@@ -63,19 +63,19 @@
   <ItemGroup>
     <Reference Include="AMCupdater, Version=0.9.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\AMC-Updater.GuzziMod\AMCupdater.exe</HintPath>
+      <HintPath>..\AMCUpdater.exe</HintPath>
     </Reference>
     <Reference Include="Core, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\svnroot\mediaportal\trunk\mediaportal\xbmc\bin\Release\Core.dll</HintPath>
+      <HintPath>..\Core.dll</HintPath>
     </Reference>
     <Reference Include="Databases, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\svnroot\mediaportal\trunk\mediaportal\xbmc\bin\Release\Databases.dll</HintPath>
+      <HintPath>..\Databases.dll</HintPath>
     </Reference>
     <Reference Include="Dialogs, Version=0.2.3.17991, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\svnroot\mediaportal\trunk\mediaportal\xbmc\bin\Release\plugins\Windows\Dialogs.dll</HintPath>
+      <HintPath>..\Dialogs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -92,15 +92,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="TaskScheduler, Version=1.3.3304.15002, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\TaskScheduler.dll</HintPath>
+      <HintPath>..\TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="Utils, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\svnroot\mediaportal\trunk\mediaportal\xbmc\bin\Release\Utils.dll</HintPath>
+      <HintPath>..\Utils.dll</HintPath>
     </Reference>
     <Reference Include="WindowPlugins, Version=0.2.3.17991, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\svnroot\mediaportal\trunk\mediaportal\xbmc\bin\Release\plugins\Windows\WindowPlugins.dll</HintPath>
+      <HintPath>..\WindowPlugins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
