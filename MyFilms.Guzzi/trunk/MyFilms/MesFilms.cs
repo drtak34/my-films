@@ -40,6 +40,7 @@ using MediaPortal.Util;
 
 using NewStringLib;
 using Cornerstone.MP;
+using MesFilms.MyFilms;
 
 namespace MesFilms
 {
@@ -215,19 +216,19 @@ namespace MesFilms
         //---------------------------------------------------------------------------------------
         //   Handle Keyboard Actions
         //---------------------------------------------------------------------------------------
-        public override void OnAction(Action actionType)
+        public override void OnAction(MediaPortal.GUI.Library.Action actionType)
         {
             Log.Debug("MyFilms : OnAction " + actionType.wID.ToString());
-            if (actionType.wID == Action.ActionType.ACTION_PARENT_DIR)
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR)
                 if (GetPrevFilmList()) return;
 
 
-            if ((actionType.wID == Action.ActionType.ACTION_PREVIOUS_MENU)&& (conf.Boolselect || conf.Boolview))
+            if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) && (conf.Boolselect || conf.Boolview))
             {
                 Change_LayOut(MesFilms.conf.StrLayOut);
                 if (GetPrevFilmList()) return;
             }
-            if ((actionType.wID == Action.ActionType.ACTION_PREVIOUS_MENU) && (conf.Boolreturn))
+            if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) && (conf.Boolreturn))
             {
                 conf.Boolreturn = false;
                 if (conf.WStrSort.ToString().ToUpper() == "ACTORS")
@@ -238,7 +239,7 @@ namespace MesFilms
                 Change_view(conf.WStrSort.ToLower());
                 return;
             }
-            if (actionType.wID == Action.ActionType.ACTION_PREVIOUS_MENU)
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU)
             {
                 if (GetPrevFilmList())
                     return;
@@ -2248,7 +2249,7 @@ namespace MesFilms
                     string wdirector = string.Empty;
                     try { wdirector = (string)MesFilms.r[i]["Director"]; }
                     catch { }
-                    System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                    System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
                 }
             }
         }

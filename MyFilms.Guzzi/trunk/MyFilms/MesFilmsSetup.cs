@@ -31,7 +31,8 @@ using System.Collections;
 using MediaPortal.GUI.Library;
 using TaskScheduler;
 using System.Runtime.InteropServices;
-using TaskSchedulerInterop;
+//Guzziusing TaskSchedulerInterop;
+using MesFilms.MyFilms;
 
 namespace MesFilms
 {
@@ -563,7 +564,7 @@ namespace MesFilms
                     wDfltSort = "RATING";
                     break;
                 default:
-                    int i = 0;
+//                    int i = 0;
                     if (Sort.Text.ToLower() == AntSort1.Text)
                     {
                         wDfltSortMethod = AntTSort1.Text;

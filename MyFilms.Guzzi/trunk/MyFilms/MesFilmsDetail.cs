@@ -23,23 +23,25 @@
 
 using System;
 using System.Collections;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.IO;
-using System.ComponentModel;
-using MediaPortal.Util;
-using MediaPortal.Playlists;
-using MediaPortal.Dialogs;
-using MediaPortal.Player;
-using MediaPortal.Video.Database;
 using System.Globalization;
-using MediaPortal.GUI.Library;
-using SQLite.NET;
-using MediaPortal.Configuration;
-using NewStringLib;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using Cornerstone.MP;
+using Grabber;
+using MediaPortal.Configuration;
+using MediaPortal.Dialogs;
+using MediaPortal.GUI.Library;
+using MediaPortal.Player;
+using MediaPortal.Playlists;
+using MediaPortal.Util;
+using MediaPortal.Video.Database;
+using MesFilms.MyFilms;
+using NewStringLib;
+using SQLite.NET;
 
 namespace MesFilms
 {
@@ -54,12 +56,17 @@ namespace MesFilms
         {
             CTRL_TxtSelect = 12,
             CTRL_BtnPlay = 101,
+            CTRL_BtnPlay1 = 10001,
+            CTRL_BtnPlay2 = 10002,
+            CTRL_BtnPlay3 = 10003,
+            CTRL_BtnPlay4 = 10004,
             CTRL_BtnReturn = 102,
             CTRL_BtnNext = 103,
             CTRL_BtnPrior = 104,
             CTRL_BtnLast = 105,
             CTRL_BtnFirst = 106,
             CTRL_BtnMaj = 107,
+            CTRL_BtnActors = 108,
             CTRL_Fanart = 1000,
             CTRL_FanartDir = 1001,
             CTRL_logos_id2001 = 2001,
@@ -146,9 +153,9 @@ namespace MesFilms
         //---------------------------------------------------------------------------------------
         //   Handle Keyboard Actions
         //---------------------------------------------------------------------------------------
-        public override void OnAction(Action actionType)
+        public override void OnAction(MediaPortal.GUI.Library.Action actionType)
         {
-            if ((actionType.wID == Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == Action.ActionType.ACTION_PARENT_DIR))
+            if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
                 MesFilms.conf.LastID = MesFilms.ID_MesFilms;
                 GUIWindowManager.ActivateWindow(ID_MesFilms);
@@ -283,6 +290,30 @@ namespace MesFilms
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlay)
+                    // Search File to play
+                    {
+                        Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        return true;
+                    }
+                    if (iControl == (int)Controls.CTRL_BtnPlay1)
+                    // Search File to play
+                    {
+                        Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        return true;
+                    }
+                    if (iControl == (int)Controls.CTRL_BtnPlay2)
+                    // Search File to play
+                    {
+                        Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        return true;
+                    }
+                    if (iControl == (int)Controls.CTRL_BtnPlay3)
+                    // Search File to play
+                    {
+                        Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        return true;
+                    }
+                    if (iControl == (int)Controls.CTRL_BtnPlay4)
                     // Search File to play
                     {
                         Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
@@ -829,7 +860,7 @@ namespace MesFilms
             Log.Info("MyFilms : Database Updated for : " + ttitle);
             if (title.Length > 0 && MesFilms.conf.StrFanart)
             {
-                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true,false,MesFilms.conf.StrTitle1.ToString());
+                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true,false);
             }
              
         }
@@ -868,7 +899,7 @@ namespace MesFilms
             int wyear = 0;
             try {  wyear = Convert.ToInt32(year);}
             catch { }
-            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose,MesFilms.conf.StrTitle1);
+            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose);
             int listCount = listemovies.Count;
             if (choose)
                 listCount = 2;
@@ -887,7 +918,7 @@ namespace MesFilms
                     dlg.Add("  *****  " + GUILocalizeStrings.Get(200036) + "  *****  "); //choice for changing movie filename
                     for (int i = 0; i < listemovies.Count; i++)
                     {
-                        dlg.Add(listemovies[i].Name + "  (" + listemovies[i].Year + ") ");
+//                        dlg.Add(listemovies[i].Name + "  (" + listemovies[i].Year + ") ");
                     }
                     if (!(dlg.SelectedLabel > -1))
                     {
@@ -1057,8 +1088,8 @@ namespace MesFilms
                 MesFilms.conf.StrIndex = MesFilms.r.Length - 1;
             if (MesFilms.conf.StrIndex == -1)
             {
-                Action actionType = new Action();
-                actionType.wID = Action.ActionType.ACTION_PREVIOUS_MENU;
+                MediaPortal.GUI.Library.Action actionType = new MediaPortal.GUI.Library.Action();
+                actionType.wID = MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU;
                 base.OnAction(actionType);
                 return;
             }
@@ -2317,7 +2348,7 @@ namespace MesFilms
                     if (enable)
                         m_SearchAnimation.AllocResources();
                     else
-                        m_SearchAnimation.FreeResources();
+                        m_SearchAnimation.Dispose();
                 }
                 m_SearchAnimation.Visible = enable;
 

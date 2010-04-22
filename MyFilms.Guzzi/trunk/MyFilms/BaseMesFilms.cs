@@ -24,6 +24,8 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using System.Text;
+using MesFilms.MyFilms;
+using MediaPortal.ServiceImplementations;
 
 
 namespace MesFilms
@@ -79,6 +81,8 @@ namespace MesFilms
             {
                 StrSelect = MesFilms.conf.StrTitle1.ToString() + " not like ''";
                 movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+                //Guzzi
+                Log.Debug("MyFilms(Guzzi) - FilmsSelected:  " + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
             }
             return movies;
         }
