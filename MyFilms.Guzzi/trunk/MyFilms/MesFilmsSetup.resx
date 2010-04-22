@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="Config_Name.ToolTip" xml:space="preserve">
+    <value>Enter a unique name for each configuration.
+You can have more than one configuration referencing a single database, or multiple configurations referencing multiple databases.  
+Configurations can be password protected in the ‘Security’ section below, to restrict access to children for example.
+</value>
+  </data>
+  <data name="PathStorage.ToolTip" xml:space="preserve">
+    <value>Enter the full path to the folder/s containing the movie files.  
+You can enter several different paths separated by a semi-colon and you can select the option “search in sub-folders”, if required.  
+You can also use the browse button to locate the correct folder/s.
+</value>
+  </data>
+  <data name="AntStorage.ToolTip" xml:space="preserve">
+    <value>Select the name of the field in your AMC database that you have used for the movie’s file name information.  
+This field in the AMC database can contain a single filename or multiple file names separated by a semi-colon.  
+If the movie comprises many files, then you could also use a playlist file (.m3u), or an image file (.iso, .bin) or a folder name (containing DVD files or .avi files).
+</value>
+  </data>
+  <data name="CatalogType.ToolTip" xml:space="preserve">
+    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
+Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
+The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.
+</value>
+  </data>
+  <data name="groupBox6.ToolTip" xml:space="preserve">
+    <value>You can define additional sort parameters – for example if you wish to sort by the movie’s length, use the database field ‘Length_num’.  
+In the adjacent field you can include a label for this particular sort item, to be displayed in the sort menu – for example ‘Movie Length’.
+</value>
+  </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
+select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
+
+For example, if you have a configuration of movies for children to watch, 
+and you wish to exclude ‘adult’ movies, then store a specific code (e.g. “XXX’) in an unused field in your ANT database 
+and define that field to be NOT included if the value equals ‘XXX’.  
+Define this configuration by default and a menu of other configurations will not appear, 
+so children will not be aware of any other configurations.
+
+Adult movies can then be included in another configuration that is password protected.
+</value>
+  </data>
+  <data name="groupBox8.ToolTip" xml:space="preserve">
+    <value>Select from the list, the view you want to see when first entering the plugin.  
+Select the option “Display Always that view when using this config”, 
+if you always want to see this view for this configuration.  
+If you do not select the option “Display Always that view when using this config”, 
+the last view used before exiting the plugin will be shown next time.
+
+If a value is entered for the second parameter, only records containing that value will be displayed.  
+For example, you can define a view for children with ‘Category’ – ‘Animation’.
+</value>
+  </data>
+  <data name="groupBox3.ToolTip" xml:space="preserve">
+    <value>Views by ‘Genre’, by ‘Year’ and by ‘Country’ are already defined by default.  
+In this section you can define additional views; 
+select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
+If there is no value entered, a menu will be displayed for the range of values available in the database.  
+If a value is entered, a list of the movies with that value will be displayed.
+</value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
+As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
+</value>
+  </data>
+  <data name="groupBox4.ToolTip" xml:space="preserve">
+    <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
+but you can include two more fields to be updated here.  
+
+Select the database field to be updated, enter the label associated with that field 
+and enter a pre-defined value to update the field.
+</value>
+  </data>
+  <data name="groupBox21.ToolTip" xml:space="preserve">
+    <value>If you wish to update your movie database and/or the movie files from within the plugin (the Update menu), 
+you can select the desired update method here.  
+Be careful when using the options that enable the deletion of the movie files from your HDD.
+
+For the ‘Update db’ options, you must select a database field to update and a value for the update.
+
+You can also select if the update or deletion is executed when the movie player has finished.
+</value>
+  </data>
+  <data name="groupBox14.ToolTip" xml:space="preserve">
+    <value>Genre, country and actors are grouped in unique fields in the database and sometimes 
+there are multiple entries in each of these fields which may be separated by commas - for example  Genre = 'Comedy, Comedy Romantic, ... ‘  
+The actual separators used can vary depending on the web-site used to grab the movie information.
+
+When using the ‘Search’ function, the plugin needs to know exactly which separators are used 
+in your movie database. A pre-defined list of separators is already given.
+
+For actors, their names are often followed by a role (Clint Eastwood (Inspector Harry), or Clint Eastwood as Inspector Harry,... ). 
+The plugin needs to know what separator is used to indicate the role text for finding or searching on actors.
+</value>
+  </data>
+  <data name="groupBox19.ToolTip" xml:space="preserve">
+    <value>If you want to update your movie datas over Internet,
+valid that option. 
+The grabber will be used for that (grabber.dll file). You have to
+define the xml parser file to be used with.
+
+With the 'try to find best match automaticly' option validated, the grabber'll
+try to find best match but can provide errors in some cases. It's better to
+don't valid it. In taht case, you'll get a menu to choose the right movie.
+
+</value>
+  </data>
+  <data name="Fanart.ToolTip" xml:space="preserve">
+    <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
+These image files must have the same name as the movie.  
+Enter the full path (or use the browse button) to the folder containing the fanart image files.
+
+Select the option “Use the Default DVD cover for missing Fanart” to have the movie's DVD cover 
+displayed as a background image for movies without a matching Fanart file. Becafull with that option you often
+get a distorded picture as covers and fanarts don't have the same size.
+</value>
+  </data>
+  <data name="txtLogosPath.ToolTip" xml:space="preserve">
+    <value>Enter (or use the browse button) the full path to the folder containing the logo image files.  
+To optimise performance, an image containing all the logos to be displayed for each movie is dynamically created.</value>
+  </data>
+  <data name="SLogo_Type.ToolTip" xml:space="preserve">
+    <value>There are two fields referenced in the skin files to display logos - ID2001 and ID2002. 
+You can nominate which logos that you want to see in the first skin field or in the second skin field by referring to these ID numbers.
+
+For example, you can define rules for genre in ID2002 and type of movie (Divx, Xvid, HD...) in ID2001. 
+
+If the skin designer has defined two physically distinct fields, you will see two separate logo images.  
+However, if the two fields are defined with the same x and y position values, 
+those two logo files are concatenated and only one image containing both the logos is displayed. 
+
+This latter situation is most often the case.
+</value>
+  </data>
+  <data name="Config_Dflt.ToolTip" xml:space="preserve">
+    <value>Check this box for the configuration that you want to be loaded each time the plugin is accessed.  
+If you have more than one configuration, and there are no configurations selected as the default, you will be prompted to select a configuration the first time.  
+Subsequently, the most recent configuration used will be loaded.
+</value>
+  </data>
+  <data name="Config_Menu.ToolTip" xml:space="preserve">
+    <value>If you select this, the Configuration's Menu will be displayed each time you enter in the plugin.
+You cann't select that option if a Default Configuration is defined
+If no default config defined and many configs, the configuration to load will be asked the first time
+After, the plugin load the last configuration used if no default defined</value>
+  </data>
+  <data name="AntIdentItem.ToolTip" xml:space="preserve">
+    <value>If the movie file cannot be located, 
+a popup window will advise you that the movie cannot be launched.  
+In the first field you can select the database item that can be used to locate the movie files or the DVD.  
+In the second field you can enter your own text message to provide additional information.
+
+</value>
+  </data>
+  <data name="DefaultCover.ToolTip" xml:space="preserve">
+    <value>Enter the full path and file name of the image file that you wish to use as the default DVD cover image.  
+You can use the browse button to select the file.  
+The default DVD cover image will be displayed when a movie entry does not have an associated cover image
+and it will be used as a default fanart image if the appropriate Fanart option is selected in the ‘Picture’ section, 
+and a movie entry does not have an associated fanart image.</value>
+  </data>
+  <data name="groupBox22.ToolTip" xml:space="preserve">
+    <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
+These image files must have the same name as the movie.  
+Enter the full path (or use the browse button) to the folder containing the fanart image files.
+
+Select the option “Use the Default DVD cover for missing Fanart” to have the movie's DVD cover 
+displayed as a background image for movies without a matching Fanart file. Becafull with that option you often
+get a distorded picture as covers and fanarts don't have the same size.
+</value>
+  </data>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>269, 17</value>
+  </metadata>
+  <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>111, 17</value>
+  </metadata>
+  <data name="groupBox18.ToolTip" xml:space="preserve">
+    <value>The following searches are already implemented :
+	by Year
+	by Name
+	by Date
+	by Rating
+	by Actors
+	by Genre
+
+You can add additional searches by selecting the database field and adding a value to filter that field by, if required.
+</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value>Enter a unique name for each configuration.  
+You can have more than one configuration referencing a single database, or multiple configurations referencing multiple databases.  
+Configurations can be password protected in the ‘Security’ section below, to restrict access to children for example.
+</value>
+  </data>
+</root>

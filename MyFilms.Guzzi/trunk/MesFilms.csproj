@@ -1,0 +1,153 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{20BCDBE0-0812-4235-9330-40B8E570DAE1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MesFilms</RootNamespace>
+    <AssemblyName>MesFilms</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\MediaPortal\xbmc\bin\Debug\plugin\windows\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>C:\Mediaportal\xbmc\bin\Release\plugins\Windows\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>obj\Debug\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>true</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Core, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Team MediaPortal\MediaPortal\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Cornerstone.MP, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Moving Picture\Cornerstone.MP\bin\Debug\Cornerstone.MP.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Databases, Version=0.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Team MediaPortal\MediaPortal\Databases.dll</HintPath>
+    </Reference>
+    <Reference Include="Dialogs, Version=0.2.3.17991, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Team MediaPortal\MediaPortal\plugins\Windows\Dialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="Grabber, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\amcupdater\grabber\bin\Release\Grabber.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TaskScheduler, Version=1.3.3304.15002, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Team MediaPortal\MediaPortal\plugins\Windows\TaskScheduler.dll</HintPath>
+    </Reference>
+    <Reference Include="Utils, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Team MediaPortal\MediaPortal\Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowPlugins, Version=0.2.3.17991, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Team MediaPortal\MediaPortal\plugins\Windows\WindowPlugins.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MyFilms\AntMovieCatalog.cs">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MyFilms\AntMovieCatalog.designer.cs">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="MyFilms\BaseMesFilms.cs" />
+    <Compile Include="MyFilms\CatalogConverter.cs" />
+    <Compile Include="MyFilms\Configuration.cs" />
+    <Compile Include="MyFilms\CryptageTexte.cs" />
+    <Compile Include="MyFilms\CString.cs" />
+    <Compile Include="MyFilms\EaxMovieCatalog.cs" />
+    <Compile Include="MyFilms\FastImage.cs" />
+    <Compile Include="MyFilms\LocalizeStrings.cs" />
+    <Compile Include="MyFilms\Logos.cs" />
+    <Compile Include="MyFilms\MesFilms.cs" />
+    <Compile Include="MyFilms\MesFilmsDetail.cs" />
+    <Compile Include="MyFilms\MesFilmsDialogSetRating.cs" />
+    <Compile Include="MyFilms\MesFilmsSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyFilms\MesFilmsSetup.designer.cs">
+      <DependentUpon>MesFilmsSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyFilms\MovieCollector.cs" />
+    <Compile Include="MyFilms\MyMovies.cs" />
+    <Compile Include="MyFilms\XbmcNfo.cs" />
+    <Compile Include="MyFilms\XmlConfig.cs" />
+    <Compile Include="MyFilms\XMM.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MyFilms\AntMovieCatalog.resx">
+      <DependentUpon>AntMovieCatalog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyFilms\MesFilmsSetup.resx">
+      <DependentUpon>MesFilmsSetup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MyFilms\AntMovieCatalog.xsc">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+    <None Include="MyFilms\AntMovieCatalog.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AntMovieCatalog.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MyFilms\AntMovieCatalog.xss">
+      <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)PostBuild.bat" "$(SolutionDir)" $(ConfigurationName) &gt;$(ProjectDir)PostBuild.log</PostBuildEvent>
+  </PropertyGroup>
+</Project>
