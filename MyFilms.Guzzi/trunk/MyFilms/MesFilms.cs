@@ -143,13 +143,13 @@ namespace MesFilms
         // Returns the description of the plugin is shown in the plugin menu
         public string Description()
         {
-            return "My Films Ant Movie Catalog";
+            return "My Films Ant Movie Catalog - Guzzi Edition";
         }
 
         // Returns the author of the plugin which is shown in the plugin menu
         public string Author()
         {
-            return "Zebons";
+            return "Zebons - Mod by Guzzi";
         }
 
         // show the setup dialog
@@ -742,6 +742,7 @@ namespace MesFilms
             else
                 s = s + conf.StrTitle1.ToString() + " not like ''";
             conf.StrFilmSelect = s;
+            Log.Debug("MyFilms (Guzzi) : StrFilmSelect: " + s);
         }
 
 
@@ -1717,7 +1718,7 @@ namespace MesFilms
                     if (conf.StrViewValue[i].Length > 0)
                     {
                         conf.Boolview = true;
-                        conf.StrTxtSelect = "Selection";
+                        conf.StrTxtSelect = "Auswahl";
                         conf.Boolselect = true;
                         conf.Wstar = "*";
                         if (conf.Wstar != "*")

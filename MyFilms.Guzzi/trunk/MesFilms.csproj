@@ -123,6 +123,7 @@
     <Compile Include="MyFilms\LocalizeStrings.cs" />
     <Compile Include="MyFilms\Logos.cs" />
     <Compile Include="MyFilms\MesFilms.cs" />
+    <Compile Include="MyFilms\MesFilmsActors.cs" />
     <Compile Include="MyFilms\MesFilmsDetail.cs" />
     <Compile Include="MyFilms\MesFilmsDialogSetRating.cs" />
     <Compile Include="MyFilms\MesFilmsSetup.cs">
