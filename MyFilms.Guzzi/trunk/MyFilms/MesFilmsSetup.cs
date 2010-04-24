@@ -91,6 +91,8 @@ namespace MesFilms
             AntIdentItem.Items.Add("(none)");
             AntFilterItem1.Items.Add("(none)");
             AntFilterItem2.Items.Add("(none)");
+            AntFilterItem3.Items.Add("(none)");
+            AntFilterItem4.Items.Add("(none)");
             AntViewItem1.Items.Add("(none)");
             AntViewItem2.Items.Add("(none)");
             AntViewItem3.Items.Add("(none)");
@@ -617,6 +619,10 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem2", AntFilterItem2.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign2", AntFilterSign2.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText2", AntFilterText2.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem3", AntFilterItem1.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText3", AntFilterText1.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem4", AntFilterItem1.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText4", AntFilterText1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterComb", AntFilterComb.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem1", AntViewItem1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText1", AntViewText1.Text.ToString());
@@ -809,6 +815,20 @@ namespace MesFilms
                 AntFilterText2.Clear();
         }
 
+        private void AntFilterItem3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (AntFilterItem3.Text == "(none)")
+                AntFilterText3.Clear();
+        }
+
+        private void AntFilterItem4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (AntFilterItem4.Text == "(none)")
+                AntFilterText4.Clear();
+        }
+
         public void ButQuit_Click(object sender, EventArgs e)
         {
             Close();
@@ -845,6 +865,10 @@ namespace MesFilms
             AntFilterItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem2", "");
             AntFilterSign2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign2", "#");
             AntFilterText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText2", "");
+            AntFilterItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem3", "");
+            AntFilterText3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText3", "");
+            AntFilterItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem4", "");
+            AntFilterText4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText4", "");
             AntFilterComb.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterComb", "and");
             AntViewItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewItem1", "");
             AntViewText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntViewText1", "");
@@ -1015,8 +1039,12 @@ namespace MesFilms
             Sort.ResetText();
             AntFilterItem1.ResetText();
             AntFilterItem2.ResetText();
+            AntFilterItem3.ResetText();
+            AntFilterItem4.ResetText();
             AntFilterText1.ResetText();
             AntFilterText2.ResetText();
+            AntFilterText3.ResetText();
+            AntFilterText4.ResetText();
             AntFilterSign1.ResetText();
             AntFilterSign2.ResetText();
             AntFilterComb.ResetText();
