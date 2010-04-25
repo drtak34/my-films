@@ -51,6 +51,8 @@ namespace MesFilms
             {
                 StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", "");
                 StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", "");
+                StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", "");
+                StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", "");
                 SearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileName", "False");
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", "");
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
@@ -418,6 +420,13 @@ namespace MesFilms
             set { strDirStor = value; }
         }
 
+        private string strDirStorTrailer = string.Empty;
+        public string StrDirStorTrailer
+        {
+            get { return strDirStorTrailer; }
+            set { strDirStorTrailer = value; }
+        }
+
         private string strIdentLabel = string.Empty;
         public string StrIdentLabel
         {
@@ -526,6 +535,12 @@ namespace MesFilms
         {
             get { return strStorage; }
             set { strStorage = value; }
+        }
+        private string strStorageTrailer = string.Empty;
+        public string StrStorageTrailer
+        {
+            get { return strStorageTrailer; }
+            set { strStorageTrailer = value; }
         }
         private string searchFile = "False";
         public string SearchFile
@@ -641,6 +656,12 @@ namespace MesFilms
         {
             get { return strPathFanart; }
             set { strPathFanart = value; }
+        }
+        private string strPathTrailer = string.Empty;
+        public string StrPathTrailer
+        {
+            get { return strPathTrailer; }
+            set { strPathTrailer = value; }
         }
         private string strPathViews = string.Empty;
         public string StrPathViews

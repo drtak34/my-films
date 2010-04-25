@@ -295,6 +295,12 @@ namespace MesFilms
                     return;
                 }
             }
+            if (actionType.wID.ToString() == "ACTION_CONEXT_MENU")
+            {
+                // context menu for update or suppress entry
+                Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+                return;
+            }
             if (actionType.wID.ToString().Substring(0, 6) == "REMOTE")
                 return;
             base.OnAction(actionType);
@@ -1408,14 +1414,14 @@ namespace MesFilms
                 Log.Debug("MyFilms (SubWordGrabbing): RegExReplace: '" + champselect + "'");
             }
 
-            string[] CleanerList = new string[] { "Der ", "der ", "Die ", "die ", "Das ", "das", "des", " so", "sich", " a ", " A ", "The ", "the ","- "," -"};
+            string[] CleanerList = new string[] { "Der ", "der ", "Die ", "die ", "Das ", "das", "des", " so", "sich", " a ", " A ", "The ", "the ","- "," -"," AT "};
             int i = 0;
             for (i = 0; i <  13; i++)
             {
                 if ((CleanerList[i].Length > 0) && (filter = true))
                 {
                     champselect = champselect.Replace(CleanerList[i], " ");
-                    Log.Debug("MyFilms (SubWordGrabbing): CleanerListItem: '" + CleanerList[i] + "'");
+                    //Log.Debug("MyFilms (SubWordGrabbing): CleanerListItem: '" + CleanerList[i] + "'");
                 }
             }
             
@@ -2199,8 +2205,8 @@ namespace MesFilms
                         break;
                     default:
                         //  Can be temorarily disabled for testing  
-                        dlg.Add(GUILocalizeStrings.Get(10798617) + dc.ColumnName);
-                        choiceSearch.Add(dc.ColumnName);
+                        //dlg.Add(GUILocalizeStrings.Get(10798617) + dc.ColumnName);
+                        //choiceSearch.Add(dc.ColumnName);
                         break;
                 }
             }
@@ -2212,7 +2218,7 @@ namespace MesFilms
             choiceSearch.Clear();
             Log.Debug("MyFilms (RelatedPropertySearch): Searchstring in Property: '" + MesFilms.r[Index][wproperty].ToString() + "'");
             //PersonTitle Grabbing (Double Words)
-            if (!(wproperty.ToString().ToLower() == "description") && !((wproperty.ToString().ToLower() == "comments")))
+            if (!(wproperty.ToString().ToLower() == "description") && !((wproperty.ToString().ToLower() == "comments")) && !((wproperty.ToString().ToLower() == "rating")))
             {
                 w_tableau = Search_String(MesFilms.r[Index][wproperty].ToString());
                 for (int wi = 0; wi < w_tableau.Count; wi++)
@@ -2236,24 +2242,34 @@ namespace MesFilms
                 else
                 MinChars = 5;
             wsub_tableau = SubWordGrabbing(MesFilms.r[Index][wproperty].ToString(),MinChars,Filter);
-            for (int wi = 0; wi < wsub_tableau.Count; wi++)
+            if ((wproperty.ToString().ToLower() == "rating"))
             {
-                if (w_tableau.Contains(wsub_tableau[wi])) // Only Add SubWordItems if not already present in SearchStrin Table
+                dlg.Add(GUILocalizeStrings.Get(10798657) + ": = " + MesFilms.r[Index][wproperty].ToString().Replace(",","."));
+                choiceSearch.Add("RatingExact");
+                dlg.Add(GUILocalizeStrings.Get(10798657) + ": > " + MesFilms.r[Index][wproperty].ToString().Replace(",","."));
+                choiceSearch.Add("RatingBetter");
+            }
+            else
+            {
+                for (int wi = 0; wi < wsub_tableau.Count; wi++)
                 {
-                    Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result already Present: '" + wsub_tableau[wi].ToString() + "'");
-                    break;
-                }
-                else
-                {
-                    for (int ii = 0; ii < 30; ii++)
+                    if (w_tableau.Contains(wsub_tableau[wi])) // Only Add SubWordItems if not already present in SearchStrin Table
                     {
-                        if (wproperty.ToLower().Equals(PropertyList[ii].ToString().ToLower()))
+                        Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result already Present: '" + wsub_tableau[wi].ToString() + "'");
+                        break;
+                    }
+                    else
+                    {
+                        for (int ii = 0; ii < 30; ii++)
                         {
-                            dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + " (" + GUILocalizeStrings.Get(10798627) + "): '" + wsub_tableau[wi] + "'");
-                            //dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + ": '" + wsub_tableau[wi] + "'");
-                            choiceSearch.Add(wsub_tableau[wi].ToString());
-                            Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result Add: '" + wsub_tableau[wi].ToString() + "'");
-                            break;
+                            if (wproperty.ToLower().Equals(PropertyList[ii].ToString().ToLower()))
+                            {
+                                dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + " (" + GUILocalizeStrings.Get(10798627) + "): '" + wsub_tableau[wi] + "'");
+                                //dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + ": '" + wsub_tableau[wi] + "'");
+                                choiceSearch.Add(wsub_tableau[wi].ToString());
+                                Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result Add: '" + wsub_tableau[wi].ToString() + "'");
+                                break;
+                            }
                         }
                     }
                 }
@@ -2278,8 +2294,20 @@ namespace MesFilms
                     return;
             }
             else
-                dlg.SelectedLabel = 0;
-            conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel].ToString() + "*'";
+            dlg.SelectedLabel = 0;
+            Log.Debug("MyFilms (Related Search by properties - Selected wproperty: " + wproperty + "'");
+            string w_rating;
+            w_rating = MesFilms.r[Index][wproperty].ToString().Replace(",", ".");
+            if ((wproperty == "Rating") && (choiceSearch[dlg.SelectedLabel].ToString() == "RatingExact"))
+                conf.StrSelect = wproperty.ToString() + " = " + w_rating;
+            else
+                if ((wproperty == "Rating") && (choiceSearch[dlg.SelectedLabel].ToString() == "RatingBetter"))
+                    conf.StrSelect = wproperty + " > " + w_rating;
+                    else
+                        if (wproperty == "Number")
+                            conf.StrSelect = wproperty + " = " + choiceSearch[dlg.SelectedLabel].ToString();
+                                else
+                                    conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel].ToString() + "*'";
             conf.StrTxtSelect = "Selection " + wproperty + " [*" + choiceSearch[dlg.SelectedLabel].ToString() + @"*]";
             conf.StrTitleSelect = "";
             GetFilmList();
@@ -2452,7 +2480,7 @@ namespace MesFilms
                         conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
                         conf.StrTitleSelect = "";
                         // Temporarily Enabled for Testing
-                        getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                        // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
                         GetFilmList();
                         break;
                 }
@@ -2580,8 +2608,20 @@ namespace MesFilms
                                     }
                             }
                         }
-                        if (w_tableau.Count == 0)
+
+            
+
+                        
+                        if (w_tableau.Count == 0) // NodeLabelEditEventArgs Results found
+                        {
+                            GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                            dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));//InfoPanel
+                            dlgOk.SetLine(1, GUILocalizeStrings.Get(10798625));
+                            dlgOk.DoModal(GetID);
+                            if (dlg.SelectedLabel == -1)
+                                return;
                             break;
+                        }
                         dlg.Reset();
                         dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798618), keyboard.Text)); // menu & SearchString
                         choiceSearch.Clear();
