@@ -82,11 +82,11 @@ namespace MesFilms
                 StrSelect = MesFilms.conf.StrTitle1.ToString() + " not like ''";
                 movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
                 //Guzzi
-                Log.Debug("MyFilms - BaseMesFilms:  StrDfltSelect: '" + StrDfltSelect + "'");
-                Log.Debug("MyFilms - BaseMesFilms:  StrSelect    : '" + StrSelect + "'");
-                Log.Debug("MyFilms - BaseMesFilms:  StrSort      : '" + StrSort + "'");
-                Log.Debug("MyFilms - BaseMesFilms:  StrSortSens  : '" + StrSortSens + "'");
-                Log.Debug("MyFilms - BaseMesFilms:  RESULTSELECT : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
+                Log.Debug("MyFilms - BaseMesFilms:  StrDfltSelect      : '" + StrDfltSelect + "'");
+                Log.Debug("MyFilms - BaseMesFilms:  StrSelect          : '" + StrSelect + "'");
+                Log.Debug("MyFilms - BaseMesFilms:  StrSort            : '" + StrSort + "'");
+                Log.Debug("MyFilms - BaseMesFilms:  StrSortSens        : '" + StrSortSens + "'");
+                Log.Debug("MyFilms - BaseMesFilms:  RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
             }
             return movies;
         }

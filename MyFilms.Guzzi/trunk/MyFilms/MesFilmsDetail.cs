@@ -381,7 +381,7 @@ namespace MesFilms
                         return true;
                     if (iControl == (int)Controls.CTRL_BtnActors)
                         // Show Actror Details Screen
-                        Update_XML_Items(); //To me changed, when DetailScreen is done!!!
+                        Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                         return true;
             }
             base.OnMessage(messageType);

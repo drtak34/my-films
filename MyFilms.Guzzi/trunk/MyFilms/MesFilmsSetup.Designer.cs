@@ -116,6 +116,7 @@ namespace MesFilms
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Selected_Enreg = new System.Windows.Forms.TextBox();
             this.AntFilterComb = new System.Windows.Forms.ComboBox();
+            this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
             this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
             this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
             this.AntFilterSign2 = new System.Windows.Forms.ComboBox();
@@ -3005,6 +3006,7 @@ namespace MesFilms
         private ComboBox AntFilterSign1;
         private ComboBox AntFilterItem2;
         private TextBox AntFilterText2;
+        private ComboBox AntFilterMinRating;
         private ComboBox AntFilterItem1;
         private TextBox AntFilterText1;
         private ComboBox AntFilterItem3;
