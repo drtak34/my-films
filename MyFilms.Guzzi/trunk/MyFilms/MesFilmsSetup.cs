@@ -582,7 +582,7 @@ namespace MesFilms
             }
             // backup yhe XML Config bfore writing
             if (System.IO.File.Exists(XmlConfig.EntireFilenameConfig("MyFilms")))
-                System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilms"), XmlConfig.EntireFilenameConfig("MyFilms") + DateTime.Now.Date.ToString() + ".bak", true);
+                System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilms"), XmlConfig.EntireFilenameConfig("MyFilms") + ".bak", true);
 
             if (Config_Dflt.Checked)
             {

@@ -1320,11 +1320,11 @@ namespace MesFilms
                 //string wstring = " ";
                 GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
                 //Guzzi:temporarily diabled
-                Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                //Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
             }
             
             GUIPropertyManager.SetProperty("#myfilms.aspectratio", wstring);
-            Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
+            //Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
         }
         //-------------------------------------------------------------------------------------------
         //  Load detailed db fields : export fields to skin as '#myfilms.<ant db column name> 

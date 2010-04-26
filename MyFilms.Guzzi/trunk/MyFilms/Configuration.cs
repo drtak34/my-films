@@ -250,7 +250,7 @@ namespace MesFilms
                 LastID = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LastID", -1);
                 TitleDelim = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "TitleDelim", ".");
                 DefaultCover = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCover", "");
-                StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "0");
+                StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5.0");
                 StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
                 StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", "");
                 StrGrabber_Dir = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Dir", "");
@@ -941,7 +941,7 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MesFilms.conf.Wstar);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MesFilms.conf.StrLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MesFilms.conf.LastID);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrAntFilterMinRating", MesFilms.conf.StrAntFilterMinRating);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntFilterMinRating", MesFilms.conf.StrAntFilterMinRating);
             switch (MesFilms.conf.StrFileType)
                 {
                     case "0":
