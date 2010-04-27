@@ -1362,9 +1362,9 @@ namespace MesFilms
             }
 
             GUIPropertyManager.SetProperty("#myfilms.aspectratio", wstring);
-            GUIPropertyManager.SetProperty("#myfilms.aspectrationame", wstring);
+            GUIPropertyManager.SetProperty("#myfilms.ar", wstring);
             //Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
-            //Log.Debug("MyFilms : Property loaded #myfilms.aspectrationame with " + wstring);
+            //Log.Debug("MyFilms : Property loaded #myfilms.ar with " + wstring);
         }
         //-------------------------------------------------------------------------------------------
         //  Load detailed db fields : export fields to skin as '#myfilms.<ant db column name> 
@@ -1378,7 +1378,6 @@ namespace MesFilms
             foreach (DataColumn dc in ds.Movie.Columns)
             {
                 string wstring = " ";
-
                 if (MesFilms.r[ItemId][dc.ColumnName] != null)
                 {
                     switch (dc.ColumnName.ToLower())
@@ -1479,35 +1478,37 @@ namespace MesFilms
                         case "picture":
                             break;
                         case "resolution":
+                            decimal aspectratio = 0; 
+                            string ar = " ";
                             if ((wrep) && (MesFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                            {
                                 wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                            Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring); 
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            //Log.Debug("MyFilms (Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            decimal aspectratio;
-                            string aspectrationame = "";
-                            decimal w_hsize;
-                            decimal w_vsize;
-                            string[] arSplit;
-                            string[] Sep = new string[] { "x" };
-                            arSplit = MesFilms.r[ItemId][dc.ColumnName].ToString().Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
-                            w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
-                            w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
-                            aspectratio = (w_hsize / w_vsize);
-                            aspectratio = Math.Round(aspectratio, 2);
-                            //Formats:
-                            //1,33 -> 4:3
-                            //1,78 -> 16:9 / widescreen
-                            //1,85 -> widescreen
-                            //2,35+ -> cinemascope
-                            if (aspectratio <  (decimal)(1.4)) aspectrationame = "4:3";
-                            if (aspectratio < (decimal)(1.9)) aspectrationame = "16:9";
-                            if (aspectratio >= (decimal)(1.9)) aspectrationame = "cinemascope";
-                            wstring = aspectratio.ToString();
+                                Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                                GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
+                                //Log.Debug("MyFilms (Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                                decimal w_hsize;
+                                decimal w_vsize;
+                                string[] arSplit;
+                                string[] Sep = new string[] { "x" };
+                                arSplit = MesFilms.r[ItemId][dc.ColumnName].ToString().Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
+                                w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
+                                w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
+                                aspectratio = (w_hsize / w_vsize);
+                                aspectratio = Math.Round(aspectratio, 2);
+                                //Formats:
+                                //1,33 -> 4:3
+                                //1,78 -> 16:9 / widescreen
+                                //1,85 -> widescreen
+                                //2,35+ -> cinemascope
+                                if (aspectratio < (decimal)(1.4)) ar = "4:3";
+                                    else if (aspectratio < (decimal)(1.9)) ar = "16:9";
+                                    else if (aspectratio >= (decimal)(1.9)) ar = "cinemascope";
+                                wstring = aspectratio.ToString();
+                            }
                             GUIPropertyManager.SetProperty("#myfilms.aspectratio", wstring);
                             Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
-                            GUIPropertyManager.SetProperty("#myfilms.aspectrationame", aspectrationame);
-                            Log.Debug("MyFilms : Property loaded #myfilms.aspectrationame with " + aspectrationame);
+                            GUIPropertyManager.SetProperty("#myfilms.ar", ar);
+                            Log.Debug("MyFilms : Property loaded #myfilms.ar with " + ar);
                             //Log.Debug("MyFilms (Load_Detailed_DB): Split for aspectratio: '" + (arSplit[0]) + "', '" + (arSplit[1]) + "' --> '" + wstring + "'");
                             break;
                         default:
