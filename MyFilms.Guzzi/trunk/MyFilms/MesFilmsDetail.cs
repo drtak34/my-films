@@ -61,6 +61,7 @@ namespace MesFilms
             CTRL_BtnPlay3 = 10003,
             CTRL_BtnPlay4 = 10004,
             CTRL_BtnPlay5 = 10005,
+            CTRL_ViewFanart = 10099,
             CTRL_BtnReturn = 102,
             CTRL_BtnNext = 103,
             CTRL_BtnPrior = 104,
@@ -164,6 +165,16 @@ namespace MesFilms
                 GUIWindowManager.ActivateWindow(ID_MesFilms);
                 return;
             }
+
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
+            {
+                Log.Debug("MyFilmsDetail : ACTION_CONTEXT_MENU erkannt !!! ");
+                // context menu for options  like PlayTrailers or Updates
+                //MesFilms.Context_Menu_Movie();
+                GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnMaj); 
+                return;
+            }
+
             base.OnAction(actionType);
             return;
         }
@@ -329,9 +340,8 @@ namespace MesFilms
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlayTrailer)
-                    // Search File to play
+                    // Search Trailer File to play
                     {
-                        Log.Debug("MyFilmsDetails (OnAtion-CTRL_BtnPlaytrailer: MesFilms.conf.StrIndex '" + MesFilms.conf.StrIndex + "'"); 
                         Launch_Movie_Trailer(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
                         return true;
                     }
@@ -454,6 +464,22 @@ namespace MesFilms
                 upd_choice[ichoice] = "grabber";
                 ichoice++;
             }
+            dlg.Add(GUILocalizeStrings.Get(931));             //Update Moviedetails from nfo-file - also download actor thumbs
+            upd_choice[ichoice] = "nfo-reader";
+            ichoice++;
+
+            dlg.Add(GUILocalizeStrings.Get(931));             //Update Moviedetails from ant.info file
+            upd_choice[ichoice] = "ant-nfo-reader";
+            ichoice++;
+
+            dlg.Add(GUILocalizeStrings.Get(931));             //Save Moviedetails to ant.info file
+            upd_choice[ichoice] = "ant-nfo-writer";
+            ichoice++;
+
+            dlg.Add(GUILocalizeStrings.Get(931));             //Search and Update Trailerfiles (local)
+            upd_choice[ichoice] = "trailer";
+            ichoice++;
+
             if (MesFilms.conf.StrFanart == true)            // Download Fanart
             {
                 dlg.Add(GUILocalizeStrings.Get(1079862));
@@ -577,6 +603,18 @@ namespace MesFilms
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     break;
 
+                case "nfo-reader":
+                    break;
+
+                case "ant-nfo-reader":
+                    break;
+
+                case "ant-nfo-writer":
+                    break;
+
+                case "trailer":
+                    break;
+                
                 case "fanart":
                     setProcessAnimationStatus(true, m_SearchAnimation);
                     Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
@@ -1322,9 +1360,11 @@ namespace MesFilms
                 //Guzzi:temporarily diabled
                 //Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
             }
-            
+
             GUIPropertyManager.SetProperty("#myfilms.aspectratio", wstring);
+            GUIPropertyManager.SetProperty("#myfilms.aspectrationame", wstring);
             //Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
+            //Log.Debug("MyFilms : Property loaded #myfilms.aspectrationame with " + wstring);
         }
         //-------------------------------------------------------------------------------------------
         //  Load detailed db fields : export fields to skin as '#myfilms.<ant db column name> 
@@ -1445,6 +1485,7 @@ namespace MesFilms
                             GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
                             //Log.Debug("MyFilms (Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
                             decimal aspectratio;
+                            string aspectrationame = "";
                             decimal w_hsize;
                             decimal w_vsize;
                             string[] arSplit;
@@ -1454,9 +1495,19 @@ namespace MesFilms
                             w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
                             aspectratio = (w_hsize / w_vsize);
                             aspectratio = Math.Round(aspectratio, 2);
+                            //Formats:
+                            //1,33 -> 4:3
+                            //1,78 -> 16:9 / widescreen
+                            //1,85 -> widescreen
+                            //2,35+ -> cinemascope
+                            if (aspectratio <  (decimal)(1.4)) aspectrationame = "4:3";
+                            if (aspectratio < (decimal)(1.9)) aspectrationame = "16:9";
+                            if (aspectratio >= (decimal)(1.9)) aspectrationame = "cinemascope";
                             wstring = aspectratio.ToString();
-                            GUIPropertyManager.SetProperty("#myfilms.aspectratio with " + aspectratio, wstring);
-                            Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring); 
+                            GUIPropertyManager.SetProperty("#myfilms.aspectratio", wstring);
+                            Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
+                            GUIPropertyManager.SetProperty("#myfilms.aspectrationame", aspectrationame);
+                            Log.Debug("MyFilms : Property loaded #myfilms.aspectrationame with " + aspectrationame);
                             //Log.Debug("MyFilms (Load_Detailed_DB): Split for aspectratio: '" + (arSplit[0]) + "', '" + (arSplit[1]) + "' --> '" + wstring + "'");
                             break;
                         default:
@@ -1471,7 +1522,6 @@ namespace MesFilms
         }
         #endregion
         #region  Lecture du film demandé
-
         public static void Launch_Movie(int select_item, int GetID, GUIAnimation m_SearchAnimation)
         //-------------------------------------------------------------------------------------------
         // Play Movie

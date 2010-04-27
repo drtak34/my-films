@@ -78,9 +78,9 @@ namespace MesFilms
             CTRL_Item3 = 1034,
             CTRL_logos_id2001 = 2001,
             CTRL_logos_id2002 = 2002,
-            CTRL_dummyMovieInfoIsAvailable = 3001,
-            CTRL_dummyMovieIsAvailable = 3002,
-            CTRL_dummyTrailerIsAvailable = 3003,
+            CTRL_MovieInfoIsAvailable = 3001,
+            CTRL_MovieIsAvailable = 3002,
+            CTRL_TrailerIsAvailable = 3003,
         }
         //[SkinControlAttribute((int)Controls.CTRL_TxtSelect)]
         //protected GUIFadeLabel TxtSelect = null;
@@ -124,15 +124,18 @@ namespace MesFilms
         protected GUIImage ImgFanart2 = null;
 
         // ControlIDs to let the skin react to certain states and properties (e.g. trailer available)
-        [SkinControlAttribute((int)Controls.CTRL_dummyMovieInfoIsAvailable)]
+
+        [SkinControlAttribute((int)Controls.CTRL_MovieInfoIsAvailable)]
         protected GUIImage MovieInfoIsAvailable = null;
 
-        [SkinControlAttribute((int)Controls.CTRL_dummyMovieIsAvailable)]
+        [SkinControlAttribute((int)Controls.CTRL_MovieIsAvailable)]
         protected GUIImage MovieIsAvailable = null;
 
-        [SkinControlAttribute((int)Controls.CTRL_dummyTrailerIsAvailable)]
+        [SkinControlAttribute((int)Controls.CTRL_TrailerIsAvailable)]
         protected GUIImage TrailerIsAvailable = null;
 
+        [SkinControlAttribute(3004)]
+        protected GUIAnimation m_SearchAnimation = null;
 
         public int Layout = 0;
         public static int Prev_ItemID = -1;
@@ -344,6 +347,7 @@ namespace MesFilms
                         GUIPropertyManager.SetProperty("#myfilms.select", " ");
                         GUIPropertyManager.SetProperty("#myfilms.rating", "0");
                         affichage_rating(0);
+                        setProcessAnimationStatus(false, m_SearchAnimation); 
                         GUIControl.HideControl(GetID, 34);
                         Configuration.Current_Config();
                         Load_Config(Configuration.CurrentConfig, true);
@@ -357,6 +361,7 @@ namespace MesFilms
  //                       AsynLoadMovieList();
  //                   }
                     GUIControl.ShowControl(GetID, 34);
+                    setProcessAnimationStatus(false, m_SearchAnimation); 
                     backdrop = new ImageSwapper();
                     backdrop.Active = true;
                     backdrop.ImageResource.Delay = 250;
@@ -1934,6 +1939,7 @@ namespace MesFilms
                     }
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
+
                 case "config":
                     string newConfig = Configuration.Choice_Config(GetID);
                     newConfig = Configuration.Control_Access_Config(newConfig, GetID);
@@ -1951,6 +1957,7 @@ namespace MesFilms
                     }
                     
                     break;
+
                 case "filterdbtrailer":
                     // GlobalFilterTrailersOnly
                     GlobalFilterTrailersOnly = !GlobalFilterTrailersOnly;
@@ -1970,8 +1977,11 @@ namespace MesFilms
                     if (GlobalFilterTrailersOnly) GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
                     //if ((GlobalFilterMinRating) && (GlobalFilterTrailersOnly)) GlobalFilterString = GlobalFilterString + " AND ";
                     Log.Info("MyFilms (SetGlobalFilterString Trailers) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
+                    setProcessAnimationStatus(true, m_SearchAnimation);
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                    setProcessAnimationStatus(false, m_SearchAnimation);
                     break;
+
                 case "filterdbrating":
                     // GlobalFilterMinRating
                     GlobalFilterMinRating = !GlobalFilterMinRating;
@@ -1991,7 +2001,9 @@ namespace MesFilms
                     if (GlobalFilterTrailersOnly) GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
                     //if ((GlobalFilterMinRating) && (GlobalFilterTrailersOnly)) GlobalFilterString = GlobalFilterString + " AND ";
                     Log.Info("MyFilms (SetGlobalFilterString MinRating) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
+                    setProcessAnimationStatus(true, m_SearchAnimation);
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                    setProcessAnimationStatus(false, m_SearchAnimation);
                     break;
                 case "filterdbsetrating":
                     // Set global value for minimum Rating to restrict movielist
@@ -2013,7 +2025,12 @@ namespace MesFilms
                     if (GlobalFilterTrailersOnly) GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
                     //if ((GlobalFilterMinRating) && (GlobalFilterTrailersOnly)) GlobalFilterString = GlobalFilterString + " AND ";
                     Log.Info("MyFilms (SetGlobalFilterString) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
-                    if (GlobalFilterMinRating) Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                    if (GlobalFilterMinRating)
+                    {
+                        setProcessAnimationStatus(true, m_SearchAnimation);
+                        Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                        setProcessAnimationStatus(false, m_SearchAnimation);
+                    }
                     break;
                 case "updatedb":
                     // Launch AMCUpdater in batch mode
@@ -2070,7 +2087,8 @@ namespace MesFilms
         //--------------------------------------------------------------------------------------------
         //   Display Context Menu for Movie 
         //--------------------------------------------------------------------------------------------
-        private void Context_Menu_Movie(int selecteditem)
+        // Changed from private to PUBLIC - GUZZI
+        public void Context_Menu_Movie(int selecteditem)
         {
             GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
             if (dlg == null) return;
@@ -3253,6 +3271,26 @@ namespace MesFilms
         {
             Log.Info("MyFilms : Loading Movie List in batch mode finished");
         }
+
+        public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
+        {
+            try
+            {
+                if (m_SearchAnimation != null)
+                {
+                    if (enable)
+                        m_SearchAnimation.AllocResources();
+                    else
+                        m_SearchAnimation.Dispose();
+                }
+                m_SearchAnimation.Visible = enable;
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
 #endregion
     }
 }
