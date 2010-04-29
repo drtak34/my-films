@@ -54,8 +54,11 @@ namespace MesFilms
                 StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", "");
                 StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", "");
                 SearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileName", "False");
+                SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", "");
+                ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", "");
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
+                SearchSubDirsTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirsTrailer", "No");
                 CheckWatched = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckWatched", false);
                 StrIdentItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentItem", "");
                 StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntTitle1", "");
@@ -549,17 +552,35 @@ namespace MesFilms
             get { return searchFile; }
             set { searchFile = value; }
         }
+        private string searchFileTrailer = "False";
+        public string SearchFileTrailer
+        {
+            get { return searchFileTrailer; }
+            set { searchFileTrailer = value; }
+        }
         private string itemSearchFile = string.Empty;
         public string ItemSearchFile
         {
             get { return itemSearchFile; }
             set { itemSearchFile = value; }
         }
+        private string itemSearchFileTrailer = string.Empty;
+        public string ItemSearchFileTrailer
+        {
+            get { return itemSearchFileTrailer; }
+            set { itemSearchFileTrailer = value; }
+        }
         private string searchSubDirs = "False";
         public string SearchSubDirs
         {
             get { return searchSubDirs; }
             set { searchSubDirs = value; }
+        }
+        private string searchSubDirsTrailer = "False";
+        public string SearchSubDirsTrailer
+        {
+            get { return searchSubDirsTrailer; }
+            set { searchSubDirsTrailer = value; }
         }
         private bool checkWatched = false;
         public bool CheckWatched

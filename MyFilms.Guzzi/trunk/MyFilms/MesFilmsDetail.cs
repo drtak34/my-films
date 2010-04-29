@@ -484,6 +484,10 @@ namespace MesFilms
             upd_choice[ichoice] = "trailer-imdb";
             ichoice++;
 
+            dlg.Add(GUILocalizeStrings.Get(10798725));             //load IMDB Trailer, store locally and update DB
+            upd_choice[ichoice] = "trailer-delete";
+            ichoice++;
+
             if (MesFilms.conf.StrFanart == true)            // Download Fanart
             {
                 dlg.Add(GUILocalizeStrings.Get(1079862));
@@ -618,34 +622,49 @@ namespace MesFilms
 
                 case "trailer":
                     {
+                        setProcessAnimationStatus(true, m_SearchAnimation);
                         //Zuerst Pfad lesen, dann Dateien suchen, in liste packen, Auswahlmenü präsenteiren und zum Schluß Update des Records
                         // Suchen nach Files mit folgendem Kriterium:
                         // 1.) ... die den Filmnamen im Filenamen haben und im Trailerverzeichnis gefunden werden (wahrscheinlich HD, daher an 1. Stelle setzen)
                         // 2.) Im Verzeichnis des Films suchen nach Filmdateien die das Wort "Trailer" im Namen haben (Endung beliebig: avi, mov, flv, etc.)
                         // 3.) Im (Trailer)-Suchpfad nach Verzeichnissen, die nach dem Filmnamen benannt sind - dann alle Files darin registrien
 
-                        Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
-                        Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
+                        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
+                        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
                         MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
+                        afficher_detail(true);
+                        //GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                        setProcessAnimationStatus(false, m_SearchAnimation);
+                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                        dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                        dlgOk.SetLine(1, MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrSTitle.ToString()].ToString());//video title
+                        dlgOk.SetLine(2, result.Count.ToString() + " Trailers gefunden !");
+                        dlgOk.DoModal(GetID);
+                        
+                        //if (dlg == null) return;
+                        //dlg.Reset();
+                        //dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                        //dlg.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
+                        //upd_choice[ichoice] = "trailer";
+                        //ichoice++;
 
-                        if (dlg == null) return;
-                        dlg.Reset();
-                        dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                        if (!(MesFilms.conf.StrStorage.Length == 0) && !(MesFilms.conf.StrStorage == "(none)") && (MesFilms.conf.WindowsFileDialog))
-                        {
-                            dlg.Add(GUILocalizeStrings.Get(863));//file
-                            upd_choice[ichoice] = "file";
-                            ichoice++;
-                        }
-                        dlg.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
-                        upd_choice[ichoice] = "trailer";
-                        ichoice++;
-
-                        dlg.DoModal(GetID);
-                        if (dlg.SelectedLabel == -1) return;
+                        //dlg.DoModal(GetID);
+                        //if (dlg.SelectedLabel == -1) return;
                         break;
                     }
                 case "trailer-imdb":
+                    break;
+
+                case "trailer-delete":
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
+                    dlgYesNo.DoModal(GetID);
+                    if (dlgYesNo.IsConfirmed)
+                    {
+                        MesFilmsDetail.DeleteTrailerFromDB((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
+                        //MesFilms.r = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, MesFilms.conf.StrFilmSelect, MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens);
+                        afficher_detail(true);
+                    }
                     break;
 
                 case "fanart":
@@ -1671,6 +1690,7 @@ namespace MesFilms
             int IMovieIndex = 0;
 
             Log.Debug("MyFilmsDetails (Launch_Movie_Trailer): new do Moviesearch with '" + select_item + "' (Selected_Item"); 
+            //Change back, if method in original properly adapted with bool Trailer
             Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, true);
             Log.Debug("MyFilmsDetails (Launch_Movie_Trailer): newItems.Count: '" + newItems.Count.ToString() + "'"); 
             if (newItems.Count > 20)
@@ -2145,7 +2165,7 @@ namespace MesFilms
                     // for image disk file filenames can be designed after iso filename delimited by '/'    
                     split2 = wfile.ToString().Split(new Char[] { '/' });
                     int wfin = split2.Length;
-                    // detect if fisrt part is an iso file
+                    // detect if first part is an iso file
                     if (VirtualDirectory.IsImageFile(System.IO.Path.GetExtension(split2[0].Trim())))
                     {
                         string wtomount = split2[0].Trim();
@@ -2268,6 +2288,7 @@ namespace MesFilms
                 }
             }
         }
+        // Kann wieder gelöscht werden, standard methode wird wieder verwendet!!!
         private static void Search_All_Files_Trailer(int select_item, bool delete, ref bool NoResumeMovie, ref ArrayList newItems, ref int IMovieIndex, bool Trailer)
         {
             string fileName = string.Empty;
@@ -2280,21 +2301,22 @@ namespace MesFilms
             if (Trailer) strDir = MesFilms.conf.StrDirStorTrailer;
             else strDir = MesFilms.conf.StrDirStor;
 
-            Log.Debug("MyFilmsDetails (Search_All_Files) - StrDirStor: " + MesFilms.conf.StrDirStor);
-            Log.Debug("MyFilmsDetails (Search_All_Files) - StrDirStortrailer: " + MesFilms.conf.StrDirStorTrailer);
-            Log.Debug("MyFilmsDetails (Search_All_Files) - Modus 'Trailer' = '" + Trailer.ToString() + "' - strDir: '" + strDir + "'");
+            Log.Debug("MyFilmsDetails (Search_All_Files_Trailer) - StrDirStor: " + MesFilms.conf.StrDirStor);
+            Log.Debug("MyFilmsDetails (Search_All_Files_Trailer) - StrDirStortrailer: " + MesFilms.conf.StrDirStorTrailer);
+            Log.Debug("MyFilmsDetails (Search_All_Files_Trailer) - Modus 'Trailer' = '" + Trailer.ToString() + "' - strDir: '" + strDir + "'");
             // retrieve filename information stored in the DB
-            if (Trailer) Log.Debug("MyFilmsDetails (Search_All_Files) - try filename MesFilms.r[select_item][MesFilms.conf.StrStorageTrailer]: '" + (string)MesFilms.r[select_item][MesFilms.conf.StrStorageTrailer].ToString().Trim() + "' - ConfStorageTrailer: '" + MesFilms.conf.StrStorageTrailer + "'");
-            else Log.Debug("MyFilmsDetails (Search_All_Files) - try filename MesFilms.r[select_item][MesFilms.conf.StrStorage]: '" + (string)MesFilms.r[select_item][MesFilms.conf.StrStorage].ToString().Trim() + "' - ConfStorage: '" + MesFilms.conf.StrStorage + "'");
+            Log.Debug("MyFilmsDetails (Search_All_Files_Trailer) - try filename MesFilms.r[select_item][MesFilms.conf.StrStorage]: '" + (string)MesFilms.r[select_item][MesFilms.conf.StrStorage].ToString().Trim() + "' - ConfStorage: '" + MesFilms.conf.StrStorage + "'");
 
             // search filename by Title movie
             string movieName = MesFilms.r[select_item][MesFilms.conf.ItemSearchFile].ToString();
+            Log.Debug("MyFilmsDetails (Search_All_Files_Trailer) - movieName: '" + movieName + "'");
             movieName = movieName.Substring(movieName.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
-            if (MesFilms.conf.ItemSearchFile.Length > 0)
-                fileName = Search_FileName(movieName, MesFilms.conf.StrDirStor).Trim();
-            if ((fileName.Length > 0) && (!(MesFilms.conf.StrStorage.Length == 0) && !(MesFilms.conf.StrStorage == "(none)")))
+            Log.Debug("MyFilmsDetails (Search_All_Files_Trailer) - movieName last substring: '" + movieName + "'");
+            if (MesFilms.conf.ItemSearchFileTrailer.Length > 0)
+                fileName = Search_FileName(movieName, MesFilms.conf.StrDirStorTrailer).Trim();
+            if ((fileName.Length > 0) && (!(MesFilms.conf.StrStorageTrailer.Length == 0) && !(MesFilms.conf.StrStorageTrailer == "(none)")))
             {
-                //MesFilms.r[select_item][MesFilms.conf.StrStorage] = fileName;
+                //MesFilms.r[select_item][MesFilms.conf.StrStorageTrailer] = fileName;
                 //Update_XML_database();
             }
 
@@ -2468,7 +2490,7 @@ namespace MesFilms
             result = new ArrayList();
             string file = filename;
 
-            SearchFiles(file, storage, false);
+            SearchFiles(file, storage, false, false);
 
             //si des resultats existent on les affichent
             if (result.Count != 0)
@@ -2517,7 +2539,7 @@ namespace MesFilms
         /// <param name="fileName">le nom du fichier recherché</param>
         /// <param name="path">le chemin du répertoire dans lequel chercher</param>
         /// <param name="recur">spécifie s'il s'agit d'une relance recursive</param>
-        public static void SearchFiles(string fileName, string searchrep, bool recur)
+        public static void SearchFiles(string fileName, string searchrep, bool recur, bool Trailer)
         {
             System.Text.RegularExpressions.Regex oRegex;
             oRegex = new System.Text.RegularExpressions.Regex(";");
@@ -2581,7 +2603,7 @@ namespace MesFilms
                     foreach (DirectoryInfo dir in dirsInf.GetDirectories())
                     {
                         //On rappelle la méthode SearchFiles pour tous les sous-répertoires  
-                        SearchFiles(file, dir.FullName, true);
+                        SearchFiles(file, dir.FullName, true, false);
                     }
                 }
             }
@@ -2876,84 +2898,134 @@ namespace MesFilms
             }
         }
 
-
-
-
         //-------------------------------------------------------------------------------------------
         //  Search All Trailerfiles locally
         //-------------------------------------------------------------------------------------------        
-            public static void SearchTrailerLocal(DataRow[] r1, int Index)
-            {
+        public static void SearchTrailerLocal(DataRow[] r1, int Index)
+        {
+            //Searchdirectory:
+            Log.Debug("MyFilmsDetails (SearchtrailerLocal) - StrDirStortrailer: " + MesFilms.conf.StrDirStorTrailer);
+            //Title1 = Movietitle
+            Log.Debug("MyFilmsDetails (SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1] : '" + MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'");
+            //Cleaned Title
+            Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Cleaned Title                                               : '" + MediaPortal.Util.Utils.FilterFileName(MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString().ToLower()) + "'");            
+            //Index of facadeview?
+            Log.Debug("MyFilmsDetails (SearchtrailerLocal) - Index: '" + Index + "'");
+            //Full Path to Film
+            Log.Debug("MyFilmsDetails (SearchtrailerLocal) - FullMediasource: '" + (string)MesFilms.r[Index][MesFilms.conf.StrStorage].ToString().Trim() + "'");
 
             result = new ArrayList();
-            string file = "trailer";
-            string storage = @"\\xms-gmi-01\movies - appletrailer;\\xms-gmi-01\movies - trailers";
-            SearchFiles(file, storage, true);
+            string file = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
+            string titlename = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
+            string titlename2 = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2].ToString();
+            string directoryname = "";
+            string movieName = "";
+            // split searchpath information delimited by semicolumn (multiple searchpathes from config)
+            string[] Trailerdirectories = MesFilms.conf.StrDirStorTrailer.ToString().Split(new Char[] { ';' });
+            Log.Debug("MyFilmsDetails (SearchtrailerLocal) Search for '" + file + "' in '" + MesFilms.conf.StrDirStorTrailer.ToString() + "'");
 
-            //si des resultats existent on les affichent
-            if (result.Count != 0)
+            //Retrieve original directory of mediafiles
+            //directoryname
+            movieName = (string)MesFilms.r[Index][MesFilms.conf.StrStorage].ToString().Trim();
+            movieName = movieName.Substring(movieName.LastIndexOf(";") + 1);
+            Log.Debug("MyFilmsDetails (SearchtrailerLocal) Splittet Mediadirectoryname: '" + movieName.ToString() + "'"); 
+            try    
+            { directoryname = System.IO.Path.GetDirectoryName(movieName); }
+            catch
+            { directoryname = ""; }
+            Log.Debug("MyFilmsDetails (SearchtrailerLocal) Get Mediadirectoryname: '" + directoryname.ToString() + "'");
+
+
+            //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
+            string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
+            foreach (string filefound in files)
                 {
-                    //if (result.Count == 1)
-                    //    return result[0].ToString();
-                    string wfile = null;
-                    result.Sort();
-                    ArrayList wresult = new ArrayList();
-                    foreach (String s in result)
+                    if ((filefound.ToString().ToLower().Contains("trailer")) && (Utils.IsVideo(filefound)))
                     {
-                        Log.Debug("SearchTrailerLocal - Resultarray entries : '" + s.ToString() + "' - Name: '" + s + "'");
+                        result.Add(filefound);
+                        Log.Debug("MyFilms (TrailersearchLocal) - FilesFound in MediaDir: '" + filefound + "'");
                     }
                 }
-
-            file = (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString());
-
-            SearchFiles(file, storage, true);
-
-            //si des resultats existent on les affichent
+            
+            //Search Filenames with "title" in Trailer Searchpath
+            string[] directories;
+            foreach (string storage in Trailerdirectories)
+            {
+                Log.Debug("MyFilms (TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'"); 
+                directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
+                foreach (string directoryfound in directories)
+                    {
+                        if ((directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
+                        {
+                            Log.Debug("MyFilms (TrailersearchLocal) - Directory found: '" + directoryfound + "'"); 
+                            files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
+                            foreach (string filefound in files)
+                            {
+                                if (Utils.IsVideo(filefound))
+                                {
+                                    result.Add(filefound);
+                                    Log.Debug("MyFilms (TrailersearchLocal) - Files added matching Directory: '" + filefound + "'");
+                                }
+                            }
+                        
+                        }
+                        else
+                        {
+                            files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
+                            foreach (string filefound in files)
+                            {
+                                if (((filefound.ToString().ToLower().Contains(titlename.ToLower())) || (filefound.ToString().ToLower().Contains(titlename2.ToLower()))) && (Utils.IsVideo(filefound)))
+                                {
+                                    result.Add(filefound);
+                                    Log.Debug("MyFilms (TrailersearchLocal) - Singlefiles found in TrailerDIR: '" + filefound + "'");
+                                }
+                            }
+                        }
+                    }            
+            }
+            string trailersourcepath = "";
             if (result.Count != 0)
-            {
-                //if (result.Count == 1)
-                //    return result[0].ToString();
-                string wfile = null;
-                result.Sort();
-                ArrayList wresult = new ArrayList();
-                foreach (String s in result)
                 {
-                    Log.Debug("SearchTrailerLocal - Resultarray entries : '" + s.ToString() + "' - Name: '" + s + "'");
+                    result.Sort();
+                    if (result.Count == 1)
+                    trailersourcepath = result[0].ToString();
+                    //ArrayList wresult = new ArrayList();
+                    //foreach (String s in result)
+                if (result.Count > 1)
+                    {for (int i = 1; i < result.Count; i++)
+                        {
+                            trailersourcepath = trailersourcepath + ";" + result[i].ToString();
+                            //Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Added Sourcepath to Trailersouce: '" + result[i].ToString() + "'");
+                        }
+                    }
+                Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Total Files found: " + result.Count);
+                Log.Debug("MyFilmsDetails (SearchTrailerLocal) - TrailerSourcePath: '" + trailersourcepath + "'");
                 }
-            }
-                
-                
-                //string fileName = Search_FileName(movieName, MesFilms.conf.StrDirStor).Trim();
+            else
+                Log.Debug("MyFilmsDetails (SearchTrailerLocal) - NO TRAILERS FOUND !!!!");
 
-            //string movieName = MesFilms.r[select_item][MesFilms.conf.ItemSearchFile].ToString();
-            //movieName = movieName.Substring(movieName.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
-            //if (MesFilms.conf.ItemSearchFile.Length > 0)
-            //    fileName = Search_FileName(movieName, MesFilms.conf.StrDirStor).Trim();
-
-
-            ArrayList newItems = new ArrayList();
-            bool NoResumeMovie = true;
-            int IMovieIndex = 0;
-            Search_All_Files_Trailer(Index, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, true);
-            for (int i = 0; i < newItems.Count; i++)
+            if ((trailersourcepath.Length > 0) && (!(MesFilms.conf.StrStorageTrailer.Length == 0) && !(MesFilms.conf.StrStorageTrailer == "(none)")))
             {
-                Log.Info("MyFilms (SearchTrailerLocal) - SearchResultList : " + newItems[i].ToString());
+                Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Current Trailersourcepath: '" + MesFilms.r[Index][MesFilms.conf.StrStorageTrailer] + "'");
+                MesFilms.r[Index][MesFilms.conf.StrStorageTrailer] = trailersourcepath;
+                Log.Debug("MyFilmsDetails (SearchTrailerLocal) - New Trailersourcepath    : '" + MesFilms.r[Index][MesFilms.conf.StrStorageTrailer] + "'");
+                Update_XML_database();
+                Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Database Updatewd !!!!");
             }
-
-            // Sample to Update Database
-            //MesFilms.r[Index][MesFilms.conf.StrSuppressField] = MesFilms.conf.StrSuppressValue.ToString();
-            //Log.Info("MyFilms : Database movie updated for deletion : " + MesFilms.r[Index][MesFilms.conf.StrTitle1]);
-            //Update_XML_database();
-
-            //Update DB-Record for Filesource (Sample)
-            //if (wfile != string.Empty)
-            //{
-            //    MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrStorage] = wfile;
-            //    Update_XML_database();
-            //    //afficher_detail(true);
-            //}
-
         }
+        
+
+        //-------------------------------------------------------------------------------------------
+        //  Delete Trailer Entries From DB
+        //-------------------------------------------------------------------------------------------        
+        public static void DeleteTrailerFromDB(DataRow[] r1, int Index)
+        {
+            MesFilms.r[Index][MesFilms.conf.StrStorageTrailer] = "";
+            Log.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Trailer entries Deleted for Current Movie !!!");
+            Update_XML_database();
+            Log.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Database Updatewd !!!!");
+        }
+        
         
         public static void SearchTrailerLocaltemp(int select_item, int GetID, GUIAnimation m_SearchAnimation)
         {
@@ -3017,9 +3089,6 @@ namespace MesFilms
                 // play movie...
                 PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
             }
-
-
-
 
         }
     }
