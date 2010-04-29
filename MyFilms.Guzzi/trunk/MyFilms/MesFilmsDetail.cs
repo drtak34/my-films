@@ -72,6 +72,8 @@ namespace MesFilms
             CTRL_BtnPlayTrailer = 109,
             CTRL_Fanart = 1000,
             CTRL_FanartDir = 1001,
+            CTRL_MovieThumbs = 1002,
+            CTRL_MovieThumbsDir = 1002,
             CTRL_logos_id2001 = 2001,
             CTRL_logos_id2002 = 2002,
             CTRL_Title = 2025,
@@ -97,6 +99,10 @@ namespace MesFilms
         protected GUIImage ImgFanart = null;
         [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
         protected GUIMultiImage ImgFanartDir = null;
+        [SkinControlAttribute((int)Controls.CTRL_MovieThumbs)]
+        protected GUIImage ImgMovieThumbs = null;
+        [SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
+        protected GUIMultiImage ImgMovieThumbsDir = null;
         [SkinControlAttribute(1030)]
         protected GUILabelControl TxtLabel1 = null;
         [SkinControlAttribute(1031)]
