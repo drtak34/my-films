@@ -42,6 +42,7 @@ using MediaPortal.Video.Database;
 using MesFilms.MyFilms;
 using NewStringLib;
 using SQLite.NET;
+using System.Xml;
 
 namespace MesFilms
 {
@@ -618,13 +619,17 @@ namespace MesFilms
                     break;
 
                 case "nfo-reader":
-                    break;
+                    {
+                        Grab_Nfo_Details((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
 
-                case "ant-nfo-reader":
-                    break;
+                        break;
+                    }
 
-                case "ant-nfo-writer":
-                    break;
+//                case "ant-nfo-reader":
+//                    break;
+
+//                case "ant-nfo-writer":
+//                    break;
 
                 case "trailer":
                     {
@@ -876,6 +881,11 @@ namespace MesFilms
                     break;
             }
         }
+
+
+
+
+
         //-------------------------------------------------------------------------------------------
         //  Grab Internet Movie Details Informations and update the XML database and refresh screen
         //-------------------------------------------------------------------------------------------        
@@ -883,7 +893,7 @@ namespace MesFilms
         {
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string[] Result = new string[20];
-            string title =  string.Empty;
+            string title = string.Empty;
             string ttitle = string.Empty;
             string wtitle = string.Empty;
             int year = 0;
@@ -895,8 +905,8 @@ namespace MesFilms
             Result = Grab.GetDetail(url, MesFilms.conf.StrPathImg + Img_Path, wscript);
             Log.Info("MyFilms : Grabb Internet Information done for : " + ttitle);
 
-//            string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
-//            string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
+            //            string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
+            //            string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
             if (Result[0] != string.Empty && Result[0] != null)
             {
                 title = Result[0].ToString();
@@ -904,7 +914,7 @@ namespace MesFilms
                 if (wtitle.Contains(MesFilms.conf.TitleDelim))
                     wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
                 if (wtitle != title)
-                    Remove_Backdrops_Fanart(wtitle,true);
+                    Remove_Backdrops_Fanart(wtitle, true);
                 if (MesFilms.conf.StrTitle1 == "OriginalTitle")
                     MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = moviehead + title;
                 else
@@ -915,9 +925,9 @@ namespace MesFilms
                 ttitle = Result[1].ToString();
                 wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
                 if (wtitle.Contains(MesFilms.conf.TitleDelim))
-                    wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) +1);
+                    wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
                 if (wtitle != ttitle)
-                    Remove_Backdrops_Fanart(wtitle,true);
+                    Remove_Backdrops_Fanart(wtitle, true);
                 if (MesFilms.conf.StrTitle1 == "TranslatedTitle")
                     MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = moviehead + ttitle;
                 else
@@ -977,14 +987,459 @@ namespace MesFilms
             Log.Info("MyFilms : Database Updated for : " + ttitle);
             if (title.Length > 0 && MesFilms.conf.StrFanart)
             {
-                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true,false);
+                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
             }
-             
+
         }
+
+        //-------------------------------------------------------------------------------------------
+        //  Grab XBMC (movie.nfo) kompatible Movie Details Informations and update the XML database and refresh screen
+        //-------------------------------------------------------------------------------------------        
+        public static void Grab_Nfo_Details(DataRow[] r1, int Index)
+        //public static void grabb_Nfo_Details(string url, string moviehead, string wscript)
+        
+        //    		private void GetMovieNfoInfo(string file, ref IMDBMovie details)  // Technick 04-2010
+		{
+
+            string[] Result = new string[20]; // Array für die nfo-grabberresults - analog dem internetgrabber
+            string[] ResultName = new string[20]; 
+            string titlename = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
+            string titlename2 = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2].ToString();
+            string directoryname = "";
+            string movieName = "";
+            string nfofile = "";
+            
+            //Retrieve original directory of mediafiles
+            //directoryname
+            movieName = (string)MesFilms.r[Index][MesFilms.conf.StrStorage].ToString().Trim();
+            movieName = movieName.Substring(movieName.LastIndexOf(";") + 1);
+            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Splittet Mediadirectoryname: '" + movieName.ToString() + "'");
+            try
+            { directoryname = System.IO.Path.GetDirectoryName(movieName); }
+            catch
+            { directoryname = ""; }
+            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Get Mediadirectoryname: '" + directoryname.ToString() + "'");
+
+            //string TitleDelim = "";
+            //if (MesFilms.conf.TitleDelim.Length == 0)
+            //    TitleDelim = "\\";
+            //string source = MesFilms.conf.StrDirStor;
+
+            //nfofile = source + "\\movie.nfo"; 
+            nfofile = directoryname + "\\movie.nfo";
+            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) nfo-Filename: '" + nfofile.ToString() + "'");
+
+            for (int i = 0; i < 20; ++i)
+            {
+                Result[i] = "";
+                ResultName[i] = "(none)";
+            }
+            
+            int	s = 0;
+			int sp = 0;
+			int[] p= new int[100];
+
+			XmlTextReader reader = new XmlTextReader(nfofile);
+			while (reader.Read())
+			{
+				if (reader.NodeType == XmlNodeType.Whitespace) continue;
+
+				switch (s)
+				{
+					case 0:
+						// Start "movie"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "movie")
+						{
+							p[sp++]=s;
+							s = 1;
+							break;
+						}
+						break;
+
+					case 1:
+						// End "movie"
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "movie")
+						{
+							s=p[--sp];
+							break;
+						}
+						// Start "title"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "title")
+						{
+							p[sp++] = s;
+							s = 2;
+							break;
+						}
+						// Start "originaltitle" (instead of sorttitle)
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "originaltitle")
+						{
+							p[sp++] = s;
+							s = 3;
+							break;
+						}
+						// Start "rating"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "rating")
+						{
+							p[sp++] = s;
+							s = 4;
+							break;
+						}
+						// Start "year"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "year")
+						{
+							p[sp++] = s;
+							s = 5;
+							break;
+						}
+						// Start "runtime"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "runtime")
+						{
+							p[sp++] = s;
+							s = 6;
+							break;
+						}
+						// Start "plot"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "plot")
+						{
+							p[sp++] = s;
+							s = 7;
+							break;
+						}
+						// Start "director"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "director")
+						{
+							p[sp++] = s;
+							s = 8;
+							break;
+						}
+						// Start "actor"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "actor")
+						{
+							p[sp++] = s;
+							s = 9;
+							break;
+						}
+						// Start "genre"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "genre")
+						{
+							p[sp++] = s;
+							s = 10;
+							break;
+						}
+						// Start "writer"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "writer")
+						{
+							p[sp++] = s;
+							s = 11;
+							break;
+						}
+						// Start "id"
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "id")
+						{
+							p[sp++] = s;
+							s = 12;
+							break;
+						}
+						break;
+
+				case 2:		// Title & End Title
+						if (reader.NodeType == XmlNodeType.Text)
+						{
+							Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Title: '" + String.Copy(reader.Value).ToString() + "'");
+                            Result[0] = String.Copy(reader.Value);
+                            ResultName[0] = "OriginalTitle";
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "title")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 3:		// Sorttitle & End Sorttitle / originaltitle
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+							// Not used in Mediaportal
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Title: '" + String.Copy(reader.Value).ToString() + "'");    
+                            Result[1] = String.Copy(reader.Value);
+                            ResultName[1] = "TranslatedTitle";
+                            break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "sorttitle")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 4:		// Rating & End Rating
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Rating: '" + float.Parse(reader.Value.Replace(".", ",")).ToString() + "'");
+                            Result[4] = float.Parse(reader.Value.Replace(".", ",")).ToString();
+                            ResultName[4] = "Rating";
+                            //details.Rating = float.Parse(reader.Value.Replace(".", ","));
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "rating")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 5:		// Year & End Year
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Year: '" + int.Parse(reader.Value).ToString() + "'");
+                            Result[8] = int.Parse(reader.Value).ToString();
+                            ResultName[8] = "Year";
+                            //details.Year = int.Parse(reader.Value); 
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "year")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 6:		// Runtime & End Runtime
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Runtime: '" + int.Parse(reader.Value).ToString() + "'");
+                            //details.RunTime = int.Parse(reader.Value);
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "runtime")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 7:		// plot  & End plot
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Beschreibung (Plot): '" + String.Copy(reader.Value).ToString() + "'");
+                            Result[3] = String.Copy(reader.Value);
+                            ResultName[3] = "Description";
+                            //details.Plot = String.Copy(reader.Value);
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "plot")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 8:		// Director  & End Director
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Director: '" + String.Copy(reader.Value).ToString() + "'");
+                            Result[6] = String.Copy(reader.Value);
+                            ResultName[6] = "Director";
+                            //details.Director = String.Copy(reader.Value);
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "director")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 9:		// Actor & End Actor
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Actor: '" + String.Copy(reader.Value).ToString() + "'");
+                            Result[5] = String.Copy(reader.Value);
+                            ResultName[5] = "Actors";
+                            //details.Actor = String.Copy(reader.Value);
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "actor")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 10:	// Genre & End Genre
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Genre: '" + String.Copy(reader.Value).ToString() + "'");
+                            //details.Genre = String.Copy(reader.Value);
+                            Result[10] = String.Copy(reader.Value);
+                            ResultName[10] = "Category";
+                            break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "genre")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 11:	// Writer  & End Writer
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Writer: '" + String.Copy(reader.Value).ToString() + "'");
+                            Result[7] = String.Copy(reader.Value);
+                            ResultName[7] = "Producer";
+                            //details.WritingCredits = String.Copy(reader.Value);
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "writer")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+				case 12:	// Id  & End Id
+					if (reader.NodeType == XmlNodeType.Text)
+						{
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) URL/IMDB-Id: '" + String.Copy(reader.Value).ToString() + "'");
+                            Result[11] = String.Copy(reader.Value);
+                            ResultName[11] = "URL";
+                            //details.IMDBNumber = String.Copy(reader.Value);
+							break;
+						}
+						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "id")
+						{
+							s=p[--sp];
+							break;
+						}
+	
+						break;
+
+				}
+			}
+
+			//char[] charsToTrim = { '|' };
+			//string str1 = details.Genre.TrimEnd(charsToTrim);
+			//string str2 = str1.TrimStart(charsToTrim);
+			//details.Genre = str2.Replace("|", ", ");
+			//str1 = //details.Director.TrimEnd(charsToTrim);
+			//str2 = str1.TrimStart(charsToTrim);
+			//details.Director = str2.Replace("|", ", ");
+            for (int i = 0; i < 20; ++i)
+            {
+                Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Summary (" + i.ToString() + ", " + Result[i].Length.ToString() + "): " + ResultName[i] + " = '" + Result[0] + "'");
+            }
+
+// Old Code            
+            string url = "";
+            string moviehead = "";
+            string wscript = "";
+
+            Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+            string title = string.Empty;
+            string ttitle = string.Empty;
+            string wtitle = string.Empty;
+            int year = 0;
+            string director = string.Empty;
+            XmlConfig XmlConfig = new XmlConfig();
+            string Img_Path = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
+            string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
+
+            Result = Grab.GetDetail(url, MesFilms.conf.StrPathImg + Img_Path, wscript);
+            Log.Info("MyFilms : Grabb Internet Information done for : " + ttitle);
+
+            //            string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
+            //            string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
+            if (Result[0] != string.Empty && Result[0] != null)
+            {
+                title = Result[0].ToString();
+                wtitle = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
+                if (wtitle.Contains(MesFilms.conf.TitleDelim))
+                    wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
+                if (wtitle != title)
+                    Remove_Backdrops_Fanart(wtitle, true);
+                if (MesFilms.conf.StrTitle1 == "OriginalTitle")
+                    MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = moviehead + title;
+                else
+                    MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = title;
+            }
+            if (Result[1] != string.Empty && Result[1] != null)
+            {
+                ttitle = Result[1].ToString();
+                wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                if (wtitle.Contains(MesFilms.conf.TitleDelim))
+                    wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
+                if (wtitle != ttitle)
+                    Remove_Backdrops_Fanart(wtitle, true);
+                if (MesFilms.conf.StrTitle1 == "TranslatedTitle")
+                    MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = moviehead + ttitle;
+                else
+                    MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = ttitle;
+            }
+            if (Result[2] != string.Empty && Result[2] != null)
+            {
+                if (Img_Path_Type.ToLower() == "true")
+                    Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
+                if (Img_Path.Length > 0)
+                    if (Img_Path.EndsWith("\\"))
+                        Result[2] = Img_Path + Result[2];
+                    else
+                        Result[2] = Img_Path + "\\" + Result[2];
+                MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
+            }
+
+            if (Result[3] != string.Empty && Result[3] != null)
+                MesFilms.r[MesFilms.conf.StrIndex]["Description"] = Result[3].ToString();
+            if (Result[4] != string.Empty && Result[4] != null)
+            {
+                if (Result[4].ToString().Length > 0)
+                {
+                    NumberFormatInfo provider = new NumberFormatInfo();
+                    provider.NumberDecimalSeparator = ".";
+                    provider.NumberDecimalDigits = 1;
+                    decimal wnote = Convert.ToDecimal(Result[4], provider);
+                    MesFilms.r[MesFilms.conf.StrIndex]["Rating"] = string.Format("{0:F1}", wnote);
+                }
+            }
+            if (Result[5] != string.Empty && Result[5] != null)
+                MesFilms.r[MesFilms.conf.StrIndex]["Actors"] = Result[5].ToString();
+            if (Result[6] != string.Empty && Result[6] != null)
+            {
+                director = Result[6].ToString();
+                MesFilms.r[MesFilms.conf.StrIndex]["Director"] = Result[6].ToString();
+            }
+            if (Result[7] != string.Empty && Result[7] != null)
+                MesFilms.r[MesFilms.conf.StrIndex]["Producer"] = Result[7].ToString();
+            if (Result[8] != string.Empty && Result[8] != null)
+            {
+                try
+                {
+                    year = Convert.ToInt16(Result[8].ToString());
+                }
+                catch { }
+                MesFilms.r[MesFilms.conf.StrIndex]["Year"] = Result[8].ToString();
+            }
+            if (Result[9] != string.Empty && Result[9] != null)
+                MesFilms.r[MesFilms.conf.StrIndex]["Country"] = Result[9].ToString();
+            if (Result[10] != string.Empty && Result[10] != null)
+                MesFilms.r[MesFilms.conf.StrIndex]["Category"] = Result[10].ToString();
+            if (Result[11] != string.Empty && Result[11] != null)
+                if (MesFilms.conf.StrStorage != "URL")
+                    MesFilms.r[MesFilms.conf.StrIndex]["URL"] = Result[11].ToString();
+            Update_XML_database();
+            Log.Info("MyFilms : Database Updated for : " + ttitle);
+            if (title.Length > 0 && MesFilms.conf.StrFanart)
+            {
+                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
+            }
+
+        }
+		
         //-------------------------------------------------------------------------------------------
         //  Remove Old backdrops Fanart already downloaded (case in title change)
         //-------------------------------------------------------------------------------------------        
-        public static void Remove_Backdrops_Fanart(string wtitle,bool suppressDir)
+        public static void Remove_Backdrops_Fanart(string wtitle, bool suppressDir)
         {
             if (wtitle.Length > 0)
             {
@@ -1003,7 +1458,7 @@ namespace MesFilms
                     foreach (FileSystemInfo sfi in sfiles)
                     {
                         System.IO.File.Delete(sfi.FullName);
-                    }   
+                    }
                 }
             }
         }
