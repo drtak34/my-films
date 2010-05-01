@@ -471,17 +471,21 @@ namespace MesFilms
                 upd_choice[ichoice] = "grabber";
                 ichoice++;
             }
-            dlg.Add(GUILocalizeStrings.Get(10798720));             //Update Moviedetails from nfo-file - also download actor thumbs, Fanart, etc. if available
-            upd_choice[ichoice] = "nfo-reader";
+            dlg.Add(GUILocalizeStrings.Get(10798719));             //Update missing Moviedetails from nfo-file - also download actor thumbs, Fanart, etc. if available
+            upd_choice[ichoice] = "nfo-reader-update";
             ichoice++;
 
-            dlg.Add(GUILocalizeStrings.Get(10798721));             //Update Moviedetails from ant.info file
-            upd_choice[ichoice] = "ant-nfo-reader";
+            dlg.Add(GUILocalizeStrings.Get(10798720));             //Overwrite all Moviedetails in DB-set from nfo-file - also download actor thumbs, Fanart, etc. if available
+            upd_choice[ichoice] = "nfo-reader-overwrite";
             ichoice++;
 
-            dlg.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
-            upd_choice[ichoice] = "ant-nfo-writer";
-            ichoice++;
+//            dlg.Add(GUILocalizeStrings.Get(10798721));             //Update Moviedetails from ant.info file
+//            upd_choice[ichoice] = "ant-nfo-reader";
+//            ichoice++;
+
+//            dlg.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
+//            upd_choice[ichoice] = "ant-nfo-writer";
+//            ichoice++;
 
             dlg.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
             upd_choice[ichoice] = "trailer";
@@ -491,7 +495,7 @@ namespace MesFilms
             upd_choice[ichoice] = "trailer-imdb";
             ichoice++;
 
-            dlg.Add(GUILocalizeStrings.Get(10798725));             //load IMDB Trailer, store locally and update DB
+            dlg.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
             upd_choice[ichoice] = "trailer-delete";
             ichoice++;
 
@@ -618,18 +622,23 @@ namespace MesFilms
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     break;
 
-                case "nfo-reader":
+                case "nfo-reader-update":
                     {
-                        Grab_Nfo_Details((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
-
+                        Grab_Nfo_Details((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex, false);
+                        break;
+                    }
+                
+                case "nfo-reader-overwrite":
+                    {
+                        Grab_Nfo_Details((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex, true);
                         break;
                     }
 
-//                case "ant-nfo-reader":
-//                    break;
+                case "ant-nfo-reader":
+                    break;
 
-//                case "ant-nfo-writer":
-//                    break;
+                case "ant-nfo-writer":
+                    break;
 
                 case "trailer":
                     {
@@ -994,20 +1003,28 @@ namespace MesFilms
 
         //-------------------------------------------------------------------------------------------
         //  Grab XBMC (movie.nfo) kompatible Movie Details Informations and update the XML database and refresh screen
+        // Last Parameter is set to overwrite all existing data - when set to false it only updates missing infos (important for batch import)
         //-------------------------------------------------------------------------------------------        
-        public static void Grab_Nfo_Details(DataRow[] r1, int Index)
+        public static void Grab_Nfo_Details(DataRow[] r1, int Index, bool overwrite)
         //public static void grabb_Nfo_Details(string url, string moviehead, string wscript)
-        
         //    		private void GetMovieNfoInfo(string file, ref IMDBMovie details)  // Technick 04-2010
-		{
+
+        {
 
             string[] Result = new string[20]; // Array für die nfo-grabberresults - analog dem internetgrabber
-            string[] ResultName = new string[20]; 
+            string[] ResultName = new string[20];
+            string[] ActorsName = new string[100]; //(Actors with Name, Role and Thumblink)
+            string[] ActorsRole = new string[100]; //(Actors with Name, Role and Thumblink)
+            string[] ActorsThumb = new string[100]; //(Actors with Name, Role and Thumblink)
+            string ActorName = "";
+            string ActorRole = "";
+            string ActorThumb = "";
             string titlename = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
             string titlename2 = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2].ToString();
             string directoryname = "";
             string movieName = "";
             string nfofile = "";
+            int Actornumber = 0;
             
             //Retrieve original directory of mediafiles
             //directoryname
@@ -1020,14 +1037,19 @@ namespace MesFilms
             { directoryname = ""; }
             Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Get Mediadirectoryname: '" + directoryname.ToString() + "'");
 
-            //string TitleDelim = "";
-            //if (MesFilms.conf.TitleDelim.Length == 0)
-            //    TitleDelim = "\\";
-            //string source = MesFilms.conf.StrDirStor;
-
-            //nfofile = source + "\\movie.nfo"; 
             nfofile = directoryname + "\\movie.nfo";
             Log.Debug("MyFilmsDetails (grabb_Nfo_Details) nfo-Filename: '" + nfofile.ToString() + "'");
+
+            if (!System.IO.File.Exists(nfofile))
+                {
+                Log.Debug("MyFilmsDetails (grabb_Nfo_Details) File cannot be opened, nfo-Filename: '" + nfofile.ToString() + "'");
+                GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                dlgOk.SetLine(1, " ");//video title
+                dlgOk.SetLine(2, "Cannot find file: '" + nfofile.ToString() + "'");
+                dlgOk.DoModal(GUIWindowManager.ActiveWindow);
+                return;
+                }
 
             for (int i = 0; i < 20; ++i)
             {
@@ -1035,12 +1057,179 @@ namespace MesFilms
                 ResultName[i] = "(none)";
             }
             
+            //Temporary Methods to check XML File
+
+            XmlTextReader reader = new XmlTextReader(nfofile);
+            string element = "";
+            string value = "";
+            while (reader.Read())
+            {
+                XmlNodeType nodeType = reader.NodeType;
+                switch (nodeType)
+                    {
+                    case XmlNodeType.Element:
+                            element = reader.Name;
+                            //Log.Debug("MyFilmsDetails XMLtextReader1 - Element name is '" + reader.Name + "'");
+                        if (reader.HasAttributes)
+                            {
+                            Log.Debug("MyFilmsDetails XMLtextReader1 - *** " + reader.AttributeCount + " Attributes found! ***");
+                            for (int i = 0; i < reader.AttributeCount; i++)
+                                {
+                                reader.MoveToAttribute(i);
+                                //Log.Debug("                Attribute is '" + reader.Name + "' with Value '" + reader.Value + "'");
+                                }
+                            }
+                        break;
+                    case XmlNodeType.Text:
+                        value = reader.Value;
+                        //Log.Debug("                Value is: " + reader.Value);
+                        break;
+                    }
+                if (element.Length > 0 && value.Length > 0)
+                {
+                    Log.Debug("MyFilmsDetail (XML-Readertest) Attribute is '" + element + "' with Value '" + value + "'");
+                    if (element == "title")
+                    {
+                        Result[1] = value;
+                        ResultName[1] = "translatedtitle";
+                    }
+                    if (element == "originaltitle")
+                    {
+                        Result[0] = value;
+                        ResultName[0] = "originaltitle";
+                    }
+                    if (element == "id")
+                    {
+                        Result[11] = value;
+                        ResultName[11] = "url";
+                    }
+                    if (element == "year")
+                    {
+                        Result[8] = value;
+                        ResultName[8] = "year";
+                    }
+                    if (element == "releasedate")
+                    {
+                        Result[13] = value;
+                        ResultName[13] = "date";
+                    }
+                    if (element == "rating")
+                    {
+                        Result[4] = value;
+                        ResultName[4] = "rating";
+                    }
+                    if (element == "votes")
+                    {
+                        Result[14] = value;
+                        ResultName[14] = "votes";
+                    }
+                    if (element == "mpaa")
+                    {
+                        Result[15] = value;
+                        ResultName[15] = "mpaa";
+                    }
+                    if (element == "certification")
+                    {
+                        Result[16] = value;
+                        ResultName[16] = "certification";
+                    }
+                    if (element == "genre")
+                    {
+                        Result[10] = value;
+                        ResultName[10] = "category";
+                    }
+                    if (element == "studio")
+                    {
+                        Result[17] = value;
+                        ResultName[17] = "studio";
+                    }
+                    if (element == "director")
+                    {
+                        Result[6] = value;
+                        ResultName[6] = "director";
+                    }
+                    if (element == "credits")
+                    {
+                        Result[7] = value;
+                        ResultName[7] = "producer (credits)";
+                    }
+                    if (element == "tagline")
+                    {
+                        Result[18] = value;
+                        ResultName[18] = "tagline";
+                    }
+                    if (element == "outline")
+                    {
+                        Result[19] = value;
+                        ResultName[19] = "outline";
+                    }
+                    if (element == "plot")
+                    {
+                        Result[3] = value;
+                        ResultName[3] = "description";
+                    }
+                    if (element == "name") // actor infos
+                    {
+                        if (ActorName.Length == 0) 
+                            ActorName = value;
+                        else
+                        {
+                            ActorsName[Actornumber] = ActorName;
+                            ActorsRole[Actornumber] = ActorRole;
+                            ActorsThumb[Actornumber] = ActorThumb;
+                            Actornumber = Actornumber + 1;
+                            ActorName = "";
+                            ActorRole = "";
+                            ActorThumb = "";
+                        }
+                    }
+                    if (element == "role") // actor infos
+                    {
+                        ActorRole = value;
+                    }
+                    if (element == "thumb") // actor infos
+                    {
+                        if (ActorName.Length > 0)
+                        {
+                            ActorThumb = value;
+                            ActorsName[Actornumber] = ActorName;
+                            ActorsRole[Actornumber] = ActorRole;
+                            ActorsThumb[Actornumber] = ActorThumb;
+                            Actornumber = Actornumber + 1;
+                            ActorName = "";
+                            ActorRole = "";
+                            ActorThumb = "";
+                        }
+                    }
+
+                    element = "";
+                    value = "";
+                }
+            //Log.Debug("MyFilmsDetail (XML-Readertest) Attribute is '" + element + "' with Value '" + value + "'");
+            }
+            Result[5] = "to be added from array";
+            ResultName[5] = "actors";
+
+            for (int i = 0; i < 20; ++i)
+            {
+                Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Summary (" + i.ToString() + ", " + Result[i].Length.ToString() + "): " + ResultName[i] + " = '" + Result[i] + "'");
+            }
+
+            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Actors found: '" + (Actornumber - 1).ToString() + "'");
+
+            for (int wi = 0; wi < Actornumber -1; ++wi)
+            {
+                Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Actors: '" + ActorsName[wi] + "' (als " + ActorsRole[wi] + ") - Thumb = '" + ActorsThumb[wi] + "'");
+            }
+
+
             int	s = 0;
 			int sp = 0;
 			int[] p= new int[100];
 
-			XmlTextReader reader = new XmlTextReader(nfofile);
-			while (reader.Read())
+            reader = new XmlTextReader(nfofile);
+            // XmlTextReader reader = new XmlTextReader(nfofile);
+            while (reader.Read())
 			{
 				if (reader.NodeType == XmlNodeType.Whitespace) continue;
 
@@ -1145,7 +1334,7 @@ namespace MesFilms
 				case 2:		// Title & End Title
 						if (reader.NodeType == XmlNodeType.Text)
 						{
-							Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Title: '" + String.Copy(reader.Value).ToString() + "'");
+							Log.Debug("MyFilmsDetails (grabb_Nfo_Details) OriginalTitle: '" + String.Copy(reader.Value).ToString() + "'");
                             Result[0] = String.Copy(reader.Value);
                             ResultName[0] = "OriginalTitle";
 							break;
@@ -1161,7 +1350,7 @@ namespace MesFilms
 					if (reader.NodeType == XmlNodeType.Text)
 						{
 							// Not used in Mediaportal
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Title: '" + String.Copy(reader.Value).ToString() + "'");    
+                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) TranslatedTitle: '" + String.Copy(reader.Value).ToString() + "'");    
                             Result[1] = String.Copy(reader.Value);
                             ResultName[1] = "TranslatedTitle";
                             break;
@@ -1328,7 +1517,7 @@ namespace MesFilms
 			//details.Director = str2.Replace("|", ", ");
             for (int i = 0; i < 20; ++i)
             {
-                Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Summary (" + i.ToString() + ", " + Result[i].Length.ToString() + "): " + ResultName[i] + " = '" + Result[0] + "'");
+                Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Summary (" + i.ToString() + ", " + Result[i].Length.ToString() + "): " + ResultName[i] + " = '" + Result[i] + "'");
             }
 
 // Old Code            
@@ -1336,7 +1525,7 @@ namespace MesFilms
             string moviehead = "";
             string wscript = "";
 
-            Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+            //Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string title = string.Empty;
             string ttitle = string.Empty;
             string wtitle = string.Empty;
@@ -1346,8 +1535,8 @@ namespace MesFilms
             string Img_Path = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
             string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
 
-            Result = Grab.GetDetail(url, MesFilms.conf.StrPathImg + Img_Path, wscript);
-            Log.Info("MyFilms : Grabb Internet Information done for : " + ttitle);
+            //Result = Grab.GetDetail(url, MesFilms.conf.StrPathImg + Img_Path, wscript);
+            //Log.Info("MyFilms : Grabb Internet Information done for : " + ttitle);
 
             //            string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
             //            string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
@@ -1427,11 +1616,11 @@ namespace MesFilms
             if (Result[11] != string.Empty && Result[11] != null)
                 if (MesFilms.conf.StrStorage != "URL")
                     MesFilms.r[MesFilms.conf.StrIndex]["URL"] = Result[11].ToString();
-            Update_XML_database();
-            Log.Info("MyFilms : Database Updated for : " + ttitle);
+            //Update_XML_database();
+            Log.Info("MyFilms : (Inactive) Database Updated for : " + ttitle);
             if (title.Length > 0 && MesFilms.conf.StrFanart)
             {
-                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
+                //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
             }
 
         }
