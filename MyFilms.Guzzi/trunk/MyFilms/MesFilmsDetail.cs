@@ -708,6 +708,7 @@ namespace MesFilms
                         string wdirector = string.Empty;
                         try { wdirector = (string)MesFilms.r[MesFilms.conf.StrIndex]["Director"]; }
                         catch { }
+                        Log.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
                         MesFilmsDetail.Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID);
 
                     }
@@ -1013,9 +1014,9 @@ namespace MesFilms
 
             string[] Result = new string[20]; // Array f¸r die nfo-grabberresults - analog dem internetgrabber
             string[] ResultName = new string[20];
-            string[] ActorsName = new string[100]; //(Actors with Name, Role and Thumblink)
-            string[] ActorsRole = new string[100]; //(Actors with Name, Role and Thumblink)
-            string[] ActorsThumb = new string[100]; //(Actors with Name, Role and Thumblink)
+            string[] ActorsName = new string[100]; //(Actors Name)
+            string[] ActorsRole = new string[100]; //(Actors Role)
+            string[] ActorsThumb = new string[100]; //(Actors Thumblink)
             string ActorName = "";
             string ActorRole = "";
             string ActorThumb = "";
@@ -1105,7 +1106,7 @@ namespace MesFilms
                     }
                     if (element == "year")
                     {
-                        Result[8] = value;
+                        Result[8] = value.ToString();
                         ResultName[8] = "year";
                     }
                     if (element == "releasedate")
@@ -1207,306 +1208,25 @@ namespace MesFilms
                 }
             //Log.Debug("MyFilmsDetail (XML-Readertest) Attribute is '" + element + "' with Value '" + value + "'");
             }
-            Result[5] = "to be added from array";
+            
+            
+
+            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Actors found: '" + (Actornumber).ToString() + "'");
             ResultName[5] = "actors";
+            if (Actornumber > 1)
+                Result[5] = ActorsName[0] + " (als " + ActorsRole[0] + ")"; 
+            for (int wi = 1; wi < Actornumber - 1; ++wi)
+            {
+                Result[5] = Result[5] + ", " + ActorsName[wi] + " (als " + ActorsRole[wi] + ")"; 
+                Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Actors: '" + ActorsName[wi] + "' (als " + ActorsRole[wi] + ") - Thumb = '" + ActorsThumb[wi] + "'");
+            }
+
 
             for (int i = 0; i < 20; ++i)
             {
                 Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Summary (" + i.ToString() + ", " + Result[i].Length.ToString() + "): " + ResultName[i] + " = '" + Result[i] + "'");
             }
 
-            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Actors found: '" + (Actornumber - 1).ToString() + "'");
-
-            for (int wi = 0; wi < Actornumber -1; ++wi)
-            {
-                Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Actors: '" + ActorsName[wi] + "' (als " + ActorsRole[wi] + ") - Thumb = '" + ActorsThumb[wi] + "'");
-            }
-
-
-            int	s = 0;
-			int sp = 0;
-			int[] p= new int[100];
-
-            reader = new XmlTextReader(nfofile);
-            // XmlTextReader reader = new XmlTextReader(nfofile);
-            while (reader.Read())
-			{
-				if (reader.NodeType == XmlNodeType.Whitespace) continue;
-
-				switch (s)
-				{
-					case 0:
-						// Start "movie"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "movie")
-						{
-							p[sp++]=s;
-							s = 1;
-							break;
-						}
-						break;
-
-					case 1:
-						// End "movie"
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "movie")
-						{
-							s=p[--sp];
-							break;
-						}
-						// Start "title"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "title")
-						{
-							p[sp++] = s;
-							s = 2;
-							break;
-						}
-						// Start "originaltitle" (instead of sorttitle)
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "originaltitle")
-						{
-							p[sp++] = s;
-							s = 3;
-							break;
-						}
-						// Start "rating"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "rating")
-						{
-							p[sp++] = s;
-							s = 4;
-							break;
-						}
-						// Start "year"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "year")
-						{
-							p[sp++] = s;
-							s = 5;
-							break;
-						}
-						// Start "runtime"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "runtime")
-						{
-							p[sp++] = s;
-							s = 6;
-							break;
-						}
-						// Start "plot"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "plot")
-						{
-							p[sp++] = s;
-							s = 7;
-							break;
-						}
-						// Start "director"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "director")
-						{
-							p[sp++] = s;
-							s = 8;
-							break;
-						}
-						// Start "actor"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "actor")
-						{
-							p[sp++] = s;
-							s = 9;
-							break;
-						}
-						// Start "genre"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "genre")
-						{
-							p[sp++] = s;
-							s = 10;
-							break;
-						}
-						// Start "writer"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "writer")
-						{
-							p[sp++] = s;
-							s = 11;
-							break;
-						}
-						// Start "id"
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "id")
-						{
-							p[sp++] = s;
-							s = 12;
-							break;
-						}
-						break;
-
-				case 2:		// Title & End Title
-						if (reader.NodeType == XmlNodeType.Text)
-						{
-							Log.Debug("MyFilmsDetails (grabb_Nfo_Details) OriginalTitle: '" + String.Copy(reader.Value).ToString() + "'");
-                            Result[0] = String.Copy(reader.Value);
-                            ResultName[0] = "OriginalTitle";
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "title")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 3:		// Sorttitle & End Sorttitle / originaltitle
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-							// Not used in Mediaportal
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) TranslatedTitle: '" + String.Copy(reader.Value).ToString() + "'");    
-                            Result[1] = String.Copy(reader.Value);
-                            ResultName[1] = "TranslatedTitle";
-                            break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "sorttitle")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 4:		// Rating & End Rating
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Rating: '" + float.Parse(reader.Value.Replace(".", ",")).ToString() + "'");
-                            Result[4] = float.Parse(reader.Value.Replace(".", ",")).ToString();
-                            ResultName[4] = "Rating";
-                            //details.Rating = float.Parse(reader.Value.Replace(".", ","));
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "rating")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 5:		// Year & End Year
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Year: '" + int.Parse(reader.Value).ToString() + "'");
-                            Result[8] = int.Parse(reader.Value).ToString();
-                            ResultName[8] = "Year";
-                            //details.Year = int.Parse(reader.Value); 
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "year")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 6:		// Runtime & End Runtime
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Runtime: '" + int.Parse(reader.Value).ToString() + "'");
-                            //details.RunTime = int.Parse(reader.Value);
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "runtime")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 7:		// plot  & End plot
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Beschreibung (Plot): '" + String.Copy(reader.Value).ToString() + "'");
-                            Result[3] = String.Copy(reader.Value);
-                            ResultName[3] = "Description";
-                            //details.Plot = String.Copy(reader.Value);
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "plot")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 8:		// Director  & End Director
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Director: '" + String.Copy(reader.Value).ToString() + "'");
-                            Result[6] = String.Copy(reader.Value);
-                            ResultName[6] = "Director";
-                            //details.Director = String.Copy(reader.Value);
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "director")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 9:		// Actor & End Actor
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Actor: '" + String.Copy(reader.Value).ToString() + "'");
-                            Result[5] = String.Copy(reader.Value);
-                            ResultName[5] = "Actors";
-                            //details.Actor = String.Copy(reader.Value);
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "actor")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 10:	// Genre & End Genre
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Genre: '" + String.Copy(reader.Value).ToString() + "'");
-                            //details.Genre = String.Copy(reader.Value);
-                            Result[10] = String.Copy(reader.Value);
-                            ResultName[10] = "Category";
-                            break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "genre")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 11:	// Writer  & End Writer
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) Writer: '" + String.Copy(reader.Value).ToString() + "'");
-                            Result[7] = String.Copy(reader.Value);
-                            ResultName[7] = "Producer";
-                            //details.WritingCredits = String.Copy(reader.Value);
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "writer")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-				case 12:	// Id  & End Id
-					if (reader.NodeType == XmlNodeType.Text)
-						{
-                            Log.Debug("MyFilmsDetails (grabb_Nfo_Details) URL/IMDB-Id: '" + String.Copy(reader.Value).ToString() + "'");
-                            Result[11] = String.Copy(reader.Value);
-                            ResultName[11] = "URL";
-                            //details.IMDBNumber = String.Copy(reader.Value);
-							break;
-						}
-						if (reader.NodeType == XmlNodeType.EndElement && reader.Name == "id")
-						{
-							s=p[--sp];
-							break;
-						}
-	
-						break;
-
-				}
-			}
 
 			//char[] charsToTrim = { '|' };
 			//string str1 = details.Genre.TrimEnd(charsToTrim);
@@ -1660,7 +1380,9 @@ namespace MesFilms
             int wyear = 0;
             try {  wyear = Convert.ToInt32(year);}
             catch { }
-            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose);
+            //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose);
+            // Hier muﬂ der Grabber repariert werden, damit FanartSuche wieder funktioniert ...
+            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose, MesFilms.conf.StrTitle1);
             int listCount = listemovies.Count;
             if (choose)
                 listCount = 2;
