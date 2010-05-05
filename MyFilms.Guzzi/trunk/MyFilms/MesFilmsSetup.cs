@@ -1296,6 +1296,7 @@ namespace MesFilms
                     else
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
             Selected_Enreg.Text = StrDfltSelect + AntTitle1.Text + " not like ''";
+            Log.Debug("MyFilms (Buid Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)

@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using MediaPortal.GUI.Library;
 
-namespace grabber
+namespace Guzzi.grabber
 {
     public class DBMovieInfo
     {
@@ -12,11 +13,11 @@ namespace grabber
             get { return identifier; }
             set { identifier = value; }
         } private string identifier;
-        public string Title
+        public string Name
         {
-            get { return title; }
-            set { title = value; }
-        } private string title;
+            get { return name; }
+            set { name = value; }
+        } private string name;
         public int Year
         {
             get { return year; }
@@ -84,35 +85,35 @@ namespace grabber
         private const string apiSearch = "http://api.themoviedb.org/2.1/Movie.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
         //private const string apiGetInfo = "http://api.themoviedb.org/2.0/Movie.getInfo?api_key=1e66c0cc99696feaf2ea56695e134eae&id=";
         private const string apiGetInfo = "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
-        public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director)
+        public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, bool choose)
         {
             List<DBMovieInfo> results = new List<DBMovieInfo>();
-            results = getMoviesByTitle(title, year, director);
+            results = getMoviesByTitle(title, year, director, choose);
             if (results.Count == 0)
-                results = getMoviesByTitle(ttitle, year, director);
+                results = getMoviesByTitle(ttitle, year, director, choose);
             return results;
         }
 
-        public List<DBMovieInfo> getMoviesByTitle(string title,  int year, string director)
+        public List<DBMovieInfo> getMoviesByTitle(string title, int year, string director, bool choose)
         {
             //title = Grabber.GrabUtil.normalizeTitle(title);
             string id = string.Empty;
             List<DBMovieInfo> results = new List<DBMovieInfo>();
             List<DBMovieInfo> resultsdet = new List<DBMovieInfo>();
-            XmlNodeList xml = getXML(apiSearch + Grabber.GrabUtil.RemoveDiacritics(title.Trim().ToLower()));
+            XmlNodeList xml = getXML(apiSearch + Grabber.GrabUtil.RemoveDiacritics(title.Trim().ToLower()).Replace(" ", "+"));
             if (xml == null)
-                    return results;
- 
+                return results;
+
             XmlNodeList movieNodes = xml.Item(0).SelectNodes("//movie");
             foreach (XmlNode node in movieNodes)
             {
                 DBMovieInfo movie = getMovieInformation(node);
-                if (movie != null && Grabber.GrabUtil.normalizeTitle(movie.Title.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())))
-                    if (year > 0 && movie.Year > 0)
+                if (movie != null && Grabber.GrabUtil.normalizeTitle(movie.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())))
+                    if (year > 0 && movie.Year > 0 && !choose)
                     {
                         if ((year >= movie.Year - 2) && (year <= movie.Year + 2))
                             results.Add(movie);
-                    }   
+                    }
                     else
                         results.Add(movie);
             }
@@ -121,26 +122,30 @@ namespace grabber
                 // Replace non-descriptive characters with spaces
                 director = System.Text.RegularExpressions.Regex.Replace(director, "( et | and | & | und )", ",");
                 if (director.IndexOf(",") > 0)
-                    director = director.Substring(0,director.IndexOf(","));
+                    director = director.Substring(0, director.IndexOf(","));
                 foreach (DBMovieInfo movie in results)
                 {
                     if (movie.Identifier != null)
                     {
-                        xml = getXML(apiGetInfo + movie.Identifier);
+
+                        try { xml = getXML(apiGetInfo + movie.Identifier); }
+                        catch { xml = null; }
                         if (xml != null)
                         {
                             movieNodes = xml.Item(0).SelectNodes("//movie");
                             foreach (XmlNode node in movieNodes)
                             {
                                 DBMovieInfo movie2 = getMovieInformation(node);
-                                if (movie2 != null && Grabber.GrabUtil.normalizeTitle(movie2.Title.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())) && movie2.Directors.Contains(director))
-                                    if (year > 0 && movie2.Year > 0)
+                                if (movie2 != null && Grabber.GrabUtil.normalizeTitle(movie2.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())) && movie2.Directors.Contains(director))
+                                    if (year > 0 && movie2.Year > 0 && !choose)
                                     {
                                         if ((year >= movie2.Year - 2) && (year <= movie2.Year + 2))
                                             resultsdet.Add(movie2);
                                     }
-                                    //else
-                                    //    resultsdet.Add(movie2);
+                                    else
+                                        resultsdet.Add(movie2);
+                                else
+                                    resultsdet.Add(movie2);
                             }
                         }
                     }
@@ -151,8 +156,9 @@ namespace grabber
             else
                 return results;
         }
-            // given a url, retrieves the xml result set and returns the nodelist of Item objects
-        public XmlNodeList getXML(string url) {
+        // given a url, retrieves the xml result set and returns the nodelist of Item objects
+        public XmlNodeList getXML(string url)
+        {
             Cornerstone.Tools.WebGrabber grabber = new Cornerstone.Tools.WebGrabber(url);
             grabber.MaxRetries = 10;
             grabber.Timeout = 5000;
@@ -160,7 +166,7 @@ namespace grabber
             grabber.Encoding = Encoding.UTF8;
 
             if (grabber.GetResponse())
-                return grabber.GetXML("results");
+                return grabber.GetXML();
             else
                 return null;
         }
@@ -186,29 +192,34 @@ namespace grabber
                     case "id":
                         movie.Identifier = value;
                         break;
+                    case "name":
                     case "title":
-                        movie.Title = value;
+                        movie.Name = value;
                         break;
                     //case "alternative_title":
                     //    // todo: remove this check when the api is fixed
                     //    if (value.Trim() != "None found." && value.Trim().Length > 0)
                     //        movie.AlternateTitles.Add(value);
                     //    break;
+                    case "released":
                     case "release":
                         DateTime date;
                         if (DateTime.TryParse(value, out date))
                             movie.Year = date.Year;
                         break;
                     case "imdb":
+                    case "imdb_id":
                         movie.ImdbID = value;
                         break;
                     case "url":
                         movie.DetailsURL = value;
                         break;
+                    case "overview":
                     case "short_overview":
                         movie.Summary = value;
                         break;
                     case "rating":
+                    case "score":
                         float rating = 0;
                         if (float.TryParse(value, out rating))
                             movie.Score = rating;
@@ -250,6 +261,25 @@ namespace grabber
                     case "backdrop":
                         if (node.OuterXml.Contains("\"original\""))
                             backdrops.Add(value);
+                        break;
+                    case "images":
+                        if (node.OuterXml.Contains("\"original\"") && node.OuterXml.Contains("\"backdrop\"") && node.OuterXml.Contains("url="))
+                        {
+                            //                            int start = node.OuterXml.IndexOf("url=") + 5;
+                            foreach (XmlNode image in node.SelectNodes("image"))
+                            {
+                                if (image.OuterXml.Contains("\"original\"") && image.OuterXml.Contains("\"backdrop\"") && image.OuterXml.Contains("url="))
+                                {
+                                    int start = image.OuterXml.IndexOf("url=") + 5;
+                                    string zvalue = image.OuterXml.Substring(start);
+                                    zvalue = zvalue.Substring(0, zvalue.IndexOf("\""));
+                                    backdrops.Add(zvalue);
+                                }
+                            }
+                            //                           string zvalue = node.OuterXml.Substring(start);
+                            //                           zvalue = zvalue.Substring(0, zvalue.IndexOf("\""));
+                            //                           backdrops.Add(zvalue);
+                        }
                         break;
                 }
             }
