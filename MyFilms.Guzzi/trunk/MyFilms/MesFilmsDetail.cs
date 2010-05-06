@@ -658,7 +658,7 @@ namespace MesFilms
                         Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
                         Log.Debug("MyFilms (SearchTrailerLocal) Parameter 1 - '(DataRow[])MesFilms.r': '" + (DataRow[])MesFilms.r);
                         Log.Debug("MyFilms (SearchTrailerLocal) Parameter 2 - '(int)MesFilms.conf.StrIndex': '" + (int)MesFilms.conf.StrIndex);
-                        MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
+                        MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex, true);
                         afficher_detail(true);
                         //GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                         setProcessAnimationStatus(false, m_SearchAnimation);
@@ -3341,7 +3341,7 @@ namespace MesFilms
         //-------------------------------------------------------------------------------------------
         //  Search All Trailerfiles locally
         //-------------------------------------------------------------------------------------------        
-        public static void SearchTrailerLocal(DataRow[] r1, int Index)
+        public static void SearchTrailerLocal(DataRow[] r1, int Index, bool ExtendedSearch)
         {
             //Searchdirectory:
             Log.Debug("MyFilmsDetails (SearchtrailerLocal) - StrDirStortrailer: " + MesFilms.conf.StrDirStorTrailer);
@@ -3404,15 +3404,17 @@ namespace MesFilms
             
             //Search Filenames with "title" in Trailer Searchpath
             string[] directories;
-            foreach (string storage in Trailerdirectories)
+            if (ExtendedSearch)
             {
-                Log.Debug("MyFilms (TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'"); 
-                directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
-                foreach (string directoryfound in directories)
+                foreach (string storage in Trailerdirectories)
+                {
+                    Log.Debug("MyFilms (TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'");
+                    directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
+                    foreach (string directoryfound in directories)
                     {
                         if ((directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
                         {
-                            Log.Debug("MyFilms (TrailersearchLocal) - Directory found: '" + directoryfound + "'"); 
+                            Log.Debug("MyFilms (TrailersearchLocal) - Directory found: '" + directoryfound + "'");
                             files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
                             foreach (string filefound in files)
                             {
@@ -3427,7 +3429,7 @@ namespace MesFilms
                                     Log.Debug("MyFilms (TrailersearchLocal) - Files added matching Directory: Size '" + wsize.ToString() + "' - Name '" + filefound + "'");
                                 }
                             }
-                        
+
                         }
                         else
                         {
@@ -3446,7 +3448,8 @@ namespace MesFilms
                                 }
                             }
                         }
-                    }            
+                    }
+                }
             }
             
             var sort = from fn in filesfound

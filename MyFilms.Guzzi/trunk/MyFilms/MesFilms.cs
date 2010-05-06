@@ -481,8 +481,12 @@ namespace MesFilms
                         dlg.Add(GUILocalizeStrings.Get(10798621));//Search global movies by random
                         choiceSearch.Add("randomsearch");
 
+                        dlg.Add(GUILocalizeStrings.Get(10798645));//Search global movies by areas
+                        choiceSearch.Add("globalareas");
+
                         dlg.Add(GUILocalizeStrings.Get(10798615));//Search global movies by property
                         choiceSearch.Add("globalproperty");
+                        
                         dlg.DoModal(GetID);
 
                         if (dlg.SelectedLabel == -1)
@@ -505,6 +509,13 @@ namespace MesFilms
                         if (choiceSearch[dlg.SelectedLabel] == "randomsearch")
                         {
                             SearchMoviesbyRandomWithTrailer();
+                            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                            dlg.DeInit();
+                            return base.OnMessage(messageType);
+                        }
+                        if (choiceSearch[dlg.SelectedLabel] == "globalareas")
+                        {
+                            SearchMoviesbyAreas();
                             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                             dlg.DeInit();
                             return base.OnMessage(messageType);
@@ -2114,19 +2125,19 @@ namespace MesFilms
                     dlgYesNo.DoModal(GetID);
                     if (!(dlgYesNo.IsConfirmed))
                         break;
-                    GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-                    setProcessAnimationStatus(true, m_SearchAnimation);
+                    //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                    //setProcessAnimationStatus(true, m_SearchAnimation);
                     
                     for (i = 0; i < w_index_count; i++)
                     {
                         Log.Debug("MyFilms (GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] + "'");
                         //MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
-                        MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(i));
+                        MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(i), false);
                     }
 
                     GUIDialogOK dlgOk1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-                    setProcessAnimationStatus(false, m_SearchAnimation);
+                    //setProcessAnimationStatus(false, m_SearchAnimation);
                     dlgOk1.SetHeading("Info");
                     dlgOk1.SetLine(1, "");
                     dlgOk1.SetLine(2, "Trailersuche beendet !");
@@ -2925,7 +2936,7 @@ namespace MesFilms
             Log.Debug("MyFilms (SearRandomWithTrailer-Info): Here should happen the handling of menucontext....");
         }
 
-        private void SearchMoviesbyRandom()
+        private void SearchMoviesbyAreas()
         {
             // first select the area where to make random search on - "all", "category", "year", "country"
             AntMovieCatalog ds = new AntMovieCatalog();
