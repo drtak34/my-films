@@ -492,9 +492,13 @@ namespace MesFilms
             upd_choice[ichoice] = "trailer";
             ichoice++;
 
-            dlg.Add(GUILocalizeStrings.Get(10798724));             //load IMDB Trailer, store locally and update DB
-            upd_choice[ichoice] = "trailer-imdb";
-            ichoice++;
+//            dlg.Add(GUILocalizeStrings.Get(10798726));             //Search local Trailer for all movies and Update DB (local) -> Moved to Main Screen !!!
+//            upd_choice[ichoice] = "trailer-all";
+//            ichoice++;
+
+            //            dlg.Add(GUILocalizeStrings.Get(10798724));             //load IMDB Trailer, store locally and update DB
+//            upd_choice[ichoice] = "trailer-imdb";
+//            ichoice++;
 
             dlg.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
             upd_choice[ichoice] = "trailer-delete";
@@ -651,7 +655,9 @@ namespace MesFilms
                         // 3.) Im (Trailer)-Suchpfad nach Verzeichnissen, die nach dem Filmnamen benannt sind - dann alle Files darin registrien
 
                         //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
-                        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
+                        Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
+                        Log.Debug("MyFilms (SearchTrailerLocal) Parameter 1 - '(DataRow[])MesFilms.r': '" + (DataRow[])MesFilms.r);
+                        Log.Debug("MyFilms (SearchTrailerLocal) Parameter 2 - '(int)MesFilms.conf.StrIndex': '" + (int)MesFilms.conf.StrIndex);
                         MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
                         afficher_detail(true);
                         //GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -661,7 +667,7 @@ namespace MesFilms
                         dlgOk.SetLine(1, MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrSTitle.ToString()].ToString());//video title
                         dlgOk.SetLine(2, result.Count.ToString() + " Trailers gefunden !");
                         dlgOk.DoModal(GetID);
-                        
+
                         //if (dlg == null) return;
                         //dlg.Reset();
                         //dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
@@ -671,6 +677,27 @@ namespace MesFilms
 
                         //dlg.DoModal(GetID);
                         //if (dlg.SelectedLabel == -1) return;
+                        break;
+                    }
+                case "trailer-all": //To Be Deleted - Moved to Main Screen !!!!
+                    {
+                        setProcessAnimationStatus(true, m_SearchAnimation);
+                        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
+                        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
+                   //dsgsdgsgsg
+                        Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
+                        Log.Debug("MyFilms (SearchTrailerLocal) Parameter 1 - '(DataRow[])MesFilms.r': '" + (DataRow[])MesFilms.r);
+                        Log.Debug("MyFilms (SearchTrailerLocal) Parameter 2 - '(int)MesFilms.conf.StrIndex': '" + (int)MesFilms.conf.StrIndex);
+                        
+                        //MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
+                        afficher_detail(true);
+                        //GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                        setProcessAnimationStatus(false, m_SearchAnimation);
+                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                        dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                        dlgOk.SetLine(1, "");
+                        dlgOk.SetLine(2, " Trailer in Datenbank aktualisiert !");
+                        dlgOk.DoModal(GetID);
                         break;
                     }
                 case "trailer-imdb":
@@ -1243,9 +1270,9 @@ namespace MesFilms
             }
 
 // Old Code            
-            string url = "";
+            //string url = "";
             string moviehead = "";
-            string wscript = "";
+            //string wscript = "";
 
             //Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string title = string.Empty;
@@ -3319,9 +3346,11 @@ namespace MesFilms
             //Searchdirectory:
             Log.Debug("MyFilmsDetails (SearchtrailerLocal) - StrDirStortrailer: " + MesFilms.conf.StrDirStorTrailer);
             //Title1 = Movietitle
-            Log.Debug("MyFilmsDetails (SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1] : '" + MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'");
+            Log.Debug("MyFilmsDetails (SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1] : '" + MesFilms.r[Index][MesFilms.conf.StrTitle1].ToString() + "'");
+            //Title2 = Translated Movietitle
+            Log.Debug("MyFilmsDetails (SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2] : '" + MesFilms.r[Index][MesFilms.conf.StrTitle2].ToString() + "'");
             //Cleaned Title
-            Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Cleaned Title                                               : '" + MediaPortal.Util.Utils.FilterFileName(MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString().ToLower()) + "'");            
+            Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Cleaned Title                                               : '" + MediaPortal.Util.Utils.FilterFileName(MesFilms.r[Index][MesFilms.conf.StrTitle1].ToString().ToLower()) + "'");            
             //Index of facadeview?
             Log.Debug("MyFilmsDetails (SearchtrailerLocal) - Index: '" + Index + "'");
             //Full Path to Film
@@ -3332,9 +3361,12 @@ namespace MesFilms
             string[] filesfound = new string[100];
             Int64[] filesfoundsize = new Int64[100];
             int filesfoundcounter = 0;
-            string file = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
-            string titlename = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
-            string titlename2 = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2].ToString();
+            string file = MesFilms.r[Index][MesFilms.conf.StrTitle1].ToString();
+            string titlename = MesFilms.r[Index][MesFilms.conf.StrTitle1].ToString();
+            string titlename2 = MesFilms.r[Index][MesFilms.conf.StrTitle2].ToString();
+            //string file = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
+            //string titlename = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
+            //string titlename2 = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2].ToString();
             string directoryname = "";
             string movieName = "";
             Int64 wsize = 0; // Temporary Filesize detection
@@ -3358,7 +3390,7 @@ namespace MesFilms
             string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
             foreach (string filefound in files)
                 {
-                    if ((filefound.ToString().ToLower().Contains("trailer")) && (Utils.IsVideo(filefound)))
+                    if (((filefound.ToString().ToLower().Contains("trailer")) || (filefound.ToString().ToLower().Contains("trlr")))&& (Utils.IsVideo(filefound)))
                     {
                         wsize = new System.IO.FileInfo(filefound).Length;
                         result.Add(filefound);
