@@ -1425,6 +1425,14 @@ namespace MesFilms
                     Log.Info("MyFilms : Fanart " + listemovies[0].Name.Substring(listemovies[0].Name.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
                     break;
                 default:
+
+                    ArrayList wotitle_tableau = new ArrayList();
+                    ArrayList wttitle_tableau = new ArrayList();
+                    ArrayList wotitle_sub_tableau = new ArrayList();
+                    ArrayList wttitle_sub_tableau = new ArrayList();
+                    int MinChars = 2;
+                    bool Filter = true;
+
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     if (dlg == null) return;
                     dlg.Reset();
@@ -1441,18 +1449,65 @@ namespace MesFilms
                     }
                     if (dlg.SelectedLabel == 0)
                     {
-                        VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-                        if (null == keyboard) return;
-                        keyboard.Reset();
-                        keyboard.Text = wtitle;
-                        keyboard.DoModal(wGetID);
-                        if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                        //Get SubTitles and Subwords from otitle and ttitle
+                        wotitle_tableau = MesFilms.SubTitleGrabbing(wtitle.ToString());
+                        wttitle_tableau = MesFilms.SubTitleGrabbing(wttitle.ToString());
+                        wotitle_sub_tableau = MesFilms.SubWordGrabbing(wtitle.ToString(),MinChars,Filter); // Min 3 Chars, Filter true (no der die das)
+                        wttitle_sub_tableau = MesFilms.SubWordGrabbing(wttitle.ToString(),MinChars,Filter); // Min 3 Chars, Filter true (no der die das)
+                        //First Show Dialog to choose Otitle, Ttitle or substrings - or Keyboard to manually enter searchstring!!!
+                        GUIDialogMenu dlgs = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                        if (dlgs == null) return;
+                        dlgs.Reset();
+                        dlgs.SetHeading(GUILocalizeStrings.Get(924) + " - Wähle Suchbegriff"); // menu
+                        dlgs.Add("  *****  " + "Manuelle Eingabe über Tastatur" + "  *****  ");
+                        dlgs.Add(wtitle); //Otitle
+                        dlgs.Add(wttitle); //Ttitle
+                        for (int wi = 0; wi < wotitle_tableau.Count; wi++)
                         {
-                            Remove_Backdrops_Fanart(wttitle,true);
-                            Remove_Backdrops_Fanart(wtitle, true);
-                            Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID);
+                            if (wotitle_tableau[wi].ToString().Length > 0) dlgs.Add(wotitle_tableau[wi].ToString());
                         }
-                        break;
+                        for (int wi = 0; wi < wttitle_tableau.Count; wi++)
+                        {
+                            if (wttitle_tableau[wi].ToString().Length > 0) dlgs.Add(wttitle_tableau[wi].ToString());
+                        }
+                        for (int wi = 0; wi < wotitle_sub_tableau.Count; wi++)
+                        {
+                            if (wotitle_sub_tableau[wi].ToString().Length > 0) dlgs.Add(wotitle_sub_tableau[wi].ToString());
+                        }
+                        for (int wi = 0; wi < wttitle_sub_tableau.Count; wi++)
+                        {
+                            if (wttitle_sub_tableau[wi].ToString().Length > 0) dlgs.Add(wttitle_sub_tableau[wi].ToString());
+                        }
+                        //Now all titles and Substrings listed in dialog !
+                        //dlgs.Add("  *****  " + GUILocalizeStrings.Get(200036) + "  *****  "); //choice for changing movie filename
+                        if (!(dlgs.SelectedLabel > -1))
+                        {
+                            dlgs.SelectedLabel = -1;
+                            dlgs.DoModal(wGetID);
+                        }
+                        Log.Debug("MyFilms (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabelText: '" + dlgs.SelectedLabelText.ToString() + "'");
+                        Log.Debug("MyFilms (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabel: '" + dlgs.SelectedLabel.ToString() + "'");
+                        if (dlgs.SelectedLabel == 0)
+                        {
+                            VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                            if (null == keyboard) return;
+                            keyboard.Reset();
+                            keyboard.Text = wtitle;
+                            keyboard.DoModal(wGetID);
+                            if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                            {
+                                Remove_Backdrops_Fanart(wttitle, true);
+                                Remove_Backdrops_Fanart(wtitle, true);
+                                Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID);
+                            }
+                            break;
+                        }
+                        if (dlgs.SelectedLabel > 0)
+                        {
+                            Download_Backdrops_Fanart(dlgs.SelectedLabelText, string.Empty, string.Empty, string.Empty, true, wGetID);
+                            //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID)
+                            break;
+                        }
                     }
                     if (dlg.SelectedLabel > 0)
                     {
