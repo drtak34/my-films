@@ -1464,19 +1464,19 @@ namespace MesFilms
                         dlgs.Add(wttitle); //Ttitle
                         for (int wi = 0; wi < wotitle_tableau.Count; wi++)
                         {
-                            if (wotitle_tableau[wi].ToString().Length > 0) dlgs.Add(wotitle_tableau[wi].ToString());
+                            if (wotitle_tableau[wi].ToString().Length > 1) dlgs.Add(wotitle_tableau[wi].ToString());
                         }
                         for (int wi = 0; wi < wttitle_tableau.Count; wi++)
                         {
-                            if (wttitle_tableau[wi].ToString().Length > 0) dlgs.Add(wttitle_tableau[wi].ToString());
+                            if (wttitle_tableau[wi].ToString().Length > 1) dlgs.Add(wttitle_tableau[wi].ToString());
                         }
                         for (int wi = 0; wi < wotitle_sub_tableau.Count; wi++)
                         {
-                            if (wotitle_sub_tableau[wi].ToString().Length > 0) dlgs.Add(wotitle_sub_tableau[wi].ToString());
+                            if (wotitle_sub_tableau[wi].ToString().Length > 1) dlgs.Add(wotitle_sub_tableau[wi].ToString());
                         }
                         for (int wi = 0; wi < wttitle_sub_tableau.Count; wi++)
                         {
-                            if (wttitle_sub_tableau[wi].ToString().Length > 0) dlgs.Add(wttitle_sub_tableau[wi].ToString());
+                            if (wttitle_sub_tableau[wi].ToString().Length > 1) dlgs.Add(wttitle_sub_tableau[wi].ToString());
                         }
                         //Now all titles and Substrings listed in dialog !
                         //dlgs.Add("  *****  " + GUILocalizeStrings.Get(200036) + "  *****  "); //choice for changing movie filename
