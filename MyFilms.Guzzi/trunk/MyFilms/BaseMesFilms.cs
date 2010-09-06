@@ -33,7 +33,8 @@ namespace MesFilms
     public class BaseMesFilms
     {
         private static AntMovieCatalog data;
-        private static Dictionary<string, string> dataPath;
+        //Auskommentiert, da nie benutzt !!!
+        //private static Dictionary<string, string> dataPath;
         private static DataRow[] movies;
 
         #region ctor
@@ -148,13 +149,13 @@ namespace MesFilms
             }
         }
 
-        public static void Lirefilm(string nomfilm)
-        {
-            if (dataPath.ContainsKey(""))
-            {
+        //public static void Lirefilm(string nomfilm)
+        //{
+        //    if (dataPath.ContainsKey(""))
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         #endregion
     }

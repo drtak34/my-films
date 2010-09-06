@@ -72,6 +72,9 @@ namespace MesFilms
             CTRL_BtnMaj = 107,
             CTRL_BtnActors = 108,
             CTRL_BtnPlayTrailer = 109,
+            CTRL_BtnActorThumbs = 110,
+            CTRL_BtnMovieThumbs = 111,
+            CTRL_BtnMovieInfos = 112,
             CTRL_Fanart = 1000,
             CTRL_FanartDir = 1001,
             CTRL_MovieThumbs = 1002,
@@ -119,6 +122,8 @@ namespace MesFilms
         int StrMax = 0;
         public const int ID_MesFilms = 7986;
         public int ID_MesFilmsDetail = 7987;
+        public int ID_MesFilmsActors = 7989;
+        public int ID_MesFilmsThumbs = 7990;
         public SQLiteClient m_db;
         public class IMDBActorMovie
         {
@@ -397,9 +402,12 @@ namespace MesFilms
                         // Update items
                         Update_XML_Items();
                         return true;
-                    if (iControl == (int)Controls.CTRL_BtnActors)
-                        // Show Actror Details Screen
-                        Update_XML_Items(); //To be changed, when DetailScreen is done!!!
+                    if (iControl == (int)Controls.CTRL_BtnActorThumbs)
+                        // Show Actor Details Screen
+                        GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
+                        // Hier Aktivitäten wie z.b. ListControl für Actors?
+                        GUIWindowManager.ShowPreviousWindow();
+                        //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                         return true;
             }
             base.OnMessage(messageType);

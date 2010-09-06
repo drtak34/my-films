@@ -53,6 +53,7 @@ namespace MesFilms
                 StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", "");
                 StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", "");
                 StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", "");
+                StrDirStorActorThumbs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageActorThumbs", "");
                 SearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileName", "False");
                 SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", "");
@@ -429,6 +430,13 @@ namespace MesFilms
         {
             get { return strDirStorTrailer; }
             set { strDirStorTrailer = value; }
+        }
+
+        private string strDirStorActorThumbs = string.Empty;
+        public string StrDirStorActorThumbs
+        {
+            get { return strDirStorActorThumbs; }
+            set { strDirStorActorThumbs = value; }
         }
 
         private string strIdentLabel = string.Empty;

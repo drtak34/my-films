@@ -151,6 +151,7 @@ namespace MesFilms
         public bool GlobalFilterMinRating = false;
         public string GlobalFilterString = "";
         public bool MovieScrobbling = false;
+        public int actorID = 0;
         #endregion
         #region events
   
@@ -2387,6 +2388,14 @@ namespace MesFilms
             dlg.Reset();
             choiceSearch.Clear();
             dlg.SetHeading(GUILocalizeStrings.Get(10798611) + wperson); // function selection (actor, director, producer)
+
+            //First add general option to show MP Actor Infos
+            if (wperson.Length > 0)
+            {
+                dlg.Add("Person Infos");
+                choiceSearch.Add("PersonInfo");
+            }
+
             DataRow[] wr = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens, false);
             if (wr.Length > 0)
             {
@@ -2408,6 +2417,51 @@ namespace MesFilms
             dlg.DoModal(GetID);
             if (dlg.SelectedLabel == -1)
                 return;
+            if (choiceSearch[dlg.SelectedLabel] == "PersonInfo")
+            {
+                ArrayList actorList = new ArrayList();
+                // Search with searchName parameter which contain wanted actor name, result(s) is in array
+                // which conatin id and name separated with char "|"
+                MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
+                // Check result
+
+                if (actorList.Count == 0)
+                {
+                    Log.Debug("MyFilms (Person Info): No ActorIDs found for '" + wperson + "'");
+                    GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK); 
+                    dlgOk.SetHeading("Info");
+                    dlgOk.SetLine(1, "");
+                    dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
+                    dlgOk.DoModal(GetID);
+                    return;
+                }
+                Log.Debug("MyFilms (Person Info): " + actorList.Count.ToString() + " ActorID(s) found for '" + wperson + "'");
+                //int actorID;
+                actorID = 0;
+                string actorname = "";
+                // Define splitter for string
+                char[] splitter = { '|' };
+                // Iterate through list
+                foreach (string act in actorList)
+                {
+                    // Split id from actor name (two substrings, [0] is id and [1] is name)
+                    string[] strActor = act.Split(splitter);
+                    // From here we have all what we want, now we can populate datatable, gridview, listview....)
+                    // actorID originally is integer in the databse (it can be string in results but if we want get details from
+                    // IMDBActor  GetActorInfo(int idActor) we need integer)
+                    actorID = Convert.ToInt32(strActor[0]);
+                    actorname = strActor[1];
+                    Log.Debug("MyFilms (Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
+                }
+                
+                MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
+                //MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(1);
+                //if (actor != null)
+
+                OnVideoArtistInfoGuzzi(actor);
+                //OnVideoArtistInfoGuzzi(wperson);
+                return;
+            }
             conf.StrSelect = choiceSearch[dlg.SelectedLabel].ToString() + " like '*" + wperson + "*'";
             if (choiceSearch[dlg.SelectedLabel] == "Actors")
                 conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]";
@@ -2419,6 +2473,25 @@ namespace MesFilms
             conf.StrTitleSelect = "";
             GetFilmList();
         }
+
+
+        private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
+        {
+            GUIVideoArtistInfoGuzzi infoDlg =
+              (GUIVideoArtistInfoGuzzi)GUIWindowManager.GetWindow(7989);
+            if (infoDlg == null)
+            {
+                return;
+            }
+            if (actor == null)
+            {
+                return;
+            }
+            infoDlg.Actor = actor;
+            infoDlg.DoModal(GetID);
+        }
+
+        
         //*****************************************************************************************
         //*  search related movies by properties                                                  *
         //*****************************************************************************************
