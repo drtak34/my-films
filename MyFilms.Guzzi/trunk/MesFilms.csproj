@@ -63,7 +63,6 @@
   <ItemGroup>
     <Reference Include="AMCUpdater, Version=0.9.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <ExecutableExtension>.exe</ExecutableExtension>
       <HintPath>..\AMCUpdater.exe</HintPath>
     </Reference>
     <Reference Include="Core, Version=1.1.0.33880, Culture=neutral, processorArchitecture=x86">
@@ -116,6 +115,8 @@
     </Compile>
     <Compile Include="MyFilms\BaseMesFilms.cs" />
     <Compile Include="MyFilms\CatalogConverter.cs" />
+    <Compile Include="MyFilms\MesFilmsActors.cs" />
+    <Compile Include="MyFilms\MesFilmsThumbs.cs" />
     <Compile Include="MyFilms\Configuration.cs" />
     <Compile Include="MyFilms\CryptageTexte.cs" />
     <Compile Include="MyFilms\CString.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="MyFilms\LocalizeStrings.cs" />
     <Compile Include="MyFilms\Logos.cs" />
     <Compile Include="MyFilms\MesFilms.cs" />
-    <Compile Include="MyFilms\MesFilmsActors.cs" />
+    <Compile Include="MyFilms\MesFilmsActorsInfo.cs" />
     <Compile Include="MyFilms\MesFilmsDetail.cs" />
     <Compile Include="MyFilms\MesFilmsDialogSetRating.cs" />
     <Compile Include="MyFilms\MesFilmsSetup.cs">
