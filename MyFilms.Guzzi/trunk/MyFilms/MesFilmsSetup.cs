@@ -32,7 +32,7 @@ using MediaPortal.GUI.Library;
 using TaskScheduler;
 using System.Runtime.InteropServices;
 //Guzziusing TaskSchedulerInterop;
-using MesFilms.MyFilms;
+using MesFilms;
 
 namespace MesFilms
 {

@@ -1,4 +1,4 @@
-#region Copyright (C) 2005-2008 Team MediaPortal
+﻿#region Copyright (C) 2005-2008 Team MediaPortal
 
 /* 
  *	Copyright (C) 2005-2008 Team MediaPortal
@@ -24,53 +24,104 @@
 #endregion
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-
-using System.Text;
-using System.Net;
 using System.IO;
 using System.Threading;
-using System.Xml.Serialization;
-
 
 using MediaPortal.GUI.Library;
 using MediaPortal.Util;
-using MediaPortal.Video.Database;
-using MediaPortal.Dialogs;
 using MediaPortal.GUI.Pictures;
-using MediaPortal.Configuration;
+using MediaPortal.Video.Database;
+using MesFilms;
 
-//namespace MesFilms
-namespace MesFilms
+namespace MesFilms.Actors
+
 {
     /// <summary>
     /// Opens a separate page to display Actor Infos
     /// </summary>
-    public class GUIVideoArtistInfoGuzzi : GUIWindow, IRenderLayer
-    //public class GUIVideoArtistInfoGuzzi : GUIWindow, ISetupForm, IShowPlugin
+    public class MesFilmsActors : GUIWindow
     {
-        #region skin
-        [SkinControl(2)]
-        protected GUIButtonControl btnViewAs = null;
-        //[SkinControl(3)]
-        //protected GUISortButtonControl btnSortBy = null;
-        [SkinControl(3)]
-        protected GUIToggleButtonControl btnBiography = null;
-        [SkinControl(4)]
-        protected GUIToggleButtonControl btnMovies = null;
-        [SkinControl(20)]
-        protected GUITextScrollUpControl tbPlotArea = null;
-        [SkinControl(21)]
-        protected GUIImage imgCoverArt = null;
-        [SkinControl(22)]
-        protected GUITextControl tbTextArea = null;
-        [SkinControl(50)]
+        #region Skin ID descriptions
+
+        enum Controls : int
+        {
+            CTRL_TxtSelect = 10401,
+            CTRL_BtnReturn = 10402,
+            CTRL_Fanart = 1000,
+            CTRL_FanartDir = 1001,
+            CTRL_MovieThumbs = 10201,
+            CTRL_MovieThumbsDir = 10202,
+
+            CTRL_BtnSrtBy = 2,
+            CTRL_BtnViewAs = 3,
+            CTRL_BtnSearchT = 4,
+            CTRL_BtnOptions = 5,
+            CTRL_BtnLayout = 6,
+            //CTRL_BtnChangeDB = 7, Not used, done in options instead!
+            //CTRL_TxtSelect = 12,
+            CTRL_Fanart1 = 11,
+            CTRL_Fanart2 = 21,
+            CTRL_Image = 1020,
+            CTRL_Image2 = 1021,
+            CTRL_List = 1026,
+            // ID 3004 aus MesFilms für Wait Symbol (Setvisilility)
+        }
+
+        [SkinControl(10101)]
+        protected GUIButtonControl CTRL_TxtSelect = null;
+        [SkinControl(10102)]
+        protected GUISortButtonControl CTRL_BtnReturn = null;
+
+        [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
+        protected GUIMultiImage ImgFanartDir = null;
+        //[SkinControlAttribute((int)Controls.CTRL_MovieThumbs)]
+        //protected GUIImage ImgMovieThumbs = null;
+        //[SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
+        //protected GUIMultiImage ImgMovieThumbsDir = null;
+
+        [SkinControlAttribute((int)Controls.CTRL_BtnSrtBy)]
+        protected GUISortButtonControl ActorBtnSrtBy = null;
+
+        [SkinControlAttribute((int)Controls.CTRL_List)]
         protected GUIFacadeControl facadeView = null;
+
+        [SkinControlAttribute((int)Controls.CTRL_Image)]
+        protected GUIImage ImgLstFilm = null;
+
+        [SkinControlAttribute((int)Controls.CTRL_Image2)]
+        protected GUIImage ImgLstFilm2 = null;
+
+        [SkinControlAttribute((int)Controls.CTRL_Fanart1)]
+        protected GUIImage ImgFanart1 = null;
+
+        [SkinControlAttribute((int)Controls.CTRL_Fanart2)]
+        protected GUIImage ImgFanart2 = null;
+
+        [SkinControlAttribute(3004)]
+        protected GUIAnimation m_SearchAnimation = null;
+
+
+        public const int ID_MesFilms = 7986;
+        public int ID_MesFilmsDetail = 7987;
+        public int ID_MesFilmsActors = 7989;
+        public int ID_MesFilmsThumbs = 7990;
+        public int ID_MesFilmsActorsInfo = 7991;
+
         #endregion
 
-        private int selectedItemIndex = -1;
-        View currentView = View.Icons;
+        public static string wsearchfile;
+        public static int wGetID;
+
+        public int Layout = 0;
+        public static int Prev_ItemID = -1;
+        public bool Context_Menu = false;
+        //public static Configuration conf;
+        //public static Logos confLogos;
+        //private string currentConfig;
+        public Cornerstone.MP.ImageSwapper backdrop;
+
+        
         private List<string> list;
 
         enum View : int
@@ -95,69 +146,119 @@ namespace MesFilms
 
         #endregion
 
-        private ViewMode viewmode = ViewMode.Biography;
-
         private IMDBActor currentActor = null;
-        private bool _prevOverlay = false;
         private string imdbCoverArtUrl = string.Empty;
 
-               
+        //Pfad für ActorThumbs
+        //MesFilms.conf.StrDirStorActorThumbs.ToString()
+        //string strDir = MesFilms.conf.StrDirStorActorThumbs;
 
-        public GUIVideoArtistInfoGuzzi()
-        //public MesFilmsActors()
+
+        public MesFilmsActors()
         {
-            GetID = (int)7989;
+            GetID = (int) 7989;
         }
 
         public override bool Init()
         {
-            return Load(GUIGraphicsContext.Skin + @"\MesFilmsActorsInfo.xml");
+            return Load(GUIGraphicsContext.Skin + @"\MesFilmsActors.xml");
         }
 
         public override void PreInit() { }
 
-        public override void OnAction(MediaPortal.GUI.Library.Action action)
+
+        //---------------------------------------------------------------------------------------
+        //   Handle Keyboard Actions
+        //---------------------------------------------------------------------------------------
+        public override void OnAction(MediaPortal.GUI.Library.Action actionType)
         {
-            if (action.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU)
+            Log.Debug("MyFilmsActors: OnAction " + actionType.wID.ToString());
+            if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
-                Close();
+                MesFilms.conf.LastID = MesFilms.ID_MesFilms;
+                GUIWindowManager.ActivateWindow(ID_MesFilms);
                 return;
             }
-            base.OnAction(action);
+
+            base.OnAction(actionType);
+            return;
         }
 
-        public override bool OnMessage(GUIMessage message)
+
+        //---------------------------------------------------------------------------------------
+        //   Handle posted Messages
+        //---------------------------------------------------------------------------------------
+        public override bool OnMessage(GUIMessage messageType)
         {
-            switch (message.Message)
+
+            int dControl = messageType.TargetControlId;
+            int iControl = messageType.SenderControlId;
+            switch (messageType.Message)
             {
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-                    _prevOverlay = GUIGraphicsContext.Overlay;
-                    base.OnMessage(message);
+                    //---------------------------------------------------------------------------------------
+                    // Windows Init
+                    //---------------------------------------------------------------------------------------
+                    base.OnMessage(messageType);
+                    wGetID = GetID;
+                    MesFilms.conf.LastID = MesFilms.ID_MesFilmsActors;
                     return true;
-                case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT:
-                    base.OnMessage(message);
-                    GUIGraphicsContext.Overlay = _prevOverlay;
+
+                case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
+                    if (Configuration.CurrentConfig != "")
+                        Configuration.SaveConfiguration(Configuration.CurrentConfig, MesFilms.conf.StrIndex, MesFilms.conf.StrTIndex);
+                    using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(MediaPortal.Configuration.Config.GetFile(MediaPortal.Configuration.Config.Dir.Config, "MediaPortal.xml")))
+                    {
+                        string currentmoduleid = "7989";
+                        bool currentmodulefullscreen = (GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_TVFULLSCREEN || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_MUSIC || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_TELETEXT);
+                        string currentmodulefullscreenstate = GUIPropertyManager.GetProperty("#currentmodulefullscreenstate");
+                        // if MP was closed/hibernated by the use of remote control, we have to retrieve the fullscreen state in an alternative manner.
+                        if (!currentmodulefullscreen && currentmodulefullscreenstate == "True")
+                            currentmodulefullscreen = true;
+                        xmlreader.SetValue("general", "lastactivemodule", currentmoduleid);
+                        xmlreader.SetValueAsBool("general", "lastactivemodulefullscreen", currentmodulefullscreen);
+                        Log.Debug("MyFilms : SaveLastActiveModule - module {0}", currentmoduleid);
+                        Log.Debug("MyFilms : SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
+                    }
+                    return true;
+
+                case GUIMessage.MessageType.GUI_MSG_SETFOCUS:
+                    //---------------------------------------------------------------------------------------
+                    // Set Focus
+                    //---------------------------------------------------------------------------------------
+                    base.OnMessage(messageType);
+                    return true;
+
+                case GUIMessage.MessageType.GUI_MSG_CLICKED:
+                    //---------------------------------------------------------------------------------------
+                    // Mouse/Keyboard Clicked
+                    //---------------------------------------------------------------------------------------
+                    if (iControl == (int)Controls.CTRL_BtnReturn)
+                    // Return Previous Menu
+                    {
+                        MesFilms.conf.LastID = MesFilms.ID_MesFilms;
+                        GUITextureManager.CleanupThumbs();
+                        GUIWindowManager.ActivateWindow(ID_MesFilms);
+                        return true;
+                    }
+
+                    if (iControl == (int)Controls.CTRL_BtnReturn)
+
+                        // Show Actor Details Screen
+                        //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
+                        GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
+                    // Hier Aktivitäten wie z.b. ListControl für Actors?
+                    GUIWindowManager.ShowPreviousWindow();
+                    //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                     return true;
             }
-            return base.OnMessage(message);
+            base.OnMessage(messageType);
+            return true;
         }
-
+        
+        
+        
         #region Base Dialog Members
-
-        private void Close()
-        {
-            GUIWindowManager.IsSwitchingToNewWindow = true;
-            lock (this)
-            {
-                m_bRunning = false;
-                GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT, GetID, 0, 0, 0, 0, null);
-                OnMessage(msg);
-
-                GUIWindowManager.UnRoute();
-                m_pParentWindow = null;
-            }
-            GUIWindowManager.IsSwitchingToNewWindow = false;
-        }
 
         public void DoModal(int dwParentId)
         {
@@ -176,7 +277,7 @@ namespace MesFilms
             GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_WINDOW_INIT, GetID, 0, 0, 0, 0, null);
             OnMessage(msg);
 
-            GUILayerManager.RegisterLayer(this, GUILayerManager.LayerType.Dialog);
+            //GUILayerManager.RegisterLayer(this, GUILayerManager.LayerType.Dialog);
 
             GUIWindowManager.IsSwitchingToNewWindow = false;
             m_bRunning = true;
@@ -184,7 +285,7 @@ namespace MesFilms
             {
                 GUIWindowManager.Process();
             }
-            GUILayerManager.UnRegisterLayer(this);
+            //GUILayerManager.UnRegisterLayer(this);
         }
 
         #endregion
@@ -212,78 +313,6 @@ namespace MesFilms
         }
 
 
-        protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
-        {
-            // Original Code
-            base.OnClicked(controlId, control, actionType);
-
-            if (control == btnMovies)
-            {
-                viewmode = ViewMode.Movies;
-                Update();
-            }
-            if (control == btnBiography)
-            {
-                viewmode = ViewMode.Biography;
-                Update();
-            }
-
-            #region ViewAs
-            if (control == btnViewAs)
-            {
-                bool shouldContinue = false;
-                do
-                {
-                    shouldContinue = false;
-                    switch (currentView)
-                    {
-                        case View.List:
-                            currentView = View.Icons;
-                            if (facadeView.ThumbnailView == null)
-                                shouldContinue = true;
-                            else
-                                facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
-                            break;
-
-                        case View.Icons:
-                            currentView = View.LargeIcons;
-                            if (facadeView.ThumbnailView == null)
-                                shouldContinue = true;
-                            else
-                                facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
-                            break;
-
-                        case View.LargeIcons:
-                            currentView = View.List;
-                            if (facadeView.ListView == null)
-                                shouldContinue = true;
-                            else
-                                facadeView.View = GUIFacadeControl.ViewMode.List;
-                            break;
-                    }
-                } while (shouldContinue);
-                
-                SelectCurrentItem();
-                GUIControl.FocusControl(GetID, controlId);
-                return;
-            }
-            #endregion
-
-            if (control == facadeView)
-            {
-                GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECTED, GetID, 0, facadeView.GetID, 0, 0,
-                                                null);
-                OnMessage(msg);
-                int itemIndex = (int)msg.Param1;
-
-                if (actionType == MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM)
-                {
-                    OnClick(itemIndex);
-                }
-            }
-
-        }
-
         public IMDBActor Actor
         {
             get { return currentActor; }
@@ -297,221 +326,16 @@ namespace MesFilms
                 return;
             }
 
-            //cast->image
-            if (viewmode == ViewMode.Movies)
-            {
-                tbPlotArea.IsVisible = false;
-                tbTextArea.IsVisible = true;
-                imgCoverArt.IsVisible = true;
-                //GUIControl.ShowControl(GetID, 50);
-                btnBiography.Selected = false;
-                btnMovies.Selected = true;
-            }
-            //cast->plot
-            if (viewmode == ViewMode.Biography)
-            {
-                tbPlotArea.IsVisible = true;
-                tbTextArea.IsVisible = false;
-                imgCoverArt.IsVisible = true;
-                //GUIControl.HideControl(GetID, 50);
-                btnBiography.Selected = true;
-                btnMovies.Selected = false;
-            }
-            GUIPropertyManager.SetProperty("#Actor.Name", currentActor.Name);
-            GUIPropertyManager.SetProperty("#Actor.DateOfBirth", currentActor.DateOfBirth);
-            GUIPropertyManager.SetProperty("#Actor.PlaceOfBirth", currentActor.PlaceOfBirth);
-            string biography = currentActor.Biography;
-            if ((biography == string.Empty) || (biography == Strings.Unknown))
-            {
-                biography = currentActor.MiniBiography;
-                if (biography == Strings.Unknown)
-                {
-                    biography = "";
-                }
-            }
-            GUIPropertyManager.SetProperty("#Actor.Biography", biography);
-
-            string movies = "";
-            //facadeView.Dispose();
-            for (int i = 0; i < currentActor.Count; ++i)
-            {
-                string line = String.Format("{0}. {1} - {2}", i + 1, currentActor[i].Year, currentActor[i].MovieTitle);
-                //string line = String.Format("{0}. {1} ({2})\n            {3}\n", i + 1, currentActor[i].Year, currentActor[i].MovieTitle, currentActor[i].Role);
-                movies += line;
-                GUIListItem item = new GUIListItem();
-                item.Label = line;
-                item.Label2 = "(als " + currentActor[i].Role.ToString() + ")";
-                item.Label3 = "n/a";
-                //item.Path = f;
-                
-                
-                string coverArtImage = string.Empty;
-                coverArtImage = Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle);
-                Log.Debug("MyFilmsActors (Coverartimage) - CoverartImage = '" + coverArtImage + "'");
-                if (File.Exists(coverArtImage))
-                {
-                  item.ThumbnailImage = coverArtImage;
-                  item.IconImageBig = coverArtImage;
-                  item.IconImage = coverArtImage;
-                  //else if (movie.Actor != string.Empty)
-                  //{            
-                  //  coverArtImage = MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieActors, movie.Actor);
-                  //  if (System.IO.File.Exists(coverArtImage))
-                  //  {
-                  //    listItem.ThumbnailImage = coverArtImage;
-                  //    listItem.IconImageBig = coverArtImage;
-                  //    listItem.IconImage = coverArtImage;
-                  //  }
-                  //}
-                  //else if (movie.SingleGenre != string.Empty)
-                  //{
-                  //  coverArtImage = MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieGenre, movie.SingleGenre);
-                  //  if (System.IO.File.Exists(coverArtImage))
-                  //  {
-                  //    listItem.ThumbnailImage = coverArtImage;
-                  //    listItem.IconImageBig = coverArtImage;
-                  //    listItem.IconImage = coverArtImage;
-                  //  }
-                  //}
-                }
-                // let's try to assign better covers
-                if (!string.IsNullOrEmpty(coverArtImage))
-                {
-                  coverArtImage = Utils.ConvertToLargeCoverArt(coverArtImage);
-                  if (File.Exists(coverArtImage))
-                  {
-                    item.ThumbnailImage = coverArtImage;
-                  }
-                }
-                              
-                //item.ThumbnailImage = Utils.GetLargeCoverArtName(Thumbs.MovieActors, currentActor.Name);
-                facadeView.Add(item);
-            }
-            //SwitchView();
-            //N�tig?
-            //base.OnPageLoad();
-            GUIPropertyManager.SetProperty("#Actor.Movies", movies);
-
-            string largeCoverArtImage = Utils.GetLargeCoverArtName(Thumbs.MovieActors, currentActor.Name);
-            if (imgCoverArt != null)
-            {
-                imgCoverArt.Dispose();
-                imgCoverArt.SetFileName(largeCoverArtImage);
-                imgCoverArt.AllocResources();
-            }
-        }
-
-        #region IRenderLayer
-
-        public bool ShouldRenderLayer()
-        {
-            return true;
-        }
-
-        public void RenderLayer(float timePassed)
-        {
-            Render(timePassed);
-        }
-
-        #endregion
-
-
-      
-        //Added for ListControl
-        private void OnClick(int itemIndex)
-        {
-            GUIListItem item = GetSelectedItem();
-            if (item == null)
-            {
-                return;
-            }
-
-            selectedItemIndex = GetSelectedItemNo();
-            OnShowPicture(item.Path);
-        }
-        private void OnShowPicture(string strFile)
-        {
-            GUISlideShow SlideShow = (GUISlideShow)GUIWindowManager.GetWindow((int)Window.WINDOW_SLIDESHOW);
-            if (SlideShow == null)
-            {
-                return;
-            }
-
-            SlideShow.Reset();
-
-            foreach (string url in list)
-            {
-                string fname = Path.GetFileName(url);
-                SlideShow.Add(fname);
-            }
-
-            if (SlideShow.Count > 0)
-            {
-                GUIWindowManager.ActivateWindow((int)Window.WINDOW_SLIDESHOW);
-                SlideShow.Select(strFile);
-            }
         }
 
         private int GetSelectedItemNo()
         {
             return facadeView.SelectedListItemIndex;
         }
+
         private GUIListItem GetSelectedItem()
         {
             return facadeView.SelectedListItem;
         }
-
-        void SelectCurrentItem()
-        {
-            int iItem = facadeView.SelectedListItemIndex;
-            if (iItem > -1)
-            {
-                GUIControl.SelectItemControl(GetID, facadeView.GetID, iItem);
-            }
-            UpdateButtonStates();
-        }
-        void UpdateButtonStates()
-        {
-            facadeView.IsVisible = false;
-            facadeView.IsVisible = true;
-            GUIControl.FocusControl(GetID, facadeView.GetID);
-
-            string strLine = string.Empty;
-            View view = currentView;
-            switch (view)
-            {
-                case View.List:
-                    strLine = GUILocalizeStrings.Get(101);
-                    break;
-                case View.Icons:
-                    strLine = GUILocalizeStrings.Get(100);
-                    break;
-                case View.LargeIcons:
-                    strLine = GUILocalizeStrings.Get(417);
-                    break;
-            }
-            if (btnViewAs != null)
-            {
-                btnViewAs.Label = strLine;
-            }
-        }
-        void SwitchView()
-        {
-            switch (currentView)
-            {
-                case View.List:
-                    facadeView.View = GUIFacadeControl.ViewMode.List;
-                    break;
-                case View.Icons:
-                    facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
-                    break;
-                case View.LargeIcons:
-                    facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
-                    break;
-            }
-
-            UpdateButtonStates(); // Ensure "View: xxxx" button label is updated to suit
-        }
-
     }
 }

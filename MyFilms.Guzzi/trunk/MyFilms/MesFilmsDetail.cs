@@ -40,7 +40,7 @@ using MediaPortal.Player;
 using MediaPortal.Playlists;
 using MediaPortal.Util;
 using MediaPortal.Video.Database;
-using MesFilms.MyFilms;
+using MesFilms;
 using NewStringLib;
 using SQLite.NET;
 using System.Xml;
@@ -58,10 +58,10 @@ namespace MesFilms
         {
             CTRL_TxtSelect = 12,
             CTRL_BtnPlay = 101,
-            CTRL_BtnPlay1 = 10001,
-            CTRL_BtnPlay2 = 10002,
-            CTRL_BtnPlay3 = 10003,
-            CTRL_BtnPlay4 = 10004,
+            CTRL_BtnPlay1Description = 10001,
+            CTRL_BtnPlay2Comment = 10002,
+            CTRL_BtnPlay3Persons = 10003,
+            CTRL_BtnPlay4TecDetails = 10004,
             CTRL_BtnPlay5 = 10005,
             CTRL_ViewFanart = 10099,
             CTRL_BtnReturn = 102,
@@ -77,8 +77,8 @@ namespace MesFilms
             CTRL_BtnMovieInfos = 112,
             CTRL_Fanart = 1000,
             CTRL_FanartDir = 1001,
-            CTRL_MovieThumbs = 1002,
-            CTRL_MovieThumbsDir = 1002,
+            //CTRL_MovieThumbs = 1002,
+            //CTRL_MovieThumbsDir = 1002,
             CTRL_logos_id2001 = 2001,
             CTRL_logos_id2002 = 2002,
             CTRL_Title = 2025,
@@ -104,10 +104,10 @@ namespace MesFilms
         protected GUIImage ImgFanart = null;
         [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
         protected GUIMultiImage ImgFanartDir = null;
-        [SkinControlAttribute((int)Controls.CTRL_MovieThumbs)]
-        protected GUIImage ImgMovieThumbs = null;
-        [SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
-        protected GUIMultiImage ImgMovieThumbsDir = null;
+        //[SkinControlAttribute((int)Controls.CTRL_MovieThumbs)]
+        //protected GUIImage ImgMovieThumbs = null;
+        //[SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
+        //protected GUIMultiImage ImgMovieThumbsDir = null;
         [SkinControlAttribute(1030)]
         protected GUILabelControl TxtLabel1 = null;
         [SkinControlAttribute(1031)]
@@ -124,6 +124,7 @@ namespace MesFilms
         public int ID_MesFilmsDetail = 7987;
         public int ID_MesFilmsActors = 7989;
         public int ID_MesFilmsThumbs = 7990;
+        public int ID_MesFilmsActorsInfo = 7991;
         public SQLiteClient m_db;
         public class IMDBActorMovie
         {
@@ -322,25 +323,25 @@ namespace MesFilms
                         Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
                         return true;
                     }
-                    if (iControl == (int)Controls.CTRL_BtnPlay1)
+                    if (iControl == (int)Controls.CTRL_BtnPlay1Description)
                     // Search File to play
                     {
                         Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
                         return true;
                     }
-                    if (iControl == (int)Controls.CTRL_BtnPlay2)
+                    if (iControl == (int)Controls.CTRL_BtnPlay2Comment)
                     // Search File to play
                     {
                         Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
                         return true;
                     }
-                    if (iControl == (int)Controls.CTRL_BtnPlay3)
+                    if (iControl == (int)Controls.CTRL_BtnPlay3Persons)
                     // Search File to play
                     {
                         Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
                         return true;
                     }
-                    if (iControl == (int)Controls.CTRL_BtnPlay4)
+                    if (iControl == (int)Controls.CTRL_BtnPlay4TecDetails)
                     // Search File to play
                     {
                         Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
@@ -350,12 +351,6 @@ namespace MesFilms
                     // Search File to play
                     {
                         Launch_Movie(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
-                        return true;
-                    }
-                    if (iControl == (int)Controls.CTRL_BtnPlayTrailer)
-                    // Search Trailer File to play
-                    {
-                        Launch_Movie_Trailer(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnNext)
@@ -399,16 +394,44 @@ namespace MesFilms
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnMaj)
-                        // Update items
+                    {    // Update items
                         Update_XML_Items();
                         return true;
+                    }
+                    if (iControl == (int)Controls.CTRL_BtnPlayTrailer)
+                    // Search Trailer File to play
+                    {
+                        Launch_Movie_Trailer(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        return true;
+                    }
+                    if (iControl == (int)Controls.CTRL_ViewFanart)
+                    // On Button goto MesFilmsThumbs
+                    {
+                        GUIWindowManager.ActivateWindow(ID_MesFilmsThumbs);
+                        return true;
+                    }
+                    if (iControl == (int)Controls.CTRL_BtnMovieThumbs)
+                    {
+                        GUIWindowManager.ActivateWindow(ID_MesFilmsThumbs);
+                        return true;
+                    }
+
+                    if (iControl == (int)Controls.CTRL_BtnActors)
+                    {
+                        GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
+                        return true;
+                    }
+
                     if (iControl == (int)Controls.CTRL_BtnActorThumbs)
+                    
                         // Show Actor Details Screen
+                        //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
                         GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
                         // Hier Aktivitäten wie z.b. ListControl für Actors?
                         GUIWindowManager.ShowPreviousWindow();
                         //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                         return true;
+                    
             }
             base.OnMessage(messageType);
             return true;

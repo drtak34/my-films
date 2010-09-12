@@ -40,7 +40,6 @@ using MediaPortal.Util;
 
 using NewStringLib;
 using Cornerstone.MP;
-using MesFilms.MyFilms;
 
 namespace MesFilms
 {
@@ -57,6 +56,8 @@ namespace MesFilms
         public const int ID_MesFilms = 7986;
         public const int ID_MesFilmsDetail = 7987;
         public const int ID_MesFilmsActors = 7989;
+        public const int ID_MesFilmsThumbs = 7990;
+        public const int ID_MesFilmsActorsInfo = 7991;
         enum Controls : int
         {
             CTRL_BtnSrtBy = 2,
@@ -152,6 +153,7 @@ namespace MesFilms
         public string GlobalFilterString = "";
         public bool MovieScrobbling = false;
         public int actorID = 0;
+        public static string CurrentMovie;
         #endregion
         #region events
   
@@ -675,6 +677,7 @@ namespace MesFilms
                         dlg.Add(GUILocalizeStrings.Get(100));//Icons
                         dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
                         dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
+                        dlg.Add(GUILocalizeStrings.Get(791));//Coverflow
                         dlg.DoModal(GetID);
 
                         if (dlg.SelectedLabel == -1)
@@ -700,6 +703,16 @@ namespace MesFilms
                                 conf.StrIndex = facadeView.SelectedListItem.ItemId;
                                 conf.StrTIndex = facadeView.SelectedListItem.Label;
                                 GUITextureManager.CleanupThumbs();
+
+                                //Start: Added for MovieThumbs
+                                CurrentMovie = "";
+                                try
+                                { CurrentMovie = (string)MesFilms.r[facadeView.SelectedListItem.ItemId][MesFilms.conf.StrStorage].ToString().Trim(); }
+                                catch
+                                { CurrentMovie = ""; }
+                                Log.Debug("MyFilms - PrepareThumbView: CurrentMovie = '" + CurrentMovie + "'");
+                                //End: Added for MovieThumbs
+
                                 GUIWindowManager.ActivateWindow(ID_MesFilmsDetail);
                             }
                             else
@@ -889,6 +902,8 @@ namespace MesFilms
             suite:
 
                 sFullTitle = sTitle = sr[conf.StrTitle1].ToString();
+                //Log.Debug("MyFilms (GetFilmList) - BuildDisplaylist - FullTitle: '" + sFullTitle + "'");
+
                 DelimCnt2 = NewString.PosCount(conf.TitleDelim, sTitle, false);
                 if (DelimCnt <= DelimCnt2)
                 {
@@ -1882,6 +1897,12 @@ namespace MesFilms
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
                     facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
                     break;
+                case 4:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
+                    facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
+                    // To be changed when Coverflow is available in CORE Files ....
+                    //facadeView.View = GUIFacadeControl.ViewMode.CoverFlow;
+                    break;
                 default:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
                     facadeView.View = GUIFacadeControl.ViewMode.List;
@@ -2238,6 +2259,13 @@ namespace MesFilms
                 ichoice++;
             }
 
+            if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+            {
+                dlg.Add(GUILocalizeStrings.Get(1079879));//Search Infos to related persons (IMDB to table lookup)
+                upd_choice[ichoice] = "infosperson";
+                ichoice++;
+            }
+
             if (MesFilms.conf.StrSuppress)
             {
                 dlg.Add(GUILocalizeStrings.Get(432));
@@ -2260,6 +2288,7 @@ namespace MesFilms
                 ichoice++;
 
             }
+            
             dlg.DoModal(GetID);
 
             if (dlg.SelectedLabel == -1)
@@ -2284,6 +2313,34 @@ namespace MesFilms
                         break;
                     }
                 
+                case "infosperson":
+
+                    {
+                        //To be modified to call new class with personlist by type and call MesFilmsActors with facade
+                        
+                        //Temporarily disabled - will be required to create Person List later ....
+                        //SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId);
+
+                        GUITextureManager.CleanupThumbs();
+                        GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
+                        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                        //dlg.DeInit();
+
+                        if (0 == 1)
+                        {
+                            Actors.MesFilmsActors infoDlg =
+                                (Actors.MesFilmsActors)GUIWindowManager.GetWindow(ID_MesFilmsActors);
+                            if (infoDlg == null)
+                            {
+                                return;
+                            }
+
+                            infoDlg.DoModal(GetID);
+                            dlg.DeInit();
+                        }
+                        break;
+                    }
+
                 case "suppress":
                     dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
                     dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
@@ -2392,7 +2449,8 @@ namespace MesFilms
             //First add general option to show MP Actor Infos
             if (wperson.Length > 0)
             {
-                dlg.Add("Person Infos");
+                dlg.Add(GUILocalizeStrings.Get(10798731));
+                //dlg.Add("Person Infos");
                 choiceSearch.Add("PersonInfo");
             }
 
@@ -2477,12 +2535,12 @@ namespace MesFilms
 
         private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
         {
-            GUIVideoArtistInfoGuzzi infoDlg =
-              (GUIVideoArtistInfoGuzzi)GUIWindowManager.GetWindow(7989);
+            ActorDialog.MesFilmsActorInfo infoDlg =
+                (ActorDialog.MesFilmsActorInfo)GUIWindowManager.GetWindow(ID_MesFilmsActorsInfo);
             if (infoDlg == null)
             {
                 return;
-            }
+                }
             if (actor == null)
             {
                 return;
@@ -3069,7 +3127,7 @@ namespace MesFilms
                     }   
                     break;
             }
-            Log.Debug("MyFilms (SearRandomWithTrailer-Info): Here should happen the handling of menucontext....");
+            Log.Debug("MyFilms (SearchRandomWithTrailer-Info): Here should happen the handling of menucontext....");
         }
 
         private void SearchMoviesbyAreas()
@@ -3574,6 +3632,8 @@ namespace MesFilms
                     string wdirector = string.Empty;
                     try { wdirector = (string)MesFilms.r[i]["Director"]; }
                     catch { }
+                    //Changed for compatibility to older grabber
+                    //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
                     System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
                 }
             }

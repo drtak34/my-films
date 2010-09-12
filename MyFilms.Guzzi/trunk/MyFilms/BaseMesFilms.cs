@@ -24,7 +24,6 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using System.Text;
-using MesFilms.MyFilms;
 using MediaPortal.ServiceImplementations;
 
 
@@ -69,7 +68,9 @@ namespace MesFilms
         #region méthodes statique publiques
         public static DataRow[] LectureDonnées(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens)
         {
-            return LectureDonnées(StrDfltSelect, StrSelect, StrSort, StrSortSens, true);
+            //Changed accordibg latest Zebons SVN
+            //return LectureDonnées(StrDfltSelect, StrSelect, StrSort, StrSortSens, true);
+            return LectureDonnées(StrDfltSelect, StrSelect, StrSort, StrSortSens, false);
         }
         public static DataRow[] LectureDonnées(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
@@ -156,7 +157,80 @@ namespace MesFilms
 
         //    }
         //}
-
+        public static string Translate_Column(string Column)
+        {
+            switch (Column)
+            {
+                case "Number":
+                    return GUILocalizeStrings.Get(10798650);
+                case "Checked":
+                    return GUILocalizeStrings.Get(10798651);
+                case "MediaLabel":
+                    return GUILocalizeStrings.Get(10798652);
+                case "MediaType":
+                    return GUILocalizeStrings.Get(10798653);
+                case "Source":
+                    return GUILocalizeStrings.Get(10798654);
+                case "Date":
+                    return GUILocalizeStrings.Get(10798655);
+                case "Borrower":
+                    return GUILocalizeStrings.Get(10798656);
+                case "Rating":
+                    return GUILocalizeStrings.Get(10798657);
+                case "OriginalTitle":
+                    return GUILocalizeStrings.Get(10798658);
+                case "TranslatedTitle":
+                    return GUILocalizeStrings.Get(10798659);
+                case "FormattedTitle":
+                    return GUILocalizeStrings.Get(10798660);
+                case "Director":
+                    return GUILocalizeStrings.Get(10798661);
+                case "Producer":
+                    return GUILocalizeStrings.Get(10798662);
+                case "Country":
+                    return GUILocalizeStrings.Get(10798663);
+                case "Category":
+                    return GUILocalizeStrings.Get(10798664);
+                case "Year":
+                    return GUILocalizeStrings.Get(10798665);
+                case "Length":
+                    return GUILocalizeStrings.Get(10798666);
+                case "Actors":
+                    return GUILocalizeStrings.Get(10798667);
+                case "URL":
+                    return GUILocalizeStrings.Get(10798668);
+                case "Description":
+                    return GUILocalizeStrings.Get(10798669);
+                case "Comments":
+                    return GUILocalizeStrings.Get(10798670);
+                case "VideoFormat":
+                    return GUILocalizeStrings.Get(10798671);
+                case "VideoBitrate":
+                    return GUILocalizeStrings.Get(10798672);
+                case "AudioFormat":
+                    return GUILocalizeStrings.Get(10798673);
+                case "AudioBitrate":
+                    return GUILocalizeStrings.Get(10798674);
+                case "Resolution":
+                    return GUILocalizeStrings.Get(10798675);
+                case "Framerate":
+                    return GUILocalizeStrings.Get(10798676);
+                case "Languages":
+                    return GUILocalizeStrings.Get(10798677);
+                case "Subtitles":
+                    return GUILocalizeStrings.Get(10798678);
+                case "DateAdded":
+                    return GUILocalizeStrings.Get(10798679);
+                case "Size":
+                    return GUILocalizeStrings.Get(10798680);
+                case "Disks":
+                    return GUILocalizeStrings.Get(10798681);
+                case "Picture":
+                    return GUILocalizeStrings.Get(10798682);
+                default:
+                    return string.Empty;
+            }
+        }
         #endregion
     }
 }
