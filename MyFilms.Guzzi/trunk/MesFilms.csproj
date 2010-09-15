@@ -110,7 +110,6 @@
   <ItemGroup>
     <Compile Include="MyFilms\AntMovieCatalog.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="MyFilms\AntMovieCatalog.designer.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>

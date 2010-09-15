@@ -31,8 +31,7 @@ using System.Collections;
 using MediaPortal.GUI.Library;
 using TaskScheduler;
 using System.Runtime.InteropServices;
-//Guzziusing TaskSchedulerInterop;
-using MesFilms;
+//Guzzi using TaskSchedulerInterop;
 
 namespace MesFilms
 {
@@ -65,11 +64,11 @@ namespace MesFilms
 
             textBox1.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginName", "Films");
             MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
-//            for (int i = 0; i < (int)MesFilms_nb_config; i++)
-//            {
-////                Config_Name.Items.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, ""));
-//                XmlConfig.RemoveEntry("MyFilms", "MyFilms", "ConfigName" + i);
-//            }
+            //            for (int i = 0; i < (int)MesFilms_nb_config; i++)
+            //            {
+            ////                Config_Name.Items.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, ""));
+            //                XmlConfig.RemoveEntry("MyFilms", "MyFilms", "ConfigName" + i);
+            //            }
             if (MesFilms_nb_config > 0)
             {
                 if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false))
@@ -196,7 +195,7 @@ namespace MesFilms
         {
             if (!System.IO.File.Exists(filename))
             {
-                if (CatalogType.Text == "Ant Movie Catalog" ||CatalogType.Text == "Xbmc NFO")
+                if (CatalogType.Text == "Ant Movie Catalog" || CatalogType.Text == "Xbmc NFO")
                 {
                     if (System.Windows.Forms.MessageBox.Show("That File doesn't exists, do you want to create it ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {

@@ -1,4 +1,5 @@
-﻿namespace MesFilms {
+﻿namespace MesFilms.MyFilms
+{
     
     
     public partial class AntMovieCatalog {
