@@ -24,14 +24,18 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Data;
 
 using MediaPortal.GUI.Library;
+using MediaPortal.Dialogs;
 using MediaPortal.Util;
 using MediaPortal.GUI.Pictures;
 using MediaPortal.Video.Database;
+using MediaPortal.Configuration;
 using MesFilms;
 
 namespace MesFilms.Actors
@@ -46,7 +50,6 @@ namespace MesFilms.Actors
 
         enum Controls : int
         {
-            CTRL_TxtSelect = 10401,
             CTRL_BtnReturn = 10402,
             CTRL_Fanart = 1000,
             CTRL_FanartDir = 1001,
@@ -58,13 +61,13 @@ namespace MesFilms.Actors
             CTRL_BtnSearchT = 4,
             CTRL_BtnOptions = 5,
             CTRL_BtnLayout = 6,
-            //CTRL_BtnChangeDB = 7, Not used, done in options instead!
+            CTRL_TxtSelect = 10412,
             //CTRL_TxtSelect = 12,
             CTRL_Fanart1 = 11,
             CTRL_Fanart2 = 21,
             CTRL_Image = 1020,
             CTRL_Image2 = 1021,
-            CTRL_List = 1026,
+            CTRL_List = 10401,
             // ID 3004 aus MesFilms für Wait Symbol (Setvisilility)
         }
 
@@ -81,7 +84,7 @@ namespace MesFilms.Actors
         //protected GUIMultiImage ImgMovieThumbsDir = null;
 
         [SkinControlAttribute((int)Controls.CTRL_BtnSrtBy)]
-        protected GUISortButtonControl ActorBtnSrtBy = null;
+        protected GUISortButtonControl BtnSrtBy = null;
 
         [SkinControlAttribute((int)Controls.CTRL_List)]
         protected GUIFacadeControl facadeView = null;
@@ -156,7 +159,15 @@ namespace MesFilms.Actors
 
         public MesFilmsActors()
         {
-            GetID = (int) 7989;
+            //
+            // TODO: Add constructor logic here
+            //
+        }
+
+        public override int GetID
+        {
+            get { return ID_MesFilmsActors; }
+            set { base.GetID = value; }
         }
 
         public override bool Init()
@@ -202,6 +213,37 @@ namespace MesFilms.Actors
                     base.OnMessage(messageType);
                     wGetID = GetID;
                     MesFilms.conf.LastID = MesFilms.ID_MesFilmsActors;
+
+
+                    //Temporary set item in facadeview...
+                    GUIListItem item = new GUIListItem();
+                    Prev_ItemID = -1;
+                    ArrayList w_tableau = new ArrayList();
+
+                    BtnSrtBy.Label = GUILocalizeStrings.Get(103);
+                    MesFilms.conf.Boolselect = true;
+                    MesFilms.conf.Wselectedlabel = "";
+                    Change_LayOut(0);
+                    facadeView.Clear();
+
+                    item = new GUIListItem();
+                    //item.Label = wchampselect.ToString();
+                    //item.Label2 = Wnb_enr.ToString();
+                    item.Label = "Arnold Schwarzenegger";
+                    item.Label2 = "als Terminator";
+                    item.Label3 = "n/a";
+                    item.IsFolder = true;
+                    facadeView.Add(item);
+
+                    item.FreeMemory();
+                    item.Label = "Jim Knopf";
+                    item.Label2 = "als Kukas, der Lokomotivführer";
+                    item.Label3 = "n/a";
+                    item.IsFolder = true;
+                    item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+                    facadeView.Add(item);
+                    //End Testfacadeinfos
+
                     return true;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
@@ -251,6 +293,64 @@ namespace MesFilms.Actors
                     GUIWindowManager.ShowPreviousWindow();
                     //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                     return true;
+
+                    if ((iControl == (int)Controls.CTRL_BtnLayout) && !MesFilms.conf.Boolselect)
+                    // Change Layout View
+                    {
+                        GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                        if (dlg == null) return true;
+                        dlg.Reset();
+                        dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                        dlg.Add(GUILocalizeStrings.Get(101));//List
+                        dlg.Add(GUILocalizeStrings.Get(100));//Icons
+                        dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
+                        dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
+                        dlg.Add(GUILocalizeStrings.Get(791));//Coverflow
+                        dlg.DoModal(GetID);
+
+                        if (dlg.SelectedLabel == -1)
+                            return true;
+                        //conf.StrIndex = 0;
+                        int wselectindex = facadeView.SelectedListItemIndex;
+                        Change_LayOut(dlg.SelectedLabel);
+                        MesFilms.conf.StrLayOut = dlg.SelectedLabel;
+                        dlg.DeInit();
+                        //GetFilmList();
+                        GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)wselectindex);
+                        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                        return base.OnMessage(messageType);
+                    }
+
+                    if (iControl == (int)Controls.CTRL_List)
+                    {
+                        if (facadeView.SelectedListItemIndex > -1)
+                        {
+                            if (!facadeView.SelectedListItem.IsFolder && !MesFilms.conf.Boolselect)
+                            // New Window for detailed selected item information
+                            {
+                                MesFilms.conf.StrIndex = facadeView.SelectedListItem.ItemId;
+                                MesFilms.conf.StrTIndex = facadeView.SelectedListItem.Label;
+                                GUITextureManager.CleanupThumbs();
+                                GUIWindowManager.ActivateWindow(ID_MesFilmsDetail);
+                            }
+                            else
+                            // View List as selected
+                            {
+                                MesFilms.conf.Wselectedlabel = facadeView.SelectedListItem.Label;
+                                Change_LayOut(MesFilms.conf.StrLayOut);
+                                if (facadeView.SelectedListItem.IsFolder)
+                                    MesFilms.conf.Boolreturn = false;
+                                else
+                                    MesFilms.conf.Boolreturn = true;
+                                //do
+                                //{
+                                //    if (MesFilms.conf.StrTitleSelect != "") MesFilms.conf.StrTitleSelect += MesFilms.conf.TitleDelim;
+                                //    MesFilms.conf.StrTitleSelect += MesFilms.conf.Wselectedlabel;
+                                //} while (GetFilmList() == false); //keep calling while single folders found
+                            }
+                        }
+                    }
+
             }
             base.OnMessage(messageType);
             return true;
@@ -337,5 +437,396 @@ namespace MesFilms.Actors
         {
             return facadeView.SelectedListItem;
         }
+
+
+
+
+        /// <summary>Selects records for display grouping them as required</summary>
+        /// <param name="WstrSelect">Select this kind of records</param>
+        /// <param name="WStrSort">Sort based on this</param>
+        /// <param name="WStrSortSens">Asc/Desc. Ascending or descending sort order</param>
+        /// <param name="NewWstar">Entries must contain this string to be included</param>
+        /// <param name="p">Position in string to begin search/replacing from</param>
+        /// <param name="ClearIndex">Reset Selected Item Index</param>
+        /// <param name="SelItem">Select entry matching this string if not empty</param>
+        public void getSelectFromActors(string WstrSelect, string WStrSort, string WStrSortSens, string NewWstar, bool ClearIndex, string SelItem)
+        {
+            GUIListItem item = new GUIListItem();
+            Prev_ItemID = -1;
+            string champselect = "";
+            string wchampselect = "";
+            ArrayList w_tableau = new ArrayList();
+            int Wnb_enr = 0;
+
+            MesFilms.conf.Wstar = NewWstar;
+            BtnSrtBy.Label = GUILocalizeStrings.Get(103);
+            MesFilms.conf.Boolselect = true;
+            MesFilms.conf.Wselectedlabel = "";
+            if (ClearIndex)
+                MesFilms.conf.StrIndex = 0;
+            Change_LayOut(0);
+            facadeView.Clear();
+            int wi = 0;
+
+            foreach (DataRow enr in BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
+            {
+                if ((WStrSort == "Date") || (WStrSort == "DateAdded"))
+                    champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
+                else
+                    champselect = enr[WStrSort].ToString().Trim();
+                ArrayList wtab = MesFilms.Search_String(champselect);
+                for (wi = 0; wi < wtab.Count; wi++)
+                {
+                    w_tableau.Add(wtab[wi].ToString().Trim());
+                }
+
+            }
+            if (WStrSortSens == " ASC")
+                w_tableau.Sort(0, w_tableau.Count, null);
+            else
+            {
+                IComparer myComparer = new myReverserClass();
+                w_tableau.Sort(0, w_tableau.Count, myComparer);
+            }
+            item = new GUIListItem();
+            for (wi = 0; wi != w_tableau.Count; wi++)
+            {
+                champselect = w_tableau[wi].ToString();
+                if (string.Compare(champselect.ToString(), wchampselect.ToString(), true) == 0)
+                    Wnb_enr++;
+                else
+                {
+                    if (MesFilms.conf.Wstar == "*" || champselect.ToUpper().Contains(MesFilms.conf.Wstar.ToUpper()))
+                    {
+                        if ((Wnb_enr > 0) && (wchampselect.Length > 0))
+                        {
+                            item = new GUIListItem();
+                            item.Label = wchampselect.ToString();
+                            item.Label2 = Wnb_enr.ToString();
+                            if (MesFilms.conf.StrViews)
+                            {
+                                if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others"))
+                                    System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others");
+                                string strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others\\" + item.Label;
+
+                                if (!System.IO.File.Exists(strThumb + ".png"))
+                                {
+                                    if (MesFilms.conf.StrPathViews.Length > 0)
+                                        if (MesFilms.conf.StrPathViews.Substring(MesFilms.conf.StrPathViews.Length - 1) == "\\")
+                                        {
+                                            if (System.IO.File.Exists(MesFilms.conf.StrPathViews + item.Label + ".jpg"))
+                                                Picture.CreateThumbnail(MesFilms.conf.StrPathViews + item.Label + ".jpg", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                            else
+                                                if (System.IO.File.Exists(MesFilms.conf.StrPathViews + item.Label + ".png"))
+                                                    Picture.CreateThumbnail(MesFilms.conf.StrPathViews + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                        }
+                                        else
+                                        {
+                                            if (System.IO.File.Exists(MesFilms.conf.StrPathViews + "\\" + item.Label + ".jpg"))
+                                                Picture.CreateThumbnail(MesFilms.conf.StrPathViews + "\\" + item.Label + ".jpg", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                            else
+                                                if (System.IO.File.Exists(MesFilms.conf.StrPathViews + "\\" + item.Label + ".png"))
+                                                    Picture.CreateThumbnail(MesFilms.conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                        }
+                                    if (!System.IO.File.Exists(strThumb + ".png"))
+                                        if (MesFilms.conf.StrViewsDflt && System.IO.File.Exists(MesFilms.conf.DefaultCover))
+                                            ImageFast.CreateImage(strThumb + ".png", item.Label);
+
+                                }
+                                item.ThumbnailImage = strThumb + ".png";
+                            }
+                            string[] wfanart;
+                            if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country")
+                                wfanart = MesFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
+                            item.IsFolder = true;
+                            item.Path = WStrSort.ToLower();
+                            item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+                            facadeView.Add(item);
+                            if (SelItem != "" && item.Label == SelItem) MesFilms.conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
+                        }
+                        Wnb_enr = 1;
+                        wchampselect = champselect.ToString();
+                    }
+                }
+            }
+
+            if ((Wnb_enr > 0) && (wchampselect.Length > 0))
+            {
+                item = new GUIListItem();
+                item.Label = wchampselect.ToString();
+                item.Label2 = Wnb_enr.ToString();
+                if (MesFilms.conf.StrViews)
+                {
+                    if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others"))
+                        System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others");
+                    string strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others\\" + item.Label;
+                    if (!System.IO.File.Exists(strThumb + ".png"))
+                    {
+                        if (MesFilms.conf.StrPathViews.Length > 0)
+                            if (MesFilms.conf.StrPathViews.Substring(MesFilms.conf.StrPathViews.Length - 1) == "\\")
+                            {
+                                if (System.IO.File.Exists(MesFilms.conf.StrPathViews + item.Label + ".jpg"))
+                                    Picture.CreateThumbnail(MesFilms.conf.StrPathViews + item.Label + ".jpg", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                else
+                                    if (System.IO.File.Exists(MesFilms.conf.StrPathViews + item.Label + ".png"))
+                                        Picture.CreateThumbnail(MesFilms.conf.StrPathViews + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                            }
+                            else
+                            {
+                                if (System.IO.File.Exists(MesFilms.conf.StrPathViews + "\\" + item.Label + ".jpg"))
+                                    Picture.CreateThumbnail(MesFilms.conf.StrPathViews + "\\" + item.Label + ".jpg", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                else
+                                    if (System.IO.File.Exists(MesFilms.conf.StrPathViews + "\\" + item.Label + ".png"))
+                                        Picture.CreateThumbnail(MesFilms.conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                            }
+                        if (!System.IO.File.Exists(strThumb + ".png"))
+                            ImageFast.CreateImage(strThumb + ".png", item.Label);
+                    }
+                    item.ThumbnailImage = strThumb + ".png";
+                }
+                item.IsFolder = true;
+                item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+                facadeView.Add(item);
+                if (SelItem != "" && item.Label == SelItem) MesFilms.conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
+                Wnb_enr = 0;
+            }
+            item.FreeMemory();
+            MesFilms.conf.StrTxtSelect = "Selection";
+            if (MesFilms.conf.Wstar != "*") MesFilms.conf.StrTxtSelect += " " + GUILocalizeStrings.Get(344) + " [*" + MesFilms.conf.Wstar + "*]";
+            GUIPropertyManager.SetProperty("#myfilms.select", MesFilms.conf.StrTxtSelect);
+            //            TxtSelect.Label = conf.StrTxtSelect;
+            MesFilms.conf.StrSelect = WstrSelect;
+            MesFilms.conf.StrFilmSelect = "";
+
+            if ((MesFilms.conf.StrIndex > facadeView.Count - 1) || (MesFilms.conf.StrIndex < 0)) //check index within bounds, will be unless xml file heavily edited
+                MesFilms.conf.StrIndex = 0;
+            if (facadeView.Count == 0)
+                GUIControl.HideControl(GetID, 34);
+            else
+            {
+                GUIControl.ShowControl(GetID, 34);
+                //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
+                //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
+                backdrop.Active = false;
+                MesFilmsDetail.Load_Detailed_DB(0, false);
+                ImgLstFilm.SetFileName("#myfilms.picture");
+                ImgLstFilm2.SetFileName("#myfilms.picture");
+                //affichage_rating(0);
+            }
+            GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count.ToString() + " " + GUILocalizeStrings.Get(127));
+            GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)MesFilms.conf.StrIndex);
+
+        }
+
+        //--------------------------------------------------------------------------------------------
+        //   Change LayOut 
+        //--------------------------------------------------------------------------------------------
+        private void Change_LayOut(int wLayOut)
+        {
+            switch (wLayOut)
+            {
+                case 1:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
+                    facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
+                    break;
+                case 2:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
+                    facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
+                    break;
+                case 3:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
+                    facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
+                    break;
+                case 4:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
+                    facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
+                    // To be changed when Coverflow is available in CORE Files ....
+                    //facadeView.View = GUIFacadeControl.ViewMode.CoverFlow;
+                    break;
+                default:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
+                    facadeView.View = GUIFacadeControl.ViewMode.List;
+                    break;
+            }
+        }
+
+        private void item_OnItemSelected(GUIListItem item, GUIControl parent)
+        {
+            GUIFilmstripControl filmstrip = parent as GUIFilmstripControl;
+            if (filmstrip != null)
+                filmstrip.InfoImageFileName = item.ThumbnailImage;
+            if (!(MesFilms.conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
+            {
+                if (facadeView.SelectedListItemIndex > -1)
+                    affichage_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
+            }
+            else
+            {
+                if (facadeView.SelectedListItemIndex > -1 && !MesFilms.conf.Boolselect)
+                    affichage_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+                else
+                {
+                    affichage_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+                    GUIControl.ShowControl(GetID, 34);
+                    //affichage_rating(0);
+                }
+            }
+            //affichage_Lstdetail(item.ItemId, true, item.Label);
+        }
+
+        private void affichage_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image
+        {
+            return;
+        }
+
+        //----------------------------------------------------------------------------------------------
+        //  Reverse Sort
+        //----------------------------------------------------------------------------------------------
+        public class myReverserClass : IComparer
+        {
+            // Calls CaseInsensitiveComparer.Compare with the parameters reversed.
+            int IComparer.Compare(Object x, Object y)
+            {
+                return ((new CaseInsensitiveComparer()).Compare(y, x));
+            }
+        }
+
+
+
+        //*****************************************************************************************
+        //*  Build Personlist with function of current movie
+        //*****************************************************************************************
+        private void Actors_SearchRelatedMoviesbyPersons(int Index)
+        {
+            GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            if (dlg == null) return;
+            dlg.Reset();
+            dlg.SetHeading(GUILocalizeStrings.Get(1079867)); // menu
+            ArrayList w_tableau = new ArrayList();
+            System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+            if (MesFilms.r[Index]["Producer"].ToString().Length > 0)
+            {
+                w_tableau = MesFilms.Search_String(MesFilms.r[Index]["Producer"].ToString());
+                for (int wi = 0; wi < w_tableau.Count; wi++)
+                {
+                    dlg.Add(GUILocalizeStrings.Get(10798612) + " : " + w_tableau[wi]);
+                    choiceSearch.Add(w_tableau[wi].ToString());
+                }
+            }
+            if (MesFilms.r[Index]["Director"].ToString().Length > 0)
+            {
+                w_tableau = MesFilms.Search_String(MesFilms.r[Index]["Director"].ToString());
+                for (int wi = 0; wi < w_tableau.Count; wi++)
+                {
+                    dlg.Add(GUILocalizeStrings.Get(1079869) + " : " + w_tableau[wi]);
+                    choiceSearch.Add(w_tableau[wi].ToString());
+                }
+            }
+            if (MesFilms.r[Index]["Actors"].ToString().Length > 0)
+            {
+                w_tableau = MesFilms.Search_String(MesFilms.r[Index]["Actors"].ToString());
+                for (int wi = 0; wi < w_tableau.Count; wi++)
+                {
+                    dlg.Add(GUILocalizeStrings.Get(1079868) + " : " + w_tableau[wi]);
+                    choiceSearch.Add(w_tableau[wi].ToString());
+                }
+            }
+            dlg.DoModal(GetID);
+            if (dlg.SelectedLabel == -1)
+                return;
+            string wperson = choiceSearch[dlg.SelectedLabel];
+            dlg.Reset();
+            choiceSearch.Clear();
+            dlg.SetHeading(GUILocalizeStrings.Get(10798611) + wperson); // function selection (actor, director, producer)
+
+            //First add general option to show MP Actor Infos
+            if (wperson.Length > 0)
+            {
+                dlg.Add(GUILocalizeStrings.Get(10798731));
+                //dlg.Add("Person Infos");
+                choiceSearch.Add("PersonInfo");
+            }
+
+            DataRow[] wr = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens, false);
+            if (wr.Length > 0)
+            {
+                dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length.ToString() + ")");
+                choiceSearch.Add("Producer");
+            }
+            wr = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens, false);
+            if (wr.Length > 0)
+            {
+                dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079869) + "  (" + wr.Length.ToString() + ")");
+                choiceSearch.Add("Director");
+            }
+            wr = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens, false);
+            if (wr.Length > 0)
+            {
+                dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length.ToString() + ")");
+                choiceSearch.Add("Actors");
+            }
+            dlg.DoModal(GetID);
+            if (dlg.SelectedLabel == -1)
+                return;
+            MesFilms.conf.StrSelect = choiceSearch[dlg.SelectedLabel].ToString() + " like '*" + wperson + "*'";
+            if (choiceSearch[dlg.SelectedLabel] == "Actors")
+                MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]";
+                else
+                    if (choiceSearch[dlg.SelectedLabel] == "Director")
+                        MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079869) + " [*" + wperson + @"*]";
+                            else
+                                MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
+            MesFilms.conf.StrTitleSelect = "";
+            //GetFilmList();
+        }
+
+
+
+        private void personinfo(string wperson, int actorID)
+            {
+                ArrayList actorList = new ArrayList();
+                // Search with searchName parameter which contain wanted actor name, result(s) is in array
+                // which conatin id and name separated with char "|"
+                MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
+                // Check result
+
+                if (actorList.Count == 0)
+                {
+                    Log.Debug("MyFilms (Person Info): No ActorIDs found for '" + wperson + "'");
+                    GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK); 
+                    dlgOk.SetHeading("Info");
+                    dlgOk.SetLine(1, "");
+                    dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
+                    dlgOk.DoModal(GetID);
+                    return;
+                }
+                Log.Debug("MyFilms (Person Info): " + actorList.Count.ToString() + " ActorID(s) found for '" + wperson + "'");
+                //int actorID;
+                actorID = 0;
+                string actorname = "";
+                // Define splitter for string
+                char[] splitter = { '|' };
+                // Iterate through list
+                foreach (string act in actorList)
+                {
+                    // Split id from actor name (two substrings, [0] is id and [1] is name)
+                    string[] strActor = act.Split(splitter);
+                    // From here we have all what we want, now we can populate datatable, gridview, listview....)
+                    // actorID originally is integer in the databse (it can be string in results but if we want get details from
+                    // IMDBActor  GetActorInfo(int idActor) we need integer)
+                    actorID = Convert.ToInt32(strActor[0]);
+                    actorname = strActor[1];
+                    Log.Debug("MyFilms (ActorDetails - Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
+                }
+                
+                MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
+                //MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(1);
+                //if (actor != null)
+
+                //OnVideoArtistInfoGuzzi(actor); // hier nicht erreichbar, Ersatz notwendig !!!
+                return;
+            }
+
+
     }
 }
