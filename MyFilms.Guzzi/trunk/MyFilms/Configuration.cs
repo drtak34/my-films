@@ -84,6 +84,8 @@ namespace MesFilms
                     StrTSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntTSort{0}", i), "");
                     StrSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSort{0}", i), "");
                 }
+                StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "").ToString().Split(new Char[] { '|' });
+                StrSearchList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchList", "").ToString().Split(new Char[] { '|' });
                 StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", "");
                 StrFileType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0");
                 StrPathImg = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntPicture", "");
@@ -656,6 +658,18 @@ namespace MesFilms
         {
             get { return strSearchText; }
             set { strSearchText = value; }
+        }
+        private string[] strSearchList = { string.Empty, string.Empty };
+        public string[] StrSearchList
+        {
+            get { return strSearchList; }
+            set { strSearchList = value; }
+        }
+        private string[] strUpdList = { string.Empty, string.Empty };
+        public string[] StrUpdList
+        {
+            get { return strUpdList; }
+            set { strUpdList = value; }
         }
         private string strFileXml = string.Empty;
         public string StrFileXml

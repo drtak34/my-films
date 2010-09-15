@@ -4,9 +4,8 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Xml;
-using MediaPortal.GUI.Library;
 
-namespace Guzzi.Cornerstone.Tools {
+namespace Cornerstone.Tools {
 
     public class WebGrabber {
         
@@ -83,7 +82,7 @@ namespace Guzzi.Cornerstone.Tools {
                         request.CookieContainer.SetCookies(request.RequestUri, cookieHeader);
                     response = (HttpWebResponse)request.GetResponse();
                     cookieHeader = request.CookieContainer.GetCookieHeader(request.RequestUri);
-                    
+
                     // Get result as stream
                     Stream resultData = response.GetResponseStream();
 
@@ -91,13 +90,13 @@ namespace Guzzi.Cornerstone.Tools {
                     if (encoding == null)
                         encoding = Encoding.GetEncoding(response.CharacterSet);
 
-                    // Debug
-                    if (_debug) {
-                        Log.Debug("URL: {0}", requestUrl);
-                        Log.Debug("UserAgent: {0}", userAgent);
-                        Log.Debug("CookieHeader: {0}", cookieHeader);
-                        Log.Debug("Encoding: {0}", encoding.EncodingName);
-                    }
+                    //// Debug
+                    //if (_debug) {
+                    //   System..Log.Debug("URL: {0}", requestUrl);
+                    //    log.Debug("UserAgent: {0}", userAgent);
+                    //    logger.Debug("CookieHeader: {0}", cookieHeader);
+                    //    logger.Debug("Encoding: {0}", encoding.EncodingName);
+                    //}
 
                     // Converts the stream to a string
                     StreamReader reader = new StreamReader(resultData, encoding, true);
@@ -158,15 +157,14 @@ namespace Guzzi.Cornerstone.Tools {
                 // if a root node name is given check for it
                 // return null when the root name doesn't match
                 if (rootNode != null)
-//                    if (xmlRoot.Name != rootNode)
-                    if (!xmlRoot.HasChildNodes)
+                    if (xmlRoot.Name != rootNode)
                         return null;
 
                 // return the node list
                 return xmlRoot.ChildNodes;
             }
-            catch (XmlException) {
-                Log.Debug("XML Parse error: URL=" + requestUrl);
+            catch (XmlException e) {
+                //logger.ErrorException("XML Parse error: URL=" + requestUrl, e);
                 return null;
             }          
         }

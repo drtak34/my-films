@@ -40,6 +40,7 @@ using MediaPortal.Util;
 
 using NewStringLib;
 using Cornerstone.MP;
+using MesFilms.MyFilms;
 
 namespace MesFilms
 {
@@ -288,6 +289,30 @@ namespace MesFilms
                     return;
                 }
             }
+			
+			// Original Coade from ZebonsMerge
+			// if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
+            // {
+            //   if (facadeView.Focus)
+            //        GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnSearchT);
+            //    else
+            //        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+            //    return;
+            //}
+			// End Merge Code
+			
+			
+			
+			
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
+                if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+                    {
+                        Log.Debug("MyFilms : ACTION_CONTEXT_MENU erkannt !!! ");
+                        // context menu for update or suppress entry
+                        Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+                        return;
+                    }
+
             if (actionType.m_key != null)
             {
                 if ((actionType.m_key.KeyChar == 112) && (facadeView.Focus) && !(facadeView.SelectedListItem.IsFolder) && ((MesFilms.conf.StrSuppress) || (MesFilms.conf.StrGrabber)))
@@ -306,15 +331,6 @@ namespace MesFilms
                     return;
                 }
             }
-
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
-                if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
-                    {
-                        Log.Debug("MyFilms : ACTION_CONTEXT_MENU erkannt !!! ");
-                        // context menu for update or suppress entry
-                        Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
-                        return;
-                    }
 
             if (actionType.wID.ToString().Substring(0, 6) == "REMOTE")
                 return;
@@ -337,24 +353,8 @@ namespace MesFilms
                     //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
                     if ((PreviousWindowId != ID_MesFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MesFilmsActors))
                     {
-                        MovieScrobbling = false; //Reset MovieScrobbling
-                        MesFilmsDetail.Init_Detailed_DB();
-                        backdrop = new ImageSwapper();
-                        backdrop.Active = false;
-                        backdrop.PropertyOne = " ";
-                        GUIPropertyManager.SetProperty("#myfilms.logos_id2001", " ");
-                        GUIPropertyManager.SetProperty("#myfilms.logos_id2002", " ");
-                        GUIPropertyManager.SetProperty("#myfilms.nbobjects", " ");
-                        GUIPropertyManager.SetProperty("#myfilms.label1", " ");
-                        GUIPropertyManager.SetProperty("#myfilms.label2", " ");
-                        GUIPropertyManager.SetProperty("#myfilms.item1", " ");
-                        GUIPropertyManager.SetProperty("#myfilms.item2", " ");
-                        GUIPropertyManager.SetProperty("#myfilms.item3", " ");
+                        InitMainScreen();
                         GUIPropertyManager.SetProperty("#myfilms.select", " ");
-                        GUIPropertyManager.SetProperty("#myfilms.rating", "0");
-                        affichage_rating(0);
-                        setProcessAnimationStatus(false, m_SearchAnimation); 
-                        GUIControl.HideControl(GetID, 34);
                         Configuration.Current_Config();
                         Load_Config(Configuration.CurrentConfig, true);
                     }
@@ -367,7 +367,7 @@ namespace MesFilms
  //                       AsynLoadMovieList();
  //                   }
                     GUIControl.ShowControl(GetID, 34);
-                    setProcessAnimationStatus(false, m_SearchAnimation); 
+                    //setProcessAnimationStatus(false, m_SearchAnimation); 
                     backdrop = new ImageSwapper();
                     backdrop.Active = true;
                     backdrop.ImageResource.Delay = 250;
@@ -433,6 +433,8 @@ namespace MesFilms
                         else
                             Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
                     }
+                    ImgFanart.SetFileName(string.Empty);
+                    ImgFanart2.SetFileName(string.Empty);
                     facadeView.Resources.Clear();
                     facadeView.Clear();
                     backdrop.PropertyOne = " ";
@@ -475,20 +477,25 @@ namespace MesFilms
                             dlg.Add(GUILocalizeStrings.Get(1079866));//Search related movies by persons
                             choiceSearch.Add("analogyperson");
                         }
-                        if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+                        if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder && MesFilms.conf.StrSearchList[0].Length > 0)
                         {
                             dlg.Add(GUILocalizeStrings.Get(10798614));//Search related movies by property
                             choiceSearch.Add("analogyproperty");
                         }
-//Guzzi: RandomMovie(Trailer)Search added
+						
+						//Guzzi: RandomMovie(Trailer)Search added
                         dlg.Add(GUILocalizeStrings.Get(10798621));//Search global movies by random
                         choiceSearch.Add("randomsearch");
 
                         dlg.Add(GUILocalizeStrings.Get(10798645));//Search global movies by areas
                         choiceSearch.Add("globalareas");
 
+                        if (MesFilms.conf.StrSearchList[0].Length > 0)
+                        {
+
                         dlg.Add(GUILocalizeStrings.Get(10798615));//Search global movies by property
                         choiceSearch.Add("globalproperty");
+						}
                         
                         dlg.DoModal(GetID);
 
@@ -505,6 +512,9 @@ namespace MesFilms
                         if (choiceSearch[dlg.SelectedLabel] == "analogyproperty")
                         {
                             SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId);
+							// This version from ZebonsMerge - Change ClassName to SearchRelatedMoviesbyPropertiesZebons
+							// SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId, MesFilms.conf.StrSearchList);
+
                             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                             dlg.DeInit();
                             return base.OnMessage(messageType);
@@ -526,6 +536,9 @@ namespace MesFilms
                         if (choiceSearch[dlg.SelectedLabel] == "globalproperty")
                         {
                             SearchMoviesbyProperties();
+							// This version from ZebonsMerge - Change ClassName to SearchMoviesbyPropertiesZebons
+							// SearchMoviesbyProperties(MesFilms.conf.StrSearchList);
+
                             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                             dlg.DeInit();
                             return base.OnMessage(messageType);
@@ -568,9 +581,13 @@ namespace MesFilms
                                     int i = 0;
                                     if (choiceSearch[dlg.SelectedLabel] == "search1")
                                         i = 1;
+                                    AntMovieCatalog ds = new AntMovieCatalog();
                                     if (control_searchText(keyboard.Text))
                                     {
-                                        conf.StrSelect = conf.StrSearchItem[i].ToString() + " like '*" + keyboard.Text + "*'";
+                                        if (ds.Movie.Columns[conf.StrSearchItem[i].ToString()].DataType.Name == "string")
+                                          conf.StrSelect = conf.StrSearchItem[i].ToString() + " like '*" + keyboard.Text + "*'";
+                                        else
+                                            conf.StrSelect = conf.StrSearchItem[i].ToString() + " = '" + keyboard.Text + "'";
                                         conf.StrTxtSelect = "Selection " + conf.StrSearchText[i] + " [*" + keyboard.Text + @"*]";
                                         conf.StrTitleSelect = "";
                                         GetFilmList();
@@ -844,6 +861,27 @@ namespace MesFilms
         {
             ImgLstFilm.SetFileName("#myfilms.picture");
             ImgLstFilm2.SetFileName("#myfilms.picture");
+            SetFilmSelect();
+            //Added GlobalFilterList for Trailer & Rating Filters !!!
+			// Added ,false from ZebonsMerge
+            r = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens,false);
+			//r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
+            Log.Debug("MyFilms (GetFilmList) - GlobalFilterString: '" + GlobalFilterString + "'");
+            Log.Debug("MyFilms (GetFilmList) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
+            Log.Debug("MyFilms (GetFilmList) - conf.StrFilmSelect: '" + conf.StrFilmSelect + "'");
+            Log.Debug("MyFilms (GetFilmList) - conf.StrSorta:      '" + conf.StrSorta + "'");
+            Log.Debug("MyFilms (GetFilmList) - conf.StrSortSens:   '" + conf.StrSortSens + "'");
+            //if (r.Length == 0)
+            //{
+            //    //GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            //    //dlgOk.ClearAll();
+            //    //dlgOk.SetLine(1, GUILocalizeStrings.Get(10798620));
+            //    //dlgOk.SetLine(2, GUILocalizeStrings.Get(10798621));
+            //    //dlgOk.DoModal(GetID);
+            //    //DisplayAllMovies();
+            //    GUIControl.HideControl(GetID, 34);
+            //    InitMainScreen();
+            //}
 
             int iCnt = 0;
             int DelimCnt = 0, DelimCnt2;
@@ -855,7 +893,6 @@ namespace MesFilms
             int iSelItem = -2;
             if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
 
-            SetFilmSelect();
             //setlabels
 //            TxtSelect.Label = (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"); // always show as though folder path using \ regardless what sep is used
             GUIPropertyManager.SetProperty("#myfilms.select", (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"));// always show as though folder path using \ regardless what sep is used
@@ -869,14 +906,6 @@ namespace MesFilms
             int number = -1;
             int wfacadewiew = 0;
             ArrayList w_tableau = new ArrayList();
-            //Added GlobalFilterList for Trailer & Rating Filters !!!
-            r = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-            //r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-            Log.Debug("MyFilms (GetFilmList) - GlobalFilterString: '" + GlobalFilterString + "'");
-            Log.Debug("MyFilms (GetFilmList) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
-            Log.Debug("MyFilms (GetFilmList) - conf.StrFilmSelect: '" + conf.StrFilmSelect + "'");
-            Log.Debug("MyFilms (GetFilmList) - conf.StrSorta:      '" + conf.StrSorta + "'");
-            Log.Debug("MyFilms (GetFilmList) - conf.StrSortSens:   '" + conf.StrSortSens + "'");
             foreach (DataRow sr in r)
             {
                 number++;
@@ -1046,9 +1075,14 @@ namespace MesFilms
             fin: ;
             }
             if (facadeView.Count == 0)
+				// From Zebonsmerge: InitMainScreen() instead of Showing empty list - ToDo: Add Dialog with Info to return to MainScreen that no movies found !!!
+                // InitMainScreen();
                 GUIControl.ShowControl(GetID, 34);
             else
+            {
+                ImgFanart.SetVisibleCondition(1, true);
                 GUIControl.HideControl(GetID, 34);
+            }
             GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count.ToString() + " " + GUILocalizeStrings.Get(127));
             GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)wfacadewiew);
             if (facadeView.Count == 1 && item.IsFolder)
@@ -1056,6 +1090,7 @@ namespace MesFilms
                 conf.Boolreturn = false;
                 conf.Wselectedlabel = item.Label;
             }
+
             return !(facadeView.Count == 1 && item.IsFolder); //ret false if single folder found
         }
 
@@ -1404,15 +1439,19 @@ namespace MesFilms
 
             if (MesFilms.conf.StrGrabber)
             {
+                // From ZebopnsMerge
+				//dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
                 if (MesFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));   // Choose grabber script for that session (status on)
                 if (!MesFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));   // Choose grabber script for that session (status off)
                 choiceView.Add("choosescript");
 
+                //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), MesFilms.conf.StrGrabber_Always.ToString(), (!MesFilms.conf.StrGrabber_Always).ToString()));   // Change grabber find trying best match option 
                 if (MesFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));   // Change grabber find trying best match option (status on)
                 if (!MesFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));   // Change grabber find trying best match option (status off)
                 choiceView.Add("findbestmatch");
             }
 
+            //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), MesFilms.conf.WindowsFileDialog.ToString(), (!MesFilms.conf.WindowsFileDialog).ToString()));  // Using Windows File Dialog File for that session
             if (MesFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628)));   // Using Windows File Dialog File for that session (status on)
             if (!MesFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));   // Using Windows File Dialog File for that session (status off)
             choiceView.Add("windowsfiledialog");
@@ -1774,9 +1813,19 @@ namespace MesFilms
             if ((conf.StrIndex > facadeView.Count - 1) || (conf.StrIndex < 0)) //check index within bounds, will be unless xml file heavily edited
                 conf.StrIndex = 0;
             if (facadeView.Count == 0)
-                GUIControl.HideControl(GetID, 34);
+            {
+                //GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                //dlgOk.ClearAll();
+                //dlgOk.SetLine(1, GUILocalizeStrings.Get(10798620));
+                //dlgOk.SetLine(2, GUILocalizeStrings.Get(10798621));
+                //dlgOk.DoModal(GetID);
+                //DisplayAllMovies();
+                //GetFilmList();
+                GUIControl.ShowControl(GetID, 34);
+            }
             else
             {
+                ImgFanart.SetVisibleCondition(1, true);
                 GUIControl.ShowControl(GetID, 34);
                 GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
                 GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
@@ -2280,7 +2329,9 @@ namespace MesFilms
         //--------------------------------------------------------------------------------------------
         //   Display Context Menu for Movie 
         //--------------------------------------------------------------------------------------------
-        // Changed from private to PUBLIC - GUZZI
+        // Changed from private to PUBLIC - GUZZI - Original ZebonsMerge was private
+		// private void Context_Menu_Movie(int selecteditem)
+
         public void Context_Menu_Movie(int selecteditem)
         {
             GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -2462,6 +2513,7 @@ namespace MesFilms
         private void SearchRelatedMoviesbyPersons(int Index)
         {
             GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
             if (dlg == null) return;
             dlg.Reset();
             dlg.SetHeading(GUILocalizeStrings.Get(1079867)); // menu
@@ -2469,7 +2521,7 @@ namespace MesFilms
             System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
             if (MesFilms.r[Index]["Producer"].ToString().Length > 0)
             {
-                w_tableau = Search_String(MesFilms.r[Index]["Producer"].ToString());
+                w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MesFilms.r[Index]["Producer"].ToString())));
                 for (int wi = 0; wi < w_tableau.Count; wi++)
                 {
                     dlg.Add(GUILocalizeStrings.Get(10798612) + " : " + w_tableau[wi]);
@@ -2478,7 +2530,7 @@ namespace MesFilms
             }
             if (MesFilms.r[Index]["Director"].ToString().Length > 0)
             {
-                w_tableau = Search_String(MesFilms.r[Index]["Director"].ToString());
+                w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MesFilms.r[Index]["Director"].ToString())));
                 for (int wi = 0; wi < w_tableau.Count; wi++)
                 {
                     dlg.Add(GUILocalizeStrings.Get(1079869) + " : " + w_tableau[wi]);
@@ -2487,12 +2539,20 @@ namespace MesFilms
             }
             if (MesFilms.r[Index]["Actors"].ToString().Length > 0)
             {
-                w_tableau = Search_String(MesFilms.r[Index]["Actors"].ToString());
+                w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MesFilms.r[Index]["Actors"].ToString())));
                 for (int wi = 0; wi < w_tableau.Count; wi++)
                 {
                     dlg.Add(GUILocalizeStrings.Get(1079868) + " : " + w_tableau[wi]);
                     choiceSearch.Add(w_tableau[wi].ToString());
                 }
+            }
+            if (choiceSearch.Count == 0)
+            {
+                if (dlg1 == null) return;
+                dlg1.SetHeading(GUILocalizeStrings.Get(1079867));
+                dlg1.SetLine(1, GUILocalizeStrings.Get(10798641));
+                dlg1.DoModal(GUIWindowManager.ActiveWindow);
+                return;
             }
             dlg.DoModal(GetID);
             if (dlg.SelectedLabel == -1)
@@ -2527,6 +2587,14 @@ namespace MesFilms
             {
                 dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length.ToString() + ")");
                 choiceSearch.Add("Actors");
+            }
+            if (choiceSearch.Count == 0)
+            {
+                if (dlg1 == null) return;
+                dlg1.SetHeading(GUILocalizeStrings.Get(1079867));
+                dlg1.SetLine(1, GUILocalizeStrings.Get(10798640));
+                dlg1.DoModal(GUIWindowManager.ActiveWindow);
+                return;
             }
             dlg.DoModal(GetID);
             if (dlg.SelectedLabel == -1)
@@ -2605,9 +2673,247 @@ namespace MesFilms
             infoDlg.DoModal(GetID);
         }
 
+
+
+        //*****************************************************************************************
+        //*  search related movies by properties  (From ZebonsMerge, renamed to ...Zebons)		  *
+        //*****************************************************************************************
+        private void SearchRelatedMoviesbyPropertiesZebons(int Index, string[] wSearchList)
+        {
+            // first select the property to be searching on
+           
+            AntMovieCatalog ds = new AntMovieCatalog();
+            GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+            GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            ArrayList w_tableau = new ArrayList();
+            if (dlg == null) return;
+            dlg.Reset();
+            dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
+            foreach (string wSearch in wSearchList)
+            {
+                dlg.Add(GUILocalizeStrings.Get(10798617) + "'" + BaseMesFilms.Translate_Column(wSearch) + "'");
+                choiceSearch.Add(wSearch);
+            }
+            dlg.DoModal(GetID);
+            if (dlg.SelectedLabel == -1)
+                return;
+            string wproperty = choiceSearch[dlg.SelectedLabel];
+            dlg.Reset();
+            if (choiceSearch.Count == 0)
+            {
+                if (dlg1 == null) return;
+                dlg1.SetHeading(GUILocalizeStrings.Get(10798613));
+                dlg1.SetLine(1, GUILocalizeStrings.Get(10798640));
+                dlg1.SetLine(2, BaseMesFilms.Translate_Column(wproperty));
+                dlg1.DoModal(GUIWindowManager.ActiveWindow);
+                return;
+            }
+            choiceSearch.Clear();
+            if (ds.Movie.Columns[wproperty].DataType.Name == "string")
+                w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MesFilms.r[Index][wproperty].ToString())));
+            else
+                w_tableau.Add(MesFilms.r[Index][wproperty].ToString());
+            for (int wi = 0; wi < w_tableau.Count; wi++)
+            {
+                dlg.Add(wproperty + " : " + w_tableau[wi]);
+                choiceSearch.Add(w_tableau[wi].ToString());
+            }
+            if (choiceSearch.Count == 0)
+            {
+                if (dlg1 == null) return;
+                dlg1.SetHeading(GUILocalizeStrings.Get(10798613));
+                dlg1.SetLine(1, GUILocalizeStrings.Get(10798640));
+                dlg1.SetLine(2, BaseMesFilms.Translate_Column(wproperty));
+                dlg1.DoModal(GUIWindowManager.ActiveWindow);
+                return;
+            }
+            dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // property selection
+            dlg.DoModal(GetID);
+            if (dlg.SelectedLabel == -1)
+                return;
+            if (ds.Movie.Columns[wproperty].DataType.Name == "string")
+            {
+                conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel].ToString() + "*'";
+                conf.StrTxtSelect = "Selection " + BaseMesFilms.Translate_Column(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel].ToString() + @"*]";
+            }
+            else
+            {
+                conf.StrSelect = wproperty + " = '" + choiceSearch[dlg.SelectedLabel].ToString() + "'";
+                conf.StrTxtSelect = "Selection " + BaseMesFilms.Translate_Column(wproperty) + " [" + choiceSearch[dlg.SelectedLabel].ToString() + @"]";
+            }
+            
+            conf.StrTitleSelect = "";
+            GetFilmList();
+        }
+
+
+
+
+        //*****************************************************************************************
+        //*  Global search movies by properties (ZebonsMerge - Renamed to ....Zebons)             *
+        //*****************************************************************************************
+        private void SearchMoviesbyPropertiesZebons(string[] wSearchList)
+        {
+            // first select the property to be searching on
+ 
+            AntMovieCatalog ds = new AntMovieCatalog();
+            GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+            ArrayList w_tableau = new ArrayList();
+            ArrayList w_tablabel = new ArrayList();
+            if (dlg == null) return;
+            dlg.Reset();
+            dlg.SetHeading(GUILocalizeStrings.Get(10798615)); // menu
+            dlg.Add(GUILocalizeStrings.Get(10798616)); // search on all fields
+            choiceSearch.Add("all");
+            foreach (string wSearch in wSearchList)
+            {
+                dlg.Add(GUILocalizeStrings.Get(10798617) + "'" + BaseMesFilms.Translate_Column(wSearch) + "'");
+                choiceSearch.Add(wSearch);
+            }
+            dlg.DoModal(GetID);
+            if (dlg.SelectedLabel == -1)
+                return;
+            string wproperty = choiceSearch[dlg.SelectedLabel];
+            VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+            if (null == keyboard) return;
+            keyboard.Reset();
+            keyboard.Text = "";
+            keyboard.DoModal(GetID);
+            if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+            {
+                switch (choiceSearch[dlg.SelectedLabel])
+                {
+                    case "all":
+                        ArrayList w_count = new ArrayList();
+                        if (dlg == null) return;
+                        dlg.Reset();
+                        dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
+                        DataRow[] wr = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
+                        foreach (DataRow wsr in wr)
+                        {
+                            foreach (string wsearch in wSearchList)
+                            {
+                                if (System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wsr[wsearch].ToString().ToLower())).Contains(keyboard.Text.ToLower()))
+                                    // column contains text serached on : added to w_tableau + w_count
+                                    if (w_tableau.Contains(wsearch))
+                                    // search position in w_tableau for adding +1 to w_count
+                                    {
+                                        for (int i = 0; i < w_tableau.Count; i++)
+                                        {
+                                            if (w_tableau[i].ToString() == wsearch)
+                                            {
+                                                w_count[i] = (int)w_count[i] + 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    // add to w_tableau and move 1 to w_count
+                                    {
+                                        w_tableau.Add(wsearch.ToString());
+                                        w_count.Add(1);
+                                    }
+                            }
+                            //foreach (DataColumn dc in ds.Movie.Columns)
+                            //{
+                            //    if (System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wsr[dc.ColumnName].ToString())).Contains(keyboard.Text))
+                            //        // column contains text serached on : added to w_tableau + w_count
+                            //        if (w_tableau.Contains(dc.ColumnName))
+                            //        // search position in w_tableau for adding +1 to w_count
+                            //        {
+                            //            for (int i = 0; i < w_tableau.Count; i++)
+                            //            {
+                            //                if (w_tableau[i].ToString() == dc.ColumnName)
+                            //                {
+                            //                    w_count[i] = (int)w_count[i] + 1;
+                            //                    break;
+                            //                }
+                            //            }
+                            //        }
+                            //        else
+                            //        // add to w_tableau and move 1 to w_count
+                            //        {
+                            //            w_tableau.Add(dc.ColumnName.ToString());
+                            //            w_count.Add(1);
+                            //        }
+                            //}
+                        }
+                        if (w_tableau.Count == 0)
+                        {
+                            if (dlg1 == null) return;
+                            dlg1.SetHeading(GUILocalizeStrings.Get(10798613));
+                            dlg1.SetLine(1, GUILocalizeStrings.Get(10798640));
+                            dlg1.SetLine(2, keyboard.Text);
+                            dlg1.DoModal(GUIWindowManager.ActiveWindow);
+                            return;
+                        }
+                        dlg.Reset();
+                        dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798618),keyboard.Text)); // menu
+                        choiceSearch.Clear();
+                        for (int i = 0; i < w_tableau.Count; i++)
+                        {
+                            dlg.Add(string.Format(GUILocalizeStrings.Get(10798619), w_count[i], BaseMesFilms.Translate_Column(w_tableau[i].ToString())));
+                            choiceSearch.Add(w_tableau[i].ToString());
+                        }
+                        dlg.DoModal(GetID);
+                        if (dlg.SelectedLabel == -1)
+                            return;
+                        wproperty = choiceSearch[dlg.SelectedLabel];
+                        if (control_searchText(keyboard.Text))
+                        {
+                            if (ds.Movie.Columns[wproperty].DataType.Name == "string")
+                            {
+                                conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel].ToString() + "*'";
+                                conf.StrTxtSelect = "Selection " + BaseMesFilms.Translate_Column(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel].ToString() + @"*]";
+                            }
+                            else
+                            {
+                                conf.StrSelect = wproperty + " = '" + keyboard.Text + "'";
+                                conf.StrTxtSelect = "Selection " + BaseMesFilms.Translate_Column(wproperty) + " [" + keyboard.Text + @"]";
+                            }
+                        //}
+                        //if (control_searchText(keyboard.Text))
+                        //{
+                        //    if (wproperty == "Rating")
+                        //        conf.StrSelect = wproperty + " = " + keyboard.Text;
+                        //    else
+                        //        if (wproperty == "Number")
+                        //            conf.StrSelect = wproperty + " = " + keyboard.Text;
+                        //        else
+                        //            conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
+                        //    conf.StrTxtSelect = "Selection " + BaseMesFilms.Translate_Column(wproperty) + " [*" + keyboard.Text + @"*]";
+                            conf.StrTitleSelect = "";
+                            //                         getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                            GetFilmList();
+                        }
+                        break;
+                    default:
+                        if (control_searchText(keyboard.Text))
+                        {
+                            if (wproperty == "Rating")
+                                conf.StrSelect = wproperty + " = " + keyboard.Text;
+                            else
+                                if (wproperty == "Number")
+                                    conf.StrSelect = wproperty + " = " + keyboard.Text;
+                                else
+                                conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
+                        conf.StrTxtSelect = "Selection " + dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]";
+                            conf.StrTitleSelect = "";
+   //                         getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                            GetFilmList();
+                        }
+                        break;
+                }
+            }
+        }
+
+
         
         //*****************************************************************************************
-        //*  search related movies by properties                                                  *
+        //*  search related movies by properties  (Guzzi Version)                                 *
         //*****************************************************************************************
         private void SearchRelatedMoviesbyProperties(int Index)
         {
@@ -2782,9 +3088,9 @@ namespace MesFilms
             conf.StrTitleSelect = "";
             GetFilmList();
         }
-        //*****************************************************************************************
-        //*  Global search movies by RANDOM (Random Search with Options, e.g. Trailer, Rating)    *
-        //*****************************************************************************************
+        //******************************************************************************************************
+        //*  Global search movies by RANDOM (Random Search with Options, e.g. Trailer, Rating) - Guzzi Version *
+        //******************************************************************************************************
 
         private void SearchMoviesbyRandomWithTrailer()
         {
@@ -3371,7 +3677,7 @@ namespace MesFilms
         }
 
         //*****************************************************************************************
-        //*  Global search movies by properties                                                   *
+        //*  Global search movies by properties     (Guzzi Version)                               *
         //*****************************************************************************************
         private void SearchMoviesbyProperties()
         {
@@ -3615,7 +3921,45 @@ namespace MesFilms
                 }
             }
         }
-
+        //*****************************************************************************************
+        //*  No Movie found to display. Display all movies
+        //*****************************************************************************************
+        private void DisplayAllMovies()
+        {
+            MesFilms.conf.StrFilmSelect = MesFilms.conf.StrTitle1.ToString() + " not like ''";
+            conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
+            conf.WStrSort = conf.StrSTitle;
+            conf.Boolselect = false;
+            conf.Boolreturn = false;
+            r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, true);
+        }
+        //*****************************************************************************************
+        //*  Initialize Fields on Main screen                                                     *
+        //*****************************************************************************************
+        private void InitMainScreen()
+        {
+            MovieScrobbling = false; //Reset MovieScrobbling
+			MesFilmsDetail.Init_Detailed_DB();
+            backdrop = new ImageSwapper();
+            backdrop.Active = false;
+            backdrop.PropertyOne = " ";
+            ImgFanart.SetVisibleCondition(1, false);
+            //ImgFanart2.SetFileName(string.Empty);
+            GUIPropertyManager.SetProperty("#myfilms.logos_id2001", " ");
+            GUIPropertyManager.SetProperty("#myfilms.logos_id2002", " ");
+            GUIPropertyManager.SetProperty("#myfilms.nbobjects", " ");
+            GUIPropertyManager.SetProperty("#myfilms.label1", " ");
+            GUIPropertyManager.SetProperty("#myfilms.label2", " ");
+            GUIPropertyManager.SetProperty("#myfilms.item1", " ");
+            GUIPropertyManager.SetProperty("#myfilms.item2", " ");
+            GUIPropertyManager.SetProperty("#myfilms.item3", " ");
+            GUIPropertyManager.SetProperty("#myfilms.Fanart", " ");
+            GUIPropertyManager.SetProperty("#myfilms.Fanart2", " ");
+            GUIPropertyManager.SetProperty("#myfilms.rating", "0");
+            affichage_rating(0);
+			// setProcessAnimationStatus(false, m_SearchAnimation); 
+            GUIControl.HideControl(GetID, 34);
+        }
         //*****************************************************************************************
         //*  Ask for Title search and grab information on the NET base on the grab configuration  *
         //*****************************************************************************************
@@ -3688,9 +4032,7 @@ namespace MesFilms
                     string wdirector = string.Empty;
                     try { wdirector = (string)MesFilms.r[i]["Director"]; }
                     catch { }
-                    //Changed for compatibility to older grabber
                     System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
-                    //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
                 }
             }
         }
@@ -3745,7 +4087,9 @@ namespace MesFilms
             Log.Info("MyFilms : Loading Movie List in batch mode finished");
         }
 
-        public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
+        
+		// ToDo: Check, if Class can be removed (not included in ZebonsMerge)
+		public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
         {
             try
             {

@@ -24,7 +24,7 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 using System.Text;
-using MediaPortal.ServiceImplementations;
+using MesFilms.MyFilms;
 
 
 namespace MesFilms
@@ -32,8 +32,7 @@ namespace MesFilms
     public class BaseMesFilms
     {
         private static AntMovieCatalog data;
-        //Auskommentiert, da nie benutzt !!!
-        //private static Dictionary<string, string> dataPath;
+        private static Dictionary<string, string> dataPath;
         private static DataRow[] movies;
 
         #region ctor
@@ -68,8 +67,6 @@ namespace MesFilms
         #region méthodes statique publiques
         public static DataRow[] LectureDonnées(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens)
         {
-            //Changed accordibg latest Zebons SVN
-            //return LectureDonnées(StrDfltSelect, StrSelect, StrSort, StrSortSens, true);
             return LectureDonnées(StrDfltSelect, StrSelect, StrSort, StrSortSens, false);
         }
         public static DataRow[] LectureDonnées(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
@@ -231,6 +228,7 @@ namespace MesFilms
                     return string.Empty;
             }
         }
+
         #endregion
     }
 }

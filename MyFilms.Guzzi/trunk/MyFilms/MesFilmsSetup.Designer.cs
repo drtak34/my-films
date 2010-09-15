@@ -165,6 +165,9 @@ namespace MesFilms
             this.AntItem1 = new System.Windows.Forms.ComboBox();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.AntUpdList = new System.Windows.Forms.TextBox();
+            this.AntUpdField = new System.Windows.Forms.ComboBox();
             this.chkWindowsFileDialog = new System.Windows.Forms.CheckBox();
             this.AntUpdDflT2 = new System.Windows.Forms.TextBox();
             this.AntUpdDflT1 = new System.Windows.Forms.TextBox();
@@ -245,11 +248,20 @@ namespace MesFilms
             this.AntTitle1 = new System.Windows.Forms.ComboBox();
             this.DefaultCover = new System.Windows.Forms.TextBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.btnResetThumbs = new System.Windows.Forms.Button();
             this.chkViews = new System.Windows.Forms.CheckBox();
             this.btnViews = new System.Windows.Forms.Button();
             this.chkDfltViews = new System.Windows.Forms.CheckBox();
             this.label29 = new System.Windows.Forms.Label();
             this.MesFilmsViews = new System.Windows.Forms.TextBox();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.AntSearchList = new System.Windows.Forms.TextBox();
+            this.AntSearchItem2 = new System.Windows.Forms.ComboBox();
+            this.AntSearchField = new System.Windows.Forms.ComboBox();
+            this.AntSearchText2 = new System.Windows.Forms.TextBox();
+            this.AntSearchItem1 = new System.Windows.Forms.ComboBox();
+            this.AntSearchText1 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label10 = new System.Windows.Forms.Label();
@@ -328,18 +340,6 @@ namespace MesFilms
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.btnResetThumbs = new System.Windows.Forms.Button();
-            this.groupBox18 = new System.Windows.Forms.GroupBox();
-            this.AntSearchItem2 = new System.Windows.Forms.ComboBox();
-            this.AntSearchText2 = new System.Windows.Forms.TextBox();
-            this.AntSearchItem1 = new System.Windows.Forms.ComboBox();
-            this.AntSearchText1 = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -356,6 +356,7 @@ namespace MesFilms
             this.groupBox19.SuspendLayout();
             this.Fanart.SuspendLayout();
             this.groupBox22.SuspendLayout();
+            this.groupBox18.SuspendLayout();
             this.General.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -373,7 +374,6 @@ namespace MesFilms
             this.Picture.SuspendLayout();
             this.Logos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
-            this.groupBox18.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -996,8 +996,8 @@ namespace MesFilms
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label33);
-            this.groupBox4.Controls.Add(this.textBox5);
-            this.groupBox4.Controls.Add(this.comboBox4);
+            this.groupBox4.Controls.Add(this.AntUpdList);
+            this.groupBox4.Controls.Add(this.AntUpdField);
             this.groupBox4.Controls.Add(this.chkWindowsFileDialog);
             this.groupBox4.Controls.Add(this.AntUpdDflT2);
             this.groupBox4.Controls.Add(this.AntUpdDflT1);
@@ -1012,6 +1012,32 @@ namespace MesFilms
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Ant Updating Items.";
             this.ToolTip1.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(74, 119);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(153, 13);
+            this.label33.TabIndex = 83;
+            this.label33.Text = "Update by Properties Selection";
+            // 
+            // AntUpdList
+            // 
+            this.AntUpdList.BackColor = System.Drawing.SystemColors.Control;
+            this.AntUpdList.Location = new System.Drawing.Point(10, 142);
+            this.AntUpdList.Name = "AntUpdList";
+            this.AntUpdList.Size = new System.Drawing.Size(338, 20);
+            this.AntUpdList.TabIndex = 82;
+            // 
+            // AntUpdField
+            // 
+            this.AntUpdField.FormattingEnabled = true;
+            this.AntUpdField.Location = new System.Drawing.Point(235, 115);
+            this.AntUpdField.Name = "AntUpdField";
+            this.AntUpdField.Size = new System.Drawing.Size(113, 21);
+            this.AntUpdField.TabIndex = 81;
+            this.AntUpdField.SelectedIndexChanged += new System.EventHandler(this.AntUpdField_SelectedIndexChanged);
             // 
             // chkWindowsFileDialog
             // 
@@ -1897,6 +1923,17 @@ namespace MesFilms
             this.groupBox22.Text = "Thumbs for Views";
             this.ToolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
             // 
+            // btnResetThumbs
+            // 
+            this.btnResetThumbs.Location = new System.Drawing.Point(378, 84);
+            this.btnResetThumbs.Name = "btnResetThumbs";
+            this.btnResetThumbs.Size = new System.Drawing.Size(84, 23);
+            this.btnResetThumbs.TabIndex = 76;
+            this.btnResetThumbs.Text = "Reset Thumbs";
+            this.ToolTip1.SetToolTip(this.btnResetThumbs, "That Action\'ll remove all generated Thumbs");
+            this.btnResetThumbs.UseVisualStyleBackColor = true;
+            this.btnResetThumbs.Click += new System.EventHandler(this.btnResetThumbs_Click);
+            // 
             // chkViews
             // 
             this.chkViews.AutoSize = true;
@@ -1942,6 +1979,79 @@ namespace MesFilms
             this.MesFilmsViews.Name = "MesFilmsViews";
             this.MesFilmsViews.Size = new System.Drawing.Size(231, 20);
             this.MesFilmsViews.TabIndex = 72;
+            // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.label18);
+            this.groupBox18.Controls.Add(this.AntSearchList);
+            this.groupBox18.Controls.Add(this.AntSearchItem2);
+            this.groupBox18.Controls.Add(this.AntSearchField);
+            this.groupBox18.Controls.Add(this.AntSearchText2);
+            this.groupBox18.Controls.Add(this.AntSearchItem1);
+            this.groupBox18.Controls.Add(this.AntSearchText1);
+            this.groupBox18.Location = new System.Drawing.Point(391, 126);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(347, 150);
+            this.groupBox18.TabIndex = 33;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "Supplementary Search";
+            this.ToolTip1.SetToolTip(this.groupBox18, resources.GetString("groupBox18.ToolTip"));
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(64, 92);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(152, 13);
+            this.label18.TabIndex = 80;
+            this.label18.Text = "Search by Properties Selection";
+            // 
+            // AntSearchList
+            // 
+            this.AntSearchList.BackColor = System.Drawing.SystemColors.Control;
+            this.AntSearchList.Location = new System.Drawing.Point(10, 115);
+            this.AntSearchList.Name = "AntSearchList";
+            this.AntSearchList.Size = new System.Drawing.Size(328, 20);
+            this.AntSearchList.TabIndex = 79;
+            // 
+            // AntSearchItem2
+            // 
+            this.AntSearchItem2.FormattingEnabled = true;
+            this.AntSearchItem2.Location = new System.Drawing.Point(10, 45);
+            this.AntSearchItem2.Name = "AntSearchItem2";
+            this.AntSearchItem2.Size = new System.Drawing.Size(145, 21);
+            this.AntSearchItem2.TabIndex = 38;
+            // 
+            // AntSearchField
+            // 
+            this.AntSearchField.FormattingEnabled = true;
+            this.AntSearchField.Location = new System.Drawing.Point(225, 88);
+            this.AntSearchField.Name = "AntSearchField";
+            this.AntSearchField.Size = new System.Drawing.Size(113, 21);
+            this.AntSearchField.TabIndex = 78;
+            this.AntSearchField.SelectedIndexChanged += new System.EventHandler(this.AntSearchField_SelectedIndexChanged);
+            // 
+            // AntSearchText2
+            // 
+            this.AntSearchText2.Location = new System.Drawing.Point(164, 46);
+            this.AntSearchText2.Name = "AntSearchText2";
+            this.AntSearchText2.Size = new System.Drawing.Size(173, 20);
+            this.AntSearchText2.TabIndex = 39;
+            // 
+            // AntSearchItem1
+            // 
+            this.AntSearchItem1.FormattingEnabled = true;
+            this.AntSearchItem1.Location = new System.Drawing.Point(10, 18);
+            this.AntSearchItem1.Name = "AntSearchItem1";
+            this.AntSearchItem1.Size = new System.Drawing.Size(145, 21);
+            this.AntSearchItem1.TabIndex = 36;
+            // 
+            // AntSearchText1
+            // 
+            this.AntSearchText1.Location = new System.Drawing.Point(164, 19);
+            this.AntSearchText1.Name = "AntSearchText1";
+            this.AntSearchText1.Size = new System.Drawing.Size(173, 20);
+            this.AntSearchText1.TabIndex = 37;
             // 
             // label10
             // 
@@ -2757,114 +2867,6 @@ namespace MesFilms
             this.textBox2.Size = new System.Drawing.Size(170, 20);
             this.textBox2.TabIndex = 17;
             // 
-            // btnResetThumbs
-            // 
-            this.btnResetThumbs.Location = new System.Drawing.Point(378, 84);
-            this.btnResetThumbs.Name = "btnResetThumbs";
-            this.btnResetThumbs.Size = new System.Drawing.Size(84, 23);
-            this.btnResetThumbs.TabIndex = 76;
-            this.btnResetThumbs.Text = "Reset Thumbs";
-            this.ToolTip1.SetToolTip(this.btnResetThumbs, "That Action\'ll remove all generated Thumbs");
-            this.btnResetThumbs.UseVisualStyleBackColor = true;
-            this.btnResetThumbs.Click += new System.EventHandler(this.btnResetThumbs_Click);
-            // 
-            // groupBox18
-            // 
-            this.groupBox18.Controls.Add(this.label18);
-            this.groupBox18.Controls.Add(this.textBox4);
-            this.groupBox18.Controls.Add(this.AntSearchItem2);
-            this.groupBox18.Controls.Add(this.comboBox3);
-            this.groupBox18.Controls.Add(this.AntSearchText2);
-            this.groupBox18.Controls.Add(this.AntSearchItem1);
-            this.groupBox18.Controls.Add(this.AntSearchText1);
-            this.groupBox18.Location = new System.Drawing.Point(391, 126);
-            this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(347, 150);
-            this.groupBox18.TabIndex = 33;
-            this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "Supplementary Search";
-            this.ToolTip1.SetToolTip(this.groupBox18, resources.GetString("groupBox18.ToolTip"));
-            // 
-            // AntSearchItem2
-            // 
-            this.AntSearchItem2.FormattingEnabled = true;
-            this.AntSearchItem2.Location = new System.Drawing.Point(10, 45);
-            this.AntSearchItem2.Name = "AntSearchItem2";
-            this.AntSearchItem2.Size = new System.Drawing.Size(145, 21);
-            this.AntSearchItem2.TabIndex = 38;
-            // 
-            // AntSearchText2
-            // 
-            this.AntSearchText2.Location = new System.Drawing.Point(164, 46);
-            this.AntSearchText2.Name = "AntSearchText2";
-            this.AntSearchText2.Size = new System.Drawing.Size(173, 20);
-            this.AntSearchText2.TabIndex = 39;
-            // 
-            // AntSearchItem1
-            // 
-            this.AntSearchItem1.FormattingEnabled = true;
-            this.AntSearchItem1.Location = new System.Drawing.Point(10, 18);
-            this.AntSearchItem1.Name = "AntSearchItem1";
-            this.AntSearchItem1.Size = new System.Drawing.Size(145, 21);
-            this.AntSearchItem1.TabIndex = 36;
-            // 
-            // AntSearchText1
-            // 
-            this.AntSearchText1.Location = new System.Drawing.Point(164, 19);
-            this.AntSearchText1.Name = "AntSearchText1";
-            this.AntSearchText1.Size = new System.Drawing.Size(173, 20);
-            this.AntSearchText1.TabIndex = 37;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(225, 88);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(113, 21);
-            this.comboBox3.TabIndex = 78;
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox4.Location = new System.Drawing.Point(10, 115);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(328, 20);
-            this.textBox4.TabIndex = 79;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(64, 92);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(152, 13);
-            this.label18.TabIndex = 80;
-            this.label18.Text = "Search by Properties Selection";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(74, 119);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(153, 13);
-            this.label33.TabIndex = 83;
-            this.label33.Text = "Update by Properties Selection";
-            // 
-            // textBox5
-            // 
-            this.textBox5.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox5.Location = new System.Drawing.Point(10, 142);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(338, 20);
-            this.textBox5.TabIndex = 82;
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(235, 115);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(113, 21);
-            this.comboBox4.TabIndex = 81;
-            // 
             // MesFilmsSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2918,6 +2920,8 @@ namespace MesFilms
             this.Fanart.PerformLayout();
             this.groupBox22.ResumeLayout(false);
             this.groupBox22.PerformLayout();
+            this.groupBox18.ResumeLayout(false);
+            this.groupBox18.PerformLayout();
             this.General.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -2943,8 +2947,6 @@ namespace MesFilms
             this.Logos.ResumeLayout(false);
             this.Logos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
-            this.groupBox18.ResumeLayout(false);
-            this.groupBox18.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3184,15 +3186,15 @@ namespace MesFilms
         private Button btnResetThumbs;
         private GroupBox groupBox18;
         private Label label18;
-        private TextBox textBox4;
+        private TextBox AntSearchList;
         private ComboBox AntSearchItem2;
-        private ComboBox comboBox3;
+        private ComboBox AntSearchField;
         private TextBox AntSearchText2;
         private ComboBox AntSearchItem1;
         private TextBox AntSearchText1;
         private Label label33;
-        private TextBox textBox5;
-        private ComboBox comboBox4;
+        private TextBox AntUpdList;
+        private ComboBox AntUpdField;
 
     }
 }

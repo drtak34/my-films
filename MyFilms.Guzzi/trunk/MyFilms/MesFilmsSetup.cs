@@ -31,7 +31,9 @@ using System.Collections;
 using MediaPortal.GUI.Library;
 using TaskScheduler;
 using System.Runtime.InteropServices;
-//Guzzi using TaskSchedulerInterop;
+//using TaskSchedulerInterop;
+using MesFilms.MyFilms;
+//using MesFilms;
 
 namespace MesFilms
 {
@@ -121,13 +123,17 @@ namespace MesFilms
                 AntFilterItem2.Items.Add(dc.ColumnName);
                 cbfdupdate.Items.Add(dc.ColumnName);
                 CmdPar.Items.Add(dc.ColumnName);
-                if ((dc.ColumnName != "Number") && (dc.ColumnName != "OriginalTitle") && (dc.ColumnName != "TranslatedTitle") && (dc.ColumnName != "Comments") && (dc.ColumnName != "Description") && (dc.ColumnName != "FormattedTitle") && (dc.ColumnName != "Date") && (dc.ColumnName != "DateAdded") && (dc.ColumnName != "Rating") && (dc.ColumnName != "Size") && (dc.ColumnName != "Picture") && (dc.ColumnName != "URL"))
+                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "DateAdded") && (dc.ColumnName != "Length_Num"))
+                {
+                    AntSearchField.Items.Add(dc.ColumnName);
+                    AntUpdField.Items.Add(dc.ColumnName);
+                }
+                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "Number") && (dc.ColumnName != "OriginalTitle") && (dc.ColumnName != "TranslatedTitle") && (dc.ColumnName != "Comments") && (dc.ColumnName != "Description") && (dc.ColumnName != "FormattedTitle") && (dc.ColumnName != "Date") && (dc.ColumnName != "DateAdded") && (dc.ColumnName != "Rating") && (dc.ColumnName != "Size") && (dc.ColumnName != "Picture") && (dc.ColumnName != "URL"))
                 {
                     SField1.Items.Add(dc.ColumnName);
                     SField2.Items.Add(dc.ColumnName);
                 }
-
-                if (!(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Description") && !(dc.ColumnName == "Comments"))
+                if ((dc.ColumnName != "Contents_Id") && !(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Description") && !(dc.ColumnName == "Comments"))
                 {
                     AntViewItem1.Items.Add(dc.ColumnName);
                     AntViewItem2.Items.Add(dc.ColumnName);
@@ -135,14 +141,14 @@ namespace MesFilms
                     AntViewItem4.Items.Add(dc.ColumnName);
                     AntViewItem5.Items.Add(dc.ColumnName);
                 }
-                if (!(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Actors"))
+                if ((dc.ColumnName != "Contents_Id") && !(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Actors"))
                 {
                     AntSearchItem1.Items.Add(dc.ColumnName);
                     AntSearchItem2.Items.Add(dc.ColumnName);
                 }
                 if ((dc.ColumnName == "TranslatedTitle") || (dc.ColumnName == "OriginalTitle") || (dc.ColumnName == "FormattedTitle"))
                     AntSTitle.Items.Add(dc.ColumnName);
-                if (!(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Year") && !(dc.ColumnName == "Rating") && !(dc.ColumnName == "DateAdded") && !(dc.ColumnName == "Date"))
+                if ((dc.ColumnName != "Contents_Id") && !(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Year") && !(dc.ColumnName == "Rating") && !(dc.ColumnName == "DateAdded") && !(dc.ColumnName == "Date"))
                 {
                     AntSort1.Items.Add(dc.ColumnName);
                     AntSort2.Items.Add(dc.ColumnName);
@@ -566,7 +572,6 @@ namespace MesFilms
                     wDfltSort = "RATING";
                     break;
                 default:
-//                    int i = 0;
                     if (Sort.Text.ToLower() == AntSort1.Text)
                     {
                         wDfltSortMethod = AntTSort1.Text;
@@ -659,6 +664,8 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem3", AntItem3.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltItem", View_Dflt_Item.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltText", View_Dflt_Text.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchList", AntSearchList.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UpdateList", AntUpdList.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "StrSelect", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator1", ListSeparator1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator2", ListSeparator2.Text.ToString());
@@ -901,6 +908,8 @@ namespace MesFilms
             AntUpdItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdItem2", "");
             AntUpdText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdText2", "");
             AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdDflT2", string.Empty);
+            AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchList", "");
+            AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UpdateList", "");
             AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel1", string.Empty);
             AntItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem1", string.Empty);
             AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel2", string.Empty);
@@ -1076,6 +1085,8 @@ namespace MesFilms
             AntSearchText1.ResetText();
             AntSearchItem2.ResetText();
             AntSearchText2.ResetText();
+            AntSearchList.ResetText();
+            AntUpdList.ResetText();
             AntUpdItem1.ResetText();
             AntUpdItem2.ResetText();
             AntUpdText1.ResetText();
@@ -2269,7 +2280,7 @@ namespace MesFilms
             }
             else
             {
-                btnParameters.Enabled = false; 
+                btnParameters.Enabled = false;
                 try
                 {
                     t = st.OpenTask("MyFilms_AMCUpdater_" + name);
@@ -2325,6 +2336,26 @@ namespace MesFilms
                 }
             }
         }
-    }
-   }
 
+        private void AntSearchField_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!AntSearchList.Text.Contains(AntSearchField.Text))
+            {
+                if (AntSearchList.Text.Length > 0)
+                    AntSearchList.Text = AntSearchList.Text + "|" + AntSearchField.Text;
+                else
+                    AntSearchList.Text = AntSearchField.Text;
+            }
+        }
+        private void AntUpdField_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!AntUpdList.Text.Contains(AntUpdField.Text))
+            {
+                if (AntUpdList.Text.Length > 0)
+                    AntUpdList.Text = AntUpdList.Text + "|" + AntUpdField.Text;
+                else
+                    AntUpdList.Text = AntUpdField.Text;
+            }
+        }
+    }
+}
