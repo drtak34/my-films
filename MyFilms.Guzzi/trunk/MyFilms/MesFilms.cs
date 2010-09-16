@@ -41,6 +41,7 @@ using MediaPortal.Util;
 using NewStringLib;
 using Cornerstone.MP;
 using MesFilms.MyFilms;
+using MesFilms;
 
 namespace MesFilms
 {
@@ -49,9 +50,7 @@ namespace MesFilms
     /// </summary>
     public class MesFilms : GUIWindow, ISetupForm
     {
-
         //private BaseMesFilms films;
-
         #region Descriptif zones Ecran
 
         public const int ID_MesFilms = 7986;
@@ -70,6 +69,7 @@ namespace MesFilms
             //CTRL_TxtSelect = 12,
             CTRL_Fanart = 11,
             CTRL_Fanart2 = 21,
+            CTRL_LoadingImage = 22,
             CTRL_Image = 1020,
             CTRL_Image2 = 1021,
             CTRL_List = 1026,
@@ -125,6 +125,9 @@ namespace MesFilms
         [SkinControlAttribute((int)Controls.CTRL_Fanart2)]
         protected GUIImage ImgFanart2 = null;
 
+        [SkinControlAttribute((int)Controls.CTRL_LoadingImage)]
+        protected GUIImage loadingImage = null;
+
         // ControlIDs to let the skin react to certain states and properties (e.g. trailer available)
 
         [SkinControlAttribute((int)Controls.CTRL_MovieInfoIsAvailable)]
@@ -147,7 +150,12 @@ namespace MesFilms
         //private string currentConfig;
         private string strPluginName = "GuzziThek";
         public static DataRow[] r; // will hold current recordset to traverse
-        public ImageSwapper backdrop;
+
+        //Imageswapperdefinitions for fanart and cover
+        //public ImageSwapper backdrop;
+        private ImageSwapper backdrop;
+        private AsyncImageResource cover = null;
+        
         //Guzzi Addons for Global nonpermanent Trailer and MinRating Filters
         public bool GlobalFilterTrailersOnly = false;
         public bool GlobalFilterMinRating = false;
@@ -170,6 +178,17 @@ namespace MesFilms
             //
             // TODO: Add constructor logic here
             //
+
+            // create Backdrop image swapper
+            backdrop = new ImageSwapper();
+            backdrop.ImageResource.Delay = 250;
+            backdrop.PropertyOne = "#myfilms.fanart";
+            //backdrop.PropertyTwo = "#myfilms.fanart2";
+
+            // create Cover image swapper
+            cover = new AsyncImageResource();
+            cover.Property = "#myfilms.coverimage";
+            cover.Delay = 250;
         }
         #region ISetupForm Members
 
@@ -246,6 +265,23 @@ namespace MesFilms
 
         public override bool Init()
         {
+            // create Backdrop image swapper
+            //backdrop = new ImageSwapper();
+            //backdrop.ImageResource.Delay = 250;
+            //backdrop.PropertyOne = "#myfilms.fanart";
+            //backdrop.PropertyTwo = "#myfilms.fanart2";
+            //backdrop.LoadingImage = loadingImage;
+
+            // create Cover image swapper
+            //cover = new AsyncImageResource();
+            //cover.Property = "#myfilms.coverimage";
+            //cover.Delay = 250;
+
+            // (re)link our backdrop image controls to the backdrop image swapper
+            //backdrop.GUIImageOne = ImgFanart;
+            //backdrop.GUIImageTwo = ImgFanart2;
+            //backdrop.LoadingImage = loadingImage;
+            
             return Load(GUIGraphicsContext.Skin + @"\MesFilms.xml");
         }
 
@@ -290,7 +326,7 @@ namespace MesFilms
                 }
             }
 			
-			// Original Coade from ZebonsMerge
+			// Original Code from ZebonsMerge
 			// if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
             // {
             //   if (facadeView.Focus)
@@ -367,17 +403,7 @@ namespace MesFilms
  //                       AsynLoadMovieList();
  //                   }
                     GUIControl.ShowControl(GetID, 34);
-                    //setProcessAnimationStatus(false, m_SearchAnimation); 
-                    backdrop = new ImageSwapper();
-                    backdrop.Active = true;
-                    backdrop.ImageResource.Delay = 250;
-                    backdrop.PropertyOne = "#myfilms.fanart";
-                    //backdrop.PropertyTwo = "#myfilms.fanart2";
-                    //backdrop.LoadingImage = loadingImage;
-                    // (re)link our backdrop image controls to the backdrop image swapper
-                    backdrop.GUIImageOne = ImgFanart;
-                    backdrop.GUIImageTwo = ImgFanart2;
-  //                  backdrop.LoadingImage = loadingImage;
+                    setProcessAnimationStatus(false, m_SearchAnimation);
 
                     if (TxtItem1 != null)
                         TxtItem1.Label = " ";
@@ -424,6 +450,7 @@ namespace MesFilms
                     return true;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
+                    Log.Debug("MyFilms : GUI_MSG_WINDOW_DEINIT erkannt !!! "); 
                     GUITextureManager.CleanupThumbs();
 
                     if (Configuration.CurrentConfig != "")
@@ -437,13 +464,17 @@ namespace MesFilms
                     ImgFanart2.SetFileName(string.Empty);
                     facadeView.Resources.Clear();
                     facadeView.Clear();
-                    backdrop.PropertyOne = " ";
+                    //backdrop.PropertyOne = " ";
+                    // added from MoPic
+                    backdrop.Filename = string.Empty;
+                    cover.Filename = string.Empty;
                     return true; // fall through to call base class?
 
                 case GUIMessage.MessageType.GUI_MSG_CLICKED:
                     //---------------------------------------------------------------------------------------
                     // Mouse/Keyboard Clicked
                     //---------------------------------------------------------------------------------------
+                    Log.Debug("MyFilms : GUI_MSG_CLICKED erkannt !!! "); 
                     if ((iControl == (int)Controls.CTRL_BtnSrtBy) && (conf.Boolselect))
                         // No change sort method and no searchs during select
                         return true;
@@ -1076,7 +1107,8 @@ namespace MesFilms
             }
             if (facadeView.Count == 0)
 				// From Zebonsmerge: InitMainScreen() instead of Showing empty list - ToDo: Add Dialog with Info to return to MainScreen that no movies found !!!
-                // InitMainScreen();
+                //InitMainScreen();
+                // Old line:
                 GUIControl.ShowControl(GetID, 34);
             else
             {
@@ -1122,10 +1154,11 @@ namespace MesFilms
         //    Display Detailed Info (Image, Description, Year, Category)
         //----------------------------------------------------------------------------------------
         private void affichage_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image
+        //public void affichage_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image
         {
             //if (facadeView.SelectedListItem.ItemId == Prev_ItemID)
             //    return;
-            Log.Debug("MyFilms : ItemId = " + ItemId.ToString() + ", wrep = " + wrep.ToString() + ", wlabel = " + wlabel);
+            Log.Debug("MyFilms (affichage_Lstdetail): ItemId = " + ItemId.ToString() + ", wrep = " + wrep.ToString() + ", wlabel = " + wlabel);
             if (ItemId == -1)
             {
                 // reinit some fields
@@ -1133,20 +1166,23 @@ namespace MesFilms
             }
             if ((facadeView.SelectedListItem.IsFolder) && (MesFilms.conf.Boolselect))
             {
-                Log.Debug("MyFilms : Item is Folder and BoolSelect is true");
-                string[] wfanart = MesFilmsDetail.Search_Fanart(wlabel, true, "file", true, facadeView.SelectedListItem.ThumbnailImage.ToString(), facadeView.SelectedListItem.Path);
+                Log.Debug("MyFilms (affichage_Lstdetail): Item is Folder and BoolSelect is true");
+                string[] wfanart = Search_Fanart(wlabel, true, "file", true, facadeView.SelectedListItem.ThumbnailImage.ToString(), facadeView.SelectedListItem.Path);
                 if (wfanart[0] == " ")
                 {
                     backdrop.Active = false;
                     GUIControl.HideControl(GetID, 35);
+                    Log.Debug("MesFilm (affichage_Lstdetail): INACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 }
                 else
                 {
                     backdrop.Active = true;
                     GUIControl.ShowControl(GetID, 35);
+                    Log.Debug("MesFilm (affichage_Lstdetail): ACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 }
-                Log.Debug("MesFilm (Backdrops-Folder): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-                backdrop.Filename = wfanart[0]; 
+                Log.Debug("MesFilm (affichage_Lstdetail): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                backdrop.Filename = wfanart[0];
+                cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
                 backdrop.Active = true;
                 GUIControl.HideControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
@@ -1158,64 +1194,33 @@ namespace MesFilms
             }
             else
             {
-                //string wtitle = MesFilms.r[ItemId]["OriginalTitle"].ToString();
-                //if (MesFilms.r[ItemId]["TranslatedTitle"] != null && MesFilms.r[ItemId]["TranslatedTitle"].ToString().Length > 0)
-                //    wtitle = MesFilms.r[ItemId]["TranslatedTitle"].ToString();
-                ////if (wtitle.IndexOf(MesFilms.conf.TitleDelim) > 0)
-                ////    wtitle = wtitle.Substring(wtitle.IndexOf(MesFilms.conf.TitleDelim) + 1);
-                //string[] wfanart = MesFilmsDetail.Search_Fanart(wtitle, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
-                if (0 == 1)
-                {
-
-                    string file = "false";
-                    if (MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString().Length > 0)
-                    {
-                        if ((MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString().IndexOf(":\\") == -1) && (MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString().Substring(0, 2) != "\\\\"))
-                            file = MesFilms.conf.StrPathImg + "\\" + MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString();
-                        else
-                            file = MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString();
-                    }
-                    else
-                        file = "";
-
-                    if (!System.IO.File.Exists(file))
-                        file = MesFilms.conf.DefaultCover;
-
-                    //ImageSwapper backdrop = new ImageSwapper();
-                    string wtitle = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
-                    if (MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] != null && MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-                        wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-                    Log.Debug("MesFilm (Guzzi-Backdrops.Dir): wtitle: '" + wtitle + "', file: '" + file + "'");
-                    //wfanart = MesFilmsDetail.Search_Fanart(wtitle, false, "dir", false, file, string.Empty);
-                    //wfanart = MesFilmsDetail.Search_Fanart(wtitle, false, "file", false, file, string.Empty);
-                    //Log.Debug("MesFilm (Guzzi-Backdrops.Dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-                }
-                Log.Debug("MyFilms : Item is Movie itself!");
-                string[] wfanart = MesFilmsDetail.Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
-                Log.Debug("MesFilm (Backdrops-File): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-                //string[] wfanart = MesFilmsDetail.Search_Fanart(wlabel, true, "dir", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty); 
-
+                Log.Debug("MyFilms (affichage_Lstdetail): Item is Movie itself!");
+                
+                //ImageSwapper backdrop = new ImageSwapper();
+                string[] wfanart = new string[2];
+                wfanart = Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
+                Log.Debug("MesFilm (affichage_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 //if (wfanart[0] == " ")
                 //{
                 //    wfanart = MesFilmsDetail.Search_Fanart(wlabel, true, "dir", true, facadeView.SelectedListItem.ThumbnailImage.ToString(), facadeView.SelectedListItem.Path);
                 // }
-
-                //Log.Debug("MesFilm (Backdrops-File): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-                //Log.Debug("MesFilm (Backdrops-File): Infos: 'facadeView.SelectedListItem.ThumbnailImage' = '" + facadeView.SelectedListItem.ThumbnailImage.ToString() + "'");
-                //Log.Debug("MesFilm (Backdrops-File): Infos: 'facadeView.SelectedListItem.Path' = '" + facadeView.SelectedListItem.Path.ToString() + "'");
-    
                 if (wfanart[0] == " ")
                     {
                         backdrop.Active = false;
+                        cover.Active = true;
                         GUIControl.HideControl(GetID, 35);
+                        Log.Debug("MesFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "', ' - ControlID35: '" + GUIControl.IsVisibleProperty.ToString()  + "'");    
                     }
                 else
                     {
                         backdrop.Active = true;
+                        cover.Active = true;
                         GUIControl.ShowControl(GetID, 35);
+                        Log.Debug("MesFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "', ' - ControlID35: '" + GUIControl.IsVisibleProperty.ToString() + "'");
                     }
-                Log.Debug("MesFilm (Backdrops-File): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                Log.Debug("MesFilm (affichage_Lstdetail): Backdrops-File: backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 backdrop.Filename = wfanart[0];
+                cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
                 if (facadeView.SelectedListItem.IsFolder)
                     Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
@@ -1749,7 +1754,7 @@ namespace MesFilms
                             }
                             string[] wfanart;
                             if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country")
-                                wfanart = MesFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
+                                wfanart = Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
                             item.IsFolder = true;
                             item.Path = WStrSort.ToLower();
                             item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
@@ -2746,8 +2751,6 @@ namespace MesFilms
             conf.StrTitleSelect = "";
             GetFilmList();
         }
-
-
 
 
         //*****************************************************************************************
@@ -3936,15 +3939,38 @@ namespace MesFilms
         //*****************************************************************************************
         //*  Initialize Fields on Main screen                                                     *
         //*****************************************************************************************
+          // Changed to Public to make sure, swapper can be accessed from elsewhere (Public, Private, Protected)
         private void InitMainScreen()
+        //public void InitMainScreen()
         {
+            Log.Debug("MyFilms (InitMainScreen) - Initialize all properties !!!"); 
             MovieScrobbling = false; //Reset MovieScrobbling
-			MesFilmsDetail.Init_Detailed_DB();
-            backdrop = new ImageSwapper();
-            backdrop.Active = false;
-            backdrop.PropertyOne = " ";
-            ImgFanart.SetVisibleCondition(1, false);
-            //ImgFanart2.SetFileName(string.Empty);
+            MesFilmsDetail.Init_Detailed_DB();
+
+            // create Backdrop image swapper
+            //backdrop = new ImageSwapper();
+            //backdrop.ImageResource.Delay = 250;
+            //backdrop.Active = false;
+            backdrop.Active = true;
+            //backdrop.PropertyOne = " ";
+            //backdrop.PropertyOne = "#myfilms.fanart";
+            //backdrop.PropertyTwo = "#myfilms.fanart2";
+            //backdrop.LoadingImage = loadingImage;
+
+            // create Cover image swapper
+            //cover = new AsyncImageResource();
+            //cover.Property = "#myfilms.coverimage";
+            //cover.Delay = 250;
+
+            // (re)link our backdrop image controls to the backdrop image swapper
+            backdrop.GUIImageOne = ImgFanart;
+            backdrop.GUIImageTwo = ImgFanart2;
+            //backdrop.LoadingImage = loadingImage;
+
+            //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge
+            //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge
+            //GUIPropertyManager.SetProperty("#myfilms.Fanart", " ");
+            //GUIPropertyManager.SetProperty("#myfilms.Fanart2", " ");
             GUIPropertyManager.SetProperty("#myfilms.logos_id2001", " ");
             GUIPropertyManager.SetProperty("#myfilms.logos_id2002", " ");
             GUIPropertyManager.SetProperty("#myfilms.nbobjects", " ");
@@ -3953,13 +3979,14 @@ namespace MesFilms
             GUIPropertyManager.SetProperty("#myfilms.item1", " ");
             GUIPropertyManager.SetProperty("#myfilms.item2", " ");
             GUIPropertyManager.SetProperty("#myfilms.item3", " ");
-            GUIPropertyManager.SetProperty("#myfilms.Fanart", " ");
-            GUIPropertyManager.SetProperty("#myfilms.Fanart2", " ");
+            //GUIPropertyManager.SetProperty("#myfilms.select", " "); // still above in init routine present, here would be doubled !
             GUIPropertyManager.SetProperty("#myfilms.rating", "0");
             affichage_rating(0);
-			// setProcessAnimationStatus(false, m_SearchAnimation); 
+            setProcessAnimationStatus(false, m_SearchAnimation);
             GUIControl.HideControl(GetID, 34);
         }
+
+        
         //*****************************************************************************************
         //*  Ask for Title search and grab information on the NET base on the grab configuration  *
         //*****************************************************************************************
@@ -4032,7 +4059,8 @@ namespace MesFilms
                     string wdirector = string.Empty;
                     try { wdirector = (string)MesFilms.r[i]["Director"]; }
                     catch { }
-                    System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                    //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                    System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
                 }
             }
         }
@@ -4106,6 +4134,91 @@ namespace MesFilms
             catch (Exception)
             {
             }
+        }
+        public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group)
+        //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
+        {
+            Log.Debug("MyFilms (MainSearchFanart) - Vars: wtitle2 = '" + wtitle2 + "'");
+            Log.Debug("MyFilms (MainSearchFanart) - Vars: main (true for mainscreen, false for Detail) = '" + main + "'");
+            Log.Debug("MyFilms (MainSearchFanart) - Vars: searched (dir or file) = '" + searched + "'");
+            Log.Debug("MyFilms (MainSearchFanart) - Vars: rep (true for grouped view) = '" + rep + "'");
+            Log.Debug("MyFilms (MainSearchFanart) - Vars: filecover = '" + filecover + "'");
+            Log.Debug("MyFilms (MainSearchFanart) - Vars: group = '" + group + "'");
+            Log.Debug("MyFilms (MainSearchFanart) - Config: MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
+            string[] wfanart = new string[2];
+            wfanart[0] = " ";
+            wfanart[1] = " ";
+            if (wtitle2.Contains(MesFilms.conf.TitleDelim))
+                wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
+            wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
+            Log.Debug("MyFilms (MainSearchFanart) - wtitle2-cleaned = '" + wtitle2 + "'");
+            Log.Debug("MyFilms (MainSearchFanart) - MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
+
+            if (!(MesFilms.conf.StrFanart == true))
+                return wfanart;
+
+            string safeName = string.Empty;
+            if (rep)
+            {
+                if (group == "country" || group == "year" || group == "category")
+                {
+                    if (!System.IO.Directory.Exists(MesFilms.conf.StrPathFanart + "\\_Group"))
+                        System.IO.Directory.CreateDirectory(MesFilms.conf.StrPathFanart + "\\_Group");
+                    if (!System.IO.Directory.Exists(MesFilms.conf.StrPathFanart + "\\_Group\\" + group))
+                        System.IO.Directory.CreateDirectory(MesFilms.conf.StrPathFanart + "\\_Group\\" + group);
+                    safeName = MesFilms.conf.StrPathFanart + "\\_Group\\" + group + "\\{" + wtitle2 + "}";
+                }
+                else
+                    return wfanart;
+            }
+            else
+                safeName = MesFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
+            Log.Debug("MyFilms (MainSearchFanart) - safename = '" + safeName + "'");
+            FileInfo wfile = new FileInfo(safeName + "\\{" + wtitle2 + "}.jpg");
+            Log.Debug("MyFilms (MainSearchFanart) - safename(file) = '" + wfile + "'");
+            Log.Debug("MyFilms (MainSearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + wtitle2 + "}.jpg") + "'");
+            if (((main) || (searched == "file")) && (System.IO.File.Exists(safeName + "\\{" + wtitle2 + "}.jpg")))
+            {
+                wfanart[0] = safeName + "\\{" + wtitle2 + "}.jpg";
+                wfanart[1] = "file";
+                return wfanart;
+            }
+            if (System.IO.Directory.Exists(safeName))
+            {
+                if ((main) || (searched == "file"))
+                {
+                    if (System.IO.Directory.GetFiles(safeName).Length > 0)
+                    {
+                        wfanart[0] = System.IO.Directory.GetFiles(safeName)[0].ToString();
+                        wfanart[1] = "file";
+                        return wfanart;
+                    }
+                }
+                else
+                {
+                    if (System.IO.Directory.GetFiles(safeName).Length > 0)
+                    {
+                        wfanart[0] = safeName;
+                        wfanart[1] = "dir";
+                        return wfanart;
+                    }
+                }
+            }
+            else
+            {
+                try { System.IO.Directory.CreateDirectory(safeName); }
+                catch { }
+            }
+            if ((MesFilms.conf.StrFanartDflt) && !(rep))
+            {
+                wfanart[0] = filecover.ToString();
+                wfanart[1] = "file";
+                //Added Guzzi - Fix that no fanart was returned ...
+                return wfanart;
+            }
+ 
+            Log.Debug("MesFilm (MainSearchFanart) - Fanart not configured: wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+            return wfanart;
         }
 
 #endregion

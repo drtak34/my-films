@@ -40,11 +40,10 @@ using SQLite.NET;
 using MediaPortal.Configuration;
 using NewStringLib;
 using Cornerstone.MP;
+using System.Xml;
+using System.Linq;
 using MesFilms.MyFilms;
-//using MesFilms;
-//using Grabber;
-//using System.Linq;
-//using System.Xml;
+using Grabber;
 
 namespace MesFilms
 {
@@ -912,9 +911,7 @@ namespace MesFilms
                 bool NoResumeMovie = true;
                 int IMovieIndex = 0;
 
-                Search_All_Files(Index, true, ref NoResumeMovie, ref newItems, ref IMovieIndex);
-				//Line before ZebonsMerge
-				//Search_All_Files(Index, true, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
+                Search_All_Files(Index, true, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
                 for (int i = 0; i < newItems.Count; i++)
                 {
                     // for each entry test if it's a file, a directory or a dvd copy
@@ -1168,7 +1165,8 @@ namespace MesFilms
             Log.Info("MyFilms : Database Updated for : " + ttitle);
             if (title.Length > 0 && MesFilms.conf.StrFanart)
             {
-                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
             }
 
         }
@@ -1512,7 +1510,8 @@ namespace MesFilms
             Log.Info("MyFilms : (Inactive) Database Updated for : " + ttitle);
             if (title.Length > 0 && MesFilms.conf.StrFanart)
             {
-                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
             }
 
         }
@@ -1552,7 +1551,8 @@ namespace MesFilms
             int wyear = 0;
             try {  wyear = Convert.ToInt32(year);}
             catch { }
-            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose,MesFilms.conf.StrTitle1);
+            //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose, MesFilms.conf.StrTitle1);
+            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose);
             Log.Debug("MyFilms (DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MesFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MesFilms.conf.StrTitle1 + "'");
             int listCount = listemovies.Count;
             Log.Debug("MyFilms (DownloadBackdrops) - listemovies: Result Listcount: '" + listCount.ToString() + "'");
@@ -1684,19 +1684,32 @@ namespace MesFilms
         //                          [0] = file or directory found (if not " ")
         //                          [1] = file or dir
         //-------------------------------------------------------------------------------------------
+
         public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group)
+        //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
         {
+            Log.Debug("MyFilms (SearchFanart) - Vars: wtitle2 = '" + wtitle2 + "'");
+            Log.Debug("MyFilms (SearchFanart) - Vars: main (true for mainscreen, false for Detail) = '" + main + "'");
+            Log.Debug("MyFilms (SearchFanart) - Vars: searched (dir or file) = '" + searched + "'");
+            Log.Debug("MyFilms (SearchFanart) - Vars: rep (true for grouped view) = '" + rep + "'");
+            Log.Debug("MyFilms (SearchFanart) - Vars: filecover = '" + filecover + "'");
+            Log.Debug("MyFilms (SearchFanart) - Vars: group = '" + group + "'");
+            Log.Debug("MyFilms (SearchFanart) - Config: MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
             string[] wfanart = new string[2];
             wfanart[0] = " ";
             wfanart[1] = " ";
-            if (MesFilms.conf.StrFanart)
+            if (MesFilms.conf.StrFanart == true)
             {
                 if (wtitle2.Contains(MesFilms.conf.TitleDelim))
                     wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
                 wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
-                if (!MesFilms.conf.StrFanart)
+                Log.Debug("MyFilms (SearchFanart) - wtitle2-cleaned = '" + wtitle2 + "'");
+                Log.Debug("MyFilms (SearchFanart) - MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
+
+                if (!(MesFilms.conf.StrFanart == true))
                     return wfanart;
-                string safeName = string.Empty; 
+
+                string safeName = string.Empty;
                 if (rep)
                 {
                     if (group == "country" || group == "year" || group == "category")
@@ -1708,11 +1721,14 @@ namespace MesFilms
                         safeName = MesFilms.conf.StrPathFanart + "\\_Group\\" + group + "\\{" + wtitle2 + "}";
                     }
                     else
-                        return wfanart; 
+                        return wfanart;
                 }
                 else
                     safeName = MesFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
+                Log.Debug("MyFilms (SearchFanart) - safename = '" + safeName + "'");
                 FileInfo wfile = new FileInfo(safeName + "\\{" + wtitle2 + "}.jpg");
+                Log.Debug("MyFilms (SearchFanart) - safename(file) = '" + wfile + "'");
+                Log.Debug("MyFilms (SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + wtitle2 + "}.jpg") + "'");
                 if (((main) || (searched == "file")) && (System.IO.File.Exists(safeName + "\\{" + wtitle2 + "}.jpg")))
                 {
                     wfanart[0] = safeName + "\\{" + wtitle2 + "}.jpg";
@@ -1749,8 +1765,12 @@ namespace MesFilms
                 {
                     wfanart[0] = filecover.ToString();
                     wfanart[1] = "file";
+                    //Added Guzzi - Fix that no fanart was returned ...
+                    return wfanart;
                 }
             }
+            
+            Log.Debug("MesFilm (SearchFanart) - Fanart not configured: wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             return wfanart;
         }
         //-------------------------------------------------------------------------------------------
@@ -1834,7 +1854,8 @@ namespace MesFilms
             if (!System.IO.File.Exists(file))
                 file = MesFilms.conf.DefaultCover;
             GUIPropertyManager.SetProperty("#myfilms.picture", file);
-
+            // ToDo: Add for ImageSwapper Coverart (coverImage)
+            //cover.Filename = file;
             if ((ImgID2001 != null) && (ImgID2002 != null) && (MesFilms.conf.StrLogos))
             {
                 if ((ImgID2001.XPosition == ImgID2002.XPosition) && (ImgID2001.YPosition == ImgID2002.YPosition))
@@ -1916,7 +1937,7 @@ namespace MesFilms
                     GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
             }
             
-            ImageSwapper backdrop = new ImageSwapper();
+            //ImageSwapper backdrop = new ImageSwapper();
             string[] wfanart = new string[2];
             string wtitle = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
 			//Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
@@ -2141,41 +2162,49 @@ namespace MesFilms
                             decimal aspectratio = 0; 
                             string ar = " ";
                             if ((wrep) && (MesFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                            {
-                                wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                                Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                                GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                                //Log.Debug("MyFilms (Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                                decimal w_hsize;
-                                decimal w_vsize;
-                                string[] arSplit;
-                                string[] Sep = new string[] { "x" };
-                                arSplit = MesFilms.r[ItemId][dc.ColumnName].ToString().Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
-                                w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
-                                w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
-                                aspectratio = (w_hsize / w_vsize);
-                                aspectratio = Math.Round(aspectratio, 2);
-                                //Formats:
-                                //1,33 -> 4:3
-                                //1,78 -> 16:9 / widescreen
-                                //1,85 -> widescreen
-                                //2,35+ -> cinemascope
-                                if (aspectratio < (decimal)(1.4)) ar = "4:3";
-                                    else if (aspectratio < (decimal)(1.9)) ar = "16:9";
-                                    else if (aspectratio >= (decimal)(1.9)) ar = "cinemascope";
-                                wstring = aspectratio.ToString();
-                            }
+                                try
+                                    {
+                                        wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
+                                        //Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                                        GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
+                                        //Log.Debug("MyFilms (Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                                        decimal w_hsize;
+                                        decimal w_vsize;
+                                        string[] arSplit;
+                                        string[] Sep = new string[] { "x" };
+                                        arSplit = MesFilms.r[ItemId][dc.ColumnName].ToString().Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
+                                        w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
+                                        w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
+                                        // To Check if/why exception eccurs
+                                        //Log.Debug("MyFilms : hsize - wsize: '" + w_hsize + " - " + w_vsize + "'");
+                                        aspectratio = (w_hsize / w_vsize);
+                                        aspectratio = Math.Round(aspectratio, 2);
+                                        //Formats:
+                                        //1,33 -> 4:3
+                                        //1,78 -> 16:9 / widescreen
+                                        //1,85 -> widescreen
+                                        //2,35+ -> cinemascope
+                                        if (aspectratio < (decimal)(1.4)) ar = "4:3";
+                                            else if (aspectratio < (decimal)(1.9)) ar = "16:9";
+                                            else if (aspectratio >= (decimal)(1.9)) ar = "cinemascope";
+                                        wstring = aspectratio.ToString();
+                                    }
+                                catch
+                                    {
+                                        Log.Info("MyFilms: Error calculating aspectratio !");
+                                    }
+
                             GUIPropertyManager.SetProperty("#myfilms.aspectratio", wstring);
-                            Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
+                            //Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
                             GUIPropertyManager.SetProperty("#myfilms.ar", ar);
-                            Log.Debug("MyFilms : Property loaded #myfilms.ar with " + ar);
+                            //Log.Debug("MyFilms : Property loaded #myfilms.ar with " + ar);
                             //Log.Debug("MyFilms (Load_Detailed_DB): Split for aspectratio: '" + (arSplit[0]) + "', '" + (arSplit[1]) + "' --> '" + wstring + "'");
                             break;
                         default:
                             if ((wrep) && (MesFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                                 wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
                             GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
                             break;
                     }
                 }

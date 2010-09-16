@@ -25,7 +25,7 @@ using System.Data;
 using System.Collections.Generic;
 using System.Text;
 using MesFilms.MyFilms;
-
+using MediaPortal.ServiceImplementations;
 
 namespace MesFilms
 {

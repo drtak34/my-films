@@ -122,7 +122,7 @@ namespace MesFilms.Actors
         //public static Configuration conf;
         //public static Logos confLogos;
         //private string currentConfig;
-        public Cornerstone.MP.ImageSwapper backdrop;
+        //private Cornerstone.MP.ImageSwapper backdrop;
 
         
         private List<string> list;
@@ -535,9 +535,10 @@ namespace MesFilms.Actors
                                 }
                                 item.ThumbnailImage = strThumb + ".png";
                             }
-                            string[] wfanart;
-                            if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country")
-                                wfanart = MesFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
+                            //Guzzi temp disabled
+                            //string[] wfanart;
+                            //if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country")
+                                //wfanart = MesFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
                             item.IsFolder = true;
                             item.Path = WStrSort.ToLower();
                             item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
@@ -607,7 +608,7 @@ namespace MesFilms.Actors
                 GUIControl.ShowControl(GetID, 34);
                 //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
                 //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
-                backdrop.Active = false;
+                //backdrop.Active = false;
                 MesFilmsDetail.Load_Detailed_DB(0, false);
                 ImgLstFilm.SetFileName("#myfilms.picture");
                 ImgLstFilm2.SetFileName("#myfilms.picture");

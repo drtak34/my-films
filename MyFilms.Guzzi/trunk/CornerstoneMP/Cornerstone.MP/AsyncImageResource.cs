@@ -48,7 +48,7 @@ namespace Cornerstone.MP {
 
         /// <summary>
         /// If multiple changes to the Filename property are made in rapid succession, this delay
-        /// will be used to prevent unecessary loading operations. Most useful for large images that
+        /// will be used to prevent uneccisary loading operations. Most useful for large images that
         /// take a non-trivial amount of time to load from memory.
         /// </summary>
         public int Delay {
@@ -118,9 +118,6 @@ namespace Cornerstone.MP {
             }
 
             set {
-                if (value == null)
-                    value = " ";
-
                 Thread newThread = new Thread(new ParameterizedThreadStart(setFilenameWorker));
                 newThread.Name = "AsyncImageResource.setFilenameWorker";
                 newThread.Start(value);
@@ -206,13 +203,8 @@ namespace Cornerstone.MP {
             if (!_active || filename == null || !File.Exists(filename))
                 return false;
 
-            try {
-                if (GUITextureManager.Load(filename, 0, 0, 0, true) > 0)
-                    return true;
-            }
-            catch (Exception) {
-                logger.Error("MediaPortal failed to load artwork: " + filename);
-            }
+            if (GUITextureManager.Load(filename, 0, 0, 0, true) > 0)
+                return true;
            
             return false;
         }

@@ -10,8 +10,8 @@ using System.Resources;
 [assembly: AssemblyDescription("MyFilms a Mediaportal plugin")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Personnel")]
-[assembly: AssemblyProduct("MediaPotal")]
-[assembly: AssemblyCopyright("Copyright © Personnel 2008")]
+[assembly: AssemblyProduct("MediaPortal")]
+[assembly: AssemblyCopyright("Copyright © Personnel 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,6 +30,6 @@ using System.Resources;
 //      Numéro de build
 //      Révision
 //
-[assembly: AssemblyVersion("4.8.0.0")]
-[assembly: AssemblyFileVersion("4.8.0.0")]
+[assembly: AssemblyVersion("5.1.0.0")]
+[assembly: AssemblyFileVersion("5.1.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("")]

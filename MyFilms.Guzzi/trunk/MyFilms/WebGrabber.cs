@@ -4,8 +4,9 @@ using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Xml;
+using MediaPortal.GUI.Library;
 
-namespace Cornerstone.Tools {
+namespace Guzzi.Cornerstone.Tools {
 
     public class WebGrabber {
         
@@ -90,13 +91,13 @@ namespace Cornerstone.Tools {
                     if (encoding == null)
                         encoding = Encoding.GetEncoding(response.CharacterSet);
 
-                    //// Debug
-                    //if (_debug) {
-                    //   System..Log.Debug("URL: {0}", requestUrl);
-                    //    log.Debug("UserAgent: {0}", userAgent);
-                    //    logger.Debug("CookieHeader: {0}", cookieHeader);
-                    //    logger.Debug("Encoding: {0}", encoding.EncodingName);
-                    //}
+                    // Debug
+                    if (_debug) {
+                        Log.Debug("URL: {0}", requestUrl);
+                        Log.Debug("UserAgent: {0}", userAgent);
+                        Log.Debug("CookieHeader: {0}", cookieHeader);
+                        Log.Debug("Encoding: {0}", encoding.EncodingName);
+                    }
 
                     // Converts the stream to a string
                     StreamReader reader = new StreamReader(resultData, encoding, true);
@@ -164,7 +165,7 @@ namespace Cornerstone.Tools {
                 return xmlRoot.ChildNodes;
             }
             catch (XmlException e) {
-                //logger.ErrorException("XML Parse error: URL=" + requestUrl, e);
+                Log.Debug("XML Parse error: URL=" + requestUrl, e);
                 return null;
             }          
         }
