@@ -39,7 +39,7 @@ using MediaPortal.GUI.Library;
 using SQLite.NET;
 using MediaPortal.Configuration;
 using NewStringLib;
-using Cornerstone.MP;
+//using Cornerstone.MP;
 using System.Xml;
 using System.Linq;
 using MesFilms.MyFilms;
@@ -1165,8 +1165,8 @@ namespace MesFilms
             Log.Info("MyFilms : Database Updated for : " + ttitle);
             if (title.Length > 0 && MesFilms.conf.StrFanart)
             {
-                //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
-                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
+                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
             }
 
         }
@@ -1510,8 +1510,8 @@ namespace MesFilms
             Log.Info("MyFilms : (Inactive) Database Updated for : " + ttitle);
             if (title.Length > 0 && MesFilms.conf.StrFanart)
             {
-                //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
-                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
+                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
             }
 
         }
@@ -1551,8 +1551,8 @@ namespace MesFilms
             int wyear = 0;
             try {  wyear = Convert.ToInt32(year);}
             catch { }
-            //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose, MesFilms.conf.StrTitle1);
-            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose);
+            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose, MesFilms.conf.StrTitle1);
+            //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose);
             Log.Debug("MyFilms (DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MesFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MesFilms.conf.StrTitle1 + "'");
             int listCount = listemovies.Count;
             Log.Debug("MyFilms (DownloadBackdrops) - listemovies: Result Listcount: '" + listCount.ToString() + "'");

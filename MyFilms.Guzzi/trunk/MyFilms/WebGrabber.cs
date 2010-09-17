@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using MediaPortal.GUI.Library;
 
-namespace Guzzi.Cornerstone.Tools {
+namespace MesFilms.Cornerstone.Tools {
 
     public class WebGrabber {
         

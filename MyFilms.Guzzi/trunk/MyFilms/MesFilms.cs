@@ -460,8 +460,8 @@ namespace MesFilms
                         else
                             Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
                     }
-                    ImgFanart.SetFileName(string.Empty);
-                    ImgFanart2.SetFileName(string.Empty);
+                    //ImgFanart.SetFileName(string.Empty);
+                    //ImgFanart2.SetFileName(string.Empty);
                     facadeView.Resources.Clear();
                     facadeView.Clear();
                     //backdrop.PropertyOne = " ";
@@ -1112,7 +1112,8 @@ namespace MesFilms
                 GUIControl.ShowControl(GetID, 34);
             else
             {
-                ImgFanart.SetVisibleCondition(1, true);
+                //ImgFanart.SetVisibleCondition(1, true);  ->> This fucked up the fanart swapper !!!!!
+                if (!backdrop.Active) backdrop.Active = true;
                 GUIControl.HideControl(GetID, 34);
             }
             GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count.ToString() + " " + GUILocalizeStrings.Get(127));
@@ -1183,7 +1184,8 @@ namespace MesFilms
                 Log.Debug("MesFilm (affichage_Lstdetail): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 backdrop.Filename = wfanart[0];
                 cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
-                backdrop.Active = true;
+                if (!backdrop.Active)
+                    backdrop.Active = true;
                 GUIControl.HideControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 GUIPropertyManager.SetProperty("#myfilms.picture", facadeView.SelectedListItem.ThumbnailImage.ToString()); 
@@ -1206,15 +1208,19 @@ namespace MesFilms
                 // }
                 if (wfanart[0] == " ")
                     {
-                        backdrop.Active = false;
-                        cover.Active = true;
+                        if (backdrop.Active)
+                            backdrop.Active = false;
+                        if (!cover.Active)
+                            cover.Active = true;
                         GUIControl.HideControl(GetID, 35);
                         Log.Debug("MesFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "', ' - ControlID35: '" + GUIControl.IsVisibleProperty.ToString()  + "'");    
                     }
                 else
                     {
-                        backdrop.Active = true;
-                        cover.Active = true;
+                        if (!backdrop.Active)
+                            backdrop.Active = true;
+                        if (!cover.Active)
+                            cover.Active = true;
                         GUIControl.ShowControl(GetID, 35);
                         Log.Debug("MesFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "', ' - ControlID35: '" + GUIControl.IsVisibleProperty.ToString() + "'");
                     }
@@ -1830,11 +1836,12 @@ namespace MesFilms
             }
             else
             {
-                ImgFanart.SetVisibleCondition(1, true);
+                //ImgFanart.SetVisibleCondition(1, true);  ->> This fucked up the fanart swapper !!!!!
+                if (!backdrop.Active) 
+                    backdrop.Active = true;
                 GUIControl.ShowControl(GetID, 34);
                 GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
                 GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
-                backdrop.Active = false;
                 MesFilmsDetail.Load_Detailed_DB(0, false);
                 ImgLstFilm.SetFileName("#myfilms.picture");
                 ImgLstFilm2.SetFileName("#myfilms.picture");
@@ -3948,26 +3955,29 @@ namespace MesFilms
             MesFilmsDetail.Init_Detailed_DB();
 
             // create Backdrop image swapper
-            //backdrop = new ImageSwapper();
-            //backdrop.ImageResource.Delay = 250;
-            //backdrop.Active = false;
+            backdrop = new ImageSwapper();
+            backdrop.ImageResource.Delay = 250;
             backdrop.Active = true;
-            //backdrop.PropertyOne = " ";
+            //if (MesFilms.conf.StrFanart)
+            //    backdrop.Active = true;
+            //else
+            //    backdrop.Active = false;
             //backdrop.PropertyOne = "#myfilms.fanart";
             //backdrop.PropertyTwo = "#myfilms.fanart2";
-            //backdrop.LoadingImage = loadingImage;
+            //backdrop.LoadingImage = loadingImage; --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
 
             // create Cover image swapper
             //cover = new AsyncImageResource();
             //cover.Property = "#myfilms.coverimage";
             //cover.Delay = 250;
+            cover.Filename = "";
 
             // (re)link our backdrop image controls to the backdrop image swapper
             backdrop.GUIImageOne = ImgFanart;
             backdrop.GUIImageTwo = ImgFanart2;
-            //backdrop.LoadingImage = loadingImage;
+            //backdrop.LoadingImage = loadingImage;  --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
 
-            //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge
+            //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge ->> This fucked up the fanart swapper !!!!!
             //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge
             //GUIPropertyManager.SetProperty("#myfilms.Fanart", " ");
             //GUIPropertyManager.SetProperty("#myfilms.Fanart2", " ");
@@ -4059,8 +4069,8 @@ namespace MesFilms
                     string wdirector = string.Empty;
                     try { wdirector = (string)MesFilms.r[i]["Director"]; }
                     catch { }
-                    //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
-                    System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
+                    System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
+                    //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
                 }
             }
         }
