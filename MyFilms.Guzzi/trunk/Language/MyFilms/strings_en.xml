@@ -68,6 +68,14 @@
     <String id="1079867">Person's Selection</String>
     <String id="1079868">Actor</String>
     <String id="1079869">Director</String>
+    <String id="1079872">First Title</String>
+    <String id="1079873">Last Title</String>
+    <String id="1079874">Delete Fanart (current Movie)</String>
+    <String id="1079875">File '{0}' doestn't exist !</String>
+    <String id="1079876">Directory '{0}' doestn't exist !</String>
+    <String id="1079877">Please check your settings !</String>
+    <String id="1079878">Are you sure ?</String>
+    <String id="1079879">Infos for related Persons</String>
     <String id="10798610">Movies as </String>
     <String id="10798611">Function Selection for </String>
     <String id="10798612">Producer</String>
@@ -82,6 +90,8 @@
     <String id="1079872">First</String>
     <String id="1079873">Last</String>
     <String id="1079874">Delete Fanart</String>
+    <String id="10798625">No result found for this value !</String>
+    <String id="10798626">=> '{1}' ({0})</String>
     <String id="1079875">File {0} doesn't exist</String>
     <String id="1079876">Directory {0} doesn't exist</String>
     <String id="1079877">Please Verify your Setup</String>
@@ -91,6 +101,7 @@
     <String id="10798642">Update Movie Data by Property</String>
     <String id="10798643">Select Property for Updating</String>
     <String id="10798644">Wrong Input Format. Please retry.</String>
+    <String id="10798645">Global Search (areas)</String>
     <String id="10798650">Number</String>
     <String id="10798651">Checked</String>
     <String id="10798652">MediaLabel</String>
@@ -124,5 +135,19 @@
     <String id="10798680">Size</String>
     <String id="10798681">Disks</String>
     <String id="10798682">Picture</String>
+    <String id="10798691">Global Filter "Only movies with Trailer" ({0})</String>
+    <String id="10798692">Global Filter "Only movies with minimumrating" ({0})</String>
+    <String id="10798693">Change value for "minimumrating" (current: '{0}')</String>
+    <String id="10798694">Seach Trailer - all Movies (local)</String>
+    <String id="10798710">Play Trailer</String>
+    <String id="10798719">Load Moviesinfos (nfo-File, local, add missing infos)</String>
+    <String id="10798720">Load Moviesinfos (nfo-File, local, replace all infos)</String>
+    <String id="10798721">Load Moviesinfos from ant-file (local)</String>
+    <String id="10798722">Store Moviesinfos in ant-file (local)</String>
+    <String id="10798723">Search Trailer (local)</String>
+    <String id="10798724">Load Trailer (online)</String>
+    <String id="10798725">Delete Trailer (current Movie)</String>
+    <String id="10798726">Search Trailers - all Movies (local)</String>
+    <String id="10798731">Person Infos (IMDB)</String>
   </Section>
 </Language>

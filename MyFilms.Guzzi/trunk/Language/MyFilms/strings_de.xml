@@ -75,6 +75,7 @@
     <String id="1079876">Verzeichnis '{0}' existiert nicht !</String>
     <String id="1079877">Bitte überprüfen Sie ihre Einstellungen !</String>
     <String id="1079878">Wollen Sie diese Auswahl treffen ?</String>
+    <String id="1079879">Infos zu beteiligten Personen</String>
     <String id="10798610">Filme als </String>
     <String id="10798611">Wähle Funktion für </String>
     <String id="10798612">Produzent</String>
@@ -147,5 +148,6 @@
     <String id="10798724">Lade Trailer (online)</String>
     <String id="10798725">Lösche  Trailer (aktueller Film)</String>
     <String id="10798726">Suche Trailer - alle Filme (lokal)</String>
+    <String id="10798731">Personen Infos (IMDB)</String>
   </Section>
 </Language>

@@ -189,7 +189,7 @@
 					<ondown>102</ondown>
 					<onup>105</onup>
 					<label>208</label>
-				</control> -->
+				</control>
 				<control>
 					<type>button</type>
 					<description>Back</description>
@@ -198,12 +198,21 @@
 					<ondown>109</ondown>
 					<onright>101</onright>
 					<label>712</label>
+				</control> -->
+				<control>
+					<type>button</type>
+					<description>Back</description>
+					<id>108</id>
+					<onup>10014</onup>
+					<ondown>109</ondown>
+					<onright>101</onright>
+					<label>Personen Infos</label>
 				</control>
 				<control>
 					<type>button</type>
 					<description>Play Trailer</description>
 					<id>109</id>
-					<onup>102</onup>
+					<onup>108</onup>
 					<ondown>107</ondown>
 					<onright>101</onright>
 					<label>Spiele Trailer</label>
@@ -308,7 +317,7 @@
 					<label>TV-Serien</label>
 					<onright>101</onright>
 					<onup>10013</onup>
-					<ondown>102</ondown>
+					<ondown>108</ondown>
 				</control>
 
 <!-- End - Additional Buttons for Links to other Plugins -->
