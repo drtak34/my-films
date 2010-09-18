@@ -39,7 +39,7 @@ using MediaPortal.GUI.Library;
 using SQLite.NET;
 using MediaPortal.Configuration;
 using NewStringLib;
-//using Cornerstone.MP;
+using Cornerstone.MP;
 using System.Xml;
 using System.Linq;
 using MesFilms.MyFilms;
@@ -87,6 +87,7 @@ namespace MesFilms
             CTRL_Genre = 2062,
             CTRL_Format = 2069,
             CTRL_ImgDD = 2072,
+            CTRL_ActorMultiThumb = 3333,
         }
         [SkinControlAttribute((int)Controls.CTRL_BtnMaj)]
         protected GUIButtonControl BtnMaj = null;
@@ -119,7 +120,10 @@ namespace MesFilms
         [SkinControlAttribute(1033)]
         protected GUIFadeLabel TxtItem2 = null;
         [SkinControlAttribute(1034)]
-        protected GUIFadeLabel TxtItem3 = null; 
+        protected GUIFadeLabel TxtItem3 = null;
+        [SkinControlAttribute((int)Controls.CTRL_ActorMultiThumb)]
+        protected GUIMultiImage ActorMultiThumb = null;
+
         static string wzone = null;
         int StrMax = 0;
         public const int ID_MesFilms = 7986;
@@ -220,6 +224,8 @@ namespace MesFilms
 
                     wGetID = GetID;
                     GUIControl.ShowControl(GetID, 35);
+                    // ToDo: Should be unhidden, if ActorThumbs are implemented
+                    GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
                     g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
@@ -1853,6 +1859,8 @@ namespace MesFilms
                 file = "";
             if (!System.IO.File.Exists(file))
                 file = MesFilms.conf.DefaultCover;
+            
+            //Should not Disable because of SpeedThumbs - Not working here .....
             GUIPropertyManager.SetProperty("#myfilms.picture", file);
             // ToDo: Add for ImageSwapper Coverart (coverImage)
             //cover.Filename = file;
@@ -1948,9 +1956,15 @@ namespace MesFilms
                     wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
             }
             if (ImgFanartDir != null)
+            {
                 wfanart = Search_Fanart(wtitle, false, "dir", false, file, string.Empty);
+                Log.Debug("MesFilm (afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+            }
             else
+            {
                 wfanart = Search_Fanart(wtitle, false, "file", false, file, string.Empty);
+                Log.Debug("MesFilm (afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+            }
 
             if (wfanart[0] == " ")
             {

@@ -610,8 +610,10 @@ namespace MesFilms.Actors
                 //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
                 //backdrop.Active = false;
                 MesFilmsDetail.Load_Detailed_DB(0, false);
-                ImgLstFilm.SetFileName("#myfilms.picture");
-                ImgLstFilm2.SetFileName("#myfilms.picture");
+
+                // Disabled because replaced by SpeedLoader
+                //ImgLstFilm.SetFileName("#myfilms.picture");
+                //ImgLstFilm2.SetFileName("#myfilms.picture");
                 //affichage_rating(0);
             }
             GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count.ToString() + " " + GUILocalizeStrings.Get(127));
