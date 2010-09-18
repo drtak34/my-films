@@ -44,6 +44,11 @@ using System.Xml;
 using System.Linq;
 using MesFilms.MyFilms;
 using Grabber;
+using MediaPortal.Profile;
+using System.Net;
+using MesFilms.WakeOnLan;
+//using TvControl;
+//using System.Net;
 
 namespace MesFilms
 {
@@ -2239,6 +2244,25 @@ namespace MesFilms
                 RunProgram(MesFilms.conf.CmdExe, MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.CmdPar].ToString());
             if (g_Player.Playing)
                 g_Player.Stop();
+
+            // Guzziu: Added WOL to start remote host before playing the files
+
+            //Make sure that we have valid hostname for the TV server
+            SetRemoteControlHostName();
+
+            //Wake up the TV server, if required
+            HandleWakeUpNas();
+            if (true)
+            {
+                GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                dlgOknas.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                dlgOknas.SetLine(1, MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString());//video title
+                dlgOknas.SetLine(2, "Starte NAS Server, bitte warten...");
+                dlgOknas.DoModal(GetID);
+                Log.Info("MyFilms: Launched HandleWakeUpNas() to start movie'" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "'");
+                return;
+            }
+            
             // search all files
             ArrayList newItems = new ArrayList();
             bool NoResumeMovie = true;
@@ -3823,6 +3847,157 @@ namespace MesFilms
             }
 
         }
+
+        private static void SetRemoteControlHostName()
+        {
+            string hostName;
+
+            // ToDo: Here should the config come from MyFilms Plugin itself - or from mediaportal.xml
+            using (Settings xmlreader = new MediaPortal.Profile.MPSettings())
+            {
+                hostName = xmlreader.GetValueAsString("nas", "hostname", "");
+                if (string.IsNullOrEmpty(hostName) || hostName == "localhost")
+                {
+                    try
+                    {
+                        hostName = Dns.GetHostName();
+
+                        Log.Info("MyFilms (SetRemoteControlHostName) : No valid hostname specified in mediaportal.xml, section 'nas' !");
+                        xmlreader.SetValue("tvservice", "hostname", hostName);
+                        hostName = "localhost";
+                        Settings.SaveCache();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Info("MyFilms (SetRemoteControlHostName) : Error resolving hostname - {0}", ex.Message);
+                        return;
+                    }
+                }
+            }
+            //RemoteControl.HostName = hostName;
+
+            Log.Info("MyFilms (SetRemoteControlHostName) : nas server :{0}", hostName);
+        }
+
+        private static void HandleWakeUpNas()
+        {
+            string hostName;
+            bool isWakeOnLanEnabled;
+            bool isAutoMacAddressEnabled;
+            int intTimeOut;
+            String macAddress;
+            byte[] hwAddress;
+
+            //Get settings from MediaPortal.xml
+            using (Settings xmlreader = new MPSettings())
+            //using (Settings xmlreader = new MediaPortal.Profile.MPSettings())
+            {
+                hostName = xmlreader.GetValueAsString("nas", "hostname", "");
+                isWakeOnLanEnabled = xmlreader.GetValueAsBool("nas", "isWakeOnLanEnabled", false);
+                isAutoMacAddressEnabled = xmlreader.GetValueAsBool("nas", "isAutoMacAddressEnabled", false);
+                intTimeOut = xmlreader.GetValueAsInt("nas", "WOLTimeOut", 10);
+            }
+
+            //isWakeOnlanEnabled
+            if (isWakeOnLanEnabled)
+            {
+                //Check for multi-seat installation
+                //if (!IsSingleSeat())
+                if (true)
+                    {
+                    WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
+
+                    //isAutoMacAddressEnabled
+                    if (isAutoMacAddressEnabled)
+                    {
+                        IPAddress ipAddress = null;
+
+                        //Check if we already have a valid IP address stored in RemoteControl.HostName,
+                        //otherwise try to resolve the IP address
+                        if (!IPAddress.TryParse(hostName, out ipAddress))
+                        {
+                            //Get IP address of the NAS server
+                            try
+                            {
+                                IPAddress[] ips;
+
+                                ips = Dns.GetHostAddresses(hostName);
+
+                                Log.Debug("MyFilms (HandleWakeUpNas) : WOL - GetHostAddresses({0}) returns:", hostName);
+
+                                foreach (IPAddress ip in ips)
+                                {
+                                    Log.Debug("    {0}", ip);
+                                }
+
+                                //Use first valid IP address
+                                ipAddress = ips[0];
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error("MyFilms (HandleWakeUpNas) : WOL - Failed GetHostAddress - {0}", ex.Message);
+                            }
+                        }
+
+                        //Check for valid IP address
+                        if (ipAddress != null)
+                        {
+                            //Update the MAC address if possible
+                            hwAddress = wakeOnLanManager.GetHardwareAddress(ipAddress);
+
+                            if (wakeOnLanManager.IsValidEthernetAddress(hwAddress))
+                            {
+                                Log.Debug("MyFilms (HandleWakeUpNas) : WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
+                                          , hwAddress[0], hwAddress[1], hwAddress[2], hwAddress[3], hwAddress[4], hwAddress[5]);
+
+                                //Store MAC address
+                                macAddress = BitConverter.ToString(hwAddress).Replace("-", ":");
+
+                                Log.Debug("MyFilms (HandleWakeUpNas) : WOL - Store MAC address: {0}", macAddress);
+
+                                using (
+                                  MediaPortal.Profile.Settings xmlwriter =
+                                    new MediaPortal.Profile.MPSettings())
+                                {
+                                    xmlwriter.SetValue("nas", "macAddress", macAddress);
+                                }
+                            }
+                        }
+                    }
+
+                    //Use stored MAC address
+                    using (Settings xmlreader = new MPSettings())
+                    {
+                        macAddress = xmlreader.GetValueAsString("nas", "macAddress", null);
+                    }
+
+                    Log.Debug("MyFilms (HandleWakeUpNas) : WOL - Use stored MAC address: {0}", macAddress);
+
+                    try
+                    {
+                        hwAddress = wakeOnLanManager.GetHwAddrBytes(macAddress);
+
+                        //Finally, start up the TV server
+                        Log.Info("MyFilms (HandleWakeUpNas) : WOL - Start the NAS server");
+
+                        if (wakeOnLanManager.WakeupSystem(hwAddress, hostName, intTimeOut))
+                        {
+                            Log.Info("MyFilms (HandleWakeUpNas) : WOL - The NAS server started successfully!");
+                        }
+                        else
+                        {
+                            Log.Error("MyFilms (HandleWakeUpNas) : WOL - Failed to start the NAS server");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("MyFilms (HandleWakeUpNas) : WOL - Failed to start the NAS server - {0}", ex.Message);
+                    }
+                }
+            }
+        }
+
+
     }
 
 }

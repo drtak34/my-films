@@ -170,6 +170,7 @@ namespace MesFilms
         public bool MovieScrobbling = false;
         public int actorID = 0;
         public static string CurrentMovie;
+        //public static string CurrentFanartDir;
         #endregion
         #region events
   
@@ -185,17 +186,6 @@ namespace MesFilms
             //
             // TODO: Add constructor logic here
             //
-
-            // create Backdrop image swapper
-            backdrop = new ImageSwapper();
-            backdrop.ImageResource.Delay = 250;
-            backdrop.PropertyOne = "#myfilms.fanart";
-            //backdrop.PropertyTwo = "#myfilms.fanart2";
-
-            // create Cover image swapper
-            cover = new AsyncImageResource();
-            cover.Property = "#myfilms.coverimage";
-            cover.Delay = 250;
         }
         #region ISetupForm Members
 
@@ -289,10 +279,17 @@ namespace MesFilms
             //backdrop.GUIImageTwo = ImgFanart2;
             //backdrop.LoadingImage = loadingImage;
 
-            // Setup Random Fanart Timer
-            m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
-            m_bFanartTimerDisabled = true;
-            
+            // create Backdrop image swapper
+            backdrop = new ImageSwapper();
+            backdrop.ImageResource.Delay = 250;
+            backdrop.PropertyOne = "#myfilms.fanart";
+            //backdrop.PropertyTwo = "#myfilms.fanart2";
+
+            // create Cover image swapper
+            cover = new AsyncImageResource();
+            cover.Property = "#myfilms.coverimage";
+            cover.Delay = 250;
+
             return Load(GUIGraphicsContext.Skin + @"\MesFilms.xml");
         }
 
@@ -305,6 +302,9 @@ namespace MesFilms
             backdrop.GUIImageTwo = ImgFanart2;
             //backdrop.LoadingImage = loadingImage;  --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
 
+            // Setup Random Fanart Timer
+            m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
+            m_bFanartTimerDisabled = true;
             // Enable Random Fanart Timer
             m_FanartTimer.Change(0,10000);
             m_bFanartTimerDisabled = false;
@@ -510,6 +510,11 @@ namespace MesFilms
                     // added from MoPic
                     backdrop.Filename = string.Empty;
                     cover.Filename = string.Empty;
+
+                    //Disable FanartTimer - already done on pagedestroy ...
+                    //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                    //m_bFanartTimerDisabled = true;
+
                     return true; // fall through to call base class?
 
                 case GUIMessage.MessageType.GUI_MSG_CLICKED:
@@ -802,6 +807,14 @@ namespace MesFilms
                                 { CurrentMovie = ""; }
                                 Log.Debug("MyFilms - PrepareThumbView: CurrentMovie = '" + CurrentMovie + "'");
                                 //End: Added for MovieThumbs
+
+                                //Start: Added for Timed Imagerswapper in Main View
+                                //CurrentFanartDir = "";
+                                //try
+                                //{ CurrentFanartDir = (string)MesFilms.r[facadeView.SelectedListItem.ItemId][MesFilms.conf.StrStorage].ToString().Trim(); }
+                                //catch
+                                //{ CurrentFanartDir = ""; }
+                                //Log.Debug("MyFilms - Set CurrentFanartDir: = '" + CurrentFanartDir + "'");
 
                                 GUIWindowManager.ActivateWindow(ID_MesFilmsDetail);
                             }
@@ -1226,6 +1239,13 @@ namespace MesFilms
                 }
                 Log.Debug("MesFilm (affichage_Lstdetail): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 backdrop.Filename = wfanart[0];
+
+                //try    
+                //    { CurrentFanartDir  = System.IO.Path.GetDirectoryName(wfanart[0]); }
+                //catch
+                //    { CurrentFanartDir = ""; }
+                //Log.Debug("MyFilmsDetails (SearchtrailerLocal) Set CurrentFanartDir to : '" + CurrentFanartDir.ToString() + "'");
+
                 cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
                 if (!backdrop.Active)
                     backdrop.Active = true;
@@ -4196,14 +4216,17 @@ namespace MesFilms
 
         private void FanartTimerEvent(object state)
         {
-            Log.Debug("MyFilms (FanartTimerEvent): FanartTimerEvent triggered !!!");
+            //Log.Debug("MyFilms (FanartTimerEvent): FanartTimerEvent triggered !!!");
             //Log.Debug("MyFilms (FanartTimerEvent): Current Setting of Backdrop: '" + backdrop.Filename.ToString() + "'");
             // ToDo: Load new Fanart here !!!
             //if ((CurrentMovie.Length > 0) && (backdrop.Filename.Length > 0) && (backdrop.Active == true))
-            if (backdrop != null)
+            if (backdrop.Filename != null)
                 {
-                //loadFanart(CurrentMovie);
-                Log.Debug("MyFilms (FanartTimerEvent): loadFanart triggered !");
+                Log.Debug("MyFilms (FanartTimerEvent): loadFanart triggered for '" + facadeView.SelectedListItem.Label + "' !");
+                //Log.Debug("MyFilms (FanartTimerEvent): loadFanart triggered for '" + CurrentMovie.ToString() + "' !");
+                //Log.Debug("MyFilms (FanartTimerEvent): loadFanart CurrentFanartDir '" + CurrentFanartDir.ToString() + "' !");
+                //Disabled, because it's still not working ...
+                //loadFanart();
             }
             else
             {
@@ -4217,7 +4240,7 @@ namespace MesFilms
         //Fanart currSeriesFanart = null;
 
         //private bool loadFanart(DBTable item)
-        private bool loadFanart(string activemovie)
+        private bool loadFanart()
         {
             if (backdrop == null)
             {
@@ -4227,14 +4250,36 @@ namespace MesFilms
             }
 
             string fanart = "";
+            string fanartdir = "";
+            string wtitle2 = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
+
+            // Get FanartDirectory
+            if (!(MesFilms.conf.StrTitle1 == "OriginalTitle"))
+            {
+                if (MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] != null && MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+                    wtitle2 = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+            }
+
+            if (wtitle2.Contains(MesFilms.conf.TitleDelim))
+                wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
+            Log.Debug("MyFilms (FindFanart) - wtitle name = '" + wtitle2 + "'");
+            //wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
+
+            fanartdir = MesFilms.conf.StrPathFanart.ToString() + "\\{" + wtitle2 + "}";
+            Log.Debug("MyFilms (FindFanart) - fanartdir = '" + fanartdir.ToString() + "'");
+            
+            
+            
             try
             {
-                Log.Debug("MyFilms (loadFanart): Load Fanart by Timer for activemovie: '" + activemovie + "'");
+                //Log.Debug("MyFilms (loadFanart): Load Fanart by Timer for activemovie: '" + "'");
                 //Fanart fanart = currSeriesFanart;
                 //DBSeries series = item as DBSeries;
 
                 // Get a Fanart for selected movie
-                FindFanart();
+                
+                
+                //FindFanart(); // first modify the method before calling it here ....
                 fanart = "test";
 
                 if (fanart == null)
@@ -4250,10 +4295,8 @@ namespace MesFilms
 
                 // Assign Fanart filename to Image Loader
                 // Will display fanart in backdrop or reset to default background                
-                backdrop.Filename = "test";
+                // backdrop.Filename = "test";
                 Log.Debug("MyFilms (loadFanart): Loaded fanart is: '" + backdrop.Filename.ToString() + "'");
-                return true;
-
                 return fanartSet = true;
             }
             catch (Exception ex)
@@ -4263,6 +4306,98 @@ namespace MesFilms
             }
         }
         
+        private bool FindFanart()
+        {
+            Log.Debug("MyFilms (FindFanart): Started FanartSearch");
+            if (MesFilms.conf.StrFanart == true)
+            {};
+            string[] wfanart = new string[2];
+            wfanart[0] = " ";
+            wfanart[1] = " ";
+            //Search Fanarts
+            string wtitle2 = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
+            Log.Debug("MyFilms (FindFanart) - wtitle old = '" + wtitle2 + "'");
+            //Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
+            if (!(MesFilms.conf.StrTitle1 == "OriginalTitle"))
+                {
+                    if (MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] != null && MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+                        wtitle2 = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                }
+
+            if (wtitle2.Contains(MesFilms.conf.TitleDelim))
+                wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
+            Log.Debug("MyFilms (FindFanart) - wtitle name = '" + wtitle2 + "'");
+            wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
+            Log.Debug("MyFilms (FindFanart) - wtitle filename = '" + wtitle2 + "'");
+            Log.Debug("MyFilms (FindFanart) - MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
+
+            string safeName = string.Empty;
+            safeName = MesFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
+            //Log.Debug("MyFilms (FindFanart) - Directory (safename) = '" + safeName.ToString() + "'");
+            FileInfo wfile = new FileInfo(safeName + "\\{" + wtitle2 + "}.jpg");
+            //Log.Debug("MyFilms (FindFanart) - FullPath (safename file&ext) = '" + wfile.ToString() + "'");
+
+            // Single File
+            //wfanart[0] = safeName + "\\{" + wtitle2 + "}.jpg";
+            //wfanart[1] = "file";
+
+            if (System.IO.Directory.Exists(safeName))
+            {
+                //file
+                if (System.IO.Directory.GetFiles(safeName).Length > 0)
+                    {
+                        wfanart[0] = System.IO.Directory.GetFiles(safeName)[0].ToString();
+                        wfanart[1] = "file";
+                    }
+                //dir    
+                if (System.IO.Directory.GetFiles(safeName).Length > 0)
+                    {
+                        wfanart[0] = safeName;
+                        wfanart[1] = "dir";
+                    }
+            }
+            else
+            {
+                try { System.IO.Directory.CreateDirectory(safeName); }
+                catch { }
+            }
+
+            ArrayList result = new ArrayList();
+            ArrayList resultsize = new ArrayList();
+            string[] filesfound = new string[100];
+            Int64[] filesfoundsize = new Int64[100];
+            int filesfoundcounter = 0;
+            Int64 wsize = 0; // Temporary Filesize detection
+            //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
+            string[] files = Directory.GetFiles(MesFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}", "*.*", SearchOption.AllDirectories);
+            foreach (string filefound in files)
+            {
+                Log.Debug("MyFilms (FanartSearchLocal) - Processing FilesFound: '" + filefound.ToString() + "'");
+                if (Utils.IsPicture(filefound))
+                {
+                    wsize = new System.IO.FileInfo(filefound).Length;
+                    result.Add(filefound);
+                    resultsize.Add(wsize);
+                    filesfound[filesfoundcounter] = filefound;
+                    filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                    filesfoundcounter = filesfoundcounter + 1;
+                    Log.Debug("MyFilms (FanartSearchLocal) - FilesFound in FanartDirectory: Size-Name '" + wsize.ToString() + "' - Name '" + filefound + "'");
+                }
+            }
+
+            Log.Debug("MesFilm (FindFanart): Results for wfanart[1,2]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+            if (wfanart[0] == " ")
+            {
+                //No Fanart available ...
+                return false;
+            }
+            else
+            {
+                //Choose random fanart and return it ....
+                return false;
+            }
+        }
+
         private void DisableFanart()
         {
             // Disable Random Fanart Timer
@@ -4273,70 +4408,6 @@ namespace MesFilms
             if (backdrop.Active) backdrop.Active = false;
             backdrop.Filename = "";
             Log.Debug("MyFilms (DisableFanart): Fanart disabled !");
-        }
-
-        private void FindFanart()
-        {
-            Log.Debug("MyFilms (FindFanart): Started FanartSearch");
-            //Search Coverfile "file"
-            string file = "false";
-            if (MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString().Length > 0)
-            {
-                if ((MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString().IndexOf(":\\") == -1) && (MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString().Substring(0, 2) != "\\\\"))
-                    file = MesFilms.conf.StrPathImg + "\\" + MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString();
-                else
-                    file = MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString();
-            }
-            else
-                file = "";
-            if (!System.IO.File.Exists(file))
-                file = MesFilms.conf.DefaultCover;
-            
-            //Search Fanarts
-            string[] wfanart = new string[2];
-            string wtitle = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
-			//Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
-            if (!(MesFilms.conf.StrTitle1 == "OriginalTitle"))
-            {
-
-                if (MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] != null && MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-                    wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-            }
-
-            //if (ImgFanartDir != null)
-            {
-                wfanart = MesFilmsDetail.Search_Fanart(wtitle, false, "dir", false, file, string.Empty);
-                Log.Debug("MesFilm (afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-            }
-            //else
-            {
-                wfanart = MesFilmsDetail.Search_Fanart(wtitle, false, "file", false, file, string.Empty);
-                Log.Debug("MesFilm (afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-            }
-
-
-            if (wfanart[0] == " ")
-            {
-                //No Fanart available ...
-            }
-            else
-            {
-                if (wfanart[1] == "dir")
-                {
-                    //ImgFanartDir.TexturePath = wfanart[0];
-                    //ImgFanartDir.PreAllocResources();
-                    //ImgFanartDir.AllocResources();
-                    //GUIControl.HideControl(GetID, (int)Controls.CTRL_Fanart);
-                    //GUIControl.ShowControl(GetID, (int)Controls.CTRL_FanartDir);
-                }
-                else
-                {
-                    //ImgFanart.SetFileName(wfanart[0]);
-                    //GUIPropertyManager.SetProperty("#myfilms.fanart", wfanart[0].ToString()); 
-                    //GUIControl.ShowControl(GetID, (int)Controls.CTRL_Fanart);
-                }
-            }
-
         }
 
         //-------------------------------------------------------------------------------------------
@@ -4365,9 +4436,6 @@ namespace MesFilms
             string file = MesFilms.r[Index][MesFilms.conf.StrTitle1].ToString();
             string titlename = MesFilms.r[Index][MesFilms.conf.StrTitle1].ToString();
             string titlename2 = MesFilms.r[Index][MesFilms.conf.StrTitle2].ToString();
-            //string file = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
-            //string titlename = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString();
-            //string titlename2 = MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2].ToString();
             string directoryname = "";
             string movieName = "";
             Int64 wsize = 0; // Temporary Filesize detection
