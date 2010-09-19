@@ -50,8 +50,6 @@ namespace MesFilms
             CTRL_BtnReturn = 10102,
             CTRL_Fanart = 1000,
             CTRL_FanartDir = 1001,
-            CTRL_MovieThumbs = 10201,
-            CTRL_MovieThumbsDir = 10202,
             CTRL_MovieThumb1 = 10301,
             CTRL_MovieThumb2 = 10302,
             CTRL_MovieThumb3 = 10303,
@@ -79,10 +77,6 @@ namespace MesFilms
         protected GUIImage ImgFanart = null;
         [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
         protected GUIMultiImage ImgFanartDir = null;
-        //[SkinControlAttribute((int)Controls.CTRL_MovieThumbs)]
-        //protected GUIImage ImgMovieThumbs = null;
-        //[SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
-        //protected GUIMultiImage ImgMovieThumbsDir = null;
         [SkinControlAttribute((int)Controls.CTRL_MovieThumb1)]
         protected GUIImage ImgThumb1 = null;
         [SkinControlAttribute((int)Controls.CTRL_MovieThumb2)]
@@ -116,12 +110,6 @@ namespace MesFilms
         [SkinControlAttribute((int)Controls.CTRL_MovieThumb16)]
         protected GUIImage ImgThumb16 = null;
         
-        [SkinControl(20)]
-        protected GUITextScrollUpControl tbPlotArea = null;
-        [SkinControl(21)]
-        protected GUIImage imgCoverArt = null;
-        [SkinControl(22)]
-        protected GUITextControl tbTextArea = null;
 
         public const int ID_MesFilms = 7986;
         public int ID_MesFilmsDetail = 7987;
@@ -196,15 +184,15 @@ namespace MesFilms
                     //directoryname
                     moviename = MesFilms.CurrentMovie.Substring(MesFilms.CurrentMovie.LastIndexOf(";") + 1);
                     Log.Debug("MyFilmsThumbs (GetThumbDirectory) Splittet Mediadirectoryname: '" + moviename.ToString() + "'");
+
                     try
                     { directoryname = System.IO.Path.GetDirectoryName(moviename); }
                     catch
                     { directoryname = ""; }
+
                     Log.Debug("MyFilmsThumbs (GetThumbDirectory) Get Thumbdirectoryname: '" + directoryname.ToString() + "'");
                     
                     LoadThumbs(directoryname);
-                    //LoadThumbs(facadeView.SelectedListItem.ItemId);
-                    //LoadThumbs("\\\\XMS-GMI-01\\Movies - Horror\\100 Tears (DVD-DivX)\\extrathumbs\\");
                     Log.Debug("MyFilmsThumbs: PropertyLoaded !");
                     MesFilms.conf.LastID = MesFilms.ID_MesFilmsThumbs;
                     return true;
@@ -278,12 +266,9 @@ namespace MesFilms
         {
             MovieThumbPath = MovieThumbPath + "\\extrathumbs\\";
             string defaultthumb = "\\\\xvs-gmi-fs\\media-server\\AMC-Appl\\AMC-DefaultCover\\videonotavailable.jpg";
-            Log.Debug("defaultthumb: '" + defaultthumb + "'");
+            Log.Debug("MyFilms (LoadThumbs) : Set default Thumb: '" + defaultthumb + "'");
             
-            //string MovieThumbPath = "\\\\XMS-GMI-01\\Movies - Horror\\100 Tears (DVD-DivX)\\extrathumbs\\";
             //string strDir = MesFilms.conf.StrDirStorActorThumbs;
-
-            
 
             string thumb1 = MovieThumbPath + "thumb1.jpg";
             Log.Debug("thumb1: '" + thumb1 + "'");
