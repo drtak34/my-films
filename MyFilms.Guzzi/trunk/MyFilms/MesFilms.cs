@@ -306,7 +306,8 @@ namespace MesFilms
             m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
             m_bFanartTimerDisabled = true;
             // Enable Random Fanart Timer
-            m_FanartTimer.Change(0,10000);
+            // Enable to use threaded timer
+            //m_FanartTimer.Change(0,10000);
             m_bFanartTimerDisabled = false;
 
             Log.Debug("OnPageLoad() completed.");
@@ -1297,8 +1298,8 @@ namespace MesFilms
                 // Disabled because of SpeedThumbs
                 //GUIPropertyManager.SetProperty("#myfilms.picture", MesFilms.conf.FileImage.ToString());
                 cover.Filename = MesFilms.conf.FileImage.ToString();
-                // Added to immediately change Fanart
-                m_FanartTimer.Change(0, 10000); // 10000 = 10 sek.
+                // Added to immediately change Fanart - activate to enable timer and reset it !
+                //m_FanartTimer.Change(0, 10000); // 10000 = 10 sek.
 
                 XmlConfig XmlConfig = new XmlConfig();
                 string logo_type = string.Empty;

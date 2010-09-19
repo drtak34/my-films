@@ -2252,7 +2252,7 @@ namespace MesFilms
 
             //Wake up the TV server, if required
             HandleWakeUpNas();
-            if (true)
+            if (false)
             {
                 GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                 dlgOknas.SetHeading(GUILocalizeStrings.Get(107986));//my films

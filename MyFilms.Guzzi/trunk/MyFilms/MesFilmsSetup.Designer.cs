@@ -116,15 +116,8 @@ namespace MesFilms
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Selected_Enreg = new System.Windows.Forms.TextBox();
             this.AntFilterComb = new System.Windows.Forms.ComboBox();
-            this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
-            this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
-            this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
             this.AntFilterSign2 = new System.Windows.Forms.ComboBox();
             this.AntFilterSign1 = new System.Windows.Forms.ComboBox();
-            this.AntFilterItem4 = new System.Windows.Forms.ComboBox();
-            this.AntFilterText4 = new System.Windows.Forms.TextBox();
-            this.AntFilterItem3 = new System.Windows.Forms.ComboBox();
-            this.AntFilterText3 = new System.Windows.Forms.TextBox();
             this.AntFilterItem2 = new System.Windows.Forms.ComboBox();
             this.AntFilterText2 = new System.Windows.Forms.TextBox();
             this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
@@ -262,6 +255,13 @@ namespace MesFilms
             this.AntSearchText2 = new System.Windows.Forms.TextBox();
             this.AntSearchItem1 = new System.Windows.Forms.ComboBox();
             this.AntSearchText1 = new System.Windows.Forms.TextBox();
+            this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
+            this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
+            this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
+            this.AntFilterItem4 = new System.Windows.Forms.ComboBox();
+            this.AntFilterText4 = new System.Windows.Forms.TextBox();
+            this.AntFilterItem3 = new System.Windows.Forms.ComboBox();
+            this.AntFilterText3 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.label10 = new System.Windows.Forms.Label();
@@ -340,6 +340,16 @@ namespace MesFilms
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.btnTrailer = new System.Windows.Forms.Button();
+            this.PathStorageTrailer = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.AntStorageTrailer = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.SearchSubDirsTrailer = new System.Windows.Forms.CheckBox();
             this.groupBox6.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -374,6 +384,9 @@ namespace MesFilms
             this.Picture.SuspendLayout();
             this.Logos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            this.groupBox23.SuspendLayout();
+            this.groupBox24.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -2053,14 +2066,64 @@ namespace MesFilms
             this.AntSearchText1.Size = new System.Drawing.Size(173, 20);
             this.AntSearchText1.TabIndex = 37;
             // 
+            // AntFilterMinRating
+            // 
+            this.AntFilterMinRating.Location = new System.Drawing.Point(0, 0);
+            this.AntFilterMinRating.Name = "AntFilterMinRating";
+            this.AntFilterMinRating.Size = new System.Drawing.Size(121, 21);
+            this.AntFilterMinRating.TabIndex = 0;
+            // 
+            // AntFilterSign4
+            // 
+            this.AntFilterSign4.Location = new System.Drawing.Point(0, 0);
+            this.AntFilterSign4.Name = "AntFilterSign4";
+            this.AntFilterSign4.Size = new System.Drawing.Size(121, 21);
+            this.AntFilterSign4.TabIndex = 0;
+            // 
+            // AntFilterSign3
+            // 
+            this.AntFilterSign3.Location = new System.Drawing.Point(0, 0);
+            this.AntFilterSign3.Name = "AntFilterSign3";
+            this.AntFilterSign3.Size = new System.Drawing.Size(121, 21);
+            this.AntFilterSign3.TabIndex = 0;
+            // 
+            // AntFilterItem4
+            // 
+            this.AntFilterItem4.Location = new System.Drawing.Point(0, 0);
+            this.AntFilterItem4.Name = "AntFilterItem4";
+            this.AntFilterItem4.Size = new System.Drawing.Size(121, 21);
+            this.AntFilterItem4.TabIndex = 0;
+            // 
+            // AntFilterText4
+            // 
+            this.AntFilterText4.Location = new System.Drawing.Point(0, 0);
+            this.AntFilterText4.Name = "AntFilterText4";
+            this.AntFilterText4.Size = new System.Drawing.Size(100, 20);
+            this.AntFilterText4.TabIndex = 0;
+            // 
+            // AntFilterItem3
+            // 
+            this.AntFilterItem3.Location = new System.Drawing.Point(0, 0);
+            this.AntFilterItem3.Name = "AntFilterItem3";
+            this.AntFilterItem3.Size = new System.Drawing.Size(121, 21);
+            this.AntFilterItem3.TabIndex = 0;
+            // 
+            // AntFilterText3
+            // 
+            this.AntFilterText3.Location = new System.Drawing.Point(0, 0);
+            this.AntFilterText3.Name = "AntFilterText3";
+            this.AntFilterText3.Size = new System.Drawing.Size(100, 20);
+            this.AntFilterText3.TabIndex = 0;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(676, 42);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(93, 13);
+            this.label10.Size = new System.Drawing.Size(98, 13);
             this.label10.TabIndex = 34;
-            this.label10.Text = "Version 5.0.0 beta";
+            this.label10.Text = "Version 5.1.0 alpha";
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label11
             // 
@@ -2089,6 +2152,7 @@ namespace MesFilms
             this.General.Controls.Add(this.Grabber);
             this.General.Controls.Add(this.Picture);
             this.General.Controls.Add(this.Logos);
+            this.General.Controls.Add(this.tabPage5);
             this.General.Location = new System.Drawing.Point(12, 66);
             this.General.Name = "General";
             this.General.SelectedIndex = 0;
@@ -2867,6 +2931,111 @@ namespace MesFilms
             this.textBox2.Size = new System.Drawing.Size(170, 20);
             this.textBox2.TabIndex = 17;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.groupBox24);
+            this.tabPage5.Controls.Add(this.groupBox23);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(747, 354);
+            this.tabPage5.TabIndex = 7;
+            this.tabPage5.Text = "Traileroptions";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // groupBox23
+            // 
+            this.groupBox23.Controls.Add(this.SearchSubDirsTrailer);
+            this.groupBox23.Controls.Add(this.btnTrailer);
+            this.groupBox23.Controls.Add(this.PathStorageTrailer);
+            this.groupBox23.Controls.Add(this.label34);
+            this.groupBox23.Location = new System.Drawing.Point(29, 30);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Size = new System.Drawing.Size(474, 104);
+            this.groupBox23.TabIndex = 72;
+            this.groupBox23.TabStop = false;
+            this.groupBox23.Text = "Trailer Searchpath (for registering trailers with movies)";
+            this.ToolTip1.SetToolTip(this.groupBox23, resources.GetString("groupBox23.ToolTip"));
+            // 
+            // btnTrailer
+            // 
+            this.btnTrailer.Enabled = false;
+            this.btnTrailer.Location = new System.Drawing.Point(430, 45);
+            this.btnTrailer.Name = "btnTrailer";
+            this.btnTrailer.Size = new System.Drawing.Size(32, 23);
+            this.btnTrailer.TabIndex = 70;
+            this.btnTrailer.Text = "...";
+            this.btnTrailer.UseVisualStyleBackColor = true;
+            // 
+            // PathStorageTrailer
+            // 
+            this.PathStorageTrailer.Enabled = false;
+            this.PathStorageTrailer.Location = new System.Drawing.Point(190, 47);
+            this.PathStorageTrailer.Name = "PathStorageTrailer";
+            this.PathStorageTrailer.Size = new System.Drawing.Size(234, 20);
+            this.PathStorageTrailer.TabIndex = 68;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(40, 50);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(94, 13);
+            this.label34.TabIndex = 69;
+            this.label34.Text = "Trailer Searchpath";
+            // 
+            // groupBox24
+            // 
+            this.groupBox24.Controls.Add(this.button1);
+            this.groupBox24.Controls.Add(this.AntStorageTrailer);
+            this.groupBox24.Controls.Add(this.label35);
+            this.groupBox24.Location = new System.Drawing.Point(29, 176);
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.Size = new System.Drawing.Size(474, 104);
+            this.groupBox24.TabIndex = 73;
+            this.groupBox24.TabStop = false;
+            this.groupBox24.Text = "ANT item for storing trailerinfos (borrower recommended)";
+            this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
+            // 
+            // button1
+            // 
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(430, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 23);
+            this.button1.TabIndex = 70;
+            this.button1.Text = "...";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // AntStorageTrailer
+            // 
+            this.AntStorageTrailer.Enabled = false;
+            this.AntStorageTrailer.Location = new System.Drawing.Point(190, 42);
+            this.AntStorageTrailer.Name = "AntStorageTrailer";
+            this.AntStorageTrailer.Size = new System.Drawing.Size(234, 20);
+            this.AntStorageTrailer.TabIndex = 68;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(40, 45);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(76, 13);
+            this.label35.TabIndex = 69;
+            this.label35.Text = "Trailer DB field";
+            // 
+            // SearchSubDirsTrailer
+            // 
+            this.SearchSubDirsTrailer.AutoSize = true;
+            this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 23);
+            this.SearchSubDirsTrailer.Name = "SearchSubDirsTrailer";
+            this.SearchSubDirsTrailer.Size = new System.Drawing.Size(130, 17);
+            this.SearchSubDirsTrailer.TabIndex = 74;
+            this.SearchSubDirsTrailer.Text = "Search in Sub Folders";
+            this.ToolTip1.SetToolTip(this.SearchSubDirsTrailer, "Select this option if you want the search for the movie files \r\nto include sub-fo" +
+                    "lders of the defined path.\r\n");
+            this.SearchSubDirsTrailer.UseVisualStyleBackColor = true;
+            // 
             // MesFilmsSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2947,6 +3116,11 @@ namespace MesFilms
             this.Logos.ResumeLayout(false);
             this.Logos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox23.PerformLayout();
+            this.groupBox24.ResumeLayout(false);
+            this.groupBox24.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3195,6 +3369,16 @@ namespace MesFilms
         private Label label33;
         private TextBox AntUpdList;
         private ComboBox AntUpdField;
+        private TabPage tabPage5;
+        private GroupBox groupBox23;
+        private Button btnTrailer;
+        private TextBox PathStorageTrailer;
+        private Label label34;
+        private GroupBox groupBox24;
+        private Button button1;
+        private TextBox AntStorageTrailer;
+        private Label label35;
+        private CheckBox SearchSubDirsTrailer;
 
     }
 }

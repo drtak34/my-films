@@ -2357,5 +2357,10 @@ namespace MesFilms
                     AntUpdList.Text = AntUpdField.Text;
             }
         }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
