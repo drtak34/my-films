@@ -2245,23 +2245,21 @@ namespace MesFilms
             if (g_Player.Playing)
                 g_Player.Stop();
 
-            // Guzziu: Added WOL to start remote host before playing the files
+            // Guzzi: Added WOL to start remote host before playing the files
 
             //Make sure that we have valid hostname for the TV server
             SetRemoteControlHostName();
 
             //Wake up the TV server, if required
             HandleWakeUpNas();
-            if (false)
-            {
-                GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                dlgOknas.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                dlgOknas.SetLine(1, MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString());//video title
-                dlgOknas.SetLine(2, "Starte NAS Server, bitte warten...");
-                dlgOknas.DoModal(GetID);
-                Log.Info("MyFilms: Launched HandleWakeUpNas() to start movie'" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "'");
-                return;
-            }
+            Log.Info("MyFilms: Launched HandleWakeUpNas() to start movie'" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "'");
+
+            //GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            //dlgOknas.SetHeading(GUILocalizeStrings.Get(107986));//my films
+            //dlgOknas.SetLine(1, MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString());//video title
+            //dlgOknas.SetLine(2, "Starte NAS Server, bitte warten...");
+            //dlgOknas.DoModal(GetID);
+            //return;
             
             // search all files
             ArrayList newItems = new ArrayList();
