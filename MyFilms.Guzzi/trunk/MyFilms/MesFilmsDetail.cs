@@ -2383,7 +2383,7 @@ namespace MesFilms
             setProcessAnimationStatus(false, m_SearchAnimation);
             if (newItems.Count > 1)
             {
-                if ((NoResumeMovie) && (1==2)) //Modded by Guzzi to always get Selectiondialog for Trailer Choice
+                if ((NoResumeMovie == false)) //Modded by Guzzi to always get Selectiondialog for Trailer Choice
                 {
                     GUIDialogFileStacking dlg = (GUIDialogFileStacking)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_FILESTACKING);
                     if (null != dlg)

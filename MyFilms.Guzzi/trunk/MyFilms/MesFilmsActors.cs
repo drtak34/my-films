@@ -305,7 +305,7 @@ namespace MesFilms.Actors
                         dlg.Add(GUILocalizeStrings.Get(100));//Icons
                         dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
                         dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
-                        dlg.Add(GUILocalizeStrings.Get(791));//Coverflow
+                        // dlg.Add(GUILocalizeStrings.Get(791));//Coverflow - add when Coverflow gets incorporated
                         dlg.DoModal(GetID);
 
                         if (dlg.SelectedLabel == -1)
