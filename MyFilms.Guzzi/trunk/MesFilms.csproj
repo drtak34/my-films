@@ -51,7 +51,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <OutputPath>obj\Debug\</OutputPath>
+    <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <PlatformTarget>x86</PlatformTarget>
     <RegisterForComInterop>true</RegisterForComInterop>
@@ -61,17 +61,13 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.0.33880, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.1.1.42763, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\Core.dll</HintPath>
+      <HintPath>..\ModLinkFiles\DeDa\Core.dll</HintPath>
     </Reference>
-    <Reference Include="Cornerstone.MP, Version=1.1.0.1067, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Databases, Version=1.1.0.42171, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>CornerstoneMP\Cornerstone.MP\bin\Release\Cornerstone.MP.dll</HintPath>
-    </Reference>
-    <Reference Include="Databases, Version=1.1.0.33882, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\Databases.dll</HintPath>
+      <HintPath>..\ModLinkFiles\DeDa\Databases.dll</HintPath>
     </Reference>
     <Reference Include="Dialogs, Version=1.1.0.16051, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -106,9 +102,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ModLinkFiles\Utils.dll</HintPath>
     </Reference>
-    <Reference Include="WindowPlugins, Version=1.1.0.33886, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="WindowPlugins, Version=1.1.0.42184, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\WindowPlugins.dll</HintPath>
+      <HintPath>..\ModLinkFiles\DeDa\WindowPlugins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +207,10 @@
     <ProjectReference Include="..\..\AMCupdater.Guzzi\grabber\Grabber.csproj">
       <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
       <Name>Grabber</Name>
+    </ProjectReference>
+    <ProjectReference Include="CornerstoneMP\Cornerstone.MP\Cornerstone.MP.csproj">
+      <Project>{77C78161-3206-45FD-A419-60218F3354C0}</Project>
+      <Name>Cornerstone.MP</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

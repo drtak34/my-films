@@ -2657,8 +2657,16 @@ namespace MesFilms
                 { movieDetails.Year = Int32.Parse(MesFilms.r[select_item]["Year"].ToString()); }
                 catch
                 { movieDetails.Year = 0; }
+
+
+                // Modified to match changes by Deda in MyVideos (New Thumbformat)
+
                 string strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, movieDetails.Title);
                 string LargeThumb = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieTitle, movieDetails.Title);
+                //string strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, movieDetails.Title) + "{" + idMovie.ToString() + "}";;
+                //string LargeThumb = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieTitle, movieDetails.Title) + "{" + idMovie.ToString() + "}";;
+                //Log.Debug("MyFilms (ThumbCreation): strThumb: '" + strThumb.ToString() + "'");
+                //Log.Debug("MyFilms (ThumbCreation): LargeThumb: '" + LargeThumb.ToString() + "'");
 
                 try
                 {

@@ -439,12 +439,20 @@ namespace MesFilms
                     }
                     if (Configuration.CurrentConfig.Length == 0)
                         GUIWindowManager.ShowPreviousWindow();
- //                   if (!bgLoadMovieList.IsBusy)
- //                   {
- //                       this.bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
- //                       this.bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
- //                       AsynLoadMovieList();
- //                   }
+
+                    // Originally Deactivated by Zebons    
+                    // ********************************
+                    // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
+                    if (!bgLoadMovieList.IsBusy)
+                    {
+                        this.bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
+                        this.bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
+                        AsynLoadMovieList();
+                    }
+                    // ********************************
+                    // Originally Deactivated by Zebons    
+                    
+                    
                     GUIControl.ShowControl(GetID, 34);
                     setProcessAnimationStatus(false, m_SearchAnimation);
 
@@ -1125,6 +1133,8 @@ namespace MesFilms
                     }
                     item.ThumbnailImage = conf.FileImage;
                     strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, sTitle);
+                    //Guzzi: Added for Debugging DeDa Changes of MyVideos...
+                    //Log.Debug("MyFilms (GetFilmList) : strThumb: '" + strThumb + "'");
                     if ((!System.IO.File.Exists(strThumb)) && (conf.FileImage != conf.DefaultCover))
                         Picture.CreateThumbnail(conf.FileImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
 
@@ -4194,7 +4204,8 @@ namespace MesFilms
             Log.Info("MyFilms : Loading Movie List in batch mode finished");
         }
 
-        
+
+            
 		// ToDo: Check, if Class can be removed (not included in ZebonsMerge)
 		public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
         {
