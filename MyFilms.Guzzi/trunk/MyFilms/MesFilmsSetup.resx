@@ -144,12 +144,12 @@ Types other than AMC will have a temporary file generated each time the original
 The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.
 </value>
   </data>
-  <data name="groupBox6.ToolTip" xml:space="preserve">
+  <data name="groupBox_SortByItem.ToolTip" xml:space="preserve">
     <value>You can define additional sort parameters – for example if you wish to sort by the movie’s length, use the database field ‘Length_num’.  
 In the adjacent field you can include a label for this particular sort item, to be displayed in the sort menu – for example ‘Movie Length’.
 </value>
   </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
+  <data name="groupBox_AntSelectedEnreg.ToolTip" xml:space="preserve">
     <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
 select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
 
@@ -162,7 +162,7 @@ so children will not be aware of any other configurations.
 Adult movies can then be included in another configuration that is password protected.
 </value>
   </data>
-  <data name="groupBox8.ToolTip" xml:space="preserve">
+  <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
 Select the option “Display Always that view when using this config”, 
 if you always want to see this view for this configuration.  
@@ -173,7 +173,7 @@ If a value is entered for the second parameter, only records containing that val
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
   </data>
-  <data name="groupBox3.ToolTip" xml:space="preserve">
+  <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
     <value>Views by ‘Genre’, by ‘Year’ and by ‘Country’ are already defined by default.  
 In this section you can define additional views; 
 select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
@@ -181,12 +181,12 @@ If there is no value entered, a menu will be displayed for the range of values a
 If a value is entered, a list of the movies with that value will be displayed.
 </value>
   </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
+  <data name="groupBox_DetailedSupplementaryInformations.ToolTip" xml:space="preserve">
     <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
 As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
 </value>
   </data>
-  <data name="groupBox21.ToolTip" xml:space="preserve">
+  <data name="groupBox_DatabaseUpdateOptions.ToolTip" xml:space="preserve">
     <value>If you wish to update your movie database and/or the movie files from within the plugin (the Update menu), 
 you can select the desired update method here.  
 Be careful when using the options that enable the deletion of the movie files from your HDD.
@@ -196,7 +196,7 @@ For the ‘Update db’ options, you must select a database field to update and 
 You can also select if the update or deletion is executed when the movie player has finished.
 </value>
   </data>
-  <data name="groupBox4.ToolTip" xml:space="preserve">
+  <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
 but you can include two more fields to be updated here.  
 
@@ -204,7 +204,7 @@ Select the database field to be updated, enter the label associated with that fi
 and enter a pre-defined value to update the field.
 </value>
   </data>
-  <data name="groupBox14.ToolTip" xml:space="preserve">
+  <data name="groupBox_Separators.ToolTip" xml:space="preserve">
     <value>Genre, country and actors are grouped in unique fields in the database and sometimes 
 there are multiple entries in each of these fields which may be separated by commas - for example  Genre = 'Comedy, Comedy Romantic, ... ‘  
 The actual separators used can vary depending on the web-site used to grab the movie information.
@@ -216,7 +216,7 @@ For actors, their names are often followed by a role (Clint Eastwood (Inspector 
 The plugin needs to know what separator is used to indicate the role text for finding or searching on actors.
 </value>
   </data>
-  <data name="groupBox19.ToolTip" xml:space="preserve">
+  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
     <value>If you want to update your movie datas over Internet,
 valid that option. 
 The grabber will be used for that (grabber.dll file). You have to
@@ -292,7 +292,7 @@ displayed as a background image for movies without a matching Fanart file. Becaf
 get a distorded picture as covers and fanarts don't have the same size.
 </value>
   </data>
-  <data name="groupBox18.ToolTip" xml:space="preserve">
+  <data name="groupBox_SupplementarySearch.ToolTip" xml:space="preserve">
     <value>The following searches are already implemented :
 	by Year
 	by Name
@@ -302,22 +302,6 @@ get a distorded picture as covers and fanarts don't have the same size.
 	by Genre
 
 You can add additional searches by selecting the database field and adding a value to filter that field by, if required.
-</value>
-  </data>
-  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>269, 17</value>
-  </metadata>
-  <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>111, 17</value>
-  </metadata>
-  <data name="groupBox24.ToolTip" xml:space="preserve">
-    <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
-These image files must have the same name as the movie.  
-Enter the full path (or use the browse button) to the folder containing the fanart image files.
-
-Select the option “Use the Default DVD cover for missing Fanart” to have the movie's DVD cover 
-displayed as a background image for movies without a matching Fanart file. Becafull with that option you often
-get a distorded picture as covers and fanarts don't have the same size.
 </value>
   </data>
   <data name="groupBox23.ToolTip" xml:space="preserve">
@@ -330,6 +314,22 @@ displayed as a background image for movies without a matching Fanart file. Becaf
 get a distorded picture as covers and fanarts don't have the same size.
 </value>
   </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
+These image files must have the same name as the movie.  
+Enter the full path (or use the browse button) to the folder containing the fanart image files.
+
+Select the option “Use the Default DVD cover for missing Fanart” to have the movie's DVD cover 
+displayed as a background image for movies without a matching Fanart file. Becafull with that option you often
+get a distorded picture as covers and fanarts don't have the same size.
+</value>
+  </data>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>269, 17</value>
+  </metadata>
+  <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>111, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

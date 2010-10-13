@@ -85,6 +85,7 @@ namespace MesFilms
 
             AntMovieCatalog ds = new AntMovieCatalog();
             AntStorage.Items.Add("(none)");
+            AntStorageTrailer.Items.Add("(none)");
             AntTitle2.Items.Add("(none)");
             AntSort1.Items.Add("(none)");
             AntSort2.Items.Add("(none)");
@@ -114,6 +115,7 @@ namespace MesFilms
                 if ((dc.ColumnName == "MediaLabel") || (dc.ColumnName == "MediaType") || (dc.ColumnName == "Source") || (dc.ColumnName == "URL") || (dc.ColumnName == "Comments") || (dc.ColumnName == "Borrower") || (dc.ColumnName == "Languages") || (dc.ColumnName == "Subtitles"))
                 {
                     AntStorage.Items.Add(dc.ColumnName);
+                    AntStorageTrailer.Items.Add(dc.ColumnName);
                     DVDPTagField.Items.Add(dc.ColumnName);
                     AntSTitle.Items.Add(dc.ColumnName);
                 }
@@ -538,6 +540,8 @@ namespace MesFilms
                 View_Dflt_Item.Text = "(none)";
             Verify_Config();
             int WLayOut = 0;
+            if (LayOut.Text == "List")
+                WLayOut = 0;
             if (LayOut.Text == "Small Icons")
                 WLayOut = 1;
             if (LayOut.Text == "Large Icons")
@@ -572,12 +576,12 @@ namespace MesFilms
                     wDfltSort = "RATING";
                     break;
                 default:
-                    if (Sort.Text.ToLower() == AntSort1.Text)
+                    if (Sort.Text.ToLower() == AntSort1.Text.ToLower())
                     {
                         wDfltSortMethod = AntTSort1.Text;
                         wDfltSort = AntSort1.Text;
                     }
-                    if (Sort.Text.ToLower() == AntSort2.Text)
+                    if (Sort.Text.ToLower() == AntSort2.Text.ToLower())
                     {
                         wDfltSortMethod = AntTSort2.Text;
                         wDfltSort = AntSort2.Text;
@@ -608,7 +612,9 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalog", MesFilmsCat.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntPicture", MesFilmsImg.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorage", AntStorage.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorageTrailer", AntStorageTrailer.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "PathStorage", PathStorage.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "PathStorageTrailer", PathStorageTrailer.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntIdentItem", AntIdentItem.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntIdentLabel", AntIdentLabel.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntTitle1", AntTitle1.Text.ToString());
@@ -692,6 +698,7 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Dwp", crypto.Crypter(Dwp.Text));
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", SearchFileName.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirs", SearchSubDirs.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", SearchSubDirsTrailer.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", CheckWatched.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", AlwaysDefaultView.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", chkOnlyTitle.Checked);
@@ -855,7 +862,9 @@ namespace MesFilms
             chkDfltViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDflt", false);
             chkViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Views", false);
             AntStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorage", "");
+            AntStorageTrailer.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorageTrailer", "");
             PathStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PathStorage", "");
+            PathStorageTrailer.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PathStorageTrailer", "");
             AntIdentItem.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntIdentItem", "");
             AntIdentLabel.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntIdentLabel", "");
             AntTitle1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntTitle1", "");
@@ -973,6 +982,11 @@ namespace MesFilms
                 SearchSubDirs.Checked = true;
             else
                 SearchSubDirs.Checked = false;
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", "False") == "True" //fmu
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", "False") == "yes")  //fmu
+                SearchSubDirsTrailer.Checked = true;
+            else
+                SearchSubDirsTrailer.Checked = false;
             radioButton1.Checked = false;
             radioButton2.Checked = false;
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
@@ -1020,6 +1034,8 @@ namespace MesFilms
                 LayOut.Text = "Small Icons";
             if (WLayOut == 2)
                 LayOut.Text = "Large Icons";
+            if (WLayOut == 3)
+                LayOut.Text = "Filmstrip";
             AntViewText_Change();
             AntSort_Change();
         }
@@ -1041,7 +1057,9 @@ namespace MesFilms
             MesFilmsFanart.ResetText();
             MesFilmsViews.ResetText();
             AntStorage.ResetText();
+            AntStorageTrailer.ResetText();
             PathStorage.ResetText();
+            PathStorageTrailer.ResetText();
             AntIdentItem.ResetText();
             AntIdentLabel.ResetText();
             AntTitle1.ResetText();
@@ -1125,6 +1143,7 @@ namespace MesFilms
             txtfdupdate.ResetText();
             rbsuppress1.Checked = true;
             SearchSubDirs.Checked = false;
+            SearchSubDirsTrailer.Checked = false;
             CheckWatched.Checked = false;
             radioButton1.Checked = false;
             radioButton2.Checked = false;
@@ -1330,6 +1349,7 @@ namespace MesFilms
                     break;
                 case 4:
                     AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = "Borrower";
                     AntTitle1.Text = "TranslatedTitle";
                     AntTitle2.Text = "OriginalTitle";
                     AntSTitle.Text = "FormattedTitle";
@@ -1342,6 +1362,7 @@ namespace MesFilms
                     break;
                 default:
                     AntStorage.Text = "URL";
+                    AntStorageTrailer.Text = "Borrower";
                     AntTitle1.Text = "TranslatedTitle";
                     AntTitle2.Text = "OriginalTitle";
                     AntSTitle.Text = "FormattedTitle";
@@ -2104,10 +2125,25 @@ namespace MesFilms
                 Sort.Items.Add(AntSort1.Text);
             if (!(AntSort2.Text == "(none)") && !(AntSort2.Text.Length == 0))
                 Sort.Items.Add(AntSort2.Text);
-            if (!(Sort.Items.Contains(Sort.Text)))
-            {
-                Sort.Text = "(none)";
-            }
+
+            if (
+                !(Sort.Text.ToLower().Contains("title")) && 
+                !(Sort.Text.ToLower() == "year") &&
+                !(Sort.Text.ToLower().Contains("date")) &&
+                !(Sort.Text.ToLower() == "rating") &&
+                !(AntSort1.Text.Length == 0) &&
+                !(AntSort2.Text.Length == 0) &&
+                !(Sort.Text.ToLower() == AntSort1.Text.ToLower()) &&
+                !(Sort.Text.ToLower() == AntSort2.Text.ToLower())
+                )
+                    {
+                        Sort.Text = "(none)";
+                    }
+            
+//            if (!(Sort.Items.Contains(Sort.Text)))
+//            {
+//                Sort.Text = "(none)";
+//            }
         }
 
 
@@ -2359,6 +2395,60 @@ namespace MesFilms
         }
 
         private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PathStorage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PathStorageTrailer_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SearchSubDirsTrailer_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AntStorageTrailer_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTrailer_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                if (!(folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") == folderBrowserDialog1.SelectedPath.Length - 1))
+                    folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+
+                if (PathStorageTrailer.Text.Length == 0)
+                    PathStorageTrailer.Text = folderBrowserDialog1.SelectedPath;
+                else
+                    PathStorageTrailer.Text = PathStorageTrailer.Text + ";" + folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+        private void MesFilmsFanart_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AntTSort1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AntTSort2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Config_Menu_CheckedChanged(object sender, EventArgs e)
         {
 
         }
