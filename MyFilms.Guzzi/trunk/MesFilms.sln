@@ -10,7 +10,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber", "..\..\AMCupdater
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cornerstone.MP", "CornerstoneMP\Cornerstone.MP\Cornerstone.MP.csproj", "{77C78161-3206-45FD-A419-60218F3354C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject MyFilms", "TestProject MyFilms\TestProject MyFilms.csproj", "{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C9D9B4E7-E991-43E6-9FBE-FF0E080803C7}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		MesFilms.vsmdi = MesFilms.vsmdi
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MesFilms.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -110,6 +121,31 @@ Global
 		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
 		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release (Standalone)|Mixed Platforms.Build.0 = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release (Standalone)|x86.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureCardDefinitions|Any CPU.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureCardDefinitions|Any CPU.Build.0 = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureCardDefinitions|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureCardDefinitions|Mixed Platforms.Build.0 = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureCardDefinitions|x86.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureDefintionsRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureDefintionsRelease|Any CPU.Build.0 = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
+		{E0259A7D-A7EC-49F8-9C63-E97CD8421F5C}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

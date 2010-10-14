@@ -26,17 +26,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Threading;
 using System.Data;
 
 using MediaPortal.GUI.Library;
 using MediaPortal.Dialogs;
 using MediaPortal.Util;
-using MediaPortal.GUI.Pictures;
 using MediaPortal.Video.Database;
 using MediaPortal.Configuration;
-using MesFilms;
 
 namespace MesFilms.Actors
 
@@ -237,7 +233,7 @@ namespace MesFilms.Actors
 
                     item.FreeMemory();
                     item.Label = "Jim Knopf";
-                    item.Label2 = "als Kukas, der Lokomotivführer";
+                    item.Label2 = "als Lukas, der Lokomotivführer";
                     item.Label3 = "n/a";
                     item.IsFolder = true;
                     item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);

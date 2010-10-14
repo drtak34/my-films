@@ -364,7 +364,9 @@ namespace MesFilms
                     return;
                 else
                 {
-                    GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
+                    GUIWindowManager.ShowPreviousWindow();
+                    //Fix to not only always return to MyHome, e.g. when coming from Basichome...
+                    //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
                     return;
                 }
             }
@@ -2696,8 +2698,8 @@ namespace MesFilms
                 // Search with searchName parameter which contain wanted actor name, result(s) is in array
                 // which conatin id and name separated with char "|"
                 MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
-                // Check result
 
+                // Check result
                 if (actorList.Count == 0)
                 {
                     Log.Debug("MyFilms (Person Info): No ActorIDs found for '" + wperson + "'");
