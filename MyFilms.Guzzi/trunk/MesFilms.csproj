@@ -94,7 +94,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="TaskScheduler, Version=1.3.3304.15002, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TaskScheduler.dll</HintPath>
+      <HintPath>..\ModLinkFiles\TaskScheduler.dll</HintPath>
     </Reference>
     <Reference Include="Utils, Version=1.1.5.41342, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
