@@ -146,6 +146,8 @@ namespace MesFilms
 
         public int Layout = 0;
         public static int Prev_ItemID = -1;
+        //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
+        public static int Prev_MenuID = -1;
         public bool Context_Menu = false;
         public static Configuration conf;
         public static Logos confLogos;
@@ -339,6 +341,8 @@ namespace MesFilms
         public override void OnAction(MediaPortal.GUI.Library.Action actionType)
         {
             Log.Debug("MyFilms : OnAction " + actionType.wID.ToString());
+            //Log.Debug("MyFilms : PreviousWindowId: '" + PreviousWindowId.ToString() + "' - Prev_MenuID: '" + Prev_MenuID.ToString() + "'");
+            //Log.Debug("MyFilms : Select: '" + conf.Boolselect + "' - View: '" + conf.Boolview + "' - Return: '" + conf.Boolreturn + "'");
             if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR)
                 if (GetPrevFilmList()) return;
 
@@ -364,9 +368,12 @@ namespace MesFilms
                     return;
                 else
                 {
-                    GUIWindowManager.ShowPreviousWindow();
+                    //GUIWindowManager.ShowPreviousWindow();
                     //Fix to not only always return to MyHome, e.g. when coming from Basichome...
                     //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
+                    //if (Prev_MenuID != -1)
+                    Log.Debug("MyFilms (GuzziFix for Previous Window - Prev_MenuID: '" + Prev_MenuID.ToString() + "'");
+                    GUIWindowManager.ActivateWindow(Prev_MenuID); 
                     return;
                 }
             }
@@ -434,6 +441,7 @@ namespace MesFilms
                     //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
                     if ((PreviousWindowId != ID_MesFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MesFilmsActors))
                     {
+                        Prev_MenuID = PreviousWindowId; 
                         InitMainScreen();
                         GUIPropertyManager.SetProperty("#myfilms.select", " ");
                         Configuration.Current_Config();
