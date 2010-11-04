@@ -214,10 +214,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AMCupdater.Guzzi\grabber\Grabber.csproj">
-      <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
-      <Name>Grabber</Name>
-    </ProjectReference>
     <ProjectReference Include="CornerstoneMP\Cornerstone.MP\Cornerstone.MP.csproj">
       <Project>{77C78161-3206-45FD-A419-60218F3354C0}</Project>
       <Name>Cornerstone.MP</Name>
