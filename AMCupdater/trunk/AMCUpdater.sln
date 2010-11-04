@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AMCUpdater", "AMCUpdater\AMCUpdater.vbproj", "{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AMCUpdaterSetup", "AMCUpdaterSetup\AMCUpdaterSetup.vdproj", "{A3255991-0C11-4BA4-B3C7-971F50A5C73C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber", "grabber\Grabber.csproj", "{92C183EE-636F-4A55-A6AB-363CDA606110}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}.Debug|x86.ActiveCfg = Debug|x86
+		{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}.Debug|x86.Build.0 = Debug|x86
+		{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}.Release|x86.ActiveCfg = Release|x86
+		{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}.Release|x86.Build.0 = Release|x86
+		{A3255991-0C11-4BA4-B3C7-971F50A5C73C}.Debug|x86.ActiveCfg = Debug
+		{A3255991-0C11-4BA4-B3C7-971F50A5C73C}.Release|x86.ActiveCfg = Release
+		{A3255991-0C11-4BA4-B3C7-971F50A5C73C}.Release|x86.Build.0 = Release
+		{92C183EE-636F-4A55-A6AB-363CDA606110}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92C183EE-636F-4A55-A6AB-363CDA606110}.Debug|x86.Build.0 = Debug|Any CPU
+		{92C183EE-636F-4A55-A6AB-363CDA606110}.Release|x86.ActiveCfg = Release|Any CPU
+		{92C183EE-636F-4A55-A6AB-363CDA606110}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
