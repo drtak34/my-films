@@ -62,9 +62,9 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.0.33880, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.1.1.11854, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MyFilms.Guzzi\ModLinkFiles\Core.dll</HintPath>
+      <HintPath>..\_ModLinkFiles\Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -73,10 +73,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utils, Version=2.2.7.16040, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MyFilms.Guzzi\ModLinkFiles\Utils.dll</HintPath>
-    </Reference>
     <Reference Include="vjslib, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_ModLinkFiles\vjslib.dll</HintPath>
