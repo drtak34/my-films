@@ -89,8 +89,10 @@ namespace MesFilms
                 StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", "");
                 StrFileType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0");
                 StrPathImg = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntPicture", "");
+                StrArtistDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistDflt", false);
                 StrPathFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartPicture", "");
                 StrPathViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsPicture", "");
+                StrPathArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistPicturePath", "");
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", 0);
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOut", StrLayOut);
                 Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", "");
@@ -256,6 +258,7 @@ namespace MesFilms
                 LastID = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LastID", -1);
                 TitleDelim = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "TitleDelim", ".");
                 DefaultCover = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCover", "");
+                DefaultCoverArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverArtist", "");
                 StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5.0");
                 StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
                 StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", "");
@@ -269,6 +272,16 @@ namespace MesFilms
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
                 StrViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Views", false);
                 StrViewsDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDflt", false);
+
+                StrCheckWOLenable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Enable", false);
+                StrCheckWOLuserdialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Userdialog", false);
+                StrNasName1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-1", string.Empty);
+                StrNasMAC1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-1", string.Empty);
+                StrNasName2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-2", string.Empty);
+                StrNasMAC2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-2", string.Empty);
+                StrNasName3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-3", string.Empty);
+                StrNasMAC3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-3", string.Empty);
+
                 int j = 0;
                 for (int i = 1; i <= 5; i++)
                 {
@@ -327,8 +340,14 @@ namespace MesFilms
             if (StrFanart)
                 if (!(StrPathFanart.Length > 0 && System.IO.Directory.Exists(StrPathFanart)))
                 {
-                    MediaPortal.GUI.Library.Log.Info("MyFilms : Fanart Path '" + StrPathFanart + "', doesn't exist. Fanart desabled ! ");
+                    MediaPortal.GUI.Library.Log.Info("MyFilms : Fanart Path '" + StrPathFanart + "', doesn't exist. Fanart disabled ! ");
                     StrFanart = false;
+                }
+            if (StrArtist)
+                if (!(StrPathArtist.Length > 0 && System.IO.Directory.Exists(StrPathArtist)))
+                {
+                    MediaPortal.GUI.Library.Log.Info("MyFilms : Artist Path '" + StrPathArtist + "', doesn't exist. Artist Pictures disabled ! ");
+                    StrArtist = false;
                 }
         }
 
@@ -713,6 +732,12 @@ namespace MesFilms
             get { return strPathViews; }
             set { strPathViews = value; }
         }
+        private string strPathArtist = string.Empty;
+        public string StrPathArtist
+        {
+            get { return strPathArtist; }
+            set { strPathArtist = value; }
+        }
         private string strSortSens = string.Empty;
         public string StrSortSens
         {
@@ -785,6 +810,12 @@ namespace MesFilms
             get { return defaultcover; }
             set { defaultcover = value; }
         }
+        private string defaultcoverartist = string.Empty;
+        public string DefaultCoverArtist
+        {
+            get { return defaultcoverartist; }
+            set { defaultcoverartist = value; }
+        }
         private string cmdExe = string.Empty;
         public string CmdExe
         {
@@ -833,11 +864,23 @@ namespace MesFilms
             get { return strFanart; }
             set { strFanart = value; }
         }
+        private bool strArtist = false;
+        public bool StrArtist
+        {
+            get { return strArtist; }
+            set { strArtist = value; }
+        }
         private bool strFanartDflt = false;
         public bool StrFanartDflt
         {
             get { return strFanartDflt; }
             set { strFanartDflt = value; }
+        }
+        private bool strArtistDflt = false;
+        public bool StrArtistDflt
+        {
+            get { return strArtistDflt; }
+            set { strArtistDflt = value; }
         }
         private bool strViews = false;
         public bool StrViews
@@ -851,6 +894,63 @@ namespace MesFilms
             get { return strViewsDflt; }
             set { strViewsDflt = value; }
         }
+
+        private bool strCheckWOLenable = false;
+        public bool StrCheckWOLenable
+        {
+            get { return strCheckWOLenable; }
+            set { strCheckWOLenable = value; }
+        }
+        
+        private bool strCheckWOLuserdialog = false;
+        public bool StrCheckWOLuserdialog
+        {
+            get { return strCheckWOLuserdialog; }
+            set { strCheckWOLuserdialog = value; }
+        }
+
+        private string strNasName1 = string.Empty;
+        public string StrNasName1
+        {
+            get { return strNasName1; }
+            set { strNasName1 = value; }
+        }
+
+        private string strNasMAC1 = string.Empty;
+        public string StrNasMAC1
+        {
+            get { return strNasMAC1; }
+            set { strNasMAC1 = value; }
+        }
+
+        private string strNasName2 = string.Empty;
+        public string StrNasName2
+        {
+            get { return strNasName2; }
+            set { strNasName2 = value; }
+        }
+
+        private string strNasMAC2 = string.Empty;
+        public string StrNasMAC2
+        {
+            get { return strNasMAC2; }
+            set { strNasMAC2 = value; }
+        }
+
+        private string strNasName3 = string.Empty;
+        public string StrNasName3
+        {
+            get { return strNasName3; }
+            set { strNasName3 = value; }
+        }
+
+        private string strNasMAC3 = string.Empty;
+        public string StrNasMAC3
+        {
+            get { return strNasMAC3; }
+            set { strNasMAC3 = value; }
+        }
+
         private bool strGrabber = false;
         public bool StrGrabber
         {
@@ -1076,11 +1176,21 @@ namespace MesFilms
             }
             bool boolchoice = true;
             if (CurrentConfig == null)
-                CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", "");
-            if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)))
+                if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", "").Length > 0)
+                    CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", "");
+                else
+                    CurrentConfig = "";
+
+            if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) && ((XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "").Length > 0)))
+                //if ((!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false))) && ((XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "")).ToString().Length() > 0))
+                    // Might require check for yes/no ? 
+                //if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", "False") == "True" //fmu
+                // || XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", "False") == "yes")  //fmu
+
                 CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
-            else
-                CurrentConfig = "";
+            //Guzzi: Remarked, because otherwise currentconfig will always be owerwritten if no defaultconfig available
+            //else
+            //    CurrentConfig = "";
             if (CurrentConfig == "")
             {
                 boolchoice = false;
