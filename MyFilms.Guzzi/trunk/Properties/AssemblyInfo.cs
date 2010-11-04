@@ -7,11 +7,11 @@ using System.Resources;
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("MyFilms")]
-[assembly: AssemblyDescription("MyFilms a Mediaportal plugin")]
+[assembly: AssemblyDescription("MyFilms Movie Plugin")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Personnel")]
 [assembly: AssemblyProduct("MediaPortal")]
-[assembly: AssemblyCopyright("Copyright © Personnel 2010")]
+[assembly: AssemblyCopyright("Copyright © 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
