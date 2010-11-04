@@ -38,6 +38,7 @@ Public Class AntProcessor
     Private Shared _ManualExcludedMoviesPath As String = String.Empty
     Private Shared _ManualInternetLookupAlwaysPrompt As Boolean = False
     Private Shared _ManualMissingFanartDownload As Boolean = True
+    Private Shared _ManualMissingTrailer As Boolean = True
     Private Shared _TempXMLBackupFile As String
 
     Private Shared _OperationCancelled As Boolean = False
@@ -211,6 +212,14 @@ Public Class AntProcessor
         End Get
         Set(ByVal value As Boolean)
             _ManualMissingFanartDownload = value
+        End Set
+    End Property
+    Public Property ManualMissingTrailer() As Boolean
+        Get
+            Return _ManualMissingTrailer
+        End Get
+        Set(ByVal value As Boolean)
+            _ManualMissingTrailer = value
         End Set
     End Property
     Public Property ManualXMLPath() As String
@@ -404,6 +413,9 @@ Public Class AntProcessor
         End If
         If (_ManualOperation.ToString = "DownLoad Fanart") Then
             LogEvent(" - Download only Missing Fanart : " & _ManualMissingFanartDownload.ToString, EventLogLevel.ImportantEvent)
+        End If
+        If (_ManualOperation.ToString = "Register Trailer") Then
+            LogEvent(" - Register only Missing Trailer : " & _ManualMissingTrailer.ToString, EventLogLevel.ImportantEvent)
         End If
 
         'Dim XmlDoc As New XmlDocument
@@ -1369,6 +1381,8 @@ Public Class AntProcessor
         LogEvent("  PurgeMissing : " + CurrentSettings.Purge_Missing_Files.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Import on Internet Lookup Failure : " + CurrentSettings.Import_File_On_Internet_Lookup_Failure.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Prohibit Internet Lookup : " + CurrentSettings.Prohibit_Internet_Lookup.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Use XBMC nfo : " + CurrentSettings.Use_XBMC_nfo.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Use Page Grabber : " + CurrentSettings.Use_Page_Grabber.ToString, EventLogLevel.ImportantEvent)
         LogEvent("Starting file analysis and import - " & _CountOrphanFiles.ToString & " orphaned files found.", EventLogLevel.ImportantEvent)
 
         XMLDoc.Load(CurrentSettings.XML_File)
@@ -2271,6 +2285,13 @@ Public Class AntProcessor
             Return False
         End If
         '        End If
+        Return True
+
+    End Function
+
+    Public Function ManualTestMissingTrailer(ByVal wtitle As String) As Boolean
+
+        'Guzzi: To be added
         Return True
 
     End Function

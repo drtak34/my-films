@@ -38,13 +38,13 @@ Partial Class frmList
         Me.lstOptions.FormattingEnabled = True
         Me.lstOptions.Location = New System.Drawing.Point(12, 73)
         Me.lstOptions.Name = "lstOptions"
-        Me.lstOptions.Size = New System.Drawing.Size(401, 173)
+        Me.lstOptions.Size = New System.Drawing.Size(586, 199)
         Me.lstOptions.TabIndex = 30
         '
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(175, 252)
+        Me.btnCancel.Location = New System.Drawing.Point(370, 283)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(72, 23)
         Me.btnCancel.TabIndex = 50
@@ -54,7 +54,7 @@ Partial Class frmList
         'btnOK
         '
         Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnOK.Location = New System.Drawing.Point(331, 252)
+        Me.btnOK.Location = New System.Drawing.Point(526, 283)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(72, 23)
         Me.btnOK.TabIndex = 70
@@ -65,12 +65,12 @@ Partial Class frmList
         '
         Me.txtSearchString.Location = New System.Drawing.Point(12, 12)
         Me.txtSearchString.Name = "txtSearchString"
-        Me.txtSearchString.Size = New System.Drawing.Size(337, 20)
+        Me.txtSearchString.Size = New System.Drawing.Size(586, 20)
         Me.txtSearchString.TabIndex = 0
         '
         'btnSearchAgain
         '
-        Me.btnSearchAgain.Location = New System.Drawing.Point(12, 252)
+        Me.btnSearchAgain.Location = New System.Drawing.Point(12, 283)
         Me.btnSearchAgain.Name = "btnSearchAgain"
         Me.btnSearchAgain.Size = New System.Drawing.Size(83, 23)
         Me.btnSearchAgain.TabIndex = 40
@@ -81,13 +81,13 @@ Partial Class frmList
         '
         Me.txtTmpParserFilePath.Location = New System.Drawing.Point(12, 38)
         Me.txtTmpParserFilePath.Name = "txtTmpParserFilePath"
-        Me.txtTmpParserFilePath.Size = New System.Drawing.Size(337, 20)
+        Me.txtTmpParserFilePath.Size = New System.Drawing.Size(522, 20)
         Me.txtTmpParserFilePath.TabIndex = 10
         '
         'btnSelectParserFile
         '
         Me.btnSelectParserFile.CausesValidation = False
-        Me.btnSelectParserFile.Location = New System.Drawing.Point(355, 37)
+        Me.btnSelectParserFile.Location = New System.Drawing.Point(540, 38)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
         Me.btnSelectParserFile.Size = New System.Drawing.Size(58, 20)
         Me.btnSelectParserFile.TabIndex = 20
@@ -96,7 +96,7 @@ Partial Class frmList
         '
         'btnDontAskAgain
         '
-        Me.btnDontAskAgain.Location = New System.Drawing.Point(253, 252)
+        Me.btnDontAskAgain.Location = New System.Drawing.Point(448, 283)
         Me.btnDontAskAgain.Name = "btnDontAskAgain"
         Me.btnDontAskAgain.Size = New System.Drawing.Size(72, 23)
         Me.btnDontAskAgain.TabIndex = 60
@@ -106,7 +106,7 @@ Partial Class frmList
         'chkDontAskAgain
         '
         Me.chkDontAskAgain.AutoSize = True
-        Me.chkDontAskAgain.Location = New System.Drawing.Point(300, 257)
+        Me.chkDontAskAgain.Location = New System.Drawing.Point(300, 288)
         Me.chkDontAskAgain.Name = "chkDontAskAgain"
         Me.chkDontAskAgain.Size = New System.Drawing.Size(15, 14)
         Me.chkDontAskAgain.TabIndex = 49
@@ -119,7 +119,7 @@ Partial Class frmList
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(425, 287)
+        Me.ClientSize = New System.Drawing.Size(610, 318)
         Me.Controls.Add(Me.chkDontAskAgain)
         Me.Controls.Add(Me.btnDontAskAgain)
         Me.Controls.Add(Me.btnSelectParserFile)

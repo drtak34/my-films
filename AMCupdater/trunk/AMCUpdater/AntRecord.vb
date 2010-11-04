@@ -7,7 +7,7 @@ Public Class AntRecord
     Private _FileName As String = String.Empty
     Private _MediaLabel As String = String.Empty
     Private _MediaType As String = String.Empty
-    Private _SourceField As String = "source"
+    Private _SourceField As String = "Source"
     Private _OverridePath As String = String.Empty
     Private _ParserPath As String = String.Empty
     'Private _XMLPath As String = String.Empty
@@ -31,6 +31,8 @@ Public Class AntRecord
     Private _DatabaseFields As New Hashtable
     Private Shared _InternetData() As String
     Public ProhibitInternetLookup As Boolean
+    Public UseXBMCnfo As Boolean
+    Public UsePageGrabber As Boolean
 
     Private Shared _XMLDoc As New Xml.XmlDocument
     Private Shared _XMLElement As Xml.XmlElement
@@ -305,6 +307,33 @@ Public Class AntRecord
         Return currentNode
     End Function
 
+    Public Function VerifyElementByFilename(ByVal otitle As String, ByVal currentNode As Xml.XmlNode) As Xml.XmlNode
+        'Public Function VerifyElementByFilename(ByVal otitle As String, ByVal source As String, ByVal currentNode As Xml.XmlNode) As Xml.XmlNode
+        ' Guzzi: only copy of function - not yet modified
+        Dim CurrentNode2 As Xml.XmlNode
+        Dim CurrentAttribute2 As String
+        'Dim CurrentFilename As String
+        'CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle='" & otitle & "']")
+        CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle=""" & otitle & """]")
+        'CurrentFilename = source
+
+        If (Not CurrentNode2 Is Nothing) Then
+            If (CurrentNode2.Attributes("Number").Value) <> (currentNode.Attributes("Number").Value) Then
+                CurrentAttribute2 = _SourceField
+                If _XMLElement.Attributes(CurrentAttribute2) Is Nothing Then
+                    currentNode.Attributes.RemoveAll()
+                    Return CurrentNode2
+                End If
+                If _XMLElement.Attributes(CurrentAttribute2).Value.ToString = String.Empty Then
+                    currentNode.Attributes.RemoveAll()
+                    Return CurrentNode2
+                End If
+
+            End If
+        End If
+        Return currentNode
+    End Function
+
 
     Private Sub DoInternetLookup(ByVal SearchString As String)
         'This is now reset on ProcessFile, since all processing will begin with that Sub.
@@ -515,6 +544,12 @@ Public Class AntRecord
                 End If
             End If
 
+
+            If CurrentSettings.Use_XBMC_nfo = True Or UseXBMCnfo = True Then
+                'Now update the Original Title with the XBMCnfo-file, if set to do so:
+                TempValue = GetXBMCnfoData(_FilePath, "OriginalTitle")
+            End If
+
             If _InternetLookupOK = True Then
                 'Now update the Original Title with the Internet value, if set to do so:
                 If _MovieTitleHandling.Contains("Internet Lookup") = True Then
@@ -566,14 +601,26 @@ Public Class AntRecord
                 End If
             End If
 
+            ' Guzzi: Original Code does remove old entries with same otitle name
             'Try to see if entry already exist with empty movie filename => delete the new entry and update existing one
-            _XMLElement = VerifyElement(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
+            '_XMLElement = VerifyElement(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
+
+            ' Guzzi: New approach to take also filename into consideration - not yet working, thus commented ...
+
+            'If _XMLElement.Attributes("Source").ToString.Length() > 0 Then
+            '_XMLElement = VerifyElementByFilename(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement.Attributes("Source").Value.ToString, _XMLElement)
+            _XMLElement = VerifyElementByFilename(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
+            'End If
 
             If _DatabaseFields("formattedtitle") = True Then
                 CurrentAttribute = "FormattedTitle"
                 If _XMLElement.Attributes("TranslatedTitle") IsNot Nothing Then
+                    'TempValue = _XMLElement.Attributes("TranslatedTitle").Value
+                    'Guzzi: Reverted Change to use InetNames for dupe checks to avoid overwriting old DB entries
                     TempValue = Grabber.GrabUtil.TitleToArchiveName(_XMLElement.Attributes("TranslatedTitle").Value)
                 ElseIf _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
+                    'TempValue = _XMLElement.Attributes("OriginalTitle").Value
+                    'Guzzi: Reverted Change to use InetNames for dupe checks to avoid overwriting old DB entries
                     TempValue = Grabber.GrabUtil.TitleToArchiveName(_XMLElement.Attributes("OriginalTitle").Value)
                 End If
                 If TempValue.Trim <> String.Empty Then
@@ -903,10 +950,37 @@ Public Class AntRecord
                 End If
             End If
 
+
+            If _DatabaseFields("description") = True And CurrentSettings.Use_Page_Grabber = True Or UsePageGrabber = True Then
+                'Now update the Description with the description from HTML-File, if set to do so:
+                CurrentAttribute = "Description"
+                TempValue = GetHTMLFileData(_FilePath, "description")
+                If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                    attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                    attr.Value = GetHTMLFileData(_FilePath, "description")
+                    If attr.Value <> "" Then
+                        _XMLElement.Attributes.Append(attr)
+                    End If
+                Else
+                    _XMLElement.Attributes(CurrentAttribute).Value = GetHTMLFileData(_FilePath, "description")
+                End If
+            End If
+
+
             If _InternetLookupOK = False Then
                 'Additional attempt to load picture with folder.jpg settings, in case Internet lookup fails
                 If _DatabaseFields("picture") = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
                     CurrentAttribute = "Picture"
+
+
+                    'GUZZI: Added to try to get Picture with Moviename.JPG !!!
+                    'Dim ReturnValue As String
+                    'Dim Filename As String = FilePath
+                    'Get the file name itself off the end: .avi
+                    'Dim FileNameEnd As String = Filename.Substring(InStrRev(Filename, "."))
+                    'Filename = Filename.Replace(FileNameEnd, "")
+                    'ReturnValue = Filename + "jpg"
+
                     Dim FileExists As Boolean = False
                     Dim NewFileName As String = _FilePath
                     If NewFileName.Contains("\") = True Then
@@ -930,6 +1004,7 @@ Public Class AntRecord
                             _XMLElement.Attributes(CurrentAttribute).Value = NewFileName
                         End If
                     End If
+
                 End If
 
             Else

@@ -29,10 +29,10 @@ Private Sub Main()
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -75,6 +75,7 @@ Private Sub Main()
         Me.lblOverridePath = New System.Windows.Forms.Label
         Me.Options = New System.Windows.Forms.TabPage
         Me.GroupBox17 = New System.Windows.Forms.GroupBox
+        Me.chkUseXBMCnfo = New System.Windows.Forms.CheckBox
         Me.chkRescanMovedFiles = New System.Windows.Forms.CheckBox
         Me.chkProhibitInternetLookup = New System.Windows.Forms.CheckBox
         Me.chkImportOnInternetFail = New System.Windows.Forms.CheckBox
@@ -350,6 +351,8 @@ Private Sub Main()
         Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.chkUsePageGrabber = New System.Windows.Forms.CheckBox
+        Me.chkManualMissingTrailer = New System.Windows.Forms.CheckBox
         Me.TabControl1.SuspendLayout()
         Me.Interactive.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -827,6 +830,8 @@ Private Sub Main()
         '
         'GroupBox17
         '
+        Me.GroupBox17.Controls.Add(Me.chkUsePageGrabber)
+        Me.GroupBox17.Controls.Add(Me.chkUseXBMCnfo)
         Me.GroupBox17.Controls.Add(Me.chkRescanMovedFiles)
         Me.GroupBox17.Controls.Add(Me.chkProhibitInternetLookup)
         Me.GroupBox17.Controls.Add(Me.chkImportOnInternetFail)
@@ -835,10 +840,21 @@ Private Sub Main()
         Me.GroupBox17.Controls.Add(Me.chkBackupXMLFirst)
         Me.GroupBox17.Location = New System.Drawing.Point(8, 6)
         Me.GroupBox17.Name = "GroupBox17"
-        Me.GroupBox17.Size = New System.Drawing.Size(518, 66)
+        Me.GroupBox17.Size = New System.Drawing.Size(518, 85)
         Me.GroupBox17.TabIndex = 1
         Me.GroupBox17.TabStop = False
         Me.GroupBox17.Text = "File Handling"
+        '
+        'chkUseXBMCnfo
+        '
+        Me.chkUseXBMCnfo.AutoSize = True
+        Me.chkUseXBMCnfo.Location = New System.Drawing.Point(211, 42)
+        Me.chkUseXBMCnfo.Name = "chkUseXBMCnfo"
+        Me.chkUseXBMCnfo.Size = New System.Drawing.Size(117, 17)
+        Me.chkUseXBMCnfo.TabIndex = 9
+        Me.chkUseXBMCnfo.Text = "Use XBMC nfo-files"
+        Me.ToolTip1.SetToolTip(Me.chkUseXBMCnfo, "Global option to try reading XBMC nfo-files when importing filedata")
+        Me.chkUseXBMCnfo.UseVisualStyleBackColor = True
         '
         'chkRescanMovedFiles
         '
@@ -902,7 +918,7 @@ Private Sub Main()
         Me.chkBackupXMLFirst.Checked = True
         Me.chkBackupXMLFirst.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkBackupXMLFirst.Enabled = False
-        Me.chkBackupXMLFirst.Location = New System.Drawing.Point(211, 42)
+        Me.chkBackupXMLFirst.Location = New System.Drawing.Point(12, 65)
         Me.chkBackupXMLFirst.Name = "chkBackupXMLFirst"
         Me.chkBackupXMLFirst.Size = New System.Drawing.Size(113, 17)
         Me.chkBackupXMLFirst.TabIndex = 7
@@ -915,7 +931,7 @@ Private Sub Main()
         Me.GroupBox13.Controls.Add(Me.Label28)
         Me.GroupBox13.Controls.Add(Me.cbLogLevel)
         Me.GroupBox13.Controls.Add(Me.Label29)
-        Me.GroupBox13.Location = New System.Drawing.Point(8, 433)
+        Me.GroupBox13.Location = New System.Drawing.Point(8, 452)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(518, 65)
         Me.GroupBox13.TabIndex = 5
@@ -958,7 +974,7 @@ Private Sub Main()
         Me.GroupBox12.Controls.Add(Me.txtExecuteProgramPath)
         Me.GroupBox12.Controls.Add(Me.chkExecuteProgram)
         Me.GroupBox12.Controls.Add(Me.Label27)
-        Me.GroupBox12.Location = New System.Drawing.Point(8, 314)
+        Me.GroupBox12.Location = New System.Drawing.Point(8, 333)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.Size = New System.Drawing.Size(518, 113)
         Me.GroupBox12.TabIndex = 4
@@ -1018,7 +1034,7 @@ Private Sub Main()
         Me.GroupBox5.Controls.Add(Me.Label25)
         Me.GroupBox5.Controls.Add(Me.txtDefaultSourceField)
         Me.GroupBox5.Controls.Add(Me.Label26)
-        Me.GroupBox5.Location = New System.Drawing.Point(8, 206)
+        Me.GroupBox5.Location = New System.Drawing.Point(8, 225)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(518, 102)
         Me.GroupBox5.TabIndex = 3
@@ -1091,7 +1107,7 @@ Private Sub Main()
         Me.GroupBox4.Controls.Add(Me.Label14)
         Me.GroupBox4.Controls.Add(Me.txtDefaultFileTypes)
         Me.GroupBox4.Controls.Add(Me.Label15)
-        Me.GroupBox4.Location = New System.Drawing.Point(8, 78)
+        Me.GroupBox4.Location = New System.Drawing.Point(8, 97)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(518, 122)
         Me.GroupBox4.TabIndex = 2
@@ -1907,6 +1923,7 @@ Private Sub Main()
         '
         'GroupBox10
         '
+        Me.GroupBox10.Controls.Add(Me.chkManualMissingTrailer)
         Me.GroupBox10.Controls.Add(Me.chkManualMissingFanartDownload)
         Me.GroupBox10.Controls.Add(Me.lblManualDatabaseFieldsPrompt)
         Me.GroupBox10.Controls.Add(Me.lblManualSelectField)
@@ -1930,7 +1947,7 @@ Private Sub Main()
         Me.chkManualMissingFanartDownload.Name = "chkManualMissingFanartDownload"
         Me.chkManualMissingFanartDownload.Size = New System.Drawing.Size(203, 17)
         Me.chkManualMissingFanartDownload.TabIndex = 8
-        Me.chkManualMissingFanartDownload.Text = "Download only Movies missing Fanart"
+        Me.chkManualMissingFanartDownload.Text = "Download only for Movies missing Fanart"
         Me.chkManualMissingFanartDownload.UseVisualStyleBackColor = True
         Me.chkManualMissingFanartDownload.Visible = False
         '
@@ -1991,7 +2008,7 @@ Private Sub Main()
         '
         Me.cbManualSelectOperation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbManualSelectOperation.FormattingEnabled = True
-        Me.cbManualSelectOperation.Items.AddRange(New Object() {"Update Value", "Delete Value", "Update Record", "Delete Record", "Download Fanart"})
+        Me.cbManualSelectOperation.Items.AddRange(New Object() {"Update Value", "Delete Value", "Update Record", "Delete Record", "Download Fanart", "Register Trailer"})
         Me.cbManualSelectOperation.Location = New System.Drawing.Point(6, 19)
         Me.cbManualSelectOperation.Name = "cbManualSelectOperation"
         Me.cbManualSelectOperation.Size = New System.Drawing.Size(195, 21)
@@ -2462,7 +2479,7 @@ Private Sub Main()
         Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
         Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 27, 0, 0)
         Me.XionPanel1.Sizable = True
-        Me.XionPanel1.Size = New System.Drawing.Size(187, 475)
+        Me.XionPanel1.Size = New System.Drawing.Size(32, 475)
         Me.XionPanel1.State = XionControls.XionPanel.PanelState.Collapse
         Me.XionPanel1.TabIndex = 67
         Me.XionPanel1.Text = "Movie List"
@@ -2478,26 +2495,26 @@ Private Sub Main()
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
         Me.DataGridView1.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle37.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle37.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle37
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.Location = New System.Drawing.Point(-2, 28)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle38.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle38.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle38
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 20
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -3204,8 +3221,8 @@ Private Sub Main()
         'BindingNavigatorCountItem
         '
         Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(38, 22)
-        Me.BindingNavigatorCountItem.Text = "de {0}"
+        Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(44, 22)
+        Me.BindingNavigatorCountItem.Text = "von {0}"
         Me.BindingNavigatorCountItem.ToolTipText = "Total Number of entries"
         '
         'BindingNavigatorDeleteItem
@@ -3492,26 +3509,26 @@ Private Sub Main()
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle39.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle39.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle39
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle3
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle40.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle40.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle40.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle40.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle40
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -3561,6 +3578,30 @@ Private Sub Main()
         Me.DateAddedDataGridViewTextBoxColumn.Name = "DateAddedDataGridViewTextBoxColumn"
         Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
+        '
+        'chkUsePageGrabber
+        '
+        Me.chkUsePageGrabber.AutoSize = True
+        Me.chkUsePageGrabber.Location = New System.Drawing.Point(211, 65)
+        Me.chkUsePageGrabber.Name = "chkUsePageGrabber"
+        Me.chkUsePageGrabber.Size = New System.Drawing.Size(114, 17)
+        Me.chkUsePageGrabber.TabIndex = 10
+        Me.chkUsePageGrabber.Text = "Use Page Grabber"
+        Me.ToolTip1.SetToolTip(Me.chkUsePageGrabber, "Try to read infos from webpage in movie directory")
+        Me.chkUsePageGrabber.UseVisualStyleBackColor = True
+        '
+        'chkManualMissingTrailer
+        '
+        Me.chkManualMissingTrailer.AutoSize = True
+        Me.chkManualMissingTrailer.Checked = True
+        Me.chkManualMissingTrailer.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkManualMissingTrailer.Location = New System.Drawing.Point(279, 23)
+        Me.chkManualMissingTrailer.Name = "chkManualMissingTrailer"
+        Me.chkManualMissingTrailer.Size = New System.Drawing.Size(194, 17)
+        Me.chkManualMissingTrailer.TabIndex = 9
+        Me.chkManualMissingTrailer.Text = "Update only Movies missing Trailers"
+        Me.chkManualMissingTrailer.UseVisualStyleBackColor = True
+        Me.chkManualMissingTrailer.Visible = False
         '
         'Form1
         '
@@ -3972,4 +4013,7 @@ Private Sub Main()
     Friend WithEvents cbMasterTitle As System.Windows.Forms.ComboBox
     Friend WithEvents lblMasterTitle As System.Windows.Forms.Label
     Friend WithEvents chkAspectRatio As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUseXBMCnfo As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUsePageGrabber As System.Windows.Forms.CheckBox
+    Friend WithEvents chkManualMissingTrailer As System.Windows.Forms.CheckBox
 End Class

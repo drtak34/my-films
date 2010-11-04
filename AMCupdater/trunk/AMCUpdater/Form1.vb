@@ -892,6 +892,7 @@ Public Class Form1
             grpManualInternetLookupSettings.Visible = False
             lblManualDatabaseFieldsPrompt.Visible = False
             chkManualMissingFanartDownload.Visible = False
+            chkManualMissingTrailer.Visible = False
 
             If cbManualSelectOperation.SelectedItem = "Update Value" Then
                 lblManualEnterNewValue.Visible = True
@@ -910,6 +911,11 @@ Public Class Form1
                 chkManualMissingFanartDownload.Visible = True
                 grpManualInternetLookupSettings.Visible = True
                 lblManualDatabaseFieldsPrompt.Visible = True
+            ElseIf cbManualSelectOperation.SelectedItem = "Register Trailer" Then
+                chkManualMissingTrailer.Visible = True
+                chkManualMissingFanartDownload.Visible = False
+                grpManualInternetLookupSettings.Visible = False
+                lblManualDatabaseFieldsPrompt.Visible = False
             End If
         End If
         Me.ValidateChildren()
@@ -1719,6 +1725,8 @@ Public Class Form1
         CurrentSettings.Parse_Playlist_Files = chkParsePlaylistFiles.Checked
         CurrentSettings.Image_Download_Filename_Prefix = txtPictureFilenamePrefix.Text
         CurrentSettings.Prohibit_Internet_Lookup = chkProhibitInternetLookup.Checked
+        CurrentSettings.Use_XBMC_nfo = chkUseXBMCnfo.Checked
+        CurrentSettings.Use_Page_Grabber = chkUsePageGrabber.Checked
         CurrentSettings.Parse_Subtitle_Files = chkParseSubtitleFiles.Checked
         CurrentSettings.Rescan_Moved_Files = chkRescanMovedFiles.Checked
 
@@ -1839,6 +1847,8 @@ Public Class Form1
             chkParsePlaylistFiles.Checked = CurrentSettings.Parse_Playlist_Files
             txtPictureFilenamePrefix.Text = CurrentSettings.Image_Download_Filename_Prefix
             chkProhibitInternetLookup.Checked = CurrentSettings.Prohibit_Internet_Lookup
+            chkUseXBMCnfo.Checked = CurrentSettings.Use_XBMC_nfo
+            chkUsePageGrabber.Checked = CurrentSettings.Use_Page_Grabber
             chkParseSubtitleFiles.Checked = CurrentSettings.Parse_Subtitle_Files
             chkRescanMovedFiles.Checked = CurrentSettings.Rescan_Moved_Files
 
@@ -2044,5 +2054,6 @@ Public Class Form1
     Private Sub TextBox2_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TextBox2.TextChanged
         '        TextBox2.Text = 1
     End Sub
+
 End Class
 

@@ -238,6 +238,19 @@ Module Module1
         Dim f As New IO.FileInfo(FilePath)
 
         Select Case DataItem.ToLower
+
+            'Guzzi Test'
+            Case "beschreibung"
+                Try
+                    TempString = "Test-Guzzi-Beschreibung"
+                    ReturnValue = TempString
+
+                Catch ex As Exception
+                    Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, 3)
+                    ReturnValue = ""
+                End Try
+
             Case "filename"
                 Try
                     'ReturnValue = MI.Get_(StreamKind.General, 0, "FileName")
@@ -256,6 +269,7 @@ Module Module1
                     LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
                     ReturnValue = ""
                 End Try
+
             Case "runtime"
                 Try
                     MI = New MediaInfo
@@ -517,6 +531,503 @@ Module Module1
         Return ReturnValue
 
     End Function
+
+
+    Public Function GetXBMCnfoData(ByVal FilePath As String, ByVal DataItem As String)
+        'Guzzi: Function to retreive information from the XBMC-nfo-file, that resides in same directory as movie does...
+        'Search for movie.nfo in directory ...
+
+        Dim ReturnValue As String = ""
+        Dim TempInteger As Long = 0
+        Dim TempString As String = ""
+        Dim MI As MediaInfo = New MediaInfo
+        Dim i As Integer = 0
+        If Not System.IO.File.Exists(FilePath) Then
+            Return "ERROR : File cannot be found"
+            LogEvent("Error - Cannot open file for analysis - " & FilePath, EventLogLevel.ErrorOrSimilar)
+            Exit Function
+        End If
+
+        Dim f As New IO.FileInfo(FilePath)
+
+        Select Case DataItem.ToLower
+
+            'Guzzi Test'
+            Case "beschreibung"
+                Try
+                    TempString = "Test-Guzzi-Beschreibung"
+                    ReturnValue = TempString
+
+                Catch ex As Exception
+                    Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, 3)
+                    ReturnValue = ""
+                End Try
+
+            Case "filename"
+                Try
+                    'ReturnValue = MI.Get_(StreamKind.General, 0, "FileName")
+                    TempString = f.Name
+                    'Console.WriteLine(f.Extension)
+                    TempString = TempString.Replace(f.Extension, "")
+                    'Put this bit in here to remove the '1of2' type bits using the system variable regex expression.
+                    Dim SplitText As New Regex("\(" & CurrentSettings.RegEx_Check_For_MultiPart_Files & "\)")
+                    TempString = SplitText.Replace(TempString, "")
+                    SplitText = New Regex(CurrentSettings.RegEx_Check_For_MultiPart_Files)
+                    TempString = SplitText.Replace(TempString, "")
+                    ReturnValue = TempString
+
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+
+            Case "runtime"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    'PlayTime value is in miliseconds!
+                    TempString = MI.Get_(StreamKind.General, 0, "PlayTime")
+                    MI.Close()
+
+                    Integer.TryParse(TempString, TempInteger)
+                    If TempInteger <> 0 Then
+                        ReturnValue = CLng(TempInteger / 60000).ToString
+                    Else
+                        ReturnValue = ""
+                    End If
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "videoformat"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    TempString = MI.Get_(StreamKind.Visual, 0, "Codec/String")
+                    MI.Close()
+                    If TempString <> "" Then
+                        ReturnValue = TempString
+                    Else
+                        ReturnValue = ""
+                    End If
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "videobitrate" 'divide by 1000 as returned in bps.
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    TempString = MI.Get_(StreamKind.Visual, 0, "BitRate")
+                    MI.Close()
+                    Integer.TryParse(TempString, TempInteger)
+                    If TempInteger <> 0 Then
+                        ReturnValue = CInt(TempInteger / 1000).ToString
+                    Else
+                        ReturnValue = ""
+                    End If
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "audioformat"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    ReturnValue = MI.Get_(StreamKind.Audio, 0, "Codec/String")
+                    MI.Close()
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "audiostreamcount"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    ReturnValue = MI.Get_(StreamKind.General, 0, "AudioCount")
+                    MI.Close()
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "audiostreamcodeclist"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    ReturnValue = MI.Get_(StreamKind.General, 0, "Audio_Codec_List")
+                    MI.Close()
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "audiostreamlanguagelist"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    'First get the count if possible
+                    TempString = ""
+                    Integer.TryParse(MI.Get_(StreamKind.General, 0, "AudioCount"), TempInteger)
+                    If TempInteger > 0 Then
+                        For i = 0 To TempInteger - 1
+                            TempString = ""
+                            'Try to get the 'proper' language for this stream:
+                            TempString = MI.Get_(StreamKind.Audio, i, "Language/String")
+                            If TempString = "" Then
+                                'If not, check the IAS value - maybe has a language string there:
+                                TempString = MI.Get_(StreamKind.General, 0, "IAS" & (i + 1).ToString)
+                            End If
+                            If TempString <> "" Then
+                                'Build the list:
+                                If ReturnValue = "" Then
+                                    ReturnValue = TempString
+                                Else
+                                    ReturnValue += " / " & TempString
+                                End If
+                            End If
+                            If ReturnValue = "" Then
+                                'Still no value, maybe just put in the number of audio streams?
+                                If MI.Get_(StreamKind.General, 0, "AudioCount") <> "1" Then
+                                    ReturnValue = MI.Get_(StreamKind.General, 0, "AudioCount").ToString
+                                End If
+                            End If
+                        Next
+                    Else
+                        'Cannot even get the count of streams - return empty:
+                        ReturnValue = ""
+                    End If
+                    MI.Close()
+                Catch ex As Exception
+                    Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "audiobitrate" 'divide
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    TempString = MI.Get_(StreamKind.Audio, 0, "BitRate")
+                    MI.Close()
+                    Integer.TryParse(TempString, TempInteger)
+                    If TempInteger <> 0 Then
+                        ReturnValue = CInt((TempInteger / 1000)).ToString
+                    Else
+                        ReturnValue = ""
+                    End If
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "textstreamcodeclist"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    ReturnValue = MI.Get_(StreamKind.General, 0, "Text_Codec_List")
+                    MI.Close()
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "textstreamlanguagelist"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    Integer.TryParse(MI.Get_(StreamKind.General, 0, "TextCount"), TempInteger)
+                    If TempInteger <> 0 Then
+                        For i = 0 To TempInteger - 1
+                            TempString = ""
+                            TempString = MI.Get_(StreamKind.Text, i, "Language/String")
+                            If TempString <> "" Then
+                                'Build the string
+                                If ReturnValue = "" Then
+                                    ReturnValue = TempString
+                                Else
+                                    ReturnValue += " / " & TempString
+                                End If
+                                'Check for a subtitle description:
+                                TempString = MI.Get_(StreamKind.Text, i, "Title")
+                                If TempString <> "" Then
+                                    'Clean up the title a bit:
+                                    TempString = TempString.Replace("<", "")
+                                    TempString = TempString.Replace(">", "")
+                                    TempString = TempString.Replace("(", "")
+                                    TempString = TempString.Replace(")", "")
+                                    ReturnValue += " (" & TempString & ")"
+                                End If
+                            End If
+                        Next
+                    End If
+                    MI.Close()
+                Catch ex As Exception
+                    Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+
+            Case "resolution"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    TempString = MI.Get_(StreamKind.Visual, 0, "Width") & "x" & MI.Get_(StreamKind.Visual, 0, "Height")
+                    MI.Close()
+                    If TempString = "x" Then
+                        TempString = ""
+                    End If
+                    ReturnValue = TempString
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "framerate"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    TempString = MI.Get_(StreamKind.Visual, 0, "FrameRate")
+                    MI.Close()
+                    ReturnValue = TempString
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "filesize" 'get in MB = divide by 1024 twice
+                Try
+                    TempString = CStr(f.Length)
+                    TempInteger = CLng(TempString)
+                    ReturnValue = CLng((TempInteger / 1048576)).ToString
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case "date"
+                Try
+                    Select Case CurrentSettings.Date_Handling
+                        'File Created Date
+                        'Current System Date
+                        'No Date
+                        Case "File Created Date"
+                            ReturnValue = f.CreationTime.Date
+                        Case "File Modified Date"
+                            ReturnValue = f.LastWriteTime.Date
+                        Case "Current System Date"
+                            ReturnValue = My.Computer.Clock.LocalTime.Date
+                        Case "No Date"
+                            ReturnValue = String.Empty
+                        Case Else
+                            ReturnValue = String.Empty
+                    End Select
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+            Case Else
+                ReturnValue = "Unknown Variable Requested"
+        End Select
+        'Console.WriteLine(DataItem.ToString + " - " + ReturnValue.ToString)
+        '        MI.Close()
+        If MI IsNot Nothing Then
+            MI = Nothing
+        End If
+
+        Return ReturnValue
+
+    End Function
+
+
+    Public Function GetHTMLFileData(ByVal FilePath As String, ByVal DataItem As String)
+        'Guzzi: Function to retreive information from the HTML-Files in movie directory...
+        'Search for goldesel 2004.htm, index.php.htm, Detail.aspx.htm, goldesel.to - quality source for more than 10 years.htm 
+        Dim ReturnValue As String = ""
+        Dim TempInteger As Long = 0
+        Dim TempString As String = ""
+        Dim Directoryname As String = ""
+        Dim HTMLfilename As String = ""
+        'Dim MI As MediaInfo = New MediaInfo
+        Dim i As Integer = 0
+
+        Directoryname = fnGetFilePath(FilePath)
+
+        If System.IO.File.Exists(Directoryname + "\" + "goldesel 2004.htm") Then
+            HTMLfilename = Directoryname + "\" + "goldesel 2004.htm"
+        End If
+        If System.IO.File.Exists(Directoryname + "\" + "index.php.htm") Then
+            HTMLfilename = Directoryname + "\" + "index.php.htm"
+        End If
+        If System.IO.File.Exists(Directoryname + "\" + "Detail.aspx.htm") Then
+            HTMLfilename = Directoryname + "\" + "Detail.aspx.htm"
+        End If
+        If System.IO.File.Exists(Directoryname + "\" + "goldesel.to - quality source for more than 10 years.htm") Then
+            HTMLfilename = Directoryname + "\" + "goldesel.to - quality source for more than 10 years.htm"
+        End If
+
+        If Not System.IO.File.Exists(HTMLfilename) Then
+            LogEvent("Error - Cannot open file for analysis - " & HTMLfilename, EventLogLevel.ErrorOrSimilar)
+            Return "ERROR : File " + HTMLfilename + " cannot be found"
+            Exit Function
+        End If
+
+        Dim f As New IO.FileInfo(HTMLfilename)
+
+        Select Case DataItem.ToLower
+
+            'Guzzi Test'
+            Case "beschreibung"
+                Try
+                    TempString = "Test-Guzzi-Beschreibung"
+                    ReturnValue = TempString
+
+                Catch ex As Exception
+                    Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, 3)
+                    ReturnValue = ""
+                End Try
+
+            Case "description"
+                'GUZZI: Added to get the Content of the HTML xxx.htm File !!!
+                Dim textReader As String
+                'LogEvent("fnGetDescription: Try to read Description from index.php.htm for File: " + FilePath, 2)
+                Try
+                    textReader = My.Computer.FileSystem.ReadAllText(FilePath, System.Text.Encoding.UTF7)
+                    LogEvent("fnGetDescription: Parsing complete for  " + FilePath, 2)
+                    Dim SearchString As String = textReader
+                    Dim SearchChar As String = "<b>Beschreibung:"
+                    Dim StartPos As Integer
+                    StartPos = InStr(1, SearchString, SearchChar, CompareMethod.Text)
+                    Dim MidWords As String = Mid(textReader, StartPos + 20)
+                    Dim EndPos As Integer
+                    SearchChar = "</td>"
+                    EndPos = InStr(1, MidWords, SearchChar, CompareMethod.Text)
+                    Dim MidDescription As String = Microsoft.VisualBasic.Left(MidWords, EndPos - 1)
+                    Dim Guzzidescription As String = Regex.Replace(MidDescription, "\r\n", " ")
+                    Dim Guzzidescription2 As String = Regex.Replace(Guzzidescription, "\<[^\>]+\>", "")
+                    'MsgBox(Guzzidescription2)
+                    ReturnValue = Guzzidescription2
+                Catch ex As Exception
+                    LogEvent("fnGetDescription: ERROR - Cannot parse " + FilePath, 3)
+                End Try
+
+            Case "filename"
+                Try
+                    'ReturnValue = MI.Get_(StreamKind.General, 0, "FileName")
+                    TempString = f.Name
+                    'Console.WriteLine(f.Extension)
+                    TempString = TempString.Replace(f.Extension, "")
+                    'Put this bit in here to remove the '1of2' type bits using the system variable regex expression.
+                    Dim SplitText As New Regex("\(" & CurrentSettings.RegEx_Check_For_MultiPart_Files & "\)")
+                    TempString = SplitText.Replace(TempString, "")
+                    SplitText = New Regex(CurrentSettings.RegEx_Check_For_MultiPart_Files)
+                    TempString = SplitText.Replace(TempString, "")
+                    ReturnValue = TempString
+
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+
+            Case "date"
+                'GUZZI: Added to get Content (Date Added) of the index.php.htm File !!!
+                'Dim FilePath As String = ""
+                'Dim ReturnValue As String = ""
+                Dim textReader As String
+                Dim FileName As String
+                Dim FileNameEnd As String = FileName.Substring(InStrRev(FileName, "\") - 1)
+                FileName = FileName.Replace(FileNameEnd, "")
+                FilePath = FileName + "\index.php.htm"
+                Dim fi As New IO.FileInfo(FilePath)
+                If Not fi.Exists Then
+                    LogEvent("fnGetDateAdded: Error - Cannot open file for analysis: " & FilePath, 3)
+                    Return "ERROR : File " + FilePath + " cannot be found"
+                    Exit Function
+                End If
+                Try
+                    textReader = My.Computer.FileSystem.ReadAllText(FilePath, System.Text.Encoding.UTF7)
+                    'MsgBox(textReader)
+                    LogEvent("fnGetDateAdded: Parsing complete for  " + FilePath, 2)
+                    Dim SearchString As String = textReader
+                    Dim SearchChar As String = "<b>Eintragsdatum:</b>"
+                    Dim StartPos As Integer
+                    StartPos = InStr(1, SearchString, SearchChar, CompareMethod.Text)
+                    Dim MidWords As String = Mid(textReader, StartPos + 3)
+                    ' MsgBox(MidWords)
+                    Dim EndPos As Integer
+                    SearchChar = "</td>"
+                    EndPos = InStr(20, MidWords, SearchChar, CompareMethod.Text)
+                    Dim MidDescription As String = Microsoft.VisualBasic.Left(MidWords, EndPos - 1)
+                    Dim Guzzidescription As String = Regex.Replace(MidDescription, "\r\n", " ")
+                    Dim Guzzidescription2 As String = Regex.Replace(Guzzidescription, "\<[^\>]+\>", "")
+                    Dim Guzzidescription3 As String = Guzzidescription2.Substring(InStrRev(Guzzidescription2, " "))
+                    ReturnValue = Guzzidescription3
+                Catch ex As Exception
+                    LogEvent("fnGetDateAdded: ERROR - Cannot parse " + FilePath, 3)
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
+
+            Case Else
+                ReturnValue = "Unknown Variable Requested"
+        End Select
+        'Console.WriteLine(DataItem.ToString + " - " + ReturnValue.ToString)
+        '        MI.Close()
+        Return ReturnValue
+
+    End Function
+
+    Public Function fnGetFolderName(ByVal FileName As String) As String
+        'GUZZI: Added to get the Root Folder Name of a Moviefile !!!
+        Dim TempString As String
+        Dim ReturnValue As String
+        Dim FileNameEnd As String = FileName.Substring(InStrRev(FileName, "\") - 1)
+        FileName = FileName.Replace(FileNameEnd, "")
+        If FileName.Contains("\") Then
+            TempString = FileName.Substring(InStrRev(FileName, "\"))
+        Else
+            TempString = FileName
+        End If
+
+        If TempString.ToLower = "video_ts" Then
+            TempString = FileName.Replace(TempString, "")
+            'Check that there isn't a trailing backslash (probably is)
+            If TempString.EndsWith("\") = True Then
+                TempString = TempString.Substring(0, Len(TempString) - 1)
+            End If
+            'Check to see if we've still got a nested path.  Take the next level up if so.
+            If TempString.Contains("\") = True Then
+                ReturnValue = TempString.Substring(InStrRev(TempString, "\"))
+            Else
+                ReturnValue = TempString
+            End If
+
+            'do more processing
+        Else
+            ReturnValue = TempString
+        End If
+
+        Return ReturnValue
+    End Function
+
+    Public Function fnGetFilePath(ByVal FileName As String) As String
+        'GUZZI: Added to get the Root Folder Name of a Moviefile !!!
+        Dim ReturnValue As String
+        Dim FileNameEnd As String = FileName.Substring(InStrRev(FileName, "\") - 1)
+        ReturnValue = FileName.Replace(FileNameEnd, "")
+        Return ReturnValue
+    End Function
+
+
 
     Public Function GetGroupName(ByVal FilePath As String)
         Dim ReturnValue As String = String.Empty

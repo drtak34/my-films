@@ -10,8 +10,9 @@
     </UpdateUrlHistory>
     <BootstrapperUrlHistory>
     </BootstrapperUrlHistory>
-    <ApplicationRevision>0</ApplicationRevision>
     <FallbackCulture>fr-FR</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ErrorReportUrlHistory>
+    </ErrorReportUrlHistory>
   </PropertyGroup>
 </Project>

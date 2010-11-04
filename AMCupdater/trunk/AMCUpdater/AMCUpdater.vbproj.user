@@ -9,11 +9,12 @@
     </UpdateUrlHistory>
     <BootstrapperUrlHistory>
     </BootstrapperUrlHistory>
-    <ApplicationRevision>0</ApplicationRevision>
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>true</VerifyUploadedFiles>
     <ProjectView>ProjectFiles</ProjectView>
     <ReferencePath>C:\Program Files\Team MediaPortal\MediaPortal\</ReferencePath>
+    <ErrorReportUrlHistory>
+    </ErrorReportUrlHistory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <StartArguments>

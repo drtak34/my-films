@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("AMC Updater")> 
+<Assembly: AssemblyTitle("AMC Updater (G-Mod)")> 
 <Assembly: AssemblyDescription("AutoUpdater for Ant Movie Catalog")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("AMC Updater")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("0.9.0.0")> 
-<Assembly: AssemblyFileVersion("0.9.0.0")> 
+<Assembly: AssemblyVersion("0.9.1.0")> 
+<Assembly: AssemblyFileVersion("0.9.1.0")> 
