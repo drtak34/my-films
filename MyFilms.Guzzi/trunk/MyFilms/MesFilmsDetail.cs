@@ -1689,7 +1689,7 @@ namespace MesFilms
         //                          wtitle2 = Translated Title if any or Original Title
         //                          main = true for main screen and false for detailed
         //                          searched = dir for Directory searched (detail screen and control multiImage)or file 
-        //                          rep = true if the selected Item is a grouped Item (henre, year...) on main screen
+        //                          rep = true if the selected Item is a grouped Item (country, genre, year...) on main screen
         //                          filecover = name of the file cover for using 'Default Cover for missing Fanart'
         //      value returned string[2]
         //                          [0] = file or directory found (if not " ")
