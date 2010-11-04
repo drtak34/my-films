@@ -30,7 +30,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ApplicationIcon>Resources\clapperboard.ico</ApplicationIcon>
+    <ApplicationIcon>MyFilms\Resources\clapperboard.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -168,7 +168,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ClassDiagram1.cd" />
+    <None Include="MyFilms\Resources\ClassDiagram1.cd" />
     <None Include="MyFilms\AntMovieCatalog.xsc">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
@@ -224,11 +224,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\film-reel-128x128.png" />
-    <None Include="Resources\clapperboard-128x128.png" />
-    <Content Include="Resources\clapperboard.ico" />
-    <Content Include="Resources\MP_Banner.png" />
-    <Content Include="Resources\MP_Icon.png" />
+    <None Include="MyFilms\Resources\film-reel-128x128.png" />
+    <None Include="MyFilms\Resources\clapperboard-128x128.png" />
+    <Content Include="MyFilms\Resources\clapperboard.ico" />
+    <Content Include="MyFilms\Resources\MP_Banner.png" />
+    <Content Include="MyFilms\Resources\MP_Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
