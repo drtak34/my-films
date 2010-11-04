@@ -548,6 +548,8 @@ namespace MesFilms
                 WLayOut = 2;
             if (LayOut.Text == "Filmstrip")
                 WLayOut = 3;
+            if (LayOut.Text == "Cover Flow")
+                WLayOut = 4;
             if (AntTitle2.Text.Length == 0)
                 AntTitle2.Text = "(none)";
             string wDfltSortMethod = string.Empty;
@@ -611,6 +613,8 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", CatalogType.SelectedIndex.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalog", MesFilmsCat.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntPicture", MesFilmsImg.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistPicturePath", MesFilmsImgArtist.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", chkDfltArtist.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorage", AntStorage.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorageTrailer", AntStorageTrailer.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "PathStorage", PathStorage.Text.ToString());
@@ -672,6 +676,16 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltText", View_Dflt_Text.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchList", AntSearchList.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UpdateList", AntUpdList.Text.ToString());
+
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", check_WOL_enable.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", check_WOL_Userdialog.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-1", NAS_Name_1.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-1", NAS_MAC_1.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-2", NAS_Name_2.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-2", NAS_MAC_2.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-3", NAS_Name_3.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-3", NAS_MAC_3.Text.ToString());
+
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "StrSelect", "");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator1", ListSeparator1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator2", ListSeparator2.Text.ToString());
@@ -705,6 +719,7 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", chkWindowsFileDialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", ItemSearchFileName.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", DefaultCover.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", DefaultCoverArtist.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdExe", CmdExe.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdPar", CmdPar.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", chkGrabber.Checked);
@@ -857,9 +872,12 @@ namespace MesFilms
             CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", "0"));
             MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalog", "");
             MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntPicture", "");
+            MesFilmsImgArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistPicturePath", "");
+            chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
             MesFilmsFanart.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartPicture", "");
             MesFilmsViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsPicture", "");
             chkDfltViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDflt", false);
+            chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
             chkViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Views", false);
             AntStorage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorage", "");
             AntStorageTrailer.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntStorageTrailer", "");
@@ -919,6 +937,16 @@ namespace MesFilms
             AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdDflT2", string.Empty);
             AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchList", "");
             AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UpdateList", "");
+
+            check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", false);
+            check_WOL_Userdialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", false);
+            NAS_Name_1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-1", string.Empty);
+            NAS_MAC_1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-1", string.Empty);
+            NAS_Name_2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-2", string.Empty);
+            NAS_MAC_2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-2", string.Empty);
+            NAS_Name_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-3", string.Empty);
+            NAS_MAC_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-3", string.Empty);
+
             AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel1", string.Empty);
             AntItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem1", string.Empty);
             AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel2", string.Empty);
@@ -987,6 +1015,17 @@ namespace MesFilms
                 SearchSubDirsTrailer.Checked = true;
             else
                 SearchSubDirsTrailer.Checked = false;
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", "False") == "True"
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", "False") == "yes")
+                check_WOL_enable.Checked = true;
+            else
+                check_WOL_enable.Checked = false;
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", "False") == "True"
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", "False") == "yes")
+                check_WOL_Userdialog.Checked = true;
+            else
+                check_WOL_Userdialog.Checked = false;
+
             radioButton1.Checked = false;
             radioButton2.Checked = false;
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
@@ -1014,6 +1053,7 @@ namespace MesFilms
             OnlyFile.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", false);
             ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", "");
             DefaultCover.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", "");
+            DefaultCoverArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", "");
             View_Dflt_Item.Items.Remove(View_Dflt_Item.Text);
             View_Dflt_Item.Items.Add(View_Dflt_Item.Text);
             View_Dflt_Item.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltItem", "(none)");
@@ -1036,6 +1076,8 @@ namespace MesFilms
                 LayOut.Text = "Large Icons";
             if (WLayOut == 3)
                 LayOut.Text = "Filmstrip";
+            if (WLayOut == 4)
+                LayOut.Text = "Cover Flow";
             AntViewText_Change();
             AntSort_Change();
         }
@@ -1054,6 +1096,7 @@ namespace MesFilms
             Config_Dflt.Checked = false;
             MesFilmsCat.ResetText();
             MesFilmsImg.ResetText();
+            MesFilmsImgArtist.ResetText();
             MesFilmsFanart.ResetText();
             MesFilmsViews.ResetText();
             AntStorage.ResetText();
@@ -1131,6 +1174,7 @@ namespace MesFilms
             View_Dflt_Item.ResetText();
             View_Dflt_Text.ResetText();
             DefaultCover.ResetText();
+            DefaultCoverArtist.ResetText();
             Dwp.ResetText();
             Rpt_Dwp.ResetText();
             CmdExe.ResetText();
@@ -1144,7 +1188,15 @@ namespace MesFilms
             rbsuppress1.Checked = true;
             SearchSubDirs.Checked = false;
             SearchSubDirsTrailer.Checked = false;
+            check_WOL_enable.Checked = false;
+            check_WOL_Userdialog.Checked = false;
             CheckWatched.Checked = false;
+            NAS_Name_1.ResetText();
+            NAS_Name_2.ResetText();
+            NAS_Name_3.ResetText();
+            NAS_MAC_1.ResetText();
+            NAS_MAC_2.ResetText();
+            NAS_MAC_3.ResetText();
             radioButton1.Checked = false;
             radioButton2.Checked = false;
             Thumbnails.Checked = true;
@@ -1164,6 +1216,7 @@ namespace MesFilms
             chkDfltFanart.Checked = false;
             chkFanart.Checked = false;
             chkDfltViews.Checked = false;
+            chkDfltArtist.Checked = false;
             chkViews.Checked = false;
 
         }
@@ -1745,6 +1798,9 @@ namespace MesFilms
                     SValue.Items.Add(wsfield);
                 }
             }
+            //Guzzi: Added aspectratio (e.g. 2,39) and ar (e.g. 16:9)
+            SValue.Items.Add("aspectratio");
+            SValue.Items.Add("ar");
         }
         public AntMovieCatalog ReadXml()
         {
@@ -2330,13 +2386,12 @@ namespace MesFilms
             }
         }
 
-        private void btnGenre_Click(object sender, EventArgs e)
+        private void btnViews_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 MesFilmsViews.Text = folderBrowserDialog1.SelectedPath;
             }
-
         }
 
         private void ButDefCov_Click(object sender, EventArgs e)
@@ -2345,16 +2400,6 @@ namespace MesFilms
             openFileDialog1.DefaultExt = "png";
             openFileDialog1.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp|All Files|*.*";
             openFileDialog1.Title = "Default display Cover";
-            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-                DefaultCover.Text = openFileDialog1.FileName;
-        }
-
-        private void BtnDefViews_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.DefaultExt = "jpg";
-            openFileDialog1.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp|All Files|*.*";
-            openFileDialog1.Title = "Default display Thumb for Grouped Views";
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
                 DefaultCover.Text = openFileDialog1.FileName;
         }
@@ -2433,6 +2478,7 @@ namespace MesFilms
             }
         }
 
+
         private void MesFilmsFanart_TextChanged(object sender, EventArgs e)
         {
 
@@ -2452,5 +2498,100 @@ namespace MesFilms
         {
 
         }
+
+        private void NAS_1_Name_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void check_WOL_enable_CheckedChanged(object sender, EventArgs e)
+        {
+            if (check_WOL_enable.Checked)
+            {
+                check_WOL_Userdialog.Enabled = true;
+                NAS_Name_1.Enabled = true;
+                NAS_Name_2.Enabled = true;
+                NAS_Name_3.Enabled = true;
+                NAS_MAC_1.Enabled = true;
+                NAS_MAC_2.Enabled = true;
+                NAS_MAC_3.Enabled = true;
+            }
+            else
+            {
+                check_WOL_Userdialog.Enabled = false;
+                NAS_Name_1.Enabled = false;
+                NAS_Name_2.Enabled = false;
+                NAS_Name_3.Enabled = false;
+                NAS_MAC_1.Enabled = false;
+                NAS_MAC_2.Enabled = false;
+                NAS_MAC_3.Enabled = false;
+            }
+
+        }
+
+        private void AntSearchFieldReset_Click(object sender, EventArgs e)
+        {
+            AntSearchList.Text = String.Empty;
+        }
+
+        private void AntUpdFieldReset_Click(object sender, EventArgs e)
+        {
+            AntUpdList.Text = String.Empty;
+        }
+
+        //private void ButDefaultCoverArtist_Click(object sender, EventArgs e)
+        //{
+        //    openFileDialog1.RestoreDirectory = true;
+        //    openFileDialog1.DefaultExt = "png";
+        //    openFileDialog1.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp|All Files|*.*";
+        //    openFileDialog1.Title = "Default display Cover";
+        //    if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+        //        DefaultCoverArtist.Text = openFileDialog1.FileName;
+        //}
+
+        private void ButImgArtist_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+                MesFilmsImgArtist.Text = folderBrowserDialog1.SelectedPath;
+            }
+
+        }
+
+        private void ButDefCovArtist_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.DefaultExt = "png";
+            openFileDialog1.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp|All Files|*.*";
+            openFileDialog1.Title = "Default Artist Cover";
+            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+                DefaultCoverArtist.Text = openFileDialog1.FileName;
+        }
+
+        private void btnResetThumbsArtist_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to reset all generated artist thumbs?", "Information", MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Artist"))
+                {
+                    if (wfile != DefaultCoverArtist.Text)
+                        System.IO.File.Delete(wfile);
+                }
+            }
+        }
+
+        private void DefaultCover_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DefaultCoverArtist_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
