@@ -59,7 +59,7 @@
     <RegisterForComInterop>false</RegisterForComInterop>
     <DebugType>pdbonly</DebugType>
     <UseVSHostingProcess>true</UseVSHostingProcess>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -151,6 +151,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyFilms\AntMovieCatalog.resx">
@@ -224,8 +229,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="MyFilms\Resources\film-reel-128x128.png" />
     <None Include="MyFilms\Resources\clapperboard-128x128.png" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <Content Include="MyFilms\Resources\clapperboard.ico" />
     <Content Include="MyFilms\Resources\MP_Banner.png" />
     <Content Include="MyFilms\Resources\MP_Icon.png" />

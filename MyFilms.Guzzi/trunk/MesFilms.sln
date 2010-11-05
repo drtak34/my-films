@@ -10,6 +10,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cornerstone.MP", "CornerstoneMP\Cornerstone.MP\Cornerstone.MP.csproj", "{77C78161-3206-45FD-A419-60218F3354C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber", "..\..\AMCupdater\trunk\grabber\Grabber.csproj", "{92C183EE-636F-4A55-A6AB-363CDA606110}"
+	ProjectSection(ProjectDependencies) = postProject
+		{77C78161-3206-45FD-A419-60218F3354C0} = {77C78161-3206-45FD-A419-60218F3354C0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +66,7 @@ Global
 		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|x86.Build.0 = Debug|Any CPU
 		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
 		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
 		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
