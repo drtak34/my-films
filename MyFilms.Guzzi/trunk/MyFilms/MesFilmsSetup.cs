@@ -129,7 +129,7 @@ namespace MesFilms
                     SField1.Items.Add(dc.ColumnName);
                     SField2.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && !(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Description") && !(dc.ColumnName == "Comments"))
+                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && !(dc.ColumnName == "Description") && !(dc.ColumnName == "Comments"))
                 {
                     AntViewItem1.Items.Add(dc.ColumnName);
                     AntViewItem2.Items.Add(dc.ColumnName);
@@ -479,14 +479,14 @@ namespace MesFilms
                     DVDPTagField.Focus();
                     return;
                 }
-            if (chkGrabber.Checked == true)
+            if (chkGrabber.Checked)
                 if (txtGrabber.Text.Length == 0)
                 {
                     System.Windows.Forms.MessageBox.Show("Grabber Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     txtGrabber.Focus();
                     return;
                 }
-            if (chkAMCUpd.Checked == true)
+            if (chkAMCUpd.Checked)
             {
                 if (txtAMCUpd_exe.Text.Length == 0)
                 {
@@ -1277,7 +1277,7 @@ namespace MesFilms
             MesFilmsSetup_Quit();
         }
 
-        private void MesFilmsSetup_Quit()
+        private static void MesFilmsSetup_Quit()
         {
         }
         private void Config_Name_Control(object sender, EventArgs e)
@@ -1454,7 +1454,7 @@ namespace MesFilms
 
         private void chkAMCUpd_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAMCUpd.Checked == true)
+            if (chkAMCUpd.Checked)
             {
                 txtAMCUpd_exe.Enabled = true;
                 btnAMCUpd_exe.Enabled = true;
@@ -1476,7 +1476,7 @@ namespace MesFilms
 
         private void chkGrabber_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkGrabber.Checked == true)
+            if (chkGrabber.Checked)
             {
                 btnGrabber.Enabled = true;
                 txtGrabber.Enabled = true;
@@ -1506,7 +1506,7 @@ namespace MesFilms
 
         private void chkFanart_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkFanart.Checked == true)
+            if (chkFanart.Checked)
             {
                 MesFilmsFanart.Enabled = true;
                 btnFanart.Enabled = true;

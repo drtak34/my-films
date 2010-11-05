@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -130,18 +131,9 @@ namespace Guzzi.grabber
                         if (xml != null)
                         {
                             movieNodes = xml.Item(0).SelectNodes("//movie");
-                            foreach (XmlNode node in movieNodes)
-                            {
-                                DBMovieInfo movie2 = getMovieInformation(node);
-                                if (movie2 != null && Grabber.GrabUtil.normalizeTitle(movie2.Title.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())) && movie2.Directors.Contains(director))
-                                    if (year > 0 && movie2.Year > 0)
-                                    {
-                                        if ((year >= movie2.Year - 2) && (year <= movie2.Year + 2))
-                                            resultsdet.Add(movie2);
-                                    }
-                                    //else
-                                    //    resultsdet.Add(movie2);
-                            }
+                            resultsdet.AddRange(from XmlNode node in movieNodes
+                                                select getMovieInformation(node)
+                                                into movie2 where movie2 != null && Grabber.GrabUtil.normalizeTitle(movie2.Title.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())) && movie2.Directors.Contains(director) where year > 0 && movie2.Year > 0 where (year >= movie2.Year - 2) && (year <= movie2.Year + 2) select movie2);
                         }
                     }
                 }
@@ -224,18 +216,12 @@ namespace Guzzi.grabber
                             movie.Runtime = runtime;
                         break;
                     case "people":
-                        foreach (XmlNode person in node.SelectNodes("person[@job='director']/name"))
-                        {
-                            directors.Add(person.InnerText.Trim());
-                        }
-                        foreach (XmlNode person in node.SelectNodes("person[@job='screenplay']/name"))
-                        {
-                            writers.Add(person.InnerText.Trim());
-                        }
-                        foreach (XmlNode person in node.SelectNodes("person[@job='actor']/name"))
-                        {
-                            actors.Add(person.InnerText.Trim());
-                        }
+                        directors.AddRange(from XmlNode person in node.SelectNodes("person[@job='director']/name")
+                                           select person.InnerText.Trim());
+                        writers.AddRange(from XmlNode person in node.SelectNodes("person[@job='screenplay']/name")
+                                         select person.InnerText.Trim());
+                        actors.AddRange(from XmlNode person in node.SelectNodes("person[@job='actor']/name")
+                                        select person.InnerText.Trim());
                         break;
                     case "categories":
                         //todo: uncomment and adapt when the genres are implemented

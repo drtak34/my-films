@@ -68,37 +68,37 @@ namespace MesFilms.Actors
         }
 
         [SkinControl(10101)]
-        protected GUIButtonControl CTRL_TxtSelect = null;
+        protected GUIButtonControl CTRL_TxtSelect;
         [SkinControl(10102)]
-        protected GUISortButtonControl CTRL_BtnReturn = null;
+        protected GUISortButtonControl CTRL_BtnReturn;
 
         [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
-        protected GUIMultiImage ImgFanartDir = null;
+        protected GUIMultiImage ImgFanartDir;
         //[SkinControlAttribute((int)Controls.CTRL_MovieThumbs)]
         //protected GUIImage ImgMovieThumbs = null;
         //[SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
         //protected GUIMultiImage ImgMovieThumbsDir = null;
 
         [SkinControlAttribute((int)Controls.CTRL_BtnSrtBy)]
-        protected GUISortButtonControl BtnSrtBy = null;
+        protected GUISortButtonControl BtnSrtBy;
 
         [SkinControlAttribute((int)Controls.CTRL_List)]
-        protected GUIFacadeControl facadeView = null;
+        protected GUIFacadeControl facadeView;
 
         [SkinControlAttribute((int)Controls.CTRL_Image)]
-        protected GUIImage ImgLstFilm = null;
+        protected GUIImage ImgLstFilm;
 
         [SkinControlAttribute((int)Controls.CTRL_Image2)]
-        protected GUIImage ImgLstFilm2 = null;
+        protected GUIImage ImgLstFilm2;
 
         [SkinControlAttribute((int)Controls.CTRL_Fanart1)]
-        protected GUIImage ImgFanart1 = null;
+        protected GUIImage ImgFanart1;
 
         [SkinControlAttribute((int)Controls.CTRL_Fanart2)]
-        protected GUIImage ImgFanart2 = null;
+        protected GUIImage ImgFanart2;
 
         [SkinControlAttribute(3004)]
-        protected GUIAnimation m_SearchAnimation = null;
+        protected GUIAnimation m_SearchAnimation;
 
 
         public const int ID_MesFilms = 7986;
@@ -179,7 +179,7 @@ namespace MesFilms.Actors
         //---------------------------------------------------------------------------------------
         public override void OnAction(MediaPortal.GUI.Library.Action actionType)
         {
-            Log.Debug("MyFilmsActors: OnAction " + actionType.wID.ToString());
+            Log.Debug("MyFilmsActors: OnAction " + actionType.wID);
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
                 MesFilms.conf.LastID = MesFilms.ID_MesFilms;
@@ -487,7 +487,7 @@ namespace MesFilms.Actors
             for (wi = 0; wi != w_tableau.Count; wi++)
             {
                 champselect = w_tableau[wi].ToString();
-                if (string.Compare(champselect.ToString(), wchampselect.ToString(), true) == 0)
+                if (string.Compare(champselect, wchampselect, true) == 0)
                     Wnb_enr++;
                 else
                 {
@@ -496,7 +496,7 @@ namespace MesFilms.Actors
                         if ((Wnb_enr > 0) && (wchampselect.Length > 0))
                         {
                             item = new GUIListItem();
-                            item.Label = wchampselect.ToString();
+                            item.Label = wchampselect;
                             item.Label2 = Wnb_enr.ToString();
                             if (MesFilms.conf.StrViews)
                             {
@@ -541,7 +541,7 @@ namespace MesFilms.Actors
                             if (SelItem != "" && item.Label == SelItem) MesFilms.conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
                         }
                         Wnb_enr = 1;
-                        wchampselect = champselect.ToString();
+                        wchampselect = champselect;
                     }
                 }
             }
@@ -549,7 +549,7 @@ namespace MesFilms.Actors
             if ((Wnb_enr > 0) && (wchampselect.Length > 0))
             {
                 item = new GUIListItem();
-                item.Label = wchampselect.ToString();
+                item.Label = wchampselect;
                 item.Label2 = Wnb_enr.ToString();
                 if (MesFilms.conf.StrViews)
                 {
@@ -611,8 +611,8 @@ namespace MesFilms.Actors
                 //ImgLstFilm2.SetFileName("#myfilms.picture");
                 //affichage_rating(0);
             }
-            GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count.ToString() + " " + GUILocalizeStrings.Get(127));
-            GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)MesFilms.conf.StrIndex);
+            GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count + " " + GUILocalizeStrings.Get(127));
+            GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, MesFilms.conf.StrIndex);
 
         }
 
@@ -672,7 +672,7 @@ namespace MesFilms.Actors
             //affichage_Lstdetail(item.ItemId, true, item.Label);
         }
 
-        private void affichage_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image
+        private static void affichage_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image
         {
             return;
         }
@@ -705,28 +705,28 @@ namespace MesFilms.Actors
             if (MesFilms.r[Index]["Producer"].ToString().Length > 0)
             {
                 w_tableau = MesFilms.Search_String(MesFilms.r[Index]["Producer"].ToString());
-                for (int wi = 0; wi < w_tableau.Count; wi++)
+                foreach (object t in w_tableau)
                 {
-                    dlg.Add(GUILocalizeStrings.Get(10798612) + " : " + w_tableau[wi]);
-                    choiceSearch.Add(w_tableau[wi].ToString());
+                    dlg.Add(GUILocalizeStrings.Get(10798612) + " : " + t);
+                    choiceSearch.Add(t.ToString());
                 }
             }
             if (MesFilms.r[Index]["Director"].ToString().Length > 0)
             {
                 w_tableau = MesFilms.Search_String(MesFilms.r[Index]["Director"].ToString());
-                for (int wi = 0; wi < w_tableau.Count; wi++)
+                foreach (object t in w_tableau)
                 {
-                    dlg.Add(GUILocalizeStrings.Get(1079869) + " : " + w_tableau[wi]);
-                    choiceSearch.Add(w_tableau[wi].ToString());
+                    dlg.Add(GUILocalizeStrings.Get(1079869) + " : " + t);
+                    choiceSearch.Add(t.ToString());
                 }
             }
             if (MesFilms.r[Index]["Actors"].ToString().Length > 0)
             {
                 w_tableau = MesFilms.Search_String(MesFilms.r[Index]["Actors"].ToString());
-                for (int wi = 0; wi < w_tableau.Count; wi++)
+                foreach (object t in w_tableau)
                 {
-                    dlg.Add(GUILocalizeStrings.Get(1079868) + " : " + w_tableau[wi]);
-                    choiceSearch.Add(w_tableau[wi].ToString());
+                    dlg.Add(GUILocalizeStrings.Get(1079868) + " : " + t);
+                    choiceSearch.Add(t.ToString());
                 }
             }
             dlg.DoModal(GetID);
@@ -748,7 +748,7 @@ namespace MesFilms.Actors
             DataRow[] wr = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens, false);
             if (wr.Length > 0)
             {
-                dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length.ToString() + ")");
+                dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
                 choiceSearch.Add("Producer");
             }
             wr = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens, false);
@@ -760,7 +760,7 @@ namespace MesFilms.Actors
             wr = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens, false);
             if (wr.Length > 0)
             {
-                dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length.ToString() + ")");
+                dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
                 choiceSearch.Add("Actors");
             }
             dlg.DoModal(GetID);
@@ -798,11 +798,10 @@ namespace MesFilms.Actors
                     dlgOk.DoModal(GetID);
                     return;
                 }
-                Log.Debug("MyFilms (Person Info): " + actorList.Count.ToString() + " ActorID(s) found for '" + wperson + "'");
+                Log.Debug("MyFilms (Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
                 //int actorID;
                 actorID = 0;
-                string actorname = "";
-                // Define splitter for string
+            // Define splitter for string
                 char[] splitter = { '|' };
                 // Iterate through list
                 foreach (string act in actorList)
@@ -813,7 +812,7 @@ namespace MesFilms.Actors
                     // actorID originally is integer in the databse (it can be string in results but if we want get details from
                     // IMDBActor  GetActorInfo(int idActor) we need integer)
                     actorID = Convert.ToInt32(strActor[0]);
-                    actorname = strActor[1];
+                    string actorname = strActor[1];
                     Log.Debug("MyFilms (ActorDetails - Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
                 }
                 

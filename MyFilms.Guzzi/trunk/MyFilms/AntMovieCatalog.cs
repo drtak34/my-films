@@ -17,7 +17,7 @@
             // 
             // AntMovieCatalog
             // 
-            this.Locale = new System.Globalization.CultureInfo("");
+            Locale = new System.Globalization.CultureInfo("");
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

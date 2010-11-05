@@ -240,9 +240,9 @@ namespace MesFilms
 
         CultureInfo[] cultureList = CultureInfo.GetCultures(CultureTypes.AllCultures);
 
-        for (int i = 0; i < cultureList.Length; i++)
+        foreach (CultureInfo t in cultureList)
         {
-          _cultures.Add(cultureList[i].EnglishName, cultureList[i].Name);
+            _cultures.Add(t.EnglishName, t.Name);
         }
       }
 

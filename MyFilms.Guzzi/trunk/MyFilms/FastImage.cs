@@ -75,10 +75,9 @@ namespace MesFilms
             // On dessine l'image 
             g.DrawImage(image, 0, 0);
             // on découpe le texte séparateur espace
-            string[] arSplit;
             int wi = 0;
             string[] Sep = {" ","-","_","&","|",",",";"};
-            arSplit = texte.Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
+            string[] arSplit = texte.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
             float xfont  = 0;
             float  wfont = 0;
             for (wi = 0; wi < arSplit.Length; wi++)

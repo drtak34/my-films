@@ -1097,11 +1097,10 @@ namespace MesFilms
         {
             if (configname.Length == 0)
                 return "";
-            string Dwp;
 //            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
 //            {
             XmlConfig XmlConfig = new XmlConfig();    
-            Dwp = XmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", "");
+            string Dwp = XmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", "");
 //            }
 
             if (Dwp.Length == 0)

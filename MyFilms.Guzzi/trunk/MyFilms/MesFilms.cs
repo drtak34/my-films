@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
 using System.IO;
@@ -244,9 +245,8 @@ namespace MesFilms
             strButtonText = wPluginName;
             strButtonImage = String.Empty;
             strButtonImageFocus = String.Empty;
-            string strBtnFile;
             strPictureImage = String.Format("hover_{0}.png", "Films");
-            strBtnFile = String.Format(@"{0}\media\{1}", GUIGraphicsContext.Skin, strPictureImage);
+            string strBtnFile = String.Format(@"{0}\media\{1}", GUIGraphicsContext.Skin, strPictureImage);
             if (!System.IO.File.Exists(strBtnFile))
                 strPictureImage = "";
             return true;
@@ -449,8 +449,8 @@ namespace MesFilms
                     // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
                     if (!bgLoadMovieList.IsBusy)
                     {
-                        this.bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
-                        this.bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
+                        bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
+                        bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
                         AsynLoadMovieList();
                     }
                     // ********************************
@@ -912,7 +912,7 @@ namespace MesFilms
         }
 
         /// <summary>Sets StrFilmSelect up based on StrSelect, StrTitleSelect etc... </summary>
-        void SetFilmSelect()
+        static void SetFilmSelect()
         {
             string s = "";
             Prev_ItemID = -1;
@@ -1013,19 +1013,18 @@ namespace MesFilms
                 if (conf.Boolreturn)//in case of selection by view verify if value correspond excatly to the searched string
                 {
                     w_tableau = Search_String(sr[conf.WStrSort].ToString());
-                    for (int wi = 0; wi < w_tableau.Count;wi++ )
+                    foreach (object t in w_tableau)
                     {
                         if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
                         {
-                            if (string.Format("{0:dd/MM/yyyy}", DateTime.Parse(w_tableau[wi].ToString()).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
+                            if (string.Format("{0:dd/MM/yyyy}", DateTime.Parse(t.ToString()).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
                                 goto suite;
                         }
                         else
                         {
-                            if (w_tableau[wi].ToString().ToLower().Contains(conf.Wselectedlabel.Trim().ToLower()))
+                            if (t.ToString().ToLower().Contains(conf.Wselectedlabel.Trim().ToLower()))
                                 goto suite;
                         }
-                        
                     }
                     goto fin;
                 }
@@ -1391,7 +1390,7 @@ namespace MesFilms
         //-------------------------------------------------------------------------------------------
         //  Control search Text : no specials characters only alphanumerics
         //-------------------------------------------------------------------------------------------        
-        private bool control_searchText(string stext)
+        private static bool control_searchText(string stext)
         {
             Regex maRegexp = new Regex("^[^*]+$");
             bool regOK = maRegexp.IsMatch(stext);
@@ -1577,10 +1576,9 @@ namespace MesFilms
              }
             ArrayList wtab = new ArrayList();
 
-            string[] arSplit;
             int wi = 0;
             string[] Sep = conf.ListSeparator;
-            arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
+            string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
             string wzone = string.Empty;
             for (wi = 0; wi < arSplit.Length; wi++)
             {
@@ -1621,10 +1619,9 @@ namespace MesFilms
             }
             ArrayList wtab = new ArrayList();
 
-            string[] arSplit;
             int wi = 0;
             string[] Sep = conf.ListSeparator;
-            arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
+            string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
             string wzone = string.Empty;
             for (wi = 0; wi < arSplit.Length; wi++)
             {
@@ -1665,11 +1662,10 @@ namespace MesFilms
             }
             ArrayList wtab = new ArrayList();
 
-            string[] arSplit;
             int wi = 0;
             string[] Sep = {" - ", ":"}; //Only Dash as Separator for Movietitles !!!
             //string[] CleanerList = new string[] { "Der ", "der ", "Die ", "die ", "Das ", "das", "des", " so", "sich", " a ", " A ", "The ", "the ","- "," -"," AT "};
-            arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
+            string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
             string wzone = string.Empty;
             for (wi = 0; wi < arSplit.Length; wi++)
             {
@@ -1724,12 +1720,11 @@ namespace MesFilms
             
             ArrayList wtab = new ArrayList();
 
-            string[] arSplit;
             int wi = 0;
             //string[] Sep = conf.ListSeparator;
             string[] Sep = new string[]
                 {" ",",",";","|","/","(",")",".",@"\",":"};
-            arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
+            string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
             string wzone = string.Empty;
             for (wi = 0; wi < arSplit.Length; wi++)
             {
@@ -2043,7 +2038,7 @@ namespace MesFilms
                 return ((new CaseInsensitiveComparer()).Compare(y, x));
             }
         }
-        private void Load_Config(string CurrentConfig, bool create_temp)
+        private static void Load_Config(string CurrentConfig, bool create_temp)
         {
             conf = new Configuration(CurrentConfig, create_temp);
             if ((conf.Boolreturn) && (conf.Wselectedlabel == ""))
@@ -2077,7 +2072,7 @@ namespace MesFilms
             }
             //Layout = conf.StrLayOut;
             
-            if ((conf.CurrentSortMethod == "") || (conf.CurrentSortMethod == null))
+            if (string.IsNullOrEmpty(conf.CurrentSortMethod))
                 conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
             else
                 BtnSrtBy.Label = conf.CurrentSortMethod.ToString();
@@ -2482,8 +2477,8 @@ namespace MesFilms
                         dlgOk.DoModal(GetID);
                         break;
                     }
-                    this.bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
-                    this.bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
+                    bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
+                    bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
                     AsynUpdateDatabase();
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
@@ -2498,8 +2493,8 @@ namespace MesFilms
                         dlgOk.DoModal(GetID);
                         break;
                     }
-                    this.bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
-                    this.bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
+                    bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
+                    bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
                     AsynUpdateFanart();
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
@@ -2633,7 +2628,7 @@ namespace MesFilms
                 upd_choice[ichoice] = "grabber";
                 ichoice++;
             }
-            if (MesFilms.conf.StrFanart == true)
+            if (MesFilms.conf.StrFanart)
             {
                 dlg.Add(GUILocalizeStrings.Get(1079862));
                 upd_choice[ichoice] = "fanart";
@@ -2780,28 +2775,28 @@ namespace MesFilms
             if (MesFilms.r[Index]["Producer"].ToString().Length > 0)
             {
                 w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MesFilms.r[Index]["Producer"].ToString())));
-                for (int wi = 0; wi < w_tableau.Count; wi++)
+                foreach (object t in w_tableau)
                 {
-                    dlg.Add(GUILocalizeStrings.Get(10798612) + " : " + w_tableau[wi]);
-                    choiceSearch.Add(w_tableau[wi].ToString());
+                    dlg.Add(GUILocalizeStrings.Get(10798612) + " : " + t);
+                    choiceSearch.Add(t.ToString());
                 }
             }
             if (MesFilms.r[Index]["Director"].ToString().Length > 0)
             {
                 w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MesFilms.r[Index]["Director"].ToString())));
-                for (int wi = 0; wi < w_tableau.Count; wi++)
+                foreach (object t in w_tableau)
                 {
-                    dlg.Add(GUILocalizeStrings.Get(1079869) + " : " + w_tableau[wi]);
-                    choiceSearch.Add(w_tableau[wi].ToString());
+                    dlg.Add(GUILocalizeStrings.Get(1079869) + " : " + t);
+                    choiceSearch.Add(t.ToString());
                 }
             }
             if (MesFilms.r[Index]["Actors"].ToString().Length > 0)
             {
                 w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MesFilms.r[Index]["Actors"].ToString())));
-                for (int wi = 0; wi < w_tableau.Count; wi++)
+                foreach (object t in w_tableau)
                 {
-                    dlg.Add(GUILocalizeStrings.Get(1079868) + " : " + w_tableau[wi]);
-                    choiceSearch.Add(w_tableau[wi].ToString());
+                    dlg.Add(GUILocalizeStrings.Get(1079868) + " : " + t);
+                    choiceSearch.Add(t.ToString());
                 }
             }
             if (choiceSearch.Count == 0)
@@ -2936,7 +2931,7 @@ namespace MesFilms
         //*****************************************************************************************
         //*  search related movies by properties  (From ZebonsMerge, renamed to ...Zebons)		  *
         //*****************************************************************************************
-        private void SearchRelatedMoviesbyPropertiesZebons(int Index, string[] wSearchList)
+        private void SearchRelatedMoviesbyPropertiesZebons(int Index, IEnumerable<string> wSearchList)
         {
             // first select the property to be searching on
            
@@ -2972,10 +2967,10 @@ namespace MesFilms
                 w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MesFilms.r[Index][wproperty].ToString())));
             else
                 w_tableau.Add(MesFilms.r[Index][wproperty].ToString());
-            for (int wi = 0; wi < w_tableau.Count; wi++)
+            foreach (object t in w_tableau)
             {
-                dlg.Add(wproperty + " : " + w_tableau[wi]);
-                choiceSearch.Add(w_tableau[wi].ToString());
+                dlg.Add(wproperty + " : " + t);
+                choiceSearch.Add(t.ToString());
             }
             if (choiceSearch.Count == 0)
             {
@@ -3009,7 +3004,7 @@ namespace MesFilms
         //*****************************************************************************************
         //*  Global search movies by properties (ZebonsMerge - Renamed to ....Zebons)             *
         //*****************************************************************************************
-        private void SearchMoviesbyPropertiesZebons(string[] wSearchList)
+        private void SearchMoviesbyPropertiesZebons(IEnumerable<string> wSearchList)
         {
             // first select the property to be searching on
  
@@ -3240,16 +3235,16 @@ namespace MesFilms
             if (!(wproperty.ToString().ToLower() == "description") && !((wproperty.ToString().ToLower() == "comments")) && !((wproperty.ToString().ToLower() == "rating")))
             {
                 w_tableau = Search_String(MesFilms.r[Index][wproperty].ToString());
-                for (int wi = 0; wi < w_tableau.Count; wi++)
+                foreach (object t in w_tableau)
                 {
                     for (int ii = 0; ii < 30; ii++)
                     {
                         if (wproperty.ToLower().Equals(PropertyList[ii].ToString().ToLower()))
                         {
-                            dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + ": " + w_tableau[wi]);
+                            dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + ": " + t);
                             //dlg.Add(wproperty + " : " + w_tableau[wi]);
-                            choiceSearch.Add(w_tableau[wi].ToString());
-                            Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result Add: '" + w_tableau[wi].ToString() + "'");
+                            choiceSearch.Add(t.ToString());
+                            Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result Add: '" + t.ToString() + "'");
                             break;
                         }
                     }
@@ -3274,11 +3269,11 @@ namespace MesFilms
                 Log.Debug("MyFilms (RelatedPropertySearch): Length: '" + MesFilms.r[Index][wproperty].ToString().Length.ToString() + "'");
                 if (MesFilms.r[Index][wproperty].ToString().Length > 0)
                 {
-                    for (int wi = 0; wi < wsub_tableau.Count; wi++)
+                    foreach (object t in wsub_tableau)
                     {
-                        if (w_tableau.Contains(wsub_tableau[wi])) // Only Add SubWordItems if not already present in SearchStrin Table
+                        if (w_tableau.Contains(t)) // Only Add SubWordItems if not already present in SearchStrin Table
                         {
-                            Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result already Present: '" + wsub_tableau[wi].ToString() + "'");
+                            Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result already Present: '" + t.ToString() + "'");
                             break;
                         }
                         else
@@ -3287,10 +3282,10 @@ namespace MesFilms
                             {
                                 if (wproperty.ToLower().Equals(PropertyList[ii].ToString().ToLower()))
                                 {
-                                    dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + " (" + GUILocalizeStrings.Get(10798627) + "): '" + wsub_tableau[wi] + "'");
+                                    dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + " (" + GUILocalizeStrings.Get(10798627) + "): '" + t + "'");
                                     //dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + ": '" + wsub_tableau[wi] + "'");
-                                    choiceSearch.Add(wsub_tableau[wi].ToString());
-                                    Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result Add: '" + wsub_tableau[wi].ToString() + "'");
+                                    choiceSearch.Add(t.ToString());
+                                    Log.Debug("MyFilms (RelatedPropertySearch): Searchstring Result Add: '" + t.ToString() + "'");
                                     break;
                                 }
                             }
@@ -3409,20 +3404,20 @@ namespace MesFilms
                                 {
                                     //Log.Debug("MyFilms (Guzzi) AddDistinctClasses: " + "Property: " + dc.ToString() + " and Value: '" + wsr[dc.ColumnName].ToString() + "'");
                                     // column Name contains propertyname : added to w_tableau + w_count
-                                    if (GetSubItems == true)
+                                    if (GetSubItems)
                                     {
                                         Log.Debug("MyFilms SubItemGrabber: Input: " + wsr[dc.ColumnName].ToString());
                                         wsub_tableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
-                                        for (int wi = 0; wi < wsub_tableau.Count; wi++)
+                                        foreach (object t in wsub_tableau)
                                         {
-                                            Log.Debug("MyFilms SubItemGrabber: Output: " + wsub_tableau[wi].ToString());
+                                            Log.Debug("MyFilms SubItemGrabber: Output: " + t.ToString());
                                             {
-                                                if (w_tableau.Contains(wsub_tableau[wi].ToString())) // search position in w_tableau for adding +1 to w_count
+                                                if (w_tableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
                                                 {
                                                     //if (!w_index.Contains(
                                                     for (int i = 0; i < w_tableau.Count; i++)
                                                     {
-                                                        if (w_tableau[i].ToString() == wsub_tableau[wi].ToString())
+                                                        if (w_tableau[i].ToString() == t.ToString())
                                                         {
                                                             w_count[i] = (int)w_count[i] + 1;
                                                             //Log.Debug("MyFilms SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
@@ -3431,18 +3426,17 @@ namespace MesFilms
                                                     }
                                                 }
                                                 else
-                                                // add to w_tableau and move 1 to w_count
+                                                    // add to w_tableau and move 1 to w_count
                                                 {
                                                     Log.Debug("MyFilms SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName].ToString() + "'");
-                                                    w_tableau.Add(wsub_tableau[wi].ToString());
+                                                    w_tableau.Add(t.ToString());
                                                     w_count.Add(1);
                                                 }
                                             }
-
                                         }
 
                                     }
-                                    if (GetItems == true)
+                                    if (GetItems)
                                     {
                                         if (w_tableau.Contains(wsr[dc.ColumnName])) // search position in w_tableau for adding +1 to w_count
                                         {
@@ -3817,20 +3811,20 @@ namespace MesFilms
                                 {
                                     //Log.Debug("MyFilms (Guzzi) AddDistinctClasses: " + "Property: " + dc.ToString() + " and Value: '" + wsr[dc.ColumnName].ToString() + "'");
                                     // column Name contains propertyname : added to w_tableau + w_count
-                                    if (GetSubItems == true)
+                                    if (GetSubItems)
                                     {
                                         Log.Debug("MyFilms SubItemGrabber: Input: " + wsr[dc.ColumnName].ToString());
                                         wsub_tableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
-                                        for (int wi = 0; wi < wsub_tableau.Count; wi++)
+                                        foreach (object t in wsub_tableau)
                                         {
-                                            Log.Debug("MyFilms SubItemGrabber: Output: " + wsub_tableau[wi].ToString());
+                                            Log.Debug("MyFilms SubItemGrabber: Output: " + t.ToString());
                                             {
-                                                if (w_tableau.Contains(wsub_tableau[wi].ToString())) // search position in w_tableau for adding +1 to w_count
+                                                if (w_tableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
                                                 {
                                                     //if (!w_index.Contains(
                                                     for (int i = 0; i < w_tableau.Count; i++)
                                                     {
-                                                        if (w_tableau[i].ToString() == wsub_tableau[wi].ToString())
+                                                        if (w_tableau[i].ToString() == t.ToString())
                                                         {
                                                             w_count[i] = (int)w_count[i] + 1;
                                                             //Log.Debug("MyFilms SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
@@ -3839,18 +3833,17 @@ namespace MesFilms
                                                     }
                                                 }
                                                 else
-                                                // add to w_tableau and move 1 to w_count
+                                                    // add to w_tableau and move 1 to w_count
                                                 {
                                                     Log.Debug("MyFilms SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName].ToString() + "'");
-                                                    w_tableau.Add(wsub_tableau[wi].ToString());
+                                                    w_tableau.Add(t.ToString());
                                                     w_count.Add(1);
                                                 }
                                             }
-
                                         }
 
                                     }
-                                    if (GetItems == true)
+                                    if (GetItems)
                                     {
                                         if (w_tableau.Contains(wsr[dc.ColumnName])) // search position in w_tableau for adding +1 to w_count
                                         {
@@ -4262,7 +4255,7 @@ namespace MesFilms
             }
         }
 
-        void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        static void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
             MesFilmsDetail.RunProgram(MesFilms.conf.StrAMCUpd_exe, MesFilms.conf.StrAMCUpd_cnf);
@@ -4290,37 +4283,38 @@ namespace MesFilms
             }
         }
 
-        void bgUpdateFanart_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        static void bgUpdateFanart_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string wtitle = string.Empty;
-            for (int i = 0; i < MesFilms.r.Length; i++)
+            foreach (DataRow t in MesFilms.r)
             {
-                if (MesFilms.r[i]["OriginalTitle"] != null && MesFilms.r[i]["OriginalTitle"].ToString().Length > 0)
-                    wtitle = MesFilms.r[i]["OriginalTitle"].ToString();
+                if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
+                    wtitle = t["OriginalTitle"].ToString();
                 if (wtitle.IndexOf(MesFilms.conf.TitleDelim) > 0)
                     wtitle = wtitle.Substring(wtitle.IndexOf(MesFilms.conf.TitleDelim) + 1);
                 string wttitle = string.Empty;
-                if (MesFilms.r[i]["TranslatedTitle"] != null && MesFilms.r[i]["TranslatedTitle"].ToString().Length > 0)
-                    wttitle = MesFilms.r[i]["TranslatedTitle"].ToString();
+                if (t["TranslatedTitle"] != null && t["TranslatedTitle"].ToString().Length > 0)
+                    wttitle = t["TranslatedTitle"].ToString();
                 if (wttitle.IndexOf(MesFilms.conf.TitleDelim) > 0)
                     wttitle = wttitle.Substring(wttitle.IndexOf(MesFilms.conf.TitleDelim) + 1);
-                if (MesFilms.r[i]["OriginalTitle"].ToString().Length > 0)
+                if (t["OriginalTitle"].ToString().Length > 0)
 
                 {
                     int wyear = 0;
-                    try { wyear = System.Convert.ToInt16(MesFilms.r[i]["Year"]); }
+                    try { wyear = System.Convert.ToInt16(t["Year"]); }
                     catch { }
                     string wdirector = string.Empty;
-                    try { wdirector = (string)MesFilms.r[i]["Director"]; }
+                    try { wdirector = (string)t["Director"]; }
                     catch { }
                     System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
                     //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
                 }
             }
         }
-        void bgUpdateFanart_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+
+        static void bgUpdateFanart_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             Log.Info("MyFilms : Backdrop Fanart download finished");
         }
@@ -4338,7 +4332,7 @@ namespace MesFilms
             }
         }
 
-        void bgLoadMovieList_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        static void bgLoadMovieList_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
             string searchrep = MesFilms.conf.StrDirStor;
@@ -4346,7 +4340,7 @@ namespace MesFilms
 
             foreach (DriveInfo d in allDrives)
             {
-                if ((d.DriveType.ToString() == "CDRom") && (d.IsReady == true))
+                if ((d.DriveType.ToString() == "CDRom") && d.IsReady)
                 {
                     if (searchrep.Length > 0)
                         searchrep = searchrep + ";" + d.Name;
@@ -4366,7 +4360,8 @@ namespace MesFilms
                 }
             }
         }
-        void bgLoadMovieList_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+
+        static void bgLoadMovieList_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             Log.Info("MyFilms : Loading Movie List in batch mode finished");
         }
@@ -4488,7 +4483,7 @@ namespace MesFilms
         private bool FindFanart()
         {
             Log.Debug("MyFilms (FindFanart): Started FanartSearch");
-            if (MesFilms.conf.StrFanart == true)
+            if (MesFilms.conf.StrFanart)
             {};
             string[] wfanart = new string[2];
             wfanart[0] = " ";

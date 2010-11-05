@@ -252,15 +252,15 @@ namespace MesFilms
             float totalHeightf = (float)totalHeight;
             Size tmp = default(Size);
             int x_pos = 0, y_pos = 0;
-            for (int i = 0; i < listelogos.Count; i++)
+            foreach (string t in listelogos)
             {
                 try
                 {
-                    single = ImageFast.FastFromFile(listelogos[i]);
+                    single = ImageFast.FastFromFile(t);
                 }
                 catch (Exception)
                 {
-                    Log.Error("MyFilms : Could not load Logo Image file... " + listelogos[i]);
+                    Log.Error("MyFilms : Could not load Logo Image file... " + t);
                     return;
                 }
                 if (totalWidth > totalHeight)
