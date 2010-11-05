@@ -133,7 +133,6 @@ namespace NewStringLib
         public int NPos(string findText, int count, bool asChars) { return NPos(findText, myString, count, asChars); }
         /// <summary>Searches for position of nth substring in string</summary>
         /// <param name="findText">string to look for</param>
-        /// <param name="findText">string to look for</param>
         /// <param name="source">string to search within</param>
         /// <param name="count">find n'th match in string. If negative search backwards from end of string for -n'th match</param>
         /// <param name="asChars">If true treat findText as a character array, matching on ANY char</param>

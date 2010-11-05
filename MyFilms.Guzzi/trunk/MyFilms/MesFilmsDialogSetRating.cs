@@ -23,10 +23,7 @@
 
 #endregion
 
-using System;
-using System.Collections;
 using MediaPortal.GUI.Library;
-using MediaPortal.Player;
 
 namespace MesFilms
 {

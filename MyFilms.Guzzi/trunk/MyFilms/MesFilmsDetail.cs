@@ -28,7 +28,6 @@ using System.Text.RegularExpressions;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
-using System.ComponentModel;
 using MediaPortal.Util;
 using MediaPortal.Playlists;
 using MediaPortal.Dialogs;
@@ -38,17 +37,13 @@ using System.Globalization;
 using MediaPortal.GUI.Library;
 using SQLite.NET;
 using MediaPortal.Configuration;
-using NewStringLib;
-using Cornerstone.MP;
 using System.Xml;
 using System.Linq;
 using MesFilms.MyFilms;
-using Grabber;
 using MediaPortal.Profile;
 using System.Net;
 using MesFilms.WakeOnLan;
-//using TvControl;
-//using System.Net;
+//using Cornerstone.MP;
 
 namespace MesFilms
 {

@@ -55,8 +55,6 @@
 #region using
 using System;
 using System.IO;                 // For I/O file
-using System.Collections.Generic;
-using System.Text;
 using System.Xml;                // For XmlDocument
 using MediaPortal.Configuration; // For recover install MediaPortal path
 #endregion

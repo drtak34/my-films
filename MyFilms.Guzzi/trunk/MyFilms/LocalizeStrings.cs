@@ -24,13 +24,9 @@
 #endregion
 
 using System;
-using System.IO;
 using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using MediaPortal.Util;
 using MediaPortal.GUI.Library;
 using MediaPortal.Configuration;
 using MediaPortal.Localisation;

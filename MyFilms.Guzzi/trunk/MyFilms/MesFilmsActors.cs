@@ -442,7 +442,6 @@ namespace MesFilms.Actors
         /// <param name="WStrSort">Sort based on this</param>
         /// <param name="WStrSortSens">Asc/Desc. Ascending or descending sort order</param>
         /// <param name="NewWstar">Entries must contain this string to be included</param>
-        /// <param name="p">Position in string to begin search/replacing from</param>
         /// <param name="ClearIndex">Reset Selected Item Index</param>
         /// <param name="SelItem">Select entry matching this string if not empty</param>
         public void getSelectFromActors(string WstrSelect, string WStrSort, string WStrSortSens, string NewWstar, bool ClearIndex, string SelItem)

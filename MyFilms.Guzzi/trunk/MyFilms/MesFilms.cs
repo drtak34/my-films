@@ -23,25 +23,19 @@
 
 using System;
 using System.Collections;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using System.Globalization;
-using System.Xml;
 using System.ComponentModel;
 using System.IO;
 using System.Data;
-using System.Drawing;
 
 using MediaPortal.GUI.Library;
 using MediaPortal.Dialogs;
-using MediaPortal.Player;
 using MediaPortal.Configuration;
 using MediaPortal.Util;
 
 using NewStringLib;
 using Cornerstone.MP;
 using MesFilms.MyFilms;
-using MesFilms;
 using System.Threading;
 using System.Linq;
 
@@ -1760,7 +1754,6 @@ namespace MesFilms
         /// <param name="WStrSort">Sort based on this</param>
         /// <param name="WStrSortSens">Asc/Desc. Ascending or descending sort order</param>
         /// <param name="NewWstar">Entries must contain this string to be included</param>
-        /// <param name="p">Position in string to begin search/replacing from</param>
         /// <param name="ClearIndex">Reset Selected Item Index</param>
         /// <param name="SelItem">Select entry matching this string if not empty</param>
         /// 

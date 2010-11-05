@@ -22,18 +22,12 @@
 #endregion
 using System;
 using System.Xml;
-using System.Xml.Schema;
 using System.Windows.Forms;
 using System.Data;
 using MediaPortal.Configuration;
-using MediaPortal.Util;
-using System.Collections;
 using MediaPortal.GUI.Library;
 using TaskScheduler;
-using System.Runtime.InteropServices;
-//using TaskSchedulerInterop;
 using MesFilms.MyFilms;
-//using MesFilms;
 
 namespace MesFilms
 {

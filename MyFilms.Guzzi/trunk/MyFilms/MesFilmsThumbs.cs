@@ -23,17 +23,8 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-
 using MediaPortal.GUI.Library;
 using MediaPortal.Configuration;
-using MediaPortal.Util;
-using MediaPortal.GUI.Pictures;
-using MediaPortal.Video.Database;
-using MesFilms;
 
 namespace MesFilms
 {

@@ -22,11 +22,7 @@
 #endregion
 using System;
 using System.Collections.Generic;
-using System.Text;
 using MediaPortal.Configuration;
-using System.IO;
-using MediaPortal.Util;
-using System.ComponentModel;
 
 
 
