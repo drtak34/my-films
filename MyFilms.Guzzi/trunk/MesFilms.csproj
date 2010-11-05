@@ -249,7 +249,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>del D:\Entwicklung\MediaPortal\mediaportal\xbmc\bin\Debug\plugins\Windows\mesfilms.dll
+copy D:\Entwicklung\MyFilms\trunk\obj\x86\Debug\MesFilms.dll D:\Entwicklung\MediaPortal\mediaportal\xbmc\bin\Debug\plugins\Windows\
+</PostBuildEvent>
   </PropertyGroup>
 </Project>
