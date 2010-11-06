@@ -61,6 +61,12 @@
     <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Guzzi%29|AnyCPU' ">
+    <OutputPath>bin\Debug %28Guzzi%29\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Guzzi%29|x86' ">
+    <OutputPath>bin\x86\Debug %28Guzzi%29\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Core, Version=1.1.1.11854, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
