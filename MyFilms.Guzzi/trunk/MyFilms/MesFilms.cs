@@ -40,6 +40,7 @@ using MesFilms.MyFilms;
 using System.Threading;
 using System.Linq;
 
+
 namespace MesFilms
 {
     /// <summary>
@@ -168,6 +169,8 @@ namespace MesFilms
         public int actorID = 0;
         public static string CurrentMovie;
         //public static string CurrentFanartDir;
+        public enum optimizeOption { optimizeDisabled };
+        //public enum optimizeDisabled;
         #endregion
         #region events
   
@@ -1799,7 +1802,7 @@ namespace MesFilms
                         {
                         //wAddList = wtab[wi].ToString().Trim().Substring(1,1) + "\\" + wtab[wi].ToString().Trim().Substring(2);
                         if (wtab[wi].ToString().Trim().Length > 1)
-                            w_tableau.Add(wtab[wi].ToString().Trim().Substring(1,1) + "\\" + wtab[wi].ToString().Trim().Substring(2));
+                            w_tableau.Add(wtab[wi].ToString().Trim().Substring(0,1) + @"\" + wtab[wi].ToString().Trim().Substring(1));
                         else
                             w_tableau.Add(wtab[wi].ToString().Trim());
                         }
