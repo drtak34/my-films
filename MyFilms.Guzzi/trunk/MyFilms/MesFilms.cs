@@ -2342,7 +2342,7 @@ namespace MesFilms
 
                 case "nasstatus": //Check and show status of NAS Servers
                     
-                    //Guzzi to add: Code to Check if NAS is up and running!!!
+                    //Todo: Guzzi to add: Code to Check if NAS is up and running!!!
 
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     GUIDialogOK dlgok = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -2901,13 +2901,18 @@ namespace MesFilms
                 return;
             }
             conf.StrSelect = choiceSearch[dlg.SelectedLabel].ToString() + " like '*" + wperson + "*'";
-            if (choiceSearch[dlg.SelectedLabel] == "Actors")
-                conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]";
-                else
-                    if (choiceSearch[dlg.SelectedLabel] == "Director")
-                        conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079869) + " [*" + wperson + @"*]";
-                            else
-                                conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
+            switch (choiceSearch[dlg.SelectedLabel])
+            {
+                case "Actors":
+                    conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]";
+                    break;
+                case "Director":
+                    conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079869) + " [*" + wperson + @"*]";
+                    break;
+                default:
+                    conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
+                    break;
+            }
             conf.StrTitleSelect = "";
             GetFilmList();
         }
@@ -3147,13 +3152,18 @@ namespace MesFilms
                     default:
                         if (control_searchText(keyboard.Text))
                         {
-                            if (wproperty == "Rating")
-                                conf.StrSelect = wproperty + " = " + keyboard.Text;
-                            else
-                                if (wproperty == "Number")
+                            switch (wproperty)
+                            {
+                                case "Rating":
                                     conf.StrSelect = wproperty + " = " + keyboard.Text;
-                                else
-                                conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
+                                    break;
+                                case "Number":
+                                    conf.StrSelect = wproperty + " = " + keyboard.Text;
+                                    break;
+                                default:
+                                    conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
+                                    break;
+                            }
                         conf.StrTxtSelect = "Selection " + dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]";
                             conf.StrTitleSelect = "";
    //                         getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
@@ -3495,16 +3505,21 @@ namespace MesFilms
                         wproperty2 = "*";
 
                     Log.Debug("MyFilms (RandomMovies) - Chosen Subcategory: '" + wproperty2 + "' selecting in '" + wproperty + "'");
-                    if (wproperty == "Rating")
-                        conf.StrSelect = wproperty + " = " + wproperty2;
-                    else
-                        if (wproperty == "Number")
+                    switch (wproperty)
+                    {
+                        case "Rating":
                             conf.StrSelect = wproperty + " = " + wproperty2;
-                        else
+                            break;
+                        case "Number":
+                            conf.StrSelect = wproperty + " = " + wproperty2;
+                            break;
+                        default:
                             if (wproperty2 == string.Format(GUILocalizeStrings.Get(10798623))) // Check, if emptypropertystring is set
                                 conf.StrSelect = wproperty + " like ''";
                             else
                                 conf.StrSelect = wproperty + " like '*" + wproperty2 + "*'";
+                            break;
+                    }
                     Log.Debug("MyFilms (RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
                     conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
                     conf.StrTitleSelect = "";
@@ -3902,16 +3917,21 @@ namespace MesFilms
                         wproperty2 = "*";
 
                     Log.Debug("MyFilms (RandomMovies) - Chosen Subcategory: '" + wproperty2 + "' selecting in '" + wproperty + "'");
-                    if (wproperty == "Rating")
-                        conf.StrSelect = wproperty + " = " + wproperty2;
-                    else
-                        if (wproperty == "Number")
+                    switch (wproperty)
+                    {
+                        case "Rating":
                             conf.StrSelect = wproperty + " = " + wproperty2;
-                        else
+                            break;
+                        case "Number":
+                            conf.StrSelect = wproperty + " = " + wproperty2;
+                            break;
+                        default:
                             if (wproperty2 == string.Format(GUILocalizeStrings.Get(10798623))) // Check, if emptypropertystring is set
                                 conf.StrSelect = wproperty + " is NULL";
                             else
                                 conf.StrSelect = wproperty + " like '*" + wproperty2 + "*'";
+                            break;
+                    }
                     Log.Debug("MyFilms (RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
                     conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
                     conf.StrTitleSelect = "";
@@ -4087,15 +4107,18 @@ namespace MesFilms
                         {
 
                             //Log.Debug("MyFilms (GlobalSearchAll) - ChosenProperty: wproperty is '" + wproperty + "'"); 
-                            if (wproperty == "rating")
-                            //if (wproperty == GUILocalizeStrings.Get(10798658)) //If "Rating" selected ...
-                                conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
-                            else
-                                if (wproperty == "number")
-                                //if (wproperty == GUILocalizeStrings.Get(10798650)) //If "Number" selected ...
+                            switch (wproperty)
+                            {
+                                case "rating":
                                     conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
-                                else
+                                    break;
+                                case "number":
+                                    conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
+                                    break;
+                                default:
                                     conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
+                                    break;
+                            }
                             conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]";
                             conf.StrTitleSelect = "";
                             // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
@@ -4157,13 +4180,18 @@ namespace MesFilms
                                 break;
                             }
 
-                            if (wproperty == "Rating")
-                                conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
-                            else
-                                if (wproperty == "Number")
+                            switch (wproperty)
+                            {
+                                case "Rating":
                                     conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
-                                else
+                                    break;
+                                case "Number":
+                                    conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
+                                    break;
+                                default:
                                     conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
+                                    break;
+                            }
                             conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]";
                             conf.StrTitleSelect = "";
                             //                         getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
@@ -4403,7 +4431,7 @@ namespace MesFilms
                 //Log.Debug("MyFilms (FanartTimerEvent): loadFanart triggered for '" + CurrentMovie.ToString() + "' !");
                 //Log.Debug("MyFilms (FanartTimerEvent): loadFanart CurrentFanartDir '" + CurrentFanartDir.ToString() + "' !");
                 //Disabled, because it's still not working ...
-                //loadFanart();
+                loadFanart();
             }
             else
             {

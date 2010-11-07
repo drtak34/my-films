@@ -22,7 +22,7 @@
 #endregion
 using System;
 using System.Data;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using MesFilms.MyFilms;
 using MediaPortal.ServiceImplementations;
 
@@ -31,7 +31,9 @@ namespace MesFilms
     public class BaseMesFilms
     {
         private static AntMovieCatalog data;
+/*
         private static Dictionary<string, string> dataPath;
+*/
         private static DataRow[] movies;
 
         #region ctor

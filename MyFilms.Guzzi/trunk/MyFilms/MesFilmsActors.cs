@@ -767,13 +767,18 @@ namespace MesFilms.Actors
             if (dlg.SelectedLabel == -1)
                 return;
             MesFilms.conf.StrSelect = choiceSearch[dlg.SelectedLabel].ToString() + " like '*" + wperson + "*'";
-            if (choiceSearch[dlg.SelectedLabel] == "Actors")
-                MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]";
-                else
-                    if (choiceSearch[dlg.SelectedLabel] == "Director")
-                        MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079869) + " [*" + wperson + @"*]";
-                            else
-                                MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
+            switch (choiceSearch[dlg.SelectedLabel])
+            {
+                case "Actors":
+                    MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079868) + " [*" + wperson + @"*]";
+                    break;
+                case "Director":
+                    MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(1079869) + " [*" + wperson + @"*]";
+                    break;
+                default:
+                    MesFilms.conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(10798612) + " [*" + wperson + @"*]";
+                    break;
+            }
             MesFilms.conf.StrTitleSelect = "";
             //GetFilmList();
         }

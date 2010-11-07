@@ -133,7 +133,7 @@ namespace MesFilms
                     if (wID != null && wID.Length > 3 && wID.ToLower().Contains("no:"))
                         WriteAntAtribute(destXml, "Number", wID.Substring(3));
                     else 
-                        if (wID != null && wID.Length > 0)
+                        if (!string.IsNullOrEmpty(wID))
                             WriteAntAtribute(destXml, "Number", wID);
                         else
                             WriteAntAtribute(destXml, "Number", "9999");
@@ -190,7 +190,7 @@ namespace MesFilms
                     }
                     WriteAntAtribute(destXml, "Rating", wrating.ToString().Replace(",", "."));
                     string wYear = nodeDVD.Attributes["Year"].Value;
-                    if (wYear != null && wYear.Length > 0)
+                    if (!string.IsNullOrEmpty(wYear))
                         WriteAntAtribute(destXml, "Year", wYear);
                     if (nodeDVD.Attributes["RunningTime"] != null)
                         WriteAntAtribute(destXml, "Length", nodeDVD.Attributes["RunningTime"].Value);

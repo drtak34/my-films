@@ -3267,6 +3267,7 @@ namespace MesFilms
             if ((idMovie >= 0) && (idFile >= 0))
             {
                 timeMovieStopped = VideoDatabase.GetMovieStopTimeAndResumeData(idFile, out resumeData);
+                //Todo: Avoid Resume of Trailers
                 if ((timeMovieStopped > 0) && (1==2)) //Modded by Guzzi to avoid resuming for Trailers
                 {
                     string title = System.IO.Path.GetFileName(filename);

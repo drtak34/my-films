@@ -47,7 +47,7 @@ namespace MesFilms
 		/// Fonction de cryptage : elle necessite en argument une chaîne de caractères,
 		/// et renvoie une chaîne de caractères cryptée (cipher-text).
 		/// </summary>
-		/// <param name="string TexteBrut"></param>
+		/// <param name=" TexteBrut"></param>
 		/// <returns name="string CypherTexte"></returns>
 		// ***************************************************************************
 
