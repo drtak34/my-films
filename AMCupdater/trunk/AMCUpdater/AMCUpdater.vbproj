@@ -249,7 +249,6 @@
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
-    <None Include="Resources\AntLogo.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -283,6 +282,9 @@
       <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
       <Name>Grabber</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

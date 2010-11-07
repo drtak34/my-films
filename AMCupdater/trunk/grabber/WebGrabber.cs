@@ -67,7 +67,7 @@ namespace Cornerstone.Tools {
         public bool Debug {
             get { return _debug; }
             set { _debug = value; }
-        } private bool _debug = false;
+        } private bool _debug;
 
         public bool GetResponse() {
             data = string.Empty;

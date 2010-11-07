@@ -2017,7 +2017,7 @@ Public Class Form1
     Private Sub TabControl1_Selected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TabControlEventArgs) Handles TabControl1.Selected
 
         If TabControl1.SelectedIndex = 6 Then
-            Dim myTable As DataTable
+            Dim myTable As DataTable = Nothing
             Dim myview As DataView
             Dim wdir As String
 

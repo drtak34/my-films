@@ -49,13 +49,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.0.33880, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.1.1.11854, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\MyFilms.Guzzi\ModLinkFiles\Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Grabber, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\grabber\bin\Release\Grabber.dll</HintPath>
+      <HintPath>..\_ModLinkFiles\Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -145,6 +141,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\grabber\Grabber.csproj">
+      <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
+      <Name>Grabber</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

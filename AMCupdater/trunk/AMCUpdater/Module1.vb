@@ -941,8 +941,8 @@ Module Module1
                 'GUZZI: Added to get Content (Date Added) of the index.php.htm File !!!
                 'Dim FilePath As String = ""
                 'Dim ReturnValue As String = ""
-                Dim textReader As String
-                Dim FileName As String
+                Dim textReader As String = ""
+                Dim FileName As String = ""
                 Dim FileNameEnd As String = FileName.Substring(InStrRev(FileName, "\") - 1)
                 FileName = FileName.Replace(FileNameEnd, "")
                 FilePath = FileName + "\index.php.htm"
