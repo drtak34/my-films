@@ -22,7 +22,7 @@ namespace MesFilms.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace MesFilms.Properties {
         ///   Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MesFilms.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace MesFilms.Properties {
         ///   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,28 +60,21 @@ namespace MesFilms.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap clapperboard_128x128 {
+        public static System.Drawing.Bitmap clapperboard_128x128 {
             get {
                 object obj = ResourceManager.GetObject("clapperboard_128x128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap film_reel_128x128 {
+        public static System.Drawing.Bitmap film_reel_128x128 {
             get {
                 object obj = ResourceManager.GetObject("film_reel_128x128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap MP_Banner {
-            get {
-                object obj = ResourceManager.GetObject("MP_Banner", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap MP_Icon {
+        public static System.Drawing.Bitmap MP_Icon {
             get {
                 object obj = ResourceManager.GetObject("MP_Icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

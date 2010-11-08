@@ -21,6 +21,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 using System;
+using System.Collections.Generic;
 using System.Xml;
 using System.Windows.Forms;
 using System.Data;
@@ -28,6 +29,9 @@ using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
 using TaskScheduler;
 using MesFilms.MyFilms;
+using MesFilms.WakeOnLan;
+using System.Net;
+using System.Collections;
 
 namespace MesFilms
 {
@@ -2495,7 +2499,8 @@ namespace MesFilms
 
         private void NAS_1_Name_TextChanged(object sender, EventArgs e)
         {
-
+            if (NAS_Name_1.Text.Length == 0)
+            NAS_MAC_1.Text = "";
         }
 
         private void check_WOL_enable_CheckedChanged(object sender, EventArgs e)
@@ -2586,6 +2591,265 @@ namespace MesFilms
 
         }
 
+        private void buttonGetMACadresses_Click(object sender, EventArgs e)
+        {
+            WakeOnLanManager wakeOnLanManager = new WakeOnLanManager(); 
+            String macAddress;
+            byte[] hwAddress;
+            IPAddress ipAddress = null;
+
+            if (!IPAddress.TryParse(NAS_Name_1.Text, out ipAddress))
+            {
+                try
+                {
+                    IPAddress[] ips;
+                    ips = Dns.GetHostAddresses(NAS_Name_1.Text);
+                    foreach (IPAddress ip in ips)
+                    {
+                        Log.Debug("    {0}", ip);
+                    }
+                    //Use first valid IP address
+                    ipAddress = ips[0];
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
+                }
+            }
+
+            //Check for valid IP address
+            if (ipAddress != null)
+            {
+                //Update the MAC address if possible
+                hwAddress = wakeOnLanManager.GetHardwareAddress(ipAddress);
+
+                if (wakeOnLanManager.IsValidEthernetAddress(hwAddress))
+                {
+                    Log.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
+                              , hwAddress[0], hwAddress[1], hwAddress[2], hwAddress[3], hwAddress[4], hwAddress[5]);
+
+                    //Store MAC address
+                    macAddress = BitConverter.ToString(hwAddress).Replace("-", ":");
+
+                    Log.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
+                    NAS_MAC_1.Text = macAddress;
+
+                }
+            }
+
+
+            ipAddress = null;
+            if (!IPAddress.TryParse(NAS_Name_2.Text, out ipAddress))
+            {
+                //Get IP address of the TV server
+                try
+                {
+                    IPAddress[] ips;
+                    ips = Dns.GetHostAddresses(NAS_Name_2.Text);
+                    foreach (IPAddress ip in ips)
+                    {
+                        Log.Debug("    {0}", ip);
+                    }
+                    //Use first valid IP address
+                    ipAddress = ips[0];
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
+                }
+            }
+
+            //Check for valid IP address
+            if (ipAddress != null)
+            {
+                //Update the MAC address if possible
+                hwAddress = wakeOnLanManager.GetHardwareAddress(ipAddress);
+
+                if (wakeOnLanManager.IsValidEthernetAddress(hwAddress))
+                {
+                    Log.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
+                              , hwAddress[0], hwAddress[1], hwAddress[2], hwAddress[3], hwAddress[4], hwAddress[5]);
+
+                    //Store MAC address
+                    macAddress = BitConverter.ToString(hwAddress).Replace("-", ":");
+
+                    Log.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
+                    NAS_MAC_2.Text = macAddress;
+
+                }
+            }
+
+            ipAddress = null;
+            if (!IPAddress.TryParse(NAS_Name_3.Text, out ipAddress))
+            {
+                //Get IP address of the TV server
+                try
+                {
+                    IPAddress[] ips;
+                    ips = Dns.GetHostAddresses(NAS_Name_3.Text);
+                    foreach (IPAddress ip in ips)
+                    {
+                        Log.Debug("    {0}", ip);
+                    }
+                    //Use first valid IP address
+                    ipAddress = ips[0];
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
+                }
+            }
+
+            //Check for valid IP address
+            if (ipAddress != null)
+            {
+                //Update the MAC address if possible
+                hwAddress = wakeOnLanManager.GetHardwareAddress(ipAddress);
+
+                if (wakeOnLanManager.IsValidEthernetAddress(hwAddress))
+                {
+                    Log.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
+                              , hwAddress[0], hwAddress[1], hwAddress[2], hwAddress[3], hwAddress[4], hwAddress[5]);
+
+                    //Store MAC address
+                    macAddress = BitConverter.ToString(hwAddress).Replace("-", ":");
+
+                    Log.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
+                    NAS_MAC_3.Text = macAddress;
+
+                }
+            }
+        }
+
+        private void buttonSendMagicPacket1_Click(object sender, EventArgs e)
+        {
+            WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
+            int intTimeOut = 30; //Timeout für WOL
+            String macAddress;
+            byte[] hwAddress;
+
+            macAddress = NAS_MAC_1.Text;
+            if (macAddress.Length > 1)
+            {
+                try
+                {
+                    hwAddress = wakeOnLanManager.GetHwAddrBytes(macAddress);
+
+                    //Finally, start up the TV server
+                    Log.Info("MyFilmsSetup - WOL: Start the NAS-Server");
+
+                    if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_1.Text, intTimeOut))
+                    {
+                        Log.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
+                    }
+                    else
+                    {
+                        Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
+                }
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("No MAC address available for '" + NAS_Name_1 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void buttonSendMagicPacket2_Click(object sender, EventArgs e)
+        {
+            WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
+            int intTimeOut = 30; //Timeout für WOL
+            String macAddress;
+            byte[] hwAddress;
+
+            macAddress = NAS_MAC_2.Text;
+            if (macAddress.Length > 1)
+            {
+                try
+                {
+                    hwAddress = wakeOnLanManager.GetHwAddrBytes(macAddress);
+
+                    //Finally, start up the TV server
+                    Log.Info("MyFilmsSetup - WOL: Start the NAS-Server");
+
+                    if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_1.Text, intTimeOut))
+                    {
+                        Log.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
+                    }
+                    else
+                    {
+                        Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
+                }
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("No MAC address available for '" + NAS_Name_2 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void buttonSendMagicPacket3_Click(object sender, EventArgs e)
+        {
+            WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
+            int intTimeOut = 30; //Timeout für WOL
+            String macAddress;
+            byte[] hwAddress;
+
+            macAddress = NAS_MAC_3.Text;
+            if (macAddress.Length > 1)
+            {
+                try
+                {
+                    hwAddress = wakeOnLanManager.GetHwAddrBytes(macAddress);
+
+                    //Finally, start up the TV server
+                    Log.Info("MyFilmsSetup - WOL: Start the NAS-Server");
+
+                    if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_1.Text, intTimeOut))
+                    {
+                        Log.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
+                    }
+                    else
+                    {
+                        Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
+                }
+            }
+            else
+            {
+                DialogResult dialogResult = MessageBox.Show("No MAC address available for '" + NAS_Name_3 + "' to try sending Magicpacket to NAS-Server !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void check_WOL_Userdialog_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NAS_Name_2_TextChanged(object sender, EventArgs e)
+        {
+            if (NAS_Name_2.Text.Length == 0)
+                NAS_MAC_2.Text = "";
+
+        }
+
+        private void NAS_Name_3_TextChanged(object sender, EventArgs e)
+        {
+            if (NAS_Name_3.Text.Length == 0)
+                NAS_MAC_3.Text = "";
+
+        }
 
     }
 }

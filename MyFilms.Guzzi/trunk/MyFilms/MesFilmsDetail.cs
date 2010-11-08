@@ -2243,20 +2243,38 @@ namespace MesFilms
 
             // Guzzi: Added WOL to start remote host before playing the files
 
-            //Make sure that we have valid hostname for the TV server
-            SetRemoteControlHostName();
+            //First get the Name of the Server to wake up
 
             //Wake up the TV server, if required
-            HandleWakeUpNas();
+            //HandleWakeUpNas();
             Log.Info("MyFilms: Launched HandleWakeUpNas() to start movie'" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "'");
 
-            //GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-            //dlgOknas.SetHeading(GUILocalizeStrings.Get(107986));//my films
-            //dlgOknas.SetLine(1, MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString());//video title
-            //dlgOknas.SetLine(2, "Starte NAS Server, bitte warten...");
-            //dlgOknas.DoModal(GetID);
-            //return;
-            
+            if (MesFilms.conf.StrCheckWOLuserdialog)
+            {
+                string UNCpath = MesFilms.r[select_item][MesFilms.conf.StrStorage].ToString();
+                if (UNCpath.StartsWith("\\\\"))
+                UNCpath = UNCpath.Substring(2, UNCpath.Substring(2).IndexOf("\\") + 0);
+                if ((UNCpath.Equals(MesFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MesFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MesFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                    dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+                    dlgOknas.SetLine(1, "Movie   : '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString() + "'"); //video title
+                    dlgOknas.SetLine(2, "Storage: '" + UNCpath + "'"); //Filename/Storagepath
+                    dlgOknas.SetLine(3, "Starte NAS Server, bitte warten...");
+                    dlgOknas.DoModal(GetID);
+                }
+                else
+                {
+                    GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                    dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+                    //dlgOknas.SetLine(1, "Movie   : '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString() + "'"); //video title
+                    dlgOknas.SetLine(2, "Storage: '" + UNCpath + "' ist nicht konfiguriert!"); //Filename/Storagepath
+                    dlgOknas.SetLine(3, "Automatischer NAS Server Start nicht möglich...");
+                    dlgOknas.DoModal(GetID);
+                }
+
+            }
+
             // search all files
             ArrayList newItems = new ArrayList();
             bool NoResumeMovie = true;
@@ -2358,7 +2376,7 @@ namespace MesFilms
                 g_Player.Stop();
             // search all files
             ArrayList newItems = new ArrayList();
-            bool NoResumeMovie = false; //Modded by Guzzi for NonResuming Trailers 
+            bool NoResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
             int IMovieIndex = 0;
 
             Log.Debug("MyFilmsDetails (Launch_Movie_Trailer): new do Moviesearch with '" + select_item + "' (Selected_Item"); 
@@ -2379,7 +2397,7 @@ namespace MesFilms
             setProcessAnimationStatus(false, m_SearchAnimation);
             if (newItems.Count > 1)
             {
-                if ((NoResumeMovie == false)) //Modded by Guzzi to always get Selectiondialog for Trailer Choice
+                if ((NoResumeMovie == true)) //Modded by Guzzi to always get Selectiondialog for Trailer Choice
                 {
                     GUIDialogFileStacking dlg = (GUIDialogFileStacking)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_FILESTACKING);
                     if (null != dlg)
@@ -3268,7 +3286,7 @@ namespace MesFilms
             {
                 timeMovieStopped = VideoDatabase.GetMovieStopTimeAndResumeData(idFile, out resumeData);
                 //Todo: Avoid Resume of Trailers
-                if ((timeMovieStopped > 0) && (1==2)) //Modded by Guzzi to avoid resuming for Trailers
+                if ((timeMovieStopped > 0) && (NoResumeMovie)) //Modded by Guzzi to avoid resuming for Trailers
                 {
                     string title = System.IO.Path.GetFileName(filename);
                     VideoDatabase.GetMovieInfoById(idMovie, ref movieDetails);
@@ -3654,36 +3672,6 @@ namespace MesFilms
 
         }
 
-        private static void SetRemoteControlHostName()
-        {
-            string hostName;
-
-            // ToDo: Here should the config come from MyFilms Plugin itself - or from mediaportal.xml
-            using (Settings xmlreader = new MediaPortal.Profile.MPSettings())
-            {
-                hostName = xmlreader.GetValueAsString("nas", "hostname", "");
-                if (string.IsNullOrEmpty(hostName) || hostName == "localhost")
-                {
-                    try
-                    {
-                        hostName = Dns.GetHostName();
-
-                        Log.Info("MyFilms (SetRemoteControlHostName) : No valid hostname specified in mediaportal.xml, section 'nas' !");
-                        xmlreader.SetValue("tvservice", "hostname", hostName);
-                        hostName = "localhost";
-                        Settings.SaveCache();
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Info("MyFilms (SetRemoteControlHostName) : Error resolving hostname - {0}", ex.Message);
-                        return;
-                    }
-                }
-            }
-            //RemoteControl.HostName = hostName;
-
-            Log.Info("MyFilms (SetRemoteControlHostName) : nas server :{0}", hostName);
-        }
 
         private static void HandleWakeUpNas()
         {

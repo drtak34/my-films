@@ -1081,6 +1081,7 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MesFilms.conf.StrLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MesFilms.conf.LastID);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntFilterMinRating", MesFilms.conf.StrAntFilterMinRating);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WOL-Userdialog", MesFilms.conf.StrCheckWOLuserdialog);
             switch (MesFilms.conf.StrFileType)
                 {
                     case "0":

@@ -179,7 +179,7 @@ namespace MesFilms.WakeOnLan
       }
     }
 
-    private bool Ping(string hostName, int timeout)
+    public static bool Ping(string hostName, int timeout)
     {
       Ping p = new Ping();
       try

@@ -343,8 +343,8 @@ and it will be used as a default artist image.</value>
   <data name="pictureBox1.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAtIAAAB6CAIAAAAd2CNXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
-        CwcBtnMLwAAA/3lJREFUeF7snQV4W1fWrmWUmWSxZDHYlszMzMzMzHbsJA4zMzO0adq0SdMkbVLmNm2D
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAAAA
+        CwAB5DetvwAA/3lJREFUeF7snQV4W1fWrmWUmWSxZDHYlszMzMzMzHbsJA4zMzO0adq0SdMkbVLmNm2D
         ZWbG6fAd+nu/452camTJjTvpJJ26z3t9j44lxUk7v96stfa3LH744QcGg/HnP//Z0dERF3//+99tbW3J
         Vzy89n+od5n65/r9Cfzr+r2VyXf6v0m+v5WZ5/+fuX/xZu7/YMGwsLjyXlf//4l+lH/+y+D5Yy+48vJJ
         /gf3f9fyixn8IDZX35/+ack3r9e/l3+Me3/yA/7f2L8Y8ote+Tp2n/7tGv0+zP0x4G3oZxq+xNz7mPv3

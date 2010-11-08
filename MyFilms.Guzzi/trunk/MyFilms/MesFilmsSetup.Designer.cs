@@ -267,6 +267,11 @@ namespace MesFilms
             this.label35 = new System.Windows.Forms.Label();
             this.check_WOL_enable = new System.Windows.Forms.CheckBox();
             this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.buttonSendMagicPacket3 = new System.Windows.Forms.Button();
+            this.buttonSendMagicPacket2 = new System.Windows.Forms.Button();
+            this.label30 = new System.Windows.Forms.Label();
+            this.buttonSendMagicPacket1 = new System.Windows.Forms.Button();
+            this.buttonGetMACadresses = new System.Windows.Forms.Button();
             this.label_NAS_Server_3_MAC = new System.Windows.Forms.Label();
             this.NAS_MAC_3 = new System.Windows.Forms.TextBox();
             this.label_NAS_Server_3_Name = new System.Windows.Forms.Label();
@@ -369,7 +374,6 @@ namespace MesFilms
             this.btnUp = new System.Windows.Forms.Button();
             this.btnDel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.SPicture = new System.Windows.Forms.PictureBox();
             this.SAnd_Or = new System.Windows.Forms.ComboBox();
             this.SValue2 = new System.Windows.Forms.ComboBox();
             this.SOp2 = new System.Windows.Forms.ComboBox();
@@ -387,6 +391,7 @@ namespace MesFilms
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.SPicture = new System.Windows.Forms.PictureBox();
             this.groupBox_SortByItem.SuspendLayout();
             this.groupBox_AntSelectedEnreg.SuspendLayout();
             this.groupBox_DefaultView.SuspendLayout();
@@ -425,10 +430,10 @@ namespace MesFilms
             this.groupBox10.SuspendLayout();
             this.Tab_Grabber.SuspendLayout();
             this.Tab_Logos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
             this.Tab_TrailerOptions.SuspendLayout();
             this.Tab_WakeOnLan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -2252,6 +2257,11 @@ namespace MesFilms
             // 
             // groupBox25
             // 
+            this.groupBox25.Controls.Add(this.buttonSendMagicPacket3);
+            this.groupBox25.Controls.Add(this.buttonSendMagicPacket2);
+            this.groupBox25.Controls.Add(this.label30);
+            this.groupBox25.Controls.Add(this.buttonSendMagicPacket1);
+            this.groupBox25.Controls.Add(this.buttonGetMACadresses);
             this.groupBox25.Controls.Add(this.label_NAS_Server_3_MAC);
             this.groupBox25.Controls.Add(this.NAS_MAC_3);
             this.groupBox25.Controls.Add(this.label_NAS_Server_3_Name);
@@ -2267,13 +2277,62 @@ namespace MesFilms
             this.groupBox25.Controls.Add(this.check_WOL_enable);
             this.groupBox25.Controls.Add(this.NAS_Name_1);
             this.groupBox25.Controls.Add(this.label36);
-            this.groupBox25.Location = new System.Drawing.Point(38, 29);
+            this.groupBox25.Location = new System.Drawing.Point(22, 29);
             this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Size = new System.Drawing.Size(620, 274);
+            this.groupBox25.Size = new System.Drawing.Size(705, 274);
             this.groupBox25.TabIndex = 73;
             this.groupBox25.TabStop = false;
             this.groupBox25.Text = "WakeOnLAN Options to Support NAS Storage";
             this.ToolTip1.SetToolTip(this.groupBox25, "If enabled you can start NAS when launching movies");
+            // 
+            // buttonSendMagicPacket3
+            // 
+            this.buttonSendMagicPacket3.Location = new System.Drawing.Point(603, 210);
+            this.buttonSendMagicPacket3.Name = "buttonSendMagicPacket3";
+            this.buttonSendMagicPacket3.Size = new System.Drawing.Size(81, 23);
+            this.buttonSendMagicPacket3.TabIndex = 91;
+            this.buttonSendMagicPacket3.Text = "Start Server 3";
+            this.buttonSendMagicPacket3.UseVisualStyleBackColor = true;
+            this.buttonSendMagicPacket3.Click += new System.EventHandler(this.buttonSendMagicPacket3_Click);
+            // 
+            // buttonSendMagicPacket2
+            // 
+            this.buttonSendMagicPacket2.Location = new System.Drawing.Point(603, 184);
+            this.buttonSendMagicPacket2.Name = "buttonSendMagicPacket2";
+            this.buttonSendMagicPacket2.Size = new System.Drawing.Size(81, 23);
+            this.buttonSendMagicPacket2.TabIndex = 90;
+            this.buttonSendMagicPacket2.Text = "Start Server 2";
+            this.buttonSendMagicPacket2.UseVisualStyleBackColor = true;
+            this.buttonSendMagicPacket2.Click += new System.EventHandler(this.buttonSendMagicPacket2_Click);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(414, 94);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(272, 13);
+            this.label30.TabIndex = 89;
+            this.label30.Text = "Auto-MAC-discover only works if NAS Storage is running";
+            // 
+            // buttonSendMagicPacket1
+            // 
+            this.buttonSendMagicPacket1.Location = new System.Drawing.Point(603, 160);
+            this.buttonSendMagicPacket1.Name = "buttonSendMagicPacket1";
+            this.buttonSendMagicPacket1.Size = new System.Drawing.Size(81, 23);
+            this.buttonSendMagicPacket1.TabIndex = 88;
+            this.buttonSendMagicPacket1.Text = "Start Server 1";
+            this.buttonSendMagicPacket1.UseVisualStyleBackColor = true;
+            this.buttonSendMagicPacket1.Click += new System.EventHandler(this.buttonSendMagicPacket1_Click);
+            // 
+            // buttonGetMACadresses
+            // 
+            this.buttonGetMACadresses.Location = new System.Drawing.Point(417, 120);
+            this.buttonGetMACadresses.Name = "buttonGetMACadresses";
+            this.buttonGetMACadresses.Size = new System.Drawing.Size(160, 28);
+            this.buttonGetMACadresses.TabIndex = 87;
+            this.buttonGetMACadresses.Text = "Try getting MAC addresses";
+            this.buttonGetMACadresses.UseVisualStyleBackColor = true;
+            this.buttonGetMACadresses.Click += new System.EventHandler(this.buttonGetMACadresses_Click);
             // 
             // label_NAS_Server_3_MAC
             // 
@@ -2308,6 +2367,7 @@ namespace MesFilms
             this.NAS_Name_3.Name = "NAS_Name_3";
             this.NAS_Name_3.Size = new System.Drawing.Size(160, 20);
             this.NAS_Name_3.TabIndex = 83;
+            this.NAS_Name_3.TextChanged += new System.EventHandler(this.NAS_Name_3_TextChanged);
             // 
             // label_NAS_Server_2_MAC
             // 
@@ -2342,6 +2402,7 @@ namespace MesFilms
             this.NAS_Name_2.Name = "NAS_Name_2";
             this.NAS_Name_2.Size = new System.Drawing.Size(160, 20);
             this.NAS_Name_2.TabIndex = 79;
+            this.NAS_Name_2.TextChanged += new System.EventHandler(this.NAS_Name_2_TextChanged);
             // 
             // label_NAS_Server_1_MAC
             // 
@@ -2380,6 +2441,7 @@ namespace MesFilms
             this.check_WOL_Userdialog.Text = "Enable WakeOnLAN UserDialog (Autoinvoke WOL when disabled)";
             this.ToolTip1.SetToolTip(this.check_WOL_Userdialog, "Enable WakeOnLAN UserDialog whn launching a movie");
             this.check_WOL_Userdialog.UseVisualStyleBackColor = true;
+            this.check_WOL_Userdialog.CheckedChanged += new System.EventHandler(this.check_WOL_Userdialog_CheckedChanged);
             // 
             // NAS_Name_1
             // 
@@ -2393,7 +2455,7 @@ namespace MesFilms
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(24, 109);
+            this.label36.Location = new System.Drawing.Point(24, 128);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(235, 13);
             this.label36.TabIndex = 69;
@@ -3116,7 +3178,6 @@ namespace MesFilms
             this.Tab_Logos.Controls.Add(this.btnUp);
             this.Tab_Logos.Controls.Add(this.btnDel);
             this.Tab_Logos.Controls.Add(this.btnAdd);
-            this.Tab_Logos.Controls.Add(this.SPicture);
             this.Tab_Logos.Controls.Add(this.SAnd_Or);
             this.Tab_Logos.Controls.Add(this.SValue2);
             this.Tab_Logos.Controls.Add(this.SOp2);
@@ -3127,6 +3188,7 @@ namespace MesFilms
             this.Tab_Logos.Controls.Add(this.textBox3);
             this.Tab_Logos.Controls.Add(this.chkLogos);
             this.Tab_Logos.Controls.Add(this.SLogo_Type);
+            this.Tab_Logos.Controls.Add(this.SPicture);
             this.Tab_Logos.Location = new System.Drawing.Point(4, 22);
             this.Tab_Logos.Name = "Tab_Logos";
             this.Tab_Logos.Padding = new System.Windows.Forms.Padding(3);
@@ -3282,19 +3344,6 @@ namespace MesFilms
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // SPicture
-            // 
-            this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
-            this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SPicture.Enabled = false;
-            this.SPicture.Location = new System.Drawing.Point(606, 247);
-            this.SPicture.Name = "SPicture";
-            this.SPicture.Size = new System.Drawing.Size(75, 48);
-            this.SPicture.TabIndex = 85;
-            this.SPicture.TabStop = false;
-            this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // SAnd_Or
             // 
@@ -3491,6 +3540,19 @@ namespace MesFilms
             this.pictureBox1.TabIndex = 75;
             this.pictureBox1.TabStop = false;
             // 
+            // SPicture
+            // 
+            this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
+            this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SPicture.Enabled = false;
+            this.SPicture.Location = new System.Drawing.Point(606, 247);
+            this.SPicture.Name = "SPicture";
+            this.SPicture.Size = new System.Drawing.Size(75, 48);
+            this.SPicture.TabIndex = 85;
+            this.SPicture.TabStop = false;
+            this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
+            // 
             // MesFilmsSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3582,10 +3644,10 @@ namespace MesFilms
             this.Tab_Grabber.ResumeLayout(false);
             this.Tab_Logos.ResumeLayout(false);
             this.Tab_Logos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
             this.Tab_TrailerOptions.ResumeLayout(false);
             this.Tab_WakeOnLan.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3881,6 +3943,11 @@ namespace MesFilms
         private CheckBox ShowTrailerWhenStartingMovie;
         private CheckBox chkDfltArtist;
         private Button btnResetThumbsArtist;
+        private Button buttonGetMACadresses;
+        private Button buttonSendMagicPacket1;
+        private Button buttonSendMagicPacket3;
+        private Button buttonSendMagicPacket2;
+        private Label label30;
 
     }
 }
