@@ -382,6 +382,7 @@ namespace MesFilms
             this.SOp1 = new System.Windows.Forms.ComboBox();
             this.SField1 = new System.Windows.Forms.ComboBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.SPicture = new System.Windows.Forms.PictureBox();
             this.Tab_TrailerOptions = new System.Windows.Forms.TabPage();
             this.Tab_WakeOnLan = new System.Windows.Forms.TabPage();
             this.ButSave = new System.Windows.Forms.Button();
@@ -391,7 +392,8 @@ namespace MesFilms
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.SPicture = new System.Windows.Forms.PictureBox();
+            this.comboWOLtimeout = new System.Windows.Forms.ComboBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.groupBox_SortByItem.SuspendLayout();
             this.groupBox_AntSelectedEnreg.SuspendLayout();
             this.groupBox_DefaultView.SuspendLayout();
@@ -430,10 +432,10 @@ namespace MesFilms
             this.groupBox10.SuspendLayout();
             this.Tab_Grabber.SuspendLayout();
             this.Tab_Logos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
             this.Tab_TrailerOptions.SuspendLayout();
             this.Tab_WakeOnLan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -2257,6 +2259,8 @@ namespace MesFilms
             // 
             // groupBox25
             // 
+            this.groupBox25.Controls.Add(this.label37);
+            this.groupBox25.Controls.Add(this.comboWOLtimeout);
             this.groupBox25.Controls.Add(this.buttonSendMagicPacket3);
             this.groupBox25.Controls.Add(this.buttonSendMagicPacket2);
             this.groupBox25.Controls.Add(this.label30);
@@ -2287,7 +2291,7 @@ namespace MesFilms
             // 
             // buttonSendMagicPacket3
             // 
-            this.buttonSendMagicPacket3.Location = new System.Drawing.Point(603, 210);
+            this.buttonSendMagicPacket3.Location = new System.Drawing.Point(603, 233);
             this.buttonSendMagicPacket3.Name = "buttonSendMagicPacket3";
             this.buttonSendMagicPacket3.Size = new System.Drawing.Size(81, 23);
             this.buttonSendMagicPacket3.TabIndex = 91;
@@ -2297,7 +2301,7 @@ namespace MesFilms
             // 
             // buttonSendMagicPacket2
             // 
-            this.buttonSendMagicPacket2.Location = new System.Drawing.Point(603, 184);
+            this.buttonSendMagicPacket2.Location = new System.Drawing.Point(603, 207);
             this.buttonSendMagicPacket2.Name = "buttonSendMagicPacket2";
             this.buttonSendMagicPacket2.Size = new System.Drawing.Size(81, 23);
             this.buttonSendMagicPacket2.TabIndex = 90;
@@ -2308,7 +2312,7 @@ namespace MesFilms
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(414, 94);
+            this.label30.Location = new System.Drawing.Point(414, 114);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(272, 13);
             this.label30.TabIndex = 89;
@@ -2316,7 +2320,7 @@ namespace MesFilms
             // 
             // buttonSendMagicPacket1
             // 
-            this.buttonSendMagicPacket1.Location = new System.Drawing.Point(603, 160);
+            this.buttonSendMagicPacket1.Location = new System.Drawing.Point(603, 183);
             this.buttonSendMagicPacket1.Name = "buttonSendMagicPacket1";
             this.buttonSendMagicPacket1.Size = new System.Drawing.Size(81, 23);
             this.buttonSendMagicPacket1.TabIndex = 88;
@@ -2326,7 +2330,7 @@ namespace MesFilms
             // 
             // buttonGetMACadresses
             // 
-            this.buttonGetMACadresses.Location = new System.Drawing.Point(417, 120);
+            this.buttonGetMACadresses.Location = new System.Drawing.Point(417, 143);
             this.buttonGetMACadresses.Name = "buttonGetMACadresses";
             this.buttonGetMACadresses.Size = new System.Drawing.Size(160, 28);
             this.buttonGetMACadresses.TabIndex = 87;
@@ -2337,7 +2341,7 @@ namespace MesFilms
             // label_NAS_Server_3_MAC
             // 
             this.label_NAS_Server_3_MAC.AutoSize = true;
-            this.label_NAS_Server_3_MAC.Location = new System.Drawing.Point(292, 215);
+            this.label_NAS_Server_3_MAC.Location = new System.Drawing.Point(292, 238);
             this.label_NAS_Server_3_MAC.Name = "label_NAS_Server_3_MAC";
             this.label_NAS_Server_3_MAC.Size = new System.Drawing.Size(119, 13);
             this.label_NAS_Server_3_MAC.TabIndex = 86;
@@ -2346,7 +2350,7 @@ namespace MesFilms
             // NAS_MAC_3
             // 
             this.NAS_MAC_3.Enabled = false;
-            this.NAS_MAC_3.Location = new System.Drawing.Point(417, 212);
+            this.NAS_MAC_3.Location = new System.Drawing.Point(417, 235);
             this.NAS_MAC_3.Name = "NAS_MAC_3";
             this.NAS_MAC_3.Size = new System.Drawing.Size(160, 20);
             this.NAS_MAC_3.TabIndex = 85;
@@ -2354,7 +2358,7 @@ namespace MesFilms
             // label_NAS_Server_3_Name
             // 
             this.label_NAS_Server_3_Name.AutoSize = true;
-            this.label_NAS_Server_3_Name.Location = new System.Drawing.Point(24, 215);
+            this.label_NAS_Server_3_Name.Location = new System.Drawing.Point(24, 238);
             this.label_NAS_Server_3_Name.Name = "label_NAS_Server_3_Name";
             this.label_NAS_Server_3_Name.Size = new System.Drawing.Size(84, 13);
             this.label_NAS_Server_3_Name.TabIndex = 84;
@@ -2363,7 +2367,7 @@ namespace MesFilms
             // NAS_Name_3
             // 
             this.NAS_Name_3.Enabled = false;
-            this.NAS_Name_3.Location = new System.Drawing.Point(114, 212);
+            this.NAS_Name_3.Location = new System.Drawing.Point(114, 235);
             this.NAS_Name_3.Name = "NAS_Name_3";
             this.NAS_Name_3.Size = new System.Drawing.Size(160, 20);
             this.NAS_Name_3.TabIndex = 83;
@@ -2372,7 +2376,7 @@ namespace MesFilms
             // label_NAS_Server_2_MAC
             // 
             this.label_NAS_Server_2_MAC.AutoSize = true;
-            this.label_NAS_Server_2_MAC.Location = new System.Drawing.Point(292, 189);
+            this.label_NAS_Server_2_MAC.Location = new System.Drawing.Point(292, 212);
             this.label_NAS_Server_2_MAC.Name = "label_NAS_Server_2_MAC";
             this.label_NAS_Server_2_MAC.Size = new System.Drawing.Size(119, 13);
             this.label_NAS_Server_2_MAC.TabIndex = 82;
@@ -2381,7 +2385,7 @@ namespace MesFilms
             // NAS_MAC_2
             // 
             this.NAS_MAC_2.Enabled = false;
-            this.NAS_MAC_2.Location = new System.Drawing.Point(417, 186);
+            this.NAS_MAC_2.Location = new System.Drawing.Point(417, 209);
             this.NAS_MAC_2.Name = "NAS_MAC_2";
             this.NAS_MAC_2.Size = new System.Drawing.Size(160, 20);
             this.NAS_MAC_2.TabIndex = 81;
@@ -2389,7 +2393,7 @@ namespace MesFilms
             // label_NAS_Server_2_Name
             // 
             this.label_NAS_Server_2_Name.AutoSize = true;
-            this.label_NAS_Server_2_Name.Location = new System.Drawing.Point(24, 189);
+            this.label_NAS_Server_2_Name.Location = new System.Drawing.Point(24, 212);
             this.label_NAS_Server_2_Name.Name = "label_NAS_Server_2_Name";
             this.label_NAS_Server_2_Name.Size = new System.Drawing.Size(84, 13);
             this.label_NAS_Server_2_Name.TabIndex = 80;
@@ -2398,7 +2402,7 @@ namespace MesFilms
             // NAS_Name_2
             // 
             this.NAS_Name_2.Enabled = false;
-            this.NAS_Name_2.Location = new System.Drawing.Point(114, 186);
+            this.NAS_Name_2.Location = new System.Drawing.Point(114, 209);
             this.NAS_Name_2.Name = "NAS_Name_2";
             this.NAS_Name_2.Size = new System.Drawing.Size(160, 20);
             this.NAS_Name_2.TabIndex = 79;
@@ -2407,7 +2411,7 @@ namespace MesFilms
             // label_NAS_Server_1_MAC
             // 
             this.label_NAS_Server_1_MAC.AutoSize = true;
-            this.label_NAS_Server_1_MAC.Location = new System.Drawing.Point(292, 163);
+            this.label_NAS_Server_1_MAC.Location = new System.Drawing.Point(292, 186);
             this.label_NAS_Server_1_MAC.Name = "label_NAS_Server_1_MAC";
             this.label_NAS_Server_1_MAC.Size = new System.Drawing.Size(119, 13);
             this.label_NAS_Server_1_MAC.TabIndex = 78;
@@ -2416,7 +2420,7 @@ namespace MesFilms
             // NAS_MAC_1
             // 
             this.NAS_MAC_1.Enabled = false;
-            this.NAS_MAC_1.Location = new System.Drawing.Point(417, 160);
+            this.NAS_MAC_1.Location = new System.Drawing.Point(417, 183);
             this.NAS_MAC_1.Name = "NAS_MAC_1";
             this.NAS_MAC_1.Size = new System.Drawing.Size(160, 20);
             this.NAS_MAC_1.TabIndex = 77;
@@ -2424,7 +2428,7 @@ namespace MesFilms
             // label_NAS_Server_1_Name
             // 
             this.label_NAS_Server_1_Name.AutoSize = true;
-            this.label_NAS_Server_1_Name.Location = new System.Drawing.Point(24, 163);
+            this.label_NAS_Server_1_Name.Location = new System.Drawing.Point(24, 186);
             this.label_NAS_Server_1_Name.Name = "label_NAS_Server_1_Name";
             this.label_NAS_Server_1_Name.Size = new System.Drawing.Size(84, 13);
             this.label_NAS_Server_1_Name.TabIndex = 76;
@@ -2446,7 +2450,7 @@ namespace MesFilms
             // NAS_Name_1
             // 
             this.NAS_Name_1.Enabled = false;
-            this.NAS_Name_1.Location = new System.Drawing.Point(114, 160);
+            this.NAS_Name_1.Location = new System.Drawing.Point(114, 183);
             this.NAS_Name_1.Name = "NAS_Name_1";
             this.NAS_Name_1.Size = new System.Drawing.Size(160, 20);
             this.NAS_Name_1.TabIndex = 68;
@@ -2455,7 +2459,7 @@ namespace MesFilms
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(24, 128);
+            this.label36.Location = new System.Drawing.Point(24, 151);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(235, 13);
             this.label36.TabIndex = 69;
@@ -3448,6 +3452,19 @@ namespace MesFilms
             this.textBox3.TabStop = false;
             this.textBox3.Text = "* be carefull the Logo Configuration is available for all MyFilms configurations";
             // 
+            // SPicture
+            // 
+            this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
+            this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SPicture.Enabled = false;
+            this.SPicture.Location = new System.Drawing.Point(606, 247);
+            this.SPicture.Name = "SPicture";
+            this.SPicture.Size = new System.Drawing.Size(75, 48);
+            this.SPicture.TabIndex = 85;
+            this.SPicture.TabStop = false;
+            this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
+            // 
             // Tab_TrailerOptions
             // 
             this.Tab_TrailerOptions.Controls.Add(this.groupBox24);
@@ -3540,18 +3557,33 @@ namespace MesFilms
             this.pictureBox1.TabIndex = 75;
             this.pictureBox1.TabStop = false;
             // 
-            // SPicture
+            // comboWOLtimeout
             // 
-            this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
-            this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.SPicture.Enabled = false;
-            this.SPicture.Location = new System.Drawing.Point(606, 247);
-            this.SPicture.Name = "SPicture";
-            this.SPicture.Size = new System.Drawing.Size(75, 48);
-            this.SPicture.TabIndex = 85;
-            this.SPicture.TabStop = false;
-            this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
+            this.comboWOLtimeout.AllowDrop = true;
+            this.comboWOLtimeout.FormatString = "N0";
+            this.comboWOLtimeout.FormattingEnabled = true;
+            this.comboWOLtimeout.Items.AddRange(new object[] {
+            "5",
+            "10",
+            "15",
+            "20",
+            "25",
+            "30",
+            "60"});
+            this.comboWOLtimeout.Location = new System.Drawing.Point(603, 57);
+            this.comboWOLtimeout.Name = "comboWOLtimeout";
+            this.comboWOLtimeout.Size = new System.Drawing.Size(81, 21);
+            this.comboWOLtimeout.TabIndex = 93;
+            this.comboWOLtimeout.SelectedIndexChanged += new System.EventHandler(this.comboWOLtimeout_SelectedIndexChanged);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(414, 60);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(167, 13);
+            this.label37.TabIndex = 94;
+            this.label37.Text = "Timeout for NAS Server WakwUp";
             // 
             // MesFilmsSetup
             // 
@@ -3644,10 +3676,10 @@ namespace MesFilms
             this.Tab_Grabber.ResumeLayout(false);
             this.Tab_Logos.ResumeLayout(false);
             this.Tab_Logos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
             this.Tab_TrailerOptions.ResumeLayout(false);
             this.Tab_WakeOnLan.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3948,6 +3980,8 @@ namespace MesFilms
         private Button buttonSendMagicPacket3;
         private Button buttonSendMagicPacket2;
         private Label label30;
+        private Label label37;
+        private ComboBox comboWOLtimeout;
 
     }
 }

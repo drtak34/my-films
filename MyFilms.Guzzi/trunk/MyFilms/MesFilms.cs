@@ -2345,7 +2345,7 @@ namespace MesFilms
                     
                     //First check status of configured NAS-Servers
                     WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
-                    int intTimeOut = 30; //Timeout für WOL
+                    int intTimeOut = conf.StrWOLtimeout; //Timeout für WOL
 
                     //GUIControl.ShowControl(GetID, 34);
                     setProcessAnimationStatus(true, m_SearchAnimation);
@@ -2360,7 +2360,7 @@ namespace MesFilms
 
                     if (MesFilms.conf.StrNasName1.Length > 0)
                     {
-                        if (WakeOnLanManager.Ping(MesFilms.conf.StrNasName1, 10))
+                        if (WakeOnLanManager.Ping(MesFilms.conf.StrNasName1, intTimeOut))
                             dlg.Add("'" + MesFilms.conf.StrNasName1 + "' - (aktiv)");
                         else
                             dlg.Add("'" + MesFilms.conf.StrNasName1 + "' - (offline) - starten?");
@@ -2369,7 +2369,7 @@ namespace MesFilms
 
                     if (MesFilms.conf.StrNasName2.Length > 0)
                     {
-                        if (WakeOnLanManager.Ping(MesFilms.conf.StrNasName2, 10))
+                        if (WakeOnLanManager.Ping(MesFilms.conf.StrNasName2, intTimeOut))
                             dlg.Add("'" + MesFilms.conf.StrNasName2 + "' - (aktiv)");
                         else
                             dlg.Add("'" + MesFilms.conf.StrNasName2 + "' - (offline) - starten?");
@@ -2378,7 +2378,7 @@ namespace MesFilms
 
                     if (MesFilms.conf.StrNasName3.Length > 0)
                     {
-                        if (WakeOnLanManager.Ping(MesFilms.conf.StrNasName3, 10))
+                        if (WakeOnLanManager.Ping(MesFilms.conf.StrNasName3, intTimeOut))
                             dlg.Add("'" + MesFilms.conf.StrNasName3 + "' - (aktiv)");
                         else
                             dlg.Add("'" + MesFilms.conf.StrNasName3 + "' - (offline) - starten?");

@@ -270,6 +270,7 @@ namespace MesFilms
                 StrViewsDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDflt", false);
 
                 StrCheckWOLenable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Enable", false);
+                StrWOLtimeout = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Timeout", "15"));
                 StrCheckWOLuserdialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Userdialog", false);
                 StrNasName1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-1", string.Empty);
                 StrNasMAC1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-1", string.Empty);
@@ -897,7 +898,14 @@ namespace MesFilms
             get { return strCheckWOLenable; }
             set { strCheckWOLenable = value; }
         }
-        
+
+        private int strWOLtimeout = 15;
+        public int StrWOLtimeout
+        {
+            get { return strWOLtimeout; }
+            set { strWOLtimeout = value; }
+        }
+
         private bool strCheckWOLuserdialog = false;
         public bool StrCheckWOLuserdialog
         {

@@ -2241,38 +2241,99 @@ namespace MesFilms
             if (g_Player.Playing)
                 g_Player.Stop();
 
+            
             // Guzzi: Added WOL to start remote host before playing the files
-
-            //First get the Name of the Server to wake up
-
-            //Wake up the TV server, if required
-            //HandleWakeUpNas();
+            // Wake up the TV server, if required
+            // HandleWakeUpNas();
             Log.Info("MyFilms: Launched HandleWakeUpNas() to start movie'" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "'");
 
             if (MesFilms.conf.StrCheckWOLuserdialog)
             {
+                int wTimeout = MesFilms.conf.StrWOLtimeout;
+                bool isActive;
                 string UNCpath = MesFilms.r[select_item][MesFilms.conf.StrStorage].ToString();
+                WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
+
                 if (UNCpath.StartsWith("\\\\"))
                 UNCpath = UNCpath.Substring(2, UNCpath.Substring(2).IndexOf("\\") + 0);
                 if ((UNCpath.Equals(MesFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MesFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MesFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)))
                 {
-                    GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                    dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
-                    dlgOknas.SetLine(1, "Movie   : '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString() + "'"); //video title
-                    dlgOknas.SetLine(2, "Storage: '" + UNCpath + "'"); //Filename/Storagepath
-                    dlgOknas.SetLine(3, "Starte NAS Server, bitte warten...");
-                    dlgOknas.DoModal(GetID);
+
+                    if (WakeOnLanManager.Ping(UNCpath, wTimeout))
+                        isActive = true;
+                    else
+                        isActive = false;
+
+                    if ((!isActive) || (true)) // Todo: DIsable "Always Show dialog"
+                    {
+                        GUIDialogOK dlgOknas =
+                            (GUIDialogOK) GUIWindowManager.GetWindow((int) GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+                        dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+                        dlgOknas.SetLine(1,
+                                         "Movie   : '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] +
+                                         "'"); //video title
+                        dlgOknas.SetLine(2, "Storage: '" + UNCpath + "' - status: '" + isActive.ToString() + "'");
+                        //Filename/Storagepath
+                        dlgOknas.SetLine(3, "Wollen Sie den NAS Server starten ?");
+                        dlgOknas.DoModal(GetID);
+                        if (dlgOknas.SelectedLabel == -1)
+                            return;
+
+                        // Start NAS Server
+                        GUIDialogOK dlgOk =
+                            (GUIDialogOK) GUIWindowManager.GetWindow((int) GUIWindow.Window.WINDOW_DIALOG_OK);
+                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
+                        dlgOk.SetLine(1, "");
+
+                        if ((UNCpath.Equals(MesFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            if (wakeOnLanManager.WakeupSystem(
+                                wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC1), MesFilms.conf.StrNasName1,
+                                wTimeout))
+                            {
+                                dlgOk.SetLine(2, MesFilms.conf.StrNasName1 + " erfolgreich gestartet!");
+                            }
+                            else
+                                dlgOk.SetLine(2, MesFilms.conf.StrNasName1 + " konnte nicht gestartet werden (Timeout)!");
+                        }
+
+                        if ((UNCpath.Equals(MesFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            if (wakeOnLanManager.WakeupSystem(
+                                wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC2), MesFilms.conf.StrNasName2,
+                                wTimeout))
+                            {
+                                dlgOk.SetLine(2, MesFilms.conf.StrNasName2 + " erfolgreich gestartet!");
+                            }
+                            else
+                                dlgOk.SetLine(2, MesFilms.conf.StrNasName2 + " konnte nicht gestartet werden (Timeout)!");
+                        }
+
+                        if ((UNCpath.Equals(MesFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)))
+                        {
+                            if (wakeOnLanManager.WakeupSystem(
+                                wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC3), MesFilms.conf.StrNasName3,
+                                wTimeout))
+                            {
+                                dlgOk.SetLine(2, MesFilms.conf.StrNasName3 + " erfolgreich gestartet!");
+                            }
+                            else
+                                dlgOk.SetLine(2, MesFilms.conf.StrNasName3 + " konnte nicht gestartet werden (Timeout)!");
+                        }
+
+                        dlgOk.DoModal(GetID);
+                    }
                 }
                 else
                 {
                     GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                     dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
                     //dlgOknas.SetLine(1, "Movie   : '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString() + "'"); //video title
-                    dlgOknas.SetLine(2, "Storage: '" + UNCpath + "' ist nicht konfiguriert!"); //Filename/Storagepath
+                    dlgOknas.SetLine(2, "Storage: '" + UNCpath + "' ist offline nicht für WOL konfiguriert!"); //Filename/Storagepath
                     dlgOknas.SetLine(3, "Automatischer NAS Server Start nicht möglich...");
                     dlgOknas.DoModal(GetID);
+                    return;
                 }
-
             }
 
             // search all files

@@ -676,6 +676,7 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UpdateList", AntUpdList.Text.ToString());
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", check_WOL_enable.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", comboWOLtimeout.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", check_WOL_Userdialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-1", NAS_Name_1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-1", NAS_MAC_1.Text.ToString());
@@ -937,6 +938,7 @@ namespace MesFilms
             AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UpdateList", "");
 
             check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", false);
+            comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", "15");
             check_WOL_Userdialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", false);
             NAS_Name_1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-1", string.Empty);
             NAS_MAC_1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-1", string.Empty);
@@ -1018,6 +1020,9 @@ namespace MesFilms
                 check_WOL_enable.Checked = true;
             else
                 check_WOL_enable.Checked = false;
+
+            comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", "15");
+
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", "False") == "True"
             || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", "False") == "yes")
                 check_WOL_Userdialog.Checked = true;
@@ -1187,6 +1192,7 @@ namespace MesFilms
             SearchSubDirs.Checked = false;
             SearchSubDirsTrailer.Checked = false;
             check_WOL_enable.Checked = false;
+            comboWOLtimeout.ResetText();
             check_WOL_Userdialog.Checked = false;
             CheckWatched.Checked = false;
             NAS_Name_1.ResetText();
@@ -2849,6 +2855,10 @@ namespace MesFilms
             if (NAS_Name_3.Text.Length == 0)
                 NAS_MAC_3.Text = "";
 
+        }
+
+        private void comboWOLtimeout_SelectedIndexChanged(object sender, EventArgs e)
+        {
         }
 
     }
