@@ -267,6 +267,8 @@ namespace MesFilms
             this.label35 = new System.Windows.Forms.Label();
             this.check_WOL_enable = new System.Windows.Forms.CheckBox();
             this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.comboWOLtimeout = new System.Windows.Forms.ComboBox();
             this.buttonSendMagicPacket3 = new System.Windows.Forms.Button();
             this.buttonSendMagicPacket2 = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
@@ -392,8 +394,6 @@ namespace MesFilms
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.comboWOLtimeout = new System.Windows.Forms.ComboBox();
-            this.label37 = new System.Windows.Forms.Label();
             this.groupBox_SortByItem.SuspendLayout();
             this.groupBox_AntSelectedEnreg.SuspendLayout();
             this.groupBox_DefaultView.SuspendLayout();
@@ -2289,6 +2289,31 @@ namespace MesFilms
             this.groupBox25.Text = "WakeOnLAN Options to Support NAS Storage";
             this.ToolTip1.SetToolTip(this.groupBox25, "If enabled you can start NAS when launching movies");
             // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(414, 60);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(165, 13);
+            this.label37.TabIndex = 94;
+            this.label37.Text = "Timeout for NAS Server WakeUp";
+            // 
+            // comboWOLtimeout
+            // 
+            this.comboWOLtimeout.FormattingEnabled = true;
+            this.comboWOLtimeout.Items.AddRange(new object[] {
+            "5",
+            "10",
+            "15",
+            "20",
+            "30",
+            "60"});
+            this.comboWOLtimeout.Location = new System.Drawing.Point(603, 57);
+            this.comboWOLtimeout.Name = "comboWOLtimeout";
+            this.comboWOLtimeout.Size = new System.Drawing.Size(81, 21);
+            this.comboWOLtimeout.TabIndex = 96;
+            this.comboWOLtimeout.SelectedIndexChanged += new System.EventHandler(this.comboWOLtimeout_SelectedIndexChanged);
+            // 
             // buttonSendMagicPacket3
             // 
             this.buttonSendMagicPacket3.Location = new System.Drawing.Point(603, 233);
@@ -3556,34 +3581,6 @@ namespace MesFilms
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 75;
             this.pictureBox1.TabStop = false;
-            // 
-            // comboWOLtimeout
-            // 
-            this.comboWOLtimeout.AllowDrop = true;
-            this.comboWOLtimeout.FormatString = "N0";
-            this.comboWOLtimeout.FormattingEnabled = true;
-            this.comboWOLtimeout.Items.AddRange(new object[] {
-            "5",
-            "10",
-            "15",
-            "20",
-            "25",
-            "30",
-            "60"});
-            this.comboWOLtimeout.Location = new System.Drawing.Point(603, 57);
-            this.comboWOLtimeout.Name = "comboWOLtimeout";
-            this.comboWOLtimeout.Size = new System.Drawing.Size(81, 21);
-            this.comboWOLtimeout.TabIndex = 93;
-            this.comboWOLtimeout.SelectedIndexChanged += new System.EventHandler(this.comboWOLtimeout_SelectedIndexChanged);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(414, 60);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(167, 13);
-            this.label37.TabIndex = 94;
-            this.label37.Text = "Timeout for NAS Server WakwUp";
             // 
             // MesFilmsSetup
             // 

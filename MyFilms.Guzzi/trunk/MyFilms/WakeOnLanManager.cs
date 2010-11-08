@@ -21,7 +21,8 @@
 #region Usings
 
 using System;
-using System.Linq;
+using System.Collections.Generic;
+using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
@@ -246,7 +247,16 @@ namespace MesFilms.WakeOnLan
         return false;
       }
 
-        return hwAddress.Any(t => t != 0x00);
+      bool valid = false;
+      for (int i = 0; i < hwAddress.Length; i++)
+      {
+          if (hwAddress[i] != 0x00)
+          {
+              valid = true;
+              break;
+          }
+      }
+      return valid;
     }
 
     /// <summary>
@@ -302,6 +312,7 @@ namespace MesFilms.WakeOnLan
     /// <returns>byte[] containing the byte representation of this hardware ethernet address</returns>
     public byte[] GetHwAddrBytes(string address)
     {
+      Log.Debug("MyFilms.WakeOnLanManager: address: '" + address + "'");
       byte[] addrn = new byte[6];
       string[] addr = address.Split(':');
       if (addr.Length != 6)

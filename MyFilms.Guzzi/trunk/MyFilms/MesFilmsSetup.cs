@@ -676,7 +676,7 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UpdateList", AntUpdList.Text.ToString());
 
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", check_WOL_enable.Checked);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", comboWOLtimeout.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", comboWOLtimeout.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", check_WOL_Userdialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-1", NAS_Name_1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-1", NAS_MAC_1.Text.ToString());
@@ -2857,9 +2857,12 @@ namespace MesFilms
 
         }
 
+
         private void comboWOLtimeout_SelectedIndexChanged(object sender, EventArgs e)
         {
+
         }
+
 
     }
 }

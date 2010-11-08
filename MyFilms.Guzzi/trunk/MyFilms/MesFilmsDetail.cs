@@ -2233,15 +2233,7 @@ namespace MesFilms
         // Play Movie
         //-------------------------------------------------------------------------------------------
         {
-            // Run externaly Program before Playing if defined in setup
-            Log.Debug("MyFilms (Play Movie) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
-            setProcessAnimationStatus(true, m_SearchAnimation);
-            if ((MesFilms.conf.CmdPar.Length > 0) && (MesFilms.conf.CmdPar != "(none)"))
-                RunProgram(MesFilms.conf.CmdExe, MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.CmdPar].ToString());
-            if (g_Player.Playing)
-                g_Player.Stop();
-
-            
+           
             // Guzzi: Added WOL to start remote host before playing the files
             // Wake up the TV server, if required
             // HandleWakeUpNas();
@@ -2255,7 +2247,7 @@ namespace MesFilms
                 WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
 
                 if (UNCpath.StartsWith("\\\\"))
-                UNCpath = UNCpath.Substring(2, UNCpath.Substring(2).IndexOf("\\") + 0);
+                UNCpath = (UNCpath.Substring(2, UNCpath.Substring(2).IndexOf("\\") + 0)).ToLower();
                 if ((UNCpath.Equals(MesFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MesFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MesFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)))
                 {
 
@@ -2266,17 +2258,18 @@ namespace MesFilms
 
                     if ((!isActive) || (true)) // Todo: DIsable "Always Show dialog"
                     {
-                        GUIDialogOK dlgOknas =
-                            (GUIDialogOK) GUIWindowManager.GetWindow((int) GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+                        GUIDialogYesNo dlgOknas =
+                            (GUIDialogYesNo) GUIWindowManager.GetWindow((int) GUIWindow.Window.WINDOW_DIALOG_YES_NO);
                         dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
                         dlgOknas.SetLine(1,
                                          "Movie   : '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] +
                                          "'"); //video title
-                        dlgOknas.SetLine(2, "Storage: '" + UNCpath + "' - status: '" + isActive.ToString() + "'");
+                        dlgOknas.SetLine(2, "Storage: '" + UNCpath + "' - Status: '" + isActive.ToString() + "'");
                         //Filename/Storagepath
                         dlgOknas.SetLine(3, "Wollen Sie den NAS Server starten ?");
+                        //dlgOknas.SetLine(3, "'" + MesFilms.conf.StrNasMAC1 + "', '" + MesFilms.conf.StrWOLtimeout.ToString() + "'");
                         dlgOknas.DoModal(GetID);
-                        if (dlgOknas.SelectedLabel == -1)
+                        if (!(dlgOknas.IsConfirmed))
                             return;
 
                         // Start NAS Server
@@ -2285,10 +2278,10 @@ namespace MesFilms
                         dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
                         dlgOk.SetLine(1, "");
 
-                        if ((UNCpath.Equals(MesFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)))
+                        if ((UNCpath.Equals(MesFilms.conf.StrNasName1.ToLower())) && (MesFilms.conf.StrNasMAC1.ToString().Length > 1))
                         {
                             if (wakeOnLanManager.WakeupSystem(
-                                wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC1), MesFilms.conf.StrNasName1,
+                                wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC1.ToString()), MesFilms.conf.StrNasName1,
                                 wTimeout))
                             {
                                 dlgOk.SetLine(2, MesFilms.conf.StrNasName1 + " erfolgreich gestartet!");
@@ -2297,7 +2290,7 @@ namespace MesFilms
                                 dlgOk.SetLine(2, MesFilms.conf.StrNasName1 + " konnte nicht gestartet werden (Timeout)!");
                         }
 
-                        if ((UNCpath.Equals(MesFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)))
+                        if ((UNCpath.Equals(MesFilms.conf.StrNasName2.ToLower())) && (MesFilms.conf.StrNasMAC2.ToString().Length > 1))
                         {
                             if (wakeOnLanManager.WakeupSystem(
                                 wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC2), MesFilms.conf.StrNasName2,
@@ -2309,7 +2302,7 @@ namespace MesFilms
                                 dlgOk.SetLine(2, MesFilms.conf.StrNasName2 + " konnte nicht gestartet werden (Timeout)!");
                         }
 
-                        if ((UNCpath.Equals(MesFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)))
+                        if ((UNCpath.Equals(MesFilms.conf.StrNasName3.ToLower())) && (MesFilms.conf.StrNasMAC3.ToString().Length > 0))
                         {
                             if (wakeOnLanManager.WakeupSystem(
                                 wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC3), MesFilms.conf.StrNasName3,
@@ -2335,6 +2328,14 @@ namespace MesFilms
                     return;
                 }
             }
+
+            // Run externaly Program before Playing if defined in setup
+            Log.Debug("MyFilms (Play Movie) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
+            setProcessAnimationStatus(true, m_SearchAnimation);
+            if ((MesFilms.conf.CmdPar.Length > 0) && (MesFilms.conf.CmdPar != "(none)"))
+                RunProgram(MesFilms.conf.CmdExe, MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.CmdPar].ToString());
+            if (g_Player.Playing)
+                g_Player.Stop();
 
             // search all files
             ArrayList newItems = new ArrayList();
