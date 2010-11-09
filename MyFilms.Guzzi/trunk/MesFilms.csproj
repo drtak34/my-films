@@ -237,7 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="MyFilms\Resources\film-reel-128x128.png" />
+    <EmbeddedResource Include="MyFilms\Resources\film-reel-128x128.png" />
     <None Include="MyFilms\Resources\clapperboard-128x128.png" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
