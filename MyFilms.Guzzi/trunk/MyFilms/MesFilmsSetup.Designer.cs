@@ -710,7 +710,7 @@ namespace MesFilms
             this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 123);
             this.groupBox_DefaultView.TabIndex = 26;
             this.groupBox_DefaultView.TabStop = false;
-            this.groupBox_DefaultView.Text = "Default View";
+            this.groupBox_DefaultView.Text = "Default Start View";
             this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
             // 
             // label10

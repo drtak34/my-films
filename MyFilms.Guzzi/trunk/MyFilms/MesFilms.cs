@@ -261,6 +261,8 @@ namespace MesFilms
         }
 
         public override bool Init()
+        //This Method is only loaded ONCE when starting Mediaportal !!!
+            // ToDo: Add Variable for Onceentering GUIview here (define it)
         {
             // create Backdrop image swapper
             //backdrop = new ImageSwapper();
@@ -294,6 +296,7 @@ namespace MesFilms
         }
 
         protected override void OnPageLoad()
+            //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
         {
             Log.Debug("OnPageLoad() started.");
             
