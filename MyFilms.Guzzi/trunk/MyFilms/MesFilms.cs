@@ -266,34 +266,28 @@ namespace MesFilms
         public override bool Init()
         //This Method is only loaded ONCE when starting Mediaportal !!!
         {
+            Log.Debug("MyFilms.Init() started.");
             // create Backdrop image swapper
-            //backdrop = new ImageSwapper();
-            //backdrop.ImageResource.Delay = 250;
-            //backdrop.PropertyOne = "#myfilms.fanart";
+            backdrop = new ImageSwapper();
+            backdrop.ImageResource.Delay = 250;
+            backdrop.PropertyOne = "#myfilms.fanart";
             //backdrop.PropertyTwo = "#myfilms.fanart2";
             //backdrop.LoadingImage = loadingImage;
 
             // create Cover image swapper
-            //cover = new AsyncImageResource();
-            //cover.Property = "#myfilms.coverimage";
-            //cover.Delay = 250;
+            cover = new AsyncImageResource();
+            cover.Property = "#myfilms.coverimage";
+            cover.Delay = 250;
 
             // (re)link our backdrop image controls to the backdrop image swapper
             //backdrop.GUIImageOne = ImgFanart;
             //backdrop.GUIImageTwo = ImgFanart2;
             //backdrop.LoadingImage = loadingImage;
 
-            // create Backdrop image swapper
-            backdrop = new ImageSwapper();
-            backdrop.ImageResource.Delay = 250;
-            backdrop.PropertyOne = "#myfilms.fanart";
-            //backdrop.PropertyTwo = "#myfilms.fanart2";
-
-            // create Cover image swapper
-            cover = new AsyncImageResource();
-            cover.Property = "#myfilms.coverimage";
-            cover.Delay = 250;
+            // Ceate Variable for OneTimeView Setup
             InitialViewSetupDone = false;
+
+            Log.Debug("MyFilms.Init() completed.");
 
             return Load(GUIGraphicsContext.Skin + @"\MesFilms.xml");
         }
@@ -301,7 +295,7 @@ namespace MesFilms
         protected override void OnPageLoad()
             //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
         {
-            Log.Debug("OnPageLoad() started.");
+            Log.Debug("MyFilms.OnPageLoad() started.");
             
             // (re)link our backdrop image controls to the backdrop image swapper
             backdrop.GUIImageOne = ImgFanart;
@@ -316,13 +310,13 @@ namespace MesFilms
             //m_FanartTimer.Change(0,10000);
             m_bFanartTimerDisabled = false;
 
-            Log.Debug("OnPageLoad() completed.");
+            Log.Debug("MyFilms.OnPageLoad() completed.");
 
         }
 
         protected override void OnPageDestroy(int new_windowId)
         {
-            Log.Debug("OnPageDestroy() completed.");
+            Log.Debug("MyFilms.OnPageDestroy() completed.");
 
             // Disable Random Fanart Timer
             m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
@@ -330,7 +324,7 @@ namespace MesFilms
 
             base.OnPageDestroy(new_windowId);
 
-            Log.Debug("OnPageDestroy() completed.");
+            Log.Debug("MyFilms.OnPageDestroy() completed.");
         }
 
 
