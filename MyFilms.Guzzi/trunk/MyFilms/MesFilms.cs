@@ -172,7 +172,10 @@ namespace MesFilms
         //public static string CurrentFanartDir;
         public enum optimizeOption { optimizeDisabled };
         //public enum optimizeDisabled;
+        public bool InitialViewSetupDone; //Added to implement InitialViewSetup, ToDo: Add Logic
         #endregion
+
+
         #region events
   
         public delegate void FilmsStoppedHandler(int stoptime, string filename);
@@ -262,7 +265,6 @@ namespace MesFilms
 
         public override bool Init()
         //This Method is only loaded ONCE when starting Mediaportal !!!
-            // ToDo: Add Variable for Onceentering GUIview here (define it)
         {
             // create Backdrop image swapper
             //backdrop = new ImageSwapper();
@@ -291,6 +293,7 @@ namespace MesFilms
             cover = new AsyncImageResource();
             cover.Property = "#myfilms.coverimage";
             cover.Delay = 250;
+            InitialViewSetupDone = false;
 
             return Load(GUIGraphicsContext.Skin + @"\MesFilms.xml");
         }
@@ -387,11 +390,8 @@ namespace MesFilms
             //    else
             //        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
             //    return;
-            //}
+            // }
 			// End Merge Code
-			
-			
-			
 			
             if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
                 if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
