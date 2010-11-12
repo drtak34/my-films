@@ -36,6 +36,7 @@
     <String id="621">Sortiere: Datum</String>
     <String id="712">Zurück</String>
     <String id="733">Ansicht: Cover</String>
+    <String id="791">Ansicht: Cover Flow</String>
     <String id="863">Datei</String>
     <String id="875">AMCupdater läuft bereits</String>
     <String id="900">Film fortsetzen?</String>
@@ -96,6 +97,7 @@
     <String id="10798628">ein</String>
     <String id="10798629">aus</String>
     <String id="10798630">Neuer Wert</String>
+    <String id="10798631">Zeige NAS Server Status</String>
     <String id="10798640">Kein Ergebnis zu dem gesuchten Wert gefunden!</String>
     <String id="10798641">Kein Eintrag vorhanden nach dem gesucht werden kann!.</String>
     <String id="10798642">Aktualisiere Filmdaten nach Eigenschaft</String>
@@ -148,6 +150,7 @@
     <String id="10798724">Lade Trailer (online)</String>
     <String id="10798725">Lösche  Trailer (aktueller Film)</String>
     <String id="10798726">Suche Trailer - alle Filme (lokal)</String>
+    <String id="10798727">Zeige NAS Server Status</String>
     <String id="10798731">Personen Infos (IMDB)</String>
   </Section>
 </Language>

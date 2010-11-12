@@ -36,6 +36,7 @@
     <String id="621">Sort by: Date</String>
     <String id="712">Back</String>
     <String id="733">Layout: Filmstrip</String>
+    <String id="791">Layout: Cover Flow</String>
     <String id="863">File</String>
     <String id="875">Current programme</String>
     <String id="900">Resume movie from last time?</String>
@@ -87,6 +88,7 @@
     <String id="10798618">Global search for string '{0}'</String>
     <String id="10798619">=> {0} entry(ies) found for {1}</String>
     <String id="10798621">Search random Movies</String>
+    <String id="10798631">Show NAS Server Status</String>
     <String id="1079872">First</String>
     <String id="1079873">Last</String>
     <String id="1079874">Delete Fanart</String>
@@ -148,6 +150,7 @@
     <String id="10798724">Load Trailer (online)</String>
     <String id="10798725">Delete Trailer (current Movie)</String>
     <String id="10798726">Search Trailers - all Movies (local)</String>
+    <String id="10798727">Show NAS Server Status</String>
     <String id="10798731">Person Infos (IMDB)</String>
   </Section>
 </Language>
