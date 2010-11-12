@@ -1178,10 +1178,18 @@ namespace MesFilms
             fin: ;
             }
             if (facadeView.Count == 0)
-				// From Zebonsmerge: InitMainScreen() instead of Showing empty list - ToDo: Add Dialog with Info to return to MainScreen that no movies found !!!
-                //InitMainScreen();
+            {
+                GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                dlgOk.ClearAll();
+                dlgOk.SetLine(1, "Keine Filme entsprechen der Suche!");
+                dlgOk.SetLine(2, "Gehe zu Startbildschirm ...");
+                dlgOk.DoModal(GetID);
+                DisplayAllMovies();
+                GUIControl.HideControl(GetID, 34);
+                InitMainScreen();
                 // Old line:
                 GUIControl.ShowControl(GetID, 34);
+            }
             else
             {
                 //ImgFanart.SetVisibleCondition(1, true);  ->> This fucked up the fanart swapper !!!!!
@@ -4293,7 +4301,6 @@ namespace MesFilms
         //*****************************************************************************************
           // Changed to Public to make sure, swapper can be accessed from elsewhere (Public, Private, Protected)
         private void InitMainScreen()
-        //public void InitMainScreen()
         {
             Log.Debug("MyFilms (InitMainScreen) - Initialize all properties !!!"); 
             MovieScrobbling = false; //Reset MovieScrobbling
