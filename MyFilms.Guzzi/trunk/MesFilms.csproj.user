@@ -12,6 +12,7 @@
     <RemoteDebugEnabled>true</RemoteDebugEnabled>
     <RemoteDebugMachine>wmc-gmi-guzzi</RemoteDebugMachine>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
-    <StartArguments>C:\Programme\Team MediaPortal\MediaPortal\MediaPortal.exe</StartArguments>
+    <StartArguments>
+    </StartArguments>
   </PropertyGroup>
 </Project>

@@ -163,7 +163,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyFilms\AntMovieCatalog.resx">
@@ -237,7 +236,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <EmbeddedResource Include="MyFilms\Resources\film-reel-128x128.png" />
     <None Include="MyFilms\Resources\clapperboard-128x128.png" />
     <None Include="Properties\Settings.settings">
