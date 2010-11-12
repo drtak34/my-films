@@ -307,7 +307,7 @@ namespace MesFilms
                 OnlyTitleList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyTitleList", false);
                 WindowsFileDialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WindowsFileDialog", false);
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
-                if (AlwaysDefaultView)
+                if ((AlwaysDefaultView) || (MesFilms.InitialStart))
                 {
                     strIndex = -1;
                     LastID = -1;

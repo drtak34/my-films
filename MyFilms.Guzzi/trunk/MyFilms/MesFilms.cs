@@ -172,7 +172,7 @@ namespace MesFilms
         //public static string CurrentFanartDir;
         public enum optimizeOption { optimizeDisabled };
         //public enum optimizeDisabled;
-        public bool InitialViewSetupDone; //Added to implement InitialViewSetup, ToDo: Add Logic
+        public static bool InitialStart = false; //Added to implement InitialViewSetup, ToDo: Add Logic
         #endregion
 
 
@@ -285,7 +285,7 @@ namespace MesFilms
             //backdrop.LoadingImage = loadingImage;
 
             // Ceate Variable for OneTimeView Setup
-            InitialViewSetupDone = false;
+            InitialStart = true;
 
             Log.Debug("MyFilms.Init() completed.");
 
@@ -441,6 +441,7 @@ namespace MesFilms
                         GUIPropertyManager.SetProperty("#myfilms.select", " ");
                         Configuration.Current_Config();
                         Load_Config(Configuration.CurrentConfig, true);
+                        // this is too early ... -> InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
                     }
                     if (Configuration.CurrentConfig.Length == 0)
                         GUIWindowManager.ShowPreviousWindow();
@@ -499,7 +500,7 @@ namespace MesFilms
                             else
                                 TxtItem3.Label = "#myfilms." + MesFilms.conf.Stritem3.ToLower();
                     }
-                    if ((conf.AlwaysDefaultView) && (PreviousWindowId != ID_MesFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MesFilmsActors))
+                    if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MesFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MesFilmsActors))
                         Fin_Charge_Init(true,false);
                     else
                         Fin_Charge_Init(false, false);
@@ -2089,6 +2090,8 @@ namespace MesFilms
             string BtnSearchT = GUILocalizeStrings.Get(137);
             GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnSearchT, BtnSearchT);
             BtnSrtBy.SortChanged += new SortEventHandler(SortChanged);
+            InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
+
             if (conf.Boolselect)
             {
                 getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, false, ""); // preserve index from last time
@@ -2341,8 +2344,13 @@ namespace MesFilms
                         else
                             Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
                         Configuration.CurrentConfig = newConfig;
+                        InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
                         Load_Config(newConfig, true);
-                        Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+                        if (InitialStart)
+                            Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
+                        else
+                            Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+                        InitialStart = false; // Guzzi: Set InitialStart to false after initialization done
                     }
 
                     break;

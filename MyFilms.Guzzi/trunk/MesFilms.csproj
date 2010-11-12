@@ -57,7 +57,7 @@
     </DefineConstants>
     <PlatformTarget>x86</PlatformTarget>
     <RegisterForComInterop>false</RegisterForComInterop>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>full</DebugType>
     <UseVSHostingProcess>true</UseVSHostingProcess>
     <Optimize>false</Optimize>
     <DebugSymbols>true</DebugSymbols>
@@ -163,6 +163,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyFilms\AntMovieCatalog.resx">
@@ -256,8 +257,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>del D:\Entwicklung\MediaPortal\mediaportal\xbmc\bin\Debug\plugins\Windows\mesfilms.dll
-copy D:\Entwicklung\MyFilms\trunk\obj\x86\Debug\MesFilms.dll D:\Entwicklung\MediaPortal\mediaportal\xbmc\bin\Debug\plugins\Windows\
+    <PostBuildEvent>del D:\Entwicklung\MediaPortal\trunk\mediaportal\xbmc\bin\Debug\plugins\Windows\mesfilms.dll
+copy D:\Entwicklung\MyFilms\trunk\obj\x86\Debug\MesFilms.dll D:\Entwicklung\MediaPortal\trunk\mediaportal\xbmc\bin\Debug\plugins\Windows\
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

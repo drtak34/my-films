@@ -554,6 +554,11 @@ namespace MesFilms
             string wDfltSort = string.Empty;
             switch (Sort.Text.ToLower())
             {
+                //if (AntSTitle.Text.Length > 0 && AntSTitle.Text != "(none)")
+                //    Sort.Items.Add(AntSTitle.Text);
+                //else
+                //    Sort.Items.Add(AntTitle1);
+                
                 case "(none)":
                     break;
                 case "title":
@@ -576,6 +581,7 @@ namespace MesFilms
                     wDfltSort = "RATING";
                     break;
                 default:
+                    wDfltSort = Sort.Text; //Guzzi: Added to not reset mapped settings other than dropdown names
                     if (Sort.Text.ToLower() == AntSort1.Text.ToLower())
                     {
                         wDfltSortMethod = AntTSort1.Text;
@@ -587,6 +593,7 @@ namespace MesFilms
                         wDfltSort = AntSort2.Text;
                     }
                     break;
+                                       
             }
             // backup yhe XML Config bfore writing
             if (System.IO.File.Exists(XmlConfig.EntireFilenameConfig("MyFilms")))
@@ -2186,6 +2193,7 @@ namespace MesFilms
             if (!(AntSort2.Text == "(none)") && !(AntSort2.Text.Length == 0))
                 Sort.Items.Add(AntSort2.Text);
 
+            //Guzzi: Added to not Reset setting when localized strings present
             if (
                 !(Sort.Text.ToLower().Contains("title")) && 
                 !(Sort.Text.ToLower() == "year") &&
@@ -2859,6 +2867,11 @@ namespace MesFilms
 
 
         private void comboWOLtimeout_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Sort_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

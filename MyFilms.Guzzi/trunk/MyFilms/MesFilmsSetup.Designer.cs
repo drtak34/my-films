@@ -751,6 +751,7 @@ namespace MesFilms
             this.Sort.Name = "Sort";
             this.Sort.Size = new System.Drawing.Size(90, 21);
             this.Sort.TabIndex = 76;
+            this.Sort.SelectedIndexChanged += new System.EventHandler(this.Sort_SelectedIndexChanged);
             // 
             // AlwaysDefaultView
             // 
