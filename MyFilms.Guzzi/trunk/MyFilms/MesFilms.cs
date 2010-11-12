@@ -1808,7 +1808,8 @@ namespace MesFilms
                         {
                         //wAddList = wtab[wi].ToString().Trim().Substring(1,1) + "\\" + wtab[wi].ToString().Trim().Substring(2);
                         if (wtab[wi].ToString().Trim().Length > 1)
-                            w_tableau.Add(wtab[wi].ToString().Trim().Substring(0,1) + @"\" + wtab[wi].ToString().Trim().Substring(1));
+                            //w_tableau.Add(wtab[wi].ToString().Trim().Substring(0, 1) + @"\" + wtab[wi].ToString().Trim().Substring(1));
+                            w_tableau.Add(wtab[wi].ToString().Trim().Substring(0,1) + @"\" + wtab[wi].ToString().Trim());
                         else
                             w_tableau.Add(wtab[wi].ToString().Trim());
                         }
