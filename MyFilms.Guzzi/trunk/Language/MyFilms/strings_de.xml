@@ -62,9 +62,9 @@
     <String id="107987">Filme</String>
     <String id="1079861">Aktualisiere Film Datenbank (AMCupdater)</String>
     <String id="1079862">Lade Fanart (online)</String>
-    <String id="1079863">Umschalten 'manuelle Wahl Grabberskript' ({0})'</String>
-    <String id="1079864">Umschalten 'automatisch bestes Suchergebnis' ({0})'</String>
-    <String id="1079865">Umschalten 'Windows Dateidialog' ({0})'</String>
+    <String id="1079863">Umschalten 'manuelle Wahl Grabberskript' ({0})</String>
+    <String id="1079864">Umschalten 'automatisch bestes Suchergebnis' ({0})</String>
+    <String id="1079865">Umschalten 'Windows Dateidialog' ({0})</String>
     <String id="1079866">Suche Filme nach beteiligten Personen</String>
     <String id="1079867">Auswahl der Person</String>
     <String id="1079868">Schauspieler</String>
@@ -77,6 +77,7 @@
     <String id="1079877">Bitte überprüfen Sie ihre Einstellungen !</String>
     <String id="1079878">Wollen Sie diese Auswahl treffen ?</String>
     <String id="1079879">Infos zu beteiligten Personen</String>
+    <String id="1079880">Umschalten 'Immer Standardansicht zeigen ({0})'</String>
     <String id="10798610">Filme als </String>
     <String id="10798611">Wähle Funktion für </String>
     <String id="10798612">Produzent</String>
@@ -97,7 +98,7 @@
     <String id="10798628">ein</String>
     <String id="10798629">aus</String>
     <String id="10798630">Neuer Wert</String>
-    <String id="10798631">Zeige NAS Server Status</String>
+    <String id="10798631">Zeige Film-Server Status</String>
     <String id="10798640">Kein Ergebnis zu dem gesuchten Wert gefunden!</String>
     <String id="10798641">Kein Eintrag vorhanden nach dem gesucht werden kann!.</String>
     <String id="10798642">Aktualisiere Filmdaten nach Eigenschaft</String>
@@ -152,7 +153,7 @@
     <String id="10798724">Lade Trailer (online)</String>
     <String id="10798725">Lösche  Trailer (aktueller Film)</String>
     <String id="10798726">Suche Trailer - alle Filme (lokal)</String>
-    <String id="10798727">Zeige NAS Server Status</String>
+    <String id="10798727">Zeige Film-Server Status</String>
     <String id="10798731">Personen Infos (IMDB)</String>
   </Section>
 </Language>

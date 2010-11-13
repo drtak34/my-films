@@ -98,6 +98,7 @@
     <String id="1079876">Directory {0} doesn't exist</String>
     <String id="1079877">Please Verify your Setup</String>
     <String id="1079878">Do you want to select it ?</String>
+    <String id="1079880">Always show default view ({0})</String>
     <String id="10798640">No entry corresponding to the searched value.</String>
     <String id="10798641">No entry to be search for.</String>
     <String id="10798642">Update Movie Data by Property</String>
