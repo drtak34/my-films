@@ -462,7 +462,7 @@ namespace MesFilms
                     
                     
                     GUIControl.ShowControl(GetID, 34);
-                    setProcessAnimationStatus(false, m_SearchAnimation);
+                    GUIWaitCursor.Hide();
 
                     if (TxtItem1 != null)
                         TxtItem1.Label = " ";
@@ -2328,7 +2328,7 @@ namespace MesFilms
                     int intTimeOut = conf.StrWOLtimeout; //Timeout für WOL
 
                     //GUIControl.ShowControl(GetID, 34);
-                    setProcessAnimationStatus(true, m_SearchAnimation);
+                    GUIWaitCursor.Show();
 
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     //if (dlg == null) return;
@@ -2366,7 +2366,7 @@ namespace MesFilms
                     }
 
                     //GUIControl.ShowControl(GetID, 34);
-                    setProcessAnimationStatus(false, m_SearchAnimation);
+                    GUIWaitCursor.Hide();
                    
                     dlg.DoModal(GetID);
                     if (dlg.SelectedLabel == -1)
@@ -2383,8 +2383,6 @@ namespace MesFilms
 
                         if (MesFilms.conf.StrNasMAC1.Length > 0)
                         {
-
-
                             if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC1), MesFilms.conf.StrNasName1, intTimeOut))
                             {
                                 dlgOk.SetLine(2, MesFilms.conf.StrNasName1 + " erfolgreich gestartet!");
@@ -2400,7 +2398,6 @@ namespace MesFilms
                         dlgOk.DoModal(GetID);
                             break;
                     }
-
 
                     if (choiceSearch[dlg.SelectedLabel] == "NAS2")
                     {
@@ -2540,59 +2537,48 @@ namespace MesFilms
                     // GlobalFilterTrailersOnly
                     GlobalFilterTrailersOnly = !GlobalFilterTrailersOnly;
                     Log.Info("MyFilms : Global filter for Trailers Only is now set to '" + GlobalFilterTrailersOnly.ToString() + "'");
-                    if (1 == 1)
-                    {
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
-                        dlgOk.SetLine(1, "");
-                        if (GlobalFilterTrailersOnly) dlgOk.SetLine(2, GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
-                        if (!GlobalFilterTrailersOnly) dlgOk.SetLine(2, GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
-                        dlgOk.DoModal(GetID);
-                    }
+                    if (GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
+                    if (!GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     GlobalFilterString = "";
                     if (GlobalFilterMinRating) GlobalFilterString = GlobalFilterString + "Rating > " + MesFilms.conf.StrAntFilterMinRating.ToString() + " AND ";
                     if (GlobalFilterTrailersOnly) GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
                     //if ((GlobalFilterMinRating) && (GlobalFilterTrailersOnly)) GlobalFilterString = GlobalFilterString + " AND ";
                     Log.Info("MyFilms (SetGlobalFilterString Trailers) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
-                    setProcessAnimationStatus(true, m_SearchAnimation);
+                    GUIWaitCursor.Show();
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-                    setProcessAnimationStatus(false, m_SearchAnimation);
+                    GUIWaitCursor.Hide();
                     break;
 
                 case "filterdbrating":
                     // GlobalFilterMinRating
                     GlobalFilterMinRating = !GlobalFilterMinRating;
                     Log.Info("MyFilms : Global filter for MinimumRating is now set to '" + GlobalFilterMinRating.ToString() + "'");
-                    if (1 == 1)
-                    {
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
-                        dlgOk.SetLine(1, "");
-                        if (GlobalFilterMinRating) dlgOk.SetLine(2, GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
-                        if (!GlobalFilterMinRating) dlgOk.SetLine(2, GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
-                        dlgOk.DoModal(GetID);
-                    }
+                    GUIDialogOK dlgOkFilterDBrating = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                    dlgOkFilterDBrating.SetHeading(GUILocalizeStrings.Get(10798624));
+                    dlgOkFilterDBrating.SetLine(1, "");
+                    if (GlobalFilterMinRating) dlgOkFilterDBrating.SetLine(2, GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
+                    if (!GlobalFilterMinRating) dlgOkFilterDBrating.SetLine(2, GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
+                    dlgOkFilterDBrating.DoModal(GetID);
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     GlobalFilterString = "";
                     if (GlobalFilterMinRating) GlobalFilterString = GlobalFilterString + "Rating > " + MesFilms.conf.StrAntFilterMinRating.ToString() + " AND ";
                     if (GlobalFilterTrailersOnly) GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
-                    //if ((GlobalFilterMinRating) && (GlobalFilterTrailersOnly)) GlobalFilterString = GlobalFilterString + " AND ";
                     Log.Info("MyFilms (SetGlobalFilterString MinRating) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
-                    setProcessAnimationStatus(true, m_SearchAnimation);
+                    GUIWaitCursor.Show();
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-                    setProcessAnimationStatus(false, m_SearchAnimation);
+                    GUIWaitCursor.Hide();
                     break;
+
                 case "filterdbsetrating":
                     // Set global value for minimum Rating to restrict movielist
                     Log.Info("MyFilms (FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MesFilms.conf.StrAntFilterMinRating.ToString() + "'");
                     MesFilmsDialogSetRating dlgRating = (MesFilmsDialogSetRating)GUIWindowManager.GetWindow(7988);
                     if (MesFilms.conf.StrAntFilterMinRating.ToString().Length > 0)
-                        //dlgRating.Rating = (decimal)Convert.ToInt32(MesFilms.conf.StrAntFilterMinRating);
                         dlgRating.Rating = Convert.ToDecimal(MesFilms.conf.StrAntFilterMinRating.Replace(".", ","));
                     else
                         dlgRating.Rating = 0;
-                    dlgRating.SetTitle("Bitte wählen sie den globalen Wert für die Minimalbewertung");
+                    dlgRating.SetTitle(GUILocalizeStrings.Get(1079881));
                     dlgRating.DoModal(GetID);
                     MesFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString().Replace("," , ".");
                     XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MesFilms.conf.StrAntFilterMinRating);
@@ -2601,24 +2587,20 @@ namespace MesFilms
                     GlobalFilterString = "";
                     if (GlobalFilterMinRating) GlobalFilterString = GlobalFilterString + "Rating > " + MesFilms.conf.StrAntFilterMinRating.ToString() + " AND ";
                     if (GlobalFilterTrailersOnly) GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
-                    //if ((GlobalFilterMinRating) && (GlobalFilterTrailersOnly)) GlobalFilterString = GlobalFilterString + " AND ";
                     Log.Info("MyFilms (SetGlobalFilterString) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
+                    GUIWaitCursor.Show();
                     if (GlobalFilterMinRating)
                     {
-                        setProcessAnimationStatus(true, m_SearchAnimation);
                         Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-                        setProcessAnimationStatus(false, m_SearchAnimation);
                     }
+                    GUIWaitCursor.Hide();
                     break;
+
                 case "updatedb":
                     // Launch AMCUpdater in batch mode
                     if (bgUpdateDB.IsBusy)
                     {
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(1079861));//action already launched
-                        dlgOk.SetLine(1, GUILocalizeStrings.Get(875));
-                        dlgOk.SetLine(2, GUILocalizeStrings.Get(330));
-                        dlgOk.DoModal(GetID);
+                        ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
                         break;
                     }
                     bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
@@ -2626,15 +2608,12 @@ namespace MesFilms
                     AsynUpdateDatabase();
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
+
                 case "downfanart":
                     // Launch Fanart download in batch mode
                     if (bgUpdateFanart.IsBusy)
                     {
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(1079862));//action already launched
-                        dlgOk.SetLine(1, GUILocalizeStrings.Get(921));
-                        dlgOk.SetLine(2, GUILocalizeStrings.Get(330));
-                        dlgOk.DoModal(GetID);
+                        ShowMessageDialog(GUILocalizeStrings.Get(1079862), GUILocalizeStrings.Get(921), GUILocalizeStrings.Get(330)); //action already launched
                         break;
                     }
                     bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
@@ -2643,15 +2622,12 @@ namespace MesFilms
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
 
-
                 case "trailer-all":
                     // Search and register all trailers for all movies in DB
-                    
                     AntMovieCatalog ds = new AntMovieCatalog();
                     ArrayList w_index = new ArrayList();
                     int w_index_count = 0;
                     string t_number_id = "";
-
                     DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
                     //Now build a list of valid movies in w_index with Number registered
                     foreach (DataRow wsr in wr)
@@ -2684,23 +2660,16 @@ namespace MesFilms
                     dlgYesNo.DoModal(GetID);
                     if (!(dlgYesNo.IsConfirmed))
                         break;
-                    //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-                    //setProcessAnimationStatus(true, m_SearchAnimation);
-                    
+                    GUIWaitCursor.Show();
                     for (i = 0; i < w_index_count; i++)
                     {
                         Log.Debug("MyFilms (GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] + "'");
                         //MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
                         MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(i), false);
                     }
-
-                    GUIDialogOK dlgOk1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-                    //setProcessAnimationStatus(false, m_SearchAnimation);
-                    dlgOk1.SetHeading("Info");
-                    dlgOk1.SetLine(1, "");
-                    dlgOk1.SetLine(2, "Trailersuche beendet !");
-                    dlgOk1.DoModal(GetID);
+                    GUIWaitCursor.Hide();
+                    ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798695)); //Traiersearch finished!
                     break;
                 
                 case "choosescript":
@@ -2725,6 +2694,14 @@ namespace MesFilms
                     MesFilms.conf.AlwaysDefaultView = !MesFilms.conf.AlwaysDefaultView;
                     XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AlwaysDefaultView", MesFilms.conf.AlwaysDefaultView);
                     Log.Info("MyFilms : Update Option 'use always default view...' changed to " + MesFilms.conf.AlwaysDefaultView.ToString());
+                    GUIWaitCursor.Show();
+                    if (MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
+                    if (!MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
+                    if (MesFilms.conf.AlwaysDefaultView)
+                        Fin_Charge_Init(true, true); //DefaultSelect, reload
+                    else
+                        Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
+                    GUIWaitCursor.Hide();
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
             }
@@ -4406,7 +4383,7 @@ namespace MesFilms
             //GUIPropertyManager.SetProperty("#myfilms.select", " "); // still above in init routine present, here would be doubled !
             GUIPropertyManager.SetProperty("#myfilms.rating", "0");
             affichage_rating(0);
-            setProcessAnimationStatus(false, m_SearchAnimation);
+            GUIWaitCursor.Hide();
             GUIControl.HideControl(GetID, 34);
         }
 
@@ -4542,25 +4519,25 @@ namespace MesFilms
             Log.Info("MyFilms : Loading Movie List in batch mode finished");
         }
 
-		public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
-        // ToDo: Check, if Class can be removed (not included in ZebonsMerge)
-        {
-            try
-            {
-                if (m_SearchAnimation != null)
-                {
-                    if (enable)
-                        m_SearchAnimation.AllocResources();
-                    else
-                        m_SearchAnimation.Dispose();
-                }
-                m_SearchAnimation.Visible = enable;
+        //public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
+        //// Not used anymore - replaced by GUIWaitCursor.Hide();
+        //{
+        //    try
+        //    {
+        //        if (m_SearchAnimation != null)
+        //        {
+        //            if (enable)
+        //                m_SearchAnimation.AllocResources();
+        //            else
+        //                m_SearchAnimation.Dispose();
+        //        }
+        //        m_SearchAnimation.Visible = enable;
 
-            }
-            catch (Exception)
-            {
-            }
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //    }
+        //}
 
         private void FanartTimerEvent(object state)
         {
@@ -4911,6 +4888,18 @@ namespace MesFilms
                 Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Database Updatewd !!!!");
             }
         }
+
+       private void ShowMessageDialog(string headline, string line1, string line2)
+       {
+          GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+          if (dlgOK != null)
+          {
+             dlgOK.SetHeading(headline);
+             dlgOK.SetLine(1, line1);
+             dlgOK.SetLine(2, line2);
+             dlgOK.DoModal(GetID);
+          }
+       }
  
 #endregion
     }
