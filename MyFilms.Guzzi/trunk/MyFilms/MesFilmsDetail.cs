@@ -1695,13 +1695,13 @@ namespace MesFilms
         public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group)
         //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
         {
-            Log.Debug("MyFilms (SearchFanart) - Vars: wtitle2 = '" + wtitle2 + "'");
-            Log.Debug("MyFilms (SearchFanart) - Vars: main (true for mainscreen, false for Detail) = '" + main + "'");
-            Log.Debug("MyFilms (SearchFanart) - Vars: searched (dir or file) = '" + searched + "'");
-            Log.Debug("MyFilms (SearchFanart) - Vars: rep (true for grouped view) = '" + rep + "'");
-            Log.Debug("MyFilms (SearchFanart) - Vars: filecover = '" + filecover + "'");
-            Log.Debug("MyFilms (SearchFanart) - Vars: group = '" + group + "'");
-            Log.Debug("MyFilms (SearchFanart) - Config: MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
+            //Log.Debug("MyFilms (SearchFanart) - Vars: wtitle2 = '" + wtitle2 + "'");
+            //Log.Debug("MyFilms (SearchFanart) - Vars: main (true for mainscreen, false for Detail) = '" + main + "'");
+            //Log.Debug("MyFilms (SearchFanart) - Vars: searched (dir or file) = '" + searched + "'");
+            //Log.Debug("MyFilms (SearchFanart) - Vars: rep (true for grouped view) = '" + rep + "'");
+            //Log.Debug("MyFilms (SearchFanart) - Vars: filecover = '" + filecover + "'");
+            //Log.Debug("MyFilms (SearchFanart) - Vars: group = '" + group + "'");
+            //Log.Debug("MyFilms (SearchFanart) - Config: MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
             string[] wfanart = new string[2];
             wfanart[0] = " ";
             wfanart[1] = " ";
@@ -1710,8 +1710,8 @@ namespace MesFilms
                 if (wtitle2.Contains(MesFilms.conf.TitleDelim))
                     wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
                 wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
-                Log.Debug("MyFilms (SearchFanart) - wtitle2-cleaned = '" + wtitle2 + "'");
-                Log.Debug("MyFilms (SearchFanart) - MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
+                //Log.Debug("MyFilms (SearchFanart) - wtitle2-cleaned = '" + wtitle2 + "'");
+                //Log.Debug("MyFilms (SearchFanart) - MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
 
                 if (!MesFilms.conf.StrFanart)
                     return wfanart;
@@ -1732,9 +1732,9 @@ namespace MesFilms
                 }
                 else
                     safeName = MesFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
-                Log.Debug("MyFilms (SearchFanart) - safename = '" + safeName + "'");
+                //Log.Debug("MyFilms (SearchFanart) - safename = '" + safeName + "'");
                 FileInfo wfile = new FileInfo(safeName + "\\{" + wtitle2 + "}.jpg");
-                Log.Debug("MyFilms (SearchFanart) - safename(file) = '" + wfile + "'");
+                //Log.Debug("MyFilms (SearchFanart) - safename(file) = '" + wfile + "'");
                 Log.Debug("MyFilms (SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + wtitle2 + "}.jpg") + "'");
                 if (((main) || (searched == "file")) && (System.IO.File.Exists(safeName + "\\{" + wtitle2 + "}.jpg")))
                 {
