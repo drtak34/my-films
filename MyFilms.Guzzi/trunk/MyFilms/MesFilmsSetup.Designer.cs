@@ -3574,7 +3574,7 @@ namespace MesFilms
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::MesFilms.Properties.Resources.MP_Icon;
+            this.pictureBox1.Image = global::MesFilms.Properties.Resources.film_reel_128x128;
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 7);
             this.pictureBox1.Name = "pictureBox1";
@@ -3968,7 +3968,6 @@ namespace MesFilms
         private GroupBox groupBox_PreLaunchingCommand;
         private ComboBox CmdPar;
         private TextBox CmdExe;
-        private PictureBox pictureBox1;
         private Label label10;
         private CheckBox ShowTrailerWhenStartingMovie;
         private CheckBox chkDfltArtist;
@@ -3980,6 +3979,7 @@ namespace MesFilms
         private Label label30;
         private Label label37;
         private ComboBox comboWOLtimeout;
+        private PictureBox pictureBox1;
 
     }
 }

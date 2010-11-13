@@ -47,6 +47,8 @@ namespace MesFilms
     /// <summary>
     /// Summary description for GUIMesFilms.
     /// </summary>
+    // [PluginIcons("MesFilms.MyFilms.Resources.clapperboard-128x128.png", "MesFilms.MyFilms.Resources.clapperboard-128x128-faded.png")]
+    [PluginIcons("MesFilms.MyFilms.Resources.film-reel-128x128.png", "MesFilms.MyFilms.Resources.film-reel-128x128-faded.png")]
     public class MesFilms : GUIWindow, ISetupForm
     {
         //private BaseMesFilms films;

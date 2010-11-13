@@ -237,13 +237,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyFilms\Resources\film-reel-128x128.png" />
-    <None Include="MyFilms\Resources\clapperboard-128x128.png" />
+    <EmbeddedResource Include="MyFilms\Resources\clapperboard-128x128.png" />
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="MyFilms\Resources\clapperboard.ico" />
-    <Content Include="MyFilms\Resources\MP_Banner.png" />
+    <EmbeddedResource Include="MyFilms\Resources\clapperboard.ico" />
+    <EmbeddedResource Include="MyFilms\Resources\clapperboard-128x128-faded.png" />
+    <EmbeddedResource Include="MyFilms\Resources\film-reel-128x128-faded.png" />
     <Content Include="MyFilms\Resources\MP_Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
