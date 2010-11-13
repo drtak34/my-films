@@ -1769,7 +1769,8 @@ namespace MesFilms
                     champselect = enr[WStrSort].ToString().Trim();
                 ArrayList wtab = Search_String(champselect);
                 //string wAddList = "";
-                if ((NewWstar.Length < 3) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director"))))
+                //if ((NewWstar.Length < 3) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director"))))
+                if ((NewWstar.Length < 0) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director"))))
                     for (wi = 0; wi < wtab.Count; wi++)
                         {
                         //wAddList = wtab[wi].ToString().Trim().Substring(1,1) + "\\" + wtab[wi].ToString().Trim().Substring(2);
@@ -1848,7 +1849,7 @@ namespace MesFilms
                                             if (System.IO.File.Exists(MesFilms.conf.DefaultCoverArtist))
                                                 ImageFast.CreateImage(strThumb + ".png", item.Label);
                                     }
-                                    else
+                                    else if ((WStrSort.ToLower().Contains("country")) || (WStrSort.ToLower().Contains("category")) || (WStrSort.ToLower().Contains("year")))
                                     {
                                         if (conf.StrPathViews.Length > 0)
                                             if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
@@ -1928,11 +1929,10 @@ namespace MesFilms
                                         if (System.IO.File.Exists(conf.StrPathArtist + "\\" + item.Label + "\\folder.png"))
                                             Picture.CreateThumbnail(conf.StrPathArtist + "\\" + item.Label + "\\folder.png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
                                 }
-                            // Guzzi: Deactivated, because we don't want to havce "TExtimages" for artists ...
-                            //if (!System.IO.File.Exists(strThumb + ".png"))
-                            //    ImageFast.CreateImage(strThumb + ".png", item.Label);
+                            if (!System.IO.File.Exists(strThumb + ".png"))
+                                ImageFast.CreateImage(strThumb + ".png", item.Label);
                         }
-                        else
+                        else if ((WStrSort.ToLower().Contains("country")) || (WStrSort.ToLower().Contains("category")) || (WStrSort.ToLower().Contains("year")))
                         {
                             if (conf.StrPathViews.Length > 0)
                                 if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
