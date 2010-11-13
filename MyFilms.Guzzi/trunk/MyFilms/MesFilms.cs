@@ -1999,6 +1999,7 @@ namespace MesFilms
                 affichage_rating(0);
             }
             GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count.ToString() + " " + GUILocalizeStrings.Get(127));
+            MesFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); 
             GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
 
         }
@@ -2131,6 +2132,8 @@ namespace MesFilms
                     }
                 }
             }
+            MesFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); 
+            GUIWaitCursor.Hide();
             if (conf.LastID == ID_MesFilmsDetail)
             {
                 GUIWindowManager.ActivateWindow(ID_MesFilmsDetail); // if last window in use was detailed one display that one again
@@ -3708,14 +3711,7 @@ namespace MesFilms
                         Log.Debug("MyFilms (ResultList) - Index: '" + i + "' - Number: '" + w_index[i].ToString() + "'");
                     if (w_index.Count == 0)
                     {
-                        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-                        //dlg.DeInit();
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        //dlgOk.Init();
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798621)); // menu for random search
-                        dlgOk.SetLine(1, "Suchergebnis: 0");
-                        dlgOk.SetLine(2, "Keine Filme in der Auswahl vorhanden");
-                        dlgOk.DoModal(GetID);
+                        ShowMessageDialog(GUILocalizeStrings.Get(10798621), "Suchergebnis: 0", "Keine Filme in der Auswahl vorhanden"); // menu for random search
                         return;
                     }
 
@@ -4518,26 +4514,6 @@ namespace MesFilms
         {
             Log.Info("MyFilms : Loading Movie List in batch mode finished");
         }
-
-        //public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
-        //// Not used anymore - replaced by GUIWaitCursor.Hide();
-        //{
-        //    try
-        //    {
-        //        if (m_SearchAnimation != null)
-        //        {
-        //            if (enable)
-        //                m_SearchAnimation.AllocResources();
-        //            else
-        //                m_SearchAnimation.Dispose();
-        //        }
-        //        m_SearchAnimation.Visible = enable;
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //    }
-        //}
 
         private void FanartTimerEvent(object state)
         {
