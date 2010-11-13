@@ -1498,6 +1498,7 @@ namespace MesFilms
             Change_view(choiceView[dlg1.SelectedLabel].ToLower());
             return;
         }
+        
         //--------------------------------------------------------------------------------------------
         //  Select Option
         //--------------------------------------------------------------------------------------------
@@ -1514,59 +1515,21 @@ namespace MesFilms
                 //dlg1.Add(GUILocalizeStrings.Get(6029) + " " + GUILocalizeStrings.Get(6022));   // Change Config 
                 choiceView.Add("config");
             }
-            // Show current NAS server status
-            if (MesFilms.conf.StrCheckWOLenable)
+
+            if (MesFilms.conf.StrCheckWOLenable) // Show current NAS server status
             {
                 dlg1.Add(GUILocalizeStrings.Get(10798727));   // Show NAS Server Status
                 choiceView.Add("nasstatus");
             }
 
-            // Change global MovieFilter (Only Movies with Trailer)
-            if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
-            if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
-            choiceView.Add("filterdbtrailer");
+            // Add Submenu for Global Settings 
+            dlg1.Add(string.Format(GUILocalizeStrings.Get(10798689)));
+            choiceView.Add("globaloptions");
 
-            // Change global MovieFilter (Only Movies with highRating)
-            if (GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798628)));
-            if (!GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798629)));
-            choiceView.Add("filterdbrating");
+            // Add Submenu for Global Updates
+            dlg1.Add(string.Format(GUILocalizeStrings.Get(10798690)));
+            choiceView.Add("globalupdates");
 
-            // Change Value for global MovieFilter (Only Movies with highRating)
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MesFilms.conf.StrAntFilterMinRating.ToString()));
-            choiceView.Add("filterdbsetrating");
-
-            if (MesFilms.conf.StrAMCUpd)
-            {
-                dlg1.Add(GUILocalizeStrings.Get(1079861));   // Change Config 
-                choiceView.Add("updatedb");
-            }
-            if (MesFilms.conf.StrFanart)
-            {
-                dlg1.Add(GUILocalizeStrings.Get(4514));   // Download all Fanart
-                choiceView.Add("downfanart");
-            }
-
-            dlg1.Add(GUILocalizeStrings.Get(10798694));   // Search and register all trailers for all movies in DB
-            choiceView.Add("trailer-all");
-
-            if (MesFilms.conf.StrGrabber)
-            {
-                // From ZebopnsMerge
-				//dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
-                if (MesFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));   // Choose grabber script for that session (status on)
-                if (!MesFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));   // Choose grabber script for that session (status off)
-                choiceView.Add("choosescript");
-
-                //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), MesFilms.conf.StrGrabber_Always.ToString(), (!MesFilms.conf.StrGrabber_Always).ToString()));   // Change grabber find trying best match option 
-                if (MesFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));   // Change grabber find trying best match option (status on)
-                if (!MesFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));   // Change grabber find trying best match option (status off)
-                choiceView.Add("findbestmatch");
-            }
-
-            //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), MesFilms.conf.WindowsFileDialog.ToString(), (!MesFilms.conf.WindowsFileDialog).ToString()));  // Using Windows File Dialog File for that session
-            if (MesFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628)));   // Using Windows File Dialog File for that session (status on)
-            if (!MesFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));   // Using Windows File Dialog File for that session (status off)
-            choiceView.Add("windowsfiledialog");
             dlg1.DoModal(GetID);
 
             if (dlg1.SelectedLabel == -1)
@@ -1576,7 +1539,7 @@ namespace MesFilms
             Change_view(choiceView[dlg1.SelectedLabel].ToLower());
             return;
         }
-        
+
         public static ArrayList Search_String(string champselect)
         {
             Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
@@ -2051,6 +2014,7 @@ namespace MesFilms
                 return ((new CaseInsensitiveComparer()).Compare(y, x));
             }
         }
+
         private static void Load_Config(string CurrentConfig, bool create_temp)
         {
             conf = new Configuration(CurrentConfig, create_temp);
@@ -2062,6 +2026,7 @@ namespace MesFilms
             if (conf.StrLogos)
                 confLogos = new Logos();
         }
+
          //--------------------------------------------------------------------------------------------
         //  Initial Windows load. If LoadDfltSlct = true => load default select if any
         //                           LoadDfltSlct = false => return from  MesFilmsDetail
@@ -2337,7 +2302,6 @@ namespace MesFilms
                 case "config": //Choose Database
                     string newConfig = Configuration.Choice_Config(GetID);
                     newConfig = Configuration.Control_Access_Config(newConfig, GetID);
-
                     if (newConfig != "") // if user escapes dialog or bad value leave system unchanged
                     {
                         //Change "Config":
@@ -2462,7 +2426,6 @@ namespace MesFilms
                         break;
                     }
 
-
                     if (choiceSearch[dlg.SelectedLabel] == "NAS3")
                     {
                         GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -2487,7 +2450,91 @@ namespace MesFilms
                         break;
                     }
                     return;
-                    
+
+                case "globaloptions":
+
+                    GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                    if (dlg1 == null) return;
+                    dlg1.Reset();
+                    dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                    System.Collections.Generic.List<string> choiceViewGlobalOptions = new System.Collections.Generic.List<string>();
+
+                    // Change global MovieFilter (Only Movies with Trailer)
+                    if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
+                    if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
+                    choiceViewGlobalOptions.Add("filterdbtrailer");
+
+                    // Change global MovieFilter (Only Movies with highRating)
+                    if (GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798628)));
+                    if (!GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798629)));
+                    choiceViewGlobalOptions.Add("filterdbrating");
+
+                    // Change Value for global MovieFilter (Only Movies with highRating)
+                    dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MesFilms.conf.StrAntFilterMinRating.ToString()));
+                    choiceViewGlobalOptions.Add("filterdbsetrating");
+
+                    if (MesFilms.conf.StrGrabber)
+                    {
+                        // From ZebopnsMerge
+                        //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
+                        if (MesFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));   // Choose grabber script for that session (status on)
+                        if (!MesFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));   // Choose grabber script for that session (status off)
+                        choiceViewGlobalOptions.Add("choosescript");
+
+                        //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), MesFilms.conf.StrGrabber_Always.ToString(), (!MesFilms.conf.StrGrabber_Always).ToString()));   // Change grabber find trying best match option 
+                        if (MesFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));   // Change grabber find trying best match option (status on)
+                        if (!MesFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));   // Change grabber find trying best match option (status off)
+                        choiceViewGlobalOptions.Add("findbestmatch");
+                    }
+
+                    //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), MesFilms.conf.WindowsFileDialog.ToString(), (!MesFilms.conf.WindowsFileDialog).ToString()));  // Using Windows File Dialog File for that session
+                    if (MesFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628)));   // Using Windows File Dialog File for that session (status on)
+                    if (!MesFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));   // Using Windows File Dialog File for that session (status off)
+                    choiceViewGlobalOptions.Add("windowsfiledialog");
+
+                    if (MesFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798628)));
+                    if (!MesFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
+                    choiceViewGlobalOptions.Add("alwaysdefaultview");
+
+                    dlg1.DoModal(GetID);
+
+                    if (dlg1.SelectedLabel == -1)
+                    {
+                        return;
+                    }
+                    Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
+                    return;
+
+                case "globalupdates":
+
+                    GUIDialogMenu dlg2 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                    if (dlg2 == null) return;
+                    dlg2.Reset();
+                    dlg2.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                    System.Collections.Generic.List<string> choiceViewGlobalUpdates = new System.Collections.Generic.List<string>();
+
+                    if (MesFilms.conf.StrAMCUpd)
+                    {
+                        dlg2.Add(GUILocalizeStrings.Get(1079861));   // Change Config 
+                        choiceViewGlobalUpdates.Add("updatedb");
+                    }
+                    if (MesFilms.conf.StrFanart)
+                    {
+                        dlg2.Add(GUILocalizeStrings.Get(4514));   // Download all Fanart
+                        choiceViewGlobalUpdates.Add("downfanart");
+                    }
+
+                    dlg2.Add(GUILocalizeStrings.Get(10798694));   // Search and register all trailers for all movies in DB
+                    choiceViewGlobalUpdates.Add("trailer-all");
+
+                    dlg2.DoModal(GetID);
+
+                    if (dlg2.SelectedLabel == -1)
+                    {
+                        return;
+                    }
+                    Change_view(choiceViewGlobalUpdates[dlg2.SelectedLabel].ToLower());
+                    return;
 
                 case "filterdbtrailer":
                     // GlobalFilterTrailersOnly
@@ -2674,6 +2721,12 @@ namespace MesFilms
                     Log.Info("MyFilms : Update Option 'use Windows File Dialog...' changed to " + MesFilms.conf.WindowsFileDialog.ToString());
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
+                case "alwaysdefaultview":
+                    MesFilms.conf.AlwaysDefaultView = !MesFilms.conf.AlwaysDefaultView;
+                    XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AlwaysDefaultView", MesFilms.conf.AlwaysDefaultView);
+                    Log.Info("MyFilms : Update Option 'use always default view...' changed to " + MesFilms.conf.AlwaysDefaultView.ToString());
+                    GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                    break;
             }
         }
         //--------------------------------------------------------------------------------------------
@@ -2857,6 +2910,7 @@ namespace MesFilms
                     break;
             }
         }
+
         //*****************************************************************************************
         //*  search related movies by persons                                                     *
         //*****************************************************************************************
@@ -3011,7 +3065,6 @@ namespace MesFilms
             GetFilmList();
         }
 
-
         private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
         {
             ActorDialog.MesFilmsActorInfo infoDlg =
@@ -3027,8 +3080,6 @@ namespace MesFilms
             infoDlg.Actor = actor;
             infoDlg.DoModal(GetID);
         }
-
-
 
         //*****************************************************************************************
         //*  search related movies by properties  (From ZebonsMerge, renamed to ...Zebons)		  *
@@ -3268,8 +3319,7 @@ namespace MesFilms
             }
         }
 
-
-        
+       
         //*****************************************************************************************
         //*  search related movies by properties  (Guzzi Version)                                 *
         //*****************************************************************************************
@@ -3446,10 +3496,10 @@ namespace MesFilms
             conf.StrTitleSelect = "";
             GetFilmList();
         }
+
         //******************************************************************************************************
         //*  Global search movies by RANDOM (Random Search with Options, e.g. Trailer, Rating) - Guzzi Version *
         //******************************************************************************************************
-
         private void SearchMoviesbyRandomWithTrailer()
         {
             // first select the area where to make random search on - "all", "category", "year", "country"
@@ -4295,6 +4345,7 @@ namespace MesFilms
                 }
             }
         }
+
         //*****************************************************************************************
         //*  No Movie found to display. Display all movies
         //*****************************************************************************************
@@ -4307,10 +4358,10 @@ namespace MesFilms
             conf.Boolreturn = false;
             r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, true);
         }
+
         //*****************************************************************************************
         //*  Initialize Fields on Main screen                                                     *
         //*****************************************************************************************
-          // Changed to Public to make sure, swapper can be accessed from elsewhere (Public, Private, Protected)
         private void InitMainScreen()
         {
             Log.Debug("MyFilms (InitMainScreen) - Initialize all properties !!!"); 
@@ -4359,13 +4410,13 @@ namespace MesFilms
             GUIControl.HideControl(GetID, 34);
         }
 
-        
         //*****************************************************************************************
         //*  Ask for Title search and grab information on the NET base on the grab configuration  *
         //*****************************************************************************************
         private void GetTitleGrab()
         {
         }
+
         //*****************************************************************************************
         //*  Update Database in batch mode                                                        *
         //*****************************************************************************************
@@ -4384,6 +4435,7 @@ namespace MesFilms
             BackgroundWorker worker = sender as BackgroundWorker;
             MesFilmsDetail.RunProgram(MesFilms.conf.StrAMCUpd_exe, MesFilms.conf.StrAMCUpd_cnf);
         }
+
         void bgUpdateDB_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             Log.Info("MyFilms : Update database with AMCUpdater finished");
@@ -4394,6 +4446,7 @@ namespace MesFilms
                 Load_Config(Configuration.CurrentConfig, true);
             }
         }
+
         //*****************************************************************************************
         //*  Download Backdrop Fanart in Batch mode                                               *
         //*****************************************************************************************
@@ -4443,7 +4496,6 @@ namespace MesFilms
             Log.Info("MyFilms : Backdrop Fanart download finished");
         }
 
-
         //*****************************************************************************************
         //*  Load List movie file in batch mode                                                   *
         //*****************************************************************************************
@@ -4490,10 +4542,8 @@ namespace MesFilms
             Log.Info("MyFilms : Loading Movie List in batch mode finished");
         }
 
-
-            
-		// ToDo: Check, if Class can be removed (not included in ZebonsMerge)
 		public static void setProcessAnimationStatus(bool enable, GUIAnimation m_SearchAnimation)
+        // ToDo: Check, if Class can be removed (not included in ZebonsMerge)
         {
             try
             {
@@ -4533,12 +4583,11 @@ namespace MesFilms
             m_bFanartTimerDisabled = false;
         }
 
-
         bool fanartSet = false;
         //Fanart currSeriesFanart = null;
 
-        //private bool loadFanart(DBTable item)
         private bool loadFanart()
+        //private bool loadFanart(DBTable item)
         {
             if (backdrop == null)
             {
@@ -4862,8 +4911,7 @@ namespace MesFilms
                 Log.Debug("MyFilmsDetails (SearchTrailerLocal) - Database Updatewd !!!!");
             }
         }
-        
-
+ 
 #endregion
     }
 }
