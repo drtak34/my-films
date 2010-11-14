@@ -338,9 +338,6 @@ namespace MesFilms.ActorDialog
                 
                 string coverArtImage = string.Empty;
 
-                //if (MesFilms.conf.StrViewsDflt && System.IO.File.Exists(MesFilms.conf.DefaultCover))
-                //    ImageFast.CreateImage(strThumb + ".png", item.Label);
-                
                 coverArtImage = MesFilms.conf.DefaultCover;
 
                 //if (System.IO.File.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others\\NoPhoto.jpg"))

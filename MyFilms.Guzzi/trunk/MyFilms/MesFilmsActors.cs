@@ -523,10 +523,6 @@ namespace MesFilms.Actors
                                                 if (System.IO.File.Exists(MesFilms.conf.StrPathViews + "\\" + item.Label + ".png"))
                                                     Picture.CreateThumbnail(MesFilms.conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
                                         }
-                                    if (!System.IO.File.Exists(strThumb + ".png"))
-                                        if (MesFilms.conf.StrViewsDflt && System.IO.File.Exists(MesFilms.conf.DefaultCover))
-                                            ImageFast.CreateImage(strThumb + ".png", item.Label);
-
                                 }
                                 item.ThumbnailImage = strThumb + ".png";
                             }
@@ -575,8 +571,6 @@ namespace MesFilms.Actors
                                     if (System.IO.File.Exists(MesFilms.conf.StrPathViews + "\\" + item.Label + ".png"))
                                         Picture.CreateThumbnail(MesFilms.conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
                             }
-                        if (!System.IO.File.Exists(strThumb + ".png"))
-                            ImageFast.CreateImage(strThumb + ".png", item.Label);
                     }
                     item.ThumbnailImage = strThumb + ".png";
                 }

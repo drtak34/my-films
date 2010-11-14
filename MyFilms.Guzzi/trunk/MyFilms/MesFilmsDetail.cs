@@ -889,7 +889,7 @@ namespace MesFilms
                         try { wdirector = (string)MesFilms.r[MesFilms.conf.StrIndex]["Director"]; }
                         catch { }
                         Log.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
-                        MesFilmsDetail.Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID);
+                        Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID);
 
                     }
                     afficher_detail(true);
@@ -1563,6 +1563,20 @@ namespace MesFilms
             Log.Debug("MyFilms (DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MesFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MesFilms.conf.StrTitle1 + "'");
             int listCount = listemovies.Count;
             Log.Debug("MyFilms (DownloadBackdrops) - listemovies: Result Listcount: '" + listCount.ToString() + "'");
+            
+            //if ((listCount == 0) && (choose))
+            //{
+            //    //MesFilmsDetail.ShowMessageDialog("", " No results found", "");
+            //    GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            //    if (dlgOK != null)
+            //    {
+            //        dlgOK.SetHeading("");
+            //        dlgOK.SetLine(1, "No results found !");
+            //        dlgOK.SetLine(2, "");
+            //        dlgOK.DoModal(wGetID);
+            //    }
+            //}
+
             if (choose)
                 listCount = 2;
             switch (listCount)
@@ -1633,8 +1647,8 @@ namespace MesFilms
                             dlgs.SelectedLabel = -1;
                             dlgs.DoModal(wGetID);
                         }
-                        Log.Debug("MyFilms (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabelText: '" + dlgs.SelectedLabelText.ToString() + "'");
-                        Log.Debug("MyFilms (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabel: '" + dlgs.SelectedLabel.ToString() + "'");
+                        //Log.Debug("MyFilms (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabelText: '" + dlgs.SelectedLabelText.ToString() + "'");
+                        //Log.Debug("MyFilms (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabel: '" + dlgs.SelectedLabel.ToString() + "'");
                         if (dlgs.SelectedLabel == 0)
                         {
                             VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
@@ -1652,7 +1666,7 @@ namespace MesFilms
                         }
                         if (dlgs.SelectedLabel > 0)
                         {
-                            Download_Backdrops_Fanart(dlgs.SelectedLabelText, string.Empty, string.Empty, string.Empty, true, wGetID);
+                            Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, string.Empty, string.Empty, true, wGetID);
                             //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID)
                             break;
                         }
@@ -3851,6 +3865,18 @@ namespace MesFilms
             }
         }
 
+        //private void ShowMessageDialog(string headline, string line1, string line2)
+        //{
+        //    GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+        //    if (dlgOK != null)
+        //    {
+        //        dlgOK.SetHeading(headline);
+        //        dlgOK.SetLine(1, line1);
+        //        dlgOK.SetLine(2, line2);
+        //        dlgOK.DoModal(GetID);
+        //        return;
+        //    }
+        //}
 
     }
 

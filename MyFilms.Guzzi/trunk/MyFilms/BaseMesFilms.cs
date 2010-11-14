@@ -22,12 +22,14 @@
 #endregion
 using System;
 using System.Data;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 using MesFilms.MyFilms;
 using MediaPortal.ServiceImplementations;
 
 namespace MesFilms
 {
+    using MediaPortal.GUI.Library;
+
     public class BaseMesFilms
     {
         private static AntMovieCatalog data;

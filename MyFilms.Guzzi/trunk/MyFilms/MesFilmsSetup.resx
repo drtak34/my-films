@@ -186,14 +186,6 @@ If a value is entered, a list of the movies with that value will be displayed.
 As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
 </value>
   </data>
-  <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
-    <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
-but you can include two more fields to be updated here.  
-
-Select the database field to be updated, enter the label associated with that field 
-and enter a pre-defined value to update the field.
-</value>
-  </data>
   <data name="groupBox_DatabaseUpdateOptions.ToolTip" xml:space="preserve">
     <value>If you wish to update your movie database and/or the movie files from within the plugin (the Update menu), 
 you can select the desired update method here.  
@@ -202,6 +194,14 @@ Be careful when using the options that enable the deletion of the movie files fr
 For the ‘Update db’ options, you must select a database field to update and a value for the update.
 
 You can also select if the update or deletion is executed when the movie player has finished.
+</value>
+  </data>
+  <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
+    <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
+but you can include two more fields to be updated here.  
+
+Select the database field to be updated, enter the label associated with that field 
+and enter a pre-defined value to update the field.
 </value>
   </data>
   <data name="groupBox_Separators.ToolTip" xml:space="preserve">
@@ -307,18 +307,18 @@ displayed as a background image for movies without a matching Fanart file. Becaf
 get a distorded picture as covers and fanarts don't have the same size.
 </value>
   </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
+and thus to integrate trailers into MyFilms.
+Trailer can be searched within the plugin and autoregistered.
+GUI allows to show if a trailer is present (registered) and play it.</value>
+  </data>
   <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
     <value>If Trailer file is not found with the 'Ant Item for storing Trailer Infos' field, you 
 can search the trailer file with the movie Name.
 Validate that option for it and give the Title used for the search.
 Attention: Might degrade performace!
 </value>
-  </data>
-  <data name="groupBox24.ToolTip" xml:space="preserve">
-    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
-and thus to integrate trailers into MyFilms.
-Trailer can be searched within the plugin and autoregistered.
-GUI allows to show if a trailer is present (registered) and play it.</value>
   </data>
   <data name="DefaultCover.ToolTip" xml:space="preserve">
     <value>Enter the full path and file name of the image file that you wish to use as the default DVD cover image.  
