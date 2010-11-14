@@ -73,18 +73,17 @@
     <OutputPath>bin\x86\Debug %28Guzzi%29\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.5.41367, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.1.5.20363, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\svn-1.2\Core.dll</HintPath>
+      <HintPath>Externals\trunk\Core.dll</HintPath>
     </Reference>
-    <Reference Include="Databases, Version=1.1.5.41373, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Databases, Version=1.1.5.20369, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\svn-1.2\Databases.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>Externals\trunk\Databases.dll</HintPath>
     </Reference>
-    <Reference Include="Dialogs, Version=1.1.5.41393, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Dialogs, Version=1.1.5.20383, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\svn-1.2\Dialogs.dll</HintPath>
+      <HintPath>Externals\trunk\Dialogs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -101,15 +100,15 @@
     <Reference Include="System.Xml" />
     <Reference Include="TaskScheduler, Version=1.3.3304.15002, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\TaskScheduler.dll</HintPath>
+      <HintPath>Externals\TaskScheduler.dll</HintPath>
     </Reference>
-    <Reference Include="Utils, Version=1.1.5.41342, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Utils, Version=1.1.5.20347, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\svn-1.2\Utils.dll</HintPath>
+      <HintPath>Externals\trunk\Utils.dll</HintPath>
     </Reference>
-    <Reference Include="WindowPlugins, Version=1.1.5.41454, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="WindowPlugins, Version=1.1.5.20421, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ModLinkFiles\svn-1.2\WindowPlugins.dll</HintPath>
+      <HintPath>Externals\trunk\WindowPlugins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
