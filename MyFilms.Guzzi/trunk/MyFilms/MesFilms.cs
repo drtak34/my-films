@@ -1012,6 +1012,31 @@ namespace MesFilms
             int number = -1;
             int wfacadewiew = 0;
             ArrayList w_tableau = new ArrayList();
+
+
+            //// Guzzi: Testloop for Debugging ...
+            //Log.Debug("MyFilms (GuzziPerfCount) - Start");
+            //int i = 0;
+            //int ii = 0;
+            //string strThumbT;
+            //foreach (DataRow sr in r)
+            //{
+            //    sTitle = sr[conf.StrTitle1].ToString();
+            //    DelimCnt2 = NewString.PosCount(conf.TitleDelim, sTitle, false);
+            //    if (DelimCnt <= DelimCnt2)
+            //    {
+            //        sTitle = NewString.NPosMid(conf.TitleDelim, sTitle, DelimCnt, DelimCnt + 1, false, false); //get current substring (folder) within path
+            //    }
+            //    conf.FileImage = conf.StrPathImg + "\\" + sr["Picture"].ToString();
+            //    ii = ii + 1;
+            //    strThumbT = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, sTitle);
+            //    if (!System.IO.File.Exists(conf.FileImage))
+            //    {
+            //        i = i + 1;
+            //    }
+            //}
+            //Log.Debug("MyFilms (GuzziPerfCount) - End (" + ii.ToString() + " Records with " + i.ToString() + " Lookups)");
+
             foreach (DataRow sr in r)
             {
                 number++;

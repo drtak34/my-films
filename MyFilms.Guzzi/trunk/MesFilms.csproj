@@ -145,9 +145,7 @@
     </Compile>
     <Compile Include="MyFilms\MovieCollector.cs" />
     <Compile Include="MyFilms\MyMovies.cs" />
-    <Compile Include="MyFilms\TheMoviedb.cs" />
     <Compile Include="MyFilms\WakeOnLanManager.cs" />
-    <Compile Include="MyFilms\WebGrabber.cs" />
     <Compile Include="MyFilms\XbmcNfo.cs" />
     <Compile Include="MyFilms\XmlConfig.cs" />
     <Compile Include="MyFilms\XMM.cs" />
