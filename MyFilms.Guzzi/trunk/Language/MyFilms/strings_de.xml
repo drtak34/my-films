@@ -79,6 +79,16 @@
     <String id="1079879">Infos zu beteiligten Personen</String>
     <String id="1079880">Umschalten 'Immer Standardansicht zeigen ({0})'</String>
     <String id="1079881">Bitte wählen sie den globalen Wert f�r die Minimalbewertung</String>
+    <String id="1079882">Update der aktuellen Person (IMDB)</String>
+    <String id="1079883">Update aller beteiligten Personen (IMDB)</String>
+    <String id="1079884">Weitere Infos zur Person</String>
+    <String id="1079885">Filmographie zur Person (IMDB)</String>
+    <String id="1079886">Internetinfos zur Person (IMDB)</String>
+    <String id="1079887">Filmclips zum Film  (IMDB)</String>
+    <String id="1079888">Bildergallerie zum Film (IMDB)</String>
+    <String id="1079889">Internetinfos zum Film (IMDB)</String>
+    <String id="1079890">Filmclips zur Person (IMDB)</String>
+    <String id="1079891">Bildergallerie zur Person (IMDB)</String>
     <String id="10798610">Filme als </String>
     <String id="10798611">Wähle Funktion für </String>
     <String id="10798612">Produzent</String>
@@ -100,6 +110,7 @@
     <String id="10798629">aus</String>
     <String id="10798630">Neuer Wert</String>
     <String id="10798631">Zeige Film-Server Status</String>
+    <String id="10798639">Keine Filme entsprechen der Suche !</String>
     <String id="10798640">Kein Ergebnis zu dem gesuchten Wert gefunden!</String>
     <String id="10798641">Kein Eintrag vorhanden nach dem gesucht werden kann!.</String>
     <String id="10798642">Aktualisiere Filmdaten nach Eigenschaft</String>
@@ -139,6 +150,7 @@
     <String id="10798680">Dateigrösse</String>
     <String id="10798681">Anzahl Dateien</String>
     <String id="10798682">Coverbild</String>
+    <String id="10798688">Lade Personeninfos - alle Personen</String>
     <String id="10798689">Globale Einstellungen ...</String>
     <String id="10798690">Globale Updates ...</String>
     <String id="10798691">Globaler Filter "Nur Filme mit Trailer" ({0})</String>

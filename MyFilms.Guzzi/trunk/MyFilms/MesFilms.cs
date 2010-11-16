@@ -391,10 +391,9 @@ namespace MesFilms
 			// End Merge Code
 			
             if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
-                if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+                if (facadeView.SelectedListItemIndex > -1)
                     {
-                        Log.Debug("MyFilms : ACTION_CONTEXT_MENU erkannt !!! ");
-                        // context menu for update or suppress entry
+                        if (!(facadeView.Focus)) GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                         Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
                         return;
                     }
@@ -2823,47 +2822,79 @@ namespace MesFilms
             string[] upd_choice = new string[20];
             int ichoice = 0;
 
+            // Moviecontext
             if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
             {
                 dlg.Add(GUILocalizeStrings.Get(1079866));//Search related movies by persons
                 upd_choice[ichoice] = "analogyperson";
                 ichoice++;
-            }
 
-            if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
-            {
                 dlg.Add(GUILocalizeStrings.Get(10798614));//Search related movies by property
                 upd_choice[ichoice] = "analogyproperty";
                 ichoice++;
-            }
 
-            if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
-            {
-                dlg.Add(GUILocalizeStrings.Get(1079879));//Search Infos to related persons (IMDB to table lookup)
-                upd_choice[ichoice] = "infosperson";
+                dlg.Add(GUILocalizeStrings.Get(1079887));
+                upd_choice[ichoice] = "movieimdbtrailer";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079888));
+                upd_choice[ichoice] = "movieimdbbilder";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079889));
+                upd_choice[ichoice] = "movieimdbinternet";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079879));//Search Infos to related persons (load persons in facadeview) - only available in filmlist
+                upd_choice[ichoice] = "moviepersonlist";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all envolved persons of a selected movie from IMDB
+                upd_choice[ichoice] = "updatepersonmovie";
                 ichoice++;
             }
 
-            if (facadeView.SelectedListItemIndex > -1) //Todo: Modify/add restriction to person views !!!
+            // Artistcontext
+            if (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder && (conf.WStrSort.ToLower().Contains("actor") || conf.WStrSort.ToLower().Contains("director") || conf.WStrSort.ToLower().Contains("producer")))
             {
-                dlg.Add(GUILocalizeStrings.Get(1079882));//Search related movies by property
+                dlg.Add(GUILocalizeStrings.Get(1079884));//Show Infos of person (load persons detailscreen - MesFilmsActor) - only available in personlist
+                upd_choice[ichoice] = "artistdetail";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079890));//Show IMDB clips http://www.imdb.com/name/nm0000288/videogallery
+                upd_choice[ichoice] = "artistimdbclips";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079891));//Show IMDB pictures http://www.imdb.com/name/nm0000288/mediaindex
+                upd_choice[ichoice] = "artistimdbbilder";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079886));//Show IMDB internetinfos http://www.imdb.com/name/nm0000288/
+                upd_choice[ichoice] = "artistimdbinternet";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079885));//Show IMDB filmlist in facadeview and add availabilityinformations to it
+                upd_choice[ichoice] = "artistimdbfilmlist";
+                ichoice++;
+
+                dlg.Add(GUILocalizeStrings.Get(1079882)); // update personinfo from IMDB and create actorthumbs - optional: load mediathek for person backdrops etc.
                 upd_choice[ichoice] = "updateperson";
                 ichoice++;
             }
 
-            if (MesFilms.conf.StrSuppress)
+            if (MesFilms.conf.StrSuppress && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
             {
                 dlg.Add(GUILocalizeStrings.Get(432));
                 upd_choice[ichoice] = "suppress";
                 ichoice++;
             }
-            if (MesFilms.conf.StrGrabber)
+            if (MesFilms.conf.StrGrabber && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
             {
                 dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
                 upd_choice[ichoice] = "grabber";
                 ichoice++;
             }
-            if (MesFilms.conf.StrFanart)
+            if (MesFilms.conf.StrFanart && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
             {
                 dlg.Add(GUILocalizeStrings.Get(1079862));
                 upd_choice[ichoice] = "fanart";
@@ -2871,7 +2902,6 @@ namespace MesFilms
                 dlg.Add(GUILocalizeStrings.Get(1079874));
                 upd_choice[ichoice] = "deletefanart";
                 ichoice++;
-
             }
             
             dlg.DoModal(GetID);
@@ -2898,7 +2928,27 @@ namespace MesFilms
                         break;
                     }
 
-                case "infosperson":
+                case "movieimdbtrailer":
+                    // ToDo: load onlinemovies from IMDB (http://www.imdb.com/title/tt0438488/videogallery)
+                    // Share loadingclass with actorclips and use parameter "mode"
+                    {
+                        break;
+                    }
+
+                case "movieimdbbilder":
+                    // ToDo: load onlinepictures from IMDB (http://www.imdb.com/title/tt0438488/mediaindex)
+                    // Share loadingclass with actorpictures and use parameter "mode"
+                    {
+                        break;
+                    }
+
+                case "movieimdbinternet":
+                    // ToDo: Launch IMDB-Internetpage via movie-tt-URL in Webbrowserplugin - check InfoPlugin how to implement ...
+                    {
+                        break;
+                    }
+
+                case "moviepersonlist":
                     {
                         //To be modified to call new class with personlist by type and call MesFilmsActors with facade
                         //Temporarily disabled - will be required to create Person List later ....
@@ -2934,11 +2984,47 @@ namespace MesFilms
                         break;
                     }
 
+                case "artistdetail":
+                    // ToDo: Launch MesFilmsActorinfo - load new facade for LOCAL (!) IMDB-mediaindex
+                    // ToDo: Optional add switch to seitch between filmclips (IMDB-videogallery) and photos (IMDB-mediaindex) - launch Onlinevideos to play clips?
+                    {
+                        break;
+                    }
+
+                case "artistimdbclips":
+                    {
+                        break;
+                    }
+
+                case "artistimdbbilder":
+                    {
+                        break;
+                    }
+
+                case "artistimdbinternet":
+                    // ToDo: Launch IMDB-Internetpage via actor-URL in Webbrowserplugin - check InfoPlugin how to implement ...
+                    {
+                        break;
+                    }
+
+                case "artistimdbfilmlist":
+                    // ToDo: Launch IMDB-Internetpage via actor-URL in Webbrowserplugin - check InfoPlugin how to implement ...
+                    // Share loadingclass with actorclips and use parameter "mode"
+                    {
+                        break;
+                    }
+
                 case "updateperson":
                     {
                         //Todo: add calls to update the personinfos from IMDB - use database and grabberclasses from MePo / Deda
                     }
                     break;
+
+                case "updatepersonmovie":
+                    // ToDo: Update personinfo for all involve artists (takes longer!)
+                    {
+                        break;
+                    }
 
                 case "suppress":
                     dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
