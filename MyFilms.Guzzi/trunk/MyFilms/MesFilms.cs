@@ -33,6 +33,7 @@ using MediaPortal.GUI.Library;
 using MediaPortal.Dialogs;
 using MediaPortal.Configuration;
 using MediaPortal.Util;
+using MediaPortal.Video.Database; // Guzzi Added for IMDB Fetcher
 
 using NewStringLib;
 using Cornerstone.MP;
