@@ -8,9 +8,9 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Programme\Team MediaPortal\MediaPortal\MediaPortal.exe</StartProgram>
+    <StartProgram>D:\Entwicklung\Mediaportal\trunk\mediaportal\xbmc\bin\Debug\MediaPortal.exe</StartProgram>
     <RemoteDebugEnabled>true</RemoteDebugEnabled>
-    <RemoteDebugMachine>wmc-gmi-guzzi</RemoteDebugMachine>
+    <RemoteDebugMachine>mediacenter@WMC-GMI-GUZZI</RemoteDebugMachine>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <StartArguments>
     </StartArguments>

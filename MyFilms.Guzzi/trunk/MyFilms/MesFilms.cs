@@ -33,7 +33,7 @@ using MediaPortal.GUI.Library;
 using MediaPortal.Dialogs;
 using MediaPortal.Configuration;
 using MediaPortal.Util;
-using MediaPortal.Video.Database; // Guzzi Added for IMDB Fetcher
+    // Guzzi Added for IMDB Fetcher
 
 using NewStringLib;
 using Cornerstone.MP;
@@ -41,6 +41,8 @@ using MesFilms.MyFilms;
 using MesFilms.WakeOnLan;
 using System.Threading;
 using System.Linq;
+using Grabber.IMDB;
+using MediaPortal.Video.Database;
 
 
 namespace MesFilms
@@ -3012,11 +3014,24 @@ namespace MesFilms
                     // Share loadingclass with actorclips and use parameter "mode"
                     {
                         break;
+                        
+                        // ToDo: Copied Code from Infoservice - still unclear how to forward http link ....
+                        string zoomlevel = string.Empty;
+                        zoomlevel = "100";
+                        int webBrowserWindowID = 16002; //Geckobrowser
+                        if (webBrowserWindowID > 0)
+                        {
+                            //logger.WriteLog(string.Format("Trying to open web browser with window ID {0}, url {1} and zoom {2}", webBrowserWindowID, FeedService.Feeds[FeedService.ActiveFeedIndex].Items[_feedListcontrol.SelectedListItemIndex].Url, zoomlevel), LogLevel.Info, InfoServiceModul.Feed);
+                            GUIWindowManager.ActivateWindow(webBrowserWindowID, false);
+                        }
                     }
 
                 case "updateperson":
                     {
                         //Todo: add calls to update the personinfos from IMDB - use database and grabberclasses from MePo / Deda
+                        ArtistIMDBpictures(facadeView.SelectedListItem.Label); // Call Updategrabber with Textlabel/Actorname
+                        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                        dlg.DeInit();
                     }
                     break;
 
@@ -3145,7 +3160,29 @@ namespace MesFilms
             //First add general option to show MP Actor Infos
             if (wperson.Length > 0)
             {
-                dlg.Add(GUILocalizeStrings.Get(10798731));
+                // First check if actror exists...
+                ArrayList actorList = new ArrayList(); // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
+                MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
+
+                // Check result
+                //if (actorList.Count != 0)
+                //{
+                //    actorID = 0;
+                //    string actorname = "";
+                //    char[] splitter = { '|' };
+                //    foreach (string act in actorList)
+                //    {
+                //        string[] strActor = act.Split(splitter);
+                //            // Split id from actor name (two substrings, [0] is id and [1] is name)
+                //        actorID = Convert.ToInt32(strActor[0]); // IMDBActor  GetActorInfo(int idActor) we need integer)
+                //        actorname = strActor[1];
+                //    }
+
+                //    MediaPortal.Video.Database.IMDBActor actor =
+                //        MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
+                //}
+
+                dlg.Add(GUILocalizeStrings.Get(10798731) + " (" + actorList.Count.ToString() + ")");
                 //dlg.Add("Person Infos");
                 choiceSearch.Add("PersonInfo");
             }
@@ -3241,7 +3278,7 @@ namespace MesFilms
             GetFilmList();
         }
 
-        private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
+        private void OnVideoArtistInfoGuzzi(IMDBActor actor)
         {
             ActorDialog.MesFilmsActorInfo infoDlg =
                 (ActorDialog.MesFilmsActorInfo)GUIWindowManager.GetWindow(ID_MesFilmsActorsInfo);
@@ -5072,7 +5109,37 @@ namespace MesFilms
              dlgOK.DoModal(GetID);
           }
        }
- 
-#endregion
+
+       //*****************************************************************************************
+       //*  search and download artist imdb pictures from mediaindex                             *
+       //*****************************************************************************************
+       private void ArtistIMDBpictures(string wperson)
+       {
+           if (wperson.Length > 0)
+           {
+               // First check if actror exists...
+               ArrayList actorList = new ArrayList();
+               // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
+               MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
+               if (actorList.Count != 0)
+               {
+                   actorID = 0;
+                   string actorname = "";
+                   char[] splitter = { '|' };
+                   foreach (string act in actorList)
+                   {
+                       string[] strActor = act.Split(splitter);
+                       // Split id from actor name (two substrings, [0] is id and [1] is name)
+                       actorID = Convert.ToInt32(strActor[0]); // IMDBActor  GetActorInfo(int idActor) we need integer)
+                       actorname = strActor[1];
+                   }
+
+                   VideoDatabase.GetActorInfo(actorID);
+               }
+
+            }
+       }
+
+        #endregion
     }
 }

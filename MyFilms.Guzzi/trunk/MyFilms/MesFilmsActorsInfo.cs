@@ -29,6 +29,7 @@ using System.IO;
 using MediaPortal.GUI.Library;
 using MediaPortal.Util;
 using MediaPortal.GUI.Pictures;
+using Grabber.IMDB;
 using MediaPortal.Video.Database;
 
 namespace MesFilms.ActorDialog

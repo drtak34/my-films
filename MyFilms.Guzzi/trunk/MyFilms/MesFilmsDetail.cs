@@ -33,7 +33,7 @@ using MediaPortal.Util;
 using MediaPortal.Playlists;
 using MediaPortal.Dialogs;
 using MediaPortal.Player;
-using MediaPortal.Video.Database;
+
 using System.Globalization;
 using MediaPortal.GUI.Library;
 using SQLite.NET;
@@ -44,6 +44,8 @@ using MesFilms.MyFilms;
 using MediaPortal.Profile;
 using System.Net;
 using MesFilms.WakeOnLan;
+using MediaPortal.Video.Database;
+
 //using Cornerstone.MP;
 
 namespace MesFilms

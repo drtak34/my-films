@@ -10,7 +10,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cornerstone.MP", "Cornersto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber", "Grabber\Grabber.csproj", "{92C183EE-636F-4A55-A6AB-363CDA606110}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{CCA5CE72-EB79-49AD-976A-CFFB46EF8DE1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{883D5404-7545-4767-89CF-D3988A6B7B31}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Databases", "..\..\Mediaportal\trunk\mediaportal\Databases\Databases.csproj", "{C1BCEC3E-6074-4328-B5D9-391A457C8FFB}"
 EndProject
@@ -174,6 +174,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C1BCEC3E-6074-4328-B5D9-391A457C8FFB} = {CCA5CE72-EB79-49AD-976A-CFFB46EF8DE1}
+		{C1BCEC3E-6074-4328-B5D9-391A457C8FFB} = {883D5404-7545-4767-89CF-D3988A6B7B31}
 	EndGlobalSection
 EndGlobal
