@@ -38,7 +38,7 @@ namespace Grabber.IMDB
 
     /// <summary>
   /// supporting classes to fetch movie information out of different databases
-  /// currently supported: IMDB http://us.imdb.com and additional database by using external csscripts
+  /// currently supported: IMDBmyfilms http://us.imdb.com and additional database by using external csscripts
   /// </summary>
   public class IMDB : IEnumerable
   {
@@ -270,7 +270,7 @@ namespace Grabber.IMDB
         _databaseList.Clear();
         if (iNumber <= 0)
         {
-          // no given databases in XML - setting to IMDB
+          // no given databases in XML - setting to IMDBmyfilms
           _databaseList.Add(new MovieInfoDatabase(DEFAULT_DATABASE, DEFAULT_SEARCH_LIMIT));
         }
         else
@@ -281,7 +281,7 @@ namespace Grabber.IMDB
           // get the databases
           for (int i = 0; i < iNumber; i++)
           {
-            strDatabase = xmlreader.GetValueAsString("moviedatabase", "database" + i, "IMDB");
+            strDatabase = xmlreader.GetValueAsString("moviedatabase", "database" + i, "IMDBmyfilms");
             iLimit = xmlreader.GetValueAsInt("moviedatabase", "limit" + i, DEFAULT_SEARCH_LIMIT);
 
             foreach (MovieInfoDatabase db in _databaseList)
@@ -343,7 +343,7 @@ namespace Grabber.IMDB
       try
       {
         // Make the Webrequest
-        //Log.Info("IMDB: get page:{0}", strURL);
+        //Log.Info("IMDBmyfilms: get page:{0}", strURL);
         WebRequest req = WebRequest.Create(strURL);
         try
         {
@@ -583,7 +583,7 @@ namespace Grabber.IMDB
     /// <summary>
     /// this method switches between the different databases to fetche the search result into movieDetails
     /// </summary>
-    public bool GetDetails(IMDBUrl url, ref IMDBMovie movieDetails)
+    public bool GetDetails(IMDBUrl url, ref MediaPortal.Video.Database.IMDBMovie movieDetails)
     {
       try
       {
@@ -664,13 +664,13 @@ namespace Grabber.IMDB
       FindIMDBActor(strURL);
     }
 
-    // Changed - IMDB changed HTML code
+    // Changed - IMDBmyfilms changed HTML code
     private void FindIMDBActor(string strURL)
     {
       try
       {
         string absoluteUri;
-        // UTF-8 have problem with special country chars, default IMDB enc is used
+        // UTF-8 have problem with special country chars, default IMDBmyfilms enc is used
         string strBody = GetPage(strURL, "utf-8", out absoluteUri);
         string value = string.Empty;
         HTMLParser parser = new HTMLParser(strBody);
@@ -679,7 +679,7 @@ namespace Grabber.IMDB
         {
           value = new HTMLUtil().ConvertHTMLToAnsi(value);
           value = Utils.RemoveParenthesis(value).Trim();
-          IMDBUrl oneUrl = new IMDBUrl(absoluteUri, value, "IMDB");
+          IMDBUrl oneUrl = new IMDBUrl(absoluteUri, value, "IMDBmyfilms");
           _elements.Add(oneUrl);
           return;
         }
@@ -712,7 +712,7 @@ namespace Grabber.IMDB
               parser.extractTo("</a>", ref name);
               name = new HTMLUtil().ConvertHTMLToAnsi(name);
               name = Utils.RemoveParenthesis(name).Trim();
-              IMDBUrl newUrl = new IMDBUrl("http://akas.imdb.com" + url, name, "IMDB");
+              IMDBUrl newUrl = new IMDBUrl("http://akas.imdb.com" + url, name, "IMDBmyfilms");
               _elements.Add(newUrl);
             }
             else
@@ -736,7 +736,7 @@ namespace Grabber.IMDB
               parser.extractTo("</a>", ref name);
               name = new HTMLUtil().ConvertHTMLToAnsi(name);
               name = Utils.RemoveParenthesis(name).Trim();
-              IMDBUrl newUrl = new IMDBUrl("http://akas.imdb.com" + url, name, "IMDB");
+              IMDBUrl newUrl = new IMDBUrl("http://akas.imdb.com" + url, name, "IMDBmyfilms");
               _elements.Add(newUrl);
             }
             else
@@ -752,7 +752,7 @@ namespace Grabber.IMDB
       }
     }
 
-    // Changed - parsing all actor DB fields through HTML (IMDB changed HTML code)
+    // Changed - parsing all actor DB fields through HTML (IMDBmyfilms changed HTML code)
     public bool GetActorDetails(IMDBUrl url, bool director, out IMDBActor actor)
     {
         actor = new IMDBActor();
@@ -957,7 +957,7 @@ namespace Grabber.IMDB
         }
         catch (Exception ex)
         {
-            Log.Error("IMDB.GetActorDetails({0} exception:{1} {2} {3}", url.URL, ex.Message, ex.Source, ex.StackTrace);
+            Log.Error("IMDBmyfilms.GetActorDetails({0} exception:{1} {2} {3}", url.URL, ex.Message, ex.Source, ex.StackTrace);
         }
         return false;
     }
@@ -1166,7 +1166,7 @@ namespace Grabber.IMDB
         }
         catch (Exception ex)
         {
-            Log.Error("IMDB.GetActorDetails({0} exception:{1} {2} {3}", url.URL, ex.Message, ex.Source, ex.StackTrace);
+            Log.Error("IMDBmyfilms.GetActorDetails({0} exception:{1} {2} {3}", url.URL, ex.Message, ex.Source, ex.StackTrace);
         }
         return false;
     }
@@ -1270,7 +1270,7 @@ namespace Grabber.IMDB
         }
         catch (Exception ex)
         {
-            Log.Error("IMDB.GetActorDetailsMediaIndex({0} exception:{1} {2} {3}", url.URL, ex.Message, ex.Source, ex.StackTrace);
+            Log.Error("IMDBmyfilms.GetActorDetailsMediaIndex({0} exception:{1} {2} {3}", url.URL, ex.Message, ex.Source, ex.StackTrace);
         }
         return false;
     }
@@ -1285,7 +1285,7 @@ namespace Grabber.IMDB
   public interface IIMDBScriptGrabber
   {
     void FindFilm(string title, int limit, ArrayList elements);
-    bool GetDetails(IMDB.IMDBUrl url, ref IMDBMovie movieDetails);
+    bool GetDetails(IMDB.IMDBUrl url, ref MediaPortal.Video.Database.IMDBMovie movieDetails);
     string GetName();
     string GetLanguage();
   }
