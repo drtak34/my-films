@@ -87,6 +87,7 @@
     <String id="10798617">Search on property </String>
     <String id="10798618">Global search for string '{0}'</String>
     <String id="10798619">=> {0} entry(ies) found for {1}</String>
+    <String id="10798620">Person Infos</String>
     <String id="10798621">Search random Movies</String>
     <String id="10798631">Show NAS Server Status</String>
     <String id="1079872">First</String>
@@ -110,6 +111,7 @@
     <String id="1079889">Internetinfos for selected Film (IMDB)</String>
     <String id="1079890">Filmclips for selected Person (IMDB)</String>
     <String id="1079891">Bildergallerie for selected Person (IMDB)</String>
+    <String id="1079892">Update ...</String>
     <String id="10798639">No matches for this search !</String>
     <String id="10798640">No entry corresponding to the searched value.</String>
     <String id="10798641">No entry to be search for.</String>
