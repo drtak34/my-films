@@ -34,7 +34,6 @@ namespace Grabber
     using MediaPortal.GUI.Library;
     using MediaPortal.Profile;
     using MediaPortal.Util;
-    using MediaPortal.Video.Database;
 
     /// <summary>
   /// supporting classes to fetch movie information out of different databases
@@ -47,29 +46,6 @@ namespace Grabber
     public const int DEFAULT_SEARCH_LIMIT = 25;
 
     #region interfaces and classes
-
-    public interface IProgress
-    {
-      void OnProgress(string line1, string line2, string line3, int percent);
-      bool OnDisableCancel(IMDBFetcher fetcher);
-      bool OnSearchStarting(IMDBFetcher fetcher);
-      bool OnSearchStarted(IMDBFetcher fetcher);
-      bool OnSearchEnd(IMDBFetcher fetcher);
-      bool OnMovieNotFound(IMDBFetcher fetcher);
-      bool OnDetailsStarting(IMDBFetcher fetcher);
-      bool OnDetailsStarted(IMDBFetcher fetcher);
-      bool OnDetailsEnd(IMDBFetcher fetcher);
-      bool OnDetailsNotFound(IMDBFetcher fetcher);
-      bool OnActorsStarting(IMDBFetcher fetcher);
-      bool OnActorsStarted(IMDBFetcher fetcher);
-      bool OnActorsEnd(IMDBFetcher fetcher);
-      bool OnRequestMovieTitle(IMDBFetcher fetcher, out string movieName);
-      bool OnSelectMovie(IMDBFetcher fetcher, out int selected);
-      bool OnScanStart(int total);
-      bool OnScanEnd();
-      bool OnScanIterating(int count);
-      bool OnScanIterated(int count);
-    }
 
     /// <summary>
     /// class that represents URL and Title of a search result
@@ -239,21 +215,12 @@ namespace Grabber
 
     private List<MovieInfoDatabase> _databaseList = new List<MovieInfoDatabase>();
 
-    private IProgress m_progress;
-
     #endregion
 
     #region ctor
 
-    public IMDB()
-      : this(null) {}
-
-    public IMDB(IProgress progress)
-    {
-      m_progress = progress;
-      // load the settings
-      LoadSettings();
-    }
+//    public IMDB()
+//      : this(null) {}
 
     #endregion
 
@@ -527,15 +494,6 @@ namespace Grabber
 
         _elements.Clear();
 
-        string line1 = GUILocalizeStrings.Get(984);
-        string line2 = GetSearchString(strMovie).Replace("+", " ");
-        string line3 = "";
-        int percent = 0;
-
-        if (m_progress != null)
-        {
-          m_progress.OnProgress(line1, line2, line3, percent);
-        }
         // search the desired databases
         foreach (MovieInfoDatabase db in _databaseList)
         {
@@ -552,21 +510,9 @@ namespace Grabber
           // load the script file as an assembly
           // if something went wrong it returns false
 
-          line1 = GUILocalizeStrings.Get(984) + ": Script " + db.ID;
-
-          if (m_progress != null)
-          {
-            m_progress.OnProgress(line1, line2, line3, percent);
-          }
-
           try
           {
             db.Grabber.FindFilm(strSearch, db.Limit, _elements);
-            percent += 100 / _databaseList.Count;
-            if (m_progress != null)
-            {
-              m_progress.OnProgress(line1, line2, line3, percent);
-            }
           }
           catch (Exception ex)
           {
