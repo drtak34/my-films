@@ -39,7 +39,7 @@ namespace Grabber
   /// supporting classes to fetch movie information out of different databases
   /// currently supported: IMDB http://us.imdb.com and additional database by using external csscripts
   /// </summary>
-  public class IMDB : IEnumerable
+  public class MyFilmsIMDB : MyFilmsIEnumerable
   {
     public static string ScriptDirectory = Config.GetSubFolder(Config.Dir.Config, "scripts\\MovieInfo");
     public const string DEFAULT_DATABASE = "IMDB";
@@ -50,51 +50,51 @@ namespace Grabber
     /// <summary>
     /// class that represents URL and Title of a search result
     /// </summary>
-    public class IMDBUrl
+    public class MyFilmsIMDBUrl
     {
       private string m_strURL = "";
       private string m_strTitle = "";
       private string m_strDatabase = "";
       private string m_strIMDBURL = "";
 
-      public IMDBUrl(string strURL, string strTitle, string strDB)
+      public MyFilmsIMDBUrl(string strURL, string strTitle, string strDB)
       {
         URL = strURL;
         Title = strTitle;
         Database = strDB;
       }
 
-      public string URL
+      public string MyFilmsURL
       {
         get { return m_strURL; }
         set { m_strURL = value; }
       }
 
-      public string Title
+      public string MyFilmsTitle
       {
         get { return m_strTitle; }
         set { m_strTitle = value; }
       }
 
-      public string Database
+      public string MyFilmsDatabase
       {
         get { return m_strDatabase; }
         set { m_strDatabase = value; }
       }
 
-      public string IMDBURL
+      public string MyFilmsIMDBURL
       {
         get { return m_strIMDBURL; }
         set { m_strIMDBURL = value; }
       }
     }
 
-    public class IMDBEnumerator : IEnumerator
+    public class MyFilmsIMDBEnumerator : IEnumerator
     {
       private int _position = -1;
-      private IMDB _t;
+      private MyFIlmsIMDB _t;
 
-      public IMDBEnumerator(IMDB t)
+      public MyFilmsIMDBEnumerator(MyFilmsIMDB t)
       {
         _t = t;
       }
@@ -114,7 +114,7 @@ namespace Grabber
         _position = -1;
       }
 
-      public IMDBUrl Current // non-IEnumerator version: type-safe
+      public MyFilmsIMDBUrl Current // non-IEnumerator version: type-safe
       {
         get
         {
@@ -122,7 +122,7 @@ namespace Grabber
           {
             return null;
           }
-          return (IMDBUrl)_t._elements[_position];
+          return (MyFIlmsIMDBUrl)_t._elements[_position];
         }
       }
 
@@ -143,7 +143,7 @@ namespace Grabber
     {
       private string _id;
       private int _limit = DEFAULT_SEARCH_LIMIT;
-      private IIMDBScriptGrabber _grabber;
+      private MyFilmsIIMDBScriptGrabber _grabber;
       private bool _grabberLoaded;
 
       public string ID
@@ -158,7 +158,7 @@ namespace Grabber
         set { _limit = value; }
       }
 
-      public IIMDBScriptGrabber Grabber
+      public MyFilmsIIMDBScriptGrabber Grabber
       {
         get 
         { 
@@ -276,21 +276,21 @@ namespace Grabber
       get { return _elements.Count; }
     }
 
-    public IMDBUrl this[int index]
+    public MyFilmsIMDBUrl this[int index]
     {
       get { return (IMDBUrl)_elements[index]; }
     }
 
-    public IMDBEnumerator GetEnumerator() // non-IEnumerable version
+    public MyFilmsIMDBEnumerator GetEnumerator() // non-IEnumerable version
     {
-      return new IMDBEnumerator(this);
+      return new MyFilmsIMDBEnumerator(this);
     }
 
     #region IEnumerable Member
 
-    IEnumerator IEnumerable.GetEnumerator()
+    MyFilmsIEnumerator IEnumerable.GetEnumerator()
     {
-      return new IMDBEnumerator(this);
+      return new MyFilmsIMDBEnumerator(this);
     }
 
     #endregion
@@ -529,7 +529,7 @@ namespace Grabber
     /// <summary>
     /// this method switches between the different databases to fetche the search result into movieDetails
     /// </summary>
-    public bool GetDetails(IMDBUrl url, ref IMDBMovie movieDetails)
+    public bool GetDetails(MyFilmsIMDBUrl url, ref MyFilmsIMDBMovie movieDetails)
     {
       try
       {
@@ -699,9 +699,9 @@ namespace Grabber
     }
 
     // Changed - parsing all actor DB fields through HTML (IMDB changed HTML code)
-    public bool GetActorDetails(IMDBUrl url, bool director, out IMDBActor actor)
+    public bool GetActorDetails(MyFilmsIMDBUrl url, bool director, out MyFilmsIMDBActor actor)
     {
-      actor = new IMDBActor();
+      actor = new MyFilmsIMDBActor();
       try
       {
         string absoluteUri;
@@ -915,10 +915,10 @@ namespace Grabber
   /// <summary>
   /// Interface used for script support
   /// </summary>
-  public interface IIMDBScriptGrabber
+  public interface MyFilmsIIMDBScriptGrabber
   {
     void FindFilm(string title, int limit, ArrayList elements);
-    bool GetDetails(IMDB.IMDBUrl url, ref IMDBMovie movieDetails);
+    bool GetDetails(MyFilmsIMDB.MyFilmsIMDBUrl url, ref MyFilmsIMDBMovie movieDetails);
     string GetName();
     string GetLanguage();
   }
