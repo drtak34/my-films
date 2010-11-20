@@ -2246,167 +2246,31 @@ namespace MesFilms
         //-------------------------------------------------------------------------------------------
         //  Load detailed infos for persons: export fields to skin as '#myfilms.<ant db column name> 
         //-------------------------------------------------------------------------------------------
-        public static void Load_Detailed_PersonInfo(int ItemId, bool wrep)
+        public static void Load_Detailed_PersonInfo(string artistname, bool wrep)
         {
             //Todo: Add new properties for publishing actorinfos (MiniBio, Bio, Birthdate, Image, Multiimage, etc.
-            string wstrformat = " ";
-            AntMovieCatalog ds = new AntMovieCatalog();
 
-            foreach (DataColumn dc in ds.Movie.Columns)
+            GUIPropertyManager.SetProperty("#myfilms.description", " ");
+            ArrayList actorList = new ArrayList();
+            VideoDatabase.GetActorByName(artistname, actorList);
+            if (actorList.Count == 0)
             {
-                string wstring = " ";
-
-                if (MesFilms.r[ItemId][dc.ColumnName] != null)
+                return;
+            }
+            int actorID;
+            string actorname = "";
+            // Define splitter for string
+            char[] splitter = { '|' };
+            // Iterate through list
+            foreach (string act in actorList)
+            {
+                string[] strActor = act.Split(splitter);
+                actorID = Convert.ToInt32(strActor[0]);
+                actorname = strActor[1];
+                if (actorID.ToString().Length > 0)
                 {
-                    switch (dc.ColumnName.ToLower())
-                    {
-                        case "translatedtitle":
-                        case "originaltitle":
-                            if (wrep)
-                                if (MesFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                                    if (MesFilms.r[ItemId][dc.ColumnName].ToString().Contains(MesFilms.conf.TitleDelim))
-                                        wstring = MesFilms.r[ItemId][dc.ColumnName].ToString().Substring(MesFilms.r[ItemId][dc.ColumnName].ToString().LastIndexOf(MesFilms.conf.TitleDelim) + 1);
-                                    else
-                                        wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            //Guzzi: Temporarily disabled
-                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            break;
-                        case "length":
-                        case "length_num":
-                            if (wrep)
-                                if (MesFilms.r[ItemId]["Length"].ToString().Length > 0)
-                                    wstring = MesFilms.r[ItemId]["Length"].ToString() + GUILocalizeStrings.Get(2998);
-                            GUIPropertyManager.SetProperty("#myfilms.length", wstring);
-                            //Guzzi: Temporarily disabled
-                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            break;
-                        case "actors":
-                            if (wrep)
-                                if (MesFilms.r[ItemId]["Actors"].ToString().Length > 0)
-                                {
-                                    wstring = MesFilms.r[ItemId]["Actors"].ToString().Replace('|', '\n');
-                                    wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
-                                }
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            //Guzzi: Temporarily disabled
-                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            break;
-                        case "description":
-                        case "comments":
-                            if (wrep)
-                                if (MesFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
-                                {
-                                    wstring = System.Web.HttpUtility.HtmlEncode(MesFilms.r[ItemId][dc.ColumnName].ToString().Replace('’', '\''));
-                                    wstring = wstring.ToString().Replace('|', '\n');
-                                    wstring = wstring.ToString().Replace('…', '.');
-                                    wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring.ToString()));
-                                }
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            //Guzzi: Temporarily disabled
-                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            break;
-                        case "date":
-                            if (wrep)
-                                if (MesFilms.r[ItemId]["Date"].ToString().Length > 0)
-                                    wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            //Guzzi: Temporarily disabled
-                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            break;
-                        case "videoformat":
-                            if (wrep)
-                                if (MesFilms.r[ItemId]["VideoFormat"].ToString().Length > 0)
-                                    wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            wstrformat = "V:" + MesFilms.r[ItemId]["VideoFormat"].ToString();
-                            //Guzzi: Temporarily disabled
-                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            break;
-                        case "audioformat":
-                            if (wrep)
-                                if (MesFilms.r[ItemId]["AudioFormat"].ToString().Length > 0)
-                                {
-                                    wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                                    if (wstrformat.Length > 1)
-                                        wstrformat = "Format " + wstrformat + ",A:" + MesFilms.r[ItemId]["AudioFormat"].ToString();
-                                    else
-                                        wstrformat = "Format A:" + MesFilms.r[ItemId]["AudioFormat"].ToString();
-                                }
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            //Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            GUIPropertyManager.SetProperty("#myfilms.format", wstrformat);
-                            //Log.Debug("MyFilms : Property loaded #myfilms.format with " + wstrformat);
-                            break;
-                        case "rating":
-                            wstring = "0";
-                            if ((wrep) && (MesFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                                wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                            try
-                            {
-                                MesFilms.conf.W_rating = (decimal)MesFilms.r[ItemId][dc.ColumnName];
-                            }
-                            catch
-                            {
-                                MesFilms.conf.W_rating = 0;
-                            }
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            //Guzzi: Temporarily disabled
-                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            break;
-                        case "contents_id":
-                        case "dateadded":
-                        case "picture":
-                            break;
-                        case "resolution":
-                            decimal aspectratio = 0;
-                            string ar = " ";
-                            if ((wrep) && (MesFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                                try
-                                {
-                                    wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                                    //Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                                    GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                                    //Log.Debug("MyFilms (Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                                    decimal w_hsize;
-                                    decimal w_vsize;
-                                    string[] arSplit;
-                                    string[] Sep = new string[] { "x" };
-                                    arSplit = MesFilms.r[ItemId][dc.ColumnName].ToString().Split(Sep, StringSplitOptions.RemoveEmptyEntries); // remove entries empty // StringSplitOptions.None);//will add "" entries also
-                                    w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
-                                    w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
-                                    // To Check if/why exception eccurs
-                                    //Log.Debug("MyFilms : hsize - wsize: '" + w_hsize + " - " + w_vsize + "'");
-                                    aspectratio = (w_hsize / w_vsize);
-                                    aspectratio = Math.Round(aspectratio, 2);
-                                    //Formats:
-                                    //1,33 -> 4:3
-                                    //1,78 -> 16:9 / widescreen
-                                    //1,85 -> widescreen
-                                    //2,35+ -> cinemascope
-                                    if (aspectratio < (decimal)(1.4)) ar = "4:3";
-                                    else if (aspectratio < (decimal)(1.9)) ar = "16:9";
-                                    else if (aspectratio >= (decimal)(1.9)) ar = "cinemascope";
-                                    wstring = aspectratio.ToString();
-                                }
-                                catch
-                                {
-                                    Log.Info("MyFilms: Error calculating aspectratio !");
-                                }
-
-                            GUIPropertyManager.SetProperty("#myfilms.aspectratio", wstring);
-                            //Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
-                            GUIPropertyManager.SetProperty("#myfilms.ar", ar);
-                            //Log.Debug("MyFilms : Property loaded #myfilms.ar with " + ar);
-                            //Log.Debug("MyFilms (Load_Detailed_DB): Split for aspectratio: '" + (arSplit[0]) + "', '" + (arSplit[1]) + "' --> '" + wstring + "'");
-                            break;
-                        default:
-                            if ((wrep) && (MesFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                                wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                            GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
-                            // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
-                            break;
-                    }
+                    IMDBActor actor = VideoDatabase.GetActorInfo(actorID);
+                    if (actor.Biography.Length > 0) GUIPropertyManager.SetProperty("#myfilms.description", actor.Biography);
                 }
             }
         }

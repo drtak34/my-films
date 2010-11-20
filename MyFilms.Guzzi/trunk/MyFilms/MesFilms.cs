@@ -1259,7 +1259,6 @@ namespace MesFilms
         //    Display Detailed Info (Image, Description, Year, Category)
         //----------------------------------------------------------------------------------------
         private void affichage_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image
-        //public void affichage_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image
         {
             //if (facadeView.SelectedListItem.ItemId == Prev_ItemID)
             //    return;
@@ -1415,7 +1414,12 @@ namespace MesFilms
                 }
             }
 
+
+            //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
             MesFilmsDetail.Load_Detailed_DB(ItemId, wrep);
+            if ((conf.WStrSort.ToLower().Contains("actors")) || (conf.WStrSort.ToLower().Contains("producer")) || (conf.WStrSort.ToLower().Contains("director")))
+                MesFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, wrep);
+
             affichage_rating(conf.W_rating);
 
         }
@@ -2069,11 +2073,10 @@ namespace MesFilms
                 GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
                 
                 //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
+                MesFilmsDetail.Load_Detailed_DB(0, false);
                 if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
-                    MesFilmsDetail.Load_Detailed_PersonInfo(0, false);
-                else
-                    MesFilmsDetail.Load_Detailed_DB(0, false);
-                
+                    MesFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
+
                 // Disabled because replaced by SpeedLoader
                 //ImgLstFilm.SetFileName("#myfilms.picture");
                 //ImgLstFilm2.SetFileName("#myfilms.picture");

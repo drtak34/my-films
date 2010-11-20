@@ -601,7 +601,7 @@ namespace MesFilms.Actors
                 //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
                 //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
                 //backdrop.Active = false;
-                MesFilmsDetail.Load_Detailed_DB(0, false);
+                MesFilmsDetail.Load_Detailed_PersonInfo("", false);
 
                 // Disabled because replaced by SpeedLoader
                 //ImgLstFilm.SetFileName("#myfilms.picture");
