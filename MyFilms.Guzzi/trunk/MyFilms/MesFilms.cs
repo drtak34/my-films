@@ -20,7 +20,6 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,7 +32,6 @@ using MediaPortal.GUI.Library;
 using MediaPortal.Dialogs;
 using MediaPortal.Configuration;
 using MediaPortal.Util;
-    // Guzzi Added for IMDB Fetcher
 
 using NewStringLib;
 using Cornerstone.MP;
@@ -41,9 +39,7 @@ using MesFilms.MyFilms;
 using MesFilms.WakeOnLan;
 using System.Threading;
 using System.Linq;
-using Grabber.IMDB;
 using MediaPortal.Video.Database;
-
 
 namespace MesFilms
 {
@@ -62,6 +58,9 @@ namespace MesFilms
         public const int ID_MesFilmsActors = 7989;
         public const int ID_MesFilmsThumbs = 7990;
         public const int ID_MesFilmsActorsInfo = 7991;
+
+        public const string ImdbBaseUrl = "http://www.imdb.com/";
+
         enum Controls : int
         {
             CTRL_BtnSrtBy = 2,
@@ -2905,7 +2904,11 @@ namespace MesFilms
                 upd_choice[ichoice] = "deletefanart";
                 ichoice++;
             }
-            
+
+            dlg.Add(GUILocalizeStrings.Get(1079892)); // Update ...
+            upd_choice[ichoice] = "updatemenu";
+            ichoice++;
+
             dlg.DoModal(GetID);
 
             if (dlg.SelectedLabel == -1)
@@ -2947,6 +2950,28 @@ namespace MesFilms
                 case "movieimdbinternet":
                     // ToDo: Launch IMDB-Internetpage via movie-tt-URL in Webbrowserplugin - check InfoPlugin how to implement ...
                     {
+                        //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
+                        int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                        string url = ImdbBaseUrl + "";
+                        string zoom = "150";
+
+                        //First search corresponding URL for the actor ...
+                        IMDB _imdb = new IMDB();
+                        IMDB.IMDBUrl wurl;
+
+                        _imdb.Find(facadeView.SelectedListItem.Label);
+                        IMDBMovie imdbMovie = new IMDBMovie();
+                        if (_imdb.Count > 0)
+                        {
+                            wurl = (IMDB.IMDBUrl)_imdb[0];
+                            if (wurl.URL.Length != 0) url = wurl.URL; // Assign proper Webpage for Actorinfos
+                        }
+
+                        //Load Webbrowserplugin with the URL
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                        GUIWindowManager.ActivateWindow(webBrowserWindowID, false); 
+
                         break;
                     }
 
@@ -2958,31 +2983,24 @@ namespace MesFilms
 
 
                         if (!facadeView.SelectedListItem.IsFolder && !conf.Boolselect)
-                        // New Window for detailed selected item information
+                        // Load Facade with movie actors 
+                        // ToDo: Load all artists, including producers and directors
+                        
                         {
                             conf.StrIndex = facadeView.SelectedListItem.ItemId;
                             conf.StrTIndex = facadeView.SelectedListItem.Label;
-                            GUITextureManager.CleanupThumbs();
 
+                            conf.WStrSort = "ACTORS";
+                            conf.Wselectedlabel = "";
+                            conf.WStrSortSens = " ASC";
+                            BtnSrtBy.IsAscending = true;
+                            conf.StrActors = "*";
+                            getSelectFromDivx("TranslatedTitle like '*" + conf.StrTIndex + "*'", conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
 
-                            GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
                         }
 
-                        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                         //dlg.DeInit();
-
-                        if (0 == 1)
-                        {
-                            Actors.MesFilmsActors infoDlg =
-                                (Actors.MesFilmsActors)GUIWindowManager.GetWindow(ID_MesFilmsActors);
-                            if (infoDlg == null)
-                            {
-                                return;
-                            }
-
-                            infoDlg.DoModal(GetID);
-                            dlg.DeInit();
-                        }
                         break;
                     }
 
@@ -3006,6 +3024,36 @@ namespace MesFilms
                 case "artistimdbinternet":
                     // ToDo: Launch IMDB-Internetpage via actor-URL in Webbrowserplugin - check InfoPlugin how to implement ...
                     {
+                        //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
+                        int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                        string url = ImdbBaseUrl + "";
+                        string zoom = "150";
+
+                        //First search corresponding URL for the actor ...
+                        Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+                        Grabber.MyFilmsIMDB.IMDBUrl wurl;
+
+                        _imdb.FindActor(facadeView.SelectedListItem.Label);
+                        Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
+                        if (_imdb.Count > 0)
+                        {
+                            //int index = IMDBFetcher.FuzzyMatch(actor);
+                            //int index;
+                            //for (index = 0; index < _imdb.Count; ++index)
+                            //{
+                            //    wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[index];
+                            //    if (wurl.URL.Length != 0) url = wurl.URL; // Assign proper Webpage for Actorinfos
+                            //    _imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
+                            //}
+                            wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+                            if (wurl.URL.Length != 0) url = wurl.URL; // Assign proper Webpage for Actorinfos
+                            //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
+                        }
+
+                        //Load Webbrowserplugin with the URL
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url); 
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                        GUIWindowManager.ActivateWindow(webBrowserWindowID, false); 
                         break;
                     }
 
@@ -3032,6 +3080,134 @@ namespace MesFilms
                         ArtistIMDBpictures(facadeView.SelectedListItem.Label); // Call Updategrabber with Textlabel/Actorname
                         GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                         dlg.DeInit();
+
+
+                        //First search corresponding URL for the actor ...
+                        bool director = false; // Actor is director
+                        IMDB _imdb = new IMDB();
+                        //IMDB.IMDBUrl wurl;
+                        //newGrab.FindActor(facadeView.SelectedListItem.Label);
+                        ArrayList actorList = new ArrayList();
+                        //if (_imdb.Count > 0)
+                        {
+                            string actor = facadeView.SelectedListItem.Label;
+                            //string test = _imdb[0].IMDBURL;
+                            _imdb.FindActor(actor);
+                            IMDBActor imdbActor = new IMDBActor();
+                            string ttt = imdbActor.ThumbnailUrl;
+                            if (_imdb.Count > 0)
+                            {
+                                //int index = IMDBFetcher.FuzzyMatch(actor);
+                                int index;
+                                int matchingIndex = -1;
+                                int matchingDistance = int.MaxValue;
+                                bool isAmbiguous = false;
+
+                                for (index = 0; index < _imdb.Count; ++index)
+                                {
+                                    int distance = Levenshtein.Match(actor, _imdb[index].Title);
+
+                                    if (distance == matchingDistance && matchingDistance != int.MaxValue)
+                                    {
+                                        isAmbiguous = true;
+                                    }
+
+                                    if (distance < matchingDistance)
+                                    {
+                                        isAmbiguous = false;
+                                        matchingDistance = distance;
+                                        matchingIndex = index;
+                                    }
+                                }
+
+                                if (isAmbiguous)
+                                {
+                                    matchingIndex = 0;
+                                }
+
+
+                                //Log.Info("Getting actor:{0}", _imdb[index].Title);
+                                _imdb.GetActorDetails(_imdb[index], director, out imdbActor);
+                                //Log.Info("Adding actor:{0}({1}),{2}", imdbActor.Name, actor, percent);
+                                int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.Name);
+                                if (actorId > 0)
+                                {
+                                    MediaPortal.Video.Database.VideoDatabase.SetActorInfo(actorId, imdbActor);
+                                    //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId); // Guzzi: Removed, only updating Actorinfos
+
+                                    if (imdbActor.ThumbnailUrl != string.Empty)
+                                    {
+                                        string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                                        string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                                        Utils.FileDelete(largeCoverArt);
+                                        Utils.FileDelete(coverArt);
+                                        MediaPortal.Video.Database.IMDBFetcher.DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(actor);
+                                imdbActor.Name = actor;
+                                IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
+                                //imdbActorMovie.MovieTitle = _movieDetails.Title;
+                                //imdbActorMovie.Year = _movieDetails.Year;
+                                //imdbActorMovie.Role = role;
+                                imdbActor.Add(imdbActorMovie);
+                                MediaPortal.Video.Database.VideoDatabase.SetActorInfo(actorId, imdbActor);
+                                //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+                            }
+                        }
+
+                        MediaPortal.Video.Database.VideoDatabase.GetActorByName(facadeView.SelectedListItem.Label, actorList);
+
+                        if (actorList.Count == 0)
+                        {
+                            GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                            dlgOk.SetHeading("Info");
+                            dlgOk.SetLine(1, "");
+                            dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
+                            dlgOk.DoModal(GetID);
+                            return;
+                        }
+                        actorID = 0;
+                        string actorname = "";
+                        char[] splitter = { '|' };
+                        foreach (string act in actorList)
+                        {
+                            string[] strActor = act.Split(splitter);
+                            actorID = Convert.ToInt32(strActor[0]);
+                            actorname = strActor[1];
+                        }
+
+                        //MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
+                        //MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(1);
+                        //if (actor != null)
+
+                        //OnVideoArtistInfoGuzzi(actor);
+
+
+
+                        IMDB GrabArtist = new IMDB();
+                        //IMDB.IMDBUrl wwurl;
+
+                        GrabArtist.FindActor(facadeView.SelectedListItem.Label);
+
+                        //int listCount = listUrl.Count;
+
+                        //url = new IMDBSearch();
+                        //MediaPortal.Video.Database.IMDB.IMDBUrl .FindActor(facadeView.SelectedListItem.Label));
+                        //Load Webbrowserplugin with the URL
+                        int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                        string url = ImdbBaseUrl + "";
+                        string zoom = "100";
+                        //value = value.Replace("%link%", url);
+                        //value = value.Replace("%zoom%", zoom);
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                        GUIWindowManager.ActivateWindow(webBrowserWindowID, false); 
+
+
                     }
                     break;
 
@@ -3098,6 +3274,42 @@ namespace MesFilms
                     dlgYesNo.DoModal(GetID);
                     if (dlgYesNo.IsConfirmed)
                         MesFilmsDetail.Remove_Backdrops_Fanart(MesFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString(), false);
+                    break;
+
+                case "updatemenu":
+                    GUIDialogMenu dlgupdate = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                    if (dlgupdate == null) return;
+                    Context_Menu = true;
+                    dlgupdate.Reset();
+                    dlgupdate.SetHeading(GUILocalizeStrings.Get(1079892)); // Update ...
+
+
+                    if (MesFilms.conf.StrSuppress && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+                    {
+                        dlg.Add(GUILocalizeStrings.Get(432));
+                        upd_choice[ichoice] = "suppress";
+                        ichoice++;
+                    }
+                    if (MesFilms.conf.StrGrabber && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+                    {
+                        dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
+                        upd_choice[ichoice] = "grabber";
+                        ichoice++;
+                    }
+                    if (MesFilms.conf.StrFanart && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+                    {
+                        dlg.Add(GUILocalizeStrings.Get(1079862));
+                        upd_choice[ichoice] = "fanart";
+                        ichoice++;
+                        dlg.Add(GUILocalizeStrings.Get(1079874));
+                        upd_choice[ichoice] = "deletefanart";
+                        ichoice++;
+                    }
+
+                    dlg.DoModal(GetID);
+
+                    if (dlg.SelectedLabel == -1)
+                        return;
                     break;
             }
         }
@@ -3278,7 +3490,7 @@ namespace MesFilms
             GetFilmList();
         }
 
-        private void OnVideoArtistInfoGuzzi(IMDBActor actor)
+        private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
         {
             ActorDialog.MesFilmsActorInfo infoDlg =
                 (ActorDialog.MesFilmsActorInfo)GUIWindowManager.GetWindow(ID_MesFilmsActorsInfo);
@@ -5134,12 +5346,13 @@ namespace MesFilms
                        actorname = strActor[1];
                    }
 
-                   VideoDatabase.GetActorInfo(actorID);
+                   MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
                }
 
             }
        }
 
         #endregion
+
     }
 }

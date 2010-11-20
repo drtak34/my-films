@@ -29,8 +29,10 @@ using System.IO;
 using MediaPortal.GUI.Library;
 using MediaPortal.Util;
 using MediaPortal.GUI.Pictures;
-using Grabber.IMDB;
 using MediaPortal.Video.Database;
+
+//using Grabber.IMDB;
+//using MediaPortal.Video.Database;
 
 namespace MesFilms.ActorDialog
 {
@@ -86,7 +88,7 @@ namespace MesFilms.ActorDialog
 
         private ViewMode viewmode = ViewMode.Biography;
 
-        private IMDBActor currentActor = null;
+        private MediaPortal.Video.Database.IMDBActor currentActor = null;
         private bool _prevOverlay = false;
         private string imdbCoverArtUrl = string.Empty;
 
