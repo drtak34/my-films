@@ -3375,28 +3375,15 @@ namespace MesFilms
             //First add general option to show MP Actor Infos
             if (wperson.Length > 0)
             {
-                // First check if actror exists...
+                // First check if actror exists... - this only works with MePo V1.1.5+
                 ArrayList actorList = new ArrayList(); // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
-                MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
-
-                // Check result
-                //if (actorList.Count != 0)
-                //{
-                //    actorID = 0;
-                //    string actorname = "";
-                //    char[] splitter = { '|' };
-                //    foreach (string act in actorList)
-                //    {
-                //        string[] strActor = act.Split(splitter);
-                //            // Split id from actor name (two substrings, [0] is id and [1] is name)
-                //        actorID = Convert.ToInt32(strActor[0]); // IMDBActor  GetActorInfo(int idActor) we need integer)
-                //        actorname = strActor[1];
-                //    }
-
-                //    MediaPortal.Video.Database.IMDBActor actor =
-                //        MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
-                //}
-
+                try
+                {
+                    MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
+                }
+                catch (Exception)
+                {}
+                
                 dlg.Add(GUILocalizeStrings.Get(10798731) + " (" + actorList.Count.ToString() + ")");
                 //dlg.Add("Person Infos");
                 choiceSearch.Add("PersonInfo");
@@ -3969,9 +3956,7 @@ namespace MesFilms
                     if (dlg == null) return;
                     dlg.Reset();
                     dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-                    //Modified to checked for GlobalFilterString
                     DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
-                    //DataColumn[] wc = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
                     w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
                     w_count.Add(0);
                     foreach (DataRow wsr in wr)
