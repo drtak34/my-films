@@ -622,25 +622,25 @@ namespace MesFilms.Actors
             {
                 case 1:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
-                    facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
                     break;
                 case 2:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
-                    facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
                     break;
                 case 3:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
-                    facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
                     break;
                 case 4:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
-                    facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
                     // To be changed when Coverflow is available in CORE Files ....
-                    //facadeView.View = GUIFacadeControl.ViewMode.CoverFlow;
+                    //facadeView.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
                     break;
                 default:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
-                    facadeView.View = GUIFacadeControl.ViewMode.List;
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
                     break;
             }
         }
@@ -810,7 +810,7 @@ namespace MesFilms.Actors
                 {
                     // Split id from actor name (two substrings, [0] is id and [1] is name)
                     string[] strActor = act.Split(splitter);
-                    // From here we have all what we want, now we can populate datatable, gridview, listview....)
+                    // From here we have all what we want, now we can populate datatable, gridview, ListLayout....)
                     // actorID originally is integer in the databse (it can be string in results but if we want get details from
                     // IMDBActor  GetActorInfo(int idActor) we need integer)
                     actorID = Convert.ToInt32(strActor[0]);

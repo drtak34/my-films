@@ -231,26 +231,26 @@ namespace MesFilms.ActorDialog
                     {
                         case View.List:
                             currentView = View.Icons;
-                            if (facadeView.ThumbnailView == null)
+                            if (facadeView.ThumbnailLayout == null)
                                 shouldContinue = true;
                             else
-                                facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
+                                facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
                             break;
 
                         case View.Icons:
                             currentView = View.LargeIcons;
-                            if (facadeView.ThumbnailView == null)
+                            if (facadeView.ThumbnailLayout == null)
                                 shouldContinue = true;
                             else
-                                facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
+                                facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
                             break;
 
                         case View.LargeIcons:
                             currentView = View.List;
-                            if (facadeView.ListView == null)
+                            if (facadeView.ListLayout == null)
                                 shouldContinue = true;
                             else
-                                facadeView.View = GUIFacadeControl.ViewMode.List;
+                                facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
                             break;
                     }
                 } while (shouldContinue);
@@ -500,13 +500,13 @@ namespace MesFilms.ActorDialog
             switch (currentView)
             {
                 case View.List:
-                    facadeView.View = GUIFacadeControl.ViewMode.List;
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
                     break;
                 case View.Icons:
-                    facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
                     break;
                 case View.LargeIcons:
-                    facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
                     break;
             }
 

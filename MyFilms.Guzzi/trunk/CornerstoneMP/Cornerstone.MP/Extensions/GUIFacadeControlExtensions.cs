@@ -17,7 +17,7 @@ namespace Cornerstone.MP.Extensions {
         /// <param name="parent">GUIControl instance to check</param>
         /// <returns>True if the control is related</returns>
         public static bool IsRelated(this GUIFacadeControl self, GUIControl parent) {
-            return (parent == self || parent == self.FilmstripView || parent == self.ThumbnailView || parent == self.ListView || parent == self.AlbumListView);
+            return (parent == self || parent == self.FilmstripLayout || parent == self.ThumbnailLayout || parent == self.ListLayout || parent == self.AlbumListLayout);
         }
 
         /// <summary>
@@ -26,10 +26,10 @@ namespace Cornerstone.MP.Extensions {
         /// <param name="self"></param>
         public static void ClearAll(this GUIFacadeControl self) {
             self.Clear();
-            if (self.ListView != null) self.ListView.Clear();
-            if (self.ThumbnailView != null) self.ThumbnailView.Clear();
-            if (self.FilmstripView != null) self.FilmstripView.Clear();
-            if (self.AlbumListView != null) self.AlbumListView.Clear();
+            if (self.ListLayout != null) self.ListLayout.Clear();
+            if (self.ThumbnailLayout != null) self.ThumbnailLayout.Clear();
+            if (self.FilmstripLayout != null) self.FilmstripLayout.Clear();
+            if (self.AlbumListLayout != null) self.AlbumListLayout.Clear();
         }
 
         /// <summary>
@@ -39,10 +39,10 @@ namespace Cornerstone.MP.Extensions {
         /// <param name="value"></param>
         public static void Focus(this GUIFacadeControl self, bool value) {
             self.Focus = value;
-            if (self.ListView != null) self.ListView.Focus = value;
-            if (self.ThumbnailView != null) self.ThumbnailView.Focus = value;
-            if (self.AlbumListView != null) self.AlbumListView.Focus = value;
-            if (self.FilmstripView != null) self.FilmstripView.Focus = value;
+            if (self.ListLayout != null) self.ListLayout.Focus = value;
+            if (self.ThumbnailLayout != null) self.ThumbnailLayout.Focus = value;
+            if (self.AlbumListLayout != null) self.AlbumListLayout.Focus = value;
+            if (self.FilmstripLayout != null) self.FilmstripLayout.Focus = value;
         }  
 
         /// <summary>
@@ -52,10 +52,10 @@ namespace Cornerstone.MP.Extensions {
         /// <param name="value"></param>
         public static void Visible(this GUIFacadeControl self, bool value) {
             self.Visible = value;
-            if (self.ListView != null) self.ListView.Visible = value;
-            if (self.ThumbnailView != null) self.ThumbnailView.Visible = value;
-            if (self.AlbumListView != null) self.AlbumListView.Visible = value;
-            if (self.FilmstripView != null) self.FilmstripView.Visible = value;
+            if (self.ListLayout != null) self.ListLayout.Visible = value;
+            if (self.ThumbnailLayout != null) self.ThumbnailLayout.Visible = value;
+            if (self.AlbumListLayout != null) self.AlbumListLayout.Visible = value;
+            if (self.FilmstripLayout != null) self.FilmstripLayout.Visible = value;
         }
 
         /// <summary>
