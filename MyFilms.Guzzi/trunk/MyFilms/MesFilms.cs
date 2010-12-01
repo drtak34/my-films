@@ -5341,6 +5341,33 @@ namespace MesFilms
        }
 
         #endregion
+       public void GetActorByName(string strActorName, ArrayList actors)
+       {
+           SQLite.NET.SQLiteClient m_db = new SQLite.NET.SQLiteClient(Config.GetFile(Config.Dir.Database, @"VideoDatabaseV5.db3"));
+           strActorName = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(strActorName);
+           if (m_db == null)
+           {
+               return;
+           }
+           try
+           {
+               actors.Clear();
+               SQLite.NET.SQLiteResultSet results = m_db.Execute("select * from Actors where strActor like '%" + strActorName + "%'");
+               if (results.Rows.Count == 0)
+               {
+                   return;
+               }
+               for (int iRow = 0; iRow < results.Rows.Count; iRow++)
+               {
+                   actors.Add(MediaPortal.Database.DatabaseUtility.Get(results, iRow, "idActor") + "|" +
+                              MediaPortal.Database.DatabaseUtility.Get(results, iRow, "strActor"));
+               }
+           }
+           catch (Exception ex)
+           {
+               Log.Error("MyFilms: videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
+           }
+       }
 
     }
 }

@@ -35,13 +35,13 @@
     <OutputPath>bin\Debug %28Guzzi%29\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.5.20363, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.1.2.19971, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Externals\trunk\Core.dll</HintPath>
+      <HintPath>..\..\Externals\Release 1.1.2\Core.dll</HintPath>
     </Reference>
-    <Reference Include="Dialogs, Version=1.1.5.20383, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Dialogs, Version=1.1.2.19980, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Externals\trunk\Dialogs.dll</HintPath>
+      <HintPath>..\..\Externals\Release 1.1.2\Dialogs.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
