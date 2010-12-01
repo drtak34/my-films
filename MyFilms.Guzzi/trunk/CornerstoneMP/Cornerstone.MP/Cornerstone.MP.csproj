@@ -35,9 +35,9 @@
     <OutputPath>bin\Debug %28Guzzi%29\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.2.19971, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.1.2.22660, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Externals\Release 1.1.2\Core.dll</HintPath>
+      <HintPath>..\..\Externals\Release 1.1.2-Guzzi\Core.dll</HintPath>
     </Reference>
     <Reference Include="Dialogs, Version=1.1.2.19980, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>

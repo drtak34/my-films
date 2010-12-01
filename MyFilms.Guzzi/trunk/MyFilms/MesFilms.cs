@@ -2252,9 +2252,9 @@ namespace MesFilms
                     try
                     {
                         GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
-                        //facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
+                        facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
                         // To be changed when Coverflow is available in CORE Files ....
-                        facadeView.View = GUIFacadeControl.ViewMode.CoverFlow;
+                        //facadeView.View = GUIFacadeControl.ViewMode.CoverFlow;
                         break;
                     }
                     catch 
