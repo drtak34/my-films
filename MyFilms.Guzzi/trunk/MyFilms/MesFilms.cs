@@ -522,7 +522,7 @@ namespace MesFilms
                     }
                     //ImgFanart.SetFileName(string.Empty);
                     //ImgFanart2.SetFileName(string.Empty);
-                    //facadeView.Resources.Clear(); // Removed for MP1.2 Compatibility
+                    facadeView.Resources.Clear();
                     facadeView.Clear();
                     //backdrop.PropertyOne = " ";
                     // added from MoPic
@@ -1324,7 +1324,7 @@ namespace MesFilms
                         if (!cover.Active)
                             cover.Active = true;
                         GUIControl.HideControl(GetID, 35);
-                        Log.Debug("MyFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "'");
+                        Log.Debug("MyFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "', ' - ControlID35: '" + GUIControl.IsVisibleProperty.ToString()  + "'");    
                     }
                 else
                     {
@@ -1333,7 +1333,7 @@ namespace MesFilms
                         if (!cover.Active)
                             cover.Active = true;
                         GUIControl.ShowControl(GetID, 35);
-                        Log.Debug("MyFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "'");
+                        Log.Debug("MyFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "', ' - ControlID35: '" + GUIControl.IsVisibleProperty.ToString() + "'");
                     }
                 Log.Debug("MyFilm (affichage_Lstdetail): Backdrops-File: backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 backdrop.Filename = wfanart[0];
@@ -2237,36 +2237,36 @@ namespace MesFilms
             {
                 case 1:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
-                    facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
+                    facadeView.View = GUIFacadeControl.ViewMode.SmallIcons;
                     break;
                 case 2:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
-                    facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+                    facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
                     break;
                 case 3:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
-                    facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+                    facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
                     break;
 
                 case 4:
                     try
                     {
                         GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
-                        //facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+                        //facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
                         // To be changed when Coverflow is available in CORE Files ....
-                        facadeView.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
+                        facadeView.View = GUIFacadeControl.ViewMode.CoverFlow;
                         break;
                     }
                     catch 
                     {
                         GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
-                        facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+                        facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
                         break;
                     };
 
                 default:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
-                    facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
+                    facadeView.View = GUIFacadeControl.ViewMode.List;
                     break;
             }
         }
@@ -3447,7 +3447,7 @@ namespace MesFilms
                 {
                     // Split id from actor name (two substrings, [0] is id and [1] is name)
                     string[] strActor = act.Split(splitter);
-                    // From here we have all what we want, now we can populate datatable, gridview, ListLayout....)
+                    // From here we have all what we want, now we can populate datatable, gridview, listview....)
                     // actorID originally is integer in the databse (it can be string in results but if we want get details from
                     // IMDBActor  GetActorInfo(int idActor) we need integer)
                     actorID = Convert.ToInt32(strActor[0]);
