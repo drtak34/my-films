@@ -1,3 +1,4 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MesFilms", "MesFilms.csproj", "{20BCDBE0-0812-4235-9330-40B8E570DAE1}"
@@ -138,6 +139,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPTray", "..\..\Mediaportal\1.1.2-Guzzi\mediaportal\MPTray\MPTray.csproj", "{74FB430C-6F41-434B-B9C3-F93BEE56E5FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectShowLib", "..\..\Mediaportal\1.1.2-Guzzi\Common-MP-TVE3\DirectShowLib\DirectShowLib.csproj", "{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GrabberInterface", "GrabberInterface", "{2274964D-A2F9-4624-B3EB-03CF3746E152}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Interface", "..\..\AMCupdater\trunk\Grabber_Interface\Grabber_Interface.csproj", "{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1256,6 +1261,36 @@ Global
 		{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|x86
 		{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|x86
 		{CE009BFA-5EF6-4153-B2A1-2FA79698A9AE}.UseCaptureDefintionsRelease|x86.Build.0 = Release|x86
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug (Guzzi)|Any CPU.Build.0 = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug (Guzzi)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug (Guzzi)|x86.ActiveCfg = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release (Standalone)|Mixed Platforms.Build.0 = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release (Standalone)|x86.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release|x86.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureCardDefinitions|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureCardDefinitions|Any CPU.Build.0 = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureCardDefinitions|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureCardDefinitions|Mixed Platforms.Build.0 = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureCardDefinitions|x86.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureDefintionsRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureDefintionsRelease|Any CPU.Build.0 = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1298,5 +1333,6 @@ Global
 		{F42B1A87-4CC6-4D2F-BDC6-1C90AF52D488} = {B98D8C70-7D9C-42FE-A14C-C6735887251A}
 		{4458F642-6022-4A3F-996F-E8AA510FB7E8} = {B98D8C70-7D9C-42FE-A14C-C6735887251A}
 		{7A626CB9-0660-4F47-B059-7AC7F68EDB0A} = {B98D8C70-7D9C-42FE-A14C-C6735887251A}
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48} = {2274964D-A2F9-4624-B3EB-03CF3746E152}
 	EndGlobalSection
 EndGlobal
