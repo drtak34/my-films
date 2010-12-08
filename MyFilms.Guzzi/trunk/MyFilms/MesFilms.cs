@@ -522,7 +522,7 @@ namespace MesFilms
                     }
                     //ImgFanart.SetFileName(string.Empty);
                     //ImgFanart2.SetFileName(string.Empty);
-                    facadeView.Resources.Clear();
+                    facadeView.Resources.Clear(); // ToDo: Don't forget to change to facadeView.ClearResources(); for 1.2 !!!
                     facadeView.Clear();
                     //backdrop.PropertyOne = " ";
                     // added from MoPic

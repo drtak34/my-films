@@ -545,6 +545,10 @@ namespace MesFilms
 //            upd_choice[ichoice] = "trailer-imdb";
 //            ichoice++;
 
+            dlg.Add(GUILocalizeStrings.Get(10798728));             //Create Thumb from movie - if no cover available, e.g. with documentaries
+            upd_choice[ichoice] = "cover-thumbnailer";
+            ichoice++;
+
             dlg.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
             upd_choice[ichoice] = "trailer-delete";
             ichoice++;
@@ -857,6 +861,16 @@ namespace MesFilms
                 case "trailer-imdb":
                     break;
 
+                case "cover-thumbnailer":
+
+                    CreateThumbFromMovie();
+                    
+                    dlg1.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                    dlg1.SetLine(2, "Cover created from movie");
+                    dlg1.DoModal(GetID);
+
+                    break;
+
                 case "trailer-delete":
                     dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
                     dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
@@ -1080,7 +1094,7 @@ namespace MesFilms
         {
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string[] Result = new string[20];
-            string title =  string.Empty;
+            string title = string.Empty;
             string ttitle = string.Empty;
             string wtitle = string.Empty;
             int year = 0;
@@ -1092,8 +1106,8 @@ namespace MesFilms
             Result = Grab.GetDetail(url, MesFilms.conf.StrPathImg + Img_Path, wscript);
             Log.Info("MyFilms : Grabb Internet Information done for : " + ttitle);
 
-//            string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
-//            string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
+            //            string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
+            //            string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
             if (Result[0] != string.Empty && Result[0] != null)
             {
                 title = Result[0].ToString();
@@ -1101,7 +1115,7 @@ namespace MesFilms
                 if (wtitle.Contains(MesFilms.conf.TitleDelim))
                     wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
                 if (wtitle != title)
-                    Remove_Backdrops_Fanart(wtitle,true);
+                    Remove_Backdrops_Fanart(wtitle, true);
                 if (MesFilms.conf.StrTitle1 == "OriginalTitle")
                     MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = moviehead + title;
                 else
@@ -1112,9 +1126,9 @@ namespace MesFilms
                 ttitle = Result[1].ToString();
                 wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
                 if (wtitle.Contains(MesFilms.conf.TitleDelim))
-                    wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) +1);
+                    wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
                 if (wtitle != ttitle)
-                    Remove_Backdrops_Fanart(wtitle,true);
+                    Remove_Backdrops_Fanart(wtitle, true);
                 if (MesFilms.conf.StrTitle1 == "TranslatedTitle")
                     MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = moviehead + ttitle;
                 else
@@ -1178,6 +1192,88 @@ namespace MesFilms
                 //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
             }
 
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //  Create Thumb via MTN (MovieThumbNailer) from movie itself
+        //-------------------------------------------------------------------------------------------        
+        public static void CreateThumbFromMovie()
+        {
+            XmlConfig XmlConfig = new XmlConfig();
+            string Img_Path = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
+            string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
+
+            string path = MesFilms.conf.StrPathImg + Img_Path;
+            string strThumb =  path + MesFilms.r[MesFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
+
+
+            if (Img_Path_Type.ToLower() == "true")
+                MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = strThumb;
+
+            if (Img_Path.Length > 0)
+                if (Img_Path.EndsWith("\\"))
+                    MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = Img_Path + strThumb;
+                else
+                    MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = Img_Path + "\\" + strThumb;
+            
+            
+            if (File.Exists(strThumb))
+            {
+                return ;
+            }
+
+            // Do not try to create thumbnails for DVDs
+            if (path.Contains("VIDEO_TS\\VIDEO_TS.IFO"))
+            {
+                return ;
+            }
+
+            MediaPortal.Services.IVideoThumbBlacklist blacklist = MediaPortal.Services.GlobalServiceProvider.Get<MediaPortal.Services.IVideoThumbBlacklist>();
+            if (blacklist != null && blacklist.Contains(path))
+            {
+                Log.Debug("Skipped creating thumbnail for {0}, it has been blacklisted because last attempt failed", path);
+                return ;
+            }
+
+
+            System.Drawing.Image thumb = null;
+            try
+            {
+                bool success = VideoThumbCreator.CreateVideoThumb(path, strThumb, true, false);
+                if (!success)
+                    return;
+                else
+                    return;
+            }
+            catch (System.Runtime.InteropServices.COMException comex)
+            {
+                if (comex.ErrorCode == unchecked((int)0x8004B200))
+                {
+                    Log.Warn("Could not create thumbnail for {0} [Unknown error 0x8004B200]", path);
+                }
+                else
+                {
+                    Log.Error("Could not create thumbnail for {0}", path);
+                    Log.Error(comex);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Could not create thumbnail for {0}", path);
+                Log.Error(ex);
+            }
+            finally
+            {
+                if (thumb != null)
+                    thumb.Dispose();
+                if (!File.Exists(strThumb) && blacklist != null)
+                {
+                    blacklist.Add(path);
+                }
+            }
+
+            Update_XML_database();
+            Log.Info("MyFilms : Database Updated for created PictureThumb: " + strThumb);
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2633,7 +2729,7 @@ namespace MesFilms
                     }
                 }
             }
-            // update the MP Video Databse for OSD view during playing
+            // update the MP Video Database for OSD view during playing // ToDo: Check proper fit for changes in Mediaportal 1.2 by Deda !!!
             update_database(fileName, select_item, -1);
             newItems.Add(fileName);
         }
