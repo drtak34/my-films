@@ -2499,7 +2499,7 @@ namespace MesFilms
 
                         if (MesFilms.conf.StrNasMAC2.Length > 0)
                         {
-                            if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC2), MesFilms.conf.StrNasName1, intTimeOut))
+                            if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC2), MesFilms.conf.StrNasName2, intTimeOut))
                             {
                                 dlgOk.SetLine(2, MesFilms.conf.StrNasName2 + " erfolgreich gestartet!");
                             }
@@ -2523,7 +2523,7 @@ namespace MesFilms
 
                         if (MesFilms.conf.StrNasMAC3.Length > 0)
                         {
-                            if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC3), MesFilms.conf.StrNasName1, intTimeOut))
+                            if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MesFilms.conf.StrNasMAC3), MesFilms.conf.StrNasName3, intTimeOut))
                             {
                                 dlgOk.SetLine(2, MesFilms.conf.StrNasName3 + " erfolgreich gestartet!");
                             }

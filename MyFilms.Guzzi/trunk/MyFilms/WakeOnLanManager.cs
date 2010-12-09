@@ -315,6 +315,8 @@ namespace MesFilms.WakeOnLan
       Log.Debug("MyFilms.WakeOnLanManager: address: '" + address + "'");
       byte[] addrn = new byte[6];
       string[] addr = address.Split(':');
+      if (addr.Length != 6) 
+          addr = address.Split('-');
       if (addr.Length != 6)
       {
         throw new ArgumentOutOfRangeException("address", address, "not a valid hardware ethernet addresss");

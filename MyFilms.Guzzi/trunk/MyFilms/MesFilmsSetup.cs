@@ -2789,7 +2789,7 @@ namespace MesFilms
                     //Finally, start up the TV server
                     Log.Info("MyFilmsSetup - WOL: Start the NAS-Server");
 
-                    if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_1.Text, intTimeOut))
+                    if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_2.Text, intTimeOut))
                     {
                         Log.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
                     }
@@ -2826,7 +2826,7 @@ namespace MesFilms
                     //Finally, start up the TV server
                     Log.Info("MyFilmsSetup - WOL: Start the NAS-Server");
 
-                    if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_1.Text, intTimeOut))
+                    if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_3.Text, intTimeOut))
                     {
                         Log.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
                     }
