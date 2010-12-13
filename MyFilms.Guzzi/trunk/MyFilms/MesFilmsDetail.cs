@@ -1846,7 +1846,14 @@ namespace MesFilms
                         return wfanart;
                 }
                 else
-                    safeName = MesFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
+                    if (wtitle2.Length > 200) // Added to avoid crash with very long filenames - better is if user configures titledelimiters properly !
+                    {
+                        return wfanart;
+                    }
+                    else
+                    {
+                        safeName = MesFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
+                    }
                 //Log.Debug("MyFilms (SearchFanart) - safename = '" + safeName + "'");
                 FileInfo wfile = new FileInfo(safeName + "\\{" + wtitle2 + "}.jpg");
                 //Log.Debug("MyFilms (SearchFanart) - safename(file) = '" + wfile + "'");
@@ -2162,7 +2169,6 @@ namespace MesFilms
             string wstring = " "; 
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-                //string wstring = " ";
                 GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
                 //Guzzi:temporarily diabled
                 //Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
@@ -2173,6 +2179,7 @@ namespace MesFilms
             GUIPropertyManager.SetProperty("#myfilms.ar", wstring);
             //Log.Debug("MyFilms : Property loaded #myfilms.ar with " + wstring);
 
+            //Added master and secondarytitel as property
             GUIPropertyManager.SetProperty("#myfilms.mastertitle", wstring);
             //Log.Debug("MyFilms : Property loaded #myfilms.mastertitle with " + wstring);
             GUIPropertyManager.SetProperty("#myfilms.secondarytitle", wstring);
