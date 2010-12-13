@@ -2554,6 +2554,11 @@ namespace MesFilms
                     dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
                     System.Collections.Generic.List<string> choiceViewGlobalOptions = new System.Collections.Generic.List<string>();
 
+                    // Change global Unwatchedfilteroption
+                    if (MesFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
+                    if (!MesFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
+                    choiceViewGlobalOptions.Add("globalunwatchedfilter");
+
                     // Change global MovieFilter (Only Movies with Trailer)
                     if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
                     if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
@@ -2633,6 +2638,13 @@ namespace MesFilms
                     }
                     Change_view(choiceViewGlobalUpdates[dlg2.SelectedLabel].ToLower());
                     return;
+
+                case "globalunwatchedfilter":
+                    // Global overlayfilter for unwatched movies ...
+                    MesFilms.conf.GlobalUnwatchedOnly = !MesFilms.conf.GlobalUnwatchedOnly;
+                    // ToDo: Add Logic to apply globaloverlayfilter for unwatched movies
+
+                    break;
 
                 case "filterdbtrailer":
                     // GlobalFilterTrailersOnly

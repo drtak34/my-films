@@ -163,6 +163,7 @@
     <String id="10798693">Ändern Wert für "Minimalbewertung" (aktuell: '{0}')</String>
     <String id="10798694">Suche Trailer - alle Filme (lokal)</String>
     <String id="10798695">Trailersuche beendet !</String>
+    <String id="10798696">Globaler Filter "Nur ungesehene Filme" ({0})</String>
     <String id="10798710">Spiele Trailer</String>
     <String id="10798719">Lade Filminformationen (nfo-Datei, lokal, ergänze fehlende Infos)</String>
     <String id="10798720">Lade Filminformationen (nfo-Datei, lokal, alle Infos überschreiben)</String>

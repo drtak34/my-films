@@ -163,6 +163,7 @@
     <String id="10798693">Change value for "minimumrating" (current: '{0}')</String>
     <String id="10798694">Seach Trailer - all Movies (local)</String>
     <String id="10798695">Trailer search finished !</String>
+    <String id="10798696">Global Filter "Only unwatched movies" ({0})</String>
     <String id="10798710">Play Trailer</String>
     <String id="10798719">Load Moviesinfos (nfo-File, local, add missing infos)</String>
     <String id="10798720">Load Moviesinfos (nfo-File, local, replace all infos)</String>

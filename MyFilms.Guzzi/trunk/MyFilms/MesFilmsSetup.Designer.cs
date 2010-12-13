@@ -121,6 +121,7 @@ namespace MesFilms
             this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
             this.AntFilterText1 = new System.Windows.Forms.TextBox();
             this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+            this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.SortSens = new System.Windows.Forms.ComboBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -295,6 +296,8 @@ namespace MesFilms
             this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
             this.MesFilmsImgArtist = new System.Windows.Forms.TextBox();
             this.groupBox_PreLaunchingCommand = new System.Windows.Forms.GroupBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
             this.CmdPar = new System.Windows.Forms.ComboBox();
             this.CmdExe = new System.Windows.Forms.TextBox();
             this.groupBox_ArtistImages = new System.Windows.Forms.GroupBox();
@@ -304,6 +307,7 @@ namespace MesFilms
             this.ButImgArtist = new System.Windows.Forms.Button();
             this.label_DefaultArtistImage = new System.Windows.Forms.Label();
             this.label_ArtistImagePath = new System.Windows.Forms.Label();
+            this.checkWatchedInProfile = new System.Windows.Forms.CheckBox();
             this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
             this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
             this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
@@ -323,6 +327,9 @@ namespace MesFilms
             this.label15 = new System.Windows.Forms.Label();
             this.Rpt_Dwp = new System.Windows.Forms.TextBox();
             this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Label_UserProfileName = new System.Windows.Forms.Label();
+            this.UserProfileName = new System.Windows.Forms.TextBox();
             this.AntIdentLabel = new System.Windows.Forms.TextBox();
             this.butPath = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -394,12 +401,6 @@ namespace MesFilms
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkWatchedInProfile = new System.Windows.Forms.CheckBox();
-            this.UserProfileName = new System.Windows.Forms.TextBox();
-            this.Label_UserProfileName = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
             this.groupBox_SortByItem.SuspendLayout();
             this.groupBox_AntSelectedEnreg.SuspendLayout();
             this.groupBox_DefaultView.SuspendLayout();
@@ -425,6 +426,7 @@ namespace MesFilms
             this.Tab_General.SuspendLayout();
             this.groupBox_Security.SuspendLayout();
             this.groupBox_PlayMovieInfos.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox_TitleOrder.SuspendLayout();
             this.Tab_Artwork.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -442,7 +444,6 @@ namespace MesFilms
             this.Tab_TrailerOptions.SuspendLayout();
             this.Tab_WakeOnLan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolTip1
@@ -703,6 +704,7 @@ namespace MesFilms
             // 
             // groupBox_DefaultView
             // 
+            this.groupBox_DefaultView.Controls.Add(this.chkGlobalUnwatchedOnly);
             this.groupBox_DefaultView.Controls.Add(this.label10);
             this.groupBox_DefaultView.Controls.Add(this.SortSens);
             this.groupBox_DefaultView.Controls.Add(this.label32);
@@ -714,11 +716,23 @@ namespace MesFilms
             this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Text);
             this.groupBox_DefaultView.Location = new System.Drawing.Point(9, 169);
             this.groupBox_DefaultView.Name = "groupBox_DefaultView";
-            this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 123);
+            this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 179);
             this.groupBox_DefaultView.TabIndex = 26;
             this.groupBox_DefaultView.TabStop = false;
             this.groupBox_DefaultView.Text = "Default Start View";
             this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
+            // 
+            // chkGlobalUnwatchedOnly
+            // 
+            this.chkGlobalUnwatchedOnly.AutoSize = true;
+            this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 135);
+            this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
+            this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(299, 17);
+            this.chkGlobalUnwatchedOnly.TabIndex = 80;
+            this.chkGlobalUnwatchedOnly.Text = "Show only unwatched movies (can be changed from GUI)";
+            this.ToolTip1.SetToolTip(this.chkGlobalUnwatchedOnly, "Unwatched option acts as global overlayfilter for all views\r\nand setting is used " +
+                    "for start view.\r\nIt can be switched on/off from the GUI during runtime.");
+            this.chkGlobalUnwatchedOnly.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
@@ -2578,6 +2592,24 @@ namespace MesFilms
                     ". The following field give the item of your \r\ndatabase passed as  parameter to t" +
                     "he command file.\r\n\r\nVery unused...");
             // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(19, 59);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(55, 13);
+            this.label39.TabIndex = 39;
+            this.label39.Text = "Parameter";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(19, 28);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(70, 13);
+            this.label38.TabIndex = 38;
+            this.label38.Text = "Commandline";
+            // 
             // CmdPar
             // 
             this.CmdPar.FormattingEnabled = true;
@@ -2670,6 +2702,20 @@ namespace MesFilms
             this.label_ArtistImagePath.Size = new System.Drawing.Size(92, 13);
             this.label_ArtistImagePath.TabIndex = 93;
             this.label_ArtistImagePath.Text = "Artist Images Path";
+            // 
+            // checkWatchedInProfile
+            // 
+            this.checkWatchedInProfile.AutoSize = true;
+            this.checkWatchedInProfile.Enabled = false;
+            this.checkWatchedInProfile.Location = new System.Drawing.Point(9, 42);
+            this.checkWatchedInProfile.Name = "checkWatchedInProfile";
+            this.checkWatchedInProfile.Size = new System.Drawing.Size(338, 17);
+            this.checkWatchedInProfile.TabIndex = 70;
+            this.checkWatchedInProfile.Text = "Update the movie status in the userprofile when movie is launched";
+            this.ToolTip1.SetToolTip(this.checkWatchedInProfile, "Select this option if you want to update the watched status in the\r\nuserprofile. " +
+                    "Requires a userprofilename to choose.\r\nTo be updated each time a movie is launch" +
+                    "ed.");
+            this.checkWatchedInProfile.UseVisualStyleBackColor = true;
             // 
             // AntFilterMinRating
             // 
@@ -2844,6 +2890,37 @@ namespace MesFilms
             this.groupBox_PlayMovieInfos.TabIndex = 74;
             this.groupBox_PlayMovieInfos.TabStop = false;
             this.groupBox_PlayMovieInfos.Text = "Play Movie Infos";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.Label_UserProfileName);
+            this.groupBox2.Controls.Add(this.UserProfileName);
+            this.groupBox2.Controls.Add(this.checkWatchedInProfile);
+            this.groupBox2.Controls.Add(this.CheckWatched);
+            this.groupBox2.Location = new System.Drawing.Point(10, 96);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(370, 91);
+            this.groupBox2.TabIndex = 71;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "MovieUpdates - watched-status";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // Label_UserProfileName
+            // 
+            this.Label_UserProfileName.AutoSize = true;
+            this.Label_UserProfileName.Location = new System.Drawing.Point(27, 64);
+            this.Label_UserProfileName.Name = "Label_UserProfileName";
+            this.Label_UserProfileName.Size = new System.Drawing.Size(92, 13);
+            this.Label_UserProfileName.TabIndex = 72;
+            this.Label_UserProfileName.Text = "User Profile Name";
+            // 
+            // UserProfileName
+            // 
+            this.UserProfileName.Enabled = false;
+            this.UserProfileName.Location = new System.Drawing.Point(143, 61);
+            this.UserProfileName.Name = "UserProfileName";
+            this.UserProfileName.Size = new System.Drawing.Size(204, 20);
+            this.UserProfileName.TabIndex = 71;
             // 
             // AntIdentLabel
             // 
@@ -3592,69 +3669,6 @@ namespace MesFilms
             this.pictureBox1.TabIndex = 75;
             this.pictureBox1.TabStop = false;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.Label_UserProfileName);
-            this.groupBox2.Controls.Add(this.UserProfileName);
-            this.groupBox2.Controls.Add(this.checkWatchedInProfile);
-            this.groupBox2.Controls.Add(this.CheckWatched);
-            this.groupBox2.Location = new System.Drawing.Point(10, 96);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(370, 91);
-            this.groupBox2.TabIndex = 71;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "MovieUpdates - watched-status";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
-            // 
-            // checkWatchedInProfile
-            // 
-            this.checkWatchedInProfile.AutoSize = true;
-            this.checkWatchedInProfile.Enabled = false;
-            this.checkWatchedInProfile.Location = new System.Drawing.Point(9, 42);
-            this.checkWatchedInProfile.Name = "checkWatchedInProfile";
-            this.checkWatchedInProfile.Size = new System.Drawing.Size(338, 17);
-            this.checkWatchedInProfile.TabIndex = 70;
-            this.checkWatchedInProfile.Text = "Update the movie status in the userprofile when movie is launched";
-            this.ToolTip1.SetToolTip(this.checkWatchedInProfile, "Select this option if you want to update the watched status in the\r\nuserprofile. " +
-                    "Requires a userprofilename to choose.\r\nTo be updated each time a movie is launch" +
-                    "ed.");
-            this.checkWatchedInProfile.UseVisualStyleBackColor = true;
-            // 
-            // UserProfileName
-            // 
-            this.UserProfileName.Enabled = false;
-            this.UserProfileName.Location = new System.Drawing.Point(143, 61);
-            this.UserProfileName.Name = "UserProfileName";
-            this.UserProfileName.Size = new System.Drawing.Size(204, 20);
-            this.UserProfileName.TabIndex = 71;
-            // 
-            // Label_UserProfileName
-            // 
-            this.Label_UserProfileName.AutoSize = true;
-            this.Label_UserProfileName.Location = new System.Drawing.Point(27, 64);
-            this.Label_UserProfileName.Name = "Label_UserProfileName";
-            this.Label_UserProfileName.Size = new System.Drawing.Size(92, 13);
-            this.Label_UserProfileName.TabIndex = 72;
-            this.Label_UserProfileName.Text = "User Profile Name";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(19, 28);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(70, 13);
-            this.label38.TabIndex = 38;
-            this.label38.Text = "Commandline";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(19, 59);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(55, 13);
-            this.label39.TabIndex = 39;
-            this.label39.Text = "Parameter";
-            // 
             // MesFilmsSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3727,6 +3741,8 @@ namespace MesFilms
             this.groupBox_Security.PerformLayout();
             this.groupBox_PlayMovieInfos.ResumeLayout(false);
             this.groupBox_PlayMovieInfos.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox_TitleOrder.ResumeLayout(false);
             this.groupBox_TitleOrder.PerformLayout();
             this.Tab_Artwork.ResumeLayout(false);
@@ -3750,8 +3766,6 @@ namespace MesFilms
             this.Tab_TrailerOptions.ResumeLayout(false);
             this.Tab_WakeOnLan.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4060,6 +4074,7 @@ namespace MesFilms
         private Label Label_UserProfileName;
         private Label label39;
         private Label label38;
+        private CheckBox chkGlobalUnwatchedOnly;
 
     }
 }
