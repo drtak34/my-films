@@ -1491,12 +1491,17 @@ namespace MesFilms
             dlg1.Add(GUILocalizeStrings.Get(342));//videos
             dlg1.Add(GUILocalizeStrings.Get(345));//year
             dlg1.Add(GUILocalizeStrings.Get(135));//genre
-            dlg1.Add(GUILocalizeStrings.Get(200026));//pays
+            dlg1.Add(GUILocalizeStrings.Get(200026));//countries
+            //dlg1.Add(GUILocalizeStrings.Get(200027));//Watched
             System.Collections.Generic.List<string> choiceView = new System.Collections.Generic.List<string>();
             choiceView.Add("all");
             choiceView.Add("year");
             choiceView.Add("category");
             choiceView.Add("country");
+            
+            //if (MesFilms.conf.CheckWatched) // Might be added to only show if checkedfield is used in config for watched movies...
+            //choiceView.Add("watched"); // Disabled - will do it via global filter later ...
+
             if (!(conf.StrStorage.Length == 0) && !(conf.StrStorage == "(none)"))
             {
                 dlg1.Add(GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
@@ -2316,6 +2321,7 @@ namespace MesFilms
                     getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); 
                     break;
+
                 case "storage":
                 //  Change View by "Storage":
                     conf.StrSelect = "((" + conf.StrTitle1.ToString() + " not like '') and (" + conf.StrStorage.ToString() + " not like ''))";
@@ -2908,8 +2914,12 @@ namespace MesFilms
                 ichoice++;
             }
 
-            dlg.Add(GUILocalizeStrings.Get(1079892)); // Update ...
-            upd_choice[ichoice] = "updatemenu";
+            if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+            {
+                dlg.Add(GUILocalizeStrings.Get(1079892)); // Update ...
+                upd_choice[ichoice] = "updatemenu";
+            }
+
             ichoice++;
 
             dlg.DoModal(GetID);

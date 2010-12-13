@@ -194,10 +194,16 @@ namespace MesFilms
                 Log.Debug("MyFilmsDetail : ACTION_CONTEXT_MENU erkannt !!! ");
                 // context menu for options  like PlayTrailers or Updates
                 //MesFilms.Context_Menu_Movie();
-                 if (BtnMaj.Focus)
+                if (BtnMaj.Focus)
+                {
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
+                    Update_XML_Items();
+                }
                 else
-                    GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnMaj);
+                {
+                    GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
+                    Update_XML_Items();
+                }
                 return;
             }
 
@@ -445,7 +451,7 @@ namespace MesFilms
                         GUIWindowManager.ShowPreviousWindow();
                         //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                         return true;
-                    
+
             }
             base.OnMessage(messageType);
             return true;
@@ -1199,22 +1205,18 @@ namespace MesFilms
         //-------------------------------------------------------------------------------------------        
         public static void CreateThumbFromMovie()
         {
-            XmlConfig XmlConfig = new XmlConfig();
-            string Img_Path = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
-            string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
+            //XmlConfig XmlConfig = new XmlConfig();
+            //string Img_Path = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
+            //string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
 
-            string path = MesFilms.conf.StrPathImg + Img_Path;
-            string strThumb =  path + MesFilms.r[MesFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
+            string path = MesFilms.r[MesFilms.conf.StrIndex]["Source"].ToString();
+            string strThumb = MesFilms.conf.StrPathImg + "\\" + MesFilms.r[MesFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
 
 
-            if (Img_Path_Type.ToLower() == "true")
-                MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = strThumb;
+            //if (Img_Path_Type.ToLower() == "true")
+            //    MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = strThumb;
 
-            if (Img_Path.Length > 0)
-                if (Img_Path.EndsWith("\\"))
-                    MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = Img_Path + strThumb;
-                else
-                    MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = Img_Path + "\\" + strThumb;
+            MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = strThumb;
             
             
             if (File.Exists(strThumb))
@@ -1239,6 +1241,7 @@ namespace MesFilms
             System.Drawing.Image thumb = null;
             try
             {
+                // CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits);
                 bool success = VideoThumbCreator.CreateVideoThumb(path, strThumb, true, false);
                 if (!success)
                     return;
@@ -2166,9 +2169,15 @@ namespace MesFilms
             }
 
             GUIPropertyManager.SetProperty("#myfilms.aspectratio", wstring);
-            GUIPropertyManager.SetProperty("#myfilms.ar", wstring);
             //Log.Debug("MyFilms : Property loaded #myfilms.aspectratio with " + wstring);
+            GUIPropertyManager.SetProperty("#myfilms.ar", wstring);
             //Log.Debug("MyFilms : Property loaded #myfilms.ar with " + wstring);
+
+            GUIPropertyManager.SetProperty("#myfilms.mastertitle", wstring);
+            //Log.Debug("MyFilms : Property loaded #myfilms.mastertitle with " + wstring);
+            GUIPropertyManager.SetProperty("#myfilms.secondarytitle", wstring);
+            //Log.Debug("MyFilms : Property loaded #myfilms.secondarytitle with " + wstring);
+
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2199,6 +2208,18 @@ namespace MesFilms
                             GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
                             //Guzzi: Temporarily disabled
                             // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+
+                            if ((MesFilms.conf.StrTitle1.ToLower() == (dc.ColumnName.ToLower())))
+                            {
+                                GUIPropertyManager.SetProperty("#myfilms.mastertitle", wstring);
+                                //Log.Debug("MyFilms : Property loaded #myfilms.mastertitle with " + wstring);
+                            }
+                            if ((MesFilms.conf.StrTitle2.ToLower() == (dc.ColumnName.ToLower())))
+                            {
+                                GUIPropertyManager.SetProperty("#myfilms.secondarytitle", wstring);
+                                //Log.Debug("MyFilms : Property loaded #myfilms.secondarytitle with " + wstring);
+                            }
+
                             break;
                         case "length":
                         case "length_num":
@@ -2333,6 +2354,17 @@ namespace MesFilms
                                 wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
                             GUIPropertyManager.SetProperty("#myfilms." + dc.ColumnName.ToLower(), wstring);
                             // Log.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+
+                            if ((MesFilms.conf.StrTitle1.ToLower() == (dc.ColumnName.ToLower())))
+                            {
+                                GUIPropertyManager.SetProperty("#myfilms.mastertitle", wstring);
+                                //Log.Debug("MyFilms : Property loaded #myfilms.mastertitle with " + wstring);
+                            }
+                            if ((MesFilms.conf.StrTitle2.ToLower() == (dc.ColumnName.ToLower())))
+                            {
+                                GUIPropertyManager.SetProperty("#myfilms.secondarytitle", wstring);
+                                //Log.Debug("MyFilms : Property loaded #myfilms.secondarytitle with " + wstring);
+                            }
                             break;
                     }
                 }
