@@ -51,22 +51,8 @@ namespace MesFilms
     protected GUIButtonControl btnMin = null;
     [SkinControlAttribute(12)]
     protected GUIButtonControl btnOk = null;
-    //[SkinControlAttribute(13)]
-    //protected GUIButtonControl btnNextItem = null;
-    //[SkinControlAttribute(14)]
-    //protected GUIButtonControl btnPlay = null;
-    //[SkinControlAttribute(15)]
-    //protected GUIButtonControl btnPreviousItem = null;
     [SkinControlAttribute(100)]
     protected GUIImageList imgStar = null;
-    //[SkinControlAttribute(101)]
-    //protected GUIImage imgStar2 = null;
-    //[SkinControlAttribute(102)]
-    //protected GUIImage imgStar3 = null;
-    //[SkinControlAttribute(103)]
-    //protected GUIImage imgStar4 = null;
-    //[SkinControlAttribute(104)]
-    //protected GUIImage imgStar5 = null;
 
     decimal rating = 1;
     string fileName;
@@ -147,7 +133,7 @@ namespace MesFilms
 
     void UpdateRating()
     {
-        GUIPropertyManager.SetProperty("#rating", Rating.ToString());
+        MesFilmsDetail.setGUIProperty("rating", Rating.ToString());
     }
 
     public decimal Rating

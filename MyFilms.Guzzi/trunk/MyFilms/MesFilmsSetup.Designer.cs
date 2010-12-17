@@ -1935,8 +1935,7 @@ namespace MesFilms
             this.TitleDelim.Name = "TitleDelim";
             this.TitleDelim.Size = new System.Drawing.Size(20, 20);
             this.TitleDelim.TabIndex = 20;
-            this.ToolTip1.SetToolTip(this.TitleDelim, "Character used for hierachical presentation.\r\nSearch on forums to have an idea ab" +
-                    "out this.");
+            this.ToolTip1.SetToolTip(this.TitleDelim, resources.GetString("TitleDelim.ToolTip"));
             // 
             // AntTitle2
             // 

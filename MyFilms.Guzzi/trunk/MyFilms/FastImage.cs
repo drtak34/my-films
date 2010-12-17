@@ -54,7 +54,7 @@ namespace MesFilms
         }
         public static Image CreateImage(string path, string texte)
         {
-            // Chargement de l'image à dessiner 
+            // Loading the image to draw 
             if (!System.IO.File.Exists(path.Substring(0, path.LastIndexOf("\\") + 1) + "Default.jpg"))
                 MediaPortal.Util.Picture.CreateThumbnail(MesFilms.conf.DefaultCover, path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg", 200, 400, 0, MediaPortal.Util.Thumbs.SpeedThumbsLarge);
             Image image = null;
@@ -65,16 +65,16 @@ namespace MesFilms
                 return null;
             }
 
-            // Création du bitmap pour réaliser le dessin 
+            // Creation of the bitmap to make the drawing 
             
   //          Bitmap bmp = new Bitmap(image.Width, image.Height);
             Bitmap bmp = new Bitmap(150, 200);
-            // Créatio ndu graphics pour dessiner 
+            // Creation of graphics to draw
             Graphics g = Graphics.FromImage(bmp);
 
-            // On dessine l'image 
+            // It draws the image 
             g.DrawImage(image, 0, 0);
-            // on découpe le texte séparateur espace
+            // the text is cut by separator space
             int wi = 0;
             string[] Sep = {" ","-","_","&","|",",",";"};
             string[] arSplit = texte.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
@@ -86,7 +86,7 @@ namespace MesFilms
                if (xfont == 0 || wfont < xfont)
                    xfont = wfont;
             }
-            // On ajoute un texte 
+            // It adds a text 
             if (xfont > 64)
                 xfont = 64;
             for (wi = 0; wi < arSplit.Length; wi++)
