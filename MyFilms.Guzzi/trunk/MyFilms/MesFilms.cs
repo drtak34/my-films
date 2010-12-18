@@ -76,39 +76,20 @@ namespace MesFilms
             CTRL_Image = 1020,
             CTRL_Image2 = 1021,
             CTRL_List = 1026,
-            //CTRL_Label1 = 1030,
-            //CTRL_Item1 = 1031,
-            //CTRL_Label2 = 1032,
-            //CTRL_Item2 = 1033,
-            //CTRL_Item3 = 1034,
             CTRL_logos_id2001 = 2001,
             CTRL_logos_id2002 = 2002,
-            CTRL_MovieInfoIsAvailable = 3001,
-            CTRL_MovieIsAvailable = 3002,
-            CTRL_TrailerIsAvailable = 3003,
+            //CTRL_MovieInfoIsAvailable = 3001,
+            //CTRL_MovieIsAvailable = 3002,
+            //CTRL_TrailerIsAvailable = 3003,
         }
         //[SkinControlAttribute((int)Controls.CTRL_TxtSelect)]
         //protected GUIFadeLabel TxtSelect = null;
+
         [SkinControlAttribute((int)Controls.CTRL_BtnSrtBy)]
         protected GUISortButtonControl BtnSrtBy = null;
 
         [SkinControlAttribute((int)Controls.CTRL_List)]
         protected GUIFacadeControl facadeView = null;
-
-        //[SkinControlAttribute((int)Controls.CTRL_Label1)]
-        //protected GUILabelControl TxtLabel1 = null;
-
-        //[SkinControlAttribute((int)Controls.CTRL_Item1)]
-        //protected GUIFadeLabel TxtItem1 = null;
-
-        //[SkinControlAttribute((int)Controls.CTRL_Label2)]
-        //protected GUILabelControl TxtLabel2 = null;
-
-        //[SkinControlAttribute((int)Controls.CTRL_Item2)]
-        //protected GUIFadeLabel TxtItem2 = null;
-
-        //[SkinControlAttribute((int)Controls.CTRL_Item3)]
-        //protected GUIFadeLabel TxtItem3 = null;
 
         [SkinControlAttribute((int)Controls.CTRL_Image)]
         protected GUIImage ImgLstFilm = null;
@@ -133,16 +114,16 @@ namespace MesFilms
 
         // ControlIDs to let the skin react to certain states and properties (e.g. trailer available)
 
-        [SkinControlAttribute((int)Controls.CTRL_MovieInfoIsAvailable)]
-        protected GUIImage MovieInfoIsAvailable = null;
+        //[SkinControlAttribute((int)Controls.CTRL_MovieInfoIsAvailable)]
+        //protected GUIImage MovieInfoIsAvailable = null;
 
-        [SkinControlAttribute((int)Controls.CTRL_MovieIsAvailable)]
-        protected GUIImage MovieIsAvailable = null;
+        //[SkinControlAttribute((int)Controls.CTRL_MovieIsAvailable)]
+        //protected GUIImage MovieIsAvailable = null;
 
-        [SkinControlAttribute((int)Controls.CTRL_TrailerIsAvailable)]
-        protected GUIImage TrailerIsAvailable = null;
+        //[SkinControlAttribute((int)Controls.CTRL_TrailerIsAvailable)]
+        //protected GUIImage TrailerIsAvailable = null;
 
-        [SkinControlAttribute(3004)]
+        [SkinControlAttribute(2080)]
         protected GUIAnimation m_SearchAnimation = null;
 
         public int Layout = 0;
@@ -272,11 +253,13 @@ namespace MesFilms
         {
             Log.Debug("MyFilms.Init() started.");
             // create Backdrop image swapper
+
             backdrop = new ImageSwapper();
             backdrop.ImageResource.Delay = 250;
             backdrop.PropertyOne = "#myfilms.fanart";
             //backdrop.PropertyTwo = "#myfilms.fanart2";
             //backdrop.LoadingImage = loadingImage;
+            backdrop.Active = false;
 
             // create Cover image swapper
             cover = new AsyncImageResource();
@@ -291,24 +274,19 @@ namespace MesFilms
             // Ceate Variable for OneTimeView Setup
             InitialStart = true;
 
-            // Added from TVseries - to be adapted, if introduction of better translationsupport is intended...
-            //#region Translations
-            //Translation.Init();
-
-            //// Push Translated Strings to skin
-            //MPTVSeriesLog.Write("Setting translated strings: ", MPTVSeriesLog.LogLevel.Debug);
-            //string propertyName = string.Empty;
-            //string propertyValue = string.Empty;
-            //foreach (string name in Translation.Strings.Keys)
-            //{
-            //    propertyName = "#TVSeries.Translation." + name + ".Label";
-            //    propertyValue = Translation.Strings[name];
-            //    MPTVSeriesLog.Write(propertyName + " = " + propertyValue, MPTVSeriesLog.LogLevel.Debug);
-            //    GUIPropertyManager.SetProperty(propertyName, propertyValue);
-            //}
-            //#endregion
-
-
+            //Add localized labels for DB Columns
+            AntMovieCatalog ds = new AntMovieCatalog();
+            foreach (DataColumn dc in ds.Movie.Columns)
+            {
+                MesFilmsDetail.setGUIProperty("db." + dc.ColumnName.ToLower() + ".label", BaseMesFilms.Translate_Column(dc.ColumnName));
+            }
+            MesFilmsDetail.setGUIProperty("db.calc.aspectratio.label", GUILocalizeStrings.Get(10798697));
+            MesFilmsDetail.setGUIProperty("db.calc.imageformat.label", GUILocalizeStrings.Get(10798698));
+            MesFilmsDetail.setGUIProperty("user.sourcetrailer.label", GUILocalizeStrings.Get(10798649));
+            MesFilmsDetail.setGUIProperty("user.source.label", GUILocalizeStrings.Get(10798648));
+            MesFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
+            MesFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
+            
             Log.Debug("MyFilms.Init() completed.");
 
             return Load(GUIGraphicsContext.Skin + @"\MesFilms.xml");
@@ -327,36 +305,19 @@ namespace MesFilms
             // Setup Random Fanart Timer
             m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
             m_bFanartTimerDisabled = true;
-            // Enable Random Fanart Timer
-            // Enable to use threaded timer
             //m_FanartTimer.Change(0,10000);
-            m_bFanartTimerDisabled = false;
-
 
             // Clear GUI Properties when first entering the plugin
             // This will avoid ugly property names being seen before 
             // its corresponding value is assigned
-            if (true)
-            {
-                MesFilmsDetail.clearGUIProperty("mastertitle");
-                MesFilmsDetail.clearGUIProperty("secondarytitle");
-                MesFilmsDetail.clearGUIProperty("logos_id2001");
-                MesFilmsDetail.clearGUIProperty("logos_id2002");
-                MesFilmsDetail.clearGUIProperty("nbobjects");
-                MesFilmsDetail.clearGUIProperty("nbobjects.unit");
-                MesFilmsDetail.clearGUIProperty("label1");
-                MesFilmsDetail.clearGUIProperty("label2");
-                MesFilmsDetail.clearGUIProperty("item1");
-                MesFilmsDetail.clearGUIProperty("item2");
-                MesFilmsDetail.clearGUIProperty("item3");
-                MesFilmsDetail.clearGUIProperty("Fanart");
-                MesFilmsDetail.clearGUIProperty("Fanart2");
-                MesFilmsDetail.clearGUIProperty("rating");
-            }
-
+            MesFilmsDetail.clearGUIProperty("logos_id2001");
+            MesFilmsDetail.clearGUIProperty("logos_id2002");
+            MesFilmsDetail.clearGUIProperty("nbobjects.value");
+            MesFilmsDetail.clearGUIProperty("Fanart");
+            MesFilmsDetail.clearGUIProperty("Fanart2");
+            //MesFilmsDetail.clearGUIProperty("config.currentconfig");
 
             Log.Debug("MyFilms.OnPageLoad() completed.");
-
         }
 
         protected override void OnPageDestroy(int new_windowId)
@@ -486,6 +447,10 @@ namespace MesFilms
                         Configuration.Current_Config();
                         Load_Config(Configuration.CurrentConfig, true);
                         // this is too early ... -> InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
+                        if (MesFilms.conf.StrFanart)
+                            backdrop.Active = true;
+                        else
+                            backdrop.Active = false;
                     }
                     if (Configuration.CurrentConfig.Length == 0)
                         GUIWindowManager.ShowPreviousWindow();
@@ -1227,8 +1192,7 @@ namespace MesFilms
                 if (!backdrop.Active) backdrop.Active = true;
                 GUIControl.HideControl(GetID, 34);
             }
-            MesFilmsDetail.setGUIProperty("nbobjects", facadeView.Count.ToString());
-            MesFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));            
+            MesFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
             GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)wfacadewiew);
             if (facadeView.Count == 1 && item.IsFolder)
             {
@@ -1301,10 +1265,8 @@ namespace MesFilms
                 cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
                 if (!backdrop.Active)
                     backdrop.Active = true;
-                GUIControl.HideControl(GetID, 34);
+                //GUIControl.ShowControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
-                // Disabled because replaced by SpeedLoader
-                //GUIPropertyManager.SetProperty("#myfilms.picture", facadeView.SelectedListItem.ThumbnailImage.ToString()); 
                 MesFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage.ToString());
                 affichage_rating(0);
                 MesFilmsDetail.clearGUIProperty("logos_id2001");
@@ -2096,9 +2058,7 @@ namespace MesFilms
                 //ImgLstFilm2.SetFileName("#myfilms.picture");
                 affichage_rating(0);
             }
-            //GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count.ToString() + " " + GUILocalizeStrings.Get(127));
-            MesFilmsDetail.setGUIProperty("nbobjects", facadeView.Count.ToString());
-            MesFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
+            MesFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
  
             MesFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
             GUIWaitCursor.Hide();
@@ -2427,7 +2387,13 @@ namespace MesFilms
                             Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
                         else
                             Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+
                         InitialStart = false; // Guzzi: Set InitialStart to false after initialization done
+
+                        if (MesFilms.conf.StrFanart)
+                            backdrop.Active = true;
+                        else
+                            backdrop.Active = false;
                     }
 
                     break;
@@ -4810,23 +4776,13 @@ namespace MesFilms
             MovieScrobbling = false; //Reset MovieScrobbling
             MesFilmsDetail.Init_Detailed_DB();  // Includes clear of db & user properties
 
-            // create Backdrop image swapper
-            backdrop = new ImageSwapper();
-            backdrop.ImageResource.Delay = 250;
-            backdrop.Active = true;
             //if (MesFilms.conf.StrFanart)
             //    backdrop.Active = true;
             //else
             //    backdrop.Active = false;
-            //backdrop.PropertyOne = "#myfilms.fanart";
-            //backdrop.PropertyTwo = "#myfilms.fanart2";
-            //backdrop.LoadingImage = loadingImage; --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
 
-            // create Cover image swapper
-            //cover = new AsyncImageResource();
-            //cover.Property = "#myfilms.coverimage";
-            //cover.Delay = 250;
-            cover.Filename = "";
+            backdrop.Filename = String.Empty;
+            cover.Filename = String.Empty;
 
             // (re)link our backdrop image controls to the backdrop image swapper
             backdrop.GUIImageOne = ImgFanart;
@@ -4835,15 +4791,13 @@ namespace MesFilms
 
             //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge ->> This fucked up the fanart swapper !!!!!
             //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge
-            //GUIPropertyManager.SetProperty("#myfilms.Fanart", " ");
-            //GUIPropertyManager.SetProperty("#myfilms.Fanart2", " ");
+
             MesFilmsDetail.clearGUIProperty("logos_id2001");
             MesFilmsDetail.clearGUIProperty("logos_id2002");
-            MesFilmsDetail.clearGUIProperty("nbobjects");
-            MesFilmsDetail.clearGUIProperty("nbobjects.unit");
+            MesFilmsDetail.clearGUIProperty("nbobjects.value");
             MesFilmsDetail.clearGUIProperty("Fanart");
             MesFilmsDetail.clearGUIProperty("Fanart2");
-            MesFilmsDetail.clearGUIProperty("rating");
+            MesFilmsDetail.clearGUIProperty("db.rating");
             affichage_rating(0);
             GUIWaitCursor.Hide();
             GUIControl.HideControl(GetID, 34);

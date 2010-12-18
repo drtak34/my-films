@@ -51,7 +51,7 @@
     <String id="2085">end</String>
     <String id="2086">forward</String>
     <String id="2087">backward</String>
-    <String id="2998"> min</String>
+    <String id="2998">min</String>
     <String id="4514">Backdrop Fanart Grabber</String>
     <String id="5910">Getting movie info</String>
     <String id="6022">Movie set-up</String>
@@ -123,11 +123,13 @@
     <String id="10798643">Select Property for Updating</String>
     <String id="10798644">Wrong Input Format. Please retry.</String>
     <String id="10798645">Global Search (areas)</String>
+    <String id="10798648">Source Movie</String>
+    <String id="10798649">Source Trailer</String>
     <String id="10798650">Number</String>
     <String id="10798651">Checked</String>
     <String id="10798652">MediaLabel</String>
     <String id="10798653">MediaType</String>
-    <String id="10798654">Source</String>
+    <String id="10798654">Source Movie</String>
     <String id="10798655">Date</String>
     <String id="10798656">Borrower</String>
     <String id="10798657">Rating</String>
@@ -165,6 +167,8 @@
     <String id="10798694">Seach Trailer - all Movies (local)</String>
     <String id="10798695">Trailer search finished !</String>
     <String id="10798696">Global Filter "Only unwatched movies" ({0})</String>
+    <String id="10798697">Aspectratio</String>
+    <String id="10798698">Imageformat</String>
     <String id="10798710">Play Trailer</String>
     <String id="10798719">Load Moviesinfos (nfo-File, local, add missing infos)</String>
     <String id="10798720">Load Moviesinfos (nfo-File, local, replace all infos)</String>
@@ -177,5 +181,10 @@
     <String id="10798727">Show NAS Server Status</String>
     <String id="10798728">Create Cover from Movie</String>
     <String id="10798731">Person Infos (IMDB)</String>
+    <String id="10798751">Overview and Moviestart</String>
+    <String id="10798752">Description</String>
+    <String id="10798753">Comments</String>
+    <String id="10798754">Acting Persons</String>
+    <String id="10798755">Technical Infos</String>
   </Section>
 </Language>

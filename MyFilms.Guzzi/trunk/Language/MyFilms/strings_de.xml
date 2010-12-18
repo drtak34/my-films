@@ -51,7 +51,7 @@
     <String id="2085">Endpunkt</String>
     <String id="2086">vor</String>
     <String id="2087">zurück</String>
-    <String id="2998"> min</String>
+    <String id="2998">min</String>
     <String id="4514">Globale Fanart Suche (online)</String>
     <String id="5910">Lade Filminformationen (online)</String>
     <String id="6022">Film Datenbank Auswahl</String>
@@ -82,7 +82,7 @@
     <String id="1079878">Wollen Sie diese Auswahl treffen ?</String>
     <String id="1079879">Infos zu beteiligten Personen</String>
     <String id="1079880">Umschalten 'Immer Standardansicht zeigen ({0})'</String>
-    <String id="1079881">Bitte wählen sie den globalen Wert f�r die Minimalbewertung</String>
+    <String id="1079881">Bitte wählen sie den globalen Wert f�r die Minimalbewertung</String>
     <String id="1079882">Update der aktuellen Person (IMDB)</String>
     <String id="1079883">Update aller beteiligten Personen (IMDB)</String>
     <String id="1079884">Weitere Infos zur Person</String>
@@ -123,6 +123,8 @@
     <String id="10798643">Wähle Eigenschaft für Aktualisierung</String>
     <String id="10798644">Falsches Eingabeformat - Versuchen Sie es erneut!</String>
     <String id="10798645">Globale Suche (nach Bereichen)</String>
+    <String id="10798648">Quellpfad Film</String>
+    <String id="10798649">Quellpfad Trailer</String>
     <String id="10798650">Datensatz ID</String>
     <String id="10798651">Checked Status</String>
     <String id="10798652">Medienbezeichnung</String>
@@ -165,6 +167,8 @@
     <String id="10798694">Suche Trailer - alle Filme (lokal)</String>
     <String id="10798695">Trailersuche beendet !</String>
     <String id="10798696">Globaler Filter "Nur ungesehene Filme" ({0})</String>
+    <String id="10798697">Bildverhältnis</String>
+    <String id="10798698">Bildformat</String>
     <String id="10798710">Spiele Trailer</String>
     <String id="10798719">Lade Filminformationen (nfo-Datei, lokal, ergänze fehlende Infos)</String>
     <String id="10798720">Lade Filminformationen (nfo-Datei, lokal, alle Infos überschreiben)</String>
@@ -177,5 +181,10 @@
     <String id="10798727">Zeige Film-Server Status</String>
     <String id="10798728">Erzeuge Cover vom Film</String>
     <String id="10798731">Personen Infos (IMDB)</String>
+    <String id="10798751">Übersicht und Filmstart</String>
+    <String id="10798752">Beschreibung</String>
+    <String id="10798753">Kommentar</String>
+    <String id="10798754">Mitwirkende Personen</String>
+    <String id="10798755">Technische Infos</String>
   </Section>
 </Language>
