@@ -2245,12 +2245,12 @@ namespace MesFilms
         public static void Load_Detailed_DB(int ItemId, bool wrep)
         {
      
-            string wstrformat = " ";
+            string wstrformat = "";
             AntMovieCatalog ds = new AntMovieCatalog();
             
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-                string wstring = " ";
+                string wstring = "";
                 //Log.Debug("MyFilms: PropertyManager: Set Properties for DB Column '" + dc.ColumnName + "' - '" + BaseMesFilms.Translate_Column(dc.ColumnName) + "'");
 
                 if (MesFilms.r[ItemId][dc.ColumnName] != null)
@@ -4149,7 +4149,7 @@ namespace MesFilms
         public static void setGUIProperty(string name, string value)
         {
             string property = "#myfilms." + name;
-            Log.Debug("MyFilms: setGuiProperty [{0}]: {1}", property, value);
+            Log.Debug("MyFilms: setGuiProperty [{0}]: '{1}'", property, value);
             GUIPropertyManager.SetProperty(property, value);
         }
 
@@ -4160,7 +4160,7 @@ namespace MesFilms
 
         public static void clearGUIProperty(string name)
         {
-            setGUIProperty(name, " "); // String.Empty doesn't work on non-initialized fields, as a result they would display as ugly #myfilms.bla.bla
+            setGUIProperty(name, ""); // String.Empty doesn't work on non-initialized fields, as a result they would display as ugly #myfilms.bla.bla - but "" seems now be possible and works better with conditional visibility checks, e.g. !strings.equals(#myfilms.xxx.value)
         }
 
     }
