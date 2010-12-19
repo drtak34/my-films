@@ -276,6 +276,10 @@ namespace MesFilms
             InitialStart = true;
 
             //Add localized labels for DB Columns
+            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            {
+                MesFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "My Films"));
+            }
             AntMovieCatalog ds = new AntMovieCatalog();
             foreach (DataColumn dc in ds.Movie.Columns)
             {

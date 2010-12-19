@@ -162,6 +162,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="MyFilms\VideoThumbCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyFilms\AntMovieCatalog.resx">

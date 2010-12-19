@@ -215,6 +215,67 @@ namespace MesFilms
                 return;
             }
 
+
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PAGE_UP)
+            {
+                if (MesFilms.conf.StrIndex == 0)
+                    return;
+                MesFilms.conf.StrIndex = MesFilms.conf.StrIndex - 1;
+                //GUITextureManager.CleanupThumbs();
+                afficher_detail(true);
+                return;
+            }
+
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PAGE_DOWN)
+            {
+                if (MesFilms.conf.StrIndex == StrMax - 1)
+                    return;
+                MesFilms.conf.StrIndex = MesFilms.conf.StrIndex + 1;
+                //GUITextureManager.CleanupThumbs();
+                afficher_detail(true);
+                return;
+            }
+
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREV_ITEM)
+            {
+                if (MesFilms.conf.StrIndex == 0)
+                    return;
+                MesFilms.conf.StrIndex = MesFilms.conf.StrIndex - 1;
+                //GUITextureManager.CleanupThumbs();
+                afficher_detail(true);
+                return;
+            }
+
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_NEXT_ITEM)
+            {
+                if (MesFilms.conf.StrIndex == StrMax - 1)
+                    return;
+                MesFilms.conf.StrIndex = MesFilms.conf.StrIndex + 1;
+                //GUITextureManager.CleanupThumbs();
+                afficher_detail(true);
+                return;
+            }
+
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_REWIND)
+            {
+                if (MesFilms.conf.StrIndex == 0)
+                    return;
+                MesFilms.conf.StrIndex = MesFilms.conf.StrIndex - 1;
+                //GUITextureManager.CleanupThumbs();
+                afficher_detail(true);
+                return;
+            }
+
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_FORWARD)
+            {
+                if (MesFilms.conf.StrIndex == StrMax - 1)
+                    return;
+                MesFilms.conf.StrIndex = MesFilms.conf.StrIndex + 1;
+                //GUITextureManager.CleanupThumbs();
+                afficher_detail(true);
+                return;
+            }
+
             base.OnAction(actionType);
             return;
         }
