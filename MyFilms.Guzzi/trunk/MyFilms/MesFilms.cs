@@ -81,6 +81,7 @@ namespace MesFilms
             //CTRL_MovieInfoIsAvailable = 3001,
             //CTRL_MovieIsAvailable = 3002,
             //CTRL_TrailerIsAvailable = 3003,
+            CTRL_GuiWaitCursor = 3004,
         }
         //[SkinControlAttribute((int)Controls.CTRL_TxtSelect)]
         //protected GUIFadeLabel TxtSelect = null;
@@ -123,7 +124,7 @@ namespace MesFilms
         //[SkinControlAttribute((int)Controls.CTRL_TrailerIsAvailable)]
         //protected GUIImage TrailerIsAvailable = null;
 
-        [SkinControlAttribute(2080)]
+        [SkinControlAttribute((int)Controls.CTRL_GuiWaitCursor)]
         protected GUIAnimation m_SearchAnimation = null;
 
         public int Layout = 0;
@@ -2060,8 +2061,8 @@ namespace MesFilms
             }
             MesFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
  
-            MesFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
-            GUIWaitCursor.Hide();
+            //MesFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+            //GUIWaitCursor.Hide();
             GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
 
         }
@@ -2382,6 +2383,7 @@ namespace MesFilms
                             Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
                         Configuration.CurrentConfig = newConfig;
                         InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
+                        MesFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
                         Load_Config(newConfig, true);
                         if (InitialStart)
                             Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
@@ -2394,6 +2396,7 @@ namespace MesFilms
                             backdrop.Active = true;
                         else
                             backdrop.Active = false;
+                        MesFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                     }
 
                     break;
@@ -2404,9 +2407,7 @@ namespace MesFilms
                     WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
                     int intTimeOut = conf.StrWOLtimeout; //Timeout für WOL
 
-                    //GUIControl.ShowControl(GetID, 34);
-                    GUIWaitCursor.Show();
-                    GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
+                    //GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
 
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     //if (dlg == null) return;
@@ -2443,9 +2444,6 @@ namespace MesFilms
                         choiceSearch.Add("NAS3");
                     }
 
-                    //GUIControl.ShowControl(GetID, 34);
-                    GUIWaitCursor.Hide();
-                   
                     dlg.DoModal(GetID);
                     if (dlg.SelectedLabel == -1)
                         return;
@@ -5126,7 +5124,7 @@ namespace MesFilms
 
             // Disable Fanart                
             if (backdrop.Active) backdrop.Active = false;
-            backdrop.Filename = "";
+            backdrop.Filename = String.Empty;
             Log.Debug("MyFilms (DisableFanart): Fanart disabled !");
         }
 

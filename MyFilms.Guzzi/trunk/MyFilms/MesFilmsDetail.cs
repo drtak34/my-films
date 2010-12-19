@@ -2615,7 +2615,7 @@ namespace MesFilms
                     dlgYesNo.SetLine(2, "' disc n° = " + MesFilms.r[select_item]["Number"].ToString());//ANT Number for Identification Media 
                 dlgYesNo.DoModal(GetID);
                 if (dlgYesNo.IsConfirmed)
-                    Launch_Movie(select_item, GetID,m_SearchAnimation);
+                    Launch_Movie(select_item, GetID, m_SearchAnimation);
                 //}
                 else
                 {
