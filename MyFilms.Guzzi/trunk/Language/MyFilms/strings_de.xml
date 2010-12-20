@@ -169,9 +169,13 @@
     <String id="10798696">Globaler Filter "Nur ungesehene Filme" ({0})</String>
     <String id="10798697">Bildverhältnis</String>
     <String id="10798698">Bildformat</String>
+    <String id="10798701">Update Menü</String>
+    <String id="10798702">Lokale Updates ...</String>
+    <String id="10798703">Online Updates ...</String>
     <String id="10798710">Spiele Trailer</String>
-    <String id="10798719">Lade Filminformationen (nfo-Datei, lokal, ergänze fehlende Infos)</String>
-    <String id="10798720">Lade Filminformationen (nfo-Datei, lokal, alle Infos überschreiben)</String>
+    <String id="10798711">YouTube Trailer (OnlineVideos)</String>
+    <String id="10798719">Lade Filminformationen (nfo, ergänze fehlende Infos)</String>
+    <String id="10798720">Lade Filminformationen (nfo, alle Infos überschreiben)</String>
     <String id="10798721">Lade Filminformationen aus ant-Datei (lokal)</String>
     <String id="10798722">Speichere Filminformationen in ant-Datei (lokal)</String>
     <String id="10798723">Suche Trailer (lokal)</String>

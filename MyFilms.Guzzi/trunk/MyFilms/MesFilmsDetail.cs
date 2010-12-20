@@ -205,12 +205,12 @@ namespace MesFilms
                 if (BtnMaj.Focus)
                 {
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
-                    Update_XML_Items();
+                    Update_XML_Items(); // Call Update Menu
                 }
                 else
                 {
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
-                    Update_XML_Items();
+                    Update_XML_Items(); // Call Update Menu
                 }
                 return;
             }
@@ -491,12 +491,22 @@ namespace MesFilms
         }
         
         //--------------------------------------------------------------------------------------------
-        //  Update specifics Infos
+        //  Update specifics Infos - creates Dialogue to choose actions...
+        //  choice: sets dialogmode depending from where it's called to display differently
+        //  possible modes: "localupdates", "internetupdates", etc.
         //--------------------------------------------------------------------------------------------
         private void Update_XML_Items()
         {
-            GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-            if (dlg == null) return;
+            Change_Menu("mainmenu");
+        }
+
+
+        //--------------------------------------------------------------------------------------------
+        //   Change Menu (and process corresponding actions)
+        //--------------------------------------------------------------------------------------------
+        private void Change_Menu(string choiceView)
+        {
+            
             string StrUpdItem1 = null;
             string StrUpdText1 = null;
             string StrUpdDflT1 = null;
@@ -505,8 +515,8 @@ namespace MesFilms
             string StrUpdDflT2 = null;
             int ItemID;
 
-            dlg.Reset();
-            XmlConfig XmlConfig = new XmlConfig();    
+            // Read Info from MyFilms Configfile
+            XmlConfig XmlConfig = new XmlConfig();
             StrUpdItem1 = XmlConfig.ReadXmlConfig("MyFilms", Configuration.CurrentConfig, "AntUpdItem1", "");
             StrUpdText1 = XmlConfig.ReadXmlConfig("MyFilms", Configuration.CurrentConfig, "AntUpdText1", "");
             StrUpdDflT1 = XmlConfig.ReadXmlConfig("MyFilms", Configuration.CurrentConfig, "AntUpdDflT1", "");
@@ -514,115 +524,85 @@ namespace MesFilms
             StrUpdText2 = XmlConfig.ReadXmlConfig("MyFilms", Configuration.CurrentConfig, "AntUpdText2", "");
             StrUpdDflT2 = XmlConfig.ReadXmlConfig("MyFilms", Configuration.CurrentConfig, "AntUpdDflT2", "");
 
-            string[] upd_choice = new string[20];
-            int ichoice = 0;
-            dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
-            dlg.Add(GUILocalizeStrings.Get(931));//rating
-            upd_choice[ichoice] = "rating";
-            ichoice++;
-            if (!(MesFilms.conf.StrStorage.Length == 0) && !(MesFilms.conf.StrStorage == "(none)") && (MesFilms.conf.WindowsFileDialog))
-            {
-                dlg.Add(GUILocalizeStrings.Get(863));//file
-                upd_choice[ichoice] = "file";
-                ichoice++;
-            }
-            if (!(StrUpdItem1 == "(none)"))
-            {
-                upd_choice[ichoice] = "item1";
-                ichoice++;
-                if (StrUpdText1.Length > 0)
-                    dlg.Add(StrUpdText1);        //Specific Item1 label to update
-                else
-                    dlg.Add(StrUpdItem1);        //Specific Item1 to update
-            }
-            if (!(StrUpdItem2 == "(none)"))
-            {
-                upd_choice[ichoice] = "item2";
-                ichoice++;
-                if (StrUpdText2.Length > 0)
-                    dlg.Add(StrUpdText2);        //Specific Item2 label to update
-                else
-                    dlg.Add(StrUpdItem2);        //Specific Item2 to update
-            }
-            if (MesFilms.conf.StrSuppress)
-            {
-                dlg.Add(GUILocalizeStrings.Get(432));
-                upd_choice[ichoice] = "delete";
-                ichoice++;
-            }
-            if (MesFilms.conf.StrGrabber)
-            {
-                dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-                upd_choice[ichoice] = "grabber";
-                ichoice++;
-            }
-            dlg.Add(GUILocalizeStrings.Get(10798719));             //Update missing Moviedetails from nfo-file - also download actor thumbs, Fanart, etc. if available
-            upd_choice[ichoice] = "nfo-reader-update";
-            ichoice++;
+            AntMovieCatalog ds = new AntMovieCatalog();
+            ItemID = (int)MesFilms.r[MesFilms.conf.StrIndex]["Number"]; //set unique id num (ant allows it to be non-unique but that is a bad idea)
+            //May wish to completely re-load the dataset before updating any fields if used in multi-user system, but would req concurrency locks etc so...
 
-            dlg.Add(GUILocalizeStrings.Get(10798720));             //Overwrite all Moviedetails in DB-set from nfo-file - also download actor thumbs, Fanart, etc. if available
-            upd_choice[ichoice] = "nfo-reader-overwrite";
-            ichoice++;
+            GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
 
-//            dlg.Add(GUILocalizeStrings.Get(10798721));             //Update Moviedetails from ant.info file
-//            upd_choice[ichoice] = "ant-nfo-reader";
-//            ichoice++;
+            GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            System.Collections.Generic.List<string> choiceViewMenu = new System.Collections.Generic.List<string>();
 
-//            dlg.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
-//            upd_choice[ichoice] = "ant-nfo-writer";
-//            ichoice++;
-
-            dlg.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
-            upd_choice[ichoice] = "trailer";
-            ichoice++;
-
-//            dlg.Add(GUILocalizeStrings.Get(10798726));             //Search local Trailer for all movies and Update DB (local) -> Moved to Main Screen !!!
-//            upd_choice[ichoice] = "trailer-all";
-//            ichoice++;
-
-            //            dlg.Add(GUILocalizeStrings.Get(10798724));             //load IMDB Trailer, store locally and update DB
-//            upd_choice[ichoice] = "trailer-imdb";
-//            ichoice++;
-
-            dlg.Add(GUILocalizeStrings.Get(10798728));             //Create Thumb from movie - if no cover available, e.g. with documentaries
-            upd_choice[ichoice] = "cover-thumbnailer";
-            ichoice++;
-
-            dlg.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
-            upd_choice[ichoice] = "trailer-delete";
-            ichoice++;
-
-            if (MesFilms.conf.StrFanart)            // Download Fanart
-            {
-                dlg.Add(GUILocalizeStrings.Get(1079862));
-                upd_choice[ichoice] = "fanart";
-                ichoice++;
-            }
-            if (MesFilms.conf.StrFanart)            // Remove Fanart
-            {
-                dlg.Add(GUILocalizeStrings.Get(1079874));
-                upd_choice[ichoice] = "deletefanart";
-                ichoice++;
-            }
-            if (MesFilms.conf.StrUpdList[0].Length > 0)
-            {
-                dlg.Add(GUILocalizeStrings.Get(10798642));  // Update by Property (choosen within the UPdate List Property
-                upd_choice[ichoice] = "updproperty";
-                ichoice++;
-            }
-            dlg.DoModal(GetID);
-            if (dlg.SelectedLabel == -1) return;
             VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
             if (null == keyboard) return;
             keyboard.Reset();
 
-            AntMovieCatalog ds = new AntMovieCatalog();
-            ItemID = (int)MesFilms.r[MesFilms.conf.StrIndex]["Number"]; //set unique id num (ant allows it to be non-unique but that is a bad idea)
-            //May wish to completely re-load the dataset before updating any fields if used in multi-user system, but would req concurrency locks etc so...
-            GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-            GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-            switch (upd_choice[dlg.SelectedLabel])
+            switch (choiceView)
             {
+                case "mainmenu":
+                
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798701)); // update menu
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798710));//play trailer
+                    choiceViewMenu.Add("playtrailer");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798711));//search youtube trailer with onlinevideos
+                    choiceViewMenu.Add("playtraileronlinevideos");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(931));//rating
+                    choiceViewMenu.Add("rating");
+
+                    if (MesFilms.conf.StrSuppress)
+                    {
+                        dlgmenu.Add(GUILocalizeStrings.Get(432));
+                        choiceViewMenu.Add("delete");
+                    }
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798702)); // local updates ...
+                    choiceViewMenu.Add("localupdates");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798703)); // online updates ...
+                    choiceViewMenu.Add("onlineupdates");
+
+                    //dlgmenu.Add("Trailer ...");
+                    //choiceViewMenu.Add("trailermenu");
+
+                    //dlgmenu.Add("Fanart ...");
+                    //choiceViewMenu.Add("fanartmenu");
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                    {
+                        return;
+                    }
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    return;
+                    //break;
+                
+                case "playtrailer":
+                    Launch_Movie_Trailer(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                    return;
+                    //break;
+
+                case "playtraileronlinevideos":
+                    //Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ...
+                    // OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
+                    string OVstartparams = string.Empty;
+                    string OVtitle = string.Empty;
+                    if (MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] != null && MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+                        OVtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                    if (OVtitle.IndexOf(MesFilms.conf.TitleDelim) > 0)
+                        OVtitle = OVtitle.Substring(OVtitle.IndexOf(MesFilms.conf.TitleDelim) + 1);
+                    OVstartparams = "site:Youtube|category:|search:" + OVtitle + " " + (MesFilms.r[MesFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                    setGUIProperty("Onlinevideos.startparams", OVstartparams);
+                    GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
+                    setGUIProperty("Onlinevideos.startparams", "");
+                    return;
+                //break;
+
                 case "rating":
                     MesFilmsDialogSetRating dlgRating = (MesFilmsDialogSetRating)GUIWindowManager.GetWindow(7988);
                     if (MesFilms.r[MesFilms.conf.StrIndex]["Rating"].ToString().Length > 0)
@@ -635,6 +615,107 @@ namespace MesFilms
                     Update_XML_database();
                     afficher_detail(true);
                     break;
+
+                case "localupdates":
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    choiceViewMenu.Clear();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798702)); // Local Updates ...
+
+                    if (MesFilms.conf.StrUpdList[0].Length > 0)
+                    {
+                        dlgmenu.Add(GUILocalizeStrings.Get(10798642));  // Update by Property (choosen within the UPdate List Property
+                        choiceViewMenu.Add("updproperty");
+                    }
+
+                    if (!(MesFilms.conf.StrStorage.Length == 0) && !(MesFilms.conf.StrStorage == "(none)") && (MesFilms.conf.WindowsFileDialog))
+                    {
+                        dlgmenu.Add(GUILocalizeStrings.Get(863));//file
+                        choiceViewMenu.Add("updatedb");
+                    }
+
+                    // No more needed because of updproperties !!!
+                    //if (!(StrUpdItem1 == "(none)"))
+                    //    {
+                    //    if (StrUpdText1.Length > 0)
+                    //        dlgmenu.Add(StrUpdText1);        //Specific Item1 label to update
+                    //    else
+                    //        dlgmenu.Add(StrUpdItem1);        //Specific Item1 to update
+                    //    choiceViewMenu.Add("item1");
+                    //    }
+                    //if (!(StrUpdItem2 == "(none)"))
+                    //{
+                    //    if (StrUpdText2.Length > 0)
+                    //        dlgmenu.Add(StrUpdText2);        //Specific Item2 label to update
+                    //    else
+                    //        dlgmenu.Add(StrUpdItem2);        //Specific Item2 to update
+                    //    choiceViewMenu.Add("item2");
+                    //}
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798719));             //Update missing Moviedetails from nfo-file - also download actor thumbs, Fanart, etc. if available
+                    choiceViewMenu.Add("nfo-reader-update");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798720));             //Overwrite all Moviedetails in DB-set from nfo-file - also download actor thumbs, Fanart, etc. if available
+                    choiceViewMenu.Add("nfo-reader-overwrite");
+
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798721));             //Update Moviedetails from ant.info file
+                    //choiceViewMenu.Add("ant-nfo-reader");
+
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
+                    //choiceViewMenu.Add("ant-nfo-writer");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
+                    choiceViewMenu.Add("trailer-register");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
+                    choiceViewMenu.Add("trailer-delete");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798728));             //Create Thumb from movie - if no cover available, e.g. with documentaries
+                    choiceViewMenu.Add("cover-thumbnailer");
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                        Change_Menu("mainmenu");
+
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    break;
+
+                case "onlineupdates":
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    choiceViewMenu.Clear();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Online Updates ...
+
+                    if (MesFilms.conf.StrGrabber)
+                    {
+                        dlgmenu.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
+                        choiceViewMenu.Add("grabber");
+                    }
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798724));             //load IMDB Trailer, store locally and update DB
+                    choiceViewMenu.Add("trailer-imdb");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
+                    choiceViewMenu.Add("trailer-delete");
+
+                    if (MesFilms.conf.StrFanart)            // Download Fanart
+                    {
+                        dlgmenu.Add(GUILocalizeStrings.Get(1079862));
+                        choiceViewMenu.Add("fanart");
+                    }
+                    if (MesFilms.conf.StrFanart)            // Remove Fanart
+                    {
+                        dlgmenu.Add(GUILocalizeStrings.Get(1079874));
+                        choiceViewMenu.Add("deletefanart");
+                    }
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                        Change_Menu("mainmenu");
+
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    break;
+
                 case "file":
                     string wfile = string.Empty;
                     if (MesFilms.conf.WindowsFileDialog)
@@ -665,9 +746,9 @@ namespace MesFilms
                                 try { MesFilms.r[MesFilms.conf.StrIndex][StrUpdItem1] = Convert.ToDecimal(keyboard.Text); }
                                 catch
                                 {
-                                    dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                                    dlg1.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
-                                    dlg1.DoModal(GetID);
+                                    dlgOK.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                                    dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
+                                    dlgOK.DoModal(GetID);
                                     return;
                                 }
                                 break;
@@ -675,9 +756,9 @@ namespace MesFilms
                                 try { MesFilms.r[MesFilms.conf.StrIndex][StrUpdItem1] = Convert.ToInt32(keyboard.Text); }
                                 catch
                                 {
-                                    dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                                    dlg1.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
-                                    dlg1.DoModal(GetID);
+                                    dlgOK.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                                    dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
+                                    dlgOK.DoModal(GetID);
                                     return;
                                 }
                                 break;
@@ -705,9 +786,9 @@ namespace MesFilms
                                 try { MesFilms.r[MesFilms.conf.StrIndex][StrUpdItem2] = Convert.ToDecimal(keyboard.Text); }
                                 catch
                                 {
-                                    dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                                    dlg1.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
-                                    dlg1.DoModal(GetID);
+                                    dlgOK.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                                    dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
+                                    dlgOK.DoModal(GetID);
                                     return;
                                 }
                                 break;
@@ -715,9 +796,9 @@ namespace MesFilms
                                 try { MesFilms.r[MesFilms.conf.StrIndex][StrUpdItem2] = Convert.ToInt32(keyboard.Text); }
                                 catch
                                 {
-                                    dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                                    dlg1.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
-                                    dlg1.DoModal(GetID);
+                                    dlgOK.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                                    dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
+                                    dlgOK.DoModal(GetID);
                                     return;
                                 }
                                 break;
@@ -738,7 +819,7 @@ namespace MesFilms
                         if (dlgYesNo.IsConfirmed)
                         {
                             MesFilmsDetail.Suppress_Entry((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
- //                           Update_XML_database();
+                            //                           Update_XML_database();
                             MesFilms.r = BaseMesFilms.LectureDonnées(MesFilms.conf.StrDfltSelect, MesFilms.conf.StrFilmSelect, MesFilms.conf.StrSorta, MesFilms.conf.StrSortSens);
                             afficher_detail(true);
 
@@ -748,19 +829,19 @@ namespace MesFilms
                 case "updproperty":
                     System.Collections.Generic.List<string> choiceUpd = new System.Collections.Generic.List<string>();
                     ArrayList w_tableau = new ArrayList();
-                    if (dlg == null) return;
-                    dlg.Reset();
-                    dlg.SetHeading(GUILocalizeStrings.Get(10798643)); // menu
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798643)); // menu
                     foreach (string wupd in MesFilms.conf.StrUpdList)
                     {
-                        dlg.Add(GUILocalizeStrings.Get(184) + " '" + BaseMesFilms.Translate_Column(wupd) + "'");
+                        dlgmenu.Add(GUILocalizeStrings.Get(184) + " '" + BaseMesFilms.Translate_Column(wupd) + "'");
                         choiceUpd.Add(wupd);
                     }
-                    dlg.DoModal(GetID);
-                    if (dlg.SelectedLabel == -1)
-                        return;
-                    string wproperty = choiceUpd[dlg.SelectedLabel];
-                    dlg.Reset();
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                        Change_Menu("mainmenu"); // go back to main contextmenu
+                    string wproperty = choiceUpd[dlgmenu.SelectedLabel];
+                    dlgmenu.Reset();
                     keyboard.Reset();
                     keyboard.Text = MesFilms.r[MesFilms.conf.StrIndex][wproperty].ToString();
                     keyboard.DoModal(GetID);
@@ -772,9 +853,9 @@ namespace MesFilms
                                 try { MesFilms.r[MesFilms.conf.StrIndex][wproperty] = Convert.ToDecimal(keyboard.Text); }
                                 catch
                                 {
-                                    dlg1.SetHeading(GUILocalizeStrings.Get(10798642)); // menu
-                                    dlg1.SetLine(1,GUILocalizeStrings.Get(10798644)); // wrong input
-                                    dlg1.DoModal(GetID);
+                                    dlgOK.SetHeading(GUILocalizeStrings.Get(10798642)); // menu
+                                    dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
+                                    dlgOK.DoModal(GetID);
                                     return;
                                 }
                                 break;
@@ -782,9 +863,9 @@ namespace MesFilms
                                 try { MesFilms.r[MesFilms.conf.StrIndex][wproperty] = Convert.ToInt32(keyboard.Text); }
                                 catch
                                 {
-                                    dlg1.SetHeading(GUILocalizeStrings.Get(10798642)); // menu
-                                    dlg1.SetLine(1,GUILocalizeStrings.Get(10798644)); // wrong input
-                                    dlg1.DoModal(GetID);
+                                    dlgOK.SetHeading(GUILocalizeStrings.Get(10798642)); // menu
+                                    dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
+                                    dlgOK.DoModal(GetID);
                                     return;
                                 }
                                 break;
@@ -829,7 +910,7 @@ namespace MesFilms
                         Grab_Nfo_Details((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex, false);
                         break;
                     }
-                
+
                 case "nfo-reader-overwrite":
                     {
                         Grab_Nfo_Details((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex, true);
@@ -837,12 +918,23 @@ namespace MesFilms
                     }
 
                 case "ant-nfo-reader":
+                    ShowMessageDialog("Info", "", "Action not yet implemented");
                     break;
 
                 case "ant-nfo-writer":
+                    ShowMessageDialog("Info", "", "Action not yet implemented");
                     break;
 
-                case "trailer":
+                case "trailer-imdb":
+                    ShowMessageDialog("Info", "", "Action not yet implemented");
+                    break;
+
+                case "cover-thumbnailer":
+                    CreateThumbFromMovie();
+                    ShowMessageDialog(GUILocalizeStrings.Get(107986), "", "Cover created from movie");
+                    break;
+
+                case "trailer-register":
                     {
                         setProcessAnimationStatus(true, m_SearchAnimation);
                         //Zuerst Pfad lesen, dann Dateien suchen, in liste packen, Auswahlmenü präsenteiren und zum Schluß Update des Records
@@ -876,39 +968,27 @@ namespace MesFilms
                         //if (dlg.SelectedLabel == -1) return;
                         break;
                     }
-                case "trailer-all": //To Be Deleted - Moved to Main Screen !!!!
-                    {
-                        setProcessAnimationStatus(true, m_SearchAnimation);
-                        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
-                        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
-                   //dsgsdgsgsg
-                        Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
-                        Log.Debug("MyFilms (SearchTrailerLocal) Parameter 1 - '(DataRow[])MesFilms.r': '" + (DataRow[])MesFilms.r);
-                        Log.Debug("MyFilms (SearchTrailerLocal) Parameter 2 - '(int)MesFilms.conf.StrIndex': '" + (int)MesFilms.conf.StrIndex);
-                        
-                        //MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
-                        afficher_detail(true);
-                        //GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-                        setProcessAnimationStatus(false, m_SearchAnimation);
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                        dlgOk.SetLine(1, "");
-                        dlgOk.SetLine(2, " Trailer in Datenbank aktualisiert !");
-                        dlgOk.DoModal(GetID);
-                        break;
-                    }
-                case "trailer-imdb":
-                    break;
+                //case "trailer-all": //To Be Deleted - Moved to Main Screen !!!!
+                //    {
+                //        setProcessAnimationStatus(true, m_SearchAnimation);
+                //        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
+                //        //Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
+                //   //dsgsdgsgsg
+                //        Log.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
+                //        Log.Debug("MyFilms (SearchTrailerLocal) Parameter 1 - '(DataRow[])MesFilms.r': '" + (DataRow[])MesFilms.r);
+                //        Log.Debug("MyFilms (SearchTrailerLocal) Parameter 2 - '(int)MesFilms.conf.StrIndex': '" + (int)MesFilms.conf.StrIndex);
 
-                case "cover-thumbnailer":
-
-                    CreateThumbFromMovie();
-                    
-                    dlg1.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                    dlg1.SetLine(2, "Cover created from movie");
-                    dlg1.DoModal(GetID);
-
-                    break;
+                //        //MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
+                //        afficher_detail(true);
+                //        //GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                //        setProcessAnimationStatus(false, m_SearchAnimation);
+                //        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                //        dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                //        dlgOk.SetLine(1, "");
+                //        dlgOk.SetLine(2, " Trailer in Datenbank aktualisiert !");
+                //        dlgOk.DoModal(GetID);
+                //        break;
+                //    }
 
                 case "trailer-delete":
                     dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
@@ -959,6 +1039,9 @@ namespace MesFilms
                     afficher_detail(true);
                     break;
 
+                default: // Main Contextmenu
+                    ShowMessageDialog("Info", "", "Action not yet implemented");
+                    return;
             }
         }
         //-------------------------------------------------------------------------------------------
@@ -4118,18 +4201,18 @@ namespace MesFilms
             }
         }
 
-        //private void ShowMessageDialog(string headline, string line1, string line2)
-        //{
-        //    GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-        //    if (dlgOK != null)
-        //    {
-        //        dlgOK.SetHeading(headline);
-        //        dlgOK.SetLine(1, line1);
-        //        dlgOK.SetLine(2, line2);
-        //        dlgOK.DoModal(GetID);
-        //        return;
-        //    }
-        //}
+        private void ShowMessageDialog(string headline, string line1, string line2)
+        {
+            GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            if (dlgOK != null)
+            {
+                dlgOK.SetHeading(headline);
+                dlgOK.SetLine(1, line1);
+                dlgOK.SetLine(2, line2);
+                dlgOK.DoModal(GetID);
+                return;
+            }
+        }
 
         //string getGUIProperty(guiProperty name)
         //{

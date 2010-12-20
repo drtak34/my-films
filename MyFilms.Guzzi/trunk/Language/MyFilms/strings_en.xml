@@ -169,9 +169,13 @@
     <String id="10798696">Global Filter "Only unwatched movies" ({0})</String>
     <String id="10798697">Aspectratio</String>
     <String id="10798698">Imageformat</String>
+    <String id="10798701">Update Menu</String>
+    <String id="10798702">Local Updates ...</String>
+    <String id="10798703">Online Updates ...</String>
     <String id="10798710">Play Trailer</String>
-    <String id="10798719">Load Moviesinfos (nfo-File, local, add missing infos)</String>
-    <String id="10798720">Load Moviesinfos (nfo-File, local, replace all infos)</String>
+    <String id="10798711">YouTube Trailer (OnlineVideos)</String>
+    <String id="10798719">Load Moviesinfos (nfo-File, add missing infos)</String>
+    <String id="10798720">Load Moviesinfos (nfo-File, replace all infos)</String>
     <String id="10798721">Load Moviesinfos from ant-file (local)</String>
     <String id="10798722">Store Moviesinfos in ant-file (local)</String>
     <String id="10798723">Search Trailer (local)</String>
