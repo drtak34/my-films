@@ -586,7 +586,7 @@ namespace MesFilms.Actors
             item.FreeMemory();
             MesFilms.conf.StrTxtSelect = "Selection";
             if (MesFilms.conf.Wstar != "*") MesFilms.conf.StrTxtSelect += " " + GUILocalizeStrings.Get(344) + " [*" + MesFilms.conf.Wstar + "*]";
-            GUIPropertyManager.SetProperty("#myfilms.select", MesFilms.conf.StrTxtSelect);
+            MesFilmsDetail.setGUIProperty("select", MesFilms.conf.StrTxtSelect);
             //            TxtSelect.Label = conf.StrTxtSelect;
             MesFilms.conf.StrSelect = WstrSelect;
             MesFilms.conf.StrFilmSelect = "";
@@ -608,7 +608,7 @@ namespace MesFilms.Actors
                 //ImgLstFilm2.SetFileName("#myfilms.picture");
                 //affichage_rating(0);
             }
-            GUIPropertyManager.SetProperty("#myfilms.nbobjects", facadeView.Count + " " + GUILocalizeStrings.Get(127));
+            MesFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count + " " + GUILocalizeStrings.Get(127));
             GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, MesFilms.conf.StrIndex);
 
         }

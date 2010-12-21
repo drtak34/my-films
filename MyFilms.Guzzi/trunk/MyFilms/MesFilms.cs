@@ -321,6 +321,7 @@ namespace MesFilms
             MesFilmsDetail.clearGUIProperty("Fanart");
             MesFilmsDetail.clearGUIProperty("Fanart2");
             //MesFilmsDetail.clearGUIProperty("config.currentconfig");
+            MesFilmsDetail.clearGUIProperty("view");
 
             Log.Debug("MyFilms.OnPageLoad() completed.");
         }
@@ -1203,6 +1204,7 @@ namespace MesFilms
                 GUIControl.HideControl(GetID, 34);
             }
             MesFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
+            GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
             GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)wfacadewiew);
             if (facadeView.Count == 1 && item.IsFolder)
             {
@@ -2069,6 +2071,7 @@ namespace MesFilms
                 affichage_rating(0);
             }
             MesFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
+            GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
  
             //MesFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
             //GUIWaitCursor.Hide();
@@ -2290,6 +2293,7 @@ namespace MesFilms
                     conf.Boolreturn = false;
                     Log.Debug("MyFilms (Guzzi): Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
                     GetFilmList();
+                    MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(342));// all videos
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "year":
@@ -2298,6 +2302,7 @@ namespace MesFilms
                     conf.WStrSortSens = " DESC";
                     BtnSrtBy.IsAscending = false;
                     getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+                    MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(345));//year
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "category":
@@ -2306,9 +2311,8 @@ namespace MesFilms
                     conf.WStrSortSens = " ASC";
                     BtnSrtBy.IsAscending = true;
                     getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+                    MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(135));//category
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
- //                   facadeView.Focus = true;
-                    
                     break;
                 case "country":
                 //  Change View by "Country":
@@ -2316,6 +2320,7 @@ namespace MesFilms
                     conf.WStrSortSens = " ASC";
                     BtnSrtBy.IsAscending = true;
                     getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
+                    MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(200026));//country
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); 
                     break;
 
@@ -2335,6 +2340,7 @@ namespace MesFilms
                     else
                         BtnSrtBy.IsAscending = false;
                     GetFilmList();
+                    MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "view0":
@@ -2390,6 +2396,12 @@ namespace MesFilms
                         else
                             getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
                     }
+
+                    if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
+                        MesFilmsDetail.setGUIProperty("view", conf.StrViewItem[i]);   // specific user View1
+                    else
+                        MesFilmsDetail.setGUIProperty("view", conf.StrViewText[i]);   // specific Text for View1
+
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
 
