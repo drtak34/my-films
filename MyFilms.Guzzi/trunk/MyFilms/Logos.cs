@@ -40,11 +40,34 @@ namespace MesFilms
             System.ComponentModel.BackgroundWorker bgLogos = new System.ComponentModel.BackgroundWorker();
             using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilmsLogos_" + Configuration.CurrentConfig + ".xml")))
             {
+
                 XmlConfig XmlConfig = new XmlConfig();
-                LogosPath = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", XmlConfig.PathInstalMP() + @"\thumbs\");
+
+                //if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Artist")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Artist");
+                //Config.GetSubFolder(Config.Dir.Skin, @"Media\Logos");
+                //MediaPortal.Configuration.Config.GetSubFolder(MediaPortal.Configuration.Config.Dir.Skin, @"Media\Logos");
+
+                // First check, if Config specific LogoConfig exists, if not create it from default file!
+                string wfile = XmlConfig.EntireFilenameConfig("MyFilmsLogos").Substring(0, XmlConfig.EntireFilenameConfig("MyFilmsLogos").LastIndexOf("."));
+                if (!System.IO.File.Exists(wfile + "_" + Configuration.CurrentConfig + ".xml"))
+                    try
+                    {
+                        System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsLogos"), wfile + "_" + Configuration.CurrentConfig + ".xml", false);
+                        wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + Configuration.CurrentConfig;
+                    }
+                    catch
+                    {
+                        Log.Debug("MyFilms: Error Creating Configspecific File from Default File!");
+                    }
+
+                //LogosPath = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", XmlConfig.PathInstalMP() + @"\thumbs\");
+                LogosPath = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos");
+                if (LogosPath.Length < 1)
+                    LogosPath = Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos";
                 if (LogosPath.LastIndexOf("\\") != LogosPath.Length - 1)
                     LogosPath = LogosPath + "\\";
                 Log.Debug("MyFilms: Logo path for storing picture created " + LogosPath.ToString());
+
                 int i = 0;
                 do
                 {
@@ -152,6 +175,10 @@ namespace MesFilms
             foreach (string wline in RulesLogos)
             {
                 string[] wtab = wline.Split(new Char[] { ';' });
+                // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
+                if (!System.IO.File.Exists(wtab[7]))
+                    wtab[7] = GUIGraphicsContext.Skin + @"\Media\Logos\" + wtab[7]; //wtab[7] = MediaPortal.Configuration.Config.GetSubFolder(MediaPortal.Configuration.Config.Dir.Skin, @"Media\Logos\") + wtab[7];
+
                 if (System.IO.File.Exists(wtab[7]) && System.IO.Path.GetDirectoryName(wtab[7]).Length > 0)
                 {
                     bool cond1 = get_record_rule(r, wtab[0], wtab[1], wtab[2]);
