@@ -2983,6 +2983,9 @@ namespace MesFilms
 
                 case "movieimdbinternet":
                     // ToDo: Launch IMDB-Internetpage via movie-tt-URL in Webbrowserplugin - check InfoPlugin how to implement ...
+                    var hasRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
+                    var hasRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
+                    if (hasRightPlugin && hasRightVersion)
                     {
                         //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
                         int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
@@ -3005,9 +3008,15 @@ namespace MesFilms
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                         GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                         GUIWindowManager.ActivateWindow(webBrowserWindowID, false); 
-                        break;
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", "");
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", "");
+                        }
+                    else
+                    {
+                        ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version resuired: 0");
                     }
-
+                    break;
+                    
                 case "moviepersonlist":
                     {
                         //To be modified to call new class with personlist by type and call MesFilmsActors with facade
