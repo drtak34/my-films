@@ -495,7 +495,12 @@ namespace MesFilms
                     }
                     //ImgFanart.SetFileName(string.Empty);
                     //ImgFanart2.SetFileName(string.Empty);
-                    facadeView.Resources.Clear(); // ToDo: Don't forget to change to facadeView.ClearResources(); for 1.2 !!!
+
+#if MP11
+                    facadeView.Resources.Clear();
+#else
+                    facadeView.Clear();
+#endif
                     facadeView.Clear();
                     //backdrop.PropertyOne = " ";
                     // added from MoPic
@@ -1298,7 +1303,7 @@ namespace MesFilms
                         if (!cover.Active)
                             cover.Active = true;
                         GUIControl.HideControl(GetID, 35);
-                        Log.Debug("MyFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "', ' - ControlID35: '" + GUIControl.IsVisibleProperty.ToString()  + "'");    
+                        Log.Debug("MyFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "'");    
                     }
                 else
                     {
@@ -1307,7 +1312,7 @@ namespace MesFilms
                         if (!cover.Active)
                             cover.Active = true;
                         GUIControl.ShowControl(GetID, 35);
-                        Log.Debug("MyFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "', ' - ControlID35: '" + GUIControl.IsVisibleProperty.ToString() + "'");
+                        Log.Debug("MyFilm (affichage_Lstdetail): Fanart-Status: '" + backdrop.Active + "'");
                     }
                 Log.Debug("MyFilm (affichage_Lstdetail): Backdrops-File: backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 backdrop.Filename = wfanart[0];
@@ -2217,6 +2222,8 @@ namespace MesFilms
         //--------------------------------------------------------------------------------------------
         private void Change_LayOut(int wLayOut)
         {
+
+#if MP11
             switch (wLayOut)
             {
                 case 1:
@@ -2231,28 +2238,39 @@ namespace MesFilms
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
                     facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
                     break;
-
-                case 4:
-                    try
-                    {
-                        GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
-                        facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
-                        // To be changed when Coverflow is available in CORE Files ....
-                        //facadeView.View = GUIFacadeControl.ViewMode.CoverFlow;
-                        break;
-                    }
-                    catch 
-                    {
-                        GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
-                        facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
-                        break;
-                    };
-
                 default:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
                     facadeView.View = GUIFacadeControl.ViewMode.List;
                     break;
             }
+#else
+            switch (wLayOut)
+            {
+                case 1:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
+                    break;
+                case 2:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+                    break;
+                case 3:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+                    break;
+                case 4:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
+                    break;
+
+                default:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
+                    break;
+            }
+
+
+#endif
         }
         //--------------------------------------------------------------------------------------------
         //   Change View Response  (and process corresponding filter list)

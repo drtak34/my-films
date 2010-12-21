@@ -618,6 +618,7 @@ namespace MesFilms.Actors
         //--------------------------------------------------------------------------------------------
         private void Change_LayOut(int wLayOut)
         {
+#if MP11
             switch (wLayOut)
             {
                 case 1:
@@ -627,22 +628,43 @@ namespace MesFilms.Actors
                 case 2:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
                     facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
+
                     break;
                 case 3:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
                     facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
-                    break;
-                case 4:
-                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
-                    facadeView.View = GUIFacadeControl.ViewMode.Filmstrip;
-                    // To be changed when Coverflow is available in CORE Files ....
-                    //facadeView.View = GUIFacadeControl.ViewMode.CoverFlow;
                     break;
                 default:
                     GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
                     facadeView.View = GUIFacadeControl.ViewMode.List;
                     break;
             }
+#else
+            switch (wLayOut)
+            {
+                case 1:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(100));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
+                    break;
+                case 2:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(417));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+                    break;
+                case 3:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(733));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+                    break;
+                case 4:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
+                    break;
+                default:
+                    GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(101));
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
+                    break;
+            }
+
+#endif
         }
 
         private void item_OnItemSelected(GUIListItem item, GUIControl parent)

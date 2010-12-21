@@ -228,6 +228,7 @@ namespace MesFilms.ActorDialog
                 {
                     shouldContinue = false;
                     switch (currentView)
+#if MP11
                     {
                         case View.List:
                             currentView = View.Icons;
@@ -253,6 +254,35 @@ namespace MesFilms.ActorDialog
                                 facadeView.View = GUIFacadeControl.ViewMode.List;
                             break;
                     }
+#else
+                    {
+                        case View.List:
+                            currentView = View.Icons;
+                            if (facadeView.ThumbnailLayout == null)
+                                shouldContinue = true;
+                            else
+                                facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
+                            break;
+
+                        case View.Icons:
+                            currentView = View.LargeIcons;
+                            if (facadeView.ThumbnailLayout == null)
+                                shouldContinue = true;
+                            else
+                                facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+                            break;
+
+                        case View.LargeIcons:
+                            currentView = View.List;
+                            if (facadeView.ListLayout == null)
+                                shouldContinue = true;
+                            else
+                                facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
+                            break;
+                    }
+
+
+#endif
                 } while (shouldContinue);
                 
                 SelectCurrentItem();
@@ -498,6 +528,7 @@ namespace MesFilms.ActorDialog
         void SwitchView()
         {
             switch (currentView)
+#if MP11
             {
                 case View.List:
                     facadeView.View = GUIFacadeControl.ViewMode.List;
@@ -509,6 +540,19 @@ namespace MesFilms.ActorDialog
                     facadeView.View = GUIFacadeControl.ViewMode.LargeIcons;
                     break;
             }
+#else
+            {
+                case View.List:
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
+                    break;
+                case View.Icons:
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.SmallIcons;
+                    break;
+                case View.LargeIcons:
+                    facadeView.CurrentLayout = GUIFacadeControl.Layout.LargeIcons;
+                    break;
+            }
+#endif
 
             UpdateButtonStates(); // Ensure "View: xxxx" button label is updated to suit
         }
