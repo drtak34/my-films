@@ -588,18 +588,38 @@ namespace MesFilms
                     //break;
 
                 case "playtraileronlinevideos":
-                    //Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ...
+                    // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ...
                     // OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
-                    string OVstartparams = string.Empty;
-                    string OVtitle = string.Empty;
-                    if (MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] != null && MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-                        OVtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-                    if (OVtitle.IndexOf(MesFilms.conf.TitleDelim) > 0)
-                        OVtitle = OVtitle.Substring(OVtitle.IndexOf(MesFilms.conf.TitleDelim) + 1);
-                    OVstartparams = "site:Youtube|category:|search:" + OVtitle + " " + (MesFilms.r[MesFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
-                    setGUIProperty("Onlinevideos.startparams", OVstartparams);
-                    GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
-                    setGUIProperty("Onlinevideos.startparams", "");
+                    // Check for Plugin and correct version - Version information for an assembly consists of the following four values: Major Version, Minor Version, Build Number, Revision
+                    var hasRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
+                    var hasRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
+                    //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
+                    if (hasRightPlugin && hasRightVersion)
+                    {
+                        string OVstartparams = string.Empty;
+                        string OVtitle = string.Empty;
+                        if (MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] != null && MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+                            OVtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                        if (OVtitle.IndexOf(MesFilms.conf.TitleDelim) > 0)
+                            OVtitle = OVtitle.Substring(OVtitle.IndexOf(MesFilms.conf.TitleDelim) + 1);
+                        OVstartparams = "site:Youtube|category:|search:" + OVtitle + " " + (MesFilms.r[MesFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                        //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "YouTube");
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", OVtitle.ToString());
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
+
+                        Log.Debug("MyFilms: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+                        GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
+                    }
+                    else
+                    {
+                        ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version resuired: 0.28");
+                    }
                     return;
                 //break;
 
@@ -1398,6 +1418,7 @@ namespace MesFilms
         //-------------------------------------------------------------------------------------------
         //  Grab XBMC (movie.nfo) kompatible Movie Details Informations and update the XML database and refresh screen
         // Last Parameter is set to overwrite all existing data - when set to false it only updates missing infos (important for batch import)
+        // bool overwrite: true owerwrites all existing infos - false updates only empty values
         //-------------------------------------------------------------------------------------------        
         public static void Grab_Nfo_Details(DataRow[] r1, int Index, bool overwrite)
         //public static void grabb_Nfo_Details(string url, string moviehead, string wscript)
