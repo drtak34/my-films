@@ -2044,9 +2044,9 @@ namespace MesFilms
             this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText2);
             this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem1);
             this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText1);
-            this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(391, 201);
+            this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(391, 170);
             this.groupBox_SupplementarySearch.Name = "groupBox_SupplementarySearch";
-            this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(347, 147);
+            this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(347, 178);
             this.groupBox_SupplementarySearch.TabIndex = 33;
             this.groupBox_SupplementarySearch.TabStop = false;
             this.groupBox_SupplementarySearch.Text = "Supplementary Search";
@@ -2054,7 +2054,7 @@ namespace MesFilms
             // 
             // AntSearchFieldReset
             // 
-            this.AntSearchFieldReset.Location = new System.Drawing.Point(287, 82);
+            this.AntSearchFieldReset.Location = new System.Drawing.Point(286, 113);
             this.AntSearchFieldReset.Name = "AntSearchFieldReset";
             this.AntSearchFieldReset.Size = new System.Drawing.Size(51, 23);
             this.AntSearchFieldReset.TabIndex = 85;
@@ -2066,7 +2066,7 @@ namespace MesFilms
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(9, 87);
+            this.label18.Location = new System.Drawing.Point(9, 118);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(152, 13);
             this.label18.TabIndex = 80;
@@ -2075,7 +2075,7 @@ namespace MesFilms
             // AntSearchList
             // 
             this.AntSearchList.BackColor = System.Drawing.SystemColors.Control;
-            this.AntSearchList.Location = new System.Drawing.Point(10, 111);
+            this.AntSearchList.Location = new System.Drawing.Point(9, 142);
             this.AntSearchList.Name = "AntSearchList";
             this.AntSearchList.Size = new System.Drawing.Size(328, 20);
             this.AntSearchList.TabIndex = 79;
@@ -2091,7 +2091,7 @@ namespace MesFilms
             // AntSearchField
             // 
             this.AntSearchField.FormattingEnabled = true;
-            this.AntSearchField.Location = new System.Drawing.Point(164, 84);
+            this.AntSearchField.Location = new System.Drawing.Point(163, 115);
             this.AntSearchField.Name = "AntSearchField";
             this.AntSearchField.Size = new System.Drawing.Size(113, 21);
             this.AntSearchField.TabIndex = 78;
