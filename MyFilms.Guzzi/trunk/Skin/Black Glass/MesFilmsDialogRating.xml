@@ -2,9 +2,10 @@
 <window>
 	<id>7988</id>
 	<defaultcontrol>10</defaultcontrol>
-	<allowoverlay>player.hasmedia+!facadeview.filmstrip</allowoverlay>
-	<animation effect="fade" time="250">WindowClose</animation>	
+	<allowoverlay>[facadeview.list|facadeview.smallicons|facadeview.largeicons|facadeview.album|facadeview.playlist]</allowoverlay>
 	<animation effect="fade" time="250">WindowOpen</animation>
+	<animation effect="fade" time="250">WindowClose</animation>
+
 	<controls>
 		<control>
 			<type>image</type>
@@ -45,7 +46,7 @@
 			<texture>bg_facade_line_nofocus.png</texture>
 			<colordiffuse>77ffffff</colordiffuse>
 		</control>
-		<!-- 		<control> 
+<!-- 		<control> 
 			<description>Rating label</description>
 			<type>label</type>
 			<id>3</id>
@@ -54,15 +55,15 @@
 			<label>204</label>
 			<font>font12</font>
 			<textcolor>ffffffff</textcolor>
-		</control> -->
-
+		</control>
+-->
 		<control>
 			<description>Rating value</description>
 			<type>label</type>
 			<id>4</id>
 			<posX>640</posX>
 			<posY>345</posY>
-			<label>#rating</label>
+			<label>#myfilms.rating</label>
 			<font>font16</font>
 			<align>center</align>
 			<colordiffuse>ffffffff</colordiffuse>
@@ -80,8 +81,8 @@
 			<textureNoFocus>arrow_round_right_nofocus.png</textureNoFocus>
 			<onleft>11</onleft>
 			<onright>10</onright>
-			<onup>13</onup>
-			<ondown>13</ondown>
+			<onup>12</onup>
+			<ondown>12</ondown>
 		</control>
 		<control>
 			<description>left button</description>
@@ -95,25 +96,24 @@
 			<textureNoFocus>arrow_round_left_nofocus.png</textureNoFocus>
 			<onleft>11</onleft>
 			<onright>10</onright>
-			<onup>13</onup>
-			<ondown>13</ondown>
+			<onup>12</onup>
+			<ondown>12</ondown>
 		</control>
-
 		<control>
 			<type>imagelist</type>
 			<id>100</id>
-			<posX>500</posX>
+			<posX>440</posX>
 			<posY>386</posY>
-			<width>320</width>
-			<height>42</height>
-			<textureWidth>30</textureWidth>
-			<textureHeight>30</textureHeight>
+			<width>520</width>
+			<height>72</height>
+			<textureWidth>60</textureWidth>
+			<textureHeight>60</textureHeight>
 			<subitems>
-				<subitem>star_nofocus.png</subitem>
-				<subitem>star_focus.png</subitem>
+				<subitem>UserRatingStarOff.png</subitem>
+				<subitem>stargood.png</subitem>
 			</subitems>
 			<orientation>horizontal</orientation>
-			<percentage>#rating</percentage>
+			<percentage>#myfilms.rating</percentage>
 			<imagesToDraw>10</imagesToDraw>
 			<animation effect="fade" time="250">WindowOpen</animation>
 			<animation effect="fade" time="250">WindowClose</animation>
@@ -143,10 +143,10 @@
 			<textXOff>0</textXOff>
 			<textYOff>3</textYOff>
 			<label>186</label>
-			<onleft>13</onleft>
+			<onleft>11</onleft>
 			<onright>10</onright>
 			<onup>10</onup>
-			<ondown>10</ondown>
+			<ondown>12</ondown>
 		</control>
 	</controls>
 </window>

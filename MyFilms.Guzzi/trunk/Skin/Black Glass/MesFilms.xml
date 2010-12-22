@@ -2,7 +2,7 @@
 	<id>7986</id>
 	<defaultcontrol>1026</defaultcontrol>
 	<allowoverlay>player.hasmedia+!facadeview.filmstrip</allowoverlay>
-	<define>#header.label:Filme</define>
+	<define>#header.label:#myfilms.config.pluginname (#myfilms.config.currentconfig)</define>
 	<define>#header.background:hover_Films.png</define>
 	<animation effect="fade" time="250" start="100" end="100">WindowClose</animation>
 	<controls>
@@ -155,8 +155,8 @@
 					<thumbPosYBig>5</thumbPosYBig>
 					<thumbZoom>yes</thumbZoom>
 					<enableFocusZoom>no</enableFocusZoom>
-          <zoomXPixels>0</zoomXPixels>
-          <zoomYPixels>0</zoomYPixels>
+          				<zoomXPixels>0</zoomXPixels>
+          				<zoomYPixels>0</zoomYPixels>
 					<hideUnfocusTexture>no</hideUnfocusTexture>
 					<renderFocusText>yes</renderFocusText>
 					<renderUnfocusText>yes</renderUnfocusText>
@@ -171,11 +171,11 @@
     					<spinPosY>705</spinPosY>
     					<spinAlign>Right</spinAlign>
     					<spinColor>6fffffff</spinColor>
-					<unfocusedAlpha>120</unfocusedAlpha>
+					<unfocusedAlpha>130</unfocusedAlpha>
 					<!-- <playedColor>ffffffff</playedColor>
 					<playedColor>ff77ccff</playedColor>
-    			<remoteColor>ffFFA075</remoteColor>
-    			<downloadColor>ff80ff80</downloadColor> -->
+    					<remoteColor>ffFFA075</remoteColor>
+    					<downloadColor>ff80ff80</downloadColor> -->
 					<showFrame>true</showFrame>
 					<frameNoFocus>DVDCase.png</frameNoFocus> 
 					<frameFocus>DVDCase.png</frameFocus> 	
@@ -220,21 +220,18 @@
 					<itemHeight>280</itemHeight>
 					<textureWidth>175</textureWidth>
 					<textureHeight>223</textureHeight>
+					<showFrame>no</showFrame>
+					<frame>-</frame>
+					<frameFocus>-</frameFocus>
+					<showFolder>yes</showFolder>
 					<imageFolder flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</imageFolder>
 					<imageFolderFocus>DVDCase.png</imageFolderFocus>
-					<frame>DVDCase.png</frame>
-					<frameFocus>DVDCase.png</frameFocus>
-					<background>emtpy.png</background>
-					<thumbs flipY="true" diffuse="Thumb_Mask.png">
-					</thumbs>
-					<InfoImage flipY="true" diffuse="Thumb_Mask.png">
-					</InfoImage>
-					<showFrame>yes</showFrame>
-					<showFolder>yes</showFolder>
+					<thumbs flipY="true" diffuse="Thumb_Mask.png"/>
 					<showBackGround>no</showBackGround>
+					<background>-</background>
 					<showInfoImage>no</showInfoImage>
+					<InfoImage>-</InfoImage>
 					<visible>facadeview.filmstrip</visible>
-					<unfocusedAlpha>255</unfocusedAlpha>
 					<thumbAnimation effect="slide" end="0,-22" time="200">focus</thumbAnimation>
 					<thumbAnimation effect="zoom" start="100,100" end="120,120" time="200">focus</thumbAnimation>
 					<scrollOffset>3</scrollOffset>
@@ -247,11 +244,11 @@
 			<type>fadelabel</type>
 			<id>12</id>
 			<posX>32</posX>
-			<posY>49</posY>
+			<posY>52</posY>
 			<font>font12</font>
 			<textcolor>aaffffff</textcolor>
 			<width>750</width>
-			<label>#myfilms.config.currentconfig: #myfilms.select</label>
+			<label>#myfilms.view - #myfilms.select</label>
 			<wrapString> : : : </wrapString>
 			<animation effect="fade" time="250">WindowClose</animation>
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -674,16 +671,19 @@
 
 <!-- COMMON FACADES -->
 
-<!-- Original Cover diabled - replaced by Asynchloaded Picture for speedup ! 
+<!--  Disables original Covers ...
+
 		<control>
 			<description>Cover Art</description>
 			<type>image</type>
 			<id>1020</id>
 			<keepaspectratio>no</keepaspectratio>
-			<posX>42</posX> 
+			<posX>62</posX> 
 			<posY>88</posY> 
 			<width>245</width> 
 			<height>348</height> 
+			<centered>yes</centered>
+			<zoom>yes</zoom>
 			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
 			<visible>facadeview.list+control.hasfocus(1026)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
@@ -733,7 +733,7 @@
 			<width>283</width>
 			<height>360</height>
 			<texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
-			<visible>facadeview.list+control.hasfocus(1026)</visible>
+			<visible>facadeview.list+control.hasfocus(1026)+control.hasthumb(22)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 
@@ -960,29 +960,18 @@
 				</control>
 			</control> 
 		</control>
-    <control>
-      <type>animation</type>
+		<control>
+			<type>animation</type>
       <description>Waiting during search</description>
-      <id>3004</id>
-      <posX>608</posX>
-      <posY>328</posY>
-      <width>64</width>
-      <height>64</height>
-      <textures>common.waiting.1.png;common.waiting.2.png;common.waiting.3.png;common.waiting.4.png;common.waiting.5.png;common.waiting.6.png;common.waiting.7.png;common.waiting.8.png</textures>
-      <Duration>0:0:01.5</Duration>
-      <keepaspectratio>yes</keepaspectratio>
-    </control>
-    <control>
-      <type>animation</type>
-      <description>Waiting during search</description>
-      <id>2080</id>
-      <posX>608</posX>
-      <posY>328</posY>
-      <width>64</width>
-      <height>64</height>
-      <textures>common.waiting.1.png;common.waiting.2.png;common.waiting.3.png;common.waiting.4.png;common.waiting.5.png;common.waiting.6.png;common.waiting.7.png;common.waiting.8.png</textures>
-      <Duration>0:0:00.5</Duration>
-      <keepaspectratio>yes</keepaspectratio>
-    </control>
+			<id>3004</id>
+			<posX>608</posX>
+			<posY>328</posY>
+			<width>64</width>
+			<height>64</height>
+			<textures>common.waiting.1.png;common.waiting.2.png;common.waiting.3.png;common.waiting.4.png;common.waiting.5.png;common.waiting.6.png;common.waiting.7.png;common.waiting.8.png</textures>
+			<Duration>0:0:01.5</Duration>
+			<keepaspectratio>yes</keepaspectratio>
+		</control>
+
   </controls>
 </window>
