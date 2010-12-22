@@ -291,6 +291,17 @@ namespace MesFilms
             MesFilmsDetail.setGUIProperty("user.source.label", GUILocalizeStrings.Get(10798648));
             MesFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
             MesFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
+            // Clear GUI Properties when first entering the plugin
+            // This will avoid ugly property names being seen before 
+            // its corresponding value is assigned
+            MesFilmsDetail.clearGUIProperty("logos_id2001");
+            MesFilmsDetail.clearGUIProperty("logos_id2002");
+            MesFilmsDetail.clearGUIProperty("nbobjects.value");
+            MesFilmsDetail.clearGUIProperty("Fanart");
+            MesFilmsDetail.clearGUIProperty("Fanart2");
+            MesFilmsDetail.clearGUIProperty("config.currentconfig");
+            MesFilmsDetail.clearGUIProperty("view");
+            MesFilmsDetail.clearGUIProperty("picture");
             
             Log.Debug("MyFilms.Init() completed.");
 
@@ -312,16 +323,7 @@ namespace MesFilms
             m_bFanartTimerDisabled = true;
             //m_FanartTimer.Change(0,10000);
 
-            // Clear GUI Properties when first entering the plugin
-            // This will avoid ugly property names being seen before 
-            // its corresponding value is assigned
-            MesFilmsDetail.clearGUIProperty("logos_id2001");
-            MesFilmsDetail.clearGUIProperty("logos_id2002");
-            MesFilmsDetail.clearGUIProperty("nbobjects.value");
-            MesFilmsDetail.clearGUIProperty("Fanart");
-            MesFilmsDetail.clearGUIProperty("Fanart2");
-            //MesFilmsDetail.clearGUIProperty("config.currentconfig");
-            MesFilmsDetail.clearGUIProperty("view");
+            MesFilmsDetail.clearGUIProperty("picture");
 
             Log.Debug("MyFilms.OnPageLoad() completed.");
         }
@@ -2294,6 +2296,7 @@ namespace MesFilms
                     Log.Debug("MyFilms (Guzzi): Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
                     GetFilmList();
                     MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(342));// all videos
+                    GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(342));
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "year":
@@ -2303,6 +2306,7 @@ namespace MesFilms
                     BtnSrtBy.IsAscending = false;
                     getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
                     MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(345));//year
+                    GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(345));
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "category":
@@ -2312,6 +2316,7 @@ namespace MesFilms
                     BtnSrtBy.IsAscending = true;
                     getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
                     MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(135));//category
+                    GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(135));
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "country":
@@ -2321,6 +2326,7 @@ namespace MesFilms
                     BtnSrtBy.IsAscending = true;
                     getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
                     MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(200026));//country
+                    GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(200026));
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); 
                     break;
 
@@ -2341,6 +2347,7 @@ namespace MesFilms
                         BtnSrtBy.IsAscending = false;
                     GetFilmList();
                     MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
+                    GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "view0":
@@ -2398,9 +2405,15 @@ namespace MesFilms
                     }
 
                     if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
+                    {
                         MesFilmsDetail.setGUIProperty("view", conf.StrViewItem[i]);   // specific user View1
+                        GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewItem[i]);
+                    }
                     else
+                    {
                         MesFilmsDetail.setGUIProperty("view", conf.StrViewText[i]);   // specific Text for View1
+                        GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewText[i]);
+                    }
 
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
