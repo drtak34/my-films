@@ -778,7 +778,7 @@ namespace MesFilms
             Config_Name.Items.Add(w_Config_Name);
             Config_Name.Text = w_Config_Name;
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
-            if (chkLogos.Checked)
+            if (chkLogos.Checked) // Save Logoconfig ...
             {
                 string wfile = XmlConfig.EntireFilenameConfig("MyFilmsLogos").Substring(0, XmlConfig.EntireFilenameConfig("MyFilmsLogos").LastIndexOf("."));
                 if (System.IO.File.Exists(wfile + "_" + Config_Name.Text + ".xml"))
@@ -793,10 +793,20 @@ namespace MesFilms
                     wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1);
                 }
 
-                XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogosPath", txtLogosPath.Text);
+                if (txtLogosPath.Text == Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos") // If path starts with default path, remove defaultpath to make it compatible with differnt OS
+                    XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogosPath", "");
+                else
+                    XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogosPath", txtLogosPath.Text);
                 int iID2001 = 0;
                 int iID2002 = 0;
                 //int icountry = 0;
+
+                string logoPath;
+                using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
+                {
+                    logoPath = MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin") + @"\Media\Logos"; // Get current path to logos in skindirectory
+                }
+
                 for (int i = 0; i < (int)LogoView.Items.Count; i++)
                 {
                     string wline = LogoView.Items[i].SubItems[1].Text + ";";
@@ -806,7 +816,7 @@ namespace MesFilms
                     wline = wline + LogoView.Items[i].SubItems[5].Text + ";";
                     wline = wline + LogoView.Items[i].SubItems[6].Text.ToLower() + ";";
                     wline = wline + LogoView.Items[i].SubItems[7].Text + ";";
-                    if (LogoView.Items[i].SubItems[9].Text.Length > 0)
+                    if ((LogoView.Items[i].SubItems[9].Text.Length > 0) && (LogoView.Items[i].SubItems[9].Text != logoPath))
                         wline = wline + LogoView.Items[i].SubItems[9].Text + "\\" + LogoView.Items[i].SubItems[8].Text;
                     else
                         wline = wline + LogoView.Items[i].SubItems[8].Text;
@@ -1594,7 +1604,7 @@ namespace MesFilms
             }
             if ((SAnd_Or.Text.Length == 0) && ((SField2.Text.Length > 0) || (SOp2.Text.Length > 0) || (SValue2.Text.Length > 0)))
             {
-                System.Windows.Forms.MessageBox.Show("The Operator 'AND' or 'OR' must be defined for Ywo conditions !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                System.Windows.Forms.MessageBox.Show("The Operator 'AND' or 'OR' must be defined for Two conditions !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 SAnd_Or.Focus();
                 return;
             }
@@ -1813,8 +1823,9 @@ namespace MesFilms
                 }
             }
             //Guzzi: Added aspectratio (e.g. 2,39) and ar (e.g. 16:9)
-            SValue.Items.Add("aspectratio");
-            SValue.Items.Add("ar");
+            // Disables, because it's not yet working - requires changes in logos.cs of plugincode
+            //SValue.Items.Add("aspectratio");
+            //SValue.Items.Add("ar");
         }
         public AntMovieCatalog ReadXml()
         {
@@ -1944,9 +1955,11 @@ namespace MesFilms
             else
                 wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + currentconfig;
 
+            //txtLogosPath.Text = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos");
             txtLogosPath.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogosPath", null);
             if (txtLogosPath.Text.Length == 0)
-                txtLogosPath.Text = XmlConfig.PathInstalMP() + @"\thumbs\";
+                txtLogosPath.Text = Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos\\"; // THis is MyFilms Default Logopath!
+                //txtLogosPath.Text = XmlConfig.PathInstalMP() + @"\thumbs\";
             selected_Logo_Item = -1;
             int i = 0;
             do
@@ -1973,6 +1986,11 @@ namespace MesFilms
 
         private void Charge_LogosView(ref string[] wtab, int i, string typelogo)
         {
+            string logoPath;
+            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
+            {
+                logoPath = MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin") + @"\Media\Logos"; // Get current path to logos in skindirectory
+            }
 
             LogoView.Items.Add(typelogo);
             LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[0].ToString());
@@ -1986,8 +2004,10 @@ namespace MesFilms
             if (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(wtab[7].ToString())))
                 LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(wtab[7].ToString()));
             else
-                LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(string.Empty);
-
+                if (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(logoPath +  @"\" + wtab[7]))) // Check if Logofile exists in default media directory of current skin and add it, if found
+                    LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(logoPath + @"\" + wtab[7]));
+                else
+                LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(string.Empty); // Add empty field, if logofile istn't found anywhere
         }
         private void chkLogos_CheckedChanged(object sender, EventArgs e)
         {

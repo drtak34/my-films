@@ -172,12 +172,19 @@ namespace MesFilms
         static string get_Logos(DataRow r, ref List<string> listelogos, ArrayList RulesLogos)
         {
             string fileLogoName = string.Empty;
+
+            string logoPath;
+            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
+            {
+                logoPath = MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin") + @"\Media\Logos"; // Get current path to logos in skindirectory
+            }
+
             foreach (string wline in RulesLogos)
             {
                 string[] wtab = wline.Split(new Char[] { ';' });
                 // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
                 if (!System.IO.File.Exists(wtab[7]))
-                    wtab[7] = GUIGraphicsContext.Skin + @"\Media\Logos\" + wtab[7]; //wtab[7] = MediaPortal.Configuration.Config.GetSubFolder(MediaPortal.Configuration.Config.Dir.Skin, @"Media\Logos\") + wtab[7];
+                    wtab[7] = logoPath + @"\" + wtab[7]; // Check, if logofile is present in logo directory of current skin
 
                 if (System.IO.File.Exists(wtab[7]) && System.IO.Path.GetDirectoryName(wtab[7]).Length > 0)
                 {

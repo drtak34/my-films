@@ -604,7 +604,7 @@ namespace MesFilms
             this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText2);
             this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterItem1);
             this.groupBox_AntSelectedEnreg.Controls.Add(this.AntFilterText1);
-            this.groupBox_AntSelectedEnreg.Location = new System.Drawing.Point(374, 6);
+            this.groupBox_AntSelectedEnreg.Location = new System.Drawing.Point(371, 6);
             this.groupBox_AntSelectedEnreg.Name = "groupBox_AntSelectedEnreg";
             this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(370, 117);
             this.groupBox_AntSelectedEnreg.TabIndex = 27;
@@ -684,7 +684,7 @@ namespace MesFilms
             // 
             this.AntFilterText2.Location = new System.Drawing.Point(242, 46);
             this.AntFilterText2.Name = "AntFilterText2";
-            this.AntFilterText2.Size = new System.Drawing.Size(119, 20);
+            this.AntFilterText2.Size = new System.Drawing.Size(113, 20);
             this.AntFilterText2.TabIndex = 24;
             // 
             // AntFilterItem1
@@ -699,7 +699,7 @@ namespace MesFilms
             // 
             this.AntFilterText1.Location = new System.Drawing.Point(242, 19);
             this.AntFilterText1.Name = "AntFilterText1";
-            this.AntFilterText1.Size = new System.Drawing.Size(119, 20);
+            this.AntFilterText1.Size = new System.Drawing.Size(113, 20);
             this.AntFilterText1.TabIndex = 21;
             // 
             // groupBox_DefaultView
@@ -980,9 +980,9 @@ namespace MesFilms
             this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label3);
             this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel1);
             this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem1);
-            this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(374, 129);
+            this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(371, 129);
             this.groupBox_DetailedSupplementaryInformations.Name = "groupBox_DetailedSupplementaryInformations";
-            this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(347, 136);
+            this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(370, 136);
             this.groupBox_DetailedSupplementaryInformations.TabIndex = 22;
             this.groupBox_DetailedSupplementaryInformations.TabStop = false;
             this.groupBox_DetailedSupplementaryInformations.Text = "Detailed Supplementary Informations";
@@ -1001,30 +1001,30 @@ namespace MesFilms
             // AntItem3
             // 
             this.AntItem3.FormattingEnabled = true;
-            this.AntItem3.Location = new System.Drawing.Point(166, 87);
+            this.AntItem3.Location = new System.Drawing.Point(185, 87);
             this.AntItem3.Name = "AntItem3";
-            this.AntItem3.Size = new System.Drawing.Size(170, 21);
+            this.AntItem3.Size = new System.Drawing.Size(173, 21);
             this.AntItem3.TabIndex = 29;
             // 
             // AntLabel2
             // 
             this.AntLabel2.Location = new System.Drawing.Point(9, 60);
             this.AntLabel2.Name = "AntLabel2";
-            this.AntLabel2.Size = new System.Drawing.Size(146, 20);
+            this.AntLabel2.Size = new System.Drawing.Size(161, 20);
             this.AntLabel2.TabIndex = 27;
             // 
             // AntItem2
             // 
             this.AntItem2.FormattingEnabled = true;
-            this.AntItem2.Location = new System.Drawing.Point(166, 60);
+            this.AntItem2.Location = new System.Drawing.Point(185, 60);
             this.AntItem2.Name = "AntItem2";
-            this.AntItem2.Size = new System.Drawing.Size(170, 21);
+            this.AntItem2.Size = new System.Drawing.Size(173, 21);
             this.AntItem2.TabIndex = 28;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(170, 16);
+            this.label7.Location = new System.Drawing.Point(182, 17);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(95, 13);
             this.label7.TabIndex = 22;
@@ -1033,7 +1033,7 @@ namespace MesFilms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 16);
+            this.label3.Location = new System.Drawing.Point(7, 17);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 13);
             this.label3.TabIndex = 21;
@@ -1043,16 +1043,16 @@ namespace MesFilms
             // 
             this.AntLabel1.Location = new System.Drawing.Point(9, 33);
             this.AntLabel1.Name = "AntLabel1";
-            this.AntLabel1.Size = new System.Drawing.Size(146, 20);
+            this.AntLabel1.Size = new System.Drawing.Size(161, 20);
             this.AntLabel1.TabIndex = 25;
             // 
             // AntItem1
             // 
             this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.AntItem1.FormattingEnabled = true;
-            this.AntItem1.Location = new System.Drawing.Point(166, 33);
+            this.AntItem1.Location = new System.Drawing.Point(185, 33);
             this.AntItem1.Name = "AntItem1";
-            this.AntItem1.Size = new System.Drawing.Size(170, 21);
+            this.AntItem1.Size = new System.Drawing.Size(173, 21);
             this.AntItem1.Sorted = true;
             this.AntItem1.TabIndex = 26;
             // 
@@ -1311,7 +1311,7 @@ namespace MesFilms
             this.groupBox_Separators.Controls.Add(this.ListSeparator1);
             this.groupBox_Separators.Location = new System.Drawing.Point(391, 6);
             this.groupBox_Separators.Name = "groupBox_Separators";
-            this.groupBox_Separators.Size = new System.Drawing.Size(350, 114);
+            this.groupBox_Separators.Size = new System.Drawing.Size(350, 125);
             this.groupBox_Separators.TabIndex = 27;
             this.groupBox_Separators.TabStop = false;
             this.groupBox_Separators.Text = "Separators";
@@ -1320,7 +1320,7 @@ namespace MesFilms
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(18, 89);
+            this.label25.Location = new System.Drawing.Point(18, 91);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(87, 13);
             this.label25.TabIndex = 84;
@@ -1342,7 +1342,7 @@ namespace MesFilms
             "(",
             "....",
             ")"});
-            this.RoleSeparator5.Location = new System.Drawing.Point(306, 76);
+            this.RoleSeparator5.Location = new System.Drawing.Point(306, 78);
             this.RoleSeparator5.Name = "RoleSeparator5";
             this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
             this.RoleSeparator5.TabIndex = 82;
@@ -1356,7 +1356,7 @@ namespace MesFilms
             "(",
             "....",
             ")"});
-            this.RoleSeparator4.Location = new System.Drawing.Point(260, 76);
+            this.RoleSeparator4.Location = new System.Drawing.Point(260, 78);
             this.RoleSeparator4.Name = "RoleSeparator4";
             this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
             this.RoleSeparator4.TabIndex = 81;
@@ -1422,7 +1422,7 @@ namespace MesFilms
             "(",
             ")",
             "...."});
-            this.RoleSeparator2.Location = new System.Drawing.Point(168, 76);
+            this.RoleSeparator2.Location = new System.Drawing.Point(168, 78);
             this.RoleSeparator2.Name = "RoleSeparator2";
             this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
             this.RoleSeparator2.Sorted = true;
@@ -1437,7 +1437,7 @@ namespace MesFilms
             "(",
             ")",
             "...."});
-            this.RoleSeparator3.Location = new System.Drawing.Point(214, 76);
+            this.RoleSeparator3.Location = new System.Drawing.Point(214, 78);
             this.RoleSeparator3.Name = "RoleSeparator3";
             this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
             this.RoleSeparator3.Sorted = true;
@@ -1447,7 +1447,7 @@ namespace MesFilms
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(9, 76);
+            this.label22.Location = new System.Drawing.Point(9, 78);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(107, 13);
             this.label22.TabIndex = 74;
@@ -1461,7 +1461,7 @@ namespace MesFilms
             "(",
             ")",
             "...."});
-            this.RoleSeparator1.Location = new System.Drawing.Point(122, 76);
+            this.RoleSeparator1.Location = new System.Drawing.Point(122, 78);
             this.RoleSeparator1.Name = "RoleSeparator1";
             this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
             this.RoleSeparator1.Sorted = true;
@@ -1818,9 +1818,9 @@ namespace MesFilms
             // txtLogosPath
             // 
             this.txtLogosPath.Enabled = false;
-            this.txtLogosPath.Location = new System.Drawing.Point(305, 11);
+            this.txtLogosPath.Location = new System.Drawing.Point(240, 8);
             this.txtLogosPath.Name = "txtLogosPath";
-            this.txtLogosPath.Size = new System.Drawing.Size(384, 20);
+            this.txtLogosPath.Size = new System.Drawing.Size(449, 20);
             this.txtLogosPath.TabIndex = 92;
             this.ToolTip1.SetToolTip(this.txtLogosPath, resources.GetString("txtLogosPath.ToolTip"));
             // 
@@ -1845,9 +1845,9 @@ namespace MesFilms
             this.SLogo_Type.Items.AddRange(new object[] {
             "ID2001",
             "ID2002"});
-            this.SLogo_Type.Location = new System.Drawing.Point(27, 247);
+            this.SLogo_Type.Location = new System.Drawing.Point(9, 289);
             this.SLogo_Type.Name = "SLogo_Type";
-            this.SLogo_Type.Size = new System.Drawing.Size(121, 21);
+            this.SLogo_Type.Size = new System.Drawing.Size(102, 21);
             this.SLogo_Type.TabIndex = 73;
             this.ToolTip1.SetToolTip(this.SLogo_Type, resources.GetString("SLogo_Type.ToolTip"));
             // 
@@ -2046,7 +2046,7 @@ namespace MesFilms
             this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText1);
             this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(391, 170);
             this.groupBox_SupplementarySearch.Name = "groupBox_SupplementarySearch";
-            this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(347, 178);
+            this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(350, 178);
             this.groupBox_SupplementarySearch.TabIndex = 33;
             this.groupBox_SupplementarySearch.TabStop = false;
             this.groupBox_SupplementarySearch.Text = "Supplementary Search";
@@ -2558,7 +2558,7 @@ namespace MesFilms
             // 
             // DefaultCoverArtist
             // 
-            this.DefaultCoverArtist.Location = new System.Drawing.Point(208, 46);
+            this.DefaultCoverArtist.Location = new System.Drawing.Point(208, 44);
             this.DefaultCoverArtist.Name = "DefaultCoverArtist";
             this.DefaultCoverArtist.Size = new System.Drawing.Size(422, 20);
             this.DefaultCoverArtist.TabIndex = 92;
@@ -2645,7 +2645,7 @@ namespace MesFilms
             // 
             // btnResetThumbsArtist
             // 
-            this.btnResetThumbsArtist.Location = new System.Drawing.Point(315, 69);
+            this.btnResetThumbsArtist.Location = new System.Drawing.Point(315, 68);
             this.btnResetThumbsArtist.Name = "btnResetThumbsArtist";
             this.btnResetThumbsArtist.Size = new System.Drawing.Size(84, 23);
             this.btnResetThumbsArtist.TabIndex = 99;
@@ -2687,7 +2687,7 @@ namespace MesFilms
             // label_DefaultArtistImage
             // 
             this.label_DefaultArtistImage.AutoSize = true;
-            this.label_DefaultArtistImage.Location = new System.Drawing.Point(40, 49);
+            this.label_DefaultArtistImage.Location = new System.Drawing.Point(40, 47);
             this.label_DefaultArtistImage.Name = "label_DefaultArtistImage";
             this.label_DefaultArtistImage.Size = new System.Drawing.Size(99, 13);
             this.label_DefaultArtistImage.TabIndex = 94;
@@ -3315,9 +3315,9 @@ namespace MesFilms
             // btnLogosPath
             // 
             this.btnLogosPath.Enabled = false;
-            this.btnLogosPath.Location = new System.Drawing.Point(695, 10);
+            this.btnLogosPath.Location = new System.Drawing.Point(695, 8);
             this.btnLogosPath.Name = "btnLogosPath";
-            this.btnLogosPath.Size = new System.Drawing.Size(32, 23);
+            this.btnLogosPath.Size = new System.Drawing.Size(32, 20);
             this.btnLogosPath.TabIndex = 94;
             this.btnLogosPath.Text = "...";
             this.btnLogosPath.UseVisualStyleBackColor = true;
@@ -3326,7 +3326,7 @@ namespace MesFilms
             // lblLogosPath
             // 
             this.lblLogosPath.AutoSize = true;
-            this.lblLogosPath.Location = new System.Drawing.Point(189, 14);
+            this.lblLogosPath.Location = new System.Drawing.Point(124, 12);
             this.lblLogosPath.Name = "lblLogosPath";
             this.lblLogosPath.Size = new System.Drawing.Size(110, 13);
             this.lblLogosPath.TabIndex = 93;
@@ -3334,9 +3334,9 @@ namespace MesFilms
             // 
             // SFilePicture
             // 
-            this.SFilePicture.Location = new System.Drawing.Point(606, 227);
+            this.SFilePicture.Location = new System.Drawing.Point(498, 245);
             this.SFilePicture.Name = "SFilePicture";
-            this.SFilePicture.Size = new System.Drawing.Size(98, 20);
+            this.SFilePicture.Size = new System.Drawing.Size(79, 20);
             this.SFilePicture.TabIndex = 91;
             this.SFilePicture.Visible = false;
             // 
@@ -3361,7 +3361,7 @@ namespace MesFilms
             this.LogoView.Location = new System.Drawing.Point(7, 36);
             this.LogoView.MultiSelect = false;
             this.LogoView.Name = "LogoView";
-            this.LogoView.Size = new System.Drawing.Size(734, 185);
+            this.LogoView.Size = new System.Drawing.Size(734, 203);
             this.LogoView.TabIndex = 90;
             this.LogoView.UseCompatibleStateImageBehavior = false;
             this.LogoView.View = System.Windows.Forms.View.Details;
@@ -3419,9 +3419,9 @@ namespace MesFilms
             // btnDown
             // 
             this.btnDown.Enabled = false;
-            this.btnDown.Location = new System.Drawing.Point(663, 312);
+            this.btnDown.Location = new System.Drawing.Point(583, 303);
             this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(47, 25);
+            this.btnDown.Size = new System.Drawing.Size(64, 21);
             this.btnDown.TabIndex = 89;
             this.btnDown.Text = "Down";
             this.btnDown.UseVisualStyleBackColor = true;
@@ -3430,9 +3430,9 @@ namespace MesFilms
             // btnUp
             // 
             this.btnUp.Enabled = false;
-            this.btnUp.Location = new System.Drawing.Point(610, 312);
+            this.btnUp.Location = new System.Drawing.Point(583, 276);
             this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(47, 25);
+            this.btnUp.Size = new System.Drawing.Size(64, 21);
             this.btnUp.TabIndex = 88;
             this.btnUp.Text = "Up";
             this.btnUp.UseVisualStyleBackColor = true;
@@ -3441,9 +3441,9 @@ namespace MesFilms
             // btnDel
             // 
             this.btnDel.Enabled = false;
-            this.btnDel.Location = new System.Drawing.Point(557, 312);
+            this.btnDel.Location = new System.Drawing.Point(663, 303);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(47, 25);
+            this.btnDel.Size = new System.Drawing.Size(64, 21);
             this.btnDel.TabIndex = 87;
             this.btnDel.Text = "Delete";
             this.btnDel.UseVisualStyleBackColor = true;
@@ -3452,9 +3452,9 @@ namespace MesFilms
             // btnAdd
             // 
             this.btnAdd.Enabled = false;
-            this.btnAdd.Location = new System.Drawing.Point(511, 312);
+            this.btnAdd.Location = new System.Drawing.Point(663, 276);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(40, 25);
+            this.btnAdd.Size = new System.Drawing.Size(64, 21);
             this.btnAdd.TabIndex = 86;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -3468,7 +3468,7 @@ namespace MesFilms
             "And",
             "Or",
             ""});
-            this.SAnd_Or.Location = new System.Drawing.Point(183, 274);
+            this.SAnd_Or.Location = new System.Drawing.Point(117, 289);
             this.SAnd_Or.Name = "SAnd_Or";
             this.SAnd_Or.Size = new System.Drawing.Size(54, 21);
             this.SAnd_Or.TabIndex = 82;
@@ -3477,7 +3477,7 @@ namespace MesFilms
             // 
             this.SValue2.Enabled = false;
             this.SValue2.FormattingEnabled = true;
-            this.SValue2.Location = new System.Drawing.Point(439, 274);
+            this.SValue2.Location = new System.Drawing.Point(371, 303);
             this.SValue2.Name = "SValue2";
             this.SValue2.Size = new System.Drawing.Size(110, 21);
             this.SValue2.TabIndex = 81;
@@ -3495,7 +3495,7 @@ namespace MesFilms
             "lower",
             "filled",
             "not filled"});
-            this.SOp2.Location = new System.Drawing.Point(359, 274);
+            this.SOp2.Location = new System.Drawing.Point(291, 303);
             this.SOp2.Name = "SOp2";
             this.SOp2.Size = new System.Drawing.Size(74, 21);
             this.SOp2.TabIndex = 80;
@@ -3505,7 +3505,7 @@ namespace MesFilms
             // 
             this.SField2.Enabled = false;
             this.SField2.FormattingEnabled = true;
-            this.SField2.Location = new System.Drawing.Point(243, 274);
+            this.SField2.Location = new System.Drawing.Point(175, 303);
             this.SField2.Name = "SField2";
             this.SField2.Size = new System.Drawing.Size(110, 21);
             this.SField2.Sorted = true;
@@ -3516,7 +3516,7 @@ namespace MesFilms
             // 
             this.SValue1.Enabled = false;
             this.SValue1.FormattingEnabled = true;
-            this.SValue1.Location = new System.Drawing.Point(439, 247);
+            this.SValue1.Location = new System.Drawing.Point(371, 276);
             this.SValue1.Name = "SValue1";
             this.SValue1.Size = new System.Drawing.Size(110, 21);
             this.SValue1.TabIndex = 78;
@@ -3534,7 +3534,7 @@ namespace MesFilms
             "lower",
             "filled",
             "not filled"});
-            this.SOp1.Location = new System.Drawing.Point(359, 247);
+            this.SOp1.Location = new System.Drawing.Point(291, 276);
             this.SOp1.Name = "SOp1";
             this.SOp1.Size = new System.Drawing.Size(74, 21);
             this.SOp1.TabIndex = 77;
@@ -3544,7 +3544,7 @@ namespace MesFilms
             // 
             this.SField1.Enabled = false;
             this.SField1.FormattingEnabled = true;
-            this.SField1.Location = new System.Drawing.Point(243, 247);
+            this.SField1.Location = new System.Drawing.Point(175, 276);
             this.SField1.Name = "SField1";
             this.SField1.Size = new System.Drawing.Size(110, 21);
             this.SField1.Sorted = true;
@@ -3556,9 +3556,9 @@ namespace MesFilms
             this.textBox3.BackColor = System.Drawing.Color.White;
             this.textBox3.Enabled = false;
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(7, 221);
+            this.textBox3.Location = new System.Drawing.Point(7, 245);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(368, 20);
+            this.textBox3.Size = new System.Drawing.Size(474, 20);
             this.textBox3.TabIndex = 75;
             this.textBox3.TabStop = false;
             this.textBox3.Text = "* be carefull the Logo Configuration is available for all MyFilms configurations";
@@ -3569,9 +3569,9 @@ namespace MesFilms
             this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.SPicture.Enabled = false;
-            this.SPicture.Location = new System.Drawing.Point(606, 247);
+            this.SPicture.Location = new System.Drawing.Point(498, 272);
             this.SPicture.Name = "SPicture";
-            this.SPicture.Size = new System.Drawing.Size(75, 48);
+            this.SPicture.Size = new System.Drawing.Size(79, 58);
             this.SPicture.TabIndex = 85;
             this.SPicture.TabStop = false;
             this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);

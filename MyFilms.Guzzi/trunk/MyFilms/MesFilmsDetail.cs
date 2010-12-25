@@ -86,14 +86,16 @@ namespace MesFilms
             CTRL_logos_id2002 = 2002,
             CTRL_Title = 2025,
             CTRL_OTitle = 2026,
-            //CTRL_lblGenre = 2032,
-            //CTRL_Genre = 2062,
             CTRL_Format = 2069, // currently required in Logo visibility options
             CTRL_ImgDD = 2072,
             CTRL_ActorMultiThumb = 3333,
         }
         [SkinControlAttribute((int)Controls.CTRL_BtnMaj)]
         protected GUIButtonControl BtnMaj = null;
+        [SkinControlAttribute((int)Controls.CTRL_BtnFirst)]
+        protected GUIButtonControl BtnFirst = null;
+        [SkinControlAttribute((int)Controls.CTRL_BtnLast)]
+        protected GUIButtonControl BtnLast = null;
         [SkinControlAttribute(2024)]
         protected GUIImage ImgDetFilm = null;
         [SkinControlAttribute(2023)]
@@ -114,17 +116,6 @@ namespace MesFilms
         //protected GUIImage ImgMovieThumbs = null;
         //[SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
         //protected GUIMultiImage ImgMovieThumbsDir = null;
-
-        //[SkinControlAttribute(1030)]
-        //protected GUILabelControl TxtLabel1 = null;
-        //[SkinControlAttribute(1031)]
-        //protected GUIFadeLabel TxtItem1 = null;
-        //[SkinControlAttribute(1032)]
-        //protected GUILabelControl TxtLabel2 = null;
-        //[SkinControlAttribute(1033)]
-        //protected GUIFadeLabel TxtItem2 = null;
-        //[SkinControlAttribute(1034)]
-        //protected GUIFadeLabel TxtItem3 = null;
 
         [SkinControlAttribute((int)Controls.CTRL_ActorMultiThumb)]
         protected GUIMultiImage ActorMultiThumb = null;
@@ -174,13 +165,23 @@ namespace MesFilms
         }
         public override bool Init()
         {
+            return Load(GUIGraphicsContext.Skin + @"\MesFilmsDetail.xml");
+        }
+
+        protected override void OnPageLoad()
+        {
             setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
             setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
             setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
             setGUIProperty("menu.actors", GUILocalizeStrings.Get(10798754));
             setGUIProperty("menu.techinfos", GUILocalizeStrings.Get(10798755));
 
-            return Load(GUIGraphicsContext.Skin + @"\MesFilmsDetail.xml");
+            BtnFirst.Label = GUILocalizeStrings.Get(1079872);
+            BtnLast.Label = GUILocalizeStrings.Get(1079873);
+            //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
+            //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
+
+            base.OnPageLoad();
         }
 
         #region Action
