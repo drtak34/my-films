@@ -401,6 +401,7 @@ namespace MesFilms
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ButCopy = new System.Windows.Forms.Button();
             this.groupBox_SortByItem.SuspendLayout();
             this.groupBox_AntSelectedEnreg.SuspendLayout();
             this.groupBox_DefaultView.SuspendLayout();
@@ -1853,7 +1854,7 @@ namespace MesFilms
             // 
             // ButQuit
             // 
-            this.ButQuit.Location = new System.Drawing.Point(679, 452);
+            this.ButQuit.Location = new System.Drawing.Point(679, 464);
             this.ButQuit.Name = "ButQuit";
             this.ButQuit.Size = new System.Drawing.Size(64, 31);
             this.ButQuit.TabIndex = 40;
@@ -1864,7 +1865,7 @@ namespace MesFilms
             // 
             // ButDelet
             // 
-            this.ButDelet.Location = new System.Drawing.Point(599, 452);
+            this.ButDelet.Location = new System.Drawing.Point(599, 464);
             this.ButDelet.Name = "ButDelet";
             this.ButDelet.Size = new System.Drawing.Size(64, 31);
             this.ButDelet.TabIndex = 39;
@@ -2794,7 +2795,7 @@ namespace MesFilms
             this.General.Controls.Add(this.Tab_Logos);
             this.General.Controls.Add(this.Tab_TrailerOptions);
             this.General.Controls.Add(this.Tab_WakeOnLan);
-            this.General.Location = new System.Drawing.Point(12, 66);
+            this.General.Location = new System.Drawing.Point(12, 78);
             this.General.Name = "General";
             this.General.SelectedIndex = 0;
             this.General.Size = new System.Drawing.Size(755, 380);
@@ -3601,7 +3602,7 @@ namespace MesFilms
             // 
             // ButSave
             // 
-            this.ButSave.Location = new System.Drawing.Point(529, 452);
+            this.ButSave.Location = new System.Drawing.Point(442, 464);
             this.ButSave.Name = "ButSave";
             this.ButSave.Size = new System.Drawing.Size(64, 31);
             this.ButSave.TabIndex = 47;
@@ -3668,11 +3669,25 @@ namespace MesFilms
             this.pictureBox1.TabIndex = 75;
             this.pictureBox1.TabStop = false;
             // 
+            // ButCopy
+            // 
+            this.ButCopy.Location = new System.Drawing.Point(521, 464);
+            this.ButCopy.Name = "ButCopy";
+            this.ButCopy.Size = new System.Drawing.Size(64, 31);
+            this.ButCopy.TabIndex = 76;
+            this.ButCopy.Text = "Copy";
+            this.ToolTip1.SetToolTip(this.ButCopy, "Creates a copy of the current selected configuration.\r\nCan be used e.g. if you wa" +
+                    "nt to have more than one \r\nconfigurations available withdifferent settings or fi" +
+                    "lters, \r\nbut based on same movie DB.");
+            this.ButCopy.UseVisualStyleBackColor = true;
+            this.ButCopy.Click += new System.EventHandler(this.ButCopy_Click);
+            // 
             // MesFilmsSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(779, 495);
+            this.ClientSize = new System.Drawing.Size(779, 506);
+            this.Controls.Add(this.ButCopy);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Config_Menu);
             this.Controls.Add(this.ButSave);
@@ -4074,6 +4089,7 @@ namespace MesFilms
         private Label label39;
         private Label label38;
         private CheckBox chkGlobalUnwatchedOnly;
+        private Button ButCopy;
 
     }
 }

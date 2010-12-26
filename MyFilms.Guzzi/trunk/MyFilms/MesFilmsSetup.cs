@@ -247,6 +247,11 @@ namespace MesFilms
 
         private void ButSave_Click(object sender, EventArgs e)
         {
+            Save_Config();
+        }
+
+        private void Save_Config()
+        {
             if (Config_Name.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Configuration's Name is Mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -1262,10 +1267,31 @@ namespace MesFilms
             }
 
         }
+
+
+        private void ButCopy_Click(object sender, EventArgs e)
+        {
+            MesFilmsInputBox input = new MesFilmsInputBox();
+            input.ShowDialog(this);
+            string newConfig_Name = input.UserName;
+            if (newConfig_Name == Config_Name.Text)
+            {
+                System.Windows.Forms.MessageBox.Show("New Config Name must be different from the existing one !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                Config_Name.Text = newConfig_Name;
+                System.Windows.Forms.MessageBox.Show("Created a copy of current Configuration !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Save_Config();
+                Config_Name.Focus();
+            }
+        }
+
         private void Remove_Config()
         {
             XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Empty);
         }
+
         private void MesFilmsSetup_Quit(object sender, FormClosedEventArgs e)
         {
             if (Config_Name.Items.Count == 0)
@@ -2903,6 +2929,7 @@ namespace MesFilms
         {
 
         }
+
 
 
     }
