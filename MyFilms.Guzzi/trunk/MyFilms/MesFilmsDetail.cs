@@ -60,7 +60,7 @@ namespace MesFilms
         enum Controls : int
         {
             //CTRL_TxtSelect = 12,
-            CTRL_BtnPlay = 101,
+            CTRL_BtnPlay = 10000,
             CTRL_BtnPlay1Description = 10001,
             CTRL_BtnPlay2Comment = 10002,
             CTRL_BtnPlay3Persons = 10003,

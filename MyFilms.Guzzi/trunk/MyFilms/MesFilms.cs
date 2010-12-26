@@ -919,6 +919,9 @@ namespace MesFilms
                 conf.StrTxtSelect = "[" + sLabel + "]";
                 conf.StrTitleSelect = "";
                 conf.Boolselect = false;
+
+                //MesFilmsDetail.setGUIProperty("view", conf.WStrSort);
+                SetLabelView(conf.WStrSort);
             }
             else
             {
@@ -985,6 +988,7 @@ namespace MesFilms
             //setlabels
 //            TxtSelect.Label = (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"); // always show as though folder path using \ regardless what sep is used
             MesFilmsDetail.setGUIProperty("select", (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"));// always show as though folder path using \ regardless what sep is used
+
             BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
             BtnSrtBy.Label = conf.CurrentSortMethod;
 
@@ -1475,7 +1479,7 @@ namespace MesFilms
             dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
             dlg1.Add(GUILocalizeStrings.Get(342));//videos
             dlg1.Add(GUILocalizeStrings.Get(345));//year
-            dlg1.Add(GUILocalizeStrings.Get(135));//genre
+            dlg1.Add(GUILocalizeStrings.Get(10798664));//genre -> category
             dlg1.Add(GUILocalizeStrings.Get(200026));//countries
             //dlg1.Add(GUILocalizeStrings.Get(200027));//Watched
             System.Collections.Generic.List<string> choiceView = new System.Collections.Generic.List<string>();
@@ -2200,6 +2204,9 @@ namespace MesFilms
                                 conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";
 //                            TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
                             conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
+
+                            if (wStrViewDfltItem.Length > 0)
+                                SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MesFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
                             MesFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
                             BtnSrtBy.Label = conf.CurrentSortMethod;
                             if (conf.StrSortSens == " ASC")
@@ -2315,8 +2322,8 @@ namespace MesFilms
                     conf.WStrSortSens = " ASC";
                     BtnSrtBy.IsAscending = true;
                     getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, "");
-                    MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(135));//category
-                    GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(135));
+                    MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(10798664));//category
+                    GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(10798664));
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "country":
@@ -5386,6 +5393,70 @@ namespace MesFilms
                }
 
             }
+       }
+
+       //*****************************************************************************************
+       //*  set the #myfilms.view label
+       //*****************************************************************************************
+       private static void SetLabelView(string viewDefaultItem)
+       {
+           viewDefaultItem = viewDefaultItem.ToLower();
+           switch (viewDefaultItem)
+           {
+               case "all":
+                   MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(342));//videos
+                   GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(342));
+                   break;
+               case "year":
+                   MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(345));//year
+                   GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(345));
+                   break;
+               case "category":
+                   MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(10798664));//category
+                   GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(10798664));
+                   break;
+               case "country":
+                   MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(200026));//country
+                   GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(200026));
+                   break;
+               case "storage":
+                   conf.StrTxtSelect = GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951);
+                   MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
+                   GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));
+                   break;
+
+               default:
+
+                   int i = -1;
+
+                   if (viewDefaultItem == conf.StrViewText[0].ToLower() || viewDefaultItem == conf.StrViewItem[0].ToLower())
+                       i = 0;
+                   if (viewDefaultItem == conf.StrViewText[1].ToLower() || viewDefaultItem == conf.StrViewItem[1].ToLower())
+                       i = 1;
+                   if (viewDefaultItem == conf.StrViewText[2].ToLower() || viewDefaultItem == conf.StrViewItem[2].ToLower())
+                       i = 2;
+                   if (viewDefaultItem == conf.StrViewText[3].ToLower() || viewDefaultItem == conf.StrViewItem[3].ToLower())
+                       i = 3;
+                   if (viewDefaultItem == conf.StrViewText[4].ToLower() || viewDefaultItem == conf.StrViewItem[4].ToLower())
+                       i = 4;
+
+                   if (i != -1)
+                   {
+                       if ((conf.StrViewText[i] == null) || (conf.StrViewText[i].Length == 0))
+                       {
+                           MesFilmsDetail.setGUIProperty("view", conf.StrViewItem[i]);   // specific user View1
+                           GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewItem[i]);
+                       }
+                       else
+                       {
+                           MesFilmsDetail.setGUIProperty("view", conf.StrViewText[i]);   // specific Text for View1
+                           GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewText[i]);
+                       }
+                   }
+
+                   break;
+           }
+
        }
 
         #endregion
