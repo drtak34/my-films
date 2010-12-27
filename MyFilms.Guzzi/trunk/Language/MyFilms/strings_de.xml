@@ -139,7 +139,7 @@
     <String id="10798661">Regisseur</String>
     <String id="10798662">Produzent</String>
     <String id="10798663">Land</String>
-    <String id="10798664">Genre</String>
+    <String id="10798664">Kategorie</String>
     <String id="10798665">Jahr</String>
     <String id="10798666">Länge</String>
     <String id="10798667">Schauspieler</String>
@@ -185,6 +185,8 @@
     <String id="10798727">Zeige Film-Server Status</String>
     <String id="10798728">Erzeuge Cover vom Film</String>
     <String id="10798731">Personen Infos (IMDB)</String>
+    <String id="10798732">Wähle Eigenschaft für Update ...</String>
+    <String id="10798733">Ersetze bestehendes Cover mit diesem ?</String>
     <String id="10798751">Übersicht und Filmstart</String>
     <String id="10798752">Beschreibung</String>
     <String id="10798753">Kommentar</String>
