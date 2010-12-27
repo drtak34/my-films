@@ -956,7 +956,7 @@ namespace MesFilms
             SetFilmSelect();
             //Added GlobalFilterList for Trailer & Rating Filters !!!
 			// Added ,false from ZebonsMerge
-            r = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens,false);
+            r = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
 			//r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
             Log.Debug("MyFilms (GetFilmList) - GlobalFilterString: '" + GlobalFilterString + "'");
             Log.Debug("MyFilms (GetFilmList) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");

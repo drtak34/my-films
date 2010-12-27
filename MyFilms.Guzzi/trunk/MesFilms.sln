@@ -27,9 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqLite", "SqLite", "{593C46
 		..\..\Mediaportal\trunk\mediaportal\Databases\Video\SqlLite\VideoDatabaseSqlLite.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\SqlLite\VideoDatabaseSqlLite.cs
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GrabberInterface", "GrabberInterface", "{2274964D-A2F9-4624-B3EB-03CF3746E152}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Interface", "..\..\AMCupdater\trunk\Grabber_Interface\Grabber_Interface.csproj", "{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Interface", "Grabber_Interface\Grabber_Interface.csproj", "{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -188,6 +186,5 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{593C4621-FD47-4EF8-BC04-BF29E59C9CDB} = {BB0C676F-E2F6-415A-AB1B-9FBF9CF38806}
-		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48} = {2274964D-A2F9-4624-B3EB-03CF3746E152}
 	EndGlobalSection
 EndGlobal

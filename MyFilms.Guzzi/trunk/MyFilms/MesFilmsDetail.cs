@@ -1184,7 +1184,7 @@ namespace MesFilms
             {
                 case 1:
                     wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[0];
-                    grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript);
+                    grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript, GetID, false);
                     break;
                 case 0:
                     break;
@@ -1225,7 +1225,7 @@ namespace MesFilms
                     if (dlg.SelectedLabel > 0)
                     {
                         wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[dlg.SelectedLabel - 1];
-                        grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy,wscript);
+                        grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy,wscript, GetID, true);
                     }
                     break;
             }
@@ -1233,7 +1233,7 @@ namespace MesFilms
         //-------------------------------------------------------------------------------------------
         //  Grab Internet Movie Details Informations and update the XML database and refresh screen
         //-------------------------------------------------------------------------------------------        
-        public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript)
+        public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript, int GetID, bool interactive)
         {
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string[] Result = new string[20];
@@ -1249,92 +1249,267 @@ namespace MesFilms
             Result = Grab.GetDetail(url, MesFilms.conf.StrPathImg + Img_Path, wscript);
             Log.Info("MyFilms : Grabb Internet Information done for : " + ttitle);
 
-            //            string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
-            //            string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
-            if (Result[0] != string.Empty && Result[0] != null)
+            // string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
+            // string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
+
+            string strChoice = "all"; // defaults to "all", if no other choice
+            if (interactive) // Dialog only in interactive mode
             {
-                title = Result[0].ToString();
-                wtitle = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
-                if (wtitle.Contains(MesFilms.conf.TitleDelim))
-                    wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
-                if (wtitle != title)
-                    Remove_Backdrops_Fanart(wtitle, true);
-                if (MesFilms.conf.StrTitle1 == "OriginalTitle")
-                    MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = moviehead + title;
-                else
-                    MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = title;
-            }
-            if (Result[1] != string.Empty && Result[1] != null)
-            {
-                ttitle = Result[1].ToString();
-                wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-                if (wtitle.Contains(MesFilms.conf.TitleDelim))
-                    wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
-                if (wtitle != ttitle)
-                    Remove_Backdrops_Fanart(wtitle, true);
-                if (MesFilms.conf.StrTitle1 == "TranslatedTitle")
-                    MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = moviehead + ttitle;
-                else
-                    MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = ttitle;
-            }
-            if (Result[2] != string.Empty && Result[2] != null)
-            {
-                if (Img_Path_Type.ToLower() == "true")
-                    Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
-                if (Img_Path.Length > 0)
-                    if (Img_Path.EndsWith("\\"))
-                        Result[2] = Img_Path + Result[2];
-                    else
-                        Result[2] = Img_Path + "\\" + Result[2];
-                MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
+
+                System.Collections.Generic.List<string> choiceViewMenu = new System.Collections.Generic.List<string>();
+                GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                dlgmenu.Reset();
+                dlgmenu.SetHeading(GUILocalizeStrings.Get(10798732)); // Choose property to update
+                dlgmenu.Add("update all infos");//play trailer
+                choiceViewMenu.Add("all");
+
+                string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director", "Producer", "Year", "Country", "Category", "URL" };
+                string strOldValue = "";
+                string strNewValue = "";
+
+                int i = 0;
+                foreach (string wProperty in PropertyList)
+                {
+                    try
+                    {
+                        strOldValue = MesFilms.r[MesFilms.conf.StrIndex][wProperty].ToString();
+                        if (strOldValue == null)
+                            strOldValue = "";
+                        strNewValue = Result[i].ToString();
+                        if (i == 2)
+                            strNewValue = Result[12];
+                        if (strOldValue == null)
+                            strOldValue = "";
+
+                        dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue + "' -> '" + strNewValue + "'");
+                        choiceViewMenu.Add(wProperty);
+                    }
+                    catch
+                    {
+                        Log.Debug("MyFilms: GrabberUpdate - Error adding Property '" + wProperty + "' to Selectionmenu");
+                    }
+                    i = i + 1;
+                }
+
+                dlgmenu.DoModal(GetID);
+                if (dlgmenu.SelectedLabel == -1)
+                {
+                    return;
+                }
+                strChoice = choiceViewMenu[dlgmenu.SelectedLabel];
             }
 
-            if (Result[3] != string.Empty && Result[3] != null)
-                MesFilms.r[MesFilms.conf.StrIndex]["Description"] = Result[3].ToString();
-            if (Result[4] != string.Empty && Result[4] != null)
+
+            switch (strChoice)
             {
-                if (Result[4].ToString().Length > 0)
-                {
-                    NumberFormatInfo provider = new NumberFormatInfo();
-                    provider.NumberDecimalSeparator = ".";
-                    provider.NumberDecimalDigits = 1;
-                    decimal wnote = Convert.ToDecimal(Result[4], provider);
-                    MesFilms.r[MesFilms.conf.StrIndex]["Rating"] = string.Format("{0:F1}", wnote);
-                }
+                case "OriginalTitle":
+                    if (Result[0] != string.Empty && Result[0] != null)
+                    {
+                        title = Result[0].ToString();
+                        wtitle = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
+                        if (wtitle.Contains(MesFilms.conf.TitleDelim))
+                            wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
+                        if (wtitle != title)
+                            Remove_Backdrops_Fanart(wtitle, true);
+                        if (MesFilms.conf.StrTitle1 == "OriginalTitle")
+                            MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = moviehead + title;
+                        else
+                            MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = title;
+                    }
+                    break;
+                case "TranslatedTitle":
+                    if (Result[1] != string.Empty && Result[1] != null)
+                    {
+                        ttitle = Result[1].ToString();
+                        wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                        if (wtitle.Contains(MesFilms.conf.TitleDelim))
+                            wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
+                        if (wtitle != ttitle)
+                            Remove_Backdrops_Fanart(wtitle, true);
+                        if (MesFilms.conf.StrTitle1 == "TranslatedTitle")
+                            MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = moviehead + ttitle;
+                        else
+                            MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = ttitle;
+                    }
+                    break;
+                case "Picture":
+                    if (Result[2] != string.Empty && Result[2] != null)
+                    {
+                        if (Img_Path_Type.ToLower() == "true")
+                            Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
+                        if (Img_Path.Length > 0)
+                            if (Img_Path.EndsWith("\\"))
+                                Result[2] = Img_Path + Result[2];
+                            else
+                                Result[2] = Img_Path + "\\" + Result[2];
+
+                        string oldPicture = GUIPropertyManager.GetProperty("picture");
+                        string newPicture = Result[2];
+
+                        setGUIProperty("picture", newPicture);
+                        GUIWindowManager.Process(); // To Update GUI display ...
+
+                        GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+                        dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079870)); // choice
+                        dlgYesNo.SetLine(1, "");
+                        dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798733)); // Replace cover with new one
+                        dlgYesNo.SetLine(3, "");
+                        dlgYesNo.DoModal(GetID);
+                        if (!(dlgYesNo.IsConfirmed))
+                        {
+                            setGUIProperty("picture", oldPicture);
+                            GUIWindowManager.Process();
+                            return;
+                        }
+
+                        MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
+                    }
+                    break;
+                case "Description":
+                    if (Result[3] != string.Empty && Result[3] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Description"] = Result[3].ToString();
+                    break;
+                case "Rating":
+                    if (Result[4] != string.Empty && Result[4] != null)
+                    {
+                        if (Result[4].ToString().Length > 0)
+                        {
+                            NumberFormatInfo provider = new NumberFormatInfo();
+                            provider.NumberDecimalSeparator = ".";
+                            provider.NumberDecimalDigits = 1;
+                            decimal wnote = Convert.ToDecimal(Result[4], provider);
+                            MesFilms.r[MesFilms.conf.StrIndex]["Rating"] = string.Format("{0:F1}", wnote);
+                        }
+                    }
+                    break;
+                case "Actors":
+                    if (Result[5] != string.Empty && Result[5] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Actors"] = Result[5].ToString();
+                    break;
+                case "Director":
+                    if (Result[6] != string.Empty && Result[6] != null)
+                    {
+                        director = Result[6].ToString();
+                        MesFilms.r[MesFilms.conf.StrIndex]["Director"] = Result[6].ToString();
+                    }
+                    break;
+                case "Producer":
+                    if (Result[7] != string.Empty && Result[7] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Producer"] = Result[7].ToString();
+                    break;
+                case "Year":
+                    if (Result[8] != string.Empty && Result[8] != null)
+                    {
+                        try
+                        {
+                            year = Convert.ToInt16(Result[8].ToString());
+                        }
+                        catch { }
+                        MesFilms.r[MesFilms.conf.StrIndex]["Year"] = Result[8].ToString();
+                    }
+                    break;
+                case "Country":
+                    if (Result[9] != string.Empty && Result[9] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Country"] = Result[9].ToString();
+                    break;
+                case "Category":
+                    if (Result[10] != string.Empty && Result[10] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Category"] = Result[10].ToString();
+                    break;
+                case "URL":
+                    if (Result[11] != string.Empty && Result[11] != null)
+                        if (MesFilms.conf.StrStorage != "URL")
+                            MesFilms.r[MesFilms.conf.StrIndex]["URL"] = Result[11].ToString();
+                    break;
+                case "all":
+                    if (Result[0] != string.Empty && Result[0] != null)
+                    {
+                        title = Result[0].ToString();
+                        wtitle = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
+                        if (wtitle.Contains(MesFilms.conf.TitleDelim))
+                            wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
+                        if (wtitle != title)
+                            Remove_Backdrops_Fanart(wtitle, true);
+                        if (MesFilms.conf.StrTitle1 == "OriginalTitle")
+                            MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = moviehead + title;
+                        else
+                            MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"] = title;
+                    }
+                    if (Result[1] != string.Empty && Result[1] != null)
+                    {
+                        ttitle = Result[1].ToString();
+                        wtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                        if (wtitle.Contains(MesFilms.conf.TitleDelim))
+                            wtitle = wtitle.Substring(wtitle.LastIndexOf(MesFilms.conf.TitleDelim) + 1);
+                        if (wtitle != ttitle)
+                            Remove_Backdrops_Fanart(wtitle, true);
+                        if (MesFilms.conf.StrTitle1 == "TranslatedTitle")
+                            MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = moviehead + ttitle;
+                        else
+                            MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] = ttitle;
+                    }
+                    if (Result[2] != string.Empty && Result[2] != null)
+                    {
+                        if (Img_Path_Type.ToLower() == "true")
+                            Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
+                        if (Img_Path.Length > 0)
+                            if (Img_Path.EndsWith("\\"))
+                                Result[2] = Img_Path + Result[2];
+                            else
+                                Result[2] = Img_Path + "\\" + Result[2];
+                        MesFilms.r[MesFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
+                    }
+
+                    if (Result[3] != string.Empty && Result[3] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Description"] = Result[3].ToString();
+                    if (Result[4] != string.Empty && Result[4] != null)
+                    {
+                        if (Result[4].ToString().Length > 0)
+                        {
+                            NumberFormatInfo provider = new NumberFormatInfo();
+                            provider.NumberDecimalSeparator = ".";
+                            provider.NumberDecimalDigits = 1;
+                            decimal wnote = Convert.ToDecimal(Result[4], provider);
+                            MesFilms.r[MesFilms.conf.StrIndex]["Rating"] = string.Format("{0:F1}", wnote);
+                        }
+                    }
+                    if (Result[5] != string.Empty && Result[5] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Actors"] = Result[5].ToString();
+                    if (Result[6] != string.Empty && Result[6] != null)
+                    {
+                        director = Result[6].ToString();
+                        MesFilms.r[MesFilms.conf.StrIndex]["Director"] = Result[6].ToString();
+                    }
+                    if (Result[7] != string.Empty && Result[7] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Producer"] = Result[7].ToString();
+                    if (Result[8] != string.Empty && Result[8] != null)
+                    {
+                        try
+                        {
+                            year = Convert.ToInt16(Result[8].ToString());
+                        }
+                        catch { }
+                        MesFilms.r[MesFilms.conf.StrIndex]["Year"] = Result[8].ToString();
+                    }
+                    if (Result[9] != string.Empty && Result[9] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Country"] = Result[9].ToString();
+                    if (Result[10] != string.Empty && Result[10] != null)
+                        MesFilms.r[MesFilms.conf.StrIndex]["Category"] = Result[10].ToString();
+                    if (Result[11] != string.Empty && Result[11] != null)
+                        if (MesFilms.conf.StrStorage != "URL")
+                            MesFilms.r[MesFilms.conf.StrIndex]["URL"] = Result[11].ToString();
+                    break;
+
+                default:
+                    break;
             }
-            if (Result[5] != string.Empty && Result[5] != null)
-                MesFilms.r[MesFilms.conf.StrIndex]["Actors"] = Result[5].ToString();
-            if (Result[6] != string.Empty && Result[6] != null)
-            {
-                director = Result[6].ToString();
-                MesFilms.r[MesFilms.conf.StrIndex]["Director"] = Result[6].ToString();
-            }
-            if (Result[7] != string.Empty && Result[7] != null)
-                MesFilms.r[MesFilms.conf.StrIndex]["Producer"] = Result[7].ToString();
-            if (Result[8] != string.Empty && Result[8] != null)
-            {
-                try
-                {
-                    year = Convert.ToInt16(Result[8].ToString());
-                }
-                catch { }
-                MesFilms.r[MesFilms.conf.StrIndex]["Year"] = Result[8].ToString();
-            }
-            if (Result[9] != string.Empty && Result[9] != null)
-                MesFilms.r[MesFilms.conf.StrIndex]["Country"] = Result[9].ToString();
-            if (Result[10] != string.Empty && Result[10] != null)
-                MesFilms.r[MesFilms.conf.StrIndex]["Category"] = Result[10].ToString();
-            if (Result[11] != string.Empty && Result[11] != null)
-                if (MesFilms.conf.StrStorage != "URL")
-                    MesFilms.r[MesFilms.conf.StrIndex]["URL"] = Result[11].ToString();
             Update_XML_database();
             Log.Info("MyFilms : Database Updated for : " + ttitle);
-            if (title.Length > 0 && MesFilms.conf.StrFanart)
+            if (title.Length > 0 && MesFilms.conf.StrFanart) // Get Fanart - ToDo Guzzi: Use local Fanart, if chosen ?
             {
                 System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
                 //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false);
             }
-
         }
 
         //-------------------------------------------------------------------------------------------
@@ -1417,7 +1592,7 @@ namespace MesFilms
         }
 
         //-------------------------------------------------------------------------------------------
-        //  Grab XBMC (movie.nfo) kompatible Movie Details Informations and update the XML database and refresh screen
+        // Grab XBMC (movie.nfo) kompatible Movie Details Informations and update the XML database and refresh screen
         // Last Parameter is set to overwrite all existing data - when set to false it only updates missing infos (important for batch import)
         // bool overwrite: true owerwrites all existing infos - false updates only empty values
         //-------------------------------------------------------------------------------------------        
