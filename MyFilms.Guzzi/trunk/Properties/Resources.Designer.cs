@@ -22,7 +22,7 @@ namespace MesFilms.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace MesFilms.Properties {
         ///   Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MesFilms.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace MesFilms.Properties {
         ///   Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,23 +60,9 @@ namespace MesFilms.Properties {
             }
         }
         
-        public static System.Drawing.Bitmap clapperboard_128x128 {
+        internal static System.Drawing.Bitmap film_reel_128x128 {
             get {
-                object obj = ResourceManager.GetObject("clapperboard_128x128", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        public static System.Drawing.Bitmap film_reel_128x128 {
-            get {
-                object obj = ResourceManager.GetObject("film_reel_128x128", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        public static System.Drawing.Bitmap MP_Icon {
-            get {
-                object obj = ResourceManager.GetObject("MP_Icon", resourceCulture);
+                object obj = ResourceManager.GetObject("film-reel-128x128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
