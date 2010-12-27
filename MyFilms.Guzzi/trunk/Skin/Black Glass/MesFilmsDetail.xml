@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <window>
 	<id>7987</id>
-	<defaultcontrol>101</defaultcontrol>
+	<defaultcontrol>10000</defaultcontrol>
 	<allowoverlay>player.hasmedia+!facadeview.filmstrip</allowoverlay>
 	<define>#header.background:hover_Films.png</define>
 	<define>#header.label:#myfilms.config.pluginname (#myfilms.view)</define>
@@ -126,7 +126,7 @@
 				<height>1</height>
 				<texture>black.png</texture>
 				<colorDiffuse>ffffffff</colorDiffuse>
-				<visible>!control.hasfocus(101)+!control.hasfocus(10099)</visible>
+				<visible>!control.hasfocus(10000)+!control.hasfocus(10099)</visible>
 			</control>
 			<control>
 				<type>image</type>
@@ -137,7 +137,7 @@
 				<height>720</height>
 				<texture>bg_left.png</texture>
 				<colorDiffuse>ffffffff</colorDiffuse>
-				<visible>!control.hasfocus(101)+!control.hasfocus(10099)</visible>
+				<visible>!control.hasfocus(10000)+!control.hasfocus(10099)</visible>
 			</control>
 			<control>
 				<type>label</type>
@@ -165,7 +165,7 @@
 				<id>1234</id>
 				<animation effect="fade" time="450" reversible="true">visible</animation>
 				<animation effect="fade" time="450" reversible="true">hidden</animation>
-				<visible>!control.hasfocus(101)+!control.hasfocus(10099)</visible>
+				<visible>!control.hasfocus(10000)+!control.hasfocus(10099)</visible>
 				<posX>0</posX>
 				<posY>100</posY>
 				<layout>StackLayout</layout>
@@ -183,9 +183,9 @@
 				<!-- <control>
 					<type>button</type>
 					<description>Play</description>
-					<id>101</id>
-					<onleft>101</onleft>
-					<onright>101</onright>
+					<id>10000</id>
+					<onleft>10000</onleft>
+					<onright>10000</onright>
 					<ondown>102</ondown>
 					<onup>105</onup>
 					<label>208</label>
@@ -196,7 +196,7 @@
 					<id>102</id>
 					<onup>10014</onup>
 					<ondown>109</ondown>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<label>712</label>
 				</control> -->
 				<control>
@@ -205,7 +205,7 @@
 					<id>108</id>
 					<onup>10014</onup>
 					<ondown>109</ondown>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<label>Personen Infos</label>
 				</control>
 				<control>
@@ -214,7 +214,7 @@
 					<id>109</id>
 					<onup>108</onup>
 					<ondown>107</ondown>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<label>Spiele Trailer</label>
 				</control>
 				<control>
@@ -223,14 +223,14 @@
 					<id>107</id>
 					<onup>109</onup>
 					<ondown>104</ondown>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<label>184</label>
 				</control>
 				<control>
 					<type>button</type>
 					<description>prior</description>
 					<id>104</id>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<ondown>103</ondown>
 					<onup>107</onup>
 					<label>210</label>
@@ -239,7 +239,7 @@
 					<type>button</type>
 					<description>next</description>
 					<id>103</id>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<ondown>106</ondown>
 					<onup>104</onup>
 					<label>209</label>
@@ -248,19 +248,19 @@
 					<type>button</type>
 					<description>First</description>
 					<id>106</id>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<ondown>105</ondown>
 					<onup>103</onup>
-					<label>Erster Titel</label>
+					<label>1079872</label>
 				</control>
 				<control>
 					<type>button</type>
 					<description>Last</description>
 					<id>105</id>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<ondown>10012</ondown>
 					<onup>106</onup>
-					<label>Letzter Titel</label>
+					<label>1079873</label>
 				</control>
 
 <!-- Start - Additional Buttons for Links to other Plugins -->
@@ -271,7 +271,7 @@
 					<id>10011</id>
 					<hyperlink></hyperlink>
 					<label>-</label>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<onup>105</onup>
 					<ondown>10012</ondown>
 				</control>
@@ -282,7 +282,7 @@
 					<id>10012</id>
 					<hyperlink>614</hyperlink>
 					<label>IMDB-ArtistInfo</label>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<onup>105</onup>
 					<ondown>10013</ondown>
 					<visible>yes</visible>
@@ -294,7 +294,7 @@
 					<id>10012</id>
 					<hyperlink>5900</hyperlink>
 					<label>Trailer</label>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<onup>105</onup>
 					<ondown>10013</ondown>
 					<visible>plugin.isenabled(My Trailers)</visible>
@@ -305,7 +305,7 @@
 					<id>10013</id>
 					<hyperlink>4755</hyperlink>
 					<label>Online Videos</label>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<onup>10012</onup>
 					<ondown>10014</ondown>
 				</control>
@@ -315,7 +315,7 @@
 					<id>10014</id>
 					<hyperlink>9811</hyperlink>
 					<label>TV-Serien</label>
-					<onright>101</onright>
+					<onright>10000</onright>
 					<onup>10013</onup>
 					<ondown>108</ondown>
 				</control>
@@ -324,49 +324,52 @@
 
 			</control>
 		</control>
-		<control>
+
+
+<!-- 		<control>
 			<description>Play Button and Summary</description>
 			<type>button</type>
 			<id>101</id>
 			<posX>2</posX>
 			<posY>630</posY>
 			<width>290</width>
-      <height>30</height>
+      			<height>30</height>
 			<onup>10004</onup>
 			<ondown>10001</ondown>
 			<onleft>107</onleft>
 			<onright>10099</onright>
-      <label>#myfilms.menu.overview</label>
+      			<label>#myfilms.menu.overview</label>
 			<font>font10</font>
-      <textureFocus>-</textureFocus>
-      <textureNoFocus>-</textureNoFocus>
-			<!-- <textcolor>ffffffff</textcolor>
+      			<textureFocus>-</textureFocus>
+      			<textureNoFocus>-</textureNoFocus>
+			<textcolor>ffffffff</textcolor>
 			<disabledcolor>30000000</disabledcolor>
-      <textureFocus>ledon.png</textureFocus>
-      <textureNoFocus>ledoff.png</textureNoFocus>
-        <subitems>
-                <subitem>101</subitem>
-                <subitem>100</subitem>
-                <subitem>417</subitem>
-        </subitems>
-      <textXOff>0</textXOff>
-      <textYOff>0</textYOff> -->
-      <!-- <visible>!Control.HasFocus(10099)</visible> -->
+      			<textureFocus>ledon.png</textureFocus>
+      			<textureNoFocus>ledoff.png</textureNoFocus>
+        		<subitems>
+                		<subitem>101</subitem>
+                		<subitem>100</subitem>
+                		<subitem>417</subitem>
+        		</subitems>
+      			<textXOff>0</textXOff>
+      			<textYOff>0</textYOff>
+      			<visible>!Control.HasFocus(10099)</visible>
 			<animation effect="slide" time="0" start="-400,0" reversible="true">focus</animation>
 			<animation effect="slide" time="0" end="-400,0" reversible="true">unfocus</animation>
 		</control>
+ -->
 
-    <control>
+    		<control>
 			<description>Play Button and Summary</description>
 			<type>button</type>
 			<id>10000</id>
 			<posX>2</posX>
 			<posY>630</posY>
 			<width>290</width>
-      <height>30</height>
-      <label>#myfilms.menu.overview</label>
+      			<height>30</height>
+      			<label>#myfilms.menu.overview</label>
 			<font>font10</font>
-      <textureFocus>-</textureFocus>
+      			<textureFocus>-</textureFocus>
       <textureNoFocus>-</textureNoFocus>
       <visible>!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
@@ -381,7 +384,7 @@
 			<posY>645</posY>
       <width>290</width>
       <height>30</height>
-      <onup>101</onup>
+      <onup>10000</onup>
       <ondown>10002</ondown>
 			<onleft>107</onleft>
 			<onright>10099</onright>
@@ -390,7 +393,7 @@
 			<align>left</align>
       <textureFocus>-</textureFocus>
       <textureNoFocus>-</textureNoFocus>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible allowhiddenfocus="true">!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -445,7 +448,7 @@
       <height>30</height>
       <id>10004</id>
       <onup>10003</onup>
-      <ondown>101</ondown>
+      <ondown>100000</ondown>
 			<onleft>107</onleft>
 			<onright>10099</onright>
       <label>#myfilms.menu.techinfos</label>
@@ -464,10 +467,10 @@
 			<posX>2000</posX>
 			<posY>1</posY>
       <id>10099</id>
-			<onleft>101</onleft>
-      <onup>101</onup>
-      <ondown>101</ondown>
-			<onleft>101</onleft>
+			<onleft>10000</onleft>
+      <onup>10000</onup>
+      <ondown>10000</ondown>
+			<onleft>10000</onleft>
 			<onright>10099</onright>
       <label>-</label>
 			<font>font10</font>
@@ -483,7 +486,7 @@
 			<width>22</width>
       <height>22</height>
 			<texture>ledon.png</texture>
-      <visible>Control.HasFocus(101)</visible>
+      <visible>Control.HasFocus(10000)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		</control>	
 		<control>
@@ -495,7 +498,7 @@
       <height>22</height>
 			<texture>ledoff.png</texture>
 			<colordiffuse>30ffffff</colordiffuse>
-      <visible>!Control.HasFocus(101)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10000)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		</control>	
 		<control>

@@ -33,7 +33,7 @@
             <id>3</id>
             <posX>407</posX>
             <posY>360</posY>
-            <label>204</label>
+            <label>#myfilms.db.rating.label</label>
             <font>font13</font>
             <textcolor>ffffffff</textcolor>
             <animation effect="fade" time="250">WindowOpen</animation>
@@ -45,7 +45,7 @@
             <id>4</id>
             <posX>300</posX>
             <posY>180</posY>
-            <label>#rating</label>
+            <label>#myfilms.db.rating</label>
             <font>font16</font>
             <colordiffuse>ffffffff</colordiffuse>
             <textcolor>ffff8000</textcolor>
@@ -121,7 +121,7 @@
                 <subitem>star.png</subitem>
             </subitems>
             <orientation>horizontal</orientation>
-            <percentage>#rating</percentage>
+            <percentage>#myfilms.db.rating.value</percentage>
             <imagesToDraw>10</imagesToDraw>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
