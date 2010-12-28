@@ -140,6 +140,9 @@
   <data name="&gt;&gt;textConfig.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="button_Browse.Location" type="System.Drawing.Point, System.Drawing">
     <value>472, 10</value>
   </data>
@@ -152,9 +155,6 @@
   <data name="button_Browse.Text" xml:space="preserve">
     <value>Browse</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="button_Browse.ToolTip" xml:space="preserve">
     <value>Open a configuration file</value>
   </data>
@@ -197,25 +197,6 @@
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 17</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>#Search#</value>
-  </data>
   <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
   </data>
@@ -227,21 +208,6 @@
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="TextSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 14</value>
-  </data>
-  <data name="TextSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 20</value>
-  </data>
-  <data name="TextSearch.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="TextSearch.Text" xml:space="preserve">
-    <value>Matrix</value>
-  </data>
-  <data name="TextSearch.ToolTip" xml:space="preserve">
-    <value>Keyword search</value>
   </data>
   <data name="&gt;&gt;TextSearch.Name" xml:space="preserve">
     <value>TextSearch</value>
@@ -255,21 +221,6 @@
   <data name="&gt;&gt;TextSearch.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="button_Load.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 12</value>
-  </data>
-  <data name="button_Load.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
-  </data>
-  <data name="button_Load.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="button_Load.Text" xml:space="preserve">
-    <value>Load</value>
-  </data>
-  <data name="button_Load.ToolTip" xml:space="preserve">
-    <value>Loads the source code of the url depending on the keyword search and page number.</value>
-  </data>
   <data name="&gt;&gt;button_Load.Name" xml:space="preserve">
     <value>button_Load</value>
   </data>
@@ -282,21 +233,6 @@
   <data name="&gt;&gt;button_Load.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="textPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>271, 14</value>
-  </data>
-  <data name="textPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 20</value>
-  </data>
-  <data name="textPage.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="textPage.Text" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="textPage.ToolTip" xml:space="preserve">
-    <value>Page Number</value>
-  </data>
   <data name="&gt;&gt;textPage.Name" xml:space="preserve">
     <value>textPage</value>
   </data>
@@ -308,21 +244,6 @@
   </data>
   <data name="&gt;&gt;textPage.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 17</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>#Page#</value>
   </data>
   <data name="&gt;&gt;label11.Name" xml:space="preserve">
     <value>label11</value>
@@ -360,25 +281,6 @@
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="textNextPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 14</value>
-  </data>
-  <data name="textNextPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 20</value>
-  </data>
-  <data name="textNextPage.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="textNextPage.ToolTip" xml:space="preserve">
-    <value>Key to the next page.
-
-Eg  "resultats/1/#Search#/#Page#.html". 
-
-At the end of each page, the grabber fetches the source code in a string 
-results resultats/1/#Search#/pagecourante+1.html
-
-If found, it will ask the user to move to the next page.</value>
-  </data>
   <data name="&gt;&gt;textNextPage.Name" xml:space="preserve">
     <value>textNextPage</value>
   </data>
@@ -390,24 +292,6 @@ If found, it will ask the user to move to the next page.</value>
   </data>
   <data name="&gt;&gt;textNextPage.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="textStepPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 14</value>
-  </data>
-  <data name="textStepPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 20</value>
-  </data>
-  <data name="textStepPage.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="textStepPage.ToolTip" xml:space="preserve">
-    <value>Key to the next page.
-
-Eg "resultats/1/#Search#/#Page#.html". 
-
-At the end of each page, the grabber fetches the source code in a string resultats/1/#Search#/pagecourante+1.html
-
-If found, it will ask the user to move to the next page.</value>
   </data>
   <data name="&gt;&gt;textStepPage.Name" xml:space="preserve">
     <value>textStepPage</value>
@@ -421,24 +305,6 @@ If found, it will ask the user to move to the next page.</value>
   <data name="&gt;&gt;textStepPage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label20.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>349, 17</value>
-  </data>
-  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="label20.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="label20.Text" xml:space="preserve">
-    <value>Step</value>
-  </data>
   <data name="&gt;&gt;label20.Name" xml:space="preserve">
     <value>label20</value>
   </data>
@@ -450,21 +316,6 @@ If found, it will ask the user to move to the next page.</value>
   </data>
   <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="label16.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 17</value>
-  </data>
-  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="label16.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="label16.Text" xml:space="preserve">
-    <value>Next Page</value>
   </data>
   <data name="&gt;&gt;label16.Name" xml:space="preserve">
     <value>label16</value>
@@ -478,24 +329,6 @@ If found, it will ask the user to move to the next page.</value>
   <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="label19.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 17</value>
-  </data>
-  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="label19.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="label19.Text" xml:space="preserve">
-    <value>Start Page</value>
-  </data>
   <data name="&gt;&gt;label19.Name" xml:space="preserve">
     <value>label19</value>
   </data>
@@ -507,24 +340,6 @@ If found, it will ask the user to move to the next page.</value>
   </data>
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="textStartPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 14</value>
-  </data>
-  <data name="textStartPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 20</value>
-  </data>
-  <data name="textStartPage.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="textStartPage.ToolTip" xml:space="preserve">
-    <value>Key to the next page.
-
-Eg "resultats/1/#Search#/#Page#.html". 
-
-At the end of each page, the grabber fetches the source code in a string results/1/#Search#/pagecourante+1.html
-
-If found, it will ask the user to move to the next page.</value>
   </data>
   <data name="&gt;&gt;textStartPage.Name" xml:space="preserve">
     <value>textStartPage</value>
@@ -562,6 +377,7 @@ If found, it will ask the user to move to the next page.</value>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonPrevParam1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -737,7 +553,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>7</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>221, 269</value>
+    <value>235, 268</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 17</value>
@@ -758,10 +574,10 @@ When you are searching the site, it is possible that the page result is a redire
     <value>8</value>
   </data>
   <data name="textBody.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 292</value>
+    <value>6, 294</value>
   </data>
   <data name="textBody.Size" type="System.Drawing.Size, System.Drawing">
-    <value>813, 304</value>
+    <value>813, 302</value>
   </data>
   <data name="textBody.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -780,15 +596,6 @@ When you are searching the site, it is possible that the page result is a redire
   </data>
   <data name="&gt;&gt;textBody.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="listPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="listPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 147</value>
-  </data>
-  <data name="listPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
   </data>
   <data name="&gt;&gt;listPreview.Name" xml:space="preserve">
     <value>listPreview</value>
@@ -826,8 +633,11 @@ When you are searching the site, it is possible that the page result is a redire
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="button_Find.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 265</value>
+    <value>184, 265</value>
   </data>
   <data name="button_Find.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 23</value>
@@ -854,7 +664,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>11</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 266</value>
+    <value>13, 266</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 20</value>
@@ -1098,8 +908,16 @@ Warning: The 2 fields are required!</value>
   <data name="TextKeyStop.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="TextKeyStop.ToolTip" xml:space="preserve">
-    <value>String that defines the end of the parameter.</value>
+    <value>String that defines the end of the parameter.
+
+SpecialParameters for beginning of expression:
+"normal"	: Find last index pf parameter
+"#REGEX#" (KEYSTART/END / PARAM1/2): Find first/last with Regex
+"#REVERSE#" (PARAM1/2): Reverse search</value>
   </data>
   <data name="&gt;&gt;TextKeyStop.Name" xml:space="preserve">
     <value>TextKeyStop</value>
@@ -1129,7 +947,13 @@ Warning: The 2 fields are required!</value>
     <value>5</value>
   </data>
   <data name="TextKeyStart.ToolTip" xml:space="preserve">
-    <value>String that defines the beginning of the parameter.</value>
+    <value>String that defines the beginning of the parameter.
+
+SpecialParameters for beginning of expression:
+"normal"	: Find last index pf parameter
+"#REGEX#" (KEYSTART/END / PARAM1/2): Find first/last with Regex
+"#REVERSE#" (PARAM1/2): Reverse search
+</value>
   </data>
   <data name="&gt;&gt;TextKeyStart.Name" xml:space="preserve">
     <value>TextKeyStart</value>
@@ -1423,18 +1247,6 @@ Important: You must replace the search string that you used with the string # # 
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 16</value>
-  </data>
-  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 170</value>
-  </data>
-  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textPreview.Text" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
     <value>textPreview</value>
@@ -1927,7 +1739,12 @@ Use the "paramter Preview" to see the result.</value>
     <value>6</value>
   </data>
   <data name="TextKeyStopD.ToolTip" xml:space="preserve">
-    <value>String that defines the end of the parameter.</value>
+    <value>String that defines the end of the parameter.
+
+SpecialParameters for beginning of expression:
+"normal"	: Find last index pf parameter
+"#REGEX#" (KEYSTART/END / PARAM1/2): Find first/last with Regex
+"#REVERSE#" (PARAM1/2): Reverse search</value>
   </data>
   <data name="&gt;&gt;TextKeyStopD.Name" xml:space="preserve">
     <value>TextKeyStopD</value>
@@ -1957,7 +1774,12 @@ Use the "paramter Preview" to see the result.</value>
     <value>5</value>
   </data>
   <data name="TextKeyStartD.ToolTip" xml:space="preserve">
-    <value>String that defines the beginning of the parameter.</value>
+    <value>String that defines the beginning of the parameter.
+
+SpecialParameters for beginning of expression:
+"normal"	: Find last index pf parameter
+"#REGEX#" (KEYSTART/END / PARAM1/2): Find first/last with Regex
+"#REVERSE#" (PARAM1/2): Reverse search</value>
   </data>
   <data name="&gt;&gt;TextKeyStartD.Name" xml:space="preserve">
     <value>TextKeyStartD</value>
@@ -2182,7 +2004,7 @@ in this new page.</value>
     <value>1</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 103</value>
+    <value>3, 93</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>832, 628</value>
@@ -2201,6 +2023,367 @@ in this new page.</value>
   </data>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 17</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>#Search#</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TextSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 14</value>
+  </data>
+  <data name="TextSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 20</value>
+  </data>
+  <data name="TextSearch.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="TextSearch.Text" xml:space="preserve">
+    <value>Matrix</value>
+  </data>
+  <data name="TextSearch.ToolTip" xml:space="preserve">
+    <value>Keyword search</value>
+  </data>
+  <data name="&gt;&gt;TextSearch.Name" xml:space="preserve">
+    <value>TextSearch</value>
+  </data>
+  <data name="&gt;&gt;TextSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextSearch.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;TextSearch.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="button_Load.Location" type="System.Drawing.Point, System.Drawing">
+    <value>372, 12</value>
+  </data>
+  <data name="button_Load.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 23</value>
+  </data>
+  <data name="button_Load.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="button_Load.Text" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="button_Load.ToolTip" xml:space="preserve">
+    <value>Loads the source code of the url depending on the keyword search and page number.</value>
+  </data>
+  <data name="&gt;&gt;button_Load.Name" xml:space="preserve">
+    <value>button_Load</value>
+  </data>
+  <data name="&gt;&gt;button_Load.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_Load.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;button_Load.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>271, 14</value>
+  </data>
+  <data name="textPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 20</value>
+  </data>
+  <data name="textPage.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="textPage.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="textPage.ToolTip" xml:space="preserve">
+    <value>Page Number</value>
+  </data>
+  <data name="&gt;&gt;textPage.Name" xml:space="preserve">
+    <value>textPage</value>
+  </data>
+  <data name="&gt;&gt;textPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textPage.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;textPage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>219, 17</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>#Page#</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="textNextPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 14</value>
+  </data>
+  <data name="textNextPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
+  </data>
+  <data name="textNextPage.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="textNextPage.ToolTip" xml:space="preserve">
+    <value>Key to the next page.
+
+Eg  "resultats/1/#Search#/#Page#.html". 
+
+At the end of each page, the grabber fetches the source code in a string 
+results resultats/1/#Search#/pagecourante+1.html
+
+If found, it will ask the user to move to the next page.</value>
+  </data>
+  <data name="&gt;&gt;textNextPage.Name" xml:space="preserve">
+    <value>textNextPage</value>
+  </data>
+  <data name="&gt;&gt;textNextPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textNextPage.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;textNextPage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="textStepPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 14</value>
+  </data>
+  <data name="textStepPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 20</value>
+  </data>
+  <data name="textStepPage.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="textStepPage.ToolTip" xml:space="preserve">
+    <value>Key to the next page.
+
+Eg "resultats/1/#Search#/#Page#.html". 
+
+At the end of each page, the grabber fetches the source code in a string resultats/1/#Search#/pagecourante+1.html
+
+If found, it will ask the user to move to the next page.</value>
+  </data>
+  <data name="&gt;&gt;textStepPage.Name" xml:space="preserve">
+    <value>textStepPage</value>
+  </data>
+  <data name="&gt;&gt;textStepPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textStepPage.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;textStepPage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label20.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label20.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>349, 17</value>
+  </data>
+  <data name="label20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="label20.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="label20.Text" xml:space="preserve">
+    <value>Step</value>
+  </data>
+  <data name="&gt;&gt;label20.Name" xml:space="preserve">
+    <value>label20</value>
+  </data>
+  <data name="&gt;&gt;label20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label20.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;label20.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label16.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 17</value>
+  </data>
+  <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="label16.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label16.Text" xml:space="preserve">
+    <value>Next Page</value>
+  </data>
+  <data name="&gt;&gt;label16.Name" xml:space="preserve">
+    <value>label16</value>
+  </data>
+  <data name="&gt;&gt;label16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label16.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;label16.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label19.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label19.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label19.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 17</value>
+  </data>
+  <data name="label19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="label19.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="label19.Text" xml:space="preserve">
+    <value>Start Page</value>
+  </data>
+  <data name="&gt;&gt;label19.Name" xml:space="preserve">
+    <value>label19</value>
+  </data>
+  <data name="&gt;&gt;label19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label19.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="textStartPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>313, 14</value>
+  </data>
+  <data name="textStartPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 20</value>
+  </data>
+  <data name="textStartPage.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="textStartPage.ToolTip" xml:space="preserve">
+    <value>Key to the next page.
+
+Eg "resultats/1/#Search#/#Page#.html". 
+
+At the end of each page, the grabber fetches the source code in a string results/1/#Search#/pagecourante+1.html
+
+If found, it will ask the user to move to the next page.</value>
+  </data>
+  <data name="&gt;&gt;textStartPage.Name" xml:space="preserve">
+    <value>textStartPage</value>
+  </data>
+  <data name="&gt;&gt;textStartPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textStartPage.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;textStartPage.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="listPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="listPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 147</value>
+  </data>
+  <data name="listPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;listPreview.Name" xml:space="preserve">
+    <value>listPreview</value>
+  </data>
+  <data name="&gt;&gt;listPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listPreview.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;listPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 16</value>
+  </data>
+  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 170</value>
+  </data>
+  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textPreview.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
+    <value>textPreview</value>
+  </data>
+  <data name="&gt;&gt;textPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textPreview.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;textPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2463,7 +2646,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>836, 732</value>
+    <value>836, 721</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
