@@ -1,6 +1,5 @@
 namespace Grabber_Interface
 {
-
     partial class GrabConfig
     {
         /// <summary>
@@ -114,6 +113,7 @@ namespace Grabber_Interface
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1.AutoPopDelay = 60000;
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();

@@ -184,9 +184,12 @@
     <String id="10798726">Suche Trailer - alle Filme (lokal)</String>
     <String id="10798727">Zeige Film-Server Status</String>
     <String id="10798728">Erzeuge Cover vom Film</String>
+    <String id="10798730">Lade Filminformationen (nfo, XBMC)</String>
     <String id="10798731">Personen Infos (IMDB)</String>
     <String id="10798732">Wähle Eigenschaft für Update ...</String>
     <String id="10798733">Ersetze bestehendes Cover mit diesem ?</String>
+    <String id="10798734">Aktualisiere alle Felder</String>
+    <String id="10798735">Aktualisiere nur leere Felder</String>
     <String id="10798751">Übersicht und Filmstart</String>
     <String id="10798752">Beschreibung</String>
     <String id="10798753">Kommentar</String>
