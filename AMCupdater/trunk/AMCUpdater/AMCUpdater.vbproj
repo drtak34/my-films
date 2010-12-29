@@ -241,6 +241,7 @@
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\app.manifest" />
   </ItemGroup>
   <ItemGroup>
