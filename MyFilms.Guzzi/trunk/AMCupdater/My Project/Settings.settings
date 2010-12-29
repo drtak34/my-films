@@ -1,0 +1,78 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="DefaultMoviePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\Server1\Movies\</Value>
+    </Setting>
+    <Setting Name="DefaultXMLPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\AMC\Media Database.xml</Value>
+    </Setting>
+    <Setting Name="DefaultMediaType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">HDD</Value>
+    </Setting>
+    <Setting Name="DefaultMediaLabel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Server</Value>
+    </Setting>
+    <Setting Name="DefaultOverridePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FileTypesToCheck" Type="System.String" Scope="User">
+      <Value Profile="(Default)">avi;mpg;divx;mpeg;wmv</Value>
+    </Setting>
+    <Setting Name="DefaultBackupXML" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DefaultOverwriteXML" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AMCDatabaseSource" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Source</Value>
+    </Setting>
+    <Setting Name="DefaultPurgeMissing" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FileTypesNonMedia" Type="System.String" Scope="User">
+      <Value Profile="(Default)">iso;img</Value>
+    </Setting>
+    <Setting Name="RegExCheckMultiPart" Type="System.String" Scope="User">
+      <Value Profile="(Default)">[0-9]of[0-9]</Value>
+    </Setting>
+    <Setting Name="DefaultScanDVDFolders" Type="System.String" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ExecuteProgram" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ExecuteProgramPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ExecuteOnlyForOrphans" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LogLevel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">All Events</Value>
+    </Setting>
+    <Setting Name="DateHandling" Type="System.String" Scope="User">
+      <Value Profile="(Default)">File Created Date</Value>
+    </Setting>
+    <Setting Name="DefaultParserPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShortNames" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultExcludeFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\AMC\AMCUpdater_Excluded_Files.xml</Value>
+    </Setting>
+    <Setting Name="BatchMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DatabaseFields" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;OriginalTitle|True;TranslatedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True</Value>
+    </Setting>
+    <Setting Name="ImportFileOnInternetLookupFailure" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
