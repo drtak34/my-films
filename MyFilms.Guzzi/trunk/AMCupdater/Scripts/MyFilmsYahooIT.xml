@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Profile>
+  <Section>
+    <DBName>Yahoo.it</DBName>
+    <URLPrefix>http://it.movies.yahoo.com</URLPrefix>
+    <URLSearch>
+      <URL Param1="" Param2="">http:_x002F__x002F_it.movies.yahoo.com_x002F_dynamic_x002F_textsearch.html_x003F_p_x003D__x0023_Search_x0023__x0026_sp_x003D_movie</URL>
+      <KeyStartList Param1="" Param2="">_x003C_h2_x003E__x0020_Film_x0020__x003C__x002F_h2_x003E_</KeyStartList>
+      <KeyEndList>_x003C__x002F_ol_x003E_</KeyEndList>
+      <KeyNextPage />
+      <KeyStartTitle Param1="" Param2="">_x0027__x003E_</KeyStartTitle>
+      <KeyEndTitle>_x0028_</KeyEndTitle>
+      <KeyTitleIndex />
+      <KeyStartYear Param1="" Param2="">_x0028_</KeyStartYear>
+      <KeyEndYear>_x0029_</KeyEndYear>
+      <KeyYearIndex />
+      <KeyStartDirector Param1="" Param2="" />
+      <KeyEndDirector />
+      <KeyDirectorIndex />
+      <KeyStartLink Param1="" Param2="">href_x003D__x0027_</KeyStartLink>
+      <KeyEndLink>_x0027__x003E_</KeyEndLink>
+      <KeyLinkIndex />
+    </URLSearch>
+    <Details>
+      <KeyStartBody Param1="" Param2="">Database_x0020_dei_x0020_film</KeyStartBody>
+      <KeyEndBody />
+      <KeyStartOTitle Param1="" Param2="">_x003C_h1_x003E__x003C_b_x003E_</KeyStartOTitle>
+      <KeyEndOTitle>_x003C__x002F_b_x003E_</KeyEndOTitle>
+      <KeyOTitleIndex />
+      <KeyStartTTitle Param1="" Param2="" />
+      <KeyEndTTitle />
+      <KeyTTitleIndex />
+      <KeyStartImg Param1="src_x003D__x0027_http" Param2="http">class_x003D__x0022_bigimgcont_x0022__x003E__x003C_img</KeyStartImg>
+      <KeyEndImg>_x0027__x0020_alt</KeyEndImg>
+      <KeyImgIndex />
+      <KeyStartLinkImg Param1="a_x0020_href_x003D__x0027_" Param2="http:_x002F__x002F_it.movies.yahoo.com">_x003C_div_x0020_id_x003D__x0022_yg-col01b_x0022__x0020_class_x003D__x0022_strucol_x0022_</KeyStartLinkImg>
+      <KeyEndLinkImg>_x0027__x003E_</KeyEndLinkImg>
+      <KeyLinkImgIndex>Original_x0020_Title</KeyLinkImgIndex>
+      <KeyStartRate Param1="" Param2="">height_x003D__x0022_13_x0022__x0020_alt_x003D__x0022_</KeyStartRate>
+      <KeyEndRate>_x0020_stars</KeyEndRate>
+      <KeyRateIndex />
+      <KeyStartRate2 Param1="" Param2="" />
+      <KeyEndRate2 />
+      <KeyRate2Index />
+      <BaseRating>_x0035_</BaseRating>
+      <KeyStartSyn Param1="" Param2="">Trama</KeyStartSyn>
+      <KeyEndSyn>_x003C_p_x003E__x003C_h3_x003E_</KeyEndSyn>
+      <KeySynIndex />
+      <KeyStartRealise Param1="" Param2="">Regia</KeyStartRealise>
+      <KeyEndRealise>_x003C__x002F_a_x003E__x003C__x002F_dd_x003E_</KeyEndRealise>
+      <KeyRealiseIndex />
+      <KeyStartProduct Param1="" Param2="" />
+      <KeyEndProduct />
+      <KeyProductIndex />
+      <KeyStartCredits Param1="" Param2="">_x003C_dt_x003E_Cast_x003C__x002F_dt_x003E_</KeyStartCredits>
+      <KeyEndCredits>_x003C__x002F_a_x003E__x003C__x002F_dd_x003E_</KeyEndCredits>
+      <KeyCreditsIndex />
+      <KeyStartCountry Param1="" Param2="" />
+      <KeyEndCountry />
+      <KeyCountryIndex />
+      <KeyStartGenre Param1="" Param2="">Genere</KeyStartGenre>
+      <KeyEndGenre>_x003C__x002F_dd_x003E_</KeyEndGenre>
+      <KeyGenreIndex />
+      <KeyStartYear Param1="" Param2="">_x003C__x002F_b_x003E_</KeyStartYear>
+      <KeyEndYear>_x003C__x002F_h1_x003E_</KeyEndYear>
+      <KeyYearIndex />
+    </Details>
+  </Section>
+</Profile>

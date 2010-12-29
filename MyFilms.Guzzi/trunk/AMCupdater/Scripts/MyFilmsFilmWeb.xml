@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Profile>
+  <Section>
+    <DBName>FilmWeb</DBName>
+    <URLPrefix>http://www.filmweb.pl</URLPrefix>
+    <URLSearch>
+      <URL Param1="" Param2="">http:_x002F__x002F_www.filmweb.pl_x002F_szukaj_x003F_q_x003D__x0023_Search_x0023__x0026_alias_x003D_film</URL>
+      <KeyStartList Param1="" Param2="">_x003C_div_x0020_style_x003D__x0022_padding-top:10px_x003B__x0022__x003E_</KeyStartList>
+      <KeyEndList>_x003C_div_x0020_id_x003D__x0022_sub_x0022__x003E_</KeyEndList>
+      <KeyNextPage>_x003F_q_x003D__x0023_Search_x0023__x0026_amp_x003B_alias_x003D_film_x0026_page_x003D__x0023_Page_x0023_</KeyNextPage>
+      <KeyStartTitle Param1="" Param2="">_x0022__x003E__x003C_b_x003E_</KeyStartTitle>
+      <KeyEndTitle>_x003C__x002F_a_x003E_</KeyEndTitle>
+      <KeyTitleIndex />
+      <KeyStartYear Param1="" Param2="">_x0009__x0028_</KeyStartYear>
+      <KeyEndYear>_x0029_</KeyEndYear>
+      <KeyYearIndex />
+      <KeyStartDirector Param1="" Param2="" />
+      <KeyEndDirector />
+      <KeyDirectorIndex />
+      <KeyStartLink Param1="" Param2="">_x0022_searchResultTitle_x0022__x0020_href_x003D__x0022_</KeyStartLink>
+      <KeyEndLink>_x0022_</KeyEndLink>
+      <KeyLinkIndex />
+    </URLSearch>
+    <Details>
+      <KeyStartBody Param1="" Param2="" />
+      <KeyEndBody />
+      <KeyStartOTitle Param1="" Param2="">_x002F_</KeyStartOTitle>
+      <KeyEndOTitle>_x0028_</KeyEndOTitle>
+      <KeyOTitleIndex>Translated_x0020_Title</KeyOTitleIndex>
+      <KeyStartTTitle Param1="" Param2="">_x003C_title_x003E_</KeyStartTTitle>
+      <KeyEndTTitle>_x002F_</KeyEndTTitle>
+      <KeyTTitleIndex />
+      <KeyStartImg Param1="o_x002F_" Param2="http:_x002F__x002F_gfx.filmweb.pl_x002F_po_x002F_">_x003C_a_x0020_rel_x003D__x0022_artshow_x0022__x0020_href_x003D__x0022_</KeyStartImg>
+      <KeyEndImg>_x003F_</KeyEndImg>
+      <KeyImgIndex />
+      <KeyStartLinkImg Param1="" Param2="" />
+      <KeyEndLinkImg />
+      <KeyLinkImgIndex />
+      <KeyStartRate Param1="" Param2="">_x003C_span_x003E__x003C_strong_x0020_class_x003D__x0022_value_x0022__x003E_</KeyStartRate>
+      <KeyEndRate>_x003C__x002F_strong_x003E__x002F_10</KeyEndRate>
+      <KeyRateIndex />
+      <KeyStartRate2 Param1="" Param2="" />
+      <KeyEndRate2 />
+      <KeyRate2Index />
+      <BaseRating />
+      <KeyStartSyn Param1="" Param2="">FILMWEB.pl_x0020_</KeyStartSyn>
+      <KeyEndSyn>_x0022__x0020__x002F__x003E_</KeyEndSyn>
+      <KeySynIndex>Original_x0020_Title</KeySynIndex>
+      <KeyStartRealise Param1="_x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x002C__x0020__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009__x0009_" Param2="_x002C_">reżyseria</KeyStartRealise>
+      <KeyEndRealise>scenariusz</KeyEndRealise>
+      <KeyRealiseIndex />
+      <KeyStartProduct Param1="" Param2="" />
+      <KeyEndProduct />
+      <KeyProductIndex />
+      <KeyStartCredits Param1="" Param2="">_x003C_td_x0020_class_x003D__x0022_film-actor_x0022__x003E_</KeyStartCredits>
+      <KeyEndCredits>_x003C__x002F_tbody_x003E_</KeyEndCredits>
+      <KeyCreditsIndex />
+      <KeyStartCountry Param1="_x0009__x0009__x0009__x0009__x002C__x0020__x0009__x0009__x0009__x0009__x0009__x0009__x0009_" Param2="_x002C_">produkcja:_x0009__x0009_</KeyStartCountry>
+      <KeyEndCountry>_x003C__x002F_strong_x003E__x0009_</KeyEndCountry>
+      <KeyCountryIndex />
+      <KeyStartGenre Param1="" Param2="">gatunek:</KeyStartGenre>
+      <KeyEndGenre>_x003C__x002F_a</KeyEndGenre>
+      <KeyGenreIndex />
+      <KeyStartYear Param1="" Param2="">_x0028_</KeyStartYear>
+      <KeyEndYear>_x0029_</KeyEndYear>
+      <KeyYearIndex />
+    </Details>
+  </Section>
+</Profile>

@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Profile>
+  <Section>
+    <DBName />
+    <URLPrefix />
+    <URLSearch>
+      <URL Param1="" Param2="">http:_x002F__x002F_www.guardiao.com_x002F_servicos_x002F_amc_x002F_adorocinema.php_x003F_filme_x003D__x0023_Search_x0023_</URL>
+      <KeyStartList Param1="" Param2="" />
+      <KeyEndList />
+      <KeyNextPage />
+      <KeyStartTitle Param1="" Param2="">_x000D__x000A_</KeyStartTitle>
+      <KeyEndTitle>Matrix_x000D__x000A_</KeyEndTitle>
+      <KeyTitleIndex />
+      <KeyStartYear Param1="" Param2="" />
+      <KeyEndYear />
+      <KeyYearIndex />
+      <KeyStartDirector Param1="" Param2="" />
+      <KeyEndDirector />
+      <KeyDirectorIndex />
+      <KeyStartLink Param1="" Param2="">Matrix</KeyStartLink>
+      <KeyEndLink>Matrix_x0020_Re</KeyEndLink>
+      <KeyLinkIndex />
+    </URLSearch>
+    <Details>
+      <KeyStartBody Param1="" Param2="" />
+      <KeyEndBody />
+      <KeyStartOTitle Param1="" Param2="" />
+      <KeyEndOTitle />
+      <KeyOTitleIndex />
+      <KeyStartTTitle Param1="" Param2="" />
+      <KeyEndTTitle />
+      <KeyTTitleIndex />
+      <KeyStartImg Param1="" Param2="" />
+      <KeyEndImg />
+      <KeyImgIndex />
+      <KeyStartLinkImg Param1="" Param2="" />
+      <KeyEndLinkImg />
+      <KeyLinkImgIndex />
+      <KeyStartRate Param1="" Param2="" />
+      <KeyEndRate />
+      <KeyRateIndex />
+      <KeyStartRate2 Param1="" Param2="" />
+      <KeyEndRate2 />
+      <KeyRate2Index />
+      <BaseRating />
+      <KeyStartSyn Param1="" Param2="" />
+      <KeyEndSyn />
+      <KeySynIndex />
+      <KeyStartRealise Param1="" Param2="" />
+      <KeyEndRealise />
+      <KeyRealiseIndex />
+      <KeyStartProduct Param1="" Param2="" />
+      <KeyEndProduct />
+      <KeyProductIndex />
+      <KeyStartCredits Param1="" Param2="" />
+      <KeyEndCredits />
+      <KeyCreditsIndex />
+      <KeyStartCountry Param1="" Param2="" />
+      <KeyEndCountry />
+      <KeyCountryIndex />
+      <KeyStartGenre Param1="" Param2="" />
+      <KeyEndGenre />
+      <KeyGenreIndex />
+      <KeyStartYear Param1="" Param2="" />
+      <KeyEndYear />
+      <KeyYearIndex />
+    </Details>
+  </Section>
+</Profile>
