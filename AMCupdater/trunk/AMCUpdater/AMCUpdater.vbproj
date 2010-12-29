@@ -11,7 +11,8 @@
     <RootNamespace>AMCUpdater</RootNamespace>
     <AssemblyName>AMCUpdater</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <ApplicationIcon>AMCUpdater.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -19,6 +20,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -93,10 +95,6 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.1.11854, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_ModLinkFiles\Core.dll</HintPath>
-    </Reference>
     <Reference Include="Grabber, Version=5.1.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\MyFilms\trunk\Grabber\bin\x86\Release\Grabber.dll</HintPath>
@@ -114,13 +112,9 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utils, Version=2.2.7.11849, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_ModLinkFiles\Utils.dll</HintPath>
-    </Reference>
     <Reference Include="XionControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\XionControls.dll</HintPath>
+      <HintPath>Externals\XionControls.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -232,15 +226,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AMCUpdater.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Cancel.png" />
-    <Content Include="Go.png" />
-    <Content Include="Info.png" />
-    <None Include="AMCUpdater User Guide.pdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="Resources\Cancel.png" />
+    <EmbeddedResource Include="Resources\Go.png" />
+    <EmbeddedResource Include="Resources\Info.png" />
     <None Include="AntMovieCatalog.MovieDataTable2.datasource" />
     <None Include="AntMovieCatalog.xsc">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
@@ -253,6 +241,7 @@
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
+    <None Include="My Project\app.manifest" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -282,7 +271,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
     <Folder Include="UnusedElements\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

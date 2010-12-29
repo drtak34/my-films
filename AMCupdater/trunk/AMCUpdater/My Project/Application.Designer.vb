@@ -16,7 +16,7 @@ Namespace My
     
     'HINWEIS: Diese Datei wird automatisch generiert. Ändern Sie sie nicht direkt. Zum Ändern
     ' oder bei in dieser Datei auftretenden Buildfehlern wechseln Sie zum Projekt-Designer.
-    ' (Wechseln Sie dazu zu den Projekteigenschaften, oder doppelklicken Sie auf den Knoten "Eigenes Projekt" im
+    ' (Wechseln Sie dazu zu den Projekteigenschaften, oder doppelklicken Sie auf den Knoten "Mein Projekt" im
     ' Projektmappen-Explorer). Nehmen Sie auf der Registerkarte "Anwendung" entsprechende Änderungen vor.
     '
     Partial Friend Class MyApplication
