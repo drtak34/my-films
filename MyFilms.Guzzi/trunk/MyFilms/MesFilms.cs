@@ -852,7 +852,7 @@ namespace MesFilms
             string SelItem;
             if (conf.StrTitleSelect == "")
             {
-                if (NewString.Left(conf.StrTxtSelect, 7) == GUILocalizeStrings.Get(1079870) || (conf.StrTxtSelect == "" && conf.Boolselect) || conf.Boolview) //original code block refactored
+                if (conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(1079870)) || (conf.StrTxtSelect == "" && conf.Boolselect) || conf.Boolview) //original code block refactored
                 {//jump back to main full list
                     conf.Boolselect = false;
                     conf.Boolview = false;
@@ -860,6 +860,7 @@ namespace MesFilms
                     conf.StrSelect = conf.StrTxtSelect = conf.StrFilmSelect = "";
                     conf.StrIndex = 0;
                     GetFilmList();
+                    SetLabelView("all"); // if back on "root", show view as "movies"
                     return true;
                 }
 
@@ -1350,7 +1351,7 @@ namespace MesFilms
                         catch
                         {
                         }
-                        GUIControl.ClearControl(GetID, (int)Controls.CTRL_logos_id2001);
+                        //GUIControl.ClearControl(GetID, (int)Controls.CTRL_logos_id2001);
                         Log.Debug("MyFilms : Logo thumb assigned : " + wlogos);
                         if (wlogos.Length == 0)
                             wlogos = " ";
@@ -1358,6 +1359,7 @@ namespace MesFilms
                         MesFilmsDetail.clearGUIProperty("logos_id2002");
 
                         //ImgID2001.DoUpdate();
+                        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
                         GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
                     }
                 }
@@ -1377,6 +1379,7 @@ namespace MesFilms
                             wlogos = " ";
                         MesFilmsDetail.setGUIProperty("logos_id2001", wlogos);
                         //ImgID2001.DoUpdate();
+                        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001); 
                         GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
                     }
                     if ((ImgID2002 != null) && (conf.StrLogos))
@@ -1392,6 +1395,7 @@ namespace MesFilms
                         if (wlogos.Length == 0)
                             wlogos = " ";
                         MesFilmsDetail.setGUIProperty("logos_id2002", wlogos);
+                        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2002); 
                         GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2002);
                     }
                     if (wlogos.Length == 0)
@@ -2063,8 +2067,8 @@ namespace MesFilms
                 if (!backdrop.Active) 
                     backdrop.Active = true;
                 GUIControl.ShowControl(GetID, 34);
-                GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
-                GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
+                //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
+                //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
                 
                 //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
                 MesFilmsDetail.Load_Detailed_DB(0, false);
