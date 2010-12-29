@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92C183EE-636F-4A55-A6AB-363CDA606110}</ProjectGuid>
+    <ProjectGuid>{7AA212CA-07FE-43FC-B222-ABD8B192D1FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
     <AssemblyName>Grabber</AssemblyName>
