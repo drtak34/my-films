@@ -291,50 +291,29 @@ Public Class AntRecord
         'CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle='" & otitle & "']")
         CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle=""" & otitle & """]")
         If (Not CurrentNode2 Is Nothing) Then
-            If (CurrentNode2.Attributes("Number").Value) <> (currentNode.Attributes("Number").Value) Then
+            If (CurrentNode2.Attributes("Number").Value) <> (currentNode.Attributes("Number").Value) Then 'check, if two movies with same otitle but different recordnumber exist
                 CurrentAttribute2 = _SourceField
-                If _XMLElement.Attributes(CurrentAttribute2) Is Nothing Then
-                    currentNode.Attributes.RemoveAll()
-                    Return CurrentNode2
-                End If
-                If _XMLElement.Attributes(CurrentAttribute2).Value.ToString = String.Empty Then
-                    currentNode.Attributes.RemoveAll()
-                    Return CurrentNode2
-                End If
+
+                ' This also doesn't work, as there is not yet a source for new movie available in XML Element - might be called later?
+                'If (CurrentNode2.Attributes(_SourceField).Value = currentNode.Attributes(_SourceField).Value) Then
+                '    currentNode.Attributes.RemoveAll()
+                '    Return CurrentNode2
+                'End If
+
+                ' Guzzi: Removed the following stuff, as it replaced existing movies with same title, but different content (e.g. director's cut or extended versions)
+                'If _XMLElement.Attributes(CurrentAttribute2) Is Nothing Then
+                '    currentNode.Attributes.RemoveAll()
+                '    Return CurrentNode2
+                'End If
+                'If _XMLElement.Attributes(CurrentAttribute2).Value.ToString = String.Empty Then
+                '    currentNode.Attributes.RemoveAll()
+                '    Return CurrentNode2
+                'End If
 
             End If
         End If
         Return currentNode
     End Function
-
-    Public Function VerifyElementByFilename(ByVal otitle As String, ByVal currentNode As Xml.XmlNode) As Xml.XmlNode
-        'Public Function VerifyElementByFilename(ByVal otitle As String, ByVal source As String, ByVal currentNode As Xml.XmlNode) As Xml.XmlNode
-        ' Guzzi: only copy of function - not yet modified
-        Dim CurrentNode2 As Xml.XmlNode
-        Dim CurrentAttribute2 As String
-        'Dim CurrentFilename As String
-        'CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle='" & otitle & "']")
-        CurrentNode2 = XMLDoc.SelectSingleNode("//AntMovieCatalog/Catalog/Contents/Movie[@OriginalTitle=""" & otitle & """]")
-        'CurrentFilename = source
-
-        If (Not CurrentNode2 Is Nothing) Then
-            If (CurrentNode2.Attributes("Number").Value) <> (currentNode.Attributes("Number").Value) Then
-                CurrentAttribute2 = _SourceField
-                If _XMLElement.Attributes(CurrentAttribute2) Is Nothing Then
-                    currentNode.Attributes.RemoveAll()
-                    Return CurrentNode2
-                End If
-                If _XMLElement.Attributes(CurrentAttribute2).Value.ToString = String.Empty Then
-                    currentNode.Attributes.RemoveAll()
-                    Return CurrentNode2
-                End If
-
-            End If
-        End If
-        Return currentNode
-    End Function
-
-
     Private Sub DoInternetLookup(ByVal SearchString As String)
         'This is now reset on ProcessFile, since all processing will begin with that Sub.
         '_LastOutputMessage = ""
@@ -603,14 +582,12 @@ Public Class AntRecord
 
             ' Guzzi: Original Code does remove old entries with same otitle name
             'Try to see if entry already exist with empty movie filename => delete the new entry and update existing one
-            '_XMLElement = VerifyElement(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
+            If _DatabaseFields("originaltitle") = True Or _DatabaseFields("translatedtitle") = True Then
+                _XMLElement = VerifyElement(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
+            Else
+                _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : No originaltitle or translatedtitle activated"
 
-            ' Guzzi: New approach to take also filename into consideration - not yet working, thus commented ...
-
-            'If _XMLElement.Attributes("Source").ToString.Length() > 0 Then
-            '_XMLElement = VerifyElementByFilename(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement.Attributes("Source").Value.ToString, _XMLElement)
-            _XMLElement = VerifyElementByFilename(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
-            'End If
+            End If
 
             If _DatabaseFields("formattedtitle") = True Then
                 CurrentAttribute = "FormattedTitle"

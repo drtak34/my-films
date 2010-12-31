@@ -657,8 +657,13 @@ Public Class AntProcessor
                                 .MasterTitle = CurrentSettings.Master_Title
                                 .InteractiveMode = True
                                 .ImagePath = CurrentSettings.Manual_XML_File.Substring(0, CurrentSettings.Manual_XML_File.LastIndexOf("\"))
+
                                 If (CurrentSettings.Image_Download_Filename_Prefix.Length > 0) Then
-                                    .ImagePath = .ImagePath & "\\" & CurrentSettings.Image_Download_Filename_Prefix.Substring(0, CurrentSettings.Image_Download_Filename_Prefix.LastIndexOf("\"))
+                                    If CurrentSettings.Image_Download_Filename_Prefix.LastIndexOf("\") > -1 Then
+                                        .ImagePath = .ImagePath & "\\" & CurrentSettings.Image_Download_Filename_Prefix.Substring(0, CurrentSettings.Image_Download_Filename_Prefix.LastIndexOf("\"))
+                                    Else
+                                        .ImagePath = .ImagePath & "\\" & CurrentSettings.Image_Download_Filename_Prefix
+                                    End If
                                 End If
 
                                 .InternetSearchHint = wDirector
@@ -730,7 +735,7 @@ Public Class AntProcessor
                                         bgwManualUpdate.ReportProgress(ProcessCounter, "Fanart already downloaded : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                     ElseIf (fanart(0).Name = "added") Then
                                         bgwManualUpdate.ReportProgress(ProcessCounter, "Fanart added : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                                    ElseIf (fanart(0).Name = "toomany") Then
+                                    ElseIf (fanart(0).Name.StartsWith("(toomany)")) Then
                                         bgwManualUpdate.ReportProgress(ProcessCounter, "Too many Movies found : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                     Else
                                         If (fanart.Count = 1 And fanart(0).Backdrops.Count > 0) Then
@@ -1324,6 +1329,9 @@ Public Class AntProcessor
         dvFoundNonMediaFiles.Sort = "FileName"
 
         Dim Path() As String
+        Dim iTemp As Integer
+        Dim strTemp, strTemp2 As String
+
         For Each row In ds.Tables("tblXML").Rows
             If dvFoundMediaFiles.Find(row("AntShortPath")) = -1 Then
                 If dvFoundNonMediaFiles.Find(row("AntShortPath")) = -1 Then
@@ -1332,6 +1340,9 @@ Public Class AntProcessor
                     Path = CurrentSettings.Movie_Scan_Path.Split(";")
                     For i As Integer = 0 To Path.Length - 1
                         If CurrentSettings.Override_Path = "" Then
+                            strTemp = row("AntPath").ToString.ToLower
+                            strTemp2 = Path(i).ToLower
+                            iTemp = row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower)
                             If row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower) > -1 Then
                                 'Match - we're scanning the path that this entry refers to - must be orphaned.
                                 ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
@@ -1339,6 +1350,9 @@ Public Class AntProcessor
                             End If
                         Else
                             'Match - the ant records refers to the location we're using as override path.
+                            strTemp = row("AntPath").ToString.ToLower
+                            strTemp2 = CurrentSettings.Override_Path.ToLower
+                            iTemp = row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower)
                             If row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower) > -1 Then
                                 'Match - we're scanning the path that this entry refers to - must be orphaned.
                                 ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})

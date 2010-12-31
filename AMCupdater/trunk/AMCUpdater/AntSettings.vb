@@ -549,6 +549,8 @@ Public Class AntSettings
         dt.Rows.Add("Parse_Subtitle_Files", "False")
         dt.Rows.Add("Rescan_Moved_Files", "False")
         dt.Rows.Add("Master_Title", "TranslatedTitle")
+        dt.Rows.Add("Use_XBMC_nfo", "False")
+        dt.Rows.Add("Use_Page_Grabber", "False")
 
         dsDefaultSettings.Tables.Add(dt)
         dsDefaultSettings.CaseSensitive = False
