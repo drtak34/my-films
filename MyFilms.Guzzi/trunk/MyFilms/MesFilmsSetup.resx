@@ -133,10 +133,12 @@ You can also use the browse button to locate the correct folder/s.
 </value>
   </data>
   <data name="AntStorage.ToolTip" xml:space="preserve">
-    <value>Select the name of the field in your AMC database that you have used for the movie’s file name information.  
+    <value>Select the name of the field in your AMC database that you have used for the movie’s file name / path information.  
+
 This field in the AMC database can contain a single filename or multiple file names separated by a semi-colon.  
 If the movie comprises many files, then you could also use a playlist file (.m3u), or an image file (.iso, .bin) or a folder name (containing DVD files or .avi files).
-</value>
+
+If you have configured a "Path for Movies File Search", the filename is sufficient, otherwise the field requires the fully qualified name including path to the moviefile.</value>
   </data>
   <data name="CatalogType.ToolTip" xml:space="preserve">
     <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
@@ -276,7 +278,7 @@ In the second field you can enter your own text message to provide additional in
 </value>
   </data>
   <data name="TitleDelim.ToolTip" xml:space="preserve">
-    <value>Character used for hierachical presentation. This can be used to group more than one movie together,
+    <value>Character used for hierarchical presentation. This can be used to group more than one movie together,
 e.g. for collections.
 
 Example:

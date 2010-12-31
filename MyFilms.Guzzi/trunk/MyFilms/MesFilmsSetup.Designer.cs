@@ -148,6 +148,7 @@ namespace MesFilms
             this.AntViewItem2 = new System.Windows.Forms.ComboBox();
             this.AntViewItem1 = new System.Windows.Forms.ComboBox();
             this.groupBox_DetailedSupplementaryInformations = new System.Windows.Forms.GroupBox();
+            this.AntLabel3 = new System.Windows.Forms.TextBox();
             this.chkOnlyTitle = new System.Windows.Forms.CheckBox();
             this.AntItem3 = new System.Windows.Forms.ComboBox();
             this.AntLabel2 = new System.Windows.Forms.TextBox();
@@ -580,9 +581,9 @@ namespace MesFilms
             // AntSort1
             // 
             this.AntSort1.FormattingEnabled = true;
-            this.AntSort1.Location = new System.Drawing.Point(10, 18);
+            this.AntSort1.Location = new System.Drawing.Point(9, 18);
             this.AntSort1.Name = "AntSort1";
-            this.AntSort1.Size = new System.Drawing.Size(160, 21);
+            this.AntSort1.Size = new System.Drawing.Size(161, 21);
             this.AntSort1.TabIndex = 36;
             this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
             this.AntSort1.Leave += new System.EventHandler(this.MesFilmsSetup_Load);
@@ -610,7 +611,7 @@ namespace MesFilms
             this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(370, 117);
             this.groupBox_AntSelectedEnreg.TabIndex = 27;
             this.groupBox_AntSelectedEnreg.TabStop = false;
-            this.groupBox_AntSelectedEnreg.Text = "Ant Selected Enreg.";
+            this.groupBox_AntSelectedEnreg.Text = "Ant User defined Filters";
             this.ToolTip1.SetToolTip(this.groupBox_AntSelectedEnreg, resources.GetString("groupBox_AntSelectedEnreg.ToolTip"));
             this.groupBox_AntSelectedEnreg.Leave += new System.EventHandler(this.Selected_Enreg_Changed);
             // 
@@ -973,6 +974,7 @@ namespace MesFilms
             // 
             // groupBox_DetailedSupplementaryInformations
             // 
+            this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel3);
             this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.chkOnlyTitle);
             this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem3);
             this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel2);
@@ -988,6 +990,13 @@ namespace MesFilms
             this.groupBox_DetailedSupplementaryInformations.TabStop = false;
             this.groupBox_DetailedSupplementaryInformations.Text = "Detailed Supplementary Informations";
             this.ToolTip1.SetToolTip(this.groupBox_DetailedSupplementaryInformations, resources.GetString("groupBox_DetailedSupplementaryInformations.ToolTip"));
+            // 
+            // AntLabel3
+            // 
+            this.AntLabel3.Location = new System.Drawing.Point(9, 88);
+            this.AntLabel3.Name = "AntLabel3";
+            this.AntLabel3.Size = new System.Drawing.Size(161, 20);
+            this.AntLabel3.TabIndex = 77;
             // 
             // chkOnlyTitle
             // 
@@ -1027,9 +1036,9 @@ namespace MesFilms
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(182, 17);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(95, 13);
+            this.label7.Size = new System.Drawing.Size(113, 13);
             this.label7.TabIndex = 22;
-            this.label7.Text = "Ant Item to Display";
+            this.label7.Text = "Ant DB Item to Display";
             // 
             // label3
             // 
@@ -1095,9 +1104,9 @@ namespace MesFilms
             // 
             // AntUpdFieldReset
             // 
-            this.AntUpdFieldReset.Location = new System.Drawing.Point(297, 113);
+            this.AntUpdFieldReset.Location = new System.Drawing.Point(297, 115);
             this.AntUpdFieldReset.Name = "AntUpdFieldReset";
-            this.AntUpdFieldReset.Size = new System.Drawing.Size(51, 23);
+            this.AntUpdFieldReset.Size = new System.Drawing.Size(51, 21);
             this.AntUpdFieldReset.TabIndex = 84;
             this.AntUpdFieldReset.Text = "Reset";
             this.ToolTip1.SetToolTip(this.AntUpdFieldReset, "That Action\'ll clear the field.");
@@ -1641,7 +1650,7 @@ namespace MesFilms
             this.chkAMCUpd.Name = "chkAMCUpd";
             this.chkAMCUpd.Size = new System.Drawing.Size(199, 30);
             this.chkAMCUpd.TabIndex = 0;
-            this.chkAMCUpd.Text = "AMCUpdater used \r\n(for global  Internet update functions)";
+            this.chkAMCUpd.Text = "Use AMCUpdater\r\n(for global  Internet update functions)";
             this.chkAMCUpd.UseVisualStyleBackColor = true;
             this.chkAMCUpd.CheckedChanged += new System.EventHandler(this.chkAMCUpd_CheckedChanged);
             // 
@@ -1669,9 +1678,9 @@ namespace MesFilms
             this.chkGrabber_ChooseScript.AutoSize = true;
             this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(406, 82);
             this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
-            this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(127, 17);
+            this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(158, 17);
             this.chkGrabber_ChooseScript.TabIndex = 60;
-            this.chkGrabber_ChooseScript.Text = "always use that script";
+            this.chkGrabber_ChooseScript.Text = "don\'t use default script (ask)";
             this.chkGrabber_ChooseScript.UseVisualStyleBackColor = true;
             // 
             // btnDirGrab
@@ -1695,11 +1704,11 @@ namespace MesFilms
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(255, 22);
+            this.label31.Location = new System.Drawing.Point(283, 22);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(145, 13);
+            this.label31.Size = new System.Drawing.Size(120, 13);
             this.label31.TabIndex = 57;
-            this.label31.Text = "Directory Grabber Files (XML)";
+            this.label31.Text = "Grabber Script Directory";
             // 
             // chkGrabber_Always
             // 
@@ -1733,11 +1742,11 @@ namespace MesFilms
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(305, 56);
+            this.label27.Location = new System.Drawing.Point(291, 55);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(95, 13);
+            this.label27.Size = new System.Drawing.Size(112, 13);
             this.label27.TabIndex = 53;
-            this.label27.Text = "Grabber File (XML)";
+            this.label27.Text = "Default Grabber Script";
             // 
             // chkGrabber
             // 
@@ -1746,7 +1755,7 @@ namespace MesFilms
             this.chkGrabber.Name = "chkGrabber";
             this.chkGrabber.Size = new System.Drawing.Size(183, 30);
             this.chkGrabber.TabIndex = 0;
-            this.chkGrabber.Text = "Grabber used \r\n(for Movie Detail Internet Update)";
+            this.chkGrabber.Text = "Use Grabber\r\n(for Movie Detail Internet Update)";
             this.chkGrabber.UseVisualStyleBackColor = true;
             this.chkGrabber.CheckedChanged += new System.EventHandler(this.chkGrabber_CheckedChanged);
             // 
@@ -1799,11 +1808,11 @@ namespace MesFilms
             // labelFanart
             // 
             this.labelFanart.AutoSize = true;
-            this.labelFanart.Location = new System.Drawing.Point(162, 20);
+            this.labelFanart.Location = new System.Drawing.Point(149, 20);
             this.labelFanart.Name = "labelFanart";
-            this.labelFanart.Size = new System.Drawing.Size(147, 13);
+            this.labelFanart.Size = new System.Drawing.Size(160, 13);
             this.labelFanart.TabIndex = 69;
-            this.labelFanart.Text = "Fanart Picture Path  (Images) ";
+            this.labelFanart.Text = "Fanart Backdrop Path  (Images) ";
             // 
             // chkDfltFanart
             // 
@@ -1960,7 +1969,7 @@ namespace MesFilms
             this.AntTitle1.Size = new System.Drawing.Size(181, 21);
             this.AntTitle1.TabIndex = 10;
             this.ToolTip1.SetToolTip(this.AntTitle1, "Select the ANT database field that you want to be displayed as the ‘Master Title’" +
-                    ".");
+                    ".\r\nYou can use Hierarchies for \"grouping\" when defining a hierarchy separator.");
             // 
             // groupBox22
             // 
@@ -2022,7 +2031,7 @@ namespace MesFilms
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(162, 27);
+            this.label29.Location = new System.Drawing.Point(169, 27);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(140, 13);
             this.label29.TabIndex = 73;
@@ -4090,6 +4099,7 @@ namespace MesFilms
         private Label label38;
         private CheckBox chkGlobalUnwatchedOnly;
         private Button ButCopy;
+        private TextBox AntLabel3;
 
     }
 }

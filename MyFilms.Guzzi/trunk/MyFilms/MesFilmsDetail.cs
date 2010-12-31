@@ -2301,7 +2301,7 @@ namespace MesFilms
                     if (MesFilms.conf.Stritem3.ToLower() == (dc.ColumnName.ToLower()))
                         if (wrep)
                             {
-                                //setGUIProperty("user.item3.label", MesFilms.conf.Strlabel3); // not currently used in myfilms
+                                setGUIProperty("user.item3.label", MesFilms.conf.Strlabel3); // not currently used in myfilms
                                 if (MesFilms.conf.Stritem3.ToLower() == "date")
                                     setGUIProperty("user.item3.field", "w" + MesFilms.conf.Stritem3.ToLower());
                                 else
