@@ -120,6 +120,8 @@ namespace MesFilms
         [SkinControlAttribute((int)Controls.CTRL_ActorMultiThumb)]
         protected GUIMultiImage ActorMultiThumb = null;
 
+
+        private static NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();  //log
         static string wzone = null;
         int StrMax = 0;
         public const int ID_MesFilms = 7986;
@@ -4198,6 +4200,7 @@ namespace MesFilms
             }
             catch (Exception ex)
             {
+
                 Log.Error("videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
             }
         }

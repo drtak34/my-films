@@ -403,6 +403,8 @@ namespace MesFilms
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.MesFilmsFanartViews = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
             this.groupBox_SortByItem.SuspendLayout();
             this.groupBox_AntSelectedEnreg.SuspendLayout();
             this.groupBox_DefaultView.SuspendLayout();
@@ -988,7 +990,7 @@ namespace MesFilms
             this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(370, 136);
             this.groupBox_DetailedSupplementaryInformations.TabIndex = 22;
             this.groupBox_DetailedSupplementaryInformations.TabStop = false;
-            this.groupBox_DetailedSupplementaryInformations.Text = "Detailed Supplementary Informations";
+            this.groupBox_DetailedSupplementaryInformations.Text = "Detailed Supplementary Information";
             this.ToolTip1.SetToolTip(this.groupBox_DetailedSupplementaryInformations, resources.GetString("groupBox_DetailedSupplementaryInformations.ToolTip"));
             // 
             // AntLabel3
@@ -1761,14 +1763,16 @@ namespace MesFilms
             // 
             // Fanart
             // 
+            this.Fanart.Controls.Add(this.label40);
+            this.Fanart.Controls.Add(this.MesFilmsFanartViews);
             this.Fanart.Controls.Add(this.chkFanart);
             this.Fanart.Controls.Add(this.btnFanart);
             this.Fanart.Controls.Add(this.MesFilmsFanart);
             this.Fanart.Controls.Add(this.labelFanart);
             this.Fanart.Controls.Add(this.chkDfltFanart);
-            this.Fanart.Location = new System.Drawing.Point(17, 188);
+            this.Fanart.Location = new System.Drawing.Point(17, 251);
             this.Fanart.Name = "Fanart";
-            this.Fanart.Size = new System.Drawing.Size(710, 70);
+            this.Fanart.Size = new System.Drawing.Size(710, 97);
             this.Fanart.TabIndex = 71;
             this.Fanart.TabStop = false;
             this.Fanart.Text = "Fanart (Backdrops)";
@@ -1879,7 +1883,7 @@ namespace MesFilms
             this.ButDelet.Size = new System.Drawing.Size(64, 31);
             this.ButDelet.TabIndex = 39;
             this.ButDelet.Text = "Delete";
-            this.ToolTip1.SetToolTip(this.ButDelet, "Delete all informations for that configuration.");
+            this.ToolTip1.SetToolTip(this.ButDelet, "Delete all information for that configuration.");
             this.ButDelet.UseVisualStyleBackColor = true;
             this.ButDelet.Click += new System.EventHandler(this.ButDelet_Click);
             // 
@@ -1979,9 +1983,9 @@ namespace MesFilms
             this.groupBox22.Controls.Add(this.chkDfltViews);
             this.groupBox22.Controls.Add(this.label29);
             this.groupBox22.Controls.Add(this.MesFilmsViews);
-            this.groupBox22.Location = new System.Drawing.Point(17, 264);
+            this.groupBox22.Location = new System.Drawing.Point(17, 170);
             this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Size = new System.Drawing.Size(710, 84);
+            this.groupBox22.Size = new System.Drawing.Size(710, 79);
             this.groupBox22.TabIndex = 75;
             this.groupBox22.TabStop = false;
             this.groupBox22.Text = "Thumbs for Grouped Views (Genre, Year, Country, ...)";
@@ -2206,7 +2210,7 @@ namespace MesFilms
             this.groupBox24.Size = new System.Drawing.Size(681, 164);
             this.groupBox24.TabIndex = 73;
             this.groupBox24.TabStop = false;
-            this.groupBox24.Text = "ANT item for storing trailerinfos (borrower recommended)";
+            this.groupBox24.Text = "ANT item for storing trailerinfo (borrower recommended)";
             this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
             // 
             // ShowTrailerWhenStartingMovie
@@ -2271,9 +2275,9 @@ namespace MesFilms
             this.label35.AutoSize = true;
             this.label35.Location = new System.Drawing.Point(24, 28);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(153, 13);
+            this.label35.Size = new System.Drawing.Size(148, 13);
             this.label35.TabIndex = 69;
-            this.label35.Text = "Ant Item for storing Trailer Infos";
+            this.label35.Text = "Ant Item for storing Trailer Info";
             // 
             // check_WOL_enable
             // 
@@ -2644,7 +2648,7 @@ namespace MesFilms
             this.groupBox_ArtistImages.Controls.Add(this.label_DefaultArtistImage);
             this.groupBox_ArtistImages.Controls.Add(this.label_ArtistImagePath);
             this.groupBox_ArtistImages.Controls.Add(this.DefaultCoverArtist);
-            this.groupBox_ArtistImages.Location = new System.Drawing.Point(17, 88);
+            this.groupBox_ArtistImages.Location = new System.Drawing.Point(17, 74);
             this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
             this.groupBox_ArtistImages.Size = new System.Drawing.Size(710, 94);
             this.groupBox_ArtistImages.TabIndex = 86;
@@ -2667,7 +2671,7 @@ namespace MesFilms
             // chkDfltArtist
             // 
             this.chkDfltArtist.AutoSize = true;
-            this.chkDfltArtist.Location = new System.Drawing.Point(42, 73);
+            this.chkDfltArtist.Location = new System.Drawing.Point(42, 70);
             this.chkDfltArtist.Name = "chkDfltArtist";
             this.chkDfltArtist.Size = new System.Drawing.Size(247, 17);
             this.chkDfltArtist.TabIndex = 98;
@@ -2809,14 +2813,14 @@ namespace MesFilms
             // General
             // 
             this.General.Controls.Add(this.Tab_General);
-            this.General.Controls.Add(this.Tab_Artwork);
             this.General.Controls.Add(this.Tab_Optional1);
             this.General.Controls.Add(this.Tab_Optional2);
-            this.General.Controls.Add(this.Tab_DVDprofilerMovieCollector);
-            this.General.Controls.Add(this.Tab_Grabber);
+            this.General.Controls.Add(this.Tab_Artwork);
             this.General.Controls.Add(this.Tab_Logos);
+            this.General.Controls.Add(this.Tab_Grabber);
             this.General.Controls.Add(this.Tab_TrailerOptions);
             this.General.Controls.Add(this.Tab_WakeOnLan);
+            this.General.Controls.Add(this.Tab_DVDprofilerMovieCollector);
             this.General.Location = new System.Drawing.Point(12, 78);
             this.General.Name = "General";
             this.General.SelectedIndex = 0;
@@ -2911,7 +2915,7 @@ namespace MesFilms
             this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(725, 193);
             this.groupBox_PlayMovieInfos.TabIndex = 74;
             this.groupBox_PlayMovieInfos.TabStop = false;
-            this.groupBox_PlayMovieInfos.Text = "Play Movie Infos";
+            this.groupBox_PlayMovieInfos.Text = "Play Movie Info";
             // 
             // groupBox2
             // 
@@ -3103,9 +3107,9 @@ namespace MesFilms
             this.groupBox1.Controls.Add(this.ButImg);
             this.groupBox1.Controls.Add(this.MesFilmsImg);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(17, 6);
+            this.groupBox1.Location = new System.Drawing.Point(17, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(710, 76);
+            this.groupBox1.Size = new System.Drawing.Size(710, 73);
             this.groupBox1.TabIndex = 85;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cover Images";
@@ -3691,6 +3695,25 @@ namespace MesFilms
             this.pictureBox1.TabIndex = 75;
             this.pictureBox1.TabStop = false;
             // 
+            // MesFilmsFanartViews
+            // 
+            this.MesFilmsFanartViews.Enabled = false;
+            this.MesFilmsFanartViews.Location = new System.Drawing.Point(315, 67);
+            this.MesFilmsFanartViews.Name = "MesFilmsFanartViews";
+            this.MesFilmsFanartViews.Size = new System.Drawing.Size(315, 20);
+            this.MesFilmsFanartViews.TabIndex = 72;
+            this.ToolTip1.SetToolTip(this.MesFilmsFanartViews, "To use Fanart for \"Views\" put fanart in the subfolder for year, category, country" +
+                    "\" , \r\ne.g. <fanartfolder>\\\\_group\\\\year\\2010\";");
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(149, 70);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(151, 13);
+            this.label40.TabIndex = 73;
+            this.label40.Text = "Resulting path for Views fanart";
+            // 
             // MesFilmsSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4100,6 +4123,8 @@ namespace MesFilms
         private CheckBox chkGlobalUnwatchedOnly;
         private Button ButCopy;
         private TextBox AntLabel3;
+        private TextBox MesFilmsFanartViews;
+        private Label label40;
 
     }
 }

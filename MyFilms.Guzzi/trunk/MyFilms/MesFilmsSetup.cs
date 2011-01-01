@@ -898,6 +898,7 @@ namespace MesFilms
             MesFilmsImgArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistPicturePath", "");
             chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
             MesFilmsFanart.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartPicture", "");
+            MesFilmsFanartViews.Text = MesFilmsFanart.Text + "\\_Group\\"; 
             MesFilmsViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsPicture", "");
             chkDfltViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDflt", false);
             chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
@@ -1560,6 +1561,7 @@ namespace MesFilms
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 MesFilmsFanart.Text = folderBrowserDialog1.SelectedPath;
+                MesFilmsFanartViews.Text = MesFilmsFanart.Text + "\\_Group\\";
             }
         }
 

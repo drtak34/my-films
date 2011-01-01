@@ -58,9 +58,9 @@ namespace MesFilms
         /*
          * Log declarations
          */
-        private static NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();  //log
-        private const string LogFileName = "myfilms.log";  //log's filename
-        private const string OldLogFileName = "myfilms.old.log";  //log's old filename
+        private static Logger Log = LogManager.GetCurrentClassLogger();  //log
+        private const string LogFileName = "MyFilms.log";  //log's filename
+        private const string OldLogFileName = "MyFilms.old.log";  //log's old filename
         
         //private BaseMesFilms films;
         #region Descriptif zones Ecran
@@ -264,6 +264,7 @@ namespace MesFilms
         public override bool Init()
         //This Method is only loaded ONCE when starting Mediaportal !!!
         {
+            InitLogger(); // Initialize Logger 
             Log.Debug("MyFilms.Init() started.");
             // create Backdrop image swapper
 
@@ -323,6 +324,8 @@ namespace MesFilms
         protected override void OnPageLoad()
             //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
         {
+            //InitLogger(); // Initialize Logger 
+            
             Log.Debug("MyFilms.OnPageLoad() started.");
             
             // (re)link our backdrop image controls to the backdrop image swapper
@@ -5516,10 +5519,9 @@ namespace MesFilms
            }
            catch (Exception) { }
 
-
            FileTarget fileTarget = new FileTarget();
            fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName);
-           fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss} " +
+           fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,f} " +
                                "${level:fixedLength=true:padding=5} " +
                                "[${logger:fixedLength=true:padding=20:shortName=true}]: ${message} " +
                                "${exception:format=tostring}";
