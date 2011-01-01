@@ -810,7 +810,7 @@ namespace MesFilms.Actors
                 // Search with searchName parameter which contain wanted actor name, result(s) is in array
                 // which conatin id and name separated with char "|"
                 //MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
-                VideoDatabase.GetActorByName(wperson, actorList);
+                MesFilmsDetail.GetActorByName(wperson, actorList);
                 // Check result
 
                 if (actorList.Count == 0)

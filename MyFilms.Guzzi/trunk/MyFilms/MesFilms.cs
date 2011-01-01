@@ -3217,7 +3217,8 @@ namespace MesFilms
 
 
                                 //Log.Info("Getting actor:{0}", _imdb[index].Title);
-                                _imdb.GetActorDetails(_imdb[index], director, out imdbActor);
+                                //_imdb.GetActorDetails(_imdb[index], director, out imdbActor);
+                                _imdb.GetActorDetails(_imdb[index], out imdbActor);
                                 //Log.Info("Adding actor:{0}({1}),{2}", imdbActor.Name, actor, percent);
                                 int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.Name);
                                 if (actorId > 0)
@@ -3249,7 +3250,8 @@ namespace MesFilms
                             }
                         }
 
-                        MediaPortal.Video.Database.VideoDatabase.GetActorByName(facadeView.SelectedListItem.Label, actorList);
+                        MesFilmsDetail.GetActorByName(facadeView.SelectedListItem.Label, actorList);
+                        //MediaPortal.Video.Database.VideoDatabase.GetActorByName(facadeView.SelectedListItem.Label, actorList);
 
                         if (actorList.Count == 0)
                         {
@@ -3464,9 +3466,10 @@ namespace MesFilms
             {
                 // First check if actror exists... - this only works with MePo V1.1.5+
                 ArrayList actorList = new ArrayList(); // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
+                //System.Collections.Generic.List<string> actorList = new System.Collections.Generic.List<string>();
                 try
                 {
-                    MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
+                    MesFilmsDetail.GetActorByName(wperson, actorList);
                 }
                 catch (Exception)
                 {}
@@ -3510,7 +3513,7 @@ namespace MesFilms
                 ArrayList actorList = new ArrayList();
                 // Search with searchName parameter which contain wanted actor name, result(s) is in array
                 // which conatin id and name separated with char "|"
-                MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
+                MesFilmsDetail.GetActorByName(wperson, actorList);
 
                 // Check result
                 if (actorList.Count == 0)
@@ -5406,7 +5409,7 @@ namespace MesFilms
                // First check if actror exists...
                ArrayList actorList = new ArrayList();
                // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
-               MediaPortal.Video.Database.VideoDatabase.GetActorByName(wperson, actorList);
+               MesFilmsDetail.GetActorByName(wperson, actorList);
                if (actorList.Count != 0)
                {
                    actorID = 0;

@@ -2484,7 +2484,7 @@ namespace MesFilms
 
             clearGUIProperty("db.description.value");
             ArrayList actorList = new ArrayList();
-            VideoDatabase.GetActorByName(artistname, actorList);
+            MesFilmsDetail.GetActorByName(artistname, actorList);
             if (actorList.Count == 0)
             {
                 return;
@@ -4172,6 +4172,36 @@ namespace MesFilms
         {
             setGUIProperty(name, ""); // String.Empty doesn't work on non-initialized fields, as a result they would display as ugly #myfilms.bla.bla - but "" seems now be possible and works better with conditional visibility checks, e.g. !strings.equals(#myfilms.xxx.value)
         }
+
+        public static void GetActorByName(string strActorName, ArrayList actors)
+        {
+            strActorName = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(strActorName);
+            SQLiteClient m_db = new SQLiteClient(Config.GetFile(Config.Dir.Database, @"VideoDatabaseV5.db3"));
+
+            if (m_db == null)
+            {
+                return;
+            }
+            try
+            {
+                actors.Clear();
+                SQLiteResultSet results = m_db.Execute("select * from Actors where strActor like '%" + strActorName + "%'");
+                if (results.Rows.Count == 0)
+                {
+                    return;
+                }
+                for (int iRow = 0; iRow < results.Rows.Count; iRow++)
+                {
+                    actors.Add(MediaPortal.Database.DatabaseUtility.Get(results, iRow, "idActor") + "|" +
+                               MediaPortal.Database.DatabaseUtility.Get(results, iRow, "strActor"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
+            }
+        }
+
 
     }
 
