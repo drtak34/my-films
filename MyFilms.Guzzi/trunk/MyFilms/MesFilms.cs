@@ -40,6 +40,10 @@ using MesFilms.WakeOnLan;
 using System.Threading;
 using System.Linq;
 using MediaPortal.Video.Database;
+using NLog.Config;
+using NLog.Targets;
+using MediaPortal.Services;
+using NLog;
 
 namespace MesFilms
 {
@@ -47,9 +51,17 @@ namespace MesFilms
     /// Summary description for GUIMesFilms.
     /// </summary>
     // [PluginIcons("MesFilms.MyFilms.Resources.clapperboard-128x128.png", "MesFilms.MyFilms.Resources.clapperboard-128x128-faded.png")]
+    //[PluginIcons("MesFilms.MyFilms.Resources.logo_mesfilms.png", "MesFilms.MyFilms.Resources.logo_mesfilms-faded.png")]
     [PluginIcons("MesFilms.MyFilms.Resources.film-reel-128x128.png", "MesFilms.MyFilms.Resources.film-reel-128x128-faded.png")]
     public class MesFilms : GUIWindow, ISetupForm
     {
+        /*
+         * Log declarations
+         */
+        private static NLog.Logger Log = NLog.LogManager.GetCurrentClassLogger();  //log
+        private const string LogFileName = "myfilms.log";  //log's filename
+        private const string OldLogFileName = "myfilms.old.log";  //log's old filename
+        
         //private BaseMesFilms films;
         #region Descriptif zones Ecran
 
@@ -5476,6 +5488,85 @@ namespace MesFilms
                    break;
            }
 
+       }
+
+
+       /// <summary>
+       /// Setup logger. This funtion made by the team behind Moving Pictures 
+       /// (http://code.google.com/p/moving-pictures/)
+       /// </summary>
+       private void InitLogger()
+       {
+           LoggingConfiguration config = new LoggingConfiguration();
+
+           try
+           {
+               FileInfo logFile = new FileInfo(Config.GetFile(Config.Dir.Log, LogFileName));
+               if (logFile.Exists)
+               {
+                   if (File.Exists(Config.GetFile(Config.Dir.Log, OldLogFileName)))
+                       File.Delete(Config.GetFile(Config.Dir.Log, OldLogFileName));
+
+                   logFile.CopyTo(Config.GetFile(Config.Dir.Log, OldLogFileName));
+                   logFile.Delete();
+               }
+           }
+           catch (Exception) { }
+
+
+           FileTarget fileTarget = new FileTarget();
+           fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName);
+           fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss} " +
+                               "${level:fixedLength=true:padding=5} " +
+                               "[${logger:fixedLength=true:padding=20:shortName=true}]: ${message} " +
+                               "${exception:format=tostring}";
+
+           config.AddTarget("file", fileTarget);
+
+           // Get current Log Level from MediaPortal 
+           NLog.LogLevel logLevel;
+           MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml"));
+
+           //string myThreadPriority = xmlreader.GetValue("general", "ThreadPriority");
+
+           //if (myThreadPriority != null && myThreadPriority.Equals("Normal", StringComparison.CurrentCulture))
+           //{
+           //    FHThreadPriority = "Lowest";
+           //}
+           //else if (myThreadPriority != null && myThreadPriority.Equals("BelowNormal", StringComparison.CurrentCulture))
+           //{
+           //    FHThreadPriority = "Lowest";
+           //}
+           //else
+           //{
+           //    FHThreadPriority = "BelowNormal";
+           //}
+
+           switch ((Level)xmlreader.GetValueAsInt("general", "loglevel", 0))
+           {
+               case Level.Error:
+                   logLevel = LogLevel.Error;
+                   break;
+               case Level.Warning:
+                   logLevel = LogLevel.Warn;
+                   break;
+               case Level.Information:
+                   logLevel = LogLevel.Info;
+                   break;
+               case Level.Debug:
+               default:
+                   logLevel = LogLevel.Debug;
+                   break;
+           }
+
+#if DEBUG
+            logLevel = LogLevel.Debug;
+#endif
+
+           LoggingRule rule = new LoggingRule("*", logLevel, fileTarget);
+           config.LoggingRules.Add(rule);
+
+           LogManager.Configuration = config;
        }
 
         #endregion
