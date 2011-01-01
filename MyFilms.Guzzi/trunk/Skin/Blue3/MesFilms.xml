@@ -137,7 +137,7 @@
 				<width>367</width>
 				<height>591</height>
 				<texture>Backslide.png</texture>
-				<colorDiffuse>fffffffff</colorDiffuse>
+				<colordiffuse>fffffffff</colordiffuse>
 				<visible>!Control.HasFocus(1026)</visible>
 				<animation effect="slide" time="450" start="-300,0" reversible="false">visible</animation>
 				<animation effect="slide" time="450" end="-300,0" reversible="false">hidden</animation>

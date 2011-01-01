@@ -28,15 +28,16 @@
 			<posY>0</posY>
 			<width>1280</width>
 			<height>720</height>
-   		<keepaspectratio>yes</keepaspectratio>
+   			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
 			<texture>#myfilms.fanart</texture>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="1">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
+<!--
 		<control>
 			<description>fanart</description>
 			<type>multiimage</type>
@@ -45,14 +46,15 @@
 			<posY>0</posY>
 			<width>1280</width>
 			<height>720</height>
-      <imagepath></imagepath>
-      <timeperimage>3000</timeperimage>
-      <fadetime>1000</fadetime>
-      <loop>yes</loop>
-   		<keepaspectratio>yes</keepaspectratio>
+      			<imagepath></imagepath>
+      			<timeperimage>3000</timeperimage>
+      			<fadetime>1000</fadetime>
+      			<loop>yes</loop>
+   			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
-      <randomize>true</randomize>
+      			<randomize>true</randomize>
 		</control>
+-->
 		<control>
 			<description>BG Overlay</description>
 			<type>image</type>
@@ -125,7 +127,7 @@
 				<width>1</width>
 				<height>1</height>
 				<texture>black.png</texture>
-				<colorDiffuse>ffffffff</colorDiffuse>
+				<colordiffuse>ffffffff</colordiffuse>
 				<visible>!control.hasfocus(10000)+!control.hasfocus(10099)</visible>
 			</control>
 			<control>
@@ -136,7 +138,7 @@
 				<width>418</width>
 				<height>720</height>
 				<texture>bg_left.png</texture>
-				<colorDiffuse>ffffffff</colorDiffuse>
+				<colordiffuse>ffffffff</colordiffuse>
 				<visible>!control.hasfocus(10000)+!control.hasfocus(10099)</visible>
 			</control>
 			<control>
@@ -366,12 +368,16 @@
 			<posX>2</posX>
 			<posY>630</posY>
 			<width>290</width>
-      			<height>30</height>
-      			<label>#myfilms.menu.overview</label>
+      <height>30</height>
+      <onup>10004</onup>
+      <ondown>10001</ondown>
+      <onleft>107</onleft>
+      <onright>10099</onright>
+      <label>#myfilms.menu.overview</label>
 			<font>font10</font>
-      			<textureFocus>-</textureFocus>
+      <textureFocus>-</textureFocus>
       <textureNoFocus>-</textureNoFocus>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible allowhiddenfocus="true">!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
@@ -448,7 +454,7 @@
       <height>30</height>
       <id>10004</id>
       <onup>10003</onup>
-      <ondown>100000</ondown>
+      <ondown>10000</ondown>
 			<onleft>107</onleft>
 			<onright>10099</onright>
       <label>#myfilms.menu.techinfos</label>
@@ -1486,7 +1492,7 @@ Detailmenu for technical details
 			<width>380</width>
 			<height>538</height>
 			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
-			<keepaspectration>yes</keepaspectration>
+			<keepaspectratio>yes</keepaspectratio>
       <visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -1502,7 +1508,7 @@ Detailmenu for technical details
 			<width>380</width>
 			<height>538</height>
 			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
-			<keepaspectration>yes</keepaspectration>
+			<keepaspectratio>yes</keepaspectratio>
 			<visible>!Control.HasFocus(10099)+player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>

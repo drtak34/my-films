@@ -137,7 +137,7 @@
 				<width>367</width>
 				<height>591</height>
 				<texture>Backslide.png</texture>
-				<colorDiffuse>fffffffff</colorDiffuse>
+				<colordiffuse>fffffffff</colordiffuse>
 				<visible>!Control.HasFocus(1026)</visible>
 				<animation effect="slide" time="450" start="-300,0" reversible="false">visible</animation>
 				<animation effect="slide" time="450" end="-300,0" reversible="false">hidden</animation>
@@ -413,9 +413,12 @@
 			 <texture>#myfilms.logos_id2001</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
+			<animation effect="fade" time="8250">visiblechange</animation>
+			<animation effect="fade" time="8250">WindowClose</animation>	
+			<animation effect="fade" time="8250">WindowOpen</animation>
 			<visible>!Control.isvisible(34)</visible>
 		</control>
-		<control>
+<!--		<control>
 			<type>image</type>
 			<description>thumb Logos ID 2002</description>
 			<id>2002</id>
@@ -428,6 +431,7 @@
 			<spaceBetweenItems>2</spaceBetweenItems>
 			<visible>!Control.isvisible(34)</visible>
 		</control>
+-->
 		<control>
 			<type>label</type>
 			<description>year</description>

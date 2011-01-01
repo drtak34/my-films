@@ -138,7 +138,7 @@
 				<width>1</width>
 				<height>1</height>
 				<texture>black.png</texture>
-				<colorDiffuse>ffffffff</colorDiffuse>
+				<colordiffuse>ffffffff</colordiffuse>
 				<visible>!control.hasfocus(10000)+!control.hasfocus(10099)</visible>
 			</control>
 			<control>
@@ -149,7 +149,7 @@
 				<width>425</width>
 				<height>580</height>
 				<texture>Backslide.png</texture>
-				<colorDiffuse>50ffffff</colorDiffuse>
+				<colordiffuse>50ffffff</colordiffuse>
 				<visible>!control.hasfocus(10000)+!control.hasfocus(10099)</visible>
 			</control>
 			<control>
@@ -1431,7 +1431,7 @@ Detailmenu for technical details
 		<posY>81</posY>
 		<width>380</width>
 		<height>538</height>
-		<keepaspectration>yes</keepaspectration>
+		<keepaspectratio>yes</keepaspectratio>
 		<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
 		<texture>#myfilms.picture</texture>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
@@ -1448,7 +1448,7 @@ Detailmenu for technical details
 		<width>380</width>
 		<height>538</height>
 		<texture>#myfilms.picture</texture>
-		<keepaspectration>yes</keepaspectration>
+		<keepaspectratio>yes</keepaspectratio>
 		<visible>!Control.HasFocus(10099)+player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>

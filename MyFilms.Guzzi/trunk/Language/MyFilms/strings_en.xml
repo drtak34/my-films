@@ -65,7 +65,7 @@
     <String id="107987">Films</String>
     <String id="1079861">Update DB (AMC Updater)</String>
     <String id="1079862">Download fanart (selected film)</String>
-    <String id="1079863">Switch grabber option: Use always that script from {0} to {1}</String>
+    <String id="1079863">Switch grabber option: Manually choose grabber script from {0} to {1}</String>
     <String id="1079864">Switch grabber option: Try to find best match from {0} to {1}</String>
     <String id="1079865">Switch update option: Use standard Windows file dialog... from {0} to {1}</String>
     <String id="1079866">Search related films by person</String>

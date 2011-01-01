@@ -793,7 +793,7 @@
 			<width>418</width>
 			<height>714</height>
 			<texture>bg_left.png</texture>
-			<colorDiffuse>ffffffff</colorDiffuse>
+			<colordiffuse>ffffffff</colordiffuse>
 			<animation effect="fade" time="50">WindowClose</animation>
 		</control>
 		<control>
@@ -825,7 +825,7 @@
 				<width>418</width>
 				<height>720</height>
 				<texture>bg_left.png</texture>
-				<colorDiffuse>ffffffff</colorDiffuse>
+				<colordiffuse>ffffffff</colordiffuse>
 				<visible>!control.hasfocus(1026)</visible>
 			</control>
 
