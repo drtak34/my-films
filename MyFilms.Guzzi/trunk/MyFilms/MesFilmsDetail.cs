@@ -3751,20 +3751,29 @@ namespace MesFilms
             file = file.Replace("ç", "[cç]");
             return file;
         }
+
         static public void RunProgram(string exeName, string argsLine)
         {
             if (exeName.Length > 0)
             {
-//                ProcessStartInfo psI = new ProcessStartInfo(exeName, argsLine);
+                // Use ProcessStartInfo class
+                // ProcessStartInfo psI = new ProcessStartInfo(exeName, argsLine);
+                //ProcessStartInfo startInfo = new ProcessStartInfo();
+                Log.Debug("Launching process with filename = '" + exeName + "' and argument = '" + argsLine + "'");
                 Process newProcess = new Process();
 
-                 try
+                try
                 {
                     newProcess.StartInfo.FileName = exeName;
                     newProcess.StartInfo.Arguments = argsLine;
                     newProcess.StartInfo.UseShellExecute = true;
                     newProcess.StartInfo.CreateNoWindow = true;
                     newProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    //newProcess.StartInfo.WorkingDirectory = "C:\\Programme\\Team MediaPortal\\MediaPortal";
+                    if (OSInfo.OSInfo.VistaOrLater())
+                    {
+                        newProcess.StartInfo.Verb = "runas";
+                    }
                     newProcess.Start();
                     while (!newProcess.HasExited)
                     {
@@ -3777,6 +3786,41 @@ namespace MesFilms
                 }
             }
         }
+
+
+        static public void RunAMCupdater(string exeName, string argsLine)
+        {
+            if (exeName.Length > 0)
+            {
+                using (Process p = new Process())
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.FileName = exeName;
+                    psi.UseShellExecute = true;
+                    psi.WindowStyle = ProcessWindowStyle.Minimized;
+                    psi.Arguments = argsLine;
+                    psi.ErrorDialog = false;
+                    if (OSInfo.OSInfo.VistaOrLater())
+                    {
+                        psi.Verb = "runas";
+                    }
+
+                    p.StartInfo = psi;
+                    Log.Debug("MyFilms: RunAMCupdater - Starting external command: {0} {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
+                    try
+                    {
+                        p.Start();
+                        p.WaitForExit();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Debug(e.ToString());
+                    }
+                    Log.Debug("MyFilms: RunAMCupdater - External command finished");
+                }
+            }
+        }
+
 
         //-------------------------------------------------------------------------------------------
         //  Search All Trailerfiles locally

@@ -997,7 +997,7 @@ namespace MesFilms
             txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", string.Empty);
             txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", string.Empty);
             chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Always", false);
-            chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "chkGrabber_ChooseScript", false);
+            chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_ChooseScript", false);
             chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd", false);
             txtAMCUpd_exe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", string.Empty);
             txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", string.Empty);

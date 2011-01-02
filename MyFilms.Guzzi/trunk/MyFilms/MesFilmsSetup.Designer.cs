@@ -220,6 +220,8 @@ namespace MesFilms
             this.label27 = new System.Windows.Forms.Label();
             this.chkGrabber = new System.Windows.Forms.CheckBox();
             this.Fanart = new System.Windows.Forms.GroupBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.MesFilmsFanartViews = new System.Windows.Forms.TextBox();
             this.chkFanart = new System.Windows.Forms.CheckBox();
             this.btnFanart = new System.Windows.Forms.Button();
             this.MesFilmsFanart = new System.Windows.Forms.TextBox();
@@ -346,26 +348,14 @@ namespace MesFilms
             this.label8 = new System.Windows.Forms.Label();
             this.ButCat = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.Tab_Optional1 = new System.Windows.Forms.TabPage();
+            this.Tab_Optional2 = new System.Windows.Forms.TabPage();
             this.Tab_Artwork = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ButDefCov = new System.Windows.Forms.Button();
             this.label_DefaulCover = new System.Windows.Forms.Label();
             this.ButImg = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.Tab_Optional1 = new System.Windows.Forms.TabPage();
-            this.Tab_Optional2 = new System.Windows.Forms.TabPage();
-            this.Tab_DVDprofilerMovieCollector = new System.Windows.Forms.TabPage();
-            this.groupBox_MovieCollector = new System.Windows.Forms.GroupBox();
-            this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.Images = new System.Windows.Forms.RadioButton();
-            this.Thumbnails = new System.Windows.Forms.RadioButton();
-            this.groupBox_DVDprofiler = new System.Windows.Forms.GroupBox();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.OnlyFile = new System.Windows.Forms.CheckBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.SortTitle = new System.Windows.Forms.CheckBox();
-            this.Tab_Grabber = new System.Windows.Forms.TabPage();
-            this.groupBox_nfoGrabber = new System.Windows.Forms.GroupBox();
             this.Tab_Logos = new System.Windows.Forms.TabPage();
             this.btnLogosPath = new System.Windows.Forms.Button();
             this.lblLogosPath = new System.Windows.Forms.Label();
@@ -394,8 +384,20 @@ namespace MesFilms
             this.SField1 = new System.Windows.Forms.ComboBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.SPicture = new System.Windows.Forms.PictureBox();
+            this.Tab_Grabber = new System.Windows.Forms.TabPage();
+            this.groupBox_nfoGrabber = new System.Windows.Forms.GroupBox();
             this.Tab_TrailerOptions = new System.Windows.Forms.TabPage();
             this.Tab_WakeOnLan = new System.Windows.Forms.TabPage();
+            this.Tab_DVDprofilerMovieCollector = new System.Windows.Forms.TabPage();
+            this.groupBox_MovieCollector = new System.Windows.Forms.GroupBox();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.Images = new System.Windows.Forms.RadioButton();
+            this.Thumbnails = new System.Windows.Forms.RadioButton();
+            this.groupBox_DVDprofiler = new System.Windows.Forms.GroupBox();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.OnlyFile = new System.Windows.Forms.CheckBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.SortTitle = new System.Windows.Forms.CheckBox();
             this.ButSave = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label21 = new System.Windows.Forms.Label();
@@ -403,8 +405,6 @@ namespace MesFilms
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.MesFilmsFanartViews = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
             this.groupBox_SortByItem.SuspendLayout();
             this.groupBox_AntSelectedEnreg.SuspendLayout();
             this.groupBox_DefaultView.SuspendLayout();
@@ -432,21 +432,21 @@ namespace MesFilms
             this.groupBox_PlayMovieInfos.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox_TitleOrder.SuspendLayout();
-            this.Tab_Artwork.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.Tab_Optional1.SuspendLayout();
             this.Tab_Optional2.SuspendLayout();
+            this.Tab_Artwork.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.Tab_Logos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
+            this.Tab_Grabber.SuspendLayout();
+            this.Tab_TrailerOptions.SuspendLayout();
+            this.Tab_WakeOnLan.SuspendLayout();
             this.Tab_DVDprofilerMovieCollector.SuspendLayout();
             this.groupBox_MovieCollector.SuspendLayout();
             this.groupBox17.SuspendLayout();
             this.groupBox_DVDprofiler.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.groupBox10.SuspendLayout();
-            this.Tab_Grabber.SuspendLayout();
-            this.Tab_Logos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
-            this.Tab_TrailerOptions.SuspendLayout();
-            this.Tab_WakeOnLan.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1778,6 +1778,25 @@ namespace MesFilms
             this.Fanart.Text = "Fanart (Backdrops)";
             this.ToolTip1.SetToolTip(this.Fanart, resources.GetString("Fanart.ToolTip"));
             // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(149, 70);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(151, 13);
+            this.label40.TabIndex = 73;
+            this.label40.Text = "Resulting path for Views fanart";
+            // 
+            // MesFilmsFanartViews
+            // 
+            this.MesFilmsFanartViews.Enabled = false;
+            this.MesFilmsFanartViews.Location = new System.Drawing.Point(315, 67);
+            this.MesFilmsFanartViews.Name = "MesFilmsFanartViews";
+            this.MesFilmsFanartViews.Size = new System.Drawing.Size(315, 20);
+            this.MesFilmsFanartViews.TabIndex = 72;
+            this.ToolTip1.SetToolTip(this.MesFilmsFanartViews, "To use Fanart for \"Views\" put fanart in the subfolder for year, category, country" +
+                    "\" , \r\ne.g. <fanartfolder>\\\\_group\\\\year\\2010\";");
+            // 
             // chkFanart
             // 
             this.chkFanart.AutoSize = true;
@@ -2535,7 +2554,9 @@ namespace MesFilms
             this.label_VersionNumber.Name = "label_VersionNumber";
             this.label_VersionNumber.Size = new System.Drawing.Size(98, 13);
             this.label_VersionNumber.TabIndex = 34;
-            this.label_VersionNumber.Text = "Version 5.1.0 alpha";
+            //this.label_VersionNumber.Text = "Version 5.1.0 alpha";
+            System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString() + " alpha";
             this.ToolTip1.SetToolTip(this.label_VersionNumber, "Alphaversion for Testing only !");
             this.label_VersionNumber.Click += new System.EventHandler(this.label10_Click);
             // 
@@ -3085,6 +3106,34 @@ namespace MesFilms
             this.label1.TabIndex = 47;
             this.label1.Text = "Catalog File (XML)";
             // 
+            // Tab_Optional1
+            // 
+            this.Tab_Optional1.Controls.Add(this.groupBox_SortByItem);
+            this.Tab_Optional1.Controls.Add(this.groupBox_AntSelectedEnreg);
+            this.Tab_Optional1.Controls.Add(this.groupBox_DefaultView);
+            this.Tab_Optional1.Controls.Add(this.groupBox_SupplementaryView);
+            this.Tab_Optional1.Controls.Add(this.groupBox_DetailedSupplementaryInformations);
+            this.Tab_Optional1.Location = new System.Drawing.Point(4, 22);
+            this.Tab_Optional1.Name = "Tab_Optional1";
+            this.Tab_Optional1.Padding = new System.Windows.Forms.Padding(3);
+            this.Tab_Optional1.Size = new System.Drawing.Size(747, 354);
+            this.Tab_Optional1.TabIndex = 1;
+            this.Tab_Optional1.Text = "Optional 1";
+            this.Tab_Optional1.UseVisualStyleBackColor = true;
+            // 
+            // Tab_Optional2
+            // 
+            this.Tab_Optional2.Controls.Add(this.groupBox_SupplementarySearch);
+            this.Tab_Optional2.Controls.Add(this.groupBox_DatabaseUpdateOptions);
+            this.Tab_Optional2.Controls.Add(this.groupBox_Separators);
+            this.Tab_Optional2.Location = new System.Drawing.Point(4, 22);
+            this.Tab_Optional2.Name = "Tab_Optional2";
+            this.Tab_Optional2.Padding = new System.Windows.Forms.Padding(3);
+            this.Tab_Optional2.Size = new System.Drawing.Size(747, 354);
+            this.Tab_Optional2.TabIndex = 3;
+            this.Tab_Optional2.Text = "Optional 2";
+            this.Tab_Optional2.UseVisualStyleBackColor = true;
+            // 
             // Tab_Artwork
             // 
             this.Tab_Artwork.Controls.Add(this.groupBox_ArtistImages);
@@ -3151,163 +3200,6 @@ namespace MesFilms
             this.label2.Size = new System.Drawing.Size(97, 13);
             this.label2.TabIndex = 86;
             this.label2.Text = "Cover Images Path";
-            // 
-            // Tab_Optional1
-            // 
-            this.Tab_Optional1.Controls.Add(this.groupBox_SortByItem);
-            this.Tab_Optional1.Controls.Add(this.groupBox_AntSelectedEnreg);
-            this.Tab_Optional1.Controls.Add(this.groupBox_DefaultView);
-            this.Tab_Optional1.Controls.Add(this.groupBox_SupplementaryView);
-            this.Tab_Optional1.Controls.Add(this.groupBox_DetailedSupplementaryInformations);
-            this.Tab_Optional1.Location = new System.Drawing.Point(4, 22);
-            this.Tab_Optional1.Name = "Tab_Optional1";
-            this.Tab_Optional1.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_Optional1.Size = new System.Drawing.Size(747, 354);
-            this.Tab_Optional1.TabIndex = 1;
-            this.Tab_Optional1.Text = "Optional 1";
-            this.Tab_Optional1.UseVisualStyleBackColor = true;
-            // 
-            // Tab_Optional2
-            // 
-            this.Tab_Optional2.Controls.Add(this.groupBox_SupplementarySearch);
-            this.Tab_Optional2.Controls.Add(this.groupBox_DatabaseUpdateOptions);
-            this.Tab_Optional2.Controls.Add(this.groupBox_Separators);
-            this.Tab_Optional2.Location = new System.Drawing.Point(4, 22);
-            this.Tab_Optional2.Name = "Tab_Optional2";
-            this.Tab_Optional2.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_Optional2.Size = new System.Drawing.Size(747, 354);
-            this.Tab_Optional2.TabIndex = 3;
-            this.Tab_Optional2.Text = "Optional 2";
-            this.Tab_Optional2.UseVisualStyleBackColor = true;
-            // 
-            // Tab_DVDprofilerMovieCollector
-            // 
-            this.Tab_DVDprofilerMovieCollector.Controls.Add(this.groupBox_MovieCollector);
-            this.Tab_DVDprofilerMovieCollector.Controls.Add(this.groupBox9);
-            this.Tab_DVDprofilerMovieCollector.Controls.Add(this.groupBox_DVDprofiler);
-            this.Tab_DVDprofilerMovieCollector.Location = new System.Drawing.Point(4, 22);
-            this.Tab_DVDprofilerMovieCollector.Name = "Tab_DVDprofilerMovieCollector";
-            this.Tab_DVDprofilerMovieCollector.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_DVDprofilerMovieCollector.Size = new System.Drawing.Size(747, 354);
-            this.Tab_DVDprofilerMovieCollector.TabIndex = 2;
-            this.Tab_DVDprofilerMovieCollector.Text = "DVDProfiler/Movie Collecor";
-            this.Tab_DVDprofilerMovieCollector.UseVisualStyleBackColor = true;
-            // 
-            // groupBox_MovieCollector
-            // 
-            this.groupBox_MovieCollector.Controls.Add(this.groupBox17);
-            this.groupBox_MovieCollector.Location = new System.Drawing.Point(377, 17);
-            this.groupBox_MovieCollector.Name = "groupBox_MovieCollector";
-            this.groupBox_MovieCollector.Size = new System.Drawing.Size(349, 134);
-            this.groupBox_MovieCollector.TabIndex = 29;
-            this.groupBox_MovieCollector.TabStop = false;
-            this.groupBox_MovieCollector.Text = "Movie Collector";
-            // 
-            // groupBox17
-            // 
-            this.groupBox17.Controls.Add(this.Images);
-            this.groupBox17.Controls.Add(this.Thumbnails);
-            this.groupBox17.Location = new System.Drawing.Point(11, 18);
-            this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(322, 91);
-            this.groupBox17.TabIndex = 3;
-            this.groupBox17.TabStop = false;
-            this.groupBox17.Text = "Covers";
-            // 
-            // Images
-            // 
-            this.Images.AutoSize = true;
-            this.Images.Location = new System.Drawing.Point(24, 47);
-            this.Images.Name = "Images";
-            this.Images.Size = new System.Drawing.Size(168, 17);
-            this.Images.TabIndex = 3;
-            this.Images.TabStop = true;
-            this.Images.Text = "Use\' Images\' Folder for Covers";
-            this.Images.UseVisualStyleBackColor = true;
-            // 
-            // Thumbnails
-            // 
-            this.Thumbnails.AutoSize = true;
-            this.Thumbnails.Location = new System.Drawing.Point(24, 22);
-            this.Thumbnails.Name = "Thumbnails";
-            this.Thumbnails.Size = new System.Drawing.Size(188, 17);
-            this.Thumbnails.TabIndex = 2;
-            this.Thumbnails.TabStop = true;
-            this.Thumbnails.Text = "Use \'Thumbnails\' Folder for Covers";
-            this.Thumbnails.UseVisualStyleBackColor = true;
-            // 
-            // groupBox_DVDprofiler
-            // 
-            this.groupBox_DVDprofiler.Controls.Add(this.groupBox13);
-            this.groupBox_DVDprofiler.Controls.Add(this.groupBox10);
-            this.groupBox_DVDprofiler.Location = new System.Drawing.Point(22, 17);
-            this.groupBox_DVDprofiler.Name = "groupBox_DVDprofiler";
-            this.groupBox_DVDprofiler.Size = new System.Drawing.Size(349, 314);
-            this.groupBox_DVDprofiler.TabIndex = 28;
-            this.groupBox_DVDprofiler.TabStop = false;
-            this.groupBox_DVDprofiler.Text = "DVDProfiler";
-            // 
-            // groupBox13
-            // 
-            this.groupBox13.Controls.Add(this.OnlyFile);
-            this.groupBox13.Location = new System.Drawing.Point(12, 207);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(327, 66);
-            this.groupBox13.TabIndex = 2;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Notes Field";
-            // 
-            // OnlyFile
-            // 
-            this.OnlyFile.AutoSize = true;
-            this.OnlyFile.Location = new System.Drawing.Point(24, 31);
-            this.OnlyFile.Name = "OnlyFile";
-            this.OnlyFile.Size = new System.Drawing.Size(221, 17);
-            this.OnlyFile.TabIndex = 0;
-            this.OnlyFile.Text = "Notes Field contains only Movie Filename";
-            this.OnlyFile.UseVisualStyleBackColor = true;
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.SortTitle);
-            this.groupBox10.Location = new System.Drawing.Point(12, 127);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(327, 62);
-            this.groupBox10.TabIndex = 1;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Use SortTitle";
-            // 
-            // SortTitle
-            // 
-            this.SortTitle.AutoSize = true;
-            this.SortTitle.Location = new System.Drawing.Point(24, 30);
-            this.SortTitle.Name = "SortTitle";
-            this.SortTitle.Size = new System.Drawing.Size(199, 17);
-            this.SortTitle.TabIndex = 0;
-            this.SortTitle.Text = "Store SortTitle in FormattedTitle Field";
-            this.SortTitle.UseVisualStyleBackColor = true;
-            // 
-            // Tab_Grabber
-            // 
-            this.Tab_Grabber.Controls.Add(this.groupBox_nfoGrabber);
-            this.Tab_Grabber.Controls.Add(this.groupBox20);
-            this.Tab_Grabber.Controls.Add(this.groupBox_GrabberOptions);
-            this.Tab_Grabber.Location = new System.Drawing.Point(4, 22);
-            this.Tab_Grabber.Name = "Tab_Grabber";
-            this.Tab_Grabber.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_Grabber.Size = new System.Drawing.Size(747, 354);
-            this.Tab_Grabber.TabIndex = 4;
-            this.Tab_Grabber.Text = "Grabber";
-            this.Tab_Grabber.UseVisualStyleBackColor = true;
-            // 
-            // groupBox_nfoGrabber
-            // 
-            this.groupBox_nfoGrabber.Location = new System.Drawing.Point(21, 243);
-            this.groupBox_nfoGrabber.Name = "groupBox_nfoGrabber";
-            this.groupBox_nfoGrabber.Size = new System.Drawing.Size(693, 105);
-            this.groupBox_nfoGrabber.TabIndex = 3;
-            this.groupBox_nfoGrabber.TabStop = false;
-            this.groupBox_nfoGrabber.Text = "XBMC nfo Grabber";
             // 
             // Tab_Logos
             // 
@@ -3603,6 +3495,28 @@ namespace MesFilms
             this.SPicture.TabStop = false;
             this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
             // 
+            // Tab_Grabber
+            // 
+            this.Tab_Grabber.Controls.Add(this.groupBox_nfoGrabber);
+            this.Tab_Grabber.Controls.Add(this.groupBox20);
+            this.Tab_Grabber.Controls.Add(this.groupBox_GrabberOptions);
+            this.Tab_Grabber.Location = new System.Drawing.Point(4, 22);
+            this.Tab_Grabber.Name = "Tab_Grabber";
+            this.Tab_Grabber.Padding = new System.Windows.Forms.Padding(3);
+            this.Tab_Grabber.Size = new System.Drawing.Size(747, 354);
+            this.Tab_Grabber.TabIndex = 4;
+            this.Tab_Grabber.Text = "Grabber";
+            this.Tab_Grabber.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_nfoGrabber
+            // 
+            this.groupBox_nfoGrabber.Location = new System.Drawing.Point(21, 243);
+            this.groupBox_nfoGrabber.Name = "groupBox_nfoGrabber";
+            this.groupBox_nfoGrabber.Size = new System.Drawing.Size(693, 105);
+            this.groupBox_nfoGrabber.TabIndex = 3;
+            this.groupBox_nfoGrabber.TabStop = false;
+            this.groupBox_nfoGrabber.Text = "XBMC nfo Grabber";
+            // 
             // Tab_TrailerOptions
             // 
             this.Tab_TrailerOptions.Controls.Add(this.groupBox24);
@@ -3625,6 +3539,113 @@ namespace MesFilms
             this.Tab_WakeOnLan.TabIndex = 8;
             this.Tab_WakeOnLan.Text = "WakeOnLAN";
             this.Tab_WakeOnLan.UseVisualStyleBackColor = true;
+            // 
+            // Tab_DVDprofilerMovieCollector
+            // 
+            this.Tab_DVDprofilerMovieCollector.Controls.Add(this.groupBox_MovieCollector);
+            this.Tab_DVDprofilerMovieCollector.Controls.Add(this.groupBox9);
+            this.Tab_DVDprofilerMovieCollector.Controls.Add(this.groupBox_DVDprofiler);
+            this.Tab_DVDprofilerMovieCollector.Location = new System.Drawing.Point(4, 22);
+            this.Tab_DVDprofilerMovieCollector.Name = "Tab_DVDprofilerMovieCollector";
+            this.Tab_DVDprofilerMovieCollector.Padding = new System.Windows.Forms.Padding(3);
+            this.Tab_DVDprofilerMovieCollector.Size = new System.Drawing.Size(747, 354);
+            this.Tab_DVDprofilerMovieCollector.TabIndex = 2;
+            this.Tab_DVDprofilerMovieCollector.Text = "DVDProfiler/Movie Collecor";
+            this.Tab_DVDprofilerMovieCollector.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_MovieCollector
+            // 
+            this.groupBox_MovieCollector.Controls.Add(this.groupBox17);
+            this.groupBox_MovieCollector.Location = new System.Drawing.Point(377, 17);
+            this.groupBox_MovieCollector.Name = "groupBox_MovieCollector";
+            this.groupBox_MovieCollector.Size = new System.Drawing.Size(349, 134);
+            this.groupBox_MovieCollector.TabIndex = 29;
+            this.groupBox_MovieCollector.TabStop = false;
+            this.groupBox_MovieCollector.Text = "Movie Collector";
+            // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.Images);
+            this.groupBox17.Controls.Add(this.Thumbnails);
+            this.groupBox17.Location = new System.Drawing.Point(11, 18);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(322, 91);
+            this.groupBox17.TabIndex = 3;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "Covers";
+            // 
+            // Images
+            // 
+            this.Images.AutoSize = true;
+            this.Images.Location = new System.Drawing.Point(24, 47);
+            this.Images.Name = "Images";
+            this.Images.Size = new System.Drawing.Size(168, 17);
+            this.Images.TabIndex = 3;
+            this.Images.TabStop = true;
+            this.Images.Text = "Use\' Images\' Folder for Covers";
+            this.Images.UseVisualStyleBackColor = true;
+            // 
+            // Thumbnails
+            // 
+            this.Thumbnails.AutoSize = true;
+            this.Thumbnails.Location = new System.Drawing.Point(24, 22);
+            this.Thumbnails.Name = "Thumbnails";
+            this.Thumbnails.Size = new System.Drawing.Size(188, 17);
+            this.Thumbnails.TabIndex = 2;
+            this.Thumbnails.TabStop = true;
+            this.Thumbnails.Text = "Use \'Thumbnails\' Folder for Covers";
+            this.Thumbnails.UseVisualStyleBackColor = true;
+            // 
+            // groupBox_DVDprofiler
+            // 
+            this.groupBox_DVDprofiler.Controls.Add(this.groupBox13);
+            this.groupBox_DVDprofiler.Controls.Add(this.groupBox10);
+            this.groupBox_DVDprofiler.Location = new System.Drawing.Point(22, 17);
+            this.groupBox_DVDprofiler.Name = "groupBox_DVDprofiler";
+            this.groupBox_DVDprofiler.Size = new System.Drawing.Size(349, 314);
+            this.groupBox_DVDprofiler.TabIndex = 28;
+            this.groupBox_DVDprofiler.TabStop = false;
+            this.groupBox_DVDprofiler.Text = "DVDProfiler";
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.OnlyFile);
+            this.groupBox13.Location = new System.Drawing.Point(12, 207);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(327, 66);
+            this.groupBox13.TabIndex = 2;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Notes Field";
+            // 
+            // OnlyFile
+            // 
+            this.OnlyFile.AutoSize = true;
+            this.OnlyFile.Location = new System.Drawing.Point(24, 31);
+            this.OnlyFile.Name = "OnlyFile";
+            this.OnlyFile.Size = new System.Drawing.Size(221, 17);
+            this.OnlyFile.TabIndex = 0;
+            this.OnlyFile.Text = "Notes Field contains only Movie Filename";
+            this.OnlyFile.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.SortTitle);
+            this.groupBox10.Location = new System.Drawing.Point(12, 127);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(327, 62);
+            this.groupBox10.TabIndex = 1;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Use SortTitle";
+            // 
+            // SortTitle
+            // 
+            this.SortTitle.AutoSize = true;
+            this.SortTitle.Location = new System.Drawing.Point(24, 30);
+            this.SortTitle.Name = "SortTitle";
+            this.SortTitle.Size = new System.Drawing.Size(199, 17);
+            this.SortTitle.TabIndex = 0;
+            this.SortTitle.Text = "Store SortTitle in FormattedTitle Field";
+            this.SortTitle.UseVisualStyleBackColor = true;
             // 
             // ButSave
             // 
@@ -3694,25 +3715,6 @@ namespace MesFilms
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 75;
             this.pictureBox1.TabStop = false;
-            // 
-            // MesFilmsFanartViews
-            // 
-            this.MesFilmsFanartViews.Enabled = false;
-            this.MesFilmsFanartViews.Location = new System.Drawing.Point(315, 67);
-            this.MesFilmsFanartViews.Name = "MesFilmsFanartViews";
-            this.MesFilmsFanartViews.Size = new System.Drawing.Size(315, 20);
-            this.MesFilmsFanartViews.TabIndex = 72;
-            this.ToolTip1.SetToolTip(this.MesFilmsFanartViews, "To use Fanart for \"Views\" put fanart in the subfolder for year, category, country" +
-                    "\" , \r\ne.g. <fanartfolder>\\\\_group\\\\year\\2010\";");
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(149, 70);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(151, 13);
-            this.label40.TabIndex = 73;
-            this.label40.Text = "Resulting path for Views fanart";
             // 
             // MesFilmsSetup
             // 
@@ -3791,11 +3793,17 @@ namespace MesFilms
             this.groupBox2.PerformLayout();
             this.groupBox_TitleOrder.ResumeLayout(false);
             this.groupBox_TitleOrder.PerformLayout();
+            this.Tab_Optional1.ResumeLayout(false);
+            this.Tab_Optional2.ResumeLayout(false);
             this.Tab_Artwork.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.Tab_Optional1.ResumeLayout(false);
-            this.Tab_Optional2.ResumeLayout(false);
+            this.Tab_Logos.ResumeLayout(false);
+            this.Tab_Logos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
+            this.Tab_Grabber.ResumeLayout(false);
+            this.Tab_TrailerOptions.ResumeLayout(false);
+            this.Tab_WakeOnLan.ResumeLayout(false);
             this.Tab_DVDprofilerMovieCollector.ResumeLayout(false);
             this.groupBox_MovieCollector.ResumeLayout(false);
             this.groupBox17.ResumeLayout(false);
@@ -3805,12 +3813,6 @@ namespace MesFilms
             this.groupBox13.PerformLayout();
             this.groupBox10.ResumeLayout(false);
             this.groupBox10.PerformLayout();
-            this.Tab_Grabber.ResumeLayout(false);
-            this.Tab_Logos.ResumeLayout(false);
-            this.Tab_Logos.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
-            this.Tab_TrailerOptions.ResumeLayout(false);
-            this.Tab_WakeOnLan.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

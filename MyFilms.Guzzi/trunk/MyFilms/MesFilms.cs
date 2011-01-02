@@ -483,8 +483,6 @@ namespace MesFilms
                     // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
                     if (!bgLoadMovieList.IsBusy)
                     {
-                        bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
-                        bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
                         AsynLoadMovieList();
                     }
                     // ********************************
@@ -2773,8 +2771,6 @@ namespace MesFilms
                         ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
                         break;
                     }
-                    bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
-                    bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
                     AsynUpdateDatabase();
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
@@ -2786,8 +2782,6 @@ namespace MesFilms
                         ShowMessageDialog(GUILocalizeStrings.Get(1079862), GUILocalizeStrings.Get(921), GUILocalizeStrings.Get(330)); //action already launched
                         break;
                     }
-                    bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
-                    bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
                     AsynUpdateFanart();
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
@@ -3570,6 +3564,7 @@ namespace MesFilms
                     break;
             }
             conf.StrTitleSelect = "";
+            SetLabelView("search"); // show "search"
             GetFilmList();
         }
 
@@ -3983,6 +3978,7 @@ namespace MesFilms
             else
                 conf.StrTxtSelect = "Selection " + wproperty + " [*" + choiceSearch[dlg.SelectedLabel].ToString() + @"*]";
             conf.StrTitleSelect = "";
+            SetLabelView("search"); // show "search"
             GetFilmList();
         }
 
@@ -4239,6 +4235,7 @@ namespace MesFilms
                     conf.StrTitleSelect = "";
                     //getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
                     Log.Debug("MyFilms (Guzzi): Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
+                    SetLabelView("search"); // show "search"
                     GetFilmList(); // Added to update view ????
 
                     //Set Context to first and only title in facadeview
@@ -4425,6 +4422,7 @@ namespace MesFilms
 
                     // Temporarily Enabled for Testing
                     //getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                    SetLabelView("search"); // show "search"
                     GetFilmList();
                     break;
 
@@ -4563,6 +4561,7 @@ namespace MesFilms
 
                     // Temporarily Enabled for Testing
                     //getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                    SetLabelView("search"); // show "search"
                     GetFilmList();
                     break;
             }
@@ -4703,6 +4702,7 @@ namespace MesFilms
                             conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]";
                             conf.StrTitleSelect = "";
                             // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                            SetLabelView("search"); // show "search"
                             GetFilmList();
                         }
                         break;
@@ -4773,7 +4773,8 @@ namespace MesFilms
                                 conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [" + keyboard.Text + @"]";
                             }
                             conf.StrTitleSelect = "";
-                            //                         getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                            // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                            SetLabelView("search"); // show "search"
                             GetFilmList();
                         }
                         break;
@@ -4851,7 +4852,8 @@ namespace MesFilms
                             conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]"; // Zebons Version
                             //conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]"; // Guzzi Version
                             conf.StrTitleSelect = "";
-                            //                         getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                            // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                            SetLabelView("search"); // show "search"
                             GetFilmList();
                         }
                         break;
@@ -4922,8 +4924,11 @@ namespace MesFilms
         {
             if (!bgUpdateDB.IsBusy)
             {
+                // moved here to avoid reinstantiating for each menu change.... thanks inker !
+                bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
+                bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
                 bgUpdateDB.RunWorkerAsync(MesFilms.conf.StrTIndex);
-                Log.Info("MyFilms : launching AMCUpdater in batch mode");
+                Log.Info("MyFilms : Launching AMCUpdater in batch mode");
 
             }
         }
@@ -4931,17 +4936,17 @@ namespace MesFilms
         static void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            MesFilmsDetail.RunProgram(MesFilms.conf.StrAMCUpd_exe, MesFilms.conf.StrAMCUpd_cnf);
+            MesFilmsDetail.RunAMCupdater(MesFilms.conf.StrAMCUpd_exe, "\"" + MesFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\""); // Add Logpath to commandlineparameters
         }
 
         void bgUpdateDB_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-            Log.Info("MyFilms : Update database with AMCUpdater finished");
+            Log.Info("MyFilms : Update database with AMCUpdater finished. (GetID = '" + GetID + "')");
             if (GetID == 7986)
             {
-                Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
                 Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
                 Load_Config(Configuration.CurrentConfig, true);
+                Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
             }
         }
 
@@ -4952,6 +4957,9 @@ namespace MesFilms
         {
             if (!bgUpdateFanart.IsBusy)
             {
+                // moved here to avoid reinstantiating for each menu change.... thanks inker !
+                bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
+                bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
                 bgUpdateFanart.RunWorkerAsync(MesFilms.r);
                 Log.Info("MyFilms : Downloading backdrop fanart in batch mode");
 
@@ -5001,6 +5009,8 @@ namespace MesFilms
         {
             if (!bgLoadMovieList.IsBusy)
             {
+                bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
+                bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
                 bgLoadMovieList.RunWorkerAsync();
                 Log.Info("MyFilms : Loading Movie List in batch mode");
             }
@@ -5440,6 +5450,10 @@ namespace MesFilms
            viewDefaultItem = viewDefaultItem.ToLower();
            switch (viewDefaultItem)
            {
+               case "search":
+                   MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(137));// "search"
+                   GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(137));
+                   break;
                case "all":
                    MesFilmsDetail.setGUIProperty("view", GUILocalizeStrings.Get(342));//videos
                    GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(342));
