@@ -629,6 +629,7 @@ Public Class AntSettings
         Else
             'User has specified a config file:
             FileToLoad = SettingsFile
+
             If File.Exists(FileToLoad) Then
                 Try
                     dsSettings.ReadXml(FileToLoad, XmlReadMode.InferSchema)

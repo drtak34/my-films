@@ -75,6 +75,7 @@ Private Sub Main()
         Me.lblOverridePath = New System.Windows.Forms.Label
         Me.Options = New System.Windows.Forms.TabPage
         Me.GroupBox17 = New System.Windows.Forms.GroupBox
+        Me.chkUsePageGrabber = New System.Windows.Forms.CheckBox
         Me.chkUseXBMCnfo = New System.Windows.Forms.CheckBox
         Me.chkRescanMovedFiles = New System.Windows.Forms.CheckBox
         Me.chkProhibitInternetLookup = New System.Windows.Forms.CheckBox
@@ -176,6 +177,7 @@ Private Sub Main()
         Me.Label18 = New System.Windows.Forms.Label
         Me.cbManualParameterFieldList1 = New System.Windows.Forms.ComboBox
         Me.GroupBox10 = New System.Windows.Forms.GroupBox
+        Me.chkManualMissingTrailer = New System.Windows.Forms.CheckBox
         Me.chkManualMissingFanartDownload = New System.Windows.Forms.CheckBox
         Me.lblManualDatabaseFieldsPrompt = New System.Windows.Forms.Label
         Me.lblManualSelectField = New System.Windows.Forms.Label
@@ -351,8 +353,6 @@ Private Sub Main()
         Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.chkUsePageGrabber = New System.Windows.Forms.CheckBox
-        Me.chkManualMissingTrailer = New System.Windows.Forms.CheckBox
         Me.TabControl1.SuspendLayout()
         Me.Interactive.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -844,6 +844,17 @@ Private Sub Main()
         Me.GroupBox17.TabIndex = 1
         Me.GroupBox17.TabStop = False
         Me.GroupBox17.Text = "File Handling"
+        '
+        'chkUsePageGrabber
+        '
+        Me.chkUsePageGrabber.AutoSize = True
+        Me.chkUsePageGrabber.Location = New System.Drawing.Point(211, 65)
+        Me.chkUsePageGrabber.Name = "chkUsePageGrabber"
+        Me.chkUsePageGrabber.Size = New System.Drawing.Size(114, 17)
+        Me.chkUsePageGrabber.TabIndex = 10
+        Me.chkUsePageGrabber.Text = "Use Page Grabber"
+        Me.ToolTip1.SetToolTip(Me.chkUsePageGrabber, "Try to read infos from webpage in movie directory")
+        Me.chkUsePageGrabber.UseVisualStyleBackColor = True
         '
         'chkUseXBMCnfo
         '
@@ -1938,6 +1949,19 @@ Private Sub Main()
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Operation"
         '
+        'chkManualMissingTrailer
+        '
+        Me.chkManualMissingTrailer.AutoSize = True
+        Me.chkManualMissingTrailer.Checked = True
+        Me.chkManualMissingTrailer.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkManualMissingTrailer.Location = New System.Drawing.Point(279, 23)
+        Me.chkManualMissingTrailer.Name = "chkManualMissingTrailer"
+        Me.chkManualMissingTrailer.Size = New System.Drawing.Size(194, 17)
+        Me.chkManualMissingTrailer.TabIndex = 9
+        Me.chkManualMissingTrailer.Text = "Update only Movies missing Trailers"
+        Me.chkManualMissingTrailer.UseVisualStyleBackColor = True
+        Me.chkManualMissingTrailer.Visible = False
+        '
         'chkManualMissingFanartDownload
         '
         Me.chkManualMissingFanartDownload.AutoSize = True
@@ -1945,7 +1969,7 @@ Private Sub Main()
         Me.chkManualMissingFanartDownload.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkManualMissingFanartDownload.Location = New System.Drawing.Point(279, 23)
         Me.chkManualMissingFanartDownload.Name = "chkManualMissingFanartDownload"
-        Me.chkManualMissingFanartDownload.Size = New System.Drawing.Size(203, 17)
+        Me.chkManualMissingFanartDownload.Size = New System.Drawing.Size(218, 17)
         Me.chkManualMissingFanartDownload.TabIndex = 8
         Me.chkManualMissingFanartDownload.Text = "Download only for Movies missing Fanart"
         Me.chkManualMissingFanartDownload.UseVisualStyleBackColor = True
@@ -3578,30 +3602,6 @@ Private Sub Main()
         Me.DateAddedDataGridViewTextBoxColumn.Name = "DateAddedDataGridViewTextBoxColumn"
         Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
-        '
-        'chkUsePageGrabber
-        '
-        Me.chkUsePageGrabber.AutoSize = True
-        Me.chkUsePageGrabber.Location = New System.Drawing.Point(211, 65)
-        Me.chkUsePageGrabber.Name = "chkUsePageGrabber"
-        Me.chkUsePageGrabber.Size = New System.Drawing.Size(114, 17)
-        Me.chkUsePageGrabber.TabIndex = 10
-        Me.chkUsePageGrabber.Text = "Use Page Grabber"
-        Me.ToolTip1.SetToolTip(Me.chkUsePageGrabber, "Try to read infos from webpage in movie directory")
-        Me.chkUsePageGrabber.UseVisualStyleBackColor = True
-        '
-        'chkManualMissingTrailer
-        '
-        Me.chkManualMissingTrailer.AutoSize = True
-        Me.chkManualMissingTrailer.Checked = True
-        Me.chkManualMissingTrailer.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkManualMissingTrailer.Location = New System.Drawing.Point(279, 23)
-        Me.chkManualMissingTrailer.Name = "chkManualMissingTrailer"
-        Me.chkManualMissingTrailer.Size = New System.Drawing.Size(194, 17)
-        Me.chkManualMissingTrailer.TabIndex = 9
-        Me.chkManualMissingTrailer.Text = "Update only Movies missing Trailers"
-        Me.chkManualMissingTrailer.UseVisualStyleBackColor = True
-        Me.chkManualMissingTrailer.Visible = False
         '
         'Form1
         '

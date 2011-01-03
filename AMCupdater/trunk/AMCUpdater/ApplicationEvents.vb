@@ -21,10 +21,9 @@ Namespace My
         End Sub
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
-
-            LogEvent("", EventLogLevel.ErrorOrSimilar)
-            LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
-            LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
+            'LogEvent("", EventLogLevel.ErrorOrSimilar)
+            'LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
+            'LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
             'If My.Application.CommandLineArgs.Count > 0 Then
             ' Call the main routine for windowless operation.
             'Dim c As New BatchApplication
@@ -35,8 +34,11 @@ Namespace My
             'LogEvent("Running in GUI Mode", EventLogLevel.ImportantEvent)
             'End If
 
-
             'Dim Settings As New AntSettings
+
+
+            'Read Dir for Logging, if 2nd Commandlineparameter is present
+
             If My.Application.CommandLineArgs.Count > 0 Then
                 CurrentSettings.LoadUserSettings(My.Application.CommandLineArgs.Item(0))
                 Dim ConfigFile As String = My.Application.CommandLineArgs.Item(0)
@@ -44,12 +46,36 @@ Namespace My
                     LogEvent("ERROR - Config File '" & ConfigFile.ToString & "' not found.", EventLogLevel.ErrorOrSimilar)
                     Exit Sub
                 End If
-                CurrentSettings.LoadUserSettings(ConfigFile)
-                Dim c As New BatchApplication
-                LogEvent("Running in Console Mode", EventLogLevel.ImportantEvent)
-                e.Cancel = True
-                c.Main()
+
+                'CurrentSettings.LoadUserSettings(ConfigFile)
+
+                If My.Application.CommandLineArgs.Count < 3 Then
+                    Dim c As New BatchApplication
+                    LogEvent("", EventLogLevel.ErrorOrSimilar)
+                    LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
+                    LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
+                    LogEvent("Running in Console Mode", EventLogLevel.ImportantEvent)
+                    e.Cancel = True
+                    c.Main()
+                ElseIf My.Application.CommandLineArgs.Item(2) = "GUI" Then
+                    LogEvent("", EventLogLevel.ErrorOrSimilar)
+                    LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
+                    LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
+                    LogEvent("Running in forced GUI Mode with Configfile", EventLogLevel.ImportantEvent)
+                    CurrentSettings.LoadUserSettings()
+                Else
+                    Dim c As New BatchApplication
+                    LogEvent("", EventLogLevel.ErrorOrSimilar)
+                    LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
+                    LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
+                    LogEvent("Running in forced Console Mode", EventLogLevel.ImportantEvent)
+                    e.Cancel = True
+                    c.Main()
+                End If
             Else
+                LogEvent("", EventLogLevel.ErrorOrSimilar)
+                LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
+                LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
                 LogEvent("Running in GUI Mode", EventLogLevel.ImportantEvent)
                 CurrentSettings.LoadUserSettings()
             End If
@@ -98,7 +124,7 @@ Namespace My
 
                     Dim f As New IO.FileInfo(CurrentSettings.XML_File.ToString)
                     If Not f.Exists Then
-                        LogEvent("XML File Not Found.", EventLogLevel.ImportantEvent)
+                        LogEvent("XML File '" + CurrentSettings.XML_File.ToString + "' Not Found.", EventLogLevel.ImportantEvent)
                         Dim destXml As New Xml.XmlTextWriter(CurrentSettings.XML_File.ToString, System.Text.Encoding.Default)
                         destXml.WriteStartDocument(False)
                         destXml.Formatting = Xml.Formatting.Indented
@@ -132,6 +158,9 @@ Namespace My
             End Sub
         End Class
 
+        Private Sub MyApplication_StartupNextInstance(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
+
+        End Sub
     End Class
 
 End Namespace

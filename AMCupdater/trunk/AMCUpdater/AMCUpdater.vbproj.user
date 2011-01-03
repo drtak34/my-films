@@ -26,6 +26,9 @@
     </StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <StartArguments>"V:\Programme\Team MediaPortal\MediaPortal\AMCUpdater_Settings.xml" "C:\Daten.test"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <StartArguments>
     </StartArguments>
   </PropertyGroup>

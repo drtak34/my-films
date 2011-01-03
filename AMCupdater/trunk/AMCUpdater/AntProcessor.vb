@@ -760,6 +760,9 @@ Public Class AntProcessor
 
         End Sub
 
+        Public Sub New()
+
+        End Sub
     End Class
 
     Private Shared Sub bgwManualUpdate_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bgwManualUpdate.DoWork

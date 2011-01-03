@@ -11,8 +11,7 @@
     <RootNamespace>AMCUpdater</RootNamespace>
     <AssemblyName>AMCUpdater</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>AMCUpdater.ico</ApplicationIcon>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -20,7 +19,6 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -245,7 +243,6 @@
     <None Include="AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
-    <None Include="My Project\app.manifest" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -279,6 +276,9 @@
       <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
       <Name>Grabber</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AMCUpdater.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UnusedElements\" />

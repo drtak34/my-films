@@ -1095,8 +1095,18 @@ Module Module1
 
 
         'Sub to write log information.  If the GUI is running then it also appends to the txtProcess box.
-        Dim path As String = My.Application.Info.DirectoryPath & "\AMCUpdater_Log.txt"
+        Dim path As String
         Dim LogText As String = My.Computer.Clock.LocalTime.ToString + " - " + EventString
+        If My.Application.CommandLineArgs.Count > 1 Then
+            If Directory.Exists(My.Application.CommandLineArgs.Item(1)) Then
+                path = My.Application.CommandLineArgs.Item(1) + "\MyFilmsAMCupdater.log"
+            Else
+                path = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
+            End If
+        Else
+            path = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
+
+        End If
 
 
         If Form1.Visible = True Then
