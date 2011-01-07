@@ -62,7 +62,7 @@ Namespace My
                     LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
                     LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
                     LogEvent("Running in forced GUI Mode with Configfile", EventLogLevel.ImportantEvent)
-                    CurrentSettings.LoadUserSettings()
+                    'CurrentSettings.LoadUserSettings()
                 Else
                     Dim c As New BatchApplication
                     LogEvent("", EventLogLevel.ErrorOrSimilar)

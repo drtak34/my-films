@@ -417,6 +417,14 @@ Public Class AntSettings
             SetAttribute("Image_Download_Filename_Prefix", value)
         End Set
     End Property
+    Public Property LogDirectory() As String
+        Get
+            Return ReadAttribute("LogDirectory")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("LogDirectory", value)
+        End Set
+    End Property
     Public Property Use_Folder_Dot_Jpg() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Use_Folder_Dot_Jpg").ToLower
@@ -549,6 +557,7 @@ Public Class AntSettings
         dt.Rows.Add("Parse_Subtitle_Files", "False")
         dt.Rows.Add("Rescan_Moved_Files", "False")
         dt.Rows.Add("Master_Title", "TranslatedTitle")
+        dt.Rows.Add("LogDirectory", "")
         dt.Rows.Add("Use_XBMC_nfo", "False")
         dt.Rows.Add("Use_Page_Grabber", "False")
 

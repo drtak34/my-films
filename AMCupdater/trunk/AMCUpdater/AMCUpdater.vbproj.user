@@ -26,7 +26,7 @@
     </StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <StartArguments>"V:\Programme\Team MediaPortal\MediaPortal\AMCUpdater_Settings.xml" "C:\Daten.test"</StartArguments>
+    <StartArguments>"V:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\MyFilmsAMCSettings_Guzzi - Test.xml" LogDirectory GUI</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <StartArguments>
