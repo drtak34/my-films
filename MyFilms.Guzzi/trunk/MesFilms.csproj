@@ -128,7 +128,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="MyFilms\BaseMesFilms.cs" />
-    <Compile Include="MyFilms\CatalogConverter.cs" />
+    <Compile Include="MyFilms\CatalogConverter\DvdProfiler.cs" />
     <Compile Include="MyFilms\FileGrabber.cs" />
     <Compile Include="MyFilms\MesFilmsActors.cs" />
     <Compile Include="MyFilms\MesFilmsInputBox.cs">
@@ -139,10 +139,10 @@
     </Compile>
     <Compile Include="MyFilms\MesFilmsThumbs.cs" />
     <Compile Include="MyFilms\Configuration.cs" />
-    <Compile Include="MyFilms\CryptageTexte.cs" />
-    <Compile Include="MyFilms\CString.cs" />
-    <Compile Include="MyFilms\EaxMovieCatalog.cs" />
-    <Compile Include="MyFilms\FastImage.cs" />
+    <Compile Include="MyFilms\Utils\CryptageTexte.cs" />
+    <Compile Include="MyFilms\Utils\CString.cs" />
+    <Compile Include="MyFilms\CatalogConverter\EaxMovieCatalog.cs" />
+    <Compile Include="MyFilms\Utils\FastImage.cs" />
     <Compile Include="MyFilms\LocalizeStrings.cs" />
     <Compile Include="MyFilms\Logos.cs" />
     <Compile Include="MyFilms\MesFilms.cs" />
@@ -155,12 +155,12 @@
     <Compile Include="MyFilms\MesFilmsSetup.designer.cs">
       <DependentUpon>MesFilmsSetup.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyFilms\MovieCollector.cs" />
-    <Compile Include="MyFilms\MyMovies.cs" />
-    <Compile Include="MyFilms\WakeOnLanManager.cs" />
-    <Compile Include="MyFilms\XbmcNfo.cs" />
+    <Compile Include="MyFilms\CatalogConverter\MovieCollector.cs" />
+    <Compile Include="MyFilms\CatalogConverter\MyMovies.cs" />
+    <Compile Include="MyFilms\Utils\WakeOnLanManager.cs" />
+    <Compile Include="MyFilms\CatalogConverter\XbmcNfo.cs" />
     <Compile Include="MyFilms\XmlConfig.cs" />
-    <Compile Include="MyFilms\XMM.cs" />
+    <Compile Include="MyFilms\CatalogConverter\XMM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MyFilms\VideoThumbCreator.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
