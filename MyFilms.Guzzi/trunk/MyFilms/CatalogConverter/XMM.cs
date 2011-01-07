@@ -23,8 +23,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 using System.Xml;
+using MediaPortal.GUI.Library;
+using System.Windows.Forms;
 using System.Globalization;
+using MediaPortal.Configuration;
+
 
 namespace MesFilms
 {
@@ -35,25 +40,71 @@ namespace MesFilms
         public XMM()
         {
             ProfilerDict = new Dictionary<string, string>();
-            ProfilerDict.Add("Format", "MediaType");
+            ProfilerDict.Add("MovieID", "Number");
+            ProfilerDict.Add("Seen", "Checked");
+            ProfilerDict.Add("MediaLabel", "MediaLabel");
+            ProfilerDict.Add("Media", "MediaType");
+            ProfilerDict.Add("MovieFile", "Source");
+            ProfilerDict.Add("DateInsert", "Date");
+            //ProfilerDict.Add("Borrower", "Borrower");
+            ProfilerDict.Add("Rating", "Rating");
             ProfilerDict.Add("Title", "OriginalTitle");
             ProfilerDict.Add("TTitle", "TranslatedTitle");
             ProfilerDict.Add("STitle", "FormattedTitle");
-            ProfilerDict.Add("CollectionNumber", "Number");
-            ProfilerDict.Add("Review/ReviewFilm", "Rating");
-            ProfilerDict.Add("MovieFile", "URL");
+            ProfilerDict.Add("Director", "Director");
+            ProfilerDict.Add("Producer", "Producer");
             ProfilerDict.Add("Country", "Country");
+            ProfilerDict.Add("Genre", "Category");
             ProfilerDict.Add("Year", "Year");
-            ProfilerDict.Add("RunningTime", "Length");
+            ProfilerDict.Add("Length", "Length");
             ProfilerDict.Add("Actors", "Actors");
-            ProfilerDict.Add("Genres", "Category");
-            ProfilerDict.Add("Credits", "Director");
-            //ProfilerDict.Add("Credits1", "Producer");
-            ProfilerDict.Add("Overview", "Description");
-            ProfilerDict.Add("Picture", "Picture");
-            ProfilerDict.Add("Date", "Date");
-            ProfilerDict.Add("Viewed", "Checked");
-            //ProfilerDict.Add("Borrower", "Borrower");
+            ProfilerDict.Add("InternetID", "URL");
+            ProfilerDict.Add("Plot", "Description");
+            ProfilerDict.Add("Comments", "Comments");
+            ProfilerDict.Add("Codec", "VideoFormat");
+            ProfilerDict.Add("Bitrate", "VideoBitrate");
+            ProfilerDict.Add("AudioCodec", "AudioFormat");
+            ProfilerDict.Add("AudioBitRate", "AudioBitrate");
+            ProfilerDict.Add("Resolution", "Resolution");
+            ProfilerDict.Add("FPS", "Framerate");
+            ProfilerDict.Add("Language", "Languages");
+            ProfilerDict.Add("Subtitles", "Subtitles");
+            ProfilerDict.Add("Filesize", "Size");
+            ProfilerDict.Add("Disks", "Disks");
+            ProfilerDict.Add("Cover", "Picture");
+
+            //int Number, 
+            //string Checked, 
+            //string MediaLabel, 
+            //string MediaType, 
+            //string Source, 
+            //string Date, 
+            //string Borrower, 
+            //decimal Rating, 
+            //string OriginalTitle, 
+            //string TranslatedTitle, 
+            //string FormattedTitle, 
+            //string Director, 
+            //string Producer, 
+            //string Country, 
+            //string Category, 
+            //string Year, 
+            //string Length, 
+            //string Actors, 
+            //string URL, 
+            //string Description, 
+            //string Comments, 
+            //string VideoFormat, 
+            //string VideoBitrate, 
+            //string AudioFormat, 
+            //string AudioBitrate, 
+            //string Resolution, 
+            //string Framerate, 
+            //string Languages, 
+            //string Subtitles, 
+            //string Size, 
+            //string Disks, 
+            //string Picture
         }
         public string ConvertXMM(string source, string folderimage, bool SortTitle, bool OnlyFile)
         {
@@ -70,105 +121,83 @@ namespace MesFilms
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(source);
-                XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/Titles/Title");
+                XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/XMM_Movie_Database/Movie");
                 foreach (XmlNode nodeDVD in dvdList)
                 {
                     destXml.WriteStartElement("Movie");
-                    XmlNode nodeID = nodeDVD.SelectSingleNode("ID");
-                    XmlNode nodeNumber = nodeDVD.SelectSingleNode("CollectionNumber");
-                    XmlNode nodeFormat = nodeDVD.SelectSingleNode("Type");
-                    XmlNode nodeTitle = nodeDVD.SelectSingleNode("LocalTitle");
-                    XmlNode nodeOTitle = nodeDVD.SelectSingleNode("OriginalTitle");
-                    XmlNode nodeSTitle = nodeDVD.SelectSingleNode("SortTitle");
-                    XmlNode nodeYear = nodeDVD.SelectSingleNode("ProductionYear");
-                    XmlNodeList LinksKist = nodeDVD.SelectNodes("Discs/Disc");
 
-                    string url = String.Empty;
-                    foreach (XmlNode nodeFile in LinksKist)
+                    //int Number, 
+                    XmlNode nodeID = nodeDVD.SelectSingleNode("ID");
+                    XmlNode nodeNumber = nodeDVD.SelectSingleNode("MovieID");
+                    if (nodeNumber != null && nodeNumber.InnerText != null && nodeNumber.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "MovieID", nodeNumber.InnerText);
+                    else
+                        WriteAntAtribute(destXml, "MovieID", "9999");
+
+                    //string Checked, 
+                    XmlNode nodeChecked = nodeDVD.SelectSingleNode("Seen");
+                    if (nodeChecked != null && nodeChecked.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Seen", nodeChecked.InnerText);
+
+                    //string MediaLabel, 
+                    XmlNode nodeMediaLabel = nodeDVD.SelectSingleNode("MediaLabel");
+                    if (nodeMediaLabel != null && nodeMediaLabel.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "MediaLabel", nodeMediaLabel.InnerText);
+
+                    //string MediaType, 
+                    XmlNode nodeMediaType = nodeDVD.SelectSingleNode("Media");
+                    if (nodeMediaType != null && nodeMediaType.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Media", nodeMediaType.InnerText);
+
+                    //string Source, 
+                    string strSource = String.Empty;
+                    for (int i = 1; i < 7; i++)
                     {
-                        if (nodeFile.SelectSingleNode("LocationSideA").InnerText.Length > 0)
-                        {
-                            if (url.Length > 0) url += ";";
-                            url += nodeFile.SelectSingleNode("LocationSideA").InnerText;
-                        }
+                        XmlNode nodeSource = nodeDVD.SelectSingleNode("MovieFile" + i.ToString());
+                        if (strSource.Length > 0 && nodeSource.InnerText.Length > 0) 
+                            strSource += ";";
+                        if (nodeSource != null && nodeSource.InnerText.Length > 0)
+                            strSource += nodeSource.InnerText;
                     }
-                    XmlNode nodeDuration = nodeDVD.SelectSingleNode("RunningTime");
-                    XmlNode nodeCountry = nodeDVD.SelectSingleNode("Country");
-                    XmlNode nodeOverview = nodeDVD.SelectSingleNode("Description");
-                    string genre = String.Empty;
-                    XmlNodeList genreList = nodeDVD.SelectNodes("Genres/Genre");
-                    foreach (XmlNode nodeGenre in genreList)
+                    WriteAntAtribute(destXml, "MovieFile", strSource);
+
+                    //string Date, 
+                    XmlNode nodeDate = nodeDVD.SelectSingleNode("DateInsert");
+                    try
                     {
-                        if (genre.Length > 0) genre += ", ";
-                        genre += nodeGenre.InnerText;
+                        DateTime dt = new DateTime();
+                        dt = DateTime.Parse(nodeDate.InnerText.ToString());
+                        WriteAntAtribute(destXml, "DateInsert", dt.ToShortDateString());
                     }
-                    string Actor = String.Empty;
-                    string Director = String.Empty;
-                    string Producer = String.Empty;
-                    XmlNodeList creditsList = nodeDVD.SelectNodes("Persons/Person");
-                    foreach (XmlNode nodeCredit in creditsList)
+                    catch
                     {
-                        string line = String.Empty;
-                        if (nodeCredit.SelectSingleNode("Type") != null && nodeCredit.SelectSingleNode("Type").InnerText == "Actor")
-                        {
-                            if (nodeCredit.SelectSingleNode("Name") != null)
-                                line = nodeCredit.SelectSingleNode("Name").InnerText;
-                            if ((nodeCredit.SelectSingleNode("Role") != null) && (nodeCredit.SelectSingleNode("Role").InnerText.Length > 0))
-                                line += " (" +nodeCredit.SelectSingleNode("Role").InnerText + ")";
-                            if (line.Length > 0)
-                            {
-                                if (Actor.Length > 0) Actor += ", ";
-                                Actor += line;
-                            }
-                        }
-                        else
-                        {
-                            if (nodeCredit.SelectSingleNode("Type") != null && nodeCredit.SelectSingleNode("Type").InnerText == "Director")
-                            {
-                                if (nodeCredit.SelectSingleNode("Name") != null)
-                                    line = nodeCredit.SelectSingleNode("Name").InnerText;
-                                if (line.Length > 0)
-                                {
-                                    if (Director.Length > 0) Director += ", ";
-                                    Director += line;
-                                }
-                            }
-                            else
-                            {
-                                if (nodeCredit.SelectSingleNode("Type") != null && nodeCredit.SelectSingleNode("Type").InnerText == "Producer")
-                                {
-                                    if (nodeCredit.SelectSingleNode("Name") != null)
-                                        line = nodeCredit.SelectSingleNode("Name").InnerText;
-                                    if (line.Length > 0)
-                                    {
-                                        if (Producer.Length > 0) Producer += ", ";
-                                        Producer += line;
-                                    }
-                                }
-                            }
-                        }
                     }
-                    string Image = String.Empty;
-                    if (nodeDVD.SelectSingleNode("Covers/Front") != null)
-                        Image = nodeDVD.SelectSingleNode("Covers/Front").InnerText;
+
+                    //string Borrower, 
+
+                    //decimal Rating, 
                     string Rating = string.Empty;
                     decimal wrating = 0;
                     CultureInfo ci = new CultureInfo("en-us");
-                    XmlNode nodeRating = nodeDVD.SelectSingleNode("ParentalRating/value");
+                    XmlNode nodeRating = nodeDVD.SelectSingleNode("Rating");
                     if (nodeRating != null && nodeRating.InnerText != null)
                     {
-                        try {wrating = Convert.ToDecimal(nodeRating.InnerText);}
+                        try { wrating = Convert.ToDecimal(nodeRating.InnerText); }
                         catch
                         {
-                            try {wrating = Convert.ToDecimal(nodeRating.InnerText, ci);}
-                            catch {}
+                            try { wrating = Convert.ToDecimal(nodeRating.InnerText, ci); }
+                            catch { }
                         }
                     }
                     Rating = wrating.ToString("0.0", ci);
-                    if (nodeNumber != null && nodeNumber.InnerText != null && nodeNumber.InnerText.Length > 0)
-                        WriteAntAtribute(destXml, "CollectionNumber", nodeNumber.InnerText);
-                    else
-                        WriteAntAtribute(destXml, "CollectionNumber", "9999");
+                    WriteAntAtribute(destXml, "Rating", Rating);
+
+                    //string OriginalTitle, 
+                    //string TranslatedTitle, 
+                    //string FormattedTitle, 
+                    XmlNode nodeOTitle = nodeDVD.SelectSingleNode("OriginalTitle");
+                    XmlNode nodeTitle = nodeDVD.SelectSingleNode("Title");
+                    XmlNode nodeSTitle = nodeDVD.SelectSingleNode("SortTitle");
                     if (nodeOTitle != null && nodeOTitle.InnerText.Length > 0)
                         WriteAntAtribute(destXml, "Title", nodeOTitle.InnerText);
                     else
@@ -178,34 +207,153 @@ namespace MesFilms
                         WriteAntAtribute(destXml, "STitle", nodeSTitle.InnerText);
                     else
                         WriteAntAtribute(destXml, "STitle", nodeTitle.InnerText);
-                    XmlNode nodeDate = nodeDVD.SelectSingleNode("Added");
-                    
-                    try
-                    {
-                        DateTime dt = new DateTime();
-                        dt = DateTime.Parse(nodeDate.InnerText.ToString());
-                        WriteAntAtribute(destXml, "Date", dt.ToShortDateString());
-                    }
-                    catch
-                    {
-                    }
-                    WriteAntAtribute(destXml, "Viewed", "false");
-                    if (nodeCountry != null)
+
+                    //string Director, 
+                    XmlNode nodeDirector = nodeDVD.SelectSingleNode("Director");
+                    if (nodeDirector != null && nodeDirector.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Director", nodeDirector.InnerText);
+
+                    //string Producer, 
+                    XmlNode nodeProducer = nodeDVD.SelectSingleNode("Producer");
+                    if (nodeProducer != null && nodeProducer.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Producer", nodeProducer.InnerText);
+
+                    //string Country, 
+                    XmlNode nodeCountry = nodeDVD.SelectSingleNode("Country");
+                    if (nodeCountry != null && nodeCountry.InnerText.Length > 0)
                         WriteAntAtribute(destXml, "Country", nodeCountry.InnerText);
-                    WriteAntAtribute(destXml, "Review/ReviewFilm", Rating);
+
+                    //string Category, 
+                    string genre = String.Empty;
+                    XmlNode genreGenre = nodeDVD.SelectSingleNode("Genre");
+                    XmlNode genreSubgenre = nodeDVD.SelectSingleNode("Subgenre");
+                    XmlNode genreCategory = nodeDVD.SelectSingleNode("Category");
+                    if (genreGenre != null && genreGenre.InnerText.Length > 0)
+                        genre = genreGenre.InnerText;
+                    if (genreSubgenre != null && genreSubgenre.InnerText.Length > 0)
+                    {
+                        foreach (string subgenre in genreSubgenre.InnerText.Split(new Char[] { '/' }))
+                        {
+                            if (genre.Length > 0) genre += ", ";
+                            genre += subgenre;
+                        }
+                    }
+                    if (genre.Length == 0 && genreCategory != null && genreCategory.InnerText.Length > 0)
+                        genre = genreCategory.InnerText;
+                    //XmlNodeList genreList = nodeDVD.SelectNodes("Genres/Genre");
+                    //foreach (XmlNode nodeGenre in genreList)
+                    //{
+                    //    if (genre.Length > 0) genre += ", ";
+                    //    genre += nodeGenre.InnerText;
+                    //}
+                    WriteAntAtribute(destXml, "Genre", genre);
+
+                    //string Year, 
+                    XmlNode nodeYear = nodeDVD.SelectSingleNode("Year");
                     if (nodeYear != null)
                         WriteAntAtribute(destXml, "Year", nodeYear.InnerText);
+
+                    //string Length, 
+                    int strLengthnum = 0;
+                    XmlNode nodeDuration = nodeDVD.SelectSingleNode("Length");
+
+                    try
+                    { strLengthnum = Int32.Parse(nodeDuration.InnerText); }
+                    catch
+                    { strLengthnum = 0; }
                     if (nodeDuration != null && nodeDuration.InnerText.Length > 0)
-                        WriteAntAtribute(destXml, "RunningTime", nodeDuration.InnerText);
-                    if (nodeFormat != null)
-                        WriteAntAtribute(destXml, "Format", nodeFormat.InnerText);
-                    WriteAntAtribute(destXml, "Genres", genre);
-                    WriteAntAtribute(destXml, "Credits", Director);
+                        WriteAntAtribute(destXml, "Length", strLengthnum.ToString());
+
+                    //string Actors, 
+                    string Actor = String.Empty;
+                    XmlNodeList creditsList = nodeDVD.SelectNodes("Actors/Actor");
+                    foreach (XmlNode nodeCredit in creditsList)
+                    {
+                        string line = String.Empty;
+                        if (nodeCredit.SelectSingleNode("ActorName") != null)
+                            line = nodeCredit.SelectSingleNode("ActorName").InnerText;
+                        if ((nodeCredit.SelectSingleNode("ActorRole") != null) && (nodeCredit.SelectSingleNode("ActorRole").InnerText.Length > 0))
+                            line += " (" + nodeCredit.SelectSingleNode("ActorRole").InnerText + ")";
+                        if (line.Length > 0)
+                        {
+                            if (Actor.Length > 0) Actor += ", ";
+                            Actor += line;
+                        }
+                    }
                     WriteAntAtribute(destXml, "Actors", Actor);
-                    WriteAntAtribute(destXml, "Picture", Image);
-                    WriteAntAtribute(destXml, "MovieFile", url);
-                    if (nodeOverview != null && nodeOverview.InnerText != null)
-                        WriteAntAtribute(destXml, "Overview", nodeOverview.InnerText);
+
+                    //string URL, 
+                    string strURL = String.Empty;
+                    XmlNode nodeURL = nodeDVD.SelectSingleNode("InternetID");
+                    if (nodeURL != null && nodeURL.InnerText != null)
+                        strURL = @"http://www.imdb.com/title/tt0" + nodeURL.InnerText;
+                        WriteAntAtribute(destXml, "InternetID", strURL);
+
+                    //string Description, 
+                    XmlNode nodePlot = nodeDVD.SelectSingleNode("Plot");
+                    if (nodePlot != null && nodePlot.InnerText != null)
+                        WriteAntAtribute(destXml, "Plot", nodePlot.InnerText);
+
+                    //string Comments, 
+                    XmlNode nodeComments = nodeDVD.SelectSingleNode("Comments");
+                    if (nodeComments != null && nodeComments.InnerText != null)
+                        WriteAntAtribute(destXml, "Comments", nodeComments.InnerText);
+
+                    //string VideoFormat, Codec
+                    XmlNode nodeVideoFormat = nodeDVD.SelectSingleNode("Codec");
+                    if (nodeVideoFormat != null && nodeVideoFormat.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Codec", nodeVideoFormat.InnerText);
+
+                    //string VideoBitrate, Bitrate 
+                    XmlNode nodeVideoBitrate = nodeDVD.SelectSingleNode("Bitrate");
+                    if (nodeVideoBitrate != null && nodeVideoBitrate.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Bitrate", nodeVideoBitrate.InnerText);
+
+                    //string AudioFormat, 
+                    XmlNode nodeAudioFormat = nodeDVD.SelectSingleNode("AudioCodec");
+                    if (nodeAudioFormat != null && nodeAudioFormat.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "AudioCodec", nodeAudioFormat.InnerText);
+
+                    //string AudioBitrate, 
+                    XmlNode nodeAudioBitrate = nodeDVD.SelectSingleNode("AudioBitRate");
+                    if (nodeAudioBitrate != null && nodeAudioBitrate.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "AudioBitRate", nodeAudioBitrate.InnerText);
+
+                    //string Resolution, 
+                    XmlNode nodeResolution = nodeDVD.SelectSingleNode("Resolution");
+                    if (nodeResolution != null && nodeResolution.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Resolution", nodeResolution.InnerText);
+
+                    //string Framerate, 
+                    XmlNode nodeFramerate = nodeDVD.SelectSingleNode("FPS");
+                    if (nodeFramerate != null && nodeFramerate.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "FPS", nodeFramerate.InnerText);
+
+                    //string Languages, 
+                    XmlNode nodeLanguages = nodeDVD.SelectSingleNode("Language");
+                    if (nodeLanguages != null && nodeLanguages.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Language", nodeLanguages.InnerText);
+
+                    //string Subtitles, 
+                    XmlNode nodeSubtitles = nodeDVD.SelectSingleNode("Subtitles");
+                    if (nodeSubtitles != null && nodeSubtitles.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Subtitles", nodeSubtitles.InnerText);
+
+                    //string Size, 
+                    XmlNode nodeSize = nodeDVD.SelectSingleNode("Filesize");
+                    if (nodeSize != null && nodeSize.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Filesize", nodeSize.InnerText);
+
+                    //string Disks, 
+                    XmlNode nodeDisks = nodeDVD.SelectSingleNode("Disks");
+                    if (nodeDisks != null && nodeDisks.InnerText.Length > 0)
+                        WriteAntAtribute(destXml, "Disks", nodeDisks.InnerText);
+
+                    //string Picture
+                    string Image = String.Empty;
+                    if (nodeDVD.SelectSingleNode("Cover") != null)
+                        Image = nodeDVD.SelectSingleNode("Cover").InnerText;
+                    WriteAntAtribute(destXml, "Cover", Image);
 
                     destXml.WriteEndElement();
                 }
@@ -227,6 +375,11 @@ namespace MesFilms
             if (ProfilerDict.TryGetValue(key, out at))
             {
                 tw.WriteAttributeString(at, value);
+                //Log.Debug("MyFilms: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+            }
+            else
+            {
+                //Log.Debug("MyFilms: XMM Importer Property '" + key + "' not found in dictionary ! - Attribute not written to DB !");
             }
         }
     }

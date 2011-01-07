@@ -48,6 +48,7 @@ namespace MesFilms
         private static void initData()
         {
             data = new AntMovieCatalog();
+            MediaPortal.ServiceImplementations.Log.Debug("MyFilms: BaseMesFilms - Try reading catalogfile '" + MesFilms.conf.StrFileXml + "'");
             try
             {
                 data.ReadXml(MesFilms.conf.StrFileXml);

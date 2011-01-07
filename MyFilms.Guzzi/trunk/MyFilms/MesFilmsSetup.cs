@@ -32,11 +32,16 @@ using MesFilms.MyFilms;
 using MesFilms.WakeOnLan;
 using System.Net;
 using System.Collections;
+using System.Diagnostics;
+using System.Reflection;
+using IWshRuntimeLibrary;
+
 
 namespace MesFilms
 {
     public partial class MesFilmsSetup : Form
     {
+        private WshShellClass WshShell; // Added for creating Desktop icon via wsh
 
         //fmu   private MediaPortal.Profile.Settings MyFilms_xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
         //fmu   private MediaPortal.Profile.Settings MyFilms_xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
@@ -52,6 +57,7 @@ namespace MesFilms
         private Crypto crypto = new Crypto();
         public int selected_Logo_Item;
         public bool load = true;
+        public DataSet AMCdsSettings = new DataSet();
         public MesFilmsSetup()
         {
             InitializeComponent();
@@ -839,7 +845,10 @@ namespace MesFilms
                     }
                 }
             }
-
+            //if (chkAMCUpd.Checked)
+            //{
+            //  Save_XML_AMCconfig(currentconfig);
+            //}
             System.Windows.Forms.MessageBox.Show("Configuration saved !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -997,9 +1006,9 @@ namespace MesFilms
             txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", string.Empty);
             txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", string.Empty);
             chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Always", false);
-            chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_ChooseScript", false);
             chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd", false);
-            txtAMCUpd_exe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", string.Empty);
+            txtAMCUpd_exe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe"); 
+            chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_ChooseScript", false);
             txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", string.Empty);
             chkSuppress.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Suppress", false);
             chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", false);
@@ -1110,6 +1119,18 @@ namespace MesFilms
                 LayOut.Text = "Cover Flow";
             AntViewText_Change();
             AntSort_Change();
+            if (PathStorage.Text.Length > 0 && AMCMovieScanPath.Text.Length == 0)
+              AMCMovieScanPath.Text = PathStorage.Text;
+            else
+              AMCMovieScanPath.Text = String.Empty;
+            if (AMCMovieScanPath.Text.Length == 0)
+              btnCreateAMCDefaultConfig.Visible = true;
+            else
+              btnCreateAMCDefaultConfig.Visible = false;
+
+            // Added by Guzzi to initialize the AMCupdater Default configuration and create default configfiles, if necessary.
+            Read_XML_AMCconfig(Config_Name.Text); // To be enabled after proper testing !!!
+          //Save_XML_AMCconfig(Config_Name.Text);
         }
         private void Refresh_Items(bool all)
         {
@@ -1251,7 +1272,11 @@ namespace MesFilms
             chkDfltViews.Checked = false;
             chkDfltArtist.Checked = false;
             chkViews.Checked = false;
-
+            chkAMC_Purge_Missing_Files.Checked = false;
+            AMCMovieScanPath.ResetText();
+            btnLaunchAMCupdater.Enabled = false;
+            btnCreateAMCDesktopIcon.Enabled = false;
+            btnCreateAMCDefaultConfig.Enabled = false;
         }
 
         private void ButDelet_Click(object sender, EventArgs e)
@@ -1467,6 +1492,17 @@ namespace MesFilms
                             MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
                     SearchFileName.Checked = true;
                     break;
+
+                case 5: // XMM
+                    AntStorage.Text = "Source";
+                    AntTitle1.Text = "TranslatedTitle";
+                    AntTitle2.Text = "OriginalTitle";
+                    AntSTitle.Text = "FormattedTitle";
+                    TitleDelim.Text = "\\";
+                    ItemSearchFileName.Text = "TranslatedTitle";
+                    SearchFileName.Checked = true;
+                    break;
+
                 default:
                     AntStorage.Text = "URL";
                     AntStorageTrailer.Text = "Borrower";
@@ -1522,6 +1558,12 @@ namespace MesFilms
                 btnAMCUpd_cnf.Enabled = true;
                 scheduleAMCUpdater.Enabled = true;
                 btnParameters.Enabled = true;
+                //btnLaunchAMCupdater.Enabled = true;
+                btnAMCMovieScanPathAdd.Enabled = true;
+                chkAMC_Purge_Missing_Files.Enabled = true;
+                btnCreateAMCDefaultConfig.Enabled = true;
+                btnCreateAMCDesktopIcon.Enabled = true;
+                AMCMovieScanPath.Enabled = true;
             }
             else
             {
@@ -1531,6 +1573,12 @@ namespace MesFilms
                 btnAMCUpd_cnf.Enabled = false;
                 scheduleAMCUpdater.Enabled = false;
                 btnParameters.Enabled = false;
+                //btnLaunchAMCupdater.Enabled = false;
+                btnAMCMovieScanPathAdd.Enabled = false;
+                chkAMC_Purge_Missing_Files.Enabled = false;
+                btnCreateAMCDefaultConfig.Enabled = false;
+                btnCreateAMCDesktopIcon.Enabled = false;
+                AMCMovieScanPath.Enabled = false;
             }
         }
 
@@ -1967,6 +2015,196 @@ namespace MesFilms
                 }
             }
         }
+
+        private void Read_XML_AMCconfig(string currentconfig)
+        {
+          bool initialconfig = true;
+          if (currentconfig.Length == 0) // Do not process, if no valid config is selected !
+            return;
+
+          string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
+          if (System.IO.File.Exists(wfiledefault + ".xml"))
+          {
+            if (!System.IO.File.Exists(wfiledefault + "_" + currentconfig + ".xml"))
+            {
+              initialconfig = true;
+              btnLaunchAMCupdater.Enabled = false;
+              try
+              {
+                System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsAMCSettings"), wfiledefault + "_" + currentconfig + ".xml", true);
+              }
+              catch
+              {
+              }
+            }
+            else
+              initialconfig = false;
+            btnLaunchAMCupdater.Enabled = true;
+
+          }
+          else
+            MessageBox.Show("The default AMCupdater configfile cannot be found! (" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings.xml" + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+
+
+
+          string AMCconfigFile = wfiledefault + "_" + currentconfig + ".xml";
+          //DataSet ds = new DataSet();
+          AMCdsSettings.Clear();
+
+          // Datei öffnen
+          System.IO.FileStream fs = new System.IO.FileStream(AMCconfigFile, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+          // Datei einlesen
+          System.IO.StreamReader sr = new System.IO.StreamReader(fs);
+          // Stream in DataSet einlesen
+          AMCdsSettings.ReadXml(sr, XmlReadMode.InferSchema);
+          AMCdsSettings.CaseSensitive = false;
+          sr.Close();
+          fs.Close();
+
+          if (AMCdsSettings.Tables.Count == 1)
+            AMCdsSettings.Tables[0].PrimaryKey = new DataColumn[] { AMCdsSettings.Tables[0].Columns["Option"] };
+
+          // if initialconfig set parameters from Myfilms, else just read existing configfile
+          if (initialconfig)
+          {
+            // Set Parameters from MyFilms configuration
+            AMCSetAttribute("Ant_Database_Source_Field", AntStorage.Text);
+            AMCSetAttribute("Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
+            AMCSetAttribute("Image_Download_Filename_Prefix", currentconfig + "_");
+            AMCSetAttribute("Internet_Parser_Path", txtAMCUpd_cnf.Text);
+            AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
+            AMCSetAttribute("Manual_Internet_Parser_Path", txtAMCUpd_cnf.Text);
+            AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
+            AMCSetAttribute("Master_Title", AntTitle1.Text);
+            AMCSetAttribute("Movie_Fanart_Path", MesFilmsFanart.Text);
+            AMCSetAttribute("XML_File", MesFilmsCat.Text);
+
+            // Set specific userdefined Parameters from MyFilms GUI configuration
+            AMCSetAttribute("Movie_Scan_Path", AMCMovieScanPath.Text);
+            if (chkAMC_Purge_Missing_Files.Checked == true)
+              AMCSetAttribute("Purge_Missing_Files", "true");
+            else
+              AMCSetAttribute("Purge_Missing_Files", "false");
+            AMCSetAttribute("LogDirectory", Config.GetDirectoryInfo(Config.Dir.Config) + @"\log");
+
+          }
+
+
+          // Those Parameters already set via MyFilmsAMCSettings.xml (Defaultconfigfile):
+          //Option	Status / Source	DefaultValue
+          //Ant_Media_Label	Default	HDD
+          //Ant_Media_Type	Default	File
+          //Backup_XML_First	Default	True
+          //Check_Field_Handling	Default	True
+          //Database_Fields_To_Import	Default	###############################################################################################################################################################################################################################################################
+          //Date_Handling	Default	Current System Date
+          //DVD_Drive_Letter	Default	
+          //Excluded_File_Strings	Default	
+          //Excluded_Folder_Strings	Default	
+          //Execute_Only_For_Orphans	Default	True
+          //Execute_Program	Default	False
+          //Execute_Program_Path	Default	
+          //File_Types_Media	Default	avi;mpg;divx;mpeg;wmv;mkv
+          //File_Types_Non_Media	Default	iso;img
+          //Filter_Strings	Default	\([0-9][0-9][0-9][0-9]\)
+          //Folder_Name_Is_Group_Name	Default	False
+          //Group_Name_Applies_To	Default	Both Titles
+          //Import_File_On_Internet_Lookup_Failure	Default	True
+          //Internet_Lookup_Always_Prompt	Default	False
+          //Log_Level	Default	All Events
+          //Manual_Internet_Lookup_Always_Prompt	Default	True
+          //Movie_Title_Handling	Default	Folder Name + Internet Lookup
+          //Override_Path	Default	
+          //Overwrite_XML_File	Default	True
+          //Parse_Playlist_Files	Default	False
+          //Parse_Subtitle_Files	Default	True
+          //Prohibit_Internet_Lookup	Default	False
+          //Read_DVD_Label	Default	False
+          //RegEx_Check_For_MultiPart_Files	Default	[-|_]cd[0-9]|[-|_]disk[0-9]|[0-9]of[0-9]
+          //Rescan_Moved_Files	Default	False
+          //Scan_For_DVD_Folders	Default	True
+          //Store_Image_With_Relative_Path	Default	True
+          //Store_Short_Names_Only	Default	False
+          //Use_Folder_Dot_Jpg	Default	False
+          //Use_Page_Grabber	Default	False
+          //Use_XBMC_nfo	Default	False
+          //LogDirectory Default
+
+
+
+
+          // load dataset for GUI display
+          AMCConfigView.Items.Clear();
+          int i = 0;
+          foreach (DataRow dr in AMCdsSettings.Tables[0].Rows)
+          {
+            AMCConfigView.Items.Add(dr[1].ToString());
+            AMCConfigView.Items[i].SubItems.Add(dr[0].ToString());
+            i = i + 1;
+          }
+          if (i > 0)
+          {
+            lblAMCupdaterConfigPreview.Visible = true;
+            btnCreateAMCDefaultConfig.Enabled = true;
+            btnCreateAMCDesktopIcon.Enabled = true;
+
+
+            if (AMCMovieScanPath.Text.Contains("\\") || !initialconfig)
+            {
+              AMCConfigView.Visible = true;
+              AMCMovieScanPath.Visible = false;
+              lblAMCMovieScanPath.Visible = false;
+              btnAMCMovieScanPathAdd.Visible = false;
+              chkAMC_Purge_Missing_Files.Visible = false;
+            }
+            else
+            {
+              AMCConfigView.Visible = false;
+              AMCMovieScanPath.Visible = true;
+              lblAMCMovieScanPath.Visible = true;
+              btnAMCMovieScanPathAdd.Visible = true;
+              chkAMC_Purge_Missing_Files.Visible = true;
+            }
+          }
+          else
+          {
+            lblAMCupdaterConfigPreview.Visible = false;
+            btnCreateAMCDefaultConfig.Enabled = true;
+            btnCreateAMCDesktopIcon.Enabled = false;
+            btnLaunchAMCupdater.Enabled = false;
+            AMCConfigView.Visible = false;
+          }
+        }
+
+        private void Save_XML_AMCconfig(string currentconfig)
+        {
+          //Save AMC configuration to file (before launching AMCupdater sith it)
+          string UserSettingsFile = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings" + "_" + currentconfig + ".xml";
+
+          if (System.IO.File.Exists(UserSettingsFile))
+            System.IO.File.Delete(UserSettingsFile);
+          try
+          {
+            AMCdsSettings.WriteXml(UserSettingsFile);
+            Log.Debug("AMCupdater Settings saved to file");
+          }
+          catch
+          {
+          }
+        }
+
+        private void AMCSetAttribute(string OptionName, string OptionValue)
+        {
+          DataRow row = null;
+          if (AMCdsSettings.Tables.Count > 0)
+            row = AMCdsSettings.Tables[0].Rows.Find(OptionName);
+          if (row != null)
+            row["Value"] = OptionValue;
+          else
+            //AMCdsSettings.Tables[0].Rows.Add();
+            AMCdsSettings.Tables[0].Rows.Add(OptionValue, OptionName);
+        }
+
         private void Read_XML_Logos(string currentconfig)
         {
             //LogoView.Clear();
@@ -2935,7 +3173,230 @@ namespace MesFilms
 
         }
 
+        private void btnLaunchAMCupdater_Click(object sender, EventArgs e)
+        {
+          using (Process p = new Process())
+          {
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCupdater.exe";
+            psi.UseShellExecute = true;
+            psi.WindowStyle = ProcessWindowStyle.Normal;
+            psi.Arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
+            //psi.Arguments = " \"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI\"";
+            psi.ErrorDialog = true;
+            if (OSInfo.OSInfo.VistaOrLater())
+            {
+              psi.Verb = "runas";
+            }
+
+            p.StartInfo = psi;
+            Log.Debug("MyFilmsSetup: Launch AMCupdater from PluginSetup with argument: {0}", "");
+            try
+            {
+              p.Start();
+              //p.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+              Log.Debug(ex.ToString());
+            }
+            Log.Debug("MyFilmsSetup: Launch AMCupdater from PluginSetup done");
+          }
+
+        }
+
+        private void btnCreateAMCDesktopIcon_Click(object sender, EventArgs e)
+        {
+
+          string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+          string linkName = "AMC-Updater '" + Config_Name.Text + "'";
+          string commandLine = "\"" + Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe""" + " \"" +
+                               Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" +
+                               Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() +
+                               "\" \"GUI\"";
+          string argument = "\"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" +
+                            Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI";
+
+          string shortcutFile = deskDir + @"\AMC-Updater (" + Config_Name.Text + ")" + ".lnk";
+          string soureFile = Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe";
+          string description = "AMC: '" + Config_Name.Text + "'";
+
+          string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" +
+                             Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
+
+          //string arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\"" + " " + "\"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\"" + " " + "\"" + "GUI\"";
+          string hotKey = String.Empty;
+          string workingDirectory = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\MyFilms";
+
+          if (System.IO.File.Exists(deskDir + "\\" + linkName + ".url"))
+            try
+            {
+              System.IO.File.Delete(deskDir + "\\" + linkName + ".url");
+            }
+            catch
+            {
+            }
+
+          try
+          {
+            CreateShortcut(soureFile, shortcutFile, description, arguments, hotKey, workingDirectory);
+          }
+          catch (Exception ex)
+          {
+            MessageBox.Show(ex.Message);
+          }
+
+          Log.Debug("MyFilms: Setup - Successfully created Desktop Icon for '" + linkName + "'");
+          DialogResult dialogResult = MessageBox.Show("Successfully created Desktop Icon for '" + linkName + "'", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+          //WshShellClass shortcut = new WshShellClass())
+          //  {
+          //    shortcut.Target = Application.ExecutablePath;
+          //    shortcut.WorkingDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
+          //    shortcut.Description = "My Shorcut Name Here";
+          //    shortcut.DisplayMode = ShellLink.LinkDisplayMode.edmNormal;
+          //    shortcut.Save(STARTUP_SHORTCUT_FILEPATH);
+          //  }
+
+          //using (System.IO.StreamWriter writer = new System.IO.StreamWriter(deskDir + "\\" + linkName + ".url"))
+          //{
+          //  //string app = System.Reflection.Assembly.GetExecutingAssembly().Location;
+          //  //string app = System.Reflection.Assembly.LoadFile(Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe").Location;
+          //  string app = Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe";
+          //  //string app = Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe";
+          //  writer.WriteLine("[InternetShortcut]");
+          //  writer.WriteLine("URL=file:///" + app.Replace(@"\", "/") + argument);
+          //  //String.Format(@"file://{0}", Application.ExecutablePath.Replace(@"\", "/")); 
+          //  writer.WriteLine("IconIndex=0");
+          //  string icon = app.Replace('\\', '/');
+          //  writer.WriteLine("IconFile=" + icon);
+          //  writer.Flush();
+          //  Log.Debug("MyFilms: Setup - Successfully created Desktop Icon for '" + linkName + "'");
+          //  DialogResult dialogResult = MessageBox.Show("Successfully created Desktop Icon for '" + linkName + "'", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          //}
 
 
+          //try
+          //{
+          //    System.IO.File.Copy(shortcutName, desktopPath, true);
+          //}
+
+          //using (interop.ShellLink shortcut = new ShellLink())
+          //{
+          //    shortcut.Target = Application.ExecutablePath;
+          //    shortcut.WorkingDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+          //    shortcut.Description = "My Shorcut Name Here";
+          //    shortcut.DisplayMode = ShellLink.LinkDisplayMode.edmNormal;
+          //    shortcut.Save(STARTUP_SHORTCUT_FILEPATH);
+          //}
+        }
+
+        /// <summary>
+        /// Create Windows Shorcut
+        /// </summary>
+        /// <param name="SourceFile">A file you want to make shortcut to</param>
+        /// <param name="ShortcutFile">Path and shorcut file name including file extension (.lnk)</param>
+        /// <param name="Description">Shortcut description</param>
+        /// <param name="Arguments">Command line arguments</param>
+        /// <param name="HotKey">Shortcut hot key as a string, for example "Ctrl+F"</param>
+        /// <param name="WorkingDirectory">"Start in" shorcut parameter</param>
+        public void CreateShortcut(string SourceFile, string ShortcutFile, string Description,
+           string Arguments, string HotKey, string WorkingDirectory)
+        {
+          // Check necessary parameters first:
+          if (String.IsNullOrEmpty(SourceFile))
+            throw new ArgumentNullException("SourceFile");
+          if (String.IsNullOrEmpty(ShortcutFile))
+            throw new ArgumentNullException("ShortcutFile");
+
+          // Create WshShellClass instance:
+          WshShellClass wshShell = new WshShellClass();
+
+          // Create shortcut object:
+          IWshRuntimeLibrary.IWshShortcut shorcut = (IWshRuntimeLibrary.IWshShortcut)wshShell.CreateShortcut(ShortcutFile);
+
+          // Assign shortcut properties:
+          shorcut.TargetPath = SourceFile;
+          shorcut.Description = Description;
+          if (!String.IsNullOrEmpty(Arguments))
+            shorcut.Arguments = Arguments;
+          if (!String.IsNullOrEmpty(HotKey))
+            shorcut.Hotkey = HotKey;
+          if (!String.IsNullOrEmpty(WorkingDirectory))
+            shorcut.WorkingDirectory = WorkingDirectory;
+
+          // Save the shortcut:
+          shorcut.Save();
+        }
+
+        private void btnAMCMovieScanPathAdd_Click(object sender, EventArgs e)
+        {
+          if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+          {
+            if (!(folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") == folderBrowserDialog1.SelectedPath.Length - 1))
+              folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+
+            if (AMCMovieScanPath.Text.Length == 0)
+              AMCMovieScanPath.Text = folderBrowserDialog1.SelectedPath;
+            else
+              AMCMovieScanPath.Text = AMCMovieScanPath.Text + ";" + folderBrowserDialog1.SelectedPath;
+          }
+        }
+
+        private void AMCMovieScanPath_TextChanged(object sender, EventArgs e)
+        {
+          if (AMCMovieScanPath.Text.Length > 0 && AMCMovieScanPath.Text.Contains("\\"))
+            btnCreateAMCDefaultConfig.Enabled = true;
+          else
+            btnCreateAMCDefaultConfig.Enabled = false;
+        }
+
+        private void btnCreateAMCDefaultConfig_Click(object sender, EventArgs e)
+        {
+
+          if ((!AMCMovieScanPath.Text.Contains("\\")))
+          {
+            MessageBox.Show(
+              "You first have to define the Search path for your movies to create a default config !",
+              "Configuration",
+              MessageBoxButtons.OK,
+              MessageBoxIcon.Stop);
+            AMCMovieScanPath.Visible = true;
+            lblAMCMovieScanPath.Visible = true;
+            btnAMCMovieScanPathAdd.Visible = true;
+            chkAMC_Purge_Missing_Files.Visible = true;
+
+            return;
+          }
+          string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
+          if (System.IO.File.Exists(wfiledefault + ".xml"))
+          {
+            if (System.IO.File.Exists(wfiledefault + "_" + Config_Name.Text + ".xml"))
+            {
+              DialogResult dialogResult = MessageBox.Show("Are you sure you want to (re)create a default config? This will overwrite any existing configuration for this DB-config and you loose all customizations made!!!", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+              if (!(dialogResult == DialogResult.Yes))
+              {
+                return;
+              }
+              else
+                System.IO.File.Copy(wfiledefault + "_" + Config_Name.Text + ".xml", wfiledefault + "_" + Config_Name.Text + ".xml.sav", true);
+            }
+            System.IO.File.Delete(wfiledefault + "_" + Config_Name.Text + ".xml");
+            Read_XML_AMCconfig(Config_Name.Text);
+
+            if (AMCMovieScanPath.Text.Contains("\\"))
+            {
+              Save_XML_AMCconfig(Config_Name.Text);
+              MessageBox.Show("Successfully created an AMCupdater default config with your settings !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+
+            }
+
+          }
+          else
+            System.Windows.Forms.MessageBox.Show("The default AMCupdater configfile cannot be found! (" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings.xml" + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+        }
     }
 }

@@ -60,6 +60,13 @@ namespace MesFilms.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap AMCUpdater {
+            get {
+                object obj = ResourceManager.GetObject("AMCUpdater", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap film_reel_128x128 {
             get {
                 object obj = ResourceManager.GetObject("film-reel-128x128", resourceCulture);
