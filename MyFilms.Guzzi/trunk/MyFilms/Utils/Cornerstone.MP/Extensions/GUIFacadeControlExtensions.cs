@@ -1,12 +1,13 @@
-﻿using MediaPortal.GUI.Library;
-using NLog;
-using System.Reflection;
-using System;
-using System.Collections.Generic;
+﻿namespace MesFilms.MyFilms.Utils.Cornerstone.MP.Extensions {
+  using MediaPortal.GUI.Library;
 
-namespace Cornerstone.MP.Extensions {
+  using NLog;
 
-    /// <summary>
+  using System.Reflection;
+  using System;
+  using System.Collections.Generic;
+
+  /// <summary>
     /// a set of extension methods for the MediaPortal GUIFacadeControl
     /// </summary>
     public static class GUIFacadeControlExtensions {

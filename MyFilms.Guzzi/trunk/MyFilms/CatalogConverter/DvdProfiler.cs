@@ -20,15 +20,15 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
 
-
-namespace MesFilms
+namespace MesFilms.MyFilms.CatalogConverter
 {
-    class CatalogConverter
+  using System;
+  using System.Collections.Generic;
+  using System.Text;
+  using System.Xml;
+
+  class CatalogConverter
     {
         public Dictionary<string, string> ProfilerDict;
         
@@ -65,7 +65,7 @@ namespace MesFilms
             destXml.WriteStartDocument();
             destXml.WriteStartElement("AntMovieCatalog");
             destXml.WriteStartElement("Catalog");
-            destXml.WriteElementString("Properties", "");
+            destXml.WriteElementString("Properties", string.Empty);
             destXml.WriteStartElement("Contents");
             try
             {
@@ -120,7 +120,7 @@ namespace MesFilms
                     if (TagField.Length > 0)
                     {
                         XmlNodeList TagList = nodeDVD.SelectNodes("Tags/Tag");
-                        TagFullName = "";
+                        TagFullName = string.Empty;
                         
                         foreach (XmlNode nodeTag in TagList)
                         {
@@ -266,7 +266,7 @@ namespace MesFilms
                     if (nodeOverview != null && nodeOverview.InnerText != null)
                         WriteAntAtribute(destXml, "Overview", nodeOverview.InnerText);
                     else
-                        WriteAntAtribute(destXml, "Overview", "");
+                        WriteAntAtribute(destXml, "Overview", string.Empty);
                         
                     destXml.WriteEndElement();
                 }
@@ -274,7 +274,7 @@ namespace MesFilms
             }
             catch 
             {
-                return"";
+              return string.Empty;
             }
             destXml.WriteEndElement();
             destXml.WriteEndElement();
@@ -284,7 +284,7 @@ namespace MesFilms
         
         private void  WriteAntAtribute(XmlTextWriter tw,string key, string value)
         {
-        string at="";
+          string at = string.Empty;
         if (ProfilerDict.TryGetValue(key, out at))
         {
             tw.WriteAttributeString(at, value);

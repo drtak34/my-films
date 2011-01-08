@@ -3,11 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MesFilms", "MesFilms.csproj", "{20BCDBE0-0812-4235-9330-40B8E570DAE1}"
 	ProjectSection(ProjectDependencies) = postProject
-		{77C78161-3206-45FD-A419-60218F3354C0} = {77C78161-3206-45FD-A419-60218F3354C0}
 		{92C183EE-636F-4A55-A6AB-363CDA606110} = {92C183EE-636F-4A55-A6AB-363CDA606110}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cornerstone.MP", "CornerstoneMP\Cornerstone.MP\Cornerstone.MP.csproj", "{77C78161-3206-45FD-A419-60218F3354C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber", "Grabber\Grabber.csproj", "{92C183EE-636F-4A55-A6AB-363CDA606110}"
 EndProject
@@ -97,43 +94,6 @@ Global
 		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|x86
 		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|x86
 		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x86.Build.0 = Release|x86
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug (Guzzi)|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug (Guzzi)|Any CPU.Build.0 = Debug (Guzzi)|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug (Guzzi)|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug (Guzzi)|Mixed Platforms.Build.0 = Debug (Guzzi)|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug (Guzzi)|x64.ActiveCfg = Debug (Guzzi)|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug (Guzzi)|x86.ActiveCfg = Debug (Guzzi)|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Debug|x86.Build.0 = Debug|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|Mixed Platforms.Build.0 = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|x64.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release (Standalone)|x86.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release|x64.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.Release|x86.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureCardDefinitions|Any CPU.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureCardDefinitions|Any CPU.Build.0 = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureCardDefinitions|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureCardDefinitions|Mixed Platforms.Build.0 = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureCardDefinitions|x64.ActiveCfg = Debug (Guzzi)|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureCardDefinitions|x86.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|Any CPU.Build.0 = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|Any CPU
-		{77C78161-3206-45FD-A419-60218F3354C0}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
 		{92C183EE-636F-4A55-A6AB-363CDA606110}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug (Guzzi)|Any CPU
 		{92C183EE-636F-4A55-A6AB-363CDA606110}.Debug (Guzzi)|Any CPU.Build.0 = Debug (Guzzi)|Any CPU
 		{92C183EE-636F-4A55-A6AB-363CDA606110}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug (Guzzi)|x86

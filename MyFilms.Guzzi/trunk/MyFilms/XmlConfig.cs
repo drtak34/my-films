@@ -89,7 +89,7 @@ namespace MesFilms
         // Called with bool type
         public void WriteXmlConfig(string FileName, string Section, string Entry, bool Value)
         {
-            string value = "";
+          string value = string.Empty;
             // Change true by "yes" and false by "no" for xml MediaPortal compatibility 
             if (Value)
             {
@@ -301,11 +301,11 @@ namespace MesFilms
         {
             XmlDocument configxml = new XmlDocument();
             //Declaration of XML document type (utf-8, same as MediaPortal)
-            XmlDeclaration declaration = configxml.CreateXmlDeclaration("1.0", "utf-8", "");
+            XmlDeclaration declaration = configxml.CreateXmlDeclaration("1.0", "utf-8", string.Empty);
             //Add declaration to document
             configxml.AppendChild(declaration);
             //Create profile node
-            XmlNode profile = configxml.CreateNode(System.Xml.XmlNodeType.Element, "profile", "");
+            XmlNode profile = configxml.CreateNode(System.Xml.XmlNodeType.Element, "profile", string.Empty);
             //Add node to document
             configxml.AppendChild(profile);
 

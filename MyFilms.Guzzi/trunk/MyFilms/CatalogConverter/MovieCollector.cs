@@ -20,15 +20,16 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Globalization;
 
-namespace MesFilms
+namespace MesFilms.MyFilms.CatalogConverter
 {
-    class MovieCollector
+  using System;
+  using System.Collections.Generic;
+  using System.Text;
+  using System.Xml;
+  using System.Globalization;
+
+  class MovieCollector
     {
         public Dictionary<string, string> ProfilerDict;
 
@@ -67,7 +68,7 @@ namespace MesFilms
             destXml.WriteStartDocument();
             destXml.WriteStartElement("AntMovieCatalog");
             destXml.WriteStartElement("Catalog");
-            destXml.WriteElementString("Properties", "");
+            destXml.WriteElementString("Properties", string.Empty);
             destXml.WriteStartElement("Contents");
             try
             {
@@ -213,7 +214,7 @@ namespace MesFilms
                             else
                                 wmedialabel = nodeDisc.SelectSingleNode("storageslot").InnerText;
 
-                        if (nodeNumber != null && nodeNumber.InnerText != null && nodeNumber.InnerText.Length > 0)
+                        if (nodeNumber != null && !string.IsNullOrEmpty(nodeNumber.InnerText))
                             WriteAntAtribute(destXml, "CollectionNumber", nodeNumber.InnerText + nodisc.ToString());
                         else
                             WriteAntAtribute(destXml, "CollectionNumber", "9999");
@@ -270,7 +271,7 @@ namespace MesFilms
                             WriteAntAtribute(destXml, "Year", nodeYear.InnerText);
                         if (nodeDuration != null && nodeDuration.InnerText.Substring(0, nodeDuration.InnerText.IndexOf(" ")).Length > 0)
                         {
-                            if (!(nodeDuration.InnerText.IndexOf(" hr ") == -1))
+                            if (nodeDuration.InnerText.IndexOf(" hr ") != -1)
                             {
                                 int duree = int.Parse(nodeDuration.InnerText.Substring(0, nodeDuration.InnerText.IndexOf(" hr ")).Trim()) * 60 + int.Parse(nodeDuration.InnerText.Substring(nodeDuration.InnerText.IndexOf(" hr ") + 4, 2).Trim());
                                 WriteAntAtribute(destXml, "RunningTime", duree.ToString());
@@ -291,7 +292,7 @@ namespace MesFilms
                         if (nodeOverview != null && nodeOverview.InnerText != null)
                             WriteAntAtribute(destXml, "Overview", nodeOverview.InnerText);
                         else
-                            WriteAntAtribute(destXml, "Overview", "");
+                          WriteAntAtribute(destXml, "Overview", string.Empty);
 
                         destXml.WriteEndElement();
                     }
@@ -299,7 +300,7 @@ namespace MesFilms
             }
             catch
             {
-                return "";
+              return string.Empty;
             }
             destXml.WriteEndElement();
             destXml.WriteEndElement();
@@ -309,7 +310,7 @@ namespace MesFilms
 
         private void WriteAntAtribute(XmlTextWriter tw, string key, string value)
         {
-            string at = "";
+          string at = string.Empty;
             if (ProfilerDict.TryGetValue(key, out at))
             {
                 tw.WriteAttributeString(at, value);

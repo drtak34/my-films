@@ -20,15 +20,16 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Globalization;
 
-namespace MesFilms
+namespace MesFilms.MyFilms.CatalogConverter
 {
-    class XbmcNfo
+  using System;
+  using System.Collections.Generic;
+  using System.Text;
+  using System.Xml;
+  using System.Globalization;
+
+  class XbmcNfo
     {
         public Dictionary<string, string> ProfilerDict;
 
@@ -81,7 +82,7 @@ namespace MesFilms
             destXml.WriteStartDocument();
             destXml.WriteStartElement("AntMovieCatalog");
             destXml.WriteStartElement("Catalog");
-            destXml.WriteElementString("Properties", "");
+            destXml.WriteElementString("Properties", string.Empty);
             destXml.WriteStartElement("Contents");
             foreach (string wpath in wStrStorage)
             {
@@ -241,7 +242,7 @@ namespace MesFilms
                 }
                 catch
                 {
-                    return "";
+                  return string.Empty;
                 }
             }
             destXml.WriteEndElement();
@@ -252,7 +253,7 @@ namespace MesFilms
 
         private void WriteAntAtribute(XmlTextWriter tw, string key, string value)
         {
-            string at = "";
+          string at = string.Empty;
             if (ProfilerDict.TryGetValue(key, out at))
             {
                 tw.WriteAttributeString(at, value);

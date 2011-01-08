@@ -18,20 +18,20 @@
 
 #endregion
 
-using System;
-using System.Globalization;
-using System.IO;
-using System.Threading;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using MediaPortal.Configuration;
-using MediaPortal.ServiceImplementations;
-using MediaPortal.Profile;
-using MediaPortal.Services;
-using MediaPortal.Util;
-
-namespace MesFilms
+namespace MesFilms.MyFilms.Utils
 {
+  using System;
+  using System.Globalization;
+  using System.IO;
+  using System.Threading;
+  using System.Runtime.CompilerServices;
+
+  using MediaPortal.Configuration;
+  using MediaPortal.ServiceImplementations;
+  using MediaPortal.Profile;
+  using MediaPortal.Services;
+  using MediaPortal.Util;
+
   public class VideoThumbCreator
   {
     private static string ExtractApp = "mtn.exe";

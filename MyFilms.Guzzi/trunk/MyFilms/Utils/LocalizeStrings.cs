@@ -23,16 +23,17 @@
 
 #endregion
 
-using System;
-using System.Globalization;
-using System.Collections;
-using System.Collections.Generic;
-using MediaPortal.GUI.Library;
-using MediaPortal.Configuration;
-using MediaPortal.Localisation;
-
-namespace MesFilms
+namespace MesFilms.MyFilms.Utils
 {
+  using System;
+  using System.Globalization;
+  using System.Collections;
+  using System.Collections.Generic;
+
+  using MediaPortal.GUI.Library;
+  using MediaPortal.Configuration;
+  using MediaPortal.Localisation;
+
   /// <summary>
   /// This class will hold all text used in the application
   /// The text is loaded for the current language from
@@ -170,8 +171,8 @@ namespace MesFilms
         Load(null);
 
       if (strLabel == null) strLabel = String.Empty;
-      if (strLabel == "-") strLabel = "";
-      if (strLabel == "") return;
+      if (strLabel == "-") strLabel = string.Empty;
+      if (strLabel == string.Empty) return;
       // This can't be a valid string code if the first character isn't a number.
       // This check will save us from catching unnecessary exceptions.
       if (!char.IsNumber(strLabel, 0))

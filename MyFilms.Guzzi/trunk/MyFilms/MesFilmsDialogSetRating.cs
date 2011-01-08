@@ -27,6 +27,8 @@ using MediaPortal.GUI.Library;
 
 namespace MesFilms
 {
+  using global::MesFilms.MyFilms.Utils;
+
   /// <summary>
   /// 
   /// </summary>

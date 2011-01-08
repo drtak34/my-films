@@ -20,20 +20,16 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
-using System.Xml;
-using MediaPortal.GUI.Library;
-using System.Windows.Forms;
-using System.Globalization;
-using MediaPortal.Configuration;
 
-
-namespace MesFilms
+namespace MesFilms.MyFilms.CatalogConverter
 {
-    class XMM
+  using System;
+  using System.Collections.Generic;
+  using System.Text;
+  using System.Xml;
+  using System.Globalization;
+
+  class XMM
     {
         public Dictionary<string, string> ProfilerDict;
 
@@ -115,7 +111,7 @@ namespace MesFilms
             destXml.WriteStartDocument();
             destXml.WriteStartElement("AntMovieCatalog");
             destXml.WriteStartElement("Catalog");
-            destXml.WriteElementString("Properties", "");
+            destXml.WriteElementString("Properties", string.Empty);
             destXml.WriteStartElement("Contents");
             try
             {
@@ -129,7 +125,7 @@ namespace MesFilms
                     //int Number, 
                     XmlNode nodeID = nodeDVD.SelectSingleNode("ID");
                     XmlNode nodeNumber = nodeDVD.SelectSingleNode("MovieID");
-                    if (nodeNumber != null && nodeNumber.InnerText != null && nodeNumber.InnerText.Length > 0)
+                    if (nodeNumber != null && !string.IsNullOrEmpty(nodeNumber.InnerText))
                         WriteAntAtribute(destXml, "MovieID", nodeNumber.InnerText);
                     else
                         WriteAntAtribute(destXml, "MovieID", "9999");
@@ -361,7 +357,7 @@ namespace MesFilms
             }
             catch
             {
-                return "";
+              return string.Empty;
             }
             destXml.WriteEndElement();
             destXml.WriteEndElement();
@@ -371,7 +367,7 @@ namespace MesFilms
 
         private void WriteAntAtribute(XmlTextWriter tw, string key, string value)
         {
-            string at = "";
+          string at = string.Empty;
             if (ProfilerDict.TryGetValue(key, out at))
             {
                 tw.WriteAttributeString(at, value);

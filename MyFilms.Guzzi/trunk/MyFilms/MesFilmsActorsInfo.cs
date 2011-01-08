@@ -36,7 +36,9 @@ using MediaPortal.Video.Database;
 
 namespace MesFilms.ActorDialog
 {
-    /// <summary>
+  using global::MesFilms.MyFilms.Utils;
+
+  /// <summary>
     /// Opens a separate Dialog to display Actor Infos - based on original IMDB actor Dialog
     /// </summary>
     public class MesFilmsActorInfo : GUIWindow, IRenderLayer

@@ -1,5 +1,9 @@
-﻿using MediaPortal.Dialogs;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using MediaPortal.Dialogs;
 using MediaPortal.GUI.Library;
+using System.ComponentModel;
 using System.Threading;
 
 namespace Cornerstone.MP {

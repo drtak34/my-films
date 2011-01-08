@@ -8,7 +8,9 @@ using System.IO;
 
 namespace MesFilms
 {
-    partial class MesFilmsSetup
+  using global::MesFilms.MyFilms.Utils;
+
+  partial class MesFilmsSetup
     {
         /// <summary>
         /// Variable nécessaire au concepteur.

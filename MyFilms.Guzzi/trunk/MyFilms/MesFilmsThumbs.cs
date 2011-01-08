@@ -179,7 +179,7 @@ namespace MesFilms
                     try
                     { directoryname = System.IO.Path.GetDirectoryName(moviename); }
                     catch
-                    { directoryname = ""; }
+                    { directoryname = string.Empty; }
 
                     Log.Debug("MyFilmsThumbs (GetThumbDirectory) Get Thumbdirectoryname: '" + directoryname.ToString() + "'");
                     
@@ -189,7 +189,7 @@ namespace MesFilms
                     return true;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
-                    if (Configuration.CurrentConfig != "")
+                    if (Configuration.CurrentConfig != string.Empty)
                         Configuration.SaveConfiguration(Configuration.CurrentConfig, MesFilms.conf.StrIndex, MesFilms.conf.StrTIndex);
                     using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
                     {

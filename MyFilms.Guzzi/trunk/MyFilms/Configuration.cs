@@ -28,7 +28,10 @@ using MediaPortal.Configuration;
 
 namespace MesFilms
 {
-    public class Configuration
+  using global::MesFilms.MyFilms.CatalogConverter;
+  using global::MesFilms.MyFilms.Utils;
+
+  public class Configuration
     {
         System.ComponentModel.BackgroundWorker bgPictureList = new System.ComponentModel.BackgroundWorker();
         public Configuration(string CurrentConfig, bool create_temp)
@@ -45,66 +48,66 @@ namespace MesFilms
             }
             using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
-                StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", "");
-                StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", "");
-                StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", "");
-                StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", "");
-                StrDirStorActorThumbs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageActorThumbs", "");
+              StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", string.Empty);
+              StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", string.Empty);
+              StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", string.Empty);
+              StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", string.Empty);
+              StrDirStorActorThumbs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageActorThumbs", string.Empty);
                 SearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileName", "False");
                 SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
-                ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", "");
-                ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", "");
+                ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", string.Empty);
+                ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", string.Empty);
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
                 SearchSubDirsTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirsTrailer", "No");
                 CheckWatched = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckWatched", false);
-                StrIdentItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentItem", "");
-                StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntTitle1", "");
-                StrTitle2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntTitle2", "");
-                StrSTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntSTitle", "");
-                if (StrSTitle == "")
+                StrIdentItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentItem", string.Empty);
+                StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntTitle1", string.Empty);
+                StrTitle2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntTitle2", string.Empty);
+                StrSTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntSTitle", string.Empty);
+                if (StrSTitle == string.Empty)
                     StrSTitle = StrTitle1;
-                StrViewDfltItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltItem", "");
-                StrViewDfltText = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltText", "");
+                StrViewDfltItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltItem", string.Empty);
+                StrViewDfltText = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltText", string.Empty);
                 for (int i = 1; i < 6; i++)
                 {
-                    StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", i.ToString()), "");
-                    StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", i.ToString()), "");
+                  StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", i), string.Empty);
+                  StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewText{0}", i), string.Empty);
                     //if (StrViewText[i - 1].ToLower() == wViewDfltItem.ToLower())
                     //    StrViewDfltItem = StrViewItem[i - 1];
-                    StrViewValue[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", i.ToString()), "");
+                  StrViewValue[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewValue{0}", i), string.Empty);
                 }
                 for (int i = 1; i < 3; i++)
                 {
-                    StrSearchText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchText{0}", i), "");
-                    StrSearchItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchItem{0}", i), "");
-                    StrTSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntTSort{0}", i), "");
-                    StrSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSort{0}", i), "");
+                  StrSearchText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchText{0}", i), string.Empty);
+                  StrSearchItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSearchItem{0}", i), string.Empty);
+                  StrTSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntTSort{0}", i), string.Empty);
+                  StrSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSort{0}", i), string.Empty);
                 }
                 StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "TranslatedTitle|OriginalTitle|Category|Year|Date|Country|Rating|Checked|MediaLabel|MediaType|Actors|Director|Producer").ToString().Split(new Char[] { '|' });
                 StrSearchList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchList", "TranslatedTitle|OriginalTitle|Description|Comments|Actors|Director|Producer|Year|Date|Category|Country|Rating|Checked|MediaLabel|MediaType|URL|Borrower|Length|VideoFormat|VideoBitrate|AudioFormat|AudioBitrate|Resolution|Framerate|Size|Disks|Languages|Subtitles|Number").ToString().Split(new Char[] { '|' });
-                StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", "");
+                StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", string.Empty);
                 StrFileType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0");
-                StrPathImg = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntPicture", "");
+                StrPathImg = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntPicture", string.Empty);
                 StrArtistDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistDflt", false);
-                StrPathFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartPicture", "");
-                StrPathViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsPicture", "");
-                StrPathArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistPicturePath", "");
+                StrPathFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartPicture", string.Empty);
+                StrPathViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsPicture", string.Empty);
+                StrPathArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistPicturePath", string.Empty);
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", 0);
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOut", StrLayOut);
-                Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", "");
-                Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", "");
-                Strlabel3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel3", "");
-                Stritem1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem1", "");
-                Stritem2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem2", "");
-                Stritem3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem3", "");
-                StrIdentLabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentLabel", "");
+                Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", string.Empty);
+                Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", string.Empty);
+                Strlabel3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel3", string.Empty);
+                Stritem1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem1", string.Empty);
+                Stritem2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem2", string.Empty);
+                Stritem3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem3", string.Empty);
+                StrIdentLabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentLabel", string.Empty);
                 StrMCCovers = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "MCCovers", "Thumbnails");
                 StrLogos = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Logos", false);
                 StrSuppress = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Suppress", false);
                 StrSupPlayer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressPlayed", false);
-                StrSuppressType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressType", "");
-                StrSuppressField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressField", "");
-                StrSuppressValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressValue", "");
+                StrSuppressType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressType", string.Empty);
+                StrSuppressField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressField", string.Empty);
+                StrSuppressValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressValue", string.Empty);
                 switch (StrFileType)
                 {
                     case "0":
@@ -123,12 +126,12 @@ namespace MesFilms
                             bool OnlyFile = false;
                             SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
-                            string TagField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DVDPTagField", "");
+                            string TagField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DVDPTagField", string.Empty);
                             CatalogConverter cv = new CatalogConverter(TagField);
                             StrFileXml = cv.ConvertProfiler(StrFileXml, StrPathImg, SortTitle, TagField,OnlyFile);
                         }
                         else
-                            StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", "");
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
                     case "2":
                         if (create_temp)
@@ -148,7 +151,7 @@ namespace MesFilms
                             StrFileXml = mc.ConvertMovieCollector(StrFileXml, StrPathImg, SortTitle, OnlyFile,StrMCCovers,TitleDelim);
                         }
                         else
-                            StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", "");
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
                     case "3":
                         if (create_temp)
@@ -168,7 +171,7 @@ namespace MesFilms
                             StrFileXml = mm.ConvertMyMovies(StrFileXml, StrPathImg, SortTitle, OnlyFile);
                         }
                         else
-                            StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", "");
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
                     case "4":
                         if (create_temp)
@@ -188,7 +191,7 @@ namespace MesFilms
                             StrFileXml = emc.ConvertEaxMovieCatalog(StrFileXml, StrPathImg, SortTitle, OnlyFile, TitleDelim);
                         }
                         else
-                            StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", "");
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
                     case "5":
                         if (create_temp)
@@ -208,7 +211,7 @@ namespace MesFilms
                             StrFileXml = xmm.ConvertXMM(StrFileXml, StrPathImg, SortTitle, OnlyFile);
                         }
                         else
-                            StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", "");
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
                     case "6":
                         if (create_temp)
@@ -228,43 +231,43 @@ namespace MesFilms
                             StrFileXml = nfo.ConvertXbmcNfo(StrFileXml, StrPathImg,StrStorage, SortTitle, OnlyFile, TitleDelim);
                         }
                         else
-                            StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", "");
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
                 }
-                StrSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelect", "");
-                StrActors = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrActors", "");
-                StrTitleSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrTitleSelect", "");
-                StrFilmSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrFilmSelect", "");
-                StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrDfltSelect", "");
-                StrSorta = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", "");
-                CurrentSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", "");
-                StrSortSens = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSens", "");
-                string wDfltSort = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSort", "");
-                string wDfltSortSens = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSens", "");
-                string wDfltSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethod", "");
-                StrTxtSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Selection", "");
+                StrSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelect", string.Empty);
+                StrActors = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrActors", string.Empty);
+                StrTitleSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrTitleSelect", string.Empty);
+                StrFilmSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrFilmSelect", string.Empty);
+                StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrDfltSelect", string.Empty);
+                StrSorta = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSort", string.Empty);
+                CurrentSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CurrentSortMethod", string.Empty);
+                StrSortSens = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSortSens", string.Empty);
+                string wDfltSort = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSort", string.Empty);
+                string wDfltSortSens = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltStrSortSens", string.Empty);
+                string wDfltSortMethod = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntDfltSortMethod", string.Empty);
+                StrTxtSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Selection", string.Empty);
                 try { StrIndex = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "IndexItem", -1); }
                 catch { StrIndex = -1; };
-                StrTIndex = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "TitleItem", "");
+                StrTIndex = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "TitleItem", string.Empty);
                 Boolselect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Boolselect", false);
                 Boolreturn = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Boolreturn", false);
                 Boolview = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Boolview", false);
-                WStrSort = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WStrSort", "");
-                Wselectedlabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WSelectedLabel", "");
-                Wstar = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Wstar", "");
+                WStrSort = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WStrSort", string.Empty);
+                Wselectedlabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WSelectedLabel", string.Empty);
+                Wstar = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Wstar", string.Empty);
                 LastID = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LastID", -1);
                 TitleDelim = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "TitleDelim", ".");
-                DefaultCover = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCover", "");
-                DefaultCoverArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverArtist", "");
+                DefaultCover = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCover", string.Empty);
+                DefaultCoverArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverArtist", string.Empty);
                 StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5.0");
                 StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
-                StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", "");
-                StrGrabber_Dir = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Dir", "");
+                StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", string.Empty);
+                StrGrabber_Dir = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Dir", string.Empty);
                 StrGrabber_Always = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Always", false);
                 StrGrabber_ChooseScript = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_ChooseScript", false);
                 StrAMCUpd = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd", false);
-                StrAMCUpd_exe = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_exe", "");
-                StrAMCUpd_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_cnf", "");
+                StrAMCUpd_exe = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_exe", string.Empty);
+                StrAMCUpd_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_cnf", string.Empty);
                 StrFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Fanart", false);
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
                 StrViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Views", false);
@@ -283,26 +286,26 @@ namespace MesFilms
                 int j = 0;
                 for (int i = 1; i <= 5; i++)
                 {
-                    if (XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ListSeparator" + i, "").Length > 0)
+                  if (XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ListSeparator" + i, string.Empty).Length > 0)
                     {
-                        listSeparator[j] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ListSeparator" + i, "");
+                      listSeparator[j] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ListSeparator" + i, string.Empty);
                         j++;
                     }
                 }
                 j = 0;
                 for (int i = 1; i <= 5; i++)
                 {
-                    if (XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RoleSeparator" + i, "").Length > 0)
+                  if (XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RoleSeparator" + i, string.Empty).Length > 0)
                     {
-                        RoleSeparator[j] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RoleSeparator" + i, "");
+                      RoleSeparator[j] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RoleSeparator" + i, string.Empty);
                         j++;
                     }
                 }
 
-                CmdExe = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CmdExe", "");
+                CmdExe = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CmdExe", string.Empty);
                 if (CmdExe == "(none)")
                     CmdExe = "";
-                CmdPar = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CmdPar", "");
+                CmdPar = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CmdPar", string.Empty);
                 if (CmdPar == "(none)")
                     CmdPar = "";
                 OnlyTitleList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyTitleList", false);
@@ -507,13 +510,13 @@ namespace MesFilms
             get { return stritem3; }
             set { stritem3 = value; }
         }
-        private string[] listSeparator = {"","","","",""};
+        private string[] listSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public string[] ListSeparator
         {
             get { return listSeparator; }
             set { listSeparator = value; }
         }
-        private string[] roleSeparator = { "", "", "", "", "" };
+        private string[] roleSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public string[] RoleSeparator
         {
             get { return roleSeparator; }
@@ -1083,17 +1086,17 @@ namespace MesFilms
         {
             XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MesFilms.conf.StrSelect.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrActors", MesFilms.conf.StrActors.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MesFilms.conf.StrTitleSelect.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MesFilms.conf.StrFilmSelect.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MesFilms.conf.StrDfltSelect.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MesFilms.conf.StrSorta.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethod", MesFilms.conf.CurrentSortMethod.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSens", MesFilms.conf.StrSortSens.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MesFilms.conf.StrSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrActors", MesFilms.conf.StrActors);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MesFilms.conf.StrTitleSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MesFilms.conf.StrFilmSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MesFilms.conf.StrDfltSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MesFilms.conf.StrSorta);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethod", MesFilms.conf.CurrentSortMethod);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSens", MesFilms.conf.StrSortSens);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Selection", MesFilms.conf.StrTxtSelect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexItem", (selectedItem > -1) ? ((MesFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "TitleItem", (selectedItem > -1) ? ((MesFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel.ToString()) : ""); //may need to check if there is no item selected and so save ""
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "TitleItem", (selectedItem > -1) ? ((MesFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolselect", MesFilms.conf.Boolselect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolreturn", MesFilms.conf.Boolreturn);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolview", MesFilms.conf.Boolview);
@@ -1109,7 +1112,7 @@ namespace MesFilms
                     case "0":
                         break;
                     case "1":
-                    XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MesFilms.conf.StrFileXml.ToString());
+                    XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MesFilms.conf.StrFileXml);
                         break;
                 }
         }
@@ -1123,15 +1126,15 @@ namespace MesFilms
 //            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
 //            {
             XmlConfig XmlConfig = new XmlConfig();    
-            string Dwp = XmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", "");
+            string Dwp = XmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", string.Empty);
 //            }
 
             if (Dwp.Length == 0)
                 return configname;
             MediaPortal.Dialogs.VirtualKeyboard keyboard = (MediaPortal.Dialogs.VirtualKeyboard)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-            if (null == keyboard) return "";
+            if (null == keyboard) return string.Empty;
             keyboard.Reset();
-            keyboard.Text = "";
+            keyboard.Text = string.Empty;
             keyboard.Password = true;
             keyboard.DoModal(GetID);
             if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
@@ -1140,7 +1143,7 @@ namespace MesFilms
                 if (crypto.Decrypter(Dwp) == keyboard.Text)
                     return configname;
             }
-            return "";
+            return string.Empty;
         }
         //--------------------------------------------------------------------------------------------
         //  Choice Configuration
@@ -1150,9 +1153,9 @@ namespace MesFilms
             MediaPortal.Dialogs.GUIDialogMenu dlg = (MediaPortal.Dialogs.GUIDialogMenu)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_MENU);
             if (dlg == null)
             {
-                
-                MesFilms.conf.StrFileXml = "";
-                return "";
+
+              MesFilms.conf.StrFileXml = string.Empty;
+              return string.Empty;
             }
             dlg.Reset();
             dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
@@ -1161,17 +1164,17 @@ namespace MesFilms
             XmlConfig XmlConfig = new XmlConfig();
             int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
             for (int i = 0; i < (int)MesFilms_nb_config; i++)
-                dlg.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, ""));
+              dlg.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
 //            }
             dlg.DoModal(GetID);
             if (dlg.SelectedLabel == -1)
             {
-                MesFilms.conf.StrFileXml = "";
-                return "";
+              MesFilms.conf.StrFileXml = string.Empty;
+              return string.Empty;
             }
             if (dlg.SelectedLabelText.Length > 0)
                 return dlg.SelectedLabelText;
-            return "";
+            return string.Empty;
         }
         //--------------------------------------------------------------------------------------------
         //  Return Current Configuration
@@ -1194,22 +1197,22 @@ namespace MesFilms
             }
             bool boolchoice = true;
             if (CurrentConfig == null)
-                if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", "").Length > 0)
-                    CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", "");
+              if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty).Length > 0)
+                  CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty);
                 else
-                    CurrentConfig = "";
+                  CurrentConfig = string.Empty;
 
-            if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) && ((XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "").Length > 0)))
+            if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) && ((XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty).Length > 0)))
                 //if ((!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false))) && ((XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "")).ToString().Length() > 0))
                     // Might require check for yes/no ? 
                 //if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", "False") == "True" //fmu
                 // || XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", "False") == "yes")  //fmu
 
-                CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
+              CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
             //Guzzi: Remarked, because otherwise currentconfig will always be owerwritten if no defaultconfig available
             //else
-            //    CurrentConfig = "";
-            if (CurrentConfig == "")
+            //    CurrentConfig = string.Empty;
+            if (CurrentConfig == string.Empty)
             {
                 boolchoice = false;
                 CurrentConfig = Configuration.Choice_Config(MesFilms.ID_MesFilms); // "" => user esc's dialog on plugin startup so exit plugin unchanged

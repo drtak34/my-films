@@ -20,19 +20,20 @@
 
 #region Usings
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
-using MediaPortal.GUI.Library;
+
 
 #endregion
 
-namespace MesFilms.WakeOnLan
+namespace MesFilms.MyFilms.Utils
 {
+  using System;
+  using System.Net;
+  using System.Net.Sockets;
+  using System.Net.NetworkInformation;
+  using System.Runtime.InteropServices;
+
+  using MediaPortal.GUI.Library;
+
   public class WakeOnLanManager
   {
     #region Constants
@@ -73,7 +74,7 @@ namespace MesFilms.WakeOnLan
 
     #region Private (lowlevel) methods
 
-    private MIB_IPNETROW[] GetPhysicalAddressTable()
+    private static MIB_IPNETROW[] GetPhysicalAddressTable()
     {
       int bytesNeeded = 0;
       int result = GetIpNetTable(IntPtr.Zero, ref bytesNeeded, false);
@@ -116,7 +117,7 @@ namespace MesFilms.WakeOnLan
       return table;
     }
 
-    private byte[] SendArpRequest(IPAddress address)
+    private static byte[] SendArpRequest(IPAddress address)
     {
       byte[] hwAddr = new byte[6];
       int len = hwAddr.Length;
@@ -126,7 +127,7 @@ namespace MesFilms.WakeOnLan
       return hwAddr;
     }
 
-    private byte[] GetWakeOnLanMagicPacket(byte[] hwAddress)
+    private static byte[] GetWakeOnLanMagicPacket(byte[] hwAddress)
     {
       if (hwAddress.Length != 6)
       {
@@ -150,7 +151,7 @@ namespace MesFilms.WakeOnLan
       return packet;
     }
 
-    private void SendMagicPacket(IPAddress address, byte[] data)
+    private static void SendMagicPacket(IPAddress address, byte[] data)
     {
       UdpClient client = new UdpClient();
       client.Connect(address, 1234);

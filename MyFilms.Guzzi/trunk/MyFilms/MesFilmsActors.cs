@@ -40,7 +40,9 @@ using MediaPortal.Video.Database;
 namespace MesFilms.Actors
 
 {
-    /// <summary>
+  using global::MesFilms.MyFilms.Utils;
+
+  /// <summary>
     /// Opens a separate page to display Actor Infos
     /// </summary>
     public class MesFilmsActors : GUIWindow
@@ -221,7 +223,7 @@ namespace MesFilms.Actors
 
                     BtnSrtBy.Label = GUILocalizeStrings.Get(103);
                     MesFilms.conf.Boolselect = true;
-                    MesFilms.conf.Wselectedlabel = "";
+                    MesFilms.conf.Wselectedlabel = string.Empty;
                     Change_LayOut(0);
                     facadeView.Clear();
 

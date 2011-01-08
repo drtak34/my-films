@@ -29,7 +29,7 @@ using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
 using TaskScheduler;
 using MesFilms.MyFilms;
-using MesFilms.WakeOnLan;
+
 using System.Net;
 using System.Collections;
 using System.Diagnostics;
@@ -39,9 +39,12 @@ using IWshRuntimeLibrary;
 
 namespace MesFilms
 {
-    public partial class MesFilmsSetup : Form
+  using global::MesFilms.MyFilms.CatalogConverter;
+  using global::MesFilms.MyFilms.Utils;
+
+  public partial class MesFilmsSetup : Form
     {
-        private WshShellClass WshShell; // Added for creating Desktop icon via wsh
+        //private WshShellClass WshShell; // Added for creating Desktop icon via wsh
 
         //fmu   private MediaPortal.Profile.Settings MyFilms_xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
         //fmu   private MediaPortal.Profile.Settings MyFilms_xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
@@ -52,7 +55,7 @@ namespace MesFilms
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private int MesFilms_nb_config = 0;
-        private string StrDfltSelect = "";
+        private string StrDfltSelect = string.Empty;
         private AntMovieCatalog mydivx = new AntMovieCatalog();
         private Crypto crypto = new Crypto();
         public int selected_Logo_Item;
@@ -84,7 +87,7 @@ namespace MesFilms
             }
             for (int i = 0; i < (int)MesFilms_nb_config; i++)
             {
-                Config_Name.Items.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, ""));
+              Config_Name.Items.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
             }
 
             AntMovieCatalog ds = new AntMovieCatalog();
@@ -139,7 +142,7 @@ namespace MesFilms
                     SField1.Items.Add(dc.ColumnName);
                     SField2.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && !(dc.ColumnName == "Description") && !(dc.ColumnName == "Comments"))
+                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Description" && dc.ColumnName != "Comments")
                 {
                     AntViewItem1.Items.Add(dc.ColumnName);
                     AntViewItem2.Items.Add(dc.ColumnName);
@@ -147,14 +150,14 @@ namespace MesFilms
                     AntViewItem4.Items.Add(dc.ColumnName);
                     AntViewItem5.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && !(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Actors"))
+                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Actors")
                 {
                     AntSearchItem1.Items.Add(dc.ColumnName);
                     AntSearchItem2.Items.Add(dc.ColumnName);
                 }
                 if ((dc.ColumnName == "TranslatedTitle") || (dc.ColumnName == "OriginalTitle") || (dc.ColumnName == "FormattedTitle"))
                     AntSTitle.Items.Add(dc.ColumnName);
-                if ((dc.ColumnName != "Contents_Id") && !(dc.ColumnName == "TranslatedTitle") && !(dc.ColumnName == "OriginalTitle") && !(dc.ColumnName == "FormattedTitle") && !(dc.ColumnName == "Year") && !(dc.ColumnName == "Rating") && !(dc.ColumnName == "DateAdded") && !(dc.ColumnName == "Date"))
+                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Year" && dc.ColumnName != "Rating" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Date")
                 {
                     AntSort1.Items.Add(dc.ColumnName);
                     AntSort2.Items.Add(dc.ColumnName);
@@ -168,7 +171,7 @@ namespace MesFilms
             }
             AntViewText_Change();
             AntSort_Change();
-            Config_Name.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
+            Config_Name.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
             chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Logos", false);
             st = new ScheduledTasks();
             Task t = null; ;
@@ -216,7 +219,7 @@ namespace MesFilms
                         destXml.WriteStartDocument();
                         destXml.WriteStartElement("AntMovieCatalog");
                         destXml.WriteStartElement("Catalog");
-                        destXml.WriteElementString("Properties", "");
+                        destXml.WriteElementString("Properties", string.Empty);
                         destXml.WriteStartElement("Contents");
                         destXml.Close();
                     }
@@ -856,7 +859,7 @@ namespace MesFilms
         {
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                if (!(folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") == folderBrowserDialog1.SelectedPath.Length - 1))
+                if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") != this.folderBrowserDialog1.SelectedPath.Length - 1)
                     folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
 
                 if (PathStorage.Text.Length == 0)
@@ -2451,17 +2454,17 @@ namespace MesFilms
             View_Dflt_Item.Items.Add("Year");
             View_Dflt_Item.Items.Add("Category");
             View_Dflt_Item.Items.Add("Country");
-            if (!(AntStorage.Text.Length == 0) && !(AntStorage.Text == "(none)"))
+            if (this.AntStorage.Text.Length != 0 && !(AntStorage.Text == "(none)"))
                 View_Dflt_Item.Items.Add("Storage");
-            if (!(AntViewItem1.Text == "(none)") && !(AntViewItem1.Text.Length == 0) && !(AntViewText1.Text.Length == 0))
+            if (!(AntViewItem1.Text == "(none)") && this.AntViewItem1.Text.Length != 0 && this.AntViewText1.Text.Length != 0)
                 View_Dflt_Item.Items.Add(AntViewText1.Text);
-            if (!(AntViewItem2.Text == "(none)") && !(AntViewItem2.Text.Length == 0) && !(AntViewText2.Text.Length == 0))
+            if (!(AntViewItem2.Text == "(none)") && this.AntViewItem2.Text.Length != 0 && this.AntViewText2.Text.Length != 0)
                 View_Dflt_Item.Items.Add(AntViewText2.Text);
-            if (!(AntViewItem3.Text == "(none)") && !(AntViewItem3.Text.Length == 0) && !(AntViewText3.Text.Length == 0))
+            if (!(AntViewItem3.Text == "(none)") && this.AntViewItem3.Text.Length != 0 && this.AntViewText3.Text.Length != 0)
                 View_Dflt_Item.Items.Add(AntViewText3.Text);
-            if (!(AntViewItem4.Text == "(none)") && !(AntViewItem4.Text.Length == 0) && !(AntViewText4.Text.Length == 0))
+            if (!(AntViewItem4.Text == "(none)") && this.AntViewItem4.Text.Length != 0 && this.AntViewText4.Text.Length != 0)
                 View_Dflt_Item.Items.Add(AntViewText4.Text);
-            if (!(AntViewItem5.Text == "(none)") && !(AntViewItem5.Text.Length == 0) && !(AntViewText5.Text.Length == 0))
+            if (!(AntViewItem5.Text == "(none)") && this.AntViewItem5.Text.Length != 0 && this.AntViewText5.Text.Length != 0)
                 View_Dflt_Item.Items.Add(AntViewText5.Text);
             if (!(View_Dflt_Item.Items.Contains(View_Dflt_Item.Text)))
             {
@@ -2480,9 +2483,9 @@ namespace MesFilms
             Sort.Items.Add("Year");
             Sort.Items.Add("Date");
             Sort.Items.Add("Rating");
-            if (!(AntSort1.Text == "(none)") && !(AntSort1.Text.Length == 0))
+            if (!(AntSort1.Text == "(none)") && this.AntSort1.Text.Length != 0)
                 Sort.Items.Add(AntSort1.Text);
-            if (!(AntSort2.Text == "(none)") && !(AntSort2.Text.Length == 0))
+            if (!(AntSort2.Text == "(none)") && this.AntSort2.Text.Length != 0)
                 Sort.Items.Add(AntSort2.Text);
 
             //Guzzi: Added to not Reset setting when localized strings present
@@ -2772,7 +2775,7 @@ namespace MesFilms
         {
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                if (!(folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") == folderBrowserDialog1.SelectedPath.Length - 1))
+                if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") != this.folderBrowserDialog1.SelectedPath.Length - 1)
                     folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
 
                 if (PathStorageTrailer.Text.Length == 0)

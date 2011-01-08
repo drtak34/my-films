@@ -20,15 +20,15 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-using System;
-using System.IO;
-using System.Text;
-using System.Security.Cryptography;
 
-
-namespace MesFilms
+namespace MesFilms.MyFilms.Utils
 {
-	public class Crypto
+  using System;
+  using System.IO;
+  using System.Text;
+  using System.Security.Cryptography;
+
+  public class Crypto
 	{
 		byte[] Clef = {0xAD, 0x24, 0xFE, 0x58, 0xC5, 0x81, 0x37, 0xB4, 0xF9, 0x97, 0x23, 0xD2, 0x13, 0x86, 0xBB, 0xA7};
 		byte[] Vect = {0x81, 0xFD, 0xC3, 0xBB, 0x0A, 0xE6, 0xFE, 0xB8, 0xD9, 0xC0, 0x0C, 0x92, 0x73, 0xD4, 0x1A, 0xF2};
@@ -54,7 +54,7 @@ namespace MesFilms
 		public string Crypter(string TexteBrut)
 		{
             if (TexteBrut.Length == 0)
-                return "";
+              return string.Empty;
 			MemoryStream CypherTexteMem = new MemoryStream();
 			
 			CryptoStream CStream = new CryptoStream(CypherTexteMem, 
@@ -86,7 +86,7 @@ namespace MesFilms
 		public string Decrypter(string CypherTexte)
 		{
             if (CypherTexte.Length == 0)
-                return "";	
+              return string.Empty;	
 			MemoryStream CypherTexteMem = new MemoryStream(new UnicodeEncoding().GetBytes(CypherTexte));
 			
 			CryptoStream CStream = new CryptoStream(CypherTexteMem, rj.CreateDecryptor(Clef, Vect),CryptoStreamMode.Read);

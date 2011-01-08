@@ -1,4 +1,5 @@
-﻿using MediaPortal.Dialogs;
+﻿using System;
+using MediaPortal.Dialogs;
 using MediaPortal.GUI.Library;
 using NLog;
 
