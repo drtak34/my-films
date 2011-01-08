@@ -371,11 +371,11 @@ namespace MesFilms.MyFilms.CatalogConverter
             if (ProfilerDict.TryGetValue(key, out at))
             {
                 tw.WriteAttributeString(at, value);
-                //Log.Debug("MyFilms: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+                //LogMyFilms.Debug("MyFilms: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
             }
             else
             {
-                //Log.Debug("MyFilms: XMM Importer Property '" + key + "' not found in dictionary ! - Attribute not written to DB !");
+                //LogMyFilms.Debug("MyFilms: XMM Importer Property '" + key + "' not found in dictionary ! - Attribute not written to DB !");
             }
         }
     }

@@ -74,6 +74,8 @@ namespace MesFilms.MyFilms.Utils
 
     #region Private (lowlevel) methods
 
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+
     private static MIB_IPNETROW[] GetPhysicalAddressTable()
     {
       int bytesNeeded = 0;
@@ -176,7 +178,7 @@ namespace MesFilms.MyFilms.Utils
       }
       else
       {
-        Log.Debug("WOLMgr: Invalid ethernet address!");
+        LogMyFilms.Debug("WOLMgr: Invalid ethernet address!");
         return false;
       }
     }
@@ -194,7 +196,7 @@ namespace MesFilms.MyFilms.Utils
       }
       catch (Exception ex)
       {
-        Log.Error("WOLMgr: Ping failed - {0}", ex.Message);
+        LogMyFilms.Error("WOLMgr: Ping failed - {0}", ex.Message);
       }
 
       return false;
@@ -276,30 +278,30 @@ namespace MesFilms.MyFilms.Utils
 
       // we have to make sure the remoting system knows that we have resumed the server by means of WOL.
       // this will make sure the connection timeout for the remoting framework is increased.
-      Log.Debug("WOLMgr: Increasing timeout for RemoteControl");
+      LogMyFilms.Debug("WOLMgr: Increasing timeout for RemoteControl");
       //TvControl.RemoteControl.UseIncreasedTimeoutForInitialConnection = true;
 
-      Log.Debug("WOLMgr: Ping {0}", wakeupTarget);
+      LogMyFilms.Debug("WOLMgr: Ping {0}", wakeupTarget);
       if (Ping(wakeupTarget, timeout))
       {
-        Log.Debug("WOLMgr: {0} already started", wakeupTarget);
+        LogMyFilms.Debug("WOLMgr: {0} already started", wakeupTarget);
         return true;
       }
 
       if (!SendWakeOnLanPacket(hwAddress, IPAddress.Broadcast))
       {
-        Log.Debug("WOLMgr: FAILED to send wake-on-lan packet!");
+        LogMyFilms.Debug("WOLMgr: FAILED to send wake-on-lan packet!");
         return false;
       }
 
       while (waited < timeout * 1000)
       {
-        Log.Debug("WOLMgr: Ping {0}", wakeupTarget);
+        LogMyFilms.Debug("WOLMgr: Ping {0}", wakeupTarget);
         if (Ping(wakeupTarget, 1000))
         {
           return true;
         }
-        Log.Debug("WOLMgr: System {0} still not reachable, waiting...", wakeupTarget);
+        LogMyFilms.Debug("WOLMgr: System {0} still not reachable, waiting...", wakeupTarget);
         System.Threading.Thread.Sleep(1000);
         waited += 2000;
       }
@@ -313,7 +315,7 @@ namespace MesFilms.MyFilms.Utils
     /// <returns>byte[] containing the byte representation of this hardware ethernet address</returns>
     public byte[] GetHwAddrBytes(string address)
     {
-      Log.Debug("MyFilms.WakeOnLanManager: address: '" + address + "'");
+      LogMyFilms.Debug("MyFilms.WakeOnLanManager: address: '" + address + "'");
       byte[] addrn = new byte[6];
       string[] addr = address.Split(':');
       if (addr.Length != 6) 

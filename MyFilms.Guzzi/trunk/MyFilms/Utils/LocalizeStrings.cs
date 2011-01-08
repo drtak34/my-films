@@ -41,6 +41,7 @@ namespace MesFilms.MyFilms.Utils
   /// </summary>
   public class GUILocalizeStrings
   {
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     #region Variables
     static LocalisationProvider _stringProvider;
     static Dictionary<string, string> _cultures;
@@ -82,7 +83,7 @@ namespace MesFilms.MyFilms.Utils
       if (language != null)
         cultureName = GetCultureName(language);
 
-      Log.Info("  Loading localised Strings - Path: {0} Culture: {1}  Language: {2} Prefix: {3}", directory, cultureName, language, isPrefixEnabled);
+      LogMyFilms.Info("  Loading localised Strings - Path: {0} Culture: {1}  Language: {2} Prefix: {3}", directory, cultureName, language, isPrefixEnabled);
 
       _stringProvider = new LocalisationProvider(directory, cultureName, isPrefixEnabled);
 
@@ -135,9 +136,9 @@ namespace MesFilms.MyFilms.Utils
       }
       catch (System.FormatException e)
       {
-        Log.Error("Error formatting translation with id {0}", dwCode);
-        Log.Error("Unformatted translation: {0}", translation);
-        Log.Error(e);
+        LogMyFilms.Error("Error formatting translation with id {0}", dwCode);
+        LogMyFilms.Error("Unformatted translation: {0}", translation);
+        LogMyFilms.Error(e);
         return translation;
       }
     }
@@ -158,7 +159,7 @@ namespace MesFilms.MyFilms.Utils
 
       if (translation == null)
       {
-        Log.Error("No translation found for id {0}", dwCode);
+        LogMyFilms.Error("No translation found for id {0}", dwCode);
         return String.Empty;
       }
 
@@ -186,7 +187,7 @@ namespace MesFilms.MyFilms.Utils
       }
       catch (FormatException e)
       {
-        Log.Error(e);
+        LogMyFilms.Error(e);
         strLabel = String.Empty;
         return;
       }
@@ -194,7 +195,7 @@ namespace MesFilms.MyFilms.Utils
       strLabel = _stringProvider.GetString("unmapped", dwLabelID);
       if (strLabel == null)
       {
-        Log.Error("No translation found for id {0}", dwLabelID);
+        LogMyFilms.Error("No translation found for id {0}", dwLabelID);
         strLabel = String.Empty;
       }
     }

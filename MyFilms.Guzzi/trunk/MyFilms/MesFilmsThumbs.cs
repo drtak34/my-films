@@ -33,6 +33,8 @@ namespace MesFilms
     /// </summary>
     public class MesFilmsThumbs : GUIWindow
     {
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+
         #region Skin ID descriptions
 
         enum Controls : int
@@ -141,7 +143,7 @@ namespace MesFilms
         //---------------------------------------------------------------------------------------
         public override void OnAction(MediaPortal.GUI.Library.Action actionType)
         {
-            Log.Debug("MyFilmsThumbs: OnAction " + actionType.wID.ToString());
+            LogMyFilms.Debug("MyFilmsThumbs: OnAction " + actionType.wID.ToString());
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
                 MesFilms.conf.LastID = MesFilms.ID_MesFilmsDetail;
@@ -169,22 +171,22 @@ namespace MesFilms
                     // Windows Init
                     //---------------------------------------------------------------------------------------
                     base.OnMessage(messageType);
-                    Log.Debug("MyFilmsThumbs: CurrentMovie: '" + MesFilms.CurrentMovie + "'");
+                    LogMyFilms.Debug("MyFilmsThumbs: CurrentMovie: '" + MesFilms.CurrentMovie + "'");
 
                     //Retrieve original directory of mediafiles
                     //directoryname
                     moviename = MesFilms.CurrentMovie.Substring(MesFilms.CurrentMovie.LastIndexOf(";") + 1);
-                    Log.Debug("MyFilmsThumbs (GetThumbDirectory) Splittet Mediadirectoryname: '" + moviename.ToString() + "'");
+                    LogMyFilms.Debug("MyFilmsThumbs (GetThumbDirectory) Splittet Mediadirectoryname: '" + moviename.ToString() + "'");
 
                     try
                     { directoryname = System.IO.Path.GetDirectoryName(moviename); }
                     catch
                     { directoryname = string.Empty; }
 
-                    Log.Debug("MyFilmsThumbs (GetThumbDirectory) Get Thumbdirectoryname: '" + directoryname.ToString() + "'");
+                    LogMyFilms.Debug("MyFilmsThumbs (GetThumbDirectory) Get Thumbdirectoryname: '" + directoryname.ToString() + "'");
                     
                     LoadThumbs(directoryname);
-                    Log.Debug("MyFilmsThumbs: PropertyLoaded !");
+                    LogMyFilms.Debug("MyFilmsThumbs: PropertyLoaded !");
                     MesFilms.conf.LastID = MesFilms.ID_MesFilmsThumbs;
                     return true;
 
@@ -201,8 +203,8 @@ namespace MesFilms
                             currentmodulefullscreen = true;
                         xmlreader.SetValue("general", "lastactivemodule", currentmoduleid);
                         xmlreader.SetValueAsBool("general", "lastactivemodulefullscreen", currentmodulefullscreen);
-                        Log.Debug("MyFilms : SaveLastActiveModule - module {0}", currentmoduleid);
-                        Log.Debug("MyFilms : SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
+                        LogMyFilms.Debug("MyFilms : SaveLastActiveModule - module {0}", currentmoduleid);
+                        LogMyFilms.Debug("MyFilms : SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
                     }
                     return true;
 
@@ -257,18 +259,18 @@ namespace MesFilms
         {
             MovieThumbPath = MovieThumbPath + "\\extrathumbs\\";
             string defaultthumb = "\\\\xvs-gmi-fs\\media-server\\AMC-Appl\\AMC-DefaultCover\\videonotavailable.jpg";
-            Log.Debug("MyFilms (LoadThumbs) : Set default Thumb: '" + defaultthumb + "'");
+            LogMyFilms.Debug("MyFilms (LoadThumbs) : Set default Thumb: '" + defaultthumb + "'");
             
             //string strDir = MesFilms.conf.StrDirStorActorThumbs;
 
             string thumb1 = MovieThumbPath + "thumb1.jpg";
-            Log.Debug("thumb1: '" + thumb1 + "'");
+            LogMyFilms.Debug("thumb1: '" + thumb1 + "'");
             if (!System.IO.File.Exists(thumb1))
                 thumb1 = defaultthumb;
             ImgThumb1.SetFileName(thumb1);
             GUIPropertyManager.SetProperty("#myfilms.moviethumb1", thumb1);
             GUIControl.ShowControl(GetID, (int)Controls.CTRL_MovieThumb1);
-            Log.Debug("thumb1: '" + thumb1 + "'");
+            LogMyFilms.Debug("thumb1: '" + thumb1 + "'");
 
             string thumb2 = MovieThumbPath + "thumb2.jpg";
             if (!System.IO.File.Exists(thumb2))

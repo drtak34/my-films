@@ -11,7 +11,8 @@ using MediaPortal.GUI.Library;
 namespace MesFilms.Cornerstone.FileTools {
 
     public class WebGrabber {
-        
+
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
         private string requestUrl;
         private string data;
 
@@ -95,10 +96,10 @@ namespace MesFilms.Cornerstone.FileTools {
 
                     // Debug
                     if (_debug) {
-                        Log.Debug("URL: {0}", requestUrl);
-                        Log.Debug("UserAgent: {0}", userAgent);
-                        Log.Debug("CookieHeader: {0}", cookieHeader);
-                        Log.Debug("Encoding: {0}", encoding.EncodingName);
+                        LogMyFilms.Debug("URL: {0}", requestUrl);
+                        LogMyFilms.Debug("UserAgent: {0}", userAgent);
+                        LogMyFilms.Debug("CookieHeader: {0}", cookieHeader);
+                        LogMyFilms.Debug("Encoding: {0}", encoding.EncodingName);
                     }
 
                     // Converts the stream to a string
@@ -167,7 +168,7 @@ namespace MesFilms.Cornerstone.FileTools {
                 return xmlRoot.ChildNodes;
             }
             catch (XmlException e) {
-                Log.Debug("XML Parse error: URL=" + requestUrl, e);
+                LogMyFilms.Debug("XML Parse error: URL=" + requestUrl, e);
                 return null;
             }          
         }

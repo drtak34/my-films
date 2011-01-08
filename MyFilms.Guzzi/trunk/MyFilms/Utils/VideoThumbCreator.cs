@@ -34,6 +34,7 @@ namespace MesFilms.MyFilms.Utils
 
   public class VideoThumbCreator
   {
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     private static string ExtractApp = "mtn.exe";
     private static string ExtractorPath = Config.GetFile(Config.Dir.Base, "MovieThumbnailer", ExtractApp);
     private static int PreviewColumns = 2;
@@ -50,13 +51,13 @@ namespace MesFilms.MyFilms.Utils
           PreviewColumns = 2;
           PreviewRows = 3;
           LeaveShareThumb = true;
-          Log.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb);
+          LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb);
           NeedsConfigRefresh = false;
 
           //PreviewColumns = xmlreader.GetValueAsInt("thumbnails", "tvthumbcols", 2);
           //PreviewRows = xmlreader.GetValueAsInt("thumbnails", "tvthumbrows", 2);
           //LeaveShareThumb = xmlreader.GetValueAsBool("thumbnails", "tvrecordedsharepreview", false);
-          //Log.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb);
+          //LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb);
           //NeedsConfigRefresh = false;
       }
     }
@@ -85,22 +86,22 @@ namespace MesFilms.MyFilms.Utils
 
       if (String.IsNullOrEmpty(aVideoPath) || String.IsNullOrEmpty(aThumbPath))
       {
-        Log.Warn("VideoThumbCreator: Invalid arguments to generate thumbnails of your video!");
+        LogMyFilms.Warn("VideoThumbCreator: Invalid arguments to generate thumbnails of your video!");
         return false;
       }
       if (!File.Exists(aVideoPath))
       {
-        Log.Warn("VideoThumbCreator: File {0} not found!", aVideoPath);
+        LogMyFilms.Warn("VideoThumbCreator: File {0} not found!", aVideoPath);
         return false;
       }
       if (!File.Exists(ExtractorPath))
       {
-        Log.Warn("VideoThumbCreator: No {0} found to generate thumbnails of your video!", ExtractApp);
+        LogMyFilms.Warn("VideoThumbCreator: No {0} found to generate thumbnails of your video!", ExtractApp);
         return false;
       }
       if (!LeaveShareThumb && !aCacheThumb)
       {
-        Log.Warn(
+        LogMyFilms.Warn(
           "VideoThumbCreator: No share thumbs wanted by config option AND no caching wanted - where should the thumb go then? Aborting..");
         return false;
       }
@@ -108,7 +109,7 @@ namespace MesFilms.MyFilms.Utils
       IVideoThumbBlacklist blacklist = GlobalServiceProvider.Get<IVideoThumbBlacklist>();
       if (blacklist != null && blacklist.Contains(aVideoPath))
       {
-        Log.Debug("Skipped creating thumbnail for {0}, it has been blacklisted because last attempt failed", aVideoPath);
+        LogMyFilms.Debug("Skipped creating thumbnail for {0}, it has been blacklisted because last attempt failed", aVideoPath);
         return false;
       }
 
@@ -158,7 +159,7 @@ namespace MesFilms.MyFilms.Utils
         if ((LeaveShareThumb && !File.Exists(ShareThumb)) // No thumb in share although it should be there
             || (!LeaveShareThumb && !File.Exists(aThumbPath))) // No thumb cached and no chance to find it in share
         {
-          //Log.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", ShareThumb, ExtractorArgs);
+          //LogMyFilms.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", ShareThumb, ExtractorArgs);
           Success = Utils.StartProcess(ExtractorPath, ExtractorArgs, TempPath, 15000, true, GetMtnConditions());
           if (!Success)
           {
@@ -166,7 +167,7 @@ namespace MesFilms.MyFilms.Utils
             Thread.Sleep(100);
             Success = Utils.StartProcess(ExtractorPath, ExtractorFallbackArgs, TempPath, 30000, true, GetMtnConditions());
             if (!Success)
-              Log.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp,
+              LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp,
                        ExtractorFallbackArgs);
           }
           // give the system a few IO cycles
@@ -180,7 +181,7 @@ namespace MesFilms.MyFilms.Utils
           }
           catch (FileNotFoundException)
           {
-            Log.Debug("VideoThumbCreator: {0} did not extract a thumbnail to: {1}", ExtractApp, OutputThumb);
+            LogMyFilms.Debug("VideoThumbCreator: {0} did not extract a thumbnail to: {1}", ExtractApp, OutputThumb);
           }
           catch (Exception)
           {
@@ -222,7 +223,7 @@ namespace MesFilms.MyFilms.Utils
       }
       catch (Exception ex)
       {
-        Log.Error("VideoThumbCreator: Thumbnail generation failed - {0}!", ex.ToString());
+        LogMyFilms.Error("VideoThumbCreator: Thumbnail generation failed - {0}!", ex.ToString());
       }
       if (File.Exists(aThumbPath))
       {
@@ -250,8 +251,8 @@ namespace MesFilms.MyFilms.Utils
       }
       catch (Exception ex)
       {
-        Log.Error("GetThumbExtractorVersion failed:");
-        Log.Error(ex);
+        LogMyFilms.Error("GetThumbExtractorVersion failed:");
+        LogMyFilms.Error(ex);
         return "";
       }
     }

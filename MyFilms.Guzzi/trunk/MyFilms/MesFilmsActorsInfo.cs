@@ -38,6 +38,8 @@ namespace MesFilms.ActorDialog
 {
   using global::MesFilms.MyFilms.Utils;
 
+  using NLog;
+
   /// <summary>
     /// Opens a separate Dialog to display Actor Infos - based on original IMDB actor Dialog
     /// </summary>
@@ -62,6 +64,7 @@ namespace MesFilms.ActorDialog
         protected GUIFacadeControl facadeView = null;
         #endregion
 
+        private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //log
         private int selectedItemIndex = -1;
         View currentView = View.Icons;
         private List<string> list;
@@ -379,7 +382,7 @@ namespace MesFilms.ActorDialog
                 //    item.ThumbnailImage = (Config.Dir.Thumbs) + "\\MyFilms_Others\\NoPhoto.jpg"; 
                 if (System.IO.File.Exists(Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle)))
                         coverArtImage = Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle);
-                Log.Debug("MyFilmsActors (Coverartimage) - CoverartImage = '" + coverArtImage + "'");
+                LogMyFilms.Debug("MyFilmsActors (Coverartimage) - CoverartImage = '" + coverArtImage + "'");
                 if (File.Exists(coverArtImage))
                 {
                   item.ThumbnailImage = coverArtImage;

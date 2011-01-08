@@ -42,6 +42,8 @@ namespace MesFilms.Actors
 {
   using global::MesFilms.MyFilms.Utils;
 
+  using NLog;
+
   /// <summary>
     /// Opens a separate page to display Actor Infos
     /// </summary>
@@ -114,6 +116,8 @@ namespace MesFilms.Actors
 
         #endregion
 
+        private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //log
+  
         public static string wsearchfile;
         public static int wGetID;
 
@@ -184,7 +188,7 @@ namespace MesFilms.Actors
         //---------------------------------------------------------------------------------------
         public override void OnAction(MediaPortal.GUI.Library.Action actionType)
         {
-            Log.Debug("MyFilmsActors: OnAction " + actionType.wID);
+            LogMyFilms.Debug("MyFilmsActors: OnAction " + actionType.wID);
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
                 MesFilms.conf.LastID = MesFilms.ID_MesFilms;
@@ -260,8 +264,8 @@ namespace MesFilms.Actors
                             currentmodulefullscreen = true;
                         xmlreader.SetValue("general", "lastactivemodule", currentmoduleid);
                         xmlreader.SetValueAsBool("general", "lastactivemodulefullscreen", currentmodulefullscreen);
-                        Log.Debug("MyFilms : SaveLastActiveModule - module {0}", currentmoduleid);
-                        Log.Debug("MyFilms : SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
+                        LogMyFilms.Debug("MyFilms : SaveLastActiveModule - module {0}", currentmoduleid);
+                        LogMyFilms.Debug("MyFilms : SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
                     }
                     return true;
 
@@ -817,7 +821,7 @@ namespace MesFilms.Actors
 
                 if (actorList.Count == 0)
                 {
-                    Log.Debug("MyFilms (Person Info): No ActorIDs found for '" + wperson + "'");
+                    LogMyFilms.Debug("MyFilms (Person Info): No ActorIDs found for '" + wperson + "'");
                     GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK); 
                     dlgOk.SetHeading("Info");
                     dlgOk.SetLine(1, "");
@@ -825,7 +829,7 @@ namespace MesFilms.Actors
                     dlgOk.DoModal(GetID);
                     return;
                 }
-                Log.Debug("MyFilms (Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
+                LogMyFilms.Debug("MyFilms (Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
                 //int actorID;
                 actorID = 0;
             // Define splitter for string
@@ -840,7 +844,7 @@ namespace MesFilms.Actors
                     // IMDBActor  GetActorInfo(int idActor) we need integer)
                     actorID = Convert.ToInt32(strActor[0]);
                     string actorname = strActor[1];
-                    Log.Debug("MyFilms (ActorDetails - Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
+                    LogMyFilms.Debug("MyFilms (ActorDetails - Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
                 }
                 
                 MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);

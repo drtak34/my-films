@@ -50,6 +50,8 @@ namespace MesFilms
         //fmu   private MediaPortal.Profile.Settings MyFilms_xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
         XmlConfig XmlConfig = new XmlConfig(); //fmu
 
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+
         static ScheduledTasks st = null;
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -1460,7 +1462,7 @@ namespace MesFilms
                     else
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
             Selected_Enreg.Text = StrDfltSelect + AntTitle1.Text + " not like ''";
-            Log.Debug("MyFilms (Buid Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
+            LogMyFilms.Debug("MyFilms (Buid Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -2189,7 +2191,7 @@ namespace MesFilms
           try
           {
             AMCdsSettings.WriteXml(UserSettingsFile);
-            Log.Debug("AMCupdater Settings saved to file");
+            LogMyFilms.Debug("AMCupdater Settings saved to file");
           }
           catch
           {
@@ -2915,14 +2917,14 @@ namespace MesFilms
                     ips = Dns.GetHostAddresses(NAS_Name_1.Text);
                     foreach (IPAddress ip in ips)
                     {
-                        Log.Debug("    {0}", ip);
+                        LogMyFilms.Debug("    {0}", ip);
                     }
                     //Use first valid IP address
                     ipAddress = ips[0];
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
+                    LogMyFilms.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
                 }
             }
 
@@ -2934,13 +2936,13 @@ namespace MesFilms
 
                 if (wakeOnLanManager.IsValidEthernetAddress(hwAddress))
                 {
-                    Log.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
+                    LogMyFilms.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
                               , hwAddress[0], hwAddress[1], hwAddress[2], hwAddress[3], hwAddress[4], hwAddress[5]);
 
                     //Store MAC address
                     macAddress = BitConverter.ToString(hwAddress).Replace("-", ":");
 
-                    Log.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
+                    LogMyFilms.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
                     NAS_MAC_1.Text = macAddress;
 
                 }
@@ -2957,14 +2959,14 @@ namespace MesFilms
                     ips = Dns.GetHostAddresses(NAS_Name_2.Text);
                     foreach (IPAddress ip in ips)
                     {
-                        Log.Debug("    {0}", ip);
+                        LogMyFilms.Debug("    {0}", ip);
                     }
                     //Use first valid IP address
                     ipAddress = ips[0];
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
+                    LogMyFilms.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
                 }
             }
 
@@ -2976,13 +2978,13 @@ namespace MesFilms
 
                 if (wakeOnLanManager.IsValidEthernetAddress(hwAddress))
                 {
-                    Log.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
+                    LogMyFilms.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
                               , hwAddress[0], hwAddress[1], hwAddress[2], hwAddress[3], hwAddress[4], hwAddress[5]);
 
                     //Store MAC address
                     macAddress = BitConverter.ToString(hwAddress).Replace("-", ":");
 
-                    Log.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
+                    LogMyFilms.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
                     NAS_MAC_2.Text = macAddress;
 
                 }
@@ -2998,14 +3000,14 @@ namespace MesFilms
                     ips = Dns.GetHostAddresses(NAS_Name_3.Text);
                     foreach (IPAddress ip in ips)
                     {
-                        Log.Debug("    {0}", ip);
+                        LogMyFilms.Debug("    {0}", ip);
                     }
                     //Use first valid IP address
                     ipAddress = ips[0];
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
+                    LogMyFilms.Error("MyFilmsSetup - GetMACaddresses: Failed GetHostAddress - {0}", ex.Message);
                 }
             }
 
@@ -3017,13 +3019,13 @@ namespace MesFilms
 
                 if (wakeOnLanManager.IsValidEthernetAddress(hwAddress))
                 {
-                    Log.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
+                    LogMyFilms.Debug("TVHome: WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
                               , hwAddress[0], hwAddress[1], hwAddress[2], hwAddress[3], hwAddress[4], hwAddress[5]);
 
                     //Store MAC address
                     macAddress = BitConverter.ToString(hwAddress).Replace("-", ":");
 
-                    Log.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
+                    LogMyFilms.Debug("MyFilmsSetup - GetMACaddresses: Store MAC address: {0}", macAddress);
                     NAS_MAC_3.Text = macAddress;
 
                 }
@@ -3045,20 +3047,20 @@ namespace MesFilms
                     hwAddress = wakeOnLanManager.GetHwAddrBytes(macAddress);
 
                     //Finally, start up the TV server
-                    Log.Info("MyFilmsSetup - WOL: Start the NAS-Server");
+                    LogMyFilms.Info("MyFilmsSetup - WOL: Start the NAS-Server");
 
                     if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_1.Text, intTimeOut))
                     {
-                        Log.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
+                        LogMyFilms.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
                     }
                     else
                     {
-                        Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
+                        LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
+                    LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
                 }
             }
             else
@@ -3082,20 +3084,20 @@ namespace MesFilms
                     hwAddress = wakeOnLanManager.GetHwAddrBytes(macAddress);
 
                     //Finally, start up the TV server
-                    Log.Info("MyFilmsSetup - WOL: Start the NAS-Server");
+                    LogMyFilms.Info("MyFilmsSetup - WOL: Start the NAS-Server");
 
                     if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_2.Text, intTimeOut))
                     {
-                        Log.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
+                        LogMyFilms.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
                     }
                     else
                     {
-                        Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
+                        LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
+                    LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
                 }
             }
             else
@@ -3119,20 +3121,20 @@ namespace MesFilms
                     hwAddress = wakeOnLanManager.GetHwAddrBytes(macAddress);
 
                     //Finally, start up the TV server
-                    Log.Info("MyFilmsSetup - WOL: Start the NAS-Server");
+                    LogMyFilms.Info("MyFilmsSetup - WOL: Start the NAS-Server");
 
                     if (wakeOnLanManager.WakeupSystem(hwAddress, NAS_Name_3.Text, intTimeOut))
                     {
-                        Log.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
+                        LogMyFilms.Info("MyFilmsSetup - WOL: The NAS-Server started successfully!");
                     }
                     else
                     {
-                        Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
+                        LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server");
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
+                    LogMyFilms.Error("MyFilmsSetup - WOL: Failed to start the NAS-Server - {0}", ex.Message);
                 }
             }
             else
@@ -3193,7 +3195,7 @@ namespace MesFilms
             }
 
             p.StartInfo = psi;
-            Log.Debug("MyFilmsSetup: Launch AMCupdater from PluginSetup with argument: {0}", "");
+            LogMyFilms.Debug("MyFilmsSetup: Launch AMCupdater from PluginSetup with argument: {0}", "");
             try
             {
               p.Start();
@@ -3201,9 +3203,9 @@ namespace MesFilms
             }
             catch (Exception ex)
             {
-              Log.Debug(ex.ToString());
+              LogMyFilms.Debug(ex.ToString());
             }
-            Log.Debug("MyFilmsSetup: Launch AMCupdater from PluginSetup done");
+            LogMyFilms.Debug("MyFilmsSetup: Launch AMCupdater from PluginSetup done");
           }
 
         }
@@ -3249,7 +3251,7 @@ namespace MesFilms
             MessageBox.Show(ex.Message);
           }
 
-          Log.Debug("MyFilms: Setup - Successfully created Desktop Icon for '" + linkName + "'");
+          LogMyFilms.Debug("MyFilms: Setup - Successfully created Desktop Icon for '" + linkName + "'");
           DialogResult dialogResult = MessageBox.Show("Successfully created Desktop Icon for '" + linkName + "'", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
           //WshShellClass shortcut = new WshShellClass())
@@ -3274,7 +3276,7 @@ namespace MesFilms
           //  string icon = app.Replace('\\', '/');
           //  writer.WriteLine("IconFile=" + icon);
           //  writer.Flush();
-          //  Log.Debug("MyFilms: Setup - Successfully created Desktop Icon for '" + linkName + "'");
+          //  LogMyFilms.Debug("MyFilms: Setup - Successfully created Desktop Icon for '" + linkName + "'");
           //  DialogResult dialogResult = MessageBox.Show("Successfully created Desktop Icon for '" + linkName + "'", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
           //}
 

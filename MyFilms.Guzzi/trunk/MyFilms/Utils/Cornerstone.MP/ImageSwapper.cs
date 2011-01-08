@@ -1,6 +1,5 @@
 ﻿namespace MesFilms.MyFilms.Utils.Cornerstone.MP {
   using MediaPortal.GUI.Library;
-
   using NLog;
 
   /// <summary>

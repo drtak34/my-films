@@ -33,6 +33,8 @@ namespace MesFilms
 
   public class BaseMesFilms
     {
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+    
         private static AntMovieCatalog data;
 /*
         private static Dictionary<string, string> dataPath;
@@ -49,7 +51,7 @@ namespace MesFilms
         private static void initData()
         {
             data = new AntMovieCatalog();
-            MediaPortal.ServiceImplementations.Log.Debug("MyFilms: BaseMesFilms - Try reading catalogfile '" + MesFilms.conf.StrFileXml + "'");
+            LogMyFilms.Debug("MyFilms: BaseMesFilms - Try reading catalogfile '" + MesFilms.conf.StrFileXml + "'");
             try
             {
                 data.ReadXml(MesFilms.conf.StrFileXml);
@@ -86,11 +88,11 @@ namespace MesFilms
                 StrSelect = MesFilms.conf.StrTitle1.ToString() + " not like ''";
                 movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
                 //Guzzi
-                Log.Debug("MyFilms - BaseMesFilms:  StrDfltSelect      : '" + StrDfltSelect + "'");
-                Log.Debug("MyFilms - BaseMesFilms:  StrSelect          : '" + StrSelect + "'");
-                Log.Debug("MyFilms - BaseMesFilms:  StrSort            : '" + StrSort + "'");
-                Log.Debug("MyFilms - BaseMesFilms:  StrSortSens        : '" + StrSortSens + "'");
-                Log.Debug("MyFilms - BaseMesFilms:  RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
+                LogMyFilms.Debug("MyFilms - BaseMesFilms:  StrDfltSelect      : '" + StrDfltSelect + "'");
+                LogMyFilms.Debug("MyFilms - BaseMesFilms:  StrSelect          : '" + StrSelect + "'");
+                LogMyFilms.Debug("MyFilms - BaseMesFilms:  StrSort            : '" + StrSort + "'");
+                LogMyFilms.Debug("MyFilms - BaseMesFilms:  StrSortSens        : '" + StrSortSens + "'");
+                LogMyFilms.Debug("MyFilms - BaseMesFilms:  RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
             }
             return movies;
         }
@@ -108,8 +110,8 @@ namespace MesFilms
             }
             catch (Exception e)
             {
-                MediaPortal.GUI.Library.Log.Error("MyFilms : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
-  //              throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
+                LogMyFilms.Error("MyFilms : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
+  //            throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
             }
 
         }

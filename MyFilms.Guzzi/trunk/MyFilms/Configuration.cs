@@ -33,6 +33,8 @@ namespace MesFilms
 
   public class Configuration
     {
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+
         System.ComponentModel.BackgroundWorker bgPictureList = new System.ComponentModel.BackgroundWorker();
         public Configuration(string CurrentConfig, bool create_temp)
         {
@@ -342,13 +344,13 @@ namespace MesFilms
             if (StrFanart)
                 if (!(StrPathFanart.Length > 0 && System.IO.Directory.Exists(StrPathFanart)))
                 {
-                    MediaPortal.GUI.Library.Log.Info("MyFilms : Fanart Path '" + StrPathFanart + "', doesn't exist. Fanart disabled ! ");
+                    LogMyFilms.Info("MyFilms : Fanart Path '" + StrPathFanart + "', doesn't exist. Fanart disabled ! ");
                     StrFanart = false;
                 }
             if (StrArtist)
                 if (!(StrPathArtist.Length > 0 && System.IO.Directory.Exists(StrPathArtist)))
                 {
-                    MediaPortal.GUI.Library.Log.Info("MyFilms : Artist Path '" + StrPathArtist + "', doesn't exist. Artist Pictures disabled ! ");
+                    LogMyFilms.Info("MyFilms : Artist Path '" + StrPathArtist + "', doesn't exist. Artist Pictures disabled ! ");
                     StrArtist = false;
                 }
         }
