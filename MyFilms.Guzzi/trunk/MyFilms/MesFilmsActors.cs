@@ -604,14 +604,9 @@ namespace MesFilms.Actors
             else
             {
                 GUIControl.ShowControl(GetID, 34);
-                //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
-                //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
                 //backdrop.Active = false;
                 MesFilmsDetail.Load_Detailed_PersonInfo("", false);
 
-                // Disabled because replaced by SpeedLoader
-                //ImgLstFilm.SetFileName("#myfilms.picture");
-                //ImgLstFilm2.SetFileName("#myfilms.picture");
                 //affichage_rating(0);
             }
             MesFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count + " " + GUILocalizeStrings.Get(127));

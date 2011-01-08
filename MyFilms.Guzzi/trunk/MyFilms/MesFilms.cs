@@ -83,13 +83,12 @@ namespace MesFilms
             CTRL_BtnSearchT = 4,
             CTRL_BtnOptions = 5,
             CTRL_BtnLayout = 6,
-            //CTRL_BtnChangeDB = 7, Not used, done in options instead!
             //CTRL_TxtSelect = 12,
             CTRL_Fanart = 11,
             CTRL_Fanart2 = 21,
             CTRL_LoadingImage = 22,
             CTRL_Image = 1020,
-            CTRL_Image2 = 1021,
+            CTRL_Image2 = 1021, // Disabled, as one Coverimage should be enough?
             CTRL_List = 1026,
             CTRL_logos_id2001 = 2001,
             CTRL_logos_id2002 = 2002,
@@ -189,7 +188,7 @@ namespace MesFilms
         // Returns the description of the plugin is shown in the plugin menu
         public string Description()
         {
-            return "My Films Ant Movie Catalog - Guzzi Edition";
+            return "My Films Ant Movie Catalog - Guzzi Mod";
         }
 
         // Returns the author of the plugin which is shown in the plugin menu
@@ -3207,7 +3206,13 @@ namespace MesFilms
 
                                 //LogMyFilms.Info("Getting actor:{0}", _imdb[index].Title);
                                 //_imdb.GetActorDetails(_imdb[index], director, out imdbActor);
+
+#if MP11
                                 //_imdb.GetActorDetails(_imdb[index], out imdbActor);
+#else
+                                _imdb.GetActorDetails(_imdb[index], out imdbActor);
+#endif
+
                                 //LogMyFilms.Info("Adding actor:{0}({1}),{2}", imdbActor.Name, actor, percent); // ToDo: Reactivate to add Actorinfos to Database !!!
                                 int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.Name);
                                 if (actorId > 0)
@@ -5580,7 +5585,7 @@ namespace MesFilms
            LogManager.Configuration = config;
        }
 
-        #endregion
+    #endregion
 
        //public void GetActorByName(string strActorName, ArrayList actors)
        //{
