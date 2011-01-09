@@ -159,7 +159,6 @@ namespace MesFilms
           this.label3 = new System.Windows.Forms.Label();
           this.AntLabel1 = new System.Windows.Forms.TextBox();
           this.AntItem1 = new System.Windows.Forms.ComboBox();
-          this.groupBox_DatabaseUpdateOptions = new System.Windows.Forms.GroupBox();
           this.groupBox_AntUpdatingItems = new System.Windows.Forms.GroupBox();
           this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.label33 = new System.Windows.Forms.Label();
@@ -182,21 +181,6 @@ namespace MesFilms
           this.rbsuppress3 = new System.Windows.Forms.RadioButton();
           this.rbsuppress1 = new System.Windows.Forms.RadioButton();
           this.chkSuppress = new System.Windows.Forms.CheckBox();
-          this.groupBox_Separators = new System.Windows.Forms.GroupBox();
-          this.label25 = new System.Windows.Forms.Label();
-          this.label23 = new System.Windows.Forms.Label();
-          this.RoleSeparator5 = new System.Windows.Forms.ComboBox();
-          this.RoleSeparator4 = new System.Windows.Forms.ComboBox();
-          this.ListSeparator5 = new System.Windows.Forms.ComboBox();
-          this.ListSeparator4 = new System.Windows.Forms.ComboBox();
-          this.ListSeparator3 = new System.Windows.Forms.ComboBox();
-          this.ListSeparator2 = new System.Windows.Forms.ComboBox();
-          this.RoleSeparator2 = new System.Windows.Forms.ComboBox();
-          this.RoleSeparator3 = new System.Windows.Forms.ComboBox();
-          this.label22 = new System.Windows.Forms.Label();
-          this.RoleSeparator1 = new System.Windows.Forms.ComboBox();
-          this.label24 = new System.Windows.Forms.Label();
-          this.ListSeparator1 = new System.Windows.Forms.ComboBox();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.radioButton2 = new System.Windows.Forms.CheckBox();
           this.radioButton1 = new System.Windows.Forms.CheckBox();
@@ -249,15 +233,6 @@ namespace MesFilms
           this.chkDfltViews = new System.Windows.Forms.CheckBox();
           this.label29 = new System.Windows.Forms.Label();
           this.MesFilmsViews = new System.Windows.Forms.TextBox();
-          this.groupBox_SupplementarySearch = new System.Windows.Forms.GroupBox();
-          this.AntSearchFieldReset = new System.Windows.Forms.Button();
-          this.label18 = new System.Windows.Forms.Label();
-          this.AntSearchList = new System.Windows.Forms.TextBox();
-          this.AntSearchItem2 = new System.Windows.Forms.ComboBox();
-          this.AntSearchField = new System.Windows.Forms.ComboBox();
-          this.AntSearchText2 = new System.Windows.Forms.TextBox();
-          this.AntSearchItem1 = new System.Windows.Forms.ComboBox();
-          this.AntSearchText1 = new System.Windows.Forms.TextBox();
           this.groupBox23 = new System.Windows.Forms.GroupBox();
           this.label19 = new System.Windows.Forms.Label();
           this.SearchSubDirsTrailer = new System.Windows.Forms.CheckBox();
@@ -297,7 +272,6 @@ namespace MesFilms
           this.label_VersionNumber = new System.Windows.Forms.Label();
           this.DefaultCover = new System.Windows.Forms.TextBox();
           this.MesFilmsImg = new System.Windows.Forms.TextBox();
-          this.CheckWatched = new System.Windows.Forms.CheckBox();
           this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
           this.MesFilmsImgArtist = new System.Windows.Forms.TextBox();
           this.groupBox_PreLaunchingCommand = new System.Windows.Forms.GroupBox();
@@ -312,7 +286,6 @@ namespace MesFilms
           this.ButImgArtist = new System.Windows.Forms.Button();
           this.label_DefaultArtistImage = new System.Windows.Forms.Label();
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
-          this.checkWatchedInProfile = new System.Windows.Forms.CheckBox();
           this.ButCopy = new System.Windows.Forms.Button();
           this.btnCreateAMCDesktopIcon = new System.Windows.Forms.Button();
           this.AMCMovieScanPath = new System.Windows.Forms.TextBox();
@@ -346,9 +319,6 @@ namespace MesFilms
           this.label15 = new System.Windows.Forms.Label();
           this.Rpt_Dwp = new System.Windows.Forms.TextBox();
           this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
-          this.groupBox2 = new System.Windows.Forms.GroupBox();
-          this.Label_UserProfileName = new System.Windows.Forms.Label();
-          this.UserProfileName = new System.Windows.Forms.TextBox();
           this.AntIdentLabel = new System.Windows.Forms.TextBox();
           this.butPath = new System.Windows.Forms.Button();
           this.label5 = new System.Windows.Forms.Label();
@@ -363,8 +333,10 @@ namespace MesFilms
           this.label8 = new System.Windows.Forms.Label();
           this.ButCat = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
-          this.Tab_Optional1 = new System.Windows.Forms.TabPage();
-          this.Tab_Optional2 = new System.Windows.Forms.TabPage();
+          this.Tab_Trailer = new System.Windows.Forms.TabPage();
+          this.Tab_Views = new System.Windows.Forms.TabPage();
+          this.Tab_Update = new System.Windows.Forms.TabPage();
+          this.Tab_Grabber = new System.Windows.Forms.TabPage();
           this.Tab_Artwork = new System.Windows.Forms.TabPage();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
           this.ButDefCov = new System.Windows.Forms.Button();
@@ -399,8 +371,6 @@ namespace MesFilms
           this.SField1 = new System.Windows.Forms.ComboBox();
           this.textBox3 = new System.Windows.Forms.TextBox();
           this.SPicture = new System.Windows.Forms.PictureBox();
-          this.Tab_Grabber = new System.Windows.Forms.TabPage();
-          this.Tab_TrailerOptions = new System.Windows.Forms.TabPage();
           this.Tab_WakeOnLan = new System.Windows.Forms.TabPage();
           this.Tab_DVDprofilerMovieCollector = new System.Windows.Forms.TabPage();
           this.groupBox_MovieCollector = new System.Windows.Forms.GroupBox();
@@ -419,22 +389,55 @@ namespace MesFilms
           this.comboBox2 = new System.Windows.Forms.ComboBox();
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
+          this.Tab_Search = new System.Windows.Forms.TabPage();
+          this.groupBox_Separators = new System.Windows.Forms.GroupBox();
+          this.label25 = new System.Windows.Forms.Label();
+          this.label23 = new System.Windows.Forms.Label();
+          this.RoleSeparator5 = new System.Windows.Forms.ComboBox();
+          this.RoleSeparator4 = new System.Windows.Forms.ComboBox();
+          this.ListSeparator5 = new System.Windows.Forms.ComboBox();
+          this.ListSeparator4 = new System.Windows.Forms.ComboBox();
+          this.ListSeparator3 = new System.Windows.Forms.ComboBox();
+          this.ListSeparator2 = new System.Windows.Forms.ComboBox();
+          this.RoleSeparator2 = new System.Windows.Forms.ComboBox();
+          this.RoleSeparator3 = new System.Windows.Forms.ComboBox();
+          this.label22 = new System.Windows.Forms.Label();
+          this.RoleSeparator1 = new System.Windows.Forms.ComboBox();
+          this.label24 = new System.Windows.Forms.Label();
+          this.ListSeparator1 = new System.Windows.Forms.ComboBox();
+          this.groupBox_SupplementarySearch = new System.Windows.Forms.GroupBox();
+          this.AntSearchFieldReset = new System.Windows.Forms.Button();
+          this.label18 = new System.Windows.Forms.Label();
+          this.AntSearchList = new System.Windows.Forms.TextBox();
+          this.AntSearchItem2 = new System.Windows.Forms.ComboBox();
+          this.AntSearchField = new System.Windows.Forms.ComboBox();
+          this.AntSearchText2 = new System.Windows.Forms.TextBox();
+          this.AntSearchItem1 = new System.Windows.Forms.ComboBox();
+          this.AntSearchText1 = new System.Windows.Forms.TextBox();
+          this.groupBoxUpdateByProperties = new System.Windows.Forms.GroupBox();
+          this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
+          this.lblUpdateValue = new System.Windows.Forms.Label();
+          this.groupBoxSearchByProperties = new System.Windows.Forms.GroupBox();
+          this.lblUserdefinedSearchItems = new System.Windows.Forms.Label();
+          this.groupBox2 = new System.Windows.Forms.GroupBox();
+          this.Label_UserProfileName = new System.Windows.Forms.Label();
+          this.UserProfileName = new System.Windows.Forms.TextBox();
+          this.checkWatchedInProfile = new System.Windows.Forms.CheckBox();
+          this.CheckWatched = new System.Windows.Forms.CheckBox();
+          this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
           this.groupBox_SupplementaryView.SuspendLayout();
           this.groupBox_DetailedSupplementaryInformations.SuspendLayout();
-          this.groupBox_DatabaseUpdateOptions.SuspendLayout();
           this.groupBox_AntUpdatingItems.SuspendLayout();
           this.gpspfield.SuspendLayout();
           this.gpsuppress.SuspendLayout();
-          this.groupBox_Separators.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox20.SuspendLayout();
           this.groupBox_GrabberOptions.SuspendLayout();
           this.Fanart.SuspendLayout();
           this.groupBox22.SuspendLayout();
-          this.groupBox_SupplementarySearch.SuspendLayout();
           this.groupBox23.SuspendLayout();
           this.groupBox24.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -445,16 +448,15 @@ namespace MesFilms
           this.Tab_General.SuspendLayout();
           this.groupBox_Security.SuspendLayout();
           this.groupBox_PlayMovieInfos.SuspendLayout();
-          this.groupBox2.SuspendLayout();
           this.groupBox_TitleOrder.SuspendLayout();
-          this.Tab_Optional1.SuspendLayout();
-          this.Tab_Optional2.SuspendLayout();
+          this.Tab_Trailer.SuspendLayout();
+          this.Tab_Views.SuspendLayout();
+          this.Tab_Update.SuspendLayout();
+          this.Tab_Grabber.SuspendLayout();
           this.Tab_Artwork.SuspendLayout();
           this.groupBox1.SuspendLayout();
           this.Tab_Logos.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
-          this.Tab_Grabber.SuspendLayout();
-          this.Tab_TrailerOptions.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
           this.Tab_DVDprofilerMovieCollector.SuspendLayout();
           this.groupBox_MovieCollector.SuspendLayout();
@@ -463,6 +465,14 @@ namespace MesFilms
           this.groupBox13.SuspendLayout();
           this.groupBox10.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+          this.Tab_Search.SuspendLayout();
+          this.groupBox_Separators.SuspendLayout();
+          this.groupBox_SupplementarySearch.SuspendLayout();
+          this.groupBoxUpdateByProperties.SuspendLayout();
+          this.groupBoxDeletionOptions.SuspendLayout();
+          this.groupBoxSearchByProperties.SuspendLayout();
+          this.groupBox2.SuspendLayout();
+          this.groupBoxMoviePathInfos.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -473,6 +483,7 @@ namespace MesFilms
           // 
           // Config_Name
           // 
+          this.Config_Name.BackColor = System.Drawing.SystemColors.Info;
           this.Config_Name.FormattingEnabled = true;
           this.Config_Name.Location = new System.Drawing.Point(195, 39);
           this.Config_Name.Name = "Config_Name";
@@ -494,10 +505,10 @@ namespace MesFilms
           // 
           // Dwp
           // 
-          this.Dwp.Location = new System.Drawing.Point(104, 43);
+          this.Dwp.Location = new System.Drawing.Point(85, 43);
           this.Dwp.Name = "Dwp";
           this.Dwp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-          this.Dwp.Size = new System.Drawing.Size(164, 20);
+          this.Dwp.Size = new System.Drawing.Size(183, 20);
           this.Dwp.TabIndex = 69;
           this.ToolTip1.SetToolTip(this.Dwp, "Enter a password here if you wish to restrict access (from children, for example)" +
                   " \r\nto this particular configuration.  \r\nThe password must be repeated in the sec" +
@@ -507,7 +518,7 @@ namespace MesFilms
           // SearchSubDirs
           // 
           this.SearchSubDirs.AutoSize = true;
-          this.SearchSubDirs.Location = new System.Drawing.Point(506, 73);
+          this.SearchSubDirs.Location = new System.Drawing.Point(21, 68);
           this.SearchSubDirs.Name = "SearchSubDirs";
           this.SearchSubDirs.Size = new System.Drawing.Size(130, 17);
           this.SearchSubDirs.TabIndex = 68;
@@ -518,7 +529,7 @@ namespace MesFilms
           // 
           // PathStorage
           // 
-          this.PathStorage.Location = new System.Drawing.Point(172, 44);
+          this.PathStorage.Location = new System.Drawing.Point(166, 14);
           this.PathStorage.Name = "PathStorage";
           this.PathStorage.Size = new System.Drawing.Size(268, 20);
           this.PathStorage.TabIndex = 54;
@@ -527,10 +538,11 @@ namespace MesFilms
           // 
           // AntStorage
           // 
+          this.AntStorage.BackColor = System.Drawing.SystemColors.Info;
           this.AntStorage.FormattingEnabled = true;
           this.AntStorage.Location = new System.Drawing.Point(172, 16);
           this.AntStorage.Name = "AntStorage";
-          this.AntStorage.Size = new System.Drawing.Size(307, 21);
+          this.AntStorage.Size = new System.Drawing.Size(222, 21);
           this.AntStorage.TabIndex = 53;
           this.ToolTip1.SetToolTip(this.AntStorage, resources.GetString("AntStorage.ToolTip"));
           // 
@@ -545,18 +557,19 @@ namespace MesFilms
             "MyMovies",
             "Eax Movie Catalog",
             "eXtreme Movie Manager (V7.1.0.2)"});
-          this.CatalogType.Location = new System.Drawing.Point(548, 14);
+          this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
-          this.CatalogType.Size = new System.Drawing.Size(164, 21);
+          this.CatalogType.Size = new System.Drawing.Size(195, 21);
           this.CatalogType.TabIndex = 62;
           this.ToolTip1.SetToolTip(this.CatalogType, resources.GetString("CatalogType.ToolTip"));
           this.CatalogType.SelectedIndexChanged += new System.EventHandler(this.CatalogType_SelectedIndexChanged);
           // 
           // MesFilmsCat
           // 
-          this.MesFilmsCat.Location = new System.Drawing.Point(116, 15);
+          this.MesFilmsCat.BackColor = System.Drawing.SystemColors.Info;
+          this.MesFilmsCat.Location = new System.Drawing.Point(113, 15);
           this.MesFilmsCat.Name = "MesFilmsCat";
-          this.MesFilmsCat.Size = new System.Drawing.Size(285, 20);
+          this.MesFilmsCat.Size = new System.Drawing.Size(288, 20);
           this.MesFilmsCat.TabIndex = 48;
           this.ToolTip1.SetToolTip(this.MesFilmsCat, "Enter the full path and name of your AMC xml database file.\r\nYou can use the brow" +
                   "se button to find the file");
@@ -574,7 +587,7 @@ namespace MesFilms
           this.groupBox_SortByItem.Size = new System.Drawing.Size(370, 77);
           this.groupBox_SortByItem.TabIndex = 29;
           this.groupBox_SortByItem.TabStop = false;
-          this.groupBox_SortByItem.Text = "Sort by Item";
+          this.groupBox_SortByItem.Text = "User defined Sort Item";
           this.ToolTip1.SetToolTip(this.groupBox_SortByItem, resources.GetString("groupBox_SortByItem.ToolTip"));
           // 
           // AntSort2
@@ -628,7 +641,7 @@ namespace MesFilms
           this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(370, 117);
           this.groupBox_AntSelectedEnreg.TabIndex = 27;
           this.groupBox_AntSelectedEnreg.TabStop = false;
-          this.groupBox_AntSelectedEnreg.Text = "Ant User defined Filters";
+          this.groupBox_AntSelectedEnreg.Text = "User defined Filters";
           this.ToolTip1.SetToolTip(this.groupBox_AntSelectedEnreg, resources.GetString("groupBox_AntSelectedEnreg.ToolTip"));
           this.groupBox_AntSelectedEnreg.Leave += new System.EventHandler(this.Selected_Enreg_Changed);
           // 
@@ -733,9 +746,9 @@ namespace MesFilms
           this.groupBox_DefaultView.Controls.Add(this.LayOut);
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Item);
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Text);
-          this.groupBox_DefaultView.Location = new System.Drawing.Point(9, 169);
+          this.groupBox_DefaultView.Location = new System.Drawing.Point(9, 6);
           this.groupBox_DefaultView.Name = "groupBox_DefaultView";
-          this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 179);
+          this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 164);
           this.groupBox_DefaultView.TabIndex = 26;
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
@@ -744,7 +757,7 @@ namespace MesFilms
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 135);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 128);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(299, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -860,12 +873,12 @@ namespace MesFilms
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewText1);
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewItem2);
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewItem1);
-          this.groupBox_SupplementaryView.Location = new System.Drawing.Point(9, 6);
+          this.groupBox_SupplementaryView.Location = new System.Drawing.Point(9, 191);
           this.groupBox_SupplementaryView.Name = "groupBox_SupplementaryView";
           this.groupBox_SupplementaryView.Size = new System.Drawing.Size(347, 157);
           this.groupBox_SupplementaryView.TabIndex = 24;
           this.groupBox_SupplementaryView.TabStop = false;
-          this.groupBox_SupplementaryView.Text = "Supplementary View";
+          this.groupBox_SupplementaryView.Text = "User defined Views";
           this.ToolTip1.SetToolTip(this.groupBox_SupplementaryView, resources.GetString("groupBox_SupplementaryView.ToolTip"));
           // 
           // AntViewValue5
@@ -1005,7 +1018,7 @@ namespace MesFilms
           this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(370, 136);
           this.groupBox_DetailedSupplementaryInformations.TabIndex = 22;
           this.groupBox_DetailedSupplementaryInformations.TabStop = false;
-          this.groupBox_DetailedSupplementaryInformations.Text = "Detailed Supplementary Information";
+          this.groupBox_DetailedSupplementaryInformations.Text = "User defined Display Items";
           this.ToolTip1.SetToolTip(this.groupBox_DetailedSupplementaryInformations, resources.GetString("groupBox_DetailedSupplementaryInformations.ToolTip"));
           // 
           // AntLabel3
@@ -1053,9 +1066,9 @@ namespace MesFilms
           this.label7.AutoSize = true;
           this.label7.Location = new System.Drawing.Point(182, 17);
           this.label7.Name = "label7";
-          this.label7.Size = new System.Drawing.Size(113, 13);
+          this.label7.Size = new System.Drawing.Size(94, 13);
           this.label7.TabIndex = 22;
-          this.label7.Text = "Ant DB Item to Display";
+          this.label7.Text = "DB Item to Display";
           // 
           // label3
           // 
@@ -1083,27 +1096,8 @@ namespace MesFilms
           this.AntItem1.Sorted = true;
           this.AntItem1.TabIndex = 26;
           // 
-          // groupBox_DatabaseUpdateOptions
-          // 
-          this.groupBox_DatabaseUpdateOptions.Controls.Add(this.groupBox_AntUpdatingItems);
-          this.groupBox_DatabaseUpdateOptions.Controls.Add(this.chksupplaystop);
-          this.groupBox_DatabaseUpdateOptions.Controls.Add(this.gpspfield);
-          this.groupBox_DatabaseUpdateOptions.Controls.Add(this.gpsuppress);
-          this.groupBox_DatabaseUpdateOptions.Controls.Add(this.chkSuppress);
-          this.groupBox_DatabaseUpdateOptions.Location = new System.Drawing.Point(11, 6);
-          this.groupBox_DatabaseUpdateOptions.Name = "groupBox_DatabaseUpdateOptions";
-          this.groupBox_DatabaseUpdateOptions.Size = new System.Drawing.Size(370, 342);
-          this.groupBox_DatabaseUpdateOptions.TabIndex = 32;
-          this.groupBox_DatabaseUpdateOptions.TabStop = false;
-          this.groupBox_DatabaseUpdateOptions.Text = "Database update options";
-          this.ToolTip1.SetToolTip(this.groupBox_DatabaseUpdateOptions, resources.GetString("groupBox_DatabaseUpdateOptions.ToolTip"));
-          // 
           // groupBox_AntUpdatingItems
           // 
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdFieldReset);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.label33);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdList);
-          this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdField);
           this.groupBox_AntUpdatingItems.Controls.Add(this.chkWindowsFileDialog);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT2);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT1);
@@ -1111,17 +1105,17 @@ namespace MesFilms
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText2);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdItem1);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText1);
-          this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(9, 164);
+          this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(17, 6);
           this.groupBox_AntUpdatingItems.Name = "groupBox_AntUpdatingItems";
-          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(354, 168);
+          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(354, 89);
           this.groupBox_AntUpdatingItems.TabIndex = 33;
           this.groupBox_AntUpdatingItems.TabStop = false;
-          this.groupBox_AntUpdatingItems.Text = "Ant Updating Items.";
+          this.groupBox_AntUpdatingItems.Text = "Userdefined Updating Items";
           this.ToolTip1.SetToolTip(this.groupBox_AntUpdatingItems, resources.GetString("groupBox_AntUpdatingItems.ToolTip"));
           // 
           // AntUpdFieldReset
           // 
-          this.AntUpdFieldReset.Location = new System.Drawing.Point(297, 115);
+          this.AntUpdFieldReset.Location = new System.Drawing.Point(639, 23);
           this.AntUpdFieldReset.Name = "AntUpdFieldReset";
           this.AntUpdFieldReset.Size = new System.Drawing.Size(51, 21);
           this.AntUpdFieldReset.TabIndex = 84;
@@ -1133,7 +1127,7 @@ namespace MesFilms
           // label33
           // 
           this.label33.AutoSize = true;
-          this.label33.Location = new System.Drawing.Point(7, 118);
+          this.label33.Location = new System.Drawing.Point(12, 26);
           this.label33.Name = "label33";
           this.label33.Size = new System.Drawing.Size(153, 13);
           this.label33.TabIndex = 83;
@@ -1142,24 +1136,24 @@ namespace MesFilms
           // AntUpdList
           // 
           this.AntUpdList.BackColor = System.Drawing.SystemColors.Control;
-          this.AntUpdList.Location = new System.Drawing.Point(10, 142);
+          this.AntUpdList.Location = new System.Drawing.Point(15, 59);
           this.AntUpdList.Name = "AntUpdList";
-          this.AntUpdList.Size = new System.Drawing.Size(338, 20);
+          this.AntUpdList.Size = new System.Drawing.Size(675, 20);
           this.AntUpdList.TabIndex = 82;
           // 
           // AntUpdField
           // 
           this.AntUpdField.FormattingEnabled = true;
-          this.AntUpdField.Location = new System.Drawing.Point(166, 115);
+          this.AntUpdField.Location = new System.Drawing.Point(171, 23);
           this.AntUpdField.Name = "AntUpdField";
-          this.AntUpdField.Size = new System.Drawing.Size(113, 21);
+          this.AntUpdField.Size = new System.Drawing.Size(151, 21);
           this.AntUpdField.TabIndex = 81;
           this.AntUpdField.SelectedIndexChanged += new System.EventHandler(this.AntUpdField_SelectedIndexChanged);
           // 
           // chkWindowsFileDialog
           // 
           this.chkWindowsFileDialog.AutoSize = true;
-          this.chkWindowsFileDialog.Location = new System.Drawing.Point(10, 80);
+          this.chkWindowsFileDialog.Location = new System.Drawing.Point(10, 68);
           this.chkWindowsFileDialog.Name = "chkWindowsFileDialog";
           this.chkWindowsFileDialog.Size = new System.Drawing.Size(299, 17);
           this.chkWindowsFileDialog.TabIndex = 77;
@@ -1214,39 +1208,41 @@ namespace MesFilms
           // 
           this.chksupplaystop.AutoSize = true;
           this.chksupplaystop.Enabled = false;
-          this.chksupplaystop.Location = new System.Drawing.Point(245, 41);
+          this.chksupplaystop.Location = new System.Drawing.Point(10, 25);
           this.chksupplaystop.Name = "chksupplaystop";
-          this.chksupplaystop.Size = new System.Drawing.Size(93, 30);
+          this.chksupplaystop.Size = new System.Drawing.Size(184, 17);
           this.chksupplaystop.TabIndex = 19;
-          this.chksupplaystop.Text = "use it when \r\nplayer finished";
+          this.chksupplaystop.Text = "Update Field when player finishes";
           this.chksupplaystop.UseVisualStyleBackColor = true;
           this.chksupplaystop.CheckedChanged += new System.EventHandler(this.chksupplaystop_CheckedChanged);
           // 
           // gpspfield
           // 
+          this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Controls.Add(this.txtfdupdate);
           this.gpspfield.Controls.Add(this.cbfdupdate);
+          this.gpspfield.Controls.Add(this.chksupplaystop);
           this.gpspfield.Enabled = false;
-          this.gpspfield.Location = new System.Drawing.Point(230, 86);
+          this.gpspfield.Location = new System.Drawing.Point(381, 6);
           this.gpspfield.Name = "gpspfield";
-          this.gpspfield.Size = new System.Drawing.Size(133, 71);
+          this.gpspfield.Size = new System.Drawing.Size(360, 100);
           this.gpspfield.TabIndex = 18;
           this.gpspfield.TabStop = false;
-          this.gpspfield.Text = "Field to update/Value";
+          this.gpspfield.Text = "Player finished Update Action";
           // 
           // txtfdupdate
           // 
-          this.txtfdupdate.Location = new System.Drawing.Point(15, 45);
+          this.txtfdupdate.Location = new System.Drawing.Point(202, 69);
           this.txtfdupdate.Name = "txtfdupdate";
-          this.txtfdupdate.Size = new System.Drawing.Size(110, 20);
+          this.txtfdupdate.Size = new System.Drawing.Size(144, 20);
           this.txtfdupdate.TabIndex = 16;
           // 
           // cbfdupdate
           // 
           this.cbfdupdate.FormattingEnabled = true;
-          this.cbfdupdate.Location = new System.Drawing.Point(15, 18);
+          this.cbfdupdate.Location = new System.Drawing.Point(10, 68);
           this.cbfdupdate.Name = "cbfdupdate";
-          this.cbfdupdate.Size = new System.Drawing.Size(110, 21);
+          this.cbfdupdate.Size = new System.Drawing.Size(150, 21);
           this.cbfdupdate.TabIndex = 15;
           this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
           // 
@@ -1257,16 +1253,16 @@ namespace MesFilms
           this.gpsuppress.Controls.Add(this.rbsuppress3);
           this.gpsuppress.Controls.Add(this.rbsuppress1);
           this.gpsuppress.Enabled = false;
-          this.gpsuppress.Location = new System.Drawing.Point(10, 41);
+          this.gpsuppress.Location = new System.Drawing.Point(15, 30);
           this.gpsuppress.Name = "gpsuppress";
-          this.gpsuppress.Size = new System.Drawing.Size(213, 117);
+          this.gpsuppress.Size = new System.Drawing.Size(321, 106);
           this.gpsuppress.TabIndex = 2;
           this.gpsuppress.TabStop = false;
           // 
           // rbsuppress2
           // 
           this.rbsuppress2.AutoSize = true;
-          this.rbsuppress2.Location = new System.Drawing.Point(15, 41);
+          this.rbsuppress2.Location = new System.Drawing.Point(15, 35);
           this.rbsuppress2.Name = "rbsuppress2";
           this.rbsuppress2.Size = new System.Drawing.Size(189, 17);
           this.rbsuppress2.TabIndex = 5;
@@ -1277,7 +1273,7 @@ namespace MesFilms
           // rbsuppress4
           // 
           this.rbsuppress4.AutoSize = true;
-          this.rbsuppress4.Location = new System.Drawing.Point(15, 87);
+          this.rbsuppress4.Location = new System.Drawing.Point(15, 81);
           this.rbsuppress4.Name = "rbsuppress4";
           this.rbsuppress4.Size = new System.Drawing.Size(201, 17);
           this.rbsuppress4.TabIndex = 4;
@@ -1289,7 +1285,7 @@ namespace MesFilms
           // rbsuppress3
           // 
           this.rbsuppress3.AutoSize = true;
-          this.rbsuppress3.Location = new System.Drawing.Point(15, 64);
+          this.rbsuppress3.Location = new System.Drawing.Point(15, 58);
           this.rbsuppress3.Name = "rbsuppress3";
           this.rbsuppress3.Size = new System.Drawing.Size(196, 17);
           this.rbsuppress3.TabIndex = 2;
@@ -1301,7 +1297,7 @@ namespace MesFilms
           // rbsuppress1
           // 
           this.rbsuppress1.AutoSize = true;
-          this.rbsuppress1.Location = new System.Drawing.Point(15, 19);
+          this.rbsuppress1.Location = new System.Drawing.Point(15, 12);
           this.rbsuppress1.Name = "rbsuppress1";
           this.rbsuppress1.Size = new System.Drawing.Size(119, 17);
           this.rbsuppress1.TabIndex = 1;
@@ -1312,210 +1308,13 @@ namespace MesFilms
           // chkSuppress
           // 
           this.chkSuppress.AutoSize = true;
-          this.chkSuppress.Location = new System.Drawing.Point(10, 19);
+          this.chkSuppress.Location = new System.Drawing.Point(10, 16);
           this.chkSuppress.Name = "chkSuppress";
           this.chkSuppress.Size = new System.Drawing.Size(183, 17);
           this.chkSuppress.TabIndex = 0;
           this.chkSuppress.Text = "Enable database deletion options";
           this.chkSuppress.UseVisualStyleBackColor = true;
           this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
-          // 
-          // groupBox_Separators
-          // 
-          this.groupBox_Separators.Controls.Add(this.label25);
-          this.groupBox_Separators.Controls.Add(this.label23);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator5);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator4);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator5);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator4);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator3);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator2);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator2);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator3);
-          this.groupBox_Separators.Controls.Add(this.label22);
-          this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
-          this.groupBox_Separators.Controls.Add(this.label24);
-          this.groupBox_Separators.Controls.Add(this.ListSeparator1);
-          this.groupBox_Separators.Location = new System.Drawing.Point(391, 6);
-          this.groupBox_Separators.Name = "groupBox_Separators";
-          this.groupBox_Separators.Size = new System.Drawing.Size(350, 125);
-          this.groupBox_Separators.TabIndex = 27;
-          this.groupBox_Separators.TabStop = false;
-          this.groupBox_Separators.Text = "Separators";
-          this.ToolTip1.SetToolTip(this.groupBox_Separators, resources.GetString("groupBox_Separators.ToolTip"));
-          // 
-          // label25
-          // 
-          this.label25.AutoSize = true;
-          this.label25.Location = new System.Drawing.Point(18, 91);
-          this.label25.Name = "label25";
-          this.label25.Size = new System.Drawing.Size(87, 13);
-          this.label25.TabIndex = 84;
-          this.label25.Text = "for Actors search";
-          // 
-          // label23
-          // 
-          this.label23.Location = new System.Drawing.Point(18, 41);
-          this.label23.Name = "label23";
-          this.label23.Size = new System.Drawing.Size(100, 26);
-          this.label23.TabIndex = 83;
-          this.label23.Text = "for Genre, Country and Actors views";
-          // 
-          // RoleSeparator5
-          // 
-          this.RoleSeparator5.FormattingEnabled = true;
-          this.RoleSeparator5.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            "....",
-            ")"});
-          this.RoleSeparator5.Location = new System.Drawing.Point(306, 78);
-          this.RoleSeparator5.Name = "RoleSeparator5";
-          this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator5.TabIndex = 82;
-          this.RoleSeparator5.Text = "List";
-          // 
-          // RoleSeparator4
-          // 
-          this.RoleSeparator4.FormattingEnabled = true;
-          this.RoleSeparator4.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            "....",
-            ")"});
-          this.RoleSeparator4.Location = new System.Drawing.Point(260, 78);
-          this.RoleSeparator4.Name = "RoleSeparator4";
-          this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator4.TabIndex = 81;
-          this.RoleSeparator4.Text = "List";
-          // 
-          // ListSeparator5
-          // 
-          this.ListSeparator5.FormattingEnabled = true;
-          this.ListSeparator5.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator5.Location = new System.Drawing.Point(306, 28);
-          this.ListSeparator5.Name = "ListSeparator5";
-          this.ListSeparator5.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator5.TabIndex = 80;
-          this.ListSeparator5.Text = "List";
-          // 
-          // ListSeparator4
-          // 
-          this.ListSeparator4.FormattingEnabled = true;
-          this.ListSeparator4.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator4.Location = new System.Drawing.Point(260, 28);
-          this.ListSeparator4.Name = "ListSeparator4";
-          this.ListSeparator4.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator4.TabIndex = 79;
-          this.ListSeparator4.Text = "List";
-          // 
-          // ListSeparator3
-          // 
-          this.ListSeparator3.FormattingEnabled = true;
-          this.ListSeparator3.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator3.Location = new System.Drawing.Point(214, 28);
-          this.ListSeparator3.Name = "ListSeparator3";
-          this.ListSeparator3.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator3.TabIndex = 78;
-          this.ListSeparator3.Text = "List";
-          // 
-          // ListSeparator2
-          // 
-          this.ListSeparator2.FormattingEnabled = true;
-          this.ListSeparator2.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator2.Location = new System.Drawing.Point(168, 28);
-          this.ListSeparator2.Name = "ListSeparator2";
-          this.ListSeparator2.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator2.TabIndex = 77;
-          this.ListSeparator2.Text = "List";
-          // 
-          // RoleSeparator2
-          // 
-          this.RoleSeparator2.FormattingEnabled = true;
-          this.RoleSeparator2.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            ")",
-            "...."});
-          this.RoleSeparator2.Location = new System.Drawing.Point(168, 78);
-          this.RoleSeparator2.Name = "RoleSeparator2";
-          this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator2.Sorted = true;
-          this.RoleSeparator2.TabIndex = 76;
-          this.RoleSeparator2.Text = "List";
-          // 
-          // RoleSeparator3
-          // 
-          this.RoleSeparator3.FormattingEnabled = true;
-          this.RoleSeparator3.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            ")",
-            "...."});
-          this.RoleSeparator3.Location = new System.Drawing.Point(214, 78);
-          this.RoleSeparator3.Name = "RoleSeparator3";
-          this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator3.Sorted = true;
-          this.RoleSeparator3.TabIndex = 75;
-          this.RoleSeparator3.Text = "List";
-          // 
-          // label22
-          // 
-          this.label22.AutoSize = true;
-          this.label22.Location = new System.Drawing.Point(9, 78);
-          this.label22.Name = "label22";
-          this.label22.Size = new System.Drawing.Size(107, 13);
-          this.label22.TabIndex = 74;
-          this.label22.Text = "Role Text Separators";
-          // 
-          // RoleSeparator1
-          // 
-          this.RoleSeparator1.FormattingEnabled = true;
-          this.RoleSeparator1.Items.AddRange(new object[] {
-            " as ",
-            "(",
-            ")",
-            "...."});
-          this.RoleSeparator1.Location = new System.Drawing.Point(122, 78);
-          this.RoleSeparator1.Name = "RoleSeparator1";
-          this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
-          this.RoleSeparator1.Sorted = true;
-          this.RoleSeparator1.TabIndex = 73;
-          this.RoleSeparator1.Text = "List";
-          // 
-          // label24
-          // 
-          this.label24.AutoSize = true;
-          this.label24.Location = new System.Drawing.Point(9, 28);
-          this.label24.Name = "label24";
-          this.label24.Size = new System.Drawing.Size(72, 13);
-          this.label24.TabIndex = 71;
-          this.label24.Text = "List Separator";
-          // 
-          // ListSeparator1
-          // 
-          this.ListSeparator1.FormattingEnabled = true;
-          this.ListSeparator1.Items.AddRange(new object[] {
-            ",",
-            ";",
-            "|"});
-          this.ListSeparator1.Location = new System.Drawing.Point(122, 28);
-          this.ListSeparator1.Name = "ListSeparator1";
-          this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
-          this.ListSeparator1.TabIndex = 70;
-          this.ListSeparator1.Text = "List";
           // 
           // groupBox9
           // 
@@ -1952,11 +1751,11 @@ namespace MesFilms
           // SearchFileName
           // 
           this.SearchFileName.AutoSize = true;
-          this.SearchFileName.Location = new System.Drawing.Point(506, 39);
+          this.SearchFileName.Location = new System.Drawing.Point(9, 45);
           this.SearchFileName.Name = "SearchFileName";
-          this.SearchFileName.Size = new System.Drawing.Size(93, 30);
+          this.SearchFileName.Size = new System.Drawing.Size(144, 17);
           this.SearchFileName.TabIndex = 66;
-          this.SearchFileName.Text = "Search by \r\nMovie\'s Name";
+          this.SearchFileName.Text = "Search by Movie\'s Name";
           this.ToolTip1.SetToolTip(this.SearchFileName, "If file is not found with the \'Ant Item for Storage Info\' field, you \r\ncan search" +
                   " the file with the movie Name.\r\nValidate that option for it and give the Title u" +
                   "sed for the search.\r\n");
@@ -1965,7 +1764,7 @@ namespace MesFilms
           // AntIdentItem
           // 
           this.AntIdentItem.FormattingEnabled = true;
-          this.AntIdentItem.Location = new System.Drawing.Point(172, 70);
+          this.AntIdentItem.Location = new System.Drawing.Point(172, 158);
           this.AntIdentItem.Name = "AntIdentItem";
           this.AntIdentItem.Size = new System.Drawing.Size(157, 21);
           this.AntIdentItem.TabIndex = 56;
@@ -2002,6 +1801,7 @@ namespace MesFilms
           // 
           // AntTitle1
           // 
+          this.AntTitle1.BackColor = System.Drawing.SystemColors.Info;
           this.AntTitle1.FormattingEnabled = true;
           this.AntTitle1.Items.AddRange(new object[] {
             "OriginalTitle",
@@ -2087,91 +1887,6 @@ namespace MesFilms
           this.MesFilmsViews.Size = new System.Drawing.Size(315, 20);
           this.MesFilmsViews.TabIndex = 72;
           // 
-          // groupBox_SupplementarySearch
-          // 
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchFieldReset);
-          this.groupBox_SupplementarySearch.Controls.Add(this.label18);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchList);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem2);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchField);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText2);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem1);
-          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText1);
-          this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(391, 170);
-          this.groupBox_SupplementarySearch.Name = "groupBox_SupplementarySearch";
-          this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(350, 178);
-          this.groupBox_SupplementarySearch.TabIndex = 33;
-          this.groupBox_SupplementarySearch.TabStop = false;
-          this.groupBox_SupplementarySearch.Text = "Supplementary Search";
-          this.ToolTip1.SetToolTip(this.groupBox_SupplementarySearch, resources.GetString("groupBox_SupplementarySearch.ToolTip"));
-          // 
-          // AntSearchFieldReset
-          // 
-          this.AntSearchFieldReset.Location = new System.Drawing.Point(286, 115);
-          this.AntSearchFieldReset.Name = "AntSearchFieldReset";
-          this.AntSearchFieldReset.Size = new System.Drawing.Size(51, 21);
-          this.AntSearchFieldReset.TabIndex = 85;
-          this.AntSearchFieldReset.Text = "Reset";
-          this.ToolTip1.SetToolTip(this.AntSearchFieldReset, "That Action\'ll clear the field.");
-          this.AntSearchFieldReset.UseVisualStyleBackColor = true;
-          this.AntSearchFieldReset.Click += new System.EventHandler(this.AntSearchFieldReset_Click);
-          // 
-          // label18
-          // 
-          this.label18.AutoSize = true;
-          this.label18.Location = new System.Drawing.Point(9, 118);
-          this.label18.Name = "label18";
-          this.label18.Size = new System.Drawing.Size(152, 13);
-          this.label18.TabIndex = 80;
-          this.label18.Text = "Search by Properties Selection";
-          // 
-          // AntSearchList
-          // 
-          this.AntSearchList.BackColor = System.Drawing.SystemColors.Control;
-          this.AntSearchList.Location = new System.Drawing.Point(9, 142);
-          this.AntSearchList.Name = "AntSearchList";
-          this.AntSearchList.Size = new System.Drawing.Size(328, 20);
-          this.AntSearchList.TabIndex = 79;
-          // 
-          // AntSearchItem2
-          // 
-          this.AntSearchItem2.FormattingEnabled = true;
-          this.AntSearchItem2.Location = new System.Drawing.Point(10, 45);
-          this.AntSearchItem2.Name = "AntSearchItem2";
-          this.AntSearchItem2.Size = new System.Drawing.Size(145, 21);
-          this.AntSearchItem2.TabIndex = 38;
-          // 
-          // AntSearchField
-          // 
-          this.AntSearchField.FormattingEnabled = true;
-          this.AntSearchField.Location = new System.Drawing.Point(163, 115);
-          this.AntSearchField.Name = "AntSearchField";
-          this.AntSearchField.Size = new System.Drawing.Size(113, 21);
-          this.AntSearchField.TabIndex = 78;
-          this.AntSearchField.SelectedIndexChanged += new System.EventHandler(this.AntSearchField_SelectedIndexChanged);
-          // 
-          // AntSearchText2
-          // 
-          this.AntSearchText2.Location = new System.Drawing.Point(164, 46);
-          this.AntSearchText2.Name = "AntSearchText2";
-          this.AntSearchText2.Size = new System.Drawing.Size(173, 20);
-          this.AntSearchText2.TabIndex = 39;
-          // 
-          // AntSearchItem1
-          // 
-          this.AntSearchItem1.FormattingEnabled = true;
-          this.AntSearchItem1.Location = new System.Drawing.Point(10, 18);
-          this.AntSearchItem1.Name = "AntSearchItem1";
-          this.AntSearchItem1.Size = new System.Drawing.Size(145, 21);
-          this.AntSearchItem1.TabIndex = 36;
-          // 
-          // AntSearchText1
-          // 
-          this.AntSearchText1.Location = new System.Drawing.Point(164, 19);
-          this.AntSearchText1.Name = "AntSearchText1";
-          this.AntSearchText1.Size = new System.Drawing.Size(173, 20);
-          this.AntSearchText1.TabIndex = 37;
-          // 
           // groupBox23
           // 
           this.groupBox23.Controls.Add(this.label19);
@@ -2249,7 +1964,7 @@ namespace MesFilms
           this.groupBox24.Size = new System.Drawing.Size(681, 164);
           this.groupBox24.TabIndex = 73;
           this.groupBox24.TabStop = false;
-          this.groupBox24.Text = "ANT item for storing trailerinfo (borrower recommended)";
+          this.groupBox24.Text = "DB Item for storing trailerinfo (borrower recommended)";
           this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
           // 
           // ShowTrailerWhenStartingMovie
@@ -2258,9 +1973,9 @@ namespace MesFilms
           this.ShowTrailerWhenStartingMovie.Enabled = false;
           this.ShowTrailerWhenStartingMovie.Location = new System.Drawing.Point(27, 125);
           this.ShowTrailerWhenStartingMovie.Name = "ShowTrailerWhenStartingMovie";
-          this.ShowTrailerWhenStartingMovie.Size = new System.Drawing.Size(226, 17);
+          this.ShowTrailerWhenStartingMovie.Size = new System.Drawing.Size(228, 17);
           this.ShowTrailerWhenStartingMovie.TabIndex = 73;
-          this.ShowTrailerWhenStartingMovie.Text = "Show Trailer as movie intro (Cinema mode)";
+          this.ShowTrailerWhenStartingMovie.Text = "Show Trailer as Movie Intro (Cinema mode)";
           this.ToolTip1.SetToolTip(this.ShowTrailerWhenStartingMovie, "If checked, a trailer from same category as movie \r\nwill be played before startin" +
                   "g the movie itself.");
           this.ShowTrailerWhenStartingMovie.UseVisualStyleBackColor = true;
@@ -2314,9 +2029,9 @@ namespace MesFilms
           this.label35.AutoSize = true;
           this.label35.Location = new System.Drawing.Point(24, 28);
           this.label35.Name = "label35";
-          this.label35.Size = new System.Drawing.Size(148, 13);
+          this.label35.Size = new System.Drawing.Size(147, 13);
           this.label35.TabIndex = 69;
-          this.label35.Text = "Ant Item for storing Trailer Info";
+          this.label35.Text = "DB Item for storing Trailer Info";
           // 
           // check_WOL_enable
           // 
@@ -2574,7 +2289,7 @@ namespace MesFilms
           this.label_VersionNumber.Name = "label_VersionNumber";
           this.label_VersionNumber.Size = new System.Drawing.Size(107, 13);
           this.label_VersionNumber.TabIndex = 34;
-          this.label_VersionNumber.Text = "Version 2.0.0.0 alpha";
+          this.label_VersionNumber.Text = "Version 5.1.0.0 alpha";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "Alphaversion for Testing only !");
           this.label_VersionNumber.Click += new System.EventHandler(this.label10_Click);
           // 
@@ -2596,18 +2311,6 @@ namespace MesFilms
           this.ToolTip1.SetToolTip(this.MesFilmsImg, "Enter the full path to the folder containing the DVD cover image files – by defau" +
                   "lt it is the same as the path to your database file.\r\nYou can use the browse but" +
                   "ton to find the correct path.\r\n");
-          // 
-          // CheckWatched
-          // 
-          this.CheckWatched.AutoSize = true;
-          this.CheckWatched.Location = new System.Drawing.Point(9, 19);
-          this.CheckWatched.Name = "CheckWatched";
-          this.CheckWatched.Size = new System.Drawing.Size(270, 17);
-          this.CheckWatched.TabIndex = 69;
-          this.CheckWatched.Text = "Update the ‘Checked’ field when movie is launched";
-          this.ToolTip1.SetToolTip(this.CheckWatched, "Select this option if you want the “Checked” field of your database \r\nto be updat" +
-                  "ed each time a movie is launched.\r\n");
-          this.CheckWatched.UseVisualStyleBackColor = true;
           // 
           // DefaultCoverArtist
           // 
@@ -2634,9 +2337,9 @@ namespace MesFilms
           this.groupBox_PreLaunchingCommand.Controls.Add(this.label38);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.CmdPar);
           this.groupBox_PreLaunchingCommand.Controls.Add(this.CmdExe);
-          this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(397, 96);
+          this.groupBox_PreLaunchingCommand.Location = new System.Drawing.Point(498, 44);
           this.groupBox_PreLaunchingCommand.Name = "groupBox_PreLaunchingCommand";
-          this.groupBox_PreLaunchingCommand.Size = new System.Drawing.Size(324, 91);
+          this.groupBox_PreLaunchingCommand.Size = new System.Drawing.Size(218, 108);
           this.groupBox_PreLaunchingCommand.TabIndex = 70;
           this.groupBox_PreLaunchingCommand.TabStop = false;
           this.groupBox_PreLaunchingCommand.Text = "Pre-Launching Command";
@@ -2647,7 +2350,7 @@ namespace MesFilms
           // label39
           // 
           this.label39.AutoSize = true;
-          this.label39.Location = new System.Drawing.Point(19, 59);
+          this.label39.Location = new System.Drawing.Point(19, 57);
           this.label39.Name = "label39";
           this.label39.Size = new System.Drawing.Size(55, 13);
           this.label39.TabIndex = 39;
@@ -2656,7 +2359,7 @@ namespace MesFilms
           // label38
           // 
           this.label38.AutoSize = true;
-          this.label38.Location = new System.Drawing.Point(19, 28);
+          this.label38.Location = new System.Drawing.Point(19, 18);
           this.label38.Name = "label38";
           this.label38.Size = new System.Drawing.Size(70, 13);
           this.label38.TabIndex = 38;
@@ -2665,16 +2368,16 @@ namespace MesFilms
           // CmdPar
           // 
           this.CmdPar.FormattingEnabled = true;
-          this.CmdPar.Location = new System.Drawing.Point(110, 56);
+          this.CmdPar.Location = new System.Drawing.Point(15, 73);
           this.CmdPar.Name = "CmdPar";
-          this.CmdPar.Size = new System.Drawing.Size(198, 21);
+          this.CmdPar.Size = new System.Drawing.Size(196, 21);
           this.CmdPar.TabIndex = 36;
           // 
           // CmdExe
           // 
-          this.CmdExe.Location = new System.Drawing.Point(110, 25);
+          this.CmdExe.Location = new System.Drawing.Point(15, 34);
           this.CmdExe.Name = "CmdExe";
-          this.CmdExe.Size = new System.Drawing.Size(198, 20);
+          this.CmdExe.Size = new System.Drawing.Size(196, 20);
           this.CmdExe.TabIndex = 37;
           // 
           // groupBox_ArtistImages
@@ -2754,20 +2457,6 @@ namespace MesFilms
           this.label_ArtistImagePath.Size = new System.Drawing.Size(92, 13);
           this.label_ArtistImagePath.TabIndex = 93;
           this.label_ArtistImagePath.Text = "Artist Images Path";
-          // 
-          // checkWatchedInProfile
-          // 
-          this.checkWatchedInProfile.AutoSize = true;
-          this.checkWatchedInProfile.Enabled = false;
-          this.checkWatchedInProfile.Location = new System.Drawing.Point(9, 42);
-          this.checkWatchedInProfile.Name = "checkWatchedInProfile";
-          this.checkWatchedInProfile.Size = new System.Drawing.Size(338, 17);
-          this.checkWatchedInProfile.TabIndex = 70;
-          this.checkWatchedInProfile.Text = "Update the movie status in the userprofile when movie is launched";
-          this.ToolTip1.SetToolTip(this.checkWatchedInProfile, "Select this option if you want to update the watched status in the\r\nuserprofile. " +
-                  "Requires a userprofilename to choose.\r\nTo be updated each time a movie is launch" +
-                  "ed.");
-          this.checkWatchedInProfile.UseVisualStyleBackColor = true;
           // 
           // ButCopy
           // 
@@ -2988,12 +2677,13 @@ namespace MesFilms
           // General
           // 
           this.General.Controls.Add(this.Tab_General);
-          this.General.Controls.Add(this.Tab_Optional1);
-          this.General.Controls.Add(this.Tab_Optional2);
+          this.General.Controls.Add(this.Tab_Trailer);
+          this.General.Controls.Add(this.Tab_Views);
+          this.General.Controls.Add(this.Tab_Search);
+          this.General.Controls.Add(this.Tab_Update);
+          this.General.Controls.Add(this.Tab_Grabber);
           this.General.Controls.Add(this.Tab_Artwork);
           this.General.Controls.Add(this.Tab_Logos);
-          this.General.Controls.Add(this.Tab_Grabber);
-          this.General.Controls.Add(this.Tab_TrailerOptions);
           this.General.Controls.Add(this.Tab_WakeOnLan);
           this.General.Controls.Add(this.Tab_DVDprofilerMovieCollector);
           this.General.Location = new System.Drawing.Point(12, 78);
@@ -3028,9 +2718,9 @@ namespace MesFilms
           this.groupBox_Security.Controls.Add(this.label15);
           this.groupBox_Security.Controls.Add(this.Rpt_Dwp);
           this.groupBox_Security.Controls.Add(this.Dwp);
-          this.groupBox_Security.Location = new System.Drawing.Point(455, 242);
+          this.groupBox_Security.Location = new System.Drawing.Point(448, 44);
           this.groupBox_Security.Name = "groupBox_Security";
-          this.groupBox_Security.Size = new System.Drawing.Size(277, 101);
+          this.groupBox_Security.Size = new System.Drawing.Size(289, 101);
           this.groupBox_Security.TabIndex = 75;
           this.groupBox_Security.TabStop = false;
           this.groupBox_Security.Text = "Security";
@@ -3047,16 +2737,16 @@ namespace MesFilms
           // label16
           // 
           this.label16.AutoSize = true;
-          this.label16.Location = new System.Drawing.Point(6, 72);
+          this.label16.Location = new System.Drawing.Point(20, 72);
           this.label16.Name = "label16";
-          this.label16.Size = new System.Drawing.Size(91, 13);
+          this.label16.Size = new System.Drawing.Size(42, 13);
           this.label16.TabIndex = 72;
-          this.label16.Text = "Repeat Password";
+          this.label16.Text = "Repeat";
           // 
           // label15
           // 
           this.label15.AutoSize = true;
-          this.label15.Location = new System.Drawing.Point(44, 47);
+          this.label15.Location = new System.Drawing.Point(9, 46);
           this.label15.Name = "label15";
           this.label15.Size = new System.Drawing.Size(53, 13);
           this.label15.TabIndex = 71;
@@ -3064,75 +2754,38 @@ namespace MesFilms
           // 
           // Rpt_Dwp
           // 
-          this.Rpt_Dwp.Location = new System.Drawing.Point(104, 69);
+          this.Rpt_Dwp.Location = new System.Drawing.Point(85, 69);
           this.Rpt_Dwp.Name = "Rpt_Dwp";
-          this.Rpt_Dwp.Size = new System.Drawing.Size(164, 20);
+          this.Rpt_Dwp.Size = new System.Drawing.Size(183, 20);
           this.Rpt_Dwp.TabIndex = 70;
           this.Rpt_Dwp.UseSystemPasswordChar = true;
           // 
           // groupBox_PlayMovieInfos
           // 
-          this.groupBox_PlayMovieInfos.Controls.Add(this.groupBox2);
+          this.groupBox_PlayMovieInfos.Controls.Add(this.groupBoxMoviePathInfos);
           this.groupBox_PlayMovieInfos.Controls.Add(this.groupBox_PreLaunchingCommand);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.SearchSubDirs);
           this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentLabel);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.butPath);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.PathStorage);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.label5);
           this.groupBox_PlayMovieInfos.Controls.Add(this.label6);
           this.groupBox_PlayMovieInfos.Controls.Add(this.AntStorage);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.ItemSearchFileName);
-          this.groupBox_PlayMovieInfos.Controls.Add(this.SearchFileName);
           this.groupBox_PlayMovieInfos.Controls.Add(this.label4);
           this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentItem);
-          this.groupBox_PlayMovieInfos.Location = new System.Drawing.Point(7, 43);
+          this.groupBox_PlayMovieInfos.Location = new System.Drawing.Point(7, 155);
           this.groupBox_PlayMovieInfos.Name = "groupBox_PlayMovieInfos";
-          this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(725, 193);
+          this.groupBox_PlayMovieInfos.Size = new System.Drawing.Size(730, 193);
           this.groupBox_PlayMovieInfos.TabIndex = 74;
           this.groupBox_PlayMovieInfos.TabStop = false;
           this.groupBox_PlayMovieInfos.Text = "Play Movie Info";
           // 
-          // groupBox2
-          // 
-          this.groupBox2.Controls.Add(this.Label_UserProfileName);
-          this.groupBox2.Controls.Add(this.UserProfileName);
-          this.groupBox2.Controls.Add(this.checkWatchedInProfile);
-          this.groupBox2.Controls.Add(this.CheckWatched);
-          this.groupBox2.Location = new System.Drawing.Point(10, 96);
-          this.groupBox2.Name = "groupBox2";
-          this.groupBox2.Size = new System.Drawing.Size(370, 91);
-          this.groupBox2.TabIndex = 71;
-          this.groupBox2.TabStop = false;
-          this.groupBox2.Text = "MovieUpdates - watched-status";
-          this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
-          // 
-          // Label_UserProfileName
-          // 
-          this.Label_UserProfileName.AutoSize = true;
-          this.Label_UserProfileName.Location = new System.Drawing.Point(27, 64);
-          this.Label_UserProfileName.Name = "Label_UserProfileName";
-          this.Label_UserProfileName.Size = new System.Drawing.Size(92, 13);
-          this.Label_UserProfileName.TabIndex = 72;
-          this.Label_UserProfileName.Text = "User Profile Name";
-          // 
-          // UserProfileName
-          // 
-          this.UserProfileName.Enabled = false;
-          this.UserProfileName.Location = new System.Drawing.Point(143, 61);
-          this.UserProfileName.Name = "UserProfileName";
-          this.UserProfileName.Size = new System.Drawing.Size(204, 20);
-          this.UserProfileName.TabIndex = 71;
-          // 
           // AntIdentLabel
           // 
-          this.AntIdentLabel.Location = new System.Drawing.Point(335, 71);
+          this.AntIdentLabel.Location = new System.Drawing.Point(335, 159);
           this.AntIdentLabel.Name = "AntIdentLabel";
           this.AntIdentLabel.Size = new System.Drawing.Size(144, 20);
           this.AntIdentLabel.TabIndex = 57;
           // 
           // butPath
           // 
-          this.butPath.Location = new System.Drawing.Point(447, 43);
+          this.butPath.Location = new System.Drawing.Point(441, 13);
           this.butPath.Name = "butPath";
           this.butPath.Size = new System.Drawing.Size(32, 23);
           this.butPath.TabIndex = 55;
@@ -3143,7 +2796,7 @@ namespace MesFilms
           // label5
           // 
           this.label5.AutoSize = true;
-          this.label5.Location = new System.Drawing.Point(12, 47);
+          this.label5.Location = new System.Drawing.Point(6, 17);
           this.label5.Name = "label5";
           this.label5.Size = new System.Drawing.Size(145, 13);
           this.label5.TabIndex = 60;
@@ -3165,15 +2818,15 @@ namespace MesFilms
             "OriginalTitle",
             "TranslatedTitle",
             "FormattedTitle"});
-          this.ItemSearchFileName.Location = new System.Drawing.Point(599, 44);
+          this.ItemSearchFileName.Location = new System.Drawing.Point(166, 43);
           this.ItemSearchFileName.Name = "ItemSearchFileName";
-          this.ItemSearchFileName.Size = new System.Drawing.Size(106, 21);
+          this.ItemSearchFileName.Size = new System.Drawing.Size(157, 21);
           this.ItemSearchFileName.TabIndex = 67;
           // 
           // label4
           // 
           this.label4.AutoSize = true;
-          this.label4.Location = new System.Drawing.Point(11, 73);
+          this.label4.Location = new System.Drawing.Point(11, 161);
           this.label4.Name = "label4";
           this.label4.Size = new System.Drawing.Size(109, 13);
           this.label4.TabIndex = 58;
@@ -3182,7 +2835,7 @@ namespace MesFilms
           // label13
           // 
           this.label13.AutoSize = true;
-          this.label13.Location = new System.Drawing.Point(463, 17);
+          this.label13.Location = new System.Drawing.Point(457, 17);
           this.label13.Name = "label13";
           this.label13.Size = new System.Drawing.Size(70, 13);
           this.label13.TabIndex = 63;
@@ -3198,7 +2851,7 @@ namespace MesFilms
           this.groupBox_TitleOrder.Controls.Add(this.label8);
           this.groupBox_TitleOrder.Controls.Add(this.AntTitle2);
           this.groupBox_TitleOrder.Controls.Add(this.AntTitle1);
-          this.groupBox_TitleOrder.Location = new System.Drawing.Point(7, 242);
+          this.groupBox_TitleOrder.Location = new System.Drawing.Point(7, 44);
           this.groupBox_TitleOrder.Name = "groupBox_TitleOrder";
           this.groupBox_TitleOrder.Size = new System.Drawing.Size(432, 101);
           this.groupBox_TitleOrder.TabIndex = 61;
@@ -3217,11 +2870,12 @@ namespace MesFilms
           // label17
           // 
           this.label17.AutoSize = true;
-          this.label17.Location = new System.Drawing.Point(294, 21);
+          this.label17.Location = new System.Drawing.Point(294, 14);
           this.label17.Name = "label17";
-          this.label17.Size = new System.Drawing.Size(101, 13);
+          this.label17.Size = new System.Drawing.Size(101, 26);
           this.label17.TabIndex = 66;
-          this.label17.Text = "Hierarchy Separator";
+          this.label17.Text = "Hierarchy Separator\r\n(Grouping)";
+          this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
           // 
           // label9
           // 
@@ -3260,33 +2914,60 @@ namespace MesFilms
           this.label1.TabIndex = 47;
           this.label1.Text = "Catalog File (XML)";
           // 
-          // Tab_Optional1
+          // Tab_Trailer
           // 
-          this.Tab_Optional1.Controls.Add(this.groupBox_SortByItem);
-          this.Tab_Optional1.Controls.Add(this.groupBox_AntSelectedEnreg);
-          this.Tab_Optional1.Controls.Add(this.groupBox_DefaultView);
-          this.Tab_Optional1.Controls.Add(this.groupBox_SupplementaryView);
-          this.Tab_Optional1.Controls.Add(this.groupBox_DetailedSupplementaryInformations);
-          this.Tab_Optional1.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Optional1.Name = "Tab_Optional1";
-          this.Tab_Optional1.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Optional1.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Optional1.TabIndex = 1;
-          this.Tab_Optional1.Text = "Optional 1";
-          this.Tab_Optional1.UseVisualStyleBackColor = true;
+          this.Tab_Trailer.Controls.Add(this.groupBox24);
+          this.Tab_Trailer.Controls.Add(this.groupBox23);
+          this.Tab_Trailer.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Trailer.Name = "Tab_Trailer";
+          this.Tab_Trailer.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Trailer.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Trailer.TabIndex = 7;
+          this.Tab_Trailer.Text = "Trailer";
+          this.Tab_Trailer.UseVisualStyleBackColor = true;
           // 
-          // Tab_Optional2
+          // Tab_Views
           // 
-          this.Tab_Optional2.Controls.Add(this.groupBox_SupplementarySearch);
-          this.Tab_Optional2.Controls.Add(this.groupBox_DatabaseUpdateOptions);
-          this.Tab_Optional2.Controls.Add(this.groupBox_Separators);
-          this.Tab_Optional2.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Optional2.Name = "Tab_Optional2";
-          this.Tab_Optional2.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Optional2.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Optional2.TabIndex = 3;
-          this.Tab_Optional2.Text = "Optional 2";
-          this.Tab_Optional2.UseVisualStyleBackColor = true;
+          this.Tab_Views.Controls.Add(this.groupBox_SortByItem);
+          this.Tab_Views.Controls.Add(this.groupBox_AntSelectedEnreg);
+          this.Tab_Views.Controls.Add(this.groupBox_DefaultView);
+          this.Tab_Views.Controls.Add(this.groupBox_SupplementaryView);
+          this.Tab_Views.Controls.Add(this.groupBox_DetailedSupplementaryInformations);
+          this.Tab_Views.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Views.Name = "Tab_Views";
+          this.Tab_Views.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Views.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Views.TabIndex = 1;
+          this.Tab_Views.Text = "Views/Filter";
+          this.Tab_Views.UseVisualStyleBackColor = true;
+          // 
+          // Tab_Update
+          // 
+          this.Tab_Update.Controls.Add(this.groupBox_AntUpdatingItems);
+          this.Tab_Update.Controls.Add(this.groupBox2);
+          this.Tab_Update.Controls.Add(this.gpspfield);
+          this.Tab_Update.Controls.Add(this.groupBoxUpdateByProperties);
+          this.Tab_Update.Controls.Add(this.groupBoxDeletionOptions);
+          this.Tab_Update.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Update.Name = "Tab_Update";
+          this.Tab_Update.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Update.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Update.TabIndex = 3;
+          this.Tab_Update.Text = "Update";
+          this.Tab_Update.UseVisualStyleBackColor = true;
+          // 
+          // Tab_Grabber
+          // 
+          this.Tab_Grabber.Controls.Add(this.groupBox20);
+          this.Tab_Grabber.Controls.Add(this.groupBox111);
+          this.Tab_Grabber.Controls.Add(this.groupBox_GrabberOptions);
+          this.Tab_Grabber.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Grabber.Name = "Tab_Grabber";
+          this.Tab_Grabber.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Grabber.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Grabber.TabIndex = 4;
+          this.Tab_Grabber.Text = "Grabber";
+          this.Tab_Grabber.UseVisualStyleBackColor = true;
           // 
           // Tab_Artwork
           // 
@@ -3649,31 +3330,6 @@ namespace MesFilms
           this.SPicture.TabStop = false;
           this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
           // 
-          // Tab_Grabber
-          // 
-          this.Tab_Grabber.Controls.Add(this.groupBox20);
-          this.Tab_Grabber.Controls.Add(this.groupBox111);
-          this.Tab_Grabber.Controls.Add(this.groupBox_GrabberOptions);
-          this.Tab_Grabber.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Grabber.Name = "Tab_Grabber";
-          this.Tab_Grabber.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Grabber.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Grabber.TabIndex = 4;
-          this.Tab_Grabber.Text = "Grabber";
-          this.Tab_Grabber.UseVisualStyleBackColor = true;
-          // 
-          // Tab_TrailerOptions
-          // 
-          this.Tab_TrailerOptions.Controls.Add(this.groupBox24);
-          this.Tab_TrailerOptions.Controls.Add(this.groupBox23);
-          this.Tab_TrailerOptions.Location = new System.Drawing.Point(4, 22);
-          this.Tab_TrailerOptions.Name = "Tab_TrailerOptions";
-          this.Tab_TrailerOptions.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_TrailerOptions.Size = new System.Drawing.Size(747, 354);
-          this.Tab_TrailerOptions.TabIndex = 7;
-          this.Tab_TrailerOptions.Text = "Traileroptions";
-          this.Tab_TrailerOptions.UseVisualStyleBackColor = true;
-          // 
           // Tab_WakeOnLan
           // 
           this.Tab_WakeOnLan.Controls.Add(this.groupBox25);
@@ -3861,6 +3517,421 @@ namespace MesFilms
           this.pictureBox1.TabIndex = 75;
           this.pictureBox1.TabStop = false;
           // 
+          // Tab_Search
+          // 
+          this.Tab_Search.Controls.Add(this.groupBoxSearchByProperties);
+          this.Tab_Search.Controls.Add(this.groupBox_SupplementarySearch);
+          this.Tab_Search.Controls.Add(this.groupBox_Separators);
+          this.Tab_Search.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Search.Name = "Tab_Search";
+          this.Tab_Search.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Search.TabIndex = 9;
+          this.Tab_Search.Text = "Search";
+          this.Tab_Search.UseVisualStyleBackColor = true;
+          // 
+          // groupBox_Separators
+          // 
+          this.groupBox_Separators.Controls.Add(this.label25);
+          this.groupBox_Separators.Controls.Add(this.label23);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator5);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator4);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator5);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator4);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator3);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator2);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator2);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator3);
+          this.groupBox_Separators.Controls.Add(this.label22);
+          this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
+          this.groupBox_Separators.Controls.Add(this.label24);
+          this.groupBox_Separators.Controls.Add(this.ListSeparator1);
+          this.groupBox_Separators.Location = new System.Drawing.Point(377, 18);
+          this.groupBox_Separators.Name = "groupBox_Separators";
+          this.groupBox_Separators.Size = new System.Drawing.Size(350, 125);
+          this.groupBox_Separators.TabIndex = 28;
+          this.groupBox_Separators.TabStop = false;
+          this.groupBox_Separators.Text = "Separators";
+          this.ToolTip1.SetToolTip(this.groupBox_Separators, resources.GetString("groupBox_Separators.ToolTip"));
+          // 
+          // label25
+          // 
+          this.label25.AutoSize = true;
+          this.label25.Location = new System.Drawing.Point(18, 91);
+          this.label25.Name = "label25";
+          this.label25.Size = new System.Drawing.Size(87, 13);
+          this.label25.TabIndex = 84;
+          this.label25.Text = "for Actors search";
+          // 
+          // label23
+          // 
+          this.label23.Location = new System.Drawing.Point(18, 41);
+          this.label23.Name = "label23";
+          this.label23.Size = new System.Drawing.Size(100, 26);
+          this.label23.TabIndex = 83;
+          this.label23.Text = "for Genre, Country and Actors views";
+          // 
+          // RoleSeparator5
+          // 
+          this.RoleSeparator5.FormattingEnabled = true;
+          this.RoleSeparator5.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            "....",
+            ")"});
+          this.RoleSeparator5.Location = new System.Drawing.Point(306, 78);
+          this.RoleSeparator5.Name = "RoleSeparator5";
+          this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator5.TabIndex = 82;
+          this.RoleSeparator5.Text = "List";
+          // 
+          // RoleSeparator4
+          // 
+          this.RoleSeparator4.FormattingEnabled = true;
+          this.RoleSeparator4.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            "....",
+            ")"});
+          this.RoleSeparator4.Location = new System.Drawing.Point(260, 78);
+          this.RoleSeparator4.Name = "RoleSeparator4";
+          this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator4.TabIndex = 81;
+          this.RoleSeparator4.Text = "List";
+          // 
+          // ListSeparator5
+          // 
+          this.ListSeparator5.FormattingEnabled = true;
+          this.ListSeparator5.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator5.Location = new System.Drawing.Point(306, 28);
+          this.ListSeparator5.Name = "ListSeparator5";
+          this.ListSeparator5.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator5.TabIndex = 80;
+          this.ListSeparator5.Text = "List";
+          // 
+          // ListSeparator4
+          // 
+          this.ListSeparator4.FormattingEnabled = true;
+          this.ListSeparator4.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator4.Location = new System.Drawing.Point(260, 28);
+          this.ListSeparator4.Name = "ListSeparator4";
+          this.ListSeparator4.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator4.TabIndex = 79;
+          this.ListSeparator4.Text = "List";
+          // 
+          // ListSeparator3
+          // 
+          this.ListSeparator3.FormattingEnabled = true;
+          this.ListSeparator3.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator3.Location = new System.Drawing.Point(214, 28);
+          this.ListSeparator3.Name = "ListSeparator3";
+          this.ListSeparator3.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator3.TabIndex = 78;
+          this.ListSeparator3.Text = "List";
+          // 
+          // ListSeparator2
+          // 
+          this.ListSeparator2.FormattingEnabled = true;
+          this.ListSeparator2.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator2.Location = new System.Drawing.Point(168, 28);
+          this.ListSeparator2.Name = "ListSeparator2";
+          this.ListSeparator2.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator2.TabIndex = 77;
+          this.ListSeparator2.Text = "List";
+          // 
+          // RoleSeparator2
+          // 
+          this.RoleSeparator2.FormattingEnabled = true;
+          this.RoleSeparator2.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            ")",
+            "...."});
+          this.RoleSeparator2.Location = new System.Drawing.Point(168, 78);
+          this.RoleSeparator2.Name = "RoleSeparator2";
+          this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator2.Sorted = true;
+          this.RoleSeparator2.TabIndex = 76;
+          this.RoleSeparator2.Text = "List";
+          // 
+          // RoleSeparator3
+          // 
+          this.RoleSeparator3.FormattingEnabled = true;
+          this.RoleSeparator3.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            ")",
+            "...."});
+          this.RoleSeparator3.Location = new System.Drawing.Point(214, 78);
+          this.RoleSeparator3.Name = "RoleSeparator3";
+          this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator3.Sorted = true;
+          this.RoleSeparator3.TabIndex = 75;
+          this.RoleSeparator3.Text = "List";
+          // 
+          // label22
+          // 
+          this.label22.AutoSize = true;
+          this.label22.Location = new System.Drawing.Point(9, 78);
+          this.label22.Name = "label22";
+          this.label22.Size = new System.Drawing.Size(107, 13);
+          this.label22.TabIndex = 74;
+          this.label22.Text = "Role Text Separators";
+          // 
+          // RoleSeparator1
+          // 
+          this.RoleSeparator1.FormattingEnabled = true;
+          this.RoleSeparator1.Items.AddRange(new object[] {
+            " as ",
+            "(",
+            ")",
+            "...."});
+          this.RoleSeparator1.Location = new System.Drawing.Point(122, 78);
+          this.RoleSeparator1.Name = "RoleSeparator1";
+          this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
+          this.RoleSeparator1.Sorted = true;
+          this.RoleSeparator1.TabIndex = 73;
+          this.RoleSeparator1.Text = "List";
+          // 
+          // label24
+          // 
+          this.label24.AutoSize = true;
+          this.label24.Location = new System.Drawing.Point(9, 28);
+          this.label24.Name = "label24";
+          this.label24.Size = new System.Drawing.Size(72, 13);
+          this.label24.TabIndex = 71;
+          this.label24.Text = "List Separator";
+          // 
+          // ListSeparator1
+          // 
+          this.ListSeparator1.FormattingEnabled = true;
+          this.ListSeparator1.Items.AddRange(new object[] {
+            ",",
+            ";",
+            "|"});
+          this.ListSeparator1.Location = new System.Drawing.Point(122, 28);
+          this.ListSeparator1.Name = "ListSeparator1";
+          this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
+          this.ListSeparator1.TabIndex = 70;
+          this.ListSeparator1.Text = "List";
+          // 
+          // groupBox_SupplementarySearch
+          // 
+          this.groupBox_SupplementarySearch.Controls.Add(this.lblUserdefinedSearchItems);
+          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem2);
+          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText2);
+          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem1);
+          this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText1);
+          this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(15, 18);
+          this.groupBox_SupplementarySearch.Name = "groupBox_SupplementarySearch";
+          this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(350, 125);
+          this.groupBox_SupplementarySearch.TabIndex = 34;
+          this.groupBox_SupplementarySearch.TabStop = false;
+          this.groupBox_SupplementarySearch.Text = "Userdefined Search Items";
+          this.ToolTip1.SetToolTip(this.groupBox_SupplementarySearch, resources.GetString("groupBox_SupplementarySearch.ToolTip"));
+          // 
+          // AntSearchFieldReset
+          // 
+          this.AntSearchFieldReset.Location = new System.Drawing.Point(646, 34);
+          this.AntSearchFieldReset.Name = "AntSearchFieldReset";
+          this.AntSearchFieldReset.Size = new System.Drawing.Size(51, 21);
+          this.AntSearchFieldReset.TabIndex = 85;
+          this.AntSearchFieldReset.Text = "Reset";
+          this.ToolTip1.SetToolTip(this.AntSearchFieldReset, "That Action\'ll clear the field.");
+          this.AntSearchFieldReset.UseVisualStyleBackColor = true;
+          // 
+          // label18
+          // 
+          this.label18.AutoSize = true;
+          this.label18.Location = new System.Drawing.Point(13, 38);
+          this.label18.Name = "label18";
+          this.label18.Size = new System.Drawing.Size(152, 13);
+          this.label18.TabIndex = 80;
+          this.label18.Text = "Search by Properties Selection";
+          // 
+          // AntSearchList
+          // 
+          this.AntSearchList.BackColor = System.Drawing.SystemColors.Control;
+          this.AntSearchList.Location = new System.Drawing.Point(16, 72);
+          this.AntSearchList.Name = "AntSearchList";
+          this.AntSearchList.Size = new System.Drawing.Size(681, 20);
+          this.AntSearchList.TabIndex = 79;
+          // 
+          // AntSearchItem2
+          // 
+          this.AntSearchItem2.FormattingEnabled = true;
+          this.AntSearchItem2.Location = new System.Drawing.Point(10, 45);
+          this.AntSearchItem2.Name = "AntSearchItem2";
+          this.AntSearchItem2.Size = new System.Drawing.Size(145, 21);
+          this.AntSearchItem2.TabIndex = 38;
+          // 
+          // AntSearchField
+          // 
+          this.AntSearchField.FormattingEnabled = true;
+          this.AntSearchField.Location = new System.Drawing.Point(170, 35);
+          this.AntSearchField.Name = "AntSearchField";
+          this.AntSearchField.Size = new System.Drawing.Size(148, 21);
+          this.AntSearchField.TabIndex = 78;
+          // 
+          // AntSearchText2
+          // 
+          this.AntSearchText2.Location = new System.Drawing.Point(164, 46);
+          this.AntSearchText2.Name = "AntSearchText2";
+          this.AntSearchText2.Size = new System.Drawing.Size(173, 20);
+          this.AntSearchText2.TabIndex = 39;
+          // 
+          // AntSearchItem1
+          // 
+          this.AntSearchItem1.FormattingEnabled = true;
+          this.AntSearchItem1.Location = new System.Drawing.Point(10, 18);
+          this.AntSearchItem1.Name = "AntSearchItem1";
+          this.AntSearchItem1.Size = new System.Drawing.Size(145, 21);
+          this.AntSearchItem1.TabIndex = 36;
+          // 
+          // AntSearchText1
+          // 
+          this.AntSearchText1.Location = new System.Drawing.Point(164, 19);
+          this.AntSearchText1.Name = "AntSearchText1";
+          this.AntSearchText1.Size = new System.Drawing.Size(173, 20);
+          this.AntSearchText1.TabIndex = 37;
+          // 
+          // groupBoxUpdateByProperties
+          // 
+          this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdFieldReset);
+          this.groupBoxUpdateByProperties.Controls.Add(this.label33);
+          this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdField);
+          this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdList);
+          this.groupBoxUpdateByProperties.Location = new System.Drawing.Point(17, 247);
+          this.groupBoxUpdateByProperties.Name = "groupBoxUpdateByProperties";
+          this.groupBoxUpdateByProperties.Size = new System.Drawing.Size(711, 101);
+          this.groupBoxUpdateByProperties.TabIndex = 34;
+          this.groupBoxUpdateByProperties.TabStop = false;
+          this.groupBoxUpdateByProperties.Text = "Update by Properties";
+          // 
+          // groupBoxDeletionOptions
+          // 
+          this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
+          this.groupBoxDeletionOptions.Controls.Add(this.gpsuppress);
+          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(17, 102);
+          this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(354, 139);
+          this.groupBoxDeletionOptions.TabIndex = 35;
+          this.groupBoxDeletionOptions.TabStop = false;
+          this.groupBoxDeletionOptions.Text = "Deletion Options";
+          // 
+          // lblUpdateValue
+          // 
+          this.lblUpdateValue.AutoSize = true;
+          this.lblUpdateValue.Location = new System.Drawing.Point(8, 50);
+          this.lblUpdateValue.Name = "lblUpdateValue";
+          this.lblUpdateValue.Size = new System.Drawing.Size(109, 13);
+          this.lblUpdateValue.TabIndex = 20;
+          this.lblUpdateValue.Text = "Field to update/Value";
+          // 
+          // groupBoxSearchByProperties
+          // 
+          this.groupBoxSearchByProperties.Controls.Add(this.AntSearchFieldReset);
+          this.groupBoxSearchByProperties.Controls.Add(this.label18);
+          this.groupBoxSearchByProperties.Controls.Add(this.AntSearchField);
+          this.groupBoxSearchByProperties.Controls.Add(this.AntSearchList);
+          this.groupBoxSearchByProperties.Location = new System.Drawing.Point(15, 225);
+          this.groupBoxSearchByProperties.Name = "groupBoxSearchByProperties";
+          this.groupBoxSearchByProperties.Size = new System.Drawing.Size(712, 114);
+          this.groupBoxSearchByProperties.TabIndex = 35;
+          this.groupBoxSearchByProperties.TabStop = false;
+          this.groupBoxSearchByProperties.Text = "Search by Properties";
+          // 
+          // lblUserdefinedSearchItems
+          // 
+          this.lblUserdefinedSearchItems.AutoSize = true;
+          this.lblUserdefinedSearchItems.Location = new System.Drawing.Point(25, 81);
+          this.lblUserdefinedSearchItems.Name = "lblUserdefinedSearchItems";
+          this.lblUserdefinedSearchItems.Size = new System.Drawing.Size(293, 13);
+          this.lblUserdefinedSearchItems.TabIndex = 40;
+          this.lblUserdefinedSearchItems.Text = "Those Items will show up as separate choice in search menu";
+          // 
+          // groupBox2
+          // 
+          this.groupBox2.Controls.Add(this.Label_UserProfileName);
+          this.groupBox2.Controls.Add(this.UserProfileName);
+          this.groupBox2.Controls.Add(this.checkWatchedInProfile);
+          this.groupBox2.Controls.Add(this.CheckWatched);
+          this.groupBox2.Location = new System.Drawing.Point(381, 150);
+          this.groupBox2.Name = "groupBox2";
+          this.groupBox2.Size = new System.Drawing.Size(360, 91);
+          this.groupBox2.TabIndex = 72;
+          this.groupBox2.TabStop = false;
+          this.groupBox2.Text = "MovieUpdates - watched-status";
+          // 
+          // Label_UserProfileName
+          // 
+          this.Label_UserProfileName.AutoSize = true;
+          this.Label_UserProfileName.Location = new System.Drawing.Point(27, 64);
+          this.Label_UserProfileName.Name = "Label_UserProfileName";
+          this.Label_UserProfileName.Size = new System.Drawing.Size(92, 13);
+          this.Label_UserProfileName.TabIndex = 72;
+          this.Label_UserProfileName.Text = "User Profile Name";
+          // 
+          // UserProfileName
+          // 
+          this.UserProfileName.Enabled = false;
+          this.UserProfileName.Location = new System.Drawing.Point(143, 61);
+          this.UserProfileName.Name = "UserProfileName";
+          this.UserProfileName.Size = new System.Drawing.Size(204, 20);
+          this.UserProfileName.TabIndex = 71;
+          // 
+          // checkWatchedInProfile
+          // 
+          this.checkWatchedInProfile.AutoSize = true;
+          this.checkWatchedInProfile.Enabled = false;
+          this.checkWatchedInProfile.Location = new System.Drawing.Point(9, 42);
+          this.checkWatchedInProfile.Name = "checkWatchedInProfile";
+          this.checkWatchedInProfile.Size = new System.Drawing.Size(338, 17);
+          this.checkWatchedInProfile.TabIndex = 70;
+          this.checkWatchedInProfile.Text = "Update the movie status in the userprofile when movie is launched";
+          this.ToolTip1.SetToolTip(this.checkWatchedInProfile, "Select this option if you want to update the watched status in the\r\nuserprofile. " +
+                  "Requires a userprofilename to choose.\r\nTo be updated each time a movie is launch" +
+                  "ed.");
+          this.checkWatchedInProfile.UseVisualStyleBackColor = true;
+          // 
+          // CheckWatched
+          // 
+          this.CheckWatched.AutoSize = true;
+          this.CheckWatched.Location = new System.Drawing.Point(9, 19);
+          this.CheckWatched.Name = "CheckWatched";
+          this.CheckWatched.Size = new System.Drawing.Size(270, 17);
+          this.CheckWatched.TabIndex = 69;
+          this.CheckWatched.Text = "Update the ‘Checked’ field when movie is launched";
+          this.ToolTip1.SetToolTip(this.CheckWatched, "Select this option if you want the “Checked” field of your database \r\nto be updat" +
+                  "ed each time a movie is launched.\r\n");
+          this.CheckWatched.UseVisualStyleBackColor = true;
+          // 
+          // groupBoxMoviePathInfos
+          // 
+          this.groupBoxMoviePathInfos.Controls.Add(this.label5);
+          this.groupBoxMoviePathInfos.Controls.Add(this.PathStorage);
+          this.groupBoxMoviePathInfos.Controls.Add(this.SearchSubDirs);
+          this.groupBoxMoviePathInfos.Controls.Add(this.butPath);
+          this.groupBoxMoviePathInfos.Controls.Add(this.SearchFileName);
+          this.groupBoxMoviePathInfos.Controls.Add(this.ItemSearchFileName);
+          this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 44);
+          this.groupBoxMoviePathInfos.Name = "groupBoxMoviePathInfos";
+          this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(482, 108);
+          this.groupBoxMoviePathInfos.TabIndex = 71;
+          this.groupBoxMoviePathInfos.TabStop = false;
+          this.groupBoxMoviePathInfos.Text = "Movie Path Configuration";
+          // 
           // MesFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3895,16 +3966,12 @@ namespace MesFilms
           this.groupBox_SupplementaryView.PerformLayout();
           this.groupBox_DetailedSupplementaryInformations.ResumeLayout(false);
           this.groupBox_DetailedSupplementaryInformations.PerformLayout();
-          this.groupBox_DatabaseUpdateOptions.ResumeLayout(false);
-          this.groupBox_DatabaseUpdateOptions.PerformLayout();
           this.groupBox_AntUpdatingItems.ResumeLayout(false);
           this.groupBox_AntUpdatingItems.PerformLayout();
           this.gpspfield.ResumeLayout(false);
           this.gpspfield.PerformLayout();
           this.gpsuppress.ResumeLayout(false);
           this.gpsuppress.PerformLayout();
-          this.groupBox_Separators.ResumeLayout(false);
-          this.groupBox_Separators.PerformLayout();
           this.groupBox9.ResumeLayout(false);
           this.groupBox9.PerformLayout();
           this.groupBox20.ResumeLayout(false);
@@ -3915,8 +3982,6 @@ namespace MesFilms
           this.Fanart.PerformLayout();
           this.groupBox22.ResumeLayout(false);
           this.groupBox22.PerformLayout();
-          this.groupBox_SupplementarySearch.ResumeLayout(false);
-          this.groupBox_SupplementarySearch.PerformLayout();
           this.groupBox23.ResumeLayout(false);
           this.groupBox23.PerformLayout();
           this.groupBox24.ResumeLayout(false);
@@ -3936,20 +4001,18 @@ namespace MesFilms
           this.groupBox_Security.PerformLayout();
           this.groupBox_PlayMovieInfos.ResumeLayout(false);
           this.groupBox_PlayMovieInfos.PerformLayout();
-          this.groupBox2.ResumeLayout(false);
-          this.groupBox2.PerformLayout();
           this.groupBox_TitleOrder.ResumeLayout(false);
           this.groupBox_TitleOrder.PerformLayout();
-          this.Tab_Optional1.ResumeLayout(false);
-          this.Tab_Optional2.ResumeLayout(false);
+          this.Tab_Trailer.ResumeLayout(false);
+          this.Tab_Views.ResumeLayout(false);
+          this.Tab_Update.ResumeLayout(false);
+          this.Tab_Grabber.ResumeLayout(false);
           this.Tab_Artwork.ResumeLayout(false);
           this.groupBox1.ResumeLayout(false);
           this.groupBox1.PerformLayout();
           this.Tab_Logos.ResumeLayout(false);
           this.Tab_Logos.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
-          this.Tab_Grabber.ResumeLayout(false);
-          this.Tab_TrailerOptions.ResumeLayout(false);
           this.Tab_WakeOnLan.ResumeLayout(false);
           this.Tab_DVDprofilerMovieCollector.ResumeLayout(false);
           this.groupBox_MovieCollector.ResumeLayout(false);
@@ -3961,6 +4024,21 @@ namespace MesFilms
           this.groupBox10.ResumeLayout(false);
           this.groupBox10.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+          this.Tab_Search.ResumeLayout(false);
+          this.groupBox_Separators.ResumeLayout(false);
+          this.groupBox_Separators.PerformLayout();
+          this.groupBox_SupplementarySearch.ResumeLayout(false);
+          this.groupBox_SupplementarySearch.PerformLayout();
+          this.groupBoxUpdateByProperties.ResumeLayout(false);
+          this.groupBoxUpdateByProperties.PerformLayout();
+          this.groupBoxDeletionOptions.ResumeLayout(false);
+          this.groupBoxDeletionOptions.PerformLayout();
+          this.groupBoxSearchByProperties.ResumeLayout(false);
+          this.groupBoxSearchByProperties.PerformLayout();
+          this.groupBox2.ResumeLayout(false);
+          this.groupBox2.PerformLayout();
+          this.groupBoxMoviePathInfos.ResumeLayout(false);
+          this.groupBoxMoviePathInfos.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -3975,7 +4053,7 @@ namespace MesFilms
         private Label label12;
         private TabControl General;
         private TabPage Tab_General;
-        private TabPage Tab_Optional1;
+        private TabPage Tab_Views;
         private Button ButDelet;
         private Button ButQuit;
         private GroupBox groupBox_DetailedSupplementaryInformations;
@@ -4058,27 +4136,12 @@ namespace MesFilms
         private CheckBox OnlyFile;
         private Label label20;
         private ComboBox AntSTitle;
-        private TabPage Tab_Optional2;
-        private GroupBox groupBox_Separators;
+        private TabPage Tab_Update;
         private CheckBox checkBox1;
         private Label label21;
         private ComboBox comboBox1;
         private ComboBox comboBox2;
         private TextBox textBox2;
-        private Label label24;
-        private ComboBox ListSeparator1;
-        private ComboBox RoleSeparator2;
-        private ComboBox RoleSeparator3;
-        private Label label22;
-        private ComboBox RoleSeparator1;
-        private ComboBox ListSeparator3;
-        private ComboBox ListSeparator2;
-        private ComboBox RoleSeparator5;
-        private ComboBox RoleSeparator4;
-        private ComboBox ListSeparator5;
-        private ComboBox ListSeparator4;
-        private Label label25;
-        private Label label23;
         private TextBox AntViewValue1;
         private TextBox AntViewValue2;
         private TextBox AntViewValue3;
@@ -4139,7 +4202,6 @@ namespace MesFilms
         private ColumnHeader Image;
         private TextBox SFilePicture;
         private ColumnHeader PathImage;
-        private GroupBox groupBox_DatabaseUpdateOptions;
         private RadioButton rbsuppress1;
         private CheckBox chkSuppress;
         private GroupBox gpsuppress;
@@ -4188,18 +4250,10 @@ namespace MesFilms
         private CheckBox chkGrabber_ChooseScript;
         private CheckBox chkWindowsFileDialog;
         private Button btnResetThumbs;
-        private GroupBox groupBox_SupplementarySearch;
-        private Label label18;
-        private TextBox AntSearchList;
-        private ComboBox AntSearchItem2;
-        private ComboBox AntSearchField;
-        private TextBox AntSearchText2;
-        private ComboBox AntSearchItem1;
-        private TextBox AntSearchText1;
         private Label label33;
         private TextBox AntUpdList;
         private ComboBox AntUpdField;
-        private TabPage Tab_TrailerOptions;
+        private TabPage Tab_Trailer;
         private GroupBox groupBox23;
         private Button btnTrailer;
         private TextBox PathStorageTrailer;
@@ -4236,7 +4290,6 @@ namespace MesFilms
         private Label label2;
         private ComboBox ItemSearchFileNameTrailer;
         private CheckBox SearchFileNameTrailer;
-        private CheckBox CheckWatched;
         private GroupBox groupBox_ArtistImages;
         private TextBox DefaultCoverArtist;
         private Label label_ArtistImagePath;
@@ -4247,7 +4300,6 @@ namespace MesFilms
         private GroupBox groupBox_nfoGrabber;
         private CheckBox ShowTrailerPlayDialog;
         private Button AntUpdFieldReset;
-        private Button AntSearchFieldReset;
         private GroupBox groupBox_PreLaunchingCommand;
         private ComboBox CmdPar;
         private TextBox CmdExe;
@@ -4263,10 +4315,6 @@ namespace MesFilms
         private Label label37;
         private ComboBox comboWOLtimeout;
         private PictureBox pictureBox1;
-        private GroupBox groupBox2;
-        private TextBox UserProfileName;
-        private CheckBox checkWatchedInProfile;
-        private Label Label_UserProfileName;
         private Label label39;
         private Label label38;
         private CheckBox chkGlobalUnwatchedOnly;
@@ -4286,6 +4334,42 @@ namespace MesFilms
         private Button btnAMCMovieScanPathAdd;
         private Label lblAMCMovieScanPath;
         private Label lblAMCupdaterConfigPreview;
+        private TabPage Tab_Search;
+        private GroupBox groupBox_SupplementarySearch;
+        private Button AntSearchFieldReset;
+        private Label label18;
+        private TextBox AntSearchList;
+        private ComboBox AntSearchItem2;
+        private ComboBox AntSearchField;
+        private TextBox AntSearchText2;
+        private ComboBox AntSearchItem1;
+        private TextBox AntSearchText1;
+        private GroupBox groupBox_Separators;
+        private Label label25;
+        private Label label23;
+        private ComboBox RoleSeparator5;
+        private ComboBox RoleSeparator4;
+        private ComboBox ListSeparator5;
+        private ComboBox ListSeparator4;
+        private ComboBox ListSeparator3;
+        private ComboBox ListSeparator2;
+        private ComboBox RoleSeparator2;
+        private ComboBox RoleSeparator3;
+        private Label label22;
+        private ComboBox RoleSeparator1;
+        private Label label24;
+        private ComboBox ListSeparator1;
+        private GroupBox groupBoxUpdateByProperties;
+        private GroupBox groupBoxDeletionOptions;
+        private Label lblUpdateValue;
+        private GroupBox groupBoxSearchByProperties;
+        private Label lblUserdefinedSearchItems;
+        private GroupBox groupBox2;
+        private Label Label_UserProfileName;
+        private TextBox UserProfileName;
+        private CheckBox checkWatchedInProfile;
+        private CheckBox CheckWatched;
+        private GroupBox groupBoxMoviePathInfos;
 
 
     }

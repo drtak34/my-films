@@ -196,28 +196,6 @@ Select the database field to be updated, enter the label associated with that fi
 and enter a pre-defined value to update the field.
 </value>
   </data>
-  <data name="groupBox_DatabaseUpdateOptions.ToolTip" xml:space="preserve">
-    <value>If you wish to update your movie database and/or the movie files from within the plugin (the Update menu), 
-you can select the desired update method here.  
-Be careful when using the options that enable the deletion of the movie files from your HDD.
-
-For the ‘Update db’ options, you must select a database field to update and a value for the update.
-
-You can also select if the update or deletion is executed when the movie player has finished.
-</value>
-  </data>
-  <data name="groupBox_Separators.ToolTip" xml:space="preserve">
-    <value>Genre, country and actors are grouped in unique fields in the database and sometimes 
-there are multiple entries in each of these fields which may be separated by commas - for example  Genre = 'Comedy, Comedy Romantic, ... ‘  
-The actual separators used can vary depending on the web-site used to grab the movie information.
-
-When using the ‘Search’ function, the plugin needs to know exactly which separators are used 
-in your movie database. A pre-defined list of separators is already given.
-
-For actors, their names are often followed by a role (Clint Eastwood (Inspector Harry), or Clint Eastwood as Inspector Harry,... ). 
-The plugin needs to know what separator is used to indicate the role text for finding or searching on actors.
-</value>
-  </data>
   <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
     <value>If you want to update your movie datas over Internet,
 valid that option. 
@@ -297,18 +275,6 @@ Enter the full path (or use the browse button) to your folder containing the vie
 Select the option 'Use the Default DVD Cover for missing thumbs' if you wish to use a DVD cover 
 when no thumb for views is available.</value>
   </data>
-  <data name="groupBox_SupplementarySearch.ToolTip" xml:space="preserve">
-    <value>The following searches are already implemented :
-	by Year
-	by Name
-	by Date
-	by Rating
-	by Actors
-	by Genre
-
-You can add additional searches by selecting the database field and adding a value to filter that field by, if required.
-</value>
-  </data>
   <data name="groupBox23.ToolTip" xml:space="preserve">
     <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
 These image files must have the same name as the movie.  
@@ -319,18 +285,18 @@ displayed as a background image for movies without a matching Fanart file. Becaf
 get a distorded picture as covers and fanarts don't have the same size.
 </value>
   </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
+and thus to integrate trailers into MyFilms.
+Trailer can be searched within the plugin and autoregistered.
+GUI allows to show if a trailer is present (registered) and play it.</value>
+  </data>
   <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
     <value>If Trailer file is not found with the 'Ant Item for storing Trailer Infos' field, you 
 can search the trailer file with the movie Name.
 Validate that option for it and give the Title used for the search.
 Attention: Might degrade performace!
 </value>
-  </data>
-  <data name="groupBox24.ToolTip" xml:space="preserve">
-    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
-and thus to integrate trailers into MyFilms.
-Trailer can be searched within the plugin and autoregistered.
-GUI allows to show if a trailer is present (registered) and play it.</value>
   </data>
   <data name="DefaultCover.ToolTip" xml:space="preserve">
     <value>Enter the full path and file name of the image file that you wish to use as the default DVD cover image.  
@@ -1493,6 +1459,30 @@ and it will be used as a default artist image.</value>
         P3+o76kMySN/vsGO//73v/IpyEORQP53TqAus3/+d34CY/tJYdhRldrfPqo3GeHFY/vpfvi7qf37Nvrn
         h/h9wbS++npoVDVWP+fx9j6j+iHw4vF2/WN1PaP9OXyP15u9VG4qJ7W+QLMfTcnPZXSp3+PDqn3LWP3z
         Ol3eR/XnIESM4T96QUP8UU7+H4l4P8ewz6u4AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="groupBox_Separators.ToolTip" xml:space="preserve">
+    <value>Genre, country and actors are grouped in unique fields in the database and sometimes 
+there are multiple entries in each of these fields which may be separated by commas - for example  Genre = 'Comedy, Comedy Romantic, ... ‘  
+The actual separators used can vary depending on the web-site used to grab the movie information.
+
+When using the ‘Search’ function, the plugin needs to know exactly which separators are used 
+in your movie database. A pre-defined list of separators is already given.
+
+For actors, their names are often followed by a role (Clint Eastwood (Inspector Harry), or Clint Eastwood as Inspector Harry,... ). 
+The plugin needs to know what separator is used to indicate the role text for finding or searching on actors.
+</value>
+  </data>
+  <data name="groupBox_SupplementarySearch.ToolTip" xml:space="preserve">
+    <value>The following searches are already implemented :
+	by Year
+	by Name
+	by Date
+	by Rating
+	by Actors
+	by Genre
+
+You can add additional searches by selecting the database field and adding a value to filter that field by, if required.
 </value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

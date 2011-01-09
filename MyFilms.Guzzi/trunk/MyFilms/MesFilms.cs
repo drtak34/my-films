@@ -1126,7 +1126,7 @@ namespace MesFilms
                             conf.FileImage = sr["Picture"].ToString();
                     }
                     else
-                        conf.FileImage = "";
+                        conf.FileImage = string.Empty;
                     string strThumb = string.Empty;
                     if (!System.IO.File.Exists(conf.FileImage))
                     {
