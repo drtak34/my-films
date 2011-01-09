@@ -2839,16 +2839,6 @@ namespace MesFilms
 
         }
 
-        private void AntSearchFieldReset_Click(object sender, EventArgs e)
-        {
-            AntSearchList.Text = String.Empty;
-        }
-
-        private void AntUpdFieldReset_Click(object sender, EventArgs e)
-        {
-            AntUpdList.Text = String.Empty;
-        }
-
         //private void ButDefaultCoverArtist_Click(object sender, EventArgs e)
         //{
         //    openFileDialog1.RestoreDirectory = true;
@@ -3180,9 +3170,17 @@ namespace MesFilms
 
         private void btnLaunchAMCglobal_Click(object sender, EventArgs e)
         {
-          launchAMCmanager();
+          if (btnLaunchAMCupdater.Visible == true)
+          {
+            launchAMCmanager();
+          }
+          else
+          {
+            MessageBox.Show("You have to configure Plugin and Grabber options first to launch AMC Manager", "Information", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            AMCMovieScanPath.Focus();
+          }
+
         }
-    
     
         private void launchAMCmanager()
         {
@@ -3413,6 +3411,30 @@ namespace MesFilms
         private void linkLabelMyFilmsWiki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
           System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films");
+        }
+
+        private void AntUpdFieldReset_Click(object sender, EventArgs e)
+        {
+          AntUpdList.Text = String.Empty;
+        }
+
+
+    
+        private void AntSearchFieldClear_Click(object sender, EventArgs e)
+        {
+          AntSearchList.Text = String.Empty;
+        }
+
+        private void AntUpdFieldReset_Click_1(object sender, EventArgs e)
+        {
+          AntUpdList.Text =
+            "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
+        }
+
+        private void AntSearchFieldResetToDefault_Click(object sender, EventArgs e)
+        {
+          AntSearchList.Text =
+            "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
         }
 
     }

@@ -1558,6 +1558,10 @@ namespace MesFilms
             dlg1.Add(string.Format(GUILocalizeStrings.Get(10798690)));
             choiceView.Add("globalupdates");
 
+            // Add Submenu for Wiki Online Help
+            dlg1.Add(string.Format(GUILocalizeStrings.Get(10798699)));
+            choiceView.Add("globalwikihelp");
+
             dlg1.DoModal(GetID);
 
             if (dlg1.SelectedLabel == -1)
@@ -2680,6 +2684,29 @@ namespace MesFilms
                     Change_view(choiceViewGlobalUpdates[dlg2.SelectedLabel].ToLower());
                     return;
 
+                case "globalwikihelp":
+                    var hasRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
+                    var hasRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
+                    if (hasRightPlugin && hasRightVersion)
+                    {
+                      //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
+                      int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                      string url = "http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films";
+                      string zoom = "150";
+
+                      //Load Webbrowserplugin with the URL
+                      GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                      GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                      GUIWindowManager.ActivateWindow(webBrowserWindowID, false);
+                      GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                      GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                    }
+                    else
+                    {
+                      ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0");
+                    }
+                    break;
+              
                 case "globalunwatchedfilter":
                     // Global overlayfilter for unwatched movies ...
                     MesFilms.conf.GlobalUnwatchedOnly = !MesFilms.conf.GlobalUnwatchedOnly;
