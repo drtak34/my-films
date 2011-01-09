@@ -2503,7 +2503,7 @@ Private Sub Main()
         Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
         Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 27, 0, 0)
         Me.XionPanel1.Sizable = True
-        Me.XionPanel1.Size = New System.Drawing.Size(32, 475)
+        Me.XionPanel1.Size = New System.Drawing.Size(187, 475)
         Me.XionPanel1.State = XionControls.XionPanel.PanelState.Collapse
         Me.XionPanel1.TabIndex = 67
         Me.XionPanel1.Text = "Movie List"
@@ -3372,7 +3372,7 @@ Private Sub Main()
         '
         Me.InternetLinksToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AMCUpdaterSourceforgeToolStripMenuItem, Me.AntMovieCatalogToolStripMenuItem, Me.MediaInfodllToolStripMenuItem})
         Me.InternetLinksToolStripMenuItem.Name = "InternetLinksToolStripMenuItem"
-        Me.InternetLinksToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.InternetLinksToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.InternetLinksToolStripMenuItem.Text = "Internet Links"
         '
         'AMCUpdaterSourceforgeToolStripMenuItem
@@ -3396,13 +3396,13 @@ Private Sub Main()
         'UserManualToolStripMenuItem
         '
         Me.UserManualToolStripMenuItem.Name = "UserManualToolStripMenuItem"
-        Me.UserManualToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.UserManualToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.UserManualToolStripMenuItem.Text = "User Manual"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'DebugToolStripMenuItem
