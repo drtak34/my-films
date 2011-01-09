@@ -967,14 +967,14 @@ namespace MesFilms
             AntSearchText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSearchText1", "");
             AntSearchItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSearchItem2", "");
             AntSearchText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSearchText2", "");
-            AntUpdItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdItem1", "");
-            AntUpdText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdText1", "");
-            AntUpdDflT1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdDflT1", "");
-            AntUpdItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdItem2", "");
-            AntUpdText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdText2", "");
-            AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdDflT2", string.Empty);
-            AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchList", "TranslatedTitle|OriginalTitle|Description|Comments|Actors|Director|Producer|Year|Date|Category|Country|Rating|Checked|MediaLabel|MediaType|URL|Borrower|Length|VideoFormat|VideoBitrate|AudioFormat|AudioBitrate|Resolution|Framerate|Size|Disks|Languages|Subtitles|Number");
-            AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UpdateList", "TranslatedTitle|OriginalTitle|Category|Year|Date|Country|Rating|Checked|MediaLabel|MediaType|Actors|Director|Producer");
+            AntUpdItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem1", "");
+            AntUpdText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText1", "");
+            AntUpdDflT1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT1", "");
+            AntUpdItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem2", "");
+            AntUpdText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText2", "");
+            AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT2", string.Empty);
+            AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
+            AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
 
             check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", false);
             comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", "15");
@@ -2732,7 +2732,7 @@ namespace MesFilms
             if (!AntSearchList.Text.Contains(AntSearchField.Text))
             {
                 if (AntSearchList.Text.Length > 0)
-                    AntSearchList.Text = AntSearchList.Text + "|" + AntSearchField.Text;
+                    AntSearchList.Text = AntSearchList.Text + ", " + AntSearchField.Text;
                 else
                     AntSearchList.Text = AntSearchField.Text;
             }
@@ -2742,7 +2742,7 @@ namespace MesFilms
             if (!AntUpdList.Text.Contains(AntUpdField.Text))
             {
                 if (AntUpdList.Text.Length > 0)
-                    AntUpdList.Text = AntUpdList.Text + "|" + AntUpdField.Text;
+                    AntUpdList.Text = AntUpdList.Text + ", " + AntUpdField.Text;
                 else
                     AntUpdList.Text = AntUpdField.Text;
             }
@@ -3173,12 +3173,18 @@ namespace MesFilms
 
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
+        private void btnLaunchAMCupdater_Click(object sender, EventArgs e)
         {
-
+          launchAMCmanager();
         }
 
-        private void btnLaunchAMCupdater_Click(object sender, EventArgs e)
+        private void btnLaunchAMCglobal_Click(object sender, EventArgs e)
+        {
+          launchAMCmanager();
+        }
+    
+    
+        private void launchAMCmanager()
         {
           using (Process p = new Process())
           {
@@ -3195,7 +3201,7 @@ namespace MesFilms
             }
 
             p.StartInfo = psi;
-            LogMyFilms.Debug("MyFilmsSetup: Launch AMCupdater from PluginSetup with argument: {0}", "");
+            LogMyFilms.Debug("MyFilmsSetup: Launch AMCupdater from PluginSetup with argument: {0}", string.Empty);
             try
             {
               p.Start();
@@ -3403,5 +3409,11 @@ namespace MesFilms
           else
             System.Windows.Forms.MessageBox.Show("The default AMCupdater configfile cannot be found! (" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings.xml" + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
         }
+
+        private void linkLabelMyFilmsWiki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+          System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films");
+        }
+
     }
 }
