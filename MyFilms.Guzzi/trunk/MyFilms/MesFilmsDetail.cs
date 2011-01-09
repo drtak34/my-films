@@ -1870,7 +1870,7 @@ namespace MesFilms
             if (MesFilms.conf.StrFanart)
             {
                 if (wtitle2.Contains(MesFilms.conf.TitleDelim))
-                    wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
+                  wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1); // Removed "trim", as there is no matching in details, if spacees are removed! old: wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
                 wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
                 //LogMyFilms.Debug("MyFilms (SearchFanart) - wtitle2-cleaned = '" + wtitle2 + "'");
                 //LogMyFilms.Debug("MyFilms (SearchFanart) - MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
@@ -2038,7 +2038,7 @@ namespace MesFilms
                     file = MesFilms.r[MesFilms.conf.StrIndex]["Picture"].ToString();
             }
             else
-                file = "";
+                file = string.Empty;
             if (!System.IO.File.Exists(file))
                 file = MesFilms.conf.DefaultCover;
             

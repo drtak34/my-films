@@ -3213,7 +3213,7 @@ namespace MesFilms
                                 _imdb.GetActorDetails(_imdb[index], out imdbActor);
 #endif
 
-                                //LogMyFilms.Info("Adding actor:{0}({1}),{2}", imdbActor.Name, actor, percent); // ToDo: Reactivate to add Actorinfos to Database !!!
+                                //LogMyFilms.Info("Adding actor:{0}({1}),{2}", imdbActor.Name, actor, percent);
                                 int actorId = MediaPortal.Video.Database.VideoDatabase.AddActor(imdbActor.Name);
                                 if (actorId > 0)
                                 {
