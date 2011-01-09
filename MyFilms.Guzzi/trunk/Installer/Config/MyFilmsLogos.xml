@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<profile>
+  <section name="ID0000">
+    <entry name="LogosPath"></entry>
+  </section>
+  <section name="ID2001">
+    <entry name="ID2001_0">Framerate;contains;23;or;Framerate;contains;24;BluRay.png</entry>
+    <entry name="ID2001_1">VideoFormat;contains;divx;or;VideoFormat;contains;div3;DIVX.png</entry>
+    <entry name="ID2001_2">VideoFormat;contains;xvid;;;;;XVID.png</entry>
+    <entry name="ID2001_3">VideoFormat;contains;dvd;;;;;DVD.png</entry>
+    <entry name="ID2001_4">VideoFormat;contains;h264;;;;;HD.png</entry>
+    <entry name="ID2001_5">VideoFormat;contains;mpeg-2;;;;;MPEG VIDEO VERSION 2.png</entry>
+    <entry name="ID2001_6">Resolution;contains;1080;;;;;1080p.png</entry>
+    <entry name="ID2001_7">Resolution;contains;720;;;;;720p.png</entry>
+    <entry name="ID2001_8">Resolution;contains;540;;;;;SD.png</entry>
+    <entry name="ID2001_9">VideoBitrate;greater;1500;;;;;HD.png</entry>
+    <entry name="ID2001_10">AudioFormat;contains;dolby digital;or;AudioFormat;contains;ac3;AC3.png</entry>
+    <entry name="ID2001_11">AudioFormat;contains;a_mpeg;or;AudioFormat;contains;mpa1l3;MPEG AUDIO VERSION 1 LAYER 3.png</entry>
+    <entry name="ID2001_12">AudioFormat;contains;a_aac/mpeg2;or;AudioFormat;audioformat;mpa1l2;MPEG AUDIO VERSION 1 LAYER 2.png</entry>
+    <entry name="ID2001_13">AudioFormat;contains;mp3;;;;;MPEG AUDIO VERSION 1 LAYER 3.png</entry>
+    <entry name="ID2001_14">AudioFormat;contains;layer 3;;;;;MPEG AUDIO VERSION 1 LAYER 3.png</entry>
+    <entry name="ID2001_15">AudioFormat;contains;layer 2;;;;;MPEG AUDIO VERSION 1 LAYER 2.png</entry>
+    <entry name="ID2001_16">AudioFormat;contains;mppeg1;;;;;20.png</entry>
+    <entry name="ID2001_17">AudioFormat;contains;6 channels;;;;;5.1.png</entry>
+    <entry name="ID2001_18">AudioBitrate;contains;375;or;AudioBitrate;contains;438;5.1.png</entry>
+    <entry name="ID2001_19">AudioBitrate;contains;188;or;AudioBitrate;contains;156;stereo.png</entry>
+    <entry name="ID2001_20">Subtitles;filled;;;;;;Subtitles.png</entry>
+    <entry name="ID2001_21">Languages;greater;1;;;;;multilanguage.png</entry>
+  </section>
+  <section name="ID2002">
+    <entry name="ID2002_0">Category;contains;drama;;;;;Drama.png</entry>
+    <entry name="ID2002_1">Category;contains;comedy;;;;;Comedy.png</entry>
+    <entry name="ID2002_2">Category;contains;action;;;;;Action.png</entry>
+    <entry name="ID2002_3">Category;contains;animation;;;;;Animation.png</entry>
+    <entry name="ID2002_4">Category;contains;documentary;;;;;Documentary.png</entry>
+    <entry name="ID2002_5">Category;contains;thriller;;;;;Thriller.png</entry>
+    <entry name="ID2002_6">Category;contains;science-fiction;;;;;Scifi.png</entry>
+    <entry name="ID2002_7">Category;contains;adventure;;;;;Adventure.png</entry>
+    <entry name="ID2002_8">Category;contains;animation;;;;;Anim.png</entry>
+    <entry name="ID2002_9">Category;contains;family;;;;;Family.png</entry>
+    <entry name="ID2002_10">Category;contains;soap;;;;;Soap.png</entry>
+    <entry name="ID2002_11">Category;contains;love;;;;;Love.png</entry>
+    <entry name="ID2002_12">Category;contains;romance;;;;;romance.png</entry>
+    <entry name="ID2002_13">Category;contains;series;;;;;Series.png</entry>
+  </section>
+</profile>

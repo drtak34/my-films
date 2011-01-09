@@ -1,0 +1,152 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Values Option="Movie_Scan_Path">
+    <Value></Value>
+  </Values>
+  <Values Option="XML_File">
+    <Value></Value>
+  </Values>
+  <Values Option="Movie_Fanart_Path">
+    <Value></Value>
+  </Values>
+  <Values Option="Ant_Media_Type">
+    <Value>HDD</Value>
+  </Values>
+  <Values Option="Ant_Media_Label">
+    <Value>Server</Value>
+  </Values>
+  <Values Option="Override_Path">
+    <Value />
+  </Values>
+  <Values Option="File_Types_Media">
+    <Value>avi;mpg;divx;mpeg;wmv;mkv</Value>
+  </Values>
+  <Values Option="File_Types_Non_Media">
+    <Value>iso;img</Value>
+  </Values>
+  <Values Option="Backup_XML_First">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Overwrite_XML_File">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Ant_Database_Source_Field">
+    <Value>Source</Value>
+  </Values>
+  <Values Option="Purge_Missing_Files">
+    <Value>False</Value>
+  </Values>
+  <Values Option="RegEx_Check_For_MultiPart_Files">
+    <Value>[-|_]cd[0-9]|[-|_]disk[0-9]|[0-9]of[0-9]</Value>
+  </Values>
+  <Values Option="Scan_For_DVD_Folders">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Execute_Program">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Execute_Program_Path">
+    <Value>
+  </Value>
+  </Values>
+  <Values Option="Execute_Only_For_Orphans">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Log_Level">
+    <Value>All Events</Value>
+  </Values>
+  <Values Option="Date_Handling">
+    <Value>File Created Date</Value>
+  </Values>
+  <Values Option="Movie_Title_Handling">
+    <Value>File Name + Internet Lookup</Value>
+  </Values>
+  <Values Option="Internet_Parser_Path">
+    <Value>C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\MyFilmsOFDB.xml</Value>
+  </Values>
+  <Values Option="Store_Short_Names_Only">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Excluded_Movies_File">
+    <Value>C:\Daten.Test\Movies - Test\AMCUpdater_Excluded_Files.txt</Value>
+  </Values>
+  <Values Option="Database_Fields_To_Import">
+    <Value>Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;OriginalTitle|True;TranslatedTitle|True;FormattedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True;Fanart|True</Value>
+  </Values>
+  <Values Option="Import_File_On_Internet_Lookup_Failure">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Internet_Lookup_Always_Prompt">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Read_DVD_Label">
+    <Value>False</Value>
+  </Values>
+  <Values Option="DVD_Drive_Letter">
+    <Value />
+  </Values>
+  <Values Option="Manual_XML_File">
+    <Value>C:\Daten.Test\Movies - Test\Movies - Test.xml</Value>
+  </Values>
+  <Values Option="Manual_Internet_Parser_Path">
+    <Value>C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\MyFilmsOFDB.xml</Value>
+  </Values>
+  <Values Option="Manual_Excluded_Movies_File">
+    <Value>C:\Daten.Test\Movies - Test\AMCUpdater_Excluded_Files.txt</Value>
+  </Values>
+  <Values Option="Manual_Internet_Lookup_Always_Prompt">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Excluded_Folder_Strings">
+    <Value />
+  </Values>
+  <Values Option="Excluded_File_Strings">
+    <Value />
+  </Values>
+  <Values Option="Filter_Strings">
+    <Value>\([0-9][0-9][0-9][0-9]\)</Value>
+  </Values>
+  <Values Option="Check_Field_Handling">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Folder_Name_Is_Group_Name">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Group_Name_Applies_To">
+    <Value>Original Title</Value>
+  </Values>
+  <Values Option="Parse_Playlist_Files">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Store_Image_With_Relative_Path">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Image_Download_Filename_Prefix">
+    <Value />
+  </Values>
+  <Values Option="Use_Folder_Dot_Jpg">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Prohibit_Internet_Lookup">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Parse_Subtitle_Files">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Rescan_Moved_Files">
+    <Value>True</Value>
+  </Values>
+  <Values Option="Master_Title">
+    <Value>TranslatedTitle</Value>
+  </Values>
+  <Values Option="Use_XBMC_nfo">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Use_Page_Grabber">
+    <Value>False</Value>
+  </Values>
+  <Values Option="LogDirectory">
+    <Value>
+  </Value>
+  </Values>
+</NewDataSet>
