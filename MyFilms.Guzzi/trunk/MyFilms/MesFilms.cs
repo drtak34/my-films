@@ -280,7 +280,9 @@ namespace MesFilms
             //Add localized labels for DB Columns
             using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
-                MesFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "My Films"));
+              MesFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "Films"));
+              MesFilmsDetail.setGUIProperty("config.pluginmode", xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal"));
+              LogMyFilms.Info("Startmode: '" + xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal") + "'");
             }
             AntMovieCatalog ds = new AntMovieCatalog();
             foreach (DataColumn dc in ds.Movie.Columns)
@@ -1559,8 +1561,11 @@ namespace MesFilms
             choiceView.Add("globalupdates");
 
             // Add Submenu for Wiki Online Help
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(10798699)));
-            choiceView.Add("globalwikihelp");
+            if (Configuration.PluginMode != "normal") // check if specialmode is configured for disabled features
+            {
+              dlg1.Add(string.Format(GUILocalizeStrings.Get(10798699)));
+              choiceView.Add("globalwikihelp");
+            }
 
             dlg1.DoModal(GetID);
 

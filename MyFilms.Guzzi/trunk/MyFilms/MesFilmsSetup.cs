@@ -57,6 +57,7 @@ namespace MesFilms
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private int MesFilms_nb_config = 0;
+        private string MyFilms_PluginMode = String.Empty; // "normal" for standard operations, "test" for extended functionalities, to be set manually in MyFilms.XML
         private string StrDfltSelect = string.Empty;
         private AntMovieCatalog mydivx = new AntMovieCatalog();
         private Crypto crypto = new Crypto();
@@ -74,6 +75,8 @@ namespace MesFilms
             Refresh_Items(true);
 
             textBox1.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginName", "Films");
+            MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/anable normal vs. testfeatures
+            LogMyFilms.Info("MyFilms Setup ********** OperationsMode (PluginMode): '" + MyFilms_PluginMode + "' **********");
             MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
             //            for (int i = 0; i < (int)MesFilms_nb_config; i++)
             //            {

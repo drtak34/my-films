@@ -158,7 +158,7 @@ namespace MesFilms
                     try
                     {
                         b.Save(LogosPath + fileLogoName);
-                        LogMyFilms.Debug("MyFilms: Concatened Logo saved " + fileLogoName);
+                        LogMyFilms.Debug("MyFilms: Concatenated Logo saved " + fileLogoName);
                         System.Threading.Thread.Sleep(10);
                     }
                     catch (Exception e)

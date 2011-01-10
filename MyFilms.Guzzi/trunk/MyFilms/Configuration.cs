@@ -359,8 +359,14 @@ namespace MesFilms
         private static string currentConfig = string.Empty;
         public static string CurrentConfig
         {
-            get { return currentConfig; }
-            set { currentConfig = value; }
+          get { return currentConfig; }
+          set { currentConfig = value; }
+        }
+        private static string pluginMode = string.Empty;
+        public static string PluginMode
+        {
+          get { return pluginMode; }
+          set { pluginMode = value; }
         }
         private static int nbConfig = int.MinValue;
         public static int NbConfig
@@ -1188,6 +1194,8 @@ namespace MesFilms
 //            {
             XmlConfig XmlConfig = new XmlConfig();
             NbConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", 0);
+            pluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Reads Plugin start mode and sets to normal if not present
+            LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");
             if (NbConfig == 0)
             {
                 MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
