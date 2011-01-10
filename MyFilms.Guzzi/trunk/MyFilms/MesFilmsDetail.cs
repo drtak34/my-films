@@ -4251,6 +4251,14 @@ namespace MesFilms
             }
         }
 
+        public static bool ExtendedStartmode(string disabledfeature)
+        {
+          if (Configuration.PluginMode != "normal") 
+            return true;
+          else
+            LogMyFilms.Debug("MyFilms: Disabled feature due to startmode 'normal': '" + disabledfeature + "'");
+            return false;
+        }
 
     }
 

@@ -1561,7 +1561,7 @@ namespace MesFilms
             choiceView.Add("globalupdates");
 
             // Add Submenu for Wiki Online Help
-            if (Configuration.PluginMode != "normal") // check if specialmode is configured for disabled features
+            if (MesFilmsDetail.ExtendedStartmode("Contextmenu for Onlinehelp")) // check if specialmode is configured for disabled features
             {
               dlg1.Add(string.Format(GUILocalizeStrings.Get(10798699)));
               choiceView.Add("globalwikihelp");
