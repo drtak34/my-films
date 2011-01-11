@@ -834,10 +834,11 @@
       </GroupItem>
       <GroupItem Name="DefaultLogos">
         <ParentGroup />
-        <DisplayName>Default Logos</DisplayName>
+        <DisplayName>Optional Logos</DisplayName>
         <DefaulChecked>true</DefaulChecked>
-        <Description>DefaultLogos "black glass style". 
-Can be used optionally, if you don't wnt to use the default delivered logo images of the skin.</Description>
+        <Description>This is an optional logo pack in "dark style".
+Installing this logo pack does NOT activate it, you have to manually configure the logo settings in setup to use them.
+If you don't do a configuration, the default logos of your selected skin will be used.</Description>
         <Files>
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
@@ -1926,11 +1927,53 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <PanelName>Install Section</PanelName>
         <WizardButtonsEnum>Next</WizardButtonsEnum>
       </SectionItem>
+      <SectionItem Guid="fe4308f2-01b6-4b63-b429-5164db3a627a" Name="Readme Information" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header Title">
+              <Value>Readme Information</Value>
+              <ValueType>String</ValueType>
+              <Description>Header title</Description>
+            </SectionParam>
+            <SectionParam Name="Header description">
+              <Value>Readme Information for [Name]</Value>
+              <ValueType>String</ValueType>
+              <Description>Description of section, shown in under section title</Description>
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value>..\MyFilms\Resources\film-reel-128x128.png</Value>
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+            <SectionParam Name="Readme text">
+              <Value>MyFilms plugin requires a minimal setup to work.
+
+Please refer to the onlinedocumentation at:
+http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films</Value>
+              <ValueType>String</ValueType>
+              <Description>The readme text</Description>
+            </SectionParam>
+            <SectionParam Name="Rreadme text file">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>The readme file should be RTF file</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items />
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Readme Information</PanelName>
+        <WizardButtonsEnum>BackNextCancel</WizardButtonsEnum>
+      </SectionItem>
       <SectionItem Guid="b842d9d3-4115-418a-8bfb-c3c85022d5d2" Name="Setup Complete" ConditionGroup="Default">
         <Params>
           <Items>
             <SectionParam Name="Header text">
-              <Value>The Extension Installer Wizard has successfully installed [Name].</Value>
+              <Value>The Extension Installer Wizard has successfully installed [Name].
+
+[Name] Setup will now be launched to let you configure the plugin.</Value>
               <ValueType>String</ValueType>
               <Description />
             </SectionParam>
@@ -1952,7 +1995,21 @@ Click Next to continue or Cancel to exit Setup.</Value>
           </Items>
         </Params>
         <Actions>
-          <Items />
+          <Items>
+            <ActionItem Name="ConfigurePlugin" ActionType="ConfigurePlugin" ConditionGroup="Default">
+              <Params>
+                <Items>
+                  <SectionParam Name="Path to plugin">
+                    <Value>%Plugins%\windows\mesfilms.dll</Value>
+                    <ValueType>Template</ValueType>
+                    <Description>Path to the plugin like 
+ %Plugins%\Windows\plugin.dll</Description>
+                  </SectionParam>
+                </Items>
+              </Params>
+              <ExecuteLocation>AfterPanelHide</ExecuteLocation>
+            </ActionItem>
+          </Items>
         </Actions>
         <IncludedGroups />
         <PanelName>Setup Complete</PanelName>
@@ -1994,7 +2051,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>1</Revision>
+      <Revision>2</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production.
@@ -2003,7 +2060,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
     <OnlineLocation />
     <ReleaseDate>2011-01-01T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.1.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.2c.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3827,7 +3884,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{917b8b43-abb2-497f-94e9-55ba82cd349c}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{437a41b1-b079-4b48-833d-29630a2427e4}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

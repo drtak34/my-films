@@ -469,7 +469,6 @@ namespace MesFilms
                     {
                         Prev_MenuID = PreviousWindowId; 
                         InitMainScreen();
-                        MesFilmsDetail.clearGUIProperty("select");
                         Configuration.Current_Config();
                         Load_Config(Configuration.CurrentConfig, true);
                         // this is too early ... -> InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
@@ -478,8 +477,12 @@ namespace MesFilms
                         else
                             backdrop.Active = false;
                     }
-                    if (Configuration.CurrentConfig.Length == 0)
-                        GUIWindowManager.ShowPreviousWindow();
+                    if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
+                    {
+                      GUIWindowManager.ShowPreviousWindow();
+                      GUIWaitCursor.Hide();
+                      return true;
+                    }
 
                     // Originally Deactivated by Zebons    
                     // ********************************
@@ -4878,6 +4881,7 @@ namespace MesFilms
             MesFilmsDetail.clearGUIProperty("Fanart");
             MesFilmsDetail.clearGUIProperty("Fanart2");
             MesFilmsDetail.clearGUIProperty("db.rating");
+            MesFilmsDetail.clearGUIProperty("select");
             this.Load_Rating(0);
             GUIWaitCursor.Hide();
             GUIControl.HideControl(GetID, 34);

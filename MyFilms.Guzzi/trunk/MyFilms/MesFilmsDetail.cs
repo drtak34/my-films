@@ -2343,12 +2343,12 @@ namespace MesFilms
                                 clearGUIProperty("user.item3.value");
                             }
 
-                    if ((MesFilms.conf.StrStorage.ToLower() == (dc.ColumnName.ToLower())))
+                    if (wrep && (MesFilms.conf.StrStorage.ToLower() == (dc.ColumnName.ToLower())))
                     {
                         setGUIProperty("user.source.value", MesFilms.r[ItemId][dc.ColumnName].ToString());
                     }
 
-                    if ((MesFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower())))
+                    if (wrep && (MesFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower())))
                     {
                         setGUIProperty("user.sourcetrailer.value", MesFilms.r[ItemId][dc.ColumnName].ToString());
                     }

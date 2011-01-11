@@ -40,6 +40,7 @@ namespace MesFilms
         public static ArrayList ID2001Logos = new ArrayList();
         public static ArrayList ID2002Logos = new ArrayList();
         public static ArrayList ID2003Logos = new ArrayList();
+        public static ArrayList ID2012Logos = new ArrayList();
         public static string LogosPath = string.Empty;
       #endregion
 

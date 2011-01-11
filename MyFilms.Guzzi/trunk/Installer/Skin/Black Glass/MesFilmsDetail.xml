@@ -1576,6 +1576,7 @@ Detailmenu for technical details
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
+<!--
 		<control>
 			<type>image</type>
 			<description>thumb Logos ID 2001</description>
@@ -1598,7 +1599,7 @@ Detailmenu for technical details
 			<description>thumb Logos ID 2002</description>
 			<id>2002</id>
 			<posX>520</posX>
-			<posY>625</posY>
+			<posY>525</posY>
 			<width>730</width>
 			<height>35</height>
 			<texture>#myfilms.logos_id2002</texture>
@@ -1610,6 +1611,45 @@ Detailmenu for technical details
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
+
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2003</description>
+			<id>2003</id>
+			<posX>520</posX>
+			<posY>625</posY>
+			<width>730</width>
+			<height>35</height>
+			<texture>#myfilms.logos_id2003</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<spaceBetweenItems>2</spaceBetweenItems>
+      <visible>!Control.HasFocus(10099)</visible>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+-->
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2012</description>
+			<id>2012</id>
+			<posX>520</posX>
+			<posY>625</posY>
+			<width>730</width>
+			<height>35</height>
+			<texture>#myfilms.logos_id2012</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<spaceBetweenItems>2</spaceBetweenItems>
+      <visible>!Control.HasFocus(10099)</visible>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+
+
+
 <!--
 		<control>
 			<description>Selection text</description>
@@ -1716,7 +1756,8 @@ Detailmenu for technical details
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control> 
-		<control>
+
+<!--		<control>
 			<type>image</type>
 			<description>thumb Logos ID 2001 (FullColor Fanart View)</description>
 			<id>1</id>
@@ -1741,6 +1782,39 @@ Detailmenu for technical details
 			<width>750</width>
 			<height>22</height>
 			<texture>#myfilms.logos_id2002</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<spaceBetweenItems>0</spaceBetweenItems>
+			<colordiffuse>cfffffff</colordiffuse>
+      <visible>Control.HasFocus(10099)</visible>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2003 (FullColor Fanart View)</description>
+			<id>1</id>
+			<posX>20</posX>
+			<posY>690</posY>
+			<width>750</width>
+			<height>22</height>
+			<texture>#myfilms.logos_id2003</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<spaceBetweenItems>0</spaceBetweenItems>
+			<colordiffuse>cfffffff</colordiffuse>
+      <visible>Control.HasFocus(10099)</visible>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
+-->
+		<control>
+			<type>image</type>
+			<description>thumb Logos ID 2012 (FullColor Fanart View)</description>
+			<id>1</id>
+			<posX>20</posX>
+			<posY>690</posY>
+			<width>750</width>
+			<height>22</height>
+			<texture>#myfilms.logos_id2012</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>

@@ -1203,7 +1203,8 @@ namespace MesFilms
                 dlgOk.SetLine(1, "No Configuration defined");
                 dlgOk.SetLine(2, "Please enter setup first");
                 dlgOk.DoModal(MesFilms.ID_MesFilms);
-                MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow();
+                //MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow(); // doesn't work in this context - why?
+              return;
             }
             bool boolchoice = true;
             if (CurrentConfig == null)
