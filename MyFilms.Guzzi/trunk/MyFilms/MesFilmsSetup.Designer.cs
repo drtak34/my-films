@@ -312,6 +312,13 @@ namespace MesFilms
           this.AntSearchFieldClear = new System.Windows.Forms.Button();
           this.checkWatchedInProfile = new System.Windows.Forms.CheckBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
+          this.groupBox_TitleOrder = new System.Windows.Forms.GroupBox();
+          this.label20 = new System.Windows.Forms.Label();
+          this.label17 = new System.Windows.Forms.Label();
+          this.label9 = new System.Windows.Forms.Label();
+          this.label8 = new System.Windows.Forms.Label();
+          this.SPicture = new System.Windows.Forms.PictureBox();
+          this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.label33 = new System.Windows.Forms.Label();
           this.AntUpdList = new System.Windows.Forms.TextBox();
           this.AntUpdField = new System.Windows.Forms.ComboBox();
@@ -335,6 +342,7 @@ namespace MesFilms
           this.AMCConfigView = new System.Windows.Forms.ListView();
           this.Option = new System.Windows.Forms.ColumnHeader();
           this.Value = new System.Windows.Forms.ColumnHeader();
+          this.btnLaunchAMCupdater = new System.Windows.Forms.Button();
           this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
@@ -363,17 +371,13 @@ namespace MesFilms
           this.label6 = new System.Windows.Forms.Label();
           this.label4 = new System.Windows.Forms.Label();
           this.label13 = new System.Windows.Forms.Label();
-          this.groupBox_TitleOrder = new System.Windows.Forms.GroupBox();
-          this.label20 = new System.Windows.Forms.Label();
-          this.label17 = new System.Windows.Forms.Label();
-          this.label9 = new System.Windows.Forms.Label();
-          this.label8 = new System.Windows.Forms.Label();
           this.ButCat = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
           this.Tab_Trailer = new System.Windows.Forms.TabPage();
           this.Tab_Views = new System.Windows.Forms.TabPage();
           this.Tab_Search = new System.Windows.Forms.TabPage();
           this.groupBoxSearchByProperties = new System.Windows.Forms.GroupBox();
+          this.AntSearchFieldReset = new System.Windows.Forms.Button();
           this.label18 = new System.Windows.Forms.Label();
           this.AntSearchField = new System.Windows.Forms.ComboBox();
           this.AntSearchList = new System.Windows.Forms.TextBox();
@@ -382,6 +386,7 @@ namespace MesFilms
           this.Label_UserProfileName = new System.Windows.Forms.Label();
           this.UserProfileName = new System.Windows.Forms.TextBox();
           this.groupBoxUpdateByProperties = new System.Windows.Forms.GroupBox();
+          this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
           this.Tab_Grabber = new System.Windows.Forms.TabPage();
           this.Tab_Artwork = new System.Windows.Forms.TabPage();
@@ -427,11 +432,6 @@ namespace MesFilms
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.btnLaunchAMCupdater = new System.Windows.Forms.Button();
-          this.SPicture = new System.Windows.Forms.PictureBox();
-          this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
-          this.AntSearchFieldReset = new System.Windows.Forms.Button();
-          this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -450,6 +450,8 @@ namespace MesFilms
           this.groupBox_ArtistImages.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
           this.groupBox_SupplementarySearch.SuspendLayout();
+          this.groupBox_TitleOrder.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.gpspfield.SuspendLayout();
           this.gpsuppress.SuspendLayout();
           this.groupBox111.SuspendLayout();
@@ -458,7 +460,6 @@ namespace MesFilms
           this.groupBox_Security.SuspendLayout();
           this.groupBox_PlayMovieInfos.SuspendLayout();
           this.groupBoxMoviePathInfos.SuspendLayout();
-          this.groupBox_TitleOrder.SuspendLayout();
           this.Tab_Trailer.SuspendLayout();
           this.Tab_Views.SuspendLayout();
           this.Tab_Search.SuspendLayout();
@@ -479,7 +480,6 @@ namespace MesFilms
           this.groupBox13.SuspendLayout();
           this.groupBox10.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -1565,7 +1565,8 @@ namespace MesFilms
           this.SLogo_Type.FormattingEnabled = true;
           this.SLogo_Type.Items.AddRange(new object[] {
             "ID2001",
-            "ID2002"});
+            "ID2002",
+            "ID2003"});
           this.SLogo_Type.Location = new System.Drawing.Point(9, 289);
           this.SLogo_Type.Name = "SLogo_Type";
           this.SLogo_Type.Size = new System.Drawing.Size(102, 21);
@@ -2741,6 +2742,87 @@ namespace MesFilms
                   "ed each time a movie is launched.\r\n");
           this.CheckWatched.UseVisualStyleBackColor = true;
           // 
+          // groupBox_TitleOrder
+          // 
+          this.groupBox_TitleOrder.Controls.Add(this.label20);
+          this.groupBox_TitleOrder.Controls.Add(this.AntSTitle);
+          this.groupBox_TitleOrder.Controls.Add(this.label17);
+          this.groupBox_TitleOrder.Controls.Add(this.TitleDelim);
+          this.groupBox_TitleOrder.Controls.Add(this.label9);
+          this.groupBox_TitleOrder.Controls.Add(this.label8);
+          this.groupBox_TitleOrder.Controls.Add(this.AntTitle2);
+          this.groupBox_TitleOrder.Controls.Add(this.AntTitle1);
+          this.groupBox_TitleOrder.Location = new System.Drawing.Point(7, 44);
+          this.groupBox_TitleOrder.Name = "groupBox_TitleOrder";
+          this.groupBox_TitleOrder.Size = new System.Drawing.Size(440, 101);
+          this.groupBox_TitleOrder.TabIndex = 61;
+          this.groupBox_TitleOrder.TabStop = false;
+          this.groupBox_TitleOrder.Text = "Title Order";
+          this.ToolTip1.SetToolTip(this.groupBox_TitleOrder, resources.GetString("groupBox_TitleOrder.ToolTip"));
+          // 
+          // label20
+          // 
+          this.label20.AutoSize = true;
+          this.label20.Location = new System.Drawing.Point(7, 72);
+          this.label20.Name = "label20";
+          this.label20.Size = new System.Drawing.Size(65, 13);
+          this.label20.TabIndex = 71;
+          this.label20.Text = "Ant SortTitle";
+          // 
+          // label17
+          // 
+          this.label17.AutoSize = true;
+          this.label17.Location = new System.Drawing.Point(294, 14);
+          this.label17.Name = "label17";
+          this.label17.Size = new System.Drawing.Size(101, 26);
+          this.label17.TabIndex = 66;
+          this.label17.Text = "Hierarchy Separator\r\n(Grouping)";
+          this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+          // 
+          // label9
+          // 
+          this.label9.AutoSize = true;
+          this.label9.Location = new System.Drawing.Point(7, 46);
+          this.label9.Name = "label9";
+          this.label9.Size = new System.Drawing.Size(97, 13);
+          this.label9.TabIndex = 18;
+          this.label9.Text = "Ant SecondaryTitle";
+          // 
+          // label8
+          // 
+          this.label8.AutoSize = true;
+          this.label8.Location = new System.Drawing.Point(7, 21);
+          this.label8.Name = "label8";
+          this.label8.Size = new System.Drawing.Size(81, 13);
+          this.label8.TabIndex = 17;
+          this.label8.Text = "Ant Master Title";
+          // 
+          // SPicture
+          // 
+          this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
+          this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+          this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          this.SPicture.Enabled = false;
+          this.SPicture.Location = new System.Drawing.Point(498, 272);
+          this.SPicture.Name = "SPicture";
+          this.SPicture.Size = new System.Drawing.Size(79, 58);
+          this.SPicture.TabIndex = 85;
+          this.SPicture.TabStop = false;
+          this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
+          this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
+          // 
+          // linkLabelMyFilmsWiki
+          // 
+          this.linkLabelMyFilmsWiki.AutoSize = true;
+          this.linkLabelMyFilmsWiki.Location = new System.Drawing.Point(254, 473);
+          this.linkLabelMyFilmsWiki.Name = "linkLabelMyFilmsWiki";
+          this.linkLabelMyFilmsWiki.Size = new System.Drawing.Size(134, 13);
+          this.linkLabelMyFilmsWiki.TabIndex = 78;
+          this.linkLabelMyFilmsWiki.TabStop = true;
+          this.linkLabelMyFilmsWiki.Text = "MyFilms Wiki Online Pages";
+          this.ToolTip1.SetToolTip(this.linkLabelMyFilmsWiki, "Opens the MyFilms Wiki in your browser...");
+          this.linkLabelMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMyFilmsWiki_LinkClicked);
+          // 
           // label33
           // 
           this.label33.AutoSize = true;
@@ -2982,6 +3064,18 @@ namespace MesFilms
           // Value
           // 
           this.Value.Width = 309;
+          // 
+          // btnLaunchAMCupdater
+          // 
+          this.btnLaunchAMCupdater.Image = global::MesFilms.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 21);
+          this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
+          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 56);
+          this.btnLaunchAMCupdater.TabIndex = 76;
+          this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
+          this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
+          this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
           // 
           // AntFilterMinRating
           // 
@@ -3244,61 +3338,6 @@ namespace MesFilms
           this.label13.TabIndex = 63;
           this.label13.Text = "Catalog Type";
           // 
-          // groupBox_TitleOrder
-          // 
-          this.groupBox_TitleOrder.Controls.Add(this.label20);
-          this.groupBox_TitleOrder.Controls.Add(this.AntSTitle);
-          this.groupBox_TitleOrder.Controls.Add(this.label17);
-          this.groupBox_TitleOrder.Controls.Add(this.TitleDelim);
-          this.groupBox_TitleOrder.Controls.Add(this.label9);
-          this.groupBox_TitleOrder.Controls.Add(this.label8);
-          this.groupBox_TitleOrder.Controls.Add(this.AntTitle2);
-          this.groupBox_TitleOrder.Controls.Add(this.AntTitle1);
-          this.groupBox_TitleOrder.Location = new System.Drawing.Point(7, 44);
-          this.groupBox_TitleOrder.Name = "groupBox_TitleOrder";
-          this.groupBox_TitleOrder.Size = new System.Drawing.Size(440, 101);
-          this.groupBox_TitleOrder.TabIndex = 61;
-          this.groupBox_TitleOrder.TabStop = false;
-          this.groupBox_TitleOrder.Text = "Title Order";
-          this.ToolTip1.SetToolTip(this.groupBox_TitleOrder, resources.GetString("groupBox_TitleOrder.ToolTip"));
-          // 
-          // label20
-          // 
-          this.label20.AutoSize = true;
-          this.label20.Location = new System.Drawing.Point(7, 72);
-          this.label20.Name = "label20";
-          this.label20.Size = new System.Drawing.Size(65, 13);
-          this.label20.TabIndex = 71;
-          this.label20.Text = "Ant SortTitle";
-          // 
-          // label17
-          // 
-          this.label17.AutoSize = true;
-          this.label17.Location = new System.Drawing.Point(294, 14);
-          this.label17.Name = "label17";
-          this.label17.Size = new System.Drawing.Size(101, 26);
-          this.label17.TabIndex = 66;
-          this.label17.Text = "Hierarchy Separator\r\n(Grouping)";
-          this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-          // 
-          // label9
-          // 
-          this.label9.AutoSize = true;
-          this.label9.Location = new System.Drawing.Point(7, 46);
-          this.label9.Name = "label9";
-          this.label9.Size = new System.Drawing.Size(97, 13);
-          this.label9.TabIndex = 18;
-          this.label9.Text = "Ant SecondaryTitle";
-          // 
-          // label8
-          // 
-          this.label8.AutoSize = true;
-          this.label8.Location = new System.Drawing.Point(7, 21);
-          this.label8.Name = "label8";
-          this.label8.Size = new System.Drawing.Size(81, 13);
-          this.label8.TabIndex = 17;
-          this.label8.Text = "Ant Master Title";
-          // 
           // ButCat
           // 
           this.ButCat.Location = new System.Drawing.Point(407, 13);
@@ -3370,6 +3409,16 @@ namespace MesFilms
           this.groupBoxSearchByProperties.TabIndex = 35;
           this.groupBoxSearchByProperties.TabStop = false;
           this.groupBoxSearchByProperties.Text = "Search by Properties";
+          // 
+          // AntSearchFieldReset
+          // 
+          this.AntSearchFieldReset.Location = new System.Drawing.Point(591, 34);
+          this.AntSearchFieldReset.Name = "AntSearchFieldReset";
+          this.AntSearchFieldReset.Size = new System.Drawing.Size(106, 21);
+          this.AntSearchFieldReset.TabIndex = 86;
+          this.AntSearchFieldReset.Text = "Reset to Defaults";
+          this.AntSearchFieldReset.UseVisualStyleBackColor = true;
+          this.AntSearchFieldReset.Click += new System.EventHandler(this.AntSearchFieldResetToDefault_Click);
           // 
           // label18
           // 
@@ -3454,6 +3503,16 @@ namespace MesFilms
           this.groupBoxUpdateByProperties.TabIndex = 34;
           this.groupBoxUpdateByProperties.TabStop = false;
           this.groupBoxUpdateByProperties.Text = "Update by Properties";
+          // 
+          // AntUpdFieldReset
+          // 
+          this.AntUpdFieldReset.Location = new System.Drawing.Point(582, 22);
+          this.AntUpdFieldReset.Name = "AntUpdFieldReset";
+          this.AntUpdFieldReset.Size = new System.Drawing.Size(108, 22);
+          this.AntUpdFieldReset.TabIndex = 86;
+          this.AntUpdFieldReset.Text = "Reset to Default";
+          this.AntUpdFieldReset.UseVisualStyleBackColor = true;
+          this.AntUpdFieldReset.Click += new System.EventHandler(this.AntUpdFieldReset_Click_1);
           // 
           // groupBoxDeletionOptions
           // 
@@ -3970,64 +4029,6 @@ namespace MesFilms
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // btnLaunchAMCupdater
-          // 
-          this.btnLaunchAMCupdater.Image = global::MesFilms.Properties.Resources.AMCUpdaterSmall;
-          this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 21);
-          this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
-          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 56);
-          this.btnLaunchAMCupdater.TabIndex = 76;
-          this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
-          this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
-          this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
-          // 
-          // SPicture
-          // 
-          this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
-          this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-          this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.SPicture.Enabled = false;
-          this.SPicture.Location = new System.Drawing.Point(498, 272);
-          this.SPicture.Name = "SPicture";
-          this.SPicture.Size = new System.Drawing.Size(79, 58);
-          this.SPicture.TabIndex = 85;
-          this.SPicture.TabStop = false;
-          this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
-          this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
-          // 
-          // linkLabelMyFilmsWiki
-          // 
-          this.linkLabelMyFilmsWiki.AutoSize = true;
-          this.linkLabelMyFilmsWiki.Location = new System.Drawing.Point(254, 473);
-          this.linkLabelMyFilmsWiki.Name = "linkLabelMyFilmsWiki";
-          this.linkLabelMyFilmsWiki.Size = new System.Drawing.Size(134, 13);
-          this.linkLabelMyFilmsWiki.TabIndex = 78;
-          this.linkLabelMyFilmsWiki.TabStop = true;
-          this.linkLabelMyFilmsWiki.Text = "MyFilms Wiki Online Pages";
-          this.ToolTip1.SetToolTip(this.linkLabelMyFilmsWiki, "Opens the MyFilms Wiki in your browser...");
-          this.linkLabelMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMyFilmsWiki_LinkClicked);
-          // 
-          // AntSearchFieldReset
-          // 
-          this.AntSearchFieldReset.Location = new System.Drawing.Point(591, 34);
-          this.AntSearchFieldReset.Name = "AntSearchFieldReset";
-          this.AntSearchFieldReset.Size = new System.Drawing.Size(106, 21);
-          this.AntSearchFieldReset.TabIndex = 86;
-          this.AntSearchFieldReset.Text = "Reset to Defaults";
-          this.AntSearchFieldReset.UseVisualStyleBackColor = true;
-          this.AntSearchFieldReset.Click += new System.EventHandler(this.AntSearchFieldResetToDefault_Click);
-          // 
-          // AntUpdFieldReset
-          // 
-          this.AntUpdFieldReset.Location = new System.Drawing.Point(582, 22);
-          this.AntUpdFieldReset.Name = "AntUpdFieldReset";
-          this.AntUpdFieldReset.Size = new System.Drawing.Size(108, 22);
-          this.AntUpdFieldReset.TabIndex = 86;
-          this.AntUpdFieldReset.Text = "Reset to Default";
-          this.AntUpdFieldReset.UseVisualStyleBackColor = true;
-          this.AntUpdFieldReset.Click += new System.EventHandler(this.AntUpdFieldReset_Click_1);
-          // 
           // MesFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4090,6 +4091,9 @@ namespace MesFilms
           this.groupBox_Separators.PerformLayout();
           this.groupBox_SupplementarySearch.ResumeLayout(false);
           this.groupBox_SupplementarySearch.PerformLayout();
+          this.groupBox_TitleOrder.ResumeLayout(false);
+          this.groupBox_TitleOrder.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
           this.gpspfield.ResumeLayout(false);
           this.gpspfield.PerformLayout();
           this.gpsuppress.ResumeLayout(false);
@@ -4105,8 +4109,6 @@ namespace MesFilms
           this.groupBox_PlayMovieInfos.PerformLayout();
           this.groupBoxMoviePathInfos.ResumeLayout(false);
           this.groupBoxMoviePathInfos.PerformLayout();
-          this.groupBox_TitleOrder.ResumeLayout(false);
-          this.groupBox_TitleOrder.PerformLayout();
           this.Tab_Trailer.ResumeLayout(false);
           this.Tab_Views.ResumeLayout(false);
           this.Tab_Search.ResumeLayout(false);
@@ -4136,7 +4138,6 @@ namespace MesFilms
           this.groupBox10.ResumeLayout(false);
           this.groupBox10.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 

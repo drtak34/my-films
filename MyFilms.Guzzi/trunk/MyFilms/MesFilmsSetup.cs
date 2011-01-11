@@ -819,6 +819,7 @@ namespace MesFilms
                     XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogosPath", txtLogosPath.Text);
                 int iID2001 = 0;
                 int iID2002 = 0;
+                int iID2003 = 0;
                 //int icountry = 0;
 
                 string logoPath;
@@ -849,6 +850,10 @@ namespace MesFilms
                         case "ID2002":
                             XmlConfig.WriteXmlConfig(wfile, LogoView.Items[i].SubItems[0].Text, LogoView.Items[i].SubItems[0].Text + "_" + iID2002, wline);
                             iID2002++;
+                            break;
+                        case "ID2003":
+                            XmlConfig.WriteXmlConfig(wfile, LogoView.Items[i].SubItems[0].Text, LogoView.Items[i].SubItems[0].Text + "_" + iID2003, wline);
+                            iID2003++;
                             break;
                     }
                 }
@@ -2079,7 +2084,7 @@ namespace MesFilms
             AMCSetAttribute("Ant_Database_Source_Field", AntStorage.Text);
             AMCSetAttribute("Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
             AMCSetAttribute("Image_Download_Filename_Prefix", currentconfig + "_");
-            AMCSetAttribute("Internet_Parser_Path", txtAMCUpd_cnf.Text);
+            AMCSetAttribute("Internet_Parser_Path", txtGrabber.Text);
             AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
             AMCSetAttribute("Manual_Internet_Parser_Path", txtAMCUpd_cnf.Text);
             AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
@@ -2164,6 +2169,8 @@ namespace MesFilms
               lblAMCMovieScanPath.Visible = false;
               btnAMCMovieScanPathAdd.Visible = false;
               chkAMC_Purge_Missing_Files.Visible = false;
+              txtAMCUpd_cnf.Text = AMCconfigFile;
+              txtAMCUpd_cnf.Enabled = false;
             }
             else
             {
@@ -2186,7 +2193,7 @@ namespace MesFilms
 
         private void Save_XML_AMCconfig(string currentconfig)
         {
-          //Save AMC configuration to file (before launching AMCupdater sith it)
+          //Save AMC configuration to file (before launching AMCupdater with it)
           string UserSettingsFile = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings" + "_" + currentconfig + ".xml";
 
           if (System.IO.File.Exists(UserSettingsFile))
@@ -2251,12 +2258,22 @@ namespace MesFilms
             i = 0;
             do
             {
-                string wline = XmlConfig.ReadXmlConfig(wfile, "ID2002", "ID2002_" + i, null);
-                if (wline == null)
-                    break;
-                string[] wtab = wline.Split(new Char[] { ';' });
-                Charge_LogosView(ref wtab, i, "ID2002");
-                i++;
+              string wline = XmlConfig.ReadXmlConfig(wfile, "ID2002", "ID2002_" + i, null);
+              if (wline == null)
+                break;
+              string[] wtab = wline.Split(new Char[] { ';' });
+              Charge_LogosView(ref wtab, i, "ID2002");
+              i++;
+            } while (true);
+            i = 0;
+            do
+            {
+              string wline = XmlConfig.ReadXmlConfig(wfile, "ID2003", "ID2003_" + i, null);
+              if (wline == null)
+                break;
+              string[] wtab = wline.Split(new Char[] { ';' });
+              Charge_LogosView(ref wtab, i, "ID2003");
+              i++;
             } while (true);
             i = 0;
         }
@@ -3258,7 +3275,7 @@ namespace MesFilms
             MessageBox.Show(ex.Message);
           }
 
-          LogMyFilms.Debug("MyFilms: Setup - Successfully created Desktop Icon for '" + linkName + "'");
+          LogMyFilms.Debug("MF: Setup - Successfully created Desktop Icon for '" + linkName + "'");
           DialogResult dialogResult = MessageBox.Show("Successfully created Desktop Icon for '" + linkName + "'", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
           //WshShellClass shortcut = new WshShellClass())
@@ -3283,7 +3300,7 @@ namespace MesFilms
           //  string icon = app.Replace('\\', '/');
           //  writer.WriteLine("IconFile=" + icon);
           //  writer.Flush();
-          //  LogMyFilms.Debug("MyFilms: Setup - Successfully created Desktop Icon for '" + linkName + "'");
+          //  LogMyFilms.Debug("MF: Setup - Successfully created Desktop Icon for '" + linkName + "'");
           //  DialogResult dialogResult = MessageBox.Show("Successfully created Desktop Icon for '" + linkName + "'", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
           //}
 
