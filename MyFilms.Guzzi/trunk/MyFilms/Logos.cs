@@ -36,6 +36,12 @@ namespace MesFilms
     public class Logos
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+      #region conteneurs
+        public static ArrayList ID2001Logos = new ArrayList();
+        public static ArrayList ID2002Logos = new ArrayList();
+        public static ArrayList ID2003Logos = new ArrayList();
+        public static string LogosPath = string.Empty;
+      #endregion
 
         public Logos()
         {
@@ -59,7 +65,7 @@ namespace MesFilms
                     }
                     catch
                     {
-                        LogMyFilms.Debug("MyFilms: Error Creating Configspecific File from Default File!");
+                        LogMyFilms.Debug("MF: Error Creating Configspecific File from Default File!");
                     }
 
                 //LogosPath = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", XmlConfig.PathInstalMP() + @"\thumbs\");
@@ -68,7 +74,7 @@ namespace MesFilms
                     LogosPath = Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos";
                 if (LogosPath.LastIndexOf("\\") != LogosPath.Length - 1)
                     LogosPath = LogosPath + "\\";
-                LogMyFilms.Debug("MyFilms: Logo path for storing picture created " + LogosPath.ToString());
+                LogMyFilms.Debug("MF: Logo path for storing picture created " + LogosPath.ToString());
 
                 int i = 0;
                 do
@@ -90,8 +96,6 @@ namespace MesFilms
                     i++;
                 } while (true);
                 i = 0;
-                //Todo: Finish Imeplementation of Countrylogos (2003)
-                ArrayList countriesLogos = new ArrayList();
                 do
                 {
                     string wline = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID2003", "ID2003_" + i, null);
@@ -117,14 +121,17 @@ namespace MesFilms
                     fileLogoName = get_Logos(r, ref listelogos, Logos.ID2002Logos);
                     break;
                 case "ID2003":
+                    fileLogoName = get_Logos(r, ref listelogos, Logos.ID2003Logos);
+                    break;
+                case "ID2012":
                     fileLogoName = get_Logos(r, ref listelogos, Logos.ID2001Logos);
                     fileLogoName = fileLogoName + get_Logos(r, ref listelogos, Logos.ID2002Logos);
+                    //fileLogoName = fileLogoName + get_Logos(r, ref listelogos, Logos.ID2003Logos); // Only show logo 1 and 2 as combined logo "12"
                     break;
-              
             }
             if (listelogos.Count > 0)
             {
-                LogMyFilms.Debug("MyFilms: Logo picture to be added " + fileLogoName.ToString());
+                LogMyFilms.Debug("MF: Logo picture to be added " + fileLogoName);
                 string skinName = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
                 if (ID == MesFilms.ID_MesFilms)
                     fileLogoName = "MyFilms_" + skinName + "_M_" + fileLogoName + ".png";
@@ -158,12 +165,12 @@ namespace MesFilms
                     try
                     {
                         b.Save(LogosPath + fileLogoName);
-                        LogMyFilms.Debug("MyFilms: Concatenated Logo saved " + fileLogoName);
+                        LogMyFilms.Debug("MF: Concatenated Logo saved " + fileLogoName);
                         System.Threading.Thread.Sleep(10);
                     }
                     catch (Exception e)
                     {
-                        LogMyFilms.Info("MyFilms: Unable to save Logo file ! error : " + e.Message.ToString());
+                        LogMyFilms.Info("MF: Unable to save Logo file ! error : " + e.Message.ToString());
                     }
                 }
                 return LogosPath + fileLogoName;
@@ -297,7 +304,7 @@ namespace MesFilms
                 }
                 catch (Exception)
                 {
-                    LogMyFilms.Error("MyFilms : Could not load Logo Image file... " + t);
+                    LogMyFilms.Error("MF: Could not load Logo Image file... " + t);
                     return;
                 }
                 if (totalWidth > totalHeight)
@@ -350,14 +357,5 @@ namespace MesFilms
 
             }
         }
-    
-        #region conteneurs
-        
-        public static ArrayList ID2001Logos = new ArrayList();
-        public static ArrayList ID2002Logos = new ArrayList();
-        public static ArrayList ID2003Logos = new ArrayList();
-        public static string LogosPath = string.Empty;
-
-        #endregion
     }
 }

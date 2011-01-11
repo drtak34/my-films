@@ -51,7 +51,7 @@ namespace MesFilms
         private static void initData()
         {
             data = new AntMovieCatalog();
-            LogMyFilms.Debug("MyFilms: BaseMesFilms - Try reading catalogfile '" + MesFilms.conf.StrFileXml + "'");
+            LogMyFilms.Debug("MF: BaseMesFilms - Try reading catalogfile '" + MesFilms.conf.StrFileXml + "'");
             try
             {
                 data.ReadXml(MesFilms.conf.StrFileXml);
@@ -88,11 +88,11 @@ namespace MesFilms
                 StrSelect = MesFilms.conf.StrTitle1.ToString() + " not like ''";
                 movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
                 //Guzzi
-                LogMyFilms.Debug("MyFilms - BaseMesFilms:  StrDfltSelect      : '" + StrDfltSelect + "'");
-                LogMyFilms.Debug("MyFilms - BaseMesFilms:  StrSelect          : '" + StrSelect + "'");
-                LogMyFilms.Debug("MyFilms - BaseMesFilms:  StrSort            : '" + StrSort + "'");
-                LogMyFilms.Debug("MyFilms - BaseMesFilms:  StrSortSens        : '" + StrSortSens + "'");
-                LogMyFilms.Debug("MyFilms - BaseMesFilms:  RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
+                LogMyFilms.Debug("MF: - BaseMesFilms:  StrDfltSelect      : '" + StrDfltSelect + "'");
+                LogMyFilms.Debug("MF: - BaseMesFilms:  StrSelect          : '" + StrSelect + "'");
+                LogMyFilms.Debug("MF: - BaseMesFilms:  StrSort            : '" + StrSort + "'");
+                LogMyFilms.Debug("MF: - BaseMesFilms:  StrSortSens        : '" + StrSortSens + "'");
+                LogMyFilms.Debug("MF: - BaseMesFilms:  RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
             }
             return movies;
         }
@@ -110,7 +110,7 @@ namespace MesFilms
             }
             catch (Exception e)
             {
-                LogMyFilms.Error("MyFilms : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
+                LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
   //            throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
             }
 

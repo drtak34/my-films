@@ -84,34 +84,39 @@ namespace MesFilms
             //CTRL_MovieThumbsDir = 1002,
             CTRL_logos_id2001 = 2001,
             CTRL_logos_id2002 = 2002,
+            CTRL_logos_id2003 = 2003,
+            CTRL_logos_id2012 = 2012,
             CTRL_Title = 2025,
             CTRL_OTitle = 2026,
-            CTRL_Format = 2069, // currently required in Logo visibility options
             CTRL_ImgDD = 2072,
             CTRL_ActorMultiThumb = 3333,
         }
         [SkinControlAttribute((int)Controls.CTRL_BtnMaj)]
-        protected GUIButtonControl BtnMaj = null;
+        protected GUIButtonControl BtnMaj;
         [SkinControlAttribute((int)Controls.CTRL_BtnFirst)]
-        protected GUIButtonControl BtnFirst = null;
+        protected GUIButtonControl BtnFirst;
         [SkinControlAttribute((int)Controls.CTRL_BtnLast)]
-        protected GUIButtonControl BtnLast = null;
+        protected GUIButtonControl BtnLast;
         [SkinControlAttribute(2024)]
-        protected GUIImage ImgDetFilm = null;
+        protected GUIImage ImgDetFilm;
         [SkinControlAttribute(2023)]
-        protected GUIImage ImgDetFilm2 = null;
+        protected GUIImage ImgDetFilm2;
         [SkinControlAttribute((int)Controls.CTRL_logos_id2001)]
-        protected GUIImage ImgID2001 = null;
+        protected GUIImage ImgID2001;
         [SkinControlAttribute((int)Controls.CTRL_logos_id2002)]
-        protected GUIImage ImgID2002 = null;
+        protected GUIImage ImgID2002;
+        [SkinControlAttribute((int)Controls.CTRL_logos_id2003)]
+        protected GUIImage ImgID2003;
+        [SkinControlAttribute((int)Controls.CTRL_logos_id2012)]
+        protected GUIImage ImgID2012;
         [SkinControlAttribute((int)Controls.CTRL_ImgDD)] // Indicates if it's a file existant for movie on HD
-        protected GUIImage ImgDD = null;
+        protected GUIImage ImgDD;
         [SkinControlAttribute(2080)]
-        protected GUIAnimation m_SearchAnimation = null;
+        protected GUIAnimation m_SearchAnimation;
         [SkinControlAttribute((int)Controls.CTRL_Fanart)]
-        protected GUIImage ImgFanart = null;
+        protected GUIImage ImgFanart;
         [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
-        protected GUIMultiImage ImgFanartDir = null;
+        protected GUIMultiImage ImgFanartDir;
         //[SkinControlAttribute((int)Controls.CTRL_MovieThumbs)]
         //protected GUIImage ImgMovieThumbs = null;
         //[SkinControlAttribute((int)Controls.CTRL_MovieThumbsDir)]
@@ -343,8 +348,8 @@ namespace MesFilms
                             currentmodulefullscreen = true;
                         xmlreader.SetValue("general", "lastactivemodule", currentmoduleid);
                         xmlreader.SetValueAsBool("general", "lastactivemodulefullscreen", currentmodulefullscreen);
-                        LogMyFilms.Debug("MyFilms : SaveLastActiveModule - module {0}", currentmoduleid);
-                        LogMyFilms.Debug("MyFilms : SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
+                        LogMyFilms.Debug("MF: SaveLastActiveModule - module {0}", currentmoduleid);
+                        LogMyFilms.Debug("MF: SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
                     }
                     return true;
 
@@ -614,7 +619,7 @@ namespace MesFilms
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", OVtitle.ToString());
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
-                        LogMyFilms.Debug("MyFilms: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+                        LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                         GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
@@ -959,10 +964,10 @@ namespace MesFilms
                         // 2.) Im Verzeichnis des Films suchen nach Filmdateien die das Wort "Trailer" im Namen haben (Endung beliebig: avi, mov, flv, etc.)
                         // 3.) Im (Trailer)-Suchpfad nach Verzeichnissen, die nach dem Filmnamen benannt sind - dann alle Files darin registrien
 
-                        //LogMyFilms.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
-                        LogMyFilms.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
-                        LogMyFilms.Debug("MyFilms (SearchTrailerLocal) Parameter 1 - '(DataRow[])MesFilms.r': '" + (DataRow[])MesFilms.r);
-                        LogMyFilms.Debug("MyFilms (SearchTrailerLocal) Parameter 2 - '(int)MesFilms.conf.StrIndex': '" + (int)MesFilms.conf.StrIndex);
+                        //LogMyFilms.Debug("MF: (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
+                        LogMyFilms.Debug("MF: (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
+                        LogMyFilms.Debug("MF: (SearchTrailerLocal) Parameter 1 - '(DataRow[])MesFilms.r': '" + (DataRow[])MesFilms.r);
+                        LogMyFilms.Debug("MF: (SearchTrailerLocal) Parameter 2 - '(int)MesFilms.conf.StrIndex': '" + (int)MesFilms.conf.StrIndex);
                         MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex, true);
                         afficher_detail(true);
                         //GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -984,27 +989,6 @@ namespace MesFilms
                         //if (dlg.SelectedLabel == -1) return;
                         break;
                     }
-                //case "trailer-all": //To Be Deleted - Moved to Main Screen !!!!
-                //    {
-                //        setProcessAnimationStatus(true, m_SearchAnimation);
-                //        //LogMyFilms.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString(): '" + (MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1].ToString() + "'"));
-                //        //LogMyFilms.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
-                //   //dsgsdgsgsg
-                //        LogMyFilms.Debug("MyFilms (SearchTrailerLocal) SelectedItemInfo from (MesFilms.r[MesFilms.conf.StrIndex]: '" + (MesFilms.r[MesFilms.conf.StrIndex].ToString() + "'"));
-                //        LogMyFilms.Debug("MyFilms (SearchTrailerLocal) Parameter 1 - '(DataRow[])MesFilms.r': '" + (DataRow[])MesFilms.r);
-                //        LogMyFilms.Debug("MyFilms (SearchTrailerLocal) Parameter 2 - '(int)MesFilms.conf.StrIndex': '" + (int)MesFilms.conf.StrIndex);
-
-                //        //MesFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, (int)MesFilms.conf.StrIndex);
-                //        afficher_detail(true);
-                //        //GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-                //        setProcessAnimationStatus(false, m_SearchAnimation);
-                //        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                //        dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                //        dlgOk.SetLine(1, "");
-                //        dlgOk.SetLine(2, " Trailer in Datenbank aktualisiert !");
-                //        dlgOk.DoModal(GetID);
-                //        break;
-                //    }
 
                 case "trailer-delete":
                     dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
@@ -1081,11 +1065,11 @@ namespace MesFilms
                         try
                         {
                             System.IO.File.Delete(t.ToString());
-                            LogMyFilms.Info("MyFilms : file deleted : " + t.ToString());
+                            LogMyFilms.Info("MF: file deleted : " + t.ToString());
                         }
                         catch
                         {
-                            LogMyFilms.Info("MyFilms : unable to delete file : " + t.ToString());
+                            LogMyFilms.Info("MF: unable to delete file : " + t.ToString());
                         }
                 }
             }
@@ -1094,12 +1078,12 @@ namespace MesFilms
                 string wdelTitle = MesFilms.r[Index][MesFilms.conf.StrTitle1].ToString();
                 MesFilms.r[Index].Delete();
                 
-                LogMyFilms.Info("MyFilms : Database movie deleted : " + wdelTitle);
+                LogMyFilms.Info("MF: Database movie deleted : " + wdelTitle);
             }
             else
             {
                 MesFilms.r[Index][MesFilms.conf.StrSuppressField] = MesFilms.conf.StrSuppressValue.ToString();
-                LogMyFilms.Info("MyFilms : Database movie updated for deletion : " + MesFilms.r[Index][MesFilms.conf.StrTitle1]);
+                LogMyFilms.Info("MF: Database movie updated for deletion : " + MesFilms.r[Index][MesFilms.conf.StrTitle1]);
             }
             Update_XML_database();
         }
@@ -1109,7 +1093,7 @@ namespace MesFilms
         public static void Update_XML_database()
         {
             BaseMesFilms.SaveMesFilms();
-            LogMyFilms.Info("MyFilms : Movie Database updated");
+            LogMyFilms.Info("MF: Movie Database updated");
         }
 
         //-------------------------------------------------------------------------------------------
@@ -1246,7 +1230,7 @@ namespace MesFilms
                 Result = Grab.GetNfoDetail(nfofile, MesFilms.conf.StrPathImg + Img_Path, MesFilms.conf.StrPathArtist, "");
             else
                 Result = Grab.GetDetail(url, MesFilms.conf.StrPathImg + Img_Path, wscript);
-            LogMyFilms.Info("MyFilms : Grabb Internet/nfo Information done for : " + ttitle);
+            LogMyFilms.Info("MF: Grab Internet/nfo Information done for : " + ttitle);
 
             // string Title_Group = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
             // string Title_Group_Apply = XmlConfig.ReadAMCUXmlConfig(MesFilms.conf.StrAMCUpd_cnf, "Group_Name_Applies_To", "");
@@ -1287,7 +1271,7 @@ namespace MesFilms
                     }
                     catch
                     {
-                        LogMyFilms.Debug("MyFilms: GrabberUpdate - Error adding Property '" + wProperty + "' to Selectionmenu");
+                        LogMyFilms.Debug("MF: GrabberUpdate - Error adding Property '" + wProperty + "' to Selectionmenu");
                     }
                     i = i + 1;
                 }
@@ -1525,7 +1509,7 @@ namespace MesFilms
                     break;
             }
             Update_XML_database();
-            LogMyFilms.Info("MyFilms : Database Updated for : " + ttitle);
+            LogMyFilms.Info("MF: Database Updated for : " + ttitle);
             if (title.Length > 0 && MesFilms.conf.StrFanart) // Get Fanart - ToDo Guzzi: Use local Fanart, if chosen ?
             {
                 System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MesFilms.conf.StrPathFanart, true, false, MesFilms.conf.StrTitle1.ToString());
@@ -1609,7 +1593,7 @@ namespace MesFilms
             }
 
             Update_XML_database();
-            LogMyFilms.Info("MyFilms : Database Updated for created PictureThumb: " + strThumb);
+            LogMyFilms.Info("MF: Database Updated for created PictureThumb: " + strThumb);
         }
 
         //-------------------------------------------------------------------------------------------
@@ -1708,9 +1692,9 @@ namespace MesFilms
             catch { }
             System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose, MesFilms.conf.StrTitle1);
             //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MesFilms.conf.StrPathFanart, true, choose);
-            LogMyFilms.Debug("MyFilms (DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MesFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MesFilms.conf.StrTitle1 + "'");
+            LogMyFilms.Debug("MF: (DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MesFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MesFilms.conf.StrTitle1 + "'");
             int listCount = listemovies.Count;
-            LogMyFilms.Debug("MyFilms (DownloadBackdrops) - listemovies: Result Listcount: '" + listCount.ToString() + "'");
+            LogMyFilms.Debug("MF: (DownloadBackdrops) - listemovies: Result Listcount: '" + listCount.ToString() + "'");
             
             //if ((listCount == 0) && (choose))
             //{
@@ -1732,7 +1716,7 @@ namespace MesFilms
                 case 0:
                     break;
                 case 1:
-                    LogMyFilms.Info("MyFilms : Fanart " + listemovies[0].Name.Substring(listemovies[0].Name.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
+                    LogMyFilms.Info("MF: Fanart " + listemovies[0].Name.Substring(listemovies[0].Name.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
                     break;
                 default:
 
@@ -1795,8 +1779,8 @@ namespace MesFilms
                             dlgs.SelectedLabel = -1;
                             dlgs.DoModal(wGetID);
                         }
-                        //LogMyFilms.Debug("MyFilms (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabelText: '" + dlgs.SelectedLabelText.ToString() + "'");
-                        //LogMyFilms.Debug("MyFilms (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabel: '" + dlgs.SelectedLabel.ToString() + "'");
+                        //LogMyFilms.Debug("MF: (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabelText: '" + dlgs.SelectedLabelText.ToString() + "'");
+                        //LogMyFilms.Debug("MF: (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabel: '" + dlgs.SelectedLabel.ToString() + "'");
                         if (dlgs.SelectedLabel == 0)
                         {
                             VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
@@ -1829,7 +1813,7 @@ namespace MesFilms
                         foreach (string backdrop in listemovies[dlg.SelectedLabel - 1].Backdrops)
                         {
                             filename1 = Grabber.GrabUtil.DownloadBacdropArt(MesFilms.conf.StrPathFanart, backdrop, wttitle, true, first, out filename);
-                            LogMyFilms.Info("MyFilms : Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
+                            LogMyFilms.Info("MF: Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
 
                             if (filename == string.Empty)
                                 filename = filename1;
@@ -1857,13 +1841,13 @@ namespace MesFilms
         public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group)
         //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
         {
-            //LogMyFilms.Debug("MyFilms (SearchFanart) - Vars: wtitle2 = '" + wtitle2 + "'");
-            //LogMyFilms.Debug("MyFilms (SearchFanart) - Vars: main (true for mainscreen, false for Detail) = '" + main + "'");
-            //LogMyFilms.Debug("MyFilms (SearchFanart) - Vars: searched (dir or file) = '" + searched + "'");
-            //LogMyFilms.Debug("MyFilms (SearchFanart) - Vars: rep (true for grouped view) = '" + rep + "'");
-            //LogMyFilms.Debug("MyFilms (SearchFanart) - Vars: filecover = '" + filecover + "'");
-            //LogMyFilms.Debug("MyFilms (SearchFanart) - Vars: group = '" + group + "'");
-            //LogMyFilms.Debug("MyFilms (SearchFanart) - Config: MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
+            //LogMyFilms.Debug("MF: (SearchFanart) - Vars: wtitle2 = '" + wtitle2 + "'");
+            //LogMyFilms.Debug("MF: (SearchFanart) - Vars: main (true for mainscreen, false for Detail) = '" + main + "'");
+            //LogMyFilms.Debug("MF: (SearchFanart) - Vars: searched (dir or file) = '" + searched + "'");
+            //LogMyFilms.Debug("MF: (SearchFanart) - Vars: rep (true for grouped view) = '" + rep + "'");
+            //LogMyFilms.Debug("MF: (SearchFanart) - Vars: filecover = '" + filecover + "'");
+            //LogMyFilms.Debug("MF: (SearchFanart) - Vars: group = '" + group + "'");
+            //LogMyFilms.Debug("MF: (SearchFanart) - Config: MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
             string[] wfanart = new string[2];
             wfanart[0] = " ";
             wfanart[1] = " ";
@@ -1872,8 +1856,8 @@ namespace MesFilms
                 if (wtitle2.Contains(MesFilms.conf.TitleDelim))
                   wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1); // Removed "trim", as there is no matching in details, if spacees are removed! old: wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MesFilms.conf.TitleDelim) + 1).Trim();
                 wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
-                //LogMyFilms.Debug("MyFilms (SearchFanart) - wtitle2-cleaned = '" + wtitle2 + "'");
-                //LogMyFilms.Debug("MyFilms (SearchFanart) - MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
+                //LogMyFilms.Debug("MF: (SearchFanart) - wtitle2-cleaned = '" + wtitle2 + "'");
+                //LogMyFilms.Debug("MF: (SearchFanart) - MesFilms.conf.StrFanart = '" + MesFilms.conf.StrFanart + "'");
 
                 if (!MesFilms.conf.StrFanart)
                     return wfanart;
@@ -1902,7 +1886,7 @@ namespace MesFilms
                     {
                         safeName = MesFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
                     }
-                //LogMyFilms.Debug("MyFilms (SearchFanart) - safename = '" + safeName + "'");
+                //LogMyFilms.Debug("MF: (SearchFanart) - safename = '" + safeName + "'");
 
                 
                 try //Added to avoid crash with very long filenames - better is if user configures titledelimiters properly !
@@ -1911,12 +1895,12 @@ namespace MesFilms
                     }
                 catch (Exception e)
                     {
-                        LogMyFilms.Debug("MyFilms: Title too long to create fanart path/filename from it - not loading fanart!");
+                        LogMyFilms.Debug("MF: Title too long to create fanart path/filename from it - not loading fanart!");
                         return wfanart;
                     }
                 
-                //LogMyFilms.Debug("MyFilms (SearchFanart) - safename(file) = '" + wfile + "'");
-                LogMyFilms.Debug("MyFilms (SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + wtitle2 + "}.jpg") + "'");
+                //LogMyFilms.Debug("MF: (SearchFanart) - safename(file) = '" + wfile + "'");
+                LogMyFilms.Debug("MF: (SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + wtitle2 + "}.jpg") + "'");
                 if (((main) || (searched == "file")) && (System.IO.File.Exists(safeName + "\\{" + wtitle2 + "}.jpg")))
                 {
                     wfanart[0] = safeName + "\\{" + wtitle2 + "}.jpg";
@@ -2046,91 +2030,14 @@ namespace MesFilms
             setGUIProperty("picture", file);
             // ToDo: Add for ImageSwapper Coverart (coverImage)
             //cover.Filename = file;
-            if ((ImgID2001 != null) && (ImgID2002 != null) && (MesFilms.conf.StrLogos))
-            {
-                if ((ImgID2001.XPosition == ImgID2002.XPosition) && (ImgID2001.YPosition == ImgID2002.YPosition))
-                {
-                    try
-                    {
-                        string wlogos = Logos.Build_Logos(MesFilms.r[MesFilms.conf.StrIndex], "ID2003", ImgID2001.Height + ImgID2002.Height, ImgID2001.Width + ImgID2002.Width, ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID);
-                        setGUIProperty("logos_id2001", wlogos);
-                        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
-                        GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
-                        GUIControl.HideControl(GetID, (int)Controls.CTRL_Format);
-                        GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
-                    }
-                    catch (Exception e)
-                    {
-                        LogMyFilms.Error("MyFilms : " + e.Message);
-                    }
-                }
-                else
-                {
-                    try
-                    {
-                        setGUIProperty("logos_id2001", Logos.Build_Logos(MesFilms.r[MesFilms.conf.StrIndex], "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID));
-                        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
-                        GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
-                        GUIControl.HideControl(GetID, (int)Controls.CTRL_Format);
-                    }
-                    catch (Exception e)
-                    {
-                        LogMyFilms.Error("MyFilms : " + e.Message);
-                    }
-                    try
-                    {
-                        setGUIProperty("logos_id2002", Logos.Build_Logos(MesFilms.r[MesFilms.conf.StrIndex], "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, 1, GetID));
-                        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2002);
-                        GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2002);
-                    }
-                    catch (Exception e)
-                    {
-                        LogMyFilms.Error("MyFilms : " + e.Message);
-                    }
-                }
-            }
-            else
-            {
-                if ((ImgID2001 != null) && (MesFilms.conf.StrLogos))
-                {
-                    try
-                    {
-                        setGUIProperty("logos_id2001", Logos.Build_Logos(MesFilms.r[MesFilms.conf.StrIndex], "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID));
-                        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
-                        GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
-                        GUIControl.HideControl(GetID, (int)Controls.CTRL_Format);
-                    }
-                    catch (Exception e)
-                    {
-                        LogMyFilms.Error("MyFilms : " + e.Message);
-                    }
-                }
-                else
-                {
-                    GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
-                    GUIControl.ShowControl(GetID, (int)Controls.CTRL_Format);
-                }
-                if ((ImgID2002 != null) && (MesFilms.conf.StrLogos))
-                {
-                    try
-                    {
-                        setGUIProperty("logos_id2002", Logos.Build_Logos(MesFilms.r[MesFilms.conf.StrIndex], "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, 1, GetID));
-                        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2002);
-                        GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2002);
-                    }
-                    catch (Exception e)
-                    {
-                        LogMyFilms.Error("MyFilms : " + e.Message);
-                    }
-                }
-                else
-                    GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
-            }
-            
+
+            // Logos:
+            this.Load_Logos(MesFilms.r[MesFilms.conf.StrIndex]);
+          
             //ImageSwapper backdrop = new ImageSwapper();
             string[] wfanart = new string[2];
             string wtitle = MesFilms.r[MesFilms.conf.StrIndex]["OriginalTitle"].ToString();
-			//Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
+      			//Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
             if (MesFilms.conf.StrTitle1 != "OriginalTitle")
             {
 
@@ -2219,6 +2126,123 @@ namespace MesFilms
                 GUIControl.EnableControl(GetID, (int)Controls.CTRL_BtnFirst);
             }
         }
+
+
+        private void Load_Logos(DataRow row)
+        {
+          //if ((ImgID2001 != null) && (ImgID2002 != null) && (MesFilms.conf.StrLogos))
+          //{
+          //if ((ImgID2001.XPosition == ImgID2002.XPosition) && (ImgID2001.YPosition == ImgID2002.YPosition))
+          //{
+          //    try
+          //    {
+          //        string wlogos = Logos.Build_Logos(MesFilms.r[MesFilms.conf.StrIndex], "ID2003", ImgID2001.Height + ImgID2002.Height, ImgID2001.Width + ImgID2002.Width, ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID);
+          //        setGUIProperty("logos_id2001", wlogos);
+          //        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
+          //        GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
+          //        GUIControl.HideControl(GetID, (int)Controls.CTRL_Format);
+          //        GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
+          //    }
+          //    catch (Exception e)
+          //    {
+          //        LogMyFilms.Error("MF: " + e.Message);
+          //    }
+          //}
+          //else
+          //    {
+          //        try
+          //        {
+          //            setGUIProperty("logos_id2001", Logos.Build_Logos(MesFilms.r[MesFilms.conf.StrIndex], "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID));
+          //            //GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
+          //            //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
+          //            GUIControl.HideControl(GetID, (int)Controls.CTRL_Format);
+          //        }
+          //        catch (Exception e)
+          //        {
+          //            LogMyFilms.Error("MF: " + e.Message);
+          //        }
+          //        try
+          //        {
+          //            setGUIProperty("logos_id2002", Logos.Build_Logos(MesFilms.r[MesFilms.conf.StrIndex], "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, 1, GetID));
+          //            //GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2002);
+          //            //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2002);
+          //        }
+          //        catch (Exception e)
+          //        {
+          //            LogMyFilms.Error("MF: " + e.Message);
+          //        }
+          //    }
+          //}
+          //else
+          //{
+          if ((ImgID2001 != null) && (MesFilms.conf.StrLogos))
+          {
+            try
+            {
+              setGUIProperty("logos_id2001", Logos.Build_Logos(row, "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID));
+              //GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
+              //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
+              //GUIControl.HideControl(GetID, (int)Controls.CTRL_Format);
+            }
+            catch (Exception e)
+            {
+              LogMyFilms.Error("MF: " + e.Message);
+            }
+          }
+          else
+          {
+            clearGUIProperty("logos_id2001");
+            //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
+            //GUIControl.ShowControl(GetID, (int)Controls.CTRL_Format);
+          }
+          if ((ImgID2002 != null) && (MesFilms.conf.StrLogos))
+          {
+            try
+            {
+              setGUIProperty("logos_id2002", Logos.Build_Logos(row, "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, 1, GetID));
+              //GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2002);
+              //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2002);
+            }
+            catch (Exception e)
+            {
+              LogMyFilms.Error("MF: " + e.Message);
+            }
+          }
+          else
+            clearGUIProperty("logos_id2002");
+          //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
+          //}
+
+          if ((ImgID2003 != null) && (MesFilms.conf.StrLogos))
+          {
+            try
+            {
+              setGUIProperty("logos_id2003", Logos.Build_Logos(row, "ID2003", ImgID2003.Height, ImgID2003.Width, ImgID2003.XPosition, ImgID2003.YPosition, 1, GetID));
+            }
+            catch (Exception e)
+            {
+              LogMyFilms.Error("MF: " + e.Message);
+            }
+          }
+          else
+            clearGUIProperty("logos_id2003");
+
+          if ((ImgID2012 != null) && (MesFilms.conf.StrLogos))
+          {
+            try
+            {
+              setGUIProperty("logos_id2012", Logos.Build_Logos(row, "ID2012", ImgID2012.Height, ImgID2012.Width, ImgID2012.XPosition, ImgID2012.YPosition, 1, GetID));
+            }
+            catch (Exception e)
+            {
+              LogMyFilms.Error("MF: " + e.Message);
+            }
+          }
+          else
+            clearGUIProperty("logos_id2012");
+        }
+
+
         //-------------------------------------------------------------------------------------------
         //  initialize exported fields to skin as '#myfilms.<ant db column name> 
         //-------------------------------------------------------------------------------------------
@@ -2265,7 +2289,7 @@ namespace MesFilms
             foreach (DataColumn dc in ds.Movie.Columns)
             {
                 string wstring = "";
-                //LogMyFilms.Debug("MyFilms: PropertyManager: Set Properties for DB Column '" + dc.ColumnName + "' - '" + BaseMesFilms.Translate_Column(dc.ColumnName) + "'");
+                //LogMyFilms.Debug("MF: PropertyManager: Set Properties for DB Column '" + dc.ColumnName + "' - '" + BaseMesFilms.Translate_Column(dc.ColumnName) + "'");
 
                 if (MesFilms.r[ItemId][dc.ColumnName] != null)
                 {
@@ -2435,9 +2459,9 @@ namespace MesFilms
                                 try
                                     {
                                         wstring = MesFilms.r[ItemId][dc.ColumnName].ToString();
-                                        //LogMyFilms.Debug("MyFilms : Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                                        //LogMyFilms.Debug("MF: Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
                                         setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                                        //LogMyFilms.Debug("MyFilms (Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
+                                        //LogMyFilms.Debug("MF: (Load_Detailed_DB): Property loaded #myfilms." + dc.ColumnName.ToLower() + " with " + wstring);
                                         decimal w_hsize;
                                         decimal w_vsize;
                                         string[] arSplit;
@@ -2446,7 +2470,7 @@ namespace MesFilms
                                         w_hsize = (decimal)Convert.ToInt32(arSplit[0]);
                                         w_vsize = (decimal)Convert.ToInt32(arSplit[1]);
                                         // To Check if/why exception eccurs
-                                        //LogMyFilms.Debug("MyFilms : hsize - wsize: '" + w_hsize + " - " + w_vsize + "'");
+                                        //LogMyFilms.Debug("MF: hsize - wsize: '" + w_hsize + " - " + w_vsize + "'");
                                         aspectratio = (w_hsize / w_vsize);
                                         aspectratio = Math.Round(aspectratio, 2);
                                         //Formats:
@@ -2461,7 +2485,7 @@ namespace MesFilms
                                     }
                                 catch
                                     {
-                                        LogMyFilms.Info("MyFilms: Error calculating aspectratio !");
+                                        LogMyFilms.Info("MF: Error calculating aspectratio !");
                                     }
                             setGUIProperty("db.calc.aspectratio.value", wstring);
                             setGUIProperty("db.calc.imageformat.value", ar);
@@ -2523,7 +2547,7 @@ namespace MesFilms
             // Guzzi: Added WOL to start remote host before playing the files
             // Wake up the TV server, if required
             // HandleWakeUpNas();
-            LogMyFilms.Info("MyFilms: Launched HandleWakeUpNas() to start movie'" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "'");
+            LogMyFilms.Info("MF: Launched HandleWakeUpNas() to start movie'" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "'");
 
             if (MesFilms.conf.StrCheckWOLuserdialog)
             {
@@ -2611,7 +2635,7 @@ namespace MesFilms
             }
 
             // Run externaly Program before Playing if defined in setup
-            LogMyFilms.Debug("MyFilms (Play Movie) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
+            LogMyFilms.Debug("MF: (Play Movie) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
             setProcessAnimationStatus(true, m_SearchAnimation);
             if ((MesFilms.conf.CmdPar.Length > 0) && (MesFilms.conf.CmdPar != "(none)"))
                 RunProgram(MesFilms.conf.CmdExe, MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.CmdPar].ToString());
@@ -2634,7 +2658,7 @@ namespace MesFilms
                 dlgOk.SetLine(1, MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()].ToString());//video title
                 dlgOk.SetLine(2, "maximum 20 entries for the playlist");
                 dlgOk.DoModal(GetID);
-                LogMyFilms.Info("MyFilms: Too many entries found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "', number of entries found = " + newItems.Count.ToString());
+                LogMyFilms.Info("MF: Too many entries found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle.ToString()] + "', number of entries found = " + newItems.Count.ToString());
                 return;
             }
             setProcessAnimationStatus(false, m_SearchAnimation);
@@ -2699,7 +2723,7 @@ namespace MesFilms
                     dlgOk.SetLine(1, GUILocalizeStrings.Get(1036));//no video found
                     dlgOk.SetLine(2, MesFilms.r[select_item][MesFilms.conf.StrSTitle].ToString());
                     dlgOk.DoModal(GetID);
-                    LogMyFilms.Info("MyFilms: File not found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle]);
+                    LogMyFilms.Info("MF: File not found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle]);
                     return;
                 }
             }
@@ -2712,7 +2736,7 @@ namespace MesFilms
         {
             // Run externaly Program before Playing if defined in setup
             setProcessAnimationStatus(true, m_SearchAnimation);
-            LogMyFilms.Debug("MyFilms (Play Movie Trailer) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
+            LogMyFilms.Debug("MF: (Play Movie Trailer) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
             if ((MesFilms.conf.CmdPar.Length > 0) && (MesFilms.conf.CmdPar != "(none)"))
                 RunProgram(MesFilms.conf.CmdExe, MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.CmdPar].ToString());
             if (g_Player.Playing)
@@ -2734,7 +2758,7 @@ namespace MesFilms
                 dlgOk.SetLine(1, MesFilms.r[select_item][MesFilms.conf.StrSTitle].ToString());//video title
                 dlgOk.SetLine(2, "maximum 20 entries for the playlist");
                 dlgOk.DoModal(GetID);
-                LogMyFilms.Info("MyFilms: Too many entries found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle] + "', number of entries found = " + newItems.Count.ToString());
+                LogMyFilms.Info("MF: Too many entries found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle] + "', number of entries found = " + newItems.Count.ToString());
                 return;
             }
             setProcessAnimationStatus(false, m_SearchAnimation);
@@ -2780,7 +2804,7 @@ namespace MesFilms
                 dlgOk.SetLine(1, GUILocalizeStrings.Get(1036));//no video found
                 dlgOk.SetLine(2, MesFilms.r[select_item][MesFilms.conf.StrSTitle].ToString());
                 dlgOk.DoModal(GetID);
-                LogMyFilms.Info("MyFilms: File not found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle]);
+                LogMyFilms.Info("MF: File not found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle]);
                 return;
             }
         }
@@ -2922,16 +2946,16 @@ namespace MesFilms
                             // Set resumedata to zero
                             VideoDatabase.GetMovieStopTimeAndResumeData(idFile, out resumeData);
                             VideoDatabase.SetMovieStopTimeAndResumeData(idFile, 0, resumeData);
-                            LogMyFilms.Info("MyFilms: GUIVideoFiles: OnPlayBackEnded idFile={0} resumeData={1}", idFile, resumeData);
+                            LogMyFilms.Info("MF: GUIVideoFiles: OnPlayBackEnded idFile={0} resumeData={1}", idFile, resumeData);
                         }
                         else
                         {
                             if ((filename == strFilePath) && (timeMovieStopped > 0))
                             {
                                 g_Player.Player.GetResumeState(out resumeData);
-                                LogMyFilms.Info("MyFilms: GUIVideoFiles: OnPlayBackStopped idFile={0} timeMovieStopped={1} resumeData={2}", idFile, timeMovieStopped, resumeData);
+                                LogMyFilms.Info("MF: GUIVideoFiles: OnPlayBackStopped idFile={0} timeMovieStopped={1} resumeData={2}", idFile, timeMovieStopped, resumeData);
                                 VideoDatabase.SetMovieStopTimeAndResumeData(idFile, timeMovieStopped, resumeData);
-                                LogMyFilms.Debug("MyFilms: GUIVideoFiles: OnPlayBackStopped store resume time");
+                                LogMyFilms.Debug("MF: GUIVideoFiles: OnPlayBackStopped store resume time");
                             }
                             else
                                 VideoDatabase.DeleteMovieStopTime(idFile);
@@ -2962,7 +2986,7 @@ namespace MesFilms
             }
             catch
             {
-                LogMyFilms.Info("MyFilms: Error during PlayBackEnded ");
+                LogMyFilms.Info("MF: Error during PlayBackEnded ");
             }
         }
 
@@ -2973,7 +2997,7 @@ namespace MesFilms
 
             if (!loader.Load(playlist, filename))
             {
-                LogMyFilms.Info("MyFilms: Playlist not found for movie : '" + filename.ToString() + "'");
+                LogMyFilms.Info("MF: Playlist not found for movie : '" + filename.ToString() + "'");
                 return "";
             }
             filename = "";
@@ -3021,8 +3045,8 @@ namespace MesFilms
                 string LargeThumb = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieTitle, movieDetails.Title);
                 //string strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, movieDetails.Title) + "{" + idMovie.ToString() + "}";;
                 //string LargeThumb = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieTitle, movieDetails.Title) + "{" + idMovie.ToString() + "}";;
-                //LogMyFilms.Debug("MyFilms (ThumbCreation): strThumb: '" + strThumb.ToString() + "'");
-                //LogMyFilms.Debug("MyFilms (ThumbCreation): LargeThumb: '" + LargeThumb.ToString() + "'");
+                //LogMyFilms.Debug("MF: (ThumbCreation): strThumb: '" + strThumb.ToString() + "'");
+                //LogMyFilms.Debug("MF: (ThumbCreation): LargeThumb: '" + LargeThumb.ToString() + "'");
 
                 try
                 {
@@ -3353,7 +3377,7 @@ namespace MesFilms
             else
             // No Movie File Found
             {
-                LogMyFilms.Info("MyFilms: File not found for movie '" + filename.ToString() + "'; string search '" + wsearchfile.ToString() + "'");
+                LogMyFilms.Info("MF: File not found for movie '" + filename.ToString() + "'; string search '" + wsearchfile.ToString() + "'");
                 return string.Empty;
             }
         }
@@ -3808,7 +3832,7 @@ namespace MesFilms
                     }
 
                     p.StartInfo = psi;
-                    LogMyFilms.Debug("MyFilms: RunAMCupdater - Starting external command: {0} {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
+                    LogMyFilms.Debug("MF: RunAMCupdater - Starting external command: {0} {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
                     try
                     {
                         p.Start();
@@ -3818,7 +3842,7 @@ namespace MesFilms
                     {
                         LogMyFilms.Debug(e.ToString());
                     }
-                    LogMyFilms.Debug("MyFilms: RunAMCupdater - External command finished");
+                    LogMyFilms.Debug("MF: RunAMCupdater - External command finished");
                 }
             }
         }
@@ -3884,7 +3908,7 @@ namespace MesFilms
                         filesfound[filesfoundcounter] = filefound;
                         filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
                         filesfoundcounter = filesfoundcounter + 1;
-                        LogMyFilms.Debug("MyFilms (TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
+                        LogMyFilms.Debug("MF: (TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
                     }
                 }
             
@@ -3894,13 +3918,13 @@ namespace MesFilms
             {
                 foreach (string storage in Trailerdirectories)
                 {
-                    LogMyFilms.Debug("MyFilms (TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'");
+                    LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'");
                     directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
                     foreach (string directoryfound in directories)
                     {
                         if ((directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
                         {
-                            LogMyFilms.Debug("MyFilms (TrailersearchLocal) - Directory found: '" + directoryfound + "'");
+                            LogMyFilms.Debug("MF: (TrailersearchLocal) - Directory found: '" + directoryfound + "'");
                             files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
                             foreach (string filefound in files)
                             {
@@ -3912,7 +3936,7 @@ namespace MesFilms
                                     filesfound[filesfoundcounter] = filefound;
                                     filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
                                     filesfoundcounter = filesfoundcounter + 1;
-                                    LogMyFilms.Debug("MyFilms (TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
+                                    LogMyFilms.Debug("MF: (TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
                                 }
                             }
 
@@ -3930,7 +3954,7 @@ namespace MesFilms
                                     filesfound[filesfoundcounter] = filefound;
                                     filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
                                     filesfoundcounter = filesfoundcounter + 1;
-                                    LogMyFilms.Debug("MyFilms (TrailersearchLocal) - Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
+                                    LogMyFilms.Debug("MF: (TrailersearchLocal) - Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
                                 }
                             }
                         }
@@ -3942,12 +3966,12 @@ namespace MesFilms
                        orderby new FileInfo(fn).Length descending
                        select fn;
             foreach (string n in filesfound)
-                LogMyFilms.Debug("MyFilms (Sorted Trailerfiles) ******* : '" + n + "'");
+                LogMyFilms.Debug("MF: (Sorted Trailerfiles) ******* : '" + n + "'");
 
             Array.Sort(filesfoundsize);
             for (int i = 0; i < result.Count; i++)
             {
-                LogMyFilms.Debug("MyFilms (Sorted Trailerfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
+                LogMyFilms.Debug("MF: (Sorted Trailerfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
             }
 
             string trailersourcepath = "";
@@ -4017,7 +4041,7 @@ namespace MesFilms
                     dlgOk.SetLine(1, MesFilms.r[select_item][MesFilms.conf.StrSTitle].ToString());//video title
                     dlgOk.SetLine(2, "maximum 20 entries for the playlist");
                     dlgOk.DoModal(GetID);
-                    LogMyFilms.Info("MyFilms: Too many entries found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle] + "', number of entries found = " + newItems.Count);
+                    LogMyFilms.Info("MF: Too many entries found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle] + "', number of entries found = " + newItems.Count);
                 return;
             }
             setProcessAnimationStatus(false, m_SearchAnimation);
@@ -4102,7 +4126,7 @@ namespace MesFilms
                             {
                                 IPAddress[] ips = Dns.GetHostAddresses(hostName);
 
-                                LogMyFilms.Debug("MyFilms (HandleWakeUpNas) : WOL - GetHostAddresses({0}) returns:", hostName);
+                                LogMyFilms.Debug("MF: (HandleWakeUpNas) : WOL - GetHostAddresses({0}) returns:", hostName);
 
                                 foreach (IPAddress ip in ips)
                                 {
@@ -4114,7 +4138,7 @@ namespace MesFilms
                             }
                             catch (Exception ex)
                             {
-                                LogMyFilms.Error("MyFilms (HandleWakeUpNas) : WOL - Failed GetHostAddress - {0}", ex.Message);
+                                LogMyFilms.Error("MF: (HandleWakeUpNas) : WOL - Failed GetHostAddress - {0}", ex.Message);
                             }
                         }
 
@@ -4126,13 +4150,13 @@ namespace MesFilms
 
                             if (wakeOnLanManager.IsValidEthernetAddress(hwAddress))
                             {
-                                LogMyFilms.Debug("MyFilms (HandleWakeUpNas) : WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
+                                LogMyFilms.Debug("MF: (HandleWakeUpNas) : WOL - Valid auto MAC address: {0:x}:{1:x}:{2:x}:{3:x}:{4:x}:{5:x}"
                                           , hwAddress[0], hwAddress[1], hwAddress[2], hwAddress[3], hwAddress[4], hwAddress[5]);
 
                                 //Store MAC address
                                 macAddress = BitConverter.ToString(hwAddress).Replace("-", ":");
 
-                                LogMyFilms.Debug("MyFilms (HandleWakeUpNas) : WOL - Store MAC address: {0}", macAddress);
+                                LogMyFilms.Debug("MF: (HandleWakeUpNas) : WOL - Store MAC address: {0}", macAddress);
 
                                 using (
                                   MediaPortal.Profile.Settings xmlwriter =
@@ -4150,27 +4174,27 @@ namespace MesFilms
                         macAddress = xmlreader.GetValueAsString("nas", "macAddress", null);
                     }
 
-                    LogMyFilms.Debug("MyFilms (HandleWakeUpNas) : WOL - Use stored MAC address: {0}", macAddress);
+                    LogMyFilms.Debug("MF: (HandleWakeUpNas) : WOL - Use stored MAC address: {0}", macAddress);
 
                     try
                     {
                         hwAddress = wakeOnLanManager.GetHwAddrBytes(macAddress);
 
                         //Finally, start up the TV server
-                        LogMyFilms.Info("MyFilms (HandleWakeUpNas) : WOL - Start the NAS server");
+                        LogMyFilms.Info("MF: (HandleWakeUpNas) : WOL - Start the NAS server");
 
                         if (wakeOnLanManager.WakeupSystem(hwAddress, hostName, intTimeOut))
                         {
-                            LogMyFilms.Info("MyFilms (HandleWakeUpNas) : WOL - The NAS server started successfully!");
+                            LogMyFilms.Info("MF: (HandleWakeUpNas) : WOL - The NAS server started successfully!");
                         }
                         else
                         {
-                            LogMyFilms.Error("MyFilms (HandleWakeUpNas) : WOL - Failed to start the NAS server");
+                            LogMyFilms.Error("MF: (HandleWakeUpNas) : WOL - Failed to start the NAS server");
                         }
                     }
                     catch (Exception ex)
                     {
-                        LogMyFilms.Error("MyFilms (HandleWakeUpNas) : WOL - Failed to start the NAS server - {0}", ex.Message);
+                        LogMyFilms.Error("MF: (HandleWakeUpNas) : WOL - Failed to start the NAS server - {0}", ex.Message);
                     }
                 }
             }
@@ -4207,7 +4231,7 @@ namespace MesFilms
         public static void setGUIProperty(string name, string value)
         {
             string property = "#myfilms." + name;
-            LogMyFilms.Debug("MyFilms: setGuiProperty [{0}]: '{1}'", property, value);
+            LogMyFilms.Debug("MF: setGuiProperty [{0}]: '{1}'", property, value);
             GUIPropertyManager.SetProperty(property, value);
         }
 
@@ -4218,7 +4242,7 @@ namespace MesFilms
 
         public static void clearGUIProperty(string name)
         {
-            setGUIProperty(name, ""); // String.Empty doesn't work on non-initialized fields, as a result they would display as ugly #myfilms.bla.bla - but "" seems now be possible and works better with conditional visibility checks, e.g. !strings.equals(#myfilms.xxx.value)
+            setGUIProperty(name, string.Empty);
         }
 
         public static void GetActorByName(string strActorName, ArrayList actors)
@@ -4256,7 +4280,7 @@ namespace MesFilms
           if (Configuration.PluginMode != "normal") 
             return true;
           else
-            LogMyFilms.Debug("MyFilms: Disabled feature due to startmode 'normal': '" + disabledfeature + "'");
+            LogMyFilms.Debug("MF: Disabled feature due to startmode 'normal': '" + disabledfeature + "'");
             return false;
         }
 
