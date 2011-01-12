@@ -555,6 +555,7 @@ namespace MesFilms
           // 
           // CatalogType
           // 
+          this.CatalogType.BackColor = System.Drawing.SystemColors.Info;
           this.CatalogType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
           this.CatalogType.FormattingEnabled = true;
           this.CatalogType.Items.AddRange(new object[] {

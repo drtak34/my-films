@@ -682,8 +682,11 @@ namespace MesFilms
                     //    choiceViewMenu.Add("item2");
                     //}
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798730));             //Update Moviedetails from nfo-file - also download actor thumbs, Fanart, etc. if available
-                    choiceViewMenu.Add("nfo-reader-update");
+                    if(ExtendedStartmode("Details context: nfo-reader-update"))
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798730));             //Update Moviedetails from nfo-file - also download actor thumbs, Fanart, etc. if available
+                      choiceViewMenu.Add("nfo-reader-update");
+                    }
 
                     //dlgmenu.Add(GUILocalizeStrings.Get(10798721));             //Update Moviedetails from ant.info file
                     //choiceViewMenu.Add("ant-nfo-reader");
@@ -691,14 +694,21 @@ namespace MesFilms
                     //dlgmenu.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
                     //choiceViewMenu.Add("ant-nfo-writer");
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
-                    choiceViewMenu.Add("trailer-register");
+                    if (MesFilms.conf.StrStorageTrailer.Length > 0)
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
+                      choiceViewMenu.Add("trailer-register");
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
-                    choiceViewMenu.Add("trailer-delete");
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
+                      choiceViewMenu.Add("trailer-delete");
+                    }
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798728));             //Create Thumb from movie - if no cover available, e.g. with documentaries
-                    choiceViewMenu.Add("cover-thumbnailer");
+                    if (ExtendedStartmode("Details context: Thumb creator (and fanart creator?)"))
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798728));
+                        //Create Thumb from movie - if no cover available, e.g. with documentaries
+                      choiceViewMenu.Add("cover-thumbnailer");
+                    }
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
@@ -719,11 +729,14 @@ namespace MesFilms
                         choiceViewMenu.Add("grabber");
                     }
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798724));             //load IMDB Trailer, store locally and update DB
-                    choiceViewMenu.Add("trailer-imdb");
+                    if (ExtendedStartmode("Details context: Trailer Download"))
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
+                      choiceViewMenu.Add("trailer-imdb");
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
-                    choiceViewMenu.Add("trailer-delete");
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
+                      choiceViewMenu.Add("trailer-delete");
+                    }
 
                     if (MesFilms.conf.StrFanart)            // Download Fanart
                     {
@@ -861,8 +874,8 @@ namespace MesFilms
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798643)); // menu
                     foreach (string wupd in MesFilms.conf.StrUpdList)
                     {
-                        dlgmenu.Add(GUILocalizeStrings.Get(184) + " '" + BaseMesFilms.Translate_Column(wupd) + "'");
-                        choiceUpd.Add(wupd);
+                        dlgmenu.Add(GUILocalizeStrings.Get(184) + " '" + BaseMesFilms.Translate_Column(wupd.Trim()) + "'");
+                        choiceUpd.Add(wupd.Trim());
                     }
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)

@@ -555,18 +555,25 @@ namespace MesFilms
                         System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
                         //Add Menuentries here
 
-                        //Guzzi: RandomMovie Search added
-                        dlg.Add(GUILocalizeStrings.Get(10798621));//Search global movies by randomsearch (singlesearch, areasearch)
-                        choiceSearch.Add("randomsearch");
+                        if (MesFilmsDetail.ExtendedStartmode("Global Random Movie Search"))
+                        {
+                          //Guzzi: RandomMovie Search added
+                          dlg.Add(GUILocalizeStrings.Get(10798621));//Search global movies by randomsearch (singlesearch, areasearch)
+                          choiceSearch.Add("randomsearch");
+                          
+                        }
 
                         if (MesFilms.conf.StrSearchList[0].Length > 0)
                         {
                             dlg.Add(GUILocalizeStrings.Get(10798615));//Search global movies by property
                             choiceSearch.Add("globalproperty");
                         }
-                        
-                        dlg.Add(GUILocalizeStrings.Get(10798645));//Search global movies by areas
-                        choiceSearch.Add("globalareas");
+
+                        if (MesFilmsDetail.ExtendedStartmode("Global Search Movies by Areas"))
+                        {
+                          dlg.Add(GUILocalizeStrings.Get(10798645)); //Search global movies by areas
+                          choiceSearch.Add("globalareas");
+                        }
 
                         dlg.Add(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(342));//Title
                         choiceSearch.Add("title");
@@ -609,7 +616,7 @@ namespace MesFilms
 
                         if (choiceSearch[dlg.SelectedLabel] == "analogyproperty")
                         {
-							//SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId, MesFilms.conf.StrSearchList); // This version takes properties from config - but should be all anyway ...
+							              //SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId, MesFilms.conf.StrSearchList); // This version takes properties from config - but should be all anyway ...
                             // Define Search Properties here (hardcoded)
                             //string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
                             //SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId, PropertyList);
@@ -635,8 +642,8 @@ namespace MesFilms
                         if (choiceSearch[dlg.SelectedLabel] == "globalproperty")
                         {
                             //SearchMoviesbyProperties(); // GuzziVersion
-							// This version from ZebonsMerge - Change ClassName to SearchMoviesbyPropertiesZebons
-							SearchMoviesbyProperties(MesFilms.conf.StrSearchList);
+							              // This version from ZebonsMerge - Change ClassName to SearchMoviesbyPropertiesZebons
+							              SearchMoviesbyProperties(MesFilms.conf.StrSearchList);
 
                             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                             dlg.DeInit();
@@ -794,7 +801,10 @@ namespace MesFilms
                         dlg.Add(GUILocalizeStrings.Get(100));//Icons
                         dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
                         dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
+#if MP11
+#else
                         dlg.Add(GUILocalizeStrings.Get(791));//Coverflow
+#endif
                         dlg.DoModal(GetID);
 
                         if (dlg.SelectedLabel == -1)
@@ -1507,7 +1517,7 @@ namespace MesFilms
             choiceView.Add("globalupdates");
 
             // Add Submenu for Wiki Online Help
-            if (MesFilmsDetail.ExtendedStartmode("Contextmenu for Onlinehelp")) // check if specialmode is configured for disabled features
+            if (MesFilmsDetail.ExtendedStartmode("Contextmenu for Wiki Onlinehelp")) // check if specialmode is configured for disabled features
             {
               dlg1.Add(string.Format(GUILocalizeStrings.Get(10798699)));
               choiceView.Add("globalwikihelp");
@@ -2305,7 +2315,7 @@ namespace MesFilms
                     conf.StrSelect = "((" + conf.StrTitle1.ToString() + " not like '') and (" + conf.StrStorage.ToString() + " not like ''))";
                     conf.StrTxtSelect = GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951);
 //                    TxtSelect.Label = conf.StrTxtSelect;
-                    MesFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
+                    MesFilmsDetail.clearGUIProperty("select");
                     conf.Boolselect = false;
                     conf.Boolreturn = false;
                     conf.Boolview = true;
@@ -2549,12 +2559,15 @@ namespace MesFilms
                     dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
                     System.Collections.Generic.List<string> choiceViewGlobalOptions = new System.Collections.Generic.List<string>();
 
-                    // Change global Unwatchedfilteroption
-                    if (MesFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
-                    if (!MesFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
-                    choiceViewGlobalOptions.Add("globalunwatchedfilter");
+                    if (MesFilmsDetail.ExtendedStartmode("Change global Unwatchedfilteroption")) // check if specialmode is configured for disabled features
+                    {
+                      // Change global Unwatchedfilteroption
+                      if (MesFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
+                      if (!MesFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
+                      choiceViewGlobalOptions.Add("globalunwatchedfilter");
+                    }
 
-                    // Change global MovieFilter (Only Movies with Trailer)
+                // Change global MovieFilter (Only Movies with Trailer)
                     if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
                     if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("filterdbtrailer");
@@ -2619,11 +2632,19 @@ namespace MesFilms
                         choiceViewGlobalUpdates.Add("downfanart");
                     }
 
-                    dlg2.Add(GUILocalizeStrings.Get(10798688));   // Search and register all trailers for all movies in DB
-                    choiceViewGlobalUpdates.Add("personinfos-all");
+                    if (MesFilmsDetail.ExtendedStartmode("Global Update all PersonInfos")) // check if specialmode is configured for disabled features
+                    {
+                      dlg2.Add(GUILocalizeStrings.Get(10798688));
+                        // Search all personinfos
+                      choiceViewGlobalUpdates.Add("personinfos-all");
+                    }
 
-                    dlg2.Add(GUILocalizeStrings.Get(10798694));   // Search and register all trailers for all movies in DB
-                    choiceViewGlobalUpdates.Add("trailer-all");
+                    if (MesFilms.conf.StrStorageTrailer.Length > 0)
+                    {
+                      dlg2.Add(GUILocalizeStrings.Get(10798694));
+                        // Search and register all trailers for all movies in DB
+                      choiceViewGlobalUpdates.Add("trailer-all");
+                    }
 
                     dlg2.DoModal(GetID);
 
@@ -2792,9 +2813,9 @@ namespace MesFilms
                     LogMyFilms.Debug("MF: (GlobalSearchTrailerLocal) - Number of Records found: " + w_index_count);
 
                     GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-                    dlgYesNo.SetHeading("Warnung !");
-                    dlgYesNo.SetLine(1, "Sehr lange Laufzeit!");
-                    dlgYesNo.SetLine(2, "Wollen Sie wirklich die Trailersuche für " + w_index_count + " Filme starten?");
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798800));
+                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798801));
+                    dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), w_index_count.ToString()));
                     dlgYesNo.DoModal(GetID);
                     if (!(dlgYesNo.IsConfirmed))
                         break;
@@ -3825,8 +3846,14 @@ namespace MesFilms
             //<entry name="UpdateList">TranslatedTitle|OriginalTitle|Category|Year|Date|Country|Rating|Checked|MediaLabel|MediaType|Actors|Director|Producer</entry>
             //<entry name="AllItems..">TranslatedTitle|OriginalTitle|FormattedTitle|Description|Comments|Actors|Director|Producer|Rating|Country|Category|Year|Checked|MediaLabel|MediaType|Source|Date|Borrower|Length|URL|VideoFormat|VideoBitrate|AudioFormat|AudioBitrate|Resolution|Framerate|Languages|Subtitles|DateAdded|Size|Disks|Picture|Contents_Id|Number</entry>
             //Sorted lists - manually adding items to have them in right order
-            string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
-            string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
+            //if (conf.StrTitle1 == "OriginalTitle")
+            //{
+            //}
+            string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
+            string[] PropertyListLabel = new string[] { "10798658", "10798659", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
+            // Former order was translated title first ...
+            //string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
+            //string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
             for (int ii = 0; ii < 31; ii++)
             {
                 dlg.Add(GUILocalizeStrings.Get(10798617) + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))));
@@ -4566,7 +4593,7 @@ namespace MesFilms
 
             foreach (string wSearch in wSearchList)
             {
-                dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(wSearch));
+                dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(wSearch.Trim()));
                 choiceSearch.Add(wSearch);
             }
 

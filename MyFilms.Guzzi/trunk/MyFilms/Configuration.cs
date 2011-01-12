@@ -85,8 +85,16 @@ namespace MesFilms
                   StrTSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntTSort{0}", i), string.Empty);
                   StrSort[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntSort{0}", i), string.Empty);
                 }
-                StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer").Split(new Char[] { ',' });
-                StrSearchList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number").Split(new Char[] { ',' });
+                if (StrTitle1 == "OriginalTitle")
+                {
+                  StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer").Split(new Char[] { ',' });
+                  StrSearchList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchList", "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number").Split(new Char[] { ',' });
+                }
+                else
+                {
+                  StrUpdList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer").Split(new Char[] { ',' });
+                  StrSearchList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number").Split(new Char[] { ',' });
+                }
                 StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalog", string.Empty);
                 StrFileType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CatalogType", "0");
                 StrPathImg = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntPicture", string.Empty);

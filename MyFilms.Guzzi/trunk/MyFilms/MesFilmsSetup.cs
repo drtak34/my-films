@@ -981,9 +981,17 @@ namespace MesFilms
             AntUpdItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem2", "");
             AntUpdText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText2", "");
             AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT2", string.Empty);
-            AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
-            AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
 
+            if (AntTitle1.Text == "OriginalTitle")
+            {
+              AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
+              AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+            }
+            else
+            {
+              AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
+              AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+            }
             check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", false);
             comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", "15");
             check_WOL_Userdialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Userdialog", false);
@@ -1027,7 +1035,7 @@ namespace MesFilms
             chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", false);
             cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressField", string.Empty);
             txtfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressValue", string.Empty);
-            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", false);
+            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", true);  // Changed default to "true" to use default logo config file
             string wsuppressType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressType", "1");
             switch (wsuppressType)
             {
