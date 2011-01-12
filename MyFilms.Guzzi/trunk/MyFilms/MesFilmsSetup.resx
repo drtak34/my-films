@@ -286,18 +286,18 @@ displayed as a background image for movies without a matching Fanart file. Becaf
 get a distorded picture as covers and fanarts don't have the same size.
 </value>
   </data>
-  <data name="groupBox24.ToolTip" xml:space="preserve">
-    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
-and thus to integrate trailers into MyFilms.
-Trailer can be searched within the plugin and autoregistered.
-GUI allows to show if a trailer is present (registered) and play it.</value>
-  </data>
   <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
     <value>If Trailer file is not found with the 'Ant Item for storing Trailer Infos' field, you 
 can search the trailer file with the movie Name.
 Validate that option for it and give the Title used for the search.
 Attention: Might degrade performace!
 </value>
+  </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
+and thus to integrate trailers into MyFilms.
+Trailer can be searched within the plugin and autoregistered.
+GUI allows to show if a trailer is present (registered) and play it.</value>
   </data>
   <data name="DefaultCover.ToolTip" xml:space="preserve">
     <value>Enter the full path and file name of the image file that you wish to use as the default DVD cover image.  
@@ -369,8 +369,8 @@ Will show "Moviecollection" with 3 items in it.</value>
   <data name="pictureBoxMyFilms.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDgAA
-        Cw4BQL7hQQAAWHNJREFUeF7tXQdYVVfWnVRTJomm95jEGI2xxNhj7713saOCIgqiggIiRVAQFFCKoAIq
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDQAA
+        Cw0B7QfALAAAWHNJREFUeF7tXQdYVVfWnVRTJomm95jEGI2xxNhj7713saOCIgqiggIiRVAQFFCKoAIq
         vYkFxYYde6/Ye2+xl/2vde47+CRm/sxMNMlEvu9879Heu+/stfs6+z4nIv949vU33gEC4Nn6++7BM+H/
         zRXgGQCeAeDva/6euT7Ef8824e+tAM8A8MwF/L014O9uAZ9ZgGcW4JkF+DtbgWcW4JkF+G0W4H+wWPoc
         PpP5+p/6iL/Vqv1mC/AX3Z38Qv5Pvv9LfvS/GwDMBfs8JKbXC3jO9aLZyv/9r/1O/y8fzV/zL2E1/lcB
