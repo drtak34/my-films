@@ -2051,7 +2051,7 @@ http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Film
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2</Revision>
+      <Revision>3</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production.
@@ -2060,7 +2060,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
     <OnlineLocation />
     <ReleaseDate>2011-01-01T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.2c.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.3.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3884,7 +3884,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{437a41b1-b079-4b48-833d-29630a2427e4}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6e122652-211c-4711-89cd-3fb6903a1238}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

@@ -107,7 +107,7 @@
     <String id="10798620">Person info</String>
     <String id="10798621">Search random films</String>
     <String id="10798622">All films</String>
-    <String id="10798623">(no infos)</String>
+    <String id="10798623">(no info)</String>
     <String id="10798624">Films System Information</String>
     <String id="10798625">No result found for this value!</String>
     <String id="10798626">=> '{1}' ({0})</String>
@@ -123,6 +123,8 @@
     <String id="10798643">Select property for updating</String>
     <String id="10798644">Wrong input format. Please retry.</String>
     <String id="10798645">Global search (areas)</String>
+    <String id="10798646">Search movies</String>
+    <String id="10798647">Search actors</String>
     <String id="10798648">Source</String>
     <String id="10798649">Trailer source</String>
     <String id="10798650">Number</String>
@@ -196,5 +198,8 @@
     <String id="10798753">Comments</String>
     <String id="10798754">Actors</String>
     <String id="10798755">Technical Info</String>
+    <String id="10798800">Warning: possible long runtime !</String>
+    <String id="10798801">Should trailer search really be</String>
+    <String id="10798802">started for {0} movies ?</String>
   </Section>
 </Language>

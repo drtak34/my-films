@@ -183,7 +183,7 @@
 				<posY>107</posY>
 				<onleft>1026</onleft>
 				<onright>1026</onright>
-				<onup>4</onup>
+				<onup>10014</onup>
 				<ondown>2</ondown>
 				<animation>unfocus</animation>
 				<label>101</label>
@@ -251,11 +251,58 @@
 				<onleft>4</onleft>
 				<onright>1026</onright>
 				<onup>4</onup>
-				<ondown>6</ondown>
+				<ondown>10012</ondown>
 				<animation>unfocus</animation>
 				<label>496</label>
 				<textcolor>ff000000</textcolor>
 			</control>
+
+
+<!-- Start - Additional Buttons for Links to other Plugins -->
+				<control>
+					<description>Empty</description>
+					<type>button</type>
+					<id>10011</id>
+					<hyperlink></hyperlink>
+					<label>-</label>
+					<onright>1026</onright>
+					<onup>5</onup>
+					<ondown>10012</ondown>
+				</control>
+				<control>
+					<description>Trailer</description>
+					<type>button</type>
+					<id>10012</id>
+					<hyperlink>5900</hyperlink>
+					<label>5900</label>
+					<onright>1026</onright>
+					<onup>5</onup>
+					<ondown>10013</ondown>
+					<visible>plugin.isenabled(My Trailers)</visible>
+				</control>
+				<control>
+					<description>Onlinevideos</description>
+					<type>button</type>
+					<id>10013</id>
+					<hyperlink>4755</hyperlink>
+					<label>Onlinevideos</label>
+					<onright>1026</onright>
+					<onup>10012</onup>
+					<ondown>10014</ondown>
+					<visible>plugin.isenabled(OnlineVideos)</visible>
+				</control>
+				<control>
+					<description>TV-Series</description>
+					<type>button</type>
+					<id>10014</id>
+					<hyperlink>9811</hyperlink>
+					<label>1300</label>
+					<onright>1026</onright>
+					<onup>10013</onup>
+					<ondown>6</ondown>
+				</control>
+<!-- End - Additional Buttons for Links to other Plugins -->
+
 		 </control>
 	</control>
     <control>

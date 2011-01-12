@@ -2160,7 +2160,7 @@ namespace MesFilms
           this.label_VersionNumber.Name = "label_VersionNumber";
           this.label_VersionNumber.Size = new System.Drawing.Size(107, 13);
           this.label_VersionNumber.TabIndex = 34;
-          this.label_VersionNumber.Text = "Version 5.0.0.2 alpha";
+          this.label_VersionNumber.Text = "Version 5.0.0.3 alpha";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "Alphaversion for Testing only !");
           this.label_VersionNumber.Click += new System.EventHandler(this.label10_Click);
           // 

@@ -47,16 +47,19 @@ namespace MesFilms
         public Logos()
         {
             System.ComponentModel.BackgroundWorker bgLogos = new System.ComponentModel.BackgroundWorker();
-            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilmsLogos_" + Configuration.CurrentConfig + ".xml")))
+            //string activeLogoConfigFile = Config.GetFile(Config.Dir.Config, "MyFilmsLogos_" + Configuration.CurrentConfig + ".xml"); // Default config customized logofile
+
+            string activeLogoConfig = "MyFilmsLogos_" + Configuration.CurrentConfig;
+            string logoConfigPathSkin;
+            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
             {
+              logoConfigPathSkin = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin"); // Get current path to active skin directory
+            }
 
-                XmlConfig XmlConfig = new XmlConfig();
-
-                //if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Artist")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Artist");
-                //Config.GetSubFolder(Config.Dir.Skin, @"Media\Logos");
-                //MediaPortal.Configuration.Config.GetSubFolder(MediaPortal.Configuration.Config.Dir.Skin, @"Media\Logos");
-
+            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilmsLogos_" + Configuration.CurrentConfig + ".xml"))) // Loading either configfile in skindirectory or specific file in configdir
+            {
                 // First check, if Config specific LogoConfig exists, if not create it from default file!
+                XmlConfig XmlConfig = new XmlConfig();
                 string wfile = XmlConfig.EntireFilenameConfig("MyFilmsLogos").Substring(0, XmlConfig.EntireFilenameConfig("MyFilmsLogos").LastIndexOf("."));
                 if (!System.IO.File.Exists(wfile + "_" + Configuration.CurrentConfig + ".xml"))
                     try
@@ -66,21 +69,37 @@ namespace MesFilms
                     }
                     catch
                     {
-                        LogMyFilms.Debug("MF: Error Creating Configspecific File from Default File!");
+                        LogMyFilms.Debug("MF: Error creating config specific file from default file !");
                     }
 
+                if (System.IO.File.Exists(logoConfigPathSkin + @"\MyFilmsLogos.xml"))
+                  try
+                  {
+                    LogMyFilms.Debug("MF: Using SKin specific logo config file: '" + logoConfigPathSkin + @"\MyFilmsLogos.xml" + "'");
+                    System.IO.File.Copy(logoConfigPathSkin + @"\MyFilmsLogos.xml", wfile + "_" + Configuration.CurrentConfig + ".xml", true); // true to owerwrite existing file in case skinoverride should be done
+                    wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + Configuration.CurrentConfig;
+                  }
+                  catch
+                  {
+                    LogMyFilms.Debug("MF: Error copying config specific file from skin override file !");
+                  }
+                //{
+                //  //activeLogoConfigFile = logoConfigPathSkin + @"\MyFilmsLogos.xml"; // Use configfile in skindirectory
+                //  //activeLogoConfig = "MyFilmsLogos";
+                //}
+
                 //LogosPath = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", XmlConfig.PathInstalMP() + @"\thumbs\");
-                LogosPath = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos");
+                LogosPath = XmlConfig.ReadXmlConfig(activeLogoConfig, "ID0000", "LogosPath", Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos");
                 if (LogosPath.Length < 1)
-                    LogosPath = Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos";
+                    LogosPath = Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Logos";
                 if (LogosPath.LastIndexOf("\\") != LogosPath.Length - 1)
                     LogosPath = LogosPath + "\\";
-                LogMyFilms.Debug("MF: Logo path for storing picture created " + LogosPath.ToString());
+                LogMyFilms.Debug("MF: Logo path for storing picture created " + LogosPath);
 
                 int i = 0;
                 do
                 {
-                    string wline = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID2001", "ID2001_" + i, null);
+                    string wline = XmlConfig.ReadXmlConfig(activeLogoConfig, "ID2001", "ID2001_" + i, null);
                     if (wline == null)
                         break;
                     ID2001Logos.Add(wline);
@@ -90,7 +109,7 @@ namespace MesFilms
                 i = 0;
                 do
                 {
-                    string wline = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID2002", "ID2002_" + i, null);
+                    string wline = XmlConfig.ReadXmlConfig(activeLogoConfig, "ID2002", "ID2002_" + i, null);
                     if (wline == null)
                         break;
                     ID2002Logos.Add(wline);
@@ -99,7 +118,7 @@ namespace MesFilms
                 i = 0;
                 do
                 {
-                    string wline = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID2003", "ID2003_" + i, null);
+                    string wline = XmlConfig.ReadXmlConfig(activeLogoConfig, "ID2003", "ID2003_" + i, null);
                     if (wline == null)
                         break;
                     ID2003Logos.Add(wline);
