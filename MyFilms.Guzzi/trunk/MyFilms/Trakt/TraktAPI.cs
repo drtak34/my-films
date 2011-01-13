@@ -6,12 +6,15 @@ using System.Net;
 using Trakt.Show;
 using Trakt.User;
 using Trakt.Movie;
-using WindowPlugins.GUITVSeries;
+using MesFilms;
 
 namespace Trakt
 {
-    static class TraktAPI
+  using MesFilms.MyFilms.Utils;
+
+  static class TraktAPI
     {
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
         public enum Status
         {
             watching,
@@ -105,7 +108,7 @@ namespace Trakt
             {
                 TraktResponse error = new TraktResponse
                 {
-                    Error = Translation.TraktNotEnoughInfo,
+                    Error = "Not enough information to send to server.",
                     Status = "failure"
                 };
                 return error;
@@ -131,7 +134,7 @@ namespace Trakt
             {
                 TraktResponse error = new TraktResponse
                 {
-                    Error = Translation.TraktNotEnoughInfo,
+                    Error = "Not enough information to send to server.",
                     Status = "failure"
                 };
                 return error;
@@ -155,7 +158,7 @@ namespace Trakt
         {
             if (!string.IsNullOrEmpty(data))
             {
-                MPTVSeriesLog.Write("Trakt Post: ", data, MPTVSeriesLog.LogLevel.Normal);
+              LogMyFilms.Info("Trakt Post: ", data);
             }
 
             try

@@ -103,6 +103,12 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -131,6 +137,18 @@
     </Compile>
     <Compile Include="MyFilms\BaseMesFilms.cs" />
     <Compile Include="MyFilms\CatalogConverter\DvdProfiler.cs" />
+    <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
+    <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />
+    <Compile Include="MyFilms\Trakt\Show\TraktSeriesOverview.cs" />
+    <Compile Include="MyFilms\Trakt\TraktAPI.cs" />
+    <Compile Include="MyFilms\Trakt\TraktExtensions.cs" />
+    <Compile Include="MyFilms\Trakt\TraktResponse.cs" />
+    <Compile Include="MyFilms\Trakt\TraktURIs.cs" />
+    <Compile Include="MyFilms\Trakt\User\TraktLibraryMovies.cs" />
+    <Compile Include="MyFilms\Trakt\User\TraktLibraryShows.cs" />
+    <Compile Include="MyFilms\Trakt\User\TraktUserProfile.cs" />
+    <Compile Include="MyFilms\Trakt\User\TraktWatchedEpisodeHistory.cs" />
+    <Compile Include="MyFilms\Trakt\User\TraktWatchedMovieHistory.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\AsyncImageResource.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\Extensions\GUIFacadeControlExtensions.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\Extensions\GUIWindowExtensions.cs" />
@@ -150,7 +168,6 @@
     <Compile Include="MyFilms\CatalogConverter\EaxMovieCatalog.cs" />
     <Compile Include="MyFilms\Utils\FastImage.cs" />
     <Compile Include="MyFilms\Utils\LocalizeStrings.cs" />
-    <Compile Include="MyFilms\Logos.cs" />
     <Compile Include="MyFilms\MesFilms.cs" />
     <Compile Include="MyFilms\MesFilmsActorsInfo.cs" />
     <Compile Include="MyFilms\MesFilmsDetail.cs" />
@@ -163,9 +180,11 @@
     </Compile>
     <Compile Include="MyFilms\CatalogConverter\MovieCollector.cs" />
     <Compile Include="MyFilms\CatalogConverter\MyMovies.cs" />
+    <Compile Include="MyFilms\Utils\Logos.cs" />
+    <Compile Include="MyFilms\Utils\Utility.cs" />
     <Compile Include="MyFilms\Utils\WakeOnLanManager.cs" />
     <Compile Include="MyFilms\CatalogConverter\XbmcNfo.cs" />
-    <Compile Include="MyFilms\XmlConfig.cs" />
+    <Compile Include="MyFilms\Utils\XmlConfig.cs" />
     <Compile Include="MyFilms\CatalogConverter\XMM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MyFilms\Utils\VideoThumbCreator.cs" />
