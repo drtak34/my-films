@@ -6,7 +6,7 @@ using System.Net;
 using Trakt.Show;
 using Trakt.User;
 using Trakt.Movie;
-using WindowPlugins.GUITVSeries;
+//using WindowPlugins.GUITVSeries;
 
 namespace Trakt
 {
@@ -100,7 +100,7 @@ namespace Trakt
             {
                 TraktResponse error = new TraktResponse
                 {
-                    Error = Translation.TraktNotEnoughInfo,
+                    Error = "TraktNotEnoughInfo",
                     Status = "failure"
                 };
                 return error;
@@ -126,7 +126,7 @@ namespace Trakt
             {
                 TraktResponse error = new TraktResponse
                 {
-                    Error = Translation.TraktNotEnoughInfo,
+                    Error = "TraktNotEnoughInfo",
                     Status = "failure"
                 };
                 return error;
@@ -150,7 +150,7 @@ namespace Trakt
         {
             if (!string.IsNullOrEmpty(data))
             {
-                MPTVSeriesLog.Write("Trakt Post: ", data, MPTVSeriesLog.LogLevel.Normal);
+               //Write("Trakt Post: ", data, MPTVSeriesLog.LogLevel.Normal);
             }
 
             try
