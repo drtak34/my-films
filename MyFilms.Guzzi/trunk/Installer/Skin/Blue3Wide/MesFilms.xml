@@ -468,13 +468,13 @@
 		</control>
 		<control>
 			<type>image</type>
-			<description>thumb Logos ID 2001</description>
-			<id>2001</id>
+			<description>thumb Logos ID 2012</description>
+			<id>2012</id>
 			<posX>425</posX>
 			<posY>630</posY>
 			<width>330</width>
 			<height>35</height>
-			 <texture>#myfilms.logos_id2001</texture>
+			 <texture>#myfilms.logos_id2012</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
 			<animation effect="fade" time="8250">visiblechange</animation>
@@ -482,20 +482,6 @@
 			<animation effect="fade" time="8250">WindowOpen</animation>
 			<visible>!Control.isvisible(34)</visible>
 		</control>
-		<control>
-			<type>image</type>
-			<description>thumb Logos ID 2002</description>
-			<id>2002</id>
-			<posX>425</posX>
-			<posY>630</posY>
-			<width>330</width>
-			<height>35</height>
-			<texture>#myfilms.logos_id2002</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<spaceBetweenItems>2</spaceBetweenItems>
-			<visible>!Control.isvisible(34)</visible>
-		</control>
-
 		<control>
 			<type>label</type>
 			<description>year</description>

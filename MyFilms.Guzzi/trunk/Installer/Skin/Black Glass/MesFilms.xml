@@ -550,7 +550,7 @@
 			<posY>676</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>tv_is_unavailable.png</texture>
+			<texture>trailer_is_unavailable.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
@@ -564,7 +564,7 @@
 			<posY>676</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>tv_is_available.png</texture>
+			<texture>trailer_is_available.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
@@ -596,7 +596,7 @@
 			<width>20</width>
 			<height>20</height>
 			<!-- <texture>led_frame_green.png</texture> -->
-			<texture>tv_is_unavailable.png</texture>
+			<texture>trailer_is_unavailable.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
@@ -611,7 +611,7 @@
 			<width>20</width>
 			<height>20</height>
 			<!-- <texture>led_frame_red.png</texture> -->
-			<texture>tv_is_available.png</texture>
+			<texture>trailer_is_available.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>

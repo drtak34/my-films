@@ -1871,7 +1871,7 @@ Detailmenu for technical details
 			<posY>671</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>led_frame_red.png</texture>
+			<texture>trailer_led_red.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<colordiffuse>a0ffffff</colordiffuse>
 			<centered>yes</centered>
@@ -1887,7 +1887,7 @@ Detailmenu for technical details
 			<posY>671</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>led_frame_green.png</texture>
+			<texture>trailer_led_green.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<colordiffuse>d0ffffff</colordiffuse>
 			<centered>yes</centered>
@@ -1918,7 +1918,7 @@ Detailmenu for technical details
 			<posY>691</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>led_frame_red.png</texture>
+			<texture>trailer_led_red.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>a0ffffff</colordiffuse>
@@ -1934,7 +1934,7 @@ Detailmenu for technical details
 			<posY>691</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>led_frame_green.png</texture>
+			<texture>trailer_led_green.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>d0ffffff</colordiffuse>
