@@ -220,7 +220,10 @@ because of low resolution of cover images and you might get a distorted picture 
   <data name="txtLogosPath.ToolTip" xml:space="preserve">
     <value>Enter (or use the browse button) the full path to the folder containing the logo image files.  
 To optimise performance, an image containing all the logos to be displayed for each movie is dynamically created.
-Those cached images usually are stored in ...\Myfilms_Logos</value>
+Those cached images usually are stored in \Thumbs\Myfilms_Logos
+If you leave the field empty, logos will be searched in &lt;mediaportal program data&gt;\skins\&lt;skin name&gt;\media\logos.
+Thus the default rules will try to assign logos of the current selected skin, if available.
+You can use Presets to use default behavior, use B3W logos or use optional logo pack.</value>
   </data>
   <data name="SLogo_Type.ToolTip" xml:space="preserve">
     <value>There are two fields referenced in the skin files to display logos - ID2001 and ID2002. 
@@ -369,8 +372,8 @@ Will show "Moviecollection" with 3 items in it.</value>
   <data name="pictureBoxMyFilms.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDQAA
-        Cw0B7QfALAAAWHNJREFUeF7tXQdYVVfWnVRTJomm95jEGI2xxNhj7713saOCIgqiggIiRVAQFFCKoAIq
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
+        CwcBtnMLwAAAWHNJREFUeF7tXQdYVVfWnVRTJomm95jEGI2xxNhj7713saOCIgqiggIiRVAQFFCKoAIq
         vYkFxYYde6/Ye2+xl/2vde47+CRm/sxMNMlEvu9879Heu+/stfs6+z4nIv949vU33gEC4Nn6++7BM+H/
         zRXgGQCeAeDva/6euT7Ef8824e+tAM8A8MwF/L014O9uAZ9ZgGcW4JkF+DtbgWcW4JkF+G0W4H+wWPoc
         PpP5+p/6iL/Vqv1mC/AX3Z38Qv5Pvv9LfvS/GwDMBfs8JKbXC3jO9aLZyv/9r/1O/y8fzV/zL2E1/lcB

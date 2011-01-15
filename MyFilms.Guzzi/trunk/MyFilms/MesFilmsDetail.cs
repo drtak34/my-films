@@ -2192,7 +2192,7 @@ namespace MesFilms
           {
             try
             {
-              setGUIProperty("logos_id2001", Logos.Build_Logos(row, "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID));
+              setGUIProperty("logos_id2001", Logos.Build_Logos(row, "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, GetID));
               //GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
               //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
               //GUIControl.HideControl(GetID, (int)Controls.CTRL_Format);
@@ -2212,7 +2212,7 @@ namespace MesFilms
           {
             try
             {
-              setGUIProperty("logos_id2002", Logos.Build_Logos(row, "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, 1, GetID));
+              setGUIProperty("logos_id2002", Logos.Build_Logos(row, "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, GetID));
               //GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2002);
               //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2002);
             }
@@ -2230,7 +2230,7 @@ namespace MesFilms
           {
             try
             {
-              setGUIProperty("logos_id2003", Logos.Build_Logos(row, "ID2003", ImgID2003.Height, ImgID2003.Width, ImgID2003.XPosition, ImgID2003.YPosition, 1, GetID));
+              setGUIProperty("logos_id2003", Logos.Build_Logos(row, "ID2003", ImgID2003.Height, ImgID2003.Width, ImgID2003.XPosition, ImgID2003.YPosition, GetID));
             }
             catch (Exception e)
             {
@@ -2244,7 +2244,7 @@ namespace MesFilms
           {
             try
             {
-              setGUIProperty("logos_id2012", Logos.Build_Logos(row, "ID2012", ImgID2012.Height, ImgID2012.Width, ImgID2012.XPosition, ImgID2012.YPosition, 1, GetID));
+              setGUIProperty("logos_id2012", Logos.Build_Logos(row, "ID2012", ImgID2012.Height, ImgID2012.Width, ImgID2012.XPosition, ImgID2012.YPosition, GetID));
             }
             catch (Exception e)
             {

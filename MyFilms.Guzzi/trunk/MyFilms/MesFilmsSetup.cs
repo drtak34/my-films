@@ -801,32 +801,35 @@ namespace MesFilms
             if (chkLogos.Checked) // Save Logoconfig ...
             {
                 string wfile = XmlConfig.EntireFilenameConfig("MyFilmsLogos").Substring(0, XmlConfig.EntireFilenameConfig("MyFilmsLogos").LastIndexOf("."));
-                if (System.IO.File.Exists(wfile + "_" + Config_Name.Text + ".xml"))
-                    System.IO.File.Copy(wfile + "_" + Config_Name.Text + ".xml", wfile + "_" + Config_Name.Text + ".xml.sav", true);
-                try
-                {
-                    System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsLogos"), wfile + "_" + Config_Name.Text + ".xml", true);
-                    wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + Config_Name.Text;
-                }
-                catch
-                {
-                    wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1);
-                }
-
-                if (txtLogosPath.Text == Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos") // If path starts with default path, remove defaultpath to make it compatible with differnt OS
-                    XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogosPath", "");
-                else
-                    XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogosPath", txtLogosPath.Text);
+                //if (System.IO.File.Exists(wfile + "_" + Config_Name.Text + ".xml"))
+                //  System.IO.File.Copy(wfile + "_" + Config_Name.Text + ".xml", wfile + "_" + Config_Name.Text + ".xml.sav", true);
+                if (System.IO.File.Exists(wfile + ".xml"))
+                  System.IO.File.Copy(wfile + ".xml", wfile + ".xml.sav", true);
+                //try
+                //{
+                //    System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsLogos"), wfile + "_" + Config_Name.Text + ".xml", true);
+                //    //wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + Config_Name.Text; // commented, as we always want to write to the original file !
+                //}
+                //catch
+                //{
+                //    wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1);
+                //}
+                wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1);
+                string logoPath;
+                //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
+                //{
+                //  logoPath = MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin") + @"\Media\Logos"; // Get current path to logos in skindirectory
+                //}
+                //if (txtLogosPath.Text.Length > 0)
+                logoPath = txtLogosPath.Text;
+                if (comboBoxLogoPresets.Text != "Define your path to logo image files") 
+                  logoPath = "";
+                XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogoPresets", comboBoxLogoPresets.Text); // Added Presets to Logo Config
+                XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogosPath", txtLogosPath.Text);
+                XmlConfig.WriteXmlConfig(wfile, "ID0000", "Spacing", comboBoxLogoSpacing.Text); // Added Spacing to Logo Config
                 int iID2001 = 0;
                 int iID2002 = 0;
                 int iID2003 = 0;
-                //int icountry = 0;
-
-                string logoPath;
-                using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
-                {
-                    logoPath = MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin") + @"\Media\Logos"; // Get current path to logos in skindirectory
-                }
 
                 for (int i = 0; i < (int)LogoView.Items.Count; i++)
                 {
@@ -837,7 +840,7 @@ namespace MesFilms
                     wline = wline + LogoView.Items[i].SubItems[5].Text + ";";
                     wline = wline + LogoView.Items[i].SubItems[6].Text.ToLower() + ";";
                     wline = wline + LogoView.Items[i].SubItems[7].Text + ";";
-                    if ((LogoView.Items[i].SubItems[9].Text.Length > 0) && (LogoView.Items[i].SubItems[9].Text != logoPath))
+                    if ((LogoView.Items[i].SubItems[9].Text.Length > 0) && (logoPath != ""))
                         wline = wline + LogoView.Items[i].SubItems[9].Text + "\\" + LogoView.Items[i].SubItems[8].Text;
                     else
                         wline = wline + LogoView.Items[i].SubItems[8].Text;
@@ -1035,7 +1038,7 @@ namespace MesFilms
             chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", false);
             cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressField", string.Empty);
             txtfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressValue", string.Empty);
-            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", true);  // Changed default to "true" to use default logo config file
+            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", false);  // Changed default to "true" to use default logo config file // had to reset to false, as logos are heavily relying on an existing DB config !
             string wsuppressType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressType", "1");
             switch (wsuppressType)
             {
@@ -1761,6 +1764,22 @@ namespace MesFilms
             }
         }
 
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+          if (selected_Logo_Item != -1)
+          {
+            //Select_Item(LogoView.SelectedItems[0].Index, false);
+            //Move_Item(LogoView.SelectedItems[0].Index, LogoView.SelectedItems[0].Index); // this is a move to "same position"
+            Edit_Item(selected_Logo_Item);
+            Select_Item(selected_Logo_Item, true);
+          }
+          else
+          {
+            System.Windows.Forms.MessageBox.Show("Please first select an Item for updating !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            return;
+          }
+        }
+
         private void btnUp_Click(object sender, EventArgs e)
         {
             if (LogoView.SelectedItems.Count != 0)
@@ -1798,6 +1817,7 @@ namespace MesFilms
         }
         private void LogoView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //if (LogoView.Items.Count != 0)
             if (LogoView.SelectedItems.Count != 0)
                 if ((LogoView.SelectedItems[0].Index > -1) && (LogoView.SelectedItems[0].Index < LogoView.Items.Count))
                     Select_Item(LogoView.SelectedItems[0].Index, true);
@@ -2024,7 +2044,7 @@ namespace MesFilms
                 {
                     if (MesFilmsCat.Text.Length == 0)
                     {
-                        System.Windows.Forms.MessageBox.Show("You must define before a valid configuration database !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        System.Windows.Forms.MessageBox.Show("You must first define a valid database configuration !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         MesFilmsCat.Focus();
                         e.Cancel = true;
                         return;
@@ -2232,26 +2252,31 @@ namespace MesFilms
         {
             //LogoView.Clear();
             string wfile = XmlConfig.EntireFilenameConfig("MyFilmsLogos").Substring(0, XmlConfig.EntireFilenameConfig("MyFilmsLogos").LastIndexOf("."));
-            if (!System.IO.File.Exists(wfile + "_" + currentconfig + ".xml"))
+            if (!System.IO.File.Exists(wfile + "_" + currentconfig + ".xml") && currentconfig.Length > 0)
             {
                 try
                 {
                     System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsLogos"), wfile + "_" + currentconfig + ".xml", true);
-                    wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + currentconfig;
+                    //wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + currentconfig;
                 }
                 catch
                 {
                     wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1);
                 }
             }
-            else
-                wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + currentconfig;
+            //else
+              //wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + currentconfig;
 
+            wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1);
+            comboBoxLogoPresets.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogoPresets", "");
             //txtLogosPath.Text = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos");
-            txtLogosPath.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogosPath", null);
+            txtLogosPath.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogosPath", "");
             if (txtLogosPath.Text.Length == 0)
-                txtLogosPath.Text = Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos\\"; // THis is MyFilms Default Logopath!
-                //txtLogosPath.Text = XmlConfig.PathInstalMP() + @"\thumbs\";
+              comboBoxLogoPresets.Text = "Use Logos of currently selected skin";
+            else
+              comboBoxLogoPresets.Text = "Define your path to logo image files";
+
+            comboBoxLogoSpacing.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "Spacing", "1");
             selected_Logo_Item = -1;
             int i = 0;
             do
@@ -2260,7 +2285,7 @@ namespace MesFilms
                 if (wline == null)
                     break;
                 string[] wtab = wline.Split(new Char[] { ';' });
-                Charge_LogosView(ref wtab, i, "ID2001");
+                Charge_LogosView(ref wtab, i, "ID2001", txtLogosPath.Text);
                 i++;
             } while (true);
             i = 0;
@@ -2270,7 +2295,7 @@ namespace MesFilms
               if (wline == null)
                 break;
               string[] wtab = wline.Split(new Char[] { ';' });
-              Charge_LogosView(ref wtab, i, "ID2002");
+              Charge_LogosView(ref wtab, i, "ID2002", txtLogosPath.Text);
               i++;
             } while (true);
             i = 0;
@@ -2280,20 +2305,21 @@ namespace MesFilms
               if (wline == null)
                 break;
               string[] wtab = wline.Split(new Char[] { ';' });
-              Charge_LogosView(ref wtab, i, "ID2003");
+              Charge_LogosView(ref wtab, i, "ID2003", txtLogosPath.Text);
               i++;
             } while (true);
             i = 0;
         }
 
-        private void Charge_LogosView(ref string[] wtab, int i, string typelogo)
+        private void Charge_LogosView(ref string[] wtab, int i, string typelogo, string logopath)
         {
-            string logoPath;
+            string skinLogoPath;
             using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.MPSettings())
             {
-                logoPath = MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin") + @"\Media\Logos"; // Get current path to logos in skindirectory
+                skinLogoPath = MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "NoSkin") + @"\Media\Logos"; // Get current path to logos in skindirectory
             }
-
+            if (logopath.Length == 0) 
+              logopath = skinLogoPath;
             LogoView.Items.Add(typelogo);
             LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[0].ToString());
             LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(wtab[1].ToString());
@@ -2306,8 +2332,8 @@ namespace MesFilms
             if (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(wtab[7].ToString())))
                 LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(wtab[7].ToString()));
             else
-                if (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(logoPath +  @"\" + wtab[7]))) // Check if Logofile exists in default media directory of current skin and add it, if found
-                    LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(logoPath + @"\" + wtab[7]));
+                if (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(logopath +  @"\" + wtab[7]))) // Check if Logofile exists in default media directory of current skin and add it, if found
+                    LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(logopath + @"\" + wtab[7]));
                 else
                 LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(string.Empty); // Add empty field, if logofile istn't found anywhere
         }
@@ -2329,8 +2355,15 @@ namespace MesFilms
                 btnDel.Enabled = true;
                 btnUp.Enabled = true;
                 btnDown.Enabled = true;
+                btnUpdate.Enabled = true;
                 txtLogosPath.Enabled = true;
                 btnLogosPath.Enabled = true;
+                comboBoxLogoSpacing.Enabled = true;
+                btnLogoClearCache.Enabled = true;
+                txtLogosPath.Enabled = true;
+                comboBoxLogoPresets.Enabled = true;
+
+              
                 if (LogoView.Items.Count == 0)
                     Read_XML_Logos(Config_Name.Text);
             }
@@ -2350,8 +2383,13 @@ namespace MesFilms
                 btnDel.Enabled = false;
                 btnUp.Enabled = false;
                 btnDown.Enabled = false;
+                btnUpdate.Enabled = false;
                 txtLogosPath.Enabled = true;
                 btnLogosPath.Enabled = true;
+                comboBoxLogoSpacing.Enabled = false;
+                btnLogoClearCache.Enabled = false;
+                txtLogosPath.Enabled = false;
+                comboBoxLogoPresets.Enabled = false;
             }
         }
 
@@ -3456,14 +3494,77 @@ namespace MesFilms
         private void AntUpdFieldReset_Click_1(object sender, EventArgs e)
         {
           AntUpdList.Text =
-            "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
+            "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
         }
 
         private void AntSearchFieldResetToDefault_Click(object sender, EventArgs e)
         {
           AntSearchList.Text =
-            "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
+            "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
         }
 
+        private void comboBoxLogoSpacing_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void comboBoxLogoPresets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          if (comboBoxLogoPresets.Text == "Define your path to logo image files")
+          {
+            txtLogosPath.Visible = true;
+            txtLogosPath.Enabled = true;
+            btnLogosPath.Visible = true;
+            lblLogosPath.Visible = true;
+          }
+          else
+          {
+            txtLogosPath.Visible = false;
+            btnLogosPath.Visible = false;
+            lblLogosPath.Visible = false;
+          }
+
+          if (comboBoxLogoPresets.Text == "Use Logos of currently selected skin")
+          {
+            txtLogosPath.Text = string.Empty;
+            txtLogosPath.Visible = true;
+            txtLogosPath.Enabled = false;
+            btnLogosPath.Visible = false;
+            lblLogosPath.Visible = false;
+          }
+
+          if (comboBoxLogoPresets.Text == "Use MyFilms Logo Pack")
+          {
+            txtLogosPath.Text = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultLogos";
+            txtLogosPath.Visible = true;
+            txtLogosPath.Enabled = false;
+            btnLogosPath.Visible = false;
+            lblLogosPath.Visible = false;
+          }
+
+          if (comboBoxLogoPresets.Text == "Use Blue3Wide logos")
+          {
+            txtLogosPath.Text = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\blue3wide\media\logos";
+            txtLogosPath.Visible = true;
+            txtLogosPath.Enabled = false;
+            btnLogosPath.Visible = false;
+            lblLogosPath.Visible = false;
+          }
+        }
+
+        private void btnLogoClearCache_Click(object sender, EventArgs e)
+        {
+          int i = 0;
+          foreach (string sFile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos"))
+          {
+            if (sFile.ToUpper().EndsWith(".PNG"))
+              System.IO.File.Delete(sFile);
+            i = i + 1;
+          }
+          if (i==0)
+            MessageBox.Show("No cached logo files to delete, your logo cache is already empty !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          else
+            MessageBox.Show("Successfully cleared " + i.ToString() + " cached files in your logo cache directory! Be aware browsing your movies might be slower when rebuilding the logos in cache.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

@@ -318,6 +318,9 @@ namespace MesFilms
           this.label9 = new System.Windows.Forms.Label();
           this.label8 = new System.Windows.Forms.Label();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
+          this.SPicture = new System.Windows.Forms.PictureBox();
+          this.comboBoxLogoSpacing = new System.Windows.Forms.ComboBox();
+          this.btnLogoClearCache = new System.Windows.Forms.Button();
           this.label33 = new System.Windows.Forms.Label();
           this.AntUpdList = new System.Windows.Forms.TextBox();
           this.AntUpdField = new System.Windows.Forms.ComboBox();
@@ -341,6 +344,7 @@ namespace MesFilms
           this.AMCConfigView = new System.Windows.Forms.ListView();
           this.Option = new System.Windows.Forms.ColumnHeader();
           this.Value = new System.Windows.Forms.ColumnHeader();
+          this.btnLaunchAMCupdater = new System.Windows.Forms.Button();
           this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
@@ -394,6 +398,10 @@ namespace MesFilms
           this.ButImg = new System.Windows.Forms.Button();
           this.label2 = new System.Windows.Forms.Label();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
+          this.btnUpdate = new System.Windows.Forms.Button();
+          this.lblLogoPresets = new System.Windows.Forms.Label();
+          this.lbl_LogoSpacing = new System.Windows.Forms.Label();
+          this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.lblSetupLogoRules = new System.Windows.Forms.Label();
           this.lblInfoLogosForAll = new System.Windows.Forms.Label();
           this.lblSelectLogoFile = new System.Windows.Forms.Label();
@@ -430,8 +438,6 @@ namespace MesFilms
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.btnLaunchAMCupdater = new System.Windows.Forms.Button();
-          this.SPicture = new System.Windows.Forms.PictureBox();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -451,6 +457,7 @@ namespace MesFilms
           this.groupBox_Separators.SuspendLayout();
           this.groupBox_SupplementarySearch.SuspendLayout();
           this.groupBox_TitleOrder.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.gpspfield.SuspendLayout();
           this.gpsuppress.SuspendLayout();
           this.groupBox111.SuspendLayout();
@@ -479,7 +486,6 @@ namespace MesFilms
           this.groupBox13.SuspendLayout();
           this.groupBox10.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -1540,9 +1546,9 @@ namespace MesFilms
           // txtLogosPath
           // 
           this.txtLogosPath.Enabled = false;
-          this.txtLogosPath.Location = new System.Drawing.Point(222, 8);
+          this.txtLogosPath.Location = new System.Drawing.Point(220, 33);
           this.txtLogosPath.Name = "txtLogosPath";
-          this.txtLogosPath.Size = new System.Drawing.Size(467, 20);
+          this.txtLogosPath.Size = new System.Drawing.Size(469, 20);
           this.txtLogosPath.TabIndex = 92;
           this.ToolTip1.SetToolTip(this.txtLogosPath, resources.GetString("txtLogosPath.ToolTip"));
           // 
@@ -2396,10 +2402,10 @@ namespace MesFilms
           this.LogoView.FullRowSelect = true;
           this.LogoView.GridLines = true;
           this.LogoView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.LogoView.Location = new System.Drawing.Point(7, 36);
+          this.LogoView.Location = new System.Drawing.Point(7, 59);
           this.LogoView.MultiSelect = false;
           this.LogoView.Name = "LogoView";
-          this.LogoView.Size = new System.Drawing.Size(734, 202);
+          this.LogoView.Size = new System.Drawing.Size(734, 191);
           this.LogoView.TabIndex = 90;
           this.ToolTip1.SetToolTip(this.LogoView, resources.GetString("LogoView.ToolTip"));
           this.LogoView.UseCompatibleStateImageBehavior = false;
@@ -2810,6 +2816,65 @@ namespace MesFilms
           this.ToolTip1.SetToolTip(this.linkLabelMyFilmsWiki, "Opens the MyFilms Wiki in your browser...");
           this.linkLabelMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMyFilmsWiki_LinkClicked);
           // 
+          // SPicture
+          // 
+          this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
+          this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+          this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          this.SPicture.Enabled = false;
+          this.SPicture.Location = new System.Drawing.Point(498, 272);
+          this.SPicture.Name = "SPicture";
+          this.SPicture.Size = new System.Drawing.Size(79, 58);
+          this.SPicture.TabIndex = 85;
+          this.SPicture.TabStop = false;
+          this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
+          this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
+          // 
+          // comboBoxLogoSpacing
+          // 
+          this.comboBoxLogoSpacing.FormattingEnabled = true;
+          this.comboBoxLogoSpacing.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "25"});
+          this.comboBoxLogoSpacing.Location = new System.Drawing.Point(644, 8);
+          this.comboBoxLogoSpacing.Name = "comboBoxLogoSpacing";
+          this.comboBoxLogoSpacing.Size = new System.Drawing.Size(45, 21);
+          this.comboBoxLogoSpacing.TabIndex = 100;
+          this.ToolTip1.SetToolTip(this.comboBoxLogoSpacing, "You can choose the distance between the generated logos in \"pixel\".\r\nDefault is \"" +
+                  "1\".");
+          this.comboBoxLogoSpacing.SelectedIndexChanged += new System.EventHandler(this.comboBoxLogoSpacing_SelectedIndexChanged);
+          // 
+          // btnLogoClearCache
+          // 
+          this.btnLogoClearCache.Location = new System.Drawing.Point(461, 8);
+          this.btnLogoClearCache.Name = "btnLogoClearCache";
+          this.btnLogoClearCache.Size = new System.Drawing.Size(116, 21);
+          this.btnLogoClearCache.TabIndex = 102;
+          this.btnLogoClearCache.Text = "Clear Logo Cache";
+          this.ToolTip1.SetToolTip(this.btnLogoClearCache, "If you have redefined logo parameters like spacing, you shoudl clear the logo cac" +
+                  "he,\r\nso the logos will be rebuild with the new parameters");
+          this.btnLogoClearCache.UseVisualStyleBackColor = true;
+          this.btnLogoClearCache.Click += new System.EventHandler(this.btnLogoClearCache_Click);
+          // 
           // label33
           // 
           this.label33.AutoSize = true;
@@ -3051,6 +3116,18 @@ namespace MesFilms
           // Value
           // 
           this.Value.Width = 309;
+          // 
+          // btnLaunchAMCupdater
+          // 
+          this.btnLaunchAMCupdater.Image = global::MesFilms.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 21);
+          this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
+          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 56);
+          this.btnLaunchAMCupdater.TabIndex = 76;
+          this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
+          this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
+          this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
           // 
           // AntFilterMinRating
           // 
@@ -3582,6 +3659,12 @@ namespace MesFilms
           // 
           // Tab_Logos
           // 
+          this.Tab_Logos.Controls.Add(this.btnUpdate);
+          this.Tab_Logos.Controls.Add(this.btnLogoClearCache);
+          this.Tab_Logos.Controls.Add(this.lblLogoPresets);
+          this.Tab_Logos.Controls.Add(this.lbl_LogoSpacing);
+          this.Tab_Logos.Controls.Add(this.comboBoxLogoPresets);
+          this.Tab_Logos.Controls.Add(this.comboBoxLogoSpacing);
           this.Tab_Logos.Controls.Add(this.lblSetupLogoRules);
           this.Tab_Logos.Controls.Add(this.lblInfoLogosForAll);
           this.Tab_Logos.Controls.Add(this.lblSelectLogoFile);
@@ -3612,6 +3695,48 @@ namespace MesFilms
           this.Tab_Logos.Text = "Logos";
           this.Tab_Logos.UseVisualStyleBackColor = true;
           // 
+          // btnUpdate
+          // 
+          this.btnUpdate.Location = new System.Drawing.Point(663, 331);
+          this.btnUpdate.Name = "btnUpdate";
+          this.btnUpdate.Size = new System.Drawing.Size(64, 21);
+          this.btnUpdate.TabIndex = 103;
+          this.btnUpdate.Text = "Update";
+          this.btnUpdate.UseVisualStyleBackColor = true;
+          this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+          // 
+          // lblLogoPresets
+          // 
+          this.lblLogoPresets.AutoSize = true;
+          this.lblLogoPresets.Location = new System.Drawing.Point(108, 11);
+          this.lblLogoPresets.Name = "lblLogoPresets";
+          this.lblLogoPresets.Size = new System.Drawing.Size(42, 13);
+          this.lblLogoPresets.TabIndex = 4;
+          this.lblLogoPresets.Text = "Presets";
+          // 
+          // lbl_LogoSpacing
+          // 
+          this.lbl_LogoSpacing.AutoSize = true;
+          this.lbl_LogoSpacing.Location = new System.Drawing.Point(592, 11);
+          this.lbl_LogoSpacing.Name = "lbl_LogoSpacing";
+          this.lbl_LogoSpacing.Size = new System.Drawing.Size(46, 13);
+          this.lbl_LogoSpacing.TabIndex = 101;
+          this.lbl_LogoSpacing.Text = "Spacing";
+          // 
+          // comboBoxLogoPresets
+          // 
+          this.comboBoxLogoPresets.FormattingEnabled = true;
+          this.comboBoxLogoPresets.Items.AddRange(new object[] {
+            "Use Logos of currently selected skin",
+            "Use Blue3Wide logos",
+            "Use MyFilms Logo Pack",
+            "Define your path to logo image files"});
+          this.comboBoxLogoPresets.Location = new System.Drawing.Point(220, 8);
+          this.comboBoxLogoPresets.Name = "comboBoxLogoPresets";
+          this.comboBoxLogoPresets.Size = new System.Drawing.Size(211, 21);
+          this.comboBoxLogoPresets.TabIndex = 3;
+          this.comboBoxLogoPresets.SelectedIndexChanged += new System.EventHandler(this.comboBoxLogoPresets_SelectedIndexChanged);
+          // 
           // lblSetupLogoRules
           // 
           this.lblSetupLogoRules.AutoSize = true;
@@ -3629,9 +3754,9 @@ namespace MesFilms
           this.lblInfoLogosForAll.ForeColor = System.Drawing.SystemColors.ControlText;
           this.lblInfoLogosForAll.Location = new System.Drawing.Point(6, 334);
           this.lblInfoLogosForAll.Name = "lblInfoLogosForAll";
-          this.lblInfoLogosForAll.Size = new System.Drawing.Size(364, 13);
+          this.lblInfoLogosForAll.Size = new System.Drawing.Size(297, 13);
           this.lblInfoLogosForAll.TabIndex = 96;
-          this.lblInfoLogosForAll.Text = "(be carefull the Logo Configuration is available for all MyFilms configurations)";
+          this.lblInfoLogosForAll.Text = "(The Logo Configuration is used for all MyFilms configurations)";
           // 
           // lblSelectLogoFile
           // 
@@ -3645,7 +3770,7 @@ namespace MesFilms
           // btnLogosPath
           // 
           this.btnLogosPath.Enabled = false;
-          this.btnLogosPath.Location = new System.Drawing.Point(695, 8);
+          this.btnLogosPath.Location = new System.Drawing.Point(695, 33);
           this.btnLogosPath.Name = "btnLogosPath";
           this.btnLogosPath.Size = new System.Drawing.Size(32, 20);
           this.btnLogosPath.TabIndex = 94;
@@ -3656,17 +3781,17 @@ namespace MesFilms
           // lblLogosPath
           // 
           this.lblLogosPath.AutoSize = true;
-          this.lblLogosPath.Location = new System.Drawing.Point(106, 12);
+          this.lblLogosPath.Location = new System.Drawing.Point(108, 36);
           this.lblLogosPath.Name = "lblLogosPath";
-          this.lblLogosPath.Size = new System.Drawing.Size(110, 13);
+          this.lblLogosPath.Size = new System.Drawing.Size(106, 13);
           this.lblLogosPath.TabIndex = 93;
-          this.lblLogosPath.Text = "Path for storing Logos";
+          this.lblLogosPath.Text = "Searchpath to Logos";
           // 
           // SFilePicture
           // 
           this.SFilePicture.Location = new System.Drawing.Point(498, 331);
           this.SFilePicture.Name = "SFilePicture";
-          this.SFilePicture.Size = new System.Drawing.Size(79, 20);
+          this.SFilePicture.Size = new System.Drawing.Size(149, 20);
           this.SFilePicture.TabIndex = 91;
           this.SFilePicture.Visible = false;
           // 
@@ -4004,32 +4129,6 @@ namespace MesFilms
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // btnLaunchAMCupdater
-          // 
-          this.btnLaunchAMCupdater.Image = global::MesFilms.Properties.Resources.AMCUpdaterSmall;
-          this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 21);
-          this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
-          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 56);
-          this.btnLaunchAMCupdater.TabIndex = 76;
-          this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
-          this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
-          this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
-          // 
-          // SPicture
-          // 
-          this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
-          this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-          this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.SPicture.Enabled = false;
-          this.SPicture.Location = new System.Drawing.Point(498, 272);
-          this.SPicture.Name = "SPicture";
-          this.SPicture.Size = new System.Drawing.Size(79, 58);
-          this.SPicture.TabIndex = 85;
-          this.SPicture.TabStop = false;
-          this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
-          this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
-          // 
           // MesFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4094,6 +4193,7 @@ namespace MesFilms
           this.groupBox_SupplementarySearch.PerformLayout();
           this.groupBox_TitleOrder.ResumeLayout(false);
           this.groupBox_TitleOrder.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
           this.gpspfield.ResumeLayout(false);
           this.gpspfield.PerformLayout();
           this.gpsuppress.ResumeLayout(false);
@@ -4138,7 +4238,6 @@ namespace MesFilms
           this.groupBox10.ResumeLayout(false);
           this.groupBox10.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -4477,6 +4576,12 @@ namespace MesFilms
         private LinkLabel linkLabelMyFilmsWiki;
         private Button AntSearchFieldReset;
         private Button AntUpdFieldReset;
+        private Label lbl_LogoSpacing;
+        private ComboBox comboBoxLogoSpacing;
+        private Label lblLogoPresets;
+        private ComboBox comboBoxLogoPresets;
+        private Button btnLogoClearCache;
+        private Button btnUpdate;
 
 
     }
