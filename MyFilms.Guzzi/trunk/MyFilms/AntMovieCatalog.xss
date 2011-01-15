@@ -8,7 +8,7 @@
   <Shapes>
     <Shape ID="DesignTable:Catalog" ZOrder="3" X="291" Y="70" Height="78" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="22" SplitterPosition="74" />
     <Shape ID="DesignTable:Contents" ZOrder="5" X="68" Y="69" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
-    <Shape ID="DesignTable:Movie" ZOrder="2" X="292" Y="219" Height="229" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="22" SplitterPosition="225" />
+    <Shape ID="DesignTable:Movie" ZOrder="2" X="292" Y="219" Height="674" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="22" SplitterPosition="670" />
   </Shapes>
   <Connectors>
     <Connector ID="DesignRelation:Catalog_Contents" ZOrder="4" LineWidth="11">

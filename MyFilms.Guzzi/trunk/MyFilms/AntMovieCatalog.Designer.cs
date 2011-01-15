@@ -926,19 +926,23 @@ namespace MesFilms.MyFilms {
             
             private global::System.Data.DataColumn columnLanguages;
             
-            private global::System.Data.DataColumn columnSubtitles;
+            private global::System.Data.DataColumn Certification;
             
             private global::System.Data.DataColumn columnDateAdded;
+            
+            private global::System.Data.DataColumn Watched;
+            
+            private global::System.Data.DataColumn columnSubtitles;
             
             private global::System.Data.DataColumn columnSize;
             
             private global::System.Data.DataColumn columnDisks;
             
+            private global::System.Data.DataColumn columnLength_Num;
+            
             private global::System.Data.DataColumn columnPicture;
             
             private global::System.Data.DataColumn columnContents_Id;
-            
-            private global::System.Data.DataColumn columnLength_Num;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MovieDataTable() : 
@@ -1175,9 +1179,9 @@ namespace MesFilms.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn SubtitlesColumn {
+            public global::System.Data.DataColumn CertificationColumn {
                 get {
-                    return this.columnSubtitles;
+                    return this.Certification;
                 }
             }
             
@@ -1185,6 +1189,20 @@ namespace MesFilms.MyFilms {
             public global::System.Data.DataColumn DateAddedColumn {
                 get {
                     return this.columnDateAdded;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatchedColumn {
+                get {
+                    return this.Watched;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubtitlesColumn {
+                get {
+                    return this.columnSubtitles;
                 }
             }
             
@@ -1203,6 +1221,13 @@ namespace MesFilms.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Length_NumColumn {
+                get {
+                    return this.columnLength_Num;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn PictureColumn {
                 get {
                     return this.columnPicture;
@@ -1213,13 +1238,6 @@ namespace MesFilms.MyFilms {
             public global::System.Data.DataColumn Contents_IdColumn {
                 get {
                     return this.columnContents_Id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn Length_NumColumn {
-                get {
-                    return this.columnLength_Num;
                 }
             }
             
@@ -1281,12 +1299,14 @@ namespace MesFilms.MyFilms {
                         string Resolution, 
                         string Framerate, 
                         string Languages, 
-                        string Subtitles, 
+                        string Certification, 
                         System.DateTime DateAdded, 
+                        string Watched, 
+                        string Subtitles, 
                         string Size, 
                         string Disks, 
-                        string Picture, 
-                        int Length_Num) {
+                        int Length_Num, 
+                        string Picture) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Number,
@@ -1317,13 +1337,15 @@ namespace MesFilms.MyFilms {
                         Resolution,
                         Framerate,
                         Languages,
-                        Subtitles,
+                        Certification,
                         DateAdded,
+                        Watched,
+                        Subtitles,
                         Size,
                         Disks,
+                        Length_Num,
                         Picture,
-                        null,
-                        Length_Num};
+                        null};
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
                 return rowMovieRow;
@@ -1359,6 +1381,8 @@ namespace MesFilms.MyFilms {
                         string Resolution, 
                         string Framerate, 
                         string Languages, 
+                        string Certification, 
+                        string Watched, 
                         string Subtitles, 
                         string Size, 
                         string Disks, 
@@ -1393,12 +1417,14 @@ namespace MesFilms.MyFilms {
                         Resolution,
                         Framerate,
                         Languages,
-                        Subtitles,
+                        Certification,
                         null,
+                        Watched,
+                        Subtitles,
                         Size,
                         Disks,
-                        Picture,
                         null,
+                        Picture,
                         null};
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -1447,13 +1473,15 @@ namespace MesFilms.MyFilms {
                 this.columnResolution = base.Columns["Resolution"];
                 this.columnFramerate = base.Columns["Framerate"];
                 this.columnLanguages = base.Columns["Languages"];
-                this.columnSubtitles = base.Columns["Subtitles"];
+                this.Certification = base.Columns["Certification"];
                 this.columnDateAdded = base.Columns["DateAdded"];
+                this.Watched = base.Columns["Watched"];
+                this.columnSubtitles = base.Columns["Subtitles"];
                 this.columnSize = base.Columns["Size"];
                 this.columnDisks = base.Columns["Disks"];
+                this.columnLength_Num = base.Columns["Length_Num"];
                 this.columnPicture = base.Columns["Picture"];
                 this.columnContents_Id = base.Columns["Contents_Id"];
-                this.columnLength_Num = base.Columns["Length_Num"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1514,20 +1542,28 @@ namespace MesFilms.MyFilms {
                 base.Columns.Add(this.columnFramerate);
                 this.columnLanguages = new global::System.Data.DataColumn("Languages", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnLanguages);
-                this.columnSubtitles = new global::System.Data.DataColumn("Subtitles", typeof(string), null, global::System.Data.MappingType.Attribute);
-                base.Columns.Add(this.columnSubtitles);
+                this.Certification = new global::System.Data.DataColumn("Certification", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.Certification.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "Certification");
+                this.Certification.ExtendedProperties.Add("Generator_UserColumnName", "Certification");
+                base.Columns.Add(this.Certification);
                 this.columnDateAdded = new global::System.Data.DataColumn("DateAdded", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDateAdded);
+                this.Watched = new global::System.Data.DataColumn("Watched", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.Watched.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "Watched");
+                this.Watched.ExtendedProperties.Add("Generator_UserColumnName", "Watched");
+                base.Columns.Add(this.Watched);
+                this.columnSubtitles = new global::System.Data.DataColumn("Subtitles", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnSubtitles);
                 this.columnSize = new global::System.Data.DataColumn("Size", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnSize);
                 this.columnDisks = new global::System.Data.DataColumn("Disks", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnDisks);
+                this.columnLength_Num = new global::System.Data.DataColumn("Length_Num", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLength_Num);
                 this.columnPicture = new global::System.Data.DataColumn("Picture", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnPicture);
                 this.columnContents_Id = new global::System.Data.DataColumn("Contents_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
                 base.Columns.Add(this.columnContents_Id);
-                this.columnLength_Num = new global::System.Data.DataColumn("Length_Num", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLength_Num);
                 this.columnNumber.Namespace = "";
                 this.columnChecked.Namespace = "";
                 this.columnMediaLabel.Namespace = "";
@@ -1556,16 +1592,18 @@ namespace MesFilms.MyFilms {
                 this.columnResolution.Namespace = "";
                 this.columnFramerate.Namespace = "";
                 this.columnLanguages.Namespace = "";
-                this.columnSubtitles.Namespace = "";
+                this.Certification.Namespace = "";
                 this.columnDateAdded.ReadOnly = true;
+                this.Watched.Namespace = "";
+                this.columnSubtitles.Namespace = "";
                 this.columnSize.Namespace = "";
                 this.columnDisks.Namespace = "";
+                this.columnLength_Num.ReadOnly = true;
+                this.columnLength_Num.DefaultValue = ((int)(0));
                 this.columnPicture.Namespace = "";
                 this.columnContents_Id.AutoIncrement = true;
                 this.columnContents_Id.AllowDBNull = false;
                 this.columnContents_Id.Namespace = "";
-                this.columnLength_Num.ReadOnly = true;
-                this.columnLength_Num.DefaultValue = ((int)(0));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2279,17 +2317,17 @@ namespace MesFilms.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string Subtitles {
+            public string Certification {
                 get {
                     try {
-                        return ((string)(this[this.tableMovie.SubtitlesColumn]));
+                        return ((string)(this[this.tableMovie.CertificationColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Subtitles in Tabelle Movie ist DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Certification in Tabelle Movie ist DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableMovie.SubtitlesColumn] = value;
+                    this[this.tableMovie.CertificationColumn] = value;
                 }
             }
             
@@ -2305,6 +2343,36 @@ namespace MesFilms.MyFilms {
                 }
                 set {
                     this[this.tableMovie.DateAddedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watched {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.WatchedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Watched in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.WatchedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subtitles {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.SubtitlesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Subtitles in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.SubtitlesColumn] = value;
                 }
             }
             
@@ -2339,6 +2407,21 @@ namespace MesFilms.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Length_Num {
+                get {
+                    try {
+                        return ((int)(this[this.tableMovie.Length_NumColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Length_Num in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.Length_NumColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Picture {
                 get {
                     try {
@@ -2360,21 +2443,6 @@ namespace MesFilms.MyFilms {
                 }
                 set {
                     this[this.tableMovie.Contents_IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int Length_Num {
-                get {
-                    try {
-                        return ((int)(this[this.tableMovie.Length_NumColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Length_Num in Tabelle Movie ist DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableMovie.Length_NumColumn] = value;
                 }
             }
             
@@ -2669,13 +2737,13 @@ namespace MesFilms.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsSubtitlesNull() {
-                return this.IsNull(this.tableMovie.SubtitlesColumn);
+            public bool IsCertificationNull() {
+                return this.IsNull(this.tableMovie.CertificationColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetSubtitlesNull() {
-                this[this.tableMovie.SubtitlesColumn] = global::System.Convert.DBNull;
+            public void SetCertificationNull() {
+                this[this.tableMovie.CertificationColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2686,6 +2754,26 @@ namespace MesFilms.MyFilms {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetDateAddedNull() {
                 this[this.tableMovie.DateAddedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatchedNull() {
+                return this.IsNull(this.tableMovie.WatchedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatchedNull() {
+                this[this.tableMovie.WatchedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubtitlesNull() {
+                return this.IsNull(this.tableMovie.SubtitlesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubtitlesNull() {
+                this[this.tableMovie.SubtitlesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2709,16 +2797,6 @@ namespace MesFilms.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPictureNull() {
-                return this.IsNull(this.tableMovie.PictureColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPictureNull() {
-                this[this.tableMovie.PictureColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsLength_NumNull() {
                 return this.IsNull(this.tableMovie.Length_NumColumn);
             }
@@ -2726,6 +2804,16 @@ namespace MesFilms.MyFilms {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetLength_NumNull() {
                 this[this.tableMovie.Length_NumColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPictureNull() {
+                return this.IsNull(this.tableMovie.PictureColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPictureNull() {
+                this[this.tableMovie.PictureColumn] = global::System.Convert.DBNull;
             }
         }
         
