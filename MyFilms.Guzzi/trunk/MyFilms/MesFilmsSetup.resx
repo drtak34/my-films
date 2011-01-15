@@ -289,18 +289,18 @@ displayed as a background image for movies without a matching Fanart file. Becaf
 get a distorded picture as covers and fanarts don't have the same size.
 </value>
   </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
+and thus to integrate trailers into MyFilms.
+Trailer can be searched within the plugin and autoregistered.
+GUI allows to show if a trailer is present (registered) and play it.</value>
+  </data>
   <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
     <value>If Trailer file is not found with the 'Ant Item for storing Trailer Infos' field, you 
 can search the trailer file with the movie Name.
 Validate that option for it and give the Title used for the search.
 Attention: Might degrade performace!
 </value>
-  </data>
-  <data name="groupBox24.ToolTip" xml:space="preserve">
-    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
-and thus to integrate trailers into MyFilms.
-Trailer can be searched within the plugin and autoregistered.
-GUI allows to show if a trailer is present (registered) and play it.</value>
   </data>
   <data name="DefaultCover.ToolTip" xml:space="preserve">
     <value>Enter the full path and file name of the image file that you wish to use as the default DVD cover image.  
