@@ -1210,7 +1210,7 @@ namespace MesFilms
                 dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
                 dlgOk.SetLine(1, "No Configuration defined");
                 dlgOk.SetLine(2, "Please enter setup first");
-                dlgOk.DoModal(MesFilms.ID_MesFilms);
+                dlgOk.DoModal(MesFilms.ID_MyFilms);
                 //MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow(); // doesn't work in this context - why?
               return;
             }
@@ -1234,11 +1234,11 @@ namespace MesFilms
             if (CurrentConfig == string.Empty)
             {
                 boolchoice = false;
-                CurrentConfig = Configuration.Choice_Config(MesFilms.ID_MesFilms); // "" => user esc's dialog on plugin startup so exit plugin unchanged
+                CurrentConfig = Configuration.Choice_Config(MesFilms.ID_MyFilms); // "" => user esc's dialog on plugin startup so exit plugin unchanged
             }
-            CurrentConfig = Configuration.Control_Access_Config(CurrentConfig, MesFilms.ID_MesFilms);
+            CurrentConfig = Configuration.Control_Access_Config(CurrentConfig, MesFilms.ID_MyFilms);
             if ((CurrentConfig == "") && (NbConfig > 1) && (boolchoice)) //error password ? so if many config => choice config menu
-                CurrentConfig = Configuration.Choice_Config(MesFilms.ID_MesFilms);
+                CurrentConfig = Configuration.Choice_Config(MesFilms.ID_MyFilms);
 //            }
         }
     }

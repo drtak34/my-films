@@ -773,8 +773,7 @@ namespace MesFilms
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(299, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
           this.chkGlobalUnwatchedOnly.Text = "Show only unwatched movies (can be changed from GUI)";
-          this.ToolTip1.SetToolTip(this.chkGlobalUnwatchedOnly, "Unwatched option acts as global overlayfilter for all views\r\nand setting is used " +
-                  "for start view.\r\nIt can be switched on/off from the GUI during runtime.");
+          this.ToolTip1.SetToolTip(this.chkGlobalUnwatchedOnly, resources.GetString("chkGlobalUnwatchedOnly.ToolTip"));
           this.chkGlobalUnwatchedOnly.UseVisualStyleBackColor = true;
           // 
           // label10
@@ -1185,7 +1184,7 @@ namespace MesFilms
           this.AntUpdFieldClear.Size = new System.Drawing.Size(64, 21);
           this.AntUpdFieldClear.TabIndex = 84;
           this.AntUpdFieldClear.Text = "Clear";
-          this.ToolTip1.SetToolTip(this.AntUpdFieldClear, "That Action\'ll clear the field.");
+          this.ToolTip1.SetToolTip(this.AntUpdFieldClear, "This will clear the items from the update list.");
           this.AntUpdFieldClear.UseVisualStyleBackColor = true;
           this.AntUpdFieldClear.Click += new System.EventHandler(this.AntUpdFieldReset_Click);
           // 
@@ -2151,11 +2150,11 @@ namespace MesFilms
           // 
           this.label_VersionNumber.AutoSize = true;
           this.label_VersionNumber.ForeColor = System.Drawing.SystemColors.HotTrack;
-          this.label_VersionNumber.Location = new System.Drawing.Point(658, 14);
+          this.label_VersionNumber.Location = new System.Drawing.Point(658, 16);
           this.label_VersionNumber.Name = "label_VersionNumber";
           this.label_VersionNumber.Size = new System.Drawing.Size(107, 13);
           this.label_VersionNumber.TabIndex = 34;
-          this.label_VersionNumber.Text = "Version 5.0.0.4 alpha";
+          this.label_VersionNumber.Text = "Version 5.0.0.5 alpha";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "Alphaversion for Testing only !");
           this.label_VersionNumber.Click += new System.EventHandler(this.label10_Click);
           // 
@@ -2265,7 +2264,7 @@ namespace MesFilms
           this.groupBox_ArtistImages.Size = new System.Drawing.Size(710, 94);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
-          this.groupBox_ArtistImages.Text = "Artist Images";
+          this.groupBox_ArtistImages.Text = "Person Images";
           this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, "Use this area to define a path where artist thumbs (images for persons) should be" +
                   " stored.\r\nWorks same way as cover images for movies.");
           // 
@@ -2285,9 +2284,9 @@ namespace MesFilms
           this.chkDfltArtist.AutoSize = true;
           this.chkDfltArtist.Location = new System.Drawing.Point(42, 70);
           this.chkDfltArtist.Name = "chkDfltArtist";
-          this.chkDfltArtist.Size = new System.Drawing.Size(247, 17);
+          this.chkDfltArtist.Size = new System.Drawing.Size(253, 17);
           this.chkDfltArtist.TabIndex = 98;
-          this.chkDfltArtist.Text = "Use the default artist image for missing Thumbs";
+          this.chkDfltArtist.Text = "Use the default person image for missing thumbs";
           this.chkDfltArtist.UseVisualStyleBackColor = true;
           // 
           // ButDefCovArtist
@@ -2324,9 +2323,9 @@ namespace MesFilms
           this.label_ArtistImagePath.AutoSize = true;
           this.label_ArtistImagePath.Location = new System.Drawing.Point(40, 20);
           this.label_ArtistImagePath.Name = "label_ArtistImagePath";
-          this.label_ArtistImagePath.Size = new System.Drawing.Size(92, 13);
+          this.label_ArtistImagePath.Size = new System.Drawing.Size(102, 13);
           this.label_ArtistImagePath.TabIndex = 93;
-          this.label_ArtistImagePath.Text = "Artist Images Path";
+          this.label_ArtistImagePath.Text = "Person Images Path";
           // 
           // ButCopy
           // 
@@ -2682,6 +2681,7 @@ namespace MesFilms
           this.AntSearchItem2.Name = "AntSearchItem2";
           this.AntSearchItem2.Size = new System.Drawing.Size(145, 21);
           this.AntSearchItem2.TabIndex = 38;
+          this.ToolTip1.SetToolTip(this.AntSearchItem2, "Choose a DB item for search");
           // 
           // AntSearchText2
           // 
@@ -2689,6 +2689,7 @@ namespace MesFilms
           this.AntSearchText2.Name = "AntSearchText2";
           this.AntSearchText2.Size = new System.Drawing.Size(173, 20);
           this.AntSearchText2.TabIndex = 39;
+          this.ToolTip1.SetToolTip(this.AntSearchText2, "Label to be displayed in search menu");
           // 
           // AntSearchItem1
           // 
@@ -2697,6 +2698,7 @@ namespace MesFilms
           this.AntSearchItem1.Name = "AntSearchItem1";
           this.AntSearchItem1.Size = new System.Drawing.Size(145, 21);
           this.AntSearchItem1.TabIndex = 36;
+          this.ToolTip1.SetToolTip(this.AntSearchItem1, "Choose a DB item for Search");
           // 
           // AntSearchText1
           // 
@@ -2704,6 +2706,7 @@ namespace MesFilms
           this.AntSearchText1.Name = "AntSearchText1";
           this.AntSearchText1.Size = new System.Drawing.Size(173, 20);
           this.AntSearchText1.TabIndex = 37;
+          this.ToolTip1.SetToolTip(this.AntSearchText1, "Label to be displayed in search menu");
           // 
           // AntSearchFieldClear
           // 
@@ -2712,7 +2715,7 @@ namespace MesFilms
           this.AntSearchFieldClear.Size = new System.Drawing.Size(64, 21);
           this.AntSearchFieldClear.TabIndex = 85;
           this.AntSearchFieldClear.Text = "Clear";
-          this.ToolTip1.SetToolTip(this.AntSearchFieldClear, "That Action\'ll clear the field.");
+          this.ToolTip1.SetToolTip(this.AntSearchFieldClear, "This will clear the items from the search list.");
           this.AntSearchFieldClear.UseVisualStyleBackColor = true;
           this.AntSearchFieldClear.Click += new System.EventHandler(this.AntSearchFieldClear_Click);
           // 
@@ -2738,8 +2741,7 @@ namespace MesFilms
           this.CheckWatched.Size = new System.Drawing.Size(270, 17);
           this.CheckWatched.TabIndex = 69;
           this.CheckWatched.Text = "Update the ‘Checked’ field when movie is launched";
-          this.ToolTip1.SetToolTip(this.CheckWatched, "Select this option if you want the “Checked” field of your database \r\nto be updat" +
-                  "ed each time a movie is launched.\r\n");
+          this.ToolTip1.SetToolTip(this.CheckWatched, resources.GetString("CheckWatched.ToolTip"));
           this.CheckWatched.UseVisualStyleBackColor = true;
           // 
           // groupBox_TitleOrder
@@ -2884,6 +2886,8 @@ namespace MesFilms
           this.AntUpdList.Name = "AntUpdList";
           this.AntUpdList.Size = new System.Drawing.Size(675, 20);
           this.AntUpdList.TabIndex = 82;
+          this.ToolTip1.SetToolTip(this.AntUpdList, "This field cannot be edited directly, but shows you the chosen DB items for updat" +
+                  "es.\r\n");
           // 
           // AntUpdField
           // 
@@ -2892,6 +2896,7 @@ namespace MesFilms
           this.AntUpdField.Name = "AntUpdField";
           this.AntUpdField.Size = new System.Drawing.Size(151, 21);
           this.AntUpdField.TabIndex = 81;
+          this.ToolTip1.SetToolTip(this.AntUpdField, "Choose a DB item to add to the property update list.");
           this.AntUpdField.SelectedIndexChanged += new System.EventHandler(this.AntUpdField_SelectedIndexChanged);
           // 
           // chksupplaystop
@@ -2919,6 +2924,7 @@ namespace MesFilms
           this.gpspfield.TabIndex = 18;
           this.gpspfield.TabStop = false;
           this.gpspfield.Text = "Player finished Update Action";
+          this.ToolTip1.SetToolTip(this.gpspfield, resources.GetString("gpspfield.ToolTip"));
           // 
           // lblUpdateValue
           // 
@@ -3457,6 +3463,9 @@ namespace MesFilms
           this.groupBoxSearchByProperties.TabIndex = 35;
           this.groupBoxSearchByProperties.TabStop = false;
           this.groupBoxSearchByProperties.Text = "Search by Properties";
+          this.ToolTip1.SetToolTip(this.groupBoxSearchByProperties, "In opposite to the \"User defined Search Items\", this is a more generic search \r\na" +
+                  "nd it is based on searching the whole catalog, including items, that are not vis" +
+                  "ible in the current view\r\n");
           // 
           // AntSearchFieldReset
           // 
@@ -3465,6 +3474,7 @@ namespace MesFilms
           this.AntSearchFieldReset.Size = new System.Drawing.Size(106, 21);
           this.AntSearchFieldReset.TabIndex = 86;
           this.AntSearchFieldReset.Text = "Reset to Defaults";
+          this.ToolTip1.SetToolTip(this.AntSearchFieldReset, "This will reset the search list to the MyFilms default values.");
           this.AntSearchFieldReset.UseVisualStyleBackColor = true;
           this.AntSearchFieldReset.Click += new System.EventHandler(this.AntSearchFieldResetToDefault_Click);
           // 
@@ -3484,6 +3494,7 @@ namespace MesFilms
           this.AntSearchField.Name = "AntSearchField";
           this.AntSearchField.Size = new System.Drawing.Size(148, 21);
           this.AntSearchField.TabIndex = 78;
+          this.ToolTip1.SetToolTip(this.AntSearchField, "Choose a DB item to add to the property search list.");
           // 
           // AntSearchList
           // 
@@ -3492,6 +3503,8 @@ namespace MesFilms
           this.AntSearchList.Name = "AntSearchList";
           this.AntSearchList.Size = new System.Drawing.Size(681, 20);
           this.AntSearchList.TabIndex = 79;
+          this.ToolTip1.SetToolTip(this.AntSearchList, "This field cannot be edited directly, but shows you the chosen DB items for searc" +
+                  "h.");
           // 
           // Tab_Update
           // 
@@ -3521,6 +3534,8 @@ namespace MesFilms
           this.groupBox2.TabIndex = 72;
           this.groupBox2.TabStop = false;
           this.groupBox2.Text = "Movie Updates - watched-status";
+          this.ToolTip1.SetToolTip(this.groupBox2, "-- future release --\r\nThis option allows you storing your \"watched status\" based " +
+                  "on a userprofile \r\nto keep track of the \"watched tatus\" for several persons.");
           // 
           // Label_UserProfileName
           // 
@@ -3552,6 +3567,7 @@ namespace MesFilms
           this.groupBoxUpdateByProperties.TabIndex = 34;
           this.groupBoxUpdateByProperties.TabStop = false;
           this.groupBoxUpdateByProperties.Text = "Update by Properties";
+          this.ToolTip1.SetToolTip(this.groupBoxUpdateByProperties, resources.GetString("groupBoxUpdateByProperties.ToolTip"));
           // 
           // AntUpdFieldReset
           // 
@@ -3560,6 +3576,7 @@ namespace MesFilms
           this.AntUpdFieldReset.Size = new System.Drawing.Size(108, 22);
           this.AntUpdFieldReset.TabIndex = 86;
           this.AntUpdFieldReset.Text = "Reset to Default";
+          this.ToolTip1.SetToolTip(this.AntUpdFieldReset, "This will reset the update llist to the MyFilms default values.");
           this.AntUpdFieldReset.UseVisualStyleBackColor = true;
           this.AntUpdFieldReset.Click += new System.EventHandler(this.AntUpdFieldReset_Click_1);
           // 

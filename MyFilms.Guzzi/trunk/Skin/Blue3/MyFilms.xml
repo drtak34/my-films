@@ -2,9 +2,17 @@
 	 <id>7986</id>
     <defaultcontrol>1026</defaultcontrol>
 	<define>#header.label:#myfilms.config.pluginname</define>
-    <allowoverlay>yes</allowoverlay>
+	<allowoverlay>player.hasmedia</allowoverlay>
 	 <controls>
 	  <import>common.time.xml</import>
+     	 <control>
+      	    <description>BG</description>
+      	    <type>image</type>
+      	    <id>1</id>
+      	    <width>720</width>
+      	    <height>576</height>
+      	    <texture>background.png</texture>
+    	</control>
         <control>
             <type>label</type>
             <description>Label use for Hide or unHide some items with Skin visible conditions</description>
@@ -27,40 +35,40 @@
             <description>fanart</description>
             <type>image</type>
             <id>11</id>
-            <posX>0</posX>
+            <posX>-152</posX>
             <posY>0</posY>
-      	    <width>1280</width>
-      	    <height>720</height>
+			<width>1024</width>
+			<height>576</height>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
             <texture>#myfilms.Fanart</texture>
             <colorkey>9fffffff</colorkey>
             <colordiffuse>9fffffff</colordiffuse>
-	    <animation effect="fade" time="250">visible</animation>
-	    <animation effect="fade" time="250" delay="250">hidden</animation>
-	    <animation effect="fade" time="1">WindowClose</animation>	
-	    <animation effect="fade" time="250">WindowOpen</animation>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
             <!-- Do not modify the visibility for this component. It is handled by the plug-in -->
         </control>
         <control>
             <description>fanart2</description>
             <type>image</type>
             <id>21</id>
-            <posX>0</posX>
+            <posX>-152</posX>
             <posY>0</posY>
-            <width>1280</width>
-            <height>720</height>
+			<width>1024</width>
+			<height>576</height>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
             <texture>#myfilms.Fanart2</texture>
-            <colorkey>9fffffff</colorkey>
-            <colordiffuse>9fffffff</colordiffuse>
-	    <animation effect="fade" time="250">visible</animation>
-	    <animation effect="fade" time="250" delay="250">hidden</animation>
-	    <animation effect="fade" time="1">WindowClose</animation>	
-	    <animation effect="fade" time="250">WindowOpen</animation>
+            <colorkey>ffffffff</colorkey>
+            <colordiffuse>ffffffff</colordiffuse>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
             <!-- Do not modify the visibility for this component. It is handled by the plug-in. -->
 		</control>
 		<control>
@@ -71,6 +79,7 @@
 			<height>720</height>
 			<texture>black.png</texture>
 			<colordiffuse>90ffffff</colordiffuse>
+			<visible>Control.isvisible(35)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -102,23 +111,37 @@
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>Config Name View Seletion</description>
+			<description>Config Name</description>
 			<id>1</id>
-			<posX>425</posX>
-			<posY>77</posY>
-			<width>430</width>
+			<posX>325</posX>
+			<posY>40</posY>
+			<width>355</width>
+			<height>24</height>
+			<label>label</label>
+			<font>font14</font>
+			<textcolor>cca9d0f7</textcolor>
+			<disabledcolor>ff808080</disabledcolor>
+			<label>#myfilms.config.currentconfig</label>
+		</control>
+		<control>
+			<type>fadelabel</type>
+			<description>View + Selection</description>
+			<id>1</id>
+			<posX>325</posX>
+			<posY>73</posY>
+			<width>355</width>
 			<height>24</height>
 			<label>label</label>
 			<font>font14</font>
 			<textcolor>7fffffff</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<label>#myfilms.config.currentconfig #myfilms.view #myfilms.select</label>
+			<label>#myfilms.view #myfilms.select</label>
 		</control>
 
 		<control>
 			<type>actiongroup</type>
 			<description>action menu</description>
-			<defaultcontrol>6</defaultcontrol>
+			<defaultcontrol>4</defaultcontrol>
 			<onexit>1026</onexit>
 			<buttonX>0</buttonX>
 			<buttonY>0</buttonY>
@@ -132,10 +155,10 @@
 			<visible>!Control.HasFocus(1026)</visible>
 			<control>
 				<type>image</type>
-				<posX>26</posX>
-				<posY>78</posY>
-				<width>367</width>
-				<height>591</height>
+				<posX>39</posX>
+				<posY>88</posY>
+				<width>225</width>
+				<height>326</height>
 				<texture>Backslide.png</texture>
 				<colordiffuse>fffffffff</colordiffuse>
 				<visible>!Control.HasFocus(1026)</visible>
@@ -145,24 +168,13 @@
 			<control>
 				<type>group</type>
 				<description>group element</description>
-				<posX>71</posX>
-				<posY>121</posY>
-				<width>190</width>
+				<posX>55</posX>
+				<posY>105</posY>
+				<width>195</width>
 				<height>120</height>
 				<layout>StackLayout</layout>
 				<animation effect="slide" time="450" start="-300,0" reversible="false">visible</animation>
 				<animation effect="slide" time="450" end="-300,0" reversible="false">hidden</animation>
-				<mpe>
-					<layout>Grid</layout>
-					<spring>no</spring>
-					<spacing>0</spacing>
-					<padding>
-						<top>0</top>
-						<right>0</right>
-						<bottom>0</bottom>
-						<left>0</left>
-					</padding>
-				</mpe>
 			<control>
 				<type>button</type>
 				<description>Layout</description>
@@ -171,7 +183,7 @@
 				<posY>107</posY>
 				<onleft>1026</onleft>
 				<onright>1026</onright>
-				<onup>4</onup>
+				<onup>10012</onup>
 				<ondown>2</ondown>
 				<animation>unfocus</animation>
 				<label>101</label>
@@ -194,7 +206,7 @@
 				<disabledcolor>60ffffff</disabledcolor>
 				<label>103</label>
 				<offsetSortButtonY>8</offsetSortButtonY>
-				<offsetSortButtonX>220</offsetSortButtonX>
+				<offsetSortButtonX>150</offsetSortButtonX>
 				<textcolor>White</textcolor>
 				<textureNoFocus>menu_list_nofocus.png</textureNoFocus>
 				<textureAscending>arrow_round_up_nofocus.png</textureAscending>
@@ -239,11 +251,32 @@
 				<onleft>4</onleft>
 				<onright>1026</onright>
 				<onup>4</onup>
-				<ondown>6</ondown>
+				<ondown>10012</ondown>
 				<animation>unfocus</animation>
 				<label>496</label>
 				<textcolor>ff000000</textcolor>
 			</control>
+
+<!-- Start - Additional Buttons for Links to other Plugins -->
+				<control>
+					<description>Separator</description>
+					<type>image</type>
+					<id>0</id>
+					<height>10</height>
+					<texture></texture>
+				</control> 
+				<control>
+					<description>TV-Series</description>
+					<type>button</type>
+					<id>10012</id>
+					<hyperlink>9811</hyperlink>
+					<label>1300</label>
+					<onright>1026</onright>
+					<onup>5</onup>
+					<ondown>6</ondown>
+				</control>
+<!-- End - Additional Buttons for Links to other Plugins -->
+
 		 </control>
 	</control>
     <control>
@@ -262,39 +295,40 @@
 				<control>
 					<description>Thumbnail Panel</description>
 					<type>thumbnailpanel</type>
-	          		<posX>100</posX>
-	          		<posY>110</posY>
-	          		<width>1173</width>
-	          		<height>480</height>
+					<posX>40</posX>
+					<posY>120</posY>
+					<width>700</width>
+					<height>300</height>
 					<onleft>6</onleft>
-					<itemWidth>117</itemWidth>
-					<textureWidth>88</textureWidth>
-					<textureHeight>107</textureHeight>
-					<thumbWidth>77</thumbWidth>
-					<thumbHeight>97</thumbHeight>
-					<thumbPosX>5</thumbPosX>
-					<thumbPosY>4</thumbPosY>
-					<textureWidthBig>149</textureWidthBig>
-					<textureHeightBig>179</textureHeightBig>
-					<itemWidthBig>210</itemWidthBig>
-					<itemHeightBig>195</itemHeightBig>
-					<thumbWidthBig>137</thumbWidthBig>
-					<thumbHeightBig>167</thumbHeightBig>
+					<itemWidth>60</itemWidth>
+					<itemHeight>82</itemHeight>
+					<textureWidth>56</textureWidth>
+					<textureHeight>81</textureHeight>
+					<thumbWidth>49</thumbWidth>
+					<thumbHeight>73</thumbHeight>
+					<itemWidthBig>94</itemWidthBig>
+					<itemHeightBig>123</itemHeightBig>
+					<textureWidthBig>86</textureWidthBig>
+					<textureHeightBig>119</textureHeightBig>
+					<thumbWidthBig>74</thumbWidthBig>
+					<thumbHeightBig>107</thumbHeightBig>
+					<zoomXPixels>14</zoomXPixels>
+					<zoomYPixels>28</zoomYPixels>
+					<thumbPosX>4</thumbPosX>
+					<thumbPosY>3</thumbPosY>
 					<thumbPosXBig>5</thumbPosXBig>
 					<thumbPosYBig>5</thumbPosYBig>
-					<zoomXPixels>30</zoomXPixels>
-					<zoomYPixels>30</zoomYPixels>
-	          		<hideUnfocusTexture>no</hideUnfocusTexture>
-	          		<renderFocusText>no</renderFocusText>
-	          		<renderUnfocusText>no</renderUnfocusText>
+					<hideUnfocusTexture>no</hideUnfocusTexture>
+					<renderFocusText>no</renderFocusText>
+					<renderUnfocusText>no</renderUnfocusText>
 	         	 </control>
           		 <control>
 					<type>listcontrol</type>
 					<description>listcontrol</description>
-           				<posX>422</posX>
-					<posY>120</posY>
-          				<width>760</width>
-          				<height>450</height>
+					<posX>322</posX>
+					<posY>95</posY>
+					<width>360</width>
+					<height>350</height>
 					<onleft>6</onleft>
 					<onright>6</onright>
 					<IconXOff>10</IconXOff>
@@ -311,8 +345,8 @@
           			<dimColor>90ffffff</dimColor>
           			<scrollOffset>2</scrollOffset>
           			<posX>0</posX>
-          			<posY>200</posY>
-          			<width>1244</width>
+          			<posY>155</posY>
+          			<width>700</width>
 					<onup>6</onup>
 					<textYOff>500</textYOff>
         			<spinPosY>630</spinPosY>
@@ -320,14 +354,14 @@
         			<spinHeight>23</spinHeight>
 					<spinPosX>800</spinPosX>
 					<spinColor>ffcccccc</spinColor>
-          			<itemWidth>232</itemWidth>
-          			<itemHeight>201</itemHeight>
-          			<textureWidth>206</textureWidth>
-          			<textureHeight>247</textureHeight>
-          			<thumbWidth>194</thumbWidth>
-          			<thumbHeight>235</thumbHeight>
-          			<thumbPosX>3</thumbPosX>
-          			<thumbPosY>2</thumbPosY>
+          			<itemWidth>134</itemWidth>
+          			<itemHeight>189</itemHeight>
+          			<textureWidth>134</textureWidth>
+          			<textureHeight>189</textureHeight>
+          			<thumbWidth>115</thumbWidth>
+          			<thumbHeight>170</thumbHeight>
+          			<thumbPosX>9</thumbPosX>
+          			<thumbPosY>6</thumbPosY>
           			<imageFolderFocus>Picture_cover.png</imageFolderFocus>
           			<frame>Picture_cover.png</frame>
           			<frameFocus>Picture_cover.png</frameFocus>
@@ -338,6 +372,7 @@
           			<showFolder>no</showFolder>
           			<showBackGround>no</showBackGround>
           			<showInfoImage>no</showInfoImage>
+					<unfocusedAlpha>120</unfocusedAlpha>
           			<thumbAnimation effect="zoom" start="100,100" end="130,130" time="200">focus</thumbAnimation>
           			<thumbAnimation effect="zoom" start="130,130" end="100,100" time="200">unfocus</thumbAnimation>
           			<animation effect="rotatey" start="0" end="20" center="525,0" tween="back" ease="easeout" time="500" reversible="false">focus</animation>
@@ -346,30 +381,29 @@
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>Master Title</description>
+			<description>Selected Item - Master Title or Group Names</description>
 			<id>1</id>
 			<posX>45</posX>
-			<posY>520</posY>
+			<posY>420</posY>
 			<font>font16</font>
-			<width>310</width>
+			<width>270</width>
 			<height>24</height>
 			<shadowAngle>45</shadowAngle>
 			<shadowDistance>2</shadowDistance>
 			<shadowColor>ff083556</shadowColor>
-			<label>#myfilms.user.mastertitle.value</label>
+			<label>#selecteditem</label>
         </control>
 		<control>
 			<type>imagelist</type>
 			<id>1</id>
-			<posX>45</posX>
-			<posY>560</posY>
-			<width>30</width>
-			<height>220</height>
-			<textureWidth>28</textureWidth>
-			<textureHeight>28</textureHeight>
+			<posX>120</posX>
+			<posY>67</posY>
+			<height>14</height>
+			<textureWidth>14</textureWidth>
+			<textureHeight>14</textureHeight>
 			<subitems>
-				<subitem>greystar.png</subitem>
-				<subitem>star.png</subitem>
+				<subitem>UserRatingStarOff.png</subitem>
+				<subitem>stargood.png</subitem>
 			</subitems>
 			<orientation>horizontal</orientation>
 			<percentage>#myfilms.db.rating.value</percentage>
@@ -380,108 +414,109 @@
 			<description>Secondary Title</description>
 			<id>1</id>
 			<posX>65</posX>
-			<posY>580</posY>
+			<posY>445</posY>
 			<font>font12</font>
-			<width>300</width>
+			<width>260</width>
 			<height>24</height>
 			<textcolor>bba9d0f7</textcolor>
 			<label>#myfilms.user.secondarytitle.value</label>
+			<visible>!player.hasmedia</visible>
         </control>
 		<control>
 			<type>textboxscrollup</type>
 			<description>Biography value</description>
 			<id>1</id>
-			<posX>422</posX>
-			<posY>510</posY>
-			<width>800</width>
-			<height>110</height>
+			<posX>325</posX>
+			<posY>410</posY>
+			<width>350</width>
+			<height>105</height>
 			<colordiffuse>ffffffff</colordiffuse>
 			<dimColor>10ffffff</dimColor>
-			<font>font11</font>
+			<font>font12</font>
 			<textcolor>FFFFFFFF</textcolor>
 			<label>#myfilms.db.description.value</label>
 			<seperator>------------------------------------------------------------------------------------------------------------------------------</seperator>
 		</control>
 		<control>
 			<type>image</type>
-			<description>thumb Logos ID 2001</description>
-			<id>2001</id>
-			<posX>425</posX>
-			<posY>630</posY>
-			<width>330</width>
-			<height>35</height>
-			 <texture>#myfilms.logos_id2001</texture>
+			<description>thumb Logos ID 2012</description>
+			<id>2012</id>
+			<posX>45</posX>
+			<posY>532</posY>
+			<width>250</width>
+			<height>25</height>
+			<texture>#myfilms.logos_id2012</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
-			<animation effect="fade" time="8250">visiblechange</animation>
-			<animation effect="fade" time="8250">WindowClose</animation>	
-			<animation effect="fade" time="8250">WindowOpen</animation>
-			<visible>!Control.isvisible(34)</visible>
+			<visible>!Control.isvisible(34)+!player.hasmedia</visible>
 		</control>
-<!--		<control>
+		<control>
 			<type>image</type>
-			<description>thumb Logos ID 2002</description>
-			<id>2002</id>
-			<posX>425</posX>
-			<posY>630</posY>
-			<width>330</width>
-			<height>35</height>
-			<texture>#myfilms.logos_id2002</texture>
+			<description>thumb Logos ID 2003</description>
+			<id>2003</id>
+			<posX>45</posX>
+			<posY>445</posY>
+			<width>150</width>
+			<height>15</height>
+			<texture>#myfilms.logos_id2003</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
-			<visible>!Control.isvisible(34)</visible>
+			<visible>!Control.isvisible(34)+!player.hasmedia</visible>
 		</control>
--->
 		<control>
 			<type>label</type>
 			<description>year</description>
 			<id>1</id>
 			<posX>45</posX>
-			<posY>610</posY>
+			<posY>465</posY>
 			<label>#myfilms.db.year.value</label>
 			<font>font14</font>
 			<shadowAngle>45</shadowAngle>
 			<shadowDistance>2</shadowDistance>
 			<shadowColor>ff083556</shadowColor>
+			<visible>!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
 			<description>category</description>
 			<id>1</id>
 			<posX>65</posX>
-			<posY>640</posY>
+			<posY>490</posY>
 			<width>250</width>
 			<label>#myfilms.db.category.value</label>
 			<font>font12</font>
 			<textcolor>bba9d0f7</textcolor>
+			<visible>!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>label</type>
 			<description>Optional Label1</description>
 			<id>1</id>
 			<posX>45</posX>
-			<posY>670</posY>
-			<width>110</width>
+			<posY>512</posY>
+			<width>90</width>
 			<label>#myfilms.user.item1.label</label>
 			<font>font11</font>
 		  <textcolor>7fffffff</textcolor>
+			<visible>!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
 			<description>Optional Item1</description>
 			<id>1</id>
-			<posX>150</posX>
-			<posY>670</posY>
-			<width>250</width>
+			<posX>115</posX>
+			<posY>512</posY>
+			<width>190</width>
 			<label>#myfilms.user.item1.value</label>
 			<font>font11</font>
+			<visible>!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
 			<description>Optional Item3</description>
 			<id>1</id>
-			<posX>1244</posX>
-			<posY>630</posY>
+			<posX>644</posX>
+			<posY>1530</posY>
 			<width>250</width>
 			<align>right</align>
 			<label>#myfilms.user.item3.value</label>
@@ -493,32 +528,32 @@
 			<description>Thumb of selected item</description>
 			<id>1020</id>
 			<posX>45</posX>
-			<posY>90</posY>
-			<width>288</width>
-			<height>420</height>
+			<posY>95</posY>
+			<width>210</width>
+			<height>313</height>
 			<texture>#myfilms.picture</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<zoom>yes</zoom>
 			<visible>facadeview.list+Control.HasFocus(1026)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
-            <animation effect="slide" time="450" end="-400,0">hidden</animation>
+			<animation effect="slide" time="450" start="-400,0">visible</animation>
+			<animation effect="slide" time="450" end="-400,0">hidden</animation>
 		</control>
     	<control>
       		<type>image</type>
     		<description>Backgroundframe of selected item</description>
       		<id>1</id>
       		<posX>39</posX>
-      		<posY>83</posY>
-      		<width>306</width>
-      		<height>436</height>
+      		<posY>88</posY>
+			<width>225</width>
+			<height>326</height>
       		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
       		<visible>facadeview.list+Control.HasFocus(1026)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
-            <animation effect="slide" time="450" end="-400,0">hidden</animation>
+			<animation effect="slide" time="450" start="-400,0">visible</animation>
+			<animation effect="slide" time="450" end="-400,0">hidden</animation>
       		<animation effect="fade" time="250">WindowOpen</animation>
       		<animation effect="fade" time="250">WindowClose</animation>
     	</control>
@@ -535,17 +570,17 @@
 			<visible>no</visible>
 		</control>
 		<control>
-		  <description>Number of Files Label</description>
-		  <type>label</type>
-		  <id>1</id>
-		  <posX>425</posX>
-		  <posY>665</posY>
-		  <label>#selectedindex/#itemcount #itemtype</label>
-		  <align>left</align>
-		  <textcolor>7fffffff</textcolor>
-		  <visible>string.equals(#selectedindex)+string.equals(#itemcount)</visible>
-		  <animation effect="fade" time="250">WindowOpen</animation>
-		  <animation effect="fade" time="250">WindowClose</animation>
+			<description>Number of Files Label</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>325</posX>
+			<posY>532</posY>
+			<label>#selectedindex/#itemcount #itemtype</label>
+			<align>left</align>
+			<textcolor>7fffffff</textcolor>
+			<visible>string.equals(#selectedindex)+string.equals(#itemcount)</visible>
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<animation effect="fade" time="250">WindowClose</animation>
 		</control>
     </controls>
 </window>

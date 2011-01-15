@@ -172,9 +172,10 @@
     <String id="10798697">Aspect ratio</String>
     <String id="10798698">Image format</String>
     <String id="10798699">Wiki Online Help (Web)</String>
-    <String id="10798701">Update Menu</String>
+    <String id="10798701">Options Menu</String>
     <String id="10798702">Local Updates ...</String>
     <String id="10798703">Online Updates ...</String>
+    <String id="10798704">Trailer ...</String>
     <String id="10798710">Play trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798719">Load films info (.nfo file, local, add missing info)</String>
@@ -193,6 +194,9 @@
     <String id="10798733">Replace existing cover with this one ?</String>
     <String id="10798734">Update all properties</String>
     <String id="10798735">Update only missing properties</String>
+    <String id="10798736">Online</String>
+    <String id="10798737">Movie not found locally</String>
+    <String id="10798738">Try YouTube ?</String>
     <String id="10798751">Overview</String>
     <String id="10798752">Description</String>
     <String id="10798753">Comments</String>

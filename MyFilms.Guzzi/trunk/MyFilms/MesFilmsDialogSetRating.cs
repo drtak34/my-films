@@ -67,7 +67,7 @@ namespace MesFilms
 
     public override bool Init()
     {
-      return Load(GUIGraphicsContext.Skin + @"\MesFilmsDialogRating.xml");
+      return Load(GUIGraphicsContext.Skin + @"\MyFilmsDialogRating.xml");
     }
 
     protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)

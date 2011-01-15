@@ -104,11 +104,11 @@ namespace MesFilms
         protected GUIImage ImgThumb16 = null;
         
 
-        public const int ID_MesFilms = 7986;
-        public int ID_MesFilmsDetail = 7987;
-        public int ID_MesFilmsActors = 7989;
-        public int ID_MesFilmsThumbs = 7990;
-        public int ID_MesFilmsActorsInfo = 7991;
+        public const int ID_MyFilms = 7986;
+        public int ID_MyFilmsDetail = 7987;
+        public int ID_MyFilmsActors = 7989;
+        public int ID_MyFilmsThumbs = 7990;
+        public int ID_MyFilmsActorsInfo = 7991;
 
         #endregion
 
@@ -127,12 +127,12 @@ namespace MesFilms
         }
         public override int GetID
         {
-            get { return ID_MesFilmsThumbs; }
+            get { return this.ID_MyFilmsThumbs; }
             set { base.GetID = value; }
         }
         public override bool Init()
         {
-            return Load(GUIGraphicsContext.Skin + @"\MesFilmsThumbs.xml");
+            return Load(GUIGraphicsContext.Skin + @"\MyFilmsThumbs.xml");
         }
 
         public override void PreInit() { }
@@ -146,8 +146,8 @@ namespace MesFilms
             LogMyFilms.Debug("MyFilmsThumbs: OnAction " + actionType.wID.ToString());
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
-                MesFilms.conf.LastID = MesFilms.ID_MesFilmsDetail;
-                GUIWindowManager.ActivateWindow(ID_MesFilmsDetail);
+                MesFilms.conf.LastID = MesFilms.ID_MyFilmsDetail;
+                GUIWindowManager.ActivateWindow(this.ID_MyFilmsDetail);
                 return;
             }
 
@@ -187,7 +187,7 @@ namespace MesFilms
                     
                     LoadThumbs(directoryname);
                     LogMyFilms.Debug("MyFilmsThumbs: PropertyLoaded !");
-                    MesFilms.conf.LastID = MesFilms.ID_MesFilmsThumbs;
+                    MesFilms.conf.LastID = MesFilms.ID_MyFilmsThumbs;
                     return true;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
@@ -222,13 +222,13 @@ namespace MesFilms
                     if (iControl == (int)Controls.CTRL_BtnReturn)
                     // Return Previous Menu
                     {
-                        MesFilms.conf.LastID = MesFilms.ID_MesFilms;
+                        MesFilms.conf.LastID = MesFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
-                        GUIWindowManager.ActivateWindow(ID_MesFilms);
+                        GUIWindowManager.ActivateWindow(ID_MyFilms);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_TxtSelect)
-                        GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
+                        GUIWindowManager.ActivateWindow(this.ID_MyFilmsActors);
                     GUIWindowManager.ShowPreviousWindow();
                     return true;
 

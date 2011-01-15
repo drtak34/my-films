@@ -172,9 +172,10 @@
     <String id="10798697">Bildverhältnis</String>
     <String id="10798698">Bildformat</String>
     <String id="10798699">Wiki Online Hilfe (Web)</String>
-    <String id="10798701">Update Menü</String>
+    <String id="10798701">Optionen Menü</String>
     <String id="10798702">Lokale Updates ...</String>
     <String id="10798703">Online Updates ...</String>
+    <String id="10798704">Trailer ...</String>
     <String id="10798710">Spiele Trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798719">Lade Filminformationen (nfo, ergänze fehlende Infos)</String>
@@ -193,6 +194,9 @@
     <String id="10798733">Ersetze bestehendes Cover mit diesem ?</String>
     <String id="10798734">Aktualisiere alle Felder</String>
     <String id="10798735">Aktualisiere nur leere Felder</String>
+    <String id="10798736">Online</String>
+    <String id="10798737">Film lokal nicht gefunden</String>
+    <String id="10798738">Versuche YouTube ?</String>
     <String id="10798751">Übersicht und Filmstart</String>
     <String id="10798752">Beschreibung</String>
     <String id="10798753">Kommentar</String>

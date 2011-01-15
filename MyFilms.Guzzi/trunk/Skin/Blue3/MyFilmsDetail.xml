@@ -215,23 +215,23 @@
 					<onright>10000</onright>
 					<label>712</label>
 				</control>
-				<!-- <control>
+				<control>
 					<type>button</type>
-					<description>Play Trailer</description>
+					<description>Trailers</description>
 					<id>109</id>
 					<onup>102</onup>
 					<ondown>107</ondown>
 					<onright>10000</onright>
-					<label>10798710</label>
-				</control> -->
+					<label>5906</label>
+				</control>
 				<control>
 					<type>button</type>
-					<description>Update</description>
+					<description>Options</description>
 					<id>107</id>
-					<onup>102</onup>
+					<onup>109</onup>
 					<ondown>104</ondown>
 					<onright>10000</onright>
-					<label>184</label>
+					<label>496</label>
 				</control>
 				<control>
 					<type>button</type>
@@ -268,48 +268,22 @@
 					<onup>106</onup>
 				</control>
 
-<!-- Start - Additional Buttons for Links to other Plugins -->
-
+			<!-- Start - Additional Buttons for Links to other Plugins -->
 				<control>
-					<description>Empty</description>
-					<type>button</type>
-					<id>10011</id>
-					<hyperlink></hyperlink>
-					<label>-</label>
-					<onright>10000</onright>
-					<onup>105</onup>
-					<ondown>10012</ondown>
-				</control>
-				<control>
-					<description>Trailer</description>
-					<type>button</type>
-					<id>10012</id>
-					<hyperlink>5900</hyperlink>
-					<label>5900</label>
-					<onright>10000</onright>
-					<onup>105</onup>
-					<ondown>10013</ondown>
-					<visible>plugin.isenabled(My Trailers)</visible>
-				</control>
-				<control>
-					<description>Onlinevideos</description>
-					<type>button</type>
-					<id>10013</id>
-					<hyperlink>4755</hyperlink>
-					<label>Onlinevideos</label>
-					<onright>10000</onright>
-					<onup>10012</onup>
-					<ondown>10014</ondown>
-					<visible>plugin.isenabled(OnlineVideos)</visible>
-				</control>
+					<description>Separator</description>
+					<type>image</type>
+					<id>0</id>
+					<height>10</height>
+					<texture></texture>
+				</control> 
 				<control>
 					<description>TV-Series</description>
 					<type>button</type>
-					<id>10014</id>
+					<id>10012</id>
 					<hyperlink>9811</hyperlink>
 					<label>1300</label>
 					<onright>10000</onright>
-					<onup>10013</onup>
+					<onup>105</onup>
 					<ondown>102</ondown>
 				</control>
 			<!-- End - Additional Buttons for Links to other Plugins -->
@@ -446,6 +420,7 @@
 		<align>left</align>
 		<textureFocus>-</textureFocus>
 		<textureNoFocus>-</textureNoFocus>
+		<visible>Control.isvisible(35)</visible>
     </control>
 	<control>
 		<description>Master Title</description>
@@ -478,11 +453,11 @@
 	<control>
 		<type>imagelist</type>
 		<id>1</id>
-		<posX>30</posX>
-		<posY>432</posY>
-		<height>14</height>
-		<textureWidth>14</textureWidth>
-		<textureHeight>14</textureHeight>
+		<posX>100</posX>
+		<posY>437</posY>
+		<height>20</height>
+		<textureWidth>20</textureWidth>
+		<textureHeight>20</textureHeight>
 		<subitems>
 			<subitem>UserRatingStarOff.png</subitem>
 			<subitem>stargood.png</subitem>
@@ -497,8 +472,8 @@
 		<description>RatingValue</description>
 		<type>label</type>
 		<id>2068</id>
-		<posX>275</posX>
-		<posY>430</posY>
+		<posX>55</posX>
+		<posY>435</posY>
 		<label>(#myfilms.db.rating.value)</label>
 		<font>font10</font>
 		<align>right</align>
@@ -1226,10 +1201,10 @@
 		<description>Thumbnail with video playing</description>
 		<type>image</type>
 		<id>2023</id>
-		<posX>45</posX>
-		<posY>90</posY>
-		<width>288</width>
-		<height>420</height>
+		<posX>34</posX>
+		<posY>81</posY>
+		<width>240</width>
+		<height>338</height>
 		<texture>#myfilms.picture</texture>
 		<keepaspectratio>yes</keepaspectratio>
 		<zoom>yes</zoom>
@@ -1286,13 +1261,13 @@
 	</control>
 	<control>
 		<type>image</type>
-		<description>thumb Logos ID 2001</description>
-		<id>2001</id>
+		<description>thumb Logos ID 2012</description>
+		<id>2012</id>
 		<posX>310</posX>
 		<posY>520</posY>
-		<width>730</width>
+		<width>400</width>
 		<height>25</height>
-		<texture>#myfilms.logos_id2001</texture>
+		<texture>#myfilms.logos_id2012</texture>
 		<keepaspectratio>yes</keepaspectratio>
 		<spaceBetweenItems>2</spaceBetweenItems>
 		<visible>!Control.HasFocus(10099)</visible>
@@ -1303,13 +1278,13 @@
 	</control>
 	<control>
 		<type>image</type>
-		<description>thumb Logos ID 2002</description>
-		<id>2002</id>
-		<posX>310</posX>
+		<description>thumb Logos ID 2003</description>
+		<id>2003</id>
+		<posX>285</posX>
 		<posY>520</posY>
-		<width>730</width>
-		<height>25</height>
-		<texture>#myfilms.logos_id2002</texture>
+		<width>20</width>
+		<height>20</height>
+		<texture>#myfilms.logos_id2003</texture>
 		<keepaspectratio>yes</keepaspectratio>
 		<spaceBetweenItems>2</spaceBetweenItems>
 		<visible>!Control.HasFocus(10099)</visible>
@@ -1402,26 +1377,10 @@
 		<description>thumb Logos ID 2001 (FullColor Fanart View)</description>
 		<id>2001</id>
 		<posX>20</posX>
-		<posY>525</posY>
-		<width>450</width>
-		<height>30</height>
+		<posY>520</posY>
+		<width>230</width>
+		<height>25</height>
 		<texture>#myfilms.logos_id2001</texture>
-		<keepaspectratio>yes</keepaspectratio>
-		<spaceBetweenItems>0</spaceBetweenItems>
-		<colordiffuse>cfffffff</colordiffuse>
-		<visible>Control.HasFocus(10099)+!player.hasmedia</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-	</control>
-	<control>
-		<type>image</type>
-		<description>thumb Logos ID 2002 (FullColor Fanart View)</description>
-		<id>2002</id>
-		<posX>20</posX>
-		<posY>525</posY>
-		<width>450</width>
-		<height>30</height>
-		<texture>#myfilms.logos_id2002</texture>
 		<keepaspectratio>yes</keepaspectratio>
 		<spaceBetweenItems>0</spaceBetweenItems>
 		<colordiffuse>cfffffff</colordiffuse>

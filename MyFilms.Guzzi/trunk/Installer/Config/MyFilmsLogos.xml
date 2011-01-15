@@ -4,13 +4,13 @@
     <entry name="LogosPath">
     </entry>
     <entry name="LogoPresets">Use Logos of currently selected skin</entry>
-    <entry name="Spacing">2</entry>
+    <entry name="Spacing">3</entry>
   </section>
   <section name="ID2001">
     <entry name="ID2001_0">Framerate;contains;23;or;Framerate;contains;24;BluRay.png</entry>
     <entry name="ID2001_1">VideoFormat;contains;divx;or;VideoFormat;contains;div3;DIVX.png</entry>
-    <entry name="ID2001_2">VideoFormat;contains;xvid;or;VideoFormat;contains;xvid;XVID.png</entry>
-    <entry name="ID2001_3">VideoFormat;contains;dvd;or;Source;contains;iso;DVD.png</entry>
+    <entry name="ID2001_2">VideoFormat;contains;xvid;;;;;XVID.png</entry>
+    <entry name="ID2001_3">VideoFormat;contains;dvd;;;;;DVD.png</entry>
     <entry name="ID2001_4">VideoFormat;contains;h264;;;;;HD.png</entry>
     <entry name="ID2001_5">VideoFormat;contains;mpeg-2;;;;;MPEG VIDEO VERSION 2.png</entry>
     <entry name="ID2001_6">Resolution;contains;1080;;;;;1080p.png</entry>
@@ -31,27 +31,31 @@
     <entry name="ID2001_21">Languages;greater;1;;;;;multilanguage.png</entry>
   </section>
   <section name="ID2002">
-    <entry name="ID2002_0">Category;contains;drama;;;;;Drama.png</entry>
-    <entry name="ID2002_1">Category;contains;comedy;;;;;Comedy.png</entry>
-    <entry name="ID2002_2">Category;contains;action;;;;;Action.png</entry>
-    <entry name="ID2002_3">Category;contains;animation;;;;;Animation.png</entry>
-    <entry name="ID2002_4">Category;contains;documentary;;;;;Documentary.png</entry>
-    <entry name="ID2002_5">Category;contains;thriller;;;;;Thriller.png</entry>
-    <entry name="ID2002_6">Category;contains;science-fiction;;;;;Scifi.png</entry>
-    <entry name="ID2002_7">Category;contains;adventure;;;;;Adventure.png</entry>
-    <entry name="ID2002_8">Category;contains;animation;;;;;Anim.png</entry>
-    <entry name="ID2002_9">Category;contains;family;;;;;Family.png</entry>
-    <entry name="ID2002_10">Category;contains;soap;;;;;Soap.png</entry>
-    <entry name="ID2002_11">Category;contains;love;;;;;Love.png</entry>
-    <entry name="ID2002_12">Category;contains;romance;;;;;romance.png</entry>
-    <entry name="ID2002_13">Category;contains;series;;;;;Series.png</entry>
+    <entry name="ID2002_0">Category;contains;action;;;;;Action.png</entry>
+    <entry name="ID2002_1">Category;contains;adventure;;;;;Adventure.png</entry>
+    <entry name="ID2002_2">Category;contains;animat;;;;;Animation.png</entry>
+    <entry name="ID2002_3">Category;contains;biography;;;;;Biography.png</entry>
+    <entry name="ID2002_4">Category;contains;comedy;;;;;Comedy.png</entry>
+    <entry name="ID2002_5">Category;contains;crime;;;;;Crime.png</entry>
+    <entry name="ID2002_6">Category;contains;documentary;;;;;Documentary.png</entry>
+    <entry name="ID2002_7">Category;contains;drama;;;;;Drama.png</entry>
+    <entry name="ID2002_8">Category;contains;family;;;;;Family.png</entry>
+    <entry name="ID2002_9">Category;contains;fantasy;;;;;Fantasy.png</entry>
+    <entry name="ID2002_10">Category;contains;noir;;;;;Film-Noir.png</entry>
+    <entry name="ID2002_11">Category;contains;history;;;;;History.png</entry>
+    <entry name="ID2002_12">Category;contains;horror;;;;;Horror.png</entry>
+    <entry name="ID2002_13">Category;equal;music;;;;;Music.png</entry>
+    <entry name="ID2002_14">Category;contains;musical;;;;;Musical.png</entry>
+    <entry name="ID2002_15">Category;contains;mystery;;;;;Mystery.png</entry>
+    <entry name="ID2002_16">Category;contains;romance;;;;;Romance.png</entry>
+    <entry name="ID2002_17">Category;contains;sci-fi;;;;;Sci-Fi.png</entry>
+    <entry name="ID2002_18">Category;contains;sport;;;;;Sport.png</entry>
+    <entry name="ID2002_19">Category;contains;thriller;;;;;Thriller.png</entry>
+    <entry name="ID2002_20">Category;contains;war;;;;;War.png</entry>
+    <entry name="ID2002_21">Category;contains;western;;;;;Western.png</entry>
   </section>
   <section name="ID2003">
-    <entry name="ID2003_0">Languages;contains;german;or;Languages;contains;deutsch;Germany.png</entry>
-    <entry name="ID2003_1">Languages;contains;english;;;;;United States.png</entry>
-    <entry name="ID2003_2">Languages;contains;french;;;;;France.png</entry>
-    <entry name="ID2003_3">Languages;contains;italian;;;;;Italy.png</entry>
-    <entry name="ID2003_4">Languages;contains;spanish;;;;;Spain.png</entry>
-    <entry name="ID2003_5">Languages;contains;chinese;;;;;China.png</entry>
+    <entry name="ID2003_0">Checked;contains;false;;;;;overlayunwatched.png</entry>
+    <entry name="ID2003_1">Checked;contains;true;;;;;overlaywatched.png</entry>
   </section>
 </profile>

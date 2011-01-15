@@ -108,11 +108,11 @@ namespace MesFilms.Actors
         protected GUIAnimation m_SearchAnimation;
 
 
-        public const int ID_MesFilms = 7986;
-        public int ID_MesFilmsDetail = 7987;
-        public int ID_MesFilmsActors = 7989;
-        public int ID_MesFilmsThumbs = 7990;
-        public int ID_MesFilmsActorsInfo = 7991;
+        public const int ID_MyFilms = 7986;
+        public int ID_MyFilmsDetail = 7987;
+        public int ID_MyFilmsActors = 7989;
+        public int ID_MyFilmsThumbs = 7990;
+        public int ID_MyFilmsActorsInfo = 7991;
 
         #endregion
 
@@ -171,13 +171,13 @@ namespace MesFilms.Actors
 
         public override int GetID
         {
-            get { return ID_MesFilmsActors; }
+            get { return this.ID_MyFilmsActors; }
             set { base.GetID = value; }
         }
 
         public override bool Init()
         {
-            return Load(GUIGraphicsContext.Skin + @"\MesFilmsActors.xml");
+            return Load(GUIGraphicsContext.Skin + @"\MyFilmsActors.xml");
         }
 
         public override void PreInit() { }
@@ -191,8 +191,8 @@ namespace MesFilms.Actors
             LogMyFilms.Debug("MyFilmsActors: OnAction " + actionType.wID);
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
-                MesFilms.conf.LastID = MesFilms.ID_MesFilms;
-                GUIWindowManager.ActivateWindow(ID_MesFilms);
+                MesFilms.conf.LastID = MesFilms.ID_MyFilms;
+                GUIWindowManager.ActivateWindow(ID_MyFilms);
                 return;
             }
 
@@ -217,7 +217,7 @@ namespace MesFilms.Actors
                     //---------------------------------------------------------------------------------------
                     base.OnMessage(messageType);
                     wGetID = GetID;
-                    MesFilms.conf.LastID = MesFilms.ID_MesFilmsActors;
+                    MesFilms.conf.LastID = MesFilms.ID_MyFilmsActors;
 
 
                     //Temporary set item in facadeview...
@@ -283,9 +283,9 @@ namespace MesFilms.Actors
                     if (iControl == (int)Controls.CTRL_BtnReturn)
                     // Return Previous Menu
                     {
-                        MesFilms.conf.LastID = MesFilms.ID_MesFilms;
+                        MesFilms.conf.LastID = MesFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
-                        GUIWindowManager.ActivateWindow(ID_MesFilms);
+                        GUIWindowManager.ActivateWindow(ID_MyFilms);
                         return true;
                     }
 
@@ -293,7 +293,7 @@ namespace MesFilms.Actors
 
                         // Show Actor Details Screen
                         //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
-                        GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
+                        GUIWindowManager.ActivateWindow(this.ID_MyFilmsActors);
                     // Hier Aktivitäten wie z.b. ListControl für Actors?
                     GUIWindowManager.ShowPreviousWindow();
                     //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
@@ -336,7 +336,7 @@ namespace MesFilms.Actors
                                 MesFilms.conf.StrIndex = facadeView.SelectedListItem.ItemId;
                                 MesFilms.conf.StrTIndex = facadeView.SelectedListItem.Label;
                                 GUITextureManager.CleanupThumbs();
-                                GUIWindowManager.ActivateWindow(ID_MesFilmsDetail);
+                                GUIWindowManager.ActivateWindow(this.ID_MyFilmsDetail);
                             }
                             else
                             // View List as selected

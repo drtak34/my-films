@@ -174,6 +174,12 @@ If a value is entered for the second parameter, only records containing that val
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
   </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.</value>
+  </data>
   <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
     <value>Views by ‘Genre’, by ‘Year’ and by ‘Country’ are already defined by default.  
 In this section you can define additional views; 
@@ -189,11 +195,13 @@ As this can be skin dependant, some experimentation may be required to see what 
   </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
-but you can include two more fields to be updated here.  
+but you can define two more fields to be updated here.
+They will show as separate menu entries.
 
 Select the database field to be updated, enter the label associated with that field 
 and enter a pre-defined value to update the field.
-</value>
+
+A possible use case could be "Checked" "seen" "true" to have a oneclick solution to set a movie watched based on checked DB field.</value>
   </data>
   <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
     <value>If you want to update your movie datas over Internet,
@@ -283,17 +291,6 @@ when no thumb for views is available.</value>
 MyFilms will try to find matching media files based on the title chosen for trailersearch 
 and media files in subdirectories containing the movie name.</value>
   </data>
-  <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
-    <value>If Trailer file is not found with the 'DB Item for storing Trailer Infos' field, you 
-can search the trailer file with the movie Name.
-Validate that option for it and give the Title used for the search.
-Attention: Might degrade performace!
-</value>
-  </data>
-  <data name="AntStorageTrailer.ToolTip" xml:space="preserve">
-    <value>Choose the DB fireld where MyFilms should store the infos about trailers.
-"Borrower" is a good recommendation, as it's not commonly used. However make sure, yoiu do not use this field for other purposes (e.g. seen status)</value>
-  </data>
   <data name="groupBox24.ToolTip" xml:space="preserve">
     <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
 and thus to integrate trailers into MyFilms.
@@ -304,6 +301,17 @@ searching for mediafiles containing "trlr" or "trailer" in the filename.
 So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
 and make sure they are named accordingly (many downloader utilities do it this way).
 You can add an additional trailer searchpath that will search and register for media files containing the movie's title.</value>
+  </data>
+  <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
+    <value>If Trailer file is not found with the 'DB Item for storing Trailer Infos' field, you 
+can search the trailer file with the movie Name.
+Validate that option for it and give the Title used for the search.
+Attention: Might degrade performace!
+</value>
+  </data>
+  <data name="AntStorageTrailer.ToolTip" xml:space="preserve">
+    <value>Choose the DB fireld where MyFilms should store the infos about trailers.
+"Borrower" is a good recommendation, as it's not commonly used. However make sure, yoiu do not use this field for other purposes (e.g. seen status)</value>
   </data>
   <data name="DefaultCover.ToolTip" xml:space="preserve">
     <value>Enter the full path and file name of the image file that you wish to use as the default DVD cover image.  
@@ -346,6 +354,13 @@ The plugin needs to know what separator is used to indicate the role text for fi
 	by Genre
 
 You can add additional searches by selecting the database field and adding a value to filter that field by, if required.
+Those searches will be shown as separate entries in the search menu. 
+They obey the filtersettings, so will be based on views you have defined.</value>
+  </data>
+  <data name="CheckWatched.ToolTip" xml:space="preserve">
+    <value>Select this option if you want the “Checked” field of your database 
+to be updated each time a movie is launched.
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field
 </value>
   </data>
   <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
@@ -365,12 +380,23 @@ movie 3: Moviecollection\movie3
 
 Will show "Moviecollection" with 3 items in it.</value>
   </data>
+  <data name="gpspfield.ToolTip" xml:space="preserve">
+    <value>This defines the action taken, when the player finishes.
+You can update e.g. the "checked" field with a value "true to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
+
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
   </metadata>
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
+  <data name="groupBoxUpdateByProperties.ToolTip" xml:space="preserve">
+    <value>In opposite to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
+The difference is, ou can't predefine a value for the update - but will always get a userdialog prefilled with the current value to change the content.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxMyFilms.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

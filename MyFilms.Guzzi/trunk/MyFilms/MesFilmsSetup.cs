@@ -743,7 +743,7 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", SearchSubDirsTrailer.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", CheckWatched.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", AlwaysDefaultView.Checked);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked); // Do not write to config, as it's acting as "defaultsetting"
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", chkOnlyTitle.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", chkWindowsFileDialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", ItemSearchFileName.Text);
@@ -2425,7 +2425,7 @@ namespace MesFilms
         {
             if (cbfdupdate.SelectedItem.ToString() == "Checked" && !(load))
             {
-                General.SelectTab(2);
+                General.SelectTab(4);
                 cbfdupdate.Focus();
                 System.Windows.Forms.MessageBox.Show("Be carefull, if you use the field 'Checked' for deleted movies, you cann't get any difference between deleted and launching movies !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -2435,7 +2435,7 @@ namespace MesFilms
         {
             if (chksupplaystop.Checked && !(load))
             {
-                General.SelectTab(2);
+                General.SelectTab(4);
                 chksupplaystop.Focus();
                 System.Windows.Forms.MessageBox.Show("Be carefull, that deletion action'll be done each time ended watching movie !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }

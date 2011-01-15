@@ -141,7 +141,7 @@
 		<control>
 			<type>actiongroup</type>
 			<description>action menu</description>
-			<defaultcontrol>6</defaultcontrol>
+			<defaultcontrol>4</defaultcontrol>
 			<onexit>1026</onexit>
 			<buttonX>0</buttonX>
 			<buttonY>0</buttonY>
@@ -183,7 +183,7 @@
 				<posY>107</posY>
 				<onleft>1026</onleft>
 				<onright>1026</onright>
-				<onup>10014</onup>
+				<onup>10012</onup>
 				<ondown>2</ondown>
 				<animation>unfocus</animation>
 				<label>101</label>
@@ -257,48 +257,22 @@
 				<textcolor>ff000000</textcolor>
 			</control>
 
-
 <!-- Start - Additional Buttons for Links to other Plugins -->
 				<control>
-					<description>Empty</description>
-					<type>button</type>
-					<id>10011</id>
-					<hyperlink></hyperlink>
-					<label>-</label>
-					<onright>1026</onright>
-					<onup>5</onup>
-					<ondown>10012</ondown>
-				</control>
-				<control>
-					<description>Trailer</description>
-					<type>button</type>
-					<id>10012</id>
-					<hyperlink>5900</hyperlink>
-					<label>5900</label>
-					<onright>1026</onright>
-					<onup>5</onup>
-					<ondown>10013</ondown>
-					<visible>plugin.isenabled(My Trailers)</visible>
-				</control>
-				<control>
-					<description>Onlinevideos</description>
-					<type>button</type>
-					<id>10013</id>
-					<hyperlink>4755</hyperlink>
-					<label>Onlinevideos</label>
-					<onright>1026</onright>
-					<onup>10012</onup>
-					<ondown>10014</ondown>
-					<visible>plugin.isenabled(OnlineVideos)</visible>
-				</control>
+					<description>Separator</description>
+					<type>image</type>
+					<id>0</id>
+					<height>10</height>
+					<texture></texture>
+				</control> 
 				<control>
 					<description>TV-Series</description>
 					<type>button</type>
-					<id>10014</id>
+					<id>10012</id>
 					<hyperlink>9811</hyperlink>
 					<label>1300</label>
 					<onright>1026</onright>
-					<onup>10013</onup>
+					<onup>5</onup>
 					<ondown>6</ondown>
 				</control>
 <!-- End - Additional Buttons for Links to other Plugins -->
@@ -465,26 +439,26 @@
 		</control>
 		<control>
 			<type>image</type>
-			<description>thumb Logos ID 2001</description>
-			<id>2001</id>
+			<description>thumb Logos ID 2012</description>
+			<id>2012</id>
 			<posX>45</posX>
 			<posY>532</posY>
-			<width>330</width>
+			<width>250</width>
 			<height>25</height>
-			 <texture>#myfilms.logos_id2001</texture>
+			<texture>#myfilms.logos_id2012</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
 			<visible>!Control.isvisible(34)+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>image</type>
-			<description>thumb Logos ID 2002</description>
-			<id>2002</id>
+			<description>thumb Logos ID 2003</description>
+			<id>2003</id>
 			<posX>45</posX>
-			<posY>532</posY>
-			<width>330</width>
-			<height>25</height>
-			<texture>#myfilms.logos_id2002</texture>
+			<posY>445</posY>
+			<width>150</width>
+			<height>15</height>
+			<texture>#myfilms.logos_id2003</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
 			<visible>!Control.isvisible(34)+!player.hasmedia</visible>

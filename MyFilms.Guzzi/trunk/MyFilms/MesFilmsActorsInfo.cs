@@ -107,7 +107,7 @@ namespace MesFilms.ActorDialog
 
         public override bool Init()
         {
-            return Load(GUIGraphicsContext.Skin + @"\MesFilmsActorsInfo.xml");
+            return Load(GUIGraphicsContext.Skin + @"\MyFilmsActorsInfo.xml");
         }
 
         public override void PreInit() { }

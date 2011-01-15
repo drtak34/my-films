@@ -129,12 +129,12 @@ namespace MesFilms
         static string wzone = null;
         int StrMax = 0;
 
-        public const int ID_MesFilms = 7986;
-        public const int ID_MesFilmsDetail = 7987;
-        public const int ID_MesFilmsDialogRating = 7988;
-        public const int ID_MesFilmsActors = 7989;
-        public const int ID_MesFilmsThumbs = 7990;
-        public const int ID_MesFilmsActorsInfo = 7991;
+        public const int ID_MyFilms = 7986;
+        public const int ID_MyFilmsDetail = 7987;
+        public const int ID_MyFilmsDialogRating = 7988;
+        public const int ID_MyFilmsActors = 7989;
+        public const int ID_MyFilmsThumbs = 7990;
+        public const int ID_MyFilmsActorsInfo = 7991;
 
         public SQLiteClient m_db;
         public class IMDBActorMovie
@@ -169,12 +169,12 @@ namespace MesFilms
         }
         public override int GetID
         {
-            get { return ID_MesFilmsDetail; }
+            get { return ID_MyFilmsDetail; }
             set { base.GetID = value; }
         }
         public override bool Init()
         {
-            return Load(GUIGraphicsContext.Skin + @"\MesFilmsDetail.xml");
+            return Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
         }
 
         protected override void OnPageLoad()
@@ -202,8 +202,8 @@ namespace MesFilms
             LogMyFilms.Debug("MyFilmsDetail: OnAction " + actionType.wID.ToString());
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
-                MesFilms.conf.LastID = MesFilms.ID_MesFilms;
-                GUIWindowManager.ActivateWindow(ID_MesFilms);
+                MesFilms.conf.LastID = MesFilms.ID_MyFilms;
+                GUIWindowManager.ActivateWindow(ID_MyFilms);
                 return;
             }
 
@@ -332,7 +332,7 @@ namespace MesFilms
 
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     afficher_detail(true);
-                    MesFilms.conf.LastID = MesFilms.ID_MesFilmsDetail;
+                    MesFilms.conf.LastID = MesFilms.ID_MyFilmsDetail;
                     return true;                
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
@@ -375,9 +375,9 @@ namespace MesFilms
                     if (iControl == (int)Controls.CTRL_BtnReturn)
                     // Return Previous Menu
                     {
-                        MesFilms.conf.LastID = MesFilms.ID_MesFilms;
+                        MesFilms.conf.LastID = MesFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
-                        GUIWindowManager.ActivateWindow(ID_MesFilms);
+                        GUIWindowManager.ActivateWindow(ID_MyFilms);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlay)
@@ -470,18 +470,18 @@ namespace MesFilms
                     if (iControl == (int)Controls.CTRL_ViewFanart)
                     // On Button goto MesFilmsThumbs
                     {
-                        GUIWindowManager.ActivateWindow(ID_MesFilmsThumbs);
+                        GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnMovieThumbs)
                     {
-                        GUIWindowManager.ActivateWindow(ID_MesFilmsThumbs);
+                        GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
                         return true;
                     }
 
                     if (iControl == (int)Controls.CTRL_BtnActors)
                     {
-                        GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
+                        GUIWindowManager.ActivateWindow(ID_MyFilmsActors);
                         return true;
                     }
 
@@ -489,7 +489,7 @@ namespace MesFilms
                     
                         // Show Actor Details Screen
                         //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
-                        GUIWindowManager.ActivateWindow(ID_MesFilmsActors);
+                        GUIWindowManager.ActivateWindow(ID_MyFilmsActors);
                         // Hier Aktivitäten wie z.b. ListControl für Actors?
                         GUIWindowManager.ShowPreviousWindow();
                         //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
@@ -556,12 +556,9 @@ namespace MesFilms
                     dlgmenu.Reset();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798701)); // update menu
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798710));//play trailer
-                    choiceViewMenu.Add("playtrailer");
-
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798711));//search youtube trailer with onlinevideos
-                    choiceViewMenu.Add("playtraileronlinevideos");
-
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798704));//trailer menu "Trailer ..."
+                    choiceViewMenu.Add("trailermenu");
+                
                     dlgmenu.Add(GUILocalizeStrings.Get(931));//rating
                     choiceViewMenu.Add("rating");
 
@@ -591,7 +588,7 @@ namespace MesFilms
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     return;
                     //break;
-                
+              
                 case "playtrailer":
                     Launch_Movie_Trailer(MesFilms.conf.StrIndex, GetID, m_SearchAnimation);
                     return;
@@ -645,6 +642,27 @@ namespace MesFilms
                     Update_XML_database();
                     afficher_detail(true);
                     break;
+
+
+
+                case "trailermenu":
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    choiceViewMenu.Clear();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Trailer ...
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798710));//play trailer
+                    choiceViewMenu.Add("playtrailer");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798711));//search youtube trailer with onlinevideos
+                    choiceViewMenu.Add("playtraileronlinevideos");
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                      Change_Menu("mainmenu");
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    break;
+
 
                 case "localupdates":
                     if (dlgmenu == null) return;
@@ -1955,7 +1973,7 @@ namespace MesFilms
                 }
             }
             
-            LogMyFilms.Debug("MesFilm (SearchFanart) - Fanart not configured: wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+            LogMyFilms.Debug("MF: (SearchFanart) - Fanart not configured: wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             return wfanart;
         }
         //-------------------------------------------------------------------------------------------
@@ -2060,12 +2078,12 @@ namespace MesFilms
             if (ImgFanartDir != null)
             {
                 wfanart = Search_Fanart(wtitle, false, "dir", false, file, string.Empty);
-                LogMyFilms.Debug("MesFilm (afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                LogMyFilms.Debug("MF: (afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             }
             else
             {
                 wfanart = Search_Fanart(wtitle, false, "file", false, file, string.Empty);
-                LogMyFilms.Debug("MesFilm (afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                LogMyFilms.Debug("MF: (afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             }
 
             if (wfanart[0] == " ")
@@ -2812,13 +2830,52 @@ namespace MesFilms
             }
             else
             {
-                GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                dlgOk.SetLine(1, GUILocalizeStrings.Get(1036));//no video found
-                dlgOk.SetLine(2, MesFilms.r[select_item][MesFilms.conf.StrSTitle].ToString());
-                dlgOk.DoModal(GetID);
-                LogMyFilms.Info("MF: File not found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle]);
-                return;
+                LogMyFilms.Info("MF: File not found for movie '" + MesFilms.r[select_item][MesFilms.conf.StrSTitle] + "'");
+                GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+                dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986) + " " + MesFilms.r[select_item][MesFilms.conf.StrSTitle].ToString());//my films & Titel
+                dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798737));//no video found locally
+                dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798738)); // Try Youtube?
+                dlgYesNo.DoModal(GetID);
+                //dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
+                if (dlgYesNo.IsConfirmed)
+                {
+                  // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ...
+                  // OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
+                  // Check for Plugin and correct version - Version information for an assembly consists of the following four values: Major Version, Minor Version, Build Number, Revision
+                  var hasRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
+                  var hasRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
+                  //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
+                  if (hasRightPlugin && hasRightVersion)
+                  {
+                    string OVstartparams = string.Empty;
+                    string OVtitle = string.Empty;
+                    if (MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"] != null && MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+                      OVtitle = MesFilms.r[MesFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                    if (OVtitle.IndexOf(MesFilms.conf.TitleDelim) > 0)
+                      OVtitle = OVtitle.Substring(OVtitle.IndexOf(MesFilms.conf.TitleDelim) + 1);
+                    OVstartparams = "site:Youtube|category:|search:" + OVtitle + " " + (MesFilms.r[MesFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                    //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
+                    GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "YouTube");
+                    GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+                    GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", OVtitle.ToString());
+                    GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
+
+                    LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+                    GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
+                    GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
+                    GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+                    GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
+                    GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
+                  }
+                  else
+                  {
+                    //MesFilmsDetail.ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version resuired: 0.28");
+                  }
+                  return;
+
+                }
+                else
+                  return;
             }
         }
 

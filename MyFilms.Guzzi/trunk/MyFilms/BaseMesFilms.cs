@@ -141,7 +141,7 @@ namespace MesFilms
                     dlgOk.SetHeading("Error");//my videos
                     dlgOk.SetLine(1, "Error during updating the XML database !");
                     dlgOk.SetLine(2, "Maybe Directory full or no write access.");
-                    dlgOk.DoModal(MesFilms.ID_MesFilmsDetail);
+                    dlgOk.DoModal(MesFilms.ID_MyFilmsDetail);
                 } 
             }
         }
