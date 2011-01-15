@@ -123,8 +123,7 @@
   <data name="Config_Name.ToolTip" xml:space="preserve">
     <value>Enter a unique name for each configuration.
 You can have more than one configuration referencing a single database, or multiple configurations referencing multiple databases.  
-Configurations can be password protected in the ‘Security’ section below, to restrict access to children for example.
-</value>
+Configurations can be password protected in the ‘Security’ section below, to restrict access to children for example.</value>
   </data>
   <data name="PathStorage.ToolTip" xml:space="preserve">
     <value>Enter the full path to the folder/s containing the movie files.  
@@ -279,28 +278,32 @@ Enter the full path (or use the browse button) to your folder containing the vie
 Select the option 'Use the Default DVD Cover for missing thumbs' if you wish to use a DVD cover 
 when no thumb for views is available.</value>
   </data>
-  <data name="groupBox23.ToolTip" xml:space="preserve">
-    <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
-These image files must have the same name as the movie.  
-Enter the full path (or use the browse button) to the folder containing the fanart image files.
-
-Select the option “Use the Default DVD cover for missing Fanart” to have the movie's DVD cover 
-displayed as a background image for movies without a matching Fanart file. Becafull with that option you often
-get a distorded picture as covers and fanarts don't have the same size.
+  <data name="PathStorageTrailer.ToolTip" xml:space="preserve">
+    <value>Enter or select the path for extended search for trailers.
+MyFilms will try to find matching media files based on the title chosen for trailersearch 
+and media files in subdirectories containing the movie name.</value>
+  </data>
+  <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
+    <value>If Trailer file is not found with the 'DB Item for storing Trailer Infos' field, you 
+can search the trailer file with the movie Name.
+Validate that option for it and give the Title used for the search.
+Attention: Might degrade performace!
 </value>
+  </data>
+  <data name="AntStorageTrailer.ToolTip" xml:space="preserve">
+    <value>Choose the DB fireld where MyFilms should store the infos about trailers.
+"Borrower" is a good recommendation, as it's not commonly used. However make sure, yoiu do not use this field for other purposes (e.g. seen status)</value>
   </data>
   <data name="groupBox24.ToolTip" xml:space="preserve">
     <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
 and thus to integrate trailers into MyFilms.
 Trailer can be searched within the plugin and autoregistered.
-GUI allows to show if a trailer is present (registered) and play it.</value>
-  </data>
-  <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
-    <value>If Trailer file is not found with the 'Ant Item for storing Trailer Infos' field, you 
-can search the trailer file with the movie Name.
-Validate that option for it and give the Title used for the search.
-Attention: Might degrade performace!
-</value>
+GUI allows to show if a trailer is present (registered) and play it.
+By default, the search includes mediafiles in the directory of the main movie and it's subdirectories, 
+searching for mediafiles containing "trlr" or "trailer" in the filename.
+So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
+and make sure they are named accordingly (many downloader utilities do it this way).
+You can add an additional trailer searchpath that will search and register for media files containing the movie's title.</value>
   </data>
   <data name="DefaultCover.ToolTip" xml:space="preserve">
     <value>Enter the full path and file name of the image file that you wish to use as the default DVD cover image.  
@@ -920,12 +923,6 @@ Will show "Moviecollection" with 3 items in it.</value>
         /P34AAAAAB/8/fgAAAAAH/z9/AAAAAA//P3+AAAAAH/8/f4AAAAA//z9/wAAAAH//P3/wAAAA//8/f/g
         AAAP//z9//gAAB///P3//gAA///8/f//+B////z9/////////P3////////8/f////////z9////////
         /P0=
-</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value>Enter a unique name for each configuration.  
-You can have more than one configuration referencing a single database, or multiple configurations referencing multiple databases.  
-Configurations can be password protected in the ‘Security’ section below, to restrict access to children for example.
 </value>
   </data>
 </root>

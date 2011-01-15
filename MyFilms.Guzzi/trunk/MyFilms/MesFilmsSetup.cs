@@ -133,8 +133,14 @@ namespace MesFilms
                 }
                 AntIdentItem.Items.Add(dc.ColumnName);
                 AntTitle2.Items.Add(dc.ColumnName);
-                AntFilterItem1.Items.Add(dc.ColumnName);
-                AntFilterItem2.Items.Add(dc.ColumnName);
+                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "Length_Num"))
+                {
+                  AntFilterItem1.Items.Add(dc.ColumnName);
+                  AntFilterItem2.Items.Add(dc.ColumnName);
+                  AntItem1.Items.Add(dc.ColumnName);
+                  AntItem2.Items.Add(dc.ColumnName);
+                  AntItem3.Items.Add(dc.ColumnName);
+                }
                 cbfdupdate.Items.Add(dc.ColumnName);
                 CmdPar.Items.Add(dc.ColumnName);
                 if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "DateAdded") && (dc.ColumnName != "Length_Num"))
@@ -169,10 +175,6 @@ namespace MesFilms
                 }
                 AntUpdItem1.Items.Add(dc.ColumnName);
                 AntUpdItem2.Items.Add(dc.ColumnName);
-                AntItem1.Items.Add(dc.ColumnName);
-                AntItem2.Items.Add(dc.ColumnName);
-                AntItem3.Items.Add(dc.ColumnName);
-
             }
             AntViewText_Change();
             AntSort_Change();

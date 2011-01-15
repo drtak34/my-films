@@ -220,8 +220,6 @@ namespace MesFilms
           this.chkDfltViews = new System.Windows.Forms.CheckBox();
           this.label29 = new System.Windows.Forms.Label();
           this.MesFilmsViews = new System.Windows.Forms.TextBox();
-          this.groupBox23 = new System.Windows.Forms.GroupBox();
-          this.label19 = new System.Windows.Forms.Label();
           this.SearchSubDirsTrailer = new System.Windows.Forms.CheckBox();
           this.btnTrailer = new System.Windows.Forms.Button();
           this.PathStorageTrailer = new System.Windows.Forms.TextBox();
@@ -449,7 +447,6 @@ namespace MesFilms
           this.groupBox_GrabberOptions.SuspendLayout();
           this.Fanart.SuspendLayout();
           this.groupBox22.SuspendLayout();
-          this.groupBox23.SuspendLayout();
           this.groupBox24.SuspendLayout();
           this.groupBox25.SuspendLayout();
           this.groupBox_PreLaunchingCommand.SuspendLayout();
@@ -1634,8 +1631,8 @@ namespace MesFilms
           this.SearchFileName.TabIndex = 66;
           this.SearchFileName.Text = "Search by Movie\'s Name";
           this.ToolTip1.SetToolTip(this.SearchFileName, "If file is not found with the \'Ant Item for Storage Info\' field, you \r\ncan search" +
-                  " the file with the movie Name.\r\nValidate that option for it and give the Title u" +
-                  "sed for the search.\r\n");
+                  " the file with the movie Name.\r\nSelect that option for it and give the Title use" +
+                  "d for the search.\r\n");
           this.SearchFileName.UseVisualStyleBackColor = true;
           // 
           // AntIdentItem
@@ -1764,34 +1761,11 @@ namespace MesFilms
           this.MesFilmsViews.Size = new System.Drawing.Size(315, 20);
           this.MesFilmsViews.TabIndex = 72;
           // 
-          // groupBox23
-          // 
-          this.groupBox23.Controls.Add(this.label19);
-          this.groupBox23.Controls.Add(this.SearchSubDirsTrailer);
-          this.groupBox23.Controls.Add(this.btnTrailer);
-          this.groupBox23.Controls.Add(this.PathStorageTrailer);
-          this.groupBox23.Controls.Add(this.label34);
-          this.groupBox23.Location = new System.Drawing.Point(29, 200);
-          this.groupBox23.Name = "groupBox23";
-          this.groupBox23.Size = new System.Drawing.Size(681, 121);
-          this.groupBox23.TabIndex = 72;
-          this.groupBox23.TabStop = false;
-          this.groupBox23.Text = "Trailer Searchpath (for registering trailers with movies)";
-          this.ToolTip1.SetToolTip(this.groupBox23, resources.GetString("groupBox23.ToolTip"));
-          // 
-          // label19
-          // 
-          this.label19.AutoSize = true;
-          this.label19.Location = new System.Drawing.Point(24, 33);
-          this.label19.Name = "label19";
-          this.label19.Size = new System.Drawing.Size(322, 13);
-          this.label19.TabIndex = 71;
-          this.label19.Text = "Default is searching trailers in movie directory and it\'s subdirectories";
-          // 
           // SearchSubDirsTrailer
           // 
           this.SearchSubDirsTrailer.AutoSize = true;
-          this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 83);
+          this.SearchSubDirsTrailer.Enabled = false;
+          this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 94);
           this.SearchSubDirsTrailer.Name = "SearchSubDirsTrailer";
           this.SearchSubDirsTrailer.Size = new System.Drawing.Size(130, 17);
           this.SearchSubDirsTrailer.TabIndex = 74;
@@ -1799,11 +1773,12 @@ namespace MesFilms
           this.ToolTip1.SetToolTip(this.SearchSubDirsTrailer, "Select this option if you want the search for the trailer files\r\nto include sub-f" +
                   "olders of the defined path.\r\n");
           this.SearchSubDirsTrailer.UseVisualStyleBackColor = true;
+          this.SearchSubDirsTrailer.Visible = false;
           this.SearchSubDirsTrailer.CheckedChanged += new System.EventHandler(this.SearchSubDirsTrailer_CheckedChanged);
           // 
           // btnTrailer
           // 
-          this.btnTrailer.Location = new System.Drawing.Point(634, 52);
+          this.btnTrailer.Location = new System.Drawing.Point(634, 63);
           this.btnTrailer.Name = "btnTrailer";
           this.btnTrailer.Size = new System.Drawing.Size(32, 23);
           this.btnTrailer.TabIndex = 70;
@@ -1813,16 +1788,17 @@ namespace MesFilms
           // 
           // PathStorageTrailer
           // 
-          this.PathStorageTrailer.Location = new System.Drawing.Point(190, 54);
+          this.PathStorageTrailer.Location = new System.Drawing.Point(190, 65);
           this.PathStorageTrailer.Name = "PathStorageTrailer";
           this.PathStorageTrailer.Size = new System.Drawing.Size(428, 20);
           this.PathStorageTrailer.TabIndex = 68;
+          this.ToolTip1.SetToolTip(this.PathStorageTrailer, resources.GetString("PathStorageTrailer.ToolTip"));
           this.PathStorageTrailer.TextChanged += new System.EventHandler(this.PathStorageTrailer_TextChanged);
           // 
           // label34
           // 
           this.label34.AutoSize = true;
-          this.label34.Location = new System.Drawing.Point(24, 57);
+          this.label34.Location = new System.Drawing.Point(24, 68);
           this.label34.Name = "label34";
           this.label34.Size = new System.Drawing.Size(143, 13);
           this.label34.TabIndex = 69;
@@ -1830,15 +1806,19 @@ namespace MesFilms
           // 
           // groupBox24
           // 
+          this.groupBox24.Controls.Add(this.SearchSubDirsTrailer);
           this.groupBox24.Controls.Add(this.ShowTrailerWhenStartingMovie);
+          this.groupBox24.Controls.Add(this.btnTrailer);
           this.groupBox24.Controls.Add(this.ShowTrailerPlayDialog);
+          this.groupBox24.Controls.Add(this.PathStorageTrailer);
           this.groupBox24.Controls.Add(this.SearchFileNameTrailer);
+          this.groupBox24.Controls.Add(this.label34);
           this.groupBox24.Controls.Add(this.ItemSearchFileNameTrailer);
           this.groupBox24.Controls.Add(this.AntStorageTrailer);
           this.groupBox24.Controls.Add(this.label35);
           this.groupBox24.Location = new System.Drawing.Point(29, 30);
           this.groupBox24.Name = "groupBox24";
-          this.groupBox24.Size = new System.Drawing.Size(681, 164);
+          this.groupBox24.Size = new System.Drawing.Size(681, 238);
           this.groupBox24.TabIndex = 73;
           this.groupBox24.TabStop = false;
           this.groupBox24.Text = "DB Item for storing trailerinfo (borrower recommended)";
@@ -1848,50 +1828,58 @@ namespace MesFilms
           // 
           this.ShowTrailerWhenStartingMovie.AutoSize = true;
           this.ShowTrailerWhenStartingMovie.Enabled = false;
-          this.ShowTrailerWhenStartingMovie.Location = new System.Drawing.Point(27, 125);
+          this.ShowTrailerWhenStartingMovie.Location = new System.Drawing.Point(27, 197);
           this.ShowTrailerWhenStartingMovie.Name = "ShowTrailerWhenStartingMovie";
           this.ShowTrailerWhenStartingMovie.Size = new System.Drawing.Size(228, 17);
           this.ShowTrailerWhenStartingMovie.TabIndex = 73;
           this.ShowTrailerWhenStartingMovie.Text = "Show Trailer as Movie Intro (Cinema mode)";
-          this.ToolTip1.SetToolTip(this.ShowTrailerWhenStartingMovie, "If checked, a trailer from same category as movie \r\nwill be played before startin" +
-                  "g the movie itself.");
+          this.ToolTip1.SetToolTip(this.ShowTrailerWhenStartingMovie, "-- Coming in future version --\r\nIf checked, a trailer from same category as movie" +
+                  " \r\nwill be played before starting the movie itself.");
           this.ShowTrailerWhenStartingMovie.UseVisualStyleBackColor = true;
+          this.ShowTrailerWhenStartingMovie.Visible = false;
           // 
           // ShowTrailerPlayDialog
           // 
           this.ShowTrailerPlayDialog.AutoSize = true;
           this.ShowTrailerPlayDialog.Enabled = false;
-          this.ShowTrailerPlayDialog.Location = new System.Drawing.Point(27, 94);
+          this.ShowTrailerPlayDialog.Location = new System.Drawing.Point(27, 166);
           this.ShowTrailerPlayDialog.Name = "ShowTrailerPlayDialog";
           this.ShowTrailerPlayDialog.Size = new System.Drawing.Size(138, 17);
           this.ShowTrailerPlayDialog.TabIndex = 72;
           this.ShowTrailerPlayDialog.Text = "Show Trailer Userdialog";
-          this.ToolTip1.SetToolTip(this.ShowTrailerPlayDialog, "If checked, a dialog will be displayed to select trailer, \r\nif more than one trai" +
-                  "ler is present.");
+          this.ToolTip1.SetToolTip(this.ShowTrailerPlayDialog, "-- Coming in future version --\r\nIf checked, a dialog will be displayed to select " +
+                  "trailer, \r\nif more than one trailer is present.");
           this.ShowTrailerPlayDialog.UseVisualStyleBackColor = true;
+          this.ShowTrailerPlayDialog.Visible = false;
           // 
           // SearchFileNameTrailer
           // 
           this.SearchFileNameTrailer.AutoSize = true;
-          this.SearchFileNameTrailer.Location = new System.Drawing.Point(27, 62);
+          this.SearchFileNameTrailer.Enabled = false;
+          this.SearchFileNameTrailer.Location = new System.Drawing.Point(27, 142);
           this.SearchFileNameTrailer.Name = "SearchFileNameTrailer";
           this.SearchFileNameTrailer.Size = new System.Drawing.Size(144, 17);
           this.SearchFileNameTrailer.TabIndex = 71;
           this.SearchFileNameTrailer.Text = "Search by Movie\'s Name";
           this.ToolTip1.SetToolTip(this.SearchFileNameTrailer, resources.GetString("SearchFileNameTrailer.ToolTip"));
           this.SearchFileNameTrailer.UseVisualStyleBackColor = true;
+          this.SearchFileNameTrailer.Visible = false;
           // 
           // ItemSearchFileNameTrailer
           // 
+          this.ItemSearchFileNameTrailer.Enabled = false;
           this.ItemSearchFileNameTrailer.FormattingEnabled = true;
           this.ItemSearchFileNameTrailer.Items.AddRange(new object[] {
             "OriginalTitle",
             "TranslatedTitle",
             "FormattedTitle"});
-          this.ItemSearchFileNameTrailer.Location = new System.Drawing.Point(190, 60);
+          this.ItemSearchFileNameTrailer.Location = new System.Drawing.Point(190, 140);
           this.ItemSearchFileNameTrailer.Name = "ItemSearchFileNameTrailer";
           this.ItemSearchFileNameTrailer.Size = new System.Drawing.Size(185, 21);
           this.ItemSearchFileNameTrailer.TabIndex = 70;
+          this.ToolTip1.SetToolTip(this.ItemSearchFileNameTrailer, "Choose the title that should be used for matching mediafiles to the movies in you" +
+                  "r DB.\r\n");
+          this.ItemSearchFileNameTrailer.Visible = false;
           // 
           // AntStorageTrailer
           // 
@@ -1899,6 +1887,7 @@ namespace MesFilms
           this.AntStorageTrailer.Name = "AntStorageTrailer";
           this.AntStorageTrailer.Size = new System.Drawing.Size(185, 21);
           this.AntStorageTrailer.TabIndex = 68;
+          this.ToolTip1.SetToolTip(this.AntStorageTrailer, resources.GetString("AntStorageTrailer.ToolTip"));
           this.AntStorageTrailer.TextChanged += new System.EventHandler(this.AntStorageTrailer_TextChanged);
           // 
           // label35
@@ -2249,6 +2238,8 @@ namespace MesFilms
           this.CmdPar.Name = "CmdPar";
           this.CmdPar.Size = new System.Drawing.Size(196, 21);
           this.CmdPar.TabIndex = 36;
+          this.ToolTip1.SetToolTip(this.CmdPar, "The value of the  chosen DB-field will be used as commandline option for the appl" +
+                  "ication laiunched");
           // 
           // CmdExe
           // 
@@ -2256,6 +2247,8 @@ namespace MesFilms
           this.CmdExe.Name = "CmdExe";
           this.CmdExe.Size = new System.Drawing.Size(196, 20);
           this.CmdExe.TabIndex = 37;
+          this.ToolTip1.SetToolTip(this.CmdExe, "Enter the commandline to an application you want to launch before the movie is st" +
+                  "arted in internal player");
           // 
           // groupBox_ArtistImages
           // 
@@ -3233,6 +3226,7 @@ namespace MesFilms
           this.Tab_General.Size = new System.Drawing.Size(747, 354);
           this.Tab_General.TabIndex = 0;
           this.Tab_General.Text = "General";
+          this.ToolTip1.SetToolTip(this.Tab_General, "Basic configuration like selecting movie catalog, titles to display, etc.");
           this.Tab_General.UseVisualStyleBackColor = true;
           // 
           // lblYellowShowRequiredItems
@@ -3412,13 +3406,13 @@ namespace MesFilms
           // Tab_Trailer
           // 
           this.Tab_Trailer.Controls.Add(this.groupBox24);
-          this.Tab_Trailer.Controls.Add(this.groupBox23);
           this.Tab_Trailer.Location = new System.Drawing.Point(4, 22);
           this.Tab_Trailer.Name = "Tab_Trailer";
           this.Tab_Trailer.Padding = new System.Windows.Forms.Padding(3);
           this.Tab_Trailer.Size = new System.Drawing.Size(747, 354);
           this.Tab_Trailer.TabIndex = 7;
           this.Tab_Trailer.Text = "Trailer";
+          this.ToolTip1.SetToolTip(this.Tab_Trailer, "Setup for trailer options like search pathes and options for behaviour in GUI");
           this.Tab_Trailer.UseVisualStyleBackColor = true;
           // 
           // Tab_Views
@@ -3434,6 +3428,7 @@ namespace MesFilms
           this.Tab_Views.Size = new System.Drawing.Size(747, 354);
           this.Tab_Views.TabIndex = 1;
           this.Tab_Views.Text = "Views/Filter";
+          this.ToolTip1.SetToolTip(this.Tab_Views, "Setup for userdefined views and filters");
           this.Tab_Views.UseVisualStyleBackColor = true;
           // 
           // Tab_Search
@@ -3446,6 +3441,7 @@ namespace MesFilms
           this.Tab_Search.Size = new System.Drawing.Size(747, 354);
           this.Tab_Search.TabIndex = 9;
           this.Tab_Search.Text = "Search";
+          this.ToolTip1.SetToolTip(this.Tab_Search, "Setup for userdefined searches");
           this.Tab_Search.UseVisualStyleBackColor = true;
           // 
           // groupBoxSearchByProperties
@@ -3510,6 +3506,7 @@ namespace MesFilms
           this.Tab_Update.Size = new System.Drawing.Size(747, 354);
           this.Tab_Update.TabIndex = 3;
           this.Tab_Update.Text = "Update";
+          this.Tab_Update.ToolTipText = "Setup for update options (updates to values from GUI)";
           this.Tab_Update.UseVisualStyleBackColor = true;
           // 
           // groupBox2
@@ -3588,6 +3585,7 @@ namespace MesFilms
           this.Tab_Grabber.Size = new System.Drawing.Size(747, 354);
           this.Tab_Grabber.TabIndex = 4;
           this.Tab_Grabber.Text = "Grabber";
+          this.Tab_Grabber.ToolTipText = "Setup for internetupdates and basic configuration for AMCupdater";
           this.Tab_Grabber.UseVisualStyleBackColor = true;
           // 
           // Tab_Artwork
@@ -3602,6 +3600,7 @@ namespace MesFilms
           this.Tab_Artwork.Size = new System.Drawing.Size(747, 354);
           this.Tab_Artwork.TabIndex = 5;
           this.Tab_Artwork.Text = "Artwork";
+          this.Tab_Artwork.ToolTipText = "Setup for artwork, like pathes to coverart, person images etc.";
           this.Tab_Artwork.UseVisualStyleBackColor = true;
           // 
           // groupBox1
@@ -3693,6 +3692,7 @@ namespace MesFilms
           this.Tab_Logos.Size = new System.Drawing.Size(747, 354);
           this.Tab_Logos.TabIndex = 6;
           this.Tab_Logos.Text = "Logos";
+          this.Tab_Logos.ToolTipText = "Setup for logos";
           this.Tab_Logos.UseVisualStyleBackColor = true;
           // 
           // btnUpdate
@@ -3939,6 +3939,7 @@ namespace MesFilms
           this.Tab_WakeOnLan.Size = new System.Drawing.Size(747, 354);
           this.Tab_WakeOnLan.TabIndex = 8;
           this.Tab_WakeOnLan.Text = "WakeOnLAN";
+          this.Tab_WakeOnLan.ToolTipText = "Setup for WakeOnLan features";
           this.Tab_WakeOnLan.UseVisualStyleBackColor = true;
           // 
           // Tab_ExternalCatalogs
@@ -3952,6 +3953,7 @@ namespace MesFilms
           this.Tab_ExternalCatalogs.Size = new System.Drawing.Size(747, 354);
           this.Tab_ExternalCatalogs.TabIndex = 2;
           this.Tab_ExternalCatalogs.Text = "External Catalogs";
+          this.Tab_ExternalCatalogs.ToolTipText = "Options for external catalogs (only applies if not using ANT movie catalog)";
           this.Tab_ExternalCatalogs.UseVisualStyleBackColor = true;
           // 
           // groupBox_MovieCollector
@@ -4152,7 +4154,6 @@ namespace MesFilms
           this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
           this.Name = "MesFilmsSetup";
           this.Text = "MyFilms Setup";
-          this.ToolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
           this.Load += new System.EventHandler(this.MesFilmsSetup_Load);
           this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MesFilmsSetup_Quit);
           this.groupBox_SortByItem.ResumeLayout(false);
@@ -4177,8 +4178,6 @@ namespace MesFilms
           this.Fanart.PerformLayout();
           this.groupBox22.ResumeLayout(false);
           this.groupBox22.PerformLayout();
-          this.groupBox23.ResumeLayout(false);
-          this.groupBox23.PerformLayout();
           this.groupBox24.ResumeLayout(false);
           this.groupBox24.PerformLayout();
           this.groupBox25.ResumeLayout(false);
@@ -4452,7 +4451,6 @@ namespace MesFilms
         private TextBox AntUpdList;
         private ComboBox AntUpdField;
         private TabPage Tab_Trailer;
-        private GroupBox groupBox23;
         private Button btnTrailer;
         private TextBox PathStorageTrailer;
         private Label label34;
@@ -4466,7 +4464,6 @@ namespace MesFilms
         private TextBox NAS_Name_1;
         private Label label36;
         private CheckBox check_WOL_Userdialog;
-        private Label label19;
         private Label label_NAS_Server_1_Name;
         private Label label_NAS_Server_1_MAC;
         private TextBox NAS_MAC_1;
