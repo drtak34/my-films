@@ -2259,8 +2259,6 @@ namespace MesFilms
                     facadeView.CurrentLayout = GUIFacadeControl.Layout.List;
                     break;
             }
-
-
 #endif
         }
         //--------------------------------------------------------------------------------------------
@@ -2268,6 +2266,7 @@ namespace MesFilms
         //--------------------------------------------------------------------------------------------
         private void Change_view(string choiceView)
         {
+            LogMyFilms.Debug("MF: Change_View called with '" + choiceView.ToString() + "'");
             conf.Boolview = false;
             conf.Boolstorage = false;
             XmlConfig XmlConfig = new XmlConfig();
@@ -2558,63 +2557,83 @@ namespace MesFilms
                     return;
 
                 case "globaloptions":
+                    LogMyFilms.Debug("MF: Building menu globaloptions");
 
-                    GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-                    if (dlg1 == null) return;
-                    dlg1.Reset();
-                    dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                    GUIDialogMenu dlg3 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                    LogMyFilms.Debug("MF: Start creating submenu for globaloptions");
+                    if (dlg3 == null) return;
+                    dlg3.Reset();
+                    dlg3.SetHeading(GUILocalizeStrings.Get(924)); // menu
                     System.Collections.Generic.List<string> choiceViewGlobalOptions = new System.Collections.Generic.List<string>();
 
+                    LogMyFilms.Debug("MF: try adding globalunwatchedfilter");
                     // Change global Unwatchedfilteroption
                     // if ((MesFilms.conf.CheckWatched) || (MesFilms.conf.StrSupPlayer))// Make it conditoional, so only displayed, if options enabled in setup !
-                    if (MesFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
-                    if (!MesFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
+                    if (MesFilms.conf.GlobalUnwatchedOnly) dlg3.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
+                    if (!MesFilms.conf.GlobalUnwatchedOnly) dlg3.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("globalunwatchedfilter");
+                    LogMyFilms.Debug("MF: added globalunwatchedfilter");
 
+                    LogMyFilms.Debug("MF: try adding filterdbtrailer");
                     // Change global MovieFilter (Only Movies with Trailer)
-                    if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
-                    if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
+                    if (GlobalFilterTrailersOnly) dlg3.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
+                    if (!GlobalFilterTrailersOnly) dlg3.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("filterdbtrailer");
+                    LogMyFilms.Debug("MF: added filterdbtrailer");
 
                     // Change global MovieFilter (Only Movies with highRating)
-                    if (GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798628)));
-                    if (!GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798629)));
+                    if (GlobalFilterMinRating) dlg3.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798628)));
+                    if (!GlobalFilterMinRating) dlg3.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("filterdbrating");
+                    LogMyFilms.Debug("MF: added filterdbrating");
 
                     // Change Value for global MovieFilter (Only Movies with highRating)
-                    dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MesFilms.conf.StrAntFilterMinRating.ToString()));
+                    dlg3.Add(string.Format(GUILocalizeStrings.Get(10798693), MesFilms.conf.StrAntFilterMinRating.ToString()));
                     choiceViewGlobalOptions.Add("filterdbsetrating");
+                    LogMyFilms.Debug("MF: added filterdbsetrating");
 
                     if (MesFilms.conf.StrGrabber)
                     {
                         // From ZebopnsMerge
+                        LogMyFilms.Debug("MF: try adding choosescript");
                         //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
-                        if (MesFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));   // Choose grabber script for that session (status on)
-                        if (!MesFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));   // Choose grabber script for that session (status off)
+                        if (MesFilms.conf.StrGrabber_ChooseScript) dlg3.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));   // Choose grabber script for that session (status on)
+                        if (!MesFilms.conf.StrGrabber_ChooseScript) dlg3.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));   // Choose grabber script for that session (status off)
                         choiceViewGlobalOptions.Add("choosescript");
+                        LogMyFilms.Debug("MF: added choosescript");
 
                         //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), MesFilms.conf.StrGrabber_Always.ToString(), (!MesFilms.conf.StrGrabber_Always).ToString()));   // Change grabber find trying best match option 
-                        if (MesFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));   // Change grabber find trying best match option (status on)
-                        if (!MesFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));   // Change grabber find trying best match option (status off)
+                        LogMyFilms.Debug("MF: try adding findbestmatch");
+                        if (MesFilms.conf.StrGrabber_Always) dlg3.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));   // Change grabber find trying best match option (status on)
+                        if (!MesFilms.conf.StrGrabber_Always) dlg3.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));   // Change grabber find trying best match option (status off)
                         choiceViewGlobalOptions.Add("findbestmatch");
+                        LogMyFilms.Debug("MF: added findbestmatch");
                     }
 
                     //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), MesFilms.conf.WindowsFileDialog.ToString(), (!MesFilms.conf.WindowsFileDialog).ToString()));  // Using Windows File Dialog File for that session
-                    if (MesFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628)));   // Using Windows File Dialog File for that session (status on)
-                    if (!MesFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));   // Using Windows File Dialog File for that session (status off)
+                    LogMyFilms.Debug("MF: try adding windowsfiledialog");
+                    if (MesFilms.conf.WindowsFileDialog) dlg3.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628)));   // Using Windows File Dialog File for that session (status on)
+                    if (!MesFilms.conf.WindowsFileDialog) dlg3.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));   // Using Windows File Dialog File for that session (status off)
                     choiceViewGlobalOptions.Add("windowsfiledialog");
+                    LogMyFilms.Debug("MF: added windowsfiledialog");
 
-                    if (MesFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798628)));
-                    if (!MesFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
+                    LogMyFilms.Debug("MF: try adding alwaysdefaultview");
+                    if (MesFilms.conf.AlwaysDefaultView) dlg3.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798628)));
+                    if (!MesFilms.conf.AlwaysDefaultView) dlg3.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("alwaysdefaultview");
+                    LogMyFilms.Debug("MF: added alwaysdefaultview");
 
-                    dlg1.DoModal(GetID);
+                    dlg3.DoModal(GetID);
 
-                    if (dlg1.SelectedLabel == -1)
+                    LogMyFilms.Debug("MF: Get userchoice: '" + dlg3.SelectedLabel.ToString() + "' and now trying to call new submenu ...");
+                    if (dlg3.SelectedLabel == -1)
                     {
                         return;
                     }
-                    Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
+
+                    LogMyFilms.Debug("MF: Call nor menu with option: '" + choiceViewGlobalOptions[dlg3.SelectedLabel].ToString() + "'");
+
+                    Change_view(choiceViewGlobalOptions[dlg3.SelectedLabel].ToLower());
                     return;
 
                 case "globalupdates":

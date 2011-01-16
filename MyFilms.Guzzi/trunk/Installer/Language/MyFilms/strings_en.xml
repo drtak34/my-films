@@ -65,11 +65,11 @@
     <String id="107987">Films</String>
     <String id="1079861">Update DB (AMC Updater)</String>
     <String id="1079862">Download fanart (selected film)</String>
-    <String id="1079863">Switch grabber option: Manually choose grabber script from {0} to {1}</String>
-    <String id="1079864">Switch grabber option: Try to find best match from {0} to {1}</String>
-    <String id="1079865">Switch update option: Use standard Windows file dialog... from {0} to {1}</String>
+    <String id="1079863">Switch grabber option: 'manually choose grabber script' ({0})</String>
+    <String id="1079864">Switch grabber option: 'autoselect best match' ({0})</String>
+    <String id="1079865">Switch update option: 'use standard windows file dialog' ({0})</String>
     <String id="1079866">Search related films by person</String>
-    <String id="1079867"> Select person</String>
+    <String id="1079867">Select person</String>
     <String id="1079868">Actor</String>
     <String id="1079869">Director</String>
     <String id="1079870">Selection</String>

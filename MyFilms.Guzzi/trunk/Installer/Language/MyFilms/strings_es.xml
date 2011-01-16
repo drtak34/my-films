@@ -65,9 +65,9 @@
     <String id="107987">My Films</String>
     <String id="1079861">Actualizar BD (AMCUpdater)</String>
     <String id="1079862">Descargar fondos de la película</String>
-    <String id="1079863">Cambiar opción de colector 'usar siempre ese script' desde {0} hasta {1}</String>
-    <String id="1079864">Cambiar opción de colector 'intentar encontrar la mejor coincidencia' desde {0} hasta {1}</String>
-    <String id="1079865">Cambiar opción de actualización 'Usar diálogos por defecto de windows...' desde {0} hasta {1}</String>
+    <String id="1079863">Cambiar opción de colector 'usar siempre ese script' ({0})</String>
+    <String id="1079864">Cambiar opción de colector 'intentar encontrar la mejor coincidencia' ({0})</String>
+    <String id="1079865">Cambiar opción de actualización 'Usar diálogos por defecto de windows...' ({0})</String>
     <String id="1079866">Buscar películas que tengan en común personas que intervienen</String>
     <String id="1079867">Seleccionar persona</String>
     <String id="1079868">Intérprete</String>
