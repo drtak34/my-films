@@ -6,5 +6,5 @@ F:
 cd F:\Team Mediaportal
 dir >>%1\postbuild.log
 
-copy %1\obj\Debug\MesFilms.dll MediaPortal\trunk\MediaPortal\xbmc\bin\Debug\plugins\Windows
+rem copy %1\obj\Debug\MesFilms.dll MediaPortal\trunk\MediaPortal\xbmc\bin\Debug\plugins\Windows
 
