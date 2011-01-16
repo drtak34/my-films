@@ -40,6 +40,7 @@ using IWshRuntimeLibrary;
 namespace MesFilms
 {
   using global::MesFilms.MyFilms.CatalogConverter;
+  using global::MesFilms.MyFilms.Configuration;
   using global::MesFilms.MyFilms.Utils;
 
   public partial class MesFilmsSetup : Form

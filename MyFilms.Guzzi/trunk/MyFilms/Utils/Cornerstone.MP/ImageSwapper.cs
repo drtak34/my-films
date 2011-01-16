@@ -1,6 +1,9 @@
 ﻿namespace MesFilms.MyFilms.Utils.Cornerstone.MP {
-  using MediaPortal.GUI.Library;
-  using NLog;
+using System.Collections.Generic;
+using System.Text;
+using MediaPortal.GUI.Library;
+using NLog;
+using System.Threading;
 
   /// <summary>
     /// This class takes two GUIImage objects so that you can treat them as one. When you assign

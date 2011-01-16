@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace MesFilms.MyFilms
+﻿namespace MesFilms.MyFilms.Configuration
 {
-    public partial class MesFilmsInputBox : Form
+  using System;
+  using System.Windows.Forms;
+
+  public partial class MesFilmsInputBox : Form
     {
         public MesFilmsInputBox()
         {

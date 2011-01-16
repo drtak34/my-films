@@ -137,6 +137,12 @@
     </Compile>
     <Compile Include="MyFilms\BaseMesFilms.cs" />
     <Compile Include="MyFilms\CatalogConverter\DvdProfiler.cs" />
+    <Compile Include="MyFilms\Configuration\MesFilmsInputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyFilms\Configuration\MesFilmsInputBox.Designer.cs">
+      <DependentUpon>MesFilmsInputBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyFilms\Configuration\TraktConfiguration.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -161,12 +167,6 @@
     <Compile Include="MyFilms\Utils\Cornerstone.MP\ImageSwapper.cs" />
     <Compile Include="MyFilms\Utils\FileGrabber.cs" />
     <Compile Include="MyFilms\MesFilmsActors.cs" />
-    <Compile Include="MyFilms\MesFilmsInputBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MyFilms\MesFilmsInputBox.Designer.cs">
-      <DependentUpon>MesFilmsInputBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="MyFilms\MesFilmsThumbs.cs" />
     <Compile Include="MyFilms\Configuration.cs" />
     <Compile Include="MyFilms\Utils\CryptageTexte.cs" />
@@ -257,9 +257,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyFilms\MesFilmsInputBox.resx">
-      <DependentUpon>MesFilmsInputBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MyFilms\Resources\film-reel-128x128.png" />
     <EmbeddedResource Include="MyFilms\Resources\film-reel-128x128-faded.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -298,6 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MyFilms\Resources\MyFilmsIcon.ico" />
+    <EmbeddedResource Include="MyFilms\Configuration\MesFilmsInputBox.resx">
+      <DependentUpon>MesFilmsInputBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyFilms\Resources\trakt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

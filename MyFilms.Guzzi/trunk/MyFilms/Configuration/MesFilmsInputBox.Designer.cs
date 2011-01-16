@@ -1,4 +1,4 @@
-﻿namespace MesFilms.MyFilms
+﻿namespace MesFilms.MyFilms.Configuration
 {
     partial class MesFilmsInputBox
     {

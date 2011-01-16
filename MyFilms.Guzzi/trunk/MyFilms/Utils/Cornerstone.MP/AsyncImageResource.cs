@@ -1,15 +1,12 @@
 ﻿namespace MesFilms.MyFilms.Utils.Cornerstone.MP {
-  using NLog;
-
-  using System;
-  using System.Threading;
-  using System.Drawing;
-  using System.Runtime.InteropServices;
-  using System.Reflection;
-
-  using MediaPortal.GUI.Library;
-
-  using System.IO;
+using NLog;
+using System;
+using System.Threading;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Reflection;
+using MediaPortal.GUI.Library;
+using System.IO;
 
   public delegate void AsyncImageLoadComplete(AsyncImageResource image);
     
