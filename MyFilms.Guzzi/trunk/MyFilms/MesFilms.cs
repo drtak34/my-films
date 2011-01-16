@@ -2102,7 +2102,7 @@ namespace MesFilms
                 GlobalFilterString = string.Empty; // reset global filterstring
                 MovieScrobbling = false; // reset scrobbler filter setting
                 if (conf.GlobalUnwatchedOnly) // Reset GlobalUnwatchedFilter to the setup default (can be changed via GUI menu)
-                  GlobalUnwatchedFilterString = "Checked not like 'true' AND ";
+                  GlobalUnwatchedFilterString = "Checked like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
                 else GlobalUnwatchedFilterString = "";
             }
             if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
@@ -2689,7 +2689,7 @@ namespace MesFilms
                     MesFilms.conf.GlobalUnwatchedOnly = !MesFilms.conf.GlobalUnwatchedOnly;
                     LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalUnwatchedFilterString + "'");
                     if (conf.GlobalUnwatchedOnly)
-                      GlobalUnwatchedFilterString = "Checked not like 'true' AND ";
+                      GlobalUnwatchedFilterString = "Checked like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
                     else 
                       GlobalUnwatchedFilterString = "";
                     if (MesFilms.conf.AlwaysDefaultView)

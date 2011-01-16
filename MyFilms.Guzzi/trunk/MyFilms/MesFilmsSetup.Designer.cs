@@ -440,6 +440,8 @@ namespace MesFilms
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.textBoxGlobalUnwatchedOnlyValue = new System.Windows.Forms.TextBox();
+          this.lblUnwatchedItemsValue = new System.Windows.Forms.Label();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -549,7 +551,6 @@ namespace MesFilms
           this.PathStorage.Size = new System.Drawing.Size(268, 20);
           this.PathStorage.TabIndex = 54;
           this.ToolTip1.SetToolTip(this.PathStorage, resources.GetString("PathStorage.ToolTip"));
-          this.PathStorage.TextChanged += new System.EventHandler(this.PathStorage_TextChanged);
           // 
           // AntStorage
           // 
@@ -622,7 +623,6 @@ namespace MesFilms
           this.AntTSort2.Name = "AntTSort2";
           this.AntTSort2.Size = new System.Drawing.Size(173, 20);
           this.AntTSort2.TabIndex = 39;
-          this.AntTSort2.TextChanged += new System.EventHandler(this.AntTSort2_TextChanged);
           // 
           // AntSort1
           // 
@@ -640,7 +640,6 @@ namespace MesFilms
           this.AntTSort1.Name = "AntTSort1";
           this.AntTSort1.Size = new System.Drawing.Size(173, 20);
           this.AntTSort1.TabIndex = 37;
-          this.AntTSort1.TextChanged += new System.EventHandler(this.AntTSort1_TextChanged);
           // 
           // groupBox_AntSelectedEnreg
           // 
@@ -752,6 +751,8 @@ namespace MesFilms
           // 
           // groupBox_DefaultView
           // 
+          this.groupBox_DefaultView.Controls.Add(this.lblUnwatchedItemsValue);
+          this.groupBox_DefaultView.Controls.Add(this.textBoxGlobalUnwatchedOnlyValue);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalUnwatchedOnly);
           this.groupBox_DefaultView.Controls.Add(this.label10);
           this.groupBox_DefaultView.Controls.Add(this.SortSens);
@@ -764,7 +765,7 @@ namespace MesFilms
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Text);
           this.groupBox_DefaultView.Location = new System.Drawing.Point(9, 6);
           this.groupBox_DefaultView.Name = "groupBox_DefaultView";
-          this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 164);
+          this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 176);
           this.groupBox_DefaultView.TabIndex = 26;
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
@@ -773,7 +774,7 @@ namespace MesFilms
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 128);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 123);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(299, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -784,7 +785,7 @@ namespace MesFilms
           // label10
           // 
           this.label10.AutoSize = true;
-          this.label10.ForeColor = System.Drawing.SystemColors.Highlight;
+          this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
           this.label10.Location = new System.Drawing.Point(7, 94);
           this.label10.Name = "label10";
           this.label10.Size = new System.Drawing.Size(291, 13);
@@ -819,7 +820,6 @@ namespace MesFilms
           this.Sort.Name = "Sort";
           this.Sort.Size = new System.Drawing.Size(90, 21);
           this.Sort.TabIndex = 76;
-          this.Sort.SelectedIndexChanged += new System.EventHandler(this.Sort_SelectedIndexChanged);
           // 
           // AlwaysDefaultView
           // 
@@ -1522,7 +1522,6 @@ namespace MesFilms
           this.MesFilmsFanart.Name = "MesFilmsFanart";
           this.MesFilmsFanart.Size = new System.Drawing.Size(315, 20);
           this.MesFilmsFanart.TabIndex = 68;
-          this.MesFilmsFanart.TextChanged += new System.EventHandler(this.MesFilmsFanart_TextChanged);
           // 
           // labelFanart
           // 
@@ -1624,7 +1623,6 @@ namespace MesFilms
           this.Config_Menu.Text = "Display Always Configuration\'s Menu (if no Default Config)";
           this.ToolTip1.SetToolTip(this.Config_Menu, resources.GetString("Config_Menu.ToolTip"));
           this.Config_Menu.UseVisualStyleBackColor = true;
-          this.Config_Menu.CheckedChanged += new System.EventHandler(this.Config_Menu_CheckedChanged);
           // 
           // SearchFileName
           // 
@@ -1778,7 +1776,6 @@ namespace MesFilms
                   "olders of the defined path.\r\n");
           this.SearchSubDirsTrailer.UseVisualStyleBackColor = true;
           this.SearchSubDirsTrailer.Visible = false;
-          this.SearchSubDirsTrailer.CheckedChanged += new System.EventHandler(this.SearchSubDirsTrailer_CheckedChanged);
           // 
           // PathStorageTrailer
           // 
@@ -1787,7 +1784,6 @@ namespace MesFilms
           this.PathStorageTrailer.Size = new System.Drawing.Size(428, 20);
           this.PathStorageTrailer.TabIndex = 68;
           this.ToolTip1.SetToolTip(this.PathStorageTrailer, resources.GetString("PathStorageTrailer.ToolTip"));
-          this.PathStorageTrailer.TextChanged += new System.EventHandler(this.PathStorageTrailer_TextChanged);
           // 
           // groupBox24
           // 
@@ -1892,7 +1888,6 @@ namespace MesFilms
           this.AntStorageTrailer.Size = new System.Drawing.Size(185, 21);
           this.AntStorageTrailer.TabIndex = 68;
           this.ToolTip1.SetToolTip(this.AntStorageTrailer, resources.GetString("AntStorageTrailer.ToolTip"));
-          this.AntStorageTrailer.TextChanged += new System.EventHandler(this.AntStorageTrailer_TextChanged);
           // 
           // label35
           // 
@@ -1971,7 +1966,6 @@ namespace MesFilms
           this.comboWOLtimeout.Name = "comboWOLtimeout";
           this.comboWOLtimeout.Size = new System.Drawing.Size(81, 21);
           this.comboWOLtimeout.TabIndex = 96;
-          this.comboWOLtimeout.SelectedIndexChanged += new System.EventHandler(this.comboWOLtimeout_SelectedIndexChanged);
           // 
           // buttonSendMagicPacket3
           // 
@@ -2129,7 +2123,6 @@ namespace MesFilms
           this.check_WOL_Userdialog.Text = "Enable WakeOnLAN UserDialog (Autoinvoke WOL when disabled)";
           this.ToolTip1.SetToolTip(this.check_WOL_Userdialog, "Enable WakeOnLAN UserDialog whn launching a movie");
           this.check_WOL_Userdialog.UseVisualStyleBackColor = true;
-          this.check_WOL_Userdialog.CheckedChanged += new System.EventHandler(this.check_WOL_Userdialog_CheckedChanged);
           // 
           // NAS_Name_1
           // 
@@ -2161,7 +2154,6 @@ namespace MesFilms
           this.label_VersionNumber.TabIndex = 34;
           this.label_VersionNumber.Text = "Version 5.0.0.6 alpha";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "Alphaversion for Testing only !");
-          this.label_VersionNumber.Click += new System.EventHandler(this.label10_Click);
           // 
           // DefaultCover
           // 
@@ -2170,7 +2162,6 @@ namespace MesFilms
           this.DefaultCover.Size = new System.Drawing.Size(422, 20);
           this.DefaultCover.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.DefaultCover, resources.GetString("DefaultCover.ToolTip"));
-          this.DefaultCover.TextChanged += new System.EventHandler(this.DefaultCover_TextChanged);
           // 
           // MesFilmsImg
           // 
@@ -2189,7 +2180,6 @@ namespace MesFilms
           this.DefaultCoverArtist.Size = new System.Drawing.Size(422, 20);
           this.DefaultCoverArtist.TabIndex = 92;
           this.ToolTip1.SetToolTip(this.DefaultCoverArtist, resources.GetString("DefaultCoverArtist.ToolTip"));
-          this.DefaultCoverArtist.TextChanged += new System.EventHandler(this.DefaultCoverArtist_TextChanged);
           // 
           // MesFilmsImgArtist
           // 
@@ -2861,7 +2851,6 @@ namespace MesFilms
           this.comboBoxLogoSpacing.TabIndex = 100;
           this.ToolTip1.SetToolTip(this.comboBoxLogoSpacing, "You can choose the distance between the generated logos in \"pixel\".\r\nDefault is \"" +
                   "1\".");
-          this.comboBoxLogoSpacing.SelectedIndexChanged += new System.EventHandler(this.comboBoxLogoSpacing_SelectedIndexChanged);
           // 
           // btnLogoClearCache
           // 
@@ -4177,6 +4166,24 @@ namespace MesFilms
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // textBoxGlobalUnwatchedOnlyValue
+          // 
+          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(237, 147);
+          this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
+          this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(103, 20);
+          this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 81;
+          this.ToolTip1.SetToolTip(this.textBoxGlobalUnwatchedOnlyValue, "By Default, unwatched items are identified by having \"false\" in the checked field" +
+                  ".\r\nHowever, you can define a value other than that, if you require it.");
+          // 
+          // lblUnwatchedItemsValue
+          // 
+          this.lblUnwatchedItemsValue.AutoSize = true;
+          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(27, 150);
+          this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
+          this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(193, 13);
+          this.lblUnwatchedItemsValue.TabIndex = 82;
+          this.lblUnwatchedItemsValue.Text = "Enter Value to identify unwatched items";
+          // 
           // MesFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4628,5 +4635,7 @@ namespace MesFilms
         private Button btnUpdate;
         private TabPage Tab_Trakt;
         private TraktConfiguration traktConfiguration1;
+        private Label lblUnwatchedItemsValue;
+        private TextBox textBoxGlobalUnwatchedOnlyValue;
     }
 }

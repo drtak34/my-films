@@ -409,490 +409,854 @@
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\MyFilms.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{19dc29bc-5a5f-40ab-bfba-b00779acbdc2}-MyFilms.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{b74de6c3-adc7-48b8-8373-0877d83b7919}-MyFilms.xml</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\MyFilms.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\MyFilmsDetail.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{9448d933-9551-413a-82f0-c878939cfe8f}-MyFilmsDetail.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{7666c31a-3e50-478f-b62f-962afa227b8b}-MyFilmsDetail.xml</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\MyFilmsDetail.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\MyFilmsDialogRating.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{52b1e355-f35f-4b1e-8300-851c8da2ebe4}-MyFilmsDialogRating.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{c5001d58-3f73-47cc-b282-fd388f345d10}-MyFilmsDialogRating.xml</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\MyFilmsDialogRating.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\amclogo.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{41b3cf4c-ce1f-44f2-8278-91e8b37b2be5}-amclogo.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{f301cb7a-9aa8-478d-8785-5bb3e73eab15}-amclogo.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\amclogo.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_DD.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{19c356fa-a5ea-40d9-ac03-b41d89fe3335}-Films_DD.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{19f297f6-9c2f-4539-948c-45bf1c2f62b0}-Films_DD.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_DD.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_first_focus.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{851e8b89-374b-480f-924f-81eb670215e2}-Films_first_focus.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{6169bd43-25f2-483a-88a4-5cfd4047849e}-Films_first_focus.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_first_focus.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_first_nofocus.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{62b142f3-da5a-4565-a376-0a4bb3db8c83}-Films_first_nofocus.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{5e30843b-67b6-468b-a776-f96366253940}-Films_first_nofocus.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_first_nofocus.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_last_focus.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{533d7928-b4d2-4e42-9262-aa5ad13fa966}-Films_last_focus.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{38942cbc-817f-47dc-9220-1fda6484333c}-Films_last_focus.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_last_focus.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_last_nofocus.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{05f5f3ad-b3c9-46b4-b666-2b9703492380}-Films_last_nofocus.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{d2b975a3-d5bf-4bea-bfc6-38666d249bef}-Films_last_nofocus.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_last_nofocus.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_next_focus.PNG</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{f1a4269a-829b-40aa-8aab-50be900405b5}-Films_next_focus.PNG</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{c88fb83a-cd95-4b24-a8aa-3c690631c3c8}-Films_next_focus.PNG</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_next_focus.PNG</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_next_nofocus.PNG</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{f04ccde8-dc0c-40f4-a1ca-d5c37eafa8c9}-Films_next_nofocus.PNG</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{90ed1a82-4115-4c6c-8aa4-ad41f65a3dc4}-Films_next_nofocus.PNG</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_next_nofocus.PNG</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_prior_focus.PNG</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{ab190adb-88ac-4e23-b146-5126c69906e1}-Films_prior_focus.PNG</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{8fd4a4ce-5856-4544-a44f-755f4282439d}-Films_prior_focus.PNG</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_prior_focus.PNG</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\Films_prior_nofocus.PNG</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{0a21a200-e8e9-4783-b063-9f177be85ae7}-Films_prior_nofocus.PNG</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{23648675-accb-457e-9eef-3a91b89c7e02}-Films_prior_nofocus.PNG</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\Films_prior_nofocus.PNG</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\gradient.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{7c6784ed-fc44-4288-9eed-d8633f42fb9f}-gradient.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{1f3a2597-6a40-4574-a216-4e7aa47ab4c8}-gradient.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\gradient.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\gradient_top.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{a7db20d8-1d61-4877-b976-ddbac2c097e1}-gradient_top.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{54574203-bcd3-42b0-8a91-1e73f4b4c404}-gradient_top.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\gradient_top.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\hover_Films.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{c8184d1a-05bf-4778-9908-8b2edb8728df}-hover_Films.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{33f9314d-e797-4e2b-add5-b23d461aee89}-hover_Films.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\hover_Films.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\ledoff.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{c8a856d5-40ed-436b-ac25-18be63a5e32b}-ledoff.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{1dc8466f-109d-482a-9edd-032ec3d33ccf}-ledoff.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\ledoff.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\Media\ledon.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{7d00a96a-c2ad-470f-9235-69f3469e187b}-ledon.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{87a4606a-66d3-4c43-b8f0-0db8f201f4a4}-ledon.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3Wide\Media\ledon.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Action and Adventure.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d6bbfb81-86c9-4af0-a831-c05128d25e42}-Action and Adventure.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Action and Adventure.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Action.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1c589980-2461-4317-97b1-94f2b92e327b}-Action.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Action.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Adventure.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{cd081941-0aeb-496c-b977-b932f3ee06d3}-Adventure.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Adventure.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Animation.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5d2d3b43-6d85-42de-8bfe-60a8f3f274ee}-Animation.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Animation.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Biography.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{71cc7b9a-9bee-41b5-9535-f7f160d1ae97}-Biography.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Biography.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Comedy.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{70d7e5e5-c8b8-4235-be64-e903ba2e2989}-Comedy.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Comedy.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Crime.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{71beb18b-2c26-4076-a1a5-c3286b4d94f8}-Crime.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Crime.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Documentary.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{844f4531-d9cb-4f9c-b908-6d36512ac6f9}-Documentary.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Documentary.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Drama.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{584f942d-1afd-4fba-a615-279f373fdb79}-Drama.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Drama.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Family.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{4d309334-19e5-455d-ba10-3a059aa8ca94}-Family.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Family.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Fantasy.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7524d80e-c9c9-49ba-86f7-b4a0c6605fd8}-Fantasy.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Fantasy.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Film Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a2b85466-e381-4fda-8018-51e3da25169f}-Film Noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Film Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Game Show.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6bd4fc20-75fb-4481-8ec0-eed81573c67b}-Game Show.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Game Show.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\History.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c7cb643e-1cf5-4a74-b804-2c4cd6a7b094}-History.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\History.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Horror.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f2b9eb41-eec9-493c-b5fb-fe4f745477d1}-Horror.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Horror.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Mini-Series.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{11ef978f-b676-432b-be47-f63f870dda43}-Mini-Series.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Mini-Series.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Music.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{07788e4c-f701-4a62-9a10-71ebd843cd6c}-Music.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Music.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Musical.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c904f522-beab-4b45-be0e-6401b90fdea7}-Musical.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Musical.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Mystery.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a25f407d-9f30-437c-9d9a-dd1419b82543}-Mystery.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Mystery.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Reality.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b709492b-a655-4d68-8c08-242981b0fee6}-Reality.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Reality.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Romance.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b656aeff-0e82-49cc-9791-a6d158785c91}-Romance.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Romance.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\SciFi.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{95994e26-5562-440f-a481-47433cd399c0}-SciFi.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\SciFi.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Sport.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{cfca521c-5354-4a4a-a349-9b872110da56}-Sport.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Sport.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Thriller.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1d2827fb-55df-4e61-9bd0-66da00a23bf2}-Thriller.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Thriller.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\War.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1d43db2a-f1fe-4054-b33a-ac85c72ce916}-War.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\War.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\Logos\Western.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1b982830-92fe-42c3-aa96-cbcbb2adbed5}-Western.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Western.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\MyFilms.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{60f59a4b-5aa8-4cb5-856b-19efd9153219}-MyFilms.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{73d68ebe-0ae4-4a72-9557-3911913bd9c1}-MyFilms.xml</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\MyFilms.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\MyFilmsDetail.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{fc23c5c2-ac73-4dde-9ad6-6dc528330c7a}-MyFilmsDetail.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{c8cd795e-b97f-4697-8f2b-eeaea1638817}-MyFilmsDetail.xml</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\MyFilmsDetail.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\MyFilmsDialogRating.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{dc8e2545-895f-4fe5-8cac-6be3e68285cd}-MyFilmsDialogRating.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{d140b410-3ee5-4690-b07d-ef43011415ca}-MyFilmsDialogRating.xml</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\MyFilmsDialogRating.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\amclogo.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{c17eb102-3677-4cc6-aaac-4a6f1b1774b6}-amclogo.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{85d900ec-0e87-4fe4-a38a-4d7c49543405}-amclogo.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\amclogo.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_DD.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{eba7f7db-2aed-4c9e-9552-b21942f501df}-Films_DD.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{5046e6e0-b861-4e71-80f2-8f7d5d54bd69}-Films_DD.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_DD.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_first_focus.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2066c62a-769c-49ab-9fdc-999c23da996e}-Films_first_focus.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{cf06e0b3-6dd0-4750-be07-5b8a2ab8d77c}-Films_first_focus.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_first_focus.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_first_nofocus.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{9c0c29dd-5327-4c65-91a6-8447153ae193}-Films_first_nofocus.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{302cfeb5-c268-4af2-a8f4-d376ee59519b}-Films_first_nofocus.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_first_nofocus.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_last_focus.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{6b12cc45-a6e9-43e4-b2be-e634c709fbdd}-Films_last_focus.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{6d672887-30af-460e-8b32-1708280899db}-Films_last_focus.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_last_focus.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_last_nofocus.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{5d168f6b-bcd9-41d7-b07d-f01100ee7f98}-Films_last_nofocus.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{c7455b0a-db14-4cbc-a6a4-183b4dba0f8b}-Films_last_nofocus.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_last_nofocus.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_next_focus.PNG</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{81426e8a-fa43-421d-80c8-08f8cdde1098}-Films_next_focus.PNG</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{db8bff7b-cab4-44fd-95be-2278de7117a5}-Films_next_focus.PNG</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_next_focus.PNG</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_next_nofocus.PNG</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{eefe722a-93e7-43fc-bcaa-7d685a3caed2}-Films_next_nofocus.PNG</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{83f8cced-fe57-43e0-9d60-7ccb7b952b98}-Films_next_nofocus.PNG</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_next_nofocus.PNG</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_prior_focus.PNG</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{de23986e-a274-473d-b107-3e4b62e23ae0}-Films_prior_focus.PNG</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{e1472ea7-a571-42be-8316-ac89441fedf3}-Films_prior_focus.PNG</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_prior_focus.PNG</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\Films_prior_nofocus.PNG</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{d16f4b48-d9d4-45a5-91fc-6c061c7d5b55}-Films_prior_nofocus.PNG</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{3b808157-cbf3-447b-9671-e46b61e3493e}-Films_prior_nofocus.PNG</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Films_prior_nofocus.PNG</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\gradient.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{94327d5e-ae57-4c18-a8f7-080e9c1dbad2}-gradient.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{433e5d74-f7ff-4e04-9728-40955337db44}-gradient.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\gradient.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\gradient_top.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{91a4ba4c-cf1d-4115-aea9-d5d164baee7a}-gradient_top.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{51aba2a3-41e1-449f-970c-d1f79e9a870a}-gradient_top.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\gradient_top.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\hover_Films.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{7f6a7419-caca-4922-99dc-7420628f3ae8}-hover_Films.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{9f284b77-f7f9-4971-8a94-0d0dc90aca30}-hover_Films.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\hover_Films.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\ledoff.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{4b2fef40-fcc3-441d-bf92-12eb57e2da64}-ledoff.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{f7c51a83-f67a-4fc5-aabf-d29de28a604c}-ledoff.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\ledoff.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3\Media\ledon.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{62478862-3ae1-4a2c-aac3-51a6c4f07ea2}-ledon.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{5ba206ad-af65-47ee-8ead-9c08d939b1b7}-ledon.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\ledon.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Action and Adventure.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{41564310-8880-45ca-8d40-afa4df5790f0}-Action and Adventure.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Action and Adventure.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Action.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0daa6828-a955-4e9b-a28c-0299417f1343}-Action.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Action.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Adventure.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d63481e3-1ab7-4521-b016-eb26426be453}-Adventure.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Adventure.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Animation.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a7d7e5f6-9926-426f-861d-96073e694020}-Animation.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Animation.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Biography.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2b292db2-77ef-494f-aebe-9e583d4f833a}-Biography.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Biography.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Comedy.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e857640f-cde9-43f0-a791-024f0042360b}-Comedy.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Comedy.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Crime.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{796ae867-2c4b-431c-bf54-78991ad430d3}-Crime.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Crime.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Documentary.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c5a7539e-7e0f-489d-b2a2-2c020705bbe2}-Documentary.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Documentary.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Drama.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{eb0de274-bcc7-4e23-8cf8-1008c7a28a77}-Drama.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Drama.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Family.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d62cbab7-6303-4962-8b84-452848219970}-Family.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Family.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Fantasy.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{eaad23d1-4660-4deb-a592-f96fd18c6f21}-Fantasy.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Fantasy.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Film Noir.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a8b7ee2c-36a9-4cb8-b5a4-08116932bb4b}-Film Noir.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Film Noir.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Game Show.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{71894f34-a474-457e-aba4-47c4bd7b0756}-Game Show.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Game Show.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\History.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a50e1112-68b5-417d-a9a4-4585e03c8b6c}-History.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\History.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Horror.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f10f976d-cdc3-4f4e-a062-215f8756be5c}-Horror.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Horror.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Mini-Series.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{da3f19c7-5d6a-47ec-9a31-da1a901c7370}-Mini-Series.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Mini-Series.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Music.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5a8267b8-1caa-4485-878b-1258c85be178}-Music.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Music.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Musical.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{59e955b3-c3a8-48f6-9242-13ca35adf9f7}-Musical.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Musical.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Mystery.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0c7267a0-d8b7-4752-a88e-2737a8f8782d}-Mystery.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Mystery.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Reality.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b9b0852f-1cbe-4dda-af8b-fce11a0b5620}-Reality.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Reality.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Romance.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8681610d-d406-419e-aebf-6a5f660701ab}-Romance.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Romance.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\SciFi.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{527ea76e-d4c8-4992-8f91-832bee4956da}-SciFi.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\SciFi.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Sport.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b7b43b4e-9cec-44dc-9509-27bc4950219b}-Sport.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Sport.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Thriller.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1d322175-4d9d-4972-98cc-d40de7e98652}-Thriller.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Thriller.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\War.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{acb0d6ad-4da7-42d9-ad34-cec8b9220b3f}-War.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\War.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\Logos\Western.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7647de12-8deb-4a51-9639-f9d0250a35d8}-Western.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\Logos\Western.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MesFilms.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{c2bc485b-0ffd-46db-8d3f-4313d34b9984}-MesFilms.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{3db6d53d-6d64-4a01-88ea-dd7523cf3464}-MesFilms.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MesFilms.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MesFilmsActors.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{01caae89-0ced-4643-830f-ad3dd627ef8d}-MesFilmsActors.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{7356e6a8-de04-4709-b458-973d4c901966}-MesFilmsActors.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MesFilmsActors.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MesFilmsActorsInfo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{ea5bd3aa-c636-436d-8239-c268d56cb077}-MesFilmsActorsInfo.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{26dc2b09-2c5c-4a14-a11d-c9ce4eed1cf4}-MesFilmsActorsInfo.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MesFilmsActorsInfo.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MesFilmsDetail.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{3ff19e77-6c83-45ee-af50-13c29c3f8543}-MesFilmsDetail.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{2d0abaf7-74e7-4cfc-b98d-d2a0dbdb7df8}-MesFilmsDetail.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MesFilmsDetail.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MesFilmsDialogRating.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{22e4d4d8-e3a6-40c1-a60b-5fdd5772c286}-MesFilmsDialogRating.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{39e82d67-b775-4319-a73f-74e1c4b90adf}-MesFilmsDialogRating.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MesFilmsDialogRating.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MesFilmsThumbs.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{0e29ae33-246e-400c-b477-e3b259c80482}-MesFilmsThumbs.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{56564a50-6ae8-4cbf-8df1-b46cfd733cbe}-MesFilmsThumbs.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MesFilmsThumbs.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MyFilms.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{e4c6cd11-d42c-4062-b9d4-3395e3a50f3a}-MyFilms.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{60a9f8be-ddc3-4903-ada2-829edc8571dd}-MyFilms.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MyFilms.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MyFilmsActors.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{b1d0a972-0941-44a3-b469-d98ad4a0b4c8}-MyFilmsActors.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{87bec4da-3aa0-4ca4-bf1a-3d4c93eb2d4f}-MyFilmsActors.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MyFilmsActors.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MyFilmsActorsInfo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2260b2ca-8bdb-4d23-9069-85dadc48ebb5}-MyFilmsActorsInfo.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{baa47e24-d97c-4306-a5b3-8cfc60fee97d}-MyFilmsActorsInfo.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MyFilmsActorsInfo.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MyFilmsDetail.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{88f6c023-0062-455b-9ee1-3b24b2bb45e0}-MyFilmsDetail.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{af8f968b-2ebd-46d6-a812-a4b260504bd8}-MyFilmsDetail.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MyFilmsDetail.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MyFilmsDialogRating.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{61fa003d-06cb-4898-9472-3634d650356a}-MyFilmsDialogRating.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{d2d45fb4-ac47-4754-8100-899cdf3df398}-MyFilmsDialogRating.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MyFilmsDialogRating.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\MyFilmsThumbs.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{de3f89b4-366e-4ca0-a12e-797bf0e6152e}-MyFilmsThumbs.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{f356b369-aab0-4896-9d02-1a8590eb5609}-MyFilmsThumbs.xml</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\MyFilmsThumbs.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\fanart_overlay_bottom.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{a798435a-3003-4d62-a4df-4a58674f7efb}-fanart_overlay_bottom.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{7c754f8c-ec47-478a-a5ff-ee6a6b274fd8}-fanart_overlay_bottom.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\fanart_overlay_bottom.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\fanart_overlay_overall.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{eb056262-552f-440a-a6a5-5431efafa056}-fanart_overlay_overall.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{2dabdb3d-1afb-4c6f-b70f-ae7025eb1fe3}-fanart_overlay_overall.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\fanart_overlay_overall.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\fanart_overlay_top.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{ec81eee1-9801-45fd-986a-3978a829779a}-fanart_overlay_top.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{a7717a43-63c9-4c2a-9b91-d9877386f647}-fanart_overlay_top.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\fanart_overlay_top.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\ledoff.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{bae9b2e6-2aea-4dc1-abe6-d2bbdacf13d8}-ledoff.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{d9fafbf8-4c63-403a-b5ed-cde9deffce4b}-ledoff.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\ledoff.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\ledon.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{67839c95-e9ca-4d81-88c5-c76d4be8a436}-ledon.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{708c9011-b489-4518-8d96-e401ead8b0ab}-ledon.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\ledon.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\trailer_is_available.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{8b89382a-597c-49e0-a5a4-9050a670ac1f}-trailer_is_available.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{ae16a50b-bea7-4911-91a9-482ae6017eaf}-trailer_is_available.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\trailer_is_available.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\trailer_is_unavailable.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{b05de4c2-80ea-458b-a296-9717b193e03f}-trailer_is_unavailable.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{97e03f4e-aef1-4798-a3a6-c354095dba94}-trailer_is_unavailable.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\trailer_is_unavailable.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\trailer_led_green.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{399d809c-1ec1-4e8f-a333-5e1b217d0b17}-trailer_led_green.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{3aee150d-3007-4677-adf1-0007fbb6663d}-trailer_led_green.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\trailer_led_green.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\trailer_led_red.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2e5f8710-be65-4b6c-afd6-6c5ea2211572}-trailer_led_red.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{a3942cb8-a02f-46ad-a242-894f09ff69cd}-trailer_led_red.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\trailer_led_red.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\lED-small\led_small_blue.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{4c03a7c1-9475-4e40-8bcb-03e969a6bc33}-led_small_blue.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{1ca3317e-a5eb-4c29-a6e3-7fa7c13d554f}-led_small_blue.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\lED-small\led_small_blue.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\lED-small\led_small_green.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{ecbfa1e7-b152-43eb-b555-cf3af5077e26}-led_small_green.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{a86dbfb3-65bf-42af-a14a-514bef974a96}-led_small_green.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\lED-small\led_small_green.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\lED-small\led_small_red.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{a558780d-5ebb-4b9a-93dd-cc8481747935}-led_small_red.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{8df1806c-89f4-42e6-b903-d121fcfae7ea}-led_small_red.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\lED-small\led_small_red.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\lED-small\led_small_yellow.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{b1c8302f-c67c-4305-ad19-0ffb6a529959}-led_small_yellow.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{531c5e53-e3cd-4866-8974-d47bd8412d51}-led_small_yellow.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\lED-small\led_small_yellow.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-Fidelity\led_frame_green.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{7f44b43a-5e18-4ca3-a12c-2807f40593d6}-led_frame_green.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{bf43ac30-1968-4a39-a15a-0244ebe1457b}-led_frame_green.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-Fidelity\led_frame_green.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-Fidelity\led_frame_red.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{856f8696-01af-4edc-8412-164a41e0b761}-led_frame_red.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{2b209186-4233-4935-b13c-29404c3acb74}-led_frame_red.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-Fidelity\led_frame_red.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-Fidelity\led_frame_red_r.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{e3be2ae1-86d5-4726-9121-86423b60cb2b}-led_frame_red_r.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{71efef22-c561-40fb-888b-4ff5bf39d173}-led_frame_red_r.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-Fidelity\led_frame_red_r.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-Fidelity\led_frame_yellow.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{de5971e0-bac9-49ad-9a6f-e36e352db360}-led_frame_yellow.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{a0fd5d25-5bd0-4b94-a3f7-5b51cce873ee}-led_frame_yellow.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-Fidelity\led_frame_yellow.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Black.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{53dae1fb-5204-44a3-9128-4dacfa8484e8}-LED_big_Black.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{a72e9dca-48c9-4b28-b350-6ea60607f81f}-LED_big_Black.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Black.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Blue.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{177efc15-7999-4a44-bb14-f24a2f7093ec}-LED_big_Blue.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{0b50f555-a7dc-4a04-929a-62df091014bb}-LED_big_Blue.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Blue.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Green.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{c529b5e5-f238-415c-964c-93be344e342e}-LED_big_Green.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{640c4d33-5028-4ad0-b4b0-8e1ccbb23038}-LED_big_Green.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Green.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Red.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{daaba4e7-3c52-4396-a04d-53fce358b3d7}-LED_big_Red.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{6ff1d782-304c-4ecb-9727-489b485ad02b}-LED_big_Red.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Red.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Yellow.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{07de35ff-d642-4aa4-a969-259e66bb6e3d}-LED_big_Yellow.png</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{cd569896-4fac-45ea-b384-5a87dc4b7e37}-LED_big_Yellow.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Yellow.png</DestinationFilename>
             </FileItem>
           </Items>
@@ -2228,6 +2592,13 @@
               <ZipFileName>Installer{CopyFile}\{0aeae001-b0d9-46e4-9abf-c8d107c82df9}-Western.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\B3logos\B3 Genre Logos (bw)\Western.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{42c03199-b4e9-403f-8c89-498b99416606}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2483,7 +2854,7 @@ Some functions will not be available or work properly, if older versions are ins
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>5</Revision>
+      <Revision>6</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production.
@@ -2916,490 +3287,854 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\MyFilms.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{19dc29bc-5a5f-40ab-bfba-b00779acbdc2}-MyFilms.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{b74de6c3-adc7-48b8-8373-0877d83b7919}-MyFilms.xml</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\MyFilms.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\MyFilmsDetail.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9448d933-9551-413a-82f0-c878939cfe8f}-MyFilmsDetail.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{7666c31a-3e50-478f-b62f-962afa227b8b}-MyFilmsDetail.xml</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\MyFilmsDetail.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\MyFilmsDialogRating.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{52b1e355-f35f-4b1e-8300-851c8da2ebe4}-MyFilmsDialogRating.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{c5001d58-3f73-47cc-b282-fd388f345d10}-MyFilmsDialogRating.xml</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\MyFilmsDialogRating.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\amclogo.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{41b3cf4c-ce1f-44f2-8278-91e8b37b2be5}-amclogo.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f301cb7a-9aa8-478d-8785-5bb3e73eab15}-amclogo.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\amclogo.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_DD.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{19c356fa-a5ea-40d9-ac03-b41d89fe3335}-Films_DD.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{19f297f6-9c2f-4539-948c-45bf1c2f62b0}-Films_DD.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_DD.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_first_focus.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{851e8b89-374b-480f-924f-81eb670215e2}-Films_first_focus.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6169bd43-25f2-483a-88a4-5cfd4047849e}-Films_first_focus.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_first_focus.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_first_nofocus.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{62b142f3-da5a-4565-a376-0a4bb3db8c83}-Films_first_nofocus.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{5e30843b-67b6-468b-a776-f96366253940}-Films_first_nofocus.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_first_nofocus.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_last_focus.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{533d7928-b4d2-4e42-9262-aa5ad13fa966}-Films_last_focus.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{38942cbc-817f-47dc-9220-1fda6484333c}-Films_last_focus.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_last_focus.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_last_nofocus.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{05f5f3ad-b3c9-46b4-b666-2b9703492380}-Films_last_nofocus.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d2b975a3-d5bf-4bea-bfc6-38666d249bef}-Films_last_nofocus.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_last_nofocus.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_next_focus.PNG</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{f1a4269a-829b-40aa-8aab-50be900405b5}-Films_next_focus.PNG</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{c88fb83a-cd95-4b24-a8aa-3c690631c3c8}-Films_next_focus.PNG</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_next_focus.PNG</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_next_nofocus.PNG</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{f04ccde8-dc0c-40f4-a1ca-d5c37eafa8c9}-Films_next_nofocus.PNG</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{90ed1a82-4115-4c6c-8aa4-ad41f65a3dc4}-Films_next_nofocus.PNG</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_next_nofocus.PNG</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_prior_focus.PNG</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ab190adb-88ac-4e23-b146-5126c69906e1}-Films_prior_focus.PNG</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{8fd4a4ce-5856-4544-a44f-755f4282439d}-Films_prior_focus.PNG</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_prior_focus.PNG</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\Films_prior_nofocus.PNG</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0a21a200-e8e9-4783-b063-9f177be85ae7}-Films_prior_nofocus.PNG</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{23648675-accb-457e-9eef-3a91b89c7e02}-Films_prior_nofocus.PNG</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\Films_prior_nofocus.PNG</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\gradient.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7c6784ed-fc44-4288-9eed-d8633f42fb9f}-gradient.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{1f3a2597-6a40-4574-a216-4e7aa47ab4c8}-gradient.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\gradient.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\gradient_top.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{a7db20d8-1d61-4877-b976-ddbac2c097e1}-gradient_top.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{54574203-bcd3-42b0-8a91-1e73f4b4c404}-gradient_top.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\gradient_top.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\hover_Films.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c8184d1a-05bf-4778-9908-8b2edb8728df}-hover_Films.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{33f9314d-e797-4e2b-add5-b23d461aee89}-hover_Films.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\hover_Films.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\ledoff.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c8a856d5-40ed-436b-ac25-18be63a5e32b}-ledoff.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{1dc8466f-109d-482a-9edd-032ec3d33ccf}-ledoff.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\ledoff.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\Media\ledon.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7d00a96a-c2ad-470f-9235-69f3469e187b}-ledon.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{87a4606a-66d3-4c43-b8f0-0db8f201f4a4}-ledon.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3Wide\Media\ledon.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Action and Adventure.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d6bbfb81-86c9-4af0-a831-c05128d25e42}-Action and Adventure.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Action and Adventure.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Action.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1c589980-2461-4317-97b1-94f2b92e327b}-Action.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Action.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Adventure.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{cd081941-0aeb-496c-b977-b932f3ee06d3}-Adventure.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Adventure.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Animation.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5d2d3b43-6d85-42de-8bfe-60a8f3f274ee}-Animation.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Animation.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Biography.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{71cc7b9a-9bee-41b5-9535-f7f160d1ae97}-Biography.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Biography.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Comedy.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{70d7e5e5-c8b8-4235-be64-e903ba2e2989}-Comedy.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Comedy.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Crime.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{71beb18b-2c26-4076-a1a5-c3286b4d94f8}-Crime.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Crime.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Documentary.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{844f4531-d9cb-4f9c-b908-6d36512ac6f9}-Documentary.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Documentary.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Drama.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{584f942d-1afd-4fba-a615-279f373fdb79}-Drama.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Drama.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Family.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{4d309334-19e5-455d-ba10-3a059aa8ca94}-Family.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Family.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Fantasy.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7524d80e-c9c9-49ba-86f7-b4a0c6605fd8}-Fantasy.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Fantasy.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Film Noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a2b85466-e381-4fda-8018-51e3da25169f}-Film Noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Film Noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Game Show.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{6bd4fc20-75fb-4481-8ec0-eed81573c67b}-Game Show.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Game Show.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\History.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c7cb643e-1cf5-4a74-b804-2c4cd6a7b094}-History.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\History.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Horror.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{f2b9eb41-eec9-493c-b5fb-fe4f745477d1}-Horror.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Horror.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Mini-Series.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{11ef978f-b676-432b-be47-f63f870dda43}-Mini-Series.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Mini-Series.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Music.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{07788e4c-f701-4a62-9a10-71ebd843cd6c}-Music.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Music.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Musical.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c904f522-beab-4b45-be0e-6401b90fdea7}-Musical.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Musical.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Mystery.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a25f407d-9f30-437c-9d9a-dd1419b82543}-Mystery.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Mystery.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Reality.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b709492b-a655-4d68-8c08-242981b0fee6}-Reality.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Reality.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Romance.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b656aeff-0e82-49cc-9791-a6d158785c91}-Romance.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Romance.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\SciFi.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{95994e26-5562-440f-a481-47433cd399c0}-SciFi.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\SciFi.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Sport.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{cfca521c-5354-4a4a-a349-9b872110da56}-Sport.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Sport.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Thriller.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1d2827fb-55df-4e61-9bd0-66da00a23bf2}-Thriller.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Thriller.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\War.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1d43db2a-f1fe-4054-b33a-ac85c72ce916}-War.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\War.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\Logos\Western.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1b982830-92fe-42c3-aa96-cbcbb2adbed5}-Western.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\Logos\Western.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\MyFilms.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{60f59a4b-5aa8-4cb5-856b-19efd9153219}-MyFilms.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{73d68ebe-0ae4-4a72-9557-3911913bd9c1}-MyFilms.xml</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\MyFilms.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\MyFilmsDetail.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{fc23c5c2-ac73-4dde-9ad6-6dc528330c7a}-MyFilmsDetail.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{c8cd795e-b97f-4697-8f2b-eeaea1638817}-MyFilmsDetail.xml</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\MyFilmsDetail.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\MyFilmsDialogRating.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{dc8e2545-895f-4fe5-8cac-6be3e68285cd}-MyFilmsDialogRating.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d140b410-3ee5-4690-b07d-ef43011415ca}-MyFilmsDialogRating.xml</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\MyFilmsDialogRating.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\amclogo.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c17eb102-3677-4cc6-aaac-4a6f1b1774b6}-amclogo.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{85d900ec-0e87-4fe4-a38a-4d7c49543405}-amclogo.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\amclogo.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_DD.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{eba7f7db-2aed-4c9e-9552-b21942f501df}-Films_DD.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{5046e6e0-b861-4e71-80f2-8f7d5d54bd69}-Films_DD.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_DD.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_first_focus.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2066c62a-769c-49ab-9fdc-999c23da996e}-Films_first_focus.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{cf06e0b3-6dd0-4750-be07-5b8a2ab8d77c}-Films_first_focus.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_first_focus.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_first_nofocus.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9c0c29dd-5327-4c65-91a6-8447153ae193}-Films_first_nofocus.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{302cfeb5-c268-4af2-a8f4-d376ee59519b}-Films_first_nofocus.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_first_nofocus.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_last_focus.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{6b12cc45-a6e9-43e4-b2be-e634c709fbdd}-Films_last_focus.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6d672887-30af-460e-8b32-1708280899db}-Films_last_focus.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_last_focus.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_last_nofocus.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{5d168f6b-bcd9-41d7-b07d-f01100ee7f98}-Films_last_nofocus.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{c7455b0a-db14-4cbc-a6a4-183b4dba0f8b}-Films_last_nofocus.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_last_nofocus.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_next_focus.PNG</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{81426e8a-fa43-421d-80c8-08f8cdde1098}-Films_next_focus.PNG</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{db8bff7b-cab4-44fd-95be-2278de7117a5}-Films_next_focus.PNG</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_next_focus.PNG</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_next_nofocus.PNG</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{eefe722a-93e7-43fc-bcaa-7d685a3caed2}-Films_next_nofocus.PNG</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{83f8cced-fe57-43e0-9d60-7ccb7b952b98}-Films_next_nofocus.PNG</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_next_nofocus.PNG</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_prior_focus.PNG</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{de23986e-a274-473d-b107-3e4b62e23ae0}-Films_prior_focus.PNG</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{e1472ea7-a571-42be-8316-ac89441fedf3}-Films_prior_focus.PNG</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_prior_focus.PNG</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\Films_prior_nofocus.PNG</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d16f4b48-d9d4-45a5-91fc-6c061c7d5b55}-Films_prior_nofocus.PNG</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{3b808157-cbf3-447b-9671-e46b61e3493e}-Films_prior_nofocus.PNG</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Films_prior_nofocus.PNG</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\gradient.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{94327d5e-ae57-4c18-a8f7-080e9c1dbad2}-gradient.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{433e5d74-f7ff-4e04-9728-40955337db44}-gradient.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\gradient.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\gradient_top.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{91a4ba4c-cf1d-4115-aea9-d5d164baee7a}-gradient_top.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{51aba2a3-41e1-449f-970c-d1f79e9a870a}-gradient_top.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\gradient_top.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\hover_Films.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7f6a7419-caca-4922-99dc-7420628f3ae8}-hover_Films.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{9f284b77-f7f9-4971-8a94-0d0dc90aca30}-hover_Films.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\hover_Films.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\ledoff.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{4b2fef40-fcc3-441d-bf92-12eb57e2da64}-ledoff.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f7c51a83-f67a-4fc5-aabf-d29de28a604c}-ledoff.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\ledoff.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3\Media\ledon.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{62478862-3ae1-4a2c-aac3-51a6c4f07ea2}-ledon.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{5ba206ad-af65-47ee-8ead-9c08d939b1b7}-ledon.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\ledon.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Action and Adventure.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{41564310-8880-45ca-8d40-afa4df5790f0}-Action and Adventure.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Action and Adventure.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Action.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0daa6828-a955-4e9b-a28c-0299417f1343}-Action.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Action.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Adventure.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d63481e3-1ab7-4521-b016-eb26426be453}-Adventure.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Adventure.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Animation.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a7d7e5f6-9926-426f-861d-96073e694020}-Animation.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Animation.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Biography.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2b292db2-77ef-494f-aebe-9e583d4f833a}-Biography.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Biography.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Comedy.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e857640f-cde9-43f0-a791-024f0042360b}-Comedy.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Comedy.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Crime.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{796ae867-2c4b-431c-bf54-78991ad430d3}-Crime.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Crime.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Documentary.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c5a7539e-7e0f-489d-b2a2-2c020705bbe2}-Documentary.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Documentary.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Drama.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{eb0de274-bcc7-4e23-8cf8-1008c7a28a77}-Drama.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Drama.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Family.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d62cbab7-6303-4962-8b84-452848219970}-Family.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Family.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Fantasy.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{eaad23d1-4660-4deb-a592-f96fd18c6f21}-Fantasy.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Fantasy.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Film Noir.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a8b7ee2c-36a9-4cb8-b5a4-08116932bb4b}-Film Noir.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Film Noir.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Game Show.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{71894f34-a474-457e-aba4-47c4bd7b0756}-Game Show.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Game Show.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\History.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a50e1112-68b5-417d-a9a4-4585e03c8b6c}-History.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\History.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Horror.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{f10f976d-cdc3-4f4e-a062-215f8756be5c}-Horror.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Horror.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Mini-Series.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{da3f19c7-5d6a-47ec-9a31-da1a901c7370}-Mini-Series.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Mini-Series.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Music.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5a8267b8-1caa-4485-878b-1258c85be178}-Music.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Music.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Musical.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{59e955b3-c3a8-48f6-9242-13ca35adf9f7}-Musical.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Musical.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Mystery.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0c7267a0-d8b7-4752-a88e-2737a8f8782d}-Mystery.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Mystery.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Reality.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b9b0852f-1cbe-4dda-af8b-fce11a0b5620}-Reality.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Reality.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Romance.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8681610d-d406-419e-aebf-6a5f660701ab}-Romance.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Romance.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\SciFi.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{527ea76e-d4c8-4992-8f91-832bee4956da}-SciFi.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\SciFi.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Sport.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b7b43b4e-9cec-44dc-9509-27bc4950219b}-Sport.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Sport.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Thriller.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1d322175-4d9d-4972-98cc-d40de7e98652}-Thriller.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Thriller.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\War.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{acb0d6ad-4da7-42d9-ad34-cec8b9220b3f}-War.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\War.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\Logos\Western.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7647de12-8deb-4a51-9639-f9d0250a35d8}-Western.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\Logos\Western.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MesFilms.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c2bc485b-0ffd-46db-8d3f-4313d34b9984}-MesFilms.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{3db6d53d-6d64-4a01-88ea-dd7523cf3464}-MesFilms.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MesFilms.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MesFilmsActors.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{01caae89-0ced-4643-830f-ad3dd627ef8d}-MesFilmsActors.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{7356e6a8-de04-4709-b458-973d4c901966}-MesFilmsActors.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MesFilmsActors.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MesFilmsActorsInfo.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ea5bd3aa-c636-436d-8239-c268d56cb077}-MesFilmsActorsInfo.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{26dc2b09-2c5c-4a14-a11d-c9ce4eed1cf4}-MesFilmsActorsInfo.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MesFilmsActorsInfo.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MesFilmsDetail.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{3ff19e77-6c83-45ee-af50-13c29c3f8543}-MesFilmsDetail.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{2d0abaf7-74e7-4cfc-b98d-d2a0dbdb7df8}-MesFilmsDetail.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MesFilmsDetail.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MesFilmsDialogRating.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{22e4d4d8-e3a6-40c1-a60b-5fdd5772c286}-MesFilmsDialogRating.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{39e82d67-b775-4319-a73f-74e1c4b90adf}-MesFilmsDialogRating.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MesFilmsDialogRating.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MesFilmsThumbs.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0e29ae33-246e-400c-b477-e3b259c80482}-MesFilmsThumbs.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{56564a50-6ae8-4cbf-8df1-b46cfd733cbe}-MesFilmsThumbs.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MesFilmsThumbs.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MyFilms.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e4c6cd11-d42c-4062-b9d4-3395e3a50f3a}-MyFilms.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{60a9f8be-ddc3-4903-ada2-829edc8571dd}-MyFilms.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MyFilms.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MyFilmsActors.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b1d0a972-0941-44a3-b469-d98ad4a0b4c8}-MyFilmsActors.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{87bec4da-3aa0-4ca4-bf1a-3d4c93eb2d4f}-MyFilmsActors.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MyFilmsActors.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MyFilmsActorsInfo.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2260b2ca-8bdb-4d23-9069-85dadc48ebb5}-MyFilmsActorsInfo.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{baa47e24-d97c-4306-a5b3-8cfc60fee97d}-MyFilmsActorsInfo.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MyFilmsActorsInfo.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MyFilmsDetail.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{88f6c023-0062-455b-9ee1-3b24b2bb45e0}-MyFilmsDetail.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{af8f968b-2ebd-46d6-a812-a4b260504bd8}-MyFilmsDetail.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MyFilmsDetail.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MyFilmsDialogRating.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{61fa003d-06cb-4898-9472-3634d650356a}-MyFilmsDialogRating.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d2d45fb4-ac47-4754-8100-899cdf3df398}-MyFilmsDialogRating.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MyFilmsDialogRating.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\MyFilmsThumbs.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{de3f89b4-366e-4ca0-a12e-797bf0e6152e}-MyFilmsThumbs.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f356b369-aab0-4896-9d02-1a8590eb5609}-MyFilmsThumbs.xml</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\MyFilmsThumbs.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\fanart_overlay_bottom.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{a798435a-3003-4d62-a4df-4a58674f7efb}-fanart_overlay_bottom.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{7c754f8c-ec47-478a-a5ff-ee6a6b274fd8}-fanart_overlay_bottom.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\fanart_overlay_bottom.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\fanart_overlay_overall.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{eb056262-552f-440a-a6a5-5431efafa056}-fanart_overlay_overall.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{2dabdb3d-1afb-4c6f-b70f-ae7025eb1fe3}-fanart_overlay_overall.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\fanart_overlay_overall.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\fanart_overlay_top.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ec81eee1-9801-45fd-986a-3978a829779a}-fanart_overlay_top.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a7717a43-63c9-4c2a-9b91-d9877386f647}-fanart_overlay_top.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\fanart_overlay_top.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\ledoff.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{bae9b2e6-2aea-4dc1-abe6-d2bbdacf13d8}-ledoff.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d9fafbf8-4c63-403a-b5ed-cde9deffce4b}-ledoff.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\ledoff.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\ledon.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{67839c95-e9ca-4d81-88c5-c76d4be8a436}-ledon.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{708c9011-b489-4518-8d96-e401ead8b0ab}-ledon.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\ledon.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\trailer_is_available.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{8b89382a-597c-49e0-a5a4-9050a670ac1f}-trailer_is_available.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{ae16a50b-bea7-4911-91a9-482ae6017eaf}-trailer_is_available.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\trailer_is_available.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\trailer_is_unavailable.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b05de4c2-80ea-458b-a296-9717b193e03f}-trailer_is_unavailable.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{97e03f4e-aef1-4798-a3a6-c354095dba94}-trailer_is_unavailable.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\trailer_is_unavailable.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\trailer_led_green.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{399d809c-1ec1-4e8f-a333-5e1b217d0b17}-trailer_led_green.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{3aee150d-3007-4677-adf1-0007fbb6663d}-trailer_led_green.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\trailer_led_green.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\trailer_led_red.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2e5f8710-be65-4b6c-afd6-6c5ea2211572}-trailer_led_red.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a3942cb8-a02f-46ad-a242-894f09ff69cd}-trailer_led_red.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\trailer_led_red.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\lED-small\led_small_blue.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{4c03a7c1-9475-4e40-8bcb-03e969a6bc33}-led_small_blue.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{1ca3317e-a5eb-4c29-a6e3-7fa7c13d554f}-led_small_blue.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\lED-small\led_small_blue.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\lED-small\led_small_green.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ecbfa1e7-b152-43eb-b555-cf3af5077e26}-led_small_green.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a86dbfb3-65bf-42af-a14a-514bef974a96}-led_small_green.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\lED-small\led_small_green.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\lED-small\led_small_red.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{a558780d-5ebb-4b9a-93dd-cc8481747935}-led_small_red.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{8df1806c-89f4-42e6-b903-d121fcfae7ea}-led_small_red.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\lED-small\led_small_red.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\lED-small\led_small_yellow.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b1c8302f-c67c-4305-ad19-0ffb6a529959}-led_small_yellow.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{531c5e53-e3cd-4866-8974-d47bd8412d51}-led_small_yellow.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\lED-small\led_small_yellow.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-Fidelity\led_frame_green.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7f44b43a-5e18-4ca3-a12c-2807f40593d6}-led_frame_green.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{bf43ac30-1968-4a39-a15a-0244ebe1457b}-led_frame_green.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-Fidelity\led_frame_green.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-Fidelity\led_frame_red.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{856f8696-01af-4edc-8412-164a41e0b761}-led_frame_red.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{2b209186-4233-4935-b13c-29404c3acb74}-led_frame_red.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-Fidelity\led_frame_red.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-Fidelity\led_frame_red_r.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e3be2ae1-86d5-4726-9121-86423b60cb2b}-led_frame_red_r.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{71efef22-c561-40fb-888b-4ff5bf39d173}-led_frame_red_r.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-Fidelity\led_frame_red_r.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-Fidelity\led_frame_yellow.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{de5971e0-bac9-49ad-9a6f-e36e352db360}-led_frame_yellow.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a0fd5d25-5bd0-4b94-a3f7-5b51cce873ee}-led_frame_yellow.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-Fidelity\led_frame_yellow.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Black.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{53dae1fb-5204-44a3-9128-4dacfa8484e8}-LED_big_Black.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a72e9dca-48c9-4b28-b350-6ea60607f81f}-LED_big_Black.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Black.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Blue.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{177efc15-7999-4a44-bb14-f24a2f7093ec}-LED_big_Blue.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{0b50f555-a7dc-4a04-929a-62df091014bb}-LED_big_Blue.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Blue.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Green.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c529b5e5-f238-415c-964c-93be344e342e}-LED_big_Green.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{640c4d33-5028-4ad0-b4b0-8e1ccbb23038}-LED_big_Green.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Green.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Red.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{daaba4e7-3c52-4396-a04d-53fce358b3d7}-LED_big_Red.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6ff1d782-304c-4ecb-9727-489b485ad02b}-LED_big_Red.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Red.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Black Glass\Media\LED-big\LED_big_Yellow.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{07de35ff-d642-4aa4-a969-259e66bb6e3d}-LED_big_Yellow.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{cd569896-4fac-45ea-b384-5a87dc4b7e37}-LED_big_Yellow.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\LED-big\LED_big_Yellow.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
@@ -4725,11 +5460,18 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{0aeae001-b0d9-46e4-9abf-c8d107c82df9}-Western.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\B3logos\B3 Genre Logos (bw)\Western.png</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{42c03199-b4e9-403f-8c89-498b99416606}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{bfbe4beb-0f16-4027-95ed-a4ca0f7d7995}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{5bc8c98a-3ca0-482c-8595-100e96b78631}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
@@ -4750,7 +5492,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName />
-        <ZipFileName>Installer{CopyFile}\{382aee38-5339-4b59-a110-8df33469acd2}-</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{2db83ec1-c718-4c15-9182-b8df050ed19d}-</ZipFileName>
         <DestinationFilename>%Skin%</DestinationFilename>
         <Folder>Skin</Folder>
         <Group>SkinFiles</Group>

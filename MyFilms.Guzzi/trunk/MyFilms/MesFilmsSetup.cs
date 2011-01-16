@@ -96,6 +96,12 @@ namespace MesFilms
             //  }
             //}
 
+            //this.label_VersionNumber.Text = "Version 5.1.0 alpha";
+            System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString() + " alpha";
+            LogMyFilms.Info("MFsetup: Started with version '" + label_VersionNumber.Text + "'");
+
+
             MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
             //            for (int i = 0; i < (int)MesFilms_nb_config; i++)
             //            {
@@ -762,7 +768,8 @@ namespace MesFilms
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", SearchSubDirsTrailer.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", CheckWatched.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", AlwaysDefaultView.Checked);
-            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked); // Do not write to config, as it's acting as "defaultsetting"
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", textBoxGlobalUnwatchedOnlyValue.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", chkOnlyTitle.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", chkWindowsFileDialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", ItemSearchFileName.Text);
@@ -1114,6 +1121,7 @@ namespace MesFilms
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
             AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", false);
             chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", false);
+            textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", "false");
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", false);
             chkWindowsFileDialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", false);
             DVDPTagField.ResetText();
@@ -1303,6 +1311,7 @@ namespace MesFilms
             OnlyFile.Checked = false;
             AlwaysDefaultView.Checked = false;
             chkGlobalUnwatchedOnly.Checked = false;
+            textBoxGlobalUnwatchedOnlyValue.Text = "false";
             chkOnlyTitle.Checked = false;
             chkWindowsFileDialog.Checked = false;
             chkGrabber.Checked = false;
@@ -1339,9 +1348,7 @@ namespace MesFilms
                 Refresh_Items(true);
                 Config_Name.ResetText();
             }
-
         }
-
 
         private void ButCopy_Click(object sender, EventArgs e)
         {
@@ -2192,9 +2199,6 @@ namespace MesFilms
           //Use_XBMC_nfo	Default	False
           //LogDirectory Default
 
-
-
-
           // load dataset for GUI display
           AMCConfigView.Items.Clear();
           int i = 0;
@@ -2835,31 +2839,6 @@ namespace MesFilms
             }
         }
 
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PathStorage_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PathStorageTrailer_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SearchSubDirsTrailer_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AntStorageTrailer_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnTrailer_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
@@ -2872,27 +2851,6 @@ namespace MesFilms
                 else
                     PathStorageTrailer.Text = PathStorageTrailer.Text + ";" + folderBrowserDialog1.SelectedPath;
             }
-        }
-
-
-        private void MesFilmsFanart_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AntTSort1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AntTSort2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Config_Menu_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void NAS_1_Name_TextChanged(object sender, EventArgs e)
@@ -2967,16 +2925,6 @@ namespace MesFilms
                         System.IO.File.Delete(wfile);
                 }
             }
-        }
-
-        private void DefaultCover_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void DefaultCoverArtist_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonGetMACadresses_Click(object sender, EventArgs e)
@@ -3220,35 +3168,18 @@ namespace MesFilms
             }
         }
 
-        private void check_WOL_Userdialog_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void NAS_Name_2_TextChanged(object sender, EventArgs e)
         {
             if (NAS_Name_2.Text.Length == 0)
                 NAS_MAC_2.Text = "";
-
         }
 
         private void NAS_Name_3_TextChanged(object sender, EventArgs e)
         {
             if (NAS_Name_3.Text.Length == 0)
                 NAS_MAC_3.Text = "";
-
         }
 
-
-        private void comboWOLtimeout_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Sort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnLaunchAMCupdater_Click(object sender, EventArgs e)
         {
@@ -3522,11 +3453,6 @@ namespace MesFilms
         {
           AntSearchList.Text =
             "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
-        }
-
-        private void comboBoxLogoSpacing_SelectedIndexChanged(object sender, EventArgs e)
-        {
-          
         }
 
         private void comboBoxLogoPresets_SelectedIndexChanged(object sender, EventArgs e)

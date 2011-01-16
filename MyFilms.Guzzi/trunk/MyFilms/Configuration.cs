@@ -321,6 +321,7 @@ namespace MesFilms
                 OnlyTitleList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyTitleList", false);
                 WindowsFileDialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WindowsFileDialog", false);
                 GlobalUnwatchedOnly = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnly", false);
+                GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnlyValue", "false");
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
                 if ((AlwaysDefaultView) || (MesFilms.InitialStart))
                 {
@@ -423,8 +424,14 @@ namespace MesFilms
         private bool globalUnwatchedOnly = false;
         public bool GlobalUnwatchedOnly
         {
-            get { return globalUnwatchedOnly; }
-            set { globalUnwatchedOnly = value; }
+          get { return globalUnwatchedOnly; }
+          set { globalUnwatchedOnly = value; }
+        }
+        private string globalUnwatchedOnlyValue;
+        public string GlobalUnwatchedOnlyValue
+        {
+          get { return globalUnwatchedOnlyValue; }
+          set { globalUnwatchedOnlyValue = value; }
         }
         private bool onlyTitleList = false;
         public bool OnlyTitleList
