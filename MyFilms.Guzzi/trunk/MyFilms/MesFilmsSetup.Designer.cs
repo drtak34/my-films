@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using MediaPortal.GUI.Library;
+
 using System.IO;
 
 namespace MesFilms
 {
+  using global::MesFilms.MyFilms.Configuration;
   using global::MesFilms.MyFilms.Utils;
 
   partial class MesFilmsSetup
@@ -31,12 +33,12 @@ namespace MesFilms
         }
         public string PluginName()
         {
-            return "Mes Films";
+            return "MyFilms";
         }
 
         public string Description()
         {
-            return "Mes Films Ant Movie Catalog";
+            return "MyFilms Ant Movie Catalog";
         }
 
         public string Author()
@@ -82,7 +84,7 @@ namespace MesFilms
             strButtonText = GUILocalizeStrings.Get(50);
             if (strButtonText == "")
             {
-                strButtonText = "Mes Films";
+                strButtonText = "MyFilms";
             }
             strButtonImage = "";
             strButtonImageFocus = "";
@@ -221,13 +223,13 @@ namespace MesFilms
           this.label29 = new System.Windows.Forms.Label();
           this.MesFilmsViews = new System.Windows.Forms.TextBox();
           this.SearchSubDirsTrailer = new System.Windows.Forms.CheckBox();
-          this.btnTrailer = new System.Windows.Forms.Button();
           this.PathStorageTrailer = new System.Windows.Forms.TextBox();
-          this.label34 = new System.Windows.Forms.Label();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
           this.ShowTrailerWhenStartingMovie = new System.Windows.Forms.CheckBox();
+          this.btnTrailer = new System.Windows.Forms.Button();
           this.ShowTrailerPlayDialog = new System.Windows.Forms.CheckBox();
           this.SearchFileNameTrailer = new System.Windows.Forms.CheckBox();
+          this.label34 = new System.Windows.Forms.Label();
           this.ItemSearchFileNameTrailer = new System.Windows.Forms.ComboBox();
           this.AntStorageTrailer = new System.Windows.Forms.ComboBox();
           this.label35 = new System.Windows.Forms.Label();
@@ -319,14 +321,47 @@ namespace MesFilms
           this.SPicture = new System.Windows.Forms.PictureBox();
           this.comboBoxLogoSpacing = new System.Windows.Forms.ComboBox();
           this.btnLogoClearCache = new System.Windows.Forms.Button();
-          this.label33 = new System.Windows.Forms.Label();
           this.AntUpdList = new System.Windows.Forms.TextBox();
           this.AntUpdField = new System.Windows.Forms.ComboBox();
-          this.chksupplaystop = new System.Windows.Forms.CheckBox();
           this.gpspfield = new System.Windows.Forms.GroupBox();
           this.lblUpdateValue = new System.Windows.Forms.Label();
           this.txtfdupdate = new System.Windows.Forms.TextBox();
           this.cbfdupdate = new System.Windows.Forms.ComboBox();
+          this.chksupplaystop = new System.Windows.Forms.CheckBox();
+          this.Tab_General = new System.Windows.Forms.TabPage();
+          this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
+          this.groupBox_Security = new System.Windows.Forms.GroupBox();
+          this.label_Security = new System.Windows.Forms.Label();
+          this.label16 = new System.Windows.Forms.Label();
+          this.label15 = new System.Windows.Forms.Label();
+          this.Rpt_Dwp = new System.Windows.Forms.TextBox();
+          this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
+          this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
+          this.label5 = new System.Windows.Forms.Label();
+          this.butPath = new System.Windows.Forms.Button();
+          this.ItemSearchFileName = new System.Windows.Forms.ComboBox();
+          this.AntIdentLabel = new System.Windows.Forms.TextBox();
+          this.label6 = new System.Windows.Forms.Label();
+          this.label4 = new System.Windows.Forms.Label();
+          this.label13 = new System.Windows.Forms.Label();
+          this.ButCat = new System.Windows.Forms.Button();
+          this.label1 = new System.Windows.Forms.Label();
+          this.Tab_Trailer = new System.Windows.Forms.TabPage();
+          this.Tab_Views = new System.Windows.Forms.TabPage();
+          this.Tab_Search = new System.Windows.Forms.TabPage();
+          this.groupBoxSearchByProperties = new System.Windows.Forms.GroupBox();
+          this.AntSearchFieldReset = new System.Windows.Forms.Button();
+          this.label18 = new System.Windows.Forms.Label();
+          this.AntSearchField = new System.Windows.Forms.ComboBox();
+          this.AntSearchList = new System.Windows.Forms.TextBox();
+          this.groupBox2 = new System.Windows.Forms.GroupBox();
+          this.Label_UserProfileName = new System.Windows.Forms.Label();
+          this.UserProfileName = new System.Windows.Forms.TextBox();
+          this.groupBoxUpdateByProperties = new System.Windows.Forms.GroupBox();
+          this.AntUpdFieldReset = new System.Windows.Forms.Button();
+          this.label33 = new System.Windows.Forms.Label();
+          this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration1 = new TraktConfiguration();
           this.gpsuppress = new System.Windows.Forms.GroupBox();
           this.rbsuppress2 = new System.Windows.Forms.RadioButton();
           this.rbsuppress4 = new System.Windows.Forms.RadioButton();
@@ -355,38 +390,7 @@ namespace MesFilms
           this.label11 = new System.Windows.Forms.Label();
           this.label12 = new System.Windows.Forms.Label();
           this.General = new System.Windows.Forms.TabControl();
-          this.Tab_General = new System.Windows.Forms.TabPage();
-          this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
-          this.groupBox_Security = new System.Windows.Forms.GroupBox();
-          this.label_Security = new System.Windows.Forms.Label();
-          this.label16 = new System.Windows.Forms.Label();
-          this.label15 = new System.Windows.Forms.Label();
-          this.Rpt_Dwp = new System.Windows.Forms.TextBox();
-          this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
-          this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
-          this.label5 = new System.Windows.Forms.Label();
-          this.butPath = new System.Windows.Forms.Button();
-          this.ItemSearchFileName = new System.Windows.Forms.ComboBox();
-          this.AntIdentLabel = new System.Windows.Forms.TextBox();
-          this.label6 = new System.Windows.Forms.Label();
-          this.label4 = new System.Windows.Forms.Label();
-          this.label13 = new System.Windows.Forms.Label();
-          this.ButCat = new System.Windows.Forms.Button();
-          this.label1 = new System.Windows.Forms.Label();
-          this.Tab_Trailer = new System.Windows.Forms.TabPage();
-          this.Tab_Views = new System.Windows.Forms.TabPage();
-          this.Tab_Search = new System.Windows.Forms.TabPage();
-          this.groupBoxSearchByProperties = new System.Windows.Forms.GroupBox();
-          this.AntSearchFieldReset = new System.Windows.Forms.Button();
-          this.label18 = new System.Windows.Forms.Label();
-          this.AntSearchField = new System.Windows.Forms.ComboBox();
-          this.AntSearchList = new System.Windows.Forms.TextBox();
           this.Tab_Update = new System.Windows.Forms.TabPage();
-          this.groupBox2 = new System.Windows.Forms.GroupBox();
-          this.Label_UserProfileName = new System.Windows.Forms.Label();
-          this.UserProfileName = new System.Windows.Forms.TextBox();
-          this.groupBoxUpdateByProperties = new System.Windows.Forms.GroupBox();
-          this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
           this.Tab_Grabber = new System.Windows.Forms.TabPage();
           this.Tab_Artwork = new System.Windows.Forms.TabPage();
@@ -456,9 +460,6 @@ namespace MesFilms
           this.groupBox_TitleOrder.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.gpspfield.SuspendLayout();
-          this.gpsuppress.SuspendLayout();
-          this.groupBox111.SuspendLayout();
-          this.General.SuspendLayout();
           this.Tab_General.SuspendLayout();
           this.groupBox_Security.SuspendLayout();
           this.groupBox_PlayMovieInfos.SuspendLayout();
@@ -467,9 +468,13 @@ namespace MesFilms
           this.Tab_Views.SuspendLayout();
           this.Tab_Search.SuspendLayout();
           this.groupBoxSearchByProperties.SuspendLayout();
-          this.Tab_Update.SuspendLayout();
           this.groupBox2.SuspendLayout();
           this.groupBoxUpdateByProperties.SuspendLayout();
+          this.Tab_Trakt.SuspendLayout();
+          this.gpsuppress.SuspendLayout();
+          this.groupBox111.SuspendLayout();
+          this.General.SuspendLayout();
+          this.Tab_Update.SuspendLayout();
           this.groupBoxDeletionOptions.SuspendLayout();
           this.Tab_Grabber.SuspendLayout();
           this.Tab_Artwork.SuspendLayout();
@@ -1775,16 +1780,6 @@ namespace MesFilms
           this.SearchSubDirsTrailer.Visible = false;
           this.SearchSubDirsTrailer.CheckedChanged += new System.EventHandler(this.SearchSubDirsTrailer_CheckedChanged);
           // 
-          // btnTrailer
-          // 
-          this.btnTrailer.Location = new System.Drawing.Point(634, 63);
-          this.btnTrailer.Name = "btnTrailer";
-          this.btnTrailer.Size = new System.Drawing.Size(32, 23);
-          this.btnTrailer.TabIndex = 70;
-          this.btnTrailer.Text = "...";
-          this.btnTrailer.UseVisualStyleBackColor = true;
-          this.btnTrailer.Click += new System.EventHandler(this.btnTrailer_Click);
-          // 
           // PathStorageTrailer
           // 
           this.PathStorageTrailer.Location = new System.Drawing.Point(190, 65);
@@ -1793,15 +1788,6 @@ namespace MesFilms
           this.PathStorageTrailer.TabIndex = 68;
           this.ToolTip1.SetToolTip(this.PathStorageTrailer, resources.GetString("PathStorageTrailer.ToolTip"));
           this.PathStorageTrailer.TextChanged += new System.EventHandler(this.PathStorageTrailer_TextChanged);
-          // 
-          // label34
-          // 
-          this.label34.AutoSize = true;
-          this.label34.Location = new System.Drawing.Point(24, 68);
-          this.label34.Name = "label34";
-          this.label34.Size = new System.Drawing.Size(143, 13);
-          this.label34.TabIndex = 69;
-          this.label34.Text = "Additional Trailer Searchpath";
           // 
           // groupBox24
           // 
@@ -1837,6 +1823,16 @@ namespace MesFilms
           this.ShowTrailerWhenStartingMovie.UseVisualStyleBackColor = true;
           this.ShowTrailerWhenStartingMovie.Visible = false;
           // 
+          // btnTrailer
+          // 
+          this.btnTrailer.Location = new System.Drawing.Point(634, 63);
+          this.btnTrailer.Name = "btnTrailer";
+          this.btnTrailer.Size = new System.Drawing.Size(32, 23);
+          this.btnTrailer.TabIndex = 70;
+          this.btnTrailer.Text = "...";
+          this.btnTrailer.UseVisualStyleBackColor = true;
+          this.btnTrailer.Click += new System.EventHandler(this.btnTrailer_Click);
+          // 
           // ShowTrailerPlayDialog
           // 
           this.ShowTrailerPlayDialog.AutoSize = true;
@@ -1863,6 +1859,15 @@ namespace MesFilms
           this.ToolTip1.SetToolTip(this.SearchFileNameTrailer, resources.GetString("SearchFileNameTrailer.ToolTip"));
           this.SearchFileNameTrailer.UseVisualStyleBackColor = true;
           this.SearchFileNameTrailer.Visible = false;
+          // 
+          // label34
+          // 
+          this.label34.AutoSize = true;
+          this.label34.Location = new System.Drawing.Point(24, 68);
+          this.label34.Name = "label34";
+          this.label34.Size = new System.Drawing.Size(143, 13);
+          this.label34.TabIndex = 69;
+          this.label34.Text = "Additional Trailer Searchpath";
           // 
           // ItemSearchFileNameTrailer
           // 
@@ -2870,15 +2875,6 @@ namespace MesFilms
           this.btnLogoClearCache.UseVisualStyleBackColor = true;
           this.btnLogoClearCache.Click += new System.EventHandler(this.btnLogoClearCache_Click);
           // 
-          // label33
-          // 
-          this.label33.AutoSize = true;
-          this.label33.Location = new System.Drawing.Point(12, 26);
-          this.label33.Name = "label33";
-          this.label33.Size = new System.Drawing.Size(153, 13);
-          this.label33.TabIndex = 83;
-          this.label33.Text = "Update by Properties Selection";
-          // 
           // AntUpdList
           // 
           this.AntUpdList.BackColor = System.Drawing.SystemColors.Control;
@@ -2898,18 +2894,6 @@ namespace MesFilms
           this.AntUpdField.TabIndex = 81;
           this.ToolTip1.SetToolTip(this.AntUpdField, "Choose a DB item to add to the property update list.");
           this.AntUpdField.SelectedIndexChanged += new System.EventHandler(this.AntUpdField_SelectedIndexChanged);
-          // 
-          // chksupplaystop
-          // 
-          this.chksupplaystop.AutoSize = true;
-          this.chksupplaystop.Enabled = false;
-          this.chksupplaystop.Location = new System.Drawing.Point(10, 25);
-          this.chksupplaystop.Name = "chksupplaystop";
-          this.chksupplaystop.Size = new System.Drawing.Size(184, 17);
-          this.chksupplaystop.TabIndex = 19;
-          this.chksupplaystop.Text = "Update Field when player finishes";
-          this.chksupplaystop.UseVisualStyleBackColor = true;
-          this.chksupplaystop.CheckedChanged += new System.EventHandler(this.chksupplaystop_CheckedChanged);
           // 
           // gpspfield
           // 
@@ -2951,268 +2935,17 @@ namespace MesFilms
           this.cbfdupdate.TabIndex = 15;
           this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
           // 
-          // gpsuppress
+          // chksupplaystop
           // 
-          this.gpsuppress.Controls.Add(this.rbsuppress2);
-          this.gpsuppress.Controls.Add(this.rbsuppress4);
-          this.gpsuppress.Controls.Add(this.rbsuppress3);
-          this.gpsuppress.Controls.Add(this.rbsuppress1);
-          this.gpsuppress.Enabled = false;
-          this.gpsuppress.Location = new System.Drawing.Point(15, 30);
-          this.gpsuppress.Name = "gpsuppress";
-          this.gpsuppress.Size = new System.Drawing.Size(321, 106);
-          this.gpsuppress.TabIndex = 2;
-          this.gpsuppress.TabStop = false;
-          // 
-          // rbsuppress2
-          // 
-          this.rbsuppress2.AutoSize = true;
-          this.rbsuppress2.Location = new System.Drawing.Point(15, 35);
-          this.rbsuppress2.Name = "rbsuppress2";
-          this.rbsuppress2.Size = new System.Drawing.Size(189, 17);
-          this.rbsuppress2.TabIndex = 5;
-          this.rbsuppress2.TabStop = true;
-          this.rbsuppress2.Text = "Delete both db entry and movie file";
-          this.rbsuppress2.UseVisualStyleBackColor = true;
-          // 
-          // rbsuppress4
-          // 
-          this.rbsuppress4.AutoSize = true;
-          this.rbsuppress4.Location = new System.Drawing.Point(15, 81);
-          this.rbsuppress4.Name = "rbsuppress4";
-          this.rbsuppress4.Size = new System.Drawing.Size(201, 17);
-          this.rbsuppress4.TabIndex = 4;
-          this.rbsuppress4.TabStop = true;
-          this.rbsuppress4.Text = "Update db entry and delete movie file";
-          this.rbsuppress4.UseVisualStyleBackColor = true;
-          this.rbsuppress4.CheckedChanged += new System.EventHandler(this.rbsuppress_CheckedChanged);
-          // 
-          // rbsuppress3
-          // 
-          this.rbsuppress3.AutoSize = true;
-          this.rbsuppress3.Location = new System.Drawing.Point(15, 58);
-          this.rbsuppress3.Name = "rbsuppress3";
-          this.rbsuppress3.Size = new System.Drawing.Size(196, 17);
-          this.rbsuppress3.TabIndex = 2;
-          this.rbsuppress3.TabStop = true;
-          this.rbsuppress3.Text = "Update db entry and keep movie file";
-          this.rbsuppress3.UseVisualStyleBackColor = true;
-          this.rbsuppress3.CheckedChanged += new System.EventHandler(this.rbsuppress_CheckedChanged);
-          // 
-          // rbsuppress1
-          // 
-          this.rbsuppress1.AutoSize = true;
-          this.rbsuppress1.Location = new System.Drawing.Point(15, 12);
-          this.rbsuppress1.Name = "rbsuppress1";
-          this.rbsuppress1.Size = new System.Drawing.Size(119, 17);
-          this.rbsuppress1.TabIndex = 1;
-          this.rbsuppress1.TabStop = true;
-          this.rbsuppress1.Text = "Delete db entry only";
-          this.rbsuppress1.UseVisualStyleBackColor = true;
-          // 
-          // chkSuppress
-          // 
-          this.chkSuppress.AutoSize = true;
-          this.chkSuppress.Location = new System.Drawing.Point(10, 16);
-          this.chkSuppress.Name = "chkSuppress";
-          this.chkSuppress.Size = new System.Drawing.Size(183, 17);
-          this.chkSuppress.TabIndex = 0;
-          this.chkSuppress.Text = "Enable database deletion options";
-          this.chkSuppress.UseVisualStyleBackColor = true;
-          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
-          // 
-          // btnCreateAMCDefaultConfig
-          // 
-          this.btnCreateAMCDefaultConfig.Enabled = false;
-          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 124);
-          this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
-          this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 23);
-          this.btnCreateAMCDefaultConfig.TabIndex = 77;
-          this.btnCreateAMCDefaultConfig.Text = "(Re)Create Default Config";
-          this.btnCreateAMCDefaultConfig.UseVisualStyleBackColor = true;
-          this.btnCreateAMCDefaultConfig.Click += new System.EventHandler(this.btnCreateAMCDefaultConfig_Click);
-          // 
-          // lblAMCupdaterConfigPreview
-          // 
-          this.lblAMCupdaterConfigPreview.AutoSize = true;
-          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(310, 48);
-          this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
-          this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
-          this.lblAMCupdaterConfigPreview.TabIndex = 85;
-          this.lblAMCupdaterConfigPreview.Text = "Preview of current AMC Updater Configuration";
-          // 
-          // groupBox111
-          // 
-          this.groupBox111.Controls.Add(this.groupBox_nfoGrabber);
-          this.groupBox111.Controls.Add(this.lblAMCupdaterConfigPreview);
-          this.groupBox111.Controls.Add(this.lblAMCMovieScanPath);
-          this.groupBox111.Controls.Add(this.chkAMC_Purge_Missing_Files);
-          this.groupBox111.Controls.Add(this.btnAMCMovieScanPathAdd);
-          this.groupBox111.Controls.Add(this.AMCMovieScanPath);
-          this.groupBox111.Controls.Add(this.AMCConfigView);
-          this.groupBox111.Controls.Add(this.btnCreateAMCDesktopIcon);
-          this.groupBox111.Controls.Add(this.btnCreateAMCDefaultConfig);
-          this.groupBox111.Controls.Add(this.btnLaunchAMCupdater);
-          this.groupBox111.ImeMode = System.Windows.Forms.ImeMode.Off;
-          this.groupBox111.Location = new System.Drawing.Point(6, 197);
-          this.groupBox111.Name = "groupBox111";
-          this.groupBox111.Size = new System.Drawing.Size(731, 153);
-          this.groupBox111.TabIndex = 3;
-          this.groupBox111.TabStop = false;
-          this.groupBox111.Text = "AMC Updater external application";
-          // 
-          // groupBox_nfoGrabber
-          // 
-          this.groupBox_nfoGrabber.Enabled = false;
-          this.groupBox_nfoGrabber.Location = new System.Drawing.Point(188, 88);
-          this.groupBox_nfoGrabber.Name = "groupBox_nfoGrabber";
-          this.groupBox_nfoGrabber.Size = new System.Drawing.Size(109, 59);
-          this.groupBox_nfoGrabber.TabIndex = 3;
-          this.groupBox_nfoGrabber.TabStop = false;
-          this.groupBox_nfoGrabber.Text = "XBMC nfo Grabber";
-          // 
-          // lblAMCMovieScanPath
-          // 
-          this.lblAMCMovieScanPath.AutoSize = true;
-          this.lblAMCMovieScanPath.Location = new System.Drawing.Point(186, 21);
-          this.lblAMCMovieScanPath.Name = "lblAMCMovieScanPath";
-          this.lblAMCMovieScanPath.Size = new System.Drawing.Size(111, 13);
-          this.lblAMCMovieScanPath.TabIndex = 84;
-          this.lblAMCMovieScanPath.Text = "Scan Path(es) Movies";
-          // 
-          // btnAMCMovieScanPathAdd
-          // 
-          this.btnAMCMovieScanPathAdd.Enabled = false;
-          this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(646, 16);
-          this.btnAMCMovieScanPathAdd.Name = "btnAMCMovieScanPathAdd";
-          this.btnAMCMovieScanPathAdd.Size = new System.Drawing.Size(32, 23);
-          this.btnAMCMovieScanPathAdd.TabIndex = 82;
-          this.btnAMCMovieScanPathAdd.Text = "...";
-          this.btnAMCMovieScanPathAdd.UseVisualStyleBackColor = true;
-          this.btnAMCMovieScanPathAdd.Click += new System.EventHandler(this.btnAMCMovieScanPathAdd_Click);
-          // 
-          // AMCConfigView
-          // 
-          this.AMCConfigView.AllowColumnReorder = true;
-          this.AMCConfigView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Option,
-            this.Value});
-          this.AMCConfigView.FullRowSelect = true;
-          this.AMCConfigView.GridLines = true;
-          this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.AMCConfigView.Location = new System.Drawing.Point(308, 67);
-          this.AMCConfigView.MultiSelect = false;
-          this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(412, 80);
-          this.AMCConfigView.TabIndex = 80;
-          this.AMCConfigView.UseCompatibleStateImageBehavior = false;
-          this.AMCConfigView.View = System.Windows.Forms.View.Details;
-          // 
-          // Option
-          // 
-          this.Option.Width = 98;
-          // 
-          // Value
-          // 
-          this.Value.Width = 309;
-          // 
-          // btnLaunchAMCupdater
-          // 
-          this.btnLaunchAMCupdater.Image = global::MesFilms.Properties.Resources.AMCUpdaterSmall;
-          this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 21);
-          this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
-          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 56);
-          this.btnLaunchAMCupdater.TabIndex = 76;
-          this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
-          this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
-          this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
-          // 
-          // AntFilterMinRating
-          // 
-          this.AntFilterMinRating.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterMinRating.Name = "AntFilterMinRating";
-          this.AntFilterMinRating.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterMinRating.TabIndex = 0;
-          // 
-          // AntFilterSign4
-          // 
-          this.AntFilterSign4.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterSign4.Name = "AntFilterSign4";
-          this.AntFilterSign4.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterSign4.TabIndex = 0;
-          // 
-          // AntFilterSign3
-          // 
-          this.AntFilterSign3.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterSign3.Name = "AntFilterSign3";
-          this.AntFilterSign3.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterSign3.TabIndex = 0;
-          // 
-          // AntFilterItem4
-          // 
-          this.AntFilterItem4.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterItem4.Name = "AntFilterItem4";
-          this.AntFilterItem4.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterItem4.TabIndex = 0;
-          // 
-          // AntFilterText4
-          // 
-          this.AntFilterText4.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterText4.Name = "AntFilterText4";
-          this.AntFilterText4.Size = new System.Drawing.Size(100, 20);
-          this.AntFilterText4.TabIndex = 0;
-          // 
-          // AntFilterItem3
-          // 
-          this.AntFilterItem3.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterItem3.Name = "AntFilterItem3";
-          this.AntFilterItem3.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterItem3.TabIndex = 0;
-          // 
-          // AntFilterText3
-          // 
-          this.AntFilterText3.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterText3.Name = "AntFilterText3";
-          this.AntFilterText3.Size = new System.Drawing.Size(100, 20);
-          this.AntFilterText3.TabIndex = 0;
-          // 
-          // label11
-          // 
-          this.label11.AutoSize = true;
-          this.label11.Location = new System.Drawing.Point(80, 14);
-          this.label11.Name = "label11";
-          this.label11.Size = new System.Drawing.Size(97, 13);
-          this.label11.TabIndex = 36;
-          this.label11.Text = "Menu Plugin Name";
-          // 
-          // label12
-          // 
-          this.label12.AutoSize = true;
-          this.label12.Location = new System.Drawing.Point(80, 42);
-          this.label12.Name = "label12";
-          this.label12.Size = new System.Drawing.Size(100, 13);
-          this.label12.TabIndex = 38;
-          this.label12.Text = "Configuration Name";
-          // 
-          // General
-          // 
-          this.General.Controls.Add(this.Tab_General);
-          this.General.Controls.Add(this.Tab_Trailer);
-          this.General.Controls.Add(this.Tab_Views);
-          this.General.Controls.Add(this.Tab_Search);
-          this.General.Controls.Add(this.Tab_Update);
-          this.General.Controls.Add(this.Tab_Grabber);
-          this.General.Controls.Add(this.Tab_Artwork);
-          this.General.Controls.Add(this.Tab_Logos);
-          this.General.Controls.Add(this.Tab_WakeOnLan);
-          this.General.Controls.Add(this.Tab_ExternalCatalogs);
-          this.General.Location = new System.Drawing.Point(12, 78);
-          this.General.Name = "General";
-          this.General.SelectedIndex = 0;
-          this.General.Size = new System.Drawing.Size(755, 380);
-          this.General.TabIndex = 46;
-          this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
+          this.chksupplaystop.AutoSize = true;
+          this.chksupplaystop.Enabled = false;
+          this.chksupplaystop.Location = new System.Drawing.Point(10, 25);
+          this.chksupplaystop.Name = "chksupplaystop";
+          this.chksupplaystop.Size = new System.Drawing.Size(184, 17);
+          this.chksupplaystop.TabIndex = 19;
+          this.chksupplaystop.Text = "Update Field when player finishes";
+          this.chksupplaystop.UseVisualStyleBackColor = true;
+          this.chksupplaystop.CheckedChanged += new System.EventHandler(this.chksupplaystop_CheckedChanged);
           // 
           // Tab_General
           // 
@@ -3506,22 +3239,6 @@ namespace MesFilms
           this.ToolTip1.SetToolTip(this.AntSearchList, "This field cannot be edited directly, but shows you the chosen DB items for searc" +
                   "h.");
           // 
-          // Tab_Update
-          // 
-          this.Tab_Update.Controls.Add(this.groupBox_AntUpdatingItems);
-          this.Tab_Update.Controls.Add(this.groupBox2);
-          this.Tab_Update.Controls.Add(this.gpspfield);
-          this.Tab_Update.Controls.Add(this.groupBoxUpdateByProperties);
-          this.Tab_Update.Controls.Add(this.groupBoxDeletionOptions);
-          this.Tab_Update.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Update.Name = "Tab_Update";
-          this.Tab_Update.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Update.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Update.TabIndex = 3;
-          this.Tab_Update.Text = "Update";
-          this.Tab_Update.ToolTipText = "Setup for update options (updates to values from GUI)";
-          this.Tab_Update.UseVisualStyleBackColor = true;
-          // 
           // groupBox2
           // 
           this.groupBox2.Controls.Add(this.Label_UserProfileName);
@@ -3579,6 +3296,318 @@ namespace MesFilms
           this.ToolTip1.SetToolTip(this.AntUpdFieldReset, "This will reset the update llist to the MyFilms default values.");
           this.AntUpdFieldReset.UseVisualStyleBackColor = true;
           this.AntUpdFieldReset.Click += new System.EventHandler(this.AntUpdFieldReset_Click_1);
+          // 
+          // label33
+          // 
+          this.label33.AutoSize = true;
+          this.label33.Location = new System.Drawing.Point(12, 26);
+          this.label33.Name = "label33";
+          this.label33.Size = new System.Drawing.Size(153, 13);
+          this.label33.TabIndex = 83;
+          this.label33.Text = "Update by Properties Selection";
+          // 
+          // Tab_Trakt
+          // 
+          this.Tab_Trakt.Controls.Add(this.traktConfiguration1);
+          this.Tab_Trakt.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Trakt.Name = "Tab_Trakt";
+          this.Tab_Trakt.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Trakt.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Trakt.TabIndex = 10;
+          this.Tab_Trakt.Text = "Trakt";
+          this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
+          this.Tab_Trakt.UseVisualStyleBackColor = true;
+          this.Tab_Trakt.Visible = false;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(23, 25);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
+          // gpsuppress
+          // 
+          this.gpsuppress.Controls.Add(this.rbsuppress2);
+          this.gpsuppress.Controls.Add(this.rbsuppress4);
+          this.gpsuppress.Controls.Add(this.rbsuppress3);
+          this.gpsuppress.Controls.Add(this.rbsuppress1);
+          this.gpsuppress.Enabled = false;
+          this.gpsuppress.Location = new System.Drawing.Point(15, 30);
+          this.gpsuppress.Name = "gpsuppress";
+          this.gpsuppress.Size = new System.Drawing.Size(321, 106);
+          this.gpsuppress.TabIndex = 2;
+          this.gpsuppress.TabStop = false;
+          // 
+          // rbsuppress2
+          // 
+          this.rbsuppress2.AutoSize = true;
+          this.rbsuppress2.Location = new System.Drawing.Point(15, 35);
+          this.rbsuppress2.Name = "rbsuppress2";
+          this.rbsuppress2.Size = new System.Drawing.Size(189, 17);
+          this.rbsuppress2.TabIndex = 5;
+          this.rbsuppress2.TabStop = true;
+          this.rbsuppress2.Text = "Delete both db entry and movie file";
+          this.rbsuppress2.UseVisualStyleBackColor = true;
+          // 
+          // rbsuppress4
+          // 
+          this.rbsuppress4.AutoSize = true;
+          this.rbsuppress4.Location = new System.Drawing.Point(15, 81);
+          this.rbsuppress4.Name = "rbsuppress4";
+          this.rbsuppress4.Size = new System.Drawing.Size(201, 17);
+          this.rbsuppress4.TabIndex = 4;
+          this.rbsuppress4.TabStop = true;
+          this.rbsuppress4.Text = "Update db entry and delete movie file";
+          this.rbsuppress4.UseVisualStyleBackColor = true;
+          this.rbsuppress4.CheckedChanged += new System.EventHandler(this.rbsuppress_CheckedChanged);
+          // 
+          // rbsuppress3
+          // 
+          this.rbsuppress3.AutoSize = true;
+          this.rbsuppress3.Location = new System.Drawing.Point(15, 58);
+          this.rbsuppress3.Name = "rbsuppress3";
+          this.rbsuppress3.Size = new System.Drawing.Size(196, 17);
+          this.rbsuppress3.TabIndex = 2;
+          this.rbsuppress3.TabStop = true;
+          this.rbsuppress3.Text = "Update db entry and keep movie file";
+          this.rbsuppress3.UseVisualStyleBackColor = true;
+          this.rbsuppress3.CheckedChanged += new System.EventHandler(this.rbsuppress_CheckedChanged);
+          // 
+          // rbsuppress1
+          // 
+          this.rbsuppress1.AutoSize = true;
+          this.rbsuppress1.Location = new System.Drawing.Point(15, 12);
+          this.rbsuppress1.Name = "rbsuppress1";
+          this.rbsuppress1.Size = new System.Drawing.Size(119, 17);
+          this.rbsuppress1.TabIndex = 1;
+          this.rbsuppress1.TabStop = true;
+          this.rbsuppress1.Text = "Delete db entry only";
+          this.rbsuppress1.UseVisualStyleBackColor = true;
+          // 
+          // chkSuppress
+          // 
+          this.chkSuppress.AutoSize = true;
+          this.chkSuppress.Location = new System.Drawing.Point(10, 16);
+          this.chkSuppress.Name = "chkSuppress";
+          this.chkSuppress.Size = new System.Drawing.Size(183, 17);
+          this.chkSuppress.TabIndex = 0;
+          this.chkSuppress.Text = "Enable database deletion options";
+          this.chkSuppress.UseVisualStyleBackColor = true;
+          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
+          // 
+          // btnCreateAMCDefaultConfig
+          // 
+          this.btnCreateAMCDefaultConfig.Enabled = false;
+          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 124);
+          this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
+          this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 23);
+          this.btnCreateAMCDefaultConfig.TabIndex = 77;
+          this.btnCreateAMCDefaultConfig.Text = "(Re)Create Default Config";
+          this.btnCreateAMCDefaultConfig.UseVisualStyleBackColor = true;
+          this.btnCreateAMCDefaultConfig.Click += new System.EventHandler(this.btnCreateAMCDefaultConfig_Click);
+          // 
+          // lblAMCupdaterConfigPreview
+          // 
+          this.lblAMCupdaterConfigPreview.AutoSize = true;
+          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(310, 48);
+          this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
+          this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
+          this.lblAMCupdaterConfigPreview.TabIndex = 85;
+          this.lblAMCupdaterConfigPreview.Text = "Preview of current AMC Updater Configuration";
+          // 
+          // groupBox111
+          // 
+          this.groupBox111.Controls.Add(this.groupBox_nfoGrabber);
+          this.groupBox111.Controls.Add(this.lblAMCupdaterConfigPreview);
+          this.groupBox111.Controls.Add(this.lblAMCMovieScanPath);
+          this.groupBox111.Controls.Add(this.chkAMC_Purge_Missing_Files);
+          this.groupBox111.Controls.Add(this.btnAMCMovieScanPathAdd);
+          this.groupBox111.Controls.Add(this.AMCMovieScanPath);
+          this.groupBox111.Controls.Add(this.AMCConfigView);
+          this.groupBox111.Controls.Add(this.btnCreateAMCDesktopIcon);
+          this.groupBox111.Controls.Add(this.btnCreateAMCDefaultConfig);
+          this.groupBox111.Controls.Add(this.btnLaunchAMCupdater);
+          this.groupBox111.ImeMode = System.Windows.Forms.ImeMode.Off;
+          this.groupBox111.Location = new System.Drawing.Point(6, 197);
+          this.groupBox111.Name = "groupBox111";
+          this.groupBox111.Size = new System.Drawing.Size(731, 153);
+          this.groupBox111.TabIndex = 3;
+          this.groupBox111.TabStop = false;
+          this.groupBox111.Text = "AMC Updater external application";
+          // 
+          // groupBox_nfoGrabber
+          // 
+          this.groupBox_nfoGrabber.Enabled = false;
+          this.groupBox_nfoGrabber.Location = new System.Drawing.Point(188, 88);
+          this.groupBox_nfoGrabber.Name = "groupBox_nfoGrabber";
+          this.groupBox_nfoGrabber.Size = new System.Drawing.Size(109, 59);
+          this.groupBox_nfoGrabber.TabIndex = 3;
+          this.groupBox_nfoGrabber.TabStop = false;
+          this.groupBox_nfoGrabber.Text = "XBMC nfo Grabber";
+          // 
+          // lblAMCMovieScanPath
+          // 
+          this.lblAMCMovieScanPath.AutoSize = true;
+          this.lblAMCMovieScanPath.Location = new System.Drawing.Point(186, 21);
+          this.lblAMCMovieScanPath.Name = "lblAMCMovieScanPath";
+          this.lblAMCMovieScanPath.Size = new System.Drawing.Size(111, 13);
+          this.lblAMCMovieScanPath.TabIndex = 84;
+          this.lblAMCMovieScanPath.Text = "Scan Path(es) Movies";
+          // 
+          // btnAMCMovieScanPathAdd
+          // 
+          this.btnAMCMovieScanPathAdd.Enabled = false;
+          this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(646, 16);
+          this.btnAMCMovieScanPathAdd.Name = "btnAMCMovieScanPathAdd";
+          this.btnAMCMovieScanPathAdd.Size = new System.Drawing.Size(32, 23);
+          this.btnAMCMovieScanPathAdd.TabIndex = 82;
+          this.btnAMCMovieScanPathAdd.Text = "...";
+          this.btnAMCMovieScanPathAdd.UseVisualStyleBackColor = true;
+          this.btnAMCMovieScanPathAdd.Click += new System.EventHandler(this.btnAMCMovieScanPathAdd_Click);
+          // 
+          // AMCConfigView
+          // 
+          this.AMCConfigView.AllowColumnReorder = true;
+          this.AMCConfigView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Option,
+            this.Value});
+          this.AMCConfigView.FullRowSelect = true;
+          this.AMCConfigView.GridLines = true;
+          this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+          this.AMCConfigView.Location = new System.Drawing.Point(308, 67);
+          this.AMCConfigView.MultiSelect = false;
+          this.AMCConfigView.Name = "AMCConfigView";
+          this.AMCConfigView.Size = new System.Drawing.Size(412, 80);
+          this.AMCConfigView.TabIndex = 80;
+          this.AMCConfigView.UseCompatibleStateImageBehavior = false;
+          this.AMCConfigView.View = System.Windows.Forms.View.Details;
+          // 
+          // Option
+          // 
+          this.Option.Width = 98;
+          // 
+          // Value
+          // 
+          this.Value.Width = 309;
+          // 
+          // btnLaunchAMCupdater
+          // 
+          this.btnLaunchAMCupdater.Image = global::MesFilms.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 21);
+          this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
+          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 56);
+          this.btnLaunchAMCupdater.TabIndex = 76;
+          this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
+          this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
+          this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
+          // 
+          // AntFilterMinRating
+          // 
+          this.AntFilterMinRating.Location = new System.Drawing.Point(0, 0);
+          this.AntFilterMinRating.Name = "AntFilterMinRating";
+          this.AntFilterMinRating.Size = new System.Drawing.Size(121, 21);
+          this.AntFilterMinRating.TabIndex = 0;
+          // 
+          // AntFilterSign4
+          // 
+          this.AntFilterSign4.Location = new System.Drawing.Point(0, 0);
+          this.AntFilterSign4.Name = "AntFilterSign4";
+          this.AntFilterSign4.Size = new System.Drawing.Size(121, 21);
+          this.AntFilterSign4.TabIndex = 0;
+          // 
+          // AntFilterSign3
+          // 
+          this.AntFilterSign3.Location = new System.Drawing.Point(0, 0);
+          this.AntFilterSign3.Name = "AntFilterSign3";
+          this.AntFilterSign3.Size = new System.Drawing.Size(121, 21);
+          this.AntFilterSign3.TabIndex = 0;
+          // 
+          // AntFilterItem4
+          // 
+          this.AntFilterItem4.Location = new System.Drawing.Point(0, 0);
+          this.AntFilterItem4.Name = "AntFilterItem4";
+          this.AntFilterItem4.Size = new System.Drawing.Size(121, 21);
+          this.AntFilterItem4.TabIndex = 0;
+          // 
+          // AntFilterText4
+          // 
+          this.AntFilterText4.Location = new System.Drawing.Point(0, 0);
+          this.AntFilterText4.Name = "AntFilterText4";
+          this.AntFilterText4.Size = new System.Drawing.Size(100, 20);
+          this.AntFilterText4.TabIndex = 0;
+          // 
+          // AntFilterItem3
+          // 
+          this.AntFilterItem3.Location = new System.Drawing.Point(0, 0);
+          this.AntFilterItem3.Name = "AntFilterItem3";
+          this.AntFilterItem3.Size = new System.Drawing.Size(121, 21);
+          this.AntFilterItem3.TabIndex = 0;
+          // 
+          // AntFilterText3
+          // 
+          this.AntFilterText3.Location = new System.Drawing.Point(0, 0);
+          this.AntFilterText3.Name = "AntFilterText3";
+          this.AntFilterText3.Size = new System.Drawing.Size(100, 20);
+          this.AntFilterText3.TabIndex = 0;
+          // 
+          // label11
+          // 
+          this.label11.AutoSize = true;
+          this.label11.Location = new System.Drawing.Point(80, 14);
+          this.label11.Name = "label11";
+          this.label11.Size = new System.Drawing.Size(97, 13);
+          this.label11.TabIndex = 36;
+          this.label11.Text = "Menu Plugin Name";
+          // 
+          // label12
+          // 
+          this.label12.AutoSize = true;
+          this.label12.Location = new System.Drawing.Point(80, 42);
+          this.label12.Name = "label12";
+          this.label12.Size = new System.Drawing.Size(100, 13);
+          this.label12.TabIndex = 38;
+          this.label12.Text = "Configuration Name";
+          // 
+          // General
+          // 
+          this.General.Controls.Add(this.Tab_General);
+          this.General.Controls.Add(this.Tab_Trailer);
+          this.General.Controls.Add(this.Tab_Views);
+          this.General.Controls.Add(this.Tab_Search);
+          this.General.Controls.Add(this.Tab_Update);
+          this.General.Controls.Add(this.Tab_Grabber);
+          this.General.Controls.Add(this.Tab_Artwork);
+          this.General.Controls.Add(this.Tab_Logos);
+          this.General.Controls.Add(this.Tab_WakeOnLan);
+          this.General.Controls.Add(this.Tab_ExternalCatalogs);
+          this.General.Controls.Add(this.Tab_Trakt);
+          this.General.Location = new System.Drawing.Point(12, 78);
+          this.General.Name = "General";
+          this.General.SelectedIndex = 0;
+          this.General.Size = new System.Drawing.Size(755, 380);
+          this.General.TabIndex = 46;
+          this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
+          // 
+          // Tab_Update
+          // 
+          this.Tab_Update.Controls.Add(this.groupBox_AntUpdatingItems);
+          this.Tab_Update.Controls.Add(this.groupBox2);
+          this.Tab_Update.Controls.Add(this.gpspfield);
+          this.Tab_Update.Controls.Add(this.groupBoxUpdateByProperties);
+          this.Tab_Update.Controls.Add(this.groupBoxDeletionOptions);
+          this.Tab_Update.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Update.Name = "Tab_Update";
+          this.Tab_Update.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Update.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Update.TabIndex = 3;
+          this.Tab_Update.Text = "Update";
+          this.Tab_Update.ToolTipText = "Setup for update options (updates to values from GUI)";
+          this.Tab_Update.UseVisualStyleBackColor = true;
           // 
           // groupBoxDeletionOptions
           // 
@@ -4212,11 +4241,6 @@ namespace MesFilms
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
           this.gpspfield.ResumeLayout(false);
           this.gpspfield.PerformLayout();
-          this.gpsuppress.ResumeLayout(false);
-          this.gpsuppress.PerformLayout();
-          this.groupBox111.ResumeLayout(false);
-          this.groupBox111.PerformLayout();
-          this.General.ResumeLayout(false);
           this.Tab_General.ResumeLayout(false);
           this.Tab_General.PerformLayout();
           this.groupBox_Security.ResumeLayout(false);
@@ -4230,11 +4254,17 @@ namespace MesFilms
           this.Tab_Search.ResumeLayout(false);
           this.groupBoxSearchByProperties.ResumeLayout(false);
           this.groupBoxSearchByProperties.PerformLayout();
-          this.Tab_Update.ResumeLayout(false);
           this.groupBox2.ResumeLayout(false);
           this.groupBox2.PerformLayout();
           this.groupBoxUpdateByProperties.ResumeLayout(false);
           this.groupBoxUpdateByProperties.PerformLayout();
+          this.Tab_Trakt.ResumeLayout(false);
+          this.gpsuppress.ResumeLayout(false);
+          this.gpsuppress.PerformLayout();
+          this.groupBox111.ResumeLayout(false);
+          this.groupBox111.PerformLayout();
+          this.General.ResumeLayout(false);
+          this.Tab_Update.ResumeLayout(false);
           this.groupBoxDeletionOptions.ResumeLayout(false);
           this.groupBoxDeletionOptions.PerformLayout();
           this.Tab_Grabber.ResumeLayout(false);
@@ -4596,7 +4626,7 @@ namespace MesFilms
         private ComboBox comboBoxLogoPresets;
         private Button btnLogoClearCache;
         private Button btnUpdate;
-
-
+        private TabPage Tab_Trakt;
+        private TraktConfiguration traktConfiguration1;
     }
 }

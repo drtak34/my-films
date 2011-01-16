@@ -137,6 +137,12 @@
     </Compile>
     <Compile Include="MyFilms\BaseMesFilms.cs" />
     <Compile Include="MyFilms\CatalogConverter\DvdProfiler.cs" />
+    <Compile Include="MyFilms\Configuration\TraktConfiguration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyFilms\Configuration\TraktConfiguration.Designer.cs">
+      <DependentUpon>TraktConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktSeriesOverview.cs" />
@@ -167,6 +173,7 @@
     <Compile Include="MyFilms\Utils\CString.cs" />
     <Compile Include="MyFilms\CatalogConverter\EaxMovieCatalog.cs" />
     <Compile Include="MyFilms\Utils\FastImage.cs" />
+    <Compile Include="MyFilms\Utils\Helper.cs" />
     <Compile Include="MyFilms\Utils\LocalizeStrings.cs" />
     <Compile Include="MyFilms\MesFilms.cs" />
     <Compile Include="MyFilms\MesFilmsActorsInfo.cs" />
@@ -284,10 +291,14 @@
     <EmbeddedResource Include="MyFilms\Resources\AMCUpdater.ico" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="MyFilms\Configuration\TraktConfiguration.resx">
+      <DependentUpon>TraktConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyFilms\Resources\AMCUpdaterSmall.ico" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MyFilms\Resources\MyFilmsIcon.ico" />
+    <EmbeddedResource Include="MyFilms\Resources\trakt.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

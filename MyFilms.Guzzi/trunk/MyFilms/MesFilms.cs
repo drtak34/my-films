@@ -3164,14 +3164,14 @@ namespace MesFilms
                         break;
                         
                         // ToDo: Copied Code from Infoservice - still unclear how to forward http link ....
-                        string zoomlevel = string.Empty;
-                        zoomlevel = "100";
-                        int webBrowserWindowID = 16002; //Geckobrowser
-                        if (webBrowserWindowID > 0)
-                        {
-                            //logger.WriteLog(string.Format("Trying to open web browser with window ID {0}, url {1} and zoom {2}", webBrowserWindowID, FeedService.Feeds[FeedService.ActiveFeedIndex].Items[_feedListcontrol.SelectedListItemIndex].Url, zoomlevel), LogLevel.Info, InfoServiceModul.Feed);
-                            GUIWindowManager.ActivateWindow(webBrowserWindowID, false);
-                        }
+                        //string zoomlevel = string.Empty;
+                        //zoomlevel = "100";
+                        //int webBrowserWindowID = 16002; //Geckobrowser
+                        //if (webBrowserWindowID > 0)
+                        //{
+                        //    //logger.WriteLog(string.Format("Trying to open web browser with window ID {0}, url {1} and zoom {2}", webBrowserWindowID, FeedService.Feeds[FeedService.ActiveFeedIndex].Items[_feedListcontrol.SelectedListItemIndex].Url, zoomlevel), LogLevel.Info, InfoServiceModul.Feed);
+                        //    GUIWindowManager.ActivateWindow(webBrowserWindowID, false);
+                        //}
                     }
 
                 case "updateperson":
@@ -3183,7 +3183,7 @@ namespace MesFilms
 
 
                         //First search corresponding URL for the actor ...
-                        bool director = false; // Actor is director
+                        // bool director = false; // Actor is director // Currently not used...
                         IMDB _imdb = new IMDB();
                         //IMDB.IMDBUrl wurl;
                         //newGrab.FindActor(facadeView.SelectedListItem.Label);
@@ -5096,7 +5096,8 @@ namespace MesFilms
             {
                 LogMyFilms.Debug("MF: (FanartTimerEvent): loadFanart NOT triggered !");
             }
-            m_bFanartTimerDisabled = false;
+            if (m_bFanartTimerDisabled) 
+              m_bFanartTimerDisabled = false;
         }
 
         bool fanartSet = false;
@@ -5105,12 +5106,16 @@ namespace MesFilms
         private bool loadFanart()
         //private bool loadFanart(DBTable item)
         {
-            if (backdrop == null)
-            {
-                // Fanart not supported by skin, exit now
-                fanartSet = false;
-                return false;
-            }
+          if (backdrop == null)
+          {
+            // Fanart not supported by skin, exit now
+            fanartSet = false;
+            return false;
+          }
+          if (fanartSet)
+          {
+            // Can be removed?
+          }
 
             string fanart = string.Empty;
             string fanartdir = string.Empty;

@@ -290,14 +290,15 @@ namespace MesFilms.Actors
                     }
 
                     if (iControl == (int)Controls.CTRL_BtnReturn)
-
-                        // Show Actor Details Screen
-                        //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
-                        GUIWindowManager.ActivateWindow(this.ID_MyFilmsActors);
-                    // Hier Aktivitäten wie z.b. ListControl für Actors?
-                    GUIWindowManager.ShowPreviousWindow();
-                    //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
-                    return true;
+                    {
+                      // Show Actor Details Screen
+                      //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
+                      GUIWindowManager.ActivateWindow(this.ID_MyFilmsActors);
+                      // Hier Aktivitäten wie z.b. ListControl für Actors?
+                      GUIWindowManager.ShowPreviousWindow();
+                      //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
+                      return true;
+                    }
 
                     if ((iControl == (int)Controls.CTRL_BtnLayout) && !MesFilms.conf.Boolselect)
                     // Change Layout View
@@ -355,7 +356,7 @@ namespace MesFilms.Actors
                             }
                         }
                     }
-
+                break;
             }
             base.OnMessage(messageType);
             return true;

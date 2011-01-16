@@ -64,6 +64,7 @@ namespace MesFilms
         public int selected_Logo_Item;
         public bool load = true;
         public DataSet AMCdsSettings = new DataSet();
+        TabPage tabPageSave = null; // Zwischenspeicher für TabPage
         public MesFilmsSetup()
         {
             InitializeComponent();
@@ -77,6 +78,23 @@ namespace MesFilms
             textBox1.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginName", "Films");
             MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/anable normal vs. testfeatures
             LogMyFilms.Info("MyFilms Setup ********** OperationsMode (PluginMode): '" + MyFilms_PluginMode + "' **********");
+
+            if (MyFilms_PluginMode == "normal") // disable Trakt in standardmode
+            {
+              //hide a tab by removing it from the TabPages collection
+              this.tabPageSave = General.TabPages[10];
+              this.General.TabPages.Remove(this.tabPageSave);
+            }
+            //else
+            //{
+            //  //show a tab by adding it to the TabPages collection
+            //  if (this.tabPageSave != null)
+            //  {
+            //    int loc = General.SelectedIndex;
+            //    this.General.TabPages.Insert(loc, this.tabPageSave);
+            //  }
+            //}
+
             MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
             //            for (int i = 0; i < (int)MesFilms_nb_config; i++)
             //            {

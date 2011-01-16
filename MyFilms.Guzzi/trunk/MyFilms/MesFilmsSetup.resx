@@ -163,6 +163,12 @@ so children will not be aware of any other configurations.
 Adult movies can then be included in another configuration that is password protected.
 </value>
   </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.</value>
+  </data>
   <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
 Select the option “Display Always that view when using this config”, 
@@ -173,12 +179,6 @@ the last view used before exiting the plugin will be shown next time.
 If a value is entered for the second parameter, only records containing that value will be displayed.  
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
-  </data>
-  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
-    <value>Unwatched option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.</value>
   </data>
   <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
     <value>Views by ‘Genre’, by ‘Year’ and by ‘Country’ are already defined by default.  
@@ -291,17 +291,6 @@ when no thumb for views is available.</value>
 MyFilms will try to find matching media files based on the title chosen for trailersearch 
 and media files in subdirectories containing the movie name.</value>
   </data>
-  <data name="groupBox24.ToolTip" xml:space="preserve">
-    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
-and thus to integrate trailers into MyFilms.
-Trailer can be searched within the plugin and autoregistered.
-GUI allows to show if a trailer is present (registered) and play it.
-By default, the search includes mediafiles in the directory of the main movie and it's subdirectories, 
-searching for mediafiles containing "trlr" or "trailer" in the filename.
-So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
-and make sure they are named accordingly (many downloader utilities do it this way).
-You can add an additional trailer searchpath that will search and register for media files containing the movie's title.</value>
-  </data>
   <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
     <value>If Trailer file is not found with the 'DB Item for storing Trailer Infos' field, you 
 can search the trailer file with the movie Name.
@@ -312,6 +301,17 @@ Attention: Might degrade performace!
   <data name="AntStorageTrailer.ToolTip" xml:space="preserve">
     <value>Choose the DB fireld where MyFilms should store the infos about trailers.
 "Borrower" is a good recommendation, as it's not commonly used. However make sure, yoiu do not use this field for other purposes (e.g. seen status)</value>
+  </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>The Trailer section allows to use a selectable ANT DB field to store trailerpathes
+and thus to integrate trailers into MyFilms.
+Trailer can be searched within the plugin and autoregistered.
+GUI allows to show if a trailer is present (registered) and play it.
+By default, the search includes mediafiles in the directory of the main movie and it's subdirectories, 
+searching for mediafiles containing "trlr" or "trailer" in the filename.
+So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
+and make sure they are named accordingly (many downloader utilities do it this way).
+You can add an additional trailer searchpath that will search and register for media files containing the movie's title.</value>
   </data>
   <data name="DefaultCover.ToolTip" xml:space="preserve">
     <value>Enter the full path and file name of the image file that you wish to use as the default DVD cover image.  
@@ -387,22 +387,22 @@ However be careful not to activate the delete options ("Delete Options", otherwi
 
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
+  <data name="groupBoxUpdateByProperties.ToolTip" xml:space="preserve">
+    <value>In opposite to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
+The difference is, ou can't predefine a value for the update - but will always get a userdialog prefilled with the current value to change the content.</value>
+  </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
   </metadata>
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
-  <data name="groupBoxUpdateByProperties.ToolTip" xml:space="preserve">
-    <value>In opposite to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
-The difference is, ou can't predefine a value for the update - but will always get a userdialog prefilled with the current value to change the content.</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxMyFilms.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBwAA
-        CwcBtnMLwAAAWHNJREFUeF7tXQdYVVfWnVRTJomm95jEGI2xxNhj7713saOCIgqiggIiRVAQFFCKoAIq
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALBgAA
+        CwYBZDTpJAAAWHNJREFUeF7tXQdYVVfWnVRTJomm95jEGI2xxNhj7713saOCIgqiggIiRVAQFFCKoAIq
         vYkFxYYde6/Ye2+xl/2vde47+CRm/sxMNMlEvu9879Heu+/stfs6+z4nIv949vU33gEC4Nn6++7BM+H/
         zRXgGQCeAeDva/6euT7Ef8824e+tAM8A8MwF/L014O9uAZ9ZgGcW4JkF+DtbgWcW4JkF+G0W4H+wWPoc
         PpP5+p/6iL/Vqv1mC/AX3Z38Qv5Pvv9LfvS/GwDMBfs8JKbXC3jO9aLZyv/9r/1O/y8fzV/zL2E1/lcB

@@ -80,5 +80,12 @@ namespace MesFilms.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap trakt {
+            get {
+                object obj = ResourceManager.GetObject("trakt", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

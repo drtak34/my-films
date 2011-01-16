@@ -1926,7 +1926,7 @@ namespace MesFilms
                     }
                 catch (Exception e)
                     {
-                        LogMyFilms.Debug("MF: Title too long to create fanart path/filename from it - not loading fanart!");
+                        LogMyFilms.Debug("MF: Title too long to create fanart path/filename from it - not loading fanart! - Exception: " + e.ToString());
                         return wfanart;
                     }
                 
