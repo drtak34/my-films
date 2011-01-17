@@ -52,10 +52,10 @@ namespace MyFilmsPlugin.MyFilms
         private static void initData()
         {
             data = new AntMovieCatalog();
-            LogMyFilms.Debug("MF: BaseMesFilms - Try reading catalogfile '" + MesFilms.conf.StrFileXml + "'");
+            LogMyFilms.Debug("MF: BaseMesFilms - Try reading catalogfile '" + MyFilms.conf.StrFileXml + "'");
             try
             {
-                data.ReadXml(MesFilms.conf.StrFileXml);
+                data.ReadXml(MyFilms.conf.StrFileXml);
             }
             catch (Exception e)
             {
@@ -82,11 +82,11 @@ namespace MyFilmsPlugin.MyFilms
             if (data == null)
                 initData();
             if (StrSelect.Length == 0)
-                StrSelect = MesFilms.conf.StrTitle1.ToString() + " not like ''";
+                StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
             movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
             if (movies.Length == 0 && all)
             {
-                StrSelect = MesFilms.conf.StrTitle1.ToString() + " not like ''";
+                StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
                 movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
                 //Guzzi
                 LogMyFilms.Debug("MF: - BaseMesFilms:  StrDfltSelect      : '" + StrDfltSelect + "'");
@@ -131,7 +131,7 @@ namespace MyFilmsPlugin.MyFilms
                 try
                 {
                     System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter
-                              (MesFilms.conf.StrFileXml, System.Text.Encoding.Default);
+                              (MyFilms.conf.StrFileXml, System.Text.Encoding.Default);
                     MyXmlTextWriter.WriteStartDocument();
                     data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
                     MyXmlTextWriter.Close();
@@ -142,7 +142,7 @@ namespace MyFilmsPlugin.MyFilms
                     dlgOk.SetHeading("Error");//my videos
                     dlgOk.SetLine(1, "Error during updating the XML database !");
                     dlgOk.SetLine(2, "Maybe Directory full or no write access.");
-                    dlgOk.DoModal(MesFilms.ID_MyFilmsDetail);
+                    dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
                 } 
             }
         }

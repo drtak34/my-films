@@ -156,11 +156,11 @@
       <DependentUpon>TraktConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="MyFilms\MyFilmsGUI\Configuration.cs" />
-    <Compile Include="MyFilms\MyFilmsGUI\MesFilms.cs" />
-    <Compile Include="MyFilms\MyFilmsGUI\MesFilmsActors.cs" />
-    <Compile Include="MyFilms\MyFilmsGUI\MesFilmsActorsInfo.cs" />
-    <Compile Include="MyFilms\MyFilmsGUI\MesFilmsDetail.cs" />
-    <Compile Include="MyFilms\MyFilmsGUI\MesFilmsDialogSetRating.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MyFilms.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MyFilmsActors.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MyFilmsActorsInfo.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MyFilmsDetail.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MyFilmsDialogSetRating.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsThumbs.cs" />
     <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />

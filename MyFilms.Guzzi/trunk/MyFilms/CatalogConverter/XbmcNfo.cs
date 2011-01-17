@@ -78,7 +78,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
         {
             if (TitleDelim.Length == 0)
                 TitleDelim = "\\";
-            string[] wStrStorage = MesFilms.conf.StrDirStor.ToString().Split(new Char[] { ';' });
+            string[] wStrStorage = MyFilms.conf.StrDirStor.ToString().Split(new Char[] { ';' });
             string WStrPath = System.IO.Path.GetDirectoryName(source);
             string destFile = WStrPath + "\\" + source.Substring(source.LastIndexOf(@"\") + 1, source.Length - source.LastIndexOf(@"\") - 5) + ".xml";
             XmlTextWriter destXml = new XmlTextWriter(destFile, Encoding.Default);

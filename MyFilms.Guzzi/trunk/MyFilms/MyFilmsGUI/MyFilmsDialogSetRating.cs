@@ -32,7 +32,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   /// <summary>
   /// 
   /// </summary>
-  public class MesFilmsDialogSetRating : MediaPortal.Dialogs.GUIDialogWindow
+  public class MyFilmsDialogSetRating : MediaPortal.Dialogs.GUIDialogWindow
   {
     public enum ResultCode
     {
@@ -60,7 +60,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     string fileName;
     ResultCode resultCode;
 
-      public MesFilmsDialogSetRating()
+      public MyFilmsDialogSetRating()
     {
       GetID = 7988;
     }
@@ -135,7 +135,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     void UpdateRating()
     {
-        MesFilmsDetail.setGUIProperty("rating", Rating.ToString());
+        MyFilmsDetail.setGUIProperty("rating", Rating.ToString());
     }
 
     public decimal Rating

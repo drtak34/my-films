@@ -28,7 +28,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using MediaPortal.Configuration;
 
-  using MyFilms;
+  using MyFilmsPlugin.MyFilms;
 
   using MyFilmsPlugin.MyFilms.CatalogConverter;
   using MyFilmsPlugin.MyFilms.Utils;
@@ -325,7 +325,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GlobalUnwatchedOnly = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnly", false);
                 GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnlyValue", "false");
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
-                if ((AlwaysDefaultView) || (MesFilms.InitialStart))
+                if ((AlwaysDefaultView) || (MyFilms.InitialStart))
                 {
                     strIndex = -1;
                     LastID = -1;
@@ -1111,33 +1111,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MesFilms.conf.StrSelect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrActors", MesFilms.conf.StrActors);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MesFilms.conf.StrTitleSelect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MesFilms.conf.StrFilmSelect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MesFilms.conf.StrDfltSelect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MesFilms.conf.StrSorta);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethod", MesFilms.conf.CurrentSortMethod);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSens", MesFilms.conf.StrSortSens);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Selection", MesFilms.conf.StrTxtSelect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexItem", (selectedItem > -1) ? ((MesFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "TitleItem", (selectedItem > -1) ? ((MesFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolselect", MesFilms.conf.Boolselect);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolreturn", MesFilms.conf.Boolreturn);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolview", MesFilms.conf.Boolview);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WSelectedLabel", MesFilms.conf.Wselectedlabel);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WStrSort", MesFilms.conf.WStrSort);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MesFilms.conf.Wstar);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MesFilms.conf.StrLayOut);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MesFilms.conf.LastID);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntFilterMinRating", MesFilms.conf.StrAntFilterMinRating);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WOL-Userdialog", MesFilms.conf.StrCheckWOLuserdialog);
-            switch (MesFilms.conf.StrFileType)
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MyFilms.conf.StrSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrActors", MyFilms.conf.StrActors);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrTitleSelect", MyFilms.conf.StrTitleSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrFilmSelect", MyFilms.conf.StrFilmSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrDfltSelect", MyFilms.conf.StrDfltSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSort", MyFilms.conf.StrSorta);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "CurrentSortMethod", MyFilms.conf.CurrentSortMethod);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSortSens", MyFilms.conf.StrSortSens);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Selection", MyFilms.conf.StrTxtSelect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItem.ToString()) : "-1"); //may need to check if there is no item selected and so save -1
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "TitleItem", (selectedItem > -1) ? ((MyFilms.conf.Boolselect) ? selectedItem.ToString() : selectedItemLabel) : string.Empty); //may need to check if there is no item selected and so save ""
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolselect", MyFilms.conf.Boolselect);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolreturn", MyFilms.conf.Boolreturn);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Boolview", MyFilms.conf.Boolview);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WSelectedLabel", MyFilms.conf.Wselectedlabel);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WStrSort", MyFilms.conf.WStrSort);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
+            switch (MyFilms.conf.StrFileType)
                 {
                     case "0":
                         break;
                     case "1":
-                    XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MesFilms.conf.StrFileXml);
+                    XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
                         break;
                 }
         }
@@ -1179,7 +1179,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg == null)
             {
 
-              MesFilms.conf.StrFileXml = string.Empty;
+              MyFilms.conf.StrFileXml = string.Empty;
               return string.Empty;
             }
             dlg.Reset();
@@ -1194,7 +1194,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.DoModal(GetID);
             if (dlg.SelectedLabel == -1)
             {
-              MesFilms.conf.StrFileXml = string.Empty;
+              MyFilms.conf.StrFileXml = string.Empty;
               return string.Empty;
             }
             if (dlg.SelectedLabelText.Length > 0)
@@ -1219,7 +1219,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
                 dlgOk.SetLine(1, "No Configuration defined");
                 dlgOk.SetLine(2, "Please enter setup first");
-                dlgOk.DoModal(MesFilms.ID_MyFilms);
+                dlgOk.DoModal(MyFilms.ID_MyFilms);
                 //MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow(); // doesn't work in this context - why?
               return;
             }
@@ -1243,11 +1243,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (CurrentConfig == string.Empty)
             {
                 boolchoice = false;
-                CurrentConfig = Configuration.Choice_Config(MesFilms.ID_MyFilms); // "" => user esc's dialog on plugin startup so exit plugin unchanged
+                CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms); // "" => user esc's dialog on plugin startup so exit plugin unchanged
             }
-            CurrentConfig = Configuration.Control_Access_Config(CurrentConfig, MesFilms.ID_MyFilms);
+            CurrentConfig = Configuration.Control_Access_Config(CurrentConfig, MyFilms.ID_MyFilms);
             if ((CurrentConfig == "") && (NbConfig > 1) && (boolchoice)) //error password ? so if many config => choice config menu
-                CurrentConfig = Configuration.Choice_Config(MesFilms.ID_MyFilms);
+                CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
 //            }
         }
     }

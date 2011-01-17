@@ -1,4 +1,4 @@
-#region Copyright (C) 2005-2008 Team MediaPortal
+﻿#region Copyright (C) 2005-2008 Team MediaPortal
 
 /* 
  *	Copyright (C) 2005-2008 Team MediaPortal
@@ -23,27 +23,30 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using MediaPortal.GUI.Library;
-using MediaPortal.Util;
-using MediaPortal.GUI.Pictures;
-using MediaPortal.Video.Database;
-
 //using Grabber.IMDB;
 //using MediaPortal.Video.Database;
 
-namespace MesFilms.ActorDialog
+namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
-  using global::MesFilms.MyFilms.Utils;
+  using System;
+  using System.Collections.Generic;
+  using System.IO;
+
+  using MediaPortal.GUI.Library;
+  using MediaPortal.GUI.Pictures;
+  using MediaPortal.Util;
+  using MediaPortal.Video.Database;
+
+  using MyFilmsPlugin.MyFilms;
 
   using NLog;
+
+  using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
 
   /// <summary>
     /// Opens a separate Dialog to display Actor Infos - based on original IMDB actor Dialog
     /// </summary>
-    public class MesFilmsActorInfo : GUIWindow, IRenderLayer
+    public class MyFilmsActorInfo : GUIWindow, IRenderLayer
     {
         #region skin
         [SkinControl(2)]
@@ -100,7 +103,7 @@ namespace MesFilms.ActorDialog
                
 
         //public GUIVideoArtistInfoGuzzi()
-        public MesFilmsActorInfo()
+        public MyFilmsActorInfo()
         {
             GetID = (int)7991;
         }
@@ -376,12 +379,12 @@ namespace MesFilms.ActorDialog
                 
                 string coverArtImage = string.Empty;
 
-                coverArtImage = MesFilms.conf.DefaultCover;
+                coverArtImage = MyFilms.conf.DefaultCover;
 
                 //if (System.IO.File.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\NoPhoto.jpg"))
                 //    item.ThumbnailImage = (Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\NoPhoto.jpg"; 
-                if (System.IO.File.Exists(Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle)))
-                        coverArtImage = Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle);
+                if (System.IO.File.Exists(MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle)))
+                        coverArtImage = MediaPortal.Util.Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle);
                 LogMyFilms.Debug("MyFilmsActors (Coverartimage) - CoverartImage = '" + coverArtImage + "'");
                 if (File.Exists(coverArtImage))
                 {
@@ -412,7 +415,7 @@ namespace MesFilms.ActorDialog
                 // let's try to assign better covers
                 if (!string.IsNullOrEmpty(coverArtImage))
                 {
-                  coverArtImage = Utils.ConvertToLargeCoverArt(coverArtImage);
+                  coverArtImage = MediaPortal.Util.Utils.ConvertToLargeCoverArt(coverArtImage);
                   if (File.Exists(coverArtImage))
                   {
                     item.ThumbnailImage = coverArtImage;
@@ -423,11 +426,11 @@ namespace MesFilms.ActorDialog
                 facadeView.Add(item);
             }
             //SwitchView();
-            //N�tig?
+            //Nötig?
             //base.OnPageLoad();
             GUIPropertyManager.SetProperty("#Actor.Movies", movies);
 
-            string largeCoverArtImage = Utils.GetLargeCoverArtName(Thumbs.MovieActors, currentActor.Name);
+            string largeCoverArtImage = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieActors, currentActor.Name);
             if (imgCoverArt != null)
             {
                 imgCoverArt.Dispose();

@@ -175,7 +175,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             {
                 LogMyFilms.Debug("MF: Logo picture to be added " + fileLogoName);
                 string skinName = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
-                if (ID == MesFilms.ID_MyFilms)
+                if (ID == MyFilms.ID_MyFilms)
                     fileLogoName = "MyFilms_" + skinName + "_M" + logoConfigOverride + fileLogoName + ".png";
                 else
                     fileLogoName = "MyFilms_" + skinName + "_D" + logoConfigOverride + fileLogoName + ".png";

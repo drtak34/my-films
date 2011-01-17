@@ -28,7 +28,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaPortal.Configuration;
   using MediaPortal.GUI.Library;
 
-  using MyFilms;
+  using MyFilmsPlugin.MyFilms;
 
   /// <summary>
     /// Opens a separate page to display Movie Thumbs
@@ -148,7 +148,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MyFilmsThumbs: OnAction " + actionType.wID.ToString());
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
-                MesFilms.conf.LastID = MesFilms.ID_MyFilmsDetail;
+                MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
                 GUIWindowManager.ActivateWindow(this.ID_MyFilmsDetail);
                 return;
             }
@@ -173,11 +173,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Windows Init
                     //---------------------------------------------------------------------------------------
                     base.OnMessage(messageType);
-                    LogMyFilms.Debug("MyFilmsThumbs: CurrentMovie: '" + MesFilms.CurrentMovie + "'");
+                    LogMyFilms.Debug("MyFilmsThumbs: CurrentMovie: '" + MyFilms.CurrentMovie + "'");
 
                     //Retrieve original directory of mediafiles
                     //directoryname
-                    moviename = MesFilms.CurrentMovie.Substring(MesFilms.CurrentMovie.LastIndexOf(";") + 1);
+                    moviename = MyFilms.CurrentMovie.Substring(MyFilms.CurrentMovie.LastIndexOf(";") + 1);
                     LogMyFilms.Debug("MyFilmsThumbs (GetThumbDirectory) Splittet Mediadirectoryname: '" + moviename.ToString() + "'");
 
                     try
@@ -189,12 +189,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     
                     LoadThumbs(directoryname);
                     LogMyFilms.Debug("MyFilmsThumbs: PropertyLoaded !");
-                    MesFilms.conf.LastID = MesFilms.ID_MyFilmsThumbs;
+                    MyFilms.conf.LastID = MyFilms.ID_MyFilmsThumbs;
                     return true;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
                     if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != string.Empty)
-                        global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MesFilms.conf.StrIndex, MesFilms.conf.StrTIndex);
+                        global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
                     using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
                     {
                         string currentmoduleid = "7990";
@@ -224,7 +224,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (iControl == (int)Controls.CTRL_BtnReturn)
                     // Return Previous Menu
                     {
-                        MesFilms.conf.LastID = MesFilms.ID_MyFilms;
+                        MyFilms.conf.LastID = MyFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
                         GUIWindowManager.ActivateWindow(ID_MyFilms);
                         return true;
@@ -263,7 +263,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string defaultthumb = "\\\\xvs-gmi-fs\\media-server\\AMC-Appl\\AMC-DefaultCover\\videonotavailable.jpg";
             LogMyFilms.Debug("MyFilms (LoadThumbs) : Set default Thumb: '" + defaultthumb + "'");
             
-            //string strDir = MesFilms.conf.StrDirStorActorThumbs;
+            //string strDir = MyFilms.conf.StrDirStorActorThumbs;
 
             string thumb1 = MovieThumbPath + "thumb1.jpg";
             LogMyFilms.Debug("thumb1: '" + thumb1 + "'");
