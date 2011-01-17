@@ -2716,7 +2716,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
               <Description>The readme text</Description>
             </SectionParam>
             <SectionParam Name="Rreadme text file">
-              <Value />
+              <Value>ReadMe.txt</Value>
               <ValueType>File</ValueType>
               <Description>The readme file should be RTF file</Description>
             </SectionParam>
@@ -2863,7 +2863,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
     <OnlineLocation />
     <ReleaseDate>2011-01-01T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.5.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.6.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -5471,7 +5471,14 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{5bc8c98a-3ca0-482c-8595-100e96b78631}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f3aa9309-da66-43fc-bc93-005d6abfae1c}-film-reel-128x128.png</ZipFileName>
+        <DestinationFilename />
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>ReadMe.txt</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{515317cc-3c46-40eb-8f5e-8c560f196f60}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

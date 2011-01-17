@@ -76,7 +76,7 @@ namespace MesFilms
         {
             Refresh_Items(true);
 
-            textBox1.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginName", "Films");
+            textBoxPluginName.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginName", "Films");
             MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/anable normal vs. testfeatures
             LogMyFilms.Info("MyFilms Setup ********** OperationsMode (PluginMode): '" + MyFilms_PluginMode + "' **********");
 
@@ -305,10 +305,10 @@ namespace MesFilms
                 Config_Menu.Focus();
                 return;
             }
-            if (textBox1.Text.Length == 0)
+            if (textBoxPluginName.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Plugin's Name is Mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                textBox1.Focus();
+                textBoxPluginName.Focus();
                 return;
             }
             if (AntTitle1.Text.Length == 0)
@@ -1384,7 +1384,7 @@ namespace MesFilms
                 else
                 {
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
-                    XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBox1.Text.ToString());
+                    XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text.ToString());
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
                     mydivx.Dispose();
                     Close();
@@ -1405,7 +1405,7 @@ namespace MesFilms
                 }
             }
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
-            XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBox1.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text.ToString());
             Close();
         }
 

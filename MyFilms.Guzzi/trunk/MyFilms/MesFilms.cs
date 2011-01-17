@@ -191,13 +191,13 @@ namespace MesFilms
         // Returns the name of the plugin which is shown in the plugin menu
         public string PluginName()
         {
-            return "My Films";
+            return "MyFilms";
         }
 
         // Returns the description of the plugin is shown in the plugin menu
         public string Description()
         {
-            return "My Films Ant Movie Catalog - Guzzi Mod";
+            return "MyFilms Ant Movie Catalog - Guzzi Mod";
         }
 
         // Returns the author of the plugin which is shown in the plugin menu
@@ -241,7 +241,7 @@ namespace MesFilms
             string wPluginName = strPluginName;
             using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
-                wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "My Films");
+                wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
             }
 
             strButtonText = wPluginName;

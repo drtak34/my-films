@@ -103,7 +103,7 @@ namespace MesFilms
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MesFilmsSetup));
           this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
           this.Config_Name = new System.Windows.Forms.ComboBox();
-          this.textBox1 = new System.Windows.Forms.TextBox();
+          this.textBoxPluginName = new System.Windows.Forms.TextBox();
           this.Dwp = new System.Windows.Forms.TextBox();
           this.SearchSubDirs = new System.Windows.Forms.CheckBox();
           this.PathStorage = new System.Windows.Forms.TextBox();
@@ -125,6 +125,8 @@ namespace MesFilms
           this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
           this.AntFilterText1 = new System.Windows.Forms.TextBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+          this.lblUnwatchedItemsValue = new System.Windows.Forms.Label();
+          this.textBoxGlobalUnwatchedOnlyValue = new System.Windows.Forms.TextBox();
           this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
           this.label10 = new System.Windows.Forms.Label();
           this.SortSens = new System.Windows.Forms.ComboBox();
@@ -440,8 +442,6 @@ namespace MesFilms
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.textBoxGlobalUnwatchedOnlyValue = new System.Windows.Forms.TextBox();
-          this.lblUnwatchedItemsValue = new System.Windows.Forms.Label();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -511,13 +511,13 @@ namespace MesFilms
           this.Config_Name.SelectedIndexChanged += new System.EventHandler(this.Config_Name_SelectedIndexChanged);
           this.Config_Name.Leave += new System.EventHandler(this.Config_Name_SelectedIndexChanged);
           // 
-          // textBox1
+          // textBoxPluginName
           // 
-          this.textBox1.Location = new System.Drawing.Point(195, 11);
-          this.textBox1.Name = "textBox1";
-          this.textBox1.Size = new System.Drawing.Size(222, 20);
-          this.textBox1.TabIndex = 5;
-          this.ToolTip1.SetToolTip(this.textBox1, "Name of the plugin displayed in MP.\r\nBy default Films, but you can choose a bette" +
+          this.textBoxPluginName.Location = new System.Drawing.Point(195, 11);
+          this.textBoxPluginName.Name = "textBoxPluginName";
+          this.textBoxPluginName.Size = new System.Drawing.Size(222, 20);
+          this.textBoxPluginName.TabIndex = 5;
+          this.ToolTip1.SetToolTip(this.textBoxPluginName, "Name of the plugin displayed in MP.\r\nBy default Films, but you can choose a bette" +
                   "r name");
           // 
           // Dwp
@@ -615,7 +615,6 @@ namespace MesFilms
           this.AntSort2.Size = new System.Drawing.Size(160, 21);
           this.AntSort2.TabIndex = 38;
           this.AntSort2.SelectedIndexChanged += new System.EventHandler(this.AntSort2_SelectedIndexChanged);
-          this.AntSort2.Leave += new System.EventHandler(this.MesFilmsSetup_Load);
           // 
           // AntTSort2
           // 
@@ -632,7 +631,6 @@ namespace MesFilms
           this.AntSort1.Size = new System.Drawing.Size(161, 21);
           this.AntSort1.TabIndex = 36;
           this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
-          this.AntSort1.Leave += new System.EventHandler(this.MesFilmsSetup_Load);
           // 
           // AntTSort1
           // 
@@ -770,6 +768,24 @@ namespace MesFilms
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
+          // 
+          // lblUnwatchedItemsValue
+          // 
+          this.lblUnwatchedItemsValue.AutoSize = true;
+          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(27, 150);
+          this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
+          this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(193, 13);
+          this.lblUnwatchedItemsValue.TabIndex = 82;
+          this.lblUnwatchedItemsValue.Text = "Enter Value to identify unwatched items";
+          // 
+          // textBoxGlobalUnwatchedOnlyValue
+          // 
+          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(237, 147);
+          this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
+          this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(103, 20);
+          this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 81;
+          this.ToolTip1.SetToolTip(this.textBoxGlobalUnwatchedOnlyValue, "By Default, unwatched items are identified by having \"false\" in the checked field" +
+                  ".\r\nHowever, you can define a value other than that, if you require it.");
           // 
           // chkGlobalUnwatchedOnly
           // 
@@ -3732,11 +3748,11 @@ namespace MesFilms
           // 
           // btnUpdate
           // 
-          this.btnUpdate.Location = new System.Drawing.Point(663, 331);
+          this.btnUpdate.Location = new System.Drawing.Point(583, 331);
           this.btnUpdate.Name = "btnUpdate";
-          this.btnUpdate.Size = new System.Drawing.Size(64, 21);
+          this.btnUpdate.Size = new System.Drawing.Size(144, 21);
           this.btnUpdate.TabIndex = 103;
-          this.btnUpdate.Text = "Update";
+          this.btnUpdate.Text = "Update Logo Rule";
           this.btnUpdate.UseVisualStyleBackColor = true;
           this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
           // 
@@ -3826,7 +3842,7 @@ namespace MesFilms
           // 
           this.SFilePicture.Location = new System.Drawing.Point(498, 331);
           this.SFilePicture.Name = "SFilePicture";
-          this.SFilePicture.Size = new System.Drawing.Size(149, 20);
+          this.SFilePicture.Size = new System.Drawing.Size(79, 20);
           this.SFilePicture.TabIndex = 91;
           this.SFilePicture.Visible = false;
           // 
@@ -4166,24 +4182,6 @@ namespace MesFilms
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // textBoxGlobalUnwatchedOnlyValue
-          // 
-          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(237, 147);
-          this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
-          this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(103, 20);
-          this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 81;
-          this.ToolTip1.SetToolTip(this.textBoxGlobalUnwatchedOnlyValue, "By Default, unwatched items are identified by having \"false\" in the checked field" +
-                  ".\r\nHowever, you can define a value other than that, if you require it.");
-          // 
-          // lblUnwatchedItemsValue
-          // 
-          this.lblUnwatchedItemsValue.AutoSize = true;
-          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(27, 150);
-          this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
-          this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(193, 13);
-          this.lblUnwatchedItemsValue.TabIndex = 82;
-          this.lblUnwatchedItemsValue.Text = "Enter Value to identify unwatched items";
-          // 
           // MesFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4200,7 +4198,7 @@ namespace MesFilms
           this.Controls.Add(this.label12);
           this.Controls.Add(this.Config_Name);
           this.Controls.Add(this.label11);
-          this.Controls.Add(this.textBox1);
+          this.Controls.Add(this.textBoxPluginName);
           this.Controls.Add(this.label_VersionNumber);
           this.Controls.Add(this.General);
           this.Controls.Add(this.ButQuit);
@@ -4299,7 +4297,7 @@ namespace MesFilms
         #endregion
 
         private Label label_VersionNumber;
-        private TextBox textBox1;
+        private TextBox textBoxPluginName;
         private Label label11;
         private ComboBox Config_Name;
         private Label label12;
