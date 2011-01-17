@@ -510,9 +510,9 @@ namespace MesFilms.Actors
                             item.Label2 = Wnb_enr.ToString();
                             if (MesFilms.conf.StrViews)
                             {
-                                if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others"))
-                                    System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others");
-                                string strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others\\" + item.Label;
+                              if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
+                                System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+                              string strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + item.Label;
 
                                 if (!System.IO.File.Exists(strThumb + ".png"))
                                 {
@@ -559,9 +559,9 @@ namespace MesFilms.Actors
                 item.Label2 = Wnb_enr.ToString();
                 if (MesFilms.conf.StrViews)
                 {
-                    if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others"))
-                        System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others");
-                    string strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others\\" + item.Label;
+                  if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
+                    System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+                  string strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + item.Label;
                     if (!System.IO.File.Exists(strThumb + ".png"))
                     {
                         if (MesFilms.conf.StrPathViews.Length > 0)

@@ -63,7 +63,7 @@
           // 
           // pictureBoxTrakt
           // 
-          this.pictureBoxTrakt.Image = global::MesFilms.Properties.Resources.trakt;
+          this.pictureBoxTrakt.Image = global::MyFilmsPlugin.Properties.Resources.trakt;
           this.pictureBoxTrakt.Location = new System.Drawing.Point(351, 72);
           this.pictureBoxTrakt.Name = "pictureBoxTrakt";
           this.pictureBoxTrakt.Size = new System.Drawing.Size(92, 46);

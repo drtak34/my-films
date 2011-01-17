@@ -23,7 +23,7 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
-using MesFilms.MyFilms;
+using MyFilmsPlugin.MyFilms;
 
 namespace MesFilms
 {

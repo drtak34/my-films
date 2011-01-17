@@ -1,4 +1,4 @@
-﻿namespace MesFilms.MyFilms
+﻿namespace MyFilmsPlugin.MyFilms
 {
     
     

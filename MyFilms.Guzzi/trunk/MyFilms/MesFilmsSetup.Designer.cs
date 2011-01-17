@@ -88,7 +88,7 @@ namespace MesFilms
             }
             strButtonImage = "";
             strButtonImageFocus = "";
-            strPictureImage = "hover_My videostack.png";
+            strPictureImage = "hover_MyFilms.png";
             return true;
         }
         #region Code généré par le Concepteur Windows Form
@@ -3501,7 +3501,7 @@ namespace MesFilms
           // 
           // btnLaunchAMCupdater
           // 
-          this.btnLaunchAMCupdater.Image = global::MesFilms.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCupdater.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
           this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
           this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 21);
           this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
@@ -4161,7 +4161,7 @@ namespace MesFilms
           // 
           // btnLaunchAMCglobal
           // 
-          this.btnLaunchAMCglobal.Image = global::MesFilms.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCglobal.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
           this.btnLaunchAMCglobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
           this.btnLaunchAMCglobal.Location = new System.Drawing.Point(39, 464);
           this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";

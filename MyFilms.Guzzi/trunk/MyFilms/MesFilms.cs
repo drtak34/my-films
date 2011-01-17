@@ -34,7 +34,7 @@ using MediaPortal.Configuration;
 using MediaPortal.Util;
 
 using NewStringLib;
-using MesFilms.MyFilms;
+using MyFilmsPlugin.MyFilms;
 
 using System.Threading;
 using System.Linq;
@@ -247,7 +247,7 @@ namespace MesFilms
             strButtonText = wPluginName;
             strButtonImage = String.Empty;
             strButtonImageFocus = String.Empty;
-            strPictureImage = String.Format("hover_{0}.png", "Films");
+            strPictureImage = String.Format("hover_{0}.png", "MyFilms");
             string strBtnFile = String.Format(@"{0}\media\{1}", GUIGraphicsContext.Skin, strPictureImage);
             if (!System.IO.File.Exists(strBtnFile))
               strPictureImage = string.Empty;
@@ -1161,9 +1161,9 @@ namespace MesFilms
                         string strlabel = item.Label;
                         MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strlabel);
                         conf.FileImage = conf.DefaultCover;
-                        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others"))
-                            System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others");
-                        strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others\\" + strlabel;
+                        if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
+                          System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+                        strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + strlabel;
                         conf.FileImage = strThumb + ".png"; 
                         if (!System.IO.File.Exists(strThumb + ".png"))
                         {
@@ -1798,7 +1798,7 @@ namespace MesFilms
 
             if (MesFilms.conf.StrViews) // Check if Thumbs directories exist or create them
             {
-                if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Others")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Others");
+                if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
                 if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
             }
 
@@ -1806,7 +1806,7 @@ namespace MesFilms
             if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
               strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
             else
-              strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Others\";
+              strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
 
             for (wi = 0; wi != w_tableau.Count; wi++)
             {
@@ -1942,7 +1942,7 @@ namespace MesFilms
                         strThumbLarge = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\" + item.Label + ".png";
                     }
                     else
-                      strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Others\" + item.Label + ".png";
+                      strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + item.Label + ".png";
                     
                     if ((!System.IO.File.Exists(strThumb)) || (!System.IO.File.Exists(strThumbLarge)))
                         {

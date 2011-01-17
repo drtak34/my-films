@@ -40,7 +40,7 @@ using SQLite.NET;
 using MediaPortal.Configuration;
 using System.Xml;
 using System.Linq;
-using MesFilms.MyFilms;
+using MyFilmsPlugin.MyFilms;
 using MediaPortal.Profile;
 using System.Net;
 using MediaPortal.Video.Database;

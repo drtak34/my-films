@@ -7,8 +7,8 @@
     <ProjectGuid>{20BCDBE0-0812-4235-9330-40B8E570DAE1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MesFilms</RootNamespace>
-    <AssemblyName>MesFilms</AssemblyName>
+    <RootNamespace>MyFilmsPlugin</RootNamespace>
+    <AssemblyName>MyFilms</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

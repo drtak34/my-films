@@ -378,8 +378,8 @@ namespace MesFilms.ActorDialog
 
                 coverArtImage = MesFilms.conf.DefaultCover;
 
-                //if (System.IO.File.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others\\NoPhoto.jpg"))
-                //    item.ThumbnailImage = (Config.Dir.Thumbs) + "\\MyFilms_Others\\NoPhoto.jpg"; 
+                //if (System.IO.File.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\NoPhoto.jpg"))
+                //    item.ThumbnailImage = (Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\NoPhoto.jpg"; 
                 if (System.IO.File.Exists(Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle)))
                         coverArtImage = Utils.GetCoverArt(Thumbs.MovieTitle, currentActor[i].MovieTitle);
                 LogMyFilms.Debug("MyFilmsActors (Coverartimage) - CoverartImage = '" + coverArtImage + "'");

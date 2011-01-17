@@ -28,7 +28,7 @@ using System.Data;
 using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
 using TaskScheduler;
-using MesFilms.MyFilms;
+using MyFilmsPlugin.MyFilms;
 
 using System.Net;
 using System.Collections;
@@ -1172,6 +1172,12 @@ namespace MesFilms
                 LayOut.Text = "Cover Flow";
             AntViewText_Change();
             AntSort_Change();
+            
+            if (Config_Name.Text.Length > 0) 
+              chkLogos.Enabled = true;
+            else 
+              chkLogos.Enabled = false;
+
             if (PathStorage.Text.Length > 0 && AMCMovieScanPath.Text.Length == 0)
               AMCMovieScanPath.Text = PathStorage.Text;
             else
@@ -2810,7 +2816,7 @@ namespace MesFilms
             MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Others"))
+                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
                 {
                     if (wfile != DefaultCover.Text)
                         System.IO.File.Delete(wfile);
@@ -2919,7 +2925,7 @@ namespace MesFilms
             MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + "\\MyFilms_Artist"))
+                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons"))
                 {
                     if (wfile != DefaultCoverArtist.Text)
                         System.IO.File.Delete(wfile);
