@@ -2356,15 +2356,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(logopath +  @"\" + wtab[7]))) // Check if Logofile exists in default media directory of current skin and add it, if found
                     LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(logopath + @"\" + wtab[7]));
                 else
-                  {
-                    string[] filePathsLogoSearch = System.IO.Directory.GetFiles(logopath + @"\", wtab[7], System.IO.SearchOption.AllDirectories);
-                    if (filePathsLogoSearch.Length > 0)
+                  if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
+
                     {
-                      wtab[7] = filePathsLogoSearch[0];
+                      string[] filePathsLogoSearch = System.IO.Directory.GetFiles(logopath + @"\", wtab[7], System.IO.SearchOption.AllDirectories);
+                      if (filePathsLogoSearch.Length > 0)
+                      {
+                        LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(System.IO.Path.GetDirectoryName(filePathsLogoSearch[0]));
+                      }
                     }
-                    else
-                      LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(string.Empty); // Add empty field, if logofile istn't found anywhere
-                  }
+                  else
+                    LogoView.Items[LogoView.Items.Count - 1].SubItems.Add(string.Empty); // Add empty field, if logofile istn't found anywhere
         }
         private void chkLogos_CheckedChanged(object sender, EventArgs e)
         {

@@ -2598,7 +2598,7 @@ Some functions will not be available or work properly, if older versions are ins
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>8</Revision>
+      <Revision>9</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production.
@@ -2607,7 +2607,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
     <OnlineLocation />
     <ReleaseDate>2011-01-01T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.8.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.9.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -4942,14 +4942,14 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d764b5c0-f41b-4f45-aea3-87c03ea55d22}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6cba57c1-de77-433c-8e5d-0530db2a97eb}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{271e4560-1ca9-4e7c-81cb-7f1c4df505a3}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{75a077f6-6dd0-4187-883a-1efd21b77302}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

@@ -1020,8 +1020,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int iSelItem = -2;
             if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
 
-            //setlabels
-//            TxtSelect.Label = (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"); // always show as though folder path using \ regardless what sep is used
+            // setlabels
+            // TxtSelect.Label = (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"); // always show as though folder path using \ regardless what sep is used
             MyFilmsDetail.setGUIProperty("select", (conf.StrTxtSelect == "") ? " " : conf.StrTxtSelect.Replace(conf.TitleDelim, @"\"));// always show as though folder path using \ regardless what sep is used
 
             BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");

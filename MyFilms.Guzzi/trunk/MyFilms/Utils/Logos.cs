@@ -227,12 +227,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
             {
                 string[] wtab = wline.Split(new Char[] { ';' });
                 // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
-                if (!System.IO.File.Exists(wtab[7]) && System.IO.File.Exists(LogosPath + @"\" + wtab[7]))  // Check, if logofile is present in logo directory of current skin
+                if (!System.IO.File.Exists(wtab[7]) && System.IO.File.Exists(LogosPath + wtab[7]))  // Check, if logofile is present in logo directory of current skin
                 {
                     wtab[7] = LogosPath + wtab[7];
                 }
                 else
-                  //if (Autosearchoption) // Check, if logo file is present in subdirectories of logo directory of current skin
+                  if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
                   {
                     string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories);
                     //string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath + @"\", System.IO.Path.GetFileNameWithoutExtension(wtab[7]), System.IO.SearchOption.AllDirectories);
