@@ -1,16 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Reflection;
-using System.Text;
-using System.Xml;
-using MediaPortal.GUI.Library;
+﻿// Copy of WebGrabber.CS -> To Be modified for Filegrabbing (XBMC.nfo Files)
+namespace MyFilmsPlugin.MyFilms.Utils {
+  using System;
+  using System.IO;
+  using System.Net;
+  using System.Reflection;
+  using System.Text;
+  using System.Xml;
 
-
-// Copy of WebGrabber.CS -> To Be modified for Filegrabbing (XBMC.nfo Files)
-namespace MesFilms.Cornerstone.FileTools {
-
-    public class WebGrabber {
+  public class WebGrabber {
 
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
         private string requestUrl;

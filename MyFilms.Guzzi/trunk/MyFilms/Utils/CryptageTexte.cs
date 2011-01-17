@@ -21,7 +21,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
-namespace MesFilms.MyFilms.Utils
+namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
   using System.IO;

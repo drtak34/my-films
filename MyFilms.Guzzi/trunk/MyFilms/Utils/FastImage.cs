@@ -20,15 +20,19 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-namespace MesFilms
+namespace MyFilmsPlugin.MyFilms.Utils
 {
-    using System;
-    using System.Drawing;
-    using System.IO;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
+  using System;
+  using System.Drawing;
+  using System.IO;
+  using System.Reflection;
+  using System.Runtime.InteropServices;
 
-    public class ImageFast
+  using MesFilms;
+
+  using MyFilmsPlugin.MyFilms.MyFilmsGUI;
+
+  public class ImageFast
     {
         [DllImport("gdiplus.dll", CharSet = CharSet.Unicode)]
         public static extern int GdipLoadImageFromFile(string filename, out IntPtr image);

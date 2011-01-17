@@ -21,7 +21,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
-namespace MesFilms.MyFilms.CatalogConverter
+namespace MyFilmsPlugin.MyFilms.CatalogConverter
 {
   using System;
   using System.Collections.Generic;

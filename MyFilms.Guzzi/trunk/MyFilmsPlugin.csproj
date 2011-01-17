@@ -143,12 +143,25 @@
     <Compile Include="MyFilms\Configuration\MesFilmsInputBox.Designer.cs">
       <DependentUpon>MesFilmsInputBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyFilms\Configuration\MesFilmsSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyFilms\Configuration\MesFilmsSetup.designer.cs">
+      <DependentUpon>MesFilmsSetup.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyFilms\Configuration\TraktConfiguration.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MyFilms\Configuration\TraktConfiguration.Designer.cs">
       <DependentUpon>TraktConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyFilms\MyFilmsGUI\Configuration.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MesFilms.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MesFilmsActors.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MesFilmsActorsInfo.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MesFilmsDetail.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MesFilmsDialogSetRating.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MyFilmsThumbs.cs" />
     <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktSeriesOverview.cs" />
@@ -167,25 +180,12 @@
     <Compile Include="MyFilms\Utils\Cornerstone.MP\Extensions\GUIWindowExtensions.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\ImageSwapper.cs" />
     <Compile Include="MyFilms\Utils\FileGrabber.cs" />
-    <Compile Include="MyFilms\MesFilmsActors.cs" />
-    <Compile Include="MyFilms\MesFilmsThumbs.cs" />
-    <Compile Include="MyFilms\Configuration.cs" />
     <Compile Include="MyFilms\Utils\CryptageTexte.cs" />
     <Compile Include="MyFilms\Utils\CString.cs" />
     <Compile Include="MyFilms\CatalogConverter\EaxMovieCatalog.cs" />
     <Compile Include="MyFilms\Utils\FastImage.cs" />
     <Compile Include="MyFilms\Utils\Helper.cs" />
     <Compile Include="MyFilms\Utils\LocalizeStrings.cs" />
-    <Compile Include="MyFilms\MesFilms.cs" />
-    <Compile Include="MyFilms\MesFilmsActorsInfo.cs" />
-    <Compile Include="MyFilms\MesFilmsDetail.cs" />
-    <Compile Include="MyFilms\MesFilmsDialogSetRating.cs" />
-    <Compile Include="MyFilms\MesFilmsSetup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MyFilms\MesFilmsSetup.designer.cs">
-      <DependentUpon>MesFilmsSetup.cs</DependentUpon>
-    </Compile>
     <Compile Include="MyFilms\CatalogConverter\MovieCollector.cs" />
     <Compile Include="MyFilms\CatalogConverter\MyMovies.cs" />
     <Compile Include="MyFilms\Utils\Logos.cs" />
@@ -205,10 +205,6 @@
   <ItemGroup>
     <EmbeddedResource Include="MyFilms\AntMovieCatalog.resx">
       <DependentUpon>AntMovieCatalog.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyFilms\MesFilmsSetup.resx">
-      <DependentUpon>MesFilmsSetup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -298,6 +294,9 @@
     <Content Include="MyFilms\Resources\MyFilmsIcon.ico" />
     <EmbeddedResource Include="MyFilms\Configuration\MesFilmsInputBox.resx">
       <DependentUpon>MesFilmsInputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyFilms\Configuration\MesFilmsSetup.resx">
+      <DependentUpon>MesFilmsSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyFilms\Resources\trakt.png" />
   </ItemGroup>

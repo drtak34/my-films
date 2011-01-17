@@ -1,4 +1,4 @@
-﻿namespace MesFilms.MyFilms.Configuration
+﻿namespace MyFilmsPlugin.MyFilms.Configuration
 {
   using System;
   using System.Windows.Forms;

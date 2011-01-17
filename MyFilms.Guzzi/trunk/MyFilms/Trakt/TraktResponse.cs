@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
-
-namespace Trakt
+﻿namespace MyFilmsPlugin.MyFilms.Trakt
 {
-    [DataContract]
+  using System.Runtime.Serialization;
+
+  [DataContract]
     public class TraktResponse
     {
         [DataMember(Name = "status")]

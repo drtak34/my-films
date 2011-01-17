@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Runtime.Serialization.Json;
-
-namespace Trakt
+﻿namespace MyFilmsPlugin.MyFilms.Trakt
 {
-    public static class JSONExtensions
+  using System.Collections.Generic;
+  using System.Text;
+  using System.IO;
+  using System.Runtime.Serialization.Json;
+
+  public static class JSONExtensions
     {
         public static IEnumerable<T> FromJSONArray<T>(this string jsonArray)
         {

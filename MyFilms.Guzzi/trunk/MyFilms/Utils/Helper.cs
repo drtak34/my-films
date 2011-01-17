@@ -21,20 +21,19 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
-using MediaPortal.GUI.Library;
-using MediaPortal.Util;
-using MediaPortal.Ripper;
-using System.Globalization;
-using System.Reflection;
-using System.Security.Cryptography;
-
-namespace WindowPlugins.GUITVSeries
+namespace MyFilmsPlugin.MyFilms.Utils
 {
-  using MediaPortal.Configuration;
+  using System;
+  using System.Collections.Generic;
+  using System.Text;
+
+  using MediaPortal.GUI.Library;
+  using MediaPortal.Util;
+  using MediaPortal.Ripper;
+
+  using System.Globalization;
+  using System.Reflection;
+  using System.Security.Cryptography;
 
   #region String Extension Methods
     public static class StringExtensions

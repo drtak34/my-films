@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Trakt
+﻿namespace MyFilmsPlugin.MyFilms.Trakt
 {
-    public static class TraktURIs
+  public static class TraktURIs
     {
         public const string ScrobbleShow = @"http://api.trakt.tv/show/{0}/5daf4d0b339a90d7473c6f1ed7f609c4e69f92b4";
         public const string ScrobbleMovie = @"http://api.trakt.tv/movie/{0}/5daf4d0b339a90d7473c6f1ed7f609c4e69f92b4";

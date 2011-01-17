@@ -4,12 +4,11 @@
   using System.Collections.Generic;
   using System.Linq;
   using System.Windows.Forms;
-
-  using Trakt;
-  using Trakt.Show;
-  using Trakt.User;
-
   using System.Reflection;
+
+  using MyFilmsPlugin.MyFilms.Trakt;
+  using MyFilmsPlugin.MyFilms.Trakt.Show;
+  using MyFilmsPlugin.MyFilms.Trakt.User;
 
   public partial class TraktConfiguration : UserControl
     {

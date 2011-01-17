@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net;
-using Trakt.Show;
-using Trakt.User;
-using Trakt.Movie;
-using WindowPlugins.GUITVSeries;
-
-namespace Trakt
+﻿namespace MyFilmsPlugin.MyFilms.Trakt
 {
-    public enum TraktScrobbleStates
+  using System.Collections.Generic;
+  using System.Net;
+
+  using MyFilmsPlugin.MyFilms.Trakt.Movie;
+  using MyFilmsPlugin.MyFilms.Trakt.Show;
+  using MyFilmsPlugin.MyFilms.Trakt.User;
+
+  public enum TraktScrobbleStates
     {
         watching,
         scrobble

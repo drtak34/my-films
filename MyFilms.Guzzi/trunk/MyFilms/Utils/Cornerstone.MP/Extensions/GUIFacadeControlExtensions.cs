@@ -1,4 +1,4 @@
-﻿namespace MesFilms.MyFilms.Utils.Cornerstone.MP.Extensions {
+﻿namespace MyFilmsPlugin.MyFilms.Utils.Cornerstone.MP.Extensions {
   using MediaPortal.GUI.Library;
 
   using NLog;

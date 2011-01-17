@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
-
-namespace Trakt.Movie
+﻿namespace MyFilmsPlugin.MyFilms.Trakt.Movie
 {
-    [DataContract]
+  using System.Runtime.Serialization;
+
+  [DataContract]
     public class TraktMovieScrobble
     {
         [DataMember(Name = "title")]

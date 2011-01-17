@@ -18,7 +18,7 @@
 
 #endregion
 
-namespace MesFilms.MyFilms.Utils
+namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
   using System.Globalization;
@@ -27,7 +27,6 @@ namespace MesFilms.MyFilms.Utils
   using System.Runtime.CompilerServices;
 
   using MediaPortal.Configuration;
-  using MediaPortal.ServiceImplementations;
   using MediaPortal.Profile;
   using MediaPortal.Services;
   using MediaPortal.Util;

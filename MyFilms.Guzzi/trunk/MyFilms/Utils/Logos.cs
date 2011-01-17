@@ -20,20 +20,23 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using MediaPortal.Configuration;
 
-using MediaPortal.GUI.Library;
-
-
-
-namespace MesFilms
+namespace MyFilmsPlugin.MyFilms.Utils
 {
-    public class Logos
+  using System;
+  using System.Collections;
+  using System.Collections.Generic;
+  using System.Data;
+  using System.Drawing;
+
+  using MediaPortal.Configuration;
+  using MediaPortal.GUI.Library;
+
+  using MesFilms;
+
+  using MyFilmsPlugin.MyFilms.MyFilmsGUI;
+
+  public class Logos
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
       #region conteneurs
@@ -224,8 +227,22 @@ namespace MesFilms
             {
                 string[] wtab = wline.Split(new Char[] { ';' });
                 // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
-                if (!System.IO.File.Exists(wtab[7]))
-                    wtab[7] = LogosPath + @"\" + wtab[7]; // Check, if logofile is present in logo directory of current skin
+                if (!System.IO.File.Exists(wtab[7]) && System.IO.File.Exists(LogosPath + @"\" + wtab[7]))  // Check, if logofile is present in logo directory of current skin
+                {
+                    wtab[7] = LogosPath + wtab[7];
+                }
+                else
+                  //if (Autosearchoption) // Check, if logo file is present in subdirectories of logo directory of current skin
+                  {
+                    string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories);
+                    //string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath + @"\", System.IO.Path.GetFileNameWithoutExtension(wtab[7]), System.IO.SearchOption.AllDirectories);
+                    if (filePathsLogoSearch.Length > 0)
+                      try
+                      {
+                        wtab[7] = filePathsLogoSearch[0];
+                      }
+                      catch {}
+                  }
 
                 if (System.IO.File.Exists(wtab[7]) && System.IO.Path.GetDirectoryName(wtab[7]).Length > 0)
                 {

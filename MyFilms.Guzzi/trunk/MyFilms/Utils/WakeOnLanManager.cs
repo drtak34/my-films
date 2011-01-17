@@ -24,15 +24,13 @@
 
 #endregion
 
-namespace MesFilms.MyFilms.Utils
+namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
   using System.Net;
   using System.Net.Sockets;
   using System.Net.NetworkInformation;
   using System.Runtime.InteropServices;
-
-  using MediaPortal.GUI.Library;
 
   public class WakeOnLanManager
   {

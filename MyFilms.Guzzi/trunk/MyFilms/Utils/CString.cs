@@ -21,13 +21,13 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-namespace NewStringLib
+namespace MyFilmsPlugin.MyFilms.Utils
 {
-	/// <summary>
+  using System;
+  using System.Collections.Generic;
+  using System.Globalization;
+
+  /// <summary>
 	/// Implementing String Methods
 	/// </summary>
 	public class NewString

@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using MediaPortal.GUI.Library;
+﻿namespace MyFilmsPlugin.MyFilms.Utils {
+  using System;
+  using System.Collections.Generic;
+  using System.ComponentModel;
+  using System.Globalization;
+  using System.IO;
+  using System.Reflection;
+  using System.Text;
+  using System.Text.RegularExpressions;
+  using System.Threading;
 
-namespace MyFilms {
-    class Utility {
+  using MediaPortal.GUI.Library;
+
+  class Utility {
 
         #region Ctor / Private variables
         

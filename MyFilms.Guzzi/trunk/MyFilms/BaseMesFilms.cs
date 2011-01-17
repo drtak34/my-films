@@ -20,16 +20,17 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
-using System;
-using System.Data;
-using System.Collections.Generic;
-using MyFilmsPlugin.MyFilms;
 
-namespace MesFilms
+namespace MyFilmsPlugin.MyFilms
 {
-    using MediaPortal.GUI.Library;
+  using System;
+  using System.Data;
 
-    using GUILocalizeStrings = global::MesFilms.MyFilms.Utils.GUILocalizeStrings;
+  using MesFilms;
+
+  using MyFilmsPlugin.MyFilms.MyFilmsGUI;
+
+  using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
 
   public class BaseMesFilms
     {
