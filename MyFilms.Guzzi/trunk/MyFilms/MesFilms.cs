@@ -987,9 +987,9 @@ namespace MesFilms
             //ImgLstFilm2.SetFileName("#myfilms.picture");
             SetFilmSelect();
             //Added GlobalFilterList for Trailer & Rating Filters !!!
-			// Added ,false from ZebonsMerge
+			      // Added ,false from ZebonsMerge
             r = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + GlobalUnwatchedFilterString + " " + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
-			//r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
+			      //r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
             LogMyFilms.Debug("MF: (GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
             LogMyFilms.Debug("MF: (GetFilmList) - GlobalUnwatchedFilterString: '" + GlobalUnwatchedFilterString + "'");
             LogMyFilms.Debug("MF: (GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
@@ -2692,10 +2692,11 @@ namespace MesFilms
                       GlobalUnwatchedFilterString = "Checked like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
                     else 
                       GlobalUnwatchedFilterString = "";
-                    if (MesFilms.conf.AlwaysDefaultView)
-                      Fin_Charge_Init(true, true); //DefaultSelect, reload
-                    else
-                      Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
+                    //if (MesFilms.conf.AlwaysDefaultView)
+                    //  Fin_Charge_Init(true, true); //DefaultSelect, reload
+                    //else
+                    //  Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
+                    Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     Change_view("globaloptions");
                     break;
 
