@@ -564,10 +564,11 @@
           this.CatalogType.Items.AddRange(new object[] {
             "Ant Movie Catalog (V3.5.1.2)",
             "DVD Profiler",
-            "MovieCollector",
+            "Movie Collector",
             "MyMovies",
             "Eax Movie Catalog",
-            "eXtreme Movie Manager (V7.1.0.2)"});
+            "eXtreme Movie Manager (V7.1.0.2)",
+            "XBMC (V10.0)"});
           this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
           this.CatalogType.Size = new System.Drawing.Size(195, 21);

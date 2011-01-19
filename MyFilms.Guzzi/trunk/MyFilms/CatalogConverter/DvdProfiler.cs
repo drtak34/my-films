@@ -28,11 +28,11 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
   using System.Text;
   using System.Xml;
 
-  class CatalogConverter
+  class DvdProfiler
     {
         public Dictionary<string, string> ProfilerDict;
         
-        public CatalogConverter(string TagField)
+        public DvdProfiler(string TagField)
         {
             ProfilerDict = new Dictionary<string, string>();
             ProfilerDict.Add("Title", "OriginalTitle");

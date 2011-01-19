@@ -1990,10 +1990,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     string destFile = "";
                     switch (CatalogType.SelectedIndex)
                     {
-                        case 0:
+                        case 0: // ANT Movie Catalog
                             mydivx.ReadXml(MesFilmsCat.Text);
                             break;
-                        case 1:
+                        case 1: //DVD Profiler
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
@@ -2002,17 +2002,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             }
                             if (radioButton1.Checked)
                                 DVDPTagField.Text = "Category";
-                            CatalogConverter cc1 = new CatalogConverter(DVDPTagField.Text);
+                            DvdProfiler cc1 = new DvdProfiler(DVDPTagField.Text);
                             mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, DVDPTagField.Text, OnlyFile.Checked));
                             break;
-                        case 2:
+                        case 2: // Movie Collector
                             MovieCollector cc2 = new MovieCollector();
                             if (Thumbnails.Checked)
                                 mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, "Thumbnails", TitleDelim.Text));
                             else
                                 mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, "Images", TitleDelim.Text));
                             break;
-                        case 3:
+                        case 3: // MyMovies
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
@@ -2022,7 +2022,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             MyMovies mm = new MyMovies();
                             mydivx.ReadXml(mm.ConvertMyMovies(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked));
                             break;
-                        case 4:
+                        case 4: // EAX Movie Catalog
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
@@ -2032,7 +2032,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             EaxMovieCatalog emc = new EaxMovieCatalog();
                             mydivx.ReadXml(emc.ConvertEaxMovieCatalog(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
                             break;
-                        case 5:
+                        case 5: //eXtreme Movie Manager
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
@@ -2042,12 +2042,29 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             XMM xmm = new XMM();
                             mydivx.ReadXml(xmm.ConvertXMM(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked));
                             break;
-                        case 6:
+                        case 6: // XBMC fulldb export (all movies in one DB)
+                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                            if (System.IO.File.Exists(destFile))
+                            {
+                              System.IO.FileInfo fInfo = new System.IO.FileInfo(destFile);
+                              long size = fInfo.Length;
+                              if (size == 0)
+                                System.IO.File.Delete(destFile);
+                            }
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+                            {
+                              mydivx.ReadXml(destFile);
+                              break;
+                            }
+                            XbmcDb Xdb = new XbmcDb();
+                            mydivx.ReadXml(Xdb.ConvertXbmcDb(MesFilmsCat.Text, MesFilmsImg.Text, AntStorage.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
+                            break;
+                        case 7: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
                             destFile = MesFilmsCat.Text;
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
-                                mydivx.ReadXml(destFile);
-                                break;
+                              mydivx.ReadXml(destFile);
+                              break;
                             }
                             XbmcNfo nfo = new XbmcNfo();
                             mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, AntStorage.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));

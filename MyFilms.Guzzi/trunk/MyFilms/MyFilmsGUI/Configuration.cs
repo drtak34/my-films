@@ -139,7 +139,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             string TagField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DVDPTagField", string.Empty);
-                            CatalogConverter cv = new CatalogConverter(TagField);
+                            DvdProfiler cv = new DvdProfiler(TagField);
                             StrFileXml = cv.ConvertProfiler(StrFileXml, StrPathImg, SortTitle, TagField,OnlyFile);
                         }
                         else
