@@ -1145,7 +1145,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Grabber Directory filled, search for XML scripts files
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     dlg.Reset();
-                    dlg.SetHeading(GUILocalizeStrings.Get(645)); // menu
+                    dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
                     if (dlg == null) return;
                     ArrayList scriptfile = new ArrayList();
                     if (MyFilms.conf.StrGrabber_cnf.Length > 0)
@@ -1266,7 +1266,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (nfo)
                 Result = Grab.GetNfoDetail(nfofile, MyFilms.conf.StrPathImg + Img_Path, MyFilms.conf.StrPathArtist, "");
             else
-                Result = Grab.GetDetail(url, MyFilms.conf.StrPathImg + Img_Path, wscript);
+            {
+              string downLoadPath;
+              if (interactive) 
+                downLoadPath = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms";
+              else
+                downLoadPath = MyFilms.conf.StrPathImg;
+              Result = Grab.GetDetail(url, downLoadPath + Img_Path, wscript);
+            }
             LogMyFilms.Info("MF: Grab Internet/nfo Information done for : " + ttitle);
 
             // string Title_Group = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Folder_Name_Is_Group_Name", "false");
@@ -1359,7 +1366,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "Picture":
                     if (Result[2] != string.Empty && Result[2] != null)
                     {
-                        if (Img_Path_Type.ToLower() == "true")
+                      string oldPicture = GUIPropertyManager.GetProperty("picture");
+                      string newPicture = Result[2];
+                      LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
+                      LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
+
+                      if (Img_Path_Type.ToLower() == "true")
                             Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
                         if (Img_Path.Length > 0)
                             if (Img_Path.EndsWith("\\"))
@@ -1367,8 +1379,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             else
                                 Result[2] = Img_Path + "\\" + Result[2];
 
-                        string oldPicture = GUIPropertyManager.GetProperty("picture");
-                        string newPicture = Result[2];
 
                         setGUIProperty("picture", newPicture);
                         GUIWindowManager.Process(); // To Update GUI display ...
@@ -1385,8 +1395,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             GUIWindowManager.Process();
                             return;
                         }
-
-                        MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
+                        if (newPicture != null && newPicture.Length > 0 && oldPicture.Length > 0)
+                        {
+                          File.Copy(newPicture, oldPicture, true);
+                          setGUIProperty("picture", oldPicture);
+                          GUIWindowManager.Process();
+                          return;
+                        }
+                        else
+                        {
+                          try
+                          {
+                            string newFinalPicture = MyFilms.conf.StrPathImg + "\\" + Result[2];
+                            File.Copy(newPicture, newFinalPicture, true);
+                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newFinalPicture;
+                            setGUIProperty("picture", newFinalPicture);
+                            GUIWindowManager.Process();
+                            return;
+                          }
+                          catch (Exception ex)
+                          {
+                            LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
+                          }
+                        }
                     }
                     break;
                 case "Description":
