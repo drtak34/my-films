@@ -113,6 +113,9 @@ namespace Grabber_Interface
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.pictureBox2 = new System.Windows.Forms.PictureBox();
           this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+          this.textURLPreview = new System.Windows.Forms.TextBox();
+          this.lblResult = new System.Windows.Forms.Label();
+          this.btnLoadPreview = new System.Windows.Forms.Button();
           this.tabControl1.SuspendLayout();
           this.tabPage1.SuspendLayout();
           this.groupBox6.SuspendLayout();
@@ -450,6 +453,9 @@ namespace Grabber_Interface
           // 
           // tabPage2
           // 
+          this.tabPage2.Controls.Add(this.btnLoadPreview);
+          this.tabPage2.Controls.Add(this.lblResult);
+          this.tabPage2.Controls.Add(this.textURLPreview);
           this.tabPage2.Controls.Add(this.buttonPrevParam);
           this.tabPage2.Controls.Add(this.buttonPreview);
           this.tabPage2.Controls.Add(this.textBodyDetail);
@@ -758,6 +764,24 @@ namespace Grabber_Interface
           this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
           this.toolTip1.ToolTipTitle = "Help";
           // 
+          // textURLPreview
+          // 
+          resources.ApplyResources(this.textURLPreview, "textURLPreview");
+          this.textURLPreview.Name = "textURLPreview";
+          // 
+          // lblResult
+          // 
+          resources.ApplyResources(this.lblResult, "lblResult");
+          this.lblResult.Name = "lblResult";
+          this.toolTip1.SetToolTip(this.lblResult, resources.GetString("lblResult.ToolTip"));
+          // 
+          // btnLoadPreview
+          // 
+          resources.ApplyResources(this.btnLoadPreview, "btnLoadPreview");
+          this.btnLoadPreview.Name = "btnLoadPreview";
+          this.btnLoadPreview.UseVisualStyleBackColor = true;
+          this.btnLoadPreview.Click += new System.EventHandler(this.btnLoadPreview_Click);
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -885,6 +909,9 @@ namespace Grabber_Interface
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox TextSearch;
+        private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.TextBox textURLPreview;
+        private System.Windows.Forms.Button btnLoadPreview;
 
     }
 }

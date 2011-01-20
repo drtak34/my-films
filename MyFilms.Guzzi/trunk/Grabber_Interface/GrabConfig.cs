@@ -1621,6 +1621,7 @@ namespace Grabber_Interface
           find = GrabUtil.Find(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text);
 
         MessageBox.Show(find, "Preview", MessageBoxButtons.OK);
+        textURLPreview.Text = find;
       }
 
     }
@@ -1640,6 +1641,46 @@ namespace Grabber_Interface
 
     }
 
+    private void btnLoadPreview_Click(object sender, EventArgs e)
+    {
+      string absoluteUri;
+      int iStart;
+      int iEnd;
+
+      if (textURLPreview.Text.Length > 0)
+      {
+
+        textPreview.ResetText();
+
+        BodyDetail = GrabUtil.GetPage(textURLPreview.Text, null, out absoluteUri, new CookieContainer());
+
+        if (xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value.Length > 0)
+        {
+          iStart = BodyDetail.IndexOf(xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value);
+          //Si la clé de début a été trouvé
+          if (iStart > 0)
+          {
+            //Si une clé de fin a été paramétrée, on l'utilise si non on prend le reste du body
+            if (xmlConf.find(xmlConf.listDetail, TagName.KeyEndBody)._Value != "")
+            {
+              iEnd = BodyDetail.IndexOf(xmlConf.find(xmlConf.listDetail, TagName.KeyEndBody)._Value, iStart);
+            }
+            else iEnd = BodyDetail.Length;
+
+            if (iEnd == -1) iEnd = BodyDetail.Length;
+
+            //Découpage du body
+            iStart += xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value.Length;
+            BodyDetail = BodyDetail.Substring(iStart, iEnd - iStart);
+            textBodyDetail.Text = BodyDetail;
+
+          }
+          else textBodyDetail.Text = BodyDetail;
+        }
+        else textBodyDetail.Text = BodyDetail;
+
+      }
+    }
 
   }
 }
