@@ -75,6 +75,9 @@ namespace Grabber_Interface
           this.TextURL = new System.Windows.Forms.TextBox();
           this.label4 = new System.Windows.Forms.Label();
           this.tabPage2 = new System.Windows.Forms.TabPage();
+          this.btnLoadPreview = new System.Windows.Forms.Button();
+          this.lblResult = new System.Windows.Forms.Label();
+          this.textURLPreview = new System.Windows.Forms.TextBox();
           this.buttonPrevParam = new System.Windows.Forms.Button();
           this.buttonPreview = new System.Windows.Forms.Button();
           this.textBodyDetail = new System.Windows.Forms.RichTextBox();
@@ -110,12 +113,10 @@ namespace Grabber_Interface
           this.button3 = new System.Windows.Forms.Button();
           this.radioButtonFR = new System.Windows.Forms.RadioButton();
           this.radioButtonEN = new System.Windows.Forms.RadioButton();
-          this.pictureBox1 = new System.Windows.Forms.PictureBox();
-          this.pictureBox2 = new System.Windows.Forms.PictureBox();
+          this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
+          this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-          this.textURLPreview = new System.Windows.Forms.TextBox();
-          this.lblResult = new System.Windows.Forms.Label();
-          this.btnLoadPreview = new System.Windows.Forms.Button();
+          this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabControl1.SuspendLayout();
           this.tabPage1.SuspendLayout();
           this.groupBox6.SuspendLayout();
@@ -125,8 +126,9 @@ namespace Grabber_Interface
           this.tabPage2.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox4.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).BeginInit();
           this.SuspendLayout();
           // 
           // textConfig
@@ -471,6 +473,24 @@ namespace Grabber_Interface
           this.tabPage2.Name = "tabPage2";
           this.tabPage2.UseVisualStyleBackColor = true;
           // 
+          // btnLoadPreview
+          // 
+          resources.ApplyResources(this.btnLoadPreview, "btnLoadPreview");
+          this.btnLoadPreview.Name = "btnLoadPreview";
+          this.btnLoadPreview.UseVisualStyleBackColor = true;
+          this.btnLoadPreview.Click += new System.EventHandler(this.btnLoadPreview_Click);
+          // 
+          // lblResult
+          // 
+          resources.ApplyResources(this.lblResult, "lblResult");
+          this.lblResult.Name = "lblResult";
+          this.toolTip1.SetToolTip(this.lblResult, resources.GetString("lblResult.ToolTip"));
+          // 
+          // textURLPreview
+          // 
+          resources.ApplyResources(this.textURLPreview, "textURLPreview");
+          this.textURLPreview.Name = "textURLPreview";
+          // 
           // buttonPrevParam
           // 
           resources.ApplyResources(this.buttonPrevParam, "buttonPrevParam");
@@ -739,19 +759,19 @@ namespace Grabber_Interface
           this.radioButtonEN.UseVisualStyleBackColor = true;
           this.radioButtonEN.CheckedChanged += new System.EventHandler(this.radioButtonEN_CheckedChanged);
           // 
-          // pictureBox1
+          // pictureBoxFranceFlag
           // 
-          this.pictureBox1.Image = global::Grabber_Interface.Properties.Resources.France;
-          resources.ApplyResources(this.pictureBox1, "pictureBox1");
-          this.pictureBox1.Name = "pictureBox1";
-          this.pictureBox1.TabStop = false;
+          this.pictureBoxFranceFlag.Image = global::Grabber_Interface.Properties.Resources.France;
+          resources.ApplyResources(this.pictureBoxFranceFlag, "pictureBoxFranceFlag");
+          this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
+          this.pictureBoxFranceFlag.TabStop = false;
           // 
-          // pictureBox2
+          // pictureBoxUSFlag
           // 
-          this.pictureBox2.Image = global::Grabber_Interface.Properties.Resources.US;
-          resources.ApplyResources(this.pictureBox2, "pictureBox2");
-          this.pictureBox2.Name = "pictureBox2";
-          this.pictureBox2.TabStop = false;
+          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.US;
+          resources.ApplyResources(this.pictureBoxUSFlag, "pictureBoxUSFlag");
+          this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
+          this.pictureBoxUSFlag.TabStop = false;
           // 
           // toolTip1
           // 
@@ -764,30 +784,19 @@ namespace Grabber_Interface
           this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
           this.toolTip1.ToolTipTitle = "Help";
           // 
-          // textURLPreview
+          // pictureBoxPreviewCover
           // 
-          resources.ApplyResources(this.textURLPreview, "textURLPreview");
-          this.textURLPreview.Name = "textURLPreview";
-          // 
-          // lblResult
-          // 
-          resources.ApplyResources(this.lblResult, "lblResult");
-          this.lblResult.Name = "lblResult";
-          this.toolTip1.SetToolTip(this.lblResult, resources.GetString("lblResult.ToolTip"));
-          // 
-          // btnLoadPreview
-          // 
-          resources.ApplyResources(this.btnLoadPreview, "btnLoadPreview");
-          this.btnLoadPreview.Name = "btnLoadPreview";
-          this.btnLoadPreview.UseVisualStyleBackColor = true;
-          this.btnLoadPreview.Click += new System.EventHandler(this.btnLoadPreview_Click);
+          resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
+          this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
+          this.pictureBoxPreviewCover.TabStop = false;
           // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.Controls.Add(this.pictureBox2);
-          this.Controls.Add(this.pictureBox1);
+          this.Controls.Add(this.pictureBoxPreviewCover);
+          this.Controls.Add(this.pictureBoxUSFlag);
+          this.Controls.Add(this.pictureBoxFranceFlag);
           this.Controls.Add(this.radioButtonEN);
           this.Controls.Add(this.radioButtonFR);
           this.Controls.Add(this.button3);
@@ -817,8 +826,9 @@ namespace Grabber_Interface
           this.groupBox3.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -881,8 +891,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.TextBox textNextPage;
         private System.Windows.Forms.RadioButton radioButtonFR;
         private System.Windows.Forms.RadioButton radioButtonEN;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBoxFranceFlag;
+        private System.Windows.Forms.PictureBox pictureBoxUSFlag;
         private System.Windows.Forms.Label labelReplaceWith;
         private System.Windows.Forms.TextBox textReplaceWith;
         private System.Windows.Forms.TextBox textReplace;
@@ -912,6 +922,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.TextBox textURLPreview;
         private System.Windows.Forms.Button btnLoadPreview;
+        private System.Windows.Forms.PictureBox pictureBoxPreviewCover;
 
     }
 }

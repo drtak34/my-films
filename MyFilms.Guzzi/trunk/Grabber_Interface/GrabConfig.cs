@@ -1206,6 +1206,13 @@ namespace Grabber_Interface
             break;
           case 2:
             textPreview.SelectedText += "Cover" + Environment.NewLine;
+            try
+            {
+              pictureBoxPreviewCover.ImageLocation = Result[i];
+            }
+            catch
+            {
+            }
             break;
           case 3:
             textPreview.SelectedText += "Synopsys" + Environment.NewLine;
@@ -1622,6 +1629,14 @@ namespace Grabber_Interface
 
         MessageBox.Show(find, "Preview", MessageBoxButtons.OK);
         textURLPreview.Text = find;
+        if (find.EndsWith("jpg") || find.EndsWith("png"))
+          try
+          {
+            pictureBoxPreviewCover.ImageLocation = find;
+          }
+        catch
+        {
+        }
       }
 
     }
