@@ -343,6 +343,7 @@ namespace Grabber_Interface
 
       xmlConf = null;
       listUrl = new ArrayList();
+      pictureBoxPreviewCover.ImageLocation = "";
 
     }
 
@@ -1175,6 +1176,9 @@ namespace Grabber_Interface
     private void buttonPreview_Click(object sender, EventArgs e)
     {
       textPreview.Clear();
+      pictureBoxPreviewCover.ImageLocation = "";
+      labelImageSize.Text = "";
+
       SaveXml(textConfig.Text + ".tmp");
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
       string[] Result = new string[20];
@@ -1710,6 +1714,7 @@ namespace Grabber_Interface
     private void pictureBoxPreviewCover_Click(object sender, EventArgs e)
     {
       pictureBoxPreviewCover.ImageLocation = "";
+      labelImageSize.Text = "";
     }
 
   }

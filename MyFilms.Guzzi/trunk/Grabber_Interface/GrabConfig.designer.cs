@@ -118,6 +118,7 @@ namespace Grabber_Interface
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
+          this.label21 = new System.Windows.Forms.Label();
           this.tabControl1.SuspendLayout();
           this.tabPage1.SuspendLayout();
           this.groupBox6.SuspendLayout();
@@ -456,6 +457,7 @@ namespace Grabber_Interface
           // 
           // tabPage2
           // 
+          this.tabPage2.Controls.Add(this.label21);
           this.tabPage2.Controls.Add(this.labelImageSize);
           this.tabPage2.Controls.Add(this.btnLoadPreview);
           this.tabPage2.Controls.Add(this.lblResult);
@@ -768,7 +770,6 @@ namespace Grabber_Interface
           // 
           // pictureBoxFranceFlag
           // 
-          this.pictureBoxFranceFlag.Image = global::Grabber_Interface.Properties.Resources.France;
           resources.ApplyResources(this.pictureBoxFranceFlag, "pictureBoxFranceFlag");
           this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
           this.pictureBoxFranceFlag.TabStop = false;
@@ -798,6 +799,11 @@ namespace Grabber_Interface
           this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
           this.pictureBoxPreviewCover.TabStop = false;
           this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
+          // 
+          // label21
+          // 
+          resources.ApplyResources(this.label21, "label21");
+          this.label21.Name = "label21";
           // 
           // GrabConfig
           // 
@@ -933,6 +939,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.Button btnLoadPreview;
         private System.Windows.Forms.PictureBox pictureBoxPreviewCover;
         private System.Windows.Forms.Label labelImageSize;
+        private System.Windows.Forms.Label label21;
 
     }
 }

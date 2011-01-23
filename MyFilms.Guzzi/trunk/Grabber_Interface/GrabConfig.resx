@@ -1846,6 +1846,18 @@ Important: You must replace the search string that you used with the string # # 
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="&gt;&gt;label21.Name" xml:space="preserve">
+    <value>label21</value>
+  </data>
+  <data name="&gt;&gt;label21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;labelImageSize.Name" xml:space="preserve">
     <value>labelImageSize</value>
   </data>
@@ -1856,7 +1868,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;labelImageSize.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;btnLoadPreview.Name" xml:space="preserve">
     <value>btnLoadPreview</value>
@@ -1868,7 +1880,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;btnLoadPreview.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;lblResult.Name" xml:space="preserve">
     <value>lblResult</value>
@@ -1880,7 +1892,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;lblResult.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;textURLPreview.Name" xml:space="preserve">
     <value>textURLPreview</value>
@@ -1892,7 +1904,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam.Name" xml:space="preserve">
     <value>buttonPrevParam</value>
@@ -1904,7 +1916,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;buttonPreview.Name" xml:space="preserve">
     <value>buttonPreview</value>
@@ -1916,7 +1928,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.Name" xml:space="preserve">
     <value>textBodyDetail</value>
@@ -1928,7 +1940,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
@@ -1940,7 +1952,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
@@ -1952,7 +1964,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;buttonFind.Name" xml:space="preserve">
     <value>buttonFind</value>
@@ -1964,7 +1976,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonFind.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;textFind.Name" xml:space="preserve">
     <value>textFind</value>
@@ -1976,7 +1988,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;textFind.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ButtonLoad.Name" xml:space="preserve">
     <value>ButtonLoad</value>
@@ -1988,7 +2000,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;ButtonLoad.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
     <value>groupBox4</value>
@@ -2000,7 +2012,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.Name" xml:space="preserve">
     <value>TextURLDetail</value>
@@ -2012,7 +2024,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;label15.Name" xml:space="preserve">
     <value>label15</value>
@@ -2024,7 +2036,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -2060,13 +2072,13 @@ Important: You must replace the search string that you used with the string # # 
     <value>759, 285</value>
   </data>
   <data name="labelImageSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
+    <value>16, 13</value>
   </data>
   <data name="labelImageSize.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
   <data name="labelImageSize.Text" xml:space="preserve">
-    <value>ImageSize</value>
+    <value>...</value>
   </data>
   <data name="labelImageSize.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
@@ -2081,7 +2093,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;labelImageSize.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btnLoadPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>746, 50</value>
@@ -2105,7 +2117,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;btnLoadPreview.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblResult.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2137,7 +2149,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;lblResult.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="textURLPreview.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2161,7 +2173,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="buttonPrevParam.Location" type="System.Drawing.Point, System.Drawing">
     <value>350, 280</value>
@@ -2192,7 +2204,7 @@ If the result is an Image, it will be shown in the preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>513, 279</value>
@@ -2220,7 +2232,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonPreview.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="textBodyDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 311</value>
@@ -2244,7 +2256,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 282</value>
@@ -2265,7 +2277,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
     <value>textPreview</value>
@@ -2301,7 +2313,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 16</value>
@@ -2352,7 +2364,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;buttonFind.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="textFind.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 282</value>
@@ -2373,7 +2385,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;textFind.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="ButtonLoad.Location" type="System.Drawing.Point, System.Drawing">
     <value>746, 8</value>
@@ -2400,7 +2412,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;ButtonLoad.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;btResetDetail.Name" xml:space="preserve">
     <value>btResetDetail</value>
@@ -2601,7 +2613,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="btResetDetail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3170,7 +3182,7 @@ in this new page.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3197,7 +3209,7 @@ in this new page.</value>
     <value>tabPage2</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3405,6 +3417,22 @@ This parameter makes it possible to define the beginning of the URL ("http://les
   <data name="&gt;&gt;radioButtonEN.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="pictureBoxFranceFlag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEgAA
+        CxIB0t1+/AAAAidJREFUSEu11t9LU2Ecx3EDEXHp3ImxucUGHg1HU6bUKhk6TLcgpUFKFysxLAxntmk0
+        wwpa9ENi5UV1V1dBEHTXTX9ARUFEba4wUxCtCPY3fHq+B90Dz3PyudkOvHjOzsX3PZ6z7WwXgKqKHhSo
+        pIoO396darZFuxlbmdFMml3V2N//ANHooin2LnY8VgdP439oNgXckcgiFhbemFIF/mafwMzqiTP06XFT
+        wNvXl0Um8xozMy+RYmjdpgpspjMwXLlp+MX8ufMQK4NxCniNQG/vfaTTrzAx8VyiCmxMXYXo97W7+HHs
+        FA90d99DIvEC8fhTiSqwPjYN0WbyOpYHhnkgGLyN0dFnGBp6JFEF1k6ehWh9PInv4RgPdHVlEIs9Bm0V
+        6dla6Vx1rAyMQLQ2PI5C6DgPdHTcQDicRSBwS6IKLB+KQvQzMoJ8MMoDPt88mpvnoWkpiSqQb2qH6Jsv
+        hC+dR3lA1+fg8czBar0kUQYc+5EXFFoP43N7Dw94vbNwu9Oor5+WqAI5uw+ign4Qn9qO8IDLlYTTeRkW
+        y5REGdD2ISdY8nTio36ABxyOi7DbZ1Fbm5AoA42tyBlaSuvS3gA+sEjpm6xpk8bNramZlKgCXxt0iOim
+        v2/y84C14QJstpQpVSDv9MPMO3tbKeCqqzvH9v68qWKxiJ281VpQsoedE7rGVrZFLvqxszJ+JlRmNJNm
+        G08dy9YLulAuNLO68s/kSv6joNn/AB77BzKv8ubGAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="pictureBoxFranceFlag.Location" type="System.Drawing.Point, System.Drawing">
     <value>1028, 8</value>
   </data>
@@ -3478,6 +3506,33 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label21.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label21.Location" type="System.Drawing.Point, System.Drawing">
+    <value>666, 284</value>
+  </data>
+  <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="label21.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="label21.Text" xml:space="preserve">
+    <value>Imagesize:</value>
+  </data>
+  <data name="&gt;&gt;label21.Name" xml:space="preserve">
+    <value>label21</value>
+  </data>
+  <data name="&gt;&gt;label21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
