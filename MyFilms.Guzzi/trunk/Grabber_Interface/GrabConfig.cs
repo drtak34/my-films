@@ -1213,6 +1213,16 @@ namespace Grabber_Interface
             catch
             {
             }
+            try
+            {
+              // Create new FileInfo object and get the Length.
+              FileInfo f = new FileInfo(Result[i]);
+              long s1 = f.Length;
+              labelImageSize.Text = s1.ToString();
+            }
+            catch
+            {
+            }
             break;
           case 3:
             textPreview.SelectedText += "Synopsys" + Environment.NewLine;
@@ -1695,6 +1705,11 @@ namespace Grabber_Interface
         else textBodyDetail.Text = BodyDetail;
 
       }
+    }
+
+    private void pictureBoxPreviewCover_Click(object sender, EventArgs e)
+    {
+      pictureBoxPreviewCover.ImageLocation = "";
     }
 
   }

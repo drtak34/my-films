@@ -75,6 +75,7 @@ namespace Grabber_Interface
           this.TextURL = new System.Windows.Forms.TextBox();
           this.label4 = new System.Windows.Forms.Label();
           this.tabPage2 = new System.Windows.Forms.TabPage();
+          this.labelImageSize = new System.Windows.Forms.Label();
           this.btnLoadPreview = new System.Windows.Forms.Button();
           this.lblResult = new System.Windows.Forms.Label();
           this.textURLPreview = new System.Windows.Forms.TextBox();
@@ -455,6 +456,7 @@ namespace Grabber_Interface
           // 
           // tabPage2
           // 
+          this.tabPage2.Controls.Add(this.labelImageSize);
           this.tabPage2.Controls.Add(this.btnLoadPreview);
           this.tabPage2.Controls.Add(this.lblResult);
           this.tabPage2.Controls.Add(this.textURLPreview);
@@ -472,6 +474,11 @@ namespace Grabber_Interface
           resources.ApplyResources(this.tabPage2, "tabPage2");
           this.tabPage2.Name = "tabPage2";
           this.tabPage2.UseVisualStyleBackColor = true;
+          // 
+          // labelImageSize
+          // 
+          resources.ApplyResources(this.labelImageSize, "labelImageSize");
+          this.labelImageSize.Name = "labelImageSize";
           // 
           // btnLoadPreview
           // 
@@ -768,7 +775,7 @@ namespace Grabber_Interface
           // 
           // pictureBoxUSFlag
           // 
-          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.US;
+          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.United_States_of_America_USA_;
           resources.ApplyResources(this.pictureBoxUSFlag, "pictureBoxUSFlag");
           this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
           this.pictureBoxUSFlag.TabStop = false;
@@ -786,9 +793,11 @@ namespace Grabber_Interface
           // 
           // pictureBoxPreviewCover
           // 
+          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
           resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
           this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
           this.pictureBoxPreviewCover.TabStop = false;
+          this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
           // 
           // GrabConfig
           // 
@@ -923,6 +932,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.TextBox textURLPreview;
         private System.Windows.Forms.Button btnLoadPreview;
         private System.Windows.Forms.PictureBox pictureBoxPreviewCover;
+        private System.Windows.Forms.Label labelImageSize;
 
     }
 }

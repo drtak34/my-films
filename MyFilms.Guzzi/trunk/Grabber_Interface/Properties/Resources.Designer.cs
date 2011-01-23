@@ -67,9 +67,9 @@ namespace Grabber_Interface.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap US {
+        internal static System.Drawing.Bitmap United_States_of_America_USA_ {
             get {
-                object obj = ResourceManager.GetObject("US", resourceCulture);
+                object obj = ResourceManager.GetObject("United_States_of_America_USA_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -14,5 +14,6 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
     <ErrorReportUrlHistory>
     </ErrorReportUrlHistory>
+    <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
 </Project>

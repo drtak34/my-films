@@ -55,22 +55,6 @@
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.2.22660, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MyFilms\trunk\Grabber\bin\x86\Release\Core.dll</HintPath>
-    </Reference>
-    <Reference Include="CSScriptLibrary, Version=1.9.0.0, Culture=neutral, PublicKeyToken=70fcc3d18c749033">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MyFilms\trunk\Grabber\bin\x86\Release\CSScriptLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Databases, Version=1.1.2.22664, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MyFilms\trunk\Grabber\bin\x86\Release\Databases.dll</HintPath>
-    </Reference>
-    <Reference Include="MediaPortal.Support, Version=1.1.2.22641, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MyFilms\trunk\Grabber\bin\x86\Release\MediaPortal.Support.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -80,10 +64,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utils, Version=2.2.7.19961, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\MyFilms\trunk\Grabber\bin\x86\Release\Utils.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GrabConfig.cs">
@@ -130,10 +110,9 @@
     <Compile Include="XmlConf.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="United States of America%28USA%29.png" />
+    <EmbeddedResource Include="Resources\United States of America%28USA%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="France.png" />
     <EmbeddedResource Include="MyFilmsSample.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +152,11 @@
       <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
       <Name>Grabber</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\France.png" />
+    <Content Include="Resources\France.png" />
+    <Content Include="Resources\Image1.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
