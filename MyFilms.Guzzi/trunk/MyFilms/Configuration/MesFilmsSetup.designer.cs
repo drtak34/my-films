@@ -357,7 +357,6 @@
           this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.label33 = new System.Windows.Forms.Label();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MesFilms.MyFilms.Configuration.TraktConfiguration();
           this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
           this.ButDefCov = new System.Windows.Forms.Button();
@@ -436,6 +435,7 @@
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.traktConfiguration1 = new MesFilms.MyFilms.Configuration.TraktConfiguration();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -621,9 +621,9 @@
           // AntSort1
           // 
           this.AntSort1.FormattingEnabled = true;
-          this.AntSort1.Location = new System.Drawing.Point(9, 18);
+          this.AntSort1.Location = new System.Drawing.Point(10, 18);
           this.AntSort1.Name = "AntSort1";
-          this.AntSort1.Size = new System.Drawing.Size(161, 21);
+          this.AntSort1.Size = new System.Drawing.Size(160, 21);
           this.AntSort1.TabIndex = 36;
           this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
           // 
@@ -724,7 +724,7 @@
           // 
           this.AntFilterText2.Location = new System.Drawing.Point(242, 46);
           this.AntFilterText2.Name = "AntFilterText2";
-          this.AntFilterText2.Size = new System.Drawing.Size(113, 20);
+          this.AntFilterText2.Size = new System.Drawing.Size(116, 20);
           this.AntFilterText2.TabIndex = 24;
           // 
           // AntFilterItem1
@@ -739,7 +739,7 @@
           // 
           this.AntFilterText1.Location = new System.Drawing.Point(242, 19);
           this.AntFilterText1.Name = "AntFilterText1";
-          this.AntFilterText1.Size = new System.Drawing.Size(113, 20);
+          this.AntFilterText1.Size = new System.Drawing.Size(116, 20);
           this.AntFilterText1.TabIndex = 21;
           // 
           // groupBox_DefaultView
@@ -1033,12 +1033,12 @@
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel3);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.chkOnlyTitle);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem3);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel2);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem2);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel2);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label7);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem1);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.label3);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel1);
-          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem1);
           this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(371, 129);
           this.groupBox_DetailedSupplementaryInformations.Name = "groupBox_DetailedSupplementaryInformations";
           this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(370, 136);
@@ -1049,48 +1049,48 @@
           // 
           // AntLabel3
           // 
-          this.AntLabel3.Location = new System.Drawing.Point(9, 88);
+          this.AntLabel3.Location = new System.Drawing.Point(185, 88);
           this.AntLabel3.Name = "AntLabel3";
-          this.AntLabel3.Size = new System.Drawing.Size(161, 20);
-          this.AntLabel3.TabIndex = 77;
+          this.AntLabel3.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel3.TabIndex = 30;
           // 
           // chkOnlyTitle
           // 
           this.chkOnlyTitle.AutoSize = true;
-          this.chkOnlyTitle.Location = new System.Drawing.Point(9, 111);
+          this.chkOnlyTitle.Location = new System.Drawing.Point(10, 115);
           this.chkOnlyTitle.Name = "chkOnlyTitle";
           this.chkOnlyTitle.Size = new System.Drawing.Size(230, 17);
-          this.chkOnlyTitle.TabIndex = 76;
+          this.chkOnlyTitle.TabIndex = 31;
           this.chkOnlyTitle.Text = "Display Only Movie\'s Title within List Layout";
           this.chkOnlyTitle.UseVisualStyleBackColor = true;
           // 
           // AntItem3
           // 
           this.AntItem3.FormattingEnabled = true;
-          this.AntItem3.Location = new System.Drawing.Point(185, 87);
+          this.AntItem3.Location = new System.Drawing.Point(10, 88);
           this.AntItem3.Name = "AntItem3";
-          this.AntItem3.Size = new System.Drawing.Size(173, 21);
+          this.AntItem3.Size = new System.Drawing.Size(160, 21);
           this.AntItem3.TabIndex = 29;
           // 
           // AntLabel2
           // 
-          this.AntLabel2.Location = new System.Drawing.Point(9, 60);
+          this.AntLabel2.Location = new System.Drawing.Point(185, 61);
           this.AntLabel2.Name = "AntLabel2";
-          this.AntLabel2.Size = new System.Drawing.Size(161, 20);
-          this.AntLabel2.TabIndex = 27;
+          this.AntLabel2.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel2.TabIndex = 28;
           // 
           // AntItem2
           // 
           this.AntItem2.FormattingEnabled = true;
-          this.AntItem2.Location = new System.Drawing.Point(185, 60);
+          this.AntItem2.Location = new System.Drawing.Point(10, 61);
           this.AntItem2.Name = "AntItem2";
-          this.AntItem2.Size = new System.Drawing.Size(173, 21);
-          this.AntItem2.TabIndex = 28;
+          this.AntItem2.Size = new System.Drawing.Size(160, 21);
+          this.AntItem2.TabIndex = 27;
           // 
           // label7
           // 
           this.label7.AutoSize = true;
-          this.label7.Location = new System.Drawing.Point(183, 15);
+          this.label7.Location = new System.Drawing.Point(8, 16);
           this.label7.Name = "label7";
           this.label7.Size = new System.Drawing.Size(94, 13);
           this.label7.TabIndex = 22;
@@ -1099,7 +1099,7 @@
           // label3
           // 
           this.label3.AutoSize = true;
-          this.label3.Location = new System.Drawing.Point(7, 15);
+          this.label3.Location = new System.Drawing.Point(187, 16);
           this.label3.Name = "label3";
           this.label3.Size = new System.Drawing.Size(33, 13);
           this.label3.TabIndex = 21;
@@ -1107,20 +1107,20 @@
           // 
           // AntLabel1
           // 
-          this.AntLabel1.Location = new System.Drawing.Point(9, 33);
+          this.AntLabel1.Location = new System.Drawing.Point(185, 34);
           this.AntLabel1.Name = "AntLabel1";
-          this.AntLabel1.Size = new System.Drawing.Size(161, 20);
-          this.AntLabel1.TabIndex = 25;
+          this.AntLabel1.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel1.TabIndex = 26;
           // 
           // AntItem1
           // 
           this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
           this.AntItem1.FormattingEnabled = true;
-          this.AntItem1.Location = new System.Drawing.Point(185, 33);
+          this.AntItem1.Location = new System.Drawing.Point(10, 34);
           this.AntItem1.Name = "AntItem1";
-          this.AntItem1.Size = new System.Drawing.Size(173, 21);
+          this.AntItem1.Size = new System.Drawing.Size(160, 21);
           this.AntItem1.Sorted = true;
-          this.AntItem1.TabIndex = 26;
+          this.AntItem1.TabIndex = 25;
           // 
           // groupBox_AntUpdatingItems
           // 
@@ -1147,6 +1147,7 @@
           this.chkWindowsFileDialog.Size = new System.Drawing.Size(299, 17);
           this.chkWindowsFileDialog.TabIndex = 77;
           this.chkWindowsFileDialog.Text = "Use Standard Windows File Dialog for Movie file Updating";
+          this.ToolTip1.SetToolTip(this.chkWindowsFileDialog, resources.GetString("chkWindowsFileDialog.ToolTip"));
           this.chkWindowsFileDialog.UseVisualStyleBackColor = true;
           // 
           // AntUpdDflT2
@@ -2231,7 +2232,7 @@
           this.CmdPar.Location = new System.Drawing.Point(15, 112);
           this.CmdPar.Name = "CmdPar";
           this.CmdPar.Size = new System.Drawing.Size(196, 21);
-          this.CmdPar.TabIndex = 36;
+          this.CmdPar.TabIndex = 37;
           this.ToolTip1.SetToolTip(this.CmdPar, "The value of the  chosen DB-field will be used as commandline option for the appl" +
                   "ication laiunched");
           // 
@@ -2240,7 +2241,7 @@
           this.CmdExe.Location = new System.Drawing.Point(15, 58);
           this.CmdExe.Name = "CmdExe";
           this.CmdExe.Size = new System.Drawing.Size(196, 20);
-          this.CmdExe.TabIndex = 37;
+          this.CmdExe.TabIndex = 36;
           this.ToolTip1.SetToolTip(this.CmdExe, "Enter the commandline to an application you want to launch before the movie is st" +
                   "arted in internal player");
           // 
@@ -3309,16 +3310,6 @@
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
           // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(23, 25);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
-          this.traktConfiguration1.TabIndex = 0;
-          // 
           // comboBoxLogoPresets
           // 
           this.comboBoxLogoPresets.FormattingEnabled = true;
@@ -3678,6 +3669,7 @@
           this.groupBoxDeletionOptions.TabIndex = 35;
           this.groupBoxDeletionOptions.TabStop = false;
           this.groupBoxDeletionOptions.Text = "Deletion Options";
+          this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
           // 
           // Tab_Grabber
           // 
@@ -4168,6 +4160,16 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(23, 25);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
+          this.traktConfiguration1.TabIndex = 0;
           // 
           // MesFilmsSetup
           // 

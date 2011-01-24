@@ -203,6 +203,13 @@ and enter a pre-defined value to update the field.
 
 A possible use case could be "Checked" "seen" "true" to have a oneclick solution to set a movie watched based on checked DB field.</value>
   </data>
+  <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
+    <value>If chosen, the option to update the filename / source of the movie will show in the update menu.
+However, it will be using a standard windows file doalog to browse the filesystem and select the movie file,
+so it is not recommended to use that option for remote only users.
+
+If using a mouse, this option can be enabled.</value>
+  </data>
   <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
     <value>If you want to update your movie datas over Internet,
 valid that option. 
@@ -419,6 +426,17 @@ You can also define a default cover, that will be used, if there is no cover def
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
+  <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
+    <value>The Database Deletion Options allow you to update and/or delete records after the corresponding movie is watched.
+
+ATTENTION:
+Be careful - enabling delete options can delete not only the record in your database, but also the movie linked to it!
+Update DB = update the record with settings of "Player finished Update Action"
+Delete DB entry = delete the record from the DB
+Delete Movie file = PHYSICALLY DELETES your movie from storage medium.
+
+</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxMyFilms.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

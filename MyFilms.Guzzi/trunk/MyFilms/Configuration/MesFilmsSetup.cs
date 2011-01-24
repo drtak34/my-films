@@ -153,12 +153,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CatalogType.SelectedIndex = 0;
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-                if ((dc.ColumnName == "MediaLabel") || (dc.ColumnName == "MediaType") || (dc.ColumnName == "Source") || (dc.ColumnName == "URL") || (dc.ColumnName == "Comments") || (dc.ColumnName == "Borrower") || (dc.ColumnName == "Languages") || (dc.ColumnName == "Subtitles"))
+              if ((dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")) // All those fieds are currently not supported by ANT-MC
+              {
+                if ((dc.ColumnName == "MediaLabel") || (dc.ColumnName == "MediaType") || (dc.ColumnName == "Source") ||
+                    (dc.ColumnName == "URL") || (dc.ColumnName == "Comments") || (dc.ColumnName == "Borrower") ||
+                    (dc.ColumnName == "Languages") || (dc.ColumnName == "Subtitles"))
                 {
-                    AntStorage.Items.Add(dc.ColumnName);
-                    AntStorageTrailer.Items.Add(dc.ColumnName);
-                    DVDPTagField.Items.Add(dc.ColumnName);
-                    AntSTitle.Items.Add(dc.ColumnName);
+                  AntStorage.Items.Add(dc.ColumnName);
+                  AntStorageTrailer.Items.Add(dc.ColumnName);
+                  DVDPTagField.Items.Add(dc.ColumnName);
+                  AntSTitle.Items.Add(dc.ColumnName);
                 }
                 AntIdentItem.Items.Add(dc.ColumnName);
                 AntTitle2.Items.Add(dc.ColumnName);
@@ -172,38 +176,51 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 cbfdupdate.Items.Add(dc.ColumnName);
                 CmdPar.Items.Add(dc.ColumnName);
-                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "DateAdded") && (dc.ColumnName != "Length_Num"))
+                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "DateAdded") &&
+                    (dc.ColumnName != "Length_Num"))
                 {
-                    AntSearchField.Items.Add(dc.ColumnName);
-                    AntUpdField.Items.Add(dc.ColumnName);
+                  AntSearchField.Items.Add(dc.ColumnName);
+                  AntUpdField.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "Number") && (dc.ColumnName != "OriginalTitle") && (dc.ColumnName != "TranslatedTitle") && (dc.ColumnName != "Comments") && (dc.ColumnName != "Description") && (dc.ColumnName != "FormattedTitle") && (dc.ColumnName != "Date") && (dc.ColumnName != "DateAdded") && (dc.ColumnName != "Rating") && (dc.ColumnName != "Size") && (dc.ColumnName != "Picture") && (dc.ColumnName != "URL"))
+                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "Number") &&
+                    (dc.ColumnName != "OriginalTitle") && (dc.ColumnName != "TranslatedTitle") &&
+                    (dc.ColumnName != "Comments") && (dc.ColumnName != "Description") &&
+                    (dc.ColumnName != "FormattedTitle") && (dc.ColumnName != "Date") && (dc.ColumnName != "DateAdded") &&
+                    (dc.ColumnName != "Rating") && (dc.ColumnName != "Size") && (dc.ColumnName != "Picture") &&
+                    (dc.ColumnName != "URL"))
                 {
-                    SField1.Items.Add(dc.ColumnName);
-                    SField2.Items.Add(dc.ColumnName);
+                  SField1.Items.Add(dc.ColumnName);
+                  SField2.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Description" && dc.ColumnName != "Comments")
+                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
+                    dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Length_Num")
                 {
-                    AntViewItem1.Items.Add(dc.ColumnName);
-                    AntViewItem2.Items.Add(dc.ColumnName);
-                    AntViewItem3.Items.Add(dc.ColumnName);
-                    AntViewItem4.Items.Add(dc.ColumnName);
-                    AntViewItem5.Items.Add(dc.ColumnName);
+                  AntViewItem1.Items.Add(dc.ColumnName);
+                  AntViewItem2.Items.Add(dc.ColumnName);
+                  AntViewItem3.Items.Add(dc.ColumnName);
+                  AntViewItem4.Items.Add(dc.ColumnName);
+                  AntViewItem5.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Actors")
+                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
+                    dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Actors")
                 {
-                    AntSearchItem1.Items.Add(dc.ColumnName);
-                    AntSearchItem2.Items.Add(dc.ColumnName);
+                  AntSearchItem1.Items.Add(dc.ColumnName);
+                  AntSearchItem2.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName == "TranslatedTitle") || (dc.ColumnName == "OriginalTitle") || (dc.ColumnName == "FormattedTitle"))
-                    AntSTitle.Items.Add(dc.ColumnName);
-                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Year" && dc.ColumnName != "Rating" && dc.ColumnName != "DateAdded" && dc.ColumnName != "Date")
+                if ((dc.ColumnName == "TranslatedTitle") || (dc.ColumnName == "OriginalTitle") || (dc.ColumnName == "FormattedTitle")) 
+                  AntSTitle.Items.Add(dc.ColumnName);
+                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
+                    dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Year" &&
+                    dc.ColumnName != "Picture" && dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
+                    dc.ColumnName != "DateAdded" && dc.ColumnName != "Date")
                 {
-                    AntSort1.Items.Add(dc.ColumnName);
-                    AntSort2.Items.Add(dc.ColumnName);
+                  AntSort1.Items.Add(dc.ColumnName);
+                  AntSort2.Items.Add(dc.ColumnName);
                 }
                 AntUpdItem1.Items.Add(dc.ColumnName);
                 AntUpdItem2.Items.Add(dc.ColumnName);
+              }
             }
             AntViewText_Change();
             AntSort_Change();
@@ -2313,18 +2330,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             //LogoView.Clear();
             string wfile = XmlConfig.EntireFilenameConfig("MyFilmsLogos").Substring(0, XmlConfig.EntireFilenameConfig("MyFilmsLogos").LastIndexOf("."));
-            if (!System.IO.File.Exists(wfile + "_" + currentconfig + ".xml") && currentconfig.Length > 0)
-            {
-                try
-                {
-                    System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsLogos"), wfile + "_" + currentconfig + ".xml", true);
-                    //wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + currentconfig;
-                }
-                catch
-                {
-                    wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1);
-                }
-            }
+            //if (!System.IO.File.Exists(wfile + "_" + currentconfig + ".xml") && currentconfig.Length > 0)
+            //{
+            //    try
+            //    {
+            //        System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsLogos"), wfile + "_" + currentconfig + ".xml", true);
+            //        //wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + currentconfig;
+            //    }
+            //    catch
+            //    {
+            //        wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1);
+            //    }
+            //}
             //else
               //wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + currentconfig;
 

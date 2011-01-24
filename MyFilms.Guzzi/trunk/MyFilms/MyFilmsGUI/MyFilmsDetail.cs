@@ -633,7 +633,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     else
                     {
-                        ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version resuired: 0.28");
+                        ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
                     }
                     return;
                 //break;
@@ -666,7 +666,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     else
                     {
-                      ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version resuired: 0.28");
+                      ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
                     }
                     return;
                 //break;
@@ -725,23 +725,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         choiceViewMenu.Add("updatedb");
                     }
 
-                    // No more needed because of updproperties !!!
-                    //if (!(StrUpdItem1 == "(none)"))
-                    //    {
-                    //    if (StrUpdText1.Length > 0)
-                    //        dlgmenu.Add(StrUpdText1);        //Specific Item1 label to update
-                    //    else
-                    //        dlgmenu.Add(StrUpdItem1);        //Specific Item1 to update
-                    //    choiceViewMenu.Add("item1");
-                    //    }
-                    //if (!(StrUpdItem2 == "(none)"))
-                    //{
-                    //    if (StrUpdText2.Length > 0)
-                    //        dlgmenu.Add(StrUpdText2);        //Specific Item2 label to update
-                    //    else
-                    //        dlgmenu.Add(StrUpdItem2);        //Specific Item2 to update
-                    //    choiceViewMenu.Add("item2");
-                    //}
+                    //No more needed because of updproperties !!! - so discussion about removal?
+                    if (StrUpdItem1 != "(none)")
+                        {
+                        if (StrUpdText1.Length > 0)
+                            dlgmenu.Add(StrUpdText1);        //Specific Item1 label to update
+                        else
+                            dlgmenu.Add(StrUpdItem1);        //Specific Item1 to update
+                        choiceViewMenu.Add("item1");
+                        }
+                    if (StrUpdItem2 != "(none)")
+                    {
+                        if (StrUpdText2.Length > 0)
+                            dlgmenu.Add(StrUpdText2);        //Specific Item2 label to update
+                        else
+                            dlgmenu.Add(StrUpdItem2);        //Specific Item2 to update
+                        choiceViewMenu.Add("item2");
+                    }
 
                     if(ExtendedStartmode("Details context: nfo-reader-update"))
                     {
@@ -2987,7 +2987,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     else
                     {
-                      //MyFilmsDetail.ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version resuired: 0.28");
+                      //ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
+                      GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                      if (dlgOK != null)
+                      {
+                        dlgOK.SetHeading("MyFilms");
+                        dlgOK.SetLine(1, "OnlineVideo plugin not installed or wrong version");
+                        dlgOK.SetLine(2, "Minimum Version required: 0.28");
+                        dlgOK.DoModal(GetID);
+                        return;
+                      }
                     }
                     break;
 
@@ -3023,7 +3032,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     else
                     {
-                      //ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version resuired: 0.28");
+                      //ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
+                      GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                      if (dlgOK != null)
+                      {
+                        dlgOK.SetHeading("MyFilms");
+                        dlgOK.SetLine(1, "OnlineVideo plugin not installed or wrong version");
+                        dlgOK.SetLine(2, "Minimum Version required: 0.28");
+                        dlgOK.DoModal(GetID);
+                        return;
+                      }
                     }
                     break;
 
@@ -4443,15 +4461,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void ShowMessageDialog(string headline, string line1, string line2)
         {
-            GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-            if (dlgOK != null)
-            {
-                dlgOK.SetHeading(headline);
-                dlgOK.SetLine(1, line1);
-                dlgOK.SetLine(2, line2);
-                dlgOK.DoModal(GetID);
-                return;
-            }
+          GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+          if (dlgOK != null)
+          {
+            dlgOK.SetHeading(headline);
+            dlgOK.SetLine(1, line1);
+            dlgOK.SetLine(2, line2);
+            dlgOK.DoModal(GetID);
+            return;
+          }
         }
 
         //string getGUIProperty(guiProperty name)
