@@ -65,6 +65,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         public MesFilmsSetup()
         {
             InitializeComponent();
+            System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString() + " alpha";
         }
 
 
@@ -76,11 +78,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/anable normal vs. testfeatures
             LogMyFilms.Info("MyFilms Setup ********** OperationsMode (PluginMode): '" + MyFilms_PluginMode + "' **********");
 
-            if (MyFilms_PluginMode == "normal") // disable Trakt in standardmode
+            if (MyFilms_PluginMode == "normal") // disable Trakt and other controls in standardmode
             {
               //hide a tab by removing it from the TabPages collection
               this.tabPageSave = General.TabPages[10];
-              this.General.TabPages.Remove(this.tabPageSave);
+              this.General.TabPages.Remove(this.tabPageSave); // Disable Trakt Tab, as it's not yet implemented
+              this.checkWatchedInProfile.Visible = false; // Disable Watched options for Userprofiles, as it's not yet implemented
+              this.Label_UserProfileName.Visible = false;
+              this.UserProfileName.Visible = false;
+              this.SearchSubDirsTrailer.Visible = false; // Disable Trailer options, that are not yet implemented
+              this.SearchFileNameTrailer.Visible = false;
+              this.ItemSearchFileNameTrailer.Visible = false;
+              this.ShowTrailerPlayDialog.Visible = false;
+              this.ShowTrailerWhenStartingMovie.Visible = false;
             }
             //else
             //{
@@ -93,8 +103,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //}
 
             //this.label_VersionNumber.Text = "Version 5.1.0 alpha";
-            System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
-            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString() + " alpha";
             LogMyFilms.Info("MFsetup: Started with version '" + label_VersionNumber.Text + "'");
 
 
@@ -200,7 +208,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntViewText_Change();
             AntSort_Change();
             Config_Name.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
-            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Logos", false);
+            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Logos", true); // Changed default to "true" - hope, it works even without fiull working config ....
             st = new ScheduledTasks();
             Task t = null; ;
             string name = string.Empty;
@@ -1007,16 +1015,25 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntUpdItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdItem2", "");
             AntUpdText2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdText2", "");
             AntUpdDflT2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntUpdDflT2", string.Empty);
+            AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "");
+            AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "");
 
-            if (AntTitle1.Text == "OriginalTitle")
+            if (AntTitle1.Text.Length > 0)
             {
-              AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
-              AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
-            }
-            else
-            {
-              AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
-              AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+              if (AntTitle1.Text == "TranslatedTitle")
+              {
+                if (AntSearchList.Text.Length == 0)
+                  AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
+                if (AntUpdList.Text.Length == 0)
+                  AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+              }
+              if (AntTitle1.Text == "OriginalTitle" || AntTitle1.Text == "FormattedTitle")
+              {
+                if (AntSearchList.Text.Length == 0)
+                  AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
+                if (AntUpdList.Text.Length == 0)
+                  AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+              }
             }
             check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOL-Enable", false);
             comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WOLtimeout", "15");
@@ -1061,7 +1078,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", false);
             cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressField", string.Empty);
             txtfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressValue", string.Empty);
-            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", false);  // Changed default to "true" to use default logo config file // had to reset to false, as logos are heavily relying on an existing DB config !
+            chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", true);  // Changed default to "true" to use default logo config file // had to reset to false, as logos are heavily relying on an existing DB config ! // Rechanged to true, as now config name should be required anymore for logo config!
             string wsuppressType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressType", "1");
             switch (wsuppressType)
             {
@@ -3536,5 +3553,24 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
             MessageBox.Show("Successfully cleared " + i.ToString() + " cached files in your logo cache directory! Be aware browsing your movies might be slower when rebuilding the logos in cache.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void AntTitle1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          if (AntTitle1.Text == "TranslatedTitle")
+          {
+            if (AntSearchList.Text.Length == 0)
+              AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
+            if (AntUpdList.Text.Length == 0)
+              AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+          }
+          if (AntTitle1.Text == "OriginalTitle" || AntTitle1.Text == "FormattedTitle")
+          {
+            if (AntSearchList.Text.Length == 0)
+              AntSearchList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchList", "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number");
+            if (AntUpdList.Text.Length == 0)
+              AntUpdList.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UpdateList", "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer");
+          }
+        }
+
     }
 }

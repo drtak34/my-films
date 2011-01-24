@@ -357,7 +357,13 @@
           this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.label33 = new System.Windows.Forms.Label();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new TraktConfiguration();
+          this.traktConfiguration1 = new MesFilms.MyFilms.Configuration.TraktConfiguration();
+          this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
+          this.groupBox1 = new System.Windows.Forms.GroupBox();
+          this.ButDefCov = new System.Windows.Forms.Button();
+          this.label_DefaulCover = new System.Windows.Forms.Label();
+          this.ButImg = new System.Windows.Forms.Button();
+          this.label2 = new System.Windows.Forms.Label();
           this.gpsuppress = new System.Windows.Forms.GroupBox();
           this.rbsuppress2 = new System.Windows.Forms.RadioButton();
           this.rbsuppress4 = new System.Windows.Forms.RadioButton();
@@ -390,16 +396,10 @@
           this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
           this.Tab_Grabber = new System.Windows.Forms.TabPage();
           this.Tab_Artwork = new System.Windows.Forms.TabPage();
-          this.groupBox1 = new System.Windows.Forms.GroupBox();
-          this.ButDefCov = new System.Windows.Forms.Button();
-          this.label_DefaulCover = new System.Windows.Forms.Label();
-          this.ButImg = new System.Windows.Forms.Button();
-          this.label2 = new System.Windows.Forms.Label();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
           this.btnUpdate = new System.Windows.Forms.Button();
           this.lblLogoPresets = new System.Windows.Forms.Label();
           this.lbl_LogoSpacing = new System.Windows.Forms.Label();
-          this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.lblSetupLogoRules = new System.Windows.Forms.Label();
           this.lblInfoLogosForAll = new System.Windows.Forms.Label();
           this.lblSelectLogoFile = new System.Windows.Forms.Label();
@@ -467,6 +467,7 @@
           this.groupBox2.SuspendLayout();
           this.groupBoxUpdateByProperties.SuspendLayout();
           this.Tab_Trakt.SuspendLayout();
+          this.groupBox1.SuspendLayout();
           this.gpsuppress.SuspendLayout();
           this.groupBox111.SuspendLayout();
           this.General.SuspendLayout();
@@ -474,7 +475,6 @@
           this.groupBoxDeletionOptions.SuspendLayout();
           this.Tab_Grabber.SuspendLayout();
           this.Tab_Artwork.SuspendLayout();
-          this.groupBox1.SuspendLayout();
           this.Tab_Logos.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
           this.Tab_ExternalCatalogs.SuspendLayout();
@@ -1488,11 +1488,11 @@
           // label40
           // 
           this.label40.AutoSize = true;
-          this.label40.Location = new System.Drawing.Point(149, 70);
+          this.label40.Location = new System.Drawing.Point(126, 70);
           this.label40.Name = "label40";
-          this.label40.Size = new System.Drawing.Size(151, 13);
+          this.label40.Size = new System.Drawing.Size(183, 13);
           this.label40.TabIndex = 73;
-          this.label40.Text = "Resulting path for Views fanart";
+          this.label40.Text = "Resulting path for Group Views fanart";
           // 
           // MesFilmsFanartViews
           // 
@@ -1643,9 +1643,9 @@
           this.SearchFileName.Size = new System.Drawing.Size(144, 17);
           this.SearchFileName.TabIndex = 66;
           this.SearchFileName.Text = "Search by Movie\'s Name";
-          this.ToolTip1.SetToolTip(this.SearchFileName, "If file is not found with the \'Ant Item for Storage Info\' field, you \r\ncan search" +
-                  " the file with the movie Name.\r\nSelect that option for it and give the Title use" +
-                  "d for the search.\r\n");
+          this.ToolTip1.SetToolTip(this.SearchFileName, "Select this option if you want to search the file in cases it\'s not found \r\nwith " +
+                  "the \'Item for Storage Info\' field. \r\nThe movie name will be used for file search" +
+                  ".");
           this.SearchFileName.UseVisualStyleBackColor = true;
           // 
           // AntIdentItem
@@ -1700,6 +1700,7 @@
           this.AntTitle1.TabIndex = 10;
           this.ToolTip1.SetToolTip(this.AntTitle1, "Select the ANT database field that you want to be displayed as the ‘Master Title’" +
                   ".\r\nYou can use Hierarchies for \"grouping\" when defining a hierarchy separator.");
+          this.AntTitle1.SelectedIndexChanged += new System.EventHandler(this.AntTitle1_SelectedIndexChanged);
           // 
           // groupBox22
           // 
@@ -1714,7 +1715,7 @@
           this.groupBox22.Size = new System.Drawing.Size(710, 79);
           this.groupBox22.TabIndex = 75;
           this.groupBox22.TabStop = false;
-          this.groupBox22.Text = "Thumbs for Grouped Views (Genre, Year, Country, ...)";
+          this.groupBox22.Text = "Thumbs for Group Views (Genre, Year, Country, ...)";
           this.ToolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
           // 
           // btnResetThumbs
@@ -1735,7 +1736,7 @@
           this.chkViews.Name = "chkViews";
           this.chkViews.Size = new System.Drawing.Size(104, 30);
           this.chkViews.TabIndex = 71;
-          this.chkViews.Text = "Use Thumbs for \r\ngrouped views";
+          this.chkViews.Text = "Use Thumbs for \r\ngroup views";
           this.chkViews.UseVisualStyleBackColor = true;
           // 
           // btnViews
@@ -1763,9 +1764,9 @@
           this.label29.AutoSize = true;
           this.label29.Location = new System.Drawing.Point(169, 27);
           this.label29.Name = "label29";
-          this.label29.Size = new System.Drawing.Size(140, 13);
+          this.label29.Size = new System.Drawing.Size(128, 13);
           this.label29.TabIndex = 73;
-          this.label29.Text = "Grouped Views Picture Path";
+          this.label29.Text = "Group Views Picture Path";
           // 
           // MesFilmsViews
           // 
@@ -1777,7 +1778,6 @@
           // SearchSubDirsTrailer
           // 
           this.SearchSubDirsTrailer.AutoSize = true;
-          this.SearchSubDirsTrailer.Enabled = false;
           this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 94);
           this.SearchSubDirsTrailer.Name = "SearchSubDirsTrailer";
           this.SearchSubDirsTrailer.Size = new System.Drawing.Size(130, 17);
@@ -1786,7 +1786,6 @@
           this.ToolTip1.SetToolTip(this.SearchSubDirsTrailer, "Select this option if you want the search for the trailer files\r\nto include sub-f" +
                   "olders of the defined path.\r\n");
           this.SearchSubDirsTrailer.UseVisualStyleBackColor = true;
-          this.SearchSubDirsTrailer.Visible = false;
           // 
           // PathStorageTrailer
           // 
@@ -1819,7 +1818,6 @@
           // ShowTrailerWhenStartingMovie
           // 
           this.ShowTrailerWhenStartingMovie.AutoSize = true;
-          this.ShowTrailerWhenStartingMovie.Enabled = false;
           this.ShowTrailerWhenStartingMovie.Location = new System.Drawing.Point(27, 197);
           this.ShowTrailerWhenStartingMovie.Name = "ShowTrailerWhenStartingMovie";
           this.ShowTrailerWhenStartingMovie.Size = new System.Drawing.Size(228, 17);
@@ -1828,7 +1826,6 @@
           this.ToolTip1.SetToolTip(this.ShowTrailerWhenStartingMovie, "-- Coming in future version --\r\nIf checked, a trailer from same category as movie" +
                   " \r\nwill be played before starting the movie itself.");
           this.ShowTrailerWhenStartingMovie.UseVisualStyleBackColor = true;
-          this.ShowTrailerWhenStartingMovie.Visible = false;
           // 
           // btnTrailer
           // 
@@ -1843,7 +1840,6 @@
           // ShowTrailerPlayDialog
           // 
           this.ShowTrailerPlayDialog.AutoSize = true;
-          this.ShowTrailerPlayDialog.Enabled = false;
           this.ShowTrailerPlayDialog.Location = new System.Drawing.Point(27, 166);
           this.ShowTrailerPlayDialog.Name = "ShowTrailerPlayDialog";
           this.ShowTrailerPlayDialog.Size = new System.Drawing.Size(138, 17);
@@ -1852,12 +1848,10 @@
           this.ToolTip1.SetToolTip(this.ShowTrailerPlayDialog, "-- Coming in future version --\r\nIf checked, a dialog will be displayed to select " +
                   "trailer, \r\nif more than one trailer is present.");
           this.ShowTrailerPlayDialog.UseVisualStyleBackColor = true;
-          this.ShowTrailerPlayDialog.Visible = false;
           // 
           // SearchFileNameTrailer
           // 
           this.SearchFileNameTrailer.AutoSize = true;
-          this.SearchFileNameTrailer.Enabled = false;
           this.SearchFileNameTrailer.Location = new System.Drawing.Point(27, 142);
           this.SearchFileNameTrailer.Name = "SearchFileNameTrailer";
           this.SearchFileNameTrailer.Size = new System.Drawing.Size(144, 17);
@@ -1865,7 +1859,6 @@
           this.SearchFileNameTrailer.Text = "Search by Movie\'s Name";
           this.ToolTip1.SetToolTip(this.SearchFileNameTrailer, resources.GetString("SearchFileNameTrailer.ToolTip"));
           this.SearchFileNameTrailer.UseVisualStyleBackColor = true;
-          this.SearchFileNameTrailer.Visible = false;
           // 
           // label34
           // 
@@ -1878,7 +1871,6 @@
           // 
           // ItemSearchFileNameTrailer
           // 
-          this.ItemSearchFileNameTrailer.Enabled = false;
           this.ItemSearchFileNameTrailer.FormattingEnabled = true;
           this.ItemSearchFileNameTrailer.Items.AddRange(new object[] {
             "OriginalTitle",
@@ -1890,7 +1882,6 @@
           this.ItemSearchFileNameTrailer.TabIndex = 70;
           this.ToolTip1.SetToolTip(this.ItemSearchFileNameTrailer, "Choose the title that should be used for matching mediafiles to the movies in you" +
                   "r DB.\r\n");
-          this.ItemSearchFileNameTrailer.Visible = false;
           // 
           // AntStorageTrailer
           // 
@@ -2161,7 +2152,7 @@
           this.label_VersionNumber.ForeColor = System.Drawing.SystemColors.HotTrack;
           this.label_VersionNumber.Location = new System.Drawing.Point(658, 16);
           this.label_VersionNumber.Name = "label_VersionNumber";
-          this.label_VersionNumber.Size = new System.Drawing.Size(107, 13);
+          this.label_VersionNumber.Size = new System.Drawing.Size(103, 13);
           this.label_VersionNumber.TabIndex = 34;
           this.label_VersionNumber.Text = "Version x.x.x.x alpha";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "Alphaversion for Testing only !");
@@ -2198,9 +2189,7 @@
           this.MesFilmsImgArtist.Name = "MesFilmsImgArtist";
           this.MesFilmsImgArtist.Size = new System.Drawing.Size(422, 20);
           this.MesFilmsImgArtist.TabIndex = 95;
-          this.ToolTip1.SetToolTip(this.MesFilmsImgArtist, "Enter the full path to the folder containing the Artist image files.\r\n(Check: By " +
-                  "default it is the same as the path to your database file.)\r\nYou can use the brow" +
-                  "se button to find the correct path.");
+          this.ToolTip1.SetToolTip(this.MesFilmsImgArtist, resources.GetString("MesFilmsImgArtist.ToolTip"));
           // 
           // groupBox_PreLaunchingCommand
           // 
@@ -2281,7 +2270,7 @@
           this.btnResetThumbsArtist.Size = new System.Drawing.Size(84, 23);
           this.btnResetThumbsArtist.TabIndex = 99;
           this.btnResetThumbsArtist.Text = "Reset Thumbs";
-          this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, "That action\'ll remove all generated artist thumbs");
+          this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, "That action\'ll remove all generated person image thumbs");
           this.btnResetThumbsArtist.UseVisualStyleBackColor = true;
           this.btnResetThumbsArtist.Click += new System.EventHandler(this.btnResetThumbsArtist_Click);
           // 
@@ -2320,9 +2309,9 @@
           this.label_DefaultArtistImage.AutoSize = true;
           this.label_DefaultArtistImage.Location = new System.Drawing.Point(40, 47);
           this.label_DefaultArtistImage.Name = "label_DefaultArtistImage";
-          this.label_DefaultArtistImage.Size = new System.Drawing.Size(99, 13);
+          this.label_DefaultArtistImage.Size = new System.Drawing.Size(109, 13);
           this.label_DefaultArtistImage.TabIndex = 94;
-          this.label_DefaultArtistImage.Text = "Default Artist Image";
+          this.label_DefaultArtistImage.Text = "Default Person Image";
           // 
           // label_ArtistImagePath
           // 
@@ -2728,7 +2717,6 @@
           // checkWatchedInProfile
           // 
           this.checkWatchedInProfile.AutoSize = true;
-          this.checkWatchedInProfile.Enabled = false;
           this.checkWatchedInProfile.Location = new System.Drawing.Point(9, 54);
           this.checkWatchedInProfile.Name = "checkWatchedInProfile";
           this.checkWatchedInProfile.Size = new System.Drawing.Size(338, 17);
@@ -2835,6 +2823,7 @@
           // 
           this.comboBoxLogoSpacing.FormattingEnabled = true;
           this.comboBoxLogoSpacing.Items.AddRange(new object[] {
+            "0",
             "1",
             "2",
             "3",
@@ -3088,6 +3077,8 @@
           this.ItemSearchFileName.Name = "ItemSearchFileName";
           this.ItemSearchFileName.Size = new System.Drawing.Size(157, 21);
           this.ItemSearchFileName.TabIndex = 67;
+          this.ToolTip1.SetToolTip(this.ItemSearchFileName, "If file is not found with the \'Ant Item for Storage Info\' field, you \r\ncan search" +
+                  " the file with the movie Name.\r\nChoose the Title used for the search.");
           // 
           // AntIdentLabel
           // 
@@ -3101,9 +3092,9 @@
           this.label6.AutoSize = true;
           this.label6.Location = new System.Drawing.Point(11, 18);
           this.label6.Name = "label6";
-          this.label6.Size = new System.Drawing.Size(144, 13);
+          this.label6.Size = new System.Drawing.Size(125, 13);
           this.label6.TabIndex = 59;
-          this.label6.Text = "Ant Item for Storage  File Info";
+          this.label6.Text = "Item for Storage  File Info";
           // 
           // label4
           // 
@@ -3195,7 +3186,7 @@
           this.groupBoxSearchByProperties.Size = new System.Drawing.Size(712, 114);
           this.groupBoxSearchByProperties.TabIndex = 35;
           this.groupBoxSearchByProperties.TabStop = false;
-          this.groupBoxSearchByProperties.Text = "Search by Properties";
+          this.groupBoxSearchByProperties.Text = "Global Search by Properties";
           this.ToolTip1.SetToolTip(this.groupBoxSearchByProperties, "In opposite to the \"User defined Search Items\", this is a more generic search \r\na" +
                   "nd it is based on searching the whole catalog, including items, that are not vis" +
                   "ible in the current view\r\n");
@@ -3228,6 +3219,7 @@
           this.AntSearchField.Size = new System.Drawing.Size(148, 21);
           this.AntSearchField.TabIndex = 78;
           this.ToolTip1.SetToolTip(this.AntSearchField, "Choose a DB item to add to the property search list.");
+          this.AntSearchField.SelectedIndexChanged += new System.EventHandler(this.AntSearchField_SelectedIndexChanged);
           // 
           // AntSearchList
           // 
@@ -3251,8 +3243,7 @@
           this.groupBox2.TabIndex = 72;
           this.groupBox2.TabStop = false;
           this.groupBox2.Text = "Movie Updates - watched-status";
-          this.ToolTip1.SetToolTip(this.groupBox2, "-- future release --\r\nThis option allows you storing your \"watched status\" based " +
-                  "on a userprofile \r\nto keep track of the \"watched tatus\" for several persons.");
+          this.ToolTip1.SetToolTip(this.groupBox2, "This option allows you updating field info for storing your \"watched status\".");
           // 
           // Label_UserProfileName
           // 
@@ -3265,7 +3256,6 @@
           // 
           // UserProfileName
           // 
-          this.UserProfileName.Enabled = false;
           this.UserProfileName.Location = new System.Drawing.Point(143, 73);
           this.UserProfileName.Name = "UserProfileName";
           this.UserProfileName.Size = new System.Drawing.Size(204, 20);
@@ -3328,6 +3318,75 @@
           this.traktConfiguration1.Name = "traktConfiguration1";
           this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
           this.traktConfiguration1.TabIndex = 0;
+          // 
+          // comboBoxLogoPresets
+          // 
+          this.comboBoxLogoPresets.FormattingEnabled = true;
+          this.comboBoxLogoPresets.Items.AddRange(new object[] {
+            "Use Logos of currently selected skin",
+            "Use Blue3Wide logos",
+            "Use MyFilms Logo Pack",
+            "Define your path to logo image files"});
+          this.comboBoxLogoPresets.Location = new System.Drawing.Point(220, 8);
+          this.comboBoxLogoPresets.Name = "comboBoxLogoPresets";
+          this.comboBoxLogoPresets.Size = new System.Drawing.Size(211, 21);
+          this.comboBoxLogoPresets.TabIndex = 3;
+          this.ToolTip1.SetToolTip(this.comboBoxLogoPresets, resources.GetString("comboBoxLogoPresets.ToolTip"));
+          this.comboBoxLogoPresets.SelectedIndexChanged += new System.EventHandler(this.comboBoxLogoPresets_SelectedIndexChanged);
+          // 
+          // groupBox1
+          // 
+          this.groupBox1.Controls.Add(this.ButDefCov);
+          this.groupBox1.Controls.Add(this.DefaultCover);
+          this.groupBox1.Controls.Add(this.label_DefaulCover);
+          this.groupBox1.Controls.Add(this.ButImg);
+          this.groupBox1.Controls.Add(this.MesFilmsImg);
+          this.groupBox1.Controls.Add(this.label2);
+          this.groupBox1.Location = new System.Drawing.Point(17, 1);
+          this.groupBox1.Name = "groupBox1";
+          this.groupBox1.Size = new System.Drawing.Size(710, 73);
+          this.groupBox1.TabIndex = 85;
+          this.groupBox1.TabStop = false;
+          this.groupBox1.Text = "Cover Images";
+          this.ToolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
+          // 
+          // ButDefCov
+          // 
+          this.ButDefCov.Location = new System.Drawing.Point(656, 42);
+          this.ButDefCov.Name = "ButDefCov";
+          this.ButDefCov.Size = new System.Drawing.Size(32, 22);
+          this.ButDefCov.TabIndex = 90;
+          this.ButDefCov.Text = "...";
+          this.ButDefCov.UseVisualStyleBackColor = true;
+          this.ButDefCov.Click += new System.EventHandler(this.ButDefCov_Click);
+          // 
+          // label_DefaulCover
+          // 
+          this.label_DefaulCover.AutoSize = true;
+          this.label_DefaulCover.Location = new System.Drawing.Point(40, 47);
+          this.label_DefaulCover.Name = "label_DefaulCover";
+          this.label_DefaulCover.Size = new System.Drawing.Size(104, 13);
+          this.label_DefaulCover.TabIndex = 88;
+          this.label_DefaulCover.Text = "Default Movie Cover";
+          // 
+          // ButImg
+          // 
+          this.ButImg.Location = new System.Drawing.Point(656, 15);
+          this.ButImg.Name = "ButImg";
+          this.ButImg.Size = new System.Drawing.Size(32, 23);
+          this.ButImg.TabIndex = 87;
+          this.ButImg.Text = "...";
+          this.ButImg.UseVisualStyleBackColor = true;
+          this.ButImg.Click += new System.EventHandler(this.ButImg_Click);
+          // 
+          // label2
+          // 
+          this.label2.AutoSize = true;
+          this.label2.Location = new System.Drawing.Point(40, 20);
+          this.label2.Name = "label2";
+          this.label2.Size = new System.Drawing.Size(97, 13);
+          this.label2.TabIndex = 86;
+          this.label2.Text = "Cover Images Path";
           // 
           // gpsuppress
           // 
@@ -3649,59 +3708,6 @@
           this.Tab_Artwork.ToolTipText = "Setup for artwork, like pathes to coverart, person images etc.";
           this.Tab_Artwork.UseVisualStyleBackColor = true;
           // 
-          // groupBox1
-          // 
-          this.groupBox1.Controls.Add(this.ButDefCov);
-          this.groupBox1.Controls.Add(this.DefaultCover);
-          this.groupBox1.Controls.Add(this.label_DefaulCover);
-          this.groupBox1.Controls.Add(this.ButImg);
-          this.groupBox1.Controls.Add(this.MesFilmsImg);
-          this.groupBox1.Controls.Add(this.label2);
-          this.groupBox1.Location = new System.Drawing.Point(17, 1);
-          this.groupBox1.Name = "groupBox1";
-          this.groupBox1.Size = new System.Drawing.Size(710, 73);
-          this.groupBox1.TabIndex = 85;
-          this.groupBox1.TabStop = false;
-          this.groupBox1.Text = "Cover Images";
-          // 
-          // ButDefCov
-          // 
-          this.ButDefCov.Location = new System.Drawing.Point(656, 42);
-          this.ButDefCov.Name = "ButDefCov";
-          this.ButDefCov.Size = new System.Drawing.Size(32, 22);
-          this.ButDefCov.TabIndex = 90;
-          this.ButDefCov.Text = "...";
-          this.ButDefCov.UseVisualStyleBackColor = true;
-          this.ButDefCov.Click += new System.EventHandler(this.ButDefCov_Click);
-          // 
-          // label_DefaulCover
-          // 
-          this.label_DefaulCover.AutoSize = true;
-          this.label_DefaulCover.Location = new System.Drawing.Point(40, 47);
-          this.label_DefaulCover.Name = "label_DefaulCover";
-          this.label_DefaulCover.Size = new System.Drawing.Size(104, 13);
-          this.label_DefaulCover.TabIndex = 88;
-          this.label_DefaulCover.Text = "Default Movie Cover";
-          // 
-          // ButImg
-          // 
-          this.ButImg.Location = new System.Drawing.Point(656, 15);
-          this.ButImg.Name = "ButImg";
-          this.ButImg.Size = new System.Drawing.Size(32, 23);
-          this.ButImg.TabIndex = 87;
-          this.ButImg.Text = "...";
-          this.ButImg.UseVisualStyleBackColor = true;
-          this.ButImg.Click += new System.EventHandler(this.ButImg_Click);
-          // 
-          // label2
-          // 
-          this.label2.AutoSize = true;
-          this.label2.Location = new System.Drawing.Point(40, 20);
-          this.label2.Name = "label2";
-          this.label2.Size = new System.Drawing.Size(97, 13);
-          this.label2.TabIndex = 86;
-          this.label2.Text = "Cover Images Path";
-          // 
           // Tab_Logos
           // 
           this.Tab_Logos.Controls.Add(this.btnUpdate);
@@ -3768,21 +3774,6 @@
           this.lbl_LogoSpacing.Size = new System.Drawing.Size(46, 13);
           this.lbl_LogoSpacing.TabIndex = 101;
           this.lbl_LogoSpacing.Text = "Spacing";
-          // 
-          // comboBoxLogoPresets
-          // 
-          this.comboBoxLogoPresets.FormattingEnabled = true;
-          this.comboBoxLogoPresets.Items.AddRange(new object[] {
-            "Use Logos of currently selected skin",
-            "Use Blue3Wide logos",
-            "Use MyFilms Logo Pack",
-            "Define your path to logo image files"});
-          this.comboBoxLogoPresets.Location = new System.Drawing.Point(220, 8);
-          this.comboBoxLogoPresets.Name = "comboBoxLogoPresets";
-          this.comboBoxLogoPresets.Size = new System.Drawing.Size(211, 21);
-          this.comboBoxLogoPresets.TabIndex = 3;
-          this.ToolTip1.SetToolTip(this.comboBoxLogoPresets, resources.GetString("comboBoxLogoPresets.ToolTip"));
-          this.comboBoxLogoPresets.SelectedIndexChanged += new System.EventHandler(this.comboBoxLogoPresets_SelectedIndexChanged);
           // 
           // lblSetupLogoRules
           // 
@@ -4260,6 +4251,8 @@
           this.groupBoxUpdateByProperties.ResumeLayout(false);
           this.groupBoxUpdateByProperties.PerformLayout();
           this.Tab_Trakt.ResumeLayout(false);
+          this.groupBox1.ResumeLayout(false);
+          this.groupBox1.PerformLayout();
           this.gpsuppress.ResumeLayout(false);
           this.gpsuppress.PerformLayout();
           this.groupBox111.ResumeLayout(false);
@@ -4270,8 +4263,6 @@
           this.groupBoxDeletionOptions.PerformLayout();
           this.Tab_Grabber.ResumeLayout(false);
           this.Tab_Artwork.ResumeLayout(false);
-          this.groupBox1.ResumeLayout(false);
-          this.groupBox1.PerformLayout();
           this.Tab_Logos.ResumeLayout(false);
           this.Tab_Logos.PerformLayout();
           this.Tab_WakeOnLan.ResumeLayout(false);

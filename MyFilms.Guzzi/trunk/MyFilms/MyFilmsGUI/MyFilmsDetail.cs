@@ -636,6 +636,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return;
                 //break;
 
+                case "playtraileronlinevideosappleitunes":
+                    var hasRightPlugin2 = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
+                    var hasRightVersion2 = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
+                    //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
+                    if (hasRightPlugin2 && hasRightVersion2)
+                    {
+                      string OVstartparams = string.Empty;
+                      string OVtitle = string.Empty;
+                      if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+                        OVtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                      if (OVtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+                        OVtitle = OVtitle.Substring(OVtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                      OVstartparams = "site:iTunes Movie Trailers|category:|search:" + OVtitle + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                      //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "iTunes Movie Trailers");
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", OVtitle.ToString());
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
+
+                      LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+                      GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
+                    }
+                    else
+                    {
+                      ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version resuired: 0.28");
+                    }
+                    return;
+                //break;
+
                 case "rating":
                     MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(7988);
                     if (MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Length > 0)
@@ -644,24 +677,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         dlgRating.Rating = 0;
                     dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
                     dlgRating.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1 || dlgmenu.SelectedLabel == 1)
+                      Change_Menu("mainmenu");
                     MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString();
                     Update_XML_database();
                     afficher_detail(true);
                     break;
 
-
-
                 case "trailermenu":
                     if (dlgmenu == null) return;
                     dlgmenu.Reset();
                     choiceViewMenu.Clear();
-                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Trailer ...
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798704)); // Trailer ...
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798710));//play trailer
                     choiceViewMenu.Add("playtrailer");
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798711));//search youtube trailer with onlinevideos
                     choiceViewMenu.Add("playtraileronlinevideos");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798712));//search apple itunes trailer with onlinevideos
+                    choiceViewMenu.Add("playtraileronlinevideosappleitunes");
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)

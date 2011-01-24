@@ -2029,7 +2029,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.StrIndex = 0;
             if (facadeView.Count == 0)
             {
-                ShowMessageDialog("", GUILocalizeStrings.Get(10798620), GUILocalizeStrings.Get(10798621));
+              ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638));
                 GUIWaitCursor.Show();
                 DisplayAllMovies();
                 GetFilmList();
@@ -3077,7 +3077,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                     else
                     {
-                        ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version resuired: 0");
+                        ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
                     }
                     break;
                     

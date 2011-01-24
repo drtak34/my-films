@@ -1633,6 +1633,9 @@ namespace Grabber_Interface
 
     private void button6_Click(object sender, EventArgs e)
     {
+      pictureBoxPreviewCover.ImageLocation = ""; // clear picture
+      labelImageSize.Text = "";
+
       if (TextKeyStartD.Text.Length > 0 && TextKeyStopD.Text.Length > 0)
       {
         string find;
