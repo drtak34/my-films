@@ -48,6 +48,7 @@
 			<loop>yes</loop>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
+			<zoom>yes</zoom>
 			<randomize>true</randomize>
 		</control>
 		<control>
@@ -305,8 +306,8 @@
 		<font>font9</font>
 		<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 		<textXOff>25</textXOff>
-		<textureFocus>ledon.png</textureFocus>
-		<textureNoFocus>ledoff.png</textureNoFocus>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
 		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -329,8 +330,8 @@
 		<align>left</align>
 		<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 		<textXOff>25</textXOff>
-		<textureFocus>ledon.png</textureFocus>
-		<textureNoFocus>ledoff.png</textureNoFocus>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
 		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -352,8 +353,8 @@
 		<align>left</align>
 		<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 		<textXOff>25</textXOff>
-		<textureFocus>ledon.png</textureFocus>
-		<textureNoFocus>ledoff.png</textureNoFocus>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
 		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -375,8 +376,8 @@
 		<align>left</align>
 		<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 		<textXOff>25</textXOff>
-		<textureFocus>ledon.png</textureFocus>
-		<textureNoFocus>ledoff.png</textureNoFocus>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
 		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -398,8 +399,8 @@
 		<align>left</align>
 		<textcolorNoFocus>99a9d0f7</textcolorNoFocus>
 		<textXOff>25</textXOff>
-		<textureFocus>ledon.png</textureFocus>
-		<textureNoFocus>ledoff.png</textureNoFocus>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
 		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -1364,13 +1365,26 @@ Detailmenu for technical details
 		<width>35</width>
 		<height>35</height>
 		<align>right</align>
-		<texture>Films_DD.png</texture>
+		<texture>MyFilms\Films_DD.png</texture>
 		<colordiffuse>7fffffff</colordiffuse>
 		<visible>!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
 		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<description>Optional Item3</description>
+		<id>1</id>
+		<posX>1244</posX>
+		<posY>630</posY>
+		<width>250</width>
+		<align>right</align>
+		<label>#myfilms.user.item3.label: #myfilms.user.item3.value</label>
+		<font>font11</font>
+		<textcolor>7fffffff</textcolor>
+		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.item3.value)</visible>
 	</control>
 
 <!-- Start Special View for FullColorFanart -->
@@ -1382,7 +1396,7 @@ Detailmenu for technical details
 		<posY>0</posY>
 		<width>1680</width>
 		<height>100</height>
-		<texture>gradient_top.png</texture>
+		<texture>MyFilms\gradient_top.png</texture>
 		<colordiffuse>90ffffff</colordiffuse>
 		<visible>Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
@@ -1397,7 +1411,7 @@ Detailmenu for technical details
 		<posY>630</posY>
 		<width>1680</width>
 		<height>100</height>
-		<texture>gradient.png</texture>
+		<texture>MyFilms\gradient.png</texture>
 		<visible>Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -1490,6 +1504,132 @@ Detailmenu for technical details
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 	</control>
 <!-- End Special View for FullColorFanart -->
+
+<!-- Watched/Unwatched Icon -->
+	<control>
+		<type>image</type>
+		<description>Watched Icon</description>
+		<id>1</id>
+		<posX>377</posX>
+		<posY>633</posY>
+		<width>20</width>
+		<height>20</height>
+		<texture>MyFilms\overlayunwatched.png</texture>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>UnWatched Icon</description>
+		<id>1</id>
+		<posX>377</posX>
+		<posY>633</posY>
+		<width>20</width>
+		<height>20</height>
+		<texture>MyFilms\overlaywatched.png</texture>
+		<colordiffuse>eea9d0f7</colordiffuse>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	
+<!-- Additional Display for Info Movie available -->
+		<control>
+			<description>Movie available Info Label</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>360</posX>
+			<posY>657</posY>
+			<width>80</width>
+			<label>Film:</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>6fffffff</textcolor>
+			<visible>!Control.HasFocus(10099)</visible>
+		</control>
+		<control>
+			<description>Movie unavailable Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>377</posX>
+			<posY>660</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\trailer_led_red.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.db.source.value)</visible>
+		</control>
+		<control>
+			<description>Movie available Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>377</posX>
+			<posY>660</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\trailer_led_green.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.db.source.value)</visible>
+		</control>
+
+
+<!-- Trailer Available Info -->
+		<control>
+			<description>Trailer available Info Label</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>365</posX>
+			<posY>686</posY>
+			<width>80</width>
+			<label>Trailer:</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>6FFFFFFF</textcolor>
+			<visible>!Control.HasFocus(10099)</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
+		<control>
+			<description>Trailer unavailable Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>377</posX>
+			<posY>690</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\trailer_led_red.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!string.contains(#myfilms.user.sourcetrailer.value, \\)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
+		<control>
+			<description>Trailer available Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>377</posX>
+			<posY>690</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\trailer_led_green.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>string.contains(#myfilms.user.sourcetrailer.value, \\)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
 
 	<control>
 		<type>animation</type>

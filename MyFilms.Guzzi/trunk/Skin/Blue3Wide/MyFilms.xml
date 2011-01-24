@@ -527,9 +527,10 @@
 			<posY>630</posY>
 			<width>250</width>
 			<align>right</align>
-			<label>#myfilms.user.item3.value</label>
+			<label>#myfilms.user.item3.label: #myfilms.user.item3.value</label>
 			<font>font11</font>
-		  <textcolor>7fffffff</textcolor>
+			<textcolor>7fffffff</textcolor>
+			<visible>string.equals(#myfilms.user.item3.value)</visible>
 		</control>
 		<control>
 			<type>image</type>
@@ -539,7 +540,7 @@
 			<posY>90</posY>
 			<width>288</width>
 			<height>420</height>
-			<texture>#myfilms.picture</texture>
+			<texture>#myfilms.coverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<zoom>yes</zoom>
 			<visible>facadeview.list+Control.HasFocus(1026)</visible>
@@ -573,9 +574,130 @@
 			<posY>100</posY>
 			<width>180</width>
 			<height>300</height>
-			<texture>#myfilms.picture</texture>
+			<texture>#myfilms.coverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<visible>no</visible>
+		</control>
+		
+<!-- Watched/Unwatched Icon -->
+	<control>
+		<type>image</type>
+		<description>Watched Icon</description>
+		<id>1</id>
+		<posX>370</posX>
+		<posY>495</posY>
+		<width>25</width>
+		<height>25</height>
+		<texture>MyFilms\overlayunwatched.png</texture>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>UnWatched Icon</description>
+		<id>1</id>
+		<posX>370</posX>
+		<posY>495</posY>
+		<width>25</width>
+		<height>25</height>
+		<texture>MyFilms\overlaywatched.png</texture>
+		<colordiffuse>eea9d0f7</colordiffuse>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+
+<!-- Additional Display for Info Movie available -->
+
+		<control>
+			<description>Movie available Info Label</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>740</posX>
+			<posY>673</posY>
+			<width>80</width>
+			<label>Film:</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>eea9d0f7</textcolor>
+			<visible>!control.isvisible(34)</visible>
+		</control>
+		<control>
+			<description>Movie unavailable Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>750</posX>
+			<posY>676</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\trailer_led_red.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!control.isvisible(34)+!string.equals(#myfilms.user.source.value)</visible>
+		</control>
+		<control>
+			<description>Movie available Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>750</posX>
+			<posY>676</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\trailer_led_green.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!control.isvisible(34)+string.equals(#myfilms.user.source.value)</visible>
+		</control>
+
+<!-- Trailer Available Info -->
+
+		<control>
+			<description>Trailer available Info Label</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>840</posX>
+			<posY>673</posY>
+			<width>80</width>
+			<label>Trailer:</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>eea9d0f7</textcolor>
+			<visible>!control.isvisible(34)</visible>
+		</control>
+		<control>
+			<description>Trailer unavailable Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>850</posX>
+			<posY>676</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\trailer_led_red.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!control.isvisible(34)+!string.equals(#myfilms.user.sourcetrailer.value)</visible>
+		</control>
+		<control>
+			<description>Trailer available Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>850</posX>
+			<posY>676</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\trailer_led_green.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!control.isvisible(34)+string.equals(#myfilms.user.sourcetrailer.value)</visible>
 		</control>
 		<control>
 		  <description>Number of Files Label</description>

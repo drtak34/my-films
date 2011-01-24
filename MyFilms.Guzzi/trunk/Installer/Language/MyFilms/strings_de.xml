@@ -94,6 +94,7 @@
     <String id="1079890">Filmclips zur Person (IMDB)</String>
     <String id="1079891">Bildergallerie zur Person (IMDB)</String>
     <String id="1079892">Update ...</String>
+    <String id="1079893">Sortiere:</String>
     <String id="10798610">Filme als </String>
     <String id="10798611">Wähle Funktion für </String>
     <String id="10798612">Produzent</String>
@@ -116,6 +117,8 @@
     <String id="10798629">aus</String>
     <String id="10798630">Neuer Wert</String>
     <String id="10798631">Zeige Film-Server Status</String>
+    <String id="10798637">Keine Filme entsprechen der Ansicht !</String>
+    <String id="10798638">Zeige Gesamtliste</String>
     <String id="10798639">Keine Filme entsprechen der Suche !</String>
     <String id="10798640">Kein Ergebnis zu dem gesuchten Wert gefunden!</String>
     <String id="10798641">Kein Eintrag vorhanden nach dem gesucht werden kann!.</String>
@@ -178,6 +181,7 @@
     <String id="10798704">Trailer ...</String>
     <String id="10798710">Spiele Trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
+    <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>
     <String id="10798719">Lade Filminformationen (nfo, ergänze fehlende Infos)</String>
     <String id="10798720">Lade Filminformationen (nfo, alle Infos überschreiben)</String>
     <String id="10798721">Lade Filminformationen aus ant-Datei (lokal)</String>
@@ -194,9 +198,9 @@
     <String id="10798733">Ersetze bestehendes Cover mit diesem ?</String>
     <String id="10798734">Aktualisiere alle Felder</String>
     <String id="10798735">Aktualisiere nur leere Felder</String>
-    <String id="10798736">Online</String>
+    <String id="10798736">Locally Available</String>
     <String id="10798737">Film lokal nicht gefunden</String>
-    <String id="10798738">Versuche YouTube ?</String>
+    <String id="10798738">Versuche Online Trailer ?</String>
     <String id="10798751">Übersicht und Filmstart</String>
     <String id="10798752">Beschreibung</String>
     <String id="10798753">Kommentar</String>

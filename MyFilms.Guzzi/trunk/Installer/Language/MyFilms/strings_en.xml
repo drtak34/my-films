@@ -94,6 +94,7 @@
     <String id="1079890">Film clips for selected person (IMDB)</String>
     <String id="1079891">Photos for selected person (IMDB)</String>
     <String id="1079892">Update ...</String>
+    <String id="1079893">Sort by:</String>
     <String id="10798610">Films as </String>
     <String id="10798611">Function selection for</String>
     <String id="10798612">Producer</String>
@@ -116,6 +117,8 @@
     <String id="10798629">off</String>
     <String id="10798630">New value</String>
     <String id="10798631">Show NAS Server status</String>
+    <String id="10798637">No films match this view !</String>
+    <String id="10798638">Show full movie list</String>
     <String id="10798639">No matches for this search!</String>
     <String id="10798640">No entry corresponding to the searched value.</String>
     <String id="10798641">No entry to be search for.</String>
@@ -178,6 +181,7 @@
     <String id="10798704">Trailer ...</String>
     <String id="10798710">Play trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
+    <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>
     <String id="10798719">Load films info (.nfo file, local, add missing info)</String>
     <String id="10798720">Load films info (.nfo file, local, replace all info)</String>
     <String id="10798721">Load films info from Ant file (local)</String>
@@ -194,9 +198,9 @@
     <String id="10798733">Replace existing cover with this one ?</String>
     <String id="10798734">Update all properties</String>
     <String id="10798735">Update only missing properties</String>
-    <String id="10798736">Online</String>
+    <String id="10798736">Locally Available</String>
     <String id="10798737">Movie not found locally</String>
-    <String id="10798738">Try YouTube ?</String>
+    <String id="10798738">Try Online Trailer ?</String>
     <String id="10798751">Overview</String>
     <String id="10798752">Description</String>
     <String id="10798753">Comments</String>
