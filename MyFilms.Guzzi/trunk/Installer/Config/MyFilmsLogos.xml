@@ -4,7 +4,7 @@
     <entry name="LogosPath">
     </entry>
     <entry name="LogoPresets">Use Logos of currently selected skin</entry>
-    <entry name="Spacing">3</entry>
+    <entry name="Spacing">1</entry>
   </section>
   <section name="ID2001">
     <entry name="ID2001_0">Framerate;contains;23;or;Framerate;contains;24;BluRay.png</entry>
@@ -28,7 +28,6 @@
     <entry name="ID2001_18">AudioBitrate;contains;375;or;AudioBitrate;contains;438;5.1.png</entry>
     <entry name="ID2001_19">AudioBitrate;contains;188;or;AudioBitrate;contains;156;stereo.png</entry>
     <entry name="ID2001_20">Subtitles;filled;;;;;;Subtitles.png</entry>
-    <entry name="ID2001_21">Languages;greater;1;;;;;multilanguage.png</entry>
   </section>
   <section name="ID2002">
     <entry name="ID2002_0">Category;contains;action;;;;;Action.png</entry>
@@ -53,9 +52,5 @@
     <entry name="ID2002_19">Category;contains;thriller;;;;;Thriller.png</entry>
     <entry name="ID2002_20">Category;contains;war;;;;;War.png</entry>
     <entry name="ID2002_21">Category;contains;western;;;;;Western.png</entry>
-  </section>
-  <section name="ID2003">
-    <entry name="ID2003_0">Checked;contains;false;;;;;overlayunwatched.png</entry>
-    <entry name="ID2003_1">Checked;contains;true;;;;;overlaywatched.png</entry>
   </section>
 </profile>
