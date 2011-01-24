@@ -2166,7 +2166,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         if (conf.StrViewDfltText.Length == 0)
                         {
-                            if (conf.StrViewDfltItem.ToLower() == "year" || conf.StrViewDfltItem.ToLower() == "category" || conf.StrViewDfltItem.ToLower() == "country" || conf.StrViewDfltItem.ToLower() == "storage")
+                          if (conf.StrViewDfltItem.ToLower() == GUILocalizeStrings.Get(342).ToLower()) // Added to support "Films" view as default view
+                            Change_view("all");
+                          if (conf.StrViewDfltItem.ToLower() == "year" || conf.StrViewDfltItem.ToLower() == "category" || conf.StrViewDfltItem.ToLower() == "country" || conf.StrViewDfltItem.ToLower() == "storage")
                                 Change_view(conf.StrViewDfltItem.ToLower());
                             else
                             {

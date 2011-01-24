@@ -1210,6 +1210,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //mydivx.Clear();
             View_Dflt_Item.Items.Clear();
             View_Dflt_Item.Items.Add("(none)");
+            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); // Filmy
             View_Dflt_Item.Items.Add("Year");
             View_Dflt_Item.Items.Add("Category");
             View_Dflt_Item.Items.Add("Country");
@@ -2584,6 +2585,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             View_Dflt_Item.Items.Clear();
             View_Dflt_Item.Items.Add("(none)");
+            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); //Films
             View_Dflt_Item.Items.Add("Year");
             View_Dflt_Item.Items.Add("Category");
             View_Dflt_Item.Items.Add("Country");
