@@ -238,6 +238,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             return true;
         }
+
+
+        /// <summary>
+        /// If the plugin should have its own button on the main menu of Media Portal then it
+        /// should return true to this method, otherwise if it should not be on home
+        /// it should return false
+        /// </summary>
+        /// <param name="strButtonText">text the button should have</param>
+        /// <param name="strButtonImage">image for the button, or empty for default</param>
+        /// <param name="strButtonImageFocus">image for the button, or empty for default</param>
+        /// <param name="strPictureImage">subpicture for the button or empty for none</param>
+        /// <returns>true  : plugin needs its own button on home
+        ///          false : plugin does not need its own button on home</returns>
         public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
         {
             string wPluginName = strPluginName;
@@ -730,7 +743,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                             if (conf.StrSort[i] != "(none)" && conf.StrSort[i].Length > 0)
                             {
-                                dlg.Add(conf.StrTSort[i]);//Specific sort i
+                                dlg.Add(GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i]);//Specific sort i
                                 choiceSort.Add(string.Format("sort{0}",i.ToString()));
                             }
                         }
@@ -766,7 +779,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 int i = 0;
                                 if (choiceSort[dlg.SelectedLabel] == "sort1")
                                     i = 1;
-                                conf.CurrentSortMethod = conf.StrTSort[i];
+                                conf.CurrentSortMethod = GUILocalizeStrings.Get(1079893) + " " + conf.StrTSort[i];
                                 conf.StrSorta = conf.StrSort[i];
                                 conf.StrSortSens = " ASC";
                                 break;
@@ -1142,7 +1155,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 break;
                         }
                     }
-                    if (sr["Checked"].ToString().ToLower() == "true")
+                  
+                    if (sr["Checked"].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue) // changed to take setup config into consideration
                         item.IsPlayed = true;
                     if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
                         if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
