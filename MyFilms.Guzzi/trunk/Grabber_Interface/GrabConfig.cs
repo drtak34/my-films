@@ -1720,5 +1720,15 @@ namespace Grabber_Interface
       labelImageSize.Text = "";
     }
 
+    private void pictureBoxFranceFlag_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void pictureBoxUSFlag_Click(object sender, EventArgs e)
+    {
+
+    }
+
   }
 }

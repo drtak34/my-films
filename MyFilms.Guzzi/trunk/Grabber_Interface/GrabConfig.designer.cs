@@ -75,6 +75,7 @@ namespace Grabber_Interface
           this.TextURL = new System.Windows.Forms.TextBox();
           this.label4 = new System.Windows.Forms.Label();
           this.tabPage2 = new System.Windows.Forms.TabPage();
+          this.label21 = new System.Windows.Forms.Label();
           this.labelImageSize = new System.Windows.Forms.Label();
           this.btnLoadPreview = new System.Windows.Forms.Button();
           this.lblResult = new System.Windows.Forms.Label();
@@ -110,15 +111,16 @@ namespace Grabber_Interface
           this.textName = new System.Windows.Forms.TextBox();
           this.label2 = new System.Windows.Forms.Label();
           this.textURLPrefix = new System.Windows.Forms.TextBox();
-          this.button2 = new System.Windows.Forms.Button();
-          this.button3 = new System.Windows.Forms.Button();
+          this.buttonNew = new System.Windows.Forms.Button();
+          this.buttonSave = new System.Windows.Forms.Button();
           this.radioButtonFR = new System.Windows.Forms.RadioButton();
           this.radioButtonEN = new System.Windows.Forms.RadioButton();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
-          this.label21 = new System.Windows.Forms.Label();
+          this.button2 = new System.Windows.Forms.Button();
+          this.button3 = new System.Windows.Forms.Button();
           this.tabControl1.SuspendLayout();
           this.tabPage1.SuspendLayout();
           this.groupBox6.SuspendLayout();
@@ -477,6 +479,11 @@ namespace Grabber_Interface
           this.tabPage2.Name = "tabPage2";
           this.tabPage2.UseVisualStyleBackColor = true;
           // 
+          // label21
+          // 
+          resources.ApplyResources(this.label21, "label21");
+          this.label21.Name = "label21";
+          // 
           // labelImageSize
           // 
           resources.ApplyResources(this.labelImageSize, "labelImageSize");
@@ -736,21 +743,21 @@ namespace Grabber_Interface
           this.textURLPrefix.Name = "textURLPrefix";
           this.toolTip1.SetToolTip(this.textURLPrefix, resources.GetString("textURLPrefix.ToolTip"));
           // 
-          // button2
+          // buttonNew
           // 
-          resources.ApplyResources(this.button2, "button2");
-          this.button2.Name = "button2";
-          this.toolTip1.SetToolTip(this.button2, resources.GetString("button2.ToolTip"));
-          this.button2.UseVisualStyleBackColor = true;
-          this.button2.Click += new System.EventHandler(this.button2_Click);
+          resources.ApplyResources(this.buttonNew, "buttonNew");
+          this.buttonNew.Name = "buttonNew";
+          this.toolTip1.SetToolTip(this.buttonNew, resources.GetString("buttonNew.ToolTip"));
+          this.buttonNew.UseVisualStyleBackColor = true;
+          this.buttonNew.Click += new System.EventHandler(this.button2_Click);
           // 
-          // button3
+          // buttonSave
           // 
-          resources.ApplyResources(this.button3, "button3");
-          this.button3.Name = "button3";
-          this.toolTip1.SetToolTip(this.button3, resources.GetString("button3.ToolTip"));
-          this.button3.UseVisualStyleBackColor = true;
-          this.button3.Click += new System.EventHandler(this.button3_Click);
+          resources.ApplyResources(this.buttonSave, "buttonSave");
+          this.buttonSave.Name = "buttonSave";
+          this.toolTip1.SetToolTip(this.buttonSave, resources.GetString("buttonSave.ToolTip"));
+          this.buttonSave.UseVisualStyleBackColor = true;
+          this.buttonSave.Click += new System.EventHandler(this.button3_Click);
           // 
           // radioButtonFR
           // 
@@ -773,6 +780,7 @@ namespace Grabber_Interface
           resources.ApplyResources(this.pictureBoxFranceFlag, "pictureBoxFranceFlag");
           this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
           this.pictureBoxFranceFlag.TabStop = false;
+          this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
           // 
           // pictureBoxUSFlag
           // 
@@ -780,6 +788,7 @@ namespace Grabber_Interface
           resources.ApplyResources(this.pictureBoxUSFlag, "pictureBoxUSFlag");
           this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
           this.pictureBoxUSFlag.TabStop = false;
+          this.pictureBoxUSFlag.Click += new System.EventHandler(this.pictureBoxUSFlag_Click);
           // 
           // toolTip1
           // 
@@ -800,10 +809,21 @@ namespace Grabber_Interface
           this.pictureBoxPreviewCover.TabStop = false;
           this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
           // 
-          // label21
+          // button2
           // 
-          resources.ApplyResources(this.label21, "label21");
-          this.label21.Name = "label21";
+          resources.ApplyResources(this.button2, "button2");
+          this.button2.Name = "button2";
+          this.toolTip1.SetToolTip(this.button2, resources.GetString("button2.ToolTip"));
+          this.button2.UseVisualStyleBackColor = true;
+          this.button2.Click += new System.EventHandler(this.button2_Click);
+          // 
+          // button3
+          // 
+          resources.ApplyResources(this.button3, "button3");
+          this.button3.Name = "button3";
+          this.toolTip1.SetToolTip(this.button3, resources.GetString("button3.ToolTip"));
+          this.button3.UseVisualStyleBackColor = true;
+          this.button3.Click += new System.EventHandler(this.button3_Click);
           // 
           // GrabConfig
           // 
@@ -814,8 +834,8 @@ namespace Grabber_Interface
           this.Controls.Add(this.pictureBoxFranceFlag);
           this.Controls.Add(this.radioButtonEN);
           this.Controls.Add(this.radioButtonFR);
-          this.Controls.Add(this.button3);
-          this.Controls.Add(this.button2);
+          this.Controls.Add(this.buttonSave);
+          this.Controls.Add(this.buttonNew);
           this.Controls.Add(this.label3);
           this.Controls.Add(this.tabControl1);
           this.Controls.Add(this.textName);
@@ -875,8 +895,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.TextBox TextKeyStart;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox textBody;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonNew;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -940,6 +960,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.PictureBox pictureBoxPreviewCover;
         private System.Windows.Forms.Label labelImageSize;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
 
     }
 }
