@@ -291,7 +291,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // create Cover image swapper
             cover = new AsyncImageResource();
             cover.Property = "#myfilms.coverimage";
-            cover.Delay = 250;
+            cover.Delay = 100;
 
             // (re)link our backdrop image controls to the backdrop image swapper
             //backdrop.GUIImageOne = ImgFanart;
@@ -555,7 +555,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //---------------------------------------------------------------------------------------
                     // Mouse/Keyboard Clicked
                     //---------------------------------------------------------------------------------------
-                    LogMyFilms.Debug("MF: GUI_MSG_CLICKED erkrecognized !"); 
+                    LogMyFilms.Debug("MF: GUI_MSG_CLICKED recognized !"); 
                     if ((iControl == (int)Controls.CTRL_BtnSrtBy) && (conf.Boolselect))
                         // No change sort method and no searchs during select
                         return true;
@@ -804,6 +804,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Change Selected Option
                     {
                         Change_Option();
+                        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
                         return base.OnMessage(messageType);
                     } 
                     if ((iControl == (int)Controls.CTRL_BtnLayout) && !conf.Boolselect)

@@ -465,6 +465,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (iControl == (int)Controls.CTRL_BtnMaj)
                     {    // Update items
                         Update_XML_Items();
+                        GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlayTrailer)
@@ -589,7 +590,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
                     {
-                        return;
+                      GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu
+                      return;
                     }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     return;
