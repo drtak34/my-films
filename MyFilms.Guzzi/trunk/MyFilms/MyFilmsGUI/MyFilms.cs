@@ -1541,6 +1541,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               choiceView.Add("globalwikihelp");
             }
 
+            dlg1.Add(string.Format(GUILocalizeStrings.Get(10798700))); // About ...
+            choiceView.Add("about");
+
             dlg1.DoModal(GetID);
 
             if (dlg1.SelectedLabel == -1)
@@ -2700,6 +2703,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0");
                     }
+                    break;
+
+                case "about":
+                      GUIDialogOK dlgok = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                      if (dlgok == null) return;
+                      dlgok.Reset();
+                      dlgok.SetHeading(GUILocalizeStrings.Get(10798624)); // MyFilms System Information
+
+                      System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+                      dlgok.SetLine(1, "MyFilms Version = 'V" + asm.GetName().Version.ToString() + "'");
+                      dlgok.SetLine(2, "MyFilms Operations Mode = '" + Configuration.PluginMode + "'");
+                      dlgok.DoModal(GetID);
                     break;
               
                 case "globalunwatchedfilter":
