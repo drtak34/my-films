@@ -2556,7 +2556,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         case "contents_id":
                         case "dateadded":
                         case "picture":
+                        case "IMDB_Id":
+                        case "TMDB_Id":
+                        case "Certification":
+                        case "Watched":
                             break;
+
                         case "resolution":
                             decimal aspectratio = 0; 
                             string ar = " ";
@@ -2632,7 +2637,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             //Todo: Add new properties for publishing actorinfos (MiniBio, Bio, Birthdate, Image, Multiimage, etc.
 
-            clearGUIProperty("db.description.value");
+            //clearGUIProperty("db.description.value");
+            LogMyFilms.Debug("MF: Load_Detailed_PersonInfo for '" + artistname + "'");
             ArrayList actorList = new ArrayList();
             MyFilmsDetail.GetActorByName(artistname, actorList);
             if (actorList.Count == 0)
@@ -2651,10 +2657,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 actorname = strActor[1];
                 if (actorID.ToString().Length > 0)
                 {
+                  try
+                  {
                     IMDBActor actor = VideoDatabase.GetActorInfo(actorID);
                     if (actor.Biography.Length > 0) setGUIProperty("db.description.value", actor.Biography);
+                    if (actor.Name.Length > 0) setGUIProperty("user.mastertitle.value", actor.Name);
+                    if (actor.Name.Length > 0) setGUIProperty("user.secondarytitle.value", actor.Name);
+                    if (actor.PlaceOfBirth.Length > 0) setGUIProperty("db.category.value", actor.PlaceOfBirth);
+                    if (actor.DateOfBirth.Length > 0) setGUIProperty("db.year.value", actor.DateOfBirth);
+                  }
+                  catch (Exception ex)
+                  {
+                    LogMyFilms.Debug("MF: Exception while loading person details: " + ex.ToString());
+                  }
                 }
             }
+            actorList.Clear();
         }
 
         #endregion

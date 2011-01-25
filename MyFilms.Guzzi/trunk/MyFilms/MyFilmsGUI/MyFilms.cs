@@ -1393,8 +1393,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
             MyFilmsDetail.Load_Detailed_DB(ItemId, wrep);
-            //if ((conf.WStrSort.ToLower().Contains("actors")) || (conf.WStrSort.ToLower().Contains("producer")) || (conf.WStrSort.ToLower().Contains("director")))
-            //    MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, wrep);
+            if ((conf.WStrSort.ToLower().Contains("actors")) || (conf.WStrSort.ToLower().Contains("producer")) || (conf.WStrSort.ToLower().Contains("director")))
+                MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, wrep);
 
             Load_Rating(conf.W_rating);
         }
@@ -1849,6 +1849,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 string strThumb;
                                 string strThumbLarge = string.Empty;
                                 string strThumbSource = string.Empty;
+
                                 if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
                                 {
                                     strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieActors, item.Label);
@@ -1860,67 +1861,62 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                     strThumbLarge = strThumbDirectory + item.Label + ".png";
                                 }
 
-                                if (!System.IO.File.Exists(strThumb))
+                                if (!System.IO.File.Exists(strThumb) || !System.IO.File.Exists(strThumbLarge)) // If there is missing thumbs ...
                                 {
                                     if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
                                     {
-                                        if (conf.StrPathArtist.Length > 0)
-                                            if (conf.StrPathArtist.Substring(conf.StrPathArtist.Length - 1) == "\\")
-                                            {
-                                                if (System.IO.File.Exists(conf.StrPathArtist + item.Label + "\\folder.jpg"))
-                                                    strThumbSource = conf.StrPathArtist + item.Label + "\\folder.jpg";
-                                                else
-                                                    if (System.IO.File.Exists(conf.StrPathArtist + item.Label + "\\folder.png"))
-                                                        strThumbSource = conf.StrPathArtist + item.Label + "\\folder.png";
-                                            }
-                                            else
-                                            {
-                                                if (System.IO.File.Exists(conf.StrPathArtist + "\\" + item.Label + "\\folder.jpg"))
-                                                    strThumbSource = conf.StrPathArtist + "\\" + item.Label + "\\folder.jpg";
-                                                else
-                                                    if (System.IO.File.Exists(conf.StrPathArtist + "\\" + item.Label + "\\folder.png"))
-                                                        strThumbSource = conf.StrPathArtist + "\\" + item.Label + "\\folder.png";
-                                            }
-                                        if ((!System.IO.File.Exists(strThumb)) && (strThumb != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
+                                      if (conf.StrPathArtist.Length > 0)
+                                      {
+                                        string strPathArtist = String.Empty;
+                                        if (conf.StrPathArtist.Substring(conf.StrPathArtist.Length - 1) == "\\") strPathArtist = conf.StrPathArtist;
+                                        else strPathArtist = conf.StrPathArtist + "\\";
+                                        if (System.IO.File.Exists(strPathArtist + item.Label + "\\folder.jpg")) strThumbSource = strPathArtist + item.Label + "\\folder.jpg";
+                                        else if (System.IO.File.Exists(strPathArtist + item.Label + "\\folder.png")) strThumbSource = strPathArtist + item.Label + "\\folder.png";
+                                        else if (System.IO.File.Exists(strPathArtist + item.Label + ".png")) strThumbSource = strPathArtist + item.Label + ".png";
+                                        else if (System.IO.File.Exists(strPathArtist + item.Label + ".jpg")) strThumbSource = strPathArtist + item.Label + ".jpg";
+                                      }
+                                      if ((!System.IO.File.Exists(strThumb)) && (strThumb != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
                                         {
-                                            Picture.CreateThumbnail(strThumbSource, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
-                                            Picture.CreateThumbnail(strThumbSource,strThumbDirectory + item.Label + ".png",400,600,0,Thumbs.SpeedThumbsLarge);
-                                            strThumbLarge = strThumbDirectory + item.Label + ".png";
+                                          Picture.CreateThumbnail(strThumbSource, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
+                                          Picture.CreateThumbnail(strThumbSource, strThumbDirectory + item.Label + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                          strThumbLarge = strThumbDirectory + item.Label + ".png";
                                         }
 
-                                        if (!System.IO.File.Exists(strThumbLarge))
-                                        {
-                                            // ImageFast.CreateImage(strThumb, item.Label);
-                                            strThumb = conf.DefaultCoverArtist;
-                                            strThumbLarge = conf.DefaultCoverArtist;
-                                        }
+                                      if ((!System.IO.File.Exists(strThumbLarge)) && (strThumbLarge != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
+                                      {
+                                        Picture.CreateThumbnail(strThumbSource, strThumbDirectory + item.Label + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                        strThumbLarge = strThumbDirectory + item.Label + ".png";
+                                      }
 
-                                        //if (!System.IO.File.Exists(strThumb + ".png"))
-                                        //    if (System.IO.File.Exists(MesFilms.conf.DefaultCoverArtist))
-                                        //        ImageFast.CreateImage(strThumb + ".png", item.Label);
+                                      if (!System.IO.File.Exists(strThumbLarge))
+                                      {
+                                          //ImageFast.CreateImage(strThumb, item.Label);
+                                          strThumb = conf.DefaultCoverArtist;
+                                          strThumbLarge = conf.DefaultCoverArtist;
+                                      }
+
+                                      //if (!System.IO.File.Exists(strThumb + ".png"))
+                                      //    if (System.IO.File.Exists(MesFilms.conf.DefaultCoverArtist))
+                                      //        ImageFast.CreateImage(strThumb + ".png", item.Label);
                                     }
                                     else if ((WStrSort.ToLower().Contains("country")) || (WStrSort.ToLower().Contains("category")) || (WStrSort.ToLower().Contains("year")))
                                     {
-                                        if (conf.StrPathViews.Length > 0)
-                                            if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
-                                            {
-                                                if (System.IO.File.Exists(conf.StrPathViews + item.Label + ".jpg"))
-                                                    Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".jpg", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                                else
-                                                    if (System.IO.File.Exists(conf.StrPathViews + item.Label + ".png"))
-                                                        Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                            }
-                                            else
-                                            {
-                                                if (System.IO.File.Exists(conf.StrPathViews + "\\" + item.Label + ".jpg"))
-                                                    Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".jpg", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                                else
-                                                    if (System.IO.File.Exists(conf.StrPathViews + "\\" + item.Label + ".png"))
-                                                        Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                            }
+                                      if (conf.StrPathViews.Length > 0)
+                                      {
+                                        string strPathViews = String.Empty;
+                                        if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") 
+                                          strPathViews = conf.StrPathViews;
+                                        else 
+                                          strPathViews = conf.StrPathViews + "\\";
+                                        if (System.IO.File.Exists(strPathViews + item.Label + ".jpg"))
+                                          Picture.CreateThumbnail(strPathViews + item.Label + ".jpg", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                        else if (System.IO.File.Exists(strPathViews + item.Label + ".png"))
+                                          Picture.CreateThumbnail(strPathViews + item.Label + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+
                                         //if (!System.IO.File.Exists(strThumb + ".png"))
                                         //    if (MesFilms.conf.StrViewsDflt && System.IO.File.Exists(MesFilms.conf.DefaultCover))
                                         //        ImageFast.CreateImage(strThumb + ".png", item.Label);
+                                      }
                                     }
 
                                 }
@@ -1967,60 +1963,61 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if ((!System.IO.File.Exists(strThumb)) || (!System.IO.File.Exists(strThumbLarge)))
                         {
                             if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
+
                             {
-                                if (conf.StrPathArtist.Length > 0)
-                                    if (conf.StrPathArtist.Substring(conf.StrPathArtist.Length - 1) == "\\")
-                                    {
-                                        if (System.IO.File.Exists(conf.StrPathArtist + item.Label + "\\folder.jpg"))
-                                            strThumbSource = conf.StrPathArtist + item.Label + "\\folder.jpg";
-                                        else
-                                            if (System.IO.File.Exists(conf.StrPathArtist + item.Label + "\\folder.png"))
-                                                strThumbSource = conf.StrPathArtist + item.Label + "\\folder.png";
-                                    }
-                                    else
-                                    {
-                                        if (System.IO.File.Exists(conf.StrPathArtist + "\\" + item.Label + "\\folder.jpg"))
-                                            strThumbSource = conf.StrPathArtist + "\\" + item.Label + "\\folder.jpg";
-                                        else
-                                            if (System.IO.File.Exists(conf.StrPathArtist + "\\" + item.Label + "\\folder.png"))
-                                                strThumbSource = conf.StrPathArtist + "\\" + item.Label + "\\folder.png";
-                                    }
-                                if ((!System.IO.File.Exists(strThumb)) && (strThumb != conf.DefaultCoverArtist) && (strThumbSource != ""))
+                              if (conf.StrPathArtist.Length > 0)
+                              {
+                                string strPathArtist = String.Empty;
+                                if (conf.StrPathArtist.Substring(conf.StrPathArtist.Length - 1) == "\\") 
+                                  strPathArtist = conf.StrPathArtist;
+                                else 
+                                  strPathArtist = conf.StrPathArtist + "\\";
+                                if (System.IO.File.Exists(strPathArtist + item.Label + "\\folder.jpg")) strThumbSource = strPathArtist + item.Label + "\\folder.jpg";
+                                else if (System.IO.File.Exists(strPathArtist + item.Label + "\\folder.png")) strThumbSource = strPathArtist + item.Label + "\\folder.png";
+                                else if (System.IO.File.Exists(strPathArtist + item.Label + ".png")) strThumbSource = strPathArtist + item.Label + ".png";
+                                else if (System.IO.File.Exists(strPathArtist + item.Label + ".jpg")) strThumbSource = strPathArtist + item.Label + ".jpg";
+                              }
+                              if ((!System.IO.File.Exists(strThumb)) && (strThumb != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
                                 {
-                                    Picture.CreateThumbnail(strThumbSource, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
-                                    Picture.CreateThumbnail(strThumbSource,strThumbDirectory + item.Label + ".png",400,600,0,Thumbs.SpeedThumbsLarge);
-                                    strThumbLarge = strThumbDirectory + item.Label + ".png";
+                                  Picture.CreateThumbnail(strThumbSource, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
+                                  Picture.CreateThumbnail(strThumbSource,strThumbDirectory + item.Label + ".png",400,600,0,Thumbs.SpeedThumbsLarge);
+                                  strThumbLarge = strThumbDirectory + item.Label + ".png";
                                 }
 
-                                if (!System.IO.File.Exists(strThumbLarge))
-                                {
-                                    // ImageFast.CreateImage(strThumb, item.Label);
-                                    strThumb = conf.DefaultCoverArtist;
-                                    strThumbLarge = conf.DefaultCoverArtist;
-                                }
+                              if ((!System.IO.File.Exists(strThumbLarge)) && (strThumbLarge != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
+                              {
+                                Picture.CreateThumbnail(strThumbSource, strThumbDirectory + item.Label + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                strThumbLarge = strThumbDirectory + item.Label + ".png";
+                              }
+
+                              if (!System.IO.File.Exists(strThumbLarge))
+                              {
+                                  //ImageFast.CreateImage(strThumb, item.Label);
+                                  strThumb = conf.DefaultCoverArtist;
+                                  strThumbLarge = conf.DefaultCoverArtist;
+                              }
+
+                              //if (!System.IO.File.Exists(strThumb + ".png"))
+                              //    if (System.IO.File.Exists(MesFilms.conf.DefaultCoverArtist))
+                              //        ImageFast.CreateImage(strThumb + ".png", item.Label);
                             }
                             else if ((WStrSort.ToLower().Contains("country")) || (WStrSort.ToLower().Contains("category")) || (WStrSort.ToLower().Contains("year")))
                             {
-                                if (conf.StrPathViews.Length > 0)
-                                    if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
-                                    {
-                                        if (System.IO.File.Exists(conf.StrPathViews + item.Label + ".jpg"))
-                                            Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".jpg", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                        else
-                                            if (System.IO.File.Exists(conf.StrPathViews + item.Label + ".png"))
-                                                Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                    }
-                                    else
-                                    {
-                                        if (System.IO.File.Exists(conf.StrPathViews + "\\" + item.Label + ".jpg"))
-                                            Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".jpg", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                        else
-                                            if (System.IO.File.Exists(conf.StrPathViews + "\\" + item.Label + ".png"))
-                                                Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                    }
+                              if (conf.StrPathViews.Length > 0)
+                              {
+                                string strPathViews = String.Empty;
+                                if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
+                                  strPathViews = conf.StrPathViews;
+                                else
+                                  strPathViews = conf.StrPathViews + "\\";
+                                if (System.IO.File.Exists(strPathViews + item.Label + ".jpg"))
+                                  Picture.CreateThumbnail(strPathViews + item.Label + ".jpg", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                else if (System.IO.File.Exists(strPathViews + item.Label + ".png"))
+                                  Picture.CreateThumbnail(strPathViews + item.Label + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
                                 if (!System.IO.File.Exists(strThumb))
-                                    ImageFast.CreateImage(strThumb, item.Label);
+                                  ImageFast.CreateImage(strThumb, item.Label);
                                 strThumbLarge = strThumb;
+                              }
                             }
                         }
                     item.ThumbnailImage = strThumbLarge;
