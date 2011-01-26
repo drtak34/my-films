@@ -326,12 +326,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 Config_Menu.Focus();
                 return;
             }
-            if (textBoxPluginName.Text.Length == 0)
-            {
-                System.Windows.Forms.MessageBox.Show("The Plugin's Name is Mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                textBoxPluginName.Focus();
-                return;
-            }
+            //if (textBoxPluginName.Text.Length == 0)
+            //{
+            //    System.Windows.Forms.MessageBox.Show("The Plugin's Name is Mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    textBoxPluginName.Focus();
+            //    return;
+            //}
             if (AntTitle1.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Master Title is Mandatory !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -1420,6 +1420,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 else
                 {
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
+                    if (textBoxPluginName.Text == "") 
+                      textBoxPluginName.Text = "MyFilms"; // Make sure, a plugin name is given - assign default, if user didn't choose any!
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text.ToString());
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
                     mydivx.Dispose();

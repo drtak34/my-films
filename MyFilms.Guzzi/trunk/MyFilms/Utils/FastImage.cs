@@ -27,9 +27,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.IO;
   using System.Reflection;
   using System.Runtime.InteropServices;
-
-  using MesFilms;
-
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
 
   public class ImageFast

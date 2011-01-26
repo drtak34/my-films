@@ -26,7 +26,7 @@ namespace MyFilmsPlugin.MyFilms
   using System;
   using System.Data;
 
-  using MesFilms;
+  using MyFilmsPlugin;
 
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
 

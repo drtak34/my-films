@@ -31,9 +31,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
   using MediaPortal.Configuration;
   using MediaPortal.GUI.Library;
-
-  using MesFilms;
-
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
 
   public class Logos

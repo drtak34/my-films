@@ -1,8 +1,12 @@
-﻿namespace MyFilmsPlugin.MyFilms.Trakt.Movie
-{
-  using System.Runtime.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Runtime.Serialization;
 
-  [DataContract]
+namespace Trakt.Movie
+{
+    [DataContract]
     public class TraktMovieScrobble
     {
         [DataMember(Name = "title")]

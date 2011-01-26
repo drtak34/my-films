@@ -1,13 +1,16 @@
-﻿namespace MyFilmsPlugin.MyFilms.Trakt
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Net;
+using Trakt.Show;
+using Trakt.User;
+using Trakt.Movie;
+using MyFilmsPlugin;
+
+namespace Trakt
 {
-  using System.Collections.Generic;
-  using System.Net;
-
-  using MyFilmsPlugin.MyFilms.Trakt.Movie;
-  using MyFilmsPlugin.MyFilms.Trakt.Show;
-  using MyFilmsPlugin.MyFilms.Trakt.User;
-
-  public enum TraktScrobbleStates
+    public enum TraktScrobbleStates
     {
         watching,
         scrobble
@@ -38,6 +41,30 @@
         /// UserAgent header used to Post to Trakt API
         /// </summary>
         public static string UserAgent { get; set; }
+
+        /// <summary>
+        /// Returns list of episodes in Users Calendar
+        /// </summary>
+        /// <param name="user">username of person to get Calendar</param>
+        public static IEnumerable<TraktUserCalendar> GetCalendarForUser(string user)
+        {   
+            // 7-Days from Today
+            // All Dates should be in PST (GMT-8)
+            DateTime dateNow = DateTime.UtcNow.Subtract(new TimeSpan(8, 0, 0));
+            return GetCalendarForUser(user, dateNow.ToString("yyyyMMdd"), "7");
+        }
+
+        /// <summary>
+        /// Returns list of episodes in Users Calendar
+        /// </summary>
+        /// <param name="user">username of person to get Calendar</param>
+        /// <param name="startDate">Start Date of calendar in form yyyyMMdd (GMT-8hrs)</param>
+        /// <param name="days">Number of days to return in calendar</param>
+        public static IEnumerable<TraktUserCalendar> GetCalendarForUser(string user, string startDate, string days)
+        {
+            string userCalendar = Transmit(string.Format(TraktURIs.UserCalendarShows, user, startDate, days), string.Empty);
+            return userCalendar.FromJSONArray<TraktUserCalendar>();
+        }
 
         /// <summary>
         /// Returns the series list for a user
@@ -80,6 +107,16 @@
         }
 
         /// <summary>
+        /// Returns a list of Friends and their user profiles
+        /// </summary>
+        /// <param name="user">username of person to retrieve friends list</param>
+        public static IEnumerable<TraktUserProfile> GetUserFriends(string user)
+        {
+            string userFriends = Transmit(string.Format(TraktURIs.UserFriends, user), string.Empty);
+            return userFriends.FromJSONArray<TraktUserProfile>();
+        }
+
+        /// <summary>
         /// Returns a list of watched items for a user
         /// only friends or non-private users will return any data
         /// Maximum of 100 items will be returned from API
@@ -101,8 +138,7 @@
         public static TraktResponse ScrobbleShowState(TraktEpisodeScrobble scrobbleData, TraktScrobbleStates status)
         {
             // check that we have everything we need
-            // server can accept title/year if tvdb id is not supplied
-            if (string.IsNullOrEmpty(scrobbleData.Title) || string.IsNullOrEmpty(scrobbleData.Season) || string.IsNullOrEmpty(scrobbleData.Episode))
+            if (string.IsNullOrEmpty(scrobbleData.SeriesID) || string.IsNullOrEmpty(scrobbleData.Season) || string.IsNullOrEmpty(scrobbleData.Episode))
             {
                 TraktResponse error = new TraktResponse
                 {
@@ -127,7 +163,7 @@
         public static TraktResponse ScrobbleMovieState(TraktMovieScrobble scrobbleData, TraktScrobbleStates status)
         {
             // check that we have everything we need
-            // server can accept title if series id is not supplied
+            // server can accept title if movie id is not supplied
             if (string.IsNullOrEmpty(scrobbleData.Title) || string.IsNullOrEmpty(scrobbleData.Year))
             {
                 TraktResponse error = new TraktResponse

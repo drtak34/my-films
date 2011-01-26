@@ -27,6 +27,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System;
   using System.Collections;
+  using System.Collections.Generic;
+  using System.ComponentModel; // for TRAKT
+  using System.Threading; // For TRAKT Timer ...
   using System.Data;
   using System.Diagnostics;
   using System.Globalization;
@@ -55,6 +58,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
+  using Trakt;
 
   /// <summary>
     /// Summary description for GUIMesFilms.
@@ -160,6 +164,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static ArrayList result;
         public static string wsearchfile;
         public static int wGetID;
+
+        private System.Threading.Timer m_TraktTimer = null;
+        private TimerCallback m_timerDelegate = null;
+        BackgroundWorker TraktScrobbleUpdater = new BackgroundWorker();
+
+
         static MyFilmsDetail()
         {
             playlistPlayer = PlayListPlayer.SingletonPlayer;
@@ -180,7 +190,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         public override bool Init()
         {
-            return Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
+          // trakt scrobble background thread
+          TraktScrobbleUpdater.WorkerSupportsCancellation = true;
+          TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
+  
+          return Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
         }
 
         protected override void OnPageLoad()
@@ -321,6 +335,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // ToDo: Should be unhidden, if ActorThumbs are implemented
                     GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
                     setProcessAnimationStatus(false, m_SearchAnimation);
+
+                    // trakt scrobble background thread
+                    TraktScrobbleUpdater.WorkerSupportsCancellation = true;
+                    TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
+
                     g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
                     g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
                     g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
@@ -4585,6 +4604,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MF: Disabled feature due to startmode 'normal': '" + disabledfeature + "'");
             return false;
         }
+
+        /// <summary>
+        /// Update Trakt status of episode being watched on Timer Interval
+        /// </summary>
+        //private void TraktUpdater(Object stateInfo)
+        //{
+        //  PlayListItem item = (PlayListItem)stateInfo;
+
+        //  // duration in minutes
+        //  double duration = item.Duration / 60000;
+        //  double progress = 0.0;
+
+        //  // get current progress of player (in seconds) to work out percent complete
+        //  if (duration > 0.0)
+        //    progress = ((g_Player.CurrentPosition / 60.0) / duration) * 100.0;
+
+        //  Trakt.TraktAPI.SendUpdate(item.Episode, Convert.ToInt32(progress), Convert.ToInt32(duration), Trakt.TraktAPI.Status.watching);
+        //}
+
+        /// <summary>
+        /// Update trakt status on playback finish
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TraktScrobble_DoWork(object sender, DoWorkEventArgs e)
+        {
+          //List<DBEpisode> episodes = (List<DBEpisode>)e.Argument;
+
+          //foreach (DBEpisode episode in episodes)
+          //{
+          //  double duration = episode[DBEpisode.cLocalPlaytime] / 60000;
+          //  Trakt.TraktAPI.SendUpdate(episode, 100, Convert.ToInt32(duration), Trakt.TraktAPI.Status.scrobble);
+          //}
+        }
+
+
 
     }
 

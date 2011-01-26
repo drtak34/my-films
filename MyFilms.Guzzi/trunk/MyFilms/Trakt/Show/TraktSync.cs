@@ -1,9 +1,12 @@
-﻿namespace MyFilmsPlugin.MyFilms.Trakt.Show
-{
-  using System.Collections.Generic;
-  using System.Runtime.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Runtime.Serialization;
 
-  [DataContract]
+namespace Trakt.Show
+{
+    [DataContract]
     public class TraktSync
     {
         [DataMember(Name = "username")]

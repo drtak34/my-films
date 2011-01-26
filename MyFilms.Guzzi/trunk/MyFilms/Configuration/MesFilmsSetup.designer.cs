@@ -2,7 +2,7 @@
 {
   using System.Windows.Forms;
 
-  using MesFilms.MyFilms.Configuration;
+  using MyFilmsPlugin.MyFilms.Configuration;
 
   using MyFilmsPlugin.MyFilms.Utils;
 
@@ -151,12 +151,12 @@
           this.AntLabel3 = new System.Windows.Forms.TextBox();
           this.chkOnlyTitle = new System.Windows.Forms.CheckBox();
           this.AntItem3 = new System.Windows.Forms.ComboBox();
-          this.AntLabel2 = new System.Windows.Forms.TextBox();
           this.AntItem2 = new System.Windows.Forms.ComboBox();
+          this.AntLabel2 = new System.Windows.Forms.TextBox();
           this.label7 = new System.Windows.Forms.Label();
+          this.AntItem1 = new System.Windows.Forms.ComboBox();
           this.label3 = new System.Windows.Forms.Label();
           this.AntLabel1 = new System.Windows.Forms.TextBox();
-          this.AntItem1 = new System.Windows.Forms.ComboBox();
           this.groupBox_AntUpdatingItems = new System.Windows.Forms.GroupBox();
           this.chkWindowsFileDialog = new System.Windows.Forms.CheckBox();
           this.AntUpdDflT2 = new System.Windows.Forms.TextBox();
@@ -357,18 +357,20 @@
           this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.label33 = new System.Windows.Forms.Label();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
           this.ButDefCov = new System.Windows.Forms.Button();
           this.label_DefaulCover = new System.Windows.Forms.Label();
           this.ButImg = new System.Windows.Forms.Button();
           this.label2 = new System.Windows.Forms.Label();
+          this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
+          this.chkSuppress = new System.Windows.Forms.CheckBox();
           this.gpsuppress = new System.Windows.Forms.GroupBox();
           this.rbsuppress2 = new System.Windows.Forms.RadioButton();
           this.rbsuppress4 = new System.Windows.Forms.RadioButton();
           this.rbsuppress3 = new System.Windows.Forms.RadioButton();
           this.rbsuppress1 = new System.Windows.Forms.RadioButton();
-          this.chkSuppress = new System.Windows.Forms.CheckBox();
           this.btnCreateAMCDefaultConfig = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.groupBox111 = new System.Windows.Forms.GroupBox();
@@ -392,7 +394,6 @@
           this.label12 = new System.Windows.Forms.Label();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Update = new System.Windows.Forms.TabPage();
-          this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
           this.Tab_Grabber = new System.Windows.Forms.TabPage();
           this.Tab_Artwork = new System.Windows.Forms.TabPage();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
@@ -435,7 +436,6 @@
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.traktConfiguration1 = new MesFilms.MyFilms.Configuration.TraktConfiguration();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -468,11 +468,11 @@
           this.groupBoxUpdateByProperties.SuspendLayout();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox1.SuspendLayout();
+          this.groupBoxDeletionOptions.SuspendLayout();
           this.gpsuppress.SuspendLayout();
           this.groupBox111.SuspendLayout();
           this.General.SuspendLayout();
           this.Tab_Update.SuspendLayout();
-          this.groupBoxDeletionOptions.SuspendLayout();
           this.Tab_Grabber.SuspendLayout();
           this.Tab_Artwork.SuspendLayout();
           this.Tab_Logos.SuspendLayout();
@@ -1072,13 +1072,6 @@
           this.AntItem3.Size = new System.Drawing.Size(160, 21);
           this.AntItem3.TabIndex = 29;
           // 
-          // AntLabel2
-          // 
-          this.AntLabel2.Location = new System.Drawing.Point(185, 61);
-          this.AntLabel2.Name = "AntLabel2";
-          this.AntLabel2.Size = new System.Drawing.Size(173, 20);
-          this.AntLabel2.TabIndex = 28;
-          // 
           // AntItem2
           // 
           this.AntItem2.FormattingEnabled = true;
@@ -1086,6 +1079,13 @@
           this.AntItem2.Name = "AntItem2";
           this.AntItem2.Size = new System.Drawing.Size(160, 21);
           this.AntItem2.TabIndex = 27;
+          // 
+          // AntLabel2
+          // 
+          this.AntLabel2.Location = new System.Drawing.Point(185, 61);
+          this.AntLabel2.Name = "AntLabel2";
+          this.AntLabel2.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel2.TabIndex = 28;
           // 
           // label7
           // 
@@ -1095,6 +1095,16 @@
           this.label7.Size = new System.Drawing.Size(94, 13);
           this.label7.TabIndex = 22;
           this.label7.Text = "DB Item to Display";
+          // 
+          // AntItem1
+          // 
+          this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+          this.AntItem1.FormattingEnabled = true;
+          this.AntItem1.Location = new System.Drawing.Point(10, 34);
+          this.AntItem1.Name = "AntItem1";
+          this.AntItem1.Size = new System.Drawing.Size(160, 21);
+          this.AntItem1.Sorted = true;
+          this.AntItem1.TabIndex = 25;
           // 
           // label3
           // 
@@ -1111,16 +1121,6 @@
           this.AntLabel1.Name = "AntLabel1";
           this.AntLabel1.Size = new System.Drawing.Size(173, 20);
           this.AntLabel1.TabIndex = 26;
-          // 
-          // AntItem1
-          // 
-          this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-          this.AntItem1.FormattingEnabled = true;
-          this.AntItem1.Location = new System.Drawing.Point(10, 34);
-          this.AntItem1.Name = "AntItem1";
-          this.AntItem1.Size = new System.Drawing.Size(160, 21);
-          this.AntItem1.Sorted = true;
-          this.AntItem1.TabIndex = 25;
           // 
           // groupBox_AntUpdatingItems
           // 
@@ -3310,6 +3310,16 @@
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
           // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(23, 25);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
           // comboBoxLogoPresets
           // 
           this.comboBoxLogoPresets.FormattingEnabled = true;
@@ -3379,6 +3389,29 @@
           this.label2.TabIndex = 86;
           this.label2.Text = "Cover Images Path";
           // 
+          // groupBoxDeletionOptions
+          // 
+          this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
+          this.groupBoxDeletionOptions.Controls.Add(this.gpsuppress);
+          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(17, 102);
+          this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(354, 139);
+          this.groupBoxDeletionOptions.TabIndex = 35;
+          this.groupBoxDeletionOptions.TabStop = false;
+          this.groupBoxDeletionOptions.Text = "Deletion Options";
+          this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
+          // 
+          // chkSuppress
+          // 
+          this.chkSuppress.AutoSize = true;
+          this.chkSuppress.Location = new System.Drawing.Point(10, 16);
+          this.chkSuppress.Name = "chkSuppress";
+          this.chkSuppress.Size = new System.Drawing.Size(183, 17);
+          this.chkSuppress.TabIndex = 0;
+          this.chkSuppress.Text = "Enable database deletion options";
+          this.chkSuppress.UseVisualStyleBackColor = true;
+          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
+          // 
           // gpsuppress
           // 
           this.gpsuppress.Controls.Add(this.rbsuppress2);
@@ -3437,17 +3470,6 @@
           this.rbsuppress1.TabStop = true;
           this.rbsuppress1.Text = "Delete db entry only";
           this.rbsuppress1.UseVisualStyleBackColor = true;
-          // 
-          // chkSuppress
-          // 
-          this.chkSuppress.AutoSize = true;
-          this.chkSuppress.Location = new System.Drawing.Point(10, 16);
-          this.chkSuppress.Name = "chkSuppress";
-          this.chkSuppress.Size = new System.Drawing.Size(183, 17);
-          this.chkSuppress.TabIndex = 0;
-          this.chkSuppress.Text = "Enable database deletion options";
-          this.chkSuppress.UseVisualStyleBackColor = true;
-          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
           // 
           // btnCreateAMCDefaultConfig
           // 
@@ -3658,18 +3680,6 @@
           this.Tab_Update.Text = "Update";
           this.Tab_Update.ToolTipText = "Setup for update options (updates to values from GUI)";
           this.Tab_Update.UseVisualStyleBackColor = true;
-          // 
-          // groupBoxDeletionOptions
-          // 
-          this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
-          this.groupBoxDeletionOptions.Controls.Add(this.gpsuppress);
-          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(17, 102);
-          this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
-          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(354, 139);
-          this.groupBoxDeletionOptions.TabIndex = 35;
-          this.groupBoxDeletionOptions.TabStop = false;
-          this.groupBoxDeletionOptions.Text = "Deletion Options";
-          this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
           // 
           // Tab_Grabber
           // 
@@ -4161,16 +4171,6 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(23, 25);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
-          this.traktConfiguration1.TabIndex = 0;
-          // 
           // MesFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4255,14 +4255,14 @@
           this.Tab_Trakt.ResumeLayout(false);
           this.groupBox1.ResumeLayout(false);
           this.groupBox1.PerformLayout();
+          this.groupBoxDeletionOptions.ResumeLayout(false);
+          this.groupBoxDeletionOptions.PerformLayout();
           this.gpsuppress.ResumeLayout(false);
           this.gpsuppress.PerformLayout();
           this.groupBox111.ResumeLayout(false);
           this.groupBox111.PerformLayout();
           this.General.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
-          this.groupBoxDeletionOptions.ResumeLayout(false);
-          this.groupBoxDeletionOptions.PerformLayout();
           this.Tab_Grabber.ResumeLayout(false);
           this.Tab_Artwork.ResumeLayout(false);
           this.Tab_Logos.ResumeLayout(false);

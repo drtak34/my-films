@@ -1,8 +1,13 @@
-﻿namespace MyFilmsPlugin.MyFilms.Trakt.User
-{
-  using System.Runtime.Serialization;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Runtime.Serialization;
+using Trakt.Common;
 
-  [DataContract]
+namespace Trakt.User
+{
+    [DataContract]
     public class TraktUserProfile : TraktResponse
     {
         [DataMember(Name = "username")]
@@ -37,6 +42,12 @@
 
         [DataMember(Name = "stats")]
         public Stats Statistics { get; set; }
+
+        [DataMember(Name = "watching")]
+        public TraktEpisode Watching { get; set; }
+
+        [DataMember(Name = "watched")]
+        public List<TraktEpisode> WatchedHistory { get; set; }
     }
 
     [DataContract]
@@ -59,7 +70,7 @@
     public class Shows
     {
         [DataMember(Name = "library")]
-        public string SeriesCount { get; set; }
+        public string Count { get; set; }
     }
 
     [DataContract]
@@ -68,8 +79,14 @@
         [DataMember(Name = "watched")]
         public string WatchedCount { get; set; }
 
+        [DataMember(Name = "watched_unique")]
+        public string WatchedUniqueCount { get; set; }
+
         [DataMember(Name = "watched_trakt")]
         public string WatchedTraktCount { get; set; }
+
+        [DataMember(Name = "watched_trakt_unique")]
+        public string WatchedTraktUniqueCount { get; set; }
 
         [DataMember(Name = "watched_elsewhere")]
         public string WatchedElseWhereCount { get; set; }

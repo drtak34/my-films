@@ -29,8 +29,6 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
   using System.Xml;
   using System.Globalization;
 
-  using MesFilms;
-
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
 
   class XbmcNfo

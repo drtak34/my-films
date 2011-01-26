@@ -1,29 +1,38 @@
-﻿namespace MyFilmsPlugin.MyFilms.Trakt
-{
-  using System.Collections.Generic;
-  using System.Text;
-  using System.IO;
-  using System.Runtime.Serialization.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
-  public static class JSONExtensions
+namespace Trakt
+{
+    public static class JSONExtensions
     {
         public static IEnumerable<T> FromJSONArray<T>(this string jsonArray)
         {
             if (string.IsNullOrEmpty(jsonArray)) return new List<T>();
 
-            using (var ms = new MemoryStream(Encoding.Default.GetBytes(jsonArray)))
+            try
             {
-                var ser = new DataContractJsonSerializer(typeof(IEnumerable<T>));
-                var result = (IEnumerable<T>)ser.ReadObject(ms);
+                using (var ms = new MemoryStream(Encoding.Default.GetBytes(jsonArray)))
+                {
+                    var ser = new DataContractJsonSerializer(typeof(IEnumerable<T>));
+                    var result = (IEnumerable<T>)ser.ReadObject(ms);
 
-                if (result == null)
-                {
-                    return new List<T>();
+                    if (result == null)
+                    {
+                        return new List<T>();
+                    }
+                    else
+                    {
+                        return result;
+                    }
                 }
-                else
-                {
-                    return result;
-                }
+            }
+            catch (Exception)
+            {
+                return new List<T>();
             }
         }
 
@@ -31,10 +40,17 @@
         {
             if (string.IsNullOrEmpty(json)) return default(T);
 
-            using (var ms = new MemoryStream(Encoding.Default.GetBytes(json.ToCharArray())))
+            try
             {
-                var ser = new DataContractJsonSerializer(typeof(T));
-                return (T)ser.ReadObject(ms);
+                using (var ms = new MemoryStream(Encoding.Default.GetBytes(json.ToCharArray())))
+                {
+                    var ser = new DataContractJsonSerializer(typeof(T));
+                    return (T)ser.ReadObject(ms);
+                }
+            }
+            catch (Exception)
+            {
+                return default(T);
             }
         }
 

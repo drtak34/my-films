@@ -163,6 +163,7 @@
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsDetail.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsDialogSetRating.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsThumbs.cs" />
+    <Compile Include="MyFilms\Trakt\Common\TraktEpisode.cs" />
     <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktSeriesOverview.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="MyFilms\Trakt\TraktURIs.cs" />
     <Compile Include="MyFilms\Trakt\User\TraktLibraryMovies.cs" />
     <Compile Include="MyFilms\Trakt\User\TraktLibraryShows.cs" />
+    <Compile Include="MyFilms\Trakt\User\TraktUserCalendar.cs" />
     <Compile Include="MyFilms\Trakt\User\TraktUserProfile.cs" />
     <Compile Include="MyFilms\Trakt\User\TraktWatchedEpisodeHistory.cs" />
     <Compile Include="MyFilms\Trakt\User\TraktWatchedMovieHistory.cs" />
