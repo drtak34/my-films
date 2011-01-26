@@ -2641,7 +2641,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MF: Load_Detailed_PersonInfo for '" + artistname + "'");
             ArrayList actorList = new ArrayList();
             MyFilmsDetail.GetActorByName(artistname, actorList);
-            if (actorList.Count == 0)
+            if (actorList.Count < 1 || actorList.Count > 5) // Do not proceed, of none or too many results !
             {
                 return;
             }
@@ -2650,29 +2650,54 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Define splitter for string
             char[] splitter = { '|' };
             // Iterate through list
+            int i = 0;
             foreach (string act in actorList)
             {
-                string[] strActor = act.Split(splitter);
-                actorID = Convert.ToInt32(strActor[0]);
-                actorname = strActor[1];
-                if (actorID.ToString().Length > 0)
+              string[] strActor = act.Split(splitter);
+              actorID = Convert.ToInt32(strActor[0]);
+              actorname = strActor[1];
+              if ((actorID.ToString().Length > 0) && i == 0)
+              {
+                i = 1;
+                LogMyFilms.Debug("MF: load details for actor: '" + actorID.ToString() + "'");
+                try
                 {
-                  try
-                  {
-                    IMDBActor actor = VideoDatabase.GetActorInfo(actorID);
-                    if (actor.Biography.Length > 0) setGUIProperty("db.description.value", actor.Biography);
-                    if (actor.Name.Length > 0) setGUIProperty("user.mastertitle.value", actor.Name);
-                    if (actor.Name.Length > 0) setGUIProperty("user.secondarytitle.value", actor.Name);
-                    if (actor.PlaceOfBirth.Length > 0) setGUIProperty("db.category.value", actor.PlaceOfBirth);
-                    if (actor.DateOfBirth.Length > 0) setGUIProperty("db.year.value", actor.DateOfBirth);
-                  }
-                  catch (Exception ex)
-                  {
-                    LogMyFilms.Debug("MF: Exception while loading person details: " + ex.ToString());
-                  }
+                  IMDBActor actor = VideoDatabase.GetActorInfo(actorID);
+                  if (actor.Biography.Length > 0) setGUIProperty("db.description.value", actor.Biography);
+                  if (actor.Name.Length > 0) setGUIProperty("user.mastertitle.value", actor.Name);
+                  if (actor.Name.Length > 0) setGUIProperty("user.secondarytitle.value", actor.Name);
+                  if (actor.PlaceOfBirth.Length > 0) setGUIProperty("db.category.value", actor.PlaceOfBirth);
+                  if (actor.DateOfBirth.Length > 0) setGUIProperty("db.year.value", actor.DateOfBirth);
                 }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Debug("MF: Exception while loading person details: " + ex.ToString());
+                }
+              }
             }
-            actorList.Clear();
+            //foreach (string act in actorList)
+            //{
+            //  string[] strActor = act.Split(splitter);
+            //  actorID = Convert.ToInt32(strActor[0]);
+            //  actorname = strActor[1];
+            //  if (actorID.ToString().Length > 0)
+            //  {
+            //    LogMyFilms.Debug("MF: load details for actor: '" + actorID.ToString() + "'");
+            //    try
+            //    {
+            //      IMDBActor actor = VideoDatabase.GetActorInfo(actorID);
+            //      if (actor.Biography.Length > 0) setGUIProperty("db.description.value", actor.Biography);
+            //      if (actor.Name.Length > 0) setGUIProperty("user.mastertitle.value", actor.Name);
+            //      if (actor.Name.Length > 0) setGUIProperty("user.secondarytitle.value", actor.Name);
+            //      if (actor.PlaceOfBirth.Length > 0) setGUIProperty("db.category.value", actor.PlaceOfBirth);
+            //      if (actor.DateOfBirth.Length > 0) setGUIProperty("db.year.value", actor.DateOfBirth);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //      LogMyFilms.Debug("MF: Exception while loading person details: " + ex.ToString());
+            //    }
+            //  }
+            //}
         }
 
         #endregion
