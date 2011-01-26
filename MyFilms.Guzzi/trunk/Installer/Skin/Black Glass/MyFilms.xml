@@ -1,6 +1,6 @@
 <window>
 	<id>7986</id>
-	<defaultcontrol>1026</defaultcontrol>
+	<defaultcontrol>50</defaultcontrol>
 	<allowoverlay>player.hasmedia+!facadeview.filmstrip</allowoverlay>
 	<define>#header.label:#myfilms.config.pluginname (#myfilms.config.currentconfig)</define>
 	<define>#header.background:hover_Films.png</define>
@@ -124,7 +124,7 @@
 			<control>
 				<description>composite control consisting of a list control and a thumbnail panel</description>
 				<type>facadeview</type>
-				<id>1026</id>
+				<id>50</id>
 				<animation effect="slide" tween="circle" easing="out" time="200" start="800,0" reversible="false">WindowOpen</animation>
 				<animation effect="slide" tween="circle" easing="out" time="200" end="800,0" reversible="false">WindowClose</animation>
 				<control>
@@ -205,7 +205,7 @@
 				<control>
 					<description>Filmstrip view</description>
 					<type>filmstrip</type>
-					<id>1026</id>
+					<id>50</id>
 					<dimColor>90ffffff</dimColor>
 					<onup>4</onup>
 					<onleft>4</onleft>
@@ -276,7 +276,7 @@
 			<align>center</align>
 			<font>font24</font>
 			<label>#myfilms.user.mastertitle.value</label>
-			<visible>[facadeview.filmstrip]+[control.hasfocus(1026)]</visible>
+			<visible>[facadeview.filmstrip]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -292,7 +292,7 @@
 			<font>font14</font>
 			<textcolor>60ffffff</textcolor>
 			<label>#myfilms.db.year.value - #myfilms.db.category.value</label>
-			<visible>!control.isvisible(34)+[facadeview.filmstrip]+[control.hasfocus(1026)]</visible>
+			<visible>!control.isvisible(34)+[facadeview.filmstrip]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -308,7 +308,7 @@
 			<font>font10</font>
 			<textcolor>60ffffff</textcolor>
 			<label>#myfilms.db.length.value #myfilms.db.length.unit - #myfilms.db.rating.value</label>
-			<visible>!control.isvisible(34)+[facadeview.filmstrip]+[control.hasfocus(1026)]</visible>
+			<visible>!control.isvisible(34)+[facadeview.filmstrip]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -326,7 +326,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>
-			<visible>!player.hasmedia+control.hasfocus(1026)+facadeview.filmstrip</visible>
+			<visible>!player.hasmedia+control.hasfocus(50)+facadeview.filmstrip</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -343,7 +343,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>
-			<visible>!player.hasmedia+control.hasfocus(1026)+facadeview.filmstrip</visible>
+			<visible>!player.hasmedia+control.hasfocus(50)+facadeview.filmstrip</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -360,7 +360,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>
-			<visible>!player.hasmedia+control.hasfocus(1026)+facadeview.filmstrip</visible>
+			<visible>!player.hasmedia+control.hasfocus(50)+facadeview.filmstrip</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -378,7 +378,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>
-			<visible>!player.hasmedia+control.hasfocus(1026)+facadeview.filmstrip</visible>
+			<visible>!player.hasmedia+control.hasfocus(50)+facadeview.filmstrip</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -402,7 +402,7 @@
 			<align>left</align>
 			<imagesToDraw>10</imagesToDraw>
 			<percentage>#myfilms.db.rating.value</percentage>
-			<visible>!control.isvisible(34)+facadeview.filmstrip+control.hasfocus(1026)</visible>
+			<visible>!control.isvisible(34)+facadeview.filmstrip+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -460,7 +460,7 @@
 			<width>750</width>
 			<font>font22</font>
 			<label>#myfilms.user.mastertitle.value</label>
-			<visible>facadeview.list+control.hasfocus(1026)</visible>
+			<visible>facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -474,7 +474,7 @@
 			<width>750</width>
 			<label>#myfilms.db.category.value</label>
 			<textcolor>90FFFFFF</textcolor>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(1026)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -488,7 +488,7 @@
 			<width>750</width>
 			<label>#myfilms.db.year.value - #myfilms.db.length.value #myfilms.db.length.unit</label>
 			<textcolor>90FFFFFF</textcolor>
-			<visible>!control.isvisible(34)+!player.hasmedia+facadeview.list+control.hasfocus(1026)</visible>
+			<visible>!control.isvisible(34)+!player.hasmedia+facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -503,7 +503,7 @@
 			<font>font10</font>
 			<align>left</align>
 			<textcolor>6fffffff</textcolor>
-			<visible>!control.isvisible(34)+!player.hasmedia+facadeview.list+control.hasfocus(1026)</visible>
+			<visible>!control.isvisible(34)+!player.hasmedia+facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -519,7 +519,7 @@
 			<font>font12</font>
 			<textcolor>FFFFFFFF</textcolor>
 			<label>#myfilms.db.description.value</label>
-			<visible>!player.hasmedia+facadeview.list+control.hasfocus(1026)</visible>
+			<visible>!player.hasmedia+facadeview.list+control.hasfocus(50)</visible>
 			<seperator>: : :</seperator>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -539,7 +539,7 @@
 			<label>Film:</label>
 			<font>font10</font>
 			<textcolor>6FFFFFFF</textcolor>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(1026)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
 		</control>
 		<control>
 			<description>Movie unavailable Icon</description>
@@ -554,7 +554,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(1026)+!string.contains(#myfilms.user.source.value, \\)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.contains(#myfilms.user.source.value, \\)</visible>
 		</control>
 		<control>
 			<description>Movie available Icon</description>
@@ -568,7 +568,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(1026)+string.contains(#myfilms.user.source.value, \\)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.contains(#myfilms.user.source.value, \\)</visible>
 		</control>
 
 <!-- Trailer Available Info -->
@@ -584,7 +584,7 @@
 			<label>Trailer:</label>
 			<font>font10</font>
 			<textcolor>6FFFFFFF</textcolor>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(1026)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
 		</control>
 		<control>
 			<description>Trailer unavailable Icon</description>
@@ -600,7 +600,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(1026)+!string.contains(#myfilms.user.sourcetrailer.value, \\)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.contains(#myfilms.user.sourcetrailer.value, \\)</visible>
 		</control>
 		<control>
 			<description>Trailer available Icon</description>
@@ -615,7 +615,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(1026)+string.contains(#myfilms.user.sourcetrailer.value, \\)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.contains(#myfilms.user.sourcetrailer.value, \\)</visible>
 		</control>
 
 <!-- THUMBVIEW -->
@@ -663,7 +663,7 @@
 			<align>center</align>
 			<font>font20</font>
 			<label>#myfilms.user.mastertitle.value</label>
-			<visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(1026)]</visible>
+			<visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(50)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control> 
 		<control>
@@ -677,7 +677,7 @@
 			<font>font12</font>
 			<textcolor>60ffffff</textcolor>
 			<label>#myfilms.db.year.value - #myfilms.db.category.value - #myfilms.db.length.value #myfilms.db.length.unit - #myfilms.db.rating.value</label>
-			<visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(1026)+control.hasthumb(22)]</visible>
+			<visible>[facadeview.smallicons|facadeview.largeicons]+[control.hasfocus(50)+control.hasthumb(22)]</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control> 
 		<!-- <control>
@@ -721,7 +721,7 @@
 			<centered>yes</centered>
 			<zoom>yes</zoom>
 			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
-			<visible>facadeview.list+control.hasfocus(1026)</visible>
+			<visible>facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
@@ -755,7 +755,7 @@
 			<!-- <texture>#myfilms.coverimage</texture> -->
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-			<visible>facadeview.list+control.hasfocus(1026)</visible>
+			<visible>facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 
@@ -769,7 +769,7 @@
 			<width>283</width>
 			<height>360</height>
 			<texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
-			<visible>facadeview.list+control.hasfocus(1026)+control.hasthumb(22)</visible>
+			<visible>facadeview.list+control.hasfocus(50)+control.hasthumb(22)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 
@@ -790,7 +790,7 @@
 			<align>left</align>
 			<imagesToDraw>10</imagesToDraw>
 			<percentage>#myfilms.db.rating.value</percentage>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(1026)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 <!--
@@ -804,7 +804,7 @@
 			<height>34</height>
 			<texture>#myfilms.logos_id2001</texture>
 			<keepaspectratio>yes</keepaspectratio>
-			<visible>!player.hasmedia+control.hasfocus(1026)+facadeview.list</visible>
+			<visible>!player.hasmedia+control.hasfocus(50)+facadeview.list</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
@@ -817,7 +817,7 @@
 			<height>34</height>
 			<texture>#myfilms.logos_id2002</texture>
 			<keepaspectratio>yes</keepaspectratio>
-			<visible>!player.hasmedia+control.hasfocus(1026)+facadeview.list</visible>
+			<visible>!player.hasmedia+control.hasfocus(50)+facadeview.list</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 		<control>
@@ -830,7 +830,7 @@
 			<height>34</height>
 			<texture>#myfilms.logos_id2003</texture>
 			<keepaspectratio>yes</keepaspectratio>
-			<visible>!player.hasmedia+control.hasfocus(1026)+facadeview.list</visible>
+			<visible>!player.hasmedia+control.hasfocus(50)+facadeview.list</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 -->
@@ -844,7 +844,7 @@
 			<height>34</height>
 			<texture>#myfilms.logos_id2012</texture>
 			<keepaspectratio>yes</keepaspectratio>
-			<visible>!player.hasmedia+control.hasfocus(1026)+facadeview.list</visible>
+			<visible>!player.hasmedia+control.hasfocus(50)+facadeview.list</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 
@@ -863,7 +863,7 @@
 			<type>actiongroup</type>
 			<description>action menu</description>
 			<defaultcontrol>4</defaultcontrol>
-			<onexit>1026</onexit>
+			<onexit>50</onexit>
 			<buttonX>0</buttonX>
 			<buttonY>0</buttonY>
 			<buttonwidth>56</buttonwidth>
@@ -889,7 +889,7 @@
 				<height>720</height>
 				<texture>bg_left.png</texture>
 				<colordiffuse>ffffffff</colordiffuse>
-				<visible>!control.hasfocus(1026)</visible>
+				<visible>!control.hasfocus(50)</visible>
 			</control>
 
 			<control>
@@ -920,7 +920,7 @@
 				<layout>StackLayout</layout>
 				<animation effect="fade" time="450" reversible="true">visible</animation>
 				<animation effect="fade" time="450" reversible="true">hidden</animation>
-				<visible>!control.hasfocus(1026)</visible>
+				<visible>!control.hasfocus(50)</visible>
   			    <mpe>
   				      <layout>Grid</layout>
   				      <spring>no</spring>
@@ -936,7 +936,7 @@
 					<type>button</type>
 					<description>Layout</description>
 					<id>6</id>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>10014</onup>
 					<ondown>2</ondown>
 					<label>101</label>
@@ -944,7 +944,7 @@
 				<control>
 					<type>sortbutton</type>
 					<id>2</id>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>6</onup>
 					<ondown>3</ondown>
 					<label>103</label>
@@ -953,7 +953,7 @@
 					<type>button</type>
 					<description>Switch view</description>
 					<id>3</id>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>2</onup>
 					<ondown>4</ondown>
 					<label>457</label>
@@ -962,7 +962,7 @@
 					<type>button</type>
 					<description>Search</description>
 					<id>4</id>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>3</onup>
 					<ondown>5</ondown>
 					<label>137</label>
@@ -971,7 +971,7 @@
 					<type>button</type>
 					<description>Options</description>
 					<id>5</id>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>4</onup>
 					<ondown>10012</ondown>
 					<label>496</label>
@@ -985,7 +985,7 @@
 					<id>10011</id>
 					<hyperlink></hyperlink>
 					<label>-</label>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>5</onup>
 					<ondown>10012</ondown>
 					<texture>bg_facade_line_nofocus.png</texture>
@@ -996,7 +996,7 @@
 					<id>10012</id>
 					<hyperlink>5900</hyperlink>
 					<label>Trailer</label>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>5</onup>
 					<ondown>10013</ondown>
 					<visible>plugin.isenabled(My Trailers)</visible>
@@ -1007,7 +1007,7 @@
 					<id>10013</id>
 					<hyperlink>4755</hyperlink>
 					<label>Online Videos</label>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>10012</onup>
 					<ondown>10014</ondown>
 				</control>
@@ -1017,7 +1017,7 @@
 					<id>10014</id>
 					<hyperlink>9811</hyperlink>
 					<label>TV-Serien</label>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>10013</onup>
 					<ondown>6</ondown>
 				</control>

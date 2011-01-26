@@ -1,6 +1,6 @@
 <window>
 	 <id>7986</id>
-    <defaultcontrol>1026</defaultcontrol>
+    <defaultcontrol>50</defaultcontrol>
 	<define>#header.label:#myfilms.config.pluginname</define>
 	<allowoverlay>player.hasmedia</allowoverlay>
 	 <controls>
@@ -142,7 +142,7 @@
 			<type>actiongroup</type>
 			<description>action menu</description>
 			<defaultcontrol>6</defaultcontrol>
-			<onexit>1026</onexit>
+			<onexit>50</onexit>
 			<buttonX>0</buttonX>
 			<buttonY>0</buttonY>
 			<buttonwidth>60</buttonwidth>
@@ -152,7 +152,7 @@
 			<width>250</width>
 			<height>400</height>
 			<dimColor>00ffffff</dimColor>
-			<visible>!Control.HasFocus(1026)</visible>
+			<visible>!Control.HasFocus(50)</visible>
 			<control>
 				<type>image</type>
 				<posX>26</posX>
@@ -161,7 +161,7 @@
 				<height>591</height>
 				<texture>Backslide.png</texture>
 				<colordiffuse>fffffffff</colordiffuse>
-				<visible>!Control.HasFocus(1026)</visible>
+				<visible>!Control.HasFocus(50)</visible>
 				<animation effect="slide" time="450" start="-300,0" reversible="false">visible</animation>
 				<animation effect="slide" time="450" end="-300,0" reversible="false">hidden</animation>
 			</control>
@@ -181,8 +181,8 @@
 				<id>6</id>
 				<posX>60</posX>
 				<posY>107</posY>
-				<onleft>1026</onleft>
-				<onright>1026</onright>
+				<onleft>50</onleft>
+				<onright>50</onright>
 				<onup>10012</onup>
 				<ondown>2</ondown>
 				<animation>unfocus</animation>
@@ -195,7 +195,7 @@
 				<posX>60</posX>
 				<posY>139</posY>
 				<onleft>6</onleft>
-				<onright>1026</onright>
+				<onright>50</onright>
 				<onup>6</onup>
 				<ondown>3</ondown>
 				<font>font13</font>
@@ -221,7 +221,7 @@
 				<posX>60</posX>
 				<posY>171</posY>
 				<onleft>2</onleft>
-				<onright>1026</onright>
+				<onright>50</onright>
 				<onup>2</onup>
 				<ondown>4</ondown>
 				<animation>unfocus</animation>
@@ -235,7 +235,7 @@
 				<posX>60</posX>
 				<posY>203</posY>
 				<onleft>3</onleft>
-				<onright>1026</onright>
+				<onright>50</onright>
 				<onup>3</onup>
 				<ondown>5</ondown>
 				<animation>unfocus</animation>
@@ -249,7 +249,7 @@
 				<posX>60</posX>
 				<posY>235</posY>
 				<onleft>4</onleft>
-				<onright>1026</onright>
+				<onright>50</onright>
 				<onup>4</onup>
 				<ondown>10012</ondown>
 				<animation>unfocus</animation>
@@ -272,7 +272,7 @@
 					<id>10012</id>
 					<hyperlink>9811</hyperlink>
 					<label>1300</label>
-					<onright>1026</onright>
+					<onright>50</onright>
 					<onup>5</onup>
 					<ondown>6</ondown>
 				</control>
@@ -282,7 +282,7 @@
 	</control>
     <control>
         	<type>group</type>
-      		<visible>!Control.HasFocus(1026)</visible>
+      		<visible>!Control.HasFocus(50)</visible>
       	   	<animation effect="fade" time="250">WindowOpen</animation>
       		<animation effect="fade" time="250">WindowClose</animation>
       		<animation effect="slide" time="150" start="0,-300">WindowOpen</animation>
@@ -292,7 +292,7 @@
 			<control>
         		<description>composite control consisting of a list control and a thumbnail panel</description>
         		<type>facadeview</type>
-        		<id>1026</id>
+        		<id>50</id>
 				<control>
 					<description>Thumbnail Panel</description>
 					<type>thumbnailpanel</type>
@@ -343,7 +343,7 @@
         		<control>
           			<description>Filmstrip view</description>
 					<type>filmstrip</type>
-					<id>1026</id>
+					<id>50</id>
           			<dimColor>90ffffff</dimColor>
           			<scrollOffset>2</scrollOffset>
           			<posX>0</posX>
@@ -543,7 +543,7 @@
 			<texture>#myfilms.coverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<zoom>yes</zoom>
-			<visible>facadeview.list+Control.HasFocus(1026)</visible>
+			<visible>facadeview.list+Control.HasFocus(50)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
             <animation effect="slide" time="450" start="-400,0">visible</animation>
@@ -558,7 +558,7 @@
       		<width>306</width>
       		<height>436</height>
       		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
-      		<visible>facadeview.list+Control.HasFocus(1026)</visible>
+      		<visible>facadeview.list+Control.HasFocus(50)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
             <animation effect="slide" time="450" start="-400,0">visible</animation>

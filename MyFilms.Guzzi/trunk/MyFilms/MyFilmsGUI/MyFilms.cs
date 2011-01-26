@@ -75,6 +75,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public const int ID_MyFilmsActors = 7989;
         public const int ID_MyFilmsThumbs = 7990;
         public const int ID_MyFilmsActorsInfo = 7991;
+        public const int ID_BrowseTheWeb = 54537689;
+        public const int ID_OnlineVideos = 4755;
 
         public const string ImdbBaseUrl = "http://www.imdb.com/";
 
@@ -91,7 +93,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CTRL_LoadingImage = 22,
             CTRL_Image = 1020,
             CTRL_Image2 = 1021, // Disabled, as one Coverimage should be enough?
-            CTRL_List = 1026,
+            CTRL_List = 50, // Changed from 1026 to 50 due to meeting MePo Standards
             CTRL_logos_id2001 = 2001,
             CTRL_logos_id2002 = 2002,
             CTRL_logos_id2003 = 2003,
@@ -170,6 +172,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public enum optimizeOption { optimizeDisabled };
         //public enum optimizeDisabled;
         public static bool InitialStart = false; //Added to implement InitialViewSetup, ToDo: Add Logic
+        public static bool ReturnFromExternalPluginInfo = false;
         #endregion
 
 
@@ -481,7 +484,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //---------------------------------------------------------------------------------------
                     base.OnMessage(messageType);
                     //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
-                    if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors))
+                    if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb) && (!ReturnFromExternalPluginInfo))
                     {
                         Prev_MenuID = PreviousWindowId; 
                         InitMainScreen();
@@ -514,10 +517,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIControl.ShowControl(GetID, 34);
                     GUIWaitCursor.Hide();
 
-                    if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors))
+                    if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb) && !ReturnFromExternalPluginInfo)
                         Fin_Charge_Init(true,false);
                     else
                         Fin_Charge_Init(false, false);
+
+                    ReturnFromExternalPluginInfo = false;
+
                     return true;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
@@ -548,6 +554,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //Disable FanartTimer - already done on pagedestroy ...
                     //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
                     //m_bFanartTimerDisabled = true;
+
+                    ReturnFromExternalPluginInfo = false;
 
                     return true; // fall through to call base class?
 
@@ -2700,7 +2708,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (hasRightPlugin && hasRightVersion)
                     {
                       //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
-                      int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                      //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
                       string url = "http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films";
                       string zoom = "150";
 
@@ -2708,7 +2716,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                       GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                       GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                      GUIWindowManager.ActivateWindow(webBrowserWindowID, false);
+                      ReturnFromExternalPluginInfo = true;
+                      GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
                       GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                       GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                     }
@@ -3099,7 +3108,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (hasRightPlugin && hasRightVersion)
                     {
                         //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
-                        int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                        //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
                         string url = ImdbBaseUrl + "";
                         string zoom = "150";
 
@@ -3119,7 +3128,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                         GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        GUIWindowManager.ActivateWindow(webBrowserWindowID, false);
+                        ReturnFromExternalPluginInfo = true;
+                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                         GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                         }
@@ -3181,7 +3191,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (hasRightPluginArtistImdb && hasRightVersionArtistImdb)
                     {
                       //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
-                      int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                      //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
                       string url = ImdbBaseUrl + "";
                       string zoom = "150";
 
@@ -3211,7 +3221,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                       GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                       GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                      GUIWindowManager.ActivateWindow(webBrowserWindowID, false);
+                      ReturnFromExternalPluginInfo = true;
+                      GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
                       GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                       GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                     }
@@ -3370,7 +3381,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         //url = new IMDBSearch();
                         //MediaPortal.Video.Database.IMDB.IMDBUrl .FindActor(facadeView.SelectedListItem.Label));
                         //Load Webbrowserplugin with the URL
-                        int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                        //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
                         string url = ImdbBaseUrl + string.Empty;
                         string zoom = "100";
                         //value = value.Replace("%link%", url);
@@ -3378,9 +3389,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                         GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        GUIWindowManager.ActivateWindow(webBrowserWindowID, false); 
-
-
+                        ReturnFromExternalPluginInfo = true;
+                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", "");
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", "");
                     }
                     break;
 
@@ -4683,7 +4695,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             foreach (string wSearch in wSearchList)
             {
                 dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(wSearch.Trim()));
-                choiceSearch.Add(wSearch);
+                choiceSearch.Add(wSearch.Trim());
             }
 
             dlg.DoModal(GetID);

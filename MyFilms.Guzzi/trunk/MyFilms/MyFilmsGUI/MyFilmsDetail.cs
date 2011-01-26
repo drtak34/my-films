@@ -145,6 +145,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public const int ID_MyFilmsActors = 7989;
         public const int ID_MyFilmsThumbs = 7990;
         public const int ID_MyFilmsActorsInfo = 7991;
+        public const int ID_BrowseTheWeb = 54537689;
+        public const int ID_OnlineVideos = 4755;
 
         public SQLiteClient m_db;
         public class IMDBActorMovie
@@ -644,7 +646,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                         LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
-                        GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
+                        //ReturnFromExternalPluginInfo = true;
+                        GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
@@ -677,7 +680,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
-                      GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
+                      //ReturnFromExternalPluginInfo = true;
+                      GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
@@ -2624,17 +2628,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                             {
                               setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                              if (MyFilms.conf.GlobalUnwatchedOnlyValue == "false" && MyFilms.r[ItemId][dc.ColumnName].ToString() == "true") 
-                                setGUIProperty("watched", "true");
-                              else 
-                                setGUIProperty("watched", "false");
+                              if (MyFilms.conf.GlobalUnwatchedOnlyValue == "false")
+                              {
+                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() == "true")
+                                  setGUIProperty("watched", "true");
+                                else
+                                  setGUIProperty("watched", "false");
+                              }
+                              else
+                              {
+                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() == "true")
+                                  setGUIProperty("watched", "false");
+                                else
+                                  setGUIProperty("watched", "true");
+                              }
                             }
                             else
                               {
                                 clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value");
                                 clearGUIProperty("watched");
                               }
-                              
                             break;
                       
                         default:
@@ -3041,7 +3054,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
-                      GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
+                      //ReturnFromExternalPluginInfo = true;
+                      GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
@@ -3086,7 +3100,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
-                      GUIWindowManager.ActivateWindow(4755, false); // 4755 is ID for OnlineVideos
+                      //ReturnFromExternalPluginInfo = true;
+                      GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
