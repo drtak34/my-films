@@ -48,20 +48,122 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using NLog.Config;
   using NLog.Targets;
 
+  using Trakt;
+
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
 
   /// <summary>
-    /// Summary description for GUIMesFilms.
+    /// Summary description for GUIMyFilms.
     /// </summary>
     //[PluginIcons("MesFilms.MyFilms.Resources.clapperboard-128x128.png", "MesFilms.MyFilms.Resources.clapperboard-128x128-faded.png")]
     //[PluginIcons("MesFilms.MyFilms.Resources.logo_mesfilms.png", "MesFilms.MyFilms.Resources.logo_mesfilms-faded.png")]
     [PluginIcons("MyFilmsPlugin.MyFilms.Resources.film-reel-128x128.png", "MyFilmsPlugin.MyFilms.Resources.film-reel-128x128-faded.png")]
     public class MyFilms : GUIWindow, ISetupForm
     {
-        /*
-         * Log declarations
-         */
+      #region Constructor
+      public MyFilms()
+      {
+        // create Backdrop image swapper
+        backdrop = new ImageSwapper();
+        backdrop.ImageResource.Delay = 250;
+        backdrop.PropertyOne = "#myfilms.fanart";
+        backdrop.PropertyTwo = "#myfilms.fanart2";
+        backdrop.LoadingImage = loadingImage;
+        backdrop.Active = false;
+
+        // create Cover image swapper
+        cover = new AsyncImageResource();
+        cover.Property = "#myfilms.coverimage";
+        cover.Delay = 100;
+      }
+      #endregion
+
+      #region ISetupForm Members
+
+      // Returns the name of the plugin which is shown in the plugin menu
+      public string PluginName()
+      {
+        return "MyFilms";
+      }
+
+      // Returns the description of the plugin is shown in the plugin menu
+      public string Description()
+      {
+        return "MyFilms Ant Movie Catalog - Guzzi Mod";
+      }
+
+      // Returns the author of the plugin which is shown in the plugin menu
+      public string Author()
+      {
+        return "Zebons (Mod by Guzzi)";
+      }
+
+      // show the setup dialog
+      public void ShowPlugin()
+      {
+        System.Windows.Forms.Form setup = new MesFilmsSetup();
+        setup.ShowDialog();
+      }
+
+      // Indicates whether plugin can be enabled/disabled
+      public bool CanEnable()
+      {
+        return true;
+      }
+
+      // get ID of windowplugin belonging to this setup
+      public int GetWindowId()
+      {
+        return 7986;
+      }
+
+      // Indicates if plugin is enabled by default;
+      public bool DefaultEnabled()
+      {
+        return true;
+      }
+
+      // indicates if a plugin has its own setup screen
+      public bool HasSetup()
+      {
+        return true;
+      }
+
+      /// <summary>
+      /// If the plugin should have its own button on the main menu of Media Portal then it
+      /// should return true to this method, otherwise if it should not be on home
+      /// it should return false
+      /// </summary>
+      /// <param name="strButtonText">text the button should have</param>
+      /// <param name="strButtonImage">image for the button, or empty for default</param>
+      /// <param name="strButtonImageFocus">image for the button, or empty for default</param>
+      /// <param name="strPictureImage">subpicture for the button or empty for none</param>
+      /// <returns>true  : plugin needs its own button on home
+      ///          false : plugin does not need its own button on home</returns>
+      public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
+      {
+        string wPluginName = strPluginName;
+        using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+        {
+          wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
+        }
+
+        strButtonText = wPluginName;
+        strButtonImage = String.Empty;
+        strButtonImageFocus = String.Empty;
+        strPictureImage = String.Format("hover_{0}.png", "MyFilms");
+        string strBtnFile = String.Format(@"{0}\media\{1}", GUIGraphicsContext.Skin, strPictureImage);
+        if (!System.IO.File.Exists(strBtnFile))
+          strPictureImage = string.Empty;
+        return true;
+      }
+      #endregion
+
+
+      /*
+       * Log declarations
+       */
         private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //log
         private const string LogFileName = "MyFilms.log";  //log's filename
         private const string OldLogFileName = "MyFilms.old.log";  //log's old filename
@@ -100,6 +202,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CTRL_logos_id2012 = 2012,
             CTRL_GuiWaitCursor = 3004,
         }
+
+        #region Skin Variables
         //[SkinControlAttribute((int)Controls.CTRL_TxtSelect)]
         //protected GUIFadeLabel TxtSelect;
 
@@ -138,6 +242,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         [SkinControlAttribute((int)Controls.CTRL_GuiWaitCursor)]
         protected GUIAnimation m_SearchAnimation;
+        #endregion
 
         public int Layout = 0;
         public static int Prev_ItemID = -1;
@@ -147,17 +252,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static Configuration conf;
         public static Logos confLogos;
         //private string currentConfig;
-        private string strPluginName = "GuzziThek";
+        private string strPluginName = "MyFilms";
         public static DataRow[] r; // will hold current recordset to traverse
 
         //Imageswapperdefinitions for fanart and cover
-        //public ImageSwapper backdrop;
         private ImageSwapper backdrop;
         private AsyncImageResource cover = null;
 
         // Guzzi: Added from TV-Series for Fanarttoggling
-        //private System.Threading.Timer m_scanTimer = null;
         private System.Threading.Timer m_FanartTimer = null;
+        private System.Threading.Timer m_TraktSyncTimer = null;
+
         private bool m_bFanartTimerDisabled = false;
 
         //Guzzi Addons for Global nonpermanent Trailer and MinRating Filters
@@ -172,6 +277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public enum optimizeOption { optimizeDisabled };
         //public enum optimizeDisabled;
         public static bool InitialStart = false; //Added to implement InitialViewSetup, ToDo: Add Logic
+        private bool LoadWithParameterSupported = false;
         public static bool ReturnFromExternalPluginInfo = false;
         #endregion
 
@@ -185,92 +291,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         System.ComponentModel.BackgroundWorker bgLoadMovieList = new System.ComponentModel.BackgroundWorker();
 
         #endregion
-        public MyFilms()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-        #region ISetupForm Members
-
-        // Returns the name of the plugin which is shown in the plugin menu
-        public string PluginName()
-        {
-            return "MyFilms";
-        }
-
-        // Returns the description of the plugin is shown in the plugin menu
-        public string Description()
-        {
-            return "MyFilms Ant Movie Catalog - Guzzi Mod";
-        }
-
-        // Returns the author of the plugin which is shown in the plugin menu
-        public string Author()
-        {
-            return "Zebons (Mod by Guzzi)";
-        }
-
-        // show the setup dialog
-        public void ShowPlugin()
-        {
-            System.Windows.Forms.Form setup = new MesFilmsSetup();
-            setup.ShowDialog();
-        }
-
-        // Indicates whether plugin can be enabled/disabled
-        public bool CanEnable()
-        {
-            return true;
-        }
-
-        // get ID of windowplugin belonging to this setup
-        public int GetWindowId()
-        {
-            return 7986;
-        }
-
-        // Indicates if plugin is enabled by default;
-        public bool DefaultEnabled()
-        {
-            return true;
-        }
-
-        // indicates if a plugin has its own setup screen
-        public bool HasSetup()
-        {
-            return true;
-        }
 
 
-        /// <summary>
-        /// If the plugin should have its own button on the main menu of Media Portal then it
-        /// should return true to this method, otherwise if it should not be on home
-        /// it should return false
-        /// </summary>
-        /// <param name="strButtonText">text the button should have</param>
-        /// <param name="strButtonImage">image for the button, or empty for default</param>
-        /// <param name="strButtonImageFocus">image for the button, or empty for default</param>
-        /// <param name="strPictureImage">subpicture for the button or empty for none</param>
-        /// <returns>true  : plugin needs its own button on home
-        ///          false : plugin does not need its own button on home</returns>
-        public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
-        {
-            string wPluginName = strPluginName;
-            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-            {
-                wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
-            }
+        #region Base Overrides
 
-            strButtonText = wPluginName;
-            strButtonImage = String.Empty;
-            strButtonImageFocus = String.Empty;
-            strPictureImage = String.Format("hover_{0}.png", "MyFilms");
-            string strBtnFile = String.Format(@"{0}\media\{1}", GUIGraphicsContext.Skin, strPictureImage);
-            if (!System.IO.File.Exists(strBtnFile))
-              strPictureImage = string.Empty;
-            return true;
-        }
         public override int GetID
         {
             get {return ID_MyFilms;}
@@ -282,19 +306,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             InitLogger(); // Initialize Logger 
             Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
             LogMyFilms.Debug("MyFilms.Init() started.");
-            // create Backdrop image swapper
-
-            backdrop = new ImageSwapper();
-            backdrop.ImageResource.Delay = 250;
-            backdrop.PropertyOne = "#myfilms.fanart";
-            //backdrop.PropertyTwo = "#myfilms.fanart2";
-            //backdrop.LoadingImage = loadingImage;
-            backdrop.Active = false;
-
-            // create Cover image swapper
-            cover = new AsyncImageResource();
-            cover.Property = "#myfilms.coverimage";
-            cover.Delay = 100;
 
             // (re)link our backdrop image controls to the backdrop image swapper
             //backdrop.GUIImageOne = ImgFanart;
@@ -305,54 +316,46 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             InitialStart = true;
 
             //Add localized labels for DB Columns
-            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            InitGUIPropertyLabels();
+
+            // check if running version of mediaportal support loading with parameter           
+            if (typeof(GUIWindow).GetField("_loadParameter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance) != null)
             {
-              MyFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "Films"));
-              MyFilmsDetail.setGUIProperty("config.pluginmode", xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal"));
-              LogMyFilms.Info("Startmode: '" + xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal") + "'");
+              LoadWithParameterSupported = true;
             }
-            AntMovieCatalog ds = new AntMovieCatalog();
-            foreach (DataColumn dc in ds.Movie.Columns)
-            {
-                MyFilmsDetail.setGUIProperty("db." + dc.ColumnName.ToLower() + ".label", BaseMesFilms.Translate_Column(dc.ColumnName));
-            }
-            MyFilmsDetail.setGUIProperty("db.calc.aspectratio.label", GUILocalizeStrings.Get(10798697));
-            MyFilmsDetail.setGUIProperty("db.calc.imageformat.label", GUILocalizeStrings.Get(10798698));
-            MyFilmsDetail.setGUIProperty("user.sourcetrailer.label", GUILocalizeStrings.Get(10798649));
-            MyFilmsDetail.setGUIProperty("user.source.label", GUILocalizeStrings.Get(10798648));
-            MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
-            MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
-            // Clear GUI Properties when first entering the plugin
-            // This will avoid ugly property names being seen before 
-            // its corresponding value is assigned
-            MyFilmsDetail.clearGUIProperty("logos_id2001");
-            MyFilmsDetail.clearGUIProperty("logos_id2002");
-            MyFilmsDetail.clearGUIProperty("logos_id2003");
-            MyFilmsDetail.clearGUIProperty("logos_id2012"); // Combined Logo
-            MyFilmsDetail.clearGUIProperty("nbobjects.value");
-            MyFilmsDetail.clearGUIProperty("Fanart");
-            MyFilmsDetail.clearGUIProperty("Fanart2");
-            MyFilmsDetail.clearGUIProperty("config.currentconfig");
-            MyFilmsDetail.clearGUIProperty("view");
-            MyFilmsDetail.clearGUIProperty("picture");
+
+            #region Trakt
+            // ToDo: Read Username, Password and Useragent from Settings file
+            //TraktAPI.Username = DBOption.GetOptions(DBOption.cTraktUsername);
+            //TraktAPI.Password = DBOption.GetOptions(DBOption.cTraktPassword);
+            //TraktAPI.UserAgent = Settings.UserAgent;
+
+            // Timer to process episodes to send to trakt, will also be called after new episodes are added to library
+            //m_TraktSyncTimer = new System.Threading.Timer(new TimerCallback(TraktSynchronize), null, 15000, Timeout.Infinite);
+            #endregion
             
-            LogMyFilms.Debug("MyFilms.Init() completed.");
+            LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
 
             return Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
         }
 
-        protected override void OnPageLoad()
-            //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
+        public override void DeInit()
+        {
+          base.DeInit();
+          // Add Other Classes here, if necessary
+        }
+
+        protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
         {
             //InitLogger(); // Initialize Logger 
             
             LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
             Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
-            
+
             // (re)link our backdrop image controls to the backdrop image swapper
             backdrop.GUIImageOne = ImgFanart;
             backdrop.GUIImageTwo = ImgFanart2;
-            //backdrop.LoadingImage = loadingImage;  --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
+            backdrop.LoadingImage = loadingImage;  // --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
 
             // Setup Random Fanart Timer
             m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
@@ -377,7 +380,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MyFilms.OnPageDestroy() completed.");
             Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
         }
-
 
         #endregion
 
@@ -426,18 +428,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return;
                 }
             }
-			
-			// Original Code from ZebonsMerge
-			// if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
-            // {
-            //   if (facadeView.Focus)
-            //        GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnSearchT);
-            //    else
-            //        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-            //    return;
-            // }
-			// End Merge Code
-			
+
             if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
                 if (facadeView.SelectedListItemIndex > -1)
                     {
@@ -4996,7 +4987,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // (re)link our backdrop image controls to the backdrop image swapper
             backdrop.GUIImageOne = ImgFanart;
             backdrop.GUIImageTwo = ImgFanart2;
-            //backdrop.LoadingImage = loadingImage;  --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
+            backdrop.LoadingImage = loadingImage;  //--> Do NOT activate - otherwise coverimage flickers and goes away !!!!
 
             //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge ->> This fucked up the fanart swapper !!!!!
             //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge
@@ -5698,8 +5689,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
            LogManager.Configuration = config;
        }
 
-      
-       private void Load_Logos(DataRow row)
+       private static void InitGUIPropertyLabels()
+       {
+         using (
+           MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+         {
+           MyFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "Films"));
+           MyFilmsDetail.setGUIProperty("config.pluginmode", xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal"));
+           LogMyFilms.Info("Startmode: '" + xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal") + "'");
+         }
+         AntMovieCatalog ds = new AntMovieCatalog();
+         foreach (DataColumn dc in ds.Movie.Columns)
+         {
+           MyFilmsDetail.setGUIProperty("db." + dc.ColumnName.ToLower() + ".label", BaseMesFilms.Translate_Column(dc.ColumnName));
+         }
+         MyFilmsDetail.setGUIProperty("db.calc.aspectratio.label", GUILocalizeStrings.Get(10798697));
+         MyFilmsDetail.setGUIProperty("db.calc.imageformat.label", GUILocalizeStrings.Get(10798698));
+         MyFilmsDetail.setGUIProperty("user.sourcetrailer.label", GUILocalizeStrings.Get(10798649));
+         MyFilmsDetail.setGUIProperty("user.source.label", GUILocalizeStrings.Get(10798648));
+         MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
+         MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
+         // Clear GUI Properties when first entering the plugin
+         // This will avoid ugly property names being seen before 
+         // its corresponding value is assigned
+         MyFilmsDetail.clearGUIProperty("logos_id2001");
+         MyFilmsDetail.clearGUIProperty("logos_id2002");
+         MyFilmsDetail.clearGUIProperty("logos_id2003");
+         MyFilmsDetail.clearGUIProperty("logos_id2012"); // Combined Logo
+         MyFilmsDetail.clearGUIProperty("nbobjects.value");
+         MyFilmsDetail.clearGUIProperty("Fanart");
+         MyFilmsDetail.clearGUIProperty("Fanart2");
+         MyFilmsDetail.clearGUIProperty("config.currentconfig");
+         MyFilmsDetail.clearGUIProperty("view");
+         MyFilmsDetail.clearGUIProperty("picture");
+       }
+
+    private void Load_Logos(DataRow row)
        {
          LogMyFilms.Debug("MF: Using Logos -> '" + conf.StrLogos + "'");
          //if ((ImgID2001 != null) && (ImgID2002 != null) && (conf.StrLogos))

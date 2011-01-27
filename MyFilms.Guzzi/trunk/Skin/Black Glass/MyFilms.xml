@@ -707,8 +707,6 @@
 
 <!-- COMMON FACADES -->
 
-<!--  Disables original Covers ...
-
 		<control>
 			<description>Cover Art</description>
 			<type>image</type>
@@ -720,9 +718,17 @@
 			<height>348</height> 
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
+			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.coverimage</texture>
+			<!-- <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture> -->
+			<!-- <colordiffuse>40ffffff</colordiffuse> -->
+			<!-- <texture>#myfilms.coverimage</texture> -->
 			<visible>facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+
 		</control>
 		<control>
 			<description>Cover Art</description>
@@ -733,30 +739,14 @@
 			<posY>88</posY> 
 			<width>245</width> 
 			<height>348</height> 
-			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
+			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.coverimage</texture>
+			<!-- <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture> -->
 			<visible>no</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
-		</control>
--->
-
-<!-- Temorarily Added as ImageCover, loaded by Imageswapper -->
-
-		<control>
-			<description>CoverImage</description>
-			<type>image</type>
-			<id>22</id>
-			<keepaspectratio>no</keepaspectratio>
-			<posX>62</posX>
-			<posY>88</posY>
-			<width>245</width> 
-			<height>348</height> 
-			<!-- <colordiffuse>40ffffff</colordiffuse> -->
-			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.coverimage</texture>
-			<!-- <texture>#myfilms.coverimage</texture> -->
-			<centered>yes</centered>
-			<zoom>yes</zoom>
-			<visible>facadeview.list+control.hasfocus(50)</visible>
-			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 
 		<control>
@@ -769,7 +759,7 @@
 			<width>283</width>
 			<height>360</height>
 			<texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
-			<visible>facadeview.list+control.hasfocus(50)+control.hasthumb(22)</visible>
+			<visible>facadeview.list+control.hasfocus(50)+control.hasthumb(1020)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
 

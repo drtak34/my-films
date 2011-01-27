@@ -59,6 +59,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
   using Trakt;
+  using Trakt.Show;
 
   /// <summary>
     /// Summary description for GUIMesFilms.
@@ -170,6 +171,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private System.Threading.Timer m_TraktTimer = null;
         private TimerCallback m_timerDelegate = null;
         BackgroundWorker TraktScrobbleUpdater = new BackgroundWorker();
+        private bool TraktMarkedFirstAsWatched = false;
+
 
 
         static MyFilmsDetail()
@@ -2845,7 +2848,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int IMovieIndex = 0;
 
             //Guzzi: Added BoolType for Trailerlaunch
-			Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
+			      Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
             //Search_All_Files(select_item, false, ref NoResumeMovie, ref newItems, ref IMovieIndex);
             if (newItems.Count > 20)
             // Maximum 20 entries (limitation for MP dialogFileStacking)
@@ -2892,6 +2895,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // ask for start movie Index
 
                 // play movie...
+                // TraktResponse ScrobbleMovieState(data) // ToDo: Add Movieupdate to Trakt here
                 PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
             }
             else
@@ -3310,6 +3314,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 LogMyFilms.Info("MF: Error during PlayBackEnded ");
             }
+            //#region Trakt
+            //// submit watched state to trakt API
+            //// could be a double episode so set both episodes as watched
+            //PlayListItem item = GetCurrentItem();
+
+            //if (item != null)
+            //{
+            //  if (item.Episode != null)
+            //  {
+            //    if (item.Episode[DBEpisode.cEpisodeIndex2] > 0)
+            //    {
+            //      // only set 2nd episode as watched here
+            //      SQLCondition condition = new SQLCondition();
+            //      condition.Add(new DBEpisode(), DBEpisode.cFilename, item.FileName, SQLConditionType.Equal);
+            //      List<DBEpisode> episodes = DBEpisode.Get(condition, false);
+            //      TraktScrobbleUpdater.RunWorkerAsync(episodes[1]);
+            //    }
+            //    else
+            //    {
+            //      TraktScrobbleUpdater.RunWorkerAsync(item.Episode);
+            //    }
+            //  }
+            //}
+            //#endregion
         }
 
         private static string LoadPlaylist(string filename)
