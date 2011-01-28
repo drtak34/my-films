@@ -2406,6 +2406,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.item3.value");
             clearGUIProperty("user.source.value");
             clearGUIProperty("user.sourcetrailer.value");
+            clearGUIProperty("user.watched.value");
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2481,7 +2482,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (wrep && (MyFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower())))
                     {
-                        setGUIProperty("user.sourcetrailer.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                      setGUIProperty("user.sourcetrailer.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                    }
+
+                    if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
+                    {
+                      if (MyFilms.r[ItemId][dc.ColumnName].ToString() != MyFilms.conf.GlobalUnwatchedOnlyValue)
+                        setGUIProperty("user.watched.value", "true");
+                      else
+                        clearGUIProperty("user.watched.value"); // set to empty, if movie is unwatched
                     }
 
                     switch (dc.ColumnName.ToLower())
@@ -2627,32 +2636,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             setGUIProperty("db.calc.imageformat.value", ar);
                             break;
 
-                        case "checked":
-                            if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
-                            {
-                              setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                              if (MyFilms.conf.GlobalUnwatchedOnlyValue == "false")
-                              {
-                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() == "true")
-                                  setGUIProperty("watched", "true");
-                                else
-                                  setGUIProperty("watched", "false");
-                              }
-                              else
-                              {
-                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() == "true")
-                                  setGUIProperty("watched", "false");
-                                else
-                                  setGUIProperty("watched", "true");
-                              }
-                            }
-                            else
-                              {
-                                clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value");
-                                clearGUIProperty("watched");
-                              }
-                            break;
-                      
                         default:
                             if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                                 setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
@@ -3296,13 +3279,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
                 if (MyFilms.conf.CheckWatched)
-                    r1[MyFilms.conf.StrPlayedIndex]["Checked"] = "True";
+                    r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
                 if (ended)
                 {
-                    if (MyFilms.conf.StrSupPlayer)
-                        Suppress_Entry(r1, MyFilms.conf.StrPlayedIndex);
+                  if (MyFilms.conf.StrSupPlayer)
+                    Suppress_Entry(r1, MyFilms.conf.StrPlayedIndex);
+                  if (MyFilms.conf.CheckWatchedPlayerStopped)
+                    r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
                 }
-                if ((MyFilms.conf.CheckWatched) || (MyFilms.conf.StrSupPlayer))
+                if ((MyFilms.conf.CheckWatched) || (MyFilms.conf.CheckWatchedPlayerStopped) || (MyFilms.conf.StrSupPlayer))
                     Update_XML_database();
                 MyFilms.conf.StrPlayedIndex = -1;
                 MyFilms.conf.StrPlayedDfltSelect = string.Empty;
@@ -4365,7 +4350,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] = trailersourcepath;
                 LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - New Trailersourcepath    : '" + MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] + "'");
                 Update_XML_database();
-                LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Database Updatewd !!!!");
+                LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Database Updated !!!!");
             }
         }
         

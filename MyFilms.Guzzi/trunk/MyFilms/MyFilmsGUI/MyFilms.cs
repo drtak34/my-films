@@ -268,8 +268,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //Guzzi Addons for Global nonpermanent Trailer and MinRating Filters
         public bool GlobalFilterTrailersOnly = false;
         public bool GlobalFilterMinRating = false;
-        public string GlobalFilterString = string.Empty;
-        public string GlobalUnwatchedFilterString = "";
+        //public string GlobalFilterString = string.Empty;
+        public string GlobalFilterStringTrailersOnly = string.Empty;
+        public string GlobalFilterStringUnwatched = string.Empty;
+        public string GlobalFilterStringMinRating = string.Empty;
+        //public string GlobalUnwatchedFilterString = string.Empty;
         public bool MovieScrobbling = false;
         public int actorID = 0;
         public static string CurrentMovie;
@@ -1003,10 +1006,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SetFilmSelect();
             //Added GlobalFilterList for Trailer & Rating Filters !!!
 			      // Added ,false from ZebonsMerge
-            r = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + GlobalUnwatchedFilterString + " " + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
+            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+            r = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
 			      //r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
             LogMyFilms.Debug("MF: (GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
-            LogMyFilms.Debug("MF: (GetFilmList) - GlobalUnwatchedFilterString: '" + GlobalUnwatchedFilterString + "'");
             LogMyFilms.Debug("MF: (GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
             LogMyFilms.Debug("MF: (GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
             LogMyFilms.Debug("MF: (GetFilmList) - conf.StrSorta:               '" + conf.StrSorta + "'");
@@ -1155,8 +1158,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 break;
                         }
                     }
-                  
-                    if (sr["Checked"].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue) // changed to take setup config into consideration
+
+                    //if (sr["Checked"].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue) // changed to take setup config into consideration
+                    if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
+                      if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
                         item.IsPlayed = true;
                     if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
                         if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
@@ -1475,9 +1480,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceView.Add("country");
             choiceView.Add("actors");
             
-            //if (MesFilms.conf.CheckWatched) // Might be added to only show if checkedfield is used in config for watched movies...
-            //choiceView.Add("watched"); // Disabled - will do it via global filter later ...
-
             if (conf.StrStorage.Length != 0 && conf.StrStorage != "(none)")
             {
                 dlg1.Add(GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
@@ -1769,15 +1771,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Change_LayOut(0); 
             facadeView.Clear();
             int wi = 0;
+            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - GlobalFilterString          : '" + GlobalFilterString + "'");
-            LogMyFilms.Debug("MF: (GetSelectFromDivx) - GlobalFilterUnwatchedString : '" + GlobalUnwatchedFilterString + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - conf.StrDfltSelect          : '" + conf.StrDfltSelect + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - WstrSelect                  : '" + WstrSelect + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSort                    : '" + WStrSort + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSortSens                : '" + WStrSortSens + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - NewWstar                    : '" + NewWstar + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - Setup Array Started (LectureDonnées)");
-            foreach (DataRow enr in BaseMesFilms.LectureDonnées(GlobalFilterString + " " + GlobalUnwatchedFilterString + " " + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
+            foreach (DataRow enr in BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
                 {
                 if ((WStrSort == "Date") || (WStrSort == "DateAdded"))
                     champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
@@ -1873,8 +1875,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                         else strPathArtist = conf.StrPathArtist + "\\";
                                         if (System.IO.File.Exists(strPathArtist + item.Label + "\\folder.jpg")) strThumbSource = strPathArtist + item.Label + "\\folder.jpg";
                                         else if (System.IO.File.Exists(strPathArtist + item.Label + "\\folder.png")) strThumbSource = strPathArtist + item.Label + "\\folder.png";
-                                        else if (System.IO.File.Exists(strPathArtist + item.Label + ".png")) strThumbSource = strPathArtist + item.Label + ".png";
+                                        else if (System.IO.File.Exists(strPathArtist + item.Label + "L" + ".jpg")) strThumbSource = strPathArtist + item.Label + "L" + ".jpg";
                                         else if (System.IO.File.Exists(strPathArtist + item.Label + ".jpg")) strThumbSource = strPathArtist + item.Label + ".jpg";
+                                        else if (System.IO.File.Exists(strPathArtist + item.Label + ".png")) strThumbSource = strPathArtist + item.Label + ".png";
                                       }
                                       if ((!System.IO.File.Exists(strThumb)) && (strThumb != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
                                         {
@@ -1975,8 +1978,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                   strPathArtist = conf.StrPathArtist + "\\";
                                 if (System.IO.File.Exists(strPathArtist + item.Label + "\\folder.jpg")) strThumbSource = strPathArtist + item.Label + "\\folder.jpg";
                                 else if (System.IO.File.Exists(strPathArtist + item.Label + "\\folder.png")) strThumbSource = strPathArtist + item.Label + "\\folder.png";
-                                else if (System.IO.File.Exists(strPathArtist + item.Label + ".png")) strThumbSource = strPathArtist + item.Label + ".png";
+                                else if (System.IO.File.Exists(strPathArtist + item.Label + "L" + ".jpg")) strThumbSource = strPathArtist + item.Label + "L" + ".jpg";
                                 else if (System.IO.File.Exists(strPathArtist + item.Label + ".jpg")) strThumbSource = strPathArtist + item.Label + ".jpg";
+                                else if (System.IO.File.Exists(strPathArtist + item.Label + ".png")) strThumbSource = strPathArtist + item.Label + ".png";
                               }
                               if ((!System.IO.File.Exists(strThumb)) && (strThumb != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
                                 {
@@ -2117,11 +2121,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //Reset GLobal Filters !
                 GlobalFilterMinRating = false;
                 GlobalFilterTrailersOnly = false;
-                GlobalFilterString = string.Empty; // reset global filterstring
+                GlobalFilterStringTrailersOnly = String.Empty;
+                GlobalFilterStringMinRating = String.Empty;
                 MovieScrobbling = false; // reset scrobbler filter setting
                 if (conf.GlobalUnwatchedOnly) // Reset GlobalUnwatchedFilter to the setup default (can be changed via GUI menu)
-                  GlobalUnwatchedFilterString = "Checked like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
-                else GlobalUnwatchedFilterString = "";
+                  GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+                else 
+                  GlobalFilterStringUnwatched = String.Empty;
             }
             if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
             {
@@ -2733,15 +2739,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "globalunwatchedfilter":
                     // Global overlayfilter for unwatched movies ...
                     MyFilms.conf.GlobalUnwatchedOnly = !MyFilms.conf.GlobalUnwatchedOnly;
-                    LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalUnwatchedFilterString + "'");
                     if (conf.GlobalUnwatchedOnly)
-                      GlobalUnwatchedFilterString = "Checked like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
-                    else 
-                      GlobalUnwatchedFilterString = "";
-                    //if (MesFilms.conf.AlwaysDefaultView)
-                    //  Fin_Charge_Init(true, true); //DefaultSelect, reload
-                    //else
-                    //  Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
+                      GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+                    else
+                      GlobalFilterStringUnwatched = String.Empty;
+                    LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     Change_view("globaloptions");
                     break;
@@ -2753,12 +2755,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //if (GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
                     //if (!GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-                    GlobalFilterString = String.Empty;
-                    if (GlobalFilterMinRating) 
-                        GlobalFilterString = GlobalFilterString + "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
-                    if (GlobalFilterTrailersOnly) 
-                        GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
-                    LogMyFilms.Info("MF: (SetGlobalFilterString Trailers) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
+                    if (GlobalFilterTrailersOnly)
+                      GlobalFilterStringTrailersOnly = conf.StrStorageTrailer + " not like '' AND ";
+                    else
+                      GlobalFilterStringTrailersOnly = String.Empty;
+                    LogMyFilms.Info("MF: (SetGlobalFilterString Trailers) - 'GlobalFilterStringTrailersOnly' = '" + GlobalFilterStringTrailersOnly + "'");
                     GUIWaitCursor.Show();
                     //GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
@@ -2770,17 +2771,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // GlobalFilterMinRating
                     GlobalFilterMinRating = !GlobalFilterMinRating;
                     LogMyFilms.Info("MF: Global filter for MinimumRating is now set to '" + GlobalFilterMinRating + "'");
-                    //GUIDialogOK dlgOkFilterDBrating = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                    //dlgOkFilterDBrating.SetHeading(GUILocalizeStrings.Get(10798624));
-                    //dlgOkFilterDBrating.SetLine(1, "");
-                    //if (GlobalFilterMinRating) dlgOkFilterDBrating.SetLine(2, GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
-                    //if (!GlobalFilterMinRating) dlgOkFilterDBrating.SetLine(2, GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
-                    //dlgOkFilterDBrating.DoModal(GetID);
-                    //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-                    GlobalFilterString = "";
-                    if (GlobalFilterMinRating) GlobalFilterString = GlobalFilterString + "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
-                    if (GlobalFilterTrailersOnly) GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
-                    LogMyFilms.Info("MF: (SetGlobalFilterString MinRating) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
+                    if (GlobalFilterMinRating)
+                      GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
+                    else 
+                      GlobalFilterStringMinRating = String.Empty;
+                    LogMyFilms.Info("MF: (SetGlobalFilterString MinRating) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
                     GUIWaitCursor.Show();
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     GUIWaitCursor.Hide();
@@ -2801,15 +2796,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
                     LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-                    GlobalFilterString = string.Empty;
-                    if (GlobalFilterMinRating) GlobalFilterString = GlobalFilterString + "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
-                    if (GlobalFilterTrailersOnly) GlobalFilterString = GlobalFilterString + "Borrower not like '' AND ";
-                    LogMyFilms.Info("MF: (SetGlobalFilterString) - 'GlobalFilterString' = '" + GlobalFilterString + "'");
-                    GUIWaitCursor.Show();
                     if (GlobalFilterMinRating)
-                    {
-                        Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-                    }
+                      GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
+                    else 
+                      GlobalFilterStringMinRating = String.Empty;
+                    LogMyFilms.Info("MF: (SetGlobalFilterString) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
+                    GUIWaitCursor.Show();
+                    Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     GUIWaitCursor.Hide();
                     Change_view("globaloptions");
                     break;
@@ -2848,7 +2841,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     ArrayList w_index = new ArrayList();
                     int w_index_count = 0;
                     string t_number_id = "";
-                    DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + GlobalUnwatchedFilterString + " " + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                    DataRow[] wr = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
                     //Now build a list of valid movies in w_index with Number registered
                     foreach (DataRow wsr in wr)
                     {
@@ -4119,7 +4112,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (dlg == null) return;
                     dlg.Reset();
                     dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-                    DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + GlobalUnwatchedFilterString + " " + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                    string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+                    DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
                     w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
                     w_count.Add(0);
                     foreach (DataRow wsr in wr)
@@ -4525,7 +4519,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlg.Reset();
                     dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
                     //Modified to checked for GlobalFilterString
-                    DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + GlobalUnwatchedFilterString + " " + conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
+                    string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+                    DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
                     //DataColumn[] wc = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
                     w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
                     w_count.Add(0);
@@ -4701,15 +4696,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             keyboard.DoModal(GetID);
             if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
             {
-            ArrayList w_count = new ArrayList(); 
-                switch (choiceSearch[dlg.SelectedLabel])
+            ArrayList w_count = new ArrayList();
+            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+            switch (choiceSearch[dlg.SelectedLabel])
                 {
                     case "all":
                         if (dlg == null) return;
                         dlg.Reset();
                         dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-                        // Added GlobalFilterString to take Global Filters effective
-                        DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + GlobalUnwatchedFilterString + " " + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                        //DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                        DataRow[] wr = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                        LogMyFilms.Debug("MF: (GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
                         LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
                         LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
                         LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
@@ -4877,8 +4874,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("MF: (GlobalSearchAll) - ChosenProperty: SearchTest is '" + keyboard.Text + "'"); 
                         if (control_searchText(keyboard.Text))
                         {
-                            // Added GloablaFilterString to make filters effective
-                            DataRow[] wdr = BaseMesFilms.LectureDonnées(GlobalFilterString + " " + GlobalUnwatchedFilterString + " " + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                            DataRow[] wdr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                            LogMyFilms.Debug("MF: (GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
                             LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
                             LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
                             LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
@@ -5709,6 +5706,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.setGUIProperty("user.source.label", GUILocalizeStrings.Get(10798648));
          MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
          MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
+         MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
          // Clear GUI Properties when first entering the plugin
          // This will avoid ugly property names being seen before 
          // its corresponding value is assigned

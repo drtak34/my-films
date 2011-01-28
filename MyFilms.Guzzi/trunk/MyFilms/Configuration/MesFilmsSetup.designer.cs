@@ -119,8 +119,6 @@
           this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
           this.AntFilterText1 = new System.Windows.Forms.TextBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
-          this.lblUnwatchedItemsValue = new System.Windows.Forms.Label();
-          this.textBoxGlobalUnwatchedOnlyValue = new System.Windows.Forms.TextBox();
           this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
           this.label10 = new System.Windows.Forms.Label();
           this.SortSens = new System.Windows.Forms.ComboBox();
@@ -319,11 +317,6 @@
           this.btnLogoClearCache = new System.Windows.Forms.Button();
           this.AntUpdList = new System.Windows.Forms.TextBox();
           this.AntUpdField = new System.Windows.Forms.ComboBox();
-          this.gpspfield = new System.Windows.Forms.GroupBox();
-          this.lblUpdateValue = new System.Windows.Forms.Label();
-          this.txtfdupdate = new System.Windows.Forms.TextBox();
-          this.cbfdupdate = new System.Windows.Forms.ComboBox();
-          this.chksupplaystop = new System.Windows.Forms.CheckBox();
           this.Tab_General = new System.Windows.Forms.TabPage();
           this.lblYellowShowRequiredItems = new System.Windows.Forms.Label();
           this.groupBox_Security = new System.Windows.Forms.GroupBox();
@@ -351,13 +344,16 @@
           this.AntSearchField = new System.Windows.Forms.ComboBox();
           this.AntSearchList = new System.Windows.Forms.TextBox();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
+          this.chksupplaystop = new System.Windows.Forms.CheckBox();
+          this.lblUpdateValue = new System.Windows.Forms.Label();
           this.Label_UserProfileName = new System.Windows.Forms.Label();
+          this.txtfdupdate = new System.Windows.Forms.TextBox();
+          this.cbfdupdate = new System.Windows.Forms.ComboBox();
           this.UserProfileName = new System.Windows.Forms.TextBox();
           this.groupBoxUpdateByProperties = new System.Windows.Forms.GroupBox();
           this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.label33 = new System.Windows.Forms.Label();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
           this.ButDefCov = new System.Windows.Forms.Button();
@@ -436,6 +432,13 @@
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.gpspfield = new System.Windows.Forms.GroupBox();
+          this.cbWatched = new System.Windows.Forms.ComboBox();
+          this.label19 = new System.Windows.Forms.Label();
+          this.CheckWatchedPlayerStopped = new System.Windows.Forms.CheckBox();
+          this.lblUnwatchedItemsValue = new System.Windows.Forms.Label();
+          this.textBoxGlobalUnwatchedOnlyValue = new System.Windows.Forms.TextBox();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -455,7 +458,6 @@
           this.groupBox_SupplementarySearch.SuspendLayout();
           this.groupBox_TitleOrder.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
-          this.gpspfield.SuspendLayout();
           this.Tab_General.SuspendLayout();
           this.groupBox_Security.SuspendLayout();
           this.groupBox_PlayMovieInfos.SuspendLayout();
@@ -484,6 +486,7 @@
           this.groupBox13.SuspendLayout();
           this.groupBox10.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          this.gpspfield.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -744,8 +747,6 @@
           // 
           // groupBox_DefaultView
           // 
-          this.groupBox_DefaultView.Controls.Add(this.lblUnwatchedItemsValue);
-          this.groupBox_DefaultView.Controls.Add(this.textBoxGlobalUnwatchedOnlyValue);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalUnwatchedOnly);
           this.groupBox_DefaultView.Controls.Add(this.label10);
           this.groupBox_DefaultView.Controls.Add(this.SortSens);
@@ -758,38 +759,20 @@
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Text);
           this.groupBox_DefaultView.Location = new System.Drawing.Point(9, 6);
           this.groupBox_DefaultView.Name = "groupBox_DefaultView";
-          this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 176);
+          this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 177);
           this.groupBox_DefaultView.TabIndex = 26;
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
           // 
-          // lblUnwatchedItemsValue
-          // 
-          this.lblUnwatchedItemsValue.AutoSize = true;
-          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(27, 150);
-          this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
-          this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(193, 13);
-          this.lblUnwatchedItemsValue.TabIndex = 82;
-          this.lblUnwatchedItemsValue.Text = "Enter Value to identify unwatched items";
-          // 
-          // textBoxGlobalUnwatchedOnlyValue
-          // 
-          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(237, 147);
-          this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
-          this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(103, 20);
-          this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 81;
-          this.ToolTip1.SetToolTip(this.textBoxGlobalUnwatchedOnlyValue, "By Default, unwatched items are identified by having \"false\" in the checked field" +
-                  ".\r\nHowever, you can define a value other than that, if you require it.");
-          // 
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 123);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 135);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
-          this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(299, 17);
+          this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(302, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
-          this.chkGlobalUnwatchedOnly.Text = "Show only unwatched movies (can be changed from GUI)";
+          this.chkGlobalUnwatchedOnly.Text = "Show only unwatched movies (can be changed from GUI).";
           this.ToolTip1.SetToolTip(this.chkGlobalUnwatchedOnly, resources.GetString("chkGlobalUnwatchedOnly.ToolTip"));
           this.chkGlobalUnwatchedOnly.UseVisualStyleBackColor = true;
           // 
@@ -1136,7 +1119,7 @@
           this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(354, 89);
           this.groupBox_AntUpdatingItems.TabIndex = 33;
           this.groupBox_AntUpdatingItems.TabStop = false;
-          this.groupBox_AntUpdatingItems.Text = "User defined Updating Items";
+          this.groupBox_AntUpdatingItems.Text = "User defined Updating Items for manual updates";
           this.ToolTip1.SetToolTip(this.groupBox_AntUpdatingItems, resources.GetString("groupBox_AntUpdatingItems.ToolTip"));
           // 
           // chkWindowsFileDialog
@@ -2718,7 +2701,7 @@
           // checkWatchedInProfile
           // 
           this.checkWatchedInProfile.AutoSize = true;
-          this.checkWatchedInProfile.Location = new System.Drawing.Point(9, 54);
+          this.checkWatchedInProfile.Location = new System.Drawing.Point(10, 97);
           this.checkWatchedInProfile.Name = "checkWatchedInProfile";
           this.checkWatchedInProfile.Size = new System.Drawing.Size(338, 17);
           this.checkWatchedInProfile.TabIndex = 70;
@@ -2731,11 +2714,11 @@
           // CheckWatched
           // 
           this.CheckWatched.AutoSize = true;
-          this.CheckWatched.Location = new System.Drawing.Point(9, 24);
+          this.CheckWatched.Location = new System.Drawing.Point(10, 15);
           this.CheckWatched.Name = "CheckWatched";
-          this.CheckWatched.Size = new System.Drawing.Size(270, 17);
+          this.CheckWatched.Size = new System.Drawing.Size(269, 17);
           this.CheckWatched.TabIndex = 69;
-          this.CheckWatched.Text = "Update the ‘Checked’ field when movie is launched";
+          this.CheckWatched.Text = "Update the \'Watched\' field when movie is launched";
           this.ToolTip1.SetToolTip(this.CheckWatched, resources.GetString("CheckWatched.ToolTip"));
           this.CheckWatched.UseVisualStyleBackColor = true;
           // 
@@ -2884,58 +2867,6 @@
           this.AntUpdField.TabIndex = 81;
           this.ToolTip1.SetToolTip(this.AntUpdField, "Choose a DB item to add to the property update list.");
           this.AntUpdField.SelectedIndexChanged += new System.EventHandler(this.AntUpdField_SelectedIndexChanged);
-          // 
-          // gpspfield
-          // 
-          this.gpspfield.Controls.Add(this.lblUpdateValue);
-          this.gpspfield.Controls.Add(this.txtfdupdate);
-          this.gpspfield.Controls.Add(this.cbfdupdate);
-          this.gpspfield.Controls.Add(this.chksupplaystop);
-          this.gpspfield.Enabled = false;
-          this.gpspfield.Location = new System.Drawing.Point(381, 6);
-          this.gpspfield.Name = "gpspfield";
-          this.gpspfield.Size = new System.Drawing.Size(360, 100);
-          this.gpspfield.TabIndex = 18;
-          this.gpspfield.TabStop = false;
-          this.gpspfield.Text = "Player finished Update Action";
-          this.ToolTip1.SetToolTip(this.gpspfield, resources.GetString("gpspfield.ToolTip"));
-          // 
-          // lblUpdateValue
-          // 
-          this.lblUpdateValue.AutoSize = true;
-          this.lblUpdateValue.Location = new System.Drawing.Point(8, 50);
-          this.lblUpdateValue.Name = "lblUpdateValue";
-          this.lblUpdateValue.Size = new System.Drawing.Size(109, 13);
-          this.lblUpdateValue.TabIndex = 20;
-          this.lblUpdateValue.Text = "Field to update/Value";
-          // 
-          // txtfdupdate
-          // 
-          this.txtfdupdate.Location = new System.Drawing.Point(202, 69);
-          this.txtfdupdate.Name = "txtfdupdate";
-          this.txtfdupdate.Size = new System.Drawing.Size(144, 20);
-          this.txtfdupdate.TabIndex = 16;
-          // 
-          // cbfdupdate
-          // 
-          this.cbfdupdate.FormattingEnabled = true;
-          this.cbfdupdate.Location = new System.Drawing.Point(10, 68);
-          this.cbfdupdate.Name = "cbfdupdate";
-          this.cbfdupdate.Size = new System.Drawing.Size(150, 21);
-          this.cbfdupdate.TabIndex = 15;
-          this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
-          // 
-          // chksupplaystop
-          // 
-          this.chksupplaystop.AutoSize = true;
-          this.chksupplaystop.Enabled = false;
-          this.chksupplaystop.Location = new System.Drawing.Point(10, 25);
-          this.chksupplaystop.Name = "chksupplaystop";
-          this.chksupplaystop.Size = new System.Drawing.Size(184, 17);
-          this.chksupplaystop.TabIndex = 19;
-          this.chksupplaystop.Text = "Update Field when player finishes";
-          this.chksupplaystop.UseVisualStyleBackColor = true;
-          this.chksupplaystop.CheckedChanged += new System.EventHandler(this.chksupplaystop_CheckedChanged);
           // 
           // Tab_General
           // 
@@ -3234,32 +3165,74 @@
           // 
           // groupBox2
           // 
+          this.groupBox2.Controls.Add(this.lblUnwatchedItemsValue);
+          this.groupBox2.Controls.Add(this.textBoxGlobalUnwatchedOnlyValue);
+          this.groupBox2.Controls.Add(this.CheckWatchedPlayerStopped);
           this.groupBox2.Controls.Add(this.Label_UserProfileName);
           this.groupBox2.Controls.Add(this.UserProfileName);
+          this.groupBox2.Controls.Add(this.label19);
+          this.groupBox2.Controls.Add(this.cbWatched);
           this.groupBox2.Controls.Add(this.checkWatchedInProfile);
           this.groupBox2.Controls.Add(this.CheckWatched);
-          this.groupBox2.Location = new System.Drawing.Point(381, 132);
+          this.groupBox2.Location = new System.Drawing.Point(17, 101);
           this.groupBox2.Name = "groupBox2";
-          this.groupBox2.Size = new System.Drawing.Size(360, 109);
+          this.groupBox2.Size = new System.Drawing.Size(354, 143);
           this.groupBox2.TabIndex = 72;
           this.groupBox2.TabStop = false;
-          this.groupBox2.Text = "Movie Updates - watched-status";
-          this.ToolTip1.SetToolTip(this.groupBox2, "This option allows you updating field info for storing your \"watched status\".");
+          this.groupBox2.Text = "Watched-Status Handling";
+          this.ToolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
+          // 
+          // chksupplaystop
+          // 
+          this.chksupplaystop.AutoSize = true;
+          this.chksupplaystop.Enabled = false;
+          this.chksupplaystop.Location = new System.Drawing.Point(12, 19);
+          this.chksupplaystop.Name = "chksupplaystop";
+          this.chksupplaystop.Size = new System.Drawing.Size(184, 17);
+          this.chksupplaystop.TabIndex = 19;
+          this.chksupplaystop.Text = "Update Field when player finishes";
+          this.chksupplaystop.UseVisualStyleBackColor = true;
+          this.chksupplaystop.CheckedChanged += new System.EventHandler(this.chksupplaystop_CheckedChanged);
+          // 
+          // lblUpdateValue
+          // 
+          this.lblUpdateValue.AutoSize = true;
+          this.lblUpdateValue.Location = new System.Drawing.Point(9, 39);
+          this.lblUpdateValue.Name = "lblUpdateValue";
+          this.lblUpdateValue.Size = new System.Drawing.Size(109, 13);
+          this.lblUpdateValue.TabIndex = 20;
+          this.lblUpdateValue.Text = "Field to update/Value";
           // 
           // Label_UserProfileName
           // 
           this.Label_UserProfileName.AutoSize = true;
-          this.Label_UserProfileName.Location = new System.Drawing.Point(27, 76);
+          this.Label_UserProfileName.Location = new System.Drawing.Point(88, 117);
           this.Label_UserProfileName.Name = "Label_UserProfileName";
           this.Label_UserProfileName.Size = new System.Drawing.Size(92, 13);
           this.Label_UserProfileName.TabIndex = 72;
           this.Label_UserProfileName.Text = "User Profile Name";
           // 
+          // txtfdupdate
+          // 
+          this.txtfdupdate.Location = new System.Drawing.Point(170, 60);
+          this.txtfdupdate.Name = "txtfdupdate";
+          this.txtfdupdate.Size = new System.Drawing.Size(144, 20);
+          this.txtfdupdate.TabIndex = 16;
+          // 
+          // cbfdupdate
+          // 
+          this.cbfdupdate.FormattingEnabled = true;
+          this.cbfdupdate.Location = new System.Drawing.Point(10, 60);
+          this.cbfdupdate.Name = "cbfdupdate";
+          this.cbfdupdate.Size = new System.Drawing.Size(150, 21);
+          this.cbfdupdate.TabIndex = 15;
+          this.cbfdupdate.SelectedIndexChanged += new System.EventHandler(this.cbfdupdate_SelectedIndexChanged);
+          // 
           // UserProfileName
           // 
-          this.UserProfileName.Location = new System.Drawing.Point(143, 73);
+          this.UserProfileName.Location = new System.Drawing.Point(186, 114);
           this.UserProfileName.Name = "UserProfileName";
-          this.UserProfileName.Size = new System.Drawing.Size(204, 20);
+          this.UserProfileName.Size = new System.Drawing.Size(162, 20);
           this.UserProfileName.TabIndex = 71;
           // 
           // groupBoxUpdateByProperties
@@ -3309,16 +3282,6 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(23, 25);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
-          this.traktConfiguration1.TabIndex = 0;
           // 
           // comboBoxLogoPresets
           // 
@@ -3393,12 +3356,13 @@
           // 
           this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
           this.groupBoxDeletionOptions.Controls.Add(this.gpsuppress);
-          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(17, 102);
+          this.groupBoxDeletionOptions.Controls.Add(this.gpspfield);
+          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(378, 6);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
-          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(354, 139);
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(350, 238);
           this.groupBoxDeletionOptions.TabIndex = 35;
           this.groupBoxDeletionOptions.TabStop = false;
-          this.groupBoxDeletionOptions.Text = "Deletion Options";
+          this.groupBoxDeletionOptions.Text = "Deletion Options for automatic updates and/or deletions";
           this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
           // 
           // chkSuppress
@@ -3421,14 +3385,14 @@
           this.gpsuppress.Enabled = false;
           this.gpsuppress.Location = new System.Drawing.Point(15, 30);
           this.gpsuppress.Name = "gpsuppress";
-          this.gpsuppress.Size = new System.Drawing.Size(321, 106);
+          this.gpsuppress.Size = new System.Drawing.Size(321, 97);
           this.gpsuppress.TabIndex = 2;
           this.gpsuppress.TabStop = false;
           // 
           // rbsuppress2
           // 
           this.rbsuppress2.AutoSize = true;
-          this.rbsuppress2.Location = new System.Drawing.Point(15, 35);
+          this.rbsuppress2.Location = new System.Drawing.Point(15, 33);
           this.rbsuppress2.Name = "rbsuppress2";
           this.rbsuppress2.Size = new System.Drawing.Size(189, 17);
           this.rbsuppress2.TabIndex = 5;
@@ -3439,7 +3403,7 @@
           // rbsuppress4
           // 
           this.rbsuppress4.AutoSize = true;
-          this.rbsuppress4.Location = new System.Drawing.Point(15, 81);
+          this.rbsuppress4.Location = new System.Drawing.Point(15, 75);
           this.rbsuppress4.Name = "rbsuppress4";
           this.rbsuppress4.Size = new System.Drawing.Size(201, 17);
           this.rbsuppress4.TabIndex = 4;
@@ -3451,7 +3415,7 @@
           // rbsuppress3
           // 
           this.rbsuppress3.AutoSize = true;
-          this.rbsuppress3.Location = new System.Drawing.Point(15, 58);
+          this.rbsuppress3.Location = new System.Drawing.Point(15, 54);
           this.rbsuppress3.Name = "rbsuppress3";
           this.rbsuppress3.Size = new System.Drawing.Size(196, 17);
           this.rbsuppress3.TabIndex = 2;
@@ -3669,7 +3633,6 @@
           // 
           this.Tab_Update.Controls.Add(this.groupBox_AntUpdatingItems);
           this.Tab_Update.Controls.Add(this.groupBox2);
-          this.Tab_Update.Controls.Add(this.gpspfield);
           this.Tab_Update.Controls.Add(this.groupBoxUpdateByProperties);
           this.Tab_Update.Controls.Add(this.groupBoxDeletionOptions);
           this.Tab_Update.Location = new System.Drawing.Point(4, 22);
@@ -4171,6 +4134,75 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // gpspfield
+          // 
+          this.gpspfield.Controls.Add(this.chksupplaystop);
+          this.gpspfield.Controls.Add(this.txtfdupdate);
+          this.gpspfield.Controls.Add(this.lblUpdateValue);
+          this.gpspfield.Controls.Add(this.cbfdupdate);
+          this.gpspfield.Enabled = false;
+          this.gpspfield.Location = new System.Drawing.Point(15, 133);
+          this.gpspfield.Name = "gpspfield";
+          this.gpspfield.Size = new System.Drawing.Size(321, 93);
+          this.gpspfield.TabIndex = 18;
+          this.gpspfield.TabStop = false;
+          this.gpspfield.Text = "Player finished Update Action";
+          this.ToolTip1.SetToolTip(this.gpspfield, resources.GetString("gpspfield.ToolTip"));
+          // 
+          // cbWatched
+          // 
+          this.cbWatched.FormattingEnabled = true;
+          this.cbWatched.Location = new System.Drawing.Point(10, 74);
+          this.cbWatched.Name = "cbWatched";
+          this.cbWatched.Size = new System.Drawing.Size(123, 21);
+          this.cbWatched.TabIndex = 73;
+          // 
+          // label19
+          // 
+          this.label19.AutoSize = true;
+          this.label19.Location = new System.Drawing.Point(8, 58);
+          this.label19.Name = "label19";
+          this.label19.Size = new System.Drawing.Size(150, 13);
+          this.label19.TabIndex = 74;
+          this.label19.Text = "Field used for Watched Status";
+          // 
+          // CheckWatchedPlayerStopped
+          // 
+          this.CheckWatchedPlayerStopped.AutoSize = true;
+          this.CheckWatchedPlayerStopped.Location = new System.Drawing.Point(10, 34);
+          this.CheckWatchedPlayerStopped.Name = "CheckWatchedPlayerStopped";
+          this.CheckWatchedPlayerStopped.Size = new System.Drawing.Size(279, 17);
+          this.CheckWatchedPlayerStopped.TabIndex = 75;
+          this.CheckWatchedPlayerStopped.Text = "Update the \'Watched\' field when playback is finished.";
+          this.CheckWatchedPlayerStopped.UseVisualStyleBackColor = true;
+          // 
+          // lblUnwatchedItemsValue
+          // 
+          this.lblUnwatchedItemsValue.AutoSize = true;
+          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(183, 58);
+          this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
+          this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(165, 13);
+          this.lblUnwatchedItemsValue.TabIndex = 84;
+          this.lblUnwatchedItemsValue.Text = "Value to identify unwatched items";
+          // 
+          // textBoxGlobalUnwatchedOnlyValue
+          // 
+          this.textBoxGlobalUnwatchedOnlyValue.Location = new System.Drawing.Point(186, 75);
+          this.textBoxGlobalUnwatchedOnlyValue.Name = "textBoxGlobalUnwatchedOnlyValue";
+          this.textBoxGlobalUnwatchedOnlyValue.Size = new System.Drawing.Size(162, 20);
+          this.textBoxGlobalUnwatchedOnlyValue.TabIndex = 83;
+          this.ToolTip1.SetToolTip(this.textBoxGlobalUnwatchedOnlyValue, resources.GetString("textBoxGlobalUnwatchedOnlyValue.ToolTip"));
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(23, 25);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
           // MesFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4233,8 +4265,6 @@
           this.groupBox_TitleOrder.ResumeLayout(false);
           this.groupBox_TitleOrder.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
-          this.gpspfield.ResumeLayout(false);
-          this.gpspfield.PerformLayout();
           this.Tab_General.ResumeLayout(false);
           this.Tab_General.PerformLayout();
           this.groupBox_Security.ResumeLayout(false);
@@ -4278,6 +4308,8 @@
           this.groupBox10.ResumeLayout(false);
           this.groupBox10.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          this.gpspfield.ResumeLayout(false);
+          this.gpspfield.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -4448,7 +4480,6 @@
         private RadioButton rbsuppress2;
         private RadioButton rbsuppress4;
         private RadioButton rbsuppress3;
-        private GroupBox gpspfield;
         private CheckBox chksupplaystop;
         private Button btnLogosPath;
         private TextBox txtLogosPath;
@@ -4622,6 +4653,10 @@
         private Button btnUpdate;
         private TabPage Tab_Trakt;
         private TraktConfiguration traktConfiguration1;
+        private GroupBox gpspfield;
+        private Label label19;
+        private ComboBox cbWatched;
+        private CheckBox CheckWatchedPlayerStopped;
         private Label lblUnwatchedItemsValue;
         private TextBox textBoxGlobalUnwatchedOnlyValue;
     }

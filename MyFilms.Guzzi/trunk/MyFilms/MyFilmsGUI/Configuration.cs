@@ -64,6 +64,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
                 SearchSubDirsTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirsTrailer", "No");
                 CheckWatched = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckWatched", false);
+                CheckWatchedPlayerStopped = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckWatchedPlayerStopped", false);
                 StrIdentItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentItem", string.Empty);
                 StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntTitle1", string.Empty);
                 StrTitle2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntTitle2", string.Empty);
@@ -118,6 +119,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrSuppress = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Suppress", false);
                 StrSupPlayer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressPlayed", false);
                 StrSuppressType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressType", string.Empty);
+                StrWatchedField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WatchedField", "Checked"); // Defaults to "Checked", if no value set, as it's most used in ANT like that
                 StrSuppressField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressField", string.Empty);
                 StrSuppressValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressValue", string.Empty);
                 switch (StrFileType)
@@ -653,10 +655,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool checkWatched = false;
         public bool CheckWatched
         {
-            get { return checkWatched; }
-            set { checkWatched = value; }
+          get { return checkWatched; }
+          set { checkWatched = value; }
         }
-       
+
+        private bool checkWatchedPlayerStopped = false;
+        public bool CheckWatchedPlayerStopped
+        {
+          get { return checkWatchedPlayerStopped; }
+          set { checkWatchedPlayerStopped = value; }
+        }
+
         private string strIdentItem = string.Empty;
         public string StrIdentItem
         {
@@ -1074,6 +1083,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strSuppressValue; }
             set { strSuppressValue = value; }
+        }
+        private string strWatchedField = string.Empty;
+        public string StrWatchedField
+        {
+          get { return strWatchedField; }
+          set { strWatchedField = value; }
         }
         private string strPlayedDfltSelect = string.Empty;
         public string StrPlayedDfltSelect

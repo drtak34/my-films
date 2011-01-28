@@ -175,6 +175,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntItem3.Items.Add(dc.ColumnName);
                 }
                 cbfdupdate.Items.Add(dc.ColumnName);
+                cbWatched.Items.Add(dc.ColumnName);
                 CmdPar.Items.Add(dc.ColumnName);
                 if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "DateAdded") &&
                     (dc.ColumnName != "Length_Num"))
@@ -788,6 +789,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirs", SearchSubDirs.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", SearchSubDirsTrailer.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", CheckWatched.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", CheckWatchedPlayerStopped.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", AlwaysDefaultView.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", textBoxGlobalUnwatchedOnlyValue.Text);
@@ -815,6 +817,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "LastID", "7986");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Suppress", chkSuppress.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", chksupplaystop.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WatchedField", cbWatched.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressField", cbfdupdate.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressValue", txtfdupdate.Text.ToString());
             if (rbsuppress1.Checked)
@@ -1093,6 +1096,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", string.Empty);
             chkSuppress.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Suppress", false);
             chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", false);
+            cbWatched.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WatchedField", "Checked");
             cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressField", string.Empty);
             txtfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressValue", string.Empty);
             chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", true);  // Changed default to "true" to use default logo config file // had to reset to false, as logos are heavily relying on an existing DB config ! // Rechanged to true, as now config name should be required anymore for logo config!
@@ -1148,6 +1152,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             radioButton1.Checked = false;
             radioButton2.Checked = false;
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
+            CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", false);
             AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", false);
             chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", false);
             textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", "false");
@@ -1325,6 +1330,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkSuppress.Checked = false;
             chksupplaystop.Checked = false;
             cbfdupdate.ResetText();
+            cbWatched.ResetText();
             txtfdupdate.ResetText();
             rbsuppress1.Checked = true;
             SearchSubDirs.Checked = false;
@@ -1333,6 +1339,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             comboWOLtimeout.ResetText();
             check_WOL_Userdialog.Checked = false;
             CheckWatched.Checked = false;
+            CheckWatchedPlayerStopped.Checked = false;
             NAS_Name_1.ResetText();
             NAS_Name_2.ResetText();
             NAS_Name_3.ResetText();

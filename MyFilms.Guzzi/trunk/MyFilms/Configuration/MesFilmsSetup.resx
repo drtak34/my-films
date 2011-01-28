@@ -167,7 +167,10 @@ Adult movies can then be included in another configuration that is password prot
     <value>Unwatched option acts as global overlayfilter for all views
 and this setting is used for start view.
 It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.</value>
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+You can configure the field and value to identify unwatched films
+on "update" tab (Watched-Status Handling).</value>
   </data>
   <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
@@ -296,7 +299,7 @@ when no thumb for views is available.</value>
   </data>
   <data name="PathStorageTrailer.ToolTip" xml:space="preserve">
     <value>Enter or select the path for extended search for trailers.
-MyFilms will try to find matching media files based on the title chosen for trailersearch 
+MyFilms will try to find matching media files based on the title chosen for trailer search 
 and media files in subdirectories containing the movie name.
 You can add more than one searchpath by separating them with semicolon, e.g. "path1; path2".
 If you choose a new path it will be added to your existing path(es).</value>
@@ -373,9 +376,9 @@ Those searches will be shown as separate entries in the search menu.
 They obey the filtersettings, so will be based on views you have defined.</value>
   </data>
   <data name="CheckWatched.ToolTip" xml:space="preserve">
-    <value>Select this option if you want the “Checked” field of your database 
+    <value>Select this option if you want the configured “Watched” field of your database 
 to be updated each time a movie is launched.
-You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "Watched" field
 </value>
   </data>
   <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
@@ -395,9 +398,21 @@ movie 3: Moviecollection\movie3
 
 Will show "Moviecollection" with 3 items in it.</value>
   </data>
-  <data name="gpspfield.ToolTip" xml:space="preserve">
-    <value>This defines the action taken, when the player finishes.
+  <data name="textBoxGlobalUnwatchedOnlyValue.ToolTip" xml:space="preserve">
+    <value>By Default, unwatched items are identified by having either "false" or "" (empty) in the related field.
+The field used for watched / unwatched status can be configured in the Update Tab.
+
+However, you can define a value other than that, if you require it.</value>
+  </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value>This option allows you updating field info for storing your "watched status".
+
+You can choose field to be used for "watched status" - a good recommendation is "checked".
+
+You can choose to update this field when starting a movie or when playback is finished.
+
 You can update e.g. the "checked" field with a value "true to indicate "watched status". 
+
 However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
 
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
@@ -419,6 +434,13 @@ and it's subdirectories for logos matching the name in the logo rule. It should 
 This is mainly required, if you have only image names without full path stored in your DB.
 You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
 </value>
+  </data>
+  <data name="gpspfield.ToolTip" xml:space="preserve">
+    <value>This defines the action taken, when the player finishes.
+You can update e.g. the "checked" field with a value "true to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
+
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
   <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
     <value>The Database Deletion Options allow you to update and/or delete records after the corresponding movie is watched.
