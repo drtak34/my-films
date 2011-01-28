@@ -4249,7 +4249,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
             foreach (string filefound in files)
                 {
-                    if (((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trlr")))&& (MediaPortal.Util.Utils.IsVideo(filefound)))
+                    if (((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trl")))&& (MediaPortal.Util.Utils.IsVideo(filefound)))
                     {
                         wsize = new System.IO.FileInfo(filefound).Length;
                         result.Add(filefound);

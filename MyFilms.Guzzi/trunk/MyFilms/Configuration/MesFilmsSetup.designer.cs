@@ -439,6 +439,7 @@
           this.lblUnwatchedItemsValue = new System.Windows.Forms.Label();
           this.textBoxGlobalUnwatchedOnlyValue = new System.Windows.Forms.TextBox();
           this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.textBoxActiveLogoPath = new System.Windows.Forms.TextBox();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -1555,8 +1556,7 @@
           this.chkLogos.Size = new System.Drawing.Size(91, 17);
           this.chkLogos.TabIndex = 74;
           this.chkLogos.Text = "Enable Logos";
-          this.ToolTip1.SetToolTip(this.chkLogos, "Select this option if you want the following logos to be displayed for selected i" +
-                  "tems.");
+          this.ToolTip1.SetToolTip(this.chkLogos, resources.GetString("chkLogos.ToolTip"));
           this.chkLogos.UseVisualStyleBackColor = true;
           this.chkLogos.CheckedChanged += new System.EventHandler(this.chkLogos_CheckedChanged);
           // 
@@ -2376,7 +2376,7 @@
           this.LogoView.Location = new System.Drawing.Point(7, 59);
           this.LogoView.MultiSelect = false;
           this.LogoView.Name = "LogoView";
-          this.LogoView.Size = new System.Drawing.Size(734, 191);
+          this.LogoView.Size = new System.Drawing.Size(734, 170);
           this.LogoView.TabIndex = 90;
           this.ToolTip1.SetToolTip(this.LogoView, resources.GetString("LogoView.ToolTip"));
           this.LogoView.UseCompatibleStateImageBehavior = false;
@@ -3675,6 +3675,7 @@
           // 
           // Tab_Logos
           // 
+          this.Tab_Logos.Controls.Add(this.textBoxActiveLogoPath);
           this.Tab_Logos.Controls.Add(this.btnUpdate);
           this.Tab_Logos.Controls.Add(this.btnLogoClearCache);
           this.Tab_Logos.Controls.Add(this.lblLogoPresets);
@@ -3711,6 +3712,7 @@
           this.Tab_Logos.Text = "Logos";
           this.Tab_Logos.ToolTipText = "Setup for logos";
           this.Tab_Logos.UseVisualStyleBackColor = true;
+          this.Tab_Logos.Click += new System.EventHandler(this.Tab_Logos_Click);
           // 
           // btnUpdate
           // 
@@ -4198,10 +4200,20 @@
           this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                       | System.Windows.Forms.AnchorStyles.Left)
                       | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(23, 25);
+          this.traktConfiguration1.Location = new System.Drawing.Point(23, 6);
           this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(693, 269);
+          this.traktConfiguration1.Size = new System.Drawing.Size(693, 345);
           this.traktConfiguration1.TabIndex = 0;
+          // 
+          // textBoxActiveLogoPath
+          // 
+          this.textBoxActiveLogoPath.Enabled = false;
+          this.textBoxActiveLogoPath.Location = new System.Drawing.Point(9, 230);
+          this.textBoxActiveLogoPath.Name = "textBoxActiveLogoPath";
+          this.textBoxActiveLogoPath.Size = new System.Drawing.Size(732, 20);
+          this.textBoxActiveLogoPath.TabIndex = 104;
+          this.ToolTip1.SetToolTip(this.textBoxActiveLogoPath, "This is the active logo with full path.\r\nIt is resulting by the settings for sear" +
+                  "chpath, the logo rule and the existance of skin logos for the active skin.\r\n");
           // 
           // MesFilmsSetup
           // 
@@ -4659,5 +4671,6 @@
         private CheckBox CheckWatchedPlayerStopped;
         private Label lblUnwatchedItemsValue;
         private TextBox textBoxGlobalUnwatchedOnlyValue;
+        private TextBox textBoxActiveLogoPath;
     }
 }

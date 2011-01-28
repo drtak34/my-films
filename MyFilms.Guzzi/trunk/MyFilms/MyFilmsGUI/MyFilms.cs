@@ -1516,7 +1516,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg1 == null) return;
             System.Collections.Generic.List<string> choiceView = new System.Collections.Generic.List<string>();
             dlg1.Reset();
-            dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
+            dlg1.SetHeading(GUILocalizeStrings.Get(10798701)); // Options Menu
             if (Configuration.NbConfig > 1)
             {
                 dlg1.Add(GUILocalizeStrings.Get(6022));   // Change Config 
@@ -2484,7 +2484,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //dlg.Reset();
                     System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
                     dlg.SetHeading(GUILocalizeStrings.Get(10798727)); // menu
-                    dlg.Add("Zurück");
+                    dlg.Add(GUILocalizeStrings.Get(712)); //Return
                     choiceSearch.Add("BACK");
 
                     if (MyFilms.conf.StrNasName1.Length > 0)
@@ -2539,7 +2539,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                         {
                             dlgOk.SetLine(1, "Servername: '" + MyFilms.conf.StrNasName1 + "', MAC: '" + MyFilms.conf.StrNasMAC1 + "'");
-                            dlgOk.SetLine(2, "Start nicht möglich, Konfiguration?");
+                            dlgOk.SetLine(2, "Start not possible, check config?");
                         }
                         dlgOk.DoModal(GetID);
                             break;
@@ -2563,7 +2563,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                         {
                             dlgOk.SetLine(1, "Servername: '" + MyFilms.conf.StrNasName2 + "', MAC: '" + MyFilms.conf.StrNasMAC2 + "'");
-                            dlgOk.SetLine(2, "Start nicht möglich, Konfiguration?");
+                            dlgOk.SetLine(2, "Start not possible, check config?");
                         }
                         dlgOk.DoModal(GetID);
                         break;
@@ -2587,7 +2587,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                         {
                             dlgOk.SetLine(1, "Servername: '" + MyFilms.conf.StrNasName3 + "', MAC: '" + MyFilms.conf.StrNasMAC3 + "'");
-                            dlgOk.SetLine(2, "Start nicht möglich, Konfiguration?");
+                            dlgOk.SetLine(2, "Start not possible, check config?");
                         }
                         dlgOk.DoModal(GetID);
                         break;
@@ -2600,7 +2600,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     if (dlg1 == null) return;
                     dlg1.Reset();
-                    dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                    dlg1.SetHeading(GUILocalizeStrings.Get(10798689)); // Global Options ...
                     System.Collections.Generic.List<string> choiceViewGlobalOptions = new System.Collections.Generic.List<string>();
 
                     // Change global Unwatchedfilteroption
@@ -2662,7 +2662,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIDialogMenu dlg2 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     if (dlg2 == null) return;
                     dlg2.Reset();
-                    dlg2.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                    dlg2.SetHeading(GUILocalizeStrings.Get(10798690)); // Global Updates ...
                     System.Collections.Generic.List<string> choiceViewGlobalUpdates = new System.Collections.Generic.List<string>();
 
                     if (MyFilms.conf.StrAMCUpd)
@@ -5392,7 +5392,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
             foreach (string filefound in files)
             {
-                if (((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trlr"))) && (Utils.IsVideo(filefound)))
+                if (((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trl"))) && (Utils.IsVideo(filefound)))
                 {
                     wsize = new System.IO.FileInfo(filefound).Length;
                     result.Add(filefound);

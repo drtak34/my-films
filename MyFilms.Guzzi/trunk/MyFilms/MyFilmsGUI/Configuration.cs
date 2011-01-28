@@ -1198,7 +1198,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return string.Empty;
             }
             dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
+            dlg.SetHeading(GUILocalizeStrings.Get(6022)); // Choose MyFilms DB Config
 //            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
 //            {
             XmlConfig XmlConfig = new XmlConfig();

@@ -54,7 +54,7 @@
     <String id="2998">min</String>
     <String id="4514">Download fanart (all films)</String>
     <String id="5910">Getting film info</String>
-    <String id="6022">Film set-up</String>
+    <String id="6022">Choose MyFilms DB Config</String>
     <String id="6029">Change</String>
     <String id="200026">Country</String>
     <String id="200027">Watched</String>
@@ -99,8 +99,8 @@
     <String id="10798611">Function selection for</String>
     <String id="10798612">Producer</String>
     <String id="10798613">Choose property for searching</String>
-    <String id="10798614">Search related films by property</String>
-    <String id="10798615">Search global films by property</String>
+    <String id="10798614">Search related films by properties</String>
+    <String id="10798615">Search all fims by properties</String>
     <String id="10798616">Search on all properties</String>
     <String id="10798617">Search on property </String>
     <String id="10798618">Global search for string '{0}'</String>
