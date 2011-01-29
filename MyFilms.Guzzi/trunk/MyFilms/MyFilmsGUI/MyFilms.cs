@@ -281,7 +281,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //public enum optimizeDisabled;
         public static bool InitialStart = false; //Added to implement InitialViewSetup, ToDo: Add Logic
         private bool LoadWithParameterSupported = false;
-        public static bool ReturnFromExternalPluginInfo = false;
+        //public static bool ReturnFromExternalPluginInfo = false;
         #endregion
 
 
@@ -350,8 +350,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
         {
-            //InitLogger(); // Initialize Logger 
-            
             LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
             Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
 
@@ -476,9 +474,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //---------------------------------------------------------------------------------------
                     // Windows Init
                     //---------------------------------------------------------------------------------------
+                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
                     base.OnMessage(messageType);
                     //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
-                    if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb) && (!ReturnFromExternalPluginInfo))
+                    if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
                     {
                         Prev_MenuID = PreviousWindowId; 
                         InitMainScreen();
@@ -502,7 +501,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
                     if (!bgLoadMovieList.IsBusy)
                     {
-                        AsynLoadMovieList();
+                      LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
+                      AsynLoadMovieList();
                     }
                     // ********************************
                     // Originally Deactivated by Zebons    
@@ -511,17 +511,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIControl.ShowControl(GetID, 34);
                     GUIWaitCursor.Hide();
 
-                    if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb) && !ReturnFromExternalPluginInfo)
+                    if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
                         Fin_Charge_Init(true,false);
                     else
                         Fin_Charge_Init(false, false);
 
-                    ReturnFromExternalPluginInfo = false;
-
+                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
                     return true;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
-                    LogMyFilms.Debug("MF: GUI_MSG_WINDOW_DEINIT recognized !"); 
+                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
                     GUITextureManager.CleanupThumbs();
 
                     if (Configuration.CurrentConfig != "")
@@ -549,8 +548,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
                     //m_bFanartTimerDisabled = true;
 
-                    ReturnFromExternalPluginInfo = false;
+                    //ReturnFromExternalPluginInfo = false; Can't call here, as it's also used for calls from menu with "return"
 
+                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
                     return true; // fall through to call base class?
 
                 case GUIMessage.MessageType.GUI_MSG_CLICKED:
@@ -919,21 +919,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else
                 {   // Jump back to prev view_display (categorised by year, genre etc)
-                    if (conf.WStrSort == "ACTORS")
-                    {
-                        conf.StrSelect = "Actors like '*" + conf.StrActors + "*'";
+                    if (conf.WStrSort.ToLower() == "actors")
+                      {
+                          conf.StrSelect = "Actors like '*" + conf.StrActors + "*'";
+                          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
+                          getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
+                      }
+                    else if (conf.WStrSort.ToLower() == "producer")
+                      {
+                        conf.StrSelect = "Producer like '*" + conf.StrActors + "*'";
                         conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
                         getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
-                    }
+                      }
+                    else if (conf.WStrSort.ToLower() == "director")
+                      {
+                        conf.StrSelect = "Director like '*" + conf.StrActors + "*'";
+                        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
+                        getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
+                      }
                     else
-                    {
-                        SelItem = NewString.StripChars(@"[]", conf.StrTxtSelect);
-                        if (conf.WStrSort == "DateAdded")
-                            getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", "Date", " DESC", "*", true, SelItem);
-                        else
-                            getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, SelItem);
-                        conf.StrSelect = "";
-                    }
+                      {
+                      SelItem = NewString.StripChars(@"[]", conf.StrTxtSelect);
+                      if (conf.WStrSort == "DateAdded")
+                          getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", "Date", " DESC", "*", true, SelItem);
+                      else
+                          getSelectFromDivx(conf.StrTitle1.ToString() + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, SelItem);
+                      conf.StrSelect = "";
+                      }
                 }
             }
             else
@@ -2039,7 +2051,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             item.FreeMemory();
             conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
-            if (conf.Wstar != "*") conf.StrTxtSelect += " " + GUILocalizeStrings.Get(344) + " [*" + conf.Wstar + "*]";
+            if (conf.Wstar != "*") conf.StrTxtSelect += " " + GUILocalizeStrings.Get(1079896) + " [*" + conf.Wstar + "*]"; // add to "Selection": Persons with Filter
             MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect); 
             //TxtSelect.Label = conf.StrTxtSelect;
             conf.StrSelect = WstrSelect;
@@ -2105,7 +2117,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             if (conf.StrLogos)
                 confLogos = new Logos();
-            // InitializeConfigProperties; // Guzzi: THis is called when Configuration changes to expose those properties to the skin (ToDo!)
             MyFilmsDetail.setGUIProperty("config.currentconfig", CurrentConfig);
         }
 
@@ -2698,7 +2709,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                       GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                       GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                      ReturnFromExternalPluginInfo = true;
                       GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
                       GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                       GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -3134,7 +3144,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                         GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        ReturnFromExternalPluginInfo = true;
                         GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                         GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -3227,7 +3236,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                       GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                       GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                      ReturnFromExternalPluginInfo = true;
                       GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
                       GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                       GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -3395,7 +3403,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                         GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        ReturnFromExternalPluginInfo = true;
                         GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", "");
                         GUIPropertyManager.SetProperty("#btWeb.link.zoom", "");
@@ -5041,6 +5048,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             this.Load_Rating(0);
             GUIWaitCursor.Hide();
             GUIControl.HideControl(GetID, 34);
+            LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties - Finished !");
         }
 
         //*****************************************************************************************
@@ -5144,9 +5152,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
                 bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
-                bgLoadMovieList.RunWorkerAsync();
                 LogMyFilms.Info("MF: Loading Movie List in batch mode");
+                bgLoadMovieList.RunWorkerAsync();
             }
+            else
+              LogMyFilms.Debug(("MF: AsynLoadMovieList() could not be launched because already running !"));
         }
 
         static void bgLoadMovieList_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
