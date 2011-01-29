@@ -1190,7 +1190,7 @@ Detailmenu for technical details
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
-		<visible>string.equals(#myfilms.db.source.value)+Control.HasFocus(10004)</visible>
+		<visible>string.equals(#myfilms.user.source.value)+Control.HasFocus(10004)</visible>
 	</control>
 	<control>
 		<type>fadelabel</type>
@@ -1208,18 +1208,18 @@ Detailmenu for technical details
 		<id>1</id>
 		<posX>520</posX>
 		<posY>570</posY>
-		<label>#myfilms.db.borrower.label:</label>
+		<label>#myfilms.user.sourcetrailer.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
-		<visible>string.equals(#myfilms.db.borrower.value)+Control.HasFocus(10004)</visible>
+		<visible>string.equals(#myfilms.user.sourcetrailer.value)+Control.HasFocus(10004)</visible>
 	</control>
 	<control>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>730</posX>
 		<posY>570</posY>
-		<label>#myfilms.db.borrower.value</label>
+		<label>#myfilms.user.sourcetrailer.value</label>
 		<width>535</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font12</font>

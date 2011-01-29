@@ -802,7 +802,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //dlgmenu.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
                     //choiceViewMenu.Add("ant-nfo-writer");
 
-                    if (MyFilms.conf.StrStorageTrailer.Length > 0)
+                    if (MyFilms.conf.StrStorageTrailer.Length > 0) // StrDirStorTrailer only required for extended search
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
                       choiceViewMenu.Add("trailer-register");
@@ -4271,7 +4271,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Int64 wsize = 0; // Temporary Filesize detection
             // split searchpath information delimited by semicolumn (multiple searchpathes from config)
             string[] Trailerdirectories = MyFilms.conf.StrDirStorTrailer.ToString().Split(new Char[] { ';' });
-            LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) Search for '" + file + "' in '" + MyFilms.conf.StrDirStorTrailer + "'");
+            LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) Extended Search '" + ExtendedSearch + "' for movie '" + file + "' in search directories: '" + MyFilms.conf.StrDirStorTrailer + "'");
 
             //Retrieve original directory of mediafiles
             //directoryname
@@ -4303,11 +4303,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             
             //Search Filenames with "title" in Trailer Searchpath
             string[] directories;
-            if (ExtendedSearch)
+            if (ExtendedSearch && MyFilms.conf.StrDirStorTrailer.Length > 0)
             {
                 foreach (string storage in Trailerdirectories)
                 {
-                    LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'");
+                    LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectory: '" + storage + "'");
                     directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
                     foreach (string directoryfound in directories)
                     {

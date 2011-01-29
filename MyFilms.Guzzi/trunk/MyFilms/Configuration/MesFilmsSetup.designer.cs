@@ -355,7 +355,6 @@
           this.AntUpdFieldReset = new System.Windows.Forms.Button();
           this.label33 = new System.Windows.Forms.Label();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
           this.ButDefCov = new System.Windows.Forms.Button();
@@ -439,6 +438,7 @@
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
@@ -1824,7 +1824,7 @@
           // ShowTrailerPlayDialog
           // 
           this.ShowTrailerPlayDialog.AutoSize = true;
-          this.ShowTrailerPlayDialog.Location = new System.Drawing.Point(27, 166);
+          this.ShowTrailerPlayDialog.Location = new System.Drawing.Point(27, 168);
           this.ShowTrailerPlayDialog.Name = "ShowTrailerPlayDialog";
           this.ShowTrailerPlayDialog.Size = new System.Drawing.Size(138, 17);
           this.ShowTrailerPlayDialog.TabIndex = 72;
@@ -3290,16 +3290,6 @@
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
           // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(23, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(693, 345);
-          this.traktConfiguration1.TabIndex = 0;
-          // 
           // comboBoxLogoPresets
           // 
           this.comboBoxLogoPresets.FormattingEnabled = true;
@@ -4203,6 +4193,16 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(23, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(693, 345);
+          this.traktConfiguration1.TabIndex = 0;
           // 
           // MesFilmsSetup
           // 

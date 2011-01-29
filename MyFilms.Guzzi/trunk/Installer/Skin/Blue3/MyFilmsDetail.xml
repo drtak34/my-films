@@ -1160,18 +1160,18 @@
 		<id>1</id>
 		<posX>310</posX>
 		<posY>485</posY>
-		<label>#myfilms.db.borrower.label:</label>
+		<label>#myfilms.user.sourcetrailer.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
-		<visible>string.equals(#myfilms.db.borrower.value)+Control.HasFocus(10004)</visible>
+		<visible>string.equals(#myfilms.user.sourcetrailer.value)+Control.HasFocus(10004)</visible>
 	</control>
 	<control>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>430</posX>
 		<posY>488</posY>
-		<label>#myfilms.db.borrower.value</label>
+		<label>#myfilms.user.sourcetrailer.value</label>
 		<width>260</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font12</font>

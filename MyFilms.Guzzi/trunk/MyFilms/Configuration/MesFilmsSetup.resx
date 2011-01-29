@@ -163,15 +163,6 @@ so children will not be aware of any other configurations.
 Adult movies can then be included in another configuration that is password protected.
 </value>
   </data>
-  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
-    <value>Unwatched option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-You can configure the field and value to identify unwatched films
-on "update" tab (Watched-Status Handling).</value>
-  </data>
   <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
 Select the option “Display Always that view when using this config”, 
@@ -182,6 +173,15 @@ the last view used before exiting the plugin will be shown next time.
 If a value is entered for the second parameter, only records containing that value will be displayed.  
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
+  </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+You can configure the field and value to identify unwatched films
+on "update" tab (Watched-Status Handling).</value>
   </data>
   <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
     <value>Views by ‘Genre’, by ‘Year’ and by ‘Country’ are already defined by default.  
@@ -196,13 +196,6 @@ If a value is entered, a list of the movies with that value will be displayed.
 As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
 </value>
   </data>
-  <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
-    <value>If chosen, the option to update the filename / source of the movie will show in the update menu.
-However, it will be using a standard windows file doalog to browse the filesystem and select the movie file,
-so it is not recommended to use that option for remote only users.
-
-If using a mouse, this option can be enabled.</value>
-  </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
 but you can define two more fields to be updated here.
@@ -212,6 +205,13 @@ Select the database field to be updated, enter the label associated with that fi
 and enter a pre-defined value to update the field.
 
 A possible use case could be "Checked" "seen" "true" to have a oneclick solution to set a movie watched based on checked DB field.</value>
+  </data>
+  <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
+    <value>If chosen, the option to update the filename / source of the movie will show in the update menu.
+However, it will be using a standard windows file doalog to browse the filesystem and select the movie file,
+so it is not recommended to use that option for remote only users.
+
+If using a mouse, this option can be enabled.</value>
   </data>
   <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
     <value>If you want to update your movie datas over Internet,
@@ -324,7 +324,10 @@ Attention: Might degrade performace!
   </data>
   <data name="AntStorageTrailer.ToolTip" xml:space="preserve">
     <value>Choose the DB fireld where MyFilms should store the infos about the source path of trailers.
-"Borrower" is a good recommendation, as it's not commonly used. However make sure, yoiu do not use this field for other purposes (e.g. seen status)</value>
+"Borrower" is a good recommendation, as it's not commonly used. However make sure, yoiu do not use this field for other purposes (e.g. seen status)
+If you use external ANT movie catalog to edit this field manually, you can add more than one movie by separating them with semicolon.
+e.g.: "\\server\path\trailer1.flv;C:\Movies\trailer2.flv"
+When using the trailersearch &amp; register, MyFilms will automatically populate this DB field for you.</value>
   </data>
   <data name="groupBox24.ToolTip" xml:space="preserve">
     <value>The Trailer section allows to use a selectable DB field to store trailer source path infos
@@ -406,12 +409,6 @@ movie 3: Moviecollection\movie3
 
 Will show "Moviecollection" with 3 items in it.</value>
   </data>
-  <data name="textBoxGlobalUnwatchedOnlyValue.ToolTip" xml:space="preserve">
-    <value>By Default, unwatched items are identified by having either "false" or "" (empty) in the related field.
-The field used for watched / unwatched status can be configured in the Update Tab.
-
-However, you can define a value other than that, if you require it.</value>
-  </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
     <value>This option allows you updating field info for storing your "watched status".
 
@@ -424,6 +421,12 @@ You can update e.g. the "checked" field with a value "true to indicate "watched 
 However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
 
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
+  <data name="textBoxGlobalUnwatchedOnlyValue.ToolTip" xml:space="preserve">
+    <value>By Default, unwatched items are identified by having either "false" or "" (empty) in the related field.
+The field used for watched / unwatched status can be configured in the Update Tab.
+
+However, you can define a value other than that, if you require it.</value>
   </data>
   <data name="groupBoxUpdateByProperties.ToolTip" xml:space="preserve">
     <value>In opposite to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
@@ -443,13 +446,6 @@ This is mainly required, if you have only image names without full path stored i
 You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
 </value>
   </data>
-  <data name="gpspfield.ToolTip" xml:space="preserve">
-    <value>This defines the action taken, when the player finishes.
-You can update e.g. the "checked" field with a value "true to indicate "watched status". 
-However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
-
-You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
-  </data>
   <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
     <value>The Database Deletion Options allow you to update and/or delete records after the corresponding movie is watched.
 
@@ -460,6 +456,13 @@ Delete DB entry = delete the record from the DB
 Delete Movie file = PHYSICALLY DELETES your movie from storage medium.
 
 </value>
+  </data>
+  <data name="gpspfield.ToolTip" xml:space="preserve">
+    <value>This defines the action taken, when the player finishes.
+You can update e.g. the "checked" field with a value "true to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
+
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>

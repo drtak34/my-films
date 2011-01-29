@@ -1419,7 +1419,7 @@ Detailmenu for technical details
 			<id>1</id>
 			<posX>520</posX>
 			<posY>540</posY>
-			<label>#myfilms.db.source.label:</label>
+			<label>#myfilms.user.source.label:</label>
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
@@ -1430,7 +1430,7 @@ Detailmenu for technical details
 			<id>1</id>
 			<posX>730</posX>
 			<posY>540</posY>
-			<label>#myfilms.db.source.value</label>
+			<label>#myfilms.user.source.value</label>
 			<width>535</width>
 			<textcolor>ffffffff</textcolor>
 			<font>font12</font>
