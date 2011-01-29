@@ -2122,12 +2122,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GlobalFilterMinRating = false;
                 GlobalFilterTrailersOnly = false;
                 GlobalFilterStringTrailersOnly = String.Empty;
+                MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
                 GlobalFilterStringMinRating = String.Empty;
+                MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
+                MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
                 MovieScrobbling = false; // reset scrobbler filter setting
                 if (conf.GlobalUnwatchedOnly) // Reset GlobalUnwatchedFilter to the setup default (can be changed via GUI menu)
+                {
                   GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
-                else 
+                  MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
+                }
+                else
+                {
                   GlobalFilterStringUnwatched = String.Empty;
+                  MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
+                }
             }
             if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
             {
@@ -2740,9 +2749,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Global overlayfilter for unwatched movies ...
                     MyFilms.conf.GlobalUnwatchedOnly = !MyFilms.conf.GlobalUnwatchedOnly;
                     if (conf.GlobalUnwatchedOnly)
+                    {
                       GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+                      MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
+                    }
                     else
+                    {
                       GlobalFilterStringUnwatched = String.Empty;
+                      MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
+                    }
                     LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     Change_view("globaloptions");
@@ -2756,9 +2771,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //if (!GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     if (GlobalFilterTrailersOnly)
+                    {
                       GlobalFilterStringTrailersOnly = conf.StrStorageTrailer + " not like '' AND ";
+                      MyFilmsDetail.setGUIProperty("globalfilter.trailersonly", "true");
+                    }
                     else
+                    {
                       GlobalFilterStringTrailersOnly = String.Empty;
+                      MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
+                    }
                     LogMyFilms.Info("MF: (SetGlobalFilterString Trailers) - 'GlobalFilterStringTrailersOnly' = '" + GlobalFilterStringTrailersOnly + "'");
                     GUIWaitCursor.Show();
                     //GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
@@ -2772,9 +2793,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GlobalFilterMinRating = !GlobalFilterMinRating;
                     LogMyFilms.Info("MF: Global filter for MinimumRating is now set to '" + GlobalFilterMinRating + "'");
                     if (GlobalFilterMinRating)
+                    {
                       GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
-                    else 
+                      MyFilmsDetail.setGUIProperty("globalfilter.minrating", "true");
+                      MyFilmsDetail.setGUIProperty("globalfilter.minratingvalue", MyFilms.conf.StrAntFilterMinRating);
+                    }
+                    else
+                    {
                       GlobalFilterStringMinRating = String.Empty;
+                      MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
+                      MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
+                    }
                     LogMyFilms.Info("MF: (SetGlobalFilterString MinRating) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
                     GUIWaitCursor.Show();
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
@@ -2797,9 +2826,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     if (GlobalFilterMinRating)
+                    {
                       GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
-                    else 
+                      MyFilmsDetail.setGUIProperty("globalfilter.minrating", "true");
+                      MyFilmsDetail.setGUIProperty("globalfilter.minratingvalue", MyFilms.conf.StrAntFilterMinRating);
+                    }
+                    else
+                    {
                       GlobalFilterStringMinRating = String.Empty;
+                      MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
+                      MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
+                    }
                     LogMyFilms.Info("MF: (SetGlobalFilterString) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
                     GUIWaitCursor.Show();
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
@@ -4998,6 +5035,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("Fanart2");
             MyFilmsDetail.clearGUIProperty("db.rating");
             MyFilmsDetail.clearGUIProperty("select");
+            MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
+            MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
+            MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
+            MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
             this.Load_Rating(0);
             GUIWaitCursor.Hide();
             GUIControl.HideControl(GetID, 34);

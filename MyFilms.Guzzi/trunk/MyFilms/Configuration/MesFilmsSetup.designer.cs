@@ -1486,7 +1486,7 @@
           this.MesFilmsFanartViews.Size = new System.Drawing.Size(315, 20);
           this.MesFilmsFanartViews.TabIndex = 72;
           this.ToolTip1.SetToolTip(this.MesFilmsFanartViews, "To use Fanart for \"Views\" put fanart in the subfolder for year, category, country" +
-                  "\" , \r\ne.g. <fanartfolder>\\\\_group\\\\year\\2010\";");
+                  ", \r\ne.g. <fanartfolder>\\\\_group\\\\year\\2010\";");
           // 
           // chkFanart
           // 
