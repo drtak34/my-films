@@ -26,8 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqLite", "SqLite", "{593C46
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Interface", "Grabber_Interface\Grabber_Interface.csproj", "{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{1D7644A5-A247-43E2-912C-247AEF281210}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Guzzi)|Any CPU = Debug (Guzzi)|Any CPU

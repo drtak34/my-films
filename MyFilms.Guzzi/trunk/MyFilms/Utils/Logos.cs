@@ -98,11 +98,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 }
                 else
                 {
-                  if (LogosPath.ToLower().Contains(@"Team Mediaportal\Mediaportal\skin".ToLower()))
+                  if (LogosPath.ToLower().Contains(@"Team Mediaportal\Mediaportal".ToLower()))
                   {
-                    int pos = LogosPath.ToLower().LastIndexOf(@"Team Mediaportal\Mediaportal\skin".ToLower());
-                    LogosPath = LogosPath.Substring(pos + @"Team Mediaportal\Mediaportal\skin".Length);
-                    LogosPath = Config.GetDirectoryInfo(Config.Dir.Skin) + LogosPath;
+                    int pos = LogosPath.ToLower().LastIndexOf(@"Team Mediaportal\Mediaportal".ToLower());
+                    LogosPath = LogosPath.Substring(pos + @"Team Mediaportal\Mediaportal".Length);
+                    LogosPath = Config.GetDirectoryInfo(Config.Dir.Config) + LogosPath;
                   }
                 }
                 if (LogosPath.LastIndexOf("\\") != LogosPath.Length - 1)
