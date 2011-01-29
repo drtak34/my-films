@@ -491,7 +491,7 @@
           // 
           // ToolTip1
           // 
-          this.ToolTip1.AutoPopDelay = 30000;
+          this.ToolTip1.AutoPopDelay = 15000;
           this.ToolTip1.InitialDelay = 500;
           this.ToolTip1.ReshowDelay = 100;
           // 
