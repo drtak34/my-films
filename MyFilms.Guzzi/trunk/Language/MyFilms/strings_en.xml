@@ -204,6 +204,13 @@
     <String id="10798736">Locally Available</String>
     <String id="10798737">Movie not found locally</String>
     <String id="10798738">Try Online Trailer ?</String>
+    <String id="10798741">(active)</String>
+    <String id="10798742">(offline) - start ?</String>
+    <String id="10798743">successfully started !</String>
+    <String id="10798744">could not be started !</String>
+    <String id="10798745">Start not possible - check config !</String>
+    <String id="10798746">is not configured for wakeonlan !</String>
+    <String id="10798747">Automatic NAS start not possible ...</String>
     <String id="10798751">Overview</String>
     <String id="10798752">Description</String>
     <String id="10798753">Comments</String>

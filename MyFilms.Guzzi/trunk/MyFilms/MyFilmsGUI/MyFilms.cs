@@ -2492,34 +2492,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //if (dlg == null) return;
                     //dlg.Reset();
                     System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
-                    dlg.SetHeading(GUILocalizeStrings.Get(10798727)); // menu
+                    dlg.SetHeading(GUILocalizeStrings.Get(10798727)); // show nas server status
                     dlg.Add(GUILocalizeStrings.Get(712)); //Return
                     choiceSearch.Add("BACK");
 
                     if (MyFilms.conf.StrNasName1.Length > 0)
                     {
                         if (WakeOnLanManager.Ping(MyFilms.conf.StrNasName1, intTimeOut))
-                            dlg.Add("'" + MyFilms.conf.StrNasName1 + "' - (aktiv)");
+                          dlg.Add("'" + MyFilms.conf.StrNasName1 + "' - " + GUILocalizeStrings.Get(10798741)); // srv name + " - (active)" 
                         else
-                            dlg.Add("'" + MyFilms.conf.StrNasName1 + "' - (offline) - starten?");
+                          dlg.Add("'" + MyFilms.conf.StrNasName1 + "' - " + GUILocalizeStrings.Get(10798742)); // srv name + " - (offline) - start ?"
                         choiceSearch.Add("NAS1");
                     }
 
                     if (MyFilms.conf.StrNasName2.Length > 0)
                     {
                         if (WakeOnLanManager.Ping(MyFilms.conf.StrNasName2, intTimeOut))
-                            dlg.Add("'" + MyFilms.conf.StrNasName2 + "' - (aktiv)");
+                          dlg.Add("'" + MyFilms.conf.StrNasName2 + "' - " + GUILocalizeStrings.Get(10798741)); // srv name + " - (active)" 
                         else
-                            dlg.Add("'" + MyFilms.conf.StrNasName2 + "' - (offline) - starten?");
+                          dlg.Add("'" + MyFilms.conf.StrNasName2 + "' - " + GUILocalizeStrings.Get(10798742)); // srv name + " - (offline) - start ?"
                         choiceSearch.Add("NAS2");
                     }
 
                     if (MyFilms.conf.StrNasName3.Length > 0)
                     {
                         if (WakeOnLanManager.Ping(MyFilms.conf.StrNasName3, intTimeOut))
-                            dlg.Add("'" + MyFilms.conf.StrNasName3 + "' - (aktiv)");
+                          dlg.Add("'" + MyFilms.conf.StrNasName3 + "' - " + GUILocalizeStrings.Get(10798741)); // srv name + " - (active)" 
                         else
-                            dlg.Add("'" + MyFilms.conf.StrNasName3 + "' - (offline) - starten?");
+                          dlg.Add("'" + MyFilms.conf.StrNasName3 + "' - " + GUILocalizeStrings.Get(10798742)); // srv name + " - (offline) - start ?"
                         choiceSearch.Add("NAS3");
                     }
 
@@ -2527,81 +2527,57 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (dlg.SelectedLabel == -1)
                         return;
 
-                    if (choiceSearch[dlg.SelectedLabel] == "BACK")
-                    return;
-
-                    if (choiceSearch[dlg.SelectedLabel] == "NAS1")
+                    switch (choiceSearch[dlg.SelectedLabel])
                     {
+                      case "BACK":
+                        return;
+
+                      default:
+
+                        string NasServerName;
+                        string NasMACAddress;
+                        if (choiceSearch[dlg.SelectedLabel] == "NAS1")
+                        {
+                          NasServerName = MyFilms.conf.StrNasName1;
+                          NasMACAddress = MyFilms.conf.StrNasMAC1;
+                        }
+                        else if (choiceSearch[dlg.SelectedLabel] == "NAS2")
+                        {
+                          NasServerName = MyFilms.conf.StrNasName2;
+                          NasMACAddress = MyFilms.conf.StrNasMAC2;
+                        }
+                        else if (choiceSearch[dlg.SelectedLabel] == "NAS3")
+                        {
+                          NasServerName = MyFilms.conf.StrNasName3;
+                          NasMACAddress = MyFilms.conf.StrNasMAC3;
+                        }
+                        else
+                        {
+                          NasServerName = String.Empty;
+                          NasMACAddress = String.Empty;
+                        }
+
                         GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
+                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); // MyFilms System Information
                         dlgOk.SetLine(1, string.Empty);
 
-                        if (MyFilms.conf.StrNasMAC1.Length > 0)
+                        if (NasMACAddress.Length > 0)
                         {
-                            if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MyFilms.conf.StrNasMAC1), MyFilms.conf.StrNasName1, intTimeOut))
-                            {
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName1 + " erfolgreich gestartet!");
-                            }
-                            else
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName1 + " konnte nicht gestartet werden!");
+                          if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(NasMACAddress), NasServerName, intTimeOut))
+                          {
+                            dlgOk.SetLine(2, "'" + NasServerName + "' " + GUILocalizeStrings.Get(10798743)); //successfully started 
+                          }
+                          else dlgOk.SetLine(2, "'" + NasServerName + "' " + GUILocalizeStrings.Get(10798744)); // could not be started 
                         }
                         else
                         {
-                            dlgOk.SetLine(1, "Servername: '" + MyFilms.conf.StrNasName1 + "', MAC: '" + MyFilms.conf.StrNasMAC1 + "'");
-                            dlgOk.SetLine(2, "Start not possible, check config?");
-                        }
-                        dlgOk.DoModal(GetID);
-                            break;
-                    }
-
-                    if (choiceSearch[dlg.SelectedLabel] == "NAS2")
-                    {
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
-                        dlgOk.SetLine(1, "");
-
-                        if (MyFilms.conf.StrNasMAC2.Length > 0)
-                        {
-                            if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MyFilms.conf.StrNasMAC2), MyFilms.conf.StrNasName2, intTimeOut))
-                            {
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName2 + " erfolgreich gestartet!");
-                            }
-                            else
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName2 + " konnte nicht gestartet werden!");
-                        }
-                        else
-                        {
-                            dlgOk.SetLine(1, "Servername: '" + MyFilms.conf.StrNasName2 + "', MAC: '" + MyFilms.conf.StrNasMAC2 + "'");
-                            dlgOk.SetLine(2, "Start not possible, check config?");
+                          dlgOk.SetLine(1, "Servername: '" + NasServerName + "', MAC: '" + NasMACAddress + "'");
+                          dlgOk.SetLine(2, GUILocalizeStrings.Get(10798745)); // start not possible - check config !
                         }
                         dlgOk.DoModal(GetID);
                         break;
                     }
-
-                    if (choiceSearch[dlg.SelectedLabel] == "NAS3")
-                    {
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
-                        dlgOk.SetLine(1, "");
-
-                        if (MyFilms.conf.StrNasMAC3.Length > 0)
-                        {
-                            if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MyFilms.conf.StrNasMAC3), MyFilms.conf.StrNasName3, intTimeOut))
-                            {
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName3 + " erfolgreich gestartet!");
-                            }
-                            else
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName3 + " konnte nicht gestartet werden!");
-                        }
-                        else
-                        {
-                            dlgOk.SetLine(1, "Servername: '" + MyFilms.conf.StrNasName3 + "', MAC: '" + MyFilms.conf.StrNasMAC3 + "'");
-                            dlgOk.SetLine(2, "Start not possible, check config?");
-                        }
-                        dlgOk.DoModal(GetID);
-                        break;
-                    }
-                    return;
+                return;
 
                 case "globaloptions":
                     LogMyFilms.Debug("MF: Building (sub)menu globaloptions");

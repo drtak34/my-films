@@ -2772,89 +2772,87 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // HandleWakeUpNas();
             LogMyFilms.Info("MF: Launched HandleWakeUpNas() to start movie'" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'");
 
-            if (MyFilms.conf.StrCheckWOLuserdialog)
+            if (MyFilms.conf.StrCheckWOLenable)
             {
-                int wTimeout = MyFilms.conf.StrWOLtimeout;
-                bool isActive;
-                string UNCpath = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
-                WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
+              WakeOnLanManager wakeOnLanManager = new WakeOnLanManager();
+              int wTimeout = MyFilms.conf.StrWOLtimeout;
+              bool isActive;
+              string UNCpath = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
+              string NasServerName;
+              string NasMACAddress;
 
-                if (UNCpath.StartsWith("\\\\"))
+              if (UNCpath.StartsWith("\\\\"))
                 UNCpath = (UNCpath.Substring(2, UNCpath.Substring(2).IndexOf("\\") + 0)).ToLower();
-                if ((UNCpath.Equals(MyFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)))
-                {
-                    if (WakeOnLanManager.Ping(UNCpath, wTimeout))
-                        isActive = true;
-                    else
-                        isActive = false;
+              if ((UNCpath.Equals(MyFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) || (UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)))
+              {
+                  if (WakeOnLanManager.Ping(UNCpath, wTimeout))
+                      isActive = true;
+                  else
+                      isActive = false;
 
-                    if ((!isActive) || (true)) // Todo: DIsable "Always Show dialog"
+                  if (!isActive) // Only if NAS server is not yet already rzunning !
+                  {
+                    if (MyFilms.conf.StrCheckWOLuserdialog)
                     {
-                        GUIDialogYesNo dlgOknas =
-                            (GUIDialogYesNo) GUIWindowManager.GetWindow((int) GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-                        dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
-                        dlgOknas.SetLine(1, "Movie   : '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'"); //video title
-                        dlgOknas.SetLine(2, "Storage: '" + UNCpath + "' - Status: '" + isActive.ToString() + "'");
-                        //Filename/Storagepath
-                        dlgOknas.SetLine(3, "Wollen Sie den NAS Server starten ?");
-                        //dlgOknas.SetLine(3, "'" + MyFilms.conf.StrNasMAC1 + "', '" + MyFilms.conf.StrWOLtimeout.ToString() + "'");
-                        dlgOknas.DoModal(GetID);
-                        if (!(dlgOknas.IsConfirmed))
-                            return;
+                      GUIDialogYesNo dlgOknas = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+                      dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+                      dlgOknas.SetLine(1, "Film    : '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'"); //video title
+                      dlgOknas.SetLine(2, "Server  : '" + UNCpath + "'");
+                      dlgOknas.SetLine(3, "Status  : '" + GUILocalizeStrings.Get(10798742)); // srv name + " - (offline) - start ?"
+                      dlgOknas.DoModal(GetID);
+                      if (!(dlgOknas.IsConfirmed)) return;
+                    }
 
-                        // Start NAS Server
+                    // Search the NAS where movie is located:
+                      if ((UNCpath.Equals(MyFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) && (MyFilms.conf.StrNasMAC1.ToString().Length > 1))
+                      {
+                        NasServerName = MyFilms.conf.StrNasName1;
+                        NasMACAddress = MyFilms.conf.StrNasMAC1;
+                      }
+                      else if ((UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) && (MyFilms.conf.StrNasMAC2.ToString().Length > 1))
+                      {
+                        NasServerName = MyFilms.conf.StrNasName2;
+                        NasMACAddress = MyFilms.conf.StrNasMAC2;
+                      }
+                      else if ((UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)) && (MyFilms.conf.StrNasMAC3.ToString().Length > 1))
+                      {
+                        NasServerName = MyFilms.conf.StrNasName3;
+                        NasMACAddress = MyFilms.conf.StrNasMAC3;
+                      }
+                      else
+                        {
+                          NasServerName = String.Empty;
+                          NasMACAddress = String.Empty;
+                        }
+
+                      // Start NAS Server
+
+                      bool SuccessFulStart = wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(NasMACAddress), NasServerName, wTimeout);
+
+                      if (MyFilms.conf.StrCheckWOLuserdialog)
+                      {
                         GUIDialogOK dlgOk =
-                            (GUIDialogOK) GUIWindowManager.GetWindow((int) GUIWindow.Window.WINDOW_DIALOG_OK);
+                          (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                         dlgOk.SetHeading(GUILocalizeStrings.Get(10798624));
                         dlgOk.SetLine(1, "");
-
-                        if ((UNCpath.Equals(MyFilms.conf.StrNasName1.ToLower())) && (MyFilms.conf.StrNasMAC1.ToString().Length > 1))
-                        {
-                            if (wakeOnLanManager.WakeupSystem(
-                                wakeOnLanManager.GetHwAddrBytes(MyFilms.conf.StrNasMAC1.ToString()), MyFilms.conf.StrNasName1,
-                                wTimeout))
-                            {
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName1 + " erfolgreich gestartet!");
-                            }
-                            else
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName1 + " konnte nicht gestartet werden (Timeout)!");
-                        }
-
-                        if ((UNCpath.Equals(MyFilms.conf.StrNasName2.ToLower())) && (MyFilms.conf.StrNasMAC2.ToString().Length > 1))
-                        {
-                            if (wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(MyFilms.conf.StrNasMAC2), MyFilms.conf.StrNasName2, wTimeout))
-                            {
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName2 + " erfolgreich gestartet!");
-                            }
-                            else
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName2 + " konnte nicht gestartet werden (Timeout)!");
-                        }
-
-                        if ((UNCpath.Equals(MyFilms.conf.StrNasName3.ToLower())) && (MyFilms.conf.StrNasMAC3.ToString().Length > 0))
-                        {
-                            if (wakeOnLanManager.WakeupSystem(
-                                wakeOnLanManager.GetHwAddrBytes(MyFilms.conf.StrNasMAC3), MyFilms.conf.StrNasName3,
-                                wTimeout))
-                            {
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName3 + " erfolgreich gestartet!");
-                            }
-                            else
-                                dlgOk.SetLine(2, MyFilms.conf.StrNasName3 + " konnte nicht gestartet werden (Timeout)!");
-                        }
-
+                        if (SuccessFulStart)
+                          dlgOk.SetLine(2, "'" + NasServerName + "' " + GUILocalizeStrings.Get(10798743)); //successfully started 
+                        else 
+                          dlgOk.SetLine(2, "'" + NasServerName + "' " + GUILocalizeStrings.Get(10798744)); // could not be started 
                         dlgOk.DoModal(GetID);
-                    }
-                }
-                else
-                {
-                    GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                    dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
-                    //dlgOknas.SetLine(1, "Movie   : '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()].ToString() + "'"); //video title
-                    dlgOknas.SetLine(2, "Storage: '" + UNCpath + "' ist offline nicht für WOL konfiguriert!"); //Filename/Storagepath
-                    dlgOknas.SetLine(3, "Automatischer NAS Server Start nicht möglich...");
-                    dlgOknas.DoModal(GetID);
-                    return;
-                }
+                      }
+                  }
+              }
+              else
+              {
+                  GUIDialogOK dlgOknas = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                  dlgOknas.SetHeading(GUILocalizeStrings.Get(107986)); //my films
+                  //dlgOknas.SetLine(1, "Movie   : '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()].ToString() + "'"); //video title
+                  dlgOknas.SetLine(2, "Server '" + UNCpath + "' " + GUILocalizeStrings.Get(10798746)); //is not configured for WakeOnLan ! 
+                  dlgOknas.SetLine(3, GUILocalizeStrings.Get(10798747)); // Automatic NAS start not possible ... 
+                  dlgOknas.DoModal(GetID);
+                  return;
+              }
             }
 
             // Run externaly Program before Playing if defined in setup
