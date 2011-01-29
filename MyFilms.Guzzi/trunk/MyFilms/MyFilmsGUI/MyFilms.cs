@@ -3018,6 +3018,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   ichoice++;
                 }
 
+                if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
+                {
+                  if (facadeView.SelectedListItem.IsPlayed) // show only the required option
+                    dlg.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
+                  else dlg.Add(GUILocalizeStrings.Get(1079894)); // set watched
+                  upd_choice[ichoice] = "togglewatchedstatus";
+                  ichoice++;
+                }
+
             }
 
             // Artistcontext
@@ -3480,6 +3489,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgYesNo.DoModal(GetID);
                     if (dlgYesNo.IsConfirmed)
                         MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString(), false);
+                    break;
+
+                case "togglewatchedstatus":
+                    if (facadeView.SelectedListItem.IsPlayed)
+                    {
+                      facadeView.SelectedListItem.IsPlayed = false;
+                      MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, false);
+                    }
+                    else
+                    {
+                      facadeView.SelectedListItem.IsPlayed = true;
+                      MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, true);
+                    }
+                    //Fin_Charge_Init(true, true);
                     break;
 
                 case "updatemenu":

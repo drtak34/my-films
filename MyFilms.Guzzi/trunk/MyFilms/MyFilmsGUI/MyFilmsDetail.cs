@@ -589,7 +589,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798704));//trailer menu "Trailer ..."
                     choiceViewMenu.Add("trailermenu");
-                
+
+                    if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
+                    {
+                      if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()) // show only the required option
+                        dlgmenu.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
+                      else 
+                        dlgmenu.Add(GUILocalizeStrings.Get(1079894)); // set watched
+                      choiceViewMenu.Add("togglewatchedstatus");
+                    }
+                    
                     dlgmenu.Add(GUILocalizeStrings.Get(931));//rating
                     choiceViewMenu.Add("rating");
 
@@ -697,7 +706,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return;
                 //break;
 
-                case "rating":
+                case "togglewatchedstatus":
+                    if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
+                    {
+                      MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
+                    }
+                    else
+                    {
+                      MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+                    }
+                    afficher_detail(true);
+                    break;
+
+              case "rating":
                     MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(7988);
                     if (MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Length > 0)
                         dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
@@ -1187,6 +1208,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             Update_XML_database();
         }
+
+        //-------------------------------------------------------------------------------------------
+        //  Set an entry from the database to watched/unwatched
+        //-------------------------------------------------------------------------------------------        
+        public static void Watched_Toggle(DataRow[] r1, int Index, bool watched)
+        {
+          if (watched)
+          {
+            MyFilms.r[Index][MyFilms.conf.StrWatchedField] = "true";
+            LogMyFilms.Info("MF: Database movie set 'watched' by setting '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' to '" + "true" + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+          }
+          else
+          {
+            MyFilms.r[Index][MyFilms.conf.StrWatchedField] = MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+            LogMyFilms.Info("MF: Database movie set 'watched' by setting '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' to '" + MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower() + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+          }
+          Update_XML_database();
+        }
+
         //-------------------------------------------------------------------------------------------
         //  Update the XML database and refresh screen
         //-------------------------------------------------------------------------------------------        
