@@ -281,7 +281,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //public enum optimizeDisabled;
         public static bool InitialStart = false; //Added to implement InitialViewSetup, ToDo: Add Logic
         private bool LoadWithParameterSupported = false;
-        //public static bool ReturnFromExternalPluginInfo = false;
+        //public static bool OldActorsSearch = false;
         #endregion
 
 
@@ -406,7 +406,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) && (conf.Boolreturn))
             {
                 conf.Boolreturn = false;
-                if (conf.WStrSort.ToString().ToUpper() == "ACTORS")
+                if (conf.WStrSort.ToString() == "ACTORS") // Removed "ToUpper"
                     if (GetPrevFilmList())
                         return;
                     else
@@ -547,8 +547,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //Disable FanartTimer - already done on pagedestroy ...
                     //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
                     //m_bFanartTimerDisabled = true;
-
-                    //ReturnFromExternalPluginInfo = false; Can't call here, as it's also used for calls from menu with "return"
 
                     LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
                     return true; // fall through to call base class?
@@ -901,8 +899,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string SelItem;
             if (conf.StrTitleSelect == "")
             {
-                if (conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(1079870)) || (conf.StrTxtSelect == "" && conf.Boolselect) || conf.Boolview) //original code block refactored
-                {//jump back to main full list
+              if (conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(1079870)) || (conf.StrTxtSelect == "" && conf.Boolselect) || conf.Boolview) //original code block refactored // 1079870 = "Selection"
+                {//jump back to main full list  
                     conf.Boolselect = false;
                     conf.Boolview = false;
                     conf.Boolreturn = false;
@@ -918,25 +916,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return false;
                 }
                 else
-                {   // Jump back to prev view_display (categorised by year, genre etc)
-                    if (conf.WStrSort.ToLower() == "actors")
-                      {
-                          conf.StrSelect = "Actors like '*" + conf.StrActors + "*'";
-                          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
-                          getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
-                      }
-                    else if (conf.WStrSort.ToLower() == "producer")
-                      {
-                        conf.StrSelect = "Producer like '*" + conf.StrActors + "*'";
-                        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
-                        getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
-                      }
-                    else if (conf.WStrSort.ToLower() == "director")
-                      {
-                        conf.StrSelect = "Director like '*" + conf.StrActors + "*'";
-                        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
-                        getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
-                      }
+                {   // Jump back to prev view_display (categorised by year, genre etc) // Removed ACTORS special handling
+                  if (conf.WStrSort == "ACTORS")
+                  {
+                    conf.StrSelect = "Actors like '*" + conf.StrActors + "*'";
+                    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
+                    SelItem = NewString.StripChars(@"[]", conf.StrTxtSelect);
+                    getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, SelItem);
+                  }
+                    //else if (conf.WStrSort == "PRODUCER")
+                    //  {
+                    //    conf.StrSelect = "Producer like '*" + conf.StrActors + "*'";
+                    //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
+                    //    getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
+                    //  }
+                    //else if (conf.WStrSort == "DIRECTOR")
+                    //  {
+                    //    conf.StrSelect = "Director like '*" + conf.StrActors + "*'";
+                    //    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
+                    //    getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, "");
+                    //  }
                     else
                       {
                       SelItem = NewString.StripChars(@"[]", conf.StrTxtSelect);
@@ -1783,6 +1782,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Change_LayOut(0); 
             facadeView.Clear();
             int wi = 0;
+
             string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - GlobalFilterString          : '" + GlobalFilterString + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - conf.StrDfltSelect          : '" + conf.StrDfltSelect + "'");
@@ -2168,6 +2168,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (conf.Boolselect)
             {
+              // Hack to get persons in ASC order after returning from external plugins ...
+              if (conf.WStrSort.ToUpper() == "ACTORS" || conf.WStrSort.ToUpper() == "PRODUCER" || conf.WStrSort.ToUpper() == "DIRECTOR")
+                getSelectFromDivx(conf.StrSelect, conf.WStrSort, " ASC", conf.Wstar, false, ""); // preserve index from last time
+              else
                 getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, false, ""); // preserve index from last time
             }
             else
