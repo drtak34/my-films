@@ -81,12 +81,6 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception) { }
 
-            // AB: can override DB path, stored in the registry
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey("Software\\MPTVSeries");
-            if (rk == null)
-                rk = Registry.CurrentUser.CreateSubKey("Software\\MPTVSeries");
-
-            // we respect overall MP settings which can be optinally defined
             logPath = Config.GetFile(Config.Dir.Log, "MyFilms.log");
             backupLogPath = Config.GetFile(Config.Dir.Log, "MyFilms.bak");
             langPath = Config.GetSubFolder(Config.Dir.Language, "MyFilms");

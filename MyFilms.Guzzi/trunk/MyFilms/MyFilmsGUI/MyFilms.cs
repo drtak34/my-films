@@ -333,6 +333,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             TraktAPI.Password = conf.StrTraktPassword;
             TraktAPI.UserAgent = MyFilmsSettings.UserAgent;
 
+            LogMyFilms.Debug("MF: Trakt Usersettings loaded - UserName: '" + TraktAPI.Username.ToString() + "'");
+            LogMyFilms.Debug("MF: Trakt Usersettings loaded - Useragent: '" + TraktAPI.UserAgent.ToString() + "'");
+
             // Timer to process episodes to send to trakt, will also be called after new episodes are added to library
             //m_TraktSyncTimer = new System.Threading.Timer(new TimerCallback(TraktSynchronize), null, 15000, Timeout.Infinite);
             #endregion

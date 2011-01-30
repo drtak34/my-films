@@ -1242,7 +1242,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             // Added by Guzzi to initialize the AMCupdater Default configuration and create default configfiles, if necessary.
             Read_XML_AMCconfig(Config_Name.Text); // To be enabled after proper testing !!!
           //Save_XML_AMCconfig(Config_Name.Text);
+
+            cTraktUsername = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktUsername", "");
+            cTraktPassword = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktPassword", "");
         }
+
         private void Refresh_Items(bool all)
         {
             CatalogType.SelectedIndex = 0;

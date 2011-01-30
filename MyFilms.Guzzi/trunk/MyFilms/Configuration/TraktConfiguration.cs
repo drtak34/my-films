@@ -44,19 +44,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void LoadFromDB()
         {
-            //textBoxUsername.Text = DBOption.GetOptions(DBOption.cTraktUsername);
-            //textBoxPassword.Text = DBOption.GetOptions(DBOption.cTraktPassword);
+          textBoxUsername.Text = MyFilmsSetup.cTraktUsername;
+          textBoxPassword.Text = MyFilmsSetup.cTraktPassword;
 
-            //TraktAPI.UserAgent = Settings.UserAgent;
-            //TraktAPI.Username = DBOption.GetOptions(DBOption.cTraktUsername);
-            //TraktAPI.Password = DBOption.GetOptions(DBOption.cTraktPassword);
+            TraktAPI.UserAgent = MyFilmsSettings.UserAgent;
+            TraktAPI.Username = MyFilmsSetup.cTraktUsername;
+            TraktAPI.Password = MyFilmsSetup.cTraktPassword;
         }
 
         private void textBoxUsername_TextChanged(object sender, EventArgs e)
         {
             //DBOption.SetOptions(DBOption.cTraktUsername, textBoxUsername.Text);
             //TraktAPI.Username = DBOption.GetOptions(DBOption.cTraktUsername);
-            MyFilms.Configuration.MyFilmsSetup.cTraktUsername = textBoxPassword.Text.ToSHA1Hash(); 
+            MyFilmsSetup.cTraktUsername = textBoxPassword.Text.ToSHA1Hash(); 
             TraktAPI.Username = textBoxUsername.Text;
         }
 
@@ -65,7 +65,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             // Hash Password
             //DBOption.SetOptions(DBOption.cTraktPassword, textBoxPassword.Text.ToSHA1Hash());
             //TraktAPI.Password = DBOption.GetOptions(DBOption.cTraktPassword);
-          MyFilms.Configuration.MyFilmsSetup.cTraktPassword = textBoxPassword.Text.ToSHA1Hash();
+          MyFilmsSetup.cTraktPassword = textBoxPassword.Text.ToSHA1Hash();
           TraktAPI.Password = textBoxPassword.Text.ToSHA1Hash();
         }
 
