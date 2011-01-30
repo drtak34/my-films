@@ -6,7 +6,7 @@
 
   using MyFilmsPlugin.MyFilms.Utils;
 
-  partial class MesFilmsSetup
+  partial class MyFilmsSetup
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -94,7 +94,7 @@
         private void InitializeComponent()
         {
           this.components = new System.ComponentModel.Container();
-          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MesFilmsSetup));
+          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyFilmsSetup));
           this.ToolTip1 = new System.Windows.Forms.ToolTip(this.components);
           this.Config_Name = new System.Windows.Forms.ComboBox();
           this.textBoxPluginName = new System.Windows.Forms.TextBox();
@@ -4204,7 +4204,7 @@
           this.traktConfiguration1.Size = new System.Drawing.Size(693, 345);
           this.traktConfiguration1.TabIndex = 0;
           // 
-          // MesFilmsSetup
+          // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -4225,7 +4225,7 @@
           this.Controls.Add(this.General);
           this.Controls.Add(this.ButQuit);
           this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-          this.Name = "MesFilmsSetup";
+          this.Name = "MyFilmsSetup";
           this.Text = "MyFilms Setup";
           this.Load += new System.EventHandler(this.MesFilmsSetup_Load);
           this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MesFilmsSetup_Quit);

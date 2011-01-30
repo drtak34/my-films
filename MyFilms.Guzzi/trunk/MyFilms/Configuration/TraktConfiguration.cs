@@ -12,6 +12,8 @@ using Trakt.User;
 
 namespace MyFilmsPlugin.MyFilms.Configuration
 {
+  using MyFilmsPlugin.MyFilms.Utils;
+
   public partial class TraktConfiguration : UserControl
     {
         private const string cButtonManualSync = "Manual Synchronize";
@@ -54,6 +56,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             //DBOption.SetOptions(DBOption.cTraktUsername, textBoxUsername.Text);
             //TraktAPI.Username = DBOption.GetOptions(DBOption.cTraktUsername);
+            MyFilms.Configuration.MyFilmsSetup.cTraktUsername = textBoxPassword.Text.ToSHA1Hash(); 
+            TraktAPI.Username = textBoxUsername.Text;
         }
 
         private void textBoxPassword_TextChanged(object sender, EventArgs e)
@@ -61,6 +65,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             // Hash Password
             //DBOption.SetOptions(DBOption.cTraktPassword, textBoxPassword.Text.ToSHA1Hash());
             //TraktAPI.Password = DBOption.GetOptions(DBOption.cTraktPassword);
+          MyFilms.Configuration.MyFilmsSetup.cTraktPassword = textBoxPassword.Text.ToSHA1Hash();
+          TraktAPI.Password = textBoxPassword.Text.ToSHA1Hash();
         }
 
         private void textBoxPassword_Enter(object sender, EventArgs e)

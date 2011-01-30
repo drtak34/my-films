@@ -3,9 +3,9 @@
   using System;
   using System.Windows.Forms;
 
-  public partial class MesFilmsInputBox : Form
+  public partial class MyFilmsInputBox : Form
     {
-        public MesFilmsInputBox()
+        public MyFilmsInputBox()
         {
             InitializeComponent();
         }

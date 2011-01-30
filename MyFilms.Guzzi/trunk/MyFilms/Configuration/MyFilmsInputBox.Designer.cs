@@ -1,6 +1,6 @@
 ﻿namespace MyFilmsPlugin.MyFilms.Configuration
 {
-    partial class MesFilmsInputBox
+    partial class MyFilmsInputBox
     {
         /// <summary>
         /// Required designer variable.
@@ -82,7 +82,7 @@
           this.pictureBox1.TabIndex = 4;
           this.pictureBox1.TabStop = false;
           // 
-          // MesFilmsInputBox
+          // MyFilmsInputBox
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -93,8 +93,8 @@
           this.Controls.Add(this.textBoxNewName);
           this.Controls.Add(this.label1);
           this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-          this.Name = "MesFilmsInputBox";
-          this.Text = "MesFilmsInputBox";
+          this.Name = "MyFilmsInputBox";
+          this.Text = "MyFilmsInputBox";
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();

@@ -36,10 +36,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
   using MyFilmsPlugin.MyFilms.CatalogConverter;
   using MyFilmsPlugin.MyFilms.Utils;
-
+  
   using TaskScheduler;
 
-  public partial class MesFilmsSetup : Form
+  public partial class MyFilmsSetup : Form
     {
         //private WshShellClass WshShell; // Added for creating Desktop icon via wsh
 
@@ -65,7 +65,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private bool StoreFullLogoPath = false;
         private string ActiveLogoPath = String.Empty;
 
-        public MesFilmsSetup()
+        public static string cTraktUsername = String.Empty;
+        public static string cTraktPassword = String.Empty;
+
+        public MyFilmsSetup()
         {
             InitializeComponent();
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
@@ -855,6 +858,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "MCCovers", "Thumbnails");
             else
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "MCCovers", "Images");
+
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktUsername", cTraktUsername);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktPassWord", cTraktPassword);
+          
             string w_Config_Name = Config_Name.Text;
             Config_Name.Items.Remove(Config_Name.Text);
             Config_Name.Items.Add(w_Config_Name);
@@ -1407,7 +1414,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void ButCopy_Click(object sender, EventArgs e)
         {
-            MesFilmsInputBox input = new MesFilmsInputBox();
+            MyFilmsInputBox input = new MyFilmsInputBox();
             input.ShowDialog(this);
             string newConfig_Name = input.UserName;
             if (newConfig_Name == Config_Name.Text)

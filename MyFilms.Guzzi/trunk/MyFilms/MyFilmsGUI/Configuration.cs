@@ -296,6 +296,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrNasMAC2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-2", string.Empty);
                 StrNasName3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-3", string.Empty);
                 StrNasMAC3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-3", string.Empty);
+                StrTraktUsername = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "cTraktUsername", string.Empty);
+                StrTraktPassword = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "cTraktPassWord", string.Empty);
 
                 int j = 0;
                 for (int i = 1; i <= 5; i++)
@@ -1004,6 +1006,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strNasMAC3; }
             set { strNasMAC3 = value; }
+        }
+
+        private string strTraktUsername = string.Empty;
+        public string StrTraktUsername
+        {
+            get { return strTraktUsername; }
+            set { strTraktUsername = value; }
+        }
+
+        private string strTraktPassword = string.Empty;
+        public string StrTraktPassword
+        {
+            get { return strTraktPassword; }
+            set { strTraktPassword = value; }
         }
 
         private bool strGrabber = false;

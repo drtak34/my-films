@@ -138,17 +138,17 @@
     <Compile Include="MyFilms\BaseMesFilms.cs" />
     <Compile Include="MyFilms\CatalogConverter\DvdProfiler.cs" />
     <Compile Include="MyFilms\CatalogConverter\XbmcDb.cs" />
-    <Compile Include="MyFilms\Configuration\MesFilmsInputBox.cs">
+    <Compile Include="MyFilms\Configuration\MyFilmsInputBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MyFilms\Configuration\MesFilmsInputBox.Designer.cs">
-      <DependentUpon>MesFilmsInputBox.cs</DependentUpon>
+    <Compile Include="MyFilms\Configuration\MyFilmsInputBox.Designer.cs">
+      <DependentUpon>MyFilmsInputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyFilms\Configuration\MesFilmsSetup.cs">
+    <Compile Include="MyFilms\Configuration\MyFilmsSetup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MyFilms\Configuration\MesFilmsSetup.designer.cs">
-      <DependentUpon>MesFilmsSetup.cs</DependentUpon>
+    <Compile Include="MyFilms\Configuration\MyFilmsSetup.designer.cs">
+      <DependentUpon>MyFilmsSetup.cs</DependentUpon>
     </Compile>
     <Compile Include="MyFilms\Configuration\TraktConfiguration.cs">
       <SubType>UserControl</SubType>
@@ -163,6 +163,7 @@
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsDetail.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsDialogSetRating.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsThumbs.cs" />
+    <Compile Include="MyFilms\MyFilmsSettings.cs" />
     <Compile Include="MyFilms\Trakt\Common\TraktEpisode.cs" />
     <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />
@@ -295,11 +296,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MyFilms\Resources\MyFilmsIcon.ico" />
-    <EmbeddedResource Include="MyFilms\Configuration\MesFilmsInputBox.resx">
-      <DependentUpon>MesFilmsInputBox.cs</DependentUpon>
+    <EmbeddedResource Include="MyFilms\Configuration\MyFilmsInputBox.resx">
+      <DependentUpon>MyFilmsInputBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MyFilms\Configuration\MesFilmsSetup.resx">
-      <DependentUpon>MesFilmsSetup.cs</DependentUpon>
+    <EmbeddedResource Include="MyFilms\Configuration\MyFilmsSetup.resx">
+      <DependentUpon>MyFilmsSetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MyFilms\Resources\trakt.png" />
   </ItemGroup>

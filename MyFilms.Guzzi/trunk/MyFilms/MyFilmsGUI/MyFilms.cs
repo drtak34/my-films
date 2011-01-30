@@ -102,7 +102,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // show the setup dialog
       public void ShowPlugin()
       {
-        System.Windows.Forms.Form setup = new MesFilmsSetup();
+        System.Windows.Forms.Form setup = new MyFilmsSetup();
         setup.ShowDialog();
       }
 
@@ -329,9 +329,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             #region Trakt
             // ToDo: Read Username, Password and Useragent from Settings file
-            //TraktAPI.Username = DBOption.GetOptions(DBOption.cTraktUsername);
-            //TraktAPI.Password = DBOption.GetOptions(DBOption.cTraktPassword);
-            //TraktAPI.UserAgent = Settings.UserAgent;
+            TraktAPI.Username = conf.StrTraktUsername;
+            TraktAPI.Password = conf.StrTraktPassword;
+            TraktAPI.UserAgent = MyFilmsSettings.UserAgent;
 
             // Timer to process episodes to send to trakt, will also be called after new episodes are added to library
             //m_TraktSyncTimer = new System.Threading.Timer(new TimerCallback(TraktSynchronize), null, 15000, Timeout.Infinite);
