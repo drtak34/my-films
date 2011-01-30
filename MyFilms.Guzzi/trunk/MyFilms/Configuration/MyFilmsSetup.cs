@@ -564,7 +564,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     DVDPTagField.Focus();
                     return;
                 }
-            if (chkGrabber.Checked)
+            if (chkAMCUpd.Checked)
                 if (txtGrabber.Text.Length == 0)
                 {
                     System.Windows.Forms.MessageBox.Show("Grabber Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -573,12 +573,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
             if (chkAMCUpd.Checked)
             {
-                if (txtAMCUpd_exe.Text.Length == 0)
-                {
-                    System.Windows.Forms.MessageBox.Show("Path to AMCUpdater program is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    txtAMCUpd_exe.Focus();
-                    return;
-                }
                 if (txtAMCUpd_cnf.Text.Length == 0)
                 {
                     System.Windows.Forms.MessageBox.Show("AMCUpdater Config File Name is Mandatory for detail Internet Update function !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -813,13 +807,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", DefaultCoverArtist.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdExe", CmdExe.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdPar", CmdPar.Text);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", chkGrabber.Checked);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", txtDirGrab.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", chkGrabber.Checked);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", txtDirGrab.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", txtGrabber.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Always", chkGrabber_Always.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_ChooseScript", chkGrabber_ChooseScript.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd", chkAMCUpd.Checked);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", txtAMCUpd_exe.Text);
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", txtAMCUpd_exe.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", txtAMCUpd_cnf.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", chkFanart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", chkDfltFanart.Checked);
@@ -1102,14 +1096,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CmdPar.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdPar", "(none)");
             CmdExe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdExe", string.Empty);
             TitleDelim.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "TitleDelim", "\\");
-            chkGrabber.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", false);
+            //chkGrabber.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", false);
             chkDfltFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", false);
             chkFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", false);
             txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", string.Empty);
-            txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
+            //txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
             chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Always", false);
             chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd", false);
-            txtAMCUpd_exe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe"); 
+            //txtAMCUpd_exe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe"); 
             chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_ChooseScript", false);
             txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", string.Empty);
             chkSuppress.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Suppress", false);
@@ -1379,13 +1373,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             textBoxGlobalUnwatchedOnlyValue.Text = "false";
             chkOnlyTitle.Checked = false;
             chkWindowsFileDialog.Checked = false;
-            chkGrabber.Checked = false;
+            //chkGrabber.Checked = false;
             txtGrabber.ResetText();
             chkGrabber_Always.Checked = false;
             chkGrabber_ChooseScript.Checked = false;
             chkAMCUpd.Checked = false;
             txtAMCUpd_cnf.ResetText();
-            txtAMCUpd_exe.ResetText();
+            //txtAMCUpd_exe.ResetText();
             chkDfltFanart.Checked = false;
             chkFanart.Checked = false;
             chkDfltViews.Checked = false;
@@ -1639,7 +1633,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnGrabber_Click(object sender, EventArgs e)
         {
-            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
             openFileDialog1.DefaultExt = "xml";
             openFileDialog1.Filter = "XML Files|*.xml";
             openFileDialog1.Title = "Find Grabber Config file (xml file)";
@@ -1647,15 +1642,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 txtGrabber.Text = openFileDialog1.FileName;
         }
 
-        private void btnAMCUpd_exe_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.DefaultExt = "AMCUpdater.exe";
-            openFileDialog1.Filter = "exe Files|AMCUpdater.exe";
-            openFileDialog1.Title = "Find AMCUpdater program";
-            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-                txtAMCUpd_exe.Text = openFileDialog1.FileName;
-        }
+        //private void btnAMCUpd_exe_Click(object sender, EventArgs e)
+        //{
+        //    openFileDialog1.RestoreDirectory = true;
+        //    openFileDialog1.DefaultExt = "AMCUpdater.exe";
+        //    openFileDialog1.Filter = "exe Files|AMCUpdater.exe";
+        //    openFileDialog1.Title = "Find AMCUpdater program";
+        //    if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+        //        txtAMCUpd_exe.Text = openFileDialog1.FileName;
+        //}
 
         private void btnAMCUpd_cnf_Click(object sender, EventArgs e)
         {
@@ -1665,15 +1660,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             openFileDialog1.Title = "Find AMCUPdater Config file (xml file)";
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
                 txtAMCUpd_cnf.Text = openFileDialog1.FileName;
-
         }
 
         private void chkAMCUpd_CheckedChanged(object sender, EventArgs e)
         {
             if (chkAMCUpd.Checked)
             {
-                txtAMCUpd_exe.Enabled = true;
-                btnAMCUpd_exe.Enabled = true;
+                //txtAMCUpd_exe.Enabled = true;
+                //btnAMCUpd_exe.Enabled = true;
                 txtAMCUpd_cnf.Enabled = true;
                 btnAMCUpd_cnf.Enabled = true;
                 scheduleAMCUpdater.Enabled = true;
@@ -1687,8 +1681,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-                txtAMCUpd_exe.Enabled = false;
-                btnAMCUpd_exe.Enabled = false;
+                //txtAMCUpd_exe.Enabled = false;
+                //btnAMCUpd_exe.Enabled = false;
                 txtAMCUpd_cnf.Enabled = false;
                 btnAMCUpd_cnf.Enabled = false;
                 scheduleAMCUpdater.Enabled = false;
@@ -1699,28 +1693,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 btnCreateAMCDefaultConfig.Enabled = false;
                 btnCreateAMCDesktopIcon.Enabled = false;
                 AMCMovieScanPath.Enabled = false;
-            }
-        }
-
-        private void chkGrabber_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkGrabber.Checked)
-            {
-                btnGrabber.Enabled = true;
-                txtGrabber.Enabled = true;
-                btnDirGrab.Enabled = true;
-                txtDirGrab.Enabled = true;
-                chkGrabber_Always.Enabled = true;
-                chkGrabber_ChooseScript.Enabled = true;
-            }
-            else
-            {
-                btnGrabber.Enabled = false;
-                txtGrabber.Enabled = false;
-                btnDirGrab.Enabled = false;
-                txtDirGrab.Enabled = false;
-                chkGrabber_Always.Enabled = false;
-                chkGrabber_ChooseScript.Enabled = false;
             }
         }
 
@@ -2258,7 +2230,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AMCSetAttribute("Ant_Database_Source_Field", AntStorage.Text);
             AMCSetAttribute("Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
             AMCSetAttribute("Image_Download_Filename_Prefix", currentconfig + "_");
-            AMCSetAttribute("Internet_Parser_Path", txtGrabber.Text);
+            if (txtGrabber.Text.Length != 0)
+              AMCSetAttribute("Internet_Parser_Path", txtGrabber.Text);
+            else
+              AMCSetAttribute("Internet_Parser_Path", Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml");
             AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
             AMCSetAttribute("Manual_Internet_Parser_Path", txtAMCUpd_cnf.Text);
             AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
@@ -2644,14 +2619,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
         }
 
-        private void btnDirGrab_Click(object sender, EventArgs e)
-        {
-            if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-                txtDirGrab.Text = folderBrowserDialog1.SelectedPath;
-            }
-        }
-
         private void SOp1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SOp1.Text == "filled" || SOp1.Text == "not filled")
@@ -2857,11 +2824,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 return null;
             }
-            t.ApplicationName = txtAMCUpd_exe.Text;
+            string AMCupdaterExecutable = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe";
+            t.ApplicationName = AMCupdaterExecutable;
             t.Parameters = txtAMCUpd_cnf.Text;
             t.Comment = "Updating the database for the MP plugin MyFilms";
-            t.Creator = "MP plugin MyFilms";
-            t.WorkingDirectory = txtAMCUpd_exe.Text.Substring(0, txtAMCUpd_exe.Text.LastIndexOf("\\"));
+            t.Creator = "MP-Plugin MyFilms";
+            t.WorkingDirectory = AMCupdaterExecutable.Substring(0, AMCupdaterExecutable.LastIndexOf("\\"));
             t.SetAccountInformation(Environment.UserName, (string)null);
             t.Flags = TaskFlags.RunOnlyIfLoggedOn;
             t.IdleWaitDeadlineMinutes = 20;

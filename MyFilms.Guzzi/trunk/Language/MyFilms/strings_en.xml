@@ -172,7 +172,7 @@
     <String id="10798691">Global filter "Only films with trailer" ({0})</String>
     <String id="10798692">Global filter "Only films with minimum rating" ({0})</String>
     <String id="10798693">Change value for "minimum rating" (current: '{0}')</String>
-    <String id="10798694">Search trailer - all films (local)</String>
+    <String id="10798694">Search and register trailers - all films (local)</String>
     <String id="10798695">Trailer search finished!</String>
     <String id="10798696">Global filter "Only unwatched films" ({0})</String>
     <String id="10798697">Aspect ratio</String>

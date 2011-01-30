@@ -285,12 +285,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
 
-        #region events
+        #region handler and backgroundworker
   
         public delegate void FilmsStoppedHandler(int stoptime, string filename);
         public delegate void FilmsEndedHandler(string filename);   
         System.ComponentModel.BackgroundWorker bgUpdateDB = new System.ComponentModel.BackgroundWorker();
         System.ComponentModel.BackgroundWorker bgUpdateFanart = new System.ComponentModel.BackgroundWorker();
+        System.ComponentModel.BackgroundWorker bgUpdateTrailer = new System.ComponentModel.BackgroundWorker();
         System.ComponentModel.BackgroundWorker bgLoadMovieList = new System.ComponentModel.BackgroundWorker();
 
         #endregion
@@ -356,6 +357,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
             Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
 
+            // Support for StartParameters - ToDo: Add start view options (implementation)
+            //string jumpToViewName = null;
+            //if (LoadWithParameterSupported)
+            //{
+            //  jumpToViewName = GetJumpToViewName();
+            //}
+
             // (re)link our backdrop image controls to the backdrop image swapper
             backdrop.GUIImageOne = ImgFanart;
             backdrop.GUIImageTwo = ImgFanart2;
@@ -366,7 +374,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             m_bFanartTimerDisabled = true;
             //m_FanartTimer.Change(0,10000);
 
-            MyFilmsDetail.clearGUIProperty("picture");
+            //MyFilmsDetail.clearGUIProperty("picture");
 
             LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
         }
@@ -443,7 +451,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (actionType.m_key != null)
             {
-                if ((actionType.m_key.KeyChar == 112) && (facadeView.Focus) && !(facadeView.SelectedListItem.IsFolder) && ((MyFilms.conf.StrSuppress) || (MyFilms.conf.StrGrabber)))
+                if ((actionType.m_key.KeyChar == 112) && (facadeView.Focus) && !(facadeView.SelectedListItem.IsFolder) && ((MyFilms.conf.StrSuppress)))
                 {
                     MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, null);
                 }
@@ -452,7 +460,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Context_Menu = false;
                     return;
                 }
-                if ((actionType.m_key.KeyChar == 120) && (facadeView.Focus) && !(facadeView.SelectedListItem.IsFolder) && ((MyFilms.conf.StrSuppress) || (MyFilms.conf.StrGrabber)))
+                if ((actionType.m_key.KeyChar == 120) && (facadeView.Focus) && !(facadeView.SelectedListItem.IsFolder) && ((MyFilms.conf.StrSuppress)))
                 {
                     // context menu for update or suppress entry
                     Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
@@ -2626,19 +2634,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MyFilms.conf.StrAntFilterMinRating.ToString()));
                     choiceViewGlobalOptions.Add("filterdbsetrating");
 
-                    if (MyFilms.conf.StrGrabber)
-                    {
-                        // From ZebopnsMerge
-                        //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
-                        if (MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));   // Choose grabber script for that session (status on)
-                        if (!MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));   // Choose grabber script for that session (status off)
-                        choiceViewGlobalOptions.Add("choosescript");
+                    // From ZebonsMerge
+                    //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
+                    if (MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));   // Choose grabber script for that session (status on)
+                    if (!MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798629)));   // Choose grabber script for that session (status off)
+                    choiceViewGlobalOptions.Add("choosescript");
 
-                        //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), MesFilms.conf.StrGrabber_Always.ToString(), (!MesFilms.conf.StrGrabber_Always).ToString()));   // Change grabber find trying best match option 
-                        if (MyFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));   // Change grabber find trying best match option (status on)
-                        if (!MyFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));   // Change grabber find trying best match option (status off)
-                        choiceViewGlobalOptions.Add("findbestmatch");
-                    }
+                    //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), MesFilms.conf.StrGrabber_Always.ToString(), (!MesFilms.conf.StrGrabber_Always).ToString()));   // Change grabber find trying best match option 
+                    if (MyFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));   // Change grabber find trying best match option (status on)
+                    if (!MyFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));   // Change grabber find trying best match option (status off)
+                    choiceViewGlobalOptions.Add("findbestmatch");
 
                     //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), MesFilms.conf.WindowsFileDialog.ToString(), (!MesFilms.conf.WindowsFileDialog).ToString()));  // Using Windows File Dialog File for that session
                     if (MyFilms.conf.WindowsFileDialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628)));   // Using Windows File Dialog File for that session (status on)
@@ -2670,9 +2675,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (MyFilms.conf.StrAMCUpd)
                     {
-                        dlg2.Add(GUILocalizeStrings.Get(1079861));   // Change Config 
+                        dlg2.Add(GUILocalizeStrings.Get(1079861));   // Update Database with external AMCupdater
                         choiceViewGlobalUpdates.Add("updatedb");
                     }
+
                     if (MyFilms.conf.StrFanart)
                     {
                         dlg2.Add(GUILocalizeStrings.Get(4514));   // Download all Fanart
@@ -2866,7 +2872,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                 
                 case "trailer-all":
-                    // Search and register all trailers for all movies in DB
+                    // Launch "Search and register all trailers for all movies in DB" in batch mode
+                    //if (bgUpdateTrailer.IsBusy)
+                    //{
+                    //    ShowMessageDialog(GUILocalizeStrings.Get(10798694), GUILocalizeStrings.Get(921), GUILocalizeStrings.Get(330)); //action already launched
+                    //    break;
+                    //}
+                    //AsynUpdateTrailer();
+                    //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                    //break;
+
                     AntMovieCatalog ds = new AntMovieCatalog();
                     ArrayList w_index = new ArrayList();
                     int w_index_count = 0;
@@ -2897,9 +2912,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Debug("MF: (GlobalSearchTrailerLocal) - Number of Records found: " + w_index_count);
 
                     GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798800));
-                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798801));
-                    dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), w_index_count.ToString()));
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798800)); // Warning: Long runtime !
+                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798801)); //should really the trailer search be started
+                    dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), w_index_count.ToString())); // for <xx> movies ?
                     dlgYesNo.DoModal(GetID);
                     if (!(dlgYesNo.IsConfirmed))
                         break;
@@ -3063,7 +3078,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 upd_choice[ichoice] = "suppress";
                 ichoice++;
             }
-            if (MyFilms.conf.StrGrabber && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+            if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
             {
                 dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
                 upd_choice[ichoice] = "grabber";
@@ -3509,7 +3524,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         upd_choice[ichoice] = "suppress";
                         ichoice++;
                     }
-                    if (MyFilms.conf.StrGrabber && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+                    if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
                     {
                         dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
                         upd_choice[ichoice] = "grabber";
@@ -5084,7 +5099,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         static void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            MyFilmsDetail.RunAMCupdater(MyFilms.conf.StrAMCUpd_exe, "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
+            MyFilmsDetail.RunAMCupdater(Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe", "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
         }
 
         void bgUpdateDB_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -5103,15 +5118,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //*****************************************************************************************
         public void AsynUpdateFanart()
         {
-            if (!bgUpdateFanart.IsBusy)
-            {
-                // moved here to avoid reinstantiating for each menu change.... thanks inker !
-                bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
-                bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
-                bgUpdateFanart.RunWorkerAsync(MyFilms.r);
-                LogMyFilms.Info("MF: : Downloading backdrop fanart in batch mode");
+          if (!bgUpdateFanart.IsBusy)
+          {
+            // moved here to avoid reinstantiating for each menu change.... thanks inker !
+            bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
+            bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
+            bgUpdateFanart.RunWorkerAsync(MyFilms.r);
+            LogMyFilms.Info("MF: : Downloading backdrop fanart in batch mode");
 
-            }
+          }
         }
 
         static void bgUpdateFanart_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -5157,6 +5172,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             if (!bgLoadMovieList.IsBusy)
             {
+                LogMyFilms.Debug("MF: AsynLoadMovieList() started in background !");
                 bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
                 bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
                 LogMyFilms.Info("MF: Loading Movie List in batch mode");
@@ -5198,6 +5214,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         static void bgLoadMovieList_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             LogMyFilms.Info("MF: Loading Movie List in batch mode finished");
+        }
+
+        //*****************************************************************************************
+        //*  Search and register Trailers in Batch mode                                               *
+        //*****************************************************************************************
+        public void AsynUpdateTrailer()
+        {
+          if (!bgUpdateTrailer.IsBusy)
+          {
+            // moved here to avoid reinstantiating for each menu change.... thanks inker !
+            bgUpdateTrailer.DoWork += new DoWorkEventHandler(bgUpdateTrailer_DoWork);
+            bgUpdateTrailer.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateTrailer_RunWorkerCompleted);
+            bgUpdateTrailer.RunWorkerAsync(MyFilms.r);
+            LogMyFilms.Info("MF: starting 'Search and register Trailer' in batch mode");
+          }
+        }
+
+        static void bgUpdateTrailer_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+          // ToDo: Check fanart worker thread to implement same way !!!
+        }
+
+        static void bgUpdateTrailer_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+          LogMyFilms.Info("MF: 'Search and register Trailer' Thread finished");
         }
 
         private void FanartTimerEvent(object state)
@@ -5918,6 +5959,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
            MyFilmsDetail.clearGUIProperty("logos_id2012");
        }
 
+      private string GetJumpToViewName()
+      {
+        return "";
+        //return GUIWindow._loadParameter; // Requires MePo 1.2+
+      }
 
     #endregion
 

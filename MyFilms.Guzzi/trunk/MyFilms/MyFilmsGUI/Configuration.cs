@@ -274,13 +274,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 DefaultCover = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCover", string.Empty);
                 DefaultCoverArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverArtist", string.Empty);
                 StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5.0");
-                StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
+                //StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
                 StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", string.Empty);
-                StrGrabber_Dir = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
+                //StrGrabber_Dir = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
                 StrGrabber_Always = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Always", false);
                 StrGrabber_ChooseScript = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_ChooseScript", false);
                 StrAMCUpd = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd", false);
-                StrAMCUpd_exe = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_exe", string.Empty);
+                //StrAMCUpd_exe = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_exe", string.Empty);
                 StrAMCUpd_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_cnf", string.Empty);
                 StrFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Fanart", false);
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
@@ -1022,12 +1022,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             set { strTraktPassword = value; }
         }
 
-        private bool strGrabber = false;
-        public bool StrGrabber
-        {
-            get { return strGrabber; }
-            set { strGrabber = value; }
-        }
+        //private bool strGrabber = false;
+        //public bool StrGrabber
+        //{
+        //  get { return strGrabber; }
+        //  set { strGrabber = value; }
+        //}
         private string strGrabber_cnf = string.Empty;
         public string StrGrabber_cnf
         {
@@ -1040,12 +1040,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strAntFilterMinRating; }
             set { strAntFilterMinRating = value; }
         }
-        private string strGrabber_Dir = string.Empty;
-        public string StrGrabber_Dir
-        {
-            get { return strGrabber_Dir; }
-            set { strGrabber_Dir = value; }
-        }
+        //private string strGrabber_Dir = string.Empty;
+        //public string StrGrabber_Dir
+        //{
+        //    get { return strGrabber_Dir; }
+        //    set { strGrabber_Dir = value; }
+        //}
         private bool strGrabber_Always = false;
         public bool StrGrabber_Always
         {
@@ -1061,15 +1061,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool strAMCUpd = false;
         public bool StrAMCUpd
         {
-            get { return strAMCUpd; }
-            set { strAMCUpd = value; }
+          get { return strAMCUpd; }
+          set { strAMCUpd = value; }
         }
-        private string strAMCUpd_exe = string.Empty;
-        public string StrAMCUpd_exe
-        {
-            get { return strAMCUpd_exe; }
-            set { strAMCUpd_exe = value; }
-        }
+        //private string strAMCUpd_exe = string.Empty;
+        //public string StrAMCUpd_exe
+        //{
+        //    get { return strAMCUpd_exe; }
+        //    set { strAMCUpd_exe = value; }
+        //}
         private string strAMCUpd_cnf = string.Empty;
         public string StrAMCUpd_cnf
         {

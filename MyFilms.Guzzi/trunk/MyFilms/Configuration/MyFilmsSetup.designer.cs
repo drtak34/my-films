@@ -174,20 +174,13 @@
           this.btnAMCUpd_cnf = new System.Windows.Forms.Button();
           this.txtAMCUpd_cnf = new System.Windows.Forms.TextBox();
           this.label28 = new System.Windows.Forms.Label();
-          this.btnAMCUpd_exe = new System.Windows.Forms.Button();
-          this.txtAMCUpd_exe = new System.Windows.Forms.TextBox();
-          this.label26 = new System.Windows.Forms.Label();
           this.chkAMCUpd = new System.Windows.Forms.CheckBox();
           this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
           this.chkGrabber_ChooseScript = new System.Windows.Forms.CheckBox();
-          this.btnDirGrab = new System.Windows.Forms.Button();
-          this.txtDirGrab = new System.Windows.Forms.TextBox();
-          this.label31 = new System.Windows.Forms.Label();
           this.chkGrabber_Always = new System.Windows.Forms.CheckBox();
           this.btnGrabber = new System.Windows.Forms.Button();
           this.txtGrabber = new System.Windows.Forms.TextBox();
           this.label27 = new System.Windows.Forms.Label();
-          this.chkGrabber = new System.Windows.Forms.CheckBox();
           this.Fanart = new System.Windows.Forms.GroupBox();
           this.label40 = new System.Windows.Forms.Label();
           this.MesFilmsFanartViews = new System.Windows.Forms.TextBox();
@@ -219,6 +212,7 @@
           this.SearchSubDirsTrailer = new System.Windows.Forms.CheckBox();
           this.PathStorageTrailer = new System.Windows.Forms.TextBox();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
+          this.labelTrailers = new System.Windows.Forms.Label();
           this.ShowTrailerWhenStartingMovie = new System.Windows.Forms.CheckBox();
           this.btnTrailer = new System.Windows.Forms.Button();
           this.ShowTrailerPlayDialog = new System.Windows.Forms.CheckBox();
@@ -396,7 +390,7 @@
           this.label12 = new System.Windows.Forms.Label();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Update = new System.Windows.Forms.TabPage();
-          this.Tab_Grabber = new System.Windows.Forms.TabPage();
+          this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Artwork = new System.Windows.Forms.TabPage();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
           this.btnUpdate = new System.Windows.Forms.Button();
@@ -438,6 +432,8 @@
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.Tab_Other = new System.Windows.Forms.TabPage();
+          this.groupBoxAMCupdaterScheduer = new System.Windows.Forms.GroupBox();
           this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
@@ -476,7 +472,7 @@
           this.groupBox111.SuspendLayout();
           this.General.SuspendLayout();
           this.Tab_Update.SuspendLayout();
-          this.Tab_Grabber.SuspendLayout();
+          this.Tab_AMCupdater.SuspendLayout();
           this.Tab_Artwork.SuspendLayout();
           this.Tab_Logos.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
@@ -487,6 +483,7 @@
           this.groupBox13.SuspendLayout();
           this.groupBox10.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          this.groupBoxAMCupdaterScheduer.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -1235,21 +1232,15 @@
           // groupBox20
           // 
           this.groupBox20.BackColor = System.Drawing.Color.Transparent;
-          this.groupBox20.Controls.Add(this.scheduleAMCUpdater);
-          this.groupBox20.Controls.Add(this.btnParameters);
-          this.groupBox20.Controls.Add(this.btnAMCUpd_cnf);
-          this.groupBox20.Controls.Add(this.txtAMCUpd_cnf);
-          this.groupBox20.Controls.Add(this.label28);
-          this.groupBox20.Controls.Add(this.btnAMCUpd_exe);
-          this.groupBox20.Controls.Add(this.txtAMCUpd_exe);
-          this.groupBox20.Controls.Add(this.label26);
+          this.groupBox20.Controls.Add(this.groupBoxAMCupdaterScheduer);
+          this.groupBox20.Controls.Add(this.groupBox111);
           this.groupBox20.Controls.Add(this.chkAMCUpd);
-          this.groupBox20.Location = new System.Drawing.Point(6, 120);
+          this.groupBox20.Location = new System.Drawing.Point(6, 69);
           this.groupBox20.Name = "groupBox20";
-          this.groupBox20.Size = new System.Drawing.Size(735, 74);
+          this.groupBox20.Size = new System.Drawing.Size(735, 279);
           this.groupBox20.TabIndex = 2;
           this.groupBox20.TabStop = false;
-          this.groupBox20.Text = "AMCUpdater Options (for global  Internet update functions)";
+          this.groupBox20.Text = "AMCUpdater Options (for global internet update functions)";
           this.ToolTip1.SetToolTip(this.groupBox20, "For updating the whole database and add automaticly new folders entries,\r\nyou can" +
                   " use and launch AMCUpdater in batch mode.\r\nYou have to define the path to the ex" +
                   "e file and the parameter XML file.");
@@ -1257,19 +1248,22 @@
           // scheduleAMCUpdater
           // 
           this.scheduleAMCUpdater.AutoSize = true;
-          this.scheduleAMCUpdater.Location = new System.Drawing.Point(23, 45);
+          this.scheduleAMCUpdater.Location = new System.Drawing.Point(17, 21);
           this.scheduleAMCUpdater.Name = "scheduleAMCUpdater";
           this.scheduleAMCUpdater.Size = new System.Drawing.Size(138, 17);
           this.scheduleAMCUpdater.TabIndex = 61;
           this.scheduleAMCUpdater.Text = "Schedule AMCUpdater ";
+          this.ToolTip1.SetToolTip(this.scheduleAMCUpdater, "You can use the windows scheduler to schedule AMCupdater to run and update automa" +
+                  "tically to update your catalog.\r\nMake sure, the configuration you choose for thi" +
+                  "s matches your needs.");
           this.scheduleAMCUpdater.UseVisualStyleBackColor = true;
           this.scheduleAMCUpdater.CheckedChanged += new System.EventHandler(this.scheduleAMCUpdater_CheckedChanged);
           // 
           // btnParameters
           // 
-          this.btnParameters.Location = new System.Drawing.Point(173, 40);
+          this.btnParameters.Location = new System.Drawing.Point(182, 17);
           this.btnParameters.Name = "btnParameters";
-          this.btnParameters.Size = new System.Drawing.Size(113, 24);
+          this.btnParameters.Size = new System.Drawing.Size(109, 24);
           this.btnParameters.TabIndex = 60;
           this.btnParameters.Text = "Task Parameters";
           this.btnParameters.UseVisualStyleBackColor = true;
@@ -1278,9 +1272,9 @@
           // btnAMCUpd_cnf
           // 
           this.btnAMCUpd_cnf.Enabled = false;
-          this.btnAMCUpd_cnf.Location = new System.Drawing.Point(646, 41);
+          this.btnAMCUpd_cnf.Location = new System.Drawing.Point(682, 19);
           this.btnAMCUpd_cnf.Name = "btnAMCUpd_cnf";
-          this.btnAMCUpd_cnf.Size = new System.Drawing.Size(32, 23);
+          this.btnAMCUpd_cnf.Size = new System.Drawing.Size(32, 20);
           this.btnAMCUpd_cnf.TabIndex = 58;
           this.btnAMCUpd_cnf.Text = "...";
           this.btnAMCUpd_cnf.UseVisualStyleBackColor = true;
@@ -1289,136 +1283,78 @@
           // txtAMCUpd_cnf
           // 
           this.txtAMCUpd_cnf.Enabled = false;
-          this.txtAMCUpd_cnf.Location = new System.Drawing.Point(406, 43);
+          this.txtAMCUpd_cnf.Location = new System.Drawing.Point(400, 19);
           this.txtAMCUpd_cnf.Name = "txtAMCUpd_cnf";
-          this.txtAMCUpd_cnf.Size = new System.Drawing.Size(234, 20);
+          this.txtAMCUpd_cnf.Size = new System.Drawing.Size(276, 20);
           this.txtAMCUpd_cnf.TabIndex = 57;
-          this.ToolTip1.SetToolTip(this.txtAMCUpd_cnf, "Grabber script files are located in the mediaportal data directory in \\scripts\\My" +
-                  "Films after installation.\r\nUnless you don\'t want to use other scripts there is n" +
-                  "o need to change this.");
+          this.ToolTip1.SetToolTip(this.txtAMCUpd_cnf, resources.GetString("txtAMCUpd_cnf.ToolTip"));
           // 
           // label28
           // 
           this.label28.AutoSize = true;
-          this.label28.Location = new System.Drawing.Point(305, 47);
+          this.label28.Location = new System.Drawing.Point(304, 23);
           this.label28.Name = "label28";
-          this.label28.Size = new System.Drawing.Size(87, 13);
+          this.label28.Size = new System.Drawing.Size(90, 13);
           this.label28.TabIndex = 56;
-          this.label28.Text = "Config File (XML)";
-          // 
-          // btnAMCUpd_exe
-          // 
-          this.btnAMCUpd_exe.Enabled = false;
-          this.btnAMCUpd_exe.Location = new System.Drawing.Point(646, 14);
-          this.btnAMCUpd_exe.Name = "btnAMCUpd_exe";
-          this.btnAMCUpd_exe.Size = new System.Drawing.Size(32, 23);
-          this.btnAMCUpd_exe.TabIndex = 55;
-          this.btnAMCUpd_exe.Text = "...";
-          this.btnAMCUpd_exe.UseVisualStyleBackColor = true;
-          this.btnAMCUpd_exe.Click += new System.EventHandler(this.btnAMCUpd_exe_Click);
-          // 
-          // txtAMCUpd_exe
-          // 
-          this.txtAMCUpd_exe.Enabled = false;
-          this.txtAMCUpd_exe.Location = new System.Drawing.Point(406, 16);
-          this.txtAMCUpd_exe.Name = "txtAMCUpd_exe";
-          this.txtAMCUpd_exe.Size = new System.Drawing.Size(234, 20);
-          this.txtAMCUpd_exe.TabIndex = 54;
-          this.ToolTip1.SetToolTip(this.txtAMCUpd_exe, "AMCupdater.exe is located in the mediaportal program directory after installation" +
-                  "");
-          // 
-          // label26
-          // 
-          this.label26.AutoSize = true;
-          this.label26.Location = new System.Drawing.Point(305, 20);
-          this.label26.Name = "label26";
-          this.label26.Size = new System.Drawing.Size(88, 13);
-          this.label26.TabIndex = 53;
-          this.label26.Text = "AMCUpdater.exe";
+          this.label28.Text = "AMCU Config File";
           // 
           // chkAMCUpd
           // 
           this.chkAMCUpd.AutoSize = true;
-          this.chkAMCUpd.Location = new System.Drawing.Point(23, 14);
+          this.chkAMCUpd.BackColor = System.Drawing.Color.Transparent;
+          this.chkAMCUpd.Location = new System.Drawing.Point(6, 14);
           this.chkAMCUpd.Name = "chkAMCUpd";
           this.chkAMCUpd.Size = new System.Drawing.Size(109, 17);
           this.chkAMCUpd.TabIndex = 0;
           this.chkAMCUpd.Text = "Use AMCUpdater";
-          this.chkAMCUpd.UseVisualStyleBackColor = true;
+          this.ToolTip1.SetToolTip(this.chkAMCUpd, "If checked, the global update options will be available iun myfilms to run AMCupd" +
+                  "ater in the background, \r\nscanning for new movies, adding them to your catalog a" +
+                  "nd and loading data for it.");
+          this.chkAMCUpd.UseVisualStyleBackColor = false;
           this.chkAMCUpd.CheckedChanged += new System.EventHandler(this.chkAMCUpd_CheckedChanged);
           // 
           // groupBox_GrabberOptions
           // 
           this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_ChooseScript);
-          this.groupBox_GrabberOptions.Controls.Add(this.btnDirGrab);
-          this.groupBox_GrabberOptions.Controls.Add(this.txtDirGrab);
-          this.groupBox_GrabberOptions.Controls.Add(this.label31);
           this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_Always);
           this.groupBox_GrabberOptions.Controls.Add(this.btnGrabber);
           this.groupBox_GrabberOptions.Controls.Add(this.txtGrabber);
           this.groupBox_GrabberOptions.Controls.Add(this.label27);
-          this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber);
           this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 10);
           this.groupBox_GrabberOptions.Name = "groupBox_GrabberOptions";
-          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 104);
+          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 57);
           this.groupBox_GrabberOptions.TabIndex = 1;
           this.groupBox_GrabberOptions.TabStop = false;
-          this.groupBox_GrabberOptions.Text = "Grabber Options";
+          this.groupBox_GrabberOptions.Text = "Movie Detail Internet Updates";
           this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
           // 
           // chkGrabber_ChooseScript
           // 
           this.chkGrabber_ChooseScript.AutoSize = true;
-          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(38, 51);
+          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(438, 13);
           this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
-          this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(158, 17);
+          this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(193, 17);
           this.chkGrabber_ChooseScript.TabIndex = 60;
-          this.chkGrabber_ChooseScript.Text = "don\'t use default script (ask)";
+          this.chkGrabber_ChooseScript.Text = "don\'t use default script (always ask)";
+          this.ToolTip1.SetToolTip(this.chkGrabber_ChooseScript, resources.GetString("chkGrabber_ChooseScript.ToolTip"));
           this.chkGrabber_ChooseScript.UseVisualStyleBackColor = true;
-          // 
-          // btnDirGrab
-          // 
-          this.btnDirGrab.Location = new System.Drawing.Point(646, 17);
-          this.btnDirGrab.Name = "btnDirGrab";
-          this.btnDirGrab.Size = new System.Drawing.Size(32, 23);
-          this.btnDirGrab.TabIndex = 59;
-          this.btnDirGrab.Text = "...";
-          this.btnDirGrab.UseVisualStyleBackColor = true;
-          this.btnDirGrab.Click += new System.EventHandler(this.btnDirGrab_Click);
-          // 
-          // txtDirGrab
-          // 
-          this.txtDirGrab.Enabled = false;
-          this.txtDirGrab.Location = new System.Drawing.Point(406, 19);
-          this.txtDirGrab.Name = "txtDirGrab";
-          this.txtDirGrab.Size = new System.Drawing.Size(234, 20);
-          this.txtDirGrab.TabIndex = 58;
-          // 
-          // label31
-          // 
-          this.label31.AutoSize = true;
-          this.label31.Location = new System.Drawing.Point(283, 22);
-          this.label31.Name = "label31";
-          this.label31.Size = new System.Drawing.Size(120, 13);
-          this.label31.TabIndex = 57;
-          this.label31.Text = "Grabber Script Directory";
           // 
           // chkGrabber_Always
           // 
           this.chkGrabber_Always.AutoSize = true;
-          this.chkGrabber_Always.Location = new System.Drawing.Point(38, 74);
+          this.chkGrabber_Always.Location = new System.Drawing.Point(438, 34);
           this.chkGrabber_Always.Name = "chkGrabber_Always";
           this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
           this.chkGrabber_Always.TabIndex = 56;
           this.chkGrabber_Always.Text = "try to find best match automatically";
+          this.ToolTip1.SetToolTip(this.chkGrabber_Always, resources.GetString("chkGrabber_Always.ToolTip"));
           this.chkGrabber_Always.UseVisualStyleBackColor = true;
           // 
           // btnGrabber
           // 
-          this.btnGrabber.Enabled = false;
-          this.btnGrabber.Location = new System.Drawing.Point(646, 50);
+          this.btnGrabber.Location = new System.Drawing.Point(361, 22);
           this.btnGrabber.Name = "btnGrabber";
-          this.btnGrabber.Size = new System.Drawing.Size(32, 23);
+          this.btnGrabber.Size = new System.Drawing.Size(32, 20);
           this.btnGrabber.TabIndex = 55;
           this.btnGrabber.Text = "...";
           this.btnGrabber.UseVisualStyleBackColor = true;
@@ -1426,31 +1362,20 @@
           // 
           // txtGrabber
           // 
-          this.txtGrabber.Enabled = false;
-          this.txtGrabber.Location = new System.Drawing.Point(406, 52);
+          this.txtGrabber.Location = new System.Drawing.Point(173, 22);
           this.txtGrabber.Name = "txtGrabber";
-          this.txtGrabber.Size = new System.Drawing.Size(234, 20);
+          this.txtGrabber.Size = new System.Drawing.Size(182, 20);
           this.txtGrabber.TabIndex = 54;
+          this.ToolTip1.SetToolTip(this.txtGrabber, resources.GetString("txtGrabber.ToolTip"));
           // 
           // label27
           // 
           this.label27.AutoSize = true;
-          this.label27.Location = new System.Drawing.Point(291, 55);
+          this.label27.Location = new System.Drawing.Point(16, 25);
           this.label27.Name = "label27";
-          this.label27.Size = new System.Drawing.Size(112, 13);
+          this.label27.Size = new System.Drawing.Size(151, 13);
           this.label27.TabIndex = 53;
-          this.label27.Text = "Default Grabber Script";
-          // 
-          // chkGrabber
-          // 
-          this.chkGrabber.AutoSize = true;
-          this.chkGrabber.Location = new System.Drawing.Point(23, 16);
-          this.chkGrabber.Name = "chkGrabber";
-          this.chkGrabber.Size = new System.Drawing.Size(183, 30);
-          this.chkGrabber.TabIndex = 0;
-          this.chkGrabber.Text = "Use Grabber\r\n(for Movie Detail Internet Update)";
-          this.chkGrabber.UseVisualStyleBackColor = true;
-          this.chkGrabber.CheckedChanged += new System.EventHandler(this.chkGrabber_CheckedChanged);
+          this.label27.Text = "Default Internet Grabber Script";
           // 
           // Fanart
           // 
@@ -1762,7 +1687,7 @@
           // SearchSubDirsTrailer
           // 
           this.SearchSubDirsTrailer.AutoSize = true;
-          this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 94);
+          this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 121);
           this.SearchSubDirsTrailer.Name = "SearchSubDirsTrailer";
           this.SearchSubDirsTrailer.Size = new System.Drawing.Size(130, 17);
           this.SearchSubDirsTrailer.TabIndex = 74;
@@ -1773,7 +1698,7 @@
           // 
           // PathStorageTrailer
           // 
-          this.PathStorageTrailer.Location = new System.Drawing.Point(190, 65);
+          this.PathStorageTrailer.Location = new System.Drawing.Point(190, 92);
           this.PathStorageTrailer.Name = "PathStorageTrailer";
           this.PathStorageTrailer.Size = new System.Drawing.Size(428, 20);
           this.PathStorageTrailer.TabIndex = 68;
@@ -1781,6 +1706,7 @@
           // 
           // groupBox24
           // 
+          this.groupBox24.Controls.Add(this.labelTrailers);
           this.groupBox24.Controls.Add(this.SearchSubDirsTrailer);
           this.groupBox24.Controls.Add(this.ShowTrailerWhenStartingMovie);
           this.groupBox24.Controls.Add(this.btnTrailer);
@@ -1791,18 +1717,28 @@
           this.groupBox24.Controls.Add(this.ItemSearchFileNameTrailer);
           this.groupBox24.Controls.Add(this.AntStorageTrailer);
           this.groupBox24.Controls.Add(this.label35);
-          this.groupBox24.Location = new System.Drawing.Point(29, 30);
+          this.groupBox24.Location = new System.Drawing.Point(23, 37);
           this.groupBox24.Name = "groupBox24";
-          this.groupBox24.Size = new System.Drawing.Size(681, 238);
+          this.groupBox24.Size = new System.Drawing.Size(681, 266);
           this.groupBox24.TabIndex = 73;
           this.groupBox24.TabStop = false;
           this.groupBox24.Text = "DB Item for storing trailerinfo (borrower recommended)";
           this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
           // 
+          // labelTrailers
+          // 
+          this.labelTrailers.AutoSize = true;
+          this.labelTrailers.Location = new System.Drawing.Point(24, 27);
+          this.labelTrailers.Name = "labelTrailers";
+          this.labelTrailers.Size = new System.Drawing.Size(379, 13);
+          this.labelTrailers.TabIndex = 74;
+          this.labelTrailers.Text = "To enable Trailer support, you must select a DB Item/field for storing Trailer in" +
+              "fo";
+          // 
           // ShowTrailerWhenStartingMovie
           // 
           this.ShowTrailerWhenStartingMovie.AutoSize = true;
-          this.ShowTrailerWhenStartingMovie.Location = new System.Drawing.Point(27, 197);
+          this.ShowTrailerWhenStartingMovie.Location = new System.Drawing.Point(27, 224);
           this.ShowTrailerWhenStartingMovie.Name = "ShowTrailerWhenStartingMovie";
           this.ShowTrailerWhenStartingMovie.Size = new System.Drawing.Size(228, 17);
           this.ShowTrailerWhenStartingMovie.TabIndex = 73;
@@ -1813,7 +1749,7 @@
           // 
           // btnTrailer
           // 
-          this.btnTrailer.Location = new System.Drawing.Point(634, 63);
+          this.btnTrailer.Location = new System.Drawing.Point(634, 90);
           this.btnTrailer.Name = "btnTrailer";
           this.btnTrailer.Size = new System.Drawing.Size(32, 23);
           this.btnTrailer.TabIndex = 70;
@@ -1824,7 +1760,7 @@
           // ShowTrailerPlayDialog
           // 
           this.ShowTrailerPlayDialog.AutoSize = true;
-          this.ShowTrailerPlayDialog.Location = new System.Drawing.Point(27, 168);
+          this.ShowTrailerPlayDialog.Location = new System.Drawing.Point(27, 195);
           this.ShowTrailerPlayDialog.Name = "ShowTrailerPlayDialog";
           this.ShowTrailerPlayDialog.Size = new System.Drawing.Size(138, 17);
           this.ShowTrailerPlayDialog.TabIndex = 72;
@@ -1836,7 +1772,7 @@
           // SearchFileNameTrailer
           // 
           this.SearchFileNameTrailer.AutoSize = true;
-          this.SearchFileNameTrailer.Location = new System.Drawing.Point(27, 142);
+          this.SearchFileNameTrailer.Location = new System.Drawing.Point(27, 169);
           this.SearchFileNameTrailer.Name = "SearchFileNameTrailer";
           this.SearchFileNameTrailer.Size = new System.Drawing.Size(144, 17);
           this.SearchFileNameTrailer.TabIndex = 71;
@@ -1847,7 +1783,7 @@
           // label34
           // 
           this.label34.AutoSize = true;
-          this.label34.Location = new System.Drawing.Point(24, 68);
+          this.label34.Location = new System.Drawing.Point(24, 95);
           this.label34.Name = "label34";
           this.label34.Size = new System.Drawing.Size(143, 13);
           this.label34.TabIndex = 69;
@@ -1860,7 +1796,7 @@
             "OriginalTitle",
             "TranslatedTitle",
             "FormattedTitle"});
-          this.ItemSearchFileNameTrailer.Location = new System.Drawing.Point(190, 140);
+          this.ItemSearchFileNameTrailer.Location = new System.Drawing.Point(190, 167);
           this.ItemSearchFileNameTrailer.Name = "ItemSearchFileNameTrailer";
           this.ItemSearchFileNameTrailer.Size = new System.Drawing.Size(185, 21);
           this.ItemSearchFileNameTrailer.TabIndex = 70;
@@ -1869,7 +1805,7 @@
           // 
           // AntStorageTrailer
           // 
-          this.AntStorageTrailer.Location = new System.Drawing.Point(190, 25);
+          this.AntStorageTrailer.Location = new System.Drawing.Point(190, 52);
           this.AntStorageTrailer.Name = "AntStorageTrailer";
           this.AntStorageTrailer.Size = new System.Drawing.Size(185, 21);
           this.AntStorageTrailer.TabIndex = 68;
@@ -1878,7 +1814,7 @@
           // label35
           // 
           this.label35.AutoSize = true;
-          this.label35.Location = new System.Drawing.Point(24, 28);
+          this.label35.Location = new System.Drawing.Point(24, 55);
           this.label35.Name = "label35";
           this.label35.Size = new System.Drawing.Size(147, 13);
           this.label35.TabIndex = 69;
@@ -2335,7 +2271,7 @@
           // 
           this.AMCMovieScanPath.Location = new System.Drawing.Point(308, 18);
           this.AMCMovieScanPath.Name = "AMCMovieScanPath";
-          this.AMCMovieScanPath.Size = new System.Drawing.Size(332, 20);
+          this.AMCMovieScanPath.Size = new System.Drawing.Size(368, 20);
           this.AMCMovieScanPath.TabIndex = 81;
           this.ToolTip1.SetToolTip(this.AMCMovieScanPath, "Enter the path(es) to your mediafiles.\r\nMore than one path, separated by semicolo" +
                   "n, are allowed.");
@@ -2899,6 +2835,7 @@
           this.lblYellowShowRequiredItems.Size = new System.Drawing.Size(140, 28);
           this.lblYellowShowRequiredItems.TabIndex = 76;
           this.lblYellowShowRequiredItems.Text = "Yellow fields are mandatory \r\nfor the plugin to work !";
+          this.lblYellowShowRequiredItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
           // 
           // groupBox_Security
           // 
@@ -2917,7 +2854,7 @@
           // label_Security
           // 
           this.label_Security.AutoSize = true;
-          this.label_Security.Location = new System.Drawing.Point(101, 19);
+          this.label_Security.Location = new System.Drawing.Point(82, 21);
           this.label_Security.Name = "label_Security";
           this.label_Security.Size = new System.Drawing.Size(167, 13);
           this.label_Security.TabIndex = 73;
@@ -2990,9 +2927,9 @@
           // 
           // butPath
           // 
-          this.butPath.Location = new System.Drawing.Point(441, 13);
+          this.butPath.Location = new System.Drawing.Point(441, 14);
           this.butPath.Name = "butPath";
-          this.butPath.Size = new System.Drawing.Size(32, 23);
+          this.butPath.Size = new System.Drawing.Size(32, 20);
           this.butPath.TabIndex = 55;
           this.butPath.Text = "...";
           this.butPath.UseVisualStyleBackColor = true;
@@ -3048,9 +2985,9 @@
           // 
           // ButCat
           // 
-          this.ButCat.Location = new System.Drawing.Point(407, 13);
+          this.ButCat.Location = new System.Drawing.Point(407, 15);
           this.ButCat.Name = "ButCat";
-          this.ButCat.Size = new System.Drawing.Size(32, 23);
+          this.ButCat.Size = new System.Drawing.Size(32, 20);
           this.ButCat.TabIndex = 49;
           this.ButCat.Text = "...";
           this.ButCat.UseVisualStyleBackColor = true;
@@ -3502,6 +3439,7 @@
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 23);
           this.btnCreateAMCDefaultConfig.TabIndex = 77;
           this.btnCreateAMCDefaultConfig.Text = "(Re)Create Default Config";
+          this.ToolTip1.SetToolTip(this.btnCreateAMCDefaultConfig, resources.GetString("btnCreateAMCDefaultConfig.ToolTip"));
           this.btnCreateAMCDefaultConfig.UseVisualStyleBackColor = true;
           this.btnCreateAMCDefaultConfig.Click += new System.EventHandler(this.btnCreateAMCDefaultConfig_Click);
           // 
@@ -3527,9 +3465,9 @@
           this.groupBox111.Controls.Add(this.btnCreateAMCDefaultConfig);
           this.groupBox111.Controls.Add(this.btnLaunchAMCupdater);
           this.groupBox111.ImeMode = System.Windows.Forms.ImeMode.Off;
-          this.groupBox111.Location = new System.Drawing.Point(6, 197);
+          this.groupBox111.Location = new System.Drawing.Point(6, 118);
           this.groupBox111.Name = "groupBox111";
-          this.groupBox111.Size = new System.Drawing.Size(731, 153);
+          this.groupBox111.Size = new System.Drawing.Size(723, 155);
           this.groupBox111.TabIndex = 3;
           this.groupBox111.TabStop = false;
           this.groupBox111.Text = "AMC Updater external application";
@@ -3556,9 +3494,9 @@
           // btnAMCMovieScanPathAdd
           // 
           this.btnAMCMovieScanPathAdd.Enabled = false;
-          this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(646, 16);
+          this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(682, 18);
           this.btnAMCMovieScanPathAdd.Name = "btnAMCMovieScanPathAdd";
-          this.btnAMCMovieScanPathAdd.Size = new System.Drawing.Size(32, 23);
+          this.btnAMCMovieScanPathAdd.Size = new System.Drawing.Size(32, 20);
           this.btnAMCMovieScanPathAdd.TabIndex = 82;
           this.btnAMCMovieScanPathAdd.Text = "...";
           this.btnAMCMovieScanPathAdd.UseVisualStyleBackColor = true;
@@ -3576,8 +3514,11 @@
           this.AMCConfigView.Location = new System.Drawing.Point(308, 67);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(412, 80);
+          this.AMCConfigView.Size = new System.Drawing.Size(406, 80);
           this.AMCConfigView.TabIndex = 80;
+          this.ToolTip1.SetToolTip(this.AMCConfigView, "List the content of the AMCupdater configuration options.\r\nThose options are used" +
+                  " to create the Default Config and when launching AMCupdater from \r\nMyFilms setup" +
+                  " or via the desktop icon.");
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
           this.AMCConfigView.View = System.Windows.Forms.View.Details;
           // 
@@ -3587,7 +3528,7 @@
           // 
           // Value
           // 
-          this.Value.Width = 309;
+          this.Value.Width = 297;
           // 
           // btnLaunchAMCupdater
           // 
@@ -3675,12 +3616,13 @@
           this.General.Controls.Add(this.Tab_Views);
           this.General.Controls.Add(this.Tab_Search);
           this.General.Controls.Add(this.Tab_Update);
-          this.General.Controls.Add(this.Tab_Grabber);
+          this.General.Controls.Add(this.Tab_AMCupdater);
           this.General.Controls.Add(this.Tab_Artwork);
           this.General.Controls.Add(this.Tab_Logos);
           this.General.Controls.Add(this.Tab_WakeOnLan);
           this.General.Controls.Add(this.Tab_ExternalCatalogs);
           this.General.Controls.Add(this.Tab_Trakt);
+          this.General.Controls.Add(this.Tab_Other);
           this.General.Location = new System.Drawing.Point(12, 78);
           this.General.Name = "General";
           this.General.SelectedIndex = 0;
@@ -3703,19 +3645,18 @@
           this.Tab_Update.ToolTipText = "Setup for update options (updates to values from GUI)";
           this.Tab_Update.UseVisualStyleBackColor = true;
           // 
-          // Tab_Grabber
+          // Tab_AMCupdater
           // 
-          this.Tab_Grabber.Controls.Add(this.groupBox20);
-          this.Tab_Grabber.Controls.Add(this.groupBox111);
-          this.Tab_Grabber.Controls.Add(this.groupBox_GrabberOptions);
-          this.Tab_Grabber.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Grabber.Name = "Tab_Grabber";
-          this.Tab_Grabber.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Grabber.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Grabber.TabIndex = 4;
-          this.Tab_Grabber.Text = "Grabber";
-          this.Tab_Grabber.ToolTipText = "Setup for internetupdates and basic configuration for AMCupdater";
-          this.Tab_Grabber.UseVisualStyleBackColor = true;
+          this.Tab_AMCupdater.Controls.Add(this.groupBox20);
+          this.Tab_AMCupdater.Controls.Add(this.groupBox_GrabberOptions);
+          this.Tab_AMCupdater.Location = new System.Drawing.Point(4, 22);
+          this.Tab_AMCupdater.Name = "Tab_AMCupdater";
+          this.Tab_AMCupdater.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_AMCupdater.Size = new System.Drawing.Size(747, 354);
+          this.Tab_AMCupdater.TabIndex = 4;
+          this.Tab_AMCupdater.Text = "AMC Updater";
+          this.Tab_AMCupdater.ToolTipText = "Setup for internetupdates and basic configuration for AMCupdater";
+          this.Tab_AMCupdater.UseVisualStyleBackColor = true;
           // 
           // Tab_Artwork
           // 
@@ -4175,12 +4116,13 @@
           // 
           this.btnLaunchAMCglobal.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
           this.btnLaunchAMCglobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCglobal.Location = new System.Drawing.Point(39, 464);
+          this.btnLaunchAMCglobal.Location = new System.Drawing.Point(45, 464);
           this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";
           this.btnLaunchAMCglobal.Size = new System.Drawing.Size(152, 31);
           this.btnLaunchAMCglobal.TabIndex = 77;
-          this.btnLaunchAMCglobal.Text = "Launch AMC Manager";
+          this.btnLaunchAMCglobal.Text = "Launch AMC Updater";
           this.btnLaunchAMCglobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+          this.ToolTip1.SetToolTip(this.btnLaunchAMCglobal, "Starts AMCupdater (external application) with the created configuration file.");
           this.btnLaunchAMCglobal.UseVisualStyleBackColor = true;
           this.btnLaunchAMCglobal.Click += new System.EventHandler(this.btnLaunchAMCglobal_Click);
           // 
@@ -4194,14 +4136,38 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // Tab_Other
+          // 
+          this.Tab_Other.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Other.Name = "Tab_Other";
+          this.Tab_Other.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Other.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Other.TabIndex = 11;
+          this.Tab_Other.Text = "Other";
+          this.Tab_Other.UseVisualStyleBackColor = true;
+          // 
+          // groupBoxAMCupdaterScheduer
+          // 
+          this.groupBoxAMCupdaterScheduer.Controls.Add(this.scheduleAMCUpdater);
+          this.groupBoxAMCupdaterScheduer.Controls.Add(this.label28);
+          this.groupBoxAMCupdaterScheduer.Controls.Add(this.btnParameters);
+          this.groupBoxAMCupdaterScheduer.Controls.Add(this.txtAMCUpd_cnf);
+          this.groupBoxAMCupdaterScheduer.Controls.Add(this.btnAMCUpd_cnf);
+          this.groupBoxAMCupdaterScheduer.Location = new System.Drawing.Point(6, 37);
+          this.groupBoxAMCupdaterScheduer.Name = "groupBoxAMCupdaterScheduer";
+          this.groupBoxAMCupdaterScheduer.Size = new System.Drawing.Size(723, 50);
+          this.groupBoxAMCupdaterScheduer.TabIndex = 62;
+          this.groupBoxAMCupdaterScheduer.TabStop = false;
+          this.groupBoxAMCupdaterScheduer.Text = "Scheduler for AMCupdater";
+          // 
           // traktConfiguration1
           // 
           this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                       | System.Windows.Forms.AnchorStyles.Left)
                       | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(23, 6);
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
           this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(693, 345);
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
           this.traktConfiguration1.TabIndex = 0;
           // 
           // MyFilmsSetup
@@ -4296,7 +4262,7 @@
           this.groupBox111.PerformLayout();
           this.General.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
-          this.Tab_Grabber.ResumeLayout(false);
+          this.Tab_AMCupdater.ResumeLayout(false);
           this.Tab_Artwork.ResumeLayout(false);
           this.Tab_Logos.ResumeLayout(false);
           this.Tab_Logos.PerformLayout();
@@ -4311,6 +4277,8 @@
           this.groupBox10.ResumeLayout(false);
           this.groupBox10.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          this.groupBoxAMCupdaterScheduer.ResumeLayout(false);
+          this.groupBoxAMCupdaterScheduer.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -4425,15 +4393,11 @@
         private RadioButton Thumbnails;
         private RadioButton Images;
         private CheckBox SearchSubDirs;
-        private TabPage Tab_Grabber;
+        private TabPage Tab_AMCupdater;
         private GroupBox groupBox_GrabberOptions;
         private Button btnGrabber;
         private TextBox txtGrabber;
         private Label label27;
-        private CheckBox chkGrabber;
-        private Button btnAMCUpd_exe;
-        private TextBox txtAMCUpd_exe;
-        private Label label26;
         private CheckBox chkAMCUpd;
         private Button btnAMCUpd_cnf;
         private TextBox txtAMCUpd_cnf;
@@ -4501,9 +4465,6 @@
         private TextBox AntUpdText1;
         private ComboBox AntSort2;
         private TextBox AntTSort2;
-        private Button btnDirGrab;
-        private TextBox txtDirGrab;
-        private Label label31;
         private Label label32;
         private ComboBox Sort;
         private ComboBox SortSens;
@@ -4660,5 +4621,8 @@
         private CheckBox CheckWatchedPlayerStopped;
         private Label lblUnwatchedItemsValue;
         private TextBox textBoxGlobalUnwatchedOnlyValue;
+        private Label labelTrailers;
+        private TabPage Tab_Other;
+        private GroupBox groupBoxAMCupdaterScheduer;
     }
 }

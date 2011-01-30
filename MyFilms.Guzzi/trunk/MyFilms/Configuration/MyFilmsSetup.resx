@@ -126,9 +126,9 @@ You can have more than one configuration referencing a single database, or multi
 Configurations can be password protected in the ‘Security’ section below, to restrict access to children for example.</value>
   </data>
   <data name="PathStorage.ToolTip" xml:space="preserve">
-    <value>Enter the full path to the folder/s containing the movie files.  
-You can enter several different paths separated by a semi-colon and you can select the option “search in sub-folders”, if required.  
-You can also use the browse button to locate the correct folder/s.
+    <value>Enter the full path to the folder(s) containing the movie files.  
+You can enter several different pathes separated by a semi-colon and you can select the option “search in sub-folders”, if required.  
+You can also use the browse button to locate the correct folder(s).
 </value>
   </data>
   <data name="AntStorage.ToolTip" xml:space="preserve">
@@ -213,17 +213,47 @@ so it is not recommended to use that option for remote only users.
 
 If using a mouse, this option can be enabled.</value>
   </data>
+  <data name="btnCreateAMCDefaultConfig.ToolTip" xml:space="preserve">
+    <value>MyFilms will create a default configuration for your current Configuration.
+This configuration is used, when you start AMCupdater from the setup or the created desktop icon.
+You might want to recreate this default configuration, if you have changed settings in MyFilms setup, 
+e.g. default Internet Grabber script.</value>
+  </data>
+  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
+    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
+MyFilms will create such a file for each Configuration Name.
+You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
+However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
+  </data>
   <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
-    <value>If you want to update your movie datas over Internet,
-valid that option. 
-The grabber will be used for that (grabber.dll file). You have to
-define the xml parser file to be used with.
+    <value>You can update your movie data via internet from insude MyFilms GUI.
 
-With the 'try to find best match automaticly' option validated, the grabber'll
+You have to define the xml parser file ("grabber script" to be used.
+
+With the 'try to find best match automaticly' option validated, the grabber will
 try to find best match but can provide errors in some cases. It's better to
-don't valid it. In taht case, you'll get a menu to choose the right movie.
+don't valid it. In that case, you'll get a menu to choose the right movie.
+
+You can change those options from MyFilms GUI (global settings) also.
 
 </value>
+  </data>
+  <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
+    <value>If unchecked, you will be asked to manually choose the script to use for internet data update.
+If checked, the Default script will always be used.
+You can change this setting also from inside MyFilms GUI in global options.</value>
+  </data>
+  <data name="chkGrabber_Always.ToolTip" xml:space="preserve">
+    <value>If checked, MyFilms will choose the best match automatically.
+If unchecked, you'll get possible matching movies presented in a list to choose manually yourself.
+Automatically matching best result may lead to wrong information for a movie.</value>
+  </data>
+  <data name="txtGrabber.ToolTip" xml:space="preserve">
+    <value>Choose a default grabber script to be used for internet data update in MyFilms GUI.
+Grabber script files are located in the mediaportal data directory in \scripts\MyFilms after installation.
+
+This setting will also be used to set the script as default script for AMCupdater configuration - however 
+you can change AMCupdater settings in the GUI to use any other settings.</value>
   </data>
   <data name="Fanart.ToolTip" xml:space="preserve">
     <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
@@ -315,6 +345,17 @@ and media files in subdirectories containing the movie name.
 You can add more than one searchpath by separating them with semicolon, e.g. "path1; path2".
 If you choose a new path it will be added to your existing path(es).</value>
   </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>The Trailer section allows to use a selectable DB field to store trailer source path infos
+and thus to integrate trailers into MyFilms.
+Trailer can be searched within the plugin and "autoregistered".
+GUI allows to show if a trailer is present (registered) and play it.
+By default, the search includes mediafiles in the directory of the main movie and it's subdirectories, 
+searching for mediafiles containing "trlr" or "trailer" in the filename.
+So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
+and make sure they are named accordingly (many downloader utilities do it this way).
+You can add an additional trailer search path that will search and register for media files containing the movie's title.</value>
+  </data>
   <data name="SearchFileNameTrailer.ToolTip" xml:space="preserve">
     <value>If Trailer file is not found with the 'DB Item for storing Trailer Infos' field, you 
 can search the trailer file with the movie Name.
@@ -328,17 +369,6 @@ Attention: Might degrade performace!
 If you use external ANT movie catalog to edit this field manually, you can add more than one movie by separating them with semicolon.
 e.g.: "\\server\path\trailer1.flv;C:\Movies\trailer2.flv"
 When using the trailersearch &amp; register, MyFilms will automatically populate this DB field for you.</value>
-  </data>
-  <data name="groupBox24.ToolTip" xml:space="preserve">
-    <value>The Trailer section allows to use a selectable DB field to store trailer source path infos
-and thus to integrate trailers into MyFilms.
-Trailer can be searched within the plugin and "autoregistered".
-GUI allows to show if a trailer is present (registered) and play it.
-By default, the search includes mediafiles in the directory of the main movie and it's subdirectories, 
-searching for mediafiles containing "trlr" or "trailer" in the filename.
-So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
-and make sure they are named accordingly (many downloader utilities do it this way).
-You can add an additional trailer search path that will search and register for media files containing the movie's title.</value>
   </data>
   <data name="DefaultCover.ToolTip" xml:space="preserve">
     <value>Enter the full path and file name of the image file that you wish to use as the default cover image.  

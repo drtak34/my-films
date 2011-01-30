@@ -495,7 +495,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (iControl == (int)Controls.CTRL_BtnPlayTrailer)
                     // Search Trailer File to play
                     {
-                        Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        if (MyFilms.conf.StrStorageTrailer.Length > 0)
+                          Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                        else
+                          Change_Menu("trailermenu");
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_ViewFanart)
@@ -739,9 +742,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Clear();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798704)); // Trailer ...
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798710));//play trailer
-                    choiceViewMenu.Add("playtrailer");
-
+                    if (MyFilms.conf.StrStorageTrailer.Length > 0)
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798710));//play trailer
+                      choiceViewMenu.Add("playtrailer");
+                    }
                     dlgmenu.Add(GUILocalizeStrings.Get(10798711));//search youtube trailer with onlinevideos
                     choiceViewMenu.Add("playtraileronlinevideos");
 
@@ -831,11 +836,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Clear();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Online Updates ...
 
-                    if (MyFilms.conf.StrGrabber)
-                    {
-                        dlgmenu.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-                        choiceViewMenu.Add("grabber");
-                    }
+                    dlgmenu.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
+                    choiceViewMenu.Add("grabber");
 
                     if (ExtendedStartmode("Details context: Trailer Download"))
                     {
@@ -1243,7 +1245,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             if (choosescript)
             {
-                if (MyFilms.conf.StrGrabber_Dir.Length > 0 && System.IO.Directory.Exists(MyFilms.conf.StrGrabber_Dir))
+              if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms"))
                 {
                     // Grabber Directory filled, search for XML scripts files
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -1257,7 +1259,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         dlg.Add(MyFilms.conf.StrGrabber_cnf.Substring(MyFilms.conf.StrGrabber_cnf.LastIndexOf("\\") + 1));
                         dlg.SelectedLabel = 0;
                     }
-                    DirectoryInfo dirsInf = new DirectoryInfo(MyFilms.conf.StrGrabber_Dir);
+                    DirectoryInfo dirsInf = new DirectoryInfo(Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
                     FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
                     foreach (FileSystemInfo sfi in sfiles)
                     {
@@ -1278,7 +1280,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                     GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                     dlgOk.SetHeading(GUILocalizeStrings.Get(645)); // menu
-                    dlgOk.SetLine(1, string.Format(GUILocalizeStrings.Get(1079876), MyFilms.conf.StrGrabber_Dir));
+                    dlgOk.SetLine(1, string.Format(GUILocalizeStrings.Get(1079876), Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms"));
                     dlgOk.SetLine(2, GUILocalizeStrings.Get(1079877));
                     dlgOk.DoModal(GetID);
                     LogMyFilms.Info("My Films : The Directory grabber config files doesn't exists. Verify your Configuration !");

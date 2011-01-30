@@ -31,6 +31,7 @@ namespace MyFilmsPlugin.MyFilms
 {
     sealed class MyFilmsSettings
     {
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
         public const bool newAPI = true;
 
         public enum Path
@@ -168,7 +169,7 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception ex)
             {
-                //LogMyFilms.Debug("Error initiating Paths: " + ex.Message);
+                LogMyFilms.Debug("Error initiating Paths: " + ex.Message);
             }
         }
 
