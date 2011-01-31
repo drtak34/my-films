@@ -1,6 +1,9 @@
 Public Class AntSettings
-    Public UserSettingsFile As String = My.Application.Info.DirectoryPath & "\AMCUpdater_Settings.xml"
-    Public ReadOnly UserDefaultSettingsFile As String = My.Application.Info.DirectoryPath & "\AMCUpdater_DefaultSettings.xml"
+    'Public UserSettingsFile As String = My.Application.Info.DirectoryPath & "\AMCUpdater_Settings.xml"
+    'Public ReadOnly UserDefaultSettingsFile As String = My.Application.Info.DirectoryPath & "\AMCUpdater_DefaultSettings.xml"
+    Public UserSettingsFile As String = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCUpdater_Settings.xml"
+    Public ReadOnly UserDefaultSettingsFile As String = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCUpdater_DefaultSettings.xml"
+
     Public Shared dsSettings As DataSet = New DataSet
     Private Shared dsDefaultSettings As DataSet = New DataSet
 
@@ -678,6 +681,11 @@ Public Class AntSettings
     Public Sub SaveDefaultSettings()
         'Called on GUI mode exit - saves all current settings for load on next launch.
         Try
+            Dim dirname = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData"
+            If Not (System.IO.Directory.Exists(dirname)) Then
+                System.IO.Directory.CreateDirectory(dirname)
+            End If
+
             dsSettings.WriteXml(UserDefaultSettingsFile)
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -686,6 +694,11 @@ Public Class AntSettings
     End Sub
 
     Public Sub CreateDefaultFiles()
+        Dim dirname = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData"
+        If Not (System.IO.Directory.Exists(dirname)) Then
+            System.IO.Directory.CreateDirectory(dirname)
+        End If
+
         dsDefaultSettings.WriteXml(UserDefaultSettingsFile)
     End Sub
 

@@ -1641,7 +1641,7 @@ Public Class Form1
         End If
 
     End Sub
-    Private Sub SaveConfigFileToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveConfigFileToolStripMenuItem.Click
+    Private Sub SaveConfigFileToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveConfigFileAsToolStripMenuItem.Click
         ApplySettings()
         Try
             With SaveFileDialog1
@@ -2055,5 +2055,56 @@ Public Class Form1
         '        TextBox2.Text = 1
     End Sub
 
+    Private Sub SaveConfigFileToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SaveConfigFileToolStripMenuItem.Click
+        ApplySettings()
+        If My.Application.CommandLineArgs.Count > 0 Then
+            Try
+                Try
+                    CurrentSettings.UserSettingsFile = My.Application.CommandLineArgs.Item(0)
+                    CurrentSettings.SaveUserSettings()
+                Catch fileException As Exception
+                    LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                End Try
+
+            Catch ex As Exception
+                LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+                Console.WriteLine(ex.Message)
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
+            End Try
+        Else
+            Try
+                With SaveFileDialog1
+                    .InitialDirectory = My.Application.Info.DirectoryPath
+                    .FileName = "AMCUpdater_Settings.xml"
+                    .CheckFileExists = False
+                    .CheckPathExists = True
+                    .DefaultExt = "xml"
+                    .DereferenceLinks = True
+                    .Filter = "XML files (*.xml)|*.xml|All files|*.*"
+                    '.Multiselect = False
+                    .RestoreDirectory = True
+                    .ShowHelp = True
+                    '.ShowReadOnly = False
+                    '.ReadOnlyChecked = False
+                    .Title = "Select a configuration file to save"
+                    .ValidateNames = True
+                    If .ShowDialog = Windows.Forms.DialogResult.OK Then
+                        Try
+                            CurrentSettings.UserSettingsFile = .FileName
+                            CurrentSettings.SaveUserSettings()
+                        Catch fileException As Exception
+                            LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
+                        End Try
+                    End If
+
+                End With
+            Catch ex As Exception
+                LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+                Console.WriteLine(ex.Message)
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
+            End Try
+
+        End If
+    End Sub
 End Class
 

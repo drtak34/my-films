@@ -1442,7 +1442,8 @@ Public Class AntProcessor
         End If
 
         'Take an additional backup regardless and store in the application directory.
-        _TempXMLBackupFile = My.Application.Info.DirectoryPath & "\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
+        ' _TempXMLBackupFile = My.Application.Info.DirectoryPath & "\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
+        _TempXMLBackupFile = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
         _TempXMLBackupFile = _TempXMLBackupFile.Replace("/", "-")
         My.Computer.FileSystem.CopyFile(CurrentSettings.XML_File, _TempXMLBackupFile)
 
