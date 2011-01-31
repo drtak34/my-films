@@ -1254,6 +1254,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             View_Dflt_Item.Items.Add("Year");
             View_Dflt_Item.Items.Add("Category");
             View_Dflt_Item.Items.Add("Country");
+            if (Config_Name.Text.Length == 0) 
+              btnFirstTimeSetup.Enabled = true;
+            else 
+              btnFirstTimeSetup.Enabled = false;
             if (!all)
                 return;
             Config_Dflt.Checked = false;
@@ -1619,99 +1623,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     SearchFileName.Checked = true;
                     break;
               case 7: // Starter Settings
-                    if (Config_Name.Text.Length == 0)
-                    {
-                      MyFilmsInputBox input = new MyFilmsInputBox();
-                      input.ShowDialog(this);
-                      string newConfig_Name = input.UserName;
-                      if (newConfig_Name == Config_Name.Text)
-                      {
-                        System.Windows.Forms.MessageBox.Show(
-                          "Config Name must be different from existing ones ! No Config created !",
-                          "Control Configuration",
-                          MessageBoxButtons.OK,
-                          MessageBoxIcon.Exclamation);
-                        break;
-                      }
-
-                      // Set values and Presets ...
-                      Config_Name.Text = newConfig_Name;
-                      AntStorage.Text = "Source";
-                      AntStorageTrailer.Text = "Borrower";
-                      AntTitle1.Text = "TranslatedTitle";
-                      AntTitle2.Text = "OriginalTitle";
-                      AntSTitle.Text = "FormattedTitle";
-                      TitleDelim.Text = "\\";
-                      ItemSearchFileName.Text = "TranslatedTitle";
-                      string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
-                      if (!System.IO.Directory.Exists(CatalogDirectory))
-                      {
-                        try
-                        {
-                          System.IO.Directory.CreateDirectory(CatalogDirectory);
-                        }
-                        catch
-                        {
-                        }
-                      }
-                      string CatalogName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog\" + Config_Name.Text + ".xml";
-                      if (!System.IO.File.Exists(CatalogName))
-                      {
-                        XmlTextWriter destXml = new XmlTextWriter(CatalogName, System.Text.Encoding.Default);
-                        destXml.Formatting = Formatting.Indented;
-                        destXml.WriteStartDocument();
-                        destXml.WriteStartElement("AntMovieCatalog");
-                        destXml.WriteStartElement("Catalog");
-                        destXml.WriteElementString("Properties", string.Empty);
-                        destXml.WriteStartElement("Contents");
-                        destXml.Close();
-                      }
-
-                      MesFilmsCat.Text = CatalogName;
-                      if (MesFilmsCat.Text.Length > 0)
-                        if (MesFilmsImg.Text.Length == 0)
-                          MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
-                      SearchFileName.Checked = true;
-                      chkFanart.Checked = true;
-                      chkDfltFanart.Checked = true;
-
-                      string FanartDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Fanart";
-                      if (!System.IO.Directory.Exists(FanartDirectory))
-                      {
-                        try
-                        {
-                          System.IO.Directory.CreateDirectory(FanartDirectory);
-                        }
-                        catch
-                        {
-                        }
-                      }
-                      MesFilmsFanart.Text = FanartDirectory;
-
-                      MessageBox.Show(
-                        "Now choose the directory containing your movies.",
-                        "Control Configuration",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                      if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
-                      {
-                        if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") !=
-                            this.folderBrowserDialog1.SelectedPath.Length - 1) folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
-
-                        if (PathStorage.Text.Length == 0) PathStorage.Text = folderBrowserDialog1.SelectedPath;
-                        else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
-                        if (AMCMovieScanPath.Text.Length == 0) AMCMovieScanPath.Text = PathStorage.Text;
-                      }
-                      System.Windows.Forms.MessageBox.Show(
-                        "Successfully created a new Configuration ! Now run AMCupdater to populate your catalog.",
-                        "Control Configuration",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation);
-                      CatalogType.SelectedIndex = 0; 
-                      Save_Config();
-                      //Config_Name.Focus();
-                    }
-                break;
+                    newCatalogWizard();
+                    break;
 
                 default:
                     AntStorage.Text = "Source";
@@ -2340,13 +2253,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             // Set specific userdefined Parameters from MyFilms GUI configuration
             AMCSetAttribute("Movie_Scan_Path", AMCMovieScanPath.Text);
-            if (chkAMC_Purge_Missing_Files.Checked == true)
+            if (chkAMC_Purge_Missing_Files.Checked)
               AMCSetAttribute("Purge_Missing_Files", "true");
             else
               AMCSetAttribute("Purge_Missing_Files", "false");
             AMCSetAttribute("LogDirectory", Config.GetDirectoryInfo(Config.Dir.Config) + @"\log");
-
-
           }
 
 
@@ -2406,7 +2317,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             btnCreateAMCDesktopIcon.Enabled = true;
 
 
-            if (AMCMovieScanPath.Text.Contains("\\") || !initialconfig)
+            if (AMCMovieScanPath.Text.Length != 0 || !initialconfig)
             {
               AMCConfigView.Visible = true;
               AMCMovieScanPath.Visible = false;
@@ -2445,7 +2356,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           try
           {
             AMCdsSettings.WriteXml(UserSettingsFile);
-            LogMyFilms.Debug("AMCupdater Settings saved to file");
+            LogMyFilms.Debug("AMCupdater Settings saved to file: '" + UserSettingsFile + "'");
           }
           catch
           {
@@ -3467,7 +3378,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnCreateAMCDesktopIcon_Click(object sender, EventArgs e)
         {
+          CreateAMCDesktopIcon();
+        }
 
+        private void CreateAMCDesktopIcon()
+        {
           string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
           string linkName = "AMC-Updater '" + Config_Name.Text + "'";
           string commandLine = "\"" + Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe""" + " \"" +
@@ -3605,7 +3520,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void AMCMovieScanPath_TextChanged(object sender, EventArgs e)
         {
-          if (AMCMovieScanPath.Text.Length > 0 && AMCMovieScanPath.Text.Contains("\\"))
+          if (AMCMovieScanPath.Text.Length != 0)
             btnCreateAMCDefaultConfig.Enabled = true;
           else
             btnCreateAMCDefaultConfig.Enabled = false;
@@ -3614,7 +3529,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void btnCreateAMCDefaultConfig_Click(object sender, EventArgs e)
         {
 
-          if ((!AMCMovieScanPath.Text.Contains("\\")))
+          if (AMCMovieScanPath.Text.Length != 0)
           {
             MessageBox.Show(
               "You first have to define the Search path for your movies to create a default config !",
@@ -3644,7 +3559,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             System.IO.File.Delete(wfiledefault + "_" + Config_Name.Text + ".xml");
             Read_XML_AMCconfig(Config_Name.Text);
 
-            if (AMCMovieScanPath.Text.Contains("\\"))
+            if (AMCMovieScanPath.Text.Length != 0)
             {
               Save_XML_AMCconfig(Config_Name.Text);
               MessageBox.Show("Successfully created an AMCupdater default config with your settings !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -3799,14 +3714,188 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
         }
 
-        private void Tab_Logos_Click(object sender, EventArgs e)
+        private void btnFirstTimeSetup_Click(object sender, EventArgs e)
         {
-
+          newCatalogWizard();
         }
 
-        private void txtLogosPath_TextChanged(object sender, EventArgs e)
+        private void newCatalogWizard()
         {
+          if (Config_Name.Text.Length == 0)
+          {
+            MyFilmsInputBox input = new MyFilmsInputBox();
+            input.ShowDialog(this);
+            string newConfig_Name = input.UserName;
+            if (newConfig_Name == Config_Name.Text)
+            {
+              System.Windows.Forms.MessageBox.Show(
+                "Config Name must be different from existing ones ! No Config created !",
+                "Control Configuration",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+              return;
+            }
 
+            // Set values and Presets ...
+            Config_Name.Text = newConfig_Name;
+            AntStorage.Text = "Source";
+            AntStorageTrailer.Text = "Borrower";
+            AntTitle1.Text = "TranslatedTitle";
+            AntTitle2.Text = "OriginalTitle";
+            AntSTitle.Text = "FormattedTitle";
+            TitleDelim.Text = "\\";
+            ItemSearchFileName.Text = "TranslatedTitle";
+            string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
+            if (!System.IO.Directory.Exists(CatalogDirectory))
+            {
+              try
+              {
+                System.IO.Directory.CreateDirectory(CatalogDirectory);
+              }
+              catch
+              {
+              }
+            }
+            string CatalogName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog\" + Config_Name.Text + ".xml";
+            if (!System.IO.File.Exists(CatalogName))
+            {
+              XmlTextWriter destXml = new XmlTextWriter(CatalogName, System.Text.Encoding.Default);
+              destXml.Formatting = Formatting.Indented;
+              destXml.WriteStartDocument();
+              destXml.WriteStartElement("AntMovieCatalog");
+              destXml.WriteStartElement("Catalog");
+              destXml.WriteElementString("Properties", string.Empty);
+              destXml.WriteStartElement("Contents");
+              destXml.Close();
+            }
+
+            MesFilmsCat.Text = CatalogName;
+            if (MesFilmsCat.Text.Length > 0)
+              if (MesFilmsImg.Text.Length == 0)
+                MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
+            DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
+            SearchFileName.Checked = true;
+            chkFanart.Checked = true;
+            chkDfltFanart.Checked = true;
+
+            string FanartDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Fanart";
+            if (!System.IO.Directory.Exists(FanartDirectory))
+            {
+              try
+              {
+                System.IO.Directory.CreateDirectory(FanartDirectory);
+              }
+              catch
+              {
+              }
+            }
+            MesFilmsFanart.Text = FanartDirectory;
+
+            string ArtistImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\PersonImages";
+            if (!System.IO.Directory.Exists(ArtistImagesDirectory))
+            {
+              try
+              {
+                System.IO.Directory.CreateDirectory(ArtistImagesDirectory);
+              }
+              catch
+              {
+              }
+            }
+            MesFilmsImgArtist.Text = ArtistImagesDirectory;
+            DefaultCoverArtist.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
+            chkDfltArtist.Checked = true; // Use default person cover if missing artwork...
+
+            string GroupViewImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\GroupViewImages";
+            if (!System.IO.Directory.Exists(GroupViewImagesDirectory))
+            {
+              try
+              {
+                System.IO.Directory.CreateDirectory(GroupViewImagesDirectory);
+              }
+              catch
+              {
+              }
+            }
+
+            MesFilmsViews.Text = GroupViewImagesDirectory;
+            chkViews.Checked = true; // Use Thumbs for views
+            chkDfltViews.Checked = true; // Use default cover for missing thumbs
+            // Logos
+            chkLogos.Checked = true;
+            comboBoxLogoPresets.Text = "Use Logos of currently selected skin";
+            //GrabberConfig
+            txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
+            chkGrabber_ChooseScript.Checked = true; //Don't use default script (ask)
+
+            // Now ask user for his movie directory...
+            MessageBox.Show(
+              "Now choose the directory containing your movies.",
+              "Control Configuration",
+              MessageBoxButtons.OK,
+              MessageBoxIcon.Information);
+            if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+              if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") !=
+                  this.folderBrowserDialog1.SelectedPath.Length - 1) folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+
+              if (PathStorage.Text.Length == 0)
+                PathStorage.Text = folderBrowserDialog1.SelectedPath;
+              else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
+            }
+            System.Windows.Forms.MessageBox.Show(
+              "Successfully created a new Configuration ! Now run AMCupdater to populate your catalog.",
+              "Control Configuration",
+              MessageBoxButtons.OK,
+              MessageBoxIcon.Exclamation);
+
+            CatalogType.SelectedIndex = 0;
+
+            //AMCupdater
+            chkAMCUpd.Checked = true; // Use AMCupdater
+            AMCMovieScanPath.Text = PathStorage.Text;
+            chkAMC_Purge_Missing_Files.Checked = true;
+            // Make controls visible:
+            //txtAMCUpd_cnf.Enabled = true;
+            //btnAMCUpd_cnf.Enabled = true;
+            //scheduleAMCUpdater.Enabled = true;
+            //btnParameters.Enabled = true;
+            ////btnLaunchAMCupdater.Enabled = true;
+            //btnAMCMovieScanPathAdd.Enabled = true;
+            //chkAMC_Purge_Missing_Files.Enabled = true;
+            //btnCreateAMCDefaultConfig.Enabled = true;
+            //btnCreateAMCDesktopIcon.Enabled = true;
+            //AMCMovieScanPath.Enabled = true;
+
+
+            // Create config for AMCupdater
+            string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
+            if (System.IO.File.Exists(wfiledefault + ".xml"))
+            {
+              if (System.IO.File.Exists(wfiledefault + "_" + Config_Name.Text + ".xml"))
+              {
+                System.IO.File.Copy(wfiledefault + "_" + Config_Name.Text + ".xml", wfiledefault + "_" + Config_Name.Text + ".xml.sav", true);
+              }
+              System.IO.File.Delete(wfiledefault + "_" + Config_Name.Text + ".xml");
+              Read_XML_AMCconfig(Config_Name.Text);
+              Save_XML_AMCconfig(Config_Name.Text);
+            }
+
+            // Create Desktop Icon for AMCupdater with config created...
+            CreateAMCDesktopIcon();
+
+            Save_Config();
+            //Config_Name.Focus();
+          }
+          else
+          {
+            System.Windows.Forms.MessageBox.Show(
+                "Config Name must be empty to use this wizard ! No Config created !",
+                "Control Configuration",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+          }
+          
         }
 
     }
