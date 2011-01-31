@@ -17,6 +17,8 @@ using System.Reflection;
 
 namespace Grabber_Interface
 {
+  using MediaPortal.Configuration;
+
   public partial class GrabConfig : Form
   {
     private System.Resources.ResourceManager RM = new System.Resources.ResourceManager("Localisation.Form1", System.Reflection.Assembly.GetExecutingAssembly());
@@ -56,15 +58,22 @@ namespace Grabber_Interface
 
     private void button1_Click(object sender, EventArgs e)
     {
-      openFileDialog1.RestoreDirectory = true;
-      openFileDialog1.Filter = "Fichiers xml (*.xml)|*.xml";
+      if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms"))
+      {
+        openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
+      }
+      else
+      {
+        openFileDialog1.RestoreDirectory = true;
+      }
+      openFileDialog1.Filter = "XML Files (*.xml)|*.xml";
+      openFileDialog1.Title = "Find Internet Grabber Script file (xml file)";
       if (openFileDialog1.ShowDialog() == DialogResult.OK)
       {
         ResetFormControlValues(this);
         textConfig.Text = openFileDialog1.FileName;
         LoadXml();
         button_Load_Click(this, e);
-
       }
     }
 
