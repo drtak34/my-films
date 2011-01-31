@@ -73,6 +73,13 @@
               <ZipFileName>Installer{CopyFile}\{939b8543-8286-460a-a9c8-1010c54382e0}-MyFilms.dll</ZipFileName>
               <DestinationFilename>%Plugins%\windows\MyFilms.dll</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base\MyFilms_Grabber_Interface.exe</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{89cf810a-3fc7-45a7-8a78-d421e40f68d8}-MyFilms_Grabber_Interface.exe</ZipFileName>
+              <DestinationFilename>%Base%\MyFilms_Grabber_Interface.exe</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2267,6 +2274,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{939b8543-8286-460a-a9c8-1010c54382e0}-MyFilms.dll</ZipFileName>
         <DestinationFilename>%Plugins%\windows\MyFilms.dll</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base\MyFilms_Grabber_Interface.exe</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{89cf810a-3fc7-45a7-8a78-d421e40f68d8}-MyFilms_Grabber_Interface.exe</ZipFileName>
+        <DestinationFilename>%Base%\MyFilms_Grabber_Interface.exe</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -4035,14 +4049,14 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d06d12e7-6c67-471a-8581-2a092816b800}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{74171ede-fc9b-4823-a73a-59bee268e568}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{11b661d3-8479-4128-b4d5-2c6fdab43f0b}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{05eebe4e-222e-42c2-9221-9933054de5e3}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
