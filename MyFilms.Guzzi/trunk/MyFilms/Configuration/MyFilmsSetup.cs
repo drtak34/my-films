@@ -942,6 +942,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     PathStorage.Text = folderBrowserDialog1.SelectedPath;
                 else
                     PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
+                if (AMCMovieScanPath.Text.Length == 0) 
+                  AMCMovieScanPath.Text = PathStorage.Text;
             }
         }
 
@@ -1616,9 +1618,103 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     ItemSearchFileName.Text = "TranslatedTitle";
                     SearchFileName.Checked = true;
                     break;
+              case 7: // Starter Settings
+                    if (Config_Name.Text.Length == 0)
+                    {
+                      MyFilmsInputBox input = new MyFilmsInputBox();
+                      input.ShowDialog(this);
+                      string newConfig_Name = input.UserName;
+                      if (newConfig_Name == Config_Name.Text)
+                      {
+                        System.Windows.Forms.MessageBox.Show(
+                          "Config Name must be different from existing ones ! No Config created !",
+                          "Control Configuration",
+                          MessageBoxButtons.OK,
+                          MessageBoxIcon.Exclamation);
+                        break;
+                      }
+
+                      // Set values and Presets ...
+                      Config_Name.Text = newConfig_Name;
+                      AntStorage.Text = "Source";
+                      AntStorageTrailer.Text = "Borrower";
+                      AntTitle1.Text = "TranslatedTitle";
+                      AntTitle2.Text = "OriginalTitle";
+                      AntSTitle.Text = "FormattedTitle";
+                      TitleDelim.Text = "\\";
+                      ItemSearchFileName.Text = "TranslatedTitle";
+                      string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
+                      if (!System.IO.Directory.Exists(CatalogDirectory))
+                      {
+                        try
+                        {
+                          System.IO.Directory.CreateDirectory(CatalogDirectory);
+                        }
+                        catch
+                        {
+                        }
+                      }
+                      string CatalogName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog\" + Config_Name.Text + ".xml";
+                      if (!System.IO.File.Exists(CatalogName))
+                      {
+                        XmlTextWriter destXml = new XmlTextWriter(CatalogName, System.Text.Encoding.Default);
+                        destXml.Formatting = Formatting.Indented;
+                        destXml.WriteStartDocument();
+                        destXml.WriteStartElement("AntMovieCatalog");
+                        destXml.WriteStartElement("Catalog");
+                        destXml.WriteElementString("Properties", string.Empty);
+                        destXml.WriteStartElement("Contents");
+                        destXml.Close();
+                      }
+
+                      MesFilmsCat.Text = CatalogName;
+                      if (MesFilmsCat.Text.Length > 0)
+                        if (MesFilmsImg.Text.Length == 0)
+                          MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
+                      SearchFileName.Checked = true;
+                      chkFanart.Checked = true;
+                      chkDfltFanart.Checked = true;
+
+                      string FanartDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Fanart";
+                      if (!System.IO.Directory.Exists(FanartDirectory))
+                      {
+                        try
+                        {
+                          System.IO.Directory.CreateDirectory(FanartDirectory);
+                        }
+                        catch
+                        {
+                        }
+                      }
+                      MesFilmsFanart.Text = FanartDirectory;
+
+                      MessageBox.Show(
+                        "Now choose the directory containing your movies.",
+                        "Control Configuration",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                      if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+                      {
+                        if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") !=
+                            this.folderBrowserDialog1.SelectedPath.Length - 1) folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+
+                        if (PathStorage.Text.Length == 0) PathStorage.Text = folderBrowserDialog1.SelectedPath;
+                        else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
+                        if (AMCMovieScanPath.Text.Length == 0) AMCMovieScanPath.Text = PathStorage.Text;
+                      }
+                      System.Windows.Forms.MessageBox.Show(
+                        "Successfully created a new Configuration ! Now run AMCupdater to populate your catalog.",
+                        "Control Configuration",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+                      CatalogType.SelectedIndex = 0; 
+                      Save_Config();
+                      //Config_Name.Focus();
+                    }
+                break;
 
                 default:
-                    AntStorage.Text = "URL";
+                    AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "Borrower";
                     AntTitle1.Text = "TranslatedTitle";
                     AntTitle2.Text = "OriginalTitle";
@@ -2063,6 +2159,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     switch (CatalogType.SelectedIndex)
                     {
                         case 0: // ANT Movie Catalog
+                        case 7: // Starter Settings ANT DB
                             mydivx.ReadXml(MesFilmsCat.Text);
                             break;
                         case 1: //DVD Profiler
@@ -2131,7 +2228,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             XbmcDb Xdb = new XbmcDb();
                             mydivx.ReadXml(Xdb.ConvertXbmcDb(MesFilmsCat.Text, MesFilmsImg.Text, AntStorage.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
                             break;
-                        case 7: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+                        case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
                             destFile = MesFilmsCat.Text;
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
@@ -2248,6 +2345,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
               AMCSetAttribute("Purge_Missing_Files", "false");
             AMCSetAttribute("LogDirectory", Config.GetDirectoryInfo(Config.Dir.Config) + @"\log");
+
 
           }
 

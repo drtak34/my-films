@@ -168,10 +168,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static string wsearchfile;
         public static int wGetID;
 
-        private System.Threading.Timer m_TraktTimer = null;
-        private TimerCallback m_timerDelegate = null;
-        BackgroundWorker TraktScrobbleUpdater = new BackgroundWorker();
-        private bool TraktMarkedFirstAsWatched = false;
+        // private System.Threading.Timer m_TraktTimer = null;
+        // private TimerCallback m_timerDelegate = null;
+        // BackgroundWorker TraktScrobbleUpdater = new BackgroundWorker();
+        // private bool TraktMarkedFirstAsWatched = false;
 
 
 
@@ -196,8 +196,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public override bool Init()
         {
           // trakt scrobble background thread
-          TraktScrobbleUpdater.WorkerSupportsCancellation = true;
-          TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
+          //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
+          //TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
   
           return Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
         }
@@ -342,8 +342,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     setProcessAnimationStatus(false, m_SearchAnimation);
 
                     // trakt scrobble background thread
-                    TraktScrobbleUpdater.WorkerSupportsCancellation = true;
-                    TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
+                    //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
+                    //TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
 
                     g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
                     g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);

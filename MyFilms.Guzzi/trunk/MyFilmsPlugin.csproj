@@ -163,7 +163,9 @@
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsDetail.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsDialogSetRating.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsThumbs.cs" />
-    <Compile Include="MyFilms\MyFilmsSettings.cs" />
+    <Compile Include="MyFilms\MyFilmsSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MyFilms\Trakt\Common\TraktEpisode.cs" />
     <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />

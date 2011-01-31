@@ -261,7 +261,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         // Guzzi: Added from TV-Series for Fanarttoggling
         private System.Threading.Timer m_FanartTimer = null;
-        private System.Threading.Timer m_TraktSyncTimer = null;
+        // private System.Threading.Timer m_TraktSyncTimer = null;
 
         private bool m_bFanartTimerDisabled = false;
 
@@ -278,10 +278,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static string CurrentMovie;
         //public static string CurrentFanartDir;
         public enum optimizeOption { optimizeDisabled };
-        //public enum optimizeDisabled;
         public static bool InitialStart = false; //Added to implement InitialViewSetup, ToDo: Add Logic
         private bool LoadWithParameterSupported = false;
-        //public static bool OldActorsSearch = false;
         #endregion
 
 
@@ -311,31 +309,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
             LogMyFilms.Debug("MyFilms.Init() started.");
 
-            // (re)link our backdrop image controls to the backdrop image swapper
-            //backdrop.GUIImageOne = ImgFanart;
-            //backdrop.GUIImageTwo = ImgFanart2;
-            //backdrop.LoadingImage = loadingImage;
-
-            // Ceate Variable for OneTimeView Setup
+            // Set Variable for FirstTimeView Setup
             InitialStart = true;
 
             //Add localized labels for DB Columns
             InitGUIPropertyLabels();
 
             // check if running version of mediaportal support loading with parameter           
-            if (typeof(GUIWindow).GetField("_loadParameter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance) != null)
-            {
-              LoadWithParameterSupported = true;
-            }
+            //if (typeof(GUIWindow).GetField("_loadParameter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance) != null)
+            //{
+            //  LoadWithParameterSupported = true;
+            //}
 
             #region Trakt
-            // ToDo: Read Username, Password and Useragent from Settings file
-            TraktAPI.Username = conf.StrTraktUsername;
-            TraktAPI.Password = conf.StrTraktPassword;
-            TraktAPI.UserAgent = MyFilmsSettings.UserAgent;
+            //TraktAPI.Username = conf.StrTraktUsername;
+            //TraktAPI.Password = conf.StrTraktPassword;
+            //TraktAPI.UserAgent = MyFilmsSettings.UserAgent;
 
-            LogMyFilms.Debug("MF: Trakt Usersettings loaded - UserName: '" + TraktAPI.Username.ToString() + "'");
-            LogMyFilms.Debug("MF: Trakt Usersettings loaded - Useragent: '" + TraktAPI.UserAgent.ToString() + "'");
+            //LogMyFilms.Debug("MF: Trakt Usersettings loaded - UserName : '" + TraktAPI.Username.ToString() + "'");
+            //LogMyFilms.Debug("MF: Trakt Usersettings loaded - Useragent: '" + TraktAPI.UserAgent.ToString() + "'");
 
             // Timer to process episodes to send to trakt, will also be called after new episodes are added to library
             //m_TraktSyncTimer = new System.Threading.Timer(new TimerCallback(TraktSynchronize), null, 15000, Timeout.Infinite);
@@ -358,11 +350,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
 
             // Support for StartParameters - ToDo: Add start view options (implementation)
-            //string jumpToViewName = null;
-            //if (LoadWithParameterSupported)
-            //{
-            //  jumpToViewName = GetJumpToViewName();
-            //}
+            string jumpToViewName = null;
+            if (LoadWithParameterSupported)
+            {
+              jumpToViewName = GetJumpToViewName();
+            }
 
             // (re)link our backdrop image controls to the backdrop image swapper
             backdrop.GUIImageOne = ImgFanart;
@@ -370,8 +362,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             backdrop.LoadingImage = loadingImage;  // --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
 
             // Setup Random Fanart Timer
-            m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
-            m_bFanartTimerDisabled = true;
+            //m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
+            //m_bFanartTimerDisabled = true;
             //m_FanartTimer.Change(0,10000);
 
             //MyFilmsDetail.clearGUIProperty("picture");
@@ -384,8 +376,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MyFilms.OnPageDestroy() started.");
 
             // Disable Random Fanart Timer
-            m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
-            m_bFanartTimerDisabled = true;
+            //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            //m_bFanartTimerDisabled = true;
 
             base.OnPageDestroy(new_windowId);
 
@@ -510,11 +502,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Originally Deactivated by Zebons    
                     // ********************************
                     // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
-                    if (!bgLoadMovieList.IsBusy)
-                    {
-                      LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
-                      AsynLoadMovieList();
-                    }
+                    //if (!bgLoadMovieList.IsBusy)
+                    //{
+                    //  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
+                    //  AsynLoadMovieList();
+                    //}
                     // ********************************
                     // Originally Deactivated by Zebons    
                     

@@ -68,10 +68,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
   using MediaPortal.Configuration;
 
+  using NLog;
+
   class XmlConfig
     {
 
 #region <<DECLARATION>>
+        // private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //for logging
         XmlDocument configxml = new XmlDocument();
 #endregion
 
@@ -272,7 +275,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 //Recover value with entry data
                 Value = entry.InnerText;
             }
-
+          // LogMyFilms.Debug("MF: Configuration - ReadXMLConfig: Filename: '" + FileName + "', Section: '" + Section + "', Entry: '" + Entry + "', Value: '" + Value + "'");
             return Value;
         }
         // Read xml config file with XmlDocument

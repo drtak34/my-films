@@ -75,6 +75,7 @@
           // 
           // pictureBox1
           // 
+          this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.film_reel_128x128;
           this.pictureBox1.Location = new System.Drawing.Point(353, 12);
           this.pictureBox1.Name = "pictureBox1";
           this.pictureBox1.Size = new System.Drawing.Size(85, 65);

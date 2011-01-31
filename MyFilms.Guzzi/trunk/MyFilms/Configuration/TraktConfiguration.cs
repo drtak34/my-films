@@ -47,7 +47,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           textBoxUsername.Text = MyFilmsSetup.cTraktUsername;
           textBoxPassword.Text = MyFilmsSetup.cTraktPassword;
 
-            TraktAPI.UserAgent = MyFilmsSettings.UserAgent;
+            TraktAPI.UserAgent = MyFilmsSettings.UserAgent; //ToDo: Add Definitions for Useragent or hardcode them !
             TraktAPI.Username = MyFilmsSetup.cTraktUsername;
             TraktAPI.Password = MyFilmsSetup.cTraktPassword;
         }
