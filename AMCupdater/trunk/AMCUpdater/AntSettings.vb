@@ -1,8 +1,8 @@
 Public Class AntSettings
     'Public UserSettingsFile As String = My.Application.Info.DirectoryPath & "\AMCUpdater_Settings.xml"
     'Public ReadOnly UserDefaultSettingsFile As String = My.Application.Info.DirectoryPath & "\AMCUpdater_DefaultSettings.xml"
-    Public UserSettingsFile As String = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCUpdater_Settings.xml"
-    Public ReadOnly UserDefaultSettingsFile As String = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCUpdater_DefaultSettings.xml"
+    Public UserSettingsFile As String = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData\AMCUpdater_Settings.xml"
+    Public ReadOnly UserDefaultSettingsFile As String = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData\AMCUpdater_DefaultSettings.xml"
 
     Public Shared dsSettings As DataSet = New DataSet
     Private Shared dsDefaultSettings As DataSet = New DataSet
