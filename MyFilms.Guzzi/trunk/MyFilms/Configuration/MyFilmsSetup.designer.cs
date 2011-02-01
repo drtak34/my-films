@@ -3142,9 +3142,9 @@
           // 
           // btnFirstTimeSetup
           // 
-          this.btnFirstTimeSetup.Location = new System.Drawing.Point(519, 301);
+          this.btnFirstTimeSetup.Location = new System.Drawing.Point(490, 304);
           this.btnFirstTimeSetup.Name = "btnFirstTimeSetup";
-          this.btnFirstTimeSetup.Size = new System.Drawing.Size(167, 38);
+          this.btnFirstTimeSetup.Size = new System.Drawing.Size(236, 35);
           this.btnFirstTimeSetup.TabIndex = 77;
           this.btnFirstTimeSetup.Text = "Setup Wizard\r\n(new catalog with presets)";
           this.ToolTip1.SetToolTip(this.btnFirstTimeSetup, resources.GetString("btnFirstTimeSetup.ToolTip"));

@@ -53,7 +53,7 @@
     <String id="2087">Backward</String>
     <String id="2998">min</String>
     <String id="4514">Download fanart (all films)</String>
-    <String id="5910">Getting film info</String>
+    <String id="5910">Get internet film info</String>
     <String id="6022">Choose MyFilms DB Config</String>
     <String id="6029">Change</String>
     <String id="200026">Country</String>
@@ -122,7 +122,7 @@
     <String id="10798631">Show NAS Server status</String>
     <String id="10798637">No films match this view !</String>
     <String id="10798638">Show full movie list</String>
-    <String id="10798639">No matches for this search!</String>
+    <String id="10798639">No movies found !</String>
     <String id="10798640">No entry corresponding to the searched value.</String>
     <String id="10798641">No entry to be search for.</String>
     <String id="10798642">Update film data by property</String>
