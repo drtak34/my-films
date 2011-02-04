@@ -4,7 +4,7 @@
     <DBName>MyFilmsIMDB</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <URLSearch>
-      <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023__x0026_x_x003D_19_x0026_y_x003D_8</URL>
+      <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">Popular_x0020_Titles</KeyStartList>
       <KeyEndList>Suggestions_x0020_For_x0020_Improving_x0020_Your_x0020_Results</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>

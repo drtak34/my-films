@@ -159,7 +159,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CatalogType.SelectedIndex = 0;
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-              if ((dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")) // All those fieds are currently not supported by ANT-MC
+              if ((dc.ColumnName != "Picture") && (dc.ColumnName != "Contents_Id") && 
+                (dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")) 
+                // All those fieds are currently not supported by ANT-MC
+                // Also removed Contents_Id and Pictures, as they mostly useless.
               {
                 if ((dc.ColumnName == "MediaLabel") || (dc.ColumnName == "MediaType") || (dc.ColumnName == "Source") ||
                     (dc.ColumnName == "URL") || (dc.ColumnName == "Comments") || (dc.ColumnName == "Borrower") ||
@@ -168,10 +171,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntStorage.Items.Add(dc.ColumnName);
                   AntStorageTrailer.Items.Add(dc.ColumnName);
                   DVDPTagField.Items.Add(dc.ColumnName);
+                }
+
+                if ((dc.ColumnName == "TranslatedTitle") || (dc.ColumnName == "OriginalTitle") || (dc.ColumnName == "FormattedTitle"))
+                {
+                  //AntTitle1.Items.Add(dc.ColumnName); // Fieds already added in Controls definition
+                  AntTitle2.Items.Add(dc.ColumnName);
                   AntSTitle.Items.Add(dc.ColumnName);
                 }
-                AntIdentItem.Items.Add(dc.ColumnName);
-                AntTitle2.Items.Add(dc.ColumnName);
                 if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "Length_Num"))
                 {
                   AntFilterItem1.Items.Add(dc.ColumnName);
@@ -180,11 +187,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntItem2.Items.Add(dc.ColumnName);
                   AntItem3.Items.Add(dc.ColumnName);
                 }
-                cbfdupdate.Items.Add(dc.ColumnName);
-                cbWatched.Items.Add(dc.ColumnName);
-                CmdPar.Items.Add(dc.ColumnName);
-                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "DateAdded") &&
-                    (dc.ColumnName != "Length_Num"))
+                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "DateAdded") && (dc.ColumnName != "Length_Num"))
                 {
                   AntSearchField.Items.Add(dc.ColumnName);
                   AntUpdField.Items.Add(dc.ColumnName);
@@ -194,7 +197,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     (dc.ColumnName != "Comments") && (dc.ColumnName != "Description") &&
                     (dc.ColumnName != "FormattedTitle") && (dc.ColumnName != "Date") && (dc.ColumnName != "DateAdded") &&
                     (dc.ColumnName != "Rating") && (dc.ColumnName != "Size") && (dc.ColumnName != "Picture") &&
-                    (dc.ColumnName != "URL"))
+                    (dc.ColumnName != "URL") && (dc.ColumnName != "Length_Num"))
                 {
                   SField1.Items.Add(dc.ColumnName);
                   SField2.Items.Add(dc.ColumnName);
@@ -209,14 +212,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntViewItem4.Items.Add(dc.ColumnName);
                   AntViewItem5.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
-                    dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Actors")
+                if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"
+                  && dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Length" && dc.ColumnName != "Picture")
                 {
                   AntSearchItem1.Items.Add(dc.ColumnName);
                   AntSearchItem2.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName == "TranslatedTitle") || (dc.ColumnName == "OriginalTitle") || (dc.ColumnName == "FormattedTitle")) 
-                  AntSTitle.Items.Add(dc.ColumnName);
                 if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
                     dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Year" &&
                     dc.ColumnName != "Picture" && dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
@@ -225,8 +226,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntSort1.Items.Add(dc.ColumnName);
                   AntSort2.Items.Add(dc.ColumnName);
                 }
-                AntUpdItem1.Items.Add(dc.ColumnName);
-                AntUpdItem2.Items.Add(dc.ColumnName);
+                if ((dc.ColumnName != "Length_Num"))
+                {
+                  AntIdentItem.Items.Add(dc.ColumnName);
+                  AntUpdItem1.Items.Add(dc.ColumnName);
+                  AntUpdItem2.Items.Add(dc.ColumnName);
+                  cbfdupdate.Items.Add(dc.ColumnName);
+                  cbWatched.Items.Add(dc.ColumnName);
+                  CmdPar.Items.Add(dc.ColumnName);
+                }
               }
             }
             AntViewText_Change();
@@ -621,8 +629,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 WLayOut = 2;
             if (LayOut.Text == "Filmstrip")
                 WLayOut = 3;
+#if MP11
             if (LayOut.Text == "Cover Flow")
+            {
+              WLayOut = 3;
+              LayOut.Text = "Filmstrip";
+            }
+#else
+          if (LayOut.Text == "Cover Flow")
                 WLayOut = 4;
+#endif
+
+
             if (AntTitle2.Text.Length == 0)
                 AntTitle2.Text = "(none)";
             string wDfltSortMethod = string.Empty;
@@ -979,7 +997,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Close();
         }
 
+
         private void Config_Name_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          Config_Name_Load();
+        }
+
+    private void Config_Name_Load()
         {
             Refresh_Items(false);
             CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", "0"));
@@ -988,7 +1012,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MesFilmsImgArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistPicturePath", "");
             chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
             MesFilmsFanart.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartPicture", "");
-            MesFilmsFanartViews.Text = MesFilmsFanart.Text + "\\_Group\\"; 
+            lblResultingGroupViewsPathFanart.Text = MesFilmsFanart.Text + "\\_Group\\";
             MesFilmsViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsPicture", "");
             chkDfltViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDflt", false);
             chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
@@ -1216,8 +1240,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 LayOut.Text = "Large Icons";
             if (WLayOut == 3)
                 LayOut.Text = "Filmstrip";
+#if MP11
+            if (WLayOut == 4)
+            {
+              WLayOut = 3;
+              LayOut.Text = "Filmstrip";
+            }
+#else
             if (WLayOut == 4)
                 LayOut.Text = "Cover Flow";
+#endif
+
             AntViewText_Change();
             AntSort_Change();
             
@@ -1250,7 +1283,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //mydivx.Clear();
             View_Dflt_Item.Items.Clear();
             View_Dflt_Item.Items.Add("(none)");
-            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); // Filmy
+            View_Dflt_Item.Items.Add(GUILocalizeStrings.Get(342)); // Films
             View_Dflt_Item.Items.Add("Year");
             View_Dflt_Item.Items.Add("Category");
             View_Dflt_Item.Items.Add("Country");
@@ -1710,7 +1743,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 MesFilmsFanart.Text = folderBrowserDialog1.SelectedPath;
-                MesFilmsFanartViews.Text = MesFilmsFanart.Text + "\\_Group\\";
+                lblResultingGroupViewsPathFanart.Text = MesFilmsFanart.Text + "\\_Group\\";
             }
         }
 
@@ -3896,6 +3929,25 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 MessageBoxIcon.Exclamation);
           }
           
+        }
+
+        private void butNew_Click(object sender, EventArgs e)
+        {
+          MyFilmsInputBox input = new MyFilmsInputBox();
+          input.ShowDialog(this);
+          string newConfig_Name = input.UserName;
+          if (newConfig_Name == Config_Name.Text)
+          {
+            System.Windows.Forms.MessageBox.Show("New Config Name must be different from the existing one !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+          }
+          else
+          {
+            Config_Name.Text = newConfig_Name;
+            Config_Name_Load();
+            System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Config_Name.Focus();
+          }
+
         }
 
     }

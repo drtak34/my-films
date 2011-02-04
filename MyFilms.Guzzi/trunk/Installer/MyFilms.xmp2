@@ -1562,13 +1562,6 @@
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\MovieGoods_Big_Thumb_New.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{d12ed7f5-7dae-43fd-a097-736f88516e79}-MovieGoods_Big_Thumb_New.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\MovieGoods_Big_Thumb_New.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\OFDB.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{3d02fee7-53a3-4a91-856d-f9eab7ff09d8}-OFDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\OFDB.xml</DestinationFilename>
@@ -2198,7 +2191,7 @@ Some functions will not be available or work properly, if older versions are ins
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>16</Revision>
+      <Revision>17</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production.
@@ -2207,7 +2200,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
     <OnlineLocation />
     <ReleaseDate>2011-01-01T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.16.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.17.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3764,13 +3757,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\MovieGoods_Big_Thumb_New.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d12ed7f5-7dae-43fd-a097-736f88516e79}-MovieGoods_Big_Thumb_New.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\MovieGoods_Big_Thumb_New.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\OFDB.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{3d02fee7-53a3-4a91-856d-f9eab7ff09d8}-OFDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\OFDB.xml</DestinationFilename>
@@ -4101,14 +4087,14 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{8c07e2f0-d309-4e9e-92d2-0dd04eebb213}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{bf5f78c8-8dc5-45b1-86a7-6f63626f42ca}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b9db8ee9-838f-45a9-b575-5f4571a97060}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f40dd3ca-f43d-43cc-be65-d18b9c25ba9e}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

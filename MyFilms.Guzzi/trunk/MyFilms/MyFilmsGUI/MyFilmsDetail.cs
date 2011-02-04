@@ -4707,7 +4707,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //}
         }
 
-
+      private bool IsInternetConnectionAvailable ()
+      {
+        // Check Internet connection
+        if (!Win32API.IsConnectedToInternet())
+        {
+          GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)Window.WINDOW_DIALOG_OK);
+          dlgOk.SetHeading(257);
+          dlgOk.SetLine(1, GUILocalizeStrings.Get(703));
+          dlgOk.DoModal(GUIWindowManager.ActiveWindow);
+          return false;
+        }
+        else
+          return true;
+      }
 
     }
 
