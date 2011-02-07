@@ -57,7 +57,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
             // Loading the image to draw 
             if (!System.IO.File.Exists(path.Substring(0, path.LastIndexOf("\\") + 1) + "Default.jpg"))
-                MediaPortal.Util.Picture.CreateThumbnail(MyFilms.conf.DefaultCover, path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg", 200, 400, 0, MediaPortal.Util.Thumbs.SpeedThumbsLarge);
+                MediaPortal.Util.Picture.CreateThumbnail(MyFilms.conf.DefaultCover, path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg", 400, 600, 0, MediaPortal.Util.Thumbs.SpeedThumbsLarge);
             Image image = null;
             try
             { image = Image.FromFile(path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg"); }

@@ -1933,9 +1933,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                           Picture.CreateThumbnail(strPathViews + item.Label + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
 
                                         // Use Default Cover if no specific Cover found:
-                                        if (!System.IO.File.Exists(strThumb + ".png"))
-                                            if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCover))
-                                                ImageFast.CreateImage(strThumb + ".png", item.Label);
+                                        if (!System.IO.File.Exists(strThumb))
+                                          if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCover))
+                                          {
+                                            strThumbLarge = conf.DefaultCover;
+                                            Picture.CreateThumbnail(strThumbLarge, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                            //ImageFast.CreateImage(strThumb, item.Label);
+                                          }
+                                        // Disabled "old" method to use Defaultcover with embedded text ofg selected item ...
+                                        //if (!System.IO.File.Exists(strThumb + ".png"))
+                                        //  if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCover))
+                                        //    ImageFast.CreateImage(strThumb + ".png", item.Label);
                                       }
                                     }
 
