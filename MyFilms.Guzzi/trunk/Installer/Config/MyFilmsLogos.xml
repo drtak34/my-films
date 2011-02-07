@@ -17,7 +17,7 @@
     <entry name="ID2001_7">Resolution;contains;720;;;;;720p.png</entry>
     <entry name="ID2001_8">Resolution;contains;540;;;;;SD.png</entry>
     <entry name="ID2001_9">VideoBitrate;greater;1500;;;;;HD.png</entry>
-    <entry name="ID2001_10">AudioFormat;contains;dolby digital;or;AudioFormat;contains;ac3;AC3.png</entry>
+    <entry name="ID2001_10">AudioFormat;contains;dolby digital;or;AudioFormat;contains;ac3;AC-3.png</entry>
     <entry name="ID2001_11">AudioFormat;contains;a_mpeg;or;AudioFormat;contains;mpa1l3;MPEG AUDIO VERSION 1 LAYER 3.png</entry>
     <entry name="ID2001_12">AudioFormat;contains;a_aac/mpeg2;or;AudioFormat;audioformat;mpa1l2;MPEG AUDIO VERSION 1 LAYER 2.png</entry>
     <entry name="ID2001_13">AudioFormat;contains;mp3;;;;;MPEG AUDIO VERSION 1 LAYER 3.png</entry>
@@ -40,14 +40,14 @@
     <entry name="ID2002_7">Category;contains;drama;;;;;Drama.png</entry>
     <entry name="ID2002_8">Category;contains;family;;;;;Family.png</entry>
     <entry name="ID2002_9">Category;contains;fantasy;;;;;Fantasy.png</entry>
-    <entry name="ID2002_10">Category;contains;noir;;;;;Film-Noir.png</entry>
+    <entry name="ID2002_10">Category;contains;noir;;;;;Film Noir.png</entry>
     <entry name="ID2002_11">Category;contains;history;;;;;History.png</entry>
     <entry name="ID2002_12">Category;contains;horror;;;;;Horror.png</entry>
     <entry name="ID2002_13">Category;equal;music;;;;;Music.png</entry>
     <entry name="ID2002_14">Category;contains;musical;;;;;Musical.png</entry>
     <entry name="ID2002_15">Category;contains;mystery;;;;;Mystery.png</entry>
     <entry name="ID2002_16">Category;contains;romance;;;;;Romance.png</entry>
-    <entry name="ID2002_17">Category;contains;sci-fi;;;;;Sci-Fi.png</entry>
+    <entry name="ID2002_17">Category;contains;sci-fi;;;;;SciFi.png</entry>
     <entry name="ID2002_18">Category;contains;sport;;;;;Sport.png</entry>
     <entry name="ID2002_19">Category;contains;thriller;;;;;Thriller.png</entry>
     <entry name="ID2002_20">Category;contains;war;;;;;War.png</entry>

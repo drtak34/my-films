@@ -1932,9 +1932,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                         else if (System.IO.File.Exists(strPathViews + item.Label + ".png"))
                                           Picture.CreateThumbnail(strPathViews + item.Label + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
 
-                                        //if (!System.IO.File.Exists(strThumb + ".png"))
-                                        //    if (MesFilms.conf.StrViewsDflt && System.IO.File.Exists(MesFilms.conf.DefaultCover))
-                                        //        ImageFast.CreateImage(strThumb + ".png", item.Label);
+                                        // Use Default Cover if no specific Cover found:
+                                        if (!System.IO.File.Exists(strThumb + ".png"))
+                                            if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCover))
+                                                ImageFast.CreateImage(strThumb + ".png", item.Label);
                                       }
                                     }
 

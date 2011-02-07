@@ -190,14 +190,14 @@
           this.btnGrabber = new System.Windows.Forms.Button();
           this.txtGrabber = new System.Windows.Forms.TextBox();
           this.label27 = new System.Windows.Forms.Label();
-          this.groupBox20 = new System.Windows.Forms.GroupBox();
-          this.groupBoxAMCupdaterScheduer = new System.Windows.Forms.GroupBox();
+          this.groupBox_AMCupdater = new System.Windows.Forms.GroupBox();
+          this.groupBox_AMCupdaterScheduer = new System.Windows.Forms.GroupBox();
           this.scheduleAMCUpdater = new System.Windows.Forms.CheckBox();
           this.label28 = new System.Windows.Forms.Label();
           this.btnParameters = new System.Windows.Forms.Button();
           this.txtAMCUpd_cnf = new System.Windows.Forms.TextBox();
           this.btnAMCUpd_cnf = new System.Windows.Forms.Button();
-          this.groupBox111 = new System.Windows.Forms.GroupBox();
+          this.groupBox_AMCupdater_ExternalApplication = new System.Windows.Forms.GroupBox();
           this.btnCreateAMCDefaultConfig = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.lblAMCMovieScanPath = new System.Windows.Forms.Label();
@@ -239,6 +239,9 @@
           this.checkWatchedInProfile = new System.Windows.Forms.CheckBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
           this.groupBox_AntUpdatingItems = new System.Windows.Forms.GroupBox();
+          this.label46 = new System.Windows.Forms.Label();
+          this.label45 = new System.Windows.Forms.Label();
+          this.label44 = new System.Windows.Forms.Label();
           this.chkWindowsFileDialog = new System.Windows.Forms.CheckBox();
           this.AntUpdDflT2 = new System.Windows.Forms.TextBox();
           this.AntUpdDflT1 = new System.Windows.Forms.TextBox();
@@ -254,6 +257,8 @@
           this.AntSearchField = new System.Windows.Forms.ComboBox();
           this.AntSearchList = new System.Windows.Forms.TextBox();
           this.groupBox_SupplementarySearch = new System.Windows.Forms.GroupBox();
+          this.label43 = new System.Windows.Forms.Label();
+          this.label42 = new System.Windows.Forms.Label();
           this.lblUserdefinedSearchItems = new System.Windows.Forms.Label();
           this.AntSearchItem2 = new System.Windows.Forms.ComboBox();
           this.AntSearchText2 = new System.Windows.Forms.TextBox();
@@ -301,6 +306,9 @@
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
           this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBox_SupplementaryView = new System.Windows.Forms.GroupBox();
+          this.label41 = new System.Windows.Forms.Label();
+          this.label31 = new System.Windows.Forms.Label();
+          this.label26 = new System.Windows.Forms.Label();
           this.AntViewValue5 = new System.Windows.Forms.TextBox();
           this.AntViewText5 = new System.Windows.Forms.TextBox();
           this.AntViewItem5 = new System.Windows.Forms.ComboBox();
@@ -436,11 +444,6 @@
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
-          this.label26 = new System.Windows.Forms.Label();
-          this.label31 = new System.Windows.Forms.Label();
-          this.label41 = new System.Windows.Forms.Label();
-          this.label42 = new System.Windows.Forms.Label();
-          this.label43 = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -450,9 +453,9 @@
           this.groupBox1.SuspendLayout();
           this.groupBox_ArtistImages.SuspendLayout();
           this.groupBox_GrabberOptions.SuspendLayout();
-          this.groupBox20.SuspendLayout();
-          this.groupBoxAMCupdaterScheduer.SuspendLayout();
-          this.groupBox111.SuspendLayout();
+          this.groupBox_AMCupdater.SuspendLayout();
+          this.groupBox_AMCupdaterScheduer.SuspendLayout();
+          this.groupBox_AMCupdater_ExternalApplication.SuspendLayout();
           this.groupBoxDeletionOptions.SuspendLayout();
           this.gpsuppress.SuspendLayout();
           this.gpspfield.SuspendLayout();
@@ -1054,6 +1057,7 @@
           this.txtLogosPath.Size = new System.Drawing.Size(469, 20);
           this.txtLogosPath.TabIndex = 92;
           this.ToolTip1.SetToolTip(this.txtLogosPath, resources.GetString("txtLogosPath.ToolTip"));
+          this.txtLogosPath.TextChanged += new System.EventHandler(this.txtLogosPath_TextChanged);
           // 
           // comboBoxLogoSpacing
           // 
@@ -1507,33 +1511,33 @@
           this.label27.TabIndex = 53;
           this.label27.Text = "Default Internet Grabber Script";
           // 
-          // groupBox20
+          // groupBox_AMCupdater
           // 
-          this.groupBox20.BackColor = System.Drawing.Color.Transparent;
-          this.groupBox20.Controls.Add(this.groupBoxAMCupdaterScheduer);
-          this.groupBox20.Controls.Add(this.groupBox111);
-          this.groupBox20.Controls.Add(this.chkAMCUpd);
-          this.groupBox20.Location = new System.Drawing.Point(6, 60);
-          this.groupBox20.Name = "groupBox20";
-          this.groupBox20.Size = new System.Drawing.Size(735, 288);
-          this.groupBox20.TabIndex = 2;
-          this.groupBox20.TabStop = false;
-          this.groupBox20.Text = "AMCUpdater Options (for global internet update functions)";
-          this.ToolTip1.SetToolTip(this.groupBox20, resources.GetString("groupBox20.ToolTip"));
+          this.groupBox_AMCupdater.BackColor = System.Drawing.Color.Transparent;
+          this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
+          this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
+          this.groupBox_AMCupdater.Controls.Add(this.chkAMCUpd);
+          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 60);
+          this.groupBox_AMCupdater.Name = "groupBox_AMCupdater";
+          this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 288);
+          this.groupBox_AMCupdater.TabIndex = 2;
+          this.groupBox_AMCupdater.TabStop = false;
+          this.groupBox_AMCupdater.Text = "AMCUpdater Options (for global internet update functions)";
+          this.ToolTip1.SetToolTip(this.groupBox_AMCupdater, resources.GetString("groupBox_AMCupdater.ToolTip"));
           // 
-          // groupBoxAMCupdaterScheduer
+          // groupBox_AMCupdaterScheduer
           // 
-          this.groupBoxAMCupdaterScheduer.Controls.Add(this.scheduleAMCUpdater);
-          this.groupBoxAMCupdaterScheduer.Controls.Add(this.label28);
-          this.groupBoxAMCupdaterScheduer.Controls.Add(this.btnParameters);
-          this.groupBoxAMCupdaterScheduer.Controls.Add(this.txtAMCUpd_cnf);
-          this.groupBoxAMCupdaterScheduer.Controls.Add(this.btnAMCUpd_cnf);
-          this.groupBoxAMCupdaterScheduer.Location = new System.Drawing.Point(153, 17);
-          this.groupBoxAMCupdaterScheduer.Name = "groupBoxAMCupdaterScheduer";
-          this.groupBoxAMCupdaterScheduer.Size = new System.Drawing.Size(576, 50);
-          this.groupBoxAMCupdaterScheduer.TabIndex = 62;
-          this.groupBoxAMCupdaterScheduer.TabStop = false;
-          this.groupBoxAMCupdaterScheduer.Text = "Scheduler for AMCupdater";
+          this.groupBox_AMCupdaterScheduer.Controls.Add(this.scheduleAMCUpdater);
+          this.groupBox_AMCupdaterScheduer.Controls.Add(this.label28);
+          this.groupBox_AMCupdaterScheduer.Controls.Add(this.btnParameters);
+          this.groupBox_AMCupdaterScheduer.Controls.Add(this.txtAMCUpd_cnf);
+          this.groupBox_AMCupdaterScheduer.Controls.Add(this.btnAMCUpd_cnf);
+          this.groupBox_AMCupdaterScheduer.Location = new System.Drawing.Point(153, 17);
+          this.groupBox_AMCupdaterScheduer.Name = "groupBox_AMCupdaterScheduer";
+          this.groupBox_AMCupdaterScheduer.Size = new System.Drawing.Size(576, 50);
+          this.groupBox_AMCupdaterScheduer.TabIndex = 62;
+          this.groupBox_AMCupdaterScheduer.TabStop = false;
+          this.groupBox_AMCupdaterScheduer.Text = "Scheduler for AMCupdater";
           // 
           // scheduleAMCUpdater
           // 
@@ -1570,7 +1574,6 @@
           // 
           // txtAMCUpd_cnf
           // 
-          this.txtAMCUpd_cnf.Enabled = false;
           this.txtAMCUpd_cnf.Location = new System.Drawing.Point(310, 20);
           this.txtAMCUpd_cnf.Name = "txtAMCUpd_cnf";
           this.txtAMCUpd_cnf.Size = new System.Drawing.Size(218, 20);
@@ -1579,7 +1582,6 @@
           // 
           // btnAMCUpd_cnf
           // 
-          this.btnAMCUpd_cnf.Enabled = false;
           this.btnAMCUpd_cnf.Location = new System.Drawing.Point(534, 20);
           this.btnAMCUpd_cnf.Name = "btnAMCUpd_cnf";
           this.btnAMCUpd_cnf.Size = new System.Drawing.Size(32, 20);
@@ -1588,28 +1590,28 @@
           this.btnAMCUpd_cnf.UseVisualStyleBackColor = true;
           this.btnAMCUpd_cnf.Click += new System.EventHandler(this.btnAMCUpd_cnf_Click);
           // 
-          // groupBox111
+          // groupBox_AMCupdater_ExternalApplication
           // 
-          this.groupBox111.Controls.Add(this.btnCreateAMCDefaultConfig);
-          this.groupBox111.Controls.Add(this.lblAMCupdaterConfigPreview);
-          this.groupBox111.Controls.Add(this.lblAMCMovieScanPath);
-          this.groupBox111.Controls.Add(this.chkAMC_Purge_Missing_Files);
-          this.groupBox111.Controls.Add(this.btnAMCMovieScanPathAdd);
-          this.groupBox111.Controls.Add(this.AMCMovieScanPath);
-          this.groupBox111.Controls.Add(this.AMCConfigView);
-          this.groupBox111.Controls.Add(this.btnCreateAMCDesktopIcon);
-          this.groupBox111.Controls.Add(this.btnLaunchAMCupdater);
-          this.groupBox111.ImeMode = System.Windows.Forms.ImeMode.Off;
-          this.groupBox111.Location = new System.Drawing.Point(6, 73);
-          this.groupBox111.Name = "groupBox111";
-          this.groupBox111.Size = new System.Drawing.Size(723, 209);
-          this.groupBox111.TabIndex = 3;
-          this.groupBox111.TabStop = false;
-          this.groupBox111.Text = "AMC Updater external application";
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDefaultConfig);
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.lblAMCupdaterConfigPreview);
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.lblAMCMovieScanPath);
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.chkAMC_Purge_Missing_Files);
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnAMCMovieScanPathAdd);
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AMCMovieScanPath);
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AMCConfigView);
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDesktopIcon);
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnLaunchAMCupdater);
+          this.groupBox_AMCupdater_ExternalApplication.ImeMode = System.Windows.Forms.ImeMode.Off;
+          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(6, 73);
+          this.groupBox_AMCupdater_ExternalApplication.Name = "groupBox_AMCupdater_ExternalApplication";
+          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(723, 209);
+          this.groupBox_AMCupdater_ExternalApplication.TabIndex = 3;
+          this.groupBox_AMCupdater_ExternalApplication.TabStop = false;
+          this.groupBox_AMCupdater_ExternalApplication.Text = "AMC Updater external application";
           // 
           // btnCreateAMCDefaultConfig
           // 
-          this.btnCreateAMCDefaultConfig.Enabled = false;
+          this.btnCreateAMCDefaultConfig.AllowDrop = true;
           this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 128);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 31);
@@ -1640,20 +1642,18 @@
           // chkAMC_Purge_Missing_Files
           // 
           this.chkAMC_Purge_Missing_Files.AutoSize = true;
-          this.chkAMC_Purge_Missing_Files.Enabled = false;
           this.chkAMC_Purge_Missing_Files.ForeColor = System.Drawing.Color.Red;
           this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(229, 43);
           this.chkAMC_Purge_Missing_Files.Name = "chkAMC_Purge_Missing_Files";
           this.chkAMC_Purge_Missing_Files.Size = new System.Drawing.Size(116, 17);
           this.chkAMC_Purge_Missing_Files.TabIndex = 83;
           this.chkAMC_Purge_Missing_Files.Text = "Purge Missing Files";
-          this.ToolTip1.SetToolTip(this.chkAMC_Purge_Missing_Files, "If enabled, AMC Updater will remove Records from your DB, where mediafile cannot " +
-                  "be found!!!");
+          this.ToolTip1.SetToolTip(this.chkAMC_Purge_Missing_Files, resources.GetString("chkAMC_Purge_Missing_Files.ToolTip"));
           this.chkAMC_Purge_Missing_Files.UseVisualStyleBackColor = true;
+          this.chkAMC_Purge_Missing_Files.CheckedChanged += new System.EventHandler(this.chkAMC_Purge_Missing_Files_CheckedChanged);
           // 
           // btnAMCMovieScanPathAdd
           // 
-          this.btnAMCMovieScanPathAdd.Enabled = false;
           this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(682, 17);
           this.btnAMCMovieScanPathAdd.Name = "btnAMCMovieScanPathAdd";
           this.btnAMCMovieScanPathAdd.Size = new System.Drawing.Size(32, 20);
@@ -1710,7 +1710,7 @@
           this.btnCreateAMCDesktopIcon.TabIndex = 78;
           this.btnCreateAMCDesktopIcon.Text = "Create Desktop Icon ";
           this.ToolTip1.SetToolTip(this.btnCreateAMCDesktopIcon, "By creating a desktop icon you can launch AMC Updater directly \r\nfrom windows wih" +
-                  "tout first starting MyFIlms setup.");
+                  "tout first starting MyFilms setup.");
           this.btnCreateAMCDesktopIcon.UseVisualStyleBackColor = true;
           this.btnCreateAMCDesktopIcon.Click += new System.EventHandler(this.btnCreateAMCDesktopIcon_Click);
           // 
@@ -1723,6 +1723,7 @@
           this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 54);
           this.btnLaunchAMCupdater.TabIndex = 76;
           this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
+          this.ToolTip1.SetToolTip(this.btnLaunchAMCupdater, "Launch AMCupdater with Configuration specific settings, as you created them.");
           this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
           this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
           // 
@@ -1746,7 +1747,7 @@
           this.groupBoxDeletionOptions.Controls.Add(this.gpspfield);
           this.groupBoxDeletionOptions.Location = new System.Drawing.Point(378, 6);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
-          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(350, 238);
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(350, 253);
           this.groupBoxDeletionOptions.TabIndex = 35;
           this.groupBoxDeletionOptions.TabStop = false;
           this.groupBoxDeletionOptions.Text = "Deletion Options for automatic updates and/or deletions";
@@ -1755,7 +1756,7 @@
           // chkSuppress
           // 
           this.chkSuppress.AutoSize = true;
-          this.chkSuppress.Location = new System.Drawing.Point(10, 16);
+          this.chkSuppress.Location = new System.Drawing.Point(10, 20);
           this.chkSuppress.Name = "chkSuppress";
           this.chkSuppress.Size = new System.Drawing.Size(292, 17);
           this.chkSuppress.TabIndex = 0;
@@ -1770,7 +1771,7 @@
           this.gpsuppress.Controls.Add(this.rbsuppress3);
           this.gpsuppress.Controls.Add(this.rbsuppress1);
           this.gpsuppress.Enabled = false;
-          this.gpsuppress.Location = new System.Drawing.Point(15, 30);
+          this.gpsuppress.Location = new System.Drawing.Point(15, 39);
           this.gpsuppress.Name = "gpsuppress";
           this.gpsuppress.Size = new System.Drawing.Size(321, 97);
           this.gpsuppress.TabIndex = 2;
@@ -1829,7 +1830,7 @@
           this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Controls.Add(this.cbfdupdate);
           this.gpspfield.Enabled = false;
-          this.gpspfield.Location = new System.Drawing.Point(15, 133);
+          this.gpspfield.Location = new System.Drawing.Point(15, 151);
           this.gpspfield.Name = "gpspfield";
           this.gpspfield.Size = new System.Drawing.Size(321, 93);
           this.gpspfield.TabIndex = 18;
@@ -1881,9 +1882,9 @@
           this.groupBoxUpdateByProperties.Controls.Add(this.label33);
           this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdField);
           this.groupBoxUpdateByProperties.Controls.Add(this.AntUpdList);
-          this.groupBoxUpdateByProperties.Location = new System.Drawing.Point(17, 247);
+          this.groupBoxUpdateByProperties.Location = new System.Drawing.Point(17, 265);
           this.groupBoxUpdateByProperties.Name = "groupBoxUpdateByProperties";
-          this.groupBoxUpdateByProperties.Size = new System.Drawing.Size(711, 101);
+          this.groupBoxUpdateByProperties.Size = new System.Drawing.Size(711, 83);
           this.groupBoxUpdateByProperties.TabIndex = 34;
           this.groupBoxUpdateByProperties.TabStop = false;
           this.groupBoxUpdateByProperties.Text = "Update by Properties";
@@ -1891,7 +1892,7 @@
           // 
           // AntUpdFieldReset
           // 
-          this.AntUpdFieldReset.Location = new System.Drawing.Point(582, 22);
+          this.AntUpdFieldReset.Location = new System.Drawing.Point(582, 17);
           this.AntUpdFieldReset.Name = "AntUpdFieldReset";
           this.AntUpdFieldReset.Size = new System.Drawing.Size(108, 22);
           this.AntUpdFieldReset.TabIndex = 86;
@@ -1902,7 +1903,7 @@
           // 
           // AntUpdFieldClear
           // 
-          this.AntUpdFieldClear.Location = new System.Drawing.Point(488, 23);
+          this.AntUpdFieldClear.Location = new System.Drawing.Point(488, 18);
           this.AntUpdFieldClear.Name = "AntUpdFieldClear";
           this.AntUpdFieldClear.Size = new System.Drawing.Size(64, 21);
           this.AntUpdFieldClear.TabIndex = 84;
@@ -1914,7 +1915,7 @@
           // label33
           // 
           this.label33.AutoSize = true;
-          this.label33.Location = new System.Drawing.Point(12, 26);
+          this.label33.Location = new System.Drawing.Point(12, 21);
           this.label33.Name = "label33";
           this.label33.Size = new System.Drawing.Size(153, 13);
           this.label33.TabIndex = 83;
@@ -1923,7 +1924,7 @@
           // AntUpdField
           // 
           this.AntUpdField.FormattingEnabled = true;
-          this.AntUpdField.Location = new System.Drawing.Point(197, 23);
+          this.AntUpdField.Location = new System.Drawing.Point(197, 18);
           this.AntUpdField.Name = "AntUpdField";
           this.AntUpdField.Size = new System.Drawing.Size(151, 21);
           this.AntUpdField.TabIndex = 81;
@@ -1933,7 +1934,7 @@
           // AntUpdList
           // 
           this.AntUpdList.BackColor = System.Drawing.SystemColors.Control;
-          this.AntUpdList.Location = new System.Drawing.Point(15, 59);
+          this.AntUpdList.Location = new System.Drawing.Point(15, 51);
           this.AntUpdList.Name = "AntUpdList";
           this.AntUpdList.Size = new System.Drawing.Size(675, 20);
           this.AntUpdList.TabIndex = 82;
@@ -1951,7 +1952,7 @@
           this.groupBox2.Controls.Add(this.cbWatched);
           this.groupBox2.Controls.Add(this.checkWatchedInProfile);
           this.groupBox2.Controls.Add(this.CheckWatched);
-          this.groupBox2.Location = new System.Drawing.Point(17, 101);
+          this.groupBox2.Location = new System.Drawing.Point(17, 116);
           this.groupBox2.Name = "groupBox2";
           this.groupBox2.Size = new System.Drawing.Size(354, 143);
           this.groupBox2.TabIndex = 72;
@@ -1962,7 +1963,7 @@
           // lblUnwatchedItemsValue
           // 
           this.lblUnwatchedItemsValue.AutoSize = true;
-          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(183, 58);
+          this.lblUnwatchedItemsValue.Location = new System.Drawing.Point(183, 57);
           this.lblUnwatchedItemsValue.Name = "lblUnwatchedItemsValue";
           this.lblUnwatchedItemsValue.Size = new System.Drawing.Size(165, 13);
           this.lblUnwatchedItemsValue.TabIndex = 84;
@@ -2005,7 +2006,7 @@
           // label19
           // 
           this.label19.AutoSize = true;
-          this.label19.Location = new System.Drawing.Point(8, 58);
+          this.label19.Location = new System.Drawing.Point(8, 57);
           this.label19.Name = "label19";
           this.label19.Size = new System.Drawing.Size(150, 13);
           this.label19.TabIndex = 74;
@@ -2044,6 +2045,9 @@
           // 
           // groupBox_AntUpdatingItems
           // 
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label46);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label45);
+          this.groupBox_AntUpdatingItems.Controls.Add(this.label44);
           this.groupBox_AntUpdatingItems.Controls.Add(this.chkWindowsFileDialog);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT2);
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdDflT1);
@@ -2053,16 +2057,43 @@
           this.groupBox_AntUpdatingItems.Controls.Add(this.AntUpdText1);
           this.groupBox_AntUpdatingItems.Location = new System.Drawing.Point(17, 6);
           this.groupBox_AntUpdatingItems.Name = "groupBox_AntUpdatingItems";
-          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(354, 89);
+          this.groupBox_AntUpdatingItems.Size = new System.Drawing.Size(354, 104);
           this.groupBox_AntUpdatingItems.TabIndex = 33;
           this.groupBox_AntUpdatingItems.TabStop = false;
           this.groupBox_AntUpdatingItems.Text = "User defined Updating Items for manual updates";
           this.ToolTip1.SetToolTip(this.groupBox_AntUpdatingItems, resources.GetString("groupBox_AntUpdatingItems.ToolTip"));
           // 
+          // label46
+          // 
+          this.label46.AutoSize = true;
+          this.label46.Location = new System.Drawing.Point(228, 15);
+          this.label46.Name = "label46";
+          this.label46.Size = new System.Drawing.Size(72, 13);
+          this.label46.TabIndex = 80;
+          this.label46.Text = "Update Value";
+          // 
+          // label45
+          // 
+          this.label45.AutoSize = true;
+          this.label45.Location = new System.Drawing.Point(136, 15);
+          this.label45.Name = "label45";
+          this.label45.Size = new System.Drawing.Size(33, 13);
+          this.label45.TabIndex = 79;
+          this.label45.Text = "Label";
+          // 
+          // label44
+          // 
+          this.label44.AutoSize = true;
+          this.label44.Location = new System.Drawing.Point(9, 15);
+          this.label44.Name = "label44";
+          this.label44.Size = new System.Drawing.Size(93, 13);
+          this.label44.TabIndex = 78;
+          this.label44.Text = "DB Item to update";
+          // 
           // chkWindowsFileDialog
           // 
           this.chkWindowsFileDialog.AutoSize = true;
-          this.chkWindowsFileDialog.Location = new System.Drawing.Point(10, 68);
+          this.chkWindowsFileDialog.Location = new System.Drawing.Point(10, 82);
           this.chkWindowsFileDialog.Name = "chkWindowsFileDialog";
           this.chkWindowsFileDialog.Size = new System.Drawing.Size(299, 17);
           this.chkWindowsFileDialog.TabIndex = 77;
@@ -2072,14 +2103,14 @@
           // 
           // AntUpdDflT2
           // 
-          this.AntUpdDflT2.Location = new System.Drawing.Point(231, 43);
+          this.AntUpdDflT2.Location = new System.Drawing.Point(231, 57);
           this.AntUpdDflT2.Name = "AntUpdDflT2";
           this.AntUpdDflT2.Size = new System.Drawing.Size(117, 20);
           this.AntUpdDflT2.TabIndex = 35;
           // 
           // AntUpdDflT1
           // 
-          this.AntUpdDflT1.Location = new System.Drawing.Point(231, 18);
+          this.AntUpdDflT1.Location = new System.Drawing.Point(231, 32);
           this.AntUpdDflT1.Name = "AntUpdDflT1";
           this.AntUpdDflT1.Size = new System.Drawing.Size(117, 20);
           this.AntUpdDflT1.TabIndex = 32;
@@ -2087,14 +2118,14 @@
           // AntUpdItem2
           // 
           this.AntUpdItem2.FormattingEnabled = true;
-          this.AntUpdItem2.Location = new System.Drawing.Point(10, 43);
+          this.AntUpdItem2.Location = new System.Drawing.Point(10, 57);
           this.AntUpdItem2.Name = "AntUpdItem2";
           this.AntUpdItem2.Size = new System.Drawing.Size(123, 21);
           this.AntUpdItem2.TabIndex = 33;
           // 
           // AntUpdText2
           // 
-          this.AntUpdText2.Location = new System.Drawing.Point(139, 44);
+          this.AntUpdText2.Location = new System.Drawing.Point(139, 58);
           this.AntUpdText2.Name = "AntUpdText2";
           this.AntUpdText2.Size = new System.Drawing.Size(86, 20);
           this.AntUpdText2.TabIndex = 34;
@@ -2102,14 +2133,14 @@
           // AntUpdItem1
           // 
           this.AntUpdItem1.FormattingEnabled = true;
-          this.AntUpdItem1.Location = new System.Drawing.Point(10, 18);
+          this.AntUpdItem1.Location = new System.Drawing.Point(10, 32);
           this.AntUpdItem1.Name = "AntUpdItem1";
           this.AntUpdItem1.Size = new System.Drawing.Size(123, 21);
           this.AntUpdItem1.TabIndex = 30;
           // 
           // AntUpdText1
           // 
-          this.AntUpdText1.Location = new System.Drawing.Point(139, 19);
+          this.AntUpdText1.Location = new System.Drawing.Point(139, 33);
           this.AntUpdText1.Name = "AntUpdText1";
           this.AntUpdText1.Size = new System.Drawing.Size(86, 20);
           this.AntUpdText1.TabIndex = 31;
@@ -2212,6 +2243,24 @@
           this.groupBox_SupplementarySearch.Text = "User defined Search Items";
           this.ToolTip1.SetToolTip(this.groupBox_SupplementarySearch, resources.GetString("groupBox_SupplementarySearch.ToolTip"));
           // 
+          // label43
+          // 
+          this.label43.AutoSize = true;
+          this.label43.Location = new System.Drawing.Point(164, 22);
+          this.label43.Name = "label43";
+          this.label43.Size = new System.Drawing.Size(124, 13);
+          this.label43.TabIndex = 42;
+          this.label43.Text = "Value for predefined filter";
+          // 
+          // label42
+          // 
+          this.label42.AutoSize = true;
+          this.label42.Location = new System.Drawing.Point(8, 22);
+          this.label42.Name = "label42";
+          this.label42.Size = new System.Drawing.Size(92, 13);
+          this.label42.TabIndex = 41;
+          this.label42.Text = "DB Item to search";
+          // 
           // lblUserdefinedSearchItems
           // 
           this.lblUserdefinedSearchItems.AutoSize = true;
@@ -2224,7 +2273,7 @@
           // AntSearchItem2
           // 
           this.AntSearchItem2.FormattingEnabled = true;
-          this.AntSearchItem2.Location = new System.Drawing.Point(10, 66);
+          this.AntSearchItem2.Location = new System.Drawing.Point(10, 67);
           this.AntSearchItem2.Name = "AntSearchItem2";
           this.AntSearchItem2.Size = new System.Drawing.Size(145, 21);
           this.AntSearchItem2.TabIndex = 38;
@@ -2232,7 +2281,7 @@
           // 
           // AntSearchText2
           // 
-          this.AntSearchText2.Location = new System.Drawing.Point(164, 67);
+          this.AntSearchText2.Location = new System.Drawing.Point(164, 68);
           this.AntSearchText2.Name = "AntSearchText2";
           this.AntSearchText2.Size = new System.Drawing.Size(173, 20);
           this.AntSearchText2.TabIndex = 39;
@@ -2241,7 +2290,7 @@
           // AntSearchItem1
           // 
           this.AntSearchItem1.FormattingEnabled = true;
-          this.AntSearchItem1.Location = new System.Drawing.Point(10, 39);
+          this.AntSearchItem1.Location = new System.Drawing.Point(10, 40);
           this.AntSearchItem1.Name = "AntSearchItem1";
           this.AntSearchItem1.Size = new System.Drawing.Size(145, 21);
           this.AntSearchItem1.TabIndex = 36;
@@ -2249,7 +2298,7 @@
           // 
           // AntSearchText1
           // 
-          this.AntSearchText1.Location = new System.Drawing.Point(164, 40);
+          this.AntSearchText1.Location = new System.Drawing.Point(164, 41);
           this.AntSearchText1.Name = "AntSearchText1";
           this.AntSearchText1.Size = new System.Drawing.Size(173, 20);
           this.AntSearchText1.TabIndex = 37;
@@ -2636,7 +2685,7 @@
           this.groupBox_DefaultView.Controls.Add(this.View_Dflt_Text);
           this.groupBox_DefaultView.Location = new System.Drawing.Point(9, 6);
           this.groupBox_DefaultView.Name = "groupBox_DefaultView";
-          this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 165);
+          this.groupBox_DefaultView.Size = new System.Drawing.Size(347, 158);
           this.groupBox_DefaultView.TabIndex = 26;
           this.groupBox_DefaultView.TabStop = false;
           this.groupBox_DefaultView.Text = "Default Start View";
@@ -2645,7 +2694,7 @@
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 128);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 125);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(302, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -2761,24 +2810,51 @@
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewText1);
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewItem2);
           this.groupBox_SupplementaryView.Controls.Add(this.AntViewItem1);
-          this.groupBox_SupplementaryView.Location = new System.Drawing.Point(9, 177);
+          this.groupBox_SupplementaryView.Location = new System.Drawing.Point(9, 170);
           this.groupBox_SupplementaryView.Name = "groupBox_SupplementaryView";
-          this.groupBox_SupplementaryView.Size = new System.Drawing.Size(347, 171);
+          this.groupBox_SupplementaryView.Size = new System.Drawing.Size(347, 178);
           this.groupBox_SupplementaryView.TabIndex = 24;
           this.groupBox_SupplementaryView.TabStop = false;
           this.groupBox_SupplementaryView.Text = "User defined Views";
           this.ToolTip1.SetToolTip(this.groupBox_SupplementaryView, resources.GetString("groupBox_SupplementaryView.ToolTip"));
           // 
+          // label41
+          // 
+          this.label41.AutoSize = true;
+          this.label41.Location = new System.Drawing.Point(238, 23);
+          this.label41.Name = "label41";
+          this.label41.Size = new System.Drawing.Size(71, 13);
+          this.label41.TabIndex = 29;
+          this.label41.Text = "Default Value";
+          // 
+          // label31
+          // 
+          this.label31.AutoSize = true;
+          this.label31.Location = new System.Drawing.Point(123, 23);
+          this.label31.Name = "label31";
+          this.label31.Size = new System.Drawing.Size(33, 13);
+          this.label31.TabIndex = 28;
+          this.label31.Text = "Label";
+          // 
+          // label26
+          // 
+          this.label26.AutoSize = true;
+          this.label26.Location = new System.Drawing.Point(7, 23);
+          this.label26.Name = "label26";
+          this.label26.Size = new System.Drawing.Size(82, 13);
+          this.label26.TabIndex = 27;
+          this.label26.Text = "DB Item to view";
+          // 
           // AntViewValue5
           // 
-          this.AntViewValue5.Location = new System.Drawing.Point(237, 139);
+          this.AntViewValue5.Location = new System.Drawing.Point(237, 146);
           this.AntViewValue5.Name = "AntViewValue5";
           this.AntViewValue5.Size = new System.Drawing.Size(103, 20);
           this.AntViewValue5.TabIndex = 26;
           // 
           // AntViewText5
           // 
-          this.AntViewText5.Location = new System.Drawing.Point(126, 139);
+          this.AntViewText5.Location = new System.Drawing.Point(126, 146);
           this.AntViewText5.Name = "AntViewText5";
           this.AntViewText5.Size = new System.Drawing.Size(105, 20);
           this.AntViewText5.TabIndex = 25;
@@ -2787,7 +2863,7 @@
           // AntViewItem5
           // 
           this.AntViewItem5.FormattingEnabled = true;
-          this.AntViewItem5.Location = new System.Drawing.Point(10, 139);
+          this.AntViewItem5.Location = new System.Drawing.Point(10, 146);
           this.AntViewItem5.Name = "AntViewItem5";
           this.AntViewItem5.Size = new System.Drawing.Size(110, 21);
           this.AntViewItem5.TabIndex = 24;
@@ -2795,14 +2871,14 @@
           // 
           // AntViewValue4
           // 
-          this.AntViewValue4.Location = new System.Drawing.Point(237, 113);
+          this.AntViewValue4.Location = new System.Drawing.Point(237, 120);
           this.AntViewValue4.Name = "AntViewValue4";
           this.AntViewValue4.Size = new System.Drawing.Size(103, 20);
           this.AntViewValue4.TabIndex = 23;
           // 
           // AntViewText4
           // 
-          this.AntViewText4.Location = new System.Drawing.Point(126, 113);
+          this.AntViewText4.Location = new System.Drawing.Point(126, 120);
           this.AntViewText4.Name = "AntViewText4";
           this.AntViewText4.Size = new System.Drawing.Size(105, 20);
           this.AntViewText4.TabIndex = 22;
@@ -2811,7 +2887,7 @@
           // AntViewItem4
           // 
           this.AntViewItem4.FormattingEnabled = true;
-          this.AntViewItem4.Location = new System.Drawing.Point(10, 113);
+          this.AntViewItem4.Location = new System.Drawing.Point(10, 120);
           this.AntViewItem4.Name = "AntViewItem4";
           this.AntViewItem4.Size = new System.Drawing.Size(110, 21);
           this.AntViewItem4.TabIndex = 21;
@@ -2819,14 +2895,14 @@
           // 
           // AntViewValue3
           // 
-          this.AntViewValue3.Location = new System.Drawing.Point(237, 87);
+          this.AntViewValue3.Location = new System.Drawing.Point(237, 94);
           this.AntViewValue3.Name = "AntViewValue3";
           this.AntViewValue3.Size = new System.Drawing.Size(103, 20);
           this.AntViewValue3.TabIndex = 20;
           // 
           // AntViewText3
           // 
-          this.AntViewText3.Location = new System.Drawing.Point(126, 87);
+          this.AntViewText3.Location = new System.Drawing.Point(126, 94);
           this.AntViewText3.Name = "AntViewText3";
           this.AntViewText3.Size = new System.Drawing.Size(105, 20);
           this.AntViewText3.TabIndex = 19;
@@ -2835,7 +2911,7 @@
           // AntViewItem3
           // 
           this.AntViewItem3.FormattingEnabled = true;
-          this.AntViewItem3.Location = new System.Drawing.Point(10, 87);
+          this.AntViewItem3.Location = new System.Drawing.Point(10, 94);
           this.AntViewItem3.Name = "AntViewItem3";
           this.AntViewItem3.Size = new System.Drawing.Size(110, 21);
           this.AntViewItem3.TabIndex = 18;
@@ -2843,21 +2919,21 @@
           // 
           // AntViewValue2
           // 
-          this.AntViewValue2.Location = new System.Drawing.Point(237, 61);
+          this.AntViewValue2.Location = new System.Drawing.Point(237, 68);
           this.AntViewValue2.Name = "AntViewValue2";
           this.AntViewValue2.Size = new System.Drawing.Size(103, 20);
           this.AntViewValue2.TabIndex = 17;
           // 
           // AntViewValue1
           // 
-          this.AntViewValue1.Location = new System.Drawing.Point(237, 35);
+          this.AntViewValue1.Location = new System.Drawing.Point(237, 42);
           this.AntViewValue1.Name = "AntViewValue1";
           this.AntViewValue1.Size = new System.Drawing.Size(103, 20);
           this.AntViewValue1.TabIndex = 14;
           // 
           // AntViewText2
           // 
-          this.AntViewText2.Location = new System.Drawing.Point(126, 61);
+          this.AntViewText2.Location = new System.Drawing.Point(126, 68);
           this.AntViewText2.Name = "AntViewText2";
           this.AntViewText2.Size = new System.Drawing.Size(105, 20);
           this.AntViewText2.TabIndex = 16;
@@ -2865,7 +2941,7 @@
           // 
           // AntViewText1
           // 
-          this.AntViewText1.Location = new System.Drawing.Point(126, 35);
+          this.AntViewText1.Location = new System.Drawing.Point(126, 42);
           this.AntViewText1.Name = "AntViewText1";
           this.AntViewText1.Size = new System.Drawing.Size(105, 20);
           this.AntViewText1.TabIndex = 13;
@@ -2875,7 +2951,7 @@
           // AntViewItem2
           // 
           this.AntViewItem2.FormattingEnabled = true;
-          this.AntViewItem2.Location = new System.Drawing.Point(10, 61);
+          this.AntViewItem2.Location = new System.Drawing.Point(10, 68);
           this.AntViewItem2.Name = "AntViewItem2";
           this.AntViewItem2.Size = new System.Drawing.Size(110, 21);
           this.AntViewItem2.TabIndex = 15;
@@ -2884,7 +2960,7 @@
           // AntViewItem1
           // 
           this.AntViewItem1.ItemHeight = 13;
-          this.AntViewItem1.Location = new System.Drawing.Point(10, 35);
+          this.AntViewItem1.Location = new System.Drawing.Point(10, 42);
           this.AntViewItem1.Name = "AntViewItem1";
           this.AntViewItem1.Size = new System.Drawing.Size(110, 21);
           this.AntViewItem1.TabIndex = 12;
@@ -3053,9 +3129,9 @@
           // 
           // btnTrailer
           // 
-          this.btnTrailer.Location = new System.Drawing.Point(634, 90);
+          this.btnTrailer.Location = new System.Drawing.Point(634, 92);
           this.btnTrailer.Name = "btnTrailer";
-          this.btnTrailer.Size = new System.Drawing.Size(32, 23);
+          this.btnTrailer.Size = new System.Drawing.Size(32, 20);
           this.btnTrailer.TabIndex = 70;
           this.btnTrailer.Text = "...";
           this.btnTrailer.UseVisualStyleBackColor = true;
@@ -3171,7 +3247,7 @@
           this.btnFirstTimeSetup.Name = "btnFirstTimeSetup";
           this.btnFirstTimeSetup.Size = new System.Drawing.Size(236, 35);
           this.btnFirstTimeSetup.TabIndex = 77;
-          this.btnFirstTimeSetup.Text = "Setup Wizard\r\n(new catalog with presets)";
+          this.btnFirstTimeSetup.Text = "Setup Wizard\r\n(new configuration with presets)";
           this.btnFirstTimeSetup.UseVisualStyleBackColor = true;
           this.btnFirstTimeSetup.Click += new System.EventHandler(this.btnFirstTimeSetup_Click);
           // 
@@ -3463,7 +3539,7 @@
             "Eax Movie Catalog",
             "eXtreme Movie Manager (V7.1.0.2)",
             "XBMC (V10.0)",
-            "Starter Settings using Presets"});
+            "MyFilms DB"});
           this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
           this.CatalogType.Size = new System.Drawing.Size(193, 21);
@@ -4145,7 +4221,7 @@
           // 
           // Tab_AMCupdater
           // 
-          this.Tab_AMCupdater.Controls.Add(this.groupBox20);
+          this.Tab_AMCupdater.Controls.Add(this.groupBox_AMCupdater);
           this.Tab_AMCupdater.Controls.Add(this.groupBox_GrabberOptions);
           this.Tab_AMCupdater.Location = new System.Drawing.Point(4, 22);
           this.Tab_AMCupdater.Name = "Tab_AMCupdater";
@@ -4191,51 +4267,6 @@
           this.General.TabIndex = 46;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
           // 
-          // label26
-          // 
-          this.label26.AutoSize = true;
-          this.label26.Location = new System.Drawing.Point(7, 19);
-          this.label26.Name = "label26";
-          this.label26.Size = new System.Drawing.Size(82, 13);
-          this.label26.TabIndex = 27;
-          this.label26.Text = "DB Item to view";
-          // 
-          // label31
-          // 
-          this.label31.AutoSize = true;
-          this.label31.Location = new System.Drawing.Point(123, 19);
-          this.label31.Name = "label31";
-          this.label31.Size = new System.Drawing.Size(33, 13);
-          this.label31.TabIndex = 28;
-          this.label31.Text = "Label";
-          // 
-          // label41
-          // 
-          this.label41.AutoSize = true;
-          this.label41.Location = new System.Drawing.Point(238, 19);
-          this.label41.Name = "label41";
-          this.label41.Size = new System.Drawing.Size(71, 13);
-          this.label41.TabIndex = 29;
-          this.label41.Text = "Default Value";
-          // 
-          // label42
-          // 
-          this.label42.AutoSize = true;
-          this.label42.Location = new System.Drawing.Point(8, 23);
-          this.label42.Name = "label42";
-          this.label42.Size = new System.Drawing.Size(92, 13);
-          this.label42.TabIndex = 41;
-          this.label42.Text = "DB Item to search";
-          // 
-          // label43
-          // 
-          this.label43.AutoSize = true;
-          this.label43.Location = new System.Drawing.Point(164, 23);
-          this.label43.Name = "label43";
-          this.label43.Size = new System.Drawing.Size(124, 13);
-          this.label43.TabIndex = 42;
-          this.label43.Text = "Value for predefined filter";
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4278,12 +4309,12 @@
           this.groupBox_ArtistImages.PerformLayout();
           this.groupBox_GrabberOptions.ResumeLayout(false);
           this.groupBox_GrabberOptions.PerformLayout();
-          this.groupBox20.ResumeLayout(false);
-          this.groupBox20.PerformLayout();
-          this.groupBoxAMCupdaterScheduer.ResumeLayout(false);
-          this.groupBoxAMCupdaterScheduer.PerformLayout();
-          this.groupBox111.ResumeLayout(false);
-          this.groupBox111.PerformLayout();
+          this.groupBox_AMCupdater.ResumeLayout(false);
+          this.groupBox_AMCupdater.PerformLayout();
+          this.groupBox_AMCupdaterScheduer.ResumeLayout(false);
+          this.groupBox_AMCupdaterScheduer.PerformLayout();
+          this.groupBox_AMCupdater_ExternalApplication.ResumeLayout(false);
+          this.groupBox_AMCupdater_ExternalApplication.PerformLayout();
           this.groupBoxDeletionOptions.ResumeLayout(false);
           this.groupBoxDeletionOptions.PerformLayout();
           this.gpsuppress.ResumeLayout(false);
@@ -4492,14 +4523,14 @@
         private Label labelFanart;
         private CheckBox chkDfltFanart;
         private TabPage Tab_AMCupdater;
-        private GroupBox groupBox20;
-        private GroupBox groupBoxAMCupdaterScheduer;
+        private GroupBox groupBox_AMCupdater;
+        private GroupBox groupBox_AMCupdaterScheduer;
         private CheckBox scheduleAMCUpdater;
         private Label label28;
         private Button btnParameters;
         private TextBox txtAMCUpd_cnf;
         private Button btnAMCUpd_cnf;
-        private GroupBox groupBox111;
+        private GroupBox groupBox_AMCupdater_ExternalApplication;
         private Label lblAMCupdaterConfigPreview;
         private Label lblAMCMovieScanPath;
         private CheckBox chkAMC_Purge_Missing_Files;
@@ -4698,5 +4729,8 @@
         private Label label26;
         private Label label43;
         private Label label42;
+        private Label label46;
+        private Label label45;
+        private Label label44;
     }
 }
