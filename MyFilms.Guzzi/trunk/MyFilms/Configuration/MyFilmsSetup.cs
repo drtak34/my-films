@@ -825,6 +825,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", ItemSearchFileName.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", DefaultCover.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", DefaultCoverArtist.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverViews", DefaultCoverViews.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultFanartImage", DefaultFanartImage.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdExe", CmdExe.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdPar", CmdPar.Text);
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", chkGrabber.Checked);
@@ -837,6 +839,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", txtAMCUpd_cnf.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", chkFanart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", chkDfltFanart.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImage", chkDfltFanartImage.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartPicture", MesFilmsFanart.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsPicture", MesFilmsViews.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Views", chkViews.Checked);
@@ -1127,6 +1130,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             TitleDelim.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "TitleDelim", "\\");
             //chkGrabber.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", false);
             chkDfltFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", false);
+            chkDfltFanartImage.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImage", false);
             chkFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", false);
             txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", string.Empty);
             //txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
@@ -1221,6 +1225,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", "");
             DefaultCover.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", "");
             DefaultCoverArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", "");
+            DefaultCoverViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverViews", "");
+            DefaultFanartImage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultFanartImage", "");
             View_Dflt_Item.Items.Remove(View_Dflt_Item.Text);
             View_Dflt_Item.Items.Add(View_Dflt_Item.Text);
             View_Dflt_Item.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltItem", "(none)");
@@ -1427,6 +1433,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             View_Dflt_Text.ResetText();
             DefaultCover.ResetText();
             DefaultCoverArtist.ResetText();
+            DefaultCoverViews.ResetText();
+            DefaultFanartImage.ResetText();
             Dwp.ResetText();
             Rpt_Dwp.ResetText();
             CmdExe.ResetText();
@@ -1471,6 +1479,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             txtAMCUpd_cnf.ResetText();
             //txtAMCUpd_exe.ResetText();
             chkDfltFanart.Checked = false;
+            chkDfltFanartImage.Checked = false;
             chkFanart.Checked = false;
             chkDfltViews.Checked = false;
             chkDfltArtist.Checked = false;
@@ -1810,12 +1819,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 MesFilmsFanart.Enabled = true;
                 btnFanart.Enabled = true;
                 chkDfltFanart.Enabled = true;
+                chkDfltFanartImage.Enabled = true;
             }
             else
             {
                 MesFilmsFanart.Enabled = false;
                 btnFanart.Enabled = false;
                 chkDfltFanart.Enabled = false;
+                chkDfltFanartImage.Enabled = false;
             }
         }
 
@@ -3044,16 +3055,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         }
 
-        //private void ButDefaultCoverArtist_Click(object sender, EventArgs e)
-        //{
-        //    openFileDialog1.RestoreDirectory = true;
-        //    openFileDialog1.DefaultExt = "png";
-        //    openFileDialog1.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp|All Files|*.*";
-        //    openFileDialog1.Title = "Default display Cover";
-        //    if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-        //        DefaultCoverArtist.Text = openFileDialog1.FileName;
-        //}
-
         private void ButImgArtist_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.Description = "Select Person Images Path";
@@ -3903,10 +3904,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           ItemSearchFileName.Text = "TranslatedTitle";
 
 
-          DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
           SearchFileName.Checked = true;
           chkFanart.Checked = true;
           chkDfltFanart.Checked = true;
+          chkDfltFanartImage.Checked = true;
 
           string FanartDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Fanart";
           if (!System.IO.Directory.Exists(FanartDirectory))
@@ -3933,7 +3934,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
           }
           MesFilmsImgArtist.Text = ArtistImagesDirectory;
-          DefaultCoverArtist.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
+          DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
+          DefaultCoverArtist.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCoverArtist.jpg";
+          DefaultCoverViews.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCoverViews.jpg";
+          DefaultFanartImage.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultFanartImage.jpg";
           chkDfltArtist.Checked = true; // Use default person cover if missing artwork...
 
           string GroupViewImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\GroupViewImages";
@@ -4079,6 +4083,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void txtLogosPath_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ButDefCovViews_Click(object sender, EventArgs e)
+        {
+          openFileDialog1.RestoreDirectory = true;
+          openFileDialog1.DefaultExt = "jpg";
+          openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";
+          openFileDialog1.Title = "Select Default Group Views Cover Image";
+          if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            DefaultCoverViews.Text = openFileDialog1.FileName;
+        }
+
+        private void ButDefFanart_Click(object sender, EventArgs e)
+        {
+          openFileDialog1.RestoreDirectory = true;
+          openFileDialog1.DefaultExt = "jpg";
+          openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";
+          openFileDialog1.Title = "Select Default Fanart Image";
+          if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            DefaultFanartImage.Text = openFileDialog1.FileName;
         }
 
     }

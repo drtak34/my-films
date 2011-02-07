@@ -2113,6 +2113,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //Added Guzzi - Fix that no fanart was returned ...
                     return wfanart;
                 }
+                if (MyFilms.conf.StrFanartDfltImage && (wfanart[0] == "" || wfanart[0] == " "))
+                {
+                  wfanart[0] = MyFilms.conf.DefaultFanartImage;
+                  wfanart[1] = "file";
+                }
             }
             
             LogMyFilms.Debug("MF: (SearchFanart) - Fanart not configured: wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");

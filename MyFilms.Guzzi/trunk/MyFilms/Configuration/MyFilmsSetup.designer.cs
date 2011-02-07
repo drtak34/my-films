@@ -444,6 +444,13 @@
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
+          this.DefaultFanartImage = new System.Windows.Forms.TextBox();
+          this.DefaultCoverViews = new System.Windows.Forms.TextBox();
+          this.ButDefCovViews = new System.Windows.Forms.Button();
+          this.ButDefFanart = new System.Windows.Forms.Button();
+          this.label47 = new System.Windows.Forms.Label();
+          this.chkDfltFanartImage = new System.Windows.Forms.CheckBox();
+          this.label48 = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1121,6 +1128,10 @@
           // 
           // Fanart
           // 
+          this.Fanart.Controls.Add(this.label48);
+          this.Fanart.Controls.Add(this.chkDfltFanartImage);
+          this.Fanart.Controls.Add(this.ButDefFanart);
+          this.Fanart.Controls.Add(this.DefaultFanartImage);
           this.Fanart.Controls.Add(this.lblResultingGroupViewsPathFanart);
           this.Fanart.Controls.Add(this.label40);
           this.Fanart.Controls.Add(this.chkFanart);
@@ -1128,9 +1139,9 @@
           this.Fanart.Controls.Add(this.MesFilmsFanart);
           this.Fanart.Controls.Add(this.labelFanart);
           this.Fanart.Controls.Add(this.chkDfltFanart);
-          this.Fanart.Location = new System.Drawing.Point(17, 251);
+          this.Fanart.Location = new System.Drawing.Point(6, 233);
           this.Fanart.Name = "Fanart";
-          this.Fanart.Size = new System.Drawing.Size(710, 97);
+          this.Fanart.Size = new System.Drawing.Size(735, 118);
           this.Fanart.TabIndex = 71;
           this.Fanart.TabStop = false;
           this.Fanart.Text = "Fanart (Backdrops)";
@@ -1140,7 +1151,7 @@
           // 
           this.lblResultingGroupViewsPathFanart.AutoSize = true;
           this.lblResultingGroupViewsPathFanart.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(314, 70);
+          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(314, 97);
           this.lblResultingGroupViewsPathFanart.Name = "lblResultingGroupViewsPathFanart";
           this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(137, 13);
           this.lblResultingGroupViewsPathFanart.TabIndex = 74;
@@ -1152,7 +1163,7 @@
           // 
           this.label40.AutoSize = true;
           this.label40.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.label40.Location = new System.Drawing.Point(114, 70);
+          this.label40.Location = new System.Drawing.Point(114, 97);
           this.label40.Name = "label40";
           this.label40.Size = new System.Drawing.Size(186, 13);
           this.label40.TabIndex = 73;
@@ -1172,7 +1183,7 @@
           // btnFanart
           // 
           this.btnFanart.Enabled = false;
-          this.btnFanart.Location = new System.Drawing.Point(656, 17);
+          this.btnFanart.Location = new System.Drawing.Point(625, 17);
           this.btnFanart.Name = "btnFanart";
           this.btnFanart.Size = new System.Drawing.Size(32, 20);
           this.btnFanart.TabIndex = 70;
@@ -1185,40 +1196,43 @@
           this.MesFilmsFanart.Enabled = false;
           this.MesFilmsFanart.Location = new System.Drawing.Point(315, 17);
           this.MesFilmsFanart.Name = "MesFilmsFanart";
-          this.MesFilmsFanart.Size = new System.Drawing.Size(335, 20);
+          this.MesFilmsFanart.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsFanart.TabIndex = 68;
           // 
           // labelFanart
           // 
           this.labelFanart.AutoSize = true;
-          this.labelFanart.Location = new System.Drawing.Point(137, 20);
+          this.labelFanart.Location = new System.Drawing.Point(169, 20);
           this.labelFanart.Name = "labelFanart";
-          this.labelFanart.Size = new System.Drawing.Size(160, 13);
+          this.labelFanart.Size = new System.Drawing.Size(108, 13);
           this.labelFanart.TabIndex = 69;
-          this.labelFanart.Text = "Fanart Backdrop Path  (Images) ";
+          this.labelFanart.Text = "Fanart Path  (Images)";
           // 
           // chkDfltFanart
           // 
           this.chkDfltFanart.AutoSize = true;
           this.chkDfltFanart.Enabled = false;
-          this.chkDfltFanart.Location = new System.Drawing.Point(42, 42);
+          this.chkDfltFanart.Location = new System.Drawing.Point(42, 74);
           this.chkDfltFanart.Name = "chkDfltFanart";
-          this.chkDfltFanart.Size = new System.Drawing.Size(244, 17);
+          this.chkDfltFanart.Size = new System.Drawing.Size(191, 17);
           this.chkDfltFanart.TabIndex = 67;
-          this.chkDfltFanart.Text = "Use the default movie cover for missing Fanart\r\n";
+          this.chkDfltFanart.Text = "Use movie cover for missing Fanart";
           this.chkDfltFanart.UseVisualStyleBackColor = true;
           // 
           // groupBox22
           // 
+          this.groupBox22.Controls.Add(this.label47);
+          this.groupBox22.Controls.Add(this.ButDefCovViews);
+          this.groupBox22.Controls.Add(this.DefaultCoverViews);
           this.groupBox22.Controls.Add(this.btnResetThumbs);
           this.groupBox22.Controls.Add(this.chkViews);
           this.groupBox22.Controls.Add(this.btnViews);
           this.groupBox22.Controls.Add(this.chkDfltViews);
           this.groupBox22.Controls.Add(this.label29);
           this.groupBox22.Controls.Add(this.MesFilmsViews);
-          this.groupBox22.Location = new System.Drawing.Point(17, 170);
+          this.groupBox22.Location = new System.Drawing.Point(6, 152);
           this.groupBox22.Name = "groupBox22";
-          this.groupBox22.Size = new System.Drawing.Size(710, 79);
+          this.groupBox22.Size = new System.Drawing.Size(735, 79);
           this.groupBox22.TabIndex = 75;
           this.groupBox22.TabStop = false;
           this.groupBox22.Text = "Thumbs for Group Views (Genre, Year, Country, ...)";
@@ -1226,9 +1240,9 @@
           // 
           // btnResetThumbs
           // 
-          this.btnResetThumbs.Location = new System.Drawing.Point(315, 50);
+          this.btnResetThumbs.Location = new System.Drawing.Point(665, 11);
           this.btnResetThumbs.Name = "btnResetThumbs";
-          this.btnResetThumbs.Size = new System.Drawing.Size(84, 23);
+          this.btnResetThumbs.Size = new System.Drawing.Size(64, 36);
           this.btnResetThumbs.TabIndex = 76;
           this.btnResetThumbs.Text = "Reset Thumbs";
           this.ToolTip1.SetToolTip(this.btnResetThumbs, "That Action\'ll remove all generated Thumbs for grouped views");
@@ -1238,7 +1252,7 @@
           // chkViews
           // 
           this.chkViews.AutoSize = true;
-          this.chkViews.Location = new System.Drawing.Point(18, 19);
+          this.chkViews.Location = new System.Drawing.Point(18, 15);
           this.chkViews.Name = "chkViews";
           this.chkViews.Size = new System.Drawing.Size(104, 30);
           this.chkViews.TabIndex = 71;
@@ -1247,7 +1261,7 @@
           // 
           // btnViews
           // 
-          this.btnViews.Location = new System.Drawing.Point(656, 24);
+          this.btnViews.Location = new System.Drawing.Point(625, 19);
           this.btnViews.Name = "btnViews";
           this.btnViews.Size = new System.Drawing.Size(32, 20);
           this.btnViews.TabIndex = 74;
@@ -1258,17 +1272,17 @@
           // chkDfltViews
           // 
           this.chkDfltViews.AutoSize = true;
-          this.chkDfltViews.Location = new System.Drawing.Point(42, 54);
+          this.chkDfltViews.Location = new System.Drawing.Point(42, 45);
           this.chkDfltViews.Name = "chkDfltViews";
-          this.chkDfltViews.Size = new System.Drawing.Size(252, 17);
+          this.chkDfltViews.Size = new System.Drawing.Size(112, 30);
           this.chkDfltViews.TabIndex = 75;
-          this.chkDfltViews.Text = "Use the default movie cover for missing Thumbs";
+          this.chkDfltViews.Text = "Use default image\r\nfor missing thumbs";
           this.chkDfltViews.UseVisualStyleBackColor = true;
           // 
           // label29
           // 
           this.label29.AutoSize = true;
-          this.label29.Location = new System.Drawing.Point(169, 27);
+          this.label29.Location = new System.Drawing.Point(169, 22);
           this.label29.Name = "label29";
           this.label29.Size = new System.Drawing.Size(128, 13);
           this.label29.TabIndex = 73;
@@ -1276,9 +1290,9 @@
           // 
           // MesFilmsViews
           // 
-          this.MesFilmsViews.Location = new System.Drawing.Point(315, 24);
+          this.MesFilmsViews.Location = new System.Drawing.Point(315, 19);
           this.MesFilmsViews.Name = "MesFilmsViews";
-          this.MesFilmsViews.Size = new System.Drawing.Size(335, 20);
+          this.MesFilmsViews.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsViews.TabIndex = 72;
           // 
           // groupBox1
@@ -1289,9 +1303,9 @@
           this.groupBox1.Controls.Add(this.ButImg);
           this.groupBox1.Controls.Add(this.MesFilmsImg);
           this.groupBox1.Controls.Add(this.label2);
-          this.groupBox1.Location = new System.Drawing.Point(17, 1);
+          this.groupBox1.Location = new System.Drawing.Point(6, 1);
           this.groupBox1.Name = "groupBox1";
-          this.groupBox1.Size = new System.Drawing.Size(710, 73);
+          this.groupBox1.Size = new System.Drawing.Size(735, 73);
           this.groupBox1.TabIndex = 85;
           this.groupBox1.TabStop = false;
           this.groupBox1.Text = "Cover Images";
@@ -1299,7 +1313,7 @@
           // 
           // ButDefCov
           // 
-          this.ButDefCov.Location = new System.Drawing.Point(656, 43);
+          this.ButDefCov.Location = new System.Drawing.Point(625, 43);
           this.ButDefCov.Name = "ButDefCov";
           this.ButDefCov.Size = new System.Drawing.Size(32, 20);
           this.ButDefCov.TabIndex = 90;
@@ -1311,7 +1325,7 @@
           // 
           this.DefaultCover.Location = new System.Drawing.Point(162, 43);
           this.DefaultCover.Name = "DefaultCover";
-          this.DefaultCover.Size = new System.Drawing.Size(488, 20);
+          this.DefaultCover.Size = new System.Drawing.Size(457, 20);
           this.DefaultCover.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.DefaultCover, resources.GetString("DefaultCover.ToolTip"));
           // 
@@ -1326,7 +1340,7 @@
           // 
           // ButImg
           // 
-          this.ButImg.Location = new System.Drawing.Point(656, 17);
+          this.ButImg.Location = new System.Drawing.Point(625, 17);
           this.ButImg.Name = "ButImg";
           this.ButImg.Size = new System.Drawing.Size(32, 20);
           this.ButImg.TabIndex = 87;
@@ -1338,7 +1352,7 @@
           // 
           this.MesFilmsImg.Location = new System.Drawing.Point(162, 17);
           this.MesFilmsImg.Name = "MesFilmsImg";
-          this.MesFilmsImg.Size = new System.Drawing.Size(488, 20);
+          this.MesFilmsImg.Size = new System.Drawing.Size(457, 20);
           this.MesFilmsImg.TabIndex = 85;
           this.ToolTip1.SetToolTip(this.MesFilmsImg, "Enter the full path to the folder containing the DVD cover image files – by defau" +
                   "lt it is the same as the path to your database file.\r\nYou can use the browse but" +
@@ -1363,9 +1377,9 @@
           this.groupBox_ArtistImages.Controls.Add(this.label_DefaultArtistImage);
           this.groupBox_ArtistImages.Controls.Add(this.label_ArtistImagePath);
           this.groupBox_ArtistImages.Controls.Add(this.DefaultCoverArtist);
-          this.groupBox_ArtistImages.Location = new System.Drawing.Point(17, 74);
+          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 74);
           this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
-          this.groupBox_ArtistImages.Size = new System.Drawing.Size(710, 94);
+          this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 76);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
           this.groupBox_ArtistImages.Text = "Person Images";
@@ -1374,9 +1388,9 @@
           // 
           // btnResetThumbsArtist
           // 
-          this.btnResetThumbsArtist.Location = new System.Drawing.Point(315, 68);
+          this.btnResetThumbsArtist.Location = new System.Drawing.Point(665, 10);
           this.btnResetThumbsArtist.Name = "btnResetThumbsArtist";
-          this.btnResetThumbsArtist.Size = new System.Drawing.Size(84, 23);
+          this.btnResetThumbsArtist.Size = new System.Drawing.Size(64, 34);
           this.btnResetThumbsArtist.TabIndex = 99;
           this.btnResetThumbsArtist.Text = "Reset Thumbs";
           this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, "That action\'ll remove all generated person image thumbs");
@@ -1386,16 +1400,16 @@
           // chkDfltArtist
           // 
           this.chkDfltArtist.AutoSize = true;
-          this.chkDfltArtist.Location = new System.Drawing.Point(42, 70);
+          this.chkDfltArtist.Location = new System.Drawing.Point(42, 36);
           this.chkDfltArtist.Name = "chkDfltArtist";
-          this.chkDfltArtist.Size = new System.Drawing.Size(253, 17);
+          this.chkDfltArtist.Size = new System.Drawing.Size(114, 30);
           this.chkDfltArtist.TabIndex = 98;
-          this.chkDfltArtist.Text = "Use the default person image for missing thumbs";
+          this.chkDfltArtist.Text = "Use default image \r\nfor missing thumbs";
           this.chkDfltArtist.UseVisualStyleBackColor = true;
           // 
           // ButDefCovArtist
           // 
-          this.ButDefCovArtist.Location = new System.Drawing.Point(656, 44);
+          this.ButDefCovArtist.Location = new System.Drawing.Point(625, 44);
           this.ButDefCovArtist.Name = "ButDefCovArtist";
           this.ButDefCovArtist.Size = new System.Drawing.Size(32, 20);
           this.ButDefCovArtist.TabIndex = 97;
@@ -1405,7 +1419,7 @@
           // 
           // ButImgArtist
           // 
-          this.ButImgArtist.Location = new System.Drawing.Point(656, 17);
+          this.ButImgArtist.Location = new System.Drawing.Point(625, 18);
           this.ButImgArtist.Name = "ButImgArtist";
           this.ButImgArtist.Size = new System.Drawing.Size(32, 20);
           this.ButImgArtist.TabIndex = 96;
@@ -1417,14 +1431,14 @@
           // 
           this.MesFilmsImgArtist.Location = new System.Drawing.Point(162, 17);
           this.MesFilmsImgArtist.Name = "MesFilmsImgArtist";
-          this.MesFilmsImgArtist.Size = new System.Drawing.Size(488, 20);
+          this.MesFilmsImgArtist.Size = new System.Drawing.Size(457, 20);
           this.MesFilmsImgArtist.TabIndex = 95;
           this.ToolTip1.SetToolTip(this.MesFilmsImgArtist, resources.GetString("MesFilmsImgArtist.ToolTip"));
           // 
           // label_DefaultArtistImage
           // 
           this.label_DefaultArtistImage.AutoSize = true;
-          this.label_DefaultArtistImage.Location = new System.Drawing.Point(40, 47);
+          this.label_DefaultArtistImage.Location = new System.Drawing.Point(170, 47);
           this.label_DefaultArtistImage.Name = "label_DefaultArtistImage";
           this.label_DefaultArtistImage.Size = new System.Drawing.Size(109, 13);
           this.label_DefaultArtistImage.TabIndex = 94;
@@ -1441,9 +1455,9 @@
           // 
           // DefaultCoverArtist
           // 
-          this.DefaultCoverArtist.Location = new System.Drawing.Point(162, 44);
+          this.DefaultCoverArtist.Location = new System.Drawing.Point(315, 44);
           this.DefaultCoverArtist.Name = "DefaultCoverArtist";
-          this.DefaultCoverArtist.Size = new System.Drawing.Size(488, 20);
+          this.DefaultCoverArtist.Size = new System.Drawing.Size(304, 20);
           this.DefaultCoverArtist.TabIndex = 92;
           this.ToolTip1.SetToolTip(this.DefaultCoverArtist, resources.GetString("DefaultCoverArtist.ToolTip"));
           // 
@@ -4267,6 +4281,69 @@
           this.General.TabIndex = 46;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
           // 
+          // DefaultFanartImage
+          // 
+          this.DefaultFanartImage.Location = new System.Drawing.Point(315, 43);
+          this.DefaultFanartImage.Name = "DefaultFanartImage";
+          this.DefaultFanartImage.Size = new System.Drawing.Size(304, 20);
+          this.DefaultFanartImage.TabIndex = 75;
+          // 
+          // DefaultCoverViews
+          // 
+          this.DefaultCoverViews.Location = new System.Drawing.Point(315, 45);
+          this.DefaultCoverViews.Name = "DefaultCoverViews";
+          this.DefaultCoverViews.Size = new System.Drawing.Size(304, 20);
+          this.DefaultCoverViews.TabIndex = 77;
+          // 
+          // ButDefCovViews
+          // 
+          this.ButDefCovViews.Location = new System.Drawing.Point(625, 45);
+          this.ButDefCovViews.Name = "ButDefCovViews";
+          this.ButDefCovViews.Size = new System.Drawing.Size(32, 20);
+          this.ButDefCovViews.TabIndex = 78;
+          this.ButDefCovViews.Text = "...";
+          this.ButDefCovViews.UseVisualStyleBackColor = true;
+          this.ButDefCovViews.Click += new System.EventHandler(this.ButDefCovViews_Click);
+          // 
+          // ButDefFanart
+          // 
+          this.ButDefFanart.AllowDrop = true;
+          this.ButDefFanart.Location = new System.Drawing.Point(625, 43);
+          this.ButDefFanart.Name = "ButDefFanart";
+          this.ButDefFanart.Size = new System.Drawing.Size(32, 20);
+          this.ButDefFanart.TabIndex = 76;
+          this.ButDefFanart.Text = "...";
+          this.ButDefFanart.UseVisualStyleBackColor = true;
+          this.ButDefFanart.Click += new System.EventHandler(this.ButDefFanart_Click);
+          // 
+          // label47
+          // 
+          this.label47.AutoSize = true;
+          this.label47.Location = new System.Drawing.Point(170, 48);
+          this.label47.Name = "label47";
+          this.label47.Size = new System.Drawing.Size(136, 13);
+          this.label47.TabIndex = 79;
+          this.label47.Text = "Default Group Views Image";
+          // 
+          // chkDfltFanartImage
+          // 
+          this.chkDfltFanartImage.AutoSize = true;
+          this.chkDfltFanartImage.Location = new System.Drawing.Point(42, 38);
+          this.chkDfltFanartImage.Name = "chkDfltFanartImage";
+          this.chkDfltFanartImage.Size = new System.Drawing.Size(117, 30);
+          this.chkDfltFanartImage.TabIndex = 77;
+          this.chkDfltFanartImage.Text = "Use Default Image \r\nfor missing fanart";
+          this.chkDfltFanartImage.UseVisualStyleBackColor = true;
+          // 
+          // label48
+          // 
+          this.label48.AutoSize = true;
+          this.label48.Location = new System.Drawing.Point(170, 46);
+          this.label48.Name = "label48";
+          this.label48.Size = new System.Drawing.Size(106, 13);
+          this.label48.TabIndex = 78;
+          this.label48.Text = "Default Fanart Image";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4732,5 +4809,12 @@
         private Label label46;
         private Label label45;
         private Label label44;
+        private TextBox DefaultFanartImage;
+        private TextBox DefaultCoverViews;
+        private Button ButDefFanart;
+        private Button ButDefCovViews;
+        private Label label47;
+        private Label label48;
+        private CheckBox chkDfltFanartImage;
     }
 }

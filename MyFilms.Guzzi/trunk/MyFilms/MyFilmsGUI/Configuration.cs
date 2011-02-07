@@ -273,6 +273,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 TitleDelim = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "TitleDelim", ".");
                 DefaultCover = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCover", string.Empty);
                 DefaultCoverArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverArtist", string.Empty);
+                DefaultCoverViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverViews", string.Empty);
+                DefaultFanartImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultFanartImage", string.Empty);
                 StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5.0");
                 //StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
                 StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", string.Empty);
@@ -284,9 +286,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrAMCUpd_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_cnf", string.Empty);
                 StrFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Fanart", false);
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
+                StrFanartDfltImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImage", false);
                 StrViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Views", false);
                 StrViewsDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDflt", false);
-
                 StrCheckWOLenable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Enable", false);
                 StrWOLtimeout = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Timeout", "15"));
                 StrCheckWOLuserdialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Userdialog", false);
@@ -866,6 +868,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return defaultcoverartist; }
             set { defaultcoverartist = value; }
         }
+
+        private string defaultcoverviews = string.Empty;
+        public string DefaultCoverViews
+        {
+            get { return defaultcoverviews; }
+            set { defaultcoverviews = value; }
+        }
+
+        private string defaultfanartimage = string.Empty;
+        public string DefaultFanartImage
+        {
+            get { return defaultfanartimage; }
+            set { defaultfanartimage = value; }
+        }
+
         private string cmdExe = string.Empty;
         public string CmdExe
         {
@@ -923,8 +940,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool strFanartDflt = false;
         public bool StrFanartDflt
         {
-            get { return strFanartDflt; }
-            set { strFanartDflt = value; }
+          get { return strFanartDflt; }
+          set { strFanartDflt = value; }
+        }
+        private bool strFanartDfltImage = false;
+        public bool StrFanartDfltImage
+        {
+          get { return strFanartDfltImage; }
+          set { strFanartDfltImage = value; }
         }
         private bool strArtistDflt = false;
         public bool StrArtistDflt

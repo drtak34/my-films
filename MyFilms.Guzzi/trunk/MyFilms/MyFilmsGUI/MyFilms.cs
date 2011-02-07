@@ -1210,7 +1210,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                     else
                                         Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
                                 if (!System.IO.File.Exists(strThumb + ".png"))
-                                    if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCover))
+                                    if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCoverViews))
                                         ImageFast.CreateImage(strThumb + ".png", item.Label);
                                 conf.FileImage = strThumb + ".png"; 
                             }
@@ -1934,9 +1934,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                                         // Use Default Cover if no specific Cover found:
                                         if (!System.IO.File.Exists(strThumb))
-                                          if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCover))
+                                          if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCoverViews))
                                           {
-                                            strThumbLarge = conf.DefaultCover;
+                                            strThumbLarge = conf.DefaultCoverViews;
                                             Picture.CreateThumbnail(strThumbLarge, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
                                             //ImageFast.CreateImage(strThumb, item.Label);
                                           }
