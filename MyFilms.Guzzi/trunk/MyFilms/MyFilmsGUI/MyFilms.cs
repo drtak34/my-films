@@ -2677,7 +2677,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (MyFilms.conf.StrAMCUpd)
                     {
                         dlg2.Add(GUILocalizeStrings.Get(1079861));   // Update Database with external AMCupdater
-                        choiceViewGlobalUpdates.Add("updatedb");
+                        choiceViewGlobalUpdates.Add("fileselect");
                     }
 
                     if (MyFilms.conf.StrFanart)
@@ -3452,6 +3452,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     string title = string.Empty;
                     if (MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"] != null && MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString().Length > 0)
                         title = MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
+                    else
+                      title = MyFilms.r[facadeView.SelectedListItem.ItemId]["OriginalTitle"].ToString();
                     if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                         title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
                     MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf);
@@ -3494,7 +3496,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
                     dlgYesNo.DoModal(GetID);
                     if (dlgYesNo.IsConfirmed)
-                        MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString(), false);
+                      //MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString(), false);
+                      MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString(), false); // Fixed, as it should delete content of mastertitle...
                     break;
 
                 case "togglewatchedstatus":

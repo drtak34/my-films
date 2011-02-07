@@ -770,10 +770,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         choiceViewMenu.Add("updproperty");
                     }
 
-                    if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && (MyFilms.conf.WindowsFileDialog))
+                    //if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && (MyFilms.conf.WindowsFileDialog))
+                    if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)")
                     {
                         dlgmenu.Add(GUILocalizeStrings.Get(863));//file
-                        choiceViewMenu.Add("updatedb");
+                        choiceViewMenu.Add("fileselect");
                     }
 
                     //No more needed because of updproperties !!! - so discussion about removal?
@@ -869,13 +870,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     break;
 
-                case "file":
+                case "fileselect":
                     string wfile = string.Empty;
+                    string wdirectory = string.Empty;
+                    if (System.IO.File.Exists(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Check if Sourcefile exists
+                    {
+                      wfile = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                      wdirectory = System.IO.Path.GetDirectoryName(wfile);
+                    }
                     if (MyFilms.conf.WindowsFileDialog)
                     {
-                        openFileDialog1.RestoreDirectory = true;
-                        if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                            wfile = openFileDialog1.FileName;
+                      openFileDialog1.Title = "Select media file";
+                      openFileDialog1.RestoreDirectory = true;
+                      openFileDialog1.InitialDirectory = wdirectory;
+                      if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                          wfile = openFileDialog1.FileName;
+                    }
+                    else
+                    {
+                      keyboard.Reset();
+                      keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                      keyboard.DoModal(GetID);
+                      if (keyboard.IsConfirmed)
+                      {
+                        wfile = keyboard.Text.ToString();
+                      }
+                      else 
+                        wfile = string.Empty;
                     }
                     if (wfile != string.Empty)
                     {
@@ -972,7 +993,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (dlgYesNo.IsConfirmed)
                         {
                             MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
-                            //                           Update_XML_database();
+                            // Update_XML_database();
                             MyFilms.r = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
                             afficher_detail(true);
 
@@ -987,7 +1008,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798643)); // menu
                     foreach (string wupd in MyFilms.conf.StrUpdList)
                     {
-                        dlgmenu.Add(GUILocalizeStrings.Get(184) + " '" + BaseMesFilms.Translate_Column(wupd.Trim()) + "'");
+                        dlgmenu.Add(" " + BaseMesFilms.Translate_Column(wupd.Trim()));
                         choiceUpd.Add(wupd.Trim());
                     }
                     dlgmenu.DoModal(GetID);
@@ -1050,7 +1071,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     setProcessAnimationStatus(true, m_SearchAnimation);
                     string title = string.Empty;
                     if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-                        title = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                    {
+                      title = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (translated)title = '" + title.ToString() + "'");
+                    }
+                    else
+                    {
+                      title = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (original)title = '" + title.ToString() + "'");
+                    }
                     if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                         title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
                     grabb_Internet_Informations(title, GetID, wChooseScript, MyFilms.conf.StrGrabber_cnf);
@@ -1246,6 +1275,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void grabb_Internet_Informations(string FullMovieName, int GetID, bool choosescript, string wscript)
         {
+            LogMyFilms.Debug("MF: launching (grabb_Internet_Informations) with title = '" + FullMovieName + "', choosescript = '" + choosescript + "', grabberfile = '" + wscript + "'");
             if (choosescript)
             {
               if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms"))
@@ -1317,7 +1347,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (dlg == null) return;
                     dlg.Reset();
                     dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                    dlg.Add("  *****  " + GUILocalizeStrings.Get(200036) + "  *****  "); //choice for changing movie filename
+                    dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
                     for (int i = 0; i < listUrl.Count; i++)
                     {
                         wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[i];
@@ -1906,8 +1936,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     if (dlg == null) return;
                     dlg.Reset();
-                    dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                    dlg.Add("  *****  " + GUILocalizeStrings.Get(200036) + "  *****  "); //choice for changing movie filename
+                    dlg.SetHeading(GUILocalizeStrings.Get(1079862)); // Load fanart (online)
+                    dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
                     foreach (DBMovieInfo t in listemovies)
                     {
                         dlg.Add(t.Name + "  (" + t.Year + ") ");
@@ -1928,8 +1958,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIDialogMenu dlgs = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                         if (dlgs == null) return;
                         dlgs.Reset();
-                        dlgs.SetHeading(GUILocalizeStrings.Get(924) + " - Wähle Suchbegriff"); // menu
-                        dlgs.Add("  *****  " + "Manuelle Eingabe über Tastatur" + "  *****  ");
+                        dlgs.SetHeading(GUILocalizeStrings.Get(1079859)); // choose search expression
+                        dlgs.Add("  *****  " + GUILocalizeStrings.Get(1079858) + "  *****  "); //manual selection with keyboard
                         dlgs.Add(wtitle); //Otitle
                         dlgs.Add(wttitle); //Ttitle
                         foreach (object t in wotitle_tableau)
@@ -1949,7 +1979,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (t.ToString().Length > 1) dlgs.Add(t.ToString());
                         }
                         //Now all titles and Substrings listed in dialog !
-                        //dlgs.Add("  *****  " + GUILocalizeStrings.Get(200036) + "  *****  "); //choice for changing movie filename
+                        //dlgs.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
                         if (!(dlgs.SelectedLabel > -1))
                         {
                             dlgs.SelectedLabel = -1;
@@ -3336,7 +3366,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
                 }
                 if ((MyFilms.conf.CheckWatched) || (MyFilms.conf.CheckWatchedPlayerStopped) || (MyFilms.conf.StrSupPlayer))
-                    Update_XML_database();
+                {
+                  Update_XML_database();
+                  afficher_detail(true);
+                }
                 MyFilms.conf.StrPlayedIndex = -1;
                 MyFilms.conf.StrPlayedDfltSelect = string.Empty;
                 MyFilms.conf.StrPlayedSelect = string.Empty;

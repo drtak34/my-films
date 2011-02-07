@@ -4105,5 +4105,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             DefaultFanartImage.Text = openFileDialog1.FileName;
         }
 
+        private void CheckWatched_CheckedChanged(object sender, EventArgs e)
+        {
+          if (CheckWatched.Checked) 
+            CheckWatchedPlayerStopped.Checked = false;
+        }
+
+        private void CheckWatchedPlayerStopped_CheckedChanged(object sender, EventArgs e)
+        {
+          if (CheckWatchedPlayerStopped.Checked) 
+            CheckWatched.Checked = false;
+        }
+
     }
 }

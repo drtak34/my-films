@@ -107,7 +107,6 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.radioButton2 = new System.Windows.Forms.CheckBox();
           this.radioButton1 = new System.Windows.Forms.CheckBox();
@@ -451,6 +450,7 @@
           this.label47 = new System.Windows.Forms.Label();
           this.chkDfltFanartImage = new System.Windows.Forms.CheckBox();
           this.label48 = new System.Windows.Forms.Label();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -637,16 +637,6 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -2000,6 +1990,7 @@
           this.CheckWatchedPlayerStopped.TabIndex = 75;
           this.CheckWatchedPlayerStopped.Text = "Update the \'Watched\' field when playback is finished.";
           this.CheckWatchedPlayerStopped.UseVisualStyleBackColor = true;
+          this.CheckWatchedPlayerStopped.CheckedChanged += new System.EventHandler(this.CheckWatchedPlayerStopped_CheckedChanged);
           // 
           // Label_UserProfileName
           // 
@@ -2056,6 +2047,7 @@
           this.CheckWatched.TabIndex = 69;
           this.CheckWatched.Text = "Update the \'Watched\' field when movie is launched";
           this.CheckWatched.UseVisualStyleBackColor = true;
+          this.CheckWatched.CheckedChanged += new System.EventHandler(this.CheckWatched_CheckedChanged);
           // 
           // groupBox_AntUpdatingItems
           // 
@@ -2109,9 +2101,9 @@
           this.chkWindowsFileDialog.AutoSize = true;
           this.chkWindowsFileDialog.Location = new System.Drawing.Point(10, 82);
           this.chkWindowsFileDialog.Name = "chkWindowsFileDialog";
-          this.chkWindowsFileDialog.Size = new System.Drawing.Size(299, 17);
+          this.chkWindowsFileDialog.Size = new System.Drawing.Size(328, 17);
           this.chkWindowsFileDialog.TabIndex = 77;
-          this.chkWindowsFileDialog.Text = "Use Standard Windows File Dialog for Movie file Updating";
+          this.chkWindowsFileDialog.Text = "Use Standard Windows File Dialog for Movie file name Updating";
           this.ToolTip1.SetToolTip(this.chkWindowsFileDialog, resources.GetString("chkWindowsFileDialog.ToolTip"));
           this.chkWindowsFileDialog.UseVisualStyleBackColor = true;
           // 
@@ -4343,6 +4335,16 @@
           this.label48.Size = new System.Drawing.Size(106, 13);
           this.label48.TabIndex = 78;
           this.label48.Text = "Default Fanart Image";
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
           // 
           // MyFilmsSetup
           // 

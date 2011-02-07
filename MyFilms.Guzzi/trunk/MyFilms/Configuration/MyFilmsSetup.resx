@@ -332,10 +332,11 @@ However be careful not to activate the delete options ("Delete Options", otherwi
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
   <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
-    <value>If chosen, the option to update the filename / source of the movie will show in the update menu.
-However, it will be using a standard windows file doalog to browse the filesystem and select the movie file,
-so it is not recommended to use that option for remote only users.
+    <value>If chosen, the option to update the filename / source of the movie in the update menu ("Filename") will usethe 
+windows file dialog to choose a movie file. If unchecked, the GUIkeyboard will be launched.
 
+As this option will be using a standard windows file dialog to browse the filesystem and select the movie file,
+it is not recommended to use that option for remote only users. 
 If using a mouse, this option can be enabled.</value>
   </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
