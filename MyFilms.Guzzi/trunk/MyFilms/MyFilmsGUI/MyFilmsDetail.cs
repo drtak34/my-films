@@ -234,18 +234,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
             {
-                LogMyFilms.Debug("MyFilmsDetail : ACTION_CONTEXT_MENU erkannt !!! ");
+                LogMyFilms.Debug("MyFilmsDetail : ACTION_CONTEXT_MENU detected ! ");
                 // context menu for options  like PlayTrailers or Updates
                 //MyFilms.Context_Menu_Movie();
                 if (BtnMaj.Focus)
                 {
-                    GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
-                    Update_XML_Items(); // Call Update Menu
+                  GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
+                  Update_XML_Items(); // Call Update Menu
                 }
                 else
                 {
-                    GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
-                    Update_XML_Items(); // Call Update Menu
+                  GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
+                  Update_XML_Items(); // Call Update Menu
                 }
                 return;
             }
@@ -626,17 +626,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
                     {
-                      GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu
+                      GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu // Removed as it's causing an exception
                       return;
                     }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
-                    return;
-                    //break;
+                    break;
               
                 case "playtrailer":
                     Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
-                    return;
-                    //break;
+                    break;
 
                 case "playtraileronlinevideos":
                     // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ...
@@ -672,8 +670,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
                     }
-                    return;
-                //break;
+                    break;
 
                 case "playtraileronlinevideosappleitunes":
                     var hasRightPlugin2 = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
@@ -706,8 +703,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
                     }
-                    return;
-                //break;
+                    break;
 
                 case "togglewatchedstatus":
                     if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
@@ -755,7 +751,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
+                    {
                       Change_Menu("mainmenu");
+                      return;
+                    }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     break;
 
@@ -825,8 +824,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
-                        Change_Menu("mainmenu");
-
+                    {
+                      Change_Menu("mainmenu");
+                      return;
+                    }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     break;
 
@@ -861,8 +862,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
-                        Change_Menu("mainmenu");
-
+                    {
+                      Change_Menu("mainmenu");
+                      return;
+                    }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     break;
 
