@@ -26,7 +26,8 @@ namespace Trakt
 
     static class TraktAPI
     {
-        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+        private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log 
+		private const string cAPIKey = "489bf9e7ab0aa019e6e2a30cc9dc9a7e1ffdb020";
         /// <summary>
         /// Trakt Username
         /// </summary>
@@ -62,7 +63,7 @@ namespace Trakt
         /// <param name="days">Number of days to return in calendar</param>
         public static IEnumerable<TraktUserCalendar> GetCalendarForUser(string user, string startDate, string days)
         {
-            string userCalendar = Transmit(string.Format(TraktURIs.UserCalendarShows, user, startDate, days), string.Empty);
+            string userCalendar = Transmit(string.Format(TraktURIs.UserCalendarShows, user, startDate, days), GetUserAuthentication());
             return userCalendar.FromJSONArray<TraktUserCalendar>();
         }
 
@@ -72,7 +73,7 @@ namespace Trakt
         /// <param name="user">username of person to get series library</param>
         public static IEnumerable<TraktLibraryShows> GetSeriesForUser(string user)
         {
-            string seriesForUser = Transmit(string.Format(TraktURIs.UserLibraryShows, user), string.Empty);
+            string seriesForUser = Transmit(string.Format(TraktURIs.UserLibraryShows, user), GetUserAuthentication());
             return seriesForUser.FromJSONArray<TraktLibraryShows>();
         }
 
@@ -82,7 +83,7 @@ namespace Trakt
         /// <param name="user">username of person to get movie library</param>
         public static IEnumerable<TraktLibraryMovies> GetMoviesForUser(string user)
         {
-            string moviesForUser = Transmit(string.Format(TraktURIs.UserLibraryMovies, user), string.Empty);
+            string moviesForUser = Transmit(string.Format(TraktURIs.UserLibraryMovies, user), GetUserAuthentication());
             return moviesForUser.FromJSONArray<TraktLibraryMovies>();
         }
 
@@ -102,7 +103,7 @@ namespace Trakt
         /// <param name="user">username of person to retrieve profile</param>
         public static TraktUserProfile GetUserProfile(string user)
         {
-            string userProfile = Transmit(string.Format(TraktURIs.UserProfile, user), string.Empty);
+            string userProfile = Transmit(string.Format(TraktURIs.UserProfile, user), GetUserAuthentication());
             return userProfile.FromJSON<TraktUserProfile>();
         }
 
@@ -112,7 +113,7 @@ namespace Trakt
         /// <param name="user">username of person to retrieve friends list</param>
         public static IEnumerable<TraktUserProfile> GetUserFriends(string user)
         {
-            string userFriends = Transmit(string.Format(TraktURIs.UserFriends, user), string.Empty);
+            string userFriends = Transmit(string.Format(TraktURIs.UserFriends, user), GetUserAuthentication());
             return userFriends.FromJSONArray<TraktUserProfile>();
         }
 
@@ -124,7 +125,7 @@ namespace Trakt
         /// <param name="user">username of person to retrieve watched items</param>
         public static IEnumerable<TraktWatchedEpisodeHistory> GetUserWatchedHistory(string user)
         {
-            string userWatchedHistory = Transmit(string.Format(TraktURIs.UserWatchedEpisodes, user), string.Empty);
+            string userWatchedHistory = Transmit(string.Format(TraktURIs.UserWatchedEpisodes, user), GetUserAuthentication());
 
             // get list of objects from json array
             return userWatchedHistory.FromJSONArray<TraktWatchedEpisodeHistory>();
@@ -207,6 +208,11 @@ namespace Trakt
             return response.FromJSON<TraktResponse>();
         }
 
+        private static string GetUserAuthentication()
+        {
+            return new TraktAuthentication { Username = TraktAPI.Username, Password = TraktAPI.Password }.ToJSON();
+        }
+
         /// <summary>
         /// Uploads string to address using the Post Method
         /// </summary>
@@ -220,6 +226,9 @@ namespace Trakt
             {
               LogMyFilms.Info("Trakt Post: ", data);
             }
+
+            // Update API key in placeholder
+            address = address.Replace("<apiKey>", cAPIKey);
 
             try
             {
