@@ -80,6 +80,20 @@
               <ZipFileName>Installer{CopyFile}\{89cf810a-3fc7-45a7-8a78-d421e40f68d8}-MyFilms_Grabber_Interface.exe</ZipFileName>
               <DestinationFilename>%Base%\MyFilms_Grabber_Interface.exe</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base\PluginLoader - MyFilms.cmd</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ff248d24-84a2-4f2d-81d3-d8796c7780c6}-PluginLoader - MyFilms.cmd</ZipFileName>
+              <DestinationFilename>%Base%\PluginLoader - MyFilms.cmd</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base\PluginConfigLoader.exe</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2922cb6f-5563-4c9b-9cfb-bb99bcd2f06b}-PluginConfigLoader.exe</ZipFileName>
+              <DestinationFilename>%Base%\PluginConfigLoader.exe</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -1549,6 +1563,13 @@
               <ZipFileName>Installer{CopyFile}\{d3548104-e9f5-4701-b9d0-62f267c1a255}-XVID.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\XVID.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a9148185-5788-4013-9f78-de1b475ecf5d}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -1911,6 +1932,13 @@
               <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultPerson.jpg</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{3e835e6f-841e-443c-aba4-0756136bf7c4}-DefaultPerson.jpg</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultPerson.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{64fa2b0e-93cd-413a-922c-4224e43f349c}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\Thumbs.db</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -2318,6 +2346,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Base\MyFilms_Grabber_Interface.exe</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{89cf810a-3fc7-45a7-8a78-d421e40f68d8}-MyFilms_Grabber_Interface.exe</ZipFileName>
         <DestinationFilename>%Base%\MyFilms_Grabber_Interface.exe</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base\PluginLoader - MyFilms.cmd</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ff248d24-84a2-4f2d-81d3-d8796c7780c6}-PluginLoader - MyFilms.cmd</ZipFileName>
+        <DestinationFilename>%Base%\PluginLoader - MyFilms.cmd</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base\PluginConfigLoader.exe</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2922cb6f-5563-4c9b-9cfb-bb99bcd2f06b}-PluginConfigLoader.exe</ZipFileName>
+        <DestinationFilename>%Base%\PluginConfigLoader.exe</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -3771,6 +3813,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a9148185-5788-4013-9f78-de1b475ecf5d}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\IMDB-akas.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{4763d251-deca-4a0e-a86d-bd32568effbc}-IMDB-akas.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB-akas.xml</DestinationFilename>
@@ -4111,18 +4160,25 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{3e835e6f-841e-443c-aba4-0756136bf7c4}-DefaultPerson.jpg</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultPerson.jpg</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{64fa2b0e-93cd-413a-922c-4224e43f349c}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\Thumbs.db</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d3ed7a9d-278e-4dc8-b874-1efa127f32a4}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{7c0e40e6-236e-4fa0-86da-f268db0c523f}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7ebea912-5125-47fb-bd22-6d25a2562c52}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{df8aaa5a-5691-4fe9-8299-6a61b5e5986b}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
