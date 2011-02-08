@@ -135,9 +135,22 @@
 			<font>font14</font>
 			<textcolor>7fffffff</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<label>#myfilms.view #myfilms.select</label>
+			<label>#myfilms.view #myfilms.select #myfilms.globalfilter.unwatched</label>
 		</control>
-
+		<control>
+			<type>fadelabel</type>
+			<description>Global Filters Status</description>
+			<id>1</id>
+			<posX>325</posX>
+			<posY>73</posY>
+			<width>355</width>
+			<height>24</height>
+			<label>label</label>
+			<font>font14</font>
+			<textcolor>7fffffff</textcolor>
+			<disabledcolor>ff808080</disabledcolor>
+			<label>#myfilms.globalfilter.unwatched</label>
+		</control>
 		<control>
 			<type>actiongroup</type>
 			<description>action menu</description>

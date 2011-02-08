@@ -63,6 +63,9 @@
     <String id="200036">Manual Tuning</String>
     <String id="107986">Films</String>
     <String id="107987">Films</String>
+    <String id="1079858">Manuelle Selection with Keyboard</String>
+    <String id="1079859">Choose Search Expression</String>
+    <String id="1079860">Manual Selection</String>
     <String id="1079861">Update DB (AMC Updater)</String>
     <String id="1079862">Download fanart (selected film)</String>
     <String id="1079863">Switch grabber option: 'manually choose grabber script' ({0})</String>
@@ -183,6 +186,7 @@
     <String id="10798702">Local Updates ...</String>
     <String id="10798703">Online Updates ...</String>
     <String id="10798704">Trailer ...</String>
+    <String id="10798705">Trailer(s) found !</String>
     <String id="10798710">Play trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>
@@ -192,7 +196,7 @@
     <String id="10798722">Store films info in Ant file (local)</String>
     <String id="10798723">Search trailer (local)</String>
     <String id="10798724">Load trailer (online)</String>
-    <String id="10798725">Delete trailer (selected film)</String>
+    <String id="10798725">Remove trailer from DB (selected film)</String>
     <String id="10798726">Search trailers - all films (local)</String>
     <String id="10798727">Show NAS Server status</String>
     <String id="10798728">Create cover from film</String>

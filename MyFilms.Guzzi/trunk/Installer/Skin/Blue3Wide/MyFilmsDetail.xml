@@ -1610,7 +1610,7 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!string.contains(#myfilms.user.sourcetrailer.value, \\)+!Control.HasFocus(10099)</visible>
+			<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.sourcetrailer.value)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
@@ -1626,7 +1626,7 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>ffffffff</colordiffuse>
-			<visible>string.contains(#myfilms.user.sourcetrailer.value, \\)+!Control.HasFocus(10099)</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>

@@ -1539,7 +1539,7 @@
 		<type>animation</type>
 		<description>Waiting during search</description>
 		<id>2080</id>
-		<posX>608</posX>
+		<posX>330</posX>
 		<posY>328</posY>
 		<width>64</width>
 		<height>64</height>

@@ -2622,9 +2622,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewGlobalOptions.Add("globalunwatchedfilter");
 
                     // Change global MovieFilter (Only Movies with Trailer)
-                    if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
-                    if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
-                    choiceViewGlobalOptions.Add("filterdbtrailer");
+                    if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+                    {
+                      if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
+                      if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
+                      choiceViewGlobalOptions.Add("filterdbtrailer");
+                    }
 
                     // Change global MovieFilter (Only Movies with highRating)
                     if (GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798628)));
@@ -2693,7 +2696,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       choiceViewGlobalUpdates.Add("personinfos-all");
                     }
 
-                    if (MyFilms.conf.StrStorageTrailer.Length > 0)
+                    if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                     {
                       dlg2.Add(GUILocalizeStrings.Get(10798694));
                         // Search and register all trailers for all movies in DB

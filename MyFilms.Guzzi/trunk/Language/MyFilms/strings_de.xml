@@ -63,6 +63,9 @@
     <String id="200036">Manueller Suchlauf</String>
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
+    <String id="1079858">Manuelle Eingabe über Tastatur</String>
+    <String id="1079859">Wähle Suchbegriff</String>
+    <String id="1079860">Manuelle Eingabe</String>
     <String id="1079861">Aktualisiere Film Datenbank (AMCupdater)</String>
     <String id="1079862">Lade Fanart (online)</String>
     <String id="1079863">Umschalten 'manuelle Wahl Grabberskript' ({0})</String>
@@ -183,6 +186,7 @@
     <String id="10798702">Lokale Updates ...</String>
     <String id="10798703">Online Updates ...</String>
     <String id="10798704">Trailer ...</String>
+    <String id="10798705">Trailer gefunden !</String>
     <String id="10798710">Spiele Trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>
@@ -192,7 +196,7 @@
     <String id="10798722">Speichere Filminformationen in ant-Datei (lokal)</String>
     <String id="10798723">Suche Trailer (lokal)</String>
     <String id="10798724">Lade Trailer (online)</String>
-    <String id="10798725">Lösche  Trailer (aktueller Film)</String>
+    <String id="10798725">Lösche  Trailer aus DB (aktueller Film)</String>
     <String id="10798726">Suche Trailer - alle Filme (lokal)</String>
     <String id="10798727">Zeige Film-Server Status</String>
     <String id="10798728">Erzeuge Cover vom Film</String>

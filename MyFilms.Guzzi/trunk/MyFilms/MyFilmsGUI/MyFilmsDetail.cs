@@ -495,7 +495,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (iControl == (int)Controls.CTRL_BtnPlayTrailer)
                     // Search Trailer File to play
                     {
-                        if (MyFilms.conf.StrStorageTrailer.Length > 0)
+                      if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)")
                           Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
                         else
                           Change_Menu("trailermenu");
@@ -738,7 +738,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Clear();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798704)); // Trailer ...
 
-                    if (MyFilms.conf.StrStorageTrailer.Length > 0)
+                    if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(10798710));//play trailer
                       choiceViewMenu.Add("playtrailer");
@@ -807,7 +807,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //dlgmenu.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
                     //choiceViewMenu.Add("ant-nfo-writer");
 
-                    if (MyFilms.conf.StrStorageTrailer.Length > 0) // StrDirStorTrailer only required for extended search
+                    if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
                       choiceViewMenu.Add("trailer-register");
@@ -1130,18 +1130,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                         dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
                         dlgOk.SetLine(1, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrSTitle.ToString()].ToString());//video title
-                        dlgOk.SetLine(2, result.Count.ToString() + " Trailers gefunden !");
+                        dlgOk.SetLine(2, result.Count.ToString() + " " + GUILocalizeStrings.Get(10798705)); // trailers found ! 
                         dlgOk.DoModal(GetID);
-
-                        //if (dlg == null) return;
-                        //dlg.Reset();
-                        //dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                        //dlg.Add(GUILocalizeStrings.Get(10798723));             //Search local Trailer and Update DB (local)
-                        //upd_choice[ichoice] = "trailer";
-                        //ichoice++;
-
-                        //dlg.DoModal(GetID);
-                        //if (dlg.SelectedLabel == -1) return;
                         break;
                     }
 
@@ -4346,15 +4336,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string[] directories;
             if (ExtendedSearch && MyFilms.conf.StrDirStorTrailer.Length > 0)
             {
+                LogMyFilms.Debug("MF: SearchTrailerLocal - starting ExtendedSearch in Searchdirectory: '" + MyFilms.conf.StrDirStorTrailer.ToString() + "'");
                 foreach (string storage in Trailerdirectories)
                 {
-                    LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectory: '" + storage + "'");
+                    LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectory: '" + storage + "', search title1: '" + titlename.ToLower() + "', search title2: '" + titlename2.ToLower() + "'");
                     directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
                     foreach (string directoryfound in directories)
                     {
+                        LogMyFilms.Debug("MF: (TrailersearchLocal) - Directory found to check matching: '" + directoryfound + "'");
                         if ((directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
                         {
-                            LogMyFilms.Debug("MF: (TrailersearchLocal) - Directory found: '" + directoryfound + "'");
+                            LogMyFilms.Debug("MF: (TrailersearchLocal) - Matching Directory found : '" + directoryfound + "'");
                             files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
                             foreach (string filefound in files)
                             {
@@ -4376,6 +4368,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
                             foreach (string filefound in files)
                             {
+                                LogMyFilms.Debug("MF: (TrailersearchLocal) - Files found to check matching: '" + filefound + "'");
                                 if (((filefound.ToLower().Contains(titlename.ToLower())) || (filefound.ToLower().Contains(titlename2.ToLower()))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
                                 {
                                     wsize = new System.IO.FileInfo(filefound).Length;
@@ -4384,7 +4377,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                     filesfound[filesfoundcounter] = filefound;
                                     filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
                                     filesfoundcounter = filesfoundcounter + 1;
-                                    LogMyFilms.Debug("MF: (TrailersearchLocal) - Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
+                                    LogMyFilms.Debug("MF: (TrailersearchLocal) - Matching Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
                                 }
                             }
                         }
@@ -4442,9 +4435,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static void DeleteTrailerFromDB(DataRow[] r1, int Index)
         {
           MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] = string.Empty;
-            LogMyFilms.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Trailer entries Deleted for Current Movie !!!");
+            LogMyFilms.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Trailer entries Deleted for Current Movie !");
             Update_XML_database();
-            LogMyFilms.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Database Updatewd !!!!");
+            LogMyFilms.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Database Updated !");
         }
         
         
