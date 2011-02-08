@@ -204,7 +204,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
                     dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Length_Num")
+                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && 
+                    dc.ColumnName != "Length_Num" && (dc.ColumnName != "Number"))
                 {
                   AntViewItem1.Items.Add(dc.ColumnName);
                   AntViewItem2.Items.Add(dc.ColumnName);

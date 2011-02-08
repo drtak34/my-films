@@ -27,6 +27,7 @@
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
         </control>
+<!--
         <control>
             <description>Rating label</description>
             <type>label</type>
@@ -39,13 +40,14 @@
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
         </control>
+-->
         <control>
             <description>Rating value</description>
             <type>label</type>
             <id>4</id>
             <posX>300</posX>
             <posY>180</posY>
-            <label>#myfilms.db.rating</label>
+            <label>#myfilms.rating</label>
             <font>font16</font>
             <colordiffuse>ffffffff</colordiffuse>
             <textcolor>ffff8000</textcolor>
@@ -62,7 +64,6 @@
             <height>29</height>
             <textureFocus>arrow_round_right_focus.png</textureFocus>
             <textureNoFocus>arrow_round_right_nofocus.png</textureNoFocus>
-            <label />
             <onleft>11</onleft>
             <onright>12</onright>
             <onup>12</onup>
@@ -80,7 +81,6 @@
             <height>29</height>
             <textureFocus>arrow_round_left_focus.png</textureFocus>
             <textureNoFocus>arrow_round_left_nofocus.png</textureNoFocus>
-            <label />
             <onleft>12</onleft>
             <onright>10</onright>
             <onup>12</onup>
@@ -121,7 +121,7 @@
                 <subitem>star.png</subitem>
             </subitems>
             <orientation>horizontal</orientation>
-            <percentage>#myfilms.db.rating.value</percentage>
+            <percentage>#myfilms.rating</percentage>
             <imagesToDraw>10</imagesToDraw>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>

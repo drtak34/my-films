@@ -48,7 +48,7 @@
             <id>4</id>
             <posX>600</posX>
             <posY>380</posY>
-            <label>#myfilms.db.rating</label>
+            <label>#myfilms.rating</label>
             <font>font16</font>
             <colordiffuse>ffffffff</colordiffuse>
             <textcolor>ffff8000</textcolor>
@@ -124,7 +124,7 @@
                 <subitem>star.png</subitem>
             </subitems>
             <orientation>horizontal</orientation>
-            <percentage>#myfilms.db.rating.value</percentage>
+            <percentage>#myfilms.rating</percentage>
             <imagesToDraw>10</imagesToDraw>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
