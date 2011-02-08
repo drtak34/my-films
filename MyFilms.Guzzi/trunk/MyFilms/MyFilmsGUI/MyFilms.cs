@@ -3460,6 +3460,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                         title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
                     MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf);
+                    //Fin_Charge_Init(false, true);
                     break;
 
                 case "fanart":

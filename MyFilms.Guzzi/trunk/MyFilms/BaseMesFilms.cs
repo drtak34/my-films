@@ -102,7 +102,7 @@ namespace MyFilmsPlugin.MyFilms
         {
             if (!System.IO.File.Exists(StrFileXml))
             {
-                throw new Exception(string.Format("Le fichier {0} n'existe pas.", StrFileXml));
+                throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
             }
             data = new AntMovieCatalog();
             try

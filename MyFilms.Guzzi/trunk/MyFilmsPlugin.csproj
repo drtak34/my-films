@@ -172,6 +172,7 @@
     <Compile Include="MyFilms\Trakt\Show\TraktSeriesOverview.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktSync.cs" />
     <Compile Include="MyFilms\Trakt\TraktAPI.cs" />
+    <Compile Include="MyFilms\Trakt\TraktAuthentication.cs" />
     <Compile Include="MyFilms\Trakt\TraktExtensions.cs" />
     <Compile Include="MyFilms\Trakt\TraktResponse.cs" />
     <Compile Include="MyFilms\Trakt\TraktURIs.cs" />

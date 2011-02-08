@@ -1379,6 +1379,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript, int GetID, bool interactive, bool nfo, string nfofile)
         {
+            LogMyFilms.Debug("MF: launching (grabb_Internet_Details_Informations) with url = '" + url.ToString() + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID.ToString() + "', interactive = '" + interactive.ToString() + "'"); 
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string[] Result = new string[20];
             string title = string.Empty;
@@ -1440,6 +1441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                         dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue + "' -> '" + strNewValue + "'");
                         choiceViewMenu.Add(wProperty);
+                        LogMyFilms.Debug("MF: GrabberUpdate - Adding Property '" + wProperty + "' to Selectionmenu");
                     }
                     catch
                     {
@@ -1494,8 +1496,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "Picture":
                     if (Result[2] != string.Empty && Result[2] != null)
                     {
-                      string oldPicture = GUIPropertyManager.GetProperty("picture");
                       string newPicture = Result[2];
+                      string oldPicture = GUIPropertyManager.GetProperty("picture");
+                      if (oldPicture.Length == 0 || oldPicture == null)
+                        oldPicture = newPicture;
                       LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
                       LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
 
@@ -1536,6 +1540,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           {
                             string newFinalPicture = MyFilms.conf.StrPathImg + "\\" + Result[2];
                             File.Copy(newPicture, newFinalPicture, true);
+                            //File.Delete(newPicture);
                             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newFinalPicture;
                             setGUIProperty("picture", newFinalPicture);
                             GUIWindowManager.Process();
@@ -1641,7 +1646,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     if (Result[2] != string.Empty && Result[2] != null)
                     {
-                        if (Img_Path_Type.ToLower() == "true")
+                      string oldPicture = GUIPropertyManager.GetProperty("picture");
+                      string newPicture = Result[2];
+                      LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
+                      LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
+
+                      if (Img_Path_Type.ToLower() == "true")
+                        Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
+                      if (Img_Path.Length > 0)
+                        if (Img_Path.EndsWith("\\"))
+                          Result[2] = Img_Path + Result[2];
+                        else
+                          Result[2] = Img_Path + "\\" + Result[2];
+
+
+                      try
+                      {
+                        string newFinalPicture = MyFilms.conf.StrPathImg + "\\" + Result[2];
+                        File.Copy(newPicture, newFinalPicture, true);
+                        //File.Delete(newPicture);
+                      }
+                      catch (Exception ex)
+                      {
+                        LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
+                      }
+                      
+                      if (Img_Path_Type.ToLower() == "true")
                             Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
                         if (Img_Path.Length > 0)
                             if (Img_Path.EndsWith("\\"))
