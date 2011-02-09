@@ -56,6 +56,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using SQLite.NET;
 
+  using Trakt.Movie;
+
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
   using Trakt;
@@ -1527,30 +1529,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             GUIWindowManager.Process();
                             return;
                         }
-                        if (newPicture != null && newPicture.Length > 0 && oldPicture.Length > 0)
+                        try
                         {
-                          File.Copy(newPicture, oldPicture, true);
-                          setGUIProperty("picture", oldPicture);
-                          GUIWindowManager.Process();
-                          return;
+                          string newFinalPicture = MyFilms.conf.StrPathImg + "\\" + Result[2];
+                          File.Copy(newPicture, newFinalPicture, true);
+                          File.Delete(newPicture);
+                          //MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newFinalPicture; // will be done below ...
+                          //setGUIProperty("picture", newFinalPicture);
+                          //GUIWindowManager.Process();
                         }
-                        else
+                        catch (Exception ex)
                         {
-                          try
-                          {
-                            string newFinalPicture = MyFilms.conf.StrPathImg + "\\" + Result[2];
-                            File.Copy(newPicture, newFinalPicture, true);
-                            //File.Delete(newPicture);
-                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newFinalPicture;
-                            setGUIProperty("picture", newFinalPicture);
-                            GUIWindowManager.Process();
-                            return;
-                          }
-                          catch (Exception ex)
-                          {
-                            LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
-                          }
+                          LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
                         }
+                        if (Img_Path_Type.ToLower() == "true")
+                          Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
+                        if (Img_Path.Length > 0)
+                          if (Img_Path.EndsWith("\\"))
+                            Result[2] = Img_Path + Result[2];
+                          else
+                            Result[2] = Img_Path + "\\" + Result[2];
+                        if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()) || !onlymissing)
+                          MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
                     }
                     break;
                 case "Description":
@@ -1664,7 +1664,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       {
                         string newFinalPicture = MyFilms.conf.StrPathImg + "\\" + Result[2];
                         File.Copy(newPicture, newFinalPicture, true);
-                        //File.Delete(newPicture);
+                        File.Delete(newPicture);
                       }
                       catch (Exception ex)
                       {
@@ -2976,7 +2976,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // ask for start movie Index
 
                 // play movie...
-                // TraktResponse ScrobbleMovieState(data) // ToDo: Add Movieupdate to Trakt here
+                
                 PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
             }
             else
@@ -4073,6 +4073,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 playlistPlayer.PlayNext();
             else
                 playlistPlayer.Play(iMovieIndex);
+
             if (g_Player.Playing && timeMovieStopped > 0)
             {
                 if (g_Player.IsDVD)
@@ -4740,35 +4741,65 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         /// <summary>
         /// Update Trakt status of episode being watched on Timer Interval
         /// </summary>
-        //private void TraktUpdater(Object stateInfo)
-        //{
-        //  PlayListItem item = (PlayListItem)stateInfo;
+        private void TraktUpdater(Object stateInfo)
+        {
+          PlayListItem item = (PlayListItem)stateInfo;
 
-        //  // duration in minutes
-        //  double duration = item.Duration / 60000;
-        //  double progress = 0.0;
+          // duration in minutes
+          double duration = item.Duration / 60000;
+          double progress = 0.0;
 
-        //  // get current progress of player (in seconds) to work out percent complete
-        //  if (duration > 0.0)
-        //    progress = ((g_Player.CurrentPosition / 60.0) / duration) * 100.0;
+          // get current progress of player (in seconds) to work out percent complete
+          if (duration > 0.0)
+            progress = ((g_Player.CurrentPosition / 60.0) / duration) * 100.0;
 
-        //  Trakt.TraktAPI.SendUpdate(item.Episode, Convert.ToInt32(progress), Convert.ToInt32(duration), Trakt.TraktAPI.Status.watching);
-        //}
+          TraktMovieScrobble scrobbleData = null;
+
+          IMDBMovie movie = new IMDBMovie(); // ToDo: To be replaced by true current data !! (Guzzi)
+
+          // Set basic properties of scrobbledata
+          scrobbleData = TraktHandler.CreateScrobbleData(movie);
+
+          if (scrobbleData == null) return;
+
+          // set duration/progress in scrobble data
+          scrobbleData.Duration = Convert.ToInt32(duration).ToString();
+          scrobbleData.Progress = Convert.ToInt32(progress).ToString();
+
+          // set watching status on trakt
+          TraktResponse response = TraktAPI.ScrobbleMovieState(scrobbleData, TraktScrobbleStates.watching);
+          if (response == null) return;
+          TraktHandler.CheckTraktErrorAndNotify(response, true);
+        }
+
 
         /// <summary>
         /// Update trakt status on playback finish
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void TraktScrobble_DoWork(object sender, DoWorkEventArgs e)
         {
-          //List<DBEpisode> episodes = (List<DBEpisode>)e.Argument;
+          IMDBMovie movie = (IMDBMovie)e.Argument;
 
-          //foreach (DBEpisode episode in episodes)
-          //{
-          //  double duration = episode[DBEpisode.cLocalPlaytime] / 60000;
-          //  Trakt.TraktAPI.SendUpdate(episode, 100, Convert.ToInt32(duration), Trakt.TraktAPI.Status.scrobble);
-          //}
+          double duration = movie.RunTime / 60000;
+
+          // get scrobble data to send to api
+          TraktMovieScrobble scrobbleData = TraktHandler.CreateScrobbleData(movie);
+          if (scrobbleData == null) return;
+
+          // set duration/progress in scrobble data
+          scrobbleData.Duration = Convert.ToInt32(duration).ToString();
+          scrobbleData.Progress = "100";
+
+          TraktResponse response = TraktAPI.ScrobbleMovieState(scrobbleData, TraktScrobbleStates.scrobble);
+          if (response == null) return;
+          TraktHandler.CheckTraktErrorAndNotify(response, true);
+
+          if (response.Status == "success")
+          {
+            // set trakt flags so we dont waste time syncing later
+            //episode[DBOnlineEpisode.cTraktLibrary] = 1;
+            //episode[DBOnlineEpisode.cTraktSeen] = 1;
+          }
         }
 
       private bool IsInternetConnectionAvailable ()

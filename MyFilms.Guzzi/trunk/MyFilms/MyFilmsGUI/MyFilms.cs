@@ -3454,13 +3454,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "grabber":
                     string title = string.Empty;
                     if (MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"] != null && MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString().Length > 0)
-                        title = MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
+                    {
+                      title = MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (translated)title = '" + title.ToString() + "'");                      
+                    }
                     else
+                    {
                       title = MyFilms.r[facadeView.SelectedListItem.ItemId]["OriginalTitle"].ToString();
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (original)title = '" + title.ToString() + "'");
+                    }
                     if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                         title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
                     MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf);
-                    //Fin_Charge_Init(false, true);
+                    Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
                     break;
 
                 case "fanart":

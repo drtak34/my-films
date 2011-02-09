@@ -166,6 +166,7 @@
     <Compile Include="MyFilms\MyFilmsSettings.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MyFilms\TraktHandler.cs" />
     <Compile Include="MyFilms\Trakt\Common\TraktEpisode.cs" />
     <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
     <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />
