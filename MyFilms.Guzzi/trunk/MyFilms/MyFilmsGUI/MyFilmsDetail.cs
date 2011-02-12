@@ -721,14 +721,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "rating":
                     MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(7988);
                     if (MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Length > 0)
-                        dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
+                    {
+                      decimal wrating = 0;
+                      //CultureInfo ci = new CultureInfo("en-us");    
+                      //dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
+                      try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"]); }
+                          catch
+                          {
+                            try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"], CultureInfo.CurrentCulture); }
+                              catch { }
+                          }
+                      dlgRating.Rating = wrating;
+                    }
                     else
                         dlgRating.Rating = 0;
+
                     dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
                     dlgRating.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1 || dlgmenu.SelectedLabel == 1)
                       Change_Menu("mainmenu");
-                    MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString();
+                    MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString("0.0", CultureInfo.CurrentCulture);
                     Update_XML_database();
                     afficher_detail(true);
                     break;
@@ -774,7 +786,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && (MyFilms.conf.WindowsFileDialog))
                     if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)")
                     {
-                        dlgmenu.Add(GUILocalizeStrings.Get(863));//file
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798636));//filename
                         choiceViewMenu.Add("fileselect");
                     }
 
@@ -3378,6 +3390,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                         else
                         {
+                            // ToDo: Activate and modify code to set watched earlier than "ended" ...
+                            // Guzzi: Code from TV-series to set as watched after xWatchedAfter %
+                            //#region Set Resume Point or Watched
+                            //double watchedAfter = DBOption.GetOptions(DBOption.cWatchedAfter);
+                            //if ((timeMovieStopped / playlistPlayer.g_Player.Duration) > watchedAfter / 100)
+                            //{
+                            //  m_currentEpisode[DBEpisode.cStopTime] = 0;
+                            //  m_currentEpisode[DBEpisode.cDateWatched] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                            //  m_currentEpisode.Commit();
+                            //  PlaybackOperationEnded(true);
+                            //}
+                            //else
+                            //{
+                            //  m_currentEpisode[DBEpisode.cStopTime] = timeMovieStopped;
+                            //  m_currentEpisode.Commit();
+                            //  PlaybackOperationEnded(false);
+                            //}
+                            //#endregion
+                          
                             if ((filename == strFilePath) && (timeMovieStopped > 0))
                             {
                                 g_Player.Player.GetResumeState(out resumeData);
@@ -3410,6 +3441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   Update_XML_database();
                   afficher_detail(true);
+                  GUIWindowManager.Process();
                 }
                 MyFilms.conf.StrPlayedIndex = -1;
                 MyFilms.conf.StrPlayedDfltSelect = string.Empty;

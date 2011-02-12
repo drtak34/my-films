@@ -59,12 +59,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     decimal rating = 1;
     string fileName;
     ResultCode resultCode;
+    public const int ID_MyFilmsDetail = 7988;
 
       public MyFilmsDialogSetRating()
     {
       GetID = 7988;
     }
 
+    public override int GetID
+    {
+      get { return ID_MyFilmsDetail; }
+      set { base.GetID = value; }
+    }
+    
     public override bool Init()
     {
       return Load(GUIGraphicsContext.Skin + @"\MyFilmsDialogRating.xml");

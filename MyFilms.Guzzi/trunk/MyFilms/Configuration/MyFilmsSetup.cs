@@ -4260,5 +4260,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CheckWatched.Checked = false;
         }
 
+        private void chkDfltFanartImage_CheckedChanged(object sender, EventArgs e)
+        {
+          if (chkDfltFanart.Checked) 
+            chkDfltFanartImage.Checked = false;
+        }
+
+        private void chkDfltFanart_CheckedChanged(object sender, EventArgs e)
+        {
+          if (chkDfltFanartImage.Checked)
+            chkDfltFanart.Checked = false;
+        }
+
     }
 }

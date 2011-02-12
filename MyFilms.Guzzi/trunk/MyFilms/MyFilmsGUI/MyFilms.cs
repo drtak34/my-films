@@ -28,6 +28,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Data;
+  using System.Globalization;
   using System.IO;
   using System.Linq;
   using System.Text.RegularExpressions;
@@ -2819,12 +2820,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MyFilms.conf.StrAntFilterMinRating + "'");
                     MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(7988);
                     if (MyFilms.conf.StrAntFilterMinRating.Length > 0)
-                        dlgRating.Rating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating.Replace(".", ","));
+                    {
+                      decimal wrating = 0;
+                      //CultureInfo ci = new CultureInfo("en-us");    
+                      try { wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating); }
+                          catch
+                          {
+                            try { wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating, CultureInfo.CurrentCulture); }
+                              catch { }
+                          }
+                      dlgRating.Rating = wrating;
+                      //dlgRating.Rating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating.Replace(".", ","));
+                    }
                     else
                         dlgRating.Rating = 0;
                     dlgRating.SetTitle(GUILocalizeStrings.Get(1079881));
                     dlgRating.DoModal(GetID);
-                    MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString().Replace("," , ".");
+
+                    //MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString().Replace("," , ".");
+                    MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", CultureInfo.CurrentCulture);
                     XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
                     LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
@@ -3082,12 +3096,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 upd_choice[ichoice] = "suppress";
                 ichoice++;
             }
-            if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
-            {
-                dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-                upd_choice[ichoice] = "grabber";
-                ichoice++;
-            }
+            //Disabled due to problems of updating DB (requires debugging before reenabling...)
+            //if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+            //{
+            //    dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
+            //    upd_choice[ichoice] = "grabber";
+            //    ichoice++;
+            //}
             if (MyFilms.conf.StrFanart && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
             {
                 dlg.Add(GUILocalizeStrings.Get(1079862));
