@@ -39,29 +39,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
     private static int PreviewColumns = 2;
     private static int PreviewRows = 3;
     private static bool LeaveShareThumb = false;
-    private static bool NeedsConfigRefresh = true;
-
-    #region Serialisation
-
-    private static void LoadSettings()
-    {
-      using (Settings xmlreader = new MPSettings())
-      {
-          PreviewColumns = 2;
-          PreviewRows = 3;
-          LeaveShareThumb = true;
-          LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb);
-          NeedsConfigRefresh = false;
-
-          //PreviewColumns = xmlreader.GetValueAsInt("thumbnails", "tvthumbcols", 2);
-          //PreviewRows = xmlreader.GetValueAsInt("thumbnails", "tvthumbrows", 2);
-          //LeaveShareThumb = xmlreader.GetValueAsBool("thumbnails", "tvrecordedsharepreview", false);
-          //LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb);
-          //NeedsConfigRefresh = false;
-      }
-    }
-
-    #endregion
 
     #region Public methods
 
@@ -76,12 +53,23 @@ namespace MyFilmsPlugin.MyFilms.Utils
     //}
 
     [MethodImpl(MethodImplOptions.Synchronized)]
-    public static bool CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits)
+    public static bool CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits, int Columns, int Rows, bool doShareThumb, string ImageType)
     {
-      if (NeedsConfigRefresh)
+      
+      PreviewColumns = 2;
+      PreviewRows = 3;
+      LeaveShareThumb = doShareThumb;
+      if (ImageType == "Cover")
       {
-        LoadSettings();
+        // ToDo: Set Resolution Params to Coverimagesize
       }
+      if (ImageType == "Fanart")
+      {
+        // ToDo: Set Resolution Params to FullHD
+      }
+      
+      LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb); 
+      //if (NeedsConfigRefresh)
 
       if (String.IsNullOrEmpty(aVideoPath) || String.IsNullOrEmpty(aThumbPath))
       {

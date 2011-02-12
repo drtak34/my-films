@@ -179,7 +179,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntTitle2.Items.Add(dc.ColumnName);
                   AntSTitle.Items.Add(dc.ColumnName);
                 }
-                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "Length_Num"))
+                if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "Length_Num") && (dc.ColumnName != "DateAdded")) // added "DatedAdded" to remove filter
                 {
                   AntFilterItem1.Items.Add(dc.ColumnName);
                   AntFilterItem2.Items.Add(dc.ColumnName);
@@ -204,7 +204,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
                 if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
                     dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && 
+                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" &&
                     dc.ColumnName != "Length_Num" && (dc.ColumnName != "Number"))
                 {
                   AntViewItem1.Items.Add(dc.ColumnName);
@@ -214,7 +214,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntViewItem5.Items.Add(dc.ColumnName);
                 }
                 if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle"
-                  && dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Picture")
+                  && dc.ColumnName != "Actors" && dc.ColumnName != "Length_Num" && dc.ColumnName != "Picture" && dc.ColumnName != "DateAdded")
                 {
                   AntSearchItem1.Items.Add(dc.ColumnName);
                   AntSearchItem2.Items.Add(dc.ColumnName);
@@ -265,6 +265,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         }
         private void ButCat_Click(object sender, System.EventArgs e)
         {
+          if (!string.IsNullOrEmpty(MesFilmsCat.Text))
+              openFileDialog1.FileName = MesFilmsCat.Text;
+            else
+            {
+              openFileDialog1.FileName = String.Empty;
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
+            }
+
+            if (MesFilmsCat.Text.Contains("\\"))
+              openFileDialog1.InitialDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\") + 1);
+
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.DefaultExt = "xml";
             openFileDialog1.Filter = "XML Files|*.xml";
@@ -324,6 +335,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void ButImg_Click(object sender, EventArgs e)
         {
+            if (!String.IsNullOrEmpty(MesFilmsImg.Text))
+              folderBrowserDialog1.SelectedPath = MesFilmsImg.Text;
+            else
+              folderBrowserDialog1.SelectedPath = String.Empty;
             folderBrowserDialog1.Description = "Select Cover Images Path"; 
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
@@ -957,6 +972,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     
         private void butPath_Click(object sender, EventArgs e)
         {
+            if (!String.IsNullOrEmpty(PathStorage.Text))
+              {
+                if (PathStorage.Text.Contains(";"))
+                  folderBrowserDialog1.SelectedPath = PathStorage.Text.Substring(PathStorage.Text.LastIndexOf(";") + 1).Trim();
+                else
+                  folderBrowserDialog1.SelectedPath = PathStorage.Text;
+                if (folderBrowserDialog1.SelectedPath.LastIndexOf("\\") == folderBrowserDialog1.SelectedPath.Length)
+                  folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath.Substring(folderBrowserDialog1.SelectedPath.Length - 1);
+              }
+            else
+              folderBrowserDialog1.SelectedPath = String.Empty;
             folderBrowserDialog1.Description = "Path for Movies File Search";
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
@@ -1735,8 +1761,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnGrabber_Click(object sender, EventArgs e)
         {
-            //openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
+            if (!string.IsNullOrEmpty(txtGrabber.Text))
+              openFileDialog1.FileName = txtGrabber.Text;
+            else
+            {
+              openFileDialog1.FileName = String.Empty;
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
+            }
+
+            if (txtGrabber.Text.Contains("\\"))
+              openFileDialog1.InitialDirectory = txtGrabber.Text.Substring(0, txtGrabber.Text.LastIndexOf("\\") + 1);
+
+            openFileDialog1.RestoreDirectory = true;
             openFileDialog1.DefaultExt = "xml";
             openFileDialog1.Filter = "XML Files|*.xml";
             openFileDialog1.Title = "Select Default Internet Grabber Script (xml file)";
@@ -1756,8 +1792,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnAMCUpd_cnf_Click(object sender, EventArgs e)
         {
-            //openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config).ToString();
+            if (!string.IsNullOrEmpty(txtAMCUpd_cnf.Text))
+              openFileDialog1.FileName = txtAMCUpd_cnf.Text;
+            else
+            {
+              openFileDialog1.FileName = String.Empty;
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config).ToString();
+            }
+
+            if (txtAMCUpd_cnf.Text.Contains("\\"))
+              openFileDialog1.InitialDirectory = txtAMCUpd_cnf.Text.Substring(0, txtAMCUpd_cnf.Text.LastIndexOf("\\") + 1);
+
+            openFileDialog1.RestoreDirectory = true;
             openFileDialog1.DefaultExt = "xml";
             openFileDialog1.Filter = "XML AMCUpdater Config Files|*.xml";
             openFileDialog1.Title = "Select AMCUPdater Config file (xml file)";
@@ -1805,6 +1851,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnFanart_Click(object sender, EventArgs e)
         {
+            if (!String.IsNullOrEmpty(MesFilmsFanart.Text))
+              folderBrowserDialog1.SelectedPath = MesFilmsFanart.Text;
+            else
+              folderBrowserDialog1.SelectedPath = String.Empty;
+
             folderBrowserDialog1.Description = "Select Fanart Backdrop Path";
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
@@ -2633,6 +2684,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnLogosPath_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(txtLogosPath.Text))
+              openFileDialog1.FileName = txtLogosPath.Text;
+            else
+            {
+              openFileDialog1.FileName = String.Empty;
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config).ToString();
+            }
+
+            if (txtLogosPath.Text.Contains("\\"))
+              openFileDialog1.InitialDirectory = txtLogosPath.Text.Substring(0, txtLogosPath.Text.LastIndexOf("\\") + 1);
+
             folderBrowserDialog1.Description = "Select Search Path to Logos";
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
@@ -2958,6 +3020,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnViews_Click(object sender, EventArgs e)
         {
+            if (!String.IsNullOrEmpty(MesFilmsViews.Text))
+              folderBrowserDialog1.SelectedPath = MesFilmsViews.Text;
+            else
+              folderBrowserDialog1.SelectedPath = String.Empty;
             folderBrowserDialog1.Description = "Select Group Views Picture Path";
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
@@ -2967,6 +3033,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void ButDefCov_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(DefaultCover.Text))
+              openFileDialog1.FileName = DefaultCover.Text;
+            else
+            {
+              openFileDialog1.FileName = String.Empty;
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            }
+
+            if (DefaultCover.Text.Contains("\\"))
+              openFileDialog1.InitialDirectory = DefaultCover.Text.Substring(0, DefaultCover.Text.LastIndexOf("\\") + 1);
+
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.DefaultExt = "jpg";
             openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";
@@ -3012,6 +3089,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnTrailer_Click(object sender, EventArgs e)
         {
+          if (!String.IsNullOrEmpty(PathStorageTrailer.Text))
+            {
+              if (PathStorageTrailer.Text.Contains(";"))
+                folderBrowserDialog1.SelectedPath = PathStorageTrailer.Text.Substring(PathStorageTrailer.Text.LastIndexOf(";") + 1).Trim();
+              else
+                folderBrowserDialog1.SelectedPath = PathStorageTrailer.Text;
+              if (folderBrowserDialog1.SelectedPath.LastIndexOf("\\") == folderBrowserDialog1.SelectedPath.Length)
+                folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath.Substring(folderBrowserDialog1.SelectedPath.Length - 1);
+            }
+            else
+              folderBrowserDialog1.SelectedPath = String.Empty;
+
             folderBrowserDialog1.Description = "Select Extended Trailer Searchpath";
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
@@ -3058,16 +3147,31 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void ButImgArtist_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.Description = "Select Person Images Path";
-            if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-                MesFilmsImgArtist.Text = folderBrowserDialog1.SelectedPath;
-            }
+          if (!String.IsNullOrEmpty(MesFilmsImgArtist.Text))
+            folderBrowserDialog1.SelectedPath = MesFilmsImgArtist.Text;
+          else
+            folderBrowserDialog1.SelectedPath = String.Empty;
+          folderBrowserDialog1.Description = "Select Person Images Path";
+          if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+          {
+              MesFilmsImgArtist.Text = folderBrowserDialog1.SelectedPath;
+          }
 
         }
 
         private void ButDefCovArtist_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(DefaultCoverArtist.Text))
+              openFileDialog1.FileName = DefaultCoverArtist.Text;
+            else
+            {
+              openFileDialog1.FileName = String.Empty;
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            }
+
+            if (DefaultCoverArtist.Text.Contains("\\"))
+              openFileDialog1.InitialDirectory = DefaultCoverArtist.Text.Substring(0, DefaultCoverArtist.Text.LastIndexOf("\\") + 1);
+
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.DefaultExt = "jpg";
             openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";
@@ -3530,6 +3634,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnAMCMovieScanPathAdd_Click(object sender, EventArgs e)
         {
+          if (!String.IsNullOrEmpty(AMCMovieScanPath.Text))
+          {
+            if (AMCMovieScanPath.Text.Contains(";"))
+              folderBrowserDialog1.SelectedPath = AMCMovieScanPath.Text.Substring(AMCMovieScanPath.Text.LastIndexOf(";") + 1).Trim();
+            else
+              folderBrowserDialog1.SelectedPath = AMCMovieScanPath.Text;
+            if (folderBrowserDialog1.SelectedPath.LastIndexOf("\\") == folderBrowserDialog1.SelectedPath.Length)
+              folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath.Substring(folderBrowserDialog1.SelectedPath.Length - 1);
+          }
+          else
+            folderBrowserDialog1.SelectedPath = String.Empty;
+
           folderBrowserDialog1.Description = "Scan Path(es)for Movies Search";
           if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
           {
@@ -4088,6 +4204,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void ButDefCovViews_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(DefaultCoverViews.Text))
+              openFileDialog1.FileName = DefaultCoverViews.Text;
+            else
+            {
+              openFileDialog1.FileName = String.Empty;
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+            }
+
+            if (DefaultCoverViews.Text.Contains("\\"))
+              openFileDialog1.InitialDirectory = DefaultCoverViews.Text.Substring(0, DefaultCoverViews.Text.LastIndexOf("\\") + 1);
+
           openFileDialog1.RestoreDirectory = true;
           openFileDialog1.DefaultExt = "jpg";
           openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";
@@ -4098,6 +4225,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void ButDefFanart_Click(object sender, EventArgs e)
         {
+          if (!string.IsNullOrEmpty(DefaultFanartImage.Text))
+            openFileDialog1.FileName = DefaultFanartImage.Text;
+          else
+          {
+            openFileDialog1.FileName = String.Empty;
+            openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+          }
+
+          if (DefaultFanartImage.Text.Contains("\\"))
+            openFileDialog1.InitialDirectory = DefaultFanartImage.Text.Substring(0, DefaultFanartImage.Text.LastIndexOf("\\") + 1);
+
           openFileDialog1.RestoreDirectory = true;
           openFileDialog1.DefaultExt = "jpg";
           openFileDialog1.Filter = "JPG Files|*.jpg|PNG Files|*.png|BMP Files|*.bmp|All Files|*.*";

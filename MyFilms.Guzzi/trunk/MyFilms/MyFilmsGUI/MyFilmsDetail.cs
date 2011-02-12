@@ -61,9 +61,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
   using Trakt;
-  using Trakt.Show;
 
-  /// <summary>
+    /// <summary>
     /// Summary description for GUIMesFilms.
     /// </summary>
     public class MyFilmsDetail : GUIWindow
@@ -1110,6 +1109,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "cover-thumbnailer":
                     CreateThumbFromMovie();
                     ShowMessageDialog(GUILocalizeStrings.Get(107986), "", "Cover created from movie");
+                    //ToDo: Add Dialog to let user choose, if cover should replace existing one (remove skip existing logic for that!)
                     break;
 
                 case "trailer-register":
@@ -1752,8 +1752,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //string Img_Path = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
             //string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
 
-            string path = MyFilms.r[MyFilms.conf.StrIndex]["Source"].ToString();
-            string strThumb = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[MyFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
+            string fileName = MyFilms.r[MyFilms.conf.StrIndex]["Source"].ToString();
+            //string[] split1 = fileName.Split(new Char[] { ';' });
+            //ArrayList movies = new ArrayList();
+            //IMDBMovie movieDetails = new IMDBMovie();
+            //Regex DVDRegexp = new Regex("video_ts");
+            //foreach (string wfile in split1)
+            //{
+            //    if (wfile.IndexOf("/") == -1)
+            //        fileName = wfile.Trim();
+            //    else
+            //        fileName = wfile.Substring(0, wfile.IndexOf("/")).Trim();
+            //    if (fileName.Length > 0)
+
+            string path = fileName.Substring(0, fileName.IndexOf(";")).Trim();
+            string strThumb = MyFilms.conf.StrPathImg + "\\MovieThumb_" + MyFilms.r[MyFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
+            LogMyFilms.Debug("MF: (CreateThumbFromMovie): Moviefilesource: '" + path + "', Covernamedestination: '" + strThumb + "'");
 
 
             //if (Img_Path_Type.ToLower() == "true")
@@ -1764,13 +1778,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             
             if (File.Exists(strThumb))
             {
-                return ;
+              LogMyFilms.Debug("MF: (CreateThumbFromMovie): Coverimagefile already exists - return without creating coverfile...");
+              return ;
             }
 
             // Do not try to create thumbnails for DVDs
             if (path.Contains("VIDEO_TS\\VIDEO_TS.IFO"))
             {
-                return ;
+              LogMyFilms.Debug("MF: (CreateThumbFromMovie): Moviesource is DVD - return without creating coverfile...");  
+              return ;
             }
 
             MediaPortal.Services.IVideoThumbBlacklist blacklist = MediaPortal.Services.GlobalServiceProvider.Get<MediaPortal.Services.IVideoThumbBlacklist>();
@@ -1781,15 +1797,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
 
-            System.Drawing.Image thumb = null;
+            //System.Drawing.Image thumb = null;
             try
             {
                 // CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits);
-                bool success = VideoThumbCreator.CreateVideoThumb(path, strThumb, true, false);
+                bool success = VideoThumbCreator.CreateVideoThumb(path, strThumb, true, false, 3, 2, false, "Cover");
                 if (!success)
-                    return;
+                {
+                  LogMyFilms.Debug("MF: (CreateThumbFromMovie): 'CreateVideoThumb' was NOT successful!");
+                  return;
+                }
                 else
-                    return;
+                {
+                  LogMyFilms.Debug("MF: (CreateThumbFromMovie): 'CreateVideoThumb' was successful!");
+                  return;
+                }
             }
             catch (System.Runtime.InteropServices.COMException comex)
             {
@@ -1810,16 +1832,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             finally
             {
-                if (thumb != null)
-                    thumb.Dispose();
+                //if (thumb != null)
+                //    thumb.Dispose();
                 if (!File.Exists(strThumb) && blacklist != null)
                 {
                     blacklist.Add(path);
                 }
             }
-
             Update_XML_database();
-            LogMyFilms.Info("MF: Database Updated for created PictureThumb: " + strThumb);
+            LogMyFilms.Info("MF: (Update_XML_database()) - Database Updated for created PictureThumb: " + strThumb);
         }
 
         //-------------------------------------------------------------------------------------------
