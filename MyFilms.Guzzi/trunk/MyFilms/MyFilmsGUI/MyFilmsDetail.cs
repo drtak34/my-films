@@ -725,12 +725,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       decimal wrating = 0;
                       //CultureInfo ci = new CultureInfo("en-us");    
                       //dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
-                      try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"]); }
-                          catch
-                          {
-                            try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"], CultureInfo.CurrentCulture); }
+                      //try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"]); }
+                          //catch
+                          //{
+                            try
+                            {
+                              wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"], CultureInfo.CurrentCulture);
+                              LogMyFilms.Debug("MF: Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
+                            }
+
                               catch { }
-                          }
+                          //}
                       dlgRating.Rating = wrating;
                     }
                     else
@@ -741,6 +746,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (dlgmenu.SelectedLabel == -1 || dlgmenu.SelectedLabel == 1)
                       Change_Menu("mainmenu");
                     MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString("0.0", CultureInfo.CurrentCulture);
+                    MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(",", ".");
                     Update_XML_database();
                     afficher_detail(true);
                     break;

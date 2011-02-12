@@ -1349,6 +1349,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //    { CurrentFanartDir = ""; }
                 //LogMyFilms.Debug("MF: (SearchtrailerLocal) Set CurrentFanartDir to : '" + CurrentFanartDir.ToString() + "'");
 
+                // remember it's folders here...
                 cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
                 if (!backdrop.Active)
                     backdrop.Active = true;
@@ -1398,9 +1399,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (facadeView.SelectedListItem.IsFolder)
                     Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
-                conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
-                MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
-                cover.Filename = MyFilms.conf.FileImage;
+                if (string.IsNullOrEmpty(facadeView.SelectedListItem.ThumbnailImage))
+                {
+                  conf.FileImage = MyFilms.conf.DefaultCover;
+                  //conf.FileImage = MyFilms.conf.DefaultCoverArtist;
+                  //conf.FileImage = MyFilms.conf.DefaultCoverViews;
+                  MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
+                  cover.Filename = MyFilms.conf.FileImage;
+                }
+                else
+                {
+                  conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
+                  MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
+                  cover.Filename = MyFilms.conf.FileImage;
+                }
 
                 //m_FanartTimer.Change(0, 10000); // 10000 = 10 sek. // Added to immediately change Fanart - activate to enable timer and reset it !
 
@@ -2823,12 +2835,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       decimal wrating = 0;
                       //CultureInfo ci = new CultureInfo("en-us");    
-                      try { wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating); }
-                          catch
-                          {
-                            try { wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating, CultureInfo.CurrentCulture); }
+                      //try { wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating); }
+                          //catch
+                          //{
+                            try
+                            {
+                              wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating, CultureInfo.CurrentCulture);
+                              LogMyFilms.Debug("MF: Filter Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
+                            }
                               catch { }
-                          }
+                          //}
                       dlgRating.Rating = wrating;
                       //dlgRating.Rating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating.Replace(".", ","));
                     }
@@ -2837,8 +2853,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgRating.SetTitle(GUILocalizeStrings.Get(1079881));
                     dlgRating.DoModal(GetID);
 
-                    //MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString().Replace("," , ".");
                     MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", CultureInfo.CurrentCulture);
+                    MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString().Replace("," , ".");
+                    LogMyFilms.Debug("MF: Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
                     XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
                     LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
