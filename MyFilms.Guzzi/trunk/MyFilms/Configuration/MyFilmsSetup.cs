@@ -63,6 +63,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         public DataSet AMCdsSettings = new DataSet();
         TabPage tabPageSave = null; // Zwischenspeicher für TabPage
         private bool StoreFullLogoPath = false;
+
+        private bool WizardActive = false; // Status of running new config wizard (to control check behaviour)
         private string ActiveLogoPath = String.Empty;
 
         public static string cTraktUsername = String.Empty;
@@ -1307,8 +1309,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (PathStorage.Text.Length > 0 && AMCMovieScanPath.Text.Length == 0)
               AMCMovieScanPath.Text = PathStorage.Text;
-            else
-              AMCMovieScanPath.Text = String.Empty;
+            //else
+            //  AMCMovieScanPath.Text = String.Empty;
             //if (AMCMovieScanPath.Text.Length == 0)
             //  btnCreateAMCDefaultConfig.Visible = true;
             //else
@@ -1631,7 +1633,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             System.Windows.Forms.MessageBox.Show("Your XML file is valid with " + mydivx.Movie.Count + " Movies in your database and " + movies.Length + " Movies to display with your 'Selected Enreg' configuration", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         else
                             System.Windows.Forms.MessageBox.Show("Your XML file is valid with 0 Movie in your database but no Movie to display, you have to change the selected enregs or fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    else
+                    else if (!WizardActive)
                     {
                         if (System.Windows.Forms.MessageBox.Show("There is no Movie to display with that file ! Do you Want to continue ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.No)
                         {
@@ -3550,7 +3552,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
 
           LogMyFilms.Debug("MF: Setup - Successfully created Desktop Icon for '" + linkName + "'");
-          DialogResult dialogResult = MessageBox.Show("Successfully created Desktop Icon for '" + linkName + "'", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          if (!WizardActive)
+            MessageBox.Show("Successfully created Desktop Icon for " + linkName + "", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
           //WshShellClass shortcut = new WshShellClass())
           //  {
@@ -3657,14 +3660,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
               AMCMovieScanPath.Text = AMCMovieScanPath.Text + ";" + folderBrowserDialog1.SelectedPath;
           }
-        }
-
-        private void AMCMovieScanPath_TextChanged(object sender, EventArgs e)
-        {
-          //if (AMCMovieScanPath.Text.Length != 0)
-          //  btnCreateAMCDefaultConfig.Enabled = true;
-          //else
-          //  btnCreateAMCDefaultConfig.Enabled = false;
         }
 
         private void btnCreateAMCDefaultConfig_Click(object sender, EventArgs e)
@@ -3926,7 +3921,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnFirstTimeSetup_Click(object sender, EventArgs e)
         {
+          WizardActive = true;
           newCatalogWizard();
+          WizardActive = false;
         }
 
         private void newCatalogWizard()
@@ -3934,25 +3931,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           bool newCatalog = true;
           if (Config_Name.Text.Length != 0)
           {
-            System.Windows.Forms.MessageBox.Show("Configuration Name must be empty to use this wizard ! No Config created !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            Config_Name.Focus();
-            return;
+            if (System.Windows.Forms.MessageBox.Show("Do you want to create a new MyFilms Configuration ?", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+              return;
           }
-            
           MyFilmsInputBox input = new MyFilmsInputBox();
           input.ShowDialog(this);
           string newConfig_Name = input.UserName;
+          if (string.IsNullOrEmpty(newConfig_Name))
+          {
+            MessageBox.Show("New Config Name must not be empty ! No Config created !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            return;
+          }
           if (newConfig_Name == Config_Name.Text)
           {
-            System.Windows.Forms.MessageBox.Show(
-              "Config Name must be different from existing ones ! No Config created !",
-              "Control Configuration",
-              MessageBoxButtons.OK,
-              MessageBoxIcon.Exclamation);
+            MessageBox.Show("Config Name must be different from existing ones ! No Config created !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             return;
           }
 
-          CatalogType.SelectedIndex = 0; // can be "7", if standalone with extended features/DB-fields is supported...
+          // Set Configuration Name & initialize new current config
+          Config_Name.Text = newConfig_Name;
+          this.Refresh_Items(true);
+
+          CatalogType.SelectedIndex = 0; // can be "7" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
 
           // Ask user to create new or use existing catalog...
           if (System.Windows.Forms.MessageBox.Show("Do you want to create a new empty catalog? \n(If you select no, you will be asked to select path to your existing catalog file.)", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -4002,7 +4002,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
 
           // Set values and Presets ...
-          Config_Name.Text = newConfig_Name;
           AntStorage.Text = "Source";
           AntStorageTrailer.Text = "Borrower";
           if (System.Windows.Forms.MessageBox.Show("Do you want to use OriginalTitle as Mastertitle ? \n(If you select no, TranslatedTitle will be used)", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -4104,17 +4103,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               PathStorage.Text = folderBrowserDialog1.SelectedPath;
             else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
           }
-          System.Windows.Forms.MessageBox.Show(
-            "Successfully created a new Configuration ! Now run AMCupdater to populate your catalog.",
-            "Control Configuration",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Exclamation);
+          //MessageBox.Show("Successfully created a new Configuration ! You may now run AMCupdater to populate or update your catalog.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
 
           //AMCupdater
           chkAMCUpd.Checked = true; // Use AMCupdater
           AMCMovieScanPath.Text = PathStorage.Text;
           chkAMC_Purge_Missing_Files.Checked = true;
+          txtAMCUpd_cnf.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
           // Make controls visible:
           //txtAMCUpd_cnf.Enabled = true;
           //btnAMCUpd_cnf.Enabled = true;
@@ -4128,7 +4124,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //AMCMovieScanPath.Enabled = true;
 
 
-          // Create config for AMCupdater
+          // Create config file for AMCupdater
           string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
           if (System.IO.File.Exists(wfiledefault + ".xml"))
           {
@@ -4137,6 +4133,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               System.IO.File.Copy(wfiledefault + "_" + Config_Name.Text + ".xml", wfiledefault + "_" + Config_Name.Text + ".xml.sav", true);
             }
             System.IO.File.Delete(wfiledefault + "_" + Config_Name.Text + ".xml");
+            
             Read_XML_AMCconfig(Config_Name.Text); // create default config file
             CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
             Save_XML_AMCconfig(Config_Name.Text); // save new config
@@ -4149,7 +4146,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Save_Config();
           //Config_Name.Focus();
           System.Windows.Forms.MessageBox.Show(
-            "Config has been created with default settings. \nPlease Review your settings to match your personal needs.",
+            "Successfully created a new Configuration with default settings ! \nPlease Review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \n AMC Updater will be autostarted, if you created an empty catalog. ",
             "Control Configuration",
             MessageBoxButtons.OK,
             MessageBoxIcon.Exclamation);
@@ -4165,13 +4162,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           MyFilmsInputBox input = new MyFilmsInputBox();
           input.ShowDialog(this);
           string newConfig_Name = input.UserName;
-          if (newConfig_Name == Config_Name.Text)
+
+          if (string.IsNullOrEmpty(newConfig_Name))
           {
-            System.Windows.Forms.MessageBox.Show("New Config Name must be different from the existing one !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            System.Windows.Forms.MessageBox.Show("New Config Name must not be empty !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           }
           else
-          {
+            if (newConfig_Name == Config_Name.Text)
+            {
+              System.Windows.Forms.MessageBox.Show("New Config Name must be different from the existing one !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
             Config_Name.Text = newConfig_Name;
+            Refresh_Items(true);
             Config_Name_Load();
             System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Config_Name.Focus();
@@ -4181,7 +4185,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void chkAMC_Purge_Missing_Files_CheckedChanged(object sender, EventArgs e)
         {
-          if (chkAMC_Purge_Missing_Files.Checked)
+          if (chkAMC_Purge_Missing_Files.Checked && !WizardActive)
           {
             if (System.Windows.Forms.MessageBox.Show("Are you sure, you want to purge records from your DB \n where media files are not accessible during AMC Updater scans ?",
                 "Control Configuration",

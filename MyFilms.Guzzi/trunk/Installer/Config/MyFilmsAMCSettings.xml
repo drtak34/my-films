@@ -13,7 +13,7 @@
     <Value>HDD</Value>
   </Values>
   <Values Option="Ant_Media_Label">
-    <Value>Server</Value>
+    <Value>AMC</Value>
   </Values>
   <Values Option="Override_Path">
     <Value />

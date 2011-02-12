@@ -107,6 +107,7 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.radioButton2 = new System.Windows.Forms.CheckBox();
           this.radioButton1 = new System.Windows.Forms.CheckBox();
@@ -153,6 +154,10 @@
           this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.btnLogoClearCache = new System.Windows.Forms.Button();
           this.Fanart = new System.Windows.Forms.GroupBox();
+          this.label48 = new System.Windows.Forms.Label();
+          this.chkDfltFanartImage = new System.Windows.Forms.CheckBox();
+          this.ButDefFanart = new System.Windows.Forms.Button();
+          this.DefaultFanartImage = new System.Windows.Forms.TextBox();
           this.lblResultingGroupViewsPathFanart = new System.Windows.Forms.Label();
           this.label40 = new System.Windows.Forms.Label();
           this.chkFanart = new System.Windows.Forms.CheckBox();
@@ -161,6 +166,9 @@
           this.labelFanart = new System.Windows.Forms.Label();
           this.chkDfltFanart = new System.Windows.Forms.CheckBox();
           this.groupBox22 = new System.Windows.Forms.GroupBox();
+          this.label47 = new System.Windows.Forms.Label();
+          this.ButDefCovViews = new System.Windows.Forms.Button();
+          this.DefaultCoverViews = new System.Windows.Forms.TextBox();
           this.btnResetThumbs = new System.Windows.Forms.Button();
           this.chkViews = new System.Windows.Forms.CheckBox();
           this.btnViews = new System.Windows.Forms.Button();
@@ -443,14 +451,6 @@
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
-          this.DefaultFanartImage = new System.Windows.Forms.TextBox();
-          this.DefaultCoverViews = new System.Windows.Forms.TextBox();
-          this.ButDefCovViews = new System.Windows.Forms.Button();
-          this.ButDefFanart = new System.Windows.Forms.Button();
-          this.label47 = new System.Windows.Forms.Label();
-          this.chkDfltFanartImage = new System.Windows.Forms.CheckBox();
-          this.label48 = new System.Windows.Forms.Label();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -637,6 +637,16 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -1137,6 +1147,43 @@
           this.Fanart.Text = "Fanart (Backdrops)";
           this.ToolTip1.SetToolTip(this.Fanart, resources.GetString("Fanart.ToolTip"));
           // 
+          // label48
+          // 
+          this.label48.AutoSize = true;
+          this.label48.Location = new System.Drawing.Point(170, 46);
+          this.label48.Name = "label48";
+          this.label48.Size = new System.Drawing.Size(106, 13);
+          this.label48.TabIndex = 78;
+          this.label48.Text = "Default Fanart Image";
+          // 
+          // chkDfltFanartImage
+          // 
+          this.chkDfltFanartImage.AutoSize = true;
+          this.chkDfltFanartImage.Location = new System.Drawing.Point(42, 38);
+          this.chkDfltFanartImage.Name = "chkDfltFanartImage";
+          this.chkDfltFanartImage.Size = new System.Drawing.Size(117, 30);
+          this.chkDfltFanartImage.TabIndex = 77;
+          this.chkDfltFanartImage.Text = "Use Default Image \r\nfor missing fanart";
+          this.chkDfltFanartImage.UseVisualStyleBackColor = true;
+          // 
+          // ButDefFanart
+          // 
+          this.ButDefFanart.AllowDrop = true;
+          this.ButDefFanart.Location = new System.Drawing.Point(625, 43);
+          this.ButDefFanart.Name = "ButDefFanart";
+          this.ButDefFanart.Size = new System.Drawing.Size(32, 20);
+          this.ButDefFanart.TabIndex = 76;
+          this.ButDefFanart.Text = "...";
+          this.ButDefFanart.UseVisualStyleBackColor = true;
+          this.ButDefFanart.Click += new System.EventHandler(this.ButDefFanart_Click);
+          // 
+          // DefaultFanartImage
+          // 
+          this.DefaultFanartImage.Location = new System.Drawing.Point(315, 43);
+          this.DefaultFanartImage.Name = "DefaultFanartImage";
+          this.DefaultFanartImage.Size = new System.Drawing.Size(304, 20);
+          this.DefaultFanartImage.TabIndex = 75;
+          // 
           // lblResultingGroupViewsPathFanart
           // 
           this.lblResultingGroupViewsPathFanart.AutoSize = true;
@@ -1227,6 +1274,32 @@
           this.groupBox22.TabStop = false;
           this.groupBox22.Text = "Thumbs for Group Views (Genre, Year, Country, ...)";
           this.ToolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
+          // 
+          // label47
+          // 
+          this.label47.AutoSize = true;
+          this.label47.Location = new System.Drawing.Point(170, 48);
+          this.label47.Name = "label47";
+          this.label47.Size = new System.Drawing.Size(136, 13);
+          this.label47.TabIndex = 79;
+          this.label47.Text = "Default Group Views Image";
+          // 
+          // ButDefCovViews
+          // 
+          this.ButDefCovViews.Location = new System.Drawing.Point(625, 45);
+          this.ButDefCovViews.Name = "ButDefCovViews";
+          this.ButDefCovViews.Size = new System.Drawing.Size(32, 20);
+          this.ButDefCovViews.TabIndex = 78;
+          this.ButDefCovViews.Text = "...";
+          this.ButDefCovViews.UseVisualStyleBackColor = true;
+          this.ButDefCovViews.Click += new System.EventHandler(this.ButDefCovViews_Click);
+          // 
+          // DefaultCoverViews
+          // 
+          this.DefaultCoverViews.Location = new System.Drawing.Point(315, 45);
+          this.DefaultCoverViews.Name = "DefaultCoverViews";
+          this.DefaultCoverViews.Size = new System.Drawing.Size(304, 20);
+          this.DefaultCoverViews.TabIndex = 77;
           // 
           // btnResetThumbs
           // 
@@ -1674,7 +1747,6 @@
           this.AMCMovieScanPath.TabIndex = 81;
           this.ToolTip1.SetToolTip(this.AMCMovieScanPath, "Enter the path(es) to your mediafiles.\r\nMore than one path, separated by semicolo" +
                   "n, are allowed.");
-          this.AMCMovieScanPath.TextChanged += new System.EventHandler(this.AMCMovieScanPath_TextChanged);
           // 
           // AMCConfigView
           // 
@@ -3544,8 +3616,7 @@
             "MyMovies",
             "Eax Movie Catalog",
             "eXtreme Movie Manager (V7.1.0.2)",
-            "XBMC (V10.0)",
-            "MyFilms DB"});
+            "XBMC (V10.0)"});
           this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
           this.CatalogType.Size = new System.Drawing.Size(193, 21);
@@ -4272,79 +4343,6 @@
           this.General.Size = new System.Drawing.Size(755, 380);
           this.General.TabIndex = 46;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
-          // 
-          // DefaultFanartImage
-          // 
-          this.DefaultFanartImage.Location = new System.Drawing.Point(315, 43);
-          this.DefaultFanartImage.Name = "DefaultFanartImage";
-          this.DefaultFanartImage.Size = new System.Drawing.Size(304, 20);
-          this.DefaultFanartImage.TabIndex = 75;
-          // 
-          // DefaultCoverViews
-          // 
-          this.DefaultCoverViews.Location = new System.Drawing.Point(315, 45);
-          this.DefaultCoverViews.Name = "DefaultCoverViews";
-          this.DefaultCoverViews.Size = new System.Drawing.Size(304, 20);
-          this.DefaultCoverViews.TabIndex = 77;
-          // 
-          // ButDefCovViews
-          // 
-          this.ButDefCovViews.Location = new System.Drawing.Point(625, 45);
-          this.ButDefCovViews.Name = "ButDefCovViews";
-          this.ButDefCovViews.Size = new System.Drawing.Size(32, 20);
-          this.ButDefCovViews.TabIndex = 78;
-          this.ButDefCovViews.Text = "...";
-          this.ButDefCovViews.UseVisualStyleBackColor = true;
-          this.ButDefCovViews.Click += new System.EventHandler(this.ButDefCovViews_Click);
-          // 
-          // ButDefFanart
-          // 
-          this.ButDefFanart.AllowDrop = true;
-          this.ButDefFanart.Location = new System.Drawing.Point(625, 43);
-          this.ButDefFanart.Name = "ButDefFanart";
-          this.ButDefFanart.Size = new System.Drawing.Size(32, 20);
-          this.ButDefFanart.TabIndex = 76;
-          this.ButDefFanart.Text = "...";
-          this.ButDefFanart.UseVisualStyleBackColor = true;
-          this.ButDefFanart.Click += new System.EventHandler(this.ButDefFanart_Click);
-          // 
-          // label47
-          // 
-          this.label47.AutoSize = true;
-          this.label47.Location = new System.Drawing.Point(170, 48);
-          this.label47.Name = "label47";
-          this.label47.Size = new System.Drawing.Size(136, 13);
-          this.label47.TabIndex = 79;
-          this.label47.Text = "Default Group Views Image";
-          // 
-          // chkDfltFanartImage
-          // 
-          this.chkDfltFanartImage.AutoSize = true;
-          this.chkDfltFanartImage.Location = new System.Drawing.Point(42, 38);
-          this.chkDfltFanartImage.Name = "chkDfltFanartImage";
-          this.chkDfltFanartImage.Size = new System.Drawing.Size(117, 30);
-          this.chkDfltFanartImage.TabIndex = 77;
-          this.chkDfltFanartImage.Text = "Use Default Image \r\nfor missing fanart";
-          this.chkDfltFanartImage.UseVisualStyleBackColor = true;
-          // 
-          // label48
-          // 
-          this.label48.AutoSize = true;
-          this.label48.Location = new System.Drawing.Point(170, 46);
-          this.label48.Name = "label48";
-          this.label48.Size = new System.Drawing.Size(106, 13);
-          this.label48.TabIndex = 78;
-          this.label48.Text = "Default Fanart Image";
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
           // 
           // MyFilmsSetup
           // 
