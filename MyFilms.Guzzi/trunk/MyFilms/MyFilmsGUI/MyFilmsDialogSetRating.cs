@@ -42,7 +42,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     };
 
     [SkinControl(2)]
-    protected GUILabelControl lblHeading = null;
+    //protected GUILabelControl lblHeading = null;
+    protected GUIFadeLabel lblHeading = null;
     [SkinControlAttribute(4)]
     protected GUILabelControl lblName = null;
     [SkinControlAttribute(5)]
@@ -69,8 +70,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public override int GetID
     {
       get { return ID_MyFilmsDetail; }
-      set { base.GetID = value; }
     }
+
+    //public override int GetID
+    //{
+    //  get { return ID_MyFilmsDetail; }
+    //  set { base.GetID = value; }
+    //}
     
     public override bool Init()
     {

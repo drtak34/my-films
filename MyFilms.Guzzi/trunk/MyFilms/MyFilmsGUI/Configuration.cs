@@ -25,6 +25,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System;
   using System.Collections.Generic;
+  using System.Globalization;
 
   using MediaPortal.Configuration;
 
@@ -276,6 +277,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 DefaultCoverViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverViews", string.Empty);
                 DefaultFanartImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultFanartImage", string.Empty);
                 StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5.0");
+                // Added to cope with local number settings:
+                if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ".")
+                  StrAntFilterMinRating = StrAntFilterMinRating.Replace(",", ".");
+                if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+                  StrAntFilterMinRating = StrAntFilterMinRating.Replace(".", ",");
                 //StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
                 StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", string.Empty);
                 //StrGrabber_Dir = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");

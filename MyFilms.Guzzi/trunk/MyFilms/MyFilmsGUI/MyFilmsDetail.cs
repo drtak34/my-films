@@ -719,34 +719,65 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
               case "rating":
-                    MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(7988);
+                    MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(ID_MyFilmsDialogRating);
+                    //NumberFormatInfo nfi = new NumberFormatInfo();
+                    //nfi.NumberDecimalSeparator = ",";
+                    //nfi.NumberGroupSeparator = "";
+                    //decimal wrating = 0;
                     if (MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Length > 0)
                     {
-                      decimal wrating = 0;
-                      //CultureInfo ci = new CultureInfo("en-us");    
+                      //wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
+                      //wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
+                      //CultureInfo ci = new CultureInfo("en-us");
                       //dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
-                      //try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"]); }
-                          //catch
-                          //{
-                            try
-                            {
-                              wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"], CultureInfo.CurrentCulture);
-                              LogMyFilms.Debug("MF: Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
-                            }
+                      //try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ",")); }
 
-                              catch { }
-                          //}
-                      dlgRating.Rating = wrating;
+                      //if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "." && MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Contains("."))
+                      //{
+                      //  try
+                      //  {
+                      //    wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
+                      //    //wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"], CultureInfo.CurrentCulture);
+                      //    LogMyFilms.Debug("MF: Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
+                      //  }
+                      //  catch { }
+                      //}
+                      //else
+                      //{
+                      //  wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString(), nfi);
+                      //}
+                      
+                      //try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ",")); }
+                      //catch
+                     // {
+                      //LogMyFilms.Debug("MF: Rating dialog using cultureinfo (decimalseparator): '" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() + "'");
+                      //wrating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"]; 
+                      //wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
+                      //try
+                        //{
+                          //wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
+                          //wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"], CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+                        //}
+
+                        //catch { }
+                      //}
+                      //dlgRating.Rating = wrating;
+                      dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
+                      if (dlgRating.Rating > 10) 
+                        dlgRating.Rating = 10;
                     }
                     else
                         dlgRating.Rating = 0;
 
                     dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
                     dlgRating.DoModal(GetID);
-                    if (dlgmenu.SelectedLabel == -1 || dlgmenu.SelectedLabel == 1)
+                    if (dlgmenu.SelectedLabel != 2) // If not returning from "ok"
                       Change_Menu("mainmenu");
-                    MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString("0.0", CultureInfo.CurrentCulture);
-                    MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(",", ".");
+                    //wrating = dlgRating.Rating;
+                    //MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString("0.0", nfi);
+                    //MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString("0,0", nfiback).Replace(",", ".");
+                    //MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = wrating.ToString().Replace(",", ".");
+                    MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating;
                     Update_XML_database();
                     afficher_detail(true);
                     break;

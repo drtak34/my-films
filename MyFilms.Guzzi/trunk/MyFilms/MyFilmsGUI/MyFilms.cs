@@ -2810,7 +2810,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Info("MF: Global filter for MinimumRating is now set to '" + GlobalFilterMinRating + "'");
                     if (GlobalFilterMinRating)
                     {
-                      GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
+                      GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating.Replace(",", ".") + " AND ";
                       MyFilmsDetail.setGUIProperty("globalfilter.minrating", "true");
                       MyFilmsDetail.setGUIProperty("globalfilter.minratingvalue", MyFilms.conf.StrAntFilterMinRating);
                     }
@@ -2829,39 +2829,50 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 case "filterdbsetrating":
                     // Set global value for minimum Rating to restrict movielist
-                    LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MyFilms.conf.StrAntFilterMinRating + "'");
-                    MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(7988);
+                    LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MyFilms.conf.StrAntFilterMinRating + "', current decimalseparator: '" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() + "'");
+                    MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(ID_MyFilmsDialogRating);
                     if (MyFilms.conf.StrAntFilterMinRating.Length > 0)
                     {
                       decimal wrating = 0;
-                      //CultureInfo ci = new CultureInfo("en-us");    
+                      //NumberFormatInfo nfi = new NumberFormatInfo();
+                      //nfi.NumberDecimalSeparator = ",";
+                      //nfi.NumberGroupSeparator = "";
+                      //if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "." && MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Contains("."))
+                      //{
+                      //  wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating.Replace(",", "."));
+                      //}
+                      wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating);
                       //try { wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating); }
-                          //catch
-                          //{
-                            try
-                            {
-                              wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating, CultureInfo.CurrentCulture);
-                              LogMyFilms.Debug("MF: Filter Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
-                            }
-                              catch { }
-                          //}
+                      //    catch
+                      //    {
+                      //      try
+                      //      {
+                      //        wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating, CultureInfo.CurrentCulture);
+                      //        LogMyFilms.Debug("MF: Filter Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
+                      //      }
+                      //        catch { }
+                      //    }
                       dlgRating.Rating = wrating;
-                      //dlgRating.Rating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating.Replace(".", ","));
                     }
                     else
                         dlgRating.Rating = 0;
                     dlgRating.SetTitle(GUILocalizeStrings.Get(1079881));
                     dlgRating.DoModal(GetID);
 
-                    MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", CultureInfo.CurrentCulture);
-                    MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString().Replace("," , ".");
-                    LogMyFilms.Debug("MF: Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
+                    //NumberFormatInfo nfiback = new NumberFormatInfo();
+                    //nfiback.NumberDecimalSeparator = ".";
+                    //nfiback.NumberGroupSeparator = "";
+                    //MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", nfiback);
+                    MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0");
+                    //LogMyFilms.Debug("MF: Storing StrAntFilterMinRating with formatted string value: '" + dlgRating.Rating.ToString("0.0") + "'");
+                    //MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString().Replace("," , ".");
+                    //LogMyFilms.Debug("MF: Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
                     XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
                     LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     if (GlobalFilterMinRating)
                     {
-                      GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating + " AND ";
+                      GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating.Replace(",", ".") + " AND ";
                       MyFilmsDetail.setGUIProperty("globalfilter.minrating", "true");
                       MyFilmsDetail.setGUIProperty("globalfilter.minratingvalue", MyFilms.conf.StrAntFilterMinRating);
                     }
