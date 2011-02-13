@@ -1045,7 +1045,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalog", "");
             MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntPicture", "");
             MesFilmsImgArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistPicturePath", "");
-            chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
             MesFilmsFanart.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartPicture", "");
             lblResultingGroupViewsPathFanart.Text = MesFilmsFanart.Text + "\\_Group\\";
             MesFilmsViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsPicture", "");
@@ -3062,8 +3061,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
                 {
+                  try
+                  {
                     if (wfile != DefaultCover.Text)
-                        System.IO.File.Delete(wfile);
+                      System.IO.File.Delete(wfile);
+                  }
+                  catch (Exception ex)
+                  {
+                    LogMyFilms.Debug("MF: Setup: Error deleting file '" + wfile.ToString() + "' - Exception: " + ex.ToString());
+                  }  
                 }
             }
         }
@@ -3190,8 +3196,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons"))
                 {
+                  try
+                  {
                     if (wfile != DefaultCoverArtist.Text)
-                        System.IO.File.Delete(wfile);
+                      System.IO.File.Delete(wfile);
+                  }
+                  catch (Exception ex)
+                  {
+                    LogMyFilms.Debug("MF: Setup: Error deleting file '" + wfile.ToString() + "' - Exception: " + ex.ToString());
+                  }  
                 }
             }
         }
@@ -4262,14 +4275,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void chkDfltFanartImage_CheckedChanged(object sender, EventArgs e)
         {
-          if (chkDfltFanart.Checked) 
-            chkDfltFanartImage.Checked = false;
+          if (chkDfltFanartImage.Checked)
+            chkDfltFanart.Checked = false;
         }
 
         private void chkDfltFanart_CheckedChanged(object sender, EventArgs e)
         {
-          if (chkDfltFanartImage.Checked)
-            chkDfltFanart.Checked = false;
+          if (chkDfltFanart.Checked)
+            chkDfltFanartImage.Checked = false;
         }
 
     }

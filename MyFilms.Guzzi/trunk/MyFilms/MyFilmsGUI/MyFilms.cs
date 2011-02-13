@@ -1340,19 +1340,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIControl.ShowControl(GetID, 35);
                     LogMyFilms.Debug("MF: (Load_Lstdetail): ACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 }
-                LogMyFilms.Debug("MF: (Load_Lstdetail): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 backdrop.Filename = wfanart[0];
 
-                //try    
-                //    { CurrentFanartDir  = System.IO.Path.GetDirectoryName(wfanart[0]); }
-                //catch
-                //    { CurrentFanartDir = ""; }
-                //LogMyFilms.Debug("MF: (SearchtrailerLocal) Set CurrentFanartDir to : '" + CurrentFanartDir.ToString() + "'");
-
-                // remember it's folders here...
                 cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
-                if (!backdrop.Active)
-                    backdrop.Active = true;
+                //if (!backdrop.Active)
+                //    backdrop.Active = true;
                 //GUIControl.ShowControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 MyFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage.ToString());
@@ -1361,8 +1353,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 MyFilmsDetail.clearGUIProperty("logos_id2002");
                 MyFilmsDetail.clearGUIProperty("logos_id2003");
                 MyFilmsDetail.clearGUIProperty("logos_id2012");
-
-                //               return;
             }
             else
             {
@@ -1806,7 +1796,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSort                    : '" + WStrSort + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSortSens                : '" + WStrSortSens + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - NewWstar                    : '" + NewWstar + "'");
-            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Setup Array Started (LectureDonnées)");
+            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Read movie DB Started (LectureDonnées)");
+
+            // Collect List of all attributes in w_tableau
             foreach (DataRow enr in BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
                 {
                 if ((WStrSort == "Date") || (WStrSort == "DateAdded"))
@@ -1833,7 +1825,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
 
-            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Setup Array Finished (LectureDonnées)");
+            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Read movie DB Finished (LectureDonnées)");
             if (WStrSortSens == " ASC")
                 w_tableau.Sort(0, w_tableau.Count, null);
             else
@@ -1841,11 +1833,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 IComparer myComparer = new myReverserClass();
                 w_tableau.Sort(0, w_tableau.Count, myComparer);
             }
-
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - Sorting Finished");
-            item = new GUIListItem();
-
-            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Started");
 
             if (MyFilms.conf.StrViews) // Check if Thumbs directories exist or create them
             {
@@ -1859,15 +1847,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
               strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
 
+
+            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Started for '*'");
+            //item = new GUIListItem();
             for (wi = 0; wi != w_tableau.Count; wi++)
             {
                 champselect = w_tableau[wi].ToString();
                 if (string.Compare(champselect, wchampselect, true) == 0)
-                    Wnb_enr++;
+                    Wnb_enr++; // count items of distinct property
                 else
                 {
                     if (conf.Wstar == "*" || champselect.ToUpper().Contains(conf.Wstar.ToUpper()))
-                    {
+                      {
                         if ((Wnb_enr > 0) && (wchampselect.Length > 0))
                         {
                             item = new GUIListItem();
@@ -1978,7 +1969,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
             }
-            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Finished");
+            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Finished for '*'");
 
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Started");
             if ((Wnb_enr > 0) && (wchampselect.Length > 0))
@@ -2066,6 +2057,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     item.IconImage = strThumb;
                     }  
                 item.IsFolder = true;
+                item.Path = WStrSort.ToLower(); 
                 //item.ItemId = number; // Only used in GetFilmList
                 item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
                 facadeView.Add(item);
@@ -2154,15 +2146,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (LoadDfltSlct)
             {
                 conf.Boolselect = false;
-                //Reset GLobal Filters !
-                GlobalFilterMinRating = false;
+                //Reset Global Filters !
                 GlobalFilterTrailersOnly = false;
                 GlobalFilterStringTrailersOnly = String.Empty;
                 MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
+
+                GlobalFilterMinRating = false;
                 GlobalFilterStringMinRating = String.Empty;
                 MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
                 MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
-                MovieScrobbling = false; // reset scrobbler filter setting
+
                 if (conf.GlobalUnwatchedOnly) // Reset GlobalUnwatchedFilter to the setup default (can be changed via GUI menu)
                 {
                   GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
@@ -2173,6 +2166,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   GlobalFilterStringUnwatched = String.Empty;
                   MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
                 }
+                MovieScrobbling = false; // reset scrobbler filter setting
             }
             if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
             {
@@ -5130,9 +5124,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GlobalFilterStringTrailersOnly = "";
               MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
             }
-            if (!MyFilms.conf.GlobalUnwatchedOnly)
+            if (string.IsNullOrEmpty(GlobalFilterStringMinRating) ) // Will be later initialized from setting MyFilms.conf.GlobalUnwatchedOnly
             {
-              GlobalFilterStringMinRating = "";
               MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
               MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
             }
