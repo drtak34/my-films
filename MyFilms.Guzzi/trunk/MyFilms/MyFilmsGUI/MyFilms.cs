@@ -5542,33 +5542,58 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             { directoryname = string.Empty; }
             LogMyFilms.Debug("MF: (SearchtrailerLocal) Get Mediadirectoryname: '" + directoryname + "'");
 
-
             //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
-            string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
-            foreach (string filefound in files)
+            if (!string.IsNullOrEmpty(directoryname))
             {
+              string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
+              foreach (string filefound in files)
+              {
                 if (((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trl"))) && (Utils.IsVideo(filefound)))
                 {
-                    wsize = new System.IO.FileInfo(filefound).Length;
-                    result.Add(filefound);
-                    resultsize.Add(wsize);
-                    filesfound[filesfoundcounter] = filefound;
-                    filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-                    filesfoundcounter = filesfoundcounter + 1;
-                    LogMyFilms.Debug("MF: (TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
+                  wsize = new System.IO.FileInfo(filefound).Length;
+                  result.Add(filefound);
+                  resultsize.Add(wsize);
+                  filesfound[filesfoundcounter] = filefound;
+                  filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                  filesfoundcounter = filesfoundcounter + 1;
+                  LogMyFilms.Debug("MF: (TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
                 }
+              }
             }
 
             //Search Filenames with "title" in Trailer Searchpath
-            string[] directories;
             if (ExtendedSearch)
             {
-                foreach (string storage in Trailerdirectories)
+              string[] files;
+              string[] directories;
+
+              foreach (string storage in Trailerdirectories)
                 {
                     LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'");
+
+                    // search in root directory
+                    files = Directory.GetFiles(storage, "*.*", SearchOption.TopDirectoryOnly);
+                    LogMyFilms.Debug("MF: (TrailersearchLocal) - Search for matching files in root directory: '" + storage + "'");
+                    foreach (string filefound in files)
+                    {
+                      if (((filefound.ToLower().Contains(titlename.ToLower())) || (filefound.ToLower().Contains(titlename2.ToLower()))) && (Utils.IsVideo(filefound)))
+                      {
+                        wsize = new System.IO.FileInfo(filefound).Length;
+                        result.Add(filefound);
+                        resultsize.Add(wsize);
+                        filesfound[filesfoundcounter] = filefound;
+                        filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                        filesfoundcounter = filesfoundcounter + 1;
+                        LogMyFilms.Debug("MF: (TrailersearchLocal) - Singlefiles found in Trailer root directory: Size '" + wsize + "' - Name '" + filefound + "'");
+                      }
+                    }
+
+                    // search in subdirectories:
                     directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
+                    LogMyFilms.Debug("MF: (TrailersearchLocal) - Search for matching (sub)directories ...");
                     foreach (string directoryfound in directories)
                     {
+                        LogMyFilms.Debug("MF: (TrailersearchLocal) - directory to check: '" + directoryfound + "'");
                         if ((directoryfound.ToLower().Contains(titlename.ToLower())) || (directoryfound.ToLower().Contains(titlename2.ToLower())))
                         {
                             LogMyFilms.Debug("MF: (TrailersearchLocal) - Directory found: '" + directoryfound + "'");
