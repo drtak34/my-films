@@ -4610,7 +4610,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (result.Count > 1)
                     {for (int i = 1; i < result.Count; i++)
                         {
-                          if (!trailersourcepath.Contains(result[i]))
+                          if (!trailersourcepath.Contains(result[i].ToString()))
                           {
                             trailersourcepath = trailersourcepath + ";" + result[i];
                             LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Added Trailer to Trailersource: '" + result[i] + "'");

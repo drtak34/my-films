@@ -5120,10 +5120,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("Fanart2");
             MyFilmsDetail.clearGUIProperty("db.rating");
             MyFilmsDetail.clearGUIProperty("select");
-            MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
-            MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
-            MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
-            MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
+            if (!GlobalFilterMinRating)
+            {
+              GlobalFilterStringUnwatched = "";
+              MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
+            }
+            if (!GlobalFilterTrailersOnly)
+            {
+              GlobalFilterStringTrailersOnly = "";
+              MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
+            }
+            if (!MyFilms.conf.GlobalUnwatchedOnly)
+            {
+              GlobalFilterStringMinRating = "";
+              MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
+              MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
+            }
             this.Load_Rating(0);
             GUIWaitCursor.Hide();
             GUIControl.HideControl(GetID, 34);
