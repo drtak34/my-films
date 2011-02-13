@@ -1003,20 +1003,20 @@
 		<id>1</id>
 		<posX>640</posX>
 		<posY>335</posY>
-		<label>#myfilms.db.dateadded.label:</label>
+		<label>#myfilms.db.borrower.label:</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
 		<align>right</align>
-		<visible>string.equals(#myfilms.db.dateadded.value)+Control.HasFocus(10004)</visible>
+		<visible>string.equals(#myfilms.db.borrower.value)+Control.HasFocus(10004)</visible>
 	</control>
 	<control>
 		<type>fadelabel</type>
 		<id>1</id>
 		<posX>650</posX>
 		<posY>335</posY>
-		<label>#myfilms.db.dateadded.value</label>
-		<width>535</width>
+		<label>#myfilms.db.borrower.value</label>
+		<width>55</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -1061,7 +1061,7 @@
 		<posX>650</posX>
 		<posY>365</posY>
 		<label>#myfilms.db.medialabel.value</label>
-		<width>535</width>
+		<width>55</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>

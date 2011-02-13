@@ -63,7 +63,8 @@
     <String id="200036">Manual Tuning</String>
     <String id="107986">Films</String>
     <String id="107987">Films</String>
-    <String id="1079858">Manuelle Selection with Keyboard</String>
+    <String id="107988">Films</String>
+    <String id="1079858">Manual Selection with Keyboard</String>
     <String id="1079859">Choose Search Expression</String>
     <String id="1079860">Manual Selection</String>
     <String id="1079861">Update DB (AMC Updater)</String>
@@ -123,6 +124,7 @@
     <String id="10798629">off</String>
     <String id="10798630">New value</String>
     <String id="10798631">Show NAS Server status</String>
+    <String id="10798636">Filename</String>
     <String id="10798637">No films match this view!</String>
     <String id="10798638">Show full film list</String>
     <String id="10798639">No films found!</String>
@@ -174,7 +176,7 @@
     <String id="10798690">Global updates ...</String>
     <String id="10798691">Show only films with trailer ({0})</String>
     <String id="10798692">Show only films with minimum rating ({0})</String>
-    <String id="10798693">Change minimum rating from '{0}')</String>
+    <String id="10798693">Change minimum rating from '{0}'</String>
     <String id="10798694">Search and add local trailers (all films)</String>
     <String id="10798695">Trailer search finished!</String>
     <String id="10798696">Show only unwatched films ({0})</String>
@@ -209,6 +211,8 @@
     <String id="10798736">Locally Available</String>
     <String id="10798737">Film not found locally</String>
     <String id="10798738">Try Online Trailer?</String>
+    <String id="10798739">Search local trailers and update DB ?</String>
+    <String id="10798740">*** play all trailers ***</String>
     <String id="10798741">(active)</String>
     <String id="10798742">(offline) - start?</String>
     <String id="10798743">successfully started!</String>
