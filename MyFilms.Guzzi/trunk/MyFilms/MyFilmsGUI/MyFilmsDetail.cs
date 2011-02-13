@@ -2576,6 +2576,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.item3.value");
             clearGUIProperty("user.source.value");
             clearGUIProperty("user.sourcetrailer.value");
+            clearGUIProperty("user.sourcetrailer.count");
             clearGUIProperty("user.watched.value");
         }
 
@@ -2653,6 +2654,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (wrep && (MyFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower())))
                     {
                       setGUIProperty("user.sourcetrailer.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                      // add number of trailers : #myfilms.user.sourcetrailer.count
+                      if (!string.IsNullOrEmpty(MyFilms.r[ItemId][dc.ColumnName].ToString()))
+                      {
+                        string[] split1;
+                        split1 = MyFilms.r[ItemId][dc.ColumnName].ToString().Split(new Char[] { ';' });
+                        setGUIProperty("user.sourcetrailer.count", split1.Count().ToString());
+                      }
+                      setGUIProperty("user.sourcetrailer.count", "0");
                     }
 
                     if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
