@@ -2233,16 +2233,16 @@ Some functions will not be available or work properly, if older versions are ins
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>20</Revision>
+      <Revision>21</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production.
 Please report bugs in MyFilms forum.</VersionDescription>
-    <DevelopmentStatus>Alpha</DevelopmentStatus>
+    <DevelopmentStatus>Beta</DevelopmentStatus>
     <OnlineLocation />
-    <ReleaseDate>2011-02-08T22:05:54</ReleaseDate>
+    <ReleaseDate>2011-02-14T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.20.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.21.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -4171,14 +4171,14 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{62306f14-437f-4893-ad30-a200aa634ca0}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{5e16fb3f-d39a-42d5-93cf-c67f1c2288d9}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{72507380-fd0e-472b-9c31-387451bacffb}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{280720be-9f64-4523-b40b-f67ca4f54f33}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
