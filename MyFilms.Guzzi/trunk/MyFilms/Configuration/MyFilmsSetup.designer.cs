@@ -451,6 +451,7 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.chkPersons = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1309,9 +1310,9 @@
           this.chkViews.AutoSize = true;
           this.chkViews.Location = new System.Drawing.Point(18, 15);
           this.chkViews.Name = "chkViews";
-          this.chkViews.Size = new System.Drawing.Size(104, 30);
+          this.chkViews.Size = new System.Drawing.Size(98, 30);
           this.chkViews.TabIndex = 71;
-          this.chkViews.Text = "Use Thumbs for \r\ngroup views";
+          this.chkViews.Text = "use thumbs for \r\ngroup views";
           this.chkViews.UseVisualStyleBackColor = true;
           // 
           // btnViews
@@ -1337,7 +1338,7 @@
           // label29
           // 
           this.label29.AutoSize = true;
-          this.label29.Location = new System.Drawing.Point(169, 22);
+          this.label29.Location = new System.Drawing.Point(170, 22);
           this.label29.Name = "label29";
           this.label29.Size = new System.Drawing.Size(128, 13);
           this.label29.TabIndex = 73;
@@ -1360,7 +1361,7 @@
           this.groupBox1.Controls.Add(this.label2);
           this.groupBox1.Location = new System.Drawing.Point(6, 1);
           this.groupBox1.Name = "groupBox1";
-          this.groupBox1.Size = new System.Drawing.Size(735, 73);
+          this.groupBox1.Size = new System.Drawing.Size(735, 67);
           this.groupBox1.TabIndex = 85;
           this.groupBox1.TabStop = false;
           this.groupBox1.Text = "Cover Images";
@@ -1368,7 +1369,7 @@
           // 
           // ButDefCov
           // 
-          this.ButDefCov.Location = new System.Drawing.Point(625, 43);
+          this.ButDefCov.Location = new System.Drawing.Point(625, 40);
           this.ButDefCov.Name = "ButDefCov";
           this.ButDefCov.Size = new System.Drawing.Size(32, 20);
           this.ButDefCov.TabIndex = 90;
@@ -1378,16 +1379,16 @@
           // 
           // DefaultCover
           // 
-          this.DefaultCover.Location = new System.Drawing.Point(162, 43);
+          this.DefaultCover.Location = new System.Drawing.Point(315, 40);
           this.DefaultCover.Name = "DefaultCover";
-          this.DefaultCover.Size = new System.Drawing.Size(457, 20);
+          this.DefaultCover.Size = new System.Drawing.Size(304, 20);
           this.DefaultCover.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.DefaultCover, resources.GetString("DefaultCover.ToolTip"));
           // 
           // label_DefaulCover
           // 
           this.label_DefaulCover.AutoSize = true;
-          this.label_DefaulCover.Location = new System.Drawing.Point(40, 47);
+          this.label_DefaulCover.Location = new System.Drawing.Point(170, 43);
           this.label_DefaulCover.Name = "label_DefaulCover";
           this.label_DefaulCover.Size = new System.Drawing.Size(104, 13);
           this.label_DefaulCover.TabIndex = 88;
@@ -1395,7 +1396,7 @@
           // 
           // ButImg
           // 
-          this.ButImg.Location = new System.Drawing.Point(625, 17);
+          this.ButImg.Location = new System.Drawing.Point(625, 14);
           this.ButImg.Name = "ButImg";
           this.ButImg.Size = new System.Drawing.Size(32, 20);
           this.ButImg.TabIndex = 87;
@@ -1405,7 +1406,7 @@
           // 
           // MesFilmsImg
           // 
-          this.MesFilmsImg.Location = new System.Drawing.Point(162, 17);
+          this.MesFilmsImg.Location = new System.Drawing.Point(162, 14);
           this.MesFilmsImg.Name = "MesFilmsImg";
           this.MesFilmsImg.Size = new System.Drawing.Size(457, 20);
           this.MesFilmsImg.TabIndex = 85;
@@ -1416,7 +1417,7 @@
           // label2
           // 
           this.label2.AutoSize = true;
-          this.label2.Location = new System.Drawing.Point(40, 20);
+          this.label2.Location = new System.Drawing.Point(40, 18);
           this.label2.Name = "label2";
           this.label2.Size = new System.Drawing.Size(97, 13);
           this.label2.TabIndex = 86;
@@ -1424,6 +1425,7 @@
           // 
           // groupBox_ArtistImages
           // 
+          this.groupBox_ArtistImages.Controls.Add(this.chkPersons);
           this.groupBox_ArtistImages.Controls.Add(this.btnResetThumbsArtist);
           this.groupBox_ArtistImages.Controls.Add(this.chkDfltArtist);
           this.groupBox_ArtistImages.Controls.Add(this.ButDefCovArtist);
@@ -1432,9 +1434,9 @@
           this.groupBox_ArtistImages.Controls.Add(this.label_DefaultArtistImage);
           this.groupBox_ArtistImages.Controls.Add(this.label_ArtistImagePath);
           this.groupBox_ArtistImages.Controls.Add(this.DefaultCoverArtist);
-          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 74);
+          this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 68);
           this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
-          this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 76);
+          this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 83);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
           this.groupBox_ArtistImages.Text = "Person Images";
@@ -1443,7 +1445,7 @@
           // 
           // btnResetThumbsArtist
           // 
-          this.btnResetThumbsArtist.Location = new System.Drawing.Point(665, 10);
+          this.btnResetThumbsArtist.Location = new System.Drawing.Point(665, 12);
           this.btnResetThumbsArtist.Name = "btnResetThumbsArtist";
           this.btnResetThumbsArtist.Size = new System.Drawing.Size(64, 34);
           this.btnResetThumbsArtist.TabIndex = 99;
@@ -1455,7 +1457,7 @@
           // chkDfltArtist
           // 
           this.chkDfltArtist.AutoSize = true;
-          this.chkDfltArtist.Location = new System.Drawing.Point(42, 36);
+          this.chkDfltArtist.Location = new System.Drawing.Point(42, 45);
           this.chkDfltArtist.Name = "chkDfltArtist";
           this.chkDfltArtist.Size = new System.Drawing.Size(114, 30);
           this.chkDfltArtist.TabIndex = 98;
@@ -1464,7 +1466,7 @@
           // 
           // ButDefCovArtist
           // 
-          this.ButDefCovArtist.Location = new System.Drawing.Point(625, 44);
+          this.ButDefCovArtist.Location = new System.Drawing.Point(625, 46);
           this.ButDefCovArtist.Name = "ButDefCovArtist";
           this.ButDefCovArtist.Size = new System.Drawing.Size(32, 20);
           this.ButDefCovArtist.TabIndex = 97;
@@ -1474,7 +1476,7 @@
           // 
           // ButImgArtist
           // 
-          this.ButImgArtist.Location = new System.Drawing.Point(625, 18);
+          this.ButImgArtist.Location = new System.Drawing.Point(625, 20);
           this.ButImgArtist.Name = "ButImgArtist";
           this.ButImgArtist.Size = new System.Drawing.Size(32, 20);
           this.ButImgArtist.TabIndex = 96;
@@ -1484,16 +1486,16 @@
           // 
           // MesFilmsImgArtist
           // 
-          this.MesFilmsImgArtist.Location = new System.Drawing.Point(162, 17);
+          this.MesFilmsImgArtist.Location = new System.Drawing.Point(315, 19);
           this.MesFilmsImgArtist.Name = "MesFilmsImgArtist";
-          this.MesFilmsImgArtist.Size = new System.Drawing.Size(457, 20);
+          this.MesFilmsImgArtist.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsImgArtist.TabIndex = 95;
           this.ToolTip1.SetToolTip(this.MesFilmsImgArtist, resources.GetString("MesFilmsImgArtist.ToolTip"));
           // 
           // label_DefaultArtistImage
           // 
           this.label_DefaultArtistImage.AutoSize = true;
-          this.label_DefaultArtistImage.Location = new System.Drawing.Point(170, 47);
+          this.label_DefaultArtistImage.Location = new System.Drawing.Point(170, 49);
           this.label_DefaultArtistImage.Name = "label_DefaultArtistImage";
           this.label_DefaultArtistImage.Size = new System.Drawing.Size(109, 13);
           this.label_DefaultArtistImage.TabIndex = 94;
@@ -1502,7 +1504,7 @@
           // label_ArtistImagePath
           // 
           this.label_ArtistImagePath.AutoSize = true;
-          this.label_ArtistImagePath.Location = new System.Drawing.Point(40, 20);
+          this.label_ArtistImagePath.Location = new System.Drawing.Point(170, 23);
           this.label_ArtistImagePath.Name = "label_ArtistImagePath";
           this.label_ArtistImagePath.Size = new System.Drawing.Size(102, 13);
           this.label_ArtistImagePath.TabIndex = 93;
@@ -1510,7 +1512,7 @@
           // 
           // DefaultCoverArtist
           // 
-          this.DefaultCoverArtist.Location = new System.Drawing.Point(315, 44);
+          this.DefaultCoverArtist.Location = new System.Drawing.Point(315, 46);
           this.DefaultCoverArtist.Name = "DefaultCoverArtist";
           this.DefaultCoverArtist.Size = new System.Drawing.Size(304, 20);
           this.DefaultCoverArtist.TabIndex = 92;
@@ -4346,6 +4348,16 @@
           this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
           this.traktConfiguration1.TabIndex = 0;
           // 
+          // chkPersons
+          // 
+          this.chkPersons.AutoSize = true;
+          this.chkPersons.Location = new System.Drawing.Point(18, 15);
+          this.chkPersons.Name = "chkPersons";
+          this.chkPersons.Size = new System.Drawing.Size(95, 30);
+          this.chkPersons.TabIndex = 100;
+          this.chkPersons.Text = "use thumbs for\r\nperson views";
+          this.chkPersons.UseVisualStyleBackColor = true;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4818,5 +4830,6 @@
         private Label label47;
         private Label label48;
         private CheckBox chkDfltFanartImage;
+        private CheckBox chkPersons;
     }
 }

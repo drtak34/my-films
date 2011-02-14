@@ -3525,7 +3525,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             //  PlaybackOperationEnded(false);
                             //}
                             //#endregion
-                          
+
+                            // Watched status for videos not in the movie database (sample code from MyVideos)
+                            //if (!foundWatched && markWatchedFiles)
+                            //{
+                            //  if (fileId >= 0)
+                            //  {
+                            //    bool watched = VideoDatabase.GetVideoFileWatched(fileId);
+
+                            //    if (watched)
+                            //    {
+                            //      foundWatched = true;
+                            //    }
+                            //    // Set watched status for old files before DB upgrade
+                            //    else
+                            //    {
+                            //      int duration = VideoDatabase.GetMovieDuration(fileId);
+                            //      int stopTime = VideoDatabase.GetMovieStopTime(fileId);
+                            //      int playedPercentage = 0;
+
+                            //      if (duration > 0)
+                            //      {
+                            //        playedPercentage = (100 * stopTime / duration);
+                            //      }
+
+                            //      if (playedPercentage >= 80)
+                            //      {
+                            //        foundWatched = true;
+                            //        VideoDatabase.SetVideoFileWatched(fileId, true);
+                            //      }
+                            //    }
+                            //  }
+                            //}
+
                             if ((filename == strFilePath) && (timeMovieStopped > 0))
                             {
                                 g_Player.Player.GetResumeState(out resumeData);

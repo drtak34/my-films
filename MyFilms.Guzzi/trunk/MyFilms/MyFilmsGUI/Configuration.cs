@@ -294,6 +294,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
                 StrFanartDfltImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImage", false);
                 StrViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Views", false);
+                StrPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Persons", false);
                 StrViewsDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDflt", false);
                 StrCheckWOLenable = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Enable", false);
                 StrWOLtimeout = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WOL-Timeout", "15"));
@@ -964,8 +965,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool strViews = false;
         public bool StrViews
         {
-            get { return strViews; }
-            set { strViews = value; }
+          get { return strViews; }
+          set { strViews = value; }
+        }
+        private bool strPersons = false;
+        public bool StrPersons
+        {
+          get { return strPersons; }
+          set { strPersons = value; }
         }
         private bool strViewsDflt = false;
         public bool StrViewsDflt
