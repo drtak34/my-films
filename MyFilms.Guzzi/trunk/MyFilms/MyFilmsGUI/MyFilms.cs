@@ -281,6 +281,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public enum optimizeOption { optimizeDisabled };
         public static bool InitialStart = false; //Added to implement InitialViewSetup, ToDo: Add Logic
         private bool LoadWithParameterSupported = false;
+
+        public bool BrowseTheWebRightPlugin = false;
+        public bool BrowseTheWebRightVersion = false;
+
         #endregion
 
 
@@ -333,6 +337,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Timer to process episodes to send to trakt, will also be called after new episodes are added to library
             //m_TraktSyncTimer = new System.Threading.Timer(new TimerCallback(TraktSynchronize), null, 15000, Timeout.Infinite);
             #endregion
+
+            BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
+            BrowseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
             
             LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
 
@@ -1398,15 +1405,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (facadeView.SelectedListItem.IsFolder)
                     Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
-                if (!System.IO.File.Exists(facadeView.SelectedListItem.ThumbnailImage))
-                {
-                  conf.FileImage = MyFilms.conf.DefaultCover;
-                  //conf.FileImage = MyFilms.conf.DefaultCoverArtist;
-                  //conf.FileImage = MyFilms.conf.DefaultCoverViews;
-                  MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
-                  cover.Filename = MyFilms.conf.FileImage;
-                }
-                else
+                //if (!System.IO.File.Exists(facadeView.SelectedListItem.ThumbnailImage))
+                //{
+                //  conf.FileImage = MyFilms.conf.DefaultCover;
+                //  //conf.FileImage = MyFilms.conf.DefaultCoverArtist;
+                //  //conf.FileImage = MyFilms.conf.DefaultCoverViews;
+                //  MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
+                //  cover.Filename = MyFilms.conf.FileImage;
+                //}
+                //else
                 {
                   conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
                   MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
@@ -1857,6 +1864,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
             else
               strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
+            bool getThumbs = false;
+            if (((MyFilms.conf.StrViews) || (MyFilms.conf.StrPersons)) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")) || (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country")))) 
+              getThumbs = true;
+            bool createFanartDir = false;
+            if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country") 
+              createFanartDir = true;
+            bool isperson = false;
+            if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director"))) 
+              isperson = true;
 
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Started");
             //item = new GUIListItem();
@@ -1876,15 +1892,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         item = new GUIListItem();
                         item.Label = wchampselect;
                         item.Label2 = Wnb_enr.ToString();
-                        if (((MyFilms.conf.StrViews) || (MyFilms.conf.StrViews)) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")) || (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country"))))
+                        if (getThumbs)
                         {
-                          strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory);
+                          strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
                           item.ThumbnailImage = strActiveFacadeImages[0];
                           item.IconImage = strActiveFacadeImages[1];
                         }
-                        string[] wfanart;
-                        if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country") 
+                        if (createFanartDir)
+                        {
+                          string[] wfanart;
                           wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
+                        }
                         item.IsFolder = true;
                         item.Path = WStrSort.ToLower();
                         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
@@ -1903,14 +1921,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 item = new GUIListItem();
                 item.Label = wchampselect;
                 item.Label2 = Wnb_enr.ToString();
-                if (((MyFilms.conf.StrViews) || (MyFilms.conf.StrPersons)) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")) || (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country"))))
+                if (getThumbs)
                 {
-                  strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory);
+                  strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
                   item.ThumbnailImage = strActiveFacadeImages[0];
                   item.IconImage = strActiveFacadeImages[1];
                 }
                 string[] wfanart;
-                if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country")
+                if (createFanartDir)
                   wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
                 item.IsFolder = true;
                 item.Path = WStrSort.ToLower(); 
@@ -1969,7 +1987,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         }
 
-        private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory)
+        private static string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson)
         {
           string[] thumbimages = new string[2];
           thumbimages[0] = string.Empty; // ThumbnailImage
@@ -1987,7 +2005,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  strThumbLarge = strThumbDirectory + itemlabel + ".png";
           //}
 
-          if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
+          if (isPerson)
           {
             //strThumbSource = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieActors, itemlabel); // check for actors images in MyVideos...
             //LogMyFilms.Debug("MF: Artist thumbs - GetCoverName(Thumbs, MovieActors) - strThumb = '" + strThumb + "'");
@@ -2012,15 +2030,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else if (System.IO.File.Exists(strPathArtist + itemlabel + "L" + ".jpg")) strThumbSource = strPathArtist + itemlabel + "L" + ".jpg";
               else if (System.IO.File.Exists(strPathArtist + itemlabel + ".jpg")) strThumbSource = strPathArtist + itemlabel + ".jpg";
               else if (System.IO.File.Exists(strPathArtist + itemlabel + ".png")) strThumbSource = strPathArtist + itemlabel + ".png";
-            }
-
-            if ((!System.IO.File.Exists(strThumb)) && strThumbSource != string.Empty)
-            {
-              Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
-              Picture.CreateThumbnail(strThumbSource, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
-              thumbimages[0] = strThumbSource;
-              thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
-              return thumbimages;
+              if (strThumbSource != string.Empty)
+              {
+                Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
+                Picture.CreateThumbnail(strThumbSource, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                thumbimages[0] = strThumbSource;
+                thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
+                return thumbimages;
+              }
             }
 
             //if ((!System.IO.File.Exists(strThumbLarge)) && (strThumbLarge != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
@@ -2029,9 +2046,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //  strThumbLarge = strThumbDirectory + itemlabel + "L.png";
             //}
 
-            if (!System.IO.File.Exists(strThumb) && conf.StrArtistDflt && conf.DefaultCoverArtist.Length > 0)
-            {
+            // if (!System.IO.File.Exists(strThumb) && conf.StrArtistDflt && conf.DefaultCoverArtist.Length > 0)
+            if (conf.StrArtistDflt && conf.DefaultCoverArtist.Length > 0)
+              {
               //ImageFast.CreateImage(strThumb, item.Label); // this is to create a pseudo cover with name of label added to it
+              //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
+              //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
               thumbimages[0] = conf.DefaultCoverArtist;
               thumbimages[1] = conf.DefaultCoverArtist;
               return thumbimages;
@@ -3017,11 +3037,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   dlg.Add(GUILocalizeStrings.Get(1079887));
                   upd_choice[ichoice] = "movieimdbtrailer";
                   ichoice++;
-
-                  dlg.Add(GUILocalizeStrings.Get(1079888));
-                  upd_choice[ichoice] = "movieimdbbilder";
-                  ichoice++;
                 }
+
+                dlg.Add(GUILocalizeStrings.Get(1079888));
+                upd_choice[ichoice] = "movieimdbbilder";
+                ichoice++;
+
                 dlg.Add(GUILocalizeStrings.Get(1079889));
                 upd_choice[ichoice] = "movieimdbinternet";
                 ichoice++;
@@ -3057,7 +3078,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person locally (load persons detailscreen or load facade with filmlists of actor")) // check if specialmode is configured for disabled features
               {
                 dlg.Add(GUILocalizeStrings.Get(1079884));
-                  //Show Infos of person (load persons detailscreen - MesFilmsActor) - only available in personlist
+                //Show Infos of person (load persons detailscreen - MesFilmsActor) - only available in personlist
                 upd_choice[ichoice] = "artistdetail";
                 ichoice++;
               }
@@ -3066,16 +3087,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               upd_choice[ichoice] = "artistimdbinternet";
               ichoice++;
               
+              dlg.Add(GUILocalizeStrings.Get(1079890));//Show IMDB clips http://www.imdb.com/name/nm0000288/videogallery
+              upd_choice[ichoice] = "artistimdbclips";
+              ichoice++;
+
+              dlg.Add(GUILocalizeStrings.Get(1079891));//Show IMDB pictures http://www.imdb.com/name/nm0000288/mediaindex
+              upd_choice[ichoice] = "artistimdbbilder";
+              ichoice++;
+
               if (MyFilmsDetail.ExtendedStartmode("Context Artist: IMDB all sort of details and updates (several entries)")) // check if specialmode is configured for disabled features
               {
-                dlg.Add(GUILocalizeStrings.Get(1079890));//Show IMDB clips http://www.imdb.com/name/nm0000288/videogallery
-                upd_choice[ichoice] = "artistimdbclips";
-                ichoice++;
-
-                dlg.Add(GUILocalizeStrings.Get(1079891));//Show IMDB pictures http://www.imdb.com/name/nm0000288/mediaindex
-                upd_choice[ichoice] = "artistimdbbilder";
-                ichoice++;
-
                 dlg.Add(GUILocalizeStrings.Get(1079885));//Show IMDB filmlist in facadeview and add availabilityinformations to it
                 upd_choice[ichoice] = "artistimdbfilmlist";
                 ichoice++;
@@ -3142,23 +3163,69 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
 
                 case "movieimdbtrailer":
-                    // ToDo: load onlinemovies from IMDB (http://www.imdb.com/title/tt0438488/videogallery)
-                    // Share loadingclass with actorclips and use parameter "mode"
+                    // Example: (http://www.imdb.com/title/tt0438488/videogallery)
                     {
-                        break;
+                      if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+                      {
+                        string url = ImdbBaseUrl + "";
+                        string zoom = "150";
+                        IMDB _imdb = new IMDB();
+                        IMDB.IMDBUrl wurl;
+                        _imdb.Find(facadeView.SelectedListItem.Label);
+                        IMDBMovie imdbMovie = new IMDBMovie();
+                        if (_imdb.Count > 0)
+                        {
+                          wurl = (IMDB.IMDBUrl)_imdb[0];
+                          if (wurl.URL.Length != 0)
+                            url = wurl.URL + @"videogallery/";
+                        }
+                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                      }
+                      else
+                      {
+                        ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+                      }
+                      break;
                     }
 
                 case "movieimdbbilder":
-                    // ToDo: load onlinepictures from IMDB (http://www.imdb.com/title/tt0438488/mediaindex)
-                    // Share loadingclass with actorpictures and use parameter "mode"
+                    // example: http://www.imdb.com/title/tt0133093/mediaindex
                     {
-                        break;
+                      if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+                      {
+                        string url = ImdbBaseUrl + "";
+                        string zoom = "150";
+                        IMDB _imdb = new IMDB();
+                        IMDB.IMDBUrl wurl;
+                        _imdb.Find(facadeView.SelectedListItem.Label);
+                        IMDBMovie imdbMovie = new IMDBMovie();
+                        if (_imdb.Count > 0)
+                        {
+                          wurl = (IMDB.IMDBUrl)_imdb[0];
+                          if (wurl.URL.Length != 0)
+                            url = wurl.URL + @"mediaindex/";
+                        }
+                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                      }
+                      else
+                      {
+                        ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+                      }
+                      break;
                     }
 
                 case "movieimdbinternet":
-                    var hasRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
-                    var hasRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
-                    if (hasRightPlugin && hasRightVersion)
+                    if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
                     {
                         //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
                         //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
@@ -3196,12 +3263,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         //To be modified to call new class with personlist by type and call MyFilmsActors with facade
                         //Temporarily disabled - will be required to create Person List later ....
                         //SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId);
-
-
                         if (!facadeView.SelectedListItem.IsFolder && !conf.Boolselect)
                         // Load Facade with movie actors 
                         // ToDo: Load all artists, including producers and directors
-                        
                         {
                             conf.StrIndex = facadeView.SelectedListItem.ItemId;
                             conf.StrTIndex = facadeView.SelectedListItem.Label;
@@ -3212,9 +3276,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             BtnSrtBy.IsAscending = true;
                             conf.StrActors = "*";
                             getSelectFromDivx("TranslatedTitle like '*" + conf.StrTIndex + "*'", conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, string.Empty);
-
                         }
-
                         GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                         //dlg.DeInit();
                         break;
@@ -3227,23 +3289,75 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         break;
                     }
 
-                case "artistimdbclips":
+                case "artistimdbclips": // Example: http://www.imdb.com/name/nm0000206/videogallery
                     {
-                        break;
+                      if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+                      { //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                        string url = ImdbBaseUrl + "";
+                        string zoom = "150";
+                        //First search corresponding URL for the actor ...
+                        Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+                        Grabber.MyFilmsIMDB.IMDBUrl wurl;
+                        _imdb.FindActor(facadeView.SelectedListItem.Label);
+                        Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
+
+                        if (_imdb.Count > 0)
+                        {
+                          wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+                          if (wurl.URL.Length != 0) url = wurl.URL + "videogallery/"; // Assign proper Webpage for Actorinfos
+                          //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
+                        }
+                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                      }
+                      else
+                      {
+                        ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+                      }
+                      break;
                     }
 
-                case "artistimdbbilder":
+                case "artistimdbbilder": // Example: http://www.imdb.com/name/nm0000206/mediaindex
+                    
                     {
-                        break;
-                    }
+                      if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+                      { //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                        string url = ImdbBaseUrl + "";
+                        string zoom = "150";
+                        //First search corresponding URL for the actor ...
+                        Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+                        Grabber.MyFilmsIMDB.IMDBUrl wurl;
+                        _imdb.FindActor(facadeView.SelectedListItem.Label);
+                        Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
 
-                case "artistimdbinternet":
-                    var hasRightPluginArtistImdb = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
-                    var hasRightVersionArtistImdb = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
-                    if (hasRightPluginArtistImdb && hasRightVersionArtistImdb)
-                    {
-                      //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
-                      //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
+                        if (_imdb.Count > 0)
+                        {
+                          wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+                          if (wurl.URL.Length != 0) url = wurl.URL + "mediaindex/"; // Assign proper Webpage for Actorinfos
+                          //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
+                        }
+                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                      }
+                      else
+                      {
+                        ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+                      }
+                      break;
+                    }
+                    
+                case "artistimdbinternet": // Example: http://www.imdb.com/name/nm0000206/
+
+                    if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+                    { //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
                       string url = ImdbBaseUrl + "";
                       string zoom = "150";
 
@@ -3288,16 +3402,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Share loadingclass with actorclips and use parameter "mode"
                     {
                         break;
-                        
-                        // ToDo: Copied Code from Infoservice - still unclear how to forward http link ....
-                        //string zoomlevel = string.Empty;
-                        //zoomlevel = "100";
-                        //int webBrowserWindowID = 16002; //Geckobrowser
-                        //if (webBrowserWindowID > 0)
-                        //{
-                        //    //logger.WriteLog(string.Format("Trying to open web browser with window ID {0}, url {1} and zoom {2}", webBrowserWindowID, FeedService.Feeds[FeedService.ActiveFeedIndex].Items[_feedListcontrol.SelectedListItemIndex].Url, zoomlevel), LogLevel.Info, InfoServiceModul.Feed);
-                        //    GUIWindowManager.ActivateWindow(webBrowserWindowID, false);
-                        //}
                     }
 
                 case "updateperson":

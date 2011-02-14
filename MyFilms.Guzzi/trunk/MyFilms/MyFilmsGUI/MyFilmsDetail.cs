@@ -3527,6 +3527,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             //#endregion
 
                             // Watched status for videos not in the movie database (sample code from MyVideos)
+
+                            //int playTimePercentage = 0; // Set watched flag after 80% of total played time
+
+                            //if (g_Player.Player.Duration >= 1)
+                            //  playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
+
+
+
                             //if (!foundWatched && markWatchedFiles)
                             //{
                             //  if (fileId >= 0)
