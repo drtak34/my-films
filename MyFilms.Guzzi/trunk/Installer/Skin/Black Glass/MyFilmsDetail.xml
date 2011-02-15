@@ -251,7 +251,6 @@
 					<onright>10000</onright>
 					<ondown>105</ondown>
 					<onup>103</onup>
-					<label>1079872</label>
 				</control>
 				<control>
 					<type>button</type>
@@ -260,7 +259,6 @@
 					<onright>10000</onright>
 					<ondown>10012</ondown>
 					<onup>106</onup>
-					<label>1079873</label>
 				</control>
 
 <!-- Start - Additional Buttons for Links to other Plugins -->
@@ -1847,6 +1845,52 @@ Detailmenu for technical details
 		</control>
 <!-- End Special View for FullColorFanart -->
 
+<!-- Watched/Unwatched Icon -->
+	<control>
+            	<description>Episode Watched Icon Background</description>
+            	<type>image</type>
+            	<id>0</id>
+            	<posX>412</posX>
+            	<posY>85</posY>
+            	<width>32</width>
+            	<height>39</height>
+            	<texture>overlaywubg.png</texture>
+	    	<colordiffuse>6fffffff</colordiffuse>
+	    	<visible>!Control.HasFocus(10099)</visible>
+	    	<animation effect="fade" time="250">WindowClose</animation>
+		<animation effect="fade" time="250">WindowOpen</animation>
+        </control>
+	<control>
+		<type>image</type>
+		<description>Watched Icon</description>
+		<id>1</id>
+		<posX>419</posX>
+		<posY>91</posY>
+		<width>20</width>
+		<height>20</height>
+		<texture>MyFilms\overlayunwatched.png</texture>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>UnWatched Icon</description>
+		<id>1</id>
+		<posX>419</posX>
+		<posY>91</posY>
+		<width>20</width>
+		<height>20</height>
+		<texture>MyFilms\overlaywatched.png</texture>
+		<colordiffuse>eea9d0f7</colordiffuse>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
 
 <!-- Additional Display for Info if Fanart available and Movie available -->
     <control>

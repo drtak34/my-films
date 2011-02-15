@@ -125,17 +125,18 @@
 				<description>composite control consisting of a list control and a thumbnail panel</description>
 				<type>facadeview</type>
 				<id>50</id>
+				<animation effect="fade" time="150">WindowClose</animation>	
 				<animation effect="slide" tween="circle" easing="out" time="200" start="800,0" reversible="false">WindowOpen</animation>
 				<animation effect="slide" tween="circle" easing="out" time="200" end="800,0" reversible="false">WindowClose</animation>
 				<control>
 					<description>Thumbnail Panel</description>
 					<type>thumbnailpanel</type>
+					<onleft>4</onleft>
+					<!-- <onright>4</onright> -->
 					<posX>10</posX>
 					<posY>75</posY>
 					<width>1300</width>
 					<height>640</height>
-					<onleft>4</onleft>
-					<!-- <onright>4</onright> -->
 					<scrollOffset>0</scrollOffset>
 					<itemWidth>159</itemWidth>
 					<itemHeight>210</itemHeight>
@@ -184,6 +185,7 @@
 					<type>listcontrol</type>
 					<description>listcontrol</description>
 					<onleft>4</onleft>
+					<!-- <onrigth>6</onrigth> -->
 					<playedColor>ff77ccff</playedColor>
 					<!-- <playedColor>ffffffff</playedColor> -->
 					<textYOff>8</textYOff>
@@ -207,6 +209,7 @@
 					<type>filmstrip</type>
 					<id>50</id>
 					<dimColor>90ffffff</dimColor>
+					<scrollOffset>2</scrollOffset>
 					<onup>4</onup>
 					<onleft>4</onleft>
 					<posX>20</posX>
@@ -762,6 +765,55 @@
 			<visible>facadeview.list+control.hasfocus(50)+control.hasthumb(1020)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
+
+<!-- Watched Icon start -->
+<!--
+			<control>
+				<description>Watched Icon Background</description>
+				<type>image</type>
+				<id>0</id>
+				<posX>276</posX>
+				<posY>109</posY>
+				<width>32</width>
+				<height>40</height>
+				<colordiffuse>b0ffffff</colordiffuse>
+				<texture>overlaywubg.png</texture>
+				<visible>facadeview.list+!Control.HasFocus(10099)</visible>
+				<animation effect="fade" time="250">visiblechange</animation>
+				<animation effect="fade" time="250">WindowClose</animation>	
+				<animation effect="fade" time="250">WindowOpen</animation>
+			</control> 
+			<control>
+				<description>Watched Icon</description>
+				<type>image</type>
+				<id>0</id>
+				<posX>282</posX>
+				<posY>113</posY>
+				<width>24</width>
+				<height>24</height>
+				<texture>overlaywatched.png</texture>
+				<visible>facadeview.list+!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
+				<animation effect="fade" time="250">visiblechange</animation>
+				<animation effect="fade" time="250">WindowClose</animation>	
+				<animation effect="fade" time="250">WindowOpen</animation>
+			</control>
+
+			<control>
+				<description>Un-Watched Icon</description>
+				<type>image</type>
+				<id>0</id>
+				<posX>282</posX>
+				<posY>113</posY>
+				<width>24</width>
+				<height>24</height>
+				<texture>overlayunwatched.png</texture>
+				<visible>facadeview.list+!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
+				<animation effect="fade" time="250">visiblechange</animation>
+				<animation effect="fade" time="250">WindowClose</animation>	
+				<animation effect="fade" time="250">WindowOpen</animation>
+			</control>
+-->
+<!-- Watched Icon end -->
 
 		<control>
 			<type>imagelist</type>

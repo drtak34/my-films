@@ -2,10 +2,9 @@
 <window>
 	<id>7988</id>
 	<defaultcontrol>10</defaultcontrol>
-	<allowoverlay>[facadeview.list|facadeview.smallicons|facadeview.largeicons|facadeview.album|facadeview.playlist]</allowoverlay>
+	<allowoverlay>player.hasmedia+!facadeview.filmstrip</allowoverlay>
+	<animation effect="fade" time="250">WindowClose</animation>	
 	<animation effect="fade" time="250">WindowOpen</animation>
-	<animation effect="fade" time="250">WindowClose</animation>
-
 	<controls>
 		<control>
 			<type>image</type>
@@ -46,7 +45,7 @@
 			<texture>bg_facade_line_nofocus.png</texture>
 			<colordiffuse>77ffffff</colordiffuse>
 		</control>
-<!-- 		<control> 
+		<!-- 		<control> 
 			<description>Rating label</description>
 			<type>label</type>
 			<id>3</id>
@@ -55,8 +54,8 @@
 			<label>204</label>
 			<font>font12</font>
 			<textcolor>ffffffff</textcolor>
-		</control>
--->
+		</control> -->
+
 		<control>
 			<description>Rating value</description>
 			<type>label</type>
