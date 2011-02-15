@@ -46,6 +46,7 @@ namespace Grabber
     private string _miniBiography = string.Empty;
     private string _biography = string.Empty;
     private ArrayList _movies = new ArrayList();
+    // ToDo: Guzzi Add Arraylist for pictures here and methods to get them
 
     public MyFilmsIMDBActor() {}
 
