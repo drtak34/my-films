@@ -4024,11 +4024,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             AntTitle1.Text = "OriginalTitle";
             AntTitle2.Text = "TranslatedTitle";
+            ItemSearchFileName.Text = "OriginalTitle";
           }
           else
           {
             AntTitle1.Text = "TranslatedTitle";
             AntTitle2.Text = "OriginalTitle";
+            ItemSearchFileName.Text = "TranslatedTitle";
           }
 
           AntSTitle.Text = "FormattedTitle";
