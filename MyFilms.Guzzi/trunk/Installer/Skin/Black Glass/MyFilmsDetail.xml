@@ -1857,9 +1857,11 @@ Detailmenu for technical details
             	<texture>overlaywubg.png</texture>
 	    	<colordiffuse>6fffffff</colordiffuse>
 	    	<visible>!Control.HasFocus(10099)</visible>
-	    	<animation effect="fade" time="250">WindowClose</animation>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
 		<animation effect="fade" time="250">WindowOpen</animation>
-        </control>
+   </control>
 	<control>
 		<type>image</type>
 		<description>Watched Icon</description>

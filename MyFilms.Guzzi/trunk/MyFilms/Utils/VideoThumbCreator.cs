@@ -56,8 +56,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
     public static bool CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits, int Columns, int Rows, bool doShareThumb, string ImageType)
     {
       
-      PreviewColumns = 2;
-      PreviewRows = 3;
+      PreviewColumns = Columns;
+      PreviewRows = Rows;
       LeaveShareThumb = doShareThumb;
       if (ImageType == "Cover")
       {
@@ -130,17 +130,18 @@ namespace MyFilmsPlugin.MyFilms.Utils
         postGapSec = 600;
       }
       bool Success = false;
-      string ExtractorArgs = string.Format(" -D 6 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -P \"{6}\"",
-                                           preGapSec, postGapSec, PreviewColumns, PreviewRows, blank, 0, aVideoPath);
-      string ExtractorFallbackArgs = string.Format(
-        " -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -P \"{6}\"", 0, 0, PreviewColumns, PreviewRows, blank, 0, aVideoPath);
+      string ExtractorArgs = string.Format(" -D 6 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"",
+                                           preGapSec, postGapSec, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\")), aVideoPath);
+      string ExtractorFallbackArgs = string.Format(" -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"", 0, 0, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1), aVideoPath);
       // Honour we are using a unix app
       ExtractorArgs = ExtractorArgs.Replace('\\', '/');
       try
       {
         // Use this for the working dir to be on the safe side
         string TempPath = Path.GetTempPath();
-        string OutputThumb = string.Format("{0}_s{1}", Path.ChangeExtension(aVideoPath, null), ".jpg");
+        string t = string.Format("{0}_s{1}", Path.ChangeExtension(aVideoPath, null), ".jpg");
+        string VideoFilename = t.Substring(t.LastIndexOf("\\"));
+        string OutputThumb = aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1) + VideoFilename;
         string ShareThumb = OutputThumb.Replace("_s.jpg", ".jpg");
 
         if ((LeaveShareThumb && !File.Exists(ShareThumb)) // No thumb in share although it should be there
@@ -192,10 +193,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         if (aCacheThumb && Success)
         {
-          if (Picture.CreateThumbnail(ShareThumb, aThumbPath, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution,
-                                      0, false))
-            Picture.CreateThumbnail(ShareThumb, Utils.ConvertToLargeCoverArt(aThumbPath),
-                                    (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
+          if (Picture.CreateThumbnail(ShareThumb, aThumbPath, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, false))
+            Picture.CreateThumbnail(ShareThumb, Utils.ConvertToLargeCoverArt(aThumbPath), (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
         }
 
         if (!LeaveShareThumb)

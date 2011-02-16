@@ -1579,7 +1579,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     break;
                 case "Picture":
-                    if (Result[2] != string.Empty && Result[2] != null)
+                    if (!string.IsNullOrEmpty(Result[2]))
                     {
                       string newPicture = Result[2];
                       string oldPicture = GUIPropertyManager.GetProperty("picture");
@@ -1836,55 +1836,72 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
 
             string fileName = MyFilms.r[MyFilms.conf.StrIndex]["Source"].ToString();
-            //string[] split1 = fileName.Split(new Char[] { ';' });
-            //ArrayList movies = new ArrayList();
-            //IMDBMovie movieDetails = new IMDBMovie();
-            //Regex DVDRegexp = new Regex("video_ts");
-            //foreach (string wfile in split1)
-            //{
-            //    if (wfile.IndexOf("/") == -1)
-            //        fileName = wfile.Trim();
-            //    else
-            //        fileName = wfile.Substring(0, wfile.IndexOf("/")).Trim();
-            //    if (fileName.Length > 0)
-
-            string path = fileName.Substring(0, fileName.IndexOf(";")).Trim();
+            if (string.IsNullOrEmpty(fileName))
+            {
+              LogMyFilms.Debug("MF: (CreateThumbFromMovie): Error - Moviefilesource is empty !");
+              return;
+            }
+            if (fileName.Contains("VIDEO_TS\\VIDEO_TS.IFO")) // Do not try to create thumbnails for DVDs
+            {
+              LogMyFilms.Debug("MF: (CreateThumbFromMovie): Moviesource is DVD - return without creating coverfile...");
+              return;
+            }
+            if (fileName.Contains(";"))
+              fileName = fileName.Substring(0, fileName.IndexOf(";")).Trim();
+            if (!System.IO.File.Exists(fileName))
+            {
+              LogMyFilms.Debug("MF: (CreateThumbFromMovie): Error - Moviefilesource: '" + fileName + "' does not exist !");
+              return;
+            }
+            string tempImage = System.IO.Path.GetTempPath() + "MovieThumb_" + MyFilms.r[MyFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
+            if (System.IO.File.Exists(tempImage)) System.IO.File.Delete(tempImage);
+            //if (System.IO.File.Exists(tempImage + "L")) System.IO.File.Delete(tempImage + "L");
             string strThumb = MyFilms.conf.StrPathImg + "\\MovieThumb_" + MyFilms.r[MyFilms.conf.StrIndex]["Number"].ToString() + ".jpg";
-            LogMyFilms.Debug("MF: (CreateThumbFromMovie): Moviefilesource: '" + path + "', Covernamedestination: '" + strThumb + "'");
-
+            LogMyFilms.Debug("MF: (CreateThumbFromMovie): Moviefilesource: '" + fileName + "', Covernamedestination: '" + strThumb + "', TempImage: '" + tempImage + "'");
 
             //if (Img_Path_Type.ToLower() == "true")
             //    MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = strThumb;
 
-            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = strThumb;
-            
-            
-            if (File.Exists(strThumb))
+            //if (File.Exists(strThumb))
+            //{
+            //  LogMyFilms.Debug("MF: (CreateThumbFromMovie): Coverimagefile already exists - return without creating coverfile...");
+            //  return ;
+            //}
+
+            //MediaPortal.Services.IVideoThumbBlacklist blacklist = MediaPortal.Services.GlobalServiceProvider.Get<MediaPortal.Services.IVideoThumbBlacklist>();
+            //if (blacklist != null && blacklist.Contains(fileName))
+            //{
+            //  LogMyFilms.Debug("Skipped creating thumbnail for {0}, it has been blacklisted because last attempt failed", fileName);
+            //    return ;
+            //}
+
+            string ar = GetAspectRatio(fileName);
+            int columns = 4;
+            int rows = 2;
+            if (string.IsNullOrEmpty(ar))
+              LogMyFilms.Debug("MF: Failed getting aspectratio of movie");
+            else
             {
-              LogMyFilms.Debug("MF: (CreateThumbFromMovie): Coverimagefile already exists - return without creating coverfile...");
-              return ;
+              LogMyFilms.Debug("MF: GetAspectratio: ar = '" + ar.ToString() + "'");
             }
-
-            // Do not try to create thumbnails for DVDs
-            if (path.Contains("VIDEO_TS\\VIDEO_TS.IFO"))
+            //"fullscreen" : "widescreen"
+            if (ar == "fullscreen")
             {
-              LogMyFilms.Debug("MF: (CreateThumbFromMovie): Moviesource is DVD - return without creating coverfile...");  
-              return ;
+              columns = 2;
+              rows = 4;
             }
-
-            MediaPortal.Services.IVideoThumbBlacklist blacklist = MediaPortal.Services.GlobalServiceProvider.Get<MediaPortal.Services.IVideoThumbBlacklist>();
-            if (blacklist != null && blacklist.Contains(path))
+            if (ar == "widescreen")
             {
-                LogMyFilms.Debug("Skipped creating thumbnail for {0}, it has been blacklisted because last attempt failed", path);
-                return ;
+              columns = 2;
+              rows = 5;
             }
+            LogMyFilms.Debug("MF: GetAspectratio: ar = '" + ar + "', columns = " + columns.ToString() + ", Rows = " + rows + ".");
 
-
-            //System.Drawing.Image thumb = null;
+            //System.Drawing.Image thumb = null;))))
             try
             {
                 // CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits);
-                bool success = VideoThumbCreator.CreateVideoThumb(path, strThumb, true, false, 3, 2, false, "Cover");
+              bool success = VideoThumbCreator.CreateVideoThumb(fileName, tempImage, true, false, columns, rows, false, "Cover");
                 if (!success)
                 {
                   LogMyFilms.Debug("MF: (CreateThumbFromMovie): 'CreateVideoThumb' was NOT successful!");
@@ -1893,39 +1910,104 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 else
                 {
                   LogMyFilms.Debug("MF: (CreateThumbFromMovie): 'CreateVideoThumb' was successful!");
-                  return;
+                  //return;
                 }
             }
             catch (System.Runtime.InteropServices.COMException comex)
             {
                 if (comex.ErrorCode == unchecked((int)0x8004B200))
                 {
-                    LogMyFilms.Warn("Could not create thumbnail for {0} [Unknown error 0x8004B200]", path);
+                  LogMyFilms.Warn("Could not create thumbnail for {0} [Unknown error 0x8004B200]", fileName);
                 }
                 else
                 {
-                    LogMyFilms.Error("Could not create thumbnail for {0}", path);
+                  LogMyFilms.Error("Could not create thumbnail for {0}", fileName);
                     LogMyFilms.Error(comex);
                 }
             }
             catch (Exception ex)
             {
-                LogMyFilms.Error("Could not create thumbnail for {0}", path);
+              LogMyFilms.Error("Could not create thumbnail for {0}", fileName);
                 LogMyFilms.Error(ex);
             }
             finally
             {
-                //if (thumb != null)
-                //    thumb.Dispose();
-                if (!File.Exists(strThumb) && blacklist != null)
-                {
-                    blacklist.Add(path);
-                }
+                //if (!File.Exists(strThumb) && blacklist != null)
+                //{
+                //  blacklist.Add(fileName);
+                //}
             }
+
+            try
+            {
+              MyFilmsPlugin.MyFilms.Utils.ImageFast.CreateImage(
+                tempImage.Substring(0, tempImage.LastIndexOf(".")) + "title.jpg",
+                MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(),
+                tempImage.Substring(0, tempImage.LastIndexOf(".")) + "L.jpg");
+            }
+            catch (Exception)
+            {
+              
+              throw;
+            }
+
+            
+            string newPicture = tempImage.Substring(0, tempImage.LastIndexOf(".") ) + "L.jpg";
+            string oldPicture = GUIPropertyManager.GetProperty("picture");
+            if (oldPicture.Length == 0 || oldPicture == null)
+              oldPicture = newPicture;
+            LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
+            LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
+            setGUIProperty("picture", newPicture);
+            GUIWindowManager.Process(); // To Update GUI display ...
+
+            GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079870)); // choice
+            dlgYesNo.SetLine(1, "");
+            dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798733)); // Replace cover with new one
+            dlgYesNo.SetLine(3, "");
+            dlgYesNo.DoModal(GUIWindowManager.ActiveWindow); 
+            //dlgYesNo.DoModal(GetID);
+            if (!(dlgYesNo.IsConfirmed))
+            {
+                setGUIProperty("picture", oldPicture);
+                GUIWindowManager.Process();
+                return;
+            }
+            try
+            {
+              string newFinalPicture = strThumb;
+              File.Copy(newPicture, newFinalPicture, true);
+              File.Delete(newPicture);
+              //MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newFinalPicture; // will be done below ...
+              //setGUIProperty("picture", newFinalPicture);
+              //GUIWindowManager.Process();
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
+            }
+            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = strThumb;
             Update_XML_database();
             LogMyFilms.Info("MF: (Update_XML_database()) - Database Updated for created PictureThumb: " + strThumb);
         }
 
+          
+        private static string GetAspectRatio(string FileName)
+        {
+          try
+          {
+            MediaInfoWrapper minfo = new MediaInfoWrapper(FileName);
+
+            return minfo.AspectRatio;
+          }
+          catch (Exception ex)
+          {
+            Log.Error("MF: GetAspectRatio: Error getting aspectratio via mediainfo.dll - Exception: " + ex.ToString());
+          }
+          return "";
+        }
+          
         //-------------------------------------------------------------------------------------------
         // Grab XBMC (movie.nfo) kompatible Movie Details Informations and update the XML database and refresh screen
         // Last Parameter is set to overwrite all existing data - when set to false it only updates missing infos (important for batch import)

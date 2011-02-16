@@ -53,14 +53,21 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
             return (Bitmap)imageType.InvokeMember("FromGDIplus", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.InvokeMethod, null, null, new object[] { loadingImage });
         }
-        public static Image CreateImage(string path, string texte)
+        public static Image CreateImage(string path, string texte, string sourceimage)
         {
+            string loadimage = "";
             // Loading the image to draw 
-            if (!System.IO.File.Exists(path.Substring(0, path.LastIndexOf("\\") + 1) + "Default.jpg"))
+            if (string.IsNullOrEmpty(sourceimage))
+            {
+              if (!System.IO.File.Exists(path.Substring(0, path.LastIndexOf("\\") + 1) + "Default.jpg"))
                 MediaPortal.Util.Picture.CreateThumbnail(MyFilms.conf.DefaultCover, path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg", 400, 600, 0, MediaPortal.Util.Thumbs.SpeedThumbsLarge);
+              loadimage = path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg";
+            }
+            else loadimage = sourceimage;
+
             Image image = null;
             try
-            { image = Image.FromFile(path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg"); }
+            { image = Image.FromFile(loadimage); }
             catch
             {
                 return null;
@@ -69,12 +76,17 @@ namespace MyFilmsPlugin.MyFilms.Utils
             // Creation of the bitmap to make the drawing 
             
   //          Bitmap bmp = new Bitmap(image.Width, image.Height);
-            Bitmap bmp = new Bitmap(150, 200);
+            //Bitmap bmp = new Bitmap(150, 200);
+            Bitmap bmp = new Bitmap(400, 600);
             // Creation of graphics to draw
             Graphics g = Graphics.FromImage(bmp);
 
             // It draws the image 
             g.DrawImage(image, 0, 0);
+
+            // Draw rectangle for title text  
+            // g.FillRectangle(Brushes.Gray, 50, 20, 300, 50);
+
             // the text is cut by separator space
             int wi = 0;
             string[] Sep = {" ","-","_","&","|",",",";"};
@@ -83,7 +95,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             float  wfont = 0;
             for (wi = 0; wi < arSplit.Length; wi++)
             {
-               wfont = (90) / arSplit[wi].Length * 3 / 2;
+               wfont = (340) / arSplit[wi].Length * 3 / 2;
                if (xfont == 0 || wfont < xfont)
                    xfont = wfont;
             }
@@ -92,7 +104,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 xfont = 64;
             for (wi = 0; wi < arSplit.Length; wi++)
             {
-                g.DrawString(arSplit[wi].ToUpper(), new Font("Courier New", xfont, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel), Brushes.White, new PointF(20, 30 + wi * xfont));
+                g.DrawString(arSplit[wi].ToUpper(), new Font("Arial", xfont, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel), Brushes.White, new PointF(20, 30 + wi * xfont));
             }
             //g.DrawString("+", new Font("Arial", 64, System.Drawing.FontStyle.Bold), Brushes.White, new PointF(1, 1));
             //g.DrawString("+", new Font("Arial", 64, System.Drawing.FontStyle.Bold), Brushes.White, new PointF(1,image.Height - 64));
