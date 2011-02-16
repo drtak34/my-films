@@ -1938,12 +1938,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //}
             }
 
+            string cleanedtitle = GetSearchString(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
+            LogMyFilms.Debug("MF: Clean title '" + MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() + "' to '" + cleanedtitle + "'");
+
             try
             {
               MyFilmsPlugin.MyFilms.Utils.ImageFast.CreateImage(
-                tempImage.Substring(0, tempImage.LastIndexOf(".")) + "title.jpg",
-                MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(),
-                tempImage.Substring(0, tempImage.LastIndexOf(".")) + "L.jpg");
+                tempImage.Substring(0, tempImage.LastIndexOf(".")) + "title.jpg", cleanedtitle, tempImage.Substring(0, tempImage.LastIndexOf(".")) + "L.jpg");
             }
             catch (Exception)
             {
@@ -1951,7 +1952,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               throw;
             }
 
-            
             string newPicture = tempImage.Substring(0, tempImage.LastIndexOf(".") ) + "L.jpg";
             string oldPicture = GUIPropertyManager.GetProperty("picture");
             if (oldPicture.Length == 0 || oldPicture == null)
@@ -1998,6 +1998,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           try
           {
             MediaInfoWrapper minfo = new MediaInfoWrapper(FileName);
+
+            LogMyFilms.Debug("MF: Mediainfo width: " + minfo.Width.ToString());
+            LogMyFilms.Debug("MF: Mediainfo height: " + minfo.Height.ToString());
+            //ToDo: Calculate aspect ratio here...
 
             return minfo.AspectRatio;
           }
@@ -5116,6 +5120,83 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else
           return true;
       }
+
+      /// <summary>
+      /// make a cleaned title out of the filename/original title
+      /// </summary>
+      private static string GetSearchString(string strMovie)
+      {
+        string strURL = strMovie;
+        //strURL = strURL.ToLower();
+        strURL = strURL.Replace(".", " ");
+        strURL = strURL.Trim();
+
+        RemoveAllAfter(ref strURL, "divx");
+        RemoveAllAfter(ref strURL, "xvid");
+        RemoveAllAfter(ref strURL, "dvd");
+        RemoveAllAfter(ref strURL, " dvdrip");
+        RemoveAllAfter(ref strURL, "svcd");
+        RemoveAllAfter(ref strURL, "mvcd");
+        RemoveAllAfter(ref strURL, "vcd");
+        RemoveAllAfter(ref strURL, "cd");
+        RemoveAllAfter(ref strURL, "ac3");
+        RemoveAllAfter(ref strURL, "ogg");
+        RemoveAllAfter(ref strURL, "ogm");
+        RemoveAllAfter(ref strURL, "internal");
+        RemoveAllAfter(ref strURL, "fragment");
+        RemoveAllAfter(ref strURL, "proper");
+        RemoveAllAfter(ref strURL, "limited");
+        RemoveAllAfter(ref strURL, "rerip");
+        RemoveAllAfter(ref strURL, "bluray");
+        RemoveAllAfter(ref strURL, "brrip");
+        RemoveAllAfter(ref strURL, "hddvd");
+        RemoveAllAfter(ref strURL, "x264");
+        RemoveAllAfter(ref strURL, "mbluray");
+        RemoveAllAfter(ref strURL, "1080p");
+        RemoveAllAfter(ref strURL, "720p");
+        RemoveAllAfter(ref strURL, "480p");
+        RemoveAllAfter(ref strURL, "r5");
+
+        RemoveAllAfter(ref strURL, "+divx");
+        RemoveAllAfter(ref strURL, "+xvid");
+        RemoveAllAfter(ref strURL, "+dvd");
+        RemoveAllAfter(ref strURL, "+dvdrip");
+        RemoveAllAfter(ref strURL, "+svcd");
+        RemoveAllAfter(ref strURL, "+mvcd");
+        RemoveAllAfter(ref strURL, "+vcd");
+        RemoveAllAfter(ref strURL, "+cd");
+        RemoveAllAfter(ref strURL, "+ac3");
+        RemoveAllAfter(ref strURL, "+ogg");
+        RemoveAllAfter(ref strURL, "+ogm");
+        RemoveAllAfter(ref strURL, "+internal");
+        RemoveAllAfter(ref strURL, "+fragment");
+        RemoveAllAfter(ref strURL, "+proper");
+        RemoveAllAfter(ref strURL, "+limited");
+        RemoveAllAfter(ref strURL, "+rerip");
+        RemoveAllAfter(ref strURL, "+bluray");
+        RemoveAllAfter(ref strURL, "+brrip");
+        RemoveAllAfter(ref strURL, "+hddvd");
+        RemoveAllAfter(ref strURL, "+x264");
+        RemoveAllAfter(ref strURL, "+mbluray");
+        RemoveAllAfter(ref strURL, "+1080p");
+        RemoveAllAfter(ref strURL, "+720p");
+        RemoveAllAfter(ref strURL, "+480p");
+        RemoveAllAfter(ref strURL, "+r5");
+        return strURL;
+      }
+      /// <summary>
+      /// cuts end of sting after strWord
+      /// </summary>
+      private static void RemoveAllAfter(ref string strLine, string strWord)
+      {
+        int iPos = strLine.IndexOf(strWord);
+        if (iPos > 0)
+        {
+          strLine = strLine.Substring(0, iPos);
+        }
+      }
+
+
 
     }
 
