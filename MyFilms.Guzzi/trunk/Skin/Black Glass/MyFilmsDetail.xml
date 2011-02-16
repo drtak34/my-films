@@ -1921,7 +1921,7 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<colordiffuse>a0ffffff</colordiffuse>
 			<centered>yes</centered>
-			<visible>!string.contains(#myfilms.user.source.value, \\)+!Control.HasFocus(10099)</visible>
+			<visible>!string.equals(#myfilms.user.source.value)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
@@ -1937,7 +1937,7 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<colordiffuse>d0ffffff</colordiffuse>
 			<centered>yes</centered>
-			<visible>string.contains(#myfilms.user.source.value, \\)+!Control.HasFocus(10099)</visible>
+			<visible>string.equals(#myfilms.user.source.value)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
@@ -1968,7 +1968,7 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>a0ffffff</colordiffuse>
-			<visible>!string.contains(#myfilms.user.sourcetrailer.value, \\)+!Control.HasFocus(10099)</visible>
+			<visible>!string.equals(#myfilms.user.sourcetrailer.value)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
@@ -1984,7 +1984,7 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>d0ffffff</colordiffuse>
-			<visible>string.contains(#myfilms.user.sourcetrailer.value, \\)+!Control.HasFocus(10099)</visible>
+			<visible>string.equals(#myfilms.user.sourcetrailer.value)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>

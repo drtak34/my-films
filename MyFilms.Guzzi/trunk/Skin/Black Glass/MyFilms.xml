@@ -557,7 +557,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.contains(#myfilms.user.source.value, \\)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.equals(#myfilms.user.source.value)</visible>
 		</control>
 		<control>
 			<description>Movie available Icon</description>
@@ -571,7 +571,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.contains(#myfilms.user.source.value, \\)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.source.value)</visible>
 		</control>
 
 <!-- Trailer Available Info -->
@@ -603,7 +603,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.contains(#myfilms.user.sourcetrailer.value, \\)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.equals(#myfilms.user.sourcetrailer.value)</visible>
 		</control>
 		<control>
 			<description>Trailer available Icon</description>
@@ -618,7 +618,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.contains(#myfilms.user.sourcetrailer.value, \\)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.value)</visible>
 		</control>
 
 <!-- THUMBVIEW -->

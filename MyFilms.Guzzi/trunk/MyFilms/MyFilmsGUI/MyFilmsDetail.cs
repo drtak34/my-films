@@ -1454,7 +1454,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (dlg.SelectedLabel > 0)
                     {
                         wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[dlg.SelectedLabel - 1];
-                        grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy,wscript, GetID, true, false, "");
+                        grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript, GetID, true, false, "");
                     }
                     break;
             }
@@ -1567,6 +1567,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (Result[1] != string.Empty && Result[1] != null)
                     {
                         ttitle = Result[1].ToString();
+                        if (string.IsNullOrEmpty(ttitle) && MyFilms.conf.StrTitle1 == "TranslatedTitle") // Added to fill ttiele with ot in case ttitle is empty and mastertitle = ttitle
+                          ttitle = Result[0].ToString();
                         wtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
                         if (wtitle.Contains(MyFilms.conf.TitleDelim))
                             wtitle = wtitle.Substring(wtitle.LastIndexOf(MyFilms.conf.TitleDelim) + 1);
