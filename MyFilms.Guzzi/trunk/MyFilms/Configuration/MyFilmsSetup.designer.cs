@@ -107,6 +107,7 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.radioButton2 = new System.Windows.Forms.CheckBox();
           this.radioButton1 = new System.Windows.Forms.CheckBox();
@@ -182,6 +183,7 @@
           this.MesFilmsImg = new System.Windows.Forms.TextBox();
           this.label2 = new System.Windows.Forms.Label();
           this.groupBox_ArtistImages = new System.Windows.Forms.GroupBox();
+          this.chkPersons = new System.Windows.Forms.CheckBox();
           this.btnResetThumbsArtist = new System.Windows.Forms.Button();
           this.chkDfltArtist = new System.Windows.Forms.CheckBox();
           this.ButDefCovArtist = new System.Windows.Forms.Button();
@@ -450,8 +452,6 @@
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
-          this.chkPersons = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -638,6 +638,16 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -1442,6 +1452,16 @@
           this.groupBox_ArtistImages.Text = "Person Images";
           this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, "Use this area to define a path where artist thumbs (images for persons) should be" +
                   " stored.\r\nWorks same way as cover images for movies.");
+          // 
+          // chkPersons
+          // 
+          this.chkPersons.AutoSize = true;
+          this.chkPersons.Location = new System.Drawing.Point(18, 15);
+          this.chkPersons.Name = "chkPersons";
+          this.chkPersons.Size = new System.Drawing.Size(95, 30);
+          this.chkPersons.TabIndex = 100;
+          this.chkPersons.Text = "use thumbs for\r\nperson views";
+          this.chkPersons.UseVisualStyleBackColor = true;
           // 
           // btnResetThumbsArtist
           // 
@@ -4337,26 +4357,6 @@
           this.General.Size = new System.Drawing.Size(755, 380);
           this.General.TabIndex = 46;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
-          // 
-          // chkPersons
-          // 
-          this.chkPersons.AutoSize = true;
-          this.chkPersons.Location = new System.Drawing.Point(18, 15);
-          this.chkPersons.Name = "chkPersons";
-          this.chkPersons.Size = new System.Drawing.Size(95, 30);
-          this.chkPersons.TabIndex = 100;
-          this.chkPersons.Text = "use thumbs for\r\nperson views";
-          this.chkPersons.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 
