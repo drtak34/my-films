@@ -272,7 +272,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
             {
               openFileDialog1.FileName = String.Empty;
-              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
+              if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\"))
+                openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\";
+              else
+                openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
             }
 
             if (MesFilmsCat.Text.Contains("\\"))
@@ -1520,7 +1523,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //btnLaunchAMCupdater.Enabled = false;
             //btnCreateAMCDesktopIcon.Enabled = false;
             //btnCreateAMCDefaultConfig.Enabled = false;
-            comboBoxLogoSpacing.ResetText();
+            //comboBoxLogoSpacing.ResetText();
         }
 
         private void ButDelet_Click(object sender, EventArgs e)
@@ -4107,6 +4110,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntViewItem1.Text = "Producer";
           AntViewText1.Text = "Producer";
 
+          cbWatched.Text = "Checked";
+
           // Now ask user for his movie directory...
           MessageBox.Show(
             "Now choose the directory containing your movies.",
@@ -4193,9 +4198,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-            Config_Name.Text = newConfig_Name;
             Refresh_Items(true);
-            Config_Name_Load();
+            Config_Name.Text = newConfig_Name;
+            //Config_Name_Load();
             System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Config_Name.Focus();
           }
