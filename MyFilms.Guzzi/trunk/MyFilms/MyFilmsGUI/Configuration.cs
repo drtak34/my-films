@@ -61,6 +61,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 SearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileName", "False");
                 SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", string.Empty);
+                ItemSearchGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchGrabberName", string.Empty);
                 ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", string.Empty);
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
                 SearchSubDirsTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirsTrailer", "No");
@@ -642,8 +643,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private string itemSearchFile = string.Empty;
         public string ItemSearchFile
         {
-            get { return itemSearchFile; }
-            set { itemSearchFile = value; }
+          get { return itemSearchFile; }
+          set { itemSearchFile = value; }
+        }
+        private string itemSearchGrabber = string.Empty;
+        public string ItemSearchGrabber
+        {
+          get { return itemSearchGrabber; }
+          set { itemSearchGrabber = value; }
         }
         private string itemSearchFileTrailer = string.Empty;
         public string ItemSearchFileTrailer

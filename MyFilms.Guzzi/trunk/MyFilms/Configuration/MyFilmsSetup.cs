@@ -385,9 +385,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if ((SearchFileName.Checked) && (ItemSearchFileName.Text.Length == 0))
             {
-                System.Windows.Forms.MessageBox.Show("The Field used for searching by Movie's File Name is mandatory  !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                ItemSearchFileName.Focus();
-                return;
+              System.Windows.Forms.MessageBox.Show("The Field used for searching by Movie's File Name is mandatory  !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+              ItemSearchFileName.Focus();
+              return;
+            }
+            if ((!string.IsNullOrEmpty(txtGrabber.Text)) && (ItemSearchGrabberName.Text.Length == 0))
+            {
+              System.Windows.Forms.MessageBox.Show("The Field used for searching internet data by Movie's Name is mandatory  !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+              ItemSearchGrabberName.Focus();
+              return;
             }
             if (AntViewItem1.Text == "Rating")
             {
@@ -844,6 +850,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", chkOnlyTitle.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", chkWindowsFileDialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", ItemSearchFileName.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberName", ItemSearchGrabberName.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", DefaultCover.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", DefaultCoverArtist.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverViews", DefaultCoverViews.Text);
@@ -1256,6 +1263,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             SortTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SortTitle", false);
             OnlyFile.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", false);
             ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", "");
+            ItemSearchGrabberName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberName", "");
             DefaultCover.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", "");
             DefaultCoverArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", "");
             DefaultCoverViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverViews", "");
@@ -1473,6 +1481,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CmdExe.ResetText();
             CmdPar.ResetText();
             ItemSearchFileName.ResetText();
+            ItemSearchGrabberName.ResetText();
             SearchFileName.Checked = false;
             chkSuppress.Checked = false;
             chksupplaystop.Checked = false;
@@ -3740,7 +3749,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
           AMCSetAttribute("Manual_Internet_Parser_Path", txtAMCUpd_cnf.Text);
           AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
-          AMCSetAttribute("Master_Title", AntTitle1.Text);
+          AMCSetAttribute("Master_Title", AntTitle1.Text); // Check, if this should be replaced by ItemSearchGrabber...
           AMCSetAttribute("Movie_Fanart_Path", MesFilmsFanart.Text);
           AMCSetAttribute("XML_File", MesFilmsCat.Text);
 
@@ -4028,18 +4037,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntTitle1.Text = "OriginalTitle";
             AntTitle2.Text = "TranslatedTitle";
             ItemSearchFileName.Text = "OriginalTitle";
+            ItemSearchGrabberName.Text = "OriginalTitle";
           }
           else
           {
             AntTitle1.Text = "TranslatedTitle";
             AntTitle2.Text = "OriginalTitle";
             ItemSearchFileName.Text = "TranslatedTitle";
+            ItemSearchGrabberName.Text = "TranslatedTitle";
           }
 
           AntSTitle.Text = "FormattedTitle";
           TitleDelim.Text = "\\";
-          ItemSearchFileName.Text = "TranslatedTitle";
-
 
           SearchFileName.Checked = true;
           chkFanart.Checked = true;

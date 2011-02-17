@@ -3568,16 +3568,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                 case "grabber":
                     string title = string.Empty;
-                    if (MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"] != null && MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString().Length > 0)
+                    if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString()))
                     {
-                      title = MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
-                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (translated)title = '" + title.ToString() + "'");                      
+                      title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
                     }
-                    else
+                    else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
                     {
-                      title = MyFilms.r[facadeView.SelectedListItem.ItemId]["OriginalTitle"].ToString();
-                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (original)title = '" + title.ToString() + "'");
+                      title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString();
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (master)title = '" + title.ToString() + "'");
                     }
+                    else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle2].ToString())) // Secondary title
+                    {
+                      title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle2].ToString();
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (secondary)title = '" + title.ToString() + "'");
+                    }
+                    else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
+                    {
+                      title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString();
+                      if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
+                      if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
+                      if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (media source)name = '" + title.ToString() + "'");
+                    }
+
                     if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                         title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
                     MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf);

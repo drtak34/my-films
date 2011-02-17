@@ -1154,15 +1154,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     setProcessAnimationStatus(true, m_SearchAnimation);
                     string title = string.Empty;
-                    if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+                    if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
                     {
-                      title = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (translated)title = '" + title.ToString() + "'");
+                      title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
                     }
-                    else
+                    else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
                     {
-                      title = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (original)title = '" + title.ToString() + "'");
+                      title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (master)title = '" + title.ToString() + "'");
+                    }
+                    else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
+                    {
+                      title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (secondary)title = '" + title.ToString() + "'");
+                    }
+                    else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
+                    {
+                      title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                      if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
+                      if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
+                      if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
+                      LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (media source)name = '" + title.ToString() + "'");
                     }
                     if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                         title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
