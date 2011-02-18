@@ -178,14 +178,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //Retrieve original directory of mediafiles
                     //directoryname
                     moviename = MyFilms.CurrentMovie.Substring(MyFilms.CurrentMovie.LastIndexOf(";") + 1);
-                    LogMyFilms.Debug("MyFilmsThumbs (GetThumbDirectory) Splittet Mediadirectoryname: '" + moviename.ToString() + "'");
+                    LogMyFilms.Debug("MyFilmsThumbs (GetThumbDirectory) splits media directory name: '" + moviename.ToString() + "'");
 
                     try
                     { directoryname = System.IO.Path.GetDirectoryName(moviename); }
                     catch
                     { directoryname = string.Empty; }
 
-                    LogMyFilms.Debug("MyFilmsThumbs (GetThumbDirectory) Get Thumbdirectoryname: '" + directoryname.ToString() + "'");
+                    LogMyFilms.Debug("MyFilmsThumbs (GetThumbDirectory) get thumb directory name: '" + directoryname.ToString() + "'");
                     
                     LoadThumbs(directoryname);
                     LogMyFilms.Debug("MyFilmsThumbs: PropertyLoaded !");

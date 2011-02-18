@@ -2,7 +2,8 @@
 	<id>7986</id>
 	<defaultcontrol>50</defaultcontrol>
 	<allowoverlay>player.hasmedia+!facadeview.filmstrip</allowoverlay>
-	<define>#header.label:#myfilms.config.pluginname (#myfilms.config.currentconfig)</define>
+<!--	<define>#header.label:#myfilms.config.pluginname (#myfilms.config.currentconfig)</define> -->
+	<define>#header.label:#myfilms.config.currentconfig</define>
 	<define>#header.background:hover_Films.png</define>
 	<animation effect="fade" time="250" start="100" end="100">WindowClose</animation>
 	<controls>
@@ -585,6 +586,18 @@
 			<posY>698</posY>
 			<width>80</width>
 			<label>Trailer:</label>
+			<font>font10</font>
+			<textcolor>6FFFFFFF</textcolor>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
+		</control>
+		<control>
+			<description>Trailer Count</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>737</posX>
+			<posY>698</posY>
+			<width>80</width>
+			<label>#myfilms.user.sourcetrailer.count</label>
 			<font>font10</font>
 			<textcolor>6FFFFFFF</textcolor>
 			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>

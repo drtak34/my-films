@@ -1272,7 +1272,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return string.Empty;
             }
             if (dlg.SelectedLabelText.Length > 0)
+            {
+              string Catalog = XmlConfig.ReadXmlConfig("MyFilms", dlg.SelectedLabelText, "AntCatalog", string.Empty);
+              if (!System.IO.File.Exists(Catalog))
+              {
+                MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+                dlgOk.SetHeading(10798624);
+                dlgOk.SetLine(1, "Cannot load Configuration:");
+                dlgOk.SetLine(2, "'" + dlg.SelectedLabelText + "'");
+                dlgOk.SetLine(3, "Verify your settings !");
+                dlgOk.DoModal(MediaPortal.GUI.Library.GUIWindowManager.ActiveWindow);
+                return string.Empty;
+              }
+              else
+              {
                 return dlg.SelectedLabelText;
+              }
+            }
             return string.Empty;
         }
         //--------------------------------------------------------------------------------------------

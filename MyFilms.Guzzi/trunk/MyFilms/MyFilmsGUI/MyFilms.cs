@@ -1220,7 +1220,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                         Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
                                     else
                                         Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                // Disabled "oseudi covers with label name"
+                                // Disabled "pseudo covers with label name"
                                 //if (!System.IO.File.Exists(strThumb + ".png"))
                                 //    if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCoverViews))
                                 //        ImageFast.CreateImage(strThumb + ".png", item.Label);
@@ -1865,7 +1865,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
               strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
             bool getThumbs = false;
-            if (((MyFilms.conf.StrViews) || (MyFilms.conf.StrPersons)) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")) || (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country")))) 
+            if (MyFilms.conf.StrViews && (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country")))
+              getThumbs = true;
+            if (MyFilms.conf.StrPersons && (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director")))
               getThumbs = true;
             bool createFanartDir = false;
             if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country") 
@@ -2483,6 +2485,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     newConfig = Configuration.Control_Access_Config(newConfig, GetID);
                     if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
                     {
+                        InitMainScreen(); // reset all properties and values
                         //Change "Config":
                         if (facadeView.SelectedListItem != null)
                             Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
@@ -3568,7 +3571,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                 case "grabber":
                     string title = string.Empty;
-                    if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString()))
+                    if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString()))
                     {
                       title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
                       LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
@@ -5632,12 +5635,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //directoryname
             movieName = (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim();
             movieName = movieName.Substring(movieName.LastIndexOf(";") + 1);
-            LogMyFilms.Debug("MF: (SearchtrailerLocal) Splittet Mediadirectoryname: '" + movieName + "'");
+            LogMyFilms.Debug("MF: (SearchtrailerLocal) splits media directory name: '" + movieName + "'");
             try
             { directoryname = System.IO.Path.GetDirectoryName(movieName); }
             catch
             { directoryname = string.Empty; }
-            LogMyFilms.Debug("MF: (SearchtrailerLocal) Get Mediadirectoryname: '" + directoryname + "'");
+            LogMyFilms.Debug("MF: (SearchtrailerLocal) get media directory name: '" + directoryname + "'");
 
             //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
             if (!string.IsNullOrEmpty(directoryname))
