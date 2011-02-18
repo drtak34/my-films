@@ -9,7 +9,7 @@ using System.IO;
 class XmlConf
 {
     
-    //Listes qui contiennent tous les noeuds
+    //Lists that contain all nodes
     public List<ListNode> listGen = new List<ListNode>();
     public List<ListNode> listSearch = new List<ListNode>();
     public List<ListNode> listDetail = new List<ListNode>();
@@ -44,7 +44,7 @@ class XmlConf
 
     public void init(string configFile)
     {
-        //Chargement du fichier de conf
+        //Loading conf file
         XmlDocument doc = new XmlDocument();
         doc.Load(configFile);
         
@@ -77,8 +77,8 @@ class XmlConf
     }
 
     /// <summary>
-    /// Ajoute un nouvel élément dans la liste spécifiée.
-    /// Paramètre list : 1 pour listGen, 2 pour listSearch, 3 pour listDetail
+    /// Adds a new element in the specified list.
+    /// Parameter List : 1 for listGen, 2 for listSearch, 3 for listDetail
     /// </summary>
     public void setList(int list, XmlNode node)
     {
@@ -185,63 +185,80 @@ class ListNode
 public class TagName
 {
 
-    public static string DBName = "DBName";
-    public static string URLPrefix = "URLPrefix";
-    public static string URL = "URL";
-    public static string KeyStartList = "KeyStartList";
-    public static string KeyEndList = "KeyEndList";
-    public static string KeyNextPage = "KeyNextPage";
-    public static string KeyStartPage = "KeyStartPage";
-    public static string KeyStepPage = "KeyStepPage";
-    public static string KeyStartTitle = "KeyStartTitle";
-    public static string KeyEndTitle = "KeyEndTitle";
-    public static string KeyStartDirector = "KeyStartDirector";
-    public static string KeyEndDirector = "KeyEndDirector";
-    public static string KeyStartYear = "KeyStartYear";
-    public static string KeyEndYear = "KeyEndYear";
-    public static string KeyYearIndex = "KeyYearIndex";
-    public static string KeyStartLink = "KeyStartLink";
-    public static string KeyEndLink = "KeyEndLink";
-    public static string KeyStartBody = "KeyStartBody";
-    public static string KeyEndBody = "KeyEndBody";
-    public static string KeyStartOTitle = "KeyStartOTitle";
-    public static string KeyEndOTitle = "KeyEndOTitle";
-    public static string KeyOTitleIndex = "KeyOTitleIndex";
-    public static string KeyStartTTitle = "KeyStartTTitle";
-    public static string KeyEndTTitle = "KeyEndTTitle";
-    public static string KeyTTitleIndex = "KeyTTitleIndex"; 
-    public static string KeyStartImg = "KeyStartImg";
-    public static string KeyEndImg = "KeyEndImg";
-    public static string KeyImgIndex = "KeyImgIndex";
-    public static string KeyStartLinkImg = "KeyStartLinkImg";
-    public static string KeyEndLinkImg = "KeyEndLinkImg";
-    public static string KeyLinkImgIndex = "KeyLinkImgIndex";
-    public static string KeyStartRate = "KeyStartRate";
-    public static string KeyEndRate = "KeyEndRate";
-    public static string KeyRateIndex = "KeyRateIndex";
-    public static string KeyStartRate2 = "KeyStartRate2";
-    public static string KeyEndRate2 = "KeyEndRate2";
-    public static string KeyRate2Index = "KeyRate2Index";
-    public static string KeyStartSyn = "KeyStartSyn";
-    public static string KeyEndSyn = "KeyEndSyn";
-    public static string KeySynIndex = "KeySynIndex";
-    public static string KeyStartRealise = "KeyStartRealise";
-    public static string KeyEndRealise = "KeyEndRealise";
-    public static string KeyRealiseIndex = "KeyRealiseIndex";
-    public static string KeyStartProduct = "KeyStartProduct";
-    public static string KeyEndProduct = "KeyEndProduct";
-    public static string KeyProductIndex = "KeyProductIndex";
-    public static string KeyStartCredits = "KeyStartCredits";
-    public static string KeyEndCredits = "KeyEndCredits";
-    public static string KeyCreditsIndex = "KeyCreditsIndex";
-    public static string KeyCreditsRegExp = "KeyCreditsRegExp";
-    public static string KeyStartCountry = "KeyStartCountry";
-    public static string KeyEndCountry = "KeyEndCountry";
-    public static string KeyCountryIndex = "KeyCountryIndex";
-    public static string KeyStartGenre = "KeyStartGenre";
-    public static string KeyEndGenre = "KeyEndGenre";
-    public static string KeyGenreIndex = "KeyGenreIndex";
-    public static string BaseRating = "BaseRating";
+  public static string DBName = "DBName";
+  public static string URLPrefix = "URLPrefix";
+  public static string URL = "URL";
+  public static string KeyStartList = "KeyStartList";           // List
+  public static string KeyEndList = "KeyEndList";
+  public static string KeyNextPage = "KeyNextPage";             // Page
+  public static string KeyStartPage = "KeyStartPage";
+  public static string KeyStepPage = "KeyStepPage";
+  public static string KeyStartTitle = "KeyStartTitle";         // Title
+  public static string KeyEndTitle = "KeyEndTitle";
+  public static string KeyStartDirector = "KeyStartDirector";   // Director
+  public static string KeyEndDirector = "KeyEndDirector";
+  public static string KeyStartYear = "KeyStartYear";           // Year
+  public static string KeyEndYear = "KeyEndYear";
+  public static string KeyYearIndex = "KeyYearIndex";
+  public static string KeyStartLink = "KeyStartLink";           // Start / End Grabber page
+  public static string KeyEndLink = "KeyEndLink";
+  public static string KeyStartBody = "KeyStartBody";
+  public static string KeyEndBody = "KeyEndBody";
+  public static string KeyStartOTitle = "KeyStartOTitle";       // TranslatedTitle
+  public static string KeyEndOTitle = "KeyEndOTitle";
+  public static string KeyOTitleIndex = "KeyOTitleIndex";
+  public static string KeyStartTTitle = "KeyStartTTitle";
+  public static string KeyEndTTitle = "KeyEndTTitle";
+  public static string KeyTTitleIndex = "KeyTTitleIndex"; 
+  public static string KeyStartImg = "KeyStartImg";             // Image
+  public static string KeyEndImg = "KeyEndImg";
+  public static string KeyImgIndex = "KeyImgIndex";
+  public static string KeyStartLinkImg = "KeyStartLinkImg";     // Linkpage for Image
+  public static string KeyEndLinkImg = "KeyEndLinkImg";
+  public static string KeyLinkImgIndex = "KeyLinkImgIndex";
+  public static string KeyStartRate = "KeyStartRate";           // Rate
+  public static string KeyEndRate = "KeyEndRate";
+  public static string KeyRateIndex = "KeyRateIndex";
+  public static string KeyStartRate2 = "KeyStartRate2";
+  public static string KeyEndRate2 = "KeyEndRate2";
+  public static string KeyRate2Index = "KeyRate2Index";
+  public static string KeyStartSyn = "KeyStartSyn";             // Synopsis / Description
+  public static string KeyEndSyn = "KeyEndSyn";
+  public static string KeySynIndex = "KeySynIndex";
+  public static string KeyStartRealise = "KeyStartRealise";
+  public static string KeyEndRealise = "KeyEndRealise";
+  public static string KeyRealiseIndex = "KeyRealiseIndex";
+  public static string KeyStartProduct = "KeyStartProduct";
+  public static string KeyEndProduct = "KeyEndProduct";
+  public static string KeyProductIndex = "KeyProductIndex";
+  public static string KeyStartCredits = "KeyStartCredits";     // Credits / Actors
+  public static string KeyEndCredits = "KeyEndCredits";
+  public static string KeyCreditsIndex = "KeyCreditsIndex";
+  public static string KeyCreditsRegExp = "KeyCreditsRegExp";
+  public static string KeyStartCountry = "KeyStartCountry";     // Country
+  public static string KeyEndCountry = "KeyEndCountry";
+  public static string KeyCountryIndex = "KeyCountryIndex";
+  public static string KeyStartGenre = "KeyStartGenre";         // Genre/Categories
+  public static string KeyEndGenre = "KeyEndGenre";
+  public static string KeyGenreIndex = "KeyGenreIndex";
+  public static string BaseRating = "BaseRating";               // Baserating
+  // Guzzi: Added to extend Grabber
+  public static string KeyStartLinkMultipurpose = "KeyStartLinkMultipurpose";
+  public static string KeyEndLinkMultipurpose = "KeyEndLinkMultipurpose";
+  public static string KeyLinkMultipurposeIndex = "KeyLinkMultipurposeIndex";
+//  public static string KeyLinkMultipurposeBaserelation = "KeyLinkMultipurposeBaserelation";
 
+  public static string KeyStartComment = "KeyStartComment";     // Comment
+  public static string KeyEndComment = "KeyEndComment";
+  public static string KeyCommentIndex = "KeyCommentIndex";
+  public static string KeyStartLanguage = "KeyStartLanguage";     // Language
+  public static string KeyEndLanguage = "KeyEndLanguage";
+  public static string KeyLanguageIndex = "KeyLanguageIndex";
+  public static string KeyStartTagline = "KeyStartTagline";     // Tagline 
+  public static string KeyEndTagline = "KeyEndTagline";
+  public static string KeyTaglineIndex = "KeyTaglineIndex";
+  public static string KeyStartCertification = "KeyStartCertification";     // Certification
+  public static string KeyEndCertification = "KeyEndCertification";
+  public static string KeyCertificationIndex = "KeyCertificationIndex";
 }
 

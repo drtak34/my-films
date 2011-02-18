@@ -49,11 +49,11 @@ namespace Grabber_Interface
           this.label19 = new System.Windows.Forms.Label();
           this.textStartPage = new System.Windows.Forms.TextBox();
           this.buttonPrevParam1 = new System.Windows.Forms.Button();
-          this.button5 = new System.Windows.Forms.Button();
+          this.button_Preview_All = new System.Windows.Forms.Button();
           this.label17 = new System.Windows.Forms.Label();
           this.textRedir = new System.Windows.Forms.TextBox();
-          this.button4 = new System.Windows.Forms.Button();
-          this.button1 = new System.Windows.Forms.Button();
+          this.button_GoDetailPage = new System.Windows.Forms.Button();
+          this.button_Preview = new System.Windows.Forms.Button();
           this.label9 = new System.Windows.Forms.Label();
           this.textBody = new System.Windows.Forms.RichTextBox();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -71,24 +71,24 @@ namespace Grabber_Interface
           this.TextKeyStop = new System.Windows.Forms.TextBox();
           this.TextKeyStart = new System.Windows.Forms.TextBox();
           this.label5 = new System.Windows.Forms.Label();
-          this.comboBox1 = new System.Windows.Forms.ComboBox();
+          this.cb_Parameter = new System.Windows.Forms.ComboBox();
           this.TextURL = new System.Windows.Forms.TextBox();
           this.label4 = new System.Windows.Forms.Label();
           this.tabPage2 = new System.Windows.Forms.TabPage();
           this.label21 = new System.Windows.Forms.Label();
           this.labelImageSize = new System.Windows.Forms.Label();
-          this.btnLoadPreview = new System.Windows.Forms.Button();
+          this.btnLoadDetailPreview = new System.Windows.Forms.Button();
           this.lblResult = new System.Windows.Forms.Label();
           this.textURLPreview = new System.Windows.Forms.TextBox();
-          this.buttonPrevParam = new System.Windows.Forms.Button();
-          this.buttonPreview = new System.Windows.Forms.Button();
+          this.buttonPrevParamDetail = new System.Windows.Forms.Button();
+          this.buttonPreviewDetailFullGrab = new System.Windows.Forms.Button();
           this.textBodyDetail = new System.Windows.Forms.RichTextBox();
           this.label10 = new System.Windows.Forms.Label();
           this.groupBox3 = new System.Windows.Forms.GroupBox();
           this.textPreview = new System.Windows.Forms.RichTextBox();
-          this.buttonFind = new System.Windows.Forms.Button();
+          this.button_Find_Detail = new System.Windows.Forms.Button();
           this.textFind = new System.Windows.Forms.TextBox();
-          this.ButtonLoad = new System.Windows.Forms.Button();
+          this.Button_Load_URL = new System.Windows.Forms.Button();
           this.groupBox4 = new System.Windows.Forms.GroupBox();
           this.btResetDetail = new System.Windows.Forms.Button();
           this.label18 = new System.Windows.Forms.Label();
@@ -104,23 +104,23 @@ namespace Grabber_Interface
           this.TextKeyStopD = new System.Windows.Forms.TextBox();
           this.TextKeyStartD = new System.Windows.Forms.TextBox();
           this.label14 = new System.Windows.Forms.Label();
-          this.cbParamDetail = new System.Windows.Forms.ComboBox();
+          this.cb_ParamDetail = new System.Windows.Forms.ComboBox();
           this.TextURLDetail = new System.Windows.Forms.TextBox();
           this.label15 = new System.Windows.Forms.Label();
           this.label3 = new System.Windows.Forms.Label();
           this.textName = new System.Windows.Forms.TextBox();
           this.label2 = new System.Windows.Forms.Label();
           this.textURLPrefix = new System.Windows.Forms.TextBox();
-          this.buttonNew = new System.Windows.Forms.Button();
-          this.buttonSave = new System.Windows.Forms.Button();
+          this.button_New = new System.Windows.Forms.Button();
+          this.button_Save = new System.Windows.Forms.Button();
           this.radioButtonFR = new System.Windows.Forms.RadioButton();
           this.radioButtonEN = new System.Windows.Forms.RadioButton();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-          this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.button2 = new System.Windows.Forms.Button();
           this.button3 = new System.Windows.Forms.Button();
+          this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabControl1.SuspendLayout();
           this.tabPage1.SuspendLayout();
           this.groupBox6.SuspendLayout();
@@ -169,11 +169,11 @@ namespace Grabber_Interface
           this.tabPage1.Controls.Add(this.groupBox6);
           this.tabPage1.Controls.Add(this.groupBox5);
           this.tabPage1.Controls.Add(this.buttonPrevParam1);
-          this.tabPage1.Controls.Add(this.button5);
+          this.tabPage1.Controls.Add(this.button_Preview_All);
           this.tabPage1.Controls.Add(this.label17);
           this.tabPage1.Controls.Add(this.textRedir);
-          this.tabPage1.Controls.Add(this.button4);
-          this.tabPage1.Controls.Add(this.button1);
+          this.tabPage1.Controls.Add(this.button_GoDetailPage);
+          this.tabPage1.Controls.Add(this.button_Preview);
           this.tabPage1.Controls.Add(this.label9);
           this.tabPage1.Controls.Add(this.textBody);
           this.tabPage1.Controls.Add(this.groupBox2);
@@ -280,13 +280,13 @@ namespace Grabber_Interface
           this.buttonPrevParam1.UseVisualStyleBackColor = true;
           this.buttonPrevParam1.Click += new System.EventHandler(this.buttonPrevParam1_Click);
           // 
-          // button5
+          // button_Preview_All
           // 
-          resources.ApplyResources(this.button5, "button5");
-          this.button5.Name = "button5";
-          this.toolTip1.SetToolTip(this.button5, resources.GetString("button5.ToolTip"));
-          this.button5.UseVisualStyleBackColor = true;
-          this.button5.Click += new System.EventHandler(this.button5_Click);
+          resources.ApplyResources(this.button_Preview_All, "button_Preview_All");
+          this.button_Preview_All.Name = "button_Preview_All";
+          this.toolTip1.SetToolTip(this.button_Preview_All, resources.GetString("button_Preview_All.ToolTip"));
+          this.button_Preview_All.UseVisualStyleBackColor = true;
+          this.button_Preview_All.Click += new System.EventHandler(this.button5_Click);
           // 
           // label17
           // 
@@ -299,21 +299,21 @@ namespace Grabber_Interface
           this.textRedir.Name = "textRedir";
           this.toolTip1.SetToolTip(this.textRedir, resources.GetString("textRedir.ToolTip"));
           // 
-          // button4
+          // button_GoDetailPage
           // 
-          resources.ApplyResources(this.button4, "button4");
-          this.button4.Name = "button4";
-          this.toolTip1.SetToolTip(this.button4, resources.GetString("button4.ToolTip"));
-          this.button4.UseVisualStyleBackColor = true;
-          this.button4.Click += new System.EventHandler(this.button4_Click);
+          resources.ApplyResources(this.button_GoDetailPage, "button_GoDetailPage");
+          this.button_GoDetailPage.Name = "button_GoDetailPage";
+          this.toolTip1.SetToolTip(this.button_GoDetailPage, resources.GetString("button_GoDetailPage.ToolTip"));
+          this.button_GoDetailPage.UseVisualStyleBackColor = true;
+          this.button_GoDetailPage.Click += new System.EventHandler(this.button4_Click);
           // 
-          // button1
+          // button_Preview
           // 
-          resources.ApplyResources(this.button1, "button1");
-          this.button1.Name = "button1";
-          this.toolTip1.SetToolTip(this.button1, resources.GetString("button1.ToolTip"));
-          this.button1.UseVisualStyleBackColor = true;
-          this.button1.Click += new System.EventHandler(this.button1_Click_1);
+          resources.ApplyResources(this.button_Preview, "button_Preview");
+          this.button_Preview.Name = "button_Preview";
+          this.toolTip1.SetToolTip(this.button_Preview, resources.GetString("button_Preview.ToolTip"));
+          this.button_Preview.UseVisualStyleBackColor = true;
+          this.button_Preview.Click += new System.EventHandler(this.button1_Click_1);
           // 
           // label9
           // 
@@ -368,7 +368,7 @@ namespace Grabber_Interface
           this.groupBox1.Controls.Add(this.TextKeyStop);
           this.groupBox1.Controls.Add(this.TextKeyStart);
           this.groupBox1.Controls.Add(this.label5);
-          this.groupBox1.Controls.Add(this.comboBox1);
+          this.groupBox1.Controls.Add(this.cb_Parameter);
           resources.ApplyResources(this.groupBox1, "groupBox1");
           this.groupBox1.Name = "groupBox1";
           this.groupBox1.TabStop = false;
@@ -431,19 +431,19 @@ namespace Grabber_Interface
           resources.ApplyResources(this.label5, "label5");
           this.label5.Name = "label5";
           // 
-          // comboBox1
+          // cb_Parameter
           // 
-          this.comboBox1.FormattingEnabled = true;
-          this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2"),
-            resources.GetString("comboBox1.Items3"),
-            resources.GetString("comboBox1.Items4")});
-          resources.ApplyResources(this.comboBox1, "comboBox1");
-          this.comboBox1.Name = "comboBox1";
-          this.toolTip1.SetToolTip(this.comboBox1, resources.GetString("comboBox1.ToolTip"));
-          this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboSearch_SelectedIndexChanged);
+          this.cb_Parameter.FormattingEnabled = true;
+          this.cb_Parameter.Items.AddRange(new object[] {
+            resources.GetString("cb_Parameter.Items"),
+            resources.GetString("cb_Parameter.Items1"),
+            resources.GetString("cb_Parameter.Items2"),
+            resources.GetString("cb_Parameter.Items3"),
+            resources.GetString("cb_Parameter.Items4")});
+          resources.ApplyResources(this.cb_Parameter, "cb_Parameter");
+          this.cb_Parameter.Name = "cb_Parameter";
+          this.toolTip1.SetToolTip(this.cb_Parameter, resources.GetString("cb_Parameter.ToolTip"));
+          this.cb_Parameter.SelectedIndexChanged += new System.EventHandler(this.comboSearch_SelectedIndexChanged);
           // 
           // TextURL
           // 
@@ -461,17 +461,17 @@ namespace Grabber_Interface
           // 
           this.tabPage2.Controls.Add(this.label21);
           this.tabPage2.Controls.Add(this.labelImageSize);
-          this.tabPage2.Controls.Add(this.btnLoadPreview);
+          this.tabPage2.Controls.Add(this.btnLoadDetailPreview);
           this.tabPage2.Controls.Add(this.lblResult);
           this.tabPage2.Controls.Add(this.textURLPreview);
-          this.tabPage2.Controls.Add(this.buttonPrevParam);
-          this.tabPage2.Controls.Add(this.buttonPreview);
+          this.tabPage2.Controls.Add(this.buttonPrevParamDetail);
+          this.tabPage2.Controls.Add(this.buttonPreviewDetailFullGrab);
           this.tabPage2.Controls.Add(this.textBodyDetail);
           this.tabPage2.Controls.Add(this.label10);
           this.tabPage2.Controls.Add(this.groupBox3);
-          this.tabPage2.Controls.Add(this.buttonFind);
+          this.tabPage2.Controls.Add(this.button_Find_Detail);
           this.tabPage2.Controls.Add(this.textFind);
-          this.tabPage2.Controls.Add(this.ButtonLoad);
+          this.tabPage2.Controls.Add(this.Button_Load_URL);
           this.tabPage2.Controls.Add(this.groupBox4);
           this.tabPage2.Controls.Add(this.TextURLDetail);
           this.tabPage2.Controls.Add(this.label15);
@@ -489,12 +489,12 @@ namespace Grabber_Interface
           resources.ApplyResources(this.labelImageSize, "labelImageSize");
           this.labelImageSize.Name = "labelImageSize";
           // 
-          // btnLoadPreview
+          // btnLoadDetailPreview
           // 
-          resources.ApplyResources(this.btnLoadPreview, "btnLoadPreview");
-          this.btnLoadPreview.Name = "btnLoadPreview";
-          this.btnLoadPreview.UseVisualStyleBackColor = true;
-          this.btnLoadPreview.Click += new System.EventHandler(this.btnLoadPreview_Click);
+          resources.ApplyResources(this.btnLoadDetailPreview, "btnLoadDetailPreview");
+          this.btnLoadDetailPreview.Name = "btnLoadDetailPreview";
+          this.btnLoadDetailPreview.UseVisualStyleBackColor = true;
+          this.btnLoadDetailPreview.Click += new System.EventHandler(this.btnLoadPreview_Click);
           // 
           // lblResult
           // 
@@ -507,21 +507,21 @@ namespace Grabber_Interface
           resources.ApplyResources(this.textURLPreview, "textURLPreview");
           this.textURLPreview.Name = "textURLPreview";
           // 
-          // buttonPrevParam
+          // buttonPrevParamDetail
           // 
-          resources.ApplyResources(this.buttonPrevParam, "buttonPrevParam");
-          this.buttonPrevParam.Name = "buttonPrevParam";
-          this.toolTip1.SetToolTip(this.buttonPrevParam, resources.GetString("buttonPrevParam.ToolTip"));
-          this.buttonPrevParam.UseVisualStyleBackColor = true;
-          this.buttonPrevParam.Click += new System.EventHandler(this.button6_Click);
+          resources.ApplyResources(this.buttonPrevParamDetail, "buttonPrevParamDetail");
+          this.buttonPrevParamDetail.Name = "buttonPrevParamDetail";
+          this.toolTip1.SetToolTip(this.buttonPrevParamDetail, resources.GetString("buttonPrevParamDetail.ToolTip"));
+          this.buttonPrevParamDetail.UseVisualStyleBackColor = true;
+          this.buttonPrevParamDetail.Click += new System.EventHandler(this.button6_Click);
           // 
-          // buttonPreview
+          // buttonPreviewDetailFullGrab
           // 
-          resources.ApplyResources(this.buttonPreview, "buttonPreview");
-          this.buttonPreview.Name = "buttonPreview";
-          this.toolTip1.SetToolTip(this.buttonPreview, resources.GetString("buttonPreview.ToolTip"));
-          this.buttonPreview.UseVisualStyleBackColor = true;
-          this.buttonPreview.Click += new System.EventHandler(this.buttonPreview_Click);
+          resources.ApplyResources(this.buttonPreviewDetailFullGrab, "buttonPreviewDetailFullGrab");
+          this.buttonPreviewDetailFullGrab.Name = "buttonPreviewDetailFullGrab";
+          this.toolTip1.SetToolTip(this.buttonPreviewDetailFullGrab, resources.GetString("buttonPreviewDetailFullGrab.ToolTip"));
+          this.buttonPreviewDetailFullGrab.UseVisualStyleBackColor = true;
+          this.buttonPreviewDetailFullGrab.Click += new System.EventHandler(this.buttonPreview_Click);
           // 
           // textBodyDetail
           // 
@@ -549,26 +549,26 @@ namespace Grabber_Interface
           resources.ApplyResources(this.textPreview, "textPreview");
           this.textPreview.Name = "textPreview";
           // 
-          // buttonFind
+          // button_Find_Detail
           // 
-          resources.ApplyResources(this.buttonFind, "buttonFind");
-          this.buttonFind.Name = "buttonFind";
-          this.toolTip1.SetToolTip(this.buttonFind, resources.GetString("buttonFind.ToolTip"));
-          this.buttonFind.UseVisualStyleBackColor = true;
-          this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
+          resources.ApplyResources(this.button_Find_Detail, "button_Find_Detail");
+          this.button_Find_Detail.Name = "button_Find_Detail";
+          this.toolTip1.SetToolTip(this.button_Find_Detail, resources.GetString("button_Find_Detail.ToolTip"));
+          this.button_Find_Detail.UseVisualStyleBackColor = true;
+          this.button_Find_Detail.Click += new System.EventHandler(this.buttonFind_Click);
           // 
           // textFind
           // 
           resources.ApplyResources(this.textFind, "textFind");
           this.textFind.Name = "textFind";
           // 
-          // ButtonLoad
+          // Button_Load_URL
           // 
-          resources.ApplyResources(this.ButtonLoad, "ButtonLoad");
-          this.ButtonLoad.Name = "ButtonLoad";
-          this.toolTip1.SetToolTip(this.ButtonLoad, resources.GetString("ButtonLoad.ToolTip"));
-          this.ButtonLoad.UseVisualStyleBackColor = true;
-          this.ButtonLoad.Click += new System.EventHandler(this.ButtonLoad_Click);
+          resources.ApplyResources(this.Button_Load_URL, "Button_Load_URL");
+          this.Button_Load_URL.Name = "Button_Load_URL";
+          this.toolTip1.SetToolTip(this.Button_Load_URL, resources.GetString("Button_Load_URL.ToolTip"));
+          this.Button_Load_URL.UseVisualStyleBackColor = true;
+          this.Button_Load_URL.Click += new System.EventHandler(this.ButtonLoad_Click);
           // 
           // groupBox4
           // 
@@ -586,7 +586,7 @@ namespace Grabber_Interface
           this.groupBox4.Controls.Add(this.TextKeyStopD);
           this.groupBox4.Controls.Add(this.TextKeyStartD);
           this.groupBox4.Controls.Add(this.label14);
-          this.groupBox4.Controls.Add(this.cbParamDetail);
+          this.groupBox4.Controls.Add(this.cb_ParamDetail);
           resources.ApplyResources(this.groupBox4, "groupBox4");
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.TabStop = false;
@@ -687,28 +687,28 @@ namespace Grabber_Interface
           resources.ApplyResources(this.label14, "label14");
           this.label14.Name = "label14";
           // 
-          // cbParamDetail
+          // cb_ParamDetail
           // 
-          this.cbParamDetail.FormattingEnabled = true;
-          this.cbParamDetail.Items.AddRange(new object[] {
-            resources.GetString("cbParamDetail.Items"),
-            resources.GetString("cbParamDetail.Items1"),
-            resources.GetString("cbParamDetail.Items2"),
-            resources.GetString("cbParamDetail.Items3"),
-            resources.GetString("cbParamDetail.Items4"),
-            resources.GetString("cbParamDetail.Items5"),
-            resources.GetString("cbParamDetail.Items6"),
-            resources.GetString("cbParamDetail.Items7"),
-            resources.GetString("cbParamDetail.Items8"),
-            resources.GetString("cbParamDetail.Items9"),
-            resources.GetString("cbParamDetail.Items10"),
-            resources.GetString("cbParamDetail.Items11"),
-            resources.GetString("cbParamDetail.Items12"),
-            resources.GetString("cbParamDetail.Items13")});
-          resources.ApplyResources(this.cbParamDetail, "cbParamDetail");
-          this.cbParamDetail.Name = "cbParamDetail";
-          this.toolTip1.SetToolTip(this.cbParamDetail, resources.GetString("cbParamDetail.ToolTip"));
-          this.cbParamDetail.SelectedIndexChanged += new System.EventHandler(this.cbParamDetail_SelectedIndexChanged);
+          this.cb_ParamDetail.FormattingEnabled = true;
+          this.cb_ParamDetail.Items.AddRange(new object[] {
+            resources.GetString("cb_ParamDetail.Items"),
+            resources.GetString("cb_ParamDetail.Items1"),
+            resources.GetString("cb_ParamDetail.Items2"),
+            resources.GetString("cb_ParamDetail.Items3"),
+            resources.GetString("cb_ParamDetail.Items4"),
+            resources.GetString("cb_ParamDetail.Items5"),
+            resources.GetString("cb_ParamDetail.Items6"),
+            resources.GetString("cb_ParamDetail.Items7"),
+            resources.GetString("cb_ParamDetail.Items8"),
+            resources.GetString("cb_ParamDetail.Items9"),
+            resources.GetString("cb_ParamDetail.Items10"),
+            resources.GetString("cb_ParamDetail.Items11"),
+            resources.GetString("cb_ParamDetail.Items12"),
+            resources.GetString("cb_ParamDetail.Items13")});
+          resources.ApplyResources(this.cb_ParamDetail, "cb_ParamDetail");
+          this.cb_ParamDetail.Name = "cb_ParamDetail";
+          this.toolTip1.SetToolTip(this.cb_ParamDetail, resources.GetString("cb_ParamDetail.ToolTip"));
+          this.cb_ParamDetail.SelectedIndexChanged += new System.EventHandler(this.cbParamDetail_SelectedIndexChanged);
           // 
           // TextURLDetail
           // 
@@ -743,21 +743,21 @@ namespace Grabber_Interface
           this.textURLPrefix.Name = "textURLPrefix";
           this.toolTip1.SetToolTip(this.textURLPrefix, resources.GetString("textURLPrefix.ToolTip"));
           // 
-          // buttonNew
+          // button_New
           // 
-          resources.ApplyResources(this.buttonNew, "buttonNew");
-          this.buttonNew.Name = "buttonNew";
-          this.toolTip1.SetToolTip(this.buttonNew, resources.GetString("buttonNew.ToolTip"));
-          this.buttonNew.UseVisualStyleBackColor = true;
-          this.buttonNew.Click += new System.EventHandler(this.button2_Click);
+          resources.ApplyResources(this.button_New, "button_New");
+          this.button_New.Name = "button_New";
+          this.toolTip1.SetToolTip(this.button_New, resources.GetString("button_New.ToolTip"));
+          this.button_New.UseVisualStyleBackColor = true;
+          this.button_New.Click += new System.EventHandler(this.button2_Click);
           // 
-          // buttonSave
+          // button_Save
           // 
-          resources.ApplyResources(this.buttonSave, "buttonSave");
-          this.buttonSave.Name = "buttonSave";
-          this.toolTip1.SetToolTip(this.buttonSave, resources.GetString("buttonSave.ToolTip"));
-          this.buttonSave.UseVisualStyleBackColor = true;
-          this.buttonSave.Click += new System.EventHandler(this.button3_Click);
+          resources.ApplyResources(this.button_Save, "button_Save");
+          this.button_Save.Name = "button_Save";
+          this.toolTip1.SetToolTip(this.button_Save, resources.GetString("button_Save.ToolTip"));
+          this.button_Save.UseVisualStyleBackColor = true;
+          this.button_Save.Click += new System.EventHandler(this.button3_Click);
           // 
           // radioButtonFR
           // 
@@ -801,14 +801,6 @@ namespace Grabber_Interface
           this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
           this.toolTip1.ToolTipTitle = "Help";
           // 
-          // pictureBoxPreviewCover
-          // 
-          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
-          this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
-          this.pictureBoxPreviewCover.TabStop = false;
-          this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
-          // 
           // button2
           // 
           resources.ApplyResources(this.button2, "button2");
@@ -825,6 +817,14 @@ namespace Grabber_Interface
           this.button3.UseVisualStyleBackColor = true;
           this.button3.Click += new System.EventHandler(this.button3_Click);
           // 
+          // pictureBoxPreviewCover
+          // 
+          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
+          this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
+          this.pictureBoxPreviewCover.TabStop = false;
+          this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -834,8 +834,8 @@ namespace Grabber_Interface
           this.Controls.Add(this.pictureBoxFranceFlag);
           this.Controls.Add(this.radioButtonEN);
           this.Controls.Add(this.radioButtonFR);
-          this.Controls.Add(this.buttonSave);
-          this.Controls.Add(this.buttonNew);
+          this.Controls.Add(this.button_Save);
+          this.Controls.Add(this.button_New);
           this.Controls.Add(this.label3);
           this.Controls.Add(this.tabControl1);
           this.Controls.Add(this.textName);
@@ -885,7 +885,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button_Find;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cb_Parameter;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button_Load;
@@ -893,30 +893,30 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox TextKeyStop;
         private System.Windows.Forms.TextBox TextKeyStart;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_Preview;
         private System.Windows.Forms.RichTextBox textBody;
-        private System.Windows.Forms.Button buttonNew;
-        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button button_New;
+        private System.Windows.Forms.Button button_Save;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RichTextBox textPreview;
-        private System.Windows.Forms.Button buttonFind;
+        private System.Windows.Forms.Button button_Find_Detail;
         private System.Windows.Forms.TextBox textFind;
-        private System.Windows.Forms.Button ButtonLoad;
+        private System.Windows.Forms.Button Button_Load_URL;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button buttonPreview;
+        private System.Windows.Forms.Button buttonPreviewDetailFullGrab;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox cbParamDetail;
+        private System.Windows.Forms.ComboBox cb_ParamDetail;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.RichTextBox textBodyDetail;
         private System.Windows.Forms.TextBox TextURL;
         private System.Windows.Forms.ListBox listPreview;
         private System.Windows.Forms.TextBox TextKeyStartD;
         private System.Windows.Forms.TextBox TextKeyStopD;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button_GoDetailPage;
         private System.Windows.Forms.TextBox TextURLDetail;
         private System.Windows.Forms.TextBox textComplement;
         private System.Windows.Forms.Label lblComplement;
@@ -940,10 +940,10 @@ namespace Grabber_Interface
         private System.Windows.Forms.TextBox textRedir;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.ComboBox Index;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button_Preview_All;
         private System.Windows.Forms.Button btReset;
         private System.Windows.Forms.Button btResetDetail;
-        private System.Windows.Forms.Button buttonPrevParam;
+        private System.Windows.Forms.Button buttonPrevParamDetail;
         private System.Windows.Forms.Button buttonPrevParam1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label19;
@@ -956,7 +956,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.TextBox TextSearch;
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.TextBox textURLPreview;
-        private System.Windows.Forms.Button btnLoadPreview;
+        private System.Windows.Forms.Button btnLoadDetailPreview;
         private System.Windows.Forms.PictureBox pictureBoxPreviewCover;
         private System.Windows.Forms.Label labelImageSize;
         private System.Windows.Forms.Label label21;
