@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Personnel")]
 [assembly: AssemblyProduct("Grabber_Interface")]
-[assembly: AssemblyCopyright("Copyright © Personnel 2008")]
+[assembly: AssemblyCopyright("Copyright © Personnel 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,5 +29,5 @@ using System.Runtime.InteropServices;
 //      Numéro de build
 //      Révision
 //
-[assembly: AssemblyVersion("5.1.0.1")]
-[assembly: AssemblyFileVersion("5.1.0.1")]
+[assembly: AssemblyVersion("5.0.0.1")]
+[assembly: AssemblyFileVersion("5.0.0.1")]

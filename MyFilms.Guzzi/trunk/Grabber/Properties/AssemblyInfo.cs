@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("grabber.Properties")]
-[assembly: AssemblyCopyright("Copyright ©  2010")]
+[assembly: AssemblyCopyright("Copyright ©  2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,5 +30,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("5.1.0.0")]
-[assembly: AssemblyFileVersion("5.1.0.0")]
+[assembly: AssemblyVersion("5.0.0.1")]
+[assembly: AssemblyFileVersion("5.0.0.1")]

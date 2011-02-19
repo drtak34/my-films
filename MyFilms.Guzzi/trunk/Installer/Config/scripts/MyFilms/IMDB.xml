@@ -54,7 +54,7 @@
       <KeyStartProduct Param1="" Param2="" />
       <KeyEndProduct />
       <KeyProductIndex />
-      <KeyStartCredits Param1="_x0020_and" Param2="_x002C__x0020_">Stars</KeyStartCredits>
+      <KeyStartCredits Param1="_x0020_and" Param2="_x002C__x0020_">_x003C_h4_x0020_class_x003D__x0022_inline_x0022__x003E_Stars:_x003C__x002F_h4_x003E_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_div_x003E_</KeyEndCredits>
       <KeyCreditsIndex />
       <KeyCreditsRegExp />
@@ -67,6 +67,21 @@
       <KeyStartYear Param1="" Param2="">_x0028_</KeyStartYear>
       <KeyEndYear>_x0029_</KeyEndYear>
       <KeyYearIndex>Translated_x0020_Title</KeyYearIndex>
+      <KeyStartLinkMultipurpose Param1="" Param2="" />
+      <KeyEndLinkMultipurpose />
+      <KeyLinkMultipurposeIndex />
+      <KeyStartComment Param1="" Param2="">_x003C_h2_x003E_User_x0020_Reviews_x003C__x002F_h2_x003E_</KeyStartComment>
+      <KeyEndComment>_x003C_hr_x0020__x002F__x003E_</KeyEndComment>
+      <KeyCommentIndex />
+      <KeyStartLanguage Param1="" Param2="">Language:_x003C__x002F_h4_x003E_</KeyStartLanguage>
+      <KeyEndLanguage>_x003C__x002F_div_x003E_</KeyEndLanguage>
+      <KeyLanguageIndex />
+      <KeyStartTagline Param1="" Param2="">Taglines:_x003C__x002F_h4_x003E_</KeyStartTagline>
+      <KeyEndTagline>_x003C_span_x0020_class_x003D_</KeyEndTagline>
+      <KeyTaglineIndex />
+      <KeyStartCertification Param1="" Param2="">_x003C_h4_x003E_Motion_x0020_Picture_x0020_Rating_x0020__x0028__x003C_a_x0020_href_x003D__x0022__x002F_mpaa_x0022__x003E_MPAA_x003C__x002F_a_x003E__x0029__x003C__x002F_h4_x003E_</KeyStartCertification>
+      <KeyEndCertification>_x003C_span_x0020_class_x003D__x0022_</KeyEndCertification>
+      <KeyCertificationIndex />
     </Details>
   </Section>
 </Profile>

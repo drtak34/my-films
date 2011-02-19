@@ -355,16 +355,16 @@
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox6.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="textNextPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 14</value>
+    <value>101, 14</value>
   </data>
   <data name="textNextPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 20</value>
+    <value>143, 20</value>
   </data>
   <data name="textNextPage.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -455,7 +455,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>True</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 17</value>
+    <value>17, 17</value>
   </data>
   <data name="label16.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -557,7 +557,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -590,7 +590,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam1.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam1.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -620,7 +620,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Preview_All.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_Preview_All.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -647,7 +647,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label17.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -674,7 +674,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textRedir.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textRedir.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -704,7 +704,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_GoDetailPage.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_GoDetailPage.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -731,7 +731,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Preview.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_Preview.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -752,7 +752,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -776,7 +776,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBody.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textBody.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -821,7 +821,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -848,7 +848,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Find.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_Find.ZOrder" xml:space="preserve">
     <value>11</value>
@@ -869,7 +869,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox5.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textBox5.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -1182,19 +1182,19 @@ SpecialParameters for beginning of expression:
     <value>9</value>
   </data>
   <data name="cb_Parameter.Items" xml:space="preserve">
-    <value>Start / End Result List</value>
+    <value>(Start-End Result List)</value>
   </data>
   <data name="cb_Parameter.Items1" xml:space="preserve">
-    <value>Start / End Title</value>
+    <value>Title</value>
   </data>
   <data name="cb_Parameter.Items2" xml:space="preserve">
-    <value>Start / End Year</value>
+    <value>Year</value>
   </data>
   <data name="cb_Parameter.Items3" xml:space="preserve">
-    <value>Start / End Director</value>
+    <value>Director</value>
   </data>
   <data name="cb_Parameter.Items4" xml:space="preserve">
-    <value>Start / End URL Detail Page</value>
+    <value>URL Detail Page</value>
   </data>
   <data name="cb_Parameter.Location" type="System.Drawing.Point, System.Drawing">
     <value>66, 19</value>
@@ -1244,7 +1244,7 @@ Start / End Detail Page URL: Required.</value>
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -1274,7 +1274,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextURL.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;TextURL.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -1301,36 +1301,36 @@ Important: You must replace the search string that you used with the string # # 
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>tabPage1</value>
+    <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabPageSearchPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPageSearchPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPageSearchPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>1052, 645</value>
   </data>
-  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabPageSearchPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
+  <data name="tabPageSearchPage.Text" xml:space="preserve">
     <value>Search Page</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="&gt;&gt;tabPageSearchPage.Name" xml:space="preserve">
+    <value>tabPageSearchPage</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPageSearchPage.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPageSearchPage.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
-  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabPageSearchPage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label21.AutoSize" type="System.Boolean, mscorlib">
@@ -1355,7 +1355,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label21.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1385,16 +1385,16 @@ Important: You must replace the search string that you used with the string # # 
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelImageSize.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;labelImageSize.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="btnLoadDetailPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 50</value>
+    <value>459, 52</value>
   </data>
   <data name="btnLoadDetailPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
+    <value>43, 20</value>
   </data>
   <data name="btnLoadDetailPreview.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -1409,7 +1409,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailPreview.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailPreview.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -1418,7 +1418,7 @@ Important: You must replace the search string that you used with the string # # 
     <value>True</value>
   </data>
   <data name="lblResult.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 55</value>
+    <value>14, 55</value>
   </data>
   <data name="lblResult.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -1441,7 +1441,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblResult.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;lblResult.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -1450,10 +1450,10 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>False</value>
   </data>
   <data name="textURLPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 52</value>
+    <value>65, 52</value>
   </data>
   <data name="textURLPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>667, 20</value>
+    <value>388, 20</value>
   </data>
   <data name="textURLPreview.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -1465,7 +1465,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textURLPreview.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1496,7 +1496,7 @@ If the result is an Image, it will be shown in the preview box.</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPrevParamDetail.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;buttonPrevParamDetail.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -1524,7 +1524,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPreviewDetailFullGrab.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;buttonPreviewDetailFullGrab.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -1548,7 +1548,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -1569,7 +1569,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -1578,7 +1578,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>6, 16</value>
   </data>
   <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 170</value>
+    <value>301, 248</value>
   </data>
   <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1599,10 +1599,10 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>0</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>508, 81</value>
+    <value>508, 3</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 192</value>
+    <value>313, 270</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1617,7 +1617,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -1644,7 +1644,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Find_Detail.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;button_Find_Detail.ZOrder" xml:space="preserve">
     <value>10</value>
@@ -1665,16 +1665,16 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textFind.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textFind.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
   <data name="Button_Load_URL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 8</value>
+    <value>459, 10</value>
   </data>
   <data name="Button_Load_URL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
+    <value>43, 20</value>
   </data>
   <data name="Button_Load_URL.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1692,7 +1692,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button_Load_URL.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;Button_Load_URL.ZOrder" xml:space="preserve">
     <value>12</value>
@@ -1701,7 +1701,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>NoControl</value>
   </data>
   <data name="btResetDetail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 169</value>
+    <value>259, 158</value>
   </data>
   <data name="btResetDetail.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 21</value>
@@ -2159,46 +2159,61 @@ SpecialParameters for beginning of expression:
     <value>13</value>
   </data>
   <data name="cb_ParamDetail.Items" xml:space="preserve">
-    <value>Start / End Detail Page</value>
+    <value>(Start-End Detail Page)</value>
   </data>
   <data name="cb_ParamDetail.Items1" xml:space="preserve">
-    <value>Start / End Original Title</value>
+    <value>Original Title</value>
   </data>
   <data name="cb_ParamDetail.Items2" xml:space="preserve">
-    <value>Start / End Translated Title</value>
+    <value>Translated Title</value>
   </data>
   <data name="cb_ParamDetail.Items3" xml:space="preserve">
-    <value>Start / End URL cover</value>
+    <value>URL cover</value>
   </data>
   <data name="cb_ParamDetail.Items4" xml:space="preserve">
-    <value>Start / End Rate 1</value>
+    <value>Rate 1</value>
   </data>
   <data name="cb_ParamDetail.Items5" xml:space="preserve">
-    <value>Start / End Rate 2</value>
+    <value>Rate 2</value>
   </data>
   <data name="cb_ParamDetail.Items6" xml:space="preserve">
-    <value>Start / End Synopsys</value>
+    <value>Description/Synopsys</value>
   </data>
   <data name="cb_ParamDetail.Items7" xml:space="preserve">
-    <value>Start / End Director</value>
+    <value>Director</value>
   </data>
   <data name="cb_ParamDetail.Items8" xml:space="preserve">
-    <value>Start / End Producer</value>
+    <value>Producer</value>
   </data>
   <data name="cb_ParamDetail.Items9" xml:space="preserve">
-    <value>Start / End Actors</value>
+    <value>Actors</value>
   </data>
   <data name="cb_ParamDetail.Items10" xml:space="preserve">
-    <value>Start / End Country</value>
+    <value>Country</value>
   </data>
   <data name="cb_ParamDetail.Items11" xml:space="preserve">
-    <value>Start / End Genre</value>
+    <value>Genre</value>
   </data>
   <data name="cb_ParamDetail.Items12" xml:space="preserve">
-    <value>Start / End Year</value>
+    <value>Year</value>
   </data>
   <data name="cb_ParamDetail.Items13" xml:space="preserve">
-    <value>Start / End URL Redirection cover</value>
+    <value>URL Redirection cover</value>
+  </data>
+  <data name="cb_ParamDetail.Items14" xml:space="preserve">
+    <value>URL Redirection common</value>
+  </data>
+  <data name="cb_ParamDetail.Items15" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="cb_ParamDetail.Items16" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="cb_ParamDetail.Items17" xml:space="preserve">
+    <value>Tagline</value>
+  </data>
+  <data name="cb_ParamDetail.Items18" xml:space="preserve">
+    <value>Certification</value>
   </data>
   <data name="cb_ParamDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 19</value>
@@ -2210,25 +2225,30 @@ SpecialParameters for beginning of expression:
     <value>2</value>
   </data>
   <data name="cb_ParamDetail.ToolTip" xml:space="preserve">
-    <value>Liste des paramètres.
+    <value>Parameter List - selects the parameter to be set:
 
 Start / End Detail Page : Permet de réduire le code source à la section qui nous intéresse.
-Start / End Original Title : Titre original.
-Start / End Translated Title : Titre traduit.
-Start / End URL cover : URL de l'affiche.
-Start / End Rate 1 : Note 1.
-Start / End Rate 2 : Note 2.
-Start / End Synopsys : Descriptif du film.
-Start / End Director: Director (s)
-Start / End Producer: Producer (s)
-Start / End Actors: Actors
-Start / End Country: Country
-Start / End Genre: Genre film.
-Start / End Year: Year.
-Start / End URL Redirection cover: For posters better, it is sometimes
+Original Title : Titre original.
+Translated Title : Titre traduit.
+URL cover : URL de l'affiche.
+Rate 1 : Note 1.
+Rate 2 : Note 2.
+Description / Synopsys : Description of film
+Director: Director (s)
+Producer: Producer (s)
+Actors: Actors
+Country: Country
+Genre: Genre/Categories.
+Year: Year.
+URL Redirection cover: For posters better, it is sometimes
 need to click on another tab. This setting allows you to find in the code
 address tab. Then use Start / End cover to find the URL address of the poster
-in this new page.</value>
+in this new page.
+URL Redirection common: Redirection for common pupose
+Comment: Comment or user review
+Language: Language
+Tagline: Tagline
+Certification: Certification</value>
   </data>
   <data name="&gt;&gt;cb_ParamDetail.Name" xml:space="preserve">
     <value>cb_ParamDetail</value>
@@ -2258,16 +2278,16 @@ in this new page.</value>
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="TextURLDetail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 10</value>
+    <value>65, 10</value>
   </data>
   <data name="TextURLDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>668, 20</value>
+    <value>388, 20</value>
   </data>
   <data name="TextURLDetail.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2282,7 +2302,7 @@ in this new page.</value>
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -2291,7 +2311,7 @@ in this new page.</value>
     <value>True</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 13</value>
+    <value>14, 13</value>
   </data>
   <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -2309,36 +2329,36 @@ in this new page.</value>
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label15.Parent" xml:space="preserve">
-    <value>tabPage2</value>
+    <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabPageDetailPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPageDetailPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPageDetailPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>1052, 645</value>
   </data>
-  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+  <data name="tabPageDetailPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="tabPage2.Text" xml:space="preserve">
+  <data name="tabPageDetailPage.Text" xml:space="preserve">
     <value>Detail page</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
+  <data name="&gt;&gt;tabPageDetailPage.Name" xml:space="preserve">
+    <value>tabPageDetailPage</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPageDetailPage.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPageDetailPage.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
-  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tabPageDetailPage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
@@ -2574,8 +2594,8 @@ This parameter makes it possible to define the beginning of the URL ("http://les
   <data name="pictureBoxFranceFlag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALEAAA
-        CxABrSO9dQAAAidJREFUSEu11t9LU2Ecx3EDEXHp3ImxucUGHg1HU6bUKhk6TLcgpUFKFysxLAxntmk0
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDgAA
+        Cw4BQL7hQQAAAidJREFUSEu11t9LU2Ecx3EDEXHp3ImxucUGHg1HU6bUKhk6TLcgpUFKFysxLAxntmk0
         wwpa9ENi5UV1V1dBEHTXTX9ARUFEba4wUxCtCPY3fHq+B90Dz3PyudkOvHjOzsX3PZ6z7WwXgKqKHhSo
         pIoO396darZFuxlbmdFMml3V2N//ANHooin2LnY8VgdP439oNgXckcgiFhbemFIF/mafwMzqiTP06XFT
         wNvXl0Um8xozMy+RYmjdpgpspjMwXLlp+MX8ufMQK4NxCniNQG/vfaTTrzAx8VyiCmxMXYXo97W7+HHs

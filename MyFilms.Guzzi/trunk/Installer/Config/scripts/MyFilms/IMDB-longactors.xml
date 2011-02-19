@@ -67,6 +67,21 @@
       <KeyStartYear Param1="" Param2="">_x0028_</KeyStartYear>
       <KeyEndYear>_x0029_</KeyEndYear>
       <KeyYearIndex>Translated_x0020_Title</KeyYearIndex>
+      <KeyStartLinkMultipurpose Param1="" Param2="" />
+      <KeyEndLinkMultipurpose />
+      <KeyLinkMultipurposeIndex />
+      <KeyStartComment Param1="" Param2="" />
+      <KeyEndComment />
+      <KeyCommentIndex />
+      <KeyStartLanguage Param1="" Param2="" />
+      <KeyEndLanguage />
+      <KeyLanguageIndex />
+      <KeyStartTagline Param1="" Param2="" />
+      <KeyEndTagline />
+      <KeyTaglineIndex />
+      <KeyStartCertification Param1="" Param2="" />
+      <KeyEndCertification />
+      <KeyCertificationIndex />
     </Details>
   </Section>
 </Profile>

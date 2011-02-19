@@ -54,6 +54,8 @@ namespace Grabber_Interface
         radioButtonFR.Checked = true;
       else
         radioButtonEN.Checked = true;
+      tabPageSearchPage.Enabled = false;
+      tabPageDetailPage.Enabled = false;
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -827,28 +829,28 @@ namespace Grabber_Interface
           textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.BaseRating)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRate2Index)._Value;
           break;
-        case 6:
+        case 6: // Description
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartSyn)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartSyn)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartSyn)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndSyn)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeySynIndex)._Value;
           break;
-        case 7:
+        case 7: // Director
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRealise)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRealise)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRealise)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndRealise)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseIndex)._Value;
           break;
-        case 8:
+        case 8: // Producer
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartProduct)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartProduct)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartProduct)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndProduct)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductIndex)._Value;
           break;
-        case 9: // Actors ! (Credits)
+        case 9: // Actors (Credits)
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCredits)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCredits)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCredits)._Value;
@@ -860,14 +862,14 @@ namespace Grabber_Interface
           catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsIndex)._Value;
           break;
-        case 10:
+        case 10: // Country
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCountry)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCountry)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCountry)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndCountry)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCountryIndex)._Value;
           break;
-        case 11:
+        case 11: // Categories / Genre
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Value;
@@ -1261,10 +1263,10 @@ namespace Grabber_Interface
       {
         Result = Grab.GetDetail(TextURLDetail.Text, Environment.GetEnvironmentVariable("TEMP"), textConfig.Text + ".tmp", true);
       }
-      catch
+      catch (Exception ex)
       {
         DialogResult dlgResult = DialogResult.None;
-        dlgResult = MessageBox.Show("Matching problem - check your definitions! (Make sure, year does not include non numerical characters)", "Error", MessageBoxButtons.OK);
+        dlgResult = MessageBox.Show("An error ocurred - check your definitions!\n Exception: " + ex.ToString(), "Error", MessageBoxButtons.OK);
         if (dlgResult == DialogResult.OK)
         {
         }
@@ -1277,13 +1279,13 @@ namespace Grabber_Interface
         switch (i)
         {
           case 0:
-            textPreview.SelectedText += "Original Title" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Original Title" + Environment.NewLine;
             break;
           case 1:
-            textPreview.SelectedText += "Translated Title" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Translated Title" + Environment.NewLine;
             break;
           case 2:
-            textPreview.SelectedText += "Cover" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Cover" + Environment.NewLine;
             try
             {
               pictureBoxPreviewCover.ImageLocation = Result[i];
@@ -1303,48 +1305,52 @@ namespace Grabber_Interface
             }
             break;
           case 3:
-            textPreview.SelectedText += "Synopsys" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Description" + Environment.NewLine;
             break;
           case 4:
-            textPreview.SelectedText += "Note" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Rating" + Environment.NewLine;
             break;
           case 5:
-            textPreview.SelectedText += "Actors" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Actors" + Environment.NewLine;
             break;
           case 6:
-            textPreview.SelectedText += "Director" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Director" + Environment.NewLine;
             break;
           case 7:
-            textPreview.SelectedText += "Producer" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Producer" + Environment.NewLine;
             break;
           case 8:
-            textPreview.SelectedText += "Year" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Year" + Environment.NewLine;
             break;
           case 9:
-            textPreview.SelectedText += "Country" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Country" + Environment.NewLine;
             break;
           case 10:
-            textPreview.SelectedText += "Genre" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Genre" + Environment.NewLine;
             break;
-
-          // New Added
+          case 11:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL" + Environment.NewLine;
+            break;
+          case 12:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Image" + Environment.NewLine;
+            break;
+          case 13:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "CommonUseURL" + Environment.NewLine;
+            break;
           case 14:
-            textPreview.SelectedText += "CommonSecURL" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Comment" + Environment.NewLine;
             break;
           case 15:
-            textPreview.SelectedText += "Comment" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Language" + Environment.NewLine;
             break;
           case 16:
-            textPreview.SelectedText += "Language" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Tagline" + Environment.NewLine;
             break;
           case 17:
-            textPreview.SelectedText += "Tagline" + Environment.NewLine;
-            break;
-          case 18:
-            textPreview.SelectedText += "Certification" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Certification" + Environment.NewLine;
             break;
         }
-        if (i <= 18) // Changed to support new fields...
+        if (i <= 17) // Changed to support new fields...
           textPreview.AppendText(Result[i] + Environment.NewLine);
         if (i == 2)
           textPreview.AppendText(Result[11] + Environment.NewLine);
@@ -1876,6 +1882,20 @@ namespace Grabber_Interface
     private void pictureBoxUSFlag_Click(object sender, EventArgs e)
     {
 
+    }
+
+    private void textConfig_TextChanged(object sender, EventArgs e)
+    {
+      if (string.IsNullOrEmpty(textConfig.Text))
+      {
+        tabPageSearchPage.Enabled = false;
+        tabPageDetailPage.Enabled = false;
+      }
+      else
+      {
+        tabPageSearchPage.Enabled = true;
+        tabPageDetailPage.Enabled = true;
+      }
     }
 
   }

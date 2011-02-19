@@ -34,7 +34,7 @@ namespace Grabber_Interface
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
           this.tabControl1 = new System.Windows.Forms.TabControl();
-          this.tabPage1 = new System.Windows.Forms.TabPage();
+          this.tabPageSearchPage = new System.Windows.Forms.TabPage();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.label8 = new System.Windows.Forms.Label();
           this.TextSearch = new System.Windows.Forms.TextBox();
@@ -74,7 +74,7 @@ namespace Grabber_Interface
           this.cb_Parameter = new System.Windows.Forms.ComboBox();
           this.TextURL = new System.Windows.Forms.TextBox();
           this.label4 = new System.Windows.Forms.Label();
-          this.tabPage2 = new System.Windows.Forms.TabPage();
+          this.tabPageDetailPage = new System.Windows.Forms.TabPage();
           this.label21 = new System.Windows.Forms.Label();
           this.labelImageSize = new System.Windows.Forms.Label();
           this.btnLoadDetailPreview = new System.Windows.Forms.Button();
@@ -122,12 +122,12 @@ namespace Grabber_Interface
           this.button3 = new System.Windows.Forms.Button();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabControl1.SuspendLayout();
-          this.tabPage1.SuspendLayout();
+          this.tabPageSearchPage.SuspendLayout();
           this.groupBox6.SuspendLayout();
           this.groupBox5.SuspendLayout();
           this.groupBox2.SuspendLayout();
           this.groupBox1.SuspendLayout();
-          this.tabPage2.SuspendLayout();
+          this.tabPageDetailPage.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox4.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
@@ -141,6 +141,7 @@ namespace Grabber_Interface
           resources.ApplyResources(this.textConfig, "textConfig");
           this.textConfig.Name = "textConfig";
           this.textConfig.ReadOnly = true;
+          this.textConfig.TextChanged += new System.EventHandler(this.textConfig_TextChanged);
           // 
           // button_Browse
           // 
@@ -158,33 +159,33 @@ namespace Grabber_Interface
           // 
           // tabControl1
           // 
-          this.tabControl1.Controls.Add(this.tabPage1);
-          this.tabControl1.Controls.Add(this.tabPage2);
+          this.tabControl1.Controls.Add(this.tabPageSearchPage);
+          this.tabControl1.Controls.Add(this.tabPageDetailPage);
           resources.ApplyResources(this.tabControl1, "tabControl1");
           this.tabControl1.Name = "tabControl1";
           this.tabControl1.SelectedIndex = 0;
           // 
-          // tabPage1
+          // tabPageSearchPage
           // 
-          this.tabPage1.Controls.Add(this.groupBox6);
-          this.tabPage1.Controls.Add(this.groupBox5);
-          this.tabPage1.Controls.Add(this.buttonPrevParam1);
-          this.tabPage1.Controls.Add(this.button_Preview_All);
-          this.tabPage1.Controls.Add(this.label17);
-          this.tabPage1.Controls.Add(this.textRedir);
-          this.tabPage1.Controls.Add(this.button_GoDetailPage);
-          this.tabPage1.Controls.Add(this.button_Preview);
-          this.tabPage1.Controls.Add(this.label9);
-          this.tabPage1.Controls.Add(this.textBody);
-          this.tabPage1.Controls.Add(this.groupBox2);
-          this.tabPage1.Controls.Add(this.button_Find);
-          this.tabPage1.Controls.Add(this.textBox5);
-          this.tabPage1.Controls.Add(this.groupBox1);
-          this.tabPage1.Controls.Add(this.TextURL);
-          this.tabPage1.Controls.Add(this.label4);
-          resources.ApplyResources(this.tabPage1, "tabPage1");
-          this.tabPage1.Name = "tabPage1";
-          this.tabPage1.UseVisualStyleBackColor = true;
+          this.tabPageSearchPage.Controls.Add(this.groupBox6);
+          this.tabPageSearchPage.Controls.Add(this.groupBox5);
+          this.tabPageSearchPage.Controls.Add(this.buttonPrevParam1);
+          this.tabPageSearchPage.Controls.Add(this.button_Preview_All);
+          this.tabPageSearchPage.Controls.Add(this.label17);
+          this.tabPageSearchPage.Controls.Add(this.textRedir);
+          this.tabPageSearchPage.Controls.Add(this.button_GoDetailPage);
+          this.tabPageSearchPage.Controls.Add(this.button_Preview);
+          this.tabPageSearchPage.Controls.Add(this.label9);
+          this.tabPageSearchPage.Controls.Add(this.textBody);
+          this.tabPageSearchPage.Controls.Add(this.groupBox2);
+          this.tabPageSearchPage.Controls.Add(this.button_Find);
+          this.tabPageSearchPage.Controls.Add(this.textBox5);
+          this.tabPageSearchPage.Controls.Add(this.groupBox1);
+          this.tabPageSearchPage.Controls.Add(this.TextURL);
+          this.tabPageSearchPage.Controls.Add(this.label4);
+          resources.ApplyResources(this.tabPageSearchPage, "tabPageSearchPage");
+          this.tabPageSearchPage.Name = "tabPageSearchPage";
+          this.tabPageSearchPage.UseVisualStyleBackColor = true;
           // 
           // groupBox6
           // 
@@ -457,27 +458,27 @@ namespace Grabber_Interface
           resources.ApplyResources(this.label4, "label4");
           this.label4.Name = "label4";
           // 
-          // tabPage2
+          // tabPageDetailPage
           // 
-          this.tabPage2.Controls.Add(this.label21);
-          this.tabPage2.Controls.Add(this.labelImageSize);
-          this.tabPage2.Controls.Add(this.btnLoadDetailPreview);
-          this.tabPage2.Controls.Add(this.lblResult);
-          this.tabPage2.Controls.Add(this.textURLPreview);
-          this.tabPage2.Controls.Add(this.buttonPrevParamDetail);
-          this.tabPage2.Controls.Add(this.buttonPreviewDetailFullGrab);
-          this.tabPage2.Controls.Add(this.textBodyDetail);
-          this.tabPage2.Controls.Add(this.label10);
-          this.tabPage2.Controls.Add(this.groupBox3);
-          this.tabPage2.Controls.Add(this.button_Find_Detail);
-          this.tabPage2.Controls.Add(this.textFind);
-          this.tabPage2.Controls.Add(this.Button_Load_URL);
-          this.tabPage2.Controls.Add(this.groupBox4);
-          this.tabPage2.Controls.Add(this.TextURLDetail);
-          this.tabPage2.Controls.Add(this.label15);
-          resources.ApplyResources(this.tabPage2, "tabPage2");
-          this.tabPage2.Name = "tabPage2";
-          this.tabPage2.UseVisualStyleBackColor = true;
+          this.tabPageDetailPage.Controls.Add(this.label21);
+          this.tabPageDetailPage.Controls.Add(this.labelImageSize);
+          this.tabPageDetailPage.Controls.Add(this.btnLoadDetailPreview);
+          this.tabPageDetailPage.Controls.Add(this.lblResult);
+          this.tabPageDetailPage.Controls.Add(this.textURLPreview);
+          this.tabPageDetailPage.Controls.Add(this.buttonPrevParamDetail);
+          this.tabPageDetailPage.Controls.Add(this.buttonPreviewDetailFullGrab);
+          this.tabPageDetailPage.Controls.Add(this.textBodyDetail);
+          this.tabPageDetailPage.Controls.Add(this.label10);
+          this.tabPageDetailPage.Controls.Add(this.groupBox3);
+          this.tabPageDetailPage.Controls.Add(this.button_Find_Detail);
+          this.tabPageDetailPage.Controls.Add(this.textFind);
+          this.tabPageDetailPage.Controls.Add(this.Button_Load_URL);
+          this.tabPageDetailPage.Controls.Add(this.groupBox4);
+          this.tabPageDetailPage.Controls.Add(this.TextURLDetail);
+          this.tabPageDetailPage.Controls.Add(this.label15);
+          resources.ApplyResources(this.tabPageDetailPage, "tabPageDetailPage");
+          this.tabPageDetailPage.Name = "tabPageDetailPage";
+          this.tabPageDetailPage.UseVisualStyleBackColor = true;
           // 
           // label21
           // 
@@ -704,7 +705,12 @@ namespace Grabber_Interface
             resources.GetString("cb_ParamDetail.Items10"),
             resources.GetString("cb_ParamDetail.Items11"),
             resources.GetString("cb_ParamDetail.Items12"),
-            resources.GetString("cb_ParamDetail.Items13")});
+            resources.GetString("cb_ParamDetail.Items13"),
+            resources.GetString("cb_ParamDetail.Items14"),
+            resources.GetString("cb_ParamDetail.Items15"),
+            resources.GetString("cb_ParamDetail.Items16"),
+            resources.GetString("cb_ParamDetail.Items17"),
+            resources.GetString("cb_ParamDetail.Items18")});
           resources.ApplyResources(this.cb_ParamDetail, "cb_ParamDetail");
           this.cb_ParamDetail.Name = "cb_ParamDetail";
           this.toolTip1.SetToolTip(this.cb_ParamDetail, resources.GetString("cb_ParamDetail.ToolTip"));
@@ -847,8 +853,8 @@ namespace Grabber_Interface
           this.Name = "GrabConfig";
           this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GrabConfig_FormClosing);
           this.tabControl1.ResumeLayout(false);
-          this.tabPage1.ResumeLayout(false);
-          this.tabPage1.PerformLayout();
+          this.tabPageSearchPage.ResumeLayout(false);
+          this.tabPageSearchPage.PerformLayout();
           this.groupBox6.ResumeLayout(false);
           this.groupBox6.PerformLayout();
           this.groupBox5.ResumeLayout(false);
@@ -856,8 +862,8 @@ namespace Grabber_Interface
           this.groupBox2.ResumeLayout(false);
           this.groupBox1.ResumeLayout(false);
           this.groupBox1.PerformLayout();
-          this.tabPage2.ResumeLayout(false);
-          this.tabPage2.PerformLayout();
+          this.tabPageDetailPage.ResumeLayout(false);
+          this.tabPageDetailPage.PerformLayout();
           this.groupBox3.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
@@ -875,8 +881,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.Button button_Browse;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageSearchPage;
+        private System.Windows.Forms.TabPage tabPageDetailPage;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textName;

@@ -99,6 +99,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.ItemSearchFileNameTrailer.Visible = false;
               this.ShowTrailerPlayDialog.Visible = false;
               this.ShowTrailerWhenStartingMovie.Visible = false;
+              this.btnGrabberInterface.Visible = false; // disable grabber interface in normal mode
             }
             //else
             //{
@@ -4303,6 +4304,37 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           if (chkDfltFanart.Checked)
             chkDfltFanartImage.Checked = false;
+        }
+
+        private void btnGrabberInterface_Click(object sender, EventArgs e)
+        {
+          using (Process p = new Process())
+          {
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\MyFilms_Grabber_Interface.exe";
+            psi.UseShellExecute = true;
+            psi.WindowStyle = ProcessWindowStyle.Normal;
+            //psi.Arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
+            //psi.Arguments = " \"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI\"";
+            psi.ErrorDialog = true;
+            if (OSInfo.OSInfo.VistaOrLater())
+            {
+              psi.Verb = "runas";
+            }
+
+            p.StartInfo = psi;
+            LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup");
+            try
+            {
+              p.Start();
+              //p.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug(ex.ToString());
+            }
+            LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup done");
+          }
         }
 
     }

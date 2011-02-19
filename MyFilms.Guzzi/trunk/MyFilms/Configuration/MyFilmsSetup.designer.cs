@@ -107,7 +107,6 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.radioButton2 = new System.Windows.Forms.CheckBox();
           this.radioButton1 = new System.Windows.Forms.CheckBox();
@@ -454,6 +453,8 @@
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -640,16 +641,6 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -1708,6 +1699,7 @@
           // 
           // groupBox_AMCupdater_ExternalApplication
           // 
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnGrabberInterface);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDefaultConfig);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.lblAMCupdaterConfigPreview);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.lblAMCMovieScanPath);
@@ -1833,9 +1825,9 @@
           // 
           this.btnLaunchAMCupdater.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
           this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 45);
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 47);
           this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
-          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 54);
+          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 52);
           this.btnLaunchAMCupdater.TabIndex = 76;
           this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
           this.ToolTip1.SetToolTip(this.btnLaunchAMCupdater, "Launch AMCupdater with Configuration specific settings, as you created them.");
@@ -4383,6 +4375,26 @@
           this.General.TabIndex = 46;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
           // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
+          // btnGrabberInterface
+          // 
+          this.btnGrabberInterface.Location = new System.Drawing.Point(17, 18);
+          this.btnGrabberInterface.Name = "btnGrabberInterface";
+          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 23);
+          this.btnGrabberInterface.TabIndex = 86;
+          this.btnGrabberInterface.Text = "Grabber Interface";
+          this.btnGrabberInterface.UseVisualStyleBackColor = true;
+          this.btnGrabberInterface.Click += new System.EventHandler(this.btnGrabberInterface_Click);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4858,5 +4870,6 @@
         private CheckBox chkPersons;
         private Label lblSearchGrabberName;
         private ComboBox ItemSearchGrabberName;
+        private Button btnGrabberInterface;
     }
 }

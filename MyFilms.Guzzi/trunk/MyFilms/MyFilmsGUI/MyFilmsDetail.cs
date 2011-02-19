@@ -618,6 +618,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798703)); // online updates ...
                     choiceViewMenu.Add("onlineupdates");
 
+                    // ToDo: Add "functional" menus like "covermenu", "updatemenu", "fanartmenu"
                     //dlgmenu.Add("Trailer ...");
                     //choiceViewMenu.Add("trailermenu");
 
@@ -1519,7 +1520,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgmenu.Add(GUILocalizeStrings.Get(10798735));
                 choiceViewMenu.Add("missing");
 
-                string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director", "Producer", "Year", "Country", "Category", "URL" };
+                // All firlds: string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director", "Producer", "Year", "Country", "Category", "URL", "Comments", "Languages", "Tagline", "Certification" };
+                string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director", "Producer", "Year", "Country", "Category", "URL", "Comments", "Languages" };
                 string strOldValue = "";
                 string strNewValue = "";
 
@@ -1563,7 +1565,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (strChoice)
             {
                 case "OriginalTitle":
-                    if (Result[0] != string.Empty && Result[0] != null)
+                if (!string.IsNullOrEmpty(Result[0]))
                     {
                         title = Result[0].ToString();
                         wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
@@ -1578,7 +1580,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     break;
                 case "TranslatedTitle":
-                    if (Result[1] != string.Empty && Result[1] != null)
+                    if (!string.IsNullOrEmpty(Result[1]))
                     {
                         ttitle = Result[1].ToString();
                         if (string.IsNullOrEmpty(ttitle) && MyFilms.conf.StrTitle1 == "TranslatedTitle" && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString())) // Added to fill ttitle with otitle in case ttitle is empty and mastertitle = ttitle and mastertitle is empty
@@ -1653,11 +1655,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     break;
                 case "Description":
-                    if (Result[3] != string.Empty && Result[3] != null)
+                    if (!string.IsNullOrEmpty(Result[3]))
                         MyFilms.r[MyFilms.conf.StrIndex]["Description"] = Result[3].ToString();
                     break;
                 case "Rating":
-                    if (Result[4] != string.Empty && Result[4] != null)
+                    if (!string.IsNullOrEmpty(Result[4]))
                     {
                         if (Result[4].ToString().Length > 0)
                         {
@@ -1670,22 +1672,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     break;
                 case "Actors":
-                    if (Result[5] != string.Empty && Result[5] != null)
+                    if (!string.IsNullOrEmpty(Result[5]))
                         MyFilms.r[MyFilms.conf.StrIndex]["Actors"] = Result[5].ToString();
                     break;
                 case "Director":
-                    if (Result[6] != string.Empty && Result[6] != null)
+                    if (!string.IsNullOrEmpty(Result[6]))
                     {
                         director = Result[6].ToString();
                         MyFilms.r[MyFilms.conf.StrIndex]["Director"] = Result[6].ToString();
                     }
                     break;
                 case "Producer":
-                    if (Result[7] != string.Empty && Result[7] != null)
+                    if (!string.IsNullOrEmpty(Result[7]))
                         MyFilms.r[MyFilms.conf.StrIndex]["Producer"] = Result[7].ToString();
                     break;
                 case "Year":
-                    if (Result[8] != string.Empty && Result[8] != null)
+                    if (!string.IsNullOrEmpty(Result[8]))
                     {
                         try
                         {
@@ -1696,17 +1698,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     break;
                 case "Country":
-                    if (Result[9] != string.Empty && Result[9] != null)
+                    if (!string.IsNullOrEmpty(Result[9]))
                         MyFilms.r[MyFilms.conf.StrIndex]["Country"] = Result[9].ToString();
                     break;
                 case "Category":
-                    if (Result[10] != string.Empty && Result[10] != null)
+                    if (!string.IsNullOrEmpty(Result[10]))
                         MyFilms.r[MyFilms.conf.StrIndex]["Category"] = Result[10].ToString();
                     break;
                 case "URL":
-                    if (Result[11] != string.Empty && Result[11] != null)
-                        if (MyFilms.conf.StrStorage != "URL")
-                            MyFilms.r[MyFilms.conf.StrIndex]["URL"] = Result[11].ToString();
+                    if (!string.IsNullOrEmpty(Result[11]))
+                      if (MyFilms.conf.StrStorage != "URL")
+                        MyFilms.r[MyFilms.conf.StrIndex]["URL"] = Result[11].ToString();
+                    break;
+                case "Comments":
+                    if (!string.IsNullOrEmpty(Result[14]))
+                      MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[5].ToString(); 
+                    break;
+                case "Languages":
+                    if (!string.IsNullOrEmpty(Result[15]))
+                      MyFilms.r[MyFilms.conf.StrIndex]["Languages"] = Result[5].ToString();
                     break;
                 case "all":
                 case "missing":
@@ -1828,6 +1838,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (MyFilms.conf.StrStorage != "URL")
                             if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString()) || !onlymissing) 
                                 MyFilms.r[MyFilms.conf.StrIndex]["URL"] = Result[11].ToString();
+                    if (!string.IsNullOrEmpty(Result[14]))
+                      if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Comments"].ToString()) || !onlymissing)
+                        MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[10].ToString();
+                    if (!string.IsNullOrEmpty(Result[15]))
+                      if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Languages"].ToString()) || !onlymissing)
+                        MyFilms.r[MyFilms.conf.StrIndex]["Languages"] = Result[10].ToString();
                     break;
 
                 default:
