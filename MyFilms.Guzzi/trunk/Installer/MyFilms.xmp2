@@ -104,12 +104,12 @@
         <Description>SkinFiles</Description>
         <Files>
           <Items>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin\Blue3Wide\MyFilms.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{ccc66825-66c7-4e9a-93a5-d287161ee18f}-MyFilms.xml</ZipFileName>
-              <DestinationFilename>%Skin%\Blue3Wide\MyFilms.xml</DestinationFilename>
+              <DestinationFilename>%Skin%\MyFilms.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -817,6 +817,20 @@
               <LocalFileName>Skin\Blue3\Media\Logos\MyFilms\Western.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{9e7dd602-4591-4f6b-b803-0998ba8d744b}-Western.png</ZipFileName>
               <DestinationFilename>%Skin%\Blue3\Media\Logos\MyFilms\Western.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3\Media\MyFilms\filmstrip.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{03ecd5b9-fe94-4625-9468-dd762d03f9ba}-filmstrip.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3\Media\MyFilms\MyFilms\filmstrip.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Blue3Wide\Media\MyFilms\filmstrip.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e9851b74-7aae-4df8-a40f-08900d66e371}-filmstrip.png</ZipFileName>
+              <DestinationFilename>%Skin%\Blue3Wide\Media\MyFilms\filmstrip.png</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -2233,7 +2247,7 @@ Some functions will not be available or work properly, if older versions are ins
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>23</Revision>
+      <Revision>24</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production.
@@ -2242,7 +2256,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
     <OnlineLocation />
     <ReleaseDate>2011-02-14T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.23.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.24.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -2361,12 +2375,12 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{2922cb6f-5563-4c9b-9cfb-bb99bcd2f06b}-PluginConfigLoader.exe</ZipFileName>
         <DestinationFilename>%Base%\PluginConfigLoader.exe</DestinationFilename>
       </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin\Blue3Wide\MyFilms.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{ccc66825-66c7-4e9a-93a5-d287161ee18f}-MyFilms.xml</ZipFileName>
-        <DestinationFilename>%Skin%\Blue3Wide\MyFilms.xml</DestinationFilename>
+        <DestinationFilename>%Skin%\MyFilms.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -3074,6 +3088,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin\Blue3\Media\Logos\MyFilms\Western.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{9e7dd602-4591-4f6b-b803-0998ba8d744b}-Western.png</ZipFileName>
         <DestinationFilename>%Skin%\Blue3\Media\Logos\MyFilms\Western.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3\Media\MyFilms\filmstrip.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{03ecd5b9-fe94-4625-9468-dd762d03f9ba}-filmstrip.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3\Media\MyFilms\MyFilms\filmstrip.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Blue3Wide\Media\MyFilms\filmstrip.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e9851b74-7aae-4df8-a40f-08900d66e371}-filmstrip.png</ZipFileName>
+        <DestinationFilename>%Skin%\Blue3Wide\Media\MyFilms\filmstrip.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -4171,14 +4199,14 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{3c520527-b90c-4abd-877e-e18a5ec8103e}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{e33ff9a0-a588-4dca-9570-cee8d271c574}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9f2c29a1-b188-4458-bb53-3370f8f3bf43}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{2c537e9f-7b5d-4cde-96d9-600657018299}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

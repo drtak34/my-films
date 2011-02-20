@@ -137,7 +137,7 @@
     <String id="10798646">Search films</String>
     <String id="10798647">Search actors</String>
     <String id="10798648">Source</String>
-    <String id="10798649">Trailer source</String>
+    <String id="10798649">Trailers</String>
     <String id="10798650">Number</String>
     <String id="10798651">Checked</String>
     <String id="10798652">Media Label</String>
@@ -185,8 +185,8 @@
     <String id="10798699">Wiki Online Help (Web)</String>
     <String id="10798700">About ...</String>
     <String id="10798701">Options Menu</String>
-    <String id="10798702">Local Updates ...</String>
-    <String id="10798703">Online Updates ...</String>
+    <String id="10798702">Updates ...</String>
+    <String id="10798703">Fanart and Cover ...</String>
     <String id="10798704">Trailer ...</String>
     <String id="10798705">Trailer(s) found !</String>
     <String id="10798710">Play trailer</String>

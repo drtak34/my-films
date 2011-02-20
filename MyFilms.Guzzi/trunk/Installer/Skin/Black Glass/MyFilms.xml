@@ -575,6 +575,70 @@
 			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.source.value)</visible>
 		</control>
 
+<!-- Global Overlay Filter Info -->
+
+	<control>
+		<description>Filters group</description>
+		<type>group</type>
+		<posX>1095</posX>
+		<posY>21</posY>
+		<layout>StackLayout(5,Horizontal)</layout>
+       		<dimColor>ffffffff</dimColor>
+		<animation effect="fade" time="250">visiblechange</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+		<control>
+			<type>image</type>
+			<description>UnWatched Global Filter Icon</description>
+			<id>0</id>
+			<width>16</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\overlayunwatched.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Trailer Global Filter Icon</description>
+			<id>0</id>
+			<width>16</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\filmstrip.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.trailersonly,True)</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Rating Global Filter Icon</description>
+			<id>0</id>
+			<width>18</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>stargood.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.minrating,True)</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<!-- <control>
+			<type>label</type>
+			<description>Rating Global Filter Value</description>
+			<id>0</id>
+			<label>#myfilms.globalfilter.minratingvalue</label>
+			<visible>string.contains(#myfilms.globalfilter.minratingvalue)</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control> -->
+	</control>
+
+
+
+
+
 <!-- Trailer Available Info -->
 
 		<control>

@@ -168,6 +168,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static ArrayList result;
         public static string wsearchfile;
         public static int wGetID;
+        public static bool isTrailer = false;
+
 
         // private System.Threading.Timer m_TraktTimer = null;
         // private TimerCallback m_timerDelegate = null;
@@ -3619,12 +3621,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
         {
-            LogMyFilms.Debug("MFD: UpdateOnPlayEnd was initiated");
+            LogMyFilms.Debug("MFD: UpdateOnPlayEnd was initiated - isTrailer = '" + isTrailer + "'");
 
             if (MyFilms.conf.StrPlayedIndex == -1)
                 return;
             if (type != g_Player.MediaType.Video || filename.EndsWith("&txe=.wmv"))
-                return;
+              return;
+            //if (isTrailer)
+            //{
+            //  LogMyFilms.Debug("MFD: Skipping UpdateOnEnd - reason: isTrailer");
+            //  isTrailer = false;
+            //  return;
+            //}
             try
             {
                 DataRow[] r1 = BaseMesFilms.LectureDonnées(MyFilms.conf.StrPlayedDfltSelect, MyFilms.conf.StrPlayedSelect, MyFilms.conf.StrPlayedSort, MyFilms.conf.StrPlayedSens);
@@ -3718,6 +3726,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     }
                 }
+                
+                if (isTrailer)
+                {
+                  LogMyFilms.Debug("MFD: Skipping UpdateOnEnd - reason: isTrailer");
+                  isTrailer = false;
+                  return;
+                }
+                
                 if (MyFilms.conf.CheckWatched)
                 {
                   r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
@@ -4444,6 +4460,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         static public void PlayMovieFromPlayListTrailer(bool NoResumeMovie, int iMovieIndex)
         {
+            isTrailer = true;
             string filename;
             if (iMovieIndex == -1)
                 filename = playlistPlayer.GetNext();
