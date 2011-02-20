@@ -99,7 +99,7 @@
 			<type>label</type>
 			<id>1</id>
 			<posX>125</posX>
-			<posY>30</posY>
+			<posY>25</posY>
 			<label>#header.label</label>
 			<font>font18</font>
 			<align>left</align>
@@ -110,13 +110,54 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
+			<description>Filters group</description>
+			<type>group</type>
+			<posX>125</posX>
+			<posY>53</posY>
+			<layout>StackLayout(5,Horizontal)</layout>
+            <dimColor>ffffffff</dimColor>
+		<control>
+			<type>image</type>
+			<description>UnWatched Global Filter Icon</description>
+			<id>0</id>
+			<width>16</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\overlayunwatched.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Trailer Global Filter Icon</description>
+			<id>0</id>
+			<width>16</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\filmstrip.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.trailersonly,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Rating Global Filter Icon</description>
+			<id>0</id>
+			<width>18</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>stargood.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.minrating,True)</visible>
+		</control>
+		<!-- <control>
+			<type>label</type>
+			<description>Rating Global Filter Value</description>
+			<id>0</id>
+			<label>#myfilms.globalfilter.minratingvalue</label>
+			<visible>string.contains(#myfilms.globalfilter.minratingvalue)</visible>
+		</control> -->
+		</control>
+		<control>
 			<type>fadelabel</type>
 			<description>Config Name</description>
 			<id>1</id>
 			<posX>325</posX>
-			<posY>40</posY>
-			<width>355</width>
-			<height>24</height>
+			<posY>30</posY>
+			<width>155</width>
 			<label>label</label>
 			<font>font14</font>
 			<textcolor>cca9d0f7</textcolor>
@@ -125,31 +166,29 @@
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>View + Selection</description>
+			<description>View</description>
 			<id>1</id>
 			<posX>325</posX>
-			<posY>73</posY>
+			<posY>48</posY>
 			<width>355</width>
 			<height>24</height>
-			<label>label</label>
 			<font>font14</font>
 			<textcolor>7fffffff</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<label>#myfilms.view #myfilms.select #myfilms.globalfilter.unwatched</label>
+			<label>#myfilms.view</label>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>Global Filters Status</description>
+			<description>Selection</description>
 			<id>1</id>
 			<posX>325</posX>
-			<posY>73</posY>
+			<posY>67</posY>
 			<width>355</width>
 			<height>24</height>
-			<label>label</label>
 			<font>font14</font>
 			<textcolor>7fffffff</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<label>#myfilms.globalfilter.unwatched</label>
+			<label>#myfilms.select</label>
 		</control>
 		<control>
 			<type>actiongroup</type>
@@ -410,7 +449,7 @@
 			<type>imagelist</type>
 			<id>1</id>
 			<posX>120</posX>
-			<posY>67</posY>
+			<posY>75</posY>
 			<height>14</height>
 			<textureWidth>14</textureWidth>
 			<textureHeight>14</textureHeight>
@@ -588,14 +627,14 @@
 <!-- Watched/Unwatched Icon -->
 	<control>
 		<type>image</type>
-		<description>Watched Icon</description>
+		<description>UnWatched Icon</description>
 		<id>1</id>
 		<posX>280</posX>
 		<posY>400</posY>
 		<width>20</width>
 		<height>20</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)</visible>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
@@ -603,7 +642,7 @@
 	</control>
 	<control>
 		<type>image</type>
-		<description>UnWatched Icon</description>
+		<description>Watched Icon</description>
 		<id>1</id>
 		<posX>280</posX>
 		<posY>400</posY>
@@ -611,7 +650,7 @@
 		<height>20</height>
 		<texture>MyFilms\overlaywatched.png</texture>
 		<colordiffuse>eea9d0f7</colordiffuse>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)</visible>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	

@@ -196,6 +196,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         public override bool Init()
         {
+          LogMyFilms.Debug("MyFilmsDetail.Init() started.");
           // trakt scrobble background thread
           //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
           //TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
@@ -205,6 +206,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected override void OnPageLoad()
         {
+            Log.Debug("MyFilms.OnPageLoad() started.");
             setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
             setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
             setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
@@ -217,6 +219,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
 
             base.OnPageLoad();
+            Log.Debug("MyFilms.OnPageLoad() finished.");
         }
 
         #region Action
@@ -320,7 +323,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //---------------------------------------------------------------------------------------
         public override bool OnMessage(GUIMessage messageType)
         {
-
+            LogMyFilms.Debug("MFD: OnMessage - MessageType: '" + messageType.Message.ToString() + "'");
             int dControl = messageType.TargetControlId;
             int iControl = messageType.SenderControlId;
             switch (messageType.Message)
@@ -329,12 +332,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //---------------------------------------------------------------------------------------
                     // Windows Init
                     //---------------------------------------------------------------------------------------
+                    LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Starting");
                     if (ImgDetFilm != null)
                         if (ImgDetFilm.IsVisible)
                             ImgDetFilm.Refresh();
                         else if (ImgDetFilm2!= null)
                             ImgDetFilm2.Refresh();
-                    base.OnMessage(messageType);
+                    base.OnMessage(messageType); // Guzzi: Removing does not work properly...
 
                     wGetID = GetID;
                     GUIControl.ShowControl(GetID, 35);
@@ -364,7 +368,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     afficher_detail(true);
                     MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
-                    return true;                
+                    LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Returning");
+                    return true;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
                     if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
@@ -528,6 +533,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         // Hier Aktivitäten wie z.b. ListControl für Actors?
                         GUIWindowManager.ShowPreviousWindow();
                         //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
+                        base.OnMessage(messageType); 
                         return true;
 
             }
@@ -612,18 +618,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         choiceViewMenu.Add("delete");
                     }
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798702)); // local updates ...
-                    choiceViewMenu.Add("localupdates");
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798702)); // Updates ...
+                    choiceViewMenu.Add("updatesmenu");
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798703)); // online updates ...
-                    choiceViewMenu.Add("onlineupdates");
-
-                    // ToDo: Add "functional" menus like "covermenu", "updatemenu", "fanartmenu"
-                    //dlgmenu.Add("Trailer ...");
-                    //choiceViewMenu.Add("trailermenu");
-
-                    //dlgmenu.Add("Fanart ...");
-                    //choiceViewMenu.Add("fanartmenu");
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
+                    choiceViewMenu.Add("fanartcovermenu");
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
@@ -809,7 +808,102 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     afficher_detail(true);
                     break;
 
-                case "trailermenu":
+              case "updatesmenu":
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    choiceViewMenu.Clear();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798702)); // Updates ...
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
+                    choiceViewMenu.Add("grabber");
+
+                    if (MyFilms.conf.StrUpdList[0].Length > 0)
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798642));  // Update by Property (choosen within the UPdate List Property
+                      choiceViewMenu.Add("updproperty");
+                    }
+
+                    //if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && (MyFilms.conf.WindowsFileDialog))
+                    if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)")
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798636));//filename
+                      choiceViewMenu.Add("fileselect");
+                    }
+
+                    //No more needed because of updproperties !!! - so discussion about removal?
+                    if (StrUpdItem1 != "(none)")
+                    {
+                      if (StrUpdText1.Length > 0)
+                        dlgmenu.Add(StrUpdText1);        //Specific Item1 label to update
+                      else
+                        dlgmenu.Add(StrUpdItem1);        //Specific Item1 to update
+                      choiceViewMenu.Add("item1");
+                    }
+                    if (StrUpdItem2 != "(none)")
+                    {
+                      if (StrUpdText2.Length > 0)
+                        dlgmenu.Add(StrUpdText2);        //Specific Item2 label to update
+                      else
+                        dlgmenu.Add(StrUpdItem2);        //Specific Item2 to update
+                      choiceViewMenu.Add("item2");
+                    }
+
+                    if (ExtendedStartmode("Details context: nfo-reader-update"))
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798730));             //Update Moviedetails from nfo-file - also download actor thumbs, Fanart, etc. if available
+                      choiceViewMenu.Add("nfo-reader-update");
+                    }
+
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798721));             //Update Moviedetails from ant.info file
+                    //choiceViewMenu.Add("ant-nfo-reader");
+
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
+                    //choiceViewMenu.Add("ant-nfo-writer");
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                    {
+                      Change_Menu("mainmenu");
+                      return;
+                    }
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    break;
+
+              case "fanartcovermenu":
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    choiceViewMenu.Clear();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
+
+                    if (MyFilms.conf.StrFanart)            // Download Fanart
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079862));
+                      choiceViewMenu.Add("fanart");
+                    }
+                    if (MyFilms.conf.StrFanart)            // Remove Fanart
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079874));
+                      choiceViewMenu.Add("deletefanart");
+                    }
+
+                    if (ExtendedStartmode("Details context: Thumb creator (and fanart creator?)"))
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798728));
+                      //Create Thumb from movie - if no cover available, e.g. with documentaries
+                      choiceViewMenu.Add("cover-thumbnailer");
+                    }
+
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                    {
+                      Change_Menu("mainmenu");
+                      return;
+                    }
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    break;
+
+              case "trailermenu":
                     if (dlgmenu == null) return;
                     dlgmenu.Reset();
                     choiceViewMenu.Clear();
@@ -841,109 +935,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                       dlgmenu.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
                       choiceViewMenu.Add("trailer-delete");
-                    }
 
-                    dlgmenu.DoModal(GetID);
-                    if (dlgmenu.SelectedLabel == -1)
-                    {
-                      Change_Menu("mainmenu");
-                      return;
-                    }
-                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
-                    break;
-
-                case "localupdates":
-                    if (dlgmenu == null) return;
-                    dlgmenu.Reset();
-                    choiceViewMenu.Clear();
-                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798702)); // Local Updates ...
-
-                    if (MyFilms.conf.StrUpdList[0].Length > 0)
-                    {
-                        dlgmenu.Add(GUILocalizeStrings.Get(10798642));  // Update by Property (choosen within the UPdate List Property
-                        choiceViewMenu.Add("updproperty");
-                    }
-
-                    //if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && (MyFilms.conf.WindowsFileDialog))
-                    if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)")
-                    {
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798636));//filename
-                        choiceViewMenu.Add("fileselect");
-                    }
-
-                    //No more needed because of updproperties !!! - so discussion about removal?
-                    if (StrUpdItem1 != "(none)")
-                        {
-                        if (StrUpdText1.Length > 0)
-                            dlgmenu.Add(StrUpdText1);        //Specific Item1 label to update
-                        else
-                            dlgmenu.Add(StrUpdItem1);        //Specific Item1 to update
-                        choiceViewMenu.Add("item1");
-                        }
-                    if (StrUpdItem2 != "(none)")
-                    {
-                        if (StrUpdText2.Length > 0)
-                            dlgmenu.Add(StrUpdText2);        //Specific Item2 label to update
-                        else
-                            dlgmenu.Add(StrUpdItem2);        //Specific Item2 to update
-                        choiceViewMenu.Add("item2");
-                    }
-
-                    if(ExtendedStartmode("Details context: nfo-reader-update"))
-                    {
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798730));             //Update Moviedetails from nfo-file - also download actor thumbs, Fanart, etc. if available
-                      choiceViewMenu.Add("nfo-reader-update");
-                    }
-
-                    //dlgmenu.Add(GUILocalizeStrings.Get(10798721));             //Update Moviedetails from ant.info file
-                    //choiceViewMenu.Add("ant-nfo-reader");
-
-                    //dlgmenu.Add(GUILocalizeStrings.Get(10798722));             //Save Moviedetails to ant.info file
-                    //choiceViewMenu.Add("ant-nfo-writer");
-
-                    if (ExtendedStartmode("Details context: Thumb creator (and fanart creator?)"))
-                    {
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798728));
-                        //Create Thumb from movie - if no cover available, e.g. with documentaries
-                      choiceViewMenu.Add("cover-thumbnailer");
-                    }
-
-                    dlgmenu.DoModal(GetID);
-                    if (dlgmenu.SelectedLabel == -1)
-                    {
-                      Change_Menu("mainmenu");
-                      return;
-                    }
-                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
-                    break;
-
-                case "onlineupdates":
-                    if (dlgmenu == null) return;
-                    dlgmenu.Reset();
-                    choiceViewMenu.Clear();
-                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Online Updates ...
-
-                    dlgmenu.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-                    choiceViewMenu.Add("grabber");
-
-                    if (ExtendedStartmode("Details context: Trailer Download"))
-                    {
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
-                      choiceViewMenu.Add("trailer-imdb");
-
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798725));             //delete Trailer entries from DB record
-                      choiceViewMenu.Add("trailer-delete");
-                    }
-
-                    if (MyFilms.conf.StrFanart)            // Download Fanart
-                    {
-                        dlgmenu.Add(GUILocalizeStrings.Get(1079862));
-                        choiceViewMenu.Add("fanart");
-                    }
-                    if (MyFilms.conf.StrFanart)            // Remove Fanart
-                    {
-                        dlgmenu.Add(GUILocalizeStrings.Get(1079874));
-                        choiceViewMenu.Add("deletefanart");
+                      if (ExtendedStartmode("Details context: Trailer Download"))
+                      {
+                        dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
+                        choiceViewMenu.Add("trailer-imdb");
+                      }
                     }
 
                     dlgmenu.DoModal(GetID);
@@ -1340,12 +1337,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (watched)
           {
             MyFilms.r[Index][MyFilms.conf.StrWatchedField] = "true";
-            LogMyFilms.Info("MF: Database movie set 'watched' by setting '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' to '" + "true" + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+            LogMyFilms.Info("MF: Database movie set 'watched' by setting '" + MyFilms.conf.StrWatchedField.ToString() + "' to '" + "true" + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
           }
           else
           {
             MyFilms.r[Index][MyFilms.conf.StrWatchedField] = MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
-            LogMyFilms.Info("MF: Database movie set 'watched' by setting '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' to '" + MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower() + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+            LogMyFilms.Info("MF: Database movie set 'watched' by setting '" + MyFilms.conf.StrWatchedField.ToString() + "' to '" + MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower() + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
           }
           Update_XML_database();
         }
@@ -1478,6 +1475,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript, int GetID, bool interactive, bool nfo, string nfofile)
         {
+//0  - "OriginalTitle", 
+//1  - "TranslatedTitle", 
+//2  - "Picture", 
+//3  - "Description", 
+//4  - "Rating", 
+//5  - "Actors", 
+//6  - "Director", 
+//7  - "Producer", 
+//8  - "Year", 
+//9  - "Country", 
+//10 - "Category", 
+//11 - "URL"
+//12 - "ImageURL"
+//13 - "MultipurposeURLlink"
+//14 - comment
+//15 - language
+//16 - tagline
+//17 - certification
+            
             LogMyFilms.Debug("MF: launching (grabb_Internet_Details_Informations) with url = '" + url.ToString() + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID.ToString() + "', interactive = '" + interactive.ToString() + "'"); 
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string[] Result = new string[20];
@@ -1520,8 +1536,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgmenu.Add(GUILocalizeStrings.Get(10798735));
                 choiceViewMenu.Add("missing");
 
-                // All firlds: string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director", "Producer", "Year", "Country", "Category", "URL", "Comments", "Languages", "Tagline", "Certification" };
-                string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director", "Producer", "Year", "Country", "Category", "URL", "Comments", "Languages" };
+                string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director", "Producer", "Year", "Country", "Category", "URL", "ImageURL", "MultipurposeURLlink", "Comments", "Languages", "Tagline", "Certification" };
                 string strOldValue = "";
                 string strNewValue = "";
 
@@ -1539,9 +1554,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (strOldValue == null)
                             strOldValue = "";
 
-                        dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue + "' -> '" + strNewValue + "'");
-                        choiceViewMenu.Add(wProperty);
-                        LogMyFilms.Debug("MF: GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                        if (wProperty != "ImageURL" && wProperty != "MultipurposeURLlink" && wProperty != "Tagline" && wProperty != "Certification")
+                        {
+                          dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue + "' -> '" + strNewValue + "'");
+                          choiceViewMenu.Add(wProperty);
+                          LogMyFilms.Debug("MF: GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                        }
+                        else
+                        {
+                          LogMyFilms.Debug("MF: GrabberUpdate - Not added to menu (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                        }
                     }
                     catch
                     {
@@ -1712,11 +1734,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                 case "Comments":
                     if (!string.IsNullOrEmpty(Result[14]))
-                      MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[5].ToString(); 
+                      MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[14].ToString(); 
                     break;
                 case "Languages":
                     if (!string.IsNullOrEmpty(Result[15]))
-                      MyFilms.r[MyFilms.conf.StrIndex]["Languages"] = Result[5].ToString();
+                      MyFilms.r[MyFilms.conf.StrIndex]["Languages"] = Result[15].ToString();
                     break;
                 case "all":
                 case "missing":
@@ -1840,10 +1862,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 MyFilms.r[MyFilms.conf.StrIndex]["URL"] = Result[11].ToString();
                     if (!string.IsNullOrEmpty(Result[14]))
                       if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Comments"].ToString()) || !onlymissing)
-                        MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[10].ToString();
+                        MyFilms.r[MyFilms.conf.StrIndex]["Comments"] = Result[14].ToString();
                     if (!string.IsNullOrEmpty(Result[15]))
                       if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Languages"].ToString()) || !onlymissing)
-                        MyFilms.r[MyFilms.conf.StrIndex]["Languages"] = Result[10].ToString();
+                        MyFilms.r[MyFilms.conf.StrIndex]["Languages"] = Result[15].ToString();
                     break;
 
                 default:
@@ -2813,7 +2835,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         setGUIProperty("user.sourcetrailer.count", split1.Count().ToString());
                       }
                       else
-                        setGUIProperty("user.sourcetrailer.count", "0");
+                        setGUIProperty("user.sourcetrailer.count", "");
                     }
 
                     if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
@@ -3569,6 +3591,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         private void OnPlayBackStarted(MediaPortal.Player.g_Player.MediaType type, string filename)
         {
+            LogMyFilms.Debug("MFD: OnPlayBackStarted was initiated");
+
             if (type != g_Player.MediaType.Video) return;
             // store informations for action at endplayback if any
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
@@ -3585,14 +3609,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         private void OnPlayBackEnded(MediaPortal.Player.g_Player.MediaType type, string filename)
         {
-            UpdateOnPlayEnd(type, 0, filename, true);
+          LogMyFilms.Debug("MFD: OnPlayBackEnded was initiated");
+          UpdateOnPlayEnd(type, 0, filename, true, false);
         }
         private void OnPlayBackStopped(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename)
         {
-            UpdateOnPlayEnd(type, timeMovieStopped, filename, false);
+          LogMyFilms.Debug("MFD: OnPlayBackStopped was initiated");
+          UpdateOnPlayEnd(type, timeMovieStopped, filename, false, true);
         }
-        private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended)
+        private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
         {
+            LogMyFilms.Debug("MFD: UpdateOnPlayEnd was initiated");
 
             if (MyFilms.conf.StrPlayedIndex == -1)
                 return;
@@ -3603,86 +3630,66 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 DataRow[] r1 = BaseMesFilms.LectureDonnées(MyFilms.conf.StrPlayedDfltSelect, MyFilms.conf.StrPlayedSelect, MyFilms.conf.StrPlayedSort, MyFilms.conf.StrPlayedSens);
                 // Handle all movie files from idMovie
                 ArrayList movies = new ArrayList();
+                int playTimePercentage = 0; // Set watched flag after 80% of total played time
                 int iidMovie = VideoDatabase.GetMovieId(filename);
                 if (iidMovie >= 0)
                 {
                     VideoDatabase.GetFiles(iidMovie, ref movies);
-                    if (movies.Count <= 0)
-                        return;
-                    foreach (object t in movies)
+                    //HashSet<string> watchedMovies = new HashSet<string>();
+
+                    if (g_Player.Player.Duration >= 1)
                     {
-                        string strFilePath = (string)t;
-                        int idFile = VideoDatabase.GetFileId(strFilePath);
-                        byte[] resumeData = null;
-                        if (idFile < 0)
-                            break;
-                        if (ended)
+                      playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
+                      LogMyFilms.Debug("MFD: Calculated playtimepercentage: '" + playTimePercentage + "'");
+                      
+                    }
+
+                    if (movies.Count <= 0)
+                          return;
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                      string strFilePath = (string)movies[i];
+                      int idFile = VideoDatabase.GetFileId(strFilePath);
+                      byte[] resumeData = null;
+                      if (idFile < 0) 
+                        break;
+                      if (g_Player.IsDVDMenu)
+                        {
+                          VideoDatabase.SetMovieStopTimeAndResumeData(idFile, 0, null);
+                          //watchedMovies.Add(strFilePath);
+                        }
+
+                      else if ((filename.Trim().ToLower().Equals(strFilePath.Trim().ToLower())) && (timeMovieStopped > 0))
+                        {
+                        g_Player.Player.GetResumeState(out resumeData);
+                        LogMyFilms.Info("GUIVideoFiles: {0} idFile={1} timeMovieStopped={2} resumeData={3}", "MyFilms", idFile, timeMovieStopped, resumeData);
+                        VideoDatabase.SetMovieStopTimeAndResumeData(idFile, timeMovieStopped, resumeData);
+                        LogMyFilms.Debug("GUIVideoFiles: {0} store resume time", "MyFilms");
+
+                        //Set file "watched" only if 80% or higher played time (share view)
+                        if (playTimePercentage >= 80)
+                          {
+                            //watchedMovies.Add(strFilePath);
+                          }
+                        }
+                      else
+                      {
+                        VideoDatabase.DeleteMovieStopTime(idFile);
+                      }
+                      if (ended)
                         {
                             // Set resumedata to zero
                             VideoDatabase.GetMovieStopTimeAndResumeData(idFile, out resumeData);
                             VideoDatabase.SetMovieStopTimeAndResumeData(idFile, 0, resumeData);
                             LogMyFilms.Info("MF: GUIVideoFiles: OnPlayBackEnded idFile={0} resumeData={1}", idFile, resumeData);
                         }
-                        else
+                      else
                         {
                             // ToDo: Activate and modify code to set watched earlier than "ended" ...
-                            // Guzzi: Code from TV-series to set as watched after xWatchedAfter %
-                            //#region Set Resume Point or Watched
-                            //double watchedAfter = DBOption.GetOptions(DBOption.cWatchedAfter);
-                            //if ((timeMovieStopped / playlistPlayer.g_Player.Duration) > watchedAfter / 100)
-                            //{
-                            //  m_currentEpisode[DBEpisode.cStopTime] = 0;
-                            //  m_currentEpisode[DBEpisode.cDateWatched] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            //  m_currentEpisode.Commit();
-                            //  PlaybackOperationEnded(true);
-                            //}
-                            //else
-                            //{
-                            //  m_currentEpisode[DBEpisode.cStopTime] = timeMovieStopped;
-                            //  m_currentEpisode.Commit();
-                            //  PlaybackOperationEnded(false);
-                            //}
-                            //#endregion
-
                             // Watched status for videos not in the movie database (sample code from MyVideos)
-
                             //int playTimePercentage = 0; // Set watched flag after 80% of total played time
-
                             //if (g_Player.Player.Duration >= 1)
                             //  playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
-
-
-
-                            //if (!foundWatched && markWatchedFiles)
-                            //{
-                            //  if (fileId >= 0)
-                            //  {
-                            //    bool watched = VideoDatabase.GetVideoFileWatched(fileId);
-
-                            //    if (watched)
-                            //    {
-                            //      foundWatched = true;
-                            //    }
-                            //    // Set watched status for old files before DB upgrade
-                            //    else
-                            //    {
-                            //      int duration = VideoDatabase.GetMovieDuration(fileId);
-                            //      int stopTime = VideoDatabase.GetMovieStopTime(fileId);
-                            //      int playedPercentage = 0;
-
-                            //      if (duration > 0)
-                            //      {
-                            //        playedPercentage = (100 * stopTime / duration);
-                            //      }
-
-                            //      if (playedPercentage >= 80)
-                            //      {
-                            //        foundWatched = true;
-                            //        VideoDatabase.SetVideoFileWatched(fileId, true);
-                            //      }
-                            //    }
-                            //  }
-                            //}
 
                             if ((filename == strFilePath) && (timeMovieStopped > 0))
                             {
@@ -3695,28 +3702,48 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 VideoDatabase.DeleteMovieStopTime(idFile);
                         }
                     }
-                    if (ended)
+                    if (ended || (stopped && MyFilms.conf.CheckWatchedPlayerStopped))
                     {
-                        IMDBMovie details = new IMDBMovie();
-                        VideoDatabase.GetMovieInfoById(iidMovie, ref details);
-                        details.Watched++;
+                      // Update db view watched status for played movie
+                      IMDBMovie details = new IMDBMovie();
+                      VideoDatabase.GetMovieInfo(filename, ref details);
+                      //VideoDatabase.GetMovieInfoById(iidMovie, ref details);
+                      if (!details.IsEmpty && (playTimePercentage >= 80 || g_Player.IsDVDMenu)) //Flag movie "watched" status only if 80% or higher played time (database view)
+                      {
+                        details.Watched = 1;
+                        //details.Watched++;
                         VideoDatabase.SetWatched(details);
+                        //VideoDatabase.SetMovieInfoById(details.ID, ref details);
+                      }
+
                     }
                 }
                 if (MyFilms.conf.CheckWatched)
-                    r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                {
+                  r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  LogMyFilms.Debug("MFD: Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie start'");
+                }
                 if (ended)
                 {
                   if (MyFilms.conf.StrSupPlayer)
                     Suppress_Entry(r1, MyFilms.conf.StrPlayedIndex);
-                  if (MyFilms.conf.CheckWatchedPlayerStopped)
-                    r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
                 }
+                if (ended && MyFilms.conf.CheckWatchedPlayerStopped)
+                {
+                  r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  LogMyFilms.Debug("MFD: Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie end'");
+                }
+                if (stopped && MyFilms.conf.CheckWatchedPlayerStopped && playTimePercentage >= 80)
+                {
+                  r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  LogMyFilms.Debug("MFD: Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie end'");
+                }
+
                 if ((MyFilms.conf.CheckWatched) || (MyFilms.conf.CheckWatchedPlayerStopped) || (MyFilms.conf.StrSupPlayer))
                 {
                   Update_XML_database();
                   afficher_detail(true);
-                  GUIWindowManager.Process();
+                  //GUIWindowManager.Process(); // Enabling creates look in handler !!!
                 }
                 MyFilms.conf.StrPlayedIndex = -1;
                 MyFilms.conf.StrPlayedDfltSelect = string.Empty;
@@ -4698,12 +4725,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("MF: SearchTrailerLocal - starting ExtendedSearch in Searchdirectory: '" + MyFilms.conf.StrDirStorTrailer.ToString() + "'");
                 foreach (string storage in Trailerdirectories)
                 {
+                  LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectory: '" + storage + "', search title1: '" + titlename.ToLower() + "', search title2: '" + titlename2.ToLower() + "'");
                   // First search rootdirectory
                   files = Directory.GetFiles(storage, "*.*", SearchOption.TopDirectoryOnly);
                   foreach (string filefound in files)
                   {
                     LogMyFilms.Debug("MF: (TrailersearchLocal) - Files found in root dir to check matching: '" + filefound + "'");
-                    if (((filefound.ToLower().Contains(titlename.ToLower())) || (filefound.ToLower().Contains(titlename2.ToLower()))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
+                    if ((!string.IsNullOrEmpty(titlename) && filefound.ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && filefound.ToLower().Contains(titlename2.ToLower())) && (MediaPortal.Util.Utils.IsVideo(filefound)))
                     {
                       wsize = new System.IO.FileInfo(filefound).Length;
                       result.Add(filefound);
@@ -4716,12 +4744,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   
                   // Now search subdirectories
-                  LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectory: '" + storage + "', search title1: '" + titlename.ToLower() + "', search title2: '" + titlename2.ToLower() + "'");
                     directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
                     foreach (string directoryfound in directories)
                     {
                         LogMyFilms.Debug("MF: (TrailersearchLocal) - Directory found to check matching: '" + directoryfound + "'");
-                        if ((directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
+                        if ((!string.IsNullOrEmpty(titlename) && directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
                         {
                             LogMyFilms.Debug("MF: (TrailersearchLocal) - Matching Directory found : '" + directoryfound + "'");
                             files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
@@ -4746,7 +4773,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             foreach (string filefound in files)
                             {
                                 LogMyFilms.Debug("MF: (TrailersearchLocal) - Files found in sub dir to check matching: '" + filefound + "'");
-                                if (((filefound.ToLower().Contains(titlename.ToLower())) || (filefound.ToLower().Contains(titlename2.ToLower()) && !string.IsNullOrEmpty(titlename2))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
+                                if (((!string.IsNullOrEmpty(titlename) && filefound.ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && filefound.ToLower().Contains(titlename2.ToLower()))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
                                 {
                                     wsize = new System.IO.FileInfo(filefound).Length;
                                     result.Add(filefound);

@@ -5180,7 +5180,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //*****************************************************************************************
         private void InitMainScreen()
         {
-            LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties !!!"); 
+            LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties !!!");
+
+            // Clearing currentconfig and views should not be done here, otherwise settings are lost when reentering plugin ...
+            //MyFilmsDetail.clearGUIProperty("config.currentconfig");
+            //MyFilmsDetail.clearGUIProperty("view");
+            //MyFilmsDetail.clearGUIProperty("picture");
+          
+          
             MovieScrobbling = false; //Reset MovieScrobbling
             MyFilmsDetail.Init_Detailed_DB();  // Includes clear of db & user properties
 
@@ -5987,19 +5994,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
          MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
          MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
-         // Clear GUI Properties when first entering the plugin
-         // This will avoid ugly property names being seen before 
-         // its corresponding value is assigned
-         MyFilmsDetail.clearGUIProperty("logos_id2001");
-         MyFilmsDetail.clearGUIProperty("logos_id2002");
-         MyFilmsDetail.clearGUIProperty("logos_id2003");
-         MyFilmsDetail.clearGUIProperty("logos_id2012"); // Combined Logo
-         MyFilmsDetail.clearGUIProperty("nbobjects.value");
-         MyFilmsDetail.clearGUIProperty("Fanart");
-         MyFilmsDetail.clearGUIProperty("Fanart2");
-         MyFilmsDetail.clearGUIProperty("config.currentconfig");
-         MyFilmsDetail.clearGUIProperty("view");
-         MyFilmsDetail.clearGUIProperty("picture");
+         // Following settings Movied to InitScreen !!!
+         //// Clear GUI Properties when first entering the plugin
+         //// This will avoid ugly property names being seen before 
+         //// its corresponding value is assigned
+         //MyFilmsDetail.clearGUIProperty("logos_id2001");
+         //MyFilmsDetail.clearGUIProperty("logos_id2002");
+         //MyFilmsDetail.clearGUIProperty("logos_id2003");
+         //MyFilmsDetail.clearGUIProperty("logos_id2012"); // Combined Logo
+         //MyFilmsDetail.clearGUIProperty("nbobjects.value");
+         //MyFilmsDetail.clearGUIProperty("Fanart");
+         //MyFilmsDetail.clearGUIProperty("Fanart2");
+         //MyFilmsDetail.clearGUIProperty("config.currentconfig");
+         //MyFilmsDetail.clearGUIProperty("view");
+         //MyFilmsDetail.clearGUIProperty("picture");
        }
 
     private void Load_Logos(DataRow row)

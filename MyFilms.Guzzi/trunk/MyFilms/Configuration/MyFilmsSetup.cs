@@ -245,6 +245,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSort_Change();
             Config_Name.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
             chkLogos.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Logos", true); // Changed default to "true" - hope, it works even without fiull working config ....
+
+            // Show number of configs available ...
+            textBoxNBconfigs.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", string.Empty);
+
             st = new ScheduledTasks();
             Task t = null; ;
             string name = string.Empty;
@@ -911,7 +915,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           
             string w_Config_Name = Config_Name.Text;
             Config_Name.Items.Remove(Config_Name.Text);
-            Config_Name.Items.Add(w_Config_Name);
+            Config_Name.Items.Add(w_Config_Name); 
             Config_Name.Text = w_Config_Name;
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
             if (chkLogos.Checked) // Save Logoconfig ...
@@ -922,6 +926,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //{
             //  Save_XML_AMCconfig(currentconfig);
             //}
+            textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
             System.Windows.Forms.MessageBox.Show("Configuration saved !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -1334,6 +1339,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             cTraktUsername = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktUsername", "");
             cTraktPassword = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktPassword", "");
+            textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
         }
 
         private void Refresh_Items(bool all)
@@ -1550,6 +1556,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 Config_Name.Items.Remove(Config_Name.Text);
                 Refresh_Items(true);
                 Config_Name.ResetText();
+                textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
             }
         }
 
@@ -1568,6 +1575,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 System.Windows.Forms.MessageBox.Show("Created a copy of current Configuration !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 Save_Config();
                 Config_Name.Focus();
+                textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
             }
         }
 
@@ -4213,6 +4221,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //Config_Name_Load();
             System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Config_Name.Focus();
+            textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
           }
 
         }

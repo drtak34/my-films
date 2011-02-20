@@ -88,8 +88,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
       if (!LeaveShareThumb && !aCacheThumb)
       {
-        LogMyFilms.Warn(
-          "VideoThumbCreator: No share thumbs wanted by config option AND no caching wanted - where should the thumb go then? Aborting..");
+        LogMyFilms.Warn("VideoThumbCreator: No share thumbs wanted by config option AND no caching wanted - where should the thumb go then? Aborting..");
         return false;
       }
 

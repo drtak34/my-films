@@ -105,6 +105,48 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
+			<description>Filters group</description>
+			<type>group</type>
+			<posX>360</posX>
+			<posY>40</posY>
+			<layout>StackLayout(5,Horizontal)</layout>
+            <dimColor>ffffffff</dimColor>
+		<control>
+			<type>image</type>
+			<description>UnWatched Global Filter Icon</description>
+			<id>0</id>
+			<width>20</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\overlayunwatched.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Trailer Global Filter Icon</description>
+			<id>0</id>
+			<width>20</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\filmstrip.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.trailersonly,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Rating Global Filter Icon</description>
+			<id>0</id>
+			<width>22</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>stargood.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.minrating,True)</visible>
+		</control>
+		<!-- <control>
+			<type>label</type>
+			<description>Rating Global Filter Value</description>
+			<id>0</id>
+			<label>#myfilms.globalfilter.minratingvalue</label>
+			<visible>string.contains(#myfilms.globalfilter.minratingvalue)</visible>
+		</control> -->
+		</control>
+		<control>
 			<type>fadelabel</type>
 			<description>Config Name</description>
 			<id>1</id>
@@ -429,11 +471,10 @@
 		<id>2025</id>
 		<posX>520</posX>
 		<posY>100</posY>
-		<font>font20</font>
 		<align>left</align>
 		<textcolor>ffffffff</textcolor>
 		<width>750</width>
-		<font>font16</font>
+		<font>font18</font>
 		<label>#myfilms.user.mastertitle.value</label>
 		<visible>!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
@@ -1208,7 +1249,7 @@ Detailmenu for technical details
 		<id>1</id>
 		<posX>520</posX>
 		<posY>570</posY>
-		<label>#myfilms.user.sourcetrailer.label:</label>
+		<label>#myfilms.user.sourcetrailer.label (#myfilms.user.sourcetrailer.count):</label>
 		<textcolor>90ffffff</textcolor>
 		<font>font14</font>
 		<width>200</width>
@@ -1508,14 +1549,14 @@ Detailmenu for technical details
 <!-- Watched/Unwatched Icon -->
 	<control>
 		<type>image</type>
-		<description>Watched Icon</description>
+		<description>UnWatched Icon</description>
 		<id>1</id>
 		<posX>377</posX>
 		<posY>633</posY>
 		<width>20</width>
 		<height>20</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)</visible>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
@@ -1523,7 +1564,7 @@ Detailmenu for technical details
 	</control>
 	<control>
 		<type>image</type>
-		<description>UnWatched Icon</description>
+		<description>Watched Icon</description>
 		<id>1</id>
 		<posX>377</posX>
 		<posY>633</posY>
@@ -1531,7 +1572,7 @@ Detailmenu for technical details
 		<height>20</height>
 		<texture>MyFilms\overlaywatched.png</texture>
 		<colordiffuse>eea9d0f7</colordiffuse>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)</visible>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	

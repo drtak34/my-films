@@ -25,6 +25,7 @@
 
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
+  using System.Globalization;
   using MediaPortal.GUI.Library;
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
@@ -134,8 +135,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public void SetHeading(int iString)
     {
-      if (iString == 0) SetHeading(string.Empty);
-      else SetHeading(GUILocalizeStrings.Get(iString));
+      if (iString == 0) 
+        SetHeading(string.Empty);
+      else 
+        SetHeading(GUILocalizeStrings.Get(iString));
     }
 
     public void SetTitle(string title)

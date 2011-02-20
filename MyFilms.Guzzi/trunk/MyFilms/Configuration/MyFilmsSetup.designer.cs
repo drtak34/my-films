@@ -207,6 +207,7 @@
           this.txtAMCUpd_cnf = new System.Windows.Forms.TextBox();
           this.btnAMCUpd_cnf = new System.Windows.Forms.Button();
           this.groupBox_AMCupdater_ExternalApplication = new System.Windows.Forms.GroupBox();
+          this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.btnCreateAMCDefaultConfig = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.lblAMCMovieScanPath = new System.Windows.Forms.Label();
@@ -453,8 +454,9 @@
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
+          this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
+          this.lblNbConfig = new System.Windows.Forms.Label();
           this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
-          this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -519,7 +521,7 @@
           this.Config_Name.FormattingEnabled = true;
           this.Config_Name.Location = new System.Drawing.Point(195, 39);
           this.Config_Name.Name = "Config_Name";
-          this.Config_Name.Size = new System.Drawing.Size(222, 21);
+          this.Config_Name.Size = new System.Drawing.Size(172, 21);
           this.Config_Name.Sorted = true;
           this.Config_Name.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.Config_Name, resources.GetString("Config_Name.ToolTip"));
@@ -530,7 +532,7 @@
           // 
           this.textBoxPluginName.Location = new System.Drawing.Point(195, 11);
           this.textBoxPluginName.Name = "textBoxPluginName";
-          this.textBoxPluginName.Size = new System.Drawing.Size(222, 20);
+          this.textBoxPluginName.Size = new System.Drawing.Size(172, 20);
           this.textBoxPluginName.TabIndex = 5;
           this.ToolTip1.SetToolTip(this.textBoxPluginName, "Name of the plugin displayed in MP.\r\nBy default Films, but you can choose a bette" +
                   "r name");
@@ -583,7 +585,7 @@
           // 
           this.label_VersionNumber.AutoSize = true;
           this.label_VersionNumber.ForeColor = System.Drawing.SystemColors.HotTrack;
-          this.label_VersionNumber.Location = new System.Drawing.Point(658, 16);
+          this.label_VersionNumber.Location = new System.Drawing.Point(650, 16);
           this.label_VersionNumber.Name = "label_VersionNumber";
           this.label_VersionNumber.Size = new System.Drawing.Size(103, 13);
           this.label_VersionNumber.TabIndex = 34;
@@ -1717,6 +1719,16 @@
           this.groupBox_AMCupdater_ExternalApplication.TabStop = false;
           this.groupBox_AMCupdater_ExternalApplication.Text = "AMC Updater external application";
           // 
+          // btnGrabberInterface
+          // 
+          this.btnGrabberInterface.Location = new System.Drawing.Point(17, 18);
+          this.btnGrabberInterface.Name = "btnGrabberInterface";
+          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 23);
+          this.btnGrabberInterface.TabIndex = 86;
+          this.btnGrabberInterface.Text = "Grabber Interface";
+          this.btnGrabberInterface.UseVisualStyleBackColor = true;
+          this.btnGrabberInterface.Click += new System.EventHandler(this.btnGrabberInterface_Click);
+          // 
           // btnCreateAMCDefaultConfig
           // 
           this.btnCreateAMCDefaultConfig.AllowDrop = true;
@@ -2089,9 +2101,11 @@
           this.CheckWatchedPlayerStopped.AutoSize = true;
           this.CheckWatchedPlayerStopped.Location = new System.Drawing.Point(10, 34);
           this.CheckWatchedPlayerStopped.Name = "CheckWatchedPlayerStopped";
-          this.CheckWatchedPlayerStopped.Size = new System.Drawing.Size(279, 17);
+          this.CheckWatchedPlayerStopped.Size = new System.Drawing.Size(332, 17);
           this.CheckWatchedPlayerStopped.TabIndex = 75;
-          this.CheckWatchedPlayerStopped.Text = "Update the \'Watched\' field when playback is finished.";
+          this.CheckWatchedPlayerStopped.Text = "Update the \'Watched\' field when playback is stopped or finished.";
+          this.ToolTip1.SetToolTip(this.CheckWatchedPlayerStopped, "watched status will be set if:\r\n- movie ended\r\n- movie was stopped at a playtime " +
+                  ">= 80%");
           this.CheckWatchedPlayerStopped.UseVisualStyleBackColor = true;
           this.CheckWatchedPlayerStopped.CheckedChanged += new System.EventHandler(this.CheckWatchedPlayerStopped_CheckedChanged);
           // 
@@ -2149,6 +2163,7 @@
           this.CheckWatched.Size = new System.Drawing.Size(269, 17);
           this.CheckWatched.TabIndex = 69;
           this.CheckWatched.Text = "Update the \'Watched\' field when movie is launched";
+          this.ToolTip1.SetToolTip(this.CheckWatched, "watched status will be set if:\r\n- movie is started");
           this.CheckWatched.UseVisualStyleBackColor = true;
           this.CheckWatched.CheckedChanged += new System.EventHandler(this.CheckWatched_CheckedChanged);
           // 
@@ -2357,9 +2372,9 @@
           this.label43.AutoSize = true;
           this.label43.Location = new System.Drawing.Point(164, 22);
           this.label43.Name = "label43";
-          this.label43.Size = new System.Drawing.Size(124, 13);
+          this.label43.Size = new System.Drawing.Size(161, 13);
           this.label43.TabIndex = 42;
-          this.label43.Text = "Value for predefined filter";
+          this.label43.Text = "Search Label to display on menu";
           // 
           // label42
           // 
@@ -4375,6 +4390,25 @@
           this.General.TabIndex = 46;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
           // 
+          // textBoxNBconfigs
+          // 
+          this.textBoxNBconfigs.Enabled = false;
+          this.textBoxNBconfigs.Location = new System.Drawing.Point(421, 39);
+          this.textBoxNBconfigs.Name = "textBoxNBconfigs";
+          this.textBoxNBconfigs.Size = new System.Drawing.Size(28, 20);
+          this.textBoxNBconfigs.TabIndex = 80;
+          this.textBoxNBconfigs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+          // 
+          // lblNbConfig
+          // 
+          this.lblNbConfig.AutoSize = true;
+          this.lblNbConfig.Enabled = false;
+          this.lblNbConfig.Location = new System.Drawing.Point(373, 42);
+          this.lblNbConfig.Name = "lblNbConfig";
+          this.lblNbConfig.Size = new System.Drawing.Size(42, 13);
+          this.lblNbConfig.TabIndex = 81;
+          this.lblNbConfig.Text = "Configs";
+          // 
           // traktConfiguration1
           // 
           this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -4385,21 +4419,13 @@
           this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
           this.traktConfiguration1.TabIndex = 0;
           // 
-          // btnGrabberInterface
-          // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(17, 18);
-          this.btnGrabberInterface.Name = "btnGrabberInterface";
-          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 23);
-          this.btnGrabberInterface.TabIndex = 86;
-          this.btnGrabberInterface.Text = "Grabber Interface";
-          this.btnGrabberInterface.UseVisualStyleBackColor = true;
-          this.btnGrabberInterface.Click += new System.EventHandler(this.btnGrabberInterface_Click);
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(779, 506);
+          this.Controls.Add(this.lblNbConfig);
+          this.Controls.Add(this.textBoxNBconfigs);
           this.Controls.Add(this.butNew);
           this.Controls.Add(this.linkLabelMyFilmsWiki);
           this.Controls.Add(this.btnLaunchAMCglobal);
@@ -4871,5 +4897,7 @@
         private Label lblSearchGrabberName;
         private ComboBox ItemSearchGrabberName;
         private Button btnGrabberInterface;
+        private TextBox textBoxNBconfigs;
+        private Label lblNbConfig;
     }
 }

@@ -277,7 +277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 DefaultCoverArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverArtist", string.Empty);
                 DefaultCoverViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverViews", string.Empty);
                 DefaultFanartImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultFanartImage", string.Empty);
-                StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5.0");
+                StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5");
                 // Added to cope with local number settings:
                 if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ".")
                   StrAntFilterMinRating = StrAntFilterMinRating.Replace(",", ".");
@@ -1268,7 +1268,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.DoModal(GetID);
             if (dlg.SelectedLabel == -1)
             {
-              MyFilms.conf.StrFileXml = string.Empty;
+              try
+              {
+                MyFilms.conf.StrFileXml = string.Empty;
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Debug("MF: Error resetting config, as not yet loaded into memory - exception: " + ex.ToString());
+              }
               return string.Empty;
             }
             if (dlg.SelectedLabelText.Length > 0)
@@ -1321,16 +1328,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   CurrentConfig = string.Empty;
 
             if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) && ((XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty).Length > 0)))
-                //if ((!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false))) && ((XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "")).ToString().Length() > 0))
-                    // Might require check for yes/no ? 
-                //if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", "False") == "True" //fmu
-                // || XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", "False") == "yes")  //fmu
-
               CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
-            //Guzzi: Remarked, because otherwise currentconfig will always be owerwritten if no defaultconfig available
-            //else
+            //else //Guzzi: Remarked, because otherwise currentconfig will always be owerwritten if no defaultconfig available
             //    CurrentConfig = string.Empty;
-            if (CurrentConfig == string.Empty)
+            if (CurrentConfig == string.Empty || (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", true)))
             {
                 boolchoice = false;
                 CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms); // "" => user esc's dialog on plugin startup so exit plugin unchanged
