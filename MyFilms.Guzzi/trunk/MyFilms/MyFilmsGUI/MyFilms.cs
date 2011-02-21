@@ -591,7 +591,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           //Guzzi: RandomMovie Search added
                           dlg.Add(GUILocalizeStrings.Get(10798621));//Search global movies by randomsearch (singlesearch, areasearch)
                           choiceSearch.Add("randomsearch");
-                          
                         }
 
                         if (MyFilms.conf.StrSearchList[0].Length > 0)
@@ -672,10 +671,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                         if (choiceSearch[dlg.SelectedLabel] == "globalproperty")
                         {
-                            //SearchMoviesbyProperties(); // GuzziVersion
-							              // This version from ZebonsMerge - Change ClassName to SearchMoviesbyPropertiesZebons
 							              SearchMoviesbyProperties(MyFilms.conf.StrSearchList);
-
                             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                             dlg.DeInit();
                             return base.OnMessage(messageType);
@@ -996,7 +992,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.StrTitleSelect = "";
                 conf.Boolselect = false;
 
-                //MyFilmsDetail.setGUIProperty("view", conf.WStrSort);
                 SetLabelView(conf.WStrSort);
             }
             else
@@ -3039,6 +3034,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 upd_choice[ichoice] = "analogyproperty";
                 ichoice++;
 
+                if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+                {
+                  string trailercount = "";
+                  if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
+                    trailercount = "0";
+                  else
+                  {
+                    string[] split1 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(new Char[] { ';' });
+                    trailercount = split1.Count().ToString();
+                  }
+                  dlg.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")");//play trailer (<number trailers present>)
+                  upd_choice[ichoice] = "playtrailer";
+                  ichoice++;
+                }
+
                 if (MyFilmsDetail.ExtendedStartmode("Context: IMDB Trailer and Pictures")) // check if specialmode is configured for disabled features
                 {
                   dlg.Add(GUILocalizeStrings.Get(1079887));
@@ -3152,6 +3162,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
             switch (upd_choice[dlg.SelectedLabel])
             {
+                case "playtrailer":
+                  // first check, if trailer files are available, offer options
+                  //if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+                  if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
+                    MyFilmsDetail.Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                  else
+                  {
+                    // Can add autosearch&register logic here before try starting trailers
+
+                    GUIDialogYesNo dlgYesNotrailersearch = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+                    dlgYesNotrailersearch.SetHeading(GUILocalizeStrings.Get(10798704));//trailer
+                    dlgYesNotrailersearch.SetLine(1, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrSTitle].ToString());//video title
+                    dlgYesNotrailersearch.SetLine(2, GUILocalizeStrings.Get(10798737));//no video found locally
+                    dlgYesNotrailersearch.SetLine(3, GUILocalizeStrings.Get(10798739)); // Search local trailers  and update DB ?
+                    dlgYesNotrailersearch.DoModal(GetID);
+                    //dlgYesNotrailersearch.DoModal(GUIWindowManager.ActiveWindow);
+                    if (dlgYesNotrailersearch.IsConfirmed)
+                    {
+                      //setProcessAnimationStatus(true, m_SearchAnimation);
+                      //LogMyFilms.Debug("MF: (SearchTrailerLocal) SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(): '" + (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() + "'"));
+                      LogMyFilms.Debug("MF: (Auto search trailer after selecting PLAY) title: '" + (MyFilms.r[MyFilms.conf.StrIndex].ToString() + "'"));
+                      MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+                      //afficher_detail(true);
+                      //setProcessAnimationStatus(false, m_SearchAnimation);
+
+                      MyFilmsDetail.Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                    }
+                  }
+                  break;
 
                 case "analogyperson":
                     {
@@ -3184,7 +3223,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                           wurl = (IMDB.IMDBUrl)_imdb[0];
                           if (wurl.URL.Length != 0)
+                          {
                             url = wurl.URL + @"videogallery/";
+                            url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                          }
                         }
                         LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
@@ -3215,7 +3257,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                           wurl = (IMDB.IMDBUrl)_imdb[0];
                           if (wurl.URL.Length != 0)
+                          {
                             url = wurl.URL + @"mediaindex/";
+                            url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                          }
+
                         }
                         LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                         GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
@@ -3245,10 +3291,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                         _imdb.Find(facadeView.SelectedListItem.Label);
                         IMDBMovie imdbMovie = new IMDBMovie();
+                        for (int i = 0; i < _imdb.Count; i++)
+                        {
+                          LogMyFilms.Debug("MF: movie imdb internet search - found: '" + _imdb[i].Title + "', URL = '" + _imdb[i].URL + "'");
+                        }
                         if (_imdb.Count > 0)
                         {
                             wurl = (IMDB.IMDBUrl)_imdb[0];
-                            if (wurl.URL.Length != 0) url = wurl.URL; // Assign proper Webpage for Actorinfos
+                            if (wurl.URL.Length != 0)
+                            {
+                              url = wurl.URL; // Assign proper Webpage for Actorinfos
+                              //url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                            }
                         }
 
                         //Load Webbrowserplugin with the URL
@@ -3311,7 +3365,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (_imdb.Count > 0)
                         {
                           wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
-                          if (wurl.URL.Length != 0) url = wurl.URL + "videogallery/"; // Assign proper Webpage for Actorinfos
+                          if (wurl.URL.Length != 0)
+                          {
+                            url = wurl.URL + "videogallery/"; // Assign proper Webpage for Actorinfos
+                            url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                          }
                           //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
                         }
                         LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
@@ -3344,7 +3402,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (_imdb.Count > 0)
                         {
                           wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
-                          if (wurl.URL.Length != 0) url = wurl.URL + "mediaindex/"; // Assign proper Webpage for Actorinfos
+                          if (wurl.URL.Length != 0)
+                          {
+                            url = wurl.URL + "mediaindex/"; // Assign proper Webpage for Actorinfos
+                            url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                          }
                           //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
                         }
                         LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
@@ -3386,7 +3448,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         //    _imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
                         //}
                         wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
-                        if (wurl.URL.Length != 0) url = wurl.URL; // Assign proper Webpage for Actorinfos
+                        if (wurl.URL.Length != 0)
+                        {
+                          url = wurl.URL; // Assign proper Webpage for Actorinfos
+                          //url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                        }
                         //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
                       }
 
@@ -5186,12 +5252,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties !!!");
 
-            // Clearing currentconfig and views should not be done here, otherwise settings are lost when reentering plugin ...
-            //MyFilmsDetail.clearGUIProperty("config.currentconfig");
-            //MyFilmsDetail.clearGUIProperty("view");
-            //MyFilmsDetail.clearGUIProperty("picture");
-          
-          
             MovieScrobbling = false; //Reset MovieScrobbling
             MyFilmsDetail.Init_Detailed_DB();  // Includes clear of db & user properties
 
@@ -5206,7 +5266,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // (re)link our backdrop image controls to the backdrop image swapper
             backdrop.GUIImageOne = ImgFanart;
             backdrop.GUIImageTwo = ImgFanart2;
-            backdrop.LoadingImage = loadingImage;  //--> Do NOT activate - otherwise coverimage flickers and goes away !!!!
+            backdrop.LoadingImage = loadingImage;
 
             //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge ->> This fucked up the fanart swapper !!!!!
             //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge
@@ -5998,20 +6058,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
          MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
          MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
-         // Following settings Movied to InitScreen !!!
          //// Clear GUI Properties when first entering the plugin
          //// This will avoid ugly property names being seen before 
          //// its corresponding value is assigned
-         //MyFilmsDetail.clearGUIProperty("logos_id2001");
-         //MyFilmsDetail.clearGUIProperty("logos_id2002");
-         //MyFilmsDetail.clearGUIProperty("logos_id2003");
-         //MyFilmsDetail.clearGUIProperty("logos_id2012"); // Combined Logo
-         //MyFilmsDetail.clearGUIProperty("nbobjects.value");
-         //MyFilmsDetail.clearGUIProperty("Fanart");
-         //MyFilmsDetail.clearGUIProperty("Fanart2");
-         //MyFilmsDetail.clearGUIProperty("config.currentconfig");
-         //MyFilmsDetail.clearGUIProperty("view");
-         //MyFilmsDetail.clearGUIProperty("picture");
+         MyFilmsDetail.clearGUIProperty("logos_id2001");
+         MyFilmsDetail.clearGUIProperty("logos_id2002");
+         MyFilmsDetail.clearGUIProperty("logos_id2003");
+         MyFilmsDetail.clearGUIProperty("logos_id2012"); // Combined Logo
+         MyFilmsDetail.clearGUIProperty("nbobjects.value");
+         MyFilmsDetail.clearGUIProperty("Fanart");
+         MyFilmsDetail.clearGUIProperty("Fanart2");
+         MyFilmsDetail.clearGUIProperty("config.currentconfig");
+         MyFilmsDetail.clearGUIProperty("view");
+         MyFilmsDetail.clearGUIProperty("picture");
        }
 
     private void Load_Logos(DataRow row)

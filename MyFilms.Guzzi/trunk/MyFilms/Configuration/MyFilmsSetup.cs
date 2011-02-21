@@ -397,6 +397,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if ((!string.IsNullOrEmpty(txtGrabber.Text)) && (ItemSearchGrabberName.Text.Length == 0))
             {
               System.Windows.Forms.MessageBox.Show("The Field used for searching internet data by Movie's Name is mandatory  !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+              General.SelectedIndex = 5;
               ItemSearchGrabberName.Focus();
               return;
             }
