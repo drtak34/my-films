@@ -85,6 +85,7 @@ namespace grabber
         private const string apiSearch = "http://api.themoviedb.org/2.1/Movie.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
         //private const string apiGetInfo = "http://api.themoviedb.org/2.0/Movie.getInfo?api_key=1e66c0cc99696feaf2ea56695e134eae&id=";
         private const string apiGetInfo = "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
+
         public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, bool choose)
         {
             List<DBMovieInfo> results = new List<DBMovieInfo>();
@@ -148,8 +149,9 @@ namespace grabber
                                     }
                                     else
                                         resultsdet.Add(movie2);
-                                //else
-                                //    resultsdet.Add(movie2);
+                                else
+                                  if (choose)
+                                    resultsdet.Add(movie2);
                             }
                         }
                     }
@@ -301,6 +303,23 @@ namespace grabber
                             //                           string zvalue = node.OuterXml.Substring(start);
                             //                           zvalue = zvalue.Substring(0, zvalue.IndexOf("\""));
                             //                           backdrops.Add(zvalue);
+                        }
+                        if (node.OuterXml.Contains("\"original\"") && node.OuterXml.Contains("\"poster\"") && node.OuterXml.Contains("url="))
+                        {
+                          //                            int start = node.OuterXml.IndexOf("url=") + 5;
+                          foreach (XmlNode image in node.SelectNodes("image"))
+                          {
+                            if (image.OuterXml.Contains("\"original\"") && image.OuterXml.Contains("\"poster\"") && image.OuterXml.Contains("url="))
+                            {
+                              int start = image.OuterXml.IndexOf("url=") + 5;
+                              string zvalue = image.OuterXml.Substring(start);
+                              zvalue = zvalue.Substring(0, zvalue.IndexOf("\""));
+                              posters.Add(zvalue);
+                            }
+                          }
+                          //                           string zvalue = node.OuterXml.Substring(start);
+                          //                           zvalue = zvalue.Substring(0, zvalue.IndexOf("\""));
+                          //                           backdrops.Add(zvalue);
                         }
                         break;
                 }

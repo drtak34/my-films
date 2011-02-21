@@ -3615,7 +3615,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
                     if (wtitle.Length > 0 && MyFilms.conf.StrFanart)
                     {
-                        MyFilmsDetail.Download_Backdrops_Fanart(wtitle, wttitle, MyFilms.r[facadeView.SelectedListItem.ItemId]["Director"].ToString(), MyFilms.r[facadeView.SelectedListItem.ItemId]["Year"].ToString(), true, GetID);
+                      MyFilmsDetail.Download_Backdrops_Fanart(wtitle, wttitle, MyFilms.r[facadeView.SelectedListItem.ItemId]["Director"].ToString(), MyFilms.r[facadeView.SelectedListItem.ItemId]["Year"].ToString(), true, GetID, wtitle);
                     }
                     //if (wttitle != null && wttitle.Length > 0)
                     //    wtitle = wttitle;

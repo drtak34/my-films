@@ -1444,7 +1444,7 @@
           this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 83);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
-          this.groupBox_ArtistImages.Text = "Person Images";
+          this.groupBox_ArtistImages.Text = "Thumbs for Person Views (actors, directors, producer)";
           this.ToolTip1.SetToolTip(this.groupBox_ArtistImages, "Use this area to define a path where artist thumbs (images for persons) should be" +
                   " stored.\r\nWorks same way as cover images for movies.");
           // 

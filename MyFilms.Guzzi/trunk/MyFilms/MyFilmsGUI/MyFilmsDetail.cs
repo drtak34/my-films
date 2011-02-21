@@ -1267,7 +1267,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         try { wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"]; }
                         catch { }
                         LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
-                        Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID);
+                        Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID, wtitle);
 
                     }
                     afficher_detail(true);
@@ -2156,7 +2156,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Dowload backdrops on theMovieDB.org
         //-------------------------------------------------------------------------------------------        
-        public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID)
+        public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
         {
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             int wyear = 0;
@@ -2206,7 +2206,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
                     foreach (DBMovieInfo t in listemovies)
                     {
-                        dlg.Add(t.Name + "  (" + t.Year + ") ");
+                        dlg.Add(t.Name + "  (" + t.Year + ") - Fanarts: " + t.Backdrops.Count + " - Id" + t.Identifier);
+                        LogMyFilms.Debug("MF: TMDB listemovies: " + t.Name + "  (" + t.Year + ") - Fanarts: " + t.Backdrops.Count + " - TMDB-Id: " + t.Identifier);
                     }
                     if (!(dlg.SelectedLabel > -1))
                     {
@@ -2226,7 +2227,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         dlgs.Reset();
                         dlgs.SetHeading(GUILocalizeStrings.Get(1079859)); // choose search expression
                         dlgs.Add("  *****  " + GUILocalizeStrings.Get(1079858) + "  *****  "); //manual selection with keyboard
-                        dlgs.Add(wtitle); //Otitle
+                        //dlgs.Add(wtitle); //Otitle
+                        dlgs.Add(savetitle); //Otitle = savetitle
                         dlgs.Add(wttitle); //Ttitle
                         foreach (object t in wotitle_tableau)
                         {
@@ -2264,16 +2266,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             {
                                 Remove_Backdrops_Fanart(wttitle, true);
                                 Remove_Backdrops_Fanart(wtitle, true);
-                                Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID);
+                                Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID, savetitle);
                             }
                             break;
                         }
-                        if (dlgs.SelectedLabel > 0)
+                        if (dlgs.SelectedLabel > 0 && dlgs.SelectedLabel < 3) // if one of otitle or ttitle selected, keep year and director
                         {
-                            Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, string.Empty, string.Empty, true, wGetID);
-                            //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID)
+                            Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, year, director, true, wGetID, savetitle);
+                            //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                             break;
                         }
+                        if (dlgs.SelectedLabel > 2) // For subitems, search without year and director !
+                        {
+                          Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, string.Empty, string.Empty, true, wGetID, savetitle);
+                          //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
+                          break;
+                        }
+
                     }
                     if (dlg.SelectedLabel > 0)
                     {
@@ -2281,7 +2290,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         string filename = string.Empty;
                         string filename1 = string.Empty;
                         if (MyFilms.conf.StrTitle1 == "OriginalTitle")
-                            wttitle = wtitle;
+                          wttitle = savetitle; // Was wttitle = wtitle;
                         foreach (string backdrop in listemovies[dlg.SelectedLabel - 1].Backdrops)
                         {
                             filename1 = Grabber.GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, backdrop, wttitle, true, first, out filename);
