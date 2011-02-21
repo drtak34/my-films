@@ -3224,16 +3224,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           wurl = (IMDB.IMDBUrl)_imdb[0];
                           if (wurl.URL.Length != 0)
                           {
-                            url = wurl.URL + @"videogallery/";
-                            url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                            url = wurl.URL + @"videogallery";
+                            url = ImdbBaseUrl + url.Substring(url.IndexOf("title")); // redirect to base www.imdb.com server and remove localized returns...
                           }
+                        
+                          LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                          GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                         }
-                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                        else
+                        {
+                          ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798640)); // MyFilmsSystemInformation - no result found
+                          break;
+                        }
+
                       }
                       else
                       {
@@ -3258,17 +3265,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           wurl = (IMDB.IMDBUrl)_imdb[0];
                           if (wurl.URL.Length != 0)
                           {
-                            url = wurl.URL + @"mediaindex/";
-                            url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                            url = wurl.URL + @"mediaindex";
+                            url = ImdbBaseUrl + url.Substring(url.IndexOf("title")); // redirect to base www.imdb.com server and remove localized returns...
                           }
-
+                          LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                          GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                         }
-                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                        else
+                        {
+                          ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798640)); // MyFilmsSystemInformation - no result found
+                          break;
+                        }
                       }
                       else
                       {
@@ -3301,17 +3312,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (wurl.URL.Length != 0)
                             {
                               url = wurl.URL; // Assign proper Webpage for Actorinfos
-                              //url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                              //url = ImdbBaseUrl + url.Substring(url.IndexOf(".com") + 5); // redirect to base www.imdb.com server and remove localized returns...
                             }
+                          //Load Webbrowserplugin with the URL
+                          LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                          GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                        }
+                        else
+                        {
+                          ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798640)); // MyFilmsSystemInformation - no result found
+                          break;
                         }
 
-                        //Load Webbrowserplugin with the URL
-                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                         }
                     else
                     {
@@ -3367,17 +3383,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
                           if (wurl.URL.Length != 0)
                           {
-                            url = wurl.URL + "videogallery/"; // Assign proper Webpage for Actorinfos
-                            url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                            url = wurl.URL + "videogallery"; // Assign proper Webpage for Actorinfos
+                            url = ImdbBaseUrl + url.Substring(url.IndexOf("name")); // redirect to base www.imdb.com server and remove localized returns...
                           }
                           //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
+                          LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                          GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                         }
-                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                        else
+                        {
+                          ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798640)); // MyFilmsSystemInformation - no result found
+                          break;
+                        }
                       }
                       else
                       {
@@ -3404,17 +3425,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
                           if (wurl.URL.Length != 0)
                           {
-                            url = wurl.URL + "mediaindex/"; // Assign proper Webpage for Actorinfos
-                            url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
+                            url = wurl.URL + "mediaindex"; // Assign proper Webpage for Actorinfos
+                            url = ImdbBaseUrl + url.Substring(url.IndexOf("name")); // redirect to base www.imdb.com server and remove localized returns...
                           }
                           //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
+                          LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                          GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                          GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                          GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                         }
-                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
-                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
-                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                        else
+                        {
+                          ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798640)); // MyFilmsSystemInformation - no result found
+                          break;
+                        }
                       }
                       else
                       {
@@ -3454,15 +3480,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           //url = ImdbBaseUrl + url.Substring(url.IndexOf(".com" + 4)); // redirect to base www.imdb.com server and remove localized returns...
                         }
                         //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
+                        //Load Webbrowserplugin with the URL
+                        LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                        GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+                        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
                       }
-
-                      //Load Webbrowserplugin with the URL
-                      LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
-                      GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
-                      GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-                      GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
-                      GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
-                      GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+                      else
+                      {
+                        ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798640)); // MyFilmsSystemInformation - no result found
+                        break;
+                      }
                     }
                     else
                     {
