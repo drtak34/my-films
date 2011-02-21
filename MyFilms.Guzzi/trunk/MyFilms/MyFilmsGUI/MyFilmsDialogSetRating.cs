@@ -27,14 +27,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System.Globalization;
   using MediaPortal.GUI.Library;
-
+  //using MediaPortal.Dialogs;
+  //using Action = MediaPortal.GUI.Library.Action;
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
+
 
   /// <summary>
   /// 
   /// </summary>
   public class MyFilmsDialogSetRating : MediaPortal.Dialogs.GUIDialogWindow
   {
+    public const int ID_MyFilmsDialogRating = 7988;
     public enum ResultCode
     {
       Close,
@@ -61,16 +64,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     decimal rating = 1;
     string fileName;
     ResultCode resultCode;
-    public const int ID_MyFilmsDetail = 7988;
 
-      public MyFilmsDialogSetRating()
+    public MyFilmsDialogSetRating()
     {
-      GetID = 7988;
+      GetID = ID_MyFilmsDialogRating;
     }
 
     public override int GetID
     {
-      get { return ID_MyFilmsDetail; }
+      get { return ID_MyFilmsDialogRating; }
     }
 
     //public override int GetID
@@ -78,7 +80,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  get { return ID_MyFilmsDetail; }
     //  set { base.GetID = value; }
     //}
-    
+
+    /// <summary>
+    /// MediaPortal will set #currentmodule with GetModuleName()
+    /// </summary>
+    /// <returns>Localized Window Name</returns>
+    public override string GetModuleName()
+    {
+      return GUILocalizeStrings.Get(ID_MyFilmsDialogRating); // return localized string for dialog's ID
+    }
+
     public override bool Init()
     {
       return Load(GUIGraphicsContext.Skin + @"\MyFilmsDialogRating.xml");

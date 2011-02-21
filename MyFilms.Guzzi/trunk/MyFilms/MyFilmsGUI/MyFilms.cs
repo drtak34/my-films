@@ -284,6 +284,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public bool BrowseTheWebRightPlugin = false;
         public bool BrowseTheWebRightVersion = false;
+        public static bool OnlineVideosRightPlugin = false;
+        public static bool OnlineVideosRightVersion = false;
 
         #endregion
 
@@ -340,7 +342,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
             BrowseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
-            
+            OnlineVideosRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
+            OnlineVideosRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
+
             LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
 
             return Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
