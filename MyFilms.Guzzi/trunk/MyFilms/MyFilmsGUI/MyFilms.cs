@@ -1859,20 +1859,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // setting up thumbs directory configuration
             string strThumbDirectory;
             string [] strActiveFacadeImages;
-            if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
+            if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower"))
               strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
             else
               strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
             bool getThumbs = false;
             if (MyFilms.conf.StrViews && (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country")))
               getThumbs = true;
-            if (MyFilms.conf.StrPersons && (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director")))
+            if (MyFilms.conf.StrPersons && (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower")))
               getThumbs = true;
+            getThumbs = true; // temporarily added to get always thumbs...
             bool createFanartDir = false;
             if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country") 
               createFanartDir = true;
             bool isperson = false;
-            if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director"))) 
+            if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower")) 
               isperson = true;
 
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Started");
@@ -2065,7 +2066,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
           }
-          else if ((WStrSort.ToLower().Contains("country")) || (WStrSort.ToLower().Contains("category")) || (WStrSort.ToLower().Contains("year")))
+          else //if ((WStrSort.ToLower().Contains("country")) || (WStrSort.ToLower().Contains("category")) || (WStrSort.ToLower().Contains("year")))
           {
             if (System.IO.File.Exists(strThumb)) // If there is missing thumbs in cache folder ...
             {

@@ -1135,9 +1135,9 @@
           this.Fanart.Controls.Add(this.MesFilmsFanart);
           this.Fanart.Controls.Add(this.labelFanart);
           this.Fanart.Controls.Add(this.chkDfltFanart);
-          this.Fanart.Location = new System.Drawing.Point(6, 233);
+          this.Fanart.Location = new System.Drawing.Point(6, 236);
           this.Fanart.Name = "Fanart";
-          this.Fanart.Size = new System.Drawing.Size(735, 118);
+          this.Fanart.Size = new System.Drawing.Size(735, 115);
           this.Fanart.TabIndex = 71;
           this.Fanart.TabStop = false;
           this.Fanart.Text = "Fanart (Backdrops)";
@@ -1265,9 +1265,9 @@
           this.groupBox22.Controls.Add(this.chkDfltViews);
           this.groupBox22.Controls.Add(this.label29);
           this.groupBox22.Controls.Add(this.MesFilmsViews);
-          this.groupBox22.Location = new System.Drawing.Point(6, 152);
+          this.groupBox22.Location = new System.Drawing.Point(6, 148);
           this.groupBox22.Name = "groupBox22";
-          this.groupBox22.Size = new System.Drawing.Size(735, 79);
+          this.groupBox22.Size = new System.Drawing.Size(735, 88);
           this.groupBox22.TabIndex = 75;
           this.groupBox22.TabStop = false;
           this.groupBox22.Text = "Thumbs for Group Views (Genre, Year, Country, ...)";
@@ -1441,7 +1441,7 @@
           this.groupBox_ArtistImages.Controls.Add(this.DefaultCoverArtist);
           this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 68);
           this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
-          this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 83);
+          this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 78);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
           this.groupBox_ArtistImages.Text = "Thumbs for Person Views (actors, directors, producer)";
