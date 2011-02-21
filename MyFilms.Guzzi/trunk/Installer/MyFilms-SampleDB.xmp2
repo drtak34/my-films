@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>2.0</Version>
+  <Groups>
+    <Items>
+      <GroupItem Name="Default">
+        <DisplayName>Default</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Default</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{37e47bd6-e95e-4b90-8e34-5895bdecb3ea}-SampleDB.xml</ZipFileName>
+              <DestinationFilename>%Thumbs%\Catalog\SampleDB.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_1.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{61ec0e91-7336-43b1-b52f-c6bc7ff631b5}-SampleDB_1.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Catalog\SampleDB_1.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_2.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ad4ced52-f154-4861-bbe4-f34602175308}-SampleDB_2.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Catalog\SampleDB_2.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_4.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a409501d-8ef5-432f-bc9e-0ca7d59f2cea}-SampleDB_4.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Catalog\SampleDB_4.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_5.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7e5a4e0b-e622-4fb4-b1bd-22020c4ac91a}-SampleDB_5.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Catalog\SampleDB_5.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_6.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a91cbf67-3ee6-4142-a3a1-3c24084d76b0}-SampleDB_6.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Catalog\SampleDB_6.jpg</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
+      <GroupItem Name="Artwork">
+        <ParentGroup>Default</ParentGroup>
+        <DisplayName>Artwork</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Artwork</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2} [-1187918999].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ada3917f-e622-4118-88c7-d0a72c3a20b7}-{x2} [-1187918999].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2} [-1187918999].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2} [-686425682].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ddd19bca-db1a-44f5-a00f-1357e3175cd4}-{x2} [-686425682].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2} [-686425682].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2} [1156113009].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{40da517c-dae4-4227-90d0-d10b4a45c992}-{x2} [1156113009].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2} [1156113009].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2} [2063373476].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{bb261566-7ff6-4d35-a385-027f2eb630ac}-{x2} [2063373476].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2} [2063373476].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2}.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d7406b62-1414-4936-9978-80ab0e605fc8}-{x2}.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2}.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{x-men.2}\{x-men.2}.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9fcde423-5ac6-447d-bfb2-07f6369a33be}-{x-men.2}.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{x-men.2}\{x-men.2}.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic} [-293191557].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7730c378-cc1d-48c4-acd8-2f03c0b0f80c}-{titanic} [-293191557].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic} [-293191557].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic} [-343785976].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{3519256d-9490-473b-aa21-1aac94e33fc7}-{titanic} [-343785976].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic} [-343785976].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic} [1385016226].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d4452c00-31ff-4b84-ac7f-33e6fadea11c}-{titanic} [1385016226].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic} [1385016226].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic} [1711275010].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1be5448e-68f9-465b-a742-9b7b00e1373f}-{titanic} [1711275010].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic} [1711275010].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic}.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{aca71c21-0cab-415e-b7bc-8fbf924267cb}-{titanic}.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic}.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-1013520210].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1acd64d2-971f-472e-8b86-03e270c2437f}-{terminator.2_.judgment.day} [-1013520210].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-1013520210].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-1399853469].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a6221286-e260-4b80-b98c-f1b676d81ad3}-{terminator.2_.judgment.day} [-1399853469].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-1399853469].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-683869646].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ca940ee5-cfb9-4e30-89a7-0b80c5d35a76}-{terminator.2_.judgment.day} [-683869646].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-683869646].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-817035908].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{532e0734-f3db-4805-8c12-7c5c7b66cbde}-{terminator.2_.judgment.day} [-817035908].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-817035908].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [402470955].jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{cde2867a-0fe8-41df-8c44-cbe6f752c0da}-{terminator.2_.judgment.day} [402470955].jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [402470955].jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day}.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b1f2171e-8509-4837-b37a-3c8b3d2bc656}-{terminator.2_.judgment.day}.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day}.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Fanart\{o'.horten}\{o'.horten}.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{3ab21b54-ff95-4cca-83ba-57aae8a0d5da}-{o'.horten}.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\Fanart\{o'.horten}\{o'.horten}.jpg</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
+    </Items>
+  </Groups>
+  <Sections>
+    <Items>
+      <SectionItem Guid="44968ed4-7841-4c64-aea3-60ef169dfbb4" Name="Welcome Screen" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header text">
+              <Value>Welcome to the Extension Installer for [Name]</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Description">
+              <Value>This will install [Name] version [Version] on your computer.
+It is recommended that you close all other applications before continuing.
+Click Next to continue or Cancel to exit Setup.</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Left part image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items />
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Welcome Screen</PanelName>
+        <WizardButtonsEnum>NextCancel</WizardButtonsEnum>
+      </SectionItem>
+      <SectionItem Guid="e1d0b79d-355f-48d0-b9ef-7b1b8f09fb92" Name="Install Section" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header Title">
+              <Value />
+              <ValueType>String</ValueType>
+              <Description>Header title</Description>
+            </SectionParam>
+            <SectionParam Name="Header description">
+              <Value />
+              <ValueType>String</ValueType>
+              <Description>Description of section, shown in under section title</Description>
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items>
+            <ActionItem Name="InstallFiles" ActionType="InstallFiles" ConditionGroup="">
+              <Params>
+                <Items />
+              </Params>
+              <ExecuteLocation>AfterPanelShow</ExecuteLocation>
+            </ActionItem>
+          </Items>
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Install Section</PanelName>
+        <WizardButtonsEnum>Next</WizardButtonsEnum>
+      </SectionItem>
+      <SectionItem Guid="e7768ef4-ca56-48d3-8202-160fc36b2b79" Name="Setup Complete" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header text">
+              <Value>The Extension Installer Wizard has successfully installed [Name].</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Left part image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Show radio buttons">
+              <Value />
+              <ValueType>Bool</ValueType>
+              <Description>Use radiobutton in place of combobox</Description>
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items />
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Setup Complete</PanelName>
+        <WizardButtonsEnum>Finish</WizardButtonsEnum>
+      </SectionItem>
+    </Items>
+  </Sections>
+  <Dependencies>
+    <Items />
+  </Dependencies>
+  <GeneralInfo>
+    <Name>MyFilms SkinnerPack</Name>
+    <Id>b01622e1-5832-4010-9804-f7a4f358eb28</Id>
+    <Author />
+    <HomePage />
+    <ForumPage />
+    <UpdateUrl />
+    <Version>
+      <Major>0</Major>
+      <Minor>0</Minor>
+      <Build>0</Build>
+      <Revision>1</Revision>
+    </Version>
+    <ExtensionDescription>This is a sample DB for the MyFilms plugin to enable skinners to easily get a working setup.</ExtensionDescription>
+    <VersionDescription />
+    <DevelopmentStatus>Alpha</DevelopmentStatus>
+    <OnlineLocation />
+    <ReleaseDate>2011-02-16T23:36:31.3842721+01:00</ReleaseDate>
+    <Tags>myfilms, skins skinners, sample db</Tags>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-SampleDB-0.0.0.1.mpe1</Location>
+    <Params>
+      <Items>
+        <SectionParam Name="Icon">
+          <Value />
+          <ValueType>File</ValueType>
+          <Description>The icon file of the package (jpg,png,bmp)</Description>
+        </SectionParam>
+        <SectionParam Name="Online Icon">
+          <Value />
+          <ValueType>String</ValueType>
+          <Description>The icon file of the package stored online (jpg,png,bmp)</Description>
+        </SectionParam>
+        <SectionParam Name="Configuration file">
+          <Value />
+          <ValueType>Template</ValueType>
+          <Description>The file used to configure the extension.
+ If have .exe extension the will be executed
+ If have .dll extension used like MP plugin configuration</Description>
+        </SectionParam>
+        <SectionParam Name="Online Screenshots">
+          <Value />
+          <ValueType>String</ValueType>
+          <Description>Online stored screenshot urls separated by ; </Description>
+        </SectionParam>
+        <SectionParam Name="Force to uninstall on update">
+          <Value>yes</Value>
+          <ValueType>Bool</ValueType>
+          <Description>Show dialog and force to uninstall previous version when updating an extension. Should only be disabled if you are using an NSIS/MSI installer.</Description>
+        </SectionParam>
+      </Items>
+    </Params>
+  </GeneralInfo>
+  <UniqueFileList>
+    <Items>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{37e47bd6-e95e-4b90-8e34-5895bdecb3ea}-SampleDB.xml</ZipFileName>
+        <DestinationFilename>%Thumbs%\Catalog\SampleDB.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_1.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{61ec0e91-7336-43b1-b52f-c6bc7ff631b5}-SampleDB_1.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Catalog\SampleDB_1.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_2.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ad4ced52-f154-4861-bbe4-f34602175308}-SampleDB_2.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Catalog\SampleDB_2.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_4.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a409501d-8ef5-432f-bc9e-0ca7d59f2cea}-SampleDB_4.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Catalog\SampleDB_4.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_5.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7e5a4e0b-e622-4fb4-b1bd-22020c4ac91a}-SampleDB_5.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Catalog\SampleDB_5.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Catalog\SampleDB_6.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a91cbf67-3ee6-4142-a3a1-3c24084d76b0}-SampleDB_6.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Catalog\SampleDB_6.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2} [-1187918999].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ada3917f-e622-4118-88c7-d0a72c3a20b7}-{x2} [-1187918999].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2} [-1187918999].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2} [-686425682].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ddd19bca-db1a-44f5-a00f-1357e3175cd4}-{x2} [-686425682].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2} [-686425682].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2} [1156113009].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{40da517c-dae4-4227-90d0-d10b4a45c992}-{x2} [1156113009].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2} [1156113009].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2} [2063373476].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{bb261566-7ff6-4d35-a385-027f2eb630ac}-{x2} [2063373476].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2} [2063373476].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{x2}\{x2}.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d7406b62-1414-4936-9978-80ab0e605fc8}-{x2}.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{x2}\{x2}.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{x-men.2}\{x-men.2}.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9fcde423-5ac6-447d-bfb2-07f6369a33be}-{x-men.2}.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{x-men.2}\{x-men.2}.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic} [-293191557].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7730c378-cc1d-48c4-acd8-2f03c0b0f80c}-{titanic} [-293191557].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic} [-293191557].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic} [-343785976].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{3519256d-9490-473b-aa21-1aac94e33fc7}-{titanic} [-343785976].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic} [-343785976].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic} [1385016226].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d4452c00-31ff-4b84-ac7f-33e6fadea11c}-{titanic} [1385016226].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic} [1385016226].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic} [1711275010].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1be5448e-68f9-465b-a742-9b7b00e1373f}-{titanic} [1711275010].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic} [1711275010].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{titanic}\{titanic}.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{aca71c21-0cab-415e-b7bc-8fbf924267cb}-{titanic}.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{titanic}\{titanic}.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-1013520210].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1acd64d2-971f-472e-8b86-03e270c2437f}-{terminator.2_.judgment.day} [-1013520210].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-1013520210].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-1399853469].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a6221286-e260-4b80-b98c-f1b676d81ad3}-{terminator.2_.judgment.day} [-1399853469].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-1399853469].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-683869646].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ca940ee5-cfb9-4e30-89a7-0b80c5d35a76}-{terminator.2_.judgment.day} [-683869646].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-683869646].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-817035908].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{532e0734-f3db-4805-8c12-7c5c7b66cbde}-{terminator.2_.judgment.day} [-817035908].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [-817035908].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [402470955].jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{cde2867a-0fe8-41df-8c44-cbe6f752c0da}-{terminator.2_.judgment.day} [402470955].jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day} [402470955].jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day}.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b1f2171e-8509-4837-b37a-3c8b3d2bc656}-{terminator.2_.judgment.day}.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{terminator.2_.judgment.day}\{terminator.2_.judgment.day}.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Fanart\{o'.horten}\{o'.horten}.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{3ab21b54-ff95-4cca-83ba-57aae8a0d5da}-{o'.horten}.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart\{o'.horten}\{o'.horten}.jpg</DestinationFilename>
+      </FileItem>
+    </Items>
+  </UniqueFileList>
+  <ProjectSettings>
+    <FolderGroups>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{6180020d-a8a9-4bc8-9256-93aaeac5d346}-</ZipFileName>
+        <DestinationFilename>%Thumbs%\Catalog</DestinationFilename>
+        <Folder>Thumbs\MyFilms\Catalog</Folder>
+        <Group>Default</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{a96e8070-93a4-482b-8c9f-2b9e3dcea056}-</ZipFileName>
+        <DestinationFilename>%Thumbs%\Fanart</DestinationFilename>
+        <Folder>Thumbs\MyFilms\Fanart</Folder>
+        <Group>Artwork</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+    </FolderGroups>
+    <ProjectFilename>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-SampleDB.xmp2</ProjectFilename>
+    <UpdatePath1 />
+    <UpdatePath2 />
+    <UpdatePath3 />
+  </ProjectSettings>
+</PackageClass>
