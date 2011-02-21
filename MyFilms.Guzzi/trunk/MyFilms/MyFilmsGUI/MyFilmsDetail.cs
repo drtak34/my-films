@@ -3427,16 +3427,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (hasRightPlugin && hasRightVersion)
                     {
                       string OVstartparams = string.Empty;
-                      string OVtitle = string.Empty;
-                      if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null &&
-                          MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0) OVtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-                      if (OVtitle.IndexOf(MyFilms.conf.TitleDelim) > 0) OVtitle = OVtitle.Substring(OVtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-                      OVstartparams = "site:Youtube|category:|search:" + OVtitle + " " +
+
+                      string title = string.Empty;
+                      if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
+                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
+                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
+                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
+                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
+                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
+                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
+                      {
+                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                        if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
+                        if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
+                        if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
+                        LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (media source)name = '" + title.ToString() + "'");
+                      }
+                      if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
+                        title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                      
+                      //string OVtitle = string.Empty;
+                      //if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0) 
+                      //  OVtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                      //if (OVtitle.IndexOf(MyFilms.conf.TitleDelim) > 0) OVtitle = OVtitle.Substring(OVtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                      OVstartparams = "site:Youtube|category:|search:" + title + " " +
                                       (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
                       //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "YouTube");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", OVtitle.ToString());
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
@@ -3473,16 +3492,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (hasRightPlugin2 && hasRightVersion2)
                     {
                       string OVstartparams = string.Empty;
-                      string OVtitle = string.Empty;
-                      if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null &&
-                          MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0) OVtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-                      if (OVtitle.IndexOf(MyFilms.conf.TitleDelim) > 0) OVtitle = OVtitle.Substring(OVtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-                      OVstartparams = "site:iTunes Movie Trailers|category:|search:" + OVtitle + " " +
-                                      (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                      string title = string.Empty;
+                      if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
+                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
+                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
+                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
+                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
+                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
+                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
+                      {
+                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                        if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
+                        if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
+                        if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
+                        LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (media source)name = '" + title.ToString() + "'");
+                      }
+                      if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
+                        title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                      
+                      //string OVtitle = string.Empty;
+                      //if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null &&
+                      //    MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0) OVtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                      //if (OVtitle.IndexOf(MyFilms.conf.TitleDelim) > 0) OVtitle = OVtitle.Substring(OVtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                      OVstartparams = "site:iTunes Movie Trailers|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
                       //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "iTunes Movie Trailers");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", OVtitle.ToString());
+                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
