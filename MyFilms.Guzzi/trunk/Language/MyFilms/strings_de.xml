@@ -63,6 +63,7 @@
     <String id="200036">Manueller Suchlauf</String>
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
+    <String id="107988">Films</String>
     <String id="1079858">Manuelle Eingabe über Tastatur</String>
     <String id="1079859">Wähle Suchbegriff</String>
     <String id="1079860">Manuelle Eingabe</String>
@@ -123,6 +124,7 @@
     <String id="10798629">aus</String>
     <String id="10798630">Neuer Wert</String>
     <String id="10798631">Zeige Film-Server Status</String>
+    <String id="10798636">Dateiname</String>
     <String id="10798637">Keine Filme entsprechen der Ansicht !</String>
     <String id="10798638">Zeige Gesamtliste</String>
     <String id="10798639">Keine Filme gefunden !</String>
@@ -183,8 +185,8 @@
     <String id="10798699">Wiki Online Hilfe (Web)</String>
     <String id="10798700">About ...</String>
     <String id="10798701">Optionen Menü</String>
-    <String id="10798702">Lokale Updates ...</String>
-    <String id="10798703">Online Updates ...</String>
+    <String id="10798702">Updates ...</String>
+    <String id="10798703">Fanart und Cover ...</String>
     <String id="10798704">Trailer ...</String>
     <String id="10798705">Trailer gefunden !</String>
     <String id="10798710">Spiele Trailer</String>
@@ -206,9 +208,11 @@
     <String id="10798733">Ersetze bestehendes Cover mit diesem ?</String>
     <String id="10798734">Aktualisiere alle Felder</String>
     <String id="10798735">Aktualisiere nur leere Felder</String>
-    <String id="10798736">Locally Available</String>
+    <String id="10798736">Lokal verfügbar</String>
     <String id="10798737">Film lokal nicht gefunden</String>
     <String id="10798738">Versuche Online Trailer ?</String>
+    <String id="10798739">Suche lokale Trailer und aktualisiere DB ?</String>
+    <String id="10798740">*** Spiele alle Trailer ***</String>
     <String id="10798741">(aktiv)</String>
     <String id="10798742">(offline) - starten ?</String>
     <String id="10798743">erfolgreich gestartet !</String>

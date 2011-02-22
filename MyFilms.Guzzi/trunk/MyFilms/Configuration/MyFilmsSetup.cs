@@ -879,6 +879,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Views", chkViews.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Persons", chkPersons.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDflt", chkDfltViews.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDfltAll", chkDfltViewsAll.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "LastID", "7986");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Suppress", chkSuppress.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", chksupplaystop.Checked);
@@ -1067,6 +1068,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             lblResultingGroupViewsPathFanart.Text = MesFilmsFanart.Text + "\\_Group\\";
             MesFilmsViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsPicture", "");
             chkDfltViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDflt", false);
+            chkDfltViewsAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDfltAll", false);
             chkDfltArtist.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistDflt", false);
             chkViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Views", false);
             chkPersons.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Persons", false);
@@ -1532,6 +1534,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDfltFanartImage.Checked = false;
             chkFanart.Checked = false;
             chkDfltViews.Checked = false;
+            chkDfltViewsAll.Checked = false;
             chkDfltArtist.Checked = false;
             chkViews.Checked = false;
             chkPersons.Checked = false;
@@ -4112,6 +4115,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           chkViews.Checked = true; // Use Thumbs for views
           chkPersons.Checked = false; // Don't use Thumbs for persons views
           chkDfltViews.Checked = true; // Use default cover for missing thumbs
+          chkDfltViewsAll.Checked = false; // Use group view thumbs for all group views
           // Logos
           chkLogos.Checked = true;
           comboBoxLogoPresets.Text = "Use Logos of currently selected skin";

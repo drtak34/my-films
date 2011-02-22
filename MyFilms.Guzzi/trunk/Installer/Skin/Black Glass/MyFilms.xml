@@ -455,6 +455,24 @@
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
+
+		<control>
+		  	<description>Number of Files Label</description>
+		  	<type>label</type>
+		  	<id>1</id>
+			<posX>865</posX>
+			<posY>635</posY>
+			<font>font16</font>
+			<align>left</align>
+			<textcolor>60ffffff</textcolor>
+		  	<label>#selectedindex/#itemcount #itemtype</label>
+		  	<align>left</align>
+		  	<visible>string.equals(#selectedindex)+string.equals(#itemcount)+facadeview.list</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+		  	<animation effect="fade" time="250">WindowOpen</animation>
+		  	<animation effect="fade" time="250">WindowClose</animation>
+		</control>
+
 		<control>
 			<description>Current program title</description>
 			<type>label</type>
