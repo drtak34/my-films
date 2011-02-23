@@ -168,8 +168,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static ArrayList result;
         public static string wsearchfile;
         public static int wGetID;
-        public static bool isTrailer = false;
-
+        //public static bool isTrailer = false;
+        //public static bool trailerPlayed = false;
+        public static bool trailerPlayed = false;
 
         // private System.Threading.Timer m_TraktTimer = null;
         // private TimerCallback m_timerDelegate = null;
@@ -510,7 +511,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Search Trailer File to play
                     {
                       if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)")
-                          Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                      {
+                        trailerPlayed = true;
+                        Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                      }
                         else
                           Change_Menu("trailermenu");
                         return true;
@@ -646,7 +650,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // first check, if trailer files are available, offer options
                     //if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                     if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
+                    {
+                      trailerPlayed = true;
                       Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                    }
                     else
                     {
                       // Can add autosearch&register logic here before try starting trailers
@@ -666,7 +673,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
                         afficher_detail(true);
                         setProcessAnimationStatus(false, m_SearchAnimation);
-
+                        trailerPlayed = true;
                         Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
                       }
                     }
@@ -702,6 +709,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                         LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+                        // should this be set here to make original movie doesn't get set to watched??
+                        // trailerPlayed = true;
                         GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
@@ -744,6 +753,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                       //ReturnFromExternalPluginInfo = true;
+                      // should this be set here to make original movie doesn't get set to watched??
+                      // trailerPlayed = true;
                       GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
@@ -3464,6 +3475,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+                      // should this be set here to make original movie doesn't get set to watched??
+                      // trailerPlayed = true;
                       GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
@@ -3514,6 +3527,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+                      // should this be set here to make original movie doesn't get set to watched??
+                      // trailerPlayed = true;
                       GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
@@ -3657,12 +3672,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
         {
-            LogMyFilms.Debug("MFD: UpdateOnPlayEnd was initiated - isTrailer = '" + isTrailer + "'");
+            LogMyFilms.Debug("MFD: UpdateOnPlayEnd was initiated - trailerPlayed = '" + trailerPlayed + "'");
 
             if (MyFilms.conf.StrPlayedIndex == -1)
                 return;
             if (type != g_Player.MediaType.Video || filename.EndsWith("&txe=.wmv"))
               return;
+            if (handleTrailer())
+              return;
+
             //if (isTrailer)
             //{
             //  LogMyFilms.Debug("MFD: Skipping UpdateOnEnd - reason: isTrailer");
@@ -3675,17 +3693,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // Handle all movie files from idMovie
                 ArrayList movies = new ArrayList();
                 int playTimePercentage = 0; // Set watched flag after 80% of total played time
+                double TotalRuntimeMovie = 0;
                 int iidMovie = VideoDatabase.GetMovieId(filename);
                 if (iidMovie >= 0)
                 {
                     VideoDatabase.GetFiles(iidMovie, ref movies);
                     //HashSet<string> watchedMovies = new HashSet<string>();
 
+                  try
+                  {
+
+                  }
+                  catch (Exception)
+                  {
+                    
+                    throw;
+                  }
+                    //if (movies.Count > 0)
+                    //{
+                    //  foreach (IMDBMovie movie in movies) // Get Total movie length
+                    //  {
+                    //    LogMyFilms.Debug("MFD: Partial Movie Runtime = '" + movie.RunTime.ToString() + "'");
+                    //    if (movie.RunTime > 0)
+                    //      TotalRuntimeMovie += movie.RunTime;
+                    //  }
+                    //  LogMyFilms.Debug("MFD: TotalRuntimeMovie = '" + TotalRuntimeMovie.ToString() + "'");
+                    //}
+
                     if (g_Player.Player.Duration >= 1)
                     {
-                      playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
-                      LogMyFilms.Debug("MFD: Calculated playtimepercentage: '" + playTimePercentage + "'");
-                      
+                      LogMyFilms.Debug("MFD: TotalRuntimeMovie = '" + TotalRuntimeMovie.ToString() + "', g_player.Player.Duration = '" + g_Player.Player.Duration.ToString() + "'");
+                      if (TotalRuntimeMovie > g_Player.Player.Duration)
+                        playTimePercentage = (int)Math.Ceiling((timeMovieStopped / TotalRuntimeMovie) * 100);
+                      else
+                        playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
+                      LogMyFilms.Debug("MFD: Calculated playtimepercentage: '" + playTimePercentage + "' - g_player.Duration: '" + g_Player.Duration.ToString() + "' - playlistPlayer.g_Player.Duration: '" + playlistPlayer.g_Player.Duration.ToString() + "'");
                     }
 
                     if (movies.Count <= 0)
@@ -3763,10 +3805,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
                 
-                if (isTrailer)
+                if (trailerPlayed)
                 {
-                  LogMyFilms.Debug("MFD: Skipping UpdateOnEnd - reason: isTrailer");
-                  isTrailer = false;
+                  LogMyFilms.Debug("MFD: Skipping UpdateOnEnd - reason: trailerPlayed = true");
+                  trailerPlayed = false;
                   return;
                 }
                 
@@ -3793,9 +3835,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 if ((MyFilms.conf.CheckWatched) || (MyFilms.conf.CheckWatchedPlayerStopped) || (MyFilms.conf.StrSupPlayer))
                 {
+                  //Tried, but didn't Help...
+                  //if (ImgDetFilm != null)
+                  //if (ImgDetFilm.IsVisible)
+                  //  ImgDetFilm.Refresh();
+                  //else if (ImgDetFilm2 != null)
+                  //  ImgDetFilm2.Refresh();
+
                   Update_XML_database();
                   afficher_detail(true);
-                  //GUIWindowManager.Process(); // Enabling creates look in handler !!!
+                  //GUIWindowManager.Process(); // Enabling creates lock in handler !!!
                 }
                 MyFilms.conf.StrPlayedIndex = -1;
                 MyFilms.conf.StrPlayedDfltSelect = string.Empty;
@@ -4496,7 +4545,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         static public void PlayMovieFromPlayListTrailer(bool NoResumeMovie, int iMovieIndex)
         {
-            isTrailer = true;
+            trailerPlayed = true;
             string filename;
             if (iMovieIndex == -1)
                 filename = playlistPlayer.GetNext();
@@ -5261,6 +5310,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           strLine = strLine.Substring(0, iPos);
         }
       }
+
+      private bool handleTrailer()
+      {
+        if (trailerPlayed)
+        {
+
+          // Set custom trailer played back to false
+          trailerPlayed = false;
+
+          // If a trailer was just played, we need to play the selected movie
+          //playMovie(queuedMedia.AttachedMovies[0], queuedMedia.Part);
+          return true;
+        }
+
+        return false;
+      }
+
 
 
 

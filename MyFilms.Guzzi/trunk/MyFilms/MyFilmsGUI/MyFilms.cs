@@ -3166,7 +3166,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   // first check, if trailer files are available, offer options
                   //if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                   if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
+                  {
+                    MyFilmsDetail.trailerPlayed = true;
                     MyFilmsDetail.Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+                  }
                   else
                   {
                     // Can add autosearch&register logic here before try starting trailers
@@ -3186,7 +3189,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
                       //afficher_detail(true);
                       //setProcessAnimationStatus(false, m_SearchAnimation);
-
+                      MyFilmsDetail.trailerPlayed = true;
                       MyFilmsDetail.Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
                     }
                   }
@@ -4712,7 +4715,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 //if (conf.StrTitleSelect != "") conf.StrTitleSelect += conf.TitleDelim;
                                 //conf.StrTitleSelect += conf.Wselectedlabel;
                                 //while (GetFilmList() == false) ; //keep calling while single folders found
-                                
+
+                                MyFilmsDetail.trailerPlayed = true;
                                 MyFilmsDetail.Launch_Movie_Trailer(facadeView.SelectedListItem.ItemId, 7990, null); //7990 To Return to this Dialog
                                 // MyFilmsDetail.Launch_Movie_Trailer(1, GetID, m_SearchAnimation);
                                 //MyFilmsDetail.Launch_Movie_Trailer(Convert.ToInt32(w_index[RandomNumber]), GetID, null);    
