@@ -56,6 +56,9 @@
     <String id="5910">Lade Filminformationen (online)</String>
     <String id="6022">Film Datenbank Auswahl</String>
     <String id="6029">Ändern</String>
+    <String id="7986">Filme</String>
+    <String id="7987">Filme</String>
+    <String id="7988">Filme</String>
     <String id="200026">Land</String>
     <String id="200027">Gesehen</String>
     <String id="200028">gesehen</String>
@@ -63,7 +66,7 @@
     <String id="200036">Manueller Suchlauf</String>
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
-    <String id="107988">Films</String>
+    <String id="107988">Filme</String>
     <String id="1079858">Manuelle Eingabe über Tastatur</String>
     <String id="1079859">Wähle Suchbegriff</String>
     <String id="1079860">Manuelle Eingabe</String>
@@ -189,6 +192,7 @@
     <String id="10798703">Fanart und Cover ...</String>
     <String id="10798704">Trailer ...</String>
     <String id="10798705">Trailer gefunden !</String>
+    <String id="10798709">Spiele Film</String>
     <String id="10798710">Spiele Trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>

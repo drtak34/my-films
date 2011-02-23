@@ -56,6 +56,9 @@
     <String id="5910">Get internet film info</String>
     <String id="6022">Choose MyFilms DB Config</String>
     <String id="6029">Change</String>
+    <String id="7986">Filme</String>
+    <String id="7987">Filme</String>
+    <String id="7988">Filme</String>
     <String id="200026">Country</String>
     <String id="200027">Watched</String>
     <String id="200028">watched</String>
@@ -189,6 +192,7 @@
     <String id="10798703">Fanart and Cover ...</String>
     <String id="10798704">Trailer ...</String>
     <String id="10798705">Trailer(s) found !</String>
+    <String id="10798709">Play Film</String>
     <String id="10798710">Play trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>

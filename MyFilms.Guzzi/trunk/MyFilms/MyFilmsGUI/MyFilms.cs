@@ -340,11 +340,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //m_TraktSyncTimer = new System.Threading.Timer(new TimerCallback(TraktSynchronize), null, 15000, Timeout.Infinite);
             #endregion
 
-            BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
-            BrowseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
-            OnlineVideosRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
-            OnlineVideosRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
-
             LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
 
             return Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
@@ -379,7 +374,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //m_FanartTimer.Change(0,10000);
 
             //MyFilmsDetail.clearGUIProperty("picture");
-
+            if (!BrowseTheWebRightPlugin || !BrowseTheWebRightVersion)
+            {
+              BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
+              BrowseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
+              LogMyFilms.Debug("MyFilms.Init() - BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "', BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "'");
+            }
+            if (!OnlineVideosRightPlugin || !OnlineVideosRightVersion)
+            {
+              OnlineVideosRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
+              OnlineVideosRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
+              LogMyFilms.Debug("MyFilms.Init() - OnlineVideosRightPlugin = '" + OnlineVideosRightPlugin + "', OnlineVideosRightVersion = '" + OnlineVideosRightVersion + "'");
+            }
             LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
         }
 
@@ -3050,9 +3056,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     string[] split1 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(new Char[] { ';' });
                     trailercount = split1.Count().ToString();
+                    dlg.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")");//play trailer (<number trailers present>)
+                    upd_choice[ichoice] = "playtrailer";
+                    ichoice++;
                   }
-                  dlg.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")");//play trailer (<number trailers present>)
-                  upd_choice[ichoice] = "playtrailer";
+                }
+
+                if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
+                {
+                  if (facadeView.SelectedListItem.IsPlayed) // show only the required option
+                    dlg.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
+                  else dlg.Add(GUILocalizeStrings.Get(1079894)); // set watched
+                  upd_choice[ichoice] = "togglewatchedstatus";
                   ichoice++;
                 }
 
@@ -3084,16 +3099,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   upd_choice[ichoice] = "updatepersonmovie";
                   ichoice++;
                 }
-
-                if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
-                {
-                  if (facadeView.SelectedListItem.IsPlayed) // show only the required option
-                    dlg.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
-                  else dlg.Add(GUILocalizeStrings.Get(1079894)); // set watched
-                  upd_choice[ichoice] = "togglewatchedstatus";
-                  ichoice++;
-                }
-
             }
 
             // Artistcontext
