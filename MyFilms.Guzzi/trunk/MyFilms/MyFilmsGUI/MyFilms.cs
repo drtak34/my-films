@@ -455,16 +455,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (actionType.m_key != null)
             {
-                if ((actionType.m_key.KeyChar == 112) && (facadeView.Focus) && !(facadeView.SelectedListItem.IsFolder) && ((MyFilms.conf.StrSuppress)))
+                if ((actionType.m_key.KeyChar == 112) && facadeView.Focus && !facadeView.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
                 {
                     MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, null);
                 }
-                if ((actionType.m_key.KeyChar == 120) && (Context_Menu))
+                if ((actionType.m_key.KeyChar == 120) && Context_Menu)
                 {
                     Context_Menu = false;
                     return;
                 }
-                if ((actionType.m_key.KeyChar == 120) && (facadeView.Focus) && !(facadeView.SelectedListItem.IsFolder) && ((MyFilms.conf.StrSuppress)))
+                if (actionType.m_key.KeyChar == 120 && facadeView.Focus && !facadeView.SelectedListItem.IsFolder)
                 {
                     // context menu for update or suppress entry
                     Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
@@ -3034,6 +3034,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 upd_choice[ichoice] = "analogyproperty";
                 ichoice++;
 
+                if (facadeView.Focus && !facadeView.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
+                {
+                  dlg.Add(GUILocalizeStrings.Get(10798709));//play movie 
+                  upd_choice[ichoice] = "playmovie";
+                  ichoice++;
+                }
+              
                 if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                 {
                   string trailercount = "";
@@ -3162,6 +3169,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
             switch (upd_choice[dlg.SelectedLabel])
             {
+                case "playmovie":
+                  MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, null);
+                  break;
+
                 case "playtrailer":
                   // first check, if trailer files are available, offer options
                   //if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
