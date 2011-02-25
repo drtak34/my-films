@@ -942,6 +942,14 @@ namespace MesFilms {
             private global::System.Data.DataColumn columnDisks;
             
             private global::System.Data.DataColumn columnPicture;
+
+            private global::System.Data.DataColumn columnCertification;
+
+            private global::System.Data.DataColumn columnWatched;
+
+            private global::System.Data.DataColumn columnIMDB_Id;
+
+            private global::System.Data.DataColumn columnTMDB_Id;
             
             private global::System.Data.DataColumn columnContents_Id;
             
@@ -1208,14 +1216,52 @@ namespace MesFilms {
                     return this.columnDisks;
                 }
             }
-            
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn PictureColumn {
-                get {
-                    return this.columnPicture;
-                }
+            public global::System.Data.DataColumn PictureColumn
+            {
+              get
+              {
+                return this.columnPicture;
+              }
             }
-            
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CertificationColumn
+            {
+              get
+              {
+                return this.columnCertification;
+              }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatchedColumn
+            {
+              get
+              {
+                return this.columnWatched;
+              }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn IMDB_IdColumn
+            {
+              get
+              {
+                return this.columnIMDB_Id;
+              }
+            }
+
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TMDB_IdColumn
+            {
+              get
+              {
+                return this.columnTMDB_Id;
+              }
+            }
+
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn Contents_IdColumn {
                 get {
@@ -1329,6 +1375,10 @@ namespace MesFilms {
                         Size,
                         Disks,
                         Picture,
+                        Certification,
+                        Watched,
+                        IMDB_Id,
+                        TMDB_Id,
                         null,
                         Length_Num};
                 rowMovieRow.ItemArray = columnValuesArray;
@@ -1405,6 +1455,10 @@ namespace MesFilms {
                         Size,
                         Disks,
                         Picture,
+                        Certification,
+                        Watched,
+                        IMDB_Id,
+                        TMDB_Id,
                         null,
                         null};
                 rowMovieRow.ItemArray = columnValuesArray;
