@@ -130,8 +130,8 @@ namespace MyFilmsPlugin.MyFilms
             {
                 try
                 {
-                    System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter
-                              (MyFilms.conf.StrFileXml, System.Text.Encoding.Default);
+                    System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter (MyFilms.conf.StrFileXml, System.Text.Encoding.Default);
+                    MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
                     MyXmlTextWriter.WriteStartDocument();
                     data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
                     MyXmlTextWriter.Close();
