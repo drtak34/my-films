@@ -240,6 +240,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   CmdPar.Items.Add(dc.ColumnName);
                 }
               }
+              else // Fields not supported by AMC - (dc.ColumnName != "Picture") && (dc.ColumnName != "Contents_Id") && (dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")
+              {
+                if (CatalogType.SelectedIndex == 5 && (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" || dc.ColumnName == "Certification"))
+                {
+                  AntSearchField.Items.Add(dc.ColumnName);
+                  AntUpdField.Items.Add(dc.ColumnName);
+                }
+              }
             }
             AntViewText_Change();
             AntSort_Change();
@@ -1762,26 +1770,24 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     SearchFileName.Checked = true;
                     break;
 
-                case 5: // XMM
-                    AntStorage.Text = "Source";
-                    AntTitle1.Text = "TranslatedTitle";
-                    AntTitle2.Text = "OriginalTitle";
-                    AntSTitle.Text = "FormattedTitle";
-                    TitleDelim.Text = "\\";
-                    ItemSearchFileName.Text = "TranslatedTitle";
-                    SearchFileName.Checked = true;
-                    break;
-              case 7: // MyFilms DB (currently same as ANT Movie Catalog, but possible to extend DB fields in the future
+                case 7: // MyFilms DB (currently same as ANT Movie Catalog, but possible to extend DB fields in the future
                     break;
 
                 default:
-                    AntStorage.Text = "Source";
-                    AntStorageTrailer.Text = "Borrower";
-                    AntTitle1.Text = "TranslatedTitle";
-                    AntTitle2.Text = "OriginalTitle";
-                    AntSTitle.Text = "FormattedTitle";
-                    TitleDelim.Text = "\\";
-                    ItemSearchFileName.Text = "TranslatedTitle";
+                    if (string.IsNullOrEmpty(AntStorage.Text))
+                      AntStorage.Text = "Source";
+                    if (string.IsNullOrEmpty(AntStorageTrailer.Text))
+                      AntStorageTrailer.Text = "Borrower";
+                    if (string.IsNullOrEmpty(AntTitle1.Text))
+                      AntTitle1.Text = "TranslatedTitle";
+                    if (string.IsNullOrEmpty(AntTitle2.Text))
+                      AntTitle2.Text = "OriginalTitle";
+                    if (string.IsNullOrEmpty(AntSTitle.Text))
+                      AntSTitle.Text = "FormattedTitle";
+                    if (string.IsNullOrEmpty(TitleDelim.Text))
+                      TitleDelim.Text = "\\";
+                    if (string.IsNullOrEmpty(ItemSearchFileName.Text))
+                      ItemSearchFileName.Text = "TranslatedTitle";
                     SearchFileName.Checked = true;
                     break;
 
