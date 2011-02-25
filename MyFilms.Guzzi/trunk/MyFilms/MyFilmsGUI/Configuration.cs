@@ -209,7 +209,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "5":
+                    case "5": // XMM
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);

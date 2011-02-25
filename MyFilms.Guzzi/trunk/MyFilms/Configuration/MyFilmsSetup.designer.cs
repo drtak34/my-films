@@ -166,6 +166,7 @@
           this.labelFanart = new System.Windows.Forms.Label();
           this.chkDfltFanart = new System.Windows.Forms.CheckBox();
           this.groupBox22 = new System.Windows.Forms.GroupBox();
+          this.chkDfltViewsAll = new System.Windows.Forms.CheckBox();
           this.label47 = new System.Windows.Forms.Label();
           this.ButDefCovViews = new System.Windows.Forms.Button();
           this.DefaultCoverViews = new System.Windows.Forms.TextBox();
@@ -457,7 +458,6 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
-          this.chkDfltViewsAll = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1284,6 +1284,19 @@
           this.groupBox22.TabStop = false;
           this.groupBox22.Text = "Thumbs for Group Views (Genre, Year, Country, ...)";
           this.ToolTip1.SetToolTip(this.groupBox22, resources.GetString("groupBox22.ToolTip"));
+          // 
+          // chkDfltViewsAll
+          // 
+          this.chkDfltViewsAll.AutoSize = true;
+          this.chkDfltViewsAll.Location = new System.Drawing.Point(42, 73);
+          this.chkDfltViewsAll.Name = "chkDfltViewsAll";
+          this.chkDfltViewsAll.Size = new System.Drawing.Size(104, 17);
+          this.chkDfltViewsAll.TabIndex = 80;
+          this.chkDfltViewsAll.Text = "Use for all Views";
+          this.ToolTip1.SetToolTip(this.chkDfltViewsAll, "If unchecked, group thumbs will only be used for genre, year and country.\r\nIf che" +
+                  "cked, it will be used for all group views except \r\nthe person views (actor, dire" +
+                  "ctor, producer, borrower).");
+          this.chkDfltViewsAll.UseVisualStyleBackColor = true;
           // 
           // label47
           // 
@@ -3673,7 +3686,7 @@
             "Movie Collector",
             "MyMovies",
             "Eax Movie Catalog",
-            "eXtreme Movie Manager (V7.1.0.2)",
+            "eXtreme Movie Manager (V7.1.1.1)",
             "XBMC (V10.0)"});
           this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
@@ -4420,19 +4433,6 @@
           this.lblNbConfig.Size = new System.Drawing.Size(42, 13);
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
-          // 
-          // chkDfltViewsAll
-          // 
-          this.chkDfltViewsAll.AutoSize = true;
-          this.chkDfltViewsAll.Location = new System.Drawing.Point(42, 73);
-          this.chkDfltViewsAll.Name = "chkDfltViewsAll";
-          this.chkDfltViewsAll.Size = new System.Drawing.Size(104, 17);
-          this.chkDfltViewsAll.TabIndex = 80;
-          this.chkDfltViewsAll.Text = "Use for all Views";
-          this.ToolTip1.SetToolTip(this.chkDfltViewsAll, "If unchecked, group thumbs will only be used for genre, year and country.\r\nIf che" +
-                  "cked, it will be used for all group views except \r\nthe person views (actor, dire" +
-                  "ctor, producer, borrower).");
-          this.chkDfltViewsAll.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 

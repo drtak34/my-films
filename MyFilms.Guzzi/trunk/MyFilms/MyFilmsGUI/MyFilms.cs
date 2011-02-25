@@ -2037,6 +2037,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else if (System.IO.File.Exists(strPathArtist + itemlabel + "L" + ".jpg")) strThumbSource = strPathArtist + itemlabel + "L" + ".jpg";
               else if (System.IO.File.Exists(strPathArtist + itemlabel + ".jpg")) strThumbSource = strPathArtist + itemlabel + ".jpg";
               else if (System.IO.File.Exists(strPathArtist + itemlabel + ".png")) strThumbSource = strPathArtist + itemlabel + ".png";
+              else if (conf.StrFileType == "5") // XMM artist thumbs: e.g. Alex-Revan_101640.jpg
+              {
+                if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in XMM picture directory
+                {
+                  string searchname = HTMLParser.removeHtml(itemlabel).Replace(" ", "-"); // replaces special character "á" and other special chars !
+                  searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                  string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
+                  if (files.Count() > 0) 
+                    strThumbSource = files[0];
+                }
+              }
               if (strThumbSource != string.Empty)
               {
                 Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
