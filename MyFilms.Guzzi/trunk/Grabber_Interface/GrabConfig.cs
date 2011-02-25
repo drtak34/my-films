@@ -660,9 +660,10 @@ namespace Grabber_Interface
       {
 
         textPreview.ResetText();
-
-        BodyDetail = GrabUtil.GetPage(TextURLDetail.Text, null, out absoluteUri, new CookieContainer());
-
+        if (TextURLDetail.Text.ToLower().StartsWith("http"))
+          BodyDetail = GrabUtil.GetPage(TextURLDetail.Text, null, out absoluteUri, new CookieContainer());
+        else
+          BodyDetail = this.ReadFile(TextURLDetail.Text); // Read html page from file !
         if (xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value.Length > 0)
         {
           iStart = BodyDetail.IndexOf(xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value);
@@ -1896,6 +1897,36 @@ namespace Grabber_Interface
         tabPageSearchPage.Enabled = true;
         tabPageDetailPage.Enabled = true;
       }
+    }
+
+    private void button_Load_File_Click(object sender, EventArgs e)
+    {
+      openFileDialog1.RestoreDirectory = true;
+      openFileDialog1.Filter = "Web Files (*.htm)|*.htm";
+      openFileDialog1.Title = "Load HTML File";
+      if (openFileDialog1.ShowDialog() == DialogResult.OK)
+      {
+        TextURLDetail.Text = openFileDialog1.FileName;
+        button_Load_Click(this, e);
+      }
+
+    }
+
+    ///<summary>
+    /// Liefert den Inhalt der Datei zurück.
+    ///</summary>
+    ///<param name="sFilename">Dateipfad</param>
+    public string ReadFile(String sFilename)
+    {
+      string sContent = "";
+
+      if (File.Exists(sFilename))
+      {
+        StreamReader myFile = new StreamReader(sFilename, System.Text.Encoding.Default);
+        sContent = myFile.ReadToEnd();
+        myFile.Close();
+      }
+      return sContent;
     }
 
   }

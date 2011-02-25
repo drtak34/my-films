@@ -121,6 +121,7 @@ namespace Grabber_Interface
           this.button2 = new System.Windows.Forms.Button();
           this.button3 = new System.Windows.Forms.Button();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
+          this.button_Load_File = new System.Windows.Forms.Button();
           this.tabControl1.SuspendLayout();
           this.tabPageSearchPage.SuspendLayout();
           this.groupBox6.SuspendLayout();
@@ -460,6 +461,7 @@ namespace Grabber_Interface
           // 
           // tabPageDetailPage
           // 
+          this.tabPageDetailPage.Controls.Add(this.button_Load_File);
           this.tabPageDetailPage.Controls.Add(this.label21);
           this.tabPageDetailPage.Controls.Add(this.labelImageSize);
           this.tabPageDetailPage.Controls.Add(this.btnLoadDetailPreview);
@@ -831,6 +833,13 @@ namespace Grabber_Interface
           this.pictureBoxPreviewCover.TabStop = false;
           this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
           // 
+          // button_Load_File
+          // 
+          resources.ApplyResources(this.button_Load_File, "button_Load_File");
+          this.button_Load_File.Name = "button_Load_File";
+          this.button_Load_File.UseVisualStyleBackColor = true;
+          this.button_Load_File.Click += new System.EventHandler(this.button_Load_File_Click);
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -968,6 +977,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_Load_File;
 
     }
 }
