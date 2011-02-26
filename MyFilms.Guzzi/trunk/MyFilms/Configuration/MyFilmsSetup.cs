@@ -882,6 +882,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", chkFanart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", chkDfltFanart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImage", chkDfltFanartImage.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImageAll", chkDfltFanartImageAll.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartPicture", MesFilmsFanart.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsPicture", MesFilmsViews.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Views", chkViews.Checked);
@@ -1188,6 +1189,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //chkGrabber.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", false);
             chkDfltFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", false);
             chkDfltFanartImage.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImage", false);
+            chkDfltFanartImageAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImageAll", false);
             chkFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", false);
             txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", string.Empty);
             //txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
@@ -1540,6 +1542,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //txtAMCUpd_exe.ResetText();
             chkDfltFanart.Checked = false;
             chkDfltFanartImage.Checked = false;
+            chkDfltFanartImageAll.Checked = false;
             chkFanart.Checked = false;
             chkDfltViews.Checked = false;
             chkDfltViewsAll.Checked = false;
@@ -4073,6 +4076,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           chkFanart.Checked = true;
           chkDfltFanart.Checked = true;
           chkDfltFanartImage.Checked = true;
+          chkDfltFanartImageAll.Checked = true;
 
           string FanartDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Fanart";
           if (!System.IO.Directory.Exists(FanartDirectory))

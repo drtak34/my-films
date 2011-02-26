@@ -294,6 +294,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Fanart", false);
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
                 StrFanartDfltImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImage", false);
+                StrFanartDfltImageAll = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImageAll", false);
                 StrViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Views", false);
                 StrPersons = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Persons", false);
                 StrViewsDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsDflt", false);
@@ -963,6 +964,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return strFanartDfltImage; }
           set { strFanartDfltImage = value; }
+        }
+        private bool strFanartDfltImageAll = false;
+        public bool StrFanartDfltImageAll
+        {
+          get { return strFanartDfltImageAll; }
+          set { strFanartDfltImageAll = value; }
         }
         private bool strArtistDflt = false;
         public bool StrArtistDflt

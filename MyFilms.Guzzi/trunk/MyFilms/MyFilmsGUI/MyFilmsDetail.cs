@@ -2388,7 +2388,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         safeName = MyFilms.conf.StrPathFanart + "\\_Group\\" + group + "\\{" + wtitle2 + "}";
                     }
                     else
+                      if (MyFilms.conf.StrFanartDfltImageAll && (wfanart[0] == "" || wfanart[0] == " "))
+                      {
+                        wfanart[0] = MyFilms.conf.DefaultFanartImage;
+                        wfanart[1] = "file";
                         return wfanart;
+                      }
                 }
                 else 
              
@@ -3659,6 +3664,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 int movieDuration = (int)g_Player.Duration;
                 VideoDatabase.SetMovieDuration(idFile, movieDuration);
             }
+          // Check, if property for OSD should be set (came from myvideo DB in the past) -> #Play.Current.Thumb
         }
         private void OnPlayBackEnded(MediaPortal.Player.g_Player.MediaType type, string filename)
         {
@@ -3694,6 +3700,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 ArrayList movies = new ArrayList();
                 int playTimePercentage = 0; // Set watched flag after 80% of total played time
                 double TotalRuntimeMovie = 0;
+
                 int iidMovie = VideoDatabase.GetMovieId(filename);
                 if (iidMovie >= 0)
                 {
@@ -3702,7 +3709,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                   try
                   {
-
+                    //if (file != string.Empty)
+                    //{
+                    //  // Set new data
+                    //  MediaInfoWrapper x = new MediaInfoWrapper(file);
+                    //  x.VideoDuration
+                    //  //GUIPropertyManager.SetProperty("#VideoCodec", Util.Utils.MakeFileName(x.VideoCodec));
+                    //  //GUIPropertyManager.SetProperty("#VideoResolution", x.VideoResolution);
+                    //  //GUIPropertyManager.SetProperty("#AudioCodec", Util.Utils.MakeFileName(x.AudioCodec));
+                    //  //GUIPropertyManager.SetProperty("#AudioChannels", x.AudioChannelsFriendly);
+                    //  //GUIPropertyManager.SetProperty("#HasSubtitles", x.HasSubtitles.ToString());
+                    //  //GUIPropertyManager.SetProperty("#AspectRatio", x.AspectRatio);
+                    //}
                   }
                   catch (Exception)
                   {

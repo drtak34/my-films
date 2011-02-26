@@ -107,7 +107,6 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.radioButton2 = new System.Windows.Forms.CheckBox();
           this.radioButton1 = new System.Windows.Forms.CheckBox();
@@ -458,6 +457,8 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
+          this.chkDfltFanartImageAll = new System.Windows.Forms.CheckBox();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -644,16 +645,6 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -1135,6 +1126,7 @@
           // 
           // Fanart
           // 
+          this.Fanart.Controls.Add(this.chkDfltFanartImageAll);
           this.Fanart.Controls.Add(this.label48);
           this.Fanart.Controls.Add(this.chkDfltFanartImage);
           this.Fanart.Controls.Add(this.ButDefFanart);
@@ -1166,11 +1158,13 @@
           // chkDfltFanartImage
           // 
           this.chkDfltFanartImage.AutoSize = true;
-          this.chkDfltFanartImage.Location = new System.Drawing.Point(42, 38);
+          this.chkDfltFanartImage.Location = new System.Drawing.Point(39, 33);
           this.chkDfltFanartImage.Name = "chkDfltFanartImage";
           this.chkDfltFanartImage.Size = new System.Drawing.Size(117, 30);
           this.chkDfltFanartImage.TabIndex = 77;
           this.chkDfltFanartImage.Text = "Use Default Image \r\nfor missing fanart";
+          this.ToolTip1.SetToolTip(this.chkDfltFanartImage, "Use default fanart image if no fanart found for movies and grouped views like yea" +
+                  "r, genre, country.");
           this.chkDfltFanartImage.UseVisualStyleBackColor = true;
           this.chkDfltFanartImage.CheckedChanged += new System.EventHandler(this.chkDfltFanartImage_CheckedChanged);
           // 
@@ -1196,7 +1190,7 @@
           // 
           this.lblResultingGroupViewsPathFanart.AutoSize = true;
           this.lblResultingGroupViewsPathFanart.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(314, 89);
+          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(461, 81);
           this.lblResultingGroupViewsPathFanart.Name = "lblResultingGroupViewsPathFanart";
           this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(137, 13);
           this.lblResultingGroupViewsPathFanart.TabIndex = 74;
@@ -1208,16 +1202,16 @@
           // 
           this.label40.AutoSize = true;
           this.label40.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.label40.Location = new System.Drawing.Point(114, 89);
+          this.label40.Location = new System.Drawing.Point(315, 81);
           this.label40.Name = "label40";
-          this.label40.Size = new System.Drawing.Size(186, 13);
+          this.label40.Size = new System.Drawing.Size(140, 13);
           this.label40.TabIndex = 73;
-          this.label40.Text = "Resulting path for Group Views fanart:";
+          this.label40.Text = "Path for Group Views fanart:";
           // 
           // chkFanart
           // 
           this.chkFanart.AutoSize = true;
-          this.chkFanart.Location = new System.Drawing.Point(18, 19);
+          this.chkFanart.Location = new System.Drawing.Point(18, 15);
           this.chkFanart.Name = "chkFanart";
           this.chkFanart.Size = new System.Drawing.Size(78, 17);
           this.chkFanart.TabIndex = 71;
@@ -1257,7 +1251,7 @@
           // 
           this.chkDfltFanart.AutoSize = true;
           this.chkDfltFanart.Enabled = false;
-          this.chkDfltFanart.Location = new System.Drawing.Point(42, 69);
+          this.chkDfltFanart.Location = new System.Drawing.Point(39, 90);
           this.chkDfltFanart.Name = "chkDfltFanart";
           this.chkDfltFanart.Size = new System.Drawing.Size(191, 17);
           this.chkDfltFanart.TabIndex = 67;
@@ -1288,7 +1282,7 @@
           // chkDfltViewsAll
           // 
           this.chkDfltViewsAll.AutoSize = true;
-          this.chkDfltViewsAll.Location = new System.Drawing.Point(42, 73);
+          this.chkDfltViewsAll.Location = new System.Drawing.Point(59, 73);
           this.chkDfltViewsAll.Name = "chkDfltViewsAll";
           this.chkDfltViewsAll.Size = new System.Drawing.Size(104, 17);
           this.chkDfltViewsAll.TabIndex = 80;
@@ -1358,7 +1352,7 @@
           // chkDfltViews
           // 
           this.chkDfltViews.AutoSize = true;
-          this.chkDfltViews.Location = new System.Drawing.Point(42, 44);
+          this.chkDfltViews.Location = new System.Drawing.Point(39, 43);
           this.chkDfltViews.Name = "chkDfltViews";
           this.chkDfltViews.Size = new System.Drawing.Size(112, 30);
           this.chkDfltViews.TabIndex = 75;
@@ -1497,7 +1491,7 @@
           // chkDfltArtist
           // 
           this.chkDfltArtist.AutoSize = true;
-          this.chkDfltArtist.Location = new System.Drawing.Point(42, 45);
+          this.chkDfltArtist.Location = new System.Drawing.Point(39, 44);
           this.chkDfltArtist.Name = "chkDfltArtist";
           this.chkDfltArtist.Size = new System.Drawing.Size(114, 30);
           this.chkDfltArtist.TabIndex = 98;
@@ -4434,6 +4428,27 @@
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
           // 
+          // chkDfltFanartImageAll
+          // 
+          this.chkDfltFanartImageAll.AutoSize = true;
+          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(59, 67);
+          this.chkDfltFanartImageAll.Name = "chkDfltFanartImageAll";
+          this.chkDfltFanartImageAll.Size = new System.Drawing.Size(104, 17);
+          this.chkDfltFanartImageAll.TabIndex = 79;
+          this.chkDfltFanartImageAll.Text = "Use for all Views";
+          this.ToolTip1.SetToolTip(this.chkDfltFanartImageAll, "Use default fanart image for all grouped views like persons, date added, etc.");
+          this.chkDfltFanartImageAll.UseVisualStyleBackColor = true;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4915,5 +4930,6 @@
         private TextBox textBoxNBconfigs;
         private Label lblNbConfig;
         private CheckBox chkDfltViewsAll;
+        private CheckBox chkDfltFanartImageAll;
     }
 }
