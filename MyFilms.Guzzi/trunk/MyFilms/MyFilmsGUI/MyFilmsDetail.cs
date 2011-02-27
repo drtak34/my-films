@@ -954,8 +954,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       string[] split1 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(new Char[] { ';' });
                       trailercount = split1.Count().ToString();
                       }
-                      dlgmenu.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")");//play trailer (<number trailers present>)
-                      choiceViewMenu.Add("playtrailer");
+                      if (trailercount != "0")
+                      {
+                        dlgmenu.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")");//play trailer (<number trailers present>)
+                        choiceViewMenu.Add("playtrailer");
+                      }
                     }
                     dlgmenu.Add(GUILocalizeStrings.Get(10798711));//search youtube trailer with onlinevideos
                     choiceViewMenu.Add("playtraileronlinevideos");

@@ -2003,15 +2003,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //string strThumbLarge = string.Empty;
           string strThumbSource = string.Empty;
 
-          //if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
-          //{
-          //  strThumbLarge = strThumbDirectory + itemlabel + ".png";
-          //}
-          //else
-          //{
-          //  strThumbLarge = strThumbDirectory + itemlabel + ".png";
-          //}
-
           if (isPerson)
           {
             //strThumbSource = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieActors, itemlabel); // check for actors images in MyVideos...
@@ -2684,7 +2675,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         return;
                     }
 
-                    LogMyFilms.Debug("MF: Call nor menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
+                    LogMyFilms.Debug("MF: Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
 
                     Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
                     return;
@@ -3061,15 +3052,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                 {
                   string trailercount = "";
-                  if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
+                  if (string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorageTrailer].ToString().Trim()))
                     trailercount = "0";
                   else
                   {
-                    string[] split1 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(new Char[] { ';' });
+                    string[] split1 = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorageTrailer].ToString().Trim().Split(new Char[] { ';' });
                     trailercount = split1.Count().ToString();
+                    if (trailercount != "0")
+                    {
                     dlg.Add(GUILocalizeStrings.Get(10798710) + " (" + trailercount + ")");//play trailer (<number trailers present>)
                     upd_choice[ichoice] = "playtrailer";
                     ichoice++;
+                    }
                   }
                 }
 
