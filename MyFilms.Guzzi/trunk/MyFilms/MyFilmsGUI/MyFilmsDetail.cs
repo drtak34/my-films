@@ -44,6 +44,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
   using MediaPortal.GUI.Library;
+  using MediaPortal.GUI.Video;
   using MediaPortal.Player;
   using MediaPortal.Playlists;
   using MediaPortal.Profile;
@@ -3666,6 +3667,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 int movieDuration = (int)g_Player.Duration;
                 VideoDatabase.SetMovieDuration(idFile, movieDuration);
+
+                //GUIVideoFiles.Reset(); // reset pincode
+          
+                //ArrayList files = new ArrayList();
+                //VideoDatabase.GetFiles(movie.ID, ref files);
+                
+                //if (files.Count > 1)
+                //{
+                //  GUIVideoFiles._stackedMovieFiles = files;
+                //  GUIVideoFiles._isStacked = true;
+                //  GUIVideoFiles.MovieDuration(files);
+                //}
+                //else
+                //{
+                //  GUIVideoFiles._isStacked = false;
+                //}
+                //GUIVideoFiles.PlayMovie(movie.ID);
+
             }
           // Check, if property for OSD should be set (came from myvideo DB in the past) -> #Play.Current.Thumb
         }
@@ -3709,27 +3728,52 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                     VideoDatabase.GetFiles(iidMovie, ref movies);
                     //HashSet<string> watchedMovies = new HashSet<string>();
-
-                  try
-                  {
-                    //if (file != string.Empty)
+                  
+                    //// Stacked movies duration -- taken from Deda, MyVideos
+                    //if (_isStacked && _totalMovieDuration != 0)
                     //{
-                    //  // Set new data
-                    //  MediaInfoWrapper x = new MediaInfoWrapper(file);
-                    //  x.VideoDuration
-                    //  //GUIPropertyManager.SetProperty("#VideoCodec", Util.Utils.MakeFileName(x.VideoCodec));
-                    //  //GUIPropertyManager.SetProperty("#VideoResolution", x.VideoResolution);
-                    //  //GUIPropertyManager.SetProperty("#AudioCodec", Util.Utils.MakeFileName(x.AudioCodec));
-                    //  //GUIPropertyManager.SetProperty("#AudioChannels", x.AudioChannelsFriendly);
-                    //  //GUIPropertyManager.SetProperty("#HasSubtitles", x.HasSubtitles.ToString());
-                    //  //GUIPropertyManager.SetProperty("#AspectRatio", x.AspectRatio);
+                    //  int duration = 0;
+
+                    //  for (int i = 0; i < _stackedMovieFiles.Count; i++)
+                    //  {
+                    //    int fileID = VideoDatabase.GetFileId((string)_stackedMovieFiles[i]);
+
+                    //    if (g_Player.CurrentFile != (string)_stackedMovieFiles[i])
+                    //    {
+                    //      //(int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
+                    //      duration += VideoDatabase.GetMovieDuration(fileID);
+                    //      continue;
+                    //    }
+                    //    playTimePercentage = (100 * (duration + timeMovieStopped) / _totalMovieDuration);
+                    //    break;
+                    //  }
                     //}
-                  }
-                  catch (Exception)
-                  {
-                    
-                    throw;
-                  }
+                    //else
+                    //{
+                    //  if (g_Player.Player.Duration >= 1)
+                    //    playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
+                    //}
+
+                    //try
+                    //{
+                    //  //if (file != string.Empty)
+                    //  //{
+                    //  //  // Set new data
+                    //  //  MediaInfoWrapper x = new MediaInfoWrapper(file);
+                    //  //  x.VideoDuration
+                    //  //  //GUIPropertyManager.SetProperty("#VideoCodec", Util.Utils.MakeFileName(x.VideoCodec));
+                    //  //  //GUIPropertyManager.SetProperty("#VideoResolution", x.VideoResolution);
+                    //  //  //GUIPropertyManager.SetProperty("#AudioCodec", Util.Utils.MakeFileName(x.AudioCodec));
+                    //  //  //GUIPropertyManager.SetProperty("#AudioChannels", x.AudioChannelsFriendly);
+                    //  //  //GUIPropertyManager.SetProperty("#HasSubtitles", x.HasSubtitles.ToString());
+                    //  //  //GUIPropertyManager.SetProperty("#AspectRatio", x.AspectRatio);
+                    //  //}
+                    //}
+                    //catch (Exception)
+                    //{
+                      
+                    //  throw;
+                    //}
                     //if (movies.Count > 0)
                     //{
                     //  foreach (IMDBMovie movie in movies) // Get Total movie length
@@ -3744,6 +3788,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (g_Player.Player.Duration >= 1)
                     {
                       LogMyFilms.Debug("MFD: TotalRuntimeMovie = '" + TotalRuntimeMovie.ToString() + "', g_player.Player.Duration = '" + g_Player.Player.Duration.ToString() + "'");
+                      string runtimeFromDb = r1[MyFilms.conf.StrPlayedIndex]["Length"].ToString();
+                      try
+                      {
+                        TotalRuntimeMovie = 60 * double.Parse(runtimeFromDb);
+                      }
+                      catch (Exception)
+                      {
+                        TotalRuntimeMovie = 0;
+                      }
+                      LogMyFilms.Debug("MFD: TotalRuntimeMovie = '" + TotalRuntimeMovie.ToString() + "', Runtime from DB = '" + runtimeFromDb + "'");
+
                       if (TotalRuntimeMovie > g_Player.Player.Duration)
                         playTimePercentage = (int)Math.Ceiling((timeMovieStopped / TotalRuntimeMovie) * 100);
                       else
@@ -5348,6 +5403,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return false;
       }
 
+      public static int MovieDuration(ArrayList files)
+      {
+        int _totalMovieDuration = 0;
+
+        foreach (string file in files)
+        {
+          int fileID = VideoDatabase.GetFileId(file);
+          int tempDuration = VideoDatabase.GetMovieDuration(fileID);
+
+          if (tempDuration > 0)
+          {
+            _totalMovieDuration += tempDuration;
+          }
+          else
+          {
+            MediaInfoWrapper mInfo = new MediaInfoWrapper(file);
+
+            if (fileID > -1)
+              VideoDatabase.SetMovieDuration(fileID, mInfo.VideoDuration / 1000);
+            _totalMovieDuration += mInfo.VideoDuration / 1000;
+          }
+        }
+        return _totalMovieDuration;
+      }
+    
 
 
 
