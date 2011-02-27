@@ -409,6 +409,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               ItemSearchGrabberName.Focus();
               return;
             }
+            if (!string.IsNullOrEmpty(txtGrabber.Text) && string.IsNullOrEmpty(cbPictureHandling.Text))
+              {
+              System.Windows.Forms.MessageBox.Show("The Field used for selecting if cover image name to be stored with relative or absolute path is mandatory  !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+              General.SelectedIndex = 5;
+              cbPictureHandling.Focus();
+              return;
+            }
             if (AntViewItem1.Text == "Rating")
             {
                 System.Windows.Forms.MessageBox.Show("View by Rating not possible", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -865,6 +872,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", chkWindowsFileDialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", ItemSearchFileName.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberName", ItemSearchGrabberName.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "PictureHandling", cbPictureHandling.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", DefaultCover.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", DefaultCoverArtist.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverViews", DefaultCoverViews.Text);
@@ -874,12 +882,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber", chkGrabber.Checked);
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", txtDirGrab.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", txtGrabber.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "PicturePrefix", txtPicturePrefix.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Always", chkGrabber_Always.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_ChooseScript", chkGrabber_ChooseScript.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd", chkAMCUpd.Checked);
             //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_exe", txtAMCUpd_exe.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", txtAMCUpd_cnf.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", chkFanart.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDefaultViews", chkFanartDefaultViews.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", chkDfltFanart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImage", chkDfltFanartImage.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImageAll", chkDfltFanartImageAll.Checked);
@@ -1191,7 +1201,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDfltFanartImage.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImage", false);
             chkDfltFanartImageAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImageAll", false);
             chkFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", false);
+            chkFanartDefaultViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDefaultViews", false);
             txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", string.Empty);
+            txtPicturePrefix.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PicturePrefix", string.Empty);
             //txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
             chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Always", false);
             chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd", false);
@@ -1283,6 +1295,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             OnlyFile.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", false);
             ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", "");
             ItemSearchGrabberName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberName", "");
+            cbPictureHandling.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PictureHandling", "");
             DefaultCover.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", "");
             DefaultCoverArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", "");
             DefaultCoverViews.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverViews", "");
@@ -1502,6 +1515,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CmdPar.ResetText();
             ItemSearchFileName.ResetText();
             ItemSearchGrabberName.ResetText();
+            cbPictureHandling.ResetText();
             SearchFileName.Checked = false;
             chkSuppress.Checked = false;
             chksupplaystop.Checked = false;
@@ -1535,6 +1549,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkWindowsFileDialog.Checked = false;
             //chkGrabber.Checked = false;
             txtGrabber.ResetText();
+            txtPicturePrefix.ResetText();
             chkGrabber_Always.Checked = false;
             chkGrabber_ChooseScript.Checked = false;
             chkAMCUpd.Checked = false;
@@ -1544,6 +1559,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDfltFanartImage.Checked = false;
             chkDfltFanartImageAll.Checked = false;
             chkFanart.Checked = false;
+            chkFanartDefaultViews.Checked = false;
             chkDfltViews.Checked = false;
             chkDfltViewsAll.Checked = false;
             chkDfltArtist.Checked = false;
@@ -1907,16 +1923,24 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (chkFanart.Checked)
             {
                 MesFilmsFanart.Enabled = true;
+                DefaultFanartImage.Enabled = true;
                 btnFanart.Enabled = true;
+                ButDefFanart.Enabled = true;
                 chkDfltFanart.Enabled = true;
                 chkDfltFanartImage.Enabled = true;
+                chkDfltFanartImageAll.Enabled = true;
+                chkFanartDefaultViews.Enabled = true;
             }
             else
             {
                 MesFilmsFanart.Enabled = false;
+                DefaultFanartImage.Enabled = false;
                 btnFanart.Enabled = false;
+                ButDefFanart.Enabled = false;
                 chkDfltFanart.Enabled = false;
                 chkDfltFanartImage.Enabled = false;
+                chkDfltFanartImageAll.Enabled = false;
+                chkFanartDefaultViews.Enabled = false;
             }
         }
 
@@ -3763,7 +3787,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           // Set Parameters from MyFilms configuration
           AMCSetAttribute("Ant_Database_Source_Field", AntStorage.Text);
           AMCSetAttribute("Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
-          AMCSetAttribute("Image_Download_Filename_Prefix", currentconfig + "_");
+          
           if (txtGrabber.Text.Length != 0)
             AMCSetAttribute("Internet_Parser_Path", txtGrabber.Text);
           else
@@ -3782,6 +3806,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
             AMCSetAttribute("Purge_Missing_Files", "false");
           AMCSetAttribute("LogDirectory", Config.GetDirectoryInfo(Config.Dir.Config) + @"\log");
+          if (!string.IsNullOrEmpty(cbPictureHandling.Text))
+          {
+            AMCSetAttribute("Use_Folder_Dot_Jpg", "false");
+            AMCSetAttribute("Store_Image_With_Relative_Path", cbPictureHandling.Text);
+
+            //AMCSetAttribute("Image_Download_Filename_Prefix", currentconfig + "_");
+            if (cbPictureHandling.Text == "Relative Path")
+            {
+              AMCSetAttribute("Image_Download_Filename_Prefix", txtPicturePrefix.Text); // just prefix
+            }
+            else if (cbPictureHandling.Text == "Full Path")
+            {
+              AMCSetAttribute("Image_Download_Filename_Prefix", MesFilmsImg.Text + "\\" + txtPicturePrefix); // Full path including "\\" excluding picturefilename 
+            }
+            else if (cbPictureHandling.Text == "Use Folder.jpg")
+            {
+              
+            }
+            else AMCSetAttribute("Image_Download_Filename_Prefix", ""); 
+          }
 
           // Those Parameters already set via MyFilmsAMCSettings.xml (Defaultconfigfile):
           //Option	Status / Source	DefaultValue
@@ -4053,6 +4097,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           // Set values and Presets ...
           AntStorage.Text = "Source";
+          cbPictureHandling.Text = "Relative Path"; // set option for picture path handling (grabber)
           AntStorageTrailer.Text = "Borrower";
           if (System.Windows.Forms.MessageBox.Show("Do you want to use OriginalTitle as Mastertitle ? \n(If you select no, TranslatedTitle will be used)", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
           {
@@ -4073,7 +4118,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           TitleDelim.Text = "\\";
 
           SearchFileName.Checked = true;
+
+          cbPictureHandling.Text = "Relative Path";
+
           chkFanart.Checked = true;
+          chkFanartDefaultViews.Checked = false;
           chkDfltFanart.Checked = true;
           chkDfltFanartImage.Checked = true;
           chkDfltFanartImageAll.Checked = true;
@@ -4167,6 +4216,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           chkAMCUpd.Checked = true; // Use AMCupdater
           AMCMovieScanPath.Text = PathStorage.Text;
           chkAMC_Purge_Missing_Files.Checked = true;
+          txtPicturePrefix.Text = Config_Name.Text + "_"; // Use configname as default prefix
           txtAMCUpd_cnf.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
           // Make controls visible:
           //txtAMCUpd_cnf.Enabled = true;
@@ -4321,7 +4371,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void chkDfltFanartImage_CheckedChanged(object sender, EventArgs e)
         {
           if (chkDfltFanartImage.Checked)
+          {
             chkDfltFanart.Checked = false;
+            chkDfltFanartImageAll.Enabled = true;
+          }
+          else
+          {
+            chkDfltFanartImageAll.Enabled = false;
+          }
         }
 
         private void chkDfltFanart_CheckedChanged(object sender, EventArgs e)
@@ -4359,6 +4416,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup done");
           }
+        }
+
+        private void cbPictureHandling_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          // options:
+          // cbPictureHandling = "Full Path"
+          // cbPictureHandling = "Relative Path"
+          // cbPictureHandling = "Use Folder.jpg"
         }
 
     }

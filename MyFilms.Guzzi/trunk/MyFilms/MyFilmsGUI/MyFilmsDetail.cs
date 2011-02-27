@@ -1542,12 +1542,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int year = 0;
             string director = string.Empty;
             XmlConfig XmlConfig = new XmlConfig();
-            string Img_Path = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
-            string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
+            // Those settings were used in the past from AMCupdater settings - now they exist in MF config as primary source!
+            //string Img_Path = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
+            //string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
             bool onlymissing = false;
 
             if (nfo)
-                Result = Grab.GetNfoDetail(nfofile, MyFilms.conf.StrPathImg + Img_Path, MyFilms.conf.StrPathArtist, "");
+                Result = Grab.GetNfoDetail(nfofile, MyFilms.conf.StrPathImg + MyFilms.conf.StrPicturePrefix, MyFilms.conf.StrPathArtist, "");
             else
             {
               string downLoadPath;
@@ -1555,7 +1556,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 downLoadPath = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms";
               else
                 downLoadPath = MyFilms.conf.StrPathImg;
-              Result = Grab.GetDetail(url, downLoadPath + Img_Path, wscript);
+              Result = Grab.GetDetail(url, downLoadPath + MyFilms.conf.StrPicturePrefix, wscript);
             }
             LogMyFilms.Info("MF: Grab Internet/nfo Information done for title/ttitle: " + MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] + "/" + MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString());
 
@@ -1667,13 +1668,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
                       LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
 
-                      if (Img_Path_Type.ToLower() == "true")
+                      if (MyFilms.conf.PictureHandling == "Relative Path")
                             Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
-                        if (Img_Path.Length > 0)
-                            if (Img_Path.EndsWith("\\"))
-                                Result[2] = Img_Path + Result[2];
+                        if (MyFilms.conf.StrPicturePrefix.Length > 0)
+                          if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
+                            Result[2] = MyFilms.conf.StrPicturePrefix + Result[2];
                             else
-                                Result[2] = Img_Path + "\\" + Result[2];
+                            Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
 
 
                         setGUIProperty("picture", newPicture);
@@ -1704,15 +1705,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                           LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
                         }
-                        if (Img_Path_Type.ToLower() == "true")
+                        if (MyFilms.conf.PictureHandling == "Relative Path")
                           Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
-                        if (Img_Path.Length > 0)
-                          if (Img_Path.EndsWith("\\"))
-                            Result[2] = Img_Path + Result[2];
+                        if (MyFilms.conf.StrPicturePrefix.Length > 0)
+                          if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
+                            Result[2] = MyFilms.conf.StrPicturePrefix + Result[2];
                           else
-                            Result[2] = Img_Path + "\\" + Result[2];
+                            Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
                         if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()) || !onlymissing)
-                          MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
+                        {
+                          if (MyFilms.conf.PictureHandling == "Relative Path")
+                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
+                          else
+                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = MyFilms.conf.StrPathImg + "\\" + Result[2].ToString();
+                        }
                     }
                     break;
                 case "Description":
@@ -1821,13 +1827,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
                       LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
 
-                      if (Img_Path_Type.ToLower() == "true")
+                      if (MyFilms.conf.PictureHandling == "Relative Path")
                         Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
-                      if (Img_Path.Length > 0)
-                        if (Img_Path.EndsWith("\\"))
-                          Result[2] = Img_Path + Result[2];
+                      if (MyFilms.conf.StrPicturePrefix.Length > 0)
+                        if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
+                          Result[2] = MyFilms.conf.StrPicturePrefix + Result[2];
                         else
-                          Result[2] = Img_Path + "\\" + Result[2];
+                          Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
 
 
                       try
@@ -1840,16 +1846,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       {
                         LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
                       }
-                      
-                      if (Img_Path_Type.ToLower() == "true")
+
+                      if (MyFilms.conf.PictureHandling == "Relative Path")
                             Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
-                        if (Img_Path.Length > 0)
-                            if (Img_Path.EndsWith("\\"))
-                                Result[2] = Img_Path + Result[2];
-                            else
-                                Result[2] = Img_Path + "\\" + Result[2];
+                      if (MyFilms.conf.StrPicturePrefix.Length > 0)
+                        if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
+                          Result[2] = MyFilms.conf.StrPicturePrefix + Result[2];
+                        else
+                          Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
                         if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()) || !onlymissing)
+                        {
+                          if (MyFilms.conf.PictureHandling == "Relative Path")
                             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
+                          else
+                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = MyFilms.conf.StrPathImg + "\\" + Result[2].ToString();
+                        }
                     }
 
                     if (!string.IsNullOrEmpty(Result[3]))
@@ -2381,9 +2392,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return wfanart;
 
                 string safeName = string.Empty;
-                if (rep)
+                if (rep) // is group view 
                 {
-                    if (group == "country" || group == "year" || group == "category")
+                  if ((group == "country" || group == "year" || group == "category") && MyFilms.conf.StrFanartDefaultViews) // Default views and fanart for group view enabled?
                     {
                         if (!System.IO.Directory.Exists(MyFilms.conf.StrPathFanart + "\\_Group"))
                             System.IO.Directory.CreateDirectory(MyFilms.conf.StrPathFanart + "\\_Group");

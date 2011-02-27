@@ -62,6 +62,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", string.Empty);
                 ItemSearchGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchGrabberName", string.Empty);
+                PictureHandling = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PictureHandling", string.Empty);
                 ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", string.Empty);
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
                 SearchSubDirsTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirsTrailer", "No");
@@ -285,6 +286,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   StrAntFilterMinRating = StrAntFilterMinRating.Replace(".", ",");
                 //StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
                 StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", string.Empty);
+                StrPicturePrefix = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PicturePrefix", string.Empty);
                 //StrGrabber_Dir = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
                 StrGrabber_Always = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_Always", false);
                 StrGrabber_ChooseScript = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_ChooseScript", false);
@@ -292,6 +294,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //StrAMCUpd_exe = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_exe", string.Empty);
                 StrAMCUpd_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_cnf", string.Empty);
                 StrFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Fanart", false);
+                StrFanartDefaultViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDefaultViews", false);
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
                 StrFanartDfltImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImage", false);
                 StrFanartDfltImageAll = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImageAll", false);
@@ -654,6 +657,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return itemSearchGrabber; }
           set { itemSearchGrabber = value; }
         }
+        private string pictureHandling = string.Empty;
+        public string PictureHandling
+        {
+          get { return pictureHandling; }
+          set { pictureHandling = value; }
+        }
         private string itemSearchFileTrailer = string.Empty;
         public string ItemSearchFileTrailer
         {
@@ -944,8 +953,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool strFanart = false;
         public bool StrFanart
         {
-            get { return strFanart; }
-            set { strFanart = value; }
+          get { return strFanart; }
+          set { strFanart = value; }
+        }
+        private bool strFanartDefaultViews = false;
+        public bool StrFanartDefaultViews
+        {
+          get { return strFanartDefaultViews; }
+          set { strFanartDefaultViews = value; }
         }
         private bool strArtist = false;
         public bool StrArtist
@@ -1091,6 +1106,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strGrabber_cnf; }
             set { strGrabber_cnf = value; }
+        }
+        private string strPicturePrefix = string.Empty;
+        public string StrPicturePrefix
+        {
+            get { return strPicturePrefix; }
+            set { strPicturePrefix = value; }
         }
         private string strAntFilterMinRating = string.Empty;
         public string StrAntFilterMinRating

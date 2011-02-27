@@ -194,6 +194,14 @@ Select the option “Use the Default DVD cover for missing Fanart” to have the
 displayed as a background image for movies without a matching fanart file. Be aware, that using that option will often create fanart image of low quality
 because of low resolution of cover images and you might get a distorted picture as covers and fanarts don't have the same size.</value>
   </data>
+  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
+    <value>If enabled, fanart will be used for group views.
+MyFilms will autocreate subfolders for you.
+Images placed in those folders will be used for fanart display
+ in the default group views (category, year, genre).
+
+If disabled, default fanart will be displayed, if it is enabled.</value>
+  </data>
   <data name="groupBox22.ToolTip" xml:space="preserve">
     <value>Select the “Use thumbs for group views" option if you have image files 
 to be displayed as cover image replacement in grouped views.  
@@ -232,18 +240,14 @@ You can use the browse button to select the file.
 The default Artist image will be displayed when an artist does not have an associated photo or image
 and it will be used as a default artist image.</value>
   </data>
-  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
-    <value>You can update your movie data via internet from insude MyFilms GUI.
+  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
+    <value>You can define how cover images are stored to your catalog.
 
-You have to define the xml parser file ("grabber script" to be used.
-
-With the 'try to find best match automaticly' option validated, the grabber will
-try to find best match but can provide errors in some cases. It's better to
-don't valid it. In that case, you'll get a menu to choose the right movie.
-
-You can change those options from MyFilms GUI (global settings) also.
-
-</value>
+Options:
+Full Path - stores the full path in the catalog. 
+Relative Path - stores only the relative path in the catalog. 
+Usually this is just the image name, while the path is defined 
+in the artwork tab (cover images path).</value>
   </data>
   <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
     <value>If unchecked, you will be asked to manually choose the script to use for internet data update.
@@ -261,6 +265,19 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
+  </data>
+  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
+    <value>You can update your movie data via internet from insude MyFilms GUI.
+
+You have to define the xml parser file ("grabber script" to be used.
+
+With the 'try to find best match automaticly' option validated, the grabber will
+try to find best match but can provide errors in some cases. It's better to
+don't valid it. In that case, you'll get a menu to choose the right movie.
+
+You can change those options from MyFilms GUI (global settings) also.
+
+</value>
   </data>
   <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
     <value>For updating the whole database and scan for and add new movies to your catalog automatically,

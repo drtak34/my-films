@@ -107,6 +107,7 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.radioButton2 = new System.Windows.Forms.CheckBox();
           this.radioButton1 = new System.Windows.Forms.CheckBox();
@@ -153,6 +154,8 @@
           this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.btnLogoClearCache = new System.Windows.Forms.Button();
           this.Fanart = new System.Windows.Forms.GroupBox();
+          this.chkFanartDefaultViews = new System.Windows.Forms.CheckBox();
+          this.chkDfltFanartImageAll = new System.Windows.Forms.CheckBox();
           this.label48 = new System.Windows.Forms.Label();
           this.chkDfltFanartImage = new System.Windows.Forms.CheckBox();
           this.ButDefFanart = new System.Windows.Forms.Button();
@@ -457,8 +460,10 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
-          this.chkDfltFanartImageAll = new System.Windows.Forms.CheckBox();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.lblPictureHandling = new System.Windows.Forms.Label();
+          this.cbPictureHandling = new System.Windows.Forms.ComboBox();
+          this.txtPicturePrefix = new System.Windows.Forms.TextBox();
+          this.lblPicturePrefix = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -645,6 +650,16 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -1126,6 +1141,7 @@
           // 
           // Fanart
           // 
+          this.Fanart.Controls.Add(this.chkFanartDefaultViews);
           this.Fanart.Controls.Add(this.chkDfltFanartImageAll);
           this.Fanart.Controls.Add(this.label48);
           this.Fanart.Controls.Add(this.chkDfltFanartImage);
@@ -1138,31 +1154,53 @@
           this.Fanart.Controls.Add(this.MesFilmsFanart);
           this.Fanart.Controls.Add(this.labelFanart);
           this.Fanart.Controls.Add(this.chkDfltFanart);
-          this.Fanart.Location = new System.Drawing.Point(6, 241);
+          this.Fanart.Location = new System.Drawing.Point(6, 231);
           this.Fanart.Name = "Fanart";
-          this.Fanart.Size = new System.Drawing.Size(735, 110);
+          this.Fanart.Size = new System.Drawing.Size(735, 120);
           this.Fanart.TabIndex = 71;
           this.Fanart.TabStop = false;
           this.Fanart.Text = "Fanart (Backdrops)";
           this.ToolTip1.SetToolTip(this.Fanart, resources.GetString("Fanart.ToolTip"));
           // 
+          // chkFanartDefaultViews
+          // 
+          this.chkFanartDefaultViews.AutoSize = true;
+          this.chkFanartDefaultViews.Location = new System.Drawing.Point(39, 44);
+          this.chkFanartDefaultViews.Name = "chkFanartDefaultViews";
+          this.chkFanartDefaultViews.Size = new System.Drawing.Size(166, 17);
+          this.chkFanartDefaultViews.TabIndex = 80;
+          this.chkFanartDefaultViews.Text = "Fanart for default group views";
+          this.ToolTip1.SetToolTip(this.chkFanartDefaultViews, resources.GetString("chkFanartDefaultViews.ToolTip"));
+          this.chkFanartDefaultViews.UseVisualStyleBackColor = true;
+          // 
+          // chkDfltFanartImageAll
+          // 
+          this.chkDfltFanartImageAll.AutoSize = true;
+          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(159, 66);
+          this.chkDfltFanartImageAll.Name = "chkDfltFanartImageAll";
+          this.chkDfltFanartImageAll.Size = new System.Drawing.Size(67, 30);
+          this.chkDfltFanartImageAll.TabIndex = 79;
+          this.chkDfltFanartImageAll.Text = "Use for \r\nall Views";
+          this.ToolTip1.SetToolTip(this.chkDfltFanartImageAll, "Use default fanart image for all grouped views like persons, date added, etc.");
+          this.chkDfltFanartImageAll.UseVisualStyleBackColor = true;
+          // 
           // label48
           // 
           this.label48.AutoSize = true;
-          this.label48.Location = new System.Drawing.Point(170, 46);
+          this.label48.Location = new System.Drawing.Point(240, 72);
           this.label48.Name = "label48";
-          this.label48.Size = new System.Drawing.Size(106, 13);
+          this.label48.Size = new System.Drawing.Size(69, 26);
           this.label48.TabIndex = 78;
-          this.label48.Text = "Default Fanart Image";
+          this.label48.Text = "Default \r\nFanart Image";
           // 
           // chkDfltFanartImage
           // 
           this.chkDfltFanartImage.AutoSize = true;
-          this.chkDfltFanartImage.Location = new System.Drawing.Point(39, 33);
+          this.chkDfltFanartImage.Location = new System.Drawing.Point(39, 66);
           this.chkDfltFanartImage.Name = "chkDfltFanartImage";
-          this.chkDfltFanartImage.Size = new System.Drawing.Size(117, 30);
+          this.chkDfltFanartImage.Size = new System.Drawing.Size(114, 30);
           this.chkDfltFanartImage.TabIndex = 77;
-          this.chkDfltFanartImage.Text = "Use Default Image \r\nfor missing fanart";
+          this.chkDfltFanartImage.Text = "Use default image \r\nfor missing fanart";
           this.ToolTip1.SetToolTip(this.chkDfltFanartImage, "Use default fanart image if no fanart found for movies and grouped views like yea" +
                   "r, genre, country.");
           this.chkDfltFanartImage.UseVisualStyleBackColor = true;
@@ -1171,7 +1209,7 @@
           // ButDefFanart
           // 
           this.ButDefFanart.AllowDrop = true;
-          this.ButDefFanart.Location = new System.Drawing.Point(625, 43);
+          this.ButDefFanart.Location = new System.Drawing.Point(625, 76);
           this.ButDefFanart.Name = "ButDefFanart";
           this.ButDefFanart.Size = new System.Drawing.Size(32, 20);
           this.ButDefFanart.TabIndex = 76;
@@ -1181,7 +1219,7 @@
           // 
           // DefaultFanartImage
           // 
-          this.DefaultFanartImage.Location = new System.Drawing.Point(315, 43);
+          this.DefaultFanartImage.Location = new System.Drawing.Point(315, 76);
           this.DefaultFanartImage.Name = "DefaultFanartImage";
           this.DefaultFanartImage.Size = new System.Drawing.Size(304, 20);
           this.DefaultFanartImage.TabIndex = 75;
@@ -1190,7 +1228,7 @@
           // 
           this.lblResultingGroupViewsPathFanart.AutoSize = true;
           this.lblResultingGroupViewsPathFanart.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(461, 81);
+          this.lblResultingGroupViewsPathFanart.Location = new System.Drawing.Point(312, 48);
           this.lblResultingGroupViewsPathFanart.Name = "lblResultingGroupViewsPathFanart";
           this.lblResultingGroupViewsPathFanart.Size = new System.Drawing.Size(137, 13);
           this.lblResultingGroupViewsPathFanart.TabIndex = 74;
@@ -1202,16 +1240,16 @@
           // 
           this.label40.AutoSize = true;
           this.label40.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.label40.Location = new System.Drawing.Point(315, 81);
+          this.label40.Location = new System.Drawing.Point(240, 48);
           this.label40.Name = "label40";
-          this.label40.Size = new System.Drawing.Size(140, 13);
+          this.label40.Size = new System.Drawing.Size(32, 13);
           this.label40.TabIndex = 73;
-          this.label40.Text = "Path for Group Views fanart:";
+          this.label40.Text = "Path:";
           // 
           // chkFanart
           // 
           this.chkFanart.AutoSize = true;
-          this.chkFanart.Location = new System.Drawing.Point(18, 15);
+          this.chkFanart.Location = new System.Drawing.Point(18, 18);
           this.chkFanart.Name = "chkFanart";
           this.chkFanart.Size = new System.Drawing.Size(78, 17);
           this.chkFanart.TabIndex = 71;
@@ -1222,7 +1260,7 @@
           // btnFanart
           // 
           this.btnFanart.Enabled = false;
-          this.btnFanart.Location = new System.Drawing.Point(625, 17);
+          this.btnFanart.Location = new System.Drawing.Point(625, 13);
           this.btnFanart.Name = "btnFanart";
           this.btnFanart.Size = new System.Drawing.Size(32, 20);
           this.btnFanart.TabIndex = 70;
@@ -1233,7 +1271,7 @@
           // MesFilmsFanart
           // 
           this.MesFilmsFanart.Enabled = false;
-          this.MesFilmsFanart.Location = new System.Drawing.Point(315, 17);
+          this.MesFilmsFanart.Location = new System.Drawing.Point(315, 13);
           this.MesFilmsFanart.Name = "MesFilmsFanart";
           this.MesFilmsFanart.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsFanart.TabIndex = 68;
@@ -1241,17 +1279,17 @@
           // labelFanart
           // 
           this.labelFanart.AutoSize = true;
-          this.labelFanart.Location = new System.Drawing.Point(169, 20);
+          this.labelFanart.Location = new System.Drawing.Point(240, 14);
           this.labelFanart.Name = "labelFanart";
-          this.labelFanart.Size = new System.Drawing.Size(108, 13);
+          this.labelFanart.Size = new System.Drawing.Size(65, 26);
           this.labelFanart.TabIndex = 69;
-          this.labelFanart.Text = "Fanart Path  (Images)";
+          this.labelFanart.Text = "Fanart Path \r\n(Images)";
           // 
           // chkDfltFanart
           // 
           this.chkDfltFanart.AutoSize = true;
           this.chkDfltFanart.Enabled = false;
-          this.chkDfltFanart.Location = new System.Drawing.Point(39, 90);
+          this.chkDfltFanart.Location = new System.Drawing.Point(39, 95);
           this.chkDfltFanart.Name = "chkDfltFanart";
           this.chkDfltFanart.Size = new System.Drawing.Size(191, 17);
           this.chkDfltFanart.TabIndex = 67;
@@ -1271,9 +1309,9 @@
           this.groupBox22.Controls.Add(this.chkDfltViews);
           this.groupBox22.Controls.Add(this.label29);
           this.groupBox22.Controls.Add(this.MesFilmsViews);
-          this.groupBox22.Location = new System.Drawing.Point(6, 148);
+          this.groupBox22.Location = new System.Drawing.Point(6, 141);
           this.groupBox22.Name = "groupBox22";
-          this.groupBox22.Size = new System.Drawing.Size(735, 94);
+          this.groupBox22.Size = new System.Drawing.Size(735, 87);
           this.groupBox22.TabIndex = 75;
           this.groupBox22.TabStop = false;
           this.groupBox22.Text = "Thumbs for Group Views (Genre, Year, Country, ...)";
@@ -1282,7 +1320,7 @@
           // chkDfltViewsAll
           // 
           this.chkDfltViewsAll.AutoSize = true;
-          this.chkDfltViewsAll.Location = new System.Drawing.Point(59, 73);
+          this.chkDfltViewsAll.Location = new System.Drawing.Point(59, 67);
           this.chkDfltViewsAll.Name = "chkDfltViewsAll";
           this.chkDfltViewsAll.Size = new System.Drawing.Size(104, 17);
           this.chkDfltViewsAll.TabIndex = 80;
@@ -1295,15 +1333,15 @@
           // label47
           // 
           this.label47.AutoSize = true;
-          this.label47.Location = new System.Drawing.Point(170, 48);
+          this.label47.Location = new System.Drawing.Point(184, 44);
           this.label47.Name = "label47";
-          this.label47.Size = new System.Drawing.Size(136, 13);
+          this.label47.Size = new System.Drawing.Size(105, 13);
           this.label47.TabIndex = 79;
-          this.label47.Text = "Default Group Views Image";
+          this.label47.Text = "Default Group Image";
           // 
           // ButDefCovViews
           // 
-          this.ButDefCovViews.Location = new System.Drawing.Point(625, 45);
+          this.ButDefCovViews.Location = new System.Drawing.Point(625, 41);
           this.ButDefCovViews.Name = "ButDefCovViews";
           this.ButDefCovViews.Size = new System.Drawing.Size(32, 20);
           this.ButDefCovViews.TabIndex = 78;
@@ -1313,7 +1351,7 @@
           // 
           // DefaultCoverViews
           // 
-          this.DefaultCoverViews.Location = new System.Drawing.Point(315, 45);
+          this.DefaultCoverViews.Location = new System.Drawing.Point(315, 41);
           this.DefaultCoverViews.Name = "DefaultCoverViews";
           this.DefaultCoverViews.Size = new System.Drawing.Size(304, 20);
           this.DefaultCoverViews.TabIndex = 77;
@@ -1334,14 +1372,14 @@
           this.chkViews.AutoSize = true;
           this.chkViews.Location = new System.Drawing.Point(18, 15);
           this.chkViews.Name = "chkViews";
-          this.chkViews.Size = new System.Drawing.Size(98, 30);
+          this.chkViews.Size = new System.Drawing.Size(155, 17);
           this.chkViews.TabIndex = 71;
-          this.chkViews.Text = "use thumbs for \r\ngroup views";
+          this.chkViews.Text = "use thumbs for group views";
           this.chkViews.UseVisualStyleBackColor = true;
           // 
           // btnViews
           // 
-          this.btnViews.Location = new System.Drawing.Point(625, 19);
+          this.btnViews.Location = new System.Drawing.Point(625, 14);
           this.btnViews.Name = "btnViews";
           this.btnViews.Size = new System.Drawing.Size(32, 20);
           this.btnViews.TabIndex = 74;
@@ -1352,7 +1390,7 @@
           // chkDfltViews
           // 
           this.chkDfltViews.AutoSize = true;
-          this.chkDfltViews.Location = new System.Drawing.Point(39, 43);
+          this.chkDfltViews.Location = new System.Drawing.Point(39, 35);
           this.chkDfltViews.Name = "chkDfltViews";
           this.chkDfltViews.Size = new System.Drawing.Size(112, 30);
           this.chkDfltViews.TabIndex = 75;
@@ -1362,7 +1400,7 @@
           // label29
           // 
           this.label29.AutoSize = true;
-          this.label29.Location = new System.Drawing.Point(170, 22);
+          this.label29.Location = new System.Drawing.Point(184, 18);
           this.label29.Name = "label29";
           this.label29.Size = new System.Drawing.Size(128, 13);
           this.label29.TabIndex = 73;
@@ -1370,7 +1408,7 @@
           // 
           // MesFilmsViews
           // 
-          this.MesFilmsViews.Location = new System.Drawing.Point(315, 19);
+          this.MesFilmsViews.Location = new System.Drawing.Point(315, 14);
           this.MesFilmsViews.Name = "MesFilmsViews";
           this.MesFilmsViews.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsViews.TabIndex = 72;
@@ -1412,7 +1450,7 @@
           // label_DefaulCover
           // 
           this.label_DefaulCover.AutoSize = true;
-          this.label_DefaulCover.Location = new System.Drawing.Point(170, 43);
+          this.label_DefaulCover.Location = new System.Drawing.Point(184, 44);
           this.label_DefaulCover.Name = "label_DefaulCover";
           this.label_DefaulCover.Size = new System.Drawing.Size(104, 13);
           this.label_DefaulCover.TabIndex = 88;
@@ -1430,9 +1468,9 @@
           // 
           // MesFilmsImg
           // 
-          this.MesFilmsImg.Location = new System.Drawing.Point(162, 14);
+          this.MesFilmsImg.Location = new System.Drawing.Point(315, 14);
           this.MesFilmsImg.Name = "MesFilmsImg";
-          this.MesFilmsImg.Size = new System.Drawing.Size(457, 20);
+          this.MesFilmsImg.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsImg.TabIndex = 85;
           this.ToolTip1.SetToolTip(this.MesFilmsImg, "Enter the full path to the folder containing the DVD cover image files – by defau" +
                   "lt it is the same as the path to your database file.\r\nYou can use the browse but" +
@@ -1441,7 +1479,7 @@
           // label2
           // 
           this.label2.AutoSize = true;
-          this.label2.Location = new System.Drawing.Point(40, 18);
+          this.label2.Location = new System.Drawing.Point(184, 17);
           this.label2.Name = "label2";
           this.label2.Size = new System.Drawing.Size(97, 13);
           this.label2.TabIndex = 86;
@@ -1460,7 +1498,7 @@
           this.groupBox_ArtistImages.Controls.Add(this.DefaultCoverArtist);
           this.groupBox_ArtistImages.Location = new System.Drawing.Point(6, 68);
           this.groupBox_ArtistImages.Name = "groupBox_ArtistImages";
-          this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 78);
+          this.groupBox_ArtistImages.Size = new System.Drawing.Size(735, 69);
           this.groupBox_ArtistImages.TabIndex = 86;
           this.groupBox_ArtistImages.TabStop = false;
           this.groupBox_ArtistImages.Text = "Thumbs for Person Views (actors, directors, producer)";
@@ -1472,9 +1510,9 @@
           this.chkPersons.AutoSize = true;
           this.chkPersons.Location = new System.Drawing.Point(18, 15);
           this.chkPersons.Name = "chkPersons";
-          this.chkPersons.Size = new System.Drawing.Size(95, 30);
+          this.chkPersons.Size = new System.Drawing.Size(160, 17);
           this.chkPersons.TabIndex = 100;
-          this.chkPersons.Text = "use thumbs for\r\nperson views";
+          this.chkPersons.Text = "use thumbs for person views";
           this.chkPersons.UseVisualStyleBackColor = true;
           // 
           // btnResetThumbsArtist
@@ -1491,7 +1529,7 @@
           // chkDfltArtist
           // 
           this.chkDfltArtist.AutoSize = true;
-          this.chkDfltArtist.Location = new System.Drawing.Point(39, 44);
+          this.chkDfltArtist.Location = new System.Drawing.Point(39, 32);
           this.chkDfltArtist.Name = "chkDfltArtist";
           this.chkDfltArtist.Size = new System.Drawing.Size(114, 30);
           this.chkDfltArtist.TabIndex = 98;
@@ -1500,7 +1538,7 @@
           // 
           // ButDefCovArtist
           // 
-          this.ButDefCovArtist.Location = new System.Drawing.Point(625, 46);
+          this.ButDefCovArtist.Location = new System.Drawing.Point(625, 40);
           this.ButDefCovArtist.Name = "ButDefCovArtist";
           this.ButDefCovArtist.Size = new System.Drawing.Size(32, 20);
           this.ButDefCovArtist.TabIndex = 97;
@@ -1510,7 +1548,7 @@
           // 
           // ButImgArtist
           // 
-          this.ButImgArtist.Location = new System.Drawing.Point(625, 20);
+          this.ButImgArtist.Location = new System.Drawing.Point(625, 15);
           this.ButImgArtist.Name = "ButImgArtist";
           this.ButImgArtist.Size = new System.Drawing.Size(32, 20);
           this.ButImgArtist.TabIndex = 96;
@@ -1520,7 +1558,7 @@
           // 
           // MesFilmsImgArtist
           // 
-          this.MesFilmsImgArtist.Location = new System.Drawing.Point(315, 19);
+          this.MesFilmsImgArtist.Location = new System.Drawing.Point(315, 14);
           this.MesFilmsImgArtist.Name = "MesFilmsImgArtist";
           this.MesFilmsImgArtist.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsImgArtist.TabIndex = 95;
@@ -1529,7 +1567,7 @@
           // label_DefaultArtistImage
           // 
           this.label_DefaultArtistImage.AutoSize = true;
-          this.label_DefaultArtistImage.Location = new System.Drawing.Point(170, 49);
+          this.label_DefaultArtistImage.Location = new System.Drawing.Point(184, 43);
           this.label_DefaultArtistImage.Name = "label_DefaultArtistImage";
           this.label_DefaultArtistImage.Size = new System.Drawing.Size(109, 13);
           this.label_DefaultArtistImage.TabIndex = 94;
@@ -1538,7 +1576,7 @@
           // label_ArtistImagePath
           // 
           this.label_ArtistImagePath.AutoSize = true;
-          this.label_ArtistImagePath.Location = new System.Drawing.Point(170, 23);
+          this.label_ArtistImagePath.Location = new System.Drawing.Point(184, 18);
           this.label_ArtistImagePath.Name = "label_ArtistImagePath";
           this.label_ArtistImagePath.Size = new System.Drawing.Size(102, 13);
           this.label_ArtistImagePath.TabIndex = 93;
@@ -1546,7 +1584,7 @@
           // 
           // DefaultCoverArtist
           // 
-          this.DefaultCoverArtist.Location = new System.Drawing.Point(315, 46);
+          this.DefaultCoverArtist.Location = new System.Drawing.Point(315, 40);
           this.DefaultCoverArtist.Name = "DefaultCoverArtist";
           this.DefaultCoverArtist.Size = new System.Drawing.Size(304, 20);
           this.DefaultCoverArtist.TabIndex = 92;
@@ -1554,6 +1592,10 @@
           // 
           // groupBox_GrabberOptions
           // 
+          this.groupBox_GrabberOptions.Controls.Add(this.lblPicturePrefix);
+          this.groupBox_GrabberOptions.Controls.Add(this.txtPicturePrefix);
+          this.groupBox_GrabberOptions.Controls.Add(this.lblPictureHandling);
+          this.groupBox_GrabberOptions.Controls.Add(this.cbPictureHandling);
           this.groupBox_GrabberOptions.Controls.Add(this.lblSearchGrabberName);
           this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberName);
           this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_ChooseScript);
@@ -1563,7 +1605,7 @@
           this.groupBox_GrabberOptions.Controls.Add(this.label27);
           this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 3);
           this.groupBox_GrabberOptions.Name = "groupBox_GrabberOptions";
-          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 73);
+          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 90);
           this.groupBox_GrabberOptions.TabIndex = 1;
           this.groupBox_GrabberOptions.TabStop = false;
           this.groupBox_GrabberOptions.Text = "Movie Detail Internet Updates";
@@ -1572,7 +1614,7 @@
           // lblSearchGrabberName
           // 
           this.lblSearchGrabberName.AutoSize = true;
-          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 49);
+          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 42);
           this.lblSearchGrabberName.Name = "lblSearchGrabberName";
           this.lblSearchGrabberName.Size = new System.Drawing.Size(124, 13);
           this.lblSearchGrabberName.TabIndex = 62;
@@ -1585,7 +1627,7 @@
             "OriginalTitle",
             "TranslatedTitle",
             "FormattedTitle"});
-          this.ItemSearchGrabberName.Location = new System.Drawing.Point(173, 46);
+          this.ItemSearchGrabberName.Location = new System.Drawing.Point(173, 39);
           this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
           this.ItemSearchGrabberName.Size = new System.Drawing.Size(183, 21);
           this.ItemSearchGrabberName.TabIndex = 61;
@@ -1593,7 +1635,7 @@
           // chkGrabber_ChooseScript
           // 
           this.chkGrabber_ChooseScript.AutoSize = true;
-          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(489, 22);
+          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(463, 17);
           this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
           this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(193, 17);
           this.chkGrabber_ChooseScript.TabIndex = 60;
@@ -1604,7 +1646,7 @@
           // chkGrabber_Always
           // 
           this.chkGrabber_Always.AutoSize = true;
-          this.chkGrabber_Always.Location = new System.Drawing.Point(489, 43);
+          this.chkGrabber_Always.Location = new System.Drawing.Point(463, 38);
           this.chkGrabber_Always.Name = "chkGrabber_Always";
           this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
           this.chkGrabber_Always.TabIndex = 56;
@@ -1614,7 +1656,7 @@
           // 
           // btnGrabber
           // 
-          this.btnGrabber.Location = new System.Drawing.Point(401, 17);
+          this.btnGrabber.Location = new System.Drawing.Point(370, 14);
           this.btnGrabber.Name = "btnGrabber";
           this.btnGrabber.Size = new System.Drawing.Size(32, 20);
           this.btnGrabber.TabIndex = 55;
@@ -1624,16 +1666,16 @@
           // 
           // txtGrabber
           // 
-          this.txtGrabber.Location = new System.Drawing.Point(173, 17);
+          this.txtGrabber.Location = new System.Drawing.Point(173, 14);
           this.txtGrabber.Name = "txtGrabber";
-          this.txtGrabber.Size = new System.Drawing.Size(222, 20);
+          this.txtGrabber.Size = new System.Drawing.Size(183, 20);
           this.txtGrabber.TabIndex = 54;
           this.ToolTip1.SetToolTip(this.txtGrabber, resources.GetString("txtGrabber.ToolTip"));
           // 
           // label27
           // 
           this.label27.AutoSize = true;
-          this.label27.Location = new System.Drawing.Point(16, 20);
+          this.label27.Location = new System.Drawing.Point(16, 17);
           this.label27.Name = "label27";
           this.label27.Size = new System.Drawing.Size(151, 13);
           this.label27.TabIndex = 53;
@@ -1645,9 +1687,9 @@
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
           this.groupBox_AMCupdater.Controls.Add(this.chkAMCUpd);
-          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 82);
+          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 95);
           this.groupBox_AMCupdater.Name = "groupBox_AMCupdater";
-          this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 269);
+          this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 256);
           this.groupBox_AMCupdater.TabIndex = 2;
           this.groupBox_AMCupdater.TabStop = false;
           this.groupBox_AMCupdater.Text = "AMCUpdater Options (for global internet update functions)";
@@ -1733,7 +1775,7 @@
           this.groupBox_AMCupdater_ExternalApplication.ImeMode = System.Windows.Forms.ImeMode.Off;
           this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(6, 73);
           this.groupBox_AMCupdater_ExternalApplication.Name = "groupBox_AMCupdater_ExternalApplication";
-          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(723, 187);
+          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(723, 178);
           this.groupBox_AMCupdater_ExternalApplication.TabIndex = 3;
           this.groupBox_AMCupdater_ExternalApplication.TabStop = false;
           this.groupBox_AMCupdater_ExternalApplication.Text = "AMC Updater external application";
@@ -1751,7 +1793,7 @@
           // btnCreateAMCDefaultConfig
           // 
           this.btnCreateAMCDefaultConfig.AllowDrop = true;
-          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 105);
+          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 101);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 31);
           this.btnCreateAMCDefaultConfig.TabIndex = 77;
@@ -1763,7 +1805,7 @@
           // lblAMCupdaterConfigPreview
           // 
           this.lblAMCupdaterConfigPreview.AutoSize = true;
-          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(226, 47);
+          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(226, 35);
           this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
           this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
           this.lblAMCupdaterConfigPreview.TabIndex = 85;
@@ -1772,7 +1814,7 @@
           // lblAMCMovieScanPath
           // 
           this.lblAMCMovieScanPath.AutoSize = true;
-          this.lblAMCMovieScanPath.Location = new System.Drawing.Point(361, 21);
+          this.lblAMCMovieScanPath.Location = new System.Drawing.Point(361, 15);
           this.lblAMCMovieScanPath.Name = "lblAMCMovieScanPath";
           this.lblAMCMovieScanPath.Size = new System.Drawing.Size(74, 13);
           this.lblAMCMovieScanPath.TabIndex = 84;
@@ -1782,7 +1824,7 @@
           // 
           this.chkAMC_Purge_Missing_Files.AutoSize = true;
           this.chkAMC_Purge_Missing_Files.ForeColor = System.Drawing.Color.Red;
-          this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(229, 20);
+          this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(229, 14);
           this.chkAMC_Purge_Missing_Files.Name = "chkAMC_Purge_Missing_Files";
           this.chkAMC_Purge_Missing_Files.Size = new System.Drawing.Size(116, 17);
           this.chkAMC_Purge_Missing_Files.TabIndex = 83;
@@ -1793,7 +1835,7 @@
           // 
           // btnAMCMovieScanPathAdd
           // 
-          this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(682, 18);
+          this.btnAMCMovieScanPathAdd.Location = new System.Drawing.Point(682, 12);
           this.btnAMCMovieScanPathAdd.Name = "btnAMCMovieScanPathAdd";
           this.btnAMCMovieScanPathAdd.Size = new System.Drawing.Size(32, 20);
           this.btnAMCMovieScanPathAdd.TabIndex = 82;
@@ -1803,7 +1845,7 @@
           // 
           // AMCMovieScanPath
           // 
-          this.AMCMovieScanPath.Location = new System.Drawing.Point(457, 18);
+          this.AMCMovieScanPath.Location = new System.Drawing.Point(457, 12);
           this.AMCMovieScanPath.Name = "AMCMovieScanPath";
           this.AMCMovieScanPath.Size = new System.Drawing.Size(219, 20);
           this.AMCMovieScanPath.TabIndex = 81;
@@ -1819,7 +1861,7 @@
           this.AMCConfigView.FullRowSelect = true;
           this.AMCConfigView.GridLines = true;
           this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.AMCConfigView.Location = new System.Drawing.Point(229, 66);
+          this.AMCConfigView.Location = new System.Drawing.Point(229, 54);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
           this.AMCConfigView.Size = new System.Drawing.Size(486, 114);
@@ -1842,7 +1884,7 @@
           // 
           // btnCreateAMCDesktopIcon
           // 
-          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(17, 142);
+          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(17, 138);
           this.btnCreateAMCDesktopIcon.Name = "btnCreateAMCDesktopIcon";
           this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(152, 31);
           this.btnCreateAMCDesktopIcon.TabIndex = 78;
@@ -1856,9 +1898,9 @@
           // 
           this.btnLaunchAMCupdater.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
           this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 47);
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 54);
           this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
-          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 52);
+          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 41);
           this.btnLaunchAMCupdater.TabIndex = 76;
           this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
           this.ToolTip1.SetToolTip(this.btnLaunchAMCupdater, "Launch AMCupdater with Configuration specific settings, as you created them.");
@@ -4428,26 +4470,46 @@
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
           // 
-          // chkDfltFanartImageAll
+          // lblPictureHandling
           // 
-          this.chkDfltFanartImageAll.AutoSize = true;
-          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(59, 67);
-          this.chkDfltFanartImageAll.Name = "chkDfltFanartImageAll";
-          this.chkDfltFanartImageAll.Size = new System.Drawing.Size(104, 17);
-          this.chkDfltFanartImageAll.TabIndex = 79;
-          this.chkDfltFanartImageAll.Text = "Use for all Views";
-          this.ToolTip1.SetToolTip(this.chkDfltFanartImageAll, "Use default fanart image for all grouped views like persons, date added, etc.");
-          this.chkDfltFanartImageAll.UseVisualStyleBackColor = true;
+          this.lblPictureHandling.AutoSize = true;
+          this.lblPictureHandling.Location = new System.Drawing.Point(16, 68);
+          this.lblPictureHandling.Name = "lblPictureHandling";
+          this.lblPictureHandling.Size = new System.Drawing.Size(85, 13);
+          this.lblPictureHandling.TabIndex = 94;
+          this.lblPictureHandling.Text = "Picture Handling";
           // 
-          // traktConfiguration1
+          // cbPictureHandling
           // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
+          this.cbPictureHandling.FormattingEnabled = true;
+          this.cbPictureHandling.Items.AddRange(new object[] {
+            "Full Path",
+            "Relative Path",
+            "Use Folder.jpg"});
+          this.cbPictureHandling.Location = new System.Drawing.Point(173, 65);
+          this.cbPictureHandling.Name = "cbPictureHandling";
+          this.cbPictureHandling.Size = new System.Drawing.Size(183, 21);
+          this.cbPictureHandling.TabIndex = 93;
+          this.ToolTip1.SetToolTip(this.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"));
+          // 
+          // txtPicturePrefix
+          // 
+          this.txtPicturePrefix.Location = new System.Drawing.Point(463, 65);
+          this.txtPicturePrefix.Name = "txtPicturePrefix";
+          this.txtPicturePrefix.Size = new System.Drawing.Size(100, 20);
+          this.txtPicturePrefix.TabIndex = 95;
+          this.ToolTip1.SetToolTip(this.txtPicturePrefix, "You can define a prefix for the cover images that will be \r\nadded to the image na" +
+                  "me.\r\nThis is useful, if you store all images for different configurations \r\nin t" +
+                  "he same directory.");
+          // 
+          // lblPicturePrefix
+          // 
+          this.lblPicturePrefix.AutoSize = true;
+          this.lblPicturePrefix.Location = new System.Drawing.Point(388, 68);
+          this.lblPicturePrefix.Name = "lblPicturePrefix";
+          this.lblPicturePrefix.Size = new System.Drawing.Size(69, 13);
+          this.lblPicturePrefix.TabIndex = 96;
+          this.lblPicturePrefix.Text = "Picture Prefix";
           // 
           // MyFilmsSetup
           // 
@@ -4931,5 +4993,10 @@
         private Label lblNbConfig;
         private CheckBox chkDfltViewsAll;
         private CheckBox chkDfltFanartImageAll;
+        private CheckBox chkFanartDefaultViews;
+        private Label lblPictureHandling;
+        private ComboBox cbPictureHandling;
+        private Label lblPicturePrefix;
+        private TextBox txtPicturePrefix;
     }
 }
