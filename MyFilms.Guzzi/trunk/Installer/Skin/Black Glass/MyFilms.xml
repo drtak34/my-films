@@ -97,7 +97,7 @@
 			<id>0</id>
 			<width>1280</width>
 			<height>720</height>
-			<texture>fanart_overlay_overall.png</texture>
+			<texture>MyFilms\fanart_overlay_overall.png</texture>
 			<colordiffuse>dfffffff</colordiffuse>
 			<visible>facadeview.filmstrip</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
@@ -399,8 +399,8 @@
 			<textureHeight>22</textureHeight>
 			<colordiffuse>6fffffff</colordiffuse>
 			<subitems>
-				<subitem>UserRatingStarOff.png</subitem>
-				<subitem>stargood.png</subitem>
+				<subitem>MyFilms\UserRatingStarOff.png</subitem>
+				<subitem>MyFilms\UserRatingStarOn.png</subitem>
 			</subitems>
 			<orientation>horizontal</orientation>
 			<align>left</align>
@@ -635,7 +635,7 @@
 			<id>0</id>
 			<width>18</width>
 			<keepaspectratio>yes</keepaspectratio>
-			<texture>stargood.png</texture>
+			<texture>MyFilms\UserRatingStarOn.png</texture>
 			<visible>string.contains(#myfilms.globalfilter.minrating,True)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -693,7 +693,7 @@
 			<posY>697</posY>
 			<width>20</width>
 			<height>20</height>
-			<!-- <texture>led_frame_green.png</texture> -->
+			<!-- <texture>MyFilms\led_frame_green.png</texture> -->
 			<texture>tv_is_unavailable.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
@@ -708,7 +708,7 @@
 			<posY>697</posY>
 			<width>20</width>
 			<height>20</height>
-			<!-- <texture>led_frame_red.png</texture> -->
+			<!-- <texture>MyFilms\led_frame_red.png</texture> -->
 			<texture>tv_is_available.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
@@ -872,7 +872,7 @@
 				<width>32</width>
 				<height>40</height>
 				<colordiffuse>b0ffffff</colordiffuse>
-				<texture>overlaywubg.png</texture>
+				<texture>MyFilms\overlaywubg.png</texture>
 				<visible>facadeview.list+!Control.HasFocus(10099)</visible>
 				<animation effect="fade" time="250">visiblechange</animation>
 				<animation effect="fade" time="250">WindowClose</animation>	
@@ -886,7 +886,7 @@
 				<posY>113</posY>
 				<width>24</width>
 				<height>24</height>
-				<texture>overlaywatched.png</texture>
+				<texture>MyFilms\overlaywatched.png</texture>
 				<visible>facadeview.list+!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
 				<animation effect="fade" time="250">visiblechange</animation>
 				<animation effect="fade" time="250">WindowClose</animation>	
@@ -901,7 +901,7 @@
 				<posY>113</posY>
 				<width>24</width>
 				<height>24</height>
-				<texture>overlayunwatched.png</texture>
+				<texture>MyFilms\overlayunwatched.png</texture>
 				<visible>facadeview.list+!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
 				<animation effect="fade" time="250">visiblechange</animation>
 				<animation effect="fade" time="250">WindowClose</animation>	
@@ -920,8 +920,8 @@
 			<textureWidth>22</textureWidth>
 			<textureHeight>22</textureHeight>
 			<subitems>
-				<subitem>UserRatingStarOff.png</subitem>
-				<subitem>stargood.png</subitem>
+				<subitem>MyFilms\UserRatingStarOff.png</subitem>
+				<subitem>MyFilms\UserRatingStarOn.png</subitem>
 			</subitems>
 			<orientation>horizontal</orientation>
 			<align>left</align>
