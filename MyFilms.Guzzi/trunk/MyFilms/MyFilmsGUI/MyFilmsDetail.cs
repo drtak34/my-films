@@ -4863,6 +4863,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //string titlename2 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
             string directoryname = "";
             string movieName = "";
+            string[] files = null;
             Int64 wsize = 0; // Temporary Filesize detection
             // split searchpath information delimited by semicolumn (multiple searchpathes from config)
             string[] Trailerdirectories = MyFilms.conf.StrDirStorTrailer.ToString().Split(new Char[] { ';' });
@@ -4878,23 +4879,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             catch
             { directoryname = ""; }
             LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) get media directory name: '" + directoryname + "'");
-
+            if (!System.IO.Directory.Exists(directoryname))
+            {
+              directoryname = "";
+              LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) directory of movie '" + movieName + "' doesn't exist anymore - check your DB");
+            }
 
             //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
-            string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
-            foreach (string filefound in files)
+            if (!string.IsNullOrEmpty(directoryname))
+            {
+              files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
+              foreach (string filefound in files)
+              {
+                if (((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trl"))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
                 {
-                    if (((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trl")))&& (MediaPortal.Util.Utils.IsVideo(filefound)))
-                    {
-                        wsize = new System.IO.FileInfo(filefound).Length;
-                        result.Add(filefound);
-                        resultsize.Add(wsize);
-                        filesfound[filesfoundcounter] = filefound;
-                        filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-                        filesfoundcounter = filesfoundcounter + 1;
-                        LogMyFilms.Debug("MF: (TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
-                    }
+                  wsize = new System.IO.FileInfo(filefound).Length;
+                  result.Add(filefound);
+                  resultsize.Add(wsize);
+                  filesfound[filesfoundcounter] = filefound;
+                  filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                  filesfoundcounter = filesfoundcounter + 1;
+                  LogMyFilms.Debug("MF: (TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
                 }
+              }
+            }
             
             //Search Filenames with "title" in Trailer Searchpath
             string[] directories;
