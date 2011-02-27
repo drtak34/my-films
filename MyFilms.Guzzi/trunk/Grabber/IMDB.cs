@@ -748,7 +748,7 @@ namespace Grabber
         }
         // Birth date
         if ((parser.skipToEndOf("Born:")) &&
-            (parser.skipToEndOf("<a href=\"/date/")) &&
+            (parser.skipToEndOf("birth_monthday=")) &&
             (parser.skipToEndOf(">")) &&
             (parser.extractTo("<", ref value)) &&
             (parser.skipToEndOf("year=")) &&
