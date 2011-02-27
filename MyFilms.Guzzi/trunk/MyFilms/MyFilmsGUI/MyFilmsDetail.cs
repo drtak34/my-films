@@ -1408,7 +1408,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Grabber Directory filled, search for XML scripts files
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     dlg.Reset();
-                    dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                    dlg.SetHeading(GUILocalizeStrings.Get(10798706)); // "Choose internet grabber script"
                     if (dlg == null) return;
                     ArrayList scriptfile = new ArrayList();
                     if (MyFilms.conf.StrGrabber_cnf.Length > 0)
@@ -1668,7 +1668,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
                       LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
 
-                      if (MyFilms.conf.PictureHandling == "Relative Path")
+                      if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
                             Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
                         if (MyFilms.conf.StrPicturePrefix.Length > 0)
                           if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
@@ -1705,7 +1705,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                           LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
                         }
-                        if (MyFilms.conf.PictureHandling == "Relative Path")
+                        if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
                           Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
                         if (MyFilms.conf.StrPicturePrefix.Length > 0)
                           if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
@@ -1714,7 +1714,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
                         if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()) || !onlymissing)
                         {
-                          if (MyFilms.conf.PictureHandling == "Relative Path")
+                          if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
                             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
                           else
                             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = MyFilms.conf.StrPathImg + "\\" + Result[2].ToString();
@@ -1827,7 +1827,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
                       LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
 
-                      if (MyFilms.conf.PictureHandling == "Relative Path")
+                      if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
                         Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
                       if (MyFilms.conf.StrPicturePrefix.Length > 0)
                         if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
@@ -1847,7 +1847,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
                       }
 
-                      if (MyFilms.conf.PictureHandling == "Relative Path")
+                      if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
                             Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
                       if (MyFilms.conf.StrPicturePrefix.Length > 0)
                         if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
@@ -1856,7 +1856,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
                         if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()) || !onlymissing)
                         {
-                          if (MyFilms.conf.PictureHandling == "Relative Path")
+                          if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
                             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
                           else
                             MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = MyFilms.conf.StrPathImg + "\\" + Result[2].ToString();

@@ -127,6 +127,7 @@
     <String id="10798629">off</String>
     <String id="10798630">New value</String>
     <String id="10798631">Show NAS Server status</String>
+    <String id="10798632">(global filter active)</String>
     <String id="10798636">Filename</String>
     <String id="10798637">No films match this view!</String>
     <String id="10798638">Show full film list</String>
@@ -174,6 +175,7 @@
     <String id="10798680">Size</String>
     <String id="10798681">Disks</String>
     <String id="10798682">Picture</String>
+    <String id="10798687">Global filters ...</String>
     <String id="10798688">Load person info (all persons)</String>
     <String id="10798689">Global settings ...</String>
     <String id="10798690">Global updates ...</String>
@@ -192,6 +194,7 @@
     <String id="10798703">Fanart and Cover ...</String>
     <String id="10798704">Trailer ...</String>
     <String id="10798705">Trailer(s) found !</String>
+    <String id="10798706">Choose internet grabber script</String>
     <String id="10798709">Play Film</String>
     <String id="10798710">Play trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>

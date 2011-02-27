@@ -127,6 +127,7 @@
     <String id="10798629">aus</String>
     <String id="10798630">Neuer Wert</String>
     <String id="10798631">Zeige Film-Server Status</String>
+    <String id="10798632">(globaler Filter aktiv)</String>
     <String id="10798636">Dateiname</String>
     <String id="10798637">Keine Filme entsprechen der Ansicht !</String>
     <String id="10798638">Zeige Gesamtliste</String>
@@ -174,6 +175,7 @@
     <String id="10798680">Dateigrösse</String>
     <String id="10798681">Anzahl Dateien</String>
     <String id="10798682">Coverbild</String>
+    <String id="10798687">Globale Filter ...</String>
     <String id="10798688">Lade Personeninfos - alle Personen</String>
     <String id="10798689">Globale Einstellungen ...</String>
     <String id="10798690">Globale Updates ...</String>
@@ -192,6 +194,7 @@
     <String id="10798703">Fanart und Cover ...</String>
     <String id="10798704">Trailer ...</String>
     <String id="10798705">Trailer gefunden !</String>
+    <String id="10798706">Wähle Internet Grabber Skript</String>
     <String id="10798709">Spiele Film</String>
     <String id="10798710">Spiele Trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>

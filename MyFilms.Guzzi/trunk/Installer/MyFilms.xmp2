@@ -1161,6 +1161,13 @@
               <ZipFileName>Installer{CopyFile}\{a3b4174d-8ea6-43bc-a900-fb6971199a32}-UserRatingStarOn.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\UserRatingStarOn.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin\Black Glass\Media\MyFilms\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{30d4593c-379a-42d5-80ea-e7466486983c}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\Thumbs.db</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2576,7 +2583,7 @@ Some functions will not be available or work properly, if older versions are ins
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>28</Revision>
+      <Revision>29</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2584,7 +2591,7 @@ Some functions will not be available or work properly, if older versions are ins
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.28.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.29.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3763,6 +3770,13 @@ Some functions will not be available or work properly, if older versions are ins
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin\Black Glass\Media\MyFilms\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{30d4593c-379a-42d5-80ea-e7466486983c}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\Thumbs.db</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\DefaultLogos\1080p.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{267ff710-0ebe-4d97-84a2-68d556d3693d}-1080p.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\1080p.png</DestinationFilename>
@@ -4856,14 +4870,14 @@ Some functions will not be available or work properly, if older versions are ins
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{1fb10d15-47b7-41eb-a457-0da59798bc09}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{8736f4e8-c2ea-4c08-b743-d410937e6a20}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{3ae946da-d8ea-432d-bfed-ac28981ddd7a}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{bb7f4866-b189-4031-b6cd-342be835cf8e}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

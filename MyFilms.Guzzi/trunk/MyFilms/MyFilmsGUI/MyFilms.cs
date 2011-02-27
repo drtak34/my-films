@@ -6207,6 +6207,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          {
            MyFilmsDetail.setGUIProperty("db." + dc.ColumnName.ToLower() + ".label", BaseMesFilms.Translate_Column(dc.ColumnName));
          }
+
+         GUIPropertyManager.SetProperty("#btWeb.startup.link", "");
+         GUIPropertyManager.SetProperty("#btWeb.link.zoom", "");
+         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
+         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
+         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
+         
          MyFilmsDetail.setGUIProperty("db.calc.aspectratio.label", GUILocalizeStrings.Get(10798697));
          MyFilmsDetail.setGUIProperty("db.calc.imageformat.label", GUILocalizeStrings.Get(10798698));
          MyFilmsDetail.setGUIProperty("user.sourcetrailer.label", GUILocalizeStrings.Get(10798649));
