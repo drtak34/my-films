@@ -286,6 +286,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public bool BrowseTheWebRightVersion = false;
         public static bool OnlineVideosRightPlugin = false;
         public static bool OnlineVideosRightVersion = false;
+        private double lastPublished = 0;
+        private Timer publishTimer;
+
 
         #endregion
 
@@ -1370,7 +1373,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //GUIControl.ShowControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 MyFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage.ToString());
-                this.Load_Rating(0);
+                // this.Load_Rating(0); // old method - nor more used
                 MyFilmsDetail.clearGUIProperty("logos_id2001");
                 MyFilmsDetail.clearGUIProperty("logos_id2002");
                 MyFilmsDetail.clearGUIProperty("logos_id2003");
@@ -1439,7 +1442,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if ((conf.WStrSort.ToLower().Contains("actors")) || (conf.WStrSort.ToLower().Contains("producer")) || (conf.WStrSort.ToLower().Contains("director")))
                 MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, wrep);
 
-            Load_Rating(conf.W_rating);
+          // Load_Rating(conf.W_rating); // old method - nor more used
         }
 
         //-------------------------------------------------------------------------------------------
@@ -1480,20 +1483,53 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 if (facadeView.SelectedListItemIndex > -1)
                     this.Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
+                    //this.MovieDetailsPublisher(true);
             }
             else
             {
                 if (facadeView.SelectedListItemIndex > -1 && !conf.Boolselect)
-                    this.Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+                {
+                  this.Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+                  //this.MovieDetailsPublisher(false);
+                  //LogMyFilms.Debug("MF: OnItemSelected - ItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Boolselect: '" + conf.Boolselect.ToString() + "', Details: 'false'");
+                }
                 else
                 {
                     this.Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+                    //LogMyFilms.Debug("MF: OnItemSelected - ItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Boolselect: '" + conf.Boolselect.ToString() + "', Details: 'false'");
+                    //this.MovieDetailsPublisher(false);
                     GUIControl.ShowControl(GetID, 34);
-                    this.Load_Rating(0);
+                    //this.Load_Rating(0); // old method - nor more used
                 }
             } 
             //Load_Lstdetail(item.ItemId, true, item.Label);
         }
+
+        private void MovieDetailsPublisher(bool wrep)
+        {
+          double tickCount = System.Windows.Media.Animation.AnimationTimer.TickCount;
+
+          // Publish instantly when previous request has passed the required delay
+          if (150 < (int)(tickCount - lastPublished)) // wait 100 ms to load details...
+          {
+            lastPublished = tickCount;
+            Load_Lstdetail(facadeView.SelectedListItem.ItemId, wrep, facadeView.SelectedListItem.Label);
+            return;
+          }
+          else // Publish on timer using the delay specified in settings
+          {
+            lastPublished = tickCount;
+            if (publishTimer == null)
+            {
+              publishTimer = new Timer(delegate { Load_Lstdetail(facadeView.SelectedListItem.ItemId, wrep, facadeView.SelectedListItem.Label); }, null, 150, Timeout.Infinite);
+            }
+            else
+            {
+              publishTimer.Change(150, Timeout.Infinite);
+            }
+          }
+        }
+
 
         #region Accès Données
 
@@ -1984,7 +2020,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // Disabled because replaced by SpeedLoader
                 //ImgLstFilm.SetFileName("#myfilms.picture");
                 //ImgLstFilm2.SetFileName("#myfilms.picture");
-                this.Load_Rating(0);
+                // this.Load_Rating(0); // old method - nor more used
             }
             MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
             GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
@@ -5421,7 +5457,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
               MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
             }
-            this.Load_Rating(0);
+            // this.Load_Rating(0); // old method - nor more used
             GUIWaitCursor.Hide();
             GUIControl.HideControl(GetID, 34);
             LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties - Finished !");

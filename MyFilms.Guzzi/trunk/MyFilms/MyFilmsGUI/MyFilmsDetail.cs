@@ -2823,7 +2823,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         public static void Load_Detailed_DB(int ItemId, bool wrep)
         {
-     
+            LogMyFilms.Debug("MFD: Load_Detailed_DB - ItemId: '" + ItemId.ToString() + "', Details (wrep): '" + wrep.ToString() + "'");
             string wstrformat = "";
             AntMovieCatalog ds = new AntMovieCatalog();
             
