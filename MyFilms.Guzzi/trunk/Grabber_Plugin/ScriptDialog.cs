@@ -1,20 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.Xml;
-using MediaPortal.GUI.Library;
-using MediaPortal.Dialogs;
-using MediaPortal.Configuration;
-
 namespace MyVideoGrabber
 {
-    public partial class MyVideoGrabberForm : Form
+  using System;
+  using System.Text;
+  using System.Windows.Forms;
+  using System.Xml;
+
+  using MediaPortal.Configuration;
+
+  public partial class MultiGrabberForm : Form
     {
-        public MyVideoGrabberForm()
+        public MultiGrabberForm()
         {
             InitializeComponent();
         }
@@ -25,7 +20,7 @@ namespace MyVideoGrabber
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.InitialDirectory = Config.GetFolder(Config.Dir.Config) + "\\MyVideoGrabberScripts";
             
-            openFileDialog1.Filter = "Fichiers xml (*.xml)|*.xml";
+            openFileDialog1.Filter = "Load xml (*.xml)|*.xml";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 listView1.Items.Add(openFileDialog1.FileName);

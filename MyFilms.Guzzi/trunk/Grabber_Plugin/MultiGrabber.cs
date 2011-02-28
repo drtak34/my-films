@@ -4,12 +4,14 @@ using System.Text;
 using System.Windows.Forms;
 using MediaPortal.GUI.Library;
 
-namespace MyVideoGrabber
+namespace GrabberPlugin
 {
-    public class Class1 : GUIWindow, ISetupForm
+  using MyVideoGrabber;
+
+  public class MultiGrabber : GUIWindow, ISetupForm
     {
 
-        public Class1()
+        public MultiGrabber()
         {
 
         }
@@ -19,7 +21,7 @@ namespace MyVideoGrabber
         // Returns the name of the plugin which is shown in the plugin menu
         public string PluginName()
         {
-            return "MyVideoGrabber";
+            return "MultiGrabber";
         }
 
         // Returns the description of the plugin is shown in the plugin menu
@@ -37,7 +39,7 @@ namespace MyVideoGrabber
         // show the setup dialog
         public void ShowPlugin()
         {
-            MyVideoGrabberForm form = new MyVideoGrabberForm();
+            MultiGrabberForm form = new MultiGrabberForm();
             form.ShowDialog();
             
             //MessageBox.Show("Nothing to configure, this is just an example");
