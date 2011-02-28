@@ -196,6 +196,10 @@
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
           this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
+          this.lblPicturePrefix = new System.Windows.Forms.Label();
+          this.txtPicturePrefix = new System.Windows.Forms.TextBox();
+          this.lblPictureHandling = new System.Windows.Forms.Label();
+          this.cbPictureHandling = new System.Windows.Forms.ComboBox();
           this.lblSearchGrabberName = new System.Windows.Forms.Label();
           this.ItemSearchGrabberName = new System.Windows.Forms.ComboBox();
           this.chkGrabber_ChooseScript = new System.Windows.Forms.CheckBox();
@@ -460,10 +464,6 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
-          this.lblPictureHandling = new System.Windows.Forms.Label();
-          this.cbPictureHandling = new System.Windows.Forms.ComboBox();
-          this.txtPicturePrefix = new System.Windows.Forms.TextBox();
-          this.lblPicturePrefix = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1610,6 +1610,47 @@
           this.groupBox_GrabberOptions.TabStop = false;
           this.groupBox_GrabberOptions.Text = "Movie Detail Internet Updates";
           this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
+          // 
+          // lblPicturePrefix
+          // 
+          this.lblPicturePrefix.AutoSize = true;
+          this.lblPicturePrefix.Location = new System.Drawing.Point(388, 68);
+          this.lblPicturePrefix.Name = "lblPicturePrefix";
+          this.lblPicturePrefix.Size = new System.Drawing.Size(69, 13);
+          this.lblPicturePrefix.TabIndex = 96;
+          this.lblPicturePrefix.Text = "Picture Prefix";
+          // 
+          // txtPicturePrefix
+          // 
+          this.txtPicturePrefix.Location = new System.Drawing.Point(463, 65);
+          this.txtPicturePrefix.Name = "txtPicturePrefix";
+          this.txtPicturePrefix.Size = new System.Drawing.Size(100, 20);
+          this.txtPicturePrefix.TabIndex = 95;
+          this.ToolTip1.SetToolTip(this.txtPicturePrefix, "You can define a prefix for the cover images that will be \r\nadded to the image na" +
+                  "me.\r\nThis is useful, if you store all images for different configurations \r\nin t" +
+                  "he same directory.");
+          // 
+          // lblPictureHandling
+          // 
+          this.lblPictureHandling.AutoSize = true;
+          this.lblPictureHandling.Location = new System.Drawing.Point(16, 68);
+          this.lblPictureHandling.Name = "lblPictureHandling";
+          this.lblPictureHandling.Size = new System.Drawing.Size(85, 13);
+          this.lblPictureHandling.TabIndex = 94;
+          this.lblPictureHandling.Text = "Picture Handling";
+          // 
+          // cbPictureHandling
+          // 
+          this.cbPictureHandling.FormattingEnabled = true;
+          this.cbPictureHandling.Items.AddRange(new object[] {
+            "Full Path",
+            "Relative Path",
+            "Use Folder.jpg"});
+          this.cbPictureHandling.Location = new System.Drawing.Point(173, 65);
+          this.cbPictureHandling.Name = "cbPictureHandling";
+          this.cbPictureHandling.Size = new System.Drawing.Size(183, 21);
+          this.cbPictureHandling.TabIndex = 93;
+          this.ToolTip1.SetToolTip(this.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"));
           // 
           // lblSearchGrabberName
           // 
@@ -2763,7 +2804,7 @@
           this.groupBox_AntSelectedEnreg.Size = new System.Drawing.Size(370, 117);
           this.groupBox_AntSelectedEnreg.TabIndex = 27;
           this.groupBox_AntSelectedEnreg.TabStop = false;
-          this.groupBox_AntSelectedEnreg.Text = "User defined Filters";
+          this.groupBox_AntSelectedEnreg.Text = "User defined Config Filters";
           this.ToolTip1.SetToolTip(this.groupBox_AntSelectedEnreg, resources.GetString("groupBox_AntSelectedEnreg.ToolTip"));
           this.groupBox_AntSelectedEnreg.Leave += new System.EventHandler(this.Selected_Enreg_Changed);
           // 
@@ -4469,47 +4510,6 @@
           this.lblNbConfig.Size = new System.Drawing.Size(42, 13);
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
-          // 
-          // lblPictureHandling
-          // 
-          this.lblPictureHandling.AutoSize = true;
-          this.lblPictureHandling.Location = new System.Drawing.Point(16, 68);
-          this.lblPictureHandling.Name = "lblPictureHandling";
-          this.lblPictureHandling.Size = new System.Drawing.Size(85, 13);
-          this.lblPictureHandling.TabIndex = 94;
-          this.lblPictureHandling.Text = "Picture Handling";
-          // 
-          // cbPictureHandling
-          // 
-          this.cbPictureHandling.FormattingEnabled = true;
-          this.cbPictureHandling.Items.AddRange(new object[] {
-            "Full Path",
-            "Relative Path",
-            "Use Folder.jpg"});
-          this.cbPictureHandling.Location = new System.Drawing.Point(173, 65);
-          this.cbPictureHandling.Name = "cbPictureHandling";
-          this.cbPictureHandling.Size = new System.Drawing.Size(183, 21);
-          this.cbPictureHandling.TabIndex = 93;
-          this.ToolTip1.SetToolTip(this.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"));
-          // 
-          // txtPicturePrefix
-          // 
-          this.txtPicturePrefix.Location = new System.Drawing.Point(463, 65);
-          this.txtPicturePrefix.Name = "txtPicturePrefix";
-          this.txtPicturePrefix.Size = new System.Drawing.Size(100, 20);
-          this.txtPicturePrefix.TabIndex = 95;
-          this.ToolTip1.SetToolTip(this.txtPicturePrefix, "You can define a prefix for the cover images that will be \r\nadded to the image na" +
-                  "me.\r\nThis is useful, if you store all images for different configurations \r\nin t" +
-                  "he same directory.");
-          // 
-          // lblPicturePrefix
-          // 
-          this.lblPicturePrefix.AutoSize = true;
-          this.lblPicturePrefix.Location = new System.Drawing.Point(388, 68);
-          this.lblPicturePrefix.Name = "lblPicturePrefix";
-          this.lblPicturePrefix.Size = new System.Drawing.Size(69, 13);
-          this.lblPicturePrefix.TabIndex = 96;
-          this.lblPicturePrefix.Text = "Picture Prefix";
           // 
           // MyFilmsSetup
           // 

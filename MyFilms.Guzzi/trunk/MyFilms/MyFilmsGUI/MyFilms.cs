@@ -2178,11 +2178,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (conf.StrDfltSelect.Length > 0)
             {
-              MyFilmsDetail.setGUIProperty("userfilter", conf.StrDfltSelect.ToString());
+              MyFilmsDetail.setGUIProperty("config.configfilter", conf.StrDfltSelect.ToString());
               LogMyFilms.Debug("MF: userfilter from setup: StrDfltSelect = '" + conf.StrDfltSelect.ToString() + "'");
             }
             else
-              MyFilmsDetail.clearGUIProperty("userfilter");
+              MyFilmsDetail.clearGUIProperty("config.configfilter");
         }
 
          //--------------------------------------------------------------------------------------------
@@ -6270,7 +6270,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.clearGUIProperty("Fanart2");
          MyFilmsDetail.clearGUIProperty("config.currentconfig");
          MyFilmsDetail.clearGUIProperty("view");
-         MyFilmsDetail.clearGUIProperty("userfilter");
+         MyFilmsDetail.clearGUIProperty("config.configfilter");
          MyFilmsDetail.clearGUIProperty("picture");
        }
 
