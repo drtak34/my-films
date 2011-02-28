@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqLite", "SqLite", "{593C46
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Interface", "Grabber_Interface\Grabber_Interface.csproj", "{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Plugin", "Grabber_Plugin\Grabber_Plugin.csproj", "{307F46D7-0620-4EA0-BBA8-8A27037CA75D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Guzzi)|Any CPU = Debug (Guzzi)|Any CPU
@@ -170,6 +172,42 @@ Global
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|Any CPU
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug (Guzzi)|Any CPU.Build.0 = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug (Guzzi)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug (Guzzi)|x64.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug (Guzzi)|x86.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|Mixed Platforms.Build.0 = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|x64.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|x86.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release|x64.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release|x86.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureCardDefinitions|Any CPU.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureCardDefinitions|Any CPU.Build.0 = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureCardDefinitions|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureCardDefinitions|Mixed Platforms.Build.0 = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureCardDefinitions|x64.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureCardDefinitions|x86.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|Any CPU.Build.0 = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
