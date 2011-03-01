@@ -929,7 +929,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       choiceViewMenu.Add("cover-thumbnailer");
                     }
 
-
+                    if (ExtendedStartmode("Details context: TMDB Poste download (and movie details?)"))
+                    {
+                      //dlgmenu.Add(GUILocalizeStrings.Get(xxxxxxx));
+                      dlgmenu.Add("Poster (TMDB)");
+                      choiceViewMenu.Add("tmdbposter");
+                    }
+                
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
                     {
@@ -1317,6 +1323,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (dlgYesNo.IsConfirmed)
                         Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
                     afficher_detail(true);
+                    break;
+
+                case "tmdbposter":
+                    setProcessAnimationStatus(true, m_SearchAnimation);
+                    //Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+                    wtitle = string.Empty;
+                    if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
+                      wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
+                    if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+                      wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                    wttitle = string.Empty;
+                    if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+                      wttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+                    if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+                      wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                    if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0 && MyFilms.conf.StrFanart)
+                    {
+                      int wyear = 0;
+                      try { wyear = System.Convert.ToInt16(MyFilms.r[MyFilms.conf.StrIndex]["Year"]); }
+                      catch { }
+                      string wdirector = string.Empty;
+                      try { wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"]; }
+                      catch { }
+                      LogMyFilms.Debug("MyFilmsDetails (posters - menu select) Download Posters: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
+                      Download_TMDB_Posters(wtitle, wttitle, wdirector, wyear.ToString(), true, GetID, wtitle);
+
+                    }
+                    afficher_detail(true);
+                    setProcessAnimationStatus(false, m_SearchAnimation);
                     break;
 
                 default: // Main Contextmenu
@@ -2222,6 +2257,148 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
         //-------------------------------------------------------------------------------------------
+        //  Dowload TMDBinfos (Poster(s), Movieinfos) on theMovieDB.org
+        //-------------------------------------------------------------------------------------------        
+        public static void Download_TMDB_Posters(string wtitle, string wttitle, string director, string year, bool choose, int wGetID, string savetitle)
+        {
+          Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+          int wyear = 0;
+          try { wyear = Convert.ToInt32(year); }
+          catch { }
+          System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetTMDBinfos(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathImg, true, choose, MyFilms.conf.StrTitle1);
+          LogMyFilms.Debug("MF: (DownloadPosters) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "'");
+          int listCount = listemovies.Count;
+          LogMyFilms.Debug("MF: (DownloadPosters) - listemovies: Result Listcount: '" + listCount + "'");
+
+          if (choose)
+            listCount = 2;
+          switch (listCount)
+          {
+            case 0:
+              break;
+            case 1:
+              LogMyFilms.Info("MF: Posters " + listemovies[0].Name.Substring(listemovies[0].Name.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
+              break;
+            default:
+
+              ArrayList wotitle_tableau = new ArrayList();
+              ArrayList wttitle_tableau = new ArrayList();
+              ArrayList wotitle_sub_tableau = new ArrayList();
+              ArrayList wttitle_sub_tableau = new ArrayList();
+              int MinChars = 2;
+              bool Filter = true;
+
+              GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+              if (dlg == null) return;
+              dlg.Reset();
+              dlg.SetHeading(GUILocalizeStrings.Get(1079862)); // Load fanart (online)
+              dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
+              foreach (DBMovieInfo t in listemovies)
+              {
+                dlg.Add(t.Name + "  (" + t.Year + ") - Fanarts: " + t.Backdrops.Count + " - Id" + t.Identifier);
+                LogMyFilms.Debug("MF: TMDB listemovies: " + t.Name + "  (" + t.Year + ") - Fanarts: " + t.Backdrops.Count + " - TMDB-Id: " + t.Identifier);
+              }
+              if (!(dlg.SelectedLabel > -1))
+              {
+                dlg.SelectedLabel = -1;
+                dlg.DoModal(wGetID);
+              }
+              if (dlg.SelectedLabel == 0)
+              {
+                //Get SubTitles and Subwords from otitle and ttitle
+                wotitle_tableau = MyFilms.SubTitleGrabbing(wtitle.ToString());
+                wttitle_tableau = MyFilms.SubTitleGrabbing(wttitle.ToString());
+                wotitle_sub_tableau = MyFilms.SubWordGrabbing(wtitle.ToString(), MinChars, Filter); // Min 3 Chars, Filter true (no der die das)
+                wttitle_sub_tableau = MyFilms.SubWordGrabbing(wttitle.ToString(), MinChars, Filter); // Min 3 Chars, Filter true (no der die das)
+                //First Show Dialog to choose Otitle, Ttitle or substrings - or Keyboard to manually enter searchstring!!!
+                GUIDialogMenu dlgs = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                if (dlgs == null) return;
+                dlgs.Reset();
+                dlgs.SetHeading(GUILocalizeStrings.Get(1079859)); // choose search expression
+                dlgs.Add("  *****  " + GUILocalizeStrings.Get(1079858) + "  *****  "); //manual selection with keyboard
+                //dlgs.Add(wtitle); //Otitle
+                dlgs.Add(savetitle); //Otitle = savetitle
+                dlgs.Add(wttitle); //Ttitle
+                foreach (object t in wotitle_tableau)
+                {
+                  if (t.ToString().Length > 1) dlgs.Add(t.ToString());
+                }
+                foreach (object t in wttitle_tableau)
+                {
+                  if (t.ToString().Length > 1) dlgs.Add(t.ToString());
+                }
+                foreach (object t in wotitle_sub_tableau)
+                {
+                  if (t.ToString().Length > 1) dlgs.Add(t.ToString());
+                }
+                foreach (object t in wttitle_sub_tableau)
+                {
+                  if (t.ToString().Length > 1) dlgs.Add(t.ToString());
+                }
+                //Now all titles and Substrings listed in dialog !
+                //dlgs.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
+                if (!(dlgs.SelectedLabel > -1))
+                {
+                  dlgs.SelectedLabel = -1;
+                  dlgs.DoModal(wGetID);
+                }
+                //LogMyFilms.Debug("MF: (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabelText: '" + dlgs.SelectedLabelText.ToString() + "'");
+                //LogMyFilms.Debug("MF: (SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabel: '" + dlgs.SelectedLabel.ToString() + "'");
+                if (dlgs.SelectedLabel == 0)
+                {
+                  VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                  if (null == keyboard) return;
+                  keyboard.Reset();
+                  keyboard.Text = wtitle;
+                  keyboard.DoModal(wGetID);
+                  if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                  {
+                    Remove_Backdrops_Fanart(wttitle, true);
+                    Remove_Backdrops_Fanart(wtitle, true);
+                    Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID, savetitle);
+                  }
+                  break;
+                }
+                if (dlgs.SelectedLabel > 0 && dlgs.SelectedLabel < 3) // if one of otitle or ttitle selected, keep year and director
+                {
+                  Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, year, director, true, wGetID, savetitle);
+                  //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
+                  break;
+                }
+                if (dlgs.SelectedLabel > 2) // For subitems, search without year and director !
+                {
+                  Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, string.Empty, string.Empty, true, wGetID, savetitle);
+                  //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
+                  break;
+                }
+
+              }
+              if (dlg.SelectedLabel > 0)
+              {
+                bool first = true;
+                string filename = string.Empty;
+                string filename1 = string.Empty;
+                if (MyFilms.conf.StrTitle1 == "OriginalTitle")
+                  wttitle = savetitle; // Was wttitle = wtitle;
+                foreach (string backdrop in listemovies[dlg.SelectedLabel - 1].Backdrops)
+                {
+                  filename1 = Grabber.GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, backdrop, wttitle, true, first, out filename);
+                  LogMyFilms.Info("MF: Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
+
+                  if (filename == string.Empty)
+                    filename = filename1;
+                  if (!(filename == "already" && filename1 == "already"))
+                    filename = "added";
+                  first = false;
+                }
+                listemovies[0].Name = filename;
+              }
+              break;
+          }
+        }
+
+
+        //-------------------------------------------------------------------------------------------
         //  Remove Old backdrops Fanart already downloaded (case in title change)
         //-------------------------------------------------------------------------------------------        
         public static void Remove_Backdrops_Fanart(string wtitle,bool suppressDir)
@@ -2261,19 +2438,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MF: (DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "'");
             int listCount = listemovies.Count;
             LogMyFilms.Debug("MF: (DownloadBackdrops) - listemovies: Result Listcount: '" + listCount.ToString() + "'");
-            
-            //if ((listCount == 0) && (choose))
-            //{
-            //    //MyFilmsDetail.ShowMessageDialog("", " No results found", "");
-            //    GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-            //    if (dlgOK != null)
-            //    {
-            //        dlgOK.SetHeading("");
-            //        dlgOK.SetLine(1, "No results found !");
-            //        dlgOK.SetLine(2, "");
-            //        dlgOK.DoModal(wGetID);
-            //    }
-            //}
 
             if (choose)
                 listCount = 2;
