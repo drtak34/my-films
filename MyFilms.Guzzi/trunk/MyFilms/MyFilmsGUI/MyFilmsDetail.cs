@@ -1552,11 +1552,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
             {
               string downLoadPath;
-              if (interactive) 
-                downLoadPath = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms";
+              if (interactive)
+              {
+                //downLoadPath = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms";
+                downLoadPath = Path.GetTempPath();
+              }
               else
-                downLoadPath = MyFilms.conf.StrPathImg;
-              Result = Grab.GetDetail(url, downLoadPath + MyFilms.conf.StrPicturePrefix, wscript);
+                downLoadPath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
+              Result = Grab.GetDetail(url, downLoadPath, wscript);
+              LogMyFilms.Info("MF: Grabber - downloadpath = '" + downLoadPath + "'");
             }
             LogMyFilms.Info("MF: Grab Internet/nfo Information done for title/ttitle: " + MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] + "/" + MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString());
 
@@ -1644,7 +1648,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "TranslatedTitle":
                     if (!string.IsNullOrEmpty(Result[1]))
                     {
-                        ttitle = Result[1].ToString();
+                        ttitle = Result[1];
                         if (string.IsNullOrEmpty(ttitle) && MyFilms.conf.StrTitle1 == "TranslatedTitle" && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString())) // Added to fill ttitle with otitle in case ttitle is empty and mastertitle = ttitle and mastertitle is empty
                           ttitle = Result[0].ToString();
                         wtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
@@ -1661,23 +1665,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "Picture":
                     if (!string.IsNullOrEmpty(Result[2]))
                     {
-                      string newPicture = Result[2];
-                      string oldPicture = GUIPropertyManager.GetProperty("picture");
-                      if (oldPicture.Length == 0 || oldPicture == null)
-                        oldPicture = newPicture;
-                      LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
-                      LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
+                        string tmpPicture = Result[2];
+                        string tmpPicturename = ""; // picturename only
+                        string oldPicture = GUIPropertyManager.GetProperty("picture");
+                        string newPicture = ""; // full path to new picture
+                        string newPictureCatalogname = ""; // entry to be stored in catalog
+                        if (string.IsNullOrEmpty(oldPicture))
+                          oldPicture = "";
 
-                      if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-                            Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
+                        // set defaults...
+                        tmpPicturename = Result[2].Substring(Result[2].LastIndexOf("\\") + 1);
+                        newPictureCatalogname = tmpPicturename; 
+                        
                         if (MyFilms.conf.StrPicturePrefix.Length > 0)
-                          if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
-                            Result[2] = MyFilms.conf.StrPicturePrefix + Result[2];
-                            else
-                            Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
+                          newPicture = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + tmpPicturename;
+                        else
+                          newPicture = MyFilms.conf.StrPathImg + "\\" + tmpPicturename;
+                      
+                        if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
+                        {
+                            newPictureCatalogname = MyFilms.conf.StrPicturePrefix + tmpPicturename;
+                        }
+                        if (MyFilms.conf.PictureHandling == "Full Path")
+                        {
+                          newPictureCatalogname = newPicture;
+                        }
 
+                        LogMyFilms.Debug("Cover Image path : '" + MyFilms.conf.StrPathImg + "'");
+                        LogMyFilms.Debug("Picturehandling  : '" + MyFilms.conf.PictureHandling + "'");
+                        LogMyFilms.Debug("PicturePrefix    : '" + MyFilms.conf.StrPicturePrefix + "'");
+                        LogMyFilms.Debug("Old  Cover Image : '" + oldPicture + "'");
+                        LogMyFilms.Debug("Temp Cover Image : '" + tmpPicture + "'");
+                        LogMyFilms.Debug("New  Cover Image : '" + newPicture + "'");
+                        LogMyFilms.Debug("New Catalog Entry: '" + newPictureCatalogname + "'");
 
-                        setGUIProperty("picture", newPicture);
+                        setGUIProperty("picture", tmpPicture);
                         GUIWindowManager.Process(); // To Update GUI display ...
 
                         GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
@@ -1692,32 +1714,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             GUIWindowManager.Process();
                             return;
                         }
+                        if (!System.IO.Directory.Exists(newPicture.Substring(0, newPicture.LastIndexOf("\\"))))
+                        {
+                          try
+                          {
+                            System.IO.Directory.CreateDirectory(newPicture.Substring(0, newPicture.LastIndexOf("\\")));
+                          }
+                          catch (Exception ex)
+                          {
+                            LogMyFilms.Debug("Could not create directory '" + newPicture.Substring(0, newPicture.LastIndexOf("\\")) + "' - Exception: " + ex.ToString());
+                          }
+                        }
                         try
                         {
-                          string newFinalPicture = MyFilms.conf.StrPathImg + "\\" + Result[2];
-                          File.Copy(newPicture, newFinalPicture, true);
-                          File.Delete(newPicture);
-                          //MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newFinalPicture; // will be done below ...
-                          //setGUIProperty("picture", newFinalPicture);
-                          //GUIWindowManager.Process();
+                          File.Copy(tmpPicture, newPicture, true);
                         }
                         catch (Exception ex)
                         {
-                          LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
+                          LogMyFilms.Debug("Error copy file: '" + tmpPicture + "' - Exception: " + ex.ToString());
                         }
-                        if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-                          Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
-                        if (MyFilms.conf.StrPicturePrefix.Length > 0)
-                          if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
-                            Result[2] = MyFilms.conf.StrPicturePrefix + Result[2];
-                          else
-                            Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
                         if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()) || !onlymissing)
+                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
+                        try
                         {
-                          if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
-                          else
-                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = MyFilms.conf.StrPathImg + "\\" + Result[2].ToString();
+                          File.Delete(tmpPicture);
+                        }
+                        catch (Exception ex)
+                        {
+                          LogMyFilms.Debug("Error deleting tmp file: '" + tmpPicture + "' - Exception: " + ex.ToString());
                         }
                     }
                     break;
@@ -1822,45 +1846,67 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     if (!string.IsNullOrEmpty(Result[2]))
                     {
-                      string oldPicture = GUIPropertyManager.GetProperty("picture");
-                      string newPicture = Result[2];
-                      LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
-                      LogMyFilms.Debug("Picture Grabber options: New temp Cover Image: '" + newPicture.ToString() + "'");
+                      string tmpPicture = Result[2];
+                      string tmpPicturename = ""; // picturename only
+                      string newPicture = ""; // full path to new picture
+                      string newPictureCatalogname = ""; // entry to be stored in catalog
+
+                      // set defaults...
+                      tmpPicturename = Result[2].Substring(Result[2].LastIndexOf("\\") + 1);
+                      newPictureCatalogname = tmpPicturename;
+
+                      if (MyFilms.conf.StrPicturePrefix.Length > 0)
+                        newPicture = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + tmpPicturename;
+                      else
+                        newPicture = MyFilms.conf.StrPathImg + "\\" + tmpPicturename;
+
 
                       if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-                        Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
-                      if (MyFilms.conf.StrPicturePrefix.Length > 0)
-                        if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
-                          Result[2] = MyFilms.conf.StrPicturePrefix + Result[2];
-                        else
-                          Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
-
-
-                      try
                       {
-                        string newFinalPicture = MyFilms.conf.StrPathImg + "\\" + Result[2];
-                        File.Copy(newPicture, newFinalPicture, true);
-                        File.Delete(newPicture);
+                        newPictureCatalogname = MyFilms.conf.StrPicturePrefix + tmpPicturename;
                       }
-                      catch (Exception ex)
+                      if (MyFilms.conf.PictureHandling == "Full Path")
                       {
-                        LogMyFilms.Debug("Error copy file: '" + newPicture + "' - Exception: " + ex.ToString());
+                        newPictureCatalogname = newPicture;
                       }
 
-                      if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-                            Result[2] = Result[2].Substring(Result[2].LastIndexOf("\\") + 1).ToString();
-                      if (MyFilms.conf.StrPicturePrefix.Length > 0)
-                        if (MyFilms.conf.StrPicturePrefix.EndsWith("\\"))
-                          Result[2] = MyFilms.conf.StrPicturePrefix + Result[2];
-                        else
-                          Result[2] = MyFilms.conf.StrPicturePrefix + "\\" + Result[2];
-                        if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()) || !onlymissing)
+                      if (newPicture != tmpPicture)
+                      {
+                        if (!System.IO.Directory.Exists(newPicture.Substring(0, newPicture.LastIndexOf("\\"))))
                         {
-                          if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = Result[2].ToString();
-                          else
-                            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = MyFilms.conf.StrPathImg + "\\" + Result[2].ToString();
+                          try
+                          {
+                            System.IO.Directory.CreateDirectory(newPicture.Substring(0, newPicture.LastIndexOf("\\")));
+                          }
+                          catch (Exception ex)
+                          {
+                            LogMyFilms.Debug(
+                              "Could not create directory '" + newPicture.Substring(0, newPicture.LastIndexOf("\\")) +
+                              "' - Exception: " + ex.ToString());
+                          }
                         }
+                        try
+                        {
+                          File.Copy(tmpPicture, newPicture, true);
+                        }
+                        catch (Exception ex)
+                        {
+                          LogMyFilms.Debug("Error copy file: '" + tmpPicture + "' - Exception: " + ex.ToString());
+                        }
+                      }
+                      if (string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString()) || !onlymissing)
+                          MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
+                      if (newPicture != tmpPicture)
+                      {
+                        try
+                        {
+                          File.Delete(tmpPicture);
+                        }
+                        catch (Exception ex)
+                        {
+                          LogMyFilms.Debug("Error deleting tmp file: '" + tmpPicture + "' - Exception: " + ex.ToString());
+                        }
+                      }
                     }
 
                     if (!string.IsNullOrEmpty(Result[3]))
@@ -3697,6 +3743,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //GUIVideoFiles.PlayMovie(movie.ID);
 
             }
+          // Might require delay to wait until OSD is first (auto)updated from MyVideo database - we might want to override this after ...  
+          //GUIPropertyManager.SetProperty("#Play.Current.Thumb", clear ? " " : osdImage);
           // Check, if property for OSD should be set (came from myvideo DB in the past) -> #Play.Current.Thumb
         }
         private void OnPlayBackEnded(MediaPortal.Player.g_Player.MediaType type, string filename)

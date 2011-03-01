@@ -360,7 +360,39 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             folderBrowserDialog1.Description = "Select Cover Images Path"; 
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                MesFilmsImg.Text = folderBrowserDialog1.SelectedPath;
+              MesFilmsImg.Text = folderBrowserDialog1.SelectedPath;
+              if (!string.IsNullOrEmpty(MesFilmsCat.Text))
+              {
+                string catalogDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
+                string imgPrefixFilenameOnly = "";
+                if (MesFilmsImg.Text == catalogDirectory)
+                  cbPictureHandling.Text = "Relative Path";
+                else
+                  cbPictureHandling.Text = "Full Path"; // set as default, unless other is possible
+                if (MesFilmsImg.Text.StartsWith(catalogDirectory) && MesFilmsImg.Text != catalogDirectory)
+                {
+                  MesFilmsImg.Text = catalogDirectory;
+                  cbPictureHandling.Text = "Relative Path";
+                  if (string.IsNullOrEmpty(txtPicturePrefix.Text))
+                  {
+                    txtPicturePrefix.Text = "";
+                    txtPicturePrefix.Text = folderBrowserDialog1.SelectedPath.Substring(catalogDirectory.Length + 1) + "\\";
+                  }
+                  else if (!txtPicturePrefix.Text.Contains("\\")) 
+                  {
+                      txtPicturePrefix.Text = folderBrowserDialog1.SelectedPath.Substring(catalogDirectory.Length + 1) + "\\" + txtPicturePrefix.Text;
+                  }
+                  else
+                  {
+                    imgPrefixFilenameOnly = txtPicturePrefix.Text.Substring(txtPicturePrefix.Text.LastIndexOf("\\") + 1);
+                    txtPicturePrefix.Text = folderBrowserDialog1.SelectedPath.Substring(catalogDirectory.Length + 1) + "\\" + imgPrefixFilenameOnly;
+                  }
+                }
+                else if (txtPicturePrefix.Text.Contains("\\"))
+                {
+                  txtPicturePrefix.Text = txtPicturePrefix.Text.Substring(txtPicturePrefix.Text.LastIndexOf("\\") + 1);
+                }
+              }
             }
         }
         // Display any warnings or errors.
@@ -412,7 +444,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (!string.IsNullOrEmpty(txtGrabber.Text) && string.IsNullOrEmpty(cbPictureHandling.Text))
               {
               System.Windows.Forms.MessageBox.Show("The Field used for selecting if cover image name to be stored with relative or absolute path is mandatory  !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-              General.SelectedIndex = 5;
+              General.SelectedIndex = 6;
               cbPictureHandling.Focus();
               return;
             }

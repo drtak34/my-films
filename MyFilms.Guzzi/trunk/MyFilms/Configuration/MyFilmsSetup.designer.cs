@@ -107,7 +107,6 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.radioButton2 = new System.Windows.Forms.CheckBox();
           this.radioButton1 = new System.Windows.Forms.CheckBox();
@@ -196,10 +195,6 @@
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
           this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
-          this.lblPicturePrefix = new System.Windows.Forms.Label();
-          this.txtPicturePrefix = new System.Windows.Forms.TextBox();
-          this.lblPictureHandling = new System.Windows.Forms.Label();
-          this.cbPictureHandling = new System.Windows.Forms.ComboBox();
           this.lblSearchGrabberName = new System.Windows.Forms.Label();
           this.ItemSearchGrabberName = new System.Windows.Forms.ComboBox();
           this.chkGrabber_ChooseScript = new System.Windows.Forms.CheckBox();
@@ -464,6 +459,11 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
+          this.lblPictureHandling = new System.Windows.Forms.Label();
+          this.cbPictureHandling = new System.Windows.Forms.ComboBox();
+          this.lblPicturePrefix = new System.Windows.Forms.Label();
+          this.txtPicturePrefix = new System.Windows.Forms.TextBox();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -650,16 +650,6 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -1415,6 +1405,10 @@
           // 
           // groupBox1
           // 
+          this.groupBox1.Controls.Add(this.lblPicturePrefix);
+          this.groupBox1.Controls.Add(this.txtPicturePrefix);
+          this.groupBox1.Controls.Add(this.lblPictureHandling);
+          this.groupBox1.Controls.Add(this.cbPictureHandling);
           this.groupBox1.Controls.Add(this.ButDefCov);
           this.groupBox1.Controls.Add(this.DefaultCover);
           this.groupBox1.Controls.Add(this.label_DefaulCover);
@@ -1431,7 +1425,7 @@
           // 
           // ButDefCov
           // 
-          this.ButDefCov.Location = new System.Drawing.Point(625, 40);
+          this.ButDefCov.Location = new System.Drawing.Point(455, 39);
           this.ButDefCov.Name = "ButDefCov";
           this.ButDefCov.Size = new System.Drawing.Size(32, 20);
           this.ButDefCov.TabIndex = 90;
@@ -1441,7 +1435,7 @@
           // 
           // DefaultCover
           // 
-          this.DefaultCover.Location = new System.Drawing.Point(315, 40);
+          this.DefaultCover.Location = new System.Drawing.Point(145, 39);
           this.DefaultCover.Name = "DefaultCover";
           this.DefaultCover.Size = new System.Drawing.Size(304, 20);
           this.DefaultCover.TabIndex = 89;
@@ -1450,7 +1444,7 @@
           // label_DefaulCover
           // 
           this.label_DefaulCover.AutoSize = true;
-          this.label_DefaulCover.Location = new System.Drawing.Point(184, 44);
+          this.label_DefaulCover.Location = new System.Drawing.Point(15, 43);
           this.label_DefaulCover.Name = "label_DefaulCover";
           this.label_DefaulCover.Size = new System.Drawing.Size(104, 13);
           this.label_DefaulCover.TabIndex = 88;
@@ -1458,7 +1452,7 @@
           // 
           // ButImg
           // 
-          this.ButImg.Location = new System.Drawing.Point(625, 14);
+          this.ButImg.Location = new System.Drawing.Point(455, 13);
           this.ButImg.Name = "ButImg";
           this.ButImg.Size = new System.Drawing.Size(32, 20);
           this.ButImg.TabIndex = 87;
@@ -1468,18 +1462,16 @@
           // 
           // MesFilmsImg
           // 
-          this.MesFilmsImg.Location = new System.Drawing.Point(315, 14);
+          this.MesFilmsImg.Location = new System.Drawing.Point(145, 13);
           this.MesFilmsImg.Name = "MesFilmsImg";
           this.MesFilmsImg.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsImg.TabIndex = 85;
-          this.ToolTip1.SetToolTip(this.MesFilmsImg, "Enter the full path to the folder containing the DVD cover image files – by defau" +
-                  "lt it is the same as the path to your database file.\r\nYou can use the browse but" +
-                  "ton to find the correct path.\r\n");
+          this.ToolTip1.SetToolTip(this.MesFilmsImg, resources.GetString("MesFilmsImg.ToolTip"));
           // 
           // label2
           // 
           this.label2.AutoSize = true;
-          this.label2.Location = new System.Drawing.Point(184, 17);
+          this.label2.Location = new System.Drawing.Point(15, 16);
           this.label2.Name = "label2";
           this.label2.Size = new System.Drawing.Size(97, 13);
           this.label2.TabIndex = 86;
@@ -1592,10 +1584,6 @@
           // 
           // groupBox_GrabberOptions
           // 
-          this.groupBox_GrabberOptions.Controls.Add(this.lblPicturePrefix);
-          this.groupBox_GrabberOptions.Controls.Add(this.txtPicturePrefix);
-          this.groupBox_GrabberOptions.Controls.Add(this.lblPictureHandling);
-          this.groupBox_GrabberOptions.Controls.Add(this.cbPictureHandling);
           this.groupBox_GrabberOptions.Controls.Add(this.lblSearchGrabberName);
           this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberName);
           this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_ChooseScript);
@@ -1611,51 +1599,10 @@
           this.groupBox_GrabberOptions.Text = "Movie Detail Internet Updates";
           this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
           // 
-          // lblPicturePrefix
-          // 
-          this.lblPicturePrefix.AutoSize = true;
-          this.lblPicturePrefix.Location = new System.Drawing.Point(388, 68);
-          this.lblPicturePrefix.Name = "lblPicturePrefix";
-          this.lblPicturePrefix.Size = new System.Drawing.Size(69, 13);
-          this.lblPicturePrefix.TabIndex = 96;
-          this.lblPicturePrefix.Text = "Picture Prefix";
-          // 
-          // txtPicturePrefix
-          // 
-          this.txtPicturePrefix.Location = new System.Drawing.Point(463, 65);
-          this.txtPicturePrefix.Name = "txtPicturePrefix";
-          this.txtPicturePrefix.Size = new System.Drawing.Size(100, 20);
-          this.txtPicturePrefix.TabIndex = 95;
-          this.ToolTip1.SetToolTip(this.txtPicturePrefix, "You can define a prefix for the cover images that will be \r\nadded to the image na" +
-                  "me.\r\nThis is useful, if you store all images for different configurations \r\nin t" +
-                  "he same directory.");
-          // 
-          // lblPictureHandling
-          // 
-          this.lblPictureHandling.AutoSize = true;
-          this.lblPictureHandling.Location = new System.Drawing.Point(16, 68);
-          this.lblPictureHandling.Name = "lblPictureHandling";
-          this.lblPictureHandling.Size = new System.Drawing.Size(85, 13);
-          this.lblPictureHandling.TabIndex = 94;
-          this.lblPictureHandling.Text = "Picture Handling";
-          // 
-          // cbPictureHandling
-          // 
-          this.cbPictureHandling.FormattingEnabled = true;
-          this.cbPictureHandling.Items.AddRange(new object[] {
-            "Full Path",
-            "Relative Path",
-            "Use Folder.jpg"});
-          this.cbPictureHandling.Location = new System.Drawing.Point(173, 65);
-          this.cbPictureHandling.Name = "cbPictureHandling";
-          this.cbPictureHandling.Size = new System.Drawing.Size(183, 21);
-          this.cbPictureHandling.TabIndex = 93;
-          this.ToolTip1.SetToolTip(this.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"));
-          // 
           // lblSearchGrabberName
           // 
           this.lblSearchGrabberName.AutoSize = true;
-          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 42);
+          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 53);
           this.lblSearchGrabberName.Name = "lblSearchGrabberName";
           this.lblSearchGrabberName.Size = new System.Drawing.Size(124, 13);
           this.lblSearchGrabberName.TabIndex = 62;
@@ -1668,7 +1615,7 @@
             "OriginalTitle",
             "TranslatedTitle",
             "FormattedTitle"});
-          this.ItemSearchGrabberName.Location = new System.Drawing.Point(173, 39);
+          this.ItemSearchGrabberName.Location = new System.Drawing.Point(173, 50);
           this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
           this.ItemSearchGrabberName.Size = new System.Drawing.Size(183, 21);
           this.ItemSearchGrabberName.TabIndex = 61;
@@ -1676,7 +1623,7 @@
           // chkGrabber_ChooseScript
           // 
           this.chkGrabber_ChooseScript.AutoSize = true;
-          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(463, 17);
+          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(463, 29);
           this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
           this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(193, 17);
           this.chkGrabber_ChooseScript.TabIndex = 60;
@@ -1687,7 +1634,7 @@
           // chkGrabber_Always
           // 
           this.chkGrabber_Always.AutoSize = true;
-          this.chkGrabber_Always.Location = new System.Drawing.Point(463, 38);
+          this.chkGrabber_Always.Location = new System.Drawing.Point(463, 50);
           this.chkGrabber_Always.Name = "chkGrabber_Always";
           this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
           this.chkGrabber_Always.TabIndex = 56;
@@ -1697,7 +1644,7 @@
           // 
           // btnGrabber
           // 
-          this.btnGrabber.Location = new System.Drawing.Point(370, 14);
+          this.btnGrabber.Location = new System.Drawing.Point(370, 25);
           this.btnGrabber.Name = "btnGrabber";
           this.btnGrabber.Size = new System.Drawing.Size(32, 20);
           this.btnGrabber.TabIndex = 55;
@@ -1707,7 +1654,7 @@
           // 
           // txtGrabber
           // 
-          this.txtGrabber.Location = new System.Drawing.Point(173, 14);
+          this.txtGrabber.Location = new System.Drawing.Point(173, 25);
           this.txtGrabber.Name = "txtGrabber";
           this.txtGrabber.Size = new System.Drawing.Size(183, 20);
           this.txtGrabber.TabIndex = 54;
@@ -1716,7 +1663,7 @@
           // label27
           // 
           this.label27.AutoSize = true;
-          this.label27.Location = new System.Drawing.Point(16, 17);
+          this.label27.Location = new System.Drawing.Point(16, 28);
           this.label27.Name = "label27";
           this.label27.Size = new System.Drawing.Size(151, 13);
           this.label27.TabIndex = 53;
@@ -4511,6 +4458,55 @@
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
           // 
+          // lblPictureHandling
+          // 
+          this.lblPictureHandling.AutoSize = true;
+          this.lblPictureHandling.Location = new System.Drawing.Point(508, 42);
+          this.lblPictureHandling.Name = "lblPictureHandling";
+          this.lblPictureHandling.Size = new System.Drawing.Size(85, 13);
+          this.lblPictureHandling.TabIndex = 96;
+          this.lblPictureHandling.Text = "Picture Handling";
+          // 
+          // cbPictureHandling
+          // 
+          this.cbPictureHandling.FormattingEnabled = true;
+          this.cbPictureHandling.Items.AddRange(new object[] {
+            "Full Path",
+            "Relative Path",
+            "Use Folder.jpg"});
+          this.cbPictureHandling.Location = new System.Drawing.Point(599, 41);
+          this.cbPictureHandling.Name = "cbPictureHandling";
+          this.cbPictureHandling.Size = new System.Drawing.Size(130, 21);
+          this.cbPictureHandling.TabIndex = 95;
+          this.ToolTip1.SetToolTip(this.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"));
+          // 
+          // lblPicturePrefix
+          // 
+          this.lblPicturePrefix.AutoSize = true;
+          this.lblPicturePrefix.Location = new System.Drawing.Point(508, 17);
+          this.lblPicturePrefix.Name = "lblPicturePrefix";
+          this.lblPicturePrefix.Size = new System.Drawing.Size(69, 13);
+          this.lblPicturePrefix.TabIndex = 98;
+          this.lblPicturePrefix.Text = "Picture Prefix";
+          // 
+          // txtPicturePrefix
+          // 
+          this.txtPicturePrefix.Location = new System.Drawing.Point(583, 14);
+          this.txtPicturePrefix.Name = "txtPicturePrefix";
+          this.txtPicturePrefix.Size = new System.Drawing.Size(146, 20);
+          this.txtPicturePrefix.TabIndex = 97;
+          this.ToolTip1.SetToolTip(this.txtPicturePrefix, resources.GetString("txtPicturePrefix.ToolTip"));
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4994,9 +4990,9 @@
         private CheckBox chkDfltViewsAll;
         private CheckBox chkDfltFanartImageAll;
         private CheckBox chkFanartDefaultViews;
-        private Label lblPictureHandling;
-        private ComboBox cbPictureHandling;
         private Label lblPicturePrefix;
         private TextBox txtPicturePrefix;
+        private Label lblPictureHandling;
+        private ComboBox cbPictureHandling;
     }
 }
