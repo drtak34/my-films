@@ -936,6 +936,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       choiceViewMenu.Add("tmdbposter");
                     }
                 
+
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
                     {
@@ -1449,7 +1450,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (MyFilms.conf.StrGrabber_cnf.Length > 0)
                     {
                         scriptfile.Add(MyFilms.conf.StrGrabber_cnf);
-                        dlg.Add(MyFilms.conf.StrGrabber_cnf.Substring(MyFilms.conf.StrGrabber_cnf.LastIndexOf("\\") + 1));
+                        dlg.Add(MyFilms.conf.StrGrabber_cnf.Substring(MyFilms.conf.StrGrabber_cnf.LastIndexOf("\\") + 1) + " (default)");
                         dlg.SelectedLabel = 0;
                     }
                     DirectoryInfo dirsInf = new DirectoryInfo(Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
