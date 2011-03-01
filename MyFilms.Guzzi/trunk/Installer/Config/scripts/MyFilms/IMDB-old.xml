@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Profile>
+  <Section>
+    <DBName>MyFilmsIMDB</DBName>
+    <URLPrefix>http://www.imdb.com</URLPrefix>
+    <URLSearch>
+      <URL Param1="" Param2="">http:_x002F__x002F_www.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
+      <KeyStartList Param1="" Param2="">Popular_x0020_Titles</KeyStartList>
+      <KeyEndList>Suggestions_x0020_For_x0020_Improving_x0020_Your_x0020_Results</KeyEndList>
+      <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
+      <KeyStepPage>_x0031_</KeyStepPage>
+      <KeyNextPage />
+      <KeyStartTitle Param1="" Param2="">_x002E__x003C__x002F_td_x003E__x003C_td_x0020_valign_x003D__x0022_top_x0022__x003E_</KeyStartTitle>
+      <KeyEndTitle>_x003C__x002F_a_x003E__x0020__x0028_</KeyEndTitle>
+      <KeyTitleIndex />
+      <KeyStartYear Param1="" Param2="">_x003C__x002F_a_x003E__x0020__x0028_</KeyStartYear>
+      <KeyEndYear>_x0029_</KeyEndYear>
+      <KeyYearIndex />
+      <KeyStartDirector Param1="" Param2="" />
+      <KeyEndDirector />
+      <KeyDirectorIndex />
+      <KeyStartLink Param1="" Param2="">_x003C_td_x0020_valign_x003D__x0022_top_x0022__x003E__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
+      <KeyEndLink>_x0022_</KeyEndLink>
+      <KeyLinkIndex />
+    </URLSearch>
+    <Details>
+      <KeyStartBody Param1="" Param2="" />
+      <KeyEndBody />
+      <KeyStartOTitle Param1="" Param2="">_x003C_title_x003E_</KeyStartOTitle>
+      <KeyEndOTitle>_x0028_</KeyEndOTitle>
+      <KeyOTitleIndex />
+      <KeyStartTTitle Param1="" Param2="">Also_x0020_Known_x0020_As:</KeyStartTTitle>
+      <KeyEndTTitle>_x003C_span_x0020_class_x003D__x0022_</KeyEndTTitle>
+      <KeyTTitleIndex />
+      <KeyStartImg Param1="_x002E_com_x002F_images" Param2="http:_x002F__x002F_ia.media-imdb.com_x002F_images">img_x0020_src_x003D__x0022_http:_x002F__x002F_ia.media-imdb</KeyStartImg>
+      <KeyEndImg>_x0022_</KeyEndImg>
+      <KeyImgIndex />
+      <KeyStartLinkImg Param1="" Param2="" />
+      <KeyEndLinkImg />
+      <KeyLinkImgIndex />
+      <KeyStartRate Param1="" Param2="">_x003C_span_x0020_class_x003D__x0022_rating-rating_x0022__x003E_</KeyStartRate>
+      <KeyEndRate>_x003C_span_x003E_</KeyEndRate>
+      <KeyRateIndex />
+      <KeyStartRate2 Param1="" Param2="" />
+      <KeyEndRate2 />
+      <KeyRate2Index />
+      <BaseRating>_x0031_0</BaseRating>
+      <KeyStartSyn Param1="" Param2="">_x003C_h2_x003E_Storyline_x003C__x002F_h2_x003E_</KeyStartSyn>
+      <KeyEndSyn>_x003C_em_x0020_class_x003D__x0022_</KeyEndSyn>
+      <KeySynIndex />
+      <KeyStartRealise Param1="" Param2="">_x003C_meta_x0020_name_x003D__x0022_description_x0022__x0020_content_x003D__x0022_Directed_x0020_by_x0020_</KeyStartRealise>
+      <KeyEndRealise>_x002E_</KeyEndRealise>
+      <KeyRealiseIndex />
+      <KeyStartProduct Param1="" Param2="" />
+      <KeyEndProduct />
+      <KeyProductIndex />
+      <KeyStartCredits Param1="_x0020_and" Param2="_x002C__x0020_">_x003C_h4_x0020_class_x003D__x0022_inline_x0022__x003E_Stars:_x003C__x002F_h4_x003E_</KeyStartCredits>
+      <KeyEndCredits>_x003C__x002F_div_x003E_</KeyEndCredits>
+      <KeyCreditsIndex />
+      <KeyCreditsRegExp />
+      <KeyStartCountry Param1="_x007C_" Param2="_x002C_">class_x003D__x0022_inline_x0022__x003E_Country:_x003C__x002F_h4_x003E_</KeyStartCountry>
+      <KeyEndCountry>_x003C__x002F_div_x003E_</KeyEndCountry>
+      <KeyCountryIndex>Genre</KeyCountryIndex>
+      <KeyStartGenre Param1="_x007C_" Param2="_x002C_">class_x003D__x0022_inline_x0022__x003E_Genres:_x003C__x002F_h4_x003E_</KeyStartGenre>
+      <KeyEndGenre>_x003C__x002F_div_x003E_</KeyEndGenre>
+      <KeyGenreIndex />
+      <KeyStartYear Param1="" Param2="">_x0028_</KeyStartYear>
+      <KeyEndYear>_x0029_</KeyEndYear>
+      <KeyYearIndex>Translated_x0020_Title</KeyYearIndex>
+      <KeyStartLinkMultipurpose Param1="" Param2="" />
+      <KeyEndLinkMultipurpose />
+      <KeyLinkMultipurposeIndex />
+      <KeyStartComment Param1="" Param2="">_x003C_h2_x003E_User_x0020_Reviews_x003C__x002F_h2_x003E_</KeyStartComment>
+      <KeyEndComment>_x003C_hr_x0020__x002F__x003E_</KeyEndComment>
+      <KeyCommentIndex />
+      <KeyStartLanguage Param1="" Param2="">Language:_x003C__x002F_h4_x003E_</KeyStartLanguage>
+      <KeyEndLanguage>_x003C__x002F_div_x003E_</KeyEndLanguage>
+      <KeyLanguageIndex />
+      <KeyStartTagline Param1="" Param2="">Taglines:_x003C__x002F_h4_x003E_</KeyStartTagline>
+      <KeyEndTagline>_x003C_span_x0020_class_x003D_</KeyEndTagline>
+      <KeyTaglineIndex />
+      <KeyStartCertification Param1="" Param2="">_x003C_h4_x003E_Motion_x0020_Picture_x0020_Rating_x0020__x0028__x003C_a_x0020_href_x003D__x0022__x002F_mpaa_x0022__x003E_MPAA_x003C__x002F_a_x003E__x0029__x003C__x002F_h4_x003E_</KeyStartCertification>
+      <KeyEndCertification>_x003C_span_x0020_class_x003D__x0022_</KeyEndCertification>
+      <KeyCertificationIndex />
+    </Details>
+  </Section>
+</Profile>
