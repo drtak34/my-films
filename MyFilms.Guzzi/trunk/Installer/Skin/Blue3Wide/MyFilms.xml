@@ -177,7 +177,8 @@
 			<font>font14</font>
 			<textcolor>7fffffff</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<label>#myfilms.view #myfilms.select</label>
+			<label>#myfilms.view - #myfilms.select</label>
+			<visible>string.contains(#myfilms.view)|string.contains(#myfilms.select)</visible>
 		</control>
 		<control>
 			<type>actiongroup</type>

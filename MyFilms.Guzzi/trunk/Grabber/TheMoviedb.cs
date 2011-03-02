@@ -14,9 +14,20 @@ namespace grabber
         } private string identifier;
         public string Name
         {
-            get { return name; }
-            set { name = value; }
+          get { return name; }
+          set { name = value; }
         } private string name;
+        public string TranslatedTitle
+        {
+          get { return translatedTitle; }
+          set { translatedTitle = value; }
+        } private string translatedTitle;
+        public string AlternativeTitle
+        {
+          get { return alternativeTitle; }
+          set { alternativeTitle = value; }
+        }
+        private string alternativeTitle;
         public int Year
         {
             get { return year; }
@@ -49,9 +60,19 @@ namespace grabber
         } private List<String> backdrops;
         public float Score
         {
-            get { return score; }
-            set { score = value; }
+          get { return score; }
+          set { score = value; }
         } private float score;
+        public string Certification
+        {
+          get { return certification; }
+          set { certification = value; }
+        } private string certification;
+        public List<String> Languages
+        {
+          get { return languages; }
+          set { languages = value; }
+        } private List<String> languages;
         public int Popularity
         {
             get { return popularity; }
@@ -62,10 +83,15 @@ namespace grabber
             get { return runtime; }
             set { runtime = value; }
         } private int runtime;
+        public List<String> Producers
+        {
+          get { return producers; }
+          set { producers = value; }
+        } private List<String> producers;
         public List<String> Directors
         {
-            get { return directors; }
-            set { directors = value; }
+          get { return directors; }
+          set { directors = value; }
         } private List<String> directors;
         public List<String> Writers
         {
@@ -74,17 +100,30 @@ namespace grabber
         } private List<String> writers;
         public List<String> Actors
         {
-            get { return actors; }
-            set { actors = value; }
-        } 
+          get { return actors; }
+          set { actors = value; }
+        }
         private List<String> actors;
+        public List<String> Country
+        {
+          get { return country; }
+          set { country = value; }
+        }
+        private List<String> country;
+        public List<String> Genres
+        {
+          get { return genres; }
+          set { genres = value; }
+        }
+        private List<String> genres;
     }
     public class TheMoviedb
     {
         //private const string apiSearch = "http://api.themoviedb.org/2.0/Movie.search?api_key=1e66c0cc99696feaf2ea56695e134eae&title=";
         private const string apiSearch = "http://api.themoviedb.org/2.1/Movie.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
-        //private const string apiGetInfo = "http://api.themoviedb.org/2.0/Movie.getInfo?api_key=1e66c0cc99696feaf2ea56695e134eae&id=";
-        private const string apiGetInfo = "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
+        //private const string apiGetMovieInfo = "http://api.themoviedb.org/2.0/Movie.getInfo?api_key=1e66c0cc99696feaf2ea56695e134eae&id=";
+        private const string apiGetMovieInfo = "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
+        private const string apiGetPersonInfo = "http://api.themoviedb.org/2.1/Person.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
 
         public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, bool choose)
         {
@@ -114,11 +153,13 @@ namespace grabber
             //title = Grabber.GrabUtil.normalizeTitle(title);
             string id = string.Empty;
             string apiSearchLanguage = "";
-            string apiGetInfoLanguage = "";
+            string apiGetMovieInfoLanguage = "";
+            string apiGetPersonInfoLanguage = "";
             if (language.Length == 2)
             {
               apiSearchLanguage = apiSearch.Replace("/en/", "/" + language + "/");
-              apiGetInfoLanguage = apiGetInfo.Replace("/en/", "/" + language + "/");
+              apiGetMovieInfoLanguage = apiGetMovieInfo.Replace("/en/", "/" + language + "/");
+              apiGetPersonInfoLanguage = apiGetPersonInfo.Replace("/en/", "/" + language + "/");
             }
 
             List<DBMovieInfo> results = new List<DBMovieInfo>();
@@ -150,7 +191,7 @@ namespace grabber
                 {
                     if (movie.Identifier != null)
                     {
-                        try { xml = getXML(apiGetInfoLanguage + movie.Identifier); }
+                        try { xml = getXML(apiGetMovieInfoLanguage + movie.Identifier); }
                         catch { xml = null; }
                         if (xml != null)
                         {
@@ -201,6 +242,7 @@ namespace grabber
             if (movieNode.ChildNodes.Count < 2 || movieNode.Name != "movie")
                 return null;
 
+            List<String> producers = new List<string>();
             List<String> directors = new List<string>();
             List<String> writers = new List<string>();
             List<String> actors = new List<string>();
@@ -219,11 +261,14 @@ namespace grabber
                     case "title":
                         movie.Name = value;
                         break;
-                    //case "alternative_title":
-                    //    // todo: remove this check when the api is fixed
-                    //    if (value.Trim() != "None found." && value.Trim().Length > 0)
-                    //        movie.AlternateTitles.Add(value);
-                    //    break;
+                    case "alternative_name":
+                        if (value.Trim() != "None found." && value.Trim().Length > 0)
+                            movie.AlternativeTitle = value;
+                        break;
+                    case "original_name":
+                        if (value.Trim() != "None found." && value.Trim().Length > 0)
+                            movie.TranslatedTitle = value;
+                        break;
                     case "released":
                     case "release":
                         DateTime date;
@@ -245,7 +290,16 @@ namespace grabber
                     case "score":
                         float rating = 0;
                         if (float.TryParse(value, out rating))
-                            movie.Score = rating;
+                          movie.Score = rating;
+                        break;
+                    case "certification":
+                          movie.Certification = value;
+                        break;
+                    case "languages_spoken":
+                        foreach (XmlNode language in node.SelectNodes("language_spoken/name"))
+                        {
+                          movie.Languages.Add(language.InnerText.Trim());
+                        }
                         break;
                     case "popularity":
                         int popularity = 0;
@@ -262,16 +316,23 @@ namespace grabber
                         foreach (XmlNode person in node.ChildNodes)
                         {
                             string name = person.Attributes["name"].Value;
+                            string character = person.Attributes["character"].Value;
+                            string thumb = person.Attributes["thumb"].Value;
                             string job = person.Attributes["job"].Value;
                             switch (job)
                             {
-                                case "Director":
+                              case "Producer":
+                                    producers.Add(name);
+                                    break;
+                              case "Director":
                                     directors.Add(name);
                                     break;
-                                case "Actor":
+                              case "Actor":
+                                    if (character.Length > 0) 
+                                      name = name + " (" + character + ")";
                                     actors.Add(name);
                                     break;
-                                case "Screenplay":
+                              case "Screenplay":
                                     writers.Add(name);
                                     break;
                             }
@@ -289,11 +350,15 @@ namespace grabber
                         //    actors.Add(person.InnerText.Trim());
                         //}
                         break;
+                    case "countries":
+                        foreach (XmlNode country in node.SelectNodes("country/name")) {
+                            movie.Country.Add(country.InnerText.Trim());
+                        }
+                        break;
                     case "categories":
-                        //todo: uncomment and adapt when the genres are implemented
-                        //foreach (XmlNode category in node.SelectNodes("category/name")) {
-                        //    movie.Genres.Add(category.InnerText.Trim());
-                        //}
+                        foreach (XmlNode category in node.SelectNodes("category/name")) {
+                            movie.Genres.Add(category.InnerText.Trim());
+                        }
                         break;
                     case "poster":
                         if (node.OuterXml.Contains("\"original\""))
@@ -341,6 +406,7 @@ namespace grabber
                         break;
                 }
             }
+            movie.Producers = producers;
             movie.Directors = directors;
             movie.Writers = writers;
             movie.Actors = actors;

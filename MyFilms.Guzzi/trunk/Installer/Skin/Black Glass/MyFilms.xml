@@ -254,6 +254,7 @@
 			<width>750</width>
 			<label>#myfilms.view - #myfilms.select</label>
 			<wrapString> : : : </wrapString>
+			<visible>string.contains(#myfilms.view)|string.contains(#myfilms.select)</visible>
 			<animation effect="fade" time="250">WindowClose</animation>
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -504,7 +505,7 @@
 		<control>
 			<description>Runtime value</description>
 			<type>fadelabel</type>
-			<id>34</id>
+			<id>1</id>
 			<posX>30</posX>
 			<posY>559</posY>
 			<width>750</width>
@@ -518,7 +519,7 @@
 		<control>
 			<description>RatingValue</description>
 			<type>label</type>
-			<id>2068</id>
+			<id>1</id>
 			<posX>280</posX>
 			<posY>452</posY>
 			<label>(#myfilms.db.rating.value)</label>

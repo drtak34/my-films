@@ -2316,20 +2316,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
             }
-            LogMyFilms.Debug("MF: Fin_Charge_Init: StrSelect = '" + conf.StrSelect + "'");
-            LogMyFilms.Debug("MF: Fin_Charge_Init: StrTxtSelect = '" + conf.StrTxtSelect + "'");
-            if (string.IsNullOrEmpty(conf.StrSelect) || conf.StrSelect.ToLower() == conf.StrTitle1.ToString() + " not like ''")
-              this.SetLabelSelect("root");
+            LogMyFilms.Debug("MF: Fin_Charge_Init: StrSelect = '" + conf.StrSelect + "', StrTxtSelect = '" + conf.StrTxtSelect + "'");
+            if (string.IsNullOrEmpty(conf.StrTxtSelect) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)))
+              SetLabelSelect("root");
+            else
+              SetLabelSelect(conf.StrTxtSelect);
             MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); 
             GUIWaitCursor.Hide();
             if (conf.LastID == ID_MyFilmsDetail)
-            {
                 GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
-            }
             if (conf.LastID == ID_MyFilmsActors)
-            {
                 GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
-            }
         }
         //--------------------------------------------------------------------------------------------
         //   Change LayOut 
@@ -2404,6 +2401,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Debug("MF: Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
                     GetFilmList();
                     SetLabelView("all");
+                    this.SetLabelSelect("root");
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
                 case "year":
@@ -6063,13 +6061,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
        //*****************************************************************************************
        //*  set the #myfilms.view label
        //*****************************************************************************************
-       private static void SetLabelView(string viewname)
+       private static void SetLabelView(string viewLabel)
        {
-         string newViewLabel = viewname; // use the parameter as default ...
-         viewname = viewname.ToLower();
-         if (viewname == GUILocalizeStrings.Get(342).ToLower()) // case "films" should show allshow all filmes
-           viewname = "all";
-         switch (viewname)
+         string newViewLabel = viewLabel; // use the parameter as default ...
+         viewLabel = viewLabel.ToLower();
+         if (viewLabel == GUILocalizeStrings.Get(342).ToLower()) // case "films" should show allshow all filmes
+           viewLabel = "all";
+         switch (viewLabel)
          {
            case "search":
              newViewLabel = GUILocalizeStrings.Get(137);// "search"
@@ -6101,15 +6099,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
            case "view4":
              // specific user View
              int i = -1;
-             if (viewname == "view0")
+             if (viewLabel == "view0")
                i = 0;
-             if (viewname == "view1")
+             if (viewLabel == "view1")
                i = 1;
-             if (viewname == "view2")
+             if (viewLabel == "view2")
                i = 2;
-             if (viewname == "view3")
+             if (viewLabel == "view3")
                i = 3;
-             if (viewname == "view4")
+             if (viewLabel == "view4")
                i = 4;
 
              //if (viewDefaultItem == conf.StrViewText[0].ToLower() || viewDefaultItem == conf.StrViewItem[0].ToLower())
@@ -6138,16 +6136,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.setGUIProperty("view", newViewLabel);
          MyFilms.conf.StrTxtView = newViewLabel;
          GUIPropertyManager.SetProperty("#currentmodule", newViewLabel);
-         LogMyFilms.Debug("MF: SetLabelView has been called with '" + viewname + "' -> set view to '" + newViewLabel + "'");
+         LogMyFilms.Debug("MF: SetLabelView has been called with '" + viewLabel + "' -> set view to '" + newViewLabel + "'");
        }
 
        //*****************************************************************************************
        //*  set the #myfilms.view label
        //*****************************************************************************************
-       private void SetLabelSelect(string selectMode)
+       private void SetLabelSelect(string selectLabel)
        {
-         selectMode = selectMode.ToLower();
-         switch (selectMode)
+         string newSelectLabel = selectLabel;
+         selectLabel = selectLabel.ToLower();
+         switch (selectLabel)
          {
            case "root":
 
@@ -6163,9 +6162,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
              break;
 
            default:
-             conf.StrTxtSelect = selectMode; //10798622 all films
-             MyFilmsDetail.setGUIProperty("select", selectMode);
-
+             conf.StrTxtSelect = newSelectLabel;
+             MyFilmsDetail.setGUIProperty("select", newSelectLabel);
              break;
          }
        }
