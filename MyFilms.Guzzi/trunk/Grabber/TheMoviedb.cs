@@ -88,12 +88,17 @@ namespace grabber
 
         public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, bool choose)
         {
+          return getMoviesByTitles(title, ttitle, year, director, choose, "en"); // set "en" as default
+        }
+
+        public List<DBMovieInfo> getMoviesByTitles(string title, string ttitle, int year, string director, bool choose, string language)
+        {
             List<DBMovieInfo> results = new List<DBMovieInfo>();
-            results = getMoviesByTitle(title, year, director, choose);
+            results = getMoviesByTitle(title, year, director, choose, language);
             if (results.Count == 1)
                 return results;
             List<DBMovieInfo> results2 = new List<DBMovieInfo>();
-            results2 = getMoviesByTitle(ttitle, year, director, choose);
+            results2 = getMoviesByTitle(ttitle, year, director, choose, language);
             if (results2.Count == 1)
                 return results2;
             return results;
@@ -101,11 +106,24 @@ namespace grabber
 
         public List<DBMovieInfo> getMoviesByTitle(string title, int year, string director, bool choose)
         {
+          return getMoviesByTitle(title, year, director, choose, "en");
+        }
+
+        public List<DBMovieInfo> getMoviesByTitle(string title, int year, string director, bool choose, string language)
+        {
             //title = Grabber.GrabUtil.normalizeTitle(title);
             string id = string.Empty;
+            string apiSearchLanguage = "";
+            string apiGetInfoLanguage = "";
+            if (language.Length == 2)
+            {
+              apiSearchLanguage = apiSearch.Replace("/en/", "/" + language + "/");
+              apiGetInfoLanguage = apiGetInfo.Replace("/en/", "/" + language + "/");
+            }
+
             List<DBMovieInfo> results = new List<DBMovieInfo>();
             List<DBMovieInfo> resultsdet = new List<DBMovieInfo>();
-            XmlNodeList xml = getXML(apiSearch + Grabber.GrabUtil.RemoveDiacritics(title.Trim().ToLower()).Replace(" ", "+"));
+            XmlNodeList xml = getXML(apiSearchLanguage + Grabber.GrabUtil.RemoveDiacritics(title.Trim().ToLower()).Replace(" ", "+"));
             if (xml == null)
                 return results;
 
@@ -132,8 +150,7 @@ namespace grabber
                 {
                     if (movie.Identifier != null)
                     {
-
-                        try { xml = getXML(apiGetInfo + movie.Identifier); }
+                        try { xml = getXML(apiGetInfoLanguage + movie.Identifier); }
                         catch { xml = null; }
                         if (xml != null)
                         {
