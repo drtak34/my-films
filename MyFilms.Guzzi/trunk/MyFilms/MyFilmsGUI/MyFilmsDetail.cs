@@ -546,9 +546,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       // Hier Aktivitäten wie z.b. ListControl für Actors?
                       GUIWindowManager.ShowPreviousWindow();
                       //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
-                      //base.OnMessage(messageType); 
                       return true;
                     }
+                base.OnMessage(messageType); 
+                return true;
             }
             base.OnMessage(messageType);
             return true;

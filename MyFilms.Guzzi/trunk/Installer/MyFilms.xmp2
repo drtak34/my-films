@@ -2317,7 +2317,7 @@ Some functions will not be available or work properly, if older versions are ins
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>31</Revision>
+      <Revision>32</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2325,7 +2325,7 @@ Some functions will not be available or work properly, if older versions are ins
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.31.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.32.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -4338,14 +4338,14 @@ Some functions will not be available or work properly, if older versions are ins
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{48e5fd4f-3542-40c5-82cd-2b07c0dc0257}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{fb33a7f0-6193-4439-a253-26451b67fa05}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7677a808-af75-4e4b-9704-7972106fc6bd}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{e0227583-c440-42ec-93c7-f8ecfc9e9185}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
