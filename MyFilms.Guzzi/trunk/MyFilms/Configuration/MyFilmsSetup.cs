@@ -65,6 +65,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private bool StoreFullLogoPath = false;
 
         private bool WizardActive = false; // Status of running new config wizard (to control check behaviour)
+        private bool RunWizardAfterInstall = false; // Will only be set true after first blank install, when no MyFilms.xml config is present to launch Wizard.
         private string ActiveLogoPath = String.Empty;
 
         public static string cTraktUsername = String.Empty;
@@ -81,7 +82,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void MesFilmsSetup_Load(object sender, EventArgs e)
         {
             Refresh_Items(true);
-
+            if (!System.IO.File.Exists(Config.GetFolder(Config.Dir.Config) + @"\" + "MyFilms" + ".xml"))
+              RunWizardAfterInstall = true;
             textBoxPluginName.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginName", "Films");
             MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/anable normal vs. testfeatures
             LogMyFilms.Info("MyFilms Setup ********** OperationsMode (PluginMode): '" + MyFilms_PluginMode + "' **********");
@@ -277,6 +279,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
                 scheduleAMCUpdater.Checked = false;
             load = false;
+            // Now start SetupWizard, if it's a clean new install
+            if (RunWizardAfterInstall)
+            {
+              WizardActive = true;
+              newCatalogWizard();
+              RunWizardAfterInstall = false;
+              WizardActive = false;
+            }
         }
         private void ButCat_Click(object sender, System.EventArgs e)
         {
@@ -4055,9 +4065,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void newCatalogWizard()
         {
           bool newCatalog = true;
-          if (Config_Name.Text.Length != 0)
+          if (Config_Name.Text.Length != 0 || RunWizardAfterInstall)
           {
-            if (System.Windows.Forms.MessageBox.Show("Do you want to create a new MyFilms Configuration ?", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (System.Windows.Forms.MessageBox.Show("Do you want to create a new MyFilms Configuration ? \n\nThis wizard helps you to setup a new configuration with default settings. \nIf you select 'yes', enter a name for the configuration.\nIf you select 'no' you can relaunch the wizard later with the 'Setup Wizard' button.", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
               return;
           }
           MyFilmsInputBox input = new MyFilmsInputBox();
