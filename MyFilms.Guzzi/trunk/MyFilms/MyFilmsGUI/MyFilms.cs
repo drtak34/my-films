@@ -190,6 +190,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CTRL_BtnSearchT = 4,
             CTRL_BtnOptions = 5,
             CTRL_BtnLayout = 6,
+            CTRL_GlobalOverlayFilter = 7,
+            CTRL_ToggleGlobalUnwatchedStatus = 8,
             //CTRL_TxtSelect = 12,
             CTRL_Fanart = 11,
             CTRL_Fanart2 = 21,
@@ -210,6 +212,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         [SkinControlAttribute((int)Controls.CTRL_BtnSrtBy)]
         protected GUISortButtonControl BtnSrtBy;
+
+        [SkinControlAttribute((int)Controls.CTRL_ToggleGlobalUnwatchedStatus)]
+        protected GUIButtonControl BtnToggleGlobalWatched;
 
         [SkinControlAttribute((int)Controls.CTRL_List)]
         protected GUIFacadeControl facadeView;
@@ -823,6 +828,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Change Selected Option
                     {
                         Change_Option();
+                        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
+                        return base.OnMessage(messageType);
+                    }
+                    if (iControl == (int)Controls.CTRL_GlobalOverlayFilter)
+                    // Change Selected Option - call global filters directly
+                    {
+                        Change_Global_Filters();
+                        GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
+                        return base.OnMessage(messageType);
+                    }
+                    if (iControl == (int)Controls.CTRL_ToggleGlobalUnwatchedStatus)
+                    // Toggle global unwatched filter directly
+                    {
+                        MyFilms.conf.GlobalUnwatchedOnly = !MyFilms.conf.GlobalUnwatchedOnly;
+                        if (conf.GlobalUnwatchedOnly)
+                        {
+                          GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+                          MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
+                        }
+                        else
+                        {
+                          GlobalFilterStringUnwatched = String.Empty;
+                          MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
+                        }
+                        LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
+                        Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                        // use this code later to set the label of the button
+                        
+                        if (MyFilms.conf.GlobalUnwatchedOnly)
+                          BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628));
+                        else
+                          BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629));
+
                         GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
                         return base.OnMessage(messageType);
                     } 
@@ -1577,7 +1615,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         
         //--------------------------------------------------------------------------------------------
-        //  Select Option
+        //  Select main Options
         //--------------------------------------------------------------------------------------------
         private void Change_Option()
         {
@@ -1627,7 +1665,51 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
         }
 
-        public static ArrayList Search_String(string champselect)
+
+
+        //--------------------------------------------------------------------------------------------
+        //  Select main Options
+        //--------------------------------------------------------------------------------------------
+        private void Change_Global_Filters()
+        {
+          GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          if (dlg1 == null) return;
+          dlg1.Reset();
+          dlg1.SetHeading(GUILocalizeStrings.Get(10798689)); // Global Options ...
+          System.Collections.Generic.List<string> choiceViewGlobalOptions = new System.Collections.Generic.List<string>();
+
+          // Change global Unwatchedfilteroption
+          // if ((MesFilms.conf.CheckWatched) || (MesFilms.conf.StrSupPlayer))// Make it conditoional, so only displayed, if options enabled in setup !
+          if (MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628)));
+          if (!MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
+          choiceViewGlobalOptions.Add("globalunwatchedfilter");
+
+          // Change global MovieFilter (Only Movies with Trailer)
+          if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
+          {
+            if (GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798628)));
+            if (!GlobalFilterTrailersOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798691), GUILocalizeStrings.Get(10798629)));
+            choiceViewGlobalOptions.Add("filterdbtrailer");
+          }
+
+          // Change global MovieFilter (Only Movies with highRating)
+          if (GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798628)));
+          if (!GlobalFilterMinRating) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798692), GUILocalizeStrings.Get(10798629)));
+          choiceViewGlobalOptions.Add("filterdbrating");
+
+          // Change Value for global MovieFilter (Only Movies with highRating)
+          dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MyFilms.conf.StrAntFilterMinRating.ToString()));
+          choiceViewGlobalOptions.Add("filterdbsetrating");
+
+          dlg1.DoModal(GetID);
+          if (dlg1.SelectedLabel == -1)
+            return;
+          LogMyFilms.Debug("MF: Call change_global_filters menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
+          Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
+          return;
+        }
+
+    public static ArrayList Search_String(string champselect)
         {
             Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
             System.Text.RegularExpressions.MatchCollection oMatches = oRegex.Matches(champselect);
@@ -2218,6 +2300,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
             }
             //Layout = conf.StrLayOut;
+
+            if (MyFilms.conf.GlobalUnwatchedOnly)
+              BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628));
+            else
+              BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629));
             
             if (string.IsNullOrEmpty(conf.CurrentSortMethod))
                 conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
