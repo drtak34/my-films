@@ -6239,11 +6239,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
              if ((GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating).Length > 0)
              {
-               conf.StrTxtSelect = GUILocalizeStrings.Get(10798622) + " " + GUILocalizeStrings.Get(10798632); // 10798622 all films // 10798632 (global filter active) 
+               //conf.StrTxtSelect = GUILocalizeStrings.Get(10798622) + " " + GUILocalizeStrings.Get(10798632); // 10798622 all films // 10798632 (global filter active) 
+               conf.StrTxtSelect = GUILocalizeStrings.Get(10798632); // 10798622 all films // 10798632 (global filter active) / Filtered
              }
              else
              {
-               conf.StrTxtSelect = GUILocalizeStrings.Get(10798622); //10798622 all films
+               conf.StrTxtSelect = GUILocalizeStrings.Get(10798622); //10798622 All 
              }
              MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
              break;

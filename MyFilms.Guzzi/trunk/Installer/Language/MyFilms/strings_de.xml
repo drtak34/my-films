@@ -118,7 +118,7 @@
     <String id="10798619">=> {0} Film(e) gefunden in '{1}'</String>
     <String id="10798620">Personen Infos</String>
     <String id="10798621">Zufällige Filmsuche</String>
-    <String id="10798622">Alle Filme</String>
+    <String id="10798622">Alle</String>
     <String id="10798623">(keine Infos)</String>
     <String id="10798624">MyFilms System Information</String>
     <String id="10798625">Kein Ergebnis zu dem gesuchten Wert gefunden!</String>
@@ -128,7 +128,7 @@
     <String id="10798629">aus</String>
     <String id="10798630">Neuer Wert</String>
     <String id="10798631">Zeige Film-Server Status</String>
-    <String id="10798632">(globaler Filter aktiv)</String>
+    <String id="10798632">Globaler Filter</String>
     <String id="10798636">Dateiname</String>
     <String id="10798637">Keine Filme entsprechen der Ansicht !</String>
     <String id="10798638">Zeige Gesamtliste</String>

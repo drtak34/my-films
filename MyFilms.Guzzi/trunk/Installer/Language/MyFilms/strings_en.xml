@@ -118,7 +118,7 @@
     <String id="10798619">=> {0} entry(ies) found for {1}</String>
     <String id="10798620">Person info</String>
     <String id="10798621">Search random films</String>
-    <String id="10798622">All films</String>
+    <String id="10798622">All</String>
     <String id="10798623">(no info)</String>
     <String id="10798624">Films System Information</String>
     <String id="10798625">No result found for this value!</String>
@@ -128,7 +128,7 @@
     <String id="10798629">off</String>
     <String id="10798630">New value</String>
     <String id="10798631">Show NAS Server status</String>
-    <String id="10798632">(global filter active)</String>
+    <String id="10798632">Filtered</String>
     <String id="10798636">Filename</String>
     <String id="10798637">No films match this view!</String>
     <String id="10798638">Show full film list</String>
