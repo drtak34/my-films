@@ -1617,19 +1617,29 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void ButDelet_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this configuration?", "Information", MessageBoxButtons.YesNo,
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this configuration? \n\nYour corresponding AMCupdater configuration and \nyour desktop icon will also be deleted!", "Warning", MessageBoxButtons.YesNo,
             MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                Remove_Config();
-                if ((Config_Name.Text) == XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", ""))
-                    XmlConfig.RemoveEntry("MyFilms", "MyFilms", "Default_Config");
-                if ((Config_Name.Text) == XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", ""))
-                    XmlConfig.RemoveEntry("MyFilms", "MyFilms", "Current_Config");
-                Config_Name.Items.Remove(Config_Name.Text);
-                Refresh_Items(true);
-                Config_Name.ResetText();
-                textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
+              string DeleteName = Config_Name.Text;
+              Remove_Config();
+              if ((Config_Name.Text) == XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "")) XmlConfig.RemoveEntry("MyFilms", "MyFilms", "Default_Config");
+              if ((Config_Name.Text) == XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", "")) XmlConfig.RemoveEntry("MyFilms", "MyFilms", "Current_Config");
+              Config_Name.Items.Remove(Config_Name.Text);
+              Refresh_Items(true);
+              Config_Name.ResetText();
+              textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
+              // Remove desktop Icon and AMCupdater config
+              string deskDir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+              string linkName = "AMC-Updater '" + DeleteName + "'";
+              string shortcutFile = deskDir + @"\AMC-Updater (" + DeleteName + ")" + ".lnk";
+              if (System.IO.File.Exists(deskDir + "\\" + linkName + ".url"))
+                try {System.IO.File.Delete(deskDir + "\\" + linkName + ".url");} catch{}
+              if (System.IO.File.Exists(shortcutFile))
+                try {System.IO.File.Delete(shortcutFile);} catch{}
+              string AMCupdaterConfigFile = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings" + "_" + DeleteName + ".xml";
+              if (System.IO.File.Exists(AMCupdaterConfigFile))
+                try { System.IO.File.Delete(AMCupdaterConfigFile); } catch{}
             }
         }
 
@@ -3670,47 +3680,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           LogMyFilms.Debug("MF: Setup - Successfully created Desktop Icon for '" + linkName + "'");
           if (!WizardActive)
             MessageBox.Show("Successfully created Desktop Icon for " + linkName + "", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-          //WshShellClass shortcut = new WshShellClass())
-          //  {
-          //    shortcut.Target = Application.ExecutablePath;
-          //    shortcut.WorkingDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
-          //    shortcut.Description = "My Shorcut Name Here";
-          //    shortcut.DisplayMode = ShellLink.LinkDisplayMode.edmNormal;
-          //    shortcut.Save(STARTUP_SHORTCUT_FILEPATH);
-          //  }
-
-          //using (System.IO.StreamWriter writer = new System.IO.StreamWriter(deskDir + "\\" + linkName + ".url"))
-          //{
-          //  //string app = System.Reflection.Assembly.GetExecutingAssembly().Location;
-          //  //string app = System.Reflection.Assembly.LoadFile(Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe").Location;
-          //  string app = Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe";
-          //  //string app = Config.GetDirectoryInfo(Config.Dir.Base).ToString() + @"\AMCupdater.exe";
-          //  writer.WriteLine("[InternetShortcut]");
-          //  writer.WriteLine("URL=file:///" + app.Replace(@"\", "/") + argument);
-          //  //String.Format(@"file://{0}", Application.ExecutablePath.Replace(@"\", "/")); 
-          //  writer.WriteLine("IconIndex=0");
-          //  string icon = app.Replace('\\', '/');
-          //  writer.WriteLine("IconFile=" + icon);
-          //  writer.Flush();
-          //  LogMyFilms.Debug("MF: Setup - Successfully created Desktop Icon for '" + linkName + "'");
-          //  DialogResult dialogResult = MessageBox.Show("Successfully created Desktop Icon for '" + linkName + "'", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-          //}
-
-
-          //try
-          //{
-          //    System.IO.File.Copy(shortcutName, desktopPath, true);
-          //}
-
-          //using (interop.ShellLink shortcut = new ShellLink())
-          //{
-          //    shortcut.Target = Application.ExecutablePath;
-          //    shortcut.WorkingDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-          //    shortcut.Description = "My Shorcut Name Here";
-          //    shortcut.DisplayMode = ShellLink.LinkDisplayMode.edmNormal;
-          //    shortcut.Save(STARTUP_SHORTCUT_FILEPATH);
-          //}
         }
 
         /// <summary>
@@ -3921,8 +3890,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntUpdList.Text = String.Empty;
         }
 
-
-    
         private void AntSearchFieldClear_Click(object sender, EventArgs e)
         {
           AntSearchList.Text = String.Empty;
@@ -4162,6 +4129,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           SearchFileName.Checked = true;
 
           cbPictureHandling.Text = "Relative Path";
+
+
+          if (AntTitle1.Text == "TranslatedTitle")
+          {
+            AntSearchList.Text = "TranslatedTitle, OriginalTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
+            AntUpdList.Text = "TranslatedTitle, OriginalTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
+          }
+          if (AntTitle1.Text == "OriginalTitle" || AntTitle1.Text == "FormattedTitle")
+          {
+            AntSearchList.Text = "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
+            AntUpdList.Text = "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
+          }
 
           chkFanart.Checked = true;
           chkFanartDefaultViews.Checked = false;

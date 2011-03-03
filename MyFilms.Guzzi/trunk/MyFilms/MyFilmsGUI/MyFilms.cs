@@ -76,7 +76,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // create Cover image swapper
         cover = new AsyncImageResource();
         cover.Property = "#myfilms.coverimage";
-        cover.Delay = 100;
+        cover.Delay = 125;
       }
       #endregion
 
@@ -857,9 +857,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         // use this code later to set the label of the button
                         
                         if (MyFilms.conf.GlobalUnwatchedOnly)
-                          BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628));
+                          BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798628));
                         else
-                          BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629));
+                          BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798629));
 
                         GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
                         return base.OnMessage(messageType);
@@ -2302,9 +2302,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //Layout = conf.StrLayOut;
 
             if (MyFilms.conf.GlobalUnwatchedOnly)
-              BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798628));
+              BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798628));
             else
-              BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629));
+              BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798629));
             
             if (string.IsNullOrEmpty(conf.CurrentSortMethod))
                 conf.CurrentSortMethod = GUILocalizeStrings.Get(103);

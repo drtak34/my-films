@@ -2470,9 +2470,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
+        //private void CycleSeriesPoster(DBSeries series, bool next)
+        //{
+        //  if (series.PosterList.Count <= 1) return;
+
+        //  int nCurrent = series.PosterList.IndexOf(series.Poster);
+
+        //  if (next)
+        //  {
+        //    nCurrent++;
+        //    if (nCurrent >= series.PosterList.Count)
+        //      nCurrent = 0;
+        //  }
+        //  else
+        //  {
+        //    nCurrent--;
+        //    if (nCurrent < 0)
+        //      nCurrent = series.PosterList.Count - 1;
+        //  }
+
+        //  series.Poster = series.PosterList[nCurrent];
+        //  series.Commit();
+
+        //  // No need to re-load the facade for non-graphical layouts
+        //  if (m_Facade.CurrentLayout == GUIFacadeControl.Layout.List)
+        //    seriesposter.Filename = ImageAllocator.GetSeriesPosterAsFilename(series);
+        //  else
+        //    LoadFacade();
+        //}
+
 
         //-------------------------------------------------------------------------------------------
-        //  Change local COver Image
+        //  Change local Cover Image
         //-------------------------------------------------------------------------------------------        
         public static void ChangeLocalCover(DataRow[] r1, int Index, bool interactive)
         {
@@ -2491,42 +2520,58 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string movieName = "";
           string[] files = null;
           Int64 wsize = 0; // Temporary Filesize detection
+          string startPattern = "";
+          string currentPicture = GUIPropertyManager.GetProperty("picture");
+          if (string.IsNullOrEmpty(currentPicture)) 
+            return;
+          string currentPictureName = currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
+          string currentStorePath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
 
-          directoryname = GUIPropertyManager.GetProperty("picture");
-          directoryname = directoryname.Substring(directoryname.LastIndexOf("\\"));
+          if (!currentPicture.StartsWith(currentStorePath)) 
+            return;
+          if (currentStorePath.EndsWith("\\"))
+            startPattern = "";
+          else 
+            startPattern = currentPicture.Substring(currentPicture.LastIndexOf("\\"), currentStorePath.Length);
+          string searchPattern = currentPicture.Substring(currentStorePath.Length + 1);
+
+          int patternLength2 = 999;
+          int patternLength = searchPattern.LastIndexOf(".");
+          if (searchPattern.Contains("["))
+            patternLength2 = searchPattern.LastIndexOf("[") - 1;
+          if (patternLength2 < patternLength) 
+            patternLength = patternLength2;
+          searchPattern = searchPattern.Substring(0, patternLength);
+          
+          LogMyFilms.Debug("MFD: (ChangeLocalCover) - startPattern = '" + startPattern + "', searchPattern = '" + searchPattern + "', currentStorePath = '" + currentStorePath + "'");
+          
+          directoryname = currentPicture.Substring(currentPicture.LastIndexOf("\\"));
 
           if (!string.IsNullOrEmpty(directoryname))
           {
-            files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
+            files = Directory.GetFiles(directoryname, "*searchPattern*.jpg", SearchOption.TopDirectoryOnly);
             foreach (string filefound in files)
             {
-              if ((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trl")))
-              {
                 wsize = new System.IO.FileInfo(filefound).Length;
                 result.Add(filefound);
                 resultsize.Add(wsize);
                 filesfound[filesfoundcounter] = filefound;
                 filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
                 filesfoundcounter = filesfoundcounter + 1;
-                LogMyFilms.Debug("MF: (TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
-              }
             }
           }
 
-          var sort = from fn in filesfound
-                     orderby new FileInfo(fn).Length descending
-                     select fn;
           foreach (string n in filesfound)
           {
             if (!string.IsNullOrEmpty(n))
-              LogMyFilms.Debug("MF: (Sorted Trailerfiles) ******* : '" + n + "'");
+              LogMyFilms.Debug("MF: (Sorted coverfiles) ******* : '" + n + "'");
           }
 
           Array.Sort(filesfoundsize);
           for (int i = 0; i < result.Count; i++)
           {
             if (!string.IsNullOrEmpty(filesfound[i]))
-              LogMyFilms.Debug("MF: (Sorted Trailerfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
+              LogMyFilms.Debug("MF: (Sorted coverfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
           }
 
           if (result.Count != 0)
@@ -2539,7 +2584,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
           else
-            LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - NO TRAILERS FOUND !!!!");
+            LogMyFilms.Debug("MyFilmsDetails (LocalCoverChange) - NO COVERS FOUND !!!!");
+
+          //string tmpPicturename = newPicture.Substring(newPicture.LastIndexOf("\\") + 1);
+          //if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
+          //{
+          //  newPictureCatalogname = MyFilms.conf.StrPicturePrefix.Substring(0,MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) + tmpPicturename;
+          //}
+          //if (MyFilms.conf.PictureHandling == "Full Path")
+          //{
+          //  newPictureCatalogname = newPicture;
+          //}
+          //if (!choose)
+          //{
+          //  MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
+          //  Update_XML_database();
+          
+
         }
         
 
