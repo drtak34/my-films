@@ -293,11 +293,19 @@
 				<onleft>4</onleft>
 				<onright>50</onright>
 				<onup>4</onup>
-				<ondown>10012</ondown>
+				<ondown>7</ondown>
 				<animation>unfocus</animation>
 				<label>496</label>
 				<textcolor>ff000000</textcolor>
 			</control>
+				<control>
+					<type>button</type>
+					<description>Global Filter Options</description>
+					<id>7</id>
+					<onright>50</onright>
+					<onup>5</onup>
+					<ondown>10012</ondown>
+				</control>
 
 
 <!-- Start - Additional Buttons for Links to other Plugins -->

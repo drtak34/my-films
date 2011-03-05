@@ -1120,20 +1120,10 @@
 					<id>7</id>
 					<onright>50</onright>
 					<onup>5</onup>
-					<ondown>8</ondown>
-					<label>Globale Filter</label>
-				</control>
-				<control>
-					<type>button</type>
-					<description>Global Unwatched Toggle</description>
-					<id>8</id>
-					<onright>50</onright>
-					<onup>7</onup>
 					<ondown>10012</ondown>
 				</control>
 
 <!-- Additional Buttons for Links to other Plugins -->
-
 				<control>
 					<description>Empty</description>
 					<type>button</type>
@@ -1146,13 +1136,20 @@
 					<texture>bg_facade_line_nofocus.png</texture>
 				</control>
 				<control>
+					<description>Separator</description>
+					<type>image</type>
+					<id>0</id>
+					<height>10</height>
+					<texture></texture>
+				</control> 
+				<control>
 					<description>Trailer</description>
 					<type>button</type>
 					<id>10012</id>
 					<hyperlink>5900</hyperlink>
 					<label>Trailer</label>
 					<onright>50</onright>
-					<onup>5</onup>
+					<onup>7</onup>
 					<ondown>10013</ondown>
 					<visible>plugin.isenabled(My Trailers)</visible>
 				</control>

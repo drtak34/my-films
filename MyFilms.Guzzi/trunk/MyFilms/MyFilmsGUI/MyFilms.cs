@@ -213,8 +213,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         [SkinControlAttribute((int)Controls.CTRL_BtnSrtBy)]
         protected GUISortButtonControl BtnSrtBy;
 
-        [SkinControlAttribute((int)Controls.CTRL_ToggleGlobalUnwatchedStatus)]
-        protected GUIButtonControl BtnToggleGlobalWatched;
+        [SkinControlAttribute((int)Controls.CTRL_GlobalOverlayFilter)]
+        protected GUIButtonControl BtnGlobalOverlayFilter;
+
+        //[SkinControlAttribute((int)Controls.CTRL_ToggleGlobalUnwatchedStatus)]
+        //protected GUIButtonControl BtnToggleGlobalWatched;
 
         [SkinControlAttribute((int)Controls.CTRL_List)]
         protected GUIFacadeControl facadeView;
@@ -856,10 +859,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                         // use this code later to set the label of the button
                         
-                        if (MyFilms.conf.GlobalUnwatchedOnly)
-                          BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798628));
-                        else
-                          BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798629));
+                        //if (MyFilms.conf.GlobalUnwatchedOnly)
+                        //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798628));
+                        //else
+                        //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798629));
 
                         GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
                         return base.OnMessage(messageType);
@@ -969,7 +972,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     return true;
                 }
 
-              if (conf.StrTxtSelect == "" || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622))) //"All movies"
+              if (conf.StrTxtSelect == "" || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798632))) //"All" or "Global Filter"
                 {
                   //SetLabelView("all"); // if back on "root", show view as "movies"
                   //SetLabelSelect("root");
@@ -1672,6 +1675,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         private void Change_Global_Filters()
         {
+          Context_Menu = true; // make sure, it's set, as otherwise we fall back to first menu level ...
           GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           if (dlg1 == null) return;
           dlg1.Reset();
@@ -2301,11 +2305,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             //Layout = conf.StrLayOut;
 
-            if (MyFilms.conf.GlobalUnwatchedOnly)
-              BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798628));
-            else
-              BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798629));
-            
+            //if (MyFilms.conf.GlobalUnwatchedOnly)
+            //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798628));
+            //else
+            //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798629));
             if (string.IsNullOrEmpty(conf.CurrentSortMethod))
                 conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
             else
@@ -2324,6 +2327,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else
                 getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, false, ""); // preserve index from last time
               LogMyFilms.Debug("MF: (Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
+              //if (string.IsNullOrEmpty(conf.StrTxtView)) // make sure it's set to "Films" if not yet initialized
+              //  conf.StrTxtView = "all";
               SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
             }
             else
@@ -2336,7 +2341,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else                                        // Defaultview selected
                 {
-                    if (string.IsNullOrEmpty(conf.StrViewDfltItem) || (conf.StrViewDfltItem == "(none)")) // no Defaultitem defined for defaultview -> normal movielist
+                  if (string.IsNullOrEmpty(conf.StrViewDfltItem) || conf.StrViewDfltItem == "(none)" || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
                     {
                         conf.StrSelect = conf.StrTitle1 + " not like ''";
 //                        TxtSelect.Label = conf.StrTxtSelect = "";
@@ -3221,9 +3226,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 // Enable/disable global overlay filter could be added here for faster access ?
                 // ...
-                dlg.Add(GUILocalizeStrings.Get(10798687)); // "global filters ..."
-                upd_choice[ichoice] = "globalfilters";
-                ichoice++;
+                //dlg.Add(GUILocalizeStrings.Get(10798687)); // "global filters ..."
+                //upd_choice[ichoice] = "globalfilters";
+                //ichoice++;
 
                 if (MyFilmsDetail.ExtendedStartmode("Context: IMDB Trailer and Pictures")) // check if specialmode is configured for disabled features
                 {
@@ -4011,6 +4016,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Debug("MF: Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
 
                     Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
+                    //Context_Menu = false;
                     return;
 
             }
@@ -5521,6 +5527,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             backdrop.GUIImageTwo = ImgFanart2;
             backdrop.LoadingImage = loadingImage;
 
+            BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798687); // Global Filters ...
+
             //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge ->> This fucked up the fanart swapper !!!!!
             //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge
 
@@ -6152,7 +6160,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
        {
          string newViewLabel = viewLabel; // use the parameter as default ...
          viewLabel = viewLabel.ToLower();
-         if (viewLabel == GUILocalizeStrings.Get(342).ToLower()) // case "films" should show allshow all filmes
+         if (viewLabel == GUILocalizeStrings.Get(342).ToLower() || string.IsNullOrEmpty(viewLabel)) // case "films" or empty should show "all" = "filmes"
            viewLabel = "all";
          switch (viewLabel)
          {

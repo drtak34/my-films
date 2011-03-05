@@ -1434,6 +1434,7 @@
           // 
           // txtPicturePrefix
           // 
+          this.txtPicturePrefix.Enabled = false;
           this.txtPicturePrefix.Location = new System.Drawing.Point(583, 14);
           this.txtPicturePrefix.Name = "txtPicturePrefix";
           this.txtPicturePrefix.Size = new System.Drawing.Size(146, 20);
@@ -1454,8 +1455,7 @@
           this.cbPictureHandling.FormattingEnabled = true;
           this.cbPictureHandling.Items.AddRange(new object[] {
             "Full Path",
-            "Relative Path",
-            "Use Folder.jpg"});
+            "Relative Path"});
           this.cbPictureHandling.Location = new System.Drawing.Point(599, 41);
           this.cbPictureHandling.Name = "cbPictureHandling";
           this.cbPictureHandling.Size = new System.Drawing.Size(130, 21);

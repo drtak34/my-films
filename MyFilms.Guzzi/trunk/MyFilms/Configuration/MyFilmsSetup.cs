@@ -4057,8 +4057,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           CatalogType.SelectedIndex = 0; // can be "7" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
 
-          // Ask user to create new or use existing catalog...
-          if (System.Windows.Forms.MessageBox.Show("Do you want to create a new empty catalog? \n(If you select no, you will be asked to select path to your existing catalog file.)", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+          // Ask user to select existing or create new catalog...
+          if (System.Windows.Forms.MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+          {
+            // Ask User for existing database file
+            newCatalog = false;
+            openFileDialog1.FileName = String.Empty;
+            if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\"))
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\";
+            else
+              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.DefaultExt = "xml";
+            openFileDialog1.Filter = "XML Files|*.xml";
+            openFileDialog1.Title = "Find AMC Movies file (xml file)";
+            openFileDialog1.CheckFileExists = false;
+            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+              Control_Database(openFileDialog1.FileName);
+            }
+          }
+          else
           {
             string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
             if (!System.IO.Directory.Exists(CatalogDirectory))
@@ -4088,20 +4107,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               if (MesFilmsImg.Text.Length == 0)
                 MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
             newCatalog = true;
-          }
-          else
-          {
-            // Ask User for existing database file
-            newCatalog = false;
-            openFileDialog1.RestoreDirectory = true;
-            openFileDialog1.DefaultExt = "xml";
-            openFileDialog1.Filter = "XML Files|*.xml";
-            openFileDialog1.Title = "Find AMC Movies file (xml file)";
-            openFileDialog1.CheckFileExists = false;
-            if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-            {
-              Control_Database(openFileDialog1.FileName);
-            }
           }
 
           // Set values and Presets ...
@@ -4217,7 +4222,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           // Now ask user for his movie directory...
           MessageBox.Show(
-            "Now choose the directory containing your movies.",
+            "Now choose the folder containing your movies.",
             "Control Configuration",
             MessageBoxButtons.OK,
             MessageBoxIcon.Information);
@@ -4274,7 +4279,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Save_Config();
           //Config_Name.Focus();
           System.Windows.Forms.MessageBox.Show(
-            "Successfully created a new Configuration with default settings ! \nPlease Review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \n AMC Updater will be autostarted, if you created an empty catalog. ",
+            "Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.",
             "Control Configuration",
             MessageBoxButtons.OK,
             MessageBoxIcon.Exclamation);

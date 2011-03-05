@@ -229,7 +229,9 @@ There are 3 possible scenarios:
 This setting is used, if you grab new pictures with MyFilms to determine the location where to store them.</value>
   </data>
   <data name="cbPictureHandling.ToolTip" xml:space="preserve">
-    <value>You can define how cover images are stored to your catalog.
+    <value>This defines how cover images are stored to your catalog.
+THe setting cannot directly be modified - MyFilms automatically sets it based on settings 
+you choose for your catalog path, your Picture prefix and the path you select as "Cover Image Path".
 
 Options:
 Full Path - stores the full path in the catalog. 
