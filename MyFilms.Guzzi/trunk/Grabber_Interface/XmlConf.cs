@@ -204,12 +204,13 @@ public class TagName
   public static string KeyEndLink = "KeyEndLink";
   public static string KeyStartBody = "KeyStartBody";
   public static string KeyEndBody = "KeyEndBody";
-  public static string KeyStartOTitle = "KeyStartOTitle";       // TranslatedTitle
+  public static string KeyStartOTitle = "KeyStartOTitle";       // Original Title
   public static string KeyEndOTitle = "KeyEndOTitle";
   public static string KeyOTitleIndex = "KeyOTitleIndex";
-  public static string KeyStartTTitle = "KeyStartTTitle";       // Original Title
+  public static string KeyStartTTitle = "KeyStartTTitle";       // TranslatedTitle
   public static string KeyEndTTitle = "KeyEndTTitle";
-  public static string KeyTTitleIndex = "KeyTTitleIndex"; 
+  public static string KeyTTitleIndex = "KeyTTitleIndex";
+  public static string KeyTTitleRegExp = "KeyTTitleRegExp";
   public static string KeyStartImg = "KeyStartImg";             // Cover Image
   public static string KeyEndImg = "KeyEndImg";
   public static string KeyImgIndex = "KeyImgIndex";
@@ -228,18 +229,22 @@ public class TagName
   public static string KeyStartRealise = "KeyStartRealise";     // Director
   public static string KeyEndRealise = "KeyEndRealise";
   public static string KeyRealiseIndex = "KeyRealiseIndex";
+  public static string KeyRealiseRegExp = "KeyRealiseRegExp";
   public static string KeyStartProduct = "KeyStartProduct";     // Producer
   public static string KeyEndProduct = "KeyEndProduct";
   public static string KeyProductIndex = "KeyProductIndex";
+  public static string KeyProductRegExp = "KeyProductRegExp";
   public static string KeyStartCredits = "KeyStartCredits";     // Credits / Actors
   public static string KeyEndCredits = "KeyEndCredits";
   public static string KeyCreditsIndex = "KeyCreditsIndex";
   public static string KeyCreditsRegExp = "KeyCreditsRegExp";
   public static string KeyStartCountry = "KeyStartCountry";     // Country
   public static string KeyEndCountry = "KeyEndCountry";
+  public static string KeyCountryRegExp = "KeyCountryRegExp";
   public static string KeyCountryIndex = "KeyCountryIndex";
   public static string KeyStartGenre = "KeyStartGenre";         // Genre/Categories
   public static string KeyEndGenre = "KeyEndGenre";
+  public static string KeyGenreRegExp = "KeyGenreRegExp";
   public static string KeyGenreIndex = "KeyGenreIndex";
   public static string BaseRating = "BaseRating";               // Baserating
   // Guzzi: Added to extend Grabber
@@ -250,6 +255,7 @@ public class TagName
 
   public static string KeyStartComment = "KeyStartComment";     // Comment
   public static string KeyEndComment = "KeyEndComment";
+  public static string KeyCommentRegExp = "KeyCommentRegExp";
   public static string KeyCommentIndex = "KeyCommentIndex";
   public static string KeyStartLanguage = "KeyStartLanguage";     // Language
   public static string KeyEndLanguage = "KeyEndLanguage";
@@ -259,6 +265,7 @@ public class TagName
   public static string KeyTaglineIndex = "KeyTaglineIndex";
   public static string KeyStartCertification = "KeyStartCertification";     // Certification
   public static string KeyEndCertification = "KeyEndCertification";
+  public static string KeyCertificationRegExp = "KeyCertificationRegExp";
   public static string KeyCertificationIndex = "KeyCertificationIndex";
 }
 

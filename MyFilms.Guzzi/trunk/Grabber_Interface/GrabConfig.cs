@@ -797,6 +797,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTTitle)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTTitle)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndTTitle)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleIndex)._Value;
           break;
         case 3: // Coverimage
@@ -842,6 +847,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRealise)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartRealise)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndRealise)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseIndex)._Value;
           break;
         case 8: // Producer
@@ -849,6 +859,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartProduct)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartProduct)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndProduct)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductIndex)._Value;
           break;
         case 9: // Actors (Credits)
@@ -868,6 +883,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCountry)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCountry)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndCountry)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCountryRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCountryIndex)._Value;
           break;
         case 11: // Categories / Genre
@@ -875,6 +895,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndGenre)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyGenreRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyGenreIndex)._Value;
           break;
         case 12: // Year
@@ -903,6 +928,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartComment)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartComment)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndComment)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCommentRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCommentIndex)._Value;
           break;
         case 16: // Language
@@ -924,6 +954,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndCertification)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationIndex)._Value;
           break;
         default:
@@ -1366,11 +1401,32 @@ namespace Grabber_Interface
       switch (cb_ParamDetail.SelectedIndex)
       {
         case 4:
-        case 5:
+        case 5: 
           xmlConf.find(xmlConf.listDetail, TagName.BaseRating)._Value = textComplement.Text;
+          break;
+        case 2:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleRegExp)._Value = textComplement.Text;
+          break;
+        case 7:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseRegExp)._Value = textComplement.Text;
+          break;
+        case 8:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyProductRegExp)._Value = textComplement.Text;
           break;
         case 9:
           xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsRegExp)._Value = textComplement.Text;
+          break;
+        case 10:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCountryRegExp)._Value = textComplement.Text;
+          break;
+        case 11:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyGenreRegExp)._Value = textComplement.Text;
+          break;
+        case 15:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCommentRegExp)._Value = textComplement.Text;
+          break;
+        case 18:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationRegExp)._Value = textComplement.Text;
           break;
         default:
           break;

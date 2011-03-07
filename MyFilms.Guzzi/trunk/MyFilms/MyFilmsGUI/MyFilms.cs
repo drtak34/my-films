@@ -960,7 +960,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (conf.StrTitleSelect == "")
             {
               if (conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(1079870)) || (conf.StrTxtSelect == "" && conf.Boolselect) || conf.Boolview) //original code block refactored // 1079870 = "Selection"
-                {//jump back to main full list  
+                {
                     conf.Boolselect = false;
                     conf.Boolview = false;
                     conf.Boolreturn = false;
@@ -969,14 +969,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GetFilmList();
                     SetLabelView("all"); // if back on "root", show view as "movies"
                     SetLabelSelect("root");
-                    return true;
+                    return true; //jump back to main full list  
                 }
 
               if (conf.StrTxtSelect == "" || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798632))) //"All" or "Global Filter"
                 {
-                  //SetLabelView("all"); // if back on "root", show view as "movies"
-                  //SetLabelSelect("root");
-                  return false;
+                  return false; //this was already "root" view - so jumping back should leave the plugin !
                 }
                 else
                 {   // Jump back to prev view_display (categorised by year, genre etc) // Removed ACTORS special handling
