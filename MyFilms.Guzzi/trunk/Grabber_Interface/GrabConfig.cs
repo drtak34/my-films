@@ -18,6 +18,7 @@ using System.Reflection;
 namespace Grabber_Interface
 {
   using MediaPortal.Configuration;
+  using MediaPortal.Util;
 
   public partial class GrabConfig : Form
   {
@@ -505,6 +506,7 @@ namespace Grabber_Interface
 
       if (cb_Parameter.SelectedIndex > 0 && TextKeyStop.Text.Length > 0)
         textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text);
+      // ToDo: Also mark Regex selection on Textbody
 
     }
 
@@ -685,7 +687,6 @@ namespace Grabber_Interface
             iStart += xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value.Length;
             BodyDetail = BodyDetail.Substring(iStart, iEnd - iStart);
             textBodyDetail.Text = BodyDetail;
-
           }
           else
             textBodyDetail.Text = BodyDetail;
@@ -716,29 +717,67 @@ namespace Grabber_Interface
 
     }
 
-    private void textBodyDetail_NewSelection(string starttext, string endtext, int bodystart)
+    private void textBodyDetail_NewSelection(string starttext, string endtext, int bodystart, string param1)
     {
 
       if (textBodyDetail.Text.Length > 0 && starttext.Length > 0 && endtext.Length > 0)
       {
         GLbBlockSelect = true;
-        int iStart = -1;
-        int iEnd = -1;
-        try
-        {
-          iStart = textBodyDetail.Text.IndexOf(starttext, bodystart) + starttext.Length;
-          iEnd = textBodyDetail.Find(endtext, iStart, RichTextBoxFinds.None);
-        }
-        catch
-        {
-          MessageBox.Show("Cannot find searchtext with given parameter, please change !", "Error");
-        }
 
-        if (iStart == -1)
-          iStart = 0;
-        if (iEnd == -1)
-          iEnd = 0;
+        int iStart = 0;
+        int iEnd = 0;
+        int iLength = 0;
 
+        string strTemp = String.Empty;
+        HTMLUtil htmlUtil = new HTMLUtil();
+        bool bregexs = false;
+        bool bregexe = false;
+        if (starttext.StartsWith("#REGEX#"))
+            bregexs = true;
+        if (endtext.StartsWith("#REGEX#"))
+            bregexe = true;
+
+        if (starttext != "" && endtext != "")
+        {
+          iLength = starttext.Length;
+          if (param1.StartsWith("#REVERSE#"))
+          {
+            if (bregexs) iStart = GrabUtil.FindRegEx(textBodyDetail.Text, starttext, iStart, ref iLength, false);
+            else iStart = textBodyDetail.Text.LastIndexOf(starttext);
+          }
+          else if (bregexs) iStart = GrabUtil.FindRegEx(textBodyDetail.Text, starttext, iStart, ref iLength, true);
+          else iStart = textBodyDetail.Text.IndexOf(starttext);
+
+          if (iStart > 0)
+          {
+            if (param1.StartsWith("#REVERSE#"))
+            {
+              iLength = endtext.Length;
+              if (bregexe) iEnd = GrabUtil.FindRegEx(textBodyDetail.Text, endtext, iStart, ref iLength, false) + iStart;
+              else iEnd = textBodyDetail.Text.LastIndexOf(endtext, iStart);
+            }
+            else
+            {
+              iStart += iLength;
+              if (bregexe) iEnd = GrabUtil.FindRegEx(textBodyDetail.Text, endtext, iStart, ref iLength, true) + iStart;
+              else iEnd = textBodyDetail.Text.IndexOf(endtext, iStart);
+            }
+          }
+        }
+        // Old method (not using regex)
+        //try
+        //{
+        //  iStart = textBodyDetail.Text.IndexOf(starttext, bodystart) + starttext.Length;
+        //  iEnd = textBodyDetail.Find(endtext, iStart, RichTextBoxFinds.None);
+        //}
+        //catch
+        //{
+        //  MessageBox.Show("Cannot find searchtext with given parameter, please change !", "Error");
+        //}
+        //if (iStart == -1)
+        //  iStart = 0;
+        //if (iEnd == -1)
+        //  iEnd = 0;
 
         textBodyDetail.Select(iStart, iEnd - iStart);
 
@@ -758,10 +797,7 @@ namespace Grabber_Interface
 
         GLbBlockSelect = false;
         textBodyDetail_SelectionChanged(null, null);
-
       }
-
-
     }
 
     private void cbParamDetail_SelectedIndexChanged(object sender, EventArgs e)
@@ -995,7 +1031,7 @@ namespace Grabber_Interface
 
     private void textKeyStartD_TextChanged(object sender, EventArgs e)
     {
-      if (GLbBlock == true)
+      if (GLbBlock)
         return;
 
       int iStart;
@@ -1007,10 +1043,10 @@ namespace Grabber_Interface
           if (TextKeyStartD.Text.Length > 0)
           {
             iStart = BodyDetail.IndexOf(TextKeyStartD.Text);
-            //Si la clé de début a été trouvé
+            //If the key was found early
             if (iStart > 0)
             {
-              //Si une clé de fin a été paramétrée, on l'utilise si non on prend le reste du body
+              //If a key purpose has been set, it is used if no one takes the rest of the body
               if (TextKeyStopD.Text != "")
               {
                 iEnd = BodyDetail.IndexOf(TextKeyStopD.Text, iStart);
@@ -1021,7 +1057,7 @@ namespace Grabber_Interface
               if (iEnd == -1)
                 iEnd = BodyDetail.Length;
 
-              //Découpage du body
+              //Cutting the Body
               iStart += TextKeyStartD.Text.Length;
               textBodyDetail.Text = BodyDetail.Substring(iStart, iEnd - iStart);
 
@@ -1092,7 +1128,7 @@ namespace Grabber_Interface
       }
 
       if (cb_ParamDetail.SelectedIndex > 0 && TextKeyStopD.Text.Length > 0)
-        textBodyDetail_NewSelection(TextKeyStartD.Text, TextKeyStopD.Text, ExtractBody(textBodyDetail.Text, Index.Text));
+        textBodyDetail_NewSelection(TextKeyStartD.Text, TextKeyStopD.Text, ExtractBody(textBodyDetail.Text, Index.Text), textDReplace.Text); // Added textDReplace = param1
     }
 
     private void TextKeyStopD_TextChanged(object sender, EventArgs e)
@@ -1193,7 +1229,7 @@ namespace Grabber_Interface
 
       if (cb_ParamDetail.SelectedIndex > 0)
       {
-        textBodyDetail_NewSelection(TextKeyStartD.Text, TextKeyStopD.Text, ExtractBody(textBodyDetail.Text, Index.Text));
+        textBodyDetail_NewSelection(TextKeyStartD.Text, TextKeyStopD.Text, ExtractBody(textBodyDetail.Text, Index.Text), textDReplace.Text);
       }
     }
 
