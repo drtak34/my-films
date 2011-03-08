@@ -56,9 +56,12 @@
     <String id="5910">Lade Filminformationen (online)</String>
     <String id="6022">Film Datenbank Auswahl</String>
     <String id="6029">Ändern</String>
-    <String id="7986">Filme</String>
-    <String id="7987">Filme</String>
-    <String id="7988">Filme</String>
+    <String id="7986">Films Übersicht</String>
+    <String id="7987">Films Details</String>
+    <String id="7988">Films Bewertung</String>
+    <String id="7989">Films Personen</String>
+    <String id="7990">Films Thumbs</String>
+    <String id="7991">Films Personen Info</String>
     <String id="200026">Land</String>
     <String id="200027">Gesehen</String>
     <String id="200028">gesehen</String>

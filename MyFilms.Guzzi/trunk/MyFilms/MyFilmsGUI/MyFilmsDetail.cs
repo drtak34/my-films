@@ -201,7 +201,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public override string GetModuleName()
         {
-          return GUILocalizeStrings.Get(ID_MyFilmsDetail); // return localized string for dialog's ID
+          return GUILocalizeStrings.Get(ID_MyFilmsDetail); // return localized string for Module ID
         }
 
         public override bool Init()

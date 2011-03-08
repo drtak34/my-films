@@ -177,6 +177,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             set { base.GetID = value; }
         }
 
+        public override string GetModuleName()
+        {
+          return GUILocalizeStrings.Get(ID_MyFilmsActors); // return localized string for Modul ID
+        }
+
         public override bool Init()
         {
             return Load(GUIGraphicsContext.Skin + @"\MyFilmsActors.xml");

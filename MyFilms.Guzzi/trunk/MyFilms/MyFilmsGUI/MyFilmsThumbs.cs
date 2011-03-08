@@ -132,6 +132,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return this.ID_MyFilmsThumbs; }
             set { base.GetID = value; }
         }
+
+        public override string GetModuleName()
+        {
+          return GUILocalizeStrings.Get(ID_MyFilmsThumbs); // return localized string for Modul ID
+        }
+
         public override bool Init()
         {
             return Load(GUIGraphicsContext.Skin + @"\MyFilmsThumbs.xml");

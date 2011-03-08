@@ -71,6 +71,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private int selectedItemIndex = -1;
         View currentView = View.Icons;
         private List<string> list;
+        public int ID_MyFilmsActorsInfo = 7991;
 
         enum View : int
         {
@@ -106,6 +107,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public MyFilmsActorInfo()
         {
             GetID = (int)7991;
+        }
+
+        public override string GetModuleName()
+        {
+          return GUILocalizeStrings.Get(ID_MyFilmsActorsInfo); // return localized string for dialog's ID
         }
 
         public override bool Init()

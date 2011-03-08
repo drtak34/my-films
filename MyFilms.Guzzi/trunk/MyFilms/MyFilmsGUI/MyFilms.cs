@@ -320,6 +320,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get {return ID_MyFilms;}
         }
 
+        public override string GetModuleName()
+        {
+          return GUILocalizeStrings.Get(ID_MyFilms); // return localized string for Module ID
+        }
+
         public override bool Init()
         //This Method is only loaded ONCE when starting Mediaportal !!!
         {
