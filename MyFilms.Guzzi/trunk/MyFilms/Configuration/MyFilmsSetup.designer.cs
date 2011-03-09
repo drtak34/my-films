@@ -1434,7 +1434,6 @@
           // 
           // txtPicturePrefix
           // 
-          this.txtPicturePrefix.Enabled = false;
           this.txtPicturePrefix.Location = new System.Drawing.Point(583, 14);
           this.txtPicturePrefix.Name = "txtPicturePrefix";
           this.txtPicturePrefix.Size = new System.Drawing.Size(146, 20);

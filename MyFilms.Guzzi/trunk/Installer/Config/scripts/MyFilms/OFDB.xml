@@ -32,6 +32,9 @@
       <KeyStartTTitle Param1="" Param2="">_x0028_IMDb_x0029_</KeyStartTTitle>
       <KeyEndTTitle>_x003C__x002F_b_x003E__x003C__x002F_font_x003E__x003C__x002F_h2_x003E__x003C__x002F_td_x003E_</KeyEndTTitle>
       <KeyTTitleIndex />
+      <KeyTTitleRegExp />
+      <KeyTTitleMaxItems />
+      <KeyTTitleLanguage />
       <KeyStartImg Param1="" Param2="">_x0009__x0020__x0020__x003C_img_x0020_src_x003D__x0022_</KeyStartImg>
       <KeyEndImg>_x0022_</KeyEndImg>
       <KeyImgIndex />
@@ -51,28 +54,36 @@
       <KeyStartRealise Param1="_x003C__x002F_a_x003E_" Param2="_x002C__x0020_">Regie:</KeyStartRealise>
       <KeyEndRealise>_x003C__x002F_a_x003E__x003C_br_x003E__x003C__x002F_b_x003E__x003C_</KeyEndRealise>
       <KeyRealiseIndex />
+      <KeyRealiseRegExp />
+      <KeyRealiseMaxItems />
       <KeyStartProduct Param1="_x003C__x002F_a_x003E_" Param2="_x002C__x0020_" />
       <KeyEndProduct />
       <KeyProductIndex />
+      <KeyProductRegExp />
+      <KeyProductMaxItems />
       <KeyStartCredits Param1="_x003C__x002F_a_x003E_" Param2="_x002C__x0020_">Darsteller:</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_a_x003E__x003C_br_x003E__x003C_font_x0020_style_x003D__x0022_</KeyEndCredits>
       <KeyCreditsIndex />
       <KeyCreditsRegExp />
+      <KeyCreditsMaxItems />
       <KeyStartCountry Param1="_x003C__x002F_a_x003E_" Param2="_x002C__x0020_">Herstellungsland:</KeyStartCountry>
       <KeyEndCountry>_x003C__x002F_a_x003E__x003C_</KeyEndCountry>
       <KeyCountryIndex />
+      <KeyCountryRegExp />
       <KeyStartGenre Param1="_x003C__x002F_a_x003E_" Param2="_x002C__x0020_">Genre_x0028_s_x0029_:</KeyStartGenre>
       <KeyEndGenre>_x003E__x003C_br_x003E__x003C__x002F_b_x003E__x003C__x002F_</KeyEndGenre>
       <KeyGenreIndex />
+      <KeyGenreRegExp />
       <KeyStartYear Param1="" Param2="">Erscheinungsjahr:</KeyStartYear>
       <KeyEndYear>_x003C__x002F_a_x003E__x003C__x002F_</KeyEndYear>
       <KeyYearIndex />
-      <KeyStartLinkMultipurpose Param1="" Param2="" />
-      <KeyEndLinkMultipurpose />
-      <KeyLinkMultipurposeIndex />
+      <KeyStartLinkPersons Param1="" Param2="" />
+      <KeyEndLinkPersons />
+      <KeyLinkPersonsIndex />
       <KeyStartComment Param1="" Param2="" />
       <KeyEndComment />
       <KeyCommentIndex />
+      <KeyCommentRegExp />
       <KeyStartLanguage Param1="" Param2="" />
       <KeyEndLanguage />
       <KeyLanguageIndex />
@@ -82,6 +93,14 @@
       <KeyStartCertification Param1="" Param2="" />
       <KeyEndCertification />
       <KeyCertificationIndex />
+      <KeyCertificationRegExp />
+      <KeyCertificationLanguage />
+      <KeyStartLinkTitles Param1="" Param2="" />
+      <KeyEndLinkTitles />
+      <KeyLinkTitlesIndex />
+      <KeyStartLinkCertification Param1="" Param2="" />
+      <KeyEndLinkCertification />
+      <KeyLinkCertificationIndex />
     </Details>
   </Section>
 </Profile>

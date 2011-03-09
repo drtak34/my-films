@@ -33,6 +33,8 @@
       <KeyEndTTitle />
       <KeyTTitleRegExp />
       <KeyTTitleIndex />
+      <KeyTTitleMaxItems />
+      <KeyTTitleLanguage />
       <KeyStartImg Param1="" Param2="" />
       <KeyEndImg />
       <KeyImgIndex />
@@ -51,16 +53,19 @@
       <KeySynIndex />
       <KeyStartRealise Param1="" Param2="" />
       <KeyEndRealise />
-      <KeyRealiseRegExp />
       <KeyRealiseIndex />
+      <KeyRealiseRegExp />
+      <KeyRealiseMaxItems />
       <KeyStartProduct Param1="" Param2="" />
       <KeyEndProduct />
-      <KeyProductRegExp />
       <KeyProductIndex />
+      <KeyProductRegExp />
+      <KeyProductMaxItems />
       <KeyStartCredits Param1="" Param2="" />
       <KeyEndCredits />
       <KeyCreditsRegExp />
       <KeyCreditsIndex />
+      <KeyCreditsMaxItems />
       <KeyStartCountry Param1="" Param2="" />
       <KeyEndCountry />
       <KeyCountryRegExp />
@@ -72,9 +77,9 @@
       <KeyStartYear Param1="" Param2="" />
       <KeyEndYear />
       <KeyYearIndex />
-      <KeyStartLinkMultipurpose Param1="" Param2="" />
-      <KeyEndLinkMultipurpose />
-      <KeyLinkMultipurposeIndex />
+      <KeyStartLinkPersons Param1="" Param2="" />
+      <KeyEndLinkPersons />
+      <KeyLinkPersonsIndex />
       <KeyStartComment Param1="" Param2="" />
       <KeyEndComment />
       <KeyCommentRegExp />
@@ -89,6 +94,13 @@
       <KeyEndCertification />
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
+      <KeyCertificationLanguage />
+      <KeyStartLinkTitles Param1="" Param2="" />
+      <KeyEndLinkTitles />
+      <KeyLinkTitlesIndex />
+      <KeyStartLinkCertification Param1="" Param2="" />
+      <KeyEndLinkCertification />
+      <KeyLinkCertificationIndex />
     </Details>
   </Section>
 </Profile>

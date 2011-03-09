@@ -75,6 +75,7 @@ namespace Grabber_Interface
           this.TextURL = new System.Windows.Forms.TextBox();
           this.label4 = new System.Windows.Forms.Label();
           this.tabPageDetailPage = new System.Windows.Forms.TabPage();
+          this.button_Load_File = new System.Windows.Forms.Button();
           this.label21 = new System.Windows.Forms.Label();
           this.labelImageSize = new System.Windows.Forms.Label();
           this.btnLoadDetailPreview = new System.Windows.Forms.Button();
@@ -121,7 +122,10 @@ namespace Grabber_Interface
           this.button2 = new System.Windows.Forms.Button();
           this.button3 = new System.Windows.Forms.Button();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
-          this.button_Load_File = new System.Windows.Forms.Button();
+          this.textMaxItems = new System.Windows.Forms.TextBox();
+          this.lblMaxItems = new System.Windows.Forms.Label();
+          this.lblLanguages = new System.Windows.Forms.Label();
+          this.textLanguages = new System.Windows.Forms.TextBox();
           this.tabControl1.SuspendLayout();
           this.tabPageSearchPage.SuspendLayout();
           this.groupBox6.SuspendLayout();
@@ -461,6 +465,8 @@ namespace Grabber_Interface
           // 
           // tabPageDetailPage
           // 
+          this.tabPageDetailPage.Controls.Add(this.textLanguages);
+          this.tabPageDetailPage.Controls.Add(this.lblLanguages);
           this.tabPageDetailPage.Controls.Add(this.button_Load_File);
           this.tabPageDetailPage.Controls.Add(this.label21);
           this.tabPageDetailPage.Controls.Add(this.labelImageSize);
@@ -481,6 +487,13 @@ namespace Grabber_Interface
           resources.ApplyResources(this.tabPageDetailPage, "tabPageDetailPage");
           this.tabPageDetailPage.Name = "tabPageDetailPage";
           this.tabPageDetailPage.UseVisualStyleBackColor = true;
+          // 
+          // button_Load_File
+          // 
+          resources.ApplyResources(this.button_Load_File, "button_Load_File");
+          this.button_Load_File.Name = "button_Load_File";
+          this.button_Load_File.UseVisualStyleBackColor = true;
+          this.button_Load_File.Click += new System.EventHandler(this.button_Load_File_Click);
           // 
           // label21
           // 
@@ -575,6 +588,8 @@ namespace Grabber_Interface
           // 
           // groupBox4
           // 
+          this.groupBox4.Controls.Add(this.lblMaxItems);
+          this.groupBox4.Controls.Add(this.textMaxItems);
           this.groupBox4.Controls.Add(this.btResetDetail);
           this.groupBox4.Controls.Add(this.label18);
           this.groupBox4.Controls.Add(this.Index);
@@ -712,7 +727,9 @@ namespace Grabber_Interface
             resources.GetString("cb_ParamDetail.Items15"),
             resources.GetString("cb_ParamDetail.Items16"),
             resources.GetString("cb_ParamDetail.Items17"),
-            resources.GetString("cb_ParamDetail.Items18")});
+            resources.GetString("cb_ParamDetail.Items18"),
+            resources.GetString("cb_ParamDetail.Items19"),
+            resources.GetString("cb_ParamDetail.Items20")});
           resources.ApplyResources(this.cb_ParamDetail, "cb_ParamDetail");
           this.cb_ParamDetail.Name = "cb_ParamDetail";
           this.toolTip1.SetToolTip(this.cb_ParamDetail, resources.GetString("cb_ParamDetail.ToolTip"));
@@ -833,12 +850,28 @@ namespace Grabber_Interface
           this.pictureBoxPreviewCover.TabStop = false;
           this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
           // 
-          // button_Load_File
+          // textMaxItems
           // 
-          resources.ApplyResources(this.button_Load_File, "button_Load_File");
-          this.button_Load_File.Name = "button_Load_File";
-          this.button_Load_File.UseVisualStyleBackColor = true;
-          this.button_Load_File.Click += new System.EventHandler(this.button_Load_File_Click);
+          resources.ApplyResources(this.textMaxItems, "textMaxItems");
+          this.textMaxItems.Name = "textMaxItems";
+          this.textMaxItems.TextChanged += new System.EventHandler(this.textMaxItems_TextChanged);
+          // 
+          // lblMaxItems
+          // 
+          resources.ApplyResources(this.lblMaxItems, "lblMaxItems");
+          this.lblMaxItems.Name = "lblMaxItems";
+          // 
+          // lblLanguages
+          // 
+          resources.ApplyResources(this.lblLanguages, "lblLanguages");
+          this.lblLanguages.Name = "lblLanguages";
+          // 
+          // textLanguages
+          // 
+          resources.ApplyResources(this.textLanguages, "textLanguages");
+          this.textLanguages.Name = "textLanguages";
+          this.toolTip1.SetToolTip(this.textLanguages, resources.GetString("textLanguages.ToolTip"));
+          this.textLanguages.TextChanged += new System.EventHandler(this.textLanguages_TextChanged);
           // 
           // GrabConfig
           // 
@@ -978,6 +1011,10 @@ namespace Grabber_Interface
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button_Load_File;
+        private System.Windows.Forms.Label lblMaxItems;
+        private System.Windows.Forms.TextBox textMaxItems;
+        private System.Windows.Forms.TextBox textLanguages;
+        private System.Windows.Forms.Label lblLanguages;
 
     }
 }

@@ -1940,20 +1940,6 @@
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB-akas-combined.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{483a0450-6066-4a90-b447-e8697abcc8a9}-IMDB-akas-combined.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-akas-combined.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB-akas.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{d93baa05-50e4-4cd5-9955-20d67b17fd17}-IMDB-akas.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-akas.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\IMDB-longactors.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{7b2b844e-b7e4-49d1-a045-1d02c72952df}-IMDB-longactors.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB-longactors.xml</DestinationFilename>
@@ -1964,13 +1950,6 @@
               <LocalFileName>Config\scripts\MyFilms\IMDB.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{0cf0db21-53d5-42e8-8b31-c5496ba6e945}-IMDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\MovieGoods_Big_Thumb.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{ac8c7701-f440-4da1-8c54-df55ac82ae6e}-MovieGoods_Big_Thumb.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\MovieGoods_Big_Thumb.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -2317,7 +2296,7 @@ Some functions will not be available or work properly, if older versions are ins
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>37</Revision>
+      <Revision>39</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2325,7 +2304,7 @@ Some functions will not be available or work properly, if older versions are ins
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.37.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.39.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -4260,20 +4239,6 @@ Some functions will not be available or work properly, if older versions are ins
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB-akas-combined.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{483a0450-6066-4a90-b447-e8697abcc8a9}-IMDB-akas-combined.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-akas-combined.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB-akas.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d93baa05-50e4-4cd5-9955-20d67b17fd17}-IMDB-akas.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-akas.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\IMDB-longactors.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{7b2b844e-b7e4-49d1-a045-1d02c72952df}-IMDB-longactors.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB-longactors.xml</DestinationFilename>
@@ -4284,13 +4249,6 @@ Some functions will not be available or work properly, if older versions are ins
         <LocalFileName>Config\scripts\MyFilms\IMDB.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{0cf0db21-53d5-42e8-8b31-c5496ba6e945}-IMDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\MovieGoods_Big_Thumb.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ac8c7701-f440-4da1-8c54-df55ac82ae6e}-MovieGoods_Big_Thumb.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\MovieGoods_Big_Thumb.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -4338,14 +4296,14 @@ Some functions will not be available or work properly, if older versions are ins
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{3cc6a92a-f5f6-476b-b345-ccf894dedaf6}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{9695e52f-6577-4154-a7d7-0627cc4523d8}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c9b06921-0fdf-499e-93af-9fbfc551d0b9}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{774866f4-97cb-4d1a-b976-0daa8c1b6b26}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
