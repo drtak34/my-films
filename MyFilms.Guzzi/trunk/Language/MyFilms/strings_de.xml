@@ -56,9 +56,12 @@
     <String id="5910">Lade Filminformationen (online)</String>
     <String id="6022">Film Datenbank Auswahl</String>
     <String id="6029">Ändern</String>
-    <String id="7986">Filme</String>
-    <String id="7987">Filme</String>
-    <String id="7988">Filme</String>
+    <String id="7986">Films Übersicht</String>
+    <String id="7987">Films Details</String>
+    <String id="7988">Films Bewertung</String>
+    <String id="7989">Films Personen</String>
+    <String id="7990">Films Thumbs</String>
+    <String id="7991">Films Personen Info</String>
     <String id="200026">Land</String>
     <String id="200027">Gesehen</String>
     <String id="200028">gesehen</String>
@@ -67,6 +70,7 @@
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
     <String id="107988">Filme</String>
+    <String id="1079857">Lade TMDB Daten (online)</String>
     <String id="1079858">Manuelle Eingabe über Tastatur</String>
     <String id="1079859">Wähle Suchbegriff</String>
     <String id="1079860">Manuelle Eingabe</String>
@@ -117,7 +121,7 @@
     <String id="10798619">=> {0} Film(e) gefunden in '{1}'</String>
     <String id="10798620">Personen Infos</String>
     <String id="10798621">Zufällige Filmsuche</String>
-    <String id="10798622">Alle Filme</String>
+    <String id="10798622">Alle</String>
     <String id="10798623">(keine Infos)</String>
     <String id="10798624">MyFilms System Information</String>
     <String id="10798625">Kein Ergebnis zu dem gesuchten Wert gefunden!</String>
@@ -127,7 +131,7 @@
     <String id="10798629">aus</String>
     <String id="10798630">Neuer Wert</String>
     <String id="10798631">Zeige Film-Server Status</String>
-    <String id="10798632">(globaler Filter aktiv)</String>
+    <String id="10798632">Globaler Filter</String>
     <String id="10798636">Dateiname</String>
     <String id="10798637">Keine Filme entsprechen der Ansicht !</String>
     <String id="10798638">Zeige Gesamtliste</String>
@@ -175,8 +179,12 @@
     <String id="10798680">Dateigrösse</String>
     <String id="10798681">Anzahl Dateien</String>
     <String id="10798682">Coverbild</String>
-    <String id="10798687">Globale Filter ...</String>
-    <String id="10798688">Lade Personeninfos - alle Personen</String>
+    <String id="10798683">Altersfreigabe</String>
+    <String id="10798684">Drehbuchautor</String>
+    <String id="10798685">Gesehen</String>
+    <String id="10798686">Zuletzt gesehen Datum</String>
+    <String id="10798687">IMDB Id</String>
+    <String id="10798688">TMDB Id</String>
     <String id="10798689">Globale Einstellungen ...</String>
     <String id="10798690">Globale Updates ...</String>
     <String id="10798691">Globaler Filter "Nur Filme mit Trailer" ({0})</String>
@@ -199,6 +207,9 @@
     <String id="10798710">Spiele Trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>
+    <String id="10798713">Ungesehene Filme </String>
+    <String id="10798714">Globale Filter ...</String>
+    <String id="10798715">Lade Personeninfos - alle Personen</String>
     <String id="10798719">Lade Filminformationen (nfo, ergänze fehlende Infos)</String>
     <String id="10798720">Lade Filminformationen (nfo, alle Infos überschreiben)</String>
     <String id="10798721">Lade Filminformationen aus ant-Datei (lokal)</String>

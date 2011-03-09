@@ -179,9 +179,12 @@
     <String id="10798680">Dateigrösse</String>
     <String id="10798681">Anzahl Dateien</String>
     <String id="10798682">Coverbild</String>
-    <String id="10798686">Ungesehene Filme " ({0})</String>
-    <String id="10798687">Globale Filter ...</String>
-    <String id="10798688">Lade Personeninfos - alle Personen</String>
+    <String id="10798683">Altersfreigabe</String>
+    <String id="10798684">Drehbuchautor</String>
+    <String id="10798685">Gesehen</String>
+    <String id="10798686">Zuletzt gesehen Datum</String>
+    <String id="10798687">IMDB Id</String>
+    <String id="10798688">TMDB Id</String>
     <String id="10798689">Globale Einstellungen ...</String>
     <String id="10798690">Globale Updates ...</String>
     <String id="10798691">Globaler Filter "Nur Filme mit Trailer" ({0})</String>
@@ -204,6 +207,9 @@
     <String id="10798710">Spiele Trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>
+    <String id="10798713">Ungesehene Filme </String>
+    <String id="10798714">Globale Filter ...</String>
+    <String id="10798715">Lade Personeninfos - alle Personen</String>
     <String id="10798719">Lade Filminformationen (nfo, ergänze fehlende Infos)</String>
     <String id="10798720">Lade Filminformationen (nfo, alle Infos überschreiben)</String>
     <String id="10798721">Lade Filminformationen aus ant-Datei (lokal)</String>

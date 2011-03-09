@@ -232,6 +232,18 @@ namespace MyFilmsPlugin.MyFilms
                     return GUILocalizeStrings.Get(10798681);
                 case "Picture":
                     return GUILocalizeStrings.Get(10798682);
+                case "Certification":
+                    return GUILocalizeStrings.Get(); //10798686
+                case "Writer":
+                    return GUILocalizeStrings.Get();
+                case "Watched":
+                    return GUILocalizeStrings.Get();
+                case "WatchedDate":
+                    return GUILocalizeStrings.Get();
+                case "IMDB_Id":
+                    return GUILocalizeStrings.Get();
+                case "TMDB_Id":
+                    return GUILocalizeStrings.Get();
                 default:
                     return string.Empty;
             }

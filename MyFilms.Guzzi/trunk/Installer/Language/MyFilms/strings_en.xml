@@ -179,9 +179,12 @@
     <String id="10798680">Size</String>
     <String id="10798681">Disks</String>
     <String id="10798682">Picture</String>
-    <String id="10798686">Unwatched films " ({0})</String>
-    <String id="10798687">Global filters ...</String>
-    <String id="10798688">Load person info (all persons)</String>
+    <String id="10798683">Certification</String>
+    <String id="10798684">Writer</String>
+    <String id="10798685">Watched</String>
+    <String id="10798686">Date Watched</String>
+    <String id="10798687">IMDB Id</String>
+    <String id="10798688">TMDB Id</String>
     <String id="10798689">Global settings ...</String>
     <String id="10798690">Global updates ...</String>
     <String id="10798691">Show only films with trailer ({0})</String>
@@ -204,6 +207,9 @@
     <String id="10798710">Play trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>
+    <String id="10798713">Unwatched films " ({0})</String>
+    <String id="10798714">Global filters ...</String>
+    <String id="10798715">Load person info (all persons)</String>
     <String id="10798719">Load films info (.nfo file, local, add missing info)</String>
     <String id="10798720">Load films info (.nfo file, local, replace all info)</String>
     <String id="10798721">Load films info from Ant file (local)</String>

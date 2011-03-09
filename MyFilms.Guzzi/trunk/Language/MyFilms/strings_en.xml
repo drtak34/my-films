@@ -56,9 +56,12 @@
     <String id="5910">Get internet film info</String>
     <String id="6022">Choose MyFilms DB Config</String>
     <String id="6029">Change</String>
-    <String id="7986">Filme</String>
-    <String id="7987">Filme</String>
-    <String id="7988">Filme</String>
+    <String id="7986">Films Main</String>
+    <String id="7987">Films Details</String>
+    <String id="7988">Films Rating</String>
+    <String id="7989">Films Persons</String>
+    <String id="7990">Films Thumbs</String>
+    <String id="7991">Films Person Info</String>
     <String id="200026">Country</String>
     <String id="200027">Watched</String>
     <String id="200028">watched</String>
@@ -67,6 +70,7 @@
     <String id="107986">Films</String>
     <String id="107987">Films</String>
     <String id="107988">Films</String>
+    <String id="1079857">Download TMDB data (online)</String>
     <String id="1079858">Manual Selection with Keyboard</String>
     <String id="1079859">Choose Search Expression</String>
     <String id="1079860">Manual Selection</String>
@@ -117,7 +121,7 @@
     <String id="10798619">=> {0} entry(ies) found for {1}</String>
     <String id="10798620">Person info</String>
     <String id="10798621">Search random films</String>
-    <String id="10798622">All films</String>
+    <String id="10798622">All</String>
     <String id="10798623">(no info)</String>
     <String id="10798624">Films System Information</String>
     <String id="10798625">No result found for this value!</String>
@@ -127,7 +131,7 @@
     <String id="10798629">off</String>
     <String id="10798630">New value</String>
     <String id="10798631">Show NAS Server status</String>
-    <String id="10798632">(global filter active)</String>
+    <String id="10798632">Filtered</String>
     <String id="10798636">Filename</String>
     <String id="10798637">No films match this view!</String>
     <String id="10798638">Show full film list</String>
@@ -175,8 +179,12 @@
     <String id="10798680">Size</String>
     <String id="10798681">Disks</String>
     <String id="10798682">Picture</String>
-    <String id="10798687">Global filters ...</String>
-    <String id="10798688">Load person info (all persons)</String>
+    <String id="10798683">Certification</String>
+    <String id="10798684">Writer</String>
+    <String id="10798685">Watched</String>
+    <String id="10798686">Date Watched</String>
+    <String id="10798687">IMDB Id</String>
+    <String id="10798688">TMDB Id</String>
     <String id="10798689">Global settings ...</String>
     <String id="10798690">Global updates ...</String>
     <String id="10798691">Show only films with trailer ({0})</String>
@@ -199,6 +207,9 @@
     <String id="10798710">Play trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
     <String id="10798712">Apple iTunes Trailer (OnlineVideos)</String>
+    <String id="10798713">Unwatched films " ({0})</String>
+    <String id="10798714">Global filters ...</String>
+    <String id="10798715">Load person info (all persons)</String>
     <String id="10798719">Load films info (.nfo file, local, add missing info)</String>
     <String id="10798720">Load films info (.nfo file, local, replace all info)</String>
     <String id="10798721">Load films info from Ant file (local)</String>

@@ -865,9 +865,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         // use this code later to set the label of the button
                         
                         //if (MyFilms.conf.GlobalUnwatchedOnly)
-                        //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798628));
+                        //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628));
                         //else
-                        //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798629));
+                        //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
 
                         GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
                         return base.OnMessage(messageType);
@@ -2309,9 +2309,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //Layout = conf.StrLayOut;
 
             //if (MyFilms.conf.GlobalUnwatchedOnly)
-            //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798628));
+            //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628));
             //else
-            //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798686), GUILocalizeStrings.Get(10798629));
+            //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
             if (string.IsNullOrEmpty(conf.CurrentSortMethod))
                 conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
             else
@@ -2841,7 +2841,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (MyFilmsDetail.ExtendedStartmode("Global Update all PersonInfos")) // check if specialmode is configured for disabled features
                     {
-                      dlg2.Add(GUILocalizeStrings.Get(10798688));
+                      dlg2.Add(GUILocalizeStrings.Get(10798715)); // Load Person infos - all persons
                         // Search all personinfos
                       choiceViewGlobalUpdates.Add("personinfos-all");
                     }
@@ -3229,7 +3229,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 // Enable/disable global overlay filter could be added here for faster access ?
                 // ...
-                //dlg.Add(GUILocalizeStrings.Get(10798687)); // "global filters ..."
+                //dlg.Add(GUILocalizeStrings.Get(10798714)); // "global filters ..."
                 //upd_choice[ichoice] = "globalfilters";
                 //ichoice++;
 
@@ -5530,7 +5530,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             backdrop.GUIImageTwo = ImgFanart2;
             backdrop.LoadingImage = loadingImage;
 
-            BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798687); // Global Filters ...
+            BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
 
             //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge ->> This fucked up the fanart swapper !!!!!
             //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge

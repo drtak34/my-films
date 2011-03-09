@@ -164,8 +164,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CatalogType.SelectedIndex = 0;
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-              if ((dc.ColumnName != "Picture") && (dc.ColumnName != "Contents_Id") && 
-                (dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")) 
+              if (dc.ColumnName != "Picture" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" 
+                && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer") 
                 // All those fieds are currently not supported by ANT-MC
                 // Also removed Contents_Id and Pictures, as they mostly useless.
               {
