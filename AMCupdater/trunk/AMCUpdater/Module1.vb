@@ -4,6 +4,7 @@ Imports System.Collections
 Imports System.Globalization
 Imports System.ComponentModel
 Imports System.Threading
+Imports MediaPortal.Configuration
 
 Module Module1
 
@@ -1108,8 +1109,11 @@ Module Module1
                 path = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
             End If
         Else
-            path = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
-
+            If (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log")) Then
+                path = Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log\AMCUpdater.log"
+            Else
+                path = My.Application.Info.DirectoryPath & "\AMCUpdater.log"
+            End If
         End If
 
 

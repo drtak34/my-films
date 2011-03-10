@@ -107,6 +107,7 @@ Public Class Form1
         MediaData.Add("subtitles", "subtitles")
         MediaData.Add("languages", "languages")
 
+        ' ToDo: Addfields to grab extended infos: Writer, Certification, TMDB_Id, IMDB_Id, Watched, DateWatched
         InternetData = New Hashtable
         InternetData.Add("rating", "rating")
         InternetData.Add("year", "year")

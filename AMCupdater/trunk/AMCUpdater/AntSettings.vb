@@ -1,8 +1,12 @@
+Imports MediaPortal.Configuration
+
 Public Class AntSettings
     'Public UserSettingsFile As String = My.Application.Info.DirectoryPath & "\AMCUpdater_Settings.xml"
     'Public ReadOnly UserDefaultSettingsFile As String = My.Application.Info.DirectoryPath & "\AMCUpdater_DefaultSettings.xml"
-    Public UserSettingsFile As String = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData\AMCUpdater_Settings.xml"
-    Public ReadOnly UserDefaultSettingsFile As String = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData\AMCUpdater_DefaultSettings.xml"
+    'Public UserSettingsFile As String = Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCupdaterData\AMCUpdater_Settings.xml"
+    'Public ReadOnly UserDefaultSettingsFile As String = Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCupdaterData\AMCUpdater_DefaultSettings.xml"
+    Public UserSettingsFile As String = Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\AMCUpdater_Settings.xml"
+    Public ReadOnly UserDefaultSettingsFile As String = Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString & "\AMCUpdater_DefaultSettings.xml"
 
     Public Shared dsSettings As DataSet = New DataSet
     Private Shared dsDefaultSettings As DataSet = New DataSet
@@ -509,6 +513,15 @@ Public Class AntSettings
 
     Public Sub New()
         Dim AppPath As String = My.Application.Info.DirectoryPath
+        Dim MePoConfigPath As String = Config.GetDirectoryInfo(Config.Dir.Config).ToString
+        Dim MePo As Boolean
+
+        If (System.IO.Directory.Exists(MePoConfigPath)) Then
+            MePo = True
+        Else
+            MePo = False
+        End If
+
         Dim dt As New DataTable("Values")
         dt.Columns.Add("Option", System.Type.GetType("System.String"))
         dt.Columns.Add("Value", System.Type.GetType("System.String"))
@@ -534,17 +547,30 @@ Public Class AntSettings
         dt.Rows.Add("Log_Level", "All Events") 'LogLevel
         dt.Rows.Add("Date_Handling", "File Created Date") 'DateHandling
         dt.Rows.Add("Movie_Title_Handling", "File Name + Internet Lookup")
-        dt.Rows.Add("Internet_Parser_Path", AppPath & "\Scripts\MyFilmsIMDB.xml") 'DefaultParserPath
+        If MePo Then
+            dt.Rows.Add("Internet_Parser_Path", MePoConfigPath & "\Scripts\\MyFilms\IMDB.xml") 'DefaultParserPath
+        Else
+            dt.Rows.Add("Internet_Parser_Path", AppPath & "\Scripts\MyFilmsIMDB.xml") 'DefaultParserPath
+        End If
         dt.Rows.Add("Store_Short_Names_Only", "False") 'ShortNames
-        dt.Rows.Add("Excluded_Movies_File", AppPath & "\AMCUpdater_Excluded_Files.txt") 'DefaultExcludeFile
+        If MePo Then
+            dt.Rows.Add("Excluded_Movies_File", MePoConfigPath & "\AMCUpdater_Excluded_Files.txt") 'DefaultExcludeFile
+        Else
+            dt.Rows.Add("Excluded_Movies_File", AppPath & "\AMCUpdater_Excluded_Files.txt") 'DefaultExcludeFile
+        End If
         dt.Rows.Add("Database_Fields_To_Import", "Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;OriginalTitle|True;TranslatedTitle|True;FormattedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True") 'DatabaseFields
         dt.Rows.Add("Import_File_On_Internet_Lookup_Failure", "True") 'ImportFileOnInternetLookupFailure
         dt.Rows.Add("Internet_Lookup_Always_Prompt", "True") 'Set to True to always get choice of Movie from Internet lookup; false to attempt auto-match as before.
         dt.Rows.Add("Read_DVD_Label", "False")
         dt.Rows.Add("DVD_Drive_Letter", "")
         dt.Rows.Add("Manual_XML_File", "")
-        dt.Rows.Add("Manual_Internet_Parser_Path", AppPath & "\Scripts\MyFilmsIMDB.xml")
-        dt.Rows.Add("Manual_Excluded_Movies_File", AppPath & "\AMCUpdater_Excluded_Files.txt")
+        If MePo Then
+            dt.Rows.Add("Manual_Internet_Parser_Path", MePoConfigPath & "\Scripts\MyFilms\IMDB.xml")
+            dt.Rows.Add("Manual_Excluded_Movies_File", MePoConfigPath & "\AMCUpdater_Excluded_Files.txt")
+        Else
+            dt.Rows.Add("Manual_Internet_Parser_Path", AppPath & "\Scripts\MyFilmsIMDB.xml")
+            dt.Rows.Add("Manual_Excluded_Movies_File", AppPath & "\AMCUpdater_Excluded_Files.txt")
+        End If
         dt.Rows.Add("Manual_Internet_Lookup_Always_Prompt", "True")
         dt.Rows.Add("Excluded_Folder_Strings", "")
         dt.Rows.Add("Excluded_File_Strings", "")
@@ -681,7 +707,8 @@ Public Class AntSettings
     Public Sub SaveDefaultSettings()
         'Called on GUI mode exit - saves all current settings for load on next launch.
         Try
-            Dim dirname = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData"
+            'Dim dirname = Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCupdaterData"
+            Dim dirname = Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Config).ToString
             If Not (System.IO.Directory.Exists(dirname)) Then
                 System.IO.Directory.CreateDirectory(dirname)
             End If
@@ -694,15 +721,16 @@ Public Class AntSettings
     End Sub
 
     Public Sub CreateDefaultFiles()
-        Dim dirname = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData"
+        'Dim dirname = Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString & "\MyFilms\AMCupdaterData"
+        Dim dirname = Config.GetDirectoryInfo(Config.Dir.Config).ToString
+        'if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
+        '     System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+        ' LogDirectoryParam = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
         If Not (System.IO.Directory.Exists(dirname)) Then
             System.IO.Directory.CreateDirectory(dirname)
         End If
 
         dsDefaultSettings.WriteXml(UserDefaultSettingsFile)
     End Sub
-
-
-
 
 End Class
