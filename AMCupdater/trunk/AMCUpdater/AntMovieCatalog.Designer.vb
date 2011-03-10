@@ -939,7 +939,11 @@ Partial Public Class AntMovieCatalog
         
         Private columnCertification As Global.System.Data.DataColumn
         
+        Private columnWriter As Global.System.Data.DataColumn
+        
         Private columnWatched As Global.System.Data.DataColumn
+        
+        Private columnDateWatched As Global.System.Data.DataColumn
         
         Private columnIMDB_Id As Global.System.Data.DataColumn
         
@@ -1228,9 +1232,23 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property WriterColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWriter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property WatchedColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnWatched
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DateWatchedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDateWatched
             End Get
         End Property
         
@@ -1326,12 +1344,14 @@ Partial Public Class AntMovieCatalog
                     ByVal Disks As String,  _
                     ByVal Picture As String,  _
                     ByVal Certification As String,  _
+                    ByVal Writer As String,  _
                     ByVal Watched As String,  _
+                    ByVal DateWatched As Date,  _
                     ByVal IMDB_Id As String,  _
                     ByVal TMDB_Id As String,  _
                     ByVal Length_Num As Integer) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, DateAdded, Size, Disks, Picture, Certification, Watched, IMDB_Id, TMDB_Id, Nothing, Length_Num}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, DateAdded, Size, Disks, Picture, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, Nothing, Length_Num}
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
             Return rowMovieRow
@@ -1372,11 +1392,13 @@ Partial Public Class AntMovieCatalog
                     ByVal Disks As String,  _
                     ByVal Picture As String,  _
                     ByVal Certification As String,  _
+                    ByVal Writer As String,  _
                     ByVal Watched As String,  _
+                    ByVal DateWatched As Date,  _
                     ByVal IMDB_Id As String,  _
                     ByVal TMDB_Id As String) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Nothing, Size, Disks, Picture, Certification, Watched, IMDB_Id, TMDB_Id, Nothing, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Nothing, Size, Disks, Picture, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, Nothing, Nothing}
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
             Return rowMovieRow
@@ -1430,7 +1452,9 @@ Partial Public Class AntMovieCatalog
             Me.columnDisks = MyBase.Columns("Disks")
             Me.columnPicture = MyBase.Columns("Picture")
             Me.columnCertification = MyBase.Columns("Certification")
+            Me.columnWriter = MyBase.Columns("Writer")
             Me.columnWatched = MyBase.Columns("Watched")
+            Me.columnDateWatched = MyBase.Columns("DateWatched")
             Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
             Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
             Me.columnContents_Id = MyBase.Columns("Contents_Id")
@@ -1510,8 +1534,12 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnPicture)
             Me.columnCertification = New Global.System.Data.DataColumn("Certification", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCertification)
+            Me.columnWriter = New Global.System.Data.DataColumn("Writer", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWriter)
             Me.columnWatched = New Global.System.Data.DataColumn("Watched", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnWatched)
+            Me.columnDateWatched = New Global.System.Data.DataColumn("DateWatched", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDateWatched)
             Me.columnIMDB_Id = New Global.System.Data.DataColumn("IMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnIMDB_Id)
             Me.columnTMDB_Id = New Global.System.Data.DataColumn("TMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -2328,6 +2356,20 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Writer() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.WriterColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.WriterColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Watched() As String
             Get
                 Try 
@@ -2338,6 +2380,20 @@ Partial Public Class AntMovieCatalog
             End Get
             Set
                 Me(Me.tableMovie.WatchedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property DateWatched() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.DateWatchedColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte DateWatched in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.DateWatchedColumn) = value
             End Set
         End Property
         
@@ -2744,6 +2800,16 @@ Partial Public Class AntMovieCatalog
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsWriterNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.WriterColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetWriterNull()
+            Me(Me.tableMovie.WriterColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Function IsWatchedNull() As Boolean
             Return Me.IsNull(Me.tableMovie.WatchedColumn)
         End Function
@@ -2751,6 +2817,16 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetWatchedNull()
             Me(Me.tableMovie.WatchedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsDateWatchedNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.DateWatchedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetDateWatchedNull()
+            Me(Me.tableMovie.DateWatchedColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _

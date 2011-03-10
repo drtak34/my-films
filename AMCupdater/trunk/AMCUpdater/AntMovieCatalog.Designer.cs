@@ -1518,6 +1518,10 @@ namespace MesFilms {
                 this.columnSize = base.Columns["Size"];
                 this.columnDisks = base.Columns["Disks"];
                 this.columnPicture = base.Columns["Picture"];
+                this.columnPicture = base.Columns["Certification"];
+                this.columnPicture = base.Columns["Watched"];
+                this.columnPicture = base.Columns["IMDB_Id"];
+                this.columnPicture = base.Columns["TMDB_Id"];
                 this.columnContents_Id = base.Columns["Contents_Id"];
                 this.columnLength_Num = base.Columns["Length_Num"];
             }
