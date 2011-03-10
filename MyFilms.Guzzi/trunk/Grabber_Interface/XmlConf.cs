@@ -239,6 +239,11 @@ public class TagName
   public static string KeyProductIndex = "KeyProductIndex";
   public static string KeyProductRegExp = "KeyProductRegExp";
   public static string KeyProductMaxItems = "KeyProductMaxItems";
+  public static string KeyStartWriter = "KeyStartWriter";     // Writer
+  public static string KeyEndWriter = "KeyEndWriter";
+  public static string KeyWriterIndex = "KeyWriterIndex";
+  public static string KeyWriterRegExp = "KeyWriterRegExp";
+  public static string KeyWriterMaxItems = "KeyWriterMaxItems";
   public static string KeyStartCredits = "KeyStartCredits";     // Credits / Actors
   public static string KeyEndCredits = "KeyEndCredits";
   public static string KeyCreditsIndex = "KeyCreditsIndex";

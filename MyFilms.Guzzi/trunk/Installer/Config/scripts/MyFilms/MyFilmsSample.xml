@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>Cinefacts (german)</DBName>
+    <DBName>TestSite (international)</DBName>
     <URLPrefix />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.cinefacts.de_x002F_suche_x002F_suche.php_x003F_type_x003D_f_x0026_name_x003D__x0023_Search_x0023_</URL>
@@ -61,6 +61,11 @@
       <KeyProductIndex />
       <KeyProductRegExp />
       <KeyProductMaxItems />
+      <KeyStartWriter Param1="" Param2="" />
+      <KeyEndWriter />
+      <KeyWriterIndex />
+      <KeyWriterRegExp />
+      <KeyWriterMaxItems />
       <KeyStartCredits Param1="" Param2="" />
       <KeyEndCredits />
       <KeyCreditsRegExp />

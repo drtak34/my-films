@@ -465,8 +465,6 @@ namespace Grabber_Interface
           // 
           // tabPageDetailPage
           // 
-          this.tabPageDetailPage.Controls.Add(this.textLanguages);
-          this.tabPageDetailPage.Controls.Add(this.lblLanguages);
           this.tabPageDetailPage.Controls.Add(this.button_Load_File);
           this.tabPageDetailPage.Controls.Add(this.label21);
           this.tabPageDetailPage.Controls.Add(this.labelImageSize);
@@ -588,6 +586,8 @@ namespace Grabber_Interface
           // 
           // groupBox4
           // 
+          this.groupBox4.Controls.Add(this.lblLanguages);
+          this.groupBox4.Controls.Add(this.textLanguages);
           this.groupBox4.Controls.Add(this.lblMaxItems);
           this.groupBox4.Controls.Add(this.textMaxItems);
           this.groupBox4.Controls.Add(this.btResetDetail);
@@ -729,7 +729,8 @@ namespace Grabber_Interface
             resources.GetString("cb_ParamDetail.Items17"),
             resources.GetString("cb_ParamDetail.Items18"),
             resources.GetString("cb_ParamDetail.Items19"),
-            resources.GetString("cb_ParamDetail.Items20")});
+            resources.GetString("cb_ParamDetail.Items20"),
+            resources.GetString("cb_ParamDetail.Items21")});
           resources.ApplyResources(this.cb_ParamDetail, "cb_ParamDetail");
           this.cb_ParamDetail.Name = "cb_ParamDetail";
           this.toolTip1.SetToolTip(this.cb_ParamDetail, resources.GetString("cb_ParamDetail.ToolTip"));

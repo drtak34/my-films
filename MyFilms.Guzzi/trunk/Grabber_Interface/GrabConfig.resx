@@ -417,77 +417,8 @@
   <data name="&gt;&gt;tabPageSearchPage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="textLanguages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 62</value>
-  </data>
-  <data name="textLanguages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>413, 20</value>
-  </data>
-  <data name="textLanguages.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="textLanguages.ToolTip" xml:space="preserve">
-    <value>Enter the language, as stated on the website you use 
-to get languagespecific details.
-Example:
-Translated titel on IMDB:
-Set Language(s) to "Germany" to get the german translated title.
-
-Remarks:
-- Only works in Regex Mode
-- You can enter more than 1 language to get results for several lnaguages listed
-- Translated Title and Certification support language filtered results</value>
-  </data>
-  <data name="textLanguages.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;textLanguages.Name" xml:space="preserve">
-    <value>textLanguages</value>
-  </data>
-  <data name="&gt;&gt;textLanguages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textLanguages.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;textLanguages.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblLanguages.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLanguages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 65</value>
-  </data>
-  <data name="lblLanguages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
-  </data>
-  <data name="lblLanguages.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="lblLanguages.Text" xml:space="preserve">
-    <value>Language(s)</value>
-  </data>
-  <data name="lblLanguages.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lblLanguages.Name" xml:space="preserve">
-    <value>lblLanguages</value>
-  </data>
-  <data name="&gt;&gt;lblLanguages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLanguages.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;lblLanguages.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="button_Load_File.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 33</value>
+    <value>459, 37</value>
   </data>
   <data name="button_Load_File.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 19</value>
@@ -508,7 +439,7 @@ Remarks:
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;button_Load_File.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -535,7 +466,7 @@ Remarks:
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="labelImageSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -565,10 +496,10 @@ Remarks:
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;labelImageSize.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="btnLoadDetailPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 32</value>
+    <value>410, 36</value>
   </data>
   <data name="btnLoadDetailPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 20</value>
@@ -589,13 +520,16 @@ Remarks:
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailPreview.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="lblResult.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblResult.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 35</value>
+    <value>14, 39</value>
   </data>
   <data name="lblResult.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -621,13 +555,13 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;lblResult.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="textURLPreview.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="textURLPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 32</value>
+    <value>89, 36</value>
   </data>
   <data name="textURLPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>295, 20</value>
@@ -645,7 +579,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="buttonPrevParamDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>350, 280</value>
@@ -676,7 +610,7 @@ If the result is an Image, it will be shown in the preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;buttonPrevParamDetail.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="buttonPreviewDetailFullGrab.Location" type="System.Drawing.Point, System.Drawing">
     <value>513, 279</value>
@@ -704,7 +638,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;buttonPreviewDetailFullGrab.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="textBodyDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 311</value>
@@ -728,7 +662,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>224, 282</value>
@@ -749,7 +683,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
     <value>textPreview</value>
@@ -785,7 +719,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="button_Find_Detail.Location" type="System.Drawing.Point, System.Drawing">
     <value>177, 280</value>
@@ -812,7 +746,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;button_Find_Detail.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="textFind.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 282</value>
@@ -833,7 +767,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textFind.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="Button_Load_URL.Location" type="System.Drawing.Point, System.Drawing">
     <value>459, 10</value>
@@ -860,7 +794,96 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;Button_Load_URL.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
+  </data>
+  <data name="lblLanguages.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLanguages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 144</value>
+  </data>
+  <data name="lblLanguages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="lblLanguages.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="lblLanguages.Text" xml:space="preserve">
+    <value>Language(s)</value>
+  </data>
+  <data name="lblLanguages.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblLanguages.Name" xml:space="preserve">
+    <value>lblLanguages</value>
+  </data>
+  <data name="&gt;&gt;lblLanguages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLanguages.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;lblLanguages.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="textLanguages.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 141</value>
+  </data>
+  <data name="textLanguages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>402, 20</value>
+  </data>
+  <data name="textLanguages.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="textLanguages.ToolTip" xml:space="preserve">
+    <value>Enter the language, as stated on the website you use 
+to get languagespecific details.
+Example:
+Translated titel on IMDB:
+Set Language(s) to "Germany" to get the german translated title.
+
+Remarks:
+- Only works in Regex Mode
+- You can enter more than 1 language to get results for several lnaguages listed
+- Translated Title and Certification support language filtered results
+- to get such results, the web page you use must return the naguage string with your group matching expression.
+- Matching is based on "parially contains" - so defining e.g. "german" would also return all values that have "Germany".</value>
+  </data>
+  <data name="textLanguages.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;textLanguages.Name" xml:space="preserve">
+    <value>textLanguages</value>
+  </data>
+  <data name="&gt;&gt;textLanguages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textLanguages.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;textLanguages.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblMaxItems.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMaxItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 119</value>
+  </data>
+  <data name="lblMaxItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="lblMaxItems.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="lblMaxItems.Text" xml:space="preserve">
+    <value>Max Items</value>
+  </data>
+  <data name="lblMaxItems.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblMaxItems.Name" xml:space="preserve">
     <value>lblMaxItems</value>
@@ -872,7 +895,19 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;lblMaxItems.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
+  </data>
+  <data name="textMaxItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>372, 116</value>
+  </data>
+  <data name="textMaxItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="textMaxItems.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="textMaxItems.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;textMaxItems.Name" xml:space="preserve">
     <value>textMaxItems</value>
@@ -884,7 +919,25 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;textMaxItems.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
+  </data>
+  <data name="btResetDetail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btResetDetail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 183</value>
+  </data>
+  <data name="btResetDetail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 21</value>
+  </data>
+  <data name="btResetDetail.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="btResetDetail.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="btResetDetail.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;btResetDetail.Name" xml:space="preserve">
     <value>btResetDetail</value>
@@ -896,7 +949,25 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;btResetDetail.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="label18.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 24</value>
+  </data>
+  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 13</value>
+  </data>
+  <data name="label18.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="label18.Text" xml:space="preserve">
+    <value>Previous Field</value>
   </data>
   <data name="&gt;&gt;label18.Name" xml:space="preserve">
     <value>label18</value>
@@ -908,7 +979,57 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
+  </data>
+  <data name="Index.Items" xml:space="preserve">
+    <value>Original Title</value>
+  </data>
+  <data name="Index.Items1" xml:space="preserve">
+    <value>Translated Title</value>
+  </data>
+  <data name="Index.Items2" xml:space="preserve">
+    <value>URL cover</value>
+  </data>
+  <data name="Index.Items3" xml:space="preserve">
+    <value>Rate 1</value>
+  </data>
+  <data name="Index.Items4" xml:space="preserve">
+    <value>Rate 2</value>
+  </data>
+  <data name="Index.Items5" xml:space="preserve">
+    <value>Synopsys</value>
+  </data>
+  <data name="Index.Items6" xml:space="preserve">
+    <value>Director</value>
+  </data>
+  <data name="Index.Items7" xml:space="preserve">
+    <value>Producer</value>
+  </data>
+  <data name="Index.Items8" xml:space="preserve">
+    <value>Actors</value>
+  </data>
+  <data name="Index.Items9" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Index.Items10" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="Index.Items11" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Index.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 20</value>
+  </data>
+  <data name="Index.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 21</value>
+  </data>
+  <data name="Index.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="Index.ToolTip" xml:space="preserve">
+    <value>This can be useful in cases where it is impossible to find one key in the code.
+The grabber will therefore seek the chain starting from the last parameter
+ instead of starting from the beginning of the code.</value>
   </data>
   <data name="&gt;&gt;Index.Name" xml:space="preserve">
     <value>Index</value>
@@ -920,7 +1041,28 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;Index.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <data name="labelDReplaceWith.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDReplaceWith.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelDReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 167</value>
+  </data>
+  <data name="labelDReplaceWith.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="labelDReplaceWith.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="labelDReplaceWith.Text" xml:space="preserve">
+    <value>With</value>
+  </data>
+  <data name="labelDReplaceWith.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;labelDReplaceWith.Name" xml:space="preserve">
     <value>labelDReplaceWith</value>
@@ -932,7 +1074,28 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;labelDReplaceWith.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
+  </data>
+  <data name="labelDReplace.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDReplace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelDReplace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 167</value>
+  </data>
+  <data name="labelDReplace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="labelDReplace.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="labelDReplace.Text" xml:space="preserve">
+    <value>Replace </value>
+  </data>
+  <data name="labelDReplace.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;labelDReplace.Name" xml:space="preserve">
     <value>labelDReplace</value>
@@ -944,7 +1107,25 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;labelDReplace.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
+  </data>
+  <data name="textDReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
+    <value>314, 167</value>
+  </data>
+  <data name="textDReplaceWith.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textDReplaceWith.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="textDReplaceWith.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 37</value>
+  </data>
+  <data name="textDReplaceWith.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="textDReplaceWith.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;textDReplaceWith.Name" xml:space="preserve">
     <value>textDReplaceWith</value>
@@ -956,7 +1137,30 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;textDReplaceWith.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
+  </data>
+  <data name="textDReplace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 167</value>
+  </data>
+  <data name="textDReplace.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textDReplace.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="textDReplace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 37</value>
+  </data>
+  <data name="textDReplace.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="textDReplace.ToolTip" xml:space="preserve">
+    <value>This area of the right will replace a string parameter by another.
+
+Use the "paramter Preview" to see the result.</value>
+  </data>
+  <data name="textDReplace.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;textDReplace.Name" xml:space="preserve">
     <value>textDReplace</value>
@@ -968,7 +1172,22 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;textDReplace.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
+  </data>
+  <data name="textComplement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 116</value>
+  </data>
+  <data name="textComplement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
+  </data>
+  <data name="textComplement.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="textComplement.ToolTip" xml:space="preserve">
+    <value>Allows to clarify more precisely the basis of the score (Score 5, 10, 20 ...)</value>
+  </data>
+  <data name="textComplement.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;textComplement.Name" xml:space="preserve">
     <value>textComplement</value>
@@ -980,7 +1199,25 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;textComplement.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
+  </data>
+  <data name="lblComplement.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblComplement.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 119</value>
+  </data>
+  <data name="lblComplement.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 13</value>
+  </data>
+  <data name="lblComplement.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblComplement.Text" xml:space="preserve">
+    <value>Complement</value>
+  </data>
+  <data name="lblComplement.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblComplement.Name" xml:space="preserve">
     <value>lblComplement</value>
@@ -992,7 +1229,22 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;lblComplement.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
+  </data>
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 50</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>Key Stop</value>
   </data>
   <data name="&gt;&gt;label12.Name" xml:space="preserve">
     <value>label12</value>
@@ -1004,7 +1256,22 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
+  </data>
+  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 50</value>
+  </data>
+  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="label13.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="label13.Text" xml:space="preserve">
+    <value>Key Start</value>
   </data>
   <data name="&gt;&gt;label13.Name" xml:space="preserve">
     <value>label13</value>
@@ -1016,7 +1283,30 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
+  </data>
+  <data name="TextKeyStopD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>314, 47</value>
+  </data>
+  <data name="TextKeyStopD.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TextKeyStopD.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="TextKeyStopD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 55</value>
+  </data>
+  <data name="TextKeyStopD.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="TextKeyStopD.ToolTip" xml:space="preserve">
+    <value>String that defines the end of the parameter.
+
+SpecialParameters for beginning of expression:
+"normal"	: Find last index pf parameter
+"#REGEX#" (KEYSTART/END / PARAM1/2): Find first/last with Regex
+"#REVERSE#" (PARAM1/2): Reverse search</value>
   </data>
   <data name="&gt;&gt;TextKeyStopD.Name" xml:space="preserve">
     <value>TextKeyStopD</value>
@@ -1028,7 +1318,30 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;TextKeyStopD.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
+  </data>
+  <data name="TextKeyStartD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 47</value>
+  </data>
+  <data name="TextKeyStartD.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TextKeyStartD.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="TextKeyStartD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 55</value>
+  </data>
+  <data name="TextKeyStartD.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="TextKeyStartD.ToolTip" xml:space="preserve">
+    <value>String that defines the beginning of the parameter.
+
+SpecialParameters for beginning of expression:
+"normal"	: Find last index pf parameter
+"#REGEX#" (KEYSTART/END / PARAM1/2): Find first/last with Regex
+"#REVERSE#" (PARAM1/2): Reverse search</value>
   </data>
   <data name="&gt;&gt;TextKeyStartD.Name" xml:space="preserve">
     <value>TextKeyStartD</value>
@@ -1040,7 +1353,22 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;TextKeyStartD.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
+  </data>
+  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 22</value>
+  </data>
+  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="label14.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label14.Text" xml:space="preserve">
+    <value>Parameter</value>
   </data>
   <data name="&gt;&gt;label14.Name" xml:space="preserve">
     <value>label14</value>
@@ -1052,7 +1380,108 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
+  </data>
+  <data name="cb_ParamDetail.Items" xml:space="preserve">
+    <value>(Start-End Detail Page)</value>
+  </data>
+  <data name="cb_ParamDetail.Items1" xml:space="preserve">
+    <value>Original Title</value>
+  </data>
+  <data name="cb_ParamDetail.Items2" xml:space="preserve">
+    <value>Translated Title</value>
+  </data>
+  <data name="cb_ParamDetail.Items3" xml:space="preserve">
+    <value>URL Cover</value>
+  </data>
+  <data name="cb_ParamDetail.Items4" xml:space="preserve">
+    <value>Rate 1</value>
+  </data>
+  <data name="cb_ParamDetail.Items5" xml:space="preserve">
+    <value>Rate 2</value>
+  </data>
+  <data name="cb_ParamDetail.Items6" xml:space="preserve">
+    <value>Description / Synopsys</value>
+  </data>
+  <data name="cb_ParamDetail.Items7" xml:space="preserve">
+    <value>Director</value>
+  </data>
+  <data name="cb_ParamDetail.Items8" xml:space="preserve">
+    <value>Producer</value>
+  </data>
+  <data name="cb_ParamDetail.Items9" xml:space="preserve">
+    <value>Actors</value>
+  </data>
+  <data name="cb_ParamDetail.Items10" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="cb_ParamDetail.Items11" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="cb_ParamDetail.Items12" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="cb_ParamDetail.Items13" xml:space="preserve">
+    <value>URL Redirection cover</value>
+  </data>
+  <data name="cb_ParamDetail.Items14" xml:space="preserve">
+    <value>URL Redirection persons</value>
+  </data>
+  <data name="cb_ParamDetail.Items15" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="cb_ParamDetail.Items16" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="cb_ParamDetail.Items17" xml:space="preserve">
+    <value>Tagline</value>
+  </data>
+  <data name="cb_ParamDetail.Items18" xml:space="preserve">
+    <value>Certification</value>
+  </data>
+  <data name="cb_ParamDetail.Items19" xml:space="preserve">
+    <value>URL Redirection TTitle</value>
+  </data>
+  <data name="cb_ParamDetail.Items20" xml:space="preserve">
+    <value>URL Redirection Certification</value>
+  </data>
+  <data name="cb_ParamDetail.Items21" xml:space="preserve">
+    <value>Writer</value>
+  </data>
+  <data name="cb_ParamDetail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 19</value>
+  </data>
+  <data name="cb_ParamDetail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 21</value>
+  </data>
+  <data name="cb_ParamDetail.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cb_ParamDetail.ToolTip" xml:space="preserve">
+    <value>Parameter List - selects the parameter to be set:
+
+Start / End Detail Page : Permet de réduire le code source à la section qui nous intéresse.
+Original Title : Titre original.
+Translated Title : Titre traduit.
+URL cover : URL de l'affiche.
+Rate 1 : Note 1.
+Rate 2 : Note 2.
+Description / Synopsys : Description of film
+Director: Director (s)
+Producer: Producer (s)
+Actors: Actors
+Country: Country
+Genre: Genre/Categories.
+Year: Year.
+URL Redirection cover: For posters better, it is sometimes
+need to click on another tab. This setting allows you to find in the code
+address tab. Then use Start / End cover to find the URL address of the poster
+in this new page.
+URL Redirection common: Redirection for common pupose
+Comment: Comment or user review
+Language: Language
+Tagline: Tagline
+Certification: Certification</value>
   </data>
   <data name="&gt;&gt;cb_ParamDetail.Name" xml:space="preserve">
     <value>cb_ParamDetail</value>
@@ -1064,13 +1493,13 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;cb_ParamDetail.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 81</value>
+    <value>9, 58</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 193</value>
+    <value>493, 215</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1085,7 +1514,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="TextURLDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 10</value>
@@ -1109,7 +1538,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>15</value>
   </data>
   <data name="label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1136,7 +1565,7 @@ If it contains a cover image, it will be shown in preview box.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="tabPageDetailPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -2594,580 +3023,6 @@ Important: You must replace the search string that you used with the string # # 
   <data name="&gt;&gt;textPreview.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btResetDetail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btResetDetail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 158</value>
-  </data>
-  <data name="btResetDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 21</value>
-  </data>
-  <data name="btResetDetail.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="btResetDetail.Text" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="btResetDetail.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;btResetDetail.Name" xml:space="preserve">
-    <value>btResetDetail</value>
-  </data>
-  <data name="&gt;&gt;btResetDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btResetDetail.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;btResetDetail.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label18.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label18.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 24</value>
-  </data>
-  <data name="label18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
-  </data>
-  <data name="label18.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="label18.Text" xml:space="preserve">
-    <value>Previous Field</value>
-  </data>
-  <data name="&gt;&gt;label18.Name" xml:space="preserve">
-    <value>label18</value>
-  </data>
-  <data name="&gt;&gt;label18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label18.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label18.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="Index.Items" xml:space="preserve">
-    <value>Original Title</value>
-  </data>
-  <data name="Index.Items1" xml:space="preserve">
-    <value>Translated Title</value>
-  </data>
-  <data name="Index.Items2" xml:space="preserve">
-    <value>URL cover</value>
-  </data>
-  <data name="Index.Items3" xml:space="preserve">
-    <value>Rate 1</value>
-  </data>
-  <data name="Index.Items4" xml:space="preserve">
-    <value>Rate 2</value>
-  </data>
-  <data name="Index.Items5" xml:space="preserve">
-    <value>Synopsys</value>
-  </data>
-  <data name="Index.Items6" xml:space="preserve">
-    <value>Director</value>
-  </data>
-  <data name="Index.Items7" xml:space="preserve">
-    <value>Producer</value>
-  </data>
-  <data name="Index.Items8" xml:space="preserve">
-    <value>Actors</value>
-  </data>
-  <data name="Index.Items9" xml:space="preserve">
-    <value>Country</value>
-  </data>
-  <data name="Index.Items10" xml:space="preserve">
-    <value>Genre</value>
-  </data>
-  <data name="Index.Items11" xml:space="preserve">
-    <value>Year</value>
-  </data>
-  <data name="Index.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 20</value>
-  </data>
-  <data name="Index.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 21</value>
-  </data>
-  <data name="Index.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="Index.ToolTip" xml:space="preserve">
-    <value>This can be useful in cases where it is impossible to find one key in the code.
-The grabber will therefore seek the chain starting from the last parameter
- instead of starting from the beginning of the code.</value>
-  </data>
-  <data name="&gt;&gt;Index.Name" xml:space="preserve">
-    <value>Index</value>
-  </data>
-  <data name="&gt;&gt;Index.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Index.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;Index.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="labelDReplaceWith.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelDReplaceWith.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelDReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 142</value>
-  </data>
-  <data name="labelDReplaceWith.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="labelDReplaceWith.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="labelDReplaceWith.Text" xml:space="preserve">
-    <value>With</value>
-  </data>
-  <data name="labelDReplaceWith.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelDReplaceWith.Name" xml:space="preserve">
-    <value>labelDReplaceWith</value>
-  </data>
-  <data name="&gt;&gt;labelDReplaceWith.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelDReplaceWith.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;labelDReplaceWith.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="labelDReplace.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelDReplace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelDReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 142</value>
-  </data>
-  <data name="labelDReplace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="labelDReplace.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="labelDReplace.Text" xml:space="preserve">
-    <value>Replace </value>
-  </data>
-  <data name="labelDReplace.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;labelDReplace.Name" xml:space="preserve">
-    <value>labelDReplace</value>
-  </data>
-  <data name="&gt;&gt;labelDReplace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelDReplace.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;labelDReplace.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="textDReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 142</value>
-  </data>
-  <data name="textDReplaceWith.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textDReplaceWith.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="textDReplaceWith.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 37</value>
-  </data>
-  <data name="textDReplaceWith.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="textDReplaceWith.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;textDReplaceWith.Name" xml:space="preserve">
-    <value>textDReplaceWith</value>
-  </data>
-  <data name="&gt;&gt;textDReplaceWith.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textDReplaceWith.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;textDReplaceWith.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="textDReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 142</value>
-  </data>
-  <data name="textDReplace.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textDReplace.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="textDReplace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 37</value>
-  </data>
-  <data name="textDReplace.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="textDReplace.ToolTip" xml:space="preserve">
-    <value>This area of the right will replace a string parameter by another.
-
-Use the "paramter Preview" to see the result.</value>
-  </data>
-  <data name="textDReplace.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;textDReplace.Name" xml:space="preserve">
-    <value>textDReplace</value>
-  </data>
-  <data name="&gt;&gt;textDReplace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textDReplace.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;textDReplace.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="textComplement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 116</value>
-  </data>
-  <data name="textComplement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 20</value>
-  </data>
-  <data name="textComplement.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="textComplement.ToolTip" xml:space="preserve">
-    <value>Allows to clarify more precisely the basis of the score (Score 5, 10, 20 ...)</value>
-  </data>
-  <data name="textComplement.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;textComplement.Name" xml:space="preserve">
-    <value>textComplement</value>
-  </data>
-  <data name="&gt;&gt;textComplement.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textComplement.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;textComplement.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="lblComplement.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblComplement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 119</value>
-  </data>
-  <data name="lblComplement.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 13</value>
-  </data>
-  <data name="lblComplement.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="lblComplement.Text" xml:space="preserve">
-    <value>Complement</value>
-  </data>
-  <data name="lblComplement.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lblComplement.Name" xml:space="preserve">
-    <value>lblComplement</value>
-  </data>
-  <data name="&gt;&gt;lblComplement.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblComplement.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;lblComplement.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 50</value>
-  </data>
-  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="label12.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="label12.Text" xml:space="preserve">
-    <value>Key Stop</value>
-  </data>
-  <data name="&gt;&gt;label12.Name" xml:space="preserve">
-    <value>label12</value>
-  </data>
-  <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="label13.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 50</value>
-  </data>
-  <data name="label13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="label13.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="label13.Text" xml:space="preserve">
-    <value>Key Start</value>
-  </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
-    <value>label13</value>
-  </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="TextKeyStopD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 47</value>
-  </data>
-  <data name="TextKeyStopD.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TextKeyStopD.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="TextKeyStopD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 55</value>
-  </data>
-  <data name="TextKeyStopD.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="TextKeyStopD.ToolTip" xml:space="preserve">
-    <value>String that defines the end of the parameter.
-
-SpecialParameters for beginning of expression:
-"normal"	: Find last index pf parameter
-"#REGEX#" (KEYSTART/END / PARAM1/2): Find first/last with Regex
-"#REVERSE#" (PARAM1/2): Reverse search</value>
-  </data>
-  <data name="&gt;&gt;TextKeyStopD.Name" xml:space="preserve">
-    <value>TextKeyStopD</value>
-  </data>
-  <data name="&gt;&gt;TextKeyStopD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextKeyStopD.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;TextKeyStopD.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="TextKeyStartD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 47</value>
-  </data>
-  <data name="TextKeyStartD.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TextKeyStartD.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="TextKeyStartD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 55</value>
-  </data>
-  <data name="TextKeyStartD.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="TextKeyStartD.ToolTip" xml:space="preserve">
-    <value>String that defines the beginning of the parameter.
-
-SpecialParameters for beginning of expression:
-"normal"	: Find last index pf parameter
-"#REGEX#" (KEYSTART/END / PARAM1/2): Find first/last with Regex
-"#REVERSE#" (PARAM1/2): Reverse search</value>
-  </data>
-  <data name="&gt;&gt;TextKeyStartD.Name" xml:space="preserve">
-    <value>TextKeyStartD</value>
-  </data>
-  <data name="&gt;&gt;TextKeyStartD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextKeyStartD.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;TextKeyStartD.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="label14.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 22</value>
-  </data>
-  <data name="label14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="label14.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label14.Text" xml:space="preserve">
-    <value>Parameter</value>
-  </data>
-  <data name="&gt;&gt;label14.Name" xml:space="preserve">
-    <value>label14</value>
-  </data>
-  <data name="&gt;&gt;label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label14.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="cb_ParamDetail.Items" xml:space="preserve">
-    <value>(Start-End Detail Page)</value>
-  </data>
-  <data name="cb_ParamDetail.Items1" xml:space="preserve">
-    <value>Original Title</value>
-  </data>
-  <data name="cb_ParamDetail.Items2" xml:space="preserve">
-    <value>Translated Title</value>
-  </data>
-  <data name="cb_ParamDetail.Items3" xml:space="preserve">
-    <value>URL Cover</value>
-  </data>
-  <data name="cb_ParamDetail.Items4" xml:space="preserve">
-    <value>Rate 1</value>
-  </data>
-  <data name="cb_ParamDetail.Items5" xml:space="preserve">
-    <value>Rate 2</value>
-  </data>
-  <data name="cb_ParamDetail.Items6" xml:space="preserve">
-    <value>Description / Synopsys</value>
-  </data>
-  <data name="cb_ParamDetail.Items7" xml:space="preserve">
-    <value>Director</value>
-  </data>
-  <data name="cb_ParamDetail.Items8" xml:space="preserve">
-    <value>Producer</value>
-  </data>
-  <data name="cb_ParamDetail.Items9" xml:space="preserve">
-    <value>Actors</value>
-  </data>
-  <data name="cb_ParamDetail.Items10" xml:space="preserve">
-    <value>Country</value>
-  </data>
-  <data name="cb_ParamDetail.Items11" xml:space="preserve">
-    <value>Genre</value>
-  </data>
-  <data name="cb_ParamDetail.Items12" xml:space="preserve">
-    <value>Year</value>
-  </data>
-  <data name="cb_ParamDetail.Items13" xml:space="preserve">
-    <value>URL Redirection cover</value>
-  </data>
-  <data name="cb_ParamDetail.Items14" xml:space="preserve">
-    <value>URL Redirection persons</value>
-  </data>
-  <data name="cb_ParamDetail.Items15" xml:space="preserve">
-    <value>Comment</value>
-  </data>
-  <data name="cb_ParamDetail.Items16" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="cb_ParamDetail.Items17" xml:space="preserve">
-    <value>Tagline</value>
-  </data>
-  <data name="cb_ParamDetail.Items18" xml:space="preserve">
-    <value>Certification</value>
-  </data>
-  <data name="cb_ParamDetail.Items19" xml:space="preserve">
-    <value>URL Redirection TTitle</value>
-  </data>
-  <data name="cb_ParamDetail.Items20" xml:space="preserve">
-    <value>URL Redirection Certification</value>
-  </data>
-  <data name="cb_ParamDetail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 19</value>
-  </data>
-  <data name="cb_ParamDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 21</value>
-  </data>
-  <data name="cb_ParamDetail.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="cb_ParamDetail.ToolTip" xml:space="preserve">
-    <value>Parameter List - selects the parameter to be set:
-
-Start / End Detail Page : Permet de réduire le code source à la section qui nous intéresse.
-Original Title : Titre original.
-Translated Title : Titre traduit.
-URL cover : URL de l'affiche.
-Rate 1 : Note 1.
-Rate 2 : Note 2.
-Description / Synopsys : Description of film
-Director: Director (s)
-Producer: Producer (s)
-Actors: Actors
-Country: Country
-Genre: Genre/Categories.
-Year: Year.
-URL Redirection cover: For posters better, it is sometimes
-need to click on another tab. This setting allows you to find in the code
-address tab. Then use Start / End cover to find the URL address of the poster
-in this new page.
-URL Redirection common: Redirection for common pupose
-Comment: Comment or user review
-Language: Language
-Tagline: Tagline
-Certification: Certification</value>
-  </data>
-  <data name="&gt;&gt;cb_ParamDetail.Name" xml:space="preserve">
-    <value>cb_ParamDetail</value>
-  </data>
-  <data name="&gt;&gt;cb_ParamDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cb_ParamDetail.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;cb_ParamDetail.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3511,60 +3366,6 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="textMaxItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 116</value>
-  </data>
-  <data name="textMaxItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="textMaxItems.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="textMaxItems.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;textMaxItems.Name" xml:space="preserve">
-    <value>textMaxItems</value>
-  </data>
-  <data name="&gt;&gt;textMaxItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textMaxItems.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;textMaxItems.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblMaxItems.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMaxItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 119</value>
-  </data>
-  <data name="lblMaxItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="lblMaxItems.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
-  </data>
-  <data name="lblMaxItems.Text" xml:space="preserve">
-    <value>Max Items</value>
-  </data>
-  <data name="lblMaxItems.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;lblMaxItems.Name" xml:space="preserve">
-    <value>lblMaxItems</value>
-  </data>
-  <data name="&gt;&gt;lblMaxItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMaxItems.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;lblMaxItems.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

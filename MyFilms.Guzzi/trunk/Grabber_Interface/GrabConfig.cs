@@ -1109,6 +1109,24 @@ namespace Grabber_Interface
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkCertification)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationIndex)._Value;
           break;
+        case 21: // Writer
+          if (!textBodyDetail.Text.Equals(BodyLinkPersons))
+            textBodyDetail.Text = BodyLinkPersons;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndWriter)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          lblMaxItems.Visible = true;
+          textMaxItems.Visible = true;
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
+          try { textMaxItems.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value; }
+          catch { textMaxItems.Text = string.Empty; };
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterIndex)._Value;
+          break;
         default:
           textDReplace.Text = "";
           textDReplaceWith.Text = "";
@@ -1239,6 +1257,9 @@ namespace Grabber_Interface
         case 20:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Value = TextKeyStartD.Text;
           break;
+        case 21:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Value = TextKeyStartD.Text;
+          break;
         default:
           TextKeyStartD.Text = "";
           break;
@@ -1344,6 +1365,9 @@ namespace Grabber_Interface
           break;
         case 20:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkCertification)._Value = TextKeyStopD.Text;
+          break;
+        case 21:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndWriter)._Value = TextKeyStopD.Text;
           break;
         default:
           TextKeyStopD.Text = "";
@@ -1549,10 +1573,11 @@ namespace Grabber_Interface
             textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Titles" + Environment.NewLine;
             break;
           case 19:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Certification" + Environment.NewLine;
+            //textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Certification" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Writer" + Environment.NewLine; 
             break;
         }
-        if (i <= 19) // Changed to support new fields...
+        if (i <= 20) // Changed to support new fields...
           textPreview.AppendText(Result[i] + Environment.NewLine);
         if (i == 2)
           textPreview.AppendText(Result[11] + Environment.NewLine);
@@ -1594,6 +1619,9 @@ namespace Grabber_Interface
         case 18:
           xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationRegExp)._Value = textComplement.Text;
           break;
+        case 21:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyWriterRegExp)._Value = textComplement.Text;
+          break;
         default:
           break;
       }
@@ -1614,6 +1642,9 @@ namespace Grabber_Interface
           break;
         case 9:
           xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value = textMaxItems.Text;
+          break;
+        case 21:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value = textMaxItems.Text;
           break;
         default:
           break;
@@ -1769,6 +1800,9 @@ namespace Grabber_Interface
         case 20:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param1 = textDReplace.Text;
           break;
+        case 21:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Param1 = textDReplace.Text;
+          break;
         default:
           break;
 
@@ -1841,6 +1875,9 @@ namespace Grabber_Interface
           break;
         case 20:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param2 = textDReplaceWith.Text;
+          break;
+        case 21:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Param2 = textDReplaceWith.Text;
           break;
         default:
           break;
@@ -1955,6 +1992,9 @@ namespace Grabber_Interface
         case "Certification":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Value;
           break;
+        case "Writer":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Value;
+          break;
         //case "TitlesURL":
         //  strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Value;
         //  break;
@@ -2028,6 +2068,12 @@ namespace Grabber_Interface
           break;
         case 19: // added for secondary titles page 
           xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesIndex)._Value = Index.Text;
+          break;
+        case 20: // added for secondary certification 
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationIndex)._Value = Index.Text;
+          break;
+        case 21: // writer
+          xmlConf.find(xmlConf.listDetail, TagName.KeyWriterIndex)._Value = Index.Text;
           break;
 
         default:

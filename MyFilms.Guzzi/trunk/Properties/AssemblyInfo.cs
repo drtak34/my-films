@@ -32,8 +32,8 @@ using MediaPortal.Common.Utils;
 //      Numéro de build
 //      Révision
 //
-[assembly: AssemblyVersion("5.0.0.39")]
-[assembly: AssemblyFileVersion("5.0.0.39")]
+[assembly: AssemblyVersion("5.0.0.40")]
+[assembly: AssemblyFileVersion("5.0.0.40")]
 [assembly: NeutralResourcesLanguageAttribute("")]
 #if MP11
 #else
