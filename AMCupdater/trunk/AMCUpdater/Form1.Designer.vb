@@ -18,7 +18,7 @@ Partial Class Form1
     Private components As System.ComponentModel.IContainer
 
     <STAThread()> _
-Private Sub Main()
+    Private Sub Main()
 
     End Sub
 

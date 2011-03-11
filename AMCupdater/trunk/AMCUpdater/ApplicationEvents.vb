@@ -49,11 +49,12 @@ Namespace My
 
                 'CurrentSettings.LoadUserSettings(ConfigFile)
 
-                If My.Application.CommandLineArgs.Count < 3 Then
+                If (My.Application.CommandLineArgs.Count < 3 And My.Application.CommandLineArgs.Count > 0) Then
                     Dim c As New BatchApplication
                     LogEvent("", EventLogLevel.ErrorOrSimilar)
                     LogEvent("AMCUpdater " & My.Application.Info.Version.ToString & " Starting", EventLogLevel.ImportantEvent)
                     LogEvent("Arguments Found : " & My.Application.CommandLineArgs.Count.ToString, EventLogLevel.ImportantEvent)
+                    LogEvent("Arguments : " & My.Application.CommandLineArgs.ToString, EventLogLevel.ImportantEvent)
                     LogEvent("Running in Console Mode", EventLogLevel.ImportantEvent)
                     e.Cancel = True
                     c.Main()
