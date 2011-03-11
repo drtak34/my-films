@@ -2274,7 +2274,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
           <Revision>9</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>Need version of "BrowseTheWeb" with minimum version 0.2.7.0 to use web link features.</Message>
+        <Message>To use MyFilms online help and preview IMDB pages, BrowseTheWeb version 0.27 (0.2.7.0) or higher must be installed.</Message>
         <Name>Browse The Web</Name>
       </DependencyItem>
       <DependencyItem>
@@ -2293,8 +2293,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
           <Revision>9999999</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>Need version of OnlineVideos with minimum version 0.28.0.0 !
-Some functions will not be available or work properly, if older versions are installed!</Message>
+        <Message>To access online trailers from with MyFilms, Online Videos v0.28 (0.28.0.0) or higher must be installed.</Message>
         <Name>OnlineVideos</Name>
       </DependencyItem>
     </Items>
@@ -4324,14 +4323,14 @@ Some functions will not be available or work properly, if older versions are ins
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2d87c3da-0cee-420b-b8bf-444ca2c13123}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d71a4648-d34d-4891-8c54-04a34fa20133}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{178a5a24-4cf3-4eae-8afa-55654070dce4}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6b1774fd-7176-4f8b-80be-8c69de46e86b}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

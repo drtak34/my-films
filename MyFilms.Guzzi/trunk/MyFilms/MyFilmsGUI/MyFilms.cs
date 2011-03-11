@@ -2830,7 +2830,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (MyFilms.conf.StrAMCUpd)
                     {
                         dlg2.Add(GUILocalizeStrings.Get(1079861));   // Update Database with external AMCupdater
-                        choiceViewGlobalUpdates.Add("fileselect");
+                        choiceViewGlobalUpdates.Add("updatedb");
                     }
 
                     if (MyFilms.conf.StrFanart)
