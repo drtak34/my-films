@@ -6273,7 +6273,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
        /// </summary>
        private static void InitLogger()
        {
-           LoggingConfiguration config = new LoggingConfiguration();
+           // LoggingConfiguration config = new LoggingConfiguration();
+           // Fix suggested in forum to avoid breaking other plugins logging...
+           LoggingConfiguration config = LogManager.Configuration ?? new LoggingConfiguration();
 
            try
            {
