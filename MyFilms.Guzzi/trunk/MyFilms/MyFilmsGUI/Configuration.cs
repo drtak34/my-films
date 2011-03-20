@@ -190,7 +190,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "4":
+                    case "4": // EAX 2.5.0
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -246,6 +246,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             XbmcNfo nfo = new XbmcNfo();
                             StrFileXml = nfo.ConvertXbmcNfo(StrFileXml, StrPathImg,StrStorage, SortTitle, OnlyFile, TitleDelim);
+                        }
+                        else
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
+                        break;
+                    case "9": // EAX 3.x
+                        if (create_temp)
+                        {
+                          string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
+                          string destFile = WStrPath + "\\" + StrFileXml.Substring(StrFileXml.LastIndexOf(@"\") + 1, StrFileXml.Length - StrFileXml.LastIndexOf(@"\") - 5) + "_tmp.xml";
+                          if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(StrFileXml))))
+                          {
+                            StrFileXml = destFile;
+                            break;
+                          }
+                          bool SortTitle = false;
+                          bool OnlyFile = false;
+                          SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
+                          OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
+                          EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
+                          StrFileXml = emc3.ConvertEaxMovieCatalog3(StrFileXml, StrPathImg, SortTitle, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);

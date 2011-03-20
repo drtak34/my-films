@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="MyFilms\BaseMesFilms.cs" />
     <Compile Include="MyFilms\CatalogConverter\DvdProfiler.cs" />
+    <Compile Include="MyFilms\CatalogConverter\EaxMovieCatalog3.cs" />
     <Compile Include="MyFilms\CatalogConverter\XbmcDb.cs" />
     <Compile Include="MyFilms\Configuration\MyFilmsInputBox.cs">
       <SubType>Form</SubType>

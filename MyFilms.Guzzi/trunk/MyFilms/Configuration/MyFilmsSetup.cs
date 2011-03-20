@@ -1827,11 +1827,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 case 0:
                     break;
-                case 4:
+                case 4: // EAX MC 2.5.0
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "Borrower";
-                    AntTitle1.Text = "TranslatedTitle";
-                    AntTitle2.Text = "OriginalTitle";
+                    if (string.IsNullOrEmpty(AntTitle1.Text))
+                      AntTitle1.Text = "TranslatedTitle";
+                    if (string.IsNullOrEmpty(AntTitle2.Text))
+                      AntTitle2.Text = "OriginalTitle";
                     AntSTitle.Text = "FormattedTitle";
                     TitleDelim.Text = "\\";
                     ItemSearchFileName.Text = "TranslatedTitle";
@@ -1842,6 +1844,29 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     break;
 
                 case 7: // MyFilms DB (currently same as ANT Movie Catalog, but possible to extend DB fields in the future
+                    break;
+
+                case 9: // EAX MC 3.0.9
+                    AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = "Borrower";
+                    if (string.IsNullOrEmpty(AntTitle1.Text))
+                      AntTitle1.Text = "TranslatedTitle";
+                    if (string.IsNullOrEmpty(AntTitle2.Text))
+                      AntTitle2.Text = "OriginalTitle";
+                    AntSTitle.Text = "FormattedTitle";
+                    TitleDelim.Text = "\\";
+                    ItemSearchFileName.Text = "TranslatedTitle";
+                    if (MesFilmsCat.Text.Length > 0)
+                      if (MesFilmsImg.Text.Length == 0)
+                        MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
+                    SearchFileName.Checked = true;
+                    AntItem1.Text = "Writer";
+                    AntLabel1.Text = "Writer";
+                    AntItem2.Text = "Certification";
+                    AntLabel2.Text = "Certification (MPAA)";
+                    AntViewItem1.Text = "Writer";
+                    AntViewText1.Text = "Writer";
+                    cbWatched.Text = "Checked";
                     break;
 
                 default:
@@ -2370,7 +2395,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             MyMovies mm = new MyMovies();
                             mydivx.ReadXml(mm.ConvertMyMovies(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked));
                             break;
-                        case 4: // EAX Movie Catalog
+                        case 4: // EAX Movie Catalog 2.5.0
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
@@ -2416,6 +2441,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             }
                             XbmcNfo nfo = new XbmcNfo();
                             mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, AntStorage.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
+                            break;
+                        case 9: // EAX Movie Catalog 3.0.9 (beta5)
+                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+                            {
+                              mydivx.ReadXml(destFile);
+                              break;
+                            }
+                            EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
+                            mydivx.ReadXml(emc3.ConvertEaxMovieCatalog3(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
                             break;
                     }
 
@@ -2854,7 +2889,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void MesFilmsCat_TextChanged(object sender, EventArgs e)
         {
-            if (CatalogType.SelectedIndex == 4)
+          if (CatalogType.SelectedIndex == 4 || CatalogType.SelectedIndex == 9) // EAX Movie Catalog 2.5.0 or 3.0.9
                 if (MesFilmsImg.Text.Length == 0)
                     MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
         }
