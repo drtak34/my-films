@@ -233,9 +233,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (wResolution.Length > 0)
                         WriteAntAtribute(destXml, "Resolution", wResolution);
                     if (wVideobitrate.Length > 0)
-                        WriteAntAtribute(destXml, "VideoBitrate", wVideobitrate.Substring(0, wVideobitrate.IndexOf(" ") - 1));
+                        WriteAntAtribute(destXml, "VideoBitrate", wVideobitrate.Substring(0, wVideobitrate.IndexOf("K") - 1).Trim().Replace(" ", ""));
                     if (wAudiobitrate.Length > 0)
-                        WriteAntAtribute(destXml, "AudioBitrate", wAudiobitrate.Substring(0, wAudiobitrate.IndexOf(" ") - 1));
+                      WriteAntAtribute(destXml, "AudioBitrate", wAudiobitrate.Substring(0, wAudiobitrate.IndexOf("K") - 1).Trim().Replace(" ", ""));
                     if (wFileSize.Length > 0)
                         WriteAntAtribute(destXml, "Size", wFileSize);
                     WriteAntAtribute(destXml, "Disks", DiscsList.Count.ToString());

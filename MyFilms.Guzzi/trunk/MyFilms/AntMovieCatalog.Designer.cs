@@ -1659,12 +1659,6 @@ namespace MyFilmsPlugin.MyFilms {
                 this.columnLength_Num.ReadOnly = true;
                 this.columnLength_Num.DefaultValue = ((int)(0));
                 this.columnPicture.Namespace = "";
-                this.columnCertification.Namespace = "";
-                this.columnWriter.Namespace = "";
-                this.columnWatched.Namespace = "";
-                //this.columnDateWatched.Namespace = "";
-                this.columnIMDB_Id.Namespace = "";
-                this.columnTMDB_Id.Namespace = "";
                 this.columnContents_Id.AutoIncrement = true;
                 this.columnContents_Id.AllowDBNull = false;
                 this.columnContents_Id.Namespace = "";

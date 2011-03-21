@@ -375,11 +375,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               {
                 string catalogDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
                 string imgPrefixFilenameOnly = "";
-                if (MesFilmsImg.Text == catalogDirectory)
+                if (MesFilmsImg.Text == catalogDirectory && CatalogType.SelectedIndex != 0) // only if not external catalog
                   cbPictureHandling.Text = "Relative Path";
                 else
                   cbPictureHandling.Text = "Full Path"; // set as default, unless other is possible
-                if (MesFilmsImg.Text.StartsWith(catalogDirectory) && MesFilmsImg.Text != catalogDirectory)
+                if (MesFilmsImg.Text.StartsWith(catalogDirectory) && MesFilmsImg.Text != catalogDirectory && CatalogType.SelectedIndex != 0) // only if not external catalog
                 {
                   MesFilmsImg.Text = catalogDirectory;
                   cbPictureHandling.Text = "Relative Path";
@@ -1863,7 +1863,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     AntItem1.Text = "Writer";
                     AntLabel1.Text = "Writer";
                     AntItem2.Text = "Certification";
-                    AntLabel2.Text = "Certification (MPAA)";
+                    AntLabel2.Text = "MPAA";
                     AntViewItem1.Text = "Writer";
                     AntViewText1.Text = "Writer";
                     cbWatched.Text = "Checked";
@@ -2024,12 +2024,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void pictureBox_Click(object sender, EventArgs e)
         {
+
+          if (!string.IsNullOrEmpty(SFilePicture.Text))
+            openFileDialog1.FileName = SFilePicture.Text;
+          else
+          {
+            openFileDialog1.FileName = String.Empty;
+            //openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
+          }
+          if (SFilePicture.Text.Contains("\\"))
+            openFileDialog1.InitialDirectory = SFilePicture.Text.Substring(0, SFilePicture.Text.LastIndexOf("\\") + 1);
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.DefaultExt = "png";
             openFileDialog1.Filter = "PNG Files|*.png";
             openFileDialog1.Title = "Find Logos files (png file)";
-            if (SFilePicture.Text.Length > 0)
-                openFileDialog1.FileName = SFilePicture.Text;
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
                 if (MediaPortal.Util.Utils.IsPicture(openFileDialog1.FileName))
@@ -4238,6 +4246,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           chkDfltViewsAll.Checked = false; // Use group view thumbs for all group views
           // Logos
           chkLogos.Checked = true;
+          comboBoxLogoSpacing.Text = "2";
           comboBoxLogoPresets.Text = "Use Logos of currently selected skin";
           //GrabberConfig
           txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";

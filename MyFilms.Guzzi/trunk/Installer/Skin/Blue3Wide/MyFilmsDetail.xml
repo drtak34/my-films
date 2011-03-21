@@ -66,21 +66,6 @@
 <!--		<import>common.window.overlay.xml</import> -->
 		<import>common.time.xml</import>
 		<control>
-			<description>Detail Panel Background</description>
-			<type>image</type>
-			<id>1</id>
-			<posX>458</posX>
-			<posY>48</posY>
-			<width>948</width>
-			<height>766</height>
-			<texture>bg_facade.png</texture>
-			<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
-			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
-		<control>
 			<type>image</type>
 			<id>1</id>
 			<posX>10</posX>
@@ -159,7 +144,7 @@
 			<textcolor>cca9d0f7</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
 			<visible>!control.hasfocus(10099)</visible>
-			<label>#myfilms.config.currentconfig</label>
+			<label>#myfilms.config.currentconfig #myfilms.config.configfilter</label>
 		</control>
 		<control>
 			<type>fadelabel</type>
@@ -221,6 +206,7 @@
 			</control>
 			<control>
 				<type>label</type>
+				<description>Menu Label</description>
 				<id>1</id>
 				<posX>130</posX>
 				<posY>70</posY>
@@ -228,15 +214,6 @@
 				<font>font18</font>
 				<align>left</align>
 				<textcolor>ffffffff</textcolor>
-			</control> 
-			<control>
-				<type>image</type>
-				<id>1</id>
-				<posX>35</posX>
-				<posY>75</posY>
-				<width>400</width>
-				<height>53</height>
-				<texture>bg_button_nofocus.png</texture>
 			</control> 
 			<control>
 				<type>group</type>
@@ -254,7 +231,7 @@
 					<description>Back</description>
 					<id>102</id>
 					<onup>10014</onup>
-					<ondown>107</ondown>
+					<ondown>109</ondown>
 					<onright>10000</onright>
 					<label>712</label>
 				</control>
@@ -281,8 +258,8 @@
 					<description>previous</description>
 					<id>104</id>
 					<onright>10000</onright>
-					<ondown>103</ondown>
 					<onup>107</onup>
+					<ondown>103</ondown>
 					<label>210</label>
 				</control>
 				<control>
@@ -290,8 +267,8 @@
 					<description>next</description>
 					<id>103</id>
 					<onright>10000</onright>
-					<ondown>106</ondown>
 					<onup>104</onup>
+					<ondown>106</ondown>
 					<label>209</label>
 				</control>
 				<control>
@@ -299,16 +276,16 @@
 					<description>First</description>
 					<id>106</id>
 					<onright>10000</onright>
-					<ondown>105</ondown>
 					<onup>103</onup>
+					<ondown>105</ondown>
 				</control>
 				<control>
 					<type>button</type>
 					<description>Last</description>
 					<id>105</id>
 					<onright>10000</onright>
-					<ondown>10012</ondown>
 					<onup>106</onup>
+					<ondown>10012</ondown>
 				</control>
 
 			<!-- Start - Additional Buttons for Links to other Plugins -->
@@ -447,7 +424,6 @@
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
-
     <control>
 		<type>button</type>
 		<description>Full Colour Fanart View</description>
@@ -479,18 +455,6 @@
 		<visible>!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 	</control>
-	<control>
-		<type>image</type>
-		<id>1</id>
-		<posX>490</posX>
-		<posY>77</posY>
-		<width>790</width>
-		<height>53</height>
-		<texture>bg_facade_line_nofocus.png</texture>
-		<colordiffuse>77ffffff</colordiffuse>
-		<visible>!Control.HasFocus(10099)</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-	</control>	
 	<control>
 		<type>imagelist</type>
 		<id>1</id>
@@ -533,18 +497,6 @@
 		<font>font14</font>
 		<align>left</align>
 		<textcolor>ffffffff</textcolor>
-		<visible>!Control.HasFocus(10099)</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-	</control>
-	<control>
-		<type>image</type>
-		<id>1</id>
-		<posX>490</posX>
-		<posY>106</posY>
-		<width>790</width>
-		<height>53</height>
-		<texture>bg_facade_line_nofocus.png</texture>
-		<colordiffuse>77ffffff</colordiffuse>
 		<visible>!Control.HasFocus(10099)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 	</control>
@@ -814,9 +766,7 @@ Detailmenu for Persons
 		<font>font14</font>
 		<visible>Control.HasFocus(10003)</visible>
 	</control>
-<!-- 
-Detailmenu for technical details
--->
+<!-- Detailmenu for technical details -->
 	<control>
 		<type>label</type>
 		<id>1</id>
@@ -859,7 +809,7 @@ Detailmenu for technical details
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<width>535</width>
-		<visible>Control.HasFocus(10004)</visible>
+		<visible>string.equals(#myfilms.db.videobitrate.value)+Control.HasFocus(10004)</visible>
 	</control>
 	<control>
 		<type>label</type>
@@ -878,7 +828,7 @@ Detailmenu for technical details
 		<posX>730</posX>
 		<posY>230</posY>
 		<label>#myfilms.db.resolution.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -900,7 +850,7 @@ Detailmenu for technical details
 		<posX>1110</posX>
 		<posY>230</posY>
 		<label>#myfilms.db.calc.aspectratio.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -923,9 +873,9 @@ Detailmenu for technical details
 		<posX>730</posX>
 		<posY>260</posY>
 		<label>#myfilms.db.framerate.value fps</label>
-		<width>535</width>
+		<width>155</width>
 		<font>font14</font>
-		<visible>Control.HasFocus(10004)</visible>
+		<visible>string.equals(#myfilms.db.framerate.value)+Control.HasFocus(10004)</visible>
 	</control>
 	<control>
 		<type>label</type>
@@ -944,20 +894,9 @@ Detailmenu for technical details
 		<posX>1110</posX>
 		<posY>260</posY>
 		<label>#myfilms.db.calc.imageformat.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
-		<visible>Control.HasFocus(10004)</visible>
-	</control>
-	<control>
-		<type>image</type>
-		<id>1</id>
-		<posX>490</posX>
-		<posY>240</posY>
-		<width>790</width>
-		<height>53</height>
-		<texture>bg_facade_line_nofocus.png</texture>
-		<colordiffuse>77ffffff</colordiffuse>
 		<visible>Control.HasFocus(10004)</visible>
 	</control>
 	<control>
@@ -1000,19 +939,8 @@ Detailmenu for technical details
 		<label>#myfilms.db.audiobitrate.value kbit/sec.</label>
 		<width>535</width>
 		<font>font14</font>
-		<visible>Control.HasFocus(10004)</visible>
+		<visible>string.equals(#myfilms.db.audiobitrate.value)+Control.HasFocus(10004)</visible>
 	</control>
-	<control>
-		<type>image</type>
-		<id>1</id>
-		<posX>490</posX>
-		<posY>310</posY>
-		<width>790</width>
-		<height>53</height>
-		<texture>bg_facade_line_nofocus.png</texture>
-		<colordiffuse>77ffffff</colordiffuse>
-		<visible>Control.HasFocus(10004)</visible>
-  </control>
 	<control>
 		<type>label</type>
 		<id>1</id>
@@ -1030,7 +958,7 @@ Detailmenu for technical details
 		<posX>730</posX>
 		<posY>370</posY>
 		<label>No. #myfilms.db.number.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -1052,7 +980,7 @@ Detailmenu for technical details
 		<posX>1110</posX>
 		<posY>370</posY>
 		<label>#myfilms.db.checked.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -1074,7 +1002,7 @@ Detailmenu for technical details
 		<posX>730</posX>
 		<posY>400</posY>
 		<label>#myfilms.db.date.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -1096,7 +1024,7 @@ Detailmenu for technical details
 		<posX>1110</posX>
 		<posY>400</posY>
 		<label>#myfilms.db.borrower.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -1118,7 +1046,7 @@ Detailmenu for technical details
 		<posX>730</posX>
 		<posY>430</posY>
 		<label>#myfilms.db.mediatype.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -1140,7 +1068,7 @@ Detailmenu for technical details
 		<posX>1110</posX>
 		<posY>430</posY>
 		<label>#myfilms.db.medialabel.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>Control.HasFocus(10004)</visible>
@@ -1162,7 +1090,7 @@ Detailmenu for technical details
 		<posX>730</posX>
 		<posY>460</posY>
 		<label>#myfilms.db.size.value MB</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
 		<visible>string.equals(#myfilms.db.size.value)+Control.HasFocus(10004)</visible>
@@ -1184,20 +1112,9 @@ Detailmenu for technical details
 		<posX>1110</posX>
 		<posY>460</posY>
 		<label>#myfilms.db.disks.value</label>
-		<width>535</width>
+		<width>155</width>
 		<textcolor>ffffffff</textcolor>
 		<font>font14</font>
-		<visible>Control.HasFocus(10004)</visible>
-	</control>
-	<control>
-		<type>image</type>
-		<id>1</id>
-		<posX>490</posX>
-		<posY>445</posY>
-		<width>790</width>
-		<height>53</height>
-		<texture>bg_facade_line_nofocus.png</texture>
-		<colordiffuse>77ffffff</colordiffuse>
 		<visible>Control.HasFocus(10004)</visible>
 	</control>
 	<control>
@@ -1313,21 +1230,6 @@ Detailmenu for technical details
 		<height>556</height>
 		<texture flipY="true" diffuse="Thumb_Mask.png">Picture_cover.png</texture>
 		<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
-	</control>
-	<control>
-		<type>image</type>
-		<id>1</id>
-		<posX>490</posX>
-		<posY>560</posY>
-		<width>790</width>
-		<height>53</height>
-		<texture>bg_facade_line_nofocus.png</texture>
-		<colordiffuse>77ffffff</colordiffuse>
-		<visible>!Control.HasFocus(10099)</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
 		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
@@ -1556,7 +1458,7 @@ Detailmenu for technical details
 		<width>20</width>
 		<height>20</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
@@ -1572,7 +1474,7 @@ Detailmenu for technical details
 		<height>20</height>
 		<texture>MyFilms\overlaywatched.png</texture>
 		<colordiffuse>eea9d0f7</colordiffuse>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	

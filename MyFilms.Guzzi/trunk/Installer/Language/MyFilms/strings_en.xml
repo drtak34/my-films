@@ -243,6 +243,8 @@
     <String id="10798753">Comments</String>
     <String id="10798754">Actors</String>
     <String id="10798755">Technical Info</String>
+    <String id="10798761">Load  Covers (TMDB)</String>
+    <String id="10798762">Change Cover</String>
     <String id="10798800">Warning: possible long runtime!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">started for {0} films?</String>

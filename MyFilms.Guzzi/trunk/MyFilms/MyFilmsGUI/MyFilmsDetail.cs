@@ -930,16 +930,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       choiceViewMenu.Add("cover-thumbnailer");
                     }
 
-                    if (ExtendedStartmode("Details context: Change Local COver)"))
-                    {
-                      //dlgmenu.Add(GUILocalizeStrings.Get(xxxxxxx));
-                      dlgmenu.Add("Change Cover");
-                      choiceViewMenu.Add("changecover");
-                    }
-
-                    //dlgmenu.Add(GUILocalizeStrings.Get(xxxxxxx));
-                    dlgmenu.Add("Poster (TMDB)");
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
                     choiceViewMenu.Add("tmdbposter");
+
+                    //if (ExtendedStartmode("Details context: Change Local COver)"))
+                    //{
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798762)); // Change Cover
+                    choiceViewMenu.Add("changecover");
+                    //}
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
@@ -1712,7 +1710,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         string tmpPicture = Result[2];
                         string tmpPicturename = ""; // picturename only
-                        string oldPicture = GUIPropertyManager.GetProperty("picture");
+                        string oldPicture = MyFilmsDetail.getGUIProperty("picture");
                         string newPicture = ""; // full path to new picture
                         string newPictureCatalogname = ""; // entry to be stored in catalog
                         if (string.IsNullOrEmpty(oldPicture))
@@ -2148,7 +2146,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
             string newPicture = tempImage.Substring(0, tempImage.LastIndexOf(".") ) + "L.jpg";
-            string oldPicture = GUIPropertyManager.GetProperty("picture");
+            string oldPicture = MyFilmsDetail.getGUIProperty("picture");
             if (oldPicture.Length == 0 || oldPicture == null)
               oldPicture = newPicture;
             LogMyFilms.Debug("Picture Grabber options: Old temp Cover Image: '" + oldPicture.ToString() + "'");
@@ -2274,7 +2272,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           string tmpPicture = "";
           string tmpPicturename = ""; // picturename only
-          string oldPicture = GUIPropertyManager.GetProperty("picture");
+          string oldPicture = MyFilmsDetail.getGUIProperty("picture");
           string newPicture = ""; // full path to new picture
           string newPictureCatalogname = ""; // entry to be stored in catalog
           if (string.IsNullOrEmpty(oldPicture))
@@ -2521,19 +2519,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string[] files = null;
           Int64 wsize = 0; // Temporary Filesize detection
           string startPattern = "";
-          string currentPicture = GUIPropertyManager.GetProperty("picture");
+          string currentPicture = MyFilmsDetail.getGUIProperty("picture");
           if (string.IsNullOrEmpty(currentPicture)) 
             return;
           string currentPictureName = currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
           string currentStorePath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
+          string newPicture = ""; // full path to new picture
+          string newPictureCatalogname = ""; // entry to be stored in catalog
+
 
           if (!currentPicture.StartsWith(currentStorePath)) 
             return;
           if (currentStorePath.EndsWith("\\"))
             startPattern = "";
           else 
-            startPattern = currentPicture.Substring(currentPicture.LastIndexOf("\\"), currentStorePath.Length);
-          string searchPattern = currentPicture.Substring(currentStorePath.Length + 1);
+            startPattern = currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
+          string searchPattern = currentPicture.Substring(currentStorePath.Length);
 
           int patternLength2 = 999;
           int patternLength = searchPattern.LastIndexOf(".");
@@ -2545,11 +2546,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           
           LogMyFilms.Debug("MFD: (ChangeLocalCover) - startPattern = '" + startPattern + "', searchPattern = '" + searchPattern + "', currentStorePath = '" + currentStorePath + "'");
           
-          directoryname = currentPicture.Substring(currentPicture.LastIndexOf("\\"));
+          directoryname = currentPicture.Substring(0, currentPicture.LastIndexOf("\\"));
 
+          int nCurrent = -1;
           if (!string.IsNullOrEmpty(directoryname))
           {
-            files = Directory.GetFiles(directoryname, "*searchPattern*.jpg", SearchOption.TopDirectoryOnly);
+            files = Directory.GetFiles(directoryname, @"*" + searchPattern + @"*.jpg", SearchOption.TopDirectoryOnly);
             foreach (string filefound in files)
             {
                 wsize = new System.IO.FileInfo(filefound).Length;
@@ -2557,6 +2559,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 resultsize.Add(wsize);
                 filesfound[filesfoundcounter] = filefound;
                 filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
+                if (filefound.ToLower() == currentPicture.ToLower()) 
+                  nCurrent = filesfoundcounter;
                 filesfoundcounter = filesfoundcounter + 1;
             }
           }
@@ -2578,29 +2582,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (result.Count > 1)
             {
-              for (int i = 1; i < result.Count; i++)
-              {
-              }
+              //for (int i = 1; i < result.Count; i++)
+              //{
+              //}
+
+
+              if (nCurrent == -1)
+                return;
+
+                nCurrent++;
+                if (nCurrent >= result.Count)
+                  nCurrent = 0;
+              newPicture = filesfound[nCurrent];
             }
           }
           else
             LogMyFilms.Debug("MyFilmsDetails (LocalCoverChange) - NO COVERS FOUND !!!!");
 
-          //string tmpPicturename = newPicture.Substring(newPicture.LastIndexOf("\\") + 1);
-          //if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-          //{
-          //  newPictureCatalogname = MyFilms.conf.StrPicturePrefix.Substring(0,MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) + tmpPicturename;
-          //}
-          //if (MyFilms.conf.PictureHandling == "Full Path")
-          //{
-          //  newPictureCatalogname = newPicture;
-          //}
-          //if (!choose)
-          //{
-          //  MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
-          //  Update_XML_database();
-          
-
+          string tmpPicturename = newPicture.Substring(newPicture.LastIndexOf("\\") + 1);
+          if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
+          {
+            newPictureCatalogname = MyFilms.conf.StrPicturePrefix.Substring(0,MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) + tmpPicturename;
+          }
+          if (MyFilms.conf.PictureHandling == "Full Path")
+          {
+            newPictureCatalogname = newPicture;
+          }
+          if (!interactive)
+          {
+            // add confirmation dialog here....
+          }
+          else
+          {
+            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
+            LogMyFilms.Debug("MFD: (ChangeLocalCover) : NewCatalogName: '" + newPictureCatalogname + "'");
+            Update_XML_database();
+          }
         }
         
 
@@ -2762,7 +2779,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 string tmpPicture = Result[2];
                 string tmpPicturename = ""; // picturename only
-                string oldPicture = GUIPropertyManager.GetProperty("picture");
+                string oldPicture = MyFilmsDetail.getGUIProperty("picture");
                 string newPicture = ""; // full path to new picture
                 string newPictureCatalogname = ""; // entry to be stored in catalog
                 if (string.IsNullOrEmpty(oldPicture))

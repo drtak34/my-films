@@ -27,7 +27,7 @@
     <String id="345">Jahre</String>
     <String id="366">Sortiere: Jahr</String>
     <String id="367">Sortiere: Bewertung</String>
-    <String id="369">Alle Filme</String>
+    <String id="369">Filmname</String>
     <String id="417">Ansicht: Symbole groß</String>
     <String id="432">Lösche Film aus der Datenbank</String>
     <String id="433">Lösche Daten ... sind Sie sicher ?</String>
@@ -243,6 +243,8 @@
     <String id="10798753">Kommentar</String>
     <String id="10798754">Mitwirkende Personen</String>
     <String id="10798755">Technische Infos</String>
+    <String id="10798761">Lade Covers (TMDB)</String>
+    <String id="10798762">Wechsel Cover</String>
     <String id="10798800">Warnung: Lange Laufzeit !</String>
     <String id="10798801">Soll wirklich die Trailersuche</String>
     <String id="10798802">für {0} Filme gestartet werden?</String>

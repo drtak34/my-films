@@ -163,7 +163,7 @@
 			<font>font14</font>
 			<textcolor>cca9d0f7</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<label>#myfilms.config.currentconfig</label>
+			<label>#myfilms.config.currentconfig  #myfilms.config.configfilter</label>
 		</control>
 		<control>
 			<type>fadelabel</type>
@@ -177,7 +177,7 @@
 			<font>font14</font>
 			<textcolor>7fffffff</textcolor>
 			<disabledcolor>ff808080</disabledcolor>
-			<label>#myfilms.view - #myfilms.select</label>
+			<label>#myfilms.view #myfilms.select</label>
 			<visible>string.contains(#myfilms.view)|string.contains(#myfilms.select)</visible>
 		</control>
 		<control>
@@ -323,7 +323,7 @@
 					<hyperlink>9811</hyperlink>
 					<label>1300</label>
 					<onright>50</onright>
-					<onup>5</onup>
+					<onup>7</onup>
 					<ondown>6</ondown>
 				</control>
 <!-- End - Additional Buttons for Links to other Plugins -->
@@ -350,7 +350,7 @@
 	          		<posY>120</posY>
 	          		<width>1173</width>
 	          		<height>380</height>
-					<onleft>6</onleft>
+					<onleft>4</onleft>
 					<itemWidth>90</itemWidth>
 					<itemHeight>125</itemHeight>
 					<textureWidth>86</textureWidth>
@@ -399,7 +399,7 @@
           			<posX>0</posX>
           			<posY>180</posY>
           			<width>1244</width>
-					<onup>6</onup>
+					<onup>4</onup>
 					<textYOff>500</textYOff>
         			<spinPosY>580</spinPosY>
 					<spinWidth>22</spinWidth>
@@ -639,7 +639,7 @@
 		<width>25</width>
 		<height>25</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
@@ -655,7 +655,7 @@
 		<height>25</height>
 		<texture>MyFilms\overlaywatched.png</texture>
 		<colordiffuse>eea9d0f7</colordiffuse>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
