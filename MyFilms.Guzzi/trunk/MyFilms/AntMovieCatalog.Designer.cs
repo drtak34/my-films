@@ -950,6 +950,10 @@ namespace MyFilmsPlugin.MyFilms {
             
             private global::System.Data.DataColumn columnTMDB_Id;
             
+            private global::System.Data.DataColumn columnSourceTrailer;
+            
+            private global::System.Data.DataColumn columnTagLine;
+            
             private global::System.Data.DataColumn columnContents_Id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1271,6 +1275,20 @@ namespace MyFilmsPlugin.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SourceTrailerColumn {
+                get {
+                    return this.columnSourceTrailer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TagLineColumn {
+                get {
+                    return this.columnTagLine;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn Contents_IdColumn {
                 get {
                     return this.columnContents_Id;
@@ -1346,7 +1364,9 @@ namespace MyFilmsPlugin.MyFilms {
                         string Watched, 
                         System.DateTime DateWatched, 
                         string IMDB_Id, 
-                        string TMDB_Id) {
+                        string TMDB_Id, 
+                        string SourceTrailer, 
+                        string TagLine) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Number,
@@ -1389,6 +1409,8 @@ namespace MyFilmsPlugin.MyFilms {
                         DateWatched,
                         IMDB_Id,
                         TMDB_Id,
+                        SourceTrailer,
+                        TagLine,
                         null};
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -1434,7 +1456,9 @@ namespace MyFilmsPlugin.MyFilms {
                         string Watched, 
                         System.DateTime DateWatched, 
                         string IMDB_Id, 
-                        string TMDB_Id) {
+                        string TMDB_Id, 
+                        string SourceTrailer, 
+                        string TagLine) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Number,
@@ -1477,6 +1501,8 @@ namespace MyFilmsPlugin.MyFilms {
                         DateWatched,
                         IMDB_Id,
                         TMDB_Id,
+                        SourceTrailer,
+                        TagLine,
                         null};
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -1537,6 +1563,8 @@ namespace MyFilmsPlugin.MyFilms {
                 this.columnDateWatched = base.Columns["DateWatched"];
                 this.columnIMDB_Id = base.Columns["IMDB_Id"];
                 this.columnTMDB_Id = base.Columns["TMDB_Id"];
+                this.columnSourceTrailer = base.Columns["SourceTrailer"];
+                this.columnTagLine = base.Columns["TagLine"];
                 this.columnContents_Id = base.Columns["Contents_Id"];
             }
             
@@ -1610,18 +1638,22 @@ namespace MyFilmsPlugin.MyFilms {
                 base.Columns.Add(this.columnLength_Num);
                 this.columnPicture = new global::System.Data.DataColumn("Picture", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnPicture);
-                this.columnCertification = new global::System.Data.DataColumn("Certification", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.columnCertification = new global::System.Data.DataColumn("Certification", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCertification);
-                this.columnWriter = new global::System.Data.DataColumn("Writer", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.columnWriter = new global::System.Data.DataColumn("Writer", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnWriter);
-                this.columnWatched = new global::System.Data.DataColumn("Watched", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.columnWatched = new global::System.Data.DataColumn("Watched", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnWatched);
-                this.columnDateWatched = new global::System.Data.DataColumn("DateWatched", typeof(global::System.DateTime), null, global::System.Data.MappingType.Attribute);
+                this.columnDateWatched = new global::System.Data.DataColumn("DateWatched", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDateWatched);
-                this.columnIMDB_Id = new global::System.Data.DataColumn("IMDB_Id", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.columnIMDB_Id = new global::System.Data.DataColumn("IMDB_Id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIMDB_Id);
-                this.columnTMDB_Id = new global::System.Data.DataColumn("TMDB_Id", typeof(string), null, global::System.Data.MappingType.Attribute);
+                this.columnTMDB_Id = new global::System.Data.DataColumn("TMDB_Id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTMDB_Id);
+                this.columnSourceTrailer = new global::System.Data.DataColumn("SourceTrailer", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSourceTrailer);
+                this.columnTagLine = new global::System.Data.DataColumn("TagLine", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTagLine);
                 this.columnContents_Id = new global::System.Data.DataColumn("Contents_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
                 base.Columns.Add(this.columnContents_Id);
                 this.columnNumber.Namespace = "";
@@ -2555,6 +2587,36 @@ namespace MyFilmsPlugin.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string SourceTrailer {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.SourceTrailerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte SourceTrailer in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.SourceTrailerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string TagLine {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.TagLineColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte TagLine in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.TagLineColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int Contents_Id {
                 get {
                     return ((int)(this[this.tableMovie.Contents_IdColumn]));
@@ -2972,6 +3034,26 @@ namespace MyFilmsPlugin.MyFilms {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetTMDB_IdNull() {
                 this[this.tableMovie.TMDB_IdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSourceTrailerNull() {
+                return this.IsNull(this.tableMovie.SourceTrailerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSourceTrailerNull() {
+                this[this.tableMovie.SourceTrailerColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTagLineNull() {
+                return this.IsNull(this.tableMovie.TagLineColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTagLineNull() {
+                this[this.tableMovie.TagLineColumn] = global::System.Convert.DBNull;
             }
         }
         
