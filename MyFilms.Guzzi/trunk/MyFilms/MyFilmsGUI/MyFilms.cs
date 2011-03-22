@@ -178,6 +178,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public const int ID_MyFilmsActors = 7989;
         public const int ID_MyFilmsThumbs = 7990;
         public const int ID_MyFilmsActorsInfo = 7991;
+        public const int ID_MyFilmsArtworkSelection = 7992;
         public const int ID_BrowseTheWeb = 54537689;
         public const int ID_OnlineVideos = 4755;
 
@@ -2412,7 +2413,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
             }
             LogMyFilms.Debug("MF: Fin_Charge_Init: StrSelect = '" + conf.StrSelect + "', StrTxtSelect = '" + conf.StrTxtSelect + "'");
-            if (string.IsNullOrEmpty(conf.StrTxtSelect) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)))
+            if (string.IsNullOrEmpty(conf.StrTxtSelect) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798632))) // empty or starts with "all" or "filtered" ... 
               SetLabelSelect("root");
             else
               SetLabelSelect(conf.StrTxtSelect);

@@ -521,9 +521,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_ViewFanart)
-                    // On Button goto MyFilmsThumbs
+                    // On Button goto MyFilmsThumbs // Changed to alo launch player due to Ember Media Manager discontinued...
                     {
-                        GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
+                        //GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
+                        Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnMovieThumbs)
@@ -3805,7 +3806,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
                     {
-                      if (MyFilms.r[ItemId][dc.ColumnName].ToString() != MyFilms.conf.GlobalUnwatchedOnlyValue)
+                      if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
                         setGUIProperty("user.watched.value", "true");
                       else
                         clearGUIProperty("user.watched.value"); // set to empty, if movie is unwatched
@@ -3917,7 +3918,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                         case "resolution":
                             decimal aspectratio = 0; 
-                            string ar = " ";
+                            string ar = "";
                             if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                                 try
                                     {

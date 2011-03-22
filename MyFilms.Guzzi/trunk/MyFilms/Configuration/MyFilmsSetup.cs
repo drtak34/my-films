@@ -1869,6 +1869,29 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     cbWatched.Text = "Checked";
                     break;
 
+                case 10: // PVD Personal Video Database V0.9.9.21
+                    AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = "Borrower";
+                    if (string.IsNullOrEmpty(AntTitle1.Text))
+                      AntTitle1.Text = "TranslatedTitle";
+                    if (string.IsNullOrEmpty(AntTitle2.Text))
+                      AntTitle2.Text = "OriginalTitle";
+                    AntSTitle.Text = "FormattedTitle";
+                    TitleDelim.Text = "\\";
+                    ItemSearchFileName.Text = "TranslatedTitle";
+                    if (MesFilmsCat.Text.Length > 0)
+                      if (MesFilmsImg.Text.Length == 0)
+                        MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
+                    SearchFileName.Checked = true;
+                    AntItem1.Text = "Writer";
+                    AntLabel1.Text = "Writer";
+                    AntItem2.Text = "Certification";
+                    AntLabel2.Text = "MPAA";
+                    AntViewItem1.Text = "Writer";
+                    AntViewText1.Text = "Writer";
+                    cbWatched.Text = "Checked";
+                    break;
+
                 default:
                     if (string.IsNullOrEmpty(AntStorage.Text))
                       AntStorage.Text = "Source";
@@ -2386,7 +2409,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             DvdProfiler cc1 = new DvdProfiler(DVDPTagField.Text);
                             mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, DVDPTagField.Text, OnlyFile.Checked));
                             break;
-                        case 2: // Movie Collector
+                        case 2: // Movie Collector V7.1.4
                             MovieCollector cc2 = new MovieCollector();
                             if (Thumbnails.Checked)
                                 mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, "Thumbnails", TitleDelim.Text));
@@ -2459,6 +2482,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             }
                             EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
                             mydivx.ReadXml(emc3.ConvertEaxMovieCatalog3(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
+                            break;
+                        case 10: // PVD PersonalVideoDatabase V0.9.9.21
+                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+                            {
+                              mydivx.ReadXml(destFile);
+                              break;
+                            }
+                            PersonalVideoDatabase pvd = new PersonalVideoDatabase();
+                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
                             break;
                     }
 

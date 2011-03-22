@@ -142,6 +142,7 @@
     <Compile Include="MyFilms\BaseMesFilms.cs" />
     <Compile Include="MyFilms\CatalogConverter\DvdProfiler.cs" />
     <Compile Include="MyFilms\CatalogConverter\EaxMovieCatalog3.cs" />
+    <Compile Include="MyFilms\CatalogConverter\PersonalVideoDatabase.cs" />
     <Compile Include="MyFilms\CatalogConverter\XbmcDb.cs" />
     <Compile Include="MyFilms\Configuration\MyFilmsInputBox.cs">
       <SubType>Form</SubType>
@@ -162,6 +163,7 @@
       <DependentUpon>TraktConfiguration.cs</DependentUpon>
     </Compile>
     <Compile Include="MyFilms\MyFilmsGUI\Configuration.cs" />
+    <Compile Include="MyFilms\MyFilmsGUI\MyFilmsArtworkSelection.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilms.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsActors.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsActorsInfo.cs" />

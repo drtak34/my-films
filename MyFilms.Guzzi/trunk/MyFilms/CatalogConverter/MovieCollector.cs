@@ -43,7 +43,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("STitle", "FormattedTitle");
             ProfilerDict.Add("CollectionNumber", "Number");
             ProfilerDict.Add("Review/ReviewFilm", "Rating");
-            ProfilerDict.Add("MovieFile", "URL");
+            ProfilerDict.Add("MovieFile", "Source");
             ProfilerDict.Add("Country", "Country");
             ProfilerDict.Add("Year", "Year");
             ProfilerDict.Add("RunningTime", "Length");
@@ -105,6 +105,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     }
                     XmlNode nodeBorrower = nodeDVD.SelectSingleNode("loan/loanedto/displayname");
                     XmlNode nodeDuration = nodeDVD.SelectSingleNode("runtime");
+                    XmlNode nodeDurationMinutes = nodeDVD.SelectSingleNode("runtimeminutes");
                     XmlNode nodeCountry = nodeDVD.SelectSingleNode("country");
                     XmlNode nodeOverview = nodeDVD.SelectSingleNode("plot");
                     string genre = String.Empty;
@@ -269,15 +270,21 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         WriteAntAtribute(destXml, "Review/ReviewFilm", Rating);
                         if (nodeYear != null && nodeYear.InnerText != null)
                             WriteAntAtribute(destXml, "Year", nodeYear.InnerText);
-                        if (nodeDuration != null && nodeDuration.InnerText.Substring(0, nodeDuration.InnerText.IndexOf(" ")).Length > 0)
+                        // Old code:
+                        //if (nodeDuration != null && nodeDuration.InnerText.Substring(0, nodeDuration.InnerText.IndexOf(" ")).Length > 0)
+                        //{
+                        //  if (nodeDuration.InnerText.IndexOf(" hr ") != -1)
+                        //  {
+                        //    int duree = int.Parse(nodeDuration.InnerText.Substring(0, nodeDuration.InnerText.IndexOf(" hr ")).Trim()) * 60 + int.Parse(nodeDuration.InnerText.Substring(nodeDuration.InnerText.IndexOf(" hr ") + 4, 2).Trim());
+                        //    WriteAntAtribute(destXml, "RunningTime", duree.ToString());
+                        //  }
+                        //  else
+                        //    WriteAntAtribute(destXml, "RunningTime", nodeDuration.InnerText.Substring(0, nodeDuration.InnerText.IndexOf(" ")).ToString());
+                        //}
+                        // New code:
+                        if (nodeDuration != null && !string.IsNullOrEmpty(nodeDuration.InnerText))
                         {
-                            if (nodeDuration.InnerText.IndexOf(" hr ") != -1)
-                            {
-                                int duree = int.Parse(nodeDuration.InnerText.Substring(0, nodeDuration.InnerText.IndexOf(" hr ")).Trim()) * 60 + int.Parse(nodeDuration.InnerText.Substring(nodeDuration.InnerText.IndexOf(" hr ") + 4, 2).Trim());
-                                WriteAntAtribute(destXml, "RunningTime", duree.ToString());
-                            }
-                            else
-                                WriteAntAtribute(destXml, "RunningTime", nodeDuration.InnerText.Substring(0, nodeDuration.InnerText.IndexOf(" ")).ToString());
+                            WriteAntAtribute(destXml, "RunningTime", nodeDuration.InnerText);
                         }
                         if (nodeBorrower != null && nodeBorrower.InnerText != null)
                             WriteAntAtribute(destXml, "Borrower", nodeBorrower.InnerText);
