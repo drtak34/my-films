@@ -87,9 +87,59 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(source);
-                XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/EaxMovieCatalog/Catalog/Contents/Movie");
+                XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/xml/viddb/movie");
                 foreach (XmlNode nodeDVD in dvdList)
                 {
+
+//+		[0]	{Element, Name="num"}	object {System.Xml.XmlElement}
+//+		[1]	{Element, Name="title"}	object {System.Xml.XmlElement}
+//+		[2]	{Element, Name="origtitle"}	object {System.Xml.XmlElement}
+//+		[3]	{Element, Name="aka"}	object {System.Xml.XmlElement}
+//+		[4]	{Element, Name="year"}	object {System.Xml.XmlElement}
+//+		[5]	{Element, Name="genre"}	object {System.Xml.XmlElement}
+//+		[6]	{Element, Name="country"}	object {System.Xml.XmlElement}
+//+		[7]	{Element, Name="studio"}	object {System.Xml.XmlElement}
+//+		[8]	{Element, Name="release"}	object {System.Xml.XmlElement}
+//+		[9]	{Element, Name="mpaa"}	object {System.Xml.XmlElement}
+//+		[10]	{Element, Name="tags"}	object {System.Xml.XmlElement}
+//+		[11]	{Element, Name="director"}	object {System.Xml.XmlElement}
+//+		[12]	{Element, Name="producer"}	object {System.Xml.XmlElement}
+//+		[13]	{Element, Name="scenario"}	object {System.Xml.XmlElement}
+//+		[14]	{Element, Name="music"}	object {System.Xml.XmlElement}
+//+		[15]	{Element, Name="actors"}	object {System.Xml.XmlElement}
+//+		[16]	{Element, Name="description"}	object {System.Xml.XmlElement}
+//+		[17]	{Element, Name="comment"}	object {System.Xml.XmlElement}
+//+		[18]	{Element, Name="tagline"}	object {System.Xml.XmlElement}
+//+		[19]	{Element, Name="url"}	object {System.Xml.XmlElement}
+//+		[20]	{Element, Name="imdbrating"}	object {System.Xml.XmlElement}
+//+		[21]	{Element, Name="rating"}	object {System.Xml.XmlElement}
+//+		[22]	{Element, Name="orating"}	object {System.Xml.XmlElement}
+//+		[23]	{Element, Name="dateadded"}	object {System.Xml.XmlElement}
+//+		[24]	{Element, Name="path"}	object {System.Xml.XmlElement}
+//+		[25]	{Element, Name="count"}	object {System.Xml.XmlElement}
+//+		[26]	{Element, Name="type"}	object {System.Xml.XmlElement}
+//+		[27]	{Element, Name="rip"}	object {System.Xml.XmlElement}
+//+		[28]	{Element, Name="length"}	object {System.Xml.XmlElement}
+//+		[29]	{Element, Name="size"}	object {System.Xml.XmlElement}
+//+		[30]	{Element, Name="langs"}	object {System.Xml.XmlElement}
+//+		[31]	{Element, Name="subs"}	object {System.Xml.XmlElement}
+//+		[32]	{Element, Name="translation"}	object {System.Xml.XmlElement}
+//+		[33]	{Element, Name="resolution"}	object {System.Xml.XmlElement}
+//+		[34]	{Element, Name="framerate"}	object {System.Xml.XmlElement}
+//+		[35]	{Element, Name="videocodec"}	object {System.Xml.XmlElement}
+//+		[36]	{Element, Name="videobitrate"}	object {System.Xml.XmlElement}
+//+		[37]	{Element, Name="audiocodec"}	object {System.Xml.XmlElement}
+//+		[38]	{Element, Name="audiobitrate"}	object {System.Xml.XmlElement}
+//+		[39]	{Element, Name="label"}	object {System.Xml.XmlElement}
+//+		[40]	{Element, Name="features"}	object {System.Xml.XmlElement}
+//+		[41]	{Element, Name="viewed"}	object {System.Xml.XmlElement}
+//+		[42]	{Element, Name="viewdate"}	object {System.Xml.XmlElement}
+//+		[43]	{Element, Name="wish"}	object {System.Xml.XmlElement}
+//+		[44]	{Element, Name="bookmark"}	object {System.Xml.XmlElement}
+//+		[45]	{Element, Name="poster"}	object {System.Xml.XmlElement}
+                  
+  
+
                     CultureInfo ci = new CultureInfo("en-us");
                     XmlNodeList DiscsList = nodeDVD.SelectNodes("Disc");
                     string wfile = string.Empty;
