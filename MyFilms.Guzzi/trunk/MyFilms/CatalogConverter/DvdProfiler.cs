@@ -226,7 +226,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         else
                             Rating = "0.0";
                     }
-                    if (nodeNumber != null && nodeNumber.InnerText != null && nodeNumber.InnerText.Length > 1)
+                    if (nodeNumber != null && nodeNumber.InnerText != null && nodeNumber.InnerText.Length > 0)
                         WriteAntAtribute(destXml,"CollectionNumber",nodeNumber.InnerText);
                     else
                         WriteAntAtribute(destXml, "CollectionNumber", "9999");
