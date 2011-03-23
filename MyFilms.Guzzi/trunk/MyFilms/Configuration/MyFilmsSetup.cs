@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using System;
   using System.Data;
   using System.Diagnostics;
+  using System.Globalization;
   using System.Net;
   using System.Windows.Forms;
   using System.Xml;
@@ -164,8 +165,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CatalogType.SelectedIndex = 0;
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-              if (dc.ColumnName != "Picture" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" 
-                && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer") 
+              if (dc.ColumnName != "Picture" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
+                && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine") 
                 // All those fieds are currently not supported by ANT-MC
                 // Also removed Contents_Id and Pictures, as they mostly useless.
               {
@@ -1228,13 +1229,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             ListSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator1", ",");
             ListSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator2", ";");
             ListSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator3", "[");
-            ListSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator4", string.Empty);
+            ListSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator4", "|");
             ListSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator5", string.Empty);
             RoleSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator1", "(");
             RoleSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator2", ")");
             RoleSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator3", " as ");
             RoleSeparator4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator4", "....");
-            RoleSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator5", string.Empty);
+            RoleSeparator5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "RoleSeparator5", "|");
             CmdPar.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdPar", "(none)");
             CmdExe.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CmdExe", string.Empty);
             TitleDelim.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "TitleDelim", "\\");
@@ -1823,9 +1824,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Tab_AMCupdater.Enabled = false;
+            Tab_Update.Enabled = false;
             switch (CatalogType.SelectedIndex)
             {
                 case 0:
+                    Tab_AMCupdater.Enabled = true;
+                    Tab_Update.Enabled = true;
                     break;
                 case 4: // EAX MC 2.5.0
                     AntStorage.Text = "Source";
@@ -1840,6 +1845,38 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     if (MesFilmsCat.Text.Length > 0)
                         if (MesFilmsImg.Text.Length == 0)
                             MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
+                    SearchFileName.Checked = true;
+                    break;
+
+                case 5: // XMM Extreme Movie Manager
+                    if (string.IsNullOrEmpty(AntStorage.Text))
+                      AntStorage.Text = "Source";
+                    if (string.IsNullOrEmpty(AntStorageTrailer.Text))
+                      AntStorageTrailer.Text = "Borrower";
+                    if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en")
+                    {
+                      if (string.IsNullOrEmpty(AntTitle1.Text))
+                        AntTitle1.Text = "OriginalTitle";
+                      if (string.IsNullOrEmpty(AntTitle2.Text))
+                        AntTitle2.Text = "TranslatedTitle";
+                      if (string.IsNullOrEmpty(ItemSearchFileName.Text))
+                        ItemSearchFileName.Text = "OriginalTitle";
+                      if (string.IsNullOrEmpty(AntSTitle.Text))
+                        AntSTitle.Text = "OriginalTitle";
+                    }
+                    else
+                    {
+                      if (string.IsNullOrEmpty(AntTitle1.Text))
+                        AntTitle1.Text = "TranslatedTitle";
+                      if (string.IsNullOrEmpty(AntTitle2.Text))
+                        AntTitle2.Text = "OriginalTitle";
+                      if (string.IsNullOrEmpty(ItemSearchFileName.Text))
+                        ItemSearchFileName.Text = "TranslatedTitle";
+                      if (string.IsNullOrEmpty(AntSTitle.Text))
+                        AntSTitle.Text = "TranslatedTitle";
+                    }
+                    if (string.IsNullOrEmpty(TitleDelim.Text))
+                      TitleDelim.Text = "\\";
                     SearchFileName.Checked = true;
                     break;
 
@@ -1897,16 +1934,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       AntStorage.Text = "Source";
                     if (string.IsNullOrEmpty(AntStorageTrailer.Text))
                       AntStorageTrailer.Text = "Borrower";
-                    if (string.IsNullOrEmpty(AntTitle1.Text))
-                      AntTitle1.Text = "TranslatedTitle";
-                    if (string.IsNullOrEmpty(AntTitle2.Text))
-                      AntTitle2.Text = "OriginalTitle";
+                    if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en")
+                    {
+                      if (string.IsNullOrEmpty(AntTitle1.Text))
+                        AntTitle1.Text = "OriginalTitle";
+                      if (string.IsNullOrEmpty(AntTitle2.Text))
+                        AntTitle2.Text = "TranslatedTitle";
+                      if (string.IsNullOrEmpty(ItemSearchFileName.Text))
+                        ItemSearchFileName.Text = "OriginalTitle";
+                    }
+                    else
+                    {
+                      if (string.IsNullOrEmpty(AntTitle1.Text))
+                        AntTitle1.Text = "TranslatedTitle";
+                      if (string.IsNullOrEmpty(AntTitle2.Text))
+                        AntTitle2.Text = "OriginalTitle";
+                      if (string.IsNullOrEmpty(ItemSearchFileName.Text))
+                        ItemSearchFileName.Text = "TranslatedTitle";
+                    }
                     if (string.IsNullOrEmpty(AntSTitle.Text))
                       AntSTitle.Text = "FormattedTitle";
                     if (string.IsNullOrEmpty(TitleDelim.Text))
                       TitleDelim.Text = "\\";
-                    if (string.IsNullOrEmpty(ItemSearchFileName.Text))
-                      ItemSearchFileName.Text = "TranslatedTitle";
                     SearchFileName.Checked = true;
                     break;
 

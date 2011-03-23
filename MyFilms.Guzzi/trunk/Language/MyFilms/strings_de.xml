@@ -248,5 +248,7 @@
     <String id="10798800">Warnung: Lange Laufzeit !</String>
     <String id="10798801">Soll wirklich die Trailersuche</String>
     <String id="10798802">für {0} Filme gestartet werden?</String>
+    <String id="10798940">Trailer</String>
+    <String id="10798941">Tagline</String>
   </Section>
 </Language>

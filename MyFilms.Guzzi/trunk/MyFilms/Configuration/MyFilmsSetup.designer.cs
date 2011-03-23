@@ -3744,7 +3744,7 @@
           this.CatalogType.FormattingEnabled = true;
           this.CatalogType.Items.AddRange(new object[] {
             "Ant Movie Catalog (V3.5.1.2)",
-            "DVD Profiler",
+            "DVD Profiler (V3.7.2)",
             "Movie Collector (V7.1.4)",
             "MyMovies (V3.18)",
             "Eax Movie Catalog (2.5.0)",

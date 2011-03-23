@@ -244,6 +244,10 @@ namespace MyFilmsPlugin.MyFilms
                     return GUILocalizeStrings.Get(10798687);
                 case "TMDB_Id":
                     return GUILocalizeStrings.Get(10798688);
+                case "SourceTrailer":
+                    return GUILocalizeStrings.Get(10798940);
+                case "TagLine":
+                    return GUILocalizeStrings.Get(10798941);
                 default:
                     return string.Empty;
             }

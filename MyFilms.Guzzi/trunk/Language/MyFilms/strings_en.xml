@@ -248,5 +248,7 @@
     <String id="10798800">Warning: possible long runtime!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">started for {0} films?</String>
+    <String id="10798940">Trailer</String>
+    <String id="10798941">Tagline</String>
   </Section>
 </Language>
