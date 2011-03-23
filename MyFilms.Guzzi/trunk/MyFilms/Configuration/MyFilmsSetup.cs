@@ -163,11 +163,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntItem3.Items.Add("(none)");
             CmdPar.Items.Add("(none)");
             CatalogType.SelectedIndex = 0;
+
             foreach (DataColumn dc in ds.Movie.Columns)
             {
               if (dc.ColumnName != "Picture" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
                 && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine") 
-                // All those fieds are currently not supported by ANT-MC
+                // All those fieds are currently not supported by ANT-MC - they will be added, if CatalogType changes to external catalog to the respective fields
                 // Also removed Contents_Id and Pictures, as they mostly useless.
               {
                 if ((dc.ColumnName == "MediaLabel") || (dc.ColumnName == "MediaType") || (dc.ColumnName == "Source") ||
@@ -181,7 +182,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
                 if ((dc.ColumnName == "TranslatedTitle") || (dc.ColumnName == "OriginalTitle") || (dc.ColumnName == "FormattedTitle"))
                 {
-                  //AntTitle1.Items.Add(dc.ColumnName); // Fieds already added in Controls definition
+                  //AntTitle1.Items.Add(dc.ColumnName); // Fields already added in Controls definition
                   AntTitle2.Items.Add(dc.ColumnName);
                   AntSTitle.Items.Add(dc.ColumnName);
                 }
@@ -1826,6 +1827,64 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             Tab_AMCupdater.Enabled = false;
             Tab_Update.Enabled = false;
+
+            if (CatalogType.SelectedIndex != 0)
+              {
+                  DVDPTagField.Items.Add("TagLine");
+                  AntStorageTrailer.Items.Add("SourceTrailer");
+
+                  AntViewItem1.Items.Add("Writer");
+                  AntViewItem2.Items.Add("Writer");
+                  AntViewItem3.Items.Add("Writer");
+                  AntViewItem4.Items.Add("Writer");
+                  AntViewItem5.Items.Add("Writer");
+                  AntViewItem1.Items.Add("Certification");
+                  AntViewItem2.Items.Add("Certification");
+                  AntViewItem3.Items.Add("Certification");
+                  AntViewItem4.Items.Add("Certification");
+                  AntViewItem5.Items.Add("Certification");
+                  AntViewItem1.Items.Add("TagLine");
+                  AntViewItem2.Items.Add("TagLine");
+                  AntViewItem3.Items.Add("TagLine");
+                  AntViewItem4.Items.Add("TagLine");
+                  AntViewItem5.Items.Add("TagLine");
+
+                  AntFilterItem1.Items.Add("Writer");
+                  AntFilterItem2.Items.Add("Writer");
+                  AntFilterItem1.Items.Add("Certification");
+                  AntFilterItem2.Items.Add("Certification");
+                  AntItem1.Items.Add("Writer");
+                  AntItem2.Items.Add("Writer");
+                  AntItem3.Items.Add("Writer");
+                  AntItem1.Items.Add("Certification");
+                  AntItem2.Items.Add("Certification");
+                  AntItem3.Items.Add("Certification");
+                  AntItem1.Items.Add("TagLine");
+                  AntItem2.Items.Add("TagLine");
+                  AntItem3.Items.Add("TagLine");
+
+                  AntSort1.Items.Add("Writer");
+                  AntSort2.Items.Add("Writer");
+                  AntSort1.Items.Add("Certification");
+                  AntSort2.Items.Add("Certification");
+
+                  AntSearchItem1.Items.Add("Writer");
+                  AntSearchItem2.Items.Add("Writer");
+                  AntSearchItem1.Items.Add("Certification");
+                  AntSearchItem2.Items.Add("Certification");
+                  AntSearchItem1.Items.Add("TagLine");
+                  AntSearchItem2.Items.Add("TagLine");
+
+                  AntSearchField.Items.Add("Writer");
+                  AntSearchField.Items.Add("Certification");
+
+                  cbWatched.Items.Add("Watched");
+                  //cbfdupdate.Items.Add(dc.ColumnName);
+                  //AntUpdItem1.Items.Add(dc.ColumnName);
+                  //AntUpdItem2.Items.Add(dc.ColumnName);
+                  //AntUpdField.Items.Add(dc.ColumnName);
+                  //AntIdentItem.Items.Add(dc.ColumnName);
+              }
             switch (CatalogType.SelectedIndex)
             {
                 case 0:

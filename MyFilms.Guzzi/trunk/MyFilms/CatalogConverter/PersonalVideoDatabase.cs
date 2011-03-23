@@ -62,16 +62,15 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("size", "Size");
             ProfilerDict.Add("videobitrate", "VideoBitrate");
             ProfilerDict.Add("audiobitrate", "AudioBitrate");
-            ProfilerDict.Add("Disks", "Disks");
+            ProfilerDict.Add("count", "Disks");
             ProfilerDict.Add("framerate", "Framerate");
             ProfilerDict.Add("comment", "Comments");
             ProfilerDict.Add("langs", "Languages");
             ProfilerDict.Add("subs", "Subtitles");
             ProfilerDict.Add("mpaa", "Certification");
             ProfilerDict.Add("tagline", "TagLine");
-          
+            ProfilerDict.Add("scenario", "Writer");
             //ProfilerDict.Add("Borrower", "Borrower");
-
         }
         public string ConvertPersonalVideoDatabase(string source, string folderimage, bool SortTitle, bool OnlyFile, string TitleDelim)
         {
@@ -208,6 +207,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       WriteAntAtribute(destXml, "director", nodeDVD.SelectSingleNode("director").InnerText);
                     if (nodeDVD.SelectSingleNode("producer") != null)
                       WriteAntAtribute(destXml, "producer", nodeDVD.SelectSingleNode("producer").InnerText);
+                    if (nodeDVD.SelectSingleNode("scenario") != null) // Writer
+                      WriteAntAtribute(destXml, "scenario", nodeDVD.SelectSingleNode("scenario").InnerText);
                     if (nodeDVD.SelectSingleNode("actors") != null)
                       WriteAntAtribute(destXml, "actors", nodeDVD.SelectSingleNode("actors").InnerText);
                     if (nodeDVD.SelectSingleNode("poster") != null)
@@ -243,13 +244,14 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       WriteAntAtribute(destXml, "size", nodeDVD.SelectSingleNode("size").InnerText);
                     if (nodeDVD.SelectSingleNode("framerate") != null)
                       WriteAntAtribute(destXml, "framerate", nodeDVD.SelectSingleNode("framerate").InnerText);
+                    if (nodeDVD.SelectSingleNode("mpaa") != null)
+                      WriteAntAtribute(destXml, "mpaa", nodeDVD.SelectSingleNode("mpaa").InnerText);
+                    if (nodeDVD.SelectSingleNode("tagline") != null)
+                      WriteAntAtribute(destXml, "tagline", nodeDVD.SelectSingleNode("tagline").InnerText);
+                    if (nodeDVD.SelectSingleNode("count") != null)
+                      WriteAntAtribute(destXml, "count", nodeDVD.SelectSingleNode("count").InnerText);
                     if (nodeDVD.SelectSingleNode("path") != null)
                       WriteAntAtribute(destXml, "path", nodeDVD.SelectSingleNode("path").InnerText);
-
-                    //ProfilerDict.Add("Disks", "Disks");
-                    //ProfilerDict.Add("mpaa", "Certification");
-                    //ProfilerDict.Add("tagline", "TagLine");
-
                     destXml.WriteEndElement();
                 }
 
