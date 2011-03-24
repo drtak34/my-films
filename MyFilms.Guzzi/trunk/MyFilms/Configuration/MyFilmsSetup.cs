@@ -377,11 +377,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               {
                 string catalogDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
                 string imgPrefixFilenameOnly = "";
-                if (MesFilmsImg.Text == catalogDirectory && CatalogType.SelectedIndex != 0) // only if not external catalog
+                if (MesFilmsImg.Text == catalogDirectory && CatalogType.SelectedIndex == 0)  // only if not external catalog
                   cbPictureHandling.Text = "Relative Path";
                 else
                   cbPictureHandling.Text = "Full Path"; // set as default, unless other is possible
-                if (MesFilmsImg.Text.StartsWith(catalogDirectory) && MesFilmsImg.Text != catalogDirectory && CatalogType.SelectedIndex != 0) // only if not external catalog
+                if (MesFilmsImg.Text.StartsWith(catalogDirectory) && MesFilmsImg.Text != catalogDirectory && CatalogType.SelectedIndex == 0) // only if not external catalog
                 {
                   MesFilmsImg.Text = catalogDirectory;
                   cbPictureHandling.Text = "Relative Path";
@@ -1738,9 +1738,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     DataRow[] movies = mydivx.Movie.Select(StrDfltSelect + AntTitle1.Text + " not like ''");
                     if (mydivx.Movie.Count > 0)
                         if (movies.Length > 0)
-                            System.Windows.Forms.MessageBox.Show("Your XML file is valid with " + mydivx.Movie.Count + " Movies in your database and " + movies.Length + " Movies to display with your 'Selected Enreg' configuration", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            System.Windows.Forms.MessageBox.Show("Your XML file is valid with " + mydivx.Movie.Count + " Movies in your database and " + movies.Length + " Movies to display with your 'User defined Config Filter' configuration", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         else
-                            System.Windows.Forms.MessageBox.Show("Your XML file is valid with 0 Movie in your database but no Movie to display, you have to change the selected enregs or fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                          System.Windows.Forms.MessageBox.Show("Your XML file is valid with 0 Movie in your database but no Movie to display, you have to change the 'User defined Config Filter' or fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     else if (!WizardActive)
                     {
                         if (System.Windows.Forms.MessageBox.Show("There is no Movie to display with that file ! Do you Want to continue ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.No)
@@ -1807,7 +1807,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     else
                         StrDfltSelect = "(" + StrDfltSelect + "(" + AntFilterItem2.Text + " " + wAntFilterSign + " '" + AntFilterText2.Text + "' )) AND ";
             Selected_Enreg.Text = StrDfltSelect + AntTitle1.Text + " not like ''";
-            LogMyFilms.Debug("MyFilms (Buid Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
+            LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -1825,66 +1825,34 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Tab_AMCupdater.Enabled = false;
-            Tab_Update.Enabled = false;
-
-            if (CatalogType.SelectedIndex != 0)
+            if (CatalogType.SelectedIndex != 0) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
               {
-                  DVDPTagField.Items.Add("TagLine");
-                  AntStorageTrailer.Items.Add("SourceTrailer");
+              Tab_AMCupdater.Enabled = false;
+              Tab_Update.Enabled = false;
+              txtPicturePrefix.Text = "";
+              if (!AntViewItem1.Items.Contains("Writer")) // only add if not already done!
+                AddExtendedFieldsForExternalCatalogs();
 
-                  AntViewItem1.Items.Add("Writer");
-                  AntViewItem2.Items.Add("Writer");
-                  AntViewItem3.Items.Add("Writer");
-                  AntViewItem4.Items.Add("Writer");
-                  AntViewItem5.Items.Add("Writer");
-                  AntViewItem1.Items.Add("Certification");
-                  AntViewItem2.Items.Add("Certification");
-                  AntViewItem3.Items.Add("Certification");
-                  AntViewItem4.Items.Add("Certification");
-                  AntViewItem5.Items.Add("Certification");
-                  AntViewItem1.Items.Add("TagLine");
-                  AntViewItem2.Items.Add("TagLine");
-                  AntViewItem3.Items.Add("TagLine");
-                  AntViewItem4.Items.Add("TagLine");
-                  AntViewItem5.Items.Add("TagLine");
-
-                  AntFilterItem1.Items.Add("Writer");
-                  AntFilterItem2.Items.Add("Writer");
-                  AntFilterItem1.Items.Add("Certification");
-                  AntFilterItem2.Items.Add("Certification");
-                  AntItem1.Items.Add("Writer");
-                  AntItem2.Items.Add("Writer");
-                  AntItem3.Items.Add("Writer");
-                  AntItem1.Items.Add("Certification");
-                  AntItem2.Items.Add("Certification");
-                  AntItem3.Items.Add("Certification");
-                  AntItem1.Items.Add("TagLine");
-                  AntItem2.Items.Add("TagLine");
-                  AntItem3.Items.Add("TagLine");
-
-                  AntSort1.Items.Add("Writer");
-                  AntSort2.Items.Add("Writer");
-                  AntSort1.Items.Add("Certification");
-                  AntSort2.Items.Add("Certification");
-
-                  AntSearchItem1.Items.Add("Writer");
-                  AntSearchItem2.Items.Add("Writer");
-                  AntSearchItem1.Items.Add("Certification");
-                  AntSearchItem2.Items.Add("Certification");
-                  AntSearchItem1.Items.Add("TagLine");
-                  AntSearchItem2.Items.Add("TagLine");
-
-                  AntSearchField.Items.Add("Writer");
-                  AntSearchField.Items.Add("Certification");
-
-                  cbWatched.Items.Add("Watched");
-                  //cbfdupdate.Items.Add(dc.ColumnName);
-                  //AntUpdItem1.Items.Add(dc.ColumnName);
-                  //AntUpdItem2.Items.Add(dc.ColumnName);
-                  //AntUpdField.Items.Add(dc.ColumnName);
-                  //AntIdentItem.Items.Add(dc.ColumnName);
+              if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en")
+                  {
+                    //if (string.IsNullOrEmpty(AntTitle1.Text))
+                    AntTitle1.Text = "OriginalTitle";
+                    AntTitle2.Text = "TranslatedTitle";
+                    ItemSearchFileName.Text = "OriginalTitle";
+                    AntSTitle.Text = "OriginalTitle";
+                  }
+                  else
+                  {
+                    AntTitle1.Text = "TranslatedTitle";
+                    AntTitle2.Text = "OriginalTitle";
+                    ItemSearchFileName.Text = "TranslatedTitle";
+                    AntSTitle.Text = "TranslatedTitle";
+                  }
+                  //if (string.IsNullOrEmpty(AntSTitle.Text)) AntSTitle.Text = "FormattedTitle";
+                  TitleDelim.Text = "\\";
+                  SearchFileName.Checked = true;
               }
+
             switch (CatalogType.SelectedIndex)
             {
                 case 0:
@@ -1894,49 +1862,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 case 4: // EAX MC 2.5.0
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "Borrower";
-                    if (string.IsNullOrEmpty(AntTitle1.Text))
-                      AntTitle1.Text = "TranslatedTitle";
-                    if (string.IsNullOrEmpty(AntTitle2.Text))
-                      AntTitle2.Text = "OriginalTitle";
-                    AntSTitle.Text = "FormattedTitle";
-                    TitleDelim.Text = "\\";
-                    ItemSearchFileName.Text = "TranslatedTitle";
                     if (MesFilmsCat.Text.Length > 0)
                         if (MesFilmsImg.Text.Length == 0)
                             MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
-                    SearchFileName.Checked = true;
                     break;
-
                 case 5: // XMM Extreme Movie Manager
                     if (string.IsNullOrEmpty(AntStorage.Text))
                       AntStorage.Text = "Source";
                     if (string.IsNullOrEmpty(AntStorageTrailer.Text))
                       AntStorageTrailer.Text = "Borrower";
-                    if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en")
-                    {
-                      if (string.IsNullOrEmpty(AntTitle1.Text))
-                        AntTitle1.Text = "OriginalTitle";
-                      if (string.IsNullOrEmpty(AntTitle2.Text))
-                        AntTitle2.Text = "TranslatedTitle";
-                      if (string.IsNullOrEmpty(ItemSearchFileName.Text))
-                        ItemSearchFileName.Text = "OriginalTitle";
-                      if (string.IsNullOrEmpty(AntSTitle.Text))
-                        AntSTitle.Text = "OriginalTitle";
-                    }
-                    else
-                    {
-                      if (string.IsNullOrEmpty(AntTitle1.Text))
-                        AntTitle1.Text = "TranslatedTitle";
-                      if (string.IsNullOrEmpty(AntTitle2.Text))
-                        AntTitle2.Text = "OriginalTitle";
-                      if (string.IsNullOrEmpty(ItemSearchFileName.Text))
-                        ItemSearchFileName.Text = "TranslatedTitle";
-                      if (string.IsNullOrEmpty(AntSTitle.Text))
-                        AntSTitle.Text = "TranslatedTitle";
-                    }
-                    if (string.IsNullOrEmpty(TitleDelim.Text))
-                      TitleDelim.Text = "\\";
-                    SearchFileName.Checked = true;
                     break;
 
                 case 7: // MyFilms DB (currently same as ANT Movie Catalog, but possible to extend DB fields in the future
@@ -1945,17 +1879,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 case 9: // EAX MC 3.0.9
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "Borrower";
-                    if (string.IsNullOrEmpty(AntTitle1.Text))
-                      AntTitle1.Text = "TranslatedTitle";
-                    if (string.IsNullOrEmpty(AntTitle2.Text))
-                      AntTitle2.Text = "OriginalTitle";
-                    AntSTitle.Text = "FormattedTitle";
-                    TitleDelim.Text = "\\";
-                    ItemSearchFileName.Text = "TranslatedTitle";
                     if (MesFilmsCat.Text.Length > 0)
-                      if (MesFilmsImg.Text.Length == 0)
-                        MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
-                    SearchFileName.Checked = true;
+                    {
+                      //if (MesFilmsImg.Text.Length == 0)
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures"; // cover path
+                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
+                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
+                      //a.	Cover image folder = D:My Documents\Data\Eax Movie Catalog \Pictures
+                      //b.	Person Thumbs = D:My Documents\Data\Eax Movie Catalog\NamePictures
+                      //c.	Fanart = D:My Documents\Eax Movie Catalog\Thumbnails – depends on the script i.e. grabs photos, but TMDB scrip grabs fanart but if users have fanart in EAX this folder is where it will be stored.
+                    }
                     AntItem1.Text = "Writer";
                     AntLabel1.Text = "Writer";
                     AntItem2.Text = "Certification";
@@ -1968,17 +1901,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 case 10: // PVD Personal Video Database V0.9.9.21
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "Borrower";
-                    if (string.IsNullOrEmpty(AntTitle1.Text))
-                      AntTitle1.Text = "TranslatedTitle";
-                    if (string.IsNullOrEmpty(AntTitle2.Text))
-                      AntTitle2.Text = "OriginalTitle";
-                    AntSTitle.Text = "FormattedTitle";
-                    TitleDelim.Text = "\\";
-                    ItemSearchFileName.Text = "TranslatedTitle";
                     if (MesFilmsCat.Text.Length > 0)
                       if (MesFilmsImg.Text.Length == 0)
                         MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
-                    SearchFileName.Checked = true;
                     AntItem1.Text = "Writer";
                     AntLabel1.Text = "Writer";
                     AntItem2.Text = "Certification";
@@ -1993,32 +1918,68 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       AntStorage.Text = "Source";
                     if (string.IsNullOrEmpty(AntStorageTrailer.Text))
                       AntStorageTrailer.Text = "Borrower";
-                    if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en")
-                    {
-                      if (string.IsNullOrEmpty(AntTitle1.Text))
-                        AntTitle1.Text = "OriginalTitle";
-                      if (string.IsNullOrEmpty(AntTitle2.Text))
-                        AntTitle2.Text = "TranslatedTitle";
-                      if (string.IsNullOrEmpty(ItemSearchFileName.Text))
-                        ItemSearchFileName.Text = "OriginalTitle";
-                    }
-                    else
-                    {
-                      if (string.IsNullOrEmpty(AntTitle1.Text))
-                        AntTitle1.Text = "TranslatedTitle";
-                      if (string.IsNullOrEmpty(AntTitle2.Text))
-                        AntTitle2.Text = "OriginalTitle";
-                      if (string.IsNullOrEmpty(ItemSearchFileName.Text))
-                        ItemSearchFileName.Text = "TranslatedTitle";
-                    }
-                    if (string.IsNullOrEmpty(AntSTitle.Text))
-                      AntSTitle.Text = "FormattedTitle";
-                    if (string.IsNullOrEmpty(TitleDelim.Text))
-                      TitleDelim.Text = "\\";
-                    SearchFileName.Checked = true;
                     break;
 
             }
+        }
+
+
+        private void AddExtendedFieldsForExternalCatalogs()
+        {
+          DVDPTagField.Items.Add("TagLine");
+          AntStorageTrailer.Items.Add("SourceTrailer");
+
+          AntViewItem1.Items.Add("Writer");
+          AntViewItem2.Items.Add("Writer");
+          AntViewItem3.Items.Add("Writer");
+          AntViewItem4.Items.Add("Writer");
+          AntViewItem5.Items.Add("Writer");
+          AntViewItem1.Items.Add("Certification");
+          AntViewItem2.Items.Add("Certification");
+          AntViewItem3.Items.Add("Certification");
+          AntViewItem4.Items.Add("Certification");
+          AntViewItem5.Items.Add("Certification");
+          AntViewItem1.Items.Add("TagLine");
+          AntViewItem2.Items.Add("TagLine");
+          AntViewItem3.Items.Add("TagLine");
+          AntViewItem4.Items.Add("TagLine");
+          AntViewItem5.Items.Add("TagLine");
+
+          AntFilterItem1.Items.Add("Writer");
+          AntFilterItem2.Items.Add("Writer");
+          AntFilterItem1.Items.Add("Certification");
+          AntFilterItem2.Items.Add("Certification");
+          AntItem1.Items.Add("Writer");
+          AntItem2.Items.Add("Writer");
+          AntItem3.Items.Add("Writer");
+          AntItem1.Items.Add("Certification");
+          AntItem2.Items.Add("Certification");
+          AntItem3.Items.Add("Certification");
+          AntItem1.Items.Add("TagLine");
+          AntItem2.Items.Add("TagLine");
+          AntItem3.Items.Add("TagLine");
+
+          AntSort1.Items.Add("Writer");
+          AntSort2.Items.Add("Writer");
+          AntSort1.Items.Add("Certification");
+          AntSort2.Items.Add("Certification");
+
+          AntSearchItem1.Items.Add("Writer");
+          AntSearchItem2.Items.Add("Writer");
+          AntSearchItem1.Items.Add("Certification");
+          AntSearchItem2.Items.Add("Certification");
+          AntSearchItem1.Items.Add("TagLine");
+          AntSearchItem2.Items.Add("TagLine");
+
+          AntSearchField.Items.Add("Writer");
+          AntSearchField.Items.Add("Certification");
+
+          cbWatched.Items.Add("Watched");
+          //cbfdupdate.Items.Add(dc.ColumnName);
+          //AntUpdItem1.Items.Add(dc.ColumnName);
+          //AntUpdItem2.Items.Add(dc.ColumnName);
+          //AntUpdField.Items.Add(dc.ColumnName);
+          //AntIdentItem.Items.Add(dc.ColumnName);
         }
 
         private void btnGrabber_Click(object sender, EventArgs e)

@@ -1630,7 +1630,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg1 == null) return;
             System.Collections.Generic.List<string> choiceView = new System.Collections.Generic.List<string>();
             dlg1.Reset();
-            dlg1.SetHeading(GUILocalizeStrings.Get(10798701)); // Options Menu
+            dlg1.SetHeading(GUILocalizeStrings.Get(10798701)); // Options ...
             if (Configuration.NbConfig > 1)
             {
                 dlg1.Add(GUILocalizeStrings.Get(6022));   // Change Config 
@@ -1683,7 +1683,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           if (dlg1 == null) return;
           dlg1.Reset();
-          dlg1.SetHeading(GUILocalizeStrings.Get(10798689)); // Global Options ...
+          dlg1.SetHeading(GUILocalizeStrings.Get(10798714)); // Global Filters ...
           System.Collections.Generic.List<string> choiceViewGlobalOptions = new System.Collections.Generic.List<string>();
 
           // Change global Unwatchedfilteroption
