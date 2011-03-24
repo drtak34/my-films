@@ -1648,8 +1648,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void ButCopy_Click(object sender, EventArgs e)
         {
             MyFilmsInputBox input = new MyFilmsInputBox();
+            input.CatalogTypeSelectedIndex = CatalogType.SelectedIndex ; // preset to currently chosen catalog type 
+            input.CatalogType = CatalogType.Text; // preset to currently chosen catalog name
             input.ShowDialog(this);
-            string newConfig_Name = input.UserName;
+            string newCatalogType = input.CatalogType;
+            int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
+            string newConfig_Name = input.ConfigName;
             if (newConfig_Name == Config_Name.Text)
             {
                 System.Windows.Forms.MessageBox.Show("New Config Name must be different from the existing one !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -1658,6 +1662,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             {
                 Config_Name.Text = newConfig_Name;
                 System.Windows.Forms.MessageBox.Show("Created a copy of current Configuration !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                CatalogType.SelectedIndex = newCatalogSelectedIndex; // set to selected catalog type 
                 Save_Config();
                 Config_Name.Focus();
                 textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
@@ -1826,7 +1831,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CatalogType.SelectedIndex != 0) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
-              {
+            {
+              chkFanart.Checked = true;
+              chkDfltFanart.Checked = true;
               Tab_AMCupdater.Enabled = false;
               Tab_Update.Enabled = false;
               txtPicturePrefix.Text = "";
@@ -1851,6 +1858,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   //if (string.IsNullOrEmpty(AntSTitle.Text)) AntSTitle.Text = "FormattedTitle";
                   TitleDelim.Text = "\\";
                   SearchFileName.Checked = true;
+
+                  //Presets for useritems:
+                  AntItem1.Text = "Writer";
+                  AntLabel1.Text = GUILocalizeStrings.Get(10798684); // Writer
+                  AntItem2.Text = "Producer";
+                  AntLabel2.Text = GUILocalizeStrings.Get(10798662);
+                  AntItem3.Text = "Certification";
+                  AntLabel3.Text = GUILocalizeStrings.Get(10798683);
+                  AntViewItem1.Text = "Writer";
+                  AntViewText1.Text = GUILocalizeStrings.Get(10798684); // Writer;
               }
 
             switch (CatalogType.SelectedIndex)
@@ -1863,8 +1880,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "Borrower";
                     if (MesFilmsCat.Text.Length > 0)
-                        if (MesFilmsImg.Text.Length == 0)
-                            MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
+                    {
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures"; // cover path
+                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
+                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
+                    }
                     break;
                 case 5: // XMM Extreme Movie Manager
                     if (string.IsNullOrEmpty(AntStorage.Text))
@@ -1889,12 +1909,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //b.	Person Thumbs = D:My Documents\Data\Eax Movie Catalog\NamePictures
                       //c.	Fanart = D:My Documents\Eax Movie Catalog\Thumbnails – depends on the script i.e. grabs photos, but TMDB scrip grabs fanart but if users have fanart in EAX this folder is where it will be stored.
                     }
-                    AntItem1.Text = "Writer";
-                    AntLabel1.Text = "Writer";
-                    AntItem2.Text = "Certification";
-                    AntLabel2.Text = "MPAA";
-                    AntViewItem1.Text = "Writer";
-                    AntViewText1.Text = "Writer";
+                    //AntItem1.Text = "Writer";
+                    //AntLabel1.Text = "Writer";
+                    //AntItem2.Text = "Certification";
+                    //AntLabel2.Text = "MPAA";
+                    //AntViewItem1.Text = "Writer";
+                    //AntViewText1.Text = "Writer";
                     cbWatched.Text = "Checked";
                     break;
 
@@ -1902,14 +1922,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "Borrower";
                     if (MesFilmsCat.Text.Length > 0)
-                      if (MesFilmsImg.Text.Length == 0)
-                        MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
-                    AntItem1.Text = "Writer";
-                    AntLabel1.Text = "Writer";
-                    AntItem2.Text = "Certification";
-                    AntLabel2.Text = "MPAA";
-                    AntViewItem1.Text = "Writer";
-                    AntViewText1.Text = "Writer";
+                    {
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Posters"; // cover path
+                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Photos"; // person thumb path
+                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Fanart"; // fanart path
+                      //a.	You can choose to store the picture in the catalog (default) or not
+                      //b.	Posters are stored in a subfolder of the catalog folder \DBName\Posters – these are the ‘extra’ posters you download
+                      //c.	Person images are stored in a subfolder of the catalog folder \DBName\ Photos – although you have to grab those separately for each person as far as I can tell.
+                    }
+                    //AntItem1.Text = "Writer";
+                    //AntLabel1.Text = "Writer";
+                    //AntItem2.Text = "Certification";
+                    //AntLabel2.Text = "MPAA";
+                    //AntViewItem1.Text = "Writer";
+                    //AntViewText1.Text = "Writer";
                     cbWatched.Text = "Checked";
                     break;
 
@@ -4183,8 +4209,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               return;
           }
           MyFilmsInputBox input = new MyFilmsInputBox();
+          input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
+          input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
           input.ShowDialog(this);
-          string newConfig_Name = input.UserName;
+          string newConfig_Name = input.ConfigName;
+          string newCatalogType = input.CatalogType;
+          int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
           if (string.IsNullOrEmpty(newConfig_Name))
           {
             MessageBox.Show("New Config Name must not be empty ! No Config created !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -4422,6 +4452,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           // Create Desktop Icon for AMCupdater with config created...
           CreateAMCDesktopIcon();
 
+          // Change Config to selected catalog type
+          CatalogType.SelectedIndex = newCatalogSelectedIndex;
           Save_Config();
           //Config_Name.Focus();
           System.Windows.Forms.MessageBox.Show(
@@ -4429,7 +4461,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             "Control Configuration",
             MessageBoxButtons.OK,
             MessageBoxIcon.Exclamation);
-          if (newCatalog)
+          if (newCatalog && CatalogType.SelectedIndex != 0)
           {
             launchAMCmanager();
           }
@@ -4439,8 +4471,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void butNew_Click(object sender, EventArgs e)
         {
           MyFilmsInputBox input = new MyFilmsInputBox();
+          input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
+          input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
           input.ShowDialog(this);
-          string newConfig_Name = input.UserName;
+          string newConfig_Name = input.ConfigName;
+          string newCatalogType = input.CatalogType;
+          int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
 
           if (string.IsNullOrEmpty(newConfig_Name))
           {
@@ -4453,12 +4489,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-            Refresh_Items(true);
-            Config_Name.Text = newConfig_Name;
-            //Config_Name_Load();
-            System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Config_Name.Focus();
-            textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
+              Refresh_Items(true);
+              Config_Name.Text = newConfig_Name;
+              //Config_Name_Load();
+              System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+              CatalogType.SelectedIndex = newCatalogSelectedIndex; // set selected CatalogType
+              Config_Name.Focus();
+              textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
           }
 
         }

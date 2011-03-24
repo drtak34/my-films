@@ -762,7 +762,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                         if (dlg == null) return true;
                         dlg.Reset();
-                        dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                        dlg.SetHeading(GUILocalizeStrings.Get(1079902)); // Sort by ...
                         System.Collections.Generic.List<string> choiceSort = new System.Collections.Generic.List<string>();
                         dlg.Add(GUILocalizeStrings.Get(103));//Title
                         dlg.Add(GUILocalizeStrings.Get(366));//Year
@@ -879,7 +879,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                         if (dlg == null) return true;
                         dlg.Reset();
-                        dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
+                        dlg.SetHeading(GUILocalizeStrings.Get(1079901)); // View (Layout) ...
                         dlg.Add(GUILocalizeStrings.Get(101));//List
                         dlg.Add(GUILocalizeStrings.Get(100));//Icons
                         dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
@@ -1580,7 +1580,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
             if (dlg1 == null) return;
             dlg1.Reset();
-            dlg1.SetHeading(GUILocalizeStrings.Get(924)); // menu
+            dlg1.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View (films) ...
             dlg1.Add(GUILocalizeStrings.Get(342));//videos
             dlg1.Add(GUILocalizeStrings.Get(345));//year
             dlg1.Add(GUILocalizeStrings.Get(10798664));//genre -> category
@@ -2157,6 +2157,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
                   string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
                   if (files.Count() > 0) 
+                    strThumbSource = files[0];
+                }
+              }
+              else if (conf.StrFileType == "10") // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
+              {
+                if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in PVD picture directory
+                {
+                  string searchname = HTMLParser.removeHtml(itemlabel).Replace(" ", "-"); // replaces special character "á" and other special chars !
+                  searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                  string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
+                  if (files.Count() > 0)
                     strThumbSource = files[0];
                 }
               }
@@ -3179,7 +3190,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg == null) return;
             Context_Menu = true;
             dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(924)); // menu
+            dlg.SetHeading(GUILocalizeStrings.Get(1079904)); // Context options ...
             string[] upd_choice = new string[20];
             int ichoice = 0;
 
@@ -3916,8 +3927,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     backdrop.Filename = wfanart[0];
                     break;
                 case "deletefanart":
-                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my videos
-                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079874));//delete fanart (current film)
+                    dlgYesNo.SetLine(1, "");
+                    dlgYesNo.SetLine(2, GUILocalizeStrings.Get(433));//confirm suppression
                     dlgYesNo.DoModal(GetID);
                     if (dlgYesNo.IsConfirmed)
                       //MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString(), false);

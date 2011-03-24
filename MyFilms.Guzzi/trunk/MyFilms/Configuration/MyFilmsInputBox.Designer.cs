@@ -33,6 +33,9 @@
           this.buttonOK = new System.Windows.Forms.Button();
           this.label2 = new System.Windows.Forms.Label();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
+          this.cbCatalogType = new System.Windows.Forms.ComboBox();
+          this.label3 = new System.Windows.Forms.Label();
+          this.label4 = new System.Windows.Forms.Label();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.SuspendLayout();
           // 
@@ -41,15 +44,15 @@
           this.label1.AutoSize = true;
           this.label1.Location = new System.Drawing.Point(22, 28);
           this.label1.Name = "label1";
-          this.label1.Size = new System.Drawing.Size(124, 13);
+          this.label1.Size = new System.Drawing.Size(255, 13);
           this.label1.TabIndex = 0;
-          this.label1.Text = "Please enter new name !";
+          this.label1.Text = "Please enter new name and select the catalog type !";
           // 
           // textBoxNewName
           // 
-          this.textBoxNewName.Location = new System.Drawing.Point(25, 84);
+          this.textBoxNewName.Location = new System.Drawing.Point(112, 91);
           this.textBoxNewName.Name = "textBoxNewName";
-          this.textBoxNewName.Size = new System.Drawing.Size(402, 20);
+          this.textBoxNewName.Size = new System.Drawing.Size(227, 20);
           this.textBoxNewName.TabIndex = 1;
           this.textBoxNewName.TextChanged += new System.EventHandler(this.textBoxNewName_TextChanged);
           this.textBoxNewName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxNewName_KeyUp);
@@ -57,7 +60,7 @@
           // buttonOK
           // 
           this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-          this.buttonOK.Location = new System.Drawing.Point(353, 125);
+          this.buttonOK.Location = new System.Drawing.Point(364, 169);
           this.buttonOK.Name = "buttonOK";
           this.buttonOK.Size = new System.Drawing.Size(74, 22);
           this.buttonOK.TabIndex = 2;
@@ -83,11 +86,53 @@
           this.pictureBox1.TabIndex = 4;
           this.pictureBox1.TabStop = false;
           // 
+          // cbCatalogType
+          // 
+          this.cbCatalogType.FormattingEnabled = true;
+          this.cbCatalogType.Items.AddRange(new object[] {
+            "Ant Movie Catalog (V3.5.1.2)",
+            "DVD Profiler (V3.7.2)",
+            "Movie Collector (V7.1.4)",
+            "MyMovies (V3.18)",
+            "Eax Movie Catalog (2.5.0)",
+            "eXtreme Movie Manager (V7.1.1.1)",
+            "XBMC (V10.0)",
+            "(n/a)",
+            "(n/a)",
+            "Eax Movie Catalog (3.0.9 b5)",
+            "PVD - Personal Video Database (0.9.9.21)"});
+          this.cbCatalogType.Location = new System.Drawing.Point(112, 132);
+          this.cbCatalogType.Name = "cbCatalogType";
+          this.cbCatalogType.Size = new System.Drawing.Size(227, 21);
+          this.cbCatalogType.TabIndex = 5;
+          this.cbCatalogType.SelectedIndexChanged += new System.EventHandler(this.cbCatalogType_SelectedIndexChanged);
+          // 
+          // label3
+          // 
+          this.label3.AutoSize = true;
+          this.label3.Location = new System.Drawing.Point(22, 94);
+          this.label3.Name = "label3";
+          this.label3.Size = new System.Drawing.Size(69, 13);
+          this.label3.TabIndex = 6;
+          this.label3.Text = "Config name:";
+          // 
+          // label4
+          // 
+          this.label4.AutoSize = true;
+          this.label4.Location = new System.Drawing.Point(22, 135);
+          this.label4.Name = "label4";
+          this.label4.Size = new System.Drawing.Size(70, 13);
+          this.label4.TabIndex = 7;
+          this.label4.Text = "Catalog Type";
+          // 
           // MyFilmsInputBox
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.ClientSize = new System.Drawing.Size(459, 163);
+          this.ClientSize = new System.Drawing.Size(470, 213);
+          this.Controls.Add(this.label4);
+          this.Controls.Add(this.label3);
+          this.Controls.Add(this.cbCatalogType);
           this.Controls.Add(this.pictureBox1);
           this.Controls.Add(this.label2);
           this.Controls.Add(this.buttonOK);
@@ -109,5 +154,8 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ComboBox cbCatalogType;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

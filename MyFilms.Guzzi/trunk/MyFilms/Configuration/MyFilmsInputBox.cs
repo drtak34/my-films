@@ -10,10 +10,21 @@
             InitializeComponent();
         }
 
-        public string UserName
+        public string ConfigName
         {
-            get { return textBoxNewName.Text; }
-            set { textBoxNewName.Text = value; }
+          get { return textBoxNewName.Text; }
+          set { textBoxNewName.Text = value; }
+        }
+
+        public string CatalogType
+        {
+          get { return cbCatalogType.Text; }
+          set { cbCatalogType.Text = value; }
+        }
+        public int CatalogTypeSelectedIndex
+        {
+          get { return cbCatalogType.SelectedIndex; }
+          set { cbCatalogType.SelectedIndex = value; }
         }
 
         private void textBoxNewName_TextChanged(object sender, EventArgs e)
@@ -39,6 +50,11 @@
           {
             MessageBox.Show(ex.Message);
           }
+        }
+
+        private void cbCatalogType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

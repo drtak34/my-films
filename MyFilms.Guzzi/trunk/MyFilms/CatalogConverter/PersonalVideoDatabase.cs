@@ -177,7 +177,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                             }
                         }
                     WriteAntAtribute(destXml, "dateadded", dt.ToShortDateString());
-                    if (nodeDVD.SelectSingleNode("Country") != null)
+                    if (nodeDVD.SelectSingleNode("country") != null)
                       if (nodeDVD.SelectSingleNode("country").InnerText.StartsWith("|"))
                         WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNode("country").InnerText.Substring(1));
                         else

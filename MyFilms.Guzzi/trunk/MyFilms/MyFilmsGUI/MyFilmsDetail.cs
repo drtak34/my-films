@@ -1321,8 +1321,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     break;
                 case "deletefanart":
-                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079874));//Delete fanart
+                    dlgYesNo.SetLine(1, "");
+                    dlgYesNo.SetLine(2, GUILocalizeStrings.Get(433));//confirm suppression
                     dlgYesNo.DoModal(GetID);
                     if (dlgYesNo.IsConfirmed)
                         Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
@@ -2579,46 +2580,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("MF: (Sorted coverfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
           }
 
-          if (result.Count != 0)
+          if (result.Count > 0)
           {
-            if (result.Count > 1)
+            if (nCurrent == -1) 
+              return;
+            nCurrent++;
+            if (nCurrent >= result.Count) 
+              nCurrent = 0;
+            newPicture = filesfound[nCurrent];
+
+            string tmpPicturename = newPicture.Substring(newPicture.LastIndexOf("\\") + 1);
+            if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
             {
-              //for (int i = 1; i < result.Count; i++)
-              //{
-              //}
-
-
-              if (nCurrent == -1)
-                return;
-
-                nCurrent++;
-                if (nCurrent >= result.Count)
-                  nCurrent = 0;
-              newPicture = filesfound[nCurrent];
+              newPictureCatalogname =
+                MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) +
+                tmpPicturename;
+            }
+            if (MyFilms.conf.PictureHandling == "Full Path")
+            {
+              newPictureCatalogname = newPicture;
+            }
+            if (!interactive)
+            {
+              // add confirmation dialog here....
+            }
+            else
+            {
+              MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
+              LogMyFilms.Debug("MFD: (ChangeLocalCover) : NewCatalogName: '" + newPictureCatalogname + "'");
+              Update_XML_database();
             }
           }
           else
             LogMyFilms.Debug("MyFilmsDetails (LocalCoverChange) - NO COVERS FOUND !!!!");
-
-          string tmpPicturename = newPicture.Substring(newPicture.LastIndexOf("\\") + 1);
-          if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
-          {
-            newPictureCatalogname = MyFilms.conf.StrPicturePrefix.Substring(0,MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) + tmpPicturename;
-          }
-          if (MyFilms.conf.PictureHandling == "Full Path")
-          {
-            newPictureCatalogname = newPicture;
-          }
-          if (!interactive)
-          {
-            // add confirmation dialog here....
-          }
-          else
-          {
-            MyFilms.r[MyFilms.conf.StrIndex]["Picture"] = newPictureCatalogname;
-            LogMyFilms.Debug("MFD: (ChangeLocalCover) : NewCatalogName: '" + newPictureCatalogname + "'");
-            Update_XML_database();
-          }
         }
         
 
