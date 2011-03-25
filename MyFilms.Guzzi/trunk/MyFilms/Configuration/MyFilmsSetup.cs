@@ -660,7 +660,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     return;
                 }
             if (CatalogType.SelectedIndex == 1)
-                if ((radioButton2.Checked) && (DVDPTagField.Text.Length == 0))
+                if ((this.cbEcStoreTagsInOptionalField.Checked) && (DVDPTagField.Text.Length == 0))
                 {
                     System.Windows.Forms.MessageBox.Show("Field Name is Mandatory for storing Tags Informations !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     DVDPTagField.Focus();
@@ -958,17 +958,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (rbsuppress4.Checked)
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressType", "4");
 
+            if (CatalogType.SelectedIndex != 0) // common external catalog options
+            {
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionStoreTaglineInDescription", cbEcAddTaglinesToDescriptionField.Checked);
+            }
             if (CatalogType.SelectedIndex == 1)
             {
-                XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SortTitle", SortTitle.Checked);
-                XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", OnlyFile.Checked);
-                if (radioButton1.Checked)
-                    XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "Category");
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SortTitle", SortTitle.Checked);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", OnlyFile.Checked);
+              if (this.cbEcMergeWithGenreField.Checked)
+                XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "Category");
+              else
+                if (this.cbEcStoreTagsInOptionalField.Checked)
+                  XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", DVDPTagField.Text);
                 else
-                    if (radioButton2.Checked)
-                        XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", DVDPTagField.Text);
-                    else
-                        XmlConfig.RemoveEntry("MyFilms", Config_Name.Text.ToString(), "DVDPTagField");
+                  XmlConfig.RemoveEntry("MyFilms", Config_Name.Text.ToString(), "DVDPTagField");
             }
             if (Thumbnails.Checked)
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "MCCovers", "Thumbnails");
@@ -1309,8 +1313,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
                 check_WOL_Userdialog.Checked = false;
 
-            radioButton1.Checked = false;
-            radioButton2.Checked = false;
+            this.cbEcMergeWithGenreField.Checked = false;
+            this.cbEcStoreTagsInOptionalField.Checked = false;
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
             CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", false);
             AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", false);
@@ -1318,13 +1322,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", "false");
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", false);
             chkWindowsFileDialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", false);
+            // common external catalog options
+            cbEcAddTaglinesToDescriptionField.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionStoreTaglineInDescription", false);
             DVDPTagField.ResetText();
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "") == "Category")
-                radioButton1.Checked = true;
+                this.cbEcMergeWithGenreField.Checked = true;
             else
                 if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "").Length > 0)
                 {
-                    radioButton2.Checked = true;
+                    this.cbEcStoreTagsInOptionalField.Checked = true;
                     DVDPTagField.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "");
                 }
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "MCCovers", "") == "Images")
@@ -1580,8 +1586,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             NAS_MAC_1.ResetText();
             NAS_MAC_2.ResetText();
             NAS_MAC_3.ResetText();
-            radioButton1.Checked = false;
-            radioButton2.Checked = false;
+            this.cbEcAddTaglinesToDescriptionField.Checked = false;
+            this.cbEcMergeWithGenreField.Checked = false;
+            this.cbEcStoreTagsInOptionalField.Checked = false;
             Thumbnails.Checked = true;
             DVDPTagField.ResetText();
             SortTitle.Checked = false;
@@ -1766,9 +1773,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
+            if (this.cbEcMergeWithGenreField.Checked)
             {
-                radioButton2.Checked = false;
+                this.cbEcStoreTagsInOptionalField.Checked = false;
                 DVDPTagField.ResetText();
             }
         }
@@ -1817,9 +1824,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton2.Checked)
+            if (this.cbEcStoreTagsInOptionalField.Checked)
             {
-                radioButton1.Checked = false;
+                this.cbEcMergeWithGenreField.Checked = false;
             }
         }
         private void Selected_Enreg_Changed(object sender, EventArgs e)
@@ -1833,7 +1840,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (CatalogType.SelectedIndex != 0) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
             {
               chkFanart.Checked = true;
-              chkDfltFanart.Checked = true;
+              chkDfltFanart.Checked = false;
+              chkDfltFanartImage.Checked = true;
+              chkDfltFanartImageAll.Checked = true;
+              chkPersons.Checked = true; // enable person thumbs
               Tab_AMCupdater.Enabled = false;
               Tab_Update.Enabled = false;
               txtPicturePrefix.Text = "";
@@ -1878,27 +1888,41 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     break;
                 case 4: // EAX MC 2.5.0
                     AntStorage.Text = "Source";
-                    AntStorageTrailer.Text = "Borrower";
+                    AntStorageTrailer.Text = "SourceTrailer";
                     if (MesFilmsCat.Text.Length > 0)
                     {
                       MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures"; // cover path
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
                       MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
                     }
+                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
                 case 5: // XMM Extreme Movie Manager
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "SourceTrailer";
                     if (MesFilmsCat.Text.Length > 0)
-                    {
-                      string strDbName = MesFilmsCat.Text.Substring(MesFilmsCat.Text.LastIndexOf("\\") + 1);
-                      strDbName = strDbName.Substring(0, strDbName.LastIndexOf(".")); // results in filename only without extension
-                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_cover"; // cover path
-                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_photos"; // person thumb path
-                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_thumbs"; // fanart path
+                    { // C:\WinApps\Video\eXtreme Movie Manager 7\Databases\<DB-name>_cover etc.
+                      //string strDatadirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
+                      //string[] directories = System.IO.Directory.GetDirectories(strDatadirectory);
+                      //string lastDirectory = string.Empty;
+                      //foreach (string directory in directories)
+                      //{
+                      //  if (string.Compare(directory, lastDirectory) >= 1)
+                      //  {
+                      //    lastDirectory = directory;
+                      //  }
+                      //}
+                      //string strDbName = MesFilmsCat.Text.Substring(MesFilmsCat.Text.LastIndexOf("\\") + 1);
+                      //strDbName = strDbName.Substring(0, strDbName.LastIndexOf(".")); // results in filename only without extension
+                      //MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_cover"; // cover path
+                      //MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_photos"; // person thumb path
+                      //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_thumbs"; // fanart path - better use _cover, as otherwise only small thumbs !
                       //a.	…eXtreme Movie Manager 7\Databases\Test_cover – for movie covers
                       //b.	… eXtreme Movie Manager 7\Databases\Test_photos – for person thumbs – filename format is Steve-Martin_143135.jpg
                       //c.	… eXtreme Movie Manager 7\Databases\Test_thumbs – for covers and thumbnails – this is where fanart might be stored as #-[movietitle]_fanart.jpg
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // cover path
+                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // person thumb path
+                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
                     }
                     break;
 
@@ -1907,7 +1931,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
                 case 9: // EAX MC 3.0.9
                     AntStorage.Text = "Source";
-                    AntStorageTrailer.Text = "Borrower";
+                    AntStorageTrailer.Text = "SourceTrailer";
                     if (MesFilmsCat.Text.Length > 0)
                     {
                       //if (MesFilmsImg.Text.Length == 0)
@@ -1919,6 +1943,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //c.	Fanart = D:My Documents\Eax Movie Catalog\Thumbnails – depends on the script i.e. grabs photos, but TMDB scrip grabs fanart but if users have fanart in EAX this folder is where it will be stored.
                     }
                     cbWatched.Text = "Checked";
+                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
 
                 case 10: // PVD Personal Video Database V0.9.9.21
@@ -2449,7 +2474,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (mydivx.Contents.Count == 0 && Config_Name.Text.Length > 0)
             {
                 mydivx.Clear();
-                mydivx = ReadXml();
+                if (!string.IsNullOrEmpty(MesFilmsCat.Text)) // only read, if catalog file is defined !
+                  mydivx = ReadXml();
                 LogoView.Items.Clear();
                 selected_Logo_Item = -1;
                 //Read_XML_Logos(Config_Name.Text);
@@ -2496,7 +2522,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                                 mydivx.ReadXml(destFile);
                                 break;
                             }
-                            if (radioButton1.Checked)
+                            if (this.cbEcMergeWithGenreField.Checked)
                                 DVDPTagField.Text = "Category";
                             DvdProfiler cc1 = new DvdProfiler(DVDPTagField.Text);
                             mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, DVDPTagField.Text, OnlyFile.Checked));
@@ -2583,7 +2609,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             PersonalVideoDatabase pvd = new PersonalVideoDatabase();
-                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text, cbEcAddTaglinesToDescriptionField.Checked));
                             break;
                     }
 
@@ -4469,11 +4495,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           Save_Config();
           //Config_Name.Focus();
-          System.Windows.Forms.MessageBox.Show(
-            "Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.",
-            "Control Configuration",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Exclamation);
+          switch (newCatalogSelectedIndex)
+          {
+            case 5:
+                System.Windows.Forms.MessageBox.Show(
+                "Successfully created a new Configuration with default settings ! \n\nPlease adapt the settings to artwork pathes to to match your personal needs.",
+                "Control Configuration",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+                General.SelectedIndex = 6;
+                MesFilmsImg.Focus(); // Set focus to cover path
+                break;
+            default:
+                System.Windows.Forms.MessageBox.Show(
+                "Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.",
+                "Control Configuration",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+                break;
+          }
+              
           if (newCatalog && CatalogType.SelectedIndex != 0)
           {
             launchAMCmanager();

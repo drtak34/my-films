@@ -125,6 +125,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrWatchedField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WatchedField", "Checked"); // Defaults to "Checked", if no value set, as it's most used in ANT like that
                 StrSuppressField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressField", string.Empty);
                 StrSuppressValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressValue", string.Empty);
+                StrECoptionStoreTaglineInDescription = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionStoreTaglineInDescription", false);
                 switch (StrFileType)
                 {
                     case "0":
@@ -285,7 +286,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                           OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                           PersonalVideoDatabase pvd = new PersonalVideoDatabase();
-                          StrFileXml = pvd.ConvertPersonalVideoDatabase(StrFileXml, StrPathImg, SortTitle, OnlyFile, TitleDelim);
+                          StrFileXml = pvd.ConvertPersonalVideoDatabase(StrFileXml, StrPathImg, SortTitle, OnlyFile, TitleDelim, StrECoptionStoreTaglineInDescription);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -518,6 +519,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strSuppress; }
             set { strSuppress = value; }
+        }
+        private bool strECoptionStoreTaglineInDescription = false;
+        public bool StrECoptionStoreTaglineInDescription
+        {
+            get { return strECoptionStoreTaglineInDescription; }
+            set { strECoptionStoreTaglineInDescription = value; }
         }
         private bool strSupPlayer = false;
         public bool StrSupPlayer

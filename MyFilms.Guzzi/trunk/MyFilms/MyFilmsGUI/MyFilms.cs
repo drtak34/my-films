@@ -2150,28 +2150,37 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else if (System.IO.File.Exists(strPathArtist + itemlabel + "L" + ".jpg")) strThumbSource = strPathArtist + itemlabel + "L" + ".jpg";
               else if (System.IO.File.Exists(strPathArtist + itemlabel + ".jpg")) strThumbSource = strPathArtist + itemlabel + ".jpg";
               else if (System.IO.File.Exists(strPathArtist + itemlabel + ".png")) strThumbSource = strPathArtist + itemlabel + ".png";
-              else if (conf.StrFileType == "5") // XMM artist thumbs: e.g. Alex-Revan_101640.jpg
-              {
-                if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in XMM picture directory
+              else
+                switch (conf.StrFileType) // perform catalog specific searches ...
                 {
-                  string searchname = HTMLParser.removeHtml(itemlabel).Replace(" ", "-"); // replaces special character "á" and other special chars !
-                  searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
-                  string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
-                  if (files.Count() > 0) 
-                    strThumbSource = files[0];
+                  case "5": // XMM artist thumbs: e.g. Alex-Revan_101640.jpg
+                      if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in XMM picture directory
+                      {
+                        string searchname = HTMLParser.removeHtml(itemlabel).Replace(" ", "-"); // replaces special character "á" and other special chars !
+                        searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                        string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
+                        if (files.Count() > 0) 
+                          strThumbSource = files[0];
+                      }
+                      break;
+                  case "9": // EAX 3.x
+                      if (System.IO.File.Exists(strPathArtist + itemlabel.Replace(" ", ".") + ".jpg")) strThumbSource = strPathArtist + itemlabel.Replace(" ", ".") + ".jpg";
+                    break;
+
+                  case "10": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
+                      if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in PVD picture directory
+                      {
+                        string searchname = HTMLParser.removeHtml(itemlabel).Replace(" ", "-"); // replaces special character "á" and other special chars !
+                        searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                        string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
+                        if (files.Count() > 0)
+                          strThumbSource = files[0];
+                      }
+                    break;
+
+                  default:
+                    break;
                 }
-              }
-              else if (conf.StrFileType == "10") // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
-              {
-                if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in PVD picture directory
-                {
-                  string searchname = HTMLParser.removeHtml(itemlabel).Replace(" ", "-"); // replaces special character "á" and other special chars !
-                  searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
-                  string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
-                  if (files.Count() > 0)
-                    strThumbSource = files[0];
-                }
-              }
               if (strThumbSource != string.Empty)
               {
                 Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);

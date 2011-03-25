@@ -3363,6 +3363,44 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     try { System.IO.Directory.CreateDirectory(safeName); }
                     catch { }
                 }
+                // Added to support fanart for external catalogs
+                switch (MyFilms.conf.StrFileType)
+                {
+                  case "5": // XMM
+                    if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in XMM fanart directory
+                    {
+                      string searchname = HTMLParser.removeHtml(wtitle2).Replace(" ", "-"); // replaces special character "á" and other special chars !
+                      searchname = "*" + Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                      string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
+                      if (files.Count() > 0)
+                      {
+                        wfanart[0] = files[0];
+                        wfanart[1] = "file";
+                        return wfanart;
+                      }
+                    }
+                    break;
+                  case "9": // EAX 3.x
+                    if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in XMM fanart directory
+                    {
+                      string searchname = HTMLParser.removeHtml(wtitle2).Replace(" ", "."); // replaces special character "á" and other special chars !
+                      //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                      searchname = searchname  + ".*.jpg";
+                      string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
+                      if (files.Count() > 0)
+                      {
+                        wfanart[0] = files[0];
+                        wfanart[1] = "file";
+                        return wfanart;
+                      }
+                    }
+                    break;
+
+                  case "10": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
+                    break;
+                  default:
+                    break;
+                }
                 if ((MyFilms.conf.StrFanartDflt) && !(rep) && System.IO.File.Exists(filecover))
                 {
                     wfanart[0] = filecover.ToString();

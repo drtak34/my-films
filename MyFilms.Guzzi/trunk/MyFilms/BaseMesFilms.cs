@@ -248,6 +248,8 @@ namespace MyFilmsPlugin.MyFilms
                     return GUILocalizeStrings.Get(10798940);
                 case "TagLine":
                     return GUILocalizeStrings.Get(10798941);
+                case "Tags":
+                    return GUILocalizeStrings.Get(10798942);
                 default:
                     return string.Empty;
             }

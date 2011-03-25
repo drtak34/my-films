@@ -69,7 +69,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Subtitles", "Subtitles");
             ProfilerDict.Add("Writer", "Writer");
             ProfilerDict.Add("Certification", "Certification");
-          //ProfilerDict.Add("Borrower", "Borrower");
+            //ProfilerDict.Add("Borrower", "Borrower");
+            //ProfilerDict.Add("TagLine", "TagLine");
+            //ProfilerDict.Add("Trailer", "SourceTrailer");
+
 
         }
         public string ConvertEaxMovieCatalog3(string source, string folderimage, bool SortTitle, bool OnlyFile, string TitleDelim)
