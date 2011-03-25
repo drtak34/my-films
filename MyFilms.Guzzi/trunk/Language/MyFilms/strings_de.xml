@@ -109,6 +109,10 @@
     <String id="1079894">Als bereits gesehen markieren</String>
     <String id="1079895">Als noch nicht gesehen markieren</String>
     <String id="1079896">Personen</String>
+    <String id="1079901">Ansicht (Layout) ...</String>
+    <String id="1079902">Sortiere ...</String>
+    <String id="1079903">Ansicht (Filme) ...</String>
+    <String id="1079904">Kontext Optionen ...</String>
     <String id="10798610">Filme als </String>
     <String id="10798611">Wähle Funktion für </String>
     <String id="10798612">Produzent</String>
@@ -227,7 +231,7 @@
     <String id="10798734">Aktualisiere alle Felder</String>
     <String id="10798735">Aktualisiere nur leere Felder</String>
     <String id="10798736">Lokal verfügbar</String>
-    <String id="10798737">Film lokal nicht gefunden</String>
+    <String id="10798737">Trailer lokal nicht gefunden</String>
     <String id="10798738">Versuche Online Trailer ?</String>
     <String id="10798739">Suche lokale Trailer und aktualisiere DB ?</String>
     <String id="10798740">*** Spiele alle Trailer ***</String>
@@ -244,7 +248,7 @@
     <String id="10798754">Mitwirkende Personen</String>
     <String id="10798755">Technische Infos</String>
     <String id="10798761">Lade Covers (TMDB)</String>
-    <String id="10798762">Wechsel Cover</String>
+    <String id="10798762">Cover wechseln</String>
     <String id="10798800">Warnung: Lange Laufzeit !</String>
     <String id="10798801">Soll wirklich die Trailersuche</String>
     <String id="10798802">für {0} Filme gestartet werden?</String>

@@ -109,6 +109,10 @@
     <String id="1079894">Set watched</String>
     <String id="1079895">Set unwatched</String>
     <String id="1079896">Persons</String>
+    <String id="1079901">View (Layout) ...</String>
+    <String id="1079902">Sort by ...</String>
+    <String id="1079903">Change View ...</String>
+    <String id="1079904">Context Options ...</String>
     <String id="10798610">Films as </String>
     <String id="10798611">Function selection for</String>
     <String id="10798612">Producer</String>
@@ -227,7 +231,7 @@
     <String id="10798734">Update all properties</String>
     <String id="10798735">Update only missing properties</String>
     <String id="10798736">Locally Available</String>
-    <String id="10798737">Film not found locally</String>
+    <String id="10798737">Trailer not found locally</String>
     <String id="10798738">Try Online Trailer?</String>
     <String id="10798739">Search local trailers and update DB ?</String>
     <String id="10798740">*** play all trailers ***</String>
