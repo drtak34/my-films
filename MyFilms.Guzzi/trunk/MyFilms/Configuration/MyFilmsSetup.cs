@@ -4463,6 +4463,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           // Change Config to selected catalog type
           CatalogType.SelectedIndex = newCatalogSelectedIndex;
+          // Set as default config, if it's the only config - but this would always have this config set as default, even if adding more configs....
+          //if (Config_Name.Items.Count == 1) 
+          //  Config_Dflt.Checked = true;
+
           Save_Config();
           //Config_Name.Focus();
           System.Windows.Forms.MessageBox.Show(

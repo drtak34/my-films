@@ -44,7 +44,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Media", "MediaType");
             ProfilerDict.Add("MovieFile", "Source");
             ProfilerDict.Add("DateInsert", "Date");
-            //ProfilerDict.Add("Borrower", "Borrower");
+            ProfilerDict.Add("Loaner", "Borrower");
             ProfilerDict.Add("Rating", "Rating");
             ProfilerDict.Add("Title", "OriginalTitle");
             ProfilerDict.Add("TTitle", "TranslatedTitle");
@@ -246,6 +246,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 //string TagLine
                 XmlNode nodeTagLine = nodeDVD.SelectSingleNode("TagLine");
                 if (nodeTagLine != null && nodeTagLine.InnerText.Length > 0) WriteAntAtribute(destXml, "TagLine", nodeTagLine.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+
+                //string Borrower
+                XmlNode nodeBorrower = nodeDVD.SelectSingleNode("Loaner");
+                if (nodeBorrower != null && nodeBorrower.InnerText.Length > 0) WriteAntAtribute(destXml, "Loaner", nodeBorrower.InnerText.Replace(char.ConvertFromUtf32(160), " "));
 
                 //string Director, 
                 XmlNode nodeDirector = nodeDVD.SelectSingleNode("Director");
