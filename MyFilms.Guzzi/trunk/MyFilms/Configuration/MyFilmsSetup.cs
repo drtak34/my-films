@@ -1887,10 +1887,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     }
                     break;
                 case 5: // XMM Extreme Movie Manager
-                    if (string.IsNullOrEmpty(AntStorage.Text))
-                      AntStorage.Text = "Source";
-                    if (string.IsNullOrEmpty(AntStorageTrailer.Text))
-                      AntStorageTrailer.Text = "Borrower";
+                    AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = "SourceTrailer";
+                    if (MesFilmsCat.Text.Length > 0)
+                    {
+                      string strDbName = MesFilmsCat.Text.Substring(MesFilmsCat.Text.LastIndexOf("\\") + 1);
+                      strDbName = strDbName.Substring(0, strDbName.LastIndexOf(".")); // results in filename only without extension
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_cover"; // cover path
+                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_photos"; // person thumb path
+                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\" + strDbName + "_thumbs"; // fanart path
+                      //a.	…eXtreme Movie Manager 7\Databases\Test_cover – for movie covers
+                      //b.	… eXtreme Movie Manager 7\Databases\Test_photos – for person thumbs – filename format is Steve-Martin_143135.jpg
+                      //c.	… eXtreme Movie Manager 7\Databases\Test_thumbs – for covers and thumbnails – this is where fanart might be stored as #-[movietitle]_fanart.jpg
+                    }
                     break;
 
                 case 7: // MyFilms DB (currently same as ANT Movie Catalog, but possible to extend DB fields in the future
@@ -1909,12 +1918,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //b.	Person Thumbs = D:My Documents\Data\Eax Movie Catalog\NamePictures
                       //c.	Fanart = D:My Documents\Eax Movie Catalog\Thumbnails – depends on the script i.e. grabs photos, but TMDB scrip grabs fanart but if users have fanart in EAX this folder is where it will be stored.
                     }
-                    //AntItem1.Text = "Writer";
-                    //AntLabel1.Text = "Writer";
-                    //AntItem2.Text = "Certification";
-                    //AntLabel2.Text = "MPAA";
-                    //AntViewItem1.Text = "Writer";
-                    //AntViewText1.Text = "Writer";
                     cbWatched.Text = "Checked";
                     break;
 
@@ -1930,12 +1933,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //b.	Posters are stored in a subfolder of the catalog folder \DBName\Posters – these are the ‘extra’ posters you download
                       //c.	Person images are stored in a subfolder of the catalog folder \DBName\ Photos – although you have to grab those separately for each person as far as I can tell.
                     }
-                    //AntItem1.Text = "Writer";
-                    //AntLabel1.Text = "Writer";
-                    //AntItem2.Text = "Certification";
-                    //AntLabel2.Text = "MPAA";
-                    //AntViewItem1.Text = "Writer";
-                    //AntViewText1.Text = "Writer";
                     cbWatched.Text = "Checked";
                     break;
 
@@ -4321,6 +4318,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSearchList.Text = "OriginalTitle, TranslatedTitle, Description, Comments, Actors, Director, Producer, Year, Date, Category, Country, Rating, Checked, MediaLabel, MediaType, URL, Borrower, Length, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Size, Disks, Languages, Subtitles, Number";
             AntUpdList.Text = "OriginalTitle, TranslatedTitle, Category, Year, Date, Country, Rating, Checked, MediaLabel, MediaType, Actors, Director, Producer";
           }
+
+          // Preset separators:
+          ListSeparator1.Text = ",";
+          ListSeparator2.Text = ";";
+          ListSeparator3.Text = "[";
+          ListSeparator4.Text = "|";
+          ListSeparator5.Text = string.Empty;
+          RoleSeparator1.Text = "(";
+          RoleSeparator2.Text = ")";
+          RoleSeparator3.Text = " as ";
+          RoleSeparator4.Text = "....";
+          RoleSeparator5.Text = "|";
 
           chkFanart.Checked = true;
           chkFanartDefaultViews.Checked = false;

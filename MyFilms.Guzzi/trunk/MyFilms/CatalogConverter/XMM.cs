@@ -44,7 +44,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Media", "MediaType");
             ProfilerDict.Add("MovieFile", "Source");
             ProfilerDict.Add("DateInsert", "Date");
-            ProfilerDict.Add("Trailer", "Borrower");
+            //ProfilerDict.Add("Borrower", "Borrower");
             ProfilerDict.Add("Rating", "Rating");
             ProfilerDict.Add("Title", "OriginalTitle");
             ProfilerDict.Add("TTitle", "TranslatedTitle");
@@ -70,6 +70,14 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Filesize", "Size");
             ProfilerDict.Add("Disks", "Disks");
             ProfilerDict.Add("Cover", "Picture");
+            ProfilerDict.Add("Writer", "Writer");
+            ProfilerDict.Add("MPAA", "Certification");
+            ProfilerDict.Add("TagLine", "TagLine");
+            ProfilerDict.Add("Trailer", "SourceTrailer");
+            //ProfilerDict.Add("watched", "Watched");
+            //ProfilerDict.Add("watcheddate", "WatchedDate");
+            //ProfilerDict.Add("IMDB_Id", "IMDB_Id");
+            //ProfilerDict.Add("TMDB_Id", "TMDB_Id");
 
             //int Number, 
             //string Checked, 
@@ -231,6 +239,14 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 if (nodeSTitle != null && nodeSTitle.InnerText.Length > 0) WriteAntAtribute(destXml, "STitle", nodeSTitle.InnerText.Replace(char.ConvertFromUtf32(160), " "));
                 else WriteAntAtribute(destXml, "STitle", nodeTitle.InnerText.Replace(char.ConvertFromUtf32(160), " "));
 
+                //string Certification
+                XmlNode nodeCertification = nodeDVD.SelectSingleNode("MPAA");
+                if (nodeCertification != null && nodeCertification.InnerText.Length > 0) WriteAntAtribute(destXml, "MPAA", nodeCertification.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+
+                //string TagLine
+                XmlNode nodeTagLine = nodeDVD.SelectSingleNode("TagLine");
+                if (nodeTagLine != null && nodeTagLine.InnerText.Length > 0) WriteAntAtribute(destXml, "TagLine", nodeTagLine.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+
                 //string Director, 
                 XmlNode nodeDirector = nodeDVD.SelectSingleNode("Director");
                 if (nodeDirector != null && nodeDirector.InnerText.Length > 0) WriteAntAtribute(destXml, "Director", nodeDirector.InnerText.Replace(char.ConvertFromUtf32(160), " "));
@@ -238,6 +254,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 //string Producer, 
                 XmlNode nodeProducer = nodeDVD.SelectSingleNode("Producer");
                 if (nodeProducer != null && nodeProducer.InnerText.Length > 0) WriteAntAtribute(destXml, "Producer", nodeProducer.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+
+                //string Writer, 
+                XmlNode nodeWriter = nodeDVD.SelectSingleNode("Writer");
+                if (nodeWriter != null && nodeWriter.InnerText.Length > 0) WriteAntAtribute(destXml, "Writer", nodeWriter.InnerText.Replace(char.ConvertFromUtf32(160), " "));
 
                 //string Country, 
                 XmlNode nodeCountry = nodeDVD.SelectSingleNode("Country");
