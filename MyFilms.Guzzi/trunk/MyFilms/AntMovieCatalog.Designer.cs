@@ -954,6 +954,8 @@ namespace MyFilmsPlugin.MyFilms {
             
             private global::System.Data.DataColumn columnTagLine;
             
+            private global::System.Data.DataColumn columnTags;
+            
             private global::System.Data.DataColumn columnContents_Id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1289,6 +1291,13 @@ namespace MyFilmsPlugin.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn TagsColumn {
+                get {
+                    return this.columnTags;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn Contents_IdColumn {
                 get {
                     return this.columnContents_Id;
@@ -1366,7 +1375,8 @@ namespace MyFilmsPlugin.MyFilms {
                         string IMDB_Id, 
                         string TMDB_Id, 
                         string SourceTrailer, 
-                        string TagLine) {
+                        string TagLine, 
+                        string Tags) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Number,
@@ -1411,6 +1421,7 @@ namespace MyFilmsPlugin.MyFilms {
                         TMDB_Id,
                         SourceTrailer,
                         TagLine,
+                        Tags,
                         null};
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -1458,7 +1469,8 @@ namespace MyFilmsPlugin.MyFilms {
                         string IMDB_Id, 
                         string TMDB_Id, 
                         string SourceTrailer, 
-                        string TagLine) {
+                        string TagLine, 
+                        string Tags) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Number,
@@ -1503,6 +1515,7 @@ namespace MyFilmsPlugin.MyFilms {
                         TMDB_Id,
                         SourceTrailer,
                         TagLine,
+                        Tags,
                         null};
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -1565,6 +1578,7 @@ namespace MyFilmsPlugin.MyFilms {
                 this.columnTMDB_Id = base.Columns["TMDB_Id"];
                 this.columnSourceTrailer = base.Columns["SourceTrailer"];
                 this.columnTagLine = base.Columns["TagLine"];
+                this.columnTags = base.Columns["Tags"];
                 this.columnContents_Id = base.Columns["Contents_Id"];
             }
             
@@ -1654,6 +1668,8 @@ namespace MyFilmsPlugin.MyFilms {
                 base.Columns.Add(this.columnSourceTrailer);
                 this.columnTagLine = new global::System.Data.DataColumn("TagLine", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnTagLine);
+                this.columnTags = new global::System.Data.DataColumn("Tags", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnTags);
                 this.columnContents_Id = new global::System.Data.DataColumn("Contents_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
                 base.Columns.Add(this.columnContents_Id);
                 this.columnNumber.Namespace = "";
@@ -2617,6 +2633,21 @@ namespace MyFilmsPlugin.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Tags {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.TagsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Tags in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.TagsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int Contents_Id {
                 get {
                     return ((int)(this[this.tableMovie.Contents_IdColumn]));
@@ -3054,6 +3085,16 @@ namespace MyFilmsPlugin.MyFilms {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetTagLineNull() {
                 this[this.tableMovie.TagLineColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsTagsNull() {
+                return this.IsNull(this.tableMovie.TagsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetTagsNull() {
+                this[this.tableMovie.TagsColumn] = global::System.Convert.DBNull;
             }
         }
         
