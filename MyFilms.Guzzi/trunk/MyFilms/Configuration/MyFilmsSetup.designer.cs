@@ -396,7 +396,7 @@
           this.label13 = new System.Windows.Forms.Label();
           this.CatalogType = new System.Windows.Forms.ComboBox();
           this.groupBox_TitleOrder = new System.Windows.Forms.GroupBox();
-          this.cbUseOriginalAsTranslatedTitle = new System.Windows.Forms.CheckBox();
+          this.chkUseOriginalAsTranslatedTitle = new System.Windows.Forms.CheckBox();
           this.label20 = new System.Windows.Forms.Label();
           this.AntSTitle = new System.Windows.Forms.ComboBox();
           this.label17 = new System.Windows.Forms.Label();
@@ -3779,7 +3779,7 @@
           // 
           // groupBox_TitleOrder
           // 
-          this.groupBox_TitleOrder.Controls.Add(this.cbUseOriginalAsTranslatedTitle);
+          this.groupBox_TitleOrder.Controls.Add(this.chkUseOriginalAsTranslatedTitle);
           this.groupBox_TitleOrder.Controls.Add(this.label20);
           this.groupBox_TitleOrder.Controls.Add(this.AntSTitle);
           this.groupBox_TitleOrder.Controls.Add(this.label17);
@@ -3796,17 +3796,17 @@
           this.groupBox_TitleOrder.Text = "Title Order";
           this.ToolTip1.SetToolTip(this.groupBox_TitleOrder, resources.GetString("groupBox_TitleOrder.ToolTip"));
           // 
-          // cbUseOriginalAsTranslatedTitle
+          // chkUseOriginalAsTranslatedTitle
           // 
-          this.cbUseOriginalAsTranslatedTitle.AutoSize = true;
-          this.cbUseOriginalAsTranslatedTitle.Enabled = false;
-          this.cbUseOriginalAsTranslatedTitle.Location = new System.Drawing.Point(297, 46);
-          this.cbUseOriginalAsTranslatedTitle.Name = "cbUseOriginalAsTranslatedTitle";
-          this.cbUseOriginalAsTranslatedTitle.Size = new System.Drawing.Size(103, 43);
-          this.cbUseOriginalAsTranslatedTitle.TabIndex = 72;
-          this.cbUseOriginalAsTranslatedTitle.Text = "Use original title \r\nif translated title \r\nis empty";
-          this.ToolTip1.SetToolTip(this.cbUseOriginalAsTranslatedTitle, resources.GetString("cbUseOriginalAsTranslatedTitle.ToolTip"));
-          this.cbUseOriginalAsTranslatedTitle.UseVisualStyleBackColor = true;
+          this.chkUseOriginalAsTranslatedTitle.AutoSize = true;
+          this.chkUseOriginalAsTranslatedTitle.Enabled = false;
+          this.chkUseOriginalAsTranslatedTitle.Location = new System.Drawing.Point(297, 46);
+          this.chkUseOriginalAsTranslatedTitle.Name = "chkUseOriginalAsTranslatedTitle";
+          this.chkUseOriginalAsTranslatedTitle.Size = new System.Drawing.Size(103, 43);
+          this.chkUseOriginalAsTranslatedTitle.TabIndex = 72;
+          this.chkUseOriginalAsTranslatedTitle.Text = "Use original title \r\nif translated title \r\nis empty";
+          this.ToolTip1.SetToolTip(this.chkUseOriginalAsTranslatedTitle, resources.GetString("chkUseOriginalAsTranslatedTitle.ToolTip"));
+          this.chkUseOriginalAsTranslatedTitle.UseVisualStyleBackColor = true;
           // 
           // label20
           // 
@@ -5052,7 +5052,7 @@
         private ComboBox cbPictureHandling;
         private GroupBox groupBox3;
         private GroupBox groupBox4;
-        private CheckBox cbUseOriginalAsTranslatedTitle;
+        private CheckBox chkUseOriginalAsTranslatedTitle;
         private CheckBox cbEcAddTaglinesToDescriptionField;
     }
 }

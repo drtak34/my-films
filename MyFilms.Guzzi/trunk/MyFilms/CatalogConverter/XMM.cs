@@ -73,6 +73,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Writer", "Writer");
             ProfilerDict.Add("MPAA", "Certification");
             ProfilerDict.Add("TagLine", "TagLine");
+            //ProfilerDict.Add("Tags", "Tags");
             ProfilerDict.Add("Trailer", "SourceTrailer");
             //ProfilerDict.Add("watched", "Watched");
             //ProfilerDict.Add("watcheddate", "WatchedDate");

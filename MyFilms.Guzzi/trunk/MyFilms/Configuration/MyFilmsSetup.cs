@@ -904,6 +904,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "LayOut", WLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "StrDfltSelect", StrDfltSelect);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Dwp", crypto.Crypter(Dwp.Text));
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseOriginaltitleForMissingTranslatedtitle", chkUseOriginalAsTranslatedTitle.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", SearchFileName.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirs", SearchSubDirs.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", SearchSubDirsTrailer.Checked);
@@ -1284,6 +1285,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Rpt_Dwp.Text = Dwp.Text;
             //fmu pour etre coherent avec MP qui stocke les booleens en yes/no au lieu de true/false
             //fmu       if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", "False") == "True")
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseOriginaltitleForMissingTranslatedtitle", "False") == "True" //fmu
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseOriginaltitleForMissingTranslatedtitle", "False") == "yes")  //fmu
+              chkUseOriginalAsTranslatedTitle.Checked = true;
+            else
+              chkUseOriginalAsTranslatedTitle.Checked = false;
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", "False") == "True" //fmu
             || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", "False") == "yes")  //fmu
                 SearchFileName.Checked = true;
@@ -1566,6 +1572,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             ItemSearchFileName.ResetText();
             ItemSearchGrabberName.ResetText();
             cbPictureHandling.ResetText();
+            chkUseOriginalAsTranslatedTitle.Checked = false;
             SearchFileName.Checked = false;
             chkSuppress.Checked = false;
             chksupplaystop.Checked = false;
@@ -4317,6 +4324,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntTitle2.Text = "TranslatedTitle";
             ItemSearchFileName.Text = "OriginalTitle";
             ItemSearchGrabberName.Text = "OriginalTitle";
+            chkUseOriginalAsTranslatedTitle.Checked = false;
           }
           else
           {
@@ -4324,6 +4332,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntTitle2.Text = "OriginalTitle";
             ItemSearchFileName.Text = "TranslatedTitle";
             ItemSearchGrabberName.Text = "TranslatedTitle";
+            chkUseOriginalAsTranslatedTitle.Checked = true;
           }
 
           AntSTitle.Text = "FormattedTitle";
