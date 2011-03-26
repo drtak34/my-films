@@ -2309,7 +2309,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>46</Revision>
+      <Revision>47</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2317,7 +2317,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.46.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.47.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -4323,14 +4323,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{98d2f8b2-e26b-44ba-a77b-b7a407726200}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{2b6c9b8b-562c-413f-b003-a77a22c5fa0d}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{71a03675-65ff-49bc-8f0d-27dae299cb7c}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{93c5ac1b-d0ca-433c-bd11-5f0a6cccaf40}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

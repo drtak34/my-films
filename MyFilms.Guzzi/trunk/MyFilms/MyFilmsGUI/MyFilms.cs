@@ -898,7 +898,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         Change_LayOut(dlg.SelectedLabel);
                         MyFilms.conf.StrLayOut = dlg.SelectedLabel;
                         dlg.DeInit();
-                        GetFilmList();
+                        // GetFilmList(); // commented, as it otherwise does reset the view to filmsview, when in person or genre views ...
+                        if (!conf.Boolselect) // depending if it's a grouped view ...
+                          GetFilmList();
+                        else
+                          getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, true, "");
                         GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)wselectindex);
                         GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                         return base.OnMessage(messageType);
@@ -1928,7 +1932,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             conf.Wselectedlabel = "";
             if (ClearIndex) 
                 conf.StrIndex = 0;
-            Change_LayOut(0); 
+            Change_LayOut(MyFilms.conf.StrLayOut); // Originally was always reset to "0"
             facadeView.Clear();
             int wi = 0;
 
