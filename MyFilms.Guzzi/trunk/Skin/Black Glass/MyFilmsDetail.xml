@@ -199,23 +199,34 @@
 					<onright>10000</onright>
 					<label>712</label>
 				</control> -->
-				<control>
+
+				<!-- <control>
 					<type>button</type>
-					<description>Back</description>
+					<description>Person infos</description>
 					<id>108</id>
 					<onup>10014</onup>
 					<ondown>109</ondown>
 					<onright>10000</onright>
 					<label>Personen Infos</label>
+				</control> -->
+
+				<control>
+					<type>button</type>
+					<description>Back</description>
+					<id>102</id>
+					<onup>10014</onup>
+					<ondown>109</ondown>
+					<onright>10000</onright>
+					<label>712</label>
 				</control>
 				<control>
 					<type>button</type>
-					<description>Play Trailer</description>
+					<description>Trailers</description>
 					<id>109</id>
-					<onup>108</onup>
+					<onup>102</onup>
 					<ondown>107</ondown>
 					<onright>10000</onright>
-					<label>Spiele Trailer</label>
+					<label>5906</label>
 				</control>
 				<control>
 					<type>button</type>
@@ -1489,6 +1500,8 @@ Detailmenu for technical details
 			<height>538</height>
 			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
 			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<zoom>yes</zoom>
       <visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -1505,6 +1518,8 @@ Detailmenu for technical details
 			<height>538</height>
 			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture>
 			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<zoom>yes</zoom>
 			<visible>!Control.HasFocus(10099)+player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>

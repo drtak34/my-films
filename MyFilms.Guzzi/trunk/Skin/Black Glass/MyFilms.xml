@@ -254,6 +254,7 @@
 			<width>750</width>
 			<label>#myfilms.view - #myfilms.select</label>
 			<wrapString> : : : </wrapString>
+			<visible>string.contains(#myfilms.view)|string.contains(#myfilms.select)</visible>
 			<animation effect="fade" time="250">WindowClose</animation>
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -504,7 +505,7 @@
 		<control>
 			<description>Runtime value</description>
 			<type>fadelabel</type>
-			<id>34</id>
+			<id>1</id>
 			<posX>30</posX>
 			<posY>559</posY>
 			<width>750</width>
@@ -518,7 +519,7 @@
 		<control>
 			<description>RatingValue</description>
 			<type>label</type>
-			<id>2068</id>
+			<id>1</id>
 			<posX>280</posX>
 			<posY>452</posY>
 			<label>(#myfilms.db.rating.value)</label>
@@ -1110,12 +1111,19 @@
 					<id>5</id>
 					<onright>50</onright>
 					<onup>4</onup>
-					<ondown>10012</ondown>
+					<ondown>7</ondown>
 					<label>496</label>
+				</control>
+				<control>
+					<type>button</type>
+					<description>Global Filter Options</description>
+					<id>7</id>
+					<onright>50</onright>
+					<onup>5</onup>
+					<ondown>10012</ondown>
 				</control>
 
 <!-- Additional Buttons for Links to other Plugins -->
-
 				<control>
 					<description>Empty</description>
 					<type>button</type>
@@ -1123,10 +1131,17 @@
 					<hyperlink></hyperlink>
 					<label>-</label>
 					<onright>50</onright>
-					<onup>5</onup>
+					<onup>8</onup>
 					<ondown>10012</ondown>
 					<texture>bg_facade_line_nofocus.png</texture>
 				</control>
+				<control>
+					<description>Separator</description>
+					<type>image</type>
+					<id>0</id>
+					<height>10</height>
+					<texture></texture>
+				</control> 
 				<control>
 					<description>Trailer</description>
 					<type>button</type>
@@ -1134,7 +1149,7 @@
 					<hyperlink>5900</hyperlink>
 					<label>Trailer</label>
 					<onright>50</onright>
-					<onup>5</onup>
+					<onup>7</onup>
 					<ondown>10013</ondown>
 					<visible>plugin.isenabled(My Trailers)</visible>
 				</control>
