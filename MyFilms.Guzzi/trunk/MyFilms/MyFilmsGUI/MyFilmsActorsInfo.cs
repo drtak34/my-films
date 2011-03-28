@@ -36,7 +36,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaPortal.GUI.Pictures;
   using MediaPortal.Util;
   using MediaPortal.Video.Database;
-
+  using Action = MediaPortal.GUI.Library.Action;
   using MyFilmsPlugin.MyFilms;
 
   using NLog;
@@ -98,7 +98,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private ViewMode viewmode = ViewMode.Biography;
 
         private MediaPortal.Video.Database.IMDBActor currentActor = null;
-        private bool _prevOverlay = false;
+        //private bool _prevOverlay = false;
         private string imdbCoverArtUrl = string.Empty;
 
                
@@ -135,62 +135,60 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             switch (message.Message)
             {
-                case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-                    _prevOverlay = GUIGraphicsContext.Overlay;
-                    base.OnMessage(message);
-                    return true;
-                case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT:
-                    base.OnMessage(message);
-                    GUIGraphicsContext.Overlay = _prevOverlay;
-                    return true;
-            }
-            return base.OnMessage(message);
+        case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT:
+          {
+            base.OnMessage(message);
+            m_pParentWindow = null;
+            m_bRunning = false;
+            Dispose();
+            DeInitControls();
+            GUILayerManager.UnRegisterLayer(this);
+            return true;
+          }
+        case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
+          {
+            base.OnMessage(message);
+            GUIGraphicsContext.Overlay = base.IsOverlayAllowed;
+            m_pParentWindow = GUIWindowManager.GetWindow(m_dwParentWindowID);
+            GUILayerManager.RegisterLayer(this, GUILayerManager.LayerType.Dialog);
+            return true;
+          }
+      }
+      return base.OnMessage(message);
         }
 
         #region Base Dialog Members
 
-        private void Close()
-        {
-            GUIWindowManager.IsSwitchingToNewWindow = true;
-            lock (this)
-            {
-                m_bRunning = false;
-                GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT, GetID, 0, 0, 0, 0, null);
-                OnMessage(msg);
+    private void Close()
+    {
+      GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT, GetID, 0, 0, 0, 0, null);
+      OnMessage(msg);
+    }
 
-                GUIWindowManager.UnRoute();
-                m_pParentWindow = null;
-            }
-            GUIWindowManager.IsSwitchingToNewWindow = false;
-        }
+    public void DoModal(int dwParentId)
+    {
+      m_dwParentWindowID = dwParentId;
+      m_pParentWindow = GUIWindowManager.GetWindow(m_dwParentWindowID);
+      if (null == m_pParentWindow)
+      {
+        m_dwParentWindowID = 0;
+        return;
+      }
+      
+      GUIWindowManager.RouteToWindow(GetID);
 
-        public void DoModal(int dwParentId)
-        {
-            m_dwParentWindowID = dwParentId;
-            m_pParentWindow = GUIWindowManager.GetWindow(m_dwParentWindowID);
-            if (null == m_pParentWindow)
-            {
-                m_dwParentWindowID = 0;
-                return;
-            }
+      // activate this window...
+      GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_WINDOW_INIT, GetID, 0, 0, 0, 0, null);
+      OnMessage(msg);
 
-            GUIWindowManager.IsSwitchingToNewWindow = true;
-            GUIWindowManager.RouteToWindow(GetID);
-
-            // active this window...
-            GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_WINDOW_INIT, GetID, 0, 0, 0, 0, null);
-            OnMessage(msg);
-
-            GUILayerManager.RegisterLayer(this, GUILayerManager.LayerType.Dialog);
-
-            GUIWindowManager.IsSwitchingToNewWindow = false;
-            m_bRunning = true;
-            while (m_bRunning && GUIGraphicsContext.CurrentState == GUIGraphicsContext.State.RUNNING)
-            {
-                GUIWindowManager.Process();
-            }
-            GUILayerManager.UnRegisterLayer(this);
-        }
+      GUILayerManager.RegisterLayer(this, GUILayerManager.LayerType.Dialog);
+      m_bRunning = true;
+      while (m_bRunning && GUIGraphicsContext.CurrentState == GUIGraphicsContext.State.RUNNING)
+      {
+        GUIWindowManager.Process();
+      }
+      GUILayerManager.UnRegisterLayer(this);
+    }
 
         #endregion
 
@@ -203,22 +201,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Update();
         }
 
-        protected override void OnPageDestroy(int newWindowId)
-        {
-            if (m_bRunning)
-            {
-                // User probably pressed H (SWITCH_HOME)
-                m_bRunning = false;
-                GUIWindowManager.UnRoute();
-                m_pParentWindow = null;
-            }
+    protected override void OnPageDestroy(int newWindowId)
+    {
+      if (m_bRunning)
+      {
+        m_bRunning = false;
+        m_pParentWindow = null;
+        GUIWindowManager.UnRoute();
+      }
 
-            base.OnPageDestroy(newWindowId);
-            currentActor = null;
-        }
+      currentActor = null;
+
+      base.OnPageDestroy(newWindowId);
+    }
 
 
-        protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
+    protected override void OnClicked(int controlId, GUIControl control, Action.ActionType actionType)
         {
             // Original Code
             base.OnClicked(controlId, control, actionType);

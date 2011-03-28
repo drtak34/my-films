@@ -2272,7 +2272,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static void Download_TMDB_Posters(string wtitle, string wttitle, string director, string year, bool choose, int wGetID, string savetitle)
         {
 
-          string tmpPicture = "";
+          //string tmpPicture = "";
           string tmpPicturename = ""; // picturename only
           string oldPicture = MyFilmsDetail.getGUIProperty("picture");
           string newPicture = ""; // full path to new picture
@@ -2517,7 +2517,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //string titlename = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
           //string titlename2 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
           string directoryname = "";
-          string movieName = "";
+          //string movieName = "";
           string[] files = null;
           Int64 wsize = 0; // Temporary Filesize detection
           string startPattern = "";
