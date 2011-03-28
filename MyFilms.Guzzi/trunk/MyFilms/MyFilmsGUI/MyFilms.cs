@@ -1934,7 +1934,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             conf.Wselectedlabel = "";
             if (ClearIndex) 
                 conf.StrIndex = 0;
-            Change_LayOut(MyFilms.conf.StrLayOut); // Originally was always reset to "0"
+            if (MyFilms.conf.UseListViewForGoups) 
+              Change_LayOut(0);
+            else
+              Change_LayOut(MyFilms.conf.StrLayOut);
             facadeView.Clear();
             int wi = 0;
 
@@ -2366,7 +2369,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-                Change_LayOut(MyFilms.conf.StrLayOut);
+                if (MyFilms.conf.UseListViewForGoups)
+                  Change_LayOut(0);
+                else
+                  Change_LayOut(MyFilms.conf.StrLayOut);
                 if (!(LoadDfltSlct))                       // Defaultview not selected
                 {
                   GetFilmList(conf.StrIndex);
@@ -2837,6 +2843,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (!MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("alwaysdefaultview");
 
+                    if (MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798628)));
+                    if (!MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798629)));
+                    choiceViewGlobalOptions.Add("alwayslistforgroups");
+
                     dlg1.DoModal(GetID);
                     if (dlg1.SelectedLabel == -1)
                     {
@@ -3184,13 +3194,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     //if (MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
                     //if (!MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
-                    
+
                     if (MyFilms.conf.AlwaysDefaultView)
-                        Fin_Charge_Init(true, true); //DefaultSelect, reload
+                      Fin_Charge_Init(true, true); //DefaultSelect, reload
                     else
-                        Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
+                      Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
                     GUIWaitCursor.Hide();
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                    Change_view("globaloptions");
+                    break;
+                case "alwayslistforgroups":
+                    MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
+                    XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
+                    LogMyFilms.Info("MF: Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
                     Change_view("globaloptions");
                     break;
             }

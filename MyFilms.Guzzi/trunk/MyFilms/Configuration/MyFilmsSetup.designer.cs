@@ -107,7 +107,6 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.cbEcStoreTagsInOptionalField = new System.Windows.Forms.CheckBox();
           this.cbEcMergeWithGenreField = new System.Windows.Forms.CheckBox();
@@ -468,6 +467,8 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.chkUseListviewForGroups = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -656,16 +657,6 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -2900,6 +2891,7 @@
           // 
           // groupBox_DefaultView
           // 
+          this.groupBox_DefaultView.Controls.Add(this.chkUseListviewForGroups);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalUnwatchedOnly);
           this.groupBox_DefaultView.Controls.Add(this.label10);
           this.groupBox_DefaultView.Controls.Add(this.SortSens);
@@ -2921,7 +2913,7 @@
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
-          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 125);
+          this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 130);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
           this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(302, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
@@ -2933,7 +2925,7 @@
           // 
           this.label10.AutoSize = true;
           this.label10.ForeColor = System.Drawing.SystemColors.ControlText;
-          this.label10.Location = new System.Drawing.Point(7, 94);
+          this.label10.Location = new System.Drawing.Point(27, 91);
           this.label10.Name = "label10";
           this.label10.Size = new System.Drawing.Size(291, 13);
           this.label10.TabIndex = 79;
@@ -4560,6 +4552,28 @@
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
           // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
+          // chkUseListviewForGroups
+          // 
+          this.chkUseListviewForGroups.AutoSize = true;
+          this.chkUseListviewForGroups.Location = new System.Drawing.Point(10, 107);
+          this.chkUseListviewForGroups.Name = "chkUseListviewForGroups";
+          this.chkUseListviewForGroups.Size = new System.Drawing.Size(202, 17);
+          this.chkUseListviewForGroups.TabIndex = 81;
+          this.chkUseListviewForGroups.Text = "Always use List View for Group Views";
+          this.ToolTip1.SetToolTip(this.chkUseListviewForGroups, "If checked, MyFilms will always use list view for group views,\r\nlike \"years\", \"co" +
+                  "untry\" etc.\r\nIf unchecked, MyFilms will use same layout as used for films.");
+          this.chkUseListviewForGroups.UseVisualStyleBackColor = true;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5054,5 +5068,6 @@
         private GroupBox groupBox4;
         private CheckBox chkUseOriginalAsTranslatedTitle;
         private CheckBox cbEcAddTaglinesToDescriptionField;
+        private CheckBox chkUseListviewForGroups;
     }
 }

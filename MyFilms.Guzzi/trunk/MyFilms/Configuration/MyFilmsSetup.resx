@@ -437,6 +437,15 @@ so children will not be aware of any other configurations.
 Adult movies can then be included in another configuration that is password protected.
 </value>
   </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+You can configure the field and value to identify unwatched films
+on "update" tab (Watched-Status Handling).</value>
+  </data>
   <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
 Select the option “Display Always that view when using this config”, 
@@ -447,15 +456,6 @@ the last view used before exiting the plugin will be shown next time.
 If a value is entered for the second parameter, only records containing that value will be displayed.  
 For example, you can define a view for children with ‘Category’ – ‘Animation’.
 </value>
-  </data>
-  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
-    <value>Unwatched option acts as global overlayfilter for all views
-and this setting is used for start view.
-It can be switched on/off from the GUI during runtime.
-So you should only activate this if you want to filter your views always when entering MyFilms.
-
-You can configure the field and value to identify unwatched films
-on "update" tab (Watched-Status Handling).</value>
   </data>
   <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
     <value>Views by ‘Genre’, by ‘Year’ and by ‘Country’ are already defined by default.  
@@ -523,50 +523,6 @@ You still can tweak all settings later to your personal preferences.
 The wizard is only working, if you have no existing config selected - so empty the configuration name field, 
 if you want to create a new config with the wizard!</value>
   </data>
-  <data name="CatalogType.ToolTip" xml:space="preserve">
-    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
-Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
-The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.
-
-Use "Starter Settings" if you don't want to use an existing Catalog. MyFilms will then use presets and you only have to choose the path to your movies.
-You can still tweak all settings afterwards if you want.</value>
-  </data>
-  <data name="chkUseOriginalAsTranslatedTitle.ToolTip" xml:space="preserve">
-    <value>This setting is useful for non english users:
-If using translated title as mastertitle, certain views might miss 
-items, if the translated title is empty.
-MyFilms can use the originaltitle as replacement in those cases.</value>
-  </data>
-  <data name="TitleDelim.ToolTip" xml:space="preserve">
-    <value>Character used for hierarchical presentation. This can be used to group more than one movie together,
-e.g. for collections.
-This separator can be used in the title fields for "grouping".
-
-Example:
-Hierachy Separator: "\"
-movie 1: Moviecollection\movie1
-movie 2: Moviecollection\movie2
-movie 3: Moviecollection\movie3
-
-Will show "Moviecollection" with 3 items in it.</value>
-  </data>
-  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
-    <value>title selection:
-You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
-
-Grouping:
-Using a hierarchy separator allows you to do grouping of your films and have a hierarchical presentation. 
-This can be used to group more than one movie together,
-e.g. for collections.
-
-Example:
-Hierachy Separator: "\"
-movie 1: Moviecollection\movie1
-movie 2: Moviecollection\movie2
-movie 3: Moviecollection\movie3
-
-Will show "Moviecollection" with 3 items in it.</value>
-  </data>
   <data name="PathStorage.ToolTip" xml:space="preserve">
     <value>Enter the full path to the folder(s) containing the movie files.  
 You can enter several different pathes separated by a semi-colon and you can select the option “search in sub-folders”, if required.  
@@ -588,6 +544,50 @@ In the first field you can select the database item that can be used to locate t
 In the second field you can enter your own text message to provide additional information.
 
 </value>
+  </data>
+  <data name="CatalogType.ToolTip" xml:space="preserve">
+    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
+Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
+The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.
+
+Use "Starter Settings" if you don't want to use an existing Catalog. MyFilms will then use presets and you only have to choose the path to your movies.
+You can still tweak all settings afterwards if you want.</value>
+  </data>
+  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
+    <value>title selection:
+You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
+
+Grouping:
+Using a hierarchy separator allows you to do grouping of your films and have a hierarchical presentation. 
+This can be used to group more than one movie together,
+e.g. for collections.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
+  </data>
+  <data name="chkUseOriginalAsTranslatedTitle.ToolTip" xml:space="preserve">
+    <value>This setting is useful for non english users:
+If using translated title as mastertitle, certain views might miss 
+items, if the translated title is empty.
+MyFilms can use the originaltitle as replacement in those cases.</value>
+  </data>
+  <data name="TitleDelim.ToolTip" xml:space="preserve">
+    <value>Character used for hierarchical presentation. This can be used to group more than one movie together,
+e.g. for collections.
+This separator can be used in the title fields for "grouping".
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
   </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
