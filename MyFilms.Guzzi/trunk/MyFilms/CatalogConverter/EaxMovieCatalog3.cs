@@ -96,7 +96,6 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 foreach (XmlNode nodeDVD in dvdList)
                 {
                   CultureInfo ci = new CultureInfo("en-us");
-                  XmlNodeList DiscsList = nodeDVD.SelectSingleNode("Discs").SelectNodes("Disc");
                   string wfile = string.Empty;
                   string wVideoCodec = string.Empty;
                   string wAudioCodec = string.Empty;
@@ -105,24 +104,33 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                   string wVideobitrate = string.Empty;
                   string wAudiobitrate = string.Empty;
                   string wFramerate = string.Empty;
+                  string Disks = string.Empty;
 
-                  if ((DiscsList != null) && (DiscsList.Count != 0))
+                  try
                   {
-                    foreach (XmlNode nodeDisc in DiscsList)
+                    XmlNodeList DiscsList = nodeDVD.SelectSingleNode("Discs").SelectNodes("Disc");
+                    if ((DiscsList != null) && (DiscsList.Count != 0))
                     {
-                      if (nodeDisc.Attributes["VideoCodec"] != null) wVideoCodec = nodeDisc.Attributes["VideoCodec"].Value;
-                      if (nodeDisc.Attributes["AudioCodec"] != null) wAudioCodec = nodeDisc.Attributes["AudioCodec"].Value;
-                      if (nodeDisc.Attributes["VideoResolution"] != null) wResolution = nodeDisc.Attributes["VideoResolution"].Value;
-                      if (nodeDisc.Attributes["VideoFilesize"] != null)
-                        if (wFileSize.Length > 0) wFileSize = wFileSize + "+" + nodeDisc.Attributes["VideoFilesize"].Value;
-                        else wFileSize = nodeDisc.Attributes["VideoFilesize"].Value;
-                      if (nodeDisc.Attributes["VideoBitrate"] != null) wVideobitrate = nodeDisc.Attributes["VideoBitrate"].Value;
-                      if (nodeDisc.Attributes["AudioBitrate"] != null) wAudiobitrate = nodeDisc.Attributes["AudioBitrate"].Value;
-                      if (nodeDisc.Attributes["VideoFramerate"] != null) wFramerate = nodeDisc.Attributes["VideoFramerate"].Value;
-                      if (nodeDisc.Attributes["VideoFullPath"] != null)
-                        if (wfile.Length > 0) wfile = wfile + ";" + nodeDisc.Attributes["VideoFullPath"].Value;
-                        else wfile = nodeDisc.Attributes["VideoFullPath"].Value;
+                      foreach (XmlNode nodeDisc in DiscsList)
+                      {
+                        if (nodeDisc.Attributes["VideoCodec"] != null) wVideoCodec = nodeDisc.Attributes["VideoCodec"].Value;
+                        if (nodeDisc.Attributes["AudioCodec"] != null) wAudioCodec = nodeDisc.Attributes["AudioCodec"].Value;
+                        if (nodeDisc.Attributes["VideoResolution"] != null) wResolution = nodeDisc.Attributes["VideoResolution"].Value;
+                        if (nodeDisc.Attributes["VideoFilesize"] != null)
+                          if (wFileSize.Length > 0) wFileSize = wFileSize + "+" + nodeDisc.Attributes["VideoFilesize"].Value;
+                          else wFileSize = nodeDisc.Attributes["VideoFilesize"].Value;
+                        if (nodeDisc.Attributes["VideoBitrate"] != null) wVideobitrate = nodeDisc.Attributes["VideoBitrate"].Value;
+                        if (nodeDisc.Attributes["AudioBitrate"] != null) wAudiobitrate = nodeDisc.Attributes["AudioBitrate"].Value;
+                        if (nodeDisc.Attributes["VideoFramerate"] != null) wFramerate = nodeDisc.Attributes["VideoFramerate"].Value;
+                        if (nodeDisc.Attributes["VideoFullPath"] != null)
+                          if (wfile.Length > 0) wfile = wfile + ";" + nodeDisc.Attributes["VideoFullPath"].Value;
+                          else wfile = nodeDisc.Attributes["VideoFullPath"].Value;
+                      }
+                      Disks = DiscsList.Count.ToString();
                     }
+                  }
+                  catch (Exception)
+                  {
                   }
                   destXml.WriteStartElement("Movie");
                   string wID = nodeDVD.Attributes["mID"].Value;
@@ -244,7 +252,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       WriteAntAtribute(destXml, "AudioBitrate", wAudiobitrate.Substring(0, wAudiobitrate.IndexOf("K") - 1).Trim().Replace(" ", ""));
                     if (wFileSize.Length > 0)
                         WriteAntAtribute(destXml, "Size", wFileSize);
-                    WriteAntAtribute(destXml, "Disks", DiscsList.Count.ToString());
+                    WriteAntAtribute(destXml, "Disks", Disks);
                     if (wFramerate.Length > 0)
                         WriteAntAtribute(destXml, "Framerate", wFramerate);
 

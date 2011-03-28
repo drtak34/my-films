@@ -4188,6 +4188,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void LogoClearCache(bool showmessage)
         {
+          if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos"))
+            System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos");
           int i = 0;
           foreach (string sFile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Logos"))
           {
