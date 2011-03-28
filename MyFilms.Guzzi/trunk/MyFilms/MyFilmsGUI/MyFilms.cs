@@ -1340,6 +1340,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 DisplayAllMovies();
                 InitMainScreen();
                 GUIControl.ShowControl(GetID, 34); // hides certain GUI elements
+                SetLabelSelect("root");
+                SetLabelView("all");
             }
             else
             {
@@ -2086,11 +2088,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.StrIndex = 0;
             if (facadeView.Count == 0)
             {
-              ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638));
+              ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638)); //"no movies matching the view" - " show filmlist"
                 GUIWaitCursor.Show();
                 DisplayAllMovies();
                 GetFilmList();
                 GUIControl.ShowControl(GetID, 34);
+                SetLabelSelect("root");
+                SetLabelView("all");
             }
             else
             {
@@ -2648,7 +2652,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //    MyFilmsDetail.setGUIProperty("view", conf.StrViewText[i]);   // specific Text for View1
                     //    GUIPropertyManager.SetProperty("#currentmodule", conf.StrViewText[i]);
                     //}
-                    SetLabelView(choiceView);
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                     break;
 
