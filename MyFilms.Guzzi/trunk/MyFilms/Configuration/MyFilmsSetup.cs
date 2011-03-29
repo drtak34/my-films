@@ -660,7 +660,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     return;
                 }
             if (CatalogType.SelectedIndex == 1)
-                if ((this.cbEcStoreTagsInOptionalField.Checked) && (DVDPTagField.Text.Length == 0))
+                if ((chkAddTags.Checked) && (DVDPTagField.Text.Length == 0))
                 {
                     System.Windows.Forms.MessageBox.Show("Field Name is Mandatory for storing Tags Informations !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     DVDPTagField.Focus();
@@ -962,7 +962,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             if (CatalogType.SelectedIndex != 0) // common external catalog options
             {
-              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionStoreTaglineInDescription", cbEcAddTaglinesToDescriptionField.Checked);
+              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionStoreTaglineInDescription", this.chkAddTaglines.Checked);
             }
             if (CatalogType.SelectedIndex == 1)
             {
@@ -970,7 +970,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               if (this.cbEcMergeWithGenreField.Checked)
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "Category");
               else
-                if (this.cbEcStoreTagsInOptionalField.Checked)
+                if (this.chkAddTags.Checked)
                   XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", DVDPTagField.Text);
                 else
                   XmlConfig.RemoveEntry("MyFilms", Config_Name.Text.ToString(), "DVDPTagField");
@@ -1320,7 +1320,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 check_WOL_Userdialog.Checked = false;
 
             this.cbEcMergeWithGenreField.Checked = false;
-            this.cbEcStoreTagsInOptionalField.Checked = false;
+            this.chkAddTags.Checked = false;
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
             CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", false);
             AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", false);
@@ -1330,14 +1330,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", false);
             chkWindowsFileDialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", false);
             // common external catalog options
-            cbEcAddTaglinesToDescriptionField.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionStoreTaglineInDescription", false);
+            this.chkAddTaglines.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionStoreTaglineInDescription", false);
             DVDPTagField.ResetText();
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "") == "Category")
                 this.cbEcMergeWithGenreField.Checked = true;
             else
                 if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "").Length > 0)
                 {
-                    this.cbEcStoreTagsInOptionalField.Checked = true;
+                    this.chkAddTags.Checked = true;
                     DVDPTagField.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "");
                 }
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "MCCovers", "") == "Images")
@@ -1589,9 +1589,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             NAS_MAC_1.ResetText();
             NAS_MAC_2.ResetText();
             NAS_MAC_3.ResetText();
-            this.cbEcAddTaglinesToDescriptionField.Checked = false;
+            this.chkAddTaglines.Checked = false;
             this.cbEcMergeWithGenreField.Checked = false;
-            this.cbEcStoreTagsInOptionalField.Checked = false;
+            this.chkAddTags.Checked = false;
             Thumbnails.Checked = true;
             DVDPTagField.ResetText();
             OnlyFile.Checked = false;
@@ -1778,7 +1778,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             if (this.cbEcMergeWithGenreField.Checked)
             {
-                this.cbEcStoreTagsInOptionalField.Checked = false;
+                this.chkAddTags.Checked = false;
                 DVDPTagField.ResetText();
             }
         }
@@ -1827,7 +1827,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.cbEcStoreTagsInOptionalField.Checked)
+            if (this.chkAddTags.Checked)
             {
                 this.cbEcMergeWithGenreField.Checked = false;
             }
@@ -2612,7 +2612,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             PersonalVideoDatabase pvd = new PersonalVideoDatabase();
-                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, TitleDelim.Text, cbEcAddTaglinesToDescriptionField.Checked));
+                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, TitleDelim.Text, this.chkAddTaglines.Checked));
                             break;
                     }
 

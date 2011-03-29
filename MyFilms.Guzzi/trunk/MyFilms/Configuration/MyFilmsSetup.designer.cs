@@ -107,8 +107,9 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
-          this.cbEcStoreTagsInOptionalField = new System.Windows.Forms.CheckBox();
+          this.chkAddTags = new System.Windows.Forms.CheckBox();
           this.cbEcMergeWithGenreField = new System.Windows.Forms.CheckBox();
           this.DVDPTagField = new System.Windows.Forms.ComboBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
@@ -312,6 +313,7 @@
           this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
           this.AntFilterText1 = new System.Windows.Forms.TextBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+          this.chkUseListviewForGroups = new System.Windows.Forms.CheckBox();
           this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
           this.label10 = new System.Windows.Forms.Label();
           this.SortSens = new System.Windows.Forms.ComboBox();
@@ -408,6 +410,16 @@
           this.MesFilmsCat = new System.Windows.Forms.TextBox();
           this.label1 = new System.Windows.Forms.Label();
           this.butNew = new System.Windows.Forms.Button();
+          this.groupBoxExtendedFieldHandling = new System.Windows.Forms.GroupBox();
+          this.groupBox3 = new System.Windows.Forms.GroupBox();
+          this.WriterAddField = new System.Windows.Forms.ComboBox();
+          this.chkAddWriter = new System.Windows.Forms.CheckBox();
+          this.groupBox5 = new System.Windows.Forms.GroupBox();
+          this.CertificationAddField = new System.Windows.Forms.ComboBox();
+          this.chkAddCertification = new System.Windows.Forms.CheckBox();
+          this.groupBox4 = new System.Windows.Forms.GroupBox();
+          this.TaglinesAddField = new System.Windows.Forms.ComboBox();
+          this.chkAddTaglines = new System.Windows.Forms.CheckBox();
           this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
@@ -427,9 +439,6 @@
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.Tab_ExternalCatalogs = new System.Windows.Forms.TabPage();
-          this.groupBoxExtendedFieldHandling = new System.Windows.Forms.GroupBox();
-          this.groupBox4 = new System.Windows.Forms.GroupBox();
-          this.cbEcAddTaglinesToDescriptionField = new System.Windows.Forms.CheckBox();
           this.groupBox_MovieCollector = new System.Windows.Forms.GroupBox();
           this.groupBox17 = new System.Windows.Forms.GroupBox();
           this.Images = new System.Windows.Forms.RadioButton();
@@ -465,12 +474,6 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
-          this.chkUseListviewForGroups = new System.Windows.Forms.CheckBox();
-          this.comboBox3 = new System.Windows.Forms.ComboBox();
-          this.groupBox5 = new System.Windows.Forms.GroupBox();
-          this.checkBox2 = new System.Windows.Forms.CheckBox();
-          this.comboBox4 = new System.Windows.Forms.ComboBox();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -508,10 +511,12 @@
           this.groupBox_PlayMovieInfos.SuspendLayout();
           this.groupBoxMoviePathInfos.SuspendLayout();
           this.groupBox_TitleOrder.SuspendLayout();
+          this.groupBoxExtendedFieldHandling.SuspendLayout();
+          this.groupBox3.SuspendLayout();
+          this.groupBox5.SuspendLayout();
+          this.groupBox4.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           this.Tab_ExternalCatalogs.SuspendLayout();
-          this.groupBoxExtendedFieldHandling.SuspendLayout();
-          this.groupBox4.SuspendLayout();
           this.groupBox_MovieCollector.SuspendLayout();
           this.groupBox17.SuspendLayout();
           this.groupBox_DVDprofiler.SuspendLayout();
@@ -522,7 +527,6 @@
           this.Tab_AMCupdater.SuspendLayout();
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
-          this.groupBox5.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -660,35 +664,45 @@
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
           // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
           // groupBox9
           // 
-          this.groupBox9.Controls.Add(this.cbEcStoreTagsInOptionalField);
+          this.groupBox9.Controls.Add(this.chkAddTags);
           this.groupBox9.Controls.Add(this.cbEcMergeWithGenreField);
           this.groupBox9.Controls.Add(this.DVDPTagField);
-          this.groupBox9.Location = new System.Drawing.Point(10, 19);
+          this.groupBox9.Location = new System.Drawing.Point(10, 213);
           this.groupBox9.Name = "groupBox9";
-          this.groupBox9.Size = new System.Drawing.Size(327, 75);
+          this.groupBox9.Size = new System.Drawing.Size(327, 86);
           this.groupBox9.TabIndex = 0;
           this.groupBox9.TabStop = false;
           this.groupBox9.Text = "Tags ...";
           this.ToolTip1.SetToolTip(this.groupBox9, "With those options, you can use specifics Tags DVDP\'s Fields\r\nand store either wi" +
                   "th Genre field either in another field\r\nof the generated DB.");
           // 
-          // cbEcStoreTagsInOptionalField
+          // chkAddTags
           // 
-          this.cbEcStoreTagsInOptionalField.AutoSize = true;
-          this.cbEcStoreTagsInOptionalField.Location = new System.Drawing.Point(23, 42);
-          this.cbEcStoreTagsInOptionalField.Name = "cbEcStoreTagsInOptionalField";
-          this.cbEcStoreTagsInOptionalField.Size = new System.Drawing.Size(96, 17);
-          this.cbEcStoreTagsInOptionalField.TabIndex = 13;
-          this.cbEcStoreTagsInOptionalField.Text = "Store in  Field :";
-          this.cbEcStoreTagsInOptionalField.UseVisualStyleBackColor = true;
-          this.cbEcStoreTagsInOptionalField.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+          this.chkAddTags.AutoSize = true;
+          this.chkAddTags.Location = new System.Drawing.Point(23, 47);
+          this.chkAddTags.Name = "chkAddTags";
+          this.chkAddTags.Size = new System.Drawing.Size(96, 17);
+          this.chkAddTags.TabIndex = 13;
+          this.chkAddTags.Text = "Store in  Field :";
+          this.chkAddTags.UseVisualStyleBackColor = true;
+          this.chkAddTags.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
           // 
           // cbEcMergeWithGenreField
           // 
           this.cbEcMergeWithGenreField.AutoSize = true;
-          this.cbEcMergeWithGenreField.Location = new System.Drawing.Point(23, 19);
+          this.cbEcMergeWithGenreField.Location = new System.Drawing.Point(23, 24);
           this.cbEcMergeWithGenreField.Name = "cbEcMergeWithGenreField";
           this.cbEcMergeWithGenreField.Size = new System.Drawing.Size(138, 17);
           this.cbEcMergeWithGenreField.TabIndex = 12;
@@ -699,9 +713,9 @@
           // DVDPTagField
           // 
           this.DVDPTagField.FormattingEnabled = true;
-          this.DVDPTagField.Location = new System.Drawing.Point(132, 40);
+          this.DVDPTagField.Location = new System.Drawing.Point(169, 45);
           this.DVDPTagField.Name = "DVDPTagField";
-          this.DVDPTagField.Size = new System.Drawing.Size(171, 21);
+          this.DVDPTagField.Size = new System.Drawing.Size(134, 21);
           this.DVDPTagField.TabIndex = 11;
           // 
           // groupBox25
@@ -2912,6 +2926,18 @@
           this.groupBox_DefaultView.Text = "Default Start View";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
           // 
+          // chkUseListviewForGroups
+          // 
+          this.chkUseListviewForGroups.AutoSize = true;
+          this.chkUseListviewForGroups.Location = new System.Drawing.Point(10, 107);
+          this.chkUseListviewForGroups.Name = "chkUseListviewForGroups";
+          this.chkUseListviewForGroups.Size = new System.Drawing.Size(202, 17);
+          this.chkUseListviewForGroups.TabIndex = 81;
+          this.chkUseListviewForGroups.Text = "Always use List View for Group Views";
+          this.ToolTip1.SetToolTip(this.chkUseListviewForGroups, "If checked, MyFilms will always use list view for group views,\r\nlike \"years\", \"co" +
+                  "untry\" etc.\r\nIf unchecked, MyFilms will use same layout as used for films.");
+          this.chkUseListviewForGroups.UseVisualStyleBackColor = true;
+          // 
           // chkGlobalUnwatchedOnly
           // 
           this.chkGlobalUnwatchedOnly.AutoSize = true;
@@ -3926,6 +3952,107 @@
           this.butNew.UseVisualStyleBackColor = true;
           this.butNew.Click += new System.EventHandler(this.butNew_Click);
           // 
+          // groupBoxExtendedFieldHandling
+          // 
+          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox3);
+          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox5);
+          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox4);
+          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox9);
+          this.groupBoxExtendedFieldHandling.Location = new System.Drawing.Point(19, 17);
+          this.groupBoxExtendedFieldHandling.Name = "groupBoxExtendedFieldHandling";
+          this.groupBoxExtendedFieldHandling.Size = new System.Drawing.Size(355, 312);
+          this.groupBoxExtendedFieldHandling.TabIndex = 30;
+          this.groupBoxExtendedFieldHandling.TabStop = false;
+          this.groupBoxExtendedFieldHandling.Text = "Extended Field Handling ...";
+          this.ToolTip1.SetToolTip(this.groupBoxExtendedFieldHandling, resources.GetString("groupBoxExtendedFieldHandling.ToolTip"));
+          // 
+          // groupBox3
+          // 
+          this.groupBox3.Controls.Add(this.WriterAddField);
+          this.groupBox3.Controls.Add(this.chkAddWriter);
+          this.groupBox3.Location = new System.Drawing.Point(10, 21);
+          this.groupBox3.Name = "groupBox3";
+          this.groupBox3.Size = new System.Drawing.Size(327, 59);
+          this.groupBox3.TabIndex = 3;
+          this.groupBox3.TabStop = false;
+          this.groupBox3.Text = "Writer ...";
+          // 
+          // WriterAddField
+          // 
+          this.WriterAddField.FormattingEnabled = true;
+          this.WriterAddField.Location = new System.Drawing.Point(169, 25);
+          this.WriterAddField.Name = "WriterAddField";
+          this.WriterAddField.Size = new System.Drawing.Size(134, 21);
+          this.WriterAddField.TabIndex = 1;
+          // 
+          // chkAddWriter
+          // 
+          this.chkAddWriter.AutoSize = true;
+          this.chkAddWriter.Location = new System.Drawing.Point(23, 27);
+          this.chkAddWriter.Name = "chkAddWriter";
+          this.chkAddWriter.Size = new System.Drawing.Size(91, 17);
+          this.chkAddWriter.TabIndex = 0;
+          this.chkAddWriter.Text = "Add to field ...";
+          this.chkAddWriter.UseVisualStyleBackColor = true;
+          // 
+          // groupBox5
+          // 
+          this.groupBox5.Controls.Add(this.CertificationAddField);
+          this.groupBox5.Controls.Add(this.chkAddCertification);
+          this.groupBox5.Location = new System.Drawing.Point(10, 86);
+          this.groupBox5.Name = "groupBox5";
+          this.groupBox5.Size = new System.Drawing.Size(327, 60);
+          this.groupBox5.TabIndex = 2;
+          this.groupBox5.TabStop = false;
+          this.groupBox5.Text = "Certification ...";
+          // 
+          // CertificationAddField
+          // 
+          this.CertificationAddField.FormattingEnabled = true;
+          this.CertificationAddField.Location = new System.Drawing.Point(169, 28);
+          this.CertificationAddField.Name = "CertificationAddField";
+          this.CertificationAddField.Size = new System.Drawing.Size(134, 21);
+          this.CertificationAddField.TabIndex = 1;
+          // 
+          // chkAddCertification
+          // 
+          this.chkAddCertification.AutoSize = true;
+          this.chkAddCertification.Location = new System.Drawing.Point(23, 30);
+          this.chkAddCertification.Name = "chkAddCertification";
+          this.chkAddCertification.Size = new System.Drawing.Size(88, 17);
+          this.chkAddCertification.TabIndex = 0;
+          this.chkAddCertification.Text = "Add to field...";
+          this.chkAddCertification.UseVisualStyleBackColor = true;
+          // 
+          // groupBox4
+          // 
+          this.groupBox4.Controls.Add(this.TaglinesAddField);
+          this.groupBox4.Controls.Add(this.chkAddTaglines);
+          this.groupBox4.Location = new System.Drawing.Point(10, 152);
+          this.groupBox4.Name = "groupBox4";
+          this.groupBox4.Size = new System.Drawing.Size(327, 55);
+          this.groupBox4.TabIndex = 1;
+          this.groupBox4.TabStop = false;
+          this.groupBox4.Text = "Taglines ...";
+          // 
+          // TaglinesAddField
+          // 
+          this.TaglinesAddField.FormattingEnabled = true;
+          this.TaglinesAddField.Location = new System.Drawing.Point(169, 24);
+          this.TaglinesAddField.Name = "TaglinesAddField";
+          this.TaglinesAddField.Size = new System.Drawing.Size(134, 21);
+          this.TaglinesAddField.TabIndex = 1;
+          // 
+          // chkAddTaglines
+          // 
+          this.chkAddTaglines.AutoSize = true;
+          this.chkAddTaglines.Location = new System.Drawing.Point(23, 26);
+          this.chkAddTaglines.Name = "chkAddTaglines";
+          this.chkAddTaglines.Size = new System.Drawing.Size(138, 17);
+          this.chkAddTaglines.TabIndex = 0;
+          this.chkAddTaglines.Text = "Add to Description Field";
+          this.chkAddTaglines.UseVisualStyleBackColor = true;
+          // 
           // AntFilterMinRating
           // 
           this.AntFilterMinRating.Location = new System.Drawing.Point(0, 0);
@@ -4075,39 +4202,6 @@
           this.Tab_ExternalCatalogs.ToolTipText = "Options for external catalogs (only applies if not using ANT movie catalog)";
           this.Tab_ExternalCatalogs.UseVisualStyleBackColor = true;
           // 
-          // groupBoxExtendedFieldHandling
-          // 
-          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox5);
-          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox4);
-          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox9);
-          this.groupBoxExtendedFieldHandling.Location = new System.Drawing.Point(19, 17);
-          this.groupBoxExtendedFieldHandling.Name = "groupBoxExtendedFieldHandling";
-          this.groupBoxExtendedFieldHandling.Size = new System.Drawing.Size(355, 291);
-          this.groupBoxExtendedFieldHandling.TabIndex = 30;
-          this.groupBoxExtendedFieldHandling.TabStop = false;
-          this.groupBoxExtendedFieldHandling.Text = "Extended field Handling ...";
-          // 
-          // groupBox4
-          // 
-          this.groupBox4.Controls.Add(this.comboBox3);
-          this.groupBox4.Controls.Add(this.cbEcAddTaglinesToDescriptionField);
-          this.groupBox4.Location = new System.Drawing.Point(10, 104);
-          this.groupBox4.Name = "groupBox4";
-          this.groupBox4.Size = new System.Drawing.Size(327, 55);
-          this.groupBox4.TabIndex = 1;
-          this.groupBox4.TabStop = false;
-          this.groupBox4.Text = "Taglines ...";
-          // 
-          // cbEcAddTaglinesToDescriptionField
-          // 
-          this.cbEcAddTaglinesToDescriptionField.AutoSize = true;
-          this.cbEcAddTaglinesToDescriptionField.Location = new System.Drawing.Point(23, 26);
-          this.cbEcAddTaglinesToDescriptionField.Name = "cbEcAddTaglinesToDescriptionField";
-          this.cbEcAddTaglinesToDescriptionField.Size = new System.Drawing.Size(138, 17);
-          this.cbEcAddTaglinesToDescriptionField.TabIndex = 0;
-          this.cbEcAddTaglinesToDescriptionField.Text = "Add to Description Field";
-          this.cbEcAddTaglinesToDescriptionField.UseVisualStyleBackColor = true;
-          // 
           // groupBox_MovieCollector
           // 
           this.groupBox_MovieCollector.Controls.Add(this.groupBox17);
@@ -4174,7 +4268,7 @@
           // OnlyFile
           // 
           this.OnlyFile.AutoSize = true;
-          this.OnlyFile.Location = new System.Drawing.Point(24, 19);
+          this.OnlyFile.Location = new System.Drawing.Point(24, 21);
           this.OnlyFile.Name = "OnlyFile";
           this.OnlyFile.Size = new System.Drawing.Size(221, 17);
           this.OnlyFile.TabIndex = 0;
@@ -4535,65 +4629,6 @@
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
           // 
-          // chkUseListviewForGroups
-          // 
-          this.chkUseListviewForGroups.AutoSize = true;
-          this.chkUseListviewForGroups.Location = new System.Drawing.Point(10, 107);
-          this.chkUseListviewForGroups.Name = "chkUseListviewForGroups";
-          this.chkUseListviewForGroups.Size = new System.Drawing.Size(202, 17);
-          this.chkUseListviewForGroups.TabIndex = 81;
-          this.chkUseListviewForGroups.Text = "Always use List View for Group Views";
-          this.ToolTip1.SetToolTip(this.chkUseListviewForGroups, "If checked, MyFilms will always use list view for group views,\r\nlike \"years\", \"co" +
-                  "untry\" etc.\r\nIf unchecked, MyFilms will use same layout as used for films.");
-          this.chkUseListviewForGroups.UseVisualStyleBackColor = true;
-          // 
-          // comboBox3
-          // 
-          this.comboBox3.FormattingEnabled = true;
-          this.comboBox3.Location = new System.Drawing.Point(169, 24);
-          this.comboBox3.Name = "comboBox3";
-          this.comboBox3.Size = new System.Drawing.Size(121, 21);
-          this.comboBox3.TabIndex = 1;
-          // 
-          // groupBox5
-          // 
-          this.groupBox5.Controls.Add(this.comboBox4);
-          this.groupBox5.Controls.Add(this.checkBox2);
-          this.groupBox5.Location = new System.Drawing.Point(10, 177);
-          this.groupBox5.Name = "groupBox5";
-          this.groupBox5.Size = new System.Drawing.Size(327, 60);
-          this.groupBox5.TabIndex = 2;
-          this.groupBox5.TabStop = false;
-          this.groupBox5.Text = "Certification ...";
-          // 
-          // checkBox2
-          // 
-          this.checkBox2.AutoSize = true;
-          this.checkBox2.Location = new System.Drawing.Point(23, 30);
-          this.checkBox2.Name = "checkBox2";
-          this.checkBox2.Size = new System.Drawing.Size(88, 17);
-          this.checkBox2.TabIndex = 0;
-          this.checkBox2.Text = "Add to field...";
-          this.checkBox2.UseVisualStyleBackColor = true;
-          // 
-          // comboBox4
-          // 
-          this.comboBox4.FormattingEnabled = true;
-          this.comboBox4.Location = new System.Drawing.Point(169, 28);
-          this.comboBox4.Name = "comboBox4";
-          this.comboBox4.Size = new System.Drawing.Size(121, 21);
-          this.comboBox4.TabIndex = 1;
-          // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4690,11 +4725,15 @@
           this.groupBoxMoviePathInfos.PerformLayout();
           this.groupBox_TitleOrder.ResumeLayout(false);
           this.groupBox_TitleOrder.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
-          this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBoxExtendedFieldHandling.ResumeLayout(false);
+          this.groupBox3.ResumeLayout(false);
+          this.groupBox3.PerformLayout();
+          this.groupBox5.ResumeLayout(false);
+          this.groupBox5.PerformLayout();
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBox_MovieCollector.ResumeLayout(false);
           this.groupBox17.ResumeLayout(false);
           this.groupBox17.PerformLayout();
@@ -4708,8 +4747,6 @@
           this.Tab_AMCupdater.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
           this.General.ResumeLayout(false);
-          this.groupBox5.ResumeLayout(false);
-          this.groupBox5.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -4752,7 +4789,7 @@
         private RadioButton Images;
         private RadioButton Thumbnails;
         private GroupBox groupBox9;
-        private CheckBox cbEcStoreTagsInOptionalField;
+        private CheckBox chkAddTags;
         private CheckBox cbEcMergeWithGenreField;
         private ComboBox DVDPTagField;
         private GroupBox groupBox_DVDprofiler;
@@ -5085,11 +5122,14 @@
         private GroupBox groupBoxExtendedFieldHandling;
         private GroupBox groupBox4;
         private CheckBox chkUseOriginalAsTranslatedTitle;
-        private CheckBox cbEcAddTaglinesToDescriptionField;
+        private CheckBox chkAddTaglines;
         private CheckBox chkUseListviewForGroups;
-        private ComboBox comboBox3;
+        private ComboBox TaglinesAddField;
         private GroupBox groupBox5;
-        private CheckBox checkBox2;
-        private ComboBox comboBox4;
+        private CheckBox chkAddCertification;
+        private ComboBox CertificationAddField;
+        private GroupBox groupBox3;
+        private ComboBox WriterAddField;
+        private CheckBox chkAddWriter;
     }
 }

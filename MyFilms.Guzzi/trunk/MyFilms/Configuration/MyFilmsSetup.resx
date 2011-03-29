@@ -589,6 +589,12 @@ movie 3: Moviecollection\movie3
 
 Will show "Moviecollection" with 3 items in it.</value>
   </data>
+  <data name="groupBoxExtendedFieldHandling.ToolTip" xml:space="preserve">
+    <value>MyFilms internally supports more than just the ANT-MovieCatalog fields.
+However, you might prefer to map those fields to standard ANT fields for some reasons:
+- Your skin only shows standard ANT fields (external catalogs)
+- You want to import data of the extended fields into ANT foelds to stay compatible with AMC (AMC)</value>
+  </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
   </metadata>
