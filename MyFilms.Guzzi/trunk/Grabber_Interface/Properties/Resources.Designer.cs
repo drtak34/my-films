@@ -60,16 +60,16 @@ namespace Grabber_Interface.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap France {
+        internal static System.Drawing.Bitmap film_reel_128x128 {
             get {
-                object obj = ResourceManager.GetObject("France", resourceCulture);
+                object obj = ResourceManager.GetObject("film-reel-128x128", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap logo_mesfilms {
+        internal static System.Drawing.Bitmap France {
             get {
-                object obj = ResourceManager.GetObject("logo_mesfilms", resourceCulture);
+                object obj = ResourceManager.GetObject("France", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

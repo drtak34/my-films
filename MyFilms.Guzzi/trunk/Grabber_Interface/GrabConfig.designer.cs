@@ -40,12 +40,12 @@ namespace Grabber_Interface
           this.groupBox7 = new System.Windows.Forms.GroupBox();
           this.groupBox10 = new System.Windows.Forms.GroupBox();
           this.label29 = new System.Windows.Forms.Label();
-          this.comboBox3 = new System.Windows.Forms.ComboBox();
+          this.cbCertificationPreferredLanguage = new System.Windows.Forms.ComboBox();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
-          this.comboBox8 = new System.Windows.Forms.ComboBox();
-          this.comboBox7 = new System.Windows.Forms.ComboBox();
-          this.comboBox6 = new System.Windows.Forms.ComboBox();
-          this.comboBox5 = new System.Windows.Forms.ComboBox();
+          this.cbMaxWriters = new System.Windows.Forms.ComboBox();
+          this.cbMaxDirectors = new System.Windows.Forms.ComboBox();
+          this.cbMaxProducers = new System.Windows.Forms.ComboBox();
+          this.cbMaxActors = new System.Windows.Forms.ComboBox();
           this.label28 = new System.Windows.Forms.Label();
           this.label27 = new System.Windows.Forms.Label();
           this.label26 = new System.Windows.Forms.Label();
@@ -53,8 +53,8 @@ namespace Grabber_Interface
           this.groupBox8 = new System.Windows.Forms.GroupBox();
           this.label24 = new System.Windows.Forms.Label();
           this.label23 = new System.Windows.Forms.Label();
-          this.comboBox1 = new System.Windows.Forms.ComboBox();
-          this.comboBox2 = new System.Windows.Forms.ComboBox();
+          this.cbTtitleMaxTitles = new System.Windows.Forms.ComboBox();
+          this.cbTtitlePreferredLanguage = new System.Windows.Forms.ComboBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.label8 = new System.Windows.Forms.Label();
@@ -133,6 +133,7 @@ namespace Grabber_Interface
           this.cb_ParamDetail = new System.Windows.Forms.ComboBox();
           this.TextURLDetail = new System.Windows.Forms.TextBox();
           this.label15 = new System.Windows.Forms.Label();
+          this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.label3 = new System.Windows.Forms.Label();
           this.textName = new System.Windows.Forms.TextBox();
           this.label2 = new System.Windows.Forms.Label();
@@ -144,13 +145,12 @@ namespace Grabber_Interface
           this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
           this.button2 = new System.Windows.Forms.Button();
           this.button3 = new System.Windows.Forms.Button();
+          this.buttonExpertMode = new System.Windows.Forms.Button();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
-          this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
-          this.buttonExpertMode = new System.Windows.Forms.Button();
           this.tabControl1.SuspendLayout();
           this.tabPageUserSettings.SuspendLayout();
           this.groupBox7.SuspendLayout();
@@ -165,8 +165,8 @@ namespace Grabber_Interface
           this.tabPageDetailPage.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox4.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
           this.SuspendLayout();
@@ -233,7 +233,7 @@ namespace Grabber_Interface
           // groupBox10
           // 
           this.groupBox10.Controls.Add(this.label29);
-          this.groupBox10.Controls.Add(this.comboBox3);
+          this.groupBox10.Controls.Add(this.cbCertificationPreferredLanguage);
           resources.ApplyResources(this.groupBox10, "groupBox10");
           this.groupBox10.Name = "groupBox10";
           this.groupBox10.TabStop = false;
@@ -243,18 +243,19 @@ namespace Grabber_Interface
           resources.ApplyResources(this.label29, "label29");
           this.label29.Name = "label29";
           // 
-          // comboBox3
+          // cbCertificationPreferredLanguage
           // 
-          this.comboBox3.FormattingEnabled = true;
-          resources.ApplyResources(this.comboBox3, "comboBox3");
-          this.comboBox3.Name = "comboBox3";
+          this.cbCertificationPreferredLanguage.FormattingEnabled = true;
+          resources.ApplyResources(this.cbCertificationPreferredLanguage, "cbCertificationPreferredLanguage");
+          this.cbCertificationPreferredLanguage.Name = "cbCertificationPreferredLanguage";
+          this.cbCertificationPreferredLanguage.SelectedIndexChanged += new System.EventHandler(this.cbCertificationPreferredLanguage_SelectedIndexChanged);
           // 
           // groupBox9
           // 
-          this.groupBox9.Controls.Add(this.comboBox8);
-          this.groupBox9.Controls.Add(this.comboBox7);
-          this.groupBox9.Controls.Add(this.comboBox6);
-          this.groupBox9.Controls.Add(this.comboBox5);
+          this.groupBox9.Controls.Add(this.cbMaxWriters);
+          this.groupBox9.Controls.Add(this.cbMaxDirectors);
+          this.groupBox9.Controls.Add(this.cbMaxProducers);
+          this.groupBox9.Controls.Add(this.cbMaxActors);
           this.groupBox9.Controls.Add(this.label28);
           this.groupBox9.Controls.Add(this.label27);
           this.groupBox9.Controls.Add(this.label26);
@@ -263,69 +264,73 @@ namespace Grabber_Interface
           this.groupBox9.Name = "groupBox9";
           this.groupBox9.TabStop = false;
           // 
-          // comboBox8
+          // cbMaxWriters
           // 
-          this.comboBox8.FormattingEnabled = true;
-          this.comboBox8.Items.AddRange(new object[] {
-            resources.GetString("comboBox8.Items"),
-            resources.GetString("comboBox8.Items1"),
-            resources.GetString("comboBox8.Items2"),
-            resources.GetString("comboBox8.Items3"),
-            resources.GetString("comboBox8.Items4"),
-            resources.GetString("comboBox8.Items5"),
-            resources.GetString("comboBox8.Items6"),
-            resources.GetString("comboBox8.Items7"),
-            resources.GetString("comboBox8.Items8")});
-          resources.ApplyResources(this.comboBox8, "comboBox8");
-          this.comboBox8.Name = "comboBox8";
+          this.cbMaxWriters.FormattingEnabled = true;
+          this.cbMaxWriters.Items.AddRange(new object[] {
+            resources.GetString("cbMaxWriters.Items"),
+            resources.GetString("cbMaxWriters.Items1"),
+            resources.GetString("cbMaxWriters.Items2"),
+            resources.GetString("cbMaxWriters.Items3"),
+            resources.GetString("cbMaxWriters.Items4"),
+            resources.GetString("cbMaxWriters.Items5"),
+            resources.GetString("cbMaxWriters.Items6"),
+            resources.GetString("cbMaxWriters.Items7"),
+            resources.GetString("cbMaxWriters.Items8")});
+          resources.ApplyResources(this.cbMaxWriters, "cbMaxWriters");
+          this.cbMaxWriters.Name = "cbMaxWriters";
+          this.cbMaxWriters.SelectedIndexChanged += new System.EventHandler(this.cbMaxWriters_SelectedIndexChanged);
           // 
-          // comboBox7
+          // cbMaxDirectors
           // 
-          this.comboBox7.FormattingEnabled = true;
-          this.comboBox7.Items.AddRange(new object[] {
-            resources.GetString("comboBox7.Items"),
-            resources.GetString("comboBox7.Items1"),
-            resources.GetString("comboBox7.Items2"),
-            resources.GetString("comboBox7.Items3"),
-            resources.GetString("comboBox7.Items4"),
-            resources.GetString("comboBox7.Items5"),
-            resources.GetString("comboBox7.Items6"),
-            resources.GetString("comboBox7.Items7"),
-            resources.GetString("comboBox7.Items8")});
-          resources.ApplyResources(this.comboBox7, "comboBox7");
-          this.comboBox7.Name = "comboBox7";
+          this.cbMaxDirectors.FormattingEnabled = true;
+          this.cbMaxDirectors.Items.AddRange(new object[] {
+            resources.GetString("cbMaxDirectors.Items"),
+            resources.GetString("cbMaxDirectors.Items1"),
+            resources.GetString("cbMaxDirectors.Items2"),
+            resources.GetString("cbMaxDirectors.Items3"),
+            resources.GetString("cbMaxDirectors.Items4"),
+            resources.GetString("cbMaxDirectors.Items5"),
+            resources.GetString("cbMaxDirectors.Items6"),
+            resources.GetString("cbMaxDirectors.Items7"),
+            resources.GetString("cbMaxDirectors.Items8")});
+          resources.ApplyResources(this.cbMaxDirectors, "cbMaxDirectors");
+          this.cbMaxDirectors.Name = "cbMaxDirectors";
+          this.cbMaxDirectors.SelectedIndexChanged += new System.EventHandler(this.cbMaxDirectors_SelectedIndexChanged);
           // 
-          // comboBox6
+          // cbMaxProducers
           // 
-          this.comboBox6.FormattingEnabled = true;
-          this.comboBox6.Items.AddRange(new object[] {
-            resources.GetString("comboBox6.Items"),
-            resources.GetString("comboBox6.Items1"),
-            resources.GetString("comboBox6.Items2"),
-            resources.GetString("comboBox6.Items3"),
-            resources.GetString("comboBox6.Items4"),
-            resources.GetString("comboBox6.Items5"),
-            resources.GetString("comboBox6.Items6"),
-            resources.GetString("comboBox6.Items7"),
-            resources.GetString("comboBox6.Items8")});
-          resources.ApplyResources(this.comboBox6, "comboBox6");
-          this.comboBox6.Name = "comboBox6";
+          this.cbMaxProducers.FormattingEnabled = true;
+          this.cbMaxProducers.Items.AddRange(new object[] {
+            resources.GetString("cbMaxProducers.Items"),
+            resources.GetString("cbMaxProducers.Items1"),
+            resources.GetString("cbMaxProducers.Items2"),
+            resources.GetString("cbMaxProducers.Items3"),
+            resources.GetString("cbMaxProducers.Items4"),
+            resources.GetString("cbMaxProducers.Items5"),
+            resources.GetString("cbMaxProducers.Items6"),
+            resources.GetString("cbMaxProducers.Items7"),
+            resources.GetString("cbMaxProducers.Items8")});
+          resources.ApplyResources(this.cbMaxProducers, "cbMaxProducers");
+          this.cbMaxProducers.Name = "cbMaxProducers";
+          this.cbMaxProducers.SelectedIndexChanged += new System.EventHandler(this.cbMaxProducers_SelectedIndexChanged);
           // 
-          // comboBox5
+          // cbMaxActors
           // 
-          this.comboBox5.FormattingEnabled = true;
-          this.comboBox5.Items.AddRange(new object[] {
-            resources.GetString("comboBox5.Items"),
-            resources.GetString("comboBox5.Items1"),
-            resources.GetString("comboBox5.Items2"),
-            resources.GetString("comboBox5.Items3"),
-            resources.GetString("comboBox5.Items4"),
-            resources.GetString("comboBox5.Items5"),
-            resources.GetString("comboBox5.Items6"),
-            resources.GetString("comboBox5.Items7"),
-            resources.GetString("comboBox5.Items8")});
-          resources.ApplyResources(this.comboBox5, "comboBox5");
-          this.comboBox5.Name = "comboBox5";
+          this.cbMaxActors.FormattingEnabled = true;
+          this.cbMaxActors.Items.AddRange(new object[] {
+            resources.GetString("cbMaxActors.Items"),
+            resources.GetString("cbMaxActors.Items1"),
+            resources.GetString("cbMaxActors.Items2"),
+            resources.GetString("cbMaxActors.Items3"),
+            resources.GetString("cbMaxActors.Items4"),
+            resources.GetString("cbMaxActors.Items5"),
+            resources.GetString("cbMaxActors.Items6"),
+            resources.GetString("cbMaxActors.Items7"),
+            resources.GetString("cbMaxActors.Items8")});
+          resources.ApplyResources(this.cbMaxActors, "cbMaxActors");
+          this.cbMaxActors.Name = "cbMaxActors";
+          this.cbMaxActors.SelectedIndexChanged += new System.EventHandler(this.cbMaxActors_SelectedIndexChanged);
           // 
           // label28
           // 
@@ -351,8 +356,8 @@ namespace Grabber_Interface
           // 
           this.groupBox8.Controls.Add(this.label24);
           this.groupBox8.Controls.Add(this.label23);
-          this.groupBox8.Controls.Add(this.comboBox1);
-          this.groupBox8.Controls.Add(this.comboBox2);
+          this.groupBox8.Controls.Add(this.cbTtitleMaxTitles);
+          this.groupBox8.Controls.Add(this.cbTtitlePreferredLanguage);
           resources.ApplyResources(this.groupBox8, "groupBox8");
           this.groupBox8.Name = "groupBox8";
           this.groupBox8.TabStop = false;
@@ -367,27 +372,29 @@ namespace Grabber_Interface
           resources.ApplyResources(this.label23, "label23");
           this.label23.Name = "label23";
           // 
-          // comboBox1
+          // cbTtitleMaxTitles
           // 
-          this.comboBox1.FormattingEnabled = true;
-          this.comboBox1.Items.AddRange(new object[] {
-            resources.GetString("comboBox1.Items"),
-            resources.GetString("comboBox1.Items1"),
-            resources.GetString("comboBox1.Items2"),
-            resources.GetString("comboBox1.Items3"),
-            resources.GetString("comboBox1.Items4"),
-            resources.GetString("comboBox1.Items5"),
-            resources.GetString("comboBox1.Items6"),
-            resources.GetString("comboBox1.Items7"),
-            resources.GetString("comboBox1.Items8")});
-          resources.ApplyResources(this.comboBox1, "comboBox1");
-          this.comboBox1.Name = "comboBox1";
+          this.cbTtitleMaxTitles.FormattingEnabled = true;
+          this.cbTtitleMaxTitles.Items.AddRange(new object[] {
+            resources.GetString("cbTtitleMaxTitles.Items"),
+            resources.GetString("cbTtitleMaxTitles.Items1"),
+            resources.GetString("cbTtitleMaxTitles.Items2"),
+            resources.GetString("cbTtitleMaxTitles.Items3"),
+            resources.GetString("cbTtitleMaxTitles.Items4"),
+            resources.GetString("cbTtitleMaxTitles.Items5"),
+            resources.GetString("cbTtitleMaxTitles.Items6"),
+            resources.GetString("cbTtitleMaxTitles.Items7"),
+            resources.GetString("cbTtitleMaxTitles.Items8")});
+          resources.ApplyResources(this.cbTtitleMaxTitles, "cbTtitleMaxTitles");
+          this.cbTtitleMaxTitles.Name = "cbTtitleMaxTitles";
+          this.cbTtitleMaxTitles.SelectedIndexChanged += new System.EventHandler(this.cbTtitleMaxTitles_SelectedIndexChanged);
           // 
-          // comboBox2
+          // cbTtitlePreferredLanguage
           // 
-          this.comboBox2.FormattingEnabled = true;
-          resources.ApplyResources(this.comboBox2, "comboBox2");
-          this.comboBox2.Name = "comboBox2";
+          this.cbTtitlePreferredLanguage.FormattingEnabled = true;
+          resources.ApplyResources(this.cbTtitlePreferredLanguage, "cbTtitlePreferredLanguage");
+          this.cbTtitlePreferredLanguage.Name = "cbTtitlePreferredLanguage";
+          this.cbTtitlePreferredLanguage.SelectedIndexChanged += new System.EventHandler(this.cbTtitlePreferredLanguage_SelectedIndexChanged);
           // 
           // tabPageSearchPage
           // 
@@ -685,7 +692,6 @@ namespace Grabber_Interface
           // tabPageDetailPage
           // 
           this.tabPageDetailPage.Controls.Add(this.button_Load_File);
-          this.tabPageDetailPage.Controls.Add(this.pictureBoxPreviewCover);
           this.tabPageDetailPage.Controls.Add(this.label21);
           this.tabPageDetailPage.Controls.Add(this.labelImageSize);
           this.tabPageDetailPage.Controls.Add(this.btnLoadDetailPreview);
@@ -702,6 +708,7 @@ namespace Grabber_Interface
           this.tabPageDetailPage.Controls.Add(this.groupBox4);
           this.tabPageDetailPage.Controls.Add(this.TextURLDetail);
           this.tabPageDetailPage.Controls.Add(this.label15);
+          this.tabPageDetailPage.Controls.Add(this.pictureBoxPreviewCover);
           resources.ApplyResources(this.tabPageDetailPage, "tabPageDetailPage");
           this.tabPageDetailPage.Name = "tabPageDetailPage";
           this.tabPageDetailPage.UseVisualStyleBackColor = true;
@@ -990,6 +997,14 @@ namespace Grabber_Interface
           resources.ApplyResources(this.label15, "label15");
           this.label15.Name = "label15";
           // 
+          // pictureBoxPreviewCover
+          // 
+          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
+          this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
+          this.pictureBoxPreviewCover.TabStop = false;
+          this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
+          // 
           // label3
           // 
           resources.ApplyResources(this.label3, "label3");
@@ -1071,6 +1086,14 @@ namespace Grabber_Interface
           this.button3.UseVisualStyleBackColor = true;
           this.button3.Click += new System.EventHandler(this.button3_Click);
           // 
+          // buttonExpertMode
+          // 
+          resources.ApplyResources(this.buttonExpertMode, "buttonExpertMode");
+          this.buttonExpertMode.Name = "buttonExpertMode";
+          this.toolTip1.SetToolTip(this.buttonExpertMode, resources.GetString("buttonExpertMode.ToolTip"));
+          this.buttonExpertMode.UseVisualStyleBackColor = true;
+          this.buttonExpertMode.Click += new System.EventHandler(this.buttonExpertMode_Click);
+          // 
           // linkLabelMFwiki
           // 
           resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
@@ -1080,18 +1103,10 @@ namespace Grabber_Interface
           // 
           // pictureBox1
           // 
-          this.pictureBox1.Image = global::Grabber_Interface.Properties.Resources.logo_mesfilms;
+          this.pictureBox1.Image = global::Grabber_Interface.Properties.Resources.film_reel_128x128;
           resources.ApplyResources(this.pictureBox1, "pictureBox1");
           this.pictureBox1.Name = "pictureBox1";
           this.pictureBox1.TabStop = false;
-          // 
-          // pictureBoxPreviewCover
-          // 
-          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
-          this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
-          this.pictureBoxPreviewCover.TabStop = false;
-          this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
           // 
           // pictureBoxUSFlag
           // 
@@ -1107,13 +1122,6 @@ namespace Grabber_Interface
           this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
           this.pictureBoxFranceFlag.TabStop = false;
           this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
-          // 
-          // buttonExpertMode
-          // 
-          resources.ApplyResources(this.buttonExpertMode, "buttonExpertMode");
-          this.buttonExpertMode.Name = "buttonExpertMode";
-          this.toolTip1.SetToolTip(this.buttonExpertMode, resources.GetString("buttonExpertMode.ToolTip"));
-          this.buttonExpertMode.UseVisualStyleBackColor = true;
           // 
           // GrabConfig
           // 
@@ -1162,8 +1170,8 @@ namespace Grabber_Interface
           this.groupBox3.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
           this.ResumeLayout(false);
@@ -1273,9 +1281,9 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbCertificationPreferredLanguage;
+        private System.Windows.Forms.ComboBox cbTtitlePreferredLanguage;
+        private System.Windows.Forms.ComboBox cbTtitleMaxTitles;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -1286,10 +1294,10 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.ComboBox comboBox7;
-        private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.ComboBox cbMaxWriters;
+        private System.Windows.Forms.ComboBox cbMaxDirectors;
+        private System.Windows.Forms.ComboBox cbMaxProducers;
+        private System.Windows.Forms.ComboBox cbMaxActors;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;

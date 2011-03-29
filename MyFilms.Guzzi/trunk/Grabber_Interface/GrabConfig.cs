@@ -44,14 +44,13 @@ namespace Grabber_Interface
     private bool ExpertModeOn = true; // to toggle GUI for simplification
 
     private XmlConf xmlConf;
-
     private ArrayList listUrl = new ArrayList();
-
     private CookieContainer cookie = new CookieContainer();
+    //TabPage tabPageSaveMovie = null;
+    //TabPage tabPageSaveDetails = null;
 
     public GrabConfig(string[] args)
     {
-
       System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
       InitializeComponent();
 
@@ -61,18 +60,18 @@ namespace Grabber_Interface
         radioButtonEN.Checked = true;
       tabPageSearchPage.Enabled = false;
       tabPageDetailPage.Enabled = false;
-
       // Test if input arguments were supplied:
       if (args.Length > 0)
       {
         ExpertModeOn = false;
-        buttonExpertMode.Text = "ExpertMode";
-        textURLPrefix.Enabled = false;
-        textName.Enabled = false;
+        ChangeVisibility(false);
         ResetFormControlValues(this);
-        textConfig.Text = args[0]; // load command line file
-        LoadXml();
-        //button_Load_Click(this, e);
+        if (System.IO.File.Exists(args[0]))
+        {
+          textConfig.Text = args[0]; // load command line file
+          LoadXml();
+          //button_Load_Click(this, e);
+        }
       }
     }
 
@@ -264,6 +263,21 @@ namespace Grabber_Interface
       textStartPage.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartPage)._Value;
       textStepPage.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStepPage)._Value;
       textPage.Text = textStartPage.Text;
+      // Load User Settings Page...
+      try { cbMaxActors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value; }
+      catch { cbMaxActors.Text = string.Empty; };
+      try { cbMaxProducers.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value; }
+      catch { cbMaxProducers.Text = string.Empty; };
+      try { cbMaxDirectors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value; }
+      catch { cbMaxDirectors.Text = string.Empty; };
+      try { cbMaxWriters.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value; }
+      catch { cbMaxWriters.Text = string.Empty; };
+      try { cbTtitlePreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value; }
+      catch { cbTtitlePreferredLanguage.Text = string.Empty; };
+      try { cbTtitleMaxTitles.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value; }
+      catch { cbTtitleMaxTitles.Text = string.Empty; };
+      try { cbCertificationPreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
+      catch { cbCertificationPreferredLanguage.Text = string.Empty; };
     }
 
     public void SaveXml(string File)
@@ -805,9 +819,9 @@ namespace Grabber_Interface
         bool bregexs = false;
         bool bregexe = false;
         if (starttext.StartsWith("#REGEX#"))
-            bregexs = true;
+          bregexs = true;
         if (endtext.StartsWith("#REGEX#"))
-            bregexe = true;
+          bregexe = true;
 
         if (starttext != "" && endtext != "")
         {
@@ -1477,7 +1491,7 @@ namespace Grabber_Interface
             TextURLDetail.Text = wurl.URL;
             EventArgs ea = new EventArgs();
             ButtonLoad_Click(Button_Load_URL, ea);
-            tabControl1.SelectTab(1);
+            tabControl1.SelectTab(2);
           }
         }
       }
@@ -1588,7 +1602,7 @@ namespace Grabber_Interface
             break;
           case 19:
             //textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Certification" + Environment.NewLine;
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Writer" + Environment.NewLine; 
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Writer" + Environment.NewLine;
             break;
         }
         if (i <= 20) // Changed to support new fields...
@@ -1606,7 +1620,7 @@ namespace Grabber_Interface
       switch (cb_ParamDetail.SelectedIndex)
       {
         case 4:
-        case 5: 
+        case 5:
           xmlConf.find(xmlConf.listDetail, TagName.BaseRating)._Value = textComplement.Text;
           break;
         case 2:
@@ -2139,9 +2153,9 @@ namespace Grabber_Interface
           {
             pictureBoxPreviewCover.ImageLocation = find;
           }
-        catch
-        {
-        }
+          catch
+          {
+          }
       }
 
     }
@@ -2225,7 +2239,7 @@ namespace Grabber_Interface
         tabPageSearchPage.Enabled = false;
         tabPageDetailPage.Enabled = false;
       }
-      else
+      else if (ExpertModeOn)
       {
         tabPageSearchPage.Enabled = true;
         tabPageDetailPage.Enabled = true;
@@ -2265,6 +2279,88 @@ namespace Grabber_Interface
     private void linkLabelMFwiki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
       System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films");
+    }
+
+    private void buttonExpertMode_Click(object sender, EventArgs e)
+    {
+      if (ExpertModeOn)
+      {
+        ChangeVisibility(false);
+        ExpertModeOn = false;
+      }
+      else
+      {
+        ChangeVisibility(true);
+        ExpertModeOn = true;
+      }
+    }
+    private void ChangeVisibility(bool visibleForExpert)
+    {
+      if (visibleForExpert == false)
+      {
+        buttonExpertMode.Text = "ExpertMode";
+        textURLPrefix.Enabled = false;
+        textURLPrefix.Visible = false;
+        label2.Visible = false;
+        textName.Enabled = false;
+        tabPageSearchPage.Enabled = false;
+        tabPageDetailPage.Enabled = false;
+        tabPageSearchPage.Visible = false;
+        tabPageDetailPage.Visible = false;
+        //tabPageSaveDetails = tabControl1.TabPages[2];
+        //tabControl1.TabPages.Remove(tabPageSaveDetails);
+        //tabPageSaveMovie = tabControl1.TabPages[1];
+        //tabControl1.TabPages.Remove(tabPageSaveMovie);
+      }
+      else
+      {
+        buttonExpertMode.Text = "SimpleMode";
+        textURLPrefix.Enabled = true;
+        textURLPrefix.Visible = true;
+        label2.Visible = true;
+        textName.Enabled = true;
+        tabPageSearchPage.Enabled = true;
+        tabPageDetailPage.Enabled = true;
+        tabPageSearchPage.Visible = true;
+        tabPageDetailPage.Visible = true;
+        //tabControl1.TabPages.Add(tabPageSaveMovie);
+        //tabControl1.TabPages.Add(tabPageSaveDetails);
+      }
+    }
+
+    private void cbMaxActors_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value = cbMaxActors.Text;
+    }
+
+    private void cbMaxProducers_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value = cbMaxProducers.Text;
+    }
+
+    private void cbMaxDirectors_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value = cbMaxDirectors.Text;
+    }
+
+    private void cbMaxWriters_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value = cbMaxWriters.Text;
+    }
+
+    private void cbTtitlePreferredLanguage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value = cbTtitlePreferredLanguage.Text;
+    }
+
+    private void cbTtitleMaxTitles_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value = cbTtitleMaxTitles.Text;
+    }
+
+    private void cbCertificationPreferredLanguage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value = cbCertificationPreferredLanguage.Text;
     }
   }
 }

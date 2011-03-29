@@ -163,10 +163,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\film-reel-128x128.png" />
     <Content Include="Resources\France.png" />
     <Content Include="Resources\France.png" />
-    <Content Include="Resources\Image1.bmp" />
-    <None Include="Resources\logo_mesfilms.png" />
     <EmbeddedResource Include="Resources\MyFilmsIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
