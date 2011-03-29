@@ -41,6 +41,7 @@ namespace Grabber_Interface
     private string BodyLinkPersons = string.Empty;
     private string BodyLinkTitles = string.Empty;
     private string BodyLinkCertification = string.Empty;
+    private bool ExpertModeOn = true; // to toggle GUI for simplification
 
     private XmlConf xmlConf;
 
@@ -48,7 +49,7 @@ namespace Grabber_Interface
 
     private CookieContainer cookie = new CookieContainer();
 
-    public GrabConfig()
+    public GrabConfig(string[] args)
     {
 
       System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
@@ -60,6 +61,19 @@ namespace Grabber_Interface
         radioButtonEN.Checked = true;
       tabPageSearchPage.Enabled = false;
       tabPageDetailPage.Enabled = false;
+
+      // Test if input arguments were supplied:
+      if (args.Length > 0)
+      {
+        ExpertModeOn = false;
+        buttonExpertMode.Text = "ExpertMode";
+        textURLPrefix.Enabled = false;
+        textName.Enabled = false;
+        ResetFormControlValues(this);
+        textConfig.Text = args[0]; // load command line file
+        LoadXml();
+        //button_Load_Click(this, e);
+      }
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -2246,6 +2260,11 @@ namespace Grabber_Interface
         myFile.Close();
       }
       return sContent;
+    }
+
+    private void linkLabelMFwiki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+      System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films");
     }
   }
 }

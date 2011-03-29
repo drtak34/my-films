@@ -34,6 +34,27 @@ namespace Grabber_Interface
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
           this.tabControl1 = new System.Windows.Forms.TabControl();
+          this.tabPageUserSettings = new System.Windows.Forms.TabPage();
+          this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+          this.label22 = new System.Windows.Forms.Label();
+          this.groupBox7 = new System.Windows.Forms.GroupBox();
+          this.groupBox10 = new System.Windows.Forms.GroupBox();
+          this.label29 = new System.Windows.Forms.Label();
+          this.comboBox3 = new System.Windows.Forms.ComboBox();
+          this.groupBox9 = new System.Windows.Forms.GroupBox();
+          this.comboBox8 = new System.Windows.Forms.ComboBox();
+          this.comboBox7 = new System.Windows.Forms.ComboBox();
+          this.comboBox6 = new System.Windows.Forms.ComboBox();
+          this.comboBox5 = new System.Windows.Forms.ComboBox();
+          this.label28 = new System.Windows.Forms.Label();
+          this.label27 = new System.Windows.Forms.Label();
+          this.label26 = new System.Windows.Forms.Label();
+          this.label25 = new System.Windows.Forms.Label();
+          this.groupBox8 = new System.Windows.Forms.GroupBox();
+          this.label24 = new System.Windows.Forms.Label();
+          this.label23 = new System.Windows.Forms.Label();
+          this.comboBox1 = new System.Windows.Forms.ComboBox();
+          this.comboBox2 = new System.Windows.Forms.ComboBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.label8 = new System.Windows.Forms.Label();
@@ -91,6 +112,10 @@ namespace Grabber_Interface
           this.textFind = new System.Windows.Forms.TextBox();
           this.Button_Load_URL = new System.Windows.Forms.Button();
           this.groupBox4 = new System.Windows.Forms.GroupBox();
+          this.lblLanguages = new System.Windows.Forms.Label();
+          this.textLanguages = new System.Windows.Forms.TextBox();
+          this.lblMaxItems = new System.Windows.Forms.Label();
+          this.textMaxItems = new System.Windows.Forms.TextBox();
           this.btResetDetail = new System.Windows.Forms.Button();
           this.label18 = new System.Windows.Forms.Label();
           this.Index = new System.Windows.Forms.ComboBox();
@@ -116,17 +141,22 @@ namespace Grabber_Interface
           this.button_Save = new System.Windows.Forms.Button();
           this.radioButtonFR = new System.Windows.Forms.RadioButton();
           this.radioButtonEN = new System.Windows.Forms.RadioButton();
-          this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
-          this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
           this.button2 = new System.Windows.Forms.Button();
           this.button3 = new System.Windows.Forms.Button();
+          this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
+          this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
+          this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
-          this.textMaxItems = new System.Windows.Forms.TextBox();
-          this.lblMaxItems = new System.Windows.Forms.Label();
-          this.lblLanguages = new System.Windows.Forms.Label();
-          this.textLanguages = new System.Windows.Forms.TextBox();
+          this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
+          this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
+          this.buttonExpertMode = new System.Windows.Forms.Button();
           this.tabControl1.SuspendLayout();
+          this.tabPageUserSettings.SuspendLayout();
+          this.groupBox7.SuspendLayout();
+          this.groupBox10.SuspendLayout();
+          this.groupBox9.SuspendLayout();
+          this.groupBox8.SuspendLayout();
           this.tabPageSearchPage.SuspendLayout();
           this.groupBox6.SuspendLayout();
           this.groupBox5.SuspendLayout();
@@ -135,9 +165,10 @@ namespace Grabber_Interface
           this.tabPageDetailPage.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox4.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
           this.SuspendLayout();
           // 
           // textConfig
@@ -164,11 +195,199 @@ namespace Grabber_Interface
           // 
           // tabControl1
           // 
+          this.tabControl1.Controls.Add(this.tabPageUserSettings);
           this.tabControl1.Controls.Add(this.tabPageSearchPage);
           this.tabControl1.Controls.Add(this.tabPageDetailPage);
           resources.ApplyResources(this.tabControl1, "tabControl1");
           this.tabControl1.Name = "tabControl1";
           this.tabControl1.SelectedIndex = 0;
+          // 
+          // tabPageUserSettings
+          // 
+          this.tabPageUserSettings.Controls.Add(this.statusStrip1);
+          this.tabPageUserSettings.Controls.Add(this.label22);
+          this.tabPageUserSettings.Controls.Add(this.groupBox7);
+          resources.ApplyResources(this.tabPageUserSettings, "tabPageUserSettings");
+          this.tabPageUserSettings.Name = "tabPageUserSettings";
+          this.tabPageUserSettings.UseVisualStyleBackColor = true;
+          // 
+          // statusStrip1
+          // 
+          resources.ApplyResources(this.statusStrip1, "statusStrip1");
+          this.statusStrip1.Name = "statusStrip1";
+          // 
+          // label22
+          // 
+          resources.ApplyResources(this.label22, "label22");
+          this.label22.Name = "label22";
+          // 
+          // groupBox7
+          // 
+          this.groupBox7.Controls.Add(this.groupBox10);
+          this.groupBox7.Controls.Add(this.groupBox9);
+          this.groupBox7.Controls.Add(this.groupBox8);
+          resources.ApplyResources(this.groupBox7, "groupBox7");
+          this.groupBox7.Name = "groupBox7";
+          this.groupBox7.TabStop = false;
+          // 
+          // groupBox10
+          // 
+          this.groupBox10.Controls.Add(this.label29);
+          this.groupBox10.Controls.Add(this.comboBox3);
+          resources.ApplyResources(this.groupBox10, "groupBox10");
+          this.groupBox10.Name = "groupBox10";
+          this.groupBox10.TabStop = false;
+          // 
+          // label29
+          // 
+          resources.ApplyResources(this.label29, "label29");
+          this.label29.Name = "label29";
+          // 
+          // comboBox3
+          // 
+          this.comboBox3.FormattingEnabled = true;
+          resources.ApplyResources(this.comboBox3, "comboBox3");
+          this.comboBox3.Name = "comboBox3";
+          // 
+          // groupBox9
+          // 
+          this.groupBox9.Controls.Add(this.comboBox8);
+          this.groupBox9.Controls.Add(this.comboBox7);
+          this.groupBox9.Controls.Add(this.comboBox6);
+          this.groupBox9.Controls.Add(this.comboBox5);
+          this.groupBox9.Controls.Add(this.label28);
+          this.groupBox9.Controls.Add(this.label27);
+          this.groupBox9.Controls.Add(this.label26);
+          this.groupBox9.Controls.Add(this.label25);
+          resources.ApplyResources(this.groupBox9, "groupBox9");
+          this.groupBox9.Name = "groupBox9";
+          this.groupBox9.TabStop = false;
+          // 
+          // comboBox8
+          // 
+          this.comboBox8.FormattingEnabled = true;
+          this.comboBox8.Items.AddRange(new object[] {
+            resources.GetString("comboBox8.Items"),
+            resources.GetString("comboBox8.Items1"),
+            resources.GetString("comboBox8.Items2"),
+            resources.GetString("comboBox8.Items3"),
+            resources.GetString("comboBox8.Items4"),
+            resources.GetString("comboBox8.Items5"),
+            resources.GetString("comboBox8.Items6"),
+            resources.GetString("comboBox8.Items7"),
+            resources.GetString("comboBox8.Items8")});
+          resources.ApplyResources(this.comboBox8, "comboBox8");
+          this.comboBox8.Name = "comboBox8";
+          // 
+          // comboBox7
+          // 
+          this.comboBox7.FormattingEnabled = true;
+          this.comboBox7.Items.AddRange(new object[] {
+            resources.GetString("comboBox7.Items"),
+            resources.GetString("comboBox7.Items1"),
+            resources.GetString("comboBox7.Items2"),
+            resources.GetString("comboBox7.Items3"),
+            resources.GetString("comboBox7.Items4"),
+            resources.GetString("comboBox7.Items5"),
+            resources.GetString("comboBox7.Items6"),
+            resources.GetString("comboBox7.Items7"),
+            resources.GetString("comboBox7.Items8")});
+          resources.ApplyResources(this.comboBox7, "comboBox7");
+          this.comboBox7.Name = "comboBox7";
+          // 
+          // comboBox6
+          // 
+          this.comboBox6.FormattingEnabled = true;
+          this.comboBox6.Items.AddRange(new object[] {
+            resources.GetString("comboBox6.Items"),
+            resources.GetString("comboBox6.Items1"),
+            resources.GetString("comboBox6.Items2"),
+            resources.GetString("comboBox6.Items3"),
+            resources.GetString("comboBox6.Items4"),
+            resources.GetString("comboBox6.Items5"),
+            resources.GetString("comboBox6.Items6"),
+            resources.GetString("comboBox6.Items7"),
+            resources.GetString("comboBox6.Items8")});
+          resources.ApplyResources(this.comboBox6, "comboBox6");
+          this.comboBox6.Name = "comboBox6";
+          // 
+          // comboBox5
+          // 
+          this.comboBox5.FormattingEnabled = true;
+          this.comboBox5.Items.AddRange(new object[] {
+            resources.GetString("comboBox5.Items"),
+            resources.GetString("comboBox5.Items1"),
+            resources.GetString("comboBox5.Items2"),
+            resources.GetString("comboBox5.Items3"),
+            resources.GetString("comboBox5.Items4"),
+            resources.GetString("comboBox5.Items5"),
+            resources.GetString("comboBox5.Items6"),
+            resources.GetString("comboBox5.Items7"),
+            resources.GetString("comboBox5.Items8")});
+          resources.ApplyResources(this.comboBox5, "comboBox5");
+          this.comboBox5.Name = "comboBox5";
+          // 
+          // label28
+          // 
+          resources.ApplyResources(this.label28, "label28");
+          this.label28.Name = "label28";
+          // 
+          // label27
+          // 
+          resources.ApplyResources(this.label27, "label27");
+          this.label27.Name = "label27";
+          // 
+          // label26
+          // 
+          resources.ApplyResources(this.label26, "label26");
+          this.label26.Name = "label26";
+          // 
+          // label25
+          // 
+          resources.ApplyResources(this.label25, "label25");
+          this.label25.Name = "label25";
+          // 
+          // groupBox8
+          // 
+          this.groupBox8.Controls.Add(this.label24);
+          this.groupBox8.Controls.Add(this.label23);
+          this.groupBox8.Controls.Add(this.comboBox1);
+          this.groupBox8.Controls.Add(this.comboBox2);
+          resources.ApplyResources(this.groupBox8, "groupBox8");
+          this.groupBox8.Name = "groupBox8";
+          this.groupBox8.TabStop = false;
+          // 
+          // label24
+          // 
+          resources.ApplyResources(this.label24, "label24");
+          this.label24.Name = "label24";
+          // 
+          // label23
+          // 
+          resources.ApplyResources(this.label23, "label23");
+          this.label23.Name = "label23";
+          // 
+          // comboBox1
+          // 
+          this.comboBox1.FormattingEnabled = true;
+          this.comboBox1.Items.AddRange(new object[] {
+            resources.GetString("comboBox1.Items"),
+            resources.GetString("comboBox1.Items1"),
+            resources.GetString("comboBox1.Items2"),
+            resources.GetString("comboBox1.Items3"),
+            resources.GetString("comboBox1.Items4"),
+            resources.GetString("comboBox1.Items5"),
+            resources.GetString("comboBox1.Items6"),
+            resources.GetString("comboBox1.Items7"),
+            resources.GetString("comboBox1.Items8")});
+          resources.ApplyResources(this.comboBox1, "comboBox1");
+          this.comboBox1.Name = "comboBox1";
+          // 
+          // comboBox2
+          // 
+          this.comboBox2.FormattingEnabled = true;
+          resources.ApplyResources(this.comboBox2, "comboBox2");
+          this.comboBox2.Name = "comboBox2";
           // 
           // tabPageSearchPage
           // 
@@ -466,6 +685,7 @@ namespace Grabber_Interface
           // tabPageDetailPage
           // 
           this.tabPageDetailPage.Controls.Add(this.button_Load_File);
+          this.tabPageDetailPage.Controls.Add(this.pictureBoxPreviewCover);
           this.tabPageDetailPage.Controls.Add(this.label21);
           this.tabPageDetailPage.Controls.Add(this.labelImageSize);
           this.tabPageDetailPage.Controls.Add(this.btnLoadDetailPreview);
@@ -608,6 +828,29 @@ namespace Grabber_Interface
           resources.ApplyResources(this.groupBox4, "groupBox4");
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.TabStop = false;
+          // 
+          // lblLanguages
+          // 
+          resources.ApplyResources(this.lblLanguages, "lblLanguages");
+          this.lblLanguages.Name = "lblLanguages";
+          // 
+          // textLanguages
+          // 
+          resources.ApplyResources(this.textLanguages, "textLanguages");
+          this.textLanguages.Name = "textLanguages";
+          this.toolTip1.SetToolTip(this.textLanguages, resources.GetString("textLanguages.ToolTip"));
+          this.textLanguages.TextChanged += new System.EventHandler(this.textLanguages_TextChanged);
+          // 
+          // lblMaxItems
+          // 
+          resources.ApplyResources(this.lblMaxItems, "lblMaxItems");
+          this.lblMaxItems.Name = "lblMaxItems";
+          // 
+          // textMaxItems
+          // 
+          resources.ApplyResources(this.textMaxItems, "textMaxItems");
+          this.textMaxItems.Name = "textMaxItems";
+          this.textMaxItems.TextChanged += new System.EventHandler(this.textMaxItems_TextChanged);
           // 
           // btResetDetail
           // 
@@ -801,21 +1044,6 @@ namespace Grabber_Interface
           this.radioButtonEN.UseVisualStyleBackColor = true;
           this.radioButtonEN.CheckedChanged += new System.EventHandler(this.radioButtonEN_CheckedChanged);
           // 
-          // pictureBoxFranceFlag
-          // 
-          resources.ApplyResources(this.pictureBoxFranceFlag, "pictureBoxFranceFlag");
-          this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
-          this.pictureBoxFranceFlag.TabStop = false;
-          this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
-          // 
-          // pictureBoxUSFlag
-          // 
-          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.United_States_of_America_USA_;
-          resources.ApplyResources(this.pictureBoxUSFlag, "pictureBoxUSFlag");
-          this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
-          this.pictureBoxUSFlag.TabStop = false;
-          this.pictureBoxUSFlag.Click += new System.EventHandler(this.pictureBoxUSFlag_Click);
-          // 
           // toolTip1
           // 
           this.toolTip1.AutomaticDelay = 200;
@@ -843,6 +1071,20 @@ namespace Grabber_Interface
           this.button3.UseVisualStyleBackColor = true;
           this.button3.Click += new System.EventHandler(this.button3_Click);
           // 
+          // linkLabelMFwiki
+          // 
+          resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
+          this.linkLabelMFwiki.Name = "linkLabelMFwiki";
+          this.linkLabelMFwiki.TabStop = true;
+          this.linkLabelMFwiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMFwiki_LinkClicked);
+          // 
+          // pictureBox1
+          // 
+          this.pictureBox1.Image = global::Grabber_Interface.Properties.Resources.logo_mesfilms;
+          resources.ApplyResources(this.pictureBox1, "pictureBox1");
+          this.pictureBox1.Name = "pictureBox1";
+          this.pictureBox1.TabStop = false;
+          // 
           // pictureBoxPreviewCover
           // 
           this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -851,34 +1093,35 @@ namespace Grabber_Interface
           this.pictureBoxPreviewCover.TabStop = false;
           this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
           // 
-          // textMaxItems
+          // pictureBoxUSFlag
           // 
-          resources.ApplyResources(this.textMaxItems, "textMaxItems");
-          this.textMaxItems.Name = "textMaxItems";
-          this.textMaxItems.TextChanged += new System.EventHandler(this.textMaxItems_TextChanged);
+          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.United_States_of_America_USA_;
+          resources.ApplyResources(this.pictureBoxUSFlag, "pictureBoxUSFlag");
+          this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
+          this.pictureBoxUSFlag.TabStop = false;
+          this.pictureBoxUSFlag.Click += new System.EventHandler(this.pictureBoxUSFlag_Click);
           // 
-          // lblMaxItems
+          // pictureBoxFranceFlag
           // 
-          resources.ApplyResources(this.lblMaxItems, "lblMaxItems");
-          this.lblMaxItems.Name = "lblMaxItems";
+          resources.ApplyResources(this.pictureBoxFranceFlag, "pictureBoxFranceFlag");
+          this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
+          this.pictureBoxFranceFlag.TabStop = false;
+          this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
           // 
-          // lblLanguages
+          // buttonExpertMode
           // 
-          resources.ApplyResources(this.lblLanguages, "lblLanguages");
-          this.lblLanguages.Name = "lblLanguages";
-          // 
-          // textLanguages
-          // 
-          resources.ApplyResources(this.textLanguages, "textLanguages");
-          this.textLanguages.Name = "textLanguages";
-          this.toolTip1.SetToolTip(this.textLanguages, resources.GetString("textLanguages.ToolTip"));
-          this.textLanguages.TextChanged += new System.EventHandler(this.textLanguages_TextChanged);
+          resources.ApplyResources(this.buttonExpertMode, "buttonExpertMode");
+          this.buttonExpertMode.Name = "buttonExpertMode";
+          this.toolTip1.SetToolTip(this.buttonExpertMode, resources.GetString("buttonExpertMode.ToolTip"));
+          this.buttonExpertMode.UseVisualStyleBackColor = true;
           // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-          this.Controls.Add(this.pictureBoxPreviewCover);
+          this.Controls.Add(this.buttonExpertMode);
+          this.Controls.Add(this.linkLabelMFwiki);
+          this.Controls.Add(this.pictureBox1);
           this.Controls.Add(this.pictureBoxUSFlag);
           this.Controls.Add(this.pictureBoxFranceFlag);
           this.Controls.Add(this.radioButtonEN);
@@ -896,6 +1139,15 @@ namespace Grabber_Interface
           this.Name = "GrabConfig";
           this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GrabConfig_FormClosing);
           this.tabControl1.ResumeLayout(false);
+          this.tabPageUserSettings.ResumeLayout(false);
+          this.tabPageUserSettings.PerformLayout();
+          this.groupBox7.ResumeLayout(false);
+          this.groupBox10.ResumeLayout(false);
+          this.groupBox10.PerformLayout();
+          this.groupBox9.ResumeLayout(false);
+          this.groupBox9.PerformLayout();
+          this.groupBox8.ResumeLayout(false);
+          this.groupBox8.PerformLayout();
           this.tabPageSearchPage.ResumeLayout(false);
           this.tabPageSearchPage.PerformLayout();
           this.groupBox6.ResumeLayout(false);
@@ -910,9 +1162,10 @@ namespace Grabber_Interface
           this.groupBox3.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreviewCover)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -1016,6 +1269,31 @@ namespace Grabber_Interface
         private System.Windows.Forms.TextBox textMaxItems;
         private System.Windows.Forms.TextBox textLanguages;
         private System.Windows.Forms.Label lblLanguages;
+        private System.Windows.Forms.TabPage tabPageUserSettings;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
+        private System.Windows.Forms.LinkLabel linkLabelMFwiki;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.ComboBox comboBox8;
+        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button buttonExpertMode;
 
     }
 }

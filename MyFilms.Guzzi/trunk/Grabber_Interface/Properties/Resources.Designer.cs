@@ -67,6 +67,13 @@ namespace Grabber_Interface.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap logo_mesfilms {
+            get {
+                object obj = ResourceManager.GetObject("logo_mesfilms", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap United_States_of_America_USA_ {
             get {
                 object obj = ResourceManager.GetObject("United_States_of_America_USA_", resourceCulture);
