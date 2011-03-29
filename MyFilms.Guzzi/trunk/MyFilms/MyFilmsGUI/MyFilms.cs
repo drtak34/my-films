@@ -2167,7 +2167,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   case "5": // XMM artist thumbs: e.g. Alex-Revan_101640.jpg
                       if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in XMM picture directory
                       {
-                        string searchname = HTMLParser.removeHtml(itemlabel).Replace(" ", "-"); // replaces special character "á" and other special chars !
+                        string searchname = HTMLParser.removeHtml(itemlabel); // replaces special character "á" and other special chars !
+                        searchname = searchname.Replace(" ", "-");
                         searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
                         string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
                         if (files.Count() > 0) 

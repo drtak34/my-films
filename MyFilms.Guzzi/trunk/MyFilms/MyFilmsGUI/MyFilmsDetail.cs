@@ -3370,8 +3370,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in XMM fanart directory
                     {
                       string searchname = HTMLParser.removeHtml(wtitle2).Replace(" ", "-"); // replaces special character "á" and other special chars !
-                      searchname = "*" + Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                      searchname = searchname.Replace(" ", "-");
+                      searchname = searchname.Replace(".", "-");
+                      searchname = searchname.Replace("'", "-");
+                      searchname = "*" + Regex.Replace(searchname, "[\n\r\t]", "-") + "_fanart*.jpg";
                       string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
+                      LogMyFilms.Debug("MFD: Search_Fanart - XMM - search for '" + searchname + "'");
                       if (files.Count() > 0)
                       {
                         wfanart[0] = files[0];

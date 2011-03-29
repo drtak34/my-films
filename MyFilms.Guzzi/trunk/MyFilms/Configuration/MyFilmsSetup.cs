@@ -695,15 +695,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     cbfdupdate.Focus();
                     return;
                 }
-            if (MesFilmsImg.Text.Length > 0 || MesFilmsFanart.Text.Length > 0)
-            {
-                if (MesFilmsImg.Text == MesFilmsFanart.Text && CatalogType.SelectedIndex != 0)
-                {
-                    System.Windows.Forms.MessageBox.Show("Picture and Fanart Path can't be the same !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    MesFilmsFanart.Focus();
-                    return;
-                }
-            }
+            //if (MesFilmsImg.Text.Length > 0 || MesFilmsFanart.Text.Length > 0)
+            //{
+            //    if (MesFilmsImg.Text == MesFilmsFanart.Text && CatalogType.SelectedIndex != 0)
+            //    {
+            //        System.Windows.Forms.MessageBox.Show("Picture and Fanart Path can't be the same !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //        MesFilmsFanart.Focus();
+            //        return;
+            //    }
+            //}
             if ((chkFanart.Checked) && (MesFilmsFanart.Text.Length == 0))
             {
                 System.Windows.Forms.MessageBox.Show("Fanart Path must be fill for using !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
