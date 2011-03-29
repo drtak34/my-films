@@ -141,13 +141,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 StrFileXml = destFile;
                                 break;
                             }
-                            bool SortTitle = false;
                             bool OnlyFile = false;
-                            SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             string TagField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DVDPTagField", string.Empty);
                             DvdProfiler cv = new DvdProfiler(TagField);
-                            StrFileXml = cv.ConvertProfiler(StrFileXml, StrPathImg, SortTitle, TagField,OnlyFile);
+                            StrFileXml = cv.ConvertProfiler(StrFileXml, StrPathImg, TagField,OnlyFile);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -162,12 +160,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 StrFileXml = destFile;
                                 break;
                             }
-                            bool SortTitle = false;
                             bool OnlyFile = false;
-                            SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             MovieCollector mc = new MovieCollector();
-                            StrFileXml = mc.ConvertMovieCollector(StrFileXml, StrPathImg, SortTitle, OnlyFile,StrMCCovers,TitleDelim);
+                            StrFileXml = mc.ConvertMovieCollector(StrFileXml, StrPathImg, OnlyFile,StrMCCovers,TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -182,12 +178,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 StrFileXml = destFile;
                                 break;
                             }
-                            bool SortTitle = false;
                             bool OnlyFile = false;
-                            SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             MyMovies mm = new MyMovies();
-                            StrFileXml = mm.ConvertMyMovies(StrFileXml, StrPathImg, SortTitle, OnlyFile);
+                            StrFileXml = mm.ConvertMyMovies(StrFileXml, StrPathImg, OnlyFile);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -202,12 +196,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 StrFileXml = destFile;
                                 break;
                             }
-                            bool SortTitle = false;
                             bool OnlyFile = false;
-                            SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             EaxMovieCatalog emc = new EaxMovieCatalog();
-                            StrFileXml = emc.ConvertEaxMovieCatalog(StrFileXml, StrPathImg, SortTitle, OnlyFile, TitleDelim);
+                            StrFileXml = emc.ConvertEaxMovieCatalog(StrFileXml, StrPathImg, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -222,12 +214,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 StrFileXml = destFile;
                                 break;
                             }
-                            bool SortTitle = false;
                             bool OnlyFile = false;
-                            SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             XMM xmm = new XMM();
-                            StrFileXml = xmm.ConvertXMM(StrFileXml, StrPathImg, SortTitle, OnlyFile);
+                            StrFileXml = xmm.ConvertXMM(StrFileXml, StrPathImg, OnlyFile);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -242,12 +232,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 StrFileXml = destFile;
                                 break;
                             }
-                            bool SortTitle = false;
                             bool OnlyFile = false;
-                            SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             XbmcNfo nfo = new XbmcNfo();
-                            StrFileXml = nfo.ConvertXbmcNfo(StrFileXml, StrPathImg,StrStorage, SortTitle, OnlyFile, TitleDelim);
+                            StrFileXml = nfo.ConvertXbmcNfo(StrFileXml, StrPathImg,StrStorage, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -262,12 +250,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             StrFileXml = destFile;
                             break;
                           }
-                          bool SortTitle = false;
                           bool OnlyFile = false;
-                          SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                           OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                           EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
-                          StrFileXml = emc3.ConvertEaxMovieCatalog3(StrFileXml, StrPathImg, SortTitle, OnlyFile, TitleDelim);
+                          StrFileXml = emc3.ConvertEaxMovieCatalog3(StrFileXml, StrPathImg, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -282,12 +268,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             StrFileXml = destFile;
                             break;
                           }
-                          bool SortTitle = false;
                           bool OnlyFile = false;
-                          SortTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SortTitle", false);
                           OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                           PersonalVideoDatabase pvd = new PersonalVideoDatabase();
-                          StrFileXml = pvd.ConvertPersonalVideoDatabase(StrFileXml, StrPathImg, SortTitle, OnlyFile, TitleDelim, StrECoptionStoreTaglineInDescription);
+                          StrFileXml = pvd.ConvertPersonalVideoDatabase(StrFileXml, StrPathImg, OnlyFile, TitleDelim, StrECoptionStoreTaglineInDescription);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);

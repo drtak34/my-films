@@ -427,7 +427,7 @@
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.Tab_ExternalCatalogs = new System.Windows.Forms.TabPage();
-          this.groupBox3 = new System.Windows.Forms.GroupBox();
+          this.groupBoxExtendedFieldHandling = new System.Windows.Forms.GroupBox();
           this.groupBox4 = new System.Windows.Forms.GroupBox();
           this.cbEcAddTaglinesToDescriptionField = new System.Windows.Forms.CheckBox();
           this.groupBox_MovieCollector = new System.Windows.Forms.GroupBox();
@@ -437,8 +437,6 @@
           this.groupBox_DVDprofiler = new System.Windows.Forms.GroupBox();
           this.groupBox13 = new System.Windows.Forms.GroupBox();
           this.OnlyFile = new System.Windows.Forms.CheckBox();
-          this.groupBox10 = new System.Windows.Forms.GroupBox();
-          this.SortTitle = new System.Windows.Forms.CheckBox();
           this.Tab_WakeOnLan = new System.Windows.Forms.TabPage();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
           this.btnUpdate = new System.Windows.Forms.Button();
@@ -468,11 +466,11 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.chkUseListviewForGroups = new System.Windows.Forms.CheckBox();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.comboBox3 = new System.Windows.Forms.ComboBox();
           this.groupBox5 = new System.Windows.Forms.GroupBox();
           this.checkBox2 = new System.Windows.Forms.CheckBox();
           this.comboBox4 = new System.Windows.Forms.ComboBox();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -512,13 +510,12 @@
           this.groupBox_TitleOrder.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           this.Tab_ExternalCatalogs.SuspendLayout();
-          this.groupBox3.SuspendLayout();
+          this.groupBoxExtendedFieldHandling.SuspendLayout();
           this.groupBox4.SuspendLayout();
           this.groupBox_MovieCollector.SuspendLayout();
           this.groupBox17.SuspendLayout();
           this.groupBox_DVDprofiler.SuspendLayout();
           this.groupBox13.SuspendLayout();
-          this.groupBox10.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
           this.Tab_Logos.SuspendLayout();
           this.Tab_Artwork.SuspendLayout();
@@ -4066,7 +4063,7 @@
           // 
           // Tab_ExternalCatalogs
           // 
-          this.Tab_ExternalCatalogs.Controls.Add(this.groupBox3);
+          this.Tab_ExternalCatalogs.Controls.Add(this.groupBoxExtendedFieldHandling);
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBox_MovieCollector);
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBox_DVDprofiler);
           this.Tab_ExternalCatalogs.Location = new System.Drawing.Point(4, 22);
@@ -4078,25 +4075,25 @@
           this.Tab_ExternalCatalogs.ToolTipText = "Options for external catalogs (only applies if not using ANT movie catalog)";
           this.Tab_ExternalCatalogs.UseVisualStyleBackColor = true;
           // 
-          // groupBox3
+          // groupBoxExtendedFieldHandling
           // 
-          this.groupBox3.Controls.Add(this.groupBox5);
-          this.groupBox3.Controls.Add(this.groupBox4);
-          this.groupBox3.Controls.Add(this.groupBox9);
-          this.groupBox3.Location = new System.Drawing.Point(19, 17);
-          this.groupBox3.Name = "groupBox3";
-          this.groupBox3.Size = new System.Drawing.Size(355, 291);
-          this.groupBox3.TabIndex = 30;
-          this.groupBox3.TabStop = false;
-          this.groupBox3.Text = "Common Options ...";
+          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox5);
+          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox4);
+          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox9);
+          this.groupBoxExtendedFieldHandling.Location = new System.Drawing.Point(19, 17);
+          this.groupBoxExtendedFieldHandling.Name = "groupBoxExtendedFieldHandling";
+          this.groupBoxExtendedFieldHandling.Size = new System.Drawing.Size(355, 291);
+          this.groupBoxExtendedFieldHandling.TabIndex = 30;
+          this.groupBoxExtendedFieldHandling.TabStop = false;
+          this.groupBoxExtendedFieldHandling.Text = "Extended field Handling ...";
           // 
           // groupBox4
           // 
           this.groupBox4.Controls.Add(this.comboBox3);
           this.groupBox4.Controls.Add(this.cbEcAddTaglinesToDescriptionField);
-          this.groupBox4.Location = new System.Drawing.Point(13, 106);
+          this.groupBox4.Location = new System.Drawing.Point(10, 104);
           this.groupBox4.Name = "groupBox4";
-          this.groupBox4.Size = new System.Drawing.Size(323, 55);
+          this.groupBox4.Size = new System.Drawing.Size(327, 55);
           this.groupBox4.TabIndex = 1;
           this.groupBox4.TabStop = false;
           this.groupBox4.Text = "Taglines ...";
@@ -4104,7 +4101,7 @@
           // cbEcAddTaglinesToDescriptionField
           // 
           this.cbEcAddTaglinesToDescriptionField.AutoSize = true;
-          this.cbEcAddTaglinesToDescriptionField.Location = new System.Drawing.Point(20, 20);
+          this.cbEcAddTaglinesToDescriptionField.Location = new System.Drawing.Point(23, 26);
           this.cbEcAddTaglinesToDescriptionField.Name = "cbEcAddTaglinesToDescriptionField";
           this.cbEcAddTaglinesToDescriptionField.Size = new System.Drawing.Size(138, 17);
           this.cbEcAddTaglinesToDescriptionField.TabIndex = 0;
@@ -4114,7 +4111,7 @@
           // groupBox_MovieCollector
           // 
           this.groupBox_MovieCollector.Controls.Add(this.groupBox17);
-          this.groupBox_MovieCollector.Location = new System.Drawing.Point(392, 189);
+          this.groupBox_MovieCollector.Location = new System.Drawing.Point(392, 103);
           this.groupBox_MovieCollector.Name = "groupBox_MovieCollector";
           this.groupBox_MovieCollector.Size = new System.Drawing.Size(335, 119);
           this.groupBox_MovieCollector.TabIndex = 29;
@@ -4157,10 +4154,9 @@
           // groupBox_DVDprofiler
           // 
           this.groupBox_DVDprofiler.Controls.Add(this.groupBox13);
-          this.groupBox_DVDprofiler.Controls.Add(this.groupBox10);
           this.groupBox_DVDprofiler.Location = new System.Drawing.Point(392, 17);
           this.groupBox_DVDprofiler.Name = "groupBox_DVDprofiler";
-          this.groupBox_DVDprofiler.Size = new System.Drawing.Size(335, 148);
+          this.groupBox_DVDprofiler.Size = new System.Drawing.Size(335, 80);
           this.groupBox_DVDprofiler.TabIndex = 28;
           this.groupBox_DVDprofiler.TabStop = false;
           this.groupBox_DVDprofiler.Text = "DVDProfiler";
@@ -4168,7 +4164,7 @@
           // groupBox13
           // 
           this.groupBox13.Controls.Add(this.OnlyFile);
-          this.groupBox13.Location = new System.Drawing.Point(13, 81);
+          this.groupBox13.Location = new System.Drawing.Point(13, 19);
           this.groupBox13.Name = "groupBox13";
           this.groupBox13.Size = new System.Drawing.Size(307, 49);
           this.groupBox13.TabIndex = 2;
@@ -4184,26 +4180,6 @@
           this.OnlyFile.TabIndex = 0;
           this.OnlyFile.Text = "Notes Field contains only Movie Filename";
           this.OnlyFile.UseVisualStyleBackColor = true;
-          // 
-          // groupBox10
-          // 
-          this.groupBox10.Controls.Add(this.SortTitle);
-          this.groupBox10.Location = new System.Drawing.Point(13, 19);
-          this.groupBox10.Name = "groupBox10";
-          this.groupBox10.Size = new System.Drawing.Size(307, 45);
-          this.groupBox10.TabIndex = 1;
-          this.groupBox10.TabStop = false;
-          this.groupBox10.Text = "Use SortTitle";
-          // 
-          // SortTitle
-          // 
-          this.SortTitle.AutoSize = true;
-          this.SortTitle.Location = new System.Drawing.Point(24, 19);
-          this.SortTitle.Name = "SortTitle";
-          this.SortTitle.Size = new System.Drawing.Size(199, 17);
-          this.SortTitle.TabIndex = 0;
-          this.SortTitle.Text = "Store SortTitle in FormattedTitle Field";
-          this.SortTitle.UseVisualStyleBackColor = true;
           // 
           // Tab_WakeOnLan
           // 
@@ -4571,16 +4547,6 @@
                   "untry\" etc.\r\nIf unchecked, MyFilms will use same layout as used for films.");
           this.chkUseListviewForGroups.UseVisualStyleBackColor = true;
           // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
-          // 
           // comboBox3
           // 
           this.comboBox3.FormattingEnabled = true;
@@ -4593,9 +4559,9 @@
           // 
           this.groupBox5.Controls.Add(this.comboBox4);
           this.groupBox5.Controls.Add(this.checkBox2);
-          this.groupBox5.Location = new System.Drawing.Point(17, 177);
+          this.groupBox5.Location = new System.Drawing.Point(10, 177);
           this.groupBox5.Name = "groupBox5";
-          this.groupBox5.Size = new System.Drawing.Size(319, 60);
+          this.groupBox5.Size = new System.Drawing.Size(327, 60);
           this.groupBox5.TabIndex = 2;
           this.groupBox5.TabStop = false;
           this.groupBox5.Text = "Certification ...";
@@ -4603,7 +4569,7 @@
           // checkBox2
           // 
           this.checkBox2.AutoSize = true;
-          this.checkBox2.Location = new System.Drawing.Point(23, 33);
+          this.checkBox2.Location = new System.Drawing.Point(23, 30);
           this.checkBox2.Name = "checkBox2";
           this.checkBox2.Size = new System.Drawing.Size(88, 17);
           this.checkBox2.TabIndex = 0;
@@ -4613,10 +4579,20 @@
           // comboBox4
           // 
           this.comboBox4.FormattingEnabled = true;
-          this.comboBox4.Location = new System.Drawing.Point(163, 30);
+          this.comboBox4.Location = new System.Drawing.Point(169, 28);
           this.comboBox4.Name = "comboBox4";
           this.comboBox4.Size = new System.Drawing.Size(121, 21);
           this.comboBox4.TabIndex = 1;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
           // 
           // MyFilmsSetup
           // 
@@ -4716,7 +4692,7 @@
           this.groupBox_TitleOrder.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
-          this.groupBox3.ResumeLayout(false);
+          this.groupBoxExtendedFieldHandling.ResumeLayout(false);
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
           this.groupBox_MovieCollector.ResumeLayout(false);
@@ -4725,8 +4701,6 @@
           this.groupBox_DVDprofiler.ResumeLayout(false);
           this.groupBox13.ResumeLayout(false);
           this.groupBox13.PerformLayout();
-          this.groupBox10.ResumeLayout(false);
-          this.groupBox10.PerformLayout();
           this.Tab_WakeOnLan.ResumeLayout(false);
           this.Tab_Logos.ResumeLayout(false);
           this.Tab_Logos.PerformLayout();
@@ -4784,8 +4758,6 @@
         private GroupBox groupBox_DVDprofiler;
         private GroupBox groupBox13;
         private CheckBox OnlyFile;
-        private GroupBox groupBox10;
-        private CheckBox SortTitle;
         private TabPage Tab_WakeOnLan;
         private GroupBox groupBox25;
         private Label label37;
@@ -5110,7 +5082,7 @@
         private TextBox txtPicturePrefix;
         private Label lblPictureHandling;
         private ComboBox cbPictureHandling;
-        private GroupBox groupBox3;
+        private GroupBox groupBoxExtendedFieldHandling;
         private GroupBox groupBox4;
         private CheckBox chkUseOriginalAsTranslatedTitle;
         private CheckBox cbEcAddTaglinesToDescriptionField;

@@ -61,7 +61,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
         }
        public string TagFullName;
 
-        public string ConvertProfiler(string source, string folderimage, bool SortTitle, string TagField, bool OnlyFile)
+        public string ConvertProfiler(string source, string folderimage, string TagField, bool OnlyFile)
         {
             string WStrPath = System.IO.Path.GetDirectoryName(source);
             string destFile = WStrPath + "\\" + source.Substring(source.LastIndexOf(@"\") + 1, source.Length - source.LastIndexOf(@"\") - 5) + "_tmp.xml";
@@ -280,7 +280,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     else
                         WriteAntAtribute(destXml, "Title", nodeTitle.InnerText);
                     WriteAntAtribute(destXml, "TTitle", nodeTitle.InnerText);
-                    if (SortTitle)
+                    if (nodeSTitle != null && !string.IsNullOrEmpty(nodeSTitle.InnerText))
                         WriteAntAtribute(destXml, "STitle", nodeSTitle.InnerText);
                     else
                         WriteAntAtribute(destXml, "STitle", nodeTitle.InnerText);

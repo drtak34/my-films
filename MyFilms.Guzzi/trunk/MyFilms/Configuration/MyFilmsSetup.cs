@@ -966,7 +966,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (CatalogType.SelectedIndex == 1)
             {
-              XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SortTitle", SortTitle.Checked);
               XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", OnlyFile.Checked);
               if (this.cbEcMergeWithGenreField.Checked)
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "Category");
@@ -1345,11 +1344,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 Images.Checked = true;
             else
                 Thumbnails.Checked = true;
-            //if (MyFilms_XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SortTitle", "False") == "True")
-            //    SortTitle.Checked = true;
-            //else
-            //    SortTitle.Checked = false;
-            SortTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SortTitle", false);
             OnlyFile.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", false);
             ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", "");
             ItemSearchGrabberName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberName", "");
@@ -1600,7 +1594,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             this.cbEcStoreTagsInOptionalField.Checked = false;
             Thumbnails.Checked = true;
             DVDPTagField.ResetText();
-            SortTitle.Checked = false;
             OnlyFile.Checked = false;
             AlwaysDefaultView.Checked = false;
             chkUseListviewForGroups.Checked = true;
@@ -2535,14 +2528,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             if (this.cbEcMergeWithGenreField.Checked)
                                 DVDPTagField.Text = "Category";
                             DvdProfiler cc1 = new DvdProfiler(DVDPTagField.Text);
-                            mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, DVDPTagField.Text, OnlyFile.Checked));
+                            mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, DVDPTagField.Text, OnlyFile.Checked));
                             break;
                         case 2: // Movie Collector V7.1.4
                             MovieCollector cc2 = new MovieCollector();
                             if (Thumbnails.Checked)
-                                mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, "Thumbnails", TitleDelim.Text));
+                                mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, "Thumbnails", TitleDelim.Text));
                             else
-                                mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, "Images", TitleDelim.Text));
+                                mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, "Images", TitleDelim.Text));
                             break;
                         case 3: // MyMovies
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2552,7 +2545,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                                 break;
                             }
                             MyMovies mm = new MyMovies();
-                            mydivx.ReadXml(mm.ConvertMyMovies(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked));
+                            mydivx.ReadXml(mm.ConvertMyMovies(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked));
                             break;
                         case 4: // EAX Movie Catalog 2.5.0
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2562,7 +2555,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                                 break;
                             }
                             EaxMovieCatalog emc = new EaxMovieCatalog();
-                            mydivx.ReadXml(emc.ConvertEaxMovieCatalog(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(emc.ConvertEaxMovieCatalog(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 5: //eXtreme Movie Manager
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2572,7 +2565,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                                 break;
                             }
                             XMM xmm = new XMM();
-                            mydivx.ReadXml(xmm.ConvertXMM(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked));
+                            mydivx.ReadXml(xmm.ConvertXMM(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked));
                             break;
                         case 6: // XBMC fulldb export (all movies in one DB)
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2589,7 +2582,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             XbmcDb Xdb = new XbmcDb();
-                            mydivx.ReadXml(Xdb.ConvertXbmcDb(MesFilmsCat.Text, MesFilmsImg.Text, AntStorage.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(Xdb.ConvertXbmcDb(MesFilmsCat.Text, MesFilmsImg.Text, AntStorage.Text, OnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
                             destFile = MesFilmsCat.Text;
@@ -2599,7 +2592,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             XbmcNfo nfo = new XbmcNfo();
-                            mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, AntStorage.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, AntStorage.Text, OnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 9: // EAX Movie Catalog 3.0.9 (beta5)
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2609,7 +2602,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
-                            mydivx.ReadXml(emc3.ConvertEaxMovieCatalog3(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(emc3.ConvertEaxMovieCatalog3(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 10: // PVD PersonalVideoDatabase V0.9.9.21
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2619,7 +2612,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             PersonalVideoDatabase pvd = new PersonalVideoDatabase();
-                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, SortTitle.Checked, OnlyFile.Checked, TitleDelim.Text, cbEcAddTaglinesToDescriptionField.Checked));
+                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, TitleDelim.Text, cbEcAddTaglinesToDescriptionField.Checked));
                             break;
                     }
 

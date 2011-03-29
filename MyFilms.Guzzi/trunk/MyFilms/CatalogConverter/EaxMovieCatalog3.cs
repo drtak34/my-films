@@ -76,7 +76,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
 
         }
-        public string ConvertEaxMovieCatalog3(string source, string folderimage, bool SortTitle, bool OnlyFile, string TitleDelim)
+        public string ConvertEaxMovieCatalog3(string source, string folderimage, bool OnlyFile, string TitleDelim)
         {
             if (TitleDelim.Length == 0)
                 TitleDelim = "\\";
