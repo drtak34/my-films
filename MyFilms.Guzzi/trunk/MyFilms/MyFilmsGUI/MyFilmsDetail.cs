@@ -4518,6 +4518,53 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
+        public static void Launch_Movie_Trailer_Streams(int select_item, int GetID, GUIAnimation m_SearchAnimation)
+        //-------------------------------------------------------------------------------------------
+        // Play Movie Trailer Links (streaming) !!!
+        //-------------------------------------------------------------------------------------------
+        {  // ToDo: Add methods for Streaming - check OV for howto's...
+          LogMyFilms.Debug("MF: (Play Movie Trailer Streams) select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "'");
+          if ((MyFilms.conf.CmdPar.Length > 0) && (MyFilms.conf.CmdPar != "(none)"))
+            RunProgram(MyFilms.conf.CmdExe, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.CmdPar].ToString());
+          if (g_Player.Playing)
+            g_Player.Stop();
+          // search all files
+          ArrayList newItems = new ArrayList();
+          bool NoResumeMovie = true; //Modded by Guzzi for NonResuming Trailers 
+          int IMovieIndex = 0;
+          LogMyFilms.Debug("MyFilmsDetails (Launch_Movie_Trailer): new do Moviesearch with '" + select_item + "' (Selected_Item");
+          if (newItems.Count > 0)
+          {
+            playlistPlayer.Reset();
+            playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
+            PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
+            playlist.Clear();
+
+            if (IMovieIndex > 0)
+            {
+              string movieFileName = (string)newItems[IMovieIndex - 1]; // as in menu there is "all-option" as first index 0 ...
+              PlayListItem newitem = new PlayListItem();
+              newitem.FileName = movieFileName;
+              LogMyFilms.Info("MF: Play specific movie trailer: '" + movieFileName + "'");
+              newitem.Type = PlayListItem.PlayListItemType.Video;
+              playlist.Add(newitem);
+            }
+            else // if play all trailers is chosen add all available trailers to playlist
+            {
+              foreach (object t in newItems)
+              {
+                string movieFileName = (string)t;
+                PlayListItem newitem = new PlayListItem();
+                newitem.FileName = movieFileName;
+                LogMyFilms.Info("MF: Add trailer to playlist: '" + movieFileName + "'");
+                newitem.Type = PlayListItem.PlayListItemType.Video;
+                playlist.Add(newitem);
+              }
+            }
+            PlayMovieFromPlayListTrailer(NoResumeMovie, 0);
+          }
+        }
+
         protected static void Search_parts(string fileName, int select_item, bool delete, ref bool NoResumeMovie, ref ArrayList newItems, ref int IdMovie, ref int IMovieIndex, ref int timeMovieStopped)
         {
             // if filename already in arraylist, return
