@@ -69,6 +69,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("subs", "Subtitles");
             ProfilerDict.Add("mpaa", "Certification");
             ProfilerDict.Add("tagline", "TagLine");
+            ProfilerDict.Add("tags", "Tags");
             ProfilerDict.Add("scenario", "Writer");
             //ProfilerDict.Add("Borrower", "Borrower");
         }
@@ -248,13 +249,14 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       WriteAntAtribute(destXml, "mpaa", nodeDVD.SelectSingleNode("mpaa").InnerText);
                     if (nodeDVD.SelectSingleNode("tagline") != null)
                       WriteAntAtribute(destXml, "tagline", nodeDVD.SelectSingleNode("tagline").InnerText);
+                    if (nodeDVD.SelectSingleNode("tags") != null)
+                      WriteAntAtribute(destXml, "tags", nodeDVD.SelectSingleNode("tags").InnerText);
                     if (nodeDVD.SelectSingleNode("count") != null)
                       WriteAntAtribute(destXml, "count", nodeDVD.SelectSingleNode("count").InnerText);
                     if (nodeDVD.SelectSingleNode("path") != null)
                       WriteAntAtribute(destXml, "path", nodeDVD.SelectSingleNode("path").InnerText);
                     destXml.WriteEndElement();
                 }
-
             }
             catch
             {

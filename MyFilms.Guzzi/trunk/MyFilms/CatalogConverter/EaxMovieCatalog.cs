@@ -67,8 +67,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Comments", "Comments");
             ProfilerDict.Add("Languages", "Languages");
             ProfilerDict.Add("Subtitles", "Subtitles");
-            //ProfilerDict.Add("Borrower", "Borrower");
-
+            ProfilerDict.Add("Writer", "Writer");
+            ProfilerDict.Add("Certification", "Certification");
+            ProfilerDict.Add("Tags", "Tags");
+          //ProfilerDict.Add("Borrower", "Borrower");
+          //ProfilerDict.Add("TagLine", "TagLine");
+          //ProfilerDict.Add("Trailer", "SourceTrailer");
         }
         public string ConvertEaxMovieCatalog(string source, string folderimage, bool SortTitle, bool OnlyFile, string TitleDelim)
         {
@@ -204,6 +208,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         WriteAntAtribute(destXml, "Director", nodeDVD.Attributes["Director"].Value);
                     if (nodeDVD.Attributes["Producer"] != null)
                         WriteAntAtribute(destXml, "Producer", nodeDVD.Attributes["Producer"].Value);
+                    if (nodeDVD.Attributes["Writer"] != null)
+                      WriteAntAtribute(destXml, "Writer", nodeDVD.Attributes["Writer"].Value);
+                    if (nodeDVD.Attributes["MPAA"] != null)
+                      WriteAntAtribute(destXml, "Certification", nodeDVD.Attributes["MPAA"].Value);
+                    if (nodeDVD.Attributes["Tags"] != null)
+                      WriteAntAtribute(destXml, "Tags", nodeDVD.Attributes["Tags"].Value);
                     if (nodeDVD.Attributes["Cast"] != null)
                         WriteAntAtribute(destXml, "Actors", nodeDVD.Attributes["Cast"].Value);
                     if (nodeDVD.Attributes["Picture"] != null)

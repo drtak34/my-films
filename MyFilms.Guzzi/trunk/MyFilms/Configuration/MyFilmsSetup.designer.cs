@@ -467,8 +467,12 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.chkUseListviewForGroups = new System.Windows.Forms.CheckBox();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.comboBox3 = new System.Windows.Forms.ComboBox();
+          this.groupBox5 = new System.Windows.Forms.GroupBox();
+          this.checkBox2 = new System.Windows.Forms.CheckBox();
+          this.comboBox4 = new System.Windows.Forms.ComboBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -521,6 +525,7 @@
           this.Tab_AMCupdater.SuspendLayout();
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
+          this.groupBox5.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -675,7 +680,7 @@
           // cbEcStoreTagsInOptionalField
           // 
           this.cbEcStoreTagsInOptionalField.AutoSize = true;
-          this.cbEcStoreTagsInOptionalField.Location = new System.Drawing.Point(24, 42);
+          this.cbEcStoreTagsInOptionalField.Location = new System.Drawing.Point(23, 42);
           this.cbEcStoreTagsInOptionalField.Name = "cbEcStoreTagsInOptionalField";
           this.cbEcStoreTagsInOptionalField.Size = new System.Drawing.Size(96, 17);
           this.cbEcStoreTagsInOptionalField.TabIndex = 13;
@@ -686,7 +691,7 @@
           // cbEcMergeWithGenreField
           // 
           this.cbEcMergeWithGenreField.AutoSize = true;
-          this.cbEcMergeWithGenreField.Location = new System.Drawing.Point(24, 17);
+          this.cbEcMergeWithGenreField.Location = new System.Drawing.Point(23, 19);
           this.cbEcMergeWithGenreField.Name = "cbEcMergeWithGenreField";
           this.cbEcMergeWithGenreField.Size = new System.Drawing.Size(138, 17);
           this.cbEcMergeWithGenreField.TabIndex = 12;
@@ -4075,6 +4080,7 @@
           // 
           // groupBox3
           // 
+          this.groupBox3.Controls.Add(this.groupBox5);
           this.groupBox3.Controls.Add(this.groupBox4);
           this.groupBox3.Controls.Add(this.groupBox9);
           this.groupBox3.Location = new System.Drawing.Point(19, 17);
@@ -4086,6 +4092,7 @@
           // 
           // groupBox4
           // 
+          this.groupBox4.Controls.Add(this.comboBox3);
           this.groupBox4.Controls.Add(this.cbEcAddTaglinesToDescriptionField);
           this.groupBox4.Location = new System.Drawing.Point(13, 106);
           this.groupBox4.Name = "groupBox4";
@@ -4552,16 +4559,6 @@
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
           // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
-          // 
           // chkUseListviewForGroups
           // 
           this.chkUseListviewForGroups.AutoSize = true;
@@ -4573,6 +4570,53 @@
           this.ToolTip1.SetToolTip(this.chkUseListviewForGroups, "If checked, MyFilms will always use list view for group views,\r\nlike \"years\", \"co" +
                   "untry\" etc.\r\nIf unchecked, MyFilms will use same layout as used for films.");
           this.chkUseListviewForGroups.UseVisualStyleBackColor = true;
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
+          // comboBox3
+          // 
+          this.comboBox3.FormattingEnabled = true;
+          this.comboBox3.Location = new System.Drawing.Point(169, 24);
+          this.comboBox3.Name = "comboBox3";
+          this.comboBox3.Size = new System.Drawing.Size(121, 21);
+          this.comboBox3.TabIndex = 1;
+          // 
+          // groupBox5
+          // 
+          this.groupBox5.Controls.Add(this.comboBox4);
+          this.groupBox5.Controls.Add(this.checkBox2);
+          this.groupBox5.Location = new System.Drawing.Point(17, 177);
+          this.groupBox5.Name = "groupBox5";
+          this.groupBox5.Size = new System.Drawing.Size(319, 60);
+          this.groupBox5.TabIndex = 2;
+          this.groupBox5.TabStop = false;
+          this.groupBox5.Text = "Certification ...";
+          // 
+          // checkBox2
+          // 
+          this.checkBox2.AutoSize = true;
+          this.checkBox2.Location = new System.Drawing.Point(23, 33);
+          this.checkBox2.Name = "checkBox2";
+          this.checkBox2.Size = new System.Drawing.Size(88, 17);
+          this.checkBox2.TabIndex = 0;
+          this.checkBox2.Text = "Add to field...";
+          this.checkBox2.UseVisualStyleBackColor = true;
+          // 
+          // comboBox4
+          // 
+          this.comboBox4.FormattingEnabled = true;
+          this.comboBox4.Location = new System.Drawing.Point(163, 30);
+          this.comboBox4.Name = "comboBox4";
+          this.comboBox4.Size = new System.Drawing.Size(121, 21);
+          this.comboBox4.TabIndex = 1;
           // 
           // MyFilmsSetup
           // 
@@ -4690,6 +4734,8 @@
           this.Tab_AMCupdater.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
           this.General.ResumeLayout(false);
+          this.groupBox5.ResumeLayout(false);
+          this.groupBox5.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -5069,5 +5115,9 @@
         private CheckBox chkUseOriginalAsTranslatedTitle;
         private CheckBox cbEcAddTaglinesToDescriptionField;
         private CheckBox chkUseListviewForGroups;
+        private ComboBox comboBox3;
+        private GroupBox groupBox5;
+        private CheckBox checkBox2;
+        private ComboBox comboBox4;
     }
 }

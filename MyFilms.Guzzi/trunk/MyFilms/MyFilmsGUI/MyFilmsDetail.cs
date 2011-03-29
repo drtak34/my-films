@@ -3384,6 +3384,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                     }
                     break;
+                  case "4": // EAX MC 2.5.0
                   case "9": // EAX 3.x
                     if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in XMM fanart directory
                     {

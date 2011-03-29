@@ -73,7 +73,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Writer", "Writer");
             ProfilerDict.Add("MPAA", "Certification");
             ProfilerDict.Add("TagLine", "TagLine");
-            //ProfilerDict.Add("Tags", "Tags");
+            ProfilerDict.Add("Tags", "Tags");
             ProfilerDict.Add("Trailer", "SourceTrailer");
             //ProfilerDict.Add("watched", "Watched");
             //ProfilerDict.Add("watcheddate", "WatchedDate");
@@ -248,21 +248,25 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 XmlNode nodeTagLine = nodeDVD.SelectSingleNode("TagLine");
                 if (nodeTagLine != null && nodeTagLine.InnerText.Length > 0) WriteAntAtribute(destXml, "TagLine", nodeTagLine.InnerText.Replace(char.ConvertFromUtf32(160), " "));
 
+                //string Tags
+                XmlNode nodeTags = nodeDVD.SelectSingleNode("Category");
+                if (nodeTags != null && nodeTags.InnerText.Length > 0) WriteAntAtribute(destXml, "Tags", nodeTags.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
+
                 //string Borrower
                 XmlNode nodeBorrower = nodeDVD.SelectSingleNode("Loaner");
                 if (nodeBorrower != null && nodeBorrower.InnerText.Length > 0) WriteAntAtribute(destXml, "Loaner", nodeBorrower.InnerText.Replace(char.ConvertFromUtf32(160), " "));
 
                 //string Director, 
                 XmlNode nodeDirector = nodeDVD.SelectSingleNode("Director");
-                if (nodeDirector != null && nodeDirector.InnerText.Length > 0) WriteAntAtribute(destXml, "Director", nodeDirector.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                if (nodeDirector != null && nodeDirector.InnerText.Length > 0) WriteAntAtribute(destXml, "Director", nodeDirector.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
 
                 //string Producer, 
                 XmlNode nodeProducer = nodeDVD.SelectSingleNode("Producer");
-                if (nodeProducer != null && nodeProducer.InnerText.Length > 0) WriteAntAtribute(destXml, "Producer", nodeProducer.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                if (nodeProducer != null && nodeProducer.InnerText.Length > 0) WriteAntAtribute(destXml, "Producer", nodeProducer.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
 
                 //string Writer, 
                 XmlNode nodeWriter = nodeDVD.SelectSingleNode("Writer");
-                if (nodeWriter != null && nodeWriter.InnerText.Length > 0) WriteAntAtribute(destXml, "Writer", nodeWriter.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                if (nodeWriter != null && nodeWriter.InnerText.Length > 0) WriteAntAtribute(destXml, "Writer", nodeWriter.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
 
                 //string Country, 
                 XmlNode nodeCountry = nodeDVD.SelectSingleNode("Country");

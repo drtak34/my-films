@@ -2175,6 +2175,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           strThumbSource = files[0];
                       }
                       break;
+                  case "4": // EAX MC 2.5.0
                   case "9": // EAX 3.x
                       if (System.IO.File.Exists(strPathArtist + itemlabel.Replace(" ", ".") + ".jpg")) strThumbSource = strPathArtist + itemlabel.Replace(" ", ".") + ".jpg";
                     break;
