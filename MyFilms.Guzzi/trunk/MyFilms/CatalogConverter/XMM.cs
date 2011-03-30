@@ -113,7 +113,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             //string Disks, 
             //string Picture
         }
-        public string ConvertXMM(string source, string folderimage, bool OnlyFile)
+        public string ConvertXMM(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, bool OnlyFile)
         {
           string WStrPath = System.IO.Path.GetDirectoryName(source);
           string destFile = WStrPath + "\\" +

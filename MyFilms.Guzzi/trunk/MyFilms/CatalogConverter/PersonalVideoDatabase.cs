@@ -73,7 +73,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("scenario", "Writer");
             //ProfilerDict.Add("Borrower", "Borrower");
         }
-        public string ConvertPersonalVideoDatabase(string source, string folderimage, bool OnlyFile, string TitleDelim, bool AddTaglineToDescription)
+        public string ConvertPersonalVideoDatabase(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, bool OnlyFile, string TitleDelim, bool AddTaglineToDescription)
         {
             if (TitleDelim.Length == 0)
                 TitleDelim = "\\";

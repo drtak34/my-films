@@ -73,7 +73,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
         }
 
         //public string ConvertXMM(string source, string folderimage, bool SortTitle, bool OnlyFile) // XMM Example
-        public string ConvertXbmcDb(string source, string folderimage, string foldermovies, bool OnlyFile, string TitleDelim)
+        public string ConvertXbmcDb(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, string foldermovies, bool OnlyFile, string TitleDelim)
         {
             if (TitleDelim.Length == 0)
                 TitleDelim = "\\";

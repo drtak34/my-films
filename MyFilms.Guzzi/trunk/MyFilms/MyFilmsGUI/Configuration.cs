@@ -126,6 +126,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrSuppressField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressField", string.Empty);
                 StrSuppressValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressValue", string.Empty);
                 StrECoptionStoreTaglineInDescription = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionStoreTaglineInDescription", false);
+                // Common EC options
+                bool addTagline = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddTagline", false);
+                bool addTags = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddTags", false);
+                bool addCertification = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddCertification", false);
+                bool addWriter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddWriter", false);
+                string DestinationTagline = "";
+                string DestinationTags = "";
+                string DestinationCertification = "";
+                string DestinationWriter = "";
+
+                if (StrFileType != "0")
+                {
+                  if (addTagline)
+                    DestinationTagline = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationTagline", "");
+                  else DestinationTagline = "";
+                  if (addTags)
+                    DestinationTags = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationTags", "");
+                  else DestinationTags = "";
+                  if (addCertification)
+                    DestinationCertification = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationCertification", "");
+                  else DestinationCertification = "";
+                  if (addWriter)
+                    DestinationWriter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationWriter", "");
+                  else DestinationWriter = "";
+                }
                 switch (StrFileType)
                 {
                     case "0":
@@ -144,7 +169,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             string TagField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DVDPTagField", string.Empty);
                             DvdProfiler cv = new DvdProfiler(TagField);
-                            StrFileXml = cv.ConvertProfiler(StrFileXml, StrPathImg, TagField,OnlyFile);
+                            StrFileXml = cv.ConvertProfiler(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, TagField, OnlyFile);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -162,7 +187,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             bool OnlyFile = false;
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             MovieCollector mc = new MovieCollector();
-                            StrFileXml = mc.ConvertMovieCollector(StrFileXml, StrPathImg, OnlyFile, TitleDelim);
+                            StrFileXml = mc.ConvertMovieCollector(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -180,7 +205,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             bool OnlyFile = false;
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             MyMovies mm = new MyMovies();
-                            StrFileXml = mm.ConvertMyMovies(StrFileXml, StrPathImg, OnlyFile);
+                            StrFileXml = mm.ConvertMyMovies(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -198,7 +223,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             bool OnlyFile = false;
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             EaxMovieCatalog emc = new EaxMovieCatalog();
-                            StrFileXml = emc.ConvertEaxMovieCatalog(StrFileXml, StrPathImg, OnlyFile, TitleDelim);
+                            StrFileXml = emc.ConvertEaxMovieCatalog(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -216,7 +241,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             bool OnlyFile = false;
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             XMM xmm = new XMM();
-                            StrFileXml = xmm.ConvertXMM(StrFileXml, StrPathImg, OnlyFile);
+                            StrFileXml = xmm.ConvertXMM(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -234,7 +259,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             bool OnlyFile = false;
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             XbmcNfo nfo = new XbmcNfo();
-                            StrFileXml = nfo.ConvertXbmcNfo(StrFileXml, StrPathImg,StrStorage, OnlyFile, TitleDelim);
+                            StrFileXml = nfo.ConvertXbmcNfo(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, StrStorage, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -252,7 +277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           bool OnlyFile = false;
                           OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                           EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
-                          StrFileXml = emc3.ConvertEaxMovieCatalog3(StrFileXml, StrPathImg, OnlyFile, TitleDelim);
+                          StrFileXml = emc3.ConvertEaxMovieCatalog3(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -270,7 +295,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           bool OnlyFile = false;
                           OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                           PersonalVideoDatabase pvd = new PersonalVideoDatabase();
-                          StrFileXml = pvd.ConvertPersonalVideoDatabase(StrFileXml, StrPathImg, OnlyFile, TitleDelim, StrECoptionStoreTaglineInDescription);
+                          StrFileXml = pvd.ConvertPersonalVideoDatabase(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile, TitleDelim, StrECoptionStoreTaglineInDescription);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);

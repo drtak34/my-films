@@ -60,9 +60,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Tag", TagField);
             ProfilerDict.Add("Tags", "Tags");
         }
-       public string TagFullName;
+        public string TagFullName;
 
-        public string ConvertProfiler(string source, string folderimage, string TagField, bool OnlyFile)
+        public string ConvertProfiler(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, string TagField, bool OnlyFile)
         {
             string WStrPath = System.IO.Path.GetDirectoryName(source);
             string destFile = WStrPath + "\\" + source.Substring(source.LastIndexOf(@"\") + 1, source.Length - source.LastIndexOf(@"\") - 5) + "_tmp.xml";

@@ -72,7 +72,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             //ProfilerDict.Add("Borrower", "Borrower");
 
         }
-        public string ConvertXbmcNfo(string source, string folderimage, string foldermovies, bool OnlyFile, string TitleDelim)
+        public string ConvertXbmcNfo(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, string foldermovies, bool OnlyFile, string TitleDelim)
         {
             if (TitleDelim.Length == 0)
                 TitleDelim = "\\";

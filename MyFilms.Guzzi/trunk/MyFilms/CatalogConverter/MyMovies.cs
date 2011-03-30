@@ -56,7 +56,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Viewed", "Checked");
             //ProfilerDict.Add("Borrower", "Borrower");
         }
-        public string ConvertMyMovies(string source, string folderimage, bool OnlyFile)
+        public string ConvertMyMovies(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, bool OnlyFile)
         {
             string WStrPath = System.IO.Path.GetDirectoryName(source);
             string destFile = WStrPath + "\\" + source.Substring(source.LastIndexOf(@"\") + 1, source.Length - source.LastIndexOf(@"\") - 5) + "_tmp.xml";

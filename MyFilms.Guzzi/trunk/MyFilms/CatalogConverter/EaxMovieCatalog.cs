@@ -74,7 +74,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
           //ProfilerDict.Add("TagLine", "TagLine");
           //ProfilerDict.Add("Trailer", "SourceTrailer");
         }
-        public string ConvertEaxMovieCatalog(string source, string folderimage, bool OnlyFile, string TitleDelim)
+        public string ConvertEaxMovieCatalog(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, bool OnlyFile, string TitleDelim)
         {
             if (TitleDelim.Length == 0)
                 TitleDelim = "\\";
