@@ -58,6 +58,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Date", "Date");
             ProfilerDict.Add("EventType", "Checked");
             ProfilerDict.Add("Tag", TagField);
+            ProfilerDict.Add("Tags", "Tags");
         }
        public string TagFullName;
 
@@ -313,6 +314,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     WriteAntAtribute(destXml, "Picture", Image);
                     if ((TagField.Length > 0) && (TagField != "Category") && (TagFullName.Length > 0))
                         WriteAntAtribute(destXml, "Tag", TagFullName);
+                    
+                    WriteAntAtribute(destXml, "Tags", TagFullName);
+                    
                     WriteAntAtribute(destXml, "Overview", Overview);
                         
                     destXml.WriteEndElement();

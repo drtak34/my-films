@@ -118,7 +118,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 Stritem2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem2", string.Empty);
                 Stritem3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem3", string.Empty);
                 StrIdentLabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentLabel", string.Empty);
-                StrMCCovers = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "MCCovers", "Thumbnails");
                 StrLogos = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Logos", false);
                 StrSuppress = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Suppress", false);
                 StrSupPlayer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressPlayed", false);
@@ -163,7 +162,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             bool OnlyFile = false;
                             OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
                             MovieCollector mc = new MovieCollector();
-                            StrFileXml = mc.ConvertMovieCollector(StrFileXml, StrPathImg, OnlyFile,StrMCCovers,TitleDelim);
+                            StrFileXml = mc.ConvertMovieCollector(StrFileXml, StrPathImg, OnlyFile, TitleDelim);
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
@@ -830,12 +829,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return strFileType; }
             set { strFileType = value; }
-        }
-        private string strMCCovers = string.Empty;
-        public string StrMCCovers
-        {
-            get { return strMCCovers; }
-            set { strMCCovers = value; }
         }
         private string strPathImg = string.Empty;
         public string StrPathImg

@@ -975,11 +975,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 else
                   XmlConfig.RemoveEntry("MyFilms", Config_Name.Text.ToString(), "DVDPTagField");
             }
-            if (Thumbnails.Checked)
-                XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "MCCovers", "Thumbnails");
-            else
-                XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "MCCovers", "Images");
-
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktUsername", cTraktUsername);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktPassWord", cTraktPassword);
           
@@ -1340,10 +1335,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     this.chkAddTags.Checked = true;
                     DVDPTagField.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "");
                 }
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "MCCovers", "") == "Images")
-                Images.Checked = true;
-            else
-                Thumbnails.Checked = true;
             OnlyFile.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", false);
             ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", "");
             ItemSearchGrabberName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberName", "");
@@ -1589,10 +1580,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             NAS_MAC_1.ResetText();
             NAS_MAC_2.ResetText();
             NAS_MAC_3.ResetText();
-            this.chkAddTaglines.Checked = false;
-            this.cbEcMergeWithGenreField.Checked = false;
-            this.chkAddTags.Checked = false;
-            Thumbnails.Checked = true;
+            chkAddTaglines.Checked = false;
+            cbEcMergeWithGenreField.Checked = false;
+            chkAddTags.Checked = false;
             DVDPTagField.ResetText();
             OnlyFile.Checked = false;
             AlwaysDefaultView.Checked = false;
@@ -1995,11 +1985,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntViewItem3.Items.Add("TagLine");
           AntViewItem4.Items.Add("TagLine");
           AntViewItem5.Items.Add("TagLine");
+          AntViewItem1.Items.Add("Tags");
+          AntViewItem2.Items.Add("Tags");
+          AntViewItem3.Items.Add("Tags");
+          AntViewItem4.Items.Add("Tags");
+          AntViewItem5.Items.Add("Tags");
 
           AntFilterItem1.Items.Add("Writer");
           AntFilterItem2.Items.Add("Writer");
           AntFilterItem1.Items.Add("Certification");
           AntFilterItem2.Items.Add("Certification");
+          AntFilterItem1.Items.Add("Tags");
+          AntFilterItem2.Items.Add("Tags");
           AntItem1.Items.Add("Writer");
           AntItem2.Items.Add("Writer");
           AntItem3.Items.Add("Writer");
@@ -2009,6 +2006,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntItem1.Items.Add("TagLine");
           AntItem2.Items.Add("TagLine");
           AntItem3.Items.Add("TagLine");
+          AntItem1.Items.Add("Tags");
+          AntItem2.Items.Add("Tags");
+          AntItem3.Items.Add("Tags");
 
           AntSort1.Items.Add("Writer");
           AntSort2.Items.Add("Writer");
@@ -2021,6 +2021,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntSearchItem2.Items.Add("Certification");
           AntSearchItem1.Items.Add("TagLine");
           AntSearchItem2.Items.Add("TagLine");
+          AntSearchItem1.Items.Add("Tags");
+          AntSearchItem2.Items.Add("Tags");
 
           AntSearchField.Items.Add("Writer");
           AntSearchField.Items.Add("Certification");
@@ -2532,10 +2534,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             break;
                         case 2: // Movie Collector V7.1.4
                             MovieCollector cc2 = new MovieCollector();
-                            if (Thumbnails.Checked)
-                                mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, "Thumbnails", TitleDelim.Text));
-                            else
-                                mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, "Images", TitleDelim.Text));
+                            mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, OnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 3: // MyMovies
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -4694,6 +4693,37 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           // cbPictureHandling = "Full Path"
           // cbPictureHandling = "Relative Path"
           // cbPictureHandling = "Use Folder.jpg"
+        }
+
+        private void btnEditScript_Click(object sender, EventArgs e)
+        {
+          using (Process p = new Process())
+          {
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\MyFilms_Grabber_Interface.exe";
+            psi.UseShellExecute = true;
+            psi.WindowStyle = ProcessWindowStyle.Normal;
+            psi.Arguments = txtGrabber.Text;
+            psi.ErrorDialog = true;
+            if (OSInfo.OSInfo.VistaOrLater())
+            {
+              psi.Verb = "runas";
+            }
+
+            p.StartInfo = psi;
+            LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup with command param '" + psi.Arguments.ToString() + "'");
+            try
+            {
+              p.Start();
+              //p.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug(ex.ToString());
+            }
+            LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup done");
+          }
+
         }
 
     }

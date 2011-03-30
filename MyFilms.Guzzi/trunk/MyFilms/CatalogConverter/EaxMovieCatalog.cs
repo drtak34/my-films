@@ -47,7 +47,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Country", "Country");
             ProfilerDict.Add("Year", "Year");
             ProfilerDict.Add("Length", "Length");
-            ProfilerDict.Add("Actors", "Actors");
+            ProfilerDict.Add("Cast", "Actors");
             ProfilerDict.Add("Category", "Category");
             ProfilerDict.Add("Director", "Director");
             ProfilerDict.Add("Producer", "Producer");
@@ -68,8 +68,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Languages", "Languages");
             ProfilerDict.Add("Subtitles", "Subtitles");
             ProfilerDict.Add("Writer", "Writer");
-            ProfilerDict.Add("Certification", "Certification");
-            ProfilerDict.Add("Tags", "Tags");
+            ProfilerDict.Add("MPAA", "Certification");
+            ProfilerDict.Add("Tag", "Tags");
           //ProfilerDict.Add("Borrower", "Borrower");
           //ProfilerDict.Add("TagLine", "TagLine");
           //ProfilerDict.Add("Trailer", "SourceTrailer");
@@ -211,11 +211,11 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.Attributes["Writer"] != null)
                       WriteAntAtribute(destXml, "Writer", nodeDVD.Attributes["Writer"].Value);
                     if (nodeDVD.Attributes["MPAA"] != null)
-                      WriteAntAtribute(destXml, "Certification", nodeDVD.Attributes["MPAA"].Value);
-                    if (nodeDVD.Attributes["Tags"] != null)
-                      WriteAntAtribute(destXml, "Tags", nodeDVD.Attributes["Tags"].Value);
+                      WriteAntAtribute(destXml, "MPAA", nodeDVD.Attributes["MPAA"].Value);
+                    if (nodeDVD.Attributes["Tag"] != null)
+                      WriteAntAtribute(destXml, "Tag", nodeDVD.Attributes["Tag"].Value);
                     if (nodeDVD.Attributes["Cast"] != null)
-                        WriteAntAtribute(destXml, "Actors", nodeDVD.Attributes["Cast"].Value);
+                      WriteAntAtribute(destXml, "Cast", nodeDVD.Attributes["Cast"].Value);
                     if (nodeDVD.Attributes["Picture"] != null)
                         WriteAntAtribute(destXml, "Picture", nodeDVD.Attributes["Picture"].Value);
                     if (nodeDVD.Attributes["Format"] != null)

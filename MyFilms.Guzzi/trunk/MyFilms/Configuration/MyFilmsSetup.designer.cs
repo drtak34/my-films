@@ -105,9 +105,7 @@
           this.label_VersionNumber = new System.Windows.Forms.Label();
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
-          this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkAddTags = new System.Windows.Forms.CheckBox();
           this.cbEcMergeWithGenreField = new System.Windows.Forms.CheckBox();
@@ -135,7 +133,6 @@
           this.check_WOL_enable = new System.Windows.Forms.CheckBox();
           this.NAS_Name_1 = new System.Windows.Forms.TextBox();
           this.label36 = new System.Windows.Forms.Label();
-          this.SPicture = new System.Windows.Forms.PictureBox();
           this.SLogo_Type = new System.Windows.Forms.ComboBox();
           this.chkLogos = new System.Windows.Forms.CheckBox();
           this.LogoView = new System.Windows.Forms.ListView();
@@ -200,6 +197,12 @@
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
           this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
+          this.groupBox6 = new System.Windows.Forms.GroupBox();
+          this.comboBox5 = new System.Windows.Forms.ComboBox();
+          this.label50 = new System.Windows.Forms.Label();
+          this.label49 = new System.Windows.Forms.Label();
+          this.comboBox3 = new System.Windows.Forms.ComboBox();
+          this.comboBox4 = new System.Windows.Forms.ComboBox();
           this.lblSearchGrabberName = new System.Windows.Forms.Label();
           this.ItemSearchGrabberName = new System.Windows.Forms.ComboBox();
           this.chkGrabber_ChooseScript = new System.Windows.Forms.CheckBox();
@@ -226,7 +229,6 @@
           this.Option = new System.Windows.Forms.ColumnHeader();
           this.Value = new System.Windows.Forms.ColumnHeader();
           this.btnCreateAMCDesktopIcon = new System.Windows.Forms.Button();
-          this.btnLaunchAMCupdater = new System.Windows.Forms.Button();
           this.chkAMCUpd = new System.Windows.Forms.CheckBox();
           this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
           this.chkSuppress = new System.Windows.Forms.CheckBox();
@@ -437,12 +439,7 @@
           this.comboBox1 = new System.Windows.Forms.ComboBox();
           this.comboBox2 = new System.Windows.Forms.ComboBox();
           this.textBox2 = new System.Windows.Forms.TextBox();
-          this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.Tab_ExternalCatalogs = new System.Windows.Forms.TabPage();
-          this.groupBox_MovieCollector = new System.Windows.Forms.GroupBox();
-          this.groupBox17 = new System.Windows.Forms.GroupBox();
-          this.Images = new System.Windows.Forms.RadioButton();
-          this.Thumbnails = new System.Windows.Forms.RadioButton();
           this.groupBox_DVDprofiler = new System.Windows.Forms.GroupBox();
           this.groupBox13 = new System.Windows.Forms.GroupBox();
           this.OnlyFile = new System.Windows.Forms.CheckBox();
@@ -474,15 +471,22 @@
           this.General = new System.Windows.Forms.TabControl();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
+          this.btnEditScript = new System.Windows.Forms.Button();
+          this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
+          this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.btnLaunchAMCupdater = new System.Windows.Forms.Button();
+          this.SPicture = new System.Windows.Forms.PictureBox();
+          this.traktConfiguration1 = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.label51 = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.Fanart.SuspendLayout();
           this.groupBox22.SuspendLayout();
           this.groupBox1.SuspendLayout();
           this.groupBox_ArtistImages.SuspendLayout();
           this.groupBox_GrabberOptions.SuspendLayout();
+          this.groupBox6.SuspendLayout();
           this.groupBox_AMCupdater.SuspendLayout();
           this.groupBox_AMCupdaterScheduer.SuspendLayout();
           this.groupBox_AMCupdater_ExternalApplication.SuspendLayout();
@@ -515,10 +519,7 @@
           this.groupBox3.SuspendLayout();
           this.groupBox5.SuspendLayout();
           this.groupBox4.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           this.Tab_ExternalCatalogs.SuspendLayout();
-          this.groupBox_MovieCollector.SuspendLayout();
-          this.groupBox17.SuspendLayout();
           this.groupBox_DVDprofiler.SuspendLayout();
           this.groupBox13.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
@@ -527,6 +528,8 @@
           this.Tab_AMCupdater.SuspendLayout();
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -637,20 +640,6 @@
           this.ToolTip1.SetToolTip(this.linkLabelMyFilmsWiki, "Opens the MyFilms Wiki in your browser...");
           this.linkLabelMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelMyFilmsWiki_LinkClicked);
           // 
-          // btnLaunchAMCglobal
-          // 
-          this.btnLaunchAMCglobal.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
-          this.btnLaunchAMCglobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCglobal.Location = new System.Drawing.Point(45, 465);
-          this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";
-          this.btnLaunchAMCglobal.Size = new System.Drawing.Size(152, 31);
-          this.btnLaunchAMCglobal.TabIndex = 77;
-          this.btnLaunchAMCglobal.Text = "Launch AMC Updater";
-          this.btnLaunchAMCglobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-          this.ToolTip1.SetToolTip(this.btnLaunchAMCglobal, resources.GetString("btnLaunchAMCglobal.ToolTip"));
-          this.btnLaunchAMCglobal.UseVisualStyleBackColor = true;
-          this.btnLaunchAMCglobal.Click += new System.EventHandler(this.btnLaunchAMCglobal_Click);
-          // 
           // Tab_Trakt
           // 
           this.Tab_Trakt.Controls.Add(this.traktConfiguration1);
@@ -664,24 +653,14 @@
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
           // 
-          // traktConfiguration1
-          // 
-          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration1.Name = "traktConfiguration1";
-          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration1.TabIndex = 0;
-          // 
           // groupBox9
           // 
           this.groupBox9.Controls.Add(this.chkAddTags);
           this.groupBox9.Controls.Add(this.cbEcMergeWithGenreField);
           this.groupBox9.Controls.Add(this.DVDPTagField);
-          this.groupBox9.Location = new System.Drawing.Point(10, 213);
+          this.groupBox9.Location = new System.Drawing.Point(13, 86);
           this.groupBox9.Name = "groupBox9";
-          this.groupBox9.Size = new System.Drawing.Size(327, 86);
+          this.groupBox9.Size = new System.Drawing.Size(307, 86);
           this.groupBox9.TabIndex = 0;
           this.groupBox9.TabStop = false;
           this.groupBox9.Text = "Tags ...";
@@ -713,7 +692,7 @@
           // DVDPTagField
           // 
           this.DVDPTagField.FormattingEnabled = true;
-          this.DVDPTagField.Location = new System.Drawing.Point(169, 45);
+          this.DVDPTagField.Location = new System.Drawing.Point(157, 45);
           this.DVDPTagField.Name = "DVDPTagField";
           this.DVDPTagField.Size = new System.Drawing.Size(134, 21);
           this.DVDPTagField.TabIndex = 11;
@@ -963,20 +942,6 @@
           this.label36.Text = "Supported Servers (make sure, it supports WOL)";
           this.ToolTip1.SetToolTip(this.label36, "MyFilms will autodetect server name from file path, \r\nif UNC notation is used and" +
                   " server is defined here.");
-          // 
-          // SPicture
-          // 
-          this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
-          this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-          this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-          this.SPicture.Enabled = false;
-          this.SPicture.Location = new System.Drawing.Point(498, 272);
-          this.SPicture.Name = "SPicture";
-          this.SPicture.Size = new System.Drawing.Size(79, 58);
-          this.SPicture.TabIndex = 85;
-          this.SPicture.TabStop = false;
-          this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
-          this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
           // 
           // SLogo_Type
           // 
@@ -1645,6 +1610,8 @@
           // 
           // groupBox_GrabberOptions
           // 
+          this.groupBox_GrabberOptions.Controls.Add(this.btnEditScript);
+          this.groupBox_GrabberOptions.Controls.Add(this.groupBox6);
           this.groupBox_GrabberOptions.Controls.Add(this.lblSearchGrabberName);
           this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberName);
           this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_ChooseScript);
@@ -1660,10 +1627,75 @@
           this.groupBox_GrabberOptions.Text = "Movie Detail Internet Updates";
           this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
           // 
+          // groupBox6
+          // 
+          this.groupBox6.Controls.Add(this.label51);
+          this.groupBox6.Controls.Add(this.comboBox5);
+          this.groupBox6.Controls.Add(this.label50);
+          this.groupBox6.Controls.Add(this.label49);
+          this.groupBox6.Controls.Add(this.comboBox3);
+          this.groupBox6.Controls.Add(this.comboBox4);
+          this.groupBox6.Location = new System.Drawing.Point(399, 9);
+          this.groupBox6.Name = "groupBox6";
+          this.groupBox6.Size = new System.Drawing.Size(330, 77);
+          this.groupBox6.TabIndex = 65;
+          this.groupBox6.TabStop = false;
+          this.groupBox6.Text = "MyFilms Grabber Override Options ...";
+          this.ToolTip1.SetToolTip(this.groupBox6, resources.GetString("groupBox6.ToolTip"));
+          // 
+          // comboBox5
+          // 
+          this.comboBox5.FormattingEnabled = true;
+          this.comboBox5.Location = new System.Drawing.Point(276, 42);
+          this.comboBox5.Name = "comboBox5";
+          this.comboBox5.Size = new System.Drawing.Size(45, 21);
+          this.comboBox5.TabIndex = 67;
+          // 
+          // label50
+          // 
+          this.label50.AutoSize = true;
+          this.label50.Location = new System.Drawing.Point(6, 21);
+          this.label50.Name = "label50";
+          this.label50.Size = new System.Drawing.Size(115, 39);
+          this.label50.TabIndex = 66;
+          this.label50.Text = "Preferred Language(s) \r\nfor Translated Title(s)\r\nand Certification";
+          // 
+          // label49
+          // 
+          this.label49.AutoSize = true;
+          this.label49.Location = new System.Drawing.Point(191, 22);
+          this.label49.Name = "label49";
+          this.label49.Size = new System.Drawing.Size(79, 13);
+          this.label49.TabIndex = 65;
+          this.label49.Text = "Limit # Persons";
+          // 
+          // comboBox3
+          // 
+          this.comboBox3.FormattingEnabled = true;
+          this.comboBox3.Location = new System.Drawing.Point(276, 19);
+          this.comboBox3.Name = "comboBox3";
+          this.comboBox3.Size = new System.Drawing.Size(45, 21);
+          this.comboBox3.TabIndex = 63;
+          this.ToolTip1.SetToolTip(this.comboBox3, "Limits the number of person names grabbed and.\r\nThis settings applies to all fiel" +
+                  "ds that grab person names, \r\nlike \r\nactors, producers, writers, directors.");
+          // 
+          // comboBox4
+          // 
+          this.comboBox4.FormattingEnabled = true;
+          this.comboBox4.Items.AddRange(new object[] {
+            "en",
+            "de",
+            "fr",
+            "it"});
+          this.comboBox4.Location = new System.Drawing.Point(124, 30);
+          this.comboBox4.Name = "comboBox4";
+          this.comboBox4.Size = new System.Drawing.Size(49, 21);
+          this.comboBox4.TabIndex = 64;
+          // 
           // lblSearchGrabberName
           // 
           this.lblSearchGrabberName.AutoSize = true;
-          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 53);
+          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 42);
           this.lblSearchGrabberName.Name = "lblSearchGrabberName";
           this.lblSearchGrabberName.Size = new System.Drawing.Size(124, 13);
           this.lblSearchGrabberName.TabIndex = 62;
@@ -1676,15 +1708,15 @@
             "OriginalTitle",
             "TranslatedTitle",
             "FormattedTitle"});
-          this.ItemSearchGrabberName.Location = new System.Drawing.Point(173, 50);
+          this.ItemSearchGrabberName.Location = new System.Drawing.Point(145, 39);
           this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
-          this.ItemSearchGrabberName.Size = new System.Drawing.Size(183, 21);
+          this.ItemSearchGrabberName.Size = new System.Drawing.Size(239, 21);
           this.ItemSearchGrabberName.TabIndex = 61;
           // 
           // chkGrabber_ChooseScript
           // 
           this.chkGrabber_ChooseScript.AutoSize = true;
-          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(463, 29);
+          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(6, 66);
           this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
           this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(193, 17);
           this.chkGrabber_ChooseScript.TabIndex = 60;
@@ -1695,7 +1727,7 @@
           // chkGrabber_Always
           // 
           this.chkGrabber_Always.AutoSize = true;
-          this.chkGrabber_Always.Location = new System.Drawing.Point(463, 50);
+          this.chkGrabber_Always.Location = new System.Drawing.Point(205, 67);
           this.chkGrabber_Always.Name = "chkGrabber_Always";
           this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
           this.chkGrabber_Always.TabIndex = 56;
@@ -1705,30 +1737,31 @@
           // 
           // btnGrabber
           // 
-          this.btnGrabber.Location = new System.Drawing.Point(370, 25);
+          this.btnGrabber.Location = new System.Drawing.Point(251, 14);
           this.btnGrabber.Name = "btnGrabber";
           this.btnGrabber.Size = new System.Drawing.Size(32, 20);
           this.btnGrabber.TabIndex = 55;
           this.btnGrabber.Text = "...";
+          this.ToolTip1.SetToolTip(this.btnGrabber, "Browse and choose the script you want MyFilms \r\nto use as default.");
           this.btnGrabber.UseVisualStyleBackColor = true;
           this.btnGrabber.Click += new System.EventHandler(this.btnGrabber_Click);
           // 
           // txtGrabber
           // 
-          this.txtGrabber.Location = new System.Drawing.Point(173, 25);
+          this.txtGrabber.Location = new System.Drawing.Point(145, 14);
           this.txtGrabber.Name = "txtGrabber";
-          this.txtGrabber.Size = new System.Drawing.Size(183, 20);
+          this.txtGrabber.Size = new System.Drawing.Size(100, 20);
           this.txtGrabber.TabIndex = 54;
           this.ToolTip1.SetToolTip(this.txtGrabber, resources.GetString("txtGrabber.ToolTip"));
           // 
           // label27
           // 
           this.label27.AutoSize = true;
-          this.label27.Location = new System.Drawing.Point(16, 28);
+          this.label27.Location = new System.Drawing.Point(16, 17);
           this.label27.Name = "label27";
-          this.label27.Size = new System.Drawing.Size(151, 13);
+          this.label27.Size = new System.Drawing.Size(112, 13);
           this.label27.TabIndex = 53;
-          this.label27.Text = "Default Internet Grabber Script";
+          this.label27.Text = "Default Grabber Script";
           // 
           // groupBox_AMCupdater
           // 
@@ -1942,19 +1975,6 @@
                   "tout first starting MyFilms setup.");
           this.btnCreateAMCDesktopIcon.UseVisualStyleBackColor = true;
           this.btnCreateAMCDesktopIcon.Click += new System.EventHandler(this.btnCreateAMCDesktopIcon_Click);
-          // 
-          // btnLaunchAMCupdater
-          // 
-          this.btnLaunchAMCupdater.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
-          this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 54);
-          this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
-          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 41);
-          this.btnLaunchAMCupdater.TabIndex = 76;
-          this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
-          this.ToolTip1.SetToolTip(this.btnLaunchAMCupdater, "Launch AMCupdater with Configuration specific settings, as you created them.");
-          this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
-          this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
           // 
           // chkAMCUpd
           // 
@@ -2931,9 +2951,9 @@
           this.chkUseListviewForGroups.AutoSize = true;
           this.chkUseListviewForGroups.Location = new System.Drawing.Point(10, 107);
           this.chkUseListviewForGroups.Name = "chkUseListviewForGroups";
-          this.chkUseListviewForGroups.Size = new System.Drawing.Size(202, 17);
+          this.chkUseListviewForGroups.Size = new System.Drawing.Size(211, 17);
           this.chkUseListviewForGroups.TabIndex = 81;
-          this.chkUseListviewForGroups.Text = "Always use List View for Group Views";
+          this.chkUseListviewForGroups.Text = "Always use List Layout for Group Views";
           this.ToolTip1.SetToolTip(this.chkUseListviewForGroups, "If checked, MyFilms will always use list view for group views,\r\nlike \"years\", \"co" +
                   "untry\" etc.\r\nIf unchecked, MyFilms will use same layout as used for films.");
           this.chkUseListviewForGroups.UseVisualStyleBackColor = true;
@@ -3957,13 +3977,12 @@
           this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox3);
           this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox5);
           this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox4);
-          this.groupBoxExtendedFieldHandling.Controls.Add(this.groupBox9);
           this.groupBoxExtendedFieldHandling.Location = new System.Drawing.Point(19, 17);
           this.groupBoxExtendedFieldHandling.Name = "groupBoxExtendedFieldHandling";
-          this.groupBoxExtendedFieldHandling.Size = new System.Drawing.Size(355, 312);
+          this.groupBoxExtendedFieldHandling.Size = new System.Drawing.Size(355, 218);
           this.groupBoxExtendedFieldHandling.TabIndex = 30;
           this.groupBoxExtendedFieldHandling.TabStop = false;
-          this.groupBoxExtendedFieldHandling.Text = "Extended Field Handling ...";
+          this.groupBoxExtendedFieldHandling.Text = "Import Options ...";
           this.ToolTip1.SetToolTip(this.groupBoxExtendedFieldHandling, resources.GetString("groupBoxExtendedFieldHandling.ToolTip"));
           // 
           // groupBox3
@@ -3980,6 +3999,11 @@
           // WriterAddField
           // 
           this.WriterAddField.FormattingEnabled = true;
+          this.WriterAddField.Items.AddRange(new object[] {
+            "Producer",
+            "Director",
+            "Description",
+            "Comments"});
           this.WriterAddField.Location = new System.Drawing.Point(169, 25);
           this.WriterAddField.Name = "WriterAddField";
           this.WriterAddField.Size = new System.Drawing.Size(134, 21);
@@ -4009,6 +4033,9 @@
           // CertificationAddField
           // 
           this.CertificationAddField.FormattingEnabled = true;
+          this.CertificationAddField.Items.AddRange(new object[] {
+            "Description",
+            "Comments"});
           this.CertificationAddField.Location = new System.Drawing.Point(169, 28);
           this.CertificationAddField.Name = "CertificationAddField";
           this.CertificationAddField.Size = new System.Drawing.Size(134, 21);
@@ -4038,6 +4065,9 @@
           // TaglinesAddField
           // 
           this.TaglinesAddField.FormattingEnabled = true;
+          this.TaglinesAddField.Items.AddRange(new object[] {
+            "Description",
+            "Comments"});
           this.TaglinesAddField.Location = new System.Drawing.Point(169, 24);
           this.TaglinesAddField.Name = "TaglinesAddField";
           this.TaglinesAddField.Size = new System.Drawing.Size(134, 21);
@@ -4048,9 +4078,9 @@
           this.chkAddTaglines.AutoSize = true;
           this.chkAddTaglines.Location = new System.Drawing.Point(23, 26);
           this.chkAddTaglines.Name = "chkAddTaglines";
-          this.chkAddTaglines.Size = new System.Drawing.Size(138, 17);
+          this.chkAddTaglines.Size = new System.Drawing.Size(94, 17);
           this.chkAddTaglines.TabIndex = 0;
-          this.chkAddTaglines.Text = "Add to Description Field";
+          this.chkAddTaglines.Text = "Add to Field ...";
           this.chkAddTaglines.UseVisualStyleBackColor = true;
           // 
           // AntFilterMinRating
@@ -4178,20 +4208,9 @@
           this.textBox2.Size = new System.Drawing.Size(170, 20);
           this.textBox2.TabIndex = 17;
           // 
-          // pictureBoxMyFilms
-          // 
-          this.pictureBoxMyFilms.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMyFilms.Image")));
-          this.pictureBoxMyFilms.Location = new System.Drawing.Point(12, 7);
-          this.pictureBoxMyFilms.Name = "pictureBoxMyFilms";
-          this.pictureBoxMyFilms.Size = new System.Drawing.Size(62, 65);
-          this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-          this.pictureBoxMyFilms.TabIndex = 75;
-          this.pictureBoxMyFilms.TabStop = false;
-          // 
           // Tab_ExternalCatalogs
           // 
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBoxExtendedFieldHandling);
-          this.Tab_ExternalCatalogs.Controls.Add(this.groupBox_MovieCollector);
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBox_DVDprofiler);
           this.Tab_ExternalCatalogs.Location = new System.Drawing.Point(4, 22);
           this.Tab_ExternalCatalogs.Name = "Tab_ExternalCatalogs";
@@ -4202,55 +4221,13 @@
           this.Tab_ExternalCatalogs.ToolTipText = "Options for external catalogs (only applies if not using ANT movie catalog)";
           this.Tab_ExternalCatalogs.UseVisualStyleBackColor = true;
           // 
-          // groupBox_MovieCollector
-          // 
-          this.groupBox_MovieCollector.Controls.Add(this.groupBox17);
-          this.groupBox_MovieCollector.Location = new System.Drawing.Point(392, 103);
-          this.groupBox_MovieCollector.Name = "groupBox_MovieCollector";
-          this.groupBox_MovieCollector.Size = new System.Drawing.Size(335, 119);
-          this.groupBox_MovieCollector.TabIndex = 29;
-          this.groupBox_MovieCollector.TabStop = false;
-          this.groupBox_MovieCollector.Text = "Movie Collector";
-          // 
-          // groupBox17
-          // 
-          this.groupBox17.Controls.Add(this.Images);
-          this.groupBox17.Controls.Add(this.Thumbnails);
-          this.groupBox17.Location = new System.Drawing.Point(11, 18);
-          this.groupBox17.Name = "groupBox17";
-          this.groupBox17.Size = new System.Drawing.Size(308, 91);
-          this.groupBox17.TabIndex = 3;
-          this.groupBox17.TabStop = false;
-          this.groupBox17.Text = "Covers";
-          // 
-          // Images
-          // 
-          this.Images.AutoSize = true;
-          this.Images.Location = new System.Drawing.Point(24, 47);
-          this.Images.Name = "Images";
-          this.Images.Size = new System.Drawing.Size(168, 17);
-          this.Images.TabIndex = 3;
-          this.Images.TabStop = true;
-          this.Images.Text = "Use\' Images\' Folder for Covers";
-          this.Images.UseVisualStyleBackColor = true;
-          // 
-          // Thumbnails
-          // 
-          this.Thumbnails.AutoSize = true;
-          this.Thumbnails.Location = new System.Drawing.Point(24, 22);
-          this.Thumbnails.Name = "Thumbnails";
-          this.Thumbnails.Size = new System.Drawing.Size(188, 17);
-          this.Thumbnails.TabIndex = 2;
-          this.Thumbnails.TabStop = true;
-          this.Thumbnails.Text = "Use \'Thumbnails\' Folder for Covers";
-          this.Thumbnails.UseVisualStyleBackColor = true;
-          // 
           // groupBox_DVDprofiler
           // 
           this.groupBox_DVDprofiler.Controls.Add(this.groupBox13);
+          this.groupBox_DVDprofiler.Controls.Add(this.groupBox9);
           this.groupBox_DVDprofiler.Location = new System.Drawing.Point(392, 17);
           this.groupBox_DVDprofiler.Name = "groupBox_DVDprofiler";
-          this.groupBox_DVDprofiler.Size = new System.Drawing.Size(335, 80);
+          this.groupBox_DVDprofiler.Size = new System.Drawing.Size(335, 197);
           this.groupBox_DVDprofiler.TabIndex = 28;
           this.groupBox_DVDprofiler.TabStop = false;
           this.groupBox_DVDprofiler.Text = "DVDProfiler";
@@ -4263,7 +4240,7 @@
           this.groupBox13.Size = new System.Drawing.Size(307, 49);
           this.groupBox13.TabIndex = 2;
           this.groupBox13.TabStop = false;
-          this.groupBox13.Text = "Notes Field";
+          this.groupBox13.Text = "Map Notes field to Source";
           // 
           // OnlyFile
           // 
@@ -4629,6 +4606,88 @@
           this.lblNbConfig.TabIndex = 81;
           this.lblNbConfig.Text = "Configs";
           // 
+          // btnEditScript
+          // 
+          this.btnEditScript.Location = new System.Drawing.Point(289, 14);
+          this.btnEditScript.Name = "btnEditScript";
+          this.btnEditScript.Size = new System.Drawing.Size(95, 20);
+          this.btnEditScript.TabIndex = 66;
+          this.btnEditScript.Text = "Grabber Options";
+          this.ToolTip1.SetToolTip(this.btnEditScript, "This launches the MyFilms Grabber Interface.\r\nYou can set user defined options or" +
+                  " switch to expert mode to \r\nmodify the grabber script in detail.");
+          this.btnEditScript.UseVisualStyleBackColor = true;
+          this.btnEditScript.Click += new System.EventHandler(this.btnEditScript_Click);
+          // 
+          // btnLaunchAMCglobal
+          // 
+          this.btnLaunchAMCglobal.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCglobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+          this.btnLaunchAMCglobal.Location = new System.Drawing.Point(45, 465);
+          this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";
+          this.btnLaunchAMCglobal.Size = new System.Drawing.Size(152, 31);
+          this.btnLaunchAMCglobal.TabIndex = 77;
+          this.btnLaunchAMCglobal.Text = "Launch AMC Updater";
+          this.btnLaunchAMCglobal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+          this.ToolTip1.SetToolTip(this.btnLaunchAMCglobal, resources.GetString("btnLaunchAMCglobal.ToolTip"));
+          this.btnLaunchAMCglobal.UseVisualStyleBackColor = true;
+          this.btnLaunchAMCglobal.Click += new System.EventHandler(this.btnLaunchAMCglobal_Click);
+          // 
+          // pictureBoxMyFilms
+          // 
+          this.pictureBoxMyFilms.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMyFilms.Image")));
+          this.pictureBoxMyFilms.Location = new System.Drawing.Point(12, 7);
+          this.pictureBoxMyFilms.Name = "pictureBoxMyFilms";
+          this.pictureBoxMyFilms.Size = new System.Drawing.Size(62, 65);
+          this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+          this.pictureBoxMyFilms.TabIndex = 75;
+          this.pictureBoxMyFilms.TabStop = false;
+          // 
+          // btnLaunchAMCupdater
+          // 
+          this.btnLaunchAMCupdater.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 54);
+          this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
+          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 41);
+          this.btnLaunchAMCupdater.TabIndex = 76;
+          this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
+          this.ToolTip1.SetToolTip(this.btnLaunchAMCupdater, "Launch AMCupdater with Configuration specific settings, as you created them.");
+          this.btnLaunchAMCupdater.UseVisualStyleBackColor = true;
+          this.btnLaunchAMCupdater.Click += new System.EventHandler(this.btnLaunchAMCupdater_Click);
+          // 
+          // SPicture
+          // 
+          this.SPicture.BackColor = System.Drawing.Color.SteelBlue;
+          this.SPicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+          this.SPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          this.SPicture.Enabled = false;
+          this.SPicture.Location = new System.Drawing.Point(498, 272);
+          this.SPicture.Name = "SPicture";
+          this.SPicture.Size = new System.Drawing.Size(79, 58);
+          this.SPicture.TabIndex = 85;
+          this.SPicture.TabStop = false;
+          this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
+          this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
+          // 
+          // traktConfiguration1
+          // 
+          this.traktConfiguration1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration1.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration1.Name = "traktConfiguration1";
+          this.traktConfiguration1.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration1.TabIndex = 0;
+          // 
+          // label51
+          // 
+          this.label51.AutoSize = true;
+          this.label51.Location = new System.Drawing.Point(191, 45);
+          this.label51.Name = "label51";
+          this.label51.Size = new System.Drawing.Size(66, 13);
+          this.label51.TabIndex = 68;
+          this.label51.Text = "Limit # Titles";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4662,7 +4721,6 @@
           this.groupBox9.PerformLayout();
           this.groupBox25.ResumeLayout(false);
           this.groupBox25.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
           this.Fanart.ResumeLayout(false);
           this.Fanart.PerformLayout();
           this.groupBox22.ResumeLayout(false);
@@ -4673,6 +4731,8 @@
           this.groupBox_ArtistImages.PerformLayout();
           this.groupBox_GrabberOptions.ResumeLayout(false);
           this.groupBox_GrabberOptions.PerformLayout();
+          this.groupBox6.ResumeLayout(false);
+          this.groupBox6.PerformLayout();
           this.groupBox_AMCupdater.ResumeLayout(false);
           this.groupBox_AMCupdater.PerformLayout();
           this.groupBox_AMCupdaterScheduer.ResumeLayout(false);
@@ -4732,11 +4792,7 @@
           this.groupBox5.PerformLayout();
           this.groupBox4.ResumeLayout(false);
           this.groupBox4.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           this.Tab_ExternalCatalogs.ResumeLayout(false);
-          this.groupBox_MovieCollector.ResumeLayout(false);
-          this.groupBox17.ResumeLayout(false);
-          this.groupBox17.PerformLayout();
           this.groupBox_DVDprofiler.ResumeLayout(false);
           this.groupBox13.ResumeLayout(false);
           this.groupBox13.PerformLayout();
@@ -4747,6 +4803,8 @@
           this.Tab_AMCupdater.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
           this.General.ResumeLayout(false);
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -4784,10 +4842,6 @@
         private TabPage Tab_Trakt;
         private TraktConfiguration traktConfiguration1;
         private TabPage Tab_ExternalCatalogs;
-        private GroupBox groupBox_MovieCollector;
-        private GroupBox groupBox17;
-        private RadioButton Images;
-        private RadioButton Thumbnails;
         private GroupBox groupBox9;
         private CheckBox chkAddTags;
         private CheckBox cbEcMergeWithGenreField;
@@ -5131,5 +5185,13 @@
         private GroupBox groupBox3;
         private ComboBox WriterAddField;
         private CheckBox chkAddWriter;
+        private ComboBox comboBox4;
+        private ComboBox comboBox3;
+        private GroupBox groupBox6;
+        private Label label49;
+        private Label label50;
+        private ComboBox comboBox5;
+        private Button btnEditScript;
+        private Label label51;
     }
 }

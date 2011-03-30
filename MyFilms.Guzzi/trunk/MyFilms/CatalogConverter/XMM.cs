@@ -393,8 +393,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
               }
 
             }
-            catch
+            catch //(Exception ex)
             {
+              //LogMyFilms.Debug("MF: XMM Importer: Failed to import Catalog: " + ex.Message);
               return string.Empty;
             }
             destXml.WriteEndElement();

@@ -57,7 +57,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Viewed", "Checked");
             ProfilerDict.Add("Borrower", "Borrower");
         }
-        public string ConvertMovieCollector(string source, string folderimage, bool OnlyFile,string WMCCovers,string TitleDelim)
+        public string ConvertMovieCollector(string source, string folderimage, bool OnlyFile, string TitleDelim)
         {
             if (TitleDelim.Length == 0)
                 TitleDelim = "\\";
@@ -160,16 +160,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                             }
                     }
                     string Image = String.Empty;
-                    if (WMCCovers == "Thumbnails")
-                    {
-                        if (nodeDVD.SelectSingleNode("thumbfilepath") != null)
-                            Image = nodeDVD.SelectSingleNode("thumbfilepath").InnerText;
-                    }
-                    else
-                    {
-                        if (nodeDVD.SelectSingleNode("coverfront") != null)
-                            Image = nodeDVD.SelectSingleNode("coverfront").InnerText;
-                    }
+                    if (nodeDVD.SelectSingleNode("coverfront") != null)
+                        Image = nodeDVD.SelectSingleNode("coverfront").InnerText;
 
                     string Rating = string.Empty;
                     decimal wrating = 0;

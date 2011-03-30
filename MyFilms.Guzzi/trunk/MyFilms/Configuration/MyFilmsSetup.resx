@@ -137,12 +137,6 @@ You cann't select that option if a Default Configuration is defined
 If no default config defined and many configs, the configuration to load will be asked the first time
 After, the plugin load the last configuration used if no default defined</value>
   </data>
-  <data name="btnLaunchAMCglobal.ToolTip" xml:space="preserve">
-    <value>Starts AMCupdater (external application) with the created configuration file.
-With AMC Updater you can interactively update your DB with internetdata, scan directories for files to 
-add them to your DB and show your catalog and edit the content.
-It can run independant from MyFilms.</value>
-  </data>
   <data name="SLogo_Type.ToolTip" xml:space="preserve">
     <value>There are two fields referenced in the skin files to display logos - ID2001 and ID2002. 
 You can nominate which logos that you want to see in the first skin field or in the second skin field by referring to these ID numbers.
@@ -287,6 +281,16 @@ don't valid it. In that case, you'll get a menu to choose the right movie.
 
 You can change those options from MyFilms GUI (global settings) also.
 
+</value>
+  </data>
+  <data name="groupBox6.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB scripts support all options listed here.
+If you set no values, the default settings of the grabber
+will be used.
+The default settings can be changed by editing the grabber script 
+in the "MyFilms Grabber Interface" ("Edit script").
 </value>
   </data>
   <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
@@ -591,9 +595,9 @@ Will show "Moviecollection" with 3 items in it.</value>
   </data>
   <data name="groupBoxExtendedFieldHandling.ToolTip" xml:space="preserve">
     <value>MyFilms internally supports more than just the ANT-MovieCatalog fields.
-However, you might prefer to map those fields to standard ANT fields for some reasons:
-- Your skin only shows standard ANT fields (external catalogs)
-- You want to import data of the extended fields into ANT foelds to stay compatible with AMC (AMC)</value>
+However, you might prefer to add those fields to standard ANT fields for display reasons:
+Your skin only shows standard ANT fields (external catalogs) and you need the userdefined items 
+to display other fields in the skin.</value>
   </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 17</value>
@@ -601,6 +605,12 @@ However, you might prefer to map those fields to standard ANT fields for some re
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
+  <data name="btnLaunchAMCglobal.ToolTip" xml:space="preserve">
+    <value>Starts AMCupdater (external application) with the created configuration file.
+With AMC Updater you can interactively update your DB with internetdata, scan directories for files to 
+add them to your DB and show your catalog and edit the content.
+It can run independant from MyFilms.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxMyFilms.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
