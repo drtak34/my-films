@@ -476,9 +476,10 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.ECMergeDestinationFieldWriter = new System.Windows.Forms.ComboBox();
           this.chkAddWriter = new System.Windows.Forms.CheckBox();
+          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.buttonDeleteTmpCatalog = new System.Windows.Forms.Button();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -4262,6 +4263,7 @@
           // 
           // Tab_ExternalCatalogs
           // 
+          this.Tab_ExternalCatalogs.Controls.Add(this.buttonDeleteTmpCatalog);
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBoxExtendedFieldHandling);
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBox_DVDprofiler);
           this.Tab_ExternalCatalogs.Location = new System.Drawing.Point(4, 22);
@@ -4668,16 +4670,6 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // traktConfiguration
-          // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
-          // 
           // ECMergeDestinationFieldWriter
           // 
           this.ECMergeDestinationFieldWriter.FormattingEnabled = true;
@@ -4701,6 +4693,27 @@
           this.chkAddWriter.Text = "Add Writer ...";
           this.chkAddWriter.UseVisualStyleBackColor = true;
           this.chkAddWriter.Visible = false;
+          // 
+          // traktConfiguration
+          // 
+          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration.Name = "traktConfiguration";
+          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration.TabIndex = 0;
+          // 
+          // buttonDeleteTmpCatalog
+          // 
+          this.buttonDeleteTmpCatalog.Location = new System.Drawing.Point(58, 264);
+          this.buttonDeleteTmpCatalog.Name = "buttonDeleteTmpCatalog";
+          this.buttonDeleteTmpCatalog.Size = new System.Drawing.Size(287, 43);
+          this.buttonDeleteTmpCatalog.TabIndex = 8;
+          this.buttonDeleteTmpCatalog.Text = "Force Reimport of external Catalog Data \r\n(delete cache data)";
+          this.ToolTip1.SetToolTip(this.buttonDeleteTmpCatalog, resources.GetString("buttonDeleteTmpCatalog.ToolTip"));
+          this.buttonDeleteTmpCatalog.UseVisualStyleBackColor = true;
+          this.buttonDeleteTmpCatalog.Click += new System.EventHandler(this.buttonDeleteTmpCatalog_Click);
           // 
           // MyFilmsSetup
           // 
@@ -5203,5 +5216,6 @@
         private ComboBox ECMergeDestinationFieldTags;
         private ComboBox ECMergeDestinationFieldWriter;
         private CheckBox chkAddWriter;
+        private Button buttonDeleteTmpCatalog;
     }
 }

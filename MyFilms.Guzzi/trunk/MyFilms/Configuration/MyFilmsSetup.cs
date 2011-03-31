@@ -4777,5 +4777,50 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         }
 
+        private void buttonDeleteTmpCatalog_Click(object sender, EventArgs e)
+        {
+          string destFile = string.Empty;
+          switch (CatalogType.SelectedIndex)
+          {
+            case 0: // ANT Movie Catalog
+            case 7: // Starter Settings ANT DB
+              break;
+            case 1: //DVD Profiler
+              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+              break;
+            case 2: // Movie Collector V7.1.4
+              break;
+            case 3: // MyMovies
+              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+              break;
+            case 4: // EAX Movie Catalog 2.5.0
+              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+              break;
+            case 5: //eXtreme Movie Manager
+              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+              break;
+            case 6: // XBMC fulldb export (all movies in one DB)
+              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+              break;
+            case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+              destFile = MesFilmsCat.Text;
+              break;
+            case 9: // EAX Movie Catalog 3.0.9 (beta5)
+              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+              break;
+            case 10: // PVD PersonalVideoDatabase V0.9.9.21
+              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+              break;
+            default:
+              break;
+          }
+          if (destFile.Length > 0)
+            if (System.IO.File.Exists(destFile))
+            {
+              System.IO.File.Delete(destFile);
+              LogMyFilms.Debug("MyFilmsSetup: Manually deleted tmp catalog: '" + destFile + "'");
+              MessageBox.Show("Deleted tmp imported data: '" + destFile + "' \n MyFilms will reimport data on next launch or when saving the config.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
