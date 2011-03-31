@@ -241,16 +241,22 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 else WriteAntAtribute(destXml, "STitle", nodeTitle.InnerText.Replace(char.ConvertFromUtf32(160), " "));
 
                 //string Certification
+                string Certification = string.Empty;
                 XmlNode nodeCertification = nodeDVD.SelectSingleNode("MPAA");
-                if (nodeCertification != null && nodeCertification.InnerText.Length > 0) WriteAntAtribute(destXml, "MPAA", nodeCertification.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                if (nodeCertification != null && nodeCertification.InnerText.Length > 0) Certification = nodeCertification.InnerText.Replace(char.ConvertFromUtf32(160), " ");
+                WriteAntAtribute(destXml, "MPAA", Certification);
 
                 //string TagLine
                 XmlNode nodeTagLine = nodeDVD.SelectSingleNode("TagLine");
-                if (nodeTagLine != null && nodeTagLine.InnerText.Length > 0) WriteAntAtribute(destXml, "TagLine", nodeTagLine.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                string Tagline = string.Empty;
+                if (nodeTagLine != null && nodeTagLine.InnerText.Length > 0) Tagline = nodeTagLine.InnerText.Replace(char.ConvertFromUtf32(160), " ");
+                WriteAntAtribute(destXml, "TagLine", Tagline);
 
                 //string Tags
+                string Tags = string.Empty;
                 XmlNode nodeTags = nodeDVD.SelectSingleNode("Category");
-                if (nodeTags != null && nodeTags.InnerText.Length > 0) WriteAntAtribute(destXml, "Tags", nodeTags.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
+                if (nodeTags != null && nodeTags.InnerText.Length > 0) Tags = nodeTags.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ",");
+                WriteAntAtribute(destXml, "Tags", Tags);
 
                 //string Borrower
                 XmlNode nodeBorrower = nodeDVD.SelectSingleNode("Loaner");
@@ -266,7 +272,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                 //string Writer, 
                 XmlNode nodeWriter = nodeDVD.SelectSingleNode("Writer");
-                if (nodeWriter != null && nodeWriter.InnerText.Length > 0) WriteAntAtribute(destXml, "Writer", nodeWriter.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
+                if (nodeWriter != null && nodeWriter.InnerText.Length > 0)
+                  WriteAntAtribute(destXml, "Writer", nodeWriter.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
 
                 //string Country, 
                 XmlNode nodeCountry = nodeDVD.SelectSingleNode("Country");
@@ -338,11 +345,53 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                 //string Description, 
                 XmlNode nodePlot = nodeDVD.SelectSingleNode("Plot");
-                if (nodePlot != null && nodePlot.InnerText != null) WriteAntAtribute(destXml, "Plot", nodePlot.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                string DescriptionMerged = string.Empty;
+                if (DestinationTagline == "Description")
+                {
+                  if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
+                  DescriptionMerged += Tagline;
+                }
+                if (DestinationTags == "Description")
+                {
+                  if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
+                  DescriptionMerged += Tags;
+                }
+                if (DestinationCertification == "Description")
+                {
+                  if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
+                  DescriptionMerged += Certification;
+                }
+                if (nodePlot != null && nodePlot.InnerText != null)
+                {
+                  if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
+                  DescriptionMerged += nodePlot.InnerText.Replace(char.ConvertFromUtf32(160), " ");
+                }
+                WriteAntAtribute(destXml, "Plot", DescriptionMerged);
 
                 //string Comments, 
                 XmlNode nodeComments = nodeDVD.SelectSingleNode("Comments");
-                if (nodeComments != null && nodeComments.InnerText != null) WriteAntAtribute(destXml, "Comments", nodeComments.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                string CommentsMerged = string.Empty;
+                if (DestinationTagline == "Comments")
+                {
+                  if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
+                  CommentsMerged += Tagline;
+                }
+                if (DestinationTags == "Comments")
+                {
+                  if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
+                  CommentsMerged += Tags;
+                }
+                if (DestinationCertification == "Comments")
+                {
+                  if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
+                  CommentsMerged += Certification;
+                }
+                if (nodeComments != null && nodeComments.InnerText != null)
+                {
+                  if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
+                  CommentsMerged += nodeComments.InnerText.Replace(char.ConvertFromUtf32(160), " ");
+                }
+                WriteAntAtribute(destXml, "Comments", CommentsMerged);
 
                 //string VideoFormat, Codec
                 XmlNode nodeVideoFormat = nodeDVD.SelectSingleNode("Codec");

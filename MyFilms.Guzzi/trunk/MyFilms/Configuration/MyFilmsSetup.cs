@@ -1864,7 +1864,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               if (!AntViewItem1.Items.Contains("Writer")) // only add if not already done!
                 AddExtendedFieldsForExternalCatalogs();
 
-              if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en")
+              if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en" || AntTitle1.Text == "OriginalTitle")
                   {
                     //if (string.IsNullOrEmpty(AntTitle1.Text))
                     AntTitle1.Text = "OriginalTitle";
@@ -1896,11 +1896,24 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             switch (CatalogType.SelectedIndex)
             {
-                case 0:
+              case 0:
                     Tab_AMCupdater.Enabled = true;
                     Tab_Update.Enabled = true;
                     break;
-                case 4: // EAX MC 2.5.0
+              case 1: // DVDprofiler
+                    AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = ""; // Disable Trailers ...
+                    if (MesFilmsCat.Text.Length > 0)
+                    {
+                      //if (MesFilmsImg.Text.Length == 0)
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Images"; // cover path
+                      //MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
+                      //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
+                    }
+                    cbWatched.Text = "Checked";
+                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
+                    break;
+              case 4: // EAX MC 2.5.0
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "SourceTrailer";
                     if (MesFilmsCat.Text.Length > 0)
@@ -2536,25 +2549,25 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     reader.Close();
                     string destFile = "";
                     // ec options
-                    string destTagline = "";
-                    string destTags = "";
-                    string destCertification = "";
-                    string destWriter = "";
+                    string DestinationTagline = "";
+                    string DestinationTags = "";
+                    string DestinationCertification = "";
+                    string DestinationWriter = "";
 
                     if (CatalogType.SelectedIndex != 0)
                     {
                       if (chkAddTagline.Checked)
-                        destTagline = ECMergeDestinationFieldTagline.Text;
-                      else destTagline = "";
+                        DestinationTagline = ECMergeDestinationFieldTagline.Text;
+                      else DestinationTagline = "";
                       if (chkAddTags.Checked)
-                        destTags = ECMergeDestinationFieldTags.Text;
-                      else destTags = "";
+                        DestinationTags = ECMergeDestinationFieldTags.Text;
+                      else DestinationTags = "";
                       if (chkAddCertification.Checked)
-                        destCertification = ECMergeDestinationFieldCertification.Text;
-                      else destCertification = "";
+                        DestinationCertification = ECMergeDestinationFieldCertification.Text;
+                      else DestinationCertification = "";
                       if (chkAddWriter.Checked)
-                        destWriter = ECMergeDestinationFieldWriter.Text;
-                      else destWriter = "";
+                        DestinationWriter = ECMergeDestinationFieldWriter.Text;
+                      else DestinationWriter = "";
                     }
 
                     switch (CatalogType.SelectedIndex)
@@ -2573,11 +2586,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             if (this.chkDVDprofilerMergeWithGenreField.Checked)
                                 DVDPTagField.Text = "Category";
                             DvdProfiler cc1 = new DvdProfiler(DVDPTagField.Text);
-                            mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, DVDPTagField.Text, chkDVDprofilerOnlyFile.Checked));
+                            mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, DVDPTagField.Text, chkDVDprofilerOnlyFile.Checked));
                             break;
                         case 2: // Movie Collector V7.1.4
                             MovieCollector cc2 = new MovieCollector();
-                            mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 3: // MyMovies
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2587,7 +2600,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                                 break;
                             }
                             MyMovies mm = new MyMovies();
-                            mydivx.ReadXml(mm.ConvertMyMovies(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, chkDVDprofilerOnlyFile.Checked));
+                            mydivx.ReadXml(mm.ConvertMyMovies(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked));
                             break;
                         case 4: // EAX Movie Catalog 2.5.0
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2597,7 +2610,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                                 break;
                             }
                             EaxMovieCatalog emc = new EaxMovieCatalog();
-                            mydivx.ReadXml(emc.ConvertEaxMovieCatalog(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(emc.ConvertEaxMovieCatalog(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 5: //eXtreme Movie Manager
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2607,7 +2620,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                                 break;
                             }
                             XMM xmm = new XMM();
-                            mydivx.ReadXml(xmm.ConvertXMM(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, chkDVDprofilerOnlyFile.Checked));
+                            mydivx.ReadXml(xmm.ConvertXMM(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked));
                             break;
                         case 6: // XBMC fulldb export (all movies in one DB)
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2624,7 +2637,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             XbmcDb Xdb = new XbmcDb();
-                            mydivx.ReadXml(Xdb.ConvertXbmcDb(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, AntStorage.Text, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(Xdb.ConvertXbmcDb(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, AntStorage.Text, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
                             destFile = MesFilmsCat.Text;
@@ -2634,7 +2647,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             XbmcNfo nfo = new XbmcNfo();
-                            mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, AntStorage.Text, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, AntStorage.Text, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 9: // EAX Movie Catalog 3.0.9 (beta5)
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2644,7 +2657,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
-                            mydivx.ReadXml(emc3.ConvertEaxMovieCatalog3(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
+                            mydivx.ReadXml(emc3.ConvertEaxMovieCatalog3(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
                         case 10: // PVD PersonalVideoDatabase V0.9.9.21
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -2654,7 +2667,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                               break;
                             }
                             PersonalVideoDatabase pvd = new PersonalVideoDatabase();
-                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, destTagline, destTags, destCertification, destWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text, this.chkAddTagline.Checked));
+                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text, this.chkAddTagline.Checked));
                             break;
                     }
 
@@ -4546,22 +4559,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //Config_Name.Focus();
           switch (newCatalogSelectedIndex)
           {
-            case 5:
-                System.Windows.Forms.MessageBox.Show(
-                "Successfully created a new Configuration with default settings ! \n\nPlease adapt the settings to artwork pathes to to match your personal needs.",
-                "Control Configuration",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
-                General.SelectedIndex = 6;
-                MesFilmsImg.Focus(); // Set focus to cover path
-                break;
+            case 0:
+              System.Windows.Forms.MessageBox.Show(
+              "Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.",
+              "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              break;
             default:
-                System.Windows.Forms.MessageBox.Show(
-                "Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.",
-                "Control Configuration",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
-                break;
+              System.Windows.Forms.MessageBox.Show(
+                "Successfully created a new Configuration for '" + CatalogType.Text + "' with default settings ! \n\nPlease verify the settings to artwork pathes to match your personal needs.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              General.SelectedIndex = 6;
+              MesFilmsImg.Focus(); // Set focus to cover path                
+              break;
           }
               
           if (newCatalog && CatalogType.SelectedIndex != 0)

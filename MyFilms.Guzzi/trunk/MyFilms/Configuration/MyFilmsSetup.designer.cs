@@ -417,14 +417,16 @@
           this.label1 = new System.Windows.Forms.Label();
           this.butNew = new System.Windows.Forms.Button();
           this.groupBoxExtendedFieldHandling = new System.Windows.Forms.GroupBox();
-          this.label53 = new System.Windows.Forms.Label();
+          this.ECMergeDestinationFieldCertification = new System.Windows.Forms.ComboBox();
+          this.ECMergeDestinationFieldTags = new System.Windows.Forms.ComboBox();
           this.ECMergeDestinationFieldTagline = new System.Windows.Forms.ComboBox();
+          this.chkAddTagline = new System.Windows.Forms.CheckBox();
+          this.chkAddCertification = new System.Windows.Forms.CheckBox();
+          this.label54 = new System.Windows.Forms.Label();
+          this.chkAddTags = new System.Windows.Forms.CheckBox();
+          this.label53 = new System.Windows.Forms.Label();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.SPicture = new System.Windows.Forms.PictureBox();
-          this.chkAddTagline = new System.Windows.Forms.CheckBox();
-          this.chkAddWriter = new System.Windows.Forms.CheckBox();
-          this.chkAddCertification = new System.Windows.Forms.CheckBox();
-          this.chkAddTags = new System.Windows.Forms.CheckBox();
           this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
@@ -475,10 +477,8 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.label54 = new System.Windows.Forms.Label();
-          this.ECMergeDestinationFieldTags = new System.Windows.Forms.ComboBox();
-          this.ECMergeDestinationFieldCertification = new System.Windows.Forms.ComboBox();
           this.ECMergeDestinationFieldWriter = new System.Windows.Forms.ComboBox();
+          this.chkAddWriter = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -4034,14 +4034,27 @@
           this.groupBoxExtendedFieldHandling.Text = "External Catalog Import Options ...";
           this.ToolTip1.SetToolTip(this.groupBoxExtendedFieldHandling, resources.GetString("groupBoxExtendedFieldHandling.ToolTip"));
           // 
-          // label53
+          // ECMergeDestinationFieldCertification
           // 
-          this.label53.AutoSize = true;
-          this.label53.Location = new System.Drawing.Point(16, 21);
-          this.label53.Name = "label53";
-          this.label53.Size = new System.Drawing.Size(146, 13);
-          this.label53.TabIndex = 2;
-          this.label53.Text = "External Catalog Source Field";
+          this.ECMergeDestinationFieldCertification.FormattingEnabled = true;
+          this.ECMergeDestinationFieldCertification.Items.AddRange(new object[] {
+            "Description",
+            "Comments"});
+          this.ECMergeDestinationFieldCertification.Location = new System.Drawing.Point(192, 108);
+          this.ECMergeDestinationFieldCertification.Name = "ECMergeDestinationFieldCertification";
+          this.ECMergeDestinationFieldCertification.Size = new System.Drawing.Size(134, 21);
+          this.ECMergeDestinationFieldCertification.TabIndex = 6;
+          // 
+          // ECMergeDestinationFieldTags
+          // 
+          this.ECMergeDestinationFieldTags.FormattingEnabled = true;
+          this.ECMergeDestinationFieldTags.Items.AddRange(new object[] {
+            "Description",
+            "Comments"});
+          this.ECMergeDestinationFieldTags.Location = new System.Drawing.Point(192, 78);
+          this.ECMergeDestinationFieldTags.Name = "ECMergeDestinationFieldTags";
+          this.ECMergeDestinationFieldTags.Size = new System.Drawing.Size(134, 21);
+          this.ECMergeDestinationFieldTags.TabIndex = 5;
           // 
           // ECMergeDestinationFieldTagline
           // 
@@ -4055,6 +4068,54 @@
           this.ECMergeDestinationFieldTagline.TabIndex = 1;
           this.ToolTip1.SetToolTip(this.ECMergeDestinationFieldTagline, "Choose a MyFilms field, where you want to add data from \r\nexternal catalog fields" +
                   ".");
+          // 
+          // chkAddTagline
+          // 
+          this.chkAddTagline.AutoSize = true;
+          this.chkAddTagline.Location = new System.Drawing.Point(39, 51);
+          this.chkAddTagline.Name = "chkAddTagline";
+          this.chkAddTagline.Size = new System.Drawing.Size(95, 17);
+          this.chkAddTagline.TabIndex = 0;
+          this.chkAddTagline.Text = "Add Tagline ...";
+          this.chkAddTagline.UseVisualStyleBackColor = true;
+          // 
+          // chkAddCertification
+          // 
+          this.chkAddCertification.AutoSize = true;
+          this.chkAddCertification.Location = new System.Drawing.Point(39, 110);
+          this.chkAddCertification.Name = "chkAddCertification";
+          this.chkAddCertification.Size = new System.Drawing.Size(115, 17);
+          this.chkAddCertification.TabIndex = 0;
+          this.chkAddCertification.Text = "Add Certification ...";
+          this.chkAddCertification.UseVisualStyleBackColor = true;
+          // 
+          // label54
+          // 
+          this.label54.AutoSize = true;
+          this.label54.Location = new System.Drawing.Point(194, 21);
+          this.label54.Name = "label54";
+          this.label54.Size = new System.Drawing.Size(125, 13);
+          this.label54.TabIndex = 3;
+          this.label54.Text = "MyFilms Destination Field";
+          // 
+          // chkAddTags
+          // 
+          this.chkAddTags.AutoSize = true;
+          this.chkAddTags.Location = new System.Drawing.Point(39, 80);
+          this.chkAddTags.Name = "chkAddTags";
+          this.chkAddTags.Size = new System.Drawing.Size(84, 17);
+          this.chkAddTags.TabIndex = 4;
+          this.chkAddTags.Text = "Add Tags ...";
+          this.chkAddTags.UseVisualStyleBackColor = true;
+          // 
+          // label53
+          // 
+          this.label53.AutoSize = true;
+          this.label53.Location = new System.Drawing.Point(16, 21);
+          this.label53.Name = "label53";
+          this.label53.Size = new System.Drawing.Size(146, 13);
+          this.label53.TabIndex = 2;
+          this.label53.Text = "External Catalog Source Field";
           // 
           // btnLaunchAMCglobal
           // 
@@ -4083,46 +4144,6 @@
           this.SPicture.TabStop = false;
           this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
           this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
-          // 
-          // chkAddTagline
-          // 
-          this.chkAddTagline.AutoSize = true;
-          this.chkAddTagline.Location = new System.Drawing.Point(39, 51);
-          this.chkAddTagline.Name = "chkAddTagline";
-          this.chkAddTagline.Size = new System.Drawing.Size(95, 17);
-          this.chkAddTagline.TabIndex = 0;
-          this.chkAddTagline.Text = "Add Tagline ...";
-          this.chkAddTagline.UseVisualStyleBackColor = true;
-          // 
-          // chkAddWriter
-          // 
-          this.chkAddWriter.AutoSize = true;
-          this.chkAddWriter.Location = new System.Drawing.Point(39, 140);
-          this.chkAddWriter.Name = "chkAddWriter";
-          this.chkAddWriter.Size = new System.Drawing.Size(88, 17);
-          this.chkAddWriter.TabIndex = 0;
-          this.chkAddWriter.Text = "Add Writer ...";
-          this.chkAddWriter.UseVisualStyleBackColor = true;
-          // 
-          // chkAddCertification
-          // 
-          this.chkAddCertification.AutoSize = true;
-          this.chkAddCertification.Location = new System.Drawing.Point(39, 110);
-          this.chkAddCertification.Name = "chkAddCertification";
-          this.chkAddCertification.Size = new System.Drawing.Size(115, 17);
-          this.chkAddCertification.TabIndex = 0;
-          this.chkAddCertification.Text = "Add Certification ...";
-          this.chkAddCertification.UseVisualStyleBackColor = true;
-          // 
-          // chkAddTags
-          // 
-          this.chkAddTags.AutoSize = true;
-          this.chkAddTags.Location = new System.Drawing.Point(39, 80);
-          this.chkAddTags.Name = "chkAddTags";
-          this.chkAddTags.Size = new System.Drawing.Size(84, 17);
-          this.chkAddTags.TabIndex = 4;
-          this.chkAddTags.Text = "Add Tags ...";
-          this.chkAddTags.UseVisualStyleBackColor = true;
           // 
           // AntFilterMinRating
           // 
@@ -4657,37 +4678,6 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // label54
-          // 
-          this.label54.AutoSize = true;
-          this.label54.Location = new System.Drawing.Point(194, 21);
-          this.label54.Name = "label54";
-          this.label54.Size = new System.Drawing.Size(125, 13);
-          this.label54.TabIndex = 3;
-          this.label54.Text = "MyFilms Destination Field";
-          // 
-          // ECMergeDestinationFieldTags
-          // 
-          this.ECMergeDestinationFieldTags.FormattingEnabled = true;
-          this.ECMergeDestinationFieldTags.Items.AddRange(new object[] {
-            "Description",
-            "Comments"});
-          this.ECMergeDestinationFieldTags.Location = new System.Drawing.Point(192, 78);
-          this.ECMergeDestinationFieldTags.Name = "ECMergeDestinationFieldTags";
-          this.ECMergeDestinationFieldTags.Size = new System.Drawing.Size(134, 21);
-          this.ECMergeDestinationFieldTags.TabIndex = 5;
-          // 
-          // ECMergeDestinationFieldCertification
-          // 
-          this.ECMergeDestinationFieldCertification.FormattingEnabled = true;
-          this.ECMergeDestinationFieldCertification.Items.AddRange(new object[] {
-            "Description",
-            "Comments"});
-          this.ECMergeDestinationFieldCertification.Location = new System.Drawing.Point(192, 108);
-          this.ECMergeDestinationFieldCertification.Name = "ECMergeDestinationFieldCertification";
-          this.ECMergeDestinationFieldCertification.Size = new System.Drawing.Size(134, 21);
-          this.ECMergeDestinationFieldCertification.TabIndex = 6;
-          // 
           // ECMergeDestinationFieldWriter
           // 
           this.ECMergeDestinationFieldWriter.FormattingEnabled = true;
@@ -4699,6 +4689,18 @@
           this.ECMergeDestinationFieldWriter.Name = "ECMergeDestinationFieldWriter";
           this.ECMergeDestinationFieldWriter.Size = new System.Drawing.Size(134, 21);
           this.ECMergeDestinationFieldWriter.TabIndex = 7;
+          this.ECMergeDestinationFieldWriter.Visible = false;
+          // 
+          // chkAddWriter
+          // 
+          this.chkAddWriter.AutoSize = true;
+          this.chkAddWriter.Location = new System.Drawing.Point(39, 140);
+          this.chkAddWriter.Name = "chkAddWriter";
+          this.chkAddWriter.Size = new System.Drawing.Size(88, 17);
+          this.chkAddWriter.TabIndex = 0;
+          this.chkAddWriter.Text = "Add Writer ...";
+          this.chkAddWriter.UseVisualStyleBackColor = true;
+          this.chkAddWriter.Visible = false;
           // 
           // MyFilmsSetup
           // 
@@ -5186,7 +5188,6 @@
         private CheckBox chkUseListviewForGroups;
         private CheckBox chkAddCertification;
         private ComboBox ECMergeDestinationFieldTagline;
-        private CheckBox chkAddWriter;
         private ComboBox comboBox4;
         private ComboBox comboBox3;
         private GroupBox groupBox6;
@@ -5198,8 +5199,9 @@
         private CheckBox chkAddTags;
         private Label label53;
         private Label label54;
-        private ComboBox ECMergeDestinationFieldWriter;
         private ComboBox ECMergeDestinationFieldCertification;
         private ComboBox ECMergeDestinationFieldTags;
+        private ComboBox ECMergeDestinationFieldWriter;
+        private CheckBox chkAddWriter;
     }
 }

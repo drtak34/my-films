@@ -47,6 +47,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Country", "Country");
             ProfilerDict.Add("Year", "Year");
             ProfilerDict.Add("RunningTime", "Length");
+            ProfilerDict.Add("imdburl", "URL");
             ProfilerDict.Add("Actors", "Actors");
             ProfilerDict.Add("Genres", "Category");
             ProfilerDict.Add("Credits", "Director");
@@ -106,6 +107,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     XmlNode nodeBorrower = nodeDVD.SelectSingleNode("loan/loanedto/displayname");
                     XmlNode nodeDuration = nodeDVD.SelectSingleNode("runtime");
                     XmlNode nodeDurationMinutes = nodeDVD.SelectSingleNode("runtimeminutes");
+                    XmlNode nodeURL = nodeDVD.SelectSingleNode("imdburl");
                     XmlNode nodeCountry = nodeDVD.SelectSingleNode("country");
                     XmlNode nodeOverview = nodeDVD.SelectSingleNode("plot");
                     string genre = String.Empty;
@@ -276,8 +278,13 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         // New code:
                         if (nodeDuration != null && !string.IsNullOrEmpty(nodeDuration.InnerText))
                         {
-                            WriteAntAtribute(destXml, "RunningTime", nodeDuration.InnerText);
+                          WriteAntAtribute(destXml, "RunningTime", nodeDuration.InnerText);
                         }
+                        if (nodeURL != null && !string.IsNullOrEmpty(nodeURL.InnerText))
+                        {
+                          WriteAntAtribute(destXml, "imdburl", nodeURL.InnerText);
+                        }
+
                         if (nodeBorrower != null && nodeBorrower.InnerText != null)
                             WriteAntAtribute(destXml, "Borrower", nodeBorrower.InnerText);
                         if (nodeFormat != null && nodeFormat.InnerText != null)
