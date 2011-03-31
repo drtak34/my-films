@@ -54,6 +54,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Credits1", "Producer");
             ProfilerDict.Add("Credits2", "Writer");
             ProfilerDict.Add("Overview", "Description");
+            ProfilerDict.Add("Comments", "Comments");
             ProfilerDict.Add("Picture", "Picture");
             ProfilerDict.Add("Date", "Date");
             ProfilerDict.Add("EventType", "Checked");
@@ -147,6 +148,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         if (nodeNotes.InnerText.IndexOf("<Country>") != -1)
                             Country = nodeNotes.InnerText.Substring(nodeNotes.InnerText.IndexOf("<Country>") + 9, nodeNotes.InnerText.IndexOf("</Country>") - nodeNotes.InnerText.IndexOf("<Country>") - 9);
                     }
+
                     if (nodeMediaType != null)
                     {
                         XmlNode nodeCountryOfOrigin = nodeDVD.SelectSingleNode("CountryOfOrigin");
@@ -159,7 +161,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                             if (genre.Length > 0) genre += ", ";
                             genre += nodeGenre.InnerText;
                     }
-                    
+
+                    string Tagline = "(no Tagline supported)";
+                  
                     XmlNodeList TagList = nodeDVD.SelectNodes("Tags/Tag");
                     TagFullName = string.Empty;
                     
@@ -358,9 +362,48 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     
                     WriteAntAtribute(destXml, "Tags", TagFullName);
                     WriteAntAtribute(destXml, "Rating", Certification);
+
+                    string DescriptionMerged = string.Empty;
+                    if (DestinationTagline == "Description")
+                    {
+                      if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
+                      DescriptionMerged += Tagline;
+                    }
+                    if (DestinationTags == "Description")
+                    {
+                      if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
+                      DescriptionMerged += TagFullName;
+                    }
+                    if (DestinationCertification == "Description")
+                    {
+                      if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
+                      DescriptionMerged += Certification;
+                    }
+                    if (Overview.Length > 0)
+                    {
+                      if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
+                      DescriptionMerged += Overview;
+                    }
+                    WriteAntAtribute(destXml, "Overview", DescriptionMerged);
+
+                    string CommentsMerged = string.Empty;
+                    if (DestinationTagline == "Comments")
+                    {
+                      if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
+                      CommentsMerged += Tagline;
+                    }
+                    if (DestinationTags == "Comments")
+                    {
+                      if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
+                      CommentsMerged += TagFullName;
+                    }
+                    if (DestinationCertification == "Comments")
+                    {
+                      if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
+                      CommentsMerged += Certification;
+                    }
+                    WriteAntAtribute(destXml, "Comments", CommentsMerged);
                     
-                    WriteAntAtribute(destXml, "Overview", Overview);
-                        
                     destXml.WriteEndElement();
                 }
 
