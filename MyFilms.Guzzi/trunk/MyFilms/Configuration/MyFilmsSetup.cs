@@ -103,6 +103,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.ShowTrailerPlayDialog.Visible = false;
               this.ShowTrailerWhenStartingMovie.Visible = false;
               this.btnGrabberInterface.Visible = false; // disable grabber interface in normal mode
+              this.buttonDeleteTmpCatalog.Visible = false // disable button to delete tmp catalog on EC tab
             }
             //else
             //{

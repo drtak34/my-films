@@ -106,6 +106,7 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerStoreTags = new System.Windows.Forms.CheckBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
@@ -416,8 +417,10 @@
           this.label1 = new System.Windows.Forms.Label();
           this.butNew = new System.Windows.Forms.Button();
           this.groupBoxExtendedFieldHandling = new System.Windows.Forms.GroupBox();
+          this.ECMergeDestinationFieldWriter = new System.Windows.Forms.ComboBox();
           this.ECMergeDestinationFieldCertification = new System.Windows.Forms.ComboBox();
           this.ECMergeDestinationFieldTags = new System.Windows.Forms.ComboBox();
+          this.chkAddWriter = new System.Windows.Forms.CheckBox();
           this.ECMergeDestinationFieldTagline = new System.Windows.Forms.ComboBox();
           this.chkAddTagline = new System.Windows.Forms.CheckBox();
           this.chkAddCertification = new System.Windows.Forms.CheckBox();
@@ -426,6 +429,10 @@
           this.label53 = new System.Windows.Forms.Label();
           this.btnLaunchAMCglobal = new System.Windows.Forms.Button();
           this.SPicture = new System.Windows.Forms.PictureBox();
+          this.groupBox_DVDprofiler = new System.Windows.Forms.GroupBox();
+          this.groupBox13 = new System.Windows.Forms.GroupBox();
+          this.chkDVDprofilerOnlyFile = new System.Windows.Forms.CheckBox();
+          this.buttonDeleteTmpCatalog = new System.Windows.Forms.Button();
           this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
@@ -444,9 +451,6 @@
           this.comboBox2 = new System.Windows.Forms.ComboBox();
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.Tab_ExternalCatalogs = new System.Windows.Forms.TabPage();
-          this.groupBox_DVDprofiler = new System.Windows.Forms.GroupBox();
-          this.groupBox13 = new System.Windows.Forms.GroupBox();
-          this.chkDVDprofilerOnlyFile = new System.Windows.Forms.CheckBox();
           this.Tab_WakeOnLan = new System.Windows.Forms.TabPage();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
           this.btnUpdate = new System.Windows.Forms.Button();
@@ -476,10 +480,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.ECMergeDestinationFieldWriter = new System.Windows.Forms.ComboBox();
-          this.chkAddWriter = new System.Windows.Forms.CheckBox();
-          this.buttonDeleteTmpCatalog = new System.Windows.Forms.Button();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -519,9 +519,9 @@
           this.groupBox_TitleOrder.SuspendLayout();
           this.groupBoxExtendedFieldHandling.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).BeginInit();
-          this.Tab_ExternalCatalogs.SuspendLayout();
           this.groupBox_DVDprofiler.SuspendLayout();
           this.groupBox13.SuspendLayout();
+          this.Tab_ExternalCatalogs.SuspendLayout();
           this.Tab_WakeOnLan.SuspendLayout();
           this.Tab_Logos.SuspendLayout();
           this.Tab_Artwork.SuspendLayout();
@@ -651,6 +651,16 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // traktConfiguration
+          // 
+          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration.Name = "traktConfiguration";
+          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -4050,6 +4060,19 @@
           this.groupBoxExtendedFieldHandling.Text = "External Catalog Import Options ...";
           this.ToolTip1.SetToolTip(this.groupBoxExtendedFieldHandling, resources.GetString("groupBoxExtendedFieldHandling.ToolTip"));
           // 
+          // ECMergeDestinationFieldWriter
+          // 
+          this.ECMergeDestinationFieldWriter.FormattingEnabled = true;
+          this.ECMergeDestinationFieldWriter.Items.AddRange(new object[] {
+            "Producer",
+            "Director",
+            "Borrower"});
+          this.ECMergeDestinationFieldWriter.Location = new System.Drawing.Point(192, 138);
+          this.ECMergeDestinationFieldWriter.Name = "ECMergeDestinationFieldWriter";
+          this.ECMergeDestinationFieldWriter.Size = new System.Drawing.Size(134, 21);
+          this.ECMergeDestinationFieldWriter.TabIndex = 7;
+          this.ECMergeDestinationFieldWriter.Visible = false;
+          // 
           // ECMergeDestinationFieldCertification
           // 
           this.ECMergeDestinationFieldCertification.FormattingEnabled = true;
@@ -4071,6 +4094,17 @@
           this.ECMergeDestinationFieldTags.Name = "ECMergeDestinationFieldTags";
           this.ECMergeDestinationFieldTags.Size = new System.Drawing.Size(134, 21);
           this.ECMergeDestinationFieldTags.TabIndex = 5;
+          // 
+          // chkAddWriter
+          // 
+          this.chkAddWriter.AutoSize = true;
+          this.chkAddWriter.Location = new System.Drawing.Point(39, 140);
+          this.chkAddWriter.Name = "chkAddWriter";
+          this.chkAddWriter.Size = new System.Drawing.Size(88, 17);
+          this.chkAddWriter.TabIndex = 0;
+          this.chkAddWriter.Text = "Add Writer ...";
+          this.chkAddWriter.UseVisualStyleBackColor = true;
+          this.chkAddWriter.Visible = false;
           // 
           // ECMergeDestinationFieldTagline
           // 
@@ -4160,6 +4194,50 @@
           this.SPicture.TabStop = false;
           this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
           this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
+          // 
+          // groupBox_DVDprofiler
+          // 
+          this.groupBox_DVDprofiler.Controls.Add(this.groupBox13);
+          this.groupBox_DVDprofiler.Controls.Add(this.groupBox9);
+          this.groupBox_DVDprofiler.Location = new System.Drawing.Point(392, 17);
+          this.groupBox_DVDprofiler.Name = "groupBox_DVDprofiler";
+          this.groupBox_DVDprofiler.Size = new System.Drawing.Size(335, 197);
+          this.groupBox_DVDprofiler.TabIndex = 28;
+          this.groupBox_DVDprofiler.TabStop = false;
+          this.groupBox_DVDprofiler.Text = "DVDProfiler";
+          this.ToolTip1.SetToolTip(this.groupBox_DVDprofiler, "Those setting are kept to keep backward compatibility to older MyFilms versions.\r" +
+                  "\nThey only apply, if the catalog type you selected is \"DVDProfiler\".");
+          // 
+          // groupBox13
+          // 
+          this.groupBox13.Controls.Add(this.chkDVDprofilerOnlyFile);
+          this.groupBox13.Location = new System.Drawing.Point(13, 19);
+          this.groupBox13.Name = "groupBox13";
+          this.groupBox13.Size = new System.Drawing.Size(307, 49);
+          this.groupBox13.TabIndex = 2;
+          this.groupBox13.TabStop = false;
+          this.groupBox13.Text = "Map Notes field to Source";
+          // 
+          // chkDVDprofilerOnlyFile
+          // 
+          this.chkDVDprofilerOnlyFile.AutoSize = true;
+          this.chkDVDprofilerOnlyFile.Location = new System.Drawing.Point(24, 21);
+          this.chkDVDprofilerOnlyFile.Name = "chkDVDprofilerOnlyFile";
+          this.chkDVDprofilerOnlyFile.Size = new System.Drawing.Size(221, 17);
+          this.chkDVDprofilerOnlyFile.TabIndex = 0;
+          this.chkDVDprofilerOnlyFile.Text = "Notes Field contains only Movie Filename";
+          this.chkDVDprofilerOnlyFile.UseVisualStyleBackColor = true;
+          // 
+          // buttonDeleteTmpCatalog
+          // 
+          this.buttonDeleteTmpCatalog.Location = new System.Drawing.Point(29, 302);
+          this.buttonDeleteTmpCatalog.Name = "buttonDeleteTmpCatalog";
+          this.buttonDeleteTmpCatalog.Size = new System.Drawing.Size(152, 27);
+          this.buttonDeleteTmpCatalog.TabIndex = 8;
+          this.buttonDeleteTmpCatalog.Text = "Delete tmp Catalog";
+          this.ToolTip1.SetToolTip(this.buttonDeleteTmpCatalog, resources.GetString("buttonDeleteTmpCatalog.ToolTip"));
+          this.buttonDeleteTmpCatalog.UseVisualStyleBackColor = true;
+          this.buttonDeleteTmpCatalog.Click += new System.EventHandler(this.buttonDeleteTmpCatalog_Click);
           // 
           // AntFilterMinRating
           // 
@@ -4299,39 +4377,6 @@
           this.Tab_ExternalCatalogs.Text = "External Catalogs";
           this.Tab_ExternalCatalogs.ToolTipText = "Options for external catalogs (only applies if not using ANT movie catalog)";
           this.Tab_ExternalCatalogs.UseVisualStyleBackColor = true;
-          // 
-          // groupBox_DVDprofiler
-          // 
-          this.groupBox_DVDprofiler.Controls.Add(this.groupBox13);
-          this.groupBox_DVDprofiler.Controls.Add(this.groupBox9);
-          this.groupBox_DVDprofiler.Location = new System.Drawing.Point(392, 17);
-          this.groupBox_DVDprofiler.Name = "groupBox_DVDprofiler";
-          this.groupBox_DVDprofiler.Size = new System.Drawing.Size(335, 197);
-          this.groupBox_DVDprofiler.TabIndex = 28;
-          this.groupBox_DVDprofiler.TabStop = false;
-          this.groupBox_DVDprofiler.Text = "DVDProfiler";
-          this.ToolTip1.SetToolTip(this.groupBox_DVDprofiler, "Those setting are kept to keep backward compatibility to older MyFilms versions.\r" +
-                  "\nThey only apply, if the catalog type you selected is \"DVDProfiler\".");
-          // 
-          // groupBox13
-          // 
-          this.groupBox13.Controls.Add(this.chkDVDprofilerOnlyFile);
-          this.groupBox13.Location = new System.Drawing.Point(13, 19);
-          this.groupBox13.Name = "groupBox13";
-          this.groupBox13.Size = new System.Drawing.Size(307, 49);
-          this.groupBox13.TabIndex = 2;
-          this.groupBox13.TabStop = false;
-          this.groupBox13.Text = "Map Notes field to Source";
-          // 
-          // chkDVDprofilerOnlyFile
-          // 
-          this.chkDVDprofilerOnlyFile.AutoSize = true;
-          this.chkDVDprofilerOnlyFile.Location = new System.Drawing.Point(24, 21);
-          this.chkDVDprofilerOnlyFile.Name = "chkDVDprofilerOnlyFile";
-          this.chkDVDprofilerOnlyFile.Size = new System.Drawing.Size(221, 17);
-          this.chkDVDprofilerOnlyFile.TabIndex = 0;
-          this.chkDVDprofilerOnlyFile.Text = "Notes Field contains only Movie Filename";
-          this.chkDVDprofilerOnlyFile.UseVisualStyleBackColor = true;
           // 
           // Tab_WakeOnLan
           // 
@@ -4697,51 +4742,6 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // ECMergeDestinationFieldWriter
-          // 
-          this.ECMergeDestinationFieldWriter.FormattingEnabled = true;
-          this.ECMergeDestinationFieldWriter.Items.AddRange(new object[] {
-            "Producer",
-            "Director",
-            "Borrower"});
-          this.ECMergeDestinationFieldWriter.Location = new System.Drawing.Point(192, 138);
-          this.ECMergeDestinationFieldWriter.Name = "ECMergeDestinationFieldWriter";
-          this.ECMergeDestinationFieldWriter.Size = new System.Drawing.Size(134, 21);
-          this.ECMergeDestinationFieldWriter.TabIndex = 7;
-          this.ECMergeDestinationFieldWriter.Visible = false;
-          // 
-          // chkAddWriter
-          // 
-          this.chkAddWriter.AutoSize = true;
-          this.chkAddWriter.Location = new System.Drawing.Point(39, 140);
-          this.chkAddWriter.Name = "chkAddWriter";
-          this.chkAddWriter.Size = new System.Drawing.Size(88, 17);
-          this.chkAddWriter.TabIndex = 0;
-          this.chkAddWriter.Text = "Add Writer ...";
-          this.chkAddWriter.UseVisualStyleBackColor = true;
-          this.chkAddWriter.Visible = false;
-          // 
-          // buttonDeleteTmpCatalog
-          // 
-          this.buttonDeleteTmpCatalog.Location = new System.Drawing.Point(211, 259);
-          this.buttonDeleteTmpCatalog.Name = "buttonDeleteTmpCatalog";
-          this.buttonDeleteTmpCatalog.Size = new System.Drawing.Size(313, 43);
-          this.buttonDeleteTmpCatalog.TabIndex = 8;
-          this.buttonDeleteTmpCatalog.Text = "Update Settings\r\n(Force reimport of external catalog data by deleting cache)";
-          this.ToolTip1.SetToolTip(this.buttonDeleteTmpCatalog, resources.GetString("buttonDeleteTmpCatalog.ToolTip"));
-          this.buttonDeleteTmpCatalog.UseVisualStyleBackColor = true;
-          this.buttonDeleteTmpCatalog.Click += new System.EventHandler(this.buttonDeleteTmpCatalog_Click);
-          // 
-          // traktConfiguration
-          // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4842,10 +4842,10 @@
           this.groupBoxExtendedFieldHandling.ResumeLayout(false);
           this.groupBoxExtendedFieldHandling.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.SPicture)).EndInit();
-          this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.groupBox_DVDprofiler.ResumeLayout(false);
           this.groupBox13.ResumeLayout(false);
           this.groupBox13.PerformLayout();
+          this.Tab_ExternalCatalogs.ResumeLayout(false);
           this.Tab_WakeOnLan.ResumeLayout(false);
           this.Tab_Logos.ResumeLayout(false);
           this.Tab_Logos.PerformLayout();
