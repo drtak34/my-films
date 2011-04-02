@@ -60,6 +60,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("EventType", "Checked");
             ProfilerDict.Add("Tag", TagField);
             ProfilerDict.Add("Tags", "Tags");
+            ProfilerDict.Add("AudioContent", "Languages");
+            ProfilerDict.Add("Subtitle", "Subtitles");
             ProfilerDict.Add("Rating", "Certification");
             ProfilerDict.Add("LoanInfo/User", "Borrower");
 
@@ -184,6 +186,27 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         genre += TagFullName;
                       }
                     }
+
+                    string languages = string.Empty;
+                    XmlNodeList LanguagesList = nodeDVD.SelectNodes("Audio/AudioTrack");
+                    foreach (XmlNode nodeLanguage in LanguagesList)
+                    {
+                      if (nodeLanguage.SelectSingleNode("AudioContent") != null && nodeLanguage.SelectSingleNode("AudioContent").InnerText != null)
+                      {
+                        if (languages.Length > 0) languages += ", ";
+                        languages += nodeLanguage.SelectSingleNode("AudioContent").InnerText;
+                      }
+                    }
+
+                    string subtitles = String.Empty;
+                    XmlNodeList subtitleList = nodeDVD.SelectNodes("Subtitles/Subtitle");
+                    foreach (XmlNode nodeSubtitle in subtitleList)
+                    {
+                      if (subtitles.Length > 0) subtitles += ", ";
+                      subtitles += nodeSubtitle.InnerText;
+                    }
+
+
 
                     string cast = String.Empty;
                     XmlNodeList actorsList = nodeDVD.SelectNodes("Actors/Actor");
@@ -361,6 +384,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         WriteAntAtribute(destXml, "Tag", TagFullName);
                     
                     WriteAntAtribute(destXml, "Tags", TagFullName);
+                    WriteAntAtribute(destXml, "AudioContent", languages);
+                    WriteAntAtribute(destXml, "Subtitle", subtitles);
                     WriteAntAtribute(destXml, "Rating", Certification);
 
                     string DescriptionMerged = string.Empty;

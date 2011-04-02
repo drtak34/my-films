@@ -2914,7 +2914,7 @@
           this.Selected_Enreg.Name = "Selected_Enreg";
           this.Selected_Enreg.ReadOnly = true;
           this.Selected_Enreg.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-          this.Selected_Enreg.Size = new System.Drawing.Size(355, 38);
+          this.Selected_Enreg.Size = new System.Drawing.Size(355, 35);
           this.Selected_Enreg.TabIndex = 28;
           this.Selected_Enreg.TabStop = false;
           // 
