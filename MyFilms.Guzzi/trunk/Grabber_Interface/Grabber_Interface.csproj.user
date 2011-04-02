@@ -18,6 +18,6 @@
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <StartArguments>c:\test\test.xml</StartArguments>
+    <StartArguments>"V:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\imdb.xml"</StartArguments>
   </PropertyGroup>
 </Project>

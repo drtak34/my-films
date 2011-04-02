@@ -478,8 +478,8 @@
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.ECMergeDestinationFieldWriter = new System.Windows.Forms.ComboBox();
           this.chkAddWriter = new System.Windows.Forms.CheckBox();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.buttonDeleteTmpCatalog = new System.Windows.Forms.Button();
+          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1633,8 +1633,7 @@
           this.btnEditScript.Size = new System.Drawing.Size(95, 20);
           this.btnEditScript.TabIndex = 66;
           this.btnEditScript.Text = "Grabber Options";
-          this.ToolTip1.SetToolTip(this.btnEditScript, "This launches the MyFilms Grabber Interface.\r\nYou can set user defined options or" +
-                  " switch to expert mode to \r\nmodify the grabber script in detail.");
+          this.ToolTip1.SetToolTip(this.btnEditScript, resources.GetString("btnEditScript.ToolTip"));
           this.btnEditScript.UseVisualStyleBackColor = true;
           this.btnEditScript.Click += new System.EventHandler(this.btnEditScript_Click);
           // 
@@ -1666,6 +1665,16 @@
           // comboBox5
           // 
           this.comboBox5.FormattingEnabled = true;
+          this.comboBox5.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "15",
+            "20",
+            "999"});
           this.comboBox5.Location = new System.Drawing.Point(276, 42);
           this.comboBox5.Name = "comboBox5";
           this.comboBox5.Size = new System.Drawing.Size(45, 21);
@@ -1692,6 +1701,16 @@
           // comboBox3
           // 
           this.comboBox3.FormattingEnabled = true;
+          this.comboBox3.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "15",
+            "20",
+            "999"});
           this.comboBox3.Location = new System.Drawing.Point(276, 19);
           this.comboBox3.Name = "comboBox3";
           this.comboBox3.Size = new System.Drawing.Size(45, 21);
@@ -1705,8 +1724,10 @@
           this.comboBox4.Items.AddRange(new object[] {
             "en",
             "de",
+            "es",
             "fr",
-            "it"});
+            "it",
+            "pt"});
           this.comboBox4.Location = new System.Drawing.Point(124, 30);
           this.comboBox4.Name = "comboBox4";
           this.comboBox4.Size = new System.Drawing.Size(49, 21);
@@ -4694,16 +4715,6 @@
           this.chkAddWriter.UseVisualStyleBackColor = true;
           this.chkAddWriter.Visible = false;
           // 
-          // traktConfiguration
-          // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
-          // 
           // buttonDeleteTmpCatalog
           // 
           this.buttonDeleteTmpCatalog.Location = new System.Drawing.Point(58, 264);
@@ -4714,6 +4725,16 @@
           this.ToolTip1.SetToolTip(this.buttonDeleteTmpCatalog, resources.GetString("buttonDeleteTmpCatalog.ToolTip"));
           this.buttonDeleteTmpCatalog.UseVisualStyleBackColor = true;
           this.buttonDeleteTmpCatalog.Click += new System.EventHandler(this.buttonDeleteTmpCatalog_Click);
+          // 
+          // traktConfiguration
+          // 
+          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration.Name = "traktConfiguration";
+          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration.TabIndex = 0;
           // 
           // MyFilmsSetup
           // 

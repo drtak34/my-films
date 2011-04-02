@@ -35,6 +35,19 @@ namespace Grabber_Interface
           this.label1 = new System.Windows.Forms.Label();
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.tabPageUserSettings = new System.Windows.Forms.TabPage();
+          this.groupBox11 = new System.Windows.Forms.GroupBox();
+          this.groupBox15 = new System.Windows.Forms.GroupBox();
+          this.chkAddTags = new System.Windows.Forms.CheckBox();
+          this.DVDPTagField = new System.Windows.Forms.ComboBox();
+          this.groupBox12 = new System.Windows.Forms.GroupBox();
+          this.WriterAddField = new System.Windows.Forms.ComboBox();
+          this.chkAddWriter = new System.Windows.Forms.CheckBox();
+          this.groupBox14 = new System.Windows.Forms.GroupBox();
+          this.TaglinesAddField = new System.Windows.Forms.ComboBox();
+          this.chkAddTaglines = new System.Windows.Forms.CheckBox();
+          this.groupBox13 = new System.Windows.Forms.GroupBox();
+          this.CertificationAddField = new System.Windows.Forms.ComboBox();
+          this.chkAddCertification = new System.Windows.Forms.CheckBox();
           this.statusStrip1 = new System.Windows.Forms.StatusStrip();
           this.label22 = new System.Windows.Forms.Label();
           this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -55,6 +68,7 @@ namespace Grabber_Interface
           this.label23 = new System.Windows.Forms.Label();
           this.cbTtitleMaxTitles = new System.Windows.Forms.ComboBox();
           this.cbTtitlePreferredLanguage = new System.Windows.Forms.ComboBox();
+          this.checkBox2 = new System.Windows.Forms.CheckBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.label8 = new System.Windows.Forms.Label();
@@ -151,23 +165,13 @@ namespace Grabber_Interface
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
-          this.checkBox2 = new System.Windows.Forms.CheckBox();
-          this.groupBox11 = new System.Windows.Forms.GroupBox();
-          this.groupBox12 = new System.Windows.Forms.GroupBox();
-          this.WriterAddField = new System.Windows.Forms.ComboBox();
-          this.chkAddWriter = new System.Windows.Forms.CheckBox();
-          this.groupBox13 = new System.Windows.Forms.GroupBox();
-          this.CertificationAddField = new System.Windows.Forms.ComboBox();
-          this.chkAddCertification = new System.Windows.Forms.CheckBox();
-          this.groupBox14 = new System.Windows.Forms.GroupBox();
-          this.TaglinesAddField = new System.Windows.Forms.ComboBox();
-          this.chkAddTaglines = new System.Windows.Forms.CheckBox();
-          this.groupBox15 = new System.Windows.Forms.GroupBox();
-          this.chkAddTags = new System.Windows.Forms.CheckBox();
-          this.cbEcMergeWithGenreField = new System.Windows.Forms.CheckBox();
-          this.DVDPTagField = new System.Windows.Forms.ComboBox();
           this.tabControl1.SuspendLayout();
           this.tabPageUserSettings.SuspendLayout();
+          this.groupBox11.SuspendLayout();
+          this.groupBox15.SuspendLayout();
+          this.groupBox12.SuspendLayout();
+          this.groupBox14.SuspendLayout();
+          this.groupBox13.SuspendLayout();
           this.groupBox7.SuspendLayout();
           this.groupBox10.SuspendLayout();
           this.groupBox9.SuspendLayout();
@@ -184,11 +188,6 @@ namespace Grabber_Interface
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
-          this.groupBox11.SuspendLayout();
-          this.groupBox12.SuspendLayout();
-          this.groupBox13.SuspendLayout();
-          this.groupBox14.SuspendLayout();
-          this.groupBox15.SuspendLayout();
           this.SuspendLayout();
           // 
           // textConfig
@@ -231,6 +230,108 @@ namespace Grabber_Interface
           resources.ApplyResources(this.tabPageUserSettings, "tabPageUserSettings");
           this.tabPageUserSettings.Name = "tabPageUserSettings";
           this.tabPageUserSettings.UseVisualStyleBackColor = true;
+          // 
+          // groupBox11
+          // 
+          this.groupBox11.Controls.Add(this.groupBox15);
+          this.groupBox11.Controls.Add(this.groupBox12);
+          this.groupBox11.Controls.Add(this.groupBox14);
+          this.groupBox11.Controls.Add(this.groupBox13);
+          resources.ApplyResources(this.groupBox11, "groupBox11");
+          this.groupBox11.Name = "groupBox11";
+          this.groupBox11.TabStop = false;
+          // 
+          // groupBox15
+          // 
+          this.groupBox15.Controls.Add(this.chkAddTags);
+          this.groupBox15.Controls.Add(this.DVDPTagField);
+          resources.ApplyResources(this.groupBox15, "groupBox15");
+          this.groupBox15.Name = "groupBox15";
+          this.groupBox15.TabStop = false;
+          this.toolTip1.SetToolTip(this.groupBox15, resources.GetString("groupBox15.ToolTip"));
+          // 
+          // chkAddTags
+          // 
+          resources.ApplyResources(this.chkAddTags, "chkAddTags");
+          this.chkAddTags.Name = "chkAddTags";
+          this.chkAddTags.UseVisualStyleBackColor = true;
+          // 
+          // DVDPTagField
+          // 
+          this.DVDPTagField.FormattingEnabled = true;
+          resources.ApplyResources(this.DVDPTagField, "DVDPTagField");
+          this.DVDPTagField.Name = "DVDPTagField";
+          // 
+          // groupBox12
+          // 
+          this.groupBox12.Controls.Add(this.WriterAddField);
+          this.groupBox12.Controls.Add(this.chkAddWriter);
+          resources.ApplyResources(this.groupBox12, "groupBox12");
+          this.groupBox12.Name = "groupBox12";
+          this.groupBox12.TabStop = false;
+          // 
+          // WriterAddField
+          // 
+          this.WriterAddField.FormattingEnabled = true;
+          this.WriterAddField.Items.AddRange(new object[] {
+            resources.GetString("WriterAddField.Items"),
+            resources.GetString("WriterAddField.Items1"),
+            resources.GetString("WriterAddField.Items2"),
+            resources.GetString("WriterAddField.Items3")});
+          resources.ApplyResources(this.WriterAddField, "WriterAddField");
+          this.WriterAddField.Name = "WriterAddField";
+          // 
+          // chkAddWriter
+          // 
+          resources.ApplyResources(this.chkAddWriter, "chkAddWriter");
+          this.chkAddWriter.Name = "chkAddWriter";
+          this.chkAddWriter.UseVisualStyleBackColor = true;
+          // 
+          // groupBox14
+          // 
+          this.groupBox14.Controls.Add(this.TaglinesAddField);
+          this.groupBox14.Controls.Add(this.chkAddTaglines);
+          resources.ApplyResources(this.groupBox14, "groupBox14");
+          this.groupBox14.Name = "groupBox14";
+          this.groupBox14.TabStop = false;
+          // 
+          // TaglinesAddField
+          // 
+          this.TaglinesAddField.FormattingEnabled = true;
+          this.TaglinesAddField.Items.AddRange(new object[] {
+            resources.GetString("TaglinesAddField.Items"),
+            resources.GetString("TaglinesAddField.Items1")});
+          resources.ApplyResources(this.TaglinesAddField, "TaglinesAddField");
+          this.TaglinesAddField.Name = "TaglinesAddField";
+          // 
+          // chkAddTaglines
+          // 
+          resources.ApplyResources(this.chkAddTaglines, "chkAddTaglines");
+          this.chkAddTaglines.Name = "chkAddTaglines";
+          this.chkAddTaglines.UseVisualStyleBackColor = true;
+          // 
+          // groupBox13
+          // 
+          this.groupBox13.Controls.Add(this.CertificationAddField);
+          this.groupBox13.Controls.Add(this.chkAddCertification);
+          resources.ApplyResources(this.groupBox13, "groupBox13");
+          this.groupBox13.Name = "groupBox13";
+          this.groupBox13.TabStop = false;
+          // 
+          // CertificationAddField
+          // 
+          this.CertificationAddField.FormattingEnabled = true;
+          this.CertificationAddField.Items.AddRange(new object[] {
+            resources.GetString("CertificationAddField.Items"),
+            resources.GetString("CertificationAddField.Items1")});
+          resources.ApplyResources(this.CertificationAddField, "CertificationAddField");
+          this.CertificationAddField.Name = "CertificationAddField";
+          // 
+          // chkAddCertification
+          // 
+          resources.ApplyResources(this.chkAddCertification, "chkAddCertification");
+          this.chkAddCertification.Name = "chkAddCertification";
+          this.chkAddCertification.UseVisualStyleBackColor = true;
           // 
           // statusStrip1
           // 
@@ -417,6 +518,12 @@ namespace Grabber_Interface
           resources.ApplyResources(this.cbTtitlePreferredLanguage, "cbTtitlePreferredLanguage");
           this.cbTtitlePreferredLanguage.Name = "cbTtitlePreferredLanguage";
           this.cbTtitlePreferredLanguage.SelectedIndexChanged += new System.EventHandler(this.cbTtitlePreferredLanguage_SelectedIndexChanged);
+          // 
+          // checkBox2
+          // 
+          resources.ApplyResources(this.checkBox2, "checkBox2");
+          this.checkBox2.Name = "checkBox2";
+          this.checkBox2.UseVisualStyleBackColor = true;
           // 
           // tabPageSearchPage
           // 
@@ -1145,121 +1252,6 @@ namespace Grabber_Interface
           this.pictureBoxFranceFlag.TabStop = false;
           this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
           // 
-          // checkBox2
-          // 
-          resources.ApplyResources(this.checkBox2, "checkBox2");
-          this.checkBox2.Name = "checkBox2";
-          this.checkBox2.UseVisualStyleBackColor = true;
-          // 
-          // groupBox11
-          // 
-          this.groupBox11.Controls.Add(this.groupBox15);
-          this.groupBox11.Controls.Add(this.groupBox12);
-          this.groupBox11.Controls.Add(this.groupBox14);
-          this.groupBox11.Controls.Add(this.groupBox13);
-          resources.ApplyResources(this.groupBox11, "groupBox11");
-          this.groupBox11.Name = "groupBox11";
-          this.groupBox11.TabStop = false;
-          // 
-          // groupBox12
-          // 
-          this.groupBox12.Controls.Add(this.WriterAddField);
-          this.groupBox12.Controls.Add(this.chkAddWriter);
-          resources.ApplyResources(this.groupBox12, "groupBox12");
-          this.groupBox12.Name = "groupBox12";
-          this.groupBox12.TabStop = false;
-          // 
-          // WriterAddField
-          // 
-          this.WriterAddField.FormattingEnabled = true;
-          this.WriterAddField.Items.AddRange(new object[] {
-            resources.GetString("WriterAddField.Items"),
-            resources.GetString("WriterAddField.Items1"),
-            resources.GetString("WriterAddField.Items2"),
-            resources.GetString("WriterAddField.Items3")});
-          resources.ApplyResources(this.WriterAddField, "WriterAddField");
-          this.WriterAddField.Name = "WriterAddField";
-          // 
-          // chkAddWriter
-          // 
-          resources.ApplyResources(this.chkAddWriter, "chkAddWriter");
-          this.chkAddWriter.Name = "chkAddWriter";
-          this.chkAddWriter.UseVisualStyleBackColor = true;
-          // 
-          // groupBox13
-          // 
-          this.groupBox13.Controls.Add(this.CertificationAddField);
-          this.groupBox13.Controls.Add(this.chkAddCertification);
-          resources.ApplyResources(this.groupBox13, "groupBox13");
-          this.groupBox13.Name = "groupBox13";
-          this.groupBox13.TabStop = false;
-          // 
-          // CertificationAddField
-          // 
-          this.CertificationAddField.FormattingEnabled = true;
-          this.CertificationAddField.Items.AddRange(new object[] {
-            resources.GetString("CertificationAddField.Items"),
-            resources.GetString("CertificationAddField.Items1")});
-          resources.ApplyResources(this.CertificationAddField, "CertificationAddField");
-          this.CertificationAddField.Name = "CertificationAddField";
-          // 
-          // chkAddCertification
-          // 
-          resources.ApplyResources(this.chkAddCertification, "chkAddCertification");
-          this.chkAddCertification.Name = "chkAddCertification";
-          this.chkAddCertification.UseVisualStyleBackColor = true;
-          // 
-          // groupBox14
-          // 
-          this.groupBox14.Controls.Add(this.TaglinesAddField);
-          this.groupBox14.Controls.Add(this.chkAddTaglines);
-          resources.ApplyResources(this.groupBox14, "groupBox14");
-          this.groupBox14.Name = "groupBox14";
-          this.groupBox14.TabStop = false;
-          // 
-          // TaglinesAddField
-          // 
-          this.TaglinesAddField.FormattingEnabled = true;
-          this.TaglinesAddField.Items.AddRange(new object[] {
-            resources.GetString("TaglinesAddField.Items"),
-            resources.GetString("TaglinesAddField.Items1")});
-          resources.ApplyResources(this.TaglinesAddField, "TaglinesAddField");
-          this.TaglinesAddField.Name = "TaglinesAddField";
-          // 
-          // chkAddTaglines
-          // 
-          resources.ApplyResources(this.chkAddTaglines, "chkAddTaglines");
-          this.chkAddTaglines.Name = "chkAddTaglines";
-          this.chkAddTaglines.UseVisualStyleBackColor = true;
-          // 
-          // groupBox15
-          // 
-          this.groupBox15.Controls.Add(this.chkAddTags);
-          this.groupBox15.Controls.Add(this.cbEcMergeWithGenreField);
-          this.groupBox15.Controls.Add(this.DVDPTagField);
-          resources.ApplyResources(this.groupBox15, "groupBox15");
-          this.groupBox15.Name = "groupBox15";
-          this.groupBox15.TabStop = false;
-          this.toolTip1.SetToolTip(this.groupBox15, resources.GetString("groupBox15.ToolTip"));
-          // 
-          // chkAddTags
-          // 
-          resources.ApplyResources(this.chkAddTags, "chkAddTags");
-          this.chkAddTags.Name = "chkAddTags";
-          this.chkAddTags.UseVisualStyleBackColor = true;
-          // 
-          // cbEcMergeWithGenreField
-          // 
-          resources.ApplyResources(this.cbEcMergeWithGenreField, "cbEcMergeWithGenreField");
-          this.cbEcMergeWithGenreField.Name = "cbEcMergeWithGenreField";
-          this.cbEcMergeWithGenreField.UseVisualStyleBackColor = true;
-          // 
-          // DVDPTagField
-          // 
-          this.DVDPTagField.FormattingEnabled = true;
-          resources.ApplyResources(this.DVDPTagField, "DVDPTagField");
-          this.DVDPTagField.Name = "DVDPTagField";
-          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -1286,6 +1278,15 @@ namespace Grabber_Interface
           this.tabControl1.ResumeLayout(false);
           this.tabPageUserSettings.ResumeLayout(false);
           this.tabPageUserSettings.PerformLayout();
+          this.groupBox11.ResumeLayout(false);
+          this.groupBox15.ResumeLayout(false);
+          this.groupBox15.PerformLayout();
+          this.groupBox12.ResumeLayout(false);
+          this.groupBox12.PerformLayout();
+          this.groupBox14.ResumeLayout(false);
+          this.groupBox14.PerformLayout();
+          this.groupBox13.ResumeLayout(false);
+          this.groupBox13.PerformLayout();
           this.groupBox7.ResumeLayout(false);
           this.groupBox7.PerformLayout();
           this.groupBox10.ResumeLayout(false);
@@ -1312,15 +1313,6 @@ namespace Grabber_Interface
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
-          this.groupBox11.ResumeLayout(false);
-          this.groupBox12.ResumeLayout(false);
-          this.groupBox12.PerformLayout();
-          this.groupBox13.ResumeLayout(false);
-          this.groupBox13.PerformLayout();
-          this.groupBox14.ResumeLayout(false);
-          this.groupBox14.PerformLayout();
-          this.groupBox15.ResumeLayout(false);
-          this.groupBox15.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -1462,7 +1454,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.CheckBox chkAddCertification;
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.CheckBox chkAddTags;
-        private System.Windows.Forms.CheckBox cbEcMergeWithGenreField;
         private System.Windows.Forms.ComboBox DVDPTagField;
 
     }

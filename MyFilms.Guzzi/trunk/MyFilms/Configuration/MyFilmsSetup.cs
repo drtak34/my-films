@@ -1978,12 +1978,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     AntStorageTrailer.Text = "Borrower";
                     if (MesFilmsCat.Text.Length > 0)
                     {
-                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Posters"; // cover path
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Photos"; // person thumb path
-                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Fanart"; // fanart path
-                      //a.	You can choose to store the picture in the catalog (default) or not
-                      //b.	Posters are stored in a subfolder of the catalog folder \DBName\Posters – these are the ‘extra’ posters you download
-                      //c.	Person images are stored in a subfolder of the catalog folder \DBName\ Photos – although you have to grab those separately for each person as far as I can tell.
+                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Screenshots"; // fanart path
+                      // o	Posters - D:\My Documents\Personal Video Database\TEST\Posters – movie covers used in PVD DB - but setting to DB path required !
+                      //o	D:\My Documents\Personal Video Database\TEST\Photos – actor/person images
+                      //o	D:\My Documents\Personal Video Database\TEST\Screenshots – could be video thumbnails, fanart, manually saved thumbs
+                      //o	D:\My Documents\Personal Video Database\TEST\images – PVD copies covers to this folder when you export to xml and these are the filenames exported for cover images, i.e.:
+                      //	<poster>images/image1_66_-1x-1.jpg</poster>
                     }
                     cbWatched.Text = "Checked";
                     break;
@@ -4754,7 +4756,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\MyFilms_Grabber_Interface.exe";
             psi.UseShellExecute = true;
             psi.WindowStyle = ProcessWindowStyle.Normal;
-            psi.Arguments = txtGrabber.Text;
+            psi.Arguments = "\"" + txtGrabber.Text + "\"";
             psi.ErrorDialog = true;
             if (OSInfo.OSInfo.VistaOrLater())
             {

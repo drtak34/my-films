@@ -270,18 +270,16 @@ You can use the browse button to select the file.
 The default Artist image will be displayed when an artist does not have an associated photo or image
 and it will be used as a default artist image.</value>
   </data>
-  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
-    <value>You can update your movie data via internet from insude MyFilms GUI.
+  <data name="btnEditScript.ToolTip" xml:space="preserve">
+    <value>This launches the MyFilms Grabber Interface.
+The current default script will be autoloaded.
+You can set user defined options or switch to expert mode to 
+modify the grabber script in detail.
 
-You have to define the xml parser file ("grabber script" to be used.
-
-With the 'try to find best match automaticly' option validated, the grabber will
-try to find best match but can provide errors in some cases. It's better to
-don't valid it. In that case, you'll get a menu to choose the right movie.
-
-You can change those options from MyFilms GUI (global settings) also.
-
-</value>
+Remark: Changes to the Grabber Options will apply to the script,
+so all MyFilms configs that use it, will be affected.
+If you want those settings to only apply to a certain MyFilms config, you should save the script
+with a separate name and set this as default grabber script.</value>
   </data>
   <data name="groupBox6.ToolTip" xml:space="preserve">
     <value>You can set several options for the internet grabber.
@@ -309,6 +307,19 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
+  </data>
+  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
+    <value>You can update your movie data via internet from insude MyFilms GUI.
+
+You have to define the xml parser file ("grabber script" to be used.
+
+With the 'try to find best match automaticly' option validated, the grabber will
+try to find best match but can provide errors in some cases. It's better to
+don't valid it. In that case, you'll get a menu to choose the right movie.
+
+You can change those options from MyFilms GUI (global settings) also.
+
+</value>
   </data>
   <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
     <value>For updating the whole database and scan for and add new movies to your catalog automatically,
@@ -611,12 +622,6 @@ It can run independant from MyFilms.</value>
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
-  <data name="buttonDeleteTmpCatalog.ToolTip" xml:space="preserve">
-    <value>If you changed you external Catalog settings, they will only apply, if an import is done in MyFilms.
-This import will happen, if the timestamp of the external catalog data is changed/updated - 
-e.g. when the data was refreshed.
-However, you can force to import the data by deleting the MyFilms cache DB.</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxMyFilms.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1001,6 +1006,12 @@ However, you can force to import the data by deleting the MyFilms cache DB.</val
         u4ZnAJC/lsb+3gB8BoBnAPh7a8DvrVF/tdd7ZgGeWYBnFuCvprW/5/U+swDPLMAzC/B7atRf7bWeWYBn
         FuCZBfirae3veb3PLMAzC/DMAvyeGvVXe61nFuBvbgH+D7ZJYjnerQCqAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="buttonDeleteTmpCatalog.ToolTip" xml:space="preserve">
+    <value>If you changed you external Catalog settings, they will only apply, if an import is done in MyFilms.
+This import will happen, if the timestamp of the external catalog data is changed/updated - 
+e.g. when the data was refreshed.
+However, you can force to import the data by deleting the MyFilms cache DB.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>

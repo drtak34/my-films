@@ -208,16 +208,16 @@
     <value>True</value>
   </data>
   <data name="chkAddTags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 47</value>
+    <value>23, 32</value>
   </data>
   <data name="chkAddTags.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 17</value>
+    <value>94, 17</value>
   </data>
   <data name="chkAddTags.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="chkAddTags.Text" xml:space="preserve">
-    <value>Store in  Field :</value>
+    <value>Add to Field ...</value>
   </data>
   <data name="&gt;&gt;chkAddTags.Name" xml:space="preserve">
     <value>chkAddTags</value>
@@ -231,35 +231,8 @@
   <data name="&gt;&gt;chkAddTags.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cbEcMergeWithGenreField.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cbEcMergeWithGenreField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 24</value>
-  </data>
-  <data name="cbEcMergeWithGenreField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 17</value>
-  </data>
-  <data name="cbEcMergeWithGenreField.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="cbEcMergeWithGenreField.Text" xml:space="preserve">
-    <value>Merge With Genre Field</value>
-  </data>
-  <data name="&gt;&gt;cbEcMergeWithGenreField.Name" xml:space="preserve">
-    <value>cbEcMergeWithGenreField</value>
-  </data>
-  <data name="&gt;&gt;cbEcMergeWithGenreField.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbEcMergeWithGenreField.Parent" xml:space="preserve">
-    <value>groupBox15</value>
-  </data>
-  <data name="&gt;&gt;cbEcMergeWithGenreField.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="DVDPTagField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 45</value>
+    <value>169, 30</value>
   </data>
   <data name="DVDPTagField.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 21</value>
@@ -277,13 +250,13 @@
     <value>groupBox15</value>
   </data>
   <data name="&gt;&gt;DVDPTagField.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="groupBox15.Location" type="System.Drawing.Point, System.Drawing">
     <value>26, 227</value>
   </data>
   <data name="groupBox15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>327, 86</value>
+    <value>327, 68</value>
   </data>
   <data name="groupBox15.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -392,6 +365,21 @@ of the generated DB.</value>
   <data name="&gt;&gt;groupBox12.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="TaglinesAddField.Items" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="TaglinesAddField.Items1" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="TaglinesAddField.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 24</value>
+  </data>
+  <data name="TaglinesAddField.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 21</value>
+  </data>
+  <data name="TaglinesAddField.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;TaglinesAddField.Name" xml:space="preserve">
     <value>TaglinesAddField</value>
   </data>
@@ -403,6 +391,21 @@ of the generated DB.</value>
   </data>
   <data name="&gt;&gt;TaglinesAddField.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="chkAddTaglines.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkAddTaglines.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 26</value>
+  </data>
+  <data name="chkAddTaglines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 17</value>
+  </data>
+  <data name="chkAddTaglines.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkAddTaglines.Text" xml:space="preserve">
+    <value>Add to Field ...</value>
   </data>
   <data name="&gt;&gt;chkAddTaglines.Name" xml:space="preserve">
     <value>chkAddTaglines</value>
@@ -440,6 +443,21 @@ of the generated DB.</value>
   <data name="&gt;&gt;groupBox14.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="CertificationAddField.Items" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CertificationAddField.Items1" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="CertificationAddField.Location" type="System.Drawing.Point, System.Drawing">
+    <value>169, 28</value>
+  </data>
+  <data name="CertificationAddField.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 21</value>
+  </data>
+  <data name="CertificationAddField.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;CertificationAddField.Name" xml:space="preserve">
     <value>CertificationAddField</value>
   </data>
@@ -451,6 +469,21 @@ of the generated DB.</value>
   </data>
   <data name="&gt;&gt;CertificationAddField.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="chkAddCertification.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkAddCertification.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 30</value>
+  </data>
+  <data name="chkAddCertification.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
+  </data>
+  <data name="chkAddCertification.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="chkAddCertification.Text" xml:space="preserve">
+    <value>Add to field...</value>
   </data>
   <data name="&gt;&gt;chkAddCertification.Name" xml:space="preserve">
     <value>chkAddCertification</value>
@@ -492,7 +525,7 @@ of the generated DB.</value>
     <value>455, 61</value>
   </data>
   <data name="groupBox11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 358</value>
+    <value>392, 327</value>
   </data>
   <data name="groupBox11.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -572,6 +605,69 @@ of the generated DB.</value>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="label29.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 30</value>
+  </data>
+  <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 13</value>
+  </data>
+  <data name="label29.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label29.Text" xml:space="preserve">
+    <value>Preferred Language</value>
+  </data>
+  <data name="&gt;&gt;label29.Name" xml:space="preserve">
+    <value>label29</value>
+  </data>
+  <data name="&gt;&gt;label29.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbCertificationPreferredLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 27</value>
+  </data>
+  <data name="cbCertificationPreferredLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbCertificationPreferredLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Name" xml:space="preserve">
+    <value>cbCertificationPreferredLanguage</value>
+  </data>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 315</value>
+  </data>
+  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 77</value>
+  </data>
+  <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="groupBox10.Text" xml:space="preserve">
+    <value>Certification ...</value>
+  </data>
   <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
     <value>groupBox10</value>
   </data>
@@ -583,6 +679,330 @@ of the generated DB.</value>
   </data>
   <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="cbMaxWriters.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbMaxWriters.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbMaxWriters.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cbMaxWriters.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cbMaxWriters.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cbMaxWriters.Items5" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cbMaxWriters.Items6" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cbMaxWriters.Items7" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cbMaxWriters.Items8" xml:space="preserve">
+    <value>999</value>
+  </data>
+  <data name="cbMaxWriters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 98</value>
+  </data>
+  <data name="cbMaxWriters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbMaxWriters.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;cbMaxWriters.Name" xml:space="preserve">
+    <value>cbMaxWriters</value>
+  </data>
+  <data name="&gt;&gt;cbMaxWriters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbMaxWriters.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;cbMaxWriters.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbMaxDirectors.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbMaxDirectors.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbMaxDirectors.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cbMaxDirectors.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cbMaxDirectors.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cbMaxDirectors.Items5" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cbMaxDirectors.Items6" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cbMaxDirectors.Items7" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cbMaxDirectors.Items8" xml:space="preserve">
+    <value>999</value>
+  </data>
+  <data name="cbMaxDirectors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 71</value>
+  </data>
+  <data name="cbMaxDirectors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbMaxDirectors.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;cbMaxDirectors.Name" xml:space="preserve">
+    <value>cbMaxDirectors</value>
+  </data>
+  <data name="&gt;&gt;cbMaxDirectors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbMaxDirectors.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;cbMaxDirectors.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbMaxProducers.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbMaxProducers.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbMaxProducers.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cbMaxProducers.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cbMaxProducers.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cbMaxProducers.Items5" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cbMaxProducers.Items6" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cbMaxProducers.Items7" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cbMaxProducers.Items8" xml:space="preserve">
+    <value>999</value>
+  </data>
+  <data name="cbMaxProducers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 44</value>
+  </data>
+  <data name="cbMaxProducers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbMaxProducers.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cbMaxProducers.Name" xml:space="preserve">
+    <value>cbMaxProducers</value>
+  </data>
+  <data name="&gt;&gt;cbMaxProducers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbMaxProducers.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;cbMaxProducers.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbMaxActors.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbMaxActors.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbMaxActors.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cbMaxActors.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cbMaxActors.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cbMaxActors.Items5" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cbMaxActors.Items6" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cbMaxActors.Items7" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cbMaxActors.Items8" xml:space="preserve">
+    <value>999</value>
+  </data>
+  <data name="cbMaxActors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 17</value>
+  </data>
+  <data name="cbMaxActors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbMaxActors.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cbMaxActors.Name" xml:space="preserve">
+    <value>cbMaxActors</value>
+  </data>
+  <data name="&gt;&gt;cbMaxActors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbMaxActors.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;cbMaxActors.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label28.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label28.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 101</value>
+  </data>
+  <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="label28.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label28.Text" xml:space="preserve">
+    <value>Max # of Writers</value>
+  </data>
+  <data name="&gt;&gt;label28.Name" xml:space="preserve">
+    <value>label28</value>
+  </data>
+  <data name="&gt;&gt;label28.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label28.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;label28.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="label27.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label27.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 74</value>
+  </data>
+  <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="label27.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label27.Text" xml:space="preserve">
+    <value>Max # of Directors</value>
+  </data>
+  <data name="&gt;&gt;label27.Name" xml:space="preserve">
+    <value>label27</value>
+  </data>
+  <data name="&gt;&gt;label27.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label27.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label26.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 47</value>
+  </data>
+  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 13</value>
+  </data>
+  <data name="label26.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label26.Text" xml:space="preserve">
+    <value>Max # of Producers</value>
+  </data>
+  <data name="&gt;&gt;label26.Name" xml:space="preserve">
+    <value>label26</value>
+  </data>
+  <data name="&gt;&gt;label26.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label26.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label25.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 20</value>
+  </data>
+  <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 13</value>
+  </data>
+  <data name="label25.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label25.Text" xml:space="preserve">
+    <value>Max # of Actors</value>
+  </data>
+  <data name="&gt;&gt;label25.Name" xml:space="preserve">
+    <value>label25</value>
+  </data>
+  <data name="&gt;&gt;label25.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label25.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 29</value>
+  </data>
+  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 134</value>
+  </data>
+  <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="groupBox9.Text" xml:space="preserve">
+    <value>Person Number Limit ...</value>
   </data>
   <data name="&gt;&gt;groupBox9.Name" xml:space="preserve">
     <value>groupBox9</value>
@@ -596,6 +1016,147 @@ of the generated DB.</value>
   <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label24.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 29</value>
+  </data>
+  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 13</value>
+  </data>
+  <data name="label24.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label24.Text" xml:space="preserve">
+    <value>Preferred Language</value>
+  </data>
+  <data name="&gt;&gt;label24.Name" xml:space="preserve">
+    <value>label24</value>
+  </data>
+  <data name="&gt;&gt;label24.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label24.Parent" xml:space="preserve">
+    <value>groupBox8</value>
+  </data>
+  <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label23.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 66</value>
+  </data>
+  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 13</value>
+  </data>
+  <data name="label23.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label23.Text" xml:space="preserve">
+    <value>Max # of Titles to grab</value>
+  </data>
+  <data name="&gt;&gt;label23.Name" xml:space="preserve">
+    <value>label23</value>
+  </data>
+  <data name="&gt;&gt;label23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label23.Parent" xml:space="preserve">
+    <value>groupBox8</value>
+  </data>
+  <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items1" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items3" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items4" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items5" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items6" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items7" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Items8" xml:space="preserve">
+    <value>999</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 63</value>
+  </data>
+  <data name="cbTtitleMaxTitles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbTtitleMaxTitles.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;cbTtitleMaxTitles.Name" xml:space="preserve">
+    <value>cbTtitleMaxTitles</value>
+  </data>
+  <data name="&gt;&gt;cbTtitleMaxTitles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbTtitleMaxTitles.Parent" xml:space="preserve">
+    <value>groupBox8</value>
+  </data>
+  <data name="&gt;&gt;cbTtitleMaxTitles.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbTtitlePreferredLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 26</value>
+  </data>
+  <data name="cbTtitlePreferredLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbTtitlePreferredLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;cbTtitlePreferredLanguage.Name" xml:space="preserve">
+    <value>cbTtitlePreferredLanguage</value>
+  </data>
+  <data name="&gt;&gt;cbTtitlePreferredLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbTtitlePreferredLanguage.Parent" xml:space="preserve">
+    <value>groupBox8</value>
+  </data>
+  <data name="&gt;&gt;cbTtitlePreferredLanguage.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 181</value>
+  </data>
+  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 114</value>
+  </data>
+  <data name="groupBox8.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="groupBox8.Text" xml:space="preserve">
+    <value>Translated Title ...</value>
+  </data>
   <data name="&gt;&gt;groupBox8.Name" xml:space="preserve">
     <value>groupBox8</value>
   </data>
@@ -607,6 +1168,21 @@ of the generated DB.</value>
   </data>
   <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="checkBox2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 443</value>
+  </data>
+  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 17</value>
+  </data>
+  <data name="checkBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="checkBox2.Text" xml:space="preserve">
+    <value>Don't grab Actor Roles</value>
   </data>
   <data name="&gt;&gt;checkBox2.Name" xml:space="preserve">
     <value>checkBox2</value>
@@ -1274,6 +1850,15 @@ When you are searching the site, it is possible that the page result is a redire
   </data>
   <data name="&gt;&gt;textBody.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="listPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="listPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>528, 147</value>
+  </data>
+  <data name="listPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
   <data name="&gt;&gt;listPreview.Name" xml:space="preserve">
     <value>listPreview</value>
@@ -2127,6 +2712,18 @@ If it contains a cover image, it will be shown in preview box.</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 16</value>
+  </data>
+  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 248</value>
+  </data>
+  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textPreview.Text" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
     <value>textPreview</value>
@@ -3109,783 +3706,6 @@ Certification: Certification</value>
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;label29.Name" xml:space="preserve">
-    <value>label29</value>
-  </data>
-  <data name="&gt;&gt;label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Name" xml:space="preserve">
-    <value>cbCertificationPreferredLanguage</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 315</value>
-  </data>
-  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 77</value>
-  </data>
-  <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="groupBox10.Text" xml:space="preserve">
-    <value>Certification ...</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label29.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 30</value>
-  </data>
-  <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 13</value>
-  </data>
-  <data name="label29.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label29.Text" xml:space="preserve">
-    <value>Preferred Language</value>
-  </data>
-  <data name="&gt;&gt;label29.Name" xml:space="preserve">
-    <value>label29</value>
-  </data>
-  <data name="&gt;&gt;label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cbCertificationPreferredLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 27</value>
-  </data>
-  <data name="cbCertificationPreferredLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cbCertificationPreferredLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Name" xml:space="preserve">
-    <value>cbCertificationPreferredLanguage</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Name" xml:space="preserve">
-    <value>cbMaxWriters</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Name" xml:space="preserve">
-    <value>cbMaxDirectors</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Name" xml:space="preserve">
-    <value>cbMaxProducers</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Name" xml:space="preserve">
-    <value>cbMaxActors</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;label28.Name" xml:space="preserve">
-    <value>label28</value>
-  </data>
-  <data name="&gt;&gt;label28.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label28.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label28.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;label27.Name" xml:space="preserve">
-    <value>label27</value>
-  </data>
-  <data name="&gt;&gt;label27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label27.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label26.Name" xml:space="preserve">
-    <value>label26</value>
-  </data>
-  <data name="&gt;&gt;label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label26.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label25.Name" xml:space="preserve">
-    <value>label25</value>
-  </data>
-  <data name="&gt;&gt;label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label25.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 29</value>
-  </data>
-  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 134</value>
-  </data>
-  <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="groupBox9.Text" xml:space="preserve">
-    <value>Person Number Limit ...</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Name" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cbMaxWriters.Items" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cbMaxWriters.Items1" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cbMaxWriters.Items2" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cbMaxWriters.Items3" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cbMaxWriters.Items4" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="cbMaxWriters.Items5" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="cbMaxWriters.Items6" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="cbMaxWriters.Items7" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="cbMaxWriters.Items8" xml:space="preserve">
-    <value>999</value>
-  </data>
-  <data name="cbMaxWriters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 98</value>
-  </data>
-  <data name="cbMaxWriters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cbMaxWriters.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Name" xml:space="preserve">
-    <value>cbMaxWriters</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cbMaxDirectors.Items" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cbMaxDirectors.Items1" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cbMaxDirectors.Items2" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cbMaxDirectors.Items3" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cbMaxDirectors.Items4" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="cbMaxDirectors.Items5" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="cbMaxDirectors.Items6" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="cbMaxDirectors.Items7" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="cbMaxDirectors.Items8" xml:space="preserve">
-    <value>999</value>
-  </data>
-  <data name="cbMaxDirectors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 71</value>
-  </data>
-  <data name="cbMaxDirectors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cbMaxDirectors.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Name" xml:space="preserve">
-    <value>cbMaxDirectors</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cbMaxProducers.Items" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cbMaxProducers.Items1" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cbMaxProducers.Items2" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cbMaxProducers.Items3" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cbMaxProducers.Items4" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="cbMaxProducers.Items5" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="cbMaxProducers.Items6" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="cbMaxProducers.Items7" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="cbMaxProducers.Items8" xml:space="preserve">
-    <value>999</value>
-  </data>
-  <data name="cbMaxProducers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 44</value>
-  </data>
-  <data name="cbMaxProducers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cbMaxProducers.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Name" xml:space="preserve">
-    <value>cbMaxProducers</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cbMaxActors.Items" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cbMaxActors.Items1" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cbMaxActors.Items2" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cbMaxActors.Items3" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cbMaxActors.Items4" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="cbMaxActors.Items5" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="cbMaxActors.Items6" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="cbMaxActors.Items7" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="cbMaxActors.Items8" xml:space="preserve">
-    <value>999</value>
-  </data>
-  <data name="cbMaxActors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 17</value>
-  </data>
-  <data name="cbMaxActors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cbMaxActors.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Name" xml:space="preserve">
-    <value>cbMaxActors</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label28.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label28.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 101</value>
-  </data>
-  <data name="label28.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 13</value>
-  </data>
-  <data name="label28.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label28.Text" xml:space="preserve">
-    <value>Max # of Writers</value>
-  </data>
-  <data name="&gt;&gt;label28.Name" xml:space="preserve">
-    <value>label28</value>
-  </data>
-  <data name="&gt;&gt;label28.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label28.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label28.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="label27.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label27.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label27.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 74</value>
-  </data>
-  <data name="label27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
-  </data>
-  <data name="label27.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label27.Text" xml:space="preserve">
-    <value>Max # of Directors</value>
-  </data>
-  <data name="&gt;&gt;label27.Name" xml:space="preserve">
-    <value>label27</value>
-  </data>
-  <data name="&gt;&gt;label27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label27.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="label26.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label26.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 47</value>
-  </data>
-  <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 13</value>
-  </data>
-  <data name="label26.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label26.Text" xml:space="preserve">
-    <value>Max # of Producers</value>
-  </data>
-  <data name="&gt;&gt;label26.Name" xml:space="preserve">
-    <value>label26</value>
-  </data>
-  <data name="&gt;&gt;label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label26.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="label25.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label25.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label25.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 20</value>
-  </data>
-  <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 13</value>
-  </data>
-  <data name="label25.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label25.Text" xml:space="preserve">
-    <value>Max # of Actors</value>
-  </data>
-  <data name="&gt;&gt;label25.Name" xml:space="preserve">
-    <value>label25</value>
-  </data>
-  <data name="&gt;&gt;label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label25.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;label24.Name" xml:space="preserve">
-    <value>label24</value>
-  </data>
-  <data name="&gt;&gt;label24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label24.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label23.Name" xml:space="preserve">
-    <value>label23</value>
-  </data>
-  <data name="&gt;&gt;label23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label23.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cbTtitleMaxTitles.Name" xml:space="preserve">
-    <value>cbTtitleMaxTitles</value>
-  </data>
-  <data name="&gt;&gt;cbTtitleMaxTitles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbTtitleMaxTitles.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;cbTtitleMaxTitles.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cbTtitlePreferredLanguage.Name" xml:space="preserve">
-    <value>cbTtitlePreferredLanguage</value>
-  </data>
-  <data name="&gt;&gt;cbTtitlePreferredLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbTtitlePreferredLanguage.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;cbTtitlePreferredLanguage.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 181</value>
-  </data>
-  <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 114</value>
-  </data>
-  <data name="groupBox8.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="groupBox8.Text" xml:space="preserve">
-    <value>Translated Title ...</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.Name" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label24.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label24.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 29</value>
-  </data>
-  <data name="label24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 13</value>
-  </data>
-  <data name="label24.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="label24.Text" xml:space="preserve">
-    <value>Preferred Language</value>
-  </data>
-  <data name="&gt;&gt;label24.Name" xml:space="preserve">
-    <value>label24</value>
-  </data>
-  <data name="&gt;&gt;label24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label24.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;label24.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label23.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label23.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label23.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 66</value>
-  </data>
-  <data name="label23.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 13</value>
-  </data>
-  <data name="label23.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label23.Text" xml:space="preserve">
-    <value>Max # of Titles to grab</value>
-  </data>
-  <data name="&gt;&gt;label23.Name" xml:space="preserve">
-    <value>label23</value>
-  </data>
-  <data name="&gt;&gt;label23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label23.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;label23.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items1" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items2" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items3" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items4" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items5" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items6" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items7" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Items8" xml:space="preserve">
-    <value>999</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 63</value>
-  </data>
-  <data name="cbTtitleMaxTitles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cbTtitleMaxTitles.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cbTtitleMaxTitles.Name" xml:space="preserve">
-    <value>cbTtitleMaxTitles</value>
-  </data>
-  <data name="&gt;&gt;cbTtitleMaxTitles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbTtitleMaxTitles.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;cbTtitleMaxTitles.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cbTtitlePreferredLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 26</value>
-  </data>
-  <data name="cbTtitlePreferredLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cbTtitlePreferredLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;cbTtitlePreferredLanguage.Name" xml:space="preserve">
-    <value>cbTtitlePreferredLanguage</value>
-  </data>
-  <data name="&gt;&gt;cbTtitlePreferredLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbTtitlePreferredLanguage.Parent" xml:space="preserve">
-    <value>groupBox8</value>
-  </data>
-  <data name="&gt;&gt;cbTtitlePreferredLanguage.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="listPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="listPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 147</value>
-  </data>
-  <data name="listPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;listPreview.Name" xml:space="preserve">
-    <value>listPreview</value>
-  </data>
-  <data name="&gt;&gt;listPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;listPreview.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;listPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 16</value>
-  </data>
-  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 248</value>
-  </data>
-  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textPreview.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
-    <value>textPreview</value>
-  </data>
-  <data name="&gt;&gt;textPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textPreview.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;textPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4282,8 +4102,8 @@ expert mode is not required.</value>
   <data name="pictureBoxFranceFlag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/gAA
-        Cv4B5iV4ZgAAAidJREFUSEu11t9LU2Ecx3EDEXHp3ImxucUGHg1HU6bUKhk6TLcgpUFKFysxLAxntmk0
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK/QAA
+        Cv0BS5xZCwAAAidJREFUSEu11t9LU2Ecx3EDEXHp3ImxucUGHg1HU6bUKhk6TLcgpUFKFysxLAxntmk0
         wwpa9ENi5UV1V1dBEHTXTX9ARUFEba4wUxCtCPY3fHq+B90Dz3PyudkOvHjOzsX3PZ6z7WwXgKqKHhSo
         pIoO396darZFuxlbmdFMml3V2N//ANHooin2LnY8VgdP439oNgXckcgiFhbemFIF/mafwMzqiTP06XFT
         wNvXl0Um8xozMy+RYmjdpgpspjMwXLlp+MX8ufMQK4NxCniNQG/vfaTTrzAx8VyiCmxMXYXo97W7+HHs
@@ -4321,141 +4141,6 @@ expert mode is not required.</value>
   </data>
   <data name="&gt;&gt;pictureBoxFranceFlag.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="checkBox2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 443</value>
-  </data>
-  <data name="checkBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 17</value>
-  </data>
-  <data name="checkBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <data name="checkBox2.Text" xml:space="preserve">
-    <value>Don't grab Actor Roles</value>
-  </data>
-  <data name="&gt;&gt;checkBox2.Name" xml:space="preserve">
-    <value>checkBox2</value>
-  </data>
-  <data name="&gt;&gt;checkBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox2.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;checkBox2.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="CertificationAddField.Items" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="CertificationAddField.Items1" xml:space="preserve">
-    <value>Comments</value>
-  </data>
-  <data name="CertificationAddField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 28</value>
-  </data>
-  <data name="CertificationAddField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 21</value>
-  </data>
-  <data name="CertificationAddField.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;CertificationAddField.Name" xml:space="preserve">
-    <value>CertificationAddField</value>
-  </data>
-  <data name="&gt;&gt;CertificationAddField.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;CertificationAddField.Parent" xml:space="preserve">
-    <value>groupBox13</value>
-  </data>
-  <data name="&gt;&gt;CertificationAddField.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="chkAddCertification.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkAddCertification.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 30</value>
-  </data>
-  <data name="chkAddCertification.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 17</value>
-  </data>
-  <data name="chkAddCertification.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="chkAddCertification.Text" xml:space="preserve">
-    <value>Add to field...</value>
-  </data>
-  <data name="&gt;&gt;chkAddCertification.Name" xml:space="preserve">
-    <value>chkAddCertification</value>
-  </data>
-  <data name="&gt;&gt;chkAddCertification.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkAddCertification.Parent" xml:space="preserve">
-    <value>groupBox13</value>
-  </data>
-  <data name="&gt;&gt;chkAddCertification.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="TaglinesAddField.Items" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="TaglinesAddField.Items1" xml:space="preserve">
-    <value>Comments</value>
-  </data>
-  <data name="TaglinesAddField.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 24</value>
-  </data>
-  <data name="TaglinesAddField.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 21</value>
-  </data>
-  <data name="TaglinesAddField.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;TaglinesAddField.Name" xml:space="preserve">
-    <value>TaglinesAddField</value>
-  </data>
-  <data name="&gt;&gt;TaglinesAddField.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TaglinesAddField.Parent" xml:space="preserve">
-    <value>groupBox14</value>
-  </data>
-  <data name="&gt;&gt;TaglinesAddField.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="chkAddTaglines.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="chkAddTaglines.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 26</value>
-  </data>
-  <data name="chkAddTaglines.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 17</value>
-  </data>
-  <data name="chkAddTaglines.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="chkAddTaglines.Text" xml:space="preserve">
-    <value>Add to Field ...</value>
-  </data>
-  <data name="&gt;&gt;chkAddTaglines.Name" xml:space="preserve">
-    <value>chkAddTaglines</value>
-  </data>
-  <data name="&gt;&gt;chkAddTaglines.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkAddTaglines.Parent" xml:space="preserve">
-    <value>groupBox14</value>
-  </data>
-  <data name="&gt;&gt;chkAddTaglines.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
