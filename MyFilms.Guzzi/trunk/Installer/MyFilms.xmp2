@@ -2020,6 +2020,323 @@
           </Items>
         </Files>
       </GroupItem>
+      <GroupItem Name="DefaultThumbs">
+        <DisplayName>DefaultThumbs</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>DefaultThumbs</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Action.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{229bd4f6-8260-4019-b61f-da2e3e47e7a8}-Action.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Action.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Adult.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{caabcf25-a87d-4446-9ea1-235d25900b20}-Adult.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Adult.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Adventure.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{71bb42ac-1aab-41f0-b0e0-79bdc58ef680}-Adventure.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Adventure.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Animation.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{be39ba98-40ac-4037-916d-16c79f988889}-Animation.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Animation.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Anime.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e5bc06c4-8c55-49cc-adc6-04b7b4789ede}-Anime.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Anime.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Biography.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c1176a96-e8fe-41c9-9625-910c8afd6ba8}-Biography.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Biography.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Bollywood.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1083d1f5-be87-44f0-8408-98c38b466098}-Bollywood.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Bollywood.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Children.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{fdcc06d3-9ea7-4f2b-b9db-29449082ce4c}-Children.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Children.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Christmas.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{37a8491d-150e-4d90-b72d-53c5db51ee5d}-Christmas.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Christmas.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Comedy.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{93bb3877-5c32-4903-b770-13c7dd4158a8}-Comedy.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Comedy.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Concert.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{730d7bb2-2dd4-47d5-a32e-85d89befd9ce}-Concert.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Concert.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Crime.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1ea48313-c31a-4741-a4b7-909dc14c85cc}-Crime.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Crime.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Disaster.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9f655345-2f0b-4a6a-9391-6c610ac6449b}-Disaster.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Disaster.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Documentary.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{32e1ae81-abe7-49c6-af66-9f2bbc34d2a9}-Documentary.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Documentary.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Drama.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e1eb5c21-646d-4713-bb29-fdaf6ee343f8}-Drama.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Drama.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Family.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{60e24e39-6da3-44d8-8d8c-fed227700957}-Family.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Family.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Fantasy.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7d046af2-9a73-4fa7-b2b9-d7e442b9aef3}-Fantasy.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Fantasy.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Film-noir.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{fb1040ca-76b1-47aa-9f23-57e59d649d59}-Film-noir.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Film-noir.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Halloween.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2953714d-9af7-48a1-a66c-33112d00cbda}-Halloween.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Halloween.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Hentai.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{959eb8cc-5502-4c01-ba09-2c69364a066a}-Hentai.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Hentai.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\History-alt.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{bc314e7d-115f-4bdf-8178-b59c1b6e75a9}-History-alt.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\History-alt.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Horror.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{adfbc50c-079a-4ed5-bc3a-bd70e3c77f59}-Horror.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Horror.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Independent.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8f68ca84-69e8-44c0-8445-f381d153eaa0}-Independent.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Independent.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Monster.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7ef457e2-4810-4859-ad25-efd2a24c0014}-Monster.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Monster.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Music.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{548987da-3681-4205-b553-44cc5b72f9a8}-Music.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Music.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Musical.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1f9abcaa-3105-436a-9953-8355a2e61c9b}-Musical.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Musical.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Mystery.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{399554ae-e754-4095-b222-c180e23e3d0a}-Mystery.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Mystery.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Nature.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{3178334a-dfa8-47c4-a11d-38984ef13f7f}-Nature.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Nature.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Post-apocalyptic.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{4932ffd2-e48f-4be5-9bb6-254fd02ab2a0}-Post-apocalyptic.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Post-apocalyptic.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Religion.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{39416312-403d-4ce5-8f41-c2c050f6d1f9}-Religion.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Religion.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Romance.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{aa6a1616-e9c9-4fda-8483-1cc85ee018ce}-Romance.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Romance.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Scifi.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{44e023a2-6eee-4395-950e-a7f4508e3c3c}-Scifi.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Scifi.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Short.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{13d63884-3ef0-4938-86b9-f875b17078a6}-Short.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Short.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Sport.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{82280f2b-552b-42d7-912a-1a1af4a6d7b1}-Sport.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Sport.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Stand-up.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b67c3c40-cbbd-4f8f-9131-ae49e9d017f5}-Stand-up.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Stand-up.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Superhero.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f3da4974-98fa-4215-97b9-3b581394e577}-Superhero.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Superhero.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Supernatural.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9a0d34c9-bf36-4500-b759-1a7560ded158}-Supernatural.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Supernatural.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Thriller.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{587b1a0a-9150-4529-b2f6-3a0653c26955}-Thriller.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Thriller.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\TV-Mini-Series.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{4f0cb6a9-7be3-4994-aa9e-5046a0358dd0}-TV-Mini-Series.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\TV-Mini-Series.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\War.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{af9df1e8-a4a2-4e23-8e04-c23a67bb6668}-War.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\War.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Western.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{df8b4864-955c-4800-9ef9-1562df75aede}-Western.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Western.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\Wrestling.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d03cd5e6-4ab6-4226-b5bc-a607f0c6e605}-Wrestling.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Wrestling.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\year\Default.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{90b70a08-4ffe-4de0-86b5-c03bc4d44af6}-Default.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\year\Default.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\GroupViewImages\country\Default.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0c293813-5ae2-4dc4-9257-80fc0e0cc0b3}-Default.jpg</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\country\Default.jpg</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
     </Items>
   </Groups>
   <Sections>
@@ -2309,7 +2626,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>51</Revision>
+      <Revision>52</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2317,7 +2634,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.51.mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.52.mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -4319,34 +4636,332 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <ZipFileName>Installer{CopyFile}\{a51dfa27-e7ee-40e0-86ed-c96762c80eb1}-DefaultFanartImage.jpg</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultFanartImage.jpg</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Action.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{229bd4f6-8260-4019-b61f-da2e3e47e7a8}-Action.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Action.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Adult.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{caabcf25-a87d-4446-9ea1-235d25900b20}-Adult.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Adult.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Adventure.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{71bb42ac-1aab-41f0-b0e0-79bdc58ef680}-Adventure.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Adventure.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Animation.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{be39ba98-40ac-4037-916d-16c79f988889}-Animation.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Animation.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Anime.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e5bc06c4-8c55-49cc-adc6-04b7b4789ede}-Anime.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Anime.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Biography.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c1176a96-e8fe-41c9-9625-910c8afd6ba8}-Biography.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Biography.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Bollywood.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1083d1f5-be87-44f0-8408-98c38b466098}-Bollywood.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Bollywood.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Children.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{fdcc06d3-9ea7-4f2b-b9db-29449082ce4c}-Children.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Children.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Christmas.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{37a8491d-150e-4d90-b72d-53c5db51ee5d}-Christmas.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Christmas.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Comedy.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{93bb3877-5c32-4903-b770-13c7dd4158a8}-Comedy.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Comedy.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Concert.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{730d7bb2-2dd4-47d5-a32e-85d89befd9ce}-Concert.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Concert.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Crime.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1ea48313-c31a-4741-a4b7-909dc14c85cc}-Crime.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Crime.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Disaster.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9f655345-2f0b-4a6a-9391-6c610ac6449b}-Disaster.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Disaster.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Documentary.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{32e1ae81-abe7-49c6-af66-9f2bbc34d2a9}-Documentary.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Documentary.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Drama.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e1eb5c21-646d-4713-bb29-fdaf6ee343f8}-Drama.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Drama.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Family.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{60e24e39-6da3-44d8-8d8c-fed227700957}-Family.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Family.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Fantasy.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7d046af2-9a73-4fa7-b2b9-d7e442b9aef3}-Fantasy.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Fantasy.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Film-noir.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{fb1040ca-76b1-47aa-9f23-57e59d649d59}-Film-noir.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Film-noir.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Halloween.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2953714d-9af7-48a1-a66c-33112d00cbda}-Halloween.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Halloween.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Hentai.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{959eb8cc-5502-4c01-ba09-2c69364a066a}-Hentai.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Hentai.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\History-alt.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{bc314e7d-115f-4bdf-8178-b59c1b6e75a9}-History-alt.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\History-alt.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Horror.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{adfbc50c-079a-4ed5-bc3a-bd70e3c77f59}-Horror.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Horror.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Independent.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8f68ca84-69e8-44c0-8445-f381d153eaa0}-Independent.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Independent.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Monster.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7ef457e2-4810-4859-ad25-efd2a24c0014}-Monster.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Monster.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Music.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{548987da-3681-4205-b553-44cc5b72f9a8}-Music.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Music.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Musical.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1f9abcaa-3105-436a-9953-8355a2e61c9b}-Musical.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Musical.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Mystery.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{399554ae-e754-4095-b222-c180e23e3d0a}-Mystery.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Mystery.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Nature.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{3178334a-dfa8-47c4-a11d-38984ef13f7f}-Nature.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Nature.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Post-apocalyptic.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{4932ffd2-e48f-4be5-9bb6-254fd02ab2a0}-Post-apocalyptic.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Post-apocalyptic.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Religion.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{39416312-403d-4ce5-8f41-c2c050f6d1f9}-Religion.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Religion.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Romance.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{aa6a1616-e9c9-4fda-8483-1cc85ee018ce}-Romance.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Romance.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Scifi.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{44e023a2-6eee-4395-950e-a7f4508e3c3c}-Scifi.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Scifi.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Short.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{13d63884-3ef0-4938-86b9-f875b17078a6}-Short.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Short.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Sport.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{82280f2b-552b-42d7-912a-1a1af4a6d7b1}-Sport.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Sport.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Stand-up.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b67c3c40-cbbd-4f8f-9131-ae49e9d017f5}-Stand-up.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Stand-up.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Superhero.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{f3da4974-98fa-4215-97b9-3b581394e577}-Superhero.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Superhero.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Supernatural.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9a0d34c9-bf36-4500-b759-1a7560ded158}-Supernatural.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Supernatural.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Thriller.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{587b1a0a-9150-4529-b2f6-3a0653c26955}-Thriller.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Thriller.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\TV-Mini-Series.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{4f0cb6a9-7be3-4994-aa9e-5046a0358dd0}-TV-Mini-Series.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\TV-Mini-Series.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\War.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{af9df1e8-a4a2-4e23-8e04-c23a67bb6668}-War.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\War.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Western.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{df8b4864-955c-4800-9ef9-1562df75aede}-Western.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Western.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\Wrestling.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d03cd5e6-4ab6-4226-b5bc-a607f0c6e605}-Wrestling.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\Wrestling.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\year\Default.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{90b70a08-4ffe-4de0-86b5-c03bc4d44af6}-Default.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\year\Default.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\GroupViewImages\country\Default.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0c293813-5ae2-4dc4-9257-80fc0e0cc0b3}-Default.jpg</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages\country\Default.jpg</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{006c78d0-34cb-49d0-b2e1-a9df1633df8a}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{94c51c99-0850-42ba-9aad-9e577c3321a9}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{60ec50b9-51e0-4f7b-99fd-06a40ef548a8}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{49af56a0-e9c6-4c82-a5ee-d70fd2cca92e}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
   </UniqueFileList>
   <ProjectSettings>
     <FolderGroups>
-      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName />
-        <ZipFileName>Installer{CopyFile}\{69b1a45d-26a9-41b7-9fe1-3585ae38037e}-</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages</DestinationFilename>
-        <Folder>Thumbs\MyFilms\DefaultImages</Folder>
-        <Group>DefaultImages</Group>
-        <Recursive>true</Recursive>
-      </FolderGroup>
       <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -4365,6 +4980,16 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <DestinationFilename>%Skin%\</DestinationFilename>
         <Folder>Skin</Folder>
         <Group>SkinFiles</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{dcb1e229-f743-4fb0-a3c9-6c791d0925ac}-</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\GroupViewImages</DestinationFilename>
+        <Folder>Thumbs\MyFilms\GroupViewImages</Folder>
+        <Group>DefaultThumbs</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
     </FolderGroups>
