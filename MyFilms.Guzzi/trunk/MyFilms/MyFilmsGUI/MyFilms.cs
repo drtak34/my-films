@@ -1989,8 +1989,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (MyFilms.conf.StrViews || MyFilms.conf.StrPersons) // Check if Thumbs directories exist or create them
             {
-                if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
-                if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
+              if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
+                System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+              if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons")) 
+                  System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons");
             }
 
             // setting up thumbs directory configuration
@@ -2011,6 +2013,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             bool createFanartDir = false;
             if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country") 
               createFanartDir = true;
+            if (!System.IO.Directory.Exists(conf.StrPathViews + @"\" + WStrSort.ToLower())) // Check default groupview thumbs directories and create them
+              try
+              {
+                System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower());
+              }
+              catch (Exception) {}
 
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Started");
             //item = new GUIListItem();
@@ -2254,12 +2262,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 thumbimages[1] = strThumb;
                 return thumbimages;
               }
+              // Check, if default group cover is present
+              if (MyFilms.conf.StrViewsDflt)
+              {
+                if (System.IO.File.Exists(strPathViews + WStrSort.ToLower() + @"\Default.jpg"))
+                {
+                  thumbimages[0] = strPathViews + WStrSort.ToLower() + @"\Default.jpg";
+                  thumbimages[1] = strPathViews + WStrSort.ToLower() + @"\Default.jpg";
+                  return thumbimages;
+                }
+              }
             }
+            
             // Use Default Cover if no specific Cover found:
             //  if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCover))
             if (MyFilms.conf.StrViewsDflt && (MyFilms.conf.DefaultCoverViews.Length > 0))
             {
-              //ImageFast.CreateImage(strThumb, item.Label); // Disabled "old" method to use Defaultcover with embedded text ofg selected item ...
+              //ImageFast.CreateImage(strThumb, item.Label); // Disabled "old" method to use Defaultcover with embedded text of selected item ...
               //Picture.CreateThumbnail(strThumbLarge, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
               thumbimages[0] = conf.DefaultCoverViews;
               thumbimages[1] = conf.DefaultCoverViews;
