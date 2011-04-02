@@ -3402,6 +3402,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                   case "10": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
+                    if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in XMM fanart directory
+                    {
+                      string searchname = HTMLParser.removeHtml(wtitle2); // replaces special character "á" and other special chars !
+                      //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                      searchname = searchname + "*.jpg";
+                      string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
+                      if (files.Count() > 0)
+                      {
+                        wfanart[0] = files[0];
+                        wfanart[1] = "file";
+                        return wfanart;
+                      }
+                    }
                     break;
                   default:
                     break;
@@ -4216,24 +4229,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             if (newItems.Count > 0)
             {
-                playlistPlayer.Reset();
-                playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
-                PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
-                playlist.Clear();
+                // Check, if the content returned is a BR playlist to supress internal player and dialogs
+                bool isBRcontent = false;
+                if (newItems[0].ToString().ToLower().Contains("bdmv")) 
+                  isBRcontent = true;
 
-                foreach (object t in newItems)
+                if (!isBRcontent)
                 {
+                  playlistPlayer.Reset();
+                  playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
+                  PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
+                  playlist.Clear();
+
+                  foreach (object t in newItems)
+                  {
                     string movieFileName = (string)t;
                     PlayListItem newitem = new PlayListItem();
                     newitem.FileName = movieFileName;
                     newitem.Type = PlayListItem.PlayListItemType.Video;
                     playlist.Add(newitem);
-                }
-                // ask for start movie Index
+                  }
+                  // ask for start movie Index
 
-                // play movie...
-                
-                PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
+                  // play movie...
+
+                  PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
+                }
             }
             else
             {
@@ -5281,6 +5302,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 Search_parts(fileName, select_item, delete, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
                                 continue;
                             }
+                        }
+
+                        if (System.IO.File.Exists(wfile3 + @"\BDMV\index.bdmv")) // check for bluray in iso ...
+                        {
+                          if (delete)
+                          {
+                            delete_movie(wfile3 + @"\BDMV\index.bdmv", ref newItems);
+                            Search_parts(wfile3, select_item, delete, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
+                            continue;
+                          }
+                          else
+                          {
+                            IdMovie = -1;
+                            add_update_movie(wfile3 + @"\BDMV\index.bdmv", select_item, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
+                            Search_parts(fileName, select_item, delete, ref NoResumeMovie, ref newItems, ref IdMovie, ref IMovieIndex, ref timeMovieStopped);
+                            continue;
+                          }
                         }
 
                         if (System.IO.Directory.Exists(wfile3))

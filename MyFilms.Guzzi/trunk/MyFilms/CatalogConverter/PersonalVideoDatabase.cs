@@ -307,7 +307,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.SelectSingleNode("comment") != null && nodeDVD.SelectSingleNode("comment").InnerText != null)
                     {
                       if (CommentsMerged.Length > 0) CommentsMerged += System.Environment.NewLine;
-                      CommentsMerged += nodeDVD.SelectSingleNode("comment").InnerText);
+                      CommentsMerged += nodeDVD.SelectSingleNode("comment").InnerText;
                     }
                     WriteAntAtribute(destXml, "comment", CommentsMerged);
 
