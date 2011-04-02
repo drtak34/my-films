@@ -263,7 +263,6 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       WriteAntAtribute(destXml, "count", nodeDVD.SelectSingleNode("count").InnerText);
 
                     //string Description, 
-                    XmlNode nodePlot = nodeDVD.SelectSingleNode("Plot");
                     string DescriptionMerged = string.Empty;
                     if (DestinationTagline == "Description")
                     {
@@ -280,6 +279,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;
                       DescriptionMerged += Certification;
                     }
+                    XmlNode nodePlot = nodeDVD.SelectSingleNode("Plot");
                     if (nodeDVD.SelectSingleNode("description") != null && nodeDVD.SelectSingleNode("description").InnerText != null)
                     {
                       if (DescriptionMerged.Length > 0) DescriptionMerged += System.Environment.NewLine;

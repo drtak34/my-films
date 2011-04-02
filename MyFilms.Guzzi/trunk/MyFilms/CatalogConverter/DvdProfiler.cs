@@ -162,7 +162,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                             genre += nodeGenre.InnerText;
                     }
 
-                    string Tagline = "(no Tagline supported)";
+                    string Tagline = "(no Tagline supported by this catalog)";
                   
                     XmlNodeList TagList = nodeDVD.SelectNodes("Tags/Tag");
                     TagFullName = string.Empty;
