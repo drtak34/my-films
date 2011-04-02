@@ -691,6 +691,10 @@
           // DVDPTagField
           // 
           this.DVDPTagField.FormattingEnabled = true;
+          this.DVDPTagField.Items.AddRange(new object[] {
+            "Tagline",
+            "URL",
+            "Languages"});
           this.DVDPTagField.Location = new System.Drawing.Point(157, 45);
           this.DVDPTagField.Name = "DVDPTagField";
           this.DVDPTagField.Size = new System.Drawing.Size(134, 21);
@@ -4306,6 +4310,8 @@
           this.groupBox_DVDprofiler.TabIndex = 28;
           this.groupBox_DVDprofiler.TabStop = false;
           this.groupBox_DVDprofiler.Text = "DVDProfiler";
+          this.ToolTip1.SetToolTip(this.groupBox_DVDprofiler, "Those setting are kept to keep backward compatibility to older MyFilms versions.\r" +
+                  "\nThey only apply, if the catalog type you selected is \"DVDProfiler\".");
           // 
           // groupBox13
           // 
@@ -4717,11 +4723,11 @@
           // 
           // buttonDeleteTmpCatalog
           // 
-          this.buttonDeleteTmpCatalog.Location = new System.Drawing.Point(58, 264);
+          this.buttonDeleteTmpCatalog.Location = new System.Drawing.Point(211, 259);
           this.buttonDeleteTmpCatalog.Name = "buttonDeleteTmpCatalog";
-          this.buttonDeleteTmpCatalog.Size = new System.Drawing.Size(287, 43);
+          this.buttonDeleteTmpCatalog.Size = new System.Drawing.Size(313, 43);
           this.buttonDeleteTmpCatalog.TabIndex = 8;
-          this.buttonDeleteTmpCatalog.Text = "Force Reimport of external Catalog Data \r\n(delete cache data)";
+          this.buttonDeleteTmpCatalog.Text = "Update Settings\r\n(Force reimport of external catalog data by deleting cache)";
           this.ToolTip1.SetToolTip(this.buttonDeleteTmpCatalog, resources.GetString("buttonDeleteTmpCatalog.ToolTip"));
           this.buttonDeleteTmpCatalog.UseVisualStyleBackColor = true;
           this.buttonDeleteTmpCatalog.Click += new System.EventHandler(this.buttonDeleteTmpCatalog_Click);

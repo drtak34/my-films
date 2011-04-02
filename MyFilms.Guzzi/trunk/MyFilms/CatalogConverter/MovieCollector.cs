@@ -52,6 +52,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Genres", "Category");
             ProfilerDict.Add("Credits", "Director");
             ProfilerDict.Add("Credits1", "Producer");
+            ProfilerDict.Add("Credits2", "Writer");
             ProfilerDict.Add("Overview", "Description");
             ProfilerDict.Add("Comments", "Comments");
             ProfilerDict.Add("Picture", "Picture");
@@ -140,6 +141,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     }
                     string Director = String.Empty;
                     string Producer = String.Empty;
+                    string Writer = String.Empty;
                     XmlNodeList creditsList = nodeDVD.SelectNodes("crew/crewmember");
                     foreach (XmlNode nodeCredit in creditsList)
                     {
@@ -155,15 +157,26 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                             }
                         }
                         else
-                            if (nodeCredit.SelectSingleNode("roleid") != null && nodeCredit.SelectSingleNode("roleid").InnerText == "dfProducer")
+                          if (nodeCredit.SelectSingleNode("roleid") != null && nodeCredit.SelectSingleNode("roleid").InnerText == "dfProducer")
+                          {
+                            if (nodeCredit.SelectSingleNode("person/displayname") != null)
+                              line = nodeCredit.SelectSingleNode("person/displayname").InnerText;
+                            if (line.Length > 0)
                             {
-                                if (nodeCredit.SelectSingleNode("person/displayname") != null)
-                                    line = nodeCredit.SelectSingleNode("person/displayname").InnerText;
-                                if (line.Length > 0)
-                                {
-                                    if (Producer.Length > 0) Producer += ", ";
-                                    Producer += line;
-                                }
+                              if (Producer.Length > 0) Producer += ", ";
+                              Producer += line;
+                            }
+                          }
+                          else
+                            if (nodeCredit.SelectSingleNode("roleid") != null && nodeCredit.SelectSingleNode("roleid").InnerText == "dfWriter")
+                            {
+                              if (nodeCredit.SelectSingleNode("person/displayname") != null)
+                                line = nodeCredit.SelectSingleNode("person/displayname").InnerText;
+                              if (line.Length > 0)
+                              {
+                                if (Writer.Length > 0) Writer += ", ";
+                                Writer += line;
+                              }
                             }
                     }
 
@@ -315,6 +328,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         WriteAntAtribute(destXml, "Tags", Tags);
                         WriteAntAtribute(destXml, "Credits", Director);
                         WriteAntAtribute(destXml, "Credits1", Producer);
+                        WriteAntAtribute(destXml, "Credits2", Writer);
                         WriteAntAtribute(destXml, "Actors", cast);
                         WriteAntAtribute(destXml, "Picture", Image);
                         WriteAntAtribute(destXml, "MovieFile", url);

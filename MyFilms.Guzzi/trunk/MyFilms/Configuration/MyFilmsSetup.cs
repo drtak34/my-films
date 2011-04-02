@@ -713,7 +713,47 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Selected_Enreg_TextChanged();
             if (View_Dflt_Item.Text.Length == 0)
                 View_Dflt_Item.Text = "(none)";
-            Verify_Config();
+
+            // Delete temporary catalog file
+            string destFile = string.Empty;
+            switch (CatalogType.SelectedIndex)
+            {
+              case 0: // ANT Movie Catalog
+              case 7: // Starter Settings ANT DB
+                break;
+              case 1: //DVD Profiler
+                destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                break;
+              case 2: // Movie Collector V7.1.4
+              case 3: // MyMovies
+              case 4: // EAX Movie Catalog 2.5.0
+              case 5: //eXtreme Movie Manager
+              case 6: // XBMC fulldb export (all movies in one DB)
+                destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                break;
+              case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+                destFile = MesFilmsCat.Text;
+                break;
+              case 9: // EAX Movie Catalog 3.0.9 (beta5)
+              case 10: // PVD PersonalVideoDatabase V0.9.9.21
+                destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                break;
+              default:
+                break;
+            }
+            if (destFile.Length > 0)
+              if (System.IO.File.Exists(destFile))
+              {
+                try
+                {
+                  System.IO.File.Delete(destFile);
+                }
+                catch (Exception) {}
+                LogMyFilms.Debug("MyFilmsSetup: Automatically deleted tmp catalog (Save action): '" + destFile + "'");
+              }
+        
+          
+            Verify_Config(); // Also (re) imports the external catalog data
             int WLayOut = 0;
             if (LayOut.Text == "List")
                 WLayOut = 0;
@@ -1851,48 +1891,52 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void CatalogType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CatalogType.SelectedIndex != 0) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
+          if (CatalogType.SelectedIndex != 0) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
+          {
+            chkFanart.Checked = true;
+            chkDfltFanart.Checked = false;
+            chkDfltFanartImage.Checked = true;
+            chkDfltFanartImageAll.Checked = true;
+            chkPersons.Checked = true; // enable person thumbs
+            Tab_AMCupdater.Enabled = false;
+            Tab_Update.Enabled = false;
+            txtPicturePrefix.Text = "";
+            if (!AntViewItem1.Items.Contains("Writer")) // only add if not already done!
+              AddExtendedFieldsForExternalCatalogs();
+
+            if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en" || AntTitle1.Text == "OriginalTitle")
             {
-              chkFanart.Checked = true;
-              chkDfltFanart.Checked = false;
-              chkDfltFanartImage.Checked = true;
-              chkDfltFanartImageAll.Checked = true;
-              chkPersons.Checked = true; // enable person thumbs
-              Tab_AMCupdater.Enabled = false;
-              Tab_Update.Enabled = false;
-              txtPicturePrefix.Text = "";
-              if (!AntViewItem1.Items.Contains("Writer")) // only add if not already done!
-                AddExtendedFieldsForExternalCatalogs();
+              //if (string.IsNullOrEmpty(AntTitle1.Text))
+              AntTitle1.Text = "OriginalTitle";
+              AntTitle2.Text = "TranslatedTitle";
+              ItemSearchFileName.Text = "OriginalTitle";
+              AntSTitle.Text = "OriginalTitle";
+            }
+            else
+            {
+              AntTitle1.Text = "TranslatedTitle";
+              AntTitle2.Text = "OriginalTitle";
+              ItemSearchFileName.Text = "TranslatedTitle";
+              AntSTitle.Text = "TranslatedTitle";
+            }
+            //if (string.IsNullOrEmpty(AntSTitle.Text)) AntSTitle.Text = "FormattedTitle";
+            TitleDelim.Text = "\\";
+            SearchFileName.Checked = true;
 
-              if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en" || AntTitle1.Text == "OriginalTitle")
-                  {
-                    //if (string.IsNullOrEmpty(AntTitle1.Text))
-                    AntTitle1.Text = "OriginalTitle";
-                    AntTitle2.Text = "TranslatedTitle";
-                    ItemSearchFileName.Text = "OriginalTitle";
-                    AntSTitle.Text = "OriginalTitle";
-                  }
-                  else
-                  {
-                    AntTitle1.Text = "TranslatedTitle";
-                    AntTitle2.Text = "OriginalTitle";
-                    ItemSearchFileName.Text = "TranslatedTitle";
-                    AntSTitle.Text = "TranslatedTitle";
-                  }
-                  //if (string.IsNullOrEmpty(AntSTitle.Text)) AntSTitle.Text = "FormattedTitle";
-                  TitleDelim.Text = "\\";
-                  SearchFileName.Checked = true;
+            //Presets for useritems:
+            AntItem1.Text = "Writer";
+            AntLabel1.Text = GUILocalizeStrings.Get(10798684); // Writer
+            AntItem2.Text = "Producer";
+            AntLabel2.Text = GUILocalizeStrings.Get(10798662);
+            AntItem3.Text = "Certification";
+            AntLabel3.Text = GUILocalizeStrings.Get(10798683);
+            AntViewItem1.Text = "Writer";
+            AntViewText1.Text = GUILocalizeStrings.Get(10798684); // Writer;
+            groupBoxExtendedFieldHandling.Enabled = true;
+          }
+          else groupBoxExtendedFieldHandling.Enabled = false;
 
-                  //Presets for useritems:
-                  AntItem1.Text = "Writer";
-                  AntLabel1.Text = GUILocalizeStrings.Get(10798684); // Writer
-                  AntItem2.Text = "Producer";
-                  AntLabel2.Text = GUILocalizeStrings.Get(10798662);
-                  AntItem3.Text = "Certification";
-                  AntLabel3.Text = GUILocalizeStrings.Get(10798683);
-                  AntViewItem1.Text = "Writer";
-                  AntViewText1.Text = GUILocalizeStrings.Get(10798684); // Writer;
-              }
+          groupBox_DVDprofiler.Enabled = false; // deaktivates DVDprofiler options as default...
 
             switch (CatalogType.SelectedIndex)
             {
@@ -1901,6 +1945,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     Tab_Update.Enabled = true;
                     break;
               case 1: // DVDprofiler
+                    groupBox_DVDprofiler.Enabled = true;
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = ""; // Disable Trailers ...
                     if (MesFilmsCat.Text.Length > 0)
