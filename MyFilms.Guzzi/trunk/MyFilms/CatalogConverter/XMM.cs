@@ -191,14 +191,36 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                 //string Date, 
                 XmlNode nodeDate = nodeDVD.SelectSingleNode("DateInsert");
+                string strDateAdded = string.Empty;
+                IFormatProvider culture = new CultureInfo("en-US", true);
+                if (nodeDate != null && nodeDate.InnerText.Length > 0)
+                {
+                  strDateAdded = nodeDate.InnerText.Replace(char.ConvertFromUtf32(160), " ").ToString();
+                  if (strDateAdded.Contains(" "))
+                    strDateAdded = strDateAdded.Substring(0, strDateAdded.IndexOf(" ")); // Remove time...
+                }
                 try
                 {
                   DateTime dt = new DateTime();
-                  dt = DateTime.Parse(nodeDate.InnerText.Replace(char.ConvertFromUtf32(160), " ").ToString());
+                  dt = DateTime.ParseExact(strDateAdded, "d.M.yyyy", System.Globalization.CultureInfo.InvariantCulture);
                   WriteAntAtribute(destXml, "DateInsert", dt.ToShortDateString());
                 }
                 catch
                 {
+                  try
+                  {
+                    DateTime dt = new DateTime();
+                    dt = DateTime.Parse(strDateAdded);
+                    //dt = DateTime.Parse(strDateAdded, culture, DateTimeStyles.NoCurrentDateDefault);
+                    //dt = DateTime.ParseExact(strDateAdded, "MM/dd/yyyy hh:mm:ss tt", culture, DateTimeStyles.NoCurrentDateDefault);
+                    WriteAntAtribute(destXml, "DateInsert", dt.ToShortDateString());
+                  }
+                  catch (Exception)
+                  {
+                    DateTime dt = new DateTime(); 
+                    dt = DateTime.Parse(strDateAdded, culture, DateTimeStyles.NoCurrentDateDefault);
+                    WriteAntAtribute(destXml, "DateInsert", dt.ToShortDateString());
+                  }
                 }
 
                 //string Borrower, 

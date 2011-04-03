@@ -42,7 +42,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("title", "TranslatedTitle");
             ProfilerDict.Add("aka", "FormattedTitle");
             ProfilerDict.Add("num", "Number");
-            ProfilerDict.Add("rating", "Rating");
+            ProfilerDict.Add("imdbrating", "Rating");
             ProfilerDict.Add("url", "URL");
             ProfilerDict.Add("country", "Country");
             ProfilerDict.Add("year", "Year");
@@ -187,8 +187,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         else
                         WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNode("country").InnerText);
                     string wRating = "0";
-                    if (nodeDVD.SelectSingleNode("rating") != null)
+                    if (nodeDVD.SelectSingleNode("imdbrating") != null && (string.IsNullOrEmpty(nodeDVD.SelectSingleNode("imdbrating").InnerText) || nodeDVD.SelectSingleNode("imdbrating").InnerText == "0"))
+                      wRating = nodeDVD.SelectSingleNode("imdbrating").InnerText;
+                    else if (nodeDVD.SelectSingleNode("rating") != null)
+                    {
                       wRating = nodeDVD.SelectSingleNode("rating").InnerText;
+                    }
                     decimal wrating = 0;
                     try { wrating = Convert.ToDecimal(wRating, ci); }
                     catch
@@ -196,7 +200,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         try { wrating = Convert.ToDecimal(wRating); }
                         catch { }
                     }
-                    WriteAntAtribute(destXml, "rating", wrating.ToString().Replace(",", "."));
+                    WriteAntAtribute(destXml, "imdbrating", wrating.ToString().Replace(",", "."));
                     string wYear = nodeDVD.SelectSingleNode("year").InnerText;
                     if (!string.IsNullOrEmpty(wYear))
                         WriteAntAtribute(destXml, "year", wYear);

@@ -1956,6 +1956,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     cbWatched.Text = "Checked";
                     if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
+              case 3: // MyMovies
+                    AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = "SourceTrailer";
+                    if (MesFilmsCat.Text.Length > 0)
+                    {
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // cover path
+                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // person thumb path
+                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
+                    }
+                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
+                    break;
               case 4: // EAX MC 2.5.0
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "SourceTrailer";
@@ -1967,7 +1978,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     }
                     if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
-                case 5: // XMM Extreme Movie Manager
+              case 5: // XMM Extreme Movie Manager
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "SourceTrailer";
                     if (MesFilmsCat.Text.Length > 0)
@@ -4367,7 +4378,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           CatalogType.SelectedIndex = 0; // can be "7" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
 
           // Ask user to select existing or create new catalog...
-          if (System.Windows.Forms.MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+          bool useExistingCatalog = true;
+          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 7)
+          {
+            if (System.Windows.Forms.MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+              useExistingCatalog = true;
+            else
+              useExistingCatalog = false;
+          }
+          else
+          {
+            System.Windows.Forms.MessageBox.Show(
+            "Please select the path to your existing catalog file. \n (You have to export your movie collection to xml format in your catalog manager first to use it in myfilms.)",
+            "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+          }
+          if (useExistingCatalog)
           {
             // Ask User for existing database file
             newCatalog = false;
@@ -4549,21 +4574,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           cbWatched.Text = "Checked";
 
           // Now ask user for his movie directory...
-          MessageBox.Show(
-            "Now choose the folder containing your movies.",
-            "Control Configuration",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
-          if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 7)
           {
-            if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") !=
-                this.folderBrowserDialog1.SelectedPath.Length - 1) folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+            MessageBox.Show(
+              "Now choose the folder containing your movies.",
+              "Control Configuration",
+              MessageBoxButtons.OK,
+              MessageBoxIcon.Information);
+            if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+            {
+              if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") !=
+                  this.folderBrowserDialog1.SelectedPath.Length - 1) folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
 
-            if (PathStorage.Text.Length == 0)
-              PathStorage.Text = folderBrowserDialog1.SelectedPath;
-            else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
+              if (PathStorage.Text.Length == 0)
+                PathStorage.Text = folderBrowserDialog1.SelectedPath;
+              else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
+            }
+            //MessageBox.Show("Successfully created a new Configuration ! You may now run AMCupdater to populate or update your catalog.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           }
-          //MessageBox.Show("Successfully created a new Configuration ! You may now run AMCupdater to populate or update your catalog.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+          else
+          {
+            PathStorage.Text = "";
+          }
 
 
           //AMCupdater

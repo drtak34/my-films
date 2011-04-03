@@ -206,8 +206,6 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       subtitles += nodeSubtitle.InnerText;
                     }
 
-
-
                     string cast = String.Empty;
                     XmlNodeList actorsList = nodeDVD.SelectNodes("Actors/Actor");
                     foreach (XmlNode nodeActor in actorsList)

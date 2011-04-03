@@ -36,13 +36,13 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
         public MovieCollector()
         {
             ProfilerDict = new Dictionary<string, string>();
+            ProfilerDict.Add("index", "Number");
             ProfilerDict.Add("Format", "MediaType");
             ProfilerDict.Add("Storage", "MediaLabel");
             ProfilerDict.Add("Title", "OriginalTitle");
             ProfilerDict.Add("TTitle", "TranslatedTitle");
             ProfilerDict.Add("STitle", "FormattedTitle");
-            ProfilerDict.Add("CollectionNumber", "Number");
-            ProfilerDict.Add("Review/ReviewFilm", "Rating");
+            ProfilerDict.Add("imdbrating", "Rating");
             ProfilerDict.Add("MovieFile", "Source");
             ProfilerDict.Add("Country", "Country");
             ProfilerDict.Add("Year", "Year");
@@ -244,9 +244,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                                 wmedialabel = nodeDisc.SelectSingleNode("storageslot").InnerText;
 
                         if (nodeNumber != null && !string.IsNullOrEmpty(nodeNumber.InnerText))
-                            WriteAntAtribute(destXml, "CollectionNumber", nodeNumber.InnerText + nodisc.ToString());
+                          WriteAntAtribute(destXml, "index", nodeNumber.InnerText + nodisc.ToString());
                         else
-                            WriteAntAtribute(destXml, "CollectionNumber", "9999");
+                          WriteAntAtribute(destXml, "index", "9999");
                         if (DiscsList.Count > 1)
                         {
                             if (nodeOTitle != null && nodeOTitle.InnerText.Length > 0)
@@ -295,7 +295,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         }
                         if (nodeCountry.SelectSingleNode("displayname") != null)
                             WriteAntAtribute(destXml, "Country", nodeCountry.SelectSingleNode("displayname").InnerText);
-                        WriteAntAtribute(destXml, "Review/ReviewFilm", Rating);
+                        WriteAntAtribute(destXml, "imdbrating", Rating);
                         WriteAntAtribute(destXml, "mpaarating", Certification);
                         if (nodeYear != null && nodeYear.InnerText != null)
                           WriteAntAtribute(destXml, "Year", nodeYear.InnerText);
