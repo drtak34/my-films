@@ -1155,6 +1155,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Check and create Group thumb folder ...
             if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
               System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
+            // only required in GetSelectFromDivX - as there is group handling...
+            //if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\category"))
+            //  System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\category");
+            //if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\country"))
+            //  System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\country");
+            //if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\year"))
+            //  System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\year");
 
             foreach (DataRow sr in r)
             {
@@ -1997,11 +2004,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             // setting up thumbs directory configuration
             string strThumbDirectory;
-            string [] strActiveFacadeImages;
+            string [] strActiveFacadeImages; // image pathes for Icon and Thumb
             if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower") || WStrSort.ToLower().Contains("writer"))
               strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
             else
-              strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\";
+              strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + WStrSort.ToLower() + @"\";
             bool isperson = false;
             if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower") || WStrSort.ToLower().Contains("writer"))
               isperson = true;
@@ -2013,12 +2020,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             bool createFanartDir = false;
             if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country") 
               createFanartDir = true;
-            if (!System.IO.Directory.Exists(conf.StrPathViews + @"\" + WStrSort.ToLower())) // Check default groupview thumbs directories and create them
-              try
-              {
-                System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower());
-              }
-              catch (Exception) {}
+            if (!System.IO.Directory.Exists(strThumbDirectory)) // Check groupview thumbs cache directories and create them
+              try {System.IO.Directory.CreateDirectory(strThumbDirectory);}
+              catch (Exception) { }
+            if (!System.IO.Directory.Exists(conf.StrPathViews + @"\" + WStrSort.ToLower())) // Check groupview thumbs (sub)directories and create them
+              try {System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower());}
+              catch (Exception) { }
 
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Started");
             //item = new GUIListItem();

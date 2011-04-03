@@ -27,6 +27,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
   using System.Data;
   using System.Diagnostics;
   using System.Globalization;
+  using System.IO;
   using System.Net;
   using System.Windows.Forms;
   using System.Xml;
@@ -3474,11 +3475,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes)
             {
-                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
+                foreach (string wfile in System.IO.Directory.GetFiles(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups", "*.*", SearchOption.AllDirectories))
                 {
                   try
                   {
-                    if (wfile != DefaultCover.Text)
+                    if (wfile != DefaultCover.Text && wfile.Substring(wfile.LastIndexOf("\\")).ToLower() != "default.jpg")
                       System.IO.File.Delete(wfile);
                   }
                   catch (Exception ex)
@@ -4512,6 +4513,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             try
             {
               System.IO.Directory.CreateDirectory(GroupViewImagesDirectory);
+              // Will be autocreated by GUI plugin
+              //System.IO.Directory.CreateDirectory(GroupViewImagesDirectory + @"\category");
+              //System.IO.Directory.CreateDirectory(GroupViewImagesDirectory + @"\country");
+              //System.IO.Directory.CreateDirectory(GroupViewImagesDirectory + @"\year");
             }
             catch
             {
