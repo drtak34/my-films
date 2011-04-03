@@ -196,6 +196,13 @@ Select the option “Use the Default DVD cover for missing Fanart” to have the
 displayed as a background image for movies without a matching fanart file. Be aware, that using that option will often create fanart image of low quality
 because of low resolution of cover images and you might get a distorted picture as covers and fanarts don't have the same size.</value>
   </data>
+  <data name="MesFilmsViews.ToolTip" xml:space="preserve">
+    <value>This path is the "root folder" for group thumbs.
+The respective thumbs will be loaded from subfolders, named like the views 
+you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
+You can place a "default.jpg" in the respective sub folder that will be displayed
+when no specific thumb can be matched.</value>
+  </data>
   <data name="groupBox22.ToolTip" xml:space="preserve">
     <value>Select the “Use thumbs for group views" option if you have image files 
 to be displayed as cover image replacement in grouped views.  

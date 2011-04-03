@@ -1392,6 +1392,7 @@
           this.MesFilmsViews.Name = "MesFilmsViews";
           this.MesFilmsViews.Size = new System.Drawing.Size(304, 20);
           this.MesFilmsViews.TabIndex = 72;
+          this.ToolTip1.SetToolTip(this.MesFilmsViews, resources.GetString("MesFilmsViews.ToolTip"));
           // 
           // groupBox1
           // 

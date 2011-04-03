@@ -723,21 +723,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               case 7: // Starter Settings ANT DB
                 break;
               case 1: //DVD Profiler
-                destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
-                break;
               case 2: // Movie Collector V7.1.4
               case 3: // MyMovies
               case 4: // EAX Movie Catalog 2.5.0
-              case 5: //eXtreme Movie Manager
+              case 5: // eXtreme Movie Manager
               case 6: // XBMC fulldb export (all movies in one DB)
+              case 9:  // EAX Movie Catalog 3.0.9 (beta5)
+              case 10: // PVD PersonalVideoDatabase V0.9.9.21
                 destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                 break;
               case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
                 destFile = MesFilmsCat.Text;
-                break;
-              case 9: // EAX Movie Catalog 3.0.9 (beta5)
-              case 10: // PVD PersonalVideoDatabase V0.9.9.21
-                destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                 break;
               default:
                 break;
@@ -2637,6 +2633,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, DVDPTagField.Text, chkDVDprofilerOnlyFile.Checked));
                             break;
                         case 2: // Movie Collector V7.1.4
+                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+                            {
+                              mydivx.ReadXml(destFile);
+                              break;
+                            }
                             MovieCollector cc2 = new MovieCollector();
                             mydivx.ReadXml(cc2.ConvertMovieCollector(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
@@ -4499,8 +4501,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           MesFilmsImgArtist.Text = ArtistImagesDirectory;
           DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
-          DefaultCoverArtist.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCoverArtist.jpg";
-          DefaultCoverViews.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCoverViews.jpg";
+          DefaultCoverArtist.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultArtist.jpg";
+          DefaultCoverViews.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultGroup.jpg";
           DefaultFanartImage.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultFanartImage.jpg";
           chkDfltArtist.Checked = true; // Use default person cover if missing artwork...
 
@@ -4837,16 +4839,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
               break;
             case 2: // Movie Collector V7.1.4
-              break;
             case 3: // MyMovies
-              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
-              break;
             case 4: // EAX Movie Catalog 2.5.0
-              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
-              break;
             case 5: //eXtreme Movie Manager
-              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
-              break;
             case 6: // XBMC fulldb export (all movies in one DB)
               destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
               break;
