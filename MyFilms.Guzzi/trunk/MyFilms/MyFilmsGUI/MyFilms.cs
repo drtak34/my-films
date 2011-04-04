@@ -1155,13 +1155,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Check and create Group thumb folder ...
             if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
               System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
-            // only required in GetSelectFromDivX - as there is group handling...
-            //if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\category"))
-            //  System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\category");
-            //if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\country"))
-            //  System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\country");
-            //if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\year"))
-            //  System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\year");
 
             foreach (DataRow sr in r)
             {
@@ -1266,6 +1259,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     string strThumb = string.Empty;
                     if (string.IsNullOrEmpty(conf.FileImage) || !System.IO.File.Exists(conf.FileImage)) // No Coverart in DB - so handle it !
                     {
+                      LogMyFilms.Debug("MF: (GetFilmlist) - Cover missing for movie '" + sr["Number"].ToString() + "' - '" + sr["TranslatedTitle"].ToString() + "' - trying to search or create... (slow!)");
                         string strlabel = item.Label;
                         MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strlabel);
                         strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + strlabel;
@@ -1299,8 +1293,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     item.ThumbnailImage = conf.FileImage;
                     strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, sTitle);
-                    //Guzzi: Added for Debugging DeDa Changes of MyVideos...
-                    //LogMyFilms.Debug("MF: (GetFilmList) : strThumb: '" + strThumb + "'");
                     if ((!System.IO.File.Exists(strThumb)) && (conf.FileImage != conf.DefaultCover))
                       Picture.CreateThumbnail(conf.FileImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
                     if (conf.FileImage == conf.DefaultCover)
@@ -2259,6 +2251,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 strPathViews = conf.StrPathViews;
               else
                 strPathViews = conf.StrPathViews + "\\";
+              strPathViews = strPathViews + WStrSort.ToLower() + "\\"; // added viev subfolder to searchpath
               if (System.IO.File.Exists(strPathViews + itemlabel + ".jpg"))
                 Picture.CreateThumbnail(strPathViews + itemlabel + ".jpg", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
               else if (System.IO.File.Exists(strPathViews + itemlabel + ".png"))
@@ -2272,10 +2265,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // Check, if default group cover is present
               if (MyFilms.conf.StrViewsDflt)
               {
-                if (System.IO.File.Exists(strPathViews + WStrSort.ToLower() + @"\Default.jpg"))
+                if (System.IO.File.Exists(strPathViews + "Default.jpg"))
                 {
-                  thumbimages[0] = strPathViews + WStrSort.ToLower() + @"\Default.jpg";
-                  thumbimages[1] = strPathViews + WStrSort.ToLower() + @"\Default.jpg";
+                  thumbimages[0] = strPathViews + "Default.jpg";
+                  thumbimages[1] = strPathViews + "Default.jpg";
                   return thumbimages;
                 }
               }
