@@ -104,6 +104,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.ShowTrailerPlayDialog.Visible = false;
               this.ShowTrailerWhenStartingMovie.Visible = false;
               this.btnGrabberInterface.Visible = false; // disable grabber interface in normal mode
+              this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
               this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
             }
             //else
@@ -179,7 +180,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 {
                   AntStorage.Items.Add(dc.ColumnName);
                   AntStorageTrailer.Items.Add(dc.ColumnName);
-                  DVDPTagField.Items.Add(dc.ColumnName);
                 }
 
                 if ((dc.ColumnName == "TranslatedTitle") || (dc.ColumnName == "OriginalTitle") || (dc.ColumnName == "FormattedTitle"))
@@ -661,13 +661,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     Dwp.Focus();
                     return;
                 }
-            if (CatalogType.SelectedIndex == 1)
-                if ((chkDVDprofilerStoreTags.Checked) && (DVDPTagField.Text.Length == 0))
-                {
-                    System.Windows.Forms.MessageBox.Show("Field Name is Mandatory for storing Tags Informations !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    DVDPTagField.Focus();
-                    return;
-                }
             if (chkAMCUpd.Checked)
                 if (txtGrabber.Text.Length == 0)
                 {
@@ -1015,10 +1008,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               if (this.chkDVDprofilerMergeWithGenreField.Checked)
                 XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "Category");
               else
-                if (this.chkDVDprofilerStoreTags.Checked)
-                  XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", DVDPTagField.Text);
-                else
-                  XmlConfig.RemoveEntry("MyFilms", Config_Name.Text.ToString(), "DVDPTagField");
+                XmlConfig.RemoveEntry("MyFilms", Config_Name.Text.ToString(), "DVDPTagField");
             }
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktUsername", cTraktUsername);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktPassWord", cTraktPassword);
@@ -1359,8 +1349,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
                 check_WOL_Userdialog.Checked = false;
 
-            this.chkDVDprofilerMergeWithGenreField.Checked = false;
-            this.chkDVDprofilerStoreTags.Checked = false;
+            chkDVDprofilerMergeWithGenreField.Checked = false;
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
             CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", false);
             AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", false);
@@ -1378,15 +1367,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             ECMergeDestinationFieldTags.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddDestinationTags", "");
             ECMergeDestinationFieldCertification.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddDestinationCertification", "");
             ECMergeDestinationFieldWriter.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ECoptionAddDestinationWriter", "");
-            DVDPTagField.ResetText();
-            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "") == "Category")
-                this.chkDVDprofilerMergeWithGenreField.Checked = true;
-            else
-                if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "").Length > 0)
-                {
-                    this.chkDVDprofilerStoreTags.Checked = true;
-                    DVDPTagField.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "");
-                }
             chkDVDprofilerOnlyFile.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyFile", false);
             ItemSearchFileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", "");
             ItemSearchGrabberName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchGrabberName", "");
@@ -1641,8 +1621,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             ECMergeDestinationFieldCertification.Text = string.Empty;
             ECMergeDestinationFieldWriter.Text = string.Empty;
             chkDVDprofilerMergeWithGenreField.Checked = false;
-            chkDVDprofilerStoreTags.Checked = false;
-            DVDPTagField.ResetText();
             chkDVDprofilerOnlyFile.Checked = false;
             AlwaysDefaultView.Checked = false;
             chkUseListviewForGroups.Checked = true;
@@ -1823,14 +1801,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.chkDVDprofilerMergeWithGenreField.Checked)
-            {
-                this.chkDVDprofilerStoreTags.Checked = false;
-                DVDPTagField.ResetText();
-            }
-        }
         private void Selected_Enreg_TextChanged()
         {
             StrDfltSelect = "";
@@ -1874,13 +1844,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             LogMyFilms.Debug("MyFilms (Build Selected Enreg) - Selected_Enreg: '" + Selected_Enreg.Text.ToString() + "'");
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (this.chkDVDprofilerStoreTags.Checked)
-            {
-                this.chkDVDprofilerMergeWithGenreField.Checked = false;
-            }
-        }
         private void Selected_Enreg_Changed(object sender, EventArgs e)
         {
             Selected_Enreg_TextChanged();
@@ -2057,7 +2020,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void AddExtendedFieldsForExternalCatalogs()
         {
-          DVDPTagField.Items.Add("TagLine");
           AntStorageTrailer.Items.Add("SourceTrailer");
 
           AntViewItem1.Items.Add("Writer");
@@ -2639,10 +2601,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                                 mydivx.ReadXml(destFile);
                                 break;
                             }
-                            if (this.chkDVDprofilerMergeWithGenreField.Checked)
-                                DVDPTagField.Text = "Category";
-                            DvdProfiler cc1 = new DvdProfiler(DVDPTagField.Text);
-                            mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, DVDPTagField.Text, chkDVDprofilerOnlyFile.Checked));
+                            DvdProfiler cc1 = new DvdProfiler("Category");
+                            mydivx.ReadXml(cc1.ConvertProfiler(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, "Category", chkDVDprofilerOnlyFile.Checked));
                             break;
                         case 2: // Movie Collector V7.1.4
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
@@ -4901,6 +4861,40 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               LogMyFilms.Debug("MyFilmsSetup: Manually deleted tmp catalog: '" + destFile + "'");
               MessageBox.Show("Deleted tmp imported data: '" + destFile + "' \n MyFilms will reimport data on next launch or when saving the config.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void buttonOpenTmpFile_Click(object sender, EventArgs e)
+        {
+          string destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+          if (!System.IO.File.Exists(destFile))
+          {
+            MessageBox.Show("The file '" + destFile + "' does not exist!", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+          }
+          using (Process p = new Process())
+          {
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = "notepad.exe";
+            psi.UseShellExecute = true;
+            psi.WindowStyle = ProcessWindowStyle.Normal;
+            psi.Arguments = "\"" + MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml" + "\"";
+            psi.ErrorDialog = true;
+            if (OSInfo.OSInfo.VistaOrLater())
+            {
+              psi.Verb = "runas";
+            }
+
+            p.StartInfo = psi;
+            try
+            {
+              p.Start();
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug(ex.ToString());
+            }
+          }
+
         }
     }
 }

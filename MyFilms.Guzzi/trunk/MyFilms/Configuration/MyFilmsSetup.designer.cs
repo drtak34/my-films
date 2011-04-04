@@ -107,9 +107,7 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
-          this.chkDVDprofilerStoreTags = new System.Windows.Forms.CheckBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
-          this.DVDPTagField = new System.Windows.Forms.ComboBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
           this.label37 = new System.Windows.Forms.Label();
           this.comboWOLtimeout = new System.Windows.Forms.ComboBox();
@@ -480,6 +478,7 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.buttonOpenTmpFile = new System.Windows.Forms.Button();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -654,28 +653,15 @@
           // 
           // groupBox9
           // 
-          this.groupBox9.Controls.Add(this.chkDVDprofilerStoreTags);
           this.groupBox9.Controls.Add(this.chkDVDprofilerMergeWithGenreField);
-          this.groupBox9.Controls.Add(this.DVDPTagField);
           this.groupBox9.Location = new System.Drawing.Point(13, 86);
           this.groupBox9.Name = "groupBox9";
-          this.groupBox9.Size = new System.Drawing.Size(307, 86);
+          this.groupBox9.Size = new System.Drawing.Size(307, 59);
           this.groupBox9.TabIndex = 0;
           this.groupBox9.TabStop = false;
           this.groupBox9.Text = "Tags ...";
           this.ToolTip1.SetToolTip(this.groupBox9, "With those options, you can use specifics Tags DVDP\'s Fields\r\nand store either wi" +
                   "th Genre field either in another field\r\nof the generated DB.");
-          // 
-          // chkDVDprofilerStoreTags
-          // 
-          this.chkDVDprofilerStoreTags.AutoSize = true;
-          this.chkDVDprofilerStoreTags.Location = new System.Drawing.Point(23, 47);
-          this.chkDVDprofilerStoreTags.Name = "chkDVDprofilerStoreTags";
-          this.chkDVDprofilerStoreTags.Size = new System.Drawing.Size(96, 17);
-          this.chkDVDprofilerStoreTags.TabIndex = 13;
-          this.chkDVDprofilerStoreTags.Text = "Store in  Field :";
-          this.chkDVDprofilerStoreTags.UseVisualStyleBackColor = true;
-          this.chkDVDprofilerStoreTags.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
           // 
           // chkDVDprofilerMergeWithGenreField
           // 
@@ -686,18 +672,6 @@
           this.chkDVDprofilerMergeWithGenreField.TabIndex = 12;
           this.chkDVDprofilerMergeWithGenreField.Text = "Merge With Genre Field";
           this.chkDVDprofilerMergeWithGenreField.UseVisualStyleBackColor = true;
-          this.chkDVDprofilerMergeWithGenreField.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-          // 
-          // DVDPTagField
-          // 
-          this.DVDPTagField.FormattingEnabled = true;
-          this.DVDPTagField.Items.AddRange(new object[] {
-            "Tagline",
-            "URL"});
-          this.DVDPTagField.Location = new System.Drawing.Point(157, 45);
-          this.DVDPTagField.Name = "DVDPTagField";
-          this.DVDPTagField.Size = new System.Drawing.Size(134, 21);
-          this.DVDPTagField.TabIndex = 11;
           // 
           // groupBox25
           // 
@@ -4356,6 +4330,7 @@
           // 
           // Tab_ExternalCatalogs
           // 
+          this.Tab_ExternalCatalogs.Controls.Add(this.buttonOpenTmpFile);
           this.Tab_ExternalCatalogs.Controls.Add(this.buttonDeleteTmpCatalog);
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBoxExtendedFieldHandling);
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBox_DVDprofiler);
@@ -4742,6 +4717,16 @@
           this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
           this.traktConfiguration.TabIndex = 0;
           // 
+          // buttonOpenTmpFile
+          // 
+          this.buttonOpenTmpFile.Location = new System.Drawing.Point(29, 269);
+          this.buttonOpenTmpFile.Name = "buttonOpenTmpFile";
+          this.buttonOpenTmpFile.Size = new System.Drawing.Size(152, 27);
+          this.buttonOpenTmpFile.TabIndex = 31;
+          this.buttonOpenTmpFile.Text = "Open tmp Catalog in Editor";
+          this.buttonOpenTmpFile.UseVisualStyleBackColor = true;
+          this.buttonOpenTmpFile.Click += new System.EventHandler(this.buttonOpenTmpFile_Click);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4892,9 +4877,7 @@
         private TraktConfiguration traktConfiguration;
         private TabPage Tab_ExternalCatalogs;
         private GroupBox groupBox9;
-        private CheckBox chkDVDprofilerStoreTags;
         private CheckBox chkDVDprofilerMergeWithGenreField;
-        private ComboBox DVDPTagField;
         private GroupBox groupBox_DVDprofiler;
         private GroupBox groupBox13;
         private CheckBox chkDVDprofilerOnlyFile;
@@ -5244,5 +5227,6 @@
         private ComboBox ECMergeDestinationFieldWriter;
         private CheckBox chkAddWriter;
         private Button buttonDeleteTmpCatalog;
+        private Button buttonOpenTmpFile;
     }
 }
