@@ -742,9 +742,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 catch (Exception) {}
                 LogMyFilms.Debug("MyFilmsSetup: Automatically deleted tmp catalog (Save action): '" + destFile + "'");
               }
-        
-          
-            Verify_Config(); // Also (re) imports the external catalog data
+
+            //Verify_Config(); // Also (re) imports the external catalog data
+            if (Verify_Config() == false) // check if config successful and if config should be saved
+              return;
+
             int WLayOut = 0;
             if (LayOut.Text == "List")
                 WLayOut = 0;
@@ -1764,7 +1766,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             System.Windows.Forms.MessageBox.Show("Give the Configuration's Name first !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             Config_Name.Focus();
         }
-        private void Verify_Config()
+        private bool Verify_Config()
         {
             if (MesFilmsCat.Text.Length > 0)
             {
@@ -1788,7 +1790,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                         if (System.Windows.Forms.MessageBox.Show("There is no Movie to display with that file ! Do you Want to continue ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Stop) == DialogResult.No)
                         {
                             MesFilmsCat.Focus();
-                            return;
+                            return false;
                         }
                         System.Windows.Forms.MessageBox.Show("You have to fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -1796,9 +1798,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Please give the XML file's name first");
-                MesFilmsCat.Focus();
+              System.Windows.Forms.MessageBox.Show("Please give the XML file's name first");
+              MesFilmsCat.Focus();
+              return false;
             }
+            return true; // save config in calling routine
         }
 
         private void Selected_Enreg_TextChanged()
