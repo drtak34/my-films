@@ -353,7 +353,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 else
                 {
 
-                    System.Windows.Forms.MessageBox.Show("You have selected a valid file !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    System.Windows.Forms.MessageBox.Show("You have to selected a valid file !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     MesFilmsCat.Focus();
                     return;
 

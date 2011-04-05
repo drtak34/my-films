@@ -105,13 +105,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         [SkinControlAttribute((int)Controls.CTRL_MovieThumb16)]
         protected GUIImage ImgThumb16 = null;
         
-
-        public const int ID_MyFilms = 7986;
-        public int ID_MyFilmsDetail = 7987;
-        public int ID_MyFilmsActors = 7989;
-        public int ID_MyFilmsThumbs = 7990;
-        public int ID_MyFilmsActorsInfo = 7991;
-
         #endregion
 
 
@@ -129,13 +122,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         public override int GetID
         {
-            get { return this.ID_MyFilmsThumbs; }
+            get { return MyFilms.ID_MyFilmsThumbs; }
             set { base.GetID = value; }
         }
 
         public override string GetModuleName()
         {
-          return GUILocalizeStrings.Get(ID_MyFilmsThumbs); // return localized string for Modul ID
+          return GUILocalizeStrings.Get(MyFilms.ID_MyFilmsThumbs); // return localized string for Modul ID
         }
 
         public override bool Init()
@@ -155,7 +148,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
                 MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
-                GUIWindowManager.ActivateWindow(this.ID_MyFilmsDetail);
+                GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsDetail);
                 return;
             }
 
@@ -232,11 +225,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         MyFilms.conf.LastID = MyFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
-                        GUIWindowManager.ActivateWindow(ID_MyFilms);
+                        GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_TxtSelect)
-                        GUIWindowManager.ActivateWindow(this.ID_MyFilmsActors);
+                        GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
                     GUIWindowManager.ShowPreviousWindow();
                     return true;
 

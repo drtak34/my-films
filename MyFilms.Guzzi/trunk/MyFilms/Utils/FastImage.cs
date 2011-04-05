@@ -60,7 +60,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (string.IsNullOrEmpty(sourceimage))
             {
               if (!System.IO.File.Exists(path.Substring(0, path.LastIndexOf("\\") + 1) + "Default.jpg"))
-                MediaPortal.Util.Picture.CreateThumbnail(MyFilms.conf.DefaultCover, path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg", 400, 600, 0, MediaPortal.Util.Thumbs.SpeedThumbsLarge);
+                MediaPortal.Util.Picture.CreateThumbnail(MyFilms.conf.DefaultCover, path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, MediaPortal.Util.Thumbs.SpeedThumbsLarge);
               loadimage = path.Substring(0, path.LastIndexOf("\\") + 1) + "\\Default.jpg";
             }
             else loadimage = sourceimage;

@@ -109,13 +109,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         [SkinControlAttribute(3004)]
         protected GUIAnimation m_SearchAnimation;
 
-
-        public const int ID_MyFilms = 7986;
-        public int ID_MyFilmsDetail = 7987;
-        public int ID_MyFilmsActors = 7989;
-        public int ID_MyFilmsThumbs = 7990;
-        public int ID_MyFilmsActorsInfo = 7991;
-
         #endregion
 
         private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();  //log
@@ -173,13 +166,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public override int GetID
         {
-            get { return this.ID_MyFilmsActors; }
+            get { return MyFilms.ID_MyFilmsActors; }
             set { base.GetID = value; }
         }
 
         public override string GetModuleName()
         {
-          return GUILocalizeStrings.Get(ID_MyFilmsActors); // return localized string for Modul ID
+          return GUILocalizeStrings.Get(MyFilms.ID_MyFilmsActors); // return localized string for Modul ID
         }
 
         public override bool Init()
@@ -199,7 +192,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
                 MyFilms.conf.LastID = MyFilms.ID_MyFilms;
-                GUIWindowManager.ActivateWindow(ID_MyFilms);
+                GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
                 return;
             }
 
@@ -292,7 +285,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         MyFilms.conf.LastID = MyFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
-                        GUIWindowManager.ActivateWindow(ID_MyFilms);
+                        GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
                         return true;
                     }
 
@@ -300,7 +293,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       // Show Actor Details Screen
                       //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
-                      GUIWindowManager.ActivateWindow(this.ID_MyFilmsActors);
+                      GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
                       // Hier Aktivitäten wie z.b. ListControl für Actors?
                       GUIWindowManager.ShowPreviousWindow();
                       //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
@@ -344,7 +337,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 MyFilms.conf.StrIndex = facadeView.SelectedListItem.ItemId;
                                 MyFilms.conf.StrTIndex = facadeView.SelectedListItem.Label;
                                 GUITextureManager.CleanupThumbs();
-                                GUIWindowManager.ActivateWindow(this.ID_MyFilmsDetail);
+                                GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsDetail);
                             }
                             else
                             // View List as selected
@@ -527,18 +520,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                         if (MyFilms.conf.StrPathViews.Substring(MyFilms.conf.StrPathViews.Length - 1) == "\\")
                                         {
                                             if (System.IO.File.Exists(MyFilms.conf.StrPathViews + item.Label + ".jpg"))
-                                                Picture.CreateThumbnail(MyFilms.conf.StrPathViews + item.Label + ".jpg", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                              Picture.CreateThumbnail(MyFilms.conf.StrPathViews + item.Label + ".jpg", strThumb + ".png", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                                             else
                                                 if (System.IO.File.Exists(MyFilms.conf.StrPathViews + item.Label + ".png"))
-                                                    Picture.CreateThumbnail(MyFilms.conf.StrPathViews + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                                  Picture.CreateThumbnail(MyFilms.conf.StrPathViews + item.Label + ".png", strThumb + ".png", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                                         }
                                         else
                                         {
                                             if (System.IO.File.Exists(MyFilms.conf.StrPathViews + "\\" + item.Label + ".jpg"))
-                                                Picture.CreateThumbnail(MyFilms.conf.StrPathViews + "\\" + item.Label + ".jpg", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                              Picture.CreateThumbnail(MyFilms.conf.StrPathViews + "\\" + item.Label + ".jpg", strThumb + ".png", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                                             else
                                                 if (System.IO.File.Exists(MyFilms.conf.StrPathViews + "\\" + item.Label + ".png"))
-                                                    Picture.CreateThumbnail(MyFilms.conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                                  Picture.CreateThumbnail(MyFilms.conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                                         }
                                 }
                                 item.ThumbnailImage = strThumb + ".png";
@@ -575,18 +568,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (MyFilms.conf.StrPathViews.Substring(MyFilms.conf.StrPathViews.Length - 1) == "\\")
                             {
                                 if (System.IO.File.Exists(MyFilms.conf.StrPathViews + item.Label + ".jpg"))
-                                    Picture.CreateThumbnail(MyFilms.conf.StrPathViews + item.Label + ".jpg", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                  Picture.CreateThumbnail(MyFilms.conf.StrPathViews + item.Label + ".jpg", strThumb + ".png", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                                 else
                                     if (System.IO.File.Exists(MyFilms.conf.StrPathViews + item.Label + ".png"))
-                                        Picture.CreateThumbnail(MyFilms.conf.StrPathViews + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                      Picture.CreateThumbnail(MyFilms.conf.StrPathViews + item.Label + ".png", strThumb + ".png", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                             }
                             else
                             {
                                 if (System.IO.File.Exists(MyFilms.conf.StrPathViews + "\\" + item.Label + ".jpg"))
-                                    Picture.CreateThumbnail(MyFilms.conf.StrPathViews + "\\" + item.Label + ".jpg", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                  Picture.CreateThumbnail(MyFilms.conf.StrPathViews + "\\" + item.Label + ".jpg", strThumb + ".png", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                                 else
                                     if (System.IO.File.Exists(MyFilms.conf.StrPathViews + "\\" + item.Label + ".png"))
-                                        Picture.CreateThumbnail(MyFilms.conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                                      Picture.CreateThumbnail(MyFilms.conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                             }
                     }
                     item.ThumbnailImage = strThumb + ".png";

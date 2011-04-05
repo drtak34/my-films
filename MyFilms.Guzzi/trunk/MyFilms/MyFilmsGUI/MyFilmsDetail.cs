@@ -142,15 +142,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         static string wzone = null;
         int StrMax = 0;
 
-        public const int ID_MyFilms = 7986;
-        public const int ID_MyFilmsDetail = 7987;
-        public const int ID_MyFilmsDialogRating = 7988;
-        public const int ID_MyFilmsActors = 7989;
-        public const int ID_MyFilmsThumbs = 7990;
-        public const int ID_MyFilmsActorsInfo = 7991;
-        public const int ID_BrowseTheWeb = 54537689;
-        public const int ID_OnlineVideos = 4755;
-
         public SQLiteClient m_db;
         public class IMDBActorMovie
         {
@@ -195,13 +186,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         public override int GetID
         {
-            get { return ID_MyFilmsDetail; }
+            get { return MyFilms.ID_MyFilmsDetail; }
             set { base.GetID = value; }
         }
 
         public override string GetModuleName()
         {
-          return GUILocalizeStrings.Get(ID_MyFilmsDetail); // return localized string for Module ID
+          return GUILocalizeStrings.Get(MyFilms.ID_MyFilmsDetail); // return localized string for Module ID
         }
 
         public override bool Init()
@@ -242,7 +233,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
                 MyFilms.conf.LastID = MyFilms.ID_MyFilms;
-                GUIWindowManager.ActivateWindow(ID_MyFilms);
+                GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
                 return;
             }
 
@@ -423,7 +414,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         MyFilms.conf.LastID = MyFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
-                        GUIWindowManager.ActivateWindow(ID_MyFilms);
+                        GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlay)
@@ -529,13 +520,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     if (iControl == (int)Controls.CTRL_BtnMovieThumbs)
                     {
-                        GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
+                        GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsThumbs);
                         return true;
                     }
 
                     if (iControl == (int)Controls.CTRL_BtnActors)
                     {
-                        GUIWindowManager.ActivateWindow(ID_MyFilmsActors);
+                        GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
                         return true;
                     }
 
@@ -543,7 +534,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       // Show Actor Details Screen
                       //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
-                      GUIWindowManager.ActivateWindow(ID_MyFilmsActors);
+                      GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
                       // Hier Aktivitäten wie z.b. ListControl für Actors?
                       GUIWindowManager.ShowPreviousWindow();
                       //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
@@ -714,7 +705,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                         // should this be set here to make original movie doesn't get set to watched??
                         // trailerPlayed = true;
-                        GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
+                        GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
@@ -758,7 +749,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       //ReturnFromExternalPluginInfo = true;
                       // should this be set here to make original movie doesn't get set to watched??
                       // trailerPlayed = true;
-                      GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
+                      GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
@@ -783,7 +774,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
               case "rating":
-                    MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(ID_MyFilmsDialogRating);
+                    MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
                     //NumberFormatInfo nfi = new NumberFormatInfo();
                     //nfi.NumberDecimalSeparator = ",";
                     //nfi.NumberGroupSeparator = "";
@@ -4457,7 +4448,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                       // should this be set here to make original movie doesn't get set to watched??
                       // trailerPlayed = true;
-                      GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
+                      GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
@@ -4509,7 +4500,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                       // should this be set here to make original movie doesn't get set to watched??
                       // trailerPlayed = true;
-                      GUIWindowManager.ActivateWindow(ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
+                      GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
@@ -5051,13 +5042,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             Picture.CreateThumbnail(wImage, strThumb, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, Thumbs.SpeedThumbsSmall);
                         if (!System.IO.File.Exists(LargeThumb))
                             Picture.CreateThumbnail(wImage, LargeThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, Thumbs.SpeedThumbsLarge);
-                        // CreateThumbnail Version 0.2.3 + SVN
-                        //if (Picture.CreateThumbnail(wImage, strThumb, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, Thumbs.SpeedThumbsSmall))
-                        //Picture.CreateThumbnail(wImage, LargeThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, Thumbs.SpeedThumbsLarge);
-                        //// CreateThumbnail Version 0.2.3 Stable
-                        //if (Picture.CreateThumbnail(wImage, strThumb, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0))
-                        //    Picture.CreateThumbnail(wImage, LargeThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0);
-
                     }
                 }
                 catch

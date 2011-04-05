@@ -182,6 +182,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public const int ID_BrowseTheWeb = 54537689;
         public const int ID_OnlineVideos = 4755;
 
+        public const int cacheThumbWith = 400;
+        public const int cacheThumbHeight = 600;
+
         public const string ImdbBaseUrl = "http://www.imdb.com/";
 
         enum Controls : int
@@ -1259,41 +1262,45 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     string strThumb = string.Empty;
                     if (string.IsNullOrEmpty(conf.FileImage) || !System.IO.File.Exists(conf.FileImage)) // No Coverart in DB - so handle it !
                     {
-                      LogMyFilms.Debug("MF: (GetFilmlist) - Cover missing for movie '" + sr["Number"].ToString() + "' - '" + sr["TranslatedTitle"].ToString() + "' - trying to search or create... (slow!)");
-                        string strlabel = item.Label;
-                        MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strlabel);
-                        strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + strlabel;
-                        if (System.IO.File.Exists(strThumb + ".png"))
+                        LogMyFilms.Debug("MF: (GetFilmlist) - Cover missing for movie '" + sr["Number"].ToString() + "' - '" + sr["TranslatedTitle"].ToString() + "' - trying to search or create... (slow!)");
+                        //string strlabel = item.Label;
+                        //MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strlabel);
+                        //strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + strlabel;
+                        //if (System.IO.File.Exists(strThumb + ".png"))
+                        //{
+                        //  conf.FileImage = strThumb + ".png"; 
+                        //}
+                        //else
                         {
-                          conf.FileImage = strThumb + ".png"; 
-                        }
-                        else
-                        {
-                            try
-                            {
-                                if (conf.StrPathViews.Length > 0)
-                                    if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
-                                        Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                    else
-                                        Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
-                                // Disabled "pseudo covers with label name"
-                                //if (!System.IO.File.Exists(strThumb + ".png"))
-                                //    if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCoverViews))
-                                //        ImageFast.CreateImage(strThumb + ".png", item.Label);
-                                if (System.IO.File.Exists(strThumb + ".png"))                                
-                                conf.FileImage = strThumb + ".png"; 
-                            }
-                            catch
-                            {
-                                conf.FileImage = string.Empty;
-                            }
-                            if (string.IsNullOrEmpty(conf.FileImage) && conf.DefaultCover.Length > 0)
+                            conf.FileImage = string.Empty;
+                            //try
+                            //{
+                            //    if (conf.StrPathViews.Length > 0)
+                            //        if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
+                            //            //Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".png", strThumb + ".png", cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+                            //            createCacheThumb(conf.StrPathViews + item.Label + ".png", strThumb + ".png");
+                            //        else
+                            //            //Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+                            //            createCacheThumb(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png");
+                            //    // Disabled "pseudo covers with label name"
+                            //    //if (!System.IO.File.Exists(strThumb + ".png"))
+                            //    //    if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCoverViews))
+                            //    //        ImageFast.CreateImage(strThumb + ".png", item.Label);
+                            //    if (System.IO.File.Exists(strThumb + ".png"))                                
+                            //    conf.FileImage = strThumb + ".png"; 
+                            //}
+                            //catch
+                            //{
+                            //    conf.FileImage = string.Empty;
+                            //}
+                            //if (string.IsNullOrEmpty(conf.FileImage) && conf.DefaultCover.Length > 0)
+                            if (conf.DefaultCover.Length > 0)
                               conf.FileImage = conf.DefaultCover;
                         }
                     }
                     item.ThumbnailImage = conf.FileImage;
                     strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, sTitle);
-                    if ((!System.IO.File.Exists(strThumb)) && (conf.FileImage != conf.DefaultCover))
+                    if (!System.IO.File.Exists(strThumb) && conf.FileImage != conf.DefaultCover && !string.IsNullOrEmpty(conf.FileImage))
                       Picture.CreateThumbnail(conf.FileImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
                     if (conf.FileImage == conf.DefaultCover)
                       item.IconImage = conf.DefaultCover;
@@ -2203,8 +2210,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
               if (strThumbSource != string.Empty)
               {
-                Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
-                Picture.CreateThumbnail(strThumbSource, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                //Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
+                createCacheThumb(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, "small");
+                //Picture.CreateThumbnail(strThumbSource, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+                createCacheThumb(strThumbSource, strThumb, cacheThumbWith, cacheThumbHeight, "large");
                 thumbimages[0] = strThumbSource;
                 thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
                 return thumbimages;
@@ -2213,7 +2222,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             //if ((!System.IO.File.Exists(strThumbLarge)) && (strThumbLarge != conf.DefaultCoverArtist) && (strThumbSource != string.Empty))
             //{
-            //  Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "L.png", 400, 600, 0, Thumbs.SpeedThumbsLarge);
+            //  Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "L.png", cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
             //  strThumbLarge = strThumbDirectory + itemlabel + "L.png";
             //}
 
@@ -2222,7 +2231,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
               //ImageFast.CreateImage(strThumb, item.Label); // this is to create a pseudo cover with name of label added to it
               //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
-              //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+              //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
               thumbimages[0] = conf.DefaultCoverArtist;
               thumbimages[1] = conf.DefaultCoverArtist;
               return thumbimages;
@@ -2251,11 +2260,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 strPathViews = conf.StrPathViews;
               else
                 strPathViews = conf.StrPathViews + "\\";
-              strPathViews = strPathViews + WStrSort.ToLower() + "\\"; // added viev subfolder to searchpath
+              strPathViews = strPathViews + WStrSort.ToLower() + "\\"; // added view subfolder to searchpath
               if (System.IO.File.Exists(strPathViews + itemlabel + ".jpg"))
-                Picture.CreateThumbnail(strPathViews + itemlabel + ".jpg", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                createCacheThumb(strPathViews + itemlabel + ".jpg", strThumb, cacheThumbWith, cacheThumbHeight, "large");
               else if (System.IO.File.Exists(strPathViews + itemlabel + ".png"))
-                Picture.CreateThumbnail(strPathViews + itemlabel + ".png", strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+                createCacheThumb(strPathViews + itemlabel + ".png", strThumb, cacheThumbWith, cacheThumbHeight, "large");
               if (System.IO.File.Exists(strThumb))
               {
                 thumbimages[0] = strThumb;
@@ -2279,7 +2288,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (MyFilms.conf.StrViewsDflt && (MyFilms.conf.DefaultCoverViews.Length > 0))
             {
               //ImageFast.CreateImage(strThumb, item.Label); // Disabled "old" method to use Defaultcover with embedded text of selected item ...
-              //Picture.CreateThumbnail(strThumbLarge, strThumb, 400, 600, 0, Thumbs.SpeedThumbsLarge);
+              //Picture.CreateThumbnail(strThumbLarge, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
               thumbimages[0] = conf.DefaultCoverViews;
               thumbimages[1] = conf.DefaultCoverViews;
               return thumbimages;
@@ -2287,9 +2296,50 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           return thumbimages;
         }
+
+        private static void createCacheThumb(string ThumbSource, string ThumbTarget, int ThumbWidth, int ThumbHeight, string SpeedThumbSize)
+        {
+          System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(ThumbSource);
+          LogMyFilms.Debug("MF: (SetViewThumb) - Image Width x Height = '" + bmp.Width + "x" + bmp.Height + "' (" + ThumbSource + ")");
+          if (bmp.Width < ThumbWidth && bmp.Height < ThumbHeight)
+          {
+            if (!SaveThumbnailFile(ThumbSource, ThumbTarget)) // if copy unsuccessful, try to create speedthumb
+            {
+              if (SpeedThumbSize == "small")
+                Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsSmall);
+              else
+                Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+            }
+          }
+          else
+            if (SpeedThumbSize == "small")
+              Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsSmall);
+            else
+              Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+          //if (bmp != null) bmp.Dispose(); // is this needed?
+        }
+
+        private static bool SaveThumbnailFile(string ThumbSource, string ThumbTarget)
+        {
+          try
+          {
+            File.Copy(ThumbSource, ThumbTarget, true);
+            File.SetAttributes(ThumbTarget, File.GetAttributes(ThumbTarget) | FileAttributes.Hidden);
+            // even if run in background thread wait a little so the main process does not starve on IO
+            if (MediaPortal.Player.g_Player.Playing)
+              Thread.Sleep(100);
+            else
+              Thread.Sleep(1);
+            return true;
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Error("MF: (SaveThumbnailFile) - Error saving new thumbnail {0} - {1}", ThumbTarget, ex.Message);
+            return false;
+          }
+        }
       
-      
-        //----------------------------------------------------------------------------------------------
+      //----------------------------------------------------------------------------------------------
         //  Reverse Sort
         //----------------------------------------------------------------------------------------------
         public class myReverserClass : IComparer

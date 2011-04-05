@@ -37,7 +37,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   /// </summary>
   public class MyFilmsDialogSetRating : MediaPortal.Dialogs.GUIDialogWindow
   {
-    public const int ID_MyFilmsDialogRating = 7988;
     public enum ResultCode
     {
       Close,
@@ -67,12 +66,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public MyFilmsDialogSetRating()
     {
-      GetID = ID_MyFilmsDialogRating;
+      GetID = MyFilms.ID_MyFilmsDialogRating;
     }
 
     public override int GetID
     {
-      get { return ID_MyFilmsDialogRating; }
+      get { return MyFilms.ID_MyFilmsDialogRating; }
     }
 
     //public override int GetID
@@ -87,7 +86,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// <returns>Localized Window Name</returns>
     public override string GetModuleName()
     {
-      return GUILocalizeStrings.Get(ID_MyFilmsDialogRating); // return localized string for Module ID
+      return GUILocalizeStrings.Get(MyFilms.ID_MyFilmsDialogRating); // return localized string for Module ID
     }
 
     public override bool Init()
