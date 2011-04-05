@@ -187,7 +187,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         else
                         WriteAntAtribute(destXml, "country", nodeDVD.SelectSingleNode("country").InnerText);
                     string wRating = "0";
-                    if (nodeDVD.SelectSingleNode("imdbrating") != null && (string.IsNullOrEmpty(nodeDVD.SelectSingleNode("imdbrating").InnerText) || nodeDVD.SelectSingleNode("imdbrating").InnerText == "0"))
+                    if (nodeDVD.SelectSingleNode("imdbrating") != null && !string.IsNullOrEmpty(nodeDVD.SelectSingleNode("imdbrating").InnerText) && nodeDVD.SelectSingleNode("imdbrating").InnerText != "0")
                       wRating = nodeDVD.SelectSingleNode("imdbrating").InnerText;
                     else if (nodeDVD.SelectSingleNode("rating") != null)
                     {
