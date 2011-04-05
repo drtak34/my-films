@@ -556,7 +556,7 @@
 			<label>#myfilms.user.item1.label</label>
 			<font>font11</font>
 		    <textcolor>7fffffff</textcolor>
-			<visible>!player.hasmedia</visible>
+			<visible>string.equals(#myfilms.user.item1.value)+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
@@ -584,7 +584,7 @@
 		</control>
 		<control>
 			<type>image</type>
-			<description>Thumb of selected item</description>
+			<description>Cover Thumb</description>
 			<id>1020</id>
 			<posX>45</posX>
 			<posY>90</posY>
@@ -593,11 +593,28 @@
 			<texture>#myfilms.coverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<zoom>yes</zoom>
-			<visible>facadeview.list+Control.HasFocus(50)</visible>
+			<visible>facadeview.list+Control.HasFocus(50)+!Control.isvisible(34)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
             <animation effect="slide" time="450" start="-400,0">visible</animation>
             <animation effect="slide" time="450" end="-400,0">hidden</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Group Thumb</description>
+			<id>1020</id>
+			<posX>45</posX>
+			<posY>90</posY>
+			<width>288</width>
+			<height>420</height>
+			<texture>#myfilms.coverimage</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<visible>facadeview.list+Control.HasFocus(50)+Control.isvisible(34)</visible>
+			<animation effect="fade" start="0" end="100" time="250" reversible="true">Visiblechange</animation>
+			<animation effect="slide" time="450" start="-400,0" reversible="true">visiblechange</animation>
+      		<animation effect="fade" time="250">WindowOpen</animation>
+      		<animation effect="fade" time="250">WindowClose</animation>
 		</control>
     	<control>
       		<type>image</type>
@@ -639,7 +656,7 @@
 		<width>25</width>
 		<height>25</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!control.isvisible(34)+!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
@@ -655,7 +672,7 @@
 		<height>25</height>
 		<texture>MyFilms\overlaywatched.png</texture>
 		<colordiffuse>eea9d0f7</colordiffuse>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		<visible>!control.isvisible(34)+!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	

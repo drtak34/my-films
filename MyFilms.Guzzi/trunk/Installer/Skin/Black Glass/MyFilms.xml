@@ -821,7 +821,29 @@
 			<!-- <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture> -->
 			<!-- <colordiffuse>40ffffff</colordiffuse> -->
 			<!-- <texture>#myfilms.coverimage</texture> -->
-			<visible>facadeview.list+control.hasfocus(50)</visible>
+			<visible>facadeview.list+control.hasfocus(50)+!Control.isvisible(34)</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+
+		</control>
+		<control>
+			<description>Cover Art</description>
+			<type>image</type>
+			<id>1020</id>
+			<keepaspectratio>yes</keepaspectratio>
+			<posX>62</posX> 
+			<posY>88</posY> 
+			<width>245</width> 
+			<height>348</height> 
+			<centered>yes</centered>
+			<texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.coverimage</texture>
+			<!-- <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture> -->
+			<!-- <colordiffuse>40ffffff</colordiffuse> -->
+			<!-- <texture>#myfilms.coverimage</texture> -->
+			<visible>facadeview.list+control.hasfocus(50)+Control.isvisible(34)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">visible</animation>
 			<animation effect="fade" time="250" delay="250">hidden</animation>

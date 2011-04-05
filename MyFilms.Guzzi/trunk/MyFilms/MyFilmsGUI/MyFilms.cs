@@ -885,13 +885,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         dlg.Reset();
                         dlg.SetHeading(GUILocalizeStrings.Get(1079901)); // View (Layout) ...
                         dlg.Add(GUILocalizeStrings.Get(101));//List
-                        dlg.Add(GUILocalizeStrings.Get(100));//Icons
-                        dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
-                        dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
+                        if (!conf.UseListViewForGoups)
+                        {
+                          dlg.Add(GUILocalizeStrings.Get(100));//Icons
+                          dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
+                          dlg.Add(GUILocalizeStrings.Get(733));//Filmstrip
 #if MP11
 #else
                         dlg.Add(GUILocalizeStrings.Get(791));//Coverflow
 #endif
+                        }
                         dlg.DoModal(GetID);
 
                         if (dlg.SelectedLabel == -1)
@@ -995,8 +998,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (conf.WStrSort == "ACTORS")
                   {
                     conf.StrSelect = "Actors like '*" + conf.StrActors + "*'";
+                    SelItem = NewString.StripChars(@"[]", conf.StrTxtSelect); // Moved one up to first set SelItem to the actor and thus get back to correct facade position
                     conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
-                    SelItem = NewString.StripChars(@"[]", conf.StrTxtSelect);
                     getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, SelItem);
                   }
                     //else if (conf.WStrSort == "PRODUCER")
@@ -2316,7 +2319,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsSmall);
             else
               Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsLarge);
-          //if (bmp != null) bmp.Dispose(); // is this needed?
+          if (bmp != null)
+          {
+            bmp.Dispose(); // is this needed?
+          }
         }
 
         private static bool SaveThumbnailFile(string ThumbSource, string ThumbTarget)
