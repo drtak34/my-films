@@ -15,7 +15,7 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
     <ErrorReportUrlHistory>
     </ErrorReportUrlHistory>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <StartArguments>"V:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\imdb.xml"</StartArguments>
