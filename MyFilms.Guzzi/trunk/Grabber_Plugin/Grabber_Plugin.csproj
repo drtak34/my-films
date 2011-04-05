@@ -31,13 +31,14 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <ApplicationIcon>
     </ApplicationIcon>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;MP12</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -50,22 +51,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.1.2.19971, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Common.Utils, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\Release 1.1.2\Core.dll</HintPath>
+      <HintPath>..\Externals\Mediaportal\Common.Utils.dll</HintPath>
     </Reference>
-    <Reference Include="Dialogs, Version=1.1.2.19980, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\Release 1.1.2\Dialogs.dll</HintPath>
+      <HintPath>..\Externals\Mediaportal\Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Dialogs, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Externals\Mediaportal\Dialogs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utils, Version=2.2.7.19961, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Utils, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\Release 1.1.2\Utils.dll</HintPath>
+      <HintPath>..\Externals\Mediaportal\Utils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

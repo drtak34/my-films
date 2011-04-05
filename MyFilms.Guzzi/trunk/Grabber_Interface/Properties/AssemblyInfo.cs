@@ -1,6 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+#if MP12
+using MediaPortal.Common.Utils;
+#endif
 
 // Les informations générales relatives à un assembly dépendent de 
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
@@ -29,5 +32,11 @@ using System.Runtime.InteropServices;
 //      Numéro de build
 //      Révision
 //
-[assembly: AssemblyVersion("5.0.0.50")]
-[assembly: AssemblyFileVersion("5.0.0.50")]
+[assembly: AssemblyVersion("5.0.0.56")]
+[assembly: AssemblyFileVersion("5.0.0.56")]
+#if MP12
+//[assembly: CompatibleVersion("1.1.7.0", "1.1.6.0")]
+[assembly: CompatibleVersion("1.1.6.27644")]
+[assembly: UsesSubsystem("MP.Config")]
+[assembly: UsesSubsystem("MP.DB")]
+#endif

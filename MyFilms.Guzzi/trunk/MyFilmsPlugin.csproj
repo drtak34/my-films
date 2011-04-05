@@ -54,7 +54,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>MP11</DefineConstants>
+    <DefineConstants>MP12</DefineConstants>
     <PlatformTarget>x86</PlatformTarget>
     <RegisterForComInterop>false</RegisterForComInterop>
     <DebugType>full</DebugType>
@@ -77,21 +77,21 @@
     <Optimize>false</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Utils, Version=1.1.6.27644, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Common.Utils, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\trunk\Common.Utils.dll</HintPath>
+      <HintPath>Externals\Mediaportal\Common.Utils.dll</HintPath>
     </Reference>
-    <Reference Include="Core, Version=1.1.2.19971, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\Release 1.1.2\Core.dll</HintPath>
+      <HintPath>Externals\Mediaportal\Core.dll</HintPath>
     </Reference>
-    <Reference Include="Databases, Version=1.1.2.19974, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Databases, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\Release 1.1.2\Databases.dll</HintPath>
+      <HintPath>Externals\Mediaportal\Databases.dll</HintPath>
     </Reference>
-    <Reference Include="Dialogs, Version=1.1.2.19980, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Dialogs, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\Release 1.1.2\Dialogs.dll</HintPath>
+      <HintPath>Externals\Mediaportal\Dialogs.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -120,13 +120,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\TaskScheduler.dll</HintPath>
     </Reference>
-    <Reference Include="Utils, Version=2.2.7.19961, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Utils, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\Release 1.1.2\Utils.dll</HintPath>
+      <HintPath>Externals\Mediaportal\Utils.dll</HintPath>
     </Reference>
-    <Reference Include="WindowPlugins, Version=1.1.2.20003, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="WindowPlugins, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\Release 1.1.2\WindowPlugins.dll</HintPath>
+      <HintPath>Externals\Mediaportal\WindowPlugins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
