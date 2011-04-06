@@ -35,6 +35,7 @@ namespace Grabber_Interface
           this.label1 = new System.Windows.Forms.Label();
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.tabPageUserSettings = new System.Windows.Forms.TabPage();
+          this.label30 = new System.Windows.Forms.Label();
           this.groupBox11 = new System.Windows.Forms.GroupBox();
           this.groupBox15 = new System.Windows.Forms.GroupBox();
           this.chkAddTags = new System.Windows.Forms.CheckBox();
@@ -223,6 +224,7 @@ namespace Grabber_Interface
           // 
           // tabPageUserSettings
           // 
+          this.tabPageUserSettings.Controls.Add(this.label30);
           this.tabPageUserSettings.Controls.Add(this.groupBox11);
           this.tabPageUserSettings.Controls.Add(this.statusStrip1);
           this.tabPageUserSettings.Controls.Add(this.label22);
@@ -230,6 +232,11 @@ namespace Grabber_Interface
           resources.ApplyResources(this.tabPageUserSettings, "tabPageUserSettings");
           this.tabPageUserSettings.Name = "tabPageUserSettings";
           this.tabPageUserSettings.UseVisualStyleBackColor = true;
+          // 
+          // label30
+          // 
+          resources.ApplyResources(this.label30, "label30");
+          this.label30.Name = "label30";
           // 
           // groupBox11
           // 
@@ -348,7 +355,6 @@ namespace Grabber_Interface
           this.groupBox7.Controls.Add(this.groupBox10);
           this.groupBox7.Controls.Add(this.groupBox9);
           this.groupBox7.Controls.Add(this.groupBox8);
-          this.groupBox7.Controls.Add(this.checkBox2);
           resources.ApplyResources(this.groupBox7, "groupBox7");
           this.groupBox7.Name = "groupBox7";
           this.groupBox7.TabStop = false;
@@ -378,6 +384,7 @@ namespace Grabber_Interface
           this.groupBox9.Controls.Add(this.cbMaxWriters);
           this.groupBox9.Controls.Add(this.cbMaxDirectors);
           this.groupBox9.Controls.Add(this.cbMaxProducers);
+          this.groupBox9.Controls.Add(this.checkBox2);
           this.groupBox9.Controls.Add(this.cbMaxActors);
           this.groupBox9.Controls.Add(this.label28);
           this.groupBox9.Controls.Add(this.label27);
@@ -484,11 +491,13 @@ namespace Grabber_Interface
           resources.ApplyResources(this.groupBox8, "groupBox8");
           this.groupBox8.Name = "groupBox8";
           this.groupBox8.TabStop = false;
+          this.toolTip1.SetToolTip(this.groupBox8, resources.GetString("groupBox8.ToolTip"));
           // 
           // label24
           // 
           resources.ApplyResources(this.label24, "label24");
           this.label24.Name = "label24";
+          this.toolTip1.SetToolTip(this.label24, resources.GetString("label24.ToolTip"));
           // 
           // label23
           // 
@@ -1288,7 +1297,6 @@ namespace Grabber_Interface
           this.groupBox13.ResumeLayout(false);
           this.groupBox13.PerformLayout();
           this.groupBox7.ResumeLayout(false);
-          this.groupBox7.PerformLayout();
           this.groupBox10.ResumeLayout(false);
           this.groupBox10.PerformLayout();
           this.groupBox9.ResumeLayout(false);
@@ -1455,6 +1463,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.CheckBox chkAddTags;
         private System.Windows.Forms.ComboBox DVDPTagField;
+        private System.Windows.Forms.Label label30;
 
     }
 }
