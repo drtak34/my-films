@@ -249,6 +249,7 @@ public class TagName
   public static string KeyCreditsIndex = "KeyCreditsIndex";
   public static string KeyCreditsRegExp = "KeyCreditsRegExp";
   public static string KeyCreditsMaxItems = "KeyCreditsMaxItems";
+  public static string KeyCreditsGrabActorRoles = "KeyCreditsGrabActorRoles";
   public static string KeyStartCountry = "KeyStartCountry";     // Country
   public static string KeyEndCountry = "KeyEndCountry";
   public static string KeyCountryRegExp = "KeyCountryRegExp";

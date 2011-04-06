@@ -69,7 +69,7 @@ namespace Grabber_Interface
           this.label23 = new System.Windows.Forms.Label();
           this.cbTtitleMaxTitles = new System.Windows.Forms.ComboBox();
           this.cbTtitlePreferredLanguage = new System.Windows.Forms.ComboBox();
-          this.checkBox2 = new System.Windows.Forms.CheckBox();
+          this.chkGrabActorRoles = new System.Windows.Forms.CheckBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.label8 = new System.Windows.Forms.Label();
@@ -166,6 +166,7 @@ namespace Grabber_Interface
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
+          this.chkACTORROLES = new System.Windows.Forms.CheckBox();
           this.tabControl1.SuspendLayout();
           this.tabPageUserSettings.SuspendLayout();
           this.groupBox11.SuspendLayout();
@@ -384,7 +385,7 @@ namespace Grabber_Interface
           this.groupBox9.Controls.Add(this.cbMaxWriters);
           this.groupBox9.Controls.Add(this.cbMaxDirectors);
           this.groupBox9.Controls.Add(this.cbMaxProducers);
-          this.groupBox9.Controls.Add(this.checkBox2);
+          this.groupBox9.Controls.Add(this.chkGrabActorRoles);
           this.groupBox9.Controls.Add(this.cbMaxActors);
           this.groupBox9.Controls.Add(this.label28);
           this.groupBox9.Controls.Add(this.label27);
@@ -528,11 +529,12 @@ namespace Grabber_Interface
           this.cbTtitlePreferredLanguage.Name = "cbTtitlePreferredLanguage";
           this.cbTtitlePreferredLanguage.SelectedIndexChanged += new System.EventHandler(this.cbTtitlePreferredLanguage_SelectedIndexChanged);
           // 
-          // checkBox2
+          // chkGrabActorRoles
           // 
-          resources.ApplyResources(this.checkBox2, "checkBox2");
-          this.checkBox2.Name = "checkBox2";
-          this.checkBox2.UseVisualStyleBackColor = true;
+          resources.ApplyResources(this.chkGrabActorRoles, "chkGrabActorRoles");
+          this.chkGrabActorRoles.Name = "chkGrabActorRoles";
+          this.chkGrabActorRoles.UseVisualStyleBackColor = true;
+          this.chkGrabActorRoles.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
           // 
           // tabPageSearchPage
           // 
@@ -951,6 +953,7 @@ namespace Grabber_Interface
           // 
           // groupBox4
           // 
+          this.groupBox4.Controls.Add(this.chkACTORROLES);
           this.groupBox4.Controls.Add(this.lblLanguages);
           this.groupBox4.Controls.Add(this.textLanguages);
           this.groupBox4.Controls.Add(this.lblMaxItems);
@@ -1261,6 +1264,13 @@ namespace Grabber_Interface
           this.pictureBoxFranceFlag.TabStop = false;
           this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
           // 
+          // chkACTORROLES
+          // 
+          resources.ApplyResources(this.chkACTORROLES, "chkACTORROLES");
+          this.chkACTORROLES.Name = "chkACTORROLES";
+          this.chkACTORROLES.UseVisualStyleBackColor = true;
+          this.chkACTORROLES.CheckedChanged += new System.EventHandler(this.chkACTORROLES_CheckedChanged);
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -1449,7 +1459,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Button buttonExpertMode;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox chkGrabActorRoles;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.ComboBox WriterAddField;
@@ -1464,6 +1474,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.CheckBox chkAddTags;
         private System.Windows.Forms.ComboBox DVDPTagField;
         private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.CheckBox chkACTORROLES;
 
     }
 }

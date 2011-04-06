@@ -266,6 +266,14 @@ namespace Grabber_Interface
       // Load User Settings Page...
       try { cbMaxActors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value; }
       catch { cbMaxActors.Text = string.Empty; };
+      string strGrabActorRoles = "false";
+      try
+      {
+        strGrabActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
+        if (strGrabActorRoles == "true") chkGrabActorRoles.Checked = true;
+        else chkGrabActorRoles.Checked = false;
+      }
+      catch { chkGrabActorRoles.Checked = false; };
       try { cbMaxProducers.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value; }
       catch { cbMaxProducers.Text = string.Empty; };
       try { cbMaxDirectors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value; }
@@ -1032,6 +1040,14 @@ namespace Grabber_Interface
           catch { textComplement.Text = string.Empty; };
           try { textMaxItems.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value; }
           catch { textMaxItems.Text = string.Empty; };
+          string strActorRoles = string.Empty;
+          try 
+          {
+            strActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
+            if (strActorRoles == "true") chkACTORROLES.Checked = true;
+            else chkACTORROLES.Checked = false;
+          }
+          catch {chkACTORROLES.Checked = false;};
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsIndex)._Value;
           break;
         case 10: // Country
@@ -1673,6 +1689,21 @@ namespace Grabber_Interface
           break;
         case 21:
           xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value = textMaxItems.Text;
+          break;
+        default:
+          break;
+      }
+    }
+
+    private void chkACTORROLES_CheckedChanged(object sender, EventArgs e)
+    {
+      switch (cb_ParamDetail.SelectedIndex)
+      {
+        case 9:
+          if (chkACTORROLES.Checked)
+            xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "true";
+          else
+            xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "false";
           break;
         default:
           break;
@@ -2331,6 +2362,14 @@ namespace Grabber_Interface
     private void cbMaxActors_SelectedIndexChanged(object sender, EventArgs e)
     {
       xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value = cbMaxActors.Text;
+    }
+
+    private void checkBox2_CheckedChanged(object sender, EventArgs e)
+    {
+      if (chkGrabActorRoles.Checked)
+        xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "true";
+      else
+        xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "false";
     }
 
     private void cbMaxProducers_SelectedIndexChanged(object sender, EventArgs e)
