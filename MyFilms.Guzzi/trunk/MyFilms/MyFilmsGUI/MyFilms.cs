@@ -311,6 +311,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public delegate void FilmsEndedHandler(string filename);   
         System.ComponentModel.BackgroundWorker bgUpdateDB = new System.ComponentModel.BackgroundWorker();
         System.ComponentModel.BackgroundWorker bgUpdateFanart = new System.ComponentModel.BackgroundWorker();
+        System.ComponentModel.BackgroundWorker bgUpdateActors = new System.ComponentModel.BackgroundWorker();
         System.ComponentModel.BackgroundWorker bgUpdateTrailer = new System.ComponentModel.BackgroundWorker();
         System.ComponentModel.BackgroundWorker bgLoadMovieList = new System.ComponentModel.BackgroundWorker();
 
@@ -5797,6 +5798,61 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Info("MF: Backdrop Fanart download finished");
         }
 
+
+
+
+        //*****************************************************************************************
+        //*  Download Actors Artwork in Batch mode                                               *
+        //*****************************************************************************************
+        public void AsynUpdateActors()
+        {
+          if (!bgUpdateActors.IsBusy)
+          {
+            // moved here to avoid reinstantiating for each menu change.... thanks inker !
+            bgUpdateActors.DoWork += new DoWorkEventHandler(bgUpdateActors_DoWork);
+            bgUpdateActors.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateActors_RunWorkerCompleted);
+            bgUpdateActors.RunWorkerAsync(MyFilms.r);
+            LogMyFilms.Info("MF: : Downloading actors artwork in batch mode");
+
+          }
+        }
+
+        static void bgUpdateActors_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+          BackgroundWorker worker = sender as BackgroundWorker;
+          Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+          string wtitle = string.Empty;
+          foreach (DataRow t in MyFilms.r)
+          {
+            if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
+              wtitle = t["OriginalTitle"].ToString();
+            if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+              wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+            string wttitle = string.Empty;
+            if (t["TranslatedTitle"] != null && t["TranslatedTitle"].ToString().Length > 0)
+              wttitle = t["TranslatedTitle"].ToString();
+            if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+              wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+            if (t["OriginalTitle"].ToString().Length > 0)
+            {
+              int wyear = 0;
+              try { wyear = System.Convert.ToInt16(t["Year"]); }
+              catch { }
+              string wdirector = string.Empty;
+              try { wdirector = (string)t["Director"]; }
+              catch { }
+              System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString());
+              //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
+            }
+          }
+        }
+
+        static void bgUpdateActors_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+          LogMyFilms.Info("MF: actors artwork download finished");
+        }
+      
+      
         //*****************************************************************************************
         //*  Load List movie file in batch mode                                                   *
         //*****************************************************************************************
