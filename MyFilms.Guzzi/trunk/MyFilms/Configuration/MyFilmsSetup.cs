@@ -724,6 +724,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               case 6: // XBMC fulldb export (all movies in one DB)
               case 9:  // EAX Movie Catalog 3.0.9 (beta5)
               case 10: // PVD PersonalVideoDatabase V0.9.9.21
+              case 11: // MovingPicturesXML V1.2
                 destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                 break;
               case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
@@ -2011,6 +2012,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     cbWatched.Text = "Checked";
                     break;
 
+                case 11: // MovingPicturesXML V1.2
+                    AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = "SourceTrailer";
+                    if (MesFilmsCat.Text.Length > 0)
+                    {
+                      MesFilmsImg.Text = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MovingPictures\Covers\FullSize"; // Covers path
+                      MesFilmsImgArtist.Text = ""; // person thumb path
+                      MesFilmsFanart.Text = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MovingPictures\Backdrops\FullSize"; // fanart path
+                    }
+                    cbWatched.Text = "Checked";
+                    break;
+
                 default:
                     if (string.IsNullOrEmpty(AntStorage.Text))
                       AntStorage.Text = "Source";
@@ -2694,6 +2707,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             }
                             PersonalVideoDatabase pvd = new PersonalVideoDatabase();
                             mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text, this.chkAddTagline.Checked));
+                            break;
+                        case 11: // MovingPicturesXML
+                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+                            {
+                              mydivx.ReadXml(destFile);
+                              break;
+                            }
+                            MovingPicturesXML mopi = new MovingPicturesXML();
+                            mydivx.ReadXml(mopi.ConvertMovingPicturesXML(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked));
                             break;
                     }
 
@@ -4853,6 +4876,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
               break;
             case 10: // PVD PersonalVideoDatabase V0.9.9.21
+            case 11: // MocingPicturesXML V1.2
               destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
               break;
             default:

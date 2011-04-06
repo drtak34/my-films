@@ -300,6 +300,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
+                    case "11": // MovingPicturesXML
+                        if (create_temp)
+                        {
+                          string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
+                          string destFile = WStrPath + "\\" + StrFileXml.Substring(StrFileXml.LastIndexOf(@"\") + 1, StrFileXml.Length - StrFileXml.LastIndexOf(@"\") - 5) + "_tmp.xml";
+                          if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(StrFileXml))))
+                          {
+                            StrFileXml = destFile;
+                            break;
+                          }
+                          bool OnlyFile = false;
+                          OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
+                          MovingPicturesXML mopi = new MovingPicturesXML();
+                          StrFileXml = mopi.ConvertMovingPicturesXML(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile);
+                        }
+                        else
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
+                        break;
                 }
                 StrSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelect", string.Empty);
                 StrActors = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrActors", string.Empty);

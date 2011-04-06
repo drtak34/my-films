@@ -3407,6 +3407,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                     }
                     break;
+
+                  case "11": // MovingPicturesXML V1.2
+                    if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in MoPi fanart directory
+                    {
+                      string searchname = HTMLParser.removeHtml(wtitle2); // replaces special character "á" and other special chars !
+                      //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
+                      searchname = "{" + searchname + "}" + "*.jpg";
+                      string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
+                      if (files.Count() > 0)
+                      {
+                        wfanart[0] = files[0];
+                        wfanart[1] = "file";
+                        return wfanart;
+                      }
+                    }
+                    break;
+
                   default:
                     break;
                 }

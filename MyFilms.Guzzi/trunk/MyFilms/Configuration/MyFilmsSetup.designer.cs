@@ -448,6 +448,7 @@
           this.comboBox2 = new System.Windows.Forms.ComboBox();
           this.textBox2 = new System.Windows.Forms.TextBox();
           this.Tab_ExternalCatalogs = new System.Windows.Forms.TabPage();
+          this.buttonOpenTmpFile = new System.Windows.Forms.Button();
           this.Tab_WakeOnLan = new System.Windows.Forms.TabPage();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
           this.btnUpdate = new System.Windows.Forms.Button();
@@ -478,7 +479,6 @@
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
-          this.buttonOpenTmpFile = new System.Windows.Forms.Button();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -3841,7 +3841,8 @@
             "(n/a)",
             "(n/a)",
             "Eax Movie Catalog (3.0.9 b5)",
-            "PVD - Personal Video Database (0.9.9.21)"});
+            "PVD - Personal Video Database (0.9.9.21)",
+            "MovingPicturesXML (V1.2 process plugin)"});
           this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
           this.CatalogType.Size = new System.Drawing.Size(193, 21);
@@ -4343,6 +4344,16 @@
           this.Tab_ExternalCatalogs.ToolTipText = "Options for external catalogs (only applies if not using ANT movie catalog)";
           this.Tab_ExternalCatalogs.UseVisualStyleBackColor = true;
           // 
+          // buttonOpenTmpFile
+          // 
+          this.buttonOpenTmpFile.Location = new System.Drawing.Point(29, 269);
+          this.buttonOpenTmpFile.Name = "buttonOpenTmpFile";
+          this.buttonOpenTmpFile.Size = new System.Drawing.Size(152, 27);
+          this.buttonOpenTmpFile.TabIndex = 31;
+          this.buttonOpenTmpFile.Text = "Open tmp Catalog in Editor";
+          this.buttonOpenTmpFile.UseVisualStyleBackColor = true;
+          this.buttonOpenTmpFile.Click += new System.EventHandler(this.buttonOpenTmpFile_Click);
+          // 
           // Tab_WakeOnLan
           // 
           this.Tab_WakeOnLan.Controls.Add(this.groupBox25);
@@ -4716,16 +4727,6 @@
           this.traktConfiguration.Name = "traktConfiguration";
           this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
           this.traktConfiguration.TabIndex = 0;
-          // 
-          // buttonOpenTmpFile
-          // 
-          this.buttonOpenTmpFile.Location = new System.Drawing.Point(29, 269);
-          this.buttonOpenTmpFile.Name = "buttonOpenTmpFile";
-          this.buttonOpenTmpFile.Size = new System.Drawing.Size(152, 27);
-          this.buttonOpenTmpFile.TabIndex = 31;
-          this.buttonOpenTmpFile.Text = "Open tmp Catalog in Editor";
-          this.buttonOpenTmpFile.UseVisualStyleBackColor = true;
-          this.buttonOpenTmpFile.Click += new System.EventHandler(this.buttonOpenTmpFile_Click);
           // 
           // MyFilmsSetup
           // 

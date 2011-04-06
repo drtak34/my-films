@@ -2198,14 +2198,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                   case "10": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
-                      if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in PVD picture directory
-                      {
-                        string searchname = HTMLParser.removeHtml(itemlabel); // replaces special character "á" and other special chars !
-                        searchname = searchname + "*.jpg";
-                        string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
-                        if (files.Count() > 0)
-                          strThumbSource = files[0];
-                      }
+                    if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in PVD picture directory
+                    {
+                      string searchname = HTMLParser.removeHtml(itemlabel); // replaces special character "á" and other special chars !
+                      searchname = searchname + "*.jpg";
+                      string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
+                      if (files.Count() > 0)
+                        strThumbSource = files[0];
+                    }
                     break;
 
                   default:

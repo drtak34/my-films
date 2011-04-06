@@ -100,7 +100,8 @@
             "(n/a)",
             "(n/a)",
             "Eax Movie Catalog (3.0.9 b5)",
-            "PVD - Personal Video Database (0.9.9.21)"});
+            "PVD - Personal Video Database (0.9.9.21)",
+            "MovingPicturesXML (V1.2 process plugin)"});
           this.cbCatalogType.Location = new System.Drawing.Point(112, 132);
           this.cbCatalogType.Name = "cbCatalogType";
           this.cbCatalogType.Size = new System.Drawing.Size(227, 21);
