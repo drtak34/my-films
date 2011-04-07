@@ -71,6 +71,7 @@
       <KeyCreditsRegExp />
       <KeyCreditsIndex />
       <KeyCreditsMaxItems />
+      <KeyCreditsGrabActorRoles />
       <KeyStartCountry Param1="" Param2="" />
       <KeyEndCountry />
       <KeyCountryRegExp />

@@ -58,6 +58,7 @@
       <KeyEndCredits>_x003C__x002F_table_x003E_</KeyEndCredits>
       <KeyCreditsIndex />
       <KeyCreditsRegExp>_x005C__x0028__x005B__x005E__x005C__x0029__x005D__x002A__x003F__x0028__x002C__x007C__x003B__x007C__x0020_et_x0020__x0029_._x002A__x003F__x005B__x005C__x0028__x005C__x0029__x005D_</KeyCreditsRegExp>
+      <KeyCreditsGrabActorRoles />
       <KeyStartCountry Param1="_x0020__x007C_" Param2="_x002C_">_x003C_h5_x003E_Country:_x003C__x002F_h5_x003E_</KeyStartCountry>
       <KeyEndCountry>_x003C__x002F_div_x003E_</KeyEndCountry>
       <KeyCountryIndex />
