@@ -886,7 +886,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         dlg.Reset();
                         dlg.SetHeading(GUILocalizeStrings.Get(1079901)); // View (Layout) ...
                         dlg.Add(GUILocalizeStrings.Get(101));//List
-                        if (!conf.UseListViewForGoups)
+                        if (!conf.UseListViewForGoups || !conf.Boolselect)
                         {
                           dlg.Add(GUILocalizeStrings.Get(100));//Icons
                           dlg.Add(GUILocalizeStrings.Get(417));//Large Icons
@@ -2030,6 +2030,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               try {System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower());}
               catch (Exception) { }
 
+            if (isperson)
+            {
+              //Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
+              //AsynUpdateActors(w_tableau);
+            }
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Started");
             //item = new GUIListItem();
             for (wi = 0; wi != w_tableau.Count; wi++)
@@ -3380,7 +3385,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 if (MyFilmsDetail.ExtendedStartmode("Context: IMDB Update for all persons of movie")) // check if specialmode is configured for disabled features
                 {
-                  dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all envolved persons of a selected movie from IMDB
+                  dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all envolved persons of a selected movie from IMDB and/or TMDB
                   upd_choice[ichoice] = "updatepersonmovie";
                   ichoice++;
                 }
@@ -5804,14 +5809,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //*****************************************************************************************
         //*  Download Actors Artwork in Batch mode                                               *
         //*****************************************************************************************
-        public void AsynUpdateActors()
+        public void AsynUpdateActors(ArrayList actors)
         {
           if (!bgUpdateActors.IsBusy)
           {
-            // moved here to avoid reinstantiating for each menu change.... thanks inker !
             bgUpdateActors.DoWork += new DoWorkEventHandler(bgUpdateActors_DoWork);
             bgUpdateActors.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateActors_RunWorkerCompleted);
-            bgUpdateActors.RunWorkerAsync(MyFilms.r);
+            bgUpdateActors.RunWorkerAsync(actors);
             LogMyFilms.Info("MF: : Downloading actors artwork in batch mode");
 
           }
@@ -5822,29 +5826,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           BackgroundWorker worker = sender as BackgroundWorker;
           Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
           string wtitle = string.Empty;
-          foreach (DataRow t in MyFilms.r)
-          {
-            if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
-              wtitle = t["OriginalTitle"].ToString();
-            if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-              wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-            string wttitle = string.Empty;
-            if (t["TranslatedTitle"] != null && t["TranslatedTitle"].ToString().Length > 0)
-              wttitle = t["TranslatedTitle"].ToString();
-            if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-              wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-            if (t["OriginalTitle"].ToString().Length > 0)
-            {
-              int wyear = 0;
-              try { wyear = System.Convert.ToInt16(t["Year"]); }
-              catch { }
-              string wdirector = string.Empty;
-              try { wdirector = (string)t["Director"]; }
-              catch { }
-              System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString());
-              //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
-            }
-          }
+          //foreach (string actor in actors)
+          //{
+          //  if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
+          //    wtitle = t["OriginalTitle"].ToString();
+          //  if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+          //    wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+          //  string wttitle = string.Empty;
+          //  if (t["TranslatedTitle"] != null && t["TranslatedTitle"].ToString().Length > 0)
+          //    wttitle = t["TranslatedTitle"].ToString();
+          //  if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+          //    wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+          //  if (t["OriginalTitle"].ToString().Length > 0)
+          //  {
+          //    int wyear = 0;
+          //    try { wyear = System.Convert.ToInt16(t["Year"]); }
+          //    catch { }
+          //    string wdirector = string.Empty;
+          //    try { wdirector = (string)t["Director"]; }
+          //    catch { }
+          //    System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, conf.StrPathFanart, true, false, conf.StrTitle1);
+          //  }
+          //}
         }
 
         static void bgUpdateActors_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
