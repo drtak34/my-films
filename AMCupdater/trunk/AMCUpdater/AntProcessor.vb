@@ -24,6 +24,7 @@ Public Class AntProcessor
 
     Private Shared _ManualFieldName As String
     Private Shared _ManualFieldValue As String
+    Private Shared _ManualFieldOldValue As String
     Private Shared _ManualOperation As String
     Private Shared _ManualParameterField1 As String
     Private Shared _ManualParameterOperator1 As String
@@ -131,6 +132,14 @@ Public Class AntProcessor
         End Get
         Set(ByVal value As String)
             _ManualFieldValue = value
+        End Set
+    End Property
+    Public Property ManualFieldOldValue() As String
+        Get
+            Return _ManualFieldOldValue
+        End Get
+        Set(ByVal value As String)
+            _ManualFieldOldValue = value
         End Set
     End Property
     Public Property ManualOperation() As String
@@ -393,6 +402,19 @@ Public Class AntProcessor
             LogEvent(" - Field to Update : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
             LogEvent(" - Value to Set : " & _ManualFieldValue.ToString, EventLogLevel.ImportantEvent)
         End If
+        If (_ManualOperation.ToString = "Update Value - Replace String") Then
+            LogEvent(" - Field to Update : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
+            LogEvent(" - Value to be replaced : " & _ManualFieldOldValue.ToString, EventLogLevel.ImportantEvent)
+            LogEvent(" - Value to replace with : " & _ManualFieldValue.ToString, EventLogLevel.ImportantEvent)
+        End If
+        If (_ManualOperation.ToString = "Update Value - Add String") Then
+            LogEvent(" - Field to Update : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
+            LogEvent(" - Value to add to existing value : " & _ManualFieldValue.ToString, EventLogLevel.ImportantEvent)
+        End If
+        If (_ManualOperation.ToString = "Update Value - Remove String") Then
+            LogEvent(" - Field to Update : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
+            LogEvent(" - Value to remove from existing value : " & _ManualFieldValue.ToString, EventLogLevel.ImportantEvent)
+        End If
         If _ManualParameterMatchAll = True Then
             LogEvent(" - Parameters - Match All Records : True", EventLogLevel.ImportantEvent)
         Else
@@ -448,10 +470,14 @@ Public Class AntProcessor
                     If (((Not _ManualMissingFanartDownload) Or (_ManualMissingFanartDownload And ManualTestMissingFanart(wtitle))) And (_ManualOperation = "Download Fanart")) Or (Not _ManualOperation = "Download Fanart") Then
                         If _ManualParameterMatchAll = True Then
                             'We're matching all records - proceed with editing
+                            Dim wyear As String = ""
+                            If (Not IsNothing(CurrentNode.Attributes("Year"))) Then
+                                wyear = CurrentNode.Attributes("Year").Value
+                            End If
                             If (Not IsNothing(CurrentNode.Attributes("Director"))) Then
-                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, CurrentNode.Attributes("Director").Value})
+                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, CurrentNode.Attributes("Director").Value, wyear})
                             Else
-                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, ""})
+                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, "", wyear})
                             End If
                             LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
                         Else
@@ -565,11 +591,54 @@ Public Class AntProcessor
                             newAttr.Value = _ManualFieldValue
                             CurrentNode.Attributes.Append(newAttr)
                             'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
-                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (and added) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         Else
                             CurrentNode.Attributes(_ManualFieldName).Value = _ManualFieldValue
                             'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        End If
+                    Case "Update Value - Replace String"
+                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                            ' Do nothing, as old value to be replaced is not contained !
+                            'newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
+                            'newAttr.Value = ""
+                            'CurrentNode.Attributes.Append(newAttr)
+                            'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Updated (No old Value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        Else
+                            If CurrentNode.Attributes(_ManualFieldName).Value.Contains(_ManualFieldOldValue) = True Then
+                                CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value.Replace(_ManualFieldOldValue, _ManualFieldValue)
+                                'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Replaced String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            Else
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value not updated (Replace String not found): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            End If
+                        End If
+                    Case "Update Value - Add String"
+                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                            newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
+                            newAttr.Value = _ManualFieldValue
+                            CurrentNode.Attributes.Append(newAttr)
+                            'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added Field and String) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        Else
+                            CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value & _ManualFieldValue
+                            'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        End If
+                    Case "Update Value - Remove String"
+                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                            ' Do nothing
+                            'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Removed - (No old Value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        Else
+                            If CurrentNode.Attributes(_ManualFieldName).Value.Contains(_ManualFieldValue) = True Then
+                                CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value.Replace(_ManualFieldValue, "")
+                                'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Removed String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            Else
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value not Updated (Remove String not found): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            End If
                         End If
                     Case "Delete Record"
                         If Not CurrentNode Is Nothing Then
@@ -597,6 +666,8 @@ Public Class AntProcessor
                         End If
 
                         Dim wDirector As String = ""
+                        Dim wYear As String = ""
+                        Dim wIMDB_Id As String = ""
                         If row("AntTitle").ToString.Length > 0 Then
                             If (row("AntDirector").ToString.Length > 0) Then
                                 If (row("AntDirector").ToString.IndexOf(",") > 0) Then
@@ -604,6 +675,12 @@ Public Class AntProcessor
                                 Else
                                     wDirector = row("AntDirector").ToString
                                 End If
+                            End If
+                            If (row("AntYear").ToString.Length > 0) Then
+                                wYear = row("AntYear").ToString
+                            End If
+                            If (row("AntIMDB_Id").ToString.Length > 0) Then
+                                wIMDB_Id = row("AntIMDB_Id").ToString
                             End If
                         End If
 
@@ -645,7 +722,7 @@ Public Class AntProcessor
                                 End If
                                 If wtitle.Length > 0 Then
                                     If wtitle.Contains("\") = True Then
-                                        .GroupName = wtitle.Substring(0, wtitle.IndexOf("\"))
+                                        .GroupName = wtitle.Substring(0, wtitle.LastIndexOf("\"))
                                         'Console.WriteLine("-" & .GroupName.ToString & "-")
                                     End If
                                 End If
@@ -667,6 +744,8 @@ Public Class AntProcessor
                                 End If
 
                                 .InternetSearchHint = wDirector
+                                .InternetSearchHintYear = wYear
+                                .InternetSearchHintIMDB_Id = wIMDB_Id
                                 .ParserPath = CurrentSettings.Manual_Internet_Parser_Path
                                 .ProcessFile(AntRecord.Process_Mode_Names.Update)
                                 .SaveProgress()
@@ -863,6 +942,7 @@ Public Class AntProcessor
         'Console.WriteLine("Min: " & Form1.ToolStripProgressBar.Minimum.ToString & ", Max : " & Form1.ToolStripProgressBar.Maximum.ToString & ", Value : " & Form1.ToolStripProgressBar.Value.ToString)
         If Form1.ToolStripProgressBar.Value < Form1.ToolStripProgressBar.Maximum Then
             Form1.ToolStripProgressBar.Value += 1
+            Form1.ToolStripProgressMessage.Text = "status: " & Form1.ToolStripProgressBar.Value.ToString & " of " & Form1.ToolStripProgressBar.Maximum.ToString & " total movie(s)"
         End If
         'The e.UserState includes messages from the background process.  In this case, it's the 'File Imported - Filename' message.
         LogEvent(e.UserState, EventLogLevel.Informational)
@@ -1467,6 +1547,7 @@ Public Class AntProcessor
 
         If _InteractiveMode = True Then
             Form1.ToolStripProgressBar.Value += 1
+            Form1.ToolStripProgressMessage.Text = "status: " & Form1.ToolStripProgressBar.Value.ToString & " of " & Form1.ToolStripProgressBar.Maximum.ToString & " total movie(s)"
         End If
 
         'The e.UserState includes messages from the background process.  In this case, it's the 'File Imported - Filename' message.
@@ -2240,6 +2321,15 @@ Public Class AntProcessor
         column = New DataColumn()
         column.DataType = System.Type.GetType("System.String")
         column.ColumnName = "AntDirector"
+        table.Columns.Add(column)
+        ' Guzzi added: Year for better matching
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.String")
+        column.ColumnName = "AntYear"
+        table.Columns.Add(column)
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.String")
+        column.ColumnName = "AntIMDB_Id"
         table.Columns.Add(column)
         table.CaseSensitive = False
         ds.Tables.Add(table)

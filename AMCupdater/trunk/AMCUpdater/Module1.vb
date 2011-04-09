@@ -177,6 +177,58 @@ Module Module1
         Return CleanString
 
     End Function
+    Public Function GetYearFromFilePath(ByVal FilePath As String)
+        'File Name
+        'Folder Name
+        'File Name + Internet Lookup 
+        'Folder Name + Internet Lookup
+
+        Dim CleanString As String = ""
+
+        'If CurrentSettings.Movie_Title_Handling.Contains("File Name") Then
+        '    'Strip Path
+        '    CleanString = FilePath.Substring(FilePath.LastIndexOf("\") + 1)
+        '    'Strip Extension
+        '    CleanString = CleanString.Substring(0, CleanString.LastIndexOf("."))
+        'ElseIf CurrentSettings.Movie_Title_Handling.Contains("Folder Name") Then
+        '    'Strip filename:
+        '    CleanString = FilePath.Substring(0, FilePath.LastIndexOf("\"))
+        '    'Strip Path:
+        '    CleanString = CleanString.Substring(CleanString.LastIndexOf("\") + 1)
+        'Else
+        CleanString = FilePath
+        'End If
+
+
+        'Dim CutText As New Regex("\(" & "([^)]*)" & "\)")
+        Dim CutText As New Regex("" & "[0-9]{4}" & "")
+        Dim m As Match
+        m = CutText.Match(CleanString)
+        If m.Success = True Then
+            Return m.Value
+        Else
+            Return ""
+        End If
+
+        'Tidy up any trailing spaces:
+        CleanString = CleanString.Trim
+        CleanString = RemoveNastyCharacters(CleanString)
+        Return CleanString
+    End Function
+    Public Function GetIMDBidFromFilePath(ByVal FilePath As String)
+        Dim CleanString As String = ""
+
+        CleanString = FilePath
+
+        Dim CutText As New Regex("" & "tt\d{7}" & "")
+        Dim m As Match
+        m = CutText.Match(CleanString)
+        If m.Success = True Then
+            Return m.Value
+        Else
+            Return ""
+        End If
+    End Function
 
     Public Function RemoveNastyCharacters(ByVal strText As String)
 

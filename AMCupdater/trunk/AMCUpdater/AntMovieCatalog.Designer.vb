@@ -949,6 +949,12 @@ Partial Public Class AntMovieCatalog
         
         Private columnTMDB_Id As Global.System.Data.DataColumn
         
+        Private columnTagLine As Global.System.Data.DataColumn
+        
+        Private columnTags As Global.System.Data.DataColumn
+        
+        Private columnTrailerSource As Global.System.Data.DataColumn
+        
         Private columnContents_Id As Global.System.Data.DataColumn
         
         Private columnLength_Num As Global.System.Data.DataColumn
@@ -1267,6 +1273,27 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TagLineColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTagLine
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TagsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTags
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TrailerSourceColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTrailerSource
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public ReadOnly Property Contents_IdColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnContents_Id
@@ -1349,9 +1376,12 @@ Partial Public Class AntMovieCatalog
                     ByVal DateWatched As Date,  _
                     ByVal IMDB_Id As String,  _
                     ByVal TMDB_Id As String,  _
+                    ByVal TagLine As String,  _
+                    ByVal Tags As String,  _
+                    ByVal TrailerSource As String,  _
                     ByVal Length_Num As Integer) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, DateAdded, Size, Disks, Picture, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, Nothing, Length_Num}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, DateAdded, Size, Disks, Picture, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, TagLine, Tags, TrailerSource, Nothing, Length_Num}
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
             Return rowMovieRow
@@ -1396,9 +1426,12 @@ Partial Public Class AntMovieCatalog
                     ByVal Watched As String,  _
                     ByVal DateWatched As Date,  _
                     ByVal IMDB_Id As String,  _
-                    ByVal TMDB_Id As String) As MovieRow
+                    ByVal TMDB_Id As String,  _
+                    ByVal TagLine As String,  _
+                    ByVal Tags As String,  _
+                    ByVal TrailerSource As String) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Nothing, Size, Disks, Picture, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, Nothing, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, Borrower, Rating, OriginalTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, Subtitles, Nothing, Size, Disks, Picture, Certification, Writer, Watched, DateWatched, IMDB_Id, TMDB_Id, TagLine, Tags, TrailerSource, Nothing, Nothing}
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
             Return rowMovieRow
@@ -1457,6 +1490,9 @@ Partial Public Class AntMovieCatalog
             Me.columnDateWatched = MyBase.Columns("DateWatched")
             Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
             Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
+            Me.columnTagLine = MyBase.Columns("TagLine")
+            Me.columnTags = MyBase.Columns("Tags")
+            Me.columnTrailerSource = MyBase.Columns("TrailerSource")
             Me.columnContents_Id = MyBase.Columns("Contents_Id")
             Me.columnLength_Num = MyBase.Columns("Length_Num")
         End Sub
@@ -1544,6 +1580,12 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnIMDB_Id)
             Me.columnTMDB_Id = New Global.System.Data.DataColumn("TMDB_Id", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnTMDB_Id)
+            Me.columnTagLine = New Global.System.Data.DataColumn("TagLine", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTagLine)
+            Me.columnTags = New Global.System.Data.DataColumn("Tags", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTags)
+            Me.columnTrailerSource = New Global.System.Data.DataColumn("TrailerSource", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTrailerSource)
             Me.columnContents_Id = New Global.System.Data.DataColumn("Contents_Id", GetType(Integer), Nothing, Global.System.Data.MappingType.Hidden)
             MyBase.Columns.Add(Me.columnContents_Id)
             Me.columnLength_Num = New Global.System.Data.DataColumn("Length_Num", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
@@ -2426,6 +2468,48 @@ Partial Public Class AntMovieCatalog
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TagLine() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.TagLineColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte TagLine in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.TagLineColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property Tags() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.TagsColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Tags in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.TagsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TrailerSource() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.TrailerSourceColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte TrailerSource in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.TrailerSourceColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property Contents_Id() As Integer
             Get
                 Return CType(Me(Me.tableMovie.Contents_IdColumn),Integer)
@@ -2847,6 +2931,36 @@ Partial Public Class AntMovieCatalog
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetTMDB_IdNull()
             Me(Me.tableMovie.TMDB_IdColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTagLineNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.TagLineColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTagLineNull()
+            Me(Me.tableMovie.TagLineColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTagsNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.TagsColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTagsNull()
+            Me(Me.tableMovie.TagsColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTrailerSourceNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.TrailerSourceColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTrailerSourceNull()
+            Me(Me.tableMovie.TrailerSourceColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _

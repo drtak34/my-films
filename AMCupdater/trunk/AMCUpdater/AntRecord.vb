@@ -24,6 +24,8 @@ Public Class AntRecord
     Private _XMLFilePath As String = String.Empty
     Private _XMLTempFilePath As String = String.Empty
     Private _InternetSearchHint As String = String.Empty
+    Private _InternetSearchHintYear As String = String.Empty
+    Private _InternetSearchHintIMDB_Id As String = String.Empty
     Private _GroupName As String = String.Empty
     Private _DownloadImage As Boolean = False
     Private _MasterTitle As String = String.Empty
@@ -51,6 +53,14 @@ Public Class AntRecord
         Category = 10
         URL = 11
         PicturePathShort = 12
+        SubUrlPersons = 13
+        Comment = 14
+        Language = 15
+        Tagline = 16
+        Certification = 17
+        SubUrlTitles = 18
+        SubUrlCertification = 19
+        Writer = 20
     End Enum
     Public Enum Process_Mode_Names
         Import
@@ -243,6 +253,22 @@ Public Class AntRecord
             _InternetSearchHint = value
         End Set
     End Property
+    Public Property InternetSearchHintYear() As String
+        Get
+            Return _InternetSearchHintYear
+        End Get
+        Set(ByVal value As String)
+            _InternetSearchHintYear = value
+        End Set
+    End Property
+    Public Property InternetSearchHintIMDB_Id() As String
+        Get
+            Return _InternetSearchHintIMDB_Id
+        End Get
+        Set(ByVal value As String)
+            _InternetSearchHintIMDB_Id = value
+        End Set
+    End Property
     Public Property GroupName() As String
         Get
             Return _GroupName
@@ -314,7 +340,7 @@ Public Class AntRecord
         End If
         Return currentNode
     End Function
-    Private Sub DoInternetLookup(ByVal SearchString As String)
+    Private Sub DoInternetLookup(ByVal SearchString As String, Optional ByVal Year As String = "", Optional ByVal IMDB_Id As String = "") ' Guzzi: Added year and imdb id as optional (search) parameters
         'This is now reset on ProcessFile, since all processing will begin with that Sub.
         '_LastOutputMessage = ""
         If CurrentSettings.Prohibit_Internet_Lookup = True Or ProhibitInternetLookup = True Then
@@ -338,6 +364,9 @@ Public Class AntRecord
                         Exit While
                     Else
                         Dim wtitle As String
+                        Dim wyear As String
+                        Dim wlimityear As Boolean = False
+
                         If _InteractiveMode = True Then
                             frmList.txtSearchString.Text = SearchString
                             frmList.chkDontAskAgain.Checked = False
@@ -352,8 +381,14 @@ Public Class AntRecord
                                 frmList.lstOptions.Items.Add("Movie not found...")
                             Else
                                 For i As Integer = 0 To wurl.Count - 1
+                                    If wurl.Item(i).Year.ToString = _InternetSearchHintYear Then
+                                        wlimityear = True
+                                    End If
+                                Next
+                                For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
-                                    If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint) And _InternetLookupAlwaysPrompt = False) Then
+                                    wyear = wurl.Item(i).Year.ToString
+                                    If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint) And _InternetLookupAlwaysPrompt = False And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                         _InternetLookupOK = True
                                         If bgwFolderScanUpdate.CancellationPending = True Then
@@ -361,7 +396,11 @@ Public Class AntRecord
                                         End If
                                         Exit While
                                     End If
-                                    frmList.lstOptions.Items.Add(wtitle)
+                                    If wyear = _InternetSearchHintYear Then
+                                        frmList.lstOptions.Items.Add(wtitle & " - (+++ recommended by grabber autoselection +++)" & " (hints: year=" & _InternetSearchHintYear & ", imdb=" & _InternetSearchHintIMDB_Id & ")")
+                                    Else
+                                        frmList.lstOptions.Items.Add(wtitle & " (hints: year=" & _InternetSearchHintYear & ", imdb=" & _InternetSearchHintIMDB_Id & ")")
+                                    End If
                                 Next
                             End If
                             If frmList.lstOptions.Items.Count > 0 Then
@@ -413,8 +452,14 @@ Public Class AntRecord
                             'LogEvent(SearchString & " - " & wurl.Count.ToString & " Movies found", EventLogLevel.Informational)
                             If _InternetSearchHint.Length > 0 Then
                                 For i As Integer = 0 To wurl.Count - 1
+                                    If wurl.Item(i).Year.ToString = _InternetSearchHintYear Then
+                                        wlimityear = True
+                                    End If
+                                Next
+                                For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
-                                    If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint)) Then
+                                    wyear = wurl.Item(i).Year.ToString
+                                    If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint) And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
                                         'Dim datas As String()
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                         'CreateXmlnetInfos(datas)
@@ -436,7 +481,7 @@ Public Class AntRecord
                 End While
             End If
         Catch ex As Exception
-            _LastOutputMessage = "ERROR : Error on Internet Lookup for " & _FileName.ToString & " : " & ex.Message.ToString
+            _LastOutputMessage = "ERROR : Error on Internet Lookup for " & _FileName.ToString & " : " & ex.Message.ToString & " - Stacktrace: " & ex.StackTrace.ToString
         End Try
     End Sub
 
@@ -465,6 +510,7 @@ Public Class AntRecord
             Dim ttitle As String = ""
             Dim director As String = ""
             Dim year As Int16 = 0
+            Dim imdb_id As String = "" ' Guzzi Added for exact IMDB matching
             If (ProcessMode = Process_Mode_Names.Import) Then
                 'Second get a decent Movie Title which we can then use for Internet Lookups as well as the Original Title field.
                 If _DatabaseFields("originaltitle") = True Then
@@ -483,7 +529,39 @@ Public Class AntRecord
                         TempValue = ""
                     End If
                 End If
+                If _DatabaseFields("year") = True Then
+                    'try to get year from filepath/name 
+                    If (_FilePath.Length > 0) Then
+                        TempValue = GetYearFromFilePath(_FilePath)
+                        CurrentAttribute = "Year"
+                        If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                            attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                            attr.Value = TempValue
+                            _XMLElement.Attributes.Append(attr)
+                        Else
+                            _XMLElement.Attributes(CurrentAttribute).Value = TempValue
+                        End If
+                        _InternetSearchHintYear = TempValue
+                        TempValue = ""
+                    End If
+                End If
+                'try to get IMDB Id from filepath/name
+                If (_FilePath.Length > 0) Then
+                    TempValue = GetIMDBidFromFilePath(_FilePath)
+                    CurrentAttribute = "IMDB_Id"
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = TempValue
+                        _XMLElement.Attributes.Append(attr)
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
+                    End If
+                    title = TempValue
+                    _InternetSearchHintIMDB_Id = TempValue
+                    TempValue = ""
+                End If
             End If
+
             If IsInternetLookupNeeded() = True Then
                 If ProcessMode = Process_Mode_Names.Update Then
                     Dim wdirector As String
@@ -499,6 +577,7 @@ Public Class AntRecord
                         Else
                             If _XMLElement.Attributes("Year") IsNot Nothing Then
                                 _InternetSearchHint = _XMLElement.Attributes("Year").Value.ToString
+                                _InternetSearchHintYear = _XMLElement.Attributes("Year").Value.ToString
                             End If
                         End If
                     End If
@@ -511,7 +590,7 @@ Public Class AntRecord
                     Else
                         If _XMLElement.Attributes("OriginalTitle").Value.ToString.Contains("\") = True Then
                             'I don't think this is needed now, but leave it for the time being to be safe!
-                            DoInternetLookup(_XMLElement.Attributes("OriginalTitle").Value.ToString.Substring(_XMLElement.Attributes("OriginalTitle").Value.ToString.IndexOf("\") + 1))
+                            DoInternetLookup(_XMLElement.Attributes("OriginalTitle").Value.ToString.Substring(_XMLElement.Attributes("OriginalTitle").Value.ToString.LastIndexOf("\") + 1))
                         Else
                             'Do Internet lookup with the existing Original Title value.
                             DoInternetLookup(_XMLElement.Attributes("OriginalTitle").Value.ToString)

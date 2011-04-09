@@ -160,6 +160,7 @@ Public Class Form1
 
         Me.Cursor = Windows.Forms.Cursors.WaitCursor
         Me.ToolStripProgressBar.Value = Me.ToolStripProgressBar.Minimum
+        Me.ToolStripProgressMessage.Text = "- idle -"
 
         Dim f As New IO.FileInfo(txtConfigFilePath.Text)
         If Not f.Exists Then
@@ -280,6 +281,7 @@ Public Class Form1
 
         btnParseXML_Click(Nothing, Nothing)
         btnProcessMovieList_Click(Nothing, Nothing)
+        'btnProcessTrailerList_Click(Nothing, Nothing) ' still has to be implemented - is just a remark
         btnFindOrphans_Click(Nothing, Nothing)
         If btnUpdateXML.Enabled = True Then
             btnUpdateXML_Click(Nothing, Nothing)
@@ -377,6 +379,7 @@ Public Class Form1
             AntProcessor.ManualFieldName = cbManualSelectField.SelectedValue.ToString
         End If
         AntProcessor.ManualFieldValue = txtManualNewValue.Text
+        AntProcessor.ManualFieldOldValue = txtManualOldValue.Text
         If cbManualParameterFieldList1.SelectedIndex > -1 Then
             AntProcessor.ManualParameterField1 = cbManualParameterFieldList1.SelectedValue.ToString
         End If
@@ -427,10 +430,16 @@ Public Class Form1
 #Region "Misc GUI Actions"
     Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectMovieFolder.Click
         Dim wpath As String
+        Dim currentPath As String
+        currentPath = txtMovieFolder.Text
+        If currentPath.Contains(";") = True Then
+            currentPath = currentPath.Substring(currentPath.IndexOf(";") + 1)
+        End If
+
         Try
             With FolderBrowserDialog1
                 .RootFolder = Environment.SpecialFolder.Desktop
-                .SelectedPath = ""
+                .SelectedPath = currentPath
                 .Description = "Select the directory where your movie files are stored."
                 .ShowNewFolderButton = False
 
@@ -466,11 +475,12 @@ Public Class Form1
         Me.ValidateChildren()
     End Sub
     Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectConfigFile.Click
-
+        Dim currentDirectory As String
+        currentDirectory = txtConfigFilePath.Text
         Try
             With OpenFileDialog1
                 .InitialDirectory = Environment.SpecialFolder.Desktop
-                .FileName = ""
+                .FileName = currentDirectory
                 .CheckFileExists = False
                 .CheckPathExists = True
                 .DefaultExt = "xml"
@@ -605,10 +615,15 @@ Public Class Form1
         Me.ValidateChildren()
     End Sub
     Private Sub btnSelectParserFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectParserFile.Click
+        Dim currentPath As String
+        currentPath = txtParserFilePath.Text
+        If currentPath.Contains(";") = True Then
+            currentPath.Substring(currentPath.IndexOf(";") + 1)
+        End If
         Try
             With OpenFileDialog1
                 .InitialDirectory = My.Application.Info.DirectoryPath
-                .FileName = ""
+                .FileName = currentPath
                 .CheckFileExists = True
                 .CheckPathExists = True
                 .DefaultExt = "xml"
@@ -637,6 +652,11 @@ Public Class Form1
         Me.ValidateChildren()
     End Sub
     Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectExcludeFile.Click
+        Dim currentPath As String
+        currentPath = txtExcludeFilePath.Text
+        If currentPath.Contains(";") = True Then
+            currentPath.Substring(currentPath.IndexOf(";") + 1)
+        End If
         Try
             With OpenFileDialog1
                 .InitialDirectory = My.Application.Info.DirectoryPath
@@ -887,6 +907,8 @@ Public Class Form1
         If cbManualSelectOperation.SelectedIndex > -1 Then
             lblManualEnterNewValue.Visible = False
             txtManualNewValue.Visible = False
+            lblManualEnterOldValue.Visible = False
+            txtManualOldValue.Visible = False
             lblManualSelectField.Visible = False
             cbManualSelectField.Visible = False
 
@@ -896,6 +918,30 @@ Public Class Form1
             chkManualMissingTrailer.Visible = False
 
             If cbManualSelectOperation.SelectedItem = "Update Value" Then
+                lblManualEnterNewValue.Visible = True
+                txtManualNewValue.Visible = True
+                txtManualNewValue.Clear()
+                lblManualSelectField.Visible = True
+                cbManualSelectField.Visible = True
+                cbManualSelectField.SelectedIndex = -1
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Replace String" Then
+                lblManualEnterOldValue.Visible = True
+                txtManualOldValue.Visible = True
+                txtManualOldValue.Clear()
+                lblManualEnterNewValue.Visible = True
+                txtManualNewValue.Visible = True
+                txtManualNewValue.Clear()
+                lblManualSelectField.Visible = True
+                cbManualSelectField.Visible = True
+                cbManualSelectField.SelectedIndex = -1
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Add String" Then
+                lblManualEnterNewValue.Visible = True
+                txtManualNewValue.Visible = True
+                txtManualNewValue.Clear()
+                lblManualSelectField.Visible = True
+                cbManualSelectField.Visible = True
+                cbManualSelectField.SelectedIndex = -1
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Remove String" Then
                 lblManualEnterNewValue.Visible = True
                 txtManualNewValue.Visible = True
                 txtManualNewValue.Clear()
@@ -1231,72 +1277,120 @@ Public Class Form1
                 Else
                     epManualUpdater.SetError(txtManualNewValue, "")
                 End If
-            ElseIf cbManualSelectOperation.SelectedItem = "Delete Value" Then
-                'Delete Value : requires cbManualSelectField
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Replace String" Then
+                'Update value replace : requires cbManualSelectField and txtManualOldValue and txtManualNewValue
                 If cbManualSelectField.SelectedIndex < 0 Then
-                    epManualUpdater.SetError(cbManualSelectField, "Please select a field to delete")
+                    epManualUpdater.SetError(cbManualSelectField, "Please select a field to update")
                     IsValid = False
                 Else
                     epManualUpdater.SetError(cbManualSelectField, "")
                 End If
-            ElseIf cbManualSelectOperation.SelectedItem = "Download Fanart" Then
-                'Delete Value : requires cbManualSelectField
-                If txtFanartFolder.Text = String.Empty Then
-                    epManualUpdater.SetError(cbManualSelectOperation, "Please select a Path to Fanart download")
+                If txtManualOldValue.Text = String.Empty Then
+                    epManualUpdater.SetError(txtManualOldValue, "Please enter the old value to be replaced")
                     IsValid = False
+                Else
+                    epManualUpdater.SetError(txtManualOldValue, "")
                 End If
-            ElseIf cbManualSelectOperation.SelectedItem = "Update Record" Then
-                If IsInternetLookupNeeded() = True Then
-                    grpManualInternetLookupSettings.Visible = True
-                    'Excluded Movie File Path Required:
-                    If txtManualExcludedMoviesPath.Text = String.Empty Then
-                        epManualUpdater.SetError(txtManualExcludedMoviesPath, "Path to excluded movies file must be entered")
+                If txtManualNewValue.Text = txtManualOldValue.Text Then
+                    epManualUpdater.SetError(txtManualNewValue, "Please enter the new value to replace DIFFERENT than old one")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(txtManualNewValue, "")
+                End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Add String" Then
+                    'Update value : requires cbManualSelectField and txtManualNewValue
+                    If cbManualSelectField.SelectedIndex < 0 Then
+                        epManualUpdater.SetError(cbManualSelectField, "Please select a field to update")
                         IsValid = False
                     Else
-                        'Check it's a valid path:
-                        Dim wpath As String = txtManualExcludedMoviesPath.Text
-                        If Not wpath.Contains("\") Then
-                            'Not a path without a backslash!
-                            epManualUpdater.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
+                        epManualUpdater.SetError(cbManualSelectField, "")
+                    End If
+                    If txtManualNewValue.Text = String.Empty Then
+                        epManualUpdater.SetError(txtManualNewValue, "Please enter the new value to add")
+                        IsValid = False
+                    Else
+                        epManualUpdater.SetError(txtManualNewValue, "")
+                    End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Remove String" Then
+                    'Update value : requires cbManualSelectField and txtManualNewValue
+                    If cbManualSelectField.SelectedIndex < 0 Then
+                        epManualUpdater.SetError(cbManualSelectField, "Please select a field to update")
+                        IsValid = False
+                    Else
+                        epManualUpdater.SetError(cbManualSelectField, "")
+                    End If
+                    If txtManualNewValue.Text = String.Empty Then
+                        epManualUpdater.SetError(txtManualNewValue, "Please enter the new value to remove")
+                        IsValid = False
+                    Else
+                        epManualUpdater.SetError(txtManualNewValue, "")
+                    End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Delete Value" Then
+                    'Delete Value : requires cbManualSelectField
+                    If cbManualSelectField.SelectedIndex < 0 Then
+                        epManualUpdater.SetError(cbManualSelectField, "Please select a field to delete")
+                        IsValid = False
+                    Else
+                        epManualUpdater.SetError(cbManualSelectField, "")
+                    End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Download Fanart" Then
+                    'Delete Value : requires cbManualSelectField
+                    If txtFanartFolder.Text = String.Empty Then
+                        epManualUpdater.SetError(cbManualSelectOperation, "Please select a Path to Fanart download")
+                        IsValid = False
+                    End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Record" Then
+                    If IsInternetLookupNeeded() = True Then
+                        grpManualInternetLookupSettings.Visible = True
+                        'Excluded Movie File Path Required:
+                        If txtManualExcludedMoviesPath.Text = String.Empty Then
+                            epManualUpdater.SetError(txtManualExcludedMoviesPath, "Path to excluded movies file must be entered")
                             IsValid = False
                         Else
-                            wpath = wpath.Substring(0, wpath.LastIndexOf("\"))
-                            If Directory.Exists(wpath) Then
-                                If txtManualExcludedMoviesPath.Text.EndsWith("\") = True Then
-                                    txtManualExcludedMoviesPath.Text += "AMCUpdater_Excluded_Files.txt"
-                                ElseIf txtManualExcludedMoviesPath.Text.EndsWith(".txt") = True Then
-                                    'Else
-                                    'txtManualExcludedMoviesPath.Text += "\AMCUpdater_Excluded_Files.txt"
-                                End If
-                                epInteractive.SetError(txtManualExcludedMoviesPath, "")
-                            Else
-                                epInteractive.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
+                            'Check it's a valid path:
+                            Dim wpath As String = txtManualExcludedMoviesPath.Text
+                            If Not wpath.Contains("\") Then
+                                'Not a path without a backslash!
+                                epManualUpdater.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
                                 IsValid = False
+                            Else
+                                wpath = wpath.Substring(0, wpath.LastIndexOf("\"))
+                                If Directory.Exists(wpath) Then
+                                    If txtManualExcludedMoviesPath.Text.EndsWith("\") = True Then
+                                        txtManualExcludedMoviesPath.Text += "AMCUpdater_Excluded_Files.txt"
+                                    ElseIf txtManualExcludedMoviesPath.Text.EndsWith(".txt") = True Then
+                                        'Else
+                                        'txtManualExcludedMoviesPath.Text += "\AMCUpdater_Excluded_Files.txt"
+                                    End If
+                                    epInteractive.SetError(txtManualExcludedMoviesPath, "")
+                                Else
+                                    epInteractive.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
+                                    IsValid = False
+                                End If
                             End If
                         End If
-                    End If
 
-                    'Internet parser file required:
-                    If txtManualInternetParserPath.Text = String.Empty Then
-                        epManualUpdater.SetError(txtManualInternetParserPath, "Path to Internet Parser File must be entered")
-                        IsValid = False
-                    Else
-                        Dim wpath As String = txtManualInternetParserPath.Text
-                        If Not wpath.Contains("\") Then
-                            'Not a path without a backslash!
-                            epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Parser File path.")
+                        'Internet parser file required:
+                        If txtManualInternetParserPath.Text = String.Empty Then
+                            epManualUpdater.SetError(txtManualInternetParserPath, "Path to Internet Parser File must be entered")
                             IsValid = False
                         Else
-                            If File.Exists(wpath) Then
-                                epManualUpdater.SetError(txtManualInternetParserPath, "")
-                            Else
+                            Dim wpath As String = txtManualInternetParserPath.Text
+                            If Not wpath.Contains("\") Then
+                                'Not a path without a backslash!
                                 epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Parser File path.")
                                 IsValid = False
+                            Else
+                                If File.Exists(wpath) Then
+                                    epManualUpdater.SetError(txtManualInternetParserPath, "")
+                                Else
+                                    epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Parser File path.")
+                                    IsValid = False
+                                End If
                             End If
                         End If
                     End If
                 End If
-            End If
         End If
 
         If chkManualParametersUpdateAll.Checked Then
@@ -1974,12 +2068,16 @@ Public Class Form1
 
 #End Region
 
-
     Private Sub btnSelectFanartFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectFanartFolder.Click
+        Dim currentPath As String
+        currentPath = txtFanartFolder.Text
+        If currentPath.Contains(";") = True Then
+            currentPath.Substring(currentPath.IndexOf(";") + 1)
+        End If
         Try
             With FolderBrowserDialog1
                 .RootFolder = Environment.SpecialFolder.Desktop
-                .SelectedPath = ""
+                .SelectedPath = currentPath
                 .Description = "Select the directory where your movie backdrops fanart are stored."
                 .ShowNewFolderButton = False
 
