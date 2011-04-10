@@ -42,6 +42,8 @@ namespace MyFilmsPlugin.MyFilms
 */
         private static DataRow[] movies;
 
+        private static DataRow[] persons;
+
         #region ctor
         static BaseMesFilms()
         {
@@ -68,6 +70,11 @@ namespace MyFilmsPlugin.MyFilms
         public static DataRow[] FilmsSelected
         {
             get { return movies; }
+        }
+
+        public static DataRow[] PersonsSelected
+        {
+          get { return persons; }
         }
 
         #endregion
@@ -97,7 +104,27 @@ namespace MyFilmsPlugin.MyFilms
             }
             return movies;
         }
- 
+
+        public static DataRow[] LectureDonnéesPersons(string StrSelect, string StrSort, string StrSortSens, bool all)
+        {
+          if (data == null)
+            initData();
+          if (StrSelect.Length == 0)
+            StrSelect = "Name" + " not like ''";
+          persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
+          if (persons.Length == 0 && all)
+          {
+            StrSelect = "Name" + " not like ''";
+            persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
+            //Guzzi
+            LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSelect          : '" + StrSelect + "'");
+            LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSort            : '" + StrSort + "'");
+            LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSortSens        : '" + StrSortSens + "'");
+            LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
+          }
+          return persons;
+        }
+
         public static void LoadFilm(string StrFileXml)
         {
             if (!System.IO.File.Exists(StrFileXml))
