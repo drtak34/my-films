@@ -122,13 +122,12 @@ Namespace My
                 Next
 
                 Try
-
                     Dim f As New IO.FileInfo(CurrentSettings.XML_File.ToString)
                     If Not f.Exists Then
                         LogEvent("XML File '" + CurrentSettings.XML_File.ToString + "' Not Found.", EventLogLevel.ImportantEvent)
                         Dim destXml As New Xml.XmlTextWriter(CurrentSettings.XML_File.ToString, System.Text.Encoding.Default)
+                        destXml.Formatting = System.Xml.Formatting.Indented
                         destXml.WriteStartDocument(False)
-                        destXml.Formatting = Xml.Formatting.Indented
                         destXml.WriteStartElement("AntMovieCatalog")
                         destXml.WriteStartElement("Catalog")
                         destXml.WriteElementString("Properties", "")
