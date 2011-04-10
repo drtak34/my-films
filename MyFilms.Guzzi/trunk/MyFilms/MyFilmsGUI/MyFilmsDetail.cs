@@ -596,6 +596,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             keyboard.Reset();
 
             string title = string.Empty; // variable for searchtitle creation
+            string mediapath = string.Empty; // variable for searchpath creation (for nfo/xml/xbmc reader)
             switch (choiceView)
             {
                 case "mainmenu":
@@ -1192,6 +1193,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     setProcessAnimationStatus(true, m_SearchAnimation);
                     title = string.Empty;
+                    mediapath = string.Empty;
                     if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
                     {
                       title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
@@ -1217,7 +1219,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                         title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
-                    grabb_Internet_Informations(title, GetID, wChooseScript, MyFilms.conf.StrGrabber_cnf);
+                    mediapath = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                    if (mediapath.Contains(";")) // take the forst source file
+                    {
+                      mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
+                    }
+
+                    grabb_Internet_Informations(title, GetID, wChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath);
                     afficher_detail(true);
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     break;
@@ -1434,7 +1442,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Grab URL Internet Movie Informations and update the XML database and refresh screen
         //-------------------------------------------------------------------------------------------        
-        public static void grabb_Internet_Informations(string FullMovieName, int GetID, bool choosescript, string wscript)
+        public static void grabb_Internet_Informations(string FullMovieName, int GetID, bool choosescript, string wscript, string FullMoviePath)
         {
             LogMyFilms.Debug("MF: launching (grabb_Internet_Informations) with title = '" + FullMovieName + "', choosescript = '" + choosescript + "', grabberfile = '" + wscript + "'");
             if (choosescript)
@@ -1483,6 +1491,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             string MovieName = FullMovieName;
             string MovieHierarchy = string.Empty;
+            string MoviePath = FullMoviePath;
             if (MyFilms.conf.TitleDelim.Length > 0)
             {
                 MovieName = FullMovieName.Substring(FullMovieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
@@ -1491,7 +1500,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             Grabber.Grabber_URLClass.IMDBUrl wurl;
 
-            ArrayList listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always);
+            ArrayList listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, MoviePath);
             int listCount = listUrl.Count;
             if (!MyFilms.conf.StrGrabber_Always)
                 listCount = 2;
@@ -1534,7 +1543,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         keyboard.Text = MovieName;
                         keyboard.DoModal(GetID);
                         if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
-                            grabb_Internet_Informations(keyboard.Text.ToString(), GetID, false, wscript);
+                            grabb_Internet_Informations(keyboard.Text.ToString(), GetID, false, wscript, MoviePath);
                         break;
                     }
                     if (dlg.SelectedLabel > 0)

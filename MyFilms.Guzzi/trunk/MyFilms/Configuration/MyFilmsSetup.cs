@@ -77,7 +77,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             InitializeComponent();
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
-            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString() + " alpha";
+            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString() + " beta";
         }
 
 
@@ -106,6 +106,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.btnGrabberInterface.Visible = false; // disable grabber interface in normal mode
               this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
               this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
+              this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
+              this.buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
             }
             //else
             //{
@@ -837,6 +839,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Menu_Config", Config_Menu.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Logos", chkLogos.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", CatalogType.SelectedIndex.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalogExecutable", AMCexePath.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalog", MesFilmsCat.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntPicture", MesFilmsImg.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistPicturePath", MesFilmsImgArtist.Text.ToString());
@@ -1163,6 +1166,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             Refresh_Items(false);
             CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", "0"));
             MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalog", "");
+            AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalogExecutable", "");
             MesFilmsImg.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntPicture", "");
             MesFilmsImgArtist.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ArtistPicturePath", "");
             MesFilmsFanart.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartPicture", "");
@@ -4923,6 +4927,69 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
           }
 
+        }
+
+        private void buttonOpenTmpFileAMC_Click(object sender, EventArgs e)
+        {
+          string destFile = string.Empty;
+          if (CatalogType.SelectedIndex == 0)
+            destFile = MesFilmsCat.Text;
+          else
+            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+          if (!System.IO.File.Exists(destFile))
+          {
+            MessageBox.Show("The file '" + destFile + "' does not exist!", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+          }
+          if (string.IsNullOrEmpty(AMCexePath.Text))
+          {
+            MessageBox.Show("Unable to launch Ant Movie Catalog ! \nPlease set the path accordingly first!", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+          }
+          //System.Diagnostics.Process.Start(AMCexePath.Text); // More detailed startup below ...
+          using (Process p = new Process())
+          {
+            ProcessStartInfo psi = new ProcessStartInfo();
+            psi.FileName = AMCexePath.Text;
+            psi.UseShellExecute = true;
+            psi.WindowStyle = ProcessWindowStyle.Normal;
+            psi.Arguments = "\"" + destFile + "\"";
+            psi.ErrorDialog = true;
+            if (OSInfo.OSInfo.VistaOrLater())
+            {
+              psi.Verb = "runas";
+            }
+
+            p.StartInfo = psi;
+            try
+            {
+              p.Start();
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug(ex.ToString());
+            }
+          }
+        }
+
+        private void buttonAMCpathSearch_Click(object sender, EventArgs e)
+        {
+          if (!string.IsNullOrEmpty(AMCexePath.Text))
+            openFileDialog1.FileName = AMCexePath.Text;
+          else
+          {
+            openFileDialog1.FileName = String.Empty;
+            openFileDialog1.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();
+          }
+          openFileDialog1.RestoreDirectory = true;
+          openFileDialog1.DefaultExt = "exe";
+          openFileDialog1.Filter = "exe Files|*.exe";
+          openFileDialog1.Title = "Select AMC Movie Catalog Executable (.exe)";
+          openFileDialog1.CheckFileExists = false;
+          if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+          {
+            AMCexePath.Text = openFileDialog1.FileName;
+          }
         }
     }
 }

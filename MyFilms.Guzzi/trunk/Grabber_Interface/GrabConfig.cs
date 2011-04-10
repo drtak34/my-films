@@ -381,8 +381,6 @@ namespace Grabber_Interface
             case "System.Windows.Forms.ListBox":
               ((ListBox)c).Items.Clear();
               break;
-
-
           }
         }
       }
@@ -2361,7 +2359,11 @@ namespace Grabber_Interface
 
     private void cbMaxActors_SelectedIndexChanged(object sender, EventArgs e)
     {
-      xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value = cbMaxActors.Text;
+      //List<ListNode> list = xmlConf.listDetail;
+      //string value = TagName.KeyCreditsMaxItems;
+      //if (xmlConf.listDetail != null && TagName.KeyCreditsMaxItems != null && cbMaxActors.Text != null && cbMaxActors != null)
+      if (cbMaxActors.SelectedIndex != -1)
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value = cbMaxActors.Text;
     }
 
     private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -2374,32 +2376,38 @@ namespace Grabber_Interface
 
     private void cbMaxProducers_SelectedIndexChanged(object sender, EventArgs e)
     {
-      xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value = cbMaxProducers.Text;
+      if (cbMaxProducers.SelectedIndex != -1)
+        xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value = cbMaxProducers.Text;
     }
 
     private void cbMaxDirectors_SelectedIndexChanged(object sender, EventArgs e)
     {
-      xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value = cbMaxDirectors.Text;
+      if (cbMaxDirectors.SelectedIndex != -1) 
+        xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value = cbMaxDirectors.Text;
     }
 
     private void cbMaxWriters_SelectedIndexChanged(object sender, EventArgs e)
     {
-      xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value = cbMaxWriters.Text;
+      if (cbMaxWriters.SelectedIndex != -1) 
+        xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value = cbMaxWriters.Text;
     }
 
     private void cbTtitlePreferredLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
-      xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value = cbTtitlePreferredLanguage.Text;
+      if (cbTtitlePreferredLanguage.SelectedIndex != -1) 
+        xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value = cbTtitlePreferredLanguage.Text;
     }
 
     private void cbTtitleMaxTitles_SelectedIndexChanged(object sender, EventArgs e)
     {
-      xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value = cbTtitleMaxTitles.Text;
+      if (cbTtitleMaxTitles.SelectedIndex != -1) 
+        xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value = cbTtitleMaxTitles.Text;
     }
 
     private void cbCertificationPreferredLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
-      xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value = cbCertificationPreferredLanguage.Text;
+      if (cbCertificationPreferredLanguage.SelectedIndex != -1) 
+        xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value = cbCertificationPreferredLanguage.Text;
     }
   }
 }

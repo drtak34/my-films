@@ -220,26 +220,26 @@
 			<control>
 				<type>button</type>
 				<description>Layout</description>
-				<id>6</id>
+				<id>2</id>
 				<posX>60</posX>
 				<posY>107</posY>
 				<onleft>50</onleft>
 				<onright>50</onright>
 				<onup>10012</onup>
-				<ondown>2</ondown>
+				<ondown>3</ondown>
 				<animation>unfocus</animation>
 				<label>101</label>
 				<textcolor>ff000000</textcolor>
 			</control>
 			<control>
 				<type>sortbutton</type>
-				<id>2</id>
+				<id>3</id>
 				<posX>60</posX>
 				<posY>139</posY>
 				<onleft>6</onleft>
 				<onright>50</onright>
-				<onup>6</onup>
-				<ondown>3</ondown>
+				<onup>2</onup>
+				<ondown>5</ondown>
 				<font>font13</font>
 				<textureFocus>menu_list_focus.png</textureFocus>
 				<textYOff>5</textYOff>
@@ -259,12 +259,12 @@
 			<control>
 				<type>button</type>
 				<description>Switch view</description>
-				<id>3</id>
+				<id>5</id>
 				<posX>60</posX>
 				<posY>171</posY>
 				<onleft>2</onleft>
 				<onright>50</onright>
-				<onup>2</onup>
+				<onup>3</onup>
 				<ondown>4</ondown>
 				<animation>unfocus</animation>
 				<label>457</label>
@@ -278,8 +278,8 @@
 				<posY>203</posY>
 				<onleft>3</onleft>
 				<onright>50</onright>
-				<onup>3</onup>
-				<ondown>5</ondown>
+				<onup>5</onup>
+				<ondown>6</ondown>
 				<animation>unfocus</animation>
 				<label>137</label>
 				<textcolor>ff000000</textcolor>
@@ -287,7 +287,7 @@
 			<control>
 				<type>button</type>
 				<description>Options</description>
-				<id>5</id>
+				<id>6</id>
 				<posX>60</posX>
 				<posY>235</posY>
 				<onleft>4</onleft>
@@ -303,7 +303,7 @@
 					<description>Global Filter Options</description>
 					<id>7</id>
 					<onright>50</onright>
-					<onup>5</onup>
+					<onup>6</onup>
 					<ondown>10012</ondown>
 				</control>
 

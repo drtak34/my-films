@@ -24,7 +24,10 @@
 namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
+  using System.IO;
   using System.Collections.Generic;
+  using System.Net;
+  using System.Diagnostics;
   using System.Text;
 
   using MediaPortal.GUI.Library;
@@ -527,6 +530,31 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
 
         #endregion
+
+        #region Web Methods
+        public static bool DownloadFile(string url, string localFile)
+        {
+          WebClient webClient = new WebClient();
+          webClient.Headers.Add("user-agent", MyFilmsSettings.UserAgent);
+
+          try
+          {
+            Directory.CreateDirectory(Path.GetDirectoryName(localFile));
+            if (!File.Exists(localFile) || ImageFast.FastFromFile(localFile) == null)
+            {
+              LogMyFilms.Debug("Downloading new file from: " + url);
+              webClient.DownloadFile(url, localFile);
+            }
+            return true;
+          }
+          catch (WebException)
+          {
+            LogMyFilms.Debug("File download failed from '{0}' to '{1}'", url, localFile);
+            return false;
+          }
+        }
+        #endregion
+    
     }
 }
 

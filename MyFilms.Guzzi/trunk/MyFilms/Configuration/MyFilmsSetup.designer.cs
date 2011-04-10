@@ -478,6 +478,11 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.buttonOpenTmpFileAMC = new System.Windows.Forms.Button();
+          this.lblAMCpath = new System.Windows.Forms.Label();
+          this.AMCexePath = new System.Windows.Forms.TextBox();
+          this.buttonAMCpathSearch = new System.Windows.Forms.Button();
+          this.groupBoxAMCsettings = new System.Windows.Forms.GroupBox();
           this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
@@ -528,6 +533,7 @@
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          this.groupBoxAMCsettings.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -608,9 +614,9 @@
           this.label_VersionNumber.ForeColor = System.Drawing.SystemColors.HotTrack;
           this.label_VersionNumber.Location = new System.Drawing.Point(650, 16);
           this.label_VersionNumber.Name = "label_VersionNumber";
-          this.label_VersionNumber.Size = new System.Drawing.Size(103, 13);
+          this.label_VersionNumber.Size = new System.Drawing.Size(98, 13);
           this.label_VersionNumber.TabIndex = 34;
-          this.label_VersionNumber.Text = "Version x.x.x.x alpha";
+          this.label_VersionNumber.Text = "Version x.x.x.x beta";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "Alphaversion for Testing only !");
           // 
           // ButCopy
@@ -4331,6 +4337,8 @@
           // 
           // Tab_ExternalCatalogs
           // 
+          this.Tab_ExternalCatalogs.Controls.Add(this.groupBoxAMCsettings);
+          this.Tab_ExternalCatalogs.Controls.Add(this.buttonOpenTmpFileAMC);
           this.Tab_ExternalCatalogs.Controls.Add(this.buttonOpenTmpFile);
           this.Tab_ExternalCatalogs.Controls.Add(this.buttonDeleteTmpCatalog);
           this.Tab_ExternalCatalogs.Controls.Add(this.groupBoxExtendedFieldHandling);
@@ -4718,6 +4726,54 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // buttonOpenTmpFileAMC
+          // 
+          this.buttonOpenTmpFileAMC.Location = new System.Drawing.Point(29, 236);
+          this.buttonOpenTmpFileAMC.Name = "buttonOpenTmpFileAMC";
+          this.buttonOpenTmpFileAMC.Size = new System.Drawing.Size(152, 27);
+          this.buttonOpenTmpFileAMC.TabIndex = 32;
+          this.buttonOpenTmpFileAMC.Text = "Open tmp Catalog in AMC";
+          this.buttonOpenTmpFileAMC.UseVisualStyleBackColor = true;
+          this.buttonOpenTmpFileAMC.Click += new System.EventHandler(this.buttonOpenTmpFileAMC_Click);
+          // 
+          // lblAMCpath
+          // 
+          this.lblAMCpath.AutoSize = true;
+          this.lblAMCpath.Location = new System.Drawing.Point(11, 33);
+          this.lblAMCpath.Name = "lblAMCpath";
+          this.lblAMCpath.Size = new System.Drawing.Size(213, 13);
+          this.lblAMCpath.TabIndex = 33;
+          this.lblAMCpath.Text = "Path to AMC Ant Movie Catalog Executable";
+          // 
+          // AMCexePath
+          // 
+          this.AMCexePath.Location = new System.Drawing.Point(14, 52);
+          this.AMCexePath.Name = "AMCexePath";
+          this.AMCexePath.Size = new System.Drawing.Size(261, 20);
+          this.AMCexePath.TabIndex = 34;
+          // 
+          // buttonAMCpathSearch
+          // 
+          this.buttonAMCpathSearch.Location = new System.Drawing.Point(281, 52);
+          this.buttonAMCpathSearch.Name = "buttonAMCpathSearch";
+          this.buttonAMCpathSearch.Size = new System.Drawing.Size(36, 20);
+          this.buttonAMCpathSearch.TabIndex = 35;
+          this.buttonAMCpathSearch.Text = "...";
+          this.buttonAMCpathSearch.UseVisualStyleBackColor = true;
+          this.buttonAMCpathSearch.Click += new System.EventHandler(this.buttonAMCpathSearch_Click);
+          // 
+          // groupBoxAMCsettings
+          // 
+          this.groupBoxAMCsettings.Controls.Add(this.AMCexePath);
+          this.groupBoxAMCsettings.Controls.Add(this.lblAMCpath);
+          this.groupBoxAMCsettings.Controls.Add(this.buttonAMCpathSearch);
+          this.groupBoxAMCsettings.Location = new System.Drawing.Point(392, 236);
+          this.groupBoxAMCsettings.Name = "groupBoxAMCsettings";
+          this.groupBoxAMCsettings.Size = new System.Drawing.Size(335, 93);
+          this.groupBoxAMCsettings.TabIndex = 36;
+          this.groupBoxAMCsettings.TabStop = false;
+          this.groupBoxAMCsettings.Text = "Ant Movie Catalog (AMC)";
+          // 
           // traktConfiguration
           // 
           this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -4840,6 +4896,8 @@
           this.Tab_Update.ResumeLayout(false);
           this.General.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          this.groupBoxAMCsettings.ResumeLayout(false);
+          this.groupBoxAMCsettings.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -5229,5 +5287,10 @@
         private CheckBox chkAddWriter;
         private Button buttonDeleteTmpCatalog;
         private Button buttonOpenTmpFile;
+        private Button buttonOpenTmpFileAMC;
+        private GroupBox groupBoxAMCsettings;
+        private TextBox AMCexePath;
+        private Label lblAMCpath;
+        private Button buttonAMCpathSearch;
     }
 }

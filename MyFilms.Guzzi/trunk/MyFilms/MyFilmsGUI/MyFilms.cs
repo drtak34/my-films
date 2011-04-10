@@ -36,6 +36,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
+  using MediaPortal.ExtensionMethods;
   using MediaPortal.GUI.Library;
   using MediaPortal.Services;
   using MediaPortal.Util;
@@ -189,11 +190,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         enum Controls : int
         {
-            CTRL_BtnSrtBy = 2,
-            CTRL_BtnViewAs = 3,
+            CTRL_BtnLayout = 2, //6
+            CTRL_BtnSrtBy = 3, //2
             CTRL_BtnSearchT = 4,
-            CTRL_BtnOptions = 5,
-            CTRL_BtnLayout = 6,
+            CTRL_BtnViewAs = 5, //3
+            CTRL_BtnOptions = 6, //5
             CTRL_GlobalOverlayFilter = 7,
             CTRL_ToggleGlobalUnwatchedStatus = 8,
             //CTRL_TxtSelect = 12,
@@ -209,6 +210,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CTRL_logos_id2012 = 2012,
             CTRL_GuiWaitCursor = 3004,
         }
+
+        //#region Events
+        //public static event RatingEventDelegate RateItem;
+        //public static event ToggleWatchedEventDelegate ToggleWatched;
+        //public delegate void RatingEventDelegate(IMDB item, string rating);
+        //public delegate void ToggleWatchedEventDelegate(IMDB movie, bool watched);
+        //#endregion
+
 
         #region Skin Variables
         //[SkinControlAttribute((int)Controls.CTRL_TxtSelect)]
@@ -2223,9 +2232,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 createCacheThumb(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, "small");
                 //Picture.CreateThumbnail(strThumbSource, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
                 createCacheThumb(strThumbSource, strThumb, cacheThumbWith, cacheThumbHeight, "large");
-                thumbimages[0] = strThumbSource;
-                thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
-                return thumbimages;
+                //thumbimages[0] = strThumbSource;
+                //thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
+                //return thumbimages;
+
+                if (System.IO.File.Exists(strThumb)) // (re)check if thumbs exist...
+                {
+                  thumbimages[0] = strThumb;
+                  thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
+                  return thumbimages;
+                }
               }
             }
 
@@ -2327,7 +2343,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsLarge);
           if (bmp != null)
           {
-            bmp.Dispose(); // is this needed?
+            bmp.SafeDispose();
           }
         }
 
@@ -2336,6 +2352,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           try
           {
             File.Copy(ThumbSource, ThumbTarget, true);
+
+            //FileStream fs = new FileStream(ThumbSource, FileMode.Open, FileAccess.Read, FileShare.Read);	
+            //BinaryReader reader = new BinaryReader(fs);
+            //byte[] bytes = new byte[fs.Length];
+            //int read;
+            //reader.Read(bytes, 0, bytes.Length)	
+            //reader.Close(); 
+            //fs.Close();
+
+
+            //using (FileStream fs = new FileStream(ThumbTarget, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+            //{
+            //  using (FileStream fs = new FileStream(ThumbTarget, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+            //  {
+            //    bmp.Save(fs, Thumbs.ThumbCodecInfo, Thumbs.ThumbEncoderParams);
+            //  }
+            //  fs.Flush();
+            //}
+            
+            
+            
             File.SetAttributes(ThumbTarget, File.GetAttributes(ThumbTarget) | FileAttributes.Hidden);
             // even if run in background thread wait a little so the main process does not starve on IO
             if (MediaPortal.Player.g_Player.Playing)
@@ -3980,6 +4017,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                 case "grabber":
                     string title = string.Empty;
+                    string mediapath = string.Empty;
                     if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString()))
                     {
                       title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
@@ -4006,7 +4044,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                         title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
-                    MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf);
+                    mediapath = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString(); // Configured GrabberTitle
+                    if (mediapath.Contains(";")) // take the forst source file
+                    {
+                      mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
+                    }
+                    MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath);
                     Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
                     break;
 

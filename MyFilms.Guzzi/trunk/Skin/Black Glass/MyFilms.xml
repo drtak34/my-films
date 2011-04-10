@@ -446,34 +446,30 @@
 			<type>label</type>
 			<id>2073</id>
 			<posX>865</posX>
-			<posY>665</posY>
+			<posY>664</posY>
 			<font>font16</font>
 			<align>left</align>
 			<textcolor>60ffffff</textcolor>
 			<label>#myfilms.nbobjects.value #myfilms.nbobjects.unit</label>
-			<visible>facadeview.list</visible>
+		  	<visible>facadeview.list</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
-
 		<control>
-		  	<description>Number of Files Label</description>
-		  	<type>label</type>
-		  	<id>1</id>
-			<posX>865</posX>
-			<posY>635</posY>
-			<font>font16</font>
-			<align>left</align>
+			<type>label</type>
+			<id>1</id>
+			<posX>1265</posX>
+			<posY>693</posY>
+			<font>font12</font>
+			<align>right</align>
 			<textcolor>60ffffff</textcolor>
 		  	<label>#selectedindex/#itemcount #itemtype</label>
-		  	<align>left</align>
 		  	<visible>string.equals(#selectedindex)+string.equals(#itemcount)+facadeview.list</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
-		  	<animation effect="fade" time="250">WindowOpen</animation>
-		  	<animation effect="fade" time="250">WindowClose</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
-
 		<control>
 			<description>Current program title</description>
 			<type>label</type>
@@ -799,7 +795,8 @@
 			<font>font10</font>
 			<align>left</align>
 			<textcolor>9fffffff</textcolor>
-			<label>#myfilms.nbobjects.value #myfilms.nbobjects.unit</label>
+		  	<label>#selectedindex/#itemcount #itemtype</label>
+			<!-- <label>#myfilms.nbobjects.value #myfilms.nbobjects.unit</label> -->
 			<visible>facadeview.smallicons|facadeview.largeicons</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 		</control>
@@ -807,7 +804,7 @@
 <!-- COMMON FACADES -->
 
 		<control>
-			<description>Cover Art</description>
+			<description>Cover Art for Films</description>
 			<type>image</type>
 			<id>1020</id>
 			<keepaspectratio>no</keepaspectratio>
@@ -830,7 +827,7 @@
 
 		</control>
 		<control>
-			<description>Cover Art</description>
+			<description>Cover Art for Groups</description>
 			<type>image</type>
 			<id>1020</id>
 			<keepaspectratio>yes</keepaspectratio>
@@ -1095,26 +1092,26 @@
 				<control>
 					<type>button</type>
 					<description>Layout</description>
-					<id>6</id>
+					<id>2</id>
 					<onright>50</onright>
 					<onup>10014</onup>
-					<ondown>2</ondown>
+					<ondown>3</ondown>
 					<label>101</label>
 				</control>
 				<control>
 					<type>sortbutton</type>
-					<id>2</id>
+					<id>3</id>
 					<onright>50</onright>
-					<onup>6</onup>
-					<ondown>3</ondown>
+					<onup>2</onup>
+					<ondown>5</ondown>
 					<label>103</label>
 				</control>
 				<control>
 					<type>button</type>
 					<description>Switch view</description>
-					<id>3</id>
+					<id>5</id>
 					<onright>50</onright>
-					<onup>2</onup>
+					<onup>3</onup>
 					<ondown>4</ondown>
 					<label>457</label>
 				</control>
@@ -1123,14 +1120,14 @@
 					<description>Search</description>
 					<id>4</id>
 					<onright>50</onright>
-					<onup>3</onup>
-					<ondown>5</ondown>
+					<onup>5</onup>
+					<ondown>6</ondown>
 					<label>137</label>
 				</control>
 				<control>
 					<type>button</type>
 					<description>Options</description>
-					<id>5</id>
+					<id>6</id>
 					<onright>50</onright>
 					<onup>4</onup>
 					<ondown>7</ondown>
@@ -1141,7 +1138,7 @@
 					<description>Global Filter Options</description>
 					<id>7</id>
 					<onright>50</onright>
-					<onup>5</onup>
+					<onup>6</onup>
 					<ondown>10012</ondown>
 				</control>
 
@@ -1157,13 +1154,16 @@
 					<ondown>10012</ondown>
 					<texture>bg_facade_line_nofocus.png</texture>
 				</control>
+<!--
 				<control>
 					<description>Separator</description>
 					<type>image</type>
 					<id>0</id>
-					<height>10</height>
-					<texture></texture>
+					<height>13</height>
+					<width>55</width>
+					<texture>bg_facade_line_nofocus.png</texture>
 				</control> 
+-->
 				<control>
 					<description>Trailer</description>
 					<type>button</type>
@@ -1193,7 +1193,7 @@
 					<label>TV-Serien</label>
 					<onright>50</onright>
 					<onup>10013</onup>
-					<ondown>6</ondown>
+					<ondown>2</ondown>
 				</control>
 			</control> 
 		</control>
