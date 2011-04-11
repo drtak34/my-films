@@ -3306,8 +3306,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                 wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
                                 if (wurl.URL.Length != 0)
                                 {
-                                  url = wurl.URL + "videogallery"; // Assign proper Webpage for Actorinfos
-                                  url = MyFilms.ImdbBaseUrl + url.Substring(url.IndexOf("name"));
+                                  url = wurl.URL;
+                                  //url = wurl.URL + "videogallery"; // Assign proper Webpage for Actorinfos
+                                  //url = MyFilms.ImdbBaseUrl + url.Substring(url.IndexOf("name"));
                                   Grabber.Grabber_URLClass fetchactor = new Grabber_URLClass();
                                   fetchactor.GetActorDetails(url, persondetails.Name, false, out imdbActor);
                                   filename1person = GrabUtil.DownloadPersonArtwork(personartworkpath, imdbActor.ThumbnailUrl, persondetails.Name, true, firstpersonimage, out filenameperson);

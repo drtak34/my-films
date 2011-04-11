@@ -3059,7 +3059,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
                       dlgok.SetLine(1, "MyFilms Version = 'V" + asm.GetName().Version.ToString() + "'");
                       dlgok.SetLine(2, "MyFilms Operations Mode = '" + Configuration.PluginMode + "'");
-                      dlgok.SetLine(3, "MyFilms Background Processes = '" + infoBackgroundProcess + "'");
+                      dlgok.SetLine(3, "MyFilms Background Process = '" + infoBackgroundProcess + "'");
                       dlgok.DoModal(GetID);
                     break;
               
