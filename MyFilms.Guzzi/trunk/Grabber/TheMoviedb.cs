@@ -50,9 +50,14 @@ namespace grabber
         } private string summary;
         public List<String> Posters
         {
-            get { return posters; }
-            set { posters = value; }
+          get { return posters; }
+          set { posters = value; }
         } private List<String> posters;
+        public List<String> PersonIDs
+        {
+          get { return personIDs; }
+          set { personIDs = value; }
+        } private List<String> personIDs;
         public List<String> Backdrops
         {
             get { return backdrops; }
@@ -116,11 +121,84 @@ namespace grabber
           set { genres = value; }
         }
         private List<String> genres;
+        public List<DBPersonInfo> Persons
+        {
+          get { return persons; }
+          set { persons = value; }
+        }
+        private List<DBPersonInfo> persons;
     }
+
+    public class DBPersonInfo
+    {
+      public string Id
+      {
+        get { return id; }
+        set { id = value; }
+      } private string id;
+      public string Name
+      {
+        get { return name; }
+        set { name = value; }
+      } private string name;
+      public string AlternateName
+      {
+        get { return alternateName; }
+        set { alternateName = value; }
+      } private string alternateName;
+      public string Job
+      {
+        get { return job; }
+        set { job = value; }
+      } private string job;
+      public string Biography
+      {
+        get { return biography; }
+        set { biography = value; }
+      } private string biography;
+      public string Birthday
+      {
+        get { return birthday; }
+        set { birthday = value; }
+      } private string birthday;
+      public string Birthplace
+      {
+        get { return birthplace; }
+        set { birthplace = value; }
+      } private string birthplace;
+      public string DetailsURL
+      {
+        get { return detailsURL; }
+        set { detailsURL = value; }
+      } private string detailsURL;
+      public int Popularity
+      {
+        get { return popularity; }
+        set { popularity = value; }
+      } private int popularity;
+      public List<String> Images
+      {
+        get { return images; }
+        set { images = value; }
+      } private List<String> images;
+      public int Known_movies
+      {
+        get { return known_movies; }
+        set { known_movies = value; }
+      } private int known_movies;
+      public List<DBMovieInfo> Movies
+      {
+        get { return movies; }
+        set { movies = value; }
+      } private List<DBMovieInfo> movies;
+    }
+  
+  
     public class TheMoviedb
     {
-        //private const string apiSearch = "http://api.themoviedb.org/2.0/Movie.search?api_key=1e66c0cc99696feaf2ea56695e134eae&title=";
-        private const string apiSearch = "http://api.themoviedb.org/2.1/Movie.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
+        //private const string apiSearchMovie = "http://api.themoviedb.org/2.0/Movie.search?api_key=1e66c0cc99696feaf2ea56695e134eae&title=";
+        private const string apiSearchMovie = "http://api.themoviedb.org/2.1/Movie.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
+        private const string apiSearchPerson = "http://api.themoviedb.org/2.1/Person.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
         //private const string apiGetMovieInfo = "http://api.themoviedb.org/2.0/Movie.getInfo?api_key=1e66c0cc99696feaf2ea56695e134eae&id=";
         private const string apiGetMovieInfo = "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
         private const string apiGetPersonInfo = "http://api.themoviedb.org/2.1/Person.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
@@ -152,12 +230,12 @@ namespace grabber
         {
             //title = Grabber.GrabUtil.normalizeTitle(title);
             string id = string.Empty;
-            string apiSearchLanguage = "";
-            string apiGetMovieInfoLanguage = "";
-            string apiGetPersonInfoLanguage = "";
+            string apiSearchLanguage = apiSearchMovie;
+            string apiGetMovieInfoLanguage = apiGetMovieInfo;
+            string apiGetPersonInfoLanguage = apiGetPersonInfo;
             if (language.Length == 2)
             {
-              apiSearchLanguage = apiSearch.Replace("/en/", "/" + language + "/");
+              apiSearchLanguage = apiSearchMovie.Replace("/en/", "/" + language + "/");
               apiGetMovieInfoLanguage = apiGetMovieInfo.Replace("/en/", "/" + language + "/");
               apiGetPersonInfoLanguage = apiGetPersonInfo.Replace("/en/", "/" + language + "/");
             }
@@ -220,6 +298,95 @@ namespace grabber
             else
                 return results;
         }
+
+        public List<DBPersonInfo> getPersonsByName(string name, bool choose, string language)
+        {
+          //name = Grabber.GrabUtil.normalizeTitle(name);
+          string id = string.Empty;
+          string apiSearchLanguage = apiSearchPerson;
+          string apiGetMovieInfoLanguage = apiGetMovieInfo;
+          string apiGetPersonInfoLanguage = apiGetPersonInfo;
+          if (language.Length == 2)
+          {
+            apiSearchLanguage = apiSearchPerson.Replace("/en/", "/" + language + "/");
+            apiGetMovieInfoLanguage = apiGetMovieInfo.Replace("/en/", "/" + language + "/");
+            apiGetPersonInfoLanguage = apiGetPersonInfo.Replace("/en/", "/" + language + "/");
+          }
+
+          List<DBPersonInfo> results = new List<DBPersonInfo>();
+          List<DBPersonInfo> resultsdet = new List<DBPersonInfo>();
+          XmlNodeList xml = getXML(apiSearchLanguage + Grabber.GrabUtil.RemoveDiacritics(name.Trim().ToLower()).Replace(" ", "+"));
+          if (xml == null)
+            return results;
+
+          XmlNodeList personNodes = xml.Item(0).SelectNodes("//person");
+          foreach (XmlNode node in personNodes)
+          {
+            DBPersonInfo person = getPersonInformation(node);
+            if (person != null && Grabber.GrabUtil.normalizeTitle(person.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(name.ToLower())))
+              results.Add(person);
+          }
+          if (results.Count > 0)
+          {
+            foreach (DBPersonInfo person in results)
+            {
+              if (person.Id != null)
+              {
+                try { xml = getXML(apiGetPersonInfoLanguage + person.Id); }
+                catch { xml = null; }
+                if (xml != null)
+                {
+                  personNodes = xml.Item(0).SelectNodes("//person");
+                  foreach (XmlNode node in personNodes)
+                  {
+                    DBPersonInfo person2 = getPersonInformation(node);
+                    if (person2 != null && Grabber.GrabUtil.normalizeTitle(person2.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(name.ToLower())))
+                      if (!choose)
+                      {
+                          resultsdet.Add(person2);
+                      }
+                      else
+                        resultsdet.Add(person2);
+                    else
+                      if (choose)
+                        resultsdet.Add(person2);
+                  }
+                }
+              }
+            }
+          }
+          if (resultsdet.Count > 0)
+            return resultsdet;
+          else
+            return results;
+        }
+
+        public DBPersonInfo getPersonsById(string id, string language)
+        {
+          string apiSearchLanguage = apiSearchPerson;
+          string apiGetMovieInfoLanguage = apiGetMovieInfo;
+          string apiGetPersonInfoLanguage = apiGetPersonInfo;
+          if (language.Length == 2)
+          {
+            apiSearchLanguage = apiSearchPerson.Replace("/en/", "/" + language + "/");
+            apiGetMovieInfoLanguage = apiGetMovieInfo.Replace("/en/", "/" + language + "/");
+            apiGetPersonInfoLanguage = apiGetPersonInfo.Replace("/en/", "/" + language + "/");
+          }
+          DBPersonInfo result = new DBPersonInfo();
+          XmlNodeList xml = getXML(apiGetPersonInfoLanguage + id);
+          if (xml == null)
+            return result;
+
+          XmlNodeList personNodes = xml.Item(0).SelectNodes("//person");
+          foreach (XmlNode node in personNodes)
+          {
+            DBPersonInfo person = getPersonInformation(node);
+            if (person != null)
+              result = person;
+          }
+          return result;
+        }
+
         // given a url, retrieves the xml result set and returns the nodelist of Item objects
         public XmlNodeList getXML(string url)
         {
@@ -248,6 +415,7 @@ namespace grabber
             List<String> actors = new List<string>();
             List<String> backdrops = new List<string>();
             List<String> posters = new List<string>();
+            List<DBPersonInfo> persons = new List<DBPersonInfo>();
             DBMovieInfo movie = new DBMovieInfo();
             foreach (XmlNode node in movieNode.ChildNodes)
             {
@@ -319,6 +487,14 @@ namespace grabber
                             string character = person.Attributes["character"].Value;
                             string thumb = person.Attributes["thumb"].Value;
                             string job = person.Attributes["job"].Value;
+                            string id = person.Attributes["id"].Value;
+                            string url = person.Attributes["url"].Value;
+                            DBPersonInfo personToAdd = new DBPersonInfo(); 
+                            personToAdd.Id = id;
+                            personToAdd.Name = name;
+                            personToAdd.DetailsURL = url;
+                            personToAdd.Job = job;
+                            persons.Add(personToAdd);
                             switch (job)
                             {
                               case "Producer":
@@ -412,7 +588,119 @@ namespace grabber
             movie.Actors = actors;
             movie.Backdrops = backdrops;
             movie.Posters = posters;
+            movie.Persons = persons;
             return movie;
+        }
+        private DBPersonInfo getPersonInformation(XmlNode personNode)
+        {
+          if (personNode == null)
+            return null;
+
+          if (personNode.ChildNodes.Count < 2 || personNode.Name != "person")
+            return null;
+
+          List<String> images = new List<string>();
+          List<DBMovieInfo> movies = new List<DBMovieInfo>();
+          //DBMovieInfo movie = new DBMovieInfo();
+          DBPersonInfo person = new DBPersonInfo();
+          foreach (XmlNode node in personNode.ChildNodes)
+          {
+            string value = node.InnerText;
+            switch (node.Name)
+            {
+              case "id":
+                person.Id = value;
+                break;
+              case "name":
+                person.Name = value;
+                break;
+              case "also_known_as":
+                if (value.Trim() != "None found." && value.Trim().Length > 0)
+                  person.AlternateName = value;
+                break;
+              case "birthday":
+                person.Birthday = value;
+                break;
+              case "birthplace":
+                person.Birthplace = value;
+                break;
+              case "url":
+                person.DetailsURL = value;
+                break;
+              case "biography":
+                person.Biography = value;
+                break;
+              case "popularity":
+                int popularity = 0;
+                if (!string.IsNullOrEmpty(value) && value.Length >0)
+                {
+                  if (int.TryParse(value, out popularity))
+                  { }
+                  else popularity = 0;
+                }
+                person.Popularity = popularity;
+                break;
+              case "known_movies":
+                int known_movies = 0;
+                if (int.TryParse(value, out known_movies))
+                  person.Known_movies = known_movies;
+                break;
+              case "filmography":
+                foreach (XmlNode movie in node.ChildNodes)
+                {
+                  DBMovieInfo movieToAdd = new DBMovieInfo();
+                  string id = movie.Attributes["id"].Value;
+                  string name = movie.Attributes["name"].Value;
+                  string character = movie.Attributes["character"].Value;
+                  string job = movie.Attributes["job"].Value;
+                  string url = movie.Attributes["url"].Value;
+                  string release = movie.Attributes["release"].Value;
+                  string posterUrl = movie.Attributes["poster"].Value;
+                  List<String> posters = new List<string>();
+                  posters.Add(posterUrl);
+                  int year = 1900;
+                  if (!string.IsNullOrEmpty(release) && release.Length > 3)
+                  {
+                    if (int.TryParse(movie.Attributes["release"].Value.Substring(0, 4), out year))
+                    { }
+                    else
+                      year = 1900;
+                  }
+                  movieToAdd.Identifier = id;
+                  movieToAdd.Name = name;
+                  movieToAdd.DetailsURL = url;
+                  movieToAdd.Year = year;
+                  movieToAdd.Posters = posters;
+                  movies.Add(movieToAdd);
+                }
+                break;
+              case "image":
+                if (node.OuterXml.Contains("\"original\""))
+                  images.Add(value);
+                break;
+              case "version":
+              case "last_modified_at":
+                break;
+              case "images":
+                if (node.OuterXml.Contains("\"original\"") && node.OuterXml.Contains("\"profile\"") && node.OuterXml.Contains("url="))
+                {
+                  foreach (XmlNode image in node.SelectNodes("image"))
+                  {
+                    if (image.OuterXml.Contains("\"original\"") && image.OuterXml.Contains("\"profile\"") && image.OuterXml.Contains("url="))
+                    {
+                      int start = image.OuterXml.IndexOf("url=") + 5;
+                      string zvalue = image.OuterXml.Substring(start);
+                      zvalue = zvalue.Substring(0, zvalue.IndexOf("\""));
+                      images.Add(zvalue);
+                    }
+                  }
+                }
+                break;
+            }
+          }
+          person.Movies = movies;
+          person.Images = images;
+          return person;
         }
 
     }

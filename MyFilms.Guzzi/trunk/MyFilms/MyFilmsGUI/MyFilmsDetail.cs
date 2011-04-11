@@ -41,6 +41,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using grabber;
 
+  using Grabber;
+
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
   using MediaPortal.GUI.Library;
@@ -1295,6 +1297,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     setProcessAnimationStatus(true, m_SearchAnimation);
                     Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
                     string wtitle = string.Empty;
+                    string personartworkpath = string.Empty;
                     if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
                         wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
                     if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
@@ -1313,8 +1316,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         try { wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"]; }
                         catch { }
                         LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
-                        Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID, wtitle);
-
+                        if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
+                        {
+                          LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
+                          personartworkpath = MyFilms.conf.StrPathArtist;
+                        }
+                        Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID, wtitle, personartworkpath);
                     }
                     afficher_detail(true);
                     setProcessAnimationStatus(false, m_SearchAnimation);
@@ -3113,13 +3120,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Dowload backdrops on theMovieDB.org
         //-------------------------------------------------------------------------------------------        
-        public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
+        public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle, string personartworkpath)
         {
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             int wyear = 0;
             try {  wyear = Convert.ToInt32(year);}
             catch { }
-            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose, MyFilms.conf.StrTitle1);
+            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose, MyFilms.conf.StrTitle1, personartworkpath);
             //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose);
             LogMyFilms.Debug("MF: (DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "'");
             int listCount = listemovies.Count;
@@ -3133,6 +3140,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                 case 1:
                     LogMyFilms.Info("MF: Fanart " + listemovies[0].Name.Substring(listemovies[0].Name.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
+                    if (listemovies[0].Persons.Count > 0)
+                      LogMyFilms.Info("MF: PersonArtwork: " + listemovies[0].Persons.Count.ToString() + " Personartwork checked for " + wttitle);
+                    {
+                      foreach (DBPersonInfo person in listemovies[0].Persons)
+                      {
+                        LogMyFilms.Info("MF: PersonArtwork: " + person.Images.Count.ToString() + " images downloaded for " + person.Name);
+                      }
+                    }
                     break;
                 default:
 
@@ -3150,8 +3165,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
                     foreach (DBMovieInfo t in listemovies)
                     {
-                        dlg.Add(t.Name + "  (" + t.Year + ") - Fanarts: " + t.Backdrops.Count + " - Id" + t.Identifier);
-                        LogMyFilms.Debug("MF: TMDB listemovies: " + t.Name + "  (" + t.Year + ") - Fanarts: " + t.Backdrops.Count + " - TMDB-Id: " + t.Identifier);
+                        dlg.Add(t.Name + "  (" + t.Year + ") - Fanarts: " + t.Backdrops.Count + " - Persons: " + t.Persons.Count.ToString());
+                        LogMyFilms.Debug("MF: TMDB listemovies: " + t.Name + "  (" + t.Year + ") - Fanarts: " + t.Backdrops.Count + " - TMDB-Id: " + t.Identifier + " - Persons: " + t.Persons.Count.ToString());
                     }
                     if (!(dlg.SelectedLabel > -1))
                     {
@@ -3210,19 +3225,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             {
                                 Remove_Backdrops_Fanart(wttitle, true);
                                 Remove_Backdrops_Fanart(wtitle, true);
-                                Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID, savetitle);
+                                Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
                             }
                             break;
                         }
                         if (dlgs.SelectedLabel > 0 && dlgs.SelectedLabel < 3) // if one of otitle or ttitle selected, keep year and director
                         {
-                            Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, year, director, true, wGetID, savetitle);
+                          Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, year, director, true, wGetID, savetitle, personartworkpath);
                             //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                             break;
                         }
                         if (dlgs.SelectedLabel > 2) // For subitems, search without year and director !
                         {
-                          Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, string.Empty, string.Empty, true, wGetID, savetitle);
+                          Download_Backdrops_Fanart(dlgs.SelectedLabelText, wttitle, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
                           //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                           break;
                         }
@@ -3230,6 +3245,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     if (dlg.SelectedLabel > 0)
                     {
+                        // Load Fanart  
                         bool first = true;
                         string filename = string.Empty;
                         string filename1 = string.Empty;
@@ -3247,6 +3263,70 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             first = false;
                         }
                         listemovies[0].Name = filename;
+                        // Download PersonArtwork
+                        string filenameperson = string.Empty;
+                        string filename1person = string.Empty;
+                        string filename2person = string.Empty;
+                        bool firstpersonimage = true;
+                        LogMyFilms.Info("MF: Person Artwork - " + listemovies[0].Persons.Count + " persons found - now loading artwork");
+                        if (!string.IsNullOrEmpty(personartworkpath) && listemovies[0].Persons != null && listemovies[0].Persons.Count > 0)
+                        {
+                          List<grabber.DBPersonInfo> listepersons = listemovies[0].Persons;
+                          foreach (grabber.DBPersonInfo person in listepersons)
+                          {
+                            grabber.DBPersonInfo persondetails = new DBPersonInfo();
+                            grabber.TheMoviedb TheMoviedb = new grabber.TheMoviedb();
+                            persondetails = TheMoviedb.getPersonsById(person.Id, string.Empty);
+                            LogMyFilms.Info(
+                              "MF: Person Artwork - " + persondetails.Images.Count + " Images found for '" +
+                              persondetails.Name + "'");
+                            if (persondetails.Images.Count > 0)
+                            {
+                              foreach (var image in persondetails.Images)
+                              {
+                                filename1person = Grabber.GrabUtil.DownloadPersonArtwork(
+                                  personartworkpath,
+                                  image,
+                                  persondetails.Name,
+                                  true,
+                                  firstpersonimage,
+                                  out filenameperson);
+                                LogMyFilms.Info(
+                                  "MF: Person Artwork " +
+                                  filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" +
+                                  persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
+                                if (filenameperson == string.Empty) filenameperson = filename1person;
+                                if (!(filenameperson == "already" && filename1person == "already")) filenameperson = "added";
+                                firstpersonimage = false;
+                              }
+                            }
+                            else
+                            {
+                              // Try to get actor images from IMDB
+                              // Get further Actors from IMDB
+                              //IMDBMovie MPmovie = new IMDBMovie();
+                              //MPmovie.Title = listemovies[0].Name;
+                              //MPmovie.IMDBNumber = listemovies[0].ImdbID;
+                              //FetchActors(MPmovie, personartworkpath);
+                              //Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+                              //Grabber.Grabber_URLClass.IMDBUrl wurl;
+                              //_imdb.FindActor(person.Name);
+                              //if (_imdb.Count > 0)
+                              //{
+                              //  wurl = (Grabber_URLClass.IMDBUrl)_imdb[0]; // Assume first match is the best !
+                              //  if (wurl.IMDBURL.Length != 0)
+                              //  {
+                              //    IMDBActor imdbactor = new IMDBActor();
+                              //    if (Grab.GetActorDetails(wurl, false, out imdbactor))
+                              //    {
+                              //      //Download Thumb
+                              //    }
+                              //    string url = imdbactor.ThumbnailUrl;
+                              //  }
+                              //}
+                            }
+                          }
+                        }
                     }
                     break;
             }
