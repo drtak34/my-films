@@ -3046,6 +3046,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "about":
+                      string infoBackgroundProcess = string.Empty;
+                      if (bgUpdateFanart.IsBusy)
+                        infoBackgroundProcess = "running (fanart & artwork)";
+                      else 
+                        infoBackgroundProcess = "not active";
                       GUIDialogOK dlgok = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                       if (dlgok == null) return;
                       dlgok.Reset();
@@ -3054,6 +3059,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
                       dlgok.SetLine(1, "MyFilms Version = 'V" + asm.GetName().Version.ToString() + "'");
                       dlgok.SetLine(2, "MyFilms Operations Mode = '" + Configuration.PluginMode + "'");
+                      dlgok.SetLine(3, "MyFilms Background Processes = '" + infoBackgroundProcess + "'");
                       dlgok.DoModal(GetID);
                     break;
               
