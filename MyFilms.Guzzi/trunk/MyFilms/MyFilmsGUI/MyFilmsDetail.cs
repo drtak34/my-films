@@ -3267,13 +3267,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         string filenameperson = string.Empty;
                         string filename1person = string.Empty;
                         string filename2person = string.Empty;
-                        bool firstpersonimage = true;
                         LogMyFilms.Info("MF: Person Artwork - " + listemovies[0].Persons.Count + " persons found - now loading artwork");
                         if (!string.IsNullOrEmpty(personartworkpath) && listemovies[0].Persons != null && listemovies[0].Persons.Count > 0)
                         {
                           List<grabber.DBPersonInfo> listepersons = listemovies[0].Persons;
                           foreach (grabber.DBPersonInfo person in listepersons)
                           {
+                            bool firstpersonimage = true;
                             grabber.DBPersonInfo persondetails = new DBPersonInfo();
                             grabber.TheMoviedb TheMoviedb = new grabber.TheMoviedb();
                             persondetails = TheMoviedb.getPersonsById(person.Id, string.Empty);
@@ -3284,17 +3284,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             {
                               foreach (var image in persondetails.Images)
                               {
-                                filename1person = Grabber.GrabUtil.DownloadPersonArtwork(
-                                  personartworkpath,
-                                  image,
-                                  persondetails.Name,
-                                  true,
-                                  firstpersonimage,
-                                  out filenameperson);
-                                LogMyFilms.Info(
-                                  "MF: Person Artwork " +
-                                  filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" +
-                                  persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
+                                filename1person = Grabber.GrabUtil.DownloadPersonArtwork(personartworkpath, image, persondetails.Name, true, firstpersonimage, out filenameperson);
+                                LogMyFilms.Info("MF: Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
                                 if (filenameperson == string.Empty) filenameperson = filename1person;
                                 if (!(filenameperson == "already" && filename1person == "already")) filenameperson = "added";
                                 firstpersonimage = false;
@@ -3302,6 +3293,59 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             }
                             else
                             {
+                              // Get further IMDB images
+                              Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+                              Grabber.MyFilmsIMDB.IMDBUrl wurl;
+                              _imdb.FindActor(persondetails.Name);
+                              //Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
+                              IMDBActor imdbActor = new IMDBActor();
+
+                              if (_imdb.Count > 0)
+                              {
+                                string url = string.Empty;
+                                wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+                                if (wurl.URL.Length != 0)
+                                {
+                                  url = wurl.URL + "videogallery"; // Assign proper Webpage for Actorinfos
+                                  url = MyFilms.ImdbBaseUrl + url.Substring(url.IndexOf("name"));
+                                  Grabber.Grabber_URLClass fetchactor = new Grabber_URLClass();
+                                  fetchactor.GetActorDetails(url, persondetails.Name, false, out imdbActor);
+                                  filename1person = GrabUtil.DownloadPersonArtwork(personartworkpath, imdbActor.ThumbnailUrl, persondetails.Name, true, firstpersonimage, out filenameperson);
+                                  LogMyFilms.Info("MF: Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
+                                  // Add actor to datbbase to get infos in person facades later...
+                                  int actorId = VideoDatabase.AddActor(imdbActor.Name);
+                                  if (actorId > 0)
+                                  {
+                                    VideoDatabase.SetActorInfo(actorId, imdbActor);
+                                    //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+
+                                    if (imdbActor.ThumbnailUrl != string.Empty)
+                                    {
+                                      string largeCoverArt = Utils.GetLargeCoverArtName(
+                                        Thumbs.MovieActors, imdbActor.Name);
+                                      string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                                      Utils.FileDelete(largeCoverArt);
+                                      Utils.FileDelete(coverArt);
+                                      //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+
+                                    }
+                                  }
+                                }
+                              }
+                              else
+                              {
+                                int actorId = VideoDatabase.AddActor(imdbActor.Name);
+                                imdbActor.Name = persondetails.Name;
+                                //IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
+                                //imdbActorMovie.MovieTitle = _movieDetails.Title;
+                                //imdbActorMovie.Year = _movieDetails.Year;
+                                //imdbActorMovie.Role = role;
+                                //imdbActor.Add(imdbActorMovie);
+                                VideoDatabase.SetActorInfo(actorId, imdbActor);
+                                //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+                              }
+                              firstpersonimage = false;
+
                               // Try to get actor images from IMDB
                               // Get further Actors from IMDB
                               //IMDBMovie MPmovie = new IMDBMovie();
