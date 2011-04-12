@@ -4341,7 +4341,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           bool newCatalog = true;
           if (Config_Name.Text.Length != 0 || RunWizardAfterInstall)
           {
-            if (System.Windows.Forms.MessageBox.Show("Do you want to create a new MyFilms Configuration ? \n\nThis wizard helps you to setup a new configuration with default settings. \nIf you select 'yes', enter a name for the configuration.\nIf you select 'no' you can relaunch the wizard later with the 'Setup Wizard' button.", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            if (System.Windows.Forms.MessageBox.Show("Do you want to create a new MyFilms Configuration ? \n\nThis wizard helps you to setup a new configuration with default settings. \nIf you select 'yes', enter a name for the configuration.\nIf you select 'no' you can relaunch the wizard later with the 'Setup Wizard' button.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
               return;
           }
           MyFilmsInputBox input = new MyFilmsInputBox();
@@ -4353,12 +4353,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
           if (string.IsNullOrEmpty(newConfig_Name))
           {
-            MessageBox.Show("New Config Name must not be empty ! No Config created !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("New Config Name must not be empty ! No Config created !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             return;
           }
           if (newConfig_Name == Config_Name.Text)
           {
-            MessageBox.Show("Config Name must be different from existing ones ! No Config created !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show("Config Name must be different from existing ones ! No Config created !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             return;
           }
 
@@ -4372,7 +4372,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           bool useExistingCatalog = true;
           if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 7)
           {
-            if (System.Windows.Forms.MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (System.Windows.Forms.MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
               useExistingCatalog = true;
             else
               useExistingCatalog = false;
@@ -4381,7 +4381,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             System.Windows.Forms.MessageBox.Show(
             "Please select the path to your existing catalog file. \n (You have to export your movie collection to xml format in your catalog manager first to use it in myfilms.)",
-            "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           }
           if (useExistingCatalog)
           {
@@ -4438,7 +4438,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntStorage.Text = "Source";
           cbPictureHandling.Text = "Relative Path"; // set option for picture path handling (grabber)
           AntStorageTrailer.Text = "Borrower";
-          if (System.Windows.Forms.MessageBox.Show("Do you want to use OriginalTitle as Mastertitle ? \n(If you select no, TranslatedTitle will be used)", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+          if (System.Windows.Forms.MessageBox.Show("Do you want to use OriginalTitle as Mastertitle ? \n(If you select no, TranslatedTitle will be used)", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
           {
             AntTitle1.Text = "OriginalTitle";
             AntTitle2.Text = "TranslatedTitle";
@@ -4581,7 +4581,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 PathStorage.Text = folderBrowserDialog1.SelectedPath;
               else PathStorage.Text = PathStorage.Text + ";" + folderBrowserDialog1.SelectedPath;
             }
-            //MessageBox.Show("Successfully created a new Configuration ! You may now run AMCupdater to populate or update your catalog.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //MessageBox.Show("Successfully created a new Configuration ! You may now run AMCupdater to populate or update your catalog.", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           }
           else
           {
@@ -4640,11 +4640,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             case 0:
               System.Windows.Forms.MessageBox.Show(
               "Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.",
-              "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
               break;
             default:
               System.Windows.Forms.MessageBox.Show(
-                "Successfully created a new Configuration for '" + CatalogType.Text + "' with default settings ! \n\nPlease verify the settings to artwork pathes to match your personal needs.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                "Successfully created a new Configuration for '" + CatalogType.Text + "' with default settings ! \n\nPlease verify the settings to artwork pathes to match your personal needs.", "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
               General.SelectedIndex = 6;
               MesFilmsImg.Focus(); // Set focus to cover path                
               break;
@@ -4669,19 +4669,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           if (string.IsNullOrEmpty(newConfig_Name))
           {
-            System.Windows.Forms.MessageBox.Show("New Config Name must not be empty !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            System.Windows.Forms.MessageBox.Show("New Config Name must not be empty !", "MyFilms - New Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           }
           else
             if (newConfig_Name == Config_Name.Text)
             {
-              System.Windows.Forms.MessageBox.Show("New Config Name must be different from the existing one !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              System.Windows.Forms.MessageBox.Show("New Config Name must be different from the existing one !", "MyFilms - New Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
               Refresh_Items(true);
               Config_Name.Text = newConfig_Name;
               //Config_Name_Load();
-              System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+              System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "MyFilms - New Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
               CatalogType.SelectedIndex = newCatalogSelectedIndex; // set selected CatalogType
               Config_Name.Focus();
               textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
