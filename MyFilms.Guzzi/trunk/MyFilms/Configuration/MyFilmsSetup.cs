@@ -4946,6 +4946,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MessageBox.Show("Unable to launch Ant Movie Catalog ! \nPlease set the path accordingly first!", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
           }
+          if (CatalogType.SelectedIndex != 0) // show warning when launching AMC with EC tmp file !
+          {
+            MessageBox.Show("Info: You are launching AMC with a temporary cache catalog file !\nPlease be aware, that changes in MC will be overwritten on next export of your external catalog !", "AMC Launcher Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          }
           //System.Diagnostics.Process.Start(AMCexePath.Text); // More detailed startup below ...
           using (Process p = new Process())
           {
