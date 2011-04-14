@@ -215,6 +215,7 @@
     <String id="10798714">Filtri Globali ...</String>
     <String id="10798715">Carica info persone (Tutti)</String>
 	<String id="10798719">Carica info films (.nfo file, locale, aggiungi info mancanti)</String>
+    <String id="10798716">Trailer IMDB (OnlineVideos)</String>
     <String id="10798720">Carica info films (.nfo file, locale, sostituisci tutte le info)</String>
     <String id="10798721">Carica info films da Ant file (locale)</String>
     <String id="10798722">Memorizza films info nel Ant file (locale)</String>

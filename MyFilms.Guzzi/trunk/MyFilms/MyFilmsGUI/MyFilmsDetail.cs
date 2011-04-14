@@ -677,6 +677,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
                 case "playtraileronlinevideos":
+                case "playtraileronlinevideosappleitunes":
+                case "playtraileronlinevideosimdbtrailer":
+                      string site = string.Empty;
+                      switch (choiceView)
+                      {
+                        case "playtraileronlinevideos":
+                          site = "YouTube";
+                          break;
+                        case "playtraileronlinevideosappleitunes":
+                          site = "iTunes Movie Trailers";
+                          break;
+                        case "playtraileronlinevideosimdbtrailer":
+                          site = "IMDb Movie Trailers";
+                          break;
+                        default:
+                          return;
+                      }
+              
                       // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
                       //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
                       if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
@@ -698,9 +716,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                           title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
 
-                        string OVstartparams = "site:Youtube|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                        string OVstartparams = "site:" + site + "|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
                         //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
-                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "YouTube");
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
@@ -717,50 +735,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     else
                     {
                         ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
-                    }
-                    break;
-
-                case "playtraileronlinevideosappleitunes":
-                      //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
-                      if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
-                      {
-                        title = string.Empty;
-                        if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
-                          title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
-                        else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
-                          title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-                        else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
-                          title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
-                        else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
-                        {
-                          title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-                          if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
-                          if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
-                          if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-                        }
-                        if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
-                          title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
-
-                      string OVstartparams = "site:iTunes Movie Trailers|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
-                      //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "iTunes Movie Trailers");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
-
-                      LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
-                      //ReturnFromExternalPluginInfo = true;
-                      // should this be set here to make original movie doesn't get set to watched??
-                      // trailerPlayed = true;
-                      GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
-                    }
-                    else
-                    {
-                      ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
                     }
                     break;
 
@@ -970,6 +944,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798712));//search apple itunes trailer with onlinevideos
                     choiceViewMenu.Add("playtraileronlinevideosappleitunes");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
+                    choiceViewMenu.Add("playtraileronlinevideosimdbtrailer");
+
 
                     if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                     {
@@ -4557,127 +4535,81 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 dlgmenu.Add(GUILocalizeStrings.Get(10798711)); //search youtube trailer with onlinevideos
                 choiceViewMenu.Add("playtraileronlinevideos");
-
-                dlgmenu.Add(GUILocalizeStrings.Get(10798712)); //search apple itunes trailer with onlinevideos
+                dlgmenu.Add(GUILocalizeStrings.Get(10798712)); //search apple itunes trailer with onlinevideos 10798716
                 choiceViewMenu.Add("playtraileronlinevideosappleitunes");
-
+                dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
+                choiceViewMenu.Add("playtraileronlinevideosimdbtrailer");
                 dlgmenu.Add(GUILocalizeStrings.Get(712) + " ..."); //Return ...
                 choiceViewMenu.Add("return");
 
                 dlgmenu.DoModal(GetID);
                 if (dlgmenu.SelectedLabel == -1) return;
+
+                string site = string.Empty;
                 switch (choiceViewMenu[dlgmenu.SelectedLabel].ToLower())
                 {
                   case "playtraileronlinevideos":
-                    // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
-                    //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
-                    if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
-                    {
-                      string title = string.Empty;
-                      if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
-                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
-                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
-                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
-                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
-                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
-                      {
-                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-                        if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
-                        if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
-                        if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-                      }
-                      if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
-                        title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
-
-                      string OVstartparams = "site:Youtube|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
-                      //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "YouTube");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
-                      LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
-                      // should this be set here to make original movie doesn't get set to watched??
-                      // trailerPlayed = true;
-                      GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
-                    }
-                    else
-                    {
-                      //ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
-                      GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                      if (dlgOK != null)
-                      {
-                        dlgOK.SetHeading("MyFilms");
-                        dlgOK.SetLine(1, "OnlineVideo plugin not installed or wrong version");
-                        dlgOK.SetLine(2, "Minimum Version required: 0.28");
-                        dlgOK.DoModal(GetID);
-                        return;
-                      }
-                    }
+                    site = "YouTube";
                     break;
-
                   case "playtraileronlinevideosappleitunes":
-                    //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
-                    if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
-                    {
-                      string title = string.Empty;
-                      if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
-                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
-                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
-                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
-                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
-                      else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
-                      {
-                        title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-                        if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
-                        if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
-                        if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-                      }
-                      if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
-                        title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
-
-                      string OVstartparams = "site:Youtube|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
-                      //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "iTunes Movie Trailers");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
-
-                      LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
-                      // should this be set here to make original movie doesn't get set to watched??
-                      // trailerPlayed = true;
-                      GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
-                      GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
-                    }
-                    else
-                    {
-                      //ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
-                      GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                      if (dlgOK != null)
-                      {
-                        dlgOK.SetHeading("MyFilms");
-                        dlgOK.SetLine(1, "OnlineVideo plugin not installed or wrong version");
-                        dlgOK.SetLine(2, "Minimum Version required: 0.28");
-                        dlgOK.DoModal(GetID);
-                        return;
-                      }
-                    }
+                    site = "iTunes Movie Trailers";
                     break;
-
+                  case "playtraileronlinevideosimdbtrailer":
+                    site = "IMDb Movie Trailers";
+                    break;
                   default:
                     return;
+                }
+                // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
+                //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
+                if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
+                {
+                  string title = string.Empty;
+                  if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
+                    title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
+                  else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
+                    title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
+                  else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
+                    title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
+                  else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
+                  {
+                    title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                    if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
+                    if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
+                    if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
+                  }
+                  if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
+                    title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
 
+                  string OVstartparams = "site:" + site + "|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                  //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
+                  LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
+                  // should this be set here to make original movie doesn't get set to watched??
+                  // trailerPlayed = true;
+                  GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
+                }
+                else
+                {
+                  //ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
+                  GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                  if (dlgOK != null)
+                  {
+                    dlgOK.SetHeading("MyFilms");
+                    dlgOK.SetLine(1, "OnlineVideo plugin not installed or wrong version");
+                    dlgOK.SetLine(2, "Minimum Version required: 0.28");
+                    dlgOK.DoModal(GetID);
+                    return;
+                  }
                 }
               }
-
             }
         }
 
