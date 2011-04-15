@@ -188,5 +188,20 @@
     <String id="10798753">Comments</String>
     <String id="10798754">Actors</String>
     <String id="10798755">Technical Info</String>
+    <String id="10798761">Load  Covers (TMDB)</String>
+    <String id="10798762">Change Cover</String>
+    <String id="10798800">Warning: possible long runtime!</String>
+    <String id="10798801">Should trailer search really be</String>
+    <String id="10798802">started for {0} films?</String>
+    <String id="10798940">Trailer</String>
+    <String id="10798941">Tagline</String>
+    <String id="10798942">Tags</String>
+    <String id="10798943">Aspectratio</String>
+    <String id="10798944">User Rating</String>
+    <String id="10798945">Fanart</String>
+    <String id="10798946">Filmstudio</String>
+    <String id="10798947">IMDB Toplist</String>
+    <String id="10798948">Onlinestatus</String>
+    <String id="10798949">Edition</String>
   </Section>
 </Language>

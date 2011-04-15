@@ -277,6 +277,20 @@ namespace MyFilmsPlugin.MyFilms
                     return GUILocalizeStrings.Get(10798941);
                 case "Tags":
                     return GUILocalizeStrings.Get(10798942);
+                case "Aspectratio":
+                    return GUILocalizeStrings.Get(10798943);
+                case "RatingUser":
+                    return GUILocalizeStrings.Get(10798944);
+                case "Fanart":
+                    return GUILocalizeStrings.Get(10798945);
+                case "Studio":
+                    return GUILocalizeStrings.Get(10798946);
+                case "IMDB_Rank":
+                    return GUILocalizeStrings.Get(10798947);
+                case "IsOnline":
+                    return GUILocalizeStrings.Get(10798948);
+                case "Edition":
+                    return GUILocalizeStrings.Get(10798949);
                 default:
                     return string.Empty;
             }

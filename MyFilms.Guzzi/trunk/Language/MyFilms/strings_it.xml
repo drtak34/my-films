@@ -256,5 +256,12 @@
     <String id="10798940">Trailer</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Tags</String>
+    <String id="10798943">Aspectratio</String>
+    <String id="10798944">User Rating</String>
+    <String id="10798945">Fanart</String>
+    <String id="10798946">Filmstudio</String>
+    <String id="10798947">IMDB Toplist</String>
+    <String id="10798948">Onlinestatus</String>
+    <String id="10798949">Edition</String>
   </Section>
 </Language>
