@@ -680,10 +680,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "playtraileronlinevideosappleitunes":
                 case "playtraileronlinevideosimdbtrailer":
                       string site = string.Empty;
+                      string titleextension = string.Empty;
                       switch (choiceView)
                       {
                         case "playtraileronlinevideos":
                           site = "YouTube";
+                          titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer";
                           break;
                         case "playtraileronlinevideosappleitunes":
                           site = "iTunes Movie Trailers";
@@ -716,11 +718,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                           title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
 
-                        string OVstartparams = "site:" + site + "|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                        string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked";
                         //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title + titleextension);
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
 
                         LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
@@ -4546,10 +4548,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (dlgmenu.SelectedLabel == -1) return;
 
                 string site = string.Empty;
+                string titleextension = string.Empty;
                 switch (choiceViewMenu[dlgmenu.SelectedLabel].ToLower())
                 {
                   case "playtraileronlinevideos":
                     site = "YouTube";
+                    titleextension = " " + MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer";
                     break;
                   case "playtraileronlinevideosappleitunes":
                     site = "iTunes Movie Trailers";
@@ -4581,11 +4585,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
                     title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
 
-                  string OVstartparams = "site:" + site + "|category:|search:" + title + " " + (MyFilms.r[MyFilms.conf.StrIndex]["Year"] + " trailer|return:Locked");
+                  string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked";
                   //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title.ToString());
+                  GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title + titleextension);
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
                   LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                   // should this be set here to make original movie doesn't get set to watched??
