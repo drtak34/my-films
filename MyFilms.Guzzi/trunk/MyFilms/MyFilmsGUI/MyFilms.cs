@@ -592,7 +592,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //backdrop.PropertyOne = " ";
                     // added from MoPic
                     backdrop.Filename = string.Empty;
-                    MyFilmsDetail.clearGUIProperty("fanart");
+                    MyFilmsDetail.clearGUIProperty("currentfanart");
                     cover.Filename = string.Empty;
 
                     //Disable FanartTimer - already done on pagedestroy ...
@@ -1432,7 +1432,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Debug("MF: (Load_Lstdetail): ACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 }
                 backdrop.Filename = wfanart[0];
-                MyFilmsDetail.setGUIProperty("fanart", wfanart[0]);
+                MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
 
                 cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
                 //if (!backdrop.Active)
@@ -1478,7 +1478,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 LogMyFilms.Debug("MyFilm (Load_Lstdetail): Backdrops-File: backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 backdrop.Filename = wfanart[0];
-                MyFilmsDetail.setGUIProperty("fanart", wfanart[0]);
+                MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
                 if (facadeView.SelectedListItem.IsFolder)
                     Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
@@ -4100,7 +4100,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     LogMyFilms.Debug("MF: (Backdrops-NewfromContext): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '"+ wfanart[1] + "'");
                     backdrop.Filename = wfanart[0];
-                    MyFilmsDetail.setGUIProperty("fanart", wfanart[0].ToString());
+                    MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0].ToString());
                     break;
                 case "deletefanart":
                     dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079874));//delete fanart (current film)
@@ -6195,7 +6195,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Disable Fanart                
             if (backdrop.Active) backdrop.Active = false;
             backdrop.Filename = String.Empty;
-            MyFilmsDetail.clearGUIProperty("fanart");
+            MyFilmsDetail.clearGUIProperty("currentfanart");
             LogMyFilms.Debug("MF: (DisableFanart): Fanart disabled !");
         }
 
@@ -6652,7 +6652,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.clearGUIProperty("view");
          MyFilmsDetail.clearGUIProperty("select");
          MyFilmsDetail.clearGUIProperty("picture");
-         MyFilmsDetail.clearGUIProperty("fanart");
+         MyFilmsDetail.clearGUIProperty("currentfanart");
        }
 
     private void Load_Logos(DataRow row)

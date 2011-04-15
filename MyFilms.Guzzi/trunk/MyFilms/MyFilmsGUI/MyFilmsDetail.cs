@@ -3693,7 +3693,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIControl.HideControl(GetID, (int)Controls.CTRL_FanartDir);
                     }
                     ImgFanart.SetFileName(wfanart[0]);
-                    setGUIProperty("fanart", wfanart[0].ToString()); 
+                    setGUIProperty("currentfanart", wfanart[0].ToString()); 
                     GUIControl.ShowControl(GetID, (int)Controls.CTRL_Fanart);
                 }
             }
