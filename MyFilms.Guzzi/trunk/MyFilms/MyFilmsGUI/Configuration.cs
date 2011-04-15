@@ -114,9 +114,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", string.Empty);
                 Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", string.Empty);
                 Strlabel3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel3", string.Empty);
+                Strlabel4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel4", string.Empty);
+                Strlabel5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel5", string.Empty);
                 Stritem1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem1", string.Empty);
                 Stritem2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem2", string.Empty);
                 Stritem3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem3", string.Empty);
+                Stritem4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem4", string.Empty);
+                Stritem5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntItem5", string.Empty);
                 StrIdentLabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentLabel", string.Empty);
                 StrLogos = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Logos", false);
                 StrSuppress = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Suppress", false);
@@ -618,6 +622,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strlabel3; }
             set { strlabel3 = value; }
         }
+        private string strlabel4 = string.Empty;
+        public string Strlabel4
+        {
+          get { return strlabel4; }
+          set { strlabel4 = value; }
+        }
+        private string strlabel5 = string.Empty;
+        public string Strlabel5
+        {
+          get { return strlabel5; }
+          set { strlabel5 = value; }
+        }
         private string stritem1 = string.Empty;
         public string Stritem1
         {
@@ -635,6 +651,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return stritem3; }
             set { stritem3 = value; }
+        }
+        private string stritem4 = string.Empty;
+        public string Stritem4
+        {
+          get { return stritem4; }
+          set { stritem4 = value; }
+        }
+        private string stritem5 = string.Empty;
+        public string Stritem5
+        {
+          get { return stritem5; }
+          set { stritem5 = value; }
         }
         private string[] listSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
         public string[] ListSeparator

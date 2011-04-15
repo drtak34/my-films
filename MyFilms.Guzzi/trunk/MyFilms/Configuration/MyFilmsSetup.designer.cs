@@ -106,6 +106,7 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
@@ -301,11 +302,6 @@
           this.label24 = new System.Windows.Forms.Label();
           this.ListSeparator1 = new System.Windows.Forms.ComboBox();
           this.Tab_Views = new System.Windows.Forms.TabPage();
-          this.groupBox_SortByItem = new System.Windows.Forms.GroupBox();
-          this.AntSort2 = new System.Windows.Forms.ComboBox();
-          this.AntTSort2 = new System.Windows.Forms.TextBox();
-          this.AntSort1 = new System.Windows.Forms.ComboBox();
-          this.AntTSort1 = new System.Windows.Forms.TextBox();
           this.groupBox_AntSelectedEnreg = new System.Windows.Forms.GroupBox();
           this.Selected_Enreg = new System.Windows.Forms.TextBox();
           this.AntFilterComb = new System.Windows.Forms.ComboBox();
@@ -430,6 +426,7 @@
           this.groupBox13 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerOnlyFile = new System.Windows.Forms.CheckBox();
           this.buttonDeleteTmpCatalog = new System.Windows.Forms.Button();
+          this.buttonOpenTmpFileAMC = new System.Windows.Forms.Button();
           this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
@@ -452,7 +449,6 @@
           this.AMCexePath = new System.Windows.Forms.TextBox();
           this.lblAMCpath = new System.Windows.Forms.Label();
           this.buttonAMCpathSearch = new System.Windows.Forms.Button();
-          this.buttonOpenTmpFileAMC = new System.Windows.Forms.Button();
           this.buttonOpenTmpFile = new System.Windows.Forms.Button();
           this.Tab_WakeOnLan = new System.Windows.Forms.TabPage();
           this.Tab_Logos = new System.Windows.Forms.TabPage();
@@ -483,7 +479,15 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.groupBox_SortByItem = new System.Windows.Forms.GroupBox();
+          this.AntSort2 = new System.Windows.Forms.ComboBox();
+          this.AntTSort2 = new System.Windows.Forms.TextBox();
+          this.AntSort1 = new System.Windows.Forms.ComboBox();
+          this.AntTSort1 = new System.Windows.Forms.TextBox();
+          this.AntItem4 = new System.Windows.Forms.ComboBox();
+          this.AntItem5 = new System.Windows.Forms.ComboBox();
+          this.AntLabel4 = new System.Windows.Forms.TextBox();
+          this.AntLabel5 = new System.Windows.Forms.TextBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -507,7 +511,6 @@
           this.groupBox_SupplementarySearch.SuspendLayout();
           this.groupBox_Separators.SuspendLayout();
           this.Tab_Views.SuspendLayout();
-          this.groupBox_SortByItem.SuspendLayout();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox_DefaultView.SuspendLayout();
           this.groupBox_SupplementaryView.SuspendLayout();
@@ -534,6 +537,7 @@
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          this.groupBox_SortByItem.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -656,6 +660,16 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // traktConfiguration
+          // 
+          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration.Name = "traktConfiguration";
+          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -2439,6 +2453,7 @@
           // 
           // Tab_Search
           // 
+          this.Tab_Search.Controls.Add(this.groupBox_SortByItem);
           this.Tab_Search.Controls.Add(this.groupBoxSearchByProperties);
           this.Tab_Search.Controls.Add(this.groupBox_SupplementarySearch);
           this.Tab_Search.Controls.Add(this.groupBox_Separators);
@@ -2446,8 +2461,8 @@
           this.Tab_Search.Name = "Tab_Search";
           this.Tab_Search.Size = new System.Drawing.Size(747, 354);
           this.Tab_Search.TabIndex = 9;
-          this.Tab_Search.Text = "Search";
-          this.ToolTip1.SetToolTip(this.Tab_Search, "Setup for userdefined searches");
+          this.Tab_Search.Text = "Sort/Search";
+          this.ToolTip1.SetToolTip(this.Tab_Search, "Setup for userdefined searches \r\nand userdefined sort items");
           this.Tab_Search.UseVisualStyleBackColor = true;
           // 
           // groupBoxSearchByProperties
@@ -2527,7 +2542,7 @@
           this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText2);
           this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchItem1);
           this.groupBox_SupplementarySearch.Controls.Add(this.AntSearchText1);
-          this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(15, 33);
+          this.groupBox_SupplementarySearch.Location = new System.Drawing.Point(15, 94);
           this.groupBox_SupplementarySearch.Name = "groupBox_SupplementarySearch";
           this.groupBox_SupplementarySearch.Size = new System.Drawing.Size(350, 125);
           this.groupBox_SupplementarySearch.TabIndex = 34;
@@ -2612,7 +2627,7 @@
           this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
           this.groupBox_Separators.Controls.Add(this.label24);
           this.groupBox_Separators.Controls.Add(this.ListSeparator1);
-          this.groupBox_Separators.Location = new System.Drawing.Point(377, 33);
+          this.groupBox_Separators.Location = new System.Drawing.Point(377, 85);
           this.groupBox_Separators.Name = "groupBox_Separators";
           this.groupBox_Separators.Size = new System.Drawing.Size(350, 125);
           this.groupBox_Separators.TabIndex = 28;
@@ -2795,7 +2810,6 @@
           // 
           // Tab_Views
           // 
-          this.Tab_Views.Controls.Add(this.groupBox_SortByItem);
           this.Tab_Views.Controls.Add(this.groupBox_AntSelectedEnreg);
           this.Tab_Views.Controls.Add(this.groupBox_DefaultView);
           this.Tab_Views.Controls.Add(this.groupBox_SupplementaryView);
@@ -2808,52 +2822,6 @@
           this.Tab_Views.Text = "Views/Filter";
           this.ToolTip1.SetToolTip(this.Tab_Views, "Setup for userdefined views and filters");
           this.Tab_Views.UseVisualStyleBackColor = true;
-          // 
-          // groupBox_SortByItem
-          // 
-          this.groupBox_SortByItem.Controls.Add(this.AntSort2);
-          this.groupBox_SortByItem.Controls.Add(this.AntTSort2);
-          this.groupBox_SortByItem.Controls.Add(this.AntSort1);
-          this.groupBox_SortByItem.Controls.Add(this.AntTSort1);
-          this.groupBox_SortByItem.Location = new System.Drawing.Point(371, 271);
-          this.groupBox_SortByItem.Name = "groupBox_SortByItem";
-          this.groupBox_SortByItem.Size = new System.Drawing.Size(370, 77);
-          this.groupBox_SortByItem.TabIndex = 29;
-          this.groupBox_SortByItem.TabStop = false;
-          this.groupBox_SortByItem.Text = "User defined Sort Item";
-          this.ToolTip1.SetToolTip(this.groupBox_SortByItem, resources.GetString("groupBox_SortByItem.ToolTip"));
-          // 
-          // AntSort2
-          // 
-          this.AntSort2.FormattingEnabled = true;
-          this.AntSort2.Location = new System.Drawing.Point(10, 45);
-          this.AntSort2.Name = "AntSort2";
-          this.AntSort2.Size = new System.Drawing.Size(160, 21);
-          this.AntSort2.TabIndex = 38;
-          this.AntSort2.SelectedIndexChanged += new System.EventHandler(this.AntSort2_SelectedIndexChanged);
-          // 
-          // AntTSort2
-          // 
-          this.AntTSort2.Location = new System.Drawing.Point(185, 45);
-          this.AntTSort2.Name = "AntTSort2";
-          this.AntTSort2.Size = new System.Drawing.Size(173, 20);
-          this.AntTSort2.TabIndex = 39;
-          // 
-          // AntSort1
-          // 
-          this.AntSort1.FormattingEnabled = true;
-          this.AntSort1.Location = new System.Drawing.Point(10, 18);
-          this.AntSort1.Name = "AntSort1";
-          this.AntSort1.Size = new System.Drawing.Size(160, 21);
-          this.AntSort1.TabIndex = 36;
-          this.AntSort1.SelectedIndexChanged += new System.EventHandler(this.AntSort1_SelectedIndexChanged);
-          // 
-          // AntTSort1
-          // 
-          this.AntTSort1.Location = new System.Drawing.Point(185, 18);
-          this.AntTSort1.Name = "AntTSort1";
-          this.AntTSort1.Size = new System.Drawing.Size(173, 20);
-          this.AntTSort1.TabIndex = 37;
           // 
           // groupBox_AntSelectedEnreg
           // 
@@ -3273,6 +3241,10 @@
           // 
           // groupBox_DetailedSupplementaryInformations
           // 
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel5);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel4);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem5);
+          this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem4);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel3);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.chkOnlyTitle);
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntItem3);
@@ -3284,7 +3256,7 @@
           this.groupBox_DetailedSupplementaryInformations.Controls.Add(this.AntLabel1);
           this.groupBox_DetailedSupplementaryInformations.Location = new System.Drawing.Point(371, 129);
           this.groupBox_DetailedSupplementaryInformations.Name = "groupBox_DetailedSupplementaryInformations";
-          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(370, 136);
+          this.groupBox_DetailedSupplementaryInformations.Size = new System.Drawing.Size(370, 219);
           this.groupBox_DetailedSupplementaryInformations.TabIndex = 22;
           this.groupBox_DetailedSupplementaryInformations.TabStop = false;
           this.groupBox_DetailedSupplementaryInformations.Text = "User defined Display Items";
@@ -3292,7 +3264,7 @@
           // 
           // AntLabel3
           // 
-          this.AntLabel3.Location = new System.Drawing.Point(185, 88);
+          this.AntLabel3.Location = new System.Drawing.Point(185, 97);
           this.AntLabel3.Name = "AntLabel3";
           this.AntLabel3.Size = new System.Drawing.Size(173, 20);
           this.AntLabel3.TabIndex = 30;
@@ -3300,7 +3272,7 @@
           // chkOnlyTitle
           // 
           this.chkOnlyTitle.AutoSize = true;
-          this.chkOnlyTitle.Location = new System.Drawing.Point(10, 115);
+          this.chkOnlyTitle.Location = new System.Drawing.Point(11, 187);
           this.chkOnlyTitle.Name = "chkOnlyTitle";
           this.chkOnlyTitle.Size = new System.Drawing.Size(230, 17);
           this.chkOnlyTitle.TabIndex = 31;
@@ -3310,7 +3282,7 @@
           // AntItem3
           // 
           this.AntItem3.FormattingEnabled = true;
-          this.AntItem3.Location = new System.Drawing.Point(10, 88);
+          this.AntItem3.Location = new System.Drawing.Point(10, 97);
           this.AntItem3.Name = "AntItem3";
           this.AntItem3.Size = new System.Drawing.Size(160, 21);
           this.AntItem3.TabIndex = 29;
@@ -3318,14 +3290,14 @@
           // AntItem2
           // 
           this.AntItem2.FormattingEnabled = true;
-          this.AntItem2.Location = new System.Drawing.Point(10, 61);
+          this.AntItem2.Location = new System.Drawing.Point(10, 70);
           this.AntItem2.Name = "AntItem2";
           this.AntItem2.Size = new System.Drawing.Size(160, 21);
           this.AntItem2.TabIndex = 27;
           // 
           // AntLabel2
           // 
-          this.AntLabel2.Location = new System.Drawing.Point(185, 61);
+          this.AntLabel2.Location = new System.Drawing.Point(185, 70);
           this.AntLabel2.Name = "AntLabel2";
           this.AntLabel2.Size = new System.Drawing.Size(173, 20);
           this.AntLabel2.TabIndex = 28;
@@ -3333,7 +3305,7 @@
           // label7
           // 
           this.label7.AutoSize = true;
-          this.label7.Location = new System.Drawing.Point(8, 16);
+          this.label7.Location = new System.Drawing.Point(8, 25);
           this.label7.Name = "label7";
           this.label7.Size = new System.Drawing.Size(94, 13);
           this.label7.TabIndex = 22;
@@ -3343,7 +3315,7 @@
           // 
           this.AntItem1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
           this.AntItem1.FormattingEnabled = true;
-          this.AntItem1.Location = new System.Drawing.Point(10, 34);
+          this.AntItem1.Location = new System.Drawing.Point(10, 43);
           this.AntItem1.Name = "AntItem1";
           this.AntItem1.Size = new System.Drawing.Size(160, 21);
           this.AntItem1.Sorted = true;
@@ -3352,7 +3324,7 @@
           // label3
           // 
           this.label3.AutoSize = true;
-          this.label3.Location = new System.Drawing.Point(187, 16);
+          this.label3.Location = new System.Drawing.Point(187, 25);
           this.label3.Name = "label3";
           this.label3.Size = new System.Drawing.Size(33, 13);
           this.label3.TabIndex = 21;
@@ -3360,7 +3332,7 @@
           // 
           // AntLabel1
           // 
-          this.AntLabel1.Location = new System.Drawing.Point(185, 34);
+          this.AntLabel1.Location = new System.Drawing.Point(185, 43);
           this.AntLabel1.Name = "AntLabel1";
           this.AntLabel1.Size = new System.Drawing.Size(173, 20);
           this.AntLabel1.TabIndex = 26;
@@ -4210,6 +4182,17 @@
           this.buttonDeleteTmpCatalog.UseVisualStyleBackColor = true;
           this.buttonDeleteTmpCatalog.Click += new System.EventHandler(this.buttonDeleteTmpCatalog_Click);
           // 
+          // buttonOpenTmpFileAMC
+          // 
+          this.buttonOpenTmpFileAMC.Location = new System.Drawing.Point(29, 236);
+          this.buttonOpenTmpFileAMC.Name = "buttonOpenTmpFileAMC";
+          this.buttonOpenTmpFileAMC.Size = new System.Drawing.Size(152, 27);
+          this.buttonOpenTmpFileAMC.TabIndex = 32;
+          this.buttonOpenTmpFileAMC.Text = "Open tmp Catalog in AMC";
+          this.ToolTip1.SetToolTip(this.buttonOpenTmpFileAMC, resources.GetString("buttonOpenTmpFileAMC.ToolTip"));
+          this.buttonOpenTmpFileAMC.UseVisualStyleBackColor = true;
+          this.buttonOpenTmpFileAMC.Click += new System.EventHandler(this.buttonOpenTmpFileAMC_Click);
+          // 
           // AntFilterMinRating
           // 
           this.AntFilterMinRating.Location = new System.Drawing.Point(0, 0);
@@ -4389,17 +4372,6 @@
           this.buttonAMCpathSearch.Text = "...";
           this.buttonAMCpathSearch.UseVisualStyleBackColor = true;
           this.buttonAMCpathSearch.Click += new System.EventHandler(this.buttonAMCpathSearch_Click);
-          // 
-          // buttonOpenTmpFileAMC
-          // 
-          this.buttonOpenTmpFileAMC.Location = new System.Drawing.Point(29, 236);
-          this.buttonOpenTmpFileAMC.Name = "buttonOpenTmpFileAMC";
-          this.buttonOpenTmpFileAMC.Size = new System.Drawing.Size(152, 27);
-          this.buttonOpenTmpFileAMC.TabIndex = 32;
-          this.buttonOpenTmpFileAMC.Text = "Open tmp Catalog in AMC";
-          this.ToolTip1.SetToolTip(this.buttonOpenTmpFileAMC, resources.GetString("buttonOpenTmpFileAMC.ToolTip"));
-          this.buttonOpenTmpFileAMC.UseVisualStyleBackColor = true;
-          this.buttonOpenTmpFileAMC.Click += new System.EventHandler(this.buttonOpenTmpFileAMC_Click);
           // 
           // buttonOpenTmpFile
           // 
@@ -4775,15 +4747,79 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // traktConfiguration
+          // groupBox_SortByItem
           // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
+          this.groupBox_SortByItem.Controls.Add(this.AntSort2);
+          this.groupBox_SortByItem.Controls.Add(this.AntTSort2);
+          this.groupBox_SortByItem.Controls.Add(this.AntSort1);
+          this.groupBox_SortByItem.Controls.Add(this.AntTSort1);
+          this.groupBox_SortByItem.Location = new System.Drawing.Point(15, 11);
+          this.groupBox_SortByItem.Name = "groupBox_SortByItem";
+          this.groupBox_SortByItem.Size = new System.Drawing.Size(350, 77);
+          this.groupBox_SortByItem.TabIndex = 36;
+          this.groupBox_SortByItem.TabStop = false;
+          this.groupBox_SortByItem.Text = "User defined Sort Item";
+          this.ToolTip1.SetToolTip(this.groupBox_SortByItem, resources.GetString("groupBox_SortByItem.ToolTip"));
+          // 
+          // AntSort2
+          // 
+          this.AntSort2.FormattingEnabled = true;
+          this.AntSort2.Location = new System.Drawing.Point(10, 45);
+          this.AntSort2.Name = "AntSort2";
+          this.AntSort2.Size = new System.Drawing.Size(145, 21);
+          this.AntSort2.TabIndex = 38;
+          // 
+          // AntTSort2
+          // 
+          this.AntTSort2.Location = new System.Drawing.Point(164, 45);
+          this.AntTSort2.Name = "AntTSort2";
+          this.AntTSort2.Size = new System.Drawing.Size(173, 20);
+          this.AntTSort2.TabIndex = 39;
+          // 
+          // AntSort1
+          // 
+          this.AntSort1.FormattingEnabled = true;
+          this.AntSort1.Location = new System.Drawing.Point(10, 18);
+          this.AntSort1.Name = "AntSort1";
+          this.AntSort1.Size = new System.Drawing.Size(145, 21);
+          this.AntSort1.TabIndex = 36;
+          // 
+          // AntTSort1
+          // 
+          this.AntTSort1.Location = new System.Drawing.Point(164, 19);
+          this.AntTSort1.Name = "AntTSort1";
+          this.AntTSort1.Size = new System.Drawing.Size(173, 20);
+          this.AntTSort1.TabIndex = 37;
+          // 
+          // AntItem4
+          // 
+          this.AntItem4.FormattingEnabled = true;
+          this.AntItem4.Location = new System.Drawing.Point(10, 124);
+          this.AntItem4.Name = "AntItem4";
+          this.AntItem4.Size = new System.Drawing.Size(160, 21);
+          this.AntItem4.TabIndex = 32;
+          // 
+          // AntItem5
+          // 
+          this.AntItem5.FormattingEnabled = true;
+          this.AntItem5.Location = new System.Drawing.Point(10, 151);
+          this.AntItem5.Name = "AntItem5";
+          this.AntItem5.Size = new System.Drawing.Size(160, 21);
+          this.AntItem5.TabIndex = 33;
+          // 
+          // AntLabel4
+          // 
+          this.AntLabel4.Location = new System.Drawing.Point(185, 125);
+          this.AntLabel4.Name = "AntLabel4";
+          this.AntLabel4.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel4.TabIndex = 34;
+          // 
+          // AntLabel5
+          // 
+          this.AntLabel5.Location = new System.Drawing.Point(185, 152);
+          this.AntLabel5.Name = "AntLabel5";
+          this.AntLabel5.Size = new System.Drawing.Size(173, 20);
+          this.AntLabel5.TabIndex = 35;
           // 
           // MyFilmsSetup
           // 
@@ -4856,8 +4892,6 @@
           this.groupBox_Separators.ResumeLayout(false);
           this.groupBox_Separators.PerformLayout();
           this.Tab_Views.ResumeLayout(false);
-          this.groupBox_SortByItem.ResumeLayout(false);
-          this.groupBox_SortByItem.PerformLayout();
           this.groupBox_AntSelectedEnreg.ResumeLayout(false);
           this.groupBox_AntSelectedEnreg.PerformLayout();
           this.groupBox_DefaultView.ResumeLayout(false);
@@ -4899,6 +4933,8 @@
           this.Tab_Update.ResumeLayout(false);
           this.General.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          this.groupBox_SortByItem.ResumeLayout(false);
+          this.groupBox_SortByItem.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -5128,11 +5164,6 @@
         private Label label24;
         private ComboBox ListSeparator1;
         private TabPage Tab_Views;
-        private GroupBox groupBox_SortByItem;
-        private ComboBox AntSort2;
-        private TextBox AntTSort2;
-        private ComboBox AntSort1;
-        private TextBox AntTSort1;
         private GroupBox groupBox_AntSelectedEnreg;
         private TextBox Selected_Enreg;
         private ComboBox AntFilterComb;
@@ -5293,5 +5324,14 @@
         private TextBox AMCexePath;
         private Label lblAMCpath;
         private Button buttonAMCpathSearch;
+        private GroupBox groupBox_SortByItem;
+        private ComboBox AntSort2;
+        private TextBox AntTSort2;
+        private ComboBox AntSort1;
+        private TextBox AntTSort1;
+        private TextBox AntLabel5;
+        private TextBox AntLabel4;
+        private ComboBox AntItem5;
+        private ComboBox AntItem4;
     }
 }

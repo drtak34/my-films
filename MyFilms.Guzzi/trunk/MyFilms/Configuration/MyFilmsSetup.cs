@@ -166,6 +166,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntItem1.Items.Add("(none)");
             AntItem2.Items.Add("(none)");
             AntItem3.Items.Add("(none)");
+            AntItem4.Items.Add("(none)");
+            AntItem5.Items.Add("(none)");
             CmdPar.Items.Add("(none)");
             CatalogType.SelectedIndex = 0;
 
@@ -197,6 +199,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   AntItem1.Items.Add(dc.ColumnName);
                   AntItem2.Items.Add(dc.ColumnName);
                   AntItem3.Items.Add(dc.ColumnName);
+                  AntItem4.Items.Add(dc.ColumnName);
+                  AntItem5.Items.Add(dc.ColumnName);
                 }
                 if ((dc.ColumnName != "Contents_Id") && (dc.ColumnName != "DateAdded") && (dc.ColumnName != "Length_Num"))
                 {
@@ -896,12 +900,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdItem2", AntUpdItem2.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdText2", AntUpdText2.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntUpdDflT2", AntUpdDflT2.Text.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel1", AntLabel1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem1", AntItem1.Text.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel2", AntLabel2.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel1", AntLabel1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem2", AntItem2.Text.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel3", AntLabel3.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel2", AntLabel2.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem3", AntItem3.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel3", AntLabel3.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem4", AntItem4.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel4", AntLabel4.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem5", AntItem5.Text.ToString());
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel5", AntLabel5.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltItem", View_Dflt_Item.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewDfltText", View_Dflt_Text.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchList", AntSearchList.Text.ToString());
@@ -1263,12 +1271,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             NAS_Name_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-Name-3", string.Empty);
             NAS_MAC_3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "NAS-MAC-3", string.Empty);
 
-            AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel1", string.Empty);
             AntItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem1", string.Empty);
-            AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel2", string.Empty);
+            AntLabel1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel1", string.Empty);
             AntItem2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem2", string.Empty);
-            AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel3", string.Empty);
+            AntLabel2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel2", string.Empty);
             AntItem3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem3", string.Empty);
+            AntLabel3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel3", string.Empty);
+            AntItem4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem4", string.Empty);
+            AntLabel4.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel4", string.Empty);
+            AntItem5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntItem5", string.Empty);
+            AntLabel5.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntLabel5", string.Empty);
             ListSeparator1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator1", ",");
             ListSeparator2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator2", ";");
             ListSeparator3.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "ListSeparator3", "[");
@@ -1570,9 +1582,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntLabel1.ResetText();
             AntLabel2.ResetText();
             AntLabel3.ResetText();
+            AntLabel4.ResetText();
+            AntLabel5.ResetText();
             AntItem1.ResetText();
             AntItem2.ResetText();
             AntItem3.ResetText();
+            AntItem4.ResetText();
+            AntItem5.ResetText();
             TitleDelim.ResetText();
             LayOut.ResetText();
             ListSeparator1.ResetText();
@@ -2079,15 +2095,23 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntItem1.Items.Add("Writer");
           AntItem2.Items.Add("Writer");
           AntItem3.Items.Add("Writer");
+          AntItem4.Items.Add("Writer");
+          AntItem5.Items.Add("Writer");
           AntItem1.Items.Add("Certification");
           AntItem2.Items.Add("Certification");
           AntItem3.Items.Add("Certification");
+          AntItem4.Items.Add("Certification");
+          AntItem5.Items.Add("Certification");
           AntItem1.Items.Add("TagLine");
           AntItem2.Items.Add("TagLine");
           AntItem3.Items.Add("TagLine");
+          AntItem4.Items.Add("TagLine");
+          AntItem5.Items.Add("TagLine");
           AntItem1.Items.Add("Tags");
           AntItem2.Items.Add("Tags");
           AntItem3.Items.Add("Tags");
+          AntItem4.Items.Add("Tags");
+          AntItem5.Items.Add("Tags");
 
           AntSort1.Items.Add("Writer");
           AntSort2.Items.Add("Writer");
