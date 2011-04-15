@@ -244,8 +244,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     }
                   
                     string Image = String.Empty;
-                    if (nodeDVD.SelectSingleNode("Covers/Front") != null)
-                        Image = nodeDVD.SelectSingleNode("Covers/Front").InnerText;
+                    if (nodeDVD.SelectSingleNode("Covers/FrontMedium") != null) // try FrontMedium first, as better resolution
+                      Image = nodeDVD.SelectSingleNode("Covers/FrontMedium").InnerText;
+                    if (string.IsNullOrEmpty(Image) && nodeDVD.SelectSingleNode("Covers/Front") != null) // Front
+                      Image = nodeDVD.SelectSingleNode("Covers/Front").InnerText;
                     string Rating = string.Empty;
                     decimal wrating = 0;
                     CultureInfo ci = new CultureInfo("en-us");
