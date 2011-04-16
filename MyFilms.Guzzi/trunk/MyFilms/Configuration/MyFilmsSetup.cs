@@ -4919,9 +4919,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (destFile.Length > 0)
             if (System.IO.File.Exists(destFile))
             {
-              System.IO.File.Delete(destFile);
-              LogMyFilms.Debug("MyFilmsSetup: Manually deleted tmp catalog: '" + destFile + "'");
-              MessageBox.Show("Deleted tmp imported data: '" + destFile + "' \n MyFilms will reimport data on next launch or when saving the config.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+              DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete the tmp cache file for this config? \n\n(File will be recreated on next 'save' action.)", "Warning", MessageBoxButtons.YesNo,
+              MessageBoxIcon.Question);
+              if (dialogResult == DialogResult.Yes)
+              {
+                System.IO.File.Delete(destFile);
+                LogMyFilms.Debug("MyFilmsSetup: Manually deleted tmp catalog: '" + destFile + "'");
+                MessageBox.Show("Deleted tmp imported data: '" + destFile + "' \n MyFilms will reimport data on next launch or when saving the config.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+              }
             }
         }
 
