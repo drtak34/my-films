@@ -285,5 +285,9 @@ public class TagName
   public static string KeyCertificationRegExp = "KeyCertificationRegExp";
   public static string KeyCertificationIndex = "KeyCertificationIndex";
   public static string KeyCertificationLanguage = "KeyCertificationLanguage";
+  // Not yet added:
+  //"Studio":
+  //"IMDB_Rank":
+  //"Edition":
 }
 
