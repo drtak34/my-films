@@ -512,6 +512,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return;
             base.OnAction(actionType);
         }
+
+        //---------------------------------------------------------------------------------------
+        //   Handle Clicked Events
+        //---------------------------------------------------------------------------------------
+        protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
+        {
+          //if (control == this.viewMenuButton)
+          //{
+          //  showViewSwitchDialog();
+          //  viewMenuButton.Focus = false;
+          //  return;
+          //}
+
+          //if (actionType != MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM) return; // some other events raised onClicked too for some reason?
+          base.OnClicked(controlId, control, actionType);
+        }
+      
         //---------------------------------------------------------------------------------------
         //   Handle posted Messages
         //---------------------------------------------------------------------------------------
@@ -519,6 +536,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             int dControl = messageType.TargetControlId;
             int iControl = messageType.SenderControlId;
+            LogMyFilms.Debug("MF: GUIMessage: " + messageType.Message.ToString() + ", Param1: " + messageType.Param1.ToString() +", Sender: " + iControl.ToString() + ", Target: " + dControl.ToString() + "");
             switch (messageType.Message)
             {
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
@@ -924,6 +942,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
                         return base.OnMessage(messageType);
                     }
+
+                    if (iControl == (int)Controls.CTRL_List && messageType.Param1 != 7)// we only handle "SELECT_ITEM" here - some other events raised onClicked too for some reason?
+                      return base.OnMessage(messageType);
 
                     if (iControl == (int)Controls.CTRL_List)
                     {

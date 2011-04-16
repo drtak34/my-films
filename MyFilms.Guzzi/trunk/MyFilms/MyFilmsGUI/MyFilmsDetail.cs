@@ -5063,26 +5063,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             //#region Trakt
             //// submit watched state to trakt API
-            //// could be a double episode so set both episodes as watched
             //PlayListItem item = GetCurrentItem();
 
             //if (item != null)
             //{
-            //  if (item.Episode != null)
-            //  {
-            //    if (item.Episode[DBEpisode.cEpisodeIndex2] > 0)
-            //    {
-            //      // only set 2nd episode as watched here
-            //      SQLCondition condition = new SQLCondition();
-            //      condition.Add(new DBEpisode(), DBEpisode.cFilename, item.FileName, SQLConditionType.Equal);
-            //      List<DBEpisode> episodes = DBEpisode.Get(condition, false);
-            //      TraktScrobbleUpdater.RunWorkerAsync(episodes[1]);
-            //    }
-            //    else
-            //    {
             //      TraktScrobbleUpdater.RunWorkerAsync(item.Episode);
-            //    }
-            //  }
             //}
             //#endregion
         }
