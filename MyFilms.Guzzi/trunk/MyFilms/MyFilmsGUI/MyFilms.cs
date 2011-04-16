@@ -649,8 +649,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                         if (MyFilms.conf.StrSearchList[0].Length > 0)
                         {
-                            dlg.Add(GUILocalizeStrings.Get(10798615));//Search global movies by property
-                            choiceSearch.Add("globalproperty");
+                          dlg.Add(GUILocalizeStrings.Get(10798615));//Search global movies by property
+                          choiceSearch.Add("globalproperty");
                         }
 
                         if (MyFilmsDetail.ExtendedStartmode("Global Search Movies by Areas"))
@@ -5444,6 +5444,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.Reset();
             dlg.SetHeading(GUILocalizeStrings.Get(10798615)); // menu
 
+            if (MyFilms.conf.StrRecentSearch1.Length > 0) // only show dialog, if there was a searchword stored before ...
+            {
+              dlg.Add(GUILocalizeStrings.Get(10798609));//last recent searches 1-5
+              choiceSearch.Add("recentsearch");
+            }
+
             dlg.Add(GUILocalizeStrings.Get(10798616)); // search on all fields
             choiceSearch.Add("all");
 
@@ -5457,19 +5463,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg.SelectedLabel == -1)
                 return;
 
+            string searchstring = string.Empty;
+            if (choiceSearch[dlg.SelectedLabel] == "recentsearch") // if user choose recent search, set searchname = choice of user instead of asking via vkeyboard
+            {
+              GUIDialogMenu dlgrecent = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+              dlgrecent.Reset();
+              dlgrecent.SetHeading(GUILocalizeStrings.Get(10798609)); // Last Searches ...
+              if (dlgrecent == null) return;
+              if (conf.StrRecentSearch1.Length > 0) dlgrecent.Add(conf.StrRecentSearch1);
+              if (conf.StrRecentSearch2.Length > 0) dlgrecent.Add(conf.StrRecentSearch2);
+              if (conf.StrRecentSearch3.Length > 0) dlgrecent.Add(conf.StrRecentSearch3);
+              if (conf.StrRecentSearch4.Length > 0) dlgrecent.Add(conf.StrRecentSearch4);
+              if (conf.StrRecentSearch5.Length > 0) dlgrecent.Add(conf.StrRecentSearch5);
+              dlgrecent.SelectedLabel = 0;
+              dlgrecent.DoModal(GetID);
+              if (dlg.SelectedLabel == -1) 
+                return;
+              searchstring = dlgrecent.SelectedLabelText.ToString();
+            }
+
             string wproperty = choiceSearch[dlg.SelectedLabel];
             VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
             if (null == keyboard) return;
             keyboard.Reset();
-            keyboard.Text = "";
+            keyboard.Text = searchstring;
             keyboard.DoModal(GetID);
-            if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+            if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text) || !string.IsNullOrEmpty(searchstring))) 
             {
-            ArrayList w_count = new ArrayList();
-            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-            switch (choiceSearch[dlg.SelectedLabel])
+              if (keyboard.Text != searchstring)
+                UpdateRecentSearch(keyboard.Text);
+              ArrayList w_count = new ArrayList();
+              string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+              switch (choiceSearch[dlg.SelectedLabel])
                 {
-                    case "all":
+                  case "all":
+                  case "recentsearch":
                         if (dlg == null) return;
                         dlg.Reset();
                         dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
@@ -5718,6 +5746,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         break;
                 }
             }
+        }
+
+        //*****************************************************************************************
+        //*  No Movie found to display. Display all movies
+        //*****************************************************************************************
+        private void UpdateRecentSearch(string newsearchstring)
+        {
+          conf.StrRecentSearch5 = conf.StrRecentSearch4;
+          conf.StrRecentSearch4 = conf.StrRecentSearch3;
+          conf.StrRecentSearch3 = conf.StrRecentSearch2;
+          conf.StrRecentSearch2 = conf.StrRecentSearch1;
+          conf.StrRecentSearch1 = newsearchstring;
         }
 
         //*****************************************************************************************

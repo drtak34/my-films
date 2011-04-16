@@ -384,6 +384,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrNasMAC2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-2", string.Empty);
                 StrNasName3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-3", string.Empty);
                 StrNasMAC3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-3", string.Empty);
+                StrRecentSearch1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch1", string.Empty);
+                StrRecentSearch2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch2", string.Empty);
+                StrRecentSearch3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch3", string.Empty);
+                StrRecentSearch4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch4", string.Empty);
+                StrRecentSearch5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch5", string.Empty);
                 StrTraktUsername = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "cTraktUsername", string.Empty);
                 StrTraktPassword = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "cTraktPassWord", string.Empty);
 
@@ -1197,6 +1202,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             set { strNasMAC3 = value; }
         }
 
+        private string strRecentSearch1 = string.Empty;
+        public string StrRecentSearch1
+        {
+          get { return strRecentSearch1; }
+          set { strRecentSearch1 = value; }
+        }
+        private string strRecentSearch2 = string.Empty;
+        public string StrRecentSearch2
+        {
+          get { return strRecentSearch2; }
+          set { strRecentSearch2 = value; }
+        }
+        private string strRecentSearch3 = string.Empty;
+        public string StrRecentSearch3
+        {
+          get { return strRecentSearch3; }
+          set { strRecentSearch3 = value; }
+        }
+        private string strRecentSearch4 = string.Empty;
+        public string StrRecentSearch4
+        {
+          get { return strRecentSearch4; }
+          set { strRecentSearch4 = value; }
+        }
+        private string strRecentSearch5 = string.Empty;
+        public string StrRecentSearch5
+        {
+          get { return strRecentSearch5; }
+          set { strRecentSearch5 = value; }
+        }
         private string strTraktUsername = string.Empty;
         public string StrTraktUsername
         {
@@ -1359,6 +1394,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch1", MyFilms.conf.StrRecentSearch1);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch2", MyFilms.conf.StrRecentSearch2);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch3", MyFilms.conf.StrRecentSearch3);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch4", MyFilms.conf.StrRecentSearch4);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch5", MyFilms.conf.StrRecentSearch5);
+
             switch (MyFilms.conf.StrFileType)
                 {
                     case "0":
