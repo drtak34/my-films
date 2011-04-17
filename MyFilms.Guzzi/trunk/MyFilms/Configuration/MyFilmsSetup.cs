@@ -149,7 +149,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSort2.Items.Add("(none)");
             Sort.Items.Add("(none)");
             AntIdentItem.Items.Add("(none)");
-            AntFilterMinRating.Items.Add("(none)");
+            //AntFilterMinRating.Items.Add("(none)");
             AntFilterItem1.Items.Add("(none)");
             AntFilterItem2.Items.Add("(none)");
             AntFilterItem3.Items.Add("(none)");
@@ -861,7 +861,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntTSort1", AntTSort1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntSort2", AntSort2.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntTSort2", AntTSort2.Text.ToString());
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterMinRating", AntFilterMinRating.Text.ToString());
+            //XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterMinRating", AntFilterMinRating.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem1", AntFilterItem1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign1", AntFilterSign1.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText1", AntFilterText1.Text.ToString());
@@ -1202,7 +1202,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntTSort2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntTSort2", "");
             Sort.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSort", "");
             SortSens.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntDfltStrSortSens", "");
-            AntFilterMinRating.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterMinRating", "5");
+            //AntFilterMinRating.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterMinRating", "5");
             AntFilterItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterItem1", "");
             AntFilterSign1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterSign1", "#");
             AntFilterText1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntFilterText1", "");
@@ -1538,7 +1538,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AntSort2.ResetText();
             AntTSort2.ResetText();
             Sort.ResetText();
-            AntFilterMinRating.ResetText();
+            //AntFilterMinRating.ResetText();
             AntFilterItem1.ResetText();
             AntFilterItem2.ResetText();
             AntFilterItem3.ResetText();

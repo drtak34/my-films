@@ -427,7 +427,7 @@
           this.chkDVDprofilerOnlyFile = new System.Windows.Forms.CheckBox();
           this.buttonDeleteTmpCatalog = new System.Windows.Forms.Button();
           this.buttonOpenTmpFileAMC = new System.Windows.Forms.Button();
-          this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
+          //this.AntFilterMinRating = new System.Windows.Forms.ComboBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
           this.AntFilterItem4 = new System.Windows.Forms.ComboBox();
@@ -4192,13 +4192,13 @@
           this.ToolTip1.SetToolTip(this.buttonOpenTmpFileAMC, resources.GetString("buttonOpenTmpFileAMC.ToolTip"));
           this.buttonOpenTmpFileAMC.UseVisualStyleBackColor = true;
           this.buttonOpenTmpFileAMC.Click += new System.EventHandler(this.buttonOpenTmpFileAMC_Click);
-          // 
-          // AntFilterMinRating
-          // 
-          this.AntFilterMinRating.Location = new System.Drawing.Point(0, 0);
-          this.AntFilterMinRating.Name = "AntFilterMinRating";
-          this.AntFilterMinRating.Size = new System.Drawing.Size(121, 21);
-          this.AntFilterMinRating.TabIndex = 0;
+          //// 
+          //// AntFilterMinRating
+          //// 
+          //this.AntFilterMinRating.Location = new System.Drawing.Point(0, 0);
+          //this.AntFilterMinRating.Name = "AntFilterMinRating";
+          //this.AntFilterMinRating.Size = new System.Drawing.Size(121, 21);
+          //this.AntFilterMinRating.TabIndex = 0;
           // 
           // AntFilterSign4
           // 
@@ -4951,7 +4951,7 @@
         private Button ButQuit;
         private ComboBox AntFilterSign4;
         private ComboBox AntFilterSign3;
-        private ComboBox AntFilterMinRating;
+        //private ComboBox AntFilterMinRating;
         private ComboBox AntFilterItem3;
         private TextBox AntFilterText3;
         private ComboBox AntFilterItem4;
