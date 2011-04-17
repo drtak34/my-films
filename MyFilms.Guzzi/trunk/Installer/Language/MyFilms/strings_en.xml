@@ -70,6 +70,7 @@
     <String id="107986">Films</String>
     <String id="107987">Films</String>
     <String id="107988">Films</String>
+    <String id="1079850">Update online availability</String>
     <String id="1079857">Download TMDB data (online)</String>
     <String id="1079858">Manual Selection with Keyboard</String>
     <String id="1079859">Choose Search Expression</String>
@@ -252,6 +253,7 @@
     <String id="10798755">Technical Info</String>
     <String id="10798761">Load  Covers (TMDB)</String>
     <String id="10798762">Change Cover</String>
+    <String id="10798770">Show only films with media available ({0})</String>
     <String id="10798800">Warning: possible long runtime!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">started for {0} films?</String>

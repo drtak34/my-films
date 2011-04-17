@@ -64,6 +64,7 @@
     <String id="107986">My Films</String>
     <String id="107987">My Films</String>
     <String id="107988">My Films</String>
+    <String id="1079850">Update online availability</String>
     <String id="1079861">Actualizar BD (AMCUpdater)</String>
     <String id="1079862">Descargar fondos de la película</String>
     <String id="1079863">Cambiar opción de colector 'usar siempre ese script' ({0})</String>
@@ -194,6 +195,7 @@
     <String id="10798755">Datos técnicos</String>
     <String id="10798761">Load  Covers (TMDB)</String>
     <String id="10798762">Change Cover</String>
+    <String id="10798770">Show only films with media available ({0})</String>
     <String id="10798800">Warning: possible long runtime!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">started for {0} films?</String>

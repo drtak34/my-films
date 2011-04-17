@@ -1883,6 +1883,7 @@ namespace MyFilmsPlugin.MyFilms {
                 this.columnLength_Num.ReadOnly = true;
                 this.columnLength_Num.DefaultValue = ((int)(0));
                 this.columnPicture.Namespace = "";
+                this.columnIsOnline.DefaultValue = ((string)("true"));
                 this.columnContents_Id.AutoIncrement = true;
                 this.columnContents_Id.AllowDBNull = false;
                 this.columnContents_Id.Namespace = "";

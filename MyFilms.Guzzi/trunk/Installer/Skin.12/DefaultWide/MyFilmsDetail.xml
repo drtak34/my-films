@@ -59,19 +59,79 @@
 			<randomize>true</randomize>
 		</control>
 		<control>
-			<description>BG Overlay</description>
+			<description>BG Overlay (dims fanart)</description>
 			<type>image</type>
 			<id>0</id>
+			<posX>0</posX>
+			<posY>0</posY>
 			<width>1280</width>
 			<height>720</height>
 			<texture>black.png</texture>
-			<colordiffuse>aaffffff</colordiffuse>
+			<colordiffuse>95ffffff</colordiffuse>
 			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
-<!--		<import>common.window.overlay.xml</import> -->
-		<import>common.time.xml</import>
+		<control>
+			<description>Overlay for FanArt</description>
+			<id>0</id>
+			<type>image</type>
+			<posX>0</posX>
+			<posY>0</posY>
+			<width>1280</width>
+			<height>720</height>
+			<texture>backgroundthumbsview.png</texture>
+			<colordiffuse>eeffffff</colordiffuse>
+			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>Top Gradient Overlay for Fanart View</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>-50</posX>
+			<posY>0</posY>
+			<width>1680</width>
+			<height>100</height>
+			<texture>MyFilms\gradient_top.png</texture>
+			<colordiffuse>90ffffff</colordiffuse>
+			<visible>Control.HasFocus(10099)</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>Bottom Gradient Overlay for Fanart View</description>
+			<id>0</id>
+			<type>image</type>
+			<posX>-200</posX>
+			<posY>630</posY>
+			<width>1680</width>
+			<height>100</height>
+			<texture>MyFilms\gradient.png</texture>
+			<visible>Control.HasFocus(10099)</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+<!--		<import>common.window.overlay.xml</import>
+			<import>common.time.xml</import> -->
+		<control>
+		  <description>Date Time</description>
+		  <type>label</type>
+		  <id>0</id>
+		  <posX>1244</posX>
+		  <posY>20</posY>
+		  <label>#date | #time</label>
+		  <align>right</align>
+		  <font>font13</font>
+		  <textcolor>ffa9d0f7</textcolor>
+		</control>
 		<control>
 			<description>My Films logo</description>
 			<type>image</type>
@@ -673,12 +733,12 @@
 		<posX>730</posX>
 		<posY>355</posY>
 		<width>520</width>
-		<height>90</height>
+		<height>105</height>
 		<textcolor>FFFFFFFF</textcolor>
 		<label>#myfilms.db.actors.value</label>
 		<font>font12</font>
 		<seperator>: : :</seperator>
-		<lineSpacing>1</lineSpacing>
+		<lineSpacing>.9</lineSpacing>
 		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	<control>
@@ -693,7 +753,7 @@
 		<label>#myfilms.db.description.value</label>
 		<seperator>: : :</seperator>
 		<font>font13</font>
-		<lineSpacing>1</lineSpacing>
+		<lineSpacing>.9</lineSpacing>
 		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
 	</control>
 	
@@ -717,12 +777,12 @@
 		<posX>520</posX>
 		<posY>200</posY>
 		<width>740</width>
-		<height>412</height>
+		<height>430</height>
 		<textcolor>FFFFFFFF</textcolor>
 		<label>#myfilms.db.description.value</label>
 		<seperator>: : :</seperator>
 		<font>font13</font>
-		<lineSpacing>1</lineSpacing>
+		<lineSpacing>.9</lineSpacing>
 		<visible>Control.HasFocus(10001)</visible>
 	</control>
 
@@ -746,12 +806,12 @@
 		<posX>520</posX>
 		<posY>200</posY>
 		<width>740</width>
-		<height>412</height>
+		<height>430</height>
 		<textcolor>FFFFFFFF</textcolor>
 		<label>#myfilms.db.comments.value</label>
 		<seperator>: : :</seperator>
 		<font>font13</font>
-		<lineSpacing>1</lineSpacing>
+		<lineSpacing>.9</lineSpacing>
 		<visible>Control.HasFocus(10002)</visible>
 	</control>
 	
@@ -780,7 +840,7 @@
 		<label>#myfilms.db.actors.value</label>
 		<seperator>: : :</seperator>
 		<font>font13</font>
-		<lineSpacing>1</lineSpacing>
+		<lineSpacing>.9</lineSpacing>
 		<visible>Control.HasFocus(10003)</visible>
 	</control>
 	
@@ -1349,36 +1409,6 @@
 	</control>
 
 <!-- Start Special View for FullColorFanart -->
-	<control>
-		<description>BG</description>
-		<type>image</type>
-		<id>0</id>
-		<posX>-50</posX>
-		<posY>0</posY>
-		<width>1680</width>
-		<height>100</height>
-		<texture>MyFilms\gradient_top.png</texture>
-		<colordiffuse>90ffffff</colordiffuse>
-		<visible>Control.HasFocus(10099)</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
-	</control>
-	<control>
-		<id>0</id>
-		<type>image</type>
-		<posX>-200</posX>
-		<posY>630</posY>
-		<width>1680</width>
-		<height>100</height>
-		<texture>MyFilms\gradient.png</texture>
-		<visible>Control.HasFocus(10099)</visible>
-		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
-	</control>
 	<control>
 		<type>label</type>
 		<description>Title (FullColor Fanart View)</description>

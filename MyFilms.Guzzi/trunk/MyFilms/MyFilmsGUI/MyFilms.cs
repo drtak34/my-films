@@ -290,17 +290,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //Guzzi Addons for Global nonpermanent Trailer and MinRating Filters
         public bool GlobalFilterTrailersOnly = false;
         public bool GlobalFilterMinRating = false;
+        public bool GlobalFilterIsOnlineOnly = false;
         //public string GlobalFilterString = string.Empty;
         public string GlobalFilterStringTrailersOnly = string.Empty;
         public string GlobalFilterStringUnwatched = string.Empty;
         public string GlobalFilterStringMinRating = string.Empty;
+        public string GlobalFilterStringIsOnline = string.Empty;
         //public string GlobalUnwatchedFilterString = string.Empty;
         public bool MovieScrobbling = false;
         public int actorID = 0;
         public static string CurrentMovie;
         //public static string CurrentFanartDir;
         public enum optimizeOption { optimizeDisabled };
-        public static bool InitialStart = false; //Added to implement InitialViewSetup, ToDo: Add Logic
+        public static bool InitialStart = false; //Added to implement InitialViewSetup
+        public static bool InitialIsOnlineScan = false; //Added to implement switch if facade should display media availability
         private bool LoadWithParameterSupported = false;
 
         public bool BrowseTheWebRightPlugin = false;
@@ -323,7 +326,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         System.ComponentModel.BackgroundWorker bgUpdateActors = new System.ComponentModel.BackgroundWorker();
         System.ComponentModel.BackgroundWorker bgUpdateTrailer = new System.ComponentModel.BackgroundWorker();
         System.ComponentModel.BackgroundWorker bgLoadMovieList = new System.ComponentModel.BackgroundWorker();
-
+        System.ComponentModel.BackgroundWorker bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
         #endregion
 
 
@@ -567,15 +570,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Originally Deactivated by Zebons    
                     // ********************************
                     // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
-                    //if (!bgLoadMovieList.IsBusy)
-                    //{
-                    //  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
-                    //  AsynLoadMovieList();
-                    //}
+                    if (!bgLoadMovieList.IsBusy)
+                    {
+                      LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
+                      AsynLoadMovieList();
+                    }
                     // ********************************
                     // Originally Deactivated by Zebons    
-                    
-                    
+
+                    //// Start Filesystemwatcher to watch for changes in availability
+                    //FileSystemWatcher FSW = new FileSystemWatcher("c:\\", "*.cs");
+                    //FswHandler Handler = new FswHandler();
+
+                    //FSW.Changed += Handler.OnEvent;
+                    //FSW.Created += Handler.OnEvent;
+                    //FSW.Deleted += Handler.OnEvent;
+                    //FSW.Renamed += Handler.OnEvent;
+
+                    //FSW.EnableRaisingEvents = true;
+
+                    //System.Threading.Thread.Sleep(555000);
+                    //// change the file manually to see which events are fired
+
+                    //FSW.EnableRaisingEvents = false;
+
                     GUIControl.ShowControl(GetID, 34);
                     GUIWaitCursor.Hide();
 
@@ -1121,7 +1139,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SetFilmSelect();
             //ImgLstFilm.SetFileName("#myfilms.picture"); // Disabled because replaced by SpeedLoader
             //ImgLstFilm2.SetFileName("#myfilms.picture");
-            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
             r = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
 			      //r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
             LogMyFilms.Debug("MF: (GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
@@ -1342,6 +1360,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     else
                       item.IconImage = strThumb;
                     item.ItemId = number;
+                    // set availability status
+                    if (InitialIsOnlineScan) // only display media status, if onlinescan was done !
+                    {
+                      if (string.IsNullOrEmpty(sr["IsOnline"].ToString()))
+                        item.IsRemote = false;
+                      else
+                        if (bool.Parse(sr["IsOnline"].ToString())) // if its online, set IsRemote to false !
+                        {
+                          item.IsRemote = false;
+                        }
+                        else
+                          item.IsRemote = true;
+                    }
                     item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
                     facadeView.Add(item);
 
@@ -1461,6 +1492,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //GUIControl.ShowControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 MyFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage.ToString());
+                if (InitialIsOnlineScan)
+                  MyFilmsDetail.setGUIProperty("isonline", facadeView.SelectedListItem.IsRemote.ToString());
+                else
+                  MyFilmsDetail.clearGUIProperty("isonline");
                 // this.Load_Rating(0); // old method - nor more used
                 MyFilmsDetail.clearGUIProperty("logos_id2001");
                 MyFilmsDetail.clearGUIProperty("logos_id2002");
@@ -1742,6 +1777,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
           choiceViewGlobalOptions.Add("globalunwatchedfilter");
 
+
+          // Change global MovieFilter (Only Movies with media files reachable 
+          if (InitialIsOnlineScan) // (requires at least initial scan!)
+          {
+            if (GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798628)));
+            if (!GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798629)));
+            choiceViewGlobalOptions.Add("filterdbisonline");
+          }
+
           // Change global MovieFilter (Only Movies with Trailer)
           if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
           {
@@ -1984,7 +2028,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             facadeView.Clear();
             int wi = 0;
 
-            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - GlobalFilterString          : '" + GlobalFilterString + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - conf.StrDfltSelect          : '" + conf.StrDfltSelect + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - WstrSelect                  : '" + WstrSelect + "'");
@@ -2475,6 +2519,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   GlobalFilterStringUnwatched = String.Empty;
                   MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
                 }
+
+                GlobalFilterIsOnlineOnly = false;
+                GlobalFilterStringIsOnline = String.Empty;
+                MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
+              
                 MovieScrobbling = false; // reset scrobbler filter setting
             }
             if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
@@ -2818,6 +2867,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                             Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
                         Configuration.CurrentConfig = newConfig;
+                        InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
                         InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
                         MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
                         Load_Config(newConfig, true);
@@ -2950,6 +3000,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (!MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("globalunwatchedfilter");
 
+                    // Change global MovieFilter (Only Movies with media files reachable (requires at least initial scan!)
+                    if (InitialIsOnlineScan)
+                    {
+                      if (GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798628)));
+                      if (!GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798629)));
+                      choiceViewGlobalOptions.Add("filterdbisonline");
+                    }
+
                     // Change global MovieFilter (Only Movies with Trailer)
                     if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                     {
@@ -3009,6 +3067,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlg2.Reset();
                     dlg2.SetHeading(GUILocalizeStrings.Get(10798690)); // Global Updates ...
                     System.Collections.Generic.List<string> choiceViewGlobalUpdates = new System.Collections.Generic.List<string>();
+
+                    dlg2.Add(GUILocalizeStrings.Get(1079850));   // Update Online status - to check availability if media files
+                    choiceViewGlobalUpdates.Add("isonlinecheck");
 
                     if (MyFilms.conf.StrAMCUpd)
                     {
@@ -3105,6 +3166,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (!Context_Menu)
                       Change_view("globaloptions");
                     else 
+                      Context_Menu = false;
+                    break;
+
+                case "filterdbisonline":
+                    // GlobalFilterIsOnline
+                    GlobalFilterIsOnlineOnly = !GlobalFilterIsOnlineOnly;
+                    LogMyFilms.Info("MF: Global filter for IsOnline available media files is now set to '" + GlobalFilterIsOnlineOnly + "'");
+                    if (GlobalFilterIsOnlineOnly)
+                    {
+                      GlobalFilterStringIsOnline = "IsOnline like 'true' AND ";
+                      MyFilmsDetail.setGUIProperty("globalfilter.isonline", "true");
+                    }
+                    else
+                    {
+                      GlobalFilterStringIsOnline = String.Empty;
+                      MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
+                    }
+                    LogMyFilms.Info("MF: (SetGlobalFilterString IsOnline) - 'GlobalFilterStringIsOnline' = '" + GlobalFilterStringIsOnline + "'");
+                    GUIWaitCursor.Show();
+                    Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                    GUIWaitCursor.Hide();
+                    if (!Context_Menu)
+                      Change_view("globaloptions");
+                    else
                       Context_Menu = false;
                     break;
 
@@ -3227,12 +3312,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       Context_Menu = false;
                     break;
 
+                case "isonlinecheck":
+                    // Launch IsOnlineCheck in batch mode
+                    if (bgIsOnlineCheck.IsBusy)
+                    {
+                      ShowMessageDialog(GUILocalizeStrings.Get(1079850), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
+                      break;
+                    }
+                    this.AsynIsOnlineCheck();
+                    GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                    break;
+
                 case "updatedb":
                     // Launch AMCUpdater in batch mode
                     if (bgUpdateDB.IsBusy)
                     {
-                        ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
-                        break;
+                      ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
+                      break;
                     }
                     AsynUpdateDatabase();
                     GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
@@ -4199,6 +4295,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (!MyFilms.conf.GlobalUnwatchedOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798696), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("globalunwatchedfilter");
 
+                    // Change global MovieFilter (Only Movies with media files reachable (requires at least initial scan!)
+                    if (InitialIsOnlineScan)
+                    {
+                      if (GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798628)));
+                      if (!GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798629)));
+                      choiceViewGlobalOptions.Add("filterdbisonline");
+                    }
+
                     // Change global MovieFilter (Only Movies with Trailer)
                     if (MyFilms.conf.StrStorageTrailer.Length > 0 && MyFilms.conf.StrStorageTrailer != "(none)") // StrDirStorTrailer only required for extended search
                     {
@@ -4880,7 +4984,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (dlg == null) return;
                     dlg.Reset();
                     dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-                    string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+                    string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
                     DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
                     w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
                     w_count.Add(0);
@@ -5288,7 +5392,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlg.Reset();
                     dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
                     //Modified to checked for GlobalFilterString
-                    string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+                    string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
                     DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
                     //DataColumn[] wc = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
                     w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
@@ -5493,7 +5597,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (keyboard.Text != searchstring)
                 UpdateRecentSearch(keyboard.Text);
               ArrayList w_count = new ArrayList();
-              string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+              string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
               switch (choiceSearch[dlg.SelectedLabel])
                 {
                   case "all":
@@ -5812,14 +5916,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("view"); // Try to properly clean main view when entering
             MyFilmsDetail.clearGUIProperty("select");
 
-            GlobalFilterStringUnwatched = ""; // Will be later initialized from setting MyFilms.conf.GlobalUnwatchedOnly
+            GlobalFilterStringUnwatched = string.Empty; // Will be later initialized from setting MyFilms.conf.GlobalUnwatchedOnly
             MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
+            GlobalFilterStringIsOnline = string.Empty;
+            MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
             if (!GlobalFilterTrailersOnly)
             {
               GlobalFilterStringTrailersOnly = "";
               MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
             }
-          
+
+            if (!GlobalFilterIsOnlineOnly)
+            {
+              GlobalFilterStringIsOnline = "";
+              MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
+            }
+
             if (!GlobalFilterMinRating)
             {
               GlobalFilterStringMinRating = "";
@@ -5884,7 +5996,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
             bgUpdateFanart.RunWorkerAsync(MyFilms.r);
             LogMyFilms.Info("MF: : Downloading backdrop fanart in batch mode");
-
           }
         }
 
@@ -5929,8 +6040,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             LogMyFilms.Info("MF: Backdrop Fanart download finished");
         }
-
-
 
 
         //*****************************************************************************************
@@ -6033,6 +6142,80 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             LogMyFilms.Info("MF: Loading Movie List in batch mode finished");
         }
+
+        //*****************************************************************************************
+        //*  Check availability status of media files in batch mode                                                   *
+        //*****************************************************************************************
+        public void AsynIsOnlineCheck()
+        {
+          if (!bgIsOnlineCheck.IsBusy)
+          {
+            LogMyFilms.Debug("MF: AsynIsOnlineCheck() started in background !");
+            bgIsOnlineCheck.DoWork += new DoWorkEventHandler(bgIsOnlineCheck_DoWork);
+            bgIsOnlineCheck.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgIsOnlineCheck_RunWorkerCompleted);
+            LogMyFilms.Info("MF: Check IsOnline  started in batch mode");
+            bgIsOnlineCheck.RunWorkerAsync(MyFilms.r);
+          }
+          else
+            LogMyFilms.Debug(("MF: AsynIsOnlineCheck() could not be launched because already running !"));
+        }
+
+        static void bgIsOnlineCheck_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+          if (MyFilms.conf.StrStorage == null || MyFilms.conf.StrStorage == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorage))
+          {
+            LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking Online Status - Source field not properly defined in setup!");
+            return;
+          }
+          LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Now checking Online Status - Source field is: '" + MyFilms.conf.StrStorage.ToString() + "'");
+          BackgroundWorker worker = sender as BackgroundWorker;
+          Regex oRegex= new System.Text.RegularExpressions.Regex(";");
+          DateTime startTime = DateTime.Now;
+          foreach (DataRow t in MyFilms.r)
+          {
+            bool isonline = true; // set true as default - even if it might not be like that ...
+            string fileName = string.Empty;
+
+            try
+            { fileName = t[MyFilms.conf.StrStorage].ToString().Trim(); }
+            catch
+            { fileName = string.Empty; }
+            //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
+            
+            string[] Mediafiles = oRegex.Split(fileName);
+            foreach (string mediafile in Mediafiles)
+            {
+              if (System.IO.File.Exists(mediafile))
+              {
+                isonline = true;
+                LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork - nedia ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              }
+              else
+              {
+                isonline = false;
+                LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork - media OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              }
+            }
+            t["IsOnline"] = isonline.ToString();
+            }
+          DateTime stopTime = DateTime.Now;
+          TimeSpan duration = stopTime - startTime;
+          LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork - total runtime was: '" + duration + "', runtime in seconds: '" + duration.TotalSeconds + "'");
+          // MyFilmsDetail.Update_XML_database(); // -> We do not require to save DB, as we don't need the infos persistent here - if user saves on other places, it will be saved anyway.
+        }
+
+        void bgIsOnlineCheck_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+          LogMyFilms.Info("MF: Check IsOnline in batch mode finished. (GetID = '" + GetID + "')");
+          if (GetID == ID_MyFilms)
+          {
+            //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+            //Load_Config(Configuration.CurrentConfig, true);
+            InitialIsOnlineScan = true; // let MF know, the status has been retrieved !
+            Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+          }
+        }
+
 
         //*****************************************************************************************
         //*  Search and register Trailers in Batch mode                                               *
@@ -6574,7 +6757,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          {
            case "root":
 
-             if ((GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating).Length > 0)
+             if ((GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating).Length > 0)
              {
                //conf.StrTxtSelect = GUILocalizeStrings.Get(10798622) + " " + GUILocalizeStrings.Get(10798632); // 10798622 all films // 10798632 (global filter active) 
                conf.StrTxtSelect = GUILocalizeStrings.Get(10798632); // 10798622 all films // 10798632 (global filter active) / Filtered
@@ -6712,6 +6895,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.clearGUIProperty("config.configfilter");
          MyFilmsDetail.clearGUIProperty("view");
          MyFilmsDetail.clearGUIProperty("select");
+         MyFilmsDetail.clearGUIProperty("isonline");
          MyFilmsDetail.clearGUIProperty("picture");
          MyFilmsDetail.clearGUIProperty("currentfanart");
        }
@@ -6859,6 +7043,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         return "";
         //return GUIWindow._loadParameter; // Requires MePo 1.2+
+      }
+
+      public class FswHandler
+      {
+        public void OnEvent(Object source, FileSystemEventArgs Args)
+        {
+          // ToDo: Add required actions here ?
+          //Console.Out.WriteLine(Args.ChangeType.ToString());
+        }
       }
 
     #endregion
