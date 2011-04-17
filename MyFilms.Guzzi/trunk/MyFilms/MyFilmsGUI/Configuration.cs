@@ -352,11 +352,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 DefaultCoverViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverViews", string.Empty);
                 DefaultFanartImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultFanartImage", string.Empty);
                 StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5");
+                StrAntFilterMinRating = StrAntFilterMinRating.Replace(",","."); // added to always convert to decimal dot (culture.invariant!)
                 // Added to cope with local number settings:
-                if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ".")
-                  StrAntFilterMinRating = StrAntFilterMinRating.Replace(",", ".");
-                if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
-                  StrAntFilterMinRating = StrAntFilterMinRating.Replace(".", ",");
+                //if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ".")
+                //  StrAntFilterMinRating = StrAntFilterMinRating.Replace(",", ".");
+                //if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
+                //  StrAntFilterMinRating = StrAntFilterMinRating.Replace(".", ",");
                 //StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
                 StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", string.Empty);
                 StrPicturePrefix = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PicturePrefix", string.Empty);
@@ -1392,7 +1393,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
-            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch1", MyFilms.conf.StrRecentSearch1);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch2", MyFilms.conf.StrRecentSearch2);

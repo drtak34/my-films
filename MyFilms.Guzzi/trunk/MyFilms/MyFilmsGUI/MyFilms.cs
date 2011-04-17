@@ -3261,7 +3261,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       //{
                       //  wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating.Replace(",", "."));
                       //}
-                      wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating);
+                      wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating, CultureInfo.InvariantCulture);
                       //try { wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating); }
                       //    catch
                       //    {
@@ -3278,15 +3278,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         dlgRating.Rating = 0;
                     dlgRating.SetTitle(GUILocalizeStrings.Get(1079881));
                     dlgRating.DoModal(GetID);
-
-                    //NumberFormatInfo nfiback = new NumberFormatInfo();
-                    //nfiback.NumberDecimalSeparator = ".";
-                    //nfiback.NumberGroupSeparator = "";
-                    //MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", nfiback);
-                    MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0");
-                    //LogMyFilms.Debug("MF: Storing StrAntFilterMinRating with formatted string value: '" + dlgRating.Rating.ToString("0.0") + "'");
-                    //MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString().Replace("," , ".");
-                    //LogMyFilms.Debug("MF: Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
+                    MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", CultureInfo.InvariantCulture);
                     XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
                     LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
                     //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
