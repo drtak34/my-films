@@ -1679,11 +1679,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceView.Add("country");
             choiceView.Add("actors");
             
-            if (conf.StrStorage.Length != 0 && conf.StrStorage != "(none)")
-            {
-                dlg1.Add(GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
-                choiceView.Add("storage");
-            }
+            // Commented, as we have replaced this feature with global overlay filter for "media available"
+            //if (conf.StrStorage.Length != 0 && conf.StrStorage != "(none)")
+            //{
+            //    dlg1.Add(GUILocalizeStrings.Get(154) + " " + GUILocalizeStrings.Get(1951));//storage
+            //    choiceView.Add("storage");
+            //}
 
             for (int i = 0; i < 5; i++)
             {
