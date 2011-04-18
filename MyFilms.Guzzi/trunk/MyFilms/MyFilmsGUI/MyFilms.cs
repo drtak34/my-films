@@ -1361,7 +1361,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       item.IconImage = strThumb;
                     item.ItemId = number;
                     // set availability status
-                    if (InitialIsOnlineScan) // only display media status, if onlinescan was done !
+                    if (InitialIsOnlineScan && !GlobalFilterIsOnlineOnly) // only display media status, if onlinescan was done AND filter is not active!
                     {
                       if (string.IsNullOrEmpty(sr["IsOnline"].ToString()))
                         item.IsRemote = false;
