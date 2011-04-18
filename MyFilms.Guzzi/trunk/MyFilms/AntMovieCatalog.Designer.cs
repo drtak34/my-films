@@ -1032,6 +1032,8 @@ namespace MyFilmsPlugin.MyFilms {
             
             private global::System.Data.DataColumn columnIsOnline;
             
+            private global::System.Data.DataColumn columnIsOnlineTrailer;
+            
             private global::System.Data.DataColumn columnAspectratio;
             
             private global::System.Data.DataColumn columnContents_Id;
@@ -1418,6 +1420,13 @@ namespace MyFilmsPlugin.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn IsOnlineTrailerColumn {
+                get {
+                    return this.columnIsOnlineTrailer;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn AspectratioColumn {
                 get {
                     return this.columnAspectratio;
@@ -1510,6 +1519,7 @@ namespace MyFilmsPlugin.MyFilms {
                         string Studio, 
                         string IMDB_Rank, 
                         string IsOnline, 
+                        string IsOnlineTrailer, 
                         string Aspectratio) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -1562,6 +1572,7 @@ namespace MyFilmsPlugin.MyFilms {
                         Studio,
                         IMDB_Rank,
                         IsOnline,
+                        IsOnlineTrailer,
                         Aspectratio,
                         null};
                 rowMovieRow.ItemArray = columnValuesArray;
@@ -1618,6 +1629,7 @@ namespace MyFilmsPlugin.MyFilms {
                         string Studio, 
                         string IMDB_Rank, 
                         string IsOnline, 
+                        string IsOnlineTrailer, 
                         string Aspectratio) {
                 MovieRow rowMovieRow = ((MovieRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
@@ -1670,6 +1682,7 @@ namespace MyFilmsPlugin.MyFilms {
                         Studio,
                         IMDB_Rank,
                         IsOnline,
+                        IsOnlineTrailer,
                         Aspectratio,
                         null};
                 rowMovieRow.ItemArray = columnValuesArray;
@@ -1740,6 +1753,7 @@ namespace MyFilmsPlugin.MyFilms {
                 this.columnStudio = base.Columns["Studio"];
                 this.columnIMDB_Rank = base.Columns["IMDB_Rank"];
                 this.columnIsOnline = base.Columns["IsOnline"];
+                this.columnIsOnlineTrailer = base.Columns["IsOnlineTrailer"];
                 this.columnAspectratio = base.Columns["Aspectratio"];
                 this.columnContents_Id = base.Columns["Contents_Id"];
             }
@@ -1844,6 +1858,8 @@ namespace MyFilmsPlugin.MyFilms {
                 base.Columns.Add(this.columnIMDB_Rank);
                 this.columnIsOnline = new global::System.Data.DataColumn("IsOnline", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIsOnline);
+                this.columnIsOnlineTrailer = new global::System.Data.DataColumn("IsOnlineTrailer", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnIsOnlineTrailer);
                 this.columnAspectratio = new global::System.Data.DataColumn("Aspectratio", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAspectratio);
                 this.columnContents_Id = new global::System.Data.DataColumn("Contents_Id", typeof(int), null, global::System.Data.MappingType.Hidden);
@@ -1884,6 +1900,7 @@ namespace MyFilmsPlugin.MyFilms {
                 this.columnLength_Num.DefaultValue = ((int)(0));
                 this.columnPicture.Namespace = "";
                 this.columnIsOnline.DefaultValue = ((string)("true"));
+                this.columnIsOnlineTrailer.DefaultValue = ((string)("true"));
                 this.columnContents_Id.AutoIncrement = true;
                 this.columnContents_Id.AllowDBNull = false;
                 this.columnContents_Id.Namespace = "";
@@ -3504,6 +3521,21 @@ namespace MyFilmsPlugin.MyFilms {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string IsOnlineTrailer {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.IsOnlineTrailerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte IsOnlineTrailer in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.IsOnlineTrailerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Aspectratio {
                 get {
                     try {
@@ -4026,6 +4058,16 @@ namespace MyFilmsPlugin.MyFilms {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetIsOnlineNull() {
                 this[this.tableMovie.IsOnlineColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsIsOnlineTrailerNull() {
+                return this.IsNull(this.tableMovie.IsOnlineTrailerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetIsOnlineTrailerNull() {
+                this[this.tableMovie.IsOnlineTrailerColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
