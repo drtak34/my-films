@@ -220,7 +220,7 @@
 			<description>Config Name and Filter</description>
 			<id>1</id>
 			<posX>425</posX>
-			<posY>30</posY>
+			<posY>37</posY>
 			<width>430</width>
 			<font>font14</font>
 			<textcolor>cca9d0f7</textcolor>
@@ -443,6 +443,8 @@
 					<IconYOff>3</IconYOff>
 					<itemwidth>18</itemwidth>
 					<itemHeight>30</itemHeight>
+					<textureFocus>MyFilms\list_sub_focus.png</textureFocus>
+					<textureNoFocus>-</textureNoFocus>
 					<keepaspectratio>yes</keepaspectratio>
 					<font>font13</font>
 					<spinPosX>1111</spinPosX>
@@ -452,7 +454,7 @@
 					<shadowColor>-</shadowColor>
 					<colordiffuse>ffffffff</colordiffuse>
 					<unfocusedAlpha>200</unfocusedAlpha>
-         		</control>
+					</control>
         		<control>
           			<description>Filmstrip view</description>
 					<type>filmstrip</type>
@@ -780,16 +782,16 @@
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 3</description>
+			<description>User Item 2</description>
 			<id>1</id>
-			<posX>1244</posX>
-			<posY>630</posY>
+			<posX>1200</posX>
+			<posY>632</posY>
 			<width>250</width>
 			<align>right</align>
-			<label>#myfilms.user.item3.label: #myfilms.user.item3.value</label>
+			<label>#myfilms.user.item2.label: #myfilms.user.item2.value</label>
 			<font>font11</font>
 			<textcolor>7fffffff</textcolor>
-			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item3.value)</visible>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
 		</control>
 		<control>
 			<type>image</type>

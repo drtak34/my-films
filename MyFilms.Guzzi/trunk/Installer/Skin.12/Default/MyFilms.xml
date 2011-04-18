@@ -445,6 +445,8 @@
 					<IconYOff>3</IconYOff>
 					<itemwidth>18</itemwidth>
 					<itemHeight>30</itemHeight>
+					<textureFocus>MyFilms\list_sub_focus.png</textureFocus>
+					<textureNoFocus>-</textureNoFocus>
 					<keepaspectratio>yes</keepaspectratio>
 					<spinPosX>650</spinPosX>
 					<spinPosY>538</spinPosY>
@@ -689,6 +691,7 @@
 			<label>#myfilms.db.description.value</label>
 			<seperator>: : :</seperator>
 			<lineSpacing>.9</lineSpacing>
+			<shadowColor>-</shadowColor>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow</visible>
 		</control>
 		<control>
@@ -751,8 +754,8 @@
 			<id>1</id>
 			<posX>45</posX>
 			<posY>515</posY>
-			<width>65</width>
-			<label>#myfilms.user.item1.label</label>
+			<width>90</width>
+			<label>#myfilms.user.item1.label: </label>
 			<font>font11</font>
 			<textcolor>7fffffff</textcolor>
 			<visible>string.equals(#myfilms.user.item1.value)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
@@ -761,24 +764,35 @@
 			<type>fadelabel</type>
 			<description>User Item 1</description>
 			<id>1</id>
-			<posX>115</posX>
+			<posX>140</posX>
 			<posY>515</posY>
-			<width>180</width>
+			<width>165</width>
 			<label>#myfilms.user.item1.value</label>
 			<font>font11</font>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 3</description>
+			<description>User Item 2 Label</description>
 			<id>1</id>
 			<posX>325</posX>
-			<posY>517</posY>
-			<width>350</width>
-			<label>#myfilms.user.item3.label: #myfilms.user.item3.value</label>
+			<posY>515</posY>
+			<width>90</width>
+			<label>#myfilms.user.item2.label: </label>
 			<font>font11</font>
-			<textcolor>ffa9d0f7</textcolor>
-			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item3.value)</visible>
+			<textcolor>7fffffff</textcolor>
+			<visible>string.equals(#myfilms.user.item2.value)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+		</control>
+		<control>
+			<type>fadelabel</type>
+			<description>User Item 2</description>
+			<id>1</id>
+			<posX>410</posX>
+			<posY>515</posY>
+			<width>350</width>
+			<label>#myfilms.user.item2.value</label>
+			<font>font11</font>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
 		</control>
 		<control>
 			<type>image</type>
@@ -944,7 +958,7 @@
 	<control>
 		<type>image</type>
 		<description>UnWatched Icon</description>
-		<id>1</id>
+		<id>0</id>
 		<posX>675</posX>
 		<posY>543</posY>
 		<width>15</width>
@@ -980,7 +994,7 @@
 	<control>
 		<type>image</type>
 		<description>UnWatched Icon</description>
-		<id>1</id>
+		<id>0</id>
 		<posX>240</posX>
 		<posY>435</posY>
 		<width>15</width>
@@ -995,7 +1009,7 @@
 	<control>
 		<type>image</type>
 		<description>Watched Icon</description>
-		<id>1</id>
+		<id>0</id>
 		<posX>240</posX>
 		<posY>435</posY>
 		<width>15</width>
@@ -1013,7 +1027,7 @@
 		<control>
 			<description>Movie available Info Label</description>
 			<type>fadelabel</type>
-			<id>1</id>
+			<id>0</id>
 			<posX>485</posX>
 			<posY>543</posY>
 			<width>80</width>
@@ -1026,7 +1040,7 @@
 		<control>
 			<description>Movie unavailable Icon</description>
 			<type>image</type>
-			<id>1</id>
+			<id>0</id>
 			<posX>490</posX>
 			<posY>545</posY>
 			<width>15</width>
@@ -1040,7 +1054,7 @@
 		<control>
 			<description>Movie available Icon</description>
 			<type>image</type>
-			<id>1</id>
+			<id>0</id>
 			<posX>490</posX>
 			<posY>545</posY>
 			<width>15</width>
@@ -1057,7 +1071,7 @@
 		<control>
 			<description>Trailer available Info Label</description>
 			<type>fadelabel</type>
-			<id>1</id>
+			<id>0</id>
 			<posX>560</posX>
 			<posY>543</posY>
 			<width>80</width>
@@ -1070,7 +1084,7 @@
 		<control>
 			<description>Trailer unavailable Icon</description>
 			<type>image</type>
-			<id>1</id>
+			<id>0</id>
 			<posX>565</posX>
 			<posY>545</posY>
 			<width>15</width>
@@ -1084,7 +1098,7 @@
 		<control>
 			<description>Trailer available Icon</description>
 			<type>image</type>
-			<id>1</id>
+			<id>0</id>
 			<posX>565</posX>
 			<posY>545</posY>
 			<width>15</width>
