@@ -2576,8 +2576,8 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <Version>
       <Major>5</Major>
       <Minor>0</Minor>
-      <Build>0</Build>
-      <Revision>59</Revision>
+      <Build>1</Build>
+      <Revision>705</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2585,7 +2585,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.0.59(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.705(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -4850,14 +4850,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{4a95d884-aaad-40a5-b2b6-751863a769f0}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a36ffaa5-db2f-45fa-8cf1-36982d0f8035}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0d2a075b-f5c7-4cfe-b8ae-1f181f2c91bf}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d5d1f8ef-cf20-4b43-9e38-d814cc6c6448}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

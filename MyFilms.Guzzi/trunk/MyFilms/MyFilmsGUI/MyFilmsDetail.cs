@@ -3976,7 +3976,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (MyFilms.conf.Stritem5.ToLower() == (dc.ColumnName.ToLower()))
                       if (wrep)
                       {
-                        setGUIProperty("user.item1.label", MyFilms.conf.Strlabel5);
+                        setGUIProperty("user.item5.label", MyFilms.conf.Strlabel5);
                         if (MyFilms.conf.Stritem5.ToLower() == "date")
                           setGUIProperty("user.item5.field", "w" + MyFilms.conf.Stritem5.ToLower());
                         else
