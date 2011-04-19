@@ -1492,10 +1492,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //GUIControl.ShowControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 MyFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage.ToString());
-                if (InitialIsOnlineScan)
-                  MyFilmsDetail.setGUIProperty("isonline", facadeView.SelectedListItem.IsRemote.ToString());
-                else
-                  MyFilmsDetail.clearGUIProperty("isonline");
                 // this.Load_Rating(0); // old method - nor more used
                 MyFilmsDetail.clearGUIProperty("logos_id2001");
                 MyFilmsDetail.clearGUIProperty("logos_id2002");
@@ -1555,6 +1551,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 //m_FanartTimer.Change(0, 10000); // 10000 = 10 sek. // Added to immediately change Fanart - activate to enable timer and reset it !
 
+                if (InitialIsOnlineScan)
+                  MyFilmsDetail.setGUIProperty("isonline", facadeView.SelectedListItem.IsRemote.ToString());
+                else
+                  MyFilmsDetail.clearGUIProperty("isonline");
+                if (InitialIsOnlineScan && MyFilms.conf.StrStorageTrailer.Length > 0)
+                  MyFilmsDetail.setGUIProperty("isonlinetrailer", r[ItemId]["IsOnlineTrailer"].ToString());
+                else
+                  MyFilmsDetail.clearGUIProperty("isonlinetrailer");
                 //XmlConfig XmlConfig = new XmlConfig();
                 //string logo_type = string.Empty;
                 //string wlogos = string.Empty;
@@ -6160,37 +6164,72 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking Online Status - Source field not properly defined in setup!");
             return;
           }
-          LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Now checking Online Status - Source field is: '" + MyFilms.conf.StrStorage.ToString() + "'");
+          LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork: Now checking Online Status - Source field <film> is: '" + conf.StrStorage + "' - Source field <trailer> is: '" + conf.StrStorageTrailer + "'");
           BackgroundWorker worker = sender as BackgroundWorker;
           Regex oRegex= new System.Text.RegularExpressions.Regex(";");
           DateTime startTime = DateTime.Now;
           foreach (DataRow t in MyFilms.r)
           {
+            // Check Movie availability
             bool isonline = true; // set true as default - even if it might not be like that ...
             string fileName = string.Empty;
 
             try
-            { fileName = t[MyFilms.conf.StrStorage].ToString().Trim(); }
+            {
+              fileName = t[MyFilms.conf.StrStorage].ToString().Trim();
+            }
             catch
-            { fileName = string.Empty; }
+            {
+              fileName = string.Empty;
+            }
             //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
-            
+
             string[] Mediafiles = oRegex.Split(fileName);
             foreach (string mediafile in Mediafiles)
             {
               if (System.IO.File.Exists(mediafile))
               {
                 isonline = true;
-                LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork - nedia ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - nedia ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
               }
               else
               {
                 isonline = false;
-                LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork - media OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - media OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
               }
             }
             t["IsOnline"] = isonline.ToString();
+
+            // Check Trailer availability
+            isonline = true; // set true as default - even if it might not be like that ...
+            fileName = string.Empty;
+
+            try
+            {
+              fileName = t[MyFilms.conf.StrStorageTrailer].ToString().Trim();
             }
+            catch
+            {
+              fileName = string.Empty;
+            }
+            //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
+
+            Mediafiles = oRegex.Split(fileName);
+            foreach (string mediafile in Mediafiles)
+            {
+              if (System.IO.File.Exists(mediafile))
+              {
+                isonline = true;
+                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              }
+              else
+              {
+                isonline = false;
+                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              }
+            }
+            t["IsOnlineTrailer"] = isonline.ToString();
+          }
           DateTime stopTime = DateTime.Now;
           TimeSpan duration = stopTime - startTime;
           LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork - total runtime was: '" + duration + "', runtime in seconds: '" + duration.TotalSeconds + "'");
@@ -6889,6 +6928,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.clearGUIProperty("view");
          MyFilmsDetail.clearGUIProperty("select");
          MyFilmsDetail.clearGUIProperty("isonline");
+         MyFilmsDetail.clearGUIProperty("isonlinetrailer");
          MyFilmsDetail.clearGUIProperty("picture");
          MyFilmsDetail.clearGUIProperty("currentfanart");
        }

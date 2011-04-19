@@ -291,6 +291,8 @@ namespace MyFilmsPlugin.MyFilms
                     return GUILocalizeStrings.Get(10798948);
                 case "Edition":
                     return GUILocalizeStrings.Get(10798949);
+                case "IsOnlineTrailer":
+                    return GUILocalizeStrings.Get(10798950);
                 default:
                     return string.Empty;
             }

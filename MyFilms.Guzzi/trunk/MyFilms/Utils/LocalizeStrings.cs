@@ -94,6 +94,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     static public string CurrentLanguage()
     {
+      //string Lang;
+      //try
+      //{ Lang = GUILocalizeStrings.GetCultureName(GUILocalizeStrings.CurrentLanguage()); }
+      //catch (Exception)
+      //{ Lang = CultureInfo.CurrentUICulture.Name; }
+      //LogMyFilms.Info("Using language " + Lang);
+      
       if (_stringProvider == null)
         Load(null);
 

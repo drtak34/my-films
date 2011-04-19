@@ -3886,6 +3886,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.item3.label");
             clearGUIProperty("user.item3.field");
             clearGUIProperty("user.item3.value");
+            clearGUIProperty("user.item4.label");
+            clearGUIProperty("user.item4.field");
+            clearGUIProperty("user.item4.value");
+            clearGUIProperty("user.item5.label");
+            clearGUIProperty("user.item5.field");
+            clearGUIProperty("user.item5.value");
             clearGUIProperty("user.source.value");
             clearGUIProperty("user.sourcetrailer.value");
             clearGUIProperty("user.sourcetrailer.count");
