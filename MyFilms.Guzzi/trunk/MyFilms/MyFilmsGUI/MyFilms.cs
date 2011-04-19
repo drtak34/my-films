@@ -1742,6 +1742,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg1.Add(string.Format(GUILocalizeStrings.Get(10798690)));
             choiceView.Add("globalupdates");
 
+            // Add Submenu for useritemx mapping
+            dlg1.Add(string.Format(GUILocalizeStrings.Get(10798771)));
+            choiceView.Add("globalmappings");
+
             // Add Submenu for Wiki Online Help
             if (MyFilmsDetail.ExtendedStartmode("Contextmenu for Wiki Onlinehelp")) // check if specialmode is configured for disabled features
             {
@@ -3109,6 +3113,101 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         return;
                     }
                     Change_view(choiceViewGlobalUpdates[dlg2.SelectedLabel].ToLower());
+                    return;
+
+                case "globalmappings": // map useritems from GUI
+                    GUIDialogMenu dlg3 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                    if (dlg3 == null) return;
+                    dlg3.Reset();
+                    dlg3.SetHeading(GUILocalizeStrings.Get(10798771)); // Display options ...
+                    System.Collections.Generic.List<string> choiceGlobalMappings = new System.Collections.Generic.List<string>();
+                    dlg3.Add(GUILocalizeStrings.Get(10798773) + " 1 (" + MyFilms.conf.Stritem1 + "-" + MyFilms.conf.Strlabel1 + ")");
+                    choiceGlobalMappings.Add("useritem1");
+                    dlg3.Add(GUILocalizeStrings.Get(10798773) + " 2 (" + MyFilms.conf.Stritem2 + "-" + MyFilms.conf.Strlabel2 + ")");
+                    choiceGlobalMappings.Add("useritem2");
+                    dlg3.Add(GUILocalizeStrings.Get(10798773) + " 3 (" + MyFilms.conf.Stritem3 + "-" + MyFilms.conf.Strlabel3 + ")");
+                    choiceGlobalMappings.Add("useritem3");
+                    dlg3.Add(GUILocalizeStrings.Get(10798773) + " 4 (" + MyFilms.conf.Stritem4 + "-" + MyFilms.conf.Strlabel4 + ")");
+                    choiceGlobalMappings.Add("useritem4");
+                    dlg3.Add(GUILocalizeStrings.Get(10798773) + " 5 (" + MyFilms.conf.Stritem5 + "-" + MyFilms.conf.Strlabel5 + ")");
+                    choiceGlobalMappings.Add("useritem5");
+                    dlg3.DoModal(GetID);
+                    if (dlg3.SelectedLabel == -1)
+                    {return;}
+                    string strUserItemSelection = choiceGlobalMappings[dlg3.SelectedLabel];
+                    dlg3.Reset();
+                    choiceGlobalMappings.Clear();
+
+                    dlg3.SetHeading(GUILocalizeStrings.Get(10798772)); // Choose field ...
+
+                    dlg3.Add("<" + GUILocalizeStrings.Get(10798774) + ">"); // empty
+                    choiceGlobalMappings.Add("");
+
+                    AntMovieCatalog amc = new AntMovieCatalog();
+                    foreach (DataColumn dc in amc.Movie.Columns)
+                    {
+                      if (dc.ColumnName != null && !string.IsNullOrEmpty(BaseMesFilms.Translate_Column(dc.ColumnName)))
+                      {
+                        dlg3.Add(BaseMesFilms.Translate_Column(dc.ColumnName));
+                        choiceGlobalMappings.Add(dc.ColumnName);
+                      }
+                    }
+
+
+
+                    string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
+                    string[] PropertyListLabel = new string[] { "10798658", "10798659", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
+                    for (int ii = 0; ii < 31; ii++)
+                    {
+                        dlg3.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))));
+                        choiceGlobalMappings.Add(PropertyList[ii]);
+                    }
+
+                    // Dont use the propertylist...
+                    //foreach (string wSearch in wSearchList)
+                    //{
+                    //    dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(wSearch));
+                    //    choiceSearch.Add(wSearch);
+                    //}
+                    dlg3.DoModal(GetID);
+                    if (dlg3.SelectedLabel == -1)
+                        return;
+                    string wproperty = choiceGlobalMappings[dlg3.SelectedLabel];
+                    dlg3.Reset();
+                    choiceGlobalMappings.Clear();
+                    LogMyFilms.Debug("MF: Display Options - new field: '" + wproperty + "', new Label: '" + BaseMesFilms.Translate_Column(wproperty) + "'.");
+                    switch (strUserItemSelection)
+                    {
+                      case "useritem1":
+                        MyFilms.conf.Stritem1 = wproperty;
+                        MyFilms.conf.Strlabel1 = BaseMesFilms.Translate_Column(wproperty);
+                        LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem1 + "', Label: '" + conf.Strlabel1 + "'.");
+                        break;
+                      case "useritem2":
+                        MyFilms.conf.Stritem2 = wproperty;
+                        MyFilms.conf.Strlabel2 = BaseMesFilms.Translate_Column(wproperty);
+                        LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem2 + "', Label: '" + conf.Strlabel2 + "'.");
+                        break;
+                      case "useritem3":
+                        MyFilms.conf.Stritem3 = wproperty;
+                        MyFilms.conf.Strlabel3 = BaseMesFilms.Translate_Column(wproperty);
+                        LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem3 + "', Label: '" + conf.Strlabel3 + "'.");
+                        break;
+                      case "useritem4":
+                        MyFilms.conf.Stritem4 = wproperty;
+                        MyFilms.conf.Strlabel4 = BaseMesFilms.Translate_Column(wproperty);
+                        LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem4 + "', Label: '" + conf.Strlabel4 + "'.");
+                        break;
+                      case "useritem5":
+                        MyFilms.conf.Stritem5 = wproperty;
+                        MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
+                        LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
+                        break;
+                      default:
+                        break;
+                    }
+                    MyFilmsDetail.Init_Detailed_DB(); // clear properties
+                    Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     return;
 
                 case "globalwikihelp":

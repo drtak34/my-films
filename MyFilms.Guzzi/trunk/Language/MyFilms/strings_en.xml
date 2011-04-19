@@ -254,6 +254,10 @@
     <String id="10798761">Load  Covers (TMDB)</String>
     <String id="10798762">Change Cover</String>
     <String id="10798770">Show only films with media available ({0})</String>
+    <String id="10798771">Display options ...</String>
+    <String id="10798772">Choose Field ...</String>
+    <String id="10798773">Display Item</String>
+    <String id="10798774">empty</String>
     <String id="10798800">Warning: possible long runtime!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">started for {0} films?</String>

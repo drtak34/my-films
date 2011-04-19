@@ -253,6 +253,10 @@
 	<String id="10798761">Carica  Copertine(TMDB)</String>
     <String id="10798762">Cambia Copertine</String>
     <String id="10798770">Show only films with media available ({0})</String>
+    <String id="10798771">Display options ...</String>
+    <String id="10798772">Choose Field ...</String>
+    <String id="10798773">Display Item</String>
+    <String id="10798774">empty</String>
     <String id="10798800">Attenzione: possibile errore runtime!</String>
     <String id="10798801">Il Trailer dovrebbe essere ricercato</String>
     <String id="10798802">Inizializzato per {0} films?</String>

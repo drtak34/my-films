@@ -1400,7 +1400,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch3", MyFilms.conf.StrRecentSearch3);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch4", MyFilms.conf.StrRecentSearch4);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "RecentSearch5", MyFilms.conf.StrRecentSearch5);
-
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem1", MyFilms.conf.Stritem1);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem2", MyFilms.conf.Stritem2);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem3", MyFilms.conf.Stritem3);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem4", MyFilms.conf.Stritem4);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem5", MyFilms.conf.Stritem5);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel1", MyFilms.conf.Strlabel1);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel2", MyFilms.conf.Strlabel2);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel3", MyFilms.conf.Strlabel3);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel4", MyFilms.conf.Strlabel4);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel5", MyFilms.conf.Strlabel5);
             switch (MyFilms.conf.StrFileType)
                 {
                     case "0":
