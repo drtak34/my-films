@@ -110,6 +110,8 @@
     <String id="1079894">Visto</String>
     <String id="1079895">Non Visto</String>
     <String id="1079896">Persone</String>
+    <String id="1079897">Use list layout for groups ({0})</String>
+    <String id="1079898">Ask if WOL should be sent ({0})</String>
     <String id="1079901">Vista (Layout) ...</String>
     <String id="1079902">Ordinato per ...</String>
     <String id="1079903">Cambia Vista ...</String>

@@ -1552,13 +1552,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //m_FanartTimer.Change(0, 10000); // 10000 = 10 sek. // Added to immediately change Fanart - activate to enable timer and reset it !
 
                 if (InitialIsOnlineScan)
-                  MyFilmsDetail.setGUIProperty("isonline", facadeView.SelectedListItem.IsRemote.ToString());
+                  MyFilmsDetail.setGUIProperty("user.source.isonline", facadeView.SelectedListItem.IsRemote.ToString());
                 else
-                  MyFilmsDetail.clearGUIProperty("isonline");
+                  MyFilmsDetail.clearGUIProperty("user.source.isonline");
                 if (InitialIsOnlineScan && MyFilms.conf.StrStorageTrailer.Length > 0)
-                  MyFilmsDetail.setGUIProperty("isonlinetrailer", r[ItemId]["IsOnlineTrailer"].ToString());
+                  MyFilmsDetail.setGUIProperty("user.sourcetrailer.isonline", r[ItemId]["IsOnlineTrailer"].ToString());
                 else
-                  MyFilmsDetail.clearGUIProperty("isonlinetrailer");
+                  MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
                 //XmlConfig XmlConfig = new XmlConfig();
                 //string logo_type = string.Empty;
                 //string wlogos = string.Empty;
@@ -3058,6 +3058,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (!MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798629)));
                     choiceViewGlobalOptions.Add("alwayslistforgroups");
 
+                    if (MyFilms.conf.StrCheckWOLenable)
+                    {
+                      if (MyFilms.conf.StrCheckWOLuserdialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079898), GUILocalizeStrings.Get(10798628)));
+                      if (!MyFilms.conf.StrCheckWOLuserdialog) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079898), GUILocalizeStrings.Get(10798629)));
+                      choiceViewGlobalOptions.Add("woluserdialog");
+                    }
+
                     dlg1.DoModal(GetID);
                     if (dlg1.SelectedLabel == -1)
                     {
@@ -3181,26 +3188,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       case "useritem1":
                         MyFilms.conf.Stritem1 = wproperty;
                         MyFilms.conf.Strlabel1 = BaseMesFilms.Translate_Column(wproperty);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem1", MyFilms.conf.Stritem1);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel1", MyFilms.conf.Strlabel1);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem1 + "', Label: '" + conf.Strlabel1 + "'.");
                         break;
                       case "useritem2":
                         MyFilms.conf.Stritem2 = wproperty;
                         MyFilms.conf.Strlabel2 = BaseMesFilms.Translate_Column(wproperty);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem2", MyFilms.conf.Stritem2);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel2", MyFilms.conf.Strlabel2);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem2 + "', Label: '" + conf.Strlabel2 + "'.");
                         break;
                       case "useritem3":
                         MyFilms.conf.Stritem3 = wproperty;
                         MyFilms.conf.Strlabel3 = BaseMesFilms.Translate_Column(wproperty);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem3", MyFilms.conf.Stritem3);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel3", MyFilms.conf.Strlabel3);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem3 + "', Label: '" + conf.Strlabel3 + "'.");
                         break;
                       case "useritem4":
                         MyFilms.conf.Stritem4 = wproperty;
                         MyFilms.conf.Strlabel4 = BaseMesFilms.Translate_Column(wproperty);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem4", MyFilms.conf.Stritem4);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel4", MyFilms.conf.Strlabel4);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem4 + "', Label: '" + conf.Strlabel4 + "'.");
                         break;
                       case "useritem5":
                         MyFilms.conf.Stritem5 = wproperty;
                         MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem5", MyFilms.conf.Stritem5);
+                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel5", MyFilms.conf.Strlabel5);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
                         break;
                       default:
@@ -3549,6 +3566,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
                     XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
                     LogMyFilms.Info("MF: Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
+                    Change_view("globaloptions");
+                    break;
+
+                case "woluserdialog":
+                    MyFilms.conf.StrCheckWOLuserdialog = !MyFilms.conf.StrCheckWOLuserdialog;
+                    XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
+                    LogMyFilms.Info("MF: Update Option 'use WOL userdialog ...' changed to " + MyFilms.conf.StrCheckWOLuserdialog);
                     Change_view("globaloptions");
                     break;
             }
@@ -5691,7 +5715,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text) || !string.IsNullOrEmpty(searchstring))) 
             {
               if (keyboard.Text != searchstring)
+              {
                 UpdateRecentSearch(keyboard.Text);
+              }
               ArrayList w_count = new ArrayList();
               string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
               switch (choiceSearch[dlg.SelectedLabel])
@@ -5949,7 +5975,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         //*****************************************************************************************
-        //*  No Movie found to display. Display all movies
+        //*  Update recent used search terms
         //*****************************************************************************************
         private void UpdateRecentSearch(string newsearchstring)
         {
@@ -5958,6 +5984,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.StrRecentSearch3 = conf.StrRecentSearch2;
           conf.StrRecentSearch2 = conf.StrRecentSearch1;
           conf.StrRecentSearch1 = newsearchstring;
+          XmlConfig XmlConfig = new XmlConfig();
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "RecentSearch1", MyFilms.conf.StrRecentSearch1);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "RecentSearch2", MyFilms.conf.StrRecentSearch2);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "RecentSearch3", MyFilms.conf.StrRecentSearch3);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "RecentSearch4", MyFilms.conf.StrRecentSearch4);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "RecentSearch5", MyFilms.conf.StrRecentSearch5);
         }
 
         //*****************************************************************************************
@@ -7015,6 +7047,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
          MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
          MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
+         MyFilmsDetail.clearGUIProperty("user.source.isonline");
+         MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
          MyFilmsDetail.clearGUIProperty("logos_id2001");
          MyFilmsDetail.clearGUIProperty("logos_id2002");
          MyFilmsDetail.clearGUIProperty("logos_id2003");
@@ -7026,8 +7060,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          MyFilmsDetail.clearGUIProperty("config.configfilter");
          MyFilmsDetail.clearGUIProperty("view");
          MyFilmsDetail.clearGUIProperty("select");
-         MyFilmsDetail.clearGUIProperty("isonline");
-         MyFilmsDetail.clearGUIProperty("isonlinetrailer");
          MyFilmsDetail.clearGUIProperty("picture");
          MyFilmsDetail.clearGUIProperty("currentfanart");
        }

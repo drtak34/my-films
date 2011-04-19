@@ -822,7 +822,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     break;
                                        
             }
-            // backup the XML Config bfore writing
+            // backup the XML Config before writing
             if (System.IO.File.Exists(XmlConfig.EntireFilenameConfig("MyFilms")))
                 System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilms"), XmlConfig.EntireFilenameConfig("MyFilms") + ".bak", true);
 
