@@ -182,13 +182,6 @@ namespace MyFilmsPlugin.MyFilms
             }
         }
 
-        //public static void Lirefilm(string nomfilm)
-        //{
-        //    if (dataPath.ContainsKey(""))
-        //    {
-
-        //    }
-        //}
         public static string Translate_Column(string Column)
         {
             switch (Column)
@@ -297,7 +290,6 @@ namespace MyFilmsPlugin.MyFilms
                     return string.Empty;
             }
         }
-
         #endregion
     }
 }

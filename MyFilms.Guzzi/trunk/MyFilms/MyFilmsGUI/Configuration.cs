@@ -38,13 +38,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
-        System.ComponentModel.BackgroundWorker bgPictureList = new System.ComponentModel.BackgroundWorker();
+        //System.ComponentModel.BackgroundWorker bgPictureList = new System.ComponentModel.BackgroundWorker();
         public Configuration(string CurrentConfig, bool create_temp)
         {
             //-----------------------------------------------------------------------------------------------
             //   Load Config Parameters in MyFilms.xml file (section CurrentConfig)
             //-----------------------------------------------------------------------------------------------
 
+            LogMyFilms.Debug("MFC: Configuration loading started for '" + CurrentConfig + "'"); 
             XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
             using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
@@ -352,12 +353,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 DefaultCoverViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultCoverViews", string.Empty);
                 DefaultFanartImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "DefaultFanartImage", string.Empty);
                 StrAntFilterMinRating = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntFilterMinRating", "5");
-                StrAntFilterMinRating = StrAntFilterMinRating.Replace(",","."); // added to always convert to decimal dot (culture.invariant!)
-                // Added to cope with local number settings:
-                //if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ".")
-                //  StrAntFilterMinRating = StrAntFilterMinRating.Replace(",", ".");
-                //if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
-                //  StrAntFilterMinRating = StrAntFilterMinRating.Replace(".", ",");
                 //StrGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber", false);
                 StrGrabber_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Grabber_cnf", string.Empty);
                 StrPicturePrefix = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PicturePrefix", string.Empty);
@@ -463,6 +458,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Info("MyFilms : Artist Path '" + StrPathArtist + "', doesn't exist. Artist Pictures disabled ! ");
                     StrArtist = false;
                 }
+            LogMyFilms.Debug("MFC: Configuration loading ended for '" + CurrentConfig + "'"); 
         }
 
 // static values
@@ -1371,6 +1367,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void SaveConfiguration(string currentConfig, int selectedItem, string selectedItemLabel)
         {
+            LogMyFilms.Debug("MFC: Configuration saving started for '" + currentConfig + "'");
             XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MyFilms.conf.StrSelect);
@@ -1401,6 +1398,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
                         break;
                 }
+            LogMyFilms.Debug("MFC: Configuration saving ended for '" + currentConfig + "'");
         }
         //--------------------------------------------------------------------------------------------
         //  Control Acces to asked configuration
@@ -1409,11 +1407,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             if (configname.Length == 0)
                 return "";
-//            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-//            {
+
             XmlConfig XmlConfig = new XmlConfig();    
             string Dwp = XmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", string.Empty);
-//            }
 
             if (Dwp.Length == 0)
                 return configname;

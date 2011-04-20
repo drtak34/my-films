@@ -335,6 +335,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public override int GetID
         {
             get {return ID_MyFilms;}
+            set { base.GetID = value; }
         }
 
         public override string GetModuleName()
@@ -386,6 +387,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
         {
+            base.OnPageLoad(); // let animations run
             LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
             Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
 
@@ -547,7 +549,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Windows Init
                     //---------------------------------------------------------------------------------------
                     LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
-                    base.OnMessage(messageType);
+                    bool result = base.OnMessage(messageType);
                     //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
                     if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
                     {
@@ -564,17 +566,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       GUIWindowManager.ShowPreviousWindow();
                       GUIWaitCursor.Hide();
-                      return true;
+                      return result;
                     }
 
                     // Originally Deactivated by Zebons    
                     // ********************************
                     // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
-                    if (!bgLoadMovieList.IsBusy)
-                    {
-                      LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
-                      AsynLoadMovieList();
-                    }
+                    //if (!bgLoadMovieList.IsBusy)
+                    //{
+                    //  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
+                    //  AsynLoadMovieList();
+                    //}
                     // ********************************
                     // Originally Deactivated by Zebons    
 
@@ -1497,6 +1499,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 MyFilmsDetail.clearGUIProperty("logos_id2002");
                 MyFilmsDetail.clearGUIProperty("logos_id2003");
                 MyFilmsDetail.clearGUIProperty("logos_id2012");
+                MyFilmsDetail.clearGUIProperty("user.source.isonline");
+                MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
             }
             else
             {
@@ -1551,14 +1555,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 //m_FanartTimer.Change(0, 10000); // 10000 = 10 sek. // Added to immediately change Fanart - activate to enable timer and reset it !
 
-                if (InitialIsOnlineScan)
-                  MyFilmsDetail.setGUIProperty("user.source.isonline", facadeView.SelectedListItem.IsRemote.ToString());
-                else
-                  MyFilmsDetail.clearGUIProperty("user.source.isonline");
-                if (InitialIsOnlineScan && MyFilms.conf.StrStorageTrailer.Length > 0)
-                  MyFilmsDetail.setGUIProperty("user.sourcetrailer.isonline", r[ItemId]["IsOnlineTrailer"].ToString());
-                else
-                  MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
+                // Not needed here - will be populated later by "Load_Detailed_DB !
+                //if (InitialIsOnlineScan)
+                //  MyFilmsDetail.setGUIProperty("user.source.isonline", facadeView.SelectedListItem.IsRemote.ToString());
+                //else
+                //  MyFilmsDetail.clearGUIProperty("user.source.isonline");
+                //if (InitialIsOnlineScan && MyFilms.conf.StrStorageTrailer.Length > 0)
+                //  MyFilmsDetail.setGUIProperty("user.sourcetrailer.isonline", r[ItemId]["IsOnlineTrailer"].ToString());
+                //else
+                //  MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
+
                 //XmlConfig XmlConfig = new XmlConfig();
                 //string logo_type = string.Empty;
                 //string wlogos = string.Empty;
@@ -2720,9 +2726,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private void Change_view(string choiceView)
         {
             LogMyFilms.Debug("MF: Change_View called with '" + choiceView + "'");
+            XmlConfig XmlConfig = new XmlConfig();
             conf.Boolview = false;
             conf.Boolstorage = false;
-            XmlConfig XmlConfig = new XmlConfig();
             switch (choiceView)
             {
                 case "all":
@@ -3159,16 +3165,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         choiceGlobalMappings.Add(dc.ColumnName);
                       }
                     }
-
-
-
-                    string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
-                    string[] PropertyListLabel = new string[] { "10798658", "10798659", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
-                    for (int ii = 0; ii < 31; ii++)
-                    {
-                        dlg3.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))));
-                        choiceGlobalMappings.Add(PropertyList[ii]);
-                    }
+                    //string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
+                    //string[] PropertyListLabel = new string[] { "10798658", "10798659", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
+                    //for (int ii = 0; ii < 31; ii++)
+                    //{
+                    //    dlg3.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))));
+                    //    choiceGlobalMappings.Add(PropertyList[ii]);
+                    //}
 
                     // Dont use the propertylist...
                     //foreach (string wSearch in wSearchList)
@@ -3188,41 +3191,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       case "useritem1":
                         MyFilms.conf.Stritem1 = wproperty;
                         MyFilms.conf.Strlabel1 = BaseMesFilms.Translate_Column(wproperty);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem1", MyFilms.conf.Stritem1);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel1", MyFilms.conf.Strlabel1);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem1 + "', Label: '" + conf.Strlabel1 + "'.");
                         break;
                       case "useritem2":
                         MyFilms.conf.Stritem2 = wproperty;
                         MyFilms.conf.Strlabel2 = BaseMesFilms.Translate_Column(wproperty);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem2", MyFilms.conf.Stritem2);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel2", MyFilms.conf.Strlabel2);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem2 + "', Label: '" + conf.Strlabel2 + "'.");
                         break;
                       case "useritem3":
                         MyFilms.conf.Stritem3 = wproperty;
                         MyFilms.conf.Strlabel3 = BaseMesFilms.Translate_Column(wproperty);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem3", MyFilms.conf.Stritem3);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel3", MyFilms.conf.Strlabel3);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem3 + "', Label: '" + conf.Strlabel3 + "'.");
                         break;
                       case "useritem4":
                         MyFilms.conf.Stritem4 = wproperty;
                         MyFilms.conf.Strlabel4 = BaseMesFilms.Translate_Column(wproperty);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem4", MyFilms.conf.Stritem4);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel4", MyFilms.conf.Strlabel4);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem4 + "', Label: '" + conf.Strlabel4 + "'.");
                         break;
                       case "useritem5":
                         MyFilms.conf.Stritem5 = wproperty;
                         MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem5", MyFilms.conf.Stritem5);
-                        XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel5", MyFilms.conf.Strlabel5);
                         LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
                         break;
                       default:
                         break;
                     }
+                    UpdateUserItems(); // save to currentconfig
                     MyFilmsDetail.Init_Detailed_DB(); // clear properties
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     return;
@@ -3375,24 +3369,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (MyFilms.conf.StrAntFilterMinRating.Length > 0)
                     {
                       decimal wrating = 0;
-                      //NumberFormatInfo nfi = new NumberFormatInfo();
-                      //nfi.NumberDecimalSeparator = ",";
-                      //nfi.NumberGroupSeparator = "";
-                      //if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "." && MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Contains("."))
-                      //{
-                      //  wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating.Replace(",", "."));
-                      //}
-                      wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating, CultureInfo.InvariantCulture);
-                      //try { wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating); }
-                      //    catch
-                      //    {
-                      //      try
-                      //      {
-                      //        wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating, CultureInfo.CurrentCulture);
-                      //        LogMyFilms.Debug("MF: Filter Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
-                      //      }
-                      //        catch { }
-                      //    }
+                      wrating = Convert.ToDecimal(MyFilms.conf.StrAntFilterMinRating.Replace(",","."), CultureInfo.InvariantCulture);
                       dlgRating.Rating = wrating;
                     }
                     else
@@ -3575,7 +3552,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Info("MF: Update Option 'use WOL userdialog ...' changed to " + MyFilms.conf.StrCheckWOLuserdialog);
                     Change_view("globaloptions");
                     break;
+
             }
+          LogMyFilms.Debug("MF: Change_View(" + choiceView + ") -> End");
         }
         //--------------------------------------------------------------------------------------------
         //   Display Context Menu for Movie 
@@ -5993,6 +5972,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         //*****************************************************************************************
+        //*  Update userdefined mappings
+        //*****************************************************************************************
+        private void UpdateUserItems()
+        {
+          XmlConfig XmlConfig = new XmlConfig();
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem1", MyFilms.conf.Stritem1);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel1", MyFilms.conf.Strlabel1);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem2", MyFilms.conf.Stritem2);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel2", MyFilms.conf.Strlabel2);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem3", MyFilms.conf.Stritem3);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel3", MyFilms.conf.Strlabel3);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem4", MyFilms.conf.Stritem4);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel4", MyFilms.conf.Strlabel4);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem5", MyFilms.conf.Stritem5);
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel5", MyFilms.conf.Strlabel5);
+        }
+
+
+        //*****************************************************************************************
         //*  No Movie found to display. Display all movies
         //*****************************************************************************************
         private static void DisplayAllMovies()
@@ -6044,10 +6042,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("view"); // Try to properly clean main view when entering
             MyFilmsDetail.clearGUIProperty("select");
 
-            GlobalFilterStringUnwatched = string.Empty; // Will be later initialized from setting MyFilms.conf.GlobalUnwatchedOnly
+            GlobalFilterStringUnwatched = string.Empty;
+            // Will be later initialized from setting MyFilms.conf.GlobalUnwatchedOnly
             MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
-            GlobalFilterStringIsOnline = string.Empty;
-            MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
             if (!GlobalFilterTrailersOnly)
             {
               GlobalFilterStringTrailersOnly = "";
@@ -6290,81 +6287,90 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         static void bgIsOnlineCheck_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-          if (MyFilms.conf.StrStorage == null || MyFilms.conf.StrStorage == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorage))
-          {
-            LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking Online Status - Source field not properly defined in setup!");
-            return;
-          }
           LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork: Now checking Online Status - Source field <film> is: '" + conf.StrStorage + "' - Source field <trailer> is: '" + conf.StrStorageTrailer + "'");
           BackgroundWorker worker = sender as BackgroundWorker;
           Regex oRegex= new System.Text.RegularExpressions.Regex(";");
           DateTime startTime = DateTime.Now;
           foreach (DataRow t in MyFilms.r)
           {
-            // Check Movie availability
-            bool isonline = true; // set true as default - even if it might not be like that ...
-            string fileName = string.Empty;
-
-            try
+            if (MyFilms.conf.StrStorage == null || MyFilms.conf.StrStorage == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorage))
             {
-              fileName = t[MyFilms.conf.StrStorage].ToString().Trim();
+              LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
             }
-            catch
+            else
             {
-              fileName = string.Empty;
-            }
-            //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
+              // Check Movie availability
+              bool isonline = true; // set true as default - even if it might not be like that ...
+              string fileName = string.Empty;
 
-            string[] Mediafiles = oRegex.Split(fileName);
-            foreach (string mediafile in Mediafiles)
-            {
-              if (System.IO.File.Exists(mediafile))
+              try
               {
-                isonline = true;
-                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - nedia ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                fileName = t[MyFilms.conf.StrStorage].ToString().Trim();
               }
-              else
+              catch
               {
-                isonline = false;
-                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - media OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                fileName = string.Empty;
               }
-            }
-            t["IsOnline"] = isonline.ToString();
+              //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
 
-            // Check Trailer availability
-            isonline = true; // set true as default - even if it might not be like that ...
-            fileName = string.Empty;
-
-            try
-            {
-              fileName = t[MyFilms.conf.StrStorageTrailer].ToString().Trim();
-            }
-            catch
-            {
-              fileName = string.Empty;
-            }
-            //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
-
-            Mediafiles = oRegex.Split(fileName);
-            foreach (string mediafile in Mediafiles)
-            {
-              if (System.IO.File.Exists(mediafile))
+              string[] Mediafiles = oRegex.Split(fileName);
+              foreach (string mediafile in Mediafiles)
               {
-                isonline = true;
-                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                if (System.IO.File.Exists(mediafile))
+                {
+                  isonline = true;
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - media ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                }
+                else
+                {
+                  isonline = false;
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - media OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                }
               }
-              else
-              {
-                isonline = false;
-                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
-              }
+              t["IsOnline"] = isonline.ToString();
             }
-            t["IsOnlineTrailer"] = isonline.ToString();
+
+            if (MyFilms.conf.StrStorage == null || MyFilms.conf.StrStorage == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorage))
+            {
+              LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
+            }
+            else
+            {
+              // Check Trailer availability
+              bool isonline = true; // set true as default - even if it might not be like that ...
+              string fileName = string.Empty;
+
+              try
+              {
+                fileName = t[MyFilms.conf.StrStorageTrailer].ToString().Trim();
+              }
+              catch
+              {
+                fileName = string.Empty;
+              }
+              //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
+
+              string[] Mediafiles = oRegex.Split(fileName);
+              foreach (string mediafile in Mediafiles)
+              {
+                if (System.IO.File.Exists(mediafile))
+                {
+                  isonline = true;
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                }
+                else
+                {
+                  isonline = false;
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                }
+              }
+              t["IsOnlineTrailer"] = isonline.ToString();
+            }
           }
           DateTime stopTime = DateTime.Now;
           TimeSpan duration = stopTime - startTime;
           LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork - total runtime was: '" + duration + "', runtime in seconds: '" + duration.TotalSeconds + "'");
-          // MyFilmsDetail.Update_XML_database(); // -> We do not require to save DB, as we don't need the infos persistent here - if user saves on other places, it will be saved anyway.
+          MyFilmsDetail.Update_XML_database();
         }
 
         void bgIsOnlineCheck_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

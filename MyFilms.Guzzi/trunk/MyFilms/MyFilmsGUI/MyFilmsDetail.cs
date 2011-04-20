@@ -199,7 +199,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public override bool Init()
         {
-          LogMyFilms.Debug("MyFilmsDetail.Init() started.");
+          LogMyFilms.Debug("MyFilmsDetail.Init() started/ended.");
           // trakt scrobble background thread
           //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
           //TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
@@ -210,6 +210,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         protected override void OnPageLoad()
         {
             Log.Debug("MyFilms.OnPageLoad() started.");
+            base.OnPageLoad(); // let animations run!
             setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
             setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
             setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
@@ -220,8 +221,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             BtnLast.Label = GUILocalizeStrings.Get(1079873);
             //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
             //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
-
-            base.OnPageLoad();
             Log.Debug("MyFilms.OnPageLoad() finished.");
         }
 
@@ -336,13 +335,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Windows Init
                     //---------------------------------------------------------------------------------------
                     LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Starting");
+                    bool result = base.OnMessage(messageType);
                     if (ImgDetFilm != null)
                         if (ImgDetFilm.IsVisible)
                             ImgDetFilm.Refresh();
                         else if (ImgDetFilm2!= null)
+                          if (ImgDetFilm2.IsVisible)
                             ImgDetFilm2.Refresh();
-                    base.OnMessage(messageType); // Guzzi: Removing does not work properly...
 
+                    //base.OnMessage(messageType); // Guzzi: Removing does not work properly...
                     wGetID = GetID;
                     GUIControl.ShowControl(GetID, 35);
                     // ToDo: Should be unhidden, if ActorThumbs are implemented
@@ -371,8 +372,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     afficher_detail(true);
                     MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
-                    LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Returning");
-                    return true;
+                    LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Finished");
+                    return result;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
                     if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
@@ -4119,12 +4120,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         case "contents_id":
                         case "dateadded":
                         case "picture":
-                        case "IMDB_Id":
-                        case "TMDB_Id":
-                        case "Certification":
-                        case "Watched":
+                        case "fanart":
+                        case "imdb_id":
+                        case "tmdb_id":
+                        case "datewatched":
+                        case "watched":
                             break;
 
+                        case "isonline":
+                            if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                            {
+                              if (MyFilms.InitialIsOnlineScan)
+                                MyFilmsDetail.setGUIProperty("user.source.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                              else
+                                MyFilmsDetail.clearGUIProperty("user.source.isonline");
+                            }
+                            break;
+                        case "isonlinetrailer":
+                            if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                            {
+                              if (MyFilms.InitialIsOnlineScan)
+                                MyFilmsDetail.setGUIProperty("user.source.isonlinetrailer", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                              else
+                                MyFilmsDetail.clearGUIProperty("user.source.isonlinetrailer");
+                            }
+                            break;
                         case "resolution":
                             decimal aspectratio = 0; 
                             string ar = "";
