@@ -58,7 +58,7 @@
 			<zoom>yes</zoom>
 			<randomize>true</randomize>
 		</control>
-		<control>
+		<!--<control>
 			<description>BG Overlay (dims fanart)</description>
 			<type>image</type>
 			<id>0</id>
@@ -87,6 +87,20 @@
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowOpen</animation>
+		</control> -->
+		<control>
+		  <description>Overlay for FanArt</description>
+		  <id>0</id>
+		  <type>image</type>
+		  <posx>0</posx>
+		  <posy>0</posy>
+		  <width>1280</width>
+		  <height>720</height>
+		  <texture>backgroundtop.png</texture>
+		  <colordiffuse>ddffffff</colordiffuse>
+			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
+		  <animation effect="fade" time="70">visible</animation>
+		  <animation effect="fade" time="70" delay="300">hidden</animation>
 		</control>
 		<control>
 			<description>Top Gradient Overlay for Fanart View</description>

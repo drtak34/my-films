@@ -3216,7 +3216,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       default:
                         break;
                     }
-                    UpdateUserItems(); // save to currentconfig
+                    UpdateUserItems(); // save to currentconfig - save time for WinDeInit
+                    //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+                    //Load_Config(Configuration.CurrentConfig, true);
                     MyFilmsDetail.Init_Detailed_DB(); // clear properties
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     return;

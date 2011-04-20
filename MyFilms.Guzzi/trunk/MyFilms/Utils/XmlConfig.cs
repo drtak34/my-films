@@ -53,23 +53,17 @@
 #endregion
 
 #region using
-
-// For I/O file
-  // For XmlDocument
-
-// For recover install MediaPortal path
+using System;
+using System.IO; // For I/O file
+using System.Collections.Generic;
+using System.Text;
+using System.Xml; // For XmlDocument
+using MediaPortal.Configuration; // For recover install MediaPortal path
+using NLog;
 #endregion
 
 namespace MyFilmsPlugin.MyFilms.Utils
 {
-  using System;
-  using System.IO;
-  using System.Xml;
-
-  using MediaPortal.Configuration;
-
-  using NLog;
-
   class XmlConfig
     {
 
