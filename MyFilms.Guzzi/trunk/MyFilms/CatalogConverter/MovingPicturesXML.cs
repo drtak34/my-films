@@ -469,8 +469,6 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                   Fanart = nodeFanart.InnerText.Replace(char.ConvertFromUtf32(160), " ");
                 //WriteAntAtribute(destXml, "BACKDROPFULLPATH", Fanart);
 
-                destXml.WriteEndElement();
-
                 // Now writing MF extended attributes
                 WriteAntElement(destXml, "IMDB_ID", strIMDB); 
                 WriteAntElement(destXml, "Trailer", strTrailer);
@@ -479,6 +477,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 WriteAntElement(destXml, "Tags", Tags);
                 WriteAntElement(destXml, "WRITERS", Writer);
                 WriteAntElement(destXml, "BACKDROPFULLPATH", Fanart);
+
+                destXml.WriteEndElement();
               }
 
             }

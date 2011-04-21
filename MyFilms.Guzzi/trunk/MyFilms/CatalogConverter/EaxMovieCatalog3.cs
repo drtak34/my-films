@@ -305,13 +305,13 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (wFramerate.Length > 0)
                         WriteAntAtribute(destXml, "Framerate", wFramerate);
 
-                    destXml.WriteEndElement();
-
                     // Now writing MF extended attributes
                     WriteAntElement(destXml, "CERTIFICATION", Certification);
                     WriteAntElement(destXml, "TAGLINE", Tagline);
                     WriteAntElement(destXml, "Tags", Tags);
                     WriteAntElement(destXml, "WRITERS", Writer);
+
+                    destXml.WriteEndElement();
                 }
 
             }

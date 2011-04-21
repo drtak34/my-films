@@ -4140,9 +4140,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                             {
                               if (MyFilms.InitialIsOnlineScan)
-                                MyFilmsDetail.setGUIProperty("user.source.isonlinetrailer", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                                MyFilmsDetail.setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
                               else
-                                MyFilmsDetail.clearGUIProperty("user.source.isonlinetrailer");
+                                MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
                             }
                             break;
                         case "resolution":

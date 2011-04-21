@@ -479,14 +479,13 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     //if (wFramerate.Length > 0)
                     //    WriteAntAtribute(destXml, "Framerate", wFramerate);
 
-                    destXml.WriteEndElement();
-
                     // Now writing MF extended attributes
                     //WriteAntElement(destXml, "mpaa", Certification);
                     //WriteAntElement(destXml, "tagline", Tagline);
                     //WriteAntElement(destXml, "tags", Tags);
                     //WriteAntElement(destXml, "scenario", Writer);
 
+                    destXml.WriteEndElement();
                 }
 
             }

@@ -48,11 +48,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MFC: Configuration loading started for '" + CurrentConfig + "'"); 
             XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
-            using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-            {
-                xmlwriter.SetValue("MyFilms", "Current_Config", CurrentConfig);
-            }
-            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            // the xmlwriter caused late update on the file when leaving MP, thus overwriting MyFilms.xml and moving changes to MyFilms.bak !!! -> We write directly only!
+            //using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            //{
+            //  xmlwriter.SetValue("MyFilms", "Current_Config", CurrentConfig);
+            //  xmlwriter.Dispose();
+            //}
+            //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
               StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", string.Empty);
               StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", string.Empty);
@@ -1390,16 +1392,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem1", MyFilms.conf.Stritem1);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel1", MyFilms.conf.Strlabel1);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem2", MyFilms.conf.Stritem2);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel2", MyFilms.conf.Strlabel2);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem3", MyFilms.conf.Stritem3);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel3", MyFilms.conf.Strlabel3);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem4", MyFilms.conf.Stritem4);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel4", MyFilms.conf.Strlabel4);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntItem5", MyFilms.conf.Stritem5);
-            //XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntLabel5", MyFilms.conf.Strlabel5);
             switch (MyFilms.conf.StrFileType)
                 {
                     case "0":

@@ -461,13 +461,13 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 if (nodeDVD.SelectSingleNode("Cover") != null) Image = nodeDVD.SelectSingleNode("Cover").InnerText.Replace(char.ConvertFromUtf32(160), " ");
                 WriteAntAtribute(destXml, "Cover", Image);
 
-                destXml.WriteEndElement();
-
                 // Now writing MF extended attributes
                 WriteAntElement(destXml, "MPAA", Certification);
                 WriteAntElement(destXml, "TagLine", Tagline);
                 WriteAntElement(destXml, "Tags", Tags);
                 WriteAntElement(destXml, "Writer", Writer);
+
+                destXml.WriteEndElement();
               }
 
             }

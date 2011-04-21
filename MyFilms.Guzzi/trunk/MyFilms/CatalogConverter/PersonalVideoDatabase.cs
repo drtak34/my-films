@@ -319,13 +319,14 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                     if (nodeDVD.SelectSingleNode("path") != null)
                       WriteAntAtribute(destXml, "path", nodeDVD.SelectSingleNode("path").InnerText);
-                    destXml.WriteEndElement();
 
                     // Now writing MF extended attributes
                     WriteAntElement(destXml, "mpaa", Certification);
                     WriteAntElement(destXml, "tagline", Tagline);
                     WriteAntElement(destXml, "tags", Tags);
                     WriteAntElement(destXml, "scenario", Writer);
+
+                    destXml.WriteEndElement();
                 }
             }
             catch

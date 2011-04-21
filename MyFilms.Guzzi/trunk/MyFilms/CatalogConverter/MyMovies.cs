@@ -377,13 +377,14 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     WriteAntAtribute(destXml, "Comments", CommentsMerged);
 
                     WriteAntAtribute(destXml, "Picture", Image);
-                    destXml.WriteEndElement();
 
                     // Now writing MF extended attributes
                     WriteAntElement(destXml, "ParentalRating/Description", Certification);
                     WriteAntElement(destXml, "TagLine", Tagline);
                     WriteAntElement(destXml, "Categories", Tags);
                     WriteAntElement(destXml, "Credits2", Writer);
+
+                    destXml.WriteEndElement();
                 }
 
             }
