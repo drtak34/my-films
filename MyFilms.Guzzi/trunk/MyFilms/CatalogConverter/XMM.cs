@@ -266,19 +266,19 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 string Certification = string.Empty;
                 XmlNode nodeCertification = nodeDVD.SelectSingleNode("MPAA");
                 if (nodeCertification != null && nodeCertification.InnerText.Length > 0) Certification = nodeCertification.InnerText.Replace(char.ConvertFromUtf32(160), " ");
-                WriteAntAtribute(destXml, "MPAA", Certification);
+                //WriteAntAtribute(destXml, "MPAA", Certification);
 
                 //string TagLine
                 XmlNode nodeTagLine = nodeDVD.SelectSingleNode("TagLine");
                 string Tagline = string.Empty;
                 if (nodeTagLine != null && nodeTagLine.InnerText.Length > 0) Tagline = nodeTagLine.InnerText.Replace(char.ConvertFromUtf32(160), " ");
-                WriteAntAtribute(destXml, "TagLine", Tagline);
+                //WriteAntAtribute(destXml, "TagLine", Tagline);
 
                 //string Tags
                 string Tags = string.Empty;
                 XmlNode nodeTags = nodeDVD.SelectSingleNode("Category");
                 if (nodeTags != null && nodeTags.InnerText.Length > 0) Tags = nodeTags.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ",");
-                WriteAntAtribute(destXml, "Tags", Tags);
+                //WriteAntAtribute(destXml, "Tags", Tags);
 
                 //string Borrower
                 XmlNode nodeBorrower = nodeDVD.SelectSingleNode("Loaner");
@@ -293,9 +293,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 if (nodeProducer != null && nodeProducer.InnerText.Length > 0) WriteAntAtribute(destXml, "Producer", nodeProducer.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
 
                 //string Writer, 
+                string Writer = string.Empty;
                 XmlNode nodeWriter = nodeDVD.SelectSingleNode("Writer");
-                if (nodeWriter != null && nodeWriter.InnerText.Length > 0)
-                  WriteAntAtribute(destXml, "Writer", nodeWriter.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ","));
+                if (nodeWriter != null && nodeWriter.InnerText.Length > 0) Writer = nodeWriter.InnerText.Replace(char.ConvertFromUtf32(160), " ").Replace("|", ",");
+                //WriteAntAtribute(destXml, "Writer", Writer);
 
                 //string Country, 
                 XmlNode nodeCountry = nodeDVD.SelectSingleNode("Country");
@@ -461,6 +462,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 WriteAntAtribute(destXml, "Cover", Image);
 
                 destXml.WriteEndElement();
+
+                // Now writing MF extended attributes
+                WriteAntElement(destXml, "MPAA", Certification);
+                WriteAntElement(destXml, "TagLine", Tagline);
+                WriteAntElement(destXml, "Tags", Tags);
+                WriteAntElement(destXml, "Writer", Writer);
               }
 
             }
@@ -491,6 +498,21 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Attribute not written to DB !");
             }
         }
+
+        private void WriteAntElement(XmlWriter tw, string key, string value)
+        {
+          string at = string.Empty;
+          if (ProfilerDict.TryGetValue(key, out at))
+          {
+            tw.WriteElementString(at, value);
+            //LogMyFilms.Debug("MF: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+          }
+          else
+          {
+            //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Element not written to DB !");
+          }
+        }
+
     }
 
 }

@@ -211,17 +211,19 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         WriteAntAtribute(destXml, "Director", nodeDVD.Attributes["Director"].Value);
                     if (nodeDVD.Attributes["Producer"] != null)
                         WriteAntAtribute(destXml, "Producer", nodeDVD.Attributes["Producer"].Value);
-                    if (nodeDVD.Attributes["Writer"] != null)
-                      WriteAntAtribute(destXml, "Writer", nodeDVD.Attributes["Writer"].Value);
+                    string Writer = string.Empty;
+                    if (nodeDVD.Attributes["Writer"] != null) 
+                      Writer = nodeDVD.Attributes["Writer"].Value;
+                    //WriteAntAtribute(destXml, "Writer", Writer);
                     if (nodeDVD.Attributes["MPAA"] != null)
                     {
                       Certification = nodeDVD.Attributes["MPAA"].Value;
-                      WriteAntAtribute(destXml, "MPAA", Certification);
+                      //WriteAntAtribute(destXml, "MPAA", Certification);
                     }
                     if (nodeDVD.Attributes["Tag"] != null)
                     {
                       Tags = nodeDVD.Attributes["Tag"].Value;
-                      WriteAntAtribute(destXml, "Tag", Tags);
+                      //WriteAntAtribute(destXml, "Tag", Tags);
                     }
                     if (nodeDVD.Attributes["Cast"] != null)
                       WriteAntAtribute(destXml, "Cast", nodeDVD.Attributes["Cast"].Value);
@@ -307,6 +309,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         WriteAntAtribute(destXml, "Framerate", wFramerate);
 
                     destXml.WriteEndElement();
+
+                    // Now writing MF extended attributes
+                    WriteAntElement(destXml, "CERTIFICATION", Certification);
+                    WriteAntElement(destXml, "TAGLINE", Tagline);
+                    WriteAntElement(destXml, "Tags", Tags);
+                    WriteAntElement(destXml, "WRITERS", Writer);
                 }
 
             }
@@ -327,6 +335,20 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             {
                 tw.WriteAttributeString(at, value);
             }
+        }
+
+        private void WriteAntElement(XmlWriter tw, string key, string value)
+        {
+          string at = string.Empty;
+          if (ProfilerDict.TryGetValue(key, out at))
+          {
+            tw.WriteElementString(at, value);
+            //LogMyFilms.Debug("MF: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+          }
+          else
+          {
+            //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Element not written to DB !");
+          }
         }
     }
 

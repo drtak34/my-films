@@ -215,8 +215,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                       WriteAntAtribute(destXml, "director", nodeDVD.SelectSingleNode("director").InnerText);
                     if (nodeDVD.SelectSingleNode("producer") != null)
                       WriteAntAtribute(destXml, "producer", nodeDVD.SelectSingleNode("producer").InnerText);
+                    string Writer = string.Empty;
                     if (nodeDVD.SelectSingleNode("scenario") != null) // Writer
-                      WriteAntAtribute(destXml, "scenario", nodeDVD.SelectSingleNode("scenario").InnerText);
+                      Writer = nodeDVD.SelectSingleNode("scenario").InnerText;
+                    //WriteAntAtribute(destXml, "scenario", Writer);
                     if (nodeDVD.SelectSingleNode("actors") != null)
                       WriteAntAtribute(destXml, "actors", nodeDVD.SelectSingleNode("actors").InnerText);
                     if (nodeDVD.SelectSingleNode("poster") != null)
@@ -251,17 +253,17 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.SelectSingleNode("mpaa") != null)
                     {
                       Certification = nodeDVD.SelectSingleNode("mpaa").InnerText;
-                      WriteAntAtribute(destXml, "mpaa", Certification);
+                      //WriteAntAtribute(destXml, "mpaa", Certification);
                     }
                     if (nodeDVD.SelectSingleNode("tagline") != null)
                     {
                       Tagline = nodeDVD.SelectSingleNode("tagline").InnerText;
-                      WriteAntAtribute(destXml, "tagline", Tagline);
+                      //WriteAntAtribute(destXml, "tagline", Tagline);
                     }
                     if (nodeDVD.SelectSingleNode("tags") != null)
                     {
                       Tags = nodeDVD.SelectSingleNode("tags").InnerText;
-                      WriteAntAtribute(destXml, "tags", Tags);
+                      //WriteAntAtribute(destXml, "tags", Tags);
                     }
                     if (nodeDVD.SelectSingleNode("count") != null)
                       WriteAntAtribute(destXml, "count", nodeDVD.SelectSingleNode("count").InnerText);
@@ -318,6 +320,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     if (nodeDVD.SelectSingleNode("path") != null)
                       WriteAntAtribute(destXml, "path", nodeDVD.SelectSingleNode("path").InnerText);
                     destXml.WriteEndElement();
+
+                    // Now writing MF extended attributes
+                    WriteAntElement(destXml, "mpaa", Certification);
+                    WriteAntElement(destXml, "tagline", Tagline);
+                    WriteAntElement(destXml, "tags", Tags);
+                    WriteAntElement(destXml, "scenario", Writer);
                 }
             }
             catch
@@ -338,6 +346,21 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 tw.WriteAttributeString(at, value);
             }
         }
+
+        private void WriteAntElement(XmlWriter tw, string key, string value)
+        {
+          string at = string.Empty;
+          if (ProfilerDict.TryGetValue(key, out at))
+          {
+            tw.WriteElementString(at, value);
+            //LogMyFilms.Debug("MF: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+          }
+          else
+          {
+            //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Element not written to DB !");
+          }
+        }
+
     }
 
 }

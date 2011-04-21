@@ -480,6 +480,13 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     //    WriteAntAtribute(destXml, "Framerate", wFramerate);
 
                     destXml.WriteEndElement();
+
+                    // Now writing MF extended attributes
+                    //WriteAntElement(destXml, "mpaa", Certification);
+                    //WriteAntElement(destXml, "tagline", Tagline);
+                    //WriteAntElement(destXml, "tags", Tags);
+                    //WriteAntElement(destXml, "scenario", Writer);
+
                 }
 
             }
@@ -507,6 +514,21 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Attribute not written to DB !");
           }
         }
+
+      private void WriteAntElement(XmlWriter tw, string key, string value)
+      {
+        string at = string.Empty;
+        if (ProfilerDict.TryGetValue(key, out at))
+        {
+          tw.WriteElementString(at, value);
+          //LogMyFilms.Debug("MF: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+        }
+        else
+        {
+          //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Element not written to DB !");
+        }
+      }
+
     }
 
 }

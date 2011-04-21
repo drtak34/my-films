@@ -322,14 +322,14 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                     WriteAntAtribute(destXml, "Genres", genre);
                     WriteAntAtribute(destXml, "Credits", Director);
                     WriteAntAtribute(destXml, "Credits1", Producer);
-                    WriteAntAtribute(destXml, "Credits2", Writer);
+                    //WriteAntAtribute(destXml, "Credits2", Writer);
                     WriteAntAtribute(destXml, "Actors", Actor);
 
                     WriteAntAtribute(destXml, "AudioTracks", languages);
                     WriteAntAtribute(destXml, "Subtitles", subtitles);
-                    WriteAntAtribute(destXml, "ParentalRating/Description", Certification);
-                    WriteAntAtribute(destXml, "TagLine", Tagline);
-                    WriteAntAtribute(destXml, "Categories", Tags);
+                    //WriteAntAtribute(destXml, "ParentalRating/Description", Certification);
+                    //WriteAntAtribute(destXml, "TagLine", Tagline);
+                    //WriteAntAtribute(destXml, "Categories", Tags);
                     if (nodeIMDB != null)
                       WriteAntAtribute(destXml, "IMDB", nodeIMDB.InnerText);
                     WriteAntAtribute(destXml, "MovieFile", Source);
@@ -378,6 +378,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                     WriteAntAtribute(destXml, "Picture", Image);
                     destXml.WriteEndElement();
+
+                    // Now writing MF extended attributes
+                    WriteAntElement(destXml, "ParentalRating/Description", Certification);
+                    WriteAntElement(destXml, "TagLine", Tagline);
+                    WriteAntElement(destXml, "Categories", Tags);
+                    WriteAntElement(destXml, "Credits2", Writer);
                 }
 
             }
@@ -399,6 +405,21 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 tw.WriteAttributeString(at, value);
             }
         }
+
+        private void WriteAntElement(XmlWriter tw, string key, string value)
+        {
+          string at = string.Empty;
+          if (ProfilerDict.TryGetValue(key, out at))
+          {
+            tw.WriteElementString(at, value);
+            //LogMyFilms.Debug("MF: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+          }
+          else
+          {
+            //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Element not written to DB !");
+          }
+        }
+
     }
 
 }
