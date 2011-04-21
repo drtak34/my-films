@@ -39,7 +39,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
         {
             ProfilerDict = new Dictionary<string, string>();
             ProfilerDict.Add("ID", "Number");
-            ProfilerDict.Add("Seen", "Checked");
+            ProfilerDict.Add("Checked", "Checked");
             ProfilerDict.Add("MediaLabel", "MediaLabel");
             ProfilerDict.Add("VIDEOFORMAT", "MediaType");
             ProfilerDict.Add("FULLPATH", "Source");
@@ -56,7 +56,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("YEAR", "Year");
             ProfilerDict.Add("RUNTIME", "Length");
             ProfilerDict.Add("ACTORS", "Actors");
-            ProfilerDict.Add("IMDB_ID", "URL"); // Alternate field: DETAILS_URL (then map IMDB to Id_IMDB)
+            ProfilerDict.Add("DETAILS_URL", "URL");
             ProfilerDict.Add("SUMMARY", "Description");
             ProfilerDict.Add("Comments", "Comments");
             ProfilerDict.Add("VIDEOCODEC", "VideoFormat");
@@ -75,11 +75,12 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("TAGLINE", "TagLine");
             ProfilerDict.Add("Tags", "Tags");
             ProfilerDict.Add("Trailer", "SourceTrailer");
-            ProfilerDict.Add("BACKDROPFULLPATH", "Fanart");
+            ProfilerDict.Add("BACKDROPFULLPATH", "Fanart"); 
+
             // POPULARITY - not mapped
             //ProfilerDict.Add("watched", "Watched");
             //ProfilerDict.Add("watcheddate", "WatchedDate");
-            //ProfilerDict.Add("IMDB_Id", "IMDB_Id");
+            ProfilerDict.Add("IMDB_ID", "IMDB_Id");
             //ProfilerDict.Add("TMDB_Id", "TMDB_Id");
 
             //int Number, 
@@ -162,6 +163,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 //string Checked, 
                 //XmlNode nodeChecked = nodeDVD.SelectSingleNode("Seen");
                 //if (nodeChecked != null && nodeChecked.InnerText.Length > 0) WriteAntAtribute(destXml, "Seen", nodeChecked.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                WriteAntAtribute(destXml, "Checked", "false");
 
                 //string MediaLabel, 
                 XmlNode nodeMediaLabel = nodeDVD.SelectSingleNode("VIDEOFORMAT");
@@ -349,9 +351,16 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                 //string URL, 
                 string strURL = String.Empty;
-                XmlNode nodeURL = nodeDVD.SelectSingleNode("IMDB_ID");
+                XmlNode nodeURL = nodeDVD.SelectSingleNode("DETAILS_URL");
                 if (nodeURL != null && nodeURL.InnerText != null) strURL = nodeURL.InnerText.Replace(char.ConvertFromUtf32(160), " ");
-                WriteAntAtribute(destXml, "IMDB_ID", strURL);
+                WriteAntAtribute(destXml, "DETAILS_URL", strURL);
+
+                //string URL, 
+                string strIMDB = String.Empty;
+                XmlNode nodeIMDB = nodeDVD.SelectSingleNode("IMDB_ID");
+                if (nodeIMDB != null && nodeIMDB.InnerText != null)
+                  strIMDB = nodeIMDB.InnerText.Replace(char.ConvertFromUtf32(160), " ");
+                //WriteAntAtribute(destXml, "IMDB_ID", strURL);
 
                 //string Description, 
                 XmlNode nodePlot = nodeDVD.SelectSingleNode("SUMMARY");
@@ -445,7 +454,8 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
                 //string Picture
                 XmlNode nodePicture = nodeDVD.SelectSingleNode("COVERFULLPATH");
-                if (nodePicture != null && nodePicture.InnerText.Length > 0) WriteAntAtribute(destXml, "COVERFULLPATH", nodePicture.InnerText.Replace(char.ConvertFromUtf32(160), " "));
+                if (nodePicture != null && nodePicture.InnerText.Length > 0) 
+                  WriteAntAtribute(destXml, "COVERFULLPATH", nodePicture.InnerText.Replace(char.ConvertFromUtf32(160), " "));
                 //string Image = String.Empty;
                 //if (nodeDVD.SelectSingleNode("COVERFULLPATH") != null && nodeDVD.SelectSingleNode("COVERFULLPATH").InnerText.Length > 0)
                 //Image = nodeDVD.SelectSingleNode("COVERFULLPATH").InnerText.Replace(char.ConvertFromUtf32(160), " ");
@@ -462,6 +472,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 destXml.WriteEndElement();
 
                 // Now writing MF extended attributes
+                WriteAntElement(destXml, "IMDB_ID", strIMDB); 
                 WriteAntElement(destXml, "Trailer", strTrailer);
                 WriteAntElement(destXml, "CERTIFICATION", Certification);
                 WriteAntElement(destXml, "TAGLINE", Tagline);
@@ -504,10 +515,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
           string at = string.Empty;
           if (ProfilerDict.TryGetValue(key, out at))
           {
-            //tw.WriteStartElement(at);
             tw.WriteElementString(at, value);
-            //tw.wWriteAttributeString(at, value);
-            //tw.WriteEndElement();
             //LogMyFilms.Debug("MF: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
           }
           else
