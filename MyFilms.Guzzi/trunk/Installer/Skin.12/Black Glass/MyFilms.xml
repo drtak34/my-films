@@ -69,6 +69,7 @@
 			<animation effect="fade" time="300">visible</animation>
 			<animation effect="fade" time="300" delay="300">hidden</animation>
 		</control>
+
 <!--		<import>common.window.overlay.xml</import> -->
 		<import>common.window.time.xml</import>
 		<control>
@@ -183,6 +184,10 @@
 					<!-- <onrigth>6</onrigth> -->
 					<playedColor>ff77ccff</playedColor>
 					<!-- <playedColor>ffffffff</playedColor> -->
+
+					<remoteColor>ffF87B72</remoteColor>
+					<!-- file not present color -->
+
 					<textYOff>8</textYOff>
 					<textXOff>-10</textXOff>
 					<posX>847</posX>
@@ -820,7 +825,96 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.source.value)</visible>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.source.value)+!string.contains(#myfilms.user.source.isonline,False)</visible>
+		</control>
+		<control>
+			<description>Movie offline Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>808</posX>
+			<posY>676</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>tv_is_timeshifting.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.source.value)+string.contains(#myfilms.user.source.isonline,False)</visible>
+		</control>
+
+
+<!-- Trailer Available Info -->
+
+		<control>
+			<description>Trailer available Info Label</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>757</posX>
+			<!-- <posX>730</posX> -->
+			<posY>698</posY>
+			<width>80</width>
+			<label>Trailer:</label>
+			<font>font10</font>
+			<textcolor>6FFFFFFF</textcolor>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
+		</control>
+		<control>
+			<description>Trailer Count</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>737</posX>
+			<posY>698</posY>
+			<width>80</width>
+			<label>#myfilms.user.sourcetrailer.count</label>
+			<font>font10</font>
+			<textcolor>6FFFFFFF</textcolor>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
+		</control>
+		<control>
+			<description>Trailer unavailable Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<!-- <posX>785</posX> -->
+			<posX>808</posX>
+			<posY>697</posY>
+			<width>20</width>
+			<height>20</height>
+			<!-- <texture>MyFilms\status_led_green.png</texture> -->
+			<texture>tv_is_unavailable.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.equals(#myfilms.user.sourcetrailer.value)</visible>
+		</control>
+		<control>
+			<description>Trailer available Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>808</posX>
+			<posY>697</posY>
+			<width>20</width>
+			<height>20</height>
+			<!-- <texture>MyFilms\status_led_red.png</texture> -->
+			<texture>tv_is_available.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.value)+!string.contains(#myfilms.user.source.isonline,False)</visible>
+		</control>
+		<control>
+			<description>Trailer available Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>808</posX>
+			<posY>697</posY>
+			<width>20</width>
+			<height>20</height>
+			<!-- <texture>MyFilms\status_led_yellow.png</texture> -->
+			<texture>tv_is_timeshifting.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.sourcetrailer.isonline,False)</visible>
 		</control>
 
 <!-- Global Overlay Filter Info -->
@@ -843,6 +937,18 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<texture>MyFilms\overlayunwatched.png</texture>
 			<visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Media Available Global Filter Icon</description>
+			<id>0</id>
+			<width>16</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\online.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.isonline,True)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
@@ -887,64 +993,6 @@
 
 
 
-<!-- Trailer Available Info -->
-
-		<control>
-			<description>Trailer available Info Label</description>
-			<type>fadelabel</type>
-			<id>1</id>
-			<posX>757</posX>
-			<!-- <posX>730</posX> -->
-			<posY>698</posY>
-			<width>80</width>
-			<label>Trailer:</label>
-			<font>font10</font>
-			<textcolor>6FFFFFFF</textcolor>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
-		</control>
-		<control>
-			<description>Trailer Count</description>
-			<type>label</type>
-			<id>1</id>
-			<posX>737</posX>
-			<posY>698</posY>
-			<width>80</width>
-			<label>#myfilms.user.sourcetrailer.count</label>
-			<font>font10</font>
-			<textcolor>6FFFFFFF</textcolor>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)</visible>
-		</control>
-		<control>
-			<description>Trailer unavailable Icon</description>
-			<type>image</type>
-			<id>1</id>
-			<!-- <posX>785</posX> -->
-			<posX>808</posX>
-			<posY>697</posY>
-			<width>20</width>
-			<height>20</height>
-			<!-- <texture>MyFilms\led_frame_green.png</texture> -->
-			<texture>tv_is_unavailable.png</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.equals(#myfilms.user.sourcetrailer.value)</visible>
-		</control>
-		<control>
-			<description>Trailer available Icon</description>
-			<type>image</type>
-			<id>1</id>
-			<posX>808</posX>
-			<posY>697</posY>
-			<width>20</width>
-			<height>20</height>
-			<!-- <texture>MyFilms\led_frame_red.png</texture> -->
-			<texture>tv_is_available.png</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.value)</visible>
-		</control>
 
 <!-- THUMBVIEW -->
 		<!-- <control>
@@ -1431,8 +1479,8 @@
 		</control>
 		<control>
 			<type>animation</type>
-      <description>Waiting during search</description>
-			<id>3004</id>
+      			<description>Waiting during search</description>
+			<id>2080</id>
 			<posX>608</posX>
 			<posY>328</posY>
 			<width>64</width>

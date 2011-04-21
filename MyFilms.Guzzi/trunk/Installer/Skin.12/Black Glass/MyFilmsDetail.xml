@@ -1933,7 +1933,7 @@ Detailmenu for technical details
 			<posY>671</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\led_frame_red.png</texture>
+			<texture>MyFilms\status_led_red.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<colordiffuse>a0ffffff</colordiffuse>
 			<centered>yes</centered>
@@ -1949,11 +1949,27 @@ Detailmenu for technical details
 			<posY>671</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\led_frame_green.png</texture>
+			<texture>MyFilms\status_led_green.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<colordiffuse>d0ffffff</colordiffuse>
 			<centered>yes</centered>
-			<visible>string.equals(#myfilms.user.source.value)+!Control.HasFocus(10099)</visible>
+			<visible>string.equals(#myfilms.user.source.value)+!string.contains(#myfilms.user.source.isonline,False)+!Control.HasFocus(10099)</visible>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
+		<control>
+			<description>Movie offline Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>1255</posX>
+			<posY>671</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\status_led_yellow.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<colordiffuse>d0ffffff</colordiffuse>
+			<centered>yes</centered>
+			<visible>string.equals(#myfilms.user.source.value)+string.contains(#myfilms.user.source.isonline,False)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
@@ -1994,7 +2010,7 @@ Detailmenu for technical details
 			<posY>691</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\led_frame_red.png</texture>
+			<texture>MyFilms\status_led_red.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>a0ffffff</colordiffuse>
@@ -2010,17 +2026,33 @@ Detailmenu for technical details
 			<posY>691</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\led_frame_green.png</texture>
+			<texture>MyFilms\status_led_green.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>d0ffffff</colordiffuse>
-			<visible>string.equals(#myfilms.user.sourcetrailer.value)+!Control.HasFocus(10099)</visible>
+			<visible>string.equals(#myfilms.user.sourcetrailer.value)+!string.contains(#myfilms.user.sourcetrailer.isonline,False)+!Control.HasFocus(10099)</visible>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
+		<control>
+			<description>Trailer offline Icon</description>
+			<type>image</type>
+			<id>1</id>
+			<posX>1255</posX>
+			<posY>691</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\status_led_yellow.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>d0ffffff</colordiffuse>
+			<visible>string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.sourcetrailer.isonline,False)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
 		<control>
 			<type>animation</type>
-      <description>Waiting during search</description>
+		      	<description>Waiting during search</description>
 			<id>2080</id>
 			<posX>608</posX>
 			<posY>328</posY>
