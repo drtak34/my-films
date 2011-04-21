@@ -55,6 +55,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
 
+  using Action = MediaPortal.GUI.Library.Action;
+  using WindowPlugins;
+  using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
+
+
   /// <summary>
     /// Summary description for GUIMyFilms.
     /// </summary>
@@ -208,7 +213,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CTRL_logos_id2002 = 2002,
             CTRL_logos_id2003 = 2003,
             CTRL_logos_id2012 = 2012,
-            CTRL_GuiWaitCursor = 3004,
+            CTRL_GuiWaitCursor = 2080,
         }
 
         //#region Events
@@ -381,9 +386,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public override void DeInit()
         {
+          LogMyFilms.Debug("MyFilms.DeInit() started. Calling base.DeInit()..."); 
           base.DeInit();
           // Add Other Classes here, if necessary
         }
+
+        //protected override string SerializeName
+        //{
+        //  get { return "myfilms"; }
+        //}
+
+        //protected override void LoadSettings()
+        //{
+        //  LogMyFilms.Debug("MyFilms.LoadSettings() started.");
+        //  base.LoadSettings();
+        //  // add plugin specific routines here
+        //}
+
+        //protected override void SaveSettings()
+        //{
+        //  LogMyFilms.Debug("MyFilms.SaveSettings() started.");
+        //  base.SaveSettings();
+        //  // add plugin specific routines here
+        //}
+
 
         protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
         {
@@ -426,15 +452,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected override void OnPageDestroy(int new_windowId)
         {
-            LogMyFilms.Debug("MyFilms.OnPageDestroy() started.");
+            LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
 
             // Disable Random Fanart Timer
             //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
             //m_bFanartTimerDisabled = true;
 
             base.OnPageDestroy(new_windowId);
-
-            LogMyFilms.Debug("MyFilms.OnPageDestroy() completed.");
+            LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
             Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
         }
 
@@ -2511,6 +2536,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         private void Fin_Charge_Init(bool LoadDfltSlct, bool reload)
         {
+            GUIWaitCursor.Init();
+            GUIWaitCursor.Show();
             if (LoadDfltSlct)
             {
                 conf.Boolselect = false;
@@ -2661,11 +2688,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
               SetLabelSelect(conf.StrTxtSelect);
             MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); 
-            GUIWaitCursor.Hide();
             if (conf.LastID == ID_MyFilmsDetail)
                 GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
             if (conf.LastID == ID_MyFilmsActors)
                 GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
+            GUIWaitCursor.Hide();
         }
         //--------------------------------------------------------------------------------------------
         //   Change LayOut 
@@ -6309,8 +6336,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 fileName = t[MyFilms.conf.StrStorage].ToString().Trim();
               }
-              catch
+              catch (Exception ex)
               {
+                LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error getting source media files from DB - exception: " + ex.Message);
                 fileName = string.Empty;
               }
               //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
@@ -6321,12 +6349,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (System.IO.File.Exists(mediafile))
                 {
                   isonline = true;
-                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - media ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
                 }
                 else
                 {
                   isonline = false;
-                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - media OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
                 }
               }
               t["IsOnline"] = isonline.ToString();
@@ -6358,12 +6386,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (System.IO.File.Exists(mediafile))
                 {
                   isonline = true;
-                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer ONLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
                 }
                 else
                 {
                   isonline = false;
-                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer OFFLINE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
                 }
               }
               t["IsOnlineTrailer"] = isonline.ToString();

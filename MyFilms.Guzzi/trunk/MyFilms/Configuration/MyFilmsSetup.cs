@@ -1749,6 +1749,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       textBoxPluginName.Text = "MyFilms"; // Make sure, a plugin name is given - assign default, if user didn't choose any!
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text.ToString());
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
+                    LogMyFilms.Debug("MF: (Setup) - Quit - created default empty config!");
                     mydivx.Dispose();
                     Close();
                 }
@@ -1769,6 +1770,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text.ToString());
+            LogMyFilms.Debug("MF: (Setup) - Quit - saved base config!");
             Close();
         }
 

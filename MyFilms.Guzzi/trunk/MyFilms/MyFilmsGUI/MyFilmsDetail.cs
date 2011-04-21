@@ -153,7 +153,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         };
         static PlayListPlayer playlistPlayer;
         static VirtualDirectory m_directory = new VirtualDirectory();
-        System.ComponentModel.BackgroundWorker bgPicture = new System.ComponentModel.BackgroundWorker();
+        BackgroundWorker bgPicture = new System.ComponentModel.BackgroundWorker();
 
         static System.Windows.Forms.OpenFileDialog openFileDialog1 = new OpenFileDialog();
         static string _virtualStartDirectory = String.Empty;
