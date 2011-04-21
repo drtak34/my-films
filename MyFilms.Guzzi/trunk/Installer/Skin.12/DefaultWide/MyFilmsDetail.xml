@@ -58,49 +58,20 @@
 			<zoom>yes</zoom>
 			<randomize>true</randomize>
 		</control>
-		<!--<control>
-			<description>BG Overlay (dims fanart)</description>
-			<type>image</type>
-			<id>0</id>
-			<posX>0</posX>
-			<posY>0</posY>
-			<width>1280</width>
-			<height>720</height>
-			<texture>black.png</texture>
-			<colordiffuse>95ffffff</colordiffuse>
-			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
 		<control>
 			<description>Overlay for FanArt</description>
 			<id>0</id>
 			<type>image</type>
-			<posX>0</posX>
-			<posY>0</posY>
+			<posx>0</posx>
+			<posy>0</posy>
 			<width>1280</width>
 			<height>720</height>
-			<texture>backgroundthumbsview.png</texture>
-			<colordiffuse>eeffffff</colordiffuse>
+			<texture>backgroundtop.png</texture>
+			<colordiffuse>ddffffff</colordiffuse>
 			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowOpen</animation>
-		</control> -->
-		<control>
-		  <description>Overlay for FanArt</description>
-		  <id>0</id>
-		  <type>image</type>
-		  <posx>0</posx>
-		  <posy>0</posy>
-		  <width>1280</width>
-		  <height>720</height>
-		  <texture>backgroundtop.png</texture>
-		  <colordiffuse>ddffffff</colordiffuse>
-			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
-		  <animation effect="fade" time="70">visible</animation>
-		  <animation effect="fade" time="70" delay="300">hidden</animation>
 		</control>
 		<control>
 			<description>Top Gradient Overlay for Fanart View</description>
@@ -186,6 +157,15 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<texture>MyFilms\overlayunwatched.png</texture>
 			<visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Media Available Global Filter Icon</description>
+			<id>0</id>
+			<width>20</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\online.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.isonline,True)</visible>
 		</control>
 		<control>
 			<type>image</type>
@@ -1620,7 +1600,7 @@
 			<posY>660</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\trailer_led_red.png</texture>
+			<texture>MyFilms\led_red.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
@@ -1634,11 +1614,25 @@
 			<posY>660</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\trailer_led_green.png</texture>
+			<texture>MyFilms\led_green.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
 			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.db.source.value)+!player.hasmedia</visible>
+		</control>
+		<control>
+			<description>Movie offline Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>392</posX>
+			<posY>660</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\led_yellow.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.db.source.value)+string.contains(#myfilms.user.source.isonline,False)+!player.hasmedia</visible>
 		</control>
 
 
@@ -1666,7 +1660,7 @@
 			<posY>690</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\trailer_led_red.png</texture>
+			<texture>MyFilms\led_red.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
@@ -1682,11 +1676,27 @@
 			<posY>690</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\trailer_led_green.png</texture>
+			<texture>MyFilms\led_green.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>ffffffff</colordiffuse>
 			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)+!player.hasmedia</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
+		<control>
+			<description>Trailer offline Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>392</posX>
+			<posY>690</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\led_yellow.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.source.isonlinetrailer,False)+!player.hasmedia</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>

@@ -17,7 +17,7 @@
 		<control>
 		  <description>Date Time</description>
 		  <type>label</type>
-		  <id>0</id>
+		  <id>1</id>
 		  <posX>1244</posX>
 		  <posY>20</posY>
 		  <label>#date | #time</label>
@@ -85,49 +85,19 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
             <!-- Do not modify the visibility for this component. It is handled by the plug-in. -->
 		</control>
-		<!-- <control>
-			<description>BG Overlay (dims fanart)</description>
-			<type>image</type>
-			<id>0</id>
-			<posX>0</posX>
-			<posY>0</posY>
-			<width>1280</width>
-			<height>720</height>
-			<texture>black.png</texture>
-			<colordiffuse>95ffffff</colordiffuse>
-			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
 		<control>
 			<description>Overlay for FanArt</description>
 			<id>0</id>
 			<type>image</type>
-			<posX>0</posX>
-			<posY>0</posY>
+			<posx>0</posx>
+			<posy>0</posy>
 			<width>1280</width>
 			<height>720</height>
-			<texture>backgroundthumbsview.png</texture>
-			<colordiffuse>eeffffff</colordiffuse>
-			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control> -->
-		<control>
-		  <description>Overlay for FanArt</description>
-		  <id>0</id>
-		  <type>image</type>
-		  <posx>0</posx>
-		  <posy>0</posy>
-		  <width>1280</width>
-		  <height>720</height>
-		  <texture>backgroundtop.png</texture>
-		  <colordiffuse>ddffffff</colordiffuse>
-			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
-		  <animation effect="fade" time="70">visible</animation>
-		  <animation effect="fade" time="70" delay="300">hidden</animation>
+			<texture>backgroundtop.png</texture>
+			<colordiffuse>ccffffff</colordiffuse>
+			<visible>Control.isvisible(35)+!facadeview.filmstrip+!facadeview.coverflow</visible>
+			<animation effect="fade" time="70">visible</animation>
+			<animation effect="fade" time="70" delay="300">hidden</animation>
 		</control>
 		<control>
 			<description>Top Gradient Overlay for Filmstrip/Coverflow</description>
@@ -188,7 +158,7 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
-			<description>Filters group</description>
+			<description>Global Filter Icons group</description>
 			<type>group</type>
 			<posX>280</posX>
 			<posY>40</posY>
@@ -202,6 +172,15 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<texture>MyFilms\overlayunwatched.png</texture>
 			<visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Media Available Global Filter Icon</description>
+			<id>0</id>
+			<width>20</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\online.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.isonline,True)</visible>
 		</control>
 		<control>
 			<type>image</type>
@@ -224,7 +203,7 @@
 		<!-- <control>
 			<type>label</type>
 			<description>Rating Global Filter Value</description>
-			<id>0</id>
+			<id>1</id>
 			<label>#myfilms.globalfilter.minratingvalue</label>
 			<visible>string.contains(#myfilms.globalfilter.minratingvalue)</visible>
 		</control> -->
@@ -258,7 +237,7 @@
 		<control>
 			<type>actiongroup</type>
 			<description>action menu</description>
-			<defaultcontrol>6</defaultcontrol>
+			<defaultcontrol>4</defaultcontrol>
 			<onexit>50</onexit>
 			<buttonX>10</buttonX>
 			<buttonY>50</buttonY>
@@ -271,7 +250,7 @@
 			<dimColor>ffffffff</dimColor>
 			<control>
 				<type>image</type>
-				<id>1</id>
+				<id>0</id>
 				<description>Menu Background</description>
 				<posX>26</posX>
 				<posY>78</posY>
@@ -457,22 +436,16 @@
 					<IconYOff>3</IconYOff>
 					<itemwidth>18</itemwidth>
 					<itemHeight>30</itemHeight>
-					<!-- <textureFocus>MyFilms\list_sub_focus.png</textureFocus>
-					<textureNoFocus>-</textureNoFocus> -->
 					<keepaspectratio>yes</keepaspectratio>
 					<font>font13</font>
 					<spinPosX>1111</spinPosX>
 					<spinPosY>668</spinPosY>
-					<!-- <shadowAngle>-</shadowAngle>
-					<shadowDistance>-</shadowDistance>
-					<shadowColor>-</shadowColor>
-					<colordiffuse>ffffffff</colordiffuse> -->
 					<unfocusedAlpha>200</unfocusedAlpha>
 					</control>
         		<control>
           			<description>Filmstrip view</description>
 					<type>filmstrip</type>
-					<id>30</id>
+					<id>50</id>
           			<dimColor>ddffffff</dimColor>
           			<scrollOffset>4</scrollOffset>
           			<posX>40</posX>
@@ -591,6 +564,7 @@
 									<lineSpacing>2.5</lineSpacing>
 									<align>left</align>
 									<textcolor>FFDDDDDD</textcolor>
+									<seperator>: : :</seperator>
 									<shadowAngle>-</shadowAngle>
 									<shadowDistance>-</shadowDistance>
 									<shadowColor>-</shadowColor>
@@ -618,6 +592,7 @@
 									<font>font9</font>
 									<lineSpacing>2.5</lineSpacing>
 									<textcolor>FFFFFFFF</textcolor>
+									<seperator>: : :</seperator>
 									<shadowAngle>-</shadowAngle>
 									<shadowDistance>-</shadowDistance>
 									<shadowColor>-</shadowColor>
@@ -1110,7 +1085,7 @@
 			<posY>676</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\trailer_led_red.png</texture>
+			<texture>MyFilms\led_red.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
@@ -1124,11 +1099,25 @@
 			<posY>676</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\trailer_led_green.png</texture>
+			<texture>MyFilms\led_green.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>ffffffff</colordiffuse>
 			<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.value)</visible>
+		</control>
+		<control>
+			<description>Movie offline Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>750</posX>
+			<posY>676</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\led_yellow.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.source.value)+string.contains(#myfilms.user.source.isonline,False)</visible>
 		</control>
 
 <!-- Trailer Available Info -->
@@ -1154,7 +1143,7 @@
 			<posY>676</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\trailer_led_red.png</texture>
+			<texture>MyFilms\led_red.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
@@ -1168,11 +1157,25 @@
 			<posY>676</posY>
 			<width>20</width>
 			<height>20</height>
-			<texture>MyFilms\trailer_led_green.png</texture>
+			<texture>MyFilms\led_green.png</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>ffffffff</colordiffuse>
 			<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.value)</visible>
+		</control>
+		<control>
+			<description>Trailer offline Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>860</posX>
+			<posY>676</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\led_yellow.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.source.isonlinetrailer,False)</visible>
 		</control>
 		
 		<control>
@@ -1188,7 +1191,7 @@
 		  <animation effect="fade" time="250">WindowOpen</animation>
 		  <animation effect="fade" time="250">WindowClose</animation>
 		</control>
-		<!-- <control>
+		<control>
 			<type>animation</type>
 			<description>Waiting during search</description>
 			<id>2080</id>
@@ -1199,6 +1202,6 @@
 			<textures>common.waiting.1.png;common.waiting.2.png;common.waiting.3.png;common.waiting.4.png;common.waiting.5.png;common.waiting.6.png;common.waiting.7.png;common.waiting.8.png</textures>
 			<Duration>0:0:01.5</Duration>
 			<keepaspectratio>yes</keepaspectratio>
-		</control> -->
+		</control>
     </controls>
 </window>
