@@ -1,7 +1,7 @@
 <window>
 	<id>7986</id>
 	<defaultcontrol>50</defaultcontrol>
-	<allowoverlay>player.hasmedia+[!facadeview.filmstrip||!facadeview.coverflow]</allowoverlay>
+	<allowoverlay>player.hasmedia+[!facadeview.filmstrip|!facadeview.coverflow]</allowoverlay>
 <!--	<define>#header.label:#myfilms.config.pluginname (#myfilms.config.currentconfig)</define> -->
 	<define>#header.label:#myfilms.config.currentconfig</define>
 	<define>#header.background:hover_Films.png</define>
@@ -209,7 +209,6 @@
 					<type>filmstrip</type>
 					<id>50</id>
 					<dimColor>90ffffff</dimColor>
-					<scrollOffset>2</scrollOffset>
 					<onup>4</onup>
 					<onleft>4</onleft>
 					<posX>20</posX>
@@ -238,6 +237,8 @@
 					<thumbAnimation effect="slide" end="0,-22" time="200">focus</thumbAnimation>
 					<thumbAnimation effect="zoom" start="100,100" end="120,120" time="200">focus</thumbAnimation>
 					<scrollOffset>3</scrollOffset>
+					<showScrollbar>no</showScrollbar>
+					<scrollbarYOff>233</scrollbarYOff>
 					<playedColor>ffffffff</playedColor>
 				</control>
 				<control>
@@ -245,7 +246,7 @@
 					<type>coverflow</type>
 					<colordiffuse>ffffffff</colordiffuse>
 					<dimColor>90ffffff</dimColor>
-					<id>1026</id>
+					<id>50</id>
 					<posX>0</posX>
 					<posY>200</posY>
 					<width>1280</width>
@@ -276,7 +277,7 @@
 					<label1YOff>405</label1YOff>
 					<label2YOff>430</label2YOff>
 					<pageSize>5</pageSize>
-					<scrollbarYOff>243</scrollbarYOff>
+					<scrollbarYOff>420</scrollbarYOff>
 					<cards flipY="yes" diffuse="Thumb_Mask.png" mask="DVDCase_coverflow_mask.png"/>
 					<keepaspectratio>no</keepaspectratio>
 					<subitems>
@@ -324,7 +325,7 @@
 									<posX>20</posX>
 									<posY>9</posY>
 									<width>215</width>
-									<label>#myfilms.translatedtitle</label>
+									<label>#myfilms.user.secondarytitle.value</label>
 									<font>font16</font>
 									<textcolor>FFFFFFFF</textcolor>
 									<wrapString> : : : </wrapString>
@@ -356,13 +357,13 @@
 									<textureWidth>15</textureWidth>
 									<textureHeight>15</textureHeight>
 									<subitems>
-										<subitem>star_nofocus.png</subitem>
-										<subitem>star_focus.png</subitem>
+										<subitem>MyFilms\UserRatingStarOff.png</subitem>
+										<subitem>MyFilms\UserRatingStarOn.png</subitem>
 									</subitems>
 									<orientation>horizontal</orientation>
 									<align>left</align>
 									<imagesToDraw>10</imagesToDraw>
-									<percentage>#myfilms.rating</percentage>
+									<percentage>#myfilms.db.rating.value</percentage>
 									<visible>!string.equals(#runtime,0)+!string.equals(#year,1900)</visible>
 								</control>
 								<control>
@@ -371,7 +372,7 @@
 									<posX>20</posX>
 									<posY>72</posY>
 									<width>215</width>
-									<label>#myfilms.category</label>
+									<label>#myfilms.db.category.value</label>
 									<font>font11</font>
 									<textcolor>ffFFFFFF</textcolor>
 									<wrapString> : : : </wrapString>
@@ -383,7 +384,7 @@
 									<posX>20</posX>
 									<posY>97</posY>
 									<width>215</width>
-									<label>#myfilms.year     #myfilms.length min     #myfilms.rating</label>
+									<label>#myfilms.db.year.value     #myfilms.db.length.value min     #myfilms.db.rating.value</label>
 									<font>font11</font>
 									<textcolor>90FFFFFF</textcolor>
 									<wrapString> : : : </wrapString>
@@ -397,7 +398,7 @@
 									<posX>20</posX>
 									<posY>123</posY>
 									<width>215</width>
-									<label>Directed by #myfilms.director</label>
+									<label>Directed by #myfilms.db.director.value</label>
 									<font>font12</font>
 									<textcolor>FFFFFFFF</textcolor>
 									<wrapString> : : : </wrapString>
@@ -410,7 +411,7 @@
 									<posY>150</posY>
 									<width>215</width>
 									<height>20</height>
-									<label>#myfilms.actors</label>
+									<label>#myfilms.db.actors.value</label>
 									<font>font10</font>
 									<lineSpacing>2</lineSpacing>
 									<align>left</align>
@@ -425,7 +426,7 @@
 									<posY>205</posY>
 									<width>215</width>
 									<height>70</height>
-									<label>#myfilms.description</label>
+									<label>#myfilms.db.description.value</label>
 									<font>font10</font>
 									<lineSpacing>2</lineSpacing>
 									<textcolor>FFFFFFFF</textcolor>
@@ -485,7 +486,7 @@
 			<type>fadelabel</type>
 			<id>12</id>
 			<posX>32</posX>
-			<posY>52</posY>
+			<posY>51</posY>
 			<font>font12</font>
 			<textcolor>aaffffff</textcolor>
 			<width>750</width>
@@ -631,11 +632,11 @@
 			<id>1</id>
 			<posX>1125</posX>
 			<posY>696</posY>
-			<width>302</width>
+			<width>120</width>
 			<height>40</height>
 			<align>right</align>
-			<textureWidth>22</textureWidth>
-			<textureHeight>22</textureHeight>
+			<textureWidth>15</textureWidth>
+			<textureHeight>15</textureHeight>
 			<colordiffuse>6fffffff</colordiffuse>
 			<subitems>
 				<subitem>MyFilms\UserRatingStarOff.png</subitem>
@@ -924,7 +925,7 @@
 		<type>group</type>
 		<posX>1095</posX>
 		<posY>21</posY>
-		<layout>StackLayout(5,Horizontal)</layout>
+		<layout>StackLayout(5,Horizontal,true)</layout>
        		<dimColor>ffffffff</dimColor>
 		<animation effect="fade" time="250">visiblechange</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
@@ -988,10 +989,6 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> -->
 	</control>
-
-
-
-
 
 
 <!-- THUMBVIEW -->
@@ -1211,11 +1208,11 @@
 			<type>imagelist</type>
 			<id>1</id>
 			<posX>30</posX>
-			<posY>456</posY>
-			<width>302</width>
+			<posY>452</posY>
+			<width>150</width>
 			<height>40</height>
-			<textureWidth>22</textureWidth>
-			<textureHeight>22</textureHeight>
+			<textureWidth>20</textureWidth>
+			<textureHeight>20</textureHeight>
 			<subitems>
 				<subitem>MyFilms\UserRatingStarOff.png</subitem>
 				<subitem>MyFilms\UserRatingStarOn.png</subitem>

@@ -139,7 +139,7 @@
           this.Controls.Add(this.buttonOK);
           this.Controls.Add(this.textBoxNewName);
           this.Controls.Add(this.label1);
-          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+          this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
           this.Name = "MyFilmsInputBox";
           this.Text = "MyFilmsInputBox";
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

@@ -638,11 +638,11 @@
       <id>1028</id>
 			<!--id>1</id-->
 			<posX>520</posX>
-			<posY>138</posY>
-			<width>180</width>
+			<posY>137</posY>
+			<width>120</width>
 			<height>42</height>
-			<textureWidth>20</textureWidth>
-			<textureHeight>20</textureHeight>
+			<textureWidth>15</textureWidth>
+			<textureHeight>15</textureHeight>
 			<subitems>
 				<subitem>MyFilms\UserRatingStarOff.png</subitem>
 				<subitem>MyFilms\UserRatingStarOn.png</subitem>
@@ -650,8 +650,8 @@
 			<orientation>horizontal</orientation>
 			<percentage>#myfilms.db.rating.value</percentage>
 			<imagesToDraw>10</imagesToDraw>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		</control>
 		<control>
 			<description>RatingValue</description>
@@ -1841,11 +1841,11 @@ Detailmenu for technical details
 			<id>1</id>
 			<posX>1125</posX>
 			<posY>696</posY>
-			<width>302</width>
+			<width>230</width>
 			<height>40</height>
 			<align>right</align>
-			<textureWidth>22</textureWidth>
-			<textureHeight>22</textureHeight>
+			<textureWidth>15</textureWidth>
+			<textureHeight>15</textureHeight>
 			<colordiffuse>6fffffff</colordiffuse>
 			<subitems>
 				<subitem>MyFilms\UserRatingStarOff.png</subitem>
