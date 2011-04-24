@@ -69,9 +69,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Subtitles", "Subtitles");
             ProfilerDict.Add("Writer", "Writer");
             ProfilerDict.Add("MPAA", "Certification");
-            ProfilerDict.Add("Tag", "Tags");
+            ProfilerDict.Add("Tags", "Tags");
             //ProfilerDict.Add("Borrower", "Borrower");
-            //ProfilerDict.Add("TagLine", "TagLine");
+            ProfilerDict.Add("TagLine", "TagLine");
             //ProfilerDict.Add("Trailer", "SourceTrailer");
 
 
@@ -306,10 +306,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                         WriteAntAtribute(destXml, "Framerate", wFramerate);
 
                     // Now writing MF extended attributes
-                    WriteAntElement(destXml, "CERTIFICATION", Certification);
-                    WriteAntElement(destXml, "TAGLINE", Tagline);
+                    WriteAntElement(destXml, "MPAA", Certification);
+                    WriteAntElement(destXml, "TagLine", Tagline);
                     WriteAntElement(destXml, "Tags", Tags);
-                    WriteAntElement(destXml, "WRITERS", Writer);
+                    WriteAntElement(destXml, "Writer", Writer);
 
                     destXml.WriteEndElement();
                 }

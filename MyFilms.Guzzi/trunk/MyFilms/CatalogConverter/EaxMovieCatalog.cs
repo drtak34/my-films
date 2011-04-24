@@ -69,9 +69,9 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Subtitles", "Subtitles");
             ProfilerDict.Add("Writer", "Writer");
             ProfilerDict.Add("MPAA", "Certification");
-            ProfilerDict.Add("Tag", "Tags");
+            ProfilerDict.Add("Tags", "Tags");
           //ProfilerDict.Add("Borrower", "Borrower");
-          //ProfilerDict.Add("TagLine", "TagLine");
+            ProfilerDict.Add("TagLine", "TagLine");
           //ProfilerDict.Add("Trailer", "SourceTrailer");
         }
         public string ConvertEaxMovieCatalog(string source, string folderimage, string DestinationTagline, string DestinationTags, string DestinationCertification, string DestinationWriter, bool OnlyFile, string TitleDelim)
@@ -310,10 +310,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
 
                     // Now writing MF extended attributes
-                    WriteAntElement(destXml, "CERTIFICATION", Certification);
-                    WriteAntElement(destXml, "TAGLINE", Tagline);
+                    WriteAntElement(destXml, "MPAA", Certification);
+                    WriteAntElement(destXml, "TagLine", Tagline);
                     WriteAntElement(destXml, "Tags", Tags);
-                    WriteAntElement(destXml, "WRITERS", Writer);
+                    WriteAntElement(destXml, "Writer", Writer);
 
                     destXml.WriteEndElement();
                 }
