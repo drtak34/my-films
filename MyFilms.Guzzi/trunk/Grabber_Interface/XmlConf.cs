@@ -289,5 +289,7 @@ public class TagName
   //"Studio":
   //"IMDB_Rank":
   //"Edition":
+  //IMDB_Id
+  //TMDB_Id
 }
 
