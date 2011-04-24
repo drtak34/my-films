@@ -174,7 +174,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             foreach (DataColumn dc in ds.Movie.Columns)
             {
               if (dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
-                && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "IsOnline" && dc.ColumnName != "Aspectratio") 
+                && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "Aspectratio") 
                 // All those fieds are currently not supported by ANT-MC - they will be added, if CatalogType changes to external catalog to the respective fields
                 // Also removed Contents_Id and Pictures, as they mostly useless.
               {
@@ -1369,6 +1369,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 check_WOL_Userdialog.Checked = false;
 
             chkDVDprofilerMergeWithGenreField.Checked = false;
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DVDPTagField", "") == "Category")
+              chkDVDprofilerMergeWithGenreField.Checked = true;
+            else
+              chkDVDprofilerMergeWithGenreField.Checked = false;
             CheckWatched.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", false);
             CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", false);
             AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", false);
@@ -1912,14 +1916,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             SearchFileName.Checked = true;
 
             //Presets for useritems:
-            AntItem1.Text = "Writer";
-            AntLabel1.Text = GUILocalizeStrings.Get(10798684); // Writer
-            AntItem2.Text = "Producer";
-            AntLabel2.Text = GUILocalizeStrings.Get(10798662);
-            AntItem3.Text = "Certification";
-            AntLabel3.Text = GUILocalizeStrings.Get(10798683);
-            AntViewItem1.Text = "Writer";
-            AntViewText1.Text = GUILocalizeStrings.Get(10798684); // Writer;
+            AntItem1.Text = "Country";
+            AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
+            AntItem2.Text = "Certification";
+            AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
+            AntItem3.Text = "Category";
+            AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
+            AntItem4.Text = "Writer";
+            AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
+            AntItem5.Text = "Producer";
+            AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
+
             groupBoxExtendedFieldHandling.Enabled = true;
           }
           else groupBoxExtendedFieldHandling.Enabled = false;
@@ -1956,6 +1963,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
                     }
                     if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
+                    chkAddTagline.Checked = true;
+                    ECMergeDestinationFieldTagline.Text = "Description";
                     break;
               case 4: // EAX MC 2.5.0
                     AntStorage.Text = "Source";
@@ -1994,6 +2003,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // cover path
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // person thumb path
                       MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
+                      chkAddTagline.Checked = true;
+                      ECMergeDestinationFieldTagline.Text = "Description";
                     }
                     break;
 
@@ -2032,6 +2043,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //	<poster>images/image1_66_-1x-1.jpg</poster>
                     }
                     cbWatched.Text = "Checked";
+                    chkAddTagline.Checked = true;
+                    ECMergeDestinationFieldTagline.Text = "Description";
                     break;
 
                 case 11: // MovingPicturesXML V1.2
@@ -4584,12 +4597,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
           chkGrabber_ChooseScript.Checked = true; //Don't use default script (ask)
 
-          AntItem1.Text = "Producer";
-          AntLabel1.Text = "Producer";
-          AntItem2.Text = "DateAdded";
-          AntLabel2.Text = "DateAdded";
-          AntItem3.Text = "Size";
-          AntLabel3.Text = "Size";
+          AntItem1.Text = "Country";
+          AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
+          AntItem2.Text = "Producer";
+          AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
+          AntItem3.Text = "Category";
+          AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
+          AntItem4.Text = "Languages";
+          AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
+          AntItem5.Text = "DateAdded";
+          AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
 
           AntViewItem1.Text = "Producer";
           AntViewText1.Text = "Producer";
