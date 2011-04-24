@@ -94,7 +94,7 @@
 			<width>1280</width>
 			<height>720</height>
 			<texture>backgroundtop.png</texture>
-			<colordiffuse>ccffffff</colordiffuse>
+			<colordiffuse>cc808080</colordiffuse>
 			<visible>Control.isvisible(35)+!facadeview.filmstrip+!facadeview.coverflow</visible>
 			<animation effect="fade" time="70">visible</animation>
 			<animation effect="fade" time="70" delay="300">hidden</animation>
@@ -109,7 +109,7 @@
 			<height>100</height>
 			<texture>MyFilms\gradient_top.png</texture>
 			<colordiffuse>ccffffff</colordiffuse>
-			<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+			<visible>!control.isvisible(34)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -125,7 +125,7 @@
 			<height>300</height>
 			<texture>MyFilms\gradient.png</texture>
 			<colordiffuse>eeffffff</colordiffuse>
-			<visible>!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+			<visible>!control.isvisible(34)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -147,7 +147,7 @@
 			<type>label</type>
 			<id>1</id>
 			<posX>125</posX>
-			<posY>25</posY>
+			<posY>10</posY>
 			<label>#header.label</label>
 			<font>font18</font>
 			<align>left</align>
@@ -160,8 +160,8 @@
 		<control>
 			<description>Global Filter Icons group</description>
 			<type>group</type>
-			<posX>280</posX>
-			<posY>40</posY>
+			<posX>125</posX>
+			<posY>52</posY>
 			<layout>StackLayout(5,Horizontal,true)</layout>
             <dimColor>ffffffff</dimColor>
 		<control>
@@ -213,7 +213,7 @@
 			<description>Config Name and Filter</description>
 			<id>1</id>
 			<posX>425</posX>
-			<posY>37</posY>
+			<posY>40</posY>
 			<width>430</width>
 			<font>font14</font>
 			<textcolor>cca9d0f7</textcolor>
@@ -698,7 +698,7 @@
 			<id>2012</id>
 			<posX>425</posX>
 			<posY>630</posY>
-			<width>730</width>
+			<width>380</width>
 			<height>35</height>
 			 <texture>#myfilms.logos_id2012</texture>
 			<keepaspectratio>yes</keepaspectratio>
@@ -748,7 +748,7 @@
 		</control>
 		<control>
 			<type>label</type>
-			<description>User Item Label 1</description>
+			<description>User Item 1 Label</description>
 			<id>1</id>
 			<posX>45</posX>
 			<posY>670</posY>
@@ -771,16 +771,28 @@
 		</control>
 		<control>
 			<type>fadelabel</type>
-			<description>User Item 2</description>
+			<description>User Item 2 Label</description>
 			<id>1</id>
-			<posX>1200</posX>
+			<posX>940</posX>
 			<posY>632</posY>
-			<width>250</width>
+			<width>200</width>
 			<align>right</align>
-			<label>#myfilms.user.item2.label: #myfilms.user.item2.value</label>
+			<label>#myfilms.user.item2.label: </label>
 			<font>font11</font>
 			<textcolor>7fffffff</textcolor>
 			<visible>!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.item2.value)</visible>
+		</control>
+		<control>
+			<type>fadelabel</type>
+			<description>User Item 2</description>
+			<id>1</id>
+			<posX>950</posX>
+			<posY>632</posY>
+			<width>260</width>
+			<align>left</align>
+			<label>#myfilms.user.item2.value</label>
+			<font>font11</font>
+			<visible>!facadeview.filmstrip+!facadeview.coverflow</visible>
 		</control>
 		<control>
 			<type>image</type>
@@ -1175,7 +1187,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>ffffffff</colordiffuse>
-			<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.source.isonlinetrailer,False)</visible>
+			<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.sourcetrailer.isonline,False)</visible>
 		</control>
 		
 		<control>

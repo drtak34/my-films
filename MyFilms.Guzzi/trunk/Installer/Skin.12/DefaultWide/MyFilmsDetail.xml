@@ -67,7 +67,7 @@
 			<width>1280</width>
 			<height>720</height>
 			<texture>backgroundtop.png</texture>
-			<colordiffuse>ddffffff</colordiffuse>
+			<colordiffuse>cc808080</colordiffuse>
 			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
@@ -77,13 +77,12 @@
 			<description>Top Gradient Overlay for Fanart View</description>
 			<type>image</type>
 			<id>0</id>
-			<posX>-50</posX>
+			<posX>-200</posX>
 			<posY>0</posY>
 			<width>1680</width>
 			<height>100</height>
 			<texture>MyFilms\gradient_top.png</texture>
 			<colordiffuse>90ffffff</colordiffuse>
-			<visible>Control.HasFocus(10099)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -98,7 +97,6 @@
 			<width>1680</width>
 			<height>100</height>
 			<texture>MyFilms\gradient.png</texture>
-			<visible>Control.HasFocus(10099)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
@@ -132,7 +130,7 @@
 			<type>label</type>
 			<id>1</id>
 			<posX>125</posX>
-			<posY>25</posY>
+			<posY>10</posY>
 			<label>#header.label</label>
 			<font>font18</font>
 			<align>left</align>
@@ -144,10 +142,11 @@
 		</control>
 		<control>
 			<description>Filters group</description>
+			<posX>1</posX>
 			<type>group</type>
-			<posX>360</posX>
-			<posY>40</posY>
-			<layout>StackLayout(5,Horizontal)</layout>
+			<posX>125</posX>
+			<posY>50</posY>
+			<layout>StackLayout(5,Horizontal,true)</layout>
             <dimColor>ffffffff</dimColor>
 		<control>
 			<type>image</type>
@@ -1604,7 +1603,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.db.source.value)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.source.value)+!player.hasmedia</visible>
 		</control>
 		<control>
 			<description>Movie available Icon</description>
@@ -1618,7 +1617,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.db.source.value)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.value)+!player.hasmedia</visible>
 		</control>
 		<control>
 			<description>Movie offline Icon</description>
@@ -1632,7 +1631,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.db.source.value)+string.contains(#myfilms.user.source.isonline,False)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.value)+string.contains(#myfilms.user.source.isonline,False)+!player.hasmedia</visible>
 		</control>
 
 
@@ -1696,7 +1695,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>ffffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.source.isonlinetrailer,False)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.sourcetrailer.isonline,False)+!player.hasmedia</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
