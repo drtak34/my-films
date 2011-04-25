@@ -532,7 +532,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Disable Random Fanart Timer
             //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
             //m_bFanartTimerDisabled = true;
-
+            MyFilmsDetail.clearGUIProperty("Fanart");
+            MyFilmsDetail.clearGUIProperty("Fanart2");
             base.OnPageDestroy(new_windowId);
             LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
             Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
@@ -545,7 +546,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           base.OnShowContextMenu();
         }
 
-    //#region Main Context Menu
+    #region Main Context Menu
         //protected override void OnShowContextMenu()
         //{
         //  try
@@ -1200,7 +1201,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  }
 
         //}
-        //#endregion
+        #endregion
 
 
 

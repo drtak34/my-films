@@ -237,7 +237,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
                     dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Year" &&
                     dc.ColumnName != "Picture" && dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
-                    dc.ColumnName != "DateAdded" && dc.ColumnName != "Date")
+                    //dc.ColumnName != "DateAdded" && // disabled for Doug testing
+                    dc.ColumnName != "Date")
                 {
                   AntSort1.Items.Add(dc.ColumnName);
                   AntSort2.Items.Add(dc.ColumnName);
