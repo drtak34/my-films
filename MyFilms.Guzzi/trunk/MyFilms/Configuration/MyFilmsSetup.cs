@@ -4609,7 +4609,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
 
           AntViewItem1.Text = "Producer";
-          AntViewText1.Text = "Producer";
+          AntViewText1.Text = BaseMesFilms.Translate_Column(AntViewItem1.Text.Trim());
 
           cbWatched.Text = "Checked";
 

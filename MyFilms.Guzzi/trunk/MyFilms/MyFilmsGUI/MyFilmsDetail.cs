@@ -5864,8 +5864,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 m_SearchAnimation.Visible = enable;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+              LogMyFilms.Error("MFD: setProcessAnimationStatus - Exception: " + ex.StackTrace.ToString());
             }
         }
 

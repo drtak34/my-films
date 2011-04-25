@@ -3281,6 +3281,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             GUIWaitCursor.Init();
             GUIWaitCursor.Show();
+            GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
+            
             if (LoadDfltSlct)
             {
                 conf.Boolselect = false;
@@ -3592,8 +3594,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (choiceView == "view4")
                         i = 4;
 
-                    GUIWaitCursor.Show();
-                    GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
                     if (conf.StrViewItem[i] == "")
 
                     switch (conf.StrViewItem[i].ToLower())
@@ -3679,6 +3679,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         Configuration.CurrentConfig = newConfig;
                         InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
                         InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
+                        GUIWaitCursor.Init();
+                        GUIWaitCursor.Show();
                         MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
                         Load_Config(newConfig, true);
                         if (InitialStart)
@@ -3693,7 +3695,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                             backdrop.Active = false;
                         MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+                        GUIWaitCursor.Hide();
                     }
+                    else
+                      GUIControl.HideControl(GetID, 34); // show elements in skin
                     break;
 
                 case "nasstatus": //Check and show status of NAS Servers
