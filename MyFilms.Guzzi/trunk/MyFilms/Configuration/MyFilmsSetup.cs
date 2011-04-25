@@ -1950,10 +1950,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     AntStorageTrailer.Text = ""; // Disable Trailers ...
                     if (MesFilmsCat.Text.Length > 0)
                     {
-                      //if (MesFilmsImg.Text.Length == 0)
                       MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Images"; // cover path
                       //MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Persons"; // person thumb path
-                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Fanart"; // fanart path
+                      //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Fanart"; // fanart path
                     }
                     cbWatched.Text = "Checked";
                     if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
@@ -1965,7 +1964,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     {
                       MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // cover path
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // person thumb path
-                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
+                      //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
                     }
                     if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     chkAddTagline.Checked = true;
@@ -1978,7 +1977,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     {
                       MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures"; // cover path
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
-                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
+                      // Did Work! MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
                     }
                     if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
@@ -2007,7 +2006,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //c.	… eXtreme Movie Manager 7\Databases\Test_thumbs – for covers and thumbnails – this is where fanart might be stored as #-[movietitle]_fanart.jpg
                       MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // cover path
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // person thumb path
-                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
+                      //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
                       chkAddTagline.Checked = true;
                       ECMergeDestinationFieldTagline.Text = "Description";
                     }
@@ -2024,7 +2023,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //if (MesFilmsImg.Text.Length == 0)
                       MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures"; // cover path
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
-                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
+                      // Did Work! MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
                       //a.	Cover image folder = D:My Documents\Data\Eax Movie Catalog \Pictures
                       //b.	Person Thumbs = D:My Documents\Data\Eax Movie Catalog\NamePictures
                       //c.	Fanart = D:My Documents\Eax Movie Catalog\Thumbnails – depends on the script i.e. grabs photos, but TMDB scrip grabs fanart but if users have fanart in EAX this folder is where it will be stored.
@@ -2040,7 +2039,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     {
                       MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
                       MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Photos"; // person thumb path
-                      MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Screenshots"; // fanart path
+                      // Did Work! MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Screenshots"; // fanart path
                       // o	Posters - D:\My Documents\Personal Video Database\TEST\Posters – movie covers used in PVD DB - but setting to DB path required !
                       //o	D:\My Documents\Personal Video Database\TEST\Photos – actor/person images
                       //o	D:\My Documents\Personal Video Database\TEST\Screenshots – could be video thumbnails, fanart, manually saved thumbs
@@ -2059,7 +2058,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     {
                       MesFilmsImg.Text = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MovingPictures\Covers\FullSize"; // Covers path
                       MesFilmsImgArtist.Text = ""; // person thumb path
-                      MesFilmsFanart.Text = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MovingPictures\Backdrops\FullSize"; // fanart path
+                      // Did Work! MesFilmsFanart.Text = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MovingPictures\Backdrops\FullSize"; // fanart path
                     }
                     cbWatched.Text = "Checked";
                     break;
