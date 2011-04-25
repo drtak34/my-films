@@ -5116,8 +5116,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - (started from main menu)");
                       if (conf.StrPersons && !string.IsNullOrEmpty(conf.StrPathArtist))
                       {
-                        LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
                         personartworkpath = MyFilms.conf.StrPathArtist;
+                        LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
                       }
                       MyFilmsDetail.Download_Backdrops_Fanart(wtitle, wttitle, MyFilms.r[facadeView.SelectedListItem.ItemId]["Director"].ToString(), MyFilms.r[facadeView.SelectedListItem.ItemId]["Year"].ToString(), true, GetID, wtitle, personartworkpath);
                     }
@@ -5441,18 +5441,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
         {
-            MyFilmsActorInfo infoDlg =
-                (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo);
-            if (infoDlg == null)
-            {
-                return;
-                }
-            if (actor == null)
-            {
-                return;
-            }
-            infoDlg.Actor = actor;
-            infoDlg.DoModal(GetID);
+          MyFilmsActorInfo infoDlg = (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo);
+          LogMyFilms.Debug("MF: (OnVideoArtistInfoGuzzi): Creating (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo)");
+          if (infoDlg == null)
+          {
+            LogMyFilms.Debug("MF: (OnVideoArtistInfoGuzzi): infoDlg == null -> returning without action");
+            return;
+          }
+          if (actor == null)
+          {
+            LogMyFilms.Debug("MF: (OnVideoArtistInfoGuzzi): actor == null -> returning without action");
+            return;
+          }
+          infoDlg.Actor = actor;
+          infoDlg.DoModal(GetID);
         }
 
         ////*****************************************************************************************
@@ -7140,13 +7142,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
                 {
                   isonline = true;
-                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie   media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
                 }
                 else
                 {
                   isonline = false;
                   if (mediafile.Length > 0)
-                    LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                    LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie   media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
                 }
               }
               t["IsOnline"] = isonline.ToString();

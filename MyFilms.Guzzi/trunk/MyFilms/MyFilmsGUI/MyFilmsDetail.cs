@@ -1300,8 +1300,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
                         if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
                         {
-                          LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
                           personartworkpath = MyFilms.conf.StrPathArtist;
+                          LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
                         }
                         Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID, wtitle, personartworkpath);
                     }
@@ -3354,6 +3354,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             }
                           }
                         }
+                        else
+                          if (string.IsNullOrEmpty(personartworkpath))
+                            LogMyFilms.Debug("MFD: No Personartwork loaded - Personartworkpath is not set in setup!");
                     }
                     break;
             }
