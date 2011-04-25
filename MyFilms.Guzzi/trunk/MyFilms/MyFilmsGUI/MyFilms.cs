@@ -3977,8 +3977,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                       if (dc.ColumnName != null && !string.IsNullOrEmpty(BaseMesFilms.Translate_Column(dc.ColumnName)))
                       {
-                        dlg3.Add(BaseMesFilms.Translate_Column(dc.ColumnName));
-                        choiceGlobalMappings.Add(dc.ColumnName);
+                        if (dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "DateWatched" 
+                          && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer")
+                        {
+                          if (MyFilms.conf.StrFileType != "0" || (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
+                            && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" 
+                            && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio"))
+                          {
+                            dlg3.Add(BaseMesFilms.Translate_Column(dc.ColumnName));
+                            choiceGlobalMappings.Add(dc.ColumnName);
+                          }
+                        }
                       }
                     }
                     //string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
