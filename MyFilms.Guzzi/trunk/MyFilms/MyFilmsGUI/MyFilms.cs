@@ -2242,6 +2242,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (ItemId == -1)
             {
                 // reinit some fields
+                LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId == -1 -> return");
                 return;
             }
             if ((facadeView.SelectedListItem.IsFolder) && (MyFilms.conf.Boolselect))
@@ -2269,7 +2270,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //GUIControl.ShowControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 MyFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage.ToString());
-                // this.Load_Rating(0); // old method - nor more used
+                // Load_Rating(0); // old method - nor more used
                 MyFilmsDetail.clearGUIProperty("logos_id2001");
                 MyFilmsDetail.clearGUIProperty("logos_id2002");
                 MyFilmsDetail.clearGUIProperty("logos_id2003");
@@ -2352,8 +2353,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
               MyFilmsDetail.Load_Detailed_DB(ItemId, wrep);
 
-
-          // Load_Rating(conf.W_rating); // old method - nor more used
+            // Load_Rating(conf.W_rating); // old method - nor more used
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2393,30 +2393,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!(conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
             {
                 if (facadeView.SelectedListItemIndex > -1)
-                    this.Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
-                    //this.MovieDetailsPublisher(true);
+                    //Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
+                  MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
             }
             else
             {
                 if (facadeView.SelectedListItemIndex > -1 && !conf.Boolselect)
                 {
-                  this.Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
-                  //this.MovieDetailsPublisher(false);
+                  //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+                  MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
                   //LogMyFilms.Debug("MF: OnItemSelected - ItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Boolselect: '" + conf.Boolselect.ToString() + "', Details: 'false'");
                 }
                 else
                 {
-                    this.Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+                    //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
                     //LogMyFilms.Debug("MF: OnItemSelected - ItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Boolselect: '" + conf.Boolselect.ToString() + "', Details: 'false'");
-                    //this.MovieDetailsPublisher(false);
+                  MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
                     GUIControl.ShowControl(GetID, 34);
-                    //this.Load_Rating(0); // old method - nor more used
+                    //Load_Rating(0); // old method - nor more used
                 }
             } 
             //Load_Lstdetail(item.ItemId, true, item.Label);
         }
 
-        private void MovieDetailsPublisher(bool wrep)
+        private void MovieDetailsPublisher(int ItemId, bool wrep, string wlabel)
         {
           double tickCount = System.Windows.Media.Animation.AnimationTimer.TickCount;
 
@@ -2424,7 +2424,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (150 < (int)(tickCount - lastPublished)) // wait 100 ms to load details...
           {
             lastPublished = tickCount;
-            Load_Lstdetail(facadeView.SelectedListItem.ItemId, wrep, facadeView.SelectedListItem.Label);
+            Load_Lstdetail(ItemId, wrep, wlabel);
             return;
           }
           else // Publish on timer using the delay specified in settings

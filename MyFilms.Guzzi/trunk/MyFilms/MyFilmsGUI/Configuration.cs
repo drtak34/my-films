@@ -1380,8 +1380,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void SaveConfiguration(string currentConfig, int selectedItem, string selectedItemLabel)
         {
-            LogMyFilms.Debug("MFC: Configuration saving started for '" + currentConfig + "'");
-            XmlConfig XmlConfig = new XmlConfig();
+          LogMyFilms.Debug("MFC: Configuration saving started for '" + currentConfig + "'");
+          using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          {
+            //XmlConfig XmlConfig = new XmlConfig();
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", currentConfig);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrSelect", MyFilms.conf.StrSelect);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "StrActors", MyFilms.conf.StrActors);
@@ -1404,14 +1406,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
             switch (MyFilms.conf.StrFileType)
-                {
-                    case "0":
-                        break;
-                    case "1":
-                    XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
-                        break;
-                }
-            LogMyFilms.Debug("MFC: Configuration saving ended for '" + currentConfig + "'");
+            {
+              case "0":
+                break;
+              case "1":
+                XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", MyFilms.conf.StrFileXml);
+                break;
+            }
+            //XmlConfig.Dispose();
+          }
+          LogMyFilms.Debug("MFC: Configuration saving ended for '" + currentConfig + "'");
         }
         //--------------------------------------------------------------------------------------------
         //  Control Acces to asked configuration

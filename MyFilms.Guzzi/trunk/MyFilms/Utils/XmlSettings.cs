@@ -186,11 +186,22 @@ namespace MyFilmsPlugin.MyFilms.Utils
     //  return fDefault;
     //}
 
+
+    public void WriteXmlConfig(string FileName, string section, string entry, object objValue)
+    {
+      SetValue(section, entry, objValue);
+    }
+
     public void SetValue(string section, string entry, object objValue)
     {
       xmlDoc.SetValue(section, entry, objValue);
     }
 
+    public void WriteXmlConfig(string FileName, string section, string entry, bool bValue)
+    {
+      SetValueAsBool(section, entry, bValue);
+    }
+    
     public void SetValueAsBool(string section, string entry, bool bValue)
     {
       SetValue(section, entry, bValue ? "yes" : "no");
