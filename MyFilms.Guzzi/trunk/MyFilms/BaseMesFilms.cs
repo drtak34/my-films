@@ -61,7 +61,8 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception e)
             {
-                throw e;
+              LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+              throw e;
             }
         }
         #endregion
@@ -138,7 +139,7 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception e)
             {
-                LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
+                LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
   //            throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
             }
 

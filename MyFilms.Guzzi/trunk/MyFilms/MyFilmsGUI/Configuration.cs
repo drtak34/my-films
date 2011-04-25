@@ -46,8 +46,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //-----------------------------------------------------------------------------------------------
 
             LogMyFilms.Debug("MFC: Configuration loading started for '" + CurrentConfig + "'"); 
-            XmlConfig XmlConfig = new XmlConfig();
-            XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
+            XmlConfig XmlConfigold = new XmlConfig();
+            XmlConfigold.WriteXmlConfig("MyFilms", "MyFilms", "Current_Config", CurrentConfig);
             // the xmlwriter caused late update on the file when leaving MP, thus overwriting MyFilms.xml and moving changes to MyFilms.bak !!! -> We write directly only!
             //using (MediaPortal.Profile.Settings xmlwriter = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             //{
@@ -55,13 +55,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //  xmlwriter.Dispose();
             //}
             //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
-              StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", string.Empty);
-              StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", string.Empty);
-              StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", string.Empty);
-              StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", string.Empty);
-              StrDirStorActorThumbs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageActorThumbs", string.Empty);
-              UseOriginaltitleForMissingTranslatedtitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UseOriginaltitleForMissingTranslatedtitle", false);
+                StrStorage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorage", string.Empty);
+                StrDirStor = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorage", string.Empty);
+                StrStorageTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntStorageTrailer", string.Empty);
+                StrDirStorTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageTrailer", string.Empty);
+                StrDirStorActorThumbs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PathStorageActorThumbs", string.Empty);
+                UseOriginaltitleForMissingTranslatedtitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UseOriginaltitleForMissingTranslatedtitle", false);
                 SearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileName", "False");
                 SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", string.Empty);
@@ -158,6 +159,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     DestinationWriter = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddDestinationWriter", "");
                   else DestinationWriter = "";
                 }
+                LogMyFilms.Debug("MFC: switch (StrFileType) '" + StrFileType.ToString() + "'"); 
                 switch (StrFileType)
                 {
                     case "0":
@@ -438,7 +440,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         CurrentSortMethod = wDfltSortMethod;
                     }
                 }
-            }
+              XmlConfig.Dispose();
+            } // End reading config
+          
             if (StrSelect == "")
                 StrSelect = StrTitle1.ToString() + " not like ''";
             if (StrSort[0].Length == 0)
@@ -1417,24 +1421,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (configname.Length == 0)
                 return "";
 
-            XmlConfig XmlConfig = new XmlConfig();    
-            string Dwp = XmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", string.Empty);
-
-            if (Dwp.Length == 0)
-                return configname;
-            MediaPortal.Dialogs.VirtualKeyboard keyboard = (MediaPortal.Dialogs.VirtualKeyboard)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-            if (null == keyboard) return string.Empty;
-            keyboard.Reset();
-            keyboard.Text = string.Empty;
-            keyboard.Password = true;
-            keyboard.DoModal(GetID);
-            if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+            using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
+              //XmlConfig XmlConfig = new XmlConfig();    
+              string Dwp = XmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", string.Empty);
+
+
+              if (Dwp.Length == 0) return configname;
+              MediaPortal.Dialogs.VirtualKeyboard keyboard =
+                (MediaPortal.Dialogs.VirtualKeyboard)
+                MediaPortal.GUI.Library.GUIWindowManager.GetWindow(
+                  (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+              if (null == keyboard) return string.Empty;
+              keyboard.Reset();
+              keyboard.Text = string.Empty;
+              keyboard.Password = true;
+              keyboard.DoModal(GetID);
+              if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+              {
                 Crypto crypto = new Crypto();
-                if (crypto.Decrypter(Dwp) == keyboard.Text)
-                    return configname;
+                if (crypto.Decrypter(Dwp) == keyboard.Text) return configname;
+              }
+              return string.Empty;
             }
-            return string.Empty;
         }
         //--------------------------------------------------------------------------------------------
         //  Choice Configuration
@@ -1450,45 +1459,49 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             dlg.Reset();
             dlg.SetHeading(GUILocalizeStrings.Get(6022)); // Choose MyFilms DB Config
-//            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-//            {
-            XmlConfig XmlConfig = new XmlConfig();
-            int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
-            for (int i = 0; i < (int)MesFilms_nb_config; i++)
-              dlg.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
-//            }
-            dlg.DoModal(GetID);
-            if (dlg.SelectedLabel == -1)
+            using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
-              try
+              //XmlConfig XmlConfig = new XmlConfig();
+              int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+              for (int i = 0; i < (int)MesFilms_nb_config; i++) dlg.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+
+              dlg.DoModal(GetID);
+              if (dlg.SelectedLabel == -1)
               {
-                MyFilms.conf.StrFileXml = string.Empty;
-              }
-              catch (Exception ex)
-              {
-                LogMyFilms.Debug("MF: Error resetting config, as not yet loaded into memory - exception: " + ex.ToString());
-              }
-              return string.Empty;
-            }
-            if (dlg.SelectedLabelText.Length > 0)
-            {
-              string Catalog = XmlConfig.ReadXmlConfig("MyFilms", dlg.SelectedLabelText, "AntCatalog", string.Empty);
-              if (!System.IO.File.Exists(Catalog))
-              {
-                MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-                dlgOk.SetHeading(10798624);
-                dlgOk.SetLine(1, "Cannot load Configuration:");
-                dlgOk.SetLine(2, "'" + dlg.SelectedLabelText + "'");
-                dlgOk.SetLine(3, "Verify your settings !");
-                dlgOk.DoModal(MediaPortal.GUI.Library.GUIWindowManager.ActiveWindow);
+                try
+                {
+                  MyFilms.conf.StrFileXml = string.Empty;
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Debug(
+                    "MF: Error resetting config, as not yet loaded into memory - exception: " + ex.ToString());
+                }
                 return string.Empty;
               }
-              else
+              if (dlg.SelectedLabelText.Length > 0)
               {
-                return dlg.SelectedLabelText;
+                string Catalog = XmlConfig.ReadXmlConfig("MyFilms", dlg.SelectedLabelText, "AntCatalog", string.Empty);
+                if (!System.IO.File.Exists(Catalog))
+                {
+                  MediaPortal.Dialogs.GUIDialogOK dlgOk =
+                    (MediaPortal.Dialogs.GUIDialogOK)
+                    MediaPortal.GUI.Library.GUIWindowManager.GetWindow(
+                      (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+                  dlgOk.SetHeading(10798624);
+                  dlgOk.SetLine(1, "Cannot load Configuration:");
+                  dlgOk.SetLine(2, "'" + dlg.SelectedLabelText + "'");
+                  dlgOk.SetLine(3, "Verify your settings !");
+                  dlgOk.DoModal(MediaPortal.GUI.Library.GUIWindowManager.ActiveWindow);
+                  return string.Empty;
+                }
+                else
+                {
+                  return dlg.SelectedLabelText;
+                }
               }
             }
-            return string.Empty;
+          return string.Empty;
         }
         //--------------------------------------------------------------------------------------------
         //  Return Current Configuration
@@ -1496,9 +1509,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static void Current_Config()
         {
             CurrentConfig = null;
-//            using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-//            {
-            XmlConfig XmlConfig = new XmlConfig();
+            using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            {
+            //XmlConfig XmlConfig = new XmlConfig();
             NbConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", 0);
             pluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Reads Plugin start mode and sets to normal if not present
             LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");
@@ -1531,7 +1544,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CurrentConfig = Configuration.Control_Access_Config(CurrentConfig, MyFilms.ID_MyFilms);
             if ((CurrentConfig == "") && (NbConfig > 1) && (boolchoice)) //error password ? so if many config => choice config menu
                 CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
-//            }
+            }
         }
     }
 

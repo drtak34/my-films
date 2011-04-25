@@ -1321,7 +1321,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
                     {
                         Prev_MenuID = PreviousWindowId;
-                        InitMainScreen();
+                        InitMainScreen(false); // don't log to MyFilms.log Property clear
                         Configuration.Current_Config();
                         Load_Config(Configuration.CurrentConfig, true);
                         if (MyFilms.conf.StrFanart)
@@ -2187,7 +2187,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798639));
                 GUIWaitCursor.Show();
                 DisplayAllMovies();
-                InitMainScreen();
+                InitMainScreen(false);
                 GUIControl.ShowControl(GetID, 34); // hides certain GUI elements
                 SetLabelSelect("root");
                 SetLabelView("all");
@@ -3679,7 +3679,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     newConfig = Configuration.Control_Access_Config(newConfig, GetID);
                     if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
                     {
-                        InitMainScreen(); // reset all properties and values
+                        InitMainScreen(false); // reset all properties and values
                         //Change "Config":
                         if (facadeView.SelectedListItem != null)
                             Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
@@ -4035,7 +4035,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     UpdateUserItems(); // save to currentconfig - save time for WinDeInit
                     //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
                     //Load_Config(Configuration.CurrentConfig, true);
-                    MyFilmsDetail.Init_Detailed_DB(); // clear properties
+                    MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
                     Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
                     return;
 
@@ -6828,12 +6828,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //*****************************************************************************************
         //*  Initialize Fields on Main screen                                                     *
         //*****************************************************************************************
-        private void InitMainScreen()
+        private void InitMainScreen(bool log)
         {
             LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties !!!");
 
             MovieScrobbling = false; //Reset MovieScrobbling
-            MyFilmsDetail.Init_Detailed_DB();  // Includes clear of db & user properties
+            MyFilmsDetail.Init_Detailed_DB(log);  // Includes clear of db & user properties
 
             //if (MesFilms.conf.StrFanart)
             //    backdrop.Active = true;
@@ -6853,37 +6853,37 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge ->> This fucked up the fanart swapper !!!!!
             //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge
 
-            MyFilmsDetail.clearGUIProperty("logos_id2001");
-            MyFilmsDetail.clearGUIProperty("logos_id2002");
-            MyFilmsDetail.clearGUIProperty("logos_id2003");
-            MyFilmsDetail.clearGUIProperty("logos_id2012"); // Combined Logo
-            MyFilmsDetail.clearGUIProperty("nbobjects.value");
-            MyFilmsDetail.clearGUIProperty("Fanart");
-            MyFilmsDetail.clearGUIProperty("Fanart2");
-            MyFilmsDetail.clearGUIProperty("db.rating");
-            MyFilmsDetail.clearGUIProperty("view"); // Try to properly clean main view when entering
-            MyFilmsDetail.clearGUIProperty("select");
+            MyFilmsDetail.clearGUIProperty("logos_id2001", log);
+            MyFilmsDetail.clearGUIProperty("logos_id2002", log);
+            MyFilmsDetail.clearGUIProperty("logos_id2003", log);
+            MyFilmsDetail.clearGUIProperty("logos_id2012", log); // Combined Logo
+            MyFilmsDetail.clearGUIProperty("nbobjects.value", log);
+            MyFilmsDetail.clearGUIProperty("Fanart", log);
+            MyFilmsDetail.clearGUIProperty("Fanart2", log);
+            MyFilmsDetail.clearGUIProperty("db.rating", log);
+            MyFilmsDetail.clearGUIProperty("view", log); // Try to properly clean main view when entering
+            MyFilmsDetail.clearGUIProperty("select", log);
 
             GlobalFilterStringUnwatched = string.Empty;
             // Will be later initialized from setting MyFilms.conf.GlobalUnwatchedOnly
-            MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
+            MyFilmsDetail.clearGUIProperty("globalfilter.unwatched", log);
             if (!GlobalFilterTrailersOnly)
             {
               GlobalFilterStringTrailersOnly = "";
-              MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
+              MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly", log);
             }
 
             if (!GlobalFilterIsOnlineOnly)
             {
               GlobalFilterStringIsOnline = "";
-              MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
+              MyFilmsDetail.clearGUIProperty("globalfilter.isonline", log);
             }
 
             if (!GlobalFilterMinRating)
             {
               GlobalFilterStringMinRating = "";
-              MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
-              MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
+              MyFilmsDetail.clearGUIProperty("globalfilter.minrating", log);
+              MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue", log);
             }
             // this.Load_Rating(0); // old method - nor more used
             GUIWaitCursor.Hide();

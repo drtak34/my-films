@@ -3864,43 +3864,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  initialize exported fields to skin as '#myfilms.<ant db column name> 
         //-------------------------------------------------------------------------------------------
-        public static void Init_Detailed_DB()
+        public static void Init_Detailed_DB(bool log)
         {
             AntMovieCatalog ds = new AntMovieCatalog();
             foreach (DataColumn dc in ds.Movie.Columns)
             {
                 //clearGUIProperty("db." + dc.ColumnName.ToLower() + ".label"); // Don't Clear Labels - they're only set once when plugin start !
-                clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value");
+              clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value", log);
             }
 
             //Clear userdefined properties
-            clearGUIProperty("db.calc.format.value");
-            clearGUIProperty("db.calc.aspectratio.value");
-            clearGUIProperty("db.calc.imageformat.value");
+            clearGUIProperty("db.calc.format.value", log);
+            clearGUIProperty("db.calc.aspectratio.value", log);
+            clearGUIProperty("db.calc.imageformat.value", log);
 
-            clearGUIProperty("user.mastertitle.label");
-            clearGUIProperty("user.mastertitle.value");
-            clearGUIProperty("user.secondarytitle.label");
-            clearGUIProperty("user.secondarytitle.value");
-            clearGUIProperty("user.item1.label");
-            clearGUIProperty("user.item1.field");
-            clearGUIProperty("user.item1.value");
-            clearGUIProperty("user.item2.label");
-            clearGUIProperty("user.item2.field");
-            clearGUIProperty("user.item2.value");
-            clearGUIProperty("user.item3.label");
-            clearGUIProperty("user.item3.field");
-            clearGUIProperty("user.item3.value");
-            clearGUIProperty("user.item4.label");
-            clearGUIProperty("user.item4.field");
-            clearGUIProperty("user.item4.value");
-            clearGUIProperty("user.item5.label");
-            clearGUIProperty("user.item5.field");
-            clearGUIProperty("user.item5.value");
-            clearGUIProperty("user.source.value");
-            clearGUIProperty("user.sourcetrailer.value");
-            clearGUIProperty("user.sourcetrailer.count");
-            clearGUIProperty("user.watched.value");
+            clearGUIProperty("user.mastertitle.label", log);
+            clearGUIProperty("user.mastertitle.value", log);
+            clearGUIProperty("user.secondarytitle.label", log);
+            clearGUIProperty("user.secondarytitle.value", log);
+            clearGUIProperty("user.item1.label", log);
+            clearGUIProperty("user.item1.field", log);
+            clearGUIProperty("user.item1.value", log);
+            clearGUIProperty("user.item2.label", log);
+            clearGUIProperty("user.item2.field", log);
+            clearGUIProperty("user.item2.value", log);
+            clearGUIProperty("user.item3.label", log);
+            clearGUIProperty("user.item3.field", log);
+            clearGUIProperty("user.item3.value", log);
+            clearGUIProperty("user.item4.label", log);
+            clearGUIProperty("user.item4.field", log);
+            clearGUIProperty("user.item4.value", log);
+            clearGUIProperty("user.item5.label", log);
+            clearGUIProperty("user.item5.field", log);
+            clearGUIProperty("user.item5.value", log);
+            clearGUIProperty("user.source.value", log);
+            clearGUIProperty("user.sourcetrailer.value", log);
+            clearGUIProperty("user.sourcetrailer.count", log);
+            clearGUIProperty("user.watched.value", log);
         }
 
         //-------------------------------------------------------------------------------------------
@@ -6206,7 +6206,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             byte[] hwAddress;
 
             //Get settings from MediaPortal.xml
-            using (Settings xmlreader = new MPSettings())
+            using (MediaPortal.Profile.Settings xmlreader = new MPSettings())
             //using (Settings xmlreader = new MediaPortal.Profile.MPSettings())
             {
                 hostName = xmlreader.GetValueAsString("nas", "hostname", "");
@@ -6281,7 +6281,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
 
                     //Use stored MAC address
-                    using (Settings xmlreader = new MPSettings())
+                    using (MediaPortal.Profile.Settings xmlreader = new MPSettings())
                     {
                         macAddress = xmlreader.GetValueAsString("nas", "macAddress", null);
                     }
@@ -6340,9 +6340,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //    setGUIProperty(name.ToString(), value);
         //}
 
+
         public static void setGUIProperty(string name, string value)
         {
+          setGUIProperty(name, value, true);
+        }
+
+        public static void setGUIProperty(string name, string value, bool log)
+        {
             string property = "#myfilms." + name;
+            if (log)
             LogMyFilms.Debug("MF: setGuiProperty [{0}]: '{1}'", property, value);
             GUIPropertyManager.SetProperty(property, value);
         }
@@ -6354,7 +6361,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void clearGUIProperty(string name)
         {
-            setGUIProperty(name, string.Empty);
+          setGUIProperty(name, string.Empty, true);
+        }
+
+        public static void clearGUIProperty(string name, bool log)
+        {
+            setGUIProperty(name, string.Empty, log);
         }
 
         public static void GetActorByName(string strActorName, ArrayList actors)
