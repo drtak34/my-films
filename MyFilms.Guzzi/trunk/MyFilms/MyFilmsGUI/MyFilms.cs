@@ -7137,7 +7137,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string[] Mediafiles = oRegex.Split(fileName);
               foreach (string mediafile in Mediafiles)
               {
-                if (System.IO.File.Exists(mediafile))
+                if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
                 {
                   isonline = true;
                   LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
@@ -7145,7 +7145,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 else
                 {
                   isonline = false;
-                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                  if (mediafile.Length > 0)
+                    LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
                 }
               }
               t["IsOnline"] = isonline.ToString();
@@ -7174,7 +7175,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string[] Mediafiles = oRegex.Split(fileName);
               foreach (string mediafile in Mediafiles)
               {
-                if (System.IO.File.Exists(mediafile))
+                if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
                 {
                   isonline = true;
                   LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
@@ -7182,7 +7183,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 else
                 {
                   isonline = false;
-                  LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                  if (mediafile.Length > 0)
+                    LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
                 }
               }
               t["IsOnlineTrailer"] = isonline.ToString();
