@@ -106,7 +106,6 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
@@ -487,6 +486,8 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
+          this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -659,16 +660,6 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
-          // 
-          // traktConfiguration
-          // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -2670,7 +2661,7 @@
           this.groupBox_Separators.Controls.Add(this.RoleSeparator1);
           this.groupBox_Separators.Controls.Add(this.label24);
           this.groupBox_Separators.Controls.Add(this.ListSeparator1);
-          this.groupBox_Separators.Location = new System.Drawing.Point(377, 85);
+          this.groupBox_Separators.Location = new System.Drawing.Point(377, 94);
           this.groupBox_Separators.Name = "groupBox_Separators";
           this.groupBox_Separators.Size = new System.Drawing.Size(350, 125);
           this.groupBox_Separators.TabIndex = 28;
@@ -3012,9 +3003,9 @@
           this.chkGlobalUnwatchedOnly.AutoSize = true;
           this.chkGlobalUnwatchedOnly.Location = new System.Drawing.Point(10, 130);
           this.chkGlobalUnwatchedOnly.Name = "chkGlobalUnwatchedOnly";
-          this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(302, 17);
+          this.chkGlobalUnwatchedOnly.Size = new System.Drawing.Size(167, 17);
           this.chkGlobalUnwatchedOnly.TabIndex = 80;
-          this.chkGlobalUnwatchedOnly.Text = "Show only unwatched movies (can be changed from GUI).";
+          this.chkGlobalUnwatchedOnly.Text = "Show only unwatched movies";
           this.ToolTip1.SetToolTip(this.chkGlobalUnwatchedOnly, resources.GetString("chkGlobalUnwatchedOnly.ToolTip"));
           this.chkGlobalUnwatchedOnly.UseVisualStyleBackColor = true;
           // 
@@ -3729,6 +3720,7 @@
           // 
           // groupBox_PlayMovieInfos
           // 
+          this.groupBox_PlayMovieInfos.Controls.Add(this.chkScanMediaOnStart);
           this.groupBox_PlayMovieInfos.Controls.Add(this.groupBoxMoviePathInfos);
           this.groupBox_PlayMovieInfos.Controls.Add(this.AntIdentLabel);
           this.groupBox_PlayMovieInfos.Controls.Add(this.label6);
@@ -3750,7 +3742,7 @@
           this.groupBoxMoviePathInfos.Controls.Add(this.butPath);
           this.groupBoxMoviePathInfos.Controls.Add(this.SearchFileName);
           this.groupBoxMoviePathInfos.Controls.Add(this.ItemSearchFileName);
-          this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 44);
+          this.groupBoxMoviePathInfos.Location = new System.Drawing.Point(6, 61);
           this.groupBoxMoviePathInfos.Name = "groupBoxMoviePathInfos";
           this.groupBoxMoviePathInfos.Size = new System.Drawing.Size(446, 96);
           this.groupBoxMoviePathInfos.TabIndex = 71;
@@ -3825,7 +3817,7 @@
           // 
           // AntIdentLabel
           // 
-          this.AntIdentLabel.Location = new System.Drawing.Point(335, 157);
+          this.AntIdentLabel.Location = new System.Drawing.Point(335, 165);
           this.AntIdentLabel.Name = "AntIdentLabel";
           this.AntIdentLabel.Size = new System.Drawing.Size(117, 20);
           this.AntIdentLabel.TabIndex = 57;
@@ -3852,7 +3844,7 @@
           // label4
           // 
           this.label4.AutoSize = true;
-          this.label4.Location = new System.Drawing.Point(11, 159);
+          this.label4.Location = new System.Drawing.Point(11, 167);
           this.label4.Name = "label4";
           this.label4.Size = new System.Drawing.Size(109, 13);
           this.label4.TabIndex = 58;
@@ -3861,7 +3853,7 @@
           // AntIdentItem
           // 
           this.AntIdentItem.FormattingEnabled = true;
-          this.AntIdentItem.Location = new System.Drawing.Point(172, 156);
+          this.AntIdentItem.Location = new System.Drawing.Point(172, 164);
           this.AntIdentItem.Name = "AntIdentItem";
           this.AntIdentItem.Size = new System.Drawing.Size(157, 21);
           this.AntIdentItem.TabIndex = 56;
@@ -4813,6 +4805,27 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // traktConfiguration
+          // 
+          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration.Name = "traktConfiguration";
+          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration.TabIndex = 0;
+          // 
+          // chkScanMediaOnStart
+          // 
+          this.chkScanMediaOnStart.AutoSize = true;
+          this.chkScanMediaOnStart.Location = new System.Drawing.Point(27, 37);
+          this.chkScanMediaOnStart.Name = "chkScanMediaOnStart";
+          this.chkScanMediaOnStart.Size = new System.Drawing.Size(120, 17);
+          this.chkScanMediaOnStart.TabIndex = 83;
+          this.chkScanMediaOnStart.Text = "Scan media on start";
+          this.ToolTip1.SetToolTip(this.chkScanMediaOnStart, resources.GetString("chkScanMediaOnStart.ToolTip"));
+          this.chkScanMediaOnStart.UseVisualStyleBackColor = true;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5325,5 +5338,6 @@
         private TextBox AntLabel4;
         private ComboBox AntItem5;
         private ComboBox AntItem4;
+        private CheckBox chkScanMediaOnStart;
     }
 }

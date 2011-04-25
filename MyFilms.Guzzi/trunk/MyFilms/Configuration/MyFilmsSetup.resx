@@ -545,6 +545,13 @@ You still can tweak all settings later to your personal preferences.
 The wizard is only working, if you have no existing config selected - so empty the configuration name field, 
 if you want to create a new config with the wizard!</value>
   </data>
+  <data name="chkScanMediaOnStart.ToolTip" xml:space="preserve">
+    <value>If checked, MyFilms will automatically scan all media files (films, trailer) to check 
+if they are currently "reachable".
+This is useful if you have stored parts of your movies on storage that is now always available, 
+e.g. USB drives or NAS servers.
+THe scan can also be launched from GUI in global options.</value>
+  </data>
   <data name="PathStorage.ToolTip" xml:space="preserve">
     <value>Enter the full path to the folder(s) containing the movie files.  
 You can enter several different pathes separated by a semi-colon and you can select the option “search in sub-folders”, if required.  

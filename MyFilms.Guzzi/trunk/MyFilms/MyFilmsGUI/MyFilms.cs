@@ -1315,6 +1315,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
                     bool result = base.OnMessage(messageType);
                     //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
+                    GUIWaitCursor.Init();
+                    GUIWaitCursor.Show();
                     if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
                     {
                         Prev_MenuID = PreviousWindowId;
@@ -1362,12 +1364,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     GUIControl.ShowControl(GetID, 34);
                     GUIWaitCursor.Hide();
+                    bool launchMediaScanner = InitialStart;
 
                     if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
                         Fin_Charge_Init(true,false);
                     else
                         Fin_Charge_Init(false, false);
-
+                    // Launch Background availability scanner, if configured in setup
+                    if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
+                    {
+                      LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
+                      this.AsynIsOnlineCheck();
+                    }
                     LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
                     return true;
 
@@ -3687,6 +3695,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
                         else
                             Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+
+                        // Launch Background availability scanner, if configured in setup
+                        if (MyFilms.conf.ScanMediaOnStart && InitialStart)
+                        {
+                          LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + InitialStart.ToString() + "'");
+                          this.AsynIsOnlineCheck();
+                        }
 
                         InitialStart = false; // Guzzi: Set InitialStart to false after initialization done
 

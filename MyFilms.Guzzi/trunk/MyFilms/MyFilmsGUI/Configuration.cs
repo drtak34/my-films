@@ -419,6 +419,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 WindowsFileDialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WindowsFileDialog", false);
                 GlobalUnwatchedOnly = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnly", false);
                 GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnlyValue", "false");
+                ScanMediaOnStart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckMediaOnStart", false);
                 UseListViewForGoups = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UseListviewForGroups", true);
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
                 if ((AlwaysDefaultView) || (MyFilms.InitialStart))
@@ -537,6 +538,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return globalUnwatchedOnlyValue; }
           set { globalUnwatchedOnlyValue = value; }
+        }
+        private bool scanMediaOnStart = false;
+        public bool ScanMediaOnStart
+        {
+          get { return scanMediaOnStart; }
+          set { scanMediaOnStart = value; }
         }
         private bool onlyTitleList = false;
         public bool OnlyTitleList
