@@ -1275,6 +1275,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "fanart":
+                    if (!MyFilmsDetail.IsInternetConnectionAvailable()) break; // stop, if no internet available
                     setProcessAnimationStatus(true, m_SearchAnimation);
                     Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
                     string wtitle = string.Empty;
@@ -6456,7 +6457,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
-      private bool IsInternetConnectionAvailable ()
+      public static bool IsInternetConnectionAvailable ()
       {
         // Check Internet connection
         if (!Win32API.IsConnectedToInternet())

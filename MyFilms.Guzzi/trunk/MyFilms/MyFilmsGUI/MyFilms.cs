@@ -5097,6 +5097,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "fanart":
+                    if (!MyFilmsDetail.IsInternetConnectionAvailable()) break; // stop, if no internet available
+                  
                     Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
                     string wtitle = string.Empty;
                     string personartworkpath = string.Empty;
