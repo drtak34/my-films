@@ -233,20 +233,6 @@
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\trailer_led_green.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{24075db5-4766-4fef-9910-e5bd96f32be3}-trailer_led_green.png</ZipFileName>
-              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\trailer_led_green.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\trailer_led_red.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{6f33915d-229b-4097-adcd-d77c347e678e}-trailer_led_red.png</ZipFileName>
-              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\trailer_led_red.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\Action.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{986c7f58-ef42-456a-bb8e-931ba7c01dd8}-Action.png</ZipFileName>
               <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\Action.png</DestinationFilename>
@@ -523,20 +509,6 @@
               <LocalFileName>Skin.12\Default\Media\MyFilms\Trailer.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{a1e9df5f-adc7-4cd8-a3c1-9c91e7891efd}-Trailer.png</ZipFileName>
               <DestinationFilename>%Skin%\Default\Media\MyFilms\Trailer.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Default\Media\MyFilms\trailer_led_green.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{148cdbad-b089-4e43-b1f9-49315039eae9}-trailer_led_green.png</ZipFileName>
-              <DestinationFilename>%Skin%\Default\Media\MyFilms\trailer_led_green.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Default\Media\MyFilms\trailer_led_red.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{aabd1ac8-d63f-4ba6-8f39-fd98ed5b4704}-trailer_led_red.png</ZipFileName>
-              <DestinationFilename>%Skin%\Default\Media\MyFilms\trailer_led_red.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -821,41 +793,6 @@
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_is_available.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{03b6358c-242a-4666-8f4a-4310f785da25}-trailer_is_available.png</ZipFileName>
-              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_is_available.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_is_unavailable.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{e5028f99-7f81-47b5-8e56-df70391e0cb2}-trailer_is_unavailable.png</ZipFileName>
-              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_is_unavailable.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_led_green.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{39a1aad4-fd21-4968-adc0-608739212ea8}-trailer_led_green.png</ZipFileName>
-              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_led_green.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_led_red.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{4974bcd6-137c-431d-b272-3ce625bce601}-trailer_led_red.png</ZipFileName>
-              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_led_red.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_led_yellow.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2515e99d-394e-475e-921e-f125241ce9da}-trailer_led_yellow.png</ZipFileName>
-              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_led_yellow.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.12\Black Glass\Media\MyFilms\UserRatingStarOff.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{a95a5850-50ec-4798-a021-aedce56e7059}-UserRatingStarOff.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\UserRatingStarOff.png</DestinationFilename>
@@ -866,6 +803,34 @@
               <LocalFileName>Skin.12\Black Glass\Media\MyFilms\UserRatingStarOn.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{f266fd49-57dc-4e93-ae50-9de85b4a825c}-UserRatingStarOn.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\UserRatingStarOn.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilmsActorsInfo.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{482113f0-dc06-4f93-81d9-4fd032d50562}-MyFilmsActorsInfo.xml</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\MyFilmsActorsInfo.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\status_led_green.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{cc711750-9e9d-483a-b02e-c8f0469f5761}-status_led_green.png</ZipFileName>
+              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\status_led_green.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\status_led_red.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{3f40b550-7e76-498c-936f-c12fc8b8005f}-status_led_red.png</ZipFileName>
+              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\status_led_red.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\status_led_yellow.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5b89e56e-4994-4aa8-893a-133e61fa455f}-status_led_yellow.png</ZipFileName>
+              <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\status_led_yellow.png</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -2913,7 +2878,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>729</Revision>
+      <Revision>742</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2921,7 +2886,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.729(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.742(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3165,20 +3130,6 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\Trailer.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{559e2379-afe7-406a-bd61-0b4b74b5379c}-Trailer.png</ZipFileName>
         <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\Trailer.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\trailer_led_green.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{24075db5-4766-4fef-9910-e5bd96f32be3}-trailer_led_green.png</ZipFileName>
-        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\trailer_led_green.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\trailer_led_red.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{6f33915d-229b-4097-adcd-d77c347e678e}-trailer_led_red.png</ZipFileName>
-        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\trailer_led_red.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -3463,20 +3414,6 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Default\Media\MyFilms\trailer_led_green.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{148cdbad-b089-4e43-b1f9-49315039eae9}-trailer_led_green.png</ZipFileName>
-        <DestinationFilename>%Skin%\Default\Media\MyFilms\trailer_led_green.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Default\Media\MyFilms\trailer_led_red.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{aabd1ac8-d63f-4ba6-8f39-fd98ed5b4704}-trailer_led_red.png</ZipFileName>
-        <DestinationFilename>%Skin%\Default\Media\MyFilms\trailer_led_red.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin.12\Default\Media\Logos\MyFilms\Action.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{ec05f7cb-9c45-4356-a10f-0faf3ff32a1f}-Action.png</ZipFileName>
         <DestinationFilename>%Skin%\Default\Media\Logos\MyFilms\Action.png</DestinationFilename>
@@ -3757,41 +3694,6 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_is_available.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{03b6358c-242a-4666-8f4a-4310f785da25}-trailer_is_available.png</ZipFileName>
-        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_is_available.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_is_unavailable.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e5028f99-7f81-47b5-8e56-df70391e0cb2}-trailer_is_unavailable.png</ZipFileName>
-        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_is_unavailable.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_led_green.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{39a1aad4-fd21-4968-adc0-608739212ea8}-trailer_led_green.png</ZipFileName>
-        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_led_green.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_led_red.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{4974bcd6-137c-431d-b272-3ce625bce601}-trailer_led_red.png</ZipFileName>
-        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_led_red.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\trailer_led_yellow.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2515e99d-394e-475e-921e-f125241ce9da}-trailer_led_yellow.png</ZipFileName>
-        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\trailer_led_yellow.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin.12\Black Glass\Media\MyFilms\UserRatingStarOff.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{a95a5850-50ec-4798-a021-aedce56e7059}-UserRatingStarOff.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\UserRatingStarOff.png</DestinationFilename>
@@ -3802,6 +3704,34 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <LocalFileName>Skin.12\Black Glass\Media\MyFilms\UserRatingStarOn.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{f266fd49-57dc-4e93-ae50-9de85b4a825c}-UserRatingStarOn.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\UserRatingStarOn.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\MyFilmsActorsInfo.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{482113f0-dc06-4f93-81d9-4fd032d50562}-MyFilmsActorsInfo.xml</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\MyFilmsActorsInfo.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\status_led_green.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{cc711750-9e9d-483a-b02e-c8f0469f5761}-status_led_green.png</ZipFileName>
+        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\status_led_green.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\status_led_red.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{3f40b550-7e76-498c-936f-c12fc8b8005f}-status_led_red.png</ZipFileName>
+        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\status_led_red.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\status_led_yellow.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5b89e56e-4994-4aa8-893a-133e61fa455f}-status_led_yellow.png</ZipFileName>
+        <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\status_led_yellow.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -5522,14 +5452,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{8707b6e2-f7b2-45b0-87a8-22a6e2e3f5a3}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{8d5f47b3-f455-4bfe-9c60-33a18cb60a21}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{faa85686-abc6-4076-8673-9f2aac65c977}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a1d98f07-be10-446f-8fe1-7babeac63f0d}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
