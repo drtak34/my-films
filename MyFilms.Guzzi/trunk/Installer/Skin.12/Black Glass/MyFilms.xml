@@ -918,6 +918,7 @@
 			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.sourcetrailer.isonline,False)</visible>
 		</control>
 
+
 <!-- Global Overlay Filter Info -->
 
 	<control>
@@ -927,9 +928,11 @@
 		<posY>21</posY>
 		<layout>StackLayout(5,Horizontal,true)</layout>
        		<dimColor>ffffffff</dimColor>
+		<!-- 
 		<animation effect="fade" time="250">visiblechange</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
 		<animation effect="fade" time="250">WindowOpen</animation>
+		-->
 		<control>
 			<type>image</type>
 			<description>UnWatched Global Filter Icon</description>
@@ -989,6 +992,8 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> -->
 	</control>
+
+
 
 
 <!-- THUMBVIEW -->
@@ -1486,20 +1491,6 @@
 			<Duration>0:0:01.5</Duration>
 			<keepaspectratio>yes</keepaspectratio>
 		</control>
-
-			<!-- IMPORT PROCESS ANIMATION -->
-			<control>
-				<description>Import Animation</description>
-				<type>animation</type>
-				<id>51</id>
-				<posX>610</posX>
-				<posY>380</posY>
-				<width>48</width>
-				<height>48</height>
-				<textures>common.waiting.1.png;common.waiting.2.png;common.waiting.3.png;common.waiting.4.png;common.waiting.5.png;common.waiting.6.png;common.waiting.7.png;common.waiting.8.png</textures>
-				<Duration>0:0:01.5</Duration>
-				<keepaspectratio>yes</keepaspectratio>
-			</control>
 
   </controls>
 </window>
