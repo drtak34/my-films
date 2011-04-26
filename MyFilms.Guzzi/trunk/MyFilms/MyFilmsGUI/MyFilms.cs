@@ -1343,7 +1343,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIWindowManager.ActivateWindow(Prev_MenuID);
             return;
           }
-          break;
+          //break;
         case Action.ActionType.ACTION_CONTEXT_MENU:
           if (facadeView.SelectedListItemIndex > -1)
           {

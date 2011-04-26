@@ -69,6 +69,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private bool WizardActive = false; // Status of running new config wizard (to control check behaviour)
         private bool RunWizardAfterInstall = false; // Will only be set true after first blank install, when no MyFilms.xml config is present to launch Wizard.
+        private bool NewConfigButton = false; // Will avid that catalogselectedindex-changed will be run on "New!" config...
         private string ActiveLogoPath = String.Empty;
 
         public static string cTraktUsername = String.Empty;
@@ -1177,6 +1178,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void Config_Name_Load()
         {
+            Refresh_Tabs(true); // enable Tabs
             Refresh_Items(false);
             CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CatalogType", "0"));
             MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AntCatalog", "");
@@ -1471,6 +1473,51 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             cTraktUsername = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktUsername", "");
             cTraktPassword = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktPassword", "");
             textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
+        }
+
+        private void Refresh_Tabs(bool enable)
+        {
+          if (!enable)
+          {
+            Tab_Trailer.Enabled = false;
+            Tab_Logos.Enabled = false;
+            Tab_Views.Enabled = false;
+            Tab_Search.Enabled = false;
+            Tab_Update.Enabled = false;
+            Tab_AMCupdater.Enabled = false;
+            Tab_Artwork.Enabled = false;
+            Tab_ExternalCatalogs.Enabled = false;
+            Tab_WakeOnLan.Enabled = false;
+            Tab_Trakt.Enabled = false;
+            MesFilmsCat.Enabled = false;
+            CatalogType.Enabled = false;
+            ButCat.Enabled = false;
+            groupBox_TitleOrder.Enabled = false;
+            groupBox_Security.Enabled = false;
+            groupBox_PlayMovieInfos.Enabled = false;
+            groupBox_PreLaunchingCommand.Enabled = false;
+
+          }
+          else
+          {
+            Tab_Trailer.Enabled = true;
+            Tab_Logos.Enabled = true;
+            Tab_Views.Enabled = true;
+            Tab_Search.Enabled = true;
+            Tab_Update.Enabled = true;
+            Tab_AMCupdater.Enabled = true;
+            Tab_Artwork.Enabled = true;
+            Tab_ExternalCatalogs.Enabled = true;
+            Tab_WakeOnLan.Enabled = true;
+            Tab_Trakt.Enabled = true;
+            MesFilmsCat.Enabled = true;
+            CatalogType.Enabled = true;
+            ButCat.Enabled = true;
+            groupBox_TitleOrder.Enabled = true;
+            groupBox_Security.Enabled = true;
+            groupBox_PlayMovieInfos.Enabled = true;
+            groupBox_PreLaunchingCommand.Enabled = true;
+          }
         }
 
         private void Refresh_Items(bool all)
@@ -1893,57 +1940,59 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           if (CatalogType.SelectedIndex != 0) // all presets for "Non-ANT-MC-Catalogs/External Catalogs"
           {
-            chkFanart.Checked = true;
-            chkDfltFanart.Checked = false;
-            chkDfltFanartImage.Checked = true;
-            chkDfltFanartImageAll.Checked = true;
-            chkPersons.Checked = true; // enable person thumbs
-            Tab_AMCupdater.Enabled = false;
-            Tab_Update.Enabled = false;
+            if (!NewConfigButton)
+            {
+              chkFanart.Checked = true;
+              chkDfltFanart.Checked = false;
+              chkDfltFanartImage.Checked = true;
+              chkDfltFanartImageAll.Checked = true;
+              chkPersons.Checked = true; // enable person thumbs
+              Tab_AMCupdater.Enabled = false;
+              Tab_Update.Enabled = false;
+              if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en" || AntTitle1.Text == "OriginalTitle")
+              {
+                //if (string.IsNullOrEmpty(AntTitle1.Text))
+                AntTitle1.Text = "OriginalTitle";
+                AntTitle2.Text = "TranslatedTitle";
+                ItemSearchFileName.Text = "OriginalTitle";
+                AntSTitle.Text = "OriginalTitle";
+              }
+              else
+              {
+                AntTitle1.Text = "TranslatedTitle";
+                AntTitle2.Text = "OriginalTitle";
+                ItemSearchFileName.Text = "TranslatedTitle";
+                AntSTitle.Text = "TranslatedTitle";
+              }
+              //if (string.IsNullOrEmpty(AntSTitle.Text)) AntSTitle.Text = "FormattedTitle";
+              TitleDelim.Text = "\\";
+              SearchFileName.Checked = true;
+
+              //Presets for useritems:
+              AntItem1.Text = "Country";
+              AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
+              AntItem2.Text = "Certification";
+              AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
+              AntItem3.Text = "Category";
+              AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
+              AntItem4.Text = "Writer";
+              AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
+              AntItem5.Text = "Producer";
+              AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
+            }
+            Tab_ExternalCatalogs.Enabled = true;
             txtPicturePrefix.Text = "";
             if (!AntViewItem1.Items.Contains("Writer")) // only add if not already done!
               AddExtendedFieldsForExternalCatalogs();
 
-            if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToLower() == "en" || AntTitle1.Text == "OriginalTitle")
-            {
-              //if (string.IsNullOrEmpty(AntTitle1.Text))
-              AntTitle1.Text = "OriginalTitle";
-              AntTitle2.Text = "TranslatedTitle";
-              ItemSearchFileName.Text = "OriginalTitle";
-              AntSTitle.Text = "OriginalTitle";
-            }
-            else
-            {
-              AntTitle1.Text = "TranslatedTitle";
-              AntTitle2.Text = "OriginalTitle";
-              ItemSearchFileName.Text = "TranslatedTitle";
-              AntSTitle.Text = "TranslatedTitle";
-            }
-            //if (string.IsNullOrEmpty(AntSTitle.Text)) AntSTitle.Text = "FormattedTitle";
-            TitleDelim.Text = "\\";
-            SearchFileName.Checked = true;
-
-            //Presets for useritems:
-            AntItem1.Text = "Country";
-            AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
-            AntItem2.Text = "Certification";
-            AntLabel2.Text = BaseMesFilms.Translate_Column(AntItem2.Text.Trim());
-            AntItem3.Text = "Category";
-            AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
-            AntItem4.Text = "Writer";
-            AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
-            AntItem5.Text = "Producer";
-            AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
-
             groupBoxExtendedFieldHandling.Enabled = true;
           }
-          else groupBoxExtendedFieldHandling.Enabled = false;
-
           groupBox_DVDprofiler.Enabled = false; // deaktivates DVDprofiler options as default...
 
             switch (CatalogType.SelectedIndex)
             {
               case 0:
+                    groupBoxExtendedFieldHandling.Enabled = false; 
                     Tab_AMCupdater.Enabled = true;
                     Tab_Update.Enabled = true;
                     break;
@@ -4728,21 +4777,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             System.Windows.Forms.MessageBox.Show("New Config Name must not be empty !", "MyFilms - New Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           }
           else
+          {
             if (newConfig_Name == Config_Name.Text)
             {
               System.Windows.Forms.MessageBox.Show("New Config Name must be different from the existing one !", "MyFilms - New Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
-              Refresh_Items(true);
+              NewConfigButton = true;
+              Refresh_Items(true); // Reset all
+              Refresh_Tabs(true); // enable Tabs
               Config_Name.Text = newConfig_Name;
               //Config_Name_Load();
               System.Windows.Forms.MessageBox.Show("Created a new Configuration ! \n You must do proper setup to use it.", "MyFilms - New Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
               CatalogType.SelectedIndex = newCatalogSelectedIndex; // set selected CatalogType
-              Config_Name.Focus();
+              //Config_Name.Focus();
+              MesFilmsCat.Focus(); // change focus away from config to initialize ...
               textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
+              NewConfigButton = true;
+            }
           }
-
         }
 
         private void chkAMC_Purge_Missing_Files_CheckedChanged(object sender, EventArgs e)
