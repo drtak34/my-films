@@ -174,8 +174,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-              if (dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
-                && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "Aspectratio") 
+              if (dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" 
+                && dc.ColumnName != "Watched" && dc.ColumnName != "DateWatched" && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" 
+                && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" 
+                && dc.ColumnName != "Edition" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "Aspectratio") 
                 // All those fieds are currently not supported by ANT-MC - they will be added, if CatalogType changes to external catalog to the respective fields
                 // Also removed Contents_Id and Pictures, as they mostly useless.
               {
@@ -238,7 +240,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 if ((dc.ColumnName != "Contents_Id") && dc.ColumnName != "TranslatedTitle" &&
                     dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" && dc.ColumnName != "Year" &&
                     dc.ColumnName != "Picture" && dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
-                    //dc.ColumnName != "DateAdded" && // disabled for Doug testing
+                    dc.ColumnName != "DateAdded" && // disabled for Doug testing
                     dc.ColumnName != "Date")
                 {
                   AntSort1.Items.Add(dc.ColumnName);
