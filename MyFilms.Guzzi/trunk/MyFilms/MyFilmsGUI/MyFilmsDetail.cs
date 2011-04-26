@@ -4095,7 +4095,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
                         setGUIProperty("user.watched.value", "true");
                       else
-                        clearGUIProperty("user.watched.value"); // set to empty, if movie is unwatched
+                        setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
                     }
 
                     switch (dc.ColumnName.ToLower())
@@ -4207,18 +4207,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                             {
                               if (MyFilms.InitialIsOnlineScan)
-                                MyFilmsDetail.setGUIProperty("user.source.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                                setGUIProperty("user.source.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
                               else
-                                MyFilmsDetail.clearGUIProperty("user.source.isonline");
+                                setGUIProperty("user.source.isonline", "");
                             }
                             break;
                         case "isonlinetrailer":
                             if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                             {
                               if (MyFilms.InitialIsOnlineScan)
-                                MyFilmsDetail.setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                                setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
                               else
-                                MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
+                                setGUIProperty("user.sourcetrailer.isonline", "");
                             }
                             break;
                         case "resolution":
@@ -4264,7 +4264,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                                 setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
                             else
-                                clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value");
+                                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", "");
                             break;
 
                     }
@@ -6415,7 +6415,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public static void setGUIProperty(string name, string value)
         {
-          setGUIProperty(name, value, true);
+          setGUIProperty(name, value, false);
         }
 
         public static void setGUIProperty(string name, string value, bool log)
