@@ -312,7 +312,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\"))
                 openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\";
               else
-                openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
+                // openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
+                openFileDialog1.InitialDirectory = "";
             }
 
             if (MesFilmsCat.Text.Contains("\\"))
