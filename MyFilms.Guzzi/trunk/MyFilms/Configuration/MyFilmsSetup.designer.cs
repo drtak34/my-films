@@ -486,8 +486,9 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
+          this.txtGrabberDisplay = new System.Windows.Forms.TextBox();
+          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1597,6 +1598,7 @@
           // 
           // groupBox_GrabberOptions
           // 
+          this.groupBox_GrabberOptions.Controls.Add(this.txtGrabberDisplay);
           this.groupBox_GrabberOptions.Controls.Add(this.btnEditScript);
           this.groupBox_GrabberOptions.Controls.Add(this.groupBox6);
           this.groupBox_GrabberOptions.Controls.Add(this.lblSearchGrabberName);
@@ -1779,9 +1781,11 @@
           // 
           this.txtGrabber.Location = new System.Drawing.Point(145, 14);
           this.txtGrabber.Name = "txtGrabber";
-          this.txtGrabber.Size = new System.Drawing.Size(100, 20);
+          this.txtGrabber.Size = new System.Drawing.Size(68, 20);
           this.txtGrabber.TabIndex = 54;
           this.ToolTip1.SetToolTip(this.txtGrabber, resources.GetString("txtGrabber.ToolTip"));
+          this.txtGrabber.Visible = false;
+          this.txtGrabber.TextChanged += new System.EventHandler(this.txtGrabber_TextChanged);
           // 
           // label27
           // 
@@ -2007,7 +2011,7 @@
           // 
           // btnLaunchAMCupdater
           // 
-          this.btnLaunchAMCupdater.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCupdater.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunchAMCupdater.Image")));
           this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
           this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 54);
           this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
@@ -4177,7 +4181,7 @@
           // 
           // btnLaunchAMCglobal
           // 
-          this.btnLaunchAMCglobal.Image = global::MyFilmsPlugin.Properties.Resources.AMCUpdaterSmall;
+          this.btnLaunchAMCglobal.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunchAMCglobal.Image")));
           this.btnLaunchAMCglobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
           this.btnLaunchAMCglobal.Location = new System.Drawing.Point(45, 465);
           this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";
@@ -4805,16 +4809,6 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // traktConfiguration
-          // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
-          // 
           // chkScanMediaOnStart
           // 
           this.chkScanMediaOnStart.AutoSize = true;
@@ -4825,6 +4819,24 @@
           this.chkScanMediaOnStart.Text = "Scan media on start";
           this.ToolTip1.SetToolTip(this.chkScanMediaOnStart, resources.GetString("chkScanMediaOnStart.ToolTip"));
           this.chkScanMediaOnStart.UseVisualStyleBackColor = true;
+          // 
+          // txtGrabberDisplay
+          // 
+          this.txtGrabberDisplay.Location = new System.Drawing.Point(145, 14);
+          this.txtGrabberDisplay.Name = "txtGrabberDisplay";
+          this.txtGrabberDisplay.ReadOnly = true;
+          this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
+          this.txtGrabberDisplay.TabIndex = 67;
+          // 
+          // traktConfiguration
+          // 
+          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration.Name = "traktConfiguration";
+          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration.TabIndex = 0;
           // 
           // MyFilmsSetup
           // 
@@ -5339,5 +5351,6 @@
         private ComboBox AntItem5;
         private ComboBox AntItem4;
         private CheckBox chkScanMediaOnStart;
+        private TextBox txtGrabberDisplay;
     }
 }

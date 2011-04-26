@@ -2178,7 +2178,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             openFileDialog1.Filter = "XML Files|*.xml";
             openFileDialog1.Title = "Select Default Internet Grabber Script (xml file)";
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
-                txtGrabber.Text = openFileDialog1.FileName;
+              txtGrabber.Text = openFileDialog1.FileName;
         }
 
         //private void btnAMCUpd_exe_Click(object sender, EventArgs e)
@@ -5055,6 +5055,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             AMCexePath.Text = openFileDialog1.FileName;
           }
+        }
+
+        private void txtGrabber_TextChanged(object sender, EventArgs e)
+        {
+          if (!string.IsNullOrEmpty(txtGrabber.Text))
+          {
+            if (txtGrabber.Text.Contains("\\"))
+              txtGrabberDisplay.Text = txtGrabber.Text.Substring(openFileDialog1.FileName.LastIndexOf("\\") + 1);
+            else
+              txtGrabberDisplay.Text = txtGrabber.Text;
+          }
+          else txtGrabberDisplay.Text = string.Empty;
         }
     }
 }
