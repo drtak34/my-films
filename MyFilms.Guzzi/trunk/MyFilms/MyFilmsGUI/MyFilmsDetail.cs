@@ -221,7 +221,77 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             BtnLast.Label = GUILocalizeStrings.Get(1079873);
             //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
             //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
-            Log.Debug("MyFilms.OnPageLoad() finished.");
+
+            //---------------------------------------------------------------------------------------
+            // Windows Init
+            //---------------------------------------------------------------------------------------
+            //LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Starting");
+            //bool result = base.OnMessage(messageType);
+            if (ImgDetFilm != null)
+              if (ImgDetFilm.IsVisible)
+                ImgDetFilm.Refresh();
+              else if (ImgDetFilm2 != null)
+                if (ImgDetFilm2.IsVisible)
+                  ImgDetFilm2.Refresh();
+
+            //base.OnMessage(messageType); // Guzzi: Removing does not work properly...
+            wGetID = GetID;
+            GUIControl.ShowControl(GetID, 35);
+            // ToDo: Should be unhidden, if ActorThumbs are implemented
+            GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
+            setProcessAnimationStatus(false, m_SearchAnimation);
+
+            // trakt scrobble background thread
+            //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
+            //TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
+
+            g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
+            g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
+            g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
+            m_directory.SetExtensions(MediaPortal.Util.Utils.VideoExtensions);
+            if (MyFilms.conf.StrTxtSelect.Length == 0)
+              clearGUIProperty("select");
+            //GUIControl.HideControl(GetID, (int)Controls.CTRL_TxtSelect);
+            else
+            {
+              setGUIProperty("select", MyFilms.conf.StrTxtSelect.Replace(MyFilms.conf.TitleDelim, @"\"));
+              //GUIControl.ShowControl(GetID, (int)Controls.CTRL_TxtSelect);
+            }
+            afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
+            int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
+
+            setProcessAnimationStatus(false, m_SearchAnimation);
+            afficher_detail(true);
+            MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
+            //LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Finished");
+            //return result;
+          
+          Log.Debug("MyFilms.OnPageLoad() finished.");
+          return;
+        }
+
+
+        protected override void OnPageDestroy(int new_windowId)
+        {
+          LogMyFilms.Debug("MyFilmsDetail.OnPageDestroy(" + new_windowId.ToString() + ") started.");
+          if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
+            global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
+          using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
+          {
+            string currentmoduleid = "7986";
+            bool currentmodulefullscreen = (GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_TVFULLSCREEN || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_MUSIC || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_TELETEXT);
+            string currentmodulefullscreenstate = GUIPropertyManager.GetProperty("#currentmodulefullscreenstate");
+            // if MP was closed/hibernated by the use of remote control, we have to retrieve the fullscreen state in an alternative manner.
+            if (!currentmodulefullscreen && currentmodulefullscreenstate == "True")
+              currentmodulefullscreen = true;
+            xmlreader.SetValue("general", "lastactivemodule", currentmoduleid);
+            xmlreader.SetValueAsBool("general", "lastactivemodulefullscreen", currentmodulefullscreen);
+            LogMyFilms.Debug("MF: SaveLastActiveModule - module {0}", currentmoduleid);
+            LogMyFilms.Debug("MF: SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
+          }
+          base.OnPageDestroy(new_windowId);
+          LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
+          Log.Debug("MyFilmsDetail.OnPageDestroy() completed. See MyFilms.log for further Details.");
         }
 
         #region Action
@@ -331,67 +401,69 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (messageType.Message)
             {
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-                    //---------------------------------------------------------------------------------------
-                    // Windows Init
-                    //---------------------------------------------------------------------------------------
-                    LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Starting");
-                    bool result = base.OnMessage(messageType);
-                    if (ImgDetFilm != null)
-                        if (ImgDetFilm.IsVisible)
-                            ImgDetFilm.Refresh();
-                        else if (ImgDetFilm2!= null)
-                          if (ImgDetFilm2.IsVisible)
-                            ImgDetFilm2.Refresh();
+                    ////---------------------------------------------------------------------------------------
+                    //// Windows Init
+                    ////---------------------------------------------------------------------------------------
+                    //LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Starting");
+                    //bool result = base.OnMessage(messageType);
+                    //if (ImgDetFilm != null)
+                    //    if (ImgDetFilm.IsVisible)
+                    //        ImgDetFilm.Refresh();
+                    //    else if (ImgDetFilm2!= null)
+                    //      if (ImgDetFilm2.IsVisible)
+                    //        ImgDetFilm2.Refresh();
 
-                    //base.OnMessage(messageType); // Guzzi: Removing does not work properly...
-                    wGetID = GetID;
-                    GUIControl.ShowControl(GetID, 35);
-                    // ToDo: Should be unhidden, if ActorThumbs are implemented
-                    GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
-                    setProcessAnimationStatus(false, m_SearchAnimation);
+                    ////base.OnMessage(messageType); // Guzzi: Removing does not work properly...
+                    //wGetID = GetID;
+                    //GUIControl.ShowControl(GetID, 35);
+                    //// ToDo: Should be unhidden, if ActorThumbs are implemented
+                    //GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
+                    //setProcessAnimationStatus(false, m_SearchAnimation);
 
-                    // trakt scrobble background thread
-                    //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
-                    //TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
+                    //// trakt scrobble background thread
+                    ////TraktScrobbleUpdater.WorkerSupportsCancellation = true;
+                    ////TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
 
-                    g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
-                    g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
-                    g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
-                    m_directory.SetExtensions(MediaPortal.Util.Utils.VideoExtensions);
-                    if (MyFilms.conf.StrTxtSelect.Length == 0)
-                        clearGUIProperty("select");
-                        //GUIControl.HideControl(GetID, (int)Controls.CTRL_TxtSelect);
-                    else
-                    {
-                        setGUIProperty("select", MyFilms.conf.StrTxtSelect.Replace(MyFilms.conf.TitleDelim, @"\"));
-                        //GUIControl.ShowControl(GetID, (int)Controls.CTRL_TxtSelect);
-                    }
-                    afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
-                    int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
+                    //g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
+                    //g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
+                    //g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
+                    //m_directory.SetExtensions(MediaPortal.Util.Utils.VideoExtensions);
+                    //if (MyFilms.conf.StrTxtSelect.Length == 0)
+                    //    clearGUIProperty("select");
+                    //    //GUIControl.HideControl(GetID, (int)Controls.CTRL_TxtSelect);
+                    //else
+                    //{
+                    //    setGUIProperty("select", MyFilms.conf.StrTxtSelect.Replace(MyFilms.conf.TitleDelim, @"\"));
+                    //    //GUIControl.ShowControl(GetID, (int)Controls.CTRL_TxtSelect);
+                    //}
+                    //afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
+                    //int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
 
-                    setProcessAnimationStatus(false, m_SearchAnimation);
-                    afficher_detail(true);
-                    MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
-                    LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Finished");
-                    return result;
+                    //setProcessAnimationStatus(false, m_SearchAnimation);
+                    //afficher_detail(true);
+                    //MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
+                    //LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Finished");
+                    //return result;
+                    break;
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
-                    if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
-                        global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
-                    using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
-                    {
-                        string currentmoduleid = "7986";
-                        bool currentmodulefullscreen = (GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_TVFULLSCREEN || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_MUSIC || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_TELETEXT);
-                        string currentmodulefullscreenstate = GUIPropertyManager.GetProperty("#currentmodulefullscreenstate");
-                        // if MP was closed/hibernated by the use of remote control, we have to retrieve the fullscreen state in an alternative manner.
-                        if (!currentmodulefullscreen && currentmodulefullscreenstate == "True")
-                            currentmodulefullscreen = true;
-                        xmlreader.SetValue("general", "lastactivemodule", currentmoduleid);
-                        xmlreader.SetValueAsBool("general", "lastactivemodulefullscreen", currentmodulefullscreen);
-                        LogMyFilms.Debug("MF: SaveLastActiveModule - module {0}", currentmoduleid);
-                        LogMyFilms.Debug("MF: SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
-                    }
-                    return true;
+                    //if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
+                    //    global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
+                    //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
+                    //{
+                    //    string currentmoduleid = "7986";
+                    //    bool currentmodulefullscreen = (GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_TVFULLSCREEN || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_MUSIC || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_TELETEXT);
+                    //    string currentmodulefullscreenstate = GUIPropertyManager.GetProperty("#currentmodulefullscreenstate");
+                    //    // if MP was closed/hibernated by the use of remote control, we have to retrieve the fullscreen state in an alternative manner.
+                    //    if (!currentmodulefullscreen && currentmodulefullscreenstate == "True")
+                    //        currentmodulefullscreen = true;
+                    //    xmlreader.SetValue("general", "lastactivemodule", currentmoduleid);
+                    //    xmlreader.SetValueAsBool("general", "lastactivemodulefullscreen", currentmodulefullscreen);
+                    //    LogMyFilms.Debug("MF: SaveLastActiveModule - module {0}", currentmoduleid);
+                    //    LogMyFilms.Debug("MF: SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
+                    //}
+                    //return true;
+                    break;
 
                 case GUIMessage.MessageType.GUI_MSG_CD_REMOVED:
                     //---------------------------------------------------------------------------------------

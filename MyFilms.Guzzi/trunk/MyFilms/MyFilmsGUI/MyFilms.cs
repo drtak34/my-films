@@ -488,21 +488,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
         {
-            base.OnPageLoad(); // let animations run
             LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
+            base.OnPageLoad(); // let animations run
             Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
-
             // Support for StartParameters - ToDo: Add start view options (implementation)
             string jumpToViewName = null;
             if (LoadWithParameterSupported)
             {
               jumpToViewName = GetJumpToViewName();
             }
-
-            // (re)link our backdrop image controls to the backdrop image swapper
-            backdrop.GUIImageOne = ImgFanart;
-            backdrop.GUIImageTwo = ImgFanart2;
-            backdrop.LoadingImage = loadingImage;  // --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
 
             // Setup Random Fanart Timer
             //m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
@@ -522,7 +516,79 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               OnlineVideosRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
               LogMyFilms.Debug("MyFilms.Init() - OnlineVideosRightPlugin = '" + OnlineVideosRightPlugin + "', OnlineVideosRightVersion = '" + OnlineVideosRightVersion + "'");
             }
+
+            // (re)link our backdrop image controls to the backdrop image swapper
+            backdrop.GUIImageOne = ImgFanart;
+            backdrop.GUIImageTwo = ImgFanart2;
+            backdrop.LoadingImage = loadingImage;  // --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
+
+            //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
+            //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
+            GUIWaitCursor.Init();
+            GUIWaitCursor.Show();
+            Thread.Sleep(5); // let animations run ?
+            if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
+            {
+              Prev_MenuID = PreviousWindowId;
+              InitMainScreen(false); // don't log to MyFilms.log Property clear
+              Configuration.Current_Config();
+              Load_Config(Configuration.CurrentConfig, true);
+              if (MyFilms.conf.StrFanart)
+                backdrop.Active = true;
+              else
+                backdrop.Active = false;
+            }
+            if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
+            {
+              GUIWindowManager.ShowPreviousWindow();
+              GUIWaitCursor.Hide();
+              return;
+            }
+
+            // Originally Deactivated by Zebons    
+            // ********************************
+            // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
+            //if (!bgLoadMovieList.IsBusy)
+            //{
+            //  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
+            //  AsynLoadMovieList();
+            //}
+            // ********************************
+            // Originally Deactivated by Zebons    
+
+            //// Start Filesystemwatcher to watch for changes in availability
+            //FileSystemWatcher FSW = new FileSystemWatcher("c:\\", "*.cs");
+            //FswHandler Handler = new FswHandler();
+
+            //FSW.Changed += Handler.OnEvent;
+            //FSW.Created += Handler.OnEvent;
+            //FSW.Deleted += Handler.OnEvent;
+            //FSW.Renamed += Handler.OnEvent;
+
+            //FSW.EnableRaisingEvents = true;
+
+            //System.Threading.Thread.Sleep(555000);
+            //// change the file manually to see which events are fired
+
+            //FSW.EnableRaisingEvents = false;
+
+            GUIControl.ShowControl(GetID, 34);
+            GUIWaitCursor.Hide();
+            bool launchMediaScanner = InitialStart;
+
+            if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
+              Fin_Charge_Init(true, false);
+            else
+              Fin_Charge_Init(false, false);
+            // Launch Background availability scanner, if configured in setup
+            if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
+            {
+              LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
+              this.AsynIsOnlineCheck();
+            }
+            //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
             LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
+            return;
         }
 
         protected override void OnPageDestroy(int new_windowId)
@@ -532,8 +598,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Disable Random Fanart Timer
             //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
             //m_bFanartTimerDisabled = true;
-            MyFilmsDetail.clearGUIProperty("Fanart");
-            MyFilmsDetail.clearGUIProperty("Fanart2");
+            //MyFilmsDetail.clearGUIProperty("Fanart");
+            //MyFilmsDetail.clearGUIProperty("Fanart2");
+
+            //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
+            //GUITextureManager.CleanupThumbs();
+
+            if (Configuration.CurrentConfig != "")
+            {
+              if (facadeView == null || facadeView.SelectedListItemIndex == -1)
+                Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
+              else
+                Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+            }
+            //ImgFanart.SetFileName(string.Empty);
+            //ImgFanart2.SetFileName(string.Empty);
+
+            //facadeView.Clear();
+            //backdrop.PropertyOne = " ";
+            // added from MoPic
+            //backdrop.Filename = string.Empty;
+            //MyFilmsDetail.clearGUIProperty("currentfanart");
+            //cover.Filename = string.Empty;
+
+            //Disable FanartTimer - already done on pagedestroy ...
+            //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            //m_bFanartTimerDisabled = true;
+
+            //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
             base.OnPageDestroy(new_windowId);
             LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
             Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
@@ -1211,76 +1303,88 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //   Handle Keyboard Actions
         //---------------------------------------------------------------------------------------
 
-        public override void OnAction(MediaPortal.GUI.Library.Action actionType)
+        public override void OnAction(Action actionType)
         {
-            LogMyFilms.Debug("MF: OnAction " + actionType.wID.ToString());
-            //LogMyFilms.Debug("MF: : PreviousWindowId: '" + PreviousWindowId.ToString() + "' - Prev_MenuID: '" + Prev_MenuID.ToString() + "'");
-            //LogMyFilms.Debug("MF: : Select: '" + conf.Boolselect + "' - View: '" + conf.Boolview + "' - Return: '" + conf.Boolreturn + "'");
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR)
-                if (GetPrevFilmList()) return;
-
-            if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) && (conf.Boolselect || conf.Boolview))
+            LogMyFilms.Debug("MF: OnAction " + actionType.wID);
+            switch (actionType.wID)
             {
-                Change_LayOut(MyFilms.conf.StrLayOut);
+              case Action.ActionType.ACTION_PARENT_DIR:
                 if (GetPrevFilmList()) return;
-            }
-            if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) && (conf.Boolreturn))
-            {
-                conf.Boolreturn = false;
-                if (conf.WStrSort.ToString() == "ACTORS") // Removed "ToUpper"
+                break;
+              case Action.ActionType.ACTION_PREVIOUS_MENU:
+                if (conf.Boolselect || conf.Boolview)
+                {
+                  Change_LayOut(MyFilms.conf.StrLayOut);
+                  if (GetPrevFilmList()) return;
+                }
+                if (conf.Boolreturn)
+                {
+                  conf.Boolreturn = false;
+                  if (conf.WStrSort.ToString() == "ACTORS") // Removed "ToUpper"
                     if (GetPrevFilmList())
-                        return;
+                      return;
                     else
-                        base.OnAction(actionType);
-                Change_view(conf.WStrSort.ToLower());
-                return;
-            }
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU)
-            {
+                      base.OnAction(actionType);
+                  Change_view(conf.WStrSort.ToLower());
+                  return;
+                }
                 if (GetPrevFilmList())
-                    return;
+                  return;
                 else
                 {
-                    //GUIWindowManager.ShowPreviousWindow();
-                    //Fix to not only always return to MyHome, e.g. when coming from Basichome...
-                    //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
-                    //if (Prev_MenuID != -1)
-                    LogMyFilms.Debug("MF: (GuzziFix for Previous Window - Prev_MenuID: '" + Prev_MenuID + "'");
-                    GUIWindowManager.ActivateWindow(Prev_MenuID); 
-                    return;
+                  //GUIWindowManager.ShowPreviousWindow();
+                  //Fix to not only always return to MyHome, e.g. when coming from Basichome...
+                  //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
+                  //if (Prev_MenuID != -1)
+                  LogMyFilms.Debug("MF: (GuzziFix for Previous Window - Prev_MenuID: '" + Prev_MenuID + "'");
+                  GUIWindowManager.ActivateWindow(Prev_MenuID);
+                  return;
                 }
-            }
-
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
+                break;
+              case Action.ActionType.ACTION_CONTEXT_MENU:
                 if (facadeView.SelectedListItemIndex > -1)
-                    {
-                        if (!(facadeView.Focus)) GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-                        Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
-                        return;
-                    }
-
-            if (actionType.m_key != null)
-            {
-                if ((actionType.m_key.KeyChar == 112) && facadeView.Focus && !facadeView.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
                 {
-                    MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, null);
+                  if (!(facadeView.Focus)) GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+                  Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+                  return;
                 }
-                if ((actionType.m_key.KeyChar == 120) && Context_Menu)
+                break;
+              case Action.ActionType.ACTION_KEY_PRESSED:
+                base.OnAction(actionType);
+                break;
+              case Action.ActionType.ACTION_PLAY:
+              case Action.ActionType.ACTION_MUSIC_PLAY:
+                // Play groups as playlist (ToDo)
+                break;
+              case Action.ActionType.ACTION_PREV_PICTURE:
+              case Action.ActionType.ACTION_NEXT_PICTURE:
+                // Cycle Artwork
+                break;
+              default:
+                if (actionType.m_key != null)
                 {
+                  if ((actionType.m_key.KeyChar == 112) && facadeView.Focus && !facadeView.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
+                  {
+                    MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, null);
+                  }
+                  if ((actionType.m_key.KeyChar == 120) && Context_Menu)
+                  {
                     Context_Menu = false;
                     return;
-                }
-                if (actionType.m_key.KeyChar == 120 && facadeView.Focus && !facadeView.SelectedListItem.IsFolder)
-                {
+                  }
+                  if (actionType.m_key.KeyChar == 120 && facadeView.Focus && !facadeView.SelectedListItem.IsFolder)
+                  {
                     // context menu for update or suppress entry
                     Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
                     return;
+                  }
                 }
-            }
 
-            if (actionType.wID.ToString().Substring(0, 6) == "REMOTE")
-                return;
-            base.OnAction(actionType);
+                if (actionType.wID.ToString().Substring(0, 6) == "REMOTE")
+                  return;
+                base.OnAction(actionType);
+                break;
+            }
         }
 
         //---------------------------------------------------------------------------------------
@@ -1310,108 +1414,112 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (messageType.Message)
             {
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-                    //---------------------------------------------------------------------------------------
-                    // Windows Init
-                    //---------------------------------------------------------------------------------------
-                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
-                    bool result = base.OnMessage(messageType);
-                    //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
-                    GUIWaitCursor.Init();
-                    GUIWaitCursor.Show();
-                    if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
-                    {
-                        Prev_MenuID = PreviousWindowId;
-                        InitMainScreen(false); // don't log to MyFilms.log Property clear
-                        Configuration.Current_Config();
-                        Load_Config(Configuration.CurrentConfig, true);
-                        if (MyFilms.conf.StrFanart)
-                            backdrop.Active = true;
-                        else
-                            backdrop.Active = false;
-                    }
-                    if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
-                    {
-                      GUIWindowManager.ShowPreviousWindow();
-                      GUIWaitCursor.Hide();
-                      return result;
-                    }
-
-                    // Originally Deactivated by Zebons    
-                    // ********************************
-                    // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
-                    //if (!bgLoadMovieList.IsBusy)
+                    ////---------------------------------------------------------------------------------------
+                    //// Windows Init
+                    ////---------------------------------------------------------------------------------------
+                    //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
+                    //bool result = base.OnMessage(messageType);
+                    ////Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
+                    //GUIWaitCursor.Init();
+                    //GUIWaitCursor.Show();
+                    //if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
                     //{
-                    //  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
-                    //  AsynLoadMovieList();
+                    //    Prev_MenuID = PreviousWindowId;
+                    //    InitMainScreen(false); // don't log to MyFilms.log Property clear
+                    //    Configuration.Current_Config();
+                    //    Load_Config(Configuration.CurrentConfig, true);
+                    //    if (MyFilms.conf.StrFanart)
+                    //        backdrop.Active = true;
+                    //    else
+                    //        backdrop.Active = false;
                     //}
-                    // ********************************
-                    // Originally Deactivated by Zebons    
+                    //if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
+                    //{
+                    //  GUIWindowManager.ShowPreviousWindow();
+                    //  GUIWaitCursor.Hide();
+                    //  return result;
+                    //}
 
-                    //// Start Filesystemwatcher to watch for changes in availability
-                    //FileSystemWatcher FSW = new FileSystemWatcher("c:\\", "*.cs");
-                    //FswHandler Handler = new FswHandler();
+                    //// Originally Deactivated by Zebons    
+                    //// ********************************
+                    //// ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
+                    ////if (!bgLoadMovieList.IsBusy)
+                    ////{
+                    ////  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
+                    ////  AsynLoadMovieList();
+                    ////}
+                    //// ********************************
+                    //// Originally Deactivated by Zebons    
 
-                    //FSW.Changed += Handler.OnEvent;
-                    //FSW.Created += Handler.OnEvent;
-                    //FSW.Deleted += Handler.OnEvent;
-                    //FSW.Renamed += Handler.OnEvent;
+                    ////// Start Filesystemwatcher to watch for changes in availability
+                    ////FileSystemWatcher FSW = new FileSystemWatcher("c:\\", "*.cs");
+                    ////FswHandler Handler = new FswHandler();
 
-                    //FSW.EnableRaisingEvents = true;
+                    ////FSW.Changed += Handler.OnEvent;
+                    ////FSW.Created += Handler.OnEvent;
+                    ////FSW.Deleted += Handler.OnEvent;
+                    ////FSW.Renamed += Handler.OnEvent;
 
-                    //System.Threading.Thread.Sleep(555000);
-                    //// change the file manually to see which events are fired
+                    ////FSW.EnableRaisingEvents = true;
 
-                    //FSW.EnableRaisingEvents = false;
+                    ////System.Threading.Thread.Sleep(555000);
+                    ////// change the file manually to see which events are fired
 
-                    GUIControl.ShowControl(GetID, 34);
-                    GUIWaitCursor.Hide();
-                    bool launchMediaScanner = InitialStart;
+                    ////FSW.EnableRaisingEvents = false;
 
-                    if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
-                        Fin_Charge_Init(true,false);
-                    else
-                        Fin_Charge_Init(false, false);
-                    // Launch Background availability scanner, if configured in setup
-                    if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
-                    {
-                      LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
-                      this.AsynIsOnlineCheck();
-                    }
-                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
-                    return true;
+                    //GUIControl.ShowControl(GetID, 34);
+                    //GUIWaitCursor.Hide();
+                    //bool launchMediaScanner = InitialStart;
+
+                    //if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
+                    //    Fin_Charge_Init(true,false);
+                    //else
+                    //    Fin_Charge_Init(false, false);
+                    //// Launch Background availability scanner, if configured in setup
+                    //if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
+                    //{
+                    //  LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
+                    //  this.AsynIsOnlineCheck();
+                    //}
+                    //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
+                    //return true;
+                    break;
+
 
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
-                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
-                    GUITextureManager.CleanupThumbs();
+//                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
+//                    GUITextureManager.CleanupThumbs();
 
-                    if (Configuration.CurrentConfig != "")
-                    {
-                        if (facadeView == null || facadeView.SelectedListItemIndex == -1)
-                            Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
-                        else
-                            Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
-                    }
-                    //ImgFanart.SetFileName(string.Empty);
-                    //ImgFanart2.SetFileName(string.Empty);
+//                    if (Configuration.CurrentConfig != "")
+//                    {
+//                        if (facadeView == null || facadeView.SelectedListItemIndex == -1)
+//                            Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
+//                        else
+//                            Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+//                    }
+//                    //ImgFanart.SetFileName(string.Empty);
+//                    //ImgFanart2.SetFileName(string.Empty);
 
-#if MP11
-                    facadeView.Resources.Clear();
-#else
-                    facadeView.Clear();
-#endif
-                    facadeView.Clear();
-                    //backdrop.PropertyOne = " ";
-                    // added from MoPic
-                    backdrop.Filename = string.Empty;
-                    MyFilmsDetail.clearGUIProperty("currentfanart");
-                    cover.Filename = string.Empty;
+//#if MP11
+//                    facadeView.Resources.Clear();
+//#else
+//                    facadeView.Clear();
+//#endif
+//                    facadeView.Clear();
+//                    //backdrop.PropertyOne = " ";
+//                    // added from MoPic
+//                    backdrop.Filename = string.Empty;
+//                    MyFilmsDetail.clearGUIProperty("currentfanart");
+//                    cover.Filename = string.Empty;
 
-                    //Disable FanartTimer - already done on pagedestroy ...
-                    //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
-                    //m_bFanartTimerDisabled = true;
+//                    //Disable FanartTimer - already done on pagedestroy ...
+//                    //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
+//                    //m_bFanartTimerDisabled = true;
 
-                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
-                    return true; // fall through to call base class?
+//                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
+//                    return true; // fall through to call base class?
+                      break;
+
 
                 case GUIMessage.MessageType.GUI_MSG_CLICKED:
                     //---------------------------------------------------------------------------------------
@@ -1918,7 +2026,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //ImgLstFilm2.SetFileName("#myfilms.picture");
             string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
             r = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
-			      //r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
             LogMyFilms.Debug("MF: (GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
             LogMyFilms.Debug("MF: (GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
             LogMyFilms.Debug("MF: (GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
@@ -1960,30 +2067,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int number = -1;
             int wfacadewiew = 0;
             ArrayList w_tableau = new ArrayList();
-
-
-            //// Guzzi: Testloop for Debugging ...
-            //LogMyFilms.Debug("MF: (GuzziPerfCount) - Start");
-            //int i = 0;
-            //int ii = 0;
-            //string strThumbT;
-            //foreach (DataRow sr in r)
-            //{
-            //    sTitle = sr[conf.StrTitle1].ToString();
-            //    DelimCnt2 = NewString.PosCount(conf.TitleDelim, sTitle, false);
-            //    if (DelimCnt <= DelimCnt2)
-            //    {
-            //        sTitle = NewString.NPosMid(conf.TitleDelim, sTitle, DelimCnt, DelimCnt + 1, false, false); //get current substring (folder) within path
-            //    }
-            //    conf.FileImage = conf.StrPathImg + "\\" + sr["Picture"].ToString();
-            //    ii = ii + 1;
-            //    strThumbT = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, sTitle);
-            //    if (!System.IO.File.Exists(conf.FileImage))
-            //    {
-            //        i = i + 1;
-            //    }
-            //}
-            //LogMyFilms.Debug("MF: (GuzziPerfCount) - End (" + ii.ToString() + " Records with " + i.ToString() + " Lookups)");
 
             // Check and create Group thumb folder ...
             if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
@@ -2234,11 +2317,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //----------------------------------------------------------------------------------------
         //    Display Detailed Info (Image, Description, Year, Category)
         //----------------------------------------------------------------------------------------
-        private void Load_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image
+        private void Load_Lstdetail(int ItemId, bool wrep, string wlabel)//wrep = false display only image, all properties cleared
         {
             //if (facadeView.SelectedListItem.ItemId == Prev_ItemID)
-            //    return;
-            LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId = " + ItemId.ToString() + ", wrep = " + wrep.ToString() + ", wlabel = " + wlabel);
+            //{
+            //  LogMyFilms.Debug("MF: (item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+            //  return;
+            //}
+            LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId = " + ItemId + ", wrep = " + wrep + ", wlabel = " + wlabel);
             if (ItemId == -1)
             {
                 // reinit some fields
@@ -2251,25 +2337,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string[] wfanart = MyFilmsDetail.Search_Fanart(wlabel, true, "file", true, facadeView.SelectedListItem.ThumbnailImage.ToString(), facadeView.SelectedListItem.Path);
                 if (wfanart[0] == " ")
                 {
+                  if (backdrop.Active)
                     backdrop.Active = false;
-                    GUIControl.HideControl(GetID, 35);
-                    LogMyFilms.Debug("MF: (Load_Lstdetail): INACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                  GUIControl.HideControl(GetID, 35);
+                  LogMyFilms.Debug("MF: (Load_Lstdetail): INACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 }
                 else
                 {
-                    backdrop.Active = true;
-                    GUIControl.ShowControl(GetID, 35);
-                    LogMyFilms.Debug("MF: (Load_Lstdetail): ACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                  if (!backdrop.Active)
+                      backdrop.Active = true;
+                  GUIControl.ShowControl(GetID, 35);
+                  LogMyFilms.Debug("MF: (Load_Lstdetail): ACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 }
                 backdrop.Filename = wfanart[0];
                 MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
 
-                cover.Filename = facadeView.SelectedListItem.ThumbnailImage.ToString();
-                //if (!backdrop.Active)
-                //    backdrop.Active = true;
+                if (!cover.Active)
+                  cover.Active = true;
+                conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
+                //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
+                MyFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage);
+                cover.Filename = conf.FileImage;
+
+              
                 //GUIControl.ShowControl(GetID, 34);
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
-                MyFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage.ToString());
                 // Load_Rating(0); // old method - nor more used
                 MyFilmsDetail.clearGUIProperty("logos_id2001");
                 MyFilmsDetail.clearGUIProperty("logos_id2002");
@@ -2281,10 +2373,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
             {
                 LogMyFilms.Debug("MF: (Load_Lstdetail): Item is Movie itself!");
-                
-                //ImageSwapper backdrop = new ImageSwapper();
                 string[] wfanart = new string[2];
-                wfanart = MyFilmsDetail.Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
+                wfanart = MyFilmsDetail.Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage, string.Empty);
                 LogMyFilms.Debug("MyFilm (Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                 //if (wfanart[0] == " ")
                 //{
@@ -2294,8 +2384,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         if (backdrop.Active)
                             backdrop.Active = false;
-                        if (!cover.Active)
-                            cover.Active = true;
                         GUIControl.HideControl(GetID, 35);
                         LogMyFilms.Debug("MyFilm (Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "'");    
                     }
@@ -2303,8 +2391,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         if (!backdrop.Active)
                             backdrop.Active = true;
-                        if (!cover.Active)
-                            cover.Active = true;
                         GUIControl.ShowControl(GetID, 35);
                         LogMyFilms.Debug("MyFilm (Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "'");
                     }
@@ -2314,6 +2400,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (facadeView.SelectedListItem.IsFolder)
                     Prev_ItemID = facadeView.SelectedListItem.ItemId;
                 Prev_ItemID = facadeView.SelectedListItem.ItemId;
+
+                if (!cover.Active)
+                  cover.Active = true;
+                
                 //if (!System.IO.File.Exists(facadeView.SelectedListItem.ThumbnailImage))
                 //{
                 //  conf.FileImage = MyFilms.conf.DefaultCover;
@@ -2323,11 +2413,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //  cover.Filename = MyFilms.conf.FileImage;
                 //}
                 //else
-                {
+                //{
                   conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
                   MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
                   cover.Filename = MyFilms.conf.FileImage;
-                }
+                //}
 
                 //m_FanartTimer.Change(0, 10000); // 10000 = 10 sek. // Added to immediately change Fanart - activate to enable timer and reset it !
 
@@ -2385,41 +2475,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         private void item_OnItemSelected(GUIListItem item, GUIControl parent)
         {
-            GUIFilmstripControl filmstrip = parent as GUIFilmstripControl;
-            //if (filmstrip == null) return;
-            //filmstrip.InfoImageFileName = item.ThumbnailImage;
-            if (filmstrip != null)
-                filmstrip.InfoImageFileName = item.ThumbnailImage;
-            if (!(conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
-            {
-                if (facadeView.SelectedListItemIndex > -1)
-                    //Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
-                  MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
-            }
-            else
-            {
-                if (facadeView.SelectedListItemIndex > -1 && !conf.Boolselect)
-                {
-                  //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
-                  MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
-                  //LogMyFilms.Debug("MF: OnItemSelected - ItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Boolselect: '" + conf.Boolselect.ToString() + "', Details: 'false'");
-                }
-                else
-                {
-                    //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
-                    //LogMyFilms.Debug("MF: OnItemSelected - ItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Boolselect: '" + conf.Boolselect.ToString() + "', Details: 'false'");
-                  MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
-                    GUIControl.ShowControl(GetID, 34);
-                    //Load_Rating(0); // old method - nor more used
-                }
-            } 
-            //Load_Lstdetail(item.ItemId, true, item.Label);
+          GUIFilmstripControl filmstrip = parent as GUIFilmstripControl;
+          if (filmstrip != null)
+              filmstrip.InfoImageFileName = item.ThumbnailImage;
+          if (!(conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
+          {
+            if (facadeView.SelectedListItemIndex > -1)
+                MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
+          }
+          else
+          {
+            if (facadeView.SelectedListItemIndex > -1 && !conf.Boolselect)
+              {
+                MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+              }
+              else
+              {
+                MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+                GUIControl.ShowControl(GetID, 34);
+              }
+          } 
+          //Load_Lstdetail(item.ItemId, true, item.Label);
         }
 
         private void MovieDetailsPublisher(int ItemId, bool wrep, string wlabel)
         {
           double tickCount = System.Windows.Media.Animation.AnimationTimer.TickCount;
-
           // Publish instantly when previous request has passed the required delay
           if (150 < (int)(tickCount - lastPublished)) // wait 100 ms to load details...
           {
@@ -2431,16 +2512,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             lastPublished = tickCount;
             if (publishTimer == null)
-            {
               publishTimer = new Timer(delegate { Load_Lstdetail(facadeView.SelectedListItem.ItemId, wrep, facadeView.SelectedListItem.Label); }, null, 150, Timeout.Infinite);
-            }
             else
-            {
               publishTimer.Change(150, Timeout.Infinite);
-            }
           }
         }
-
 
         #region Accès Données
 
@@ -2790,7 +2866,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         /// <param name="ClearIndex">Reset Selected Item Index</param>
         /// <param name="SelItem">Select entry matching this string if not empty</param>
         /// 
-        //Example for Actors list:
+            //Example for Actors list:
             //conf.WStrSort = "ACTORS";
             //conf.Wselectedlabel = "";
             //conf.WStrSortSens = " ASC";
@@ -2827,9 +2903,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSort                    : '" + WStrSort + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSortSens                : '" + WStrSortSens + "'");
             LogMyFilms.Debug("MF: (GetSelectFromDivx) - NewWstar                    : '" + NewWstar + "'");
-            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Read movie DB Started (LectureDonnées)");
 
             // Collect List of all attributes in w_tableau
+            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Read movie DB Group Names");
             foreach (DataRow enr in BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
                 {
                 if ((WStrSort == "Date") || (WStrSort == "DateAdded"))
@@ -2856,7 +2932,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
 
-            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Read movie DB Finished (LectureDonnées)");
+            LogMyFilms.Debug("MF: (GetSelectFromDivx) - Sort Group Names");
             if (WStrSortSens == " ASC")
                 w_tableau.Sort(0, w_tableau.Count, null);
             else
@@ -2983,7 +3059,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.StrIndex = 0;
             if (facadeView.Count == 0)
             {
-              ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638)); //"no movies matching the view" - " show filmlist"
+                ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638)); //"no movies matching the view" - " show filmlist"
                 GUIWaitCursor.Show();
                 DisplayAllMovies();
                 GetFilmList();
@@ -2999,22 +3075,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIControl.ShowControl(GetID, 34);
                 //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
                 //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
-                
-                //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
-                MyFilmsDetail.Load_Detailed_DB(0, false);
-                if ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director")))
+
+                if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
                     MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
+                else
+                  MyFilmsDetail.Load_Detailed_DB(0, false);
 
                 // Disabled because replaced by SpeedLoader
-                //ImgLstFilm.SetFileName("#myfilms.picture");
-                //ImgLstFilm2.SetFileName("#myfilms.picture");
+                // ImgLstFilm.SetFileName("#myfilms.picture");
+                // ImgLstFilm2.SetFileName("#myfilms.picture");
                 // this.Load_Rating(0); // old method - nor more used
             }
             MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
             GUIPropertyManager.SetProperty("#itemcount", facadeView.Count.ToString());
  
             //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
-            //GUIWaitCursor.Hide();
             GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
 
         }
@@ -3288,9 +3363,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         private void Fin_Charge_Init(bool LoadDfltSlct, bool reload)
         {
-            GUIWaitCursor.Init();
-            GUIWaitCursor.Show();
-            GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
+            LogMyFilms.Debug("MF: Fin_Charge_Init() called with LoadDfltSlct = '" + LoadDfltSlct + "', reload = '" + reload + "'");
+            //GUIWaitCursor.Init();
+            //GUIWaitCursor.Show();
+            //GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
             
             if (LoadDfltSlct)
             {
@@ -3325,7 +3401,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
             {
                 //chargement des films
-                BaseMesFilms.LoadFilm(conf.StrFileXml);
+                if (reload)
+                  BaseMesFilms.LoadFilm(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
                 r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
             }
             //Layout = conf.StrLayOut;
@@ -3344,7 +3421,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             BtnSrtBy.SortChanged += new SortEventHandler(SortChanged);
             InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
 
-            if (conf.Boolselect)
+            if (conf.Boolselect) // Groupviews ?
             {
               // Hack to get persons in ASC order after returning from external plugins ...
               if (conf.WStrSort.ToUpper() == "ACTORS" || conf.WStrSort.ToUpper() == "PRODUCER" || conf.WStrSort.ToUpper() == "DIRECTOR")
@@ -3441,12 +3518,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               SetLabelSelect("root");
             else
               SetLabelSelect(conf.StrTxtSelect);
-            MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation); 
+            //  MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+            //  GUIWaitCursor.Hide();
             if (conf.LastID == ID_MyFilmsDetail)
-                GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
+              GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
             if (conf.LastID == ID_MyFilmsActors)
-                GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
-            GUIWaitCursor.Hide();
+              GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
         }
         //--------------------------------------------------------------------------------------------
         //   Change LayOut 
@@ -8087,6 +8164,508 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
        //        LogMyFilms.Error("MF: videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
        //    }
        //}
+
+
+
+      #region Facade Loading
+      //// this is expensive to do if changing mode......450 ms ???
+      //private void setFacadeMode(GUIFacadeControl.Layout mode)
+      //{
+      //  if (this.facadeView == null)
+      //    return;
+
+      //  if (mode == GUIFacadeControl.Layout.List)
+      //  {
+      //    this.facadeView.CurrentLayout = mode;
+      //  }
+      //  else
+      //  {
+      //    if (mode == GUIFacadeControl.Layout.AlbumView)
+      //    {
+      //      switch (this.listLevel)
+      //      {
+      //        case (Listlevel.Movie):
+      //            this.facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
+      //          break;
+      //        case (Listlevel.Person):
+      //        case (Listlevel.Group):
+      //          break;
+      //      }
+      //    }
+      //  }
+      //}
+
+      //System.ComponentModel.BackgroundWorker bg = null;
+
+      //private void LoadFacade()
+      //{
+      //  if (bg == null)
+      //  {
+      //    bg = new System.ComponentModel.BackgroundWorker();
+      //    bg.DoWork += new System.ComponentModel.DoWorkEventHandler(bgLoadFacade);
+      //    bg.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bgFacadeDone);
+      //    bg.WorkerReportsProgress = true;
+      //    bg.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bg_ProgressChanged);
+      //    bg.WorkerSupportsCancellation = true;
+      //  }
+
+      //  lock (bg)
+      //  {
+      //    if (bg.IsBusy) // we have to wait - complete method will call LoadFacade again
+      //    {
+      //      if (!bg.CancellationPending)
+      //        bg.CancelAsync();
+      //      return;
+      //    }
+      //    //aclib.Performance.PerfWatcher.GetNamedWatch("FacadeLoading").Start();
+      //    prepareLoadFacade();
+      //    bg.RunWorkerAsync();
+      //  }
+      //}
+
+      //bool bFacadeEmpty = true;
+      //private void prepareLoadFacade()
+      //{
+      //  try
+      //  {
+      //    this.facadeView.ListLayout.Clear();
+      //    this.facadeView.AlbumListLayout.Clear();
+
+      //    if (this.facadeView.ThumbnailLayout != null)
+      //      this.facadeView.ThumbnailLayout.Clear();
+
+      //    if (this.facadeView.FilmstripLayout != null)
+      //      this.facadeView.FilmstripLayout.Clear();
+
+      //    if (this.facadeView.CoverFlowLayout != null)
+      //      this.facadeView.CoverFlowLayout.Clear();
+
+      //    if (facadeView != null) facadeView.Focus = true;
+      //    LogMyFilms.Debug("LoadFacade: ListLevel: " + listLevel);
+      //    //setCurPositionLabel();
+
+      //    switch (this.listLevel)
+      //    {
+      //      case Listlevel.Movie:
+      //      case Listlevel.Group:
+      //        //if (!CheckSkinFanartSettings()) DisableFanart();
+      //        break;
+      //    }
+      //    //setNewListLevelOfCurrView(m_CurrViewStep);
+
+      //  }
+      //  catch (Exception ex)
+      //  {
+      //    LogMyFilms.Debug("Error preparing Facade... " + ex.Message);
+      //  }
+      //}
+
+      ////SkipSeasonCodes SkipSeasonCode = SkipSeasonCodes.none;
+      //List<GUIListItem> itemsForDelayedImgLoading = null;
+      //private void bg_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+      //{
+      //  try
+      //  {
+      //    BackgroundFacadeLoadingArgument arg = e.UserState as BackgroundFacadeLoadingArgument;
+      //    //MPTVSeriesLog.Write("bg_ProgressChanged for: " + arg.Type.ToString(), MPTVSeriesLog.LogLevel.Debug);
+
+      //    if (bg.CancellationPending)
+      //    {
+      //      LogMyFilms.Debug("bg_ProgressChanged cancelled");
+      //      return;
+      //    }
+
+      //    if (arg == null || arg.Type == BackGroundLoadingArgumentType.None) return;
+
+      //    switch (arg.Type)
+      //    {
+      //      case BackGroundLoadingArgumentType.FullElement:
+      //      case BackGroundLoadingArgumentType.ElementForDelayedImgLoading:
+      //        {
+      //          GUIListItem gli = arg.Argument as GUIListItem;
+      //          if (facadeView != null && gli != null)
+      //          {
+      //            // Messages are not recieved in OnMessage for Filmstrip/Coverflow, instead subscribe to OnItemSelected
+      //            if (facadeView.CurrentLayout == GUIFacadeControl.Layout.Filmstrip)
+      //              gli.OnItemSelected += new GUIListItem.ItemSelectedHandler(onFacadeItemSelected);
+
+      //            if (facadeView.CurrentLayout == GUIFacadeControl.Layout.CoverFlow)
+      //              gli.OnItemSelected += new GUIListItem.ItemSelectedHandler(onFacadeItemSelected);
+
+      //            bFacadeEmpty = false;
+      //            facadeView.Add(gli);
+      //            if (arg.Type == BackGroundLoadingArgumentType.ElementForDelayedImgLoading)
+      //            {
+      //              if (itemsForDelayedImgLoading == null)
+      //                itemsForDelayedImgLoading = new List<GUIListItem>();
+      //              itemsForDelayedImgLoading.Add(gli);
+      //            }
+      //          }
+      //        }
+      //        break;
+
+      //      case BackGroundLoadingArgumentType.DelayedImgLoading:
+      //        {
+      //          if (itemsForDelayedImgLoading != null && itemsForDelayedImgLoading.Count > arg.IndexArgument)
+      //          {
+      //            string image = arg.Argument as string;
+      //            itemsForDelayedImgLoading[arg.IndexArgument].IconImageBig = image;
+      //          }
+      //        }
+      //        break;
+
+      //      case BackGroundLoadingArgumentType.ElementSelection:
+      //        {
+      //          // thread told us which element it'd like to select
+      //          // however the user might have already started moving around
+      //          // if that is the case, we don't select anything
+      //          LogMyFilms.Debug("Element Selection: " + arg.IndexArgument.ToString());
+      //          if (this.facadeView != null && this.facadeView.SelectedListItemIndex < 1)
+      //          {
+      //            this.facadeView.Focus = true;
+      //            this.facadeView.SelectedListItemIndex = arg.IndexArgument;
+
+      //            // Hack for 'set' SelectedListItemIndex not being implemented in Filmstrip/Coverflow Layout
+      //            // Navigate to selected using OnAction instead 
+      //            if (facadeView.CurrentLayout == GUIFacadeControl.Layout.Filmstrip ||
+      //                facadeView.CurrentLayout == GUIFacadeControl.Layout.CoverFlow)
+      //            {
+      //            }
+      //          }
+      //        }
+      //        break;
+
+      //      case BackGroundLoadingArgumentType.DelayedImgInit:
+      //        itemsForDelayedImgLoading = null;
+      //        break;
+      //      case BackGroundLoadingArgumentType.SetFacadeMode:
+      //        GUIFacadeControl.Layout viewMode = (GUIFacadeControl.Layout)arg.Argument;
+      //        setFacadeMode(viewMode);
+      //        break;
+      //    }
+      //  }
+      //  catch (Exception ex)
+      //  {
+      //    LogMyFilms.Debug(string.Format("Error in bg_ProgressChanged: {0}: {1}", ex.Message, ex.InnerException));
+      //    LogMyFilms.Debug(ex.StackTrace);
+      //  }
+      //}
+
+      //private void bgFacadeDone(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+      //{
+      //  // ZF - seems to be crashing because of facade being null sometimes, before getting inside the plugin
+      //  if (facadeView == null)
+      //    return;
+
+      //  if (e.Cancelled)
+      //  {
+      //    LogMyFilms.Debug("Background Load Facade detected cancel - performing delayed userclick");
+      //    LoadFacade(); // we only cancel if the user clicked something while we were still loading
+      //    // whatever was selected we will enter (this is because m_selected whatever will not get updated
+      //    // even if the user selects somethign else while we wait for cancellation due to it being a different listlevel)                                
+      //    return;
+      //  }
+      //  LogMyFilms.Debug("Background Load Facade Complete");
+
+      //  if (facadeView == null)
+      //    return;
+
+      //  //if (!CheckSkinFanartSettings()) DisableFanart();
+
+      //  facadeView.Focus = true;
+
+      //  if (bFacadeEmpty)
+      //  {
+      //    if (m_CurrViewStep == 0)
+      //    {
+      //      setFacadeMode(GUIFacadeControl.Layout.List);
+      //      GUIListItem item = new GUIListItem("Translation.No_items");
+      //      item.IsRemote = true;
+      //      this.facadeView.Add(item);
+
+      //      #region Clear GUI Properties
+      //      // ToDo: clear GUI Properties
+      //      #endregion
+
+      //    }
+      //    else
+      //    {
+      //      // probably something was removed
+      //      LogMyFilms.Debug("Nothing to display, going out");
+      //      OnAction(new Action(Action.ActionType.ACTION_PREVIOUS_MENU, 0, 0));
+      //    }
+      //  }
+
+      //  if (skipSeasonIfOne_DirectionDown && SkipSeasonCode == SkipSeasonCodes.SkipSeasonDown)
+      //  {
+      //    OnClicked(facadeView.GetID, m_Facade, Action.ActionType.ACTION_SELECT_ITEM);
+      //  }
+      //  else if (!skipSeasonIfOne_DirectionDown && SkipSeasonCode == SkipSeasonCodes.SkipSeasonUp)
+      //  {
+      //    OnAction(new Action(Action.ActionType.ACTION_PREVIOUS_MENU, 0, 0));
+      //  }
+      //}
+
+      //private void bgLoadFacade(object sender, System.ComponentModel.DoWorkEventArgs e)
+      //{
+      //  //facadeLoaded = false; // reset
+      //  bgLoadFacade();
+      //  if (bg.CancellationPending)
+      //    e.Cancel = true;
+
+      //}
+
+      //private void bgLoadFacade()
+      //{
+      //  LogMyFilms.Debug("Begin Loading of Facade");
+      //  try
+      //  {
+      //    GUIListItem item = null;
+      //    int selectedIndex = -1;
+      //    int count = 0;
+      //    bool delayedImageLoading = false;
+      //    List<DBSeries> seriesList = null;
+
+      //    switch (this.listLevel)
+      //    {
+      //      #region Group
+      //      case Listlevel.Group:
+      //        break;
+      //      #endregion
+      //      #region Episode
+      //      case Listlevel.Movie:
+      //        {
+      //          bool bFindNext = false;
+      //          ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.SetFacadeMode, 0, GUIFacadeControl.Layout.List);
+
+      //          // Get a list of Episodes to display for current view							
+      //          List<DBEpisode> episodesToDisplay = m_CurrLView.getEpisodeItems(m_CurrViewStep, m_stepSelection);
+
+      //          // Update Filtered Episode Count Property, this acurately displays the number of items on the facade
+      //          // #TVSeries.Series.EpisodeCount is not desirable in some views e.g. Recently Added or views that filter by episode fields
+      //          setGUIProperty(guiProperty.FilteredEpisodeCount, episodesToDisplay.Count.ToString());
+      //          setGUIProperty("#itemcount", episodesToDisplay.Count.ToString());
+
+      //          int watchedCount = 0;
+      //          int unwatchedCount = episodesToDisplay.Count;
+
+      //          LogMyFilms.Debug(string.Format("Displaying {0} episodes from {1}", episodesToDisplay.Count.ToString(), m_SelectedSeries));
+      //          item = null;
+
+      //          if (episodesToDisplay.Count == 0)
+      //            bFacadeEmpty = true;
+
+      //          foreach (DBEpisode episode in episodesToDisplay)
+      //          {
+      //            try
+      //            {
+      //              //bEmpty = false;
+      //              item = new GUIListItem();
+
+      //              // its possible the user never selected a series/season (flat view)
+      //              // thus its desirable to display series and season index also)
+
+      //              item.Label = FieldGetter.resolveDynString(m_sFormatEpisodeCol2, episode);
+
+      //              item.Label2 = FieldGetter.resolveDynString(m_sFormatEpisodeCol3, episode);
+      //              item.Label3 = FieldGetter.resolveDynString(m_sFormatEpisodeCol1, episode);
+
+      //              #region List Colors
+      //              item.IsRemote = false;
+      //              item.IsPlayed = false;
+
+      //              // Set IsRemote property to true, if the episode is not local on disk                                    
+      //              if (episode[DBEpisode.cFilename].ToString().Length == 0 || episode[DBEpisode.cIsAvailable] == 0)
+      //              {
+      //                item.IsRemote = true;
+      //              }
+      //              // Set IsPlayed property to true, if the episode has been watched
+      //              else if (episode[DBOnlineEpisode.cWatched])
+      //              {
+      //                item.IsPlayed = true;
+      //              }
+      //              // Set Selected property to true, if all episodes are hidden
+      //              if (episode[DBOnlineEpisode.cHidden] && DBOption.GetOptions(DBOption.cShowHiddenItems))
+      //              {
+      //                item.IsRemote = false;
+      //                item.IsPlayed = false;
+      //                item.Selected = true;
+      //              }
+      //              #endregion
+
+      //              if (item.IsPlayed)
+      //              {
+      //                watchedCount++;
+      //                unwatchedCount--;
+      //              }
+
+      //              item.TVTag = episode;
+
+      //              if (m_SelectedEpisode != null)
+      //              {
+      //                if (episode[DBEpisode.cCompositeID] == m_SelectedEpisode[DBEpisode.cCompositeID])
+      //                {
+      //                  if (!episode[DBOnlineEpisode.cWatched])
+      //                  {
+      //                    //-- video has not been watched so keep it selected
+      //                    selectedIndex = count;
+      //                  }
+      //                  else
+      //                  {
+      //                    //-- move to the next unwatched video in the list
+      //                    bFindNext = true;
+      //                    selectedIndex = count;
+      //                  }
+      //                }
+      //                else if (bFindNext && !episode[DBOnlineEpisode.cWatched])
+      //                {
+      //                  selectedIndex = count;
+      //                  bFindNext = false;
+      //                }
+      //              }
+      //              else
+      //              {
+      //                // select the first that has a file and is not watched
+      //                if (selectedIndex == -1 && episode[DBOnlineEpisode.cWatched] == 0 && episode[DBEpisode.cFilename].ToString().Length > 0)
+      //                  selectedIndex = count;
+      //              }
+
+      //              // show watched flag image if skin supports it
+      //              // this should take precedence over least used option for appending logo/ep thumb
+      //              bool bWatched = episode[DBOnlineEpisode.cWatched];
+      //              bool bAvailable = episode[DBEpisode.cFilename].ToString().Length > 0;
+
+      //              if (!LoadWatchedFlag(item, bWatched, bAvailable))
+      //              {
+      //                if (DBOption.GetOptions(DBOption.cAppendFirstLogoToList))
+      //                {
+      //                  // first returned logo should also show up here in list view directly
+      //                  item.IconImage = localLogos.getFirstEpLogo(episode);
+      //                }
+      //              }
+
+      //              if (bg.CancellationPending)
+      //              {
+      //                LogMyFilms.Debug("Cancelling Episode List Load");
+      //                return;
+      //              }
+      //              else
+      //              {
+      //                ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.FullElement, count, item);
+      //              }
+      //            }
+      //            catch (Exception ex)
+      //            {
+      //              LogMyFilms.Debug("The 'LoadFacade' function has generated an error displaying episode list item: " + ex.Message);
+      //            }
+      //            count++;
+      //          }
+      //          // Push Watched/Unwatched Count for Current Episode View
+      //          //setGUIProperty(guiProperty.WatchedCount, watchedCount.ToString());
+      //          //setGUIProperty(guiProperty.UnWatchedCount, unwatchedCount.ToString());
+      //        }
+      //        LogMyFilms.Debug("LoadFacade: Finish");
+      //        break;
+      //      #endregion
+      //    }
+
+      //    #region Report ItemToAutoSelect
+      //    if (selectedIndex != -1)
+      //      ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.ElementSelection, selectedIndex, null);
+      //    else ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.ElementSelection, (selectedIndex = 0), null); // select the first by default
+      //    #endregion
+
+      //    #region Delayed Image Loading
+      //    if (delayedImageLoading && seriesList != null)
+      //    {
+      //      // This is a perfect oportunity to use all cores on the machine
+      //      // we queue each image up to be loaded, resize and put them into memory in parallel
+      //      // on my dual core dev. machine this saves about 40%, but it heavily depends on the no. of images
+      //      // and img sizes the user has selected in config
+      //      int done = 0;                   // we need to know later when all threads are done
+      //      ThreadPool.SetMinThreads(8, 8); // seems to default to 2 (avail. cores?)
+      //      try
+      //      {
+      //        // we know which one was selected, lets be smart and try to first load those around it                        
+      //        Helper.ProximityForEach(seriesList, selectedIndex, delegate(DBSeries series, int currIndex)
+      //        {
+      //          if (!bg.CancellationPending)
+      //          {
+      //            // now foreach series, queue up the banner loading in the threadpool
+      //            KeyValuePair<int, DBSeries> keySeriesValue = new KeyValuePair<int, DBSeries>(currIndex, series);
+      //            ThreadPool.QueueUserWorkItem(delegate(object state)
+      //            {
+      //              string img = string.Empty;
+      //              KeyValuePair<int, DBSeries> stateSeries = (KeyValuePair<int, DBSeries>)state;
+
+      //              // Load Series Banners if WideBanners otherwise load Posters for Filmstrip/Coverflow
+      //              if (DBOption.GetOptions(DBOption.cView_Series_ListFormat) == "Filmstrip")
+      //                img = ImageAllocator.GetSeriesPoster(stateSeries.Value, false);
+      //              else if (DBOption.GetOptions(DBOption.cView_Series_ListFormat) == "Coverflow")
+      //                img = ImageAllocator.GetSeriesPoster(stateSeries.Value, true);
+      //              else
+      //                img = ImageAllocator.GetSeriesBanner(stateSeries.Value);
+      //              //ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.DelayedImgLoading, stateSeries.Value[DBSeries.cID], img);
+      //              ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.DelayedImgLoading, stateSeries.Key, img);
+      //              Interlocked.Increment(ref done);
+      //            }, keySeriesValue);
+      //          }
+      //          else done++;
+      //        });
+      //      }
+      //      catch (Exception exs)
+      //      {
+      //        LogMyFilms.Debug("Delayed ImgLoad Exception: " + exs.Message);
+      //      }
+
+      //      // we now need to wait until all are done, because we are already on a different thread
+      //      // and the workitems themselves call our bg worker's progresschanged method to display the imgs
+      //      // on the gui's thread, and if we exit to early we cannot do that
+      //      while (done < seriesList.Count) // let's hope we don't get an exception in a background thread or we will never finish
+      //        Thread.Sleep(15);           // this no. can use some tweaking
+      //    }
+      //    #endregion
+      //  }
+      //  catch (Exception e)
+      //  {
+      //    LogMyFilms.Debug("The 'LoadFacade' function has generated an error: " + e.Message);
+      //  }
+      //}
+
+      //private void ReportFacadeLoadingProgress(BackGroundLoadingArgumentType type, int indexArgument, object state)
+      //{
+      //  if (!bg.CancellationPending)
+      //  {
+      //    BackgroundFacadeLoadingArgument Arg = new BackgroundFacadeLoadingArgument();
+      //    Arg.Type = type;
+      //    Arg.IndexArgument = indexArgument;
+      //    Arg.Argument = state;
+
+      //    bg.ReportProgress(0, Arg);
+      //  }
+      //}
+      #endregion
+
+      //enum BackGroundLoadingArgumentType
+      //{
+      //  None,
+      //  FullElement,
+      //  ElementForDelayedImgLoading,
+      //  DelayedImgLoading,
+      //  DelayedImgInit,
+      //  ElementSelection,
+      //  SkipSeasonDown,
+      //  SkipSeasonUp,
+      //  SetFacadeMode
+      //}
+
+      //class BackgroundFacadeLoadingArgument
+      //{
+      //  public BackGroundLoadingArgumentType Type = BackGroundLoadingArgumentType.None;
+
+      //  public object Argument = null;
+      //  public int IndexArgument = 0;
+      //}
 
     }
 }
