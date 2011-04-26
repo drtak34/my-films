@@ -546,6 +546,7 @@
           this.ToolTip1.AutoPopDelay = 15000;
           this.ToolTip1.InitialDelay = 500;
           this.ToolTip1.ReshowDelay = 100;
+          this.ToolTip1.IsBalloon = true;
           // 
           // Config_Name
           // 
