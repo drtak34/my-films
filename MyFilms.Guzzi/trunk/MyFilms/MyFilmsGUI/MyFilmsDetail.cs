@@ -1563,7 +1563,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             Grabber.Grabber_URLClass.IMDBUrl wurl;
 
-            ArrayList listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, MoviePath);
+            //ArrayList listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, MoviePath); // MoviePath only when nfo reader used !!!
+            ArrayList listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, "");
             int listCount = listUrl.Count;
             if (!MyFilms.conf.StrGrabber_Always)
                 listCount = 2;
