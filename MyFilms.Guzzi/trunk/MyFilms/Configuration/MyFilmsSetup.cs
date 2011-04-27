@@ -4661,7 +4661,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntLabel3.Text = BaseMesFilms.Translate_Column(AntItem3.Text.Trim());
           AntItem4.Text = "Languages";
           AntLabel4.Text = BaseMesFilms.Translate_Column(AntItem4.Text.Trim());
-          AntItem5.Text = "DateAdded";
+          AntItem5.Text = "Date";
           AntLabel5.Text = BaseMesFilms.Translate_Column(AntItem5.Text.Trim());
 
           AntViewItem1.Text = "Producer";

@@ -507,6 +507,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //m_FanartTimer.Change(0,10000);
 
       //MyFilmsDetail.clearGUIProperty("picture");
+      BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
+      
       if (!BrowseTheWebRightPlugin || !BrowseTheWebRightVersion)
       {
         BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
@@ -614,6 +616,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else
           Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
       }
+
       //ImgFanart.SetFileName(string.Empty);
       //ImgFanart2.SetFileName(string.Empty);
 
@@ -2025,8 +2028,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     bool GetFilmList<T>(T gSelItem)
     {
       SetFilmSelect();
-      //ImgLstFilm.SetFileName("#myfilms.picture"); // Disabled because replaced by SpeedLoader
-      //ImgLstFilm2.SetFileName("#myfilms.picture");
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
       r = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       LogMyFilms.Debug("MF: (GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
@@ -2045,7 +2046,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //    GUIControl.HideControl(GetID, 34);
       //    InitMainScreen();
       //}
-
       int iCnt = 0;
       int DelimCnt = 0, DelimCnt2;
       GUIListItem item = new GUIListItem();
@@ -2224,7 +2224,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             item.IconImage = strThumb;
           item.ItemId = number;
           // set availability status
-          if (InitialIsOnlineScan && !GlobalFilterIsOnlineOnly) // only display media status, if onlinescan was done AND filter is not active!
+          if (InitialIsOnlineScan) // only display media status, if onlinescan was done
           {
             if (string.IsNullOrEmpty(sr["IsOnline"].ToString()))
               item.IsRemote = false;
@@ -2270,13 +2270,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (facadeView.Count == 0)
       {
+        item = new GUIListItem();
+        item.Label = GUILocalizeStrings.Get(10798639);
+        item.IsRemote = true;
+        facadeView.Add(item);
+        item.FreeMemory();
         ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798639));
-        GUIWaitCursor.Show();
-        DisplayAllMovies();
-        InitMainScreen(false);
+        //GUIWaitCursor.Show();
+        //DisplayAllMovies();
+        Load_Lstdetail(-1, "no results found");
+        //InitMainScreen(false);
         GUIControl.ShowControl(GetID, 34); // hides certain GUI elements
-        SetLabelSelect("root");
-        SetLabelView("all");
+        //SetLabelSelect("root");
+        //SetLabelView("all");
       }
       else
       {
@@ -2331,14 +2337,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (ItemId == -1)
       {
         // reinit some fields
+        cover.Filename = "";
+        backdrop.Filename = "";
+        MyFilmsDetail.Init_Detailed_DB(false);
         LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId == -1 -> return");
         return;
       }
 
-      if (facadeView.SelectedListItem.IsFolder)
-        Prev_ItemID = facadeView.SelectedListItemIndex;
-      else
-        Prev_ItemID = facadeView.SelectedListItem.ItemId;
+      //if (facadeView.SelectedListItem.IsFolder)
+      //  Prev_ItemID = facadeView.SelectedListItemIndex;
+      //else
+      Prev_ItemID = facadeView.SelectedListItem.ItemId;
 
       if ((facadeView.SelectedListItem.IsFolder) && (MyFilms.conf.Boolselect))
       {
@@ -2364,8 +2373,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (!cover.Active)
           cover.Active = true;
         conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
-        //MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
-        MyFilmsDetail.setGUIProperty("picture", facadeView.SelectedListItem.ThumbnailImage);
+        MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
         cover.Filename = conf.FileImage;
 
         //GUIControl.ShowControl(GetID, 34);
@@ -2419,8 +2427,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //else
         //{
         conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
-        MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
-        cover.Filename = MyFilms.conf.FileImage;
+        MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
+        cover.Filename = conf.FileImage;
         //}
 
         //m_FanartTimer.Change(0, 10000); // 10000 = 10 sek. // Added to immediately change Fanart - activate to enable timer and reset it !
@@ -2519,7 +2527,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (150 < (int)(tickCount - lastPublished)) // wait 100 ms to load details...
       {
         lastPublished = tickCount;
-        Load_Lstdetail(ItemId, wlabel);
+        Load_Lstdetail(facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+        // Load_Lstdetail(ItemId, wlabel); 
         return;
       }
       else // Publish on timer using the delay specified in settings
@@ -3008,7 +3017,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if ((Wnb_enr > 0) && (wchampselect.Length > 0))
             {
-              item = new GUIListItem();
+              item = new GUIListItem(item); 
+              //item.ItemId = number;
               item.Label = wchampselect;
               item.Label2 = Wnb_enr.ToString();
               //item.Label3 = WStrSort.ToLower();
@@ -3018,7 +3028,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
                 item.ThumbnailImage = strActiveFacadeImages[0];
-                item.IconImageBig = strActiveFacadeImages[0];
                 item.IconImage = strActiveFacadeImages[1];
               }
               if (createFanartDir)
@@ -3040,7 +3049,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if ((Wnb_enr > 0) && (wchampselect.Length > 0))
       {
-        item = new GUIListItem();
+        item = new GUIListItem(); 
+        //item.ItemId = number;
         item.Label = wchampselect;
         item.Label2 = Wnb_enr.ToString();
         //item.Label3 = WStrSort.ToLower();
@@ -3051,7 +3061,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
           item.ThumbnailImage = strActiveFacadeImages[0];
-          item.IconImageBig = strActiveFacadeImages[0];
           item.IconImage = strActiveFacadeImages[1];
         }
         string[] wfanart;
@@ -3385,7 +3394,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("MF: Fin_Charge_Init() called with LoadDfltSlct = '" + LoadDfltSlct + "', reload = '" + reload + "'");
       //GUIWaitCursor.Init();
       //GUIWaitCursor.Show();
-      //GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
+      
+      GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
 
       //if (publishTimer != null)
       //  publishTimer.SafeDispose();
@@ -3539,8 +3549,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         SetLabelSelect("root");
       else
         SetLabelSelect(conf.StrTxtSelect);
-      //  MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
-      //  GUIWaitCursor.Hide();
+      MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+      GUIWaitCursor.Hide();
       if (conf.LastID == ID_MyFilmsDetail)
         GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
       if (conf.LastID == ID_MyFilmsActors)
@@ -3808,11 +3818,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               backdrop.Active = true;
             else
               backdrop.Active = false;
-            MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
-            GUIWaitCursor.Hide();
           }
           else
             GUIControl.HideControl(GetID, 34); // show elements in skin
+          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+          GUIWaitCursor.Hide();
           break;
 
         case "nasstatus": //Check and show status of NAS Servers
@@ -6955,9 +6965,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.LoadingImage = loadingImage;
 
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
-
-      //ImgFanart.SetVisibleCondition(1, false); //Added by ZebonsMerge ->> This fucked up the fanart swapper !!!!!
-      //ImgFanart2.SetFileName(string.Empty); //Added by ZebonsMerge
 
       MyFilmsDetail.clearGUIProperty("logos_id2001", log);
       MyFilmsDetail.clearGUIProperty("logos_id2002", log);
