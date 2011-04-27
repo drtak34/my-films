@@ -430,6 +430,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitLogger(); // Initialize Logger 
       Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
       LogMyFilms.Debug("MyFilms.Init() started.");
+      LogMyFilms.Info("MyFilms     Version: '" + MyFilmsSettings.Version + "', BuildDate: '" + MyFilmsSettings.BuildDate + "'");
+      LogMyFilms.Info("MediaPortal Version: '" + MyFilmsSettings.MPVersion + "', BuildDate: '" + MyFilmsSettings.MPBuildDate + "'");
+      System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+      dlgok.SetLine(1, "MyFilms Version = 'V" + asm.GetName().Version.ToString() + "'");
 
       // Set Variable for FirstTimeView Setup
       InitialStart = true;
@@ -2898,7 +2902,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public void getSelectFromDivx(string WstrSelect, string WStrSort, string WStrSortSens, string NewWstar, bool ClearIndex, string SelItem)
     {
-      GUIListItem item = new GUIListItem();
+      //GUIListItem item = new GUIListItem();
       Prev_ItemID = -1;
       string champselect = "";
       string wchampselect = "";
@@ -2915,7 +2919,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Change_LayOut(0);
       else
         Change_LayOut(MyFilms.conf.StrLayOut);
-      facadeView.Clear();
+      //facadeView.Clear();
+      GUIControl.ClearControl(GetID, facadeView.GetID); // taken from OV
       int wi = 0;
 
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
@@ -3017,18 +3022,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if ((Wnb_enr > 0) && (wchampselect.Length > 0))
             {
+              GUIListItem item = new GUIListItem(wchampselect);
               item = new GUIListItem(item); 
               //item.ItemId = number;
               item.Label = wchampselect;
               item.Label2 = Wnb_enr.ToString();
               //item.Label3 = WStrSort.ToLower();
               //item.DVDLabel = WStrSort.ToLower();
+              MediaPortal.Util.Utils.SetDefaultIcons(item);
               item.Path = WStrSort.ToLower();
               if (getThumbs)
               {
                 strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
                 item.ThumbnailImage = strActiveFacadeImages[0];
-                item.IconImage = strActiveFacadeImages[1];
+                item.IconImage = strActiveFacadeImages[0];
+                item.IconImageBig = strActiveFacadeImages[0];
               }
               if (createFanartDir)
               {
@@ -3049,19 +3057,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if ((Wnb_enr > 0) && (wchampselect.Length > 0))
       {
-        item = new GUIListItem(); 
+        GUIListItem item = new GUIListItem(wchampselect);
         //item.ItemId = number;
         item.Label = wchampselect;
         item.Label2 = Wnb_enr.ToString();
         //item.Label3 = WStrSort.ToLower();
         //item.DVDLabel = WStrSort.ToLower();
+        MediaPortal.Util.Utils.SetDefaultIcons(item);
         item.Path = WStrSort.ToLower();
         //item.ItemId = number; // Only used in GetFilmList
         if (getThumbs)
         {
           strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
           item.ThumbnailImage = strActiveFacadeImages[0];
-          item.IconImage = strActiveFacadeImages[1];
+          item.IconImage = strActiveFacadeImages[0];
+          item.IconImageBig = strActiveFacadeImages[0];
         }
         string[] wfanart;
         if (createFanartDir)
@@ -3075,7 +3085,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Finished");
 
-      item.FreeMemory();
+      //item.FreeMemory();
       conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
       if (conf.Wstar != "*") conf.StrTxtSelect += " " + GUILocalizeStrings.Get(1079896) + " [*" + conf.Wstar + "*]"; // add to "Selection": Persons with Filter
       MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
