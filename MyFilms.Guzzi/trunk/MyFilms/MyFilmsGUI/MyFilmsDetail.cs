@@ -210,6 +210,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         protected override void OnPageLoad()
         {
             Log.Debug("MyFilms.OnPageLoad() started.");
+            LogMyFilms.Debug("MFD: OnPageLoad() started.");
             base.OnPageLoad(); // let animations run!
             setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
             setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
@@ -260,13 +261,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
             int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
 
-            setProcessAnimationStatus(false, m_SearchAnimation);
             afficher_detail(true);
             MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
             //LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Finished");
             //return result;
-          
-          Log.Debug("MyFilms.OnPageLoad() finished.");
+
+            setProcessAnimationStatus(false, m_SearchAnimation);
+            LogMyFilms.Debug("MFD: OnPageLoad() finished.");
+            Log.Debug("MyFilms.OnPageLoad() finished.");
           return;
         }
 
@@ -3670,8 +3672,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             StrMax = MyFilms.r.Length;
         }
-
         private void afficher_detail(bool searchPicture)
+        {
+          afficher_detail(searchPicture, false);
+        }
+
+        private void afficher_detail(bool searchPicture, bool checkfileavailability)
         {
             //-----------------------------------------------------------------------------------------------------------------------
             //    Load Detailed Info
@@ -3774,7 +3780,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIControl.ShowControl(GetID, (int)Controls.CTRL_Fanart);
                 }
             }
-            if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)")
+            if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && checkfileavailability)
             {
                 if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length > 0)
                 {
