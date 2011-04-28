@@ -195,6 +195,7 @@
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.DefaultCoverArtist = new System.Windows.Forms.TextBox();
           this.groupBox_GrabberOptions = new System.Windows.Forms.GroupBox();
+          this.txtGrabberDisplay = new System.Windows.Forms.TextBox();
           this.btnEditScript = new System.Windows.Forms.Button();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.label51 = new System.Windows.Forms.Label();
@@ -389,6 +390,7 @@
           this.CmdPar = new System.Windows.Forms.ComboBox();
           this.CmdExe = new System.Windows.Forms.TextBox();
           this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
+          this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
           this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
           this.label5 = new System.Windows.Forms.Label();
           this.PathStorage = new System.Windows.Forms.TextBox();
@@ -486,8 +488,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
-          this.txtGrabberDisplay = new System.Windows.Forms.TextBox();
           this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
@@ -545,8 +545,9 @@
           // 
           this.ToolTip1.AutoPopDelay = 15000;
           this.ToolTip1.InitialDelay = 500;
-          this.ToolTip1.ReshowDelay = 100;
           this.ToolTip1.IsBalloon = true;
+          this.ToolTip1.ReshowDelay = 100;
+          this.ToolTip1.ToolTipTitle = "MyFilms Help ...";
           // 
           // Config_Name
           // 
@@ -1616,6 +1617,14 @@
           this.groupBox_GrabberOptions.TabStop = false;
           this.groupBox_GrabberOptions.Text = "Movie Detail Internet Updates";
           this.ToolTip1.SetToolTip(this.groupBox_GrabberOptions, resources.GetString("groupBox_GrabberOptions.ToolTip"));
+          // 
+          // txtGrabberDisplay
+          // 
+          this.txtGrabberDisplay.Location = new System.Drawing.Point(145, 14);
+          this.txtGrabberDisplay.Name = "txtGrabberDisplay";
+          this.txtGrabberDisplay.ReadOnly = true;
+          this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
+          this.txtGrabberDisplay.TabIndex = 67;
           // 
           // btnEditScript
           // 
@@ -3739,6 +3748,17 @@
           this.groupBox_PlayMovieInfos.TabStop = false;
           this.groupBox_PlayMovieInfos.Text = "Play Movie Info";
           // 
+          // chkScanMediaOnStart
+          // 
+          this.chkScanMediaOnStart.AutoSize = true;
+          this.chkScanMediaOnStart.Location = new System.Drawing.Point(27, 37);
+          this.chkScanMediaOnStart.Name = "chkScanMediaOnStart";
+          this.chkScanMediaOnStart.Size = new System.Drawing.Size(120, 17);
+          this.chkScanMediaOnStart.TabIndex = 83;
+          this.chkScanMediaOnStart.Text = "Scan media on start";
+          this.ToolTip1.SetToolTip(this.chkScanMediaOnStart, resources.GetString("chkScanMediaOnStart.ToolTip"));
+          this.chkScanMediaOnStart.UseVisualStyleBackColor = true;
+          // 
           // groupBoxMoviePathInfos
           // 
           this.groupBoxMoviePathInfos.Controls.Add(this.label5);
@@ -4809,25 +4829,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // chkScanMediaOnStart
-          // 
-          this.chkScanMediaOnStart.AutoSize = true;
-          this.chkScanMediaOnStart.Location = new System.Drawing.Point(27, 37);
-          this.chkScanMediaOnStart.Name = "chkScanMediaOnStart";
-          this.chkScanMediaOnStart.Size = new System.Drawing.Size(120, 17);
-          this.chkScanMediaOnStart.TabIndex = 83;
-          this.chkScanMediaOnStart.Text = "Scan media on start";
-          this.ToolTip1.SetToolTip(this.chkScanMediaOnStart, resources.GetString("chkScanMediaOnStart.ToolTip"));
-          this.chkScanMediaOnStart.UseVisualStyleBackColor = true;
-          // 
-          // txtGrabberDisplay
-          // 
-          this.txtGrabberDisplay.Location = new System.Drawing.Point(145, 14);
-          this.txtGrabberDisplay.Name = "txtGrabberDisplay";
-          this.txtGrabberDisplay.ReadOnly = true;
-          this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
-          this.txtGrabberDisplay.TabIndex = 67;
           // 
           // traktConfiguration
           // 
