@@ -269,6 +269,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public int Layout = 0;
     public static int Prev_ItemID = -1;
+
+    public static string Prev_wLabel = string.Empty;
     //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
     public static int Prev_MenuID = -1;
     public bool Context_Menu = false;
@@ -428,8 +430,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("MyFilms.Init() started.");
       LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() + "',   BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
       LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion.ToString() + "', BuildDate: '" + MyFilmsSettings.MPBuildDate.ToString() + "'");
-      //System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
-      //dlgok.SetLine(1, "MyFilms Version = 'V" + asm.GetName().Version.ToString() + "'");
 
       // Set Variable for FirstTimeView Setup
       InitialStart = true;
@@ -464,7 +464,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public override void DeInit()
     {
-      LogMyFilms.Debug("MyFilms.DeInit() started. Calling base.DeInit()...");
+      LogMyFilms.Debug("MyFilms.DeInit() started/ended. Calling base.DeInit()...");
       base.DeInit();
       // Add Other Classes here, if necessary
     }
@@ -491,9 +491,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
     {
+      if (InitialStart)
+      {
+        // Initial steps
+      }
       LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
       Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
-      base.OnPageLoad(); // let animations run
 
       // Support for StartParameters - ToDo: Add start view options (implementation)
       string jumpToViewName = null;
@@ -509,7 +512,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //MyFilmsDetail.clearGUIProperty("picture");
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
-      
+
       if (!BrowseTheWebRightPlugin || !BrowseTheWebRightVersion)
       {
         BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
@@ -527,29 +530,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.GUIImageOne = ImgFanart;
       backdrop.GUIImageTwo = ImgFanart2;
       backdrop.LoadingImage = loadingImage;  // --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
+      if (!cover.Active)
+        cover.Active = true;
+      if (!groupcover.Active)
+        groupcover.Active = true;
 
       //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
       //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
-      GUIWaitCursor.Init();
+      //GUIWaitCursor.Init();
       GUIWaitCursor.Show();
-      Thread.Sleep(5); // let animations run ?
+      //Thread.Sleep(5); // let animations run ?
       if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
       {
         Prev_MenuID = PreviousWindowId;
         InitMainScreen(false); // don't log to MyFilms.log Property clear
+        //InitGlobalFilters(false);
         Configuration.Current_Config();
         Load_Config(Configuration.CurrentConfig, true);
+        if (MyFilms.conf.StrFanart)
+          backdrop.Active = true;
+        else
+          backdrop.Active = false;
       }
       if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
       {
         GUIWindowManager.ShowPreviousWindow();
-        GUIWaitCursor.Hide();
+        //GUIWaitCursor.Hide();
         return;
       }
-      if (MyFilms.conf.StrFanart)
-        backdrop.Active = true;
-      else
-        backdrop.Active = false;
 
       // Originally Deactivated by Zebons    
       // ********************************
@@ -594,7 +602,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
       LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
-      return;
+      base.OnPageLoad(); // let animations run
     }
 
     protected override void OnPageDestroy(int new_windowId)
@@ -636,6 +644,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       base.OnPageDestroy(new_windowId);
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
       Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
+    }
+
+    private void DoPageLoad()
+    {
     }
 
     #endregion
@@ -1421,9 +1433,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (messageType.Message)
       {
         case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-          bool result = base.OnMessage(messageType);
+          //bool result = base.OnMessage(messageType);
           // Do things here ...        
-          return result;
+          //return result;
+          return base.OnMessage(messageType);
 
         case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
           break;
@@ -1815,6 +1828,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     bool GetPrevFilmList()
     {
       Prev_ItemID = -1;
+      Prev_wLabel = string.Empty;
       string SelItem;
       if (conf.StrTitleSelect == "")
       {
@@ -1884,7 +1898,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     static void SetFilmSelect()
     {
       string s = "";
-      Prev_ItemID = -1;
+      Prev_ItemID = -1; 
+      Prev_wLabel = string.Empty;
       if (conf.Boolselect)
       {
         string sLabel = conf.Wselectedlabel;
@@ -2227,11 +2242,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //----------------------------------------------------------------------------------------
     private void Load_Lstdetail(int ItemId, string wlabel)//wrep = false display only image, all properties cleared
     {
-      //if (facadeView.SelectedListItem.ItemId == Prev_ItemID)
-      //{
-      //  LogMyFilms.Debug("MF: (item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
-      //  return;
-      //}
+      if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_wLabel)
+      {
+        LogMyFilms.Debug("MF: (item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+        return;
+      }
       LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId = " + ItemId + ", wlabel = " + wlabel);
       if (ItemId == -1)
       {
@@ -2247,6 +2262,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  Prev_ItemID = facadeView.SelectedListItemIndex;
       //else
       Prev_ItemID = facadeView.SelectedListItem.ItemId;
+      Prev_wLabel = facadeView.SelectedListItem.Label;
 
       if ((facadeView.SelectedListItem.IsFolder) && (MyFilms.conf.Boolselect))
       {
@@ -2269,11 +2285,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
 
-        if (!cover.Active)
-          cover.Active = true;
+        //if (!cover.Active)
+        //  cover.Active = true;
         conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
-        cover.Filename = conf.FileImage;
+        groupcover.Filename = conf.FileImage;
 
         //GUIControl.ShowControl(GetID, 34);
         // Load_Rating(0); // old method - nor more used
@@ -2312,8 +2328,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
 
-        if (!cover.Active)
-          cover.Active = true;
+        //if (!cover.Active)
+        //  cover.Active = true;
 
         //if (!System.IO.File.Exists(facadeView.SelectedListItem.ThumbnailImage))
         //{
@@ -2799,6 +2815,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       //GUIListItem item = new GUIListItem();
       Prev_ItemID = -1;
+      Prev_wLabel = string.Empty;
       string champselect = "";
       string wchampselect = "";
       ArrayList w_tableau = new ArrayList();
@@ -3680,6 +3697,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
           {
             InitMainScreen(false); // reset all properties and values
+            InitGlobalFilters(false); // reset global filters, when loading new config !
             //Change "Config":
             if (facadeView.SelectedListItem != null)
               Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
@@ -3690,6 +3708,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
             GUIWaitCursor.Init();
             GUIWaitCursor.Show();
+            GUIWindowManager.Process();
             MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
             Load_Config(newConfig, true);
             if (InitialStart)
@@ -6840,7 +6859,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties !!!");
 
-      MovieScrobbling = false; //Reset MovieScrobbling
       MyFilmsDetail.Init_Detailed_DB(log);  // Includes clear of db & user properties
 
       backdrop.Filename = String.Empty;
@@ -6858,7 +6876,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("db.rating", log);
       MyFilmsDetail.clearGUIProperty("view", log); // Try to properly clean main view when entering
       MyFilmsDetail.clearGUIProperty("select", log);
+      LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties - Finished !");
+    }
 
+    //*****************************************************************************************
+    //*  Reset global Filters
+    //*****************************************************************************************
+    private void InitGlobalFilters(bool log)
+    {
+      LogMyFilms.Debug("MF: (InitGlobalFilters) - Reset global Filters ...");
+      MovieScrobbling = false; //Reset MovieScrobbling
       GlobalFilterStringUnwatched = string.Empty;
       // Will be later initialized from setting MyFilms.conf.GlobalUnwatchedOnly
       MyFilmsDetail.clearGUIProperty("globalfilter.unwatched", log);
@@ -6880,10 +6907,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.clearGUIProperty("globalfilter.minrating", log);
         MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue", log);
       }
-      // this.Load_Rating(0); // old method - nor more used
-      GUIWaitCursor.Hide();
-      GUIControl.ShowControl(GetID, 34); // hide elements in skin
-      LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties - Finished !");
     }
 
     //*****************************************************************************************

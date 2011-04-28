@@ -211,7 +211,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             Log.Debug("MyFilms.OnPageLoad() started.");
             LogMyFilms.Debug("MFD: OnPageLoad() started.");
-            base.OnPageLoad(); // let animations run!
             setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
             setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
             setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
@@ -269,7 +268,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             setProcessAnimationStatus(false, m_SearchAnimation);
             LogMyFilms.Debug("MFD: OnPageLoad() finished.");
             Log.Debug("MyFilms.OnPageLoad() finished.");
-          return;
+            base.OnPageLoad(); // let animations run!
         }
 
 
