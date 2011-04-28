@@ -473,7 +473,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             facadeView.Clear();
             int wi = 0;
 
-            foreach (DataRow enr in BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
+            foreach (DataRow enr in BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
             {
                 if ((WStrSort == "Date") || (WStrSort == "DateAdded"))
                     champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
@@ -766,19 +766,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 choiceSearch.Add("PersonInfo");
             }
 
-            DataRow[] wr = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+            DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
             if (wr.Length > 0)
             {
                 dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
                 choiceSearch.Add("Producer");
             }
-            wr = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+            wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
             if (wr.Length > 0)
             {
                 dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079869) + "  (" + wr.Length.ToString() + ")");
                 choiceSearch.Add("Director");
             }
-            wr = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+            wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
             if (wr.Length > 0)
             {
                 dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");

@@ -81,32 +81,38 @@ namespace MyFilmsPlugin.MyFilms
         #endregion
 
         #region méthodes statique publiques
-        public static DataRow[] LectureDonnées(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens)
+        public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens)
         {
-            return LectureDonnées(StrDfltSelect, StrSelect, StrSort, StrSortSens, false);
+            return ReadDataMovies(StrDfltSelect, StrSelect, StrSort, StrSortSens, false);
         }
-        public static DataRow[] LectureDonnées(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
+        public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
+            LogMyFilms.Debug("ReadDataMovies() - Starting ...");
             if (data == null)
                 initData();
+            else
+              LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
+            LogMyFilms.Debug("StrDfltSelect      : '" + StrDfltSelect + "'");
+            LogMyFilms.Debug("StrSelect          : '" + StrSelect + "'");
+            LogMyFilms.Debug("StrSort            : '" + StrSort + "'");
+            LogMyFilms.Debug("StrSortSens        : '" + StrSortSens + "'");
+            LogMyFilms.Debug("RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
             if (StrSelect.Length == 0)
-                StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
+            {
+              StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
+            }
             movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
             if (movies.Length == 0 && all)
             {
                 StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
+                LogMyFilms.Debug("ReadDataMovies() - Switching to full list ...");
                 movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
-                //Guzzi
-                LogMyFilms.Debug("MF: - BaseMesFilms:  StrDfltSelect      : '" + StrDfltSelect + "'");
-                LogMyFilms.Debug("MF: - BaseMesFilms:  StrSelect          : '" + StrSelect + "'");
-                LogMyFilms.Debug("MF: - BaseMesFilms:  StrSort            : '" + StrSort + "'");
-                LogMyFilms.Debug("MF: - BaseMesFilms:  StrSortSens        : '" + StrSortSens + "'");
-                LogMyFilms.Debug("MF: - BaseMesFilms:  RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
             }
+            LogMyFilms.Debug("ReadDataMovies() - Finished ...");
             return movies;
         }
 
-        public static DataRow[] LectureDonnéesPersons(string StrSelect, string StrSort, string StrSortSens, bool all)
+        public static DataRow[] ReadDataPersons(string StrSelect, string StrSort, string StrSortSens, bool all)
         {
           if (data == null)
             initData();
@@ -139,8 +145,8 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception e)
             {
-                LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
-  //            throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
+              LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+              throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
             }
 
         }

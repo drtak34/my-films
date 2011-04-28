@@ -77,13 +77,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.ImageResource.Delay = 250;
       backdrop.PropertyOne = "#myfilms.fanart";
       backdrop.PropertyTwo = "#myfilms.fanart2";
-      backdrop.LoadingImage = loadingImage;
-      backdrop.Active = false;
 
-      // create Cover image swapper
+      // create Film Cover image swapper
       cover = new AsyncImageResource();
       cover.Property = "#myfilms.coverimage";
       cover.Delay = 125;
+
+      // create Group Cover image swapper
+      groupcover = new AsyncImageResource();
+      groupcover.Property = "#myfilms.groupcoverimage";
+      groupcover.Delay = 125;
     }
     #endregion
 
@@ -217,14 +220,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_GuiWaitCursor = 2080,
     }
 
-    //#region Events
-    //public static event RatingEventDelegate RateItem;
-    //public static event ToggleWatchedEventDelegate ToggleWatched;
-    //public delegate void RatingEventDelegate(IMDB item, string rating);
-    //public delegate void ToggleWatchedEventDelegate(IMDB movie, bool watched);
-    //#endregion
-
-
     #region Skin Variables
     //[SkinControlAttribute((int)Controls.CTRL_TxtSelect)]
     //protected GUIFadeLabel TxtSelect;
@@ -286,6 +281,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //Imageswapperdefinitions for fanart and cover
     private ImageSwapper backdrop;
     private AsyncImageResource cover = null;
+    private AsyncImageResource groupcover = null;
 
     // Guzzi: Added from TV-Series for Fanarttoggling
     private System.Threading.Timer m_FanartTimer = null;
@@ -424,16 +420,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return GUILocalizeStrings.Get(ID_MyFilms); // return localized string for Module ID
     }
 
-    public override bool Init()
-    //This Method is only loaded ONCE when starting Mediaportal !!!
+    public override bool Init() //This Method is only loaded ONCE when starting Mediaportal !
     {
+      bool result = Load(GUIGraphicsContext.Skin + @"\MyFilms.xml"); 
       InitLogger(); // Initialize Logger 
       Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
       LogMyFilms.Debug("MyFilms.Init() started.");
-      LogMyFilms.Info("MyFilms     Version: '" + MyFilmsSettings.Version + "', BuildDate: '" + MyFilmsSettings.BuildDate + "'");
-      LogMyFilms.Info("MediaPortal Version: '" + MyFilmsSettings.MPVersion + "', BuildDate: '" + MyFilmsSettings.MPBuildDate + "'");
-      System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
-      dlgok.SetLine(1, "MyFilms Version = 'V" + asm.GetName().Version.ToString() + "'");
+      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() + "',   BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
+      LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion.ToString() + "', BuildDate: '" + MyFilmsSettings.MPBuildDate.ToString() + "'");
+      //System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+      //dlgok.SetLine(1, "MyFilms Version = 'V" + asm.GetName().Version.ToString() + "'");
 
       // Set Variable for FirstTimeView Setup
       InitialStart = true;
@@ -463,7 +459,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //GUIWindowManager.Receivers += new SendMessageHandler(GUIWindowManager_OnNewMessage);
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
 
-      return Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
+      return result;
     }
 
     public override void DeInit()
@@ -496,8 +492,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
     {
       LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
-      base.OnPageLoad(); // let animations run
       Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
+      base.OnPageLoad(); // let animations run
+
       // Support for StartParameters - ToDo: Add start view options (implementation)
       string jumpToViewName = null;
       if (LoadWithParameterSupported)
@@ -526,7 +523,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("MyFilms.Init() - OnlineVideosRightPlugin = '" + OnlineVideosRightPlugin + "', OnlineVideosRightVersion = '" + OnlineVideosRightVersion + "'");
       }
 
-      // (re)link our backdrop image controls to the backdrop image swapper
+      // (re)link backdrop image controls to the backdrop image swapper
       backdrop.GUIImageOne = ImgFanart;
       backdrop.GUIImageTwo = ImgFanart2;
       backdrop.LoadingImage = loadingImage;  // --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
@@ -542,10 +539,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         InitMainScreen(false); // don't log to MyFilms.log Property clear
         Configuration.Current_Config();
         Load_Config(Configuration.CurrentConfig, true);
-        if (MyFilms.conf.StrFanart)
-          backdrop.Active = true;
-        else
-          backdrop.Active = false;
       }
       if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
       {
@@ -553,6 +546,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GUIWaitCursor.Hide();
         return;
       }
+      if (MyFilms.conf.StrFanart)
+        backdrop.Active = true;
+      else
+        backdrop.Active = false;
 
       // Originally Deactivated by Zebons    
       // ********************************
@@ -1424,112 +1421,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (messageType.Message)
       {
         case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-          ////---------------------------------------------------------------------------------------
-          //// Windows Init
-          ////---------------------------------------------------------------------------------------
-          //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
-          //bool result = base.OnMessage(messageType);
-          ////Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
-          //GUIWaitCursor.Init();
-          //GUIWaitCursor.Show();
-          //if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
-          //{
-          //    Prev_MenuID = PreviousWindowId;
-          //    InitMainScreen(false); // don't log to MyFilms.log Property clear
-          //    Configuration.Current_Config();
-          //    Load_Config(Configuration.CurrentConfig, true);
-          //    if (MyFilms.conf.StrFanart)
-          //        backdrop.Active = true;
-          //    else
-          //        backdrop.Active = false;
-          //}
-          //if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
-          //{
-          //  GUIWindowManager.ShowPreviousWindow();
-          //  GUIWaitCursor.Hide();
-          //  return result;
-          //}
-
-          //// Originally Deactivated by Zebons    
-          //// ********************************
-          //// ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
-          ////if (!bgLoadMovieList.IsBusy)
-          ////{
-          ////  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
-          ////  AsynLoadMovieList();
-          ////}
-          //// ********************************
-          //// Originally Deactivated by Zebons    
-
-          ////// Start Filesystemwatcher to watch for changes in availability
-          ////FileSystemWatcher FSW = new FileSystemWatcher("c:\\", "*.cs");
-          ////FswHandler Handler = new FswHandler();
-
-          ////FSW.Changed += Handler.OnEvent;
-          ////FSW.Created += Handler.OnEvent;
-          ////FSW.Deleted += Handler.OnEvent;
-          ////FSW.Renamed += Handler.OnEvent;
-
-          ////FSW.EnableRaisingEvents = true;
-
-          ////System.Threading.Thread.Sleep(555000);
-          ////// change the file manually to see which events are fired
-
-          ////FSW.EnableRaisingEvents = false;
-
-          //GUIControl.ShowControl(GetID, 34);
-          //GUIWaitCursor.Hide();
-          //bool launchMediaScanner = InitialStart;
-
-          //if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
-          //    Fin_Charge_Init(true,false);
-          //else
-          //    Fin_Charge_Init(false, false);
-          //// Launch Background availability scanner, if configured in setup
-          //if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
-          //{
-          //  LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
-          //  this.AsynIsOnlineCheck();
-          //}
-          //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
-          //return true;
-          break;
-
+          bool result = base.OnMessage(messageType);
+          // Do things here ...        
+          return result;
 
         case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
-          //                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
-          //                    GUITextureManager.CleanupThumbs();
-
-          //                    if (Configuration.CurrentConfig != "")
-          //                    {
-          //                        if (facadeView == null || facadeView.SelectedListItemIndex == -1)
-          //                            Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
-          //                        else
-          //                            Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
-          //                    }
-          //                    //ImgFanart.SetFileName(string.Empty);
-          //                    //ImgFanart2.SetFileName(string.Empty);
-
-          //#if MP11
-          //                    facadeView.Resources.Clear();
-          //#else
-          //                    facadeView.Clear();
-          //#endif
-          //                    facadeView.Clear();
-          //                    //backdrop.PropertyOne = " ";
-          //                    // added from MoPic
-          //                    backdrop.Filename = string.Empty;
-          //                    MyFilmsDetail.clearGUIProperty("currentfanart");
-          //                    cover.Filename = string.Empty;
-
-          //                    //Disable FanartTimer - already done on pagedestroy ...
-          //                    //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
-          //                    //m_bFanartTimerDisabled = true;
-
-          //                    LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
-          //                    return true; // fall through to call base class?
           break;
-
 
         case GUIMessage.MessageType.GUI_MSG_CLICKED:
           //---------------------------------------------------------------------------------------
@@ -2031,9 +1928,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// <returns>If returns false means is currently displaying a single folder</returns>
     bool GetFilmList<T>(T gSelItem)
     {
+      LogMyFilms.Debug("GetFilmList started: BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false)");
       SetFilmSelect();
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      r = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
+      r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       LogMyFilms.Debug("MF: (GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
       LogMyFilms.Debug("MF: (GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("MF: (GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
@@ -2074,7 +1972,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int number = -1;
       int wfacadewiew = 0;
       ArrayList w_tableau = new ArrayList();
-
+      bool isdate = false;
+      if (conf.WStrSort == "Date" || conf.WStrSort == "DateAdded") isdate = true;
       // Check and create Group thumb folder ...
       if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups"))
         System.IO.Directory.CreateDirectory(Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups");
@@ -2087,7 +1986,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           w_tableau = Search_String(sr[conf.WStrSort].ToString());
           foreach (object t in w_tableau)
           {
-            if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
+            if (isdate)
             {
               if (string.Format("{0:dd/MM/yyyy}", DateTime.Parse(t.ToString()).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
                 goto suite;
@@ -2143,13 +2042,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 item.Label2 = sr["Year"].ToString();
                 break;
               case "DateAdded":
-                try
-                {
-                  item.Label2 = sr["Date"].ToString();
-                }
-                catch
-                {
-                }
+                try {item.Label2 = sr["Date"].ToString();}
+                catch {}
                 break;
               case "RATING":
                 item.Label2 = sr["Rating"].ToString();
@@ -2180,7 +2074,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             conf.FileImage = string.Empty;
           string strThumb = string.Empty;
-          if (string.IsNullOrEmpty(conf.FileImage) || !System.IO.File.Exists(conf.FileImage)) // No Coverart in DB - so handle it !
+          if (string.IsNullOrEmpty(conf.FileImage) || !File.Exists(conf.FileImage)) // No Coverart in DB - so handle it !
           {
             LogMyFilms.Debug("MF: (GetFilmlist) - Cover missing for movie '" + sr["Number"].ToString() + "' - '" + sr["TranslatedTitle"].ToString() + "' - trying to search or create... (slow!)");
             //string strlabel = item.Label;
@@ -2302,6 +2196,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.Boolreturn = false;
         conf.Wselectedlabel = item.Label;
       }
+      LogMyFilms.Debug("GetFilmList finished!");
       return !(facadeView.Count == 1 && item.IsFolder); //ret false if single folder found
     }
 
@@ -2713,7 +2608,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       foreach (System.Text.RegularExpressions.Match oMatch in oMatches)
       {
         Regex oRegexReplace = new Regex("[,;]");
-        champselect = champselect.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, ""));
+        champselect = champselect.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, string.Empty));
       }
       ArrayList wtab = new ArrayList();
 
@@ -2915,7 +2810,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.Wselectedlabel = "";
       if (ClearIndex)
         conf.StrIndex = 0;
-      if (MyFilms.conf.UseListViewForGoups)
+      if (conf.UseListViewForGoups)
         Change_LayOut(0);
       else
         Change_LayOut(MyFilms.conf.StrLayOut);
@@ -2931,32 +2826,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSortSens                : '" + WStrSortSens + "'");
       LogMyFilms.Debug("MF: (GetSelectFromDivx) - NewWstar                    : '" + NewWstar + "'");
 
+      bool isperson = false;
+      if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower") || WStrSort.ToLower().Contains("writer"))
+        isperson = true;
+      bool isdate = false;
+      if (WStrSort == "Date" || WStrSort == "DateAdded")
+        isdate = true;
+
       // Collect List of all attributes in w_tableau
       LogMyFilms.Debug("MF: (GetSelectFromDivx) - Read movie DB Group Names");
-      foreach (DataRow enr in BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
+      foreach (DataRow enr in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
       {
-        if ((WStrSort == "Date") || (WStrSort == "DateAdded"))
+        if (isdate)
           champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
         else
           champselect = enr[WStrSort].ToString().Trim();
         ArrayList wtab = Search_String(champselect);
-        //string wAddList = "";
-        //if ((NewWstar.Length < 3) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director"))))
-        if ((NewWstar.Length < 0) && ((WStrSort.ToLower().Contains("actors")) || (WStrSort.ToLower().Contains("producer")) || (WStrSort.ToLower().Contains("director"))))
-          for (wi = 0; wi < wtab.Count; wi++)
-          {
-            //wAddList = wtab[wi].ToString().Trim().Substring(1,1) + "\\" + wtab[wi].ToString().Trim().Substring(2);
-            if (wtab[wi].ToString().Trim().Length > 1)
-              //w_tableau.Add(wtab[wi].ToString().Trim().Substring(0, 1) + @"\" + wtab[wi].ToString().Trim().Substring(1));
-              w_tableau.Add(wtab[wi].ToString().Trim().Substring(0, 1) + @"\" + wtab[wi].ToString().Trim());
-            else
-              w_tableau.Add(wtab[wi].ToString().Trim());
-          }
-        else
-          for (wi = 0; wi < wtab.Count; wi++)
-          {
-            w_tableau.Add(wtab[wi].ToString().Trim());
-          }
+        for (wi = 0; wi < wtab.Count; wi++)
+        {
+          w_tableau.Add(wtab[wi].ToString().Trim());
+        }
       }
 
       LogMyFilms.Debug("MF: (GetSelectFromDivx) - Sort Group Names");
@@ -2984,13 +2873,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
       else
         strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + WStrSort.ToLower() + @"\";
-      bool isperson = false;
-      if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower") || WStrSort.ToLower().Contains("writer"))
-        isperson = true;
       bool getThumbs = false;
       if (MyFilms.conf.StrViews && (MyFilms.conf.StrViewsDfltAll || (WStrSort.ToLower().Contains("category") || WStrSort.ToLower().Contains("year") || WStrSort.ToLower().Contains("country"))))
         getThumbs = true;
-      if (MyFilms.conf.StrPersons && (isperson))
+      if (MyFilms.conf.StrPersons && isperson)
         getThumbs = true;
       bool createFanartDir = false;
       if (WStrSort.ToLower() == "category" || WStrSort.ToLower() == "year" || WStrSort.ToLower() == "country")
@@ -3035,7 +2921,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
                 item.ThumbnailImage = strActiveFacadeImages[0];
-                item.IconImage = strActiveFacadeImages[0];
+                item.IconImage = strActiveFacadeImages[1];
                 item.IconImageBig = strActiveFacadeImages[0];
               }
               if (createFanartDir)
@@ -3070,7 +2956,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
           item.ThumbnailImage = strActiveFacadeImages[0];
-          item.IconImage = strActiveFacadeImages[0];
+          item.IconImage = strActiveFacadeImages[1];
           item.IconImageBig = strActiveFacadeImages[0];
         }
         string[] wfanart;
@@ -3107,12 +2993,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        //ImgFanart.SetVisibleCondition(1, true);  ->> This fucked up the fanart swapper !!!!!
         if (!backdrop.Active)
           backdrop.Active = true;
         GUIControl.ShowControl(GetID, 34);
-        //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2001);
-        //GUIControl.HideControl(GetID, (int)Controls.CTRL_logos_id2002);
 
         if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
           MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
@@ -3129,7 +3012,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
-
     }
 
     private static string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson)
@@ -3444,7 +3326,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //chargement des films
         if (reload)
           BaseMesFilms.LoadFilm(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-        r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
       }
       //Layout = conf.StrLayOut;
 
@@ -4401,7 +4283,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ArrayList w_index = new ArrayList();
           int w_index_count = 0;
           string t_number_id = "";
-          DataRow[] wr = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+          DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
           //Now build a list of valid movies in w_index with Number registered
           foreach (DataRow wsr in wr)
           {
@@ -5465,25 +5347,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         choiceSearch.Add("PersonInfo");
       }
 
-      DataRow[] wr = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
         choiceSearch.Add("Producer");
       }
-      wr = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079869) + "  (" + wr.Length + ")");
         choiceSearch.Add("Director");
       }
-      wr = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, "Writer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Writer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798684) + "  (" + wr.Length + ")");
         choiceSearch.Add("Writer");
       }
-      wr = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
@@ -5697,7 +5579,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //                     if (dlg == null) return;
     //                     dlg.Reset();
     //                     dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-    //                     DataRow[] wr = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
+    //                     DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
     //                     foreach (DataRow wsr in wr)
     //                     {
     //                         foreach (string wsearch in wSearchList)
@@ -6032,7 +5914,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
           string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-          DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+          DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
           w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
           w_count.Add(0);
           foreach (DataRow wsr in wr)
@@ -6440,8 +6322,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
           //Modified to checked for GlobalFilterString
           string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-          DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
-          //DataColumn[] wc = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
+          DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
+          //DataColumn[] wc = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
           w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
           w_count.Add(0);
           foreach (DataRow wsr in wr)
@@ -6654,8 +6536,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg == null) return;
             dlg.Reset();
             dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-            //DataRow[] wr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-            DataRow[] wr = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+            //DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+            DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
             LogMyFilms.Debug("MF: (GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
             LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
             LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
@@ -6752,7 +6634,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg == null) return;
             dlg.Reset();
             dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-            DataRow[] wrz = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+            DataRow[] wrz = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
             foreach (DataRow wsr in wrz)
             {
               foreach (string wsearch in wSearchList)
@@ -6824,7 +6706,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MF: (GlobalSearchAll) - ChosenProperty: SearchTest is '" + keyboard.Text + "'");
             if (control_searchText(keyboard.Text))
             {
-              DataRow[] wdr = BaseMesFilms.LectureDonnées(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+              DataRow[] wdr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
               LogMyFilms.Debug("MF: (GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
               LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
               LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
@@ -6948,7 +6830,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.WStrSort = conf.StrSTitle;
       conf.Boolselect = false;
       conf.Boolreturn = false;
-      r = BaseMesFilms.LectureDonnées(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, true);
+      r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, true);
     }
 
     //*****************************************************************************************
@@ -6961,18 +6843,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MovieScrobbling = false; //Reset MovieScrobbling
       MyFilmsDetail.Init_Detailed_DB(log);  // Includes clear of db & user properties
 
-      //if (MesFilms.conf.StrFanart)
-      //    backdrop.Active = true;
-      //else
-      //    backdrop.Active = false;
-
       backdrop.Filename = String.Empty;
       cover.Filename = String.Empty;
-
-      // (re)link the backdrop image controls to the backdrop image swapper
-      backdrop.GUIImageOne = ImgFanart;
-      backdrop.GUIImageTwo = ImgFanart2;
-      backdrop.LoadingImage = loadingImage;
 
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
 
@@ -7235,14 +7107,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BackgroundWorker worker = sender as BackgroundWorker;
       Regex oRegex = new System.Text.RegularExpressions.Regex(";");
       DateTime startTime = DateTime.Now;
-      foreach (DataRow t in MyFilms.r)
+
+      DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens, true);
+      string TotalRecords = wr.Count().ToString();
+      int counter = 0;
+      bool film = false;
+      if (MyFilms.conf.StrStorage == null || MyFilms.conf.StrStorage == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorage)) film = true;
+      bool trailer = false;
+      if (MyFilms.conf.StrStorageTrailer == null || MyFilms.conf.StrStorageTrailer == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer)) trailer = true;
+      foreach (DataRow t in wr)
       {
-        if (MyFilms.conf.StrStorage == null || MyFilms.conf.StrStorage == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorage))
+        if (film)
         {
           LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
         }
         else
         {
+          counter++;
           // Check Movie availability
           bool isonline = true; // set true as default - even if it might not be like that ...
           string fileName = string.Empty;
@@ -7274,9 +7155,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
           t["IsOnline"] = isonline.ToString();
+          MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner (" + counter + " of " + TotalRecords + " - film): '" + t[conf.StrTitle1] + "'", false);
         }
 
-        if (MyFilms.conf.StrStorage == null || MyFilms.conf.StrStorage == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorage))
+        if (trailer)
         {
           LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
         }
@@ -7312,6 +7194,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
           t["IsOnlineTrailer"] = isonline.ToString();
+          MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner (" + counter + " of " + TotalRecords + " - film): '" + t[conf.StrTitle1] + "'", false);
         }
       }
       DateTime stopTime = DateTime.Now;
@@ -7329,6 +7212,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //Load_Config(Configuration.CurrentConfig, true);
         InitialIsOnlineScan = true; // let MF know, the status has been retrieved !
         Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+        MyFilmsDetail.clearGUIProperty("statusmessage");
       }
     }
 
@@ -8015,6 +7899,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("select");
       MyFilmsDetail.clearGUIProperty("picture");
       MyFilmsDetail.clearGUIProperty("currentfanart");
+      MyFilmsDetail.clearGUIProperty("statusmessage");
     }
 
     private void Load_Logos(DataRow row)

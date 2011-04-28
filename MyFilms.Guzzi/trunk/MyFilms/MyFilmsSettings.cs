@@ -32,7 +32,7 @@ namespace MyFilmsPlugin.MyFilms
     sealed class MyFilmsSettings
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
-        public const bool newAPI = true;
+        //public const bool newAPI = true;
 
         public enum Path
         {
@@ -148,16 +148,6 @@ namespace MyFilmsPlugin.MyFilms
                 default: return string.Empty;
             }
         }
-
-        /// <summary>
-        /// Sets an alternative Database Storage Location.\nThe new Location will be saved in the Registry.
-        /// </summary>
-        /// <param name="databaseFile">Location of the Database</param>
-        public static void SetDBPath(string databaseFile)
-        {
-            RegistryKey rk = Registry.CurrentUser.CreateSubKey("Software\\MPTVSeries");
-            rk.SetValue("DBFile", databaseFile);
-        }
         #endregion
 
         # region Helpers
@@ -169,7 +159,7 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception ex)
             {
-                LogMyFilms.Debug("Error initiating Paths: " + ex.Message);
+                LogMyFilms.Error("Error initiating Paths: " + ex.Message);
             }
         }
 

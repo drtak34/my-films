@@ -1174,7 +1174,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                             MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
                             // Update_XML_database();
-                            MyFilms.r = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
+                            MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
                             afficher_detail(true);
 
                         }
@@ -1343,7 +1343,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (dlgYesNo.IsConfirmed)
                     {
                         MyFilmsDetail.DeleteTrailerFromDB((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
-                        //MyFilms.r = BaseMesFilms.LectureDonnées(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
+                        //MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
                         afficher_detail(true);
                     }
                     break;
@@ -4955,7 +4955,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //}
             try
             {
-                DataRow[] r1 = BaseMesFilms.LectureDonnées(MyFilms.conf.StrPlayedDfltSelect, MyFilms.conf.StrPlayedSelect, MyFilms.conf.StrPlayedSort, MyFilms.conf.StrPlayedSens);
+                DataRow[] r1 = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrPlayedDfltSelect, MyFilms.conf.StrPlayedSelect, MyFilms.conf.StrPlayedSort, MyFilms.conf.StrPlayedSens);
                 // Handle all movie files from idMovie
                 ArrayList movies = new ArrayList();
                 int playTimePercentage = 0; // Set watched flag after 80% of total played time
