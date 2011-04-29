@@ -56,17 +56,20 @@ namespace MyFilmsPlugin.MyFilms
         #region méthodes statique sprivées
         private static void initData()
         {
+          lock (data)
+          {
             data = new AntMovieCatalog();
             LogMyFilms.Debug("MF: BaseMesFilms - Try reading catalogfile '" + MyFilms.conf.StrFileXml + "'");
             try
             {
-                data.ReadXml(MyFilms.conf.StrFileXml);
+              data.ReadXml(MyFilms.conf.StrFileXml);
             }
             catch (Exception e)
             {
               LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
               throw e;
             }
+          }
         }
         #endregion
 
@@ -90,9 +93,11 @@ namespace MyFilmsPlugin.MyFilms
         }
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
+          lock (data)
+          {
             LogMyFilms.Debug("ReadDataMovies() - Starting ...");
             if (data == null)
-                initData();
+              initData();
             else
               LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
             LogMyFilms.Debug("StrDfltSelect      : '" + StrDfltSelect + "'");
@@ -107,89 +112,108 @@ namespace MyFilmsPlugin.MyFilms
             movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
             if (movies.Length == 0 && all)
             {
-                StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
-                LogMyFilms.Debug("ReadDataMovies() - Switching to full list ...");
-                movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
+              StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
+              LogMyFilms.Debug("ReadDataMovies() - Switching to full list ...");
+              movies = data.Tables["Movie"].Select(StrDfltSelect + StrSelect, StrSort + " " + StrSortSens);
             }
             LogMyFilms.Debug("ReadDataMovies() - Finished ...");
             return movies;
+          }
         }
 
         public static DataRow[] ReadDataPersons(string StrSelect, string StrSort, string StrSortSens, bool all)
         {
-          if (data == null)
-            initData();
-          if (StrSelect.Length == 0)
-            StrSelect = "Name" + " not like ''";
-          persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
-          if (persons.Length == 0 && all)
+          lock (data)
           {
-            StrSelect = "Name" + " not like ''";
+            if (data == null) initData();
+            if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
             persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
-            //Guzzi
-            LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSelect          : '" + StrSelect + "'");
-            LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSort            : '" + StrSort + "'");
-            LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSortSens        : '" + StrSortSens + "'");
-            LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
+            if (persons.Length == 0 && all)
+            {
+              StrSelect = "Name" + " not like ''";
+              persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
+              //Guzzi
+              LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSelect          : '" + StrSelect + "'");
+              LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSort            : '" + StrSort + "'");
+              LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSortSens        : '" + StrSortSens + "'");
+              LogMyFilms.Debug(
+                "MF: - BaseMesFilmsPersons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
+            }
+            return persons;
           }
-          return persons;
         }
 
         public static void LoadFilm(string StrFileXml)
         {
+          lock (data)
+          {
             if (!System.IO.File.Exists(StrFileXml))
             {
-                throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
+              throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
             }
             data = new AntMovieCatalog();
             try
             {
-                data.ReadXml(StrFileXml);
+              data.ReadXml(StrFileXml);
             }
             catch (Exception e)
             {
-              LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
-              throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
+              LogMyFilms.Error(
+                "MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " +
+                e.Message.ToString() + ", " + e.StackTrace.ToString());
+              throw new Exception(
+                "Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " +
+                e.Message.ToString());
             }
+          }
 
         }
         public static void UnloadMesFilms()
         {
+          lock (data)
+          {
             if (data != null)
             {
-                data.Dispose();
+              data.Dispose();
 
             }
+          }
         }
         public static void SaveMesFilms()
         {
+          lock (data)
+          {
             if (data != null)
             {
-                try
-                {
-                    System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter (MyFilms.conf.StrFileXml, System.Text.Encoding.Default);
-                    MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
-                    MyXmlTextWriter.WriteStartDocument();
-                    data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
-                    MyXmlTextWriter.Close();
-                }
-                catch
-                {
-                    MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-                    dlgOk.SetHeading("Error");//my videos
-                    dlgOk.SetLine(1, "Error during updating the XML database !");
-                    dlgOk.SetLine(2, "Maybe Directory full or no write access.");
-                    dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
-                } 
+              try
+              {
+                System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(MyFilms.conf.StrFileXml, System.Text.Encoding.Default);
+                MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
+                MyXmlTextWriter.WriteStartDocument();
+                data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                MyXmlTextWriter.Close();
+              }
+              catch
+              {
+                MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+                dlgOk.SetHeading("Error");//my videos
+                dlgOk.SetLine(1, "Error during updating the XML database !");
+                dlgOk.SetLine(2, "Maybe Directory full or no write access.");
+                dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
+              }
             }
+          }
         }
 
         public static void CancelMesFilms()
         {
+          lock (data)
+          {
             if (data != null)
             {
-                data.Clear();
+              data.Clear();
             }
+          }
         }
 
         public static string Translate_Column(string Column)
