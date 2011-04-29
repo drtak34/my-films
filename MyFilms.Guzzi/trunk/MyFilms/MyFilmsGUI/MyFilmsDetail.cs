@@ -21,8 +21,6 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
-//using Cornerstone.MP;
-
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System;
@@ -171,8 +169,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // BackgroundWorker TraktScrobbleUpdater = new BackgroundWorker();
         // private bool TraktMarkedFirstAsWatched = false;
 
-
-
         static MyFilmsDetail()
         {
             playlistPlayer = PlayListPlayer.SingletonPlayer;
@@ -209,18 +205,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         protected override void OnPageLoad()
         {
-            Log.Debug("MyFilms.OnPageLoad() started.");
-            LogMyFilms.Debug("MFD: OnPageLoad() started.");
+            LogMyFilms.Debug("OnPageLoad() started.");
             setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
             setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
             setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
             setGUIProperty("menu.actors", GUILocalizeStrings.Get(10798754));
             setGUIProperty("menu.techinfos", GUILocalizeStrings.Get(10798755));
 
-            BtnFirst.Label = GUILocalizeStrings.Get(1079872);
-            BtnLast.Label = GUILocalizeStrings.Get(1079873);
-            //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
-            //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
+            BtnFirst.Label = GUILocalizeStrings.Get(1079872); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
+            BtnLast.Label = GUILocalizeStrings.Get(1079873); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
 
             //---------------------------------------------------------------------------------------
             // Windows Init
@@ -239,7 +232,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIControl.ShowControl(GetID, 35);
             // ToDo: Should be unhidden, if ActorThumbs are implemented
             GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
-            setProcessAnimationStatus(false, m_SearchAnimation);
 
             // trakt scrobble background thread
             //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
@@ -250,30 +242,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
             m_directory.SetExtensions(MediaPortal.Util.Utils.VideoExtensions);
             if (MyFilms.conf.StrTxtSelect.Length == 0)
-              clearGUIProperty("select");
-            //GUIControl.HideControl(GetID, (int)Controls.CTRL_TxtSelect);
+              clearGUIProperty("select"); //GUIControl.HideControl(GetID, (int)Controls.CTRL_TxtSelect);
             else
-            {
-              setGUIProperty("select", MyFilms.conf.StrTxtSelect.Replace(MyFilms.conf.TitleDelim, @"\"));
-              //GUIControl.ShowControl(GetID, (int)Controls.CTRL_TxtSelect);
-            }
+              setGUIProperty("select", MyFilms.conf.StrTxtSelect.Replace(MyFilms.conf.TitleDelim, @"\")); //GUIControl.ShowControl(GetID, (int)Controls.CTRL_TxtSelect);
             afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
             int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
 
             afficher_detail(true);
             MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
-            //LogMyFilms.Debug("MFD: Message - WINDOWS_INIT - Finished");
-            //return result;
 
             setProcessAnimationStatus(false, m_SearchAnimation);
-            LogMyFilms.Debug("MFD: OnPageLoad() finished.");
-            Log.Debug("MyFilms.OnPageLoad() finished.");
+            LogMyFilms.Debug("OnPageLoad() finished.");
             base.OnPageLoad(); // let animations run!
         }
 
 
         protected override void OnPageDestroy(int new_windowId)
         {
+          base.OnPageDestroy(new_windowId);
           LogMyFilms.Debug("MyFilmsDetail.OnPageDestroy(" + new_windowId.ToString() + ") started.");
           if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
             global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
@@ -290,9 +276,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MF: SaveLastActiveModule - module {0}", currentmoduleid);
             LogMyFilms.Debug("MF: SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
           }
-          base.OnPageDestroy(new_windowId);
           LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
-          Log.Debug("MyFilmsDetail.OnPageDestroy() completed. See MyFilms.log for further Details.");
         }
 
         #region Action

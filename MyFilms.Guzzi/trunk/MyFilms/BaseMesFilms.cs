@@ -36,7 +36,10 @@ namespace MyFilmsPlugin.MyFilms
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     
-        private static AntMovieCatalog data;
+        private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
+
+        private static MyFilmsData MFdata; // Separate DB File to store "NonANT Data"
+
 /*
         private static Dictionary<string, string> dataPath;
 */

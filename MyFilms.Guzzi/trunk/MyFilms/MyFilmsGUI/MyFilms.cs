@@ -491,7 +491,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
     {
-      base.OnPageLoad(); // let animations run
       if (InitialStart)
       {
         // Initial steps
@@ -538,11 +537,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       DoPageLoad(); // run former WindowInit threaded...
       LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
+      base.OnPageLoad(); // let animations run
     }
 
     protected override void OnPageDestroy(int new_windowId)
     {
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
+
+      base.OnPageDestroy(new_windowId);
 
       // Disable Random Fanart Timer
       //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
@@ -572,7 +574,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //cover.Filename = string.Empty;
 
       //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
-      base.OnPageDestroy(new_windowId);
 
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
       Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
@@ -589,18 +590,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Worker_DoPageLoad()
     {
-      //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
       //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
       GUIWaitCursor.Init();
       GUIWaitCursor.Show();
       if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
       {
         Prev_MenuID = PreviousWindowId;
-        InitMainScreen(false); // don't log to MyFilms.log Property clear
+        if (InitialStart)
+          InitMainScreen(false); // don't log to MyFilms.log Property clear
         //InitGlobalFilters(false);
         Configuration.Current_Config();
         Load_Config(Configuration.CurrentConfig, true);
-        if (MyFilms.conf.StrFanart)
+        if (MyFilms.conf.StrFanart && !backdrop.Active)
           backdrop.Active = true;
         else
           backdrop.Active = false;
@@ -623,6 +624,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // ********************************
       // Originally Deactivated by Zebons    
 
+      bool launchMediaScanner = InitialStart;
+
+      if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
+        Fin_Charge_Init(true, false);
+      else
+        Fin_Charge_Init(false, false);
+      // Launch Background availability scanner, if configured in setup
+      if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
+      {
+        LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
+        this.AsynIsOnlineCheck();
+      }
+      //GUIControl.ShowControl(GetID, 34);
+      GUIWaitCursor.Hide();
+
       //// Start Filesystemwatcher to watch for changes in availability
       //FileSystemWatcher FSW = new FileSystemWatcher("c:\\", "*.cs");
       //FswHandler Handler = new FswHandler();
@@ -638,22 +654,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //// change the file manually to see which events are fired
 
       //FSW.EnableRaisingEvents = false;
-
-      GUIControl.ShowControl(GetID, 34);
-      GUIWaitCursor.Hide();
-      bool launchMediaScanner = InitialStart;
-
-      if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
-        Fin_Charge_Init(true, false);
-      else
-        Fin_Charge_Init(false, false);
-      // Launch Background availability scanner, if configured in setup
-      if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
-      {
-        LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
-        this.AsynIsOnlineCheck();
-      }
-      //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
     }
 
     #endregion
@@ -1723,9 +1723,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
             }
             LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
-            Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+            this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
             // use this code later to set the label of the button
-
             //if (MyFilms.conf.GlobalUnwatchedOnly)
             //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798628));
             //else
