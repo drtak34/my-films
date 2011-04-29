@@ -491,6 +491,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
     {
+      base.OnPageLoad(); // let animations run
       if (InitialStart)
       {
         // Initial steps
@@ -535,11 +536,63 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!groupcover.Active)
         groupcover.Active = true;
 
+      DoPageLoad(); // run former WindowInit threaded...
+      LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
+    }
+
+    protected override void OnPageDestroy(int new_windowId)
+    {
+      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
+
+      // Disable Random Fanart Timer
+      //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
+      //m_bFanartTimerDisabled = true;
+      //MyFilmsDetail.clearGUIProperty("Fanart");
+      //MyFilmsDetail.clearGUIProperty("Fanart2");
+
+      //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
+      //GUITextureManager.CleanupThumbs();
+
+      if (Configuration.CurrentConfig != "")
+      {
+        if (facadeView == null || facadeView.SelectedListItemIndex == -1)
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
+        else
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+      }
+
+      //ImgFanart.SetFileName(string.Empty);
+      //ImgFanart2.SetFileName(string.Empty);
+
+      //facadeView.Clear();
+      //backdrop.PropertyOne = " ";
+      // added from MoPic
+      //backdrop.Filename = string.Empty;
+      //MyFilmsDetail.clearGUIProperty("currentfanart");
+      //cover.Filename = string.Empty;
+
+      //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
+      base.OnPageDestroy(new_windowId);
+
+      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
+      Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
+    }
+
+    private void DoPageLoad()
+    {
+      Thread LoadThread = new Thread(new ThreadStart(Worker_DoPageLoad));
+      LoadThread.IsBackground = true;
+      LoadThread.Priority = ThreadPriority.AboveNormal;
+      LoadThread.Name = "MyFilms init";
+      LoadThread.Start();
+    }
+
+    private void Worker_DoPageLoad()
+    {
       //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - Start");
       //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
-      //GUIWaitCursor.Init();
+      GUIWaitCursor.Init();
       GUIWaitCursor.Show();
-      //Thread.Sleep(5); // let animations run ?
       if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
       {
         Prev_MenuID = PreviousWindowId;
@@ -555,7 +608,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
       {
         GUIWindowManager.ShowPreviousWindow();
-        //GUIWaitCursor.Hide();
+        GUIWaitCursor.Hide();
         return;
       }
 
@@ -601,53 +654,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         this.AsynIsOnlineCheck();
       }
       //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_INIT - End");
-      LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
-      base.OnPageLoad(); // let animations run
-    }
-
-    protected override void OnPageDestroy(int new_windowId)
-    {
-      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
-
-      // Disable Random Fanart Timer
-      //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
-      //m_bFanartTimerDisabled = true;
-      //MyFilmsDetail.clearGUIProperty("Fanart");
-      //MyFilmsDetail.clearGUIProperty("Fanart2");
-
-      //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
-      //GUITextureManager.CleanupThumbs();
-
-      if (Configuration.CurrentConfig != "")
-      {
-        if (facadeView == null || facadeView.SelectedListItemIndex == -1)
-          Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
-        else
-          Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
-      }
-
-      //ImgFanart.SetFileName(string.Empty);
-      //ImgFanart2.SetFileName(string.Empty);
-
-      //facadeView.Clear();
-      //backdrop.PropertyOne = " ";
-      // added from MoPic
-      //backdrop.Filename = string.Empty;
-      //MyFilmsDetail.clearGUIProperty("currentfanart");
-      //cover.Filename = string.Empty;
-
-      //Disable FanartTimer - already done on pagedestroy ...
-      //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
-      //m_bFanartTimerDisabled = true;
-
-      //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
-      base.OnPageDestroy(new_windowId);
-      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
-      Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
-    }
-
-    private void DoPageLoad()
-    {
     }
 
     #endregion
@@ -3001,7 +3007,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (facadeView.Count == 0)
       {
         ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638)); //"no movies matching the view" - " show filmlist"
-        GUIWaitCursor.Show();
         DisplayAllMovies();
         GetFilmList();
         GUIControl.ShowControl(GetID, 34);
@@ -3294,6 +3299,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.clearGUIProperty("config.configfilter");
     }
 
+    private void Refreshfacade()
+    {
+      Thread LoadThread = new Thread(new ThreadStart(Worker_Refreshfacade));
+      LoadThread.IsBackground = true;
+      LoadThread.Priority = ThreadPriority.AboveNormal;
+      LoadThread.Name = "MyFilms Fin_Charge_Init";
+      LoadThread.Start();
+    }
+
+    private void Worker_Refreshfacade()
+    {
+      GUIWaitCursor.Init();
+      GUIWaitCursor.Show();
+      Fin_Charge_Init(false, true);
+      GUIWaitCursor.Hide();
+    }
+
     //--------------------------------------------------------------------------------------------
     //  Initial Windows load. If LoadDfltSlct = true => load default select if any
     //                           LoadDfltSlct = false => return from  MyFilmsDetail
@@ -3301,11 +3323,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Fin_Charge_Init(bool LoadDfltSlct, bool reload)
     {
       LogMyFilms.Debug("MF: Fin_Charge_Init() called with LoadDfltSlct = '" + LoadDfltSlct + "', reload = '" + reload + "'");
-      //GUIWaitCursor.Init();
-      //GUIWaitCursor.Show();
-      
-      GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
-
       //if (publishTimer != null)
       //  publishTimer.SafeDispose();
       if (LoadDfltSlct)
@@ -3458,8 +3475,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         SetLabelSelect("root");
       else
         SetLabelSelect(conf.StrTxtSelect);
-      MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
-      GUIWaitCursor.Hide();
       if (conf.LastID == ID_MyFilmsDetail)
         GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
       if (conf.LastID == ID_MyFilmsActors)
@@ -4064,7 +4079,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
           //Load_Config(Configuration.CurrentConfig, true);
           MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
-          Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           return;
 
         case "globalwikihelp":
@@ -4123,7 +4138,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
           }
           LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
-          Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
           else
@@ -4145,9 +4160,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
           }
           LogMyFilms.Info("MF: (SetGlobalFilterString IsOnline) - 'GlobalFilterStringIsOnline' = '" + GlobalFilterStringIsOnline + "'");
-          GUIWaitCursor.Show();
-          Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          GUIWaitCursor.Hide();
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
           else
@@ -4172,10 +4185,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
           }
           LogMyFilms.Info("MF: (SetGlobalFilterString Trailers) - 'GlobalFilterStringTrailersOnly' = '" + GlobalFilterStringTrailersOnly + "'");
-          GUIWaitCursor.Show();
-          //GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
-          Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          GUIWaitCursor.Hide();
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
           else
@@ -4199,9 +4209,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
           }
           LogMyFilms.Info("MF: (SetGlobalFilterString MinRating) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
-          GUIWaitCursor.Show();
-          Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          GUIWaitCursor.Hide();
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
           else
@@ -4239,9 +4247,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
           }
           LogMyFilms.Info("MF: (SetGlobalFilterString) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
-          GUIWaitCursor.Show();
-          Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          GUIWaitCursor.Hide();
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
           else
@@ -4334,15 +4340,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgYesNo.DoModal(GetID);
           if (!(dlgYesNo.IsConfirmed))
             break;
-          GUIWaitCursor.Show();
           for (i = 0; i < w_index_count; i++)
           {
             LogMyFilms.Debug("MF: (GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] + "'");
             //MyFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
             MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, Convert.ToInt32(i), false);
           }
-          Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          GUIWaitCursor.Hide();
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798695)); //Traiersearch finished!
           break;
 
@@ -4371,8 +4375,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilms.conf.AlwaysDefaultView = !MyFilms.conf.AlwaysDefaultView;
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AlwaysDefaultView", MyFilms.conf.AlwaysDefaultView);
           LogMyFilms.Info("MF: Update Option 'use always default view...' changed to " + MyFilms.conf.AlwaysDefaultView.ToString());
-          GUIWaitCursor.Show();
-          //GUIWindowManager.Process(); //Added by hint of Damien to update GUI first ...
 
           //if (MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
           //if (!MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
@@ -4381,7 +4383,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Fin_Charge_Init(true, true); //DefaultSelect, reload
           else
             Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
-          GUIWaitCursor.Hide();
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           Change_view("globaloptions");
           break;
@@ -5120,7 +5121,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
           }
           MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath);
-          Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
+          //Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
 
         case "fanart":
