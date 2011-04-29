@@ -380,7 +380,7 @@
 	</control>
     <control>
         	<type>group</type>
-      		<visible>!Control.HasFocus(50)</visible>
+       		<visible>!Control.HasFocus(50)</visible>
       	   	<animation effect="fade" time="250">WindowOpen</animation>
       		<animation effect="fade" time="250">WindowClose</animation>
       		<animation effect="slide" time="150" start="0,-300">WindowOpen</animation>
@@ -420,6 +420,7 @@
 	          		<renderUnfocusText>no</renderUnfocusText>
 					<unfocusedAlpha>150</unfocusedAlpha>
 					<font>font13</font>
+      					<animation effect="fade" time="250">WindowClose</animation>
 					<animation effect="fade" time="250">Focus</animation>
 					<animation effect="fade" time="250">UnFocus</animation>
 	         	 </control>
@@ -808,8 +809,8 @@
 			<visible>!Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
             <animation effect="slide" time="450" end="-400,0">hidden</animation>
+            <animation effect="slide" time="450" start="-400,0">visible</animation>
       		<animation effect="fade" time="250">WindowOpen</animation>
       		<animation effect="fade" time="250">WindowClose</animation>
 		</control>
@@ -825,8 +826,8 @@
       		<visible>!Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
             <animation effect="slide" time="450" end="-400,0">hidden</animation>
+            <animation effect="slide" time="450" start="-400,0">visible</animation>
       		<animation effect="fade" time="250">WindowOpen</animation>
       		<animation effect="fade" time="250">WindowClose</animation>
     	</control>
@@ -838,14 +839,14 @@
 			<posY>90</posY>
 			<width>288</width>
 			<height>420</height>
-			<texture>#myfilms.coverimage</texture>
+			<texture>#myfilms.groupcoverimage</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<valign>middle</valign>
 			<visible>Control.isvisible(34)+facadeview.list+Control.HasFocus(50)</visible>
 			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
 			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
-            <animation effect="slide" time="450" start="-400,0">visible</animation>
             <animation effect="slide" time="450" end="-400,0">hidden</animation>
+            <animation effect="slide" time="450" start="-400,0">visible</animation>
       		<animation effect="fade" time="250">WindowOpen</animation>
       		<animation effect="fade" time="250">WindowClose</animation>
 		</control>
@@ -1203,6 +1204,18 @@
 		  <animation effect="fade" time="250">WindowOpen</animation>
 		  <animation effect="fade" time="250">WindowClose</animation>
 		</control>
+<!--
+		<control>
+			<description>Background Status Messages</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>500</posX>
+			<posY>10</posY>
+			<font>font12</font>
+			<textcolor>aaffffff</textcolor>
+			<label>#myfilms.statusmessage</label>
+		</control>
+-->
 		<control>
 			<type>animation</type>
 			<description>Waiting during search</description>

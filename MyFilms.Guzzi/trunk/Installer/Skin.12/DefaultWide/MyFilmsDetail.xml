@@ -71,7 +71,6 @@
 			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Top Gradient Overlay for Fanart View</description>

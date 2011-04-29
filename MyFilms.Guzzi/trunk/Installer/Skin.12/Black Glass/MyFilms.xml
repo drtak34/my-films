@@ -26,7 +26,6 @@
             		<visible>yes</visible>
             		<focusable>no</focusable>
        		</control>
-<!--
 		<control>
 			<description>BG</description>
 			<id>1</id>
@@ -35,7 +34,6 @@
 			<height>720</height>
 			<texture>bg.jpg</texture>    
 		</control>
--->
 
 		<control>
 			<description>fanart</description>
@@ -50,8 +48,11 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-			<animation effect="fade" time="300">visible</animation>
-			<animation effect="fade" time="300" delay="300">hidden</animation>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<visible>no</visible>
 		</control>
 		<control>
 			<description>fanart2</description>
@@ -66,9 +67,88 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-			<animation effect="fade" time="300">visible</animation>
-			<animation effect="fade" time="300" delay="300">hidden</animation>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<visible>no</visible>
 		</control>
+
+<!-- Start additional Backdrops
+
+		<control>
+			<description>alternate fanart</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>0</posX>
+			<posY>0</posY>
+			<width>640</width>
+			<height>360</height>
+			<texture>#myfilms.fanart</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<zoom>yes</zoom>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<visible>control.isvisible(11)+facadeview.list</visible>
+		</control>
+		<control>
+			<description>alternate fanart2</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>0</posX>
+			<posY>0</posY>
+			<width>640</width>
+			<height>360</height>
+			<texture>#myfilms.fanart2</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<zoom>yes</zoom>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<visible>control.isvisible(21)+facadeview.list</visible>
+		</control>
+		<control>
+			<description>alternate fanart</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>0</posX>
+			<posY>0</posY>
+			<width>1280</width>
+			<height>360</height>
+			<texture>#myfilms.fanart</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<zoom>yes</zoom>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<visible>control.isvisible(11)+facadeview.filmstrip</visible>
+		</control>
+		<control>
+			<description>alternate fanart2</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>0</posX>
+			<posY>0</posY>
+			<width>1280</width>
+			<height>360</height>
+			<texture>#myfilms.fanart2</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<zoom>yes</zoom>
+			<animation effect="fade" time="250">visible</animation>
+			<animation effect="fade" time="250" delay="250">hidden</animation>
+			<animation effect="fade" time="1">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+			<visible>control.isvisible(21)+facadeview.filmstrip</visible>
+		</control>
+End additional Backdrops  -->
 
 <!--		<import>common.window.overlay.xml</import> -->
 		<import>common.window.time.xml</import>
@@ -81,10 +161,8 @@
 			<texture>bg.jpg</texture>
 			<colordiffuse>c0ffffff</colordiffuse>
 			<visible>!facadeview.filmstrip</visible>
-			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
-			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
-			<animation effect="fade" time="250">WindowOpen</animation>
-			<animation effect="fade" time="1">WindowClose</animation>			
+			<animation effect="fade" time="250" delay="150">WindowOpen</animation>				
+			<animation effect="fade" time="150">WindowClose</animation>	
 		</control>
 		<control>
 			<description>Overlay Filmstrip</description>
@@ -95,10 +173,8 @@
 			<texture>MyFilms\fanart_overlay_overall.png</texture>
 			<colordiffuse>dfffffff</colordiffuse>
 			<visible>facadeview.filmstrip</visible>
-			<animation effect="fade" start="0" end="100" time="250">Visible</animation>
-			<animation effect="fade" start="100" end="0" time="250" delay="250">Hidden</animation>
-			<animation effect="fade" time="250">WindowOpen</animation>
-			<animation effect="fade" time="1">WindowClose</animation>			
+			<animation effect="fade" time="250" delay="150">WindowOpen</animation>				
+			<animation effect="fade" time="150">WindowClose</animation>	
 		</control>
 		<control>
 			<type>label</type>
@@ -1491,6 +1567,17 @@
 			<Duration>0:0:01.5</Duration>
 			<keepaspectratio>yes</keepaspectratio>
 		</control>
-
+		<control>
+			<description>Background Status Messages</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>340</posX>
+			<posY>1</posY>
+			<width>600</width>
+			<font>font10</font>
+			<textcolor>60ffffff</textcolor>
+			<label>#myfilms.statusmessage</label>
+			<!-- <label>This is a test status message with very long teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeext</label> -->
+		</control>
   </controls>
 </window>
