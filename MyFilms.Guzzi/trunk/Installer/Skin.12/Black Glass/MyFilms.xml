@@ -33,6 +33,7 @@
 			<width>1280</width>
 			<height>720</height>
 			<texture>bg.jpg</texture>    
+			<shouldCache>true</shouldCache>
 		</control>
 
 		<control>
@@ -161,6 +162,7 @@ End additional Backdrops  -->
 			<texture>bg.jpg</texture>
 			<colordiffuse>c0ffffff</colordiffuse>
 			<visible>!facadeview.filmstrip</visible>
+			<shouldCache>true</shouldCache>
 			<animation effect="fade" time="250" delay="150">WindowOpen</animation>				
 			<animation effect="fade" time="150">WindowClose</animation>	
 		</control>
@@ -173,6 +175,7 @@ End additional Backdrops  -->
 			<texture>MyFilms\fanart_overlay_overall.png</texture>
 			<colordiffuse>dfffffff</colordiffuse>
 			<visible>facadeview.filmstrip</visible>
+			<shouldCache>true</shouldCache>
 			<animation effect="fade" time="250" delay="150">WindowOpen</animation>				
 			<animation effect="fade" time="150">WindowClose</animation>	
 		</control>

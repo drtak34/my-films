@@ -5114,13 +5114,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void txtGrabber_TextChanged(object sender, EventArgs e)
         {
           if (!string.IsNullOrEmpty(txtGrabber.Text))
-          {
-            if (txtGrabber.Text.Contains("\\"))
-              txtGrabberDisplay.Text = txtGrabber.Text.Substring(openFileDialog1.FileName.LastIndexOf("\\") + 1);
-            else
-              txtGrabberDisplay.Text = txtGrabber.Text;
-          }
-          else txtGrabberDisplay.Text = string.Empty;
+            Path.GetFileName(txtGrabber.Text);
+          else 
+            txtGrabberDisplay.Text = string.Empty;
         }
     }
 }

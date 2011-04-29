@@ -267,6 +267,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected GUIAnimation m_SearchAnimation;
     #endregion
 
+    public static ReaderWriterLockSlim _rw = new ReaderWriterLockSlim();
+
     public int Layout = 0;
     public static int Prev_ItemID = -1;
 
@@ -406,6 +408,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     System.ComponentModel.BackgroundWorker bgUpdateTrailer = new System.ComponentModel.BackgroundWorker();
     System.ComponentModel.BackgroundWorker bgLoadMovieList = new System.ComponentModel.BackgroundWorker();
     System.ComponentModel.BackgroundWorker bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
+
     #endregion
 
 
@@ -586,6 +589,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LoadThread.Priority = ThreadPriority.AboveNormal;
       LoadThread.Name = "MyFilms init";
       LoadThread.Start();
+      //LoadThread.Join(); // block main thread until background thread finished
+      //if (!bgUpdateDB.IsBusy)
+      //{
+      //  // moved here to avoid reinstantiating for each menu change.... thanks inker !
+      //  bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
+      //  bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
+      //  bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
+      //  LogMyFilms.Info("MF: Launching AMCUpdater in batch mode");
+      //}
+      
+
     }
 
     private void Worker_DoPageLoad()
@@ -1951,7 +1965,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("GetFilmList started: BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false)");
       SetFilmSelect();
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      MyFilms._rw.EnterReadLock();
       r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
+      MyFilms._rw.ExitReadLock();
       LogMyFilms.Debug("MF: (GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
       LogMyFilms.Debug("MF: (GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("MF: (GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
@@ -3357,9 +3373,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
       {
         //chargement des films
+        _rw.EnterReadLock();
         if (reload)
           BaseMesFilms.LoadFilm(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+        _rw.ExitReadLock();
       }
       //Layout = conf.StrLayOut;
 
@@ -5367,25 +5385,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         choiceSearch.Add("PersonInfo");
       }
 
+      MyFilms._rw.EnterReadLock();
       DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      MyFilms._rw.ExitReadLock();
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
         choiceSearch.Add("Producer");
       }
+      MyFilms._rw.EnterReadLock();
       wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      MyFilms._rw.ExitReadLock();
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079869) + "  (" + wr.Length + ")");
         choiceSearch.Add("Director");
       }
+      MyFilms._rw.EnterReadLock();
       wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Writer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      MyFilms._rw.ExitReadLock();
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798684) + "  (" + wr.Length + ")");
         choiceSearch.Add("Writer");
       }
+      MyFilms._rw.EnterReadLock();
       wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+      MyFilms._rw.ExitReadLock();
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
@@ -6850,7 +6876,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.WStrSort = conf.StrSTitle;
       conf.Boolselect = false;
       conf.Boolreturn = false;
+      MyFilms._rw.EnterReadLock();
       r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, true);
+      MyFilms._rw.ExitReadLock();
     }
 
     //*****************************************************************************************
@@ -7132,7 +7160,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Regex oRegex = new System.Text.RegularExpressions.Regex(";");
       DateTime startTime = DateTime.Now;
 
+      MyFilms._rw.EnterReadLock();
       DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens, true);
+      MyFilms._rw.ExitReadLock();
       string TotalRecords = wr.Count().ToString();
       int counter = 0;
       bool film = false;

@@ -1481,8 +1481,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void Update_XML_database()
         {
-            BaseMesFilms.SaveMesFilms();
-            LogMyFilms.Info("MF: Movie Database updated");
+          MyFilms._rw.EnterWriteLock();
+          BaseMesFilms.SaveMesFilms();
+          MyFilms._rw.ExitWriteLock();
+          LogMyFilms.Info("MF: Movie Database updated");
         }
 
         //-------------------------------------------------------------------------------------------
