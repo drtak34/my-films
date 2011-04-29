@@ -93,13 +93,11 @@ namespace MyFilmsPlugin.MyFilms
         }
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens, bool all)
         {
-          lock (data)
-          {
+          //lock (data)
+          //{
             LogMyFilms.Debug("ReadDataMovies() - Starting ...");
-            if (data == null)
-              initData();
-            else
-              LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
+            if (data == null) initData();
+            else LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
             LogMyFilms.Debug("StrDfltSelect      : '" + StrDfltSelect + "'");
             LogMyFilms.Debug("StrSelect          : '" + StrSelect + "'");
             LogMyFilms.Debug("StrSort            : '" + StrSort + "'");
@@ -118,13 +116,11 @@ namespace MyFilmsPlugin.MyFilms
             }
             LogMyFilms.Debug("ReadDataMovies() - Finished ...");
             return movies;
-          }
+          //}
         }
 
         public static DataRow[] ReadDataPersons(string StrSelect, string StrSort, string StrSortSens, bool all)
         {
-          lock (data)
-          {
             if (data == null) initData();
             if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
             persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
@@ -140,13 +136,10 @@ namespace MyFilmsPlugin.MyFilms
                 "MF: - BaseMesFilmsPersons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
             }
             return persons;
-          }
         }
 
         public static void LoadFilm(string StrFileXml)
         {
-          lock (data)
-          {
             if (!System.IO.File.Exists(StrFileXml))
             {
               throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
@@ -165,24 +158,20 @@ namespace MyFilmsPlugin.MyFilms
                 "Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " +
                 e.Message.ToString());
             }
-          }
 
         }
         public static void UnloadMesFilms()
         {
-          lock (data)
-          {
             if (data != null)
             {
               data.Dispose();
 
             }
-          }
         }
         public static void SaveMesFilms()
         {
-          lock (data)
-          {
+          //lock (data)
+          //{
             if (data != null)
             {
               try
@@ -202,18 +191,15 @@ namespace MyFilmsPlugin.MyFilms
                 dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
               }
             }
-          }
+          //}
         }
 
         public static void CancelMesFilms()
         {
-          lock (data)
-          {
             if (data != null)
             {
               data.Clear();
             }
-          }
         }
 
         public static string Translate_Column(string Column)
