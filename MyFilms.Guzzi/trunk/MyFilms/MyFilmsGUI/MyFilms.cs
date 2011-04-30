@@ -2328,11 +2328,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //----------------------------------------------------------------------------------------
     private void Load_Lstdetail(int ItemId, string wlabel)//wrep = false display only image, all properties cleared
     {
-      if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_wLabel)
-      {
-        LogMyFilms.Debug("MF: (item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
-        return;
-      }
+      // Moved to onitemselected handlercode
+      //if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_wLabel)
+      //{
+      //  LogMyFilms.Debug("MF: (item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+      //  return;
+      //}
       LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId = " + ItemId + ", wlabel = " + wlabel);
       if (ItemId == -1)
       {
@@ -2496,7 +2497,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void item_OnItemSelected(GUIListItem item, GUIControl parent)
     {
-      LogMyFilms.Debug("MF: Call item_OnItemSelected()with options - item: '" + item + "', facadeView.SelectedListItemIndex: '" + facadeView.SelectedListItemIndex + "', facadeView.SelectedListItem.Label: '" + facadeView.SelectedListItem.Label + "'"); 
+      LogMyFilms.Debug("MF: Call item_OnItemSelected()with options - item: '" + item + "', facadeView.SelectedListItemIndex: '" + facadeView.SelectedListItemIndex + "', facadeView.SelectedListItem.Label: '" + facadeView.SelectedListItem.Label + "'");
+      if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_wLabel)
+      {
+        LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_wLabel (" + Prev_wLabel + ") -> return without action !");
+        return;
+      }
+
       GUIFilmstripControl filmstrip = parent as GUIFilmstripControl;
       if (filmstrip != null)
         filmstrip.InfoImageFileName = item.ThumbnailImage;
