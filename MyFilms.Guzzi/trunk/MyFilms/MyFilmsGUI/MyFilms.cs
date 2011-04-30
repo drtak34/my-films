@@ -525,6 +525,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
 
       // Support for StartParameters - ToDo: Add start view options (implementation)
+
+      // check if running version of mediaportal supports loading with parameter
+      System.Reflection.FieldInfo fi = typeof(GUIWindow).GetField("_loadParameter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+      if (fi != null)
+      {
+          string loadParam = (string)fi.GetValue(this);
+          //site:<sitename>|category:<categoryname>|search:<searchstring>|return:<locked|root>|view:<list|smallthumbs|largethumbs>
+          //add bool option on search to popup VK if nothing found or not
+      }      
       string jumpToViewName = null;
       if (LoadWithParameterSupported)
       {
@@ -666,17 +675,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
 
-      // Originally Deactivated by Zebons    
-      // ********************************
-      // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
-      //if (!bgLoadMovieList.IsBusy)
-      //{
-      //  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
-      //  AsynLoadMovieList();
-      //}
-      // ********************************
-      // Originally Deactivated by Zebons    
-
       bool launchMediaScanner = InitialStart;
 
       if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
@@ -704,6 +702,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Info("bgOnPageLoad_RunWorkerCompleted launched. (GetID = '" + GetID + "')");
       if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
       {
+        // Originally Deactivated by Zebons    
+        // ********************************
+        // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
+        //if (!bgLoadMovieList.IsBusy)
+        //{
+        //  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
+        //  AsynLoadMovieList();
+        //}
+        // ********************************
+        // Originally Deactivated by Zebons    
+
         //// Start Filesystemwatcher to watch for changes in availability
         //FileSystemWatcher FSW = new FileSystemWatcher("c:\\", "*.cs");
         //FswHandler Handler = new FswHandler();
@@ -3128,7 +3137,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
     }
 
-    private static string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson)
+    private void LoadFacadeImages()
+    {
+      //foreach (GUIListItem item in facadeView)
+      //{
+      //  // load images ...
+      //}
+    }
+
+    private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson)
     {
       string[] thumbimages = new string[2];
       thumbimages[0] = string.Empty; // ThumbnailImage
@@ -3398,6 +3415,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LoadThread.Priority = ThreadPriority.AboveNormal;
       LoadThread.Name = "MyFilms Fin_Charge_Init";
       LoadThread.Start();
+      //LoadThread.Join(); // wait until background thread finished ...
     }
 
     private void Worker_Refreshfacade()
