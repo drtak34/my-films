@@ -570,24 +570,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!groupcover.Active)
         groupcover.Active = true;
 
-      DoPageLoad(); // run former WindowInit threaded...
-      this.SetDummyControlsForFacade(listLevel);
-      LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
       base.OnPageLoad(); // let animations run
+      DoPageLoad(); // run former WindowInit threaded...
+      LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
     }
 
     protected override void OnPageDestroy(int new_windowId)
     {
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
 
-      if (!bgOnPageLoad.CancellationPending) // cancel pageload worker thread - otherwise null ref exception when trying to populate facade ...
-        bgOnPageLoad.CancelAsync();
-      while (bgOnPageLoad.IsBusy)
-      {
-        Thread.Sleep();
-      }
+      //if (!bgOnPageLoad.CancellationPending) // cancel pageload worker thread - otherwise null ref exception when trying to populate facade ...
+      //  bgOnPageLoad.CancelAsync();
+      //Thread.Sleep(15); // sleep 5 milliseconds
       // Set Facadevisibilities false ...
-      SetDummyControlsForFacade(Listlevel.None);
+      //SetDummyControlsForFacade(Listlevel.None);
 
       // Disable Random Fanart Timer
       //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
@@ -625,35 +621,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void DoPageLoad()
     {
-      if (bgOnPageLoad == null)
-      {
-        bgOnPageLoad = new System.ComponentModel.BackgroundWorker();
-        bgOnPageLoad.DoWork += new DoWorkEventHandler(bgOnPageLoad_DoWork);
-        bgOnPageLoad.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgOnPageLoad_RunWorkerCompleted);
-        bgOnPageLoad.WorkerSupportsCancellation = true;
-        bgOnPageLoad.WorkerReportsProgress = false;
-        //bgOnPageLoad.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bgOnPageLoad_ProgressChanged);
-        bgOnPageLoad.RunWorkerAsync();
-        LogMyFilms.Info("DoPageLoad() launching OnPageLoad LoadSettings in batch mode");
-      }
+      //if (bgOnPageLoad == null)
+      //{
+      //  bgOnPageLoad = new System.ComponentModel.BackgroundWorker();
+      //  bgOnPageLoad.DoWork += new DoWorkEventHandler(bgOnPageLoad_DoWork);
+      //  bgOnPageLoad.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgOnPageLoad_RunWorkerCompleted);
+      //  bgOnPageLoad.WorkerSupportsCancellation = true;
+      //  bgOnPageLoad.WorkerReportsProgress = false;
+      //  //bgOnPageLoad.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bgOnPageLoad_ProgressChanged);
+      //  bgOnPageLoad.RunWorkerAsync();
+      //  LogMyFilms.Info("DoPageLoad() launching OnPageLoad LoadSettings in batch mode");
+      //}
 
       //lock (bgOnPageLoad) // Locking not necessary, because we just don't perform it, if it's already running!
-      {
-        if (!bgOnPageLoad.IsBusy) // we have to wait - complete method will call LoadFacade again
-        {
-          bgOnPageLoad.RunWorkerAsync();
-        }
-      }
+      //{
+      //  if (!bgOnPageLoad.IsBusy) // we have to wait - complete method will call LoadFacade again
+      //  {
+      //    bgOnPageLoad.RunWorkerAsync();
+      //  }
+      //}
 
-      //Thread LoadThread = new Thread(new ThreadStart(Worker_DoPageLoad));
-      //LoadThread.IsBackground = true;
-      //LoadThread.Priority = ThreadPriority.AboveNormal;
-      //LoadThread.Name = "MyFilms init";
-      //LoadThread.Start();
-      ////LoadThread.Join(); // block main thread until background thread finished
+      Thread LoadThread = new Thread(new ThreadStart(Worker_DoPageLoad));
+      LoadThread.IsBackground = true;
+      LoadThread.Priority = ThreadPriority.AboveNormal;
+      LoadThread.Name = "MyFilms init";
+      LoadThread.Start();
+      LoadThread.Join(); // block main thread until background thread finished
     }
 
-    private void bgOnPageLoad_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+    //private void bgOnPageLoad_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+    private void Worker_DoPageLoad()
     {
       //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
       GUIWaitCursor.Init();
@@ -1855,8 +1852,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (iControl == (int)Controls.CTRL_List)
           {
-            if (facadeView.SelectedListItemIndex > -1 && !bgOnPageLoad.IsBusy) // do not allow going to details when loading thread still active !!!
-            {
+            // if (facadeView.SelectedListItemIndex > -1 && !bgOnPageLoad.IsBusy) // do not allow going to details when loading thread still active !!!
+            if (facadeView.SelectedListItemIndex > -1) // do not allow going to details when loading thread still active !!!
+              {
               if (!facadeView.SelectedListItem.IsFolder && !conf.Boolselect)
               // New Window for detailed selected item information
               {
@@ -2347,12 +2345,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  return;
       //}
       LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId = " + ItemId + ", wlabel = " + wlabel);
-      if (ItemId == -1)
+      if (ItemId == -1 || facadeView.SelectedListItem.ItemId == -1)
       {
         // reinit some fields
-        cover.Filename = "";
-        backdrop.Filename = "";
-        MyFilmsDetail.Init_Detailed_DB(false);
+        //cover.Filename = "";
+        //backdrop.Filename = "";
+        //MyFilmsDetail.Init_Detailed_DB(false);
         LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId == -1 -> return");
         return;
       }
