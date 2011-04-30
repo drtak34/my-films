@@ -87,6 +87,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       groupcover = new AsyncImageResource();
       groupcover.Property = "#myfilms.groupcoverimage";
       groupcover.Delay = 125;
+
+      // create Group Cover image swapper
+      personcover = new AsyncImageResource();
+      personcover.Property = "#myfilms.personcoverimage";
+      personcover.Delay = 125;
     }
     #endregion
 
@@ -213,8 +218,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_DummyFacadeFilm = 36,
       CTRL_DummyFacadeGroup = 37,
       CTRL_DummyFacadePerson = 38,
-      CTRL_Image = 1020,
-      CTRL_Image2 = 1021,
+      CTRL_ImageFilm = 1020,
+      CTRL_ImageGroup = 1021,
+      CTRL_ImagePerson = 1022,
       CTRL_List = 50, // Changed from 1026 to 50 due to meeting MePo Standards
       CTRL_logos_id2001 = 2001,
       CTRL_logos_id2002 = 2002,
@@ -239,11 +245,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     [SkinControlAttribute((int)Controls.CTRL_List)]
     protected GUIFacadeControl facadeView;
 
-    [SkinControlAttribute((int)Controls.CTRL_Image)]
+    [SkinControlAttribute((int)Controls.CTRL_ImageFilm)]
     protected GUIImage ImgLstFilm;
 
-    [SkinControlAttribute((int)Controls.CTRL_Image2)]
-    protected GUIImage ImgLstFilm2;
+    [SkinControlAttribute((int)Controls.CTRL_ImageGroup)]
+    protected GUIImage ImgLstGroup;
+
+    [SkinControlAttribute((int)Controls.CTRL_ImagePerson)]
+    protected GUIImage ImgLstPerson;
 
     [SkinControlAttribute((int)Controls.CTRL_logos_id2001)]
     protected GUIImage ImgID2001;
@@ -299,6 +308,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private ImageSwapper backdrop;
     private AsyncImageResource cover = null;
     private AsyncImageResource groupcover = null;
+    private AsyncImageResource personcover = null;
 
     // Guzzi: Added from TV-Series for Fanarttoggling
     private System.Threading.Timer m_FanartTimer = null;
@@ -3101,7 +3111,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         // Disabled because replaced by SpeedLoader
         // ImgLstFilm.SetFileName("#myfilms.picture");
-        // ImgLstFilm2.SetFileName("#myfilms.picture");
+        // ImgLstGroup.SetFileName("#myfilms.picture");
         // this.Load_Rating(0); // old method - nor more used
       }
       MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
