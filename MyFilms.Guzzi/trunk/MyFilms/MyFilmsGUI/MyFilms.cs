@@ -580,10 +580,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
 
-      base.OnPageDestroy(new_windowId);
       if (!bgOnPageLoad.CancellationPending) // cancel pageload worker thread - otherwise null ref exception when trying to populate facade ...
         bgOnPageLoad.CancelAsync();
-
+      while (bgOnPageLoad.IsBusy)
+      {
+        Thread.Sleep();
+      }
       // Set Facadevisibilities false ...
       SetDummyControlsForFacade(Listlevel.None);
 
@@ -616,6 +618,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
 
+      base.OnPageDestroy(new_windowId);
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
       Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
     }
