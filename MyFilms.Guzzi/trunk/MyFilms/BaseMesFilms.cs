@@ -38,7 +38,7 @@ namespace MyFilmsPlugin.MyFilms
     
         private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
 
-        private static MyFilmsData MFdata; // Separate DB File to store "NonANT Data"
+        //private static MyFilmsData MFdata; // Separate DB File to store "NonANT Data"
 
 /*
         private static Dictionary<string, string> dataPath;
@@ -56,8 +56,6 @@ namespace MyFilmsPlugin.MyFilms
         #region méthodes statique sprivées
         private static void initData()
         {
-          lock (data)
-          {
             data = new AntMovieCatalog();
             LogMyFilms.Debug("MF: BaseMesFilms - Try reading catalogfile '" + MyFilms.conf.StrFileXml + "'");
             try
@@ -69,7 +67,6 @@ namespace MyFilmsPlugin.MyFilms
               LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
               throw e;
             }
-          }
         }
         #endregion
 

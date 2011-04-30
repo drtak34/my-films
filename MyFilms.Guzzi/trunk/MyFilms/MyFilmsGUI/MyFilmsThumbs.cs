@@ -172,11 +172,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     // Windows Init
                     //---------------------------------------------------------------------------------------
                     base.OnMessage(messageType);
-                    LogMyFilms.Debug("MyFilmsThumbs: CurrentMovie: '" + MyFilms.CurrentMovie + "'");
-
                     //Retrieve original directory of mediafiles
                     //directoryname
-                    moviename = MyFilms.CurrentMovie.Substring(MyFilms.CurrentMovie.LastIndexOf(";") + 1);
+                    moviename = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Trim();
+                    moviename = moviename.Substring(moviename.LastIndexOf(";") + 1);
                     LogMyFilms.Debug("MyFilmsThumbs (GetThumbDirectory) splits media directory name: '" + moviename.ToString() + "'");
 
                     try

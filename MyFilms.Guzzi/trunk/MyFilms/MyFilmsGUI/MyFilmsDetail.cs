@@ -196,10 +196,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public override bool Init()
         {
           LogMyFilms.Debug("MyFilmsDetail.Init() started/ended.");
-          // trakt scrobble background thread
-          //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
-          //TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
-  
           return Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
         }
 
@@ -232,10 +228,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIControl.ShowControl(GetID, 35);
             // ToDo: Should be unhidden, if ActorThumbs are implemented
             GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
-
-            // trakt scrobble background thread
-            //TraktScrobbleUpdater.WorkerSupportsCancellation = true;
-            //TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
 
             g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
             g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
