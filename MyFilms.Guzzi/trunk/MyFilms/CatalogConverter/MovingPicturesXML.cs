@@ -484,7 +484,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             }
             catch (Exception)
             {
-              //LogMyFilms.Debug("MF: XMM Importer: Failed to import Catalog: " + ex.Message);
+              //LogMyFilms.Debug("XMM Importer: Failed to import Catalog: " + ex.Message);
               return string.Empty;
             }
             destXml.WriteEndElement();
@@ -502,11 +502,11 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
           if (ProfilerDict.TryGetValue(key, out at))
           {
             tw.WriteAttributeString(at, value);
-            //LogMyFilms.Debug("MF: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+            //LogMyFilms.Debug("XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
           }
           else
           {
-            //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Attribute not written to DB !");
+            //LogMyFilms.Debug("XMM Importer Property '" + key + "' not found in dictionary ! - Attribute not written to DB !");
           }
         }
 
@@ -516,11 +516,11 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
           if (ProfilerDict.TryGetValue(key, out at))
           {
             tw.WriteElementString(at, value);
-            //LogMyFilms.Debug("MF: XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
+            //LogMyFilms.Debug("XMM Importer: Writing Property '" + key + "' with Value '" + value.ToString() + "' to DB.");
           }
           else
           {
-            //LogMyFilms.Debug("MF: XMM Importer Property '" + key + "' not found in dictionary ! - Element not written to DB !");
+            //LogMyFilms.Debug("XMM Importer Property '" + key + "' not found in dictionary ! - Element not written to DB !");
           }
         }
     }

@@ -1808,7 +1808,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       textBoxPluginName.Text = "MyFilms"; // Make sure, a plugin name is given - assign default, if user didn't choose any!
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text.ToString());
                     XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
-                    LogMyFilms.Debug("MF: (Setup) - Quit - created default empty config!");
+                    LogMyFilms.Debug("(Setup) - Quit - created default empty config!");
                     mydivx.Dispose();
                     Close();
                 }
@@ -1829,7 +1829,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "NbConfig", Config_Name.Items.Count);
             XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginName", textBoxPluginName.Text.ToString());
-            LogMyFilms.Debug("MF: (Setup) - Quit - saved base config!");
+            LogMyFilms.Debug("(Setup) - Quit - saved base config!");
             Close();
         }
 
@@ -3029,7 +3029,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
           }
           if (ActiveLogoPath.LastIndexOf("\\") != ActiveLogoPath.Length - 1) ActiveLogoPath = ActiveLogoPath + "\\";
-          LogMyFilms.Debug("MF: Logo path for reading logos        : '" + ActiveLogoPath + "'");
+          LogMyFilms.Debug("Logo path for reading logos        : '" + ActiveLogoPath + "'");
 
           int i = 0;
           do
@@ -3587,7 +3587,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   }
                   catch (Exception ex)
                   {
-                    LogMyFilms.Debug("MF: Setup: Error deleting file '" + wfile.ToString() + "' - Exception: " + ex.ToString());
+                    LogMyFilms.Debug("Setup: Error deleting file '" + wfile.ToString() + "' - Exception: " + ex.ToString());
                   }  
                 }
             }
@@ -3722,7 +3722,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                   }
                   catch (Exception ex)
                   {
-                    LogMyFilms.Debug("MF: Setup: Error deleting file '" + wfile.ToString() + "' - Exception: " + ex.ToString());
+                    LogMyFilms.Debug("Setup: Error deleting file '" + wfile.ToString() + "' - Exception: " + ex.ToString());
                   }  
                 }
             }
@@ -4083,7 +4083,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MessageBox.Show(ex.Message);
           }
 
-          LogMyFilms.Debug("MF: Setup - Successfully created Desktop Icon for '" + linkName + "'");
+          LogMyFilms.Debug("Setup - Successfully created Desktop Icon for '" + linkName + "'");
           if (!WizardActive)
             MessageBox.Show("Successfully created Desktop Icon for " + linkName + "", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

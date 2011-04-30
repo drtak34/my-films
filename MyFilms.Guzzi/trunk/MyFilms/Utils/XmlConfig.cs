@@ -269,7 +269,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 //Recover value with entry data
                 Value = entry.InnerText;
             }
-          // LogMyFilms.Debug("MF: Configuration - ReadXMLConfig: Filename: '" + FileName + "', Section: '" + Section + "', Entry: '" + Entry + "', Value: '" + Value + "'");
+          // LogMyFilms.Debug("Configuration - ReadXMLConfig: Filename: '" + FileName + "', Section: '" + Section + "', Entry: '" + Entry + "', Value: '" + Value + "'");
             return Value;
         }
         // Read xml config file with XmlDocument

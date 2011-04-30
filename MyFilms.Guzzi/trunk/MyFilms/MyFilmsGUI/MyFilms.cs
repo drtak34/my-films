@@ -476,8 +476,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //TraktAPI.Password = conf.StrTraktPassword;
       //TraktAPI.UserAgent = MyFilmsSettings.UserAgent;
 
-      //LogMyFilms.Debug("MF: Trakt Usersettings loaded - UserName : '" + TraktAPI.Username.ToString() + "'");
-      //LogMyFilms.Debug("MF: Trakt Usersettings loaded - Useragent: '" + TraktAPI.UserAgent.ToString() + "'");
+      //LogMyFilms.Debug("Trakt Usersettings loaded - UserName : '" + TraktAPI.Username.ToString() + "'");
+      //LogMyFilms.Debug("Trakt Usersettings loaded - Useragent: '" + TraktAPI.UserAgent.ToString() + "'");
 
       // Timer to process episodes to send to trakt, will also be called after new episodes are added to library
       //m_TraktSyncTimer = new System.Threading.Timer(new TimerCallback(TraktSynchronize), null, 15000, Timeout.Infinite);
@@ -572,9 +572,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!groupcover.Active)
         groupcover.Active = true;
 
-      base.OnPageLoad(); // let animations run
       DoPageLoad(); // run former WindowInit threaded...
       LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
+      base.OnPageLoad(); // let animations run
     }
 
     protected override void OnPageDestroy(int new_windowId)
@@ -593,7 +593,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //MyFilmsDetail.clearGUIProperty("Fanart");
       //MyFilmsDetail.clearGUIProperty("Fanart2");
 
-      //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
+      //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
       //GUITextureManager.CleanupThumbs();
 
       if (Configuration.CurrentConfig != "")
@@ -614,11 +614,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //MyFilmsDetail.clearGUIProperty("currentfanart");
       //cover.Filename = string.Empty;
 
-      //LogMyFilms.Debug("MF: GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
+      //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
 
-      base.OnPageDestroy(new_windowId);
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
       Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
+      base.OnPageDestroy(new_windowId);
     }
 
     private void DoPageLoad()
@@ -692,7 +692,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Launch Background availability scanner, if configured in setup
       if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
       {
-        LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
+        LogMyFilms.Debug("Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
         this.AsynIsOnlineCheck();
       }
       //GUIControl.ShowControl(GetID, 34);
@@ -709,7 +709,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
         //if (!bgLoadMovieList.IsBusy)
         //{
-        //  LogMyFilms.Debug("MF: Launching AsynLoadMovieList");
+        //  LogMyFilms.Debug("Launching AsynLoadMovieList");
         //  AsynLoadMovieList();
         //}
         // ********************************
@@ -738,6 +738,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     protected override void OnShowContextMenu()
     {
+      LogMyFilms.Debug("OnShowContextMenu() started");
       base.OnShowContextMenu();
     }
 
@@ -1408,7 +1409,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public override void OnAction(Action actionType)
     {
-      LogMyFilms.Debug("MF: OnAction " + actionType.wID);
+      LogMyFilms.Debug("OnAction " + actionType.wID);
       switch (actionType.wID)
       {
         case Action.ActionType.ACTION_PARENT_DIR:
@@ -1440,7 +1441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //Fix to not only always return to MyHome, e.g. when coming from Basichome...
             //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
             //if (Prev_MenuID != -1)
-            LogMyFilms.Debug("MF: (GuzziFix for Previous Window - Prev_MenuID: '" + Prev_MenuID + "'");
+            LogMyFilms.Debug("(GuzziFix for Previous Window - Prev_MenuID: '" + Prev_MenuID + "'");
             GUIWindowManager.ActivateWindow(Prev_MenuID);
             return;
           }
@@ -1513,7 +1514,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       int dControl = messageType.TargetControlId;
       int iControl = messageType.SenderControlId;
-      LogMyFilms.Debug("MF: GUIMessage: " + messageType.Message.ToString() + ", Param1: " + messageType.Param1.ToString() + ", Sender: " + iControl.ToString() + ", Target: " + dControl.ToString() + "");
+      LogMyFilms.Debug("GUIMessage: " + messageType.Message.ToString() + ", Param1: " + messageType.Param1.ToString() + ", Sender: " + iControl.ToString() + ", Target: " + dControl.ToString() + "");
       switch (messageType.Message)
       {
         case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
@@ -1529,7 +1530,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //---------------------------------------------------------------------------------------
           // Mouse/Keyboard Clicked
           //---------------------------------------------------------------------------------------
-          LogMyFilms.Debug("MF: GUI_MSG_CLICKED recognized !");
+          LogMyFilms.Debug("GUI_MSG_CLICKED recognized !");
           if ((iControl == (int)Controls.CTRL_BtnSrtBy) && (conf.Boolselect))
             // No change sort method and no searchs during select
             return true;
@@ -1800,7 +1801,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GlobalFilterStringUnwatched = String.Empty;
               MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
             }
-            LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
+            LogMyFilms.Info("Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
             this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
             // use this code later to set the label of the button
             //if (MyFilms.conf.GlobalUnwatchedOnly)
@@ -2024,7 +2025,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else
         s = s + conf.StrTitle1.ToString() + " not like ''";
       conf.StrFilmSelect = s;
-      LogMyFilms.Debug("MF: (SetFilmSelect) - StrFilmSelect: '" + s + "'");
+      LogMyFilms.Debug("(SetFilmSelect) - StrFilmSelect: '" + s + "'");
     }
 
 
@@ -2044,11 +2045,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilms._rw.EnterReadLock();
       r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       MyFilms._rw.ExitReadLock();
-      LogMyFilms.Debug("MF: (GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
-      LogMyFilms.Debug("MF: (GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
-      LogMyFilms.Debug("MF: (GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
-      LogMyFilms.Debug("MF: (GetFilmList) - conf.StrSorta:               '" + conf.StrSorta + "'");
-      LogMyFilms.Debug("MF: (GetFilmList) - conf.StrSortSens:            '" + conf.StrSortSens + "'");
+      LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
+      LogMyFilms.Debug("(GetFilmList) - conf.StrSorta:               '" + conf.StrSorta + "'");
+      LogMyFilms.Debug("(GetFilmList) - conf.StrSortSens:            '" + conf.StrSortSens + "'");
       //if (r.Length == 0)
       //{
       //    //GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -2114,7 +2115,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       suite:
 
         sFullTitle = sTitle = sr[conf.StrTitle1].ToString();
-        //LogMyFilms.Debug("MF: (GetFilmList) - BuildDisplaylist - FullTitle: '" + sFullTitle + "'");
+        //LogMyFilms.Debug("(GetFilmList) - BuildDisplaylist - FullTitle: '" + sFullTitle + "'");
 
         DelimCnt2 = NewString.PosCount(conf.TitleDelim, sTitle, false);
         if (DelimCnt <= DelimCnt2)
@@ -2190,7 +2191,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string strThumb = string.Empty;
           if (string.IsNullOrEmpty(conf.FileImage) || !File.Exists(conf.FileImage)) // No Coverart in DB - so handle it !
           {
-            LogMyFilms.Debug("MF: (GetFilmlist) - Cover missing for movie '" + sr["Number"].ToString() + "' - '" + sr["TranslatedTitle"].ToString() + "' - trying to search or create... (slow!)");
+            LogMyFilms.Debug("(GetFilmlist) - Cover missing for movie '" + sr["Number"].ToString() + "' - '" + sr["TranslatedTitle"].ToString() + "' - trying to search or create... (slow!)");
             //string strlabel = item.Label;
             //MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strlabel);
             //strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + strlabel;
@@ -2345,7 +2346,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("Load_Lstdetail: ItemId = " + currentItem.ItemId + ", label = " + currentItem.Label + ", TVtag = " + currentItem.TVTag);
       if (currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_wLabel)
       {
-        LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+        LogMyFilms.Debug("(Load_Lstdetail): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
         return;
       }
       if (currentItem.ItemId == -1)
@@ -2354,7 +2355,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //cover.Filename = "";
         //backdrop.Filename = "";
         //MyFilmsDetail.Init_Detailed_DB(false);
-        LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId == -1 -> return");
+        LogMyFilms.Debug("(Load_Lstdetail): ItemId == -1 -> return");
         return;
       }
 
@@ -2363,21 +2364,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if ((currentItem.IsFolder) && (MyFilms.conf.Boolselect))
       {
-        LogMyFilms.Debug("MF: (Load_Lstdetail): Item is Folder and BoolSelect is true");
+        LogMyFilms.Debug("(Load_Lstdetail): Item is Folder and BoolSelect is true");
         string[] wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage.ToString(), currentItem.Path);
         if (wfanart[0] == " ")
         {
           if (backdrop.Active)
             backdrop.Active = false;
           GUIControl.HideControl(GetID, 35);
-          LogMyFilms.Debug("MF: (Load_Lstdetail): INACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+          LogMyFilms.Debug("(Load_Lstdetail): INACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         }
         else
         {
           if (!backdrop.Active)
             backdrop.Active = true;
           GUIControl.ShowControl(GetID, 35);
-          LogMyFilms.Debug("MF: (Load_Lstdetail): ACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+          LogMyFilms.Debug("(Load_Lstdetail): ACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         }
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
@@ -2399,7 +2400,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        LogMyFilms.Debug("MF: (Load_Lstdetail): Item is Movie itself!");
+        LogMyFilms.Debug("(Load_Lstdetail): Item is Movie itself!");
         string[] wfanart = new string[2];
         wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", false, currentItem.ThumbnailImage, string.Empty);
         LogMyFilms.Debug("MyFilm (Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
@@ -2450,7 +2451,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
-
       switch (currentItem.TVTag.ToString())
       {
         case "person":
@@ -2468,12 +2468,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.ShowControl(GetID, 34);
           break;
       }
-      //if (currentItem.TVTag == "person")
-      //if (conf.WStrSort.ToLower().Contains("actors") || conf.WStrSort.ToLower().Contains("producer") || conf.WStrSort.ToLower().Contains("director") || conf.WStrSort.ToLower().Contains("writer"))
-      //  MyFilmsDetail.Load_Detailed_PersonInfo(currentItem.Label, details);
-      //else
-      //  MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, details);
-
       // Load_Rating(conf.W_rating); // old method - nor more used
     }
 
@@ -2506,7 +2500,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void item_OnItemSelected(GUIListItem item, GUIControl parent)
     {
-      LogMyFilms.Debug("MF: Call item_OnItemSelected()with options - item: '" + item.ItemId + "', SelectedListItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Label: '" + facadeView.SelectedListItem.Label + "', TVtag: '" + item.TVTag.ToString() + "'");
+      LogMyFilms.Debug("Call item_OnItemSelected()with options - item: '" + item.ItemId + "', SelectedListItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Label: '" + facadeView.SelectedListItem.Label + "', TVtag: '" + item.TVTag.ToString() + "'");
       if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_wLabel)
       {
         LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_wLabel (" + Prev_wLabel + ") -> return without action !");
@@ -2540,7 +2534,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //private void MovieDetailsPublisher(int ItemId, string wlabel)
     private void MovieDetailsPublisher(GUIListItem item, bool wrep)
     {
-      LogMyFilms.Debug("MF: Call MovieDetailsPublisher()with options - ItemId    : '" + item.ItemId + "', label: '" + item.Label + "'");
+      LogMyFilms.Debug("Call MovieDetailsPublisher()with options - ItemId    : '" + item.ItemId + "', label: '" + item.Label + "'");
       double tickCount = System.Windows.Media.Animation.AnimationTimer.TickCount;
       // Update instance of delayed item with current position
       itemToPublish = item;
@@ -2719,7 +2713,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg1.DoModal(GetID);
       if (dlg1.SelectedLabel == -1)
         return;
-      LogMyFilms.Debug("MF: Call change_global_filters menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
+      LogMyFilms.Debug("Call change_global_filters menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
       Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
       return;
     }
@@ -2859,14 +2853,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static ArrayList SubWordGrabbing(string champselect, int minchars, bool filter)
     {
-      LogMyFilms.Debug("MF: (SubWordGrabbing): InputString: '" + champselect + "'");
+      LogMyFilms.Debug("(SubWordGrabbing): InputString: '" + champselect + "'");
       Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
       System.Text.RegularExpressions.MatchCollection oMatches = oRegex.Matches(champselect);
       foreach (System.Text.RegularExpressions.Match oMatch in oMatches)
       {
         Regex oRegexReplace = new Regex("[,;]");
         champselect = champselect.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, ""));
-        LogMyFilms.Debug("MF: (SubWordGrabbing): RegExReplace: '" + champselect + "'");
+        LogMyFilms.Debug("(SubWordGrabbing): RegExReplace: '" + champselect + "'");
       }
 
       string[] CleanerList = new string[] { "Der ", "der ", "Die ", "die ", "Das ", "das", "des", " so", "sich", " a ", " A ", "The ", "the ", "- ", " -", " AT ", "in " };
@@ -2876,7 +2870,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if ((CleanerList[i].Length > 0) && (filter = true))
         {
           champselect = champselect.Replace(CleanerList[i], " ");
-          //LogMyFilms.Debug("MF: (SubWordGrabbing): CleanerListItem: '" + CleanerList[i] + "'");
+          //LogMyFilms.Debug("(SubWordGrabbing): CleanerListItem: '" + CleanerList[i] + "'");
         }
       }
 
@@ -2892,11 +2886,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (arSplit[wi].Length > 0)
         {
           wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim());
-          LogMyFilms.Debug("MF: (SubWordGrabbing): wzone: '" + wzone + "'");
+          LogMyFilms.Debug("(SubWordGrabbing): wzone: '" + wzone + "'");
           if (wzone.Length >= minchars)//Only words with minimum 4 letters!
           {
             wtab.Add(wzone.Trim());
-            LogMyFilms.Debug("MF: (SubWordGrabbing): AddWordToList: '" + wzone.Trim() + "'");
+            LogMyFilms.Debug("(SubWordGrabbing): AddWordToList: '" + wzone.Trim() + "'");
           }
           wzone = string.Empty;
         }
@@ -2946,12 +2940,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int wi = 0;
 
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - GlobalFilterString          : '" + GlobalFilterString + "'");
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - conf.StrDfltSelect          : '" + conf.StrDfltSelect + "'");
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - WstrSelect                  : '" + WstrSelect + "'");
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSort                    : '" + WStrSort + "'");
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - WStrSortSens                : '" + WStrSortSens + "'");
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - NewWstar                    : '" + NewWstar + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString          : '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect          : '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WstrSelect                  : '" + WstrSelect + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSort                    : '" + WStrSort + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - WStrSortSens                : '" + WStrSortSens + "'");
+      LogMyFilms.Debug("(GetSelectFromDivx) - NewWstar                    : '" + NewWstar + "'");
 
       bool isperson = false;
       if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower") || WStrSort.ToLower().Contains("writer"))
@@ -2961,7 +2955,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         isdate = true;
 
       // Collect List of all attributes in w_tableau
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - Read movie DB Group Names");
+      LogMyFilms.Debug("(GetSelectFromDivx) - Read movie DB Group Names");
       foreach (DataRow enr in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
       {
         if (isdate)
@@ -2975,7 +2969,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - Sort Group Names");
+      LogMyFilms.Debug("(GetSelectFromDivx) - Sort Group Names");
       if (WStrSortSens == " ASC")
         w_tableau.Sort(0, w_tableau.Count, null);
       else
@@ -2983,7 +2977,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         IComparer myComparer = new myReverserClass();
         w_tableau.Sort(0, w_tableau.Count, myComparer);
       }
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - Sorting Finished");
+      LogMyFilms.Debug("(GetSelectFromDivx) - Sorting Finished");
 
       if (MyFilms.conf.StrViews || MyFilms.conf.StrPersons) // Check if Thumbs directories exist or create them
       {
@@ -3020,7 +3014,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
         //AsynUpdateActors(w_tableau);
       }
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Started");
+      LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Started");
       //GUIListItem item = null;
       for (wi = 0; wi != w_tableau.Count; wi++)
       {
@@ -3107,7 +3101,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.StrIndex = facadeView.Count - 1; //test if this item is one to select
         Wnb_enr = 0;
       }
-      LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Finished");
+      LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Finished");
 
       //item.FreeMemory();
       conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
@@ -3171,7 +3165,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (isPerson)
       {
         //strThumbSource = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieActors, itemlabel); // check for actors images in MyVideos...
-        //LogMyFilms.Debug("MF: Artist thumbs - GetCoverName(Thumbs, MovieActors) - strThumb = '" + strThumb + "'");
+        //LogMyFilms.Debug("Artist thumbs - GetCoverName(Thumbs, MovieActors) - strThumb = '" + strThumb + "'");
         //if (!System.IO.File.Exists(strThumb))
         //  strThumb = strThumbDirectory + itemlabel + ".png";
         //else
@@ -3325,7 +3319,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static void createCacheThumb(string ThumbSource, string ThumbTarget, int ThumbWidth, int ThumbHeight, string SpeedThumbSize)
     {
       System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(ThumbSource);
-      LogMyFilms.Debug("MF: (SetViewThumb) - Image Width x Height = '" + bmp.Width + "x" + bmp.Height + "' (" + ThumbSource + ")");
+      LogMyFilms.Debug("(SetViewThumb) - Image Width x Height = '" + bmp.Width + "x" + bmp.Height + "' (" + ThumbSource + ")");
       if (bmp.Width < ThumbWidth && bmp.Height < ThumbHeight)
       {
         if (!SaveThumbnailFile(ThumbSource, ThumbTarget)) // if copy unsuccessful, try to create speedthumb
@@ -3383,7 +3377,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       catch (Exception ex)
       {
-        LogMyFilms.Error("MF: (SaveThumbnailFile) - Error saving new thumbnail {0} - {1}", ThumbTarget, ex.Message);
+        LogMyFilms.Error("(SaveThumbnailFile) - Error saving new thumbnail {0} - {1}", ThumbTarget, ex.Message);
         return false;
       }
     }
@@ -3416,7 +3410,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         string userfilter = conf.StrDfltSelect.Substring(0, conf.StrDfltSelect.LastIndexOf("AND")).Trim();
         MyFilmsDetail.setGUIProperty("config.configfilter", userfilter);
-        LogMyFilms.Debug("MF: userfilter from setup: StrDfltSelect = '" + userfilter + "'");
+        LogMyFilms.Debug("userfilter from setup: StrDfltSelect = '" + userfilter + "'");
       }
       else
         MyFilmsDetail.clearGUIProperty("config.configfilter");
@@ -3446,7 +3440,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //--------------------------------------------------------------------------------------------
     private void Fin_Charge_Init(bool LoadDfltSlct, bool reload)
     {
-      LogMyFilms.Debug("MF: Fin_Charge_Init() called with LoadDfltSlct = '" + LoadDfltSlct + "', reload = '" + reload + "'");
+      LogMyFilms.Debug("Fin_Charge_Init() called with LoadDfltSlct = '" + LoadDfltSlct + "', reload = '" + reload + "'");
       //if (publishTimer != null)
       //  publishTimer.SafeDispose();
       if (LoadDfltSlct)
@@ -3511,7 +3505,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           getSelectFromDivx(conf.StrSelect, conf.WStrSort, " ASC", conf.Wstar, false, ""); // preserve index from last time
         else
           getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, false, ""); // preserve index from last time
-        LogMyFilms.Debug("MF: (Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
+        LogMyFilms.Debug("(Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
         //if (string.IsNullOrEmpty(conf.StrTxtView)) // make sure it's set to "Films" if not yet initialized
         //  conf.StrTxtView = "all";
         SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
@@ -3597,7 +3591,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
-      LogMyFilms.Debug("MF: Fin_Charge_Init: StrSelect = '" + conf.StrSelect + "', StrTxtSelect = '" + conf.StrTxtSelect + "'");
+      LogMyFilms.Debug("Fin_Charge_Init: StrSelect = '" + conf.StrSelect + "', StrTxtSelect = '" + conf.StrTxtSelect + "'");
       if (string.IsNullOrEmpty(conf.StrTxtSelect) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798632))) // empty or starts with "all" or "filtered" ... 
         SetLabelSelect("root");
       else
@@ -3666,7 +3660,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //--------------------------------------------------------------------------------------------
     private void Change_view(string choiceView)
     {
-      LogMyFilms.Debug("MF: Change_View called with '" + choiceView + "'");
+      LogMyFilms.Debug("Change_View called with '" + choiceView + "'");
       XmlConfig XmlConfig = new XmlConfig();
       conf.Boolview = false;
       conf.Boolstorage = false;
@@ -3679,7 +3673,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.WStrSort = conf.StrSTitle;
           conf.Boolselect = false;
           conf.Boolreturn = false;
-          LogMyFilms.Debug("MF: Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
+          LogMyFilms.Debug("Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
           GetFilmList();
           SetLabelView("all");
           this.SetLabelSelect("root");
@@ -3862,7 +3856,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Launch Background availability scanner, if configured in setup
             if (MyFilms.conf.ScanMediaOnStart && InitialStart)
             {
-              LogMyFilms.Debug("MF: Launching Availabilityscanner - Initialstart = '" + InitialStart.ToString() + "'");
+              LogMyFilms.Debug("Launching Availabilityscanner - Initialstart = '" + InitialStart.ToString() + "'");
               this.AsynIsOnlineCheck();
             }
 
@@ -3979,7 +3973,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return;
 
         case "globaloptions":
-          LogMyFilms.Debug("MF: Building (sub)menu globaloptions");
+          LogMyFilms.Debug("Building (sub)menu globaloptions");
 
           GUIDialogMenu dlg1 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           if (dlg1 == null) return;
@@ -4055,7 +4049,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           }
 
-          LogMyFilms.Debug("MF: Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
+          LogMyFilms.Debug("Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
 
           Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
           return;
@@ -4172,33 +4166,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string wproperty = choiceGlobalMappings[dlg3.SelectedLabel];
           dlg3.Reset();
           choiceGlobalMappings.Clear();
-          LogMyFilms.Debug("MF: Display Options - new field: '" + wproperty + "', new Label: '" + BaseMesFilms.Translate_Column(wproperty) + "'.");
+          LogMyFilms.Debug("Display Options - new field: '" + wproperty + "', new Label: '" + BaseMesFilms.Translate_Column(wproperty) + "'.");
           switch (strUserItemSelection)
           {
             case "useritem1":
               MyFilms.conf.Stritem1 = wproperty;
               MyFilms.conf.Strlabel1 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem1 + "', Label: '" + conf.Strlabel1 + "'.");
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem1 + "', Label: '" + conf.Strlabel1 + "'.");
               break;
             case "useritem2":
               MyFilms.conf.Stritem2 = wproperty;
               MyFilms.conf.Strlabel2 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem2 + "', Label: '" + conf.Strlabel2 + "'.");
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem2 + "', Label: '" + conf.Strlabel2 + "'.");
               break;
             case "useritem3":
               MyFilms.conf.Stritem3 = wproperty;
               MyFilms.conf.Strlabel3 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem3 + "', Label: '" + conf.Strlabel3 + "'.");
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem3 + "', Label: '" + conf.Strlabel3 + "'.");
               break;
             case "useritem4":
               MyFilms.conf.Stritem4 = wproperty;
               MyFilms.conf.Strlabel4 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem4 + "', Label: '" + conf.Strlabel4 + "'.");
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem4 + "', Label: '" + conf.Strlabel4 + "'.");
               break;
             case "useritem5":
               MyFilms.conf.Stritem5 = wproperty;
               MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
-              LogMyFilms.Debug("MF: Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
               break;
             default:
               break;
@@ -4221,7 +4215,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string zoom = "150";
 
             //Load Webbrowserplugin with the URL
-            LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+            LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
             GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
@@ -4265,7 +4259,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GlobalFilterStringUnwatched = String.Empty;
             MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
           }
-          LogMyFilms.Info("MF: Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
+          LogMyFilms.Info("Global filter for Unwatched Only is now set to '" + GlobalFilterStringUnwatched + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
@@ -4276,7 +4270,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "filterdbisonline":
           // GlobalFilterIsOnline
           GlobalFilterIsOnlineOnly = !GlobalFilterIsOnlineOnly;
-          LogMyFilms.Info("MF: Global filter for IsOnline available media files is now set to '" + GlobalFilterIsOnlineOnly + "'");
+          LogMyFilms.Info("Global filter for IsOnline available media files is now set to '" + GlobalFilterIsOnlineOnly + "'");
           if (GlobalFilterIsOnlineOnly)
           {
             GlobalFilterStringIsOnline = "IsOnline like 'true' AND ";
@@ -4287,7 +4281,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GlobalFilterStringIsOnline = String.Empty;
             MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
           }
-          LogMyFilms.Info("MF: (SetGlobalFilterString IsOnline) - 'GlobalFilterStringIsOnline' = '" + GlobalFilterStringIsOnline + "'");
+          LogMyFilms.Info("(SetGlobalFilterString IsOnline) - 'GlobalFilterStringIsOnline' = '" + GlobalFilterStringIsOnline + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
@@ -4298,7 +4292,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "filterdbtrailer":
           // GlobalFilterTrailersOnly
           GlobalFilterTrailersOnly = !GlobalFilterTrailersOnly;
-          LogMyFilms.Info("MF: Global filter for Trailers Only is now set to '" + GlobalFilterTrailersOnly + "'");
+          LogMyFilms.Info("Global filter for Trailers Only is now set to '" + GlobalFilterTrailersOnly + "'");
           //if (GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
           //if (!GlobalFilterTrailersOnly) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
@@ -4312,7 +4306,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GlobalFilterStringTrailersOnly = String.Empty;
             MyFilmsDetail.clearGUIProperty("globalfilter.trailersonly");
           }
-          LogMyFilms.Info("MF: (SetGlobalFilterString Trailers) - 'GlobalFilterStringTrailersOnly' = '" + GlobalFilterStringTrailersOnly + "'");
+          LogMyFilms.Info("(SetGlobalFilterString Trailers) - 'GlobalFilterStringTrailersOnly' = '" + GlobalFilterStringTrailersOnly + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
@@ -4323,7 +4317,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "filterdbrating":
           // GlobalFilterMinRating
           GlobalFilterMinRating = !GlobalFilterMinRating;
-          LogMyFilms.Info("MF: Global filter for MinimumRating is now set to '" + GlobalFilterMinRating + "'");
+          LogMyFilms.Info("Global filter for MinimumRating is now set to '" + GlobalFilterMinRating + "'");
           if (GlobalFilterMinRating)
           {
             GlobalFilterStringMinRating = "Rating > " + MyFilms.conf.StrAntFilterMinRating.Replace(",", ".") + " AND ";
@@ -4336,7 +4330,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
             MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
           }
-          LogMyFilms.Info("MF: (SetGlobalFilterString MinRating) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
+          LogMyFilms.Info("(SetGlobalFilterString MinRating) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
@@ -4346,7 +4340,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "filterdbsetrating":
           // Set global value for minimum Rating to restrict movielist
-          LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MyFilms.conf.StrAntFilterMinRating + "', current decimalseparator: '" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() + "'");
+          LogMyFilms.Info("(FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MyFilms.conf.StrAntFilterMinRating + "', current decimalseparator: '" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() + "'");
           MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(ID_MyFilmsDialogRating);
           if (MyFilms.conf.StrAntFilterMinRating.Length > 0)
           {
@@ -4360,7 +4354,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgRating.DoModal(GetID);
           MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", CultureInfo.InvariantCulture);
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
-          LogMyFilms.Info("MF: (FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
+          LogMyFilms.Info("(FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           if (GlobalFilterMinRating)
           {
@@ -4374,7 +4368,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
             MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
           }
-          LogMyFilms.Info("MF: (SetGlobalFilterString) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
+          LogMyFilms.Info("(SetGlobalFilterString) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu)
             Change_view("globaloptions");
@@ -4442,11 +4436,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-              //LogMyFilms.Debug("MF: (GlobalSearchTrailerLocal) - dc.ColumnName '" + dc.ColumnName.ToString() + "'");
+              //LogMyFilms.Debug("(GlobalSearchTrailerLocal) - dc.ColumnName '" + dc.ColumnName.ToString() + "'");
               if (dc.ColumnName.ToString() == "Number")
               {
                 t_number_id = wsr[dc.ColumnName].ToString();
-                //LogMyFilms.Debug("MF: (GlobalSearchTrailerLocal) - Movienumber stored as '" + t_number_id + "'");
+                //LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Movienumber stored as '" + t_number_id + "'");
               }
             }
             foreach (DataColumn dc in ds.Movie.Columns)
@@ -4454,12 +4448,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (dc.ColumnName.ToLower() == "translatedtitle")
               {
                 w_index.Add(t_number_id);
-                LogMyFilms.Debug("MF: (GlobalSearchTrailerLocal) - Add MovieIDs to indexlist: dc: '" + dc + "' and Number(ID): '" + t_number_id + "'");
+                LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Add MovieIDs to indexlist: dc: '" + dc + "' and Number(ID): '" + t_number_id + "'");
                 w_index_count = w_index_count + 1;
               }
             }
           }
-          LogMyFilms.Debug("MF: (GlobalSearchTrailerLocal) - Number of Records found: " + w_index_count);
+          LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number of Records found: " + w_index_count);
 
           GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
           dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798800)); // Warning: Long runtime !
@@ -4470,7 +4464,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           for (i = 0; i < w_index_count; i++)
           {
-            LogMyFilms.Debug("MF: (GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] + "'");
+            LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] + "'");
             //MyFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
             MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, Convert.ToInt32(i), false);
           }
@@ -4481,28 +4475,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "choosescript":
           MyFilms.conf.StrGrabber_ChooseScript = !MyFilms.conf.StrGrabber_ChooseScript;
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "Grabber_ChooseScript", MyFilms.conf.StrGrabber_ChooseScript);
-          LogMyFilms.Info("MF: Grabber Option 'use always that script' changed to " + MyFilms.conf.StrGrabber_ChooseScript.ToString());
+          LogMyFilms.Info("Grabber Option 'use always that script' changed to " + MyFilms.conf.StrGrabber_ChooseScript.ToString());
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           Change_view("globaloptions");
           break;
         case "findbestmatch":
           MyFilms.conf.StrGrabber_Always = !MyFilms.conf.StrGrabber_Always;
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "Grabber_Always", MyFilms.conf.StrGrabber_Always);
-          LogMyFilms.Info("MF: Grabber Option 'try to find best match...' changed to " + MyFilms.conf.StrGrabber_Always.ToString());
+          LogMyFilms.Info("Grabber Option 'try to find best match...' changed to " + MyFilms.conf.StrGrabber_Always.ToString());
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           Change_view("globaloptions");
           break;
         case "windowsfiledialog":
           MyFilms.conf.WindowsFileDialog = !MyFilms.conf.WindowsFileDialog;
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "WindowsFileDialog", MyFilms.conf.WindowsFileDialog);
-          LogMyFilms.Info("MF: Update Option 'use Windows File Dialog...' changed to " + MyFilms.conf.WindowsFileDialog.ToString());
+          LogMyFilms.Info("Update Option 'use Windows File Dialog...' changed to " + MyFilms.conf.WindowsFileDialog.ToString());
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           Change_view("globaloptions");
           break;
         case "alwaysdefaultview":
           MyFilms.conf.AlwaysDefaultView = !MyFilms.conf.AlwaysDefaultView;
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AlwaysDefaultView", MyFilms.conf.AlwaysDefaultView);
-          LogMyFilms.Info("MF: Update Option 'use always default view...' changed to " + MyFilms.conf.AlwaysDefaultView.ToString());
+          LogMyFilms.Info("Update Option 'use always default view...' changed to " + MyFilms.conf.AlwaysDefaultView.ToString());
 
           //if (MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
           //if (!MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
@@ -4517,19 +4511,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "alwayslistforgroups":
           MyFilms.conf.UseListViewForGoups = !MyFilms.conf.UseListViewForGoups;
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UseListviewForGroups", MyFilms.conf.UseListViewForGoups);
-          LogMyFilms.Info("MF: Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
+          LogMyFilms.Info("Update Option 'use list view for groups ...' changed to " + MyFilms.conf.UseListViewForGoups);
           Change_view("globaloptions");
           break;
 
         case "woluserdialog":
           MyFilms.conf.StrCheckWOLuserdialog = !MyFilms.conf.StrCheckWOLuserdialog;
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
-          LogMyFilms.Info("MF: Update Option 'use WOL userdialog ...' changed to " + MyFilms.conf.StrCheckWOLuserdialog);
+          LogMyFilms.Info("Update Option 'use WOL userdialog ...' changed to " + MyFilms.conf.StrCheckWOLuserdialog);
           Change_view("globaloptions");
           break;
 
       }
-      LogMyFilms.Debug("MF: Change_View(" + choiceView + ") -> End");
+      LogMyFilms.Debug("Change_View(" + choiceView + ") -> End");
     }
     //--------------------------------------------------------------------------------------------
     //   Display Context Menu for Movie 
@@ -4727,8 +4721,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlgYesNotrailersearch.IsConfirmed)
             {
               //setProcessAnimationStatus(true, m_SearchAnimation);
-              //LogMyFilms.Debug("MF: (SearchTrailerLocal) SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(): '" + (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() + "'"));
-              LogMyFilms.Debug("MF: (Auto search trailer after selecting PLAY) title: '" + (MyFilms.r[MyFilms.conf.StrIndex].ToString() + "'"));
+              //LogMyFilms.Debug("(SearchTrailerLocal) SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(): '" + (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() + "'"));
+              LogMyFilms.Debug("(Auto search trailer after selecting PLAY) title: '" + (MyFilms.r[MyFilms.conf.StrIndex].ToString() + "'"));
               MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
               //afficher_detail(true);
               //setProcessAnimationStatus(false, m_SearchAnimation);
@@ -4774,7 +4768,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   url = ImdbBaseUrl + url.Substring(url.IndexOf("title")); // redirect to base www.imdb.com server and remove localized returns...
                 }
 
-                LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                 GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
@@ -4814,7 +4808,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   url = wurl.URL + @"mediaindex";
                   url = ImdbBaseUrl + url.Substring(url.IndexOf("title")); // redirect to base www.imdb.com server and remove localized returns...
                 }
-                LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                 GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
@@ -4850,7 +4844,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             IMDBMovie imdbMovie = new IMDBMovie();
             for (int i = 0; i < _imdb.Count; i++)
             {
-              LogMyFilms.Debug("MF: movie imdb internet search - found: '" + _imdb[i].Title + "', URL = '" + _imdb[i].URL + "'");
+              LogMyFilms.Debug("movie imdb internet search - found: '" + _imdb[i].Title + "', URL = '" + _imdb[i].URL + "'");
             }
             if (_imdb.Count > 0)
             {
@@ -4861,7 +4855,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //url = ImdbBaseUrl + url.Substring(url.IndexOf(".com") + 5); // redirect to base www.imdb.com server and remove localized returns...
               }
               //Load Webbrowserplugin with the URL
-              LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+              LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
               GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
               GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
@@ -4933,7 +4927,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   url = ImdbBaseUrl + url.Substring(url.IndexOf("name")); // redirect to base www.imdb.com server and remove localized returns...
                 }
                 //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
-                LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                 GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
@@ -4974,7 +4968,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   url = ImdbBaseUrl + url.Substring(url.IndexOf("name")); // redirect to base www.imdb.com server and remove localized returns...
                 }
                 //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
-                LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+                LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                 GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
@@ -5026,7 +5020,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               //_imdb.GetActorDetails(_imdb[index], false, out imdbActor); // Details here not needed - we just want the URL !
               //Load Webbrowserplugin with the URL
-              LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+              LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
               GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
               GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
@@ -5189,7 +5183,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string zoom = "100";
             //value = value.Replace("%link%", url);
             //value = value.Replace("%zoom%", zoom);
-            LogMyFilms.Debug("MF: Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
+            LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
             GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
@@ -5220,17 +5214,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString()))
           {
             title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
-            LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
+            LogMyFilms.Debug("selecting (grabb_Internet_Informations) with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
           }
           else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
           {
             title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString();
-            LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (master)title = '" + title.ToString() + "'");
+            LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (master)title = '" + title.ToString() + "'");
           }
           else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle2].ToString())) // Secondary title
           {
             title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle2].ToString();
-            LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (secondary)title = '" + title.ToString() + "'");
+            LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (secondary)title = '" + title.ToString() + "'");
           }
           else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
           {
@@ -5238,7 +5232,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
             if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
             if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-            LogMyFilms.Debug("MF: selecting (grabb_Internet_Informations) with (media source)name = '" + title.ToString() + "'");
+            LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (media source)name = '" + title.ToString() + "'");
           }
 
           if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
@@ -5291,7 +5285,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             backdrop.Active = true;
             GUIControl.ShowControl(GetID, 35);
           }
-          LogMyFilms.Debug("MF: (Backdrops-NewfromContext): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+          LogMyFilms.Debug("(Backdrops-NewfromContext): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
           backdrop.Filename = wfanart[0];
           MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0].ToString());
           break;
@@ -5406,7 +5400,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           }
 
-          LogMyFilms.Debug("MF: Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
+          LogMyFilms.Debug("Call global menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
 
           Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
           //Context_Menu = false;
@@ -5549,7 +5543,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Check result
         if (actorList.Count == 0)
         {
-          LogMyFilms.Debug("MF: (Person Info): No ActorIDs found for '" + wperson + "'");
+          LogMyFilms.Debug("(Person Info): No ActorIDs found for '" + wperson + "'");
           GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
           dlgOk.SetHeading("Info");
           dlgOk.SetLine(1, string.Empty);
@@ -5557,7 +5551,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgOk.DoModal(GetID);
           return;
         }
-        LogMyFilms.Debug("MF: (Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
+        LogMyFilms.Debug("(Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
         //int actorID;
         actorID = 0;
         string actorname = string.Empty;
@@ -5573,7 +5567,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // IMDBActor  GetActorInfo(int idActor) we need integer)
           actorID = Convert.ToInt32(strActor[0]);
           actorname = strActor[1];
-          LogMyFilms.Debug("MF: (Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
+          LogMyFilms.Debug("(Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
         }
 
         MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
@@ -5607,15 +5601,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
     {
       MyFilmsActorInfo infoDlg = (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo);
-      LogMyFilms.Debug("MF: (OnVideoArtistInfoGuzzi): Creating (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo)");
+      LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): Creating (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo)");
       if (infoDlg == null)
       {
-        LogMyFilms.Debug("MF: (OnVideoArtistInfoGuzzi): infoDlg == null -> returning without action");
+        LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): infoDlg == null -> returning without action");
         return;
       }
       if (actor == null)
       {
-        LogMyFilms.Debug("MF: (OnVideoArtistInfoGuzzi): actor == null -> returning without action");
+        LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): actor == null -> returning without action");
         return;
       }
       infoDlg.Actor = actor;
@@ -5915,7 +5909,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string wproperty = choiceSearch[dlg.SelectedLabel];
       dlg.Reset();
       choiceSearch.Clear();
-      LogMyFilms.Debug("MF: (RelatedPropertySearch): Searchstring in Property: '" + MyFilms.r[Index][wproperty] + "'");
+      LogMyFilms.Debug("(RelatedPropertySearch): Searchstring in Property: '" + MyFilms.r[Index][wproperty] + "'");
       //PersonTitle Grabbing (Double Words)
       if (wproperty.ToLower() != "description" && wproperty.ToLower() != "comments" && wproperty.ToLower() != "rating")
       {
@@ -5929,7 +5923,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + ": " + t);
               //dlg.Add(wproperty + " : " + w_tableau[wi]);
               choiceSearch.Add(t.ToString());
-              LogMyFilms.Debug("MF: (RelatedPropertySearch): Searchstring Result Add: '" + t + "'");
+              LogMyFilms.Debug("(RelatedPropertySearch): Searchstring Result Add: '" + t + "'");
               break;
             }
           }
@@ -5951,14 +5945,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        LogMyFilms.Debug("MF: (RelatedPropertySearch): Length: '" + MyFilms.r[Index][wproperty].ToString().Length.ToString() + "'");
+        LogMyFilms.Debug("(RelatedPropertySearch): Length: '" + MyFilms.r[Index][wproperty].ToString().Length.ToString() + "'");
         if (MyFilms.r[Index][wproperty].ToString().Length > 0)
         {
           foreach (object t in wsub_tableau)
           {
             if (w_tableau.Contains(t)) // Only Add SubWordItems if not already present in SearchStrin Table
             {
-              LogMyFilms.Debug("MF: (RelatedPropertySearch): Searchstring Result already Present: '" + t + "'");
+              LogMyFilms.Debug("(RelatedPropertySearch): Searchstring Result already Present: '" + t + "'");
               break;
             }
             else
@@ -5970,7 +5964,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + " (" + GUILocalizeStrings.Get(10798627) + "): '" + t + "'");
                   //dlg.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + ": '" + wsub_tableau[wi] + "'");
                   choiceSearch.Add(t.ToString());
-                  LogMyFilms.Debug("MF: (RelatedPropertySearch): Searchstring Result Add: '" + t + "'");
+                  LogMyFilms.Debug("(RelatedPropertySearch): Searchstring Result Add: '" + t + "'");
                   break;
                 }
               }
@@ -5990,7 +5984,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       //if (choiceSearch.Count > 1)
-      LogMyFilms.Debug("MF: (Related Search by properties - ChoiceSearch.Count: " + choiceSearch.Count);
+      LogMyFilms.Debug("(Related Search by properties - ChoiceSearch.Count: " + choiceSearch.Count);
       if (choiceSearch.Count > 0)
       {
         dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // property selection
@@ -6000,7 +5994,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
         dlg.SelectedLabel = 0;
-      LogMyFilms.Debug("MF: (Related Search by properties - Selected wproperty: " + wproperty + "'");
+      LogMyFilms.Debug("(Related Search by properties - Selected wproperty: " + wproperty + "'");
       string w_rating = "0";
 
       if (choiceSearch.Count == 0) //Use Special "is NULL" handling if property is empty ...
@@ -6087,15 +6081,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else
                 {
-                  //LogMyFilms.Debug("MF: (Guzzi) AddDistinctClasses: " + "Property: " + dc.ToString() + " and Value: '" + wsr[dc.ColumnName].ToString() + "'");
+                  //LogMyFilms.Debug("(Guzzi) AddDistinctClasses: " + "Property: " + dc.ToString() + " and Value: '" + wsr[dc.ColumnName].ToString() + "'");
                   // column Name contains propertyname : added to w_tableau + w_count
                   if (GetSubItems)
                   {
-                    LogMyFilms.Debug("MF: SubItemGrabber: Input: " + wsr[dc.ColumnName]);
+                    LogMyFilms.Debug("SubItemGrabber: Input: " + wsr[dc.ColumnName]);
                     wsub_tableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
                     foreach (object t in wsub_tableau)
                     {
-                      LogMyFilms.Debug("MF: SubItemGrabber: Output: " + t);
+                      LogMyFilms.Debug("SubItemGrabber: Output: " + t);
                       {
                         if (w_tableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
                         {
@@ -6105,7 +6099,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (w_tableau[i].ToString() == t.ToString())
                             {
                               w_count[i] = (int)w_count[i] + 1;
-                              //LogMyFilms.Debug("MF: SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
+                              //LogMyFilms.Debug("SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
                               break;
                             }
                           }
@@ -6113,7 +6107,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                         // add to w_tableau and move 1 to w_count
                         {
-                          LogMyFilms.Debug("MF: SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName] + "'");
+                          LogMyFilms.Debug("SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName] + "'");
                           w_tableau.Add(t.ToString());
                           w_count.Add(1);
                         }
@@ -6130,7 +6124,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (w_tableau[i].ToString() == wsr[dc.ColumnName].ToString())
                         {
                           w_count[i] = (int)w_count[i] + 1;
-                          //LogMyFilms.Debug("MF: (Guzzi) Class already present, adding Counter for Property: " + dc.ToString() + "Value: '" + wsr[dc.ColumnName].ToString() + "'");
+                          //LogMyFilms.Debug("(Guzzi) Class already present, adding Counter for Property: " + dc.ToString() + "Value: '" + wsr[dc.ColumnName].ToString() + "'");
                           break;
                         }
                       }
@@ -6138,7 +6132,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     else
                     // add to w_tableau and move 1 to w_count
                     {
-                      //LogMyFilms.Debug("MF: AddDistinctClasses with Property: '" + dc.ToString() + "' and Value '" + wsr[dc.ColumnName].ToString() + "'");
+                      //LogMyFilms.Debug("AddDistinctClasses with Property: '" + dc.ToString() + "' and Value '" + wsr[dc.ColumnName].ToString() + "'");
                       w_tableau.Add(wsr[dc.ColumnName].ToString());
                       w_count.Add(1);
                     }
@@ -6149,7 +6143,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           if (w_tableau.Count == 0)
           {
-            LogMyFilms.Debug("MF: PropertyClassCount is 0");
+            LogMyFilms.Debug("PropertyClassCount is 0");
             break;
           }
 
@@ -6176,7 +6170,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             wproperty2 = "*";
 
-          LogMyFilms.Debug("MF: (RandomMovies) - Chosen Subcategory: '" + wproperty2 + "' selecting in '" + wproperty + "'");
+          LogMyFilms.Debug("(RandomMovies) - Chosen Subcategory: '" + wproperty2 + "' selecting in '" + wproperty + "'");
           switch (wproperty)
           {
             case "Rating":
@@ -6192,7 +6186,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.StrSelect = wproperty + " like '*" + wproperty2 + "*'";
               break;
           }
-          LogMyFilms.Debug("MF: (RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
+          LogMyFilms.Debug("(RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
           conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
           conf.StrTitleSelect = string.Empty;
 
@@ -6224,7 +6218,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if ((wproperty == "randomall") && (dc.ColumnName.ToLower() == "translatedtitle"))
               {
                 w_index.Add(t_number_id);
-                LogMyFilms.Debug("MF: (RamdomSearch - randomall!!!) - Add MovieIDs to indexlist: dc: '" + dc + "' and Number(ID): '" + t_number_id + "'");
+                LogMyFilms.Debug("(RamdomSearch - randomall!!!) - Add MovieIDs to indexlist: dc: '" + dc + "' and Number(ID): '" + t_number_id + "'");
                 w_index_count = w_index_count + 1;
               }
               else
@@ -6233,20 +6227,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if ((dc.ColumnName == wproperty) && (wsr[dc.ColumnName].ToString().Length == 0)) // column Name contains propertyname : add movie number (for later selection) to w_index
                   {
                     w_index.Add(t_number_id);
-                    LogMyFilms.Debug("MF: (RamdomSearch - (none)!!!) Add MovieIDs to indexlist: dc: '" + dc + "' and Number(ID): '" + t_number_id + "'");
+                    LogMyFilms.Debug("(RamdomSearch - (none)!!!) Add MovieIDs to indexlist: dc: '" + dc + "' and Number(ID): '" + t_number_id + "'");
                     w_index_count = w_index_count + 1;
                   }
                 }
                 else
                 {
-                  //LogMyFilms.Debug("MF: (searchmatches) - dc '" + dc.ToString() + "' - dc.ColumnName '" + dc.ColumnName.ToString() + "' - wproperty '" + wproperty + "' and Number(ID): '" + t_number_id + "'");
+                  //LogMyFilms.Debug("(searchmatches) - dc '" + dc.ToString() + "' - dc.ColumnName '" + dc.ColumnName.ToString() + "' - wproperty '" + wproperty + "' and Number(ID): '" + t_number_id + "'");
                   if (dc.ColumnName == wproperty)
                   {
-                    //LogMyFilms.Debug("MF: (searfhmatches with subitems) property2: '" + wproperty2 + "' - DB-Content: '" + wsr[dc.ColumnName].ToString() + "'"); 
+                    //LogMyFilms.Debug("(searfhmatches with subitems) property2: '" + wproperty2 + "' - DB-Content: '" + wsr[dc.ColumnName].ToString() + "'"); 
                     if (wsr[dc.ColumnName].ToString().Contains(wproperty2)) // column Name contains propertyname : add movie number (for later selection) to w_index
                     {
                       w_index.Add(t_number_id);
-                      LogMyFilms.Debug("MF: (RamdomSearch - Standard) Counter '" + w_index_count + "' Added as '" + w_index[w_index_count] + "'");
+                      LogMyFilms.Debug("(RamdomSearch - Standard) Counter '" + w_index_count + "' Added as '" + w_index[w_index_count] + "'");
                       w_index_count = w_index_count + 1;
                     }
                   }
@@ -6254,9 +6248,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
           // we now have a list with movies matching the choice and their index/number value -> now do loop for selection
-          LogMyFilms.Debug("MF: (ResultBuildIndex) Found " + w_index.Count + " Records matching '" + wproperty2 + "' in '" + wproperty + "'");
+          LogMyFilms.Debug("(ResultBuildIndex) Found " + w_index.Count + " Records matching '" + wproperty2 + "' in '" + wproperty + "'");
           for (int i = 0; i < w_index.Count; i++)
-            LogMyFilms.Debug("MF: (ResultList) - Index: '" + i + "' - Number: '" + w_index[i] + "'");
+            LogMyFilms.Debug("(ResultList) - Index: '" + i + "' - Number: '" + w_index[i] + "'");
           if (w_index.Count == 0)
           {
             ShowMessageDialog(GUILocalizeStrings.Get(10798621), "Suchergebnis: 0", "Keine Filme in der Auswahl vorhanden"); // menu for random search
@@ -6266,8 +6260,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //Choose Random Movie from Resultlist
           System.Random rnd = new System.Random();
           Int32 RandomNumber = rnd.Next(w_index.Count + 1);
-          LogMyFilms.Debug("MF: RandomNumber: '" + RandomNumber + "'");
-          LogMyFilms.Debug("MF: RandomTitle: '" + RandomNumber + "'");
+          LogMyFilms.Debug("RandomNumber: '" + RandomNumber + "'");
+          LogMyFilms.Debug("RandomTitle: '" + RandomNumber + "'");
 
           //Set Filmlist to random Movie:
           conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = string.Empty; //clear all selects
@@ -6279,7 +6273,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.StrTxtSelect = "Selection number [" + Convert.ToInt32(w_index[RandomNumber]) + "]";
           conf.StrTitleSelect = string.Empty;
           //getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
-          LogMyFilms.Debug("MF: (Guzzi): Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
+          LogMyFilms.Debug("(Guzzi): Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
           SetLabelView("search"); // show "search"
           GetFilmList(); // Added to update view ????
 
@@ -6392,7 +6386,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               case "RepeatSearch":
                 RandomNumber = rnd.Next(w_index.Count + 1);
-                LogMyFilms.Debug("MF: RandomNumber: '" + RandomNumber + "'");
+                LogMyFilms.Debug("RandomNumber: '" + RandomNumber + "'");
                 //MyFilmsDetail.Launch_Movie_Trailer(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
 
 
@@ -6424,7 +6418,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           break;
       }
-      LogMyFilms.Debug("MF: (SearchRandomWithTrailer-Info): Here should happen the handling of menucontext....");
+      LogMyFilms.Debug("(SearchRandomWithTrailer-Info): Here should happen the handling of menucontext....");
     }
 
     private void SearchMoviesbyAreas()
@@ -6496,15 +6490,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else
                 {
-                  //LogMyFilms.Debug("MF: (Guzzi) AddDistinctClasses: " + "Property: " + dc.ToString() + " and Value: '" + wsr[dc.ColumnName].ToString() + "'");
+                  //LogMyFilms.Debug("(Guzzi) AddDistinctClasses: " + "Property: " + dc.ToString() + " and Value: '" + wsr[dc.ColumnName].ToString() + "'");
                   // column Name contains propertyname : added to w_tableau + w_count
                   if (GetSubItems)
                   {
-                    LogMyFilms.Debug("MF: SubItemGrabber: Input: " + wsr[dc.ColumnName]);
+                    LogMyFilms.Debug("SubItemGrabber: Input: " + wsr[dc.ColumnName]);
                     wsub_tableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
                     foreach (object t in wsub_tableau)
                     {
-                      LogMyFilms.Debug("MF: SubItemGrabber: Output: " + t);
+                      LogMyFilms.Debug("SubItemGrabber: Output: " + t);
                       {
                         if (w_tableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
                         {
@@ -6514,7 +6508,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (w_tableau[i].ToString() == t.ToString())
                             {
                               w_count[i] = (int)w_count[i] + 1;
-                              //LogMyFilms.Debug("MF: SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
+                              //LogMyFilms.Debug("SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
                               break;
                             }
                           }
@@ -6522,7 +6516,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                         // add to w_tableau and move 1 to w_count
                         {
-                          LogMyFilms.Debug("MF: SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName] + "'");
+                          LogMyFilms.Debug("SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName] + "'");
                           w_tableau.Add(t.ToString());
                           w_count.Add(1);
                         }
@@ -6539,7 +6533,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (w_tableau[i].ToString() == wsr[dc.ColumnName].ToString())
                         {
                           w_count[i] = (int)w_count[i] + 1;
-                          //LogMyFilms.Debug("MF: (Guzzi) Clas already present, adding Counter for Property: " + dc.ToString() + "Value: '" + wsr[dc.ColumnName].ToString() + "'");
+                          //LogMyFilms.Debug("(Guzzi) Clas already present, adding Counter for Property: " + dc.ToString() + "Value: '" + wsr[dc.ColumnName].ToString() + "'");
                           break;
                         }
                       }
@@ -6547,7 +6541,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     else
                     // add to w_tableau and move 1 to w_count
                     {
-                      //LogMyFilms.Debug("MF: (Guzzi) AddDistinctClasses with Property: '" + dc.ToString() + "' and Value '" + wsr[dc.ColumnName].ToString() + "'");
+                      //LogMyFilms.Debug("(Guzzi) AddDistinctClasses with Property: '" + dc.ToString() + "' and Value '" + wsr[dc.ColumnName].ToString() + "'");
                       w_tableau.Add(wsr[dc.ColumnName].ToString());
                       w_count.Add(1);
                     }
@@ -6558,7 +6552,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           if (w_tableau.Count == 0)
           {
-            LogMyFilms.Debug("MF: PropertyClassCount is 0");
+            LogMyFilms.Debug("PropertyClassCount is 0");
             break;
           }
 
@@ -6585,7 +6579,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             wproperty2 = "*";
 
-          LogMyFilms.Debug("MF: (RandomMovies) - Chosen Subcategory: '" + wproperty2 + "' selecting in '" + wproperty + "'");
+          LogMyFilms.Debug("(RandomMovies) - Chosen Subcategory: '" + wproperty2 + "' selecting in '" + wproperty + "'");
           switch (wproperty)
           {
             case "Rating":
@@ -6601,7 +6595,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.StrSelect = wproperty + " like '*" + wproperty2 + "*'";
               break;
           }
-          LogMyFilms.Debug("MF: (RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
+          LogMyFilms.Debug("(RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
           conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
           conf.StrTitleSelect = string.Empty;
 
@@ -6695,12 +6689,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
             //DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
             DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - searchStringKBD   : '" + keyboard.Text + "'");
+            LogMyFilms.Debug("(GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
+            LogMyFilms.Debug("(GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
+            LogMyFilms.Debug("(GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
+            LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
+            LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
+            LogMyFilms.Debug("(GlobalSearchAll) - searchStringKBD   : '" + keyboard.Text + "'");
             foreach (DataRow wsr in wr)
             {
               foreach (DataColumn dc in ds.Movie.Columns)
@@ -6715,7 +6709,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if (w_tableau[i].ToString() == dc.ColumnName.ToLower())
                       {
                         w_count[i] = (int)w_count[i] + 1;
-                        //LogMyFilms.Debug("MF: (GlobalSearchAll) - AddCount for: '" + i.ToString() + "' - '" + dc.ColumnName.ToString() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
+                        //LogMyFilms.Debug("(GlobalSearchAll) - AddCount for: '" + i.ToString() + "' - '" + dc.ColumnName.ToString() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
                         break;
                       }
                     }
@@ -6725,11 +6719,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     w_tableau.Add(dc.ColumnName.ToLower());
                     w_count.Add(1);
-                    //LogMyFilms.Debug("MF: (GlobalSearchAll) - AddProperty for: '" + dc.ColumnName.ToString().ToLower() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
+                    //LogMyFilms.Debug("(GlobalSearchAll) - AddProperty for: '" + dc.ColumnName.ToString().ToLower() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
                   }
               }
             }
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + w_tableau.Count + "'");
+            LogMyFilms.Debug("(GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + w_tableau.Count + "'");
             if (w_tableau.Count == 0) // NodeLabelEditEventArgs Results found
             {
               GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -6747,10 +6741,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798656" };
             for (int ii = 0; ii < 30; ii++)
             {
-              //LogMyFilms.Debug("MF: (GlobalSearchAll) - OutputSort: Property is '" + PropertyList[ii] + "' - '" + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + "' (" + PropertyListLabel[ii] + ")");
+              //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: Property is '" + PropertyList[ii] + "' - '" + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + "' (" + PropertyListLabel[ii] + ")");
               for (int i = 0; i < w_tableau.Count; i++)
               {
-                //LogMyFilms.Debug("MF: (GlobalSearchAll) - OutputSort: w_tableau is '" + w_tableau[i] + "'"); 
+                //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: w_tableau is '" + w_tableau[i] + "'"); 
                 if (w_tableau[i].ToString().ToLower().Equals(PropertyList[ii].ToLower()))
                 {
                   dlg.Add(string.Format(GUILocalizeStrings.Get(10798619), w_count[i], GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii])))));
@@ -6765,7 +6759,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (control_searchText(keyboard.Text))
             {
 
-              //LogMyFilms.Debug("MF: (GlobalSearchAll) - ChosenProperty: wproperty is '" + wproperty + "'"); 
+              //LogMyFilms.Debug("(GlobalSearchAll) - ChosenProperty: wproperty is '" + wproperty + "'"); 
               switch (wproperty)
               {
                 case "rating":
@@ -6859,17 +6853,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
 
           default:
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - ChosenProperty: wproperty is '" + wproperty + "'");
-            LogMyFilms.Debug("MF: (GlobalSearchAll) - ChosenProperty: SearchTest is '" + keyboard.Text + "'");
+            LogMyFilms.Debug("(GlobalSearchAll) - ChosenProperty: wproperty is '" + wproperty + "'");
+            LogMyFilms.Debug("(GlobalSearchAll) - ChosenProperty: SearchTest is '" + keyboard.Text + "'");
             if (control_searchText(keyboard.Text))
             {
               DataRow[] wdr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-              LogMyFilms.Debug("MF: (GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
-              LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
-              LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
-              LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
-              LogMyFilms.Debug("MF: (GlobalSearchAll) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
-              LogMyFilms.Debug("MF: (GlobalSearchAll) - searchStringKBD   : '" + keyboard.Text + "'");
+              LogMyFilms.Debug("(GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
+              LogMyFilms.Debug("(GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
+              LogMyFilms.Debug("(GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
+              LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
+              LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
+              LogMyFilms.Debug("(GlobalSearchAll) - searchStringKBD   : '" + keyboard.Text + "'");
               foreach (DataRow wsr in wdr)
               {
                 foreach (DataColumn dc in ds.Movie.Columns)
@@ -6886,7 +6880,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           if (w_tableau[i].ToString() == dc.ColumnName.ToLower())
                           {
                             w_count[i] = (int)w_count[i] + 1;
-                            //LogMyFilms.Debug("MF: (GlobalSearchAll) - AddCount for: '" + i.ToString() + "' - '" + dc.ColumnName.ToString() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
+                            //LogMyFilms.Debug("(GlobalSearchAll) - AddCount for: '" + i.ToString() + "' - '" + dc.ColumnName.ToString() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
                             break;
                           }
                         }
@@ -6896,12 +6890,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       {
                         w_tableau.Add(dc.ColumnName.ToLower());
                         w_count.Add(1);
-                        //LogMyFilms.Debug("MF: (GlobalSearchAll) - AddProperty for: '" + dc.ColumnName.ToString().ToLower() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
+                        //LogMyFilms.Debug("(GlobalSearchAll) - AddProperty for: '" + dc.ColumnName.ToString().ToLower() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
                       }
                   }
                 }
               }
-              LogMyFilms.Debug("MF: (GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + w_tableau.Count + "'");
+              LogMyFilms.Debug("(GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + w_tableau.Count + "'");
               if (w_tableau.Count == 0) // NodeLabelEditEventArgs Results found
               {
                 GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -6997,7 +6991,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     private void InitMainScreen(bool log)
     {
-      LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties !!!");
+      LogMyFilms.Debug("(InitMainScreen) - Initialize all properties !!!");
 
       MyFilmsDetail.Init_Detailed_DB(log);  // Includes clear of db & user properties
 
@@ -7016,7 +7010,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("db.rating", log);
       MyFilmsDetail.clearGUIProperty("view", log); // Try to properly clean main view when entering
       MyFilmsDetail.clearGUIProperty("select", log);
-      LogMyFilms.Debug("MF: (InitMainScreen) - Initialize all properties - Finished !");
+      LogMyFilms.Debug("(InitMainScreen) - Initialize all properties - Finished !");
     }
 
     //*****************************************************************************************
@@ -7024,7 +7018,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     private void InitGlobalFilters(bool log)
     {
-      LogMyFilms.Debug("MF: (InitGlobalFilters) - Reset global Filters ...");
+      LogMyFilms.Debug("(InitGlobalFilters) - Reset global Filters ...");
       MovieScrobbling = false; //Reset MovieScrobbling
       GlobalFilterStringUnwatched = string.Empty;
       // Will be later initialized from setting MyFilms.conf.GlobalUnwatchedOnly
@@ -7067,7 +7061,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
         bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
-        LogMyFilms.Info("MF: Launching AMCUpdater in batch mode");
+        LogMyFilms.Info("Launching AMCUpdater in batch mode");
 
       }
     }
@@ -7080,7 +7074,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     void bgUpdateDB_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
-      LogMyFilms.Info("MF: : Update database with AMCUpdater finished. (GetID = '" + GetID + "')");
+      LogMyFilms.Info(": Update database with AMCUpdater finished. (GetID = '" + GetID + "')");
       if (GetID == 7986)
       {
         Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
@@ -7100,7 +7094,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
         bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
         bgUpdateFanart.RunWorkerAsync(MyFilms.r);
-        LogMyFilms.Info("MF: : Downloading backdrop fanart in batch mode");
+        LogMyFilms.Info(": Downloading backdrop fanart in batch mode");
       }
     }
 
@@ -7142,7 +7136,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void bgUpdateFanart_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
-      LogMyFilms.Info("MF: Backdrop Fanart download finished");
+      LogMyFilms.Info("Backdrop Fanart download finished");
     }
 
 
@@ -7156,7 +7150,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bgUpdateActors.DoWork += new DoWorkEventHandler(bgUpdateActors_DoWork);
         bgUpdateActors.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateActors_RunWorkerCompleted);
         bgUpdateActors.RunWorkerAsync(actors);
-        LogMyFilms.Info("MF: : Downloading actors artwork in batch mode");
+        LogMyFilms.Info(": Downloading actors artwork in batch mode");
 
       }
     }
@@ -7192,7 +7186,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void bgUpdateActors_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
-      LogMyFilms.Info("MF: actors artwork download finished");
+      LogMyFilms.Info("actors artwork download finished");
     }
 
 
@@ -7203,14 +7197,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgLoadMovieList.IsBusy)
       {
-        LogMyFilms.Debug("MF: AsynLoadMovieList() started in background !");
+        LogMyFilms.Debug("AsynLoadMovieList() started in background !");
         bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
         bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
-        LogMyFilms.Info("MF: Loading Movie List in batch mode");
+        LogMyFilms.Info("Loading Movie List in batch mode");
         bgLoadMovieList.RunWorkerAsync();
       }
       else
-        LogMyFilms.Debug(("MF: AsynLoadMovieList() could not be launched because already running !"));
+        LogMyFilms.Debug(("AsynLoadMovieList() could not be launched because already running !"));
     }
 
     static void bgLoadMovieList_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -7244,7 +7238,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void bgLoadMovieList_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
-      LogMyFilms.Info("MF: Loading Movie List in batch mode finished");
+      LogMyFilms.Info("Loading Movie List in batch mode finished");
     }
 
     //*****************************************************************************************
@@ -7254,19 +7248,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgIsOnlineCheck.IsBusy)
       {
-        LogMyFilms.Debug("MF: AsynIsOnlineCheck() started in background !");
+        LogMyFilms.Debug("AsynIsOnlineCheck() started in background !");
         bgIsOnlineCheck.DoWork += new DoWorkEventHandler(bgIsOnlineCheck_DoWork);
         bgIsOnlineCheck.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgIsOnlineCheck_RunWorkerCompleted);
-        LogMyFilms.Info("MF: Check IsOnline  started in batch mode");
+        LogMyFilms.Info("Check IsOnline  started in batch mode");
         bgIsOnlineCheck.RunWorkerAsync(MyFilms.r);
       }
       else
-        LogMyFilms.Debug(("MF: AsynIsOnlineCheck() could not be launched because already running !"));
+        LogMyFilms.Debug(("AsynIsOnlineCheck() could not be launched because already running !"));
     }
 
     static void bgIsOnlineCheck_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
-      LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork: Now checking Online Status - Source field <film> is: '" + conf.StrStorage + "' - Source field <trailer> is: '" + conf.StrStorageTrailer + "'");
+      LogMyFilms.Info("bgIsOnlineCheck_DoWork: Now checking Online Status - Source field <film> is: '" + conf.StrStorage + "' - Source field <trailer> is: '" + conf.StrStorageTrailer + "'");
       BackgroundWorker worker = sender as BackgroundWorker;
       Regex oRegex = new System.Text.RegularExpressions.Regex(";");
       DateTime startTime = DateTime.Now;
@@ -7284,7 +7278,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (film)
         {
-          LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
+          LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
         }
         else
         {
@@ -7299,7 +7293,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           catch (Exception ex)
           {
-            LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error getting source media files from DB - exception: " + ex.Message);
+            LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error getting source media files from DB - exception: " + ex.Message);
             fileName = string.Empty;
           }
           //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
@@ -7310,13 +7304,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
             {
               isonline = true;
-              LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie   media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie   media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
             }
             else
             {
               isonline = false;
               if (mediafile.Length > 0)
-                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - movie   media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie   media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
             }
           }
           t["IsOnline"] = isonline.ToString();
@@ -7325,7 +7319,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (trailer)
         {
-          LogMyFilms.Error("MF: bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
+          LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
         }
         else
         {
@@ -7349,13 +7343,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
             {
               isonline = true;
-              LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              LogMyFilms.Debug("bgIsOnlineCheck_DoWork - trailer media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
             }
             else
             {
               isonline = false;
               if (mediafile.Length > 0)
-                LogMyFilms.Debug("MF: bgIsOnlineCheck_DoWork - trailer media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - trailer media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
             }
           }
           t["IsOnlineTrailer"] = isonline.ToString();
@@ -7364,13 +7358,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       DateTime stopTime = DateTime.Now;
       TimeSpan duration = stopTime - startTime;
-      LogMyFilms.Info("MF: bgIsOnlineCheck_DoWork - total runtime was: '" + duration + "', runtime in seconds: '" + duration.TotalSeconds + "'");
+      LogMyFilms.Info("bgIsOnlineCheck_DoWork - total runtime was: '" + duration + "', runtime in seconds: '" + duration.TotalSeconds + "'");
       MyFilmsDetail.Update_XML_database();
     }
 
     void bgIsOnlineCheck_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
-      LogMyFilms.Info("MF: Check IsOnline in batch mode finished. (GetID = '" + GetID + "')");
+      LogMyFilms.Info("Check IsOnline in batch mode finished. (GetID = '" + GetID + "')");
       if (GetID == ID_MyFilms)
       {
         //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
@@ -7393,7 +7387,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bgUpdateTrailer.DoWork += new DoWorkEventHandler(bgUpdateTrailer_DoWork);
         bgUpdateTrailer.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateTrailer_RunWorkerCompleted);
         bgUpdateTrailer.RunWorkerAsync(MyFilms.r);
-        LogMyFilms.Info("MF: starting 'Search and register Trailer' in batch mode");
+        LogMyFilms.Info("starting 'Search and register Trailer' in batch mode");
       }
     }
 
@@ -7404,26 +7398,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void bgUpdateTrailer_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
-      LogMyFilms.Info("MF: 'Search and register Trailer' Thread finished");
+      LogMyFilms.Info("'Search and register Trailer' Thread finished");
     }
 
     private void FanartTimerEvent(object state)
     {
-      //LogMyFilms.Debug("MF: (FanartTimerEvent): FanartTimerEvent triggered !!!");
-      //LogMyFilms.Debug("MF: (FanartTimerEvent): Current Setting of Backdrop: '" + backdrop.Filename.ToString() + "'");
+      //LogMyFilms.Debug("(FanartTimerEvent): FanartTimerEvent triggered !!!");
+      //LogMyFilms.Debug("(FanartTimerEvent): Current Setting of Backdrop: '" + backdrop.Filename.ToString() + "'");
       // ToDo: Load new Fanart here !!!
       //if ((CurrentMovie.Length > 0) && (backdrop.Filename.Length > 0) && (backdrop.Active == true))
       if (backdrop.Filename != null)
       {
-        LogMyFilms.Debug("MF: (FanartTimerEvent): loadFanart triggered for '" + facadeView.SelectedListItem.Label + "' !");
-        //LogMyFilms.Debug("MF: (FanartTimerEvent): loadFanart triggered for '" + CurrentMovie.ToString() + "' !");
-        //LogMyFilms.Debug("MF: (FanartTimerEvent): loadFanart CurrentFanartDir '" + CurrentFanartDir.ToString() + "' !");
+        LogMyFilms.Debug("(FanartTimerEvent): loadFanart triggered for '" + facadeView.SelectedListItem.Label + "' !");
+        //LogMyFilms.Debug("(FanartTimerEvent): loadFanart triggered for '" + CurrentMovie.ToString() + "' !");
+        //LogMyFilms.Debug("(FanartTimerEvent): loadFanart CurrentFanartDir '" + CurrentFanartDir.ToString() + "' !");
         //Disabled, because it's still not working ...
         loadFanart();
       }
       else
       {
-        LogMyFilms.Debug("MF: (FanartTimerEvent): loadFanart NOT triggered !");
+        LogMyFilms.Debug("(FanartTimerEvent): loadFanart NOT triggered !");
       }
       if (m_bFanartTimerDisabled)
         m_bFanartTimerDisabled = false;
@@ -7459,17 +7453,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (wtitle2.Contains(MyFilms.conf.TitleDelim))
         wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
-      LogMyFilms.Debug("MF: (FindFanart) - wtitle name = '" + wtitle2 + "'");
+      LogMyFilms.Debug("(FindFanart) - wtitle name = '" + wtitle2 + "'");
       //wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
 
       fanartdir = MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
-      LogMyFilms.Debug("MF: (FindFanart) - fanartdir = '" + fanartdir + "'");
+      LogMyFilms.Debug("(FindFanart) - fanartdir = '" + fanartdir + "'");
 
 
 
       try
       {
-        //LogMyFilms.Debug("MF: (loadFanart): Load Fanart by Timer for activemovie: '" + "'");
+        //LogMyFilms.Debug("(loadFanart): Load Fanart by Timer for activemovie: '" + "'");
         //Fanart fanart = currSeriesFanart;
         //DBSeries series = item as DBSeries;
 
@@ -7482,7 +7476,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (fanart == null)
         {
           // This shouldn't happen
-          LogMyFilms.Debug("MF: (loadFanart): Fanart is unavailable, disabling");
+          LogMyFilms.Debug("(loadFanart): Fanart is unavailable, disabling");
           DisableFanart();
           return false;
         }
@@ -7493,19 +7487,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Assign Fanart filename to Image Loader
         // Will display fanart in backdrop or reset to default background                
         // backdrop.Filename = "test";
-        LogMyFilms.Debug("MF: (loadFanart): Loaded fanart is: '" + backdrop.Filename + "'");
+        LogMyFilms.Debug("(loadFanart): Loaded fanart is: '" + backdrop.Filename + "'");
         return fanartSet = true;
       }
       catch (Exception ex)
       {
-        LogMyFilms.Debug("MF: (loadFanart): Failed to load Fanart: " + ex.Message);
+        LogMyFilms.Debug("(loadFanart): Failed to load Fanart: " + ex.Message);
         return fanartSet = false;
       }
     }
 
     private bool FindFanart()
     {
-      LogMyFilms.Debug("MF: (FindFanart): Started FanartSearch");
+      LogMyFilms.Debug("(FindFanart): Started FanartSearch");
       if (MyFilms.conf.StrFanart)
       { };
       string[] wfanart = new string[2];
@@ -7513,7 +7507,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       wfanart[1] = " ";
       //Search Fanarts
       string wtitle2 = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-      LogMyFilms.Debug("MF: (FindFanart) - wtitle old = '" + wtitle2 + "'");
+      LogMyFilms.Debug("(FindFanart) - wtitle old = '" + wtitle2 + "'");
       //Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
       if (MyFilms.conf.StrTitle1 != "OriginalTitle")
       {
@@ -7523,16 +7517,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (wtitle2.Contains(MyFilms.conf.TitleDelim))
         wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
-      LogMyFilms.Debug("MF: (FindFanart) - wtitle name = '" + wtitle2 + "'");
+      LogMyFilms.Debug("(FindFanart) - wtitle name = '" + wtitle2 + "'");
       wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
-      LogMyFilms.Debug("MF: (FindFanart) - wtitle filename = '" + wtitle2 + "'");
-      LogMyFilms.Debug("MF: (FindFanart) - MesFilms.conf.StrFanart = '" + MyFilms.conf.StrFanart + "'");
+      LogMyFilms.Debug("(FindFanart) - wtitle filename = '" + wtitle2 + "'");
+      LogMyFilms.Debug("(FindFanart) - MesFilms.conf.StrFanart = '" + MyFilms.conf.StrFanart + "'");
 
       string safeName = string.Empty;
       safeName = MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
-      //LogMyFilms.Debug("MF: (FindFanart) - Directory (safename) = '" + safeName.ToString() + "'");
+      //LogMyFilms.Debug("(FindFanart) - Directory (safename) = '" + safeName.ToString() + "'");
       FileInfo wfile = new FileInfo(safeName + "\\{" + wtitle2 + "}.jpg");
-      //LogMyFilms.Debug("MF: (FindFanart) - FullPath (safename file&ext) = '" + wfile.ToString() + "'");
+      //LogMyFilms.Debug("(FindFanart) - FullPath (safename file&ext) = '" + wfile.ToString() + "'");
 
       // Single File
       //wfanart[0] = safeName + "\\{" + wtitle2 + "}.jpg";
@@ -7569,7 +7563,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}", "*.*", SearchOption.AllDirectories);
       foreach (string filefound in files)
       {
-        LogMyFilms.Debug("MF: (FanartSearchLocal) - Processing FilesFound: '" + filefound + "'");
+        LogMyFilms.Debug("(FanartSearchLocal) - Processing FilesFound: '" + filefound + "'");
         if (Utils.IsPicture(filefound))
         {
           wsize = new System.IO.FileInfo(filefound).Length;
@@ -7578,11 +7572,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           filesfound[filesfoundcounter] = filefound;
           filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
           filesfoundcounter = filesfoundcounter + 1;
-          LogMyFilms.Debug("MF: (FanartSearchLocal) - FilesFound in FanartDirectory: Size-Name '" + wsize + "' - Name '" + filefound + "'");
+          LogMyFilms.Debug("(FanartSearchLocal) - FilesFound in FanartDirectory: Size-Name '" + wsize + "' - Name '" + filefound + "'");
         }
       }
 
-      LogMyFilms.Debug("MF: (FindFanart): Results for wfanart[1,2]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+      LogMyFilms.Debug("(FindFanart): Results for wfanart[1,2]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
       if (wfanart[0] == " ")
       {
         //No Fanart available ...
@@ -7605,7 +7599,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (backdrop.Active) backdrop.Active = false;
       backdrop.Filename = String.Empty;
       MyFilmsDetail.clearGUIProperty("currentfanart");
-      LogMyFilms.Debug("MF: (DisableFanart): Fanart disabled !");
+      LogMyFilms.Debug("(DisableFanart): Fanart disabled !");
     }
 
     //-------------------------------------------------------------------------------------------
@@ -7614,17 +7608,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static void SearchFanart(DataRow[] r1, int Index, bool ExtendedSearch)
     {
       //Searchdirectory:
-      LogMyFilms.Debug("MF: (SearchtrailerLocal) - StrDirStortrailer: " + MyFilms.conf.StrDirStorTrailer);
+      LogMyFilms.Debug("(SearchtrailerLocal) - StrDirStortrailer: " + MyFilms.conf.StrDirStorTrailer);
       //Title1 = Movietitle
-      LogMyFilms.Debug("MF: (SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1] : '" + MyFilms.r[Index][MyFilms.conf.StrTitle1] + "'");
+      LogMyFilms.Debug("(SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1] : '" + MyFilms.r[Index][MyFilms.conf.StrTitle1] + "'");
       //Title2 = Translated Movietitle
-      LogMyFilms.Debug("MF: (SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2] : '" + MyFilms.r[Index][MyFilms.conf.StrTitle2] + "'");
+      LogMyFilms.Debug("(SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2] : '" + MyFilms.r[Index][MyFilms.conf.StrTitle2] + "'");
       //Cleaned Title
-      LogMyFilms.Debug("MF: (SearchTrailerLocal) - Cleaned Title                                               : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
+      LogMyFilms.Debug("(SearchTrailerLocal) - Cleaned Title                                               : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
       //Index of facadeview?
-      LogMyFilms.Debug("MF: (SearchtrailerLocal) - Index: '" + Index + "'");
+      LogMyFilms.Debug("(SearchtrailerLocal) - Index: '" + Index + "'");
       //Full Path to Film
-      LogMyFilms.Debug("MF: (SearchtrailerLocal) - FullMediasource: '" + (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim() + "'");
+      LogMyFilms.Debug("(SearchtrailerLocal) - FullMediasource: '" + (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim() + "'");
 
       ArrayList result = new ArrayList();
       ArrayList resultsize = new ArrayList();
@@ -7639,18 +7633,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Int64 wsize = 0; // Temporary Filesize detection
       // split searchpath information delimited by semicolumn (multiple searchpathes from config)
       string[] Trailerdirectories = MyFilms.conf.StrDirStorTrailer.Split(new Char[] { ';' });
-      LogMyFilms.Debug("MF: (SearchtrailerLocal) Search for '" + file + "' in '" + MyFilms.conf.StrDirStorTrailer + "'");
+      LogMyFilms.Debug("(SearchtrailerLocal) Search for '" + file + "' in '" + MyFilms.conf.StrDirStorTrailer + "'");
 
       //Retrieve original directory of mediafiles
       //directoryname
       movieName = (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim();
       movieName = movieName.Substring(movieName.LastIndexOf(";") + 1);
-      LogMyFilms.Debug("MF: (SearchtrailerLocal) splits media directory name: '" + movieName + "'");
+      LogMyFilms.Debug("(SearchtrailerLocal) splits media directory name: '" + movieName + "'");
       try
       { directoryname = System.IO.Path.GetDirectoryName(movieName); }
       catch
       { directoryname = string.Empty; }
-      LogMyFilms.Debug("MF: (SearchtrailerLocal) get media directory name: '" + directoryname + "'");
+      LogMyFilms.Debug("(SearchtrailerLocal) get media directory name: '" + directoryname + "'");
 
       //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
       if (!string.IsNullOrEmpty(directoryname))
@@ -7666,7 +7660,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             filesfound[filesfoundcounter] = filefound;
             filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
             filesfoundcounter = filesfoundcounter + 1;
-            LogMyFilms.Debug("MF: (TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
+            LogMyFilms.Debug("(TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
           }
         }
       }
@@ -7679,11 +7673,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         foreach (string storage in Trailerdirectories)
         {
-          LogMyFilms.Debug("MF: (TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'");
+          LogMyFilms.Debug("(TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'");
 
           // search in root directory
           files = Directory.GetFiles(storage, "*.*", SearchOption.TopDirectoryOnly);
-          LogMyFilms.Debug("MF: (TrailersearchLocal) - Search for matching files in root directory: '" + storage + "'");
+          LogMyFilms.Debug("(TrailersearchLocal) - Search for matching files in root directory: '" + storage + "'");
           foreach (string filefound in files)
           {
             if (((filefound.ToLower().Contains(titlename.ToLower())) || (filefound.ToLower().Contains(titlename2.ToLower()))) && (Utils.IsVideo(filefound)))
@@ -7694,19 +7688,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               filesfound[filesfoundcounter] = filefound;
               filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
               filesfoundcounter = filesfoundcounter + 1;
-              LogMyFilms.Debug("MF: (TrailersearchLocal) - Singlefiles found in Trailer root directory: Size '" + wsize + "' - Name '" + filefound + "'");
+              LogMyFilms.Debug("(TrailersearchLocal) - Singlefiles found in Trailer root directory: Size '" + wsize + "' - Name '" + filefound + "'");
             }
           }
 
           // search in subdirectories:
           directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
-          LogMyFilms.Debug("MF: (TrailersearchLocal) - Search for matching (sub)directories ...");
+          LogMyFilms.Debug("(TrailersearchLocal) - Search for matching (sub)directories ...");
           foreach (string directoryfound in directories)
           {
-            LogMyFilms.Debug("MF: (TrailersearchLocal) - directory to check: '" + directoryfound + "'");
+            LogMyFilms.Debug("(TrailersearchLocal) - directory to check: '" + directoryfound + "'");
             if ((directoryfound.ToLower().Contains(titlename.ToLower())) || (directoryfound.ToLower().Contains(titlename2.ToLower())))
             {
-              LogMyFilms.Debug("MF: (TrailersearchLocal) - Directory found: '" + directoryfound + "'");
+              LogMyFilms.Debug("(TrailersearchLocal) - Directory found: '" + directoryfound + "'");
               files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
               foreach (string filefound in files)
               {
@@ -7718,7 +7712,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   filesfound[filesfoundcounter] = filefound;
                   filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
                   filesfoundcounter = filesfoundcounter + 1;
-                  LogMyFilms.Debug("MF: (TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
+                  LogMyFilms.Debug("(TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
                 }
               }
 
@@ -7736,7 +7730,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   filesfound[filesfoundcounter] = filefound;
                   filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
                   filesfoundcounter = filesfoundcounter + 1;
-                  LogMyFilms.Debug("MF: (TrailersearchLocal) - Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
+                  LogMyFilms.Debug("(TrailersearchLocal) - Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
                 }
               }
             }
@@ -7748,12 +7742,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                  orderby new FileInfo(fn).Length descending
                  select fn;
       foreach (string n in filesfound)
-        LogMyFilms.Debug("MF: (Sorted Trailerfiles) ******* : '" + n + "'");
+        LogMyFilms.Debug("(Sorted Trailerfiles) ******* : '" + n + "'");
 
       Array.Sort(filesfoundsize);
       for (int i = 0; i < result.Count; i++)
       {
-        LogMyFilms.Debug("MF: (Sorted Trailerfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
+        LogMyFilms.Debug("(Sorted Trailerfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
       }
 
       string trailersourcepath = "";
@@ -7769,22 +7763,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           for (int i = 1; i < result.Count; i++)
           {
             trailersourcepath = trailersourcepath + ";" + result[i];
-            LogMyFilms.Debug("MF: (SearchTrailerLocal) - Added Trailer to Trailersouce: '" + result[i] + "'");
+            LogMyFilms.Debug("(SearchTrailerLocal) - Added Trailer to Trailersouce: '" + result[i] + "'");
           }
         }
-        LogMyFilms.Debug("MF: (SearchTrailerLocal) - Total Files found: " + result.Count);
-        LogMyFilms.Debug("MF: (SearchTrailerLocal) - TrailerSourcePath: '" + trailersourcepath + "'");
+        LogMyFilms.Debug("(SearchTrailerLocal) - Total Files found: " + result.Count);
+        LogMyFilms.Debug("(SearchTrailerLocal) - TrailerSourcePath: '" + trailersourcepath + "'");
       }
       else
-        LogMyFilms.Debug("MF: (SearchTrailerLocal) - NO TRAILERS FOUND !!!!");
+        LogMyFilms.Debug("(SearchTrailerLocal) - NO TRAILERS FOUND !!!!");
 
       if ((trailersourcepath.Length > 0) && (MyFilms.conf.StrStorageTrailer.Length != 0 && MyFilms.conf.StrStorageTrailer != "(none)"))
       {
-        LogMyFilms.Debug("MF: (SearchTrailerLocal) - Old Trailersourcepath: '" + MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] + "'");
+        LogMyFilms.Debug("(SearchTrailerLocal) - Old Trailersourcepath: '" + MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] + "'");
         MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] = trailersourcepath;
-        LogMyFilms.Debug("MF: (SearchTrailerLocal) - New Trailersourcepath    : '" + MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] + "'");
+        LogMyFilms.Debug("(SearchTrailerLocal) - New Trailersourcepath    : '" + MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] + "'");
         //Update_XML_database();
-        LogMyFilms.Debug("MF: (SearchTrailerLocal) - Database Updated !!!!");
+        LogMyFilms.Debug("(SearchTrailerLocal) - Database Updated !!!!");
       }
     }
 
@@ -7908,7 +7902,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("view", newViewLabel);
       MyFilms.conf.StrTxtView = newViewLabel;
       GUIPropertyManager.SetProperty("#currentmodule", newViewLabel);
-      LogMyFilms.Debug("MF: SetLabelView has been called with '" + viewLabel + "' -> set view to '" + newViewLabel + "'");
+      LogMyFilms.Debug("SetLabelView has been called with '" + viewLabel + "' -> set view to '" + newViewLabel + "'");
     }
 
     //*****************************************************************************************
@@ -8069,7 +8063,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Load_Logos(DataRow row)
     {
-      LogMyFilms.Debug("MF: Using Logos -> '" + conf.StrLogos + "'");
+      LogMyFilms.Debug("Using Logos -> '" + conf.StrLogos + "'");
       //if ((ImgID2001 != null) && (ImgID2002 != null) && (conf.StrLogos))
       //{
       //    if ((ImgID2001.XPosition == ImgID2002.XPosition) && (ImgID2001.YPosition == ImgID2002.YPosition))
@@ -8083,7 +8077,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //        {
       //        }
       //        //GUIControl.ClearControl(GetID, (int)Controls.CTRL_logos_id2001);
-      //        LogMyFilms.Debug("MF: : Logo thumb assigned : " + wlogos);
+      //        LogMyFilms.Debug(": Logo thumb assigned : " + wlogos);
       //        if (wlogos.Length == 0)
       //            wlogos = " ";
       //        MyFilmsDetail.setGUIProperty("logos_id2001", wlogos);
@@ -8105,7 +8099,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //        }
       //        catch (Exception e)
       //        {
-      //          LogMyFilms.Error("MF: : " + e.Message);
+      //          LogMyFilms.Error(": " + e.Message);
       //        }
       //        if (wlogos.Length == 0)
       //            wlogos = string.Empty;
@@ -8129,7 +8123,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //        }
       //        catch (Exception e)
       //        {
-      //          LogMyFilms.Error("MF: : " + e.Message);
+      //          LogMyFilms.Error(": " + e.Message);
       //        }
       //        if (wlogos.Length == 0)
       //            wlogos = string.Empty;
@@ -8157,7 +8151,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         catch (Exception e)
         {
-          LogMyFilms.Error("MF: " + e.Message);
+          LogMyFilms.Error("" + e.Message);
         }
       }
       else
@@ -8171,7 +8165,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         catch (Exception e)
         {
-          LogMyFilms.Error("MF: " + e.Message);
+          LogMyFilms.Error("" + e.Message);
         }
       }
       else
@@ -8185,7 +8179,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         catch (Exception e)
         {
-          LogMyFilms.Error("MF: " + e.Message);
+          LogMyFilms.Error("" + e.Message);
         }
       }
       else
@@ -8199,7 +8193,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         catch (Exception e)
         {
-          LogMyFilms.Error("MF: " + e.Message);
+          LogMyFilms.Error("" + e.Message);
         }
       }
       else
@@ -8298,7 +8292,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //    }
     //    catch (Exception ex)
     //    {
-    //        LogMyFilms.Error("MF: videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
+    //        LogMyFilms.Error("videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
     //    }
     //}
 

@@ -70,19 +70,19 @@ namespace MyFilmsPlugin.MyFilms.Utils
               {
                 activeLogoConfigFile = logoConfigPathSkin + @"\MyFilmsLogos.xml";
                 logoConfigOverride = "O";
-                LogMyFilms.Debug("MF: Using Skin specific logo config file: '" + activeLogoConfigFile + "'");
+                LogMyFilms.Debug("Using Skin specific logo config file: '" + activeLogoConfigFile + "'");
                 //wfile = wfile.Substring(wfile.LastIndexOf("\\") + 1) + "_" + Configuration.CurrentConfig;
               }
               catch
               {
-                LogMyFilms.Debug("MF: Error copying config specific file from skin override file !");
+                LogMyFilms.Debug("Error copying config specific file from skin override file !");
               }
             }
             else
             {
               activeLogoConfigFile = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsLogos.xml";
               logoConfigOverride = "";
-              LogMyFilms.Debug("MF: Using MyFilms default logo config file: '" + activeLogoConfigFile + "'");
+              LogMyFilms.Debug("Using MyFilms default logo config file: '" + activeLogoConfigFile + "'");
             }
 
           using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(activeLogoConfigFile))
@@ -108,8 +108,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 if (LogosPath.LastIndexOf("\\") != LogosPath.Length - 1)
                     LogosPath = LogosPath + "\\";
                 spacer = XmlConfig.ReadXmlConfig(activeLogoConfigFile, "ID0000", "Spacing", 1);
-                LogMyFilms.Debug("MF: Logo path for reading logos        : '" + LogosPath + "'");
-                LogMyFilms.Debug("MF: Logo path for storing cached logos : '" + LogosPathThumbs + "' with spacing = '" + spacer.ToString() + "'");
+                LogMyFilms.Debug("Logo path for reading logos        : '" + LogosPath + "'");
+                LogMyFilms.Debug("Logo path for storing cached logos : '" + LogosPathThumbs + "' with spacing = '" + spacer.ToString() + "'");
                 int i = 0;
                 ID2001Logos.Clear();
                 ID2002Logos.Clear();
@@ -170,7 +170,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
             if (listelogos.Count > 0)
             {
-                LogMyFilms.Debug("MF: Logo picture to be added " + fileLogoName);
+                LogMyFilms.Debug("Logo picture to be added " + fileLogoName);
                 string skinName = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
                 if (ID == MyFilms.ID_MyFilms)
                     fileLogoName = "MyFilms_" + skinName + "_M" + logoConfigOverride + fileLogoName + ".png";
@@ -204,12 +204,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
                     try
                     {
                         b.Save(LogosPathThumbs + fileLogoName);
-                        LogMyFilms.Debug("MF: Concatenated Logo saved " + fileLogoName);
+                        LogMyFilms.Debug("Concatenated Logo saved " + fileLogoName);
                         System.Threading.Thread.Sleep(10);
                     }
                     catch (Exception e)
                     {
-                        LogMyFilms.Info("MF: Unable to save Logo file ! error : " + e.Message.ToString());
+                        LogMyFilms.Info("Unable to save Logo file ! error : " + e.Message.ToString());
                     }
                 }
                 return LogosPathThumbs + fileLogoName;
@@ -350,7 +350,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 }
                 catch (Exception)
                 {
-                    LogMyFilms.Error("MF: Could not load Logo Image file... " + t);
+                    LogMyFilms.Error("Could not load Logo Image file... " + t);
                     return;
                 }
                 if (totalWidth > totalHeight)

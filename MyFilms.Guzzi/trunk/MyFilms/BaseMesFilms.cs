@@ -57,14 +57,14 @@ namespace MyFilmsPlugin.MyFilms
         private static void initData()
         {
             data = new AntMovieCatalog();
-            LogMyFilms.Debug("MF: BaseMesFilms - Try reading catalogfile '" + MyFilms.conf.StrFileXml + "'");
+            LogMyFilms.Debug("BaseMesFilms - Try reading catalogfile '" + MyFilms.conf.StrFileXml + "'");
             try
             {
               data.ReadXml(MyFilms.conf.StrFileXml);
             }
             catch (Exception e)
             {
-              LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+              LogMyFilms.Error(": Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
               throw e;
             }
         }
@@ -126,9 +126,9 @@ namespace MyFilmsPlugin.MyFilms
               StrSelect = "Name" + " not like ''";
               persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
               //Guzzi
-              LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSelect          : '" + StrSelect + "'");
-              LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSort            : '" + StrSort + "'");
-              LogMyFilms.Debug("MF: - BaseMesFilmsPersons:  StrSortSens        : '" + StrSortSens + "'");
+              LogMyFilms.Debug("- BaseMesFilmsPersons:  StrSelect          : '" + StrSelect + "'");
+              LogMyFilms.Debug("- BaseMesFilmsPersons:  StrSort            : '" + StrSort + "'");
+              LogMyFilms.Debug("- BaseMesFilmsPersons:  StrSortSens        : '" + StrSortSens + "'");
               LogMyFilms.Debug(
                 "MF: - BaseMesFilmsPersons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
             }
