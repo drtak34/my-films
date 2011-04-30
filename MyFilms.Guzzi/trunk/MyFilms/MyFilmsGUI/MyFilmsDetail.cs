@@ -747,7 +747,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           return;
                       }
               
-                      // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
+                      // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... 
+                      // OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
                       //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
                       if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
                       {
@@ -778,7 +779,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                         // should this be set here to make original movie doesn't get set to watched??
                         // trailerPlayed = true;
+#if MP11
                         GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
+#else
+                        GUIWindowManager.ActivateWindow((int)MyFilms.ID_OnlineVideos, OVstartparams);
+#endif
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
@@ -802,50 +807,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     afficher_detail(true);
                     break;
 
-              case "rating":
+                case "rating":
                     MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(MyFilms.ID_MyFilmsDialogRating);
-                    //NumberFormatInfo nfi = new NumberFormatInfo();
-                    //nfi.NumberDecimalSeparator = ",";
-                    //nfi.NumberGroupSeparator = "";
-                    //decimal wrating = 0;
                     if (MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Length > 0)
                     {
-                      //wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
-                      //wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
-                      //CultureInfo ci = new CultureInfo("en-us");
-                      //dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
-                      //try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ",")); }
-
-                      //if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == "." && MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Contains("."))
-                      //{
-                      //  try
-                      //  {
-                      //    wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
-                      //    //wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"], CultureInfo.CurrentCulture);
-                      //    LogMyFilms.Debug("MF: Rating dialog using cultureinfo: '" + CultureInfo.CurrentCulture.ToString() + "'");
-                      //  }
-                      //  catch { }
-                      //}
-                      //else
-                      //{
-                      //  wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString(), nfi);
-                      //}
-                      
-                      //try { wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ",")); }
-                      //catch
-                     // {
-                      //LogMyFilms.Debug("MF: Rating dialog using cultureinfo (decimalseparator): '" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() + "'");
-                      //wrating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"]; 
-                      //wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
-                      //try
-                        //{
-                          //wrating = Decimal.Parse(MyFilms.r[MyFilms.conf.StrIndex]["Rating"].ToString().Replace(".", ","), nfi);
-                          //wrating = Convert.ToDecimal(MyFilms.r[MyFilms.conf.StrIndex]["Rating"], CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-                        //}
-
-                        //catch { }
-                      //}
-                      //dlgRating.Rating = wrating;
                       dlgRating.Rating = (decimal)MyFilms.r[MyFilms.conf.StrIndex]["Rating"];
                       if (dlgRating.Rating > 10) 
                         dlgRating.Rating = 10;
@@ -857,10 +822,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgRating.DoModal(GetID);
                     if (dlgmenu.SelectedLabel != 2) // If not returning from "ok"
                       Change_Menu("mainmenu");
-                    //wrating = dlgRating.Rating;
-                    //MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString("0.0", nfi);
-                    //MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating.ToString("0,0", nfiback).Replace(",", ".");
-                    //MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = wrating.ToString().Replace(",", ".");
                     MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating;
                     Update_XML_database();
                     afficher_detail(true);
@@ -4711,7 +4672,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   LogMyFilms.Debug("MF: Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                   // should this be set here to make original movie doesn't get set to watched??
                   // trailerPlayed = true;
+#if MP11
                   GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
+#else
+                  GUIWindowManager.ActivateWindow((int)MyFilms.ID_OnlineVideos, OVstartparams);
+#endif
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
