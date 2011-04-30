@@ -294,6 +294,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public int Layout = 0;
     public static int Prev_ItemID = -1;
 
+    public static GUIListItem itemToPublish = null;
+
     public static string Prev_wLabel = string.Empty;
     //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
     public static int Prev_MenuID = -1;
@@ -2129,6 +2131,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             item.Label = sTitle; //reset to current single folder as > 1 entries
             item.IsFolder = true;
+            item.TVTag = "group";
 
             item.ThumbnailImage = conf.FileImage;
             item.IconImage = conf.FileImage;
@@ -2139,6 +2142,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           iCnt = 1;
           item = new GUIListItem();
           item.Label = sFullTitle; // Set = full subfolders path initially
+          item.TVTag = "film";
           if (!MyFilms.conf.OnlyTitleList)
           {
             switch (conf.StrSorta)
@@ -2286,7 +2290,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798639));
         //GUIWaitCursor.Show();
         //DisplayAllMovies();
-        Load_Lstdetail(-1, "no results found");
         //InitMainScreen(false);
         GUIControl.ShowControl(GetID, 34); // hides certain GUI elements
         //SetLabelSelect("root");
@@ -2336,16 +2339,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //----------------------------------------------------------------------------------------
     //    Display Detailed Info (Image, Description, Year, Category)
     //----------------------------------------------------------------------------------------
-    private void Load_Lstdetail(int ItemId, string wlabel)//wrep = false display only image, all properties cleared
+    //private void Load_Lstdetail(GUIListItem currentItem, int ItemId, string wlabel)//wrep = false display only image, all properties cleared
+    private void Load_Lstdetail(GUIListItem currentItem)
     {
-      // Moved to onitemselected handlercode
-      //if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_wLabel)
-      //{
-      //  LogMyFilms.Debug("MF: (item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
-      //  return;
-      //}
-      LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId = " + ItemId + ", wlabel = " + wlabel);
-      if (ItemId == -1 || facadeView.SelectedListItem.ItemId == -1)
+      LogMyFilms.Debug("Load_Lstdetail: ItemId = " + currentItem.ItemId + ", label = " + currentItem.Label + ", TVtag = " + currentItem.TVTag);
+      if (currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_wLabel)
+      {
+        LogMyFilms.Debug("MF: (Load_Lstdetail): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
+        return;
+      }
+      if (currentItem.ItemId == -1)
       {
         // reinit some fields
         //cover.Filename = "";
@@ -2355,16 +2358,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
 
-      //if (facadeView.SelectedListItem.IsFolder)
-      //  Prev_ItemID = facadeView.SelectedListItemIndex;
-      //else
-      Prev_ItemID = facadeView.SelectedListItem.ItemId;
-      Prev_wLabel = facadeView.SelectedListItem.Label;
+      Prev_ItemID = currentItem.ItemId;
+      Prev_wLabel = currentItem.Label;
 
-      if ((facadeView.SelectedListItem.IsFolder) && (MyFilms.conf.Boolselect))
+      if ((currentItem.IsFolder) && (MyFilms.conf.Boolselect))
       {
         LogMyFilms.Debug("MF: (Load_Lstdetail): Item is Folder and BoolSelect is true");
-        string[] wfanart = MyFilmsDetail.Search_Fanart(wlabel, true, "file", true, facadeView.SelectedListItem.ThumbnailImage.ToString(), facadeView.SelectedListItem.Path);
+        string[] wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage.ToString(), currentItem.Path);
         if (wfanart[0] == " ")
         {
           if (backdrop.Active)
@@ -2384,7 +2384,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         //if (!cover.Active)
         //  cover.Active = true;
-        conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
+        conf.FileImage = currentItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
         groupcover.Filename = conf.FileImage;
 
@@ -2401,7 +2401,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         LogMyFilms.Debug("MF: (Load_Lstdetail): Item is Movie itself!");
         string[] wfanart = new string[2];
-        wfanart = MyFilmsDetail.Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage, string.Empty);
+        wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", false, currentItem.ThumbnailImage, string.Empty);
         LogMyFilms.Debug("MyFilm (Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         //if (wfanart[0] == " ")
         //{
@@ -2438,42 +2438,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //}
         //else
         //{
-        conf.FileImage = facadeView.SelectedListItem.ThumbnailImage;
+        conf.FileImage = currentItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
         cover.Filename = conf.FileImage;
         //}
 
-        //m_FanartTimer.Change(0, 10000); // 10000 = 10 sek. // Added to immediately change Fanart - activate to enable timer and reset it !
-
         //XmlConfig XmlConfig = new XmlConfig();
         //string logo_type = string.Empty;
         //string wlogos = string.Empty;
-        Load_Logos(MyFilms.r[ItemId]);
+        Load_Logos(MyFilms.r[currentItem.ItemId]);
       }
 
       //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
 
-      bool details = false;
-      if (!(conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
+      switch (currentItem.TVTag.ToString())
       {
-        if (facadeView.SelectedListItemIndex > -1)
-          details = true;
+        case "person":
+          MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false); 
+          MyFilmsDetail.Load_Detailed_PersonInfo(currentItem.Label, true); 
+          break;
+        case "group":
+          MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
+          break;
+        case "film":
+          MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, true);
+          break;
+        default:
+          MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
+          GUIControl.ShowControl(GetID, 34);
+          break;
       }
-      else
-      {
-        if (facadeView.SelectedListItemIndex > -1 && !conf.Boolselect)
-          details = false;
-        else
-        {
-          details = false;
-          //GUIControl.ShowControl(GetID, 34);
-        }
-      }
-
-      if ((conf.WStrSort.ToLower().Contains("actors")) || (conf.WStrSort.ToLower().Contains("producer")) || (conf.WStrSort.ToLower().Contains("director")))
-        MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, details);
-      else
-        MyFilmsDetail.Load_Detailed_DB(ItemId, details);
+      //if (currentItem.TVTag == "person")
+      //if (conf.WStrSort.ToLower().Contains("actors") || conf.WStrSort.ToLower().Contains("producer") || conf.WStrSort.ToLower().Contains("director") || conf.WStrSort.ToLower().Contains("writer"))
+      //  MyFilmsDetail.Load_Detailed_PersonInfo(currentItem.Label, details);
+      //else
+      //  MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, details);
 
       // Load_Rating(conf.W_rating); // old method - nor more used
     }
@@ -2507,7 +2506,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void item_OnItemSelected(GUIListItem item, GUIControl parent)
     {
-      LogMyFilms.Debug("MF: Call item_OnItemSelected()with options - item: '" + item + "', facadeView.SelectedListItemIndex: '" + facadeView.SelectedListItemIndex + "', facadeView.SelectedListItem.Label: '" + facadeView.SelectedListItem.Label + "'");
+      LogMyFilms.Debug("MF: Call item_OnItemSelected()with options - item: '" + item.ItemId + "', SelectedListItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Label: '" + facadeView.SelectedListItem.Label + "', TVtag: '" + item.TVTag.ToString() + "'");
       if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_wLabel)
       {
         LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_wLabel (" + Prev_wLabel + ") -> return without action !");
@@ -2520,32 +2519,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!(conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
       {
         if (facadeView.SelectedListItemIndex > -1)
-          MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
+          MovieDetailsPublisher(item, true); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
       }
       else
       {
         if (facadeView.SelectedListItemIndex > -1 && !conf.Boolselect)
         {
-          MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+          MovieDetailsPublisher(item, false); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
         }
         else
         {
-          MovieDetailsPublisher(facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+          MovieDetailsPublisher(item, false); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
           //GUIControl.ShowControl(GetID, 34);
         }
       }
+      LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_wLabel (" + Prev_wLabel + ") -> return without action !");
       //Load_Lstdetail(item.ItemId, true, item.Label);
     }
 
-    private void MovieDetailsPublisher(int ItemId, string wlabel)
+    //private void MovieDetailsPublisher(int ItemId, string wlabel)
+    private void MovieDetailsPublisher(GUIListItem item, bool wrep)
     {
-      LogMyFilms.Debug("MF: Call MovieDetailsPublisher()with options - ItemId: '" + ItemId + "', wlabel: '" + wlabel + "'"); 
+      LogMyFilms.Debug("MF: Call MovieDetailsPublisher()with options - ItemId    : '" + item.ItemId + "', label: '" + item.Label + "'");
       double tickCount = System.Windows.Media.Animation.AnimationTimer.TickCount;
+      // Update instance of delayed item with current position
+      itemToPublish = item;
       // Publish instantly when previous request has passed the required delay
-      if (150 < (int)(tickCount - lastPublished)) // wait 100 ms to load details...
+      if (100 < (int)(tickCount - lastPublished)) // wait 100 ms to load details...
       {
         lastPublished = tickCount;
-        Load_Lstdetail(facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+        Load_Lstdetail(itemToPublish);
         // Load_Lstdetail(ItemId, wlabel); 
         return;
       }
@@ -2553,7 +2556,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         lastPublished = tickCount;
         if (publishTimer == null)
-          publishTimer = new Timer(delegate { Load_Lstdetail(facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label); }, null, 150, Timeout.Infinite);
+          publishTimer = new Timer(delegate { Load_Lstdetail(itemToPublish); }, null, 150, Timeout.Infinite);
         else
           publishTimer.Change(150, Timeout.Infinite);
       }
@@ -3018,7 +3021,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //AsynUpdateActors(w_tableau);
       }
       LogMyFilms.Debug("MF: (GetSelectFromDivx) - Facadesetup Groups Started");
-      //item = new GUIListItem();
+      //GUIListItem item = null;
       for (wi = 0; wi != w_tableau.Count; wi++)
       {
         champselect = w_tableau[wi].ToString();
@@ -3032,8 +3035,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if ((Wnb_enr > 0) && (wchampselect.Length > 0))
             {
-              GUIListItem item = new GUIListItem(wchampselect);
-              item = new GUIListItem(item); 
+              GUIListItem item = new GUIListItem(); 
               //item.ItemId = number;
               item.Label = wchampselect;
               item.Label2 = Wnb_enr.ToString();
@@ -3041,6 +3043,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //item.DVDLabel = WStrSort.ToLower();
               //MediaPortal.Util.Utils.SetDefaultIcons(item);
               item.Path = WStrSort.ToLower();
+
+              if (isperson) 
+                item.TVTag = "person";
+              else 
+                item.TVTag = "group";
 
               if (getThumbs)
               {
@@ -3068,7 +3075,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if ((Wnb_enr > 0) && (wchampselect.Length > 0))
       {
-        GUIListItem item = new GUIListItem(wchampselect);
+        GUIListItem item = new GUIListItem();
         //item.ItemId = number;
         item.Label = wchampselect;
         item.Label2 = Wnb_enr.ToString();
@@ -3077,6 +3084,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //MediaPortal.Util.Utils.SetDefaultIcons(item);
         item.Path = WStrSort.ToLower();
         //item.ItemId = number; // Only used in GetFilmList
+
+        if (isperson)
+          item.TVTag = "person";
+        else
+          item.TVTag = "group";
+
         if (getThumbs)
         {
           strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
