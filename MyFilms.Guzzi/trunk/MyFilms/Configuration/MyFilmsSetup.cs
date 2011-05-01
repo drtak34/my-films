@@ -110,6 +110,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
               this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
               this.buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
+              // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
+              //CatalogType.Items.Remove("MyFilms extended Database");
+              //CatalogType.Items.Remove("XBMC nfo reader");
+              //CatalogType.Items.Remove(CatalogType.Items[7]); // MF internal DB
+              //CatalogType.Items.RemoveAt(8); // XBMC nfo reader (deparate files)
+              //CatalogType.Items.Add("test");
             }
             //else
             //{
@@ -120,6 +126,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //    this.General.TabPages.Insert(loc, this.tabPageSave);
             //  }
             //}
+            //"Ant Movie Catalog (V3.5.1.2)",
+            //"DVD Profiler (V3.7.2)",
+            //"Movie Collector (V7.1.4)",
+            //"MyMovies (V3.18)",
+            //"Eax Movie Catalog (2.5.0)",
+            //"eXtreme Movie Manager (V7.1.1.1)",
+            //"XBMC (V10.0)",
+            //"MyFilms extended Database",
+            //"XBMC nfo reader",
+            //"Eax Movie Catalog (3.0.9 b5)",
+            //"PVD - Personal Video Database (0.9.9.21)",
+            //"MovingPicturesXML (V1.2 process plugin)"});
 
             //this.label_VersionNumber.Text = "Version 5.1.0 alpha";
             LogMyFilms.Info("MFsetup: Started with version '" + label_VersionNumber.Text + "'");

@@ -3917,8 +3917,8 @@
             "Eax Movie Catalog (2.5.0)",
             "eXtreme Movie Manager (V7.1.1.1)",
             "XBMC (V10.0)",
-            "(n/a)",
-            "(n/a)",
+            "MyFilms extended Database",
+            "XBMC nfo reader",
             "Eax Movie Catalog (3.0.9 b5)",
             "PVD - Personal Video Database (0.9.9.21)",
             "MovingPicturesXML (V1.2 process plugin)"});
