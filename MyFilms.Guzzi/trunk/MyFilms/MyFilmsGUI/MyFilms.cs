@@ -51,13 +51,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using NLog.Config;
   using NLog.Targets;
 
-  using Trakt;
-
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
 
   using Action = MediaPortal.GUI.Library.Action;
-  using WindowPlugins;
   using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
 
 
@@ -296,7 +293,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static GUIListItem itemToPublish = null;
 
-    public static string Prev_wLabel = string.Empty;
+    public static string Prev_Label = string.Empty;
     //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
     public static int Prev_MenuID = -1;
     public bool Context_Menu = false;
@@ -432,7 +429,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     System.ComponentModel.BackgroundWorker bgUpdateTrailer = new System.ComponentModel.BackgroundWorker();
     System.ComponentModel.BackgroundWorker bgLoadMovieList = new System.ComponentModel.BackgroundWorker();
     System.ComponentModel.BackgroundWorker bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
-    System.ComponentModel.BackgroundWorker bgOnPageLoad = null;
+    // System.ComponentModel.BackgroundWorker bgOnPageLoad = null;
 
     #endregion
 
@@ -580,10 +577,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected override void OnPageDestroy(int new_windowId)
     {
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
-
+      // Reset to force republishing details on reentering
+      Prev_ItemID = -1;
+      Prev_Label = string.Empty;
       //if (!bgOnPageLoad.CancellationPending) // cancel pageload worker thread - otherwise null ref exception when trying to populate facade ...
       //  bgOnPageLoad.CancelAsync();
-      //Thread.Sleep(15); // sleep 5 milliseconds
+      //Thread.Sleep(5); // sleep 5 milliseconds
       // Set Facadevisibilities false ...
       //SetDummyControlsForFacade(Listlevel.None);
 
@@ -594,7 +593,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //MyFilmsDetail.clearGUIProperty("Fanart2");
 
       //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
-      //GUITextureManager.CleanupThumbs();
+      GUITextureManager.CleanupThumbs();
 
       if (Configuration.CurrentConfig != "")
       {
@@ -739,6 +738,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected override void OnShowContextMenu()
     {
       LogMyFilms.Debug("OnShowContextMenu() started");
+      if (facadeView.SelectedListItemIndex > -1)
+      {
+        if (!(facadeView.Focus)) GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+        Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        return;
+      }
       base.OnShowContextMenu();
     }
 
@@ -1407,10 +1412,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //   Handle Keyboard Actions
     //---------------------------------------------------------------------------------------
 
-    public override void OnAction(Action actionType)
+    public override void OnAction(Action action)
     {
-      LogMyFilms.Debug("OnAction " + actionType.wID);
-      switch (actionType.wID)
+      LogMyFilms.Debug("OnAction " + action.wID);
+      switch (action.wID)
       {
         case Action.ActionType.ACTION_PARENT_DIR:
           if (GetPrevFilmList()) return;
@@ -1428,7 +1433,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (GetPrevFilmList())
                 return;
               else
-                base.OnAction(actionType);
+                base.OnAction(action);
             Change_view(conf.WStrSort.ToLower());
             this.SetDummyControlsForFacade(listLevel);
             return;
@@ -1445,16 +1450,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIWindowManager.ActivateWindow(Prev_MenuID);
             return;
           }
-        case Action.ActionType.ACTION_CONTEXT_MENU:
-          if (facadeView.SelectedListItemIndex > -1)
-          {
-            if (!(facadeView.Focus)) GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-            Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
-            return;
-          }
-          break;
         case Action.ActionType.ACTION_KEY_PRESSED:
-          base.OnAction(actionType);
+          base.OnAction(action);
           break;
         case Action.ActionType.ACTION_PLAY:
         case Action.ActionType.ACTION_MUSIC_PLAY:
@@ -1464,19 +1461,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case Action.ActionType.ACTION_NEXT_PICTURE:
           // Cycle Artwork
           break;
+        case Action.ActionType.ACTION_CONTEXT_MENU:
+          base.OnAction(action);
+          break;
         default:
-          if (actionType.m_key != null)
+          if (action.m_key != null)
           {
-            if ((actionType.m_key.KeyChar == 112) && facadeView.Focus && !facadeView.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
+            if ((action.m_key.KeyChar == 112) && facadeView.Focus && !facadeView.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
             {
               MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, null);
             }
-            if ((actionType.m_key.KeyChar == 120) && Context_Menu)
+            if ((action.m_key.KeyChar == 120) && Context_Menu)
             {
               Context_Menu = false;
               return;
             }
-            if (actionType.m_key.KeyChar == 120 && facadeView.Focus && !facadeView.SelectedListItem.IsFolder)
+            if (action.m_key.KeyChar == 120 && facadeView.Focus && !facadeView.SelectedListItem.IsFolder)
             {
               // context menu for update or suppress entry
               Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
@@ -1484,9 +1484,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          if (actionType.wID.ToString().Substring(0, 6) == "REMOTE")
+          if (action.wID.ToString().Substring(0, 6) == "REMOTE")
             return;
-          base.OnAction(actionType);
+          base.OnAction(action);
           break;
       }
     }
@@ -1496,6 +1496,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //---------------------------------------------------------------------------------------
     protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
     {
+      LogMyFilms.Debug("OnClicked() started");
       //if (control == this.viewMenuButton)
       //{
       //  showViewSwitchDialog();
@@ -1503,7 +1504,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  return;
       //}
 
-      //if (actionType != MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM) return; // some other events raised onClicked too for some reason?
+      //if (action != MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM) return; // some other events raised onClicked too for some reason?
       base.OnClicked(controlId, control, actionType);
     }
 
@@ -1522,9 +1523,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Do things here ...        
           //return result;
           return base.OnMessage(messageType);
+          //break;
 
         case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
-          break;
+          return base.OnMessage(messageType);
+          //return true;  
+          //break;
 
         case GUIMessage.MessageType.GUI_MSG_CLICKED:
           //---------------------------------------------------------------------------------------
@@ -1900,7 +1904,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     bool GetPrevFilmList()
     {
       Prev_ItemID = -1;
-      Prev_wLabel = string.Empty;
+      Prev_Label = string.Empty;
       string SelItem;
       if (conf.StrTitleSelect == "")
       {
@@ -1995,7 +1999,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       string s = "";
       Prev_ItemID = -1; 
-      Prev_wLabel = string.Empty;
+      Prev_Label = string.Empty;
       if (conf.Boolselect)
       {
         string sLabel = conf.Wselectedlabel;
@@ -2344,7 +2348,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Load_Lstdetail(GUIListItem currentItem)
     {
       LogMyFilms.Debug("Load_Lstdetail: ItemId = " + currentItem.ItemId + ", label = " + currentItem.Label + ", TVtag = " + currentItem.TVTag);
-      if (currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_wLabel)
+      if (currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label)
       {
         LogMyFilms.Debug("(Load_Lstdetail): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
         return;
@@ -2360,7 +2364,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       Prev_ItemID = currentItem.ItemId;
-      Prev_wLabel = currentItem.Label;
+      Prev_Label = currentItem.Label;
 
       if ((currentItem.IsFolder) && (MyFilms.conf.Boolselect))
       {
@@ -2501,9 +2505,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void item_OnItemSelected(GUIListItem item, GUIControl parent)
     {
       LogMyFilms.Debug("Call item_OnItemSelected()with options - item: '" + item.ItemId + "', SelectedListItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Label: '" + facadeView.SelectedListItem.Label + "', TVtag: '" + item.TVTag.ToString() + "'");
-      if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_wLabel)
+      if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label)
       {
-        LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_wLabel (" + Prev_wLabel + ") -> return without action !");
+        LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
         return;
       }
 
@@ -2527,7 +2531,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //GUIControl.ShowControl(GetID, 34);
         }
       }
-      LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_wLabel (" + Prev_wLabel + ") -> return without action !");
+      LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
       //Load_Lstdetail(item.ItemId, true, item.Label);
     }
 
@@ -2919,7 +2923,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       //GUIListItem item = new GUIListItem();
       Prev_ItemID = -1;
-      Prev_wLabel = string.Empty;
+      Prev_Label = string.Empty;
       string champselect = "";
       string wchampselect = "";
       ArrayList w_tableau = new ArrayList();

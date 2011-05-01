@@ -378,69 +378,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (messageType.Message)
             {
                 case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-                    ////---------------------------------------------------------------------------------------
-                    //// Windows Init
-                    ////---------------------------------------------------------------------------------------
-                    //LogMyFilms.Debug("Message - WINDOWS_INIT - Starting");
-                    //bool result = base.OnMessage(messageType);
-                    //if (ImgDetFilm != null)
-                    //    if (ImgDetFilm.IsVisible)
-                    //        ImgDetFilm.Refresh();
-                    //    else if (ImgDetFilm2!= null)
-                    //      if (ImgDetFilm2.IsVisible)
-                    //        ImgDetFilm2.Refresh();
+                    base.OnMessage(messageType); 
+                    return true; 
+                    //break;
 
-                    ////base.OnMessage(messageType); // Guzzi: Removing does not work properly...
-                    //wGetID = GetID;
-                    //GUIControl.ShowControl(GetID, 35);
-                    //// ToDo: Should be unhidden, if ActorThumbs are implemented
-                    //GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
-                    //setProcessAnimationStatus(false, m_SearchAnimation);
-
-                    //// trakt scrobble background thread
-                    ////TraktScrobbleUpdater.WorkerSupportsCancellation = true;
-                    ////TraktScrobbleUpdater.DoWork += new DoWorkEventHandler(TraktScrobble_DoWork);
-
-                    //g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
-                    //g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
-                    //g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
-                    //m_directory.SetExtensions(MediaPortal.Util.Utils.VideoExtensions);
-                    //if (MyFilms.conf.StrTxtSelect.Length == 0)
-                    //    clearGUIProperty("select");
-                    //    //GUIControl.HideControl(GetID, (int)Controls.CTRL_TxtSelect);
-                    //else
-                    //{
-                    //    setGUIProperty("select", MyFilms.conf.StrTxtSelect.Replace(MyFilms.conf.TitleDelim, @"\"));
-                    //    //GUIControl.ShowControl(GetID, (int)Controls.CTRL_TxtSelect);
-                    //}
-                    //afficher_init(MyFilms.conf.StrIndex); //Populate DataSet & Convert ItemId passed in initially to Index within DataSet
-                    //int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
-
-                    //setProcessAnimationStatus(false, m_SearchAnimation);
-                    //afficher_detail(true);
-                    //MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
-                    //LogMyFilms.Debug("Message - WINDOWS_INIT - Finished");
-                    //return result;
-                    break;
-
-                case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
-                    //if (global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig != "")
-                    //    global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.SaveConfiguration(global::MyFilmsPlugin.MyFilms.MyFilmsGUI.Configuration.CurrentConfig, MyFilms.conf.StrIndex, MyFilms.conf.StrTIndex);
-                    //using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
-                    //{
-                    //    string currentmoduleid = "7986";
-                    //    bool currentmodulefullscreen = (GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_TVFULLSCREEN || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_MUSIC || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO || GUIWindowManager.ActiveWindow == (int)GUIWindow.Window.WINDOW_FULLSCREEN_TELETEXT);
-                    //    string currentmodulefullscreenstate = GUIPropertyManager.GetProperty("#currentmodulefullscreenstate");
-                    //    // if MP was closed/hibernated by the use of remote control, we have to retrieve the fullscreen state in an alternative manner.
-                    //    if (!currentmodulefullscreen && currentmodulefullscreenstate == "True")
-                    //        currentmodulefullscreen = true;
-                    //    xmlreader.SetValue("general", "lastactivemodule", currentmoduleid);
-                    //    xmlreader.SetValueAsBool("general", "lastactivemodulefullscreen", currentmodulefullscreen);
-                    //    LogMyFilms.Debug("SaveLastActiveModule - module {0}", currentmoduleid);
-                    //    LogMyFilms.Debug("SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
-                    //}
-                    //return true;
-                    break;
+                case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT:
+                    base.OnMessage(messageType); 
+                    return true;
+                    //break;
 
                 case GUIMessage.MessageType.GUI_MSG_CD_REMOVED:
                     //---------------------------------------------------------------------------------------
@@ -585,10 +530,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (iControl == (int)Controls.CTRL_BtnActorThumbs)
                     {
                       // Show Actor Details Screen
-                      //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
                       GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
                       // Hier Aktivitäten wie z.b. ListControl für Actors?
-                      GUIWindowManager.ShowPreviousWindow();
+                      //GUIWindowManager.ShowPreviousWindow();
                       //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                       return true;
                     }
@@ -3389,13 +3333,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group)
         //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
         {
-            //LogMyFilms.Debug("(SearchFanart) - Vars: wtitle2 = '" + wtitle2 + "'");
-            //LogMyFilms.Debug("(SearchFanart) - Vars: main (true for mainscreen, false for Detail) = '" + main + "'");
-            //LogMyFilms.Debug("(SearchFanart) - Vars: searched (dir or file) = '" + searched + "'");
-            //LogMyFilms.Debug("(SearchFanart) - Vars: rep (true for grouped view) = '" + rep + "'");
-            //LogMyFilms.Debug("(SearchFanart) - Vars: filecover = '" + filecover + "'");
-            //LogMyFilms.Debug("(SearchFanart) - Vars: group = '" + group + "'");
-            //LogMyFilms.Debug("(SearchFanart) - Config: MyFilms.conf.StrFanart = '" + MyFilms.conf.StrFanart + "'");
             string[] wfanart = new string[2];
             wfanart[0] = " ";
             wfanart[1] = " ";
@@ -3404,8 +3341,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (wtitle2.Contains(MyFilms.conf.TitleDelim))
                   wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MyFilms.conf.TitleDelim) + 1); // Removed "trim", as there is no matching in details, if spacees are removed! old: wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
                 wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
-                //LogMyFilms.Debug("(SearchFanart) - wtitle2-cleaned = '" + wtitle2 + "'");
-                //LogMyFilms.Debug("(SearchFanart) - MyFilms.conf.StrFanart = '" + MyFilms.conf.StrFanart + "'");
 
                 if (!MyFilms.conf.StrFanart)
                     return wfanart;
@@ -3439,7 +3374,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         safeName = MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
                     }
-                //LogMyFilms.Debug("(SearchFanart) - safename = '" + safeName + "'");
 
                 
                 try //Added to avoid crash with very long filenames - better is if user configures titledelimiters properly !
