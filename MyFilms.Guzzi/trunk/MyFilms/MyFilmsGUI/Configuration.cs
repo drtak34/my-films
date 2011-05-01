@@ -162,9 +162,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("MFC: switch (StrFileType) '" + StrFileType.ToString() + "'"); 
                 switch (StrFileType)
                 {
-                    case "0":
-                        break;
-                    case "1":
+                    case "0": // ANT Movie Catalog
+                    case "10":// ANT Movie Catalog extended
+                      break;
+                    case "1": // DVD Profiler
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -183,7 +184,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "2":
+                    case "2": // Movie Collector V7.1.4
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -201,7 +202,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "3":
+                    case "3": // MyMovies
                         if (create_temp)
                         {
                             string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -237,43 +238,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "5": // XMM
-                        if (create_temp)
-                        {
-                            string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
-                            string destFile = WStrPath + "\\" + StrFileXml.Substring(StrFileXml.LastIndexOf(@"\") + 1, StrFileXml.Length - StrFileXml.LastIndexOf(@"\") - 5) + "_tmp.xml";
-                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(StrFileXml))))
-                            {
-                                StrFileXml = destFile;
-                                break;
-                            }
-                            bool OnlyFile = false;
-                            OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
-                            XMM xmm = new XMM();
-                            StrFileXml = xmm.ConvertXMM(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile);
-                        }
-                        else
-                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
-                        break;
-                    case "6":
-                        if (create_temp)
-                        {
-                            string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
-                            string destFile = WStrPath + "\\" + StrFileXml.Substring(StrFileXml.LastIndexOf(@"\") + 1, StrFileXml.Length - StrFileXml.LastIndexOf(@"\") - 5) + "_tmp.xml";
-                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(StrFileXml))))
-                            {
-                                StrFileXml = destFile;
-                                break;
-                            }
-                            bool OnlyFile = false;
-                            OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
-                            XbmcNfo nfo = new XbmcNfo();
-                            StrFileXml = nfo.ConvertXbmcNfo(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, StrStorage, OnlyFile, TitleDelim);
-                        }
-                        else
-                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
-                        break;
-                    case "9": // EAX 3.x
+                    case "5": // EAX 3.x
                         if (create_temp)
                         {
                           string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -291,7 +256,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "10": // PVD 0.9.9.21
+                    case "6": // PVD 0.9.9.21
                         if (create_temp)
                         {
                           string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -309,7 +274,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
                         break;
-                    case "11": // MovingPicturesXML
+                    case "7": // XMM
+                        if (create_temp)
+                        {
+                            string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
+                            string destFile = WStrPath + "\\" + StrFileXml.Substring(StrFileXml.LastIndexOf(@"\") + 1, StrFileXml.Length - StrFileXml.LastIndexOf(@"\") - 5) + "_tmp.xml";
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(StrFileXml))))
+                            {
+                                StrFileXml = destFile;
+                                break;
+                            }
+                            bool OnlyFile = false;
+                            OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
+                            XMM xmm = new XMM();
+                            StrFileXml = xmm.ConvertXMM(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, OnlyFile);
+                        }
+                        else
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
+                        break;
+                    case "8": // XBMC fulldb export (all movies in one DB)
+                        if (create_temp)
+                        {
+                            string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
+                            string destFile = WStrPath + "\\" + StrFileXml.Substring(StrFileXml.LastIndexOf(@"\") + 1, StrFileXml.Length - StrFileXml.LastIndexOf(@"\") - 5) + "_tmp.xml";
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(StrFileXml))))
+                            {
+                                StrFileXml = destFile;
+                                break;
+                            }
+                            bool OnlyFile = false;
+                            OnlyFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyFile", false);
+                            XbmcNfo nfo = new XbmcNfo();
+                            StrFileXml = nfo.ConvertXbmcNfo(StrFileXml, StrPathImg, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, StrStorage, OnlyFile, TitleDelim);
+                        }
+                        else
+                          StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
+                        break;
+                    case "9": // MovingPicturesXML
                         if (create_temp)
                         {
                           string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
@@ -326,6 +327,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                         else
                           StrFileXml = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntCatalogTemp", string.Empty);
+                        break;
+                    case "11": // XBMC NFO reader
                         break;
                 }
                 StrSelect = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "StrSelect", string.Empty);

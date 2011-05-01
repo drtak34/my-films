@@ -3915,13 +3915,13 @@
             "Movie Collector (V7.1.4)",
             "MyMovies (V3.18)",
             "Eax Movie Catalog (2.5.0)",
-            "eXtreme Movie Manager (V7.1.1.1)",
-            "XBMC (V10.0)",
-            "MyFilms extended Database",
-            "XBMC nfo reader",
             "Eax Movie Catalog (3.0.9 b5)",
             "PVD - Personal Video Database (0.9.9.21)",
-            "MovingPicturesXML (V1.2 process plugin)"});
+            "eXtreme Movie Manager (V7.1.1.1)",
+            "XBMC (V10.0)",
+            "MovingPicturesXML (V1.2 process plugin)",
+            "MyFilms extended Database",
+            "XBMC nfo reader"});
           this.CatalogType.Location = new System.Drawing.Point(533, 14);
           this.CatalogType.Name = "CatalogType";
           this.CatalogType.Size = new System.Drawing.Size(193, 21);

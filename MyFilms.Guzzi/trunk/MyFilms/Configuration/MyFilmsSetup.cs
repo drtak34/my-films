@@ -111,8 +111,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
               this.buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
               // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
-              //CatalogType.Items.Remove("MyFilms extended Database");
-              //CatalogType.Items.Remove("XBMC nfo reader");
+              CatalogType.Items.Remove("MyFilms extended Database");
+              CatalogType.Items.Remove("XBMC nfo reader");
               //CatalogType.Items.Remove(CatalogType.Items[7]); // MF internal DB
               //CatalogType.Items.RemoveAt(8); // XBMC nfo reader (deparate files)
               //CatalogType.Items.Add("test");
@@ -126,18 +126,18 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //    this.General.TabPages.Insert(loc, this.tabPageSave);
             //  }
             //}
-            //"Ant Movie Catalog (V3.5.1.2)",
-            //"DVD Profiler (V3.7.2)",
-            //"Movie Collector (V7.1.4)",
-            //"MyMovies (V3.18)",
-            //"Eax Movie Catalog (2.5.0)",
-            //"eXtreme Movie Manager (V7.1.1.1)",
-            //"XBMC (V10.0)",
-            //"MyFilms extended Database",
-            //"XBMC nfo reader",
-            //"Eax Movie Catalog (3.0.9 b5)",
-            //"PVD - Personal Video Database (0.9.9.21)",
-            //"MovingPicturesXML (V1.2 process plugin)"});
+//"Ant Movie Catalog (V3.5.1.2)",
+//"DVD Profiler (V3.7.2)",
+//"Movie Collector (V7.1.4)",
+//"MyMovies (V3.18)",
+//"Eax Movie Catalog (2.5.0)",
+//"eXtreme Movie Manager (V7.1.1.1)",
+//"XBMC (V10.0)",
+//"MyFilms extended Database",
+//"XBMC nfo reader",
+//"Eax Movie Catalog (3.0.9 b5)",
+//"PVD - Personal Video Database (0.9.9.21)",
+//"MovingPicturesXML (V1.2 process plugin)"});
 
             //this.label_VersionNumber.Text = "Version 5.1.0 alpha";
             LogMyFilms.Info("MFsetup: Started with version '" + label_VersionNumber.Text + "'");
@@ -277,7 +277,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               }
               else // Fields not supported by AMC - (dc.ColumnName != "Picture") && (dc.ColumnName != "Contents_Id") && (dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")
               {
-                if (CatalogType.SelectedIndex == 5 && (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" || dc.ColumnName == "Certification"))
+                if (CatalogType.SelectedIndex == 7 && (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" || dc.ColumnName == "Certification"))
                 {
                   AntSearchField.Items.Add(dc.ColumnName);
                   AntUpdField.Items.Add(dc.ColumnName);
@@ -360,7 +360,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 //eXtreme Movie Manager (V7.1.0.2)
                 //XBMC (V10.0)
                 //MyFilms DB (ANT with extended Database Fields)
-              if (CatalogType.Text == "Ant Movie Catalog (V3.5.1.2)" || CatalogType.Text == "Xbmc NFO")
+              if (CatalogType.SelectedIndex == 0 || CatalogType.SelectedIndex == 10 || CatalogType.SelectedIndex == 11) // AMC, AMCextended or XBMC NFO reader
                 {
                     if (System.Windows.Forms.MessageBox.Show("That File doesn't exists, do you want to create it ?", "Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -744,20 +744,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             switch (CatalogType.SelectedIndex)
             {
               case 0: // ANT Movie Catalog
-              case 7: // Starter Settings ANT DB
+              case 10:// Starter Settings ANT extended DB
                 break;
               case 1: //DVD Profiler
               case 2: // Movie Collector V7.1.4
               case 3: // MyMovies
               case 4: // EAX Movie Catalog 2.5.0
-              case 5: // eXtreme Movie Manager
-              case 6: // XBMC fulldb export (all movies in one DB)
-              case 9:  // EAX Movie Catalog 3.0.9 (beta5)
-              case 10: // PVD PersonalVideoDatabase V0.9.9.21
-              case 11: // MovingPicturesXML V1.2
+              case 5: // EAX Movie Catalog 3.0.9 (beta5)
+              case 6: // PVD PersonalVideoDatabase V0.9.9.21
+              case 7: // eXtreme Movie Manager
+              case 8: // XBMC fulldb export (all movies in one DB)
+              case 9: // MovingPicturesXML V1.2
                 destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                 break;
-              case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+              case 11: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
                 destFile = MesFilmsCat.Text;
                 break;
               default:
@@ -2731,7 +2731,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     switch (CatalogType.SelectedIndex)
                     {
                         case 0: // ANT Movie Catalog
-                        case 7: // Starter Settings ANT DB
+                        case 10: // Starter Settings ANT DB
                             mydivx.ReadXml(MesFilmsCat.Text);
                             break;
                         case 1: //DVD Profiler
@@ -2774,7 +2774,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             EaxMovieCatalog emc = new EaxMovieCatalog();
                             mydivx.ReadXml(emc.ConvertEaxMovieCatalog(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
-                        case 5: //eXtreme Movie Manager
+                        case 5: // EAX Movie Catalog 3.0.9 (beta5)
+                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+                            {
+                              mydivx.ReadXml(destFile);
+                              break;
+                            }
+                            EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
+                            mydivx.ReadXml(emc3.ConvertEaxMovieCatalog3(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
+                            break;
+                        case 6: // PVD PersonalVideoDatabase V0.9.9.21
+                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+                            {
+                              mydivx.ReadXml(destFile);
+                              break;
+                            }
+                            PersonalVideoDatabase pvd = new PersonalVideoDatabase();
+                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text, this.chkAddTagline.Checked));
+                            break;
+                        case 7: //eXtreme Movie Manager
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
@@ -2784,7 +2804,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             XMM xmm = new XMM();
                             mydivx.ReadXml(xmm.ConvertXMM(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked));
                             break;
-                        case 6: // XBMC fulldb export (all movies in one DB)
+                        case 8: // XBMC fulldb export (all movies in one DB)
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                             if (System.IO.File.Exists(destFile))
                             {
@@ -2801,37 +2821,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             XbmcDb Xdb = new XbmcDb();
                             mydivx.ReadXml(Xdb.ConvertXbmcDb(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, AntStorage.Text, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
-                        case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
-                            destFile = MesFilmsCat.Text;
-                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
-                            {
-                              mydivx.ReadXml(destFile);
-                              break;
-                            }
-                            XbmcNfo nfo = new XbmcNfo();
-                            mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, AntStorage.Text, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
-                            break;
-                        case 9: // EAX Movie Catalog 3.0.9 (beta5)
-                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
-                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
-                            {
-                              mydivx.ReadXml(destFile);
-                              break;
-                            }
-                            EaxMovieCatalog3 emc3 = new EaxMovieCatalog3();
-                            mydivx.ReadXml(emc3.ConvertEaxMovieCatalog3(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
-                            break;
-                        case 10: // PVD PersonalVideoDatabase V0.9.9.21
-                            destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
-                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
-                            {
-                              mydivx.ReadXml(destFile);
-                              break;
-                            }
-                            PersonalVideoDatabase pvd = new PersonalVideoDatabase();
-                            mydivx.ReadXml(pvd.ConvertPersonalVideoDatabase(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text, this.chkAddTagline.Checked));
-                            break;
-                        case 11: // MovingPicturesXML
+                        case 9: // MovingPicturesXML
                             destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
                             if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
                             {
@@ -2840,6 +2830,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                             }
                             MovingPicturesXML mopi = new MovingPicturesXML();
                             mydivx.ReadXml(mopi.ConvertMovingPicturesXML(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, chkDVDprofilerOnlyFile.Checked));
+                            break;
+                        case 11: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+                            destFile = MesFilmsCat.Text;
+                            if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+                            {
+                              mydivx.ReadXml(destFile);
+                              break;
+                            }
+                            XbmcNfo nfo = new XbmcNfo();
+                            mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, DestinationTagline, DestinationTags, DestinationCertification, DestinationWriter, AntStorage.Text, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
                             break;
                     }
 
@@ -3278,7 +3278,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void MesFilmsCat_TextChanged(object sender, EventArgs e)
         {
-          if (CatalogType.SelectedIndex == 4 || CatalogType.SelectedIndex == 9) // EAX Movie Catalog 2.5.0 or 3.0.9
+          if (CatalogType.SelectedIndex == 4 || CatalogType.SelectedIndex == 5) // EAX Movie Catalog 2.5.0 or 3.0.9
                 if (MesFilmsImg.Text.Length == 0)
                     MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures";
         }
@@ -4485,7 +4485,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           Config_Name.Text = newConfig_Name;
           this.Refresh_Items(true);
 
-          CatalogType.SelectedIndex = 0; // can be "7" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
+          CatalogType.SelectedIndex = 0; // can be "10" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
 
           // Ask user to select existing or create new catalog...
           bool useExistingCatalog = true;
@@ -4989,27 +4989,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           switch (CatalogType.SelectedIndex)
           {
             case 0: // ANT Movie Catalog
-            case 7: // Starter Settings ANT DB
+            case 10:// Starter Settings ANT extnded DB
               break;
-            case 1: //DVD Profiler
-              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
-              break;
+            case 1: // DVD Profiler
             case 2: // Movie Collector V7.1.4
             case 3: // MyMovies
             case 4: // EAX Movie Catalog 2.5.0
-            case 5: //eXtreme Movie Manager
-            case 6: // XBMC fulldb export (all movies in one DB)
+            case 5: // EAX Movie Catalog 3.0.9 (beta5)
+            case 6: // PVD PersonalVideoDatabase V0.9.9.21
+            case 7: // eXtreme Movie Manager
+            case 8: // XBMC fulldb export (all movies in one DB)
+            case 9: // MovingPicturesXML V1.2
               destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
               break;
-            case 8: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+            case 11: // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
               destFile = MesFilmsCat.Text;
-              break;
-            case 9: // EAX Movie Catalog 3.0.9 (beta5)
-              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
-              break;
-            case 10: // PVD PersonalVideoDatabase V0.9.9.21
-            case 11: // MocingPicturesXML V1.2
-              destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
               break;
             default:
               break;

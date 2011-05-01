@@ -3194,7 +3194,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             switch (conf.StrFileType) // perform catalog specific searches ...
             {
-              case "5": // XMM artist thumbs: e.g. Alex-Revan_101640.jpg
+              case "0": // ANT Movie Catalog
+                break;
+              case "10":// Starter Settings ANT extnded DB
+                break;
+              case "1": // DVD Profiler
+                break;
+              case "2": // Movie Collector V7.1.4
+                break;
+              case "3": // MyMovies
+                break;
+              case "4": // EAX MC 2.5.0
+              case "5": // EAX 3.x
+                if (System.IO.File.Exists(strPathArtist + itemlabel.Replace(" ", ".") + ".jpg")) strThumbSource = strPathArtist + itemlabel.Replace(" ", ".") + ".jpg";
+                break;
+              case "6": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
+                if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in PVD picture directory
+                {
+                  string searchname = HTMLParser.removeHtml(itemlabel); // replaces special character "á" and other special chars !
+                  searchname = searchname + "*.jpg";
+                  string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
+                  if (files.Count() > 0)
+                    strThumbSource = files[0];
+                }
+                break;
+              case "7": // XMM artist thumbs: e.g. Alex-Revan_101640.jpg
                 if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in XMM picture directory
                 {
                   string searchname = HTMLParser.removeHtml(itemlabel); // replaces special character "á" and other special chars !
@@ -3205,22 +3229,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     strThumbSource = files[0];
                 }
                 break;
-              case "4": // EAX MC 2.5.0
-              case "9": // EAX 3.x
-                if (System.IO.File.Exists(strPathArtist + itemlabel.Replace(" ", ".") + ".jpg")) strThumbSource = strPathArtist + itemlabel.Replace(" ", ".") + ".jpg";
+              case "8": // XBMC fulldb export (all movies in one DB)
                 break;
-
-              case "10": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
-                if (!string.IsNullOrEmpty(conf.StrPathArtist)) //Search matching files in PVD picture directory
-                {
-                  string searchname = HTMLParser.removeHtml(itemlabel); // replaces special character "á" and other special chars !
-                  searchname = searchname + "*.jpg";
-                  string[] files = Directory.GetFiles(conf.StrPathArtist, searchname, SearchOption.TopDirectoryOnly);
-                  if (files.Count() > 0)
-                    strThumbSource = files[0];
-                }
+              case "9": // MovingPicturesXML V1.2
                 break;
-
+              case "11": // XBMC Nfo (separate nfo files, to scan dirs - MovingPictures or XBMC)
+                break;
               default:
                 break;
             }
