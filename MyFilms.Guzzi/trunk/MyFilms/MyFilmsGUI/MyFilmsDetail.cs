@@ -280,16 +280,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MyFilmsDetail: OnAction " + actionType.wID.ToString());
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
-                MyFilms.conf.LastID = MyFilms.ID_MyFilms;
-                GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
+              if (BtnMaj.Focus) // first switch to main details window before returning to main window ....
+              {
+                GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
                 return;
+              }
+              MyFilms.conf.LastID = MyFilms.ID_MyFilms;
+              GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
+              return;
             }
 
-            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU)
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU) // context menu for options  like PlayTrailers or Updates
             {
                 LogMyFilms.Debug("MyFilmsDetail : ACTION_CONTEXT_MENU detected ! ");
-                // context menu for options  like PlayTrailers or Updates
-                //MyFilms.Context_Menu_Movie();
                 if (BtnMaj.Focus)
                 {
                   GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
@@ -492,8 +495,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     if (iControl == (int)Controls.CTRL_BtnMaj)
                     {    // Update items
-                        Update_XML_Items();
-                        GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu
+                        Change_Menu("mainmenu");  // was: Update_XML_Items();
+                        // GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu
                         return true;
                     }
                     if (iControl == (int)Controls.CTRL_BtnPlayTrailer)

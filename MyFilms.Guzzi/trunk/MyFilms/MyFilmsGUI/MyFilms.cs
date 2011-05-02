@@ -617,7 +617,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //MyFilmsDetail.clearGUIProperty("Fanart2");
 
       //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - Start");
-      GUITextureManager.CleanupThumbs();
 
       if (Configuration.CurrentConfig != "")
       {
@@ -639,6 +638,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
 
+      GUITextureManager.CleanupThumbs();
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
       Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
       base.OnPageDestroy(new_windowId);
@@ -764,7 +764,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("OnShowContextMenu() started");
       if (facadeView.SelectedListItemIndex > -1)
       {
-        if (!(facadeView.Focus)) GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+        if (!(facadeView.Focus)) 
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
         Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
         return;
       }
@@ -1445,6 +1446,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (GetPrevFilmList()) return;
           break;
         case Action.ActionType.ACTION_PREVIOUS_MENU:
+          if (!facadeView.Focus)
+          {
+            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // set focus to facade, if e.g. menu buttons had focus (after global options etc.)
+            return;
+          }
           if (conf.Boolselect || conf.Boolview)
           {
             Change_LayOut(MyFilms.conf.StrLayOut);
@@ -1530,7 +1536,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  return;
       //}
 
-      //if (action != MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM) return; // some other events raised onClicked too for some reason?
+      //if (actionType != MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM) return; // some other events raised onClicked too for some reason?
       base.OnClicked(controlId, control, actionType);
     }
 
@@ -1545,16 +1551,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (messageType.Message)
       {
         case GUIMessage.MessageType.GUI_MSG_WINDOW_INIT:
-          //bool result = base.OnMessage(messageType);
-          // Do things here ...        
-          //return result;
           return base.OnMessage(messageType);
-          //break;
 
-        case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT: //called when exiting plugin either by prev menu or pressing home button
+        case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT:
           return base.OnMessage(messageType);
-          //return true;  
-          //break;
 
         case GUIMessage.MessageType.GUI_MSG_CLICKED:
           //---------------------------------------------------------------------------------------
@@ -1567,165 +1567,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if ((iControl == (int)Controls.CTRL_BtnSearchT) && (conf.Boolselect))
             conf.Boolselect = false;
           if (iControl == (int)Controls.CTRL_BtnSearchT)
-          // Search dialog search
-          {
-            GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-            if (dlg == null) return true;
-            dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(137) + " ..."); // Search ...
-            System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
-            //Add Menuentries here
-
-            if (MyFilmsDetail.ExtendedStartmode("Global Random Movie Search"))
-            {
-              //Guzzi: RandomMovie Search added
-              dlg.Add(GUILocalizeStrings.Get(10798621));//Search global movies by randomsearch (singlesearch, areasearch)
-              choiceSearch.Add("randomsearch");
-            }
-
-            if (MyFilms.conf.StrSearchList[0].Length > 0)
-            {
-              dlg.Add(GUILocalizeStrings.Get(10798615));//Search global movies by property
-              choiceSearch.Add("globalproperty");
-            }
-
-            if (MyFilmsDetail.ExtendedStartmode("Global Search Movies by Areas"))
-            {
-              dlg.Add(GUILocalizeStrings.Get(10798645)); //Search global movies by areas
-              choiceSearch.Add("globalareas");
-            }
-
-            dlg.Add(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(369));//Title
-            choiceSearch.Add("title");
-
-            dlg.Add(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(344));//Actors
-            choiceSearch.Add("actors");
-            for (int i = 0; i < 2; i++)
-            {
-              if (MyFilms.conf.StrSearchItem[i] != "(none)" && MyFilms.conf.StrSearchItem[i].Length > 0)
-              {
-                if (MyFilms.conf.StrSearchText[i].Length == 0)
-                  dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]);//Specific search with no text
-                else
-                  dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]);//Specific search  text
-                choiceSearch.Add(string.Format("search{0}", i.ToString()));
-              }
-            }
-            if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
-            {
-              dlg.Add(GUILocalizeStrings.Get(1079866));//Search related movies by persons
-              choiceSearch.Add("analogyperson");
-            }
-            if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder && MyFilms.conf.StrSearchList[0].Length > 0)
-            {
-              dlg.Add(GUILocalizeStrings.Get(10798614));//Search related movies by property
-              choiceSearch.Add("analogyproperty");
-            }
-
-            dlg.DoModal(GetID);
-
-            if (dlg.SelectedLabel == -1)
-              return true;
-            if (choiceSearch[dlg.SelectedLabel] == "analogyperson")
-            {
-              SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId);
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-              dlg.DeInit();
-              return base.OnMessage(messageType);
-            }
-
-            if (choiceSearch[dlg.SelectedLabel] == "analogyproperty")
-            {
-              //SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId, MesFilms.conf.StrSearchList); // This version takes properties from config - but should be all anyway ...
-              // Define Search Properties here (hardcoded)
-              //string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
-              //SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId, PropertyList);
-              SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId);
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-              dlg.DeInit();
-              return base.OnMessage(messageType);
-            }
-            if (choiceSearch[dlg.SelectedLabel] == "randomsearch")
-            {
-              SearchMoviesbyRandomWithTrailer();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-              dlg.DeInit();
-              return base.OnMessage(messageType);
-            }
-            if (choiceSearch[dlg.SelectedLabel] == "globalareas")
-            {
-              SearchMoviesbyAreas();
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-              dlg.DeInit();
-              return base.OnMessage(messageType);
-            }
-            if (choiceSearch[dlg.SelectedLabel] == "globalproperty")
-            {
-              SearchMoviesbyProperties(MyFilms.conf.StrSearchList);
-              GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-              dlg.DeInit();
-              return base.OnMessage(messageType);
-            }
-            VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-            if (null == keyboard) return true;
-            keyboard.Reset();
-            keyboard.Text = "";
-            keyboard.DoModal(GetID);
-            if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
-            {
-              switch (choiceSearch[dlg.SelectedLabel])
-              {
-                case "title":
-                  if (control_searchText(keyboard.Text))
-                  {
-                    listLevel = Listlevel.Movie;
-                    conf.StrSelect = conf.StrTitle1.ToString() + " like '*" + keyboard.Text + "*'";
-                    //conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]";
-                    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]";
-                    conf.StrTitleSelect = "";
-                    GetFilmList();
-                  }
-                  else
-                    return false;
-                  break;
-                case "actors":
-                  if (control_searchText(keyboard.Text))
-                  {
-                    listLevel = Listlevel.Person;
-                    conf.WStrSort = "ACTORS";
-                    conf.Wselectedlabel = "";
-                    conf.WStrSortSens = " ASC";
-                    BtnSrtBy.IsAscending = true;
-                    conf.StrActors = keyboard.Text;
-                    getSelectFromDivx("Actors like '*" + keyboard.Text + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
-                  }
-                  else
-                    return false;
-                  break;
-                case "search0":
-                case "search1":
-                  int i = 0;
-                  if (choiceSearch[dlg.SelectedLabel] == "search1")
-                    i = 1;
-                  AntMovieCatalog ds = new AntMovieCatalog();
-                  if (control_searchText(keyboard.Text))
-                  {
-                    if (ds.Movie.Columns[conf.StrSearchItem[i].ToString()].DataType.Name == "string")
-                      conf.StrSelect = conf.StrSearchItem[i].ToString() + " like '*" + keyboard.Text + "*'";
-                    else
-                      conf.StrSelect = conf.StrSearchItem[i].ToString() + " = '" + keyboard.Text + "'";
-                    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text + @"*]";
-                    conf.StrTitleSelect = "";
-                    GetFilmList();
-                  }
-                  else
-                    return false;
-                  break;
-              }
-            }
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
-            dlg.DeInit();
-          }
+            // Search dialog search
+            Change_Search_Options();
           if (iControl == (int)Controls.CTRL_BtnSrtBy)
           // Choice of Sort Method
           {
@@ -1807,14 +1650,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Change Selected Option
           {
             Change_Option();
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
+            // GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade // Reremoved for Doug !
             return base.OnMessage(messageType);
           }
           if (iControl == (int)Controls.CTRL_GlobalOverlayFilter)
           // Change Selected Option - call global filters directly
           {
             Change_Global_Filters();
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
+            // GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade // Reremoved for Doug !
             return base.OnMessage(messageType);
           }
           if (iControl == (int)Controls.CTRL_ToggleGlobalUnwatchedStatus)
@@ -1839,7 +1682,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //else
             //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
 
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade
+            // GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // Added to return to facade // Reremoved for Doug !
             return base.OnMessage(messageType);
           }
           //if ((iControl == (int)Controls.CTRL_BtnLayout) && !conf.Boolselect) // conf.Boolelect is true, if it's a movie facade - so false if it's grouped views ...
@@ -1897,11 +1740,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 listLevel = Listlevel.None;
                 this.SetDummyControlsForFacade(listLevel);
                 
-                //GUITextureManager.CleanupThumbs(); // Guzzi: Removed to keep animations!
+                // GUITextureManager.CleanupThumbs(); // Guzzi: Removed to keep animations! - do cleanup later in OnPageDestroy!
                 GUIWindowManager.ActivateWindow(ID_MyFilmsDetail);
               }
-              else
-              // View List as selected
+              else // View List as selected
               {
                 conf.Wselectedlabel = facadeView.SelectedListItem.Label;
                 Change_LayOut(MyFilms.conf.StrLayOut);
@@ -2779,7 +2621,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
     //--------------------------------------------------------------------------------------------
-    //  Select main Options
+    //  Select main global filters
     //--------------------------------------------------------------------------------------------
     private void Change_Global_Filters()
     {
@@ -2828,6 +2670,171 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("Call change_global_filters menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
       Change_view(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
       return;
+    }
+
+    private void Change_Search_Options()
+    {
+      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      if (dlg == null) return; // true;
+
+      dlg.Reset();
+      dlg.SetHeading(GUILocalizeStrings.Get(137) + " ..."); // Search ...
+      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      //Add Menuentries here
+
+      if (MyFilmsDetail.ExtendedStartmode("Global Random Movie Search"))
+      {
+        //Guzzi: RandomMovie Search added
+        dlg.Add(GUILocalizeStrings.Get(10798621)); //Search global movies by randomsearch (singlesearch, areasearch)
+        choiceSearch.Add("randomsearch");
+      }
+
+      if (MyFilms.conf.StrSearchList[0].Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(10798615)); //Search global movies by property
+        choiceSearch.Add("globalproperty");
+      }
+
+      if (MyFilmsDetail.ExtendedStartmode("Global Search Movies by Areas"))
+      {
+        dlg.Add(GUILocalizeStrings.Get(10798645)); //Search global movies by areas
+        choiceSearch.Add("globalareas");
+      }
+
+      dlg.Add(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(369)); //Title
+      choiceSearch.Add("title");
+
+      dlg.Add(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(344)); //Actors
+      choiceSearch.Add("actors");
+      for (int i = 0; i < 2; i++)
+      {
+        if (MyFilms.conf.StrSearchItem[i] != "(none)" && MyFilms.conf.StrSearchItem[i].Length > 0)
+        {
+          if (MyFilms.conf.StrSearchText[i].Length == 0) dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
+          else dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
+          choiceSearch.Add(string.Format("search{0}", i.ToString()));
+        }
+      }
+      if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+      {
+        dlg.Add(GUILocalizeStrings.Get(1079866)); //Search related movies by persons
+        choiceSearch.Add("analogyperson");
+      }
+      if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder &&
+          MyFilms.conf.StrSearchList[0].Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(10798614)); //Search related movies by property
+        choiceSearch.Add("analogyproperty");
+      }
+
+      dlg.DoModal(GetID);
+
+      if (dlg.SelectedLabel == -1) 
+        return; // true;
+      if (choiceSearch[dlg.SelectedLabel] == "analogyperson")
+      {
+        SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId, false);
+        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+        dlg.DeInit();
+        return;
+        //return base.OnMessage(messageType);
+      }
+
+      if (choiceSearch[dlg.SelectedLabel] == "analogyproperty")
+      {
+        SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId, false);
+        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+        dlg.DeInit();
+        return;
+        //return base.OnMessage(messageType);
+      }
+      if (choiceSearch[dlg.SelectedLabel] == "randomsearch")
+      {
+        SearchMoviesbyRandomWithTrailer(false);
+        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+        dlg.DeInit();
+        return;
+        //return base.OnMessage(messageType);
+      }
+      if (choiceSearch[dlg.SelectedLabel] == "globalareas")
+      {
+        SearchMoviesbyAreas(false);
+        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+        dlg.DeInit();
+        return;
+        //return base.OnMessage(messageType);
+      }
+      if (choiceSearch[dlg.SelectedLabel] == "globalproperty")
+      {
+        SearchMoviesbyProperties(MyFilms.conf.StrSearchList, false);
+        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+        dlg.DeInit();
+        return;
+        //return base.OnMessage(messageType);
+      }
+      VirtualKeyboard keyboard =
+        (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+      //if (null == keyboard) return true;
+      if (null == keyboard) 
+        return;
+      keyboard.Reset();
+      keyboard.Text = "";
+      keyboard.DoModal(GetID);
+      if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+      {
+        switch (choiceSearch[dlg.SelectedLabel])
+        {
+          case "title":
+            if (control_searchText(keyboard.Text))
+            {
+              listLevel = Listlevel.Movie;
+              conf.StrSelect = conf.StrTitle1.ToString() + " like '*" + keyboard.Text + "*'";
+              //conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]";
+              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(369) + " [*" +
+                                  keyboard.Text + @"*]";
+              conf.StrTitleSelect = "";
+              GetFilmList();
+            }
+            else return; // false;
+            break;
+          case "actors":
+            if (control_searchText(keyboard.Text))
+            {
+              listLevel = Listlevel.Person;
+              conf.WStrSort = "ACTORS";
+              conf.Wselectedlabel = "";
+              conf.WStrSortSens = " ASC";
+              BtnSrtBy.IsAscending = true;
+              conf.StrActors = keyboard.Text;
+              getSelectFromDivx(
+                "Actors like '*" + keyboard.Text + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
+            }
+            else return; // false;
+            break;
+          case "search0":
+          case "search1":
+            int i = 0;
+            if (choiceSearch[dlg.SelectedLabel] == "search1") i = 1;
+            AntMovieCatalog ds = new AntMovieCatalog();
+            if (control_searchText(keyboard.Text))
+            {
+              if (ds.Movie.Columns[conf.StrSearchItem[i].ToString()].DataType.Name == "string") conf.StrSelect = conf.StrSearchItem[i].ToString() + " like '*" + keyboard.Text + "*'";
+              else conf.StrSelect = conf.StrSearchItem[i].ToString() + " = '" + keyboard.Text + "'";
+              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text +
+                                  @"*]";
+              conf.StrTitleSelect = "";
+              GetFilmList();
+            }
+            else return; // false;
+            break;
+        }
+      }
+      else
+      {
+        // GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // commented, as we do not want to return to facade
+        dlg.DeInit();
+        this.Change_Search_Options(); // recall search menu
+      }
     }
 
     public static ArrayList Search_String(string champselect)
@@ -4429,7 +4436,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+            MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
             GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+            MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
             GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
           }
@@ -4673,12 +4682,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgYesNo.DoModal(GetID);
           if (!(dlgYesNo.IsConfirmed))
             break;
+          MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
           for (i = 0; i < w_index_count; i++)
           {
             LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] + "'");
             //MyFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
             MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, Convert.ToInt32(i), false);
           }
+          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798695)); //Traiersearch finished!
           break;
@@ -4945,7 +4956,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "analogyperson":
           {
-            SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId);
+            SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId, Context_Menu);
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
             dlg.DeInit();
             break;
@@ -4953,8 +4964,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "analogyproperty":
           {
-            SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId);
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+            SearchRelatedMoviesbyProperties((int)facadeView.SelectedListItem.ItemId, Context_Menu);
+            //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
             dlg.DeInit();
             break;
           }
@@ -4982,7 +4993,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
                 GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
               }
@@ -5022,7 +5035,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
                 GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
               }
@@ -5069,7 +5084,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
               GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+              MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
               GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+              MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
               GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
             }
@@ -5141,7 +5158,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
                 GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
               }
@@ -5182,7 +5201,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+                MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
                 GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
               }
@@ -5234,7 +5255,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
               GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+              MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
               GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+              MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
               GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
             }
@@ -5397,7 +5420,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url.ToString() + "'");
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+            MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
             GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+            MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
             GUIPropertyManager.SetProperty("#btWeb.startup.link", "");
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", "");
           }
@@ -5623,7 +5648,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  search related movies by persons                                                     *
     //*****************************************************************************************
-    private void SearchRelatedMoviesbyPersons(int Index)
+    private void SearchRelatedMoviesbyPersons(int Index, bool returnToContextmenu)
     {
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -5679,7 +5704,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1)
       {
-        Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        if (returnToContextmenu) // only call if it was called from context menu
+          Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        else 
+          Change_Search_Options();
         return;
       }
 
@@ -6140,7 +6168,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  search related movies by properties  (Guzzi Version)                                 *
     //*****************************************************************************************
-    private void SearchRelatedMoviesbyProperties(int Index) // (int Index, IEnumerable<string> wSearchList)
+    private void SearchRelatedMoviesbyProperties(int Index, bool returnToContextmenu) // (int Index, IEnumerable<string> wSearchList)
     {
       // first select the property to be searching on
       AntMovieCatalog ds = new AntMovieCatalog();
@@ -6188,7 +6216,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1)
       {
-        Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        if (returnToContextmenu) // only call if it was called from context menu
+          Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        else 
+          Change_Search_Options();
         return;
       }
       string wproperty = choiceSearch[dlg.SelectedLabel];
@@ -6308,7 +6339,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //******************************************************************************************************
     //*  Global search movies by RANDOM (Random Search with Options, e.g. Trailer, Rating) - Guzzi Version *
     //******************************************************************************************************
-    private void SearchMoviesbyRandomWithTrailer()
+    private void SearchMoviesbyRandomWithTrailer(bool returnToContextmenu)
     {
       // first select the area where to make random search on - "all", "category", "year", "country"
       AntMovieCatalog ds = new AntMovieCatalog();
@@ -6331,7 +6362,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       choiceSearch.Add("Country");
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1)
+      {
+        if (returnToContextmenu)
+          this.Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        else
+          this.Change_Search_Options();
         return;
+      }
       string wproperty = choiceSearch[dlg.SelectedLabel];
       VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
       //            if (null == keyboard) return;
@@ -6689,7 +6726,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                 dlgOk.SetLine(1, string.Empty);
                 dlgOk.SetLine(2, "Not yet implemented - be patient ....");
-                SearchMoviesbyRandomWithTrailer();
+                SearchMoviesbyRandomWithTrailer(false);
                 return;
 
               case "Back":
@@ -6706,7 +6743,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("(SearchRandomWithTrailer-Info): Here should happen the handling of menucontext....");
     }
 
-    private void SearchMoviesbyAreas()
+    private void SearchMoviesbyAreas(bool returnToContextmenu)
     {
       // first select the area where to make random search on - "all", "category", "year", "country"
       AntMovieCatalog ds = new AntMovieCatalog();
@@ -6729,7 +6766,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       choiceSearch.Add("Country");
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1)
+      {
+        if (returnToContextmenu)
+          this.Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        else
+          this.Change_Search_Options();
         return;
+      }
       string wproperty = choiceSearch[dlg.SelectedLabel];
       VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
       //            if (null == keyboard) return;
@@ -6900,7 +6943,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  Global search movies by properties     (Guzzi Version)                               *
     //*****************************************************************************************
-    private void SearchMoviesbyProperties(IEnumerable<string> wSearchList) // Old hardcoded searchlist: "TranslatedTitle|OriginalTitle|Description|Comments|Actors|Director|Producer|Rating|Year|Date|Category|Country"
+    private void SearchMoviesbyProperties(IEnumerable<string> wSearchList, bool returnToContextmenu) // Old hardcoded searchlist: "TranslatedTitle|OriginalTitle|Description|Comments|Actors|Director|Producer|Rating|Year|Date|Category|Country"
     {
       // first select the property to be searching on
       AntMovieCatalog ds = new AntMovieCatalog();
@@ -6930,7 +6973,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1)
-        return;
+      {
+        if (returnToContextmenu)
+          this.Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        else 
+          this.Change_Search_Options();
+          return;
+      }
 
       string searchstring = string.Empty;
       if (choiceSearch[dlg.SelectedLabel] == "recentsearch") // if user choose recent search, set searchname = choice of user instead of asking via vkeyboard

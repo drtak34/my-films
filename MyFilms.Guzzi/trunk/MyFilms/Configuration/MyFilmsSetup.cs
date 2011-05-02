@@ -328,9 +328,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else
             {
               openFileDialog1.FileName = String.Empty;
-              if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\"))
-                openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\";
-              else
+              //if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\"))
+              //  openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\";
+              //else
                 // openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
                 openFileDialog1.InitialDirectory = "";
             }
@@ -2245,7 +2245,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             openFileDialog1.Filter = "XML Files|*.xml";
             openFileDialog1.Title = "Select Default Internet Grabber Script (xml file)";
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
+            {
               txtGrabber.Text = openFileDialog1.FileName;
+              if (!string.IsNullOrEmpty(txtGrabber.Text))
+                txtGrabberDisplay.Text = Path.GetFileName(txtGrabber.Text);
+              else
+                txtGrabberDisplay.Text = string.Empty;
+            }
         }
 
         //private void btnAMCUpd_exe_Click(object sender, EventArgs e)
@@ -5126,7 +5132,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void txtGrabber_TextChanged(object sender, EventArgs e)
         {
           if (!string.IsNullOrEmpty(txtGrabber.Text))
-            Path.GetFileName(txtGrabber.Text);
+            txtGrabberDisplay.Text = Path.GetFileName(txtGrabber.Text);
           else 
             txtGrabberDisplay.Text = string.Empty;
         }
