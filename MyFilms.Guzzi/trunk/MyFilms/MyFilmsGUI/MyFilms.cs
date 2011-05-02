@@ -5678,7 +5678,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1)
+      {
+        Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
         return;
+      }
+
       string wperson = choiceSearch[dlg.SelectedLabel];
       dlg.Reset();
       choiceSearch.Clear();
@@ -6183,7 +6187,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1)
+      {
+        Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
         return;
+      }
       string wproperty = choiceSearch[dlg.SelectedLabel];
       dlg.Reset();
       choiceSearch.Clear();
