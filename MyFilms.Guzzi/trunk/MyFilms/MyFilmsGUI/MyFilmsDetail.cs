@@ -3259,16 +3259,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                     VideoDatabase.SetActorInfo(actorId, imdbActor);
                                     //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
 
-                                    if (imdbActor.ThumbnailUrl != string.Empty)
-                                    {
-                                      string largeCoverArt = Utils.GetLargeCoverArtName(
-                                        Thumbs.MovieActors, imdbActor.Name);
-                                      string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-                                      Utils.FileDelete(largeCoverArt);
-                                      Utils.FileDelete(coverArt);
-                                      //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
-
-                                    }
+                                    // Deactivated, as downloading not yet working !!!
+                                    //if (imdbActor.ThumbnailUrl != string.Empty)
+                                    //{
+                                    //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                                    //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                                    //  Utils.FileDelete(largeCoverArt);
+                                    //  Utils.FileDelete(coverArt);
+                                    //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+                                    //}
                                   }
                                 }
                               }

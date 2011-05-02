@@ -34,6 +34,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Text.RegularExpressions;
   using System.Threading;
 
+  using Grabber;
+
   using MediaPortal.Configuration;
   using MediaPortal.Dialogs;
   using MediaPortal.ExtensionMethods;
@@ -286,6 +288,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     #endregion
 
+    #region Private Properties
+
+    // From OV/TVS
+    private bool StopDownload { get; set; }
+    //private Layout CurrentLayout { get; set; }
+
+    #endregion
+
     public static ReaderWriterLockSlim _rw = new ReaderWriterLockSlim();
 
     public int Layout = 0;
@@ -347,6 +357,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
     #region Enums
+    //public enum Layout
+    //{
+    //  List = 0,
+    //  SmallIcons = 1,
+    //  LargeIcons = 2,
+    //  Filmstrip = 3,
+    //  Coverflow = 4
+    //}
+
     enum eContextItems
     {
       toggleWatched,
@@ -577,6 +596,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected override void OnPageDestroy(int new_windowId)
     {
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") started.");
+
+      // stop any background tasks
+      StopDownload = true;
+      GUIConnector.Instance.StopBackgroundTask();
+
       // Reset to force republishing details on reentering
       Prev_ItemID = -1;
       Prev_Label = string.Empty;
@@ -1456,10 +1480,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case Action.ActionType.ACTION_PLAY:
         case Action.ActionType.ACTION_MUSIC_PLAY:
           // Play groups as playlist (ToDo)
+          base.OnAction(action);
           break;
         case Action.ActionType.ACTION_PREV_PICTURE:
         case Action.ActionType.ACTION_NEXT_PICTURE:
           // Cycle Artwork
+          base.OnAction(action);
           break;
         case Action.ActionType.ACTION_CONTEXT_MENU:
           base.OnAction(action);
@@ -2193,6 +2219,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             conf.FileImage = string.Empty;
           string strThumb = string.Empty;
+
           if (string.IsNullOrEmpty(conf.FileImage) || !File.Exists(conf.FileImage)) // No Coverart in DB - so handle it !
           {
             LogMyFilms.Debug("(GetFilmlist) - Cover missing for movie '" + sr["Number"].ToString() + "' - '" + sr["TranslatedTitle"].ToString() + "' - trying to search or create... (slow!)");
@@ -2319,6 +2346,82 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return !(facadeView.Count == 1 && item.IsFolder); //ret false if single folder found
     }
 
+    private void GetImagesFilmList(List<GUIListItem> itemsWithThumbs, string WStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir)
+    {
+      StopDownload = false;
+
+      // split the downloads in X+ groups and do multithreaded downloading
+      int groupSize = (int)Math.Max(1, Math.Floor((double)itemsWithThumbs.Count / 2)); // Guzzi: Set group to x to only allow x thread(s)
+      int groups = (int)Math.Ceiling((double)itemsWithThumbs.Count / groupSize);
+
+      for (int i = 0; i < groups; i++)
+      {
+        List<GUIListItem> groupList = new List<GUIListItem>();
+        for (int j = groupSize * i; j < groupSize * i + (groupSize * (i + 1) > itemsWithThumbs.Count ? itemsWithThumbs.Count - groupSize * i : groupSize); j++)
+        {
+          groupList.Add(itemsWithThumbs[j]);
+        }
+
+        new System.Threading.Thread(delegate(object o)
+        {
+          List<GUIListItem> items = (List<GUIListItem>)o;
+          foreach (GUIListItem item in items)
+          {
+            // stop download if we have exited window
+            if (StopDownload) break;
+
+            if (getThumbs)
+            {
+              string[] strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
+              string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+
+              //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+              //{
+              //  item.ThumbnailImage = texture;
+              //  item.IconImage = texture;
+              //  item.IconImageBig = texture;
+              //}
+              item.ThumbnailImage = strActiveFacadeImages[0].ToString();
+              item.IconImage = strActiveFacadeImages[1].ToString();
+              item.IconImageBig = strActiveFacadeImages[0].ToString();
+
+              // if selected force an update of thumbnail
+              //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
+              //if (selectedItem == this)
+              //{
+              //  GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, ItemId, 0, null));
+              //}
+            }
+            if (createFanartDir)
+            {
+              string[] wfanart;
+              wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
+            }
+
+            // ToDo: Add downloader to SetViewThumbs - or here ...
+
+            //string remoteThumb = item.ImageRemotePath;
+            //if (string.IsNullOrEmpty(remoteThumb)) continue;
+
+            //string localThumb = item.Image;
+            //if (string.IsNullOrEmpty(localThumb)) continue;
+
+            //if (Helper.DownloadFile(remoteThumb, localThumb))
+            //{
+            //  // notify that thumbnail image has been downloaded
+            //  item.ThumbnailImage = localThumb;
+            //  item.NotifyPropertyChanged("ThumbnailImage");
+            //}
+          }
+        })
+        {
+          IsBackground = true,
+          Name = "MyFilms Image Detector and Downloader" + i.ToString()
+        }.Start(groupList);
+      }
+    }
+
+
 
     //----------------------------------------------------------------------------------------
     //    Display rating (Hide/show Star Images)
@@ -2387,11 +2490,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
 
-        //if (!cover.Active)
-        //  cover.Active = true;
         conf.FileImage = currentItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
+        //if (this.facadeView.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
+        //{
+        //  if (!cover.Active) cover.Active = true;
+        //  if (!groupcover.Active) groupcover.Active = true;
+        //  if (!personcover.Active) personcover.Active = true;
+        //  groupcover.Filename = conf.FileImage;
+        //}
+        //else
+        //{
+        //  if (cover.Active) cover.Active = false;
+        //  if (groupcover.Active) groupcover.Active = false;
+        //  if (personcover.Active) personcover.Active = false;
+        //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
+        //}
         groupcover.Filename = conf.FileImage;
+
 
         //GUIControl.ShowControl(GetID, 34);
         // Load_Rating(0); // old method - nor more used
@@ -2445,6 +2561,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //{
         conf.FileImage = currentItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
+        //if (this.facadeView.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
+        //{
+        //  if (!cover.Active) cover.Active = true;
+        //  if (!groupcover.Active) groupcover.Active = true;
+        //  if (!personcover.Active) personcover.Active = true;
+        //  cover.Filename = conf.FileImage;
+        //}
+        //else
+        //{
+        //  if (cover.Active) cover.Active = false;
+        //  if (groupcover.Active) groupcover.Active = false;
+        //  if (personcover.Active) personcover.Active = false;
+        //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
+        //}
         cover.Filename = conf.FileImage;
         //}
 
@@ -2510,7 +2640,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
         return;
       }
-
       GUIFilmstripControl filmstrip = parent as GUIFilmstripControl;
       if (filmstrip != null)
         filmstrip.InfoImageFileName = item.ThumbnailImage;
@@ -2927,6 +3056,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string champselect = "";
       string wchampselect = "";
       ArrayList w_tableau = new ArrayList();
+      List<GUIListItem> facadeDownloadItems = new List<GUIListItem>();
       int Wnb_enr = 0;
 
       conf.Wstar = NewWstar;
@@ -3013,11 +3143,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         try { System.IO.Directory.CreateDirectory(conf.StrPathViews + @"\" + WStrSort.ToLower()); }
         catch (Exception) { }
 
-      if (isperson)
-      {
-        //Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
-        //AsynUpdateActors(w_tableau);
-      }
+    if (isperson) // Launch Backgroundworker to (off)-load actors artwork and create cache thumbs
+      {AsynUpdateActors(w_tableau);}
+
       LogMyFilms.Debug("(GetSelectFromDivx) - Facadesetup Groups Started");
       //GUIListItem item = null;
       for (wi = 0; wi != w_tableau.Count; wi++)
@@ -3046,20 +3174,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 item.TVTag = "person";
               else 
                 item.TVTag = "group";
-
-              if (getThumbs)
-              {
-                strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
-                item.ThumbnailImage = strActiveFacadeImages[0];
-                item.IconImage = strActiveFacadeImages[1];
-                item.IconImageBig = strActiveFacadeImages[0];
-              }
-              if (createFanartDir)
-              {
-                string[] wfanart;
-                wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
-              }
               item.IsFolder = true;
+              facadeDownloadItems.Add(item); // offload artwork loading in background thread - first collect items in list!
               item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
               facadeView.Add(item);
               if (SelItem != "" && item.Label == SelItem)
@@ -3087,18 +3203,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.TVTag = "person";
         else
           item.TVTag = "group";
-
-        if (getThumbs)
-        {
-          strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
-          item.ThumbnailImage = strActiveFacadeImages[0];
-          item.IconImage = strActiveFacadeImages[1];
-          item.IconImageBig = strActiveFacadeImages[0];
-        }
-        string[] wfanart;
-        if (createFanartDir)
-          wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
         item.IsFolder = true;
+        facadeDownloadItems.Add(item); // offload artwork loading in background thread - first collect items in list!
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
         facadeView.Add(item);
         if (SelItem != "" && item.Label == SelItem)
@@ -3147,14 +3253,98 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
+      // Call this async after facade is loaded - WIP
+      //if (getThumbs) this.LoadFacadeImages(WStrSort, strThumbDirectory, isperson);
+      if (getThumbs)
+        this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir);
     }
 
-    private void LoadFacadeImages()
+
+    private void GetImages(List<GUIListItem> itemsWithThumbs, string WStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir)
     {
-      //foreach (GUIListItem item in facadeView)
-      //{
-      //  // load images ...
-      //}
+      StopDownload = false;
+
+      // split the downloads in X+ groups and do multithreaded downloading
+      int groupSize = (int)Math.Max(1, Math.Floor((double)itemsWithThumbs.Count / 2)); // Guzzi: Set group to x to only allow x thread(s)
+      int groups = (int)Math.Ceiling((double)itemsWithThumbs.Count / groupSize);
+
+      for (int i = 0; i < groups; i++)
+      {
+        List<GUIListItem> groupList = new List<GUIListItem>();
+        for (int j = groupSize * i; j < groupSize * i + (groupSize * (i + 1) > itemsWithThumbs.Count ? itemsWithThumbs.Count - groupSize * i : groupSize); j++)
+        {
+          groupList.Add(itemsWithThumbs[j]);
+        }
+
+        new System.Threading.Thread(delegate(object o)
+        {
+          List<GUIListItem> items = (List<GUIListItem>)o;
+          foreach (GUIListItem item in items)
+          {
+            // stop download if we have exited window
+            if (StopDownload) break;
+
+            if (getThumbs)
+            {
+              string[] strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
+              string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+
+              //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+              //{
+              //  item.ThumbnailImage = texture;
+              //  item.IconImage = texture;
+              //  item.IconImageBig = texture;
+              //}
+              item.ThumbnailImage = strActiveFacadeImages[0].ToString();
+              item.IconImage = strActiveFacadeImages[1].ToString();
+              item.IconImageBig = strActiveFacadeImages[0].ToString();
+
+              // if selected force an update of thumbnail
+              //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
+              //if (selectedItem == this)
+              //{
+              //  GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, ItemId, 0, null));
+              //}
+            }
+            if (createFanartDir)
+            {
+              string[] wfanart;
+              wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
+            }
+
+            // ToDo: Add downloader to SetViewThumbs - or here ...
+
+            //string remoteThumb = item.ImageRemotePath;
+            //if (string.IsNullOrEmpty(remoteThumb)) continue;
+
+            //string localThumb = item.Image;
+            //if (string.IsNullOrEmpty(localThumb)) continue;
+
+            //if (Helper.DownloadFile(remoteThumb, localThumb))
+            //{
+            //  // notify that thumbnail image has been downloaded
+            //  item.ThumbnailImage = localThumb;
+            //  item.NotifyPropertyChanged("ThumbnailImage");
+            //}
+          }
+        })
+        {
+          IsBackground = true,
+          Name = "MyFilms Image Detector and Downloader" + i.ToString()
+        }.Start(groupList);
+      }
+    }
+
+    private void LoadFacadeImages(string WStrSort, string strThumbDirectory, bool isperson)
+    {
+      for(int i = 0; i < facadeView.Count; i++)
+      {
+        GUIListItem item = facadeView[i];
+        string[] strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
+        item.ThumbnailImage = strActiveFacadeImages[0].ToString();
+        item.IconImage = strActiveFacadeImages[1].ToString();
+        item.IconImageBig = strActiveFacadeImages[0].ToString();
+      }
     }
 
     private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson)
@@ -3439,7 +3629,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Thread LoadThread = new Thread(new ThreadStart(Worker_Refreshfacade));
       LoadThread.IsBackground = true;
       LoadThread.Priority = ThreadPriority.AboveNormal;
-      LoadThread.Name = "MyFilms Fin_Charge_Init";
+      LoadThread.Name = "MyFilms Fin_Charge_Init (false-true)";
       LoadThread.Start();
       //LoadThread.Join(); // wait until background thread finished ...
     }
@@ -3449,6 +3639,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIWaitCursor.Init();
       GUIWaitCursor.Show();
       Fin_Charge_Init(false, true);
+      GUIWaitCursor.Hide();
+    }
+
+    private void Loadfacade()
+    {
+      Thread LoadThread = new Thread(new ThreadStart(Worker_Refreshfacade));
+      LoadThread.IsBackground = true;
+      LoadThread.Priority = ThreadPriority.AboveNormal;
+      LoadThread.Name = "MyFilms Fin_Charge_Init (true-true)";
+      LoadThread.Start();
+      //LoadThread.Join(); // wait until background thread finished ...
+    }
+
+    private void Worker_Loadfacade()
+    {
+      GUIWaitCursor.Init();
+      GUIWaitCursor.Show();
+      Fin_Charge_Init(true, true);
       GUIWaitCursor.Hide();
     }
 
@@ -3861,15 +4069,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Configuration.CurrentConfig = newConfig;
             InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
             InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
-            GUIWaitCursor.Init();
-            GUIWaitCursor.Show();
-            GUIWindowManager.Process();
-            MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
+            //GUIWaitCursor.Init();
+            //GUIWaitCursor.Show();
+            //GUIWindowManager.Process();
+            //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
             Load_Config(newConfig, true);
             if (InitialStart)
               Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
+              //Loadfacade(); // load facade threaded...
             else
+            {
               Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+              //if (conf.AlwaysDefaultView)
+              //  Loadfacade(); // load threaded Fin_Charge_Init(true, true)
+              //else
+              //  Refreshfacade(); // load threaded Fin_Charge_Init(false, true)
+            }
 
             // Launch Background availability scanner, if configured in setup
             if (MyFilms.conf.ScanMediaOnStart && InitialStart)
@@ -3877,7 +4092,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("Launching Availabilityscanner - Initialstart = '" + InitialStart.ToString() + "'");
               this.AsynIsOnlineCheck();
             }
-
             InitialStart = false; // Guzzi: Set InitialStart to false after initialization done
 
             if (MyFilms.conf.StrFanart)
@@ -3887,8 +4101,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
             GUIControl.HideControl(GetID, 34); // show elements in skin
-          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
-          GUIWaitCursor.Hide();
+          //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+          //GUIWaitCursor.Hide();
           break;
 
         case "nasstatus": //Check and show status of NAS Servers
@@ -4519,10 +4733,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //if (MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798628));
           //if (!MesFilms.conf.AlwaysDefaultView) ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798630) + " = " + GUILocalizeStrings.Get(10798629));
 
-          if (MyFilms.conf.AlwaysDefaultView)
-            Fin_Charge_Init(true, true); //DefaultSelect, reload
-          else
-            Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
+          //if (MyFilms.conf.AlwaysDefaultView)
+          //  Fin_Charge_Init(true, true); //DefaultSelect, reload
+          //else
+          //  Fin_Charge_Init(true, true); //NotDefaultSelect, Only reload
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           Change_view("globaloptions");
           break;
@@ -5553,45 +5767,112 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       if (choiceSearch[dlg.SelectedLabel] == "PersonInfo")
       {
-        ArrayList actorList = new ArrayList();
-        // Search with searchName parameter which contain wanted actor name, result(s) is in array
-        // which conatin id and name separated with char "|"
-        MyFilmsDetail.GetActorByName(wperson, actorList);
-
-        // Check result
-        if (actorList.Count == 0)
+        IMDBActor imdbActor = new IMDBActor();
+        IMDB imdb = new IMDB();
+        string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(wperson);
+        imdb.FindActor(actorSearchname);
+        for (int i = 0; i < imdb.Count; ++i)
         {
-          LogMyFilms.Debug("(Person Info): No ActorIDs found for '" + wperson + "'");
-          GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-          dlgOk.SetHeading("Info");
-          dlgOk.SetLine(1, string.Empty);
-          dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
-          dlgOk.DoModal(GetID);
-          return;
+          //if (_guiListItem.ItemId == Movie.DirectorID)
+          //{
+          //  imdb.GetActorDetails(imdb[i], true, out imdbActor);
+          //}
+          //else
+          //{
+            imdb.GetActorDetails(imdb[i], false, out imdbActor);
+          //}
+          //VideoDatabase.SetActorInfo(_guiListItem.ItemId, imdbActor);
+          if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
+          {
+            break;
+          }
         }
-        LogMyFilms.Debug("(Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
-        //int actorID;
-        actorID = 0;
-        string actorname = string.Empty;
-        // Define splitter for string
-        char[] splitter = { '|' };
-        // Iterate through list
-        foreach (string act in actorList)
+        if (imdbActor.ThumbnailUrl != null)
         {
-          // Split id from actor name (two substrings, [0] is id and [1] is name)
-          string[] strActor = act.Split(splitter);
-          // From here we have all what we want, now we can populate datatable, gridview, listview....)
-          // actorID originally is integer in the databse (it can be string in results but if we want get details from
-          // IMDBActor  GetActorInfo(int idActor) we need integer)
-          actorID = Convert.ToInt32(strActor[0]);
-          actorname = strActor[1];
-          LogMyFilms.Debug("(Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
+          if (imdbActor.ThumbnailUrl.Length != 0)
+          {
+                      if (imdbActor.ThumbnailUrl.Length != 0 && !string.IsNullOrEmpty(conf.StrPathArtist))
+                      {
+                        string filename1person = GrabUtil.DownloadPersonArtwork(conf.StrPathArtist, imdbActor.ThumbnailUrl, wperson, true, true, out filename1person);
+                        LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + wperson + "', path='" + filename1person + "'");
+                        // DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, _actor); // original Deda call
+                      }
+                      else
+                      {
+                        LogMyFilms.Debug("IMDBFetcher single actor fetch could not be done - no person artwork path defined in MyFilms config");
+                      }
+
+          }
+          else
+          {
+            LogMyFilms.Debug("IMDBFetcher single actor fetch: url=empty for actor {0}", wperson);
+          }
         }
+        else
+        {
+          Log.Debug("IMDBFetcher single actor fetch: url=null for actor {0}", wperson);
+        }
+        //_imdbActor = imdbActor;
 
-        MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
-        //if (actor != null)
 
-        OnVideoArtistInfoGuzzi(actor);
+        // Add actor to datbbase to get infos in person facades later...
+        int actorId = VideoDatabase.AddActor(imdbActor.Name);
+        if (actorId > 0)
+        {
+          VideoDatabase.SetActorInfo(actorId, imdbActor);
+          //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+
+          //if (imdbActor.ThumbnailUrl != string.Empty)
+          //{
+          //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+          //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+          //  Utils.FileDelete(largeCoverArt);
+          //  Utils.FileDelete(coverArt);
+          //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+          //}
+        }
+        
+        //// Last working Guzzi Code
+        ////ArrayList actorList = new ArrayList();
+        ////// Search with searchName parameter which contain wanted actor name, result(s) is in array
+        ////// which conatin id and name separated with char "|"
+        ////MyFilmsDetail.GetActorByName(wperson, actorList);
+
+        ////// Check result
+        ////if (actorList.Count == 0)
+        ////{
+        ////  LogMyFilms.Debug("(Person Info): No ActorIDs found for '" + wperson + "'");
+        ////  GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+        ////  dlgOk.SetHeading("Info");
+        ////  dlgOk.SetLine(1, string.Empty);
+        ////  dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
+        ////  dlgOk.DoModal(GetID);
+        ////  return;
+        ////}
+        ////LogMyFilms.Debug("(Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
+        //////int actorID;
+        ////actorID = 0;
+        ////string actorname = string.Empty;
+        ////// Define splitter for string
+        ////char[] splitter = { '|' };
+        ////// Iterate through list
+        ////foreach (string act in actorList)
+        ////{
+        ////  // Split id from actor name (two substrings, [0] is id and [1] is name)
+        ////  string[] strActor = act.Split(splitter);
+        ////  // From here we have all what we want, now we can populate datatable, gridview, listview....)
+        ////  // actorID originally is integer in the databse (it can be string in results but if we want get details from
+        ////  // IMDBActor  GetActorInfo(int idActor) we need integer)
+        ////  actorID = Convert.ToInt32(strActor[0]);
+        ////  actorname = strActor[1];
+        ////  LogMyFilms.Debug("(Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
+        ////}
+
+        ////MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
+        //////if (actor != null)
+        ////OnVideoArtistInfoGuzzi(actor);
+
+        OnVideoArtistInfoGuzzi(imdbActor);
         //OnVideoArtistInfoGuzzi(wperson);
         return;
       }
@@ -8795,6 +9076,117 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //}
     #endregion
 
+
+    public static int ShowMenuDialog(string heading, List<GUIListItem> items)
+    {
+      return ShowMenuDialog(heading, items, -1);
+    }
+
+    private delegate int ShowMenuDialogDelegate(string heading, List<GUIListItem> items);
+
+    /// <summary>
+    /// Displays a menu dialog from list of items
+    /// </summary>
+    /// <returns>Selected item index, -1 if exited</returns>
+    public static int ShowMenuDialog(string heading, List<GUIListItem> items, int selectedItemIndex)
+    {
+      if (GUIGraphicsContext.form.InvokeRequired)
+      {
+        ShowMenuDialogDelegate d = ShowMenuDialog;
+        return (int)GUIGraphicsContext.form.Invoke(d, heading, items);
+      }
+
+      GUIDialogMenu dlgMenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_MENU);
+      if (dlgMenu == null) return -1;
+
+      dlgMenu.Reset();
+
+      dlgMenu.SetHeading(heading);
+
+      foreach (GUIListItem item in items)
+      {
+        dlgMenu.Add(item);
+      }
+
+      if (selectedItemIndex >= 0)
+        dlgMenu.SelectedLabel = selectedItemIndex;
+
+      dlgMenu.DoModal(GUIWindowManager.ActiveWindow);
+
+      if (dlgMenu.SelectedLabel < 0)
+      {
+        return -1;
+      }
+
+      return dlgMenu.SelectedLabel;
+    }
+
+    /// <summary>
+    /// Displays a notification dialog.
+    /// </summary>
+    public static void ShowNotifyDialog(string heading, string text)
+    {
+      ShowNotifyDialog(heading, text, string.Empty);
+    }
+
+    private delegate void ShowNotifyDialogDelegate(string heading, string text, string image);
+
+    /// <summary>
+    /// Displays a notification dialog.
+    /// </summary>
+    public static void ShowNotifyDialog(string heading, string text, string image)
+    {
+      if (GUIGraphicsContext.form.InvokeRequired)
+      {
+        ShowNotifyDialogDelegate d = ShowNotifyDialog;
+        GUIGraphicsContext.form.Invoke(d, heading, text, image);
+        return;
+      }
+
+      GUIDialogNotify pDlgNotify = (GUIDialogNotify)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
+      if (pDlgNotify == null) return;
+
+      // if image is empty, attempt to load the default
+      string defaultLogo = Path.Combine(GUIGraphicsContext.Skin, @"Media\Logos\tvseries.png");
+      if (File.Exists(defaultLogo))
+      {
+        image = defaultLogo;
+      }
+
+      pDlgNotify.SetHeading(heading);
+      pDlgNotify.SetImage(image);
+      pDlgNotify.SetText(text);
+      pDlgNotify.DoModal(GUIWindowManager.ActiveWindow);
+    }
+
+    private delegate void ShowDialogOkDelegate(string heading, string[] lines);
+
+    /// <summary>
+    /// Displays a ok dialog.
+    /// </summary>
+    public static void ShowDialogOk(string heading, string[] lines)
+    {
+      if (GUIGraphicsContext.form.InvokeRequired)
+      {
+        ShowDialogOkDelegate d = ShowDialogOk;
+        GUIGraphicsContext.form.Invoke(d, heading, lines);
+        return;
+      }
+
+      GUIDialogOK pDlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      if (pDlgOk == null) return;
+
+      pDlgOk.SetHeading(heading);
+      for (int i = 1; i <= lines.Length; i++)
+      {
+        pDlgOk.SetLine(i, lines[i - 1]);
+      }
+      pDlgOk.DoModal(GUIWindowManager.ActiveWindow);
+    }
+
+
+
+
     //enum BackGroundLoadingArgumentType
     //{
     //  None,
@@ -8842,4 +9234,62 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  }
     //}
   }
+
+  
+  //public class GUIMyFilmsListItem : GUIListItem
+  //{
+  //  #region Facade Item
+  //  public GUIMyFilmsListItem(string strLabel) : base(strLabel) { }
+
+  //  public object Item
+  //  {
+  //    get { return _Item; }
+  //    set
+  //    {
+  //      _Item = value;
+  //      INotifyPropertyChanged notifier = value as INotifyPropertyChanged;
+  //      if (notifier != null)
+  //      {
+  //        notifier.PropertyChanged += (s, e) =>
+  //        {
+  //          if (s is DBActor && e.PropertyName == "ThumbnailImage")
+  //            SetImageToGui((s as DBActor).ThumbnailImage);
+  //        };
+  //      }
+  //    }
+  //  } protected object _Item;
+
+  //  protected void SetImageToGui(string imageFilePath)
+  //  {
+  //    if (string.IsNullOrEmpty(imageFilePath)) return;
+
+  //    string texture = GetTextureFromFile(imageFilePath);
+
+  //    if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(imageFilePath), texture, 0, 0, 0) > 0)
+  //    {
+  //      ThumbnailImage = texture;
+  //      IconImage = texture;
+  //      IconImageBig = texture;
+  //    }
+
+  //    // if selected and GUIActors is current window force an update of thumbnail
+  //    GUIActors actorWindow = GUIWindowManager.GetWindow(GUIWindowManager.ActiveWindow) as GUIActors;
+  //    if (actorWindow != null)
+  //    {
+  //      GUIListItem selectedItem = GUIControl.GetSelectedListItem(9816, 50);
+  //      if (selectedItem == this)
+  //      {
+  //        GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, ItemId, 0, null));
+  //      }
+  //    }
+  //  }
+
+  //  private string GetTextureFromFile(string filename)
+  //  {
+  //    return "[MyFilms:" + filename.GetHashCode() + "]";
+  //  }
+
+  //  #endregion
+  //}
+
 }
