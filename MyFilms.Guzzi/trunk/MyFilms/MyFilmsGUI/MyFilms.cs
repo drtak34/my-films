@@ -2099,6 +2099,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string sPrevTitle = "";
       string SelItem = gSelItem.ToString();
       int iSelItem = -2;
+      List<GUIListItem> facadeDownloadItems = new List<GUIListItem>();
       if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
 
       // setlabels
@@ -2209,6 +2210,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
             if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
               item.IsPlayed = true;
+
           if (sr["Picture"].ToString().Length > 0)
           {
             if ((sr["Picture"].ToString().IndexOf(":\\") == -1) && (sr["Picture"].ToString().Substring(0, 2) != "\\\\"))
@@ -2217,55 +2219,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.FileImage = sr["Picture"].ToString();
           }
           else
-            conf.FileImage = string.Empty;
-          string strThumb = string.Empty;
-
-          if (string.IsNullOrEmpty(conf.FileImage) || !File.Exists(conf.FileImage)) // No Coverart in DB - so handle it !
           {
-            LogMyFilms.Debug("(GetFilmlist) - Cover missing for movie '" + sr["Number"].ToString() + "' - '" + sr["TranslatedTitle"].ToString() + "' - trying to search or create... (slow!)");
-            //string strlabel = item.Label;
-            //MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strlabel);
-            //strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + strlabel;
-            //if (System.IO.File.Exists(strThumb + ".png"))
-            //{
-            //  conf.FileImage = strThumb + ".png"; 
-            //}
-            //else
-            {
-              conf.FileImage = string.Empty;
-              //try
-              //{
-              //    if (conf.StrPathViews.Length > 0)
-              //        if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
-              //            //Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".png", strThumb + ".png", cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
-              //            createCacheThumb(conf.StrPathViews + item.Label + ".png", strThumb + ".png");
-              //        else
-              //            //Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
-              //            createCacheThumb(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png");
-              //    // Disabled "pseudo covers with label name"
-              //    //if (!System.IO.File.Exists(strThumb + ".png"))
-              //    //    if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCoverViews))
-              //    //        ImageFast.CreateImage(strThumb + ".png", item.Label);
-              //    if (System.IO.File.Exists(strThumb + ".png"))                                
-              //    conf.FileImage = strThumb + ".png"; 
-              //}
-              //catch
-              //{
-              //    conf.FileImage = string.Empty;
-              //}
-              //if (string.IsNullOrEmpty(conf.FileImage) && conf.DefaultCover.Length > 0)
-              if (conf.DefaultCover.Length > 0)
-                conf.FileImage = conf.DefaultCover;
-            }
+            conf.FileImage = string.Empty;
           }
+          item.DVDLabel = sTitle; // used by background thread
           item.ThumbnailImage = conf.FileImage;
-          strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, sTitle);
-          if (!System.IO.File.Exists(strThumb) && conf.FileImage != conf.DefaultCover && !string.IsNullOrEmpty(conf.FileImage))
-            Picture.CreateThumbnail(conf.FileImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
-          if (conf.FileImage == conf.DefaultCover)
-            item.IconImage = conf.DefaultCover;
-          else
-            item.IconImage = strThumb;
+          item.IconImageBig = conf.FileImage;
+          item.IconImage = conf.FileImage;
+
           item.ItemId = number;
           // set availability status
           if (InitialIsOnlineScan) // only display media status, if onlinescan was done
@@ -2280,6 +2241,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else
                 item.IsRemote = true;
           }
+          facadeDownloadItems.Add(item);
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
           facadeView.Add(item);
 
@@ -2343,10 +2305,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       listLevel = Listlevel.Movie;
       LogMyFilms.Debug("GetFilmList finished!");
+      GetImagesFilmList(facadeDownloadItems);
       return !(facadeView.Count == 1 && item.IsFolder); //ret false if single folder found
     }
 
-    private void GetImagesFilmList(List<GUIListItem> itemsWithThumbs, string WStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir)
+    private void GetImagesFilmList(List<GUIListItem> itemsWithThumbs)
     {
       StopDownload = false;
 
@@ -2370,53 +2333,69 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // stop download if we have exited window
             if (StopDownload) break;
 
-            if (getThumbs)
-            {
-              string[] strActiveFacadeImages = SetViewThumbs(WStrSort, item.Label, strThumbDirectory, isperson);
-              string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
-
-              //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+            string strThumb = string.Empty;
+            //if (!File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
+            if (item.ThumbnailImage == "" || !File.Exists(item.ThumbnailImage)) // No Coverart in DB - so handle it !
+              {
+              //string strlabel = item.Label;
+              //MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strlabel);
+              //strThumb = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Groups\" + strlabel;
+              //if (System.IO.File.Exists(strThumb + ".png"))
               //{
-              //  item.ThumbnailImage = texture;
-              //  item.IconImage = texture;
-              //  item.IconImageBig = texture;
+              //  conf.FileImage = strThumb + ".png"; 
               //}
-              item.ThumbnailImage = strActiveFacadeImages[0].ToString();
-              item.IconImage = strActiveFacadeImages[1].ToString();
-              item.IconImageBig = strActiveFacadeImages[0].ToString();
-
-              // if selected force an update of thumbnail
-              //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
-              //if (selectedItem == this)
-              //{
-              //  GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, ItemId, 0, null));
-              //}
+              //else
+              {
+                //conf.FileImage = string.Empty;
+                //try
+                //{
+                //    if (conf.StrPathViews.Length > 0)
+                //        if (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
+                //            //Picture.CreateThumbnail(conf.StrPathViews + item.Label + ".png", strThumb + ".png", cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+                //            createCacheThumb(conf.StrPathViews + item.Label + ".png", strThumb + ".png");
+                //        else
+                //            //Picture.CreateThumbnail(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png", cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+                //            createCacheThumb(conf.StrPathViews + "\\" + item.Label + ".png", strThumb + ".png");
+                //    // Disabled "pseudo covers with label name"
+                //    //if (!System.IO.File.Exists(strThumb + ".png"))
+                //    //    if (MyFilms.conf.StrViewsDflt && System.IO.File.Exists(MyFilms.conf.DefaultCoverViews))
+                //    //        ImageFast.CreateImage(strThumb + ".png", item.Label);
+                //    if (System.IO.File.Exists(strThumb + ".png"))                                
+                //    conf.FileImage = strThumb + ".png"; 
+                //}
+                //catch
+                //{
+                //    conf.FileImage = string.Empty;
+                //}
+                //if (string.IsNullOrEmpty(conf.FileImage) && conf.DefaultCover.Length > 0)
+                //if (conf.DefaultCover.Length > 0)
+                //  conf.FileImage = conf.DefaultCover;
+              }
             }
-            if (createFanartDir)
+            strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, item.DVDLabel); // item.DVDLabel is sTitle
+            if (!System.IO.File.Exists(strThumb) && item.ThumbnailImage != conf.DefaultCover && !string.IsNullOrEmpty(item.ThumbnailImage))
             {
-              string[] wfanart;
-              wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, WStrSort.ToLower());
+              Picture.CreateThumbnail(item.ThumbnailImage, strThumb, 100, 150, 0, Thumbs.SpeedThumbsSmall);
+              LogMyFilms.Debug("GetFimList: Background thread creating thumbimage for sTitle: '" + item.DVDLabel.ToString() + "'");
             }
-
-            // ToDo: Add downloader to SetViewThumbs - or here ...
-
-            //string remoteThumb = item.ImageRemotePath;
-            //if (string.IsNullOrEmpty(remoteThumb)) continue;
-
-            //string localThumb = item.Image;
-            //if (string.IsNullOrEmpty(localThumb)) continue;
-
-            //if (Helper.DownloadFile(remoteThumb, localThumb))
-            //{
-            //  // notify that thumbnail image has been downloaded
-            //  item.ThumbnailImage = localThumb;
-            //  item.NotifyPropertyChanged("ThumbnailImage");
-            //}
+            if (System.IO.File.Exists(strThumb))
+            {
+              item.IconImage = strThumb;
+            }
+            else
+            {
+              if (conf.DefaultCover.Length > 0)
+              {
+                item.IconImage = conf.DefaultCover;
+                //item.IconImageBig = conf.DefaultCover;
+                //item.ThumbnailImage = conf.DefaultCover;
+              }
+            }
           }
         })
         {
           IsBackground = true,
-          Name = "MyFilms Image Detector and Downloader" + i.ToString()
+          Name = "MyFilms FilmList Image Detector" + i.ToString()
         }.Start(groupList);
       }
     }
