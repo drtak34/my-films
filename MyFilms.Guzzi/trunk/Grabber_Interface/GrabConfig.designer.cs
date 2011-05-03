@@ -59,6 +59,7 @@ namespace Grabber_Interface
           this.cbMaxWriters = new System.Windows.Forms.ComboBox();
           this.cbMaxDirectors = new System.Windows.Forms.ComboBox();
           this.cbMaxProducers = new System.Windows.Forms.ComboBox();
+          this.chkGrabActorRoles = new System.Windows.Forms.CheckBox();
           this.cbMaxActors = new System.Windows.Forms.ComboBox();
           this.label28 = new System.Windows.Forms.Label();
           this.label27 = new System.Windows.Forms.Label();
@@ -69,7 +70,6 @@ namespace Grabber_Interface
           this.label23 = new System.Windows.Forms.Label();
           this.cbTtitleMaxTitles = new System.Windows.Forms.ComboBox();
           this.cbTtitlePreferredLanguage = new System.Windows.Forms.ComboBox();
-          this.chkGrabActorRoles = new System.Windows.Forms.CheckBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.label8 = new System.Windows.Forms.Label();
@@ -127,6 +127,9 @@ namespace Grabber_Interface
           this.textFind = new System.Windows.Forms.TextBox();
           this.Button_Load_URL = new System.Windows.Forms.Button();
           this.groupBox4 = new System.Windows.Forms.GroupBox();
+          this.textLanguagesAll = new System.Windows.Forms.TextBox();
+          this.lblLanguagesAll = new System.Windows.Forms.Label();
+          this.chkACTORROLES = new System.Windows.Forms.CheckBox();
           this.lblLanguages = new System.Windows.Forms.Label();
           this.textLanguages = new System.Windows.Forms.TextBox();
           this.lblMaxItems = new System.Windows.Forms.Label();
@@ -166,7 +169,6 @@ namespace Grabber_Interface
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
-          this.chkACTORROLES = new System.Windows.Forms.CheckBox();
           this.tabControl1.SuspendLayout();
           this.tabPageUserSettings.SuspendLayout();
           this.groupBox11.SuspendLayout();
@@ -446,6 +448,13 @@ namespace Grabber_Interface
           this.cbMaxProducers.Name = "cbMaxProducers";
           this.cbMaxProducers.SelectedIndexChanged += new System.EventHandler(this.cbMaxProducers_SelectedIndexChanged);
           // 
+          // chkGrabActorRoles
+          // 
+          resources.ApplyResources(this.chkGrabActorRoles, "chkGrabActorRoles");
+          this.chkGrabActorRoles.Name = "chkGrabActorRoles";
+          this.chkGrabActorRoles.UseVisualStyleBackColor = true;
+          this.chkGrabActorRoles.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+          // 
           // cbMaxActors
           // 
           this.cbMaxActors.FormattingEnabled = true;
@@ -527,14 +536,8 @@ namespace Grabber_Interface
           this.cbTtitlePreferredLanguage.FormattingEnabled = true;
           resources.ApplyResources(this.cbTtitlePreferredLanguage, "cbTtitlePreferredLanguage");
           this.cbTtitlePreferredLanguage.Name = "cbTtitlePreferredLanguage";
+          this.toolTip1.SetToolTip(this.cbTtitlePreferredLanguage, resources.GetString("cbTtitlePreferredLanguage.ToolTip"));
           this.cbTtitlePreferredLanguage.SelectedIndexChanged += new System.EventHandler(this.cbTtitlePreferredLanguage_SelectedIndexChanged);
-          // 
-          // chkGrabActorRoles
-          // 
-          resources.ApplyResources(this.chkGrabActorRoles, "chkGrabActorRoles");
-          this.chkGrabActorRoles.Name = "chkGrabActorRoles";
-          this.chkGrabActorRoles.UseVisualStyleBackColor = true;
-          this.chkGrabActorRoles.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
           // 
           // tabPageSearchPage
           // 
@@ -953,6 +956,8 @@ namespace Grabber_Interface
           // 
           // groupBox4
           // 
+          this.groupBox4.Controls.Add(this.textLanguagesAll);
+          this.groupBox4.Controls.Add(this.lblLanguagesAll);
           this.groupBox4.Controls.Add(this.chkACTORROLES);
           this.groupBox4.Controls.Add(this.lblLanguages);
           this.groupBox4.Controls.Add(this.textLanguages);
@@ -976,6 +981,25 @@ namespace Grabber_Interface
           resources.ApplyResources(this.groupBox4, "groupBox4");
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.TabStop = false;
+          // 
+          // textLanguagesAll
+          // 
+          resources.ApplyResources(this.textLanguagesAll, "textLanguagesAll");
+          this.textLanguagesAll.Name = "textLanguagesAll";
+          this.toolTip1.SetToolTip(this.textLanguagesAll, resources.GetString("textLanguagesAll.ToolTip"));
+          this.textLanguagesAll.TextChanged += new System.EventHandler(this.textLanguagesAll_TextChanged);
+          // 
+          // lblLanguagesAll
+          // 
+          resources.ApplyResources(this.lblLanguagesAll, "lblLanguagesAll");
+          this.lblLanguagesAll.Name = "lblLanguagesAll";
+          // 
+          // chkACTORROLES
+          // 
+          resources.ApplyResources(this.chkACTORROLES, "chkACTORROLES");
+          this.chkACTORROLES.Name = "chkACTORROLES";
+          this.chkACTORROLES.UseVisualStyleBackColor = true;
+          this.chkACTORROLES.CheckedChanged += new System.EventHandler(this.chkACTORROLES_CheckedChanged);
           // 
           // lblLanguages
           // 
@@ -1203,13 +1227,14 @@ namespace Grabber_Interface
           // toolTip1
           // 
           this.toolTip1.AutomaticDelay = 200;
-          this.toolTip1.AutoPopDelay = 0;
+          this.toolTip1.AutoPopDelay = 15000;
+          this.toolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
           this.toolTip1.InitialDelay = 50;
           this.toolTip1.IsBalloon = true;
           this.toolTip1.ReshowDelay = 0;
           this.toolTip1.ShowAlways = true;
           this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-          this.toolTip1.ToolTipTitle = "Help";
+          this.toolTip1.ToolTipTitle = "Grabber Configuration Help ...";
           // 
           // button2
           // 
@@ -1263,13 +1288,6 @@ namespace Grabber_Interface
           this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
           this.pictureBoxFranceFlag.TabStop = false;
           this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
-          // 
-          // chkACTORROLES
-          // 
-          resources.ApplyResources(this.chkACTORROLES, "chkACTORROLES");
-          this.chkACTORROLES.Name = "chkACTORROLES";
-          this.chkACTORROLES.UseVisualStyleBackColor = true;
-          this.chkACTORROLES.CheckedChanged += new System.EventHandler(this.chkACTORROLES_CheckedChanged);
           // 
           // GrabConfig
           // 
@@ -1475,6 +1493,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.ComboBox DVDPTagField;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.CheckBox chkACTORROLES;
+        private System.Windows.Forms.Label lblLanguagesAll;
+        private System.Windows.Forms.TextBox textLanguagesAll;
 
     }
 }

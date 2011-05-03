@@ -59,7 +59,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml; // For XmlDocument
 using MediaPortal.Configuration; // For recover install MediaPortal path
-using NLog;
+// using NLog;
 #endregion
 
 namespace MyFilmsPlugin.MyFilms.Utils

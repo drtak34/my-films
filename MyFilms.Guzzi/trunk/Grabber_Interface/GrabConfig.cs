@@ -400,8 +400,16 @@ namespace Grabber_Interface
 
     private void button1_Click_1(object sender, EventArgs e)
     {
-      SaveXml(textConfig.Text + ".tmp");
-      Load_Preview(false);
+      if (string.IsNullOrEmpty(textConfig.Text))
+      {
+        MessageBox.Show("No Config loaded !", "Error");
+        return;
+      }
+      else
+      {
+        SaveXml(textConfig.Text + ".tmp");
+        Load_Preview(false);
+      }
     }
 
     private void Load_Preview(bool AlwaysAsk)
@@ -481,8 +489,15 @@ namespace Grabber_Interface
 
     private void button3_Click(object sender, EventArgs e)
     {
-      if (textConfig.Text.Length > 0)
+      if (string.IsNullOrEmpty(textConfig.Text))
+      {
+        MessageBox.Show("No Config loaded !", "Error");
+        return;
+      }
+      else
+      {
         SaveXml(textConfig.Text);
+      }
     }
 
     private void TextKeyStart_TextChanged(object sender, EventArgs e)
@@ -899,12 +914,15 @@ namespace Grabber_Interface
       textComplement.Clear();
       textMaxItems.Clear();
       textLanguages.Clear();
+      textLanguagesAll.Clear();
       lblComplement.Visible = false;
       lblMaxItems.Visible = false;
       lblLanguages.Visible = false;
+      lblLanguagesAll.Visible = false;
       textComplement.Visible = false;
       textMaxItems.Visible = false;
       textLanguages.Visible = false;
+      textLanguagesAll.Visible = false;
       buttonPrevParamDetail.Visible = true;
       //lblComplement.Text = "Complement";
       if (!textBodyDetail.Text.Equals(BodyDetail))
@@ -931,16 +949,20 @@ namespace Grabber_Interface
             textBodyDetail.Text = BodyLinkTitles;
           try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value; }
           catch { textLanguages.Text = string.Empty; };
+          try { textLanguagesAll.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguageAll)._Value; }
+          catch { textLanguagesAll.Text = string.Empty; };
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTTitle)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTTitle)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTTitle)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndTTitle)._Value;
           lblLanguages.Visible = true;
+          lblLanguagesAll.Visible = true;
           lblComplement.Visible = true;
           lblMaxItems.Visible = true;
           textComplement.Visible = true;
           textMaxItems.Visible = true;
           textLanguages.Visible = true;
+          textLanguagesAll.Visible = true;
           lblComplement.Text = "RegExp";
           try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleRegExp)._Value; }
           catch { textComplement.Text = string.Empty; };
@@ -1124,6 +1146,8 @@ namespace Grabber_Interface
             textBodyDetail.Text = BodyLinkCertification;
           try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
           catch { textLanguages.Text = string.Empty; };
+          try { textLanguagesAll.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
+          catch { textLanguagesAll.Text = string.Empty; };
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Value;
@@ -1132,7 +1156,9 @@ namespace Grabber_Interface
           textComplement.Visible = true;
           lblComplement.Text = "RegExp";
           lblLanguages.Visible = true;
+          lblLanguagesAll.Visible = true;
           textLanguages.Visible = true;
+          textLanguagesAll.Visible = true;
           try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationRegExp)._Value; }
           catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationIndex)._Value;
@@ -1513,15 +1539,21 @@ namespace Grabber_Interface
 
     private void buttonPreview_Click(object sender, EventArgs e)
     {
+      if (string.IsNullOrEmpty(textConfig.Text))
+      {
+        MessageBox.Show("No Config loaded !", "Error");
+        return;
+      }
+      
       textPreview.Clear();
       pictureBoxPreviewCover.ImageLocation = "";
       labelImageSize.Text = "";
 
       SaveXml(textConfig.Text + ".tmp");
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
-      string[] Result = new string[20];
+      string[] Result = new string[30];
 
-      try
+      try // http://akas.imdb.com/title/tt0133093/
       {
         Result = Grab.GetDetail(TextURLDetail.Text, Environment.GetEnvironmentVariable("TEMP"), textConfig.Text + ".tmp", true);
       }
@@ -1618,11 +1650,31 @@ namespace Grabber_Interface
             //textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Certification" + Environment.NewLine;
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Writer" + Environment.NewLine;
             break;
+          case 26:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Names: Countries for 'Translated Title'" + Environment.NewLine;
+            break;
+          case 27:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Translated Title'" + Environment.NewLine;
+            break;
+          case 28:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Names: Countries for 'Certification'" + Environment.NewLine;
+            break;
+          case 29:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Certification'" + Environment.NewLine;
+            break;
         }
         if (i <= 20) // Changed to support new fields...
           textPreview.AppendText(Result[i] + Environment.NewLine);
         if (i == 2)
           textPreview.AppendText(Result[11] + Environment.NewLine);
+        if (i == 26)
+          textPreview.AppendText(Result[26] + Environment.NewLine);
+        if (i == 27)
+          textPreview.AppendText(Result[27] + Environment.NewLine);
+        if (i == 28)
+          textPreview.AppendText(Result[28] + Environment.NewLine);
+        if (i == 29)
+          textPreview.AppendText(Result[29] + Environment.NewLine);
       }
 
       System.IO.File.Delete(textConfig.Text + ".tmp");
@@ -1722,6 +1774,23 @@ namespace Grabber_Interface
           break;
       }
     }
+
+    private void textLanguagesAll_TextChanged(object sender, EventArgs e)
+    {
+      switch (cb_ParamDetail.SelectedIndex)
+      {
+        case 2:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguageAll)._Value = textLanguagesAll.Text;
+          break;
+        case 18:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value = textLanguagesAll.Text;
+          break;
+        default:
+          break;
+      }
+    }
+
+
     private void radioButtonFR_CheckedChanged(object sender, EventArgs e)
     {
       Application.CurrentCulture = FrenchCulture;
@@ -2140,6 +2209,12 @@ namespace Grabber_Interface
 
     private void button5_Click(object sender, EventArgs e)
     {
+      if (string.IsNullOrEmpty(textConfig.Text))
+      {
+        MessageBox.Show("No Config loaded !", "Error");
+        return;
+      }
+      else
       {
         SaveXml(textConfig.Text + ".tmp");
         Load_Preview(true);

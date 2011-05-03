@@ -213,6 +213,7 @@ public class TagName
   public static string KeyTTitleRegExp = "KeyTTitleRegExp";
   public static string KeyTTitleMaxItems = "KeyTTitleMaxItems";
   public static string KeyTTitleLanguage = "KeyTTitleLanguage";
+  public static string KeyTTitleLanguageAll = "KeyTTitleLanguageAll";
   //  public static string KeyTTitleSubPage = "KeyTTitleSubPage";
   public static string KeyStartImg = "KeyStartImg";             // Cover Image
   public static string KeyEndImg = "KeyEndImg";
@@ -285,6 +286,7 @@ public class TagName
   public static string KeyCertificationRegExp = "KeyCertificationRegExp";
   public static string KeyCertificationIndex = "KeyCertificationIndex";
   public static string KeyCertificationLanguage = "KeyCertificationLanguage";
+  public static string KeyCertificationLanguageAll = "KeyCertificationLanguageAll";
   // Not yet added:
   //"Studio":
   //"IMDB_Rank":
