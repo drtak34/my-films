@@ -286,6 +286,25 @@ namespace Grabber_Interface
       catch { cbTtitleMaxTitles.Text = string.Empty; };
       try { cbCertificationPreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
       catch { cbCertificationPreferredLanguage.Text = string.Empty; };
+
+      // Add Dropdownentries to User Options
+      cbTtitlePreferredLanguage.Items.Clear();
+      string strTemp;
+      try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguageAll)._Value; }
+      catch { strTemp = string.Empty; };
+      string[] split = strTemp.Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
+      foreach (var strDroptext in split)
+      {
+        cbTtitlePreferredLanguage.Items.Add(strDroptext);
+      }
+      cbCertificationPreferredLanguage.Items.Clear();
+      try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
+      catch { strTemp = string.Empty; };
+      split = strTemp.Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
+      foreach (var strDroptext in split)
+      {
+        cbCertificationPreferredLanguage.Items.Add(strDroptext);
+      }
     }
 
     public void SaveXml(string File)
