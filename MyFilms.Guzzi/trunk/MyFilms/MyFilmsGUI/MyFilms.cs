@@ -3813,6 +3813,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
       if (conf.LastID == ID_MyFilmsActors)
         GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
+      //if (facadeView.CurrentLayout == GUIFacadeControl.Layout.CoverFlow && Prev_ItemID != -1)
+      //{
+      //  //facadeView.CoverFlowLayout.SelectCard(facadeView.SelectedListItemIndex); // added to reduce broken initial animation
+      //  facadeView.CoverFlowLayout.SelectCard(Prev_ItemID); // added to reduce broken initial animation
+      //}
     }
     //--------------------------------------------------------------------------------------------
     //   Change LayOut 
@@ -3858,6 +3863,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case 4:
           GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLayout, GUILocalizeStrings.Get(791));
           facadeView.CurrentLayout = GUIFacadeControl.Layout.CoverFlow;
+          //if (facadeView.CurrentLayout == GUIFacadeControl.Layout.CoverFlow)
+          //  facadeView.CoverFlowLayout.SelectCard(facadeView.SelectedListItemIndex); // added to reduce broken initial animation
           break;
 
         default:

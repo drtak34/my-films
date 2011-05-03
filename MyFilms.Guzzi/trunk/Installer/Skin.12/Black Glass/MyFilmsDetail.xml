@@ -5,8 +5,9 @@
 	<allowoverlay>player.hasmedia+[!facadeview.filmstrip|!facadeview.coverflow]</allowoverlay>
 	<define>#header.background:hover_Films.png</define>
 	<define>#header.label:#myfilms.config.pluginname (#myfilms.view)</define>
-	<animation effect="fade" time="250" start="100" end="100">WindowClose</animation>
-	<controls>
+  <animation effect="fade" time="250" start="100" end="0">WindowClose</animation>
+  <animation effect="fade" time="250" start="0" end="100">WindowOpen</animation>
+  <controls>
 		<import>common.window.background.xml</import>
 <!--
 		<control>
@@ -18,6 +19,7 @@
 			<width>1280</width>
 			<height>720</height>
 			<texture>bg.jpg</texture>    
+			<visible>control.hasthumb(1000)</visible>
 			<shouldCache>true</shouldCache>
 		</control>
 -->
@@ -29,15 +31,15 @@
 			<posY>0</posY>
 			<width>1280</width>
 			<height>720</height>
-   			<keepaspectratio>yes</keepaspectratio>
+      <keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
 			<texture>#myfilms.fanart</texture>
-      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="1">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+    </control>
 		<control>
 			<description>fanart</description>
 			<type>multiimage</type>
@@ -46,14 +48,18 @@
 			<posY>0</posY>
 			<width>1280</width>
 			<height>720</height>
-      			<imagepath></imagepath>
-      			<timeperimage>3000</timeperimage>
-      			<fadetime>1000</fadetime>
-      			<loop>yes</loop>
-   			<keepaspectratio>yes</keepaspectratio>
+      <imagepath></imagepath>
+      <timeperimage>3000</timeperimage>
+      <fadetime>1000</fadetime>
+      <loop>yes</loop>
+      <keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
-      			<randomize>true</randomize>
-		</control>
+      <randomize>true</randomize>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+    </control>
 		<control>
 			<description>BG Overlay</description>
 			<type>image</type>
@@ -62,10 +68,12 @@
 			<height>720</height>
 			<texture>bg.jpg</texture>
 			<colordiffuse>c0ffffff</colordiffuse>
-      			<visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)</visible>
 			<shouldCache>true</shouldCache>
-      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 <!--		<import>common.window.overlay.xml</import> -->
 		<import>common.window.time.xml</import>
@@ -78,10 +86,10 @@
 			<width>948</width>
 			<height>766</height>
 			<texture>bg_facade.png</texture>
-      			<visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)</visible>
 			<shouldCache>true</shouldCache>
-      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -94,8 +102,8 @@
 			<font>font28</font>
 			<align>left</align>
 			<textcolor>60ffffff</textcolor>
-      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -340,39 +348,39 @@
 
 
 <!-- 		<control>
-			<description>Play Button and Summary</description>
-			<type>button</type>
-			<id>101</id>
-			<posX>2</posX>
-			<posY>630</posY>
-			<width>290</width>
-      			<height>30</height>
-			<onup>10004</onup>
-			<ondown>10001</ondown>
-			<onleft>107</onleft>
-			<onright>10099</onright>
-      			<label>#myfilms.menu.overview</label>
-			<font>font10</font>
-      			<textureFocus>-</textureFocus>
-      			<textureNoFocus>-</textureNoFocus>
-			<textcolor>ffffffff</textcolor>
-			<disabledcolor>30000000</disabledcolor>
-      			<textureFocus>MyFilms\ledon.png</textureFocus>
-      			<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
-        		<subitems>
-                		<subitem>101</subitem>
-                		<subitem>100</subitem>
-                		<subitem>417</subitem>
-        		</subitems>
-      			<textXOff>0</textXOff>
-      			<textYOff>0</textYOff>
-      			<visible>!Control.HasFocus(10099)</visible>
-			<animation effect="slide" time="0" start="-400,0" reversible="true">focus</animation>
-			<animation effect="slide" time="0" end="-400,0" reversible="true">unfocus</animation>
-		</control>
+			  <description>Play Button and Summary</description>
+			  <type>button</type>
+			  <id>101</id>
+			  <posX>2</posX>
+			  <posY>630</posY>
+			  <width>290</width>
+			  <height>30</height>
+			  <onup>10004</onup>
+			  <ondown>10001</ondown>
+			  <onleft>107</onleft>
+			  <onright>10099</onright>
+			  <label>#myfilms.menu.overview</label>
+			  <font>font10</font>
+			  <textureFocus>-</textureFocus>
+			  <textureNoFocus>-</textureNoFocus>
+			  <textcolor>ffffffff</textcolor>
+			  <disabledcolor>30000000</disabledcolor>
+			  <textureFocus>MyFilms\ledon.png</textureFocus>
+			  <textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
+  		    <subitems>
+    		    <subitem>101</subitem>
+    		    <subitem>100</subitem>
+    		    <subitem>417</subitem>
+  		    </subitems>
+			    <textXOff>0</textXOff>
+			    <textYOff>0</textYOff>
+		    <visible>!Control.HasFocus(10099)</visible>
+			  <animation effect="slide" time="0" start="-400,0" reversible="true">focus</animation>
+			  <animation effect="slide" time="0" end="-400,0" reversible="true">unfocus</animation>
+		  </control>
  -->
 
-    		<control>
+    <control>
 			<description>Play Button and Summary</description>
 			<type>button</type>
 			<id>10000</id>
@@ -391,6 +399,8 @@
       <visible allowhiddenfocus="true">!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 
     <control>
@@ -413,6 +423,8 @@
       <visible allowhiddenfocus="true">!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
     </control>
     <control>
       <type>button</type>
@@ -434,7 +446,9 @@
       <visible>!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
-    </control>
+ 			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+   </control>
     <control>
       <type>button</type>
       <description>Actor Details</description>
@@ -455,7 +469,9 @@
       <visible>!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
-    </control>
+ 			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+   </control>
     <control>
       <type>button</type>
       <description>Technical Details</description>
@@ -476,7 +492,9 @@
       <visible>!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
-    </control>
+ 			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+   </control>
 
     <control>
       <type>button</type>
@@ -505,6 +523,8 @@
 			<texture>MyFilms\ledon.png</texture>
       <visible>Control.HasFocus(10000)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -512,11 +532,13 @@
 			<posX>13</posX>
 			<posY>637</posY>
 			<width>22</width>
-      <height>22</height>
+      			<height>22</height>
 			<texture>MyFilms\ledoff.png</texture>
 			<colordiffuse>30ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10000)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>!Control.HasFocus(10000)+!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -524,10 +546,12 @@
 			<posX>13</posX>
 			<posY>652</posY>
 			<width>22</width>
-      <height>22</height>
+      			<height>22</height>
 			<texture>MyFilms\ledon.png</texture>
-      <visible>Control.HasFocus(10001)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>Control.HasFocus(10001)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -535,11 +559,13 @@
 			<posX>13</posX>
 			<posY>652</posY>
 			<width>22</width>
-      <height>22</height>
+      			<height>22</height>
 			<texture>MyFilms\ledoff.png</texture>
 			<colordiffuse>30ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -547,10 +573,12 @@
 			<posX>13</posX>
 			<posY>667</posY>
 			<width>22</width>
-      <height>22</height>
+      			<height>22</height>
 			<texture>MyFilms\ledon.png</texture>
-      <visible>Control.HasFocus(10002)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>Control.HasFocus(10002)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -558,11 +586,13 @@
 			<posX>13</posX>
 			<posY>667</posY>
 			<width>22</width>
-      <height>22</height>
+      			<height>22</height>
 			<colordiffuse>30ffffff</colordiffuse>
 			<texture>MyFilms\ledoff.png</texture>
-      <visible>!Control.HasFocus(10002)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10002)+!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -574,6 +604,8 @@
 			<texture>MyFilms\ledon.png</texture>
       <visible>Control.HasFocus(10003)</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -582,10 +614,12 @@
 			<posY>682</posY>
 			<width>22</width>
       <height>22</height>
-			<colordiffuse>30ffffff</colordiffuse>
-			<texture>MyFilms\ledoff.png</texture>
+      <colordiffuse>30ffffff</colordiffuse>
+      <texture>MyFilms\ledoff.png</texture>
       <visible>!Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -596,7 +630,9 @@
       <height>22</height>
 			<texture>MyFilms\ledon.png</texture>
       <visible>Control.HasFocus(10004)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -604,12 +640,16 @@
 			<posX>13</posX>
 			<posY>697</posY>
 			<width>22</width>
-      <height>22</height>
+      			<height>22</height>
 			<colordiffuse>30ffffff</colordiffuse>
 			<texture>MyFilms\ledoff.png</texture>
-      <visible>!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
+
+
 		<control>
 			<description>TitleValue</description>
 			<type>fadelabel</type>
@@ -621,8 +661,10 @@
 			<textcolor>ffffffff</textcolor>
 			<width>750</width>
 			<label>#myfilms.user.mastertitle.value</label>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>image</type>
@@ -633,12 +675,14 @@
 			<height>53</height>
 			<texture>bg_facade_line_nofocus.png</texture>
 			<colordiffuse>77ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>imagelist</type>
-      <id>1028</id>
+      			<id>1028</id>
 			<!--id>1</id-->
 			<posX>520</posX>
 			<posY>137</posY>
@@ -655,6 +699,8 @@
 			<imagesToDraw>10</imagesToDraw>
       			<visible>!Control.HasFocus(10099)</visible>
       			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>RatingValue</description>
@@ -666,8 +712,10 @@
 			<font>font10</font>
 			<align>left</align>
 			<textcolor>6fffffff</textcolor>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>DurationValue</description>
@@ -679,8 +727,10 @@
 			<font>font14</font>
 			<align>left</align>
 			<textcolor>ffffffff</textcolor>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Original Title</description>
@@ -692,8 +742,10 @@
 			<width>410</width>
 			<font>font14</font>
 			<textcolor>90ffffff</textcolor>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>	
 		<control>
 			<type>image</type>
@@ -704,8 +756,10 @@
 			<height>53</height>
 			<texture>bg_facade_line_nofocus.png</texture>
 			<colordiffuse>77ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>label</type>
@@ -716,7 +770,9 @@
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>fadelabel</type>
@@ -727,7 +783,9 @@
 			<width>535</width>
 			<textcolor>ffffffff</textcolor>
 			<font>font14</font>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>label</type>
@@ -739,7 +797,9 @@
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>YearValue</description>
@@ -751,7 +811,9 @@
 			<textcolor>ffffffff</textcolor>
 			<font>font14</font>
 			<width>535</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>CategoryPrompt</description>
@@ -763,7 +825,9 @@
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>CategoryValue</description>
@@ -774,7 +838,9 @@
 			<label>#myfilms.db.category.value</label>
 			<width>535</width>
 			<font>font14</font>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>CountryPrompt</description>
@@ -786,7 +852,9 @@
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>CountryValue</description>
@@ -797,7 +865,9 @@
 			<label>#myfilms.db.country.value</label>
 			<width>535</width>
 			<font>font14</font>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>DirectorPrompt</description>
@@ -809,7 +879,9 @@
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>DirectorValue</description>
@@ -820,7 +892,9 @@
 			<label>#myfilms.db.director.value</label>
 			<width>535</width>
 			<font>font14</font>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Optional Display Field 2 Prompt</description>
@@ -832,7 +906,9 @@
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Optional Display Field 2 Value</description>
@@ -844,7 +920,9 @@
 			<width>535</width>
 			<textcolor>ffffffff</textcolor>
 			<font>font14</font>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>ActorsPrompt</description>
@@ -856,7 +934,9 @@
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Actors (Overview)</description>
@@ -870,7 +950,9 @@
 			<label>#myfilms.db.actors.value</label>
 			<font>font12</font>
 			<seperator>: : :</seperator>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>description (overview)</description>
@@ -884,7 +966,9 @@
 			<label>#myfilms.db.description.value</label>
 			<seperator>: : :</seperator>
 			<font>font14</font>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 <!-- 
 Detailmenu for Description
@@ -899,7 +983,9 @@ Detailmenu for Description
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>Control.HasFocus(10001)</visible>
+      			<visible>Control.HasFocus(10001)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>description (Beschreibung)</description>
@@ -913,7 +999,9 @@ Detailmenu for Description
 			<label>#myfilms.db.description.value</label>
 			<seperator>: : :</seperator>
 			<font>font14</font>
-      <visible>Control.HasFocus(10001)</visible>
+      			<visible>Control.HasFocus(10001)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 <!-- 
 Detailmenu for Comments
@@ -928,7 +1016,9 @@ Detailmenu for Comments
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>Control.HasFocus(10002)</visible>
+      			<visible>Control.HasFocus(10002)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>comments value (Kommentar)</description>
@@ -939,10 +1029,12 @@ Detailmenu for Comments
 			<width>740</width>
 			<height>412</height>
 			<textcolor>FFFFFFFF</textcolor>
-      <label>#myfilms.db.comments.value</label>
+      			<label>#myfilms.db.comments.value</label>
 			<seperator>: : :</seperator>
 			<font>font14</font>
-      <visible>Control.HasFocus(10002)</visible>
+      			<visible>Control.HasFocus(10002)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 <!-- 
 Detailmenu for Persons
@@ -957,7 +1049,9 @@ Detailmenu for Persons
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>Control.HasFocus(10003)</visible>
+      			<visible>Control.HasFocus(10003)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Person Infos</description>
@@ -968,10 +1062,12 @@ Detailmenu for Persons
 			<width>740</width>
 			<height>412</height>
 			<textcolor>FFFFFFFF</textcolor>
-      <label>#myfilms.db.actors.value</label>
+      			<label>#myfilms.db.actors.value</label>
 			<seperator>: : :</seperator>
 			<font>font14</font>
-      <visible>Control.HasFocus(10003)</visible>
+      			<visible>Control.HasFocus(10003)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 <!-- 
 Detailmenu for technical details
@@ -985,7 +1081,7 @@ Detailmenu for technical details
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
 			<width>200</width>
-      <visible>Control.HasFocus(10004)</visible>
+      			<visible>Control.HasFocus(10004)</visible>
 		</control>
 		<control>
 			<type>fadelabel</type>
@@ -1483,14 +1579,14 @@ Detailmenu for technical details
 			<posY>40</posY>
 			<width>200</width>
 			<height>200</height>
-      <imagepath></imagepath>
-      <timeperimage>3000</timeperimage>
-      <fadetime>1000</fadetime>
-      <loop>yes</loop>
-   		<keepaspectratio>yes</keepaspectratio>
+      			<imagepath></imagepath>
+      			<timeperimage>3000</timeperimage>
+      			<fadetime>1000</fadetime>
+      			<loop>yes</loop>
+   			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
-      <randomize>true</randomize>
-      <visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
+      			<randomize>true</randomize>
+      			<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
 		</control>
 
 
@@ -1506,9 +1602,9 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<zoom>yes</zoom>
-      <visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1525,8 +1621,8 @@ Detailmenu for technical details
 			<centered>yes</centered>
 			<zoom>yes</zoom>
 			<visible>!Control.HasFocus(10099)+player.hasmedia</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1539,9 +1635,9 @@ Detailmenu for technical details
 			<width>437</width>
 			<height>556</height>
 			<texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1554,9 +1650,9 @@ Detailmenu for technical details
 			<height>53</height>
 			<texture>bg_facade_line_nofocus.png</texture>
 			<colordiffuse>77ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1570,9 +1666,9 @@ Detailmenu for technical details
 			<font>font12</font>
 			<width>690</width>
 			<textcolor>90ffffff</textcolor>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1587,9 +1683,9 @@ Detailmenu for technical details
 			<align>left</align>
 			<textcolor>90ffffff</textcolor>
 			<width>690</width>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1605,9 +1701,9 @@ Detailmenu for technical details
 			<texture>#myfilms.logos_id2001</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1622,9 +1718,9 @@ Detailmenu for technical details
 			<texture>#myfilms.logos_id2002</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1640,9 +1736,9 @@ Detailmenu for technical details
 			<texture>#myfilms.logos_id2003</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1658,14 +1754,12 @@ Detailmenu for technical details
 			<texture>#myfilms.logos_id2012</texture>
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>2</spaceBetweenItems>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
-
-
 
 <!--
 		<control>
@@ -1689,9 +1783,9 @@ Detailmenu for technical details
 			<align>right</align>
 			<texture>Films_DD.png</texture>
 			<colordiffuse>7fffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1707,9 +1801,9 @@ Detailmenu for technical details
 			<height>120</height>
 			<texture>MyFilms\fanart_overlay_top.png</texture>
 			<colordiffuse>ffffffff</colordiffuse>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1721,9 +1815,9 @@ Detailmenu for technical details
 			<width>1680</width>
 			<height>100</height>
 			<texture>gradient.png</texture>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
@@ -1737,9 +1831,9 @@ Detailmenu for technical details
 			<align>center</align>
 			<font>font24</font>
 			<label>#myfilms.user.mastertitle.value</label>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 			<animation effect="fade" time="250">WindowClose</animation>	
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> 
@@ -1754,9 +1848,11 @@ Detailmenu for technical details
 			<font>font14</font>
 			<textcolor>60ffffff</textcolor>
 			<label>#myfilms.db.year.value - #myfilms.db.category.value</label>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> 
 		<control>
 			<type>label</type>
@@ -1769,9 +1865,11 @@ Detailmenu for technical details
 			<font>font10</font>
 			<textcolor>60ffffff</textcolor>
 			<label>#myfilms.db.length.value #myfilms.db.length.unit - #myfilms.db.rating.value</label>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control> 
 
 <!--		<control>
@@ -1786,9 +1884,11 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>image</type>
@@ -1802,9 +1902,11 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>image</type>
@@ -1818,9 +1920,11 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 -->
 		<control>
@@ -1835,9 +1939,11 @@ Detailmenu for technical details
 			<keepaspectratio>yes</keepaspectratio>
 			<spaceBetweenItems>0</spaceBetweenItems>
 			<colordiffuse>cfffffff</colordiffuse>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>imagelist</type>
@@ -1858,9 +1964,11 @@ Detailmenu for technical details
 			<align>left</align>
 			<imagesToDraw>10</imagesToDraw>
 			<percentage>#myfilms.db.rating.value</percentage>
-      <visible>Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 <!-- End Special View for FullColorFanart -->
 
@@ -1924,9 +2032,11 @@ Detailmenu for technical details
 			<label>Film</label>
 			<font>font10</font>
 			<textcolor>6FFFFFFF</textcolor>
-      <visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<visible>!Control.HasFocus(10099)</visible>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Movie unavailable Icon</description>
@@ -1941,8 +2051,10 @@ Detailmenu for technical details
 			<colordiffuse>a0ffffff</colordiffuse>
 			<centered>yes</centered>
 			<visible>!string.equals(#myfilms.user.source.value)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Movie available Icon</description>
@@ -1957,8 +2069,10 @@ Detailmenu for technical details
 			<colordiffuse>d0ffffff</colordiffuse>
 			<centered>yes</centered>
 			<visible>string.equals(#myfilms.user.source.value)+!string.contains(#myfilms.user.source.isonline,False)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Movie offline Icon</description>
@@ -1973,8 +2087,10 @@ Detailmenu for technical details
 			<colordiffuse>d0ffffff</colordiffuse>
 			<centered>yes</centered>
 			<visible>string.equals(#myfilms.user.source.value)+string.contains(#myfilms.user.source.isonline,False)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 
 		<control>
@@ -1988,8 +2104,10 @@ Detailmenu for technical details
 			<font>font10</font>
 			<textcolor>6FFFFFFF</textcolor>
 			<visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Trailer Count</description>
@@ -2002,8 +2120,10 @@ Detailmenu for technical details
 			<font>font10</font>
 			<textcolor>6FFFFFFF</textcolor>
 			<visible>!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Trailer unavailable Icon</description>
@@ -2018,8 +2138,10 @@ Detailmenu for technical details
 			<centered>yes</centered>
 			<colordiffuse>a0ffffff</colordiffuse>
 			<visible>!string.equals(#myfilms.user.sourcetrailer.value)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Trailer available Icon</description>
@@ -2034,8 +2156,10 @@ Detailmenu for technical details
 			<centered>yes</centered>
 			<colordiffuse>d0ffffff</colordiffuse>
 			<visible>string.equals(#myfilms.user.sourcetrailer.value)+!string.contains(#myfilms.user.sourcetrailer.isonline,False)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Trailer offline Icon</description>
@@ -2050,8 +2174,10 @@ Detailmenu for technical details
 			<centered>yes</centered>
 			<colordiffuse>d0ffffff</colordiffuse>
 			<visible>string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.sourcetrailer.isonline,False)+!Control.HasFocus(10099)</visible>
-      <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<type>animation</type>
@@ -2064,6 +2190,10 @@ Detailmenu for technical details
 			<textures>common.waiting.1.png;common.waiting.2.png;common.waiting.3.png;common.waiting.4.png;common.waiting.5.png;common.waiting.6.png;common.waiting.7.png;common.waiting.8.png</textures>
 			<Duration>0:0:01.5</Duration>
 			<keepaspectratio>yes</keepaspectratio>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 <!--
 		<control>
@@ -2076,6 +2206,10 @@ Detailmenu for technical details
 			<height>300</height>
 			<keepaspectratio>yes</keepaspectratio>
 			<texture>\\XMS-GMI-01\Movies - Horror\100 Tears (DVD-DivX)\extrathumbs\thumb1.jpg</texture>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>ActorPicture</description>
@@ -2086,6 +2220,10 @@ Detailmenu for technical details
 			<width>300</width>
 			<keepaspectratio>yes</keepaspectratio>
 			<texture>http://ia.media-imdb.com/images/M/MV5BMTg5MzU4NDI0NF5BMl5BanBnXkFtZTcwODY3NjkxMQ@@._V1._SY275_SX400_.jpg</texture>
+      			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+      			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 -->
 	</controls>

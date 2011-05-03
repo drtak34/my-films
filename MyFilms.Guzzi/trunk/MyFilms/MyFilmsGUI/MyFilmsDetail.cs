@@ -280,11 +280,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("MyFilmsDetail: OnAction " + actionType.wID.ToString());
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
-              if (BtnMaj.Focus) // first switch to main details window before returning to main window ....
-              {
-                GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
-                return;
-              }
+              //if (BtnMaj.Focus) // first switch to main details window before returning to main window ....
+              //{
+              //  GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay);
+              //  return;
+              //}
               MyFilms.conf.LastID = MyFilms.ID_MyFilms;
               GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
               return;
