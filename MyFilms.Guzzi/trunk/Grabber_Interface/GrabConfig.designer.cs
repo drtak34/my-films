@@ -269,6 +269,9 @@ namespace Grabber_Interface
           // DVDPTagField
           // 
           this.DVDPTagField.FormattingEnabled = true;
+          this.DVDPTagField.Items.AddRange(new object[] {
+            resources.GetString("DVDPTagField.Items"),
+            resources.GetString("DVDPTagField.Items1")});
           resources.ApplyResources(this.DVDPTagField, "DVDPTagField");
           this.DVDPTagField.Name = "DVDPTagField";
           // 

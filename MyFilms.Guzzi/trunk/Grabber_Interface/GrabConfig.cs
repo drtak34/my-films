@@ -2488,7 +2488,6 @@ namespace Grabber_Interface
 
     private void cbTtitlePreferredLanguage_SelectedIndexChanged(object sender, EventArgs e)
     {
-      if (cbTtitlePreferredLanguage.SelectedIndex != -1) 
         xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value = cbTtitlePreferredLanguage.Text;
     }
 
