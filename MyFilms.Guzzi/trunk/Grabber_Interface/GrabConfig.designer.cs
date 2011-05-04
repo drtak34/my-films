@@ -1074,21 +1074,20 @@ namespace Grabber_Interface
             this.columnReplace,
             this.columnAdd});
           this.listViewFieldMapping.GridLines = true;
-          this.listViewFieldMapping.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            ((System.Windows.Forms.ListViewGroup)(resources.GetObject("listViewFieldMapping.Groups"))),
-            ((System.Windows.Forms.ListViewGroup)(resources.GetObject("listViewFieldMapping.Groups1"))),
-            ((System.Windows.Forms.ListViewGroup)(resources.GetObject("listViewFieldMapping.Groups2")))});
           this.listViewFieldMapping.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             ((System.Windows.Forms.ListViewItem)(resources.GetObject("listViewFieldMapping.Items"))),
             ((System.Windows.Forms.ListViewItem)(resources.GetObject("listViewFieldMapping.Items1"))),
             ((System.Windows.Forms.ListViewItem)(resources.GetObject("listViewFieldMapping.Items2")))});
           resources.ApplyResources(this.listViewFieldMapping, "listViewFieldMapping");
+          this.listViewFieldMapping.MinimumSize = new System.Drawing.Size(5, 0);
           this.listViewFieldMapping.Name = "listViewFieldMapping";
+          this.listViewFieldMapping.Sorting = System.Windows.Forms.SortOrder.Ascending;
           this.listViewFieldMapping.UseCompatibleStateImageBehavior = false;
           this.listViewFieldMapping.View = System.Windows.Forms.View.List;
           // 
           // columnGrabberField
           // 
+          this.columnGrabberField.Tag = "";
           resources.ApplyResources(this.columnGrabberField, "columnGrabberField");
           // 
           // columnReplace
