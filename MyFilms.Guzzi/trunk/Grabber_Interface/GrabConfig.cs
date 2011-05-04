@@ -46,13 +46,18 @@ namespace Grabber_Interface
     private XmlConf xmlConf;
     private ArrayList listUrl = new ArrayList();
     private CookieContainer cookie = new CookieContainer();
+
     //TabPage tabPageSaveMovie = null;
     //TabPage tabPageSaveDetails = null;
+
+    private string[] Fields = new string[30]; // List to hold all possible grab fields ...
+
 
     public GrabConfig(string[] args)
     {
       System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
       InitializeComponent();
+      this.InitMappingTable(); // load Mappingtable with values and other initialization
 
       if (CultureInfo.InstalledUICulture.ToString() == FrenchCulture.ToString())
         radioButtonFR.Checked = true;
@@ -253,6 +258,7 @@ namespace Grabber_Interface
 
     public void LoadXml()
     {
+      InitMappingTable();
       xmlConf = new XmlConf(textConfig.Text);
 
       textName.Text = xmlConf.find(xmlConf.listGen, TagName.DBName)._Value;
@@ -2501,6 +2507,67 @@ namespace Grabber_Interface
     {
       if (cbCertificationPreferredLanguage.SelectedIndex != -1) 
         xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value = cbCertificationPreferredLanguage.Text;
+    }
+
+    private void InitMappingTable()
+    {
+      Fields[0] = "OriginalTitle";
+      Fields[1] = "TranslatedTitle";
+      Fields[2] = "Picture";
+      Fields[3] = "Description";
+      Fields[4] = "Rating";
+      Fields[5] = "Actors";
+      Fields[6] = "Director";
+      Fields[7] = "Producer";
+      Fields[8] = "Year";
+      Fields[9] = "Country";
+      Fields[10] = "Category";
+      Fields[11] = "URL - Redirection Picture";
+      Fields[12] = "ImageURL";
+      Fields[13] = "URL - Redirection Persons";
+      Fields[14] = "Comment";
+      Fields[15] = "Language";
+      Fields[16] = "Tagline";
+      Fields[17] = "Certification";
+      Fields[18] = "URL - Redirection Titles";
+      Fields[19] = "Writer";
+      Fields[20] = "";
+      Fields[21] = "";
+      Fields[22] = "";
+      Fields[23] = "";
+      Fields[24] = "";
+      Fields[25] = "";
+      Fields[26] = "TranslatedTitle - All Names";
+      Fields[27] = "TranslatedTitle - All Values";
+      Fields[28] = "Certification - All Names";
+      Fields[29] = "Certification - All Values";
+      
+      Column2.Items.Add(""); // empty field to choose ....
+      foreach (string field in Fields)
+      {
+        if (!string.IsNullOrEmpty(field))
+        Column2.Items.Add(field);
+      }
+      for (int n = 0; n < 30; n++)
+      {
+        //Column2.Items.Add(Fields[n]); // add items to dropdownlist
+        n = dataGridViewMapping.Rows.Add(); // add row for config
+        dataGridViewMapping.Rows[n].Cells[0].Value = n;
+        dataGridViewMapping.Rows[n].Cells[1].Value = Fields[n]; // adds field name
+        // dataGridViewMapping.Rows[n].Cells[2].Value = Fields[n]; // can be used to original field.
+        //dataGridViewMapping.Rows[n].Cells[1].Value = "dateTimeNow";
+        dataGridViewMapping.Rows[n].Cells[3].Value = false;
+        dataGridViewMapping.Rows[n].Cells[4].Value = false;
+        dataGridViewMapping.Rows[n].Cells[5].Value = false;
+
+        //
+        // The second cell is a date cell, use typeof(DateTime).
+        //
+        //dataGridViewMapping.Rows[n].Cells[1].ValueType = typeof(DateTime);
+        //dataGridViewMapping.Rows[n].Cells[2].Value = wordCount;
+
+      }
+
     }
   }
 }
