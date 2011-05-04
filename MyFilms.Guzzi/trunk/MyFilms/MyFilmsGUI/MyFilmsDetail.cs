@@ -1529,7 +1529,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             
             LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url.ToString() + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID.ToString() + "', interactive = '" + interactive.ToString() + "'"); 
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-            string[] Result = new string[20];
+            string[] Result = new string[30];
             string title = string.Empty;
             string ttitle = string.Empty;
             string wtitle = string.Empty;
@@ -2591,7 +2591,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url.ToString() + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID.ToString() + "', interactive = '" + interactive.ToString() + "'");
           Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-          string[] Result = new string[20];
+          string[] Result = new string[30];
           string title = string.Empty;
           string ttitle = string.Empty;
           string wtitle = string.Empty;
