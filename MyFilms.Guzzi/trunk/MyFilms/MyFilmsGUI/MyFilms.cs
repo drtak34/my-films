@@ -588,7 +588,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!groupcover.Active)
         groupcover.Active = true;
 
-      DoPageLoad(); // run former WindowInit threaded...
+      Worker_DoPageLoad(); // run former WindowInit synchronous
+      //DoPageLoad(); // run former WindowInit threaded...
       LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
       base.OnPageLoad(); // let animations run
     }
@@ -1523,22 +1524,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    //---------------------------------------------------------------------------------------
-    //   Handle Clicked Events
-    //---------------------------------------------------------------------------------------
-    protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
-    {
-      LogMyFilms.Debug("OnClicked() started");
-      //if (control == this.viewMenuButton)
-      //{
-      //  showViewSwitchDialog();
-      //  viewMenuButton.Focus = false;
-      //  return;
-      //}
+    ////---------------------------------------------------------------------------------------
+    ////   Handle Clicked Events
+    ////---------------------------------------------------------------------------------------
+    //protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
+    //{
+    //  LogMyFilms.Debug("OnClicked() started");
+    //  //if (control == this.viewMenuButton)
+    //  //{
+    //  //  showViewSwitchDialog();
+    //  //  viewMenuButton.Focus = false;
+    //  //  return;
+    //  //}
 
-      //if (actionType != MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM) return; // some other events raised onClicked too for some reason?
-      base.OnClicked(controlId, control, actionType);
-    }
+    //  //if (actionType != MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM) return; // some other events raised onClicked too for some reason?
+    //  base.OnClicked(controlId, control, actionType);
+    //}
 
     //---------------------------------------------------------------------------------------
     //   Handle posted Messages
@@ -1724,12 +1725,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           if (iControl == (int)Controls.CTRL_List && messageType.Param1 != 7)// we only handle "SELECT_ITEM" here - some other events raised onClicked too for some reason?
-            return base.OnMessage(messageType);
+            return true; 
+            //return base.OnMessage(messageType);
 
           if (iControl == (int)Controls.CTRL_List)
           {
             // if (facadeView.SelectedListItemIndex > -1 && !bgOnPageLoad.IsBusy) // do not allow going to details when loading thread still active !!!
-            if (facadeView.SelectedListItemIndex > -1) // do not allow going to details when loading thread still active !!!
+            if (facadeView.SelectedListItemIndex > -1)
               {
               if (!facadeView.SelectedListItem.IsFolder && !conf.Boolselect)
               // New Window for detailed selected item information

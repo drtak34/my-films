@@ -9,10 +9,17 @@
 8  - "Year", 
 9  - "Country", 
 10 - "Category", 
-11 - "URL"
+11 - "URL" - Redirection Picture
 12 - "ImageURL"
-13 - "MultipurposeURLlink"
+13 - URL - Redirection Persons
 14 - comment
 15 - language
 16 - tagline
 17 - certification
+18 - URL - Redirection Titles
+19 - Writer
+
+26 - TranslatedTitle - All Names
+27 - TranslatedTitle - All Values
+28 - Certification - All Names
+29 - Certification - All Values
