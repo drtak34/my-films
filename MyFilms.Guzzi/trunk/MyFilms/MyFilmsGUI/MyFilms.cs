@@ -1443,6 +1443,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("OnAction " + action.wID);
       switch (action.wID)
       {
+        case Action.ActionType.ACTION_MOVE_LEFT:
+        case Action.ActionType.ACTION_MOVE_RIGHT:
+          base.OnAction(action);
+          return;
+
         case Action.ActionType.ACTION_PARENT_DIR:
           if (GetPrevFilmList()) return;
           break;
@@ -2457,15 +2462,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void item_OnItemSelected(GUIListItem item, GUIControl parent)
     {
-      LogMyFilms.Debug("Call item_OnItemSelected()with options - item: '" + item.ItemId + "', SelectedListItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Label: '" + facadeView.SelectedListItem.Label + "', TVtag: '" + item.TVTag.ToString() + "'");
-      if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label)
-      {
-        LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
-        return;
-      }
+      // LogMyFilms.Debug("Call item_OnItemSelected()with options - item: '" + item.ItemId + "', SelectedListItemIndex: '" + facadeView.SelectedListItemIndex.ToString() + "', Label: '" + facadeView.SelectedListItem.Label + "', TVtag: '" + item.TVTag.ToString() + "'");
+
       GUIFilmstripControl filmstrip = parent as GUIFilmstripControl;
       if (filmstrip != null)
         filmstrip.InfoImageFileName = item.ThumbnailImage;
+
+      if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label)
+      {
+        //LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
+        return;
+      }
+
+      // MovieDetailsPublisher(item, true); // try: loa dMovieDetailsPublisher always ...
+
       if (!(conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
       {
         if (facadeView.SelectedListItemIndex > -1)
@@ -2484,18 +2494,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
-      //Load_Lstdetail(item.ItemId, true, item.Label);
+      // Load_Lstdetail(item.ItemId, true, item.Label);
     }
 
     //private void MovieDetailsPublisher(int ItemId, string wlabel)
     private void MovieDetailsPublisher(GUIListItem item, bool wrep)
     {
-      LogMyFilms.Debug("Call MovieDetailsPublisher()with options - ItemId    : '" + item.ItemId + "', label: '" + item.Label + "'");
+      LogMyFilms.Debug("Call MovieDetailsPublisher() with options - ItemId    : '" + item.ItemId + "', label: '" + item.Label + "'");
       double tickCount = System.Windows.Media.Animation.AnimationTimer.TickCount;
       // Update instance of delayed item with current position
       itemToPublish = item;
       // Publish instantly when previous request has passed the required delay
-      if (100 < (int)(tickCount - lastPublished)) // wait 100 ms to load details...
+      if (125 < (int)(tickCount - lastPublished)) // wait 125 ms to load details...
       {
         lastPublished = tickCount;
         Load_Lstdetail(itemToPublish);
