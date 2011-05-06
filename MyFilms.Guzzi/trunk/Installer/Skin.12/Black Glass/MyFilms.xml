@@ -369,7 +369,7 @@ End additional Backdrops  -->
 					<onup>2</onup>
 					<onleft>50</onleft>
 					<onright>50</onright>
-					<selectedCard>0</selectedCard>
+					<!-- <selectedCard>0</selectedCard> -->
 					<cardWidth>255</cardWidth>
 					<cardHeight>360</cardHeight>
 					<angle>45</angle>
@@ -378,7 +378,7 @@ End additional Backdrops  -->
 					<sideDepth>250</sideDepth>
 					<offsetY>0</offsetY>
 					<selectedOffsetY>0</selectedOffsetY>
-					<speed>8</speed>
+					<speed>6</speed>
 					<!--
 					<backgroundHeight>250</backgroundHeight>
 					<backgroundWidth>1280</backgroundWidth>
@@ -411,7 +411,7 @@ End additional Backdrops  -->
 					<scrollbarYOff>420</scrollbarYOff>
 					<cards flipY="yes" diffuse="Thumb_Mask.png" mask="DVDCase_coverflow_mask.png"/>
 					<keepaspectratio>yes</keepaspectratio>
-					<thumbZoom>no</thumbZoom>
+					<thumbZoom>yes</thumbZoom>
 					<subitems>
 						<subitem>
 							<![CDATA[
@@ -425,8 +425,7 @@ End additional Backdrops  -->
 									<height>360</height>
 									<texture flipY="yes" diffuse="Thumb_Mask.png" mask="DVDCase_coverflow_mask.png">black.png</texture>
 								</control>
-
-								
+								<!--
 								<control>
 									<description>Watched Icon</description>
 									<type>image</type>
@@ -449,7 +448,7 @@ End additional Backdrops  -->
 									<texture>overlayunwatched.png</texture>
 									<visible>!string.equals(#runtime,0)+!string.equals(#year,1900)+!string.contains(#iswatched, yes)</visible>
 								</control>
-								
+								-->
 								<control>
 									<description>Movie Title</description>
 									<type>fadelabel</type>
@@ -604,8 +603,6 @@ End additional Backdrops  -->
 									<wrapString> : : : </wrapString>
 									<visible>![!string.equals(#runtime,0)+!string.equals(#year,1900)]</visible>
 								</control>
-
-								
 							</controls>
 							]]>
 						</subitem>
