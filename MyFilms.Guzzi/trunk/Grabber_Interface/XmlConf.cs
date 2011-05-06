@@ -13,6 +13,7 @@ class XmlConf
     public List<ListNode> listGen = new List<ListNode>();
     public List<ListNode> listSearch = new List<ListNode>();
     public List<ListNode> listDetail = new List<ListNode>();
+    public List<ListNode> listMappings = new List<ListNode>();
 
     //Contructeur
     public XmlConf(string configFile)
@@ -70,10 +71,18 @@ class XmlConf
 
         for (int i = 0; i < l.Count; i++)
         {
-            if (l.Item(i).ParentNode.Name == "Details")
-                setList(3, l.Item(i));
+          if (l.Item(i).ParentNode.Name == "Details")
+            setList(3, l.Item(i));
         }
-    
+
+        l = n.SelectNodes("Mappings/*");
+
+        for (int i = 0; i < l.Count; i++)
+        {
+          if (l.Item(i).ParentNode.Name == "Mappings")
+            setList(4, l.Item(i));
+        }
+
     }
 
     /// <summary>
@@ -113,6 +122,12 @@ class XmlConf
                     (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
                     (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText))));
                 break;
+            case 4:
+                listDetail.Add(new ListNode(node.Name,
+                    XmlConvert.DecodeName(node.InnerText),
+                    (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
+                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText))));
+                break;
         }
     }
 
@@ -139,6 +154,9 @@ class ListNode
     private string value = string.Empty;
     private string param1 = string.Empty;
     private string param2 = string.Empty;
+    private string param3 = string.Empty;
+    private string param4 = string.Empty;
+    private string param5 = string.Empty;
 
     public ListNode(string tag, string value, string param1, string param2)
     {
@@ -172,8 +190,26 @@ class ListNode
 
     public string _Param2
     {
-        get { return param2; }
-        set { param2 = value; }
+      get { return param2; }
+      set { param2 = value; }
+    }
+
+    public string _Param3
+    {
+      get { return param3; }
+      set { param3 = value; }
+    }
+
+    public string _Param4
+    {
+      get { return param4; }
+      set { param4 = value; }
+    }
+
+    public string _Param5
+    {
+      get { return param5; }
+      set { param5 = value; }
     }
 
 }
@@ -293,5 +329,11 @@ public class TagName
   //"Edition":
   //IMDB_Id
   //TMDB_Id
+  public static string MappingNumber = "MappingNumber";
+  public static string MappingSource = "MappingSource";
+  public static string MappingDestination = "MappingDestination";
+  public static string MappingReplace = "MappingReplace";
+  public static string MappingAddStart = "MappingAddStart";
+  public static string MappingAddEnd = "MappingAddEnd";
 }
 

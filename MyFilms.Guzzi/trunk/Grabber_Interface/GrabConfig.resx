@@ -1940,6 +1940,53 @@ of the generated DB.</value>
   <data name="&gt;&gt;DVDPTagField.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewMapping.Location" type="System.Drawing.Point, System.Drawing">
+    <value>439, 90</value>
+  </data>
+  <data name="dataGridViewMapping.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="dataGridViewMapping.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 410</value>
+  </data>
+  <data name="dataGridViewMapping.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="dataGridViewMapping.ToolTip" xml:space="preserve">
+    <value>With the Mapping Table you can control the mapping of grabbed data to 
+your catalog fields.
+You can e.g. map data of fields, that are missing in your catlaog to an existing field.</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
+    <value>dataGridViewMapping</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>109, 17</value>
   </metadata>
@@ -4101,18 +4148,6 @@ of the generated DB.</value>
   <data name="&gt;&gt;label31.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
-    <value>dataGridViewMapping</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
-    <value>tabPageUserSettings</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;label30.Name" xml:space="preserve">
     <value>label30</value>
   </data>
@@ -4200,49 +4235,38 @@ of the generated DB.</value>
   <data name="&gt;&gt;tabPageUserSettings.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="label31.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewMapping.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 90</value>
   </data>
-  <data name="dataGridViewMapping.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 410</value>
+  <data name="label31.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="dataGridViewMapping.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="label31.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="dataGridViewMapping.ToolTip" xml:space="preserve">
-    <value>With the Mapping Table you can control the mapping of grabbed data to 
-your catalog fields.
-You can e.g. map data of fields, that are missing in your catlaog to an existing field.</value>
+  <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
+    <value>435, 61</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
-    <value>dataGridViewMapping</value>
+  <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 20</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="label31.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
+  <data name="label31.Text" xml:space="preserve">
+    <value>Data Field Mapping ...</value>
+  </data>
+  <data name="&gt;&gt;label31.Name" xml:space="preserve">
+    <value>label31</value>
+  </data>
+  <data name="&gt;&gt;label31.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label31.Parent" xml:space="preserve">
     <value>tabPageUserSettings</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;label31.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5385,7 +5409,7 @@ you can edit and then save it to another name (Save).</value>
     <value>Source</value>
   </data>
   <data name="Column1.Width" type="System.Int32, mscorlib">
-    <value>66</value>
+    <value>125</value>
   </data>
   <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -5394,7 +5418,7 @@ you can edit and then save it to another name (Save).</value>
     <value>Destination</value>
   </data>
   <data name="Column2.Width" type="System.Int32, mscorlib">
-    <value>85</value>
+    <value>125</value>
   </data>
   <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -5422,39 +5446,6 @@ you can edit and then save it to another name (Save).</value>
   </data>
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>73</value>
-  </data>
-  <data name="label31.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label31.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="label31.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>435, 61</value>
-  </data>
-  <data name="label31.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 20</value>
-  </data>
-  <data name="label31.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="label31.Text" xml:space="preserve">
-    <value>Data Field Mapping ...</value>
-  </data>
-  <data name="&gt;&gt;label31.Name" xml:space="preserve">
-    <value>label31</value>
-  </data>
-  <data name="&gt;&gt;label31.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label31.Parent" xml:space="preserve">
-    <value>tabPageUserSettings</value>
-  </data>
-  <data name="&gt;&gt;label31.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -84,6 +84,7 @@ namespace Grabber_Interface
           this.groupBox15 = new System.Windows.Forms.GroupBox();
           this.chkAddTags = new System.Windows.Forms.CheckBox();
           this.DVDPTagField = new System.Windows.Forms.ComboBox();
+          this.dataGridViewMapping = new System.Windows.Forms.DataGridView();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -141,7 +142,7 @@ namespace Grabber_Interface
           this.label5 = new System.Windows.Forms.Label();
           this.label4 = new System.Windows.Forms.Label();
           this.tabPageUserSettings = new System.Windows.Forms.TabPage();
-          this.dataGridViewMapping = new System.Windows.Forms.DataGridView();
+          this.label31 = new System.Windows.Forms.Label();
           this.label30 = new System.Windows.Forms.Label();
           this.groupBox11 = new System.Windows.Forms.GroupBox();
           this.groupBox12 = new System.Windows.Forms.GroupBox();
@@ -178,9 +179,9 @@ namespace Grabber_Interface
           this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
           this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
           this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-          this.label31 = new System.Windows.Forms.Label();
           this.groupBox8.SuspendLayout();
           this.groupBox15.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).BeginInit();
@@ -194,7 +195,6 @@ namespace Grabber_Interface
           this.groupBox2.SuspendLayout();
           this.groupBox1.SuspendLayout();
           this.tabPageUserSettings.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox11.SuspendLayout();
           this.groupBox12.SuspendLayout();
           this.groupBox14.SuspendLayout();
@@ -654,6 +654,26 @@ namespace Grabber_Interface
           resources.ApplyResources(this.DVDPTagField, "DVDPTagField");
           this.DVDPTagField.Name = "DVDPTagField";
           // 
+          // dataGridViewMapping
+          // 
+          this.dataGridViewMapping.AllowUserToAddRows = false;
+          this.dataGridViewMapping.AllowUserToDeleteRows = false;
+          this.dataGridViewMapping.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+          this.dataGridViewMapping.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+          this.dataGridViewMapping.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+          this.dataGridViewMapping.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column0,
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5});
+          resources.ApplyResources(this.dataGridViewMapping, "dataGridViewMapping");
+          this.dataGridViewMapping.MultiSelect = false;
+          this.dataGridViewMapping.Name = "dataGridViewMapping";
+          this.dataGridViewMapping.RowHeadersVisible = false;
+          this.toolTip1.SetToolTip(this.dataGridViewMapping, resources.GetString("dataGridViewMapping.ToolTip"));
+          // 
           // linkLabelMFwiki
           // 
           resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
@@ -1063,23 +1083,10 @@ namespace Grabber_Interface
           this.tabPageUserSettings.Name = "tabPageUserSettings";
           this.tabPageUserSettings.UseVisualStyleBackColor = true;
           // 
-          // dataGridViewMapping
+          // label31
           // 
-          this.dataGridViewMapping.AllowUserToAddRows = false;
-          this.dataGridViewMapping.AllowUserToDeleteRows = false;
-          this.dataGridViewMapping.BackgroundColor = System.Drawing.SystemColors.ControlLight;
-          this.dataGridViewMapping.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-          this.dataGridViewMapping.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column0,
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
-          resources.ApplyResources(this.dataGridViewMapping, "dataGridViewMapping");
-          this.dataGridViewMapping.Name = "dataGridViewMapping";
-          this.dataGridViewMapping.RowHeadersVisible = false;
-          this.toolTip1.SetToolTip(this.dataGridViewMapping, resources.GetString("dataGridViewMapping.ToolTip"));
+          resources.ApplyResources(this.label31, "label31");
+          this.label31.Name = "label31";
           // 
           // label30
           // 
@@ -1343,16 +1350,14 @@ namespace Grabber_Interface
           // 
           // Column1
           // 
-          this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
           resources.ApplyResources(this.Column1, "Column1");
           this.Column1.Name = "Column1";
           // 
           // Column2
           // 
-          this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
           resources.ApplyResources(this.Column2, "Column2");
           this.Column2.Name = "Column2";
-          this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // Column3
@@ -1360,7 +1365,7 @@ namespace Grabber_Interface
           this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
           resources.ApplyResources(this.Column3, "Column3");
           this.Column3.Name = "Column3";
-          this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // Column4
@@ -1368,7 +1373,7 @@ namespace Grabber_Interface
           this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
           resources.ApplyResources(this.Column4, "Column4");
           this.Column4.Name = "Column4";
-          this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // Column5
@@ -1376,13 +1381,8 @@ namespace Grabber_Interface
           this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
           resources.ApplyResources(this.Column5, "Column5");
           this.Column5.Name = "Column5";
-          this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-          // 
-          // label31
-          // 
-          resources.ApplyResources(this.label31, "label31");
-          this.label31.Name = "label31";
           // 
           // GrabConfig
           // 
@@ -1411,6 +1411,7 @@ namespace Grabber_Interface
           this.groupBox8.PerformLayout();
           this.groupBox15.ResumeLayout(false);
           this.groupBox15.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxUSFlag)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFranceFlag)).EndInit();
@@ -1431,7 +1432,6 @@ namespace Grabber_Interface
           this.groupBox1.PerformLayout();
           this.tabPageUserSettings.ResumeLayout(false);
           this.tabPageUserSettings.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).EndInit();
           this.groupBox11.ResumeLayout(false);
           this.groupBox12.ResumeLayout(false);
           this.groupBox12.PerformLayout();
@@ -1596,13 +1596,13 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridView dataGridViewMapping;
         private System.Windows.Forms.BindingSource iMDBEnumeratorBindingSource1;
         private System.Windows.Forms.BindingSource iMDBEnumeratorBindingSource;
+        private System.Windows.Forms.Label label31;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column5;
-        private System.Windows.Forms.Label label31;
 
     }
 }

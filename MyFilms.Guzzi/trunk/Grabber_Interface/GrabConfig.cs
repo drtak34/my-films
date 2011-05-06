@@ -311,6 +311,29 @@ namespace Grabber_Interface
       {
         cbCertificationPreferredLanguage.Items.Add(strDroptext);
       }
+
+      // Read Mapping Infos
+      for (int i = 0; i < dataGridViewMapping.Rows.Count; i++)
+      {
+        try
+        {
+          string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty;
+          val1 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param1;
+          val2 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param2;
+          val3 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param3;
+          val4 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param4;
+          val5 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param5;
+
+          dataGridViewMapping.Rows[i].Cells[1].Value = val1;
+          dataGridViewMapping.Rows[i].Cells[2].Value = val2;
+          dataGridViewMapping.Rows[i].Cells[3].Value = val3;
+          dataGridViewMapping.Rows[i].Cells[4].Value = val4;
+          dataGridViewMapping.Rows[i].Cells[5].Value = val5;
+        }
+        catch
+        { }
+      }
+
     }
 
     public void SaveXml(string File)
@@ -366,8 +389,28 @@ namespace Grabber_Interface
         tw.WriteString(XmlConvert.EncodeName(xmlConf.listDetail[i]._Value));
         tw.WriteEndElement();
       }
-
       tw.WriteEndElement();
+
+      // Write Mapping Infos
+      tw.WriteStartElement("Mapping");
+      for (int i = 0; i < dataGridViewMapping.Rows.Count; i++)
+      {
+        tw.WriteStartElement("Field_" + i.ToString()); // fieldnumer
+        string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty;
+        if (dataGridViewMapping.Rows[i].Cells[1].Value != null) val1 = dataGridViewMapping.Rows[i].Cells[1].Value.ToString(); // source
+        if (dataGridViewMapping.Rows[i].Cells[2].Value != null) val2 = dataGridViewMapping.Rows[i].Cells[2].Value.ToString(); // destination
+        if (dataGridViewMapping.Rows[i].Cells[3].Value != null) val3 = dataGridViewMapping.Rows[i].Cells[3].Value.ToString(); // replace
+        if (dataGridViewMapping.Rows[i].Cells[4].Value != null) val4 = dataGridViewMapping.Rows[i].Cells[4].Value.ToString(); // add before
+        if (dataGridViewMapping.Rows[i].Cells[5].Value != null) val5 = dataGridViewMapping.Rows[i].Cells[5].Value.ToString(); // add after
+
+        tw.WriteAttributeString("source", XmlConvert.EncodeName(val1));
+        tw.WriteAttributeString("destination", XmlConvert.EncodeName(val2));
+        tw.WriteAttributeString("replace", XmlConvert.EncodeName(val3));
+        tw.WriteAttributeString("addstart", XmlConvert.EncodeName(val4));
+        tw.WriteAttributeString("addend", XmlConvert.EncodeName(val5));
+        tw.WriteEndElement();
+      }
+
       tw.WriteEndElement();
       tw.WriteEndElement();
       tw.WriteEndDocument();
@@ -1576,7 +1619,7 @@ namespace Grabber_Interface
 
       SaveXml(textConfig.Text + ".tmp");
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
-      string[] Result = new string[30];
+      string[] Result = new string[60];
 
       try // http://akas.imdb.com/title/tt0133093/
       {
@@ -1585,7 +1628,7 @@ namespace Grabber_Interface
       catch (Exception ex)
       {
         DialogResult dlgResult = DialogResult.None;
-        dlgResult = MessageBox.Show("An error ocurred - check your definitions!\n Exception: " + ex.ToString(), "Error", MessageBoxButtons.OK);
+        dlgResult = MessageBox.Show("An error ocurred - check your definitions!\n Exception: " + ex.ToString() + ", Stacktrace: " + ex.StackTrace.ToString(), "Error", MessageBoxButtons.OK);
         if (dlgResult == DialogResult.OK)
         {
         }
@@ -1687,19 +1730,13 @@ namespace Grabber_Interface
           case 29:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Certification'" + Environment.NewLine;
             break;
+          default:
+            textPreview.SelectedText += "(" + (i).ToString() + ") " + "Mapping Output Field '" + (i-30).ToString() + "'" + Environment.NewLine;
+            break;
+
         }
-        if (i <= 20) // Changed to support new fields...
+        if (i <= 60) // Changed to support new fields...
           textPreview.AppendText(Result[i] + Environment.NewLine);
-        if (i == 2)
-          textPreview.AppendText(Result[11] + Environment.NewLine);
-        if (i == 26)
-          textPreview.AppendText(Result[26] + Environment.NewLine);
-        if (i == 27)
-          textPreview.AppendText(Result[27] + Environment.NewLine);
-        if (i == 28)
-          textPreview.AppendText(Result[28] + Environment.NewLine);
-        if (i == 29)
-          textPreview.AppendText(Result[29] + Environment.NewLine);
       }
 
       System.IO.File.Delete(textConfig.Text + ".tmp");
@@ -2541,14 +2578,15 @@ namespace Grabber_Interface
       Fields[27] = "TranslatedTitle - All Values";
       Fields[28] = "Certification - All Names";
       Fields[29] = "Certification - All Values";
-      
+
+      Column2.Items.Clear();
       Column2.Items.Add(""); // empty field to choose ....
       foreach (string field in Fields)
       {
         if (!string.IsNullOrEmpty(field))
         Column2.Items.Add(field);
       }
-      for (int n = 0; n < 30; n++)
+      for (int n = 0; n < 29; n++)
       {
         //Column2.Items.Add(Fields[n]); // add items to dropdownlist
         n = dataGridViewMapping.Rows.Add(); // add row for config
