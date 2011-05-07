@@ -5490,14 +5490,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{56ce80ab-bede-4778-a29e-63111bf13490}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{4323b9e1-d21b-40d7-90db-30b8ed4d3f2a}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{54a22250-8a6b-460d-ac35-22a31488bd2f}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{85895e53-d42a-4fff-8992-6360837b3a6a}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

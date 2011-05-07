@@ -258,7 +258,7 @@ namespace Grabber_Interface
 
     public void LoadXml()
     {
-      InitMappingTable();
+      // InitMappingTable();
       xmlConf = new XmlConf(textConfig.Text);
 
       textName.Text = xmlConf.find(xmlConf.listGen, TagName.DBName)._Value;
@@ -313,25 +313,27 @@ namespace Grabber_Interface
       }
 
       // Read Mapping Infos
-      for (int i = 0; i < dataGridViewMapping.Rows.Count; i++)
+      for (int i = 0; i < 29; i++)
       {
         try
         {
           string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty;
-          val1 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param1;
-          val2 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param2;
-          val3 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param3;
-          val4 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param4;
-          val5 = xmlConf.find(xmlConf.listMappings, TagName.MappingSource)._Param5;
+          val1 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param1;
+          val2 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param2;
+          val3 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param3;
+          val4 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param4;
+          val5 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param5;
 
           dataGridViewMapping.Rows[i].Cells[1].Value = val1;
           dataGridViewMapping.Rows[i].Cells[2].Value = val2;
-          dataGridViewMapping.Rows[i].Cells[3].Value = val3;
-          dataGridViewMapping.Rows[i].Cells[4].Value = val4;
-          dataGridViewMapping.Rows[i].Cells[5].Value = val5;
+          dataGridViewMapping.Rows[i].Cells[3].Value = Convert.ToBoolean(val3);
+          dataGridViewMapping.Rows[i].Cells[4].Value = Convert.ToBoolean(val4);
+          dataGridViewMapping.Rows[i].Cells[5].Value = Convert.ToBoolean(val5);
         }
-        catch
-        { }
+        catch (Exception)
+        {
+          
+        }
       }
 
     }
@@ -2586,24 +2588,15 @@ namespace Grabber_Interface
         if (!string.IsNullOrEmpty(field))
         Column2.Items.Add(field);
       }
-      for (int n = 0; n < 29; n++)
+      for (int i = 0; i < 29; i++)
       {
-        //Column2.Items.Add(Fields[n]); // add items to dropdownlist
-        n = dataGridViewMapping.Rows.Add(); // add row for config
-        dataGridViewMapping.Rows[n].Cells[0].Value = n;
-        dataGridViewMapping.Rows[n].Cells[1].Value = Fields[n]; // adds field name
-        // dataGridViewMapping.Rows[n].Cells[2].Value = Fields[n]; // can be used to original field.
-        //dataGridViewMapping.Rows[n].Cells[1].Value = "dateTimeNow";
-        dataGridViewMapping.Rows[n].Cells[3].Value = false;
-        dataGridViewMapping.Rows[n].Cells[4].Value = false;
-        dataGridViewMapping.Rows[n].Cells[5].Value = false;
-
-        //
-        // The second cell is a date cell, use typeof(DateTime).
-        //
-        //dataGridViewMapping.Rows[n].Cells[1].ValueType = typeof(DateTime);
-        //dataGridViewMapping.Rows[n].Cells[2].Value = wordCount;
-
+        i = dataGridViewMapping.Rows.Add(); // add row for config
+        dataGridViewMapping.Rows[i].Cells[0].Value = i;
+        dataGridViewMapping.Rows[i].Cells[1].Value = Fields[i]; // adds field name
+        dataGridViewMapping.Rows[i].Cells[2].Value = string.Empty;
+        dataGridViewMapping.Rows[i].Cells[3].Value = false;
+        dataGridViewMapping.Rows[i].Cells[4].Value = false;
+        dataGridViewMapping.Rows[i].Cells[5].Value = false;
       }
 
     }

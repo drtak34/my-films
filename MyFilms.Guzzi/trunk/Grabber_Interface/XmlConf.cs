@@ -13,7 +13,7 @@ class XmlConf
     public List<ListNode> listGen = new List<ListNode>();
     public List<ListNode> listSearch = new List<ListNode>();
     public List<ListNode> listDetail = new List<ListNode>();
-    public List<ListNode> listMappings = new List<ListNode>();
+    public List<ListNode> listMapping = new List<ListNode>();
 
     //Contructeur
     public XmlConf(string configFile)
@@ -75,11 +75,11 @@ class XmlConf
             setList(3, l.Item(i));
         }
 
-        l = n.SelectNodes("Mappings/*");
+        l = n.SelectNodes("Mapping/*");
 
         for (int i = 0; i < l.Count; i++)
         {
-          if (l.Item(i).ParentNode.Name == "Mappings")
+          if (l.Item(i).ParentNode.Name == "Mapping")
             setList(4, l.Item(i));
         }
 
@@ -93,40 +93,72 @@ class XmlConf
     {
         XmlNode att1 = null;
         XmlNode att2 = null;
+        XmlNode att3 = null;
+        XmlNode att4 = null;
+        XmlNode att5 = null;
 
         for (int i = 0; i < node.Attributes.Count; i++)
         {
-            if (i == 0)
-                att1 = node.Attributes.Item(i);
-            else
-                att2 = node.Attributes.Item(i);
+          switch (i)
+          {
+            case 0:
+              att1 = node.Attributes.Item(i);
+              break;
+            case 1:
+              att2 = node.Attributes.Item(i);
+              break;
+            case 2:
+              att3 = node.Attributes.Item(i);
+              break;
+            case 3:
+              att4 = node.Attributes.Item(i);
+              break;
+            case 4:
+              att5 = node.Attributes.Item(i);
+              break;
+          }
+          //if (i == 0)
+          //      att1 = node.Attributes.Item(i);
+          //  else
+          //      att2 = node.Attributes.Item(i);
         }
-
         switch (list)
         {
             case 1:
                 listGen.Add(new ListNode(node.Name,
-                    XmlConvert.DecodeName(node.InnerText),
-                    (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
-                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText))));
+                    XmlConvert.DecodeName(node.InnerText), 
+                    (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)), 
+                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)), 
+                    (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)), 
+                    (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)), 
+                    (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText))));
                 break;
             case 2:
                 listSearch.Add(new ListNode(node.Name,
                     XmlConvert.DecodeName(node.InnerText),
                     (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
-                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText))));
+                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
+                    (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
+                    (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
+                    (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText))));
                 break;
             case 3:
                 listDetail.Add(new ListNode(node.Name,
                     XmlConvert.DecodeName(node.InnerText),
                     (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
-                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText))));
+                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
+                    (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
+                    (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
+                    (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText))));
                 break;
             case 4:
-                listDetail.Add(new ListNode(node.Name,
+                listMapping.Add(new ListNode(node.Name,
                     XmlConvert.DecodeName(node.InnerText),
                     (att1 == null ? null : XmlConvert.DecodeName(att1.InnerText)),
-                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText))));
+                    (att2 == null ? null : XmlConvert.DecodeName(att2.InnerText)),
+                    (att3 == null ? null : XmlConvert.DecodeName(att3.InnerText)),
+                    (att4 == null ? null : XmlConvert.DecodeName(att4.InnerText)),
+                    (att5 == null ? null : XmlConvert.DecodeName(att5.InnerText))));
                 break;
         }
     }
@@ -158,7 +190,7 @@ class ListNode
     private string param4 = string.Empty;
     private string param5 = string.Empty;
 
-    public ListNode(string tag, string value, string param1, string param2)
+    public ListNode(string tag, string value, string param1, string param2, string param3, string param4, string param5)
     {
         this.tag = tag;
         this.value = value;
@@ -166,8 +198,18 @@ class ListNode
             param1 = "";
         this.param1 = param1;
         if (param2 == null)
-            param2 = "";
+          param2 = "";
         this.param2 = param2;
+
+        if (param3 == null)
+          param3 = "";
+        this.param3 = param3;
+        if (param4 == null)
+          param4 = "";
+        this.param4 = param4;
+        if (param5 == null)
+          param5 = "";
+        this.param5 = param5;
     }
 
     public string _Tag
@@ -211,7 +253,6 @@ class ListNode
       get { return param5; }
       set { param5 = value; }
     }
-
 }
 
 
@@ -329,11 +370,11 @@ public class TagName
   //"Edition":
   //IMDB_Id
   //TMDB_Id
-  public static string MappingNumber = "MappingNumber";
-  public static string MappingSource = "MappingSource";
-  public static string MappingDestination = "MappingDestination";
-  public static string MappingReplace = "MappingReplace";
-  public static string MappingAddStart = "MappingAddStart";
-  public static string MappingAddEnd = "MappingAddEnd";
+  //public static string MappingNumber = "MappingNumber";
+  //public static string MappingSource = "MappingSource";
+  //public static string MappingDestination = "MappingDestination";
+  //public static string MappingReplace = "MappingReplace";
+  //public static string MappingAddStart = "MappingAddStart";
+  //public static string MappingAddEnd = "MappingAddEnd";
 }
 
