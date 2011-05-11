@@ -61,6 +61,13 @@ Public Class AntRecord
         SubUrlTitles = 18
         SubUrlCertification = 19
         Writer = 20
+
+        '19 - Writer
+        '26 - TranslatedTitle - All Names
+        '27 - TranslatedTitle - All Values
+        '28 - Certification - All Names
+        '29 - Certification - All Values
+
     End Enum
     Public Enum Process_Mode_Names
         Import

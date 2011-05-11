@@ -57,6 +57,9 @@ Public Class AntProcessor
             If ds.Tables("tblFoundMediaFiles") IsNot Nothing Then
                 FileCount += ds.Tables("tblFoundMediaFiles").Rows.Count
             End If
+            If ds.Tables("tblFoundTrailerFiles") IsNot Nothing Then
+                FileCount += ds.Tables("tblFoundTrailerFiles").Rows.Count
+            End If
             If ds.Tables("tblFoundNonMediaFiles") IsNot Nothing Then
                 FileCount += ds.Tables("tblFoundNonMediaFiles").Rows.Count
             End If
@@ -1048,6 +1051,9 @@ Public Class AntProcessor
         If ds.Tables("tblFoundNonMediaFiles") IsNot Nothing Then
             ds.Tables("tblFoundNonMediaFiles").Clear()
         End If
+        If ds.Tables("tblFoundTrailerFiles") IsNot Nothing Then
+            ds.Tables("tblFoundTrailerFiles").Clear()
+        End If
         If ds.Tables("tblFoundMediaFiles") IsNot Nothing Then
             ds.Tables("tblFoundMediaFiles").Clear()
         End If
@@ -1091,7 +1097,7 @@ Public Class AntProcessor
                     If (XMLExclTable.ContainsValue(foundFile.ToLower) = False) Then
                         'Check for match against movie file types:
                         Try
-                            'I took out the Override path here so every file gets loaded into tblFoundMovieFiles properly.  Override path handling moved to ProcessOr
+                            'I took out the Override path here so every file gets loaded into tblFoundMovieFiles properly.  Override path handling moved to Processor
                             FoundFileName = StripPathFromFile(foundFile, CurrentMoviePath)
 
                             'File Handling - compare extension to known media filetypes
@@ -2181,6 +2187,19 @@ Public Class AntProcessor
 
         'Found Non-Media Files Table
         table = New DataTable("tblFoundNonMediaFiles")
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.String")
+        column.ColumnName = "FileName"
+        table.Columns.Add(column)
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.String")
+        column.ColumnName = "FilePath"
+        table.Columns.Add(column)
+        table.CaseSensitive = False
+        ds.Tables.Add(table)
+
+        'Found Trailer-Media Files Table
+        table = New DataTable("tblFoundTrailerFiles")
         column = New DataColumn()
         column.DataType = System.Type.GetType("System.String")
         column.ColumnName = "FileName"
