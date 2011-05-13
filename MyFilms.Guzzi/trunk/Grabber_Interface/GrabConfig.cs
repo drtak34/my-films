@@ -2569,8 +2569,8 @@ namespace Grabber_Interface
       Fields[16] = "Tagline";
       Fields[17] = "Certification";
       Fields[18] = "URL - Redirection Titles";
-      Fields[19] = "Writer";
-      Fields[20] = "";
+      Fields[19] = "URL - Redirection Certification";
+      Fields[20] = "Writer";
       Fields[21] = "";
       Fields[22] = "";
       Fields[23] = "";

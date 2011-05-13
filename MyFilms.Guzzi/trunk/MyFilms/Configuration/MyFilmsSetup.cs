@@ -4721,7 +4721,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //AMCupdater
           chkAMCUpd.Checked = true; // Use AMCupdater
           AMCMovieScanPath.Text = PathStorage.Text;
-          chkAMC_Purge_Missing_Files.Checked = true;
+          chkAMC_Purge_Missing_Files.Checked = false;
           txtPicturePrefix.Text = Config_Name.Text + "_"; // Use configname as default prefix
           txtAMCUpd_cnf.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
           // Make controls visible:
