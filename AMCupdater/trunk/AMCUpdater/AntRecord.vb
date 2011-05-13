@@ -59,10 +59,13 @@ Public Class AntRecord
         Tagline = 16
         Certification = 17
         SubUrlTitles = 18
-        SubUrlCertification = 19
-        Writer = 20
-
-        '19 - Writer
+        Writer = 19
+        SubUrlCertification = 20
+        IMDBrank = 21
+        Studio = 22
+        Edition = 23
+        Fanart = 24
+        AspectRatio = 25
         '26 - TranslatedTitle - All Names
         '27 - TranslatedTitle - All Values
         '28 - Certification - All Names
@@ -1224,7 +1227,87 @@ Public Class AntRecord
                             _XMLElement.Attributes.Append(attr)
                         End If
                     Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = ""
+                        ' _XMLElement.Attributes(CurrentAttribute).Value = ""
+                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Comment) ' Guzzi addded grabbed commment
+                    End If
+                End If
+
+                ' Guzzi: Added Languages, Writer, Certification, Tagline
+                If _DatabaseFields("languages") = True Then
+                    CurrentAttribute = "Languages"
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = ""
+                        If attr.Value <> "" Then
+                            _XMLElement.Attributes.Append(attr)
+                        End If
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Language)
+                    End If
+                End If
+
+                If _DatabaseFields("certification") = True Then
+                    CurrentAttribute = "Certification"
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = ""
+                        If attr.Value <> "" Then
+                            _XMLElement.Attributes.Append(attr)
+                        End If
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Certification)
+                    End If
+                End If
+
+                If _DatabaseFields("writer") = True Then
+                    CurrentAttribute = "Writer"
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = ""
+                        If attr.Value <> "" Then
+                            _XMLElement.Attributes.Append(attr)
+                        End If
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Writer)
+                    End If
+                End If
+
+                If _DatabaseFields("tagline") = True Then
+                    CurrentAttribute = "Tagline"
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = ""
+                        If attr.Value <> "" Then
+                            _XMLElement.Attributes.Append(attr)
+                        End If
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Tagline)
+                    End If
+                End If
+
+                If _DatabaseFields("imdbrank") = True Then
+                    CurrentAttribute = "ImdbRank"
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = ""
+                        If attr.Value <> "" Then
+                            _XMLElement.Attributes.Append(attr)
+                        End If
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.IMDBrank)
+                    End If
+                End If
+
+                If _DatabaseFields("studio") = True Then
+                    CurrentAttribute = "Studio"
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = ""
+                        If attr.Value <> "" Then
+                            _XMLElement.Attributes.Append(attr)
+                        End If
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Studio)
                     End If
                 End If
 

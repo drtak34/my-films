@@ -75,6 +75,14 @@ Public Class AntSettings
             SetAttribute("File_Types_Non_Media", value)
         End Set
     End Property
+    Public Property File_Types_Trailer() As String
+        Get
+            Return ReadAttribute("File_Types_Trailer")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("File_Types_Trailer", value)
+        End Set
+    End Property
     Public Property Master_Title() As String
         Get
             Return ReadAttribute("Master_Title")

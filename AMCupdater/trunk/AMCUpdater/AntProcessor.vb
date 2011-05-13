@@ -1071,6 +1071,7 @@ Public Class AntProcessor
         Dim FoundFileName As String
         Dim ValidMediaExtensions As String() = CurrentSettings.File_Types_Media.Split(";")
         Dim ValidNonMediaExtensions As String() = CurrentSettings.File_Types_Non_Media.Split(";")
+        Dim ValidTrailerExtensions As String() = CurrentSettings.File_Types_Trailer.Split(";") ' Added for trailer detection
         Dim row As DataRow
 
         Dim CurrentMoviePath As String
@@ -1102,12 +1103,22 @@ Public Class AntProcessor
 
                             'File Handling - compare extension to known media filetypes
                             If Array.IndexOf(ValidMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
-                                LogEvent("  File Found - " & FoundFileName, EventLogLevel.Informational)
+                                If Array.IndexOf(ValidTrailerExtensions, foundFile.Substring(InStr(foundFile, "."))) >= 0 Then
 
-                                row = ds.Tables("tblFoundMediaFiles").NewRow()
-                                row("FileName") = FoundFileName
-                                row("FilePath") = CurrentMoviePath
-                                ds.Tables("tblFoundMediaFiles").Rows.Add(row)
+                                    LogEvent("  File Found (trailer) - " & FoundFileName, EventLogLevel.Informational)
+
+                                    row = ds.Tables("tblFoundTrailerFiles").NewRow()
+                                    row("FileName") = FoundFileName
+                                    row("FilePath") = CurrentMoviePath
+                                    ds.Tables("tblFoundTrailerFiles").Rows.Add(row)
+                                Else
+                                    LogEvent("  File Found (movie) - " & FoundFileName, EventLogLevel.Informational)
+
+                                    row = ds.Tables("tblFoundMediaFiles").NewRow()
+                                    row("FileName") = FoundFileName
+                                    row("FilePath") = CurrentMoviePath
+                                    ds.Tables("tblFoundMediaFiles").Rows.Add(row)
+                                End If
 
                             ElseIf Array.IndexOf(ValidNonMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
                                 'Check for match against non-movie file types:

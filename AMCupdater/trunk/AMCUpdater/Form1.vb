@@ -1670,6 +1670,9 @@ Public Class Form1
     Private Sub MediaFileToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MediaFileToolStripMenuItem.Click
         AntProcessor.TEST_ListTable("tblFoundMediaFiles")
     End Sub
+    Private Sub TrailerFileToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MediaFileToolStripMenuItem.Click
+        AntProcessor.TEST_ListTable("tblFoundTrailerFiles")
+    End Sub
     Private Sub NonMediaFilesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NonMediaFilesToolStripMenuItem.Click
         AntProcessor.TEST_ListTable("tblFoundNonMediaFiles")
     End Sub
@@ -1798,6 +1801,7 @@ Public Class Form1
         CurrentSettings.Execute_Program_Path = txtExecuteProgramPath.Text
         CurrentSettings.File_Types_Media = txtDefaultFileTypes.Text
         CurrentSettings.File_Types_Non_Media = txtDefaultFileTypesNonMedia.Text
+        CurrentSettings.File_Types_Trailer = txtTrailerIentificationStrings.Text
         CurrentSettings.Import_File_On_Internet_Lookup_Failure = chkImportOnInternetFail.Checked
         CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupBehaviour.SelectedValue
         CurrentSettings.Internet_Parser_Path = txtParserFilePath.Text
@@ -1923,6 +1927,7 @@ Public Class Form1
             txtExecuteProgramPath.Text = CurrentSettings.Execute_Program_Path
             txtDefaultFileTypes.Text = CurrentSettings.File_Types_Media
             txtDefaultFileTypesNonMedia.Text = CurrentSettings.File_Types_Non_Media
+            txtTrailerIentificationStrings.Text = CurrentSettings.File_Types_Trailer
             chkImportOnInternetFail.Checked = CurrentSettings.Import_File_On_Internet_Lookup_Failure
             cbInternetLookupBehaviour.SelectedValue = CurrentSettings.Internet_Lookup_Always_Prompt
             txtParserFilePath.Text = CurrentSettings.Internet_Parser_Path
