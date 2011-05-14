@@ -95,13 +95,13 @@
             "Movie Collector (V7.1.4)",
             "MyMovies (V3.18)",
             "Eax Movie Catalog (2.5.0)",
-            "eXtreme Movie Manager (V7.1.1.1)",
-            "XBMC (V10.0)",
-            "(n/a)",
-            "(n/a)",
             "Eax Movie Catalog (3.0.9 b5)",
             "PVD - Personal Video Database (0.9.9.21)",
+            "eXtreme Movie Manager (V7.1.1.1)",
+            "XBMC (V10.0)",
             "MovingPicturesXML (V1.2 process plugin)"});
+            // MyFilms extended Database
+            // XBMC nfo reader
           this.cbCatalogType.Location = new System.Drawing.Point(112, 132);
           this.cbCatalogType.Name = "cbCatalogType";
           this.cbCatalogType.Size = new System.Drawing.Size(227, 21);
