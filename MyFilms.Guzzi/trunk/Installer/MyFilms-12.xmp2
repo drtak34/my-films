@@ -2814,17 +2814,17 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <MinVersion>
           <Major>1</Major>
           <Minor>1</Minor>
-          <Build>6</Build>
-          <Revision>27808</Revision>
+          <Build>27808</Build>
+          <Revision>7</Revision>
         </MinVersion>
         <MaxVersion>
-          <Major>1</Major>
-          <Minor>1</Minor>
-          <Build>6</Build>
-          <Revision>27644</Revision>
+          <Major>0</Major>
+          <Minor>0</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
         </MaxVersion>
-        <WarnOnly>true</WarnOnly>
-        <Message>Need version of MediaPortal with version betwen 1.1.6.27808 - 1.2.x.x</Message>
+        <WarnOnly>false</WarnOnly>
+        <Message>Need version of MediaPortal with minimum version of 1.1.7.27808.</Message>
         <Name>MediaPortal</Name>
       </DependencyItem>
       <DependencyItem>
@@ -2832,18 +2832,18 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Id>2869e8cd-579e-4fdb-ad6d-19ff5bd4e46f</Id>
         <MinVersion>
           <Major>0</Major>
-          <Minor>2</Minor>
-          <Build>7</Build>
+          <Minor>3</Minor>
+          <Build>0</Build>
           <Revision>0</Revision>
         </MinVersion>
         <MaxVersion>
           <Major>0</Major>
-          <Minor>2</Minor>
-          <Build>9</Build>
-          <Revision>9</Revision>
+          <Minor>0</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To use MyFilms online help and preview IMDB pages, BrowseTheWeb version 0.27 (0.2.7.0) or higher must be installed.</Message>
+        <Message>To use MyFilms online help and preview IMDB pages, BrowseTheWeb version 0.30 (0.3.0) or higher must be installed.</Message>
         <Name>Browse The Web</Name>
       </DependencyItem>
       <DependencyItem>
@@ -2851,60 +2851,22 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Id>269bd257-7ce5-450a-b786-1c2834c81849</Id>
         <MinVersion>
           <Major>0</Major>
-          <Minor>28</Minor>
+          <Minor>29</Minor>
           <Build>0</Build>
-          <Revision>0</Revision>
+          <Revision>1</Revision>
         </MinVersion>
         <MaxVersion>
           <Major>0</Major>
-          <Minor>28</Minor>
-          <Build>9999999</Build>
-          <Revision>9999999</Revision>
+          <Minor>0</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To access online trailers from with MyFilms, Online Videos v0.28 (0.28.0.0) or higher must be installed.</Message>
+        <Message>To access online trailers (incl. IMDB) from MyFilms, Online Videos v0.29 (0.29.1) or higher must be installed.</Message>
         <Name>OnlineVideos</Name>
       </DependencyItem>
     </Items>
   </Dependencies>
-  <PluginDependencies>
-    <Items>
-      <PluginDependencyItem AssemblyName="MyFilms.dll">
-        <CompatibleVersion>
-          <Items>
-            <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
-            </CompatibleVersionItem>
-          </Items>
-        </CompatibleVersion>
-        <SubSystemsUsed>
-          <Items>
-            <SubSystemItem Name="MP.Players" />
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.SkinEngine" />
-          </Items>
-        </SubSystemsUsed>
-      </PluginDependencyItem>
-      <PluginDependencyItem AssemblyName="MyVideoGrabber.dll">
-        <CompatibleVersion>
-          <Items>
-            <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
-            </CompatibleVersionItem>
-          </Items>
-        </CompatibleVersion>
-        <SubSystemsUsed>
-          <Items>
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.DB" />
-          </Items>
-        </SubSystemsUsed>
-      </PluginDependencyItem>
-    </Items>
-  </PluginDependencies>
   <GeneralInfo>
     <Name>MyFilms</Name>
     <Id>ceddd4d1-4cac-4846-9af5-f4daee1bbddc</Id>
@@ -5490,14 +5452,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{4323b9e1-d21b-40d7-90db-30b8ed4d3f2a}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6519606e-276e-4340-b8c1-3c514bef910d}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{85895e53-d42a-4fff-8992-6360837b3a6a}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{66325f9a-909a-4b72-a32e-2d63089fdb84}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
