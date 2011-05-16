@@ -634,8 +634,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
                     {
-                      GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu // Removed as it's causing an exception
-                      return;
+                      // GUIControl.FocusControl(GetID, (int)Controls.CTRL_BtnPlay); // Added to return to main view after menu // Removed as it's causing an exception
+                      // return;
+                      break;
                     }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     break;
