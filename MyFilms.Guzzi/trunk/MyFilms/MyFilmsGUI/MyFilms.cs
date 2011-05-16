@@ -2276,10 +2276,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //    Display Detailed Info (Image, Description, Year, Category)
     //----------------------------------------------------------------------------------------
     //private void Load_Lstdetail(GUIListItem currentItem, int ItemId, string wlabel)//wrep = false display only image, all properties cleared
-    private void Load_Lstdetail(GUIListItem currentItem)
+    private void Load_Lstdetail(GUIListItem currentItem, bool forceLoading)
     {
       LogMyFilms.Debug("Load_Lstdetail: ItemId = " + currentItem.ItemId + ", label = " + currentItem.Label + ", TVtag = " + currentItem.TVTag);
-      if (currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label)
+      if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading)
       {
         LogMyFilms.Debug("(Load_Lstdetail): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
         return;
@@ -2427,7 +2427,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         default:
           MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
-          GUIControl.ShowControl(GetID, 34);
+          //GUIControl.ShowControl(GetID, 34);
           break;
       }
       // Load_Rating(conf.W_rating); // old method - nor more used
@@ -2508,7 +2508,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (125 < (int)(tickCount - lastPublished)) // wait 125 ms to load details...
       {
         lastPublished = tickCount;
-        Load_Lstdetail(itemToPublish);
+        Load_Lstdetail(itemToPublish, false);
         // Load_Lstdetail(ItemId, wlabel); 
         return;
       }
@@ -2516,7 +2516,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         lastPublished = tickCount;
         if (publishTimer == null)
-          publishTimer = new Timer(delegate { Load_Lstdetail(itemToPublish); }, null, 150, Timeout.Infinite);
+          publishTimer = new Timer(delegate { Load_Lstdetail(itemToPublish, false); }, null, 150, Timeout.Infinite);
         else
           publishTimer.Change(150, Timeout.Infinite);
       }
@@ -3821,6 +3821,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else
         SetLabelSelect(conf.StrTxtSelect);
       this.SetDummyControlsForFacade(listLevel);
+
+      // load all initial values, when preparing facade ....
+      //if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label) // in this case, itemselectedhandler would not load details
+      //  if (facadeView.SelectedListItemIndex > -1 && conf.LastID != ID_MyFilmsDetail && conf.LastID != ID_MyFilmsActors) // only when not going to actors or details vew
+      //  {
+      //    Log.Debug("Fin_Charge_Init(): Force loading of Details");
+      //    Load_Lstdetail(facadeView.SelectedListItem, true); // force details loading
+      //  }
+
       if (conf.LastID == ID_MyFilmsDetail)
         GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
       if (conf.LastID == ID_MyFilmsActors)
