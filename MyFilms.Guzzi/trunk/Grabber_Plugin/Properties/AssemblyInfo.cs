@@ -34,8 +34,8 @@ using MediaPortal.Common.Utils;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("5.0.0.56")]
-[assembly: AssemblyFileVersion("5.0.0.56")]
+[assembly: AssemblyVersion("5.0.1.815")]
+[assembly: AssemblyFileVersion("5.0.1.815")]
 #if MP12
 //[assembly: CompatibleVersion("1.1.7.0", "1.1.6.0")]
 [assembly: CompatibleVersion("1.1.6.27644")]

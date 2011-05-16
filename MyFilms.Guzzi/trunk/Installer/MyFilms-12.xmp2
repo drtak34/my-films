@@ -101,6 +101,13 @@
               <ZipFileName>Installer{CopyFile}\{78b18a8f-5c82-411d-8574-50143c502abd}-MyVideoGrabber.dll</ZipFileName>
               <DestinationFilename>%Plugins%\windows\MyVideoGrabber.dll</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>plugins.12\process\MovingPicturesXML.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{84794996-999d-43f7-8c9a-d6d66dd432a0}-MovingPicturesXML.dll</ZipFileName>
+              <DestinationFilename>%Plugins%\windows\MovingPicturesXML.dll</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2886,7 +2893,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.803(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.815(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3011,6 +3018,13 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <LocalFileName>plugins.12\Windows\MyVideoGrabber.dll</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{78b18a8f-5c82-411d-8574-50143c502abd}-MyVideoGrabber.dll</ZipFileName>
         <DestinationFilename>%Plugins%\windows\MyVideoGrabber.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>plugins.12\process\MovingPicturesXML.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{84794996-999d-43f7-8c9a-d6d66dd432a0}-MovingPicturesXML.dll</ZipFileName>
+        <DestinationFilename>%Plugins%\windows\MovingPicturesXML.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -5452,14 +5466,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{6519606e-276e-4340-b8c1-3c514bef910d}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a8f1812a-00a4-4840-b7da-ac01bd1898d1}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{66325f9a-909a-4b72-a32e-2d63089fdb84}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{9ac7b5ab-ef5a-42a1-8904-76488be4d183}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
