@@ -4510,18 +4510,27 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           if (useExistingCatalog)
           {
+            string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
+            //if (!System.IO.Directory.Exists(CatalogDirectory))
+            //{
+            //  try {System.IO.Directory.CreateDirectory(CatalogDirectory);}
+            //  catch {}
+            //}
             // Ask User for existing database file
             newCatalog = false;
             openFileDialog1.FileName = String.Empty;
-            if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\"))
-              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\Thumbs\MyFilms\Catalog\";
+            if (System.IO.Directory.Exists(CatalogDirectory))
+              openFileDialog1.InitialDirectory = CatalogDirectory;
             else
-              openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\";
+              openFileDialog1.InitialDirectory = "";
+            if (!string.IsNullOrEmpty(MesFilmsCat.Text) && MesFilmsCat.Text.Contains("\\"))
+              openFileDialog1.InitialDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\") + 1);
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.DefaultExt = "xml";
             openFileDialog1.Filter = "XML Files|*.xml";
-            openFileDialog1.Title = "Find AMC Movies file (xml file)";
+            openFileDialog1.Title = "Select Movie Catalog File (xml)";
             openFileDialog1.CheckFileExists = false;
+            
             if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
             {
               Control_Database(openFileDialog1.FileName);
@@ -4532,13 +4541,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             string CatalogDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog";
             if (!System.IO.Directory.Exists(CatalogDirectory))
             {
-              try
-              {
-                System.IO.Directory.CreateDirectory(CatalogDirectory);
-              }
-              catch
-              {
-              }
+              try {System.IO.Directory.CreateDirectory(CatalogDirectory);}
+              catch {}
             }
             string CatalogName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Catalog\" + Config_Name.Text + ".xml";
             if (!System.IO.File.Exists(CatalogName))
