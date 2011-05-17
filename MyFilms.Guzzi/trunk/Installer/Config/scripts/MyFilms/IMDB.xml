@@ -3,6 +3,8 @@
   <Section>
     <DBName>MyFilmsIMDB</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
+    <Mapping />
+    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">Popular_x0020_Titles</KeyStartList>
@@ -35,6 +37,7 @@
       <KeyTTitleIndex />
       <KeyTTitleMaxItems />
       <KeyTTitleLanguage />
+      <KeyTTitleLanguageAll />
       <KeyStartImg Param1="_x0023_REVERSE_x0023_" Param2="">_x0022__x0020_data-rmconst</KeyStartImg>
       <KeyEndImg>src_x003D__x0022_</KeyEndImg>
       <KeyImgIndex />
@@ -101,6 +104,7 @@
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
       <KeyCertificationLanguage />
+      <KeyCertificationLanguageAll />
       <KeyStartLinkTitles Param1="" Param2="" />
       <KeyEndLinkTitles />
       <KeyLinkTitlesIndex />

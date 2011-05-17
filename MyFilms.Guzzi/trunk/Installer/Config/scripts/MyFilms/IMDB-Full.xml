@@ -3,6 +3,8 @@
   <Section>
     <DBName>MyFilmsIMDB</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
+    <Mapping />
+    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">Popular_x0020_Titles</KeyStartList>
@@ -35,6 +37,7 @@
       <KeyTTitleIndex />
       <KeyTTitleMaxItems />
       <KeyTTitleLanguage />
+      <KeyTTitleLanguageAll>USA_x002C__x0020_Argentina_x002C__x0020_Austria_x002C__x0020_Belgium_x002C__x0020_Brazil_x002C__x0020_Croatia_x002C__x0020_Czech_x0020_Republic_x002C__x0020_Estonia_x002C__x0020_Finland_x002C__x0020_France_x002C__x0020_Germany_x002C__x0020_Italy_x002C__x0020_Japan_x002C__x0020_Mexico_x002C__x0020_Poland_x002C__x0020_Portugal_x002C__x0020_Romania_x002C__x0020_Slovakia_x002C__x0020_Spain_x002C__x0020_Sweden_x002C__x0020_Turkey_x002C__x0020_Uruguay_x002C__x0020_Denmark_x002C__x0020_Greece_x002C__x0020_Norway_x002C__x0020_Russia_x002C__x0020_Canada_x002C__x0020_Hungary_x002C__x0020_Estonia_x002C__x0020_Slovenia</KeyTTitleLanguageAll>
       <KeyStartImg Param1="_x0023_REVERSE_x0023_" Param2="">_x0022__x0020_data-rmconst</KeyStartImg>
       <KeyEndImg>src_x003D__x0022_</KeyEndImg>
       <KeyImgIndex />
@@ -101,6 +104,7 @@
       <KeyCertificationRegExp>certificates_x003D_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029_:_x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyCertificationRegExp>
       <KeyCertificationIndex />
       <KeyCertificationLanguage />
+      <KeyCertificationLanguageAll>USA_x002C__x0020_Iceland_x002C__x0020_Ireland_x002C__x0020_Malaysia_x002C__x0020_UK_x002C__x0020_Philippines_x002C__x0020_France_x002C__x0020_Brazil_x002C__x0020_India_x002C__x0020_South_x0020_Africa_x002C__x0020_Argentina_x002C__x0020_Australia_x002C__x0020_Belgium_x002C__x0020_Chile_x002C__x0020_Finland_x002C__x0020_Germany_x002C__x0020_Hong_x0020_Kong_x002C__x0020_Ireland_x002C__x0020_Israel_x002C__x0020_Italy_x002C__x0020_Japan_x002C__x0020_Netherlands_x002C__x0020_New_x0020_Zealand_x002C__x0020_Norway_x002C__x0020_Peru_x002C__x0020_Portugal_x002C__x0020_Singapore_x002C__x0020_South_x0020_Korea_x002C__x0020_Spain_x002C__x0020_Sweden_x002C__x0020_Switzerland_x002C__x0020_Switzerland_x002C__x0020_UK_x002C__x0020_Canada_x002C__x0020_Canada_x002C__x0020_Canada_x002C__x0020_Canada_x002C__x0020_Canada</KeyCertificationLanguageAll>
       <KeyStartLinkTitles Param1="_x0023_REGEX_x0023__x002F__x005B__x005C__x003F__x007C__x0022__x005D_._x002A_" Param2="_x002F_releaseinfo_x0023_akas">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_</KeyStartLinkTitles>
       <KeyEndLinkTitles>_x002F__x003E_</KeyEndLinkTitles>
       <KeyLinkTitlesIndex />
@@ -108,5 +112,37 @@
       <KeyEndLinkCertification>_x002F__x003E_</KeyEndLinkCertification>
       <KeyLinkCertificationIndex />
     </Details>
+    <Mapping>
+      <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" />
+      <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" />
+      <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" />
+      <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" />
+      <Field_4 source="Rating" destination="" replace="False" addstart="False" addend="False" />
+      <Field_5 source="Actors" destination="" replace="False" addstart="False" addend="False" />
+      <Field_6 source="Director" destination="" replace="False" addstart="False" addend="False" />
+      <Field_7 source="Producer" destination="" replace="False" addstart="False" addend="False" />
+      <Field_8 source="Year" destination="" replace="False" addstart="False" addend="False" />
+      <Field_9 source="Country" destination="" replace="False" addstart="False" addend="False" />
+      <Field_10 source="Category" destination="" replace="False" addstart="False" addend="False" />
+      <Field_11 source="URL_x0020_-_x0020_Redirection_x0020_Picture" destination="" replace="False" addstart="False" addend="False" />
+      <Field_12 source="ImageURL" destination="" replace="False" addstart="False" addend="False" />
+      <Field_13 source="URL_x0020_-_x0020_Redirection_x0020_Persons" destination="" replace="False" addstart="False" addend="False" />
+      <Field_14 source="Comment" destination="" replace="False" addstart="False" addend="False" />
+      <Field_15 source="Language" destination="" replace="False" addstart="False" addend="False" />
+      <Field_16 source="Tagline" destination="" replace="False" addstart="False" addend="False" />
+      <Field_17 source="Certification" destination="" replace="False" addstart="False" addend="False" />
+      <Field_18 source="URL_x0020_-_x0020_Redirection_x0020_Titles" destination="" replace="False" addstart="False" addend="False" />
+      <Field_19 source="URL_x0020_-_x0020_Redirection_x0020_Certification" destination="" replace="False" addstart="False" addend="False" />
+      <Field_20 source="Writer" destination="" replace="False" addstart="False" addend="False" />
+      <Field_21 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_22 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_23 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_24 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_25 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
+      <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
+      <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
+      <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
+    </Mapping>
   </Section>
 </Profile>

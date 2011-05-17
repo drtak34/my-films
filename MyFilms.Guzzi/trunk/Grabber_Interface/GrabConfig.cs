@@ -301,7 +301,7 @@ namespace Grabber_Interface
       string[] split = strTemp.Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
       foreach (var strDroptext in split)
       {
-        cbTtitlePreferredLanguage.Items.Add(strDroptext);
+        cbTtitlePreferredLanguage.Items.Add(strDroptext.Trim());
       }
       cbCertificationPreferredLanguage.Items.Clear();
       try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
@@ -309,11 +309,11 @@ namespace Grabber_Interface
       split = strTemp.Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
       foreach (var strDroptext in split)
       {
-        cbCertificationPreferredLanguage.Items.Add(strDroptext);
+        cbCertificationPreferredLanguage.Items.Add(strDroptext.Trim());
       }
 
       // Read Mapping Infos
-      for (int i = 0; i < 29; i++)
+      for (int i = 0; i < 30; i++)
       {
         try
         {
@@ -2588,7 +2588,7 @@ namespace Grabber_Interface
         if (!string.IsNullOrEmpty(field))
         Column2.Items.Add(field);
       }
-      for (int i = 0; i < 29; i++)
+      for (int i = 0; i < 30; i++)
       {
         i = dataGridViewMapping.Rows.Add(); // add row for config
         dataGridViewMapping.Rows[i].Cells[0].Value = i;
