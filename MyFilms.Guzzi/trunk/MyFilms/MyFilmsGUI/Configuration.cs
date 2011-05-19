@@ -387,13 +387,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrNasMAC2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-2", string.Empty);
                 StrNasName3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-Name-3", string.Empty);
                 StrNasMAC3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "NAS-MAC-3", string.Empty);
-                StrRecentSearch1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch1", string.Empty);
-                StrRecentSearch2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch2", string.Empty);
-                StrRecentSearch3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch3", string.Empty);
-                StrRecentSearch4 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch4", string.Empty);
-                StrRecentSearch5 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "RecentSearch5", string.Empty);
-                StrTraktUsername = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "cTraktUsername", string.Empty);
-                StrTraktPassword = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "cTraktPassWord", string.Empty);
+                StrSearchHistory = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchHistory", string.Empty);
+                MyFilms.SearchHistory.Clear();
+                foreach (string s in StrSearchHistory.Split('|'))
+                {
+                  if (!string.IsNullOrEmpty(s.Trim()))
+                    MyFilms.SearchHistory.Add(s);
+                }
 
                 int j = 0;
                 for (int i = 1; i <= 5; i++)
@@ -1215,36 +1215,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             set { strNasMAC3 = value; }
         }
 
-        private string strRecentSearch1 = string.Empty;
-        public string StrRecentSearch1
+        private string strSearchHistory = string.Empty;
+        public string StrSearchHistory
         {
-          get { return strRecentSearch1; }
-          set { strRecentSearch1 = value; }
+          get { return strSearchHistory; }
+          set { strSearchHistory = value; }
         }
-        private string strRecentSearch2 = string.Empty;
-        public string StrRecentSearch2
-        {
-          get { return strRecentSearch2; }
-          set { strRecentSearch2 = value; }
-        }
-        private string strRecentSearch3 = string.Empty;
-        public string StrRecentSearch3
-        {
-          get { return strRecentSearch3; }
-          set { strRecentSearch3 = value; }
-        }
-        private string strRecentSearch4 = string.Empty;
-        public string StrRecentSearch4
-        {
-          get { return strRecentSearch4; }
-          set { strRecentSearch4 = value; }
-        }
-        private string strRecentSearch5 = string.Empty;
-        public string StrRecentSearch5
-        {
-          get { return strRecentSearch5; }
-          set { strRecentSearch5 = value; }
-        }
+
         private string strTraktUsername = string.Empty;
         public string StrTraktUsername
         {
@@ -1259,12 +1236,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             set { strTraktPassword = value; }
         }
 
-        //private bool strGrabber = false;
-        //public bool StrGrabber
-        //{
-        //  get { return strGrabber; }
-        //  set { strGrabber = value; }
-        //}
         private string strGrabber_cnf = string.Empty;
         public string StrGrabber_cnf
         {
@@ -1283,12 +1254,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strAntFilterMinRating; }
             set { strAntFilterMinRating = value; }
         }
-        //private string strGrabber_Dir = string.Empty;
-        //public string StrGrabber_Dir
-        //{
-        //    get { return strGrabber_Dir; }
-        //    set { strGrabber_Dir = value; }
-        //}
+
         private bool strGrabber_Always = false;
         public bool StrGrabber_Always
         {
@@ -1307,12 +1273,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return strAMCUpd; }
           set { strAMCUpd = value; }
         }
-        //private string strAMCUpd_exe = string.Empty;
-        //public string StrAMCUpd_exe
-        //{
-        //    get { return strAMCUpd_exe; }
-        //    set { strAMCUpd_exe = value; }
-        //}
         private string strAMCUpd_cnf = string.Empty;
         public string StrAMCUpd_cnf
         {
@@ -1408,6 +1368,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "Wstar", MyFilms.conf.Wstar);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
+
             switch (MyFilms.conf.StrFileType)
             {
               case "0":
