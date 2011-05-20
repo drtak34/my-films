@@ -85,12 +85,6 @@ namespace Grabber_Interface
           this.chkAddTags = new System.Windows.Forms.CheckBox();
           this.DVDPTagField = new System.Windows.Forms.ComboBox();
           this.dataGridViewMapping = new System.Windows.Forms.DataGridView();
-          this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
-          this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-          this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-          this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -179,6 +173,12 @@ namespace Grabber_Interface
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+          this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+          this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
           this.groupBox8.SuspendLayout();
           this.groupBox15.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
@@ -673,50 +673,6 @@ namespace Grabber_Interface
           this.dataGridViewMapping.Name = "dataGridViewMapping";
           this.dataGridViewMapping.RowHeadersVisible = false;
           this.toolTip1.SetToolTip(this.dataGridViewMapping, resources.GetString("dataGridViewMapping.ToolTip"));
-          // 
-          // Column0
-          // 
-          this.Column0.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.Column0, "Column0");
-          this.Column0.Name = "Column0";
-          this.Column0.ReadOnly = true;
-          this.Column0.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-          // 
-          // Column1
-          // 
-          resources.ApplyResources(this.Column1, "Column1");
-          this.Column1.Name = "Column1";
-          // 
-          // Column2
-          // 
-          resources.ApplyResources(this.Column2, "Column2");
-          this.Column2.Name = "Column2";
-          this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-          this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-          // 
-          // Column3
-          // 
-          this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-          resources.ApplyResources(this.Column3, "Column3");
-          this.Column3.Name = "Column3";
-          this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-          this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-          // 
-          // Column4
-          // 
-          this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-          resources.ApplyResources(this.Column4, "Column4");
-          this.Column4.Name = "Column4";
-          this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-          this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-          // 
-          // Column5
-          // 
-          this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-          resources.ApplyResources(this.Column5, "Column5");
-          this.Column5.Name = "Column5";
-          this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-          this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // linkLabelMFwiki
           // 
@@ -1244,6 +1200,7 @@ namespace Grabber_Interface
           resources.ApplyResources(this.groupBox10, "groupBox10");
           this.groupBox10.Name = "groupBox10";
           this.groupBox10.TabStop = false;
+          this.toolTip1.SetToolTip(this.groupBox10, resources.GetString("groupBox10.ToolTip"));
           // 
           // label29
           // 
@@ -1383,6 +1340,50 @@ namespace Grabber_Interface
           // iMDBEnumeratorBindingSource1
           // 
           this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
+          // 
+          // Column0
+          // 
+          this.Column0.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.Column0, "Column0");
+          this.Column0.Name = "Column0";
+          this.Column0.ReadOnly = true;
+          this.Column0.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+          // 
+          // Column1
+          // 
+          resources.ApplyResources(this.Column1, "Column1");
+          this.Column1.Name = "Column1";
+          // 
+          // Column2
+          // 
+          resources.ApplyResources(this.Column2, "Column2");
+          this.Column2.Name = "Column2";
+          this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+          this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+          // 
+          // Column3
+          // 
+          this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+          resources.ApplyResources(this.Column3, "Column3");
+          this.Column3.Name = "Column3";
+          this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+          this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+          // 
+          // Column4
+          // 
+          this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+          resources.ApplyResources(this.Column4, "Column4");
+          this.Column4.Name = "Column4";
+          this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+          this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+          // 
+          // Column5
+          // 
+          this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+          resources.ApplyResources(this.Column5, "Column5");
+          this.Column5.Name = "Column5";
+          this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+          this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // GrabConfig
           // 

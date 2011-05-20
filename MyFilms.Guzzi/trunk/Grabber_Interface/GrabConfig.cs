@@ -52,7 +52,6 @@ namespace Grabber_Interface
 
     private string[] Fields = new string[30]; // List to hold all possible grab fields ...
 
-
     public GrabConfig(string[] args)
     {
       System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
@@ -299,6 +298,7 @@ namespace Grabber_Interface
       try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguageAll)._Value; }
       catch { strTemp = string.Empty; };
       string[] split = strTemp.Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
+      Array.Sort(split);
       foreach (var strDroptext in split)
       {
         cbTtitlePreferredLanguage.Items.Add(strDroptext.Trim());
@@ -307,6 +307,7 @@ namespace Grabber_Interface
       try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
       catch { strTemp = string.Empty; };
       split = strTemp.Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
+      Array.Sort(split);
       foreach (var strDroptext in split)
       {
         cbCertificationPreferredLanguage.Items.Add(strDroptext.Trim());
@@ -567,6 +568,7 @@ namespace Grabber_Interface
       else
       {
         SaveXml(textConfig.Text);
+        MessageBox.Show("Config saved !", "Info");
       }
     }
 
@@ -1214,10 +1216,6 @@ namespace Grabber_Interface
         case 18: // Certification
           if (!textBodyDetail.Text.Equals(BodyLinkCertification))
             textBodyDetail.Text = BodyLinkCertification;
-          try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
-          catch { textLanguages.Text = string.Empty; };
-          try { textLanguagesAll.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
-          catch { textLanguagesAll.Text = string.Empty; };
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCertification)._Value;
@@ -1229,6 +1227,10 @@ namespace Grabber_Interface
           lblLanguagesAll.Visible = true;
           textLanguages.Visible = true;
           textLanguagesAll.Visible = true;
+          try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
+          catch { textLanguages.Text = string.Empty; };
+          try { textLanguagesAll.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
+          catch { textLanguagesAll.Text = string.Empty; };
           try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationRegExp)._Value; }
           catch { textComplement.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationIndex)._Value;
@@ -1811,6 +1813,9 @@ namespace Grabber_Interface
 
     private void chkACTORROLES_CheckedChanged(object sender, EventArgs e)
     {
+      if (GLbBlock)
+        return;
+
       switch (cb_ParamDetail.SelectedIndex)
       {
         case 9:
@@ -1826,6 +1831,9 @@ namespace Grabber_Interface
 
     private void textLanguages_TextChanged(object sender, EventArgs e)
     {
+      if (GLbBlock)
+        return;
+
       switch (cb_ParamDetail.SelectedIndex)
       {
         case 2:
@@ -1841,6 +1849,9 @@ namespace Grabber_Interface
 
     private void textLanguagesAll_TextChanged(object sender, EventArgs e)
     {
+      if (GLbBlock)
+        return;
+
       switch (cb_ParamDetail.SelectedIndex)
       {
         case 2:
@@ -2585,7 +2596,7 @@ namespace Grabber_Interface
       Column2.Items.Add(""); // empty field to choose ....
       foreach (string field in Fields)
       {
-        if (!string.IsNullOrEmpty(field))
+        if (!string.IsNullOrEmpty(field) && !field.Contains("URL") && !field.Contains("All "))
         Column2.Items.Add(field);
       }
       for (int i = 0; i < 30; i++)
