@@ -537,12 +537,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
     {
+      LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
+      Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
+
       if (InitialStart)
       {
         // Initial steps
       }
-      LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
-      Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
 
       // Support for StartParameters - ToDo: Add start view options (implementation)
 
@@ -585,10 +586,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.GUIImageOne = ImgFanart;
       backdrop.GUIImageTwo = ImgFanart2;
       backdrop.LoadingImage = loadingImage;  // --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
-      if (!cover.Active)
-        cover.Active = true;
-      if (!groupcover.Active)
-        groupcover.Active = true;
+      if (!cover.Active) cover.Active = true;
+      if (!groupcover.Active) groupcover.Active = true;
+      if (!personcover.Active) personcover.Active = true;
 
       Worker_DoPageLoad(); // run former WindowInit synchronous
       //DoPageLoad(); // run former WindowInit threaded...
@@ -691,8 +691,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //InitGlobalFilters(false);
         Configuration.Current_Config();
         Load_Config(Configuration.CurrentConfig, true);
-        if (MyFilms.conf.StrFanart && !backdrop.Active)
-          backdrop.Active = true;
+        if (MyFilms.conf.StrFanart)
+        {
+           if (!backdrop.Active) backdrop.Active = true;
+        }
         else
           backdrop.Active = false;
       }
@@ -715,6 +717,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("OnPageLoad() - load facade with last settings -> Fin_Charge_Init(false, false)");
         Fin_Charge_Init(false, false);
       }
+
       // Launch Background availability scanner, if configured in setup
       if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
       {
@@ -2280,7 +2283,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //private void Load_Lstdetail(GUIListItem currentItem, int ItemId, string wlabel)//wrep = false display only image, all properties cleared
     private void Load_Lstdetail(GUIListItem currentItem, bool forceLoading)
     {
-      LogMyFilms.Debug("Load_Lstdetail: ItemId = " + currentItem.ItemId + ", label = " + currentItem.Label + ", TVtag = " + currentItem.TVTag);
+      LogMyFilms.Debug("Load_Lstdetail - Start: ItemId = " + currentItem.ItemId + ", label = " + currentItem.Label + ", TVtag = " + currentItem.TVTag);
       if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading)
       {
         LogMyFilms.Debug("(Load_Lstdetail): ItemId == Prev_ItemID (" + Prev_ItemID + ") -> return");
@@ -2472,33 +2475,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label)
       {
-        //LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
+        LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
         return;
       }
 
-      // MovieDetailsPublisher(item, true); // try: loa dMovieDetailsPublisher always ...
+      MovieDetailsPublisher(item, true); // try: load MovieDetailsPublisher always ...
 
-      if (!(conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
-      {
-        if (facadeView.SelectedListItemIndex > -1)
-          MovieDetailsPublisher(item, true); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
-      }
-      else
-      {
-        if (facadeView.SelectedListItemIndex > -1 && !conf.Boolselect)
-        {
-          MovieDetailsPublisher(item, false); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
-        }
-        else
-        {
-          MovieDetailsPublisher(item, false); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
-          //GUIControl.ShowControl(GetID, 34);
-        }
-      }
-      LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
+      //if (!(conf.Boolselect || (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder))) //xxxx
+      //{
+      //  if (facadeView.SelectedListItemIndex > -1)
+      //    MovieDetailsPublisher(item, true); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, true, facadeView.SelectedListItem.Label);
+      //}
+      //else
+      //{
+      //  if (facadeView.SelectedListItemIndex > -1 && !conf.Boolselect)
+      //  {
+      //    MovieDetailsPublisher(item, false); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+      //  }
+      //  else
+      //  {
+      //    MovieDetailsPublisher(item, false); //Load_Lstdetail(facadeView.SelectedListItem.ItemId, false, facadeView.SelectedListItem.Label);
+      //    //GUIControl.ShowControl(GetID, 34);
+      //  }
+      //}
       // Load_Lstdetail(item.ItemId, true, item.Label);
     }
 
+    // delegate void MovieDetailsPublisherWorker(GUIListItem item, bool wrep);
+    
     //private void MovieDetailsPublisher(int ItemId, string wlabel)
     private void MovieDetailsPublisher(GUIListItem item, bool wrep)
     {
@@ -2510,11 +2514,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (125 < (int)(tickCount - lastPublished)) // wait 125 ms to load details...
       {
         lastPublished = tickCount;
+        // MovieDetailsPublisherWorker publisher = new MovieDetailsPublisherWorker(MovieDetailsPublisher);
+        // publisher.BeginInvoke(itemToPublish, false, null, null);
+
         Load_Lstdetail(itemToPublish, false);
         // Load_Lstdetail(ItemId, wlabel); 
         return;
       }
-      else // Publish on timer using the delay specified in settings
+      else // Publish on timer using delay specified
       {
         lastPublished = tickCount;
         if (publishTimer == null)
@@ -3732,8 +3739,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else
           getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, false, ""); // preserve index from last time
         LogMyFilms.Debug("(Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
-        //if (string.IsNullOrEmpty(conf.StrTxtView)) // make sure it's set to "Films" if not yet initialized
-        //  conf.StrTxtView = "all";
         SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
       }
       else
@@ -3751,8 +3756,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (string.IsNullOrEmpty(conf.StrViewDfltItem) || conf.StrViewDfltItem == "(none)" || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
           {
-            conf.StrSelect = conf.StrTitle1 + " not like ''";
-            //                        TxtSelect.Label = conf.StrTxtSelect = "";
+            conf.StrSelect = conf.StrTitle1 + " not like ''"; // was: TxtSelect.Label = conf.StrTxtSelect = "";
             conf.Boolselect = false;
             if (conf.StrSortSens == " ASC")
               BtnSrtBy.IsAscending = true;
@@ -3828,7 +3832,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label) // in this case, itemselectedhandler would not load details
       //  if (facadeView.SelectedListItemIndex > -1 && conf.LastID != ID_MyFilmsDetail && conf.LastID != ID_MyFilmsActors) // only when not going to actors or details vew
       //  {
-      //    Log.Debug("Fin_Charge_Init(): Force loading of Details");
+      //    Log.Debug("OnPageLoad() - from Fin_Charge_Init(): Force loading of Details");
       //    Load_Lstdetail(facadeView.SelectedListItem, true); // force details loading
       //  }
 
@@ -8589,39 +8593,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         case Listlevel.Movie:
           LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'film'");
-          if (!dummyFacadeFilm.Visible)
-            dummyFacadeFilm.Visible = true;
-          if (dummyFacadeGroup.Visible)
-            dummyFacadeGroup.Visible = false;
-          if (dummyFacadePerson.Visible)
-            dummyFacadePerson.Visible = false;
+          if (!dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = true;
+          if (dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
+          if (dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
           break;
         case Listlevel.Group:
           LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'group'");
-          if (dummyFacadeFilm.Visible)
-            dummyFacadeFilm.Visible = false;
-          if (!dummyFacadeGroup.Visible)
-            dummyFacadeGroup.Visible = true;
-          if (dummyFacadePerson.Visible)
-            dummyFacadePerson.Visible = false;
+          if (dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
+          if (!dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = true;
+          if (dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
           break;
         case Listlevel.Person:
           LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'person'");
-          if (dummyFacadeFilm.Visible)
-            dummyFacadeFilm.Visible = false;
-          if (dummyFacadeGroup.Visible)
-            dummyFacadeGroup.Visible = false;
-          if (!dummyFacadePerson.Visible)
-            dummyFacadePerson.Visible = true;
+          if (dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
+          if (dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
+          if (!dummyFacadePerson.Visible) dummyFacadePerson.Visible = true;
           break;
         case Listlevel.None:
           LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'none'");
-          if (dummyFacadeFilm.Visible)
-            dummyFacadeFilm.Visible = false;
-          if (dummyFacadeGroup.Visible)
-            dummyFacadeGroup.Visible = false;
-          if (dummyFacadePerson.Visible)
-            dummyFacadePerson.Visible = false;
+          if (dummyFacadeFilm.Visible) dummyFacadeFilm.Visible = false;
+          if (dummyFacadeGroup.Visible) dummyFacadeGroup.Visible = false;
+          if (dummyFacadePerson.Visible) dummyFacadePerson.Visible = false;
           break;
         default:
           LogMyFilms.Debug("SetDummyControlsForFacade() setting Listlevel to 'default' (all false)");
@@ -8633,35 +8625,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
 
     #endregion
-
-    //public void GetActorByName(string strActorName, ArrayList actors)
-    //{
-    //    SQLite.NET.SQLiteClient m_db = new SQLite.NET.SQLiteClient(Config.GetFile(Config.Dir.Database, @"VideoDatabaseV5.db3"));
-    //    strActorName = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(strActorName);
-    //    if (m_db == null)
-    //    {
-    //        return;
-    //    }
-    //    try
-    //    {
-    //        actors.Clear();
-    //        SQLite.NET.SQLiteResultSet results = m_db.Execute("select * from Actors where strActor like '%" + strActorName + "%'");
-    //        if (results.Rows.Count == 0)
-    //        {
-    //            return;
-    //        }
-    //        for (int iRow = 0; iRow < results.Rows.Count; iRow++)
-    //        {
-    //            actors.Add(MediaPortal.Database.DatabaseUtility.Get(results, iRow, "idActor") + "|" +
-    //                       MediaPortal.Database.DatabaseUtility.Get(results, iRow, "strActor"));
-    //        }
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        LogMyFilms.Error("videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
-    //    }
-    //}
-
 
 
     #region Facade Loading
