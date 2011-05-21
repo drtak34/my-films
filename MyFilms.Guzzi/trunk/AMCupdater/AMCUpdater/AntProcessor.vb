@@ -2098,11 +2098,17 @@ Public Class AntProcessor
         If ds.Tables("tblFoundNonMediaFiles") IsNot Nothing Then
             ds.Tables("tblFoundNonMediaFiles").Clear()
         End If
+        If ds.Tables("tblFoundTrailerFiles") IsNot Nothing Then
+            ds.Tables("tblFoundTrailerFiles").Clear()
+        End If
         If ds.Tables("tblOrphanedMediaFiles") IsNot Nothing Then
             ds.Tables("tblOrphanedMediaFiles").Clear()
         End If
         If ds.Tables("tblOrphanedNonMediaFiles") IsNot Nothing Then
             ds.Tables("tblOrphanedNonMediaFiles").Clear()
+        End If
+        If ds.Tables("tblOrphanedTrailerMediaFiles") IsNot Nothing Then
+            ds.Tables("tblOrphanedTrailerMediaFiles").Clear()
         End If
         If ds.Tables("tblOrphanedAntRecords") IsNot Nothing Then
             ds.Tables("tblOrphanedAntRecords").Clear()
@@ -2277,6 +2283,34 @@ Public Class AntProcessor
         ds.Tables.Add(table)
 
         table = New DataTable("tblOrphanedNonMediaFiles")
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.Int32")
+        column.ColumnName = "AntID"
+        table.Columns.Add(column)
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.String")
+        column.ColumnName = "PhysicalPath"
+        table.Columns.Add(column)
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.String")
+        column.ColumnName = "VirtualPath"
+        table.Columns.Add(column)
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.String")
+        column.ColumnName = "FileName"
+        table.Columns.Add(column)
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.Boolean")
+        column.ColumnName = "Moved"
+        table.Columns.Add(column)
+        column = New DataColumn()
+        column.DataType = System.Type.GetType("System.String")
+        column.ColumnName = "GroupName"
+        table.Columns.Add(column)
+        table.CaseSensitive = False
+        ds.Tables.Add(table)
+
+        table = New DataTable("tblOrphanedTrailerMediaFiles")
         column = New DataColumn()
         column.DataType = System.Type.GetType("System.Int32")
         column.ColumnName = "AntID"
