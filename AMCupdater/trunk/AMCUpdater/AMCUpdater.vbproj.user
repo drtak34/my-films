@@ -11,7 +11,7 @@
     </BootstrapperUrlHistory>
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>true</VerifyUploadedFiles>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <ReferencePath>C:\Program Files\Team MediaPortal\MediaPortal\</ReferencePath>
     <ErrorReportUrlHistory>
     </ErrorReportUrlHistory>
@@ -26,8 +26,7 @@
     </StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <StartArguments>
-    </StartArguments>
+    <StartArguments>"V:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\MyFilmsAMCSettings_amc-test-1.xml"</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <StartArguments>

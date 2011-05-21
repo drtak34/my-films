@@ -1815,6 +1815,7 @@ Public Class Form1
         CurrentSettings.Import_File_On_Internet_Lookup_Failure = chkImportOnInternetFail.Checked
         CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupBehaviour.SelectedValue
         CurrentSettings.Internet_Parser_Path = txtParserFilePath.Text
+        CurrentSettings.Dont_Ask_Interactive = chkDontAskInteractive.Checked
         CurrentSettings.Log_Level = cbLogLevel.SelectedItem
         CurrentSettings.Movie_Fanart_Path = txtFanartFolder.Text
         CurrentSettings.Movie_Scan_Path = txtMovieFolder.Text
@@ -1826,7 +1827,6 @@ Public Class Form1
         CurrentSettings.Store_Short_Names_Only = chkShortNames.Checked
         CurrentSettings.XML_File = txtConfigFilePath.Text
         CurrentSettings.Read_DVD_Label = chkReadDVDLabel.Checked
-        CurrentSettings.Dont_Ask_Interactive = chkDontAskInteractive.Checked
         CurrentSettings.Manual_Excluded_Movies_File = txtManualExcludedMoviesPath.Text
         CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
         CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
