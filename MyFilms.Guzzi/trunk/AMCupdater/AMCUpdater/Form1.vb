@@ -70,7 +70,6 @@ Public Class Form1
             .Columns.Add("Display", System.Type.GetType("System.String"))
             .Rows.Add(True, "Always offer choice of movie")
             .Rows.Add(False, "Try to find best match automatically")
-            .Rows.Add(False, "Try to find best match automatically - don't ask for misses")
         End With
         Dim dvInternetLookupBehaviour1 As New DataView(dtInternetLookupBehaviour)
         Dim dvInternetLookupBehaviour2 As New DataView(dtInternetLookupBehaviour)
@@ -86,9 +85,6 @@ Public Class Form1
             .ValueMember = "Value"
             .SelectedIndex = -1
         End With
-
-
-
 
         MediaData = New Hashtable
         'MediaData.Add("originaltitle", "originaltitle")
