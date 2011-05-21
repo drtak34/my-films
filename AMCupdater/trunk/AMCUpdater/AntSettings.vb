@@ -543,6 +543,7 @@ Public Class AntSettings
         dt.Rows.Add("Override_Path", "") 'DefaultOverridePath
         dt.Rows.Add("File_Types_Media", "avi;mpg;divx;mpeg;wmv;mkv") 'FileTypesToCheck
         dt.Rows.Add("File_Types_Non_Media", "iso;img") 'FileTypesNonMedia
+        dt.Rows.Add("File_Types_Trailer", "trl;trailer") 'FileTypesTrailer
         dt.Rows.Add("Backup_XML_First", "True") 'DefaultBackupXML
         dt.Rows.Add("Overwrite_XML_File", "True") 'DefaultOverwriteXML
         dt.Rows.Add("Ant_Database_Source_Field", "Source") 'AMCDatabaseSource
