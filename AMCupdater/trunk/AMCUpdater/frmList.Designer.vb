@@ -130,6 +130,7 @@ Partial Class frmList
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(717, 318)
+        Me.ControlBox = False
         Me.Controls.Add(Me.ButtonGrabberOptions)
         Me.Controls.Add(Me.chkDontAskAgain)
         Me.Controls.Add(Me.btnDontAskAgain)
