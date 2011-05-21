@@ -70,6 +70,7 @@ Public Class Form1
             .Columns.Add("Display", System.Type.GetType("System.String"))
             .Rows.Add(True, "Always offer choice of movie")
             .Rows.Add(False, "Try to find best match automatically")
+            .Rows.Add(False, "Try to find best match automatically - don't ask for misses")
         End With
         Dim dvInternetLookupBehaviour1 As New DataView(dtInternetLookupBehaviour)
         Dim dvInternetLookupBehaviour2 As New DataView(dtInternetLookupBehaviour)
@@ -108,7 +109,6 @@ Public Class Form1
         MediaData.Add("subtitles", "subtitles")
         MediaData.Add("languages", "languages")
 
-        ' ToDo: Addfields to grab extended infos: Writer, Certification, TMDB_Id, IMDB_Id, Watched, DateWatched
         InternetData = New Hashtable
         InternetData.Add("rating", "rating")
         InternetData.Add("year", "year")
@@ -123,6 +123,15 @@ Public Class Form1
         InternetData.Add("description", "description")
         InternetData.Add("comments", "comments")
         InternetData.Add("picture", "picture")
+        ' Guzzi added: Extended fields
+        InternetData.Add("writer", "writer")
+        InternetData.Add("certification", "certification")
+        InternetData.Add("languages", "languages")
+        InternetData.Add("tagline", "tagline")
+        InternetData.Add("imdb_id", "imdb_id")
+        InternetData.Add("tmdb_id", "tmdb_id")
+        InternetData.Add("imdbrank", "imdbrank")
+        InternetData.Add("studio", "studio")
 
         SetCheckButtonStatus(ButtonStatus.ReadyToParseXML)
 

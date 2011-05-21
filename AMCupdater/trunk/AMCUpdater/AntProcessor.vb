@@ -2434,6 +2434,8 @@ Public Class AntProcessor
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Certification", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Writer", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Tagline", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"IMDB_Id", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"TMDB_Id", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"ImdbRank", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Studio", "String"})
         End If
