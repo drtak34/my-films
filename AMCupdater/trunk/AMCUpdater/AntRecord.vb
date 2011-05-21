@@ -21,6 +21,7 @@ Public Class AntRecord
     Private _MovieTitleHandling As String = String.Empty
     Private _LastOutputMessage As String = String.Empty
     Private _Read_DVD_Label As Boolean = False
+    Private _Dont_Ask_Interactive As Boolean = False
     Private _XMLFilePath As String = String.Empty
     Private _XMLTempFilePath As String = String.Empty
     Private _InternetSearchHint As String = String.Empty
@@ -272,6 +273,14 @@ Public Class AntRecord
             _Read_DVD_Label = value
         End Set
     End Property
+    Public Property Dont_Ask_Interactive() As Boolean
+        Get
+            Return _Dont_Ask_Interactive
+        End Get
+        Set(ByVal value As Boolean)
+            _Dont_Ask_Interactive = value
+        End Set
+    End Property
     Public Property XMLFilePath() As String
         Get
             Return _XMLFilePath
@@ -407,8 +416,8 @@ Public Class AntRecord
                         Dim wyear As String
                         Dim wlimityear As Boolean = False
 
-                        'If (_InteractiveMode = True And InternetLookupAlwaysPrompt) Then
-                        If (_InteractiveMode = True And InternetLookupAlwaysPrompt) Then
+                        'If _InteractiveMode = True Then
+                        If (_InteractiveMode = True And _Dont_Ask_Interactive = False) Then
                             frmList.txtSearchString.Text = SearchString
                             frmList.chkDontAskAgain.Checked = False
                             frmList.txtTmpParserFilePath.Text = _ParserPath

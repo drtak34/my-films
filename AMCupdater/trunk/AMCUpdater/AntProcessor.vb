@@ -1742,6 +1742,7 @@ Public Class AntProcessor
                             .InternetLookupAlwaysPrompt = objSettings.Internet_Lookup_Always_Prompt
                             .DateHandling = objSettings.Date_Handling
                             .Read_DVD_Label = objSettings.Read_DVD_Label
+                            .Dont_Ask_Interactive = objSettings.Dont_Ask_Interactive
                             .XMLFilePath = objSettings.XML_File
                             .MovieTitleHandling = objSettings.Movie_Title_Handling
                             .GroupName = row("GroupName").ToString
@@ -1761,7 +1762,7 @@ Public Class AntProcessor
                             End If
                         Else
                             'need to create a new entry:
-                            Ant.CreateElement()
+                            Ant.CreateElement() ' find movie and add it
                             Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
                             Ant.SaveProgress()
 
@@ -1888,6 +1889,7 @@ Public Class AntProcessor
                             .InternetLookupAlwaysPrompt = objSettings.Internet_Lookup_Always_Prompt
                             .DateHandling = objSettings.Date_Handling
                             .Read_DVD_Label = objSettings.Read_DVD_Label
+                            .Dont_Ask_Interactive = objSettings.Dont_Ask_Interactive
                             .XMLFilePath = objSettings.XML_File
                             .MovieTitleHandling = objSettings.Movie_Title_Handling
                             .GroupName = row("GroupName").ToString

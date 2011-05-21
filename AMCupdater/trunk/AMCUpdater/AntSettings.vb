@@ -303,6 +303,19 @@ Public Class AntSettings
             SetAttribute("DVD_Drive_Letter", value)
         End Set
     End Property
+    Public Property Dont_Ask_Interactive() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Dont_Ask_Interactive").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Dont_Ask_Interactive", value)
+        End Set
+    End Property
     Public Property Manual_XML_File() As String
         Get
             Return ReadAttribute("Manual_XML_File")
@@ -572,6 +585,7 @@ Public Class AntSettings
         dt.Rows.Add("Internet_Lookup_Always_Prompt", "True") 'Set to True to always get choice of Movie from Internet lookup; false to attempt auto-match as before.
         dt.Rows.Add("Read_DVD_Label", "False")
         dt.Rows.Add("DVD_Drive_Letter", "")
+        dt.Rows.Add("Dont_Ask_Interactive", "False")
         dt.Rows.Add("Manual_XML_File", "")
         If MePo Then
             dt.Rows.Add("Manual_Internet_Parser_Path", MePoConfigPath & "\Scripts\MyFilms\IMDB.xml")
