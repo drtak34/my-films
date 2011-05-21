@@ -4234,7 +4234,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
             AMCSetAttribute("Internet_Parser_Path", Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml");
           AMCSetAttribute("Manual_Excluded_Movies_File", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCExcludedMoviesFile.txt");
-          AMCSetAttribute("Manual_Internet_Parser_Path", txtAMCUpd_cnf.Text);
+          AMCSetAttribute("Manual_Internet_Parser_Path", txtGrabber.Text);
           AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
           AMCSetAttribute("Master_Title", AntTitle1.Text); // Check, if this should be replaced by ItemSearchGrabber...
           AMCSetAttribute("Movie_Fanart_Path", MesFilmsFanart.Text);
