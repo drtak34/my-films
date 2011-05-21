@@ -1530,7 +1530,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             
             LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url.ToString() + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID.ToString() + "', interactive = '" + interactive.ToString() + "'"); 
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-            string[] Result = new string[30];
+            string[] Result = new string[60];
             string title = string.Empty;
             string ttitle = string.Empty;
             string wtitle = string.Empty;
@@ -1555,6 +1555,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else
                 downLoadPath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
               Result = Grab.GetDetail(url, downLoadPath, wscript);
+              // copy mapped values to original values
+              for (int i = 0; i < 30; i++)
+              {
+                Result[i] = Result[i + 30];
+              }
               LogMyFilms.Info("Grabber - downloadpath = '" + downLoadPath + "'");
             }
             LogMyFilms.Info("Grab Internet/nfo Information done for title/ttitle: " + MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] + "/" + MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString());
@@ -2592,7 +2597,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url.ToString() + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID.ToString() + "', interactive = '" + interactive.ToString() + "'");
           Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-          string[] Result = new string[30];
+          string[] Result = new string[60];
           string title = string.Empty;
           string ttitle = string.Empty;
           string wtitle = string.Empty;
@@ -2617,6 +2622,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
               downLoadPath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
             Result = Grab.GetDetail(url, downLoadPath, wscript);
+            // copy mapped values to original values
+            for (int i = 0; i < 30; i++)
+            {
+              Result[i] = Result[i + 30];
+            }
             LogMyFilms.Info("Grabber - downloadpath = '" + downLoadPath + "'");
           }
           LogMyFilms.Info("Grab Internet/nfo Information done for title/ttitle: " + MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] + "/" + MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString());

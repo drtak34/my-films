@@ -3826,25 +3826,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         SetLabelSelect("root");
       else
         SetLabelSelect(conf.StrTxtSelect);
-      this.SetDummyControlsForFacade(listLevel);
-
-      // load all initial values, when preparing facade ....
-      //if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label) // in this case, itemselectedhandler would not load details
-      //  if (facadeView.SelectedListItemIndex > -1 && conf.LastID != ID_MyFilmsDetail && conf.LastID != ID_MyFilmsActors) // only when not going to actors or details vew
-      //  {
-      //    Log.Debug("OnPageLoad() - from Fin_Charge_Init(): Force loading of Details");
-      //    Load_Lstdetail(facadeView.SelectedListItem, true); // force details loading
-      //  }
+      SetDummyControlsForFacade(listLevel);
 
       if (conf.LastID == ID_MyFilmsDetail)
         GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
       if (conf.LastID == ID_MyFilmsActors)
         GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
-      //if (facadeView.CurrentLayout == GUIFacadeControl.Layout.CoverFlow && Prev_ItemID != -1)
-      //{
-      //  //facadeView.CoverFlowLayout.SelectCard(facadeView.SelectedListItemIndex); // added to reduce broken initial animation
-      //  facadeView.CoverFlowLayout.SelectCard(Prev_ItemID); // added to reduce broken initial animation
-      //}
     }
     //--------------------------------------------------------------------------------------------
     //   Change LayOut 
@@ -8587,6 +8574,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void SetDummyControlsForFacade(Listlevel listlevel)
     {
+      Log.Debug("SetDummyControlsForFacade(): listlevel = '" + listlevel + "'");
       if (dummyFacadeFilm == null || dummyFacadeGroup == null || dummyFacadePerson == null) 
         return;
       switch (listlevel)
