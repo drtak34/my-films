@@ -267,7 +267,7 @@ Public Class Form1
         Try
             AntProcessor.UpdateXMLFile()
         Catch ex As Exception
-            LogEvent("Error : " & ex.Message, EventLogLevel.ErrorOrSimilar)
+            LogEvent("Error : " & ex.Message & " - Stacktrace: " & ex.StackTrace.ToString, EventLogLevel.ErrorOrSimilar)
             'Finally
             'fnSetCheckButtonStatus(ButtonStatus.ParseXML)
         End Try
@@ -2215,10 +2215,10 @@ Public Class Form1
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Using p = New Process
             Dim psi As New ProcessStartInfo
-            psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base).ToString + "\MyFilms_Grabber_Interface.exe"
+            psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base).ToString & "\MyFilms_Grabber_Interface.exe"
             psi.UseShellExecute = True
             psi.WindowStyle = ProcessWindowStyle.Normal
-            psi.Arguments = """ + txtParserFilePath.Text + """
+            psi.Arguments = """" & txtParserFilePath.Text & """"
             psi.ErrorDialog = True
             If (OSInfo.OSInfo.VistaOrLater()) Then
                 psi.Verb = "runas"
