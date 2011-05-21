@@ -38,7 +38,7 @@ using MediaPortal.Common.Utils;
 #if MP11
 #else
 //[assembly: CompatibleVersion("1.1.7.0", "1.1.6.0")]
-[assembly: CompatibleVersion("1.1.6.27644")]
+[assembly: CompatibleVersion("1.1.7.27830", "1.1.6.27644")]
 [assembly: UsesSubsystem("MP.SkinEngine")]
 [assembly: UsesSubsystem("MP.Config")]
 [assembly: UsesSubsystem("MP.Players")]
