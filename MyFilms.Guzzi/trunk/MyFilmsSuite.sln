@@ -27,6 +27,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Interface", "Grabber_Interface\Grabber_Interface.csproj", "{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Plugin", "Grabber_Plugin\Grabber_Plugin.csproj", "{307F46D7-0620-4EA0-BBA8-8A27037CA75D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{92C183EE-636F-4A55-A6AB-363CDA606110} = {92C183EE-636F-4A55-A6AB-363CDA606110}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovingPicturesXML", "MovingPicturesXML\movingpicturesxml\MovingPicturesXML.csproj", "{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}"
 EndProject
@@ -156,6 +159,7 @@ Global
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Debug|x86.Build.0 = Debug|Any CPU
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
 		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
@@ -192,6 +196,7 @@ Global
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Debug|x86.Build.0 = Debug|Any CPU
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
@@ -228,6 +233,7 @@ Global
 		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|x86.Build.0 = Debug|Any CPU
 		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
 		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
 		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
