@@ -356,10 +356,29 @@ Public Class AntProcessor
                 Else
                     Return 0
                 End If
+            Case ">Num"
+                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
+                    If Val(CurrentNode.Attributes(ManualParameterField).Value.ToString) > Val(ManualParameterValue) Then
+                        Return 1
+                    Else
+                        Return 0
+                    End If
+                Else
+                    Return 0
+                End If
             Case "<"
                 If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
                     'Attribute exists, check it's not a match:
                     If CurrentNode.Attributes(ManualParameterField).Value.ToString < ManualParameterValue Then
+                        Return 1
+                    Else
+                        Return 0
+                    End If
+                End If
+            Case "<Num"
+                If CurrentNode.Attributes(ManualParameterField) IsNot Nothing Then
+                    'Attribute exists, check it's not a match:
+                    If Val(CurrentNode.Attributes(ManualParameterField).Value.ToString) < Val(ManualParameterValue) Then
                         Return 1
                     Else
                         Return 0

@@ -40,37 +40,67 @@ Public Class AntRecord
     Private Shared _XMLElement As Xml.XmlElement
 
     Private Enum Grabber_Output
-        OriginalTitle = 0
-        TranslatedTitle = 1
-        PicturePathLong = 2
-        Description = 3
-        Rating = 4
-        Actors = 5
-        Director = 6
-        Producer = 7
-        Year = 8
-        Country = 9
-        Category = 10
-        URL = 11
-        PicturePathShort = 12
-        SubUrlPersons = 13
-        Comment = 14
-        Language = 15
-        Tagline = 16
-        Certification = 17
-        SubUrlTitles = 18
-        Writer = 19
-        SubUrlCertification = 20
-        IMDBrank = 21
-        Studio = 22
-        Edition = 23
-        Fanart = 24
-        AspectRatio = 25
-        '26 - TranslatedTitle - All Names
-        '27 - TranslatedTitle - All Values
-        '28 - Certification - All Names
-        '29 - Certification - All Values
+        'OriginalTitle = 0
+        'TranslatedTitle = 1
+        'PicturePathLong = 2
+        'Description = 3
+        'Rating = 4
+        'Actors = 5
+        'Director = 6
+        'Producer = 7
+        'Year = 8
+        'Country = 9
+        'Category = 10
+        'URL = 11
+        'PicturePathShort = 12
+        'SubUrlPersons = 13
+        'Comment = 14
+        'Language = 15
+        'Tagline = 16
+        'Certification = 17
+        'SubUrlTitles = 18
+        'Writer = 19
+        'SubUrlCertification = 20
+        'IMDBrank = 21
+        'Studio = 22
+        'Edition = 23
+        'Fanart = 24
+        'AspectRatio = 25
+        'TranslatedTitleAllNames = 26
+        'TranslatedTitleAllValues = 27
+        'CertificationAllNames = 28
+        'CertificationAllValues = 29
 
+        OriginalTitle = 30
+        TranslatedTitle = 31
+        PicturePathLong = 32
+        Description = 33
+        Rating = 34
+        Actors = 35
+        Director = 36
+        Producer = 37
+        Year = 38
+        Country = 39
+        Category = 40
+        URL = 41
+        PicturePathShort = 42
+        SubUrlPersons = 43
+        Comment = 44
+        Language = 45
+        Tagline = 46
+        Certification = 47
+        SubUrlTitles = 48
+        Writer = 49
+        SubUrlCertification = 50
+        IMDBrank = 51
+        Studio = 52
+        Edition = 53
+        Fanart = 54
+        AspectRatio = 55
+        TranslatedTitleAllNames = 56
+        TranslatedTitleAllValues = 57
+        CertificationAllNames = 58
+        CertificationAllValues = 59
     End Enum
     Public Enum Process_Mode_Names
         Import
