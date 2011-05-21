@@ -1826,6 +1826,7 @@ Public Class Form1
         CurrentSettings.Store_Short_Names_Only = chkShortNames.Checked
         CurrentSettings.XML_File = txtConfigFilePath.Text
         CurrentSettings.Read_DVD_Label = chkReadDVDLabel.Checked
+        CurrentSettings.Dont_Ask_Interactive = chkDontAskInteractive.Checked
         CurrentSettings.Manual_Excluded_Movies_File = txtManualExcludedMoviesPath.Text
         CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
         CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
@@ -1953,6 +1954,7 @@ Public Class Form1
             txtConfigFilePath.Text = CurrentSettings.XML_File
             txtManualXMLPath.Text = CurrentSettings.XML_File
             chkReadDVDLabel.Checked = CurrentSettings.Read_DVD_Label
+            chkDontAskInteractive.Checked = CurrentSettings.Dont_Ask_Interactive
             chkFolderNameIsGroupName.Checked = CurrentSettings.Folder_Name_Is_Group_Name
             chkParsePlaylistFiles.Checked = CurrentSettings.Parse_Playlist_Files
             txtPictureFilenamePrefix.Text = CurrentSettings.Image_Download_Filename_Prefix
