@@ -2223,7 +2223,6 @@ Public Class Form1
             If (OSInfo.OSInfo.VistaOrLater()) Then
                 psi.Verb = "runas"
             End If
-
             p.StartInfo = psi
             Try
                 p.Start()

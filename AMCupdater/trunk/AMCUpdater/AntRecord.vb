@@ -531,6 +531,7 @@ Public Class AntRecord
         Try
 
             Dim attr As Xml.XmlAttribute
+            Dim element As Xml.XmlElement
             Dim TempValue As String
             Dim CurrentAttribute As String
 
@@ -1262,85 +1263,6 @@ Public Class AntRecord
                     End If
                 End If
 
-                ' Guzzi: Added Languages, Writer, Certification, Tagline
-                If _DatabaseFields("languages") = True Then
-                    CurrentAttribute = "Languages"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = ""
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Language)
-                    End If
-                End If
-
-                If _DatabaseFields("certification") = True Then
-                    CurrentAttribute = "Certification"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = ""
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Certification)
-                    End If
-                End If
-
-                If _DatabaseFields("writer") = True Then
-                    CurrentAttribute = "Writer"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = ""
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Writer)
-                    End If
-                End If
-
-                If _DatabaseFields("tagline") = True Then
-                    CurrentAttribute = "Tagline"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = ""
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Tagline)
-                    End If
-                End If
-
-                If _DatabaseFields("imdbrank") = True Then
-                    CurrentAttribute = "ImdbRank"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = ""
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.IMDBrank)
-                    End If
-                End If
-
-                If _DatabaseFields("studio") = True Then
-                    CurrentAttribute = "Studio"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = ""
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Studio)
-                    End If
-                End If
-
                 If _DatabaseFields("picture") = True Then
                     CurrentAttribute = "Picture"
                     If CurrentSettings.Use_Folder_Dot_Jpg = True Then
@@ -1478,10 +1400,92 @@ Public Class AntRecord
                     End If
                 End If
 
+
+                ' Guzzi: Added Languages, Writer, Certification, Tagline
+                If _DatabaseFields("languages") = True Then
+                    CurrentAttribute = "Languages"
+                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
+                        element = _XMLDoc.CreateElement(CurrentAttribute)
+                        element.InnerText = _InternetData(Grabber_Output.Language)
+                        If element.InnerText <> "" Then
+                            _XMLElement.AppendChild(element)
+                        End If
+                    Else
+                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Language)
+                    End If
+                End If
+
+                If _DatabaseFields("certification") = True Then
+                    CurrentAttribute = "Certification"
+                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
+                        element = _XMLDoc.CreateElement(CurrentAttribute)
+                        element.InnerText = _InternetData(Grabber_Output.Certification)
+                        If element.InnerText <> "" Then
+                            _XMLElement.AppendChild(element)
+                        End If
+                    Else
+                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Certification)
+                    End If
+                End If
+
+                If _DatabaseFields("writer") = True Then
+                    CurrentAttribute = "Writer"
+                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
+                        element = _XMLDoc.CreateElement(CurrentAttribute)
+                        element.InnerText = _InternetData(Grabber_Output.Writer)
+                        If element.InnerText <> "" Then
+                            _XMLElement.AppendChild(element)
+                        End If
+                    Else
+                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Writer)
+                    End If
+                End If
+
+                If _DatabaseFields("tagline") = True Then
+                    CurrentAttribute = "Tagline"
+                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
+                        element = _XMLDoc.CreateElement(CurrentAttribute)
+                        element.InnerText = _InternetData(Grabber_Output.Tagline)
+                        If element.InnerText <> "" Then
+                            _XMLElement.AppendChild(element)
+                        End If
+                    Else
+                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Tagline)
+                    End If
+                End If
+
+                If _DatabaseFields("imdbrank") = True Then
+                    CurrentAttribute = "ImdbRank"
+                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
+                        element = _XMLDoc.CreateElement(CurrentAttribute)
+                        element.InnerText = _InternetData(Grabber_Output.IMDBrank)
+                        If element.InnerText <> "" Then
+                            _XMLElement.AppendChild(element)
+                        End If
+                    Else
+                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.IMDBrank)
+                    End If
+                End If
+
+                If _DatabaseFields("studio") = True Then
+                    CurrentAttribute = "Studio"
+                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
+                        element = _XMLDoc.CreateElement(CurrentAttribute)
+                        element.InnerText = _InternetData(Grabber_Output.Studio)
+                        If element.InnerText <> "" Then
+                            _XMLElement.AppendChild(element)
+                        End If
+                    Else
+                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Studio)
+                    End If
+                End If
             End If
+
+            'get fanart
             If _InternetLookupOK = True Then
                 If _DatabaseFields("fanart") = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
                     Dim fanart As List(Of Grabber.DBMovieInfo)
+                    Dim ttitleCleaned As String = ""
                     CurrentAttribute = "Year"
                     If Not _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
                         Try
@@ -1501,15 +1505,22 @@ Public Class AntRecord
                     CurrentAttribute = "TranslatedTitle"
                     If Not _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
                         ttitle = _XMLElement.Attributes(CurrentAttribute).Value
+                        If ttitle.Contains("(") Then
+                            ttitleCleaned = ttitle.Substring(0, ttitle.IndexOf("("))
+                        Else
+                            ttitleCleaned = ttitle
+                        End If
                     End If
                     Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
                     If title.Length > 0 Then
                         If title.Contains("\") = True Then
                             title = title.Substring(0, title.IndexOf("\") - 1)
                             'Console.WriteLine("-" & .GroupName.ToString & "-")
-                            fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                            'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                            fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                         Else
-                            fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                            'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                            fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                         End If
                     End If
                 End If

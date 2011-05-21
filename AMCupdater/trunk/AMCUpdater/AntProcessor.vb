@@ -2430,6 +2430,12 @@ Public Class AntProcessor
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Subtitles", "String"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Size", "Int"})
             ds.Tables("tblAntFields").Rows.Add(New Object() {"Picture", "String"})
+            'ds.Tables("tblAntFields").Rows.Add(New Object() {"Languages", "String"}) ' for internet languages
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Certification", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Writer", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Tagline", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"ImdbRank", "String"})
+            ds.Tables("tblAntFields").Rows.Add(New Object() {"Studio", "String"})
         End If
 
     End Sub

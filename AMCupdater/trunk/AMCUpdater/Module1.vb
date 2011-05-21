@@ -1319,6 +1319,11 @@ Module Module1
             InternetData.Add("description")
             InternetData.Add("comments")
             InternetData.Add("picture")
+            InternetData.Add("comment")
+            'InternetData.Add("language")
+            InternetData.Add("tagline")
+            InternetData.Add("certification")
+            InternetData.Add("writer")
 
             If CurrentSettings.Movie_Title_Handling.Contains("Internet Lookup") Then
                 InternetData.Add("originaltitle")
