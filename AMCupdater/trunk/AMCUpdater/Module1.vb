@@ -14,6 +14,7 @@ Module Module1
 
     Public Enum EventLogLevel As Integer
         None
+        InformationalWithGrabbing
         Informational
         ImportantEvent
         ErrorOrSimilar
@@ -1125,23 +1126,34 @@ Module Module1
     Public Sub LogEvent(ByVal EventString As String, ByVal LogLevel As EventLogLevel)
         'LogLevels...
         ' 0 = None (no logging)
-        ' 1 = Informational
-        ' 2 = Verbose (most events)
-        ' 3 = Debug (all events)
+        ' 1 = InformationalWithGrabbing
+        ' 2 = Informational
+        ' 3 = Verbose (most events)
+        ' 4 = Debug (all events)
         ' Errors = 3
         ' Major operations = 2
         ' Individual Files = 1
 
+        'CurrentSettings values:
+        'All Events with Grabbing
+        'All Events
+        'Major Events
+        'ErrorsOnly
+
         Dim CurrentLogName As String = CurrentSettings.Log_Level
         Dim LogItem As Boolean = False
-        If CurrentLogName = "All Events" Then
+        If CurrentLogName = "All Events with Grabbing" Then
             LogItem = True
-        ElseIf CurrentLogName = "Major Events" Then
+        ElseIf CurrentLogName = "All Events" Then
             If LogLevel >= 2 Then
                 LogItem = True
             End If
-        ElseIf CurrentLogName = "Errors Only" Then
+        ElseIf CurrentLogName = "Major Events" Then
             If LogLevel >= 3 Then
+                LogItem = True
+            End If
+        ElseIf CurrentLogName = "Errors Only" Then
+            If LogLevel >= 4 Then
                 LogItem = True
             End If
         End If
