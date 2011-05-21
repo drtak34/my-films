@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("AutoUpdater for Ant Movie Catalog")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("AMC Updater")> 
-<Assembly: AssemblyCopyright("Copyright © Orion Hall 2007")> 
+<Assembly: AssemblyCopyright("Copyright © Orion Hall 2011")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("0.9.1.3")> 
-<Assembly: AssemblyFileVersion("0.9.1.3")> 
+<Assembly: AssemblyVersion("0.9.1.4")> 
+<Assembly: AssemblyFileVersion("0.9.1.4")> 

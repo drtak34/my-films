@@ -75,7 +75,9 @@ Public Class AntProcessor
             If ds.Tables("tblOrphanedNonMediaFiles") IsNot Nothing Then
                 _CountOrphanFiles += ds.Tables("tblOrphanedNonMediaFiles").Rows.Count
             End If
-
+            If ds.Tables("tblOrphanedTrailerMediaFiles") IsNot Nothing Then
+                _CountOrphanFiles += ds.Tables("tblOrphanedTrailerMediaFiles").Rows.Count
+            End If
             Return _CountOrphanFiles
         End Get
     End Property
@@ -1067,14 +1069,14 @@ Public Class AntProcessor
     Public Sub ProcessMovieFolder()
         'Sub to enumerate all files in the given MoviePath location.
 
+        If ds.Tables("tblFoundMediaFiles") IsNot Nothing Then
+            ds.Tables("tblFoundMediaFiles").Clear()
+        End If
         If ds.Tables("tblFoundNonMediaFiles") IsNot Nothing Then
             ds.Tables("tblFoundNonMediaFiles").Clear()
         End If
         If ds.Tables("tblFoundTrailerFiles") IsNot Nothing Then
             ds.Tables("tblFoundTrailerFiles").Clear()
-        End If
-        If ds.Tables("tblFoundMediaFiles") IsNot Nothing Then
-            ds.Tables("tblFoundMediaFiles").Clear()
         End If
 
         Dim XMLExclTable As New Hashtable
@@ -1186,6 +1188,9 @@ Public Class AntProcessor
         End If
         If ds.Tables("tblOrphanedNonMediaFiles").Rows.Count > 0 Then
             ds.Tables("tblOrphanedNonMediaFiles").Clear()
+        End If
+        If ds.Tables("tblOrphanedTrailerMediaFiles").Rows.Count > 0 Then ' Orphaned Trailerfiles
+            ds.Tables("tblOrphanedTrailerMediaFiles").Clear()
         End If
         If ds.Tables("tblMultiPartFiles").Rows.Count > 0 Then
             ds.Tables("tblMultiPartFiles").Clear()
