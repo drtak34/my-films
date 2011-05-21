@@ -407,7 +407,8 @@ Public Class AntRecord
                         Dim wyear As String
                         Dim wlimityear As Boolean = False
 
-                        If _InteractiveMode = True Then
+                        'If (_InteractiveMode = True And InternetLookupAlwaysPrompt) Then
+                        If (_InteractiveMode = True And InternetLookupAlwaysPrompt) Then
                             frmList.txtSearchString.Text = SearchString
                             frmList.chkDontAskAgain.Checked = False
                             frmList.txtTmpParserFilePath.Text = _ParserPath
