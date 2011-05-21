@@ -2171,13 +2171,6 @@
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB-akas-combined.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{487a7389-d9a7-40de-93e3-b955ae764ec0}-IMDB-akas-combined.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-akas-combined.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\IMDB-Full.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{fda1eb71-6050-4cef-b106-1c89b09a50d7}-IMDB-Full.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Full.xml</DestinationFilename>
@@ -2863,13 +2856,13 @@ Please refer to the Wiki onlinedocumentation.</Value>
           <Revision>27644</Revision>
         </MinVersion>
         <MaxVersion>
-          <Major>1</Major>
-          <Minor>1</Minor>
-          <Build>6</Build>
-          <Revision>27644</Revision>
+          <Major>0</Major>
+          <Minor>0</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>false</WarnOnly>
-        <Message>requires MediaPortal version 1.1.6.27644 to 1.1.6.27644.</Message>
+        <Message>requires MediaPortal version 1.1.6.27644</Message>
         <Name>MediaPortal</Name>
       </DependencyItem>
     </Items>
@@ -2941,7 +2934,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>816</Revision>
+      <Revision>851</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2949,7 +2942,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.816(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.851(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -5115,13 +5108,6 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB-akas-combined.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{487a7389-d9a7-40de-93e3-b955ae764ec0}-IMDB-akas-combined.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-akas-combined.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\IMDB-Full.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{fda1eb71-6050-4cef-b106-1c89b09a50d7}-IMDB-Full.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Full.xml</DestinationFilename>
@@ -5522,14 +5508,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0571feca-0045-40ef-8ef2-fdd213378268}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{1d7e2387-204b-45e0-9d24-96903192995f}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{182dfd16-fa71-4ab3-9a9f-fd29c5fa1baa}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{7d7a28f7-dac4-41f5-82d5-c9c69f9e95df}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

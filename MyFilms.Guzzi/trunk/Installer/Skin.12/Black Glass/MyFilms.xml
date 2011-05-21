@@ -1755,7 +1755,7 @@ End additional Backdrops  -->
 			<type>label</type>
 			<id>0</id>
 			<posX>340</posX>
-			<posY>100</posY>
+			<posY>110</posY>
 			<width>600</width>
 			<font>font10</font>
 			<textcolor>60ffffff</textcolor>
@@ -1767,7 +1767,7 @@ End additional Backdrops  -->
 			<type>label</type>
 			<id>0</id>
 			<posX>340</posX>
-			<posY>100</posY>
+			<posY>120</posY>
 			<width>600</width>
 			<font>font10</font>
 			<textcolor>60ffffff</textcolor>

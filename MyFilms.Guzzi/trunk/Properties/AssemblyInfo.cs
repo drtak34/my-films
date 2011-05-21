@@ -11,10 +11,10 @@ using MediaPortal.Common.Utils;
 [assembly: AssemblyTitle("MyFilms")]
 [assembly: AssemblyDescription("MyFilms Movie Plugin")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Personnel")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MediaPortal")]
 [assembly: AssemblyCopyright("Copyright © 2011")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Zebons, Guzzi")]
 [assembly: AssemblyCulture("")]
 
 // L'affectation de la valeur false à ComVisible rend les types invisibles dans cet assembly 
@@ -32,8 +32,8 @@ using MediaPortal.Common.Utils;
 //      Numéro de build
 //      Révision
 //
-[assembly: AssemblyVersion("5.0.1.816")]
-[assembly: AssemblyFileVersion("5.0.1.816")]
+[assembly: AssemblyVersion("5.0.1.851")]
+[assembly: AssemblyFileVersion("5.0.1.851")]
 [assembly: NeutralResourcesLanguageAttribute("")]
 #if MP11
 #else
