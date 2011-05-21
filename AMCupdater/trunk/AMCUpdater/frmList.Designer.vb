@@ -31,6 +31,7 @@ Partial Class frmList
         Me.btnSelectParserFile = New System.Windows.Forms.Button
         Me.btnDontAskAgain = New System.Windows.Forms.Button
         Me.chkDontAskAgain = New System.Windows.Forms.CheckBox
+        Me.ButtonGrabberOptions = New System.Windows.Forms.Button
         Me.SuspendLayout()
         '
         'lstOptions
@@ -38,7 +39,7 @@ Partial Class frmList
         Me.lstOptions.FormattingEnabled = True
         Me.lstOptions.Location = New System.Drawing.Point(12, 73)
         Me.lstOptions.Name = "lstOptions"
-        Me.lstOptions.Size = New System.Drawing.Size(586, 199)
+        Me.lstOptions.Size = New System.Drawing.Size(693, 199)
         Me.lstOptions.TabIndex = 30
         '
         'btnCancel
@@ -56,7 +57,7 @@ Partial Class frmList
         Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.btnOK.Location = New System.Drawing.Point(526, 283)
         Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(72, 23)
+        Me.btnOK.Size = New System.Drawing.Size(179, 23)
         Me.btnOK.TabIndex = 70
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
@@ -65,7 +66,7 @@ Partial Class frmList
         '
         Me.txtSearchString.Location = New System.Drawing.Point(12, 12)
         Me.txtSearchString.Name = "txtSearchString"
-        Me.txtSearchString.Size = New System.Drawing.Size(586, 20)
+        Me.txtSearchString.Size = New System.Drawing.Size(693, 20)
         Me.txtSearchString.TabIndex = 0
         '
         'btnSearchAgain
@@ -114,12 +115,22 @@ Partial Class frmList
         Me.chkDontAskAgain.UseVisualStyleBackColor = True
         Me.chkDontAskAgain.Visible = False
         '
+        'ButtonGrabberOptions
+        '
+        Me.ButtonGrabberOptions.Location = New System.Drawing.Point(604, 38)
+        Me.ButtonGrabberOptions.Name = "ButtonGrabberOptions"
+        Me.ButtonGrabberOptions.Size = New System.Drawing.Size(101, 20)
+        Me.ButtonGrabberOptions.TabIndex = 71
+        Me.ButtonGrabberOptions.Text = "Grabber Options"
+        Me.ButtonGrabberOptions.UseVisualStyleBackColor = True
+        '
         'frmList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(610, 318)
+        Me.ClientSize = New System.Drawing.Size(717, 318)
+        Me.Controls.Add(Me.ButtonGrabberOptions)
         Me.Controls.Add(Me.chkDontAskAgain)
         Me.Controls.Add(Me.btnDontAskAgain)
         Me.Controls.Add(Me.btnSelectParserFile)
@@ -130,7 +141,7 @@ Partial Class frmList
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.lstOptions)
         Me.DoubleBuffered = True
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.KeyPreview = True
         Me.Name = "frmList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -148,4 +159,5 @@ Partial Class frmList
     Friend WithEvents btnSelectParserFile As System.Windows.Forms.Button
     Friend WithEvents btnDontAskAgain As System.Windows.Forms.Button
     Friend WithEvents chkDontAskAgain As System.Windows.Forms.CheckBox
+    Friend WithEvents ButtonGrabberOptions As System.Windows.Forms.Button
 End Class

@@ -1,3 +1,5 @@
+Imports MediaPortal.Configuration
+
 Public Class frmList
 
     Private SearchTextChanged As Boolean = False
@@ -109,5 +111,25 @@ Public Class frmList
 
     Private Sub frmList_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.txtSearchString.Focus()
+    End Sub
+
+    Private Sub ButtonGrabberOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonGrabberOptions.Click
+        Using p = New Process
+            Dim psi As New ProcessStartInfo
+            psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base).ToString & "\MyFilms_Grabber_Interface.exe"
+            psi.UseShellExecute = True
+            psi.WindowStyle = ProcessWindowStyle.Normal
+            psi.Arguments = """" & txtTmpParserFilePath.Text & """"
+            psi.ErrorDialog = True
+            If (OSInfo.OSInfo.VistaOrLater()) Then
+                psi.Verb = "runas"
+            End If
+            p.StartInfo = psi
+            Try
+                p.Start()
+            Catch
+            End Try
+        End Using
+
     End Sub
 End Class
