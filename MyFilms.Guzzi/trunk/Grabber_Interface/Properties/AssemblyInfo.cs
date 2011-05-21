@@ -9,12 +9,12 @@ using MediaPortal.Common.Utils;
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("MyFilms_Grabber_Interface")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Grabber Interface for MyFilms Grabber Scripts")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Personnel")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Grabber_Interface")]
-[assembly: AssemblyCopyright("Copyright © Personnel 2011")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2011")]
+[assembly: AssemblyTrademark("Titof, Guzzi")]
 [assembly: AssemblyCulture("")]
 
 // L'affectation de la valeur false à ComVisible rend les types invisibles dans cet assembly 
@@ -32,8 +32,8 @@ using MediaPortal.Common.Utils;
 //      Numéro de build
 //      Révision
 //
-[assembly: AssemblyVersion("5.0.1.815")]
-[assembly: AssemblyFileVersion("5.0.1.815")]
+[assembly: AssemblyVersion("5.1.0.0")]
+[assembly: AssemblyFileVersion("5.1.0.0")]
 #if MP12
 //[assembly: CompatibleVersion("1.1.7.0", "1.1.6.0")]
 [assembly: CompatibleVersion("1.1.6.27644")]
