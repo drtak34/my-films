@@ -2239,5 +2239,24 @@ Public Class Form1
             End Try
         End Using
     End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        Using p = New Process
+            Dim psi As New ProcessStartInfo
+            psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base).ToString & "\MyFilms_Grabber_Interface.exe"
+            psi.UseShellExecute = True
+            psi.WindowStyle = ProcessWindowStyle.Normal
+            psi.Arguments = """" & txtManualInternetParserPath.Text & """"
+            psi.ErrorDialog = True
+            If (OSInfo.OSInfo.VistaOrLater()) Then
+                psi.Verb = "runas"
+            End If
+            p.StartInfo = psi
+            Try
+                p.Start()
+            Catch
+            End Try
+        End Using
+    End Sub
 End Class
 
