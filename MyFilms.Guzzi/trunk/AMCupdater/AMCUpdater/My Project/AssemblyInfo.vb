@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("AMC Updater (G-Mod)")> 
-<Assembly: AssemblyDescription("AutoUpdater for Ant Movie Catalog")> 
+<Assembly: AssemblyDescription("Movie DB AutoUpdater for MyFilms & Ant Movie Catalog")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("AMC Updater")> 
-<Assembly: AssemblyCopyright("Copyright © Orion Hall 2011")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyCopyright("Copyright © 2011")> 
+<Assembly: AssemblyTrademark("Orion Hall, Zebons, Guzzi")> 
 
 <Assembly: ComVisible(False)> 
 

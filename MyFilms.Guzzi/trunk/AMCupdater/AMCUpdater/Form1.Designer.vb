@@ -37,6 +37,7 @@ Partial Class Form1
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
         Me.Interactive = New System.Windows.Forms.TabPage
+        Me.ToolStripProgressMessage = New System.Windows.Forms.Label
         Me.btnShowHideLog = New System.Windows.Forms.Button
         Me.GroupBox7 = New System.Windows.Forms.GroupBox
         Me.Button1 = New System.Windows.Forms.Button
@@ -65,6 +66,7 @@ Partial Class Form1
         Me.btnProcessMovieList = New System.Windows.Forms.Button
         Me.btnJustDoIt = New System.Windows.Forms.Button
         Me.GroupBox6 = New System.Windows.Forms.GroupBox
+        Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox
         Me.chkReadDVDLabel = New System.Windows.Forms.CheckBox
         Me.txtMediaLabel = New System.Windows.Forms.TextBox
         Me.Label12 = New System.Windows.Forms.Label
@@ -95,8 +97,6 @@ Partial Class Form1
         Me.chkExecuteProgram = New System.Windows.Forms.CheckBox
         Me.Label27 = New System.Windows.Forms.Label
         Me.GroupBox5 = New System.Windows.Forms.GroupBox
-        Me.txtTrailerIentificationStrings = New System.Windows.Forms.TextBox
-        Me.Label79 = New System.Windows.Forms.Label
         Me.chkParseSubtitleFiles = New System.Windows.Forms.CheckBox
         Me.chkShortNames = New System.Windows.Forms.CheckBox
         Me.txtRegExSearchMultiPart = New System.Windows.Forms.TextBox
@@ -104,7 +104,9 @@ Partial Class Form1
         Me.txtDefaultSourceField = New System.Windows.Forms.TextBox
         Me.Label26 = New System.Windows.Forms.Label
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
+        Me.txtTrailerIentificationStrings = New System.Windows.Forms.TextBox
         Me.chkParsePlaylistFiles = New System.Windows.Forms.CheckBox
+        Me.Label79 = New System.Windows.Forms.Label
         Me.chkCheckDVDFolders = New System.Windows.Forms.CheckBox
         Me.txtDefaultFileTypesNonMedia = New System.Windows.Forms.TextBox
         Me.Label14 = New System.Windows.Forms.Label
@@ -152,6 +154,7 @@ Partial Class Form1
         Me.Manual = New System.Windows.Forms.TabPage
         Me.btnManualCancel = New System.Windows.Forms.Button
         Me.grpManualInternetLookupSettings = New System.Windows.Forms.GroupBox
+        Me.Button2 = New System.Windows.Forms.Button
         Me.Label42 = New System.Windows.Forms.Label
         Me.txtManualExcludedMoviesPath = New System.Windows.Forms.TextBox
         Me.Label40 = New System.Windows.Forms.Label
@@ -342,8 +345,10 @@ Partial Class Form1
         Me.XMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.MediaFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.NonMediaFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.TrailerFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OrphanMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OrphanNonMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.OrphanTrailerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.MultiPartFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OrphanAntToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.MultiPartProcessedFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -366,11 +371,7 @@ Partial Class Form1
         Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.ToolStripProgressMessage = New System.Windows.Forms.Label
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox
-        Me.TrailerFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.OrphanTrailerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.MyFilmsWikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.TabControl1.SuspendLayout()
         Me.Interactive.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -453,6 +454,16 @@ Partial Class Form1
         Me.Interactive.TabIndex = 0
         Me.Interactive.Text = "Interactive"
         Me.Interactive.UseVisualStyleBackColor = True
+        '
+        'ToolStripProgressMessage
+        '
+        Me.ToolStripProgressMessage.AutoSize = True
+        Me.ToolStripProgressMessage.Location = New System.Drawing.Point(16, 503)
+        Me.ToolStripProgressMessage.Name = "ToolStripProgressMessage"
+        Me.ToolStripProgressMessage.Size = New System.Drawing.Size(35, 13)
+        Me.ToolStripProgressMessage.TabIndex = 55
+        Me.ToolStripProgressMessage.Text = "status"
+        Me.ToolStripProgressMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btnShowHideLog
         '
@@ -757,6 +768,17 @@ Partial Class Form1
         Me.GroupBox6.TabIndex = 1
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Options"
+        '
+        'chkDontAskInteractive
+        '
+        Me.chkDontAskInteractive.AutoSize = True
+        Me.chkDontAskInteractive.Location = New System.Drawing.Point(415, 56)
+        Me.chkDontAskInteractive.Name = "chkDontAskInteractive"
+        Me.chkDontAskInteractive.Size = New System.Drawing.Size(80, 30)
+        Me.chkDontAskInteractive.TabIndex = 59
+        Me.chkDontAskInteractive.Text = "Don't ask," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "iif no match"
+        Me.ToolTip1.SetToolTip(Me.chkDontAskInteractive, resources.GetString("chkDontAskInteractive.ToolTip"))
+        Me.chkDontAskInteractive.UseVisualStyleBackColor = True
         '
         'chkReadDVDLabel
         '
@@ -1082,24 +1104,6 @@ Partial Class Form1
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "File Processing"
         '
-        'txtTrailerIentificationStrings
-        '
-        Me.txtTrailerIentificationStrings.Location = New System.Drawing.Point(225, 127)
-        Me.txtTrailerIentificationStrings.Name = "txtTrailerIentificationStrings"
-        Me.txtTrailerIentificationStrings.Size = New System.Drawing.Size(270, 20)
-        Me.txtTrailerIentificationStrings.TabIndex = 29
-        Me.ToolTip1.SetToolTip(Me.txtTrailerIentificationStrings, "if a file contains one of these strings, it will be identified as trailer instead" & _
-                " of movie" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "several values are possible - use "";"" as delimiter.")
-        '
-        'Label79
-        '
-        Me.Label79.AutoSize = True
-        Me.Label79.Location = New System.Drawing.Point(9, 130)
-        Me.Label79.Name = "Label79"
-        Me.Label79.Size = New System.Drawing.Size(134, 13)
-        Me.Label79.TabIndex = 28
-        Me.Label79.Text = "Trailer Identification Strings"
-        '
         'chkParseSubtitleFiles
         '
         Me.chkParseSubtitleFiles.AutoSize = True
@@ -1175,6 +1179,15 @@ Partial Class Form1
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "File Types"
         '
+        'txtTrailerIentificationStrings
+        '
+        Me.txtTrailerIentificationStrings.Location = New System.Drawing.Point(225, 127)
+        Me.txtTrailerIentificationStrings.Name = "txtTrailerIentificationStrings"
+        Me.txtTrailerIentificationStrings.Size = New System.Drawing.Size(270, 20)
+        Me.txtTrailerIentificationStrings.TabIndex = 29
+        Me.ToolTip1.SetToolTip(Me.txtTrailerIentificationStrings, "if a file contains one of these strings, it will be identified as trailer instead" & _
+                " of movie" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "several values are possible - use "";"" as delimiter.")
+        '
         'chkParsePlaylistFiles
         '
         Me.chkParsePlaylistFiles.AutoSize = True
@@ -1185,6 +1198,15 @@ Partial Class Form1
         Me.chkParsePlaylistFiles.Text = "Also check for Playlist Files?"
         Me.chkParsePlaylistFiles.UseVisualStyleBackColor = True
         Me.chkParsePlaylistFiles.Visible = False
+        '
+        'Label79
+        '
+        Me.Label79.AutoSize = True
+        Me.Label79.Location = New System.Drawing.Point(9, 130)
+        Me.Label79.Name = "Label79"
+        Me.Label79.Size = New System.Drawing.Size(134, 13)
+        Me.Label79.TabIndex = 28
+        Me.Label79.Text = "Trailer Identification Strings"
         '
         'chkCheckDVDFolders
         '
@@ -1707,6 +1729,15 @@ Partial Class Form1
         Me.grpManualInternetLookupSettings.TabIndex = 101
         Me.grpManualInternetLookupSettings.TabStop = False
         Me.grpManualInternetLookupSettings.Text = "Internet Lookup"
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(329, 35)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(94, 20)
+        Me.Button2.TabIndex = 54
+        Me.Button2.Text = "Grabber Options"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Label42
         '
@@ -2635,7 +2666,7 @@ Partial Class Form1
         Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
         Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 27, 0, 0)
         Me.XionPanel1.Sizable = True
-        Me.XionPanel1.Size = New System.Drawing.Size(27, 494)
+        Me.XionPanel1.Size = New System.Drawing.Size(184, 494)
         Me.XionPanel1.State = XionControls.XionPanel.PanelState.Collapse
         Me.XionPanel1.TabIndex = 67
         Me.XionPanel1.Text = "Movie List"
@@ -3509,9 +3540,9 @@ Partial Class Form1
         '
         'InternetLinksToolStripMenuItem
         '
-        Me.InternetLinksToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AMCUpdaterSourceforgeToolStripMenuItem, Me.AntMovieCatalogToolStripMenuItem, Me.MediaInfodllToolStripMenuItem})
+        Me.InternetLinksToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MyFilmsWikiToolStripMenuItem, Me.AMCUpdaterSourceforgeToolStripMenuItem, Me.AntMovieCatalogToolStripMenuItem, Me.MediaInfodllToolStripMenuItem})
         Me.InternetLinksToolStripMenuItem.Name = "InternetLinksToolStripMenuItem"
-        Me.InternetLinksToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.InternetLinksToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.InternetLinksToolStripMenuItem.Text = "Internet Links"
         '
         'AMCUpdaterSourceforgeToolStripMenuItem
@@ -3535,13 +3566,13 @@ Partial Class Form1
         'UserManualToolStripMenuItem
         '
         Me.UserManualToolStripMenuItem.Name = "UserManualToolStripMenuItem"
-        Me.UserManualToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.UserManualToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.UserManualToolStripMenuItem.Text = "User Manual"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'DebugToolStripMenuItem
@@ -3569,6 +3600,12 @@ Partial Class Form1
         Me.NonMediaFilesToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.NonMediaFilesToolStripMenuItem.Text = "Non Media Files"
         '
+        'TrailerFilesToolStripMenuItem
+        '
+        Me.TrailerFilesToolStripMenuItem.Name = "TrailerFilesToolStripMenuItem"
+        Me.TrailerFilesToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.TrailerFilesToolStripMenuItem.Text = "Trailer Media Files"
+        '
         'OrphanMediaToolStripMenuItem
         '
         Me.OrphanMediaToolStripMenuItem.Name = "OrphanMediaToolStripMenuItem"
@@ -3580,6 +3617,12 @@ Partial Class Form1
         Me.OrphanNonMediaToolStripMenuItem.Name = "OrphanNonMediaToolStripMenuItem"
         Me.OrphanNonMediaToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.OrphanNonMediaToolStripMenuItem.Text = "Orphan Non Media"
+        '
+        'OrphanTrailerToolStripMenuItem
+        '
+        Me.OrphanTrailerToolStripMenuItem.Name = "OrphanTrailerToolStripMenuItem"
+        Me.OrphanTrailerToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.OrphanTrailerToolStripMenuItem.Text = "Orphan Trailer"
         '
         'MultiPartFilesToolStripMenuItem
         '
@@ -3659,6 +3702,14 @@ Partial Class Form1
         '
         Me.epOptions.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink
         Me.epOptions.ContainerControl = Me
+        '
+        'ToolTip1
+        '
+        Me.ToolTip1.AutoPopDelay = 15000
+        Me.ToolTip1.InitialDelay = 500
+        Me.ToolTip1.IsBalloon = True
+        Me.ToolTip1.ReshowDelay = 100
+        Me.ToolTip1.ToolTipTitle = "MyFilms - AMCupdater Help"
         '
         'AntMovieCatalog
         '
@@ -3742,47 +3793,11 @@ Partial Class Form1
         Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
         '
-        'ToolStripProgressMessage
+        'MyFilmsWikiToolStripMenuItem
         '
-        Me.ToolStripProgressMessage.AutoSize = True
-        Me.ToolStripProgressMessage.Location = New System.Drawing.Point(16, 503)
-        Me.ToolStripProgressMessage.Name = "ToolStripProgressMessage"
-        Me.ToolStripProgressMessage.Size = New System.Drawing.Size(35, 13)
-        Me.ToolStripProgressMessage.TabIndex = 55
-        Me.ToolStripProgressMessage.Text = "status"
-        Me.ToolStripProgressMessage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(329, 35)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(94, 20)
-        Me.Button2.TabIndex = 54
-        Me.Button2.Text = "Grabber Options"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'chkDontAskInteractive
-        '
-        Me.chkDontAskInteractive.AutoSize = True
-        Me.chkDontAskInteractive.Location = New System.Drawing.Point(415, 56)
-        Me.chkDontAskInteractive.Name = "chkDontAskInteractive"
-        Me.chkDontAskInteractive.Size = New System.Drawing.Size(80, 30)
-        Me.chkDontAskInteractive.TabIndex = 59
-        Me.chkDontAskInteractive.Text = "Don't ask," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "iif no match"
-        Me.ToolTip1.SetToolTip(Me.chkDontAskInteractive, resources.GetString("chkDontAskInteractive.ToolTip"))
-        Me.chkDontAskInteractive.UseVisualStyleBackColor = True
-        '
-        'TrailerFilesToolStripMenuItem
-        '
-        Me.TrailerFilesToolStripMenuItem.Name = "TrailerFilesToolStripMenuItem"
-        Me.TrailerFilesToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
-        Me.TrailerFilesToolStripMenuItem.Text = "Trailer Media Files"
-        '
-        'OrphanTrailerToolStripMenuItem
-        '
-        Me.OrphanTrailerToolStripMenuItem.Name = "OrphanTrailerToolStripMenuItem"
-        Me.OrphanTrailerToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
-        Me.OrphanTrailerToolStripMenuItem.Text = "Orphan Trailer"
+        Me.MyFilmsWikiToolStripMenuItem.Name = "MyFilmsWikiToolStripMenuItem"
+        Me.MyFilmsWikiToolStripMenuItem.Size = New System.Drawing.Size(219, 22)
+        Me.MyFilmsWikiToolStripMenuItem.Text = "MyFilms Wiki"
         '
         'Form1
         '
@@ -4217,4 +4232,5 @@ Partial Class Form1
     Friend WithEvents chkDontAskInteractive As System.Windows.Forms.CheckBox
     Friend WithEvents TrailerFilesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OrphanTrailerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MyFilmsWikiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

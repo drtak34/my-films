@@ -1660,6 +1660,9 @@ Public Class Form1
     Private Sub AboutToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AboutToolStripMenuItem.Click
         frmAbout.ShowDialog()
     End Sub
+    Private Sub MyFilmsWikiToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyFilmsWikiToolStripMenuItem.Click
+        System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/")
+    End Sub
     Private Sub AMCUpdaterSourceforgeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AMCUpdaterSourceforgeToolStripMenuItem.Click
         System.Diagnostics.Process.Start("http://sourceforge.net/projects/amcupdater/")
     End Sub
@@ -2259,6 +2262,5 @@ Public Class Form1
             End Try
         End Using
     End Sub
-
 End Class
 

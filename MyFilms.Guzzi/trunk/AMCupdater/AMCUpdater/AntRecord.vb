@@ -538,6 +538,7 @@ Public Class AntRecord
     Public Sub ProcessFile(ByVal ProcessMode As Process_Mode_Names)
 
         _LastOutputMessage = ""
+        'LogEvent("ProcessFile() - Start !", EventLogLevel.InformationalWithGrabbing)
         Try
 
             Dim attr As Xml.XmlAttribute
@@ -556,6 +557,7 @@ Public Class AntRecord
                 'Else
                 '_XMLElement.Attributes(CurrentAttribute).Value = TempValue
             End If
+            'LogEvent("ProcessFile() - get valid record number: '" & TempValue & "'", EventLogLevel.InformationalWithGrabbing)
             TempValue = ""
             Dim title As String = ""
             Dim ttitle As String = ""
@@ -564,6 +566,7 @@ Public Class AntRecord
             Dim imdb_id As String = "" ' Guzzi Added for exact IMDB matching
             If (ProcessMode = Process_Mode_Names.Import) Then
                 'Second get a decent Movie Title which we can then use for Internet Lookups as well as the Original Title field.
+                'LogEvent("ProcessFile() - Import: Get search & matching hints...", EventLogLevel.InformationalWithGrabbing)
                 If _DatabaseFields("originaltitle") = True Then
                     'add a test for manual update when no file specified => Internet lookup with OriginalTitle     
                     If (_FilePath.Length > 0) Then
@@ -577,6 +580,7 @@ Public Class AntRecord
                             _XMLElement.Attributes(CurrentAttribute).Value = TempValue
                         End If
                         title = TempValue
+                        'LogEvent("ProcessFile() - Import - hints - title: '" & title & "'", EventLogLevel.InformationalWithGrabbing)
                         TempValue = ""
                     End If
                 End If
@@ -593,6 +597,7 @@ Public Class AntRecord
                             _XMLElement.Attributes(CurrentAttribute).Value = TempValue
                         End If
                         _InternetSearchHintYear = TempValue
+                        'LogEvent("ProcessFile() - Import - hints - year: '" & _InternetSearchHintYear & "'", EventLogLevel.InformationalWithGrabbing)
                         TempValue = ""
                     End If
                 End If
@@ -607,8 +612,8 @@ Public Class AntRecord
                     Else
                         _XMLElement.Attributes(CurrentAttribute).Value = TempValue
                     End If
-                    title = TempValue
                     _InternetSearchHintIMDB_Id = TempValue
+                    'LogEvent("ProcessFile() - Import - hints - imdb_id: '" & _InternetSearchHintIMDB_Id & "'", EventLogLevel.InformationalWithGrabbing)
                     TempValue = ""
                 End If
             End If
@@ -632,6 +637,7 @@ Public Class AntRecord
                             End If
                         End If
                     End If
+                    'LogEvent("ProcessFile() - Update - _InternetSearchHint: '" & _InternetSearchHint & "'", EventLogLevel.InformationalWithGrabbing)
                 End If
                 If _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
                     'Looks like we have a value here - if so, use it for the lookup.  Assuming here that it has already been 'cleaned'.
