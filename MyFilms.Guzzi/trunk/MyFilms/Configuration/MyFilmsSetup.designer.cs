@@ -3099,7 +3099,8 @@
             "List",
             "Small Icons",
             "Large Icons",
-            "Filmstrip"});
+            "Filmstrip",
+            "Cover Flow"});
           this.LayOut.Location = new System.Drawing.Point(50, 44);
           this.LayOut.Name = "LayOut";
           this.LayOut.Size = new System.Drawing.Size(103, 21);
