@@ -3019,9 +3019,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           txtLogosPath.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogosPath", "");
           comboBoxLogoSpacing.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "Spacing", "1");
           selected_Logo_Item = -1;
+          comboBoxLogoPresets.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogoPresets", "Use Logos of currently selected skin");
           LogosPresetSelect();
           Read_XML_Logos_Details(wfile);
-          comboBoxLogoPresets.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogoPresets", "Use Logos of currently selected skin");
         }
 
         private void Read_XML_Logos_Details(string wfile)
