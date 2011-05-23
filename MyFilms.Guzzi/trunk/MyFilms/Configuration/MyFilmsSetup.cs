@@ -4392,7 +4392,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             else if (comboBoxLogoPresets.Text == "Use Blue3Wide logos")
             {
+#if MP11
               txtLogosPath.Text = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\blue3wide\media\logos";
+#else
+              txtLogosPath.Text = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\defaultwide\media\logos";
+#endif
               StoreFullLogoPath = false;
               txtLogosPath.Visible = true;
               txtLogosPath.Enabled = false;
