@@ -247,6 +247,7 @@
 			<width>250</width>
 			<height>400</height>
 			<dimColor>ffffffff</dimColor>
+ 			<visible>[control.hasfocus(2)|control.hasfocus(3)|control.hasfocus(4)|control.hasfocus(5)|control.hasfocus(6)|control.hasfocus(7)|control.hasfocus(10012)]</visible>
 			<control>
 				<type>image</type>
 				<description>Menu Background</description>
