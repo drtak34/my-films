@@ -5579,6 +5579,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
             }
         }
+
         private static void update_fieldDB(string champselect, int iidmovie, string field)
         {
             IMDBMovie movieDetails = new IMDBMovie();

@@ -1336,8 +1336,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         List<string[]> movieList = new List<string[]>();
         public List<string[]> MovieList
         {
-            get { return movieList; }
-            set { movieList = value; }
+          get { return movieList; }
+          set { movieList = value; }
+        }
+        List<string[]> trailerList = new List<string[]>();
+        public List<string[]> TrailerList
+        {
+          get { return trailerList; }
+          set { trailerList = value; }
         }
 
 

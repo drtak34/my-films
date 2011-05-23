@@ -7617,97 +7617,219 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     static void bgIsOnlineCheck_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
-      LogMyFilms.Info("bgIsOnlineCheck_DoWork: Now checking Online Status - Source field <film> is: '" + conf.StrStorage + "' - Source field <trailer> is: '" + conf.StrStorageTrailer + "'");
       BackgroundWorker worker = sender as BackgroundWorker;
-      Regex oRegex = new System.Text.RegularExpressions.Regex(";");
       DateTime startTime = DateTime.Now;
+      Regex oRegex = new Regex(";"); 
+      LogMyFilms.Info("bgIsOnlineCheck_DoWork: Now checking Online Status - Source field <film> is: '" + conf.StrStorage + "' - Source field <trailer> is: '" + conf.StrStorageTrailer + "'");
 
+      // Check Config
+      bool filmSource = true;
+      if (string.IsNullOrEmpty(conf.StrStorage) || conf.StrStorage == "(none)") // no source path set?
+        filmSource = false;
+      bool filmSearch = true;
+      if (string.IsNullOrEmpty(conf.ItemSearchFile) || string.IsNullOrEmpty(MyFilms.conf.SearchFile) || conf.SearchFile == "False" || conf.SearchFile == "no")
+        filmSearch = false;
+      bool trailerSource = true;
+      if (string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) || MyFilms.conf.StrStorageTrailer == "(none)")
+        trailerSource = false;
+      bool trailerSearch = true;
+      if (string.IsNullOrEmpty(conf.ItemSearchFileTrailer) || string.IsNullOrEmpty(MyFilms.conf.SearchFileTrailer) || conf.SearchFileTrailer == "False" || conf.SearchFileTrailer == "no")
+        trailerSearch = false;
+      LogMyFilms.Debug("bgIsOnlineCheck_DoWork: filmSource = '" + filmSource + "', filmSearch = '" + filmSearch + "', trailerSource = '" + trailerSource + "', trailerSearch = '" + trailerSearch + "'");
+
+      // Build MovieList (files)
+      if (filmSearch) // if search by filename is activated in setup ...
+      {
+        LogMyFilms.Debug("bgIsOnlineCheck_DoWork: Now checking Searchpathes, adding CDrom(s) and build MovieList ...");
+        string searchrep = conf.StrDirStor; // Searchpath for movies 
+        DriveInfo[] allDrives = DriveInfo.GetDrives(); // get local drives to find CDrom(s)
+        foreach (DriveInfo d in allDrives)
+        {
+          if ((d.DriveType.ToString() == "CDRom") && d.IsReady) // if drive is a CDrom and is "ready/media present" add it to search pathes
+          {
+            if (searchrep.Length > 0) searchrep = searchrep + ";" + d.Name;
+            else searchrep = d.Name;
+          }
+        }
+        LogMyFilms.Debug("bgIsOnlineCheck_DoWork: Resulting Searchpathes after adding active CDrom(s): '" + searchrep + "'");
+        
+        try
+        {
+          string[] SearchDir = oRegex.Split(searchrep);
+          foreach (string path in SearchDir)
+          {
+            if (System.IO.Directory.Exists(path))
+            {
+              MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - GetDir: '" + path + "'");
+              conf.MovieList.Add(System.IO.Directory.GetFiles(path));
+              if (MyFilms.conf.SearchSubDirs == "no") continue;
+              foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
+              {
+                MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - GetDir: '" + sFolderSub + "'");
+                conf.MovieList.Add(System.IO.Directory.GetFiles(sFolderSub));
+              }
+            }
+            else
+            {
+              LogMyFilms.Error("bgIsOnlineCheck_DoWork: Search Directory (Movie) not found: '" + path + "' - check your config!");
+            }
+          }
+        }
+        catch (Exception ex) {LogMyFilms.Debug("bgIsOnlineCheck_DoWork: SearchDir exception: " + ex.Message + ", " + ex.StackTrace.ToString());}
+        LogMyFilms.Debug("bgIsOnlineCheck_DoWork: Movie Files found: '" + conf.MovieList.Count + "'");
+      }
+
+      // Build TrailerList (files)
+      if (trailerSearch) // if search by filename is activated in setup ...
+      {
+        LogMyFilms.Info("bgIsOnlineCheck_DoWork: Now checking Searchpathes for Trailers and build TrailerList ...");
+        string searchrepTrailer = conf.StrDirStorTrailer; // Searchpath for trailer 
+        string[] SearchDirTrailer = oRegex.Split(searchrepTrailer);
+        foreach (string path in SearchDirTrailer)
+        {
+          if (Directory.Exists(path))
+          {
+            MyFilms.conf.TrailerList.Add(System.IO.Directory.GetFiles(path));
+            if (MyFilms.conf.SearchSubDirsTrailer == "no") continue;
+            foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
+            {
+              conf.TrailerList.Add(System.IO.Directory.GetFiles(sFolderSub));
+            }
+          }
+          else
+          {
+            LogMyFilms.Error("bgIsOnlineCheck_DoWork: Search Directory (Trailer) not found: '" + path + "' - check your config!");
+          }
+        }
+        LogMyFilms.Debug("bgIsOnlineCheck_DoWork: Trailer Files found: '" + conf.TrailerList.Count + "'");
+      }
+
+      LogMyFilms.Info("bgIsOnlineCheck_DoWork: Read MyFilms Database ...");
       MyFilms._rw.EnterReadLock();
       DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens, true);
       MyFilms._rw.ExitReadLock();
       string TotalRecords = wr.Count().ToString();
+      LogMyFilms.Debug("bgIsOnlineCheck_DoWork: DB-Records found: '" + TotalRecords + "'");
+
+      // Now scan for availability
       int counter = 0;
-      bool film = false;
-      if (MyFilms.conf.StrStorage == null || MyFilms.conf.StrStorage == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorage)) film = true;
-      bool trailer = false;
-      if (MyFilms.conf.StrStorageTrailer == null || MyFilms.conf.StrStorageTrailer == "(none)" || string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer)) trailer = true;
       foreach (DataRow t in wr)
       {
-        if (film)
+        counter++;
+        // Check Movie availability
+        if (!filmSource && !filmSearch)
         {
-          LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
+          //LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error checking Movie Online Status - Source or Search not properly defined in setup!");
         }
-        else
+        else 
         {
-          counter++;
-          // Check Movie availability
-          bool isonline = true; // set true as default - even if it might not be like that ...
+          bool isonline = true; // set true as default
           string fileName = string.Empty;
 
-          try
+          if (filmSource)
           {
-            fileName = t[MyFilms.conf.StrStorage].ToString().Trim();
-          }
-          catch (Exception ex)
-          {
-            LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error getting source media files from DB - exception: " + ex.Message);
-            fileName = string.Empty;
-          }
-          //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
-
-          string[] Mediafiles = oRegex.Split(fileName);
-          foreach (string mediafile in Mediafiles)
-          {
-            if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
+            try
             {
-              isonline = true;
-              LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie   media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              fileName = t[MyFilms.conf.StrStorage].ToString().Trim();
             }
-            else
+            catch (Exception ex)
             {
-              isonline = false;
-              if (mediafile.Length > 0)
-                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie   media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error getting source media files from DB - exception: " + ex.Message);
+              fileName = string.Empty;
             }
+            //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
+            string[] Mediafiles = oRegex.Split(fileName);
+            foreach (string mediafile in Mediafiles)
+            {
+              if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
+              {
+                // isonline = true;
+                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie (" + counter + ") SOURCE check   media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              }
+              else
+              {
+                isonline = false;
+                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie (" + counter + ") SOURCE check   media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              }
+            }
+          }
+          if (!isonline && filmSearch) // if movie not found via source and search is enabled...
+          {
+              string movieName = t[MyFilms.conf.ItemSearchFile].ToString();
+              movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
+              string[] result = conf.MovieList.Find(
+              delegate(string[] files)
+              {
+                return files.Where(n => n.Contains(movieName)).Count() > 0;
+              }
+              );
+              if (result != null)
+              {
+                foreach (string file in result)
+                {
+                  if (string.IsNullOrEmpty(file.Trim())) continue;
+                  if (MediaPortal.Util.Utils.IsVideo(file))
+                  {
+                    isonline = true;
+                    LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie (" + counter + ") SEARCH check   file FOUND      for title '" + t[conf.StrTitle1] + "' - file found: '" + file + "'");
+                  }
+                }
+              }
+              else
+              {
+                isonline = false;
+                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie (" + counter + ") SEARCH check   media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file found: (none)");
+              }
+              
+              //MyFilmsDetail.result = new ArrayList();
+              //MyFilmsDetail.SearchFiles(movieName, conf.StrDirStor, false, false);
+              //if (MyFilmsDetail.result.Count != 0) // found!
+              //{
+              //  // isonline = true;
+              //  LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie (" + counter + ") SEARCH check   file FOUND      for title '" + t[conf.StrTitle1] + "' - file found: '" + MyFilmsDetail.result[0].ToString().Trim() + "'");
+              //}
+              //else
+              //{
+              //  isonline = false;
+              //  LogMyFilms.Debug("bgIsOnlineCheck_DoWork - movie (" + counter + ") SEARCH check   media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file found: (none)");
+              //}
           }
           t["IsOnline"] = isonline.ToString();
-          MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner (" + counter + " of " + TotalRecords + " - film): '" + t[conf.StrTitle1] + "'", false);
+          MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner - (" + counter + " of " + TotalRecords + ") - Film: '" + t[conf.StrTitle1] + "'", false);
         }
 
-        if (trailer)
+        // Check Trailer availability
+        if (!trailerSource && !trailerSearch)
         {
-          LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error checking media Online Status - Source field not properly defined in setup!");
+          //LogMyFilms.Error("bgIsOnlineCheck_DoWork: Error checking Trailer Online Status - Source or Search not properly defined in setup!");
         }
         else
         {
-          // Check Trailer availability
           bool isonline = true; // set true as default - even if it might not be like that ...
           string fileName = string.Empty;
 
-          try
+          if (trailerSource)
           {
-            fileName = t[MyFilms.conf.StrStorageTrailer].ToString().Trim();
-          }
-          catch
-          {
-            fileName = string.Empty;
-          }
-          //fileName = fileName.Substring(0, fileName.LastIndexOf(";")).Trim();
+            try {fileName = t[MyFilms.conf.StrStorageTrailer].ToString().Trim();}
+            catch {fileName = string.Empty;}
 
-          string[] Mediafiles = oRegex.Split(fileName);
-          foreach (string mediafile in Mediafiles)
+            string[] Mediafiles = oRegex.Split(fileName);
+            foreach (string mediafile in Mediafiles)
+            {
+              if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
+              {
+                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - trailer (" + counter + ") media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              }
+              else
+              {
+                isonline = false;
+                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - trailer (" + counter + ") media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
+              }
+            }
+          }
+          if (!isonline && trailerSearch)
           {
-            if (mediafile.Length > 0 && System.IO.File.Exists(mediafile))
-            {
-              isonline = true;
-              LogMyFilms.Debug("bgIsOnlineCheck_DoWork - trailer media AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
-            }
-            else
-            {
-              isonline = false;
-              if (mediafile.Length > 0)
-                LogMyFilms.Debug("bgIsOnlineCheck_DoWork - trailer media NOT AVAILABLE for title '" + t[conf.StrTitle1] + "' - file: '" + mediafile + "'");
-            }
+            // Currently no autosearch implemented
           }
           t["IsOnlineTrailer"] = isonline.ToString();
           MyFilmsDetail.setGUIProperty("statusmessage", "Onlinescanner (" + counter + " of " + TotalRecords + " - film): '" + t[conf.StrTitle1] + "'", false);
@@ -8574,7 +8696,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void SetDummyControlsForFacade(Listlevel listlevel)
     {
-      Log.Debug("SetDummyControlsForFacade(): listlevel = '" + listlevel + "'");
+      LogMyFilms.Debug("SetDummyControlsForFacade(): listlevel = '" + listlevel + "'");
       if (dummyFacadeFilm == null || dummyFacadeGroup == null || dummyFacadePerson == null) 
         return;
       switch (listlevel)
