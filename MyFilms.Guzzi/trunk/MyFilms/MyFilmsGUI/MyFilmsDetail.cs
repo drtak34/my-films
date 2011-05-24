@@ -4115,22 +4115,97 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             break;
 
                         case "isonline":
-                            if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                            // old method
+                            //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                            //{
+                            //  if (MyFilms.InitialIsOnlineScan)
+                            //    setGUIProperty("user.source.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                            //  else
+                            //    setGUIProperty("user.source.isonline", "");
+                            //}
+
+                            // new method
+                            if (wrep)
                             {
-                              if (MyFilms.InitialIsOnlineScan)
-                                setGUIProperty("user.source.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                              if (MyFilms.InitialIsOnlineScan) // if availability scanner did run - either by autostart or manually
+                              {
+                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                                {
+                                  if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "True")
+                                    setGUIProperty("user.source.isonline", "online");
+                                  else if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "False")
+                                  {
+                                    if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
+                                        setGUIProperty("user.source.isonline", "available");
+                                    else
+                                      setGUIProperty("user.source.isonline", "offline");
+                                  }
+                                }
+                                else
+                                  setGUIProperty("user.source.isonline", "unknown"); // should not happen, if scanner did run ...
+                              }
                               else
-                                setGUIProperty("user.source.isonline", "");
+                              {
+                                if (MyFilms.r[ItemId][MyFilms.conf.StrStorage].ToString().Length > 0) // if there is source info available ...
+                                {
+                                  if (MyFilms.conf.ScanMediaOnStart) // if availability scanner is supposed to autostart
+                                    setGUIProperty("user.source.isonline", "available");
+                                  else
+                                    setGUIProperty("user.source.isonline", "online"); // set online as default
+                                }
+                                else if (MyFilms.conf.SearchFile.ToLower() == "true" || MyFilms.conf.SearchFile.ToLower() == "yes") // if search is enabled in setup
+                                  setGUIProperty("user.source.isonline", "unknown");
+                                else 
+                                  setGUIProperty("user.source.isonline", "offline");
+                              }
                             }
+                            else
+                              setGUIProperty("user.source.isonline", "");
                             break;
                         case "isonlinetrailer":
-                            if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                            //if (wrep && MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                            //{
+                            //  if (MyFilms.InitialIsOnlineScan)
+                            //    setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                            //  else
+                            //    setGUIProperty("user.sourcetrailer.isonline", "");
+                            //}
+                            if (wrep)
                             {
                               if (MyFilms.InitialIsOnlineScan)
-                                setGUIProperty("user.sourcetrailer.isonline", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                              {
+                                if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
+                                {
+                                  if (MyFilms.r[ItemId][dc.ColumnName].ToString() == "True")
+                                    setGUIProperty("user.sourcetrailer.isonline", "online");
+                                  else
+                                  {
+                                    if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
+                                      setGUIProperty("user.sourcetrailer.isonline", "available");
+                                    else
+                                      setGUIProperty("user.sourcetrailer.isonline", "offline");
+                                  }
+                                }
+                                else
+                                  setGUIProperty("user.sourcetrailer.isonline", "unknown"); // should not happen, if scanner did run ...
+                              }
                               else
-                                setGUIProperty("user.sourcetrailer.isonline", "");
+                              {
+                                if (MyFilms.r[ItemId][MyFilms.conf.StrStorageTrailer].ToString().Length > 0)
+                                {
+                                  if (MyFilms.conf.ScanMediaOnStart)
+                                    setGUIProperty("user.sourcetrailer.isonline", "available");
+                                  else
+                                    setGUIProperty("user.sourcetrailer.isonline", "online"); // set online as default
+                                }
+                                else if (MyFilms.conf.SearchFileTrailer.ToLower() == "true" || MyFilms.conf.SearchFileTrailer.ToLower() == "yes") // if search is enabled in setup
+                                  setGUIProperty("user.sourcetrailer.isonline", "unknown");
+                                else
+                                  setGUIProperty("user.sourcetrailer.isonline", "offline");
+                              }
                             }
+                            else
+                              setGUIProperty("user.sourcetrailer.isonline", "");
                             break;
                         case "resolution":
                             decimal aspectratio = 0; 
