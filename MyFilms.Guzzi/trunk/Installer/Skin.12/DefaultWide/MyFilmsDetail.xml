@@ -1602,7 +1602,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.source.value)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unavailable)+!player.hasmedia</visible>
 		</control>
 		<control>
 			<description>Movie available Icon</description>
@@ -1616,7 +1616,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.value)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,available)+!player.hasmedia</visible>
 		</control>
 		<control>
 			<description>Movie offline Icon</description>
@@ -1630,7 +1630,21 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.value)+string.contains(#myfilms.user.source.isonline,False)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,offline)+!player.hasmedia</visible>
+		</control>
+		<control>
+			<description>Movie unknown Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>392</posX>
+			<posY>660</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\led_grey.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unknown)+!player.hasmedia</visible>
 		</control>
 
 
@@ -1662,7 +1676,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.sourcetrailer.value)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)+!player.hasmedia</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
@@ -1678,7 +1692,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>ffffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,available)+!player.hasmedia</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>
@@ -1694,7 +1708,23 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>ffffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.sourcetrailer.isonline,False)+!player.hasmedia</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,offline)+!player.hasmedia</visible>
+			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		</control>
+		<control>
+			<description>Trailer unknown Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>392</posX>
+			<posY>690</posY>
+			<width>20</width>
+			<height>20</height>
+			<texture>MyFilms\led_grey.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)+!player.hasmedia</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		</control>

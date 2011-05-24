@@ -1581,7 +1581,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.source.value)</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unavailable)</visible>
 		</control>
 		<control>
 			<description>Movie available Icon</description>
@@ -1595,7 +1595,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.value)</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,available)</visible>
 		</control>
 		<control>
 			<description>Movie offline Icon</description>
@@ -1609,7 +1609,21 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.value)+string.contains(#myfilms.user.source.isonline,False)</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,offline)</visible>
+		</control>
+		<control>
+			<description>Movie unknown Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>265</posX>
+			<posY>478</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_grey.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unknown)</visible>
 		</control>
 
 <!-- Trailer Available Info -->
@@ -1639,7 +1653,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.sourcetrailer.value)</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)</visible>
 		</control>
 		<control>
 			<description>Trailer available Icon</description>
@@ -1653,7 +1667,7 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,available)</visible>
 		</control>
 		<control>
 			<description>Trailer offline Icon</description>
@@ -1667,7 +1681,21 @@
 			<keepaspectratio>yes</keepaspectratio>
 			<centered>yes</centered>
 			<colordiffuse>c0ffffff</colordiffuse>
-			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.value)+string.contains(#myfilms.user.sourcetrailer.isonline,False)</visible>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,offline)</visible>
+		</control>
+		<control>
+			<description>Trailer unknown Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>265</posX>
+			<posY>498</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_grey.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
 		</control>
 
 	<control>
