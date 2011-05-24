@@ -4198,8 +4198,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                   else
                                     setGUIProperty("user.sourcetrailer.isonline", "available"); // set online as default
                                 }
-                                else if (MyFilms.conf.SearchFileTrailer.ToLower() == "true" || MyFilms.conf.SearchFileTrailer.ToLower() == "yes") // if search is enabled in setup
-                                  setGUIProperty("user.sourcetrailer.isonline", "unknown");
+                                //else if (MyFilms.conf.SearchFileTrailer.ToLower() == "true" || MyFilms.conf.SearchFileTrailer.ToLower() == "yes") // if search is enabled in setup
+                                //  setGUIProperty("user.sourcetrailer.isonline", "unknown");
                                 else
                                   setGUIProperty("user.sourcetrailer.isonline", "unavailable");
                               }
