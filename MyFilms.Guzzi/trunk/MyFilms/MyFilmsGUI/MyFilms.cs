@@ -7756,11 +7756,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!isonline && filmSearch) // if movie not found via source and search is enabled...
           {
               string movieName = t[MyFilms.conf.ItemSearchFile].ToString();
-              movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
+              movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim().ToLower();
               string[] result = conf.MovieList.Find(
               delegate(string[] files)
               {
-                return files.Where(n => n.Contains(movieName)).Count() > 0;
+                return files.Where(n => n.ToLower().Contains(@"\" + movieName + @".") || n.ToLower().Contains(@"\" + movieName + @"\")).Count() > 0;
               }
               );
               if (result != null)
