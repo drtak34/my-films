@@ -2340,7 +2340,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
         //}
         groupcover.Filename = conf.FileImage;
-
+        cover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
 
         //GUIControl.ShowControl(GetID, 34);
         // Load_Rating(0); // old method - nor more used
