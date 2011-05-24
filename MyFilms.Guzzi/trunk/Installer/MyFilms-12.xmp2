@@ -839,6 +839,20 @@
               <ZipFileName>Installer{CopyFile}\{5b89e56e-4994-4aa8-893a-133e61fa455f}-status_led_yellow.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\status_led_yellow.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\led_grey.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ff08b9cf-54d3-40ff-9e70-8af254300216}-led_grey.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\led_grey.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Default\Media\MyFilms\led_grey.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{96b2af29-2de8-47b9-ba3c-69a57fd43e37}-led_grey.png</ZipFileName>
+              <DestinationFilename>%Skin%\Default\Media\MyFilms\led_grey.png</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2878,7 +2892,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>858</Revision>
+      <Revision>867</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -2886,7 +2900,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.858(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.867(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3739,6 +3753,20 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <LocalFileName>Skin.12\Black Glass\Media\MyFilms\status_led_yellow.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{5b89e56e-4994-4aa8-893a-133e61fa455f}-status_led_yellow.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\status_led_yellow.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\Media\MyFilms\led_grey.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ff08b9cf-54d3-40ff-9e70-8af254300216}-led_grey.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\Media\MyFilms\led_grey.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Default\Media\MyFilms\led_grey.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{96b2af29-2de8-47b9-ba3c-69a57fd43e37}-led_grey.png</ZipFileName>
+        <DestinationFilename>%Skin%\Default\Media\MyFilms\led_grey.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -5452,14 +5480,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{42ce93af-4bd9-41a0-8476-52b0817c1ee5}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{10c65df9-6883-4350-9085-d405a76ddb6e}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b4f5b178-bf22-48e4-ac8e-58f985cbb50d}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{588a20ff-912b-4375-939e-6a422b46bb00}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
