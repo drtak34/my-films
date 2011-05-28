@@ -3979,6 +3979,7 @@
           this.label17.TabIndex = 66;
           this.label17.Text = "Hierarchy Separator\r\n(Grouping)";
           this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+          this.ToolTip1.SetToolTip(this.label17, resources.GetString("label17.ToolTip"));
           // 
           // TitleDelim
           // 
@@ -4029,8 +4030,7 @@
           this.AntTitle1.Name = "AntTitle1";
           this.AntTitle1.Size = new System.Drawing.Size(178, 21);
           this.AntTitle1.TabIndex = 10;
-          this.ToolTip1.SetToolTip(this.AntTitle1, "Select the ANT database field that you want to be displayed as the ‘Master Title’" +
-                  ".\r\nYou can use Hierarchies for \"grouping\" when defining a hierarchy separator.");
+          this.ToolTip1.SetToolTip(this.AntTitle1, resources.GetString("AntTitle1.ToolTip"));
           this.AntTitle1.SelectedIndexChanged += new System.EventHandler(this.AntTitle1_SelectedIndexChanged);
           // 
           // ButCat
