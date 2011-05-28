@@ -199,11 +199,11 @@
           this.btnEditScript = new System.Windows.Forms.Button();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.label51 = new System.Windows.Forms.Label();
-          this.comboBox5 = new System.Windows.Forms.ComboBox();
+          this.cbGrabberOverrideTitleLimit = new System.Windows.Forms.ComboBox();
           this.label50 = new System.Windows.Forms.Label();
           this.label49 = new System.Windows.Forms.Label();
-          this.comboBox3 = new System.Windows.Forms.ComboBox();
-          this.comboBox4 = new System.Windows.Forms.ComboBox();
+          this.cbGrabberOverridePersonLimit = new System.Windows.Forms.ComboBox();
+          this.cbGrabberOverrideLanguage = new System.Windows.Forms.ComboBox();
           this.lblSearchGrabberName = new System.Windows.Forms.Label();
           this.ItemSearchGrabberName = new System.Windows.Forms.ComboBox();
           this.chkGrabber_ChooseScript = new System.Windows.Forms.CheckBox();
@@ -1641,11 +1641,11 @@
           // groupBox6
           // 
           this.groupBox6.Controls.Add(this.label51);
-          this.groupBox6.Controls.Add(this.comboBox5);
+          this.groupBox6.Controls.Add(this.cbGrabberOverrideTitleLimit);
           this.groupBox6.Controls.Add(this.label50);
           this.groupBox6.Controls.Add(this.label49);
-          this.groupBox6.Controls.Add(this.comboBox3);
-          this.groupBox6.Controls.Add(this.comboBox4);
+          this.groupBox6.Controls.Add(this.cbGrabberOverridePersonLimit);
+          this.groupBox6.Controls.Add(this.cbGrabberOverrideLanguage);
           this.groupBox6.Location = new System.Drawing.Point(399, 9);
           this.groupBox6.Name = "groupBox6";
           this.groupBox6.Size = new System.Drawing.Size(330, 77);
@@ -1663,10 +1663,10 @@
           this.label51.TabIndex = 68;
           this.label51.Text = "Limit # Titles";
           // 
-          // comboBox5
+          // cbGrabberOverrideTitleLimit
           // 
-          this.comboBox5.FormattingEnabled = true;
-          this.comboBox5.Items.AddRange(new object[] {
+          this.cbGrabberOverrideTitleLimit.FormattingEnabled = true;
+          this.cbGrabberOverrideTitleLimit.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
@@ -1676,10 +1676,10 @@
             "15",
             "20",
             "999"});
-          this.comboBox5.Location = new System.Drawing.Point(276, 42);
-          this.comboBox5.Name = "comboBox5";
-          this.comboBox5.Size = new System.Drawing.Size(45, 21);
-          this.comboBox5.TabIndex = 67;
+          this.cbGrabberOverrideTitleLimit.Location = new System.Drawing.Point(276, 42);
+          this.cbGrabberOverrideTitleLimit.Name = "cbGrabberOverrideTitleLimit";
+          this.cbGrabberOverrideTitleLimit.Size = new System.Drawing.Size(45, 21);
+          this.cbGrabberOverrideTitleLimit.TabIndex = 67;
           // 
           // label50
           // 
@@ -1699,10 +1699,10 @@
           this.label49.TabIndex = 65;
           this.label49.Text = "Limit # Persons";
           // 
-          // comboBox3
+          // cbGrabberOverridePersonLimit
           // 
-          this.comboBox3.FormattingEnabled = true;
-          this.comboBox3.Items.AddRange(new object[] {
+          this.cbGrabberOverridePersonLimit.FormattingEnabled = true;
+          this.cbGrabberOverridePersonLimit.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
@@ -1712,27 +1712,27 @@
             "15",
             "20",
             "999"});
-          this.comboBox3.Location = new System.Drawing.Point(276, 19);
-          this.comboBox3.Name = "comboBox3";
-          this.comboBox3.Size = new System.Drawing.Size(45, 21);
-          this.comboBox3.TabIndex = 63;
-          this.ToolTip1.SetToolTip(this.comboBox3, "Limits the number of person names grabbed and.\r\nThis settings applies to all fiel" +
+          this.cbGrabberOverridePersonLimit.Location = new System.Drawing.Point(276, 19);
+          this.cbGrabberOverridePersonLimit.Name = "cbGrabberOverridePersonLimit";
+          this.cbGrabberOverridePersonLimit.Size = new System.Drawing.Size(45, 21);
+          this.cbGrabberOverridePersonLimit.TabIndex = 63;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverridePersonLimit, "Limits the number of person names grabbed and.\r\nThis settings applies to all fiel" +
                   "ds that grab person names, \r\nlike \r\nactors, producers, writers, directors.");
           // 
-          // comboBox4
+          // cbGrabberOverrideLanguage
           // 
-          this.comboBox4.FormattingEnabled = true;
-          this.comboBox4.Items.AddRange(new object[] {
+          this.cbGrabberOverrideLanguage.FormattingEnabled = true;
+          this.cbGrabberOverrideLanguage.Items.AddRange(new object[] {
             "en",
             "de",
             "es",
             "fr",
             "it",
             "pt"});
-          this.comboBox4.Location = new System.Drawing.Point(124, 30);
-          this.comboBox4.Name = "comboBox4";
-          this.comboBox4.Size = new System.Drawing.Size(49, 21);
-          this.comboBox4.TabIndex = 64;
+          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(124, 30);
+          this.cbGrabberOverrideLanguage.Name = "cbGrabberOverrideLanguage";
+          this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(61, 21);
+          this.cbGrabberOverrideLanguage.TabIndex = 64;
           // 
           // lblSearchGrabberName
           // 
@@ -5323,12 +5323,12 @@
         private CheckBox chkUseListviewForGroups;
         private CheckBox chkAddCertification;
         private ComboBox ECMergeDestinationFieldTagline;
-        private ComboBox comboBox4;
-        private ComboBox comboBox3;
+        private ComboBox cbGrabberOverrideLanguage;
+        private ComboBox cbGrabberOverridePersonLimit;
         private GroupBox groupBox6;
         private Label label49;
         private Label label50;
-        private ComboBox comboBox5;
+        private ComboBox cbGrabberOverrideTitleLimit;
         private Button btnEditScript;
         private Label label51;
         private CheckBox chkAddTags;

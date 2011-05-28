@@ -67,6 +67,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 SearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchFileNameTrailer", "False");
                 ItemSearchFile = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileName", string.Empty);
                 ItemSearchGrabber = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchGrabberName", string.Empty);
+                GrabberOverrideLanguage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GrabberOverrideLanguage", string.Empty);
+                GrabberOverridePersonLimit = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GrabberOverridePersonLimit", string.Empty);
+                GrabberOverrideTitleLimit = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GrabberOverrideTitleLimit", string.Empty);
                 PictureHandling = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PictureHandling", string.Empty);
                 ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", string.Empty);
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
@@ -791,11 +794,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return itemSearchFile; }
           set { itemSearchFile = value; }
         }
+    
         private string itemSearchGrabber = string.Empty;
         public string ItemSearchGrabber
         {
           get { return itemSearchGrabber; }
           set { itemSearchGrabber = value; }
+        }
+        private string grabberOverrideLanguage = string.Empty;
+        public string GrabberOverrideLanguage
+        {
+          get { return grabberOverrideLanguage; }
+          set { grabberOverrideLanguage = value; }
+        }
+        private string grabberOverridePersonLimit = string.Empty;
+        public string GrabberOverridePersonLimit
+        {
+          get { return grabberOverridePersonLimit; }
+          set { grabberOverridePersonLimit = value; }
+        }
+        private string grabberOverrideTitleLimit = string.Empty;
+        public string GrabberOverrideTitleLimit
+        {
+          get { return grabberOverrideTitleLimit; }
+          set { grabberOverrideTitleLimit = value; }
         }
         private string pictureHandling = string.Empty;
         public string PictureHandling
