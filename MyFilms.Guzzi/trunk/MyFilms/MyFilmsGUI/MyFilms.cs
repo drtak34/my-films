@@ -5150,66 +5150,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
         case "artistdetail":
-          // ToDo: Launch MesFilmsActorinfo - load new facade for LOCAL (!) IMDB-mediaindex
-          // ToDo: Optional add switch to seitch between filmclips (IMDB-videogallery) and photos (IMDB-mediaindex) - launch Onlinevideos to play clips?
           LogMyFilms.Debug("artistdetail: searching infos for '" + facadeView.SelectedListItem.Label.ToString() + "'");
           {
-            IMDBActor imdbActor = new IMDBActor();
-            IMDB imdb = new IMDB();
             string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(facadeView.SelectedListItem.Label.ToString());
-            imdb.FindActor(actorSearchname);
-            for (int i = 0; i < imdb.Count; ++i)
-            {
-              imdb.GetActorDetails(imdb[i], false, out imdbActor);
-              // VideoDatabase.SetActorInfo(_guiListItem.ItemId, imdbActor);
-              // if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
-              //{
-              //  break;
-              //}
-            }
-            if (imdbActor.ThumbnailUrl != null)
-            {
-              if (imdbActor.ThumbnailUrl.Length != 0)
-              {
-                if (imdbActor.ThumbnailUrl.Length != 0 && !string.IsNullOrEmpty(conf.StrPathArtist))
-                {
-                  string filename1person = GrabUtil.DownloadPersonArtwork(conf.StrPathArtist, imdbActor.ThumbnailUrl, actorSearchname, true, true, out filename1person);
-                  LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + actorSearchname + "', path='" + filename1person + "'");
-                  // DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, _actor); // original Deda call
-                }
-                else
-                {
-                  LogMyFilms.Debug("IMDBFetcher single actor fetch could not be done - no person artwork path defined in MyFilms config");
-                }
-
-              }
-              else
-              {
-                LogMyFilms.Debug("IMDBFetcher single actor fetch: url=empty for actor {0}", actorSearchname);
-              }
-            }
-            else
-            {
-              Log.Debug("IMDBFetcher single actor fetch: url=null for actor {0}", actorSearchname);
-            }
-
-            // Add actor to datbbase to get infos in person facades later...
-            int actorId = VideoDatabase.AddActor(imdbActor.Name);
-            if (actorId > 0)
-            {
-              VideoDatabase.SetActorInfo(actorId, imdbActor);
-              //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
-
-              //if (imdbActor.ThumbnailUrl != string.Empty)
-              //{
-              //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-              //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-              //  Utils.FileDelete(largeCoverArt);
-              //  Utils.FileDelete(coverArt);
-              //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
-              //}
-            }
-            OnVideoArtistInfoGuzzi(imdbActor);
+            PersonInfo(actorSearchname);
             break;
           }
 
@@ -5857,113 +5801,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       if (choiceSearch[dlg.SelectedLabel] == "PersonInfo")
       {
-        IMDBActor imdbActor = new IMDBActor();
-        IMDB imdb = new IMDB();
         string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(wperson);
-        imdb.FindActor(actorSearchname);
-        for (int i = 0; i < imdb.Count; ++i)
-        {
-          //if (_guiListItem.ItemId == Movie.DirectorID)
-          //{
-          //  imdb.GetActorDetails(imdb[i], true, out imdbActor);
-          //}
-          //else
-          //{
-            imdb.GetActorDetails(imdb[i], false, out imdbActor);
-          //}
-          //VideoDatabase.SetActorInfo(_guiListItem.ItemId, imdbActor);
-          if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
-          {
-            break;
-          }
-        }
-        if (imdbActor.ThumbnailUrl != null)
-        {
-          if (imdbActor.ThumbnailUrl.Length != 0)
-          {
-                      if (imdbActor.ThumbnailUrl.Length != 0 && !string.IsNullOrEmpty(conf.StrPathArtist))
-                      {
-                        string filename1person = GrabUtil.DownloadPersonArtwork(conf.StrPathArtist, imdbActor.ThumbnailUrl, wperson, true, true, out filename1person);
-                        LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + wperson + "', path='" + filename1person + "'");
-                        // DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, _actor); // original Deda call
-                      }
-                      else
-                      {
-                        LogMyFilms.Debug("IMDBFetcher single actor fetch could not be done - no person artwork path defined in MyFilms config");
-                      }
-
-          }
-          else
-          {
-            LogMyFilms.Debug("IMDBFetcher single actor fetch: url=empty for actor {0}", wperson);
-          }
-        }
-        else
-        {
-          Log.Debug("IMDBFetcher single actor fetch: url=null for actor {0}", wperson);
-        }
-        //_imdbActor = imdbActor;
-
-
-        // Add actor to datbbase to get infos in person facades later...
-        int actorId = VideoDatabase.AddActor(imdbActor.Name);
-        if (actorId > 0)
-        {
-          VideoDatabase.SetActorInfo(actorId, imdbActor);
-          //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
-
-          //if (imdbActor.ThumbnailUrl != string.Empty)
-          //{
-          //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-          //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-          //  Utils.FileDelete(largeCoverArt);
-          //  Utils.FileDelete(coverArt);
-          //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
-          //}
-        }
-        
-        //// Last working Guzzi Code
-        ////ArrayList actorList = new ArrayList();
-        ////// Search with searchName parameter which contain wanted actor name, result(s) is in array
-        ////// which conatin id and name separated with char "|"
-        ////MyFilmsDetail.GetActorByName(wperson, actorList);
-
-        ////// Check result
-        ////if (actorList.Count == 0)
-        ////{
-        ////  LogMyFilms.Debug("(Person Info): No ActorIDs found for '" + wperson + "'");
-        ////  GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-        ////  dlgOk.SetHeading("Info");
-        ////  dlgOk.SetLine(1, string.Empty);
-        ////  dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
-        ////  dlgOk.DoModal(GetID);
-        ////  return;
-        ////}
-        ////LogMyFilms.Debug("(Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
-        //////int actorID;
-        ////actorID = 0;
-        ////string actorname = string.Empty;
-        ////// Define splitter for string
-        ////char[] splitter = { '|' };
-        ////// Iterate through list
-        ////foreach (string act in actorList)
-        ////{
-        ////  // Split id from actor name (two substrings, [0] is id and [1] is name)
-        ////  string[] strActor = act.Split(splitter);
-        ////  // From here we have all what we want, now we can populate datatable, gridview, listview....)
-        ////  // actorID originally is integer in the databse (it can be string in results but if we want get details from
-        ////  // IMDBActor  GetActorInfo(int idActor) we need integer)
-        ////  actorID = Convert.ToInt32(strActor[0]);
-        ////  actorname = strActor[1];
-        ////  LogMyFilms.Debug("(Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
-        ////}
-
-        ////MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
-        //////if (actor != null)
-        ////OnVideoArtistInfoGuzzi(actor);
-
-        OnVideoArtistInfoGuzzi(imdbActor);
-        //OnVideoArtistInfoGuzzi(wperson);
+        this.PersonInfo(actorSearchname);
         return;
       }
       conf.StrSelect = choiceSearch[dlg.SelectedLabel].ToString() + " like '*" + wperson + "*'";
@@ -5985,6 +5824,116 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.StrTitleSelect = "";
       SetLabelView("search"); // show "search"
       GetFilmList();
+    }
+
+    private void PersonInfo(string PersonName)
+    {
+      IMDBActor imdbActor = new IMDBActor();
+      IMDB imdb = new IMDB();
+      imdb.FindActor(PersonName);
+      for (int i = 0; i < imdb.Count; ++i)
+      {
+        //if (_guiListItem.ItemId == Movie.DirectorID)
+        //{
+        //  imdb.GetActorDetails(imdb[i], true, out imdbActor);
+        //}
+        //else
+        //{
+        imdb.GetActorDetails(imdb[i], false, out imdbActor);
+        //}
+        //VideoDatabase.SetActorInfo(_guiListItem.ItemId, imdbActor);
+        if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
+        {
+          break;
+        }
+      }
+      if (imdbActor.ThumbnailUrl != null)
+      {
+        if (imdbActor.ThumbnailUrl.Length != 0)
+        {
+          if (imdbActor.ThumbnailUrl.Length != 0 && !string.IsNullOrEmpty(conf.StrPathArtist))
+          {
+            string filename1person = GrabUtil.DownloadPersonArtwork(conf.StrPathArtist, imdbActor.ThumbnailUrl, PersonName, true, true, out filename1person);
+            LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + PersonName + "', path='" + filename1person + "'");
+            // DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, _actor); // original Deda call
+          }
+          else
+          {
+            LogMyFilms.Debug("IMDBFetcher single actor fetch could not be done - no person artwork path defined in MyFilms config");
+          }
+
+        }
+        else
+        {
+          LogMyFilms.Debug("IMDBFetcher single actor fetch: url=empty for actor {0}", PersonName);
+        }
+      }
+      else
+      {
+        Log.Debug("IMDBFetcher single actor fetch: url=null for actor {0}", PersonName);
+      }
+      //_imdbActor = imdbActor;
+
+
+      // Add actor to datbbase to get infos in person facades later...
+      int actorId = VideoDatabase.AddActor(imdbActor.Name);
+      if (actorId > 0)
+      {
+        VideoDatabase.SetActorInfo(actorId, imdbActor);
+        //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+
+        //if (imdbActor.ThumbnailUrl != string.Empty)
+        //{
+        //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+        //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+        //  Utils.FileDelete(largeCoverArt);
+        //  Utils.FileDelete(coverArt);
+        //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+        //}
+      }
+
+      //// Last working Guzzi Code
+      ////ArrayList actorList = new ArrayList();
+      ////// Search with searchName parameter which contain wanted actor name, result(s) is in array
+      ////// which conatin id and name separated with char "|"
+      ////MyFilmsDetail.GetActorByName(wperson, actorList);
+
+      ////// Check result
+      ////if (actorList.Count == 0)
+      ////{
+      ////  LogMyFilms.Debug("(Person Info): No ActorIDs found for '" + wperson + "'");
+      ////  GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      ////  dlgOk.SetHeading("Info");
+      ////  dlgOk.SetLine(1, string.Empty);
+      ////  dlgOk.SetLine(2, "Keine Personen Infos vorhanden !");
+      ////  dlgOk.DoModal(GetID);
+      ////  return;
+      ////}
+      ////LogMyFilms.Debug("(Person Info): " + actorList.Count + " ActorID(s) found for '" + wperson + "'");
+      //////int actorID;
+      ////actorID = 0;
+      ////string actorname = string.Empty;
+      ////// Define splitter for string
+      ////char[] splitter = { '|' };
+      ////// Iterate through list
+      ////foreach (string act in actorList)
+      ////{
+      ////  // Split id from actor name (two substrings, [0] is id and [1] is name)
+      ////  string[] strActor = act.Split(splitter);
+      ////  // From here we have all what we want, now we can populate datatable, gridview, listview....)
+      ////  // actorID originally is integer in the databse (it can be string in results but if we want get details from
+      ////  // IMDBActor  GetActorInfo(int idActor) we need integer)
+      ////  actorID = Convert.ToInt32(strActor[0]);
+      ////  actorname = strActor[1];
+      ////  LogMyFilms.Debug("(Person Info): ActorID: '" + actorID + "' with ActorName: '" + actorname + "' found found for '" + wperson + "'");
+      ////}
+
+      ////MediaPortal.Video.Database.IMDBActor actor = MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
+      //////if (actor != null)
+      ////OnVideoArtistInfoGuzzi(actor);
+
+      OnVideoArtistInfoGuzzi(imdbActor);
+      //OnVideoArtistInfoGuzzi(wperson);
     }
 
     private void OnVideoArtistInfoGuzzi(MediaPortal.Video.Database.IMDBActor actor)
