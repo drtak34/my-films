@@ -7036,7 +7036,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       keyboard.DoModal(GetID);
       if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text) || !string.IsNullOrEmpty(searchstring)))
       {
-        UpdateRecentSearch(keyboard.Text); // makes sure, searchstring will go to first place, if already present ...
+        UpdateRecentSearch(keyboard.Text, 20); // makes sure, searchstring will go to first place, if already present ... maxItems 20
         ArrayList w_count = new ArrayList();
         string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
         switch (wproperty)
@@ -7296,11 +7296,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  Update recent used search terms
     //*****************************************************************************************
-    private void UpdateRecentSearch(string newsearchstring)
+    private void UpdateRecentSearch(string newsearchstring, int maxItems)
     {
       if (SearchHistory.Contains(newsearchstring.Trim()))
         SearchHistory.Remove(newsearchstring.Trim());
       SearchHistory.Add(newsearchstring.Trim());
+
+      while (SearchHistory.Count > maxItems)
+      {
+        LogMyFilms.Debug("UpdateRecentSearch: Item limit is: '" + maxItems + "', remove '" + SearchHistory[0] + "' from list");
+        SearchHistory.RemoveAt(0);
+      }
 
       string his = "";
       foreach (string s in MyFilms.SearchHistory)
