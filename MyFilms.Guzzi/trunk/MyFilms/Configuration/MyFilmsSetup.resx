@@ -627,6 +627,8 @@ MyFilms can use the originaltitle as replacement in those cases.</value>
 e.g. for collections.
 This separator can be used in the title fields for "grouping".
 
+You get grouping by adding the separator to the respective content of any of the title fields.
+
 Example:
 Hierachy Separator: "\"
 movie 1: Moviecollection\movie1

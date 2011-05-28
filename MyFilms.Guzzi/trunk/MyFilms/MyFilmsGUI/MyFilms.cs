@@ -4868,13 +4868,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Artistcontext
       if (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder && (conf.WStrSort.ToLower().Contains("actor") || conf.WStrSort.ToLower().Contains("director") || conf.WStrSort.ToLower().Contains("producer")))
       {
-        if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person locally (load persons detailscreen or load facade with filmlists of actor")) // check if specialmode is configured for disabled features
-        {
+        //if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person locally (load persons detailscreen or load facade with filmlists of actor")) // check if specialmode is configured for disabled features
+        //{
           dlg.Add(GUILocalizeStrings.Get(1079884));
-          //Show Infos of person (load persons detailscreen - MesFilmsActor) - only available in personlist
+          //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
           upd_choice[ichoice] = "artistdetail";
           ichoice++;
-        }
+        //}
 
         dlg.Add(GUILocalizeStrings.Get(1079886));//Show IMDB internetinfos http://www.imdb.com/name/nm0000288/
         upd_choice[ichoice] = "artistimdbinternet";
@@ -5131,7 +5131,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //SearchRelatedMoviesbyPersons((int)facadeView.SelectedListItem.ItemId);
             if (!facadeView.SelectedListItem.IsFolder && !conf.Boolselect)
             // Load Facade with movie actors 
-            // ToDo: Load all artists, including producers and directors
+            // ToDo: Load all artists, including producers and directors - add infos about function into facade item2 or 3
             {
               conf.StrIndex = facadeView.SelectedListItem.ItemId;
               conf.StrTIndex = facadeView.SelectedListItem.Label;
@@ -5141,6 +5141,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.WStrSortSens = " ASC";
               BtnSrtBy.IsAscending = true;
               conf.StrActors = "*";
+              listLevel = Listlevel.Person;
               getSelectFromDivx("TranslatedTitle like '*" + conf.StrTIndex + "*'", conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, string.Empty);
             }
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
@@ -5151,7 +5152,64 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "artistdetail":
           // ToDo: Launch MesFilmsActorinfo - load new facade for LOCAL (!) IMDB-mediaindex
           // ToDo: Optional add switch to seitch between filmclips (IMDB-videogallery) and photos (IMDB-mediaindex) - launch Onlinevideos to play clips?
+          LogMyFilms.Debug("artistdetail: searching infos for '" + facadeView.SelectedListItem.Label.ToString() + "'");
           {
+            IMDBActor imdbActor = new IMDBActor();
+            IMDB imdb = new IMDB();
+            string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(facadeView.SelectedListItem.Label.ToString());
+            imdb.FindActor(actorSearchname);
+            for (int i = 0; i < imdb.Count; ++i)
+            {
+              imdb.GetActorDetails(imdb[i], false, out imdbActor);
+              // VideoDatabase.SetActorInfo(_guiListItem.ItemId, imdbActor);
+              // if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
+              //{
+              //  break;
+              //}
+            }
+            if (imdbActor.ThumbnailUrl != null)
+            {
+              if (imdbActor.ThumbnailUrl.Length != 0)
+              {
+                if (imdbActor.ThumbnailUrl.Length != 0 && !string.IsNullOrEmpty(conf.StrPathArtist))
+                {
+                  string filename1person = GrabUtil.DownloadPersonArtwork(conf.StrPathArtist, imdbActor.ThumbnailUrl, actorSearchname, true, true, out filename1person);
+                  LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + actorSearchname + "', path='" + filename1person + "'");
+                  // DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, _actor); // original Deda call
+                }
+                else
+                {
+                  LogMyFilms.Debug("IMDBFetcher single actor fetch could not be done - no person artwork path defined in MyFilms config");
+                }
+
+              }
+              else
+              {
+                LogMyFilms.Debug("IMDBFetcher single actor fetch: url=empty for actor {0}", actorSearchname);
+              }
+            }
+            else
+            {
+              Log.Debug("IMDBFetcher single actor fetch: url=null for actor {0}", actorSearchname);
+            }
+
+            // Add actor to datbbase to get infos in person facades later...
+            int actorId = VideoDatabase.AddActor(imdbActor.Name);
+            if (actorId > 0)
+            {
+              VideoDatabase.SetActorInfo(actorId, imdbActor);
+              //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+
+              //if (imdbActor.ThumbnailUrl != string.Empty)
+              //{
+              //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+              //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+              //  Utils.FileDelete(largeCoverArt);
+              //  Utils.FileDelete(coverArt);
+              //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+              //}
+            }
+            OnVideoArtistInfoGuzzi(imdbActor);
             break;
           }
 
