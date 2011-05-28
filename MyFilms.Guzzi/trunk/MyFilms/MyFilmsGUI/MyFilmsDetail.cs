@@ -1558,7 +1558,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // copy mapped values to original values
               for (int i = 0; i < 30; i++)
               {
+                LogMyFilms.Debug("Grabber Details: original: '" + i + "' - '" + Result[i] + "'");
                 Result[i] = Result[i + 30];
+                LogMyFilms.Debug("Grabber Details: mapped  : '" + i + "' - '" + Result[i] + "'");
               }
               LogMyFilms.Info("Grabber - downloadpath = '" + downLoadPath + "'");
             }
