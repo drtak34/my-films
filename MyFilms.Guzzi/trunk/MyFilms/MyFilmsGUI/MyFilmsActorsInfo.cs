@@ -376,8 +376,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 movies += line;
                 GUIListItem item = new GUIListItem();
                 item.Label = line;
-                item.Label2 = "(als " + currentActor[i].Role.ToString() + ")";
-                item.Label3 = "n/a";
+                item.Label2 = "(" + currentActor[i].Role.ToString() + ")";
+                item.Label3 = "";
                 //item.Path = f;
                 
                 
