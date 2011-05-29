@@ -271,26 +271,53 @@ namespace Grabber_Interface
       // Load User Settings Page...
       try { cbMaxActors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value; }
       catch { cbMaxActors.Text = string.Empty; };
-      string strGrabActorRoles = "false";
+      if (string.IsNullOrEmpty(cbMaxActors.Text)) cbMaxActors.Enabled = false;
+      else cbMaxActors.Enabled = true;
+
+      string strGrabActorRoles = "";
       try
       {
         strGrabActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
         if (strGrabActorRoles == "true") chkGrabActorRoles.Checked = true;
         else chkGrabActorRoles.Checked = false;
       }
-      catch { chkGrabActorRoles.Checked = false; };
+      catch 
+      {
+        chkGrabActorRoles.Checked = false;
+        chkGrabActorRoles.Enabled = false;
+      };
+      if (string.IsNullOrEmpty(strGrabActorRoles)) chkGrabActorRoles.Enabled = false;
+      else chkGrabActorRoles.Enabled = true;
+
       try { cbMaxProducers.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value; }
-      catch { cbMaxProducers.Text = string.Empty; };
+      catch { cbMaxProducers.Text = string.Empty;};
+      if (string.IsNullOrEmpty(cbMaxProducers.Text)) cbMaxProducers.Enabled = false;
+      else cbMaxProducers.Enabled = true;
+
       try { cbMaxDirectors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value; }
-      catch { cbMaxDirectors.Text = string.Empty; };
+      catch {cbMaxDirectors.Text = string.Empty;};
+      if (string.IsNullOrEmpty(cbMaxDirectors.Text)) cbMaxDirectors.Enabled = false;
+      else cbMaxDirectors.Enabled = true;
+
       try { cbMaxWriters.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value; }
-      catch { cbMaxWriters.Text = string.Empty; };
+      catch {cbMaxWriters.Text = string.Empty;};
+      if (string.IsNullOrEmpty(cbMaxWriters.Text)) cbMaxWriters.Enabled = false;
+      else cbMaxWriters.Enabled = true;
+
       try { cbTtitlePreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value; }
       catch { cbTtitlePreferredLanguage.Text = string.Empty; };
+      if (string.IsNullOrEmpty(cbTtitlePreferredLanguage.Text)) cbTtitlePreferredLanguage.Enabled = false;
+      else cbTtitlePreferredLanguage.Enabled = true;
+      
       try { cbTtitleMaxTitles.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value; }
-      catch { cbTtitleMaxTitles.Text = string.Empty; };
+      catch {cbTtitleMaxTitles.Text = string.Empty;};
+      if (string.IsNullOrEmpty(cbTtitleMaxTitles.Text)) cbTtitleMaxTitles.Enabled = false;
+      else cbTtitleMaxTitles.Enabled = true;
+      
       try { cbCertificationPreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
       catch { cbCertificationPreferredLanguage.Text = string.Empty; };
+      if (string.IsNullOrEmpty(cbCertificationPreferredLanguage.Text)) cbCertificationPreferredLanguage.Enabled = false;
+      else cbCertificationPreferredLanguage.Enabled = true;
 
       // Add Dropdownentries to User Options
       cbTtitlePreferredLanguage.Items.Clear();
@@ -303,6 +330,7 @@ namespace Grabber_Interface
       {
         cbTtitlePreferredLanguage.Items.Add(strDroptext.Trim());
       }
+      
       cbCertificationPreferredLanguage.Items.Clear();
       try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
       catch { strTemp = string.Empty; };
@@ -313,29 +341,29 @@ namespace Grabber_Interface
         cbCertificationPreferredLanguage.Items.Add(strDroptext.Trim());
       }
 
-      // Read Mapping Infos
-      for (int i = 0; i < 30; i++)
-      {
-        try
+        // Read Mapping Infos
+        for (int i = 0; i < 30; i++)
         {
-          string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty;
-          val1 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param1;
-          val2 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param2;
-          val3 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param3;
-          val4 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param4;
-          val5 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param5;
+          try
+          {
+            string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty;
+            val1 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param1;
+            val2 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param2;
+            val3 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param3;
+            val4 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param4;
+            val5 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param5;
 
-          dataGridViewMapping.Rows[i].Cells[1].Value = val1;
-          dataGridViewMapping.Rows[i].Cells[2].Value = val2;
-          dataGridViewMapping.Rows[i].Cells[3].Value = Convert.ToBoolean(val3);
-          dataGridViewMapping.Rows[i].Cells[4].Value = Convert.ToBoolean(val4);
-          dataGridViewMapping.Rows[i].Cells[5].Value = Convert.ToBoolean(val5);
+            dataGridViewMapping.Rows[i].Cells[1].Value = val1;
+            dataGridViewMapping.Rows[i].Cells[2].Value = val2;
+            dataGridViewMapping.Rows[i].Cells[3].Value = Convert.ToBoolean(val3);
+            dataGridViewMapping.Rows[i].Cells[4].Value = Convert.ToBoolean(val4);
+            dataGridViewMapping.Rows[i].Cells[5].Value = Convert.ToBoolean(val5);
+          }
+          catch (Exception)
+          {
+
+          }
         }
-        catch (Exception)
-        {
-          
-        }
-      }
 
     }
 
