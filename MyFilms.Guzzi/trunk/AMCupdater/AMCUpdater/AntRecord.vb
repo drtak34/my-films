@@ -60,8 +60,8 @@ Public Class AntRecord
         'Tagline = 16
         'Certification = 17
         'SubUrlTitles = 18
-        'Writer = 19
-        'SubUrlCertification = 20
+        'SubUrlCertification = 19
+        'Writer = 20
         'IMDBrank = 21
         'Studio = 22
         'Edition = 23
@@ -91,8 +91,8 @@ Public Class AntRecord
         Tagline = 46
         Certification = 47
         SubUrlTitles = 48
-        Writer = 49
-        SubUrlCertification = 50
+        SubUrlCertification = 49
+        Writer = 50
         IMDBrank = 51
         Studio = 52
         Edition = 53

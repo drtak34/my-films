@@ -1741,9 +1741,27 @@ namespace Grabber_Interface
             break;
 
         }
+        if (i < 30)
+          if (Result[i] != Result[i + 30])
+            textPreview.SelectedText += "(mapping active) " + Environment.NewLine;
+        if (i >= 30)
+          if (Result[i] != Result[i - 30])
+            textPreview.SelectedText += "(mapping active) " + Environment.NewLine;
+
         if (i <= 60) // Changed to support new fields...
           textPreview.AppendText(Result[i] + Environment.NewLine);
       }
+
+      //textPreview.SelectedText += Environment.NewLine;
+      //textPreview.SelectedText += "Changes due to Mappings:" + Environment.NewLine;
+
+      //for (int i = 0; i < 30; i++)
+      //{
+      //  if (Result[i] != Result[i + 30] && !string.IsNullOrEmpty(Result[i + 30]))
+      //  {
+      //    textPreview.SelectedText += "(" + i.ToString() + ") " + "Original Title" + Environment.NewLine;
+      //  }
+      //}
 
       System.IO.File.Delete(textConfig.Text + ".tmp");
 

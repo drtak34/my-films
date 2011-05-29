@@ -169,6 +169,128 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // BackgroundWorker TraktScrobbleUpdater = new BackgroundWorker();
         // private bool TraktMarkedFirstAsWatched = false;
 
+        #region Enums
+        private enum Grabber_Output : int
+        {
+            //OriginalTitle = 0,
+            //TranslatedTitle = 1,
+            //PicturePathLong = 2,
+            //Description = 3,
+            //Rating = 4,
+            //Actors = 5,
+            //Director = 6,
+            //Producer = 7,
+            //Year = 8,
+            //Country = 9,
+            //Category = 10,
+            //URL = 11,
+            //PicturePathShort = 12,
+            //SubUrlPersons = 13,
+            //Comment = 14,
+            //Language = 15,
+            //Tagline = 16,
+            //Certification = 17,
+            //SubUrlTitles = 18,
+            //SubUrlCertification = 19,
+            //Writer = 20,
+            //IMDBrank = 21,
+            //Studio = 22,
+            //Edition = 23,
+            //Fanart = 24,
+            //AspectRatio = 25,
+            //TranslatedTitleAllNames = 26,
+            //TranslatedTitleAllValues = 27,
+            //CertificationAllNames = 28,
+            //CertificationAllValues = 29
+
+            OriginalTitle = 30,
+            TranslatedTitle = 31,
+            PicturePathLong = 32,
+            Description = 33,
+            Rating = 34,
+            Actors = 35,
+            Director = 36,
+            Producer = 37,
+            Year = 38,
+            Country = 39,
+            Category = 40,
+            URL = 41,
+            PicturePathShort = 42,
+            SubUrlPersons = 43,
+            Comment = 44,
+            Language = 45,
+            Tagline = 46,
+            Certification = 47,
+            SubUrlTitles = 48,
+            SubUrlCertification = 49,
+            Writer = 50,
+            IMDBrank = 51,
+            Studio = 52,
+            Edition = 53,
+            Fanart = 54,
+            AspectRatio = 55,
+            TranslatedTitleAllNames = 56,
+            TranslatedTitleAllValues = 57,
+            CertificationAllNames = 58,
+            CertificationAllValues = 59
+        }
+
+        private enum Grabber_DB_Field
+        {
+                //case "Number":
+                //case "Checked":
+                //case "MediaLabel":
+                //case "MediaType":
+                //case "Source":
+                //case "Date":
+                //case "Borrower":
+                //case "Rating":
+                //case "OriginalTitle":
+                //case "TranslatedTitle":
+                //case "FormattedTitle":
+                //case "Director":
+                //case "Producer":
+                //case "Country":
+                //case "Category":
+                //case "Year":
+                //case "Length":
+                //case "Actors":
+                //case "URL":
+                //case "Description":
+                //case "Comments":
+                //case "VideoFormat":
+                //case "VideoBitrate":
+                //case "AudioFormat":
+                //case "AudioBitrate":
+                //case "Resolution":
+                //case "Framerate":
+                //case "Languages":
+                //case "Subtitles":
+                //case "DateAdded":
+                //case "Size":
+                //case "Disks":
+                //case "Picture":
+                //case "Certification":
+                //case "Writer":
+                //case "Watched":
+                //case "WatchedDate":
+                //case "IMDB_Id":
+                //case "TMDB_Id":
+                //case "SourceTrailer":
+                //case "TagLine":
+                //case "Tags":
+                //case "Aspectratio":
+                //case "RatingUser":
+                //case "Fanart":
+                //case "Studio":
+                //case "IMDB_Rank":
+                //case "IsOnline":
+                //case "Edition":
+                //case "IsOnlineTrailer":
+        }
+        #endregion
+
+
         static MyFilmsDetail()
         {
             playlistPlayer = PlayListPlayer.SingletonPlayer;
@@ -1509,25 +1631,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript, int GetID, bool interactive, bool nfo, string nfofile)
         {
-//0  - "OriginalTitle", 
-//1  - "TranslatedTitle", 
-//2  - "Picture", 
-//3  - "Description", 
-//4  - "Rating", 
-//5  - "Actors", 
-//6  - "Director", 
-//7  - "Producer", 
-//8  - "Year", 
-//9  - "Country", 
-//10 - "Category", 
-//11 - "URL"
-//12 - "ImageURL"
-//13 - "MultipurposeURLlink"
-//14 - comment
-//15 - language
-//16 - tagline
-//17 - certification
-            
             LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url.ToString() + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID.ToString() + "', interactive = '" + interactive.ToString() + "'"); 
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
             string[] Result = new string[60];
@@ -1536,10 +1639,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string wtitle = string.Empty;
             int year = 0;
             string director = string.Empty;
-            XmlConfig XmlConfig = new XmlConfig();
             // Those settings were used in the past from AMCupdater settings - now they exist in MF config as primary source!
-            //string Img_Path = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
-            //string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
+            // XmlConfig XmlConfig = new XmlConfig();
+            // string Img_Path = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Image_Download_Filename_Prefix", "");
+            // string Img_Path_Type = XmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Store_Image_With_Relative_Path", "false");
             bool onlymissing = false;
 
             if (nfo)
@@ -1582,7 +1685,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgmenu.Add(GUILocalizeStrings.Get(10798735));
                 choiceViewMenu.Add("missing");
 
-                string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Picture", "Description", "Rating", "Actors", "Director", "Producer", "Year", "Country", "Category", "URL", "ImageURL", "MultipurposeURLlink", "Comments", "Languages", "Tagline", "Certification" };
+                string[] PropertyList = new string[] 
+                { "OriginalTitle", 
+                  "TranslatedTitle", 
+                  "Picture", 
+                  "Description", 
+                  "Rating", 
+                  "Actors", 
+                  "Director", 
+                  "Producer", 
+                  "Year", 
+                  "Country", 
+                  "Category", 
+                  "URL", 
+                  "ImageURL", 
+                  "SubUrlPersons", 
+                  "Comments", 
+                  "Languages", 
+                  "TagLine", 
+                  "Certification",
+                  "SubUrlTitles",
+                  "SubUrlCertification",
+                  "Writer",
+                  "IMDBrank",
+                  "Studio",
+                  "Edition",
+                  "Fanart",
+                  "Aspectratio",
+                  "TranslatedTitleAllNames",
+                  "TranslatedTitleAllValues",
+                  "CertificationAllNames",
+                  "CertificationAllValues"
+                };
                 string strOldValue = "";
                 string strNewValue = "";
 
@@ -1591,25 +1725,37 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                     try
                     {
-                        strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
-                        if (strOldValue == null)
+                      strOldValue = MyFilms.r[MyFilms.conf.StrIndex][wProperty].ToString();
+                      if (strOldValue == null)
                             strOldValue = "";
-                        strNewValue = Result[i].ToString();
-                        if (i == 2)
-                            strNewValue = Result[12];
-                        if (strOldValue == null)
-                            strOldValue = "";
+                      strNewValue = Result[i].ToString();
+                      if (i == 2)
+                          strNewValue = Result[12];
+                      if (strOldValue == null)
+                          strOldValue = "";
 
-                        if (wProperty != "ImageURL" && wProperty != "MultipurposeURLlink" && wProperty != "Tagline" && wProperty != "Certification")
-                        {
-                          dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue + "' -> '" + strNewValue + "'");
-                          choiceViewMenu.Add(wProperty);
-                          LogMyFilms.Debug("GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
-                        }
-                        else
-                        {
-                          LogMyFilms.Debug("GrabberUpdate - Not added to menu (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
-                        }
+                      if ( // make sure, only supported fields are offered to user for update
+                        wProperty != "ImageURL" 
+                        && !wProperty.Contains("Sub") 
+                        && !wProperty.Contains("All")
+                        && wProperty != "TagLine"
+                        && wProperty != "Certification"
+                        && wProperty != "Writer"
+                        && wProperty != "IMDBrank"
+                        && wProperty != "Studio"
+                        && wProperty != "Edition"
+                        && wProperty != "Fanart"
+                        && wProperty != "Aspectratio"
+                        )
+                      {
+                        dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue + "' -> '" + strNewValue + "'");
+                        choiceViewMenu.Add(wProperty);
+                        LogMyFilms.Debug("GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                      }
+                      else
+                      {
+                        LogMyFilms.Debug("GrabberUpdate - Not added to menu (unsupported) - (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
+                      }
                     }
                     catch
                     {
@@ -1974,7 +2120,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (title.Length > 0 && MyFilms.conf.StrFanart) // Get Fanart - ToDo Guzzi: Use local Fanart, if chosen ?
             {
                 System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString());
-                //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MyFilms.conf.StrPathFanart, true, false);
             }
         }
 
