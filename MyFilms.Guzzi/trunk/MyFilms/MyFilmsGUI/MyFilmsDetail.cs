@@ -5505,9 +5505,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if ((MyFilms.conf.SearchFile == "True") || (MyFilms.conf.SearchFile == "yes"))
                 {
                     string movieName = MyFilms.r[select_item][MyFilms.conf.ItemSearchFile].ToString();
+                    LogMyFilms.Debug("Search_All_Files: Search = active, movieName = '" + movieName + "'");
                     movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
+                    LogMyFilms.Debug("Search_All_Files: Search = active, movieName (cleaned) = '" + movieName + "'");
                     if (MyFilms.conf.ItemSearchFile.Length > 0)
-                        fileName = Search_FileName(movieName, MyFilms.conf.StrDirStor).Trim();
+                    {
+                      LogMyFilms.Debug("Search_All_Files: Search = active, movieName (cleaned) = '" + movieName + "', SearchDirectory: '" + MyFilms.conf.StrDirStor + "'");
+                      fileName = Search_FileName(movieName, MyFilms.conf.StrDirStor).Trim();
+                    }
+                        
                     if ((fileName.Length > 0) && (!(MyFilms.conf.StrStorage.Length == 0) && MyFilms.conf.StrStorage != "(none)"))
                     {
                         MyFilms.r[select_item][MyFilms.conf.StrStorage] = fileName;
@@ -5700,6 +5706,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         
         private static string Search_FileName(string filename, string storage)
         {
+            LogMyFilms.Debug("Search_FileName: Launched with parameters: filename = '" + filename + "', storage = '" + storage + "'");
             result = new ArrayList();
             string file = filename;
 
