@@ -1719,7 +1719,9 @@ namespace Grabber_Interface
             textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Titles" + Environment.NewLine;
             break;
           case 19:
-            //textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Certification" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Certification" + Environment.NewLine;
+            break;
+          case 20:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Writer" + Environment.NewLine;
             break;
           case 26:
