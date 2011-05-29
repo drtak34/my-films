@@ -106,6 +106,7 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
@@ -488,7 +489,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -664,6 +664,16 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // traktConfiguration
+          // 
+          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration.Name = "traktConfiguration";
+          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -1942,9 +1952,9 @@
           this.lblAMCMovieScanPath.AutoSize = true;
           this.lblAMCMovieScanPath.Location = new System.Drawing.Point(361, 15);
           this.lblAMCMovieScanPath.Name = "lblAMCMovieScanPath";
-          this.lblAMCMovieScanPath.Size = new System.Drawing.Size(74, 13);
+          this.lblAMCMovieScanPath.Size = new System.Drawing.Size(68, 13);
           this.lblAMCMovieScanPath.TabIndex = 84;
-          this.lblAMCMovieScanPath.Text = "Scan Path(es)";
+          this.lblAMCMovieScanPath.Text = "Scan Path(s)";
           // 
           // chkAMC_Purge_Missing_Files
           // 
@@ -1992,9 +2002,7 @@
           this.AMCConfigView.Name = "AMCConfigView";
           this.AMCConfigView.Size = new System.Drawing.Size(486, 114);
           this.AMCConfigView.TabIndex = 80;
-          this.ToolTip1.SetToolTip(this.AMCConfigView, "List the content of the AMCupdater configuration options.\r\nThose options are used" +
-                  " to create the Default Config and when launching AMCupdater from \r\nMyFilms setup" +
-                  " or via the desktop icon.");
+          this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
           this.AMCConfigView.View = System.Windows.Forms.View.Details;
           // 
@@ -4831,16 +4839,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // traktConfiguration
-          // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
           // 
           // MyFilmsSetup
           // 
