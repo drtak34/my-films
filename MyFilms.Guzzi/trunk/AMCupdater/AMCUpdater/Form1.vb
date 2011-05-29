@@ -1747,6 +1747,13 @@ Public Class Form1
             'CurrentSettings.UserSettingsFile = SettingsFile
             CurrentSettings.LoadUserSettings(SettingsFile)
             LoadSettings()
+            ' Add config file name to window title
+            If (SettingsFile.ToString.Length > 0) Then
+                Me.Text = "Ant Movie Catalog Auto-Updater - " & SettingsFile.ToString
+            Else
+                Me.Text = "Ant Movie Catalog Auto-Updater"
+            End If
+
             Me.ValidateChildren()
         End If
 
