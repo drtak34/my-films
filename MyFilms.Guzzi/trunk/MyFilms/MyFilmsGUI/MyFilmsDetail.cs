@@ -5722,12 +5722,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 ArrayList wresult = new ArrayList();
                 foreach (String s in result)
                 {
-                    if (!MediaPortal.Util.Utils.ShouldStack(s, wfile) && s.ToLower() != wfile.ToLower())
+                    LogMyFilms.Debug("Search_FileName - Searchresult: '" + s.ToString() + "'");
+                    if (string.IsNullOrEmpty(wfile))
+                    {
+                      wresult.Add(s);
+                      wfile = s;
+                    }
+                    else if (!MediaPortal.Util.Utils.ShouldStack(s, wfile) && s.ToLower() != wfile.ToLower())
                     {
                         wresult.Add(s);
                         wfile = s;
                     }
                 }
+                LogMyFilms.Debug("Search_FileName - Total Searchresults: '" + wresult.Count + "'");
                 if (wresult.Count == 1)
                     return wresult[0].ToString();
                 else

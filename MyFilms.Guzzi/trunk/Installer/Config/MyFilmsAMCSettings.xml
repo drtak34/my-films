@@ -19,7 +19,7 @@
     <Value />
   </Values>
   <Values Option="File_Types_Media">
-    <Value>avi;mpg;divx;mpeg;wmv;mkv</Value>
+    <Value>avi;mpg;divx;mpeg;wmv;mkv;flv</Value>
   </Values>
   <Values Option="File_Types_Non_Media">
     <Value>iso;img</Value>
