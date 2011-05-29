@@ -1124,8 +1124,16 @@ Public Class AntProcessor
 
                             'File Handling - compare extension to known media filetypes
                             If Array.IndexOf(ValidMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
-                                If Array.IndexOf(ValidTrailerExtensions, foundFile.Substring(InStr(foundFile, "."))) >= 0 Then
+                                'Check, if it's a trailer
+                                Dim isTrailer As Boolean = False
+                                For Each TrailerProp As String In ValidTrailerExtensions
+                                    If FoundFileName.Contains(TrailerProp) Then
+                                        isTrailer = True
+                                    End If
+                                Next
 
+                                'If Array.IndexOf(ValidTrailerExtensions, foundFile.Substring(InStr(foundFile, "."))) >= 0 Then
+                                If isTrailer = True Then
                                     LogEvent("  File Found (trailer) - " & FoundFileName, EventLogLevel.Informational)
 
                                     row = ds.Tables("tblFoundTrailerFiles").NewRow()
