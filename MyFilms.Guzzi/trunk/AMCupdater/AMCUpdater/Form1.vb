@@ -35,6 +35,10 @@ Public Class Form1
 
 
     End Sub
+
+    Private Sub Form1_Enter(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Enter
+
+    End Sub
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Me.AddOwnedForm(dgLogWindow)
@@ -1749,7 +1753,7 @@ Public Class Form1
             LoadSettings()
             ' Add config file name to window title
             If (SettingsFile.ToString.Length > 0) Then
-                Me.Text = "Ant Movie Catalog Auto-Updater - " & SettingsFile.ToString
+                Me.Text = "Ant Movie Catalog Auto-Updater - " & SettingsFile.ToString.Substring(SettingsFile.ToString.LastIndexOf("\") + 1)
             Else
                 Me.Text = "Ant Movie Catalog Auto-Updater"
             End If

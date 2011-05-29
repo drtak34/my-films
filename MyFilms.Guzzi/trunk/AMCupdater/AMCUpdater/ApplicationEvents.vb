@@ -47,6 +47,14 @@ Namespace My
                     Exit Sub
                 End If
 
+                ' Add config file name to window title
+                If (ConfigFile.ToString.Length > 0) Then
+                    Form1.Text = "Ant Movie Catalog Auto-Updater - " & ConfigFile.ToString.Substring(ConfigFile.ToString.LastIndexOf("\") + 1)
+                Else
+                    Form1.Text = "Ant Movie Catalog Auto-Updater"
+                End If
+
+
                 'CurrentSettings.LoadUserSettings(ConfigFile)
 
                 If (My.Application.CommandLineArgs.Count < 3 And My.Application.CommandLineArgs.Count > 0) Then
