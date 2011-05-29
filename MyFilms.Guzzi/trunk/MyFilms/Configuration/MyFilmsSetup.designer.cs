@@ -106,7 +106,6 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
@@ -489,6 +488,7 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -664,16 +664,6 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
-          // 
-          // traktConfiguration
-          // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
           // 
           // groupBox9
           // 
@@ -1918,9 +1908,9 @@
           // 
           // btnGrabberInterface
           // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(17, 18);
+          this.btnGrabberInterface.Location = new System.Drawing.Point(17, 19);
           this.btnGrabberInterface.Name = "btnGrabberInterface";
-          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 23);
+          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 27);
           this.btnGrabberInterface.TabIndex = 86;
           this.btnGrabberInterface.Text = "Grabber Interface";
           this.btnGrabberInterface.UseVisualStyleBackColor = true;
@@ -1929,9 +1919,9 @@
           // btnCreateAMCDefaultConfig
           // 
           this.btnCreateAMCDefaultConfig.AllowDrop = true;
-          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 101);
+          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 106);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
-          this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 31);
+          this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 29);
           this.btnCreateAMCDefaultConfig.TabIndex = 77;
           this.btnCreateAMCDefaultConfig.Text = "(Re)Create Default Config";
           this.ToolTip1.SetToolTip(this.btnCreateAMCDefaultConfig, resources.GetString("btnCreateAMCDefaultConfig.ToolTip"));
@@ -1941,7 +1931,7 @@
           // lblAMCupdaterConfigPreview
           // 
           this.lblAMCupdaterConfigPreview.AutoSize = true;
-          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(226, 35);
+          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(196, 47);
           this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
           this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
           this.lblAMCupdaterConfigPreview.TabIndex = 85;
@@ -1950,7 +1940,7 @@
           // lblAMCMovieScanPath
           // 
           this.lblAMCMovieScanPath.AutoSize = true;
-          this.lblAMCMovieScanPath.Location = new System.Drawing.Point(361, 15);
+          this.lblAMCMovieScanPath.Location = new System.Drawing.Point(196, 16);
           this.lblAMCMovieScanPath.Name = "lblAMCMovieScanPath";
           this.lblAMCMovieScanPath.Size = new System.Drawing.Size(68, 13);
           this.lblAMCMovieScanPath.TabIndex = 84;
@@ -1960,7 +1950,7 @@
           // 
           this.chkAMC_Purge_Missing_Files.AutoSize = true;
           this.chkAMC_Purge_Missing_Files.ForeColor = System.Drawing.Color.Red;
-          this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(229, 14);
+          this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(597, 41);
           this.chkAMC_Purge_Missing_Files.Name = "chkAMC_Purge_Missing_Files";
           this.chkAMC_Purge_Missing_Files.Size = new System.Drawing.Size(116, 17);
           this.chkAMC_Purge_Missing_Files.TabIndex = 83;
@@ -1981,9 +1971,9 @@
           // 
           // AMCMovieScanPath
           // 
-          this.AMCMovieScanPath.Location = new System.Drawing.Point(457, 12);
+          this.AMCMovieScanPath.Location = new System.Drawing.Point(270, 12);
           this.AMCMovieScanPath.Name = "AMCMovieScanPath";
-          this.AMCMovieScanPath.Size = new System.Drawing.Size(219, 20);
+          this.AMCMovieScanPath.Size = new System.Drawing.Size(406, 20);
           this.AMCMovieScanPath.TabIndex = 81;
           this.ToolTip1.SetToolTip(this.AMCMovieScanPath, "Enter the path(es) to your mediafiles.\r\nMore than one path, separated by semicolo" +
                   "n, are allowed.");
@@ -1997,10 +1987,10 @@
           this.AMCConfigView.FullRowSelect = true;
           this.AMCConfigView.GridLines = true;
           this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.AMCConfigView.Location = new System.Drawing.Point(229, 54);
+          this.AMCConfigView.Location = new System.Drawing.Point(191, 63);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(486, 114);
+          this.AMCConfigView.Size = new System.Drawing.Size(524, 106);
           this.AMCConfigView.TabIndex = 80;
           this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
@@ -2018,9 +2008,9 @@
           // 
           // btnCreateAMCDesktopIcon
           // 
-          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(17, 138);
+          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(17, 141);
           this.btnCreateAMCDesktopIcon.Name = "btnCreateAMCDesktopIcon";
-          this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(152, 31);
+          this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(152, 28);
           this.btnCreateAMCDesktopIcon.TabIndex = 78;
           this.btnCreateAMCDesktopIcon.Text = "Create Desktop Icon ";
           this.ToolTip1.SetToolTip(this.btnCreateAMCDesktopIcon, "By creating a desktop icon you can launch AMC Updater directly \r\nfrom windows wih" +
@@ -2032,9 +2022,9 @@
           // 
           this.btnLaunchAMCupdater.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunchAMCupdater.Image")));
           this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 54);
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 63);
           this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
-          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 41);
+          this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 37);
           this.btnLaunchAMCupdater.TabIndex = 76;
           this.btnLaunchAMCupdater.Text = "Launch external\r\nAMC Updater GUI";
           this.ToolTip1.SetToolTip(this.btnLaunchAMCupdater, "Launch AMCupdater with Configuration specific settings, as you created them.");
@@ -4839,6 +4829,16 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
+          // 
+          // traktConfiguration
+          // 
+          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
+          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
+          this.traktConfiguration.Name = "traktConfiguration";
+          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
+          this.traktConfiguration.TabIndex = 0;
           // 
           // MyFilmsSetup
           // 
