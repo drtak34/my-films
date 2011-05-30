@@ -321,7 +321,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     // Guzzi: Added from TV-Series for Fanarttoggling
     private System.Threading.Timer m_FanartTimer = null;
-    // private System.Threading.Timer m_TraktSyncTimer = null;
 
     // Guzzi: Added to proper handle listlevels
     private static Listlevel listLevel = Listlevel.Movie;
@@ -488,18 +487,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //{
       //  LoadWithParameterSupported = true;
       //}
-
-      #region Trakt
-      //TraktAPI.Username = conf.StrTraktUsername;
-      //TraktAPI.Password = conf.StrTraktPassword;
-      //TraktAPI.UserAgent = MyFilmsSettings.UserAgent;
-
-      //LogMyFilms.Debug("Trakt Usersettings loaded - UserName : '" + TraktAPI.Username.ToString() + "'");
-      //LogMyFilms.Debug("Trakt Usersettings loaded - Useragent: '" + TraktAPI.UserAgent.ToString() + "'");
-
-      // Timer to process episodes to send to trakt, will also be called after new episodes are added to library
-      //m_TraktSyncTimer = new System.Threading.Timer(new TimerCallback(TraktSynchronize), null, 15000, Timeout.Infinite);
-      #endregion
 
       // Register Messagehandler for CD-Inserted-Messages
       //GUIWindowManager.Receivers += new SendMessageHandler(GUIWindowManager_OnNewMessage);
@@ -3130,7 +3117,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // setting up thumbs directory configuration
       string strThumbDirectory;
-      string[] strActiveFacadeImages; // image pathes for Icon and Thumb
+      // string[] strActiveFacadeImages; // image pathes for Icon and Thumb -> moved usage to background thread
       if (WStrSort.ToLower().Contains("actors") || WStrSort.ToLower().Contains("producer") || WStrSort.ToLower().Contains("director") || WStrSort.ToLower().Contains("borrower") || WStrSort.ToLower().Contains("writer"))
         strThumbDirectory = Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\Thumbs\MyFilms_Persons\";
       else

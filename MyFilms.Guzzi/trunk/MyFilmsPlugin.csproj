@@ -162,12 +162,6 @@
     <Compile Include="MyFilms\Configuration\MyFilmsSetup.designer.cs">
       <DependentUpon>MyFilmsSetup.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyFilms\Configuration\TraktConfiguration.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyFilms\Configuration\TraktConfiguration.Designer.cs">
-      <DependentUpon>TraktConfiguration.cs</DependentUpon>
-    </Compile>
     <Compile Include="MyFilms\MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\GUIConnector.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\MyFilmsArtworkSelection.cs" />
@@ -180,23 +174,6 @@
     <Compile Include="MyFilms\MyFilmsSettings.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MyFilms\TraktHandler.cs" />
-    <Compile Include="MyFilms\Trakt\Common\TraktEpisode.cs" />
-    <Compile Include="MyFilms\Trakt\Movie\TraktMovieScrobble.cs" />
-    <Compile Include="MyFilms\Trakt\Show\TraktEpisodeScrobble.cs" />
-    <Compile Include="MyFilms\Trakt\Show\TraktSeriesOverview.cs" />
-    <Compile Include="MyFilms\Trakt\Show\TraktSync.cs" />
-    <Compile Include="MyFilms\Trakt\TraktAPI.cs" />
-    <Compile Include="MyFilms\Trakt\TraktAuthentication.cs" />
-    <Compile Include="MyFilms\Trakt\TraktExtensions.cs" />
-    <Compile Include="MyFilms\Trakt\TraktResponse.cs" />
-    <Compile Include="MyFilms\Trakt\TraktURIs.cs" />
-    <Compile Include="MyFilms\Trakt\User\TraktLibraryMovies.cs" />
-    <Compile Include="MyFilms\Trakt\User\TraktLibraryShows.cs" />
-    <Compile Include="MyFilms\Trakt\User\TraktUserCalendar.cs" />
-    <Compile Include="MyFilms\Trakt\User\TraktUserProfile.cs" />
-    <Compile Include="MyFilms\Trakt\User\TraktWatchedEpisodeHistory.cs" />
-    <Compile Include="MyFilms\Trakt\User\TraktWatchedMovieHistory.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\AsyncImageResource.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\Extensions\GUIFacadeControlExtensions.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\Extensions\GUIWindowExtensions.cs" />
@@ -320,9 +297,6 @@
     <EmbeddedResource Include="MyFilms\Resources\AMCUpdater.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyFilms\Configuration\TraktConfiguration.resx">
-      <DependentUpon>TraktConfiguration.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MyFilms\Resources\AMCUpdaterSmall.ico" />
   </ItemGroup>
   <ItemGroup>

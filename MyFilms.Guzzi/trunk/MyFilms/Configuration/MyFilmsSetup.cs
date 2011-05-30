@@ -72,9 +72,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private bool NewConfigButton = false; // Will avid that catalogselectedindex-changed will be run on "New!" config...
         private string ActiveLogoPath = String.Empty;
 
-        public static string cTraktUsername = String.Empty;
-        public static string cTraktPassword = String.Empty;
-
         public MyFilmsSetup()
         {
             InitializeComponent();
@@ -1052,8 +1049,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               else
                 XmlConfig.RemoveEntry("MyFilms", Config_Name.Text.ToString(), "DVDPTagField");
             }
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktUsername", cTraktUsername);
-            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktPassWord", cTraktPassword);
           
             string w_Config_Name = Config_Name.Text;
             Config_Name.Items.Remove(Config_Name.Text);
@@ -1495,8 +1490,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             // Added by Guzzi to load or initialize the AMCupdater Default configuration and create default configfiles, if necessary.
             Read_XML_AMCconfig(Config_Name.Text);
 
-            cTraktUsername = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktUsername", "");
-            cTraktPassword = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "cTraktPassword", "");
             textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
         }
 

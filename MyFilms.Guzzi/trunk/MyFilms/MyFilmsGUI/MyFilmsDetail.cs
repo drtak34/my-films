@@ -26,8 +26,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System;
   using System.Collections;
   using System.Collections.Generic;
-  using System.ComponentModel; // for TRAKT
-  using System.Threading; // For TRAKT Timer ...
+  using System.ComponentModel;
+  using System.Threading;
   using System.Data;
   using System.Diagnostics;
   using System.Globalization;
@@ -57,11 +57,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using SQLite.NET;
 
-  using Trakt.Movie;
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
-  using Trakt;
 
     /// <summary>
     /// Summary description for GUIMesFilms.
@@ -163,11 +161,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //public static bool isTrailer = false;
         //public static bool trailerPlayed = false;
         public static bool trailerPlayed = false;
-
-        // private System.Threading.Timer m_TraktTimer = null;
-        // private TimerCallback m_timerDelegate = null;
-        // BackgroundWorker TraktScrobbleUpdater = new BackgroundWorker();
-        // private bool TraktMarkedFirstAsWatched = false;
 
         #region Enums
         private enum Grabber_Output : int
@@ -5320,15 +5313,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 LogMyFilms.Info("Error during PlayBackEnded ");
             }
-            //#region Trakt
-            //// submit watched state to trakt API
-            //PlayListItem item = GetCurrentItem();
-
-            //if (item != null)
-            //{
-            //      TraktScrobbleUpdater.RunWorkerAsync(item.Episode);
-            //}
-            //#endregion
         }
 
         private static string LoadPlaylist(string filename)
@@ -5738,6 +5722,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (wresult.Count == 1)
                     return wresult[0].ToString();
                 else
+                  //foreach (string s in wresult)
+                  //{
+                  //  if (s == filename) 
+                  //    return filename;
+                  //}
                 {
                     // Many files found; ask for the good file
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -6650,70 +6639,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             LogMyFilms.Debug("Disabled feature due to startmode 'normal': '" + disabledfeature + "'");
             return false;
-        }
-
-        /// <summary>
-        /// Update Trakt status of episode being watched on Timer Interval
-        /// </summary>
-        private void TraktUpdater(Object stateInfo)
-        {
-          PlayListItem item = (PlayListItem)stateInfo;
-
-          // duration in minutes
-          double duration = item.Duration / 60000;
-          double progress = 0.0;
-
-          // get current progress of player (in seconds) to work out percent complete
-          if (duration > 0.0)
-            progress = ((g_Player.CurrentPosition / 60.0) / duration) * 100.0;
-
-          TraktMovieScrobble scrobbleData = null;
-
-          IMDBMovie movie = new IMDBMovie(); // ToDo: To be replaced by true current data !! (Guzzi)
-
-          // Set basic properties of scrobbledata
-          scrobbleData = TraktHandler.CreateScrobbleData(movie);
-
-          if (scrobbleData == null) return;
-
-          // set duration/progress in scrobble data
-          scrobbleData.Duration = Convert.ToInt32(duration).ToString();
-          scrobbleData.Progress = Convert.ToInt32(progress).ToString();
-
-          // set watching status on trakt
-          TraktResponse response = TraktAPI.ScrobbleMovieState(scrobbleData, TraktScrobbleStates.watching);
-          if (response == null) return;
-          TraktHandler.CheckTraktErrorAndNotify(response, true);
-        }
-
-
-        /// <summary>
-        /// Update trakt status on playback finish
-        /// </summary>
-        private void TraktScrobble_DoWork(object sender, DoWorkEventArgs e)
-        {
-          IMDBMovie movie = (IMDBMovie)e.Argument;
-
-          double duration = movie.RunTime / 60000;
-
-          // get scrobble data to send to api
-          TraktMovieScrobble scrobbleData = TraktHandler.CreateScrobbleData(movie);
-          if (scrobbleData == null) return;
-
-          // set duration/progress in scrobble data
-          scrobbleData.Duration = Convert.ToInt32(duration).ToString();
-          scrobbleData.Progress = "100";
-
-          TraktResponse response = TraktAPI.ScrobbleMovieState(scrobbleData, TraktScrobbleStates.scrobble);
-          if (response == null) return;
-          TraktHandler.CheckTraktErrorAndNotify(response, true);
-
-          if (response.Status == "success")
-          {
-            // set trakt flags so we dont waste time syncing later
-            //episode[DBOnlineEpisode.cTraktLibrary] = 1;
-            //episode[DBOnlineEpisode.cTraktSeen] = 1;
-          }
         }
 
       public static bool IsInternetConnectionAvailable ()

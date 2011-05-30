@@ -488,8 +488,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.traktConfiguration = new MyFilmsPlugin.MyFilms.Configuration.TraktConfiguration();
-          this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
           this.Fanart.SuspendLayout();
@@ -654,7 +652,6 @@
           // 
           // Tab_Trakt
           // 
-          this.Tab_Trakt.Controls.Add(this.traktConfiguration);
           this.Tab_Trakt.Location = new System.Drawing.Point(4, 22);
           this.Tab_Trakt.Name = "Tab_Trakt";
           this.Tab_Trakt.Padding = new System.Windows.Forms.Padding(3);
@@ -4830,16 +4827,6 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // traktConfiguration
-          // 
-          this.traktConfiguration.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                      | System.Windows.Forms.AnchorStyles.Left)
-                      | System.Windows.Forms.AnchorStyles.Right)));
-          this.traktConfiguration.Location = new System.Drawing.Point(67, 6);
-          this.traktConfiguration.Name = "traktConfiguration";
-          this.traktConfiguration.Size = new System.Drawing.Size(613, 344);
-          this.traktConfiguration.TabIndex = 0;
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4868,7 +4855,6 @@
           this.Text = "MyFilms Setup";
           this.Load += new System.EventHandler(this.MesFilmsSetup_Load);
           this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MesFilmsSetup_Quit);
-          this.Tab_Trakt.ResumeLayout(false);
           this.groupBox9.ResumeLayout(false);
           this.groupBox9.PerformLayout();
           this.groupBox25.ResumeLayout(false);
@@ -4989,7 +4975,6 @@
         private Button btnLaunchAMCglobal;
         private LinkLabel linkLabelMyFilmsWiki;
         private TabPage Tab_Trakt;
-        private TraktConfiguration traktConfiguration;
         private TabPage Tab_ExternalCatalogs;
         private GroupBox groupBox9;
         private CheckBox chkDVDprofilerMergeWithGenreField;

@@ -1244,20 +1244,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           set { strSearchHistory = value; }
         }
 
-        private string strTraktUsername = string.Empty;
-        public string StrTraktUsername
-        {
-            get { return strTraktUsername; }
-            set { strTraktUsername = value; }
-        }
-
-        private string strTraktPassword = string.Empty;
-        public string StrTraktPassword
-        {
-            get { return strTraktPassword; }
-            set { strTraktPassword = value; }
-        }
-
         private string strGrabber_cnf = string.Empty;
         public string StrGrabber_cnf
         {
