@@ -2182,30 +2182,30 @@
               <ZipFileName>Installer{CopyFile}\{57d852b9-6253-4961-a821-cea4556b7f2c}-MyVideoGrabber.csscript</ZipFileName>
               <DestinationFilename>%Config%\scripts\MovieInfo\MyVideoGrabber.csscript</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\IMDB-Full.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{fda1eb71-6050-4cef-b106-1c89b09a50d7}-IMDB-Full.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Full.xml</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\IMDB.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{e9531c59-fb14-400c-8803-5d0a8e84628b}-IMDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB.xml</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\MyFilmsSample.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{a89bbe00-4c47-4dd3-8c81-91a1916cc757}-MyFilmsSample.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\MyFilmsSample.xml</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\OFDB.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{7f5f8efc-a8e8-49b7-b5e3-89a02585e57c}-OFDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\OFDB.xml</DestinationFilename>
@@ -5077,30 +5077,30 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <ZipFileName>Installer{CopyFile}\{57d852b9-6253-4961-a821-cea4556b7f2c}-MyVideoGrabber.csscript</ZipFileName>
         <DestinationFilename>%Config%\scripts\MovieInfo\MyVideoGrabber.csscript</DestinationFilename>
       </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\IMDB-Full.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{fda1eb71-6050-4cef-b106-1c89b09a50d7}-IMDB-Full.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Full.xml</DestinationFilename>
       </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\IMDB.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{e9531c59-fb14-400c-8803-5d0a8e84628b}-IMDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB.xml</DestinationFilename>
       </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\MyFilmsSample.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{a89bbe00-4c47-4dd3-8c81-91a1916cc757}-MyFilmsSample.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\MyFilmsSample.xml</DestinationFilename>
       </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\OFDB.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{7f5f8efc-a8e8-49b7-b5e3-89a02585e57c}-OFDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\OFDB.xml</DestinationFilename>
@@ -5480,14 +5480,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{15f91333-23f4-41c5-8ca5-75b1c759dde7}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{0ef6f6f8-552a-4552-bd9d-a883ab47a642}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9a4551e5-e03f-4d49-9396-9f1245526ee3}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6eaca804-5a15-439d-9e6e-93b437a880d9}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
