@@ -1724,8 +1724,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       strNewValue = Result[i].ToString();
                       if (i == 2)
                           strNewValue = Result[12];
-                      if (strOldValue == null)
-                          strOldValue = "";
+                      if (strNewValue == null)
+                          strNewValue = "";
 
                       if ( // make sure, only supported fields are offered to user for update
                         wProperty != "ImageURL" 
@@ -1741,7 +1741,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         && wProperty != "Aspectratio"
                         )
                       {
-                        dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue + "' -> '" + strNewValue + "'");
+                        dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" + strNewValue.Replace(Environment.NewLine, " # ") + "'");
                         choiceViewMenu.Add(wProperty);
                         LogMyFilms.Debug("GrabberUpdate - Add to menu (" + wProperty + "): '" + strOldValue + "' -> '" + strNewValue + "'");
                       }
