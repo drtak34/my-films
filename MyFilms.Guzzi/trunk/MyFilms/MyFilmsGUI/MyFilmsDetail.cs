@@ -4503,7 +4503,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // Guzzi: Added WOL to start remote host before playing the files
             // Wake up the TV server, if required
             // HandleWakeUpNas();
-            LogMyFilms.Info("Launched HandleWakeUpNas() to start movie'" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'");
+            // LogMyFilms.Info("Launched HandleWakeUpNas() to start movie'" + MyFilms.r[select_item][MyFilms.conf.StrSTitle.ToString()] + "'");
 
             if (MyFilms.conf.StrCheckWOLenable)
             {
@@ -5445,48 +5445,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string[] split1;
             string[] split2;
             string[] split3;
-            string strDir = MyFilms.conf.StrDirStor;
+            string strDir = string.Empty;
             int IdMovie = -1;
             int timeMovieStopped = 0;
             if (Trailer)
-            {
-              if (MyFilms.conf.StrDirStorTrailer.Length > 0)
-                strDir = MyFilms.conf.StrDirStorTrailer;
-              else
               {
-                strDir = "";
+                if (MyFilms.conf.StrDirStorTrailer.Length > 0)
+                  strDir = MyFilms.conf.StrDirStorTrailer;
               }
-            }
-              
-            else strDir = MyFilms.conf.StrDirStor;
+            else 
+              strDir = MyFilms.conf.StrDirStor;
 
-            LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - StrDirStor: " + MyFilms.conf.StrDirStor);
-            LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - StrDirStortrailer: " + MyFilms.conf.StrDirStorTrailer);
-            LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - Modus 'Trailer' = '" + Trailer + "' - strDir: '" + strDir + "'");
+            LogMyFilms.Debug("(Search_All_Files) - Modus 'Trailer' = '" + Trailer + "' - Searchpath (strDir): '" + strDir + "'");
             // retrieve filename information stored in the DB
             if (Trailer)
-              if (MyFilms.conf.StrDirStorTrailer.Length > 0)
-                LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - try filename MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer]: '" + MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer].ToString().Trim() + "' - ConfStorageTrailer: '" + MyFilms.conf.StrStorageTrailer + "'");
-              else 
-                LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - Trailersearchpath not set in config!");
-            else
-              LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - try filename MyFilms.r[select_item][MyFilms.conf.StrStorage]: '" + MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString().Trim() + "' - ConfStorage: '" + MyFilms.conf.StrStorage + "'");
-            if (Trailer)
             {
-                try
-                { fileName = MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer].ToString().Trim(); }
-                catch
-                { fileName = string.Empty; }
+              if (!string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) && MyFilms.conf.StrStorageTrailer != "(none)")
+              {
+                LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - try filename MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer]: '" + MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer].ToString().Trim() + "' - ConfStorageTrailer: '" + MyFilms.conf.StrStorageTrailer + "'"); 
+                try { fileName = MyFilms.r[select_item][MyFilms.conf.StrStorageTrailer].ToString().Trim(); }
+                catch { fileName = string.Empty; }
+              }
             }
             else
-              if (MyFilms.conf.StrStorage != null && MyFilms.conf.StrStorage != "(none)" && MyFilms.conf.StrStorage != string.Empty)
-                {
-                    try
-                    { fileName = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString().Trim(); }
-                    catch
-                    { fileName = string.Empty; }
-                }
-            if (fileName.Length == 0 && !Trailer)
+            {
+              if (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)")
+              {
+                LogMyFilms.Debug("MyFilmsDetails (Search_All_Files) - try filename MyFilms.r[select_item][MyFilms.conf.StrStorage]: '" + MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString().Trim() + "' - ConfStorage: '" + MyFilms.conf.StrStorage + "'"); 
+                try { fileName = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString().Trim(); }
+                catch { fileName = string.Empty; }
+              }
+            }
+
+            if (string.IsNullOrEmpty(fileName) && !Trailer)
             {
                 // search filename by Title movie
                 if ((MyFilms.conf.SearchFile == "True") || (MyFilms.conf.SearchFile == "yes"))
@@ -5500,8 +5491,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       LogMyFilms.Debug("Search_All_Files: Search = active, movieName (cleaned) = '" + movieName + "', SearchDirectory: '" + MyFilms.conf.StrDirStor + "'");
                       fileName = Search_FileName(movieName, MyFilms.conf.StrDirStor).Trim();
                     }
-                        
-                    if ((fileName.Length > 0) && (!(MyFilms.conf.StrStorage.Length == 0) && MyFilms.conf.StrStorage != "(none)"))
+
+                    if ((fileName.Length > 0) && (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)"))
                     {
                         MyFilms.r[select_item][MyFilms.conf.StrStorage] = fileName;
                         Update_XML_database();
