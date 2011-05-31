@@ -1681,11 +1681,11 @@
           // label50
           // 
           this.label50.AutoSize = true;
-          this.label50.Location = new System.Drawing.Point(6, 21);
+          this.label50.Location = new System.Drawing.Point(8, 16);
           this.label50.Name = "label50";
-          this.label50.Size = new System.Drawing.Size(115, 39);
+          this.label50.Size = new System.Drawing.Size(170, 26);
           this.label50.TabIndex = 66;
-          this.label50.Text = "Preferred Language(s) \r\nfor Translated Title(s)\r\nand Certification";
+          this.label50.Text = "Preferred Language(s) for \r\nTranslated Title(s) and Certification";
           // 
           // label49
           // 
@@ -1720,15 +1720,55 @@
           // 
           this.cbGrabberOverrideLanguage.FormattingEnabled = true;
           this.cbGrabberOverrideLanguage.Items.AddRange(new object[] {
-            "en",
-            "de",
-            "es",
-            "fr",
-            "it",
-            "pt"});
-          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(124, 30);
+            "Argentina",
+            "Australia",
+            "Austria",
+            "Belgium",
+            "Brazil",
+            "Canada",
+            "Chile",
+            "Croatia",
+            "Czech Republic",
+            "Denmark",
+            "Estonia",
+            "Finland",
+            "France",
+            "Germany",
+            "Greece",
+            "Hong Kong",
+            "Hungary",
+            "Iceland",
+            "India",
+            "Ireland",
+            "Israel",
+            "Italy",
+            "Japan",
+            "Malaysia",
+            "Mexico",
+            "Netherlands",
+            "New Zealand",
+            "Norway",
+            "Peru",
+            "Philippines",
+            "Poland",
+            "Portugal",
+            "Romania",
+            "Russia",
+            "Singapore",
+            "Slovakia",
+            "Slovenia",
+            "South Africa",
+            "South Korea",
+            "Spain",
+            "Sweden",
+            "Switzerland",
+            "Turkey",
+            "UK",
+            "Uruguay",
+            "USA"});
+          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(11, 48);
           this.cbGrabberOverrideLanguage.Name = "cbGrabberOverrideLanguage";
-          this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(61, 21);
+          this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(167, 21);
           this.cbGrabberOverrideLanguage.TabIndex = 64;
           // 
           // lblSearchGrabberName
