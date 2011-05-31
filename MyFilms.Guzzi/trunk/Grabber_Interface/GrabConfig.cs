@@ -306,8 +306,8 @@ namespace Grabber_Interface
 
       try { cbTtitlePreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value; }
       catch { cbTtitlePreferredLanguage.Text = string.Empty; };
-      if (string.IsNullOrEmpty(cbTtitlePreferredLanguage.Text)) cbTtitlePreferredLanguage.Enabled = false;
-      else cbTtitlePreferredLanguage.Enabled = true;
+      //if (string.IsNullOrEmpty(cbTtitlePreferredLanguage.Text)) cbTtitlePreferredLanguage.Enabled = false;
+      //else cbTtitlePreferredLanguage.Enabled = true;
       
       try { cbTtitleMaxTitles.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value; }
       catch {cbTtitleMaxTitles.Text = string.Empty;};
@@ -316,8 +316,8 @@ namespace Grabber_Interface
       
       try { cbCertificationPreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
       catch { cbCertificationPreferredLanguage.Text = string.Empty; };
-      if (string.IsNullOrEmpty(cbCertificationPreferredLanguage.Text)) cbCertificationPreferredLanguage.Enabled = false;
-      else cbCertificationPreferredLanguage.Enabled = true;
+      //if (string.IsNullOrEmpty(cbCertificationPreferredLanguage.Text)) cbCertificationPreferredLanguage.Enabled = false;
+      //else cbCertificationPreferredLanguage.Enabled = true;
 
       // Add Dropdownentries to User Options
       cbTtitlePreferredLanguage.Items.Clear();
@@ -328,8 +328,11 @@ namespace Grabber_Interface
       Array.Sort(split);
       foreach (var strDroptext in split)
       {
-        cbTtitlePreferredLanguage.Items.Add(strDroptext.Trim());
+        if (!cbTtitlePreferredLanguage.Items.Contains(strDroptext.Trim()))
+          cbTtitlePreferredLanguage.Items.Add(strDroptext.Trim());
       }
+      if (cbTtitlePreferredLanguage.Items.Count > 0) cbTtitlePreferredLanguage.Enabled = true;
+      else cbTtitlePreferredLanguage.Enabled = false;
       
       cbCertificationPreferredLanguage.Items.Clear();
       try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
@@ -338,8 +341,11 @@ namespace Grabber_Interface
       Array.Sort(split);
       foreach (var strDroptext in split)
       {
-        cbCertificationPreferredLanguage.Items.Add(strDroptext.Trim());
+        if (!cbCertificationPreferredLanguage.Items.Contains(strDroptext.Trim()))
+          cbCertificationPreferredLanguage.Items.Add(strDroptext.Trim());
       }
+      if (cbCertificationPreferredLanguage.Items.Count > 0) cbCertificationPreferredLanguage.Enabled = true;
+      else cbCertificationPreferredLanguage.Enabled = false;
 
         // Read Mapping Infos
         for (int i = 0; i < 30; i++)
