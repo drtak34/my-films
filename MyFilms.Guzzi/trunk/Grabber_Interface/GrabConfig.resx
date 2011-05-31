@@ -1657,7 +1657,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>3</value>
   </data>
   <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 218</value>
+    <value>15, 197</value>
   </data>
   <data name="groupBox8.Size" type="System.Drawing.Size, System.Drawing">
     <value>352, 114</value>
@@ -1943,6 +1943,62 @@ of the generated DB.</value>
   <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewMapping.Location" type="System.Drawing.Point, System.Drawing">
+    <value>439, 90</value>
+  </data>
+  <data name="dataGridViewMapping.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="dataGridViewMapping.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 410</value>
+  </data>
+  <data name="dataGridViewMapping.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="dataGridViewMapping.ToolTip" xml:space="preserve">
+    <value>With the Mapping Table you can control the mapping of grabbed data to 
+your catalog fields.
+You can e.g. map data of fields, that are missing in your catlaog to an existing field.
+You can "merge" data by adding it to fields at the end or the beginning.
+Options:
+- Replace: replaces the content of the destionation field with content of source field
+- Add to Start: Adds the content of source to the beginning of the destination field
+- Add to End: Adds the content of source to the end of the destination field
+
+Note: You can add more than one field to a destination field - so you could e.g. merge 
+data from several source fields to a single destination field.
+</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
+    <value>dataGridViewMapping</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="Column0.HeaderText" xml:space="preserve">
     <value>No.</value>
   </data>
@@ -1994,42 +2050,109 @@ of the generated DB.</value>
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>85</value>
   </data>
-  <data name="dataGridViewMapping.Location" type="System.Drawing.Point, System.Drawing">
-    <value>439, 90</value>
+  <data name="&gt;&gt;label29.Name" xml:space="preserve">
+    <value>label29</value>
   </data>
-  <data name="dataGridViewMapping.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
+  <data name="&gt;&gt;label29.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="dataGridViewMapping.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 410</value>
+  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
+    <value>groupBox10</value>
   </data>
-  <data name="dataGridViewMapping.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="dataGridViewMapping.ToolTip" xml:space="preserve">
-    <value>With the Mapping Table you can control the mapping of grabbed data to 
-your catalog fields.
-You can e.g. map data of fields, that are missing in your catlaog to an existing field.
-You can "merge" data by adding it to fields at the end or the beginning.
-Options:
-- Replace: replaces the content of the destionation field with content of source field
-- Add to Start: Adds the content of source to the beginning of the destination field
-- Add to End: Adds the content of source to the end of the destination field
-
-Note: You can add more than one field to a destination field - so you could e.g. merge 
-data from several source fields to a single destination field.
-</value>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Name" xml:space="preserve">
+    <value>cbCertificationPreferredLanguage</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
-    <value>dataGridViewMapping</value>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Parent" xml:space="preserve">
+    <value>groupBox10</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
-    <value>tabPageUserSettings</value>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
+  <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 317</value>
+  </data>
+  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 77</value>
+  </data>
+  <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="groupBox10.Text" xml:space="preserve">
+    <value>Certification ...</value>
+  </data>
+  <data name="groupBox10.ToolTip" xml:space="preserve">
+    <value>IMDB offers "Certifiaction" for different countries.
+You can either leave the field empty to get all or define some countries (more than one possible) to get those specitic certifications.
+This feature only works, if the script and the web site supports it.
+Most sites do not support country specific certifications.</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label29.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 30</value>
+  </data>
+  <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 13</value>
+  </data>
+  <data name="label29.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label29.Text" xml:space="preserve">
+    <value>Preferred Country</value>
+  </data>
+  <data name="&gt;&gt;label29.Name" xml:space="preserve">
+    <value>label29</value>
+  </data>
+  <data name="&gt;&gt;label29.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbCertificationPreferredLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 27</value>
+  </data>
+  <data name="cbCertificationPreferredLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="cbCertificationPreferredLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Name" xml:space="preserve">
+    <value>cbCertificationPreferredLanguage</value>
+  </data>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.Parent" xml:space="preserve">
+    <value>groupBox10</value>
+  </data>
+  <data name="&gt;&gt;cbCertificationPreferredLanguage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -4178,6 +4301,37 @@ data from several source fields to a single destination field.
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <data name="label32.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label32.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 48</value>
+  </data>
+  <data name="label32.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 26</value>
+  </data>
+  <data name="label32.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="label32.Text" xml:space="preserve">
+    <value>Options greyed out are NOT supported 
+by the currently loaded grabber script !</value>
+  </data>
+  <data name="&gt;&gt;label32.Name" xml:space="preserve">
+    <value>label32</value>
+  </data>
+  <data name="&gt;&gt;label32.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label32.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;label32.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label31.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4209,7 +4363,7 @@ data from several source fields to a single destination field.
     <value>tabPageUserSettings</value>
   </data>
   <data name="&gt;&gt;label31.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4245,7 +4399,7 @@ you can edit and then save it to another name (Save).</value>
     <value>tabPageUserSettings</value>
   </data>
   <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;groupBox12.Name" xml:space="preserve">
     <value>groupBox12</value>
@@ -4305,7 +4459,7 @@ you can edit and then save it to another name (Save).</value>
     <value>tabPageUserSettings</value>
   </data>
   <data name="&gt;&gt;groupBox11.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>3, 620</value>
@@ -4332,7 +4486,7 @@ you can edit and then save it to another name (Save).</value>
     <value>tabPageUserSettings</value>
   </data>
   <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label22.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4344,7 +4498,7 @@ you can edit and then save it to another name (Save).</value>
     <value>NoControl</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 21</value>
+    <value>16, 14</value>
   </data>
   <data name="label22.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 25</value>
@@ -4365,19 +4519,7 @@ you can edit and then save it to another name (Save).</value>
     <value>tabPageUserSettings</value>
   </data>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;groupBox9.Name" xml:space="preserve">
     <value>groupBox9</value>
@@ -4392,10 +4534,10 @@ you can edit and then save it to another name (Save).</value>
     <value>1</value>
   </data>
   <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 61</value>
+    <value>21, 86</value>
   </data>
   <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 439</value>
+    <value>386, 414</value>
   </data>
   <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4413,7 +4555,7 @@ you can edit and then save it to another name (Save).</value>
     <value>tabPageUserSettings</value>
   </data>
   <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tabPageUserSettings.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -4763,111 +4905,6 @@ you can edit and then save it to another name (Save).</value>
   <data name="&gt;&gt;chkAddCertification.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;label29.Name" xml:space="preserve">
-    <value>label29</value>
-  </data>
-  <data name="&gt;&gt;label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Name" xml:space="preserve">
-    <value>cbCertificationPreferredLanguage</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 346</value>
-  </data>
-  <data name="groupBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 77</value>
-  </data>
-  <data name="groupBox10.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="groupBox10.Text" xml:space="preserve">
-    <value>Certification ...</value>
-  </data>
-  <data name="groupBox10.ToolTip" xml:space="preserve">
-    <value>IMDB offers "Certifiaction" for different countries.
-You can either leave the field empty to get all or define some countries (more than one possible) to get those specitic certifications.
-This feature only works, if the script and the web site supports it.
-Most sites do not support country specific certifications.</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Name" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label29.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label29.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label29.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 30</value>
-  </data>
-  <data name="label29.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 13</value>
-  </data>
-  <data name="label29.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label29.Text" xml:space="preserve">
-    <value>Preferred Country</value>
-  </data>
-  <data name="&gt;&gt;label29.Name" xml:space="preserve">
-    <value>label29</value>
-  </data>
-  <data name="&gt;&gt;label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label29.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;label29.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cbCertificationPreferredLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 27</value>
-  </data>
-  <data name="cbCertificationPreferredLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 21</value>
-  </data>
-  <data name="cbCertificationPreferredLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Name" xml:space="preserve">
-    <value>cbCertificationPreferredLanguage</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.Parent" xml:space="preserve">
-    <value>groupBox10</value>
-  </data>
-  <data name="&gt;&gt;cbCertificationPreferredLanguage.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;cbMaxWriters.Name" xml:space="preserve">
     <value>cbMaxWriters</value>
   </data>
@@ -4977,10 +5014,10 @@ Most sites do not support country specific certifications.</value>
     <value>8</value>
   </data>
   <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 29</value>
+    <value>15, 19</value>
   </data>
   <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 183</value>
+    <value>352, 172</value>
   </data>
   <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -5820,24 +5857,6 @@ Most sites do not support country specific certifications.</value>
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;saveFileDialog2.Name" xml:space="preserve">
-    <value>saveFileDialog2</value>
-  </data>
-  <data name="&gt;&gt;saveFileDialog2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;iMDBEnumeratorBindingSource.Name" xml:space="preserve">
-    <value>iMDBEnumeratorBindingSource</value>
-  </data>
-  <data name="&gt;&gt;iMDBEnumeratorBindingSource.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;iMDBEnumeratorBindingSource1.Name" xml:space="preserve">
-    <value>iMDBEnumeratorBindingSource1</value>
-  </data>
-  <data name="&gt;&gt;iMDBEnumeratorBindingSource1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Column0.Name" xml:space="preserve">
     <value>Column0</value>
   </data>
@@ -5873,6 +5892,24 @@ Most sites do not support country specific certifications.</value>
   </data>
   <data name="&gt;&gt;Column5.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveFileDialog2.Name" xml:space="preserve">
+    <value>saveFileDialog2</value>
+  </data>
+  <data name="&gt;&gt;saveFileDialog2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iMDBEnumeratorBindingSource.Name" xml:space="preserve">
+    <value>iMDBEnumeratorBindingSource</value>
+  </data>
+  <data name="&gt;&gt;iMDBEnumeratorBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;iMDBEnumeratorBindingSource1.Name" xml:space="preserve">
+    <value>iMDBEnumeratorBindingSource1</value>
+  </data>
+  <data name="&gt;&gt;iMDBEnumeratorBindingSource1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GrabConfig</value>
