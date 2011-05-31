@@ -137,6 +137,14 @@ You cann't select that option if a Default Configuration is defined
 If no default config defined and many configs, the configuration to load will be asked the first time
 After, the plugin load the last configuration used if no default defined</value>
   </data>
+  <data name="cbAllowTraktSync.ToolTip" xml:space="preserve">
+    <value>If enabled, TRAKT plugin is allowed to synchronize your movie data
+to the TRAKT site.
+Note:
+Do only enable for movie collections.
+It is not recommended to enable for private videos or documentaries, as 
+there is usually no movie data available on internet databases.</value>
+  </data>
   <data name="SLogo_Type.ToolTip" xml:space="preserve">
     <value>There are two fields referenced in the skin files to display logos - ID2001 and ID2002. 
 You can nominate which logos that you want to see in the first skin field or in the second skin field by referring to these ID numbers.
@@ -277,6 +285,19 @@ You can use the browse button to select the file.
 The default Artist image will be displayed when an artist does not have an associated photo or image
 and it will be used as a default artist image.</value>
   </data>
+  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
+    <value>You can update your movie data via internet from insude MyFilms GUI.
+
+You have to define the xml parser file ("grabber script" to be used.
+
+With the 'try to find best match automaticly' option validated, the grabber will
+try to find best match but can provide errors in some cases. It's better to
+don't valid it. In that case, you'll get a menu to choose the right movie.
+
+You can change those options from MyFilms GUI (global settings) also.
+
+</value>
+  </data>
   <data name="btnEditScript.ToolTip" xml:space="preserve">
     <value>This launches the MyFilms Grabber Interface.
 The current default script will be autoloaded.
@@ -314,19 +335,6 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
-  </data>
-  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
-    <value>You can update your movie data via internet from insude MyFilms GUI.
-
-You have to define the xml parser file ("grabber script" to be used.
-
-With the 'try to find best match automaticly' option validated, the grabber will
-try to find best match but can provide errors in some cases. It's better to
-don't valid it. In that case, you'll get a menu to choose the right movie.
-
-You can change those options from MyFilms GUI (global settings) also.
-
-</value>
   </data>
   <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
     <value>For updating the whole database and scan for and add new movies to your catalog automatically,

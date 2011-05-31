@@ -24,11 +24,17 @@
 namespace MyFilmsPlugin.MyFilms
 {
   using System;
+  using System.Collections;
   using System.Data;
+
+  using MediaPortal.Configuration;
+  using MediaPortal.GUI.Library;
+  using MediaPortal.Video.Database;
 
   using MyFilmsPlugin;
 
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
+  using MyFilmsPlugin.MyFilms.Utils;
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
 
@@ -93,8 +99,10 @@ namespace MyFilmsPlugin.MyFilms
           //lock (data)
           //{
             LogMyFilms.Debug("ReadDataMovies() - Starting ...");
-            if (data == null) initData();
-            else LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
+            if (data == null) 
+              initData();
+            else 
+              LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
             LogMyFilms.Debug("StrDfltSelect      : '" + StrDfltSelect + "'");
             LogMyFilms.Debug("StrSelect          : '" + StrSelect + "'");
             LogMyFilms.Debug("StrSort            : '" + StrSort + "'");
@@ -148,14 +156,9 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception e)
             {
-              LogMyFilms.Error(
-                "MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " +
-                e.Message.ToString() + ", " + e.StackTrace.ToString());
-              throw new Exception(
-                "Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " +
-                e.Message.ToString());
+              LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+              throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
             }
-
         }
         public static void UnloadMesFilms()
         {
@@ -197,6 +200,94 @@ namespace MyFilmsPlugin.MyFilms
             {
               data.Clear();
             }
+        }
+
+        public static void GetMovies(ref ArrayList movies)
+        {
+          movies.Clear(); 
+          AntMovieCatalog dataExport = new AntMovieCatalog();
+
+          using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          {
+            int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+            ArrayList configs = new ArrayList();
+            for (int i = 0; i < MesFilms_nb_config; i++)
+              configs.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+
+            foreach (string config in configs)
+            {
+              string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+              bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+              string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
+              string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
+              string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
+              string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
+              string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
+              LogMyFilms.Debug("BaseMesFilms - GetMovies: catalogfile '" + Catalog + "', enabled for Trakt: '" + TraktEnabled + "'");
+              if (System.IO.File.Exists(Catalog) && TraktEnabled)
+              {
+                try
+                {
+                  dataExport.ReadXml(Catalog);
+                }
+                catch (Exception e)
+                {
+                  LogMyFilms.Error(": Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+                  throw e;
+                }
+
+                try
+                {
+                  DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect + StrTitle1 + " not like ''", "OriginalTitle" + " " + "ASC");
+                  // if (results.Length == 0) continue;
+
+                  foreach (DataRow sr in results)
+                  {
+                    try
+                    {
+                      MFMovie movie = new MFMovie();
+                      if (!string.IsNullOrEmpty(sr["Number"].ToString()))
+                        movie.ID = Int32.Parse(sr["Number"].ToString());
+                      else movie.ID = 0;
+                      movie.Year = Int32.Parse(sr["Year"].ToString());
+                      movie.Title = sr["OriginalTitle"].ToString();
+                      if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
+                        if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower())
+                          movie.Watched = true;
+                      //if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
+                      //  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
+                      //    movie.Watched = true;
+                      movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
+                      string mediapath = string.Empty;
+                      if (!string.IsNullOrEmpty(Storage) && Storage != "(none)")
+                      {
+                        mediapath = sr[Storage].ToString();
+                        if (mediapath.Contains(";")) // take the first source file
+                          mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
+                      }
+                      movie.File = mediapath;
+                      if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
+                        movie.IMDBNumber = sr["IMDB_Id"].ToString();
+                      if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString())) 
+                        movie.TMDBNumber = sr["TMDB_Id"].ToString();
+                      movie.DateAdded = sr["Date"].ToString();
+                      movies.Add(movie);
+                    }
+                    catch (Exception mex)
+                    {
+                      Log.Error("MyFilms videodatabase: add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
+                      throw;
+                    }
+                  }
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
+                  Log.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
+                }
+              }
+            } 
+          }
         }
 
         public static string Translate_Column(string Column)
@@ -309,4 +400,102 @@ namespace MyFilmsPlugin.MyFilms
         }
         #endregion
     }
+  public class MFMovie
+  {
+    private int _mID = -1;
+    private string _mStrTitle = string.Empty;
+    private string _mStrFile = string.Empty;
+    private string _mStrPath = string.Empty;
+    private string _mStrIMDBNumber = string.Empty;
+    private string _mStrTMDBNumber = string.Empty;
+    private int _mIYear = 1900;
+    private float _mFRating;
+    private bool _mIWatched;
+    private string _mDateAdded = string.Empty;
+
+    public MFMovie() { }
+
+    public int ID
+    {
+      get { return _mID; }
+      set { _mID = value; }
+    }
+
+    public bool IsEmpty
+    {
+      get
+      {
+        if ((_mStrTitle != string.Empty) && (_mStrTitle != Strings.Unknown))
+        {
+          return false;
+        }
+        return true;
+      }
+    }
+
+    public bool Watched
+    {
+      get { return _mIWatched; }
+      set { _mIWatched = value; }
+    }
+
+    public string Title
+    {
+      get { return _mStrTitle; }
+      set { _mStrTitle = value; }
+    }
+
+    public string File
+    {
+      get { return _mStrFile; }
+      set { _mStrFile = value; }
+    }
+
+    public string Path
+    {
+      get { return _mStrPath; }
+      set { _mStrPath = value; }
+    }
+
+    public string IMDBNumber
+    {
+      get { return _mStrIMDBNumber; }
+      set { _mStrIMDBNumber = value; }
+    }
+
+    public string TMDBNumber
+    {
+      get { return _mStrTMDBNumber; }
+      set { _mStrTMDBNumber = value; }
+    }
+
+    public int Year
+    {
+      get { return _mIYear; }
+      set { _mIYear = value; }
+    }
+
+    public float Rating
+    {
+      get { return _mFRating; }
+      set { _mFRating = value; }
+    }
+
+    public string DateAdded
+    {
+      get { return _mDateAdded; }
+      set { _mDateAdded = value; }
+    }
+
+    public void Reset()
+    {
+      _mStrTitle = string.Empty;
+      _mStrIMDBNumber = string.Empty;
+      _mStrTMDBNumber = string.Empty;
+      _mIYear = 1900;
+      _mFRating = 0.0f;
+      _mIWatched = false;
+      _mDateAdded = string.Empty;
+    }
+  }
 }

@@ -488,6 +488,9 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.cbAllowTraktSync = new System.Windows.Forms.CheckBox();
+          this.label52 = new System.Windows.Forms.Label();
+          this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
           this.Fanart.SuspendLayout();
@@ -652,6 +655,8 @@
           // 
           // Tab_Trakt
           // 
+          this.Tab_Trakt.Controls.Add(this.label52);
+          this.Tab_Trakt.Controls.Add(this.cbAllowTraktSync);
           this.Tab_Trakt.Location = new System.Drawing.Point(4, 22);
           this.Tab_Trakt.Name = "Tab_Trakt";
           this.Tab_Trakt.Padding = new System.Windows.Forms.Padding(3);
@@ -4867,6 +4872,27 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // cbAllowTraktSync
+          // 
+          this.cbAllowTraktSync.AutoSize = true;
+          this.cbAllowTraktSync.Location = new System.Drawing.Point(29, 78);
+          this.cbAllowTraktSync.Name = "cbAllowTraktSync";
+          this.cbAllowTraktSync.Size = new System.Drawing.Size(176, 17);
+          this.cbAllowTraktSync.TabIndex = 0;
+          this.cbAllowTraktSync.Text = "Enable TRAKT Synchronisation";
+          this.ToolTip1.SetToolTip(this.cbAllowTraktSync, resources.GetString("cbAllowTraktSync.ToolTip"));
+          this.cbAllowTraktSync.UseVisualStyleBackColor = true;
+          // 
+          // label52
+          // 
+          this.label52.AutoSize = true;
+          this.label52.Location = new System.Drawing.Point(28, 28);
+          this.label52.Name = "label52";
+          this.label52.Size = new System.Drawing.Size(321, 26);
+          this.label52.TabIndex = 1;
+          this.label52.Text = "If you enable TRAKT Synchronization, your movie catalog data will\r\nbe synchronize" +
+              "d with trakt internet site.";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4895,6 +4921,8 @@
           this.Text = "MyFilms Setup";
           this.Load += new System.EventHandler(this.MesFilmsSetup_Load);
           this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MesFilmsSetup_Quit);
+          this.Tab_Trakt.ResumeLayout(false);
+          this.Tab_Trakt.PerformLayout();
           this.groupBox9.ResumeLayout(false);
           this.groupBox9.PerformLayout();
           this.groupBox25.ResumeLayout(false);
@@ -5379,5 +5407,7 @@
         private ComboBox AntItem4;
         private CheckBox chkScanMediaOnStart;
         private TextBox txtGrabberDisplay;
+        private CheckBox cbAllowTraktSync;
+        private Label label52;
     }
 }

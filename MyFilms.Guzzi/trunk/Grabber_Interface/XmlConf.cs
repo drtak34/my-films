@@ -341,17 +341,25 @@ public class TagName
   public static string KeyStartLinkPersons = "KeyStartLinkPersons";
   public static string KeyEndLinkPersons = "KeyEndLinkPersons";
   public static string KeyLinkPersonsIndex = "KeyLinkPersonsIndex";
+  
   public static string KeyStartLinkTitles = "KeyStartLinkTitles";
   public static string KeyEndLinkTitles = "KeyEndLinkTitles";
   public static string KeyLinkTitlesIndex = "KeyLinkTitlesIndex";
+
   public static string KeyStartLinkCertification = "KeyStartLinkCertification";
   public static string KeyEndLinkCertification = "KeyEndLinkCertification";
   public static string KeyLinkCertificationIndex = "KeyLinkCertificationIndex";
+
+  //public static string KeyStartLinkComment = "KeyStartLinkComment";
+  //public static string KeyEndLinkComment = "KeyEndLinkComment";
+  //public static string KeyLinkCommentIndex = "KeyLinkCommentIndex";
 
   public static string KeyStartComment = "KeyStartComment";     // Comment
   public static string KeyEndComment = "KeyEndComment";
   public static string KeyCommentRegExp = "KeyCommentRegExp";
   public static string KeyCommentIndex = "KeyCommentIndex";
+  //public static string KeyCommentMaxItems = "KeyCommentMaxItems";
+
   public static string KeyStartLanguage = "KeyStartLanguage";     // Language
   public static string KeyEndLanguage = "KeyEndLanguage";
   public static string KeyLanguageIndex = "KeyLanguageIndex";
@@ -370,11 +378,5 @@ public class TagName
   //"Edition":
   //IMDB_Id
   //TMDB_Id
-  //public static string MappingNumber = "MappingNumber";
-  //public static string MappingSource = "MappingSource";
-  //public static string MappingDestination = "MappingDestination";
-  //public static string MappingReplace = "MappingReplace";
-  //public static string MappingAddStart = "MappingAddStart";
-  //public static string MappingAddEnd = "MappingAddEnd";
 }
 

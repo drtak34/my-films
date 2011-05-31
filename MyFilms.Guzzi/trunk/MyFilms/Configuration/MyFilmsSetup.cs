@@ -981,6 +981,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", textBoxGlobalUnwatchedOnlyValue.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckMediaOnStart", chkScanMediaOnStart.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AllowTraktSync", cbAllowTraktSync.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", chkOnlyTitle.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", chkWindowsFileDialog.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ItemSearchFileName", ItemSearchFileName.Text);
@@ -1404,6 +1405,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", false);
             textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", "false");
             chkScanMediaOnStart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckMediaOnStart", false);
+            cbAllowTraktSync.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AllowTraktSync", false);
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", false);
             chkWindowsFileDialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WindowsFileDialog", false);
             // common external catalog options
@@ -1725,6 +1727,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkUseListviewForGroups.Checked = true;
             chkGlobalUnwatchedOnly.Checked = false;
             chkScanMediaOnStart.Checked = false;
+            cbAllowTraktSync.Checked = false;
             textBoxGlobalUnwatchedOnlyValue.Text = "false";
             chkOnlyTitle.Checked = false;
             chkWindowsFileDialog.Checked = false;
