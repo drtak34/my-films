@@ -606,6 +606,36 @@ namespace Grabber_Interface
       }
     }
 
+    private void button_SaveAs_Click(object sender, EventArgs e)
+    {
+      if (string.IsNullOrEmpty(textConfig.Text))
+      {
+        MessageBox.Show("No Config loaded !", "Error");
+        return;
+      }
+      else
+      {
+        if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms"))
+        {
+          saveFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
+        }
+        else
+        {
+          saveFileDialog1.RestoreDirectory = true;
+        }
+        saveFileDialog1.FileName = textConfig.Text;
+        saveFileDialog1.Filter = "XML Files (*.xml)|*.xml";
+        saveFileDialog1.Title = "Save Internet Grabber Script file (xml file)";
+        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+        {
+          textConfig.Text = saveFileDialog1.FileName;
+          SaveXml(textConfig.Text);
+          MessageBox.Show("Config saved !", "Info");
+        }
+      }
+    }
+
+
     private void TextKeyStart_TextChanged(object sender, EventArgs e)
     {
       if (GLbBlock == true)

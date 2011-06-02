@@ -151,6 +151,7 @@ namespace Grabber_Interface
           this.label5 = new System.Windows.Forms.Label();
           this.label4 = new System.Windows.Forms.Label();
           this.tabPageUserSettings = new System.Windows.Forms.TabPage();
+          this.label32 = new System.Windows.Forms.Label();
           this.label31 = new System.Windows.Forms.Label();
           this.label30 = new System.Windows.Forms.Label();
           this.groupBox11 = new System.Windows.Forms.GroupBox();
@@ -179,7 +180,7 @@ namespace Grabber_Interface
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-          this.label32 = new System.Windows.Forms.Label();
+          this.button_SaveAs = new System.Windows.Forms.Button();
           this.groupBox8.SuspendLayout();
           this.groupBox15.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
@@ -1150,6 +1151,12 @@ namespace Grabber_Interface
           this.tabPageUserSettings.Name = "tabPageUserSettings";
           this.tabPageUserSettings.UseVisualStyleBackColor = true;
           // 
+          // label32
+          // 
+          resources.ApplyResources(this.label32, "label32");
+          this.label32.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+          this.label32.Name = "label32";
+          // 
           // label31
           // 
           resources.ApplyResources(this.label31, "label31");
@@ -1387,16 +1394,18 @@ namespace Grabber_Interface
           // 
           this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
           // 
-          // label32
+          // button_SaveAs
           // 
-          resources.ApplyResources(this.label32, "label32");
-          this.label32.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-          this.label32.Name = "label32";
+          resources.ApplyResources(this.button_SaveAs, "button_SaveAs");
+          this.button_SaveAs.Name = "button_SaveAs";
+          this.button_SaveAs.UseVisualStyleBackColor = true;
+          this.button_SaveAs.Click += new System.EventHandler(this.button_SaveAs_Click);
           // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+          this.Controls.Add(this.button_SaveAs);
           this.Controls.Add(this.buttonExpertMode);
           this.Controls.Add(this.linkLabelMFwiki);
           this.Controls.Add(this.pictureBox1);
@@ -1613,6 +1622,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column5;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Button button_SaveAs;
 
     }
 }
