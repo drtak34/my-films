@@ -27,13 +27,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using SQLite.NET;
-using MediaPortal.Database;
 using System.Text.RegularExpressions;
 using System.IO;
 
 namespace MyFilmsPlugin.MyFilms
 {
-    //moved to DBOnineEpisodes.cs
+  using MyFilmsPlugin.MyFilms.Utils;
+
+  //moved to DBOnineEpisodes.cs
     //public class DBOnlineEpisode : DBTable
     public enum MostRecentType
     {
@@ -42,14 +43,14 @@ namespace MyFilmsPlugin.MyFilms
         Created
     }
 
-    public class DBEpisode : BaseMesFilms, ICacheable<DBEpisode>, IEquatable<DBEpisode>, IComparable<DBEpisode>
+    public class DBMovie : BaseMesFilms, IEquatable<DBMovie>
     {
-        public static void overRide(DBEpisode old, DBEpisode newObject)
+        public static void overRide(DBMovie old, DBMovie newObject)
         {
             old = newObject;
         }
 
-        public DBEpisode fullItem
+        public DBMovie fullItem
         {
             get { return this; }
             set { overRide(this, value); }
@@ -65,14 +66,8 @@ namespace MyFilmsPlugin.MyFilms
 
         #region Local DB Fields
         public const String cFilename = "EpisodeFilename";
-        public const String cCompositeID = DBOnlineEpisode.cCompositeID;           // composite string used for link key to online episode data
-        public const String cSeriesID = DBOnlineEpisode.cSeriesID;
-        public const String cSeasonIndex = DBOnlineEpisode.cSeasonIndex;
-        public const String cEpisodeIndex = DBOnlineEpisode.cEpisodeIndex;
 
         // ids for the second episode if it's a double (and please don't ever do triple episodes)
-        public const String cCompositeID2 = DBOnlineEpisode.cCompositeID + "2";
-        public const String cEpisodeIndex2 = DBOnlineEpisode.cEpisodeIndex + "2";
         
         public const String cEpisodeName = "LocalEpisodeName";
         public const String cImportProcessed = "LocalImportProcessed";
@@ -118,12 +113,10 @@ namespace MyFilmsPlugin.MyFilms
         public const String cIsAvailable = "IsAvailable";
         #endregion
 
-        private DBOnlineEpisode m_onlineEpisode = null;
-
         public static Dictionary<String, String> s_FieldToDisplayNameMap = new Dictionary<String, String>();
         public static Dictionary<string, DBField> s_fields = new Dictionary<string, DBField>();
 
-        public delegate void dbEpisodeUpdateOccuredDelegate(DBEpisode updated);
+        public delegate void dbEpisodeUpdateOccuredDelegate(DBMovie updated);
         public static event dbEpisodeUpdateOccuredDelegate dbEpisodeUpdateOccured;
 
         public static List<string> subTitleExtensions = new List<string>();
@@ -135,10 +128,10 @@ namespace MyFilmsPlugin.MyFilms
 
         private static bool m_bUpdateEpisodeCount = false; // used to ensure StdConds are used while in Config mode
 
-        static DBEpisode()
+        static DBMovie()
         {
             // make sure the table is created on first run
-            DBEpisode dummy = new DBEpisode();
+            DBMovie dummy = new DBMovie();
 
             ///////////////////////////////////////////////////
             #region Pretty Names displayed in Configuration Details Tab
@@ -199,7 +192,7 @@ namespace MyFilmsPlugin.MyFilms
                         break;
 
                     case 3:
-                        DBEpisode.GlobalSet(new DBEpisode(), DBEpisode.cEpisodeIndex2, 0, new SQLCondition());
+                        DBMovie.GlobalSet(new DBMovie(), DBMovie.cEpisodeIndex2, 0, new SQLCondition());
                         nUpgradeDBVersion++;
                         break;
 
@@ -216,14 +209,14 @@ namespace MyFilmsPlugin.MyFilms
                     case 6:
                         // Ensure that Volume Label is not empty
                         SQLCondition conditions = new SQLCondition();
-                        conditions.Add(new DBEpisode(), DBEpisode.cFilename, string.Empty, SQLConditionType.NotEqual);
-                        List<DBEpisode> episodes = DBEpisode.Get(conditions);
+                        conditions.Add(new DBMovie(), DBMovie.cFilename, string.Empty, SQLConditionType.NotEqual);
+                        List<DBMovie> episodes = DBMovie.Get(conditions);
                         
                         // For some reason I couldnt get all eps missing a volume label when I explictly added condition
                         // use this method instead to get them by removing all eps that already have a volume label
                         episodes.RemoveAll(ep => ep[cVolumeLabel].ToString().Trim() != string.Empty);
 
-                        foreach (DBEpisode episode in episodes)
+                        foreach (DBMovie episode in episodes)
                         {
                             string filename = episode[cFilename].ToString();
                             if (!string.IsNullOrEmpty(filename))
@@ -266,7 +259,7 @@ namespace MyFilmsPlugin.MyFilms
                 return sFieldName;
         }
 
-        public DBEpisode() 
+        public DBMovie() 
             : base(cTableName)
         {
             InitColumns();
@@ -277,7 +270,7 @@ namespace MyFilmsPlugin.MyFilms
 
         }
 
-        public DBEpisode(bool bCreateEmptyOnline)
+        public DBMovie(bool bCreateEmptyOnline)
             : base(cTableName)
         {
             InitColumns();
@@ -286,7 +279,7 @@ namespace MyFilmsPlugin.MyFilms
                 m_onlineEpisode = new DBOnlineEpisode();
         }
 
-        public DBEpisode(DBOnlineEpisode onlineEpisode, String filename)
+        public DBMovie(DBOnlineEpisode onlineEpisode, String filename)
             : base(cTableName)
         {
             InitColumns();
@@ -296,13 +289,13 @@ namespace MyFilmsPlugin.MyFilms
             //    ReadMediaInfo();
 
             //composite id will bw set automatically from setting these three
-            this[DBEpisode.cSeriesID] = onlineEpisode[DBOnlineEpisode.cSeriesID];
-            this[DBEpisode.cSeasonIndex] = onlineEpisode[DBOnlineEpisode.cSeasonIndex];
-            this[DBEpisode.cEpisodeIndex] = onlineEpisode[DBOnlineEpisode.cEpisodeIndex];
+            this[DBMovie.cSeriesID] = onlineEpisode[DBOnlineEpisode.cSeriesID];
+            this[DBMovie.cSeasonIndex] = onlineEpisode[DBOnlineEpisode.cSeasonIndex];
+            this[DBMovie.cEpisodeIndex] = onlineEpisode[DBOnlineEpisode.cEpisodeIndex];
             m_onlineEpisode = onlineEpisode;
         }
 
-        public DBEpisode(String filename, bool bSkipMediaInfo)
+        public DBMovie(String filename, bool bSkipMediaInfo)
             : base(cTableName)
         {
             InitColumns();
@@ -410,7 +403,7 @@ namespace MyFilmsPlugin.MyFilms
             // TODO: update local_episodes set seriesID =  74205 where seriesID = -1
             DBOnlineEpisode newOnlineEpisode = new DBOnlineEpisode();
             string composite = nSeriesID + "_" + base[cSeasonIndex] + "x" + base[cEpisodeIndex];
-            if (!base[DBEpisode.cCompositeID].ToString().Contains("x"))
+            if (!base[DBMovie.cCompositeID].ToString().Contains("x"))
                 composite = nSeriesID + "_" + base[DBOnlineEpisode.cFirstAired];
             if (!newOnlineEpisode.ReadPrimary(composite))
             {
@@ -435,12 +428,12 @@ namespace MyFilmsPlugin.MyFilms
             base[cCompositeID] = newOnlineEpisode[DBOnlineEpisode.cCompositeID];
             base[cSeriesID] = nSeriesID;
 
-            if (base[DBEpisode.cCompositeID2].ToString().Length > 0) {
+            if (base[DBMovie.cCompositeID2].ToString().Length > 0) {
                 DBOnlineEpisode oldDouble = new DBOnlineEpisode();
-                bool oldExist = oldDouble.ReadPrimary(base[DBEpisode.cCompositeID2]);
-                base[DBEpisode.cCompositeID2] = nSeriesID + "_" + base[DBEpisode.cSeasonIndex] + "x" + base[DBEpisode.cEpisodeIndex2];
+                bool oldExist = oldDouble.ReadPrimary(base[DBMovie.cCompositeID2]);
+                base[DBMovie.cCompositeID2] = nSeriesID + "_" + base[DBMovie.cSeasonIndex] + "x" + base[DBMovie.cEpisodeIndex2];
                 DBOnlineEpisode newDouble = new DBOnlineEpisode();
-                if (!newDouble.ReadPrimary(base[DBEpisode.cCompositeID2])) {
+                if (!newDouble.ReadPrimary(base[DBMovie.cCompositeID2])) {
                     if (oldExist) {
                         foreach (string fieldName in oldDouble.FieldNames) {
                             switch (fieldName) {
@@ -554,14 +547,14 @@ namespace MyFilmsPlugin.MyFilms
             if (null == MI) return false;
             
             // Check if File Exists and is not an Image type e.g. ISO (we can't extract mediainfo from that)
-            if (System.IO.File.Exists(this[DBEpisode.cFilename]) && !Helper.IsImageFile(this[DBEpisode.cFilename]))
+            if (System.IO.File.Exists(this[DBMovie.cFilename]) && !Helper.IsImageFile(this[DBMovie.cFilename]))
             {
                 try
                 {
-                    MPTVSeriesLog.Write("Attempting to read Mediainfo for ", this[DBEpisode.cFilename].ToString(), MPTVSeriesLog.LogLevel.DebugSQL);
+                    MPTVSeriesLog.Write("Attempting to read Mediainfo for ", this[DBMovie.cFilename].ToString(), MPTVSeriesLog.LogLevel.DebugSQL);
                     
                     // open file in MediaInfo
-                    MI.Open(this[DBEpisode.cFilename]);
+                    MI.Open(this[DBMovie.cFilename]);
                                         
                     // check number of failed attempts at mediainfo extraction                    
                     int noAttempts = 0;
@@ -607,12 +600,12 @@ namespace MyFilmsPlugin.MyFilms
                         int retries = MAX_MEDIAINFO_RETRIES - (noAttempts * -1);
 
                         string retriesLeft = retries > 0 ? retries.ToString() : "No";
-                        retriesLeft = string.Format("Problem parsing MediaInfo for: {0}, ({1} retries left)", this[DBEpisode.cFilename].ToString(), retriesLeft);
+                        retriesLeft = string.Format("Problem parsing MediaInfo for: {0}, ({1} retries left)", this[DBMovie.cFilename].ToString(), retriesLeft);
 
                         MPTVSeriesLog.Write(retriesLeft, MPTVSeriesLog.LogLevel.Normal);
                     }
                     else {
-                        MPTVSeriesLog.Write("Succesfully read MediaInfo for ", this[DBEpisode.cFilename].ToString(), OnlineParsing.IsMainOnlineParseComplete ? MPTVSeriesLog.LogLevel.Normal : MPTVSeriesLog.LogLevel.Debug);                   
+                        MPTVSeriesLog.Write("Succesfully read MediaInfo for ", this[DBMovie.cFilename].ToString(), OnlineParsing.IsMainOnlineParseComplete ? MPTVSeriesLog.LogLevel.Normal : MPTVSeriesLog.LogLevel.Debug);                   
                     }
 
                     // Commit MediaInfo to database
@@ -634,10 +627,10 @@ namespace MyFilmsPlugin.MyFilms
         {
             try
             {
-                if (System.IO.File.Exists(this[DBEpisode.cFilename]))
+                if (System.IO.File.Exists(this[DBMovie.cFilename]))
                 {
                     this[cFileDateAdded] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    this[cFileDateCreated] = System.IO.File.GetCreationTime(this[DBEpisode.cFilename]).ToString("yyyy-MM-dd HH:mm:ss");
+                    this[cFileDateCreated] = System.IO.File.GetCreationTime(this[DBMovie.cFilename]).ToString("yyyy-MM-dd HH:mm:ss");
                     Commit();
                 }
             }
@@ -659,7 +652,7 @@ namespace MyFilmsPlugin.MyFilms
 
         public bool checkHasSubtitles(bool useMediaInfo)
         {
-            if (String.IsNullOrEmpty(this[DBEpisode.cFilename])) return false;
+            if (String.IsNullOrEmpty(this[DBMovie.cFilename])) return false;
 
             int textCount = -1;
             if (useMediaInfo && !String.IsNullOrEmpty(this["TextCount"]))
@@ -707,7 +700,7 @@ namespace MyFilmsPlugin.MyFilms
         {
             MPTVSeriesLog.Write(string.Format("Using SubCentral for checkHasSubtitles(), useMediaInfo = {0}, textCount = {1}", useMediaInfo.ToString(), textCount.ToString()), MPTVSeriesLog.LogLevel.Debug);
             List<FileInfo> fiFiles = new List<FileInfo>();
-            fiFiles.Add(new FileInfo(this[DBEpisode.cFilename]));
+            fiFiles.Add(new FileInfo(this[DBMovie.cFilename]));
             bool result = SubCentral.Utils.SubCentralUtils.MediaHasSubtitles(fiFiles, false, textCount, !useMediaInfo);
             MPTVSeriesLog.Write(string.Format("SubCentral returned {0}", result.ToString()), MPTVSeriesLog.LogLevel.Debug);
             return result;
@@ -733,7 +726,7 @@ namespace MyFilmsPlugin.MyFilms
 
         public bool isWritable()
         {
-            string file = this[DBEpisode.cFilename];
+            string file = this[DBMovie.cFilename];
             if (string.IsNullOrEmpty(file)) return false;
             FileInfo fi = new FileInfo(file);
             if (fi != null)
@@ -749,17 +742,17 @@ namespace MyFilmsPlugin.MyFilms
 
             // Always delete from Local episode table if deleting from disk or database
             SQLCondition condition = new SQLCondition();
-            condition.Add(new DBEpisode(), DBEpisode.cFilename, this[DBEpisode.cFilename], SQLConditionType.Equal);
+            condition.Add(new DBMovie(), DBMovie.cFilename, this[DBMovie.cFilename], SQLConditionType.Equal);
 
-            List<DBEpisode> episodes = DBEpisode.Get(condition, false);
+            List<DBMovie> episodes = DBMovie.Get(condition, false);
             if (episodes != null)
             {
-                foreach (DBEpisode episode in episodes)
+                foreach (DBMovie episode in episodes)
                 {
-                    string file = this[DBEpisode.cFilename];
+                    string file = this[DBMovie.cFilename];
                     if ((type != TVSeriesPlugin.DeleteMenuItems.database && !episode.isWritable()) || type == TVSeriesPlugin.DeleteMenuItems.database)
                     {
-                        DBEpisode.Clear(condition);
+                        DBMovie.Clear(condition);
 
                         if (type != TVSeriesPlugin.DeleteMenuItems.database)
                         {
@@ -818,14 +811,14 @@ namespace MyFilmsPlugin.MyFilms
             if (type == TVSeriesPlugin.DeleteMenuItems.disk)
             {
                 SQLCondition seasonConditions = new SQLCondition();
-                seasonConditions.Add(new DBEpisode(), DBEpisode.cSeriesID, this[DBEpisode.cSeriesID], SQLConditionType.Equal);
-                seasonConditions.Add(new DBEpisode(), DBEpisode.cSeasonIndex, this[DBEpisode.cSeasonIndex], SQLConditionType.Equal);
-                List<DBEpisode> localEpisodes = DBEpisode.Get(seasonConditions);
+                seasonConditions.Add(new DBMovie(), DBMovie.cSeriesID, this[DBMovie.cSeriesID], SQLConditionType.Equal);
+                seasonConditions.Add(new DBMovie(), DBMovie.cSeasonIndex, this[DBMovie.cSeasonIndex], SQLConditionType.Equal);
+                List<DBMovie> localEpisodes = DBMovie.Get(seasonConditions);
                 if (localEpisodes.Count == 0)
                 {
                     SQLCondition cond = new SQLCondition();
-                    cond.Add(new DBSeason(), DBSeason.cSeriesID, this[DBEpisode.cSeriesID], SQLConditionType.Equal);
-                    cond.Add(new DBSeason(), DBSeason.cIndex, this[DBEpisode.cSeasonIndex], SQLConditionType.Equal);
+                    cond.Add(new DBSeason(), DBSeason.cSeriesID, this[DBMovie.cSeriesID], SQLConditionType.Equal);
+                    cond.Add(new DBSeason(), DBSeason.cIndex, this[DBMovie.cSeasonIndex], SQLConditionType.Equal);
                     List<DBSeason> season = DBSeason.Get(cond);                    
                     // should only get one season returned
                     if (season != null && season.Count == 1)
@@ -836,11 +829,11 @@ namespace MyFilmsPlugin.MyFilms
                     
                     // also check if local files exist for series
                     SQLCondition seriesConditions = new SQLCondition();
-                    seriesConditions.Add(new DBEpisode(), DBEpisode.cSeriesID, this[DBEpisode.cSeriesID], SQLConditionType.Equal);                    
-                    localEpisodes = DBEpisode.Get(seriesConditions);
+                    seriesConditions.Add(new DBMovie(), DBMovie.cSeriesID, this[DBMovie.cSeriesID], SQLConditionType.Equal);                    
+                    localEpisodes = DBMovie.Get(seriesConditions);
                     if (localEpisodes.Count == 0)
                     {
-                        DBSeries series = DBSeries.Get(this[DBEpisode.cSeriesID]);
+                        DBSeries series = DBSeries.Get(this[DBMovie.cSeriesID]);
                         if (series != null)
                         {
                             series[DBOnlineSeries.cHasLocalFiles] = false;
@@ -860,7 +853,7 @@ namespace MyFilmsPlugin.MyFilms
                 condition = new SQLCondition();
                 condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeriesID, this[DBOnlineEpisode.cSeriesID], SQLConditionType.Equal);
                 condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeasonIndex, this[DBOnlineEpisode.cSeasonIndex], SQLConditionType.Equal);
-                episodes = DBEpisode.Get(condition, false);
+                episodes = DBMovie.Get(condition, false);
                 if (episodes.Count == 0)
                 {
                     condition = new SQLCondition();
@@ -870,8 +863,8 @@ namespace MyFilmsPlugin.MyFilms
 
                     // If episode count is still zero, then delete the series\seasons
                     condition = new SQLCondition();
-                    condition.Add(new DBEpisode(), DBEpisode.cSeriesID, this[DBOnlineEpisode.cSeriesID], SQLConditionType.Equal);
-                    episodes = DBEpisode.Get(condition, false);
+                    condition.Add(new DBMovie(), DBMovie.cSeriesID, this[DBOnlineEpisode.cSeriesID], SQLConditionType.Equal);
+                    episodes = DBMovie.Get(condition, false);
                     if (episodes.Count == 0)
                     {
                         // Delete All Seasons
@@ -902,7 +895,7 @@ namespace MyFilmsPlugin.MyFilms
         {
             List<string> resultMsg = new List<string>(); 
 
-            if (String.IsNullOrEmpty(this[DBEpisode.cFilename]))
+            if (String.IsNullOrEmpty(this[DBMovie.cFilename]))
             {
                 resultMsg.Add(Translation.EpisodeFilenameEmpty);
                 return resultMsg;
@@ -985,11 +978,6 @@ namespace MyFilmsPlugin.MyFilms
             }
         }
 
-        public DBOnlineEpisode onlineEpisode
-        {
-            get { return m_onlineEpisode; }
-        }
-
         public override ICollection<String> FieldNames
         {
             get
@@ -1029,7 +1017,7 @@ namespace MyFilmsPlugin.MyFilms
                 switch (fieldName)
                 {
                     case cFileSizeBytes:
-                        return System.IO.File.Exists(base[DBEpisode.cFilename]) ? new System.IO.FileInfo(base[DBEpisode.cFilename]).Length : 0;
+                        return System.IO.File.Exists(base[DBMovie.cFilename]) ? new System.IO.FileInfo(base[DBMovie.cFilename]).Length : 0;
                     case cFileSize:
                         return StrFormatByteSize(this[cFileSizeBytes]);
                     //case cAvailableSubtitles:
@@ -1155,30 +1143,30 @@ namespace MyFilmsPlugin.MyFilms
             return base.Commit();
         }
 
-        public static DBEpisode GetFirstUnwatched(int seriesID)
+        public static DBMovie GetFirstUnwatched(int seriesID)
         {
             SQLCondition conditions = new SQLCondition();
-            conditions.Add(new DBEpisode(), DBEpisode.cSeriesID, new DBValue(seriesID), SQLConditionType.Equal);
-            List<DBEpisode> results = GetFirstUnwatched(conditions);
+            conditions.Add(new DBMovie(), DBMovie.cSeriesID, new DBValue(seriesID), SQLConditionType.Equal);
+            List<DBMovie> results = GetFirstUnwatched(conditions);
             if (results.Count > 0)
                 return results[0];
             else
                 return null;
         }
 
-        public static DBEpisode GetFirstUnwatched(int seriesID, int seasonIndex)
+        public static DBMovie GetFirstUnwatched(int seriesID, int seasonIndex)
         {
             SQLCondition conditions = new SQLCondition();
-            conditions.Add(new DBEpisode(), DBEpisode.cSeriesID, new DBValue(seriesID), SQLConditionType.Equal);
-            conditions.Add(new DBEpisode(), DBEpisode.cSeasonIndex, new DBValue(seasonIndex), SQLConditionType.Equal);
-            List<DBEpisode> results = GetFirstUnwatched(conditions);
+            conditions.Add(new DBMovie(), DBMovie.cSeriesID, new DBValue(seriesID), SQLConditionType.Equal);
+            conditions.Add(new DBMovie(), DBMovie.cSeasonIndex, new DBValue(seasonIndex), SQLConditionType.Equal);
+            List<DBMovie> results = GetFirstUnwatched(conditions);
             if (results.Count > 0)
                 return results[0];
             else
                 return null;
         }
 
-        public static List<DBEpisode> GetFirstUnwatched()
+        public static List<DBMovie> GetFirstUnwatched()
         {
             return GetFirstUnwatched(new SQLCondition());
         }
@@ -1296,9 +1284,9 @@ namespace MyFilmsPlugin.MyFilms
             epsUnWatched = epsTotal - epsWatched;
         }
 
-        static List<DBEpisode> GetFirstUnwatched(SQLCondition conditions)
+        static List<DBMovie> GetFirstUnwatched(SQLCondition conditions)
         {
-            SQLWhat what = new SQLWhat(new DBEpisode());
+            SQLWhat what = new SQLWhat(new DBMovie());
             conditions.Add(new DBOnlineEpisode(), DBOnlineEpisode.cWatched, new DBValue(false), SQLConditionType.Equal);
 
             string sqlQuery = "select " + what + " where compositeid in ( select min(local_episodes.compositeid) from local_episodes inner join online_episodes on local_episodes.compositeid = online_episodes.compositeid " + conditions 
@@ -1307,12 +1295,12 @@ namespace MyFilmsPlugin.MyFilms
                 + @"and exists (select id from season where seriesid = local_episodes.seriesid and seasonindex = local_episodes.seasonindex and hidden = 0) "
                 + @"group by local_episodes.seriesID );";
             SQLiteResultSet results = DBTVSeries.Execute(sqlQuery);
-            List<DBEpisode> outList = new List<DBEpisode>();
+            List<DBMovie> outList = new List<DBMovie>();
             if (results.Rows.Count > 0)
             {
                 for (int index = 0; index < results.Rows.Count; index++)
                 {
-                    DBEpisode episode = new DBEpisode();
+                    DBMovie episode = new DBMovie();
                     episode.Read(ref results, index);
                     episode.m_onlineEpisode = new DBOnlineEpisode();
                     episode.m_onlineEpisode.Read(results.Rows[index], results.ColumnIndices);
@@ -1328,7 +1316,7 @@ namespace MyFilmsPlugin.MyFilms
             {
                 SQLCondition conditions = new SQLCondition();
                 if ((!Settings.isConfig || m_bUpdateEpisodeCount) && DBOption.GetOptions(DBOption.cView_Episode_OnlyShowLocalFiles))
-                    conditions.Add(new DBEpisode(), DBEpisode.cFilename, string.Empty, SQLConditionType.NotEqual);
+                    conditions.Add(new DBMovie(), DBMovie.cFilename, string.Empty, SQLConditionType.NotEqual);
 
                 // include hidden?
                 if (!DBOption.GetOptions(DBOption.cShowHiddenItems))
@@ -1380,25 +1368,25 @@ namespace MyFilmsPlugin.MyFilms
 
             SQLCondition subQueryConditions = new SQLCondition();
             if (matchSeriesID.Success)
-                subQueryConditions.Add(new DBEpisode(), cSeriesID, matchSeriesID.Groups[1].Value, SQLConditionType.Equal);
+                subQueryConditions.Add(new DBMovie(), cSeriesID, matchSeriesID.Groups[1].Value, SQLConditionType.Equal);
             if (matchSeasonIndex.Success)
-                subQueryConditions.Add(new DBEpisode(), cSeasonIndex, matchSeasonIndex.Groups[1].Value, SQLConditionType.Equal);
-            subQueryConditions.Add(new DBEpisode(), cCompositeID2, "", SQLConditionType.NotEqual);
+                subQueryConditions.Add(new DBMovie(), cSeasonIndex, matchSeasonIndex.Groups[1].Value, SQLConditionType.Equal);
+            subQueryConditions.Add(new DBMovie(), cCompositeID2, "", SQLConditionType.NotEqual);
 
-            String sqlSubQuery = "select distinct " + DBEpisode.Q(cCompositeID2) + " from " + DBEpisode.cTableName + subQueryConditions;
+            String sqlSubQuery = "select distinct " + DBMovie.Q(cCompositeID2) + " from " + DBMovie.cTableName + subQueryConditions;
             conditionsFirst.AddCustom(sqlSubQuery, DBOnlineEpisode.Q(cCompositeID), SQLConditionType.NotIn);
-            conditionsSecond.Add(new DBEpisode(), cCompositeID2, "", SQLConditionType.NotEqual);
+            conditionsSecond.Add(new DBMovie(), cCompositeID2, "", SQLConditionType.NotEqual);
 
             DBTable first = null;
             DBTable second = null;
             if (reverseJoin) {
                 //reverse the order of these so that its possible to select DBEpisodes without DBOnlineEpisodes
                 // - SQLite dosen't fully support right joins so we have to reverse the table order
-                first = new DBEpisode();
+                first = new DBMovie();
                 second = new DBOnlineEpisode();
             } else {
                 first = new DBOnlineEpisode();
-                second = new DBEpisode();
+                second = new DBMovie();
             }
 
             string orderBy = string.Empty;
@@ -1437,10 +1425,10 @@ namespace MyFilmsPlugin.MyFilms
                 orderBy = " order by " + ordercol.Replace(".", "") + (orderBy.Contains(" desc ") ? " desc " : " asc ");
             }
 
-            sqlQuery = sqlWhat + " left join " + second.m_tableName + " on (" + DBEpisode.Q(cCompositeID) + "=" + DBOnlineEpisode.Q(cCompositeID)
+            sqlQuery = sqlWhat + " left join " + second.m_tableName + " on (" + DBMovie.Q(cCompositeID) + "=" + DBOnlineEpisode.Q(cCompositeID)
                 + ") " + conditionsFirst
                 + " union ";
-            sqlQuery += sqlWhat + " left join " + second.m_tableName + " on (" + DBEpisode.Q(cCompositeID2) + "=" + DBOnlineEpisode.Q(cCompositeID)
+            sqlQuery += sqlWhat + " left join " + second.m_tableName + " on (" + DBMovie.Q(cCompositeID2) + "=" + DBOnlineEpisode.Q(cCompositeID)
                 + ") " + conditionsSecond + orderBy + conditions.limitString;
             
             return sqlQuery;
@@ -1451,7 +1439,7 @@ namespace MyFilmsPlugin.MyFilms
         /// <summary>
         /// returns the 3 most recent episodes based on criteria
         /// </summary>        
-        public static List<DBEpisode> GetMostRecent(MostRecentType type)
+        public static List<DBMovie> GetMostRecent(MostRecentType type)
         {
             return GetMostRecent(type, 30, 3);
         }
@@ -1462,7 +1450,7 @@ namespace MyFilmsPlugin.MyFilms
         /// <param name="type">most recent type</param>
         /// <param name="days">number of days to look back in database</param>
         /// <param name="limit">number of results to return</param>        
-        public static List<DBEpisode> GetMostRecent(MostRecentType type, int days, int limit)
+        public static List<DBMovie> GetMostRecent(MostRecentType type, int days, int limit)
         {
             return GetMostRecent(type, days, limit, false);
         }
@@ -1474,7 +1462,7 @@ namespace MyFilmsPlugin.MyFilms
         /// <param name="days">number of days to look back in database</param>
         /// <param name="limit">number of results to return</param>
         /// <param name="unwatched">only get unwatched episodes (only used with recent added type)</param>
-        public static List<DBEpisode> GetMostRecent(MostRecentType type, int days, int limit, bool unwatchedOnly)
+        public static List<DBMovie> GetMostRecent(MostRecentType type, int days, int limit, bool unwatchedOnly)
         {
             // Create Time Span to lookup most recents
             DateTime dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
@@ -1486,26 +1474,26 @@ namespace MyFilmsPlugin.MyFilms
             switch (type)
             {
                 case MostRecentType.Created:
-                    condition.Add(new DBEpisode(), DBEpisode.cFileDateCreated, date, SQLConditionType.GreaterEqualThan);                    
+                    condition.Add(new DBMovie(), DBMovie.cFileDateCreated, date, SQLConditionType.GreaterEqualThan);                    
                     if (unwatchedOnly)
                     {
                         condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cWatched, 1, SQLConditionType.NotEqual);
                     }
-                    condition.AddOrderItem(DBEpisode.Q(DBEpisode.cFileDateCreated), SQLCondition.orderType.Descending);
+                    condition.AddOrderItem(DBMovie.Q(DBMovie.cFileDateCreated), SQLCondition.orderType.Descending);
                     break;
 
                 case MostRecentType.Added:
-                    condition.Add(new DBEpisode(), DBEpisode.cFileDateAdded, date, SQLConditionType.GreaterEqualThan);
+                    condition.Add(new DBMovie(), DBMovie.cFileDateAdded, date, SQLConditionType.GreaterEqualThan);
                     if (unwatchedOnly)
                     {
                         condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cWatched, 1, SQLConditionType.NotEqual);
                     }
-                    condition.AddOrderItem(DBEpisode.Q(cFileDateAdded), SQLCondition.orderType.Descending);
+                    condition.AddOrderItem(DBMovie.Q(cFileDateAdded), SQLCondition.orderType.Descending);
                     break;               
 
                 case MostRecentType.Watched:
-                    condition.Add(new DBEpisode(), DBEpisode.cDateWatched, date, SQLConditionType.GreaterEqualThan);
-                    condition.AddOrderItem(DBEpisode.Q(DBEpisode.cDateWatched), SQLCondition.orderType.Descending);
+                    condition.Add(new DBMovie(), DBMovie.cDateWatched, date, SQLConditionType.GreaterEqualThan);
+                    condition.AddOrderItem(DBMovie.Q(DBMovie.cDateWatched), SQLCondition.orderType.Descending);
                     break;
             }
             
@@ -1515,16 +1503,16 @@ namespace MyFilmsPlugin.MyFilms
             return Get(condition, false);
         }        
         #endregion
-        public static List<DBEpisode> GetAll()
+        public static List<DBMovie> GetAll()
         {
             return Get(new SQLCondition(), true);
         }
 
-        public static List<DBEpisode> Get(int nSeriesID)
+        public static List<DBMovie> Get(int nSeriesID)
         {
             return Get(nSeriesID, true);
         }
-        public static List<DBEpisode> Get(int nSeriesID, bool inclStdCond)
+        public static List<DBMovie> Get(int nSeriesID, bool inclStdCond)
         {
             SQLCondition conditions = new SQLCondition();
             conditions.Add(new DBOnlineEpisode(), cSeriesID, nSeriesID, SQLConditionType.Equal);
@@ -1532,11 +1520,11 @@ namespace MyFilmsPlugin.MyFilms
             return Get(conditions, inclStdCond);
         }
 
-        public static List<DBEpisode> Get(int nSeriesID, int nSeasonIndex)
+        public static List<DBMovie> Get(int nSeriesID, int nSeasonIndex)
         {
             return Get(nSeriesID, nSeasonIndex, true);
         }
-        public static List<DBEpisode> Get(int nSeriesID, int nSeasonIndex, bool includeStdCond)
+        public static List<DBMovie> Get(int nSeriesID, int nSeasonIndex, bool includeStdCond)
         {
             SQLCondition conditions = new SQLCondition();
             conditions.Add(new DBOnlineEpisode(), cSeriesID, nSeriesID, SQLConditionType.Equal);
@@ -1545,30 +1533,30 @@ namespace MyFilmsPlugin.MyFilms
             return Get(conditions, includeStdCond);
         }
 
-        public static List<DBEpisode> Get(SQLCondition conditions)
+        public static List<DBMovie> Get(SQLCondition conditions)
         {
             return Get(conditions, true);
         }
 
-        public static List<DBEpisode> Get(SQLCondition conditions, bool includeStdCond)
+        public static List<DBMovie> Get(SQLCondition conditions, bool includeStdCond)
         {
             return Get(stdGetSQL(conditions, true, includeStdCond, false));
         }
 
-        public static List<DBEpisode> Get(SQLCondition conditions, bool includeStdCond, bool reverseJoin)
+        public static List<DBMovie> Get(SQLCondition conditions, bool includeStdCond, bool reverseJoin)
         {
             return Get(stdGetSQL(conditions, true, includeStdCond, reverseJoin));
         }
 
-        public static List<DBEpisode> Get(string query)
+        public static List<DBMovie> Get(string query)
         {
             SQLiteResultSet results = DBTVSeries.Execute(query);
-            List<DBEpisode> outList = new List<DBEpisode>();
+            List<DBMovie> outList = new List<DBMovie>();
             if (results.Rows.Count > 0)
             {
                 for (int index = 0; index < results.Rows.Count; index++)
                 {
-                    DBEpisode episode = new DBEpisode();
+                    DBMovie episode = new DBMovie();
                     episode.Read(results.Rows[index], results.ColumnIndices);
                     episode.m_onlineEpisode = new DBOnlineEpisode();
                     episode.m_onlineEpisode.Read(results.Rows[index], results.ColumnIndices);
@@ -1585,13 +1573,13 @@ namespace MyFilmsPlugin.MyFilms
         public override string ToString()
         {
             if (this.m_onlineEpisode != null) return m_onlineEpisode.ToString();
-            DBSeries s = Helper.getCorrespondingSeries(this[DBEpisode.cSeriesID]);
-            return string.Format("{0} - {1}x{2}", (s == null ? "(" + this[DBEpisode.cSeriesID] + ")" : s.ToString()), this[DBEpisode.cSeasonIndex], this[DBEpisode.cEpisodeIndex]);
+            DBSeries s = Helper.getCorrespondingSeries(this[DBMovie.cSeriesID]);
+            return string.Format("{0} - {1}x{2}", (s == null ? "(" + this[DBMovie.cSeriesID] + ")" : s.ToString()), this[DBMovie.cSeasonIndex], this[DBMovie.cEpisodeIndex]);
         }
 
         public static void Clear(SQLCondition conditions)
         {
-            Clear(new DBEpisode(), conditions);
+            Clear(new DBMovie(), conditions);
         }
 
         public static void GlobalSet(String sKey, DBValue Value)
@@ -1602,7 +1590,7 @@ namespace MyFilmsPlugin.MyFilms
         public static void GlobalSet(String sKey, DBValue Value, SQLCondition condition)
         {
             GlobalSet(new DBOnlineEpisode(), sKey, Value, condition);
-            GlobalSet(new DBEpisode(), sKey, Value, condition);
+            GlobalSet(new DBMovie(), sKey, Value, condition);
         }
 
         public static new String Q(String sField)
@@ -1632,9 +1620,9 @@ namespace MyFilmsPlugin.MyFilms
         }
         #endregion
 
-        #region IEquatable<DBEpisode> Members
+        #region IEquatable<DBMovie> Members
 
-        public bool Equals(DBEpisode other)
+        public bool Equals(DBMovie other)
         {
             bool result = false;
 
@@ -1644,37 +1632,6 @@ namespace MyFilmsPlugin.MyFilms
             }
 
             return result;
-        }
-
-        #endregion
-
-        #region IComparable<DBEpisode> Members
-
-        public int CompareTo(DBEpisode other)
-        {
-            return getRelSortingIndexOfEp(this).CompareTo(getRelSortingIndexOfEp(other));
-        }
-
-        double getRelSortingIndexOfEp(DBEpisode ep)
-        {
-            // consider episode sort order when sorting
-            DBSeries series = Helper.getCorrespondingSeries(int.Parse(ep[DBOnlineEpisode.cSeriesID]));
-            bool SortByDVD = series[DBOnlineSeries.cEpisodeSortOrder] == "DVD";
-
-            string seasonIndex = SortByDVD ? DBOnlineEpisode.cCombinedSeason : DBOnlineEpisode.cSeasonIndex;
-            string episodeIndex = SortByDVD ? DBOnlineEpisode.cCombinedEpisodeNumber : DBOnlineEpisode.cEpisodeIndex;
-
-            if (ep[seasonIndex] == 0)
-            {
-                if (ep[DBOnlineEpisode.cAirsAfterSeason] != string.Empty && ep[DBOnlineEpisode.cAirsBeforeEpisode] == string.Empty)
-                {
-                    return 9999 + ep[episodeIndex];
-                }
-                else
-                    return ((int)ep[DBOnlineEpisode.cAirsBeforeEpisode]) - 0.9 + (((int)ep[episodeIndex]) / 100f) + (ep[DBOnlineEpisode.cAirsBeforeSeason] * 100);
-            }
-            else
-                return (double)ep[episodeIndex] + ep[seasonIndex] * 100;
         }
 
         #endregion

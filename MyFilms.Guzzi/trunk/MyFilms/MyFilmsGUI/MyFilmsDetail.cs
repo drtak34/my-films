@@ -59,6 +59,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
+  using MediaInfo = MyFilmsPlugin.MyFilms.Utils.MediaInfo;
   using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
 
     /// <summary>
@@ -920,6 +921,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       choiceViewMenu.Add("fileselect");
                     }
 
+                    if (ExtendedStartmode("Details context: update mediainfos"))
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798708)); //update mediainfos
+                      choiceViewMenu.Add("updmediainfos");
+                    }
+
                     //No more needed because of updproperties !!! - so discussion about removal?
                     if (StrUpdItem1 != "(none)")
                     {
@@ -1249,6 +1256,150 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         afficher_detail(true);
                     }
                     break;
+
+                case "updmediainfos":
+                {
+                  string FileDate = string.Empty;
+                  string VideoPlaytime = string.Empty;
+                  string VideoCodec = string.Empty;
+                  string VideoFormat = string.Empty;
+                  string VideoFormatProfile = string.Empty;
+                  string VideoBitRate = string.Empty;
+                  string VideoFrameRate = string.Empty;
+                  string VideoWidth = string.Empty;
+                  string VideoHeight = string.Empty;
+                  string VideoAspectRatio = string.Empty;
+
+                  string AudioCodec = string.Empty;
+                  string AudioFormat = string.Empty;
+                  string AudioFormatProfile = string.Empty;
+                  string AudioBitrate = string.Empty;
+                  string AudioChannels = string.Empty;
+                  string AudioTracks = string.Empty;
+
+                  string TextCount = string.Empty;
+
+                  long TotalSize = 0;
+                  int TotalRuntime = 0;
+
+                  string source = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                  string[] files = source.Split(new Char[] { ';' });
+
+                  foreach (string file in files)
+                  {
+                    LogMyFilms.Debug("Mediainfo - Filename: '" + file + "'");
+                    if (System.IO.File.Exists(file))
+                    {
+                      // Get File Date Added/Created
+                      FileDate = GetFileTimeStamps(file);
+                      LogMyFilms.Debug("Mediainfo - FileDate: '" + FileDate + "'");
+
+                      System.IO.FileInfo fi = new System.IO.FileInfo(file);
+                      TotalSize += fi.Length;
+
+                      // ReadMediaInfo(file, ref mediainfo);
+                      MediaInfo mediainfo = MediaInfo.GetInstance();
+
+                      // MediaInfo Object could not be created
+                      if (null == mediainfo) 
+                        return;
+
+                      // Check if File Exists and is not an Image type e.g. ISO (we can't extract mediainfo from that)
+                      if (System.IO.File.Exists(file) && !Helper.IsImageFile(file))
+                      {
+                        try
+                        {
+                          LogMyFilms.Debug("Attempting to read Mediainfo for ", file.ToString());
+
+                          // open file in MediaInfo
+                          mediainfo.Open(file);
+
+                          // check number of failed attempts at mediainfo extraction                    
+                          int noAttempts = 0;
+
+                          // Get Playtime (runtime)
+                          string result = mediainfo.VideoPlaytime;
+
+                          string LocalPlaytime = result != "-1" ? result : noAttempts.ToString();
+
+                          VideoPlaytime = mediainfo.VideoPlaytime;
+                          LogMyFilms.Debug("Mediainfo - VideoPlaytime: '" + VideoPlaytime + "'");
+                          TotalRuntime += Int32.Parse(VideoPlaytime);
+
+                          VideoCodec = mediainfo.VideoCodec;
+                          LogMyFilms.Debug("Mediainfo - Videocodec: '" + VideoCodec + "'");
+                          VideoFormat = mediainfo.VideoCodecFormat;
+                          LogMyFilms.Debug("Mediainfo - VideoCodecFormat: '" + VideoFormat + "'");
+                          VideoFormatProfile = mediainfo.VideoFormatProfile;
+                          LogMyFilms.Debug("Mediainfo - VideoFormatProfile: '" + VideoFormatProfile + "'");
+                          VideoBitRate = mediainfo.VideoBitrate;
+                          LogMyFilms.Debug("Mediainfo - VideoBitrate: '" + VideoBitRate + "'");
+                          VideoFrameRate = mediainfo.VideoFramesPerSecond;
+                          LogMyFilms.Debug("Mediainfo - VideoFramesPerSecond: '" + VideoFrameRate + "'");
+                          VideoWidth = mediainfo.VideoWidth;
+                          LogMyFilms.Debug("Mediainfo - VideoWidth: '" + VideoWidth + "'");
+                          VideoHeight = mediainfo.VideoHeight;
+                          LogMyFilms.Debug("Mediainfo - VideoHeight: '" + VideoHeight + "'");
+                          VideoAspectRatio = mediainfo.VideoAspectRatio;
+                          LogMyFilms.Debug("Mediainfo - VideoAspectRatio: '" + VideoAspectRatio + "'");
+
+                          AudioCodec = mediainfo.AudioCodec;
+                          LogMyFilms.Debug("Mediainfo - AudioCodec: '" + AudioCodec + "'");
+                          AudioFormat = mediainfo.AudioCodecFormat;
+                          LogMyFilms.Debug("Mediainfo - AudioCodecFormat: '" + AudioFormat + "'");
+                          AudioFormatProfile = mediainfo.AudioFormatProfile;
+                          LogMyFilms.Debug("Mediainfo - AudioFormatProfile: '" + AudioFormatProfile + "'");
+                          AudioBitrate = mediainfo.AudioBitrate;
+                          LogMyFilms.Debug("Mediainfo - AudioBitrate: '" + AudioBitrate + "'");
+                          AudioChannels = mediainfo.AudioChannelCount;
+                          LogMyFilms.Debug("Mediainfo - AudioChannelCount: '" + AudioChannels + "'");
+                          AudioTracks = mediainfo.AudioStreamCount;
+                          LogMyFilms.Debug("Mediainfo - AudioStreamCount: '" + AudioTracks + "'");
+
+                          TextCount = mediainfo.SubtitleCount;
+                          LogMyFilms.Debug("Mediainfo - SubtitleCount: '" + TextCount + "'");
+
+                          // MediaInfo cleanup
+                          mediainfo.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                          LogMyFilms.Debug("Error reading MediaInfo: ", ex.Message);
+                        }
+
+                      }
+                      LogMyFilms.Debug("File '" + file + "' does not exist or is an image file");
+
+
+                    }
+                    else
+                      LogMyFilms.Debug("Mediainfo - File '" + file + "' does not exist !");
+                  }
+                  int size = (int)(TotalSize / 1024 / 1024);
+                  string strSize = string.Format("{0}", size);
+                  //string humanKBSize = string.Format("{0} KB", size);
+                  //string humanMBSize = string.Format("{0} MB", size / 1024);
+                  //string humanGBSize = string.Format("{0} GB", size / 1024 / 1024);
+                  LogMyFilms.Debug("Mediainfo - TotalSize: '" + strSize + "'");
+                  LogMyFilms.Debug("Mediainfo - TotalRuntime: '" + TotalRuntime.ToString() + "'");
+
+                  //MyFilms.r[MyFilms.conf.StrIndex]["Length"] = TotalRuntime.ToString();
+                  //MyFilms.r[MyFilms.conf.StrIndex]["VideoFormat"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["VideoBitrate"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["AudioFormat"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["AudioBitrate"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["Resolution"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["Framerate"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["Languages"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["Subtitles"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["DateAdded"] = string.Empty;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["Size"] = string.Format("{0}", size); ;
+                  //MyFilms.r[MyFilms.conf.StrIndex]["Disks"] = split.Count().ToString();
+                  //MyFilms.r[MyFilms.conf.StrIndex]["Aspectratio"] = string.Empty;
+                  //Update_XML_database();
+                  //afficher_detail(true);
+                }
+                break;
 
                 case "grabber":
                     bool wChooseScript = MyFilms.conf.StrGrabber_ChooseScript;
@@ -6821,6 +6972,179 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         return MyFilms.currentMovie;
       }
+
+      public bool ReadMediaInfo(string file, ref MediaInfo mediainfo)
+      {
+        MediaInfo MI = MediaInfo.GetInstance();
+
+        // MediaInfo Object could not be created
+        if (null == MI) return false;
+
+        // Check if File Exists and is not an Image type e.g. ISO (we can't extract mediainfo from that)
+        if (System.IO.File.Exists(file) && !Helper.IsImageFile(file))
+        {
+          try
+          {
+            LogMyFilms.Debug("Attempting to read Mediainfo for ", file.ToString());
+
+            // open file in MediaInfo
+            MI.Open(file);
+
+            // check number of failed attempts at mediainfo extraction                    
+            int noAttempts = 0;
+
+            // Get Playtime (runtime)
+            string result = MI.VideoPlaytime;
+            mediainfo = MI;
+
+            string LocalPlaytime = result != "-1" ? result : noAttempts.ToString();
+
+            bool failed = false;
+            if (result != "-1")
+            {
+              string VideoCodec = MI.VideoCodec;
+              string VideoFormat = MI.VideoCodecFormat;
+              string VideoFormatProfile = MI.VideoFormatProfile;
+              string VideoBitRate = MI.VideoBitrate;
+              string VideoFrameRate = MI.VideoFramesPerSecond;
+              string VideoWidth = MI.VideoWidth;
+              string VideoHeight = MI.VideoHeight;
+              string VideoAspectRatio = MI.VideoAspectRatio;
+
+              string AudioCodec = MI.AudioCodec;
+              string AudioFormat = MI.AudioCodecFormat;
+              string AudioFormatProfile = MI.AudioFormatProfile;
+              string AudioBitrate = MI.AudioBitrate;
+              string AudioChannels = MI.AudioChannelCount;
+              string AudioTracks = MI.AudioStreamCount;
+
+              string TextCount = MI.SubtitleCount;
+
+              // check for subtitles in mediainfo
+              List<string> files = new List<string>();
+              files.Add(file);
+              bool AvailableSubtitles = checkHasSubtitles(files, true);
+            }
+            else
+              failed = true;
+
+            // MediaInfo cleanup
+            MI.Close();
+
+            if (failed)
+            {
+              // Get number of retries left to report to user
+              int retries = 3 - (noAttempts * -1);
+
+              string retriesLeft = retries > 0 ? retries.ToString() : "No";
+              retriesLeft = string.Format("Problem parsing MediaInfo for: {0}, ({1} retries left)", file.ToString(), retriesLeft);
+
+              LogMyFilms.Debug(retriesLeft);
+            }
+            else
+            {
+              LogMyFilms.Debug("Succesfully read MediaInfo for ", file.ToString());
+            }
+            return true;
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("Error reading MediaInfo: ", ex.Message);
+          }
+
+        }
+        LogMyFilms.Debug("File '" + file + "' does not exist or is an image file");
+        return false;
+
+      }
+
+      private string GetFileTimeStamps(string file)
+      {
+        try
+        {
+          if (System.IO.File.Exists(file))
+          {
+            string FileDateCreated = System.IO.File.GetCreationTime(file).ToString("yyyy-MM-dd HH:mm:ss");
+            return FileDateCreated;
+          }
+        }
+        catch
+        {
+          LogMyFilms.Debug("Error: Unable to extract File Timestamps");
+          string FileDateNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+          return FileDateNow;
+        }
+        return string.Empty;
+      }
+
+      public bool checkHasLocalSubtitles(List<string> filenames)
+      {
+        return checkHasSubtitles(filenames, false);
+      }
+
+      public bool checkHasSubtitles(List<string> filenames, bool useMediaInfo)
+      {
+        if (filenames.Count == 0) 
+          return false;
+
+        int textCount = -1;
+        if (useMediaInfo)
+        {
+          textCount = 0;
+        }
+
+        if (Helper.IsSubCentralAvailableAndEnabled)
+        {
+          return checkHasSubtitlesFromSubCentral(filenames, useMediaInfo, textCount);
+        }
+
+        if (textCount > 0)
+          return true;
+        return false;
+      }
+
+      private bool checkHasSubtitlesFromSubCentral(List<string> files, bool useMediaInfo, int textCount)
+      {
+        LogMyFilms.Debug(string.Format("Using SubCentral for checkHasSubtitles(), useMediaInfo = {0}, textCount = {1}", useMediaInfo.ToString(), textCount.ToString()));
+        List<FileInfo> fiFiles = new List<FileInfo>();
+        foreach (string file in files)
+        {
+          fiFiles.Add(new FileInfo(file));
+        }
+        bool result = SubCentral.Utils.SubCentralUtils.MediaHasSubtitles(fiFiles, false, textCount, !useMediaInfo);
+        LogMyFilms.Debug(string.Format("SubCentral returned {0}", result));
+        return result;
+      }
+
+      bool isWritable(FileInfo fileInfo)
+      {
+        FileStream stream = null;
+        try
+        {
+          stream = fileInfo.Open(FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+        }
+        catch
+        {
+          return true;
+        }
+        finally
+        {
+          if (stream != null) stream.Close();
+        }
+        return false;
+      }
+
+      public bool isWritable(string file)
+      {
+        if (string.IsNullOrEmpty(file)) return false;
+        FileInfo fi = new FileInfo(file);
+        if (fi != null)
+        {
+          return isWritable(fi);
+        }
+        return false;
+      }
+
 
     }
 

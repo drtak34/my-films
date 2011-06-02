@@ -1,14 +1,15 @@
 ﻿namespace MyFilmsPlugin.MyFilms
 {
-    
-    
-    public partial class AntMovieCatalog {
+  // using System.Data;
+
+  public partial class AntMovieCatalog {
       partial class ContentsDataTable
       {
       }
   
       partial class MovieDataTable
       {
+        // DataView exportmovies = new DataView();
       }
 
       partial class PersonDataTable

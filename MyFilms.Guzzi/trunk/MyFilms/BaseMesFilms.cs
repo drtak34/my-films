@@ -223,7 +223,7 @@ namespace MyFilmsPlugin.MyFilms
               string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
               string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
               string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
-              LogMyFilms.Debug("GetMovies: Config = '" + config + "', TraktEnabled = '" + TraktEnabled + "', Catalogfile = '" + Catalog + "'");
+              LogMyFilms.Debug("GetMovies: TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
               if (System.IO.File.Exists(Catalog) && TraktEnabled)
               {
                 try

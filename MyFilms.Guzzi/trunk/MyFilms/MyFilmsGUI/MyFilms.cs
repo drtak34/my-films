@@ -1078,7 +1078,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //    if (dlg.SelectedId == -1) return;
 
     //    #region Selected Menu Item Actions
-    //    List<DBEpisode> episodeList = new List<DBEpisode>();
+    //    List<DBMovie> episodeList = new List<DBMovie>();
     //    SQLCondition conditions = null;
 
     //    switch (dlg.SelectedId)
@@ -1089,12 +1089,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //        if (selectedEpisode != null)
     //        {
     //          bool watched = selectedEpisode[DBOnlineEpisode.cWatched];
-    //          if (selectedEpisode[DBEpisode.cFilename].ToString().Length > 0)
+    //          if (selectedEpisode[DBMovie.cFilename].ToString().Length > 0)
     //          {
     //            conditions = new SQLCondition();
-    //            conditions.Add(new DBEpisode(), DBEpisode.cFilename, selectedEpisode[DBEpisode.cFilename], SQLConditionType.Equal);
-    //            List<DBEpisode> episodes = DBEpisode.Get(conditions, false);
-    //            foreach (DBEpisode episode in episodes)
+    //            conditions.Add(new DBMovie(), DBMovie.cFilename, selectedEpisode[DBMovie.cFilename], SQLConditionType.Equal);
+    //            List<DBMovie> episodes = DBMovie.Get(conditions, false);
+    //            foreach (DBMovie episode in episodes)
     //            {
     //              episode[DBOnlineEpisode.cWatched] = !watched;
     //              episode[DBOnlineEpisode.cTraktSeen] = watched ? 2 : 0;
@@ -1138,11 +1138,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //          conditions.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeasonIndex, selectedSeason[DBSeason.cIndex], SQLConditionType.Equal);
     //        }
 
-    //        episodeList = DBEpisode.Get(conditions, true);
+    //        episodeList = DBMovie.Get(conditions, true);
 
     //        // reset traktSeen flag for later synchronization 
     //        // and set watched state
-    //        foreach (DBEpisode episode in episodeList)
+    //        foreach (DBMovie episode in episodeList)
     //        {
     //          episode[DBOnlineEpisode.cWatched] = 1;
     //          episode[DBOnlineEpisode.cTraktSeen] = 0;
@@ -1184,11 +1184,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //          conditions.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeasonIndex, selectedSeason[DBSeason.cIndex], SQLConditionType.Equal);
     //        }
 
-    //        episodeList = DBEpisode.Get(conditions, true);
+    //        episodeList = DBMovie.Get(conditions, true);
 
     //        // set traktSeen flag and watched state
     //        // when traktSeen = 2, the seen flag will be removed from trakt
-    //        foreach (DBEpisode episode in episodeList)
+    //        foreach (DBMovie episode in episodeList)
     //        {
     //          episode[DBOnlineEpisode.cWatched] = 0;
     //          episode[DBOnlineEpisode.cTraktSeen] = 2;
@@ -1255,8 +1255,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //        {
     //          // clear the series
     //          SQLCondition condition = new SQLCondition();
-    //          condition.Add(new DBEpisode(), DBEpisode.cSeriesID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
-    //          DBEpisode.Clear(condition);
+    //          condition.Add(new DBMovie(), DBMovie.cSeriesID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
+    //          DBMovie.Clear(condition);
     //          condition = new SQLCondition();
     //          condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeriesID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
     //          DBOnlineEpisode.Clear(condition);
@@ -1286,7 +1286,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //        {
     //          if (selectedEpisode != null)
     //          {
-    //            DBEpisode episode = (DBEpisode)currentitem.TVTag;
+    //            DBMovie episode = (DBMovie)currentitem.TVTag;
     //            ShowSubtitleMenu(episode);
     //          }
     //        }
@@ -1355,11 +1355,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //            LoadFacade();
     //            break;
     //          case Listlevel.Season:
-    //            foreach (DBEpisode ep in DBEpisode.Get(m_SelectedSeason[DBSeason.cSeriesID], m_SelectedSeason[DBSeason.cIndex], false))
+    //            foreach (DBMovie ep in DBMovie.Get(m_SelectedSeason[DBSeason.cSeriesID], m_SelectedSeason[DBSeason.cIndex], false))
     //              ep.ReadMediaInfo();
     //            break;
     //          case Listlevel.Series:
-    //            foreach (DBEpisode ep in DBEpisode.Get((int)m_SelectedSeries[DBSeries.cID], false))
+    //            foreach (DBMovie ep in DBMovie.Get((int)m_SelectedSeries[DBSeries.cID], false))
     //              ep.ReadMediaInfo();
     //            break;
     //        }
@@ -9010,7 +9010,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //          ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.SetFacadeMode, 0, GUIFacadeControl.Layout.List);
 
     //          // Get a list of Episodes to display for current view							
-    //          List<DBEpisode> episodesToDisplay = m_CurrLView.getEpisodeItems(m_CurrViewStep, m_stepSelection);
+    //          List<DBMovie> episodesToDisplay = m_CurrLView.getEpisodeItems(m_CurrViewStep, m_stepSelection);
 
     //          // Update Filtered Episode Count Property, this acurately displays the number of items on the facade
     //          // #TVSeries.Series.EpisodeCount is not desirable in some views e.g. Recently Added or views that filter by episode fields
@@ -9026,7 +9026,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //          if (episodesToDisplay.Count == 0)
     //            bFacadeEmpty = true;
 
-    //          foreach (DBEpisode episode in episodesToDisplay)
+    //          foreach (DBMovie episode in episodesToDisplay)
     //          {
     //            try
     //            {
@@ -9046,7 +9046,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //              item.IsPlayed = false;
 
     //              // Set IsRemote property to true, if the episode is not local on disk                                    
-    //              if (episode[DBEpisode.cFilename].ToString().Length == 0 || episode[DBEpisode.cIsAvailable] == 0)
+    //              if (episode[DBMovie.cFilename].ToString().Length == 0 || episode[DBMovie.cIsAvailable] == 0)
     //              {
     //                item.IsRemote = true;
     //              }
@@ -9074,7 +9074,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //              if (m_SelectedEpisode != null)
     //              {
-    //                if (episode[DBEpisode.cCompositeID] == m_SelectedEpisode[DBEpisode.cCompositeID])
+    //                if (episode[DBMovie.cCompositeID] == m_SelectedEpisode[DBMovie.cCompositeID])
     //                {
     //                  if (!episode[DBOnlineEpisode.cWatched])
     //                  {
@@ -9097,14 +9097,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //              else
     //              {
     //                // select the first that has a file and is not watched
-    //                if (selectedIndex == -1 && episode[DBOnlineEpisode.cWatched] == 0 && episode[DBEpisode.cFilename].ToString().Length > 0)
+    //                if (selectedIndex == -1 && episode[DBOnlineEpisode.cWatched] == 0 && episode[DBMovie.cFilename].ToString().Length > 0)
     //                  selectedIndex = count;
     //              }
 
     //              // show watched flag image if skin supports it
     //              // this should take precedence over least used option for appending logo/ep thumb
     //              bool bWatched = episode[DBOnlineEpisode.cWatched];
-    //              bool bAvailable = episode[DBEpisode.cFilename].ToString().Length > 0;
+    //              bool bAvailable = episode[DBMovie.cFilename].ToString().Length > 0;
 
     //              if (!LoadWatchedFlag(item, bWatched, bAvailable))
     //              {
