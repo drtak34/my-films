@@ -4856,13 +4856,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Artistcontext
       if (facadeView.SelectedListItemIndex > -1 && facadeView.SelectedListItem.IsFolder && (conf.WStrSort.ToLower().Contains("actor") || conf.WStrSort.ToLower().Contains("director") || conf.WStrSort.ToLower().Contains("producer")))
       {
-        //if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person locally (load persons detailscreen or load facade with filmlists of actor")) // check if specialmode is configured for disabled features
-        //{
+        if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
+        {
           dlg.Add(GUILocalizeStrings.Get(1079884));
           //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
           upd_choice[ichoice] = "artistdetail";
           ichoice++;
-        //}
+        }
 
         dlg.Add(GUILocalizeStrings.Get(1079886));//Show IMDB internetinfos http://www.imdb.com/name/nm0000288/
         upd_choice[ichoice] = "artistimdbinternet";
@@ -5740,8 +5740,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         catch (Exception)
         { }
 
-        dlg.Add(GUILocalizeStrings.Get(10798731) + " (" + actorList.Count.ToString() + ")");
-        choiceSearch.Add("PersonInfo");
+        if (MyFilmsDetail.ExtendedStartmode("relatedpersonsearch: add person option to dialog menu for personinfodialog"))
+        {
+          dlg.Add(GUILocalizeStrings.Get(10798731) + " (" + actorList.Count.ToString() + ")");
+          choiceSearch.Add("PersonInfo");
+        }
       }
 
       MyFilms._rw.EnterReadLock();
