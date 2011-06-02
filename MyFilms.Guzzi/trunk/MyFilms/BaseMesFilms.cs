@@ -412,6 +412,8 @@ namespace MyFilmsPlugin.MyFilms
     private float _mFRating;
     private bool _mIWatched;
     private string _mDateAdded = string.Empty;
+    private string _mPicture = string.Empty;
+    private string _mFanart = string.Empty;
 
     public MFMovie() { }
 
@@ -487,6 +489,18 @@ namespace MyFilmsPlugin.MyFilms
       set { _mDateAdded = value; }
     }
 
+    public string Picture
+    {
+      get { return _mPicture; }
+      set { _mPicture = value; }
+    }
+
+    public string Fanart
+    {
+      get { return _mFanart; }
+      set { _mFanart = value; }
+    }
+
     public void Reset()
     {
       _mStrTitle = string.Empty;
@@ -496,6 +510,8 @@ namespace MyFilmsPlugin.MyFilms
       _mFRating = 0.0f;
       _mIWatched = false;
       _mDateAdded = string.Empty;
+      _mPicture = string.Empty;
+      _mFanart = string.Empty;
     }
   }
 }

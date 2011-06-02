@@ -356,6 +356,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
 
             afficher_detail(true);
+
             MyFilms.conf.LastID = MyFilms.ID_MyFilmsDetail;
 
             setProcessAnimationStatus(false, m_SearchAnimation);
@@ -746,6 +747,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
                     choiceViewMenu.Add("fanartcovermenu");
 
+                    if (Helper.IsSubCentralAvailableAndEnabled)
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798707)); // Subtitles ...
+                      choiceViewMenu.Add("subtitles");
+                    }
+                    else LogMyFilms.Debug("Subcentral not found or wrong version - disabling context entry");
+
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
                     {
@@ -1047,6 +1055,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       return;
                     }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    break;
+
+                case "subtitles":
+                    if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() != null)
+                    {
+                      // ShowSubtitleMenu(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
+                      if (Helper.IsSubCentralAvailableAndEnabled)
+                      {
+                        GUIWindowManager.ActivateWindow(84623);
+                      }
+                    }
                     break;
 
                 case "fileselect":
@@ -3730,6 +3749,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //-----------------------------------------------------------------------------------------------------------------------
             //    Load Detailed Info
             //-----------------------------------------------------------------------------------------------------------------------
+            MyFilms.currentMovie.Reset(); // clear currentmovie
+
             if (MyFilms.conf.StrIndex > MyFilms.r.Length - 1)
                 MyFilms.conf.StrIndex = MyFilms.r.Length - 1;
             if (MyFilms.conf.StrIndex == -1)
@@ -3743,6 +3764,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 int TitlePos = (MyFilms.conf.StrTitleSelect.Length > 0) ? MyFilms.conf.StrTitleSelect.Length + 1 : 0; //only display rest of title after selected part common to group
                 MyFilms.conf.StrTIndex = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString().Substring(TitlePos);
+                MyFilms.currentMovie.Title = MyFilms.conf.StrTIndex;
                 GUIControl.ShowControl(GetID, (int)Controls.CTRL_Title);
             }
             else
@@ -3769,9 +3791,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 file = string.Empty;
             if (!System.IO.File.Exists(file))
                 file = MyFilms.conf.DefaultCover;
-            
             //Should not Disable because of SpeedThumbs - Not working here .....
             setGUIProperty("picture", file);
+            MyFilms.currentMovie.Picture = file;
             // ToDo: Add for ImageSwapper Coverart (coverImage)
             //cover.Filename = file;
 
@@ -3828,6 +3850,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIControl.ShowControl(GetID, (int)Controls.CTRL_Fanart);
                 }
             }
+            MyFilms.currentMovie.Fanart = Search_Fanart(wtitle, false, "file", false, file, string.Empty)[0]; 
+            //MyFilms.currentMovie.Fanart = wfanart[0];  
+
             if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && checkfileavailability)
             {
                 if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString().Length > 0)
@@ -4081,7 +4106,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (MyFilms.conf.Stritem3.ToLower() == (dc.ColumnName.ToLower()))
                       if (wrep)
                           {
-                            setGUIProperty("user.item3.label", MyFilms.conf.Strlabel3); // not currently used in myfilms
+                            setGUIProperty("user.item3.label", MyFilms.conf.Strlabel3);
                             if (MyFilms.conf.Stritem3.ToLower() == "date")
                                 setGUIProperty("user.item3.field", "w" + MyFilms.conf.Stritem3.ToLower());
                             else
@@ -4128,7 +4153,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                     if (wrep && (MyFilms.conf.StrStorage.ToLower() == (dc.ColumnName.ToLower())))
                     {
-                        setGUIProperty("user.source.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                      setGUIProperty("user.source.value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                      MyFilms.currentMovie.File = MyFilms.r[ItemId][dc.ColumnName].ToString();
                     }
 
                     if (wrep && (MyFilms.conf.StrStorageTrailer.ToLower() == (dc.ColumnName.ToLower())))
@@ -4166,10 +4192,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
 
                             if ((MyFilms.conf.StrTitle1.ToLower() == (dc.ColumnName.ToLower())))
-                                if (wrep)
-                                    setGUIProperty("user.mastertitle.value", wstring);
-                                    else
-                                    clearGUIProperty("user.mastertitle.value");
+                            {
+                              // MyFilms.currentMovie.Title = wstring; // already set in afficher_detail()
+                              if (wrep)
+                                setGUIProperty("user.mastertitle.value", wstring);
+                              else
+                                clearGUIProperty("user.mastertitle.value");
+                            }
                             if ((MyFilms.conf.StrTitle2.ToLower() == (dc.ColumnName.ToLower())))
                                 if (wrep)
                                     setGUIProperty("user.secondarytitle.value", wstring);
@@ -4250,8 +4279,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         case "contents_id":
                         case "dateadded":
                         case "picture":
+                            break;
                         case "fanart":
+                            if ((MyFilms.currentMovie.Fanart.Length == 0) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                              MyFilms.currentMovie.Fanart = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                            break;
                         case "imdb_id":
+                            if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                              MyFilms.currentMovie.IMDBNumber = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                            else
+                              MyFilms.currentMovie.IMDBNumber = "";
+                            break;
                         case "tmdb_id":
                         case "datewatched":
                         case "watched":
@@ -4407,6 +4445,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                                     }
                             setGUIProperty("db.calc.aspectratio.value", wstring);
                             setGUIProperty("db.calc.imageformat.value", ar);
+                            break;
+                        case "year":
+                            if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
+                            {
+                              setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
+                              MyFilms.currentMovie.Year = Int32.Parse(MyFilms.r[ItemId][dc.ColumnName].ToString());
+                            }
+                              
+                            else
+                            {
+                              setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", "");
+                              MyFilms.currentMovie.Year = 0;
+                            }
                             break;
 
                         default:
@@ -6765,9 +6816,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         return _totalMovieDuration;
       }
-    
 
-
+      public static MFMovie GetCurrentMovie()
+      {
+        return MyFilms.currentMovie;
+      }
 
     }
 

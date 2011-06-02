@@ -312,6 +312,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //private string currentConfig;
     private string strPluginName = "MyFilms";
     public static DataRow[] r; // will hold current recordset to traverse
+    public static MFMovie currentMovie = new MFMovie(); // will hold current recordset to traverse
 
     //Imageswapperdefinitions for fanart and cover
     private ImageSwapper backdrop;
