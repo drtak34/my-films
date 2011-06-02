@@ -229,7 +229,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
             get {
                 string result = this.Get(StreamKind.Video, 0, "CodecID");
-                LogMyFilms.Debug("Video Codec ID: ", result);
+                //LogMyFilms.Debug("Video Codec ID: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -239,7 +239,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             get
             {
                 string result = this.Get(StreamKind.Video, 0, "Format");
-                LogMyFilms.Debug("Video Format: ", result);
+                //LogMyFilms.Debug("Video Format: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -249,7 +249,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             get
             {
                 string result = this.Get(StreamKind.Video, 0, "Format_Profile");
-                LogMyFilms.Debug("Video Format Profile: ", result);
+                //LogMyFilms.Debug("Video Format Profile: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -257,7 +257,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string VideoBitrate{
             get {
                 string result = this.Get(StreamKind.Video, 0, "BitRate");
-                LogMyFilms.Debug("Video Bit Rate: ", result);
+                //LogMyFilms.Debug("Video Bit Rate: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -265,7 +265,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string VideoWidth {
             get {
                 string result = this.Get(StreamKind.Video, 0, "Width");
-                LogMyFilms.Debug("Video Width: ", result);
+                //LogMyFilms.Debug("Video Width: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -273,7 +273,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string VideoHeight {
             get {
                 string result = this.Get(StreamKind.Video, 0, "Height");
-                LogMyFilms.Debug("Video Height: ", result);
+                //LogMyFilms.Debug("Video Height: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -281,7 +281,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string VideoAspectRatio {
             get {
                 string result = this.Get(StreamKind.Video, 0, "DisplayAspectRatio");
-                LogMyFilms.Debug("Video Aspect Ratio: ", result);
+                //LogMyFilms.Debug("Video Aspect Ratio: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -289,7 +289,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string VideoPlaytime {
             get {
                 string result = this.Get(StreamKind.Video, 0, "Duration");
-                LogMyFilms.Debug("Video Duration: ", result);
+                //LogMyFilms.Debug("Video Duration: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -297,7 +297,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string VideoFramesPerSecond {
             get {
                 string result = this.Get(StreamKind.Video, 0, "FrameRate");
-                LogMyFilms.Debug("Video Framerate: ", result);
+                //LogMyFilms.Debug("Video Framerate: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -309,7 +309,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string AudioCodec {
             get {
                 string result = this.Get(StreamKind.Audio, 0, "CodecID");
-                LogMyFilms.Debug("Audio Codec ID: ", result);
+                //LogMyFilms.Debug("Audio Codec ID: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -319,7 +319,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             get
             {
                 string result = this.Get(StreamKind.Audio, 0, "Format");
-                LogMyFilms.Debug("Audio Format: ", result);
+                //LogMyFilms.Debug("Audio Format: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -329,7 +329,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             get
             {
                 string result = this.Get(StreamKind.Audio, 0, "Format_Profile");
-                LogMyFilms.Debug("Audio Format Profile: ", result);
+                //LogMyFilms.Debug("Audio Format Profile: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -337,7 +337,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string AudioBitrate {
             get {
                 string result = this.Get(StreamKind.Audio, 0, "BitRate");
-                LogMyFilms.Debug("Audio Bit Rate: ", result);
+                //LogMyFilms.Debug("Audio Bit Rate: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -345,7 +345,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string AudioStreamCount {
             get {
                 string result = this.Get(StreamKind.Audio, 0, "StreamCount");
-                LogMyFilms.Debug("Audio Stream Count: ", result);
+                //LogMyFilms.Debug("Audio Stream Count: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -355,7 +355,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         /// </summary>
         public string AudioChannelCount {
             get {
-                string result = GetAudioChannelCount(0);                
+                string result = GetAudioChannelCount(0);
+                //LogMyFilms.Debug("Audio Channel Count: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -367,7 +368,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string SubtitleCount {
             get {
                 string result = this.Get(StreamKind.General, 0, "TextCount");
-                LogMyFilms.Debug("Subtitle Count: ", result);
+                //LogMyFilms.Debug("Subtitle Count: ", result);
                 return result.Length > 0 ? result : "-1";
             }
         }
@@ -378,7 +379,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         public string GetAudioChannelCount(int stream) {
             string result = this.Get(StreamKind.Audio, (int)stream, "Channel(s)");
-            LogMyFilms.Debug(string.Format("Audio Channel Count [{0}]: {1}", stream.ToString(), result));
+            //LogMyFilms.Debug(string.Format("Audio Channel Count [{0}]: {1}", stream.ToString(), result));
             return result;
         }
 
