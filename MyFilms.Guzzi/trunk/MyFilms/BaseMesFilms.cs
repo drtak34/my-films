@@ -134,11 +134,10 @@ namespace MyFilmsPlugin.MyFilms
               StrSelect = "Name" + " not like ''";
               persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
               //Guzzi
-              LogMyFilms.Debug("- BaseMesFilmsPersons:  StrSelect          : '" + StrSelect + "'");
-              LogMyFilms.Debug("- BaseMesFilmsPersons:  StrSort            : '" + StrSort + "'");
-              LogMyFilms.Debug("- BaseMesFilmsPersons:  StrSortSens        : '" + StrSortSens + "'");
-              LogMyFilms.Debug(
-                "MF: - BaseMesFilmsPersons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
+              LogMyFilms.Debug("Persons:  StrSelect          : '" + StrSelect + "'");
+              LogMyFilms.Debug("Persons:  StrSort            : '" + StrSort + "'");
+              LogMyFilms.Debug("Persons:  StrSortSens        : '" + StrSortSens + "'");
+              LogMyFilms.Debug("Persons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
             }
             return persons;
         }
@@ -156,7 +155,7 @@ namespace MyFilmsPlugin.MyFilms
             }
             catch (Exception e)
             {
-              LogMyFilms.Error("MF: : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+              LogMyFilms.Error("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
               throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
             }
         }
@@ -190,6 +189,7 @@ namespace MyFilmsPlugin.MyFilms
                 dlgOk.SetLine(2, "Maybe Directory full or no write access.");
                 dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
               }
+              // data.WriteXmlSchema(@"c:\myfilms.xsd"); // this writes XML schema infos to disk
             }
           //}
         }
@@ -223,7 +223,7 @@ namespace MyFilmsPlugin.MyFilms
               string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
               string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
               string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
-              LogMyFilms.Debug("BaseMesFilms - GetMovies: catalogfile '" + Catalog + "', enabled for Trakt: '" + TraktEnabled + "'");
+              LogMyFilms.Debug("GetMovies: Config = '" + config + "', TraktEnabled = '" + TraktEnabled + "', Catalogfile = '" + Catalog + "'");
               if (System.IO.File.Exists(Catalog) && TraktEnabled)
               {
                 try
