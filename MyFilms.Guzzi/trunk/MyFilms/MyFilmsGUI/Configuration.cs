@@ -70,6 +70,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GrabberOverrideLanguage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GrabberOverrideLanguage", string.Empty);
                 GrabberOverridePersonLimit = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GrabberOverridePersonLimit", string.Empty);
                 GrabberOverrideTitleLimit = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GrabberOverrideTitleLimit", string.Empty);
+                GrabberOverrideGetRoles = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GrabberOverrideGetRoles", string.Empty);
                 PictureHandling = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PictureHandling", string.Empty);
                 ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", string.Empty);
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
@@ -820,6 +821,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return grabberOverridePersonLimit; }
           set { grabberOverridePersonLimit = value; }
+        }
+        private string grabberOverrideGetRoles = string.Empty;
+        public string GrabberOverrideGetRoles
+        {
+          get { return grabberOverrideGetRoles; }
+          set { grabberOverrideGetRoles = value; }
         }
         private string grabberOverrideTitleLimit = string.Empty;
         public string GrabberOverrideTitleLimit

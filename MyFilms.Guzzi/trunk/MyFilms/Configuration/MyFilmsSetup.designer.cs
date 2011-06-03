@@ -490,6 +490,8 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.label55 = new System.Windows.Forms.Label();
+          this.cbGrabberOverrideGetRoles = new System.Windows.Forms.ComboBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1636,7 +1638,7 @@
           this.groupBox_GrabberOptions.Controls.Add(this.label27);
           this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 3);
           this.groupBox_GrabberOptions.Name = "groupBox_GrabberOptions";
-          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 90);
+          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 94);
           this.groupBox_GrabberOptions.TabIndex = 1;
           this.groupBox_GrabberOptions.TabStop = false;
           this.groupBox_GrabberOptions.Text = "Movie Detail Internet Updates";
@@ -1663,6 +1665,8 @@
           // 
           // groupBox6
           // 
+          this.groupBox6.Controls.Add(this.cbGrabberOverrideGetRoles);
+          this.groupBox6.Controls.Add(this.label55);
           this.groupBox6.Controls.Add(this.label51);
           this.groupBox6.Controls.Add(this.cbGrabberOverrideTitleLimit);
           this.groupBox6.Controls.Add(this.label50);
@@ -1671,7 +1675,7 @@
           this.groupBox6.Controls.Add(this.cbGrabberOverrideLanguage);
           this.groupBox6.Location = new System.Drawing.Point(399, 9);
           this.groupBox6.Name = "groupBox6";
-          this.groupBox6.Size = new System.Drawing.Size(330, 77);
+          this.groupBox6.Size = new System.Drawing.Size(330, 81);
           this.groupBox6.TabIndex = 65;
           this.groupBox6.TabStop = false;
           this.groupBox6.Text = "MyFilms Grabber Override Options ...";
@@ -1680,7 +1684,7 @@
           // label51
           // 
           this.label51.AutoSize = true;
-          this.label51.Location = new System.Drawing.Point(191, 45);
+          this.label51.Location = new System.Drawing.Point(191, 58);
           this.label51.Name = "label51";
           this.label51.Size = new System.Drawing.Size(66, 13);
           this.label51.TabIndex = 68;
@@ -1699,7 +1703,7 @@
             "15",
             "20",
             "999"});
-          this.cbGrabberOverrideTitleLimit.Location = new System.Drawing.Point(276, 42);
+          this.cbGrabberOverrideTitleLimit.Location = new System.Drawing.Point(276, 55);
           this.cbGrabberOverrideTitleLimit.Name = "cbGrabberOverrideTitleLimit";
           this.cbGrabberOverrideTitleLimit.Size = new System.Drawing.Size(45, 21);
           this.cbGrabberOverrideTitleLimit.TabIndex = 67;
@@ -1709,7 +1713,7 @@
           // label50
           // 
           this.label50.AutoSize = true;
-          this.label50.Location = new System.Drawing.Point(12, 21);
+          this.label50.Location = new System.Drawing.Point(12, 22);
           this.label50.Name = "label50";
           this.label50.Size = new System.Drawing.Size(161, 13);
           this.label50.TabIndex = 66;
@@ -1718,7 +1722,7 @@
           // label49
           // 
           this.label49.AutoSize = true;
-          this.label49.Location = new System.Drawing.Point(191, 22);
+          this.label49.Location = new System.Drawing.Point(191, 36);
           this.label49.Name = "label49";
           this.label49.Size = new System.Drawing.Size(79, 13);
           this.label49.TabIndex = 65;
@@ -1737,7 +1741,7 @@
             "15",
             "20",
             "999"});
-          this.cbGrabberOverridePersonLimit.Location = new System.Drawing.Point(276, 19);
+          this.cbGrabberOverridePersonLimit.Location = new System.Drawing.Point(276, 32);
           this.cbGrabberOverridePersonLimit.Name = "cbGrabberOverridePersonLimit";
           this.cbGrabberOverridePersonLimit.Size = new System.Drawing.Size(45, 21);
           this.cbGrabberOverridePersonLimit.TabIndex = 63;
@@ -1879,9 +1883,9 @@
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
           this.groupBox_AMCupdater.Controls.Add(this.chkAMCUpd);
-          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 95);
+          this.groupBox_AMCupdater.Location = new System.Drawing.Point(6, 100);
           this.groupBox_AMCupdater.Name = "groupBox_AMCupdater";
-          this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 256);
+          this.groupBox_AMCupdater.Size = new System.Drawing.Size(735, 248);
           this.groupBox_AMCupdater.TabIndex = 2;
           this.groupBox_AMCupdater.TabStop = false;
           this.groupBox_AMCupdater.Text = "AMCUpdater Options (for global internet update functions)";
@@ -1965,9 +1969,9 @@
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDesktopIcon);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnLaunchAMCupdater);
           this.groupBox_AMCupdater_ExternalApplication.ImeMode = System.Windows.Forms.ImeMode.Off;
-          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(6, 73);
+          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(6, 70);
           this.groupBox_AMCupdater_ExternalApplication.Name = "groupBox_AMCupdater_ExternalApplication";
-          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(723, 178);
+          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(723, 173);
           this.groupBox_AMCupdater_ExternalApplication.TabIndex = 3;
           this.groupBox_AMCupdater_ExternalApplication.TabStop = false;
           this.groupBox_AMCupdater_ExternalApplication.Text = "AMC Updater external application";
@@ -1985,7 +1989,7 @@
           // btnCreateAMCDefaultConfig
           // 
           this.btnCreateAMCDefaultConfig.AllowDrop = true;
-          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 106);
+          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 102);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 29);
           this.btnCreateAMCDefaultConfig.TabIndex = 77;
@@ -1997,7 +2001,7 @@
           // lblAMCupdaterConfigPreview
           // 
           this.lblAMCupdaterConfigPreview.AutoSize = true;
-          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(196, 47);
+          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(196, 43);
           this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
           this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
           this.lblAMCupdaterConfigPreview.TabIndex = 85;
@@ -2016,7 +2020,7 @@
           // 
           this.chkAMC_Purge_Missing_Files.AutoSize = true;
           this.chkAMC_Purge_Missing_Files.ForeColor = System.Drawing.Color.Red;
-          this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(570, 42);
+          this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(570, 39);
           this.chkAMC_Purge_Missing_Files.Name = "chkAMC_Purge_Missing_Files";
           this.chkAMC_Purge_Missing_Files.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
           this.chkAMC_Purge_Missing_Files.Size = new System.Drawing.Size(135, 17);
@@ -2054,7 +2058,7 @@
           this.AMCConfigView.FullRowSelect = true;
           this.AMCConfigView.GridLines = true;
           this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.AMCConfigView.Location = new System.Drawing.Point(191, 63);
+          this.AMCConfigView.Location = new System.Drawing.Point(191, 59);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
           this.AMCConfigView.Size = new System.Drawing.Size(524, 106);
@@ -2075,7 +2079,7 @@
           // 
           // btnCreateAMCDesktopIcon
           // 
-          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(17, 141);
+          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(17, 137);
           this.btnCreateAMCDesktopIcon.Name = "btnCreateAMCDesktopIcon";
           this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(152, 28);
           this.btnCreateAMCDesktopIcon.TabIndex = 78;
@@ -2089,7 +2093,7 @@
           // 
           this.btnLaunchAMCupdater.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunchAMCupdater.Image")));
           this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 63);
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 59);
           this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
           this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 37);
           this.btnLaunchAMCupdater.TabIndex = 76;
@@ -4897,6 +4901,28 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // label55
+          // 
+          this.label55.AutoSize = true;
+          this.label55.Location = new System.Drawing.Point(191, 16);
+          this.label55.Name = "label55";
+          this.label55.Size = new System.Drawing.Size(82, 13);
+          this.label55.TabIndex = 70;
+          this.label55.Text = "Get Actor Roles";
+          // 
+          // cbGrabberOverrideGetRoles
+          // 
+          this.cbGrabberOverrideGetRoles.FormattingEnabled = true;
+          this.cbGrabberOverrideGetRoles.Items.AddRange(new object[] {
+            "true",
+            "false"});
+          this.cbGrabberOverrideGetRoles.Location = new System.Drawing.Point(276, 10);
+          this.cbGrabberOverrideGetRoles.Name = "cbGrabberOverrideGetRoles";
+          this.cbGrabberOverrideGetRoles.Size = new System.Drawing.Size(45, 21);
+          this.cbGrabberOverrideGetRoles.TabIndex = 71;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverrideGetRoles, "If checked, add Roles to actor infos.\r\nDepends on the grabber script supporting t" +
+                  "hat option.");
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5413,5 +5439,7 @@
         private TextBox txtGrabberDisplay;
         private CheckBox cbAllowTraktSync;
         private Label label52;
+        private Label label55;
+        private ComboBox cbGrabberOverrideGetRoles;
     }
 }

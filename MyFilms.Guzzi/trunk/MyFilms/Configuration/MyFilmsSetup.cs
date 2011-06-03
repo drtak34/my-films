@@ -989,6 +989,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideLanguage", cbGrabberOverrideLanguage.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverridePersonLimit", cbGrabberOverridePersonLimit.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideTitleLimit", cbGrabberOverrideTitleLimit.Text);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideGetRoles", cbGrabberOverrideGetRoles.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "PictureHandling", cbPictureHandling.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", DefaultCover.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCoverArtist", DefaultCoverArtist.Text);
@@ -1423,6 +1424,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             cbGrabberOverrideLanguage.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideLanguage", string.Empty);
             cbGrabberOverridePersonLimit.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverridePersonLimit", string.Empty);
             cbGrabberOverrideTitleLimit.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideTitleLimit", string.Empty);
+            cbGrabberOverrideGetRoles.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GrabberOverrideGetRoles", string.Empty);
 
             cbPictureHandling.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PictureHandling", "");
             DefaultCover.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "DefaultCover", "");
@@ -1721,6 +1723,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             ECMergeDestinationFieldTags.Text = string.Empty;
             ECMergeDestinationFieldCertification.Text = string.Empty;
             ECMergeDestinationFieldWriter.Text = string.Empty;
+            cbGrabberOverrideLanguage.Text = string.Empty;
+            cbGrabberOverrideTitleLimit.Text = string.Empty;
+            cbGrabberOverridePersonLimit.Text = string.Empty;
+            cbGrabberOverrideGetRoles.Text = string.Empty;
             chkDVDprofilerMergeWithGenreField.Checked = false;
             chkDVDprofilerOnlyFile.Checked = false;
             AlwaysDefaultView.Checked = false;

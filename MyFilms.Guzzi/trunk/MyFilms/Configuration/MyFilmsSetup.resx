@@ -313,11 +313,11 @@ As the dropdown only allows choosing one value, multiple values have to be enter
   <data name="groupBox6.ToolTip" xml:space="preserve">
     <value>You can set several options for the internet grabber.
 Be aware, that not all options are supported by all grabber scripts.
-However, IMDB scripts should support all options listed here.
+However, IMDB (full) script should support all options listed here.
 If you set no values, the default settings of the grabber
-will be used.
-The default settings (of the grabber script) can be changed by editing the grabber script 
-in the "MyFilms Grabber Interface" ("Edit script").
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "MyFilms Grabber Interface" ("Edit script").
 </value>
   </data>
   <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
