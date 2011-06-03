@@ -974,7 +974,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     //if (ExtendedStartmode("Details context: Change Local COver)"))
                     //{
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798762)); // Change Cover
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798762) + " (" + ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true) + ")"); // Change Cover
                     choiceViewMenu.Add("changecover");
                     //}
 
@@ -1562,7 +1562,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "changecover":
-                    ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+                    string covercount = ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, false);
                     afficher_detail(true);
                     setProcessAnimationStatus(false, m_SearchAnimation);
                     Change_Menu("fanartcovermenu"); // stay in cover toggle menu
@@ -2772,7 +2772,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Change local Cover Image
         //-------------------------------------------------------------------------------------------        
-        public static void ChangeLocalCover(DataRow[] r1, int Index, bool interactive)
+        public static string ChangeLocalCover(DataRow[] r1, int Index, bool interactive, bool onlyReturnCount)
         {
           result = new ArrayList();
           ArrayList resultsize = new ArrayList();
@@ -2792,7 +2792,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string startPattern = "";
           string currentPicture = MyFilmsDetail.getGUIProperty("picture");
           if (string.IsNullOrEmpty(currentPicture)) 
-            return;
+            return "";
           string currentPictureName = currentPicture.Substring(currentPicture.LastIndexOf("\\") + 1);
           string currentStorePath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
           string newPicture = ""; // full path to new picture
@@ -2800,7 +2800,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
           if (!currentPicture.StartsWith(currentStorePath)) 
-            return;
+            return "";
           if (currentStorePath.EndsWith("\\"))
             startPattern = "";
           else 
@@ -2836,6 +2836,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
+          if (onlyReturnCount) 
+            return result.Count.ToString();
+
           foreach (string n in filesfound)
           {
             if (!string.IsNullOrEmpty(n))
@@ -2852,7 +2855,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (result.Count > 0)
           {
             if (nCurrent == -1) 
-              return;
+              return "";
             nCurrent++;
             if (nCurrent >= result.Count) 
               nCurrent = 0;
@@ -2882,6 +2885,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
             LogMyFilms.Debug("MyFilmsDetails (LocalCoverChange) - NO COVERS FOUND !!!!");
+
+          return result.Count.ToString();
         }
         
 
