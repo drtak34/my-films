@@ -145,6 +145,8 @@ Public Class FileFolderEnum
                         _Files.Add(fi.FullName)
                         _TotalFiles += 1
                         _TotalSize += fi.Length
+                    Else
+                        LogEvent("  File Skipped - " & fi.Name, EventLogLevel.Informational)
                     End If
                 End If
             Next
@@ -160,6 +162,8 @@ Public Class FileFolderEnum
                         _TotalFolders += 1
                         GetFiles(di.FullName)
                     End If
+                Else
+                    LogEvent("  Directory skipped - " & di.Name, EventLogLevel.Informational)
                 End If
             Next
         Catch ex As Exception

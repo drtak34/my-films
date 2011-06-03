@@ -1079,7 +1079,7 @@ Public Class AntProcessor
             ds.Tables("tblFoundTrailerFiles").Clear()
         End If
 
-        Dim XMLExclTable As New Hashtable
+        Dim XMLExclTable As New Hashtable ' "always ignore" movies
         If (IO.File.Exists(CurrentSettings.Excluded_Movies_File)) Then
             Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
             Dim i As Integer = 0
@@ -1109,20 +1109,24 @@ Public Class AntProcessor
                 LogEvent("Processing Movie Folder : " & CurrentMoviePath.ToString, EventLogLevel.ImportantEvent)
                 LogEvent("---------------------------------------------------------------------------------------------------", EventLogLevel.Informational)
 
+                LogEvent("Scanning Files ...", EventLogLevel.ImportantEvent)
                 Dim blah As New FileFolderEnum()
                 'blah.Root = CurrentMoviePath
                 blah.ExcludedFiles = CurrentSettings.Excluded_File_Strings
                 blah.ExcludedFolders = CurrentSettings.Excluded_Folder_Strings
                 blah.GetFiles(CurrentMoviePath)
+                LogEvent("Scanning Files done - TotalFiles: " & blah.TotalFiles.ToString & ", TotalSize: " & blah.TotalSize.ToString & ", TotalFolders: " & blah.TotalFolders.ToString, EventLogLevel.ImportantEvent)
+                LogEvent("---------------------------------------------------------------------------------------------------", EventLogLevel.Informational)
+                LogEvent("Identifying Files ...", EventLogLevel.ImportantEvent)
                 For Each foundFile As String In blah.Files
 
-                    If (XMLExclTable.ContainsValue(foundFile.ToLower) = False) Then
+                    If (XMLExclTable.ContainsValue(foundFile.ToLower) = False) Then ' if not in "always ignore" file
                         'Check for match against movie file types:
                         Try
                             'I took out the Override path here so every file gets loaded into tblFoundMovieFiles properly.  Override path handling moved to Processor
                             FoundFileName = StripPathFromFile(foundFile, CurrentMoviePath)
 
-                            'File Handling - compare extension to known media filetypes
+                            'File Handling - compare extension to known media filetypes (trailer or movies)
                             If Array.IndexOf(ValidMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
                                 'Check, if it's a trailer
                                 Dim isTrailer As Boolean = False
@@ -1151,7 +1155,7 @@ Public Class AntProcessor
 
                             ElseIf Array.IndexOf(ValidNonMediaExtensions, foundFile.Substring(InStrRev(foundFile, "."))) >= 0 Then
                                 'Check for match against non-movie file types:
-                                LogEvent("  File Found - " & FoundFileName, EventLogLevel.Informational)
+                                LogEvent("  File Found (NonMedia) - " & FoundFileName, EventLogLevel.Informational)
 
                                 row = ds.Tables("tblFoundNonMediaFiles").NewRow()
                                 row("FileName") = FoundFileName
@@ -1162,19 +1166,21 @@ Public Class AntProcessor
                                 'Finally special handling to check for DVD images in folders.
                                 'If FoundFileName.ToLower.Contains("video_ts") Then
                                 If Right(FoundFileName, 12).ToLower = "video_ts.ifo" Then
-                                    LogEvent("  File Found - " & FoundFileName, EventLogLevel.Informational)
+                                    LogEvent("  File Found (DVDfolder) - " & FoundFileName, EventLogLevel.Informational)
 
                                     row = ds.Tables("tblFoundNonMediaFiles").NewRow()
                                     row("FileName") = FoundFileName
                                     row("FilePath") = CurrentMoviePath
                                     ds.Tables("tblFoundNonMediaFiles").Rows.Add(row)
                                 End If
+                            Else
+                                'LogEvent("  File Excluded - " & FoundFileName, EventLogLevel.Informational)
                             End If
                         Catch ex As Exception
                             LogEvent("ERROR : " & ex.Message, EventLogLevel.ErrorOrSimilar)
                         End Try
                     Else
-                        LogEvent("  File Excluded - **********  " & foundFile & "  *****", EventLogLevel.Informational)
+                        LogEvent("  File Excluded - " & foundFile & "  - (always ignore)", EventLogLevel.Informational)
                     End If
 
                 Next
