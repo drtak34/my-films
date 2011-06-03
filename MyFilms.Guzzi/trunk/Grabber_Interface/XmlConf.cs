@@ -350,9 +350,9 @@ public class TagName
   public static string KeyEndLinkCertification = "KeyEndLinkCertification";
   public static string KeyLinkCertificationIndex = "KeyLinkCertificationIndex";
 
-  //public static string KeyStartLinkComment = "KeyStartLinkComment";
-  //public static string KeyEndLinkComment = "KeyEndLinkComment";
-  //public static string KeyLinkCommentIndex = "KeyLinkCommentIndex";
+  public static string KeyStartLinkComment = "KeyStartLinkComment";
+  public static string KeyEndLinkComment = "KeyEndLinkComment";
+  public static string KeyLinkCommentIndex = "KeyLinkCommentIndex";
 
   public static string KeyStartComment = "KeyStartComment";     // Comment
   public static string KeyEndComment = "KeyEndComment";

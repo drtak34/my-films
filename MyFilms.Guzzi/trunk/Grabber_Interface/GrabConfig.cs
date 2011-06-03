@@ -41,6 +41,7 @@ namespace Grabber_Interface
     private string BodyLinkPersons = string.Empty;
     private string BodyLinkTitles = string.Empty;
     private string BodyLinkCertification = string.Empty;
+    private string BodyLinkComment = string.Empty;
     private bool ExpertModeOn = true; // to toggle GUI for simplification
 
     private XmlConf xmlConf;
@@ -275,9 +276,11 @@ namespace Grabber_Interface
       else cbMaxActors.Enabled = true;
 
       string strGrabActorRoles = "";
+      string strGrabActorRegex = "";
       try
       {
         strGrabActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
+        strGrabActorRegex = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsRegExp)._Value;
         if (strGrabActorRoles == "true") chkGrabActorRoles.Checked = true;
         else chkGrabActorRoles.Checked = false;
       }
@@ -286,7 +289,7 @@ namespace Grabber_Interface
         chkGrabActorRoles.Checked = false;
         chkGrabActorRoles.Enabled = false;
       };
-      if (string.IsNullOrEmpty(strGrabActorRoles)) chkGrabActorRoles.Enabled = false;
+      if (string.IsNullOrEmpty(strGrabActorRoles) || string.IsNullOrEmpty(strGrabActorRegex)) chkGrabActorRoles.Enabled = false;
       else chkGrabActorRoles.Enabled = true;
 
       try { cbMaxProducers.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value; }
@@ -958,6 +961,24 @@ namespace Grabber_Interface
       }
       else
         BodyLinkCertification = BodyDetail;
+
+      // Test if there is a redirection page for Comment and load page in BodyLinkComment
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(BodyDetail, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(BodyDetail, strStart, strEnd).Trim();
+        BodyLinkComment = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+      }
+      else
+        BodyLinkComment = BodyDetail;
     }
 
     private void textBodyDetail_NewSelection(string starttext, string endtext, int bodystart, string param1)
@@ -1252,6 +1273,8 @@ namespace Grabber_Interface
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsIndex)._Value;
           break;
         case 15: // Comment
+          if (!textBodyDetail.Text.Equals(BodyLinkComment))
+            textBodyDetail.Text = BodyLinkComment;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartComment)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartComment)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartComment)._Value;
@@ -1330,6 +1353,13 @@ namespace Grabber_Interface
           try { textMaxItems.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value; }
           catch { textMaxItems.Text = string.Empty; };
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterIndex)._Value;
+          break;
+        case 22: // Link Comment-Secondary Page
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
           break;
         default:
           textDReplace.Text = "";
@@ -1464,6 +1494,9 @@ namespace Grabber_Interface
         case 21:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Value = TextKeyStartD.Text;
           break;
+        case 22:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value = TextKeyStartD.Text;
+          break;
         default:
           TextKeyStartD.Text = "";
           break;
@@ -1572,6 +1605,9 @@ namespace Grabber_Interface
           break;
         case 21:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndWriter)._Value = TextKeyStopD.Text;
+          break;
+        case 22:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value = TextKeyStopD.Text;
           break;
         default:
           TextKeyStopD.Text = "";
@@ -1701,21 +1737,34 @@ namespace Grabber_Interface
         {
         }
       }
-
+      string mapped;
       for (int i = 0; i < Result.Length; i++)
       {
         textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
-
+        if (i > 29) mapped = " (mapped)";
+        else mapped = "";
+ 
         switch (i)
         {
           case 0:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Original Title" + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Original Title" + mapped + Environment.NewLine;
+            break;
+          case 30:
+            textPreview.SelectedText += Environment.NewLine;
+            textPreview.SelectedText += Environment.NewLine;
+            textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline); 
+            textPreview.SelectedText += "MAPPED OUTPUT FIELDS:" + Environment.NewLine;
+            textPreview.SelectedText += Environment.NewLine;
+            textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Original Title" + mapped + Environment.NewLine;
             break;
           case 1:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Translated Title" + Environment.NewLine;
+          case 31:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Translated Title" + mapped + Environment.NewLine;
             break;
           case 2:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Cover" + Environment.NewLine;
+          case 32:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Cover" + mapped + Environment.NewLine;
             try
             {
               pictureBoxPreviewCover.ImageLocation = Result[i];
@@ -1735,82 +1784,124 @@ namespace Grabber_Interface
             }
             break;
           case 3:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Description" + Environment.NewLine;
+          case 33:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Description" + mapped + Environment.NewLine;
             break;
           case 4:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Rating" + Environment.NewLine;
+          case 34:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Rating" + mapped + Environment.NewLine;
             break;
           case 5:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Actors" + Environment.NewLine;
+          case 35:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Actors" + mapped + Environment.NewLine;
             break;
           case 6:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Director" + Environment.NewLine;
+          case 36:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Director" + mapped + Environment.NewLine;
             break;
           case 7:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Producer" + Environment.NewLine;
+          case 37:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Producer" + mapped + Environment.NewLine;
             break;
           case 8:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Year" + Environment.NewLine;
+          case 38:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Year" + mapped + Environment.NewLine;
             break;
           case 9:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Country" + Environment.NewLine;
+          case 39:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Country" + mapped + Environment.NewLine;
             break;
           case 10:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Genre" + Environment.NewLine;
+          case 40:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Genre" + mapped + Environment.NewLine;
             break;
           case 11:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL" + Environment.NewLine;
+          case 41:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL" + mapped + Environment.NewLine;
             break;
           case 12:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Image" + Environment.NewLine;
+          case 42:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Image" + mapped + Environment.NewLine;
             break;
           case 13:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Persons" + Environment.NewLine;
+          case 43:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Persons" + mapped + Environment.NewLine;
             break;
           case 14:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Comment" + Environment.NewLine;
+          case 44:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Comment" + mapped + Environment.NewLine;
             break;
           case 15:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Language" + Environment.NewLine;
+          case 45:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Language" + mapped + Environment.NewLine;
             break;
           case 16:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Tagline" + Environment.NewLine;
+          case 46:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Tagline" + mapped + Environment.NewLine;
             break;
           case 17:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Certification" + Environment.NewLine;
+          case 47:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Certification" + mapped + Environment.NewLine;
             break;
           case 18:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Titles" + Environment.NewLine;
+          case 48:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Titles" + mapped + Environment.NewLine;
             break;
           case 19:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Certification" + Environment.NewLine;
+          case 49:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Certification" + mapped + Environment.NewLine;
             break;
           case 20:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Writer" + Environment.NewLine;
+          case 50:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Writer" + mapped + Environment.NewLine;
+            break;
+          case 21:
+          case 51:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "URL Comment" + mapped + Environment.NewLine;
+            break;
+          case 22:
+          case 52:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "- not used -" + mapped + Environment.NewLine;
+            break;
+          case 23:
+          case 53:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "- not used -" + mapped + Environment.NewLine;
+            break;
+          case 24:
+          case 54:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "- not used -" + mapped + Environment.NewLine;
+            break;
+          case 25:
+          case 55:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "- not used -" + mapped + Environment.NewLine;
             break;
           case 26:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Names: Countries for 'Translated Title'" + Environment.NewLine;
+          case 56:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Names: Countries for 'Translated Title'" + mapped + Environment.NewLine;
             break;
           case 27:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Translated Title'" + Environment.NewLine;
+          case 57:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Translated Title'" + mapped + Environment.NewLine;
             break;
           case 28:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Names: Countries for 'Certification'" + Environment.NewLine;
+          case 58:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Names: Countries for 'Certification'" + mapped + Environment.NewLine;
             break;
           case 29:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Certification'" + Environment.NewLine;
+          case 59:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Certification'" + mapped + Environment.NewLine;
             break;
           default:
-            textPreview.SelectedText += "(" + (i).ToString() + ") " + "Mapping Output Field '" + (i-30).ToString() + "'" + Environment.NewLine;
+            textPreview.SelectedText += "(" + (i).ToString() + ") " + "Mapping Output Field '" + (i - 30).ToString() + "'" + mapped + Environment.NewLine;
             break;
 
         }
-        if (i < 30)
-          if (Result[i] != Result[i + 30])
-            textPreview.SelectedText += "(mapping active) " + Environment.NewLine;
-        if (i >= 30)
-          if (Result[i] != Result[i - 30])
-            textPreview.SelectedText += "(mapping active) " + Environment.NewLine;
+        //if (i < 30)
+        //  if (Result[i] != Result[i + 30])
+        //    textPreview.SelectedText += "(mapping active) " + Environment.NewLine;
+        //if (i >= 30)
+        //  if (Result[i] != Result[i - 30])
+        //    textPreview.SelectedText += "(mapping active) " + Environment.NewLine;
 
         if (i <= 60) // Changed to support new fields...
           textPreview.AppendText(Result[i] + Environment.NewLine);
@@ -2088,6 +2179,9 @@ namespace Grabber_Interface
         case 21:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Param1 = textDReplace.Text;
           break;
+        case 22:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param1 = textDReplace.Text;
+          break;
         default:
           break;
 
@@ -2163,6 +2257,9 @@ namespace Grabber_Interface
           break;
         case 21:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Param2 = textDReplaceWith.Text;
+          break;
+        case 22:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2 = textDReplaceWith.Text;
           break;
         default:
           break;
@@ -2360,6 +2457,9 @@ namespace Grabber_Interface
         case 21: // writer
           xmlConf.find(xmlConf.listDetail, TagName.KeyWriterIndex)._Value = Index.Text;
           break;
+        case 22: // added for secondary comment 
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value = Index.Text;
+          break;
 
         default:
           break;
@@ -2404,8 +2504,13 @@ namespace Grabber_Interface
       if (TextKeyStartD.Text.Length > 0 && TextKeyStopD.Text.Length > 0)
       {
         string find;
-        if (textDReplace.Text.Length > 0)
-          find = GrabUtil.FindWithAction(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text, textDReplace.Text, textDReplaceWith.Text, textComplement.Text, textMaxItems.Text, textLanguages.Text);
+        string allNames;
+        string allRoles;
+
+
+        if (textDReplace.Text.Length > 0) // if (textComplement.Text.Length > 0)
+        //  find = GrabUtil.FindWithAction(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text, textDReplace.Text, textDReplaceWith.Text, textComplement.Text, textMaxItems.Text, textLanguages.Text);
+          find = GrabUtil.FindWithAction(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text, textDReplace.Text, textDReplaceWith.Text, textComplement.Text, textMaxItems.Text, textLanguages.Text, out allNames, out allRoles, chkACTORROLES.Checked);
         else
           find = GrabUtil.Find(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text);
 
@@ -2603,9 +2708,13 @@ namespace Grabber_Interface
     private void checkBox2_CheckedChanged(object sender, EventArgs e)
     {
       if (chkGrabActorRoles.Checked)
+      {
         xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "true";
+      }
       else
-        xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "false";
+      {
+        xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "false";        
+      }
     }
 
     private void cbMaxProducers_SelectedIndexChanged(object sender, EventArgs e)
@@ -2666,7 +2775,7 @@ namespace Grabber_Interface
       Fields[18] = "URL - Redirection Titles";
       Fields[19] = "URL - Redirection Certification";
       Fields[20] = "Writer";
-      Fields[21] = "";
+      Fields[21] = "URL - Redirection Comment";
       Fields[22] = "";
       Fields[23] = "";
       Fields[24] = "";

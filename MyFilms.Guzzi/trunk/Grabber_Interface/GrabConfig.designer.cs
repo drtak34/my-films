@@ -352,7 +352,8 @@ namespace Grabber_Interface
             resources.GetString("cb_ParamDetail.Items18"),
             resources.GetString("cb_ParamDetail.Items19"),
             resources.GetString("cb_ParamDetail.Items20"),
-            resources.GetString("cb_ParamDetail.Items21")});
+            resources.GetString("cb_ParamDetail.Items21"),
+            resources.GetString("cb_ParamDetail.Items22")});
           resources.ApplyResources(this.cb_ParamDetail, "cb_ParamDetail");
           this.cb_ParamDetail.Name = "cb_ParamDetail";
           this.toolTip1.SetToolTip(this.cb_ParamDetail, resources.GetString("cb_ParamDetail.ToolTip"));
@@ -1398,6 +1399,7 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.button_SaveAs, "button_SaveAs");
           this.button_SaveAs.Name = "button_SaveAs";
+          this.toolTip1.SetToolTip(this.button_SaveAs, resources.GetString("button_SaveAs.ToolTip"));
           this.button_SaveAs.UseVisualStyleBackColor = true;
           this.button_SaveAs.Click += new System.EventHandler(this.button_SaveAs_Click);
           // 
