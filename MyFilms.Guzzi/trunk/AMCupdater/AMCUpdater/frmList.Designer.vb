@@ -45,9 +45,9 @@ Partial Class frmList
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(370, 283)
+        Me.btnCancel.Location = New System.Drawing.Point(348, 283)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(72, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(94, 23)
         Me.btnCancel.TabIndex = 50
         Me.btnCancel.Text = "Ignore"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -55,9 +55,9 @@ Partial Class frmList
         'btnOK
         '
         Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnOK.Location = New System.Drawing.Point(526, 283)
+        Me.btnOK.Location = New System.Drawing.Point(565, 283)
         Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(179, 23)
+        Me.btnOK.Size = New System.Drawing.Size(140, 23)
         Me.btnOK.TabIndex = 70
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
@@ -71,9 +71,9 @@ Partial Class frmList
         '
         'btnSearchAgain
         '
-        Me.btnSearchAgain.Location = New System.Drawing.Point(12, 283)
+        Me.btnSearchAgain.Location = New System.Drawing.Point(24, 283)
         Me.btnSearchAgain.Name = "btnSearchAgain"
-        Me.btnSearchAgain.Size = New System.Drawing.Size(83, 23)
+        Me.btnSearchAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnSearchAgain.TabIndex = 40
         Me.btnSearchAgain.Text = "Search Again"
         Me.btnSearchAgain.UseVisualStyleBackColor = True
@@ -99,9 +99,9 @@ Partial Class frmList
         '
         Me.btnDontAskAgain.Location = New System.Drawing.Point(448, 283)
         Me.btnDontAskAgain.Name = "btnDontAskAgain"
-        Me.btnDontAskAgain.Size = New System.Drawing.Size(72, 23)
+        Me.btnDontAskAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnDontAskAgain.TabIndex = 60
-        Me.btnDontAskAgain.Text = "Ever Ignore"
+        Me.btnDontAskAgain.Text = "Always Ignore"
         Me.btnDontAskAgain.UseVisualStyleBackColor = True
         '
         'chkDontAskAgain

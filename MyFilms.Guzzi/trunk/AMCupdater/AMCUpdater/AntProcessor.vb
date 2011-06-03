@@ -452,7 +452,7 @@ Public Class AntProcessor
                 LogEvent(" - Parameters - Value to Find : " & _ManualParameterValue2.ToString, EventLogLevel.ImportantEvent)
             End If
             If _ManualParserPath <> "" Then
-                LogEvent(" - Parameters - Internet Parser : " & _ManualParserPath.ToString, EventLogLevel.ImportantEvent)
+                LogEvent(" - Parameters - Internet Grabber Script : " & _ManualParserPath.ToString, EventLogLevel.ImportantEvent)
                 LogEvent(" - Parameters - Excluded Movies File : " & _ManualExcludedMoviesPath.ToString, EventLogLevel.ImportantEvent)
                 LogEvent(" - Parameters - Internet Lookup Always Prompt : " & _ManualInternetLookupAlwaysPrompt.ToString, EventLogLevel.ImportantEvent)
             End If
@@ -1519,7 +1519,7 @@ Public Class AntProcessor
 
         LogEvent("Starting XML update process.", EventLogLevel.ImportantEvent)
         LogEvent("  FilePath : " + CurrentSettings.XML_File.ToString, EventLogLevel.ImportantEvent)
-        LogEvent("  ParserPath : " + CurrentSettings.Internet_Parser_Path.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  GrabberScriptPath : " + CurrentSettings.Internet_Parser_Path.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  ExcludePath : " + CurrentSettings.Excluded_Movies_File.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  MoviePath : " + CurrentSettings.Movie_Scan_Path.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  OverridePath : " + CurrentSettings.Override_Path.ToString, EventLogLevel.ImportantEvent)

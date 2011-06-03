@@ -1383,19 +1383,19 @@ Public Class Form1
 
                         'Internet parser file required:
                         If txtManualInternetParserPath.Text = String.Empty Then
-                            epManualUpdater.SetError(txtManualInternetParserPath, "Path to Internet Parser File must be entered")
+                        epManualUpdater.SetError(txtManualInternetParserPath, "Path to Internet Grabber Script must be entered")
                             IsValid = False
                         Else
                             Dim wpath As String = txtManualInternetParserPath.Text
                             If Not wpath.Contains("\") Then
                                 'Not a path without a backslash!
-                                epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Parser File path.")
+                            epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Grabber Script path.")
                                 IsValid = False
                             Else
                                 If File.Exists(wpath) Then
                                     epManualUpdater.SetError(txtManualInternetParserPath, "")
                                 Else
-                                    epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Parser File path.")
+                                epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Grabber Script path.")
                                     IsValid = False
                                 End If
                             End If
