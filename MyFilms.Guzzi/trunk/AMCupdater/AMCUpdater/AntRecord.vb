@@ -55,14 +55,15 @@ Public Class AntRecord
         'URL = 11
         'PicturePathShort = 12
         'SubUrlPersons = 13
-        'Comment = 14
+        'Comments = 14
         'Language = 15
         'Tagline = 16
         'Certification = 17
         'SubUrlTitles = 18
         'SubUrlCertification = 19
         'Writer = 20
-        'IMDBrank = 21
+        'SubUrlComment = 21
+        ''IMDBrank = 21
         'Studio = 22
         'Edition = 23
         'Fanart = 24
@@ -86,14 +87,15 @@ Public Class AntRecord
         URL = 41
         PicturePathShort = 42
         SubUrlPersons = 43
-        Comment = 44
+        Comments = 44
         Language = 45
         Tagline = 46
         Certification = 47
         SubUrlTitles = 48
         SubUrlCertification = 49
         Writer = 50
-        IMDBrank = 51
+        SubUrlComment = 51
+        'IMDBrank = 51
         Studio = 52
         Edition = 53
         Fanart = 54
@@ -845,14 +847,17 @@ Public Class AntRecord
                     End If
                 End If
                 CurrentAttribute = _SourceField
-                If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                    attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                    attr.Value = TempValue
-                    _XMLElement.Attributes.Append(attr)
-                Else
-                    _XMLElement.Attributes(CurrentAttribute).Value = TempValue
+                If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) Then
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = TempValue
+                        _XMLElement.Attributes.Append(attr)
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
+                    End If
                 End If
             End If
+
             TempValue = ""
 
             If _DatabaseFields("subtitles") = True And (_FilePath.Length > 0) Then
@@ -1269,13 +1274,13 @@ Public Class AntRecord
                     CurrentAttribute = "Comments"
                     If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
                         attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = ""
+                        attr.Value = _InternetData(Grabber_Output.Comments)
                         If attr.Value <> "" Then
                             _XMLElement.Attributes.Append(attr)
                         End If
                     Else
                         ' _XMLElement.Attributes(CurrentAttribute).Value = ""
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Comment) ' Guzzi addded grabbed commment
+                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Comments) ' Guzzi addded grabbed commment
                     End If
                 End If
 
@@ -1470,18 +1475,18 @@ Public Class AntRecord
                     End If
                 End If
 
-                If _DatabaseFields("imdbrank") = True Then
-                    CurrentAttribute = "ImdbRank"
-                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
-                        element = _XMLDoc.CreateElement(CurrentAttribute)
-                        element.InnerText = _InternetData(Grabber_Output.IMDBrank)
-                        If element.InnerText <> "" Then
-                            _XMLElement.AppendChild(element)
-                        End If
-                    Else
-                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.IMDBrank)
-                    End If
-                End If
+                'If _DatabaseFields("imdbrank") = True Then
+                '    CurrentAttribute = "ImdbRank"
+                '    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
+                '        element = _XMLDoc.CreateElement(CurrentAttribute)
+                '        element.InnerText = _InternetData(Grabber_Output.IMDBrank)
+                '        If element.InnerText <> "" Then
+                '            _XMLElement.AppendChild(element)
+                '        End If
+                '    Else
+                '        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.IMDBrank)
+                '    End If
+                'End If
 
                 If _DatabaseFields("studio") = True Then
                     CurrentAttribute = "Studio"
