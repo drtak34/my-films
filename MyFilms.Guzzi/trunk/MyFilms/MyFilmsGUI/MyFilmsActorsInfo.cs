@@ -54,9 +54,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //[SkinControl(3)]
         //protected GUISortButtonControl btnSortBy = null;
         [SkinControl(3)]
-        protected GUIToggleButtonControl btnBiography = null;
+        protected GUIButtonControl btnBiography = null;
         [SkinControl(4)]
-        protected GUIToggleButtonControl btnMovies = null;
+        protected GUIButtonControl btnMovies = null;
+        //[SkinControl(4)]
+        //protected GUIToggleButtonControl btnMovies = null;
         [SkinControl(20)]
         protected GUITextScrollUpControl tbPlotArea = null;
         [SkinControl(21)]
