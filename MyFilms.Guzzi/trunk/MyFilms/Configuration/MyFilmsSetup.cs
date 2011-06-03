@@ -2896,21 +2896,26 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             return;
 
           string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
-          if (System.IO.File.Exists(wfiledefault + ".xml"))
+          if (!System.IO.File.Exists(wfiledefault + "_" + currentconfig + ".xml"))
           {
-            if (!System.IO.File.Exists(wfiledefault + "_" + currentconfig + ".xml"))
+            try
             {
-              try
+              
+              if (System.IO.File.Exists(wfiledefault + ".xml"))
               {
                 System.IO.File.Copy(XmlConfig.EntireFilenameConfig("MyFilmsAMCSettings"), wfiledefault + "_" + currentconfig + ".xml", true);
               }
-              catch
+              else
               {
+                MessageBox.Show("The default AMCupdater configfile cannot be found! (" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings.xml" + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
               }
+                
+            }
+            catch
+            {
             }
           }
-          else
-            MessageBox.Show("The default AMCupdater configfile cannot be found! (" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings.xml" + ")", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
           string AMCconfigFile = wfiledefault + "_" + currentconfig + ".xml";
           //DataSet ds = new DataSet();
@@ -4192,10 +4197,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (AMCMovieScanPath.Text.Length == 0)
           {
             MessageBox.Show(
-              "You first have to define the Search path for your movies to create a default config !",
-              "Configuration",
-              MessageBoxButtons.OK,
-              MessageBoxIcon.Stop);
+              "You first have to define the Search path for your movies to create a default config !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             AMCMovieScanPath.Focus();
             return;
           }
@@ -4213,7 +4215,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 System.IO.File.Copy(wfiledefault + "_" + Config_Name.Text + ".xml", wfiledefault + "_" + Config_Name.Text + ".xml.sav", true);
             }
             System.IO.File.Delete(wfiledefault + "_" + Config_Name.Text + ".xml");
-            Read_XML_AMCconfig(Config_Name.Text); // create default config file
+            Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
             CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
             Save_XML_AMCconfig(Config_Name.Text); // save new config
             Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
@@ -4763,8 +4765,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               System.IO.File.Copy(wfiledefault + "_" + Config_Name.Text + ".xml", wfiledefault + "_" + Config_Name.Text + ".xml.sav", true);
             }
             System.IO.File.Delete(wfiledefault + "_" + Config_Name.Text + ".xml");
-            
-            Read_XML_AMCconfig(Config_Name.Text); // create default config file
+
+            Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
             CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
             Save_XML_AMCconfig(Config_Name.Text); // save new config
             Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults

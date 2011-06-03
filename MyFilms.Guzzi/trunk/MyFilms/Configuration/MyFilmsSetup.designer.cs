@@ -1930,7 +1930,7 @@
           // 
           // btnParameters
           // 
-          this.btnParameters.Location = new System.Drawing.Point(94, 16);
+          this.btnParameters.Location = new System.Drawing.Point(94, 17);
           this.btnParameters.Name = "btnParameters";
           this.btnParameters.Size = new System.Drawing.Size(109, 24);
           this.btnParameters.TabIndex = 60;
@@ -2106,7 +2106,7 @@
           // 
           this.chkAMCUpd.AutoSize = true;
           this.chkAMCUpd.BackColor = System.Drawing.Color.Transparent;
-          this.chkAMCUpd.Location = new System.Drawing.Point(23, 32);
+          this.chkAMCUpd.Location = new System.Drawing.Point(23, 31);
           this.chkAMCUpd.Name = "chkAMCUpd";
           this.chkAMCUpd.Size = new System.Drawing.Size(87, 30);
           this.chkAMCUpd.TabIndex = 0;
