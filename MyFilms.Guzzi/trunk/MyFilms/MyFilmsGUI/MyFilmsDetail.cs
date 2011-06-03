@@ -5918,11 +5918,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (wresult.Count == 1)
                     return wresult[0].ToString();
                 else
-                  //foreach (string s in wresult)
-                  //{
-                  //  if (s == filename) 
-                  //    return filename;
-                  //}
+                  foreach (string searchresult in wresult)
+                  {
+                    if (searchresult == filename || searchresult.ToLower().Contains(@"\" + filename + @".") || searchresult.ToLower().Contains(@"\" + filename + @"\"))
+                      return searchresult;
+                  }
                 {
                     // Many files found; ask for the good file
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
