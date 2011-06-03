@@ -1331,11 +1331,17 @@ Module Module1
             InternetData.Add("description")
             InternetData.Add("comments")
             InternetData.Add("picture")
-            InternetData.Add("comment")
             'InternetData.Add("language")
             InternetData.Add("tagline")
             InternetData.Add("certification")
             InternetData.Add("writer")
+            'InternetData.Add("languages")
+            InternetData.Add("imdb_id")
+            InternetData.Add("tmdb_id")
+            InternetData.Add("imdbrank")
+            InternetData.Add("studio")
+            InternetData.Add("fanart") ' Guzzi: added on request Dadeo
+
 
             If CurrentSettings.Movie_Title_Handling.Contains("Internet Lookup") Then
                 InternetData.Add("originaltitle")
