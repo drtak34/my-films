@@ -972,16 +972,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     choiceViewMenu.Clear();
                     dlgmenu.SetHeading(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
 
-                    if (MyFilms.conf.StrFanart)            // Download Fanart
-                    {
-                      dlgmenu.Add(GUILocalizeStrings.Get(1079862));
-                      choiceViewMenu.Add("fanart");
-                    }
-                    if (MyFilms.conf.StrFanart)            // Remove Fanart
-                    {
-                      dlgmenu.Add(GUILocalizeStrings.Get(1079874));
-                      choiceViewMenu.Add("deletefanart");
-                    }
+                    //if (ExtendedStartmode("Details context: Change Local COver)"))
+                    //{
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798762)); // Change Cover
+                    choiceViewMenu.Add("changecover");
+                    //}
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
+                    choiceViewMenu.Add("tmdbposter");
 
                     if (ExtendedStartmode("Details context: Thumb creator (and fanart creator?)"))
                     {
@@ -990,14 +988,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       choiceViewMenu.Add("cover-thumbnailer");
                     }
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
-                    choiceViewMenu.Add("tmdbposter");
-
-                    //if (ExtendedStartmode("Details context: Change Local COver)"))
-                    //{
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798762)); // Change Cover
-                    choiceViewMenu.Add("changecover");
-                    //}
+                    if (MyFilms.conf.StrFanart)            // Remove Fanart
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079874));
+                      choiceViewMenu.Add("deletefanart");
+                    }
+                    if (MyFilms.conf.StrFanart)            // Download Fanart
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079862));
+                      choiceViewMenu.Add("fanart");
+                    }
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
@@ -1565,6 +1565,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
                     afficher_detail(true);
                     setProcessAnimationStatus(false, m_SearchAnimation);
+                    Change_Menu("fanartcovermenu"); // stay in cover toggle menu
                     break;
 
                 case "tmdbposter":
