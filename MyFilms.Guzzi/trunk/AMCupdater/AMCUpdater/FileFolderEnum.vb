@@ -187,7 +187,7 @@ Public Class FileFolderEnum
         'Next
         For Each blah As String In ExclusionList.Keys
             If blah.Length > 0 Then
-                If blah.ToLower = ItemName.ToLower Then
+                If ItemName.ToLower.Contains(blah.ToLower) Then
                     ReturnValue = True
                 End If
             End If
