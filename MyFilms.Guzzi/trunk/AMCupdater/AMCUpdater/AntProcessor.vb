@@ -1127,7 +1127,7 @@ Public Class AntProcessor
                                 'Check, if it's a trailer
                                 Dim isTrailer As Boolean = False
                                 For Each TrailerProp As String In ValidTrailerExtensions
-                                    If FoundFileName.Contains(TrailerProp) Then
+                                    If FoundFileName.ToLower.Contains(TrailerProp.ToLower) Then
                                         isTrailer = True
                                     End If
                                 Next
