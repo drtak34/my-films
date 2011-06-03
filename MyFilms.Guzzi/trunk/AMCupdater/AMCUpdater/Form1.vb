@@ -132,6 +132,7 @@ Public Class Form1
         InternetData.Add("tmdb_id", "tmdb_id")
         InternetData.Add("imdbrank", "imdbrank")
         InternetData.Add("studio", "studio")
+        InternetData.Add("fanart", "fanart") ' Guzzi: added on request Dadeo
 
         SetCheckButtonStatus(ButtonStatus.ReadyToParseXML)
 
