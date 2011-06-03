@@ -106,6 +106,8 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.label52 = new System.Windows.Forms.Label();
+          this.cbAllowTraktSync = new System.Windows.Forms.CheckBox();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
@@ -488,8 +490,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.cbAllowTraktSync = new System.Windows.Forms.CheckBox();
-          this.label52 = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -666,6 +666,27 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // label52
+          // 
+          this.label52.AutoSize = true;
+          this.label52.Location = new System.Drawing.Point(28, 28);
+          this.label52.Name = "label52";
+          this.label52.Size = new System.Drawing.Size(321, 26);
+          this.label52.TabIndex = 1;
+          this.label52.Text = "If you enable TRAKT Synchronization, your movie catalog data will\r\nbe synchronize" +
+              "d with trakt internet site.";
+          // 
+          // cbAllowTraktSync
+          // 
+          this.cbAllowTraktSync.AutoSize = true;
+          this.cbAllowTraktSync.Location = new System.Drawing.Point(29, 78);
+          this.cbAllowTraktSync.Name = "cbAllowTraktSync";
+          this.cbAllowTraktSync.Size = new System.Drawing.Size(176, 17);
+          this.cbAllowTraktSync.TabIndex = 0;
+          this.cbAllowTraktSync.Text = "Enable TRAKT Synchronisation";
+          this.ToolTip1.SetToolTip(this.cbAllowTraktSync, resources.GetString("cbAllowTraktSync.ToolTip"));
+          this.cbAllowTraktSync.UseVisualStyleBackColor = true;
           // 
           // groupBox9
           // 
@@ -1682,15 +1703,17 @@
           this.cbGrabberOverrideTitleLimit.Name = "cbGrabberOverrideTitleLimit";
           this.cbGrabberOverrideTitleLimit.Size = new System.Drawing.Size(45, 21);
           this.cbGrabberOverrideTitleLimit.TabIndex = 67;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed.\r\nYou may also set a preferred lan" +
+                  "guage/country \r\nfor grabbing in the override options.\r\n");
           // 
           // label50
           // 
           this.label50.AutoSize = true;
-          this.label50.Location = new System.Drawing.Point(8, 16);
+          this.label50.Location = new System.Drawing.Point(12, 21);
           this.label50.Name = "label50";
-          this.label50.Size = new System.Drawing.Size(170, 26);
+          this.label50.Size = new System.Drawing.Size(161, 13);
           this.label50.TabIndex = 66;
-          this.label50.Text = "Preferred Language(s) for \r\nTranslated Title(s) and Certification";
+          this.label50.Text = "Preferred Languages / Countries";
           // 
           // label49
           // 
@@ -1718,8 +1741,8 @@
           this.cbGrabberOverridePersonLimit.Name = "cbGrabberOverridePersonLimit";
           this.cbGrabberOverridePersonLimit.Size = new System.Drawing.Size(45, 21);
           this.cbGrabberOverridePersonLimit.TabIndex = 63;
-          this.ToolTip1.SetToolTip(this.cbGrabberOverridePersonLimit, "Limits the number of person names grabbed and.\r\nThis settings applies to all fiel" +
-                  "ds that grab person names, \r\nlike \r\nactors, producers, writers, directors.");
+          this.ToolTip1.SetToolTip(this.cbGrabberOverridePersonLimit, "Limits the number of person names grabbed.\r\nThis settings applies to all fields t" +
+                  "hat grab person names, \r\nlike actors, producers, writers, directors.");
           // 
           // cbGrabberOverrideLanguage
           // 
@@ -1771,10 +1794,11 @@
             "UK",
             "Uruguay",
             "USA"});
-          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(11, 48);
+          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(11, 43);
           this.cbGrabberOverrideLanguage.Name = "cbGrabberOverrideLanguage";
           this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(167, 21);
           this.cbGrabberOverrideLanguage.TabIndex = 64;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverrideLanguage, resources.GetString("cbGrabberOverrideLanguage.ToolTip"));
           // 
           // lblSearchGrabberName
           // 
@@ -1992,11 +2016,12 @@
           // 
           this.chkAMC_Purge_Missing_Files.AutoSize = true;
           this.chkAMC_Purge_Missing_Files.ForeColor = System.Drawing.Color.Red;
-          this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(597, 41);
+          this.chkAMC_Purge_Missing_Files.Location = new System.Drawing.Point(570, 42);
           this.chkAMC_Purge_Missing_Files.Name = "chkAMC_Purge_Missing_Files";
-          this.chkAMC_Purge_Missing_Files.Size = new System.Drawing.Size(116, 17);
+          this.chkAMC_Purge_Missing_Files.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+          this.chkAMC_Purge_Missing_Files.Size = new System.Drawing.Size(135, 17);
           this.chkAMC_Purge_Missing_Files.TabIndex = 83;
-          this.chkAMC_Purge_Missing_Files.Text = "Purge Missing Files";
+          this.chkAMC_Purge_Missing_Files.Text = "Purge Orphan Records";
           this.ToolTip1.SetToolTip(this.chkAMC_Purge_Missing_Files, resources.GetString("chkAMC_Purge_Missing_Files.ToolTip"));
           this.chkAMC_Purge_Missing_Files.UseVisualStyleBackColor = true;
           this.chkAMC_Purge_Missing_Files.CheckedChanged += new System.EventHandler(this.chkAMC_Purge_Missing_Files_CheckedChanged);
@@ -4871,27 +4896,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // cbAllowTraktSync
-          // 
-          this.cbAllowTraktSync.AutoSize = true;
-          this.cbAllowTraktSync.Location = new System.Drawing.Point(29, 78);
-          this.cbAllowTraktSync.Name = "cbAllowTraktSync";
-          this.cbAllowTraktSync.Size = new System.Drawing.Size(176, 17);
-          this.cbAllowTraktSync.TabIndex = 0;
-          this.cbAllowTraktSync.Text = "Enable TRAKT Synchronisation";
-          this.ToolTip1.SetToolTip(this.cbAllowTraktSync, resources.GetString("cbAllowTraktSync.ToolTip"));
-          this.cbAllowTraktSync.UseVisualStyleBackColor = true;
-          // 
-          // label52
-          // 
-          this.label52.AutoSize = true;
-          this.label52.Location = new System.Drawing.Point(28, 28);
-          this.label52.Name = "label52";
-          this.label52.Size = new System.Drawing.Size(321, 26);
-          this.label52.TabIndex = 1;
-          this.label52.Text = "If you enable TRAKT Synchronization, your movie catalog data will\r\nbe synchronize" +
-              "d with trakt internet site.";
           // 
           // MyFilmsSetup
           // 
