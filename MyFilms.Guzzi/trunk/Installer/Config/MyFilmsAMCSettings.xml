@@ -37,7 +37,7 @@
     <Value>Source</Value>
   </Values>
   <Values Option="Purge_Missing_Files">
-    <Value>False</Value>
+    <Value>True</Value>
   </Values>
   <Values Option="RegEx_Check_For_MultiPart_Files">
     <Value>[-|_|.| +][cC][dD][0-9]|[-|_|.| +][dD][iI][sS][kKcC][0-9]|[0-9]of[0-9]</Value>
@@ -62,10 +62,10 @@
     <Value>File Created Date</Value>
   </Values>
   <Values Option="Movie_Title_Handling">
-    <Value>File Name + Internet Lookup</Value>
+    <Value>Folder Name + Internet Lookup</Value>
   </Values>
   <Values Option="Internet_Parser_Path">
-    <Value>C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\MyFilmsIMDB.xml</Value>
+    <Value>C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\IMDB.xml</Value>
   </Values>
   <Values Option="Store_Short_Names_Only">
     <Value>False</Value>
@@ -80,7 +80,7 @@
     <Value>True</Value>
   </Values>
   <Values Option="Internet_Lookup_Always_Prompt">
-    <Value>True</Value>
+    <Value>false</Value>
   </Values>
   <Values Option="Read_DVD_Label">
     <Value>False</Value>
@@ -95,7 +95,7 @@
     <Value>C:\Daten.Test\Movies - Test\Movies - Test.xml</Value>
   </Values>
   <Values Option="Manual_Internet_Parser_Path">
-    <Value>C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\MyFilmsOFDB.xml</Value>
+    <Value>C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\IMDB.xml</Value>
   </Values>
   <Values Option="Manual_Excluded_Movies_File">
     <Value>C:\Daten.Test\Movies - Test\AMCUpdater_Excluded_Files.txt</Value>
@@ -110,7 +110,7 @@
     <Value />
   </Values>
   <Values Option="Filter_Strings">
-    <Value>\([0-9][0-9][0-9][0-9]\)</Value>
+    <Value>\([0-9][0-9][0-9][0-9]\)|\(.*\)</Value>
   </Values>
   <Values Option="Check_Field_Handling">
     <Value>False</Value>
