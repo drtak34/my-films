@@ -4638,7 +4638,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // stop background worker
           if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
           {
-            bgUpdateDB.CancelAsync(); 
+            bgUpdateDB.CancelAsync();
+            Thread.Sleep(1000);
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
           }
           else
