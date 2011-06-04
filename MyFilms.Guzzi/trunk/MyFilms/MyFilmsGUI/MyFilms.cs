@@ -4294,8 +4294,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (MyFilms.conf.StrAMCUpd)
           {
+            // stop background worker
             dlg2.Add(GUILocalizeStrings.Get(1079861));   // Update Database with external AMCupdater
             choiceViewGlobalUpdates.Add("updatedb");
+
+            if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
+            {
+              dlg2.Add(GUILocalizeStrings.Get(1079855));   // Stop Database Updater (active)
+              choiceViewGlobalUpdates.Add("cancelupdatedb");
+            }
           }
 
           if (MyFilms.conf.StrFanart)
@@ -4627,6 +4634,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
 
+        case "cancelupdatedb":
+          // stop background worker
+          if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
+          {
+            bgUpdateDB.CancelAsync(); 
+            ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
+          }
+          else
+          {
+            ShowMessageDialog("", "AMC Updater cannot be stopped!", ""); // AMC Updater is stopping!
+          }
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+          break;
+        
         case "downfanart":
           // Launch Fanart download in batch mode
           if (bgUpdateFanart.IsBusy)
@@ -7416,14 +7437,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     public void AsynUpdateDatabase()
     {
-      if (!bgUpdateDB.IsBusy)
+      if (!bgUpdateDB.IsBusy) //         bgUpdateDB.CancelAsync();
       {
         // moved here to avoid reinstantiating for each menu change.... thanks inker !
         bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
         bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
+        bgUpdateDB.WorkerSupportsCancellation = true;
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         LogMyFilms.Info("Launching AMCUpdater in batch mode");
-
       }
     }
 

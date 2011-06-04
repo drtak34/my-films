@@ -71,6 +71,8 @@
     <String id="107987">Filme</String>
     <String id="107988">Filme</String>
     <String id="1079850">Aktualisiere Online Verfügbarkeit</String>
+    <String id="1079855">Stoppe Film Datenbank Aktualisierung (aktiv)</String>
+    <String id="1079856">AMCupdater wird beendet !</String>
     <String id="1079857">Lade TMDB Daten (online)</String>
     <String id="1079858">Manuelle Eingabe über Tastatur</String>
     <String id="1079859">Wähle Suchbegriff</String>
