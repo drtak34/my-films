@@ -572,7 +572,7 @@ Public Class AntSettings
         If MePo Then
             dt.Rows.Add("Internet_Parser_Path", MePoConfigPath & "\Scripts\\MyFilms\IMDB.xml") 'DefaultParserPath
         Else
-            dt.Rows.Add("Internet_Parser_Path", AppPath & "\Scripts\MyFilmsIMDB.xml") 'DefaultParserPath
+            dt.Rows.Add("Internet_Parser_Path", AppPath & "\Scripts\MyFilmsIMDB.xml") 'DefaultGrabberScript
         End If
         dt.Rows.Add("Store_Short_Names_Only", "False") 'ShortNames
         If MePo Then

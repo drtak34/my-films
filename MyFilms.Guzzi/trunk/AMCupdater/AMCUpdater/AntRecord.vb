@@ -408,6 +408,7 @@ Public Class AntRecord
                     If (wurl.Count = 1) And _InternetLookupAlwaysPrompt = False Then
                         _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage)
                         _InternetLookupOK = True
+                        _LastOutputMessage = SearchString & " - " & " Movie found by 'single result' match."
 
                         If bgwFolderScanUpdate.CancellationPending = True Then
                             Exit Sub
@@ -416,6 +417,8 @@ Public Class AntRecord
                     Else
                         Dim wtitle As String
                         Dim wyear As String
+                        Dim wimdb As String
+                        Dim wtmdb As String
                         Dim wlimityear As Boolean = False
 
                         'If _InteractiveMode = True Then
@@ -502,16 +505,10 @@ Public Class AntRecord
                         Else
                             ' In batch mode, try to identify the right movie with  optseachstring
                             'LogEvent(SearchString & " - " & wurl.Count.ToString & " Movies found", EventLogLevel.Informational)
-                            If _InternetSearchHint.Length > 0 Then
-                                For i As Integer = 0 To wurl.Count - 1
-                                    If wurl.Item(i).Year.ToString = _InternetSearchHintYear Then
-                                        wlimityear = True
-                                    End If
-                                Next
+                            If _InternetSearchHint.Length > 0 Then ' this is old searchhint method !
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString
-                                    If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint) And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
+                                    If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint)) Then
                                         'Dim datas As String()
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                         'CreateXmlnetInfos(datas)
@@ -524,6 +521,85 @@ Public Class AntRecord
                                 Next
                             End If
 
+                            If (wurl.Count = 0) Then
+                                _LastOutputMessage = SearchString & " - " & wurl.Count.ToString & " Movies found from Internet lookup."
+                                _InternetLookupOK = False
+                                Exit While
+                            Else 'If _InternetSearchHint.Length > 0 Or _InternetSearchHintYear.Length > 0 Or _InternetSearchHintIMDB_Id.Length > 0 Then
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString
+                                    wimdb = wurl.Item(i).IMDB_ID.ToString
+                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
+
+                                    If (wimdb = _InternetSearchHintIMDB_Id) Then
+                                        'If (wtitle.Contains(SearchString) And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                Next
+
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString
+                                    wimdb = wurl.Item(i).IMDB_ID.ToString
+                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
+                                    If (wtitle.Contains(SearchString) And wyear = _InternetSearchHintYear) Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint and name match."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                Next
+
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString
+                                    wimdb = wurl.Item(i).IMDB_ID.ToString
+                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
+                                    If (wyear = _InternetSearchHintYear And _InternetLookupAlwaysPrompt = False) Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                Next
+
+                                Dim CountNameMatch As Integer
+                                Dim index As Integer
+
+                                CountNameMatch = 0
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString
+                                    wimdb = wurl.Item(i).IMDB_ID.ToString
+                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
+                                    If (wtitle.Contains(SearchString) And _InternetLookupAlwaysPrompt = False) Then
+                                        CountNameMatch = CountNameMatch + 1
+                                        index = i
+                                    End If
+                                Next
+                                If (CountNameMatch = 1) Then
+                                    _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                    _InternetLookupOK = True
+                                    _LastOutputMessage = SearchString & " - " & " Movie found by name match."
+                                    If bgwFolderScanUpdate.CancellationPending = True Then
+                                        Exit Sub
+                                    End If
+                                    Exit While
+                                End If
+                            End If
                             _LastOutputMessage = SearchString & " - " & wurl.Count.ToString & " Movies found from Internet lookup."
                             _InternetLookupOK = False
                             Exit While
@@ -635,9 +711,11 @@ Public Class AntRecord
                         Else
                             If _XMLElement.Attributes("Year") IsNot Nothing Then
                                 _InternetSearchHint = _XMLElement.Attributes("Year").Value.ToString
-                                _InternetSearchHintYear = _XMLElement.Attributes("Year").Value.ToString
                             End If
                         End If
+                    End If
+                    If _XMLElement.Attributes("Year") IsNot Nothing Then
+                        _InternetSearchHintYear = _XMLElement.Attributes("Year").Value.ToString
                     End If
                     'LogEvent("ProcessFile() - Update - _InternetSearchHint: '" & _InternetSearchHint & "'", EventLogLevel.InformationalWithGrabbing)
                 End If

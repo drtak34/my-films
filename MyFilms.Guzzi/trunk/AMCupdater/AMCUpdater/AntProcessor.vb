@@ -1777,7 +1777,7 @@ Public Class AntProcessor
                             If Ant.LastOutputMessage.StartsWith("ERROR") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                             Else
-                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Updated - " & ReplacementPath)
+                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Updated - " & ReplacementPath & " - " & Ant.LastOutputMessage)
                             End If
                         Else
                             'need to create a new entry:
@@ -1802,7 +1802,7 @@ Public Class AntProcessor
                                     If Ant.InternetLookupOK = False Then
                                         OutputMessage += " (Internet Lookup Failed)"
                                     End If
-                                    bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, OutputMessage)
+                                    bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, OutputMessage & " - " & Ant.LastOutputMessage)
                                     NewAntID += 1
                                 Else
                                     'First check if the Internet Lookup works:
@@ -1810,17 +1810,17 @@ Public Class AntProcessor
                                         MovieRootNode.AppendChild(Ant.XMLElement)
                                         _CountRecordsAdded += 1
                                         If ReplacementPath.IndexOf(";") >= 0 Then
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Imported - " & ReplacementPath)
+                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Imported - " & ReplacementPath & " - " & Ant.LastOutputMessage)
                                         Else
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Imported - " & ReplacementPath)
+                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Imported - " & ReplacementPath & " - " & Ant.LastOutputMessage)
                                         End If
                                         NewAntID += 1
                                     Else
                                         'Mark as Ignored - do not import.
                                         If ReplacementPath.IndexOf(";") >= 0 Then
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Ignored - **********  " & ReplacementPath & "  *****")
+                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Ignored - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
                                         Else
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Ignored - **********  " & ReplacementPath & "  *****")
+                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Ignored - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
                                         End If
                                     End If
                                 End If

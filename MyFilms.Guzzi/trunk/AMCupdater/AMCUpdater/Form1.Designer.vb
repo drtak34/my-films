@@ -774,9 +774,9 @@ Partial Class Form1
         Me.chkDontAskInteractive.AutoSize = True
         Me.chkDontAskInteractive.Location = New System.Drawing.Point(415, 56)
         Me.chkDontAskInteractive.Name = "chkDontAskInteractive"
-        Me.chkDontAskInteractive.Size = New System.Drawing.Size(80, 30)
+        Me.chkDontAskInteractive.Size = New System.Drawing.Size(78, 30)
         Me.chkDontAskInteractive.TabIndex = 59
-        Me.chkDontAskInteractive.Text = "Don't ask," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "iif no match"
+        Me.chkDontAskInteractive.Text = "Don't ask," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "if no match"
         Me.ToolTip1.SetToolTip(Me.chkDontAskInteractive, resources.GetString("chkDontAskInteractive.ToolTip"))
         Me.chkDontAskInteractive.UseVisualStyleBackColor = True
         '

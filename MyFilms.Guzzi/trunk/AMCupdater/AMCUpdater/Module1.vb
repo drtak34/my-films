@@ -202,14 +202,21 @@ Module Module1
 
 
         'Dim CutText As New Regex("\(" & "([^)]*)" & "\)")
-        Dim CutText As New Regex("" & "[0-9]{4}" & "")
+        Dim CutText As New Regex("[^0-9][0-9]{4}[^0-9]")
         Dim m As Match
         m = CutText.Match(CleanString)
         If m.Success = True Then
-            Return m.Value
+            Return m.Value.Substring(1, 4) 'remove ()
         Else
+            'Dim CutText2 As New Regex("" & "[0-9]{4}" & "")
+            'Dim m2 As Match
+            'm2 = CutText2.Match(CleanString)
+            'If m2.Success = True Then
+            '    Return m2.Value
+            'Else
             Return ""
         End If
+        'End If
 
         'Tidy up any trailing spaces:
         CleanString = CleanString.Trim
