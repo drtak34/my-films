@@ -1708,7 +1708,7 @@
           this.cbGrabberOverrideTitleLimit.Size = new System.Drawing.Size(45, 21);
           this.cbGrabberOverrideTitleLimit.TabIndex = 67;
           this.ToolTip1.SetToolTip(this.cbGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed.\r\nYou may also set a preferred lan" +
-                  "guage/country \r\nfor grabbing in the override options.\r\n");
+                  "guage/country \r\nfor grabbing in the override options.");
           // 
           // label50
           // 
@@ -1993,7 +1993,7 @@
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 36);
           this.btnCreateAMCDefaultConfig.TabIndex = 77;
-          this.btnCreateAMCDefaultConfig.Text = "Sync MyFilms Settings \r\nto AMC Updater";
+          this.btnCreateAMCDefaultConfig.Text = "Sync MyFilms Settings \r\nto AMC Updater Config";
           this.ToolTip1.SetToolTip(this.btnCreateAMCDefaultConfig, resources.GetString("btnCreateAMCDefaultConfig.ToolTip"));
           this.btnCreateAMCDefaultConfig.UseVisualStyleBackColor = true;
           this.btnCreateAMCDefaultConfig.Click += new System.EventHandler(this.btnCreateAMCDefaultConfig_Click);
