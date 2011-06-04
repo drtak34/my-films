@@ -439,7 +439,7 @@ Public Class Form1
 #End Region
 
 #Region "Misc GUI Actions"
-    Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectMovieFolder.Click
+    Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim wpath As String
         Dim currentPath As String
         currentPath = txtMovieFolder.Text
@@ -485,7 +485,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectConfigFile.Click
+    Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim currentDirectory As String
         currentDirectory = txtConfigFilePath.Text
         Try
@@ -625,7 +625,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectParserFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectParserFile.Click
+    Private Sub btnSelectParserFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim currentPath As String
         currentPath = txtParserFilePath.Text
         If currentPath.Contains(";") = True Then
@@ -662,7 +662,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectExcludeFile.Click
+    Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim currentPath As String
         currentPath = txtExcludeFilePath.Text
         If currentPath.Contains(";") = True Then
@@ -882,7 +882,7 @@ Public Class Form1
 #End Region
 
 #Region "Validation"
-    Private Sub chkOverwriteXML_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOverwriteXML.CheckedChanged
+    Private Sub chkOverwriteXML_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         'AntProcessor.OverwriteXMLFile = chkOverwriteXML.Checked
 
@@ -893,12 +893,12 @@ Public Class Form1
             chkBackupXMLFirst.Enabled = False
         End If
     End Sub
-    Private Sub txtOverridePath_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtOverridePath.LostFocus
+    Private Sub txtOverridePath_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
         If txtOverridePath.Text <> String.Empty And txtOverridePath.Text.EndsWith("\") = False Then
             txtOverridePath.Text += "\"
         End If
     End Sub
-    Private Sub chkPurgeMissing_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPurgeMissing.Click
+    Private Sub chkPurgeMissing_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         If chkPurgeMissing.Checked = True Then
             Dim Warning As String = "Warning : The 'Purge missing' option removes invalid entries from your database file."
@@ -1063,7 +1063,7 @@ Public Class Form1
     Private Sub cbManualSelectField_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualSelectField.SelectedIndexChanged
         Me.ValidateChildren()
     End Sub
-    Private Sub txtMovieFolder_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMovieFolder.LostFocus
+    Private Sub txtMovieFolder_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         'txtOverridePath_LostFocus(sender, e)
         Dim Path As String() = txtMovieFolder.Text.Split(";")
         Dim PathItem As String = String.Empty
@@ -1096,7 +1096,7 @@ Public Class Form1
         End If
         Me.ValidateChildren()
     End Sub
-    Private Sub txtDefaultFileTypes_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDefaultFileTypes.LostFocus
+    Private Sub txtDefaultFileTypes_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim FileTypes() As String
         Dim OutputString As String = String.Empty
         If txtDefaultFileTypes.Text <> String.Empty Then
@@ -1117,7 +1117,7 @@ Public Class Form1
         End If
         'Me.ValidateChildren()
     End Sub
-    Private Sub txtDefaultFileTypesNonMedia_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDefaultFileTypesNonMedia.LostFocus
+    Private Sub txtDefaultFileTypesNonMedia_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim FileTypes() As String
         Dim OutputString As String = String.Empty
         If txtDefaultFileTypesNonMedia.Text <> String.Empty Then
@@ -1167,7 +1167,7 @@ Public Class Form1
 
 
 
-    Private Sub Interactive_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtOverridePath.Validating, txtMovieFolder.Validating, txtConfigFilePath.Validating, txtParserFilePath.Validating, txtExcludeFilePath.Validating
+    Private Sub Interactive_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
         'Override Path and Movie Folder (Check for empty; check that no override path used with multiple scan folders
         Dim IsValid As Boolean = True
 
@@ -1471,7 +1471,7 @@ Public Class Form1
         End If
 
     End Sub
-    Private Sub Options_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtDefaultFileTypes.Validating, txtDefaultSourceField.Validating, chkExecuteProgram.Validating, txtExecuteProgramPath.Validating
+    Private Sub Options_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtDefaultSourceField.Validating, chkExecuteProgram.Validating, txtExecuteProgramPath.Validating
         'txtDefaultFileType
         'txtDefaultSourceField
         'chkExecuteProgram
@@ -2099,7 +2099,7 @@ Public Class Form1
 
 #End Region
 
-    Private Sub btnSelectFanartFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectFanartFolder.Click
+    Private Sub btnSelectFanartFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim currentPath As String
         currentPath = txtFanartFolder.Text
         If currentPath.Contains(";") = True Then
@@ -2123,7 +2123,7 @@ Public Class Form1
         Me.ValidateChildren()
     End Sub
 
-    Public Sub txtConfigFilePath_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtConfigFilePath.TextChanged
+    Public Sub txtConfigFilePath_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         txtManualXMLPath.Text = txtConfigFilePath.Text
         CurrentSettings.XML_File = txtConfigFilePath.Text
@@ -2237,7 +2237,7 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Using p = New Process
             Dim psi As New ProcessStartInfo
             psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base).ToString & "\MyFilms_Grabber_Interface.exe"
