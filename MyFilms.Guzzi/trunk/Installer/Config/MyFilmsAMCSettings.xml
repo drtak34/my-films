@@ -9,6 +9,9 @@
   <Values Option="Movie_Fanart_Path">
     <Value></Value>
   </Values>
+  <Values Option="Movie_PersonArtwork_Path">
+    <Value>
+  </Value></Values>
   <Values Option="Ant_Media_Type">
     <Value>HDD</Value>
   </Values>
@@ -152,7 +155,19 @@
     <Value>False</Value>
   </Values>
   <Values Option="LogDirectory">
-    <Value>
-  </Value>
+    <Value></Value>
+  </Values>
+  <Values Option="Grabber_Override_Language">
+    <Value></Value>
+  </Values>
+  <Values Option="Grabber_Override_PersonLimit">
+    <Value></Value>
+  </Values>
+  <Values Option="Grabber_Override_TitleLimit">
+    <Value></Value>
+  </Values>
+  <Values Option="Grabber_Override_GetRoles">
+    <Value></Value>
+  </Values>
   </Values>
 </NewDataSet>

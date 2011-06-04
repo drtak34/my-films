@@ -4249,6 +4249,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AMCSetAttribute("Manual_XML_File", MesFilmsCat.Text);
           AMCSetAttribute("Master_Title", AntTitle1.Text); // Check, if this should be replaced by ItemSearchGrabber...
           AMCSetAttribute("Movie_Fanart_Path", MesFilmsFanart.Text);
+          AMCSetAttribute("Movie_PersonArtwork_Path", MesFilmsImgArtist.Text);
+          AMCSetAttribute("Grabber_Override_Language", cbGrabberOverrideLanguage.Text);
+          AMCSetAttribute("Grabber_Override_PersonLimit", cbGrabberOverridePersonLimit.Text);
+          AMCSetAttribute("Grabber_Override_TitleLimit", cbGrabberOverrideTitleLimit.Text);
+          AMCSetAttribute("Grabber_Override_GetRoles", cbGrabberOverrideGetRoles.Text);
+
           AMCSetAttribute("XML_File", MesFilmsCat.Text);
 
           // Set specific userdefined Parameters from MyFilms GUI configuration

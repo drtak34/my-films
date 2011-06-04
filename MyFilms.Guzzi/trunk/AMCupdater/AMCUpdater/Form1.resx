@@ -123,10 +123,38 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
+  <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
+    <value>AMCUpdater can be instructed to ignore selected files.
+These files will never be scanned or imported by AMCUpdater.
+If the file does not exist; it will be created the first time you select 'Ignore' on a movie.
+Note:
+It is sufficient, to set path and name to a file - AMCupdater will autocreate it on first use.</value>
+  </data>
+  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>280, 50</value>
+  </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1095, 13</value>
   </metadata>
-  <data name="ComboBox1.ToolTip" xml:space="preserve">
+  <data name="txtOverridePath.ToolTip" xml:space="preserve">
+    <value>Use this field to change the path to your files.
+Normally used if you are scanning local files (i.e. d:\Movies)
+but your MediaPortal client will access them over the network (i.e. \\server\Movies\)
+The over-ride path will replace the 'Path to Movies Folder'.
+Note : Can only be used when scanning a single folder structure.</value>
+  </data>
+  <data name="GroupBox26.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "MyFilms Grabber Interface" ("Edit script").
+
+</value>
+  </data>
+  <data name="chkGrabberOverrideLanguage.ToolTip" xml:space="preserve">
     <value>Preferred Language(s) for 
 Translated Title(s) and Certification
 
@@ -139,17 +167,6 @@ of your ANT Movie Catalog.
 Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
-  </data>
-  <data name="GroupBox26.ToolTip" xml:space="preserve">
-    <value>You can set several options for the internet grabber.
-Be aware, that not all options are supported by all grabber scripts.
-However, IMDB (full) script should support all options listed here.
-If you set no values, the default settings of the grabber
-will be used instead.
-The default settings (of the grabber script) can be changed by editing 
-the grabber script in the "MyFilms Grabber Interface" ("Edit script").
-
-</value>
   </data>
   <data name="chkDontAskInteractive.ToolTip" xml:space="preserve">
     <value>Only effective, if you have chosen the internet lookup behaviour as
@@ -171,13 +188,13 @@ Note:
 If you don't have e.g. the year in the directory or movie name, AMCupdater most probably will not get good matches on movie searches.
 To get good matches automatically, year should be in directory or filename in brackets - e.g. "moviename (1982)"</value>
   </data>
-  <data name="Label46.Text" xml:space="preserve">
-    <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
-</value>
+  <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
+    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
+If orphaned entries are found, then will be purged from the database.
+This only affects database entries which reference the currently scanned movie folder.
+Override path is taken into account for this option.
+For example, an entry listing a Source of 'd:\Movies' will not be considered an orphen if you scan 'e:\Other Movies'.</value>
   </data>
-  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>280, 50</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCancelProcessing.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -360,6 +377,16 @@ To get good matches automatically, year should be in directory or filename in br
         4Yf/A4jwK1j8sv9c4vvvO02iRmprZmYWsGzZsv329g4JVL7POjisPUcnmYm0o4uxsJgdrqmp6Soi0pvd
         pVUnkyNj9wU/bHJfQvQVQFr/dwyKhUQPMpakbJRgR5rMWXYLQJqMbU1FyLoLPvt1/uTpK4N8bA2Zo0L7
         kjX+os/+D1cNRyxq14aNAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="chkParseSubtitleFiles.ToolTip" xml:space="preserve">
+    <value>When enabled, AMCUpdater will look for and analyse .IDX subtitle index files.
+These files will be scanned to determine what languages are included, if possible.
+This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
+</value>
+  </data>
+  <data name="Label46.Text" xml:space="preserve">
+    <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
 </value>
   </data>
   <data name="cbMasterTitle.ToolTip" xml:space="preserve">
@@ -965,31 +992,4 @@ If you have your movie files in folders, that have the movie title, select “fo
   <metadata name="AntMovieCatalog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>145, 50</value>
   </metadata>
-  <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
-    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
-If orphaned entries are found, then will be purged from the database.
-This only affects database entries which reference the currently scanned movie folder.
-Override path is taken into account for this option.
-For example, an entry listing a Source of 'd:\Movies' will not be considered an orphen if you scan 'e:\Other Movies'.</value>
-  </data>
-  <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
-    <value>AMCUpdater can be instructed to ignore selected files.
-These files will never be scanned or imported by AMCUpdater.
-If the file does not exist; it will be created the first time you select 'Ignore' on a movie.
-Note:
-It is sufficient, to set path and name to a file - AMCupdater will autocreate it on first use.</value>
-  </data>
-  <data name="txtOverridePath.ToolTip" xml:space="preserve">
-    <value>Use this field to change the path to your files.
-Normally used if you are scanning local files (i.e. d:\Movies)
-but your MediaPortal client will access them over the network (i.e. \\server\Movies\)
-The over-ride path will replace the 'Path to Movies Folder'.
-Note : Can only be used when scanning a single folder structure.</value>
-  </data>
-  <data name="chkParseSubtitleFiles.ToolTip" xml:space="preserve">
-    <value>When enabled, AMCUpdater will look for and analyse .IDX subtitle index files.
-These files will be scanned to determine what languages are included, if possible.
-This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
-</value>
-  </data>
 </root>

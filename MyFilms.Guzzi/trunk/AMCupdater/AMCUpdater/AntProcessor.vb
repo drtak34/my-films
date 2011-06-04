@@ -771,6 +771,11 @@ Public Class AntProcessor
                                 .InternetSearchHintYear = wYear
                                 .InternetSearchHintIMDB_Id = wIMDB_Id
                                 .ParserPath = CurrentSettings.Manual_Internet_Parser_Path
+                                .GrabberOverrideLanguage = CurrentSettings.Grabber_Override_Language
+                                .GrabberOverrideGetRoles = CurrentSettings.Grabber_Override_GetRoles
+                                .GrabberOverridePersonLimit = CurrentSettings.Grabber_Override_PersonLimit
+                                .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
+
                                 .ProcessFile(AntRecord.Process_Mode_Names.Update)
                                 .SaveProgress()
                             End With
@@ -830,7 +835,8 @@ Public Class AntProcessor
                                 '    'Console.WriteLine("-" & .GroupName.ToString & "-")
 
                                 '    fanart = Gb.GetFanart(Title, year, director, CurrentSettings.Movie_Fanart_Path, True)
-                                'Else
+                                'Else 
+                                'fanart = Gb.GetFanart(wotitle, wtitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_Fanart_Path)
                                 fanart = Gb.GetFanart(wotitle, wtitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                                 'End If
                                 If (fanart.Count > 0) Then
@@ -1524,6 +1530,7 @@ Public Class AntProcessor
         LogEvent("  MoviePath : " + CurrentSettings.Movie_Scan_Path.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  OverridePath : " + CurrentSettings.Override_Path.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  FanartPath : " + CurrentSettings.Movie_Fanart_Path.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  PersonArtworkPath : " + CurrentSettings.Movie_PersonArtwork_Path.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Store Short Names : " + CurrentSettings.Store_Short_Names_Only.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  OverwriteFlag : " + CurrentSettings.Overwrite_XML_File.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  BackupFlag : " + CurrentSettings.Backup_XML_First.ToString, EventLogLevel.ImportantEvent)
@@ -1533,6 +1540,10 @@ Public Class AntProcessor
         LogEvent("  PurgeMissing : " + CurrentSettings.Purge_Missing_Files.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Import on Internet Lookup Failure : " + CurrentSettings.Import_File_On_Internet_Lookup_Failure.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Prohibit Internet Lookup : " + CurrentSettings.Prohibit_Internet_Lookup.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Grabber_Override_Language    : " + CurrentSettings.Grabber_Override_Language.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Grabber_Override_PersonLimit : " + CurrentSettings.Grabber_Override_PersonLimit.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Grabber_Override_TitleLimit  : " + CurrentSettings.Grabber_Override_TitleLimit.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Grabber_Override_GetRoles    : " + CurrentSettings.Grabber_Override_GetRoles.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Use XBMC nfo : " + CurrentSettings.Use_XBMC_nfo.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Use Page Grabber : " + CurrentSettings.Use_Page_Grabber.ToString, EventLogLevel.ImportantEvent)
         LogEvent("Starting file analysis and import - " & _CountOrphanFiles.ToString & " orphaned files found.", EventLogLevel.ImportantEvent)
@@ -1754,6 +1765,10 @@ Public Class AntProcessor
                             .MovieNumber = NewAntID
                             .XMLDoc = xmldoc
                             .ParserPath = objSettings.Internet_Parser_Path
+                            .GrabberOverrideLanguage = objSettings.Grabber_Override_Language
+                            .GrabberOverrideGetRoles = objSettings.Grabber_Override_GetRoles
+                            .GrabberOverridePersonLimit = objSettings.Grabber_Override_PersonLimit
+                            .GrabberOverrideTitleLimit = objSettings.Grabber_Override_TitleLimit
                             .InteractiveMode = InteractiveMode
                             .ExcludeFile = objSettings.Excluded_Movies_File
                             '.ImagePath = objSettings.XML_File.Substring(0, objSettings.XML_File.LastIndexOf("\"))
@@ -1901,6 +1916,10 @@ Public Class AntProcessor
                             .MovieNumber = NewAntID
                             .XMLDoc = xmldoc
                             .ParserPath = objSettings.Internet_Parser_Path
+                            .GrabberOverrideLanguage = objSettings.Grabber_Override_Language
+                            .GrabberOverrideGetRoles = objSettings.Grabber_Override_GetRoles
+                            .GrabberOverridePersonLimit = objSettings.Grabber_Override_PersonLimit
+                            .GrabberOverrideTitleLimit = objSettings.Grabber_Override_TitleLimit
                             .InteractiveMode = InteractiveMode
                             .ExcludeFile = objSettings.Excluded_Movies_File
                             '.ImagePath = objSettings.XML_File.Substring(0, objSettings.XML_File.LastIndexOf("\"))

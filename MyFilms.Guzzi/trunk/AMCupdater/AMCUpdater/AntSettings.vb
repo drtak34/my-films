@@ -27,6 +27,14 @@ Public Class AntSettings
             SetAttribute("Movie_Fanart_Path", value)
         End Set
     End Property
+    Public Property Movie_PersonArtwork_Path() As String
+        Get
+            Return ReadAttribute("Movie_PersonArtwork_Path")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Movie_PersonArtwork_Path", value)
+        End Set
+    End Property
     Public Property XML_File() As String
         Get
             Return ReadAttribute("XML_File")
@@ -81,6 +89,38 @@ Public Class AntSettings
         End Get
         Set(ByVal value As String)
             SetAttribute("File_Types_Trailer", value)
+        End Set
+    End Property
+    Public Property Grabber_Override_Language() As String
+        Get
+            Return ReadAttribute("Grabber_Override_Language")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Grabber_Override_Language", value)
+        End Set
+    End Property
+    Public Property Grabber_Override_GetRoles() As String
+        Get
+            Return ReadAttribute("Grabber_Override_GetRoles")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Grabber_Override_GetRoles", value)
+        End Set
+    End Property
+    Public Property Grabber_Override_PersonLimit() As String
+        Get
+            Return ReadAttribute("Grabber_Override_PersonLimit")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Grabber_Override_PersonLimit", value)
+        End Set
+    End Property
+    Public Property Grabber_Override_TitleLimit() As String
+        Get
+            Return ReadAttribute("Grabber_Override_TitleLimit")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Grabber_Override_TitleLimit", value)
         End Set
     End Property
     Public Property Master_Title() As String
@@ -551,6 +591,7 @@ Public Class AntSettings
         dt.Rows.Add("Movie_Scan_Path", "") 'DefaultMoviePath
         dt.Rows.Add("XML_File", "") 'DefaultXMLPath
         dt.Rows.Add("Movie_Fanart_Path", "") 'DefaultFanartPath
+        dt.Rows.Add("Movie_PersonArtwork_Path", "") 'DefaultPersonArtworkPath
         dt.Rows.Add("Ant_Media_Type", "HDD") 'DefaultMediaType
         dt.Rows.Add("Ant_Media_Label", "Server") 'DefaultMediaLabel
         dt.Rows.Add("Override_Path", "") 'DefaultOverridePath
@@ -609,6 +650,10 @@ Public Class AntSettings
         dt.Rows.Add("Parse_Subtitle_Files", "False")
         dt.Rows.Add("Rescan_Moved_Files", "False")
         dt.Rows.Add("Master_Title", "TranslatedTitle")
+        dt.Rows.Add("Grabber_Override_Language", "")
+        dt.Rows.Add("Grabber_Override_PersonLimit", "")
+        dt.Rows.Add("Grabber_Override_TitleLimit", "")
+        dt.Rows.Add("Grabber_Override_GetRoles", "")
         dt.Rows.Add("LogDirectory", "")
         dt.Rows.Add("Use_XBMC_nfo", "False")
         dt.Rows.Add("Use_Page_Grabber", "False")

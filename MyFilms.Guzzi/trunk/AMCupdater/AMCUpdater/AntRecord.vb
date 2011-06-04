@@ -10,6 +10,10 @@ Public Class AntRecord
     Private _SourceField As String = "Source"
     Private _OverridePath As String = String.Empty
     Private _ParserPath As String = String.Empty
+    Private _GrabberOverrideLanguage As String = String.Empty
+    Private _GrabberOverrideGetRoles As String = String.Empty
+    Private _GrabberOverridePersonLimit As String = String.Empty
+    Private _GrabberOverrideTitleLimit As String = String.Empty
     'Private _XMLPath As String = String.Empty
     Private _InternetLookupOK As Boolean
     Private _InteractiveMode As Boolean
@@ -222,6 +226,38 @@ Public Class AntRecord
             _ParserPath = value
         End Set
     End Property
+    Public Property GrabberOverrideLanguage()
+        Get
+            Return _GrabberOverrideLanguage
+        End Get
+        Set(ByVal value)
+            _GrabberOverrideLanguage = value
+        End Set
+    End Property
+    Public Property GrabberOverrideGetRoles()
+        Get
+            Return _GrabberOverrideGetRoles
+        End Get
+        Set(ByVal value)
+            _GrabberOverrideGetRoles = value
+        End Set
+    End Property
+    Public Property GrabberOverridePersonLimit()
+        Get
+            Return _GrabberOverridePersonLimit
+        End Get
+        Set(ByVal value)
+            _GrabberOverridePersonLimit = value
+        End Set
+    End Property
+    Public Property GrabberOverrideTitleLimit()
+        Get
+            Return _GrabberOverrideTitleLimit
+        End Get
+        Set(ByVal value)
+            _GrabberOverrideTitleLimit = value
+        End Set
+    End Property
     Public ReadOnly Property InternetLookupOK() As Boolean
         Get
             Return _InternetLookupOK
@@ -406,7 +442,9 @@ Public Class AntRecord
                 While (True)
                     wurl = Gb.ReturnURL(SearchString, _ParserPath, wpage, _InternetLookupAlwaysPrompt)
                     If (wurl.Count = 1) And _InternetLookupAlwaysPrompt = False Then
-                        _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage)
+
+                        '_InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage)
+                        _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                         _InternetLookupOK = True
                         _LastOutputMessage = SearchString & " - " & " Movie found by 'single result' match."
 
@@ -444,7 +482,8 @@ Public Class AntRecord
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString
                                     If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint) And _InternetLookupAlwaysPrompt = False And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
                                         If bgwFolderScanUpdate.CancellationPending = True Then
                                             Exit Sub
@@ -510,7 +549,8 @@ Public Class AntRecord
                                     wtitle = wurl.Item(i).Title.ToString
                                     If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint)) Then
                                         'Dim datas As String()
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         'CreateXmlnetInfos(datas)
                                         _InternetLookupOK = True
                                         If bgwFolderScanUpdate.CancellationPending = True Then
@@ -534,7 +574,8 @@ Public Class AntRecord
 
                                     If (wimdb = _InternetSearchHintIMDB_Id) Then
                                         'If (wtitle.Contains(SearchString) And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
                                         _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
@@ -550,7 +591,8 @@ Public Class AntRecord
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If (wtitle.Contains(SearchString) And wyear = _InternetSearchHintYear) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
                                         _LastOutputMessage = SearchString & " - " & " Movie found by year hint and name match."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
@@ -566,7 +608,8 @@ Public Class AntRecord
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If (wyear = _InternetSearchHintYear And _InternetLookupAlwaysPrompt = False) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
                                         _LastOutputMessage = SearchString & " - " & " Movie found by year hint."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
@@ -591,7 +634,8 @@ Public Class AntRecord
                                     End If
                                 Next
                                 If (CountNameMatch = 1) Then
-                                    _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                    '_InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                    _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                     _InternetLookupOK = True
                                     _LastOutputMessage = SearchString & " - " & " Movie found by name match."
                                     If bgwFolderScanUpdate.CancellationPending = True Then
@@ -1616,9 +1660,11 @@ Public Class AntRecord
                             title = title.Substring(0, title.IndexOf("\") - 1)
                             'Console.WriteLine("-" & .GroupName.ToString & "-")
                             'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                            'fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path)
                             fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                         Else
                             'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                            'fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path)
                             fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                         End If
                     End If

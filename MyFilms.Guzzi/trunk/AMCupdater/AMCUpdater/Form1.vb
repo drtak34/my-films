@@ -1832,6 +1832,7 @@ Public Class Form1
         CurrentSettings.Dont_Ask_Interactive = chkDontAskInteractive.Checked
         CurrentSettings.Log_Level = cbLogLevel.SelectedItem
         CurrentSettings.Movie_Fanart_Path = txtFanartFolder.Text
+        CurrentSettings.Movie_PersonArtwork_Path = txtPersonArtworkFolder.Text
         CurrentSettings.Movie_Scan_Path = txtMovieFolder.Text
         CurrentSettings.Override_Path = txtOverridePath.Text
         CurrentSettings.Overwrite_XML_File = chkOverwriteXML.Checked
@@ -1936,6 +1937,10 @@ Public Class Form1
 
         CurrentSettings.Group_Name_Applies_To = cbGroupNameAppliesTo.SelectedItem.ToString
         CurrentSettings.Master_Title = cbMasterTitle.SelectedItem.ToString
+        CurrentSettings.Grabber_Override_Language = chkGrabberOverrideLanguage.SelectedItem.ToString
+        CurrentSettings.Grabber_Override_GetRoles = chkGrabberOverrideGetRoles.SelectedItem.ToString
+        CurrentSettings.Grabber_Override_PersonLimit = chkGrabberOverridePersonLimit.SelectedItem.ToString
+        CurrentSettings.Grabber_Override_TitleLimit = chkGrabberOverrideTitleLimit.SelectedItem.ToString
 
     End Sub
     Private Sub LoadSettings()
@@ -1959,6 +1964,7 @@ Public Class Form1
             cbLogLevel.SelectedItem = CurrentSettings.Log_Level
             txtMovieFolder.Text = CurrentSettings.Movie_Scan_Path
             txtFanartFolder.Text = CurrentSettings.Movie_Fanart_Path
+            txtPersonArtworkFolder.Text = CurrentSettings.Movie_PersonArtwork_Path
             txtOverridePath.Text = CurrentSettings.Override_Path
             chkOverwriteXML.Checked = CurrentSettings.Overwrite_XML_File
             chkPurgeMissing.Checked = CurrentSettings.Purge_Missing_Files
@@ -1994,6 +2000,10 @@ Public Class Form1
 
             cbGroupNameAppliesTo.SelectedItem = CurrentSettings.Group_Name_Applies_To
             cbMasterTitle.SelectedItem = CurrentSettings.Master_Title
+            chkGrabberOverrideLanguage.SelectedItem = CurrentSettings.Grabber_Override_Language
+            chkGrabberOverrideGetRoles.SelectedItem = CurrentSettings.Grabber_Override_GetRoles
+            chkGrabberOverridePersonLimit.SelectedItem = CurrentSettings.Grabber_Override_PersonLimit
+            chkGrabberOverrideTitleLimit.SelectedItem = CurrentSettings.Grabber_Override_TitleLimit
 
             Dim DBFields() As String
             DBFields = CurrentSettings.Database_Fields_To_Import.Split(";")
@@ -2121,6 +2131,31 @@ Public Class Form1
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
         End Try
         Me.ValidateChildren()
+    End Sub
+
+    Private Sub btnSelectPersonArtworkFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectPersonArtworkFolder.Click
+        Dim currentPath As String
+        currentPath = txtPersonArtworkFolder.Text
+        If currentPath.Contains(";") = True Then
+            currentPath.Substring(currentPath.IndexOf(";") + 1)
+        End If
+        Try
+            With FolderBrowserDialog1
+                .RootFolder = Environment.SpecialFolder.Desktop
+                .SelectedPath = currentPath
+                .Description = "Select the directory where your person artwork thumbs are stored."
+                .ShowNewFolderButton = False
+
+                If .ShowDialog = Windows.Forms.DialogResult.OK Then
+                    txtPersonArtworkFolder.Text = .SelectedPath
+                End If
+            End With
+        Catch ex As Exception
+            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
+        End Try
+        Me.ValidateChildren()
+
     End Sub
 
     Public Sub txtConfigFilePath_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -2274,5 +2309,6 @@ Public Class Form1
             End Try
         End Using
     End Sub
+
 End Class
 

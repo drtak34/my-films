@@ -4,7 +4,7 @@
     <entry name="LogosPath">
     </entry>
     <entry name="LogoPresets">Use Logos of currently selected skin</entry>
-    <entry name="Spacing">1</entry>
+    <entry name="Spacing">2</entry>
   </section>
   <section name="ID2001">
     <entry name="ID2001_0">Framerate;contains;23;or;Framerate;contains;24;BluRay.png</entry>
