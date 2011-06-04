@@ -113,5 +113,37 @@
       <KeyEndLinkComment />
       <KeyLinkCommentIndex />
     </Details>
+    <Mapping>
+      <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" />
+      <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" />
+      <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" />
+      <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" />
+      <Field_4 source="Rating" destination="" replace="False" addstart="False" addend="False" />
+      <Field_5 source="Actors" destination="" replace="False" addstart="False" addend="False" />
+      <Field_6 source="Director" destination="" replace="False" addstart="False" addend="False" />
+      <Field_7 source="Producer" destination="" replace="False" addstart="False" addend="False" />
+      <Field_8 source="Year" destination="" replace="False" addstart="False" addend="False" />
+      <Field_9 source="Country" destination="" replace="False" addstart="False" addend="False" />
+      <Field_10 source="Category" destination="" replace="False" addstart="False" addend="False" />
+      <Field_11 source="URL_x0020_-_x0020_Redirection_x0020_Picture" destination="" replace="False" addstart="False" addend="False" />
+      <Field_12 source="ImageURL" destination="" replace="False" addstart="False" addend="False" />
+      <Field_13 source="URL_x0020_-_x0020_Redirection_x0020_Persons" destination="" replace="False" addstart="False" addend="False" />
+      <Field_14 source="Comment" destination="" replace="False" addstart="False" addend="False" />
+      <Field_15 source="Language" destination="" replace="False" addstart="False" addend="False" />
+      <Field_16 source="Tagline" destination="" replace="False" addstart="False" addend="False" />
+      <Field_17 source="Certification" destination="" replace="False" addstart="False" addend="False" />
+      <Field_18 source="URL_x0020_-_x0020_Redirection_x0020_Titles" destination="" replace="False" addstart="False" addend="False" />
+      <Field_19 source="URL_x0020_-_x0020_Redirection_x0020_Certification" destination="" replace="False" addstart="False" addend="False" />
+      <Field_20 source="Writer" destination="" replace="False" addstart="False" addend="False" />
+      <Field_21 source="URL_x0020_-_x0020_Redirection_x0020_Comment" destination="" replace="False" addstart="False" addend="False" />
+      <Field_22 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_23 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_24 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_25 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
+      <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
+      <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
+      <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
+    </Mapping>
   </Section>
 </Profile>
