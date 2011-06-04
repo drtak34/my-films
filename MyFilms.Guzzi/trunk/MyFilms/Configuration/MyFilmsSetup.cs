@@ -441,6 +441,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void ButSave_Click(object sender, EventArgs e)
         {
             Save_Config();
+            // update AMCupdater config with latest MyFilms settings
+            Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
+            CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
+            Save_XML_AMCconfig(Config_Name.Text); // save new config
+            Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
         }
 
         private void Save_Config()
@@ -1810,6 +1815,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 System.Windows.Forms.MessageBox.Show("Created a copy of current Configuration !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 CatalogType.SelectedIndex = newCatalogSelectedIndex; // set to selected catalog type 
                 Save_Config();
+                // Create matching AMCupdater config
+                Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
+                CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
+                Save_XML_AMCconfig(Config_Name.Text); // save new config
+                Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
+
                 Config_Name.Focus();
                 textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
             }
