@@ -1989,11 +1989,11 @@
           // btnCreateAMCDefaultConfig
           // 
           this.btnCreateAMCDefaultConfig.AllowDrop = true;
-          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 102);
+          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(17, 95);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
-          this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 29);
+          this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 36);
           this.btnCreateAMCDefaultConfig.TabIndex = 77;
-          this.btnCreateAMCDefaultConfig.Text = "(Re)Create Default Config";
+          this.btnCreateAMCDefaultConfig.Text = "Sync MyFilms Settings \r\nto AMC Updater";
           this.ToolTip1.SetToolTip(this.btnCreateAMCDefaultConfig, resources.GetString("btnCreateAMCDefaultConfig.ToolTip"));
           this.btnCreateAMCDefaultConfig.UseVisualStyleBackColor = true;
           this.btnCreateAMCDefaultConfig.Click += new System.EventHandler(this.btnCreateAMCDefaultConfig_Click);
@@ -2093,7 +2093,7 @@
           // 
           this.btnLaunchAMCupdater.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunchAMCupdater.Image")));
           this.btnLaunchAMCupdater.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 59);
+          this.btnLaunchAMCupdater.Location = new System.Drawing.Point(17, 52);
           this.btnLaunchAMCupdater.Name = "btnLaunchAMCupdater";
           this.btnLaunchAMCupdater.Size = new System.Drawing.Size(152, 37);
           this.btnLaunchAMCupdater.TabIndex = 76;
