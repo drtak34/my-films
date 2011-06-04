@@ -974,7 +974,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     //if (ExtendedStartmode("Details context: Change Local COver)"))
                     //{
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798762) + " (" + ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true) + ")"); // Change Cover
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798762) + " " + ChangeLocalCover((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true)); // Change Cover
                     choiceViewMenu.Add("changecover");
                     //}
 
@@ -2836,8 +2836,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          if (onlyReturnCount) 
-            return result.Count.ToString();
+          if (onlyReturnCount)
+            return filesfoundcounter.ToString();
 
           foreach (string n in filesfound)
           {
@@ -2852,10 +2852,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("(Sorted coverfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
           }
 
+          if (filesfoundcounter == 1) return "(1)";
           if (result.Count > 0)
           {
-            if (nCurrent == -1) 
-              return "";
+            if (nCurrent == -1)
+              return "(" + filesfoundcounter.ToString() + ")";
             nCurrent++;
             if (nCurrent >= result.Count) 
               nCurrent = 0;
@@ -2864,9 +2865,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string tmpPicturename = newPicture.Substring(newPicture.LastIndexOf("\\") + 1);
             if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
             {
-              newPictureCatalogname =
-                MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) +
-                tmpPicturename;
+              newPictureCatalogname = MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\") + 1) + tmpPicturename;
             }
             if (MyFilms.conf.PictureHandling == "Full Path")
             {
@@ -2882,11 +2881,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("(ChangeLocalCover) : NewCatalogName: '" + newPictureCatalogname + "'");
               Update_XML_database();
             }
+            return "(" + filesfoundcounter.ToString() + ")";
           }
           else
             LogMyFilms.Debug("MyFilmsDetails (LocalCoverChange) - NO COVERS FOUND !!!!");
-
-          return result.Count.ToString();
+          return "";
         }
         
 
