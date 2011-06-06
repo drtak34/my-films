@@ -1848,6 +1848,7 @@ Public Class Form1
         CurrentSettings.Manual_XML_File = txtManualXMLPath.Text
         CurrentSettings.Folder_Name_Is_Group_Name = chkFolderNameIsGroupName.Checked
         CurrentSettings.Parse_Playlist_Files = chkParsePlaylistFiles.Checked
+        CurrentSettings.Parse_Trailers = chkParseTrailers.Checked
         CurrentSettings.Image_Download_Filename_Prefix = txtPictureFilenamePrefix.Text
         CurrentSettings.Prohibit_Internet_Lookup = chkProhibitInternetLookup.Checked
         CurrentSettings.Use_XBMC_nfo = chkUseXBMCnfo.Checked
@@ -1977,6 +1978,7 @@ Public Class Form1
             chkDontAskInteractive.Checked = CurrentSettings.Dont_Ask_Interactive
             chkFolderNameIsGroupName.Checked = CurrentSettings.Folder_Name_Is_Group_Name
             chkParsePlaylistFiles.Checked = CurrentSettings.Parse_Playlist_Files
+            chkParseTrailers.Checked = CurrentSettings.Parse_Trailers
             txtPictureFilenamePrefix.Text = CurrentSettings.Image_Download_Filename_Prefix
             chkProhibitInternetLookup.Checked = CurrentSettings.Prohibit_Internet_Lookup
             chkUseXBMCnfo.Checked = CurrentSettings.Use_XBMC_nfo

@@ -464,6 +464,19 @@ Public Class AntSettings
             SetAttribute("Parse_Playlist_Files", value)
         End Set
     End Property
+    Public Property Parse_Trailers() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Parse_Trailers").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Parse_Trailers", value)
+        End Set
+    End Property
     Public Property Store_Image_With_Relative_Path() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Store_Image_With_Relative_Path").ToLower
@@ -643,6 +656,7 @@ Public Class AntSettings
         dt.Rows.Add("Folder_Name_Is_Group_Name", "False")
         dt.Rows.Add("Group_Name_Applies_To", "Original Title")
         dt.Rows.Add("Parse_Playlist_Files", "False")
+        dt.Rows.Add("Parse_Trailers", "False")
         dt.Rows.Add("Store_Image_With_Relative_Path", "True")
         dt.Rows.Add("Image_Download_Filename_Prefix", "")
         dt.Rows.Add("Use_Folder_Dot_Jpg", "False")

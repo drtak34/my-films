@@ -123,16 +123,6 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
-  <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
-    <value>AMCUpdater can be instructed to ignore selected files.
-These files will never be scanned or imported by AMCUpdater.
-If the file does not exist; it will be created the first time you select 'Ignore' on a movie.
-Note:
-It is sufficient, to set path and name to a file - AMCupdater will autocreate it on first use.</value>
-  </data>
-  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>280, 50</value>
-  </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1095, 13</value>
   </metadata>
@@ -384,6 +374,13 @@ For example, an entry listing a Source of 'd:\Movies' will not be considered an 
 These files will be scanned to determine what languages are included, if possible.
 This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
 </value>
+  </data>
+  <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
+    <value>AMCUpdater can be instructed to ignore selected files.
+These files will never be scanned or imported by AMCUpdater.
+If the file does not exist; it will be created the first time you select 'Ignore' on a movie.
+Note:
+It is sufficient, to set path and name to a file - AMCupdater will autocreate it on first use.</value>
   </data>
   <data name="Label46.Text" xml:space="preserve">
     <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
@@ -708,6 +705,9 @@ If you have your movie files in folders, that have the movie title, select “fo
         8Dsg/w+T+GsRKGk0sAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>280, 50</value>
+  </metadata>
   <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 50</value>
   </metadata>

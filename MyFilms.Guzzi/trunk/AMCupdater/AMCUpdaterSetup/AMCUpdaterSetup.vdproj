@@ -262,6 +262,30 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CA78B0608A987D9B55672EF969E6F5F5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_6B35836A040A4775DF8BC0BCCD7524E8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B34D80A348D99A8782F48268A9EABE0D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AE855CD98E48530DE34491D744E316F0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_520FAAEED1027971F344AA17B84E799D"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -287,30 +311,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_0ECBD392480F214602A0EF5C3380C9F0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CA78B0608A987D9B55672EF969E6F5F5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6B35836A040A4775DF8BC0BCCD7524E8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B34D80A348D99A8782F48268A9EABE0D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AE855CD98E48530DE34491D744E316F0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -358,6 +358,16 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5"
+                    {
+                    "Name" = "8:.NET Framework 3.5"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.9.0.x86"
+                    {
+                    "Name" = "8:Visual C++-Laufzeitbibliotheken (x86)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.9.0.x86"
+                    }
                 }
             }
         }
@@ -864,7 +874,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Grabber, Version=5.0.1.815, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:Grabber, Version=5.0.1.939, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_CA78B0608A987D9B55672EF969E6F5F5"
@@ -1052,7 +1062,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AMC Updater"
         "ProductCode" = "8:{378C2834-384E-46B3-88BE-02415B1A68D1}"
-        "PackageCode" = "8:{48B2ADD9-95AF-4E31-A59F-6011A518A293}"
+        "PackageCode" = "8:{3276AEA8-CC6E-42B4-A52D-7A90067CA031}"
         "UpgradeCode" = "8:{6C05476F-DF35-4F16-91CF-6F4AB31A1CD1}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
