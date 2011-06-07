@@ -439,7 +439,7 @@ Public Class Form1
 #End Region
 
 #Region "Misc GUI Actions"
-    Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectMovieFolder.Click
         Dim wpath As String
         Dim currentPath As String
         currentPath = txtMovieFolder.Text
@@ -485,7 +485,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectConfigFile.Click
         Dim currentDirectory As String
         currentDirectory = txtConfigFilePath.Text
         Try
@@ -625,7 +625,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectParserFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnSelectParserFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectParserFile.Click
         Dim currentPath As String
         currentPath = txtParserFilePath.Text
         If currentPath.Contains(";") = True Then
@@ -662,7 +662,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectExcludeFile.Click
         Dim currentPath As String
         currentPath = txtExcludeFilePath.Text
         If currentPath.Contains(";") = True Then
@@ -1938,10 +1938,10 @@ Public Class Form1
 
         CurrentSettings.Group_Name_Applies_To = cbGroupNameAppliesTo.SelectedItem.ToString
         CurrentSettings.Master_Title = cbMasterTitle.SelectedItem.ToString
-        CurrentSettings.Grabber_Override_Language = chkGrabberOverrideLanguage.SelectedItem.ToString
-        CurrentSettings.Grabber_Override_GetRoles = chkGrabberOverrideGetRoles.SelectedItem.ToString
-        CurrentSettings.Grabber_Override_PersonLimit = chkGrabberOverridePersonLimit.SelectedItem.ToString
-        CurrentSettings.Grabber_Override_TitleLimit = chkGrabberOverrideTitleLimit.SelectedItem.ToString
+        CurrentSettings.Grabber_Override_Language = chkGrabberOverrideLanguage.Text.ToString()
+        CurrentSettings.Grabber_Override_GetRoles = chkGrabberOverrideGetRoles.Text.ToString
+        CurrentSettings.Grabber_Override_PersonLimit = chkGrabberOverridePersonLimit.Text.ToString
+        CurrentSettings.Grabber_Override_TitleLimit = chkGrabberOverrideTitleLimit.Text.ToString
 
     End Sub
     Private Sub LoadSettings()
@@ -2002,10 +2002,10 @@ Public Class Form1
 
             cbGroupNameAppliesTo.SelectedItem = CurrentSettings.Group_Name_Applies_To
             cbMasterTitle.SelectedItem = CurrentSettings.Master_Title
-            chkGrabberOverrideLanguage.SelectedItem = CurrentSettings.Grabber_Override_Language
-            chkGrabberOverrideGetRoles.SelectedItem = CurrentSettings.Grabber_Override_GetRoles
-            chkGrabberOverridePersonLimit.SelectedItem = CurrentSettings.Grabber_Override_PersonLimit
-            chkGrabberOverrideTitleLimit.SelectedItem = CurrentSettings.Grabber_Override_TitleLimit
+            chkGrabberOverrideLanguage.Text = CurrentSettings.Grabber_Override_Language
+            chkGrabberOverrideGetRoles.Text = CurrentSettings.Grabber_Override_GetRoles
+            chkGrabberOverridePersonLimit.Text = CurrentSettings.Grabber_Override_PersonLimit
+            chkGrabberOverrideTitleLimit.Text = CurrentSettings.Grabber_Override_TitleLimit
 
             Dim DBFields() As String
             DBFields = CurrentSettings.Database_Fields_To_Import.Split(";")
@@ -2111,7 +2111,7 @@ Public Class Form1
 
 #End Region
 
-    Private Sub btnSelectFanartFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnSelectFanartFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectFanartFolder.Click
         Dim currentPath As String
         currentPath = txtFanartFolder.Text
         If currentPath.Contains(";") = True Then
