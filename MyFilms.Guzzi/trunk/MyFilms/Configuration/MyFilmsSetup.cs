@@ -4619,7 +4619,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntSTitle.Text = "FormattedTitle";
           TitleDelim.Text = "\\";
 
-          SearchFileName.Checked = true;
+          SearchFileName.Checked = false;
 
           cbPictureHandling.Text = "Relative Path";
 
