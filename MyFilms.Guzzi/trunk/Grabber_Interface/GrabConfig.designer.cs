@@ -94,6 +94,7 @@ namespace Grabber_Interface
           this.groupBox10 = new System.Windows.Forms.GroupBox();
           this.label29 = new System.Windows.Forms.Label();
           this.cbCertificationPreferredLanguage = new System.Windows.Forms.ComboBox();
+          this.button_SaveAs = new System.Windows.Forms.Button();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -180,7 +181,7 @@ namespace Grabber_Interface
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-          this.button_SaveAs = new System.Windows.Forms.Button();
+          this.label33 = new System.Windows.Forms.Label();
           this.groupBox8.SuspendLayout();
           this.groupBox15.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
@@ -742,6 +743,14 @@ namespace Grabber_Interface
           this.cbCertificationPreferredLanguage.Name = "cbCertificationPreferredLanguage";
           this.cbCertificationPreferredLanguage.SelectedIndexChanged += new System.EventHandler(this.cbCertificationPreferredLanguage_SelectedIndexChanged);
           // 
+          // button_SaveAs
+          // 
+          resources.ApplyResources(this.button_SaveAs, "button_SaveAs");
+          this.button_SaveAs.Name = "button_SaveAs";
+          this.toolTip1.SetToolTip(this.button_SaveAs, resources.GetString("button_SaveAs.ToolTip"));
+          this.button_SaveAs.UseVisualStyleBackColor = true;
+          this.button_SaveAs.Click += new System.EventHandler(this.button_SaveAs_Click);
+          // 
           // linkLabelMFwiki
           // 
           resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
@@ -1140,6 +1149,7 @@ namespace Grabber_Interface
           // 
           // tabPageUserSettings
           // 
+          this.tabPageUserSettings.Controls.Add(this.label33);
           this.tabPageUserSettings.Controls.Add(this.label32);
           this.tabPageUserSettings.Controls.Add(this.label31);
           this.tabPageUserSettings.Controls.Add(this.dataGridViewMapping);
@@ -1395,13 +1405,11 @@ namespace Grabber_Interface
           // 
           this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
           // 
-          // button_SaveAs
+          // label33
           // 
-          resources.ApplyResources(this.button_SaveAs, "button_SaveAs");
-          this.button_SaveAs.Name = "button_SaveAs";
-          this.toolTip1.SetToolTip(this.button_SaveAs, resources.GetString("button_SaveAs.ToolTip"));
-          this.button_SaveAs.UseVisualStyleBackColor = true;
-          this.button_SaveAs.Click += new System.EventHandler(this.button_SaveAs_Click);
+          resources.ApplyResources(this.label33, "label33");
+          this.label33.ForeColor = System.Drawing.Color.Red;
+          this.label33.Name = "label33";
           // 
           // GrabConfig
           // 
@@ -1625,6 +1633,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column5;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Button button_SaveAs;
+        private System.Windows.Forms.Label label33;
 
     }
 }
