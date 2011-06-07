@@ -1487,8 +1487,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               groupBox_AMCupdater_ExternalApplication.Enabled = false;
               groupBox_AMCupdaterScheduer.Enabled = false;
             }
-            if (PathStorage.Text.Length > 0 && AMCMovieScanPath.Text.Length == 0)
-              AMCMovieScanPath.Text = PathStorage.Text;
+            //if (PathStorage.Text.Length > 0 && AMCMovieScanPath.Text.Length == 0) // disabled, because users don't want to always have that path copied to AMC scan path
+            //  AMCMovieScanPath.Text = PathStorage.Text;
             //else
             //  AMCMovieScanPath.Text = String.Empty;
             //if (AMCMovieScanPath.Text.Length == 0)
