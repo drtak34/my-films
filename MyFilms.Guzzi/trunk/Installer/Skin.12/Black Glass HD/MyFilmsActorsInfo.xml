@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--version="1.0" encoding="utf-8" standalone="yes"-->
+<window>
+  <id>7991</id>
+  <defaultcontrol>3</defaultcontrol>
+  <allowoverlay>control.isvisible(13371337)</allowoverlay>
+  <define>#header.label:</define>
+  <define>#header.background:hover_my videos.png</define>
+  <animation effect="fade" time="250" start="100" end="100">WindowClose</animation>
+  <controls>
+    <import>common.window.background.xml</import>
+    <import>common.window.overlay.xml</import>
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>60</posX>
+      <posY>22</posY>
+      <width>1800</width>
+      <height>1035</height>
+      <texture>bg_dialog_big.png</texture>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>102</posX>
+      <posY>126</posY>
+      <width>1714</width>
+      <height>79</height>
+      <texture>bg_facade_line_nofocus.png</texture>
+      <colordiffuse>77ffffff</colordiffuse>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>681</posX>
+      <posY>205</posY>
+      <width>3</width>
+      <height>733</height>
+      <texture>bg_button_vertical.png</texture>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <!-- 		<control>
+			<description>Actor Name Label</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>177</posX>
+			<posY>125</posY>
+			<label>493</label>
+			<font>font13</font>
+			<textcolor>FFB2D4F5</textcolor>
+		<animation effect="fade" time="250">WindowClose</animation><animation effect="fade" time="250">WindowOpen</animation></control> -->
+    <control>
+      <description>Actor Name value</description>
+      <type>fadelabel</type>
+      <id>1</id>
+      <posX>711</posX>
+      <posY>97</posY>
+      <width>1050</width>
+      <label>#Actor.Name</label>
+      <font>font22</font>
+      <textcolor>FFFFFFFF</textcolor>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <!-- 		<control>
+			<description>Born</description>
+			<type>label</type>
+			<id>1</id>
+			<posX>177</posX>
+			<posY>150</posY>
+			<label>686</label>
+			<font>font13</font>
+			<textcolor>FFB2D4F5</textcolor>
+		<animation effect="fade" time="250">WindowClose</animation><animation effect="fade" time="250">WindowOpen</animation></control> -->
+    <control>
+      <description>Date of Birth</description>
+      <type>fadelabel</type>
+      <id>1</id>
+      <posX>711</posX>
+      <posY>157</posY>
+      <width>1066</width>
+      <label>#Actor.DateOfBirth - #Actor.PlaceOfBirth</label>
+      <font>font12</font>
+      <textcolor>90FFFFFF</textcolor>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>group element</description>
+      <type>group</type>
+      <posX>103</posX>
+      <posY>780</posY>
+      <layout>StackLayout</layout>
+      <control>
+        <description>Biography</description>
+        <type>togglebutton</type>
+        <id>3</id>
+        <label>1011</label>
+        <onleft>2</onleft>
+        <onright>50</onright>
+        <onup>4</onup>
+        <ondown>4</ondown>
+        <animation effect="fade" time="250">WindowClose</animation>
+        <animation effect="fade" time="250">WindowOpen</animation>
+      </control>
+      <control>
+        <description>Movies</description>
+        <type>togglebutton</type>
+        <id>4</id>
+        <label>342</label>
+        <onleft>2</onleft>
+        <onright>50</onright>
+        <onup>3</onup>
+        <ondown>3</ondown>
+        <animation effect="fade" time="250">WindowClose</animation>
+        <animation effect="fade" time="250">WindowOpen</animation>
+      </control>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <id>21</id>
+      <description>Image logo</description>
+      <type>image</type>
+      <posX>135</posX>
+      <posY>235</posY>
+      <width>519</width>
+      <height>390</height>
+      <keepaspectratio>yes</keepaspectratio>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#thumb</texture>
+      <centered>yes</centered>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>image</type>
+      <description>Image logo</description>
+      <id>1</id>
+      <posX>120</posX>
+      <posY>225</posY>
+      <width>547</width>
+      <height>414</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">PictureCase.png</texture>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>102</posX>
+      <posY>859</posY>
+      <width>1714</width>
+      <height>79</height>
+      <texture>bg_facade_line_nofocus.png</texture>
+      <colordiffuse>77ffffff</colordiffuse>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>image</type>
+      <id>0</id>
+      <posX>103</posX>
+      <posY>700</posY>
+      <width>577</width>
+      <height>79</height>
+      <texture>bg_button_nofocus.png</texture>
+      <visible>control.isvisible(3)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>Biography value</description>
+      <type>textboxscrollup</type>
+      <id>20</id>
+      <posX>711</posX>
+      <posY>225</posY>
+      <width>1050</width>
+      <height>660</height>
+      <label>#Actor.Biography</label>
+      <font>font13</font>
+      <seperator>: : :</seperator>
+      <textcolor>6fffffff</textcolor>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <description>textarea</description>
+      <type>textbox</type>
+      <id>22</id>
+      <posX>3711</posX>
+      <posY>225</posY>
+      <width>1050</width>
+      <height>675</height>
+      <onleft>4</onleft>
+      <onright>50</onright>
+      <onup>4</onup>
+      <ondown>4</ondown>
+      <spinPosX>4566</spinPosX>
+      <spinPosY>954</spinPosY>
+      <textcolor>03FFFFFF</textcolor>
+      <label>#Actor.Movies</label>
+      <visible>control.hasfocus(3)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>group</type>
+      <description>group element</description>
+      <control>
+        <description>composite control consisting of a list control and a thumbnail panel</description>
+        <type>facadeview</type>
+        <id>50</id>
+        <animation effect="slide" tween="circle" easing="out" time="200" start="800,0" reversible="false">WindowOpen</animation>
+        <animation effect="slide" tween="circle" easing="out" time="200" end="800,0" reversible="false">WindowClose</animation>
+        <visible>!Control.IsVisible(20)</visible>
+        <control>
+          <description>Thumbnail Panel</description>
+          <type>thumbnailpanel</type>
+          <posX>15</posX>
+          <posY>225</posY>
+          <width>1950</width>
+          <height>810</height>
+          <onleft>4</onleft>
+          <scrollOffset>0</scrollOffset>
+          <itemWidth>238</itemWidth>
+          <itemHeight>315</itemHeight>
+          <textureWidth>220</textureWidth>
+          <textureHeight>280</textureHeight>
+          <thumbWidth>192</thumbWidth>
+          <thumbHeight>271</thumbHeight>
+          <thumbPosX>25</thumbPosX>
+          <thumbPosY>4</thumbPosY>
+          <itemWidthBig>387</itemWidthBig>
+          <itemHeightBig>469</itemHeightBig>
+          <thumbWidthBig>292</thumbWidthBig>
+          <thumbHeightBig>414</thumbHeightBig>
+          <textureWidthBig>337</textureWidthBig>
+          <textureHeightBig>427</textureHeightBig>
+          <thumbPosXBig>37</thumbPosXBig>
+          <thumbPosYBig>7</thumbPosYBig>
+          <thumbZoom>yes</thumbZoom>
+          <enableFocusZoom>no</enableFocusZoom>
+          <zoomXPixels>0</zoomXPixels>
+          <zoomYPixels>0</zoomYPixels>
+          <hideUnfocusTexture>no</hideUnfocusTexture>
+          <renderFocusText>yes</renderFocusText>
+          <renderUnfocusText>yes</renderUnfocusText>
+          <imageFolder>DVDCase.png</imageFolder>
+          <imageFolderFocus>DVDCase.png</imageFolderFocus>
+          <textXOff>3</textXOff>
+          <textYOff>3</textYOff>
+          <spinCanFocus>no</spinCanFocus>
+          <spinWidth>12</spinWidth>
+          <spinHeight>13</spinHeight>
+          <spinPosX>1846</spinPosX>
+          <spinPosY>1027</spinPosY>
+          <spinAlign>Right</spinAlign>
+          <spinColor>6fffffff</spinColor>
+          <unfocusedAlpha>120</unfocusedAlpha>
+          <!-- <playedColor>ffffffff</playedColor>
+					<playedColor>ff77ccff</playedColor>
+    					<remoteColor>ffFFA075</remoteColor>
+    					<downloadColor>ff80ff80</downloadColor> -->
+          <showFrame>true</showFrame>
+          <frameNoFocus>DVDCase.png</frameNoFocus>
+          <frameFocus>DVDCase.png</frameFocus>
+        </control>
+        <control>
+          <type>listcontrol</type>
+          <description>listcontrol</description>
+          <onleft>4</onleft>
+          <playedColor>ff77ccff</playedColor>
+          <!-- <playedColor>ffffffff</playedColor> -->
+          <textYOff>12</textYOff>
+          <textXOff>-10</textXOff>
+          <posX>730</posX>
+          <posY>220</posY>
+          <width>1039</width>
+          <height>795</height>
+          <textYOff>4</textYOff>
+          <textXOff>-10</textXOff>
+          <textXOff2>945</textXOff2>
+          <textYOff2>48</textYOff2>
+          <textXOff3>975</textXOff3>
+          <textYOff3>51</textYOff3>
+          <font2>font11</font2>
+          <font3>font11</font3>
+          <textureHeight>90</textureHeight>
+          <textureFocus>bg_facade_line_focus.png</textureFocus>
+          <textureNoFocus>bg_facade_line_nofocus.png</textureNoFocus>
+          <IconXOff>15</IconXOff>
+          <IconYOff>15</IconYOff>
+          <spinCanFocus>no</spinCanFocus>
+          <spinWidth>33</spinWidth>
+          <spinHeight>30</spinHeight>
+          <spinPosX>1732</spinPosX>
+          <spinPosY>967</spinPosY>
+          <spinAlign>Right</spinAlign>
+          <spinColor>6fffffff</spinColor>
+          <visible>!Control.IsVisible(20)</visible>
+        </control>
+      </control>
+    </control>
+  </controls>
+</window>
