@@ -169,4 +169,7 @@
   <Values Option="Grabber_Override_GetRoles">
     <Value></Value>
   </Values>
+  <Values Option="Parse_Trailers">
+    <Value></Value>
+  </Values>
 </NewDataSet>
