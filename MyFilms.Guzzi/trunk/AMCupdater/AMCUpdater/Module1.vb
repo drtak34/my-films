@@ -208,15 +208,23 @@ Module Module1
         If m.Success = True Then
             Return m.Value.Substring(1, 4) 'remove ()
         Else
-            'Dim CutText2 As New Regex("" & "[0-9]{4}" & "")
-            'Dim m2 As Match
-            'm2 = CutText2.Match(CleanString)
-            'If m2.Success = True Then
-            '    Return m2.Value
-            'Else
-            Return ""
+            ' remove IMDB ID from text
+            Dim CutIMDB As New Regex("tt\d{7}")
+            Dim imdb As Match
+            imdb = CutIMDB.Match(CleanString)
+            If imdb.Success = True Then
+                CleanString = CleanString.Replace(imdb.Value, "")
+            End If
+
+            Dim CutText2 As New Regex("[0-9]{4}")
+            Dim m2 As Match
+            m2 = CutText2.Match(CleanString)
+            If m2.Success = True Then
+                Return m2.Value
+            Else
+                Return ""
+            End If
         End If
-        'End If
 
         'Tidy up any trailing spaces:
         CleanString = CleanString.Trim
