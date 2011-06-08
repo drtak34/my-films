@@ -978,6 +978,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseOriginaltitleForMissingTranslatedtitle", chkUseOriginalAsTranslatedTitle.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchFileName", SearchFileName.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirs", SearchSubDirs.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchOnlyExactMatches", SearchOnlyExactMatches.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", SearchSubDirsTrailer.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatched", CheckWatched.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", CheckWatchedPlayerStopped.Checked);
@@ -1377,9 +1378,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 SearchFileName.Checked = false;
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirs", "False") == "True" //fmu
             || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirs", "False") == "yes")  //fmu
-                SearchSubDirs.Checked = true;
+              SearchSubDirs.Checked = true;
             else
-                SearchSubDirs.Checked = false;
+              SearchSubDirs.Checked = false;
+            if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchOnlyExactMatches", "False") == "True"
+            || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchOnlyExactMatches", "False") == "yes")
+              SearchOnlyExactMatches.Checked = true;
+            else
+              SearchOnlyExactMatches.Checked = false;
             if (XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", "False") == "True" //fmu
             || XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SearchSubDirsTrailer", "False") == "yes")  //fmu
                 SearchSubDirsTrailer.Checked = true;
@@ -1708,6 +1714,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             txtfdupdate.ResetText();
             rbsuppress1.Checked = true;
             SearchSubDirs.Checked = false;
+            SearchOnlyExactMatches.Checked = false;
             SearchSubDirsTrailer.Checked = false;
             check_WOL_enable.Checked = false;
             comboWOLtimeout.ResetText();

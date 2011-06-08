@@ -74,6 +74,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 PictureHandling = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "PictureHandling", string.Empty);
                 ItemSearchFileTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ItemSearchFileNameTrailer", string.Empty);
                 SearchSubDirs = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirs", "No");
+                SearchOnlyExactMatches = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchOnlyExactMatches", "No");
                 SearchSubDirsTrailer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SearchSubDirsTrailer", "No");
                 CheckWatched = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckWatched", false);
                 CheckWatchedPlayerStopped = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckWatchedPlayerStopped", false);
@@ -851,6 +852,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return searchSubDirs; }
             set { searchSubDirs = value; }
+        }
+        private string searchOnlyExactMatches = "False";
+        public string SearchOnlyExactMatches
+        {
+            get { return searchOnlyExactMatches; }
+            set { searchOnlyExactMatches = value; }
         }
         private string searchSubDirsTrailer = "False";
         public string SearchSubDirsTrailer

@@ -200,6 +200,8 @@
           this.txtGrabberDisplay = new System.Windows.Forms.TextBox();
           this.btnEditScript = new System.Windows.Forms.Button();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
+          this.cbGrabberOverrideGetRoles = new System.Windows.Forms.ComboBox();
+          this.label55 = new System.Windows.Forms.Label();
           this.label51 = new System.Windows.Forms.Label();
           this.cbGrabberOverrideTitleLimit = new System.Windows.Forms.ComboBox();
           this.label50 = new System.Windows.Forms.Label();
@@ -490,8 +492,7 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.label55 = new System.Windows.Forms.Label();
-          this.cbGrabberOverrideGetRoles = new System.Windows.Forms.ComboBox();
+          this.SearchOnlyExactMatches = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1680,6 +1681,28 @@
           this.groupBox6.TabStop = false;
           this.groupBox6.Text = "MyFilms Grabber Override Options ...";
           this.ToolTip1.SetToolTip(this.groupBox6, resources.GetString("groupBox6.ToolTip"));
+          // 
+          // cbGrabberOverrideGetRoles
+          // 
+          this.cbGrabberOverrideGetRoles.FormattingEnabled = true;
+          this.cbGrabberOverrideGetRoles.Items.AddRange(new object[] {
+            "true",
+            "false"});
+          this.cbGrabberOverrideGetRoles.Location = new System.Drawing.Point(276, 10);
+          this.cbGrabberOverrideGetRoles.Name = "cbGrabberOverrideGetRoles";
+          this.cbGrabberOverrideGetRoles.Size = new System.Drawing.Size(45, 21);
+          this.cbGrabberOverrideGetRoles.TabIndex = 71;
+          this.ToolTip1.SetToolTip(this.cbGrabberOverrideGetRoles, "If checked, add Roles to actor infos.\r\nDepends on the grabber script supporting t" +
+                  "hat option.");
+          // 
+          // label55
+          // 
+          this.label55.AutoSize = true;
+          this.label55.Location = new System.Drawing.Point(191, 16);
+          this.label55.Name = "label55";
+          this.label55.Size = new System.Drawing.Size(82, 13);
+          this.label55.TabIndex = 70;
+          this.label55.Text = "Get Actor Roles";
           // 
           // label51
           // 
@@ -3832,6 +3855,7 @@
           // 
           // groupBoxMoviePathInfos
           // 
+          this.groupBoxMoviePathInfos.Controls.Add(this.SearchOnlyExactMatches);
           this.groupBoxMoviePathInfos.Controls.Add(this.label5);
           this.groupBoxMoviePathInfos.Controls.Add(this.PathStorage);
           this.groupBoxMoviePathInfos.Controls.Add(this.SearchSubDirs);
@@ -4901,27 +4925,16 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // label55
+          // SearchOnlyExactMatches
           // 
-          this.label55.AutoSize = true;
-          this.label55.Location = new System.Drawing.Point(191, 16);
-          this.label55.Name = "label55";
-          this.label55.Size = new System.Drawing.Size(82, 13);
-          this.label55.TabIndex = 70;
-          this.label55.Text = "Get Actor Roles";
-          // 
-          // cbGrabberOverrideGetRoles
-          // 
-          this.cbGrabberOverrideGetRoles.FormattingEnabled = true;
-          this.cbGrabberOverrideGetRoles.Items.AddRange(new object[] {
-            "true",
-            "false"});
-          this.cbGrabberOverrideGetRoles.Location = new System.Drawing.Point(276, 10);
-          this.cbGrabberOverrideGetRoles.Name = "cbGrabberOverrideGetRoles";
-          this.cbGrabberOverrideGetRoles.Size = new System.Drawing.Size(45, 21);
-          this.cbGrabberOverrideGetRoles.TabIndex = 71;
-          this.ToolTip1.SetToolTip(this.cbGrabberOverrideGetRoles, "If checked, add Roles to actor infos.\r\nDepends on the grabber script supporting t" +
-                  "hat option.");
+          this.SearchOnlyExactMatches.AutoSize = true;
+          this.SearchOnlyExactMatches.Location = new System.Drawing.Point(338, 38);
+          this.SearchOnlyExactMatches.Name = "SearchOnlyExactMatches";
+          this.SearchOnlyExactMatches.Size = new System.Drawing.Size(79, 30);
+          this.SearchOnlyExactMatches.TabIndex = 69;
+          this.SearchOnlyExactMatches.Text = "Only exact \r\nMatches";
+          this.ToolTip1.SetToolTip(this.SearchOnlyExactMatches, resources.GetString("SearchOnlyExactMatches.ToolTip"));
+          this.SearchOnlyExactMatches.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 
@@ -5441,5 +5454,6 @@
         private Label label52;
         private Label label55;
         private ComboBox cbGrabberOverrideGetRoles;
+        private CheckBox SearchOnlyExactMatches;
     }
 }

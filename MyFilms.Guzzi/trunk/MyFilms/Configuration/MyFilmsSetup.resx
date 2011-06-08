@@ -285,6 +285,19 @@ You can use the browse button to select the file.
 The default Artist image will be displayed when an artist does not have an associated photo or image
 and it will be used as a default artist image.</value>
   </data>
+  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
+    <value>You can update your movie data via internet from insude MyFilms GUI.
+
+You have to define the xml parser file ("grabber script" to be used.
+
+With the 'try to find best match automaticly' option validated, the grabber will
+try to find best match but can provide errors in some cases. It's better to
+don't valid it. In that case, you'll get a menu to choose the right movie.
+
+You can change those options from MyFilms GUI (global settings) also.
+
+</value>
+  </data>
   <data name="btnEditScript.ToolTip" xml:space="preserve">
     <value>This launches the MyFilms Grabber Interface.
 The current default script will be autoloaded.
@@ -295,6 +308,16 @@ Remark: Changes to the Grabber Options will apply to the script,
 so all MyFilms configs that use it, will be affected.
 If you want those settings to only apply to a certain MyFilms config, you should save the script
 with a separate name and set this as default grabber script.</value>
+  </data>
+  <data name="groupBox6.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "MyFilms Grabber Interface" ("Edit script").
+</value>
   </data>
   <data name="cbGrabberOverrideLanguage.ToolTip" xml:space="preserve">
     <value>Preferred Language(s) for 
@@ -309,16 +332,6 @@ of your ANT Movie Catalog.
 Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
-  </data>
-  <data name="groupBox6.ToolTip" xml:space="preserve">
-    <value>You can set several options for the internet grabber.
-Be aware, that not all options are supported by all grabber scripts.
-However, IMDB (full) script should support all options listed here.
-If you set no values, the default settings of the grabber
-will be used instead.
-The default settings (of the grabber script) can be changed by editing 
-the grabber script in the "MyFilms Grabber Interface" ("Edit script").
-</value>
   </data>
   <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
     <value>If unchecked, you will be asked to manually choose the script to use for internet data update.
@@ -336,19 +349,6 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
-  </data>
-  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
-    <value>You can update your movie data via internet from insude MyFilms GUI.
-
-You have to define the xml parser file ("grabber script" to be used.
-
-With the 'try to find best match automaticly' option validated, the grabber will
-try to find best match but can provide errors in some cases. It's better to
-don't valid it. In that case, you'll get a menu to choose the right movie.
-
-You can change those options from MyFilms GUI (global settings) also.
-
-</value>
   </data>
   <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
     <value>For updating the whole database and scan for and add new movies to your catalog automatically,
@@ -617,6 +617,14 @@ if they are currently "reachable".
 This is useful if you have stored parts of your movies on storage that is now always available, 
 e.g. USB drives or NAS servers.
 THe scan can also be launched from GUI in global options.</value>
+  </data>
+  <data name="SearchOnlyExactMatches.ToolTip" xml:space="preserve">
+    <value>If checked, only files with exact matching with search name will 
+be "autostarted". 
+Example: Searchname = "movie", filename = movie.avi.
+If unchecked, also files that only contain a part of the search title will 
+be autostarted.
+Example: Searchname = "movie", filename = "movie divx.avi"</value>
   </data>
   <data name="PathStorage.ToolTip" xml:space="preserve">
     <value>Enter the full path to the folder(s) containing the movie files.  

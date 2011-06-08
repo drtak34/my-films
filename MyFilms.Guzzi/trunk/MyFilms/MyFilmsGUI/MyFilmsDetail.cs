@@ -5920,14 +5920,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
                 LogMyFilms.Debug("Search_FileName - Total Searchresults: '" + wresult.Count + "'");
-                if (wresult.Count == 1)
+                if (wresult.Count == 1 && MyFilms.conf.SearchOnlyExactMatches.ToLower() != "no")
                     return wresult[0].ToString();
                 else
+                {
+                  string singlefilefound = string.Empty;
+                  int count = 0;
                   foreach (string searchresult in wresult)
                   {
-                    if (searchresult == filename || searchresult.ToLower().Contains(@"\" + filename + @".") || searchresult.ToLower().Contains(@"\" + filename + @"\"))
-                      return searchresult;
+                    if (searchresult == filename || searchresult.ToLower().Contains(@"\" + filename.ToLower() + @".") || searchresult.ToLower().Contains(@"\" + filename.ToLower() + @"\"))
+                    {
+                      LogMyFilms.Debug("full match found via file/directory compare -> '" + searchresult + "'");
+                      count = count + 1;
+                      singlefilefound = searchresult;
+                    }
                   }
+                  if (count == 1)
+                  {
+                    LogMyFilms.Debug("Single match found via file/directory compare -> using: '" + singlefilefound + "'");
+                    return singlefilefound;
+                  }
+                }
                 {
                     // Many files found; ask for the good file
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
