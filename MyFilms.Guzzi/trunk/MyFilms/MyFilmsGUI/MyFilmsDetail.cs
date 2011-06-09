@@ -5902,7 +5902,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 if (result.Count == 1)
                 {
-                  if (result[0].ToString().ToLower() == filename.ToLower() || MyFilms.conf.SearchOnlyExactMatches.ToLower() != "no")
+                  if (result[0].ToString().ToLower() == filename.ToLower() || MyFilms.conf.SearchOnlyExactMatches.ToLower() == "no")
                   {
                     LogMyFilms.Debug("only one match found - return result: '" + result[0].ToString() + "'");
                     return result[0].ToString();
@@ -5930,7 +5930,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                 }
                 LogMyFilms.Debug("Search_FileName - Total Searchresults: '" + wresult.Count + "'");
-                if (wresult.Count == 1 && MyFilms.conf.SearchOnlyExactMatches.ToLower() != "no")
+                if (wresult.Count == 1 && (wresult[0].ToString().ToLower() == filename.ToLower() || MyFilms.conf.SearchOnlyExactMatches.ToLower() == "no"))
                     return wresult[0].ToString();
                 else
                 {
@@ -5950,6 +5950,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Debug("Single match found via file/directory compare -> using: '" + singlefilefound + "'");
                     return singlefilefound;
                   }
+                  // else return ""; // activate, if no "near match" should be displayed in exact match mode
                 }
                 {
                     // Many files found; ask for the good file
