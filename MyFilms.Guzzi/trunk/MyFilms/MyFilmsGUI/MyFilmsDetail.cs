@@ -5950,7 +5950,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Debug("Single match found via file/directory compare -> using: '" + singlefilefound + "'");
                     return singlefilefound;
                   }
-                  // else return ""; // activate, if no "near match" should be displayed in exact match mode
+                  // else if (MyFilms.conf.SearchOnlyExactMatches.ToLower() != "no") return ""; // activate, if no "near match" should be displayed in exact match mode
                 }
                 {
                     // Many files found; ask for the good file
