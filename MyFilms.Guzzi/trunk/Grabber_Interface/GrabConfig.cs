@@ -525,15 +525,18 @@ namespace Grabber_Interface
       listPreview.Items.Clear();
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
       Grabber_URLClass.IMDBUrl wurl;
+      int pageNumber = -1;
+      if (!string.IsNullOrEmpty(textPage.Text)) 
+        pageNumber = Convert.ToInt16(textPage.Text);
       try
       {
-        listUrl = Grab.ReturnURL(TextSearch.Text, textConfig.Text + ".tmp", Convert.ToInt16(textPage.Text), AlwaysAsk);
+        listUrl = Grab.ReturnURL(TextSearch.Text, textConfig.Text + ".tmp", pageNumber, AlwaysAsk);
       }
-      catch
+      catch (Exception ex)
       {
         DialogResult dlgResult = DialogResult.None;
 
-        dlgResult = MessageBox.Show("Matching problem - check your definitions! (Make sure, year does not include non numerical characters)", "Error", MessageBoxButtons.OK);
+        dlgResult = MessageBox.Show("Grabber ERROR - check your definitions! \n\nException Message: " + ex.Message + "\nStacktrace: " + ex.StackTrace, "Error", MessageBoxButtons.OK);
         if (dlgResult == DialogResult.OK)
         {
         }
