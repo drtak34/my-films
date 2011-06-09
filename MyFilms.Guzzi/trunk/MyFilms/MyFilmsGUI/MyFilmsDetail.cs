@@ -5901,23 +5901,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (result.Count != 0)
             {
                 if (result.Count == 1)
+                {
+                  if (result[0].ToString().ToLower() == filename.ToLower() || MyFilms.conf.SearchOnlyExactMatches.ToLower() != "no")
+                  {
+                    LogMyFilms.Debug("only one match found - return result: '" + result[0].ToString() + "'");
                     return result[0].ToString();
+                  }
+                  else
+                  {
+                    LogMyFilms.Debug("only one match found - but no exact match: '" + result[0].ToString() + "'");
+                  }
+                }
                 string wfile = null;
                 result.Sort();
                 ArrayList wresult = new ArrayList();
                 foreach (String s in result)
                 {
-                    LogMyFilms.Debug("Search_FileName - Searchresult: '" + s.ToString() + "'");
-                    if (string.IsNullOrEmpty(wfile))
-                    {
-                      wresult.Add(s);
-                      wfile = s;
-                    }
-                    else if (!MediaPortal.Util.Utils.ShouldStack(s, wfile) && s.ToLower() != wfile.ToLower())
-                    {
-                        wresult.Add(s);
-                        wfile = s;
-                    }
+                  LogMyFilms.Debug("Search_FileName - Searchresult: '" + s.ToString() + "'");
+                  if (string.IsNullOrEmpty(wfile))
+                  {
+                    wresult.Add(s);
+                    wfile = s;
+                  }
+                  else if (!MediaPortal.Util.Utils.ShouldStack(s, wfile) && s.ToLower() != wfile.ToLower())
+                  {
+                    wresult.Add(s);
+                    wfile = s;
+                  }
                 }
                 LogMyFilms.Debug("Search_FileName - Total Searchresults: '" + wresult.Count + "'");
                 if (wresult.Count == 1 && MyFilms.conf.SearchOnlyExactMatches.ToLower() != "no")
