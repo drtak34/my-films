@@ -27,6 +27,12 @@
           set { cbCatalogType.SelectedIndex = value; }
         }
 
+        public string Country
+        {
+          get { return cbCountry.Text; }
+          set { cbCountry.Text = value; }
+        }
+
         private void textBoxNewName_TextChanged(object sender, EventArgs e)
         {
 
@@ -50,11 +56,6 @@
           {
             MessageBox.Show(ex.Message);
           }
-        }
-
-        private void cbCatalogType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

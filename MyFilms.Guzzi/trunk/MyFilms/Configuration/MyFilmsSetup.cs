@@ -4533,9 +4533,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           MyFilmsInputBox input = new MyFilmsInputBox();
           input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
           input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
+          input.Country = "USA";
           input.ShowDialog(this);
           string newConfig_Name = input.ConfigName;
           string newCatalogType = input.CatalogType;
+          string newCountry = input.Country;
           int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
           if (string.IsNullOrEmpty(newConfig_Name))
           {
@@ -4739,7 +4741,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           comboBoxLogoSpacing.Text = "2";
           comboBoxLogoPresets.Text = "Use Logos of currently selected skin";
           //GrabberConfig
-          txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
+          //txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
           chkGrabber_ChooseScript.Checked = true; //Don't use default script (ask)
 
           AntItem1.Text = "Country";
@@ -4761,11 +4763,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           // Now ask user for his movie directory...
           if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 7)
           {
-            MessageBox.Show(
-              "Now choose the folder containing your movies.",
-              "Control Configuration",
-              MessageBoxButtons.OK,
-              MessageBoxIcon.Information);
+            MessageBox.Show("Now choose the folder containing your movies.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            string samplemovies =  Config.GetDirectoryInfo(Config.Dir.Thumbs) + @"\MyFilms\SampleMovies";
+            if (System.IO.Directory.Exists(samplemovies))
+              folderBrowserDialog1.SelectedPath = samplemovies;
+
             if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
             {
               if (this.folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") !=
@@ -4782,6 +4785,73 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             PathStorage.Text = "";
           }
 
+          // Create country specific settings
+          cbGrabberOverrideLanguage.Text = "";
+          cbGrabberOverrideGetRoles.Text = "";
+          cbGrabberOverridePersonLimit.Text = "";
+          cbGrabberOverrideTitleLimit.Text = "";
+          switch (newCountry)
+          {
+            case "Germany":
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\Cinefacts-Kino.xml";
+              break;
+            case "Canada":
+              cbGrabberOverrideLanguage.Text = "Canada";
+              cbGrabberOverrideGetRoles.Text = "true";
+              cbGrabberOverridePersonLimit.Text = "10";
+              cbGrabberOverrideTitleLimit.Text = "3";
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
+              break;
+            default:
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB-Full.xml";
+              break;
+          //Argentina
+          //Australia
+          //Austria
+          //Belgium
+          //Brazil
+          //Canada
+          //Chile
+          //Croatia
+          //Czech Republic
+          //Denmark
+          //Estonia
+          //Finland
+          //France
+          //Germany
+          //Greece
+          //Hong Kong
+          //Hungary
+          //Iceland
+          //India
+          //Ireland
+          //Israel
+          //Italy
+          //Japan
+          //Malaysia
+          //Mexico
+          //Netherlands
+          //New Zealand
+          //Norway
+          //Peru
+          //Philippines
+          //Poland
+          //Portugal
+          //Romania
+          //Russia
+          //Singapore
+          //Slovakia
+          //Slovenia
+          //South Africa
+          //South Korea
+          //Spain
+          //Sweden
+          //Switzerland
+          //Turkey
+          //UK
+          //Uruguay
+          //USA          
+          }
 
           //AMCupdater
           chkAMCUpd.Checked = true; // Use AMCupdater

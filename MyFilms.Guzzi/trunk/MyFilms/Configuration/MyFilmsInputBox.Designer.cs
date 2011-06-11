@@ -36,6 +36,8 @@
           this.cbCatalogType = new System.Windows.Forms.ComboBox();
           this.label3 = new System.Windows.Forms.Label();
           this.label4 = new System.Windows.Forms.Label();
+          this.cbCountry = new System.Windows.Forms.ComboBox();
+          this.lblCountry = new System.Windows.Forms.Label();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.SuspendLayout();
           // 
@@ -60,7 +62,7 @@
           // buttonOK
           // 
           this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-          this.buttonOK.Location = new System.Drawing.Point(364, 169);
+          this.buttonOK.Location = new System.Drawing.Point(375, 171);
           this.buttonOK.Name = "buttonOK";
           this.buttonOK.Size = new System.Drawing.Size(74, 22);
           this.buttonOK.TabIndex = 2;
@@ -100,13 +102,10 @@
             "eXtreme Movie Manager (V7.1.1.1)",
             "XBMC (V10.0)",
             "MovingPicturesXML (V1.2 process plugin)"});
-            // MyFilms extended Database
-            // XBMC nfo reader
           this.cbCatalogType.Location = new System.Drawing.Point(112, 132);
           this.cbCatalogType.Name = "cbCatalogType";
           this.cbCatalogType.Size = new System.Drawing.Size(227, 21);
           this.cbCatalogType.TabIndex = 5;
-          this.cbCatalogType.SelectedIndexChanged += new System.EventHandler(this.cbCatalogType_SelectedIndexChanged);
           // 
           // label3
           // 
@@ -126,11 +125,77 @@
           this.label4.TabIndex = 7;
           this.label4.Text = "Catalog Type";
           // 
+          // cbCountry
+          // 
+          this.cbCountry.FormattingEnabled = true;
+          this.cbCountry.Items.AddRange(new object[] {
+            "Argentina",
+            "Australia",
+            "Austria",
+            "Belgium",
+            "Brazil",
+            "Canada",
+            "Chile",
+            "Croatia",
+            "Czech Republic",
+            "Denmark",
+            "Estonia",
+            "Finland",
+            "France",
+            "Germany",
+            "Greece",
+            "Hong Kong",
+            "Hungary",
+            "Iceland",
+            "India",
+            "Ireland",
+            "Israel",
+            "Italy",
+            "Japan",
+            "Malaysia",
+            "Mexico",
+            "Netherlands",
+            "New Zealand",
+            "Norway",
+            "Peru",
+            "Philippines",
+            "Poland",
+            "Portugal",
+            "Romania",
+            "Russia",
+            "Singapore",
+            "Slovakia",
+            "Slovenia",
+            "South Africa",
+            "South Korea",
+            "Spain",
+            "Sweden",
+            "Switzerland",
+            "Turkey",
+            "UK",
+            "Uruguay",
+            "USA"});
+          this.cbCountry.Location = new System.Drawing.Point(112, 172);
+          this.cbCountry.Name = "cbCountry";
+          this.cbCountry.Size = new System.Drawing.Size(227, 21);
+          this.cbCountry.TabIndex = 8;
+          // 
+          // lblCountry
+          // 
+          this.lblCountry.AutoSize = true;
+          this.lblCountry.Location = new System.Drawing.Point(22, 175);
+          this.lblCountry.Name = "lblCountry";
+          this.lblCountry.Size = new System.Drawing.Size(43, 13);
+          this.lblCountry.TabIndex = 9;
+          this.lblCountry.Text = "Country";
+          // 
           // MyFilmsInputBox
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(470, 213);
+          this.Controls.Add(this.lblCountry);
+          this.Controls.Add(this.cbCountry);
           this.Controls.Add(this.label4);
           this.Controls.Add(this.label3);
           this.Controls.Add(this.cbCatalogType);
@@ -158,5 +223,7 @@
         private System.Windows.Forms.ComboBox cbCatalogType;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbCountry;
+        private System.Windows.Forms.Label lblCountry;
     }
 }
