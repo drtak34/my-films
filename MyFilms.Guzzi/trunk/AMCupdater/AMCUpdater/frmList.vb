@@ -132,4 +132,9 @@ Public Class frmList
         End Using
 
     End Sub
+
+    Private Sub btnCancelFromDialog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelFromDialog.Click
+        Form1.AntProcessor.bgwFolderScanUpdate_Cancel()
+        Me.DialogResult = Windows.Forms.DialogResult.Cancel
+    End Sub
 End Class

@@ -123,30 +123,6 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1095, 13</value>
-  </metadata>
-  <data name="txtOverridePath.ToolTip" xml:space="preserve">
-    <value>Use this field to change the path to your files.
-Normally used if you are scanning local files (i.e. d:\Movies)
-but your MediaPortal client will access them over the network (i.e. \\server\Movies\)
-The over-ride path will replace the 'Path to Movies Folder'.
-Note : Can only be used when scanning a single folder structure.</value>
-  </data>
-  <data name="chkGrabberOverrideLanguage.ToolTip" xml:space="preserve">
-    <value>Preferred Language(s) for 
-Translated Title(s) and Certification
-
-Depending on the abilities of your grabber script, you can
-set a language/country here to tell the grabber to get related infos.
-Most internet sites only support titles for different countries - IMDB-Full script 
-also supports Certification for different countries.
-Note: To use Certification, you have to map that data to one of the standard fields 
-of your ANT Movie Catalog.
-Note: You can add more than one language/country using comma separated values.
-Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
-As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
-  </data>
   <data name="GroupBox26.ToolTip" xml:space="preserve">
     <value>You can set several options for the internet grabber.
 Be aware, that not all options are supported by all grabber scripts.
@@ -169,15 +145,49 @@ If checked, you won't get a dialog - instead AMCupdater is importing the movie w
 These files allow AMCUpdater to access Internet Movie sites to get movie information
 Various Parser Files are provided by default - they are in the Scripts subfolder of the AMCUpdater application folder.</value>
   </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1095, 13</value>
+  </metadata>
   <data name="cbInternetLookupBehaviour.ToolTip" xml:space="preserve">
     <value>If you choose "try to find best match automatically", AMCupdater will automatically load internet infos
-in the case, only one match is found for the selected movie (assuming, ony one match is the right one).
-If you choose "always ask" you will always get a dialog to verify, if the found movie is the correct one.
+in the case, only one match is found for the selected movie (assuming, this one match is the right one).
+If you choose "always ask" you will always get a dialog to verify, if the found movie is the correct one - 
+even if only one result was found.
 
 Note:
 If you don't have e.g. the year in the directory or movie name, AMCupdater most probably will not get good matches on movie searches.
 To get good matches automatically, year should be in directory or filename in brackets - e.g. "moviename (1982)"</value>
   </data>
+  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>280, 50</value>
+  </metadata>
+  <data name="txtOverridePath.ToolTip" xml:space="preserve">
+    <value>Use this field to change the path to your files.
+Normally used if you are scanning local files (i.e. d:\Movies)
+but your MediaPortal client will access them over the network (i.e. \\server\Movies\)
+The over-ride path will replace the 'Path to Movies Folder'.
+Note : Can only be used when scanning a single folder structure.</value>
+  </data>
+  <data name="chkGrabberOverrideLanguage.ToolTip" xml:space="preserve">
+    <value>Preferred Language(s) for 
+Translated Title(s) and Certification
+
+Depending on the abilities of your grabber script, you can
+set a language/country here to tell the grabber to get related infos.
+Most internet sites only support titles for different countries - IMDB-Full script 
+also supports Certification for different countries.
+Note: To use Certification, you have to map that data to one of the standard fields 
+of your ANT Movie Catalog.
+Note: You can add more than one language/country using comma separated values.
+Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
+As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
+  </data>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1095, 13</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1095, 13</value>
+  </metadata>
   <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
     <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
 If orphaned entries are found, then will be purged from the database.
@@ -705,6 +715,9 @@ If you have your movie files in folders, that have the movie title, select “fo
         8Dsg/w+T+GsRKGk0sAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 50</value>
+  </metadata>
   <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 50</value>
   </metadata>

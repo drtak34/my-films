@@ -440,7 +440,7 @@ Public Class AntRecord
                 Dim wpage As Int16 = -1
                 Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
                 While (True)
-                    If _InternetSearchHintIMDB_Id.Length > 0 And _Dont_Ask_Interactive = True Then
+                    If _InternetSearchHintIMDB_Id.Length > 0 And (_Dont_Ask_Interactive = True Or _InternetLookupAlwaysPrompt = False) Then
                         wurl = Gb.ReturnURL(_InternetSearchHintIMDB_Id, _ParserPath, wpage, _InternetLookupAlwaysPrompt)
                         If (wurl.Count = 1) And _InternetLookupAlwaysPrompt = False Then
                             _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
@@ -453,6 +453,7 @@ Public Class AntRecord
                         End If
                     End If
 
+                    wurl.Clear() ' clear to make sure nothing left from tt request ...
                     wurl = Gb.ReturnURL(SearchString, _ParserPath, wpage, _InternetLookupAlwaysPrompt)
                     If (wurl.Count = 1) And _InternetLookupAlwaysPrompt = False Then
 
@@ -474,7 +475,50 @@ Public Class AntRecord
 
                         'If _InteractiveMode = True Then
                         If (_InteractiveMode = True And _Dont_Ask_Interactive = False) Then
+
+                            'First try to find matches due to "try to find best match automatically" - this is enhanced matching option as feature on top of grabber matching itself
+                            If _InternetLookupAlwaysPrompt = False Then
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString
+                                    wimdb = wurl.Item(i).IMDB_ID.ToString
+                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
+
+                                    If (wimdb = _InternetSearchHintIMDB_Id) Then
+                                        'If (wtitle.Contains(SearchString) And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
+                                        '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint (" & _InternetSearchHintIMDB_Id & ")."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                Next
+
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString
+                                    wimdb = wurl.Item(i).IMDB_ID.ToString
+                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
+                                    If (wtitle.Contains(SearchString) And wyear = _InternetSearchHintYear) Then
+                                        '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & SearchString & ")."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                Next
+                            End If
+
+                            'If no automatches found, show dialog box to choose from
                             frmList.txtSearchString.Text = SearchString
+                            frmList.txtSearchintYear.Text = _InternetSearchHintYear
+                            frmList.txtSearchhintIMDB_Id.Text = _InternetSearchHintIMDB_Id
                             frmList.chkDontAskAgain.Checked = False
                             frmList.txtTmpParserFilePath.Text = _ParserPath
                             frmList.lstOptions.Items.Clear()
@@ -504,9 +548,9 @@ Public Class AntRecord
                                         Exit While
                                     End If
                                     If wyear = _InternetSearchHintYear Then
-                                        frmList.lstOptions.Items.Add(wtitle & " - (+++ recommended by grabber autoselection +++)" & " (hints: year=" & _InternetSearchHintYear & ", imdb=" & _InternetSearchHintIMDB_Id & ")")
+                                        frmList.lstOptions.Items.Add(wtitle & " - (+++ recommended by grabber autoselection +++)")
                                     Else
-                                        frmList.lstOptions.Items.Add(wtitle & " (hints: year=" & _InternetSearchHintYear & ", imdb=" & _InternetSearchHintIMDB_Id & ")")
+                                        frmList.lstOptions.Items.Add(wtitle & "")
                                     End If
                                 Next
                             End If
@@ -536,8 +580,10 @@ Public Class AntRecord
                                     wpage = Convert.ToInt16(wurl.Item(wentry).IMDBURL)
                                 Else
                                     If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And (frmList.lstOptions.SelectedItem.ToString.Length > 0)) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(wentry).url, _ImagePath, frmList.txtTmpParserFilePath.Text, _DownloadImage)
+                                        '_InternetData = Gb.GetDetail(wurl.Item(wentry).url, _ImagePath, frmList.txtTmpParserFilePath.Text, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(wentry).url, _ImagePath, frmList.txtTmpParserFilePath.Text, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by user's manual selection"
                                         Exit While
                                     Else 'If returnValue = Windows.Forms.DialogResult.Cancel Then
                                         'The ElseIf didn't always fire if you close the window or something.
@@ -566,6 +612,7 @@ Public Class AntRecord
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         'CreateXmlnetInfos(datas)
                                         _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by AMCU internetsearchhint (" & _InternetSearchHint & ")."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
                                             Exit Sub
                                         End If
