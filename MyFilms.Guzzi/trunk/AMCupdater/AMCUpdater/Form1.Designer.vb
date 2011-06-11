@@ -746,6 +746,7 @@ Partial Class Form1
         'chkUsePageGrabber
         '
         Me.chkUsePageGrabber.AutoSize = True
+        Me.chkUsePageGrabber.Enabled = False
         Me.chkUsePageGrabber.Location = New System.Drawing.Point(211, 65)
         Me.chkUsePageGrabber.Name = "chkUsePageGrabber"
         Me.chkUsePageGrabber.Size = New System.Drawing.Size(114, 17)
@@ -757,6 +758,7 @@ Partial Class Form1
         'chkUseXBMCnfo
         '
         Me.chkUseXBMCnfo.AutoSize = True
+        Me.chkUseXBMCnfo.Enabled = False
         Me.chkUseXBMCnfo.Location = New System.Drawing.Point(211, 42)
         Me.chkUseXBMCnfo.Name = "chkUseXBMCnfo"
         Me.chkUseXBMCnfo.Size = New System.Drawing.Size(117, 17)
