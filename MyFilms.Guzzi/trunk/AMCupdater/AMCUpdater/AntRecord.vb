@@ -667,6 +667,23 @@ Public Class AntRecord
                                     End If
                                 Next
 
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString
+                                    wimdb = wurl.Item(i).IMDB_ID.ToString
+                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
+                                    If (wtitle.Contains(SearchString) And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
+                                        '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & SearchString & ")."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                Next
+
                                 ' to be commented ? -> as only year hint gives usually bad results (wrong movie names!)
                                 CountNameMatch = 0
                                 index = 0
