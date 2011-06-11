@@ -440,11 +440,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void ButSave_Click(object sender, EventArgs e)
         {
-            Save_Config();
             // update AMCupdater config with latest MyFilms settings
-            Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
+            // Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file // reading already done in "load MF settings)
             CreateMyFilmsDefaultsForAMCconfig(Config_Name.Text); //create MF defaults
             Save_XML_AMCconfig(Config_Name.Text); // save new config
+
+            // Save MF config
+            Save_Config();
             Read_XML_AMCconfig(Config_Name.Text); // reread config file with new defaults
         }
 
@@ -1503,7 +1505,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             //  btnCreateAMCDefaultConfig.Visible = false;
 
             // Added by Guzzi to load or initialize the AMCupdater Default configuration and create default configfiles, if necessary.
-            Read_XML_AMCconfig(Config_Name.Text);
+            Read_XML_AMCconfig(Config_Name.Text); // read current (or create new default) config file
 
             textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
         }
@@ -2961,6 +2963,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AMCConfigView.Items[i].SubItems.Add(dr[0].ToString());
             i = i + 1;
           }
+          // set MF GUI to values from AMC file, if values are present
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Scan_Path")))
+            AMCMovieScanPath.Text = this.AMCGetAttribute("Movie_Scan_Path");
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Purge_Missing_Files")))
+          {
+            if (AMCGetAttribute("Purge_Missing_Files").ToLower() == "true") chkAMC_Purge_Missing_Files.Checked = true;
+            else chkAMC_Purge_Missing_Files.Checked = false;
+          }
+
         //  if (i > 0)
         //  {
         //    lblAMCupdaterConfigPreview.Visible = true;
@@ -3024,6 +3035,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
             //AMCdsSettings.Tables[0].Rows.Add();
             AMCdsSettings.Tables[0].Rows.Add(OptionValue, OptionName);
+        }
+
+        private string AMCGetAttribute(string OptionName)
+        {
+          DataRow row = null;
+          if (AMCdsSettings.Tables.Count > 0)
+            row = AMCdsSettings.Tables[0].Rows.Find(OptionName);
+          if (row != null)
+            return row["Value"].ToString().ToLower();
+          else 
+            return string.Empty;
         }
 
         //private void Read_XML_Logos(string currentconfig)
@@ -4868,7 +4890,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void chkAMC_Purge_Missing_Files_CheckedChanged(object sender, EventArgs e)
         {
-          if (chkAMC_Purge_Missing_Files.Checked && !WizardActive)
+          if (chkAMC_Purge_Missing_Files.Checked && !WizardActive && AMCGetAttribute("Purge_Missing_Files") != "true")
           {
             if (System.Windows.Forms.MessageBox.Show("Are you sure, you want to purge records from your DB \n where media files are not accessible during AMC Updater scans ?",
                 "Control Configuration",
