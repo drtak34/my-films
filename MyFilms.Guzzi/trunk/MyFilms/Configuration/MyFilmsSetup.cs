@@ -4913,7 +4913,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               break;
           }
               
-          if (newCatalog && CatalogType.SelectedIndex != 0)
+          if (newCatalog && CatalogType.SelectedIndex == 0)
           {
             launchAMCmanager();
           }
