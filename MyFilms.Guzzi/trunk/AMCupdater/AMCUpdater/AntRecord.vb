@@ -440,6 +440,7 @@ Public Class AntRecord
                 Dim wpage As Int16 = -1
                 Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
                 While (True)
+                    'If _InternetSearchHintIMDB_Id.Length > 0 Then
                     If _InternetSearchHintIMDB_Id.Length > 0 And (_Dont_Ask_Interactive = True Or _InternetLookupAlwaysPrompt = False) Then
                         wurl = Gb.ReturnURL(_InternetSearchHintIMDB_Id, _ParserPath, wpage, _InternetLookupAlwaysPrompt)
                         If (wurl.Count = 1) And _InternetLookupAlwaysPrompt = False Then
