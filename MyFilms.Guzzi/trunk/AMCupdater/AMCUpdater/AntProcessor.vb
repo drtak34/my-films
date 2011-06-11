@@ -1803,6 +1803,8 @@ Public Class AntProcessor
                             If Ant.LastOutputMessage.StartsWith("ERROR") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                                 'LogEvent("ERROR : " & blah.LastOutputMessage, EventLogLevel.ErrorOrSimilar)
+                            ElseIf Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
+                                bgwFolderScanUpdate.CancelAsync()
                             Else
                                 If CurrentSettings.Import_File_On_Internet_Lookup_Failure = True Then
                                     'Doesn't matter if the Internet loookup worked; just load the entry:

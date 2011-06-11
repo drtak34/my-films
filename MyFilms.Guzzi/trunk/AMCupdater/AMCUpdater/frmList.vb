@@ -134,7 +134,11 @@ Public Class frmList
     End Sub
 
     Private Sub btnCancelFromDialog_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancelFromDialog.Click
-        Form1.AntProcessor.bgwFolderScanUpdate_Cancel()
-        Me.DialogResult = Windows.Forms.DialogResult.Cancel
+        'Me.DialogResult = Windows.Forms.DialogResult.Cancel
+        Me.DialogResult = Windows.Forms.DialogResult.Abort
+        'Dim AntProc As New AntProcessor
+        'AntProc.bgwFolderScanUpdate_Cancel()
+        'bgwFolderScanUpdate.CancelAsync()
+        'Form1.btnCancelProcessing.Enabled = False
     End Sub
 End Class

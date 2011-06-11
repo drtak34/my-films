@@ -580,6 +580,11 @@ Public Class AntRecord
                                 If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And frmList.lstOptions.SelectedItem.ToString = "---") Then
                                     wpage = Convert.ToInt16(wurl.Item(wentry).IMDBURL)
                                 Else
+                                    If (returnValue = Windows.Forms.DialogResult.Abort) Then
+                                        _InternetLookupOK = False
+                                        _LastOutputMessage = "UserAbort !"
+                                        Exit While
+                                    End If
                                     If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And (frmList.lstOptions.SelectedItem.ToString.Length > 0)) Then
                                         '_InternetData = Gb.GetDetail(wurl.Item(wentry).url, _ImagePath, frmList.txtTmpParserFilePath.Text, _DownloadImage)
                                         _InternetData = Gb.GetDetail(wurl.Item(wentry).url, _ImagePath, frmList.txtTmpParserFilePath.Text, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
