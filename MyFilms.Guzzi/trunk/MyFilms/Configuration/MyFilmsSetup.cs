@@ -4236,8 +4236,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           if (AMCMovieScanPath.Text.Length == 0)
           {
-            MessageBox.Show(
-              "You first have to define the Search path for your movies to create or sync a config !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            MessageBox.Show("You first have to define the Search path for your movies to create or sync a config !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             AMCMovieScanPath.Focus();
             return;
           }
@@ -4246,7 +4245,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             if (System.IO.File.Exists(wfiledefault + "_" + Config_Name.Text + ".xml"))
             {
-              DialogResult dialogResult = MessageBox.Show("Are you sure you want to sync your MyFilms settings to AMC Updater? You might loose come customizations made!", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+              DialogResult dialogResult = MessageBox.Show("Are you sure you want to (re)create your AMC Updater settings based on current MyFilms config? You might loose AMC Updater customizations you made!", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
               if (!(dialogResult == DialogResult.Yes))
               {
                 return;

@@ -396,6 +396,7 @@
           this.groupBox_PlayMovieInfos = new System.Windows.Forms.GroupBox();
           this.chkScanMediaOnStart = new System.Windows.Forms.CheckBox();
           this.groupBoxMoviePathInfos = new System.Windows.Forms.GroupBox();
+          this.SearchOnlyExactMatches = new System.Windows.Forms.CheckBox();
           this.label5 = new System.Windows.Forms.Label();
           this.PathStorage = new System.Windows.Forms.TextBox();
           this.SearchSubDirs = new System.Windows.Forms.CheckBox();
@@ -492,7 +493,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.SearchOnlyExactMatches = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -2016,7 +2016,7 @@
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(152, 36);
           this.btnCreateAMCDefaultConfig.TabIndex = 77;
-          this.btnCreateAMCDefaultConfig.Text = "Sync MyFilms Settings \r\nto AMC Updater Config";
+          this.btnCreateAMCDefaultConfig.Text = "(re)Create AMC Updater \r\nDefault Settings";
           this.ToolTip1.SetToolTip(this.btnCreateAMCDefaultConfig, resources.GetString("btnCreateAMCDefaultConfig.ToolTip"));
           this.btnCreateAMCDefaultConfig.UseVisualStyleBackColor = true;
           this.btnCreateAMCDefaultConfig.Click += new System.EventHandler(this.btnCreateAMCDefaultConfig_Click);
@@ -3869,6 +3869,17 @@
           this.groupBoxMoviePathInfos.TabStop = false;
           this.groupBoxMoviePathInfos.Text = "Movie Path Configuration";
           // 
+          // SearchOnlyExactMatches
+          // 
+          this.SearchOnlyExactMatches.AutoSize = true;
+          this.SearchOnlyExactMatches.Location = new System.Drawing.Point(338, 38);
+          this.SearchOnlyExactMatches.Name = "SearchOnlyExactMatches";
+          this.SearchOnlyExactMatches.Size = new System.Drawing.Size(79, 30);
+          this.SearchOnlyExactMatches.TabIndex = 69;
+          this.SearchOnlyExactMatches.Text = "Only exact \r\nMatches";
+          this.ToolTip1.SetToolTip(this.SearchOnlyExactMatches, resources.GetString("SearchOnlyExactMatches.ToolTip"));
+          this.SearchOnlyExactMatches.UseVisualStyleBackColor = true;
+          // 
           // label5
           // 
           this.label5.AutoSize = true;
@@ -4924,17 +4935,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // SearchOnlyExactMatches
-          // 
-          this.SearchOnlyExactMatches.AutoSize = true;
-          this.SearchOnlyExactMatches.Location = new System.Drawing.Point(338, 38);
-          this.SearchOnlyExactMatches.Name = "SearchOnlyExactMatches";
-          this.SearchOnlyExactMatches.Size = new System.Drawing.Size(79, 30);
-          this.SearchOnlyExactMatches.TabIndex = 69;
-          this.SearchOnlyExactMatches.Text = "Only exact \r\nMatches";
-          this.ToolTip1.SetToolTip(this.SearchOnlyExactMatches, resources.GetString("SearchOnlyExactMatches.ToolTip"));
-          this.SearchOnlyExactMatches.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 

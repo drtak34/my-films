@@ -350,23 +350,13 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
   </data>
-  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
-    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
-including grabbing mediainfos, internet movie data, coverimage and fanart.
-You can use and launch AMCUpdater in batch modefrom inside the MyFilms GUI or schedule a task 
-to run independantly from mediaportal / MyFilms.</value>
-  </data>
-  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
-    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
-MyFilms will create such a file for each Configuration Name.
-You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
-However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
-  </data>
   <data name="btnCreateAMCDefaultConfig.ToolTip" xml:space="preserve">
     <value>MyFilms will create a default configuration for AMCupdater based on your current MyFilms Configuration.
 This configuration is used, when you start AMCupdater from the setup or the created desktop icon.
-You might want to resync this configuration, if you have changed settings in MyFilms setup, and want those 
-to be pushed to AMCupdater config easily, e.g. default Internet Grabber script.</value>
+You might want to recreate this configuration, if you have changed settings in MyFilms setup and AMCupdater setup
+and want to create a new default setup.
+In normal usage this is not required, as saving MyFilms coinfig also pushes changes to AMCupdater config file.
+Note: THis will overwrite your existing AMC Updater settings file - so you'll loose customizations you made.</value>
   </data>
   <data name="chkAMC_Purge_Missing_Files.ToolTip" xml:space="preserve">
     <value>If enabled, AMC Updater will remove Records from your DB, when movie file(s) cannot be found in your movie folder or subfolders!
@@ -430,6 +420,18 @@ Loading data includes:
 - getting internet infos via the selected internet grabber script
 - getting coverimage via the selected internet grabber script
 - loading fanart</value>
+  </data>
+  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
+    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
+including grabbing mediainfos, internet movie data, coverimage and fanart.
+You can use and launch AMCUpdater in batch modefrom inside the MyFilms GUI or schedule a task 
+to run independantly from mediaportal / MyFilms.</value>
+  </data>
+  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
+    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
+MyFilms will create such a file for each Configuration Name.
+You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
+However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
   </data>
   <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
     <value>The Database Deletion Options allow you to update and/or delete records after the corresponding movie is watched.
