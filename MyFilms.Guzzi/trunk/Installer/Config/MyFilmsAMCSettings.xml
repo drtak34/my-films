@@ -74,7 +74,7 @@
     <Value>False</Value>
   </Values>
   <Values Option="Excluded_Movies_File">
-    <Value>C:\Daten.Test\Movies - Test\AMCUpdater_Excluded_Files.txt</Value>
+    <Value>C:\AMCUpdater_Excluded_Files.txt</Value>
   </Values>
   <Values Option="Database_Fields_To_Import">
     <Value>Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;OriginalTitle|True;TranslatedTitle|True;FormattedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True;Fanart|True;Languages|True;Certification|True;Writer|True;Tagline|True;IMDBrank|False;Studio|False</Value>
@@ -92,10 +92,10 @@
     <Value />
   </Values>
   <Values Option="Dont_Ask_Interactive">
-    <Value>False</Value>
+    <Value>True</Value>
   </Values>
   <Values Option="Manual_XML_File">
-    <Value>C:\Daten.Test\Movies - Test\Movies - Test.xml</Value>
+    <Value>C:\Movies - Test.xml</Value>
   </Values>
   <Values Option="Manual_Internet_Parser_Path">
     <Value>C:\Dokumente und Einstellungen\All Users\Anwendungsdaten\Team MediaPortal\MediaPortal\scripts\MyFilms\IMDB.xml</Value>
@@ -104,7 +104,7 @@
     <Value>C:\Daten.Test\Movies - Test\AMCUpdater_Excluded_Files.txt</Value>
   </Values>
   <Values Option="Manual_Internet_Lookup_Always_Prompt">
-    <Value>True</Value>
+    <Value>False</Value>
   </Values>
   <Values Option="Excluded_Folder_Strings">
     <Value />

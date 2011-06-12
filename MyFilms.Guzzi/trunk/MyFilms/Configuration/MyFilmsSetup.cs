@@ -4798,7 +4798,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               cbGrabberOverrideLanguage.Text = "Canada";
               cbGrabberOverrideGetRoles.Text = "true";
               cbGrabberOverridePersonLimit.Text = "10";
-              cbGrabberOverrideTitleLimit.Text = "3";
+              cbGrabberOverrideTitleLimit.Text = "0";
               txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
               break;
             default:
