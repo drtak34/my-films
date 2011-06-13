@@ -103,6 +103,13 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{84794996-999d-43f7-8c9a-d6d66dd432a0}-MovingPicturesXML.dll</ZipFileName>
               <DestinationFilename>%Plugins%\windows\MovingPicturesXML.dll</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base.12\NLog.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{489c36c2-f379-4836-8909-0ff16c768cad}-NLog.dll</ZipFileName>
+              <DestinationFilename>%Base%\NLog.dll</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3520,6 +3527,13 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <ZipFileName>Installer{CopyFile}\{84794996-999d-43f7-8c9a-d6d66dd432a0}-MovingPicturesXML.dll</ZipFileName>
         <DestinationFilename>%Plugins%\windows\MovingPicturesXML.dll</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base.12\NLog.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{489c36c2-f379-4836-8909-0ff16c768cad}-NLog.dll</ZipFileName>
+        <DestinationFilename>%Base%\NLog.dll</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -6408,14 +6422,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{12b1f753-9bd6-4844-8722-10fe25a83d96}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{24950558-d6d2-465c-991d-3dffc79792b0}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{547cd4bb-85f1-406e-911b-2955e329d0cf}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{dbeae6e2-6926-4b8a-bb4c-1735667bdb13}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
