@@ -520,13 +520,21 @@ Public Class AntRecord
                             frmList.txtSearchString.Text = SearchString
                             frmList.txtSearchintYear.Text = _InternetSearchHintYear
                             frmList.txtSearchhintIMDB_Id.Text = _InternetSearchHintIMDB_Id
+                            If _InternetSearchHintIMDB_Id <> "" Then
+                                frmList.btnSearchAgainWithIMDB_Id.Enabled = True
+                            Else
+                                frmList.btnSearchAgainWithIMDB_Id.Enabled = False
+                            End If
                             frmList.chkDontAskAgain.Checked = False
                             frmList.txtTmpParserFilePath.Text = _ParserPath
+                            frmList.txtTmpParserFilePathShort.Text = _ParserPath.Substring(_ParserPath.LastIndexOf("\") + 1)
                             frmList.lstOptions.Items.Clear()
                             If _FileName.ToString <> "" Then
                                 frmList.Text = _FileName
+                                frmList.txtSource.Text = _FileName
                             Else
                                 frmList.Text = _FilePath
+                                frmList.txtSource.Text = _FilePath
                             End If
                             If (wurl.Count = 0) Then
                                 frmList.lstOptions.Items.Add("Movie not found...")
@@ -549,7 +557,7 @@ Public Class AntRecord
                                         Exit While
                                     End If
                                     If wyear = _InternetSearchHintYear Then
-                                        frmList.lstOptions.Items.Add(wtitle & " - (+++ recommended by grabber autoselection +++)")
+                                        frmList.lstOptions.Items.Add(wtitle & " - (+++ recommended by year search hint +++)")
                                     Else
                                         frmList.lstOptions.Items.Add(wtitle & "")
                                     End If

@@ -37,20 +37,26 @@ Partial Class frmList
         Me.Label1 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.btnCancelFromDialog = New System.Windows.Forms.Button
+        Me.txtTmpParserFilePathShort = New System.Windows.Forms.TextBox
+        Me.btnSearchAgainWithIMDB_Id = New System.Windows.Forms.Button
+        Me.Label3 = New System.Windows.Forms.Label
+        Me.Label4 = New System.Windows.Forms.Label
+        Me.txtSource = New System.Windows.Forms.TextBox
+        Me.Label5 = New System.Windows.Forms.Label
         Me.SuspendLayout()
         '
         'lstOptions
         '
         Me.lstOptions.FormattingEnabled = True
-        Me.lstOptions.Location = New System.Drawing.Point(12, 73)
+        Me.lstOptions.Location = New System.Drawing.Point(14, 85)
         Me.lstOptions.Name = "lstOptions"
-        Me.lstOptions.Size = New System.Drawing.Size(693, 199)
+        Me.lstOptions.Size = New System.Drawing.Size(693, 212)
         Me.lstOptions.TabIndex = 30
         '
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(504, 283)
+        Me.btnCancel.Location = New System.Drawing.Point(480, 308)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(94, 23)
         Me.btnCancel.TabIndex = 50
@@ -60,23 +66,23 @@ Partial Class frmList
         'btnOK
         '
         Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnOK.Location = New System.Drawing.Point(618, 283)
+        Me.btnOK.Location = New System.Drawing.Point(612, 308)
         Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(86, 23)
+        Me.btnOK.Size = New System.Drawing.Size(93, 23)
         Me.btnOK.TabIndex = 70
         Me.btnOK.Text = "OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
         'txtSearchString
         '
-        Me.txtSearchString.Location = New System.Drawing.Point(12, 12)
+        Me.txtSearchString.Location = New System.Drawing.Point(96, 32)
         Me.txtSearchString.Name = "txtSearchString"
-        Me.txtSearchString.Size = New System.Drawing.Size(353, 20)
+        Me.txtSearchString.Size = New System.Drawing.Size(316, 20)
         Me.txtSearchString.TabIndex = 0
         '
         'btnSearchAgain
         '
-        Me.btnSearchAgain.Location = New System.Drawing.Point(24, 283)
+        Me.btnSearchAgain.Location = New System.Drawing.Point(26, 308)
         Me.btnSearchAgain.Name = "btnSearchAgain"
         Me.btnSearchAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnSearchAgain.TabIndex = 40
@@ -85,15 +91,16 @@ Partial Class frmList
         '
         'txtTmpParserFilePath
         '
-        Me.txtTmpParserFilePath.Location = New System.Drawing.Point(12, 42)
+        Me.txtTmpParserFilePath.Location = New System.Drawing.Point(96, 59)
         Me.txtTmpParserFilePath.Name = "txtTmpParserFilePath"
-        Me.txtTmpParserFilePath.Size = New System.Drawing.Size(522, 20)
+        Me.txtTmpParserFilePath.Size = New System.Drawing.Size(272, 20)
         Me.txtTmpParserFilePath.TabIndex = 10
+        Me.txtTmpParserFilePath.Visible = False
         '
         'btnSelectParserFile
         '
         Me.btnSelectParserFile.CausesValidation = False
-        Me.btnSelectParserFile.Location = New System.Drawing.Point(540, 42)
+        Me.btnSelectParserFile.Location = New System.Drawing.Point(247, 59)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
         Me.btnSelectParserFile.Size = New System.Drawing.Size(58, 20)
         Me.btnSelectParserFile.TabIndex = 20
@@ -102,7 +109,7 @@ Partial Class frmList
         '
         'btnDontAskAgain
         '
-        Me.btnDontAskAgain.Location = New System.Drawing.Point(398, 283)
+        Me.btnDontAskAgain.Location = New System.Drawing.Point(374, 308)
         Me.btnDontAskAgain.Name = "btnDontAskAgain"
         Me.btnDontAskAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnDontAskAgain.TabIndex = 60
@@ -112,7 +119,7 @@ Partial Class frmList
         'chkDontAskAgain
         '
         Me.chkDontAskAgain.AutoSize = True
-        Me.chkDontAskAgain.Location = New System.Drawing.Point(215, 288)
+        Me.chkDontAskAgain.Location = New System.Drawing.Point(191, 313)
         Me.chkDontAskAgain.Name = "chkDontAskAgain"
         Me.chkDontAskAgain.Size = New System.Drawing.Size(15, 14)
         Me.chkDontAskAgain.TabIndex = 49
@@ -122,7 +129,7 @@ Partial Class frmList
         '
         'ButtonGrabberOptions
         '
-        Me.ButtonGrabberOptions.Location = New System.Drawing.Point(604, 42)
+        Me.ButtonGrabberOptions.Location = New System.Drawing.Point(311, 59)
         Me.ButtonGrabberOptions.Name = "ButtonGrabberOptions"
         Me.ButtonGrabberOptions.Size = New System.Drawing.Size(101, 20)
         Me.ButtonGrabberOptions.TabIndex = 71
@@ -132,23 +139,23 @@ Partial Class frmList
         'txtSearchintYear
         '
         Me.txtSearchintYear.Enabled = False
-        Me.txtSearchintYear.Location = New System.Drawing.Point(462, 12)
+        Me.txtSearchintYear.Location = New System.Drawing.Point(501, 32)
         Me.txtSearchintYear.Name = "txtSearchintYear"
-        Me.txtSearchintYear.Size = New System.Drawing.Size(72, 20)
+        Me.txtSearchintYear.Size = New System.Drawing.Size(44, 20)
         Me.txtSearchintYear.TabIndex = 72
+        Me.txtSearchintYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtSearchhintIMDB_Id
         '
-        Me.txtSearchhintIMDB_Id.Enabled = False
-        Me.txtSearchhintIMDB_Id.Location = New System.Drawing.Point(604, 12)
+        Me.txtSearchhintIMDB_Id.Location = New System.Drawing.Point(629, 32)
         Me.txtSearchhintIMDB_Id.Name = "txtSearchhintIMDB_Id"
-        Me.txtSearchhintIMDB_Id.Size = New System.Drawing.Size(100, 20)
+        Me.txtSearchhintIMDB_Id.Size = New System.Drawing.Size(78, 20)
         Me.txtSearchhintIMDB_Id.TabIndex = 73
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(395, 9)
+        Me.Label1.Location = New System.Drawing.Point(434, 29)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(61, 26)
         Me.Label1.TabIndex = 74
@@ -157,7 +164,7 @@ Partial Class frmList
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(540, 9)
+        Me.Label2.Location = New System.Drawing.Point(566, 29)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 26)
         Me.Label2.TabIndex = 75
@@ -165,20 +172,78 @@ Partial Class frmList
         '
         'btnCancelFromDialog
         '
-        Me.btnCancelFromDialog.Location = New System.Drawing.Point(268, 283)
+        Me.btnCancelFromDialog.Location = New System.Drawing.Point(244, 308)
         Me.btnCancelFromDialog.Name = "btnCancelFromDialog"
         Me.btnCancelFromDialog.Size = New System.Drawing.Size(97, 23)
         Me.btnCancelFromDialog.TabIndex = 76
         Me.btnCancelFromDialog.Text = "Cancel Grabbing"
         Me.btnCancelFromDialog.UseVisualStyleBackColor = True
         '
+        'txtTmpParserFilePathShort
+        '
+        Me.txtTmpParserFilePathShort.Enabled = False
+        Me.txtTmpParserFilePathShort.Location = New System.Drawing.Point(96, 59)
+        Me.txtTmpParserFilePathShort.Name = "txtTmpParserFilePathShort"
+        Me.txtTmpParserFilePathShort.Size = New System.Drawing.Size(137, 20)
+        Me.txtTmpParserFilePathShort.TabIndex = 77
+        '
+        'btnSearchAgainWithIMDB_Id
+        '
+        Me.btnSearchAgainWithIMDB_Id.Location = New System.Drawing.Point(612, 58)
+        Me.btnSearchAgainWithIMDB_Id.Name = "btnSearchAgainWithIMDB_Id"
+        Me.btnSearchAgainWithIMDB_Id.Size = New System.Drawing.Size(93, 20)
+        Me.btnSearchAgainWithIMDB_Id.TabIndex = 78
+        Me.btnSearchAgainWithIMDB_Id.Text = "Search IMDB"
+        Me.btnSearchAgainWithIMDB_Id.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(15, 62)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(75, 13)
+        Me.Label3.TabIndex = 79
+        Me.Label3.Text = "Grabber Script"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(15, 35)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(64, 13)
+        Me.Label4.TabIndex = 80
+        Me.Label4.Text = "Search Title"
+        '
+        'txtSource
+        '
+        Me.txtSource.Enabled = False
+        Me.txtSource.Location = New System.Drawing.Point(96, 6)
+        Me.txtSource.Name = "txtSource"
+        Me.txtSource.Size = New System.Drawing.Size(611, 20)
+        Me.txtSource.TabIndex = 81
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(15, 9)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(73, 13)
+        Me.Label5.TabIndex = 82
+        Me.Label5.Text = "Media Source"
+        '
         'frmList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(717, 318)
+        Me.ClientSize = New System.Drawing.Size(717, 343)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.txtSource)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.btnSearchAgainWithIMDB_Id)
+        Me.Controls.Add(Me.txtTmpParserFilePathShort)
         Me.Controls.Add(Me.btnCancelFromDialog)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -219,4 +284,10 @@ Partial Class frmList
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents btnCancelFromDialog As System.Windows.Forms.Button
+    Friend WithEvents txtTmpParserFilePathShort As System.Windows.Forms.TextBox
+    Friend WithEvents btnSearchAgainWithIMDB_Id As System.Windows.Forms.Button
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txtSource As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

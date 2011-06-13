@@ -9,19 +9,24 @@ Public Class frmList
     End Sub
 
     Private Sub btnSearchAgain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchAgain.Click
+        btnSearchAgain.Enabled = False
         If txtSearchString.Text <> "" Then
+            lstOptions.Items.Clear()
+            lstOptions.Items.Add("... now searching for results ...")
+            'Thread.Sleep(5)
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
             wurl.Clear()
             wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
+            lstOptions.Items.Clear()
             If (wurl.Count > 0) Then
-                lstOptions.Items.Clear()
                 For i As Integer = 0 To wurl.Count - 1
                     lstOptions.Items.Add(wurl.Item(i).Title)
                 Next
                 lstOptions.SelectedIndex = 0
                 btnOK.Enabled = True
             Else
+                lstOptions.Items.Add("No results found !")
                 btnOK.Enabled = False
             End If
             SearchTextChanged = False
@@ -30,6 +35,30 @@ Public Class frmList
         End If
     End Sub
 
+    Private Sub btnSearchAgainWithIMDB_Id_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchAgainWithIMDB_Id.Click
+        If txtSearchhintIMDB_Id.Text <> "" And txtSearchhintIMDB_Id.Text.StartsWith("tt") Then
+            Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
+            'Dim wurl As ArrayList
+            lstOptions.Items.Clear()
+            lstOptions.Items.Add("... now searching for results ...")
+            wurl.Clear()
+            wurl = Gb.ReturnURL(txtSearchhintIMDB_Id.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
+            lstOptions.Items.Clear()
+            If (wurl.Count > 0) Then
+                For i As Integer = 0 To wurl.Count - 1
+                    lstOptions.Items.Add(wurl.Item(i).Title)
+                Next
+                lstOptions.SelectedIndex = 0
+                btnOK.Enabled = True
+            Else
+                lstOptions.Items.Add("No results found !")
+                btnOK.Enabled = False
+            End If
+            SearchTextChanged = False
+        Else
+            MsgBox("There must be a valid IMDB-Id (ttxxxxxxx) present!", MsgBoxStyle.OkOnly)
+        End If
+    End Sub
     Private Sub btnDontAskAgain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDontAskAgain.Click
         'Add to xml file to ignore in future scans:
         Me.chkDontAskAgain.Checked() = True
@@ -57,6 +86,7 @@ Public Class frmList
                 If .ShowDialog = Windows.Forms.DialogResult.OK Then
                     Try
                         txtTmpParserFilePath.Text = .FileName
+                        txtTmpParserFilePathShort.Text = .FileName.ToString.Substring(.FileName.ToString.LastIndexOf("\") + 1)
                     Catch fileException As Exception
                         LogEvent("ERROR : " + fileException.Message, EventLogLevel.ErrorOrSimilar)
                     End Try
@@ -111,6 +141,7 @@ Public Class frmList
 
     Private Sub frmList_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.txtSearchString.Focus()
+        Me.btnSearchAgain.Enabled = False
     End Sub
 
     Private Sub ButtonGrabberOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonGrabberOptions.Click
@@ -140,5 +171,21 @@ Public Class frmList
         'AntProc.bgwFolderScanUpdate_Cancel()
         'bgwFolderScanUpdate.CancelAsync()
         'Form1.btnCancelProcessing.Enabled = False
+    End Sub
+
+    Private Sub txtSearchhintIMDB_Id_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearchhintIMDB_Id.TextChanged
+        If txtSearchhintIMDB_Id.Text <> "" Then
+            btnSearchAgainWithIMDB_Id.Enabled = True
+        Else
+            btnSearchAgainWithIMDB_Id.Enabled = False
+        End If
+    End Sub
+
+    Private Sub txtSearchString_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearchString.TextChanged
+        btnSearchAgain.Enabled = True
+    End Sub
+
+    Private Sub txtTmpParserFilePathShort_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTmpParserFilePathShort.TextChanged
+        btnSearchAgain.Enabled = True
     End Sub
 End Class
