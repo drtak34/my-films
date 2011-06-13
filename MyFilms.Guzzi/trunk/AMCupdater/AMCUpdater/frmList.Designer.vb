@@ -131,6 +131,7 @@ Partial Class frmList
         '
         'txtSearchintYear
         '
+        Me.txtSearchintYear.Enabled = False
         Me.txtSearchintYear.Location = New System.Drawing.Point(462, 12)
         Me.txtSearchintYear.Name = "txtSearchintYear"
         Me.txtSearchintYear.Size = New System.Drawing.Size(72, 20)
@@ -138,6 +139,7 @@ Partial Class frmList
         '
         'txtSearchhintIMDB_Id
         '
+        Me.txtSearchhintIMDB_Id.Enabled = False
         Me.txtSearchhintIMDB_Id.Location = New System.Drawing.Point(604, 12)
         Me.txtSearchhintIMDB_Id.Name = "txtSearchhintIMDB_Id"
         Me.txtSearchhintIMDB_Id.Size = New System.Drawing.Size(100, 20)
