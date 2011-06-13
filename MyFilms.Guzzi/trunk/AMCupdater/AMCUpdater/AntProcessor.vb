@@ -1229,6 +1229,10 @@ Public Class AntProcessor
         dvOrphanedMediaFiles = ds.Tables("tblOrphanedMediaFiles").DefaultView
         dvOrphanedMediaFiles.Sort = "FileName"
 
+        Dim dvFoundMediaFiles As New DataView
+        dvFoundMediaFiles = ds.Tables("tblFoundMediaFiles").DefaultView
+        dvFoundMediaFiles.Sort = "FileName"
+
         Dim SplitText As New Regex(CurrentSettings.RegEx_Check_For_MultiPart_Files)
         Dim m As Match
 
@@ -1240,6 +1244,8 @@ Public Class AntProcessor
             For Each row In ds.Tables("tblFoundMediaFiles").Rows
                 m = SplitText.Match(row("FileName"))
                 Dim wfile As String = String.Empty
+                Dim tfile As String = String.Empty
+                Dim tpath As String = String.Empty
                 If CurrentSettings.Store_Short_Names_Only Then
                     wfile = row("FileName")
                     If wfile.Contains("\") Then
@@ -1252,24 +1258,59 @@ Public Class AntProcessor
                         wfile = row("FilePath") + row("FileName")
                     End If
                 End If
+                ' for debugging - to be removed
+                tfile = row("FileName")
+                tpath = row("FilePath")
+
                 Dim FileMoved As Boolean = False
 
                 If dvXML.Find(wfile) = -1 Then 'This is case-sensitive!
-                    'File not already in XML - add it.
+
+                    'Found Media Files Table
+                    '("tblFoundMediaFiles")
+                    'column.ColumnName = "FileName" (string)
+                    'column.ColumnName = "FilePath" (string)
+
+                    '("tblOrphanedAntRecords")
+                    'column.ColumnName = "AntID" (int32)
+                    'column.ColumnName = "PhysicalPath" (string)
+                    'column.ColumnName = "FileName" (string)
+
+                    '("tblOrphanedMediaFiles")
+                    'column.ColumnName = "AntID" (int32)
+                    'column.ColumnName = "PhysicalPath"
+                    'column.ColumnName = "VirtualPath"
+                    'column.ColumnName = "FileName"
+                    'column.ColumnName = "Moved" (boolean)
+                    'column.ColumnName = "GroupName"
+
+                    'XML Table
+                    '("tblXML")
+                    'column.ColumnName = "AntID" (int32)
+                    'column.ColumnName = "AntPath" (string)
+                    'column.ColumnName = "AntShortPath" (string)
+
+                    'File not already in XML - check, if moved or add it.
                     If dvOrphanedMediaFiles.Find(row("FileName")) = -1 Then
                         dvXML.Sort = "AntShortPath"
                         If dvXML.Find(row("FileName")) = -1 Then
                             ' Shortname not found - might be new or might have moved.
                             For Each row2 As DataRow In ds.Tables("tblXML").Rows
                                 'take just the filename without any path:
+
                                 SearchName = row2("AntPath").ToString.Substring(row2("AntPath").ToString.LastIndexOf("\") + 1)
                                 If SearchName = wfile.Substring(wfile.LastIndexOf("\") + 1) Then
-                                    'Match found - file moved:
-                                    ds.Tables("tblOrphanedMediaFiles").Rows.Add(New Object() {row2("AntID"), row("FilePath"), CurrentSettings.Override_Path, row("FileName"), True})
-                                    LogEvent("     Moved File : " + row("FileName"), EventLogLevel.Informational)
-                                    MovedFilesCount += 1
-                                    FileMoved = True
-                                    Exit For
+                                    'Match found - check, if file already used by existing record:
+                                    'dvXML.Sort = "AntPath"
+                                    'If wfile = row2("AntPath") Or dvXML.Find(row2("AntPath")) = -1 Then ' if this file is not already in an existing record or the record is the one to be moved ...
+                                    dvFoundMediaFiles.Sort = "FileName"
+                                    If dvFoundMediaFiles.Find(row2("AntShortPath")) = -1 Then ' if this file is not already in an existing record or the record is the one to be moved ...
+                                        ds.Tables("tblOrphanedMediaFiles").Rows.Add(New Object() {row2("AntID"), row("FilePath"), CurrentSettings.Override_Path, row("FileName"), True})
+                                        LogEvent("     Moved File : " + row("FileName"), EventLogLevel.Informational)
+                                        MovedFilesCount += 1
+                                        FileMoved = True
+                                        Exit For
+                                    End If
                                 End If
                             Next
                             If FileMoved = False Then
@@ -1472,39 +1513,70 @@ Public Class AntProcessor
         dvFoundNonMediaFiles = ds.Tables("tblFoundNonMediaFiles").DefaultView
         dvFoundNonMediaFiles.Sort = "FileName"
 
+        Dim dvOrphanedMediaFiles As New DataView
+        dvOrphanedMediaFiles = ds.Tables("tblOrphanedMediaFiles").DefaultView
+        dvOrphanedMediaFiles.Sort = "FileName"
+
         Dim Path() As String
         Dim iTemp As Integer
         Dim strTemp, strTemp2 As String
+        Dim FileMoved As Boolean = False
 
         For Each row In ds.Tables("tblXML").Rows
             If dvFoundMediaFiles.Find(row("AntShortPath")) = -1 Then
                 If dvFoundNonMediaFiles.Find(row("AntShortPath")) = -1 Then
-                    ''And if not there, it's probably an orphan - check to see if the path is different:
 
-                    Path = CurrentSettings.Movie_Scan_Path.Split(";")
-                    For i As Integer = 0 To Path.Length - 1
-                        If CurrentSettings.Override_Path = "" Then
-                            strTemp = row("AntPath").ToString.ToLower
-                            strTemp2 = Path(i).ToLower
-                            iTemp = row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower)
-                            If row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower) > -1 Then
-                                'Match - we're scanning the path that this entry refers to - must be orphaned.
-                                ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
-                                LogEvent(" - Orphaned Ant Record : " & row("AntPath"), EventLogLevel.Informational)
-                            End If
-                        Else
-                            'Match - the ant records refers to the location we're using as override path.
-                            strTemp = row("AntPath").ToString.ToLower
-                            strTemp2 = CurrentSettings.Override_Path.ToLower
-                            iTemp = row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower)
-                            If row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower) > -1 Then
-                                'Match - we're scanning the path that this entry refers to - must be orphaned.
-                                ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
-                                LogEvent(" - Orphaned Ant Record : " & row("AntPath"), EventLogLevel.Informational)
-                            End If
+                    '("tblOrphanedMediaFiles")
+                    'column.ColumnName = "AntID" (int32)
+                    'column.ColumnName = "PhysicalPath"
+                    'column.ColumnName = "VirtualPath"
+                    'column.ColumnName = "FileName"
+                    'column.ColumnName = "Moved" (boolean)
+                    'column.ColumnName = "GroupName"
+
+                    'XML Table
+                    '("tblXML")
+                    'column.ColumnName = "AntID" (int32)
+                    'column.ColumnName = "AntPath" (string)
+                    'column.ColumnName = "AntShortPath" (string)
+
+                    ' check if it is a moved file ...
+                    FileMoved = False
+                    For Each row2 As DataRow In ds.Tables("tblOrphanedMediaFiles").Rows
+                        If row("AntID").ToString = row2("AntID").ToString And row2("Moved") = True Then
+                            LogEvent(" - Orphaned Ant Record is a Moved File : " + row("AntPath") + ", File: " + row2("FileName"), EventLogLevel.Informational)
+                            FileMoved = True
+                            Exit For
                         End If
-
                     Next
+
+                    If FileMoved = False Then
+                        'And if not there, it's probably an orphan - check to see if the path is different:
+                        Path = CurrentSettings.Movie_Scan_Path.Split(";")
+                        For i As Integer = 0 To Path.Length - 1
+                            If CurrentSettings.Override_Path = "" Then
+                                strTemp = row("AntPath").ToString.ToLower
+                                strTemp2 = Path(i).ToLower
+                                iTemp = row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower)
+                                If row("AntPath").ToString.ToLower.IndexOf(Path(i).ToLower) > -1 Then
+                                    'Match - we're scanning the path that this entry refers to - must be orphaned.
+                                    ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
+                                    LogEvent(" - Orphaned Ant Record : " & row("AntPath"), EventLogLevel.Informational)
+                                End If
+                            Else
+                                'Match - the ant records refers to the location we're using as override path.
+                                strTemp = row("AntPath").ToString.ToLower
+                                strTemp2 = CurrentSettings.Override_Path.ToLower
+                                iTemp = row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower)
+                                If row("AntPath").ToString.ToLower.IndexOf(CurrentSettings.Override_Path.ToLower) > -1 Then
+                                    'Match - we're scanning the path that this entry refers to - must be orphaned.
+                                    ds.Tables("tblOrphanedAntRecords").Rows.Add(New Object() {row("AntID"), row("AntPath"), row("AntShortPath")})
+                                    LogEvent(" - Orphaned Ant Record : " & row("AntPath"), EventLogLevel.Informational)
+                                End If
+                            End If
+                        Next
+                    End If
+
                 End If
             End If
         Next row
