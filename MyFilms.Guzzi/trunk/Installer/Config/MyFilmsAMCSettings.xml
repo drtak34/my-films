@@ -82,6 +82,9 @@
   <Values Option="Import_File_On_Internet_Lookup_Failure">
     <Value>True</Value>
   </Values>
+  <Values Option="Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode">
+    <Value>True</Value>
+  </Values>
   <Values Option="Internet_Lookup_Always_Prompt">
     <Value>false</Value>
   </Values>
