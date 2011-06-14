@@ -29,10 +29,10 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -45,6 +45,8 @@ Partial Class Form1
         Me.txtMovieFolder = New System.Windows.Forms.TextBox
         Me.Label17 = New System.Windows.Forms.Label
         Me.GroupBox23 = New System.Windows.Forms.GroupBox
+        Me.chkImportOnInternetFailIgnoreWhenInteractive = New System.Windows.Forms.CheckBox
+        Me.cbTitleHandling = New System.Windows.Forms.ComboBox
         Me.GroupBox26 = New System.Windows.Forms.GroupBox
         Me.Label87 = New System.Windows.Forms.Label
         Me.Label86 = New System.Windows.Forms.Label
@@ -54,9 +56,11 @@ Partial Class Form1
         Me.chkGrabberOverridePersonLimit = New System.Windows.Forms.ComboBox
         Me.chkGrabberOverrideGetRoles = New System.Windows.Forms.ComboBox
         Me.chkGrabberOverrideLanguage = New System.Windows.Forms.ComboBox
+        Me.Label43 = New System.Windows.Forms.Label
         Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox
         Me.Button1 = New System.Windows.Forms.Button
         Me.btnSelectParserFile = New System.Windows.Forms.Button
+        Me.chkImportOnInternetFail = New System.Windows.Forms.CheckBox
         Me.Label23 = New System.Windows.Forms.Label
         Me.txtParserFilePath = New System.Windows.Forms.TextBox
         Me.cbInternetLookupBehaviour = New System.Windows.Forms.ComboBox
@@ -66,7 +70,6 @@ Partial Class Form1
         Me.chkUseXBMCnfo = New System.Windows.Forms.CheckBox
         Me.chkRescanMovedFiles = New System.Windows.Forms.CheckBox
         Me.chkProhibitInternetLookup = New System.Windows.Forms.CheckBox
-        Me.chkImportOnInternetFail = New System.Windows.Forms.CheckBox
         Me.chkPurgeMissing = New System.Windows.Forms.CheckBox
         Me.chkOverwriteXML = New System.Windows.Forms.CheckBox
         Me.chkBackupXMLFirst = New System.Windows.Forms.CheckBox
@@ -138,7 +141,6 @@ Partial Class Form1
         Me.Label45 = New System.Windows.Forms.Label
         Me.dgExcludedFileStrings = New System.Windows.Forms.DataGridView
         Me.DatabaseFields = New System.Windows.Forms.TabPage
-        Me.chkAspectRatio = New System.Windows.Forms.CheckBox
         Me.cbMasterTitle = New System.Windows.Forms.ComboBox
         Me.lblMasterTitle = New System.Windows.Forms.Label
         Me.lblPicturePrefix = New System.Windows.Forms.Label
@@ -151,8 +153,6 @@ Partial Class Form1
         Me.cbCheckHandling = New System.Windows.Forms.ComboBox
         Me.lblCheckFieldHandling = New System.Windows.Forms.Label
         Me.lblInternetLookupRequired = New System.Windows.Forms.Label
-        Me.cbTitleHandling = New System.Windows.Forms.ComboBox
-        Me.Label43 = New System.Windows.Forms.Label
         Me.cbDateHandling = New System.Windows.Forms.ComboBox
         Me.Label30 = New System.Windows.Forms.Label
         Me.GroupBox16 = New System.Windows.Forms.GroupBox
@@ -486,14 +486,14 @@ Partial Class Form1
         Me.GroupBox24.Controls.Add(Me.Label17)
         Me.GroupBox24.Location = New System.Drawing.Point(11, 106)
         Me.GroupBox24.Name = "GroupBox24"
-        Me.GroupBox24.Size = New System.Drawing.Size(521, 105)
+        Me.GroupBox24.Size = New System.Drawing.Size(521, 102)
         Me.GroupBox24.TabIndex = 106
         Me.GroupBox24.TabStop = False
         Me.GroupBox24.Text = "Movie Folder(s) ..."
         '
         'txtOverridePath
         '
-        Me.txtOverridePath.Location = New System.Drawing.Point(12, 76)
+        Me.txtOverridePath.Location = New System.Drawing.Point(12, 73)
         Me.txtOverridePath.Name = "txtOverridePath"
         Me.txtOverridePath.Size = New System.Drawing.Size(463, 20)
         Me.txtOverridePath.TabIndex = 40
@@ -502,7 +502,7 @@ Partial Class Form1
         'lblOverridePath
         '
         Me.lblOverridePath.AutoSize = True
-        Me.lblOverridePath.Location = New System.Drawing.Point(11, 60)
+        Me.lblOverridePath.Location = New System.Drawing.Point(11, 57)
         Me.lblOverridePath.Name = "lblOverridePath"
         Me.lblOverridePath.Size = New System.Drawing.Size(185, 13)
         Me.lblOverridePath.TabIndex = 41
@@ -548,7 +548,10 @@ Partial Class Form1
         '
         'GroupBox23
         '
+        Me.GroupBox23.Controls.Add(Me.chkImportOnInternetFailIgnoreWhenInteractive)
+        Me.GroupBox23.Controls.Add(Me.cbTitleHandling)
         Me.GroupBox23.Controls.Add(Me.GroupBox26)
+        Me.GroupBox23.Controls.Add(Me.Label43)
         Me.GroupBox23.Controls.Add(Me.chkDontAskInteractive)
         Me.GroupBox23.Controls.Add(Me.Button1)
         Me.GroupBox23.Controls.Add(Me.btnSelectParserFile)
@@ -557,12 +560,37 @@ Partial Class Form1
         Me.GroupBox23.Controls.Add(Me.txtParserFilePath)
         Me.GroupBox23.Controls.Add(Me.cbInternetLookupBehaviour)
         Me.GroupBox23.Controls.Add(Me.Label24)
-        Me.GroupBox23.Location = New System.Drawing.Point(11, 217)
+        Me.GroupBox23.Location = New System.Drawing.Point(11, 210)
         Me.GroupBox23.Name = "GroupBox23"
-        Me.GroupBox23.Size = New System.Drawing.Size(521, 215)
+        Me.GroupBox23.Size = New System.Drawing.Size(521, 222)
         Me.GroupBox23.TabIndex = 104
         Me.GroupBox23.TabStop = False
         Me.GroupBox23.Text = "Internet Grabber Options ..."
+        '
+        'chkImportOnInternetFailIgnoreWhenInteractive
+        '
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.AutoSize = True
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.Location = New System.Drawing.Point(301, 114)
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.Name = "chkImportOnInternetFailIgnoreWhenInteractive"
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.Size = New System.Drawing.Size(196, 17)
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.TabIndex = 61
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.Text = "Don't Import File in Interactive Mode"
+        Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFailIgnoreWhenInteractive, "If you want AMCupdater to import files in background mode (MyFIlms global update)" & _
+                ", " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "but do NOT want AMCupdater to import files for AMCupdater interactive GUI mo" & _
+                "de, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "you can set this option.")
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.UseVisualStyleBackColor = True
+        '
+        'cbTitleHandling
+        '
+        Me.cbTitleHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbTitleHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbTitleHandling.FormattingEnabled = True
+        Me.cbTitleHandling.Items.AddRange(New Object() {"File Name", "Folder Name", "Relative Name", "File Name + Internet Lookup", "Folder Name + Internet Lookup", "Relative Name + Internet Lookup"})
+        Me.cbTitleHandling.Location = New System.Drawing.Point(103, 96)
+        Me.cbTitleHandling.Name = "cbTitleHandling"
+        Me.cbTitleHandling.Size = New System.Drawing.Size(170, 21)
+        Me.cbTitleHandling.TabIndex = 40
+        Me.ToolTip1.SetToolTip(Me.cbTitleHandling, resources.GetString("cbTitleHandling.ToolTip"))
         '
         'GroupBox26
         '
@@ -574,9 +602,9 @@ Partial Class Form1
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverridePersonLimit)
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideGetRoles)
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideLanguage)
-        Me.GroupBox26.Location = New System.Drawing.Point(12, 108)
+        Me.GroupBox26.Location = New System.Drawing.Point(8, 130)
         Me.GroupBox26.Name = "GroupBox26"
-        Me.GroupBox26.Size = New System.Drawing.Size(500, 97)
+        Me.GroupBox26.Size = New System.Drawing.Size(500, 86)
         Me.GroupBox26.TabIndex = 60
         Me.GroupBox26.TabStop = False
         Me.GroupBox26.Text = "AMC Updater - Grabber Override Options ..."
@@ -585,7 +613,7 @@ Partial Class Form1
         'Label87
         '
         Me.Label87.AutoSize = True
-        Me.Label87.Location = New System.Drawing.Point(319, 70)
+        Me.Label87.Location = New System.Drawing.Point(319, 62)
         Me.Label87.Name = "Label87"
         Me.Label87.Size = New System.Drawing.Size(66, 13)
         Me.Label87.TabIndex = 7
@@ -594,7 +622,7 @@ Partial Class Form1
         'Label86
         '
         Me.Label86.AutoSize = True
-        Me.Label86.Location = New System.Drawing.Point(319, 43)
+        Me.Label86.Location = New System.Drawing.Point(319, 38)
         Me.Label86.Name = "Label86"
         Me.Label86.Size = New System.Drawing.Size(79, 13)
         Me.Label86.TabIndex = 6
@@ -603,7 +631,7 @@ Partial Class Form1
         'Label85
         '
         Me.Label85.AutoSize = True
-        Me.Label85.Location = New System.Drawing.Point(319, 16)
+        Me.Label85.Location = New System.Drawing.Point(319, 14)
         Me.Label85.Name = "Label85"
         Me.Label85.Size = New System.Drawing.Size(82, 13)
         Me.Label85.TabIndex = 5
@@ -612,17 +640,17 @@ Partial Class Form1
         'Label84
         '
         Me.Label84.AutoSize = True
-        Me.Label84.Location = New System.Drawing.Point(94, 24)
+        Me.Label84.Location = New System.Drawing.Point(12, 27)
         Me.Label84.Name = "Label84"
-        Me.Label84.Size = New System.Drawing.Size(161, 13)
+        Me.Label84.Size = New System.Drawing.Size(68, 39)
         Me.Label84.TabIndex = 4
-        Me.Label84.Text = "Preferred Languages / Countries"
+        Me.Label84.Text = "Preferred " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Languages /" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Countries"
         '
         'chkGrabberOverrideTitleLimit
         '
         Me.chkGrabberOverrideTitleLimit.FormattingEnabled = True
         Me.chkGrabberOverrideTitleLimit.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "10", "15", "20", "999"})
-        Me.chkGrabberOverrideTitleLimit.Location = New System.Drawing.Point(416, 67)
+        Me.chkGrabberOverrideTitleLimit.Location = New System.Drawing.Point(416, 59)
         Me.chkGrabberOverrideTitleLimit.Name = "chkGrabberOverrideTitleLimit"
         Me.chkGrabberOverrideTitleLimit.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverrideTitleLimit.TabIndex = 3
@@ -633,7 +661,7 @@ Partial Class Form1
         '
         Me.chkGrabberOverridePersonLimit.FormattingEnabled = True
         Me.chkGrabberOverridePersonLimit.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "10", "15", "20", "999"})
-        Me.chkGrabberOverridePersonLimit.Location = New System.Drawing.Point(416, 40)
+        Me.chkGrabberOverridePersonLimit.Location = New System.Drawing.Point(416, 35)
         Me.chkGrabberOverridePersonLimit.Name = "chkGrabberOverridePersonLimit"
         Me.chkGrabberOverridePersonLimit.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverridePersonLimit.TabIndex = 2
@@ -644,7 +672,7 @@ Partial Class Form1
         '
         Me.chkGrabberOverrideGetRoles.FormattingEnabled = True
         Me.chkGrabberOverrideGetRoles.Items.AddRange(New Object() {"true", "false"})
-        Me.chkGrabberOverrideGetRoles.Location = New System.Drawing.Point(416, 13)
+        Me.chkGrabberOverrideGetRoles.Location = New System.Drawing.Point(416, 11)
         Me.chkGrabberOverrideGetRoles.Name = "chkGrabberOverrideGetRoles"
         Me.chkGrabberOverrideGetRoles.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverrideGetRoles.TabIndex = 1
@@ -655,16 +683,25 @@ Partial Class Form1
         '
         Me.chkGrabberOverrideLanguage.FormattingEnabled = True
         Me.chkGrabberOverrideLanguage.Items.AddRange(New Object() {"Argentina", "Australia", "Austria", "Belgium", "Brazil", "Canada", "Chile", "Croatia", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hong Kong", "Hungary", "Iceland", "India", "Ireland", "Israel", "Italy", "Japan", "Malaysia", "Mexico", "Netherlands", "New Zealand", "Norway", "Peru", "Philippines", "Poland", "Portugal", "Romania", "Russia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Turkey", "UK", "Uruguay", "USA"})
-        Me.chkGrabberOverrideLanguage.Location = New System.Drawing.Point(90, 40)
+        Me.chkGrabberOverrideLanguage.Location = New System.Drawing.Point(95, 38)
         Me.chkGrabberOverrideLanguage.Name = "chkGrabberOverrideLanguage"
-        Me.chkGrabberOverrideLanguage.Size = New System.Drawing.Size(199, 21)
+        Me.chkGrabberOverrideLanguage.Size = New System.Drawing.Size(170, 21)
         Me.chkGrabberOverrideLanguage.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideLanguage, resources.GetString("chkGrabberOverrideLanguage.ToolTip"))
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.Location = New System.Drawing.Point(11, 94)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(86, 26)
+        Me.Label43.TabIndex = 39
+        Me.Label43.Text = "Title and " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Search Handling"
         '
         'chkDontAskInteractive
         '
         Me.chkDontAskInteractive.AutoSize = True
-        Me.chkDontAskInteractive.Location = New System.Drawing.Point(330, 63)
+        Me.chkDontAskInteractive.Location = New System.Drawing.Point(301, 68)
         Me.chkDontAskInteractive.Name = "chkDontAskInteractive"
         Me.chkDontAskInteractive.Size = New System.Drawing.Size(129, 17)
         Me.chkDontAskInteractive.TabIndex = 59
@@ -674,7 +711,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(374, 33)
+        Me.Button1.Location = New System.Drawing.Point(374, 36)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(100, 20)
         Me.Button1.TabIndex = 51
@@ -684,17 +721,28 @@ Partial Class Form1
         'btnSelectParserFile
         '
         Me.btnSelectParserFile.CausesValidation = False
-        Me.btnSelectParserFile.Location = New System.Drawing.Point(480, 33)
+        Me.btnSelectParserFile.Location = New System.Drawing.Point(480, 36)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
         Me.btnSelectParserFile.Size = New System.Drawing.Size(32, 20)
         Me.btnSelectParserFile.TabIndex = 5
         Me.btnSelectParserFile.Text = "..."
         Me.btnSelectParserFile.UseVisualStyleBackColor = True
         '
+        'chkImportOnInternetFail
+        '
+        Me.chkImportOnInternetFail.AutoSize = True
+        Me.chkImportOnInternetFail.Location = New System.Drawing.Point(301, 91)
+        Me.chkImportOnInternetFail.Name = "chkImportOnInternetFail"
+        Me.chkImportOnInternetFail.Size = New System.Drawing.Size(184, 17)
+        Me.chkImportOnInternetFail.TabIndex = 0
+        Me.chkImportOnInternetFail.Text = "Import File if Internet Lookup Fails"
+        Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFail, resources.GetString("chkImportOnInternetFail.ToolTip"))
+        Me.chkImportOnInternetFail.UseVisualStyleBackColor = True
+        '
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(11, 17)
+        Me.Label23.Location = New System.Drawing.Point(11, 20)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(182, 13)
         Me.Label23.TabIndex = 42
@@ -702,7 +750,7 @@ Partial Class Form1
         '
         'txtParserFilePath
         '
-        Me.txtParserFilePath.Location = New System.Drawing.Point(12, 33)
+        Me.txtParserFilePath.Location = New System.Drawing.Point(12, 36)
         Me.txtParserFilePath.Name = "txtParserFilePath"
         Me.txtParserFilePath.Size = New System.Drawing.Size(356, 20)
         Me.txtParserFilePath.TabIndex = 4
@@ -712,16 +760,16 @@ Partial Class Form1
         '
         Me.cbInternetLookupBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInternetLookupBehaviour.FormattingEnabled = True
-        Me.cbInternetLookupBehaviour.Location = New System.Drawing.Point(102, 61)
+        Me.cbInternetLookupBehaviour.Location = New System.Drawing.Point(103, 66)
         Me.cbInternetLookupBehaviour.Name = "cbInternetLookupBehaviour"
-        Me.cbInternetLookupBehaviour.Size = New System.Drawing.Size(199, 21)
+        Me.cbInternetLookupBehaviour.Size = New System.Drawing.Size(170, 21)
         Me.cbInternetLookupBehaviour.TabIndex = 9
         Me.ToolTip1.SetToolTip(Me.cbInternetLookupBehaviour, resources.GetString("cbInternetLookupBehaviour.ToolTip"))
         '
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(11, 58)
+        Me.Label24.Location = New System.Drawing.Point(11, 62)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(85, 26)
         Me.Label24.TabIndex = 51
@@ -790,17 +838,6 @@ Partial Class Form1
         Me.ToolTip1.SetToolTip(Me.chkProhibitInternetLookup, "Global override option to disable all Internet-based functionality.")
         Me.chkProhibitInternetLookup.UseVisualStyleBackColor = True
         '
-        'chkImportOnInternetFail
-        '
-        Me.chkImportOnInternetFail.AutoSize = True
-        Me.chkImportOnInternetFail.Location = New System.Drawing.Point(330, 85)
-        Me.chkImportOnInternetFail.Name = "chkImportOnInternetFail"
-        Me.chkImportOnInternetFail.Size = New System.Drawing.Size(184, 17)
-        Me.chkImportOnInternetFail.TabIndex = 0
-        Me.chkImportOnInternetFail.Text = "Import File if Internet Lookup Fails"
-        Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFail, "Continue processing and import files even when Internet lookup fails or similar.")
-        Me.chkImportOnInternetFail.UseVisualStyleBackColor = True
-        '
         'chkPurgeMissing
         '
         Me.chkPurgeMissing.AutoSize = True
@@ -866,7 +903,7 @@ Partial Class Form1
         Me.GroupBox8.Controls.Add(Me.btnUpdateXML)
         Me.GroupBox8.Controls.Add(Me.btnProcessMovieList)
         Me.GroupBox8.Controls.Add(Me.btnJustDoIt)
-        Me.GroupBox8.Location = New System.Drawing.Point(6, 438)
+        Me.GroupBox8.Location = New System.Drawing.Point(11, 438)
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.Size = New System.Drawing.Size(521, 105)
         Me.GroupBox8.TabIndex = 2
@@ -1239,9 +1276,9 @@ Partial Class Form1
         Me.cbLogLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbLogLevel.FormattingEnabled = True
         Me.cbLogLevel.Items.AddRange(New Object() {"All Events with Grabbing", "All Events", "Major Events", "Errors Only"})
-        Me.cbLogLevel.Location = New System.Drawing.Point(96, 13)
+        Me.cbLogLevel.Location = New System.Drawing.Point(137, 13)
         Me.cbLogLevel.Name = "cbLogLevel"
-        Me.cbLogLevel.Size = New System.Drawing.Size(121, 21)
+        Me.cbLogLevel.Size = New System.Drawing.Size(171, 21)
         Me.cbLogLevel.TabIndex = 20
         Me.ToolTip1.SetToolTip(Me.cbLogLevel, "The logging level option controls what information is saved to the logfile")
         '
@@ -1558,7 +1595,6 @@ Partial Class Form1
         '
         'DatabaseFields
         '
-        Me.DatabaseFields.Controls.Add(Me.chkAspectRatio)
         Me.DatabaseFields.Controls.Add(Me.cbMasterTitle)
         Me.DatabaseFields.Controls.Add(Me.lblMasterTitle)
         Me.DatabaseFields.Controls.Add(Me.lblPicturePrefix)
@@ -1571,8 +1607,6 @@ Partial Class Form1
         Me.DatabaseFields.Controls.Add(Me.cbCheckHandling)
         Me.DatabaseFields.Controls.Add(Me.lblCheckFieldHandling)
         Me.DatabaseFields.Controls.Add(Me.lblInternetLookupRequired)
-        Me.DatabaseFields.Controls.Add(Me.cbTitleHandling)
-        Me.DatabaseFields.Controls.Add(Me.Label43)
         Me.DatabaseFields.Controls.Add(Me.cbDateHandling)
         Me.DatabaseFields.Controls.Add(Me.Label30)
         Me.DatabaseFields.Controls.Add(Me.GroupBox16)
@@ -1585,25 +1619,13 @@ Partial Class Form1
         Me.DatabaseFields.Text = "Database Fields"
         Me.DatabaseFields.UseVisualStyleBackColor = True
         '
-        'chkAspectRatio
-        '
-        Me.chkAspectRatio.AutoSize = True
-        Me.chkAspectRatio.Location = New System.Drawing.Point(353, 546)
-        Me.chkAspectRatio.Name = "chkAspectRatio"
-        Me.chkAspectRatio.Size = New System.Drawing.Size(177, 17)
-        Me.chkAspectRatio.TabIndex = 52
-        Me.chkAspectRatio.Text = "Aspect Ratio instead Resolution"
-        Me.ToolTip1.SetToolTip(Me.chkAspectRatio, "Store Aspect Ration in Resolution Field (ex: resolution 704x304 give 2.31as Aspec" & _
-                "t Ration - 704:304)")
-        Me.chkAspectRatio.UseVisualStyleBackColor = True
-        '
         'cbMasterTitle
         '
         Me.cbMasterTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbMasterTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbMasterTitle.FormattingEnabled = True
         Me.cbMasterTitle.Items.AddRange(New Object() {"TranslatedTitle", "OriginalTitle"})
-        Me.cbMasterTitle.Location = New System.Drawing.Point(353, 422)
+        Me.cbMasterTitle.Location = New System.Drawing.Point(353, 411)
         Me.cbMasterTitle.Name = "cbMasterTitle"
         Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
         Me.cbMasterTitle.TabIndex = 51
@@ -1612,7 +1634,7 @@ Partial Class Form1
         'lblMasterTitle
         '
         Me.lblMasterTitle.AutoSize = True
-        Me.lblMasterTitle.Location = New System.Drawing.Point(350, 406)
+        Me.lblMasterTitle.Location = New System.Drawing.Point(350, 395)
         Me.lblMasterTitle.Name = "lblMasterTitle"
         Me.lblMasterTitle.Size = New System.Drawing.Size(116, 13)
         Me.lblMasterTitle.TabIndex = 50
@@ -1621,7 +1643,7 @@ Partial Class Form1
         'lblPicturePrefix
         '
         Me.lblPicturePrefix.AutoSize = True
-        Me.lblPicturePrefix.Location = New System.Drawing.Point(349, 497)
+        Me.lblPicturePrefix.Location = New System.Drawing.Point(349, 519)
         Me.lblPicturePrefix.Name = "lblPicturePrefix"
         Me.lblPicturePrefix.Size = New System.Drawing.Size(148, 13)
         Me.lblPicturePrefix.TabIndex = 49
@@ -1629,7 +1651,7 @@ Partial Class Form1
         '
         'txtPictureFilenamePrefix
         '
-        Me.txtPictureFilenamePrefix.Location = New System.Drawing.Point(353, 513)
+        Me.txtPictureFilenamePrefix.Location = New System.Drawing.Point(353, 535)
         Me.txtPictureFilenamePrefix.Name = "txtPictureFilenamePrefix"
         Me.txtPictureFilenamePrefix.Size = New System.Drawing.Size(174, 20)
         Me.txtPictureFilenamePrefix.TabIndex = 48
@@ -1641,7 +1663,7 @@ Partial Class Form1
         Me.cbPictureHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPictureHandling.FormattingEnabled = True
         Me.cbPictureHandling.Items.AddRange(New Object() {"Full Path", "Relative Path", "Use Folder.jpg"})
-        Me.cbPictureHandling.Location = New System.Drawing.Point(353, 473)
+        Me.cbPictureHandling.Location = New System.Drawing.Point(353, 489)
         Me.cbPictureHandling.Name = "cbPictureHandling"
         Me.cbPictureHandling.Size = New System.Drawing.Size(174, 21)
         Me.cbPictureHandling.TabIndex = 46
@@ -1650,7 +1672,7 @@ Partial Class Form1
         'lblPictureHandling
         '
         Me.lblPictureHandling.AutoSize = True
-        Me.lblPictureHandling.Location = New System.Drawing.Point(349, 457)
+        Me.lblPictureHandling.Location = New System.Drawing.Point(349, 473)
         Me.lblPictureHandling.Name = "lblPictureHandling"
         Me.lblPictureHandling.Size = New System.Drawing.Size(91, 13)
         Me.lblPictureHandling.TabIndex = 45
@@ -1662,7 +1684,7 @@ Partial Class Form1
         Me.cbGroupNameAppliesTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbGroupNameAppliesTo.FormattingEnabled = True
         Me.cbGroupNameAppliesTo.Items.AddRange(New Object() {"Original Title", "Translated Title", "Both Titles"})
-        Me.cbGroupNameAppliesTo.Location = New System.Drawing.Point(353, 383)
+        Me.cbGroupNameAppliesTo.Location = New System.Drawing.Point(353, 356)
         Me.cbGroupNameAppliesTo.Name = "cbGroupNameAppliesTo"
         Me.cbGroupNameAppliesTo.Size = New System.Drawing.Size(174, 21)
         Me.cbGroupNameAppliesTo.TabIndex = 44
@@ -1670,7 +1692,7 @@ Partial Class Form1
         'lblGroupNameAppliesTo
         '
         Me.lblGroupNameAppliesTo.AutoSize = True
-        Me.lblGroupNameAppliesTo.Location = New System.Drawing.Point(350, 367)
+        Me.lblGroupNameAppliesTo.Location = New System.Drawing.Point(350, 340)
         Me.lblGroupNameAppliesTo.Name = "lblGroupNameAppliesTo"
         Me.lblGroupNameAppliesTo.Size = New System.Drawing.Size(113, 13)
         Me.lblGroupNameAppliesTo.TabIndex = 43
@@ -1679,7 +1701,7 @@ Partial Class Form1
         'chkFolderNameIsGroupName
         '
         Me.chkFolderNameIsGroupName.AutoSize = True
-        Me.chkFolderNameIsGroupName.Location = New System.Drawing.Point(353, 346)
+        Me.chkFolderNameIsGroupName.Location = New System.Drawing.Point(353, 320)
         Me.chkFolderNameIsGroupName.Name = "chkFolderNameIsGroupName"
         Me.chkFolderNameIsGroupName.Size = New System.Drawing.Size(175, 17)
         Me.chkFolderNameIsGroupName.TabIndex = 42
@@ -1714,33 +1736,12 @@ Partial Class Form1
         '
         Me.lblInternetLookupRequired.AutoSize = True
         Me.lblInternetLookupRequired.ForeColor = System.Drawing.Color.Red
-        Me.lblInternetLookupRequired.Location = New System.Drawing.Point(366, 187)
+        Me.lblInternetLookupRequired.Location = New System.Drawing.Point(366, 189)
         Me.lblInternetLookupRequired.Name = "lblInternetLookupRequired"
         Me.lblInternetLookupRequired.Size = New System.Drawing.Size(147, 26)
         Me.lblInternetLookupRequired.TabIndex = 39
         Me.lblInternetLookupRequired.Text = "-- Internet lookup is required --" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "-- with these settings --"
         Me.lblInternetLookupRequired.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'cbTitleHandling
-        '
-        Me.cbTitleHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbTitleHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTitleHandling.FormattingEnabled = True
-        Me.cbTitleHandling.Items.AddRange(New Object() {"File Name", "Folder Name", "Relative Name", "File Name + Internet Lookup", "Folder Name + Internet Lookup", "Relative Name + Internet Lookup"})
-        Me.cbTitleHandling.Location = New System.Drawing.Point(353, 319)
-        Me.cbTitleHandling.Name = "cbTitleHandling"
-        Me.cbTitleHandling.Size = New System.Drawing.Size(174, 21)
-        Me.cbTitleHandling.TabIndex = 38
-        Me.ToolTip1.SetToolTip(Me.cbTitleHandling, resources.GetString("cbTitleHandling.ToolTip"))
-        '
-        'Label43
-        '
-        Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(350, 303)
-        Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(116, 13)
-        Me.Label43.TabIndex = 37
-        Me.Label43.Text = "Original Title Handling :"
         '
         'cbDateHandling
         '
@@ -1748,7 +1749,7 @@ Partial Class Form1
         Me.cbDateHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDateHandling.FormattingEnabled = True
         Me.cbDateHandling.Items.AddRange(New Object() {"File Created Date", "File Modified Date", "Current System Date", "No Date"})
-        Me.cbDateHandling.Location = New System.Drawing.Point(353, 279)
+        Me.cbDateHandling.Location = New System.Drawing.Point(353, 282)
         Me.cbDateHandling.Name = "cbDateHandling"
         Me.cbDateHandling.Size = New System.Drawing.Size(174, 21)
         Me.cbDateHandling.TabIndex = 36
@@ -1756,7 +1757,7 @@ Partial Class Form1
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(350, 263)
+        Me.Label30.Location = New System.Drawing.Point(350, 266)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(106, 13)
         Me.Label30.TabIndex = 35
@@ -2866,8 +2867,8 @@ Partial Class Form1
         Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
         Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 27, 0, 0)
         Me.XionPanel1.Sizable = True
-        Me.XionPanel1.Size = New System.Drawing.Size(32, 541)
-        Me.XionPanel1.State = XionControls.XionPanel.PanelState.Collapse
+        Me.XionPanel1.Size = New System.Drawing.Size(199, 539)
+        Me.XionPanel1.State = XionControls.XionPanel.PanelState.Expand
         Me.XionPanel1.TabIndex = 67
         Me.XionPanel1.Text = "Movie List"
         Me.XionPanel1.Title = "Movie List"
@@ -2882,31 +2883,31 @@ Partial Class Form1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5})
         Me.DataGridView1.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.Location = New System.Drawing.Point(-2, 30)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 20
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView1.RowTemplate.Height = 16
-        Me.DataGridView1.Size = New System.Drawing.Size(197, 510)
+        Me.DataGridView1.Size = New System.Drawing.Size(197, 507)
         Me.DataGridView1.TabIndex = 1
         '
         'DataGridViewTextBoxColumn1
@@ -3929,26 +3930,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle3
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4252,8 +4253,6 @@ Partial Class Form1
     Friend WithEvents Label41 As System.Windows.Forms.Label
     Friend WithEvents lblManualDatabaseFieldsPrompt As System.Windows.Forms.Label
     Friend WithEvents btnManualCancel As System.Windows.Forms.Button
-    Friend WithEvents cbTitleHandling As System.Windows.Forms.ComboBox
-    Friend WithEvents Label43 As System.Windows.Forms.Label
     Friend WithEvents lblInternetLookupRequired As System.Windows.Forms.Label
     Friend WithEvents ScanFilters As System.Windows.Forms.TabPage
     Friend WithEvents dgExcludedFileStrings As System.Windows.Forms.DataGridView
@@ -4369,7 +4368,6 @@ Partial Class Form1
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents cbMasterTitle As System.Windows.Forms.ComboBox
     Friend WithEvents lblMasterTitle As System.Windows.Forms.Label
-    Friend WithEvents chkAspectRatio As System.Windows.Forms.CheckBox
     Friend WithEvents chkManualMissingTrailer As System.Windows.Forms.CheckBox
     Friend WithEvents SaveConfigFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
@@ -4459,4 +4457,7 @@ Partial Class Form1
     Friend WithEvents Label85 As System.Windows.Forms.Label
     Friend WithEvents Label87 As System.Windows.Forms.Label
     Friend WithEvents chkParseTrailers As System.Windows.Forms.CheckBox
+    Friend WithEvents cbTitleHandling As System.Windows.Forms.ComboBox
+    Friend WithEvents Label43 As System.Windows.Forms.Label
+    Friend WithEvents chkImportOnInternetFailIgnoreWhenInteractive As System.Windows.Forms.CheckBox
 End Class

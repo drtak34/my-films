@@ -309,6 +309,19 @@ Public Class AntSettings
             SetAttribute("Import_File_On_Internet_Lookup_Failure", value)
         End Set
     End Property
+    Public Property Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode", value)
+        End Set
+    End Property
     Public Property Internet_Lookup_Always_Prompt() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Internet_Lookup_Always_Prompt").ToLower

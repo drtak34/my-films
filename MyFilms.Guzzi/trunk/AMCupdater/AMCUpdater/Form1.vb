@@ -1827,6 +1827,7 @@ Public Class Form1
         CurrentSettings.File_Types_Non_Media = txtDefaultFileTypesNonMedia.Text
         CurrentSettings.File_Types_Trailer = txtTrailerIentificationStrings.Text
         CurrentSettings.Import_File_On_Internet_Lookup_Failure = chkImportOnInternetFail.Checked
+        CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = chkImportOnInternetFailIgnoreWhenInteractive.Checked
         CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupBehaviour.SelectedValue
         CurrentSettings.Internet_Parser_Path = txtParserFilePath.Text
         CurrentSettings.Dont_Ask_Interactive = chkDontAskInteractive.Checked
@@ -1960,6 +1961,7 @@ Public Class Form1
             txtDefaultFileTypesNonMedia.Text = CurrentSettings.File_Types_Non_Media
             txtTrailerIentificationStrings.Text = CurrentSettings.File_Types_Trailer
             chkImportOnInternetFail.Checked = CurrentSettings.Import_File_On_Internet_Lookup_Failure
+            chkImportOnInternetFailIgnoreWhenInteractive.Checked = CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode
             cbInternetLookupBehaviour.SelectedValue = CurrentSettings.Internet_Lookup_Always_Prompt
             txtParserFilePath.Text = CurrentSettings.Internet_Parser_Path
             cbLogLevel.SelectedItem = CurrentSettings.Log_Level
@@ -2078,6 +2080,12 @@ Public Class Form1
                 chkImportOnInternetFail.Checked = True
             Else
                 chkImportOnInternetFail.Checked = False
+            End If
+
+            If (CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = "True") Then
+                chkImportOnInternetFailIgnoreWhenInteractive.Checked = True
+            Else
+                chkImportOnInternetFailIgnoreWhenInteractive.Checked = False
             End If
 
             If chkOverwriteXML.Checked = True Then

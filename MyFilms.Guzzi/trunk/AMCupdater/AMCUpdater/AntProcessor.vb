@@ -1611,6 +1611,7 @@ Public Class AntProcessor
         LogEvent("  SourceField : " + CurrentSettings.Ant_Database_Source_Field.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  PurgeMissing : " + CurrentSettings.Purge_Missing_Files.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Import on Internet Lookup Failure : " + CurrentSettings.Import_File_On_Internet_Lookup_Failure.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Don't Import on Internet Lookup Failure in GuiMode: " + CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Prohibit Internet Lookup : " + CurrentSettings.Prohibit_Internet_Lookup.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_Language    : " + CurrentSettings.Grabber_Override_Language.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_PersonLimit : " + CurrentSettings.Grabber_Override_PersonLimit.ToString, EventLogLevel.ImportantEvent)
@@ -1878,7 +1879,7 @@ Public Class AntProcessor
                             ElseIf Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
                                 bgwFolderScanUpdate.CancelAsync()
                             Else
-                                If CurrentSettings.Import_File_On_Internet_Lookup_Failure = True Then
+                                If CurrentSettings.Import_File_On_Internet_Lookup_Failure And (_InteractiveMode = False Or CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = False) Then
                                     'Doesn't matter if the Internet loookup worked; just load the entry:
                                     MovieRootNode.AppendChild(Ant.XMLElement)
                                     _CountRecordsAdded += 1
