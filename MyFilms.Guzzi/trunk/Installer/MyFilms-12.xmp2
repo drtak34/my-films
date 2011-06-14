@@ -3373,8 +3373,8 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <MaxVersion>
           <Major>1</Major>
           <Minor>1</Minor>
-          <Build>7</Build>
-          <Revision>99999</Revision>
+          <Build>6</Build>
+          <Revision>27644</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
         <Message>requires MediaPortal min version 1.1.6.27644</Message>
@@ -3382,6 +3382,80 @@ Please refer to the Wiki onlinedocumentation.</Value>
       </DependencyItem>
     </Items>
   </Dependencies>
+  <PluginDependencies>
+    <Items>
+      <PluginDependencyItem AssemblyName="MyFilms.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
+              <DesignedForVersion>1.1.7.27830</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items>
+            <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.Players" />
+            <SubSystemItem Name="MP.SkinEngine" />
+          </Items>
+        </SubSystemsUsed>
+      </PluginDependencyItem>
+      <PluginDependencyItem AssemblyName="MovingPicturesXML.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
+              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items>
+            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.Players" />
+            <SubSystemItem Name="MP.DB" />
+          </Items>
+        </SubSystemsUsed>
+      </PluginDependencyItem>
+      <PluginDependencyItem AssemblyName="BrowseTheWeb.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.7.0</MinRequiredVersion>
+              <DesignedForVersion>1.1.7.0</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items>
+            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.DB" />
+          </Items>
+        </SubSystemsUsed>
+      </PluginDependencyItem>
+      <PluginDependencyItem AssemblyName="SubCentral.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
+              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items>
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Externals.MediaInfo" />
+          </Items>
+        </SubSystemsUsed>
+      </PluginDependencyItem>
+    </Items>
+  </PluginDependencies>
   <GeneralInfo>
     <Name>MyFilms</Name>
     <Id>ceddd4d1-4cac-4846-9af5-f4daee1bbddc</Id>
@@ -3393,7 +3467,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>982</Revision>
+      <Revision>989</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -3401,7 +3475,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.982(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.989(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -6422,14 +6496,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{1ed339bb-c6c4-42ce-b724-010ea58225b5}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{dd1bed40-e791-47f0-b410-5fdba5c7a2ab}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{de14c5fc-db7b-47d1-830b-27ea0bc760cb}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d3f92624-a6b3-4f5a-8431-00d2168ec48c}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
