@@ -80,7 +80,7 @@
     <Value>Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;OriginalTitle|True;TranslatedTitle|True;FormattedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True;Fanart|True;Languages|True;Certification|True;Writer|True;Tagline|True;IMDBrank|False;Studio|False</Value>
   </Values>
   <Values Option="Import_File_On_Internet_Lookup_Failure">
-    <Value>False</Value>
+    <Value>True</Value>
   </Values>
   <Values Option="Internet_Lookup_Always_Prompt">
     <Value>false</Value>
