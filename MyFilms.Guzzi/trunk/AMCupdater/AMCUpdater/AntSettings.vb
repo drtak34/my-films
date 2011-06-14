@@ -649,6 +649,7 @@ Public Class AntSettings
         End If
         dt.Rows.Add("Database_Fields_To_Import", "Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;OriginalTitle|True;TranslatedTitle|True;FormattedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True") 'DatabaseFields
         dt.Rows.Add("Import_File_On_Internet_Lookup_Failure", "True") 'ImportFileOnInternetLookupFailure
+        dt.Rows.Add("Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode", "True") 'DontImportFileOnInternetLookupFailureInGuimode
         dt.Rows.Add("Internet_Lookup_Always_Prompt", "True") 'Set to True to always get choice of Movie from Internet lookup; false to attempt auto-match as before.
         dt.Rows.Add("Read_DVD_Label", "False")
         dt.Rows.Add("DVD_Drive_Letter", "")

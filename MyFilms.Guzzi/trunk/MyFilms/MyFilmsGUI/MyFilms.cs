@@ -491,6 +491,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // Register Messagehandler for CD-Inserted-Messages
       //GUIWindowManager.Receivers += new SendMessageHandler(GUIWindowManager_OnNewMessage);
+
+      // Register Eventhandler for AMCupdater Background progress reporting
+      //AMCupdaterStartEventHandler();
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
 
       return result;
@@ -7624,6 +7627,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Info("Loading Movie List in batch mode finished");
     }
 
+
+    public void AMCupdaterStartEventHandler()
+    {
+        AMCUpdater.AntProcessor.bgwFolderScanUpdate.ProgressChanged += new ProgressChangedEventHandler(AMCupdater_ProgressChanged);
+        AMCUpdater.AntProcessor.bgwFolderScanUpdate.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AMCupdater_RunWorkerCompleted);
+    }
+
+    void AMCupdater_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+    {
+      LogMyFilms.Info("AMCupdater_ProgressChanged. (GetID = '" + GetID + "', Message: " + e.UserState + ", Progress: " + e.ProgressPercentage + ")");
+      if (GetID == ID_MyFilms)
+      {
+        MyFilmsDetail.setGUIProperty("statusmessage", "AMCupdater Running - Importing Movies");
+      }
+    }
+    void  AMCupdater_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+    {
+      LogMyFilms.Info("AMCupdater RunWorkerCompleted");
+      if (GetID == ID_MyFilms)
+      {
+        MyFilmsDetail.clearGUIProperty("statusmessage");
+      }
+    }
+
+    
     //*****************************************************************************************
     //*  Check availability status of media files in batch mode                                                   *
     //*****************************************************************************************

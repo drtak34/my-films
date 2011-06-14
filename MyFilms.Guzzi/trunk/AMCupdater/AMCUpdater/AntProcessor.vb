@@ -4,7 +4,7 @@ Imports System.ComponentModel
 
 Public Class AntProcessor
 
-    Private Shared WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker
+    Public Shared WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker ' changed to public to get progress from MF plugin
     Private Shared WithEvents bgwManualUpdate As New System.ComponentModel.BackgroundWorker
 
     Private Shared ds As DataSet
