@@ -4567,12 +4567,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           // Ask user to select existing or create new catalog...
           bool useExistingCatalog = true;
+
           if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 7)
           {
-            if (System.Windows.Forms.MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-              useExistingCatalog = true;
+            if (MyFilms_PluginMode != "normal") // added to only allow new catalogs in test mode
+            {
+              if (
+                System.Windows.Forms.MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.",
+                  "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) 
+                useExistingCatalog = true;
+              else 
+                useExistingCatalog = false;
+            }
             else
-              useExistingCatalog = false;
+              System.Windows.Forms.MessageBox.Show("Please select the path to your existing catalog file !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
           }
           else
           {
