@@ -1771,6 +1771,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkPersons.Checked = false;
             chkAMC_Purge_Missing_Files.Checked = false;
             AMCMovieScanPath.ResetText();
+            AmcTitleSearchHandling.Text = string.Empty;
             //btnLaunchAMCupdater.Enabled = false;
             //btnCreateAMCDesktopIcon.Enabled = false;
             //btnCreateAMCDefaultConfig.Enabled = false;
@@ -2971,6 +2972,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (AMCGetAttribute("Purge_Missing_Files").ToLower() == "true") chkAMC_Purge_Missing_Files.Checked = true;
             else chkAMC_Purge_Missing_Files.Checked = false;
           }
+          if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Title_Handling")))
+            AmcTitleSearchHandling.Text = this.AMCGetAttribute("Movie_Title_Handling");
 
         //  if (i > 0)
         //  {
@@ -4240,6 +4243,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AMCMovieScanPath.Focus();
             return;
           }
+          if (AmcTitleSearchHandling.Text.Length == 0)
+          {
+            MessageBox.Show("You first have to define the Title and Search Handling for AMCupdater to create or sync a config !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            AmcTitleSearchHandling.Focus();
+            return;
+          }
           string wfiledefault = Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings";
           if (System.IO.File.Exists(wfiledefault + ".xml"))
           {
@@ -4303,6 +4312,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
             AMCSetAttribute("Purge_Missing_Files", "false");
           AMCSetAttribute("LogDirectory", Config.GetDirectoryInfo(Config.Dir.Config) + @"\log");
+          AMCSetAttribute("Movie_Title_Handling", AmcTitleSearchHandling.Text);
           if (!string.IsNullOrEmpty(cbPictureHandling.Text))
           {
             AMCSetAttribute("Use_Folder_Dot_Jpg", "false");
@@ -4855,6 +4865,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //AMCupdater
           chkAMCUpd.Checked = true; // Use AMCupdater
           AMCMovieScanPath.Text = PathStorage.Text;
+          AmcTitleSearchHandling.Text = "Folder Name + Internet Lookup"; // set this as default
           chkAMC_Purge_Missing_Files.Checked = false;
           txtPicturePrefix.Text = Config_Name.Text + "_"; // Use configname as default prefix
           txtAMCUpd_cnf.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";

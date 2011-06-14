@@ -350,6 +350,12 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
   </data>
+  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
+    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
+MyFilms will create such a file for each Configuration Name.
+You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
+However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
+  </data>
   <data name="btnCreateAMCDefaultConfig.ToolTip" xml:space="preserve">
     <value>MyFilms will create a default configuration for AMCupdater based on your current MyFilms Configuration.
 This configuration is used, when you start AMCupdater from the setup or the created desktop icon.
@@ -368,50 +374,6 @@ Also check your AMCupdater settings, as there are options to configure how updat
 - There is settings in AMCupdater to PREVENT it from purging files - even when movie files are NOT available during scanning - this is mostly for DVD-drives, but can also be used for USB-attached drives.
 This makes sure, records won’t be removed from DB - and if you start film in MF, it won’t find film and will ask you to insert media.</value>
   </data>
-  <data name="AMCConfigView.ToolTip" xml:space="preserve">
-    <value>List the content of the AMCupdater configuration options.
-Those options are used to create the Default Config and when launching AMCupdater from 
-MyFilms setup or via the desktop icon.
-
-Note:
-This config will be created for AMCupdater when you first create a MyFilms config.
-It won't be updated, until you press button "(re)create Default Config".
-This is to make sure, MyFilms won't overwrite any settings that you may have done in AMCupdater itself.</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnLaunchAMCupdater.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        OdO/AZk0m+sODGQxAAAAAElFTkSuQmCC
-</value>
-  </data>
   <data name="chkAMCUpd.ToolTip" xml:space="preserve">
     <value>If checked, the global update options will be available in myfilms to run AMCupdater in the background, 
 scanning for new movies, adding them to your catalog and and loading data for it.
@@ -426,12 +388,6 @@ Loading data includes:
 including grabbing mediainfos, internet movie data, coverimage and fanart.
 You can use and launch AMCUpdater in batch modefrom inside the MyFilms GUI or schedule a task 
 to run independantly from mediaportal / MyFilms.</value>
-  </data>
-  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
-    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
-MyFilms will create such a file for each Configuration Name.
-You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
-However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
   </data>
   <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
     <value>The Database Deletion Options allow you to update and/or delete records after the corresponding movie is watched.
@@ -726,6 +682,7 @@ However, you might prefer to add those fields to standard ANT fields for display
 Your skin only shows standard ANT fields (external catalogs) and you need the userdefined items 
 to display other fields in the skin.</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnLaunchAMCglobal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -1167,6 +1124,16 @@ external catalog - so AMC should only be used for readonly.</value>
         u4ZnAJC/lsb+3gB8BoBnAPh7a8DvrVF/tdd7ZgGeWYBnFuCvprW/5/U+swDPLMAzC/B7atRf7bWeWYBn
         FuCZBfirae3veb3PLMAzC/DMAvyeGvVXe61nFuBvbgH+D7ZJYjnerQCqAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="AMCConfigView.ToolTip" xml:space="preserve">
+    <value>List the content of the AMCupdater configuration options.
+Those options are used to create the Default Config and when launching AMCupdater from 
+MyFilms setup or via the desktop icon.
+
+Note:
+This config will be created for AMCupdater when you first create a MyFilms config.
+It won't be updated, until you press button "(re)create Default Config".
+This is to make sure, MyFilms won't overwrite any settings that you may have done in AMCupdater itself.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>57</value>
