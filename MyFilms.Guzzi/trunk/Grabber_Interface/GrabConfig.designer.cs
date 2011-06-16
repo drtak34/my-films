@@ -152,6 +152,7 @@ namespace Grabber_Interface
           this.label5 = new System.Windows.Forms.Label();
           this.label4 = new System.Windows.Forms.Label();
           this.tabPageUserSettings = new System.Windows.Forms.TabPage();
+          this.label33 = new System.Windows.Forms.Label();
           this.label32 = new System.Windows.Forms.Label();
           this.label31 = new System.Windows.Forms.Label();
           this.label30 = new System.Windows.Forms.Label();
@@ -181,7 +182,6 @@ namespace Grabber_Interface
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-          this.label33 = new System.Windows.Forms.Label();
           this.groupBox8.SuspendLayout();
           this.groupBox15.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
@@ -1162,6 +1162,12 @@ namespace Grabber_Interface
           this.tabPageUserSettings.Name = "tabPageUserSettings";
           this.tabPageUserSettings.UseVisualStyleBackColor = true;
           // 
+          // label33
+          // 
+          resources.ApplyResources(this.label33, "label33");
+          this.label33.ForeColor = System.Drawing.Color.Red;
+          this.label33.Name = "label33";
+          // 
           // label32
           // 
           resources.ApplyResources(this.label32, "label32");
@@ -1404,12 +1410,6 @@ namespace Grabber_Interface
           // iMDBEnumeratorBindingSource1
           // 
           this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
-          // 
-          // label33
-          // 
-          resources.ApplyResources(this.label33, "label33");
-          this.label33.ForeColor = System.Drawing.Color.Red;
-          this.label33.Name = "label33";
           // 
           // GrabConfig
           // 
