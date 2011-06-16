@@ -3040,6 +3040,13 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{7d2709dd-6b9f-4afd-8bdd-275c21714fb7}-movie.wmv</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\50 First Dates (2004)\movie.wmv</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\Catalog\SampleMovies.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5145b860-18b6-42eb-827e-a7ce88169df0}-SampleMovies.xml</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\Catalog\SampleMovies.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -6478,6 +6485,13 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <ZipFileName>Installer{CopyFile}\{7d2709dd-6b9f-4afd-8bdd-275c21714fb7}-movie.wmv</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\SampleMovies\50 First Dates (2004)\movie.wmv</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\Catalog\SampleMovies.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5145b860-18b6-42eb-827e-a7ce88169df0}-SampleMovies.xml</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\Catalog\SampleMovies.xml</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -6496,14 +6510,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{dd1bed40-e791-47f0-b410-5fdba5c7a2ab}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{60b0f3b3-dbcc-41dc-984d-c9d912969318}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d3f92624-a6b3-4f5a-8431-00d2168ec48c}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{7c705671-6092-41af-a249-6586b399f085}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
