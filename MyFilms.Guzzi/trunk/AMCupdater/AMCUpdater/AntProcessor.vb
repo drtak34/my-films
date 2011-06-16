@@ -1877,6 +1877,7 @@ Public Class AntProcessor
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                                 'LogEvent("ERROR : " & blah.LastOutputMessage, EventLogLevel.ErrorOrSimilar)
                             ElseIf Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
+                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                                 bgwFolderScanUpdate.CancelAsync()
                             Else
                                 If CurrentSettings.Import_File_On_Internet_Lookup_Failure And (_InteractiveMode = False Or CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = False) Then
