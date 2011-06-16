@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>MyFilmsIMDB</DBName>
+    <DBName>IMDB-Full</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
+    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">Popular_x0020_Titles</KeyStartList>
@@ -130,7 +131,7 @@
       <Field_13 source="URL_x0020_-_x0020_Redirection_x0020_Persons" destination="" replace="False" addstart="False" addend="False" />
       <Field_14 source="Comment" destination="" replace="False" addstart="False" addend="False" />
       <Field_15 source="Language" destination="" replace="False" addstart="False" addend="False" />
-      <Field_16 source="Tagline" destination="" replace="False" addstart="False" addend="False" />
+      <Field_16 source="Tagline" destination="Description" replace="False" addstart="True" addend="False" />
       <Field_17 source="Certification" destination="Comment" replace="False" addstart="True" addend="False" />
       <Field_18 source="URL_x0020_-_x0020_Redirection_x0020_Titles" destination="" replace="False" addstart="False" addend="False" />
       <Field_19 source="URL_x0020_-_x0020_Redirection_x0020_Certification" destination="" replace="False" addstart="False" addend="False" />

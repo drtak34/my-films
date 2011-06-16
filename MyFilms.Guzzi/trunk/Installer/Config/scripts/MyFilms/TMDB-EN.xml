@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>The Movie DB XML</DBName>
+    <DBName>The Movie DB (en)</DBName>
     <URLPrefix />
+    <Mapping />
     <Mapping />
     <Mapping />
     <Mapping />
@@ -73,7 +74,7 @@
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x003C_cast_x003E_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_cast_x003E_</KeyEndCredits>
       <KeyCreditsIndex />
-      <KeyCreditsRegExp>name_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_character_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_</KeyCreditsRegExp>
+      <KeyCreditsRegExp>name_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_character_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A_job_x003D__x0022_actor_x0022_</KeyCreditsRegExp>
       <KeyCreditsMaxItems />
       <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
       <KeyStartCountry Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x003C_countries_x003E_</KeyStartCountry>

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>MyFilmsIMDB</DBName>
+    <DBName>IMDB</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
