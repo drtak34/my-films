@@ -3046,7 +3046,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (AMCdsSettings.Tables.Count > 0)
             row = AMCdsSettings.Tables[0].Rows.Find(OptionName);
           if (row != null)
-            return row["Value"].ToString().ToLower();
+            return row["Value"].ToString();
           else 
             return string.Empty;
         }
@@ -4334,7 +4334,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             else AMCSetAttribute("Image_Download_Filename_Prefix", ""); 
           }
 
+
           // Those Parameters already set via MyFilmsAMCSettings.xml (Defaultconfigfile):
+          //Movie_Title_Handling	Default	Folder Name + Internet Lookup
           //Option	Status / Source	DefaultValue
           //Ant_Media_Label	Default	HDD
           //Ant_Media_Type	Default	File
@@ -4357,7 +4359,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //Internet_Lookup_Always_Prompt	Default	False
           //Log_Level	Default	All Events
           //Manual_Internet_Lookup_Always_Prompt	Default	True
-          //Movie_Title_Handling	Default	Folder Name + Internet Lookup
           //Override_Path	Default	
           //Overwrite_XML_File	Default	True
           //Parse_Playlist_Files	Default	False
@@ -4761,6 +4762,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           //txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
           chkGrabber_ChooseScript.Checked = true; //Don't use default script (ask)
 
+          CheckWatchedPlayerStopped.Checked = true; // set watched status handling
+
           AntItem1.Text = "Country";
           AntLabel1.Text = BaseMesFilms.Translate_Column(AntItem1.Text.Trim());
           AntItem2.Text = "Producer";
@@ -4920,9 +4923,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           switch (newCatalogSelectedIndex)
           {
             case 0:
-              System.Windows.Forms.MessageBox.Show(
-              "Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.",
-              "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              // System.Windows.Forms.MessageBox.Show("Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.", "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              System.Windows.Forms.MessageBox.Show("Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog.", "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
               break;
             default:
               System.Windows.Forms.MessageBox.Show(
@@ -5288,6 +5290,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             txtGrabberDisplay.Text = Path.GetFileName(txtGrabber.Text);
           else 
             txtGrabberDisplay.Text = string.Empty;
+        }
+
+        private void txtAMCUpd_cnf_TextChanged(object sender, EventArgs e)
+        {
+          if (!string.IsNullOrEmpty(txtAMCUpd_cnf.Text))
+            txtAMCUpd_cnf_Display.Text = Path.GetFileName(txtAMCUpd_cnf.Text);
+          else
+            txtAMCUpd_cnf_Display.Text = string.Empty;
         }
     }
 }

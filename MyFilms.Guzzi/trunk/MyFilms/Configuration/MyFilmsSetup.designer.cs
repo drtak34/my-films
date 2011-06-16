@@ -106,6 +106,11 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.btnGrabberInterface = new System.Windows.Forms.Button();
+          this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
+          this.AMCConfigView = new System.Windows.Forms.ListView();
+          this.Option = new System.Windows.Forms.ColumnHeader();
+          this.Value = new System.Windows.Forms.ColumnHeader();
           this.label52 = new System.Windows.Forms.Label();
           this.cbAllowTraktSync = new System.Windows.Forms.CheckBox();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -223,6 +228,8 @@
           this.txtAMCUpd_cnf = new System.Windows.Forms.TextBox();
           this.btnAMCUpd_cnf = new System.Windows.Forms.Button();
           this.groupBox_AMCupdater_ExternalApplication = new System.Windows.Forms.GroupBox();
+          this.label56 = new System.Windows.Forms.Label();
+          this.AmcTitleSearchHandling = new System.Windows.Forms.ComboBox();
           this.btnCreateAMCDefaultConfig = new System.Windows.Forms.Button();
           this.lblAMCMovieScanPath = new System.Windows.Forms.Label();
           this.chkAMC_Purge_Missing_Files = new System.Windows.Forms.CheckBox();
@@ -487,13 +494,7 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
-          this.AMCConfigView = new System.Windows.Forms.ListView();
-          this.Option = new System.Windows.Forms.ColumnHeader();
-          this.Value = new System.Windows.Forms.ColumnHeader();
-          this.btnGrabberInterface = new System.Windows.Forms.Button();
-          this.AmcTitleSearchHandling = new System.Windows.Forms.ComboBox();
-          this.label56 = new System.Windows.Forms.Label();
+          this.txtAMCUpd_cnf_Display = new System.Windows.Forms.TextBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -673,6 +674,52 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // btnGrabberInterface
+          // 
+          this.btnGrabberInterface.Location = new System.Drawing.Point(551, 36);
+          this.btnGrabberInterface.Name = "btnGrabberInterface";
+          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 27);
+          this.btnGrabberInterface.TabIndex = 88;
+          this.btnGrabberInterface.Text = "Grabber Interface";
+          this.btnGrabberInterface.UseVisualStyleBackColor = true;
+          // 
+          // lblAMCupdaterConfigPreview
+          // 
+          this.lblAMCupdaterConfigPreview.AutoSize = true;
+          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(26, 79);
+          this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
+          this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
+          this.lblAMCupdaterConfigPreview.TabIndex = 87;
+          this.lblAMCupdaterConfigPreview.Text = "Preview of current AMC Updater Configuration";
+          // 
+          // AMCConfigView
+          // 
+          this.AMCConfigView.AllowColumnReorder = true;
+          this.AMCConfigView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Option,
+            this.Value});
+          this.AMCConfigView.FullRowSelect = true;
+          this.AMCConfigView.GridLines = true;
+          this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+          this.AMCConfigView.Location = new System.Drawing.Point(21, 95);
+          this.AMCConfigView.MultiSelect = false;
+          this.AMCConfigView.Name = "AMCConfigView";
+          this.AMCConfigView.Size = new System.Drawing.Size(706, 244);
+          this.AMCConfigView.TabIndex = 86;
+          this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
+          this.AMCConfigView.UseCompatibleStateImageBehavior = false;
+          this.AMCConfigView.View = System.Windows.Forms.View.Details;
+          // 
+          // Option
+          // 
+          this.Option.Text = "Option";
+          this.Option.Width = 171;
+          // 
+          // Value
+          // 
+          this.Value.Text = "Value";
+          this.Value.Width = 515;
           // 
           // label52
           // 
@@ -1656,6 +1703,7 @@
           this.txtGrabberDisplay.ReadOnly = true;
           this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
           this.txtGrabberDisplay.TabIndex = 67;
+          this.ToolTip1.SetToolTip(this.txtGrabberDisplay, resources.GetString("txtGrabberDisplay.ToolTip"));
           // 
           // btnEditScript
           // 
@@ -1920,6 +1968,7 @@
           // 
           // groupBox_AMCupdaterScheduer
           // 
+          this.groupBox_AMCupdaterScheduer.Controls.Add(this.txtAMCUpd_cnf_Display);
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.scheduleAMCUpdater);
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.label28);
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.btnParameters);
@@ -1940,9 +1989,7 @@
           this.scheduleAMCUpdater.Size = new System.Drawing.Size(71, 17);
           this.scheduleAMCUpdater.TabIndex = 61;
           this.scheduleAMCUpdater.Text = "Schedule";
-          this.ToolTip1.SetToolTip(this.scheduleAMCUpdater, "You can use the windows scheduler to schedule AMCupdater to run and update automa" +
-                  "tically to update your catalog.\r\nMake sure, the configuration you choose for thi" +
-                  "s matches your needs.");
+          this.ToolTip1.SetToolTip(this.scheduleAMCUpdater, resources.GetString("scheduleAMCUpdater.ToolTip"));
           this.scheduleAMCUpdater.UseVisualStyleBackColor = true;
           this.scheduleAMCUpdater.CheckedChanged += new System.EventHandler(this.scheduleAMCUpdater_CheckedChanged);
           // 
@@ -1969,9 +2016,11 @@
           // 
           this.txtAMCUpd_cnf.Location = new System.Drawing.Point(107, 45);
           this.txtAMCUpd_cnf.Name = "txtAMCUpd_cnf";
-          this.txtAMCUpd_cnf.Size = new System.Drawing.Size(271, 20);
+          this.txtAMCUpd_cnf.Size = new System.Drawing.Size(168, 20);
           this.txtAMCUpd_cnf.TabIndex = 57;
           this.ToolTip1.SetToolTip(this.txtAMCUpd_cnf, resources.GetString("txtAMCUpd_cnf.ToolTip"));
+          this.txtAMCUpd_cnf.Visible = false;
+          this.txtAMCUpd_cnf.TextChanged += new System.EventHandler(this.txtAMCUpd_cnf_TextChanged);
           // 
           // btnAMCUpd_cnf
           // 
@@ -2000,6 +2049,30 @@
           this.groupBox_AMCupdater_ExternalApplication.TabIndex = 3;
           this.groupBox_AMCupdater_ExternalApplication.TabStop = false;
           this.groupBox_AMCupdater_ExternalApplication.Text = "AMC Updater external application";
+          // 
+          // label56
+          // 
+          this.label56.AutoSize = true;
+          this.label56.Location = new System.Drawing.Point(10, 51);
+          this.label56.Name = "label56";
+          this.label56.Size = new System.Drawing.Size(112, 13);
+          this.label56.TabIndex = 86;
+          this.label56.Text = "Title & Search Handling";
+          // 
+          // AmcTitleSearchHandling
+          // 
+          this.AmcTitleSearchHandling.FormattingEnabled = true;
+          this.AmcTitleSearchHandling.Items.AddRange(new object[] {
+            "File Name",
+            "Folder Name",
+            "Relative Name",
+            "File Name + Internet Lookup",
+            "Folder Name + Internet Lookup",
+            "Relative Name + Internet Lookup"});
+          this.AmcTitleSearchHandling.Location = new System.Drawing.Point(139, 48);
+          this.AmcTitleSearchHandling.Name = "AmcTitleSearchHandling";
+          this.AmcTitleSearchHandling.Size = new System.Drawing.Size(200, 21);
+          this.AmcTitleSearchHandling.TabIndex = 85;
           // 
           // btnCreateAMCDefaultConfig
           // 
@@ -4879,75 +4952,13 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // lblAMCupdaterConfigPreview
+          // txtAMCUpd_cnf_Display
           // 
-          this.lblAMCupdaterConfigPreview.AutoSize = true;
-          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(26, 79);
-          this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
-          this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
-          this.lblAMCupdaterConfigPreview.TabIndex = 87;
-          this.lblAMCupdaterConfigPreview.Text = "Preview of current AMC Updater Configuration";
-          // 
-          // AMCConfigView
-          // 
-          this.AMCConfigView.AllowColumnReorder = true;
-          this.AMCConfigView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Option,
-            this.Value});
-          this.AMCConfigView.FullRowSelect = true;
-          this.AMCConfigView.GridLines = true;
-          this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.AMCConfigView.Location = new System.Drawing.Point(21, 95);
-          this.AMCConfigView.MultiSelect = false;
-          this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(706, 244);
-          this.AMCConfigView.TabIndex = 86;
-          this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
-          this.AMCConfigView.UseCompatibleStateImageBehavior = false;
-          this.AMCConfigView.View = System.Windows.Forms.View.Details;
-          // 
-          // Option
-          // 
-          this.Option.Text = "Option";
-          this.Option.Width = 171;
-          // 
-          // Value
-          // 
-          this.Value.Text = "Value";
-          this.Value.Width = 515;
-          // 
-          // btnGrabberInterface
-          // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(551, 36);
-          this.btnGrabberInterface.Name = "btnGrabberInterface";
-          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 27);
-          this.btnGrabberInterface.TabIndex = 88;
-          this.btnGrabberInterface.Text = "Grabber Interface";
-          this.btnGrabberInterface.UseVisualStyleBackColor = true;
-          // 
-          // AmcTitleSearchHandling
-          // 
-          this.AmcTitleSearchHandling.FormattingEnabled = true;
-          this.AmcTitleSearchHandling.Items.AddRange(new object[] {
-            "File Name",
-            "Folder Name",
-            "Relative Name",
-            "File Name + Internet Lookup",
-            "Folder Name + Internet Lookup",
-            "Relative Name + Internet Lookup"});
-          this.AmcTitleSearchHandling.Location = new System.Drawing.Point(139, 48);
-          this.AmcTitleSearchHandling.Name = "AmcTitleSearchHandling";
-          this.AmcTitleSearchHandling.Size = new System.Drawing.Size(121, 21);
-          this.AmcTitleSearchHandling.TabIndex = 85;
-          // 
-          // label56
-          // 
-          this.label56.AutoSize = true;
-          this.label56.Location = new System.Drawing.Point(10, 51);
-          this.label56.Name = "label56";
-          this.label56.Size = new System.Drawing.Size(112, 13);
-          this.label56.TabIndex = 86;
-          this.label56.Text = "Title & Search Handling";
+          this.txtAMCUpd_cnf_Display.Enabled = false;
+          this.txtAMCUpd_cnf_Display.Location = new System.Drawing.Point(108, 45);
+          this.txtAMCUpd_cnf_Display.Name = "txtAMCUpd_cnf_Display";
+          this.txtAMCUpd_cnf_Display.Size = new System.Drawing.Size(272, 20);
+          this.txtAMCUpd_cnf_Display.TabIndex = 62;
           // 
           // MyFilmsSetup
           // 
@@ -5469,5 +5480,6 @@
         private Button btnGrabberInterface;
         private ComboBox AmcTitleSearchHandling;
         private Label label56;
+        private TextBox txtAMCUpd_cnf_Display;
     }
 }

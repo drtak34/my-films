@@ -137,6 +137,16 @@ You cann't select that option if a Default Configuration is defined
 If no default config defined and many configs, the configuration to load will be asked the first time
 After, the plugin load the last configuration used if no default defined</value>
   </data>
+  <data name="AMCConfigView.ToolTip" xml:space="preserve">
+    <value>List the content of the AMCupdater configuration options.
+Those options are used to create the Default Config and when launching AMCupdater from 
+MyFilms setup or via the desktop icon.
+
+Note:
+This config will be created for AMCupdater when you first create a MyFilms config.
+It won't be updated, until you press button "(re)create Default Config".
+This is to make sure, MyFilms won't overwrite any settings that you may have done in AMCupdater itself.</value>
+  </data>
   <data name="cbAllowTraktSync.ToolTip" xml:space="preserve">
     <value>If enabled, TRAKT plugin is allowed to synchronize your movie data
 to the TRAKT site.
@@ -285,18 +295,12 @@ You can use the browse button to select the file.
 The default Artist image will be displayed when an artist does not have an associated photo or image
 and it will be used as a default artist image.</value>
   </data>
-  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
-    <value>You can update your movie data via internet from insude MyFilms GUI.
+  <data name="txtGrabberDisplay.ToolTip" xml:space="preserve">
+    <value>Set the default grabber script for updates within MyFilms.
+If you selected "Don't use default script", you still can choose to use another script - but default script
+will always appear as first entry.
 
-You have to define the xml parser file ("grabber script" to be used.
-
-With the 'try to find best match automaticly' option validated, the grabber will
-try to find best match but can provide errors in some cases. It's better to
-don't valid it. In that case, you'll get a menu to choose the right movie.
-
-You can change those options from MyFilms GUI (global settings) also.
-
-</value>
+For global override settings, that affect possibly any grabber sfcript, see "MyFilms Grabber Override Options".</value>
   </data>
   <data name="btnEditScript.ToolTip" xml:space="preserve">
     <value>This launches the MyFilms Grabber Interface.
@@ -319,20 +323,6 @@ The default settings (of the grabber script) can be changed by editing
 the grabber script in the "MyFilms Grabber Interface" ("Edit script").
 </value>
   </data>
-  <data name="cbGrabberOverrideLanguage.ToolTip" xml:space="preserve">
-    <value>Preferred Language(s) for 
-Translated Title(s) and Certification
-
-Depending on the abilities of your grabber script, you can
-set a language/country here to tell the grabber to get related infos.
-Most internet sites only support titles for different countries - IMDB-Full script 
-also supports Certification for different countries.
-Note: To use Certification, you have to map that data to one of the standard fields 
-of your ANT Movie Catalog.
-Note: You can add more than one language/country using comma separated values.
-Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
-As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
-  </data>
   <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
     <value>If unchecked, you will be asked to manually choose the script to use for internet data update.
 If checked, the Default script will always be used.
@@ -349,6 +339,45 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
+  </data>
+  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
+    <value>You can update your movie data via internet from insude MyFilms GUI.
+
+You have to define the xml parser file ("grabber script" to be used.
+
+With the 'try to find best match automaticly' option validated, the grabber will
+try to find best match but can provide errors in some cases. It's better to
+don't valid it. In that case, you'll get a menu to choose the right movie.
+
+You can change those options from MyFilms GUI (global settings) also.
+
+</value>
+  </data>
+  <data name="cbGrabberOverrideLanguage.ToolTip" xml:space="preserve">
+    <value>Preferred Language(s) for 
+Translated Title(s) and Certification
+
+Depending on the abilities of your grabber script, you can
+set a language/country here to tell the grabber to get related infos.
+Most internet sites only support titles for different countries - IMDB-Full script 
+also supports Certification for different countries.
+Note: To use Certification, you have to map that data to one of the standard fields 
+of your ANT Movie Catalog.
+Note: You can add more than one language/country using comma separated values.
+Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
+As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
+  </data>
+  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
+    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
+including grabbing mediainfos, internet movie data, coverimage and fanart.
+You can use and launch AMCUpdater in batch modefrom inside the MyFilms GUI or schedule a task 
+to run independantly from mediaportal / MyFilms.</value>
+  </data>
+  <data name="scheduleAMCUpdater.ToolTip" xml:space="preserve">
+    <value>You can use the windows scheduler to schedule AMCupdater to run and update automatically to update your catalog.
+Make sure, the configuration you choose for this matches your needs.
+Note: You can always launch AMCupdater from within MyFilms anytime you wish and let it import movies in the background.
+If you prefer that, you do NOT require to schedule a task via scheduler.</value>
   </data>
   <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
     <value>Choose the config file for AMCupdater that should be used for the scheduled run.
@@ -382,12 +411,6 @@ Loading data includes:
 - getting internet infos via the selected internet grabber script
 - getting coverimage via the selected internet grabber script
 - loading fanart</value>
-  </data>
-  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
-    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
-including grabbing mediainfos, internet movie data, coverimage and fanart.
-You can use and launch AMCUpdater in batch modefrom inside the MyFilms GUI or schedule a task 
-to run independantly from mediaportal / MyFilms.</value>
   </data>
   <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
     <value>The Database Deletion Options allow you to update and/or delete records after the corresponding movie is watched.
@@ -566,8 +589,8 @@ It will basically do the following:
 This will give you a quick way to test MyFilms right away.
 You still can tweak all settings later to your personal preferences.
 
-The wizard is only working, if you have no existing config selected - so empty the configuration name field, 
-if you want to create a new config with the wizard!</value>
+Note:
+If you want to test or do skinning, but don't have a working catalog, you can select the "SampleMovies.xml" catalog.</value>
   </data>
   <data name="chkScanMediaOnStart.ToolTip" xml:space="preserve">
     <value>If checked, MyFilms will automatically scan all media files (films, trailer) to check 
@@ -1124,16 +1147,6 @@ external catalog - so AMC should only be used for readonly.</value>
         u4ZnAJC/lsb+3gB8BoBnAPh7a8DvrVF/tdd7ZgGeWYBnFuCvprW/5/U+swDPLMAzC/B7atRf7bWeWYBn
         FuCZBfirae3veb3PLMAzC/DMAvyeGvVXe61nFuBvbgH+D7ZJYjnerQCqAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="AMCConfigView.ToolTip" xml:space="preserve">
-    <value>List the content of the AMCupdater configuration options.
-Those options are used to create the Default Config and when launching AMCupdater from 
-MyFilms setup or via the desktop icon.
-
-Note:
-This config will be created for AMCupdater when you first create a MyFilms config.
-It won't be updated, until you press button "(re)create Default Config".
-This is to make sure, MyFilms won't overwrite any settings that you may have done in AMCupdater itself.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>57</value>
