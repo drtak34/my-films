@@ -4812,14 +4812,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
 
           // Create country specific settings
-          cbGrabberOverrideLanguage.Text = "";
-          cbGrabberOverrideGetRoles.Text = "";
-          cbGrabberOverridePersonLimit.Text = "";
-          cbGrabberOverrideTitleLimit.Text = "";
+          cbGrabberOverrideLanguage.Text = newCountry;
           switch (newCountry)
           {
             case "Germany":
               txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\Cinefacts-Kino.xml";
+              cbGrabberOverrideGetRoles.Text = "";
+              cbGrabberOverridePersonLimit.Text = "";
+              cbGrabberOverrideTitleLimit.Text = "";
               break;
             case "Canada":
             default:

@@ -222,6 +222,7 @@
           this.label27 = new System.Windows.Forms.Label();
           this.groupBox_AMCupdater = new System.Windows.Forms.GroupBox();
           this.groupBox_AMCupdaterScheduer = new System.Windows.Forms.GroupBox();
+          this.txtAMCUpd_cnf_Display = new System.Windows.Forms.TextBox();
           this.scheduleAMCUpdater = new System.Windows.Forms.CheckBox();
           this.label28 = new System.Windows.Forms.Label();
           this.btnParameters = new System.Windows.Forms.Button();
@@ -494,7 +495,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.txtAMCUpd_cnf_Display = new System.Windows.Forms.TextBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -1690,7 +1690,7 @@
           this.groupBox_GrabberOptions.Controls.Add(this.label27);
           this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 19);
           this.groupBox_GrabberOptions.Name = "groupBox_GrabberOptions";
-          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 114);
+          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 123);
           this.groupBox_GrabberOptions.TabIndex = 1;
           this.groupBox_GrabberOptions.TabStop = false;
           this.groupBox_GrabberOptions.Text = "MyFilms Internal Internet Grabbing";
@@ -1698,7 +1698,7 @@
           // 
           // txtGrabberDisplay
           // 
-          this.txtGrabberDisplay.Location = new System.Drawing.Point(145, 14);
+          this.txtGrabberDisplay.Location = new System.Drawing.Point(145, 22);
           this.txtGrabberDisplay.Name = "txtGrabberDisplay";
           this.txtGrabberDisplay.ReadOnly = true;
           this.txtGrabberDisplay.Size = new System.Drawing.Size(100, 20);
@@ -1707,7 +1707,7 @@
           // 
           // btnEditScript
           // 
-          this.btnEditScript.Location = new System.Drawing.Point(289, 14);
+          this.btnEditScript.Location = new System.Drawing.Point(289, 22);
           this.btnEditScript.Name = "btnEditScript";
           this.btnEditScript.Size = new System.Drawing.Size(95, 20);
           this.btnEditScript.TabIndex = 66;
@@ -1726,7 +1726,7 @@
           this.groupBox6.Controls.Add(this.label49);
           this.groupBox6.Controls.Add(this.cbGrabberOverridePersonLimit);
           this.groupBox6.Controls.Add(this.cbGrabberOverrideLanguage);
-          this.groupBox6.Location = new System.Drawing.Point(399, 9);
+          this.groupBox6.Location = new System.Drawing.Point(398, 15);
           this.groupBox6.Name = "groupBox6";
           this.groupBox6.Size = new System.Drawing.Size(330, 96);
           this.groupBox6.TabIndex = 65;
@@ -1883,7 +1883,7 @@
           // lblSearchGrabberName
           // 
           this.lblSearchGrabberName.AutoSize = true;
-          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 42);
+          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 50);
           this.lblSearchGrabberName.Name = "lblSearchGrabberName";
           this.lblSearchGrabberName.Size = new System.Drawing.Size(124, 13);
           this.lblSearchGrabberName.TabIndex = 62;
@@ -1896,7 +1896,7 @@
             "OriginalTitle",
             "TranslatedTitle",
             "FormattedTitle"});
-          this.ItemSearchGrabberName.Location = new System.Drawing.Point(145, 39);
+          this.ItemSearchGrabberName.Location = new System.Drawing.Point(145, 47);
           this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
           this.ItemSearchGrabberName.Size = new System.Drawing.Size(138, 21);
           this.ItemSearchGrabberName.TabIndex = 61;
@@ -1904,7 +1904,7 @@
           // chkGrabber_ChooseScript
           // 
           this.chkGrabber_ChooseScript.AutoSize = true;
-          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(145, 66);
+          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(145, 74);
           this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
           this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(193, 17);
           this.chkGrabber_ChooseScript.TabIndex = 60;
@@ -1915,7 +1915,7 @@
           // chkGrabber_Always
           // 
           this.chkGrabber_Always.AutoSize = true;
-          this.chkGrabber_Always.Location = new System.Drawing.Point(145, 88);
+          this.chkGrabber_Always.Location = new System.Drawing.Point(145, 97);
           this.chkGrabber_Always.Name = "chkGrabber_Always";
           this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
           this.chkGrabber_Always.TabIndex = 56;
@@ -1925,7 +1925,7 @@
           // 
           // btnGrabber
           // 
-          this.btnGrabber.Location = new System.Drawing.Point(251, 14);
+          this.btnGrabber.Location = new System.Drawing.Point(251, 22);
           this.btnGrabber.Name = "btnGrabber";
           this.btnGrabber.Size = new System.Drawing.Size(32, 20);
           this.btnGrabber.TabIndex = 55;
@@ -1936,7 +1936,7 @@
           // 
           // txtGrabber
           // 
-          this.txtGrabber.Location = new System.Drawing.Point(145, 14);
+          this.txtGrabber.Location = new System.Drawing.Point(145, 22);
           this.txtGrabber.Name = "txtGrabber";
           this.txtGrabber.Size = new System.Drawing.Size(68, 20);
           this.txtGrabber.TabIndex = 54;
@@ -1947,7 +1947,7 @@
           // label27
           // 
           this.label27.AutoSize = true;
-          this.label27.Location = new System.Drawing.Point(16, 17);
+          this.label27.Location = new System.Drawing.Point(16, 25);
           this.label27.Name = "label27";
           this.label27.Size = new System.Drawing.Size(112, 13);
           this.label27.TabIndex = 53;
@@ -1981,6 +1981,14 @@
           this.groupBox_AMCupdaterScheduer.TabIndex = 62;
           this.groupBox_AMCupdaterScheduer.TabStop = false;
           this.groupBox_AMCupdaterScheduer.Text = "Scheduler for AMCupdater";
+          // 
+          // txtAMCUpd_cnf_Display
+          // 
+          this.txtAMCUpd_cnf_Display.Enabled = false;
+          this.txtAMCUpd_cnf_Display.Location = new System.Drawing.Point(108, 45);
+          this.txtAMCUpd_cnf_Display.Name = "txtAMCUpd_cnf_Display";
+          this.txtAMCUpd_cnf_Display.Size = new System.Drawing.Size(272, 20);
+          this.txtAMCUpd_cnf_Display.TabIndex = 62;
           // 
           // scheduleAMCUpdater
           // 
@@ -4952,14 +4960,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // txtAMCUpd_cnf_Display
-          // 
-          this.txtAMCUpd_cnf_Display.Enabled = false;
-          this.txtAMCUpd_cnf_Display.Location = new System.Drawing.Point(108, 45);
-          this.txtAMCUpd_cnf_Display.Name = "txtAMCUpd_cnf_Display";
-          this.txtAMCUpd_cnf_Display.Size = new System.Drawing.Size(272, 20);
-          this.txtAMCUpd_cnf_Display.TabIndex = 62;
           // 
           // MyFilmsSetup
           // 
