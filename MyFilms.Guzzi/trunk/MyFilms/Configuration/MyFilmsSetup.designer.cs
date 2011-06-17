@@ -1769,6 +1769,7 @@
           // 
           this.cbGrabberOverrideTitleLimit.FormattingEnabled = true;
           this.cbGrabberOverrideTitleLimit.Items.AddRange(new object[] {
+            "0",
             "1",
             "2",
             "3",

@@ -4822,14 +4822,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\Cinefacts-Kino.xml";
               break;
             case "Canada":
-              cbGrabberOverrideLanguage.Text = "Canada";
+            default:
+              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
               cbGrabberOverrideGetRoles.Text = "true";
               cbGrabberOverridePersonLimit.Text = "10";
               cbGrabberOverrideTitleLimit.Text = "0";
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB.xml";
-              break;
-            default:
-              txtGrabber.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\IMDB-Full.xml";
               break;
           //Argentina
           //Australia
