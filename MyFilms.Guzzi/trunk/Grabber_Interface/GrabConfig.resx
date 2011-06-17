@@ -733,7 +733,13 @@ SpecialParameters for beginning of expression:
     <value>15</value>
   </data>
   <data name="textComplement.ToolTip" xml:space="preserve">
-    <value>Allows to clarify more precisely the basis of the score (Score 5, 10, 20 ...)</value>
+    <value>Different meanings:
+Rating:
+Allows to clarify more precisely the basis of the score (Score 5, 10, 20 ...)
+Others:
+Allows regex expressions to get content as matchgroups.
+#MULTILINE# allows to perform regex match collection with multiline regexoption.
+Default is "Singleline".</value>
   </data>
   <data name="textComplement.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
