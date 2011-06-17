@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>The Movie DB (en)</DBName>
+    <DBName>The Movie DB (es)</DBName>
     <URLPrefix />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_api.themoviedb.org_x002F_2.1_x002F_Movie.search_x002F_en_x002F_xml_x002F_5b8fecd0c39786077bc5af07e56fee5e_x002F__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="" />
@@ -23,7 +19,7 @@
       <KeyStartDirector Param1="" Param2="" />
       <KeyEndDirector />
       <KeyDirectorIndex />
-      <KeyStartLink Param1="_x003E_" Param2="http:_x002F__x002F_api.themoviedb.org_x002F_2.1_x002F_Movie.getInfo_x002F_en_x002F_xml_x002F_5b8fecd0c39786077bc5af07e56fee5e_x002F_">_x003C_id</KeyStartLink>
+      <KeyStartLink Param1="_x003E_" Param2="http:_x002F__x002F_api.themoviedb.org_x002F_2.1_x002F_Movie.getInfo_x002F_es_x002F_xml_x002F_5b8fecd0c39786077bc5af07e56fee5e_x002F_">_x003C_id</KeyStartLink>
       <KeyEndLink>_x003C__x002F_id_x003E_</KeyEndLink>
       <KeyLinkIndex />
     </URLSearch>
@@ -56,25 +52,25 @@
       <KeyStartSyn Param1="" Param2="">_x003C_overview_x003E_</KeyStartSyn>
       <KeyEndSyn>_x003C__x002F_overview_x003E_</KeyEndSyn>
       <KeySynIndex />
-      <KeyStartRealise Param1="_x0023_REGEX_x0023_" Param2="">_x003C_regie_x003E_</KeyStartRealise>
-      <KeyEndRealise>_x003C__x002F_regie_x003E_</KeyEndRealise>
+      <KeyStartRealise Param1="_x0023_REGEX_x0023_" Param2="">_x003C_cast_x003E_</KeyStartRealise>
+      <KeyEndRealise>_x003C__x002F_cast_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
-      <KeyRealiseRegExp>name_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C_._x002A_</KeyRealiseRegExp>
+      <KeyRealiseRegExp>_x0023_MULTILINE_x0023_name_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_character_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A_job_x003D__x0022_Director_x0022_</KeyRealiseRegExp>
       <KeyRealiseMaxItems />
-      <KeyStartProduct Param1="_x003C__x002F_a_x003E_" Param2="_x002C__x0020_" />
-      <KeyEndProduct />
+      <KeyStartProduct Param1="_x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x003C_cast_x003E_</KeyStartProduct>
+      <KeyEndProduct>_x003C__x002F_cast_x003E_</KeyEndProduct>
       <KeyProductIndex />
-      <KeyProductRegExp />
+      <KeyProductRegExp>_x0023_MULTILINE_x0023_name_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_character_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A_job_x003D__x0022_Producer_x0022_</KeyProductRegExp>
       <KeyProductMaxItems />
-      <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">_x003C_drehbuch_x003E_</KeyStartWriter>
-      <KeyEndWriter>_x003C__x002F_drehbuch_x003E_</KeyEndWriter>
+      <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">_x003C_cast_x003E_</KeyStartWriter>
+      <KeyEndWriter>_x003C__x002F_cast_x003E_</KeyEndWriter>
       <KeyWriterIndex />
-      <KeyWriterRegExp>name_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C_._x002A_</KeyWriterRegExp>
+      <KeyWriterRegExp>_x0023_MULTILINE_x0023_name_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_character_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A_job_x003D__x0022_Screenplay_x0022_</KeyWriterRegExp>
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x003C_cast_x003E_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_cast_x003E_</KeyEndCredits>
       <KeyCreditsIndex />
-      <KeyCreditsRegExp>name_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_character_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A_job_x003D__x0022_actor_x0022_</KeyCreditsRegExp>
+      <KeyCreditsRegExp>_x0023_MULTILINE_x0023_name_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_character_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A_job_x003D__x0022_Actor_x0022_</KeyCreditsRegExp>
       <KeyCreditsMaxItems />
       <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
       <KeyStartCountry Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x003C_countries_x003E_</KeyStartCountry>
