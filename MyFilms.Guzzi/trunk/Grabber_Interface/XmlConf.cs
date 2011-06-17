@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Reflection;
 using System.IO;
-
+using MediaPortal.Configuration;
 
 class XmlConf
 {
@@ -26,12 +26,14 @@ class XmlConf
 
     public void initNew(string configFile)
     {
+        //Assembly _ass = Assembly.GetExecutingAssembly();
+        //Stream _stream = _ass.GetManifestResourceStream(_ass.GetName().Name + ".MyFilmsSample.xml");
 
-        Assembly _ass = Assembly.GetExecutingAssembly();
-        Stream _stream = _ass.GetManifestResourceStream(_ass.GetName().Name + ".MyFilmsSample.xml");
+        string MyFilmsSampleGrabber = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsSampleGrabber.xml";
 
         XmlDocument _xDoc = new XmlDocument();
-        StreamReader _str = new StreamReader(_stream, System.Text.Encoding.UTF8);
+        StreamReader _str = new StreamReader(MyFilmsSampleGrabber, System.Text.Encoding.UTF8);
+        //StreamReader _str = new StreamReader(_stream, System.Text.Encoding.UTF8);
         string _xmlStrings = string.Empty;
 
         while (_str.Peek() > 0)

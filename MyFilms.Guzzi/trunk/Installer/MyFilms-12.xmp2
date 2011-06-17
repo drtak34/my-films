@@ -110,6 +110,13 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{489c36c2-f379-4836-8909-0ff16c768cad}-NLog.dll</ZipFileName>
               <DestinationFilename>%Base%\NLog.dll</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Config\MyFilmsSampleGrabber.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9ad219ee-edaf-4335-b760-d5102ace67af}-MyFilmsSampleGrabber.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilmsSampleGrabber.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2467,13 +2474,6 @@ Required!</Description>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\MyFilmsSample.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2be0a9d6-9c55-4a40-b7f5-13777a1bdd2a}-MyFilmsSample.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\MyFilmsSample.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\OFDB-XML.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{f08fc66a-918a-448b-9b31-80768019db0f}-OFDB-XML.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\OFDB-XML.xml</DestinationFilename>
@@ -3614,6 +3614,13 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <LocalFileName>Base.12\NLog.dll</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{489c36c2-f379-4836-8909-0ff16c768cad}-NLog.dll</ZipFileName>
         <DestinationFilename>%Base%\NLog.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Config\MyFilmsSampleGrabber.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9ad219ee-edaf-4335-b760-d5102ace67af}-MyFilmsSampleGrabber.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilmsSampleGrabber.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -5942,13 +5949,6 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\MyFilmsSample.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2be0a9d6-9c55-4a40-b7f5-13777a1bdd2a}-MyFilmsSample.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\MyFilmsSample.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\OFDB-XML.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{f08fc66a-918a-448b-9b31-80768019db0f}-OFDB-XML.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\OFDB-XML.xml</DestinationFilename>
@@ -6510,14 +6510,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{60b0f3b3-dbcc-41dc-984d-c9d912969318}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a412b0be-0c16-4118-b99b-fd64f7637ec8}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7c705671-6092-41af-a249-6586b399f085}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{85788cd8-e433-4523-b07b-01289889c36c}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
