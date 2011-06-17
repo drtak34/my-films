@@ -4313,27 +4313,33 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             AMCSetAttribute("Purge_Missing_Files", "false");
           AMCSetAttribute("LogDirectory", Config.GetDirectoryInfo(Config.Dir.Config) + @"\log");
           AMCSetAttribute("Movie_Title_Handling", AmcTitleSearchHandling.Text);
+
           if (!string.IsNullOrEmpty(cbPictureHandling.Text))
           {
-            AMCSetAttribute("Use_Folder_Dot_Jpg", "false");
-            AMCSetAttribute("Store_Image_With_Relative_Path", cbPictureHandling.Text);
-
-            //AMCSetAttribute("Image_Download_Filename_Prefix", currentconfig + "_");
-            if (cbPictureHandling.Text == "Relative Path")
+            switch (cbPictureHandling.Text)
             {
-              AMCSetAttribute("Image_Download_Filename_Prefix", txtPicturePrefix.Text); // just prefix
+              case "Relative Path":
+                AMCSetAttribute("Use_Folder_Dot_Jpg", "False");
+                AMCSetAttribute("Store_Image_With_Relative_Path", "True");
+                AMCSetAttribute("Image_Download_Filename_Prefix", txtPicturePrefix.Text); // just prefix
+                break;
+              case "Full Path":
+                AMCSetAttribute("Use_Folder_Dot_Jpg", "False");
+                AMCSetAttribute("Store_Image_With_Relative_Path", "False");
+                AMCSetAttribute("Image_Download_Filename_Prefix", MesFilmsImg.Text + "\\" + txtPicturePrefix); // Full path including "\\" excluding picturefilename 
+                break;
+              case "Use Folder.jpg":
+                AMCSetAttribute("Use_Folder_Dot_Jpg", "True");
+                AMCSetAttribute("Store_Image_With_Relative_Path", "False");
+                AMCSetAttribute("Image_Download_Filename_Prefix", ""); // just prefix
+                break;
+              default:
+                AMCSetAttribute("Use_Folder_Dot_Jpg", "False");
+                AMCSetAttribute("Store_Image_With_Relative_Path", "False");
+                AMCSetAttribute("Image_Download_Filename_Prefix", MesFilmsImg.Text + "\\" + txtPicturePrefix); // Full path including "\\" excluding picturefilename 
+                break;
             }
-            else if (cbPictureHandling.Text == "Full Path")
-            {
-              AMCSetAttribute("Image_Download_Filename_Prefix", MesFilmsImg.Text + "\\" + txtPicturePrefix); // Full path including "\\" excluding picturefilename 
-            }
-            else if (cbPictureHandling.Text == "Use Folder.jpg")
-            {
-              
-            }
-            else AMCSetAttribute("Image_Download_Filename_Prefix", ""); 
           }
-
 
           // Those Parameters already set via MyFilmsAMCSettings.xml (Defaultconfigfile):
           //Movie_Title_Handling	Default	Folder Name + Internet Lookup
