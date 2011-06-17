@@ -2232,8 +2232,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (conf.DefaultCover.Length > 0)
               {
                 item.IconImage = conf.DefaultCover;
-                //item.IconImageBig = conf.DefaultCover;
-                //item.ThumbnailImage = conf.DefaultCover;
+                item.IconImageBig = conf.DefaultCover;
+                item.ThumbnailImage = conf.DefaultCover;
               }
             }
           }

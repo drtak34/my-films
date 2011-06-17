@@ -3945,7 +3945,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
                 file = string.Empty;
-            if (!System.IO.File.Exists(file))
+            if (!System.IO.File.Exists(file) || string.IsNullOrEmpty(file))
                 file = MyFilms.conf.DefaultCover;
             //Should not Disable because of SpeedThumbs - Not working here .....
             setGUIProperty("picture", file);
