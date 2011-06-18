@@ -4,6 +4,7 @@
     <DBName>IMDB</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Mapping />
+    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">Popular_x0020_Titles</KeyStartList>
@@ -96,7 +97,7 @@
       <KeyEndLanguage>_x003C__x002F_div_x003E_</KeyEndLanguage>
       <KeyLanguageIndex />
       <KeyStartTagline Param1="_x0023_ADD_x0023_" Param2="_x0022__x0020__x007C__x0020__x0022_">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Tagline_x005B_s_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E_</KeyStartTagline>
-      <KeyEndTagline>_x003C_span_x0020_class_x003D__x0022_</KeyEndTagline>
+      <KeyEndTagline>_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_._x002A__x007C__x003C__x002F_div_x003E_._x002A_</KeyEndTagline>
       <KeyTaglineIndex />
       <KeyStartCertification Param1="MPAA" Param2="">MPAA_x003C__x002F_a_x003E__x0029__x003C__x002F_h4_x003E_</KeyStartCertification>
       <KeyEndCertification>_x003C_span_x0020_class_x003D__x0022_</KeyEndCertification>
