@@ -449,6 +449,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     System.ComponentModel.BackgroundWorker bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
     // System.ComponentModel.BackgroundWorker bgOnPageLoad = null;
 
+    public delegate void DelegateUpdateProgress(string message);
+    public static void UpdateMyProgressbar(string message)
+    {
+      MyFilmsDetail.setGUIProperty("statusmessage", message);
+    }
+
     #endregion
 
     #region Base Overrides
@@ -7744,7 +7750,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    
     //*****************************************************************************************
     //*  Check availability status of media files in batch mode                                                   *
     //*****************************************************************************************
