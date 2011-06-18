@@ -7559,6 +7559,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
         Load_Config(Configuration.CurrentConfig, true);
         Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+        ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798748));
       }
     }
 
@@ -7608,7 +7609,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           try { wdirector = (string)t["Director"]; }
           catch { }
           System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString(), personartworkpath);
-          //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MesFilms.conf.StrPathFanart, true, false);
         }
       }
     }
@@ -7723,8 +7723,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public void AMCupdaterStartEventHandler()
     {
-        AMCUpdater.AntProcessor.bgwFolderScanUpdate.ProgressChanged += new ProgressChangedEventHandler(AMCupdater_ProgressChanged);
-        AMCUpdater.AntProcessor.bgwFolderScanUpdate.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AMCupdater_RunWorkerCompleted);
+        // AMCUpdater.AntProcessor.bgwFolderScanUpdate.ProgressChanged += new ProgressChangedEventHandler(AMCupdater_ProgressChanged);
+        // AMCUpdater.AntProcessor.bgwFolderScanUpdate.RunWorkerCompleted += new RunWorkerCompletedEventHandler(AMCupdater_RunWorkerCompleted);
     }
 
     void AMCupdater_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
