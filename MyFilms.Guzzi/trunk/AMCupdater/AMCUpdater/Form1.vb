@@ -1754,7 +1754,7 @@ Public Class Form1
             LoadSettings()
             ' Add config file name to window title
             If (SettingsFile.ToString.Length > 0) Then
-                Me.Text = "Ant Movie Catalog Auto-Updater - " & SettingsFile.ToString.Substring(SettingsFile.ToString.LastIndexOf("\") + 1)
+                Me.Text = "AMC Updater - " & SettingsFile.ToString.Substring(SettingsFile.ToString.LastIndexOf("\") + 1)
             Else
                 Me.Text = "Ant Movie Catalog Auto-Updater"
             End If

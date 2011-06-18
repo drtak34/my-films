@@ -49,7 +49,7 @@ Namespace My
 
                 ' Add config file name to window title
                 If (ConfigFile.ToString.Length > 0) Then
-                    Form1.Text = "Ant Movie Catalog Auto-Updater - " & ConfigFile.ToString.Substring(ConfigFile.ToString.LastIndexOf("\") + 1)
+                    Form1.Text = "AMC Updater - " & ConfigFile.ToString.Substring(ConfigFile.ToString.LastIndexOf("\") + 1)
                 Else
                     Form1.Text = "Ant Movie Catalog Auto-Updater"
                 End If
