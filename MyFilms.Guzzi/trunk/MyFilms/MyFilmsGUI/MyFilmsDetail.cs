@@ -1818,6 +1818,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                         dlg.Add(wurl.Title.ToString());
                     }
+                    string[] split = MovieName.Trim().Split(new Char[] { ' ' });
+                    foreach (string s in split)
+                    {
+                      dlg.Add(s);
+                    }
                     if (!(dlg.SelectedLabel > -1))
                     {
                         dlg.SelectedLabel = -1;
@@ -1834,14 +1839,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             grabb_Internet_Informations(keyboard.Text.ToString(), GetID, false, wscript, MoviePath);
                         break;
                     }
-                    if (dlg.SelectedLabel > 0)
+                    if (dlg.SelectedLabel > 0 && dlg.SelectedLabel <= listUrl.Count)
                     {
                         wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[dlg.SelectedLabel - 1];
                         grabb_Internet_Details_Informations(wurl.URL, MovieHierarchy, wscript, GetID, true, false, "");
                     }
+                    if (dlg.SelectedLabel > listUrl.Count)
+                    {
+                      VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                      if (null == keyboard) return;
+                      keyboard.Reset();
+                      keyboard.Text = dlg.SelectedLabelText;
+                      keyboard.DoModal(GetID);
+                      if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                        grabb_Internet_Informations(keyboard.Text.ToString(), GetID, false, wscript, MoviePath);
+                      break;
+                    }
                     break;
             }
         }
+
         //-------------------------------------------------------------------------------------------
         //  Grab Internet Movie Details Informations and update the XML database and refresh screen
         //-------------------------------------------------------------------------------------------        
@@ -1904,6 +1921,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 Thread.Sleep(500);
                 dlgPrgrs.ShowWaitCursor = false;
                 dlgPrgrs.Close();
+
+                //MyFilms.DelegateUpdateProgress myProgress = new MyFilms.DelegateUpdateProgress(MyFilms.UpdateMyProgressbar);
+                //  myProgressbar.Invoke(myProgress, "test");
                 
                 //Thread LoadThread = new Thread(delegate()
                 //  {
