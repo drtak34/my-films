@@ -470,6 +470,7 @@ Public Class AntRecord
                     Else
                         Dim wtitle As String
                         Dim wyear As String
+                        Dim dyear As Double
                         Dim wimdb As String
                         Dim wtmdb As String
                         Dim wlimityear As Boolean = False
@@ -482,6 +483,9 @@ Public Class AntRecord
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    If Double.TryParse(wyear, dyear) = False Then
+                                        wyear = ""
+                                    End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
 
@@ -501,6 +505,9 @@ Public Class AntRecord
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    If Double.TryParse(wyear, dyear) = False Then
+                                        wyear = ""
+                                    End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If (wtitle.Contains(SearchString) And wyear = _InternetSearchHintYear) Then
@@ -647,7 +654,6 @@ Public Class AntRecord
 
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
 
@@ -667,6 +673,9 @@ Public Class AntRecord
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    If Double.TryParse(wyear, dyear) = False Then
+                                        wyear = ""
+                                    End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If (wtitle.Contains(SearchString) And wyear = _InternetSearchHintYear) Then
@@ -684,6 +693,9 @@ Public Class AntRecord
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    If Double.TryParse(wyear, dyear) = False Then
+                                        wyear = ""
+                                    End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If _InternetSearchHintYear <> "" And _InternetSearchHintYear.Length >= 4 And wyear <> "" And wyear.Length >= 4 Then
@@ -707,6 +719,9 @@ Public Class AntRecord
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    If Double.TryParse(wyear, dyear) = False Then
+                                        wyear = ""
+                                    End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If (wyear = _InternetSearchHintYear And _InternetLookupAlwaysPrompt = False) Then
@@ -742,6 +757,9 @@ Public Class AntRecord
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    If Double.TryParse(wyear, dyear) = False Then
+                                        wyear = ""
+                                    End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If (wtitle.Contains(SearchString) And _InternetLookupAlwaysPrompt = False) Then
