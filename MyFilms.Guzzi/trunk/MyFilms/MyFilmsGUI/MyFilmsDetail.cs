@@ -1417,7 +1417,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             break;
                         }
                     }
-                    setProcessAnimationStatus(true, m_SearchAnimation);
+                    // setProcessAnimationStatus(true, m_SearchAnimation); // will be done later ...
                     title = string.Empty;
                     mediapath = string.Empty;
                     if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
@@ -1453,7 +1453,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     grabb_Internet_Informations(title, GetID, wChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath);
                     afficher_detail(true);
-                    setProcessAnimationStatus(false, m_SearchAnimation);
+                    setProcessAnimationStatus(false, m_SearchAnimation); // make sure it's switched off
                     break;
 
                 case "nfo-reader-update":
@@ -1736,7 +1736,59 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Grabber.Grabber_URLClass.IMDBUrl wurl;
 
             //ArrayList listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, MoviePath); // MoviePath only when nfo reader used !!!
-            ArrayList listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, "");
+            // ArrayList listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, "");
+              
+              ArrayList listUrl = new ArrayList();
+
+              GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+              if (dlgPrgrs != null)
+              {
+                dlgPrgrs.Reset();
+                dlgPrgrs.DisplayProgressBar = false;
+                dlgPrgrs.ShowWaitCursor = true;
+                dlgPrgrs.DisableCancel(true);
+                dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Internet Movie Grabber"));
+                dlgPrgrs.SetLine(1, "Searching Movies ...");
+                dlgPrgrs.Percentage = 0;
+                dlgPrgrs.NeedRefresh();
+                dlgPrgrs.ShouldRenderLayer();
+                dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+
+                listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, "");
+
+                dlgPrgrs.Percentage = 100;
+                dlgPrgrs.SetLine(1, "Finished Searching Movies ...");
+                dlgPrgrs.NeedRefresh();
+                dlgPrgrs.ShouldRenderLayer();
+                Thread.Sleep(500);
+                dlgPrgrs.ShowWaitCursor = false;
+                dlgPrgrs.Close();
+                
+
+                //new System.Threading.Thread(delegate()
+                //  {
+                //    dlgPrgrs.Percentage = 10;
+                //    Result = Grab.GetDetail(
+                //      url,
+                //      downLoadPath,
+                //      wscript,
+                //      true,
+                //      MyFilms.conf.GrabberOverrideLanguage,
+                //      MyFilms.conf.GrabberOverridePersonLimit,
+                //      MyFilms.conf.GrabberOverrideTitleLimit,
+                //      MyFilms.conf.GrabberOverrideGetRoles);
+                //    if (dlgPrgrs != null)
+                //    {
+                //      dlgPrgrs.Percentage = 100;
+                //      dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
+                //      dlgPrgrs.Close();
+                //    }
+
+                //    GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => { return 0; }, 0, 0, null);
+                //  }) { Name = "MyFilmsDetailsLoader", IsBackground = true }.Start();
+                //return;
+              }
+            
             int listCount = listUrl.Count;
             if (!MyFilms.conf.StrGrabber_Always)
                 listCount = 2;
@@ -1810,7 +1862,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             bool onlymissing = false;
 
             if (nfo)
-                Result = Grab.GetNfoDetail(nfofile, MyFilms.conf.StrPathImg + MyFilms.conf.StrPicturePrefix, MyFilms.conf.StrPathArtist, "");
+            {
+              Result = Grab.GetNfoDetail(nfofile, MyFilms.conf.StrPathImg + MyFilms.conf.StrPicturePrefix, MyFilms.conf.StrPathArtist, "");
+            }
             else
             {
               string downLoadPath;
@@ -1823,7 +1877,84 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 downLoadPath = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix;
               LogMyFilms.Debug("Grabber - GetDetail: OverrideLanguage = '" + MyFilms.conf.GrabberOverrideLanguage + "', OverridePersonLimit = '" + MyFilms.conf.GrabberOverridePersonLimit + "', OverrideTitleLimit = '" + MyFilms.conf.GrabberOverrideTitleLimit + "', Get Roles = '" + MyFilms.conf.GrabberOverrideGetRoles + "'");
               LogMyFilms.Debug("Grabber - GetDetail: script = '" + wscript + "', url = '" + url + "', download path = '" + downLoadPath + "'");
-              Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
+              
+              // Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
+
+
+              GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+              if (dlgPrgrs != null)
+              {
+                dlgPrgrs.Reset();
+                dlgPrgrs.DisplayProgressBar = false;
+                dlgPrgrs.ShowWaitCursor = true;
+                dlgPrgrs.DisableCancel(true);
+                dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Internet Details Grabber"));
+                dlgPrgrs.SetLine(1, "Loading Movie Details ...");
+                dlgPrgrs.Percentage = 0;
+                dlgPrgrs.NeedRefresh();
+                dlgPrgrs.ShouldRenderLayer();
+                dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+
+                Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles);
+                
+                dlgPrgrs.Percentage = 100;
+                dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
+                dlgPrgrs.NeedRefresh();
+                dlgPrgrs.ShouldRenderLayer();
+                Thread.Sleep(500);
+                dlgPrgrs.ShowWaitCursor = false;
+                dlgPrgrs.Close();
+                
+                //Thread LoadThread = new Thread(delegate()
+                //  {
+                //    dlgPrgrs.Percentage = 10;
+                //    Result = Grab.GetDetail(
+                //      url,
+                //      downLoadPath,
+                //      wscript,
+                //      true,
+                //      MyFilms.conf.GrabberOverrideLanguage,
+                //      MyFilms.conf.GrabberOverridePersonLimit,
+                //      MyFilms.conf.GrabberOverrideTitleLimit,
+                //      MyFilms.conf.GrabberOverrideGetRoles);
+                //    if (dlgPrgrs != null)
+                //    {
+                //      dlgPrgrs.Percentage = 100;
+                //      dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
+                //      Thread.Sleep(200);
+                //      dlgPrgrs.Close();
+                //    }
+                //  });
+                //LoadThread.IsBackground = true;
+                //LoadThread.Priority = ThreadPriority.AboveNormal;
+                //LoadThread.Name = "MyFilmsDetailLoader";
+                //LoadThread.Start();
+                //LoadThread.Join(); // block main thread until background thread finished
+
+                //new System.Threading.Thread(delegate()
+                //  {
+                //    dlgPrgrs.Percentage = 10;
+                //    Result = Grab.GetDetail(
+                //      url,
+                //      downLoadPath,
+                //      wscript,
+                //      true,
+                //      MyFilms.conf.GrabberOverrideLanguage,
+                //      MyFilms.conf.GrabberOverridePersonLimit,
+                //      MyFilms.conf.GrabberOverrideTitleLimit,
+                //      MyFilms.conf.GrabberOverrideGetRoles);
+                //    if (dlgPrgrs != null)
+                //    {
+                //      dlgPrgrs.Percentage = 100;
+                //      dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
+                //      dlgPrgrs.Close();
+                //    }
+
+                //    GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => { return 0; }, 0, 0, null);
+                //  }) { Name = "MyFilmsDetailsLoader", IsBackground = true }.Start();
+                //return;
+              }
+
               // Result = Grab.GetDetail(url, downLoadPath, wscript);
               // copy mapped values to original values
               for (int i = 0; i < 30; i++)
@@ -2286,11 +2417,75 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Info("Database Updated for title/ttitle: " + title + "/" + ttitle);
             if (title.Length > 0 && MyFilms.conf.StrFanart) // Get Fanart - ToDo Guzzi: Use local Fanart, if chosen ?
             {
-                System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString());
+              GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+              if (dlgPrgrs != null)
+              {
+                dlgPrgrs.Reset();
+                dlgPrgrs.DisplayProgressBar = false;
+                dlgPrgrs.ShowWaitCursor = true;
+                dlgPrgrs.DisableCancel(true);
+                dlgPrgrs.SetHeading(string.Format("{0} - {1}", "MyFilms", "Artwork Updater"));
+                dlgPrgrs.SetLine(1, "Loading Artwork ...");
+                dlgPrgrs.Percentage = 0;
+                dlgPrgrs.NeedRefresh();
+                dlgPrgrs.ShouldRenderLayer();
+                dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+
+                new System.Threading.Thread(delegate()
+                  {
+                    GrabArtwork(title, ttitle, (int)year, director, MyFilms.conf.StrTitle1.ToString(), dlgPrgrs);
+
+                  //GrabArtwork(title, ttitle, (int)year, director, MyFilms.conf.StrTitle1.ToString(), r => 
+                  //{
+                  //  dlgPrgrs.Percentage = r;
+                  //  return dlgPrgrs.ShouldRenderLayer();
+                  //});
+                  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+                  {
+                    return 0;
+                  }, 0, 0, null);
+                  }) { Name = "MyFilmsArtworkLoader", IsBackground = true }.Start();
+                return;
+              }
+              
+              // System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, (int)year, director, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString());
             }
         }
 
-        //-------------------------------------------------------------------------------------------
+        private static void GrabArtwork(string title, string ttitle, int year, string director, string StrTitle1, GUIDialogProgress dlgPrgrs)
+        {
+          try
+          {
+            if (dlgPrgrs != null) 
+              dlgPrgrs.SetLine(1, "Now loading Artwork ...");
+
+            if (dlgPrgrs != null && !dlgPrgrs.ShouldRenderLayer()) 
+              return;
+
+            if (dlgPrgrs != null) 
+              dlgPrgrs.Percentage = 10;
+
+            Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
+            System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(title, ttitle, year, director, MyFilms.conf.StrPathFanart, true, false, StrTitle1);
+          }
+          catch (Exception)
+          {
+            // LogMyFilms.Error(ex);
+          }
+          finally
+          {
+            if (dlgPrgrs != null)
+            {
+              dlgPrgrs.Percentage = 100; 
+              dlgPrgrs.SetLine(1, "Finished loading Artwork !");
+              dlgPrgrs.ShowWaitCursor = false;
+              Thread.Sleep(500);
+              dlgPrgrs.Close();
+            }
+          }
+        }
+
+      //-------------------------------------------------------------------------------------------
         //  Create Thumb via MTN (MovieThumbNailer) from movie itself
         //-------------------------------------------------------------------------------------------        
         public static void CreateThumbFromMovie()
