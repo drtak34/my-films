@@ -2359,7 +2359,7 @@ Most sites do not support country specific certifications.</value>
     <value>7, 311</value>
   </data>
   <data name="textBodyDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1032, 330</value>
+    <value>1039, 336</value>
   </data>
   <data name="textBodyDetail.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -2428,7 +2428,7 @@ Most sites do not support country specific certifications.</value>
     <value>6, 16</value>
   </data>
   <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 248</value>
+    <value>308, 248</value>
   </data>
   <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2452,7 +2452,7 @@ Most sites do not support country specific certifications.</value>
     <value>508, 3</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 270</value>
+    <value>320, 270</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -2956,7 +2956,7 @@ Most sites do not support country specific certifications.</value>
     <value>NoControl</value>
   </data>
   <data name="pictureBoxPreviewCover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>827, 10</value>
+    <value>834, 8</value>
   </data>
   <data name="pictureBoxPreviewCover.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 295</value>
@@ -2986,7 +2986,7 @@ Most sites do not support country specific certifications.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageDetailPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 645</value>
+    <value>1052, 653</value>
   </data>
   <data name="tabPageDetailPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3238,7 +3238,7 @@ Most sites do not support country specific certifications.</value>
     <value>6, 311</value>
   </data>
   <data name="textBody.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1040, 328</value>
+    <value>1040, 336</value>
   </data>
   <data name="textBody.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -3622,7 +3622,7 @@ Most sites do not support country specific certifications.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageSearchPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 646</value>
+    <value>1052, 653</value>
   </data>
   <data name="tabPageSearchPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4049,7 +4049,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>3, 620</value>
   </metadata>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 620</value>
+    <value>3, 628</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1046, 22</value>
@@ -4502,7 +4502,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageUserSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 645</value>
+    <value>1052, 653</value>
   </data>
   <data name="tabPageUserSettings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4526,7 +4526,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>5, 93</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1060, 672</value>
+    <value>1060, 679</value>
   </data>
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -4559,7 +4559,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1070, 769</value>
+    <value>1070, 777</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
