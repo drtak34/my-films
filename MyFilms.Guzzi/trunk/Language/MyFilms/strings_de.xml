@@ -223,6 +223,8 @@
     <String id="10798714">Globale Filter ...</String>
     <String id="10798715">Lade Personeninfos - alle Personen</String>
     <String id="10798716">IMDB Trailer (OnlineVideos)</String>
+    <String id="10798717">Unvollständige Filmdaten</String>
+    <String id="10798718">=> {0} Film(en) fehlt  '{1}'</String>
     <String id="10798719">Lade Filminformationen (nfo, ergänze fehlende Infos)</String>
     <String id="10798720">Lade Filminformationen (nfo, alle Infos überschreiben)</String>
     <String id="10798721">Lade Filminformationen aus ant-Datei (lokal)</String>

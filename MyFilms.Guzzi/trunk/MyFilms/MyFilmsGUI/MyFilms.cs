@@ -288,13 +288,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     #endregion
 
-    #region Private Properties
+    #region Private/Public Properties
 
     // From OV/TVS
     private bool StopDownload { get; set; }
     //private Layout CurrentLayout { get; set; }
-
-    #endregion
 
     public static ReaderWriterLockSlim _rw = new ReaderWriterLockSlim();
 
@@ -356,7 +354,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static List<string> SearchHistory = new List<string>();
 
     #endregion
-
 
     #region Enums
     //public enum Layout
@@ -438,7 +435,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     #endregion
 
-
+    #endregion
 
     #region handler and backgroundworker
 
@@ -453,7 +450,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // System.ComponentModel.BackgroundWorker bgOnPageLoad = null;
 
     #endregion
-
 
     #region Base Overrides
 
@@ -754,8 +750,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    #endregion
-
     protected override void OnShowContextMenu()
     {
       LogMyFilms.Debug("OnShowContextMenu() started");
@@ -769,7 +763,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       base.OnShowContextMenu();
     }
 
-    #region Main Context Menu
+    #endregion
+
+    #region Main Context Menu (inative)
     //protected override void OnShowContextMenu()
     //{
     //  try
@@ -1425,8 +1421,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //}
     #endregion
-
-
 
     #region Action
 
@@ -4328,6 +4322,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewGlobalUpdates.Add("trailer-all");
           }
 
+          dlg2.Add(GUILocalizeStrings.Get(10798717)); // incomplete movie data
+          // Search records with missing movie data, e.g. after import when internet data loading failed
+          choiceViewGlobalUpdates.Add("incomplete-movie-data");
+
           dlg2.DoModal(GetID);
 
           if (dlg2.SelectedLabel == -1)
@@ -4728,6 +4726,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798695)); //Traiersearch finished!
           break;
 
+        case "incomplete-movie-data":
+          SearchIncompleteMovies(MyFilms.conf.StrSearchList);
+          break;
+        
         case "choosescript":
           MyFilms.conf.StrGrabber_ChooseScript = !MyFilms.conf.StrGrabber_ChooseScript;
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "Grabber_ChooseScript", MyFilms.conf.StrGrabber_ChooseScript);
@@ -7307,6 +7309,97 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
         }
       }
+    }
+
+    //*****************************************************************************************
+    //*  Global search movies with missing/empty properties                                   *
+    //*****************************************************************************************
+    private void SearchIncompleteMovies(IEnumerable<string> wSearchList) // Old hardcoded searchlist: "TranslatedTitle|OriginalTitle|Description|Comments|Actors|Director|Producer|Rating|Year|Date|Category|Country"
+    {
+      // first select the property to be searching on
+      AntMovieCatalog ds = new AntMovieCatalog();
+      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      ArrayList w_tableau = new ArrayList();
+      ArrayList w_count = new ArrayList();
+      string wproperty = string.Empty;
+
+      if (dlg == null) return;
+      dlg.Reset();
+
+      dlg.Reset();
+      dlg.SetHeading(GUILocalizeStrings.Get(10798717)); // incomplete movie data
+      DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+      LogMyFilms.Debug("(SearchIncompleteMovies) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(SearchIncompleteMovies) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
+      LogMyFilms.Debug("(SearchIncompleteMovies) - conf.StrSorta     : '" + conf.StrSorta + "'");
+      LogMyFilms.Debug("(SearchIncompleteMovies) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
+      foreach (DataRow wsr in wr)
+      {
+        foreach (DataColumn dc in ds.Movie.Columns)
+        {
+          //if (wsr[dc.ColumnName].ToString().ToLower().Contains(keyboard.Text.ToLower()))
+          if (wsr[dc.ColumnName].ToString().Length == 0) //Check if field is empty
+            if (w_tableau.Contains(dc.ColumnName.ToLower()))
+            // search position in w_tableau for adding +1 to w_count
+            {
+              for (int i = 0; i < w_tableau.Count; i++)
+              {
+                if (w_tableau[i].ToString() == dc.ColumnName.ToLower())
+                {
+                  w_count[i] = (int)w_count[i] + 1;
+                  break;
+                }
+              }
+            }
+            else
+            // add to w_tableau and move 1 to w_count
+            {
+              w_tableau.Add(dc.ColumnName.ToLower());
+              w_count.Add(1);
+            }
+        }
+      }
+      LogMyFilms.Debug("(SearchIncompleteMovies) - Result of Search in all properties (w_tableau.Count): '" + w_tableau.Count + "'");
+      if (w_tableau.Count == 0) // NodeLabelEditEventArgs Results found
+      {
+        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+        dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //InfoPanel
+        dlgOk.SetLine(1, GUILocalizeStrings.Get(10798625)); // no result found for searched items
+        dlgOk.DoModal(GetID);
+        if (dlg.SelectedLabel == -1)
+          return;
+        return;
+      }
+      dlg.Reset();
+      dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798717))); // incomplete movie data
+      choiceSearch.Clear();
+      string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL" };
+      string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668" };
+      for (int ii = 0; ii < 30; ii++)
+      {
+        //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: Property is '" + PropertyList[ii] + "' - '" + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + "' (" + PropertyListLabel[ii] + ")");
+        for (int i = 0; i < w_tableau.Count; i++)
+        {
+          //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: w_tableau is '" + w_tableau[i] + "'"); 
+          if (w_tableau[i].ToString().ToLower().Equals(PropertyList[ii].ToLower()))
+          {
+            dlg.Add(string.Format(GUILocalizeStrings.Get(10798718), w_count[i], GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii])))));
+            choiceSearch.Add(w_tableau[i].ToString());
+          }
+        }
+      }
+      dlg.DoModal(GetID);
+      if (dlg.SelectedLabel == -1)
+        return;
+      wproperty = choiceSearch[dlg.SelectedLabel];
+      LogMyFilms.Debug("(SearchIncompleteMovies) - ChosenProperty is '" + wproperty + "'"); 
+
+      conf.StrSelect = wproperty + " is NULL";
+      conf.StrTxtSelect = "Selection " + wproperty + " [*empty*]";
+      conf.StrTitleSelect = string.Empty;
+      SetLabelView("search"); // show "search"
+      GetFilmList();
     }
 
     //*****************************************************************************************

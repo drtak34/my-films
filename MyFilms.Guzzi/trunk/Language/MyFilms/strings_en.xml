@@ -223,6 +223,8 @@
     <String id="10798714">Global filters ...</String>
     <String id="10798715">Load person info (all persons)</String>
     <String id="10798716">IMDB Trailer (OnlineVideos)</String>
+    <String id="10798717">Incomplete movie data</String>
+    <String id="10798718">=> {0} Film(s) are missing '{1}'</String>
     <String id="10798719">Load films info (.nfo file, local, add missing info)</String>
     <String id="10798720">Load films info (.nfo file, local, replace all info)</String>
     <String id="10798721">Load films info from Ant file (local)</String>

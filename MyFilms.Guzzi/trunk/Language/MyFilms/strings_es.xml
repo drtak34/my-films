@@ -180,6 +180,8 @@
     <String id="10798703">Actualizaciones online ...</String>
     <String id="10798710">Reproducir trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
+    <String id="10798717">Incomplete movie data</String>
+    <String id="10798718">=> {0} Film(s) are missing '{1}'</String>
     <String id="10798719">Obtener datos de películas (archivo .nfo, local, completar datos ausente)</String>
     <String id="10798720">Obtener datos de películas (archivo .nfo, local, reemplazar todos los datos)</String>
     <String id="10798721">Obtener datos de películas desde archivo Ant (local)</String>
