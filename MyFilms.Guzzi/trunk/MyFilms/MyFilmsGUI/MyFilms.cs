@@ -4734,6 +4734,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "incomplete-movie-data":
           SearchIncompleteMovies(MyFilms.conf.StrSearchList);
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_List); // set focus to list
           break;
         
         case "choosescript":
@@ -4927,13 +4928,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         upd_choice[ichoice] = "suppress";
         ichoice++;
       }
-      //Disabled due to problems of updating DB (requires debugging before reenabling...)
-      //if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
-      //{
-      //    dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-      //    upd_choice[ichoice] = "grabber";
-      //    ichoice++;
-      //}
+
+      if (MyFilmsDetail.ExtendedStartmode("Context Movie: Internet data update")) // check if specialmode is configured for disabled features
+      {
+        //Disabled due to problems of updating DB (requires debugging before reenabling...)
+        if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+        {
+          dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
+          upd_choice[ichoice] = "grabber";
+          ichoice++;
+        }
+      }
+      
       if (MyFilms.conf.StrFanart && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
       {
         dlg.Add(GUILocalizeStrings.Get(1079862));
@@ -5522,6 +5528,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
           }
+
+          conf.StrIndex = facadeView.SelectedListItem.ItemId;
+          conf.StrTIndex = facadeView.SelectedListItem.Label;
+
           MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath);
           //Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
@@ -7382,7 +7392,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       choiceSearch.Clear();
       string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL" };
       string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668" };
-      for (int ii = 0; ii < 30; ii++)
+      for (int ii = 0; ii < 29; ii++)
       {
         //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: Property is '" + PropertyList[ii] + "' - '" + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + "' (" + PropertyListLabel[ii] + ")");
         for (int i = 0; i < w_tableau.Count; i++)
