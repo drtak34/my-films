@@ -3075,6 +3075,30 @@ Updated DLLs for BrowseTheWeb and SubCentral with MyFilms Support</Description>
           </Items>
         </Files>
       </GroupItem>
+      <GroupItem Name="AMCinstaller">
+        <ParentGroup>Default</ParentGroup>
+        <DisplayName>AMCinstaller</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>AMCinstaller</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{31439464-c8ad-4605-86e0-0aa2882fe38c}-AMCUpdaterSetup.msi</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\AMCinstaller\setup.exe</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0bcf3be9-f459-4e60-826e-de04dc31b7a9}-setup.exe</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\AMCinstaller\setup.exe</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
     </Items>
   </Groups>
   <Sections>
@@ -3403,9 +3427,9 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <SubSystemsUsed>
           <Items>
             <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3474,7 +3498,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>1008</Revision>
+      <Revision>1027</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANT video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -3482,7 +3506,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1008(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1027(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -6506,18 +6530,32 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <ZipFileName>Installer{CopyFile}\{342078f4-5cde-4f44-ada7-ab53b5275944}-SubCentral.dll</ZipFileName>
         <DestinationFilename>%Plugins%\Windows\SubCentral.dll</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{31439464-c8ad-4605-86e0-0aa2882fe38c}-AMCUpdaterSetup.msi</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\AMCinstaller\setup.exe</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0bcf3be9-f459-4e60-826e-de04dc31b7a9}-setup.exe</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\AMCinstaller\setup.exe</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{26fefedc-921d-4ae6-b7ac-72fafe4eb8a6}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{2679c054-5b57-4ddf-b869-633efcc0a8ac}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c6cff73b-9e8e-4c83-bc2c-6f34550edfc7}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{5f7aba06-6e89-4aac-8aed-c06d14a90add}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
@@ -6562,6 +6600,16 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <DestinationFilename>%Thumbs%\MyFilms\SampleMovies</DestinationFilename>
         <Folder>Thumbs\MyFilms\SampleMovies</Folder>
         <Group>SampleMovies</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{154004e9-7df8-41fe-8e33-6cb15cbcf145}-</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\AMCinstaller</DestinationFilename>
+        <Folder>Thumbs\MyFilms\AMCinstaller</Folder>
+        <Group>AMCinstaller</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
     </FolderGroups>
