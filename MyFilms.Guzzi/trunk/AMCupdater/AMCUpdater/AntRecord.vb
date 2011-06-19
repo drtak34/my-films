@@ -513,7 +513,7 @@ Public Class AntRecord
                                     End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
-                                    If (wtitle.Contains(SearchString) And wyear = _InternetSearchHintYear) Then
+                                    If ((wtitle.Contains(SearchString) Or wtitle.Replace(":", "").Replace("  ", " ").Contains(SearchString)) And wyear = _InternetSearchHintYear) Then
                                         '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
@@ -705,7 +705,7 @@ Public Class AntRecord
                                     End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
-                                    If (wtitle.Contains(SearchString) And wyear = _InternetSearchHintYear) Then
+                                    If ((wtitle.Contains(SearchString) Or wtitle.Replace(":", "").Replace("  ", " ").Contains(SearchString)) And wyear = _InternetSearchHintYear) Then
                                         '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
@@ -726,7 +726,7 @@ Public Class AntRecord
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If _InternetSearchHintYear <> "" And _InternetSearchHintYear.Length >= 4 And wyear <> "" And wyear.Length >= 4 Then
-                                        If (wtitle.Contains(SearchString) And wyear <> "" And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
+                                        If ((wtitle.Contains(SearchString) Or wtitle.Replace(":", "").Replace("  ", " ").Contains(SearchString)) And wyear <> "" And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
                                             '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                             _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                             _InternetLookupOK = True
@@ -789,7 +789,7 @@ Public Class AntRecord
                                     End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
-                                    If (wtitle.Contains(SearchString) And _InternetLookupAlwaysPrompt = False) Then
+                                    If ((wtitle.Contains(SearchString) Or wtitle.Replace(":", "").Replace("  ", " ").Contains(SearchString)) And _InternetLookupAlwaysPrompt = False) Then
                                         CountNameMatch = CountNameMatch + 1
                                         index = i
                                     End If
