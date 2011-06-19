@@ -547,6 +547,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string loadParam = (string)fi.GetValue(this);
           //site:<sitename>|category:<categoryname>|search:<searchstring>|return:<locked|root>|view:<list|smallthumbs|largethumbs>
           //add bool option on search to popup VK if nothing found or not
+
+        // MF planned options:
+        // config:<configname>|property:<propertyname>|propertyvalue:<propertyvalue>|search:<searchexpression>|view:<facadeviewtype>
+        // priority order: search overrules property view. propertyvalue is optional. view is optional, config is optional, if not set, last used or default will be used.
+        // actors are possible by using property:actors|propertyvalue:actorname
+        // if invalid values are given, param start is ignored
+        // optional: add public method for basichome editors to ask possible values
       }      
       string jumpToViewName = null;
       if (LoadWithParameterSupported)
