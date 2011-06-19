@@ -1,4 +1,6 @@
 Imports System.Windows.Forms
+Imports MediaPortal.Util
+Imports Cornerstone.Tools
 
 Public Class AntRecord
     'Inherits Xml.XmlElement
@@ -705,11 +707,11 @@ Public Class AntRecord
                                     End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
-                                    If ((wtitle.Contains(SearchString) Or wtitle.Replace(":", "").Replace("  ", " ").Contains(SearchString)) And wyear = _InternetSearchHintYear) Then
+                                    If ((wtitle.Contains(SearchString) Or wtitle.Replace(":", "").Replace("  ", " ").Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 3) And wyear = _InternetSearchHintYear) Then
                                         '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
-                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & SearchString & ")."
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & wurl.Item(i).Title & ") and FuzziDistance = '" & FuzziDistance(SearchString, wurl.Item(i).Title.ToString) & "'."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
                                             Exit Sub
                                         End If
@@ -726,11 +728,11 @@ Public Class AntRecord
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If _InternetSearchHintYear <> "" And _InternetSearchHintYear.Length >= 4 And wyear <> "" And wyear.Length >= 4 Then
-                                        If ((wtitle.Contains(SearchString) Or wtitle.Replace(":", "").Replace("  ", " ").Contains(SearchString)) And wyear <> "" And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
+                                        If ((wtitle.Contains(SearchString) Or wtitle.Replace(":", "").Replace("  ", " ").Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 3) And wyear <> "" And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
                                             '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                             _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                             _InternetLookupOK = True
-                                            _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & SearchString & ")."
+                                            _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & wurl.Item(i).Title & ") and FuzziDistance = '" & FuzziDistance(SearchString, wurl.Item(i).Title.ToString) & "'."
                                             If bgwFolderScanUpdate.CancellationPending = True Then
                                                 Exit Sub
                                             End If
@@ -759,20 +761,20 @@ Public Class AntRecord
                                         index = i
                                     End If
                                 Next
-                                If (CountNameMatch = 1) Then
+                                If (CountNameMatch = 1 And FuzziDistance(SearchString, wurl.Item(index).Title.ToString) < 5) Then
                                     _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                     _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with single match."
+                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with single match and FuzziDistance = '" & FuzziDistance(SearchString, wurl.Item(index).Title.ToString) & "'."
                                     If bgwFolderScanUpdate.CancellationPending = True Then
                                         Exit Sub
                                     End If
                                     Exit While
                                 End If
                                 ' more results found
-                                If (CountNameMatch = 2) Then
+                                If (CountNameMatch = 2 And FuzziDistance(SearchString, wurl.Item(index).Title.ToString) < 10) Then
                                     _InternetData = Gb.GetDetail(wurl.Item(indexFirstMatch).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                     _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with DOUBLE match - using first match."
+                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with DOUBLE match and FuzziDistance = '" & FuzziDistance(SearchString, wurl.Item(index).Title.ToString) & "' - using first match."
                                     If bgwFolderScanUpdate.CancellationPending = True Then
                                         Exit Sub
                                     End If
@@ -798,14 +800,29 @@ Public Class AntRecord
                                     '_InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage)
                                     _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                     _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by name match (" & SearchString & ") with single match."
+                                    _LastOutputMessage = SearchString & " - " & " Movie found by name match (" & wurl.Item(index).Title & ") with single match."
+                                    If bgwFolderScanUpdate.CancellationPending = True Then
+                                        Exit Sub
+                                    End If
+                                    Exit While
+                                End If
+
+                                'Fuzzi Matching - try to find the best one that matches max distance allowed
+                                CountNameMatch = 0
+                                index = 0
+                                Dim matchingDistance As Integer = Integer.MaxValue
+                                index = FuzzyMatch(SearchString, wurl, matchingDistance)
+                                If index <> -1 And matchingDistance < 4 Then
+                                    _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                    _InternetLookupOK = True
+                                    _LastOutputMessage = SearchString & " - " & " Movie found by FuzzySearch (" & wurl.Item(index).Title & ") with (distance = " & matchingDistance & ")."
                                     If bgwFolderScanUpdate.CancellationPending = True Then
                                         Exit Sub
                                     End If
                                     Exit While
                                 End If
                             End If
-                            _LastOutputMessage = SearchString & " - " & wurl.Count.ToString & " Movies found from Internet lookup."
+                            _LastOutputMessage = SearchString & " - " & wurl.Count.ToString & " Movies found from Internet lookup - no matching possible."
                             _InternetLookupOK = False
                             Exit While
                             'dtmulti.Rows.Add(FilePath)
@@ -817,6 +834,61 @@ Public Class AntRecord
             _LastOutputMessage = "ERROR : Error on Internet Lookup for " & _FileName.ToString & " : " & ex.Message.ToString & " - Stacktrace: " & ex.StackTrace.ToString
         End Try
     End Sub
+
+    Function FuzzyMatch(ByVal searchtitle As String, ByVal wurl As ArrayList, ByRef matchingDistance As Integer) As Integer
+        Dim matchingIndex As Integer = -1
+        matchingDistance = Integer.MaxValue
+        Dim isAmbiguous As Boolean = False
+
+
+        For index As Integer = 0 To wurl.Count - 1
+            'searchtitle = GetSearchString(searchtitle) ' might be unneccessary, as already done by AMCU
+            'Dim distance As Integer = Levenshtein.Match(searchtitle, wurl.Item(index).Title.ToString.ToLower())
+            Dim distance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, wurl.Item(index).Title.ToString)
+            If (distance = matchingDistance And matchingDistance <> Integer.MaxValue) Then
+                isAmbiguous = True
+            End If
+
+            If (distance < matchingDistance) Then
+                isAmbiguous = False
+                matchingDistance = distance
+                matchingIndex = index
+            End If
+        Next
+        If isAmbiguous = True Then
+            Return -1
+        End If
+        Return matchingIndex
+    End Function
+
+    Function GetSearchString(ByVal strMovie As String) As String
+        Dim strUrl As String = strMovie
+        strUrl = strUrl.Trim()
+        Dim rx As New Regex("(([\(\{\[]|\b)((576|720|1080)[pi]|dir(ectors )?cut|dvd([r59]|rip|scr(eener)?)|(avc)?hd|wmv|ntsc|pal|mpeg|dsr|r[1-5]|bd[59]|dts|ac3|blu(-)?ray|[hp]dtv|stv|hddvd|xvid|divx|x264|dxva|(?-i)FEST[Ii]VAL|L[iI]M[iI]TED|[WF]S|PROPER|REPACK|RER[Ii]P|REAL|RETA[Ii]L|EXTENDED|REMASTERED|UNRATED|CHRONO|THEATR[Ii]CAL|DC|SE|UNCUT|[Ii]NTERNAL|V\d{1}|BR[Rr]ip|[DS]UBBED)([\]\)\}]|\b)(-[^\s]+$)?)", RegexOptions.IgnoreCase)
+        strUrl = rx.Replace(strUrl, "").Replace(".", " ").Replace("_", " ").Trim()
+        Return strUrl
+    End Function
+
+    Function CloseEnough(ByVal searchtitle As String, ByVal movietitle As String) As Boolean
+        Dim AutoApprovalTreshold As Integer = 2
+        Dim distance As Integer
+        distance = AdvancedStringComparer.Levenshtein(searchtitle, movietitle)
+        If (distance <= AutoApprovalTreshold = True) Then
+            Return True
+        End If
+        'For Each currAltTitle As String in movie.AlternateTitles) DO
+        '    distance = Grabber.GrabUtil.AdvancedStringComparer.Levenshtein(title, currAltTitle)
+
+        '    If (distance <= MovingPicturesCore.Settings.AutoApproveThreshold) Then
+        '        Return True
+        '    End If
+        'Next
+        Return False
+    End Function
+
+    Function FuzziDistance(ByVal searchtitle As String, ByVal movietitle As String) As Integer
+        Return AdvancedStringComparer.Levenshtein(searchtitle, movietitle)
+    End Function
 
     Public Sub ProcessFile(ByVal ProcessMode As Process_Mode_Names)
 
