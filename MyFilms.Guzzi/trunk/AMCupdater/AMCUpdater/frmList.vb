@@ -1,12 +1,10 @@
+Imports System.Windows.Forms
 Imports MediaPortal.Configuration
 
 Public Class frmList
 
     Private SearchTextChanged As Boolean = False
 
-    Private Sub lstOptions_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
-        Me.DialogResult = Windows.Forms.DialogResult.OK
-    End Sub
     Private Sub lstOptionsExt_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstOptionsExt.DoubleClick
         Me.DialogResult = Windows.Forms.DialogResult.OK
     End Sub
@@ -14,28 +12,22 @@ Public Class frmList
     Private Sub btnSearchAgain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchAgain.Click
         btnSearchAgain.Enabled = False
         If txtSearchString.Text <> "" Then
-            lstOptions.Items.Clear()
             lstOptionsExt.Rows.Clear()
-            lstOptions.Items.Add("... now searching for results ...")
             lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", ""})
             'Thread.Sleep(5)
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
             wurl.Clear()
             wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
-            lstOptions.Items.Clear()
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
-                    lstOptions.Items.Add(wurl.Item(i).Title)
                     lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL})
                 Next
-                lstOptions.SelectedIndex = 0
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
             Else
-                lstOptions.Items.Add("No results found !")
                 lstOptionsExt.Rows.Add(New String() {"No results found !", "", ""})
                 btnOK.Enabled = False
             End If
@@ -49,25 +41,19 @@ Public Class frmList
         If txtSearchhintIMDB_Id.Text <> "" And txtSearchhintIMDB_Id.Text.StartsWith("tt") Then
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
-            lstOptions.Items.Clear()
             lstOptionsExt.Rows.Clear()
-            lstOptions.Items.Add("... now searching for results ...")
             lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", ""})
             wurl.Clear()
             wurl = Gb.ReturnURL(txtSearchhintIMDB_Id.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
-            lstOptions.Items.Clear()
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
-                    lstOptions.Items.Add(wurl.Item(i).Title)
                     lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL})
                 Next
-                lstOptions.SelectedIndex = 0
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
             Else
-                lstOptions.Items.Add("No results found !")
                 lstOptionsExt.Rows.Add(New String() {"No results found !", "", ""})
                 btnOK.Enabled = False
             End If
@@ -133,8 +119,8 @@ Public Class frmList
             Else
                 'Current results match search text - return OK if an item is selected:
                 e.Handled = True
-                If lstOptions.Items.Count > 0 Then
-                    If lstOptions.Items(0).ToString <> "Movie not found..." Then
+                If lstOptionsExt.Rows.Count > 0 Then
+                    If lstOptionsExt("Title", 0).Value.ToString() <> "Movie not found..." Then
                         Me.DialogResult = Windows.Forms.DialogResult.OK
                     End If
                 End If
@@ -147,13 +133,16 @@ Public Class frmList
     Private Sub frmList_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         'Console.WriteLine(e.KeyCode.ToString)
         If e.KeyCode = Windows.Forms.Keys.Up Or e.KeyCode = Windows.Forms.Keys.Down Then
+            Dim rowToDelete As Int32 = Me.lstOptionsExt.Rows.GetFirstRow(DataGridViewElementStates.Selected)
             If e.KeyCode = Windows.Forms.Keys.Up Then
-                If Me.lstOptions.SelectedIndex > 0 Then
-                    Me.lstOptions.SelectedIndex -= 1
+                If rowToDelete > 0 Then
+                    Me.lstOptionsExt.Rows(rowToDelete).Selected = False
+                    Me.lstOptionsExt.Rows(rowToDelete - 1).Selected = True
                 End If
             ElseIf e.KeyCode = Windows.Forms.Keys.Down Then
-                If Me.lstOptions.SelectedIndex < Me.lstOptions.Items.Count - 1 Then
-                    Me.lstOptions.SelectedIndex += 1
+                If rowToDelete < Me.lstOptionsExt.Rows.Count - 1 Then
+                    Me.lstOptionsExt.Rows(rowToDelete).Selected = False
+                    Me.lstOptionsExt.Rows(rowToDelete + 1).Selected = True
                 End If
             End If
             e.Handled = True
@@ -215,6 +204,24 @@ Public Class frmList
             If (e.ColumnIndex = Me.lstOptionsExt.Columns("Weblink").Index) Then
                 Dim Filepath As String = Me.lstOptionsExt("Weblink", e.RowIndex).Value.ToString()
                 System.Diagnostics.Process.Start(Filepath)
+
+                'Using p = New Process
+                '    Dim psi As New ProcessStartInfo
+                '    psi.FileName = Filepath
+                '    psi.UseShellExecute = True
+                '    psi.WindowStyle = ProcessWindowStyle.Normal
+                '    psi.Arguments = ""
+                '    psi.ErrorDialog = True
+                '    If (OSInfo.OSInfo.VistaOrLater()) Then
+                '        psi.Verb = "runas"
+                '    End If
+                '    p.StartInfo = psi
+                '    Try
+                '        p.Start()
+                '    Catch
+                '    End Try
+                'End Using
+
             End If
         Catch ex As Exception
         End Try

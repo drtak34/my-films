@@ -54,7 +54,7 @@ Partial Class frmList
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(480, 308)
+        Me.btnCancel.Location = New System.Drawing.Point(480, 364)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(94, 23)
         Me.btnCancel.TabIndex = 50
@@ -64,7 +64,7 @@ Partial Class frmList
         'btnOK
         '
         Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnOK.Location = New System.Drawing.Point(614, 308)
+        Me.btnOK.Location = New System.Drawing.Point(614, 364)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(93, 23)
         Me.btnOK.TabIndex = 70
@@ -80,7 +80,7 @@ Partial Class frmList
         '
         'btnSearchAgain
         '
-        Me.btnSearchAgain.Location = New System.Drawing.Point(26, 308)
+        Me.btnSearchAgain.Location = New System.Drawing.Point(26, 364)
         Me.btnSearchAgain.Name = "btnSearchAgain"
         Me.btnSearchAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnSearchAgain.TabIndex = 40
@@ -107,7 +107,7 @@ Partial Class frmList
         '
         'btnDontAskAgain
         '
-        Me.btnDontAskAgain.Location = New System.Drawing.Point(374, 308)
+        Me.btnDontAskAgain.Location = New System.Drawing.Point(374, 364)
         Me.btnDontAskAgain.Name = "btnDontAskAgain"
         Me.btnDontAskAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnDontAskAgain.TabIndex = 60
@@ -117,7 +117,7 @@ Partial Class frmList
         'chkDontAskAgain
         '
         Me.chkDontAskAgain.AutoSize = True
-        Me.chkDontAskAgain.Location = New System.Drawing.Point(191, 313)
+        Me.chkDontAskAgain.Location = New System.Drawing.Point(191, 369)
         Me.chkDontAskAgain.Name = "chkDontAskAgain"
         Me.chkDontAskAgain.Size = New System.Drawing.Size(15, 14)
         Me.chkDontAskAgain.TabIndex = 49
@@ -170,7 +170,7 @@ Partial Class frmList
         '
         'btnCancelFromDialog
         '
-        Me.btnCancelFromDialog.Location = New System.Drawing.Point(244, 308)
+        Me.btnCancelFromDialog.Location = New System.Drawing.Point(244, 364)
         Me.btnCancelFromDialog.Name = "btnCancelFromDialog"
         Me.btnCancelFromDialog.Size = New System.Drawing.Size(97, 23)
         Me.btnCancelFromDialog.TabIndex = 76
@@ -251,10 +251,10 @@ Partial Class frmList
         Me.lstOptionsExt.ReadOnly = True
         Me.lstOptionsExt.RowHeadersVisible = False
         Me.lstOptionsExt.RowHeadersWidth = 11
-        Me.lstOptionsExt.RowTemplate.Height = 14
+        Me.lstOptionsExt.RowTemplate.Height = 15
         Me.lstOptionsExt.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.lstOptionsExt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.lstOptionsExt.Size = New System.Drawing.Size(689, 212)
+        Me.lstOptionsExt.Size = New System.Drawing.Size(689, 266)
         Me.lstOptionsExt.TabIndex = 83
         '
         'Title
@@ -277,11 +277,10 @@ Partial Class frmList
         '
         'Weblink
         '
-        Me.Weblink.ActiveLinkColor = System.Drawing.Color.DimGray
+        Me.Weblink.ActiveLinkColor = System.Drawing.Color.Black
         Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.Weblink.FillWeight = 75.54945!
         Me.Weblink.HeaderText = "Weblink"
-        Me.Weblink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
         Me.Weblink.LinkColor = System.Drawing.Color.LightGray
         Me.Weblink.Name = "Weblink"
         Me.Weblink.ReadOnly = True
@@ -293,7 +292,7 @@ Partial Class frmList
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(717, 343)
+        Me.ClientSize = New System.Drawing.Size(717, 396)
         Me.ControlBox = False
         Me.Controls.Add(Me.lstOptionsExt)
         Me.Controls.Add(Me.Label5)

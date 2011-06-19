@@ -538,7 +538,6 @@ Public Class AntRecord
                             frmList.chkDontAskAgain.Checked = False
                             frmList.txtTmpParserFilePath.Text = _ParserPath
                             frmList.txtTmpParserFilePathShort.Text = _ParserPath.Substring(_ParserPath.LastIndexOf("\") + 1)
-                            frmList.lstOptions.Items.Clear()
                             frmList.lstOptionsExt.Rows.Clear()
                             'For Each row As System.Windows.Forms.DataGridViewRow In frmList.lstOptionsExt.Rows
                             '    frmList.lstOptionsExt.Rows.Remove(row)
@@ -567,7 +566,6 @@ Public Class AntRecord
                                 frmList.txtSource.Text = _FilePath
                             End If
                             If (wurl.Count = 0) Then
-                                frmList.lstOptions.Items.Add("Movie not found...")
                                 frmList.lstOptionsExt.Rows.Add(New String() {"Movie not found...", "", ""})
                             Else
                                 For i As Integer = 0 To wurl.Count - 1
@@ -589,18 +587,15 @@ Public Class AntRecord
                                         Exit While
                                     End If
                                     If wyear = _InternetSearchHintYear Then
-                                        frmList.lstOptions.Items.Add(wtitle & " - (+++ recommended by year search hint +++)")
                                         frmList.lstOptionsExt.Rows.Add(New String() {wtitle & " - (+++ recommended by year hint +++)", wyear, wmovieurl})
                                     Else
-                                        frmList.lstOptions.Items.Add(wtitle & "")
                                         frmList.lstOptionsExt.Rows.Add(New String() {wtitle, wyear, wmovieurl})
                                     End If
                                 Next
                             End If
-                            If frmList.lstOptions.Items.Count > 0 Then
-                                frmList.lstOptions.SelectedIndex = 0
+                            If frmList.lstOptionsExt.Rows.Count > 0 Then
                                 frmList.lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-                                frmList.lstOptionsExt.Rows(0).Selected = True
+                                frmList.lstOptionsExt.Rows(0).Selected = True 'set first line as selected
                                 frmList.btnOK.Enabled = True
                             Else
                                 frmList.btnOK.Enabled = False
@@ -621,10 +616,10 @@ Public Class AntRecord
                                 _LastOutputMessage = "Failed to load Internet Data for " & FilePath
                                 Exit While
                             End If
-                            If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And frmList.lstOptions.SelectedItem.ToString = "+++") Then
+                            If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And frmList.lstOptionsExt("Title", wentry).Value.ToString() = "+++") Then
                                 wpage = Convert.ToInt16(wurl.Item(wentry).IMDBURL)
                             Else
-                                If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And frmList.lstOptions.SelectedItem.ToString = "---") Then
+                                If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And frmList.lstOptionsExt("Title", wentry).Value.ToString() = "---") Then
                                     wpage = Convert.ToInt16(wurl.Item(wentry).IMDBURL)
                                 Else
                                     If (returnValue = Windows.Forms.DialogResult.Abort) Then
@@ -632,7 +627,7 @@ Public Class AntRecord
                                         _LastOutputMessage = "UserAbort ! - Scan cancelled from Userdialog !"
                                         Exit While
                                     End If
-                                    If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And (frmList.lstOptions.SelectedItem.ToString.Length > 0)) Then
+                                    If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And (frmList.lstOptionsExt("Title", wentry).Value.ToString().Length > 0)) Then
                                         '_InternetData = Gb.GetDetail(wurl.Item(wentry).url, _ImagePath, frmList.txtTmpParserFilePath.Text, _DownloadImage)
                                         _InternetData = Gb.GetDetail(wurl.Item(wentry).url, _ImagePath, frmList.txtTmpParserFilePath.Text, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
