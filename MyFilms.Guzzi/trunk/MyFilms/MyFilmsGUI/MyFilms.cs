@@ -4929,17 +4929,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ichoice++;
       }
 
-      if (MyFilmsDetail.ExtendedStartmode("Context Movie: Internet data update")) // check if specialmode is configured for disabled features
-      {
-        //Disabled due to problems of updating DB (requires debugging before reenabling...)
-        if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
-        {
-          dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
-          upd_choice[ichoice] = "grabber";
-          ichoice++;
-        }
-      }
-      
       if (MyFilms.conf.StrFanart && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
       {
         dlg.Add(GUILocalizeStrings.Get(1079862));
@@ -4949,6 +4938,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         upd_choice[ichoice] = "deletefanart";
         ichoice++;
       }
+
+      //if (MyFilmsDetail.ExtendedStartmode("Context Movie: Internet data update")) // check if specialmode is configured for disabled features
+      //{
+        //Disabled due to problems of updating DB (requires debugging before reenabling...)
+        if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+        {
+          dlg.Add(GUILocalizeStrings.Get(5910));        //Update Internet Movie Details
+          upd_choice[ichoice] = "grabber";
+          ichoice++;
+        }
+      //}
 
       //if (facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
       //{
