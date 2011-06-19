@@ -2955,36 +2955,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
-        //private void CycleSeriesPoster(DBSeries series, bool next)
-        //{
-        //  if (series.PosterList.Count <= 1) return;
-
-        //  int nCurrent = series.PosterList.IndexOf(series.Poster);
-
-        //  if (next)
-        //  {
-        //    nCurrent++;
-        //    if (nCurrent >= series.PosterList.Count)
-        //      nCurrent = 0;
-        //  }
-        //  else
-        //  {
-        //    nCurrent--;
-        //    if (nCurrent < 0)
-        //      nCurrent = series.PosterList.Count - 1;
-        //  }
-
-        //  series.Poster = series.PosterList[nCurrent];
-        //  series.Commit();
-
-        //  // No need to re-load the facade for non-graphical layouts
-        //  if (m_Facade.CurrentLayout == GUIFacadeControl.Layout.List)
-        //    seriesposter.Filename = ImageAllocator.GetSeriesPosterAsFilename(series);
-        //  else
-        //    LoadFacade();
-        //}
-
-
         //-------------------------------------------------------------------------------------------
         //  Change local Cover Image
         //-------------------------------------------------------------------------------------------        
