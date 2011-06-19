@@ -22,7 +22,8 @@ Partial Class frmList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lstOptions = New System.Windows.Forms.ListBox
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.btnCancel = New System.Windows.Forms.Button
         Me.btnOK = New System.Windows.Forms.Button
         Me.txtSearchString = New System.Windows.Forms.TextBox
@@ -43,15 +44,12 @@ Partial Class frmList
         Me.Label4 = New System.Windows.Forms.Label
         Me.txtSource = New System.Windows.Forms.TextBox
         Me.Label5 = New System.Windows.Forms.Label
+        Me.lstOptionsExt = New System.Windows.Forms.DataGridView
+        Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Year = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Weblink = New System.Windows.Forms.DataGridViewLinkColumn
+        CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'lstOptions
-        '
-        Me.lstOptions.FormattingEnabled = True
-        Me.lstOptions.Location = New System.Drawing.Point(14, 85)
-        Me.lstOptions.Name = "lstOptions"
-        Me.lstOptions.Size = New System.Drawing.Size(693, 212)
-        Me.lstOptions.TabIndex = 30
         '
         'btnCancel
         '
@@ -66,7 +64,7 @@ Partial Class frmList
         'btnOK
         '
         Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnOK.Location = New System.Drawing.Point(612, 308)
+        Me.btnOK.Location = New System.Drawing.Point(614, 308)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(93, 23)
         Me.btnOK.TabIndex = 70
@@ -189,7 +187,7 @@ Partial Class frmList
         '
         'btnSearchAgainWithIMDB_Id
         '
-        Me.btnSearchAgainWithIMDB_Id.Location = New System.Drawing.Point(612, 58)
+        Me.btnSearchAgainWithIMDB_Id.Location = New System.Drawing.Point(614, 58)
         Me.btnSearchAgainWithIMDB_Id.Name = "btnSearchAgainWithIMDB_Id"
         Me.btnSearchAgainWithIMDB_Id.Size = New System.Drawing.Size(93, 20)
         Me.btnSearchAgainWithIMDB_Id.TabIndex = 78
@@ -231,6 +229,65 @@ Partial Class frmList
         Me.Label5.TabIndex = 82
         Me.Label5.Text = "Media Source"
         '
+        'lstOptionsExt
+        '
+        Me.lstOptionsExt.AllowUserToAddRows = False
+        Me.lstOptionsExt.AllowUserToDeleteRows = False
+        Me.lstOptionsExt.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Silver
+        Me.lstOptionsExt.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.lstOptionsExt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.lstOptionsExt.BackgroundColor = System.Drawing.SystemColors.Window
+        Me.lstOptionsExt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.lstOptionsExt.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.lstOptionsExt.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
+        Me.lstOptionsExt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.lstOptionsExt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Title, Me.Year, Me.Weblink})
+        Me.lstOptionsExt.Location = New System.Drawing.Point(18, 85)
+        Me.lstOptionsExt.Margin = New System.Windows.Forms.Padding(1)
+        Me.lstOptionsExt.MultiSelect = False
+        Me.lstOptionsExt.Name = "lstOptionsExt"
+        Me.lstOptionsExt.ReadOnly = True
+        Me.lstOptionsExt.RowHeadersVisible = False
+        Me.lstOptionsExt.RowHeadersWidth = 11
+        Me.lstOptionsExt.RowTemplate.Height = 14
+        Me.lstOptionsExt.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.lstOptionsExt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.lstOptionsExt.Size = New System.Drawing.Size(689, 212)
+        Me.lstOptionsExt.TabIndex = 83
+        '
+        'Title
+        '
+        Me.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Title.FillWeight = 377.7473!
+        Me.Title.HeaderText = "Title"
+        Me.Title.Name = "Title"
+        Me.Title.ReadOnly = True
+        '
+        'Year
+        '
+        Me.Year.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Year.DefaultCellStyle = DataGridViewCellStyle2
+        Me.Year.HeaderText = "Year"
+        Me.Year.Name = "Year"
+        Me.Year.ReadOnly = True
+        Me.Year.Width = 53
+        '
+        'Weblink
+        '
+        Me.Weblink.ActiveLinkColor = System.Drawing.Color.DimGray
+        Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Weblink.FillWeight = 75.54945!
+        Me.Weblink.HeaderText = "Weblink"
+        Me.Weblink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.Weblink.LinkColor = System.Drawing.Color.LightGray
+        Me.Weblink.Name = "Weblink"
+        Me.Weblink.ReadOnly = True
+        Me.Weblink.TrackVisitedState = False
+        Me.Weblink.Width = 51
+        '
         'frmList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -238,6 +295,7 @@ Partial Class frmList
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(717, 343)
         Me.ControlBox = False
+        Me.Controls.Add(Me.lstOptionsExt)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtSource)
         Me.Controls.Add(Me.Label4)
@@ -258,18 +316,17 @@ Partial Class frmList
         Me.Controls.Add(Me.txtSearchString)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.lstOptions)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.KeyPreview = True
         Me.Name = "frmList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Please select the correct entry"
+        CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents lstOptions As System.Windows.Forms.ListBox
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
     Friend WithEvents txtSearchString As System.Windows.Forms.TextBox
@@ -290,4 +347,8 @@ Partial Class frmList
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtSource As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents lstOptionsExt As System.Windows.Forms.DataGridView
+    Friend WithEvents Title As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Year As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Weblink As System.Windows.Forms.DataGridViewLinkColumn
 End Class

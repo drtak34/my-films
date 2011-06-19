@@ -4,7 +4,10 @@ Public Class frmList
 
     Private SearchTextChanged As Boolean = False
 
-    Private Sub lstOptions_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstOptions.DoubleClick
+    Private Sub lstOptions_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs)
+        Me.DialogResult = Windows.Forms.DialogResult.OK
+    End Sub
+    Private Sub lstOptionsExt_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstOptionsExt.DoubleClick
         Me.DialogResult = Windows.Forms.DialogResult.OK
     End Sub
 
@@ -12,21 +15,28 @@ Public Class frmList
         btnSearchAgain.Enabled = False
         If txtSearchString.Text <> "" Then
             lstOptions.Items.Clear()
+            lstOptionsExt.Rows.Clear()
             lstOptions.Items.Add("... now searching for results ...")
+            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", ""})
             'Thread.Sleep(5)
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
             wurl.Clear()
             wurl = Gb.ReturnURL(txtSearchString.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
             lstOptions.Items.Clear()
+            lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
                     lstOptions.Items.Add(wurl.Item(i).Title)
+                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL})
                 Next
                 lstOptions.SelectedIndex = 0
+                lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+                lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
             Else
                 lstOptions.Items.Add("No results found !")
+                lstOptionsExt.Rows.Add(New String() {"No results found !", "", ""})
                 btnOK.Enabled = False
             End If
             SearchTextChanged = False
@@ -40,18 +50,25 @@ Public Class frmList
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
             lstOptions.Items.Clear()
+            lstOptionsExt.Rows.Clear()
             lstOptions.Items.Add("... now searching for results ...")
+            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", ""})
             wurl.Clear()
             wurl = Gb.ReturnURL(txtSearchhintIMDB_Id.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
             lstOptions.Items.Clear()
+            lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
                     lstOptions.Items.Add(wurl.Item(i).Title)
+                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL})
                 Next
                 lstOptions.SelectedIndex = 0
+                lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+                lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
             Else
                 lstOptions.Items.Add("No results found !")
+                lstOptionsExt.Rows.Add(New String() {"No results found !", "", ""})
                 btnOK.Enabled = False
             End If
             SearchTextChanged = False
@@ -69,7 +86,11 @@ Public Class frmList
         Dim OpenParserFileDialog = New System.Windows.Forms.OpenFileDialog
         Try
             With OpenParserFileDialog
-                .InitialDirectory = Environment.SpecialFolder.Desktop
+                If System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\scripts\MyFilms") Then
+                    .InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\scripts\MyFilms"
+                Else
+                    .InitialDirectory = Environment.SpecialFolder.Desktop
+                End If
                 .FileName = ""
                 .CheckFileExists = True
                 .CheckPathExists = True
@@ -188,4 +209,15 @@ Public Class frmList
     Private Sub txtTmpParserFilePathShort_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTmpParserFilePathShort.TextChanged
         btnSearchAgain.Enabled = True
     End Sub
+
+    Private Sub lstOptionsExt_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles lstOptionsExt.CellContentClick
+        Try
+            If (e.ColumnIndex = Me.lstOptionsExt.Columns("Weblink").Index) Then
+                Dim Filepath As String = Me.lstOptionsExt("Weblink", e.RowIndex).Value.ToString()
+                System.Diagnostics.Process.Start(Filepath)
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
+
 End Class

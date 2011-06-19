@@ -1,3 +1,5 @@
+Imports System.Windows.Forms
+
 Public Class AntRecord
     'Inherits Xml.XmlElement
 
@@ -469,6 +471,7 @@ Public Class AntRecord
                         Exit While
                     Else
                         Dim wtitle As String
+                        Dim wmovieurl As String
                         Dim wyear As String
                         Dim dyear As Double
                         Dim wimdb As String
@@ -536,6 +539,26 @@ Public Class AntRecord
                             frmList.txtTmpParserFilePath.Text = _ParserPath
                             frmList.txtTmpParserFilePathShort.Text = _ParserPath.Substring(_ParserPath.LastIndexOf("\") + 1)
                             frmList.lstOptions.Items.Clear()
+                            frmList.lstOptionsExt.Rows.Clear()
+                            'For Each row As System.Windows.Forms.DataGridViewRow In frmList.lstOptionsExt.Rows
+                            '    frmList.lstOptionsExt.Rows.Remove(row)
+                            'Next
+
+
+                            'Dim rowToDelete As Int32 = -1
+                            'For i As Integer = 0 To frmList.lstOptionsExt.Rows.Count
+                            '    rowToDelete = frmList.lstOptionsExt.Rows.GetFirstRow(DataGridViewElementStates.Displayed)
+                            '    If rowToDelete > -1 Then
+                            '        frmList.lstOptionsExt.Rows.RemoveAt(rowToDelete)
+                            '        rowToDelete = -1
+                            '    End If
+                            'Next
+
+                            'Dim rowToDelete As Int32 = frmList.lstOptionsExt.Rows.GetFirstRow(DataGridViewElementStates.Selected)
+                            'If rowToDelete > -1 Then
+                            '    frmList.lstOptionsExt.Rows.RemoveAt(rowToDelete)
+                            'End If
+
                             If _FileName.ToString <> "" Then
                                 frmList.Text = _FileName
                                 frmList.txtSource.Text = _FileName
@@ -545,6 +568,7 @@ Public Class AntRecord
                             End If
                             If (wurl.Count = 0) Then
                                 frmList.lstOptions.Items.Add("Movie not found...")
+                                frmList.lstOptionsExt.Rows.Add(New String() {"Movie not found...", "", ""})
                             Else
                                 For i As Integer = 0 To wurl.Count - 1
                                     If wurl.Item(i).Year.ToString = _InternetSearchHintYear Then
@@ -554,6 +578,7 @@ Public Class AntRecord
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString
+                                    wmovieurl = wurl.Item(i).URL.ToString
                                     If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint) And _InternetLookupAlwaysPrompt = False And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
                                         '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
@@ -565,13 +590,17 @@ Public Class AntRecord
                                     End If
                                     If wyear = _InternetSearchHintYear Then
                                         frmList.lstOptions.Items.Add(wtitle & " - (+++ recommended by year search hint +++)")
+                                        frmList.lstOptionsExt.Rows.Add(New String() {wtitle & " - (+++ recommended by year hint +++)", wyear, wmovieurl})
                                     Else
                                         frmList.lstOptions.Items.Add(wtitle & "")
+                                        frmList.lstOptionsExt.Rows.Add(New String() {wtitle, wyear, wmovieurl})
                                     End If
                                 Next
                             End If
                             If frmList.lstOptions.Items.Count > 0 Then
                                 frmList.lstOptions.SelectedIndex = 0
+                                frmList.lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+                                frmList.lstOptionsExt.Rows(0).Selected = True
                                 frmList.btnOK.Enabled = True
                             Else
                                 frmList.btnOK.Enabled = False
@@ -583,8 +612,11 @@ Public Class AntRecord
                             returnValue = frmList.ShowDialog()
                             SearchString = frmList.txtSearchString.Text
                             Dim blah4 As Boolean = frmList.chkDontAskAgain.Checked
-                            Dim wentry As Integer = frmList.lstOptions.SelectedIndex
-                            If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And frmList.lstOptions.SelectedItem.ToString = "Movie not found...") Then
+                            'Dim wentry As Integer = frmList.lstOptions.SelectedIndex
+                            Dim wentry As Integer = frmList.lstOptionsExt.Rows.GetFirstRow(DataGridViewElementStates.Selected)
+
+                            If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And frmList.lstOptionsExt("Title", wentry).Value.ToString() = "Movie not found...") Then
+                                'If ((returnValue = Windows.Forms.DialogResult.OK) And (wentry > -1) And frmList.lstOptions.SelectedItem.ToString = "Movie not found...") Then
                                 _InternetLookupOK = False
                                 _LastOutputMessage = "Failed to load Internet Data for " & FilePath
                                 Exit While
