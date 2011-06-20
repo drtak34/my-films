@@ -95,7 +95,7 @@ Namespace My
 
         Class BatchApplication
             Sub Main()
-
+                Console.WriteLine("AMCupdater: Starting in Batch Mode")
                 LogEvent(" : Starting Batch Mode", EventLogLevel.ImportantEvent)
                 LogEvent(" - Movie Path : " & CurrentSettings.Movie_Scan_Path, EventLogLevel.ImportantEvent)
                 LogEvent(" - XML File Path : " & CurrentSettings.XML_File, EventLogLevel.ImportantEvent)

@@ -6139,7 +6139,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         psi.Verb = "runas";
                     }
-
+                    // psi.RedirectStandardOutput = true; // redirect output to streamreader - ToDo: add reader to use and add console output to AMCU !
                     p.StartInfo = psi;
                     LogMyFilms.Debug("RunAMCupdater - Starting external command: {0} {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
                     try
