@@ -227,4 +227,11 @@ Public Class frmList
         End Try
     End Sub
 
+    Private Sub btnSearchGoogle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchGoogle.Click
+        Dim t As String = txtSearchString.Text & " (" & txtSearchintYear.Text & ")"
+        Try
+            Process.Start("http://google.com/search?q=" + t)
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

@@ -279,6 +279,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AMCUpdater.ico" />
+    <None Include="Resources\google_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

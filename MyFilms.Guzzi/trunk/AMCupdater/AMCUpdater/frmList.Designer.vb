@@ -45,6 +45,7 @@ Partial Class frmList
         Me.txtSource = New System.Windows.Forms.TextBox
         Me.Label5 = New System.Windows.Forms.Label
         Me.lstOptionsExt = New System.Windows.Forms.DataGridView
+        Me.btnSearchGoogle = New System.Windows.Forms.Button
         Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Year = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Weblink = New System.Windows.Forms.DataGridViewLinkColumn
@@ -187,9 +188,9 @@ Partial Class frmList
         '
         'btnSearchAgainWithIMDB_Id
         '
-        Me.btnSearchAgainWithIMDB_Id.Location = New System.Drawing.Point(614, 58)
+        Me.btnSearchAgainWithIMDB_Id.Location = New System.Drawing.Point(569, 59)
         Me.btnSearchAgainWithIMDB_Id.Name = "btnSearchAgainWithIMDB_Id"
-        Me.btnSearchAgainWithIMDB_Id.Size = New System.Drawing.Size(93, 20)
+        Me.btnSearchAgainWithIMDB_Id.Size = New System.Drawing.Size(138, 20)
         Me.btnSearchAgainWithIMDB_Id.TabIndex = 78
         Me.btnSearchAgainWithIMDB_Id.Text = "Search IMDB"
         Me.btnSearchAgainWithIMDB_Id.UseVisualStyleBackColor = True
@@ -257,6 +258,16 @@ Partial Class frmList
         Me.lstOptionsExt.Size = New System.Drawing.Size(689, 266)
         Me.lstOptionsExt.TabIndex = 83
         '
+        'btnSearchGoogle
+        '
+        Me.btnSearchGoogle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSearchGoogle.Location = New System.Drawing.Point(437, 59)
+        Me.btnSearchGoogle.Name = "btnSearchGoogle"
+        Me.btnSearchGoogle.Size = New System.Drawing.Size(108, 20)
+        Me.btnSearchGoogle.TabIndex = 84
+        Me.btnSearchGoogle.Text = "Search Net"
+        Me.btnSearchGoogle.UseVisualStyleBackColor = True
+        '
         'Title
         '
         Me.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
@@ -268,7 +279,7 @@ Partial Class frmList
         'Year
         '
         Me.Year.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         Me.Year.DefaultCellStyle = DataGridViewCellStyle2
         Me.Year.HeaderText = "Year"
         Me.Year.Name = "Year"
@@ -281,7 +292,8 @@ Partial Class frmList
         Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.Weblink.FillWeight = 75.54945!
         Me.Weblink.HeaderText = "Weblink"
-        Me.Weblink.LinkColor = System.Drawing.Color.LightGray
+        Me.Weblink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.Weblink.LinkColor = System.Drawing.Color.DarkGray
         Me.Weblink.Name = "Weblink"
         Me.Weblink.ReadOnly = True
         Me.Weblink.TrackVisitedState = False
@@ -294,6 +306,7 @@ Partial Class frmList
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(717, 396)
         Me.ControlBox = False
+        Me.Controls.Add(Me.btnSearchGoogle)
         Me.Controls.Add(Me.lstOptionsExt)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.txtSource)
@@ -347,6 +360,7 @@ Partial Class frmList
     Friend WithEvents txtSource As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lstOptionsExt As System.Windows.Forms.DataGridView
+    Friend WithEvents btnSearchGoogle As System.Windows.Forms.Button
     Friend WithEvents Title As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Year As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Weblink As System.Windows.Forms.DataGridViewLinkColumn
