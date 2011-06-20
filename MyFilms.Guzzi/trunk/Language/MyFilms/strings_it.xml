@@ -62,11 +62,11 @@
     <String id="7989">Films Persone</String>
     <String id="7990">Films Immagini</String>
     <String id="7991">Films Info Persone</String>
-	<String id="200026">Paese</String>
+    <String id="200026">Paese</String>
     <String id="200027">Visto</String>
     <String id="200028">visto</String>
     <String id="200029">non visto</String>
-	<String id="200036">Ricerca manuale</String>
+    <String id="200036">Ricerca manuale</String>
     <String id="107986">My Films</String>
     <String id="107987">My Films</String>
     <String id="107988">My Films</String>
@@ -145,7 +145,7 @@
     <String id="10798636">Nome File</String>
     <String id="10798637">Nessun films corrispondente a Questa Vista!</String>
     <String id="10798638">Mostra Lista Film Completa</String>
-	<String id="10798639">Nessuno Risultato per Questa Ricerca!</String>
+    <String id="10798639">Nessuno Risultato per Questa Ricerca!</String>
     <String id="10798640">Nessun valore corrispondente a quello Cercato.</String>
     <String id="10798641">Nessun Valore da cercare.</String>
     <String id="10798642">Aggiorna Dati Film per Proprietà</String>
@@ -154,7 +154,7 @@
     <String id="10798645">Ricerca Globale (aree)</String>
     <String id="10798646">Ricerca films</String>
     <String id="10798647">Ricerca attori</String>
-	<String id="10798648">Sorgente</String>
+    <String id="10798648">Sorgente</String>
     <String id="10798649">Sorgente Trailer</String>
     <String id="10798650">Numero</String>
     <String id="10798651">Checked</String>
@@ -193,8 +193,8 @@
     <String id="10798684">Sceneggiatura</String>
     <String id="10798685">Visto</String>
     <String id="10798686">Data Visione</String>
-	<String id="10798687">ID IMDB</String>
-	<String id="10798688">ID TMDB</String>
+    <String id="10798687">ID IMDB</String>
+    <String id="10798688">ID TMDB</String>
     <String id="10798689">Settaggio Globale ...</String>
     <String id="10798690">Aggiornamento Globale ...</String>
     <String id="10798691">Visualizza Solo films con trailer ({0})</String>
@@ -207,7 +207,7 @@
     <String id="10798698">Formato Immagine</String>
     <String id="10798699">Aiuto Online Wiki (Web)</String>
     <String id="10798700">Informazioni ...</String>
-	<String id="10798701">Update Menu</String>
+    <String id="10798701">Update Menu</String>
     <String id="10798702">Update Locale...</String>
     <String id="10798703">Update Online...</String>
     <String id="10798704">Trailer ...</String>
@@ -216,16 +216,16 @@
     <String id="10798707">Subtitles ...</String>
     <String id="10798708">Update Mediainfos</String>
     <String id="10798709">Visualizza Film</String>
-	<String id="10798710">Visualizza trailer</String>
+    <String id="10798710">Visualizza trailer</String>
     <String id="10798711">Trailer YouTube (OnlineVideos)</String>
     <String id="10798712">Trailer Apple iTunes (OnlineVideos)</String>
     <String id="10798713">Films Non Visti" ({0})</String>
     <String id="10798714">Filtri Globali ...</String>
     <String id="10798715">Carica info persone (Tutti)</String>
-	<String id="10798719">Carica info films (.nfo file, locale, aggiungi info mancanti)</String>
     <String id="10798716">Trailer IMDB (OnlineVideos)</String>
     <String id="10798717">Incomplete movie data</String>
     <String id="10798718">=> {0} Film(s) are missing '{1}'</String>
+    <String id="10798719">Carica info films (.nfo file, locale, aggiungi info mancanti)</String>
     <String id="10798720">Carica info films (.nfo file, locale, sostituisci tutte le info)</String>
     <String id="10798721">Carica info films da Ant file (locale)</String>
     <String id="10798722">Memorizza films info nel Ant file (locale)</String>
@@ -236,7 +236,7 @@
     <String id="10798727">Mostra Stato Server NAS</String>
     <String id="10798728">Crea Copertina dal film</String>
     <String id="10798730">Carica info films (.nfo file, locale)</String>
-	<String id="10798731">Info Persone (IMDB)</String>
+    <String id="10798731">Info Persone (IMDB)</String>
     <String id="10798732">Scegli proprietà aggiornamento ...</String>
     <String id="10798733">Sostituisci Copertina esistente con questa?</String>
     <String id="10798734">Aggiornamento di tutte le proprietà</String>
@@ -254,12 +254,12 @@
     <String id="10798746">Non è configurato per wakeonlan!</String>
     <String id="10798747">Inizializzazione Automatica NAS non possibile...</String>
     <String id="10798748">Global Update finished !</String>
-	<String id="10798751">Dettaglio</String>
+    <String id="10798751">Dettaglio</String>
     <String id="10798752">Descrizione</String>
     <String id="10798753">Commenti</String>
     <String id="10798754">Attori</String>
     <String id="10798755">Info Tecniche</String>
-	<String id="10798761">Carica  Copertine(TMDB)</String>
+    <String id="10798761">Carica  Copertine(TMDB)</String>
     <String id="10798762">Cambia Copertine</String>
     <String id="10798770">Show only films with media available ({0})</String>
     <String id="10798771">Display options ...</String>
