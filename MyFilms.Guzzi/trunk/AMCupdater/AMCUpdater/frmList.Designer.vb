@@ -22,8 +22,12 @@ Partial Class frmList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.btnCancel = New System.Windows.Forms.Button
         Me.btnOK = New System.Windows.Forms.Button
         Me.txtSearchString = New System.Windows.Forms.TextBox
@@ -49,6 +53,7 @@ Partial Class frmList
         Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Year = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Weblink = New System.Windows.Forms.DataGridViewLinkColumn
+        Me.Distance = New System.Windows.Forms.DataGridViewTextBoxColumn
         CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -235,24 +240,45 @@ Partial Class frmList
         Me.lstOptionsExt.AllowUserToAddRows = False
         Me.lstOptionsExt.AllowUserToDeleteRows = False
         Me.lstOptionsExt.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Silver
-        Me.lstOptionsExt.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.lstOptionsExt.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.lstOptionsExt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.lstOptionsExt.BackgroundColor = System.Drawing.SystemColors.Window
         Me.lstOptionsExt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lstOptionsExt.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.lstOptionsExt.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.lstOptionsExt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.lstOptionsExt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Title, Me.Year, Me.Weblink})
+        Me.lstOptionsExt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Title, Me.Year, Me.Weblink, Me.Distance})
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.lstOptionsExt.DefaultCellStyle = DataGridViewCellStyle11
         Me.lstOptionsExt.Location = New System.Drawing.Point(18, 85)
         Me.lstOptionsExt.Margin = New System.Windows.Forms.Padding(1)
         Me.lstOptionsExt.MultiSelect = False
         Me.lstOptionsExt.Name = "lstOptionsExt"
         Me.lstOptionsExt.ReadOnly = True
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.lstOptionsExt.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.lstOptionsExt.RowHeadersVisible = False
         Me.lstOptionsExt.RowHeadersWidth = 11
-        Me.lstOptionsExt.RowTemplate.Height = 15
+        Me.lstOptionsExt.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.lstOptionsExt.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.lstOptionsExt.RowTemplate.Height = 16
+        Me.lstOptionsExt.RowTemplate.ReadOnly = True
         Me.lstOptionsExt.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.lstOptionsExt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.lstOptionsExt.Size = New System.Drawing.Size(689, 266)
@@ -265,7 +291,7 @@ Partial Class frmList
         Me.btnSearchGoogle.Name = "btnSearchGoogle"
         Me.btnSearchGoogle.Size = New System.Drawing.Size(108, 20)
         Me.btnSearchGoogle.TabIndex = 84
-        Me.btnSearchGoogle.Text = "Search Net"
+        Me.btnSearchGoogle.Text = "Search Internet"
         Me.btnSearchGoogle.UseVisualStyleBackColor = True
         '
         'Title
@@ -279,8 +305,8 @@ Partial Class frmList
         'Year
         '
         Me.Year.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Year.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Year.DefaultCellStyle = DataGridViewCellStyle8
         Me.Year.HeaderText = "Year"
         Me.Year.Name = "Year"
         Me.Year.ReadOnly = True
@@ -290,14 +316,28 @@ Partial Class frmList
         '
         Me.Weblink.ActiveLinkColor = System.Drawing.Color.Black
         Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Gray
+        Me.Weblink.DefaultCellStyle = DataGridViewCellStyle9
         Me.Weblink.FillWeight = 75.54945!
         Me.Weblink.HeaderText = "Weblink"
         Me.Weblink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.Weblink.LinkColor = System.Drawing.Color.DarkGray
+        Me.Weblink.LinkColor = System.Drawing.Color.Gray
         Me.Weblink.Name = "Weblink"
         Me.Weblink.ReadOnly = True
         Me.Weblink.TrackVisitedState = False
         Me.Weblink.Width = 51
+        '
+        'Distance
+        '
+        Me.Distance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Gray
+        Me.Distance.DefaultCellStyle = DataGridViewCellStyle10
+        Me.Distance.HeaderText = "Dist"
+        Me.Distance.Name = "Distance"
+        Me.Distance.ReadOnly = True
+        Me.Distance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.Distance.Width = 30
         '
         'frmList
         '
@@ -364,4 +404,5 @@ Partial Class frmList
     Friend WithEvents Title As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Year As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Weblink As System.Windows.Forms.DataGridViewLinkColumn
+    Friend WithEvents Distance As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

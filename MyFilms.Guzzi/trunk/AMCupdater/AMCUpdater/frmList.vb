@@ -1,5 +1,6 @@
 Imports System.Windows.Forms
 Imports MediaPortal.Configuration
+Imports Cornerstone.Tools
 
 Public Class frmList
 
@@ -10,10 +11,11 @@ Public Class frmList
     End Sub
 
     Private Sub btnSearchAgain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchAgain.Click
+        Dim distance As String
         btnSearchAgain.Enabled = False
         If txtSearchString.Text <> "" Then
             lstOptionsExt.Rows.Clear()
-            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", ""})
+            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", "", ""})
             'Thread.Sleep(5)
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
@@ -22,7 +24,12 @@ Public Class frmList
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
-                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL})
+                    If FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString) = Integer.MaxValue Then
+                        distance = ""
+                    Else
+                        distance = FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString).ToString
+                    End If
+                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL, distance})
                 Next
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
@@ -37,6 +44,10 @@ Public Class frmList
         End If
     End Sub
 
+    Function FuzziDistance(ByVal searchtitle As String, ByVal movietitle As String) As Integer
+        Return AdvancedStringComparer.Levenshtein(searchtitle, movietitle)
+    End Function
+
     Private Sub btnSearchAgainWithIMDB_Id_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearchAgainWithIMDB_Id.Click
         If txtSearchhintIMDB_Id.Text <> "" And txtSearchhintIMDB_Id.Text.StartsWith("tt") Then
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
@@ -48,7 +59,7 @@ Public Class frmList
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
-                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL})
+                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL, ""})
                 Next
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
@@ -133,16 +144,16 @@ Public Class frmList
     Private Sub frmList_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
         'Console.WriteLine(e.KeyCode.ToString)
         If e.KeyCode = Windows.Forms.Keys.Up Or e.KeyCode = Windows.Forms.Keys.Down Then
-            Dim rowToDelete As Int32 = Me.lstOptionsExt.Rows.GetFirstRow(DataGridViewElementStates.Selected)
+            Dim rowSelected As Int32 = Me.lstOptionsExt.Rows.GetFirstRow(DataGridViewElementStates.Selected)
             If e.KeyCode = Windows.Forms.Keys.Up Then
-                If rowToDelete > 0 Then
-                    Me.lstOptionsExt.Rows(rowToDelete).Selected = False
-                    Me.lstOptionsExt.Rows(rowToDelete - 1).Selected = True
+                If rowSelected > 0 Then
+                    Me.lstOptionsExt.Rows(rowSelected).Selected = False
+                    Me.lstOptionsExt.Rows(rowSelected - 1).Selected = True
                 End If
             ElseIf e.KeyCode = Windows.Forms.Keys.Down Then
-                If rowToDelete < Me.lstOptionsExt.Rows.Count - 1 Then
-                    Me.lstOptionsExt.Rows(rowToDelete).Selected = False
-                    Me.lstOptionsExt.Rows(rowToDelete + 1).Selected = True
+                If rowSelected < Me.lstOptionsExt.Rows.Count - 1 Then
+                    Me.lstOptionsExt.Rows(rowSelected).Selected = False
+                    Me.lstOptionsExt.Rows(rowSelected + 1).Selected = True
                 End If
             End If
             e.Handled = True
