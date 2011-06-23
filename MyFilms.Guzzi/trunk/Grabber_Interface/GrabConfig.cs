@@ -37,6 +37,7 @@ namespace Grabber_Interface
     private bool GLbBlockSelect = false;
     private string Body = string.Empty;
     private string BodyDetail = string.Empty;
+    private string BodyDetail2 = string.Empty;
     private string BodyLinkImg = string.Empty;
     private string BodyLinkPersons = string.Empty;
     private string BodyLinkTitles = string.Empty;
@@ -131,12 +132,13 @@ namespace Grabber_Interface
           textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Param1;
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Param2;
           break;
-        case 4:
+        case 4: // details page
           TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Value;
           TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndLink)._Value;
           textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Param1;
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Param2;
           break;
+
         default:
           TextKeyStart.Text = "";
           TextKeyStop.Text = "";
@@ -892,6 +894,25 @@ namespace Grabber_Interface
 
 
       }
+
+      // Test if there is a page for Secondary Details (like OFDB GW) and load page in BodyDetails2
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(BodyDetail, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(BodyDetail, strStart, strEnd).Trim();
+        BodyDetail2 = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+      }
+      else
+        BodyDetail2 = "";
+
       // Test if there is a redirection page for Covers and load page in BodyLinkImg
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Value;
       strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkImg)._Value;
@@ -973,11 +994,17 @@ namespace Grabber_Interface
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
       if (strStart.Length > 0)
       {
+        string strGrabPage = string.Empty;
+        if (!string.IsNullOrEmpty(BodyDetail2)) 
+          strGrabPage = BodyDetail2;
+        else
+          strGrabPage = BodyDetail;
+
         string strTemp = string.Empty;
         if (strParam1.Length > 0 && strParam2.Length > 0)
-          strTemp = GrabUtil.FindWithAction(BodyDetail, strStart, strEnd, strParam1, strParam2).Trim();
+          strTemp = GrabUtil.FindWithAction(strGrabPage, strStart, strEnd, strParam1, strParam2).Trim();
         else
-          strTemp = GrabUtil.Find(BodyDetail, strStart, strEnd).Trim();
+          strTemp = GrabUtil.Find(strGrabPage, strStart, strEnd).Trim();
         BodyLinkComment = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
       }
       else
@@ -1364,6 +1391,13 @@ namespace Grabber_Interface
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
           break;
+        case 23: // Link Secondary Details Base Page
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
+          break;
         default:
           textDReplace.Text = "";
           textDReplaceWith.Text = "";
@@ -1500,6 +1534,9 @@ namespace Grabber_Interface
         case 22:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value = TextKeyStartD.Text;
           break;
+        case 23:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value = TextKeyStartD.Text;
+          break;
         default:
           TextKeyStartD.Text = "";
           break;
@@ -1611,6 +1648,9 @@ namespace Grabber_Interface
           break;
         case 22:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value = TextKeyStopD.Text;
+          break;
+        case 23:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value = TextKeyStopD.Text;
           break;
         default:
           TextKeyStopD.Text = "";
@@ -2185,6 +2225,9 @@ namespace Grabber_Interface
         case 22:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param1 = textDReplace.Text;
           break;
+        case 23:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1 = textDReplace.Text;
+          break;
         default:
           break;
 
@@ -2263,6 +2306,9 @@ namespace Grabber_Interface
           break;
         case 22:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2 = textDReplaceWith.Text;
+          break;
+        case 23:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2 = textDReplaceWith.Text;
           break;
         default:
           break;
@@ -2462,6 +2508,9 @@ namespace Grabber_Interface
           break;
         case 22: // added for secondary comment 
           xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value = Index.Text;
+          break;
+        case 23: // added for secondary comment 
+          xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value = Index.Text;
           break;
 
         default:

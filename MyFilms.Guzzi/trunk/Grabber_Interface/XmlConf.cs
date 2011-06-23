@@ -279,8 +279,12 @@ public class TagName
   public static string KeyStartYear = "KeyStartYear";           // Year
   public static string KeyEndYear = "KeyEndYear";
   public static string KeyYearIndex = "KeyYearIndex";
-  public static string KeyStartLink = "KeyStartLink";           // Start / End Grabber page
+  public static string KeyStartLink = "KeyStartLink";           // Start / End Grabber Detail page
   public static string KeyEndLink = "KeyEndLink";
+  //public static string KeyStartLink2 = "KeyStartLink2";           // Start / End Grabber Detail 2 page
+  //public static string KeyEndLink2 = "KeyEndLink2";
+  //public static string KeyStartLink3 = "KeyStartLink3";           // Start / End Grabber Detail 3 page
+  //public static string KeyEndLink3 = "KeyEndLink3";
   public static string KeyStartBody = "KeyStartBody";
   public static string KeyEndBody = "KeyEndBody";
   public static string KeyStartOTitle = "KeyStartOTitle";       // Original Title
@@ -380,5 +384,9 @@ public class TagName
   //"Edition":
   //IMDB_Id
   //TMDB_Id
+  // secondary Details page - will be loaded forst and is available for all fields as option
+  public static string KeyStartDetails2 = "KeyStartDetails2";     // Certification
+  public static string KeyEndDetails2 = "KeyEndDetails2";
+  public static string KeyDetails2Index = "KeyDetails2Index";
 }
 
