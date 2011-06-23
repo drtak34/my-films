@@ -545,7 +545,7 @@ namespace Grabber_Interface
       for (int i = 0; i < listUrl.Count; i++)
       {
         wurl = (Grabber_URLClass.IMDBUrl)listUrl[i];
-        listPreview.Items.Add(wurl.Title);
+        listPreview.Items.Add(wurl.Title + " (" + wurl.Year.ToString() + ") " + wurl.Director);
       }
     }
 
