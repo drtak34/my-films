@@ -43,6 +43,7 @@ namespace Grabber_Interface
     private string BodyLinkTitles = string.Empty;
     private string BodyLinkCertification = string.Empty;
     private string BodyLinkComment = string.Empty;
+    private string BodyLinkSyn = string.Empty;
     private bool ExpertModeOn = true; // to toggle GUI for simplification
 
     private XmlConf xmlConf;
@@ -896,22 +897,29 @@ namespace Grabber_Interface
       }
 
       // Test if there is a page for Secondary Details (like OFDB GW) and load page in BodyDetails2
-      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value;
-      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
-      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1;
-      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2;
-      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
-      if (strStart.Length > 0)
+      try
       {
-        string strTemp = string.Empty;
-        if (strParam1.Length > 0 && strParam2.Length > 0)
-          strTemp = GrabUtil.FindWithAction(BodyDetail, strStart, strEnd, strParam1, strParam2).Trim();
+        strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value;
+        strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
+        strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1;
+        strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2;
+        strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
+        if (strStart.Length > 0)
+        {
+          string strTemp = string.Empty;
+          if (strParam1.Length > 0 && strParam2.Length > 0)
+            strTemp = GrabUtil.FindWithAction(BodyDetail, strStart, strEnd, strParam1, strParam2).Trim();
+          else
+            strTemp = GrabUtil.Find(BodyDetail, strStart, strEnd).Trim();
+          BodyDetail2 = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+        }
         else
-          strTemp = GrabUtil.Find(BodyDetail, strStart, strEnd).Trim();
-        BodyDetail2 = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+          BodyDetail2 = "";
       }
-      else
+      catch 
+      {
         BodyDetail2 = "";
+      }
 
       // Test if there is a redirection page for Covers and load page in BodyLinkImg
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Value;
@@ -986,6 +994,31 @@ namespace Grabber_Interface
       else
         BodyLinkCertification = BodyDetail;
 
+      // Test if there is a redirection page for Synopsis/Description and load page in BodyLinkSyn
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkSyn)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value;
+      if (strStart.Length > 0)
+      {
+        string strGrabPage = string.Empty;
+        if (!string.IsNullOrEmpty(BodyDetail2))
+          strGrabPage = BodyDetail2;
+        else
+          strGrabPage = BodyDetail;
+
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strGrabPage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strGrabPage, strStart, strEnd).Trim();
+        BodyLinkSyn = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+      }
+      else
+        BodyLinkSyn = BodyDetail;
+
+      
       // Test if there is a redirection page for Comment and load page in BodyLinkComment
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value;
       strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value;
@@ -1189,6 +1222,8 @@ namespace Grabber_Interface
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRate2Index)._Value;
           break;
         case 6: // Description
+          if (!textBodyDetail.Text.Equals(BodyLinkSyn))
+            textBodyDetail.Text = BodyLinkSyn;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartSyn)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartSyn)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartSyn)._Value;
@@ -1398,6 +1433,49 @@ namespace Grabber_Interface
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
           break;
+        case 24: // Studio
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndStudio)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStudioIndex)._Value;
+          break;
+        case 25: // Edition
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartEdition)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartEdition)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartEdition)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndEdition)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEditionIndex)._Value;
+          break;
+        case 26: // IMDB_Rank
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Rank)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Rank)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Rank)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndIMDB_Rank)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyIMDB_RankIndex)._Value;
+          break;
+        case 27: // IMDB_Id
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Id)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Id)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Id)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndIMDB_Id)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyIMDB_IdIndex)._Value;
+          break;
+        case 28: // TMDB_Id
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndTMDB_Id)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTMDB_IdIndex)._Value;
+          break;
+        case 29: // Link Synopsis/Description-Secondary Page
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkSyn)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value;
+          break;
+
         default:
           textDReplace.Text = "";
           textDReplaceWith.Text = "";
@@ -1537,6 +1615,24 @@ namespace Grabber_Interface
         case 23:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value = TextKeyStartD.Text;
           break;
+        case 24:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Value = TextKeyStartD.Text;
+          break;
+        case 25:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartEdition)._Value = TextKeyStartD.Text;
+          break;
+        case 26:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Rank)._Value = TextKeyStartD.Text;
+          break;
+        case 27:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Id)._Value = TextKeyStartD.Text;
+          break;
+        case 28:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Value = TextKeyStartD.Text;
+          break;
+        case 29:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value = TextKeyStartD.Text;
+          break;
         default:
           TextKeyStartD.Text = "";
           break;
@@ -1651,6 +1747,24 @@ namespace Grabber_Interface
           break;
         case 23:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value = TextKeyStopD.Text;
+          break;
+        case 24:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndStudio)._Value = TextKeyStopD.Text;
+          break;
+        case 25:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndEdition)._Value = TextKeyStopD.Text;
+          break;
+        case 26:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndIMDB_Rank)._Value = TextKeyStopD.Text;
+          break;
+        case 27:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndIMDB_Id)._Value = TextKeyStopD.Text;
+          break;
+        case 28:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndTMDB_Id)._Value = TextKeyStopD.Text;
+          break;
+        case 29:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkSyn)._Value = TextKeyStopD.Text;
           break;
         default:
           TextKeyStopD.Text = "";
@@ -1904,19 +2018,19 @@ namespace Grabber_Interface
             break;
           case 22:
           case 52:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "- not used -" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Studio" + mapped + Environment.NewLine;
             break;
           case 23:
           case 53:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "- not used -" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Edition" + mapped + Environment.NewLine;
             break;
           case 24:
           case 54:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "- not used -" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "IMDB_Rank" + mapped + Environment.NewLine;
             break;
           case 25:
           case 55:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "- not used -" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "IMDB_Id" + mapped + Environment.NewLine;
             break;
           case 26:
           case 56:
@@ -2228,6 +2342,24 @@ namespace Grabber_Interface
         case 23:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1 = textDReplace.Text;
           break;
+        case 24:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Param1 = textDReplace.Text;
+          break;
+        case 25:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartEdition)._Param1 = textDReplace.Text;
+          break;
+        case 26:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Rank)._Param1 = textDReplace.Text;
+          break;
+        case 27:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Id)._Param1 = textDReplace.Text;
+          break;
+        case 28:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Param1 = textDReplace.Text;
+          break;
+        case 29:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param1 = textDReplace.Text;
+          break;
         default:
           break;
 
@@ -2309,6 +2441,24 @@ namespace Grabber_Interface
           break;
         case 23:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2 = textDReplaceWith.Text;
+          break;
+        case 24:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Param2 = textDReplaceWith.Text;
+          break;
+        case 25:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartEdition)._Param2 = textDReplaceWith.Text;
+          break;
+        case 26:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Rank)._Param2 = textDReplaceWith.Text;
+          break;
+        case 27:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Id)._Param2 = textDReplaceWith.Text;
+          break;
+        case 28:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Param2 = textDReplaceWith.Text;
+          break;
+        case 29:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param2 = textDReplaceWith.Text;
           break;
         default:
           break;
@@ -2426,6 +2576,21 @@ namespace Grabber_Interface
         case "Writer":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartWriter)._Value;
           break;
+        case "Studio":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Value;
+          break;
+        case "Edition":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartEdition)._Value;
+          break;
+        case "IMDB_Rank":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Rank)._Value;
+          break;
+        case "IMDB_Id":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartIMDB_Id)._Value;
+          break;
+        case "TMDB_Id":
+          strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTMDB_Id)._Value;
+          break;
         //case "TitlesURL":
         //  strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Value;
         //  break;
@@ -2509,8 +2674,26 @@ namespace Grabber_Interface
         case 22: // added for secondary comment 
           xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value = Index.Text;
           break;
-        case 23: // added for secondary comment 
+        case 23: // added for details base page 
           xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value = Index.Text;
+          break;
+        case 24: // added for Studio
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStudioIndex)._Value = Index.Text;
+          break;
+        case 25: // added for Edition
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEditionIndex)._Value = Index.Text;
+          break;
+        case 26: // added for IMDB_Rank
+          xmlConf.find(xmlConf.listDetail, TagName.KeyIMDB_RankIndex)._Value = Index.Text;
+          break;
+        case 27: // added for IMDB_Id
+          xmlConf.find(xmlConf.listDetail, TagName.KeyIMDB_IdIndex)._Value = Index.Text;
+          break;
+        case 28: // added for TMDB_Id
+          xmlConf.find(xmlConf.listDetail, TagName.KeyTMDB_IdIndex)._Value = Index.Text;
+          break;
+        case 29: // added for secondary Synopsis/description 
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value = Index.Text;
           break;
 
         default:
@@ -2828,10 +3011,10 @@ namespace Grabber_Interface
       Fields[19] = "URL - Redirection Certification";
       Fields[20] = "Writer";
       Fields[21] = "URL - Redirection Comment";
-      Fields[22] = "";
-      Fields[23] = "";
-      Fields[24] = "";
-      Fields[25] = "";
+      Fields[22] = "Studio";
+      Fields[23] = "Edition";
+      Fields[24] = "IMDB_Rank";
+      Fields[25] = "IMDB_Id";
       Fields[26] = "TranslatedTitle - All Names";
       Fields[27] = "TranslatedTitle - All Values";
       Fields[28] = "Certification - All Names";

@@ -310,6 +310,11 @@ public class TagName
   public static string KeyStartRate2 = "KeyStartRate2";         // Rating 2
   public static string KeyEndRate2 = "KeyEndRate2";
   public static string KeyRate2Index = "KeyRate2Index";
+
+  public static string KeyStartLinkSyn = "KeyStartLinkSyn"; // Synopsis/Description Link Page
+  public static string KeyEndLinkSyn = "KeyEndLinkSyn";
+  public static string KeyLinkSynIndex = "KeyLinkSynIndex";
+  
   public static string KeyStartSyn = "KeyStartSyn";             // Synopsis / Description
   public static string KeyEndSyn = "KeyEndSyn";
   public static string KeySynIndex = "KeySynIndex";
@@ -356,7 +361,7 @@ public class TagName
   public static string KeyEndLinkCertification = "KeyEndLinkCertification";
   public static string KeyLinkCertificationIndex = "KeyLinkCertificationIndex";
 
-  public static string KeyStartLinkComment = "KeyStartLinkComment";
+  public static string KeyStartLinkComment = "KeyStartLinkComment"; // Comment Link Page
   public static string KeyEndLinkComment = "KeyEndLinkComment";
   public static string KeyLinkCommentIndex = "KeyLinkCommentIndex";
 
@@ -379,13 +384,33 @@ public class TagName
   public static string KeyCertificationLanguage = "KeyCertificationLanguage";
   public static string KeyCertificationLanguageAll = "KeyCertificationLanguageAll";
   // Not yet added:
-  //"Studio":
-  //"IMDB_Rank":
-  //"Edition":
-  //IMDB_Id
-  //TMDB_Id
+  public static string KeyStartStudio = "KeyStartStudio";     // Studio
+  public static string KeyEndStudio = "KeyEndStudio";
+  //public static string KeyStudioRegExp = "KeyStudioRegExp";
+  public static string KeyStudioIndex = "KeyStudioIndex";
+
+  public static string KeyStartEdition = "KeyStartEdition";     // Edition
+  public static string KeyEndEdition = "KeyEndEdition";
+  //public static string KeyEditionRegExp = "KeyEditionRegExp";
+  public static string KeyEditionIndex = "KeyEditionIndex";
+
+  public static string KeyStartIMDB_Rank = "KeyStartIMDB_Rank";     // IMDB_Rank
+  public static string KeyEndIMDB_Rank = "KeyEndIMDB_Rank";
+  //public static string KeyIMDB_RankRegExp = "KeyIMDB_RankRegExp";
+  public static string KeyIMDB_RankIndex = "KeyIMDB_RankIndex";
+
+  public static string KeyStartIMDB_Id = "KeyStartIMDB_Id";     // IMDB_Id
+  public static string KeyEndIMDB_Id = "KeyEndIMDB_Id";
+  //public static string KeyIMDB_IdRegExp = "KeyIMDB_IdRegExp";
+  public static string KeyIMDB_IdIndex = "KeyIMDB_IdIndex";
+
+  public static string KeyStartTMDB_Id = "KeyStartTMDB_Id";     // TMDB_Id
+  public static string KeyEndTMDB_Id = "KeyEndTMDB_Id";
+  //public static string KeyTMDB_IdRegExp = "KeyTMDB_IdRegExp";
+  public static string KeyTMDB_IdIndex = "KeyTMDB_IdIndex";
+
   // secondary Details page - will be loaded forst and is available for all fields as option
-  public static string KeyStartDetails2 = "KeyStartDetails2";     // Certification
+  public static string KeyStartDetails2 = "KeyStartDetails2";     // Details2
   public static string KeyEndDetails2 = "KeyEndDetails2";
   public static string KeyDetails2Index = "KeyDetails2Index";
 }

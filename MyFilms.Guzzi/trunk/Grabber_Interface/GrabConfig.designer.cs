@@ -355,7 +355,13 @@ namespace Grabber_Interface
             resources.GetString("cb_ParamDetail.Items20"),
             resources.GetString("cb_ParamDetail.Items21"),
             resources.GetString("cb_ParamDetail.Items22"),
-            resources.GetString("cb_ParamDetail.Items23")});
+            resources.GetString("cb_ParamDetail.Items23"),
+            resources.GetString("cb_ParamDetail.Items24"),
+            resources.GetString("cb_ParamDetail.Items25"),
+            resources.GetString("cb_ParamDetail.Items26"),
+            resources.GetString("cb_ParamDetail.Items27"),
+            resources.GetString("cb_ParamDetail.Items28"),
+            resources.GetString("cb_ParamDetail.Items29")});
           resources.ApplyResources(this.cb_ParamDetail, "cb_ParamDetail");
           this.cb_ParamDetail.Name = "cb_ParamDetail";
           this.toolTip1.SetToolTip(this.cb_ParamDetail, resources.GetString("cb_ParamDetail.ToolTip"));
