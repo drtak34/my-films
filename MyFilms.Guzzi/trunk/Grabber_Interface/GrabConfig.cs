@@ -953,7 +953,7 @@ namespace Grabber_Interface
           textBodyDetail.Text = BodyDetail;
 
         watch.Stop();
-        TimeBodyDetail = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+        TimeBodyDetail = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
       }
 
       // Test if there is a page for Secondary Details (like OFDB GW) and load page in BodyDetails2
@@ -982,7 +982,7 @@ namespace Grabber_Interface
         else
           BodyDetail2 = "";
         watch.Stop();
-        TimeBodyDetail2 = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+        TimeBodyDetail2 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
       }
       catch
       {
@@ -1014,7 +1014,7 @@ namespace Grabber_Interface
         else
           BodyLinkGeneric1 = "";
         watch.Stop();
-        TimeBodyLinkGeneric1 = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+        TimeBodyLinkGeneric1 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
       }
       catch
       {
@@ -1046,7 +1046,7 @@ namespace Grabber_Interface
         else
           BodyLinkGeneric2 = "";
         watch.Stop();
-        TimeBodyLinkGeneric2 = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+        TimeBodyLinkGeneric2 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
       }
       catch
       {
@@ -1076,7 +1076,7 @@ namespace Grabber_Interface
       else
         BodyLinkImg = "";
       watch.Stop();
-      TimeBodyLinkImg = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+      TimeBodyLinkImg = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
 
       // Test if there is a redirection page for Persons and load page in BodyLinkPersons
       watch.Reset();
@@ -1101,7 +1101,7 @@ namespace Grabber_Interface
       else
         BodyLinkPersons = "";
       watch.Stop();
-      TimeBodyLinkPersons = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+      TimeBodyLinkPersons = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
 
       // Test if there is a redirection page for Titles and load page in BodyLinkTitles
       watch.Reset();
@@ -1126,7 +1126,7 @@ namespace Grabber_Interface
       else
         BodyLinkTitles = "";
       watch.Stop();
-      TimeBodyLinkTitles = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+      TimeBodyLinkTitles = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
 
       // Test if there is a redirection page for Certification and load page in BodyLinkCertification
       watch.Reset();
@@ -1151,7 +1151,7 @@ namespace Grabber_Interface
       else
         BodyLinkCertification = "";
       watch.Stop();
-      TimeBodyLinkCertification = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+      TimeBodyLinkCertification = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
 
       // Test if there is a redirection page for Synopsis/Description and load page in BodyLinkSyn
       watch.Reset();
@@ -1176,7 +1176,7 @@ namespace Grabber_Interface
       else
         BodyLinkSyn = "";
       watch.Stop();
-      TimeBodyLinkSyn = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+      TimeBodyLinkSyn = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
       
       // Test if there is a redirection page for Comment and load page in BodyLinkComment
       watch.Reset();
@@ -1201,7 +1201,7 @@ namespace Grabber_Interface
       else
         BodyLinkComment = "";
       watch.Stop();
-      TimeBodyLinkComment = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
+      TimeBodyLinkComment = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
     }
 
 
@@ -2234,7 +2234,7 @@ namespace Grabber_Interface
         }
       }
       watch.Stop();
-      totalruntime = "Total Runtime: " + (watch.ElapsedMilliseconds).ToString() + " msec.";
+      totalruntime = "Total Runtime: " + (watch.ElapsedMilliseconds).ToString() + " ms.";
 
       string mapped;
       for (int i = 0; i < Result.Length; i++)
@@ -2400,26 +2400,37 @@ namespace Grabber_Interface
       }
       // List of Grab Pages used for Grabber results:
       textPreview.AppendText(Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
       textPreview.SelectedText += "*** Infos about used Grab Pages ***" + Environment.NewLine;
-      textPreview.AppendText("Base Page:" +  TimeBodyDetail + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
+      textPreview.AppendText("Base Page:" + TimeBodyDetail + Environment.NewLine);
       textPreview.AppendText(URLBodyDetail + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Gateway:" + TimeBodyDetail2 + Environment.NewLine);
       textPreview.AppendText(URLBodyDetail2 + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Generic 1:" + TimeBodyLinkGeneric1 + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkGeneric1 + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Generic 2:" + TimeBodyLinkGeneric2 + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkGeneric2 + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Cover:" + TimeBodyLinkImg + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkImg + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Persons:" + TimeBodyLinkPersons + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkPersons + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Title:" + TimeBodyLinkTitles + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkTitles + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Certification:" + TimeBodyLinkCertification + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkCertification + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Comment:" + TimeBodyLinkComment + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkComment + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Description:" + TimeBodyLinkSyn + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkSyn + Environment.NewLine);
 
