@@ -28,11 +28,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Data;
+  using System.Diagnostics;
   using System.Globalization;
   using System.IO;
   using System.Linq;
   using System.Text.RegularExpressions;
   using System.Threading;
+  using System.Web.UI.WebControls;
+
+  using AMCUpdater;
 
   using Grabber;
 
@@ -57,6 +61,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
 
   using Action = MediaPortal.GUI.Library.Action;
+  using AntMovieCatalog = MyFilmsPlugin.MyFilms.AntMovieCatalog;
   using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
 
 
@@ -441,6 +446,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public delegate void FilmsStoppedHandler(int stoptime, string filename);
     public delegate void FilmsEndedHandler(string filename);
+
+    public delegate void EventHandler(object sender, EventArgs e);
+
     System.ComponentModel.BackgroundWorker bgUpdateDB = new System.ComponentModel.BackgroundWorker();
     System.ComponentModel.BackgroundWorker bgUpdateFanart = new System.ComponentModel.BackgroundWorker();
     System.ComponentModel.BackgroundWorker bgUpdateActors = new System.ComponentModel.BackgroundWorker();
@@ -2243,6 +2251,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 item.ThumbnailImage = conf.DefaultCover;
               }
             }
+          // Thread.Sleep(10);
           }
         })
         {
@@ -4653,6 +4662,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
           {
             bgUpdateDB.CancelAsync();
+
+            //// Temporary added to hard kill process
+            //foreach (Process clsProcess in Process.GetProcesses())
+            //{
+            //  if (clsProcess.ProcessName.StartsWith("AMCupdater"))
+            //    clsProcess.Kill();
+            //}
+
             Thread.Sleep(1000);
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
           }
@@ -7572,6 +7589,90 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       BackgroundWorker worker = sender as BackgroundWorker;
       MyFilmsDetail.RunAMCupdater(Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe", "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
+
+      //BackgroundWorker bgwFolderScanUpdate = new System.ComponentModel.BackgroundWorker();
+      //bgwFolderScanUpdate.WorkerSupportsCancellation = true;
+      //bgwFolderScanUpdate.WorkerReportsProgress = true;
+      //bgwFolderScanUpdate.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
+      //bgwFolderScanUpdate.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
+      //bgwFolderScanUpdate.ProgressChanged += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
+      ////bgwFolderScanUpdate.RunWorkerAsync();
+
+
+      //AntSettings CurrentSettings = new AntSettings();
+      //ArrayList wurl = new ArrayList();
+
+      //LogMyFilms.Debug(" : Starting Batch Mode");
+      //LogMyFilms.Debug(" - Movie Path : " + CurrentSettings.Movie_Scan_Path);
+      //LogMyFilms.Debug(" - XML File Path : " + CurrentSettings.XML_File);
+      //LogMyFilms.Debug(" - Parser File Path : " + CurrentSettings.Internet_Parser_Path);
+      //LogMyFilms.Debug(" - Grabber_Override_Language    : " + CurrentSettings.Grabber_Override_Language.ToString());
+      //LogMyFilms.Debug(" - Grabber_Override_PersonLimit : " + CurrentSettings.Grabber_Override_PersonLimit.ToString());
+      //LogMyFilms.Debug(" - Grabber_Override_TitleLimit  : " + CurrentSettings.Grabber_Override_TitleLimit.ToString());
+      //LogMyFilms.Debug(" - Grabber_Override_GetRoles    : " + CurrentSettings.Grabber_Override_GetRoles.ToString());
+      //LogMyFilms.Debug(" - Exclude File Path : " + CurrentSettings.Excluded_Movies_File);
+      //LogMyFilms.Debug(" - Fanart Path : " + CurrentSettings.Movie_Fanart_Path);
+      //LogMyFilms.Debug(" - PersonArtwork Path : " + CurrentSettings.Movie_PersonArtwork_Path);
+      //LogMyFilms.Debug(" - Media Label : " + CurrentSettings.Ant_Media_Label);
+      //LogMyFilms.Debug(" - Media Type : " + CurrentSettings.Ant_Media_Type);
+      //LogMyFilms.Debug(" - Override Path : " + CurrentSettings.Override_Path);
+      //LogMyFilms.Debug(" - Store Short Names : " + CurrentSettings.Store_Short_Names_Only);
+      //LogMyFilms.Debug(" - Backup Option : " + CurrentSettings.Backup_XML_First);
+      //LogMyFilms.Debug(" - Overwrite Original File Option : " + CurrentSettings.Overwrite_XML_File.ToString());
+      //LogMyFilms.Debug(" - Source Field : " + CurrentSettings.Ant_Database_Source_Field.ToString());
+      //LogMyFilms.Debug(" - Purge Missing Movies From Database : " + CurrentSettings.Purge_Missing_Files.ToString());
+      //LogMyFilms.Debug(" - Check for folders containing DVD copies : " + CurrentSettings.Scan_For_DVD_Folders.ToString());
+      
+      //string ConfigFile = MyFilms.conf.StrAMCUpd_cnf;
+      //if (!System.IO.File.Exists(ConfigFile))
+      //{
+      //  LogMyFilms.Debug("ERROR - Config File '" + ConfigFile.ToString() + "' not found.");
+      //  return;
+      //}
+
+      //CurrentSettings.LoadUserSettings(ConfigFile);
+
+      //try
+      //{
+      //  FileInfo f = new System.IO.FileInfo(CurrentSettings.XML_File);
+      //  if (!f.Exists) //  System.IO.File.Exists(f)
+      //  {
+      //    LogMyFilms.Debug("XML File '" + CurrentSettings.XML_File.ToString() + "' Not Found.");
+      //    System.Xml.XmlTextWriter destXml = new System.Xml.XmlTextWriter(CurrentSettings.XML_File.ToString(), System.Text.Encoding.Default);
+      //    destXml.Formatting = System.Xml.Formatting.Indented;
+      //    destXml.WriteStartDocument(false);
+      //    destXml.WriteStartElement("AntMovieCatalog");
+      //    destXml.WriteStartElement("Catalog");
+      //    destXml.WriteElementString("Properties", "");
+      //    destXml.WriteStartElement("Contents");
+      //    destXml.WriteEndElement();
+      //    destXml.WriteEndElement();
+      //    destXml.WriteEndElement();
+      //    destXml.Close();
+      //    LogMyFilms.Debug("Creating XML File");
+      //    LogMyFilms.Debug(" - FilePath : " + CurrentSettings.XML_File.ToString());
+      //  }
+
+        
+      //  AntProcessor Ant = new AntProcessor();
+      //  Ant.InteractiveMode = false;
+      //  Ant.ProcessXML(""); // XMLFilePath as sting param
+      //  Ant.ProcessMovieFolder();
+      //  Ant.ProcessOrphanFiles();
+      //  if (Ant.CountOrphanFiles > 0 || Ant.CountOrphanRecords > 0)
+      //    Ant.UpdateXMLFile();
+
+      //}
+      //catch (Exception ex)
+      //{
+      //  //Console.WriteLine(ex.Message);
+      //  //LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar);
+      //  throw;
+      //}
+      //finally
+      //{
+      //  // LogEvent(" - Processing Complete.", EventLogLevel.ImportantEvent)
+      //}
     }
 
     void bgUpdateDB_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

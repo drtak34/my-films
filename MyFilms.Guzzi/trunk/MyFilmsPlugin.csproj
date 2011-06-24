@@ -272,6 +272,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="AMCupdater\AMCUpdater\AMCUpdater.vbproj">
+      <Project>{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}</Project>
+      <Name>AMCUpdater</Name>
+    </ProjectReference>
     <ProjectReference Include="Grabber\Grabber.csproj">
       <Project>{92C183EE-636F-4A55-A6AB-363CDA606110}</Project>
       <Name>Grabber</Name>

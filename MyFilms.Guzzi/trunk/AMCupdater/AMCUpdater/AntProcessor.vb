@@ -2,9 +2,35 @@ Imports System.Threading
 Imports System.Xml
 Imports System.ComponentModel
 
-Public Class AntProcessor
+Public Class FilmUpdatedEventArgs
+    Inherits EventArgs
+    Private _errorClass As String
+    Private _message As String
 
-    Public Shared WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker ' changed to public to get progress from MF plugin
+    'Constructor.
+    Public Sub New(ByVal errorclass As String, ByVal message As String)
+        Me._errorClass = errorclass
+        Me._message = message
+    End Sub
+End Class
+
+Public Class AntProcessor
+    Public Event FilmUpdated As FilmUpdatedEventHandler
+    ' The protected OnFilmUpdatedEventName method raises the event by invoking the delegates. The sender is always this, the current instance
+    ' of the class.
+
+    Protected Overridable Sub OnFilmUpdated(ByVal e As FilmUpdatedEventArgs)
+        RaiseEvent FilmUpdated(Me, e)
+    End Sub
+
+    Public Delegate Sub FilmUpdatedEventHandler(ByVal sender As Object, ByVal e As FilmUpdatedEventArgs)
+
+    'Public Delegate MovieImportedDelegate(movie As String)
+    'Shared Event MovieImported As MovieImportedDelegate
+    'Public Event FilmUpdatedEventName As FilmUpdatedEventHandler
+    'Public Delegate Sub FilmUpdatedEventHandler(ByVal sender As Object, ByVal e As FilmUpdatedEventArgs)
+
+    Private Shared WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker ' changed to public to get progress from MF plugin
     Private Shared WithEvents bgwManualUpdate As New System.ComponentModel.BackgroundWorker
 
     Private Shared ds As DataSet
@@ -1409,7 +1435,7 @@ Public Class AntProcessor
                         ''Not there - add to foldernames:
                         'FolderNames.Add(row("FileName"), CurrentFoldername)
                         '    End If
-        End If
+                    End If
                 Next
                 'Repeat to catch the missing ones (bad technique but it should work!)
                 'For Each row In ds.Tables("tblOrphanedMediaFiles").Rows
@@ -1671,8 +1697,6 @@ Public Class AntProcessor
             LogEvent("Processing Files.", EventLogLevel.ImportantEvent)
             If (_InteractiveMode) Then
                 bgwFolderScanUpdate.RunWorkerAsync(XMLUpdateObject)
-                'XMLUpdateObject.UpdateXML()
-                'UpdateXMLFile_PostProcessing()
             Else
                 XMLUpdateObject.UpdateXML()
                 UpdateXMLFile_PostProcessing()
@@ -1688,6 +1712,15 @@ Public Class AntProcessor
             Form1.ToolStripProgressBar.Value += 1
             Form1.ToolStripProgressMessage.Text = "status: " & Form1.ToolStripProgressBar.Value.ToString & " of " & Form1.ToolStripProgressBar.Maximum.ToString & " total movie(s)"
         End If
+
+        '' Tell the UI we are done.
+        'Try
+        '    ' Invoke the delegate on the form.
+        '    Me.Invoke(New BarDelegate(UpdateBar))
+
+        'Catch
+
+        '    ' Some problem occurred but we can recover.
 
         'The e.UserState includes messages from the background process.  In this case, it's the 'File Imported - Filename' message.
         LogEvent(e.UserState, EventLogLevel.Informational)
@@ -1925,6 +1958,11 @@ Public Class AntProcessor
 
             If ds.Tables("tblOrphanedNonMediaFiles") IsNot Nothing Then
                 For Each row In ds.Tables("tblOrphanedNonMediaFiles").Rows
+                    'Dim e As New FilmUpdatedEventArgs("Info", "Testmessage from Event")
+                    'OnFilmUpdated(e)
+                    'If EventNeu() IsNot Nothing Then
+                    '    EventNeu("Test Eventhandler");
+                    'End If
 
                     If bgwFolderScanUpdate.CancellationPending = True Then
                         Exit Function
@@ -2611,7 +2649,10 @@ Public Class AntProcessor
 
     End Function
 
+    Private Sub EventNeu(ByVal EineVariable As String)
 
-
+        ' //Hier können nun die Aktionen stehen, die das Event
+        ' //bewirken sollen
+    End Sub
 
 End Class
