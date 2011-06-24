@@ -2017,19 +2017,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   "Category", 
                   "URL", 
                   "ImageURL", 
-                  "SubUrlPersons", 
+                  "Writer", 
                   "Comments", 
                   "Languages", 
                   "TagLine", 
                   "Certification",
-                  "SubUrlTitles",
-                  "SubUrlCertification",
-                  "Writer",
-                  "SubUrlComments",
+                  "IMDB_Id",
+                  "IMDBrank",
                   "Studio",
                   "Edition",
                   "Fanart",
-                  "Aspectratio",
+                  "Generic1",
+                  "Generic2",
+                  "Generic3",
                   "TranslatedTitleAllNames",
                   "TranslatedTitleAllValues",
                   "CertificationAllNames",
@@ -2054,12 +2054,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                       if ( // make sure, only supported fields are offered to user for update
                         wProperty != "ImageURL" 
-                        && !wProperty.Contains("Sub") 
+                        && !wProperty.Contains("Sub")
                         && !wProperty.Contains("All")
+                        && !wProperty.Contains("Generic")
                         && wProperty != "TagLine"
                         && wProperty != "Certification"
                         && wProperty != "Writer"
-                        && wProperty != "SubUrlComments"
                         && wProperty != "Studio"
                         && wProperty != "Edition"
                         && wProperty != "Fanart"
