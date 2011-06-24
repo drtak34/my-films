@@ -17,6 +17,8 @@ using System.Reflection;
 
 namespace Grabber_Interface
 {
+  using System.Diagnostics;
+
   using MediaPortal.Configuration;
   using MediaPortal.Util;
 
@@ -57,6 +59,17 @@ namespace Grabber_Interface
     private string URLBodyLinkCertification = string.Empty;
     private string URLBodyLinkComment = string.Empty;
     private string URLBodyLinkSyn = string.Empty;
+
+    private string TimeBodyDetail = string.Empty;
+    private string TimeBodyDetail2 = string.Empty;
+    private string TimeBodyLinkImg = string.Empty;
+    private string TimeBodyLinkGeneric1 = string.Empty;
+    private string TimeBodyLinkGeneric2 = string.Empty;
+    private string TimeBodyLinkPersons = string.Empty;
+    private string TimeBodyLinkTitles = string.Empty;
+    private string TimeBodyLinkCertification = string.Empty;
+    private string TimeBodyLinkComment = string.Empty;
+    private string TimeBodyLinkSyn = string.Empty;
     
     private bool ExpertModeOn = true; // to toggle GUI for simplification
 
@@ -888,9 +901,23 @@ namespace Grabber_Interface
       URLBodyLinkComment = string.Empty;
       URLBodyLinkSyn = string.Empty;
 
+      TimeBodyDetail = string.Empty;
+      TimeBodyDetail2 = string.Empty;
+      TimeBodyLinkImg = string.Empty;
+      TimeBodyLinkGeneric1 = string.Empty;
+      TimeBodyLinkGeneric2 = string.Empty;
+      TimeBodyLinkPersons = string.Empty;
+      TimeBodyLinkTitles = string.Empty;
+      TimeBodyLinkCertification = string.Empty;
+      TimeBodyLinkComment = string.Empty;
+      TimeBodyLinkSyn = string.Empty;
+
+      Stopwatch watch = new Stopwatch();
+
       if (TextURLDetail.Text.Length > 0)
       {
-
+        watch.Reset();
+        watch.Start();
         textPreview.ResetText();
         URLBodyDetail = TextURLDetail.Text;
         if (TextURLDetail.Text.ToLower().StartsWith("http"))
@@ -925,12 +952,15 @@ namespace Grabber_Interface
         else
           textBodyDetail.Text = BodyDetail;
 
-
+        watch.Stop();
+        TimeBodyDetail = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
       }
 
       // Test if there is a page for Secondary Details (like OFDB GW) and load page in BodyDetails2
       try
       {
+        watch.Reset();
+        watch.Start();
         strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value;
         strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
         strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1;
@@ -951,6 +981,8 @@ namespace Grabber_Interface
         }
         else
           BodyDetail2 = "";
+        watch.Stop();
+        TimeBodyDetail2 = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
       }
       catch
       {
@@ -960,6 +992,8 @@ namespace Grabber_Interface
       // Test if there is a page for Generic 1 Page
       try
       {
+        watch.Reset();
+        watch.Start();
         strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Value;
         strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkGeneric1)._Value;
         strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Param1;
@@ -979,6 +1013,8 @@ namespace Grabber_Interface
         }
         else
           BodyLinkGeneric1 = "";
+        watch.Stop();
+        TimeBodyLinkGeneric1 = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
       }
       catch
       {
@@ -988,6 +1024,8 @@ namespace Grabber_Interface
       // Test if there is a page for Generic 2 Page
       try
       {
+        watch.Reset();
+        watch.Start();
         strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Value;
         strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkGeneric2)._Value;
         strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Param1;
@@ -1007,6 +1045,8 @@ namespace Grabber_Interface
         }
         else
           BodyLinkGeneric2 = "";
+        watch.Stop();
+        TimeBodyLinkGeneric2 = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
       }
       catch
       {
@@ -1014,6 +1054,8 @@ namespace Grabber_Interface
       }
 
       // Test if there is a redirection page for Covers and load page in BodyLinkImg
+      watch.Reset();
+      watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Value;
       strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkImg)._Value;
       strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Param1;
@@ -1033,8 +1075,12 @@ namespace Grabber_Interface
       }
       else
         BodyLinkImg = "";
+      watch.Stop();
+      TimeBodyLinkImg = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
 
       // Test if there is a redirection page for Persons and load page in BodyLinkPersons
+      watch.Reset();
+      watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Value;
       strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersons)._Value;
       strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Param1;
@@ -1054,8 +1100,12 @@ namespace Grabber_Interface
       }
       else
         BodyLinkPersons = "";
+      watch.Stop();
+      TimeBodyLinkPersons = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
 
       // Test if there is a redirection page for Titles and load page in BodyLinkTitles
+      watch.Reset();
+      watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Value;
       strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTitles)._Value;
       strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Param1;
@@ -1075,8 +1125,12 @@ namespace Grabber_Interface
       }
       else
         BodyLinkTitles = "";
+      watch.Stop();
+      TimeBodyLinkTitles = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
 
       // Test if there is a redirection page for Certification and load page in BodyLinkCertification
+      watch.Reset();
+      watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Value;
       strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkCertification)._Value;
       strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param1;
@@ -1096,8 +1150,12 @@ namespace Grabber_Interface
       }
       else
         BodyLinkCertification = "";
+      watch.Stop();
+      TimeBodyLinkCertification = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
 
       // Test if there is a redirection page for Synopsis/Description and load page in BodyLinkSyn
+      watch.Reset();
+      watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value;
       strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkSyn)._Value;
       strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param1;
@@ -1117,9 +1175,12 @@ namespace Grabber_Interface
       }
       else
         BodyLinkSyn = "";
-
+      watch.Stop();
+      TimeBodyLinkSyn = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
       
       // Test if there is a redirection page for Comment and load page in BodyLinkComment
+      watch.Reset();
+      watch.Start();
       strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value;
       strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value;
       strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param1;
@@ -1139,6 +1200,8 @@ namespace Grabber_Interface
       }
       else
         BodyLinkComment = "";
+      watch.Stop();
+      TimeBodyLinkComment = " (" + (watch.ElapsedMilliseconds).ToString() + " msec.)";
     }
 
 
@@ -2146,6 +2209,10 @@ namespace Grabber_Interface
         return;
       }
       
+      Stopwatch watch = new Stopwatch();
+      string totalruntime = string.Empty;
+      watch.Reset();
+      watch.Start();
       textPreview.Clear();
       pictureBoxPreviewCover.ImageLocation = "";
       labelImageSize.Text = "";
@@ -2166,6 +2233,9 @@ namespace Grabber_Interface
         {
         }
       }
+      watch.Stop();
+      totalruntime = "Total Runtime: " + (watch.ElapsedMilliseconds).ToString() + " msec.";
+
       string mapped;
       for (int i = 0; i < Result.Length; i++)
       {
@@ -2332,29 +2402,33 @@ namespace Grabber_Interface
       textPreview.AppendText(Environment.NewLine);
       textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
       textPreview.SelectedText += "*** Infos about used Grab Pages ***" + Environment.NewLine;
-      textPreview.AppendText("Base Page:" + Environment.NewLine);
+      textPreview.AppendText("Base Page:" +  TimeBodyDetail + Environment.NewLine);
       textPreview.AppendText(URLBodyDetail + Environment.NewLine);
-      textPreview.AppendText("URL Gateway:" + Environment.NewLine);
+      textPreview.AppendText("URL Gateway:" + TimeBodyDetail2 + Environment.NewLine);
       textPreview.AppendText(URLBodyDetail2 + Environment.NewLine);
-      textPreview.AppendText("URL Redirection Generic 1:" + Environment.NewLine);
+      textPreview.AppendText("URL Redirection Generic 1:" + TimeBodyLinkGeneric1 + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkGeneric1 + Environment.NewLine);
-      textPreview.AppendText("URL Redirection Generic 2:" + Environment.NewLine);
+      textPreview.AppendText("URL Redirection Generic 2:" + TimeBodyLinkGeneric2 + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkGeneric2 + Environment.NewLine);
-      textPreview.AppendText("URL Redirection Cover:" + Environment.NewLine);
+      textPreview.AppendText("URL Redirection Cover:" + TimeBodyLinkImg + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkImg + Environment.NewLine);
-      textPreview.AppendText("URL Redirection Persons:" + Environment.NewLine);
+      textPreview.AppendText("URL Redirection Persons:" + TimeBodyLinkPersons + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkPersons + Environment.NewLine);
-      textPreview.AppendText("URL Redirection Title:" + Environment.NewLine);
+      textPreview.AppendText("URL Redirection Title:" + TimeBodyLinkTitles + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkTitles + Environment.NewLine);
-      textPreview.AppendText("URL Redirection Certification:" + Environment.NewLine);
+      textPreview.AppendText("URL Redirection Certification:" + TimeBodyLinkCertification + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkCertification + Environment.NewLine);
-      textPreview.AppendText("URL Redirection Comment:" + Environment.NewLine);
+      textPreview.AppendText("URL Redirection Comment:" + TimeBodyLinkComment + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkComment + Environment.NewLine);
-      textPreview.AppendText("URL Redirection Description:" + Environment.NewLine);
+      textPreview.AppendText("URL Redirection Description:" + TimeBodyLinkSyn + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkSyn + Environment.NewLine);
 
-      System.IO.File.Delete(textConfig.Text + ".tmp");
+      textPreview.AppendText(Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
+      textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
+      textPreview.SelectedText += totalruntime + Environment.NewLine;
 
+      System.IO.File.Delete(textConfig.Text + ".tmp");
     }
 
     private void textComplement_TextChanged(object sender, EventArgs e)
