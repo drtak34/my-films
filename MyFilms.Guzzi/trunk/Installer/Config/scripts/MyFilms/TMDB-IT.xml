@@ -112,6 +112,27 @@
       <KeyStartLinkComment Param1="ot_x002F_" Param2="http:_x002F__x002F_www.ofdb.de_x002F_plot_x002F_">_x003C_a_x0020_href_x003D__x0022_pl</KeyStartLinkComment>
       <KeyEndLinkComment>_x0022__x003E__x003C_b_x003E_</KeyEndLinkComment>
       <KeyLinkCommentIndex />
+      <KeyStartDetails2 Param1="" Param2="" />
+      <KeyEndDetails2 />
+      <KeyDetails2Index />
+      <KeyStartStudio Param1="" Param2="" />
+      <KeyEndStudio />
+      <KeyStudioIndex />
+      <KeyStartEdition Param1="" Param2="" />
+      <KeyEndEdition />
+      <KeyEditionIndex />
+      <KeyStartIMDB_Rank Param1="" Param2="" />
+      <KeyEndIMDB_Rank />
+      <KeyIMDB_RankIndex />
+      <KeyStartIMDB_Id Param1="" Param2="" />
+      <KeyEndIMDB_Id />
+      <KeyIMDB_IdIndex />
+      <KeyStartTMDB_Id Param1="" Param2="" />
+      <KeyEndTMDB_Id />
+      <KeyTMDB_IdIndex />
+      <KeyStartLinkSyn Param1="" Param2="" />
+      <KeyEndLinkSyn />
+      <KeyLinkSynIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" />
@@ -136,10 +157,10 @@
       <Field_19 source="URL_x0020_-_x0020_Redirection_x0020_Certification" destination="" replace="False" addstart="False" addend="False" />
       <Field_20 source="Writer" destination="" replace="False" addstart="False" addend="False" />
       <Field_21 source="URL_x0020_-_x0020_Redirection_x0020_Comment" destination="" replace="False" addstart="False" addend="False" />
-      <Field_22 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_23 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_24 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_25 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_22 source="Studio" destination="" replace="False" addstart="False" addend="False" />
+      <Field_23 source="Edition" destination="" replace="False" addstart="False" addend="False" />
+      <Field_24 source="IMDB_Rank" destination="" replace="False" addstart="False" addend="False" />
+      <Field_25 source="IMDB_Id" destination="" replace="False" addstart="False" addend="False" />
       <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />

@@ -3,21 +3,6 @@
   <Section>
     <DBName>Cinefacts (german)</DBName>
     <URLPrefix />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.cinefacts.de_x002F_suche_x002F_suche.php_x003F_type_x003D_d_x0026_name_x003D__x0027__x0023_Search_x0023__x0027__x0026_go.x_x003D_0_x0026_go.y_x003D_0</URL>
       <KeyStartList Param1="" Param2="">_x003C__x002F_td_x003E__x000D__x000A__x0020__x0020__x0020__x0020__x003C__x002F_tr_x003E__x000D__x000A__x0020__x0020__x0020__x0020__x003C__x002F_table_x003E__x000D__x000A_</KeyStartList>
@@ -127,6 +112,27 @@
       <KeyStartLinkComment Param1="" Param2="" />
       <KeyEndLinkComment />
       <KeyLinkCommentIndex />
+      <KeyStartDetails2 Param1="" Param2="" />
+      <KeyEndDetails2 />
+      <KeyDetails2Index />
+      <KeyStartStudio Param1="" Param2="" />
+      <KeyEndStudio />
+      <KeyStudioIndex />
+      <KeyStartEdition Param1="" Param2="" />
+      <KeyEndEdition />
+      <KeyEditionIndex />
+      <KeyStartIMDB_Rank Param1="" Param2="" />
+      <KeyEndIMDB_Rank />
+      <KeyIMDB_RankIndex />
+      <KeyStartIMDB_Id Param1="" Param2="" />
+      <KeyEndIMDB_Id />
+      <KeyIMDB_IdIndex />
+      <KeyStartTMDB_Id Param1="" Param2="" />
+      <KeyEndTMDB_Id />
+      <KeyTMDB_IdIndex />
+      <KeyStartLinkSyn Param1="" Param2="" />
+      <KeyEndLinkSyn />
+      <KeyLinkSynIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" />
@@ -151,10 +157,10 @@
       <Field_19 source="URL_x0020_-_x0020_Redirection_x0020_Certification" destination="" replace="False" addstart="False" addend="False" />
       <Field_20 source="Writer" destination="" replace="False" addstart="False" addend="False" />
       <Field_21 source="URL_x0020_-_x0020_Redirection_x0020_Comment" destination="" replace="False" addstart="False" addend="False" />
-      <Field_22 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_23 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_24 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_25 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_22 source="Studio" destination="" replace="False" addstart="False" addend="False" />
+      <Field_23 source="Edition" destination="" replace="False" addstart="False" addend="False" />
+      <Field_24 source="IMDB_Rank" destination="" replace="False" addstart="False" addend="False" />
+      <Field_25 source="IMDB_Id" destination="" replace="False" addstart="False" addend="False" />
       <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />

@@ -3,7 +3,6 @@
   <Section>
     <DBName>Cinefacts (german)</DBName>
     <URLPrefix />
-    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.cinefacts.de_x002F_suche_x002F_suche.php_x003F_type_x003D_f_x0026_name_x003D__x0027__x0023_Search_x0023__x0027_</URL>
       <KeyStartList Param1="" Param2="">SUCHERGEBNISSE_x0020_</KeyStartList>
@@ -88,9 +87,9 @@
       <KeyStartLinkPersons Param1="" Param2="" />
       <KeyEndLinkPersons />
       <KeyLinkPersonsIndex />
-      <KeyStartComment Param1="" Param2="">USERKOMMENTARE</KeyStartComment>
-      <KeyEndComment>_x0020__x0020__x0020__x0020_Bewertung:_x0020__x0009__x0009_</KeyEndComment>
-      <KeyCommentRegExp />
+      <KeyStartComment Param1="_x0023_REGEX_x0023__x005B__x005C__x007C__x005D__x005B__x0020__x005D__x007C__x003C_br._x002A__x003F__x003E_" Param2="">_x0023_REGEX_x0023_h1._x002A__x003F__x003C__x002F_li_x003E_</KeyStartComment>
+      <KeyEndComment>_x0023_REGEX_x0023_BEWERTUNG</KeyEndComment>
+      <KeyCommentRegExp>class_x003D__x0022_c5b_x0022__x003E__x003C_h2_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_ul</KeyCommentRegExp>
       <KeyCommentIndex />
       <KeyStartLanguage Param1="" Param2="" />
       <KeyEndLanguage />
@@ -110,9 +109,30 @@
       <KeyStartLinkCertification Param1="" Param2="" />
       <KeyEndLinkCertification />
       <KeyLinkCertificationIndex />
-      <KeyStartLinkComment Param1="" Param2="" />
-      <KeyEndLinkComment />
+      <KeyStartLinkComment Param1="_x0023_REVERSE_x0023__x002F_kino" Param2="http:_x002F__x002F_www.cinefacts.de_x002F_kino">_x0022__x003E_Filmkritik</KeyStartLinkComment>
+      <KeyEndLinkComment>href_x003D__x0022_</KeyEndLinkComment>
       <KeyLinkCommentIndex />
+      <KeyStartDetails2 Param1="" Param2="" />
+      <KeyEndDetails2 />
+      <KeyDetails2Index />
+      <KeyStartStudio Param1="" Param2="" />
+      <KeyEndStudio />
+      <KeyStudioIndex />
+      <KeyStartEdition Param1="" Param2="" />
+      <KeyEndEdition />
+      <KeyEditionIndex />
+      <KeyStartIMDB_Rank Param1="" Param2="" />
+      <KeyEndIMDB_Rank />
+      <KeyIMDB_RankIndex />
+      <KeyStartIMDB_Id Param1="" Param2="" />
+      <KeyEndIMDB_Id />
+      <KeyIMDB_IdIndex />
+      <KeyStartTMDB_Id Param1="" Param2="" />
+      <KeyEndTMDB_Id />
+      <KeyTMDB_IdIndex />
+      <KeyStartLinkSyn Param1="" Param2="" />
+      <KeyEndLinkSyn />
+      <KeyLinkSynIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" />
@@ -137,10 +157,10 @@
       <Field_19 source="URL_x0020_-_x0020_Redirection_x0020_Certification" destination="" replace="False" addstart="False" addend="False" />
       <Field_20 source="Writer" destination="" replace="False" addstart="False" addend="False" />
       <Field_21 source="URL_x0020_-_x0020_Redirection_x0020_Comment" destination="" replace="False" addstart="False" addend="False" />
-      <Field_22 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_23 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_24 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_25 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_22 source="Studio" destination="" replace="False" addstart="False" addend="False" />
+      <Field_23 source="Edition" destination="" replace="False" addstart="False" addend="False" />
+      <Field_24 source="IMDB_Rank" destination="" replace="False" addstart="False" addend="False" />
+      <Field_25 source="IMDB_Id" destination="" replace="False" addstart="False" addend="False" />
       <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />

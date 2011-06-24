@@ -3,12 +3,6 @@
   <Section>
     <DBName>IMDB.DE</DBName>
     <URLPrefix>http://www.imdb.de</URLPrefix>
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.imdb.de_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">herungsweise_x0020__x0026__x0023_xDC_x003B_bereinstimmung</KeyStartList>
@@ -121,6 +115,24 @@
       <KeyStartDetails2 Param1="_x0023_REGEX_x0023_._x002A__x002F_" Param2="http:_x002F__x002F_ofdbgw.lirzg.net_x002F_imdb2ofdb_x002F_">primary-photo_x002F_media</KeyStartDetails2>
       <KeyEndDetails2>_x0022_</KeyEndDetails2>
       <KeyDetails2Index />
+      <KeyStartStudio Param1="" Param2="" />
+      <KeyEndStudio />
+      <KeyStudioIndex />
+      <KeyStartEdition Param1="" Param2="" />
+      <KeyEndEdition />
+      <KeyEditionIndex />
+      <KeyStartIMDB_Rank Param1="" Param2="" />
+      <KeyEndIMDB_Rank />
+      <KeyIMDB_RankIndex />
+      <KeyStartIMDB_Id Param1="" Param2="">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.de_x002F_title_x002F_</KeyStartIMDB_Id>
+      <KeyEndIMDB_Id>_x002F__x0022_</KeyEndIMDB_Id>
+      <KeyIMDB_IdIndex />
+      <KeyStartTMDB_Id Param1="" Param2="" />
+      <KeyEndTMDB_Id />
+      <KeyTMDB_IdIndex />
+      <KeyStartLinkSyn Param1="" Param2="" />
+      <KeyEndLinkSyn />
+      <KeyLinkSynIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" />
@@ -139,16 +151,16 @@
       <Field_13 source="URL_x0020_-_x0020_Redirection_x0020_Persons" destination="" replace="False" addstart="False" addend="False" />
       <Field_14 source="Comment" destination="" replace="False" addstart="False" addend="False" />
       <Field_15 source="Language" destination="" replace="False" addstart="False" addend="False" />
-      <Field_16 source="Tagline" destination="Description" replace="False" addstart="True" addend="False" />
+      <Field_16 source="Tagline" destination="" replace="False" addstart="False" addend="False" />
       <Field_17 source="Certification" destination="" replace="False" addstart="False" addend="False" />
       <Field_18 source="URL_x0020_-_x0020_Redirection_x0020_Titles" destination="" replace="False" addstart="False" addend="False" />
       <Field_19 source="URL_x0020_-_x0020_Redirection_x0020_Certification" destination="" replace="False" addstart="False" addend="False" />
       <Field_20 source="Writer" destination="" replace="False" addstart="False" addend="False" />
       <Field_21 source="URL_x0020_-_x0020_Redirection_x0020_Comment" destination="" replace="False" addstart="False" addend="False" />
-      <Field_22 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_23 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_24 source="" destination="" replace="False" addstart="False" addend="False" />
-      <Field_25 source="" destination="" replace="False" addstart="False" addend="False" />
+      <Field_22 source="Studio" destination="" replace="False" addstart="False" addend="False" />
+      <Field_23 source="Edition" destination="" replace="False" addstart="False" addend="False" />
+      <Field_24 source="IMDB_Rank" destination="" replace="False" addstart="False" addend="False" />
+      <Field_25 source="IMDB_Id" destination="" replace="False" addstart="False" addend="False" />
       <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
