@@ -81,9 +81,6 @@ namespace Grabber_Interface
           this.label23 = new System.Windows.Forms.Label();
           this.cbTtitleMaxTitles = new System.Windows.Forms.ComboBox();
           this.cbTtitlePreferredLanguage = new System.Windows.Forms.ComboBox();
-          this.groupBox15 = new System.Windows.Forms.GroupBox();
-          this.chkAddTags = new System.Windows.Forms.CheckBox();
-          this.DVDPTagField = new System.Windows.Forms.ComboBox();
           this.dataGridViewMapping = new System.Windows.Forms.DataGridView();
           this.Column0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,10 +88,13 @@ namespace Grabber_Interface
           this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
           this.Column4 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
           this.Column5 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.MergePreferSource = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+          this.MergePreferDestination = new System.Windows.Forms.DataGridViewCheckBoxColumn();
           this.groupBox10 = new System.Windows.Forms.GroupBox();
           this.label29 = new System.Windows.Forms.Label();
           this.cbCertificationPreferredLanguage = new System.Windows.Forms.ComboBox();
           this.button_SaveAs = new System.Windows.Forms.Button();
+          this.URLpage = new System.Windows.Forms.ComboBox();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -112,6 +112,7 @@ namespace Grabber_Interface
           this.groupBox3 = new System.Windows.Forms.GroupBox();
           this.textPreview = new System.Windows.Forms.RichTextBox();
           this.groupBox4 = new System.Windows.Forms.GroupBox();
+          this.lblSubPage = new System.Windows.Forms.Label();
           this.lblLanguagesAll = new System.Windows.Forms.Label();
           this.chkACTORROLES = new System.Windows.Forms.CheckBox();
           this.lblLanguages = new System.Windows.Forms.Label();
@@ -156,16 +157,6 @@ namespace Grabber_Interface
           this.label32 = new System.Windows.Forms.Label();
           this.label31 = new System.Windows.Forms.Label();
           this.label30 = new System.Windows.Forms.Label();
-          this.groupBox11 = new System.Windows.Forms.GroupBox();
-          this.groupBox12 = new System.Windows.Forms.GroupBox();
-          this.WriterAddField = new System.Windows.Forms.ComboBox();
-          this.chkAddWriter = new System.Windows.Forms.CheckBox();
-          this.groupBox14 = new System.Windows.Forms.GroupBox();
-          this.TaglinesAddField = new System.Windows.Forms.ComboBox();
-          this.chkAddTaglines = new System.Windows.Forms.CheckBox();
-          this.groupBox13 = new System.Windows.Forms.GroupBox();
-          this.CertificationAddField = new System.Windows.Forms.ComboBox();
-          this.chkAddCertification = new System.Windows.Forms.CheckBox();
           this.statusStrip1 = new System.Windows.Forms.StatusStrip();
           this.label22 = new System.Windows.Forms.Label();
           this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -183,7 +174,6 @@ namespace Grabber_Interface
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
           this.groupBox8.SuspendLayout();
-          this.groupBox15.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -199,10 +189,6 @@ namespace Grabber_Interface
           this.groupBox2.SuspendLayout();
           this.groupBox1.SuspendLayout();
           this.tabPageUserSettings.SuspendLayout();
-          this.groupBox11.SuspendLayout();
-          this.groupBox12.SuspendLayout();
-          this.groupBox14.SuspendLayout();
-          this.groupBox13.SuspendLayout();
           this.groupBox7.SuspendLayout();
           this.groupBox9.SuspendLayout();
           this.tabControl1.SuspendLayout();
@@ -361,7 +347,12 @@ namespace Grabber_Interface
             resources.GetString("cb_ParamDetail.Items26"),
             resources.GetString("cb_ParamDetail.Items27"),
             resources.GetString("cb_ParamDetail.Items28"),
-            resources.GetString("cb_ParamDetail.Items29")});
+            resources.GetString("cb_ParamDetail.Items29"),
+            resources.GetString("cb_ParamDetail.Items30"),
+            resources.GetString("cb_ParamDetail.Items31"),
+            resources.GetString("cb_ParamDetail.Items32"),
+            resources.GetString("cb_ParamDetail.Items33"),
+            resources.GetString("cb_ParamDetail.Items34")});
           resources.ApplyResources(this.cb_ParamDetail, "cb_ParamDetail");
           this.cb_ParamDetail.Name = "cb_ParamDetail";
           this.toolTip1.SetToolTip(this.cb_ParamDetail, resources.GetString("cb_ParamDetail.ToolTip"));
@@ -641,34 +632,11 @@ namespace Grabber_Interface
           this.toolTip1.SetToolTip(this.cbTtitlePreferredLanguage, resources.GetString("cbTtitlePreferredLanguage.ToolTip"));
           this.cbTtitlePreferredLanguage.SelectedIndexChanged += new System.EventHandler(this.cbTtitlePreferredLanguage_SelectedIndexChanged);
           // 
-          // groupBox15
-          // 
-          this.groupBox15.Controls.Add(this.chkAddTags);
-          this.groupBox15.Controls.Add(this.DVDPTagField);
-          resources.ApplyResources(this.groupBox15, "groupBox15");
-          this.groupBox15.Name = "groupBox15";
-          this.groupBox15.TabStop = false;
-          this.toolTip1.SetToolTip(this.groupBox15, resources.GetString("groupBox15.ToolTip"));
-          // 
-          // chkAddTags
-          // 
-          resources.ApplyResources(this.chkAddTags, "chkAddTags");
-          this.chkAddTags.Name = "chkAddTags";
-          this.chkAddTags.UseVisualStyleBackColor = true;
-          // 
-          // DVDPTagField
-          // 
-          this.DVDPTagField.FormattingEnabled = true;
-          this.DVDPTagField.Items.AddRange(new object[] {
-            resources.GetString("DVDPTagField.Items"),
-            resources.GetString("DVDPTagField.Items1")});
-          resources.ApplyResources(this.DVDPTagField, "DVDPTagField");
-          this.DVDPTagField.Name = "DVDPTagField";
-          // 
           // dataGridViewMapping
           // 
           this.dataGridViewMapping.AllowUserToAddRows = false;
           this.dataGridViewMapping.AllowUserToDeleteRows = false;
+          this.dataGridViewMapping.AllowUserToOrderColumns = true;
           this.dataGridViewMapping.BackgroundColor = System.Drawing.SystemColors.ControlLight;
           this.dataGridViewMapping.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
           this.dataGridViewMapping.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -678,7 +646,9 @@ namespace Grabber_Interface
             this.Column2,
             this.Column3,
             this.Column4,
-            this.Column5});
+            this.Column5,
+            this.MergePreferSource,
+            this.MergePreferDestination});
           resources.ApplyResources(this.dataGridViewMapping, "dataGridViewMapping");
           this.dataGridViewMapping.MultiSelect = false;
           this.dataGridViewMapping.Name = "dataGridViewMapping";
@@ -697,37 +667,55 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.Column1, "Column1");
           this.Column1.Name = "Column1";
+          this.Column1.ReadOnly = true;
           // 
           // Column2
           // 
           resources.ApplyResources(this.Column2, "Column2");
           this.Column2.Name = "Column2";
+          this.Column2.ReadOnly = false;
           this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // Column3
           // 
-          this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
           resources.ApplyResources(this.Column3, "Column3");
           this.Column3.Name = "Column3";
+          this.Column3.ReadOnly = false;
           this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // Column4
           // 
-          this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
           resources.ApplyResources(this.Column4, "Column4");
           this.Column4.Name = "Column4";
+          this.Column4.ReadOnly = false;
           this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // Column5
           // 
-          this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
           resources.ApplyResources(this.Column5, "Column5");
           this.Column5.Name = "Column5";
+          this.Column5.ReadOnly = false;
           this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+          // 
+          // MergePreferSource
+          // 
+          resources.ApplyResources(this.MergePreferSource, "MergePreferSource");
+          this.MergePreferSource.Name = "MergePreferSource";
+          this.MergePreferSource.ReadOnly = false;
+          this.MergePreferSource.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+          this.MergePreferSource.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+          // 
+          // MergePreferDestination
+          // 
+          resources.ApplyResources(this.MergePreferDestination, "MergePreferDestination");
+          this.MergePreferDestination.Name = "MergePreferDestination";
+          this.MergePreferDestination.ReadOnly = false;
+          this.MergePreferDestination.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+          this.MergePreferDestination.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
           // groupBox10
           // 
@@ -757,6 +745,24 @@ namespace Grabber_Interface
           this.toolTip1.SetToolTip(this.button_SaveAs, resources.GetString("button_SaveAs.ToolTip"));
           this.button_SaveAs.UseVisualStyleBackColor = true;
           this.button_SaveAs.Click += new System.EventHandler(this.button_SaveAs_Click);
+          // 
+          // URLpage
+          // 
+          this.URLpage.FormattingEnabled = true;
+          this.URLpage.Items.AddRange(new object[] {
+            resources.GetString("URLpage.Items"),
+            resources.GetString("URLpage.Items1"),
+            resources.GetString("URLpage.Items2"),
+            resources.GetString("URLpage.Items3"),
+            resources.GetString("URLpage.Items4"),
+            resources.GetString("URLpage.Items5"),
+            resources.GetString("URLpage.Items6"),
+            resources.GetString("URLpage.Items7"),
+            resources.GetString("URLpage.Items8")});
+          resources.ApplyResources(this.URLpage, "URLpage");
+          this.URLpage.Name = "URLpage";
+          this.toolTip1.SetToolTip(this.URLpage, resources.GetString("URLpage.ToolTip"));
+          this.URLpage.SelectedIndexChanged += new System.EventHandler(this.URLpage_SelectedIndexChanged);
           // 
           // linkLabelMFwiki
           // 
@@ -873,6 +879,8 @@ namespace Grabber_Interface
           // 
           // groupBox4
           // 
+          this.groupBox4.Controls.Add(this.lblSubPage);
+          this.groupBox4.Controls.Add(this.URLpage);
           this.groupBox4.Controls.Add(this.textLanguagesAll);
           this.groupBox4.Controls.Add(this.lblLanguagesAll);
           this.groupBox4.Controls.Add(this.chkACTORROLES);
@@ -898,6 +906,11 @@ namespace Grabber_Interface
           resources.ApplyResources(this.groupBox4, "groupBox4");
           this.groupBox4.Name = "groupBox4";
           this.groupBox4.TabStop = false;
+          // 
+          // lblSubPage
+          // 
+          resources.ApplyResources(this.lblSubPage, "lblSubPage");
+          this.lblSubPage.Name = "lblSubPage";
           // 
           // lblLanguagesAll
           // 
@@ -1161,7 +1174,6 @@ namespace Grabber_Interface
           this.tabPageUserSettings.Controls.Add(this.label31);
           this.tabPageUserSettings.Controls.Add(this.dataGridViewMapping);
           this.tabPageUserSettings.Controls.Add(this.label30);
-          this.tabPageUserSettings.Controls.Add(this.groupBox11);
           this.tabPageUserSettings.Controls.Add(this.statusStrip1);
           this.tabPageUserSettings.Controls.Add(this.label22);
           this.tabPageUserSettings.Controls.Add(this.groupBox7);
@@ -1190,87 +1202,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.label30, "label30");
           this.label30.Name = "label30";
-          // 
-          // groupBox11
-          // 
-          this.groupBox11.Controls.Add(this.groupBox15);
-          this.groupBox11.Controls.Add(this.groupBox12);
-          this.groupBox11.Controls.Add(this.groupBox14);
-          this.groupBox11.Controls.Add(this.groupBox13);
-          resources.ApplyResources(this.groupBox11, "groupBox11");
-          this.groupBox11.Name = "groupBox11";
-          this.groupBox11.TabStop = false;
-          // 
-          // groupBox12
-          // 
-          this.groupBox12.Controls.Add(this.WriterAddField);
-          this.groupBox12.Controls.Add(this.chkAddWriter);
-          resources.ApplyResources(this.groupBox12, "groupBox12");
-          this.groupBox12.Name = "groupBox12";
-          this.groupBox12.TabStop = false;
-          // 
-          // WriterAddField
-          // 
-          this.WriterAddField.FormattingEnabled = true;
-          this.WriterAddField.Items.AddRange(new object[] {
-            resources.GetString("WriterAddField.Items"),
-            resources.GetString("WriterAddField.Items1"),
-            resources.GetString("WriterAddField.Items2"),
-            resources.GetString("WriterAddField.Items3")});
-          resources.ApplyResources(this.WriterAddField, "WriterAddField");
-          this.WriterAddField.Name = "WriterAddField";
-          // 
-          // chkAddWriter
-          // 
-          resources.ApplyResources(this.chkAddWriter, "chkAddWriter");
-          this.chkAddWriter.Name = "chkAddWriter";
-          this.chkAddWriter.UseVisualStyleBackColor = true;
-          // 
-          // groupBox14
-          // 
-          this.groupBox14.Controls.Add(this.TaglinesAddField);
-          this.groupBox14.Controls.Add(this.chkAddTaglines);
-          resources.ApplyResources(this.groupBox14, "groupBox14");
-          this.groupBox14.Name = "groupBox14";
-          this.groupBox14.TabStop = false;
-          // 
-          // TaglinesAddField
-          // 
-          this.TaglinesAddField.FormattingEnabled = true;
-          this.TaglinesAddField.Items.AddRange(new object[] {
-            resources.GetString("TaglinesAddField.Items"),
-            resources.GetString("TaglinesAddField.Items1")});
-          resources.ApplyResources(this.TaglinesAddField, "TaglinesAddField");
-          this.TaglinesAddField.Name = "TaglinesAddField";
-          // 
-          // chkAddTaglines
-          // 
-          resources.ApplyResources(this.chkAddTaglines, "chkAddTaglines");
-          this.chkAddTaglines.Name = "chkAddTaglines";
-          this.chkAddTaglines.UseVisualStyleBackColor = true;
-          // 
-          // groupBox13
-          // 
-          this.groupBox13.Controls.Add(this.CertificationAddField);
-          this.groupBox13.Controls.Add(this.chkAddCertification);
-          resources.ApplyResources(this.groupBox13, "groupBox13");
-          this.groupBox13.Name = "groupBox13";
-          this.groupBox13.TabStop = false;
-          // 
-          // CertificationAddField
-          // 
-          this.CertificationAddField.FormattingEnabled = true;
-          this.CertificationAddField.Items.AddRange(new object[] {
-            resources.GetString("CertificationAddField.Items"),
-            resources.GetString("CertificationAddField.Items1")});
-          resources.ApplyResources(this.CertificationAddField, "CertificationAddField");
-          this.CertificationAddField.Name = "CertificationAddField";
-          // 
-          // chkAddCertification
-          // 
-          resources.ApplyResources(this.chkAddCertification, "chkAddCertification");
-          this.chkAddCertification.Name = "chkAddCertification";
-          this.chkAddCertification.UseVisualStyleBackColor = true;
           // 
           // statusStrip1
           // 
@@ -1444,8 +1375,6 @@ namespace Grabber_Interface
           this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GrabConfig_FormClosing);
           this.groupBox8.ResumeLayout(false);
           this.groupBox8.PerformLayout();
-          this.groupBox15.ResumeLayout(false);
-          this.groupBox15.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).EndInit();
           this.groupBox10.ResumeLayout(false);
           this.groupBox10.PerformLayout();
@@ -1469,13 +1398,6 @@ namespace Grabber_Interface
           this.groupBox1.PerformLayout();
           this.tabPageUserSettings.ResumeLayout(false);
           this.tabPageUserSettings.PerformLayout();
-          this.groupBox11.ResumeLayout(false);
-          this.groupBox12.ResumeLayout(false);
-          this.groupBox12.PerformLayout();
-          this.groupBox14.ResumeLayout(false);
-          this.groupBox14.PerformLayout();
-          this.groupBox13.ResumeLayout(false);
-          this.groupBox13.PerformLayout();
           this.groupBox7.ResumeLayout(false);
           this.groupBox9.ResumeLayout(false);
           this.groupBox9.PerformLayout();
@@ -1593,19 +1515,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabPageUserSettings;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.GroupBox groupBox15;
-        private System.Windows.Forms.CheckBox chkAddTags;
-        private System.Windows.Forms.ComboBox DVDPTagField;
-        private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.ComboBox WriterAddField;
-        private System.Windows.Forms.CheckBox chkAddWriter;
-        private System.Windows.Forms.GroupBox groupBox14;
-        private System.Windows.Forms.ComboBox TaglinesAddField;
-        private System.Windows.Forms.CheckBox chkAddTaglines;
-        private System.Windows.Forms.GroupBox groupBox13;
-        private System.Windows.Forms.ComboBox CertificationAddField;
-        private System.Windows.Forms.CheckBox chkAddCertification;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.GroupBox groupBox7;
@@ -1632,15 +1541,19 @@ namespace Grabber_Interface
         private System.Windows.Forms.BindingSource iMDBEnumeratorBindingSource1;
         private System.Windows.Forms.BindingSource iMDBEnumeratorBindingSource;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Button button_SaveAs;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.ComboBox URLpage;
+        private System.Windows.Forms.Label lblSubPage;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column0;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column4;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column5;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Button button_SaveAs;
-        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn MergePreferSource;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn MergePreferDestination;
 
     }
 }

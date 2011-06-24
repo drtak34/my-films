@@ -29,110 +29,168 @@
       <KeyStartOTitle Param1="" Param2="" />
       <KeyEndOTitle />
       <KeyOTitleIndex />
+      <KeyOTitlePage />
       <KeyStartTTitle Param1="" Param2="" />
       <KeyEndTTitle />
       <KeyTTitleRegExp />
       <KeyTTitleIndex />
+      <KeyTTitlePage />
       <KeyTTitleMaxItems />
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll />
       <KeyStartImg Param1="" Param2="" />
       <KeyEndImg />
       <KeyImgIndex />
+      <KeyImgPage />
       <KeyStartLinkImg Param1="" Param2="" />
       <KeyEndLinkImg />
       <KeyLinkImgIndex />
+      <KeyLinkImgPage />
       <KeyStartRate Param1="" Param2="" />
       <KeyEndRate />
       <KeyRateIndex />
+      <KeyRatePage />
       <KeyStartRate2 Param1="" Param2="" />
       <KeyEndRate2 />
       <KeyRate2Index />
+      <KeyRate2Page />
       <BaseRating />
       <KeyStartSyn Param1="" Param2="" />
       <KeyEndSyn />
       <KeySynIndex />
+      <KeySynPage />
       <KeyStartRealise Param1="" Param2="" />
       <KeyEndRealise />
       <KeyRealiseIndex />
+      <KeyRealisePage />
       <KeyRealiseRegExp />
       <KeyRealiseMaxItems />
       <KeyStartProduct Param1="" Param2="" />
       <KeyEndProduct />
       <KeyProductIndex />
+      <KeyProductPage />
       <KeyProductRegExp />
       <KeyProductMaxItems />
       <KeyStartWriter Param1="" Param2="" />
       <KeyEndWriter />
       <KeyWriterIndex />
+      <KeyWriterPage />
       <KeyWriterRegExp />
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="" Param2="" />
       <KeyEndCredits />
       <KeyCreditsRegExp />
       <KeyCreditsIndex />
+      <KeyCreditsPage />
       <KeyCreditsMaxItems />
       <KeyCreditsGrabActorRoles />
       <KeyStartCountry Param1="" Param2="" />
       <KeyEndCountry />
       <KeyCountryRegExp />
       <KeyCountryIndex />
+      <KeyCountryPage />
       <KeyStartGenre Param1="" Param2="" />
       <KeyEndGenre />
       <KeyGenreRegExp />
       <KeyGenreIndex />
+      <KeyGenrePage />
       <KeyStartYear Param1="" Param2="" />
       <KeyEndYear />
       <KeyYearIndex />
+      <KeyYearPage />
       <KeyStartLinkPersons Param1="" Param2="" />
       <KeyEndLinkPersons />
       <KeyLinkPersonsIndex />
+      <KeyLinkPersonsPage />
       <KeyStartComment Param1="" Param2="" />
       <KeyEndComment />
       <KeyCommentRegExp />
       <KeyCommentIndex />
+      <KeyCommentPage />
       <KeyStartLanguage Param1="" Param2="" />
       <KeyEndLanguage />
       <KeyLanguageIndex />
+      <KeyLanguagePage />
       <KeyStartTagline Param1="" Param2="" />
       <KeyEndTagline />
       <KeyTaglineIndex />
+      <KeyTaglinePage />
       <KeyStartCertification Param1="" Param2="" />
       <KeyEndCertification />
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
+      <KeyCertificationPage />
       <KeyCertificationLanguage />
       <KeyCertificationLanguageAll />
       <KeyStartLinkTitles Param1="" Param2="" />
       <KeyEndLinkTitles />
       <KeyLinkTitlesIndex />
+      <KeyLinkTitlesPage />
       <KeyStartLinkCertification Param1="" Param2="" />
       <KeyEndLinkCertification />
       <KeyLinkCertificationIndex />
+      <KeyLinkCertificationPage />
       <KeyStartLinkComment Param1="" Param2="" />
       <KeyEndLinkComment />
       <KeyLinkCommentIndex />
+      <KeyLinkCommentPage />
       <KeyStartDetails2 Param1="" Param2="" />
       <KeyEndDetails2 />
       <KeyDetails2Index />
+      <KeyDetails2Page />
       <KeyStartStudio Param1="" Param2="" />
       <KeyEndStudio />
       <KeyStudioIndex />
+      <KeyStudioPage />
       <KeyStartEdition Param1="" Param2="" />
       <KeyEndEdition />
       <KeyEditionIndex />
+      <KeyEditionPage />
       <KeyStartIMDB_Rank Param1="" Param2="" />
       <KeyEndIMDB_Rank />
       <KeyIMDB_RankIndex />
+      <KeyIMDB_RankPage />
       <KeyStartIMDB_Id Param1="" Param2="" />
       <KeyEndIMDB_Id />
       <KeyIMDB_IdIndex />
+      <KeyIMDB_IdPage />
       <KeyStartTMDB_Id Param1="" Param2="" />
       <KeyEndTMDB_Id />
       <KeyTMDB_IdIndex />
+      <KeyTMDB_IdPage />
       <KeyStartLinkSyn Param1="" Param2="" />
       <KeyEndLinkSyn />
       <KeyLinkSynIndex />
+      <KeyLinkSynPage />
+      <KeyStartLinkGeneric1 Param1="" Param2="" />
+      <KeyEndLinkGeneric1 />
+      <KeyLinkGeneric1Index />
+      <KeyLinkGeneric1Page />
+      <KeyStartLinkGeneric2 Param1="" Param2="" />
+      <KeyEndLinkGeneric2 />
+      <KeyLinkGeneric2Index />
+      <KeyLinkGeneric2Page />
+      <KeyStartGeneric1 Param1="" Param2="" />
+      <KeyEndGeneric1 />
+      <KeyGeneric1Index />
+      <KeyGeneric1RegExp />
+      <KeyGeneric1MaxItems />
+      <KeyGeneric1Language />
+      <KeyGeneric1Page />
+      <KeyStartGeneric2 Param1="" Param2="" />
+      <KeyEndGeneric2 />
+      <KeyGeneric2Index />
+      <KeyGeneric2RegExp />
+      <KeyGeneric2MaxItems />
+      <KeyGeneric2Language />
+      <KeyGeneric2Page />
+      <KeyStartGeneric3 Param1="" Param2="" />
+      <KeyEndGeneric3 />
+      <KeyGeneric3Index />
+      <KeyGeneric3RegExp />
+      <KeyGeneric3MaxItems />
+      <KeyGeneric3Language />
+      <KeyGeneric3Page />
     </Details>
   </Section>
 </Profile>
