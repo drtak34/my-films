@@ -1816,7 +1816,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             else
                                 dlg.SelectedLabel = -2;
                         }
-                        dlg.Add(wurl.Title.ToString());
+                        dlg.Add(wurl.Title.ToString() + " (" + wurl.Year.ToString() + ")");
                     }
                     string[] split = MovieName.Trim().Split(new Char[] { ' ' });
                     foreach (string s in split)
@@ -2025,7 +2025,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   "SubUrlTitles",
                   "SubUrlCertification",
                   "Writer",
-                  "IMDBrank",
+                  "SubUrlComments",
                   "Studio",
                   "Edition",
                   "Fanart",
@@ -2059,7 +2059,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         && wProperty != "TagLine"
                         && wProperty != "Certification"
                         && wProperty != "Writer"
-                        && wProperty != "IMDBrank"
+                        && wProperty != "SubUrlComments"
                         && wProperty != "Studio"
                         && wProperty != "Edition"
                         && wProperty != "Fanart"
