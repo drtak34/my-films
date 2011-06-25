@@ -173,6 +173,7 @@ namespace Grabber_Interface
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+          this.btnLoadDetailInWeb = new System.Windows.Forms.Button();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -451,7 +452,7 @@ namespace Grabber_Interface
           this.buttonPrevParamDetail.Name = "buttonPrevParamDetail";
           this.toolTip1.SetToolTip(this.buttonPrevParamDetail, resources.GetString("buttonPrevParamDetail.ToolTip"));
           this.buttonPrevParamDetail.UseVisualStyleBackColor = true;
-          this.buttonPrevParamDetail.Click += new System.EventHandler(this.button6_Click);
+          this.buttonPrevParamDetail.Click += new System.EventHandler(this.buttonPrevParamDetail_Click);
           // 
           // lblResult
           // 
@@ -523,7 +524,7 @@ namespace Grabber_Interface
           this.button_GoDetailPage.Name = "button_GoDetailPage";
           this.toolTip1.SetToolTip(this.button_GoDetailPage, resources.GetString("button_GoDetailPage.ToolTip"));
           this.button_GoDetailPage.UseVisualStyleBackColor = true;
-          this.button_GoDetailPage.Click += new System.EventHandler(this.button4_Click);
+          this.button_GoDetailPage.Click += new System.EventHandler(this.button_GoDetailPage_Click);
           // 
           // textRedir
           // 
@@ -673,7 +674,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.Column2, "Column2");
           this.Column2.Name = "Column2";
-          this.Column2.ReadOnly = false;
           this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
@@ -681,7 +681,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.Column3, "Column3");
           this.Column3.Name = "Column3";
-          this.Column3.ReadOnly = false;
           this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
@@ -689,7 +688,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.Column4, "Column4");
           this.Column4.Name = "Column4";
-          this.Column4.ReadOnly = false;
           this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
@@ -697,7 +695,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.Column5, "Column5");
           this.Column5.Name = "Column5";
-          this.Column5.ReadOnly = false;
           this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
@@ -705,7 +702,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.MergePreferSource, "MergePreferSource");
           this.MergePreferSource.Name = "MergePreferSource";
-          this.MergePreferSource.ReadOnly = false;
           this.MergePreferSource.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.MergePreferSource.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
@@ -713,7 +709,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.MergePreferDestination, "MergePreferDestination");
           this.MergePreferDestination.Name = "MergePreferDestination";
-          this.MergePreferDestination.ReadOnly = false;
           this.MergePreferDestination.Resizable = System.Windows.Forms.DataGridViewTriState.False;
           this.MergePreferDestination.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
           // 
@@ -758,7 +753,8 @@ namespace Grabber_Interface
             resources.GetString("URLpage.Items5"),
             resources.GetString("URLpage.Items6"),
             resources.GetString("URLpage.Items7"),
-            resources.GetString("URLpage.Items8")});
+            resources.GetString("URLpage.Items8"),
+            resources.GetString("URLpage.Items9")});
           resources.ApplyResources(this.URLpage, "URLpage");
           this.URLpage.Name = "URLpage";
           this.toolTip1.SetToolTip(this.URLpage, resources.GetString("URLpage.ToolTip"));
@@ -795,6 +791,7 @@ namespace Grabber_Interface
           // 
           // tabPageDetailPage
           // 
+          this.tabPageDetailPage.Controls.Add(this.btnLoadDetailInWeb);
           this.tabPageDetailPage.Controls.Add(this.button_Load_File);
           this.tabPageDetailPage.Controls.Add(this.label21);
           this.tabPageDetailPage.Controls.Add(this.labelImageSize);
@@ -1349,6 +1346,13 @@ namespace Grabber_Interface
           // 
           this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
           // 
+          // btnLoadDetailInWeb
+          // 
+          resources.ApplyResources(this.btnLoadDetailInWeb, "btnLoadDetailInWeb");
+          this.btnLoadDetailInWeb.Name = "btnLoadDetailInWeb";
+          this.btnLoadDetailInWeb.UseVisualStyleBackColor = true;
+          this.btnLoadDetailInWeb.Click += new System.EventHandler(this.btnLoadDetailInWeb_Click);
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -1554,6 +1558,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewCheckBoxColumn Column5;
         private System.Windows.Forms.DataGridViewCheckBoxColumn MergePreferSource;
         private System.Windows.Forms.DataGridViewCheckBoxColumn MergePreferDestination;
+        private System.Windows.Forms.Button btnLoadDetailInWeb;
 
     }
 }

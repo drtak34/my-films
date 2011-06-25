@@ -1170,7 +1170,7 @@ namespace Grabber_Interface
           strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-        URLBodyLinkComment = strTemp;
+        URLBodyLinkSyn = strTemp;
         BodyLinkSyn = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
       }
       else
@@ -1195,7 +1195,7 @@ namespace Grabber_Interface
           strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-        URLBodyLinkSyn = strTemp;
+        URLBodyLinkComment = strTemp;
         BodyLinkComment = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
       }
       else
@@ -1210,35 +1210,49 @@ namespace Grabber_Interface
       string strActivePage = string.Empty;
       switch (Page)
       {
+        case "":
+          strActivePage = BodyDetail;
+          textURLPreview.Text = URLBodyDetail;
+          break;
         case "URL Gateway":
           strActivePage = BodyDetail2;
+          textURLPreview.Text = URLBodyDetail2;
           break;
         case "URL Redirection Generic 1":
           strActivePage = BodyLinkGeneric1;
+          textURLPreview.Text = URLBodyLinkGeneric1;
           break;
         case "URL Redirection Generic 2":
           strActivePage = BodyLinkGeneric2;
+          textURLPreview.Text = URLBodyLinkGeneric2;
           break;
         case "URL Redirection Cover":
           strActivePage = BodyLinkImg;
+          textURLPreview.Text = URLBodyLinkImg;
           break;
         case "URL Redirection Persons":
           strActivePage = BodyLinkPersons;
+          textURLPreview.Text = URLBodyLinkPersons;
           break;
         case "URL Redirection Title":
           strActivePage = BodyLinkTitles;
+          textURLPreview.Text = URLBodyLinkTitles;
           break;
         case "URL Redirection Certification":
           strActivePage = BodyLinkCertification;
+          textURLPreview.Text = URLBodyLinkCertification;
           break;
         case "URL Redirection Comment":
           strActivePage = BodyLinkComment;
+          textURLPreview.Text = URLBodyLinkComment;
           break;
         case "URL Redirection Description":
           strActivePage = BodyLinkSyn;
+          textURLPreview.Text = URLBodyLinkSyn;
           break;
         default:
-          strActivePage = BodyDetail;
+          strActivePage = "";
+          textURLPreview.Text = "";
           break;
       }
       return strActivePage;
@@ -1343,6 +1357,8 @@ namespace Grabber_Interface
       textMaxItems.Visible = false;
       textLanguages.Visible = false;
       textLanguagesAll.Visible = false;
+      chkACTORROLES.Visible = false;
+      chkACTORROLES.Enabled = false;
       buttonPrevParamDetail.Visible = true;
       //lblComplement.Text = "Complement";
       if (!textBodyDetail.Text.Equals(BodyDetail))
@@ -1784,6 +1800,9 @@ namespace Grabber_Interface
 
       }
 
+      if (lblComplement.Visible == true)
+        chkACTORROLES.Visible = true;
+
       if (cb_ParamDetail.SelectedIndex > 0)
       {
         textDReplace.Visible = true;
@@ -2165,7 +2184,7 @@ namespace Grabber_Interface
         button_GoDetailPage.Enabled = false;
     }
 
-    private void button4_Click(object sender, EventArgs e)
+    private void button_GoDetailPage_Click(object sender, EventArgs e)
     {
       if (listPreview.SelectedIndex >= 0)
       {
@@ -3302,7 +3321,7 @@ namespace Grabber_Interface
     //    TextKeyStopD_TextChanged(null, null);
     //}
 
-    private void button6_Click(object sender, EventArgs e)
+    private void buttonPrevParamDetail_Click(object sender, EventArgs e)
     {
       pictureBoxPreviewCover.ImageLocation = ""; // clear picture
       labelImageSize.Text = "";
@@ -3321,15 +3340,13 @@ namespace Grabber_Interface
           find = GrabUtil.Find(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text);
 
         MessageBox.Show(find, "Preview", MessageBoxButtons.OK);
-        textURLPreview.Text = find;
+
+        if (textURLPreview.Text.StartsWith("http"))
+          textURLPreview.Text = find; // load Parameter in Sub URL field (to allow web launching etc.
+
         if (find.EndsWith("jpg") || find.EndsWith("png"))
-          try
-          {
-            pictureBoxPreviewCover.ImageLocation = find;
-          }
-          catch
-          {
-          }
+          try { pictureBoxPreviewCover.ImageLocation = find; }
+          catch {}
       }
 
     }
@@ -3611,6 +3628,18 @@ namespace Grabber_Interface
         dataGridViewMapping.Rows[i].Cells[7].Value = false;
       }
 
+    }
+
+    private void btnLoadDetailInWeb_Click(object sender, EventArgs e)
+    {
+      try
+      {
+        Process.Start(textURLPreview.Text);
+      }
+      catch (Exception)
+      {
+        throw;
+      }
     }
 
   }

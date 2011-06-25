@@ -535,7 +535,7 @@ expert mode is not required.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="cb_ParamDetail.Items" xml:space="preserve">
     <value>(Start-End Detail Page)</value>
@@ -625,13 +625,13 @@ expert mode is not required.</value>
     <value>URL Redirection Generic 2</value>
   </data>
   <data name="cb_ParamDetail.Items29" xml:space="preserve">
-    <value>URL Redirection cover</value>
+    <value>URL Redirection Cover</value>
   </data>
   <data name="cb_ParamDetail.Items30" xml:space="preserve">
-    <value>URL Redirection persons</value>
+    <value>URL Redirection Persons</value>
   </data>
   <data name="cb_ParamDetail.Items31" xml:space="preserve">
-    <value>URL Redirection TTitle</value>
+    <value>URL Redirection Title</value>
   </data>
   <data name="cb_ParamDetail.Items32" xml:space="preserve">
     <value>URL Redirection Certification</value>
@@ -871,10 +871,10 @@ Set Characters to add in "With" field.
     <value>Year</value>
   </data>
   <data name="Index.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 87</value>
+    <value>341, 87</value>
   </data>
   <data name="Index.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 21</value>
+    <value>141, 21</value>
   </data>
   <data name="Index.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -990,7 +990,7 @@ on "User Options" tab.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;Button_Load_URL.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="button_Find_Detail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1020,7 +1020,7 @@ on "User Options" tab.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;button_Find_Detail.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="buttonPreviewDetailFullGrab.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1052,7 +1052,7 @@ This preview takes all user settings into consideration.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;buttonPreviewDetailFullGrab.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="buttonPrevParamDetail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1088,7 +1088,7 @@ all options are working as desired, please use "Preview Full Grab".</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;buttonPrevParamDetail.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="lblResult.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1100,13 +1100,13 @@ all options are working as desired, please use "Preview Full Grab".</value>
     <value>14, 39</value>
   </data>
   <data name="lblResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+    <value>51, 13</value>
   </data>
   <data name="lblResult.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="lblResult.Text" xml:space="preserve">
-    <value>Preview</value>
+    <value>Sub URL</value>
   </data>
   <data name="lblResult.ToolTip" xml:space="preserve">
     <value>This shows the result after you klicked "preview parameter".
@@ -1123,7 +1123,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;lblResult.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="TextURL.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 21</value>
@@ -1882,6 +1882,70 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="MergePreferSource.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="MergePreferDestination.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dataGridViewMapping.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 116</value>
+  </data>
+  <data name="dataGridViewMapping.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="dataGridViewMapping.Size" type="System.Drawing.Size, System.Drawing">
+    <value>652, 410</value>
+  </data>
+  <data name="dataGridViewMapping.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="dataGridViewMapping.ToolTip" xml:space="preserve">
+    <value>With the Mapping Table you can control the mapping of grabbed data to 
+your catalog fields.
+You can e.g. map data of fields, that are missing in your catlaog to an existing field.
+You can "merge" data by adding it to fields at the end or the beginning.
+Options:
+- Replace: replaces the content of the destionation field with content of source field
+- Add to Start: Adds the content of source to the beginning of the destination field
+- Add to End: Adds the content of source to the end of the destination field
+- Merge (prefer source): replaces the content of the destionation field with content of source field, if source is not empty
+- Merge (prefer destination): replaces the content of the destionation field with content of source field, if destination is not empty
+
+Note: You can add more than one field to a destination field - so you could e.g. merge 
+data from several source fields to a single destination field.
+</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
+    <value>dataGridViewMapping</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="Column0.HeaderText" xml:space="preserve">
     <value>No.</value>
   </data>
@@ -1950,46 +2014,6 @@ You can add multiple languages, if you want the grabber to get more than one tit
   </data>
   <data name="MergePreferDestination.Width" type="System.Int32, mscorlib">
     <value>66</value>
-  </data>
-  <data name="dataGridViewMapping.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 116</value>
-  </data>
-  <data name="dataGridViewMapping.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="dataGridViewMapping.Size" type="System.Drawing.Size, System.Drawing">
-    <value>652, 410</value>
-  </data>
-  <data name="dataGridViewMapping.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="dataGridViewMapping.ToolTip" xml:space="preserve">
-    <value>With the Mapping Table you can control the mapping of grabbed data to 
-your catalog fields.
-You can e.g. map data of fields, that are missing in your catlaog to an existing field.
-You can "merge" data by adding it to fields at the end or the beginning.
-Options:
-- Replace: replaces the content of the destionation field with content of source field
-- Add to Start: Adds the content of source to the beginning of the destination field
-- Add to End: Adds the content of source to the end of the destination field
-- Merge (prefer source): replaces the content of the destionation field with content of source field, if source is not empty
-- Merge (prefer destination): replaces the content of the destionation field with content of source field, if destination is not empty
-
-Note: You can add more than one field to a destination field - so you could e.g. merge 
-data from several source fields to a single destination field.
-</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
-    <value>dataGridViewMapping</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
-    <value>tabPageUserSettings</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="&gt;&gt;label29.Name" xml:space="preserve">
     <value>label29</value>
@@ -2124,30 +2148,33 @@ Most sites do not support country specific certifications.</value>
     <value>0</value>
   </data>
   <data name="URLpage.Items" xml:space="preserve">
-    <value>URL Gateway</value>
+    <value />
   </data>
   <data name="URLpage.Items1" xml:space="preserve">
-    <value>URL Redirection Generic 1</value>
+    <value>URL Gateway</value>
   </data>
   <data name="URLpage.Items2" xml:space="preserve">
-    <value>URL Redirection Generic 2</value>
+    <value>URL Redirection Generic 1</value>
   </data>
   <data name="URLpage.Items3" xml:space="preserve">
-    <value>URL Redirection Cover</value>
+    <value>URL Redirection Generic 2</value>
   </data>
   <data name="URLpage.Items4" xml:space="preserve">
-    <value>URL Redirection Persons</value>
+    <value>URL Redirection Cover</value>
   </data>
   <data name="URLpage.Items5" xml:space="preserve">
-    <value>URL Redirection Title</value>
+    <value>URL Redirection Persons</value>
   </data>
   <data name="URLpage.Items6" xml:space="preserve">
-    <value>URL Redirection Certification</value>
+    <value>URL Redirection Title</value>
   </data>
   <data name="URLpage.Items7" xml:space="preserve">
-    <value>URL Redirection Comment</value>
+    <value>URL Redirection Certification</value>
   </data>
   <data name="URLpage.Items8" xml:space="preserve">
+    <value>URL Redirection Comment</value>
+  </data>
+  <data name="URLpage.Items9" xml:space="preserve">
     <value>URL Redirection Description</value>
   </data>
   <data name="URLpage.Location" type="System.Drawing.Point, System.Drawing">
@@ -2308,182 +2335,35 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
   <data name="&gt;&gt;pictureBoxFranceFlag.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;button_Load_File.Name" xml:space="preserve">
-    <value>button_Load_File</value>
+  <data name="btnLoadDetailInWeb.Location" type="System.Drawing.Point, System.Drawing">
+    <value>361, 37</value>
   </data>
-  <data name="&gt;&gt;button_Load_File.Type" xml:space="preserve">
+  <data name="btnLoadDetailInWeb.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 19</value>
+  </data>
+  <data name="btnLoadDetailInWeb.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="btnLoadDetailInWeb.Text" xml:space="preserve">
+    <value>Web</value>
+  </data>
+  <data name="&gt;&gt;btnLoadDetailInWeb.Name" xml:space="preserve">
+    <value>btnLoadDetailInWeb</value>
+  </data>
+  <data name="&gt;&gt;btnLoadDetailInWeb.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button_Load_File.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnLoadDetailInWeb.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
   </data>
-  <data name="&gt;&gt;button_Load_File.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnLoadDetailInWeb.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;label21.Name" xml:space="preserve">
-    <value>label21</value>
-  </data>
-  <data name="&gt;&gt;label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label21.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;labelImageSize.Name" xml:space="preserve">
-    <value>labelImageSize</value>
-  </data>
-  <data name="&gt;&gt;labelImageSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelImageSize.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;labelImageSize.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;btnLoadDetailPreview.Name" xml:space="preserve">
-    <value>btnLoadDetailPreview</value>
-  </data>
-  <data name="&gt;&gt;btnLoadDetailPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnLoadDetailPreview.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;btnLoadDetailPreview.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;textURLPreview.Name" xml:space="preserve">
-    <value>textURLPreview</value>
-  </data>
-  <data name="&gt;&gt;textURLPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textURLPreview.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;textBodyDetail.Name" xml:space="preserve">
-    <value>textBodyDetail</value>
-  </data>
-  <data name="&gt;&gt;textBodyDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBodyDetail.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;textBodyDetail.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;textFind.Name" xml:space="preserve">
-    <value>textFind</value>
-  </data>
-  <data name="&gt;&gt;textFind.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textFind.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;textFind.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
-  </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;label15.Name" xml:space="preserve">
-    <value>label15</value>
-  </data>
-  <data name="&gt;&gt;label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Name" xml:space="preserve">
-    <value>pictureBoxPreviewCover</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="tabPageDetailPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageDetailPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageDetailPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 653</value>
-  </data>
-  <data name="tabPageDetailPage.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPageDetailPage.Text" xml:space="preserve">
-    <value>Detail page</value>
-  </data>
-  <data name="&gt;&gt;tabPageDetailPage.Name" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;tabPageDetailPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageDetailPage.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPageDetailPage.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="button_Load_File.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="button_Load_File.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 37</value>
+    <value>410, 37</value>
   </data>
   <data name="button_Load_File.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 19</value>
@@ -2504,7 +2384,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;button_Load_File.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2534,7 +2414,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="labelImageSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2567,16 +2447,16 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;labelImageSize.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btnLoadDetailPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnLoadDetailPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 36</value>
+    <value>459, 37</value>
   </data>
   <data name="btnLoadDetailPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 20</value>
+    <value>43, 19</value>
   </data>
   <data name="btnLoadDetailPreview.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -2594,16 +2474,13 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailPreview.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="textURLPreview.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>4</value>
   </data>
   <data name="textURLPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 36</value>
   </data>
   <data name="textURLPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 20</value>
+    <value>266, 20</value>
   </data>
   <data name="textURLPreview.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -2618,7 +2495,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="textBodyDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 311</value>
@@ -2642,7 +2519,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="textFind.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 282</value>
@@ -2663,7 +2540,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textFind.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2687,7 +2564,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
     <value>textPreview</value>
@@ -2723,31 +2600,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 16</value>
-  </data>
-  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 248</value>
-  </data>
-  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="textPreview.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
-    <value>textPreview</value>
-  </data>
-  <data name="&gt;&gt;textPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textPreview.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;textPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;lblSubPage.Name" xml:space="preserve">
     <value>lblSubPage</value>
@@ -2948,7 +2801,115 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
+  </data>
+  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 13</value>
+  </data>
+  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="label15.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="label15.Text" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="&gt;&gt;label15.Name" xml:space="preserve">
+    <value>label15</value>
+  </data>
+  <data name="&gt;&gt;label15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="pictureBoxPreviewCover.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="pictureBoxPreviewCover.Location" type="System.Drawing.Point, System.Drawing">
+    <value>834, 8</value>
+  </data>
+  <data name="pictureBoxPreviewCover.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 295</value>
+  </data>
+  <data name="pictureBoxPreviewCover.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>StretchImage</value>
+  </data>
+  <data name="pictureBoxPreviewCover.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxPreviewCover.Name" xml:space="preserve">
+    <value>pictureBoxPreviewCover</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxPreviewCover.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxPreviewCover.Parent" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="tabPageDetailPage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageDetailPage.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageDetailPage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1052, 653</value>
+  </data>
+  <data name="tabPageDetailPage.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageDetailPage.Text" xml:space="preserve">
+    <value>Detail page</value>
+  </data>
+  <data name="&gt;&gt;tabPageDetailPage.Name" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;tabPageDetailPage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageDetailPage.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPageDetailPage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 16</value>
+  </data>
+  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>308, 248</value>
+  </data>
+  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textPreview.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
+    <value>textPreview</value>
+  </data>
+  <data name="&gt;&gt;textPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textPreview.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;textPreview.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="lblSubPage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3110,10 +3071,10 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>7</value>
   </data>
   <data name="textMaxItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 116</value>
+    <value>341, 116</value>
   </data>
   <data name="textMaxItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
+    <value>57, 20</value>
   </data>
   <data name="textMaxItems.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -3411,63 +3372,6 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
   </data>
   <data name="&gt;&gt;label14.ZOrder" xml:space="preserve">
     <value>22</value>
-  </data>
-  <data name="label15.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label15.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 13</value>
-  </data>
-  <data name="label15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="label15.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="label15.Text" xml:space="preserve">
-    <value>URL</value>
-  </data>
-  <data name="&gt;&gt;label15.Name" xml:space="preserve">
-    <value>label15</value>
-  </data>
-  <data name="&gt;&gt;label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label15.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="pictureBoxPreviewCover.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="pictureBoxPreviewCover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>834, 8</value>
-  </data>
-  <data name="pictureBoxPreviewCover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 295</value>
-  </data>
-  <data name="pictureBoxPreviewCover.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
-    <value>StretchImage</value>
-  </data>
-  <data name="pictureBoxPreviewCover.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Name" xml:space="preserve">
-    <value>pictureBoxPreviewCover</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
-    <value>17</value>
   </data>
   <data name="&gt;&gt;groupBox6.Name" xml:space="preserve">
     <value>groupBox6</value>
@@ -4369,6 +4273,120 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
+  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>3, 628</value>
+  </metadata>
+  <data name="&gt;&gt;label33.Name" xml:space="preserve">
+    <value>label33</value>
+  </data>
+  <data name="&gt;&gt;label33.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label33.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;label33.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label32.Name" xml:space="preserve">
+    <value>label32</value>
+  </data>
+  <data name="&gt;&gt;label32.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label32.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;label32.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label31.Name" xml:space="preserve">
+    <value>label31</value>
+  </data>
+  <data name="&gt;&gt;label31.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label31.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;label31.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label30.Name" xml:space="preserve">
+    <value>label30</value>
+  </data>
+  <data name="&gt;&gt;label30.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label30.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;label30.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Name" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;statusStrip1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;label22.Name" xml:space="preserve">
+    <value>label22</value>
+  </data>
+  <data name="&gt;&gt;label22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label22.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Name" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tabPageUserSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageUserSettings.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageUserSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1052, 653</value>
+  </data>
+  <data name="tabPageUserSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPageUserSettings.Text" xml:space="preserve">
+    <value>User Options</value>
+  </data>
+  <data name="&gt;&gt;tabPageUserSettings.Name" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPageUserSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageUserSettings.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPageUserSettings.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label33.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4594,33 +4612,6 @@ If you want to create a new configuration based on the existing script, you can 
   </data>
   <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="tabPageUserSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageUserSettings.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageUserSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 653</value>
-  </data>
-  <data name="tabPageUserSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tabPageUserSettings.Text" xml:space="preserve">
-    <value>User Options</value>
-  </data>
-  <data name="&gt;&gt;tabPageUserSettings.Name" xml:space="preserve">
-    <value>tabPageUserSettings</value>
-  </data>
-  <data name="&gt;&gt;tabPageUserSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageUserSettings.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPageUserSettings.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;cbMaxWriters.Name" xml:space="preserve">
     <value>cbMaxWriters</value>
