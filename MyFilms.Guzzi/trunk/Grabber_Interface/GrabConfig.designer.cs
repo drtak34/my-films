@@ -173,6 +173,7 @@ namespace Grabber_Interface
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
           this.btnLoadDetailInWeb = new System.Windows.Forms.Button();
+          this.button_Load_Web = new System.Windows.Forms.Button();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -1020,6 +1021,7 @@ namespace Grabber_Interface
           // 
           // groupBox6
           // 
+          this.groupBox6.Controls.Add(this.button_Load_Web);
           this.groupBox6.Controls.Add(this.label8);
           this.groupBox6.Controls.Add(this.TextSearch);
           this.groupBox6.Controls.Add(this.button_Load);
@@ -1346,6 +1348,13 @@ namespace Grabber_Interface
           this.btnLoadDetailInWeb.UseVisualStyleBackColor = true;
           this.btnLoadDetailInWeb.Click += new System.EventHandler(this.btnLoadDetailInWeb_Click);
           // 
+          // button_Load_Web
+          // 
+          resources.ApplyResources(this.button_Load_Web, "button_Load_Web");
+          this.button_Load_Web.Name = "button_Load_Web";
+          this.button_Load_Web.UseVisualStyleBackColor = true;
+          this.button_Load_Web.Click += new System.EventHandler(this.button_Load_Web_Click);
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -1551,6 +1560,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewCheckBoxColumn MergePreferSource;
         private System.Windows.Forms.DataGridViewCheckBoxColumn MergePreferDestination;
         private System.Windows.Forms.Button btnLoadDetailInWeb;
+        private System.Windows.Forms.Button button_Load_Web;
 
     }
 }

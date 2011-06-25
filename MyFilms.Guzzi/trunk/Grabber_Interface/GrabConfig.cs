@@ -3646,5 +3646,36 @@ namespace Grabber_Interface
       }
     }
 
+    private void button_Load_Web_Click(object sender, EventArgs e)
+    {
+      if (!TextURL.Text.Contains("#Search#"))
+      {
+        MessageBox.Show("Please, replace search keyword by #Search# in URL !", "Error");
+        return;
+      }
+
+      if (TextSearch.Text.Length == 0)
+      {
+        MessageBox.Show("Please, insert search keyword !", "Error");
+        return;
+      }
+      if (TextURL.Text.Contains("#Page#") && (textPage.Text.Length == 0))
+      {
+        MessageBox.Show("Please, give the page number to load !", "Error");
+        return;
+      }
+
+      listPreview.Items.Clear();
+      if (TextURL.Text.Length > 0)
+      {
+        if (TextURL.Text.StartsWith("http://") == false) TextURL.Text = "http://" + TextURL.Text;
+        string strSearch = GrabUtil.encodeSearch(TextSearch.Text);
+        string wurl = TextURL.Text.Replace("#Search#", strSearch);
+        wurl = wurl.Replace("#Page#", textPage.Text);
+        try { Process.Start(wurl); }
+        catch (Exception) {throw;}
+      }
+    }
+
   }
 }
