@@ -29,142 +29,200 @@
       <KeyStartOTitle Param1="" Param2="">_x003C_title_x003E_</KeyStartOTitle>
       <KeyEndOTitle>_x0020__x0028_</KeyEndOTitle>
       <KeyOTitleIndex />
+      <KeyOTitlePage />
       <KeyStartTTitle Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0023_REGEX_x0023_Also_x0020_Known._x002A__x003F_</KeyStartTTitle>
       <KeyEndTTitle>_x003C__x002F_div_x003E_</KeyEndTTitle>
       <KeyTTitleRegExp>_x003C__x002F_h4_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C_._x002A_</KeyTTitleRegExp>
       <KeyTTitleIndex />
+      <KeyTTitlePage />
       <KeyTTitleMaxItems>_x0039_99</KeyTTitleMaxItems>
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll>USA_x002C__x0020_Argentina_x002C__x0020_Austria_x002C__x0020_Belgium_x002C__x0020_Brazil_x002C__x0020_Croatia_x002C__x0020_Czech_x0020_Republic_x002C__x0020_Estonia_x002C__x0020_Finland_x002C__x0020_France_x002C__x0020_Germany_x002C__x0020_Italy_x002C__x0020_Japan_x002C__x0020_Mexico_x002C__x0020_Poland_x002C__x0020_Portugal_x002C__x0020_Romania_x002C__x0020_Slovakia_x002C__x0020_Spain_x002C__x0020_Sweden_x002C__x0020_Turkey_x002C__x0020_Uruguay_x002C__x0020_Denmark_x002C__x0020_Greece_x002C__x0020_Norway_x002C__x0020_Russia_x002C__x0020_Canada_x002C__x0020_Hungary_x002C__x0020_Estonia_x002C__x0020_Slovenia</KeyTTitleLanguageAll>
       <KeyStartImg Param1="_x0023_REVERSE_x0023_" Param2="">_x0022__x0020_data-rmconst</KeyStartImg>
       <KeyEndImg>src_x003D__x0022_</KeyEndImg>
       <KeyImgIndex />
+      <KeyImgPage>URL_x0020_Redirection_x0020_Cover</KeyImgPage>
       <KeyStartLinkImg Param1="_x002F_rm" Param2="http:_x002F__x002F_akas.imdb.com_x002F_media_x002F_rm">href_x003D__x0022__x002F_media</KeyStartLinkImg>
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
+      <KeyLinkImgPage />
       <KeyStartRate Param1="" Param2="">_x003C_span_x0020_class_x003D__x0022_rating-rating_x0022__x003E_</KeyStartRate>
       <KeyEndRate>_x003C_span</KeyEndRate>
       <KeyRateIndex />
+      <KeyRatePage />
       <KeyStartRate2 Param1="" Param2="" />
       <KeyEndRate2 />
       <KeyRate2Index />
+      <KeyRate2Page />
       <BaseRating>_x0031_0</BaseRating>
       <KeyStartSyn Param1="" Param2="">_x0023_REGEX_x0023__x003C_h2_x003E_._x002A__x003F_Storyline_x003F_._x002A__x003F__x003C__x002F_h2_x003E_</KeyStartSyn>
       <KeyEndSyn>class_x003D__x0022_</KeyEndSyn>
       <KeySynIndex />
+      <KeySynPage />
       <KeyStartRealise Param1="_x002E_.." Param2="_x002E_..">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Director_x005B_s_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartRealise>
       <KeyEndRealise>_x003C__x002F_div_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
+      <KeyRealisePage />
       <KeyRealiseRegExp>href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022_._x002A__x003F__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyRealiseRegExp>
       <KeyRealiseMaxItems />
       <KeyStartProduct Param1="_x002E_.." Param2="_x002E_..">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_W_x005D__x002A_Writer_x005B_s_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartProduct>
       <KeyEndProduct>_x003C__x002F_div_x003E_</KeyEndProduct>
       <KeyProductIndex />
+      <KeyProductPage />
       <KeyProductRegExp>href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyProductRegExp>
       <KeyProductMaxItems />
       <KeyStartWriter Param1="" Param2="" />
       <KeyEndWriter />
       <KeyWriterIndex />
+      <KeyWriterPage />
       <KeyWriterRegExp />
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_table_x0020_class_x003D__x0022_cast_x0022__x003E_._x002A__x003F__x003C__x002F_table_x003E__x007C__x003C_table_x0020_class_x003D__x0022_cast_list_x0022__x003E_._x002A__x003F_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_table_x003E_</KeyEndCredits>
-      <KeyCreditsIndex />
       <KeyCreditsRegExp>href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022_._x002A__x003F_alt_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F__x003C_td.class_x003D__x0022_character_x0022__x003E_._x002A__x003F__x003C_div_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_div_x003E_</KeyCreditsRegExp>
+      <KeyCreditsIndex />
+      <KeyCreditsPage />
       <KeyCreditsMaxItems>_x0039_99</KeyCreditsMaxItems>
       <KeyCreditsGrabActorRoles>false</KeyCreditsGrabActorRoles>
       <KeyStartCountry Param1="_x007C_" Param2="_x002C__x0020_">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Countr_x005B_ys_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartCountry>
       <KeyEndCountry>_x003C__x002F_div_x003E_</KeyEndCountry>
       <KeyCountryRegExp />
       <KeyCountryIndex />
+      <KeyCountryPage />
       <KeyStartGenre Param1="_x007C_" Param2="_x002C_">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E_Genre_x005B_s_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E_</KeyStartGenre>
       <KeyEndGenre>_x003C__x002F_div_x003E_</KeyEndGenre>
       <KeyGenreRegExp />
       <KeyGenreIndex />
+      <KeyGenrePage />
       <KeyStartYear Param1="_x0023_REVERSE_x0023__x0029__x0020_-_x0020_IMDb" Param2="">_x003C__x002F_title_x003E_</KeyStartYear>
       <KeyEndYear>_x0028_</KeyEndYear>
       <KeyYearIndex>Original_x0020_Title</KeyYearIndex>
+      <KeyYearPage />
       <KeyStartLinkPersons Param1="" Param2="" />
       <KeyEndLinkPersons />
       <KeyLinkPersonsIndex />
+      <KeyLinkPersonsPage />
       <KeyStartComment Param1="_x0023_REGEX_x0023__x003C_br_x002F__x003E__x003C_br_x002F__x003E_" Param2="_x0020__x003C_p_x003E__x003C__x002F_p_x003E_">User_x0020_Reviews</KeyStartComment>
       <KeyEndComment>_x003C_hr_x0020__x002F__x003E_</KeyEndComment>
       <KeyCommentRegExp />
       <KeyCommentIndex />
+      <KeyCommentPage />
       <KeyStartLanguage Param1="_x007C_" Param2="_x002C_">Language:</KeyStartLanguage>
       <KeyEndLanguage>_x003C__x002F_div_x003E_</KeyEndLanguage>
       <KeyLanguageIndex />
+      <KeyLanguagePage />
       <KeyStartTagline Param1="_x0023_ADD_x0023_" Param2="_x0022__x0020__x007C__x0020__x0022_">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Tagline_x005B_s_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E_</KeyStartTagline>
       <KeyEndTagline>_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_._x002A__x007C__x003C__x002F_div_x003E_._x002A_</KeyEndTagline>
       <KeyTaglineIndex />
+      <KeyTaglinePage />
       <KeyStartCertification Param1="MPAA" Param2="">MPAA_x003C__x002F_a_x003E__x0029__x003C__x002F_h4_x003E_</KeyStartCertification>
       <KeyEndCertification>_x003C_span_x0020_class_x003D__x0022_</KeyEndCertification>
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
+      <KeyCertificationPage />
       <KeyCertificationLanguage />
       <KeyCertificationLanguageAll />
       <KeyStartLinkTitles Param1="" Param2="" />
       <KeyEndLinkTitles />
       <KeyLinkTitlesIndex />
+      <KeyLinkTitlesPage />
       <KeyStartLinkCertification Param1="" Param2="" />
       <KeyEndLinkCertification />
       <KeyLinkCertificationIndex />
+      <KeyLinkCertificationPage />
       <KeyStartLinkComment Param1="" Param2="" />
       <KeyEndLinkComment />
       <KeyLinkCommentIndex />
+      <KeyLinkCommentPage />
       <KeyStartDetails2 Param1="" Param2="" />
       <KeyEndDetails2 />
       <KeyDetails2Index />
+      <KeyDetails2Page />
       <KeyStartStudio Param1="" Param2="" />
       <KeyEndStudio />
       <KeyStudioIndex />
+      <KeyStudioPage />
       <KeyStartEdition Param1="" Param2="" />
       <KeyEndEdition />
       <KeyEditionIndex />
+      <KeyEditionPage />
       <KeyStartIMDB_Rank Param1="" Param2="" />
       <KeyEndIMDB_Rank />
       <KeyIMDB_RankIndex />
+      <KeyIMDB_RankPage />
       <KeyStartIMDB_Id Param1="" Param2="" />
       <KeyEndIMDB_Id />
       <KeyIMDB_IdIndex />
+      <KeyIMDB_IdPage />
       <KeyStartTMDB_Id Param1="" Param2="" />
       <KeyEndTMDB_Id />
       <KeyTMDB_IdIndex />
+      <KeyTMDB_IdPage />
       <KeyStartLinkSyn Param1="" Param2="" />
       <KeyEndLinkSyn />
       <KeyLinkSynIndex />
+      <KeyLinkSynPage />
+      <KeyStartLinkGeneric1 Param1="" Param2="" />
+      <KeyEndLinkGeneric1 />
+      <KeyLinkGeneric1Index />
+      <KeyLinkGeneric1Page />
+      <KeyStartLinkGeneric2 Param1="" Param2="" />
+      <KeyEndLinkGeneric2 />
+      <KeyLinkGeneric2Index />
+      <KeyLinkGeneric2Page />
+      <KeyStartGeneric1 Param1="" Param2="" />
+      <KeyEndGeneric1 />
+      <KeyGeneric1Index />
+      <KeyGeneric1RegExp />
+      <KeyGeneric1MaxItems />
+      <KeyGeneric1Language />
+      <KeyGeneric1Page />
+      <KeyStartGeneric2 Param1="" Param2="" />
+      <KeyEndGeneric2 />
+      <KeyGeneric2Index />
+      <KeyGeneric2RegExp />
+      <KeyGeneric2MaxItems />
+      <KeyGeneric2Language />
+      <KeyGeneric2Page />
+      <KeyStartGeneric3 Param1="" Param2="" />
+      <KeyEndGeneric3 />
+      <KeyGeneric3Index />
+      <KeyGeneric3RegExp />
+      <KeyGeneric3MaxItems />
+      <KeyGeneric3Language />
+      <KeyGeneric3Page />
     </Details>
     <Mapping>
-      <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" />
-      <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" />
-      <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" />
-      <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" />
-      <Field_4 source="Rating" destination="" replace="False" addstart="False" addend="False" />
-      <Field_5 source="Actors" destination="" replace="False" addstart="False" addend="False" />
-      <Field_6 source="Director" destination="" replace="False" addstart="False" addend="False" />
-      <Field_7 source="Producer" destination="" replace="False" addstart="False" addend="False" />
-      <Field_8 source="Year" destination="" replace="False" addstart="False" addend="False" />
-      <Field_9 source="Country" destination="" replace="False" addstart="False" addend="False" />
-      <Field_10 source="Category" destination="" replace="False" addstart="False" addend="False" />
-      <Field_11 source="URL_x0020_-_x0020_Redirection_x0020_Picture" destination="" replace="False" addstart="False" addend="False" />
-      <Field_12 source="ImageURL" destination="" replace="False" addstart="False" addend="False" />
-      <Field_13 source="URL_x0020_-_x0020_Redirection_x0020_Persons" destination="" replace="False" addstart="False" addend="False" />
-      <Field_14 source="Comment" destination="" replace="False" addstart="False" addend="False" />
-      <Field_15 source="Language" destination="" replace="False" addstart="False" addend="False" />
-      <Field_16 source="Tagline" destination="Description" replace="False" addstart="True" addend="False" />
-      <Field_17 source="Certification" destination="" replace="False" addstart="False" addend="False" />
-      <Field_18 source="URL_x0020_-_x0020_Redirection_x0020_Titles" destination="" replace="False" addstart="False" addend="False" />
-      <Field_19 source="URL_x0020_-_x0020_Redirection_x0020_Certification" destination="" replace="False" addstart="False" addend="False" />
-      <Field_20 source="Writer" destination="" replace="False" addstart="False" addend="False" />
-      <Field_21 source="URL_x0020_-_x0020_Redirection_x0020_Comment" destination="" replace="False" addstart="False" addend="False" />
-      <Field_22 source="Studio" destination="" replace="False" addstart="False" addend="False" />
-      <Field_23 source="Edition" destination="" replace="False" addstart="False" addend="False" />
-      <Field_24 source="IMDB_Rank" destination="" replace="False" addstart="False" addend="False" />
-      <Field_25 source="IMDB_Id" destination="" replace="False" addstart="False" addend="False" />
-      <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
-      <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
-      <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" />
-      <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" />
+      <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_4 source="Rating" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_5 source="Actors" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_6 source="Director" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_7 source="Producer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_8 source="Year" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_9 source="Country" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_10 source="Category" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_11 source="URL_x0020_Redirection_x0020_Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_12 source="ImageURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_13 source="Writer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_14 source="Comment" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_15 source="Language" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_16 source="Tagline" destination="Description" replace="False" addstart="True" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_17 source="Certification" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_18 source="IMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_19 source="IMDBrank" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_20 source="Studio" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_21 source="Edition" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_22 source="Fanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_23 source="Generic1" destination="Description" replace="False" addstart="False" addend="False" mergeprefersource="True" mergepreferdestination="False" />
+      <Field_24 source="Generic2" destination="Country" replace="False" addstart="False" addend="False" mergeprefersource="True" mergepreferdestination="False" />
+      <Field_25 source="Generic3" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_29 source="Certification_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>

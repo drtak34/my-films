@@ -4,7 +4,7 @@
     <DBName>TestSite (international)</DBName>
     <URLPrefix />
     <URLSearch>
-      <URL Param1="" Param2="">http:_x002F__x002F_www.cinefacts.de_x002F_suche_x002F_suche.php_x003F_type_x003D_f_x0026_name_x003D__x0023_Search_x0023_</URL>
+      <URL Param1="" Param2="" />
       <KeyStartList Param1="" Param2="" />
       <KeyEndList />
       <KeyStartPage Param1="" Param2="" />
