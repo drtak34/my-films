@@ -157,7 +157,6 @@ namespace Grabber_Interface
           this.label32 = new System.Windows.Forms.Label();
           this.label31 = new System.Windows.Forms.Label();
           this.label30 = new System.Windows.Forms.Label();
-          this.statusStrip1 = new System.Windows.Forms.StatusStrip();
           this.label22 = new System.Windows.Forms.Label();
           this.groupBox7 = new System.Windows.Forms.GroupBox();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
@@ -278,7 +277,7 @@ namespace Grabber_Interface
           this.toolTip1.AutomaticDelay = 200;
           this.toolTip1.AutoPopDelay = 15000;
           this.toolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-          this.toolTip1.InitialDelay = 50;
+          this.toolTip1.InitialDelay = 250;
           this.toolTip1.IsBalloon = true;
           this.toolTip1.ReshowDelay = 0;
           this.toolTip1.ShowAlways = true;
@@ -1171,7 +1170,6 @@ namespace Grabber_Interface
           this.tabPageUserSettings.Controls.Add(this.label31);
           this.tabPageUserSettings.Controls.Add(this.dataGridViewMapping);
           this.tabPageUserSettings.Controls.Add(this.label30);
-          this.tabPageUserSettings.Controls.Add(this.statusStrip1);
           this.tabPageUserSettings.Controls.Add(this.label22);
           this.tabPageUserSettings.Controls.Add(this.groupBox7);
           resources.ApplyResources(this.tabPageUserSettings, "tabPageUserSettings");
@@ -1199,11 +1197,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.label30, "label30");
           this.label30.Name = "label30";
-          // 
-          // statusStrip1
-          // 
-          resources.ApplyResources(this.statusStrip1, "statusStrip1");
-          this.statusStrip1.Name = "statusStrip1";
           // 
           // label22
           // 
@@ -1519,7 +1512,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabPageUserSettings;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox10;

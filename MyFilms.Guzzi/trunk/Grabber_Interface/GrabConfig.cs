@@ -1253,8 +1253,11 @@ namespace Grabber_Interface
         default:
           strActivePage = "";
           textURLPreview.Text = "";
+          lblResult.Text = "Sub URL";
           break;
       }
+      if (!string.IsNullOrEmpty(strActivePage))
+        lblResult.Text = strActivePage.Length.ToString();
       return strActivePage;
     }
     
@@ -1360,6 +1363,7 @@ namespace Grabber_Interface
       chkACTORROLES.Visible = false;
       chkACTORROLES.Enabled = false;
       buttonPrevParamDetail.Visible = true;
+      lblResult.Text = "Sub URL";
       //lblComplement.Text = "Complement";
       if (!textBodyDetail.Text.Equals(BodyDetail))
         textBodyDetail.Text = BodyDetail;
