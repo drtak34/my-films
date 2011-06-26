@@ -101,6 +101,7 @@ namespace Grabber_Interface
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
           this.tabPageDetailPage = new System.Windows.Forms.TabPage();
+          this.btnLoadDetailInWeb = new System.Windows.Forms.Button();
           this.button_Load_File = new System.Windows.Forms.Button();
           this.label21 = new System.Windows.Forms.Label();
           this.labelImageSize = new System.Windows.Forms.Label();
@@ -114,7 +115,7 @@ namespace Grabber_Interface
           this.groupBox4 = new System.Windows.Forms.GroupBox();
           this.lblSubPage = new System.Windows.Forms.Label();
           this.lblLanguagesAll = new System.Windows.Forms.Label();
-          this.chkACTORROLES = new System.Windows.Forms.CheckBox();
+          this.chkActorRoles = new System.Windows.Forms.CheckBox();
           this.lblLanguages = new System.Windows.Forms.Label();
           this.lblMaxItems = new System.Windows.Forms.Label();
           this.textMaxItems = new System.Windows.Forms.TextBox();
@@ -134,6 +135,7 @@ namespace Grabber_Interface
           this.label8 = new System.Windows.Forms.Label();
           this.label11 = new System.Windows.Forms.Label();
           this.groupBox5 = new System.Windows.Forms.GroupBox();
+          this.button_Load_Web = new System.Windows.Forms.Button();
           this.label20 = new System.Windows.Forms.Label();
           this.label16 = new System.Windows.Forms.Label();
           this.label19 = new System.Windows.Forms.Label();
@@ -144,6 +146,8 @@ namespace Grabber_Interface
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.listPreview = new System.Windows.Forms.ListBox();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
+          this.button_FirstMatch = new System.Windows.Forms.Button();
+          this.button_NextMatch = new System.Windows.Forms.Button();
           this.btReset = new System.Windows.Forms.Button();
           this.labelReplaceWith = new System.Windows.Forms.Label();
           this.labelReplace = new System.Windows.Forms.Label();
@@ -172,8 +176,10 @@ namespace Grabber_Interface
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-          this.btnLoadDetailInWeb = new System.Windows.Forms.Button();
-          this.button_Load_Web = new System.Windows.Forms.Button();
+          this.checkBox_DisableStartMarker = new System.Windows.Forms.CheckBox();
+          this.label_SearchMatches_Endtext = new System.Windows.Forms.Label();
+          this.label_SearchMatches_Starttext = new System.Windows.Forms.Label();
+          this.dataGridView1 = new System.Windows.Forms.DataGridView();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -195,6 +201,7 @@ namespace Grabber_Interface
           this.tabControl1.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.iMDBEnumeratorBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.iMDBEnumeratorBindingSource1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
           this.SuspendLayout();
           // 
           // textConfig
@@ -475,7 +482,10 @@ namespace Grabber_Interface
             resources.GetString("cb_Parameter.Items1"),
             resources.GetString("cb_Parameter.Items2"),
             resources.GetString("cb_Parameter.Items3"),
-            resources.GetString("cb_Parameter.Items4")});
+            resources.GetString("cb_Parameter.Items4"),
+            resources.GetString("cb_Parameter.Items5"),
+            resources.GetString("cb_Parameter.Items6"),
+            resources.GetString("cb_Parameter.Items7")});
           resources.ApplyResources(this.cb_Parameter, "cb_Parameter");
           this.cb_Parameter.Name = "cb_Parameter";
           this.toolTip1.SetToolTip(this.cb_Parameter, resources.GetString("cb_Parameter.ToolTip"));
@@ -814,6 +824,13 @@ namespace Grabber_Interface
           this.tabPageDetailPage.Name = "tabPageDetailPage";
           this.tabPageDetailPage.UseVisualStyleBackColor = true;
           // 
+          // btnLoadDetailInWeb
+          // 
+          resources.ApplyResources(this.btnLoadDetailInWeb, "btnLoadDetailInWeb");
+          this.btnLoadDetailInWeb.Name = "btnLoadDetailInWeb";
+          this.btnLoadDetailInWeb.UseVisualStyleBackColor = true;
+          this.btnLoadDetailInWeb.Click += new System.EventHandler(this.btnLoadDetailInWeb_Click);
+          // 
           // button_Load_File
           // 
           resources.ApplyResources(this.button_Load_File, "button_Load_File");
@@ -849,6 +866,7 @@ namespace Grabber_Interface
           resources.ApplyResources(this.textBodyDetail, "textBodyDetail");
           this.textBodyDetail.Name = "textBodyDetail";
           this.textBodyDetail.ReadOnly = true;
+          this.textBodyDetail.ShowSelectionMargin = true;
           this.textBodyDetail.SelectionChanged += new System.EventHandler(this.textBodyDetail_SelectionChanged);
           this.textBodyDetail.Click += new System.EventHandler(this.textBodyDetail_Click);
           // 
@@ -880,7 +898,7 @@ namespace Grabber_Interface
           this.groupBox4.Controls.Add(this.URLpage);
           this.groupBox4.Controls.Add(this.textLanguagesAll);
           this.groupBox4.Controls.Add(this.lblLanguagesAll);
-          this.groupBox4.Controls.Add(this.chkACTORROLES);
+          this.groupBox4.Controls.Add(this.chkActorRoles);
           this.groupBox4.Controls.Add(this.lblLanguages);
           this.groupBox4.Controls.Add(this.textLanguages);
           this.groupBox4.Controls.Add(this.lblMaxItems);
@@ -914,12 +932,12 @@ namespace Grabber_Interface
           resources.ApplyResources(this.lblLanguagesAll, "lblLanguagesAll");
           this.lblLanguagesAll.Name = "lblLanguagesAll";
           // 
-          // chkACTORROLES
+          // chkActorRoles
           // 
-          resources.ApplyResources(this.chkACTORROLES, "chkACTORROLES");
-          this.chkACTORROLES.Name = "chkACTORROLES";
-          this.chkACTORROLES.UseVisualStyleBackColor = true;
-          this.chkACTORROLES.CheckedChanged += new System.EventHandler(this.chkACTORROLES_CheckedChanged);
+          resources.ApplyResources(this.chkActorRoles, "chkActorRoles");
+          this.chkActorRoles.Name = "chkActorRoles";
+          this.chkActorRoles.UseVisualStyleBackColor = true;
+          this.chkActorRoles.CheckedChanged += new System.EventHandler(this.chkACTORROLES_CheckedChanged);
           // 
           // lblLanguages
           // 
@@ -999,6 +1017,7 @@ namespace Grabber_Interface
           // 
           // tabPageSearchPage
           // 
+          this.tabPageSearchPage.Controls.Add(this.dataGridView1);
           this.tabPageSearchPage.Controls.Add(this.groupBox6);
           this.tabPageSearchPage.Controls.Add(this.groupBox5);
           this.tabPageSearchPage.Controls.Add(this.buttonPrevParam1);
@@ -1053,6 +1072,13 @@ namespace Grabber_Interface
           this.groupBox5.Name = "groupBox5";
           this.groupBox5.TabStop = false;
           // 
+          // button_Load_Web
+          // 
+          resources.ApplyResources(this.button_Load_Web, "button_Load_Web");
+          this.button_Load_Web.Name = "button_Load_Web";
+          this.button_Load_Web.UseVisualStyleBackColor = true;
+          this.button_Load_Web.Click += new System.EventHandler(this.button_Load_Web_Click);
+          // 
           // label20
           // 
           resources.ApplyResources(this.label20, "label20");
@@ -1079,6 +1105,7 @@ namespace Grabber_Interface
           resources.ApplyResources(this.textBody, "textBody");
           this.textBody.Name = "textBody";
           this.textBody.ReadOnly = true;
+          this.textBody.ShowSelectionMargin = true;
           this.textBody.SelectionChanged += new System.EventHandler(this.textBody_SelectionChanged);
           this.textBody.Click += new System.EventHandler(this.textBody_Click);
           // 
@@ -1108,6 +1135,11 @@ namespace Grabber_Interface
           // 
           // groupBox1
           // 
+          this.groupBox1.Controls.Add(this.label_SearchMatches_Starttext);
+          this.groupBox1.Controls.Add(this.label_SearchMatches_Endtext);
+          this.groupBox1.Controls.Add(this.checkBox_DisableStartMarker);
+          this.groupBox1.Controls.Add(this.button_FirstMatch);
+          this.groupBox1.Controls.Add(this.button_NextMatch);
           this.groupBox1.Controls.Add(this.btReset);
           this.groupBox1.Controls.Add(this.labelReplaceWith);
           this.groupBox1.Controls.Add(this.labelReplace);
@@ -1122,6 +1154,20 @@ namespace Grabber_Interface
           resources.ApplyResources(this.groupBox1, "groupBox1");
           this.groupBox1.Name = "groupBox1";
           this.groupBox1.TabStop = false;
+          // 
+          // button_FirstMatch
+          // 
+          resources.ApplyResources(this.button_FirstMatch, "button_FirstMatch");
+          this.button_FirstMatch.Name = "button_FirstMatch";
+          this.button_FirstMatch.UseVisualStyleBackColor = true;
+          this.button_FirstMatch.Click += new System.EventHandler(this.button_FirstMatch_Click);
+          // 
+          // button_NextMatch
+          // 
+          resources.ApplyResources(this.button_NextMatch, "button_NextMatch");
+          this.button_NextMatch.Name = "button_NextMatch";
+          this.button_NextMatch.UseVisualStyleBackColor = true;
+          this.button_NextMatch.Click += new System.EventHandler(this.button_NextMatch_Click);
           // 
           // btReset
           // 
@@ -1341,19 +1387,28 @@ namespace Grabber_Interface
           // 
           this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
           // 
-          // btnLoadDetailInWeb
+          // checkBox_DisableStartMarker
           // 
-          resources.ApplyResources(this.btnLoadDetailInWeb, "btnLoadDetailInWeb");
-          this.btnLoadDetailInWeb.Name = "btnLoadDetailInWeb";
-          this.btnLoadDetailInWeb.UseVisualStyleBackColor = true;
-          this.btnLoadDetailInWeb.Click += new System.EventHandler(this.btnLoadDetailInWeb_Click);
+          resources.ApplyResources(this.checkBox_DisableStartMarker, "checkBox_DisableStartMarker");
+          this.checkBox_DisableStartMarker.Name = "checkBox_DisableStartMarker";
+          this.toolTip1.SetToolTip(this.checkBox_DisableStartMarker, resources.GetString("checkBox_DisableStartMarker.ToolTip"));
+          this.checkBox_DisableStartMarker.UseVisualStyleBackColor = true;
           // 
-          // button_Load_Web
+          // label_SearchMatches_Endtext
           // 
-          resources.ApplyResources(this.button_Load_Web, "button_Load_Web");
-          this.button_Load_Web.Name = "button_Load_Web";
-          this.button_Load_Web.UseVisualStyleBackColor = true;
-          this.button_Load_Web.Click += new System.EventHandler(this.button_Load_Web_Click);
+          resources.ApplyResources(this.label_SearchMatches_Endtext, "label_SearchMatches_Endtext");
+          this.label_SearchMatches_Endtext.Name = "label_SearchMatches_Endtext";
+          // 
+          // label_SearchMatches_Starttext
+          // 
+          resources.ApplyResources(this.label_SearchMatches_Starttext, "label_SearchMatches_Starttext");
+          this.label_SearchMatches_Starttext.Name = "label_SearchMatches_Starttext";
+          // 
+          // dataGridView1
+          // 
+          this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+          resources.ApplyResources(this.dataGridView1, "dataGridView1");
+          this.dataGridView1.Name = "dataGridView1";
           // 
           // GrabConfig
           // 
@@ -1410,6 +1465,7 @@ namespace Grabber_Interface
           this.tabControl1.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.iMDBEnumeratorBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.iMDBEnumeratorBindingSource1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -1457,7 +1513,7 @@ namespace Grabber_Interface
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox textLanguagesAll;
         private System.Windows.Forms.Label lblLanguagesAll;
-        private System.Windows.Forms.CheckBox chkACTORROLES;
+        private System.Windows.Forms.CheckBox chkActorRoles;
         private System.Windows.Forms.Label lblLanguages;
         private System.Windows.Forms.TextBox textLanguages;
         private System.Windows.Forms.Label lblMaxItems;
@@ -1561,6 +1617,12 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewCheckBoxColumn MergePreferDestination;
         private System.Windows.Forms.Button btnLoadDetailInWeb;
         private System.Windows.Forms.Button button_Load_Web;
+        private System.Windows.Forms.Button button_NextMatch;
+        private System.Windows.Forms.Button button_FirstMatch;
+        private System.Windows.Forms.CheckBox checkBox_DisableStartMarker;
+        private System.Windows.Forms.Label label_SearchMatches_Endtext;
+        private System.Windows.Forms.Label label_SearchMatches_Starttext;
+        private System.Windows.Forms.DataGridView dataGridView1;
 
     }
 }

@@ -33,6 +33,7 @@ namespace Grabber_Interface
 
     private int GLiSearch = 0;
     private int GLiSearchD = 0;
+    private int GLiSearchMatches = 0; // Added for search match highlighting
     //block auto text changed.
     private bool GLbBlock = false;
     //block auto selection changed in body
@@ -134,6 +135,8 @@ namespace Grabber_Interface
     {
       GLbBlock = true;
       buttonPrevParam1.Visible = true;
+      label_SearchMatches_Starttext.Text = "";
+      label_SearchMatches_Endtext.Text = "";
 
       switch (cb_Parameter.SelectedIndex)
       {
@@ -527,8 +530,10 @@ namespace Grabber_Interface
         }
       }
 
+      GLiSearchMatches = 0;
       GLiSearch = 0;
       GLiSearchD = 0;
+      checkBox_DisableStartMarker.Enabled = true;
       Body = string.Empty;
       BodyDetail = string.Empty;
 
@@ -598,9 +603,8 @@ namespace Grabber_Interface
 
     private void textBody_Click(object sender, EventArgs e)
     {
-
       GLiSearch = ((RichTextBox)sender).SelectionStart;
-
+      GLiSearchMatches = ((RichTextBox)sender).SelectionStart;
     }
 
     private void button2_Click(object sender, EventArgs e)
@@ -733,7 +737,7 @@ namespace Grabber_Interface
       }
 
       if (cb_Parameter.SelectedIndex > 0 && TextKeyStop.Text.Length > 0)
-        textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text);
+        textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, false);
       // ToDo: Also mark Regex selection on Textbody
 
     }
@@ -792,7 +796,7 @@ namespace Grabber_Interface
       }
 
       if (cb_Parameter.SelectedIndex > 0)
-        textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text);
+        textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, false);
     }
 
     private void textBody_SelectionChanged(object sender, EventArgs e)
@@ -811,24 +815,74 @@ namespace Grabber_Interface
       label9.Text = nb.ToString() + " match found";
     }
 
-    private void textBody_NewSelection(string starttext, string endtext)
+
+    private void textBody_NewSelection(string starttext, string endtext, bool manualselect)
     {
 
       if (textBody.Text.Length > 0 && starttext.Length > 0 && endtext.Length > 0)
       {
         GLbBlockSelect = true;
 
-        int iStart;
-        int iEnd;
-        iStart = textBody.Find(starttext, 0, RichTextBoxFinds.None) + starttext.Length;
-        iEnd = textBody.Find(endtext, iStart, RichTextBoxFinds.None);
+
+        int iStart = 0;
+        int iEnd = 0;
+        int iLength = 0;
+
+        if (manualselect) 
+          iStart = GLiSearchMatches;
+
+        bool bregexs = false;
+        bool bregexe = false;
+        if (starttext.StartsWith("#REGEX#")) bregexs = true;
+        if (endtext.StartsWith("#REGEX#")) bregexe = true;
+
+        if (starttext != "" && endtext != "")
+        {
+          iLength = starttext.Length;
+          if (bregexs) 
+            iStart = GrabUtil.FindRegEx(textBody.Text, starttext, iStart, ref iLength, true) + iStart;
+          else 
+            iStart = textBody.Text.IndexOf(starttext, iStart);
+
+         if (iStart > 0)
+          {
+            iStart += iLength;
+            if (bregexe) 
+              iEnd = GrabUtil.FindRegEx(textBody.Text, endtext, iStart, ref iLength, true) + iStart;
+            else 
+              iEnd = textBody.Text.IndexOf(endtext, iStart);
+          }
+        }
+
+        // Old method (not using regex)
+        //if (manualselect)
+        //  iStart = textBody.Find(starttext, GLiSearchMatches, RichTextBoxFinds.None) + starttext.Length;
+        //else
+        //  iStart = textBody.Find(starttext, 0, RichTextBoxFinds.None) + starttext.Length;
+        //iEnd = textBody.Find(endtext, iStart, RichTextBoxFinds.None);
+        
+        //if (iStart == -1)
+        //  iStart = 0;
+        //if (iEnd == -1)
+        //  iEnd = 0;
+        
+        
+        
+        
         if (iStart == -1)
           iStart = iEnd;
         if (iEnd == -1)
           iEnd = iStart;
         if ((iEnd == -1) && (iStart == -1))
           iStart = iEnd = 0;
-        textBody.Select(iStart, iEnd - iStart);
+
+        if (manualselect)
+          GLiSearchMatches = iEnd;
+
+        CountSearchMatches(starttext, endtext);
+
+        if (!checkBox_DisableStartMarker.Enabled || manualselect)
+          textBody.Select(iStart, iEnd - iStart);
 
         //if (textReplace.Text.Length > 0 && textReplaceWith.Text.Length > 0)
         //{
@@ -847,9 +901,64 @@ namespace Grabber_Interface
         GLbBlockSelect = false;
         textBody_SelectionChanged(null, null);
       }
+    }
 
+    private void CountSearchMatches(string starttext, string endtext)
+    {
+      int nb = 0;
+      int i = 0;
+      int iLength = 0;
+      bool bregexs = false;
+      bool bregexe = false;
+      if (starttext.StartsWith("#REGEX#")) bregexs = true;
+      if (endtext.StartsWith("#REGEX#")) bregexe = true;
 
+      if (bregexs)
+        i = GrabUtil.FindRegEx(textBody.Text, starttext, i, ref iLength, true) + i;
+      else
+        i = textBody.Text.IndexOf(starttext, i);
+      // i = textBody.Find(starttext, 0, RichTextBoxFinds.NoHighlight);
+      while (i > 0)
+      {
+        nb++;
+        //i = textBody.Find(starttext, i + starttext.Length, RichTextBoxFinds.NoHighlight);
+        if (bregexs)
+        {
+          i = GrabUtil.FindRegEx(textBody.Text, starttext, i + starttext.Length, ref iLength, true) + i;
+          if (iLength == 0)
+            i = 0;
+          else
+            i += iLength;
+        }
+        else
+          i = textBody.Text.IndexOf(starttext, i + starttext.Length);
+      }
+      label_SearchMatches_Starttext.Text = nb.ToString();
 
+      nb = 0;
+      i = 0;
+      iLength = 0;
+      if (bregexe)
+        i = GrabUtil.FindRegEx(textBody.Text, endtext, i, ref iLength, true) + i;
+      else
+        i = textBody.Text.IndexOf(endtext, i);
+      //i = textBody.Find(endtext, 0, RichTextBoxFinds.NoHighlight);
+      while (i > 0)
+      {
+        nb++;
+        //i = textBody.Find(endtext, i + endtext.Length, RichTextBoxFinds.NoHighlight);
+        if (bregexe)
+        {
+          i = GrabUtil.FindRegEx(textBody.Text, endtext, i + endtext.Length, ref iLength, true) + i;
+          if (iLength == 0)
+            i = 0;
+          else
+            i += iLength;
+        }
+        else
+          i = textBody.Text.IndexOf(endtext, i + endtext.Length);
+      }
+      label_SearchMatches_Endtext.Text = nb.ToString();
     }
 
     private void GrabConfig_FormClosing(object sender, FormClosingEventArgs e)
@@ -1360,8 +1469,8 @@ namespace Grabber_Interface
       textMaxItems.Visible = false;
       textLanguages.Visible = false;
       textLanguagesAll.Visible = false;
-      chkACTORROLES.Visible = false;
-      chkACTORROLES.Enabled = false;
+      chkActorRoles.Visible = false;
+      chkActorRoles.Enabled = false;
       buttonPrevParamDetail.Visible = true;
       lblResult.Text = "Sub URL";
       //lblComplement.Text = "Complement";
@@ -1516,10 +1625,10 @@ namespace Grabber_Interface
           try 
           {
             strActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
-            if (strActorRoles == "true") chkACTORROLES.Checked = true;
-            else chkACTORROLES.Checked = false;
+            if (strActorRoles == "true") chkActorRoles.Checked = true;
+            else chkActorRoles.Checked = false;
           }
-          catch {chkACTORROLES.Checked = false;};
+          catch {chkActorRoles.Checked = false;};
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsIndex)._Value;
           break;
         case 10: // Country
@@ -1805,7 +1914,10 @@ namespace Grabber_Interface
       }
 
       if (lblComplement.Visible == true)
-        chkACTORROLES.Visible = true;
+      {
+        chkActorRoles.Visible = true; 
+        chkActorRoles.Enabled = true;
+      }
 
       if (cb_ParamDetail.SelectedIndex > 0)
       {
@@ -2555,7 +2667,7 @@ namespace Grabber_Interface
       switch (cb_ParamDetail.SelectedIndex)
       {
         case 9:
-          if (chkACTORROLES.Checked)
+          if (chkActorRoles.Checked)
             xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "true";
           else
             xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = "false";
@@ -3339,7 +3451,7 @@ namespace Grabber_Interface
 
         if (textDReplace.Text.Length > 0) // if (textComplement.Text.Length > 0)
         //  find = GrabUtil.FindWithAction(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text, textDReplace.Text, textDReplaceWith.Text, textComplement.Text, textMaxItems.Text, textLanguages.Text);
-          find = GrabUtil.FindWithAction(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text, textDReplace.Text, textDReplaceWith.Text, textComplement.Text, textMaxItems.Text, textLanguages.Text, out allNames, out allRoles, chkACTORROLES.Checked);
+          find = GrabUtil.FindWithAction(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text, textDReplace.Text, textDReplaceWith.Text, textComplement.Text, textMaxItems.Text, textLanguages.Text, out allNames, out allRoles, chkActorRoles.Checked);
         else
           find = GrabUtil.Find(textBodyDetail.Text, TextKeyStartD.Text, TextKeyStopD.Text);
 
@@ -3675,6 +3787,17 @@ namespace Grabber_Interface
         try { Process.Start(wurl); }
         catch (Exception) {throw;}
       }
+    }
+
+    private void button_NextMatch_Click(object sender, EventArgs e)
+    {
+      textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, true);
+    }
+
+    private void button_FirstMatch_Click(object sender, EventArgs e)
+    {
+      GLiSearchMatches = 0;
+      textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, true);
     }
 
   }
