@@ -22,6 +22,12 @@
       <KeyStartLink Param1="_x003E_" Param2="http:_x002F__x002F_ofdbgw.org_x002F_movie_x002F_">_x003C_id</KeyStartLink>
       <KeyEndLink>_x003C__x002F_id_x003E_</KeyEndLink>
       <KeyLinkIndex />
+      <KeyStartID Param1="" Param2="" />
+      <KeyEndID />
+      <KeyIDIndex />
+      <KeyStartOptions Param1="" Param2="" />
+      <KeyEndOptions />
+      <KeyOptionsIndex />
     </URLSearch>
     <Details>
       <KeyStartBody Param1="" Param2="">_x003C_td_x003E__x003C_img_x0020_src_x003D__x0022_images_x002F_s_filmangaben_t.gif_x0022_</KeyStartBody>

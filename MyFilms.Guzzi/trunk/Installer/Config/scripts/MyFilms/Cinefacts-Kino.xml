@@ -22,6 +22,12 @@
       <KeyStartLink Param1="_x002F_kino_x002F_" Param2="http:_x002F__x002F_www.cinefacts.de_x002F_kino_x002F_">_x0009__x0009__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
       <KeyEndLink>_x0022__x003E_Details_x003C__x002F_a_x003E__x003C__x002F_td_x003E_</KeyEndLink>
       <KeyLinkIndex />
+      <KeyStartID Param1="" Param2="" />
+      <KeyEndID />
+      <KeyIDIndex />
+      <KeyStartOptions Param1="" Param2="" />
+      <KeyEndOptions />
+      <KeyOptionsIndex />
     </URLSearch>
     <Details>
       <KeyStartBody Param1="" Param2="" />
