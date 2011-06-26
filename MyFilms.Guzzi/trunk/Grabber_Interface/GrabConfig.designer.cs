@@ -70,7 +70,6 @@ namespace Grabber_Interface
           this.button_Preview = new System.Windows.Forms.Button();
           this.button_GoDetailPage = new System.Windows.Forms.Button();
           this.textRedir = new System.Windows.Forms.TextBox();
-          this.button_Preview_All = new System.Windows.Forms.Button();
           this.buttonPrevParam1 = new System.Windows.Forms.Button();
           this.textStartPage = new System.Windows.Forms.TextBox();
           this.textStepPage = new System.Windows.Forms.TextBox();
@@ -97,7 +96,6 @@ namespace Grabber_Interface
           this.cbCertificationPreferredLanguage = new System.Windows.Forms.ComboBox();
           this.button_SaveAs = new System.Windows.Forms.Button();
           this.URLpage = new System.Windows.Forms.ComboBox();
-          this.checkBox_DisableStartMarker = new System.Windows.Forms.CheckBox();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -134,7 +132,8 @@ namespace Grabber_Interface
           this.label15 = new System.Windows.Forms.Label();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
-          this.listPreview = new System.Windows.Forms.ListBox();
+          this.labelSearchPosition = new System.Windows.Forms.Label();
+          this.PositionSearch = new System.Windows.Forms.Label();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
           this.button_Load_Web = new System.Windows.Forms.Button();
           this.label8 = new System.Windows.Forms.Label();
@@ -149,6 +148,13 @@ namespace Grabber_Interface
           this.label9 = new System.Windows.Forms.Label();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
           this.dataGridViewSearchResults = new System.Windows.Forms.DataGridView();
+          this.ResultColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+          this.ResultColumn6 = new System.Windows.Forms.DataGridViewLinkColumn();
+          this.ResultColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
           this.label_SearchMatches_Starttext = new System.Windows.Forms.Label();
           this.label_SearchMatches_Endtext = new System.Windows.Forms.Label();
@@ -182,13 +188,6 @@ namespace Grabber_Interface
           this.tabControl1 = new System.Windows.Forms.TabControl();
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-          this.ResultColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-          this.ResultColumn6 = new System.Windows.Forms.DataGridViewLinkColumn();
-          this.ResultColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -228,7 +227,7 @@ namespace Grabber_Interface
           this.button_Browse.Tag = "";
           this.toolTip1.SetToolTip(this.button_Browse, resources.GetString("button_Browse.ToolTip"));
           this.button_Browse.UseVisualStyleBackColor = true;
-          this.button_Browse.Click += new System.EventHandler(this.button1_Click);
+          this.button_Browse.Click += new System.EventHandler(this.button_Browse_Click);
           // 
           // label1
           // 
@@ -534,7 +533,7 @@ namespace Grabber_Interface
           this.button_Preview.Name = "button_Preview";
           this.toolTip1.SetToolTip(this.button_Preview, resources.GetString("button_Preview.ToolTip"));
           this.button_Preview.UseVisualStyleBackColor = true;
-          this.button_Preview.Click += new System.EventHandler(this.button1_Click_1);
+          this.button_Preview.Click += new System.EventHandler(this.button_Preview_Click);
           // 
           // button_GoDetailPage
           // 
@@ -549,14 +548,6 @@ namespace Grabber_Interface
           resources.ApplyResources(this.textRedir, "textRedir");
           this.textRedir.Name = "textRedir";
           this.toolTip1.SetToolTip(this.textRedir, resources.GetString("textRedir.ToolTip"));
-          // 
-          // button_Preview_All
-          // 
-          resources.ApplyResources(this.button_Preview_All, "button_Preview_All");
-          this.button_Preview_All.Name = "button_Preview_All";
-          this.toolTip1.SetToolTip(this.button_Preview_All, resources.GetString("button_Preview_All.ToolTip"));
-          this.button_Preview_All.UseVisualStyleBackColor = true;
-          this.button_Preview_All.Click += new System.EventHandler(this.button5_Click);
           // 
           // buttonPrevParam1
           // 
@@ -777,13 +768,6 @@ namespace Grabber_Interface
           this.URLpage.Name = "URLpage";
           this.toolTip1.SetToolTip(this.URLpage, resources.GetString("URLpage.ToolTip"));
           this.URLpage.SelectedIndexChanged += new System.EventHandler(this.URLpage_SelectedIndexChanged);
-          // 
-          // checkBox_DisableStartMarker
-          // 
-          resources.ApplyResources(this.checkBox_DisableStartMarker, "checkBox_DisableStartMarker");
-          this.checkBox_DisableStartMarker.Name = "checkBox_DisableStartMarker";
-          this.toolTip1.SetToolTip(this.checkBox_DisableStartMarker, resources.GetString("checkBox_DisableStartMarker.ToolTip"));
-          this.checkBox_DisableStartMarker.UseVisualStyleBackColor = true;
           // 
           // linkLabelMFwiki
           // 
@@ -1032,11 +1016,11 @@ namespace Grabber_Interface
           // 
           // tabPageSearchPage
           // 
-          this.tabPageSearchPage.Controls.Add(this.listPreview);
+          this.tabPageSearchPage.Controls.Add(this.labelSearchPosition);
+          this.tabPageSearchPage.Controls.Add(this.PositionSearch);
           this.tabPageSearchPage.Controls.Add(this.groupBox6);
           this.tabPageSearchPage.Controls.Add(this.groupBox5);
           this.tabPageSearchPage.Controls.Add(this.buttonPrevParam1);
-          this.tabPageSearchPage.Controls.Add(this.button_Preview_All);
           this.tabPageSearchPage.Controls.Add(this.label17);
           this.tabPageSearchPage.Controls.Add(this.textRedir);
           this.tabPageSearchPage.Controls.Add(this.textBody);
@@ -1053,12 +1037,15 @@ namespace Grabber_Interface
           this.tabPageSearchPage.Name = "tabPageSearchPage";
           this.tabPageSearchPage.UseVisualStyleBackColor = true;
           // 
-          // listPreview
+          // labelSearchPosition
           // 
-          this.listPreview.FormattingEnabled = true;
-          resources.ApplyResources(this.listPreview, "listPreview");
-          this.listPreview.Name = "listPreview";
-          this.listPreview.SelectedIndexChanged += new System.EventHandler(this.listPreview_SelectedIndexChanged);
+          resources.ApplyResources(this.labelSearchPosition, "labelSearchPosition");
+          this.labelSearchPosition.Name = "labelSearchPosition";
+          // 
+          // PositionSearch
+          // 
+          resources.ApplyResources(this.PositionSearch, "PositionSearch");
+          this.PositionSearch.Name = "PositionSearch";
           // 
           // groupBox6
           // 
@@ -1128,6 +1115,7 @@ namespace Grabber_Interface
           this.textBody.Name = "textBody";
           this.textBody.ReadOnly = true;
           this.textBody.ShowSelectionMargin = true;
+          this.textBody.CursorChanged += new System.EventHandler(this.textBody_CursorChanged);
           this.textBody.SelectionChanged += new System.EventHandler(this.textBody_SelectionChanged);
           this.textBody.Click += new System.EventHandler(this.textBody_Click);
           // 
@@ -1177,11 +1165,60 @@ namespace Grabber_Interface
           this.dataGridViewSearchResults.SelectionChanged += new System.EventHandler(this.dataGridViewSearchResults_SelectionChanged);
           this.dataGridViewSearchResults.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewSearchResults_CellContentClick);
           // 
+          // ResultColumn1
+          // 
+          resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
+          this.ResultColumn1.Name = "ResultColumn1";
+          // 
+          // ResultColumn2
+          // 
+          this.ResultColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.ResultColumn2, "ResultColumn2");
+          this.ResultColumn2.Name = "ResultColumn2";
+          // 
+          // ResultColumn3
+          // 
+          dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle1;
+          resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
+          this.ResultColumn3.Name = "ResultColumn3";
+          // 
+          // ResultColumn4
+          // 
+          this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle2;
+          resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
+          this.ResultColumn4.Name = "ResultColumn4";
+          // 
+          // ResultColumn5
+          // 
+          this.ResultColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.ResultColumn5, "ResultColumn5");
+          this.ResultColumn5.Name = "ResultColumn5";
+          // 
+          // ResultColumn6
+          // 
+          this.ResultColumn6.ActiveLinkColor = System.Drawing.SystemColors.Desktop;
+          this.ResultColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+          resources.ApplyResources(this.ResultColumn6, "ResultColumn6");
+          this.ResultColumn6.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+          this.ResultColumn6.LinkColor = System.Drawing.SystemColors.AppWorkspace;
+          this.ResultColumn6.Name = "ResultColumn6";
+          this.ResultColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+          this.ResultColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+          this.ResultColumn6.TrackVisitedState = false;
+          // 
+          // ResultColumn7
+          // 
+          this.ResultColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+          resources.ApplyResources(this.ResultColumn7, "ResultColumn7");
+          this.ResultColumn7.Name = "ResultColumn7";
+          // 
           // groupBox1
           // 
           this.groupBox1.Controls.Add(this.label_SearchMatches_Starttext);
           this.groupBox1.Controls.Add(this.label_SearchMatches_Endtext);
-          this.groupBox1.Controls.Add(this.checkBox_DisableStartMarker);
           this.groupBox1.Controls.Add(this.button_FirstMatch);
           this.groupBox1.Controls.Add(this.button_NextMatch);
           this.groupBox1.Controls.Add(this.btReset);
@@ -1441,56 +1478,6 @@ namespace Grabber_Interface
           // 
           this.iMDBEnumeratorBindingSource1.DataSource = typeof(Grabber.MyFilmsIMDB.IMDBEnumerator);
           // 
-          // ResultColumn1
-          // 
-          resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
-          this.ResultColumn1.Name = "ResultColumn1";
-          // 
-          // ResultColumn2
-          // 
-          this.ResultColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.ResultColumn2, "ResultColumn2");
-          this.ResultColumn2.Name = "ResultColumn2";
-          // 
-          // ResultColumn3
-          // 
-          dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle1;
-          resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
-          this.ResultColumn3.Name = "ResultColumn3";
-          // 
-          // ResultColumn4
-          // 
-          this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle2;
-          resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
-          this.ResultColumn4.Name = "ResultColumn4";
-          // 
-          // ResultColumn5
-          // 
-          this.ResultColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.ResultColumn5, "ResultColumn5");
-          this.ResultColumn5.Name = "ResultColumn5";
-          // 
-          // ResultColumn6
-          // 
-          this.ResultColumn6.ActiveLinkColor = System.Drawing.SystemColors.Desktop;
-          this.ResultColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          resources.ApplyResources(this.ResultColumn6, "ResultColumn6");
-          this.ResultColumn6.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-          this.ResultColumn6.LinkColor = System.Drawing.SystemColors.AppWorkspace;
-          this.ResultColumn6.Name = "ResultColumn6";
-          this.ResultColumn6.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-          this.ResultColumn6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-          this.ResultColumn6.TrackVisitedState = false;
-          // 
-          // ResultColumn7
-          // 
-          this.ResultColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-          resources.ApplyResources(this.ResultColumn7, "ResultColumn7");
-          this.ResultColumn7.Name = "ResultColumn7";
-          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -1631,7 +1618,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textStartPage;
         private System.Windows.Forms.Button buttonPrevParam1;
-        private System.Windows.Forms.Button button_Preview_All;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textRedir;
         private System.Windows.Forms.RichTextBox textBody;
@@ -1641,7 +1627,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.Button button_Preview;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ListBox listPreview;
         private System.Windows.Forms.Button button_Find;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btReset;
@@ -1700,7 +1685,6 @@ namespace Grabber_Interface
         private System.Windows.Forms.Button button_Load_Web;
         private System.Windows.Forms.Button button_NextMatch;
         private System.Windows.Forms.Button button_FirstMatch;
-        private System.Windows.Forms.CheckBox checkBox_DisableStartMarker;
         private System.Windows.Forms.Label label_SearchMatches_Endtext;
         private System.Windows.Forms.Label label_SearchMatches_Starttext;
         private System.Windows.Forms.DataGridView dataGridViewSearchResults;
@@ -1711,6 +1695,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn5;
         private System.Windows.Forms.DataGridViewLinkColumn ResultColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn7;
+        private System.Windows.Forms.Label labelSearchPosition;
+        private System.Windows.Forms.Label PositionSearch;
 
     }
 }

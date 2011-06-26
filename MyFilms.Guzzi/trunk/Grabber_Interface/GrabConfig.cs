@@ -39,6 +39,7 @@ namespace Grabber_Interface
     //block auto selection changed in body
     private bool GLbBlockSelect = false;
     private string Body = string.Empty;
+    private string BodyStripped = string.Empty; // added to hold stripped search page
     private string BodyDetail = string.Empty;
     private string BodyDetail2 = string.Empty;
     private string BodyLinkImg = string.Empty;
@@ -110,7 +111,7 @@ namespace Grabber_Interface
       }
     }
 
-    private void button1_Click(object sender, EventArgs e)
+    private void button_Browse_Click(object sender, EventArgs e)
     {
       if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms"))
       {
@@ -193,6 +194,7 @@ namespace Grabber_Interface
 
       if (cb_Parameter.SelectedIndex > 0)
       {
+        textBody.Text = BodyStripped;
         textReplace.Visible = true;
         textReplaceWith.Visible = true;
         //btReset.Visible = true;
@@ -201,6 +203,7 @@ namespace Grabber_Interface
       }
       else
       {
+        textBody.Text = Body;
         textReplace.Text = "";
         textReplaceWith.Text = "";
         textReplace.Visible = false;
@@ -232,19 +235,19 @@ namespace Grabber_Interface
         return;
       }
 
-      listPreview.Items.Clear();
       dataGridViewSearchResults.Rows.Clear();
-      
       if (TextURL.Text.Length > 0)
       {
         string absoluteUri;
         string strSearch;
-        int iStart;
-        int iEnd;
+        string starttext = "";
+        string endtext = "";
+        int iStart = -1;
+        int iEnd = -1;
+        int iLength = 0;
 
         if (TextURL.Text.StartsWith("http://") == false)
           TextURL.Text = "http://" + TextURL.Text;
-
 
         strSearch = GrabUtil.encodeSearch(TextSearch.Text);
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
@@ -260,12 +263,9 @@ namespace Grabber_Interface
           listUrl.Clear();
           listUrl.Add(new Grabber_URLClass.IMDBUrl(absoluteUri, TextSearch.Text + " (AutoRedirect)", null, null));
 
-          listPreview.Items.Clear();
           dataGridViewSearchResults.Rows.Clear();
 
-          listPreview.Items.Add(((Grabber_URLClass.IMDBUrl)listUrl[0]).Title);
-
-          for (int i = 0; i < 1; i++)
+          for (int i = 0; i < 1; i++) // only add 1 line ...
           {
             i = dataGridViewSearchResults.Rows.Add(); // add row for config
             dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
@@ -282,43 +282,44 @@ namespace Grabber_Interface
             dataGridViewSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewSearchResults.Rows[0].Selected = true; //set first line as selected
           }
-          
-          return;
-
         }
 
         if (textRedir.Text.Length > 0)
           Body = GrabUtil.GetPage(textRedir.Text, null, out absoluteUri, cookie);
 
-        if (xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value.Length > 0)
+        // now stripping the search page
+        BodyStripped = Body;
+        textBody.Text = Body;
+        starttext = xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value;
+        endtext = xmlConf.find(xmlConf.listSearch, TagName.KeyEndList)._Value;
+
+        if (Body.Length > 0 && (starttext.Length > 0 || endtext.Length > 0))
         {
-          iStart = Body.IndexOf(xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value);
-          //Si la clé de début a été trouvé
-          if (iStart > 0)
+          iStart = 0; iEnd = -1; iLength = 0;
+          if (starttext.Length > 0)
           {
-            //Si une clé de fin a été paramétrée, on l'utilise si non on prend le reste du body
-            if (xmlConf.find(xmlConf.listSearch, TagName.KeyEndList)._Value != "")
-            {
-              iEnd = Body.IndexOf(xmlConf.find(xmlConf.listSearch, TagName.KeyEndList)._Value, iStart);
-            }
-            else
-              iEnd = Body.Length;
-
-            if (iEnd == -1)
-              iEnd = Body.Length;
-
-            //Découpage du body
-            iStart += xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value.Length;
-            textBody.Text = Body.Substring(iStart, iEnd - iStart);
-
+            iStart = GrabUtil.FindPosition(Body, starttext, iStart, ref iLength, true, true);
+            if (iStart <= 0) { iStart = 0; labelSearchPosition.Text = ""; }
+            else { labelSearchPosition.Text = iStart.ToString(); }
           }
-          else
-            textBody.Text = Body;
+          if (endtext.Length > 0)
+          {
+            iEnd = GrabUtil.FindPosition(Body, endtext, iStart, ref iLength, true, false);
+            if (iEnd <= 0) iEnd = Body.Length;
+          }
+
+          if (iStart == -1)
+            iStart = iEnd;
+          if (iEnd == -1)
+            iEnd = iStart;
+          if ((iEnd == -1) && (iStart == -1))
+            iStart = iEnd = 0;
+
+          CountSearchMatches(starttext, endtext);
+          BodyStripped = Body.Substring(iStart, iEnd - iStart);
+          textBody.Text = BodyStripped; // initial view is stripped, as it's more interesting for script programmer ...
         }
-        else
-          textBody.Text = Body;
-
-
+      // CountSearchMatches(starttext, endtext);
       }
     }
 
@@ -566,7 +567,6 @@ namespace Grabber_Interface
       GLiSearchMatches = 0;
       GLiSearch = 0;
       GLiSearchD = 0;
-      checkBox_DisableStartMarker.Enabled = true;
       Body = string.Empty;
       BodyDetail = string.Empty;
 
@@ -576,9 +576,7 @@ namespace Grabber_Interface
 
     }
 
-
-
-    private void button1_Click_1(object sender, EventArgs e)
+    private void button_Preview_Click(object sender, EventArgs e)
     {
       if (string.IsNullOrEmpty(textConfig.Text))
       {
@@ -594,7 +592,6 @@ namespace Grabber_Interface
 
     private void Load_Preview(bool AlwaysAsk)
     {
-      listPreview.Items.Clear();
       dataGridViewSearchResults.Rows.Clear();
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
       Grabber_URLClass.IMDBUrl wurl;
@@ -618,8 +615,6 @@ namespace Grabber_Interface
       for (int i = 0; i < listUrl.Count; i++)
       {
         wurl = (Grabber_URLClass.IMDBUrl)listUrl[i];
-        listPreview.Items.Add(wurl.Title + " (" + wurl.Year.ToString() + ") " + wurl.Director);
-
         i = dataGridViewSearchResults.Rows.Add(); // add row for config
         dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
         dataGridViewSearchResults.Rows[i].Cells[1].Value = wurl.Title;
@@ -883,10 +878,10 @@ namespace Grabber_Interface
     private void textBody_NewSelection(string starttext, string endtext, bool manualselect)
     {
 
-      if (textBody.Text.Length > 0 && starttext.Length > 0 && endtext.Length > 0)
+      // If you have at least the key to start, we cut strBody
+      if (textBody.Text.Length > 0 && (starttext.Length > 0 || endtext.Length > 0))
       {
         GLbBlockSelect = true;
-
 
         int iStart = 0;
         int iEnd = 0;
@@ -895,44 +890,19 @@ namespace Grabber_Interface
         if (manualselect) 
           iStart = GLiSearchMatches;
 
-        bool bregexs = false;
-        bool bregexe = false;
-        if (starttext.StartsWith("#REGEX#")) bregexs = true;
-        if (endtext.StartsWith("#REGEX#")) bregexe = true;
 
-        if (starttext != "" && endtext != "")
+        if (starttext.Length > 0)
         {
-          iLength = starttext.Length;
-          if (bregexs) 
-            iStart = GrabUtil.FindRegEx(textBody.Text, starttext, iStart, ref iLength, true) + iStart;
-          else 
-            iStart = textBody.Text.IndexOf(starttext, iStart);
-
-         if (iStart > 0)
-          {
-            iStart += iLength;
-            if (bregexe) 
-              iEnd = GrabUtil.FindRegEx(textBody.Text, endtext, iStart, ref iLength, true) + iStart;
-            else 
-              iEnd = textBody.Text.IndexOf(endtext, iStart);
-          }
+          iStart = GrabUtil.FindPosition(textBody.Text, starttext, iStart, ref iLength, true, true);
+          if (iStart <= 0) { iStart = 0; labelSearchPosition.Text = ""; }
+          else { labelSearchPosition.Text = iStart.ToString(); } 
+        }
+        if (endtext.Length > 0)
+        {
+          iEnd = GrabUtil.FindPosition(textBody.Text, endtext, iStart, ref iLength, true, false);
+          if (iEnd <= 0) iEnd = textBody.Text.Length;
         }
 
-        // Old method (not using regex)
-        //if (manualselect)
-        //  iStart = textBody.Find(starttext, GLiSearchMatches, RichTextBoxFinds.None) + starttext.Length;
-        //else
-        //  iStart = textBody.Find(starttext, 0, RichTextBoxFinds.None) + starttext.Length;
-        //iEnd = textBody.Find(endtext, iStart, RichTextBoxFinds.None);
-        
-        //if (iStart == -1)
-        //  iStart = 0;
-        //if (iEnd == -1)
-        //  iEnd = 0;
-        
-        
-        
-        
         if (iStart == -1)
           iStart = iEnd;
         if (iEnd == -1)
@@ -944,23 +914,7 @@ namespace Grabber_Interface
           GLiSearchMatches = iEnd;
 
         CountSearchMatches(starttext, endtext);
-
-        if (!checkBox_DisableStartMarker.Enabled || manualselect)
-          textBody.Select(iStart, iEnd - iStart);
-
-        //if (textReplace.Text.Length > 0 && textReplaceWith.Text.Length > 0)
-        //{
-        //    textBody.SelectedText = textBody.SelectedText.Replace(textReplace.Text, textReplaceWith.Text);
-
-        //    iStart = textBody.Find(starttext, 0, RichTextBoxFinds.None) + starttext.Length;
-        //    iEnd = textBody.Find(endtext, iStart, RichTextBoxFinds.None);
-        //    if (iStart == -1)
-        //        iStart = 0;
-        //    if (iEnd == -1)
-        //        iEnd = 0;
-
-        //    textBody.Select(iStart, iEnd - iStart);
-        //}
+        textBody.Select(iStart, iEnd - iStart);
 
         GLbBlockSelect = false;
         textBody_SelectionChanged(null, null);
@@ -2349,21 +2303,6 @@ namespace Grabber_Interface
 
     }
 
-    private void listPreview_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      if ((listPreview.SelectedIndex >= 0) && (listPreview.SelectedItem.ToString() == "+++"))
-        button_GoDetailPage.Text = "Display Next Page";
-      else
-        if ((listPreview.SelectedIndex >= 0) && (listPreview.SelectedItem.ToString() == "---"))
-          button_GoDetailPage.Text = "Display Previous Page";
-        else
-          button_GoDetailPage.Text = "Use with Detail Page";
-      if (listPreview.SelectedIndex >= 0)
-        button_GoDetailPage.Enabled = true;
-      else
-        button_GoDetailPage.Enabled = false;
-    }
-
     private void dataGridViewSearchResults_SelectionChanged(object sender, EventArgs e)
     {
       int rowSelected = this.dataGridViewSearchResults.Rows.GetFirstRow(DataGridViewElementStates.Selected);
@@ -3509,21 +3448,6 @@ namespace Grabber_Interface
 
     }
 
-
-    private void button5_Click(object sender, EventArgs e)
-    {
-      if (string.IsNullOrEmpty(textConfig.Text))
-      {
-        MessageBox.Show("No Config loaded !", "Error");
-        return;
-      }
-      else
-      {
-        SaveXml(textConfig.Text + ".tmp");
-        Load_Preview(true);
-      }
-    }
-
     //private void btReset_Click(object sender, EventArgs e)
     //{
     //    textReplace.Text = "";
@@ -3918,6 +3842,14 @@ namespace Grabber_Interface
         
         throw;
       }
+    }
+
+    private void textBody_CursorChanged(object sender, EventArgs e)
+    {
+      if (textBody.SelectionStart < 0)
+        labelSearchPosition.Text = textBody.SelectionStart.ToString();
+      else 
+        labelSearchPosition.Text = "";
     }
 
   }
