@@ -2367,6 +2367,10 @@ namespace Grabber_Interface
     private void dataGridViewSearchResults_SelectionChanged(object sender, EventArgs e)
     {
       int rowSelected = this.dataGridViewSearchResults.Rows.GetFirstRow(DataGridViewElementStates.Selected);
+      if (rowSelected == -1)
+        return;
+      if (this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value == null)
+        return;
       if (rowSelected >= 0 && this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value.ToString() == "+++")
         button_GoDetailPage.Text = "Display Next Page";
       else if (rowSelected >= 0 && this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value.ToString() == "---")
