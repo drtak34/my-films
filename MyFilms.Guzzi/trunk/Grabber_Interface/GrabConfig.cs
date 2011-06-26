@@ -140,34 +140,46 @@ namespace Grabber_Interface
 
       switch (cb_Parameter.SelectedIndex)
       {
-        case 0:
+        case 0: // Start - End
           TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value;
           TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndList)._Value;
           buttonPrevParam1.Visible = false;
           break;
-        case 1:
+        case 1: // Title
           TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartTitle)._Value;
           TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndTitle)._Value;
           textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartTitle)._Param1;
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartTitle)._Param2;
           break;
-        case 2:
+        case 2: // Year
           TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartYear)._Value;
           TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndYear)._Value;
           textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartYear)._Param1;
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartYear)._Param2;
           break;
-        case 3:
+        case 3: // Director
           TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Value;
           TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndDirector)._Value;
           textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Param1;
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Param2;
           break;
-        case 4: // details page
+        case 4: // details page URL
           TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Value;
           TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndLink)._Value;
           textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Param1;
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Param2;
+          break;
+        case 5: // ID (e.g. IMDB_Id)
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndID)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Param2;
+          break;
+        case 6: // Options (e.g. Groups like "Video, Kino, TV, Series, etc.)
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndOptions)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param2;
           break;
 
         default:
@@ -221,6 +233,8 @@ namespace Grabber_Interface
       }
 
       listPreview.Items.Clear();
+      dataGridViewSearchResults.Rows.Clear();
+      
       if (TextURL.Text.Length > 0)
       {
         string absoluteUri;
@@ -247,9 +261,28 @@ namespace Grabber_Interface
           listUrl.Add(new Grabber_URLClass.IMDBUrl(absoluteUri, TextSearch.Text + " (AutoRedirect)", null, null));
 
           listPreview.Items.Clear();
+          dataGridViewSearchResults.Rows.Clear();
 
           listPreview.Items.Add(((Grabber_URLClass.IMDBUrl)listUrl[0]).Title);
 
+          for (int i = 0; i < 1; i++)
+          {
+            i = dataGridViewSearchResults.Rows.Add(); // add row for config
+            dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
+            dataGridViewSearchResults.Rows[i].Cells[1].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Title;
+            dataGridViewSearchResults.Rows[i].Cells[2].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Year;
+            dataGridViewSearchResults.Rows[i].Cells[3].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Options;
+            dataGridViewSearchResults.Rows[i].Cells[4].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).ID;
+            dataGridViewSearchResults.Rows[i].Cells[5].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).URL;
+            dataGridViewSearchResults.Rows[i].Cells[6].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Director;
+          }
+          
+          if (dataGridViewSearchResults.Rows.Count > 0)
+          {
+            dataGridViewSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewSearchResults.Rows[0].Selected = true; //set first line as selected
+          }
+          
           return;
 
         }
@@ -562,6 +595,7 @@ namespace Grabber_Interface
     private void Load_Preview(bool AlwaysAsk)
     {
       listPreview.Items.Clear();
+      dataGridViewSearchResults.Rows.Clear();
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
       Grabber_URLClass.IMDBUrl wurl;
       int pageNumber = -1;
@@ -585,6 +619,21 @@ namespace Grabber_Interface
       {
         wurl = (Grabber_URLClass.IMDBUrl)listUrl[i];
         listPreview.Items.Add(wurl.Title + " (" + wurl.Year.ToString() + ") " + wurl.Director);
+
+        i = dataGridViewSearchResults.Rows.Add(); // add row for config
+        dataGridViewSearchResults.Rows[i].Cells[0].Value = i;
+        dataGridViewSearchResults.Rows[i].Cells[1].Value = wurl.Title;
+        dataGridViewSearchResults.Rows[i].Cells[2].Value = wurl.Year;
+        dataGridViewSearchResults.Rows[i].Cells[3].Value = wurl.Options;
+        dataGridViewSearchResults.Rows[i].Cells[4].Value = wurl.ID;
+        dataGridViewSearchResults.Rows[i].Cells[5].Value = wurl.URL;
+        dataGridViewSearchResults.Rows[i].Cells[6].Value = wurl.Director;
+        // dataGridViewSearchResults.Rows.Add(new object() { (i + 1).ToString(), wtitle, wyear, wmovieurl, distance });
+      }
+      if (dataGridViewSearchResults.Rows.Count > 0)
+      {
+        dataGridViewSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        dataGridViewSearchResults.Rows[0].Selected = true; //set first line as selected
       }
     }
 
@@ -730,6 +779,12 @@ namespace Grabber_Interface
         case 4:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Value = TextKeyStart.Text;
           break;
+        case 5:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Value = TextKeyStart.Text;
+          break;
+        case 6:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Value = TextKeyStart.Text;
+          break;
         default:
           TextKeyStart.Text = "";
           break;
@@ -788,6 +843,15 @@ namespace Grabber_Interface
           break;
         case 4:
           xmlConf.find(xmlConf.listSearch, TagName.KeyEndLink)._Value = TextKeyStop.Text;
+          break;
+        case 5:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndID)._Value = TextKeyStop.Text;
+          break;
+        case 6:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndOptions)._Value = TextKeyStop.Text;
+          break;
+        case 7:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndOptions)._Value = TextKeyStop.Text;
           break;
         default:
           TextKeyStop.Text = "";
@@ -2300,25 +2364,48 @@ namespace Grabber_Interface
         button_GoDetailPage.Enabled = false;
     }
 
+    private void dataGridViewSearchResults_SelectionChanged(object sender, EventArgs e)
+    {
+      int rowSelected = this.dataGridViewSearchResults.Rows.GetFirstRow(DataGridViewElementStates.Selected);
+      if (rowSelected >= 0 && this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value.ToString() == "+++")
+        button_GoDetailPage.Text = "Display Next Page";
+      else if (rowSelected >= 0 && this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value.ToString() == "---")
+          button_GoDetailPage.Text = "Display Previous Page";
+        else
+          button_GoDetailPage.Text = "Use with Detail Page";
+      if (rowSelected >= 0)
+        button_GoDetailPage.Enabled = true;
+      else
+        button_GoDetailPage.Enabled = false;
+      //this.dataGridViewSearchResults.Rows[rowSelected].Selected = false;
+      //this.dataGridViewSearchResults.Rows[rowSelected - 1].Selected = true;
+    }
+
+    private void dataGridViewSearchResults_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+    {
+      button_GoDetailPage_Click(sender, e);
+    }
+
     private void button_GoDetailPage_Click(object sender, EventArgs e)
     {
-      if (listPreview.SelectedIndex >= 0)
+      int rowSelected = this.dataGridViewSearchResults.Rows.GetFirstRow(DataGridViewElementStates.Selected);
+      if (rowSelected >= 0)
       {
-        if (listPreview.SelectedItem.ToString() == "+++")
+        if (this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value.ToString() == "+++")
         {
           textPage.Text = Convert.ToString(Convert.ToInt16(textPage.Text) + Convert.ToInt16(textStepPage.Text));
           Grabber_URLClass.IMDBUrl wurl;
-          wurl = (Grabber_URLClass.IMDBUrl)listUrl[listPreview.SelectedIndex];
+          wurl = (Grabber_URLClass.IMDBUrl)listUrl[rowSelected];
           Load_Preview(false);
           button_GoDetailPage.Enabled = false;
         }
         else
         {
-          if (listPreview.SelectedItem.ToString() == "---")
+          if (this.dataGridViewSearchResults["ResultColumn2", rowSelected].Value.ToString() == "---")
           {
             textPage.Text = Convert.ToString(Convert.ToInt16(textPage.Text) - Convert.ToInt16(textStepPage.Text));
             Grabber_URLClass.IMDBUrl wurl;
-            wurl = (Grabber_URLClass.IMDBUrl)listUrl[listPreview.SelectedIndex];
+            wurl = (Grabber_URLClass.IMDBUrl)listUrl[rowSelected];
             Load_Preview(false);
             button_GoDetailPage.Enabled = false;
           }
@@ -2326,7 +2413,7 @@ namespace Grabber_Interface
           {
             System.IO.File.Delete(textConfig.Text + ".tmp");
             Grabber_URLClass.IMDBUrl wurl;
-            wurl = (Grabber_URLClass.IMDBUrl)listUrl[listPreview.SelectedIndex];
+            wurl = (Grabber_URLClass.IMDBUrl)listUrl[rowSelected];
             TextURLDetail.Text = wurl.URL;
             EventArgs ea = new EventArgs();
             ButtonLoad_Click(Button_Load_URL, ea);
@@ -3042,6 +3129,12 @@ namespace Grabber_Interface
         case 4:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Param1 = textReplace.Text;
           break;
+        case 5:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Param1 = textReplace.Text;
+          break;
+        case 6:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param1 = textReplace.Text;
+          break;
         default:
           break;
 
@@ -3066,6 +3159,12 @@ namespace Grabber_Interface
           break;
         case 4:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Param2 = textReplaceWith.Text;
+          break;
+        case 5:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Param2 = textReplaceWith.Text;
+          break;
+        case 6:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param2 = textReplaceWith.Text;
           break;
         default:
           break;
@@ -3777,7 +3876,7 @@ namespace Grabber_Interface
         return;
       }
 
-      listPreview.Items.Clear();
+      // listPreview.Items.Clear();
       if (TextURL.Text.Length > 0)
       {
         if (TextURL.Text.StartsWith("http://") == false) TextURL.Text = "http://" + TextURL.Text;
@@ -3798,6 +3897,23 @@ namespace Grabber_Interface
     {
       GLiSearchMatches = 0;
       textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, true);
+    }
+
+    private void dataGridViewSearchResults_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+      try
+      {
+        if (e.ColumnIndex == this.dataGridViewSearchResults.Columns["ResultColumn6"].Index)
+        {
+          string Filepath = this.dataGridViewSearchResults["ResultColumn6", e.RowIndex].Value.ToString();
+          System.Diagnostics.Process.Start(Filepath);
+        }
+      }
+      catch (Exception)
+      {
+        
+        throw;
+      }
     }
 
   }

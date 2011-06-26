@@ -319,6 +319,10 @@ public class TagName
   public static string KeyYearPage = "KeyYearPage";
   public static string KeyStartLink = "KeyStartLink";           // Start / End Grabber Detail page
   public static string KeyEndLink = "KeyEndLink";
+  public static string KeyStartID = "KeyStartID";           // Start / End ID (IMDB_Id)
+  public static string KeyEndID = "KeyEndID";
+  public static string KeyStartOptions = "KeyStartOptions";           // Start / End Options
+  public static string KeyEndOptions = "KeyEndOptions";
 
   public static string KeyStartBody = "KeyStartBody";
   public static string KeyEndBody = "KeyEndBody";

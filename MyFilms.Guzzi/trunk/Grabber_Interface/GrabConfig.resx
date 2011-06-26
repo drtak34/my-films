@@ -1176,9 +1176,6 @@ Important: You must replace the search string that you used with the string # # 
   <data name="cb_Parameter.Items6" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="cb_Parameter.Items7" xml:space="preserve">
-    <value>AKAs</value>
-  </data>
   <data name="cb_Parameter.Location" type="System.Drawing.Point, System.Drawing">
     <value>66, 19</value>
   </data>
@@ -1221,7 +1218,7 @@ Start / End Detail Page URL: Required.</value>
     <value>Both</value>
   </data>
   <data name="TextKeyStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 54</value>
+    <value>173, 84</value>
   </data>
   <data name="TextKeyStart.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1257,7 +1254,7 @@ SpecialParameters for beginning of expression:
     <value>Both</value>
   </data>
   <data name="TextKeyStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 54</value>
+    <value>173, 84</value>
   </data>
   <data name="TextKeyStop.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1283,7 +1280,7 @@ SpecialParameters for beginning of expression:
     <value>12</value>
   </data>
   <data name="textReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 121</value>
+    <value>66, 140</value>
   </data>
   <data name="textReplace.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1321,7 +1318,7 @@ Warning: The 2 fields are required!</value>
     <value>NoControl</value>
   </data>
   <data name="button_Find.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 272</value>
+    <value>184, 281</value>
   </data>
   <data name="button_Find.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 23</value>
@@ -1351,7 +1348,7 @@ Warning: The 2 fields are required!</value>
     <value>NoControl</value>
   </data>
   <data name="button_Preview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 272</value>
+    <value>509, 282</value>
   </data>
   <data name="button_Preview.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 23</value>
@@ -1384,7 +1381,7 @@ Warning: The 2 fields are required!</value>
     <value>NoControl</value>
   </data>
   <data name="button_GoDetailPage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>689, 272</value>
+    <value>689, 282</value>
   </data>
   <data name="button_GoDetailPage.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 23</value>
@@ -1441,7 +1438,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>NoControl</value>
   </data>
   <data name="button_Preview_All.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 272</value>
+    <value>572, 282</value>
   </data>
   <data name="button_Preview_All.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 23</value>
@@ -1471,7 +1468,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>NoControl</value>
   </data>
   <data name="buttonPrevParam1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 272</value>
+    <value>371, 281</value>
   </data>
   <data name="buttonPrevParam1.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 23</value>
@@ -3538,25 +3535,25 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
   <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>848, 276</value>
+  <data name="listPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>640, 311</value>
   </data>
-  <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 150</value>
+  <data name="listPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>412, 95</value>
   </data>
-  <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+  <data name="listPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Name" xml:space="preserve">
-    <value>dataGridView1</value>
+  <data name="&gt;&gt;listPreview.Name" xml:space="preserve">
+    <value>listPreview</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;listPreview.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;listPreview.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
   </data>
-  <data name="&gt;&gt;dataGridView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;listPreview.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;button_Load_Web.Name" xml:space="preserve">
@@ -3734,7 +3731,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>7</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 273</value>
+    <value>13, 282</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 20</value>
@@ -3758,7 +3755,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 275</value>
+    <value>235, 284</value>
   </data>
   <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 17</value>
@@ -3778,23 +3775,95 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;listPreview.Name" xml:space="preserve">
-    <value>listPreview</value>
+  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn1.HeaderText" xml:space="preserve">
+    <value>#</value>
   </data>
-  <data name="&gt;&gt;listPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ResultColumn1.Width" type="System.Int32, mscorlib">
+    <value>25</value>
   </data>
-  <data name="&gt;&gt;listPreview.Parent" xml:space="preserve">
+  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn2.HeaderText" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ResultColumn2.Width" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn3.HeaderText" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="ResultColumn3.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn4.HeaderText" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ResultColumn4.Width" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn5.HeaderText" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ResultColumn5.Width" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn6.HeaderText" xml:space="preserve">
+    <value>DetailsURL</value>
+  </data>
+  <data name="ResultColumn6.Width" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn7.HeaderText" xml:space="preserve">
+    <value>Director</value>
+  </data>
+  <data name="ResultColumn7.Width" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="dataGridViewSearchResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="dataGridViewSearchResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 165</value>
+  </data>
+  <data name="dataGridViewSearchResults.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewSearchResults.Name" xml:space="preserve">
+    <value>dataGridViewSearchResults</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewSearchResults.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewSearchResults.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="&gt;&gt;listPreview.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;dataGridViewSearchResults.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>505, 92</value>
+    <value>494, 92</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>540, 166</value>
+    <value>551, 184</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -3814,27 +3883,6 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="label_SearchMatches_Starttext.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_SearchMatches_Starttext.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label_SearchMatches_Starttext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 75</value>
-  </data>
-  <data name="label_SearchMatches_Starttext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
-  </data>
-  <data name="label_SearchMatches_Starttext.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="label_SearchMatches_Starttext.Text" xml:space="preserve">
-    <value>matches</value>
-  </data>
-  <data name="label_SearchMatches_Starttext.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
   <data name="&gt;&gt;label_SearchMatches_Starttext.Name" xml:space="preserve">
     <value>label_SearchMatches_Starttext</value>
   </data>
@@ -3846,24 +3894,6 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
   </data>
   <data name="&gt;&gt;label_SearchMatches_Starttext.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="label_SearchMatches_Endtext.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label_SearchMatches_Endtext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 75</value>
-  </data>
-  <data name="label_SearchMatches_Endtext.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
-  </data>
-  <data name="label_SearchMatches_Endtext.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="label_SearchMatches_Endtext.Text" xml:space="preserve">
-    <value>matches</value>
-  </data>
-  <data name="label_SearchMatches_Endtext.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;label_SearchMatches_Endtext.Name" xml:space="preserve">
     <value>label_SearchMatches_Endtext</value>
@@ -3877,22 +3907,6 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
   <data name="&gt;&gt;label_SearchMatches_Endtext.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="checkBox_DisableStartMarker.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBox_DisableStartMarker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 22</value>
-  </data>
-  <data name="checkBox_DisableStartMarker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>15, 14</value>
-  </data>
-  <data name="checkBox_DisableStartMarker.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="checkBox_DisableStartMarker.ToolTip" xml:space="preserve">
-    <value>If checked, marking is not jumping to first match, if parameter has changed.
-Useful, if you want to "follow" the grabbing via "Find Next".</value>
-  </data>
   <data name="&gt;&gt;checkBox_DisableStartMarker.Name" xml:space="preserve">
     <value>checkBox_DisableStartMarker</value>
   </data>
@@ -3904,18 +3918,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   </data>
   <data name="&gt;&gt;checkBox_DisableStartMarker.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="button_FirstMatch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 19</value>
-  </data>
-  <data name="button_FirstMatch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
-  </data>
-  <data name="button_FirstMatch.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="button_FirstMatch.Text" xml:space="preserve">
-    <value>Find First</value>
   </data>
   <data name="&gt;&gt;button_FirstMatch.Name" xml:space="preserve">
     <value>button_FirstMatch</value>
@@ -3929,18 +3931,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   <data name="&gt;&gt;button_FirstMatch.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="button_NextMatch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 19</value>
-  </data>
-  <data name="button_NextMatch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
-  </data>
-  <data name="button_NextMatch.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="button_NextMatch.Text" xml:space="preserve">
-    <value>Find Next</value>
-  </data>
   <data name="&gt;&gt;button_NextMatch.Name" xml:space="preserve">
     <value>button_NextMatch</value>
   </data>
@@ -3952,24 +3942,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   </data>
   <data name="&gt;&gt;button_NextMatch.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="btReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btReset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 137</value>
-  </data>
-  <data name="btReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 21</value>
-  </data>
-  <data name="btReset.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="btReset.Text" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="btReset.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;btReset.Name" xml:space="preserve">
     <value>btReset</value>
@@ -3983,27 +3955,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   <data name="&gt;&gt;btReset.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="labelReplaceWith.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelReplaceWith.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 121</value>
-  </data>
-  <data name="labelReplaceWith.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
-  </data>
-  <data name="labelReplaceWith.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="labelReplaceWith.Text" xml:space="preserve">
-    <value>With</value>
-  </data>
-  <data name="labelReplaceWith.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;labelReplaceWith.Name" xml:space="preserve">
     <value>labelReplaceWith</value>
   </data>
@@ -4015,27 +3966,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   </data>
   <data name="&gt;&gt;labelReplaceWith.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <data name="labelReplace.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelReplace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 121</value>
-  </data>
-  <data name="labelReplace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="labelReplace.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="labelReplace.Text" xml:space="preserve">
-    <value>Replace </value>
-  </data>
-  <data name="labelReplace.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;labelReplace.Name" xml:space="preserve">
     <value>labelReplace</value>
@@ -4049,24 +3979,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   <data name="&gt;&gt;labelReplace.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="textReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 121</value>
-  </data>
-  <data name="textReplaceWith.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="textReplaceWith.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="textReplaceWith.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 37</value>
-  </data>
-  <data name="textReplaceWith.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="textReplaceWith.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;textReplaceWith.Name" xml:space="preserve">
     <value>textReplaceWith</value>
   </data>
@@ -4078,24 +3990,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   </data>
   <data name="&gt;&gt;textReplaceWith.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 53</value>
-  </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>Key Stop</value>
   </data>
   <data name="&gt;&gt;label7.Name" xml:space="preserve">
     <value>label7</value>
@@ -4109,24 +4003,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 53</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>Key Start</value>
-  </data>
   <data name="&gt;&gt;label6.Name" xml:space="preserve">
     <value>label6</value>
   </data>
@@ -4138,24 +4014,6 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 22</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Parameter</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -4173,7 +4031,7 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
     <value>6, 92</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 166</value>
+    <value>482, 184</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -4421,26 +4279,269 @@ Useful, if you want to "follow" the grabbing via "Find Next".</value>
   <data name="&gt;&gt;label19.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="listPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 13</value>
+  <data name="button_FirstMatch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 19</value>
   </data>
-  <data name="listPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>528, 147</value>
+  <data name="button_FirstMatch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
   </data>
-  <data name="listPreview.TabIndex" type="System.Int32, mscorlib">
+  <data name="button_FirstMatch.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="button_FirstMatch.Text" xml:space="preserve">
+    <value>Find First</value>
+  </data>
+  <data name="&gt;&gt;button_FirstMatch.Name" xml:space="preserve">
+    <value>button_FirstMatch</value>
+  </data>
+  <data name="&gt;&gt;button_FirstMatch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_FirstMatch.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;button_FirstMatch.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="button_NextMatch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>393, 19</value>
+  </data>
+  <data name="button_NextMatch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="button_NextMatch.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="button_NextMatch.Text" xml:space="preserve">
+    <value>Find Next</value>
+  </data>
+  <data name="&gt;&gt;button_NextMatch.Name" xml:space="preserve">
+    <value>button_NextMatch</value>
+  </data>
+  <data name="&gt;&gt;button_NextMatch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_NextMatch.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;button_NextMatch.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btReset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 156</value>
+  </data>
+  <data name="btReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 21</value>
+  </data>
+  <data name="btReset.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="&gt;&gt;listPreview.Name" xml:space="preserve">
-    <value>listPreview</value>
+  <data name="btReset.Text" xml:space="preserve">
+    <value>Reset</value>
   </data>
-  <data name="&gt;&gt;listPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btReset.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;listPreview.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+  <data name="&gt;&gt;btReset.Name" xml:space="preserve">
+    <value>btReset</value>
   </data>
-  <data name="&gt;&gt;listPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;btReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btReset.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;btReset.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labelReplaceWith.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelReplaceWith.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 140</value>
+  </data>
+  <data name="labelReplaceWith.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="labelReplaceWith.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelReplaceWith.Text" xml:space="preserve">
+    <value>With</value>
+  </data>
+  <data name="labelReplaceWith.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelReplaceWith.Name" xml:space="preserve">
+    <value>labelReplaceWith</value>
+  </data>
+  <data name="&gt;&gt;labelReplaceWith.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReplaceWith.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelReplaceWith.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="labelReplace.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelReplace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelReplace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 140</value>
+  </data>
+  <data name="labelReplace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="labelReplace.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="labelReplace.Text" xml:space="preserve">
+    <value>Replace </value>
+  </data>
+  <data name="labelReplace.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;labelReplace.Name" xml:space="preserve">
+    <value>labelReplace</value>
+  </data>
+  <data name="&gt;&gt;labelReplace.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelReplace.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelReplace.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="textReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 140</value>
+  </data>
+  <data name="textReplaceWith.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textReplaceWith.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="textReplaceWith.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 37</value>
+  </data>
+  <data name="textReplaceWith.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="textReplaceWith.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;textReplaceWith.Name" xml:space="preserve">
+    <value>textReplaceWith</value>
+  </data>
+  <data name="&gt;&gt;textReplaceWith.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textReplaceWith.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;textReplaceWith.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 53</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Key Stop</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 53</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Key Start</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 22</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <data name="&gt;&gt;label33.Name" xml:space="preserve">
     <value>label33</value>
@@ -5241,6 +5342,97 @@ If you want to create a new configuration based on the existing script, you can 
   <metadata name="iMDBEnumeratorBindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>319, 620</value>
   </metadata>
+  <data name="checkBox_DisableStartMarker.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox_DisableStartMarker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 22</value>
+  </data>
+  <data name="checkBox_DisableStartMarker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>15, 14</value>
+  </data>
+  <data name="checkBox_DisableStartMarker.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="checkBox_DisableStartMarker.ToolTip" xml:space="preserve">
+    <value>If checked, marking is not jumping to first match, if parameter has changed.
+Useful, if you want to "follow" the grabbing via "Find Next".</value>
+  </data>
+  <data name="&gt;&gt;checkBox_DisableStartMarker.Name" xml:space="preserve">
+    <value>checkBox_DisableStartMarker</value>
+  </data>
+  <data name="&gt;&gt;checkBox_DisableStartMarker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox_DisableStartMarker.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;checkBox_DisableStartMarker.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label_SearchMatches_Endtext.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_SearchMatches_Endtext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 75</value>
+  </data>
+  <data name="label_SearchMatches_Endtext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="label_SearchMatches_Endtext.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label_SearchMatches_Endtext.Text" xml:space="preserve">
+    <value>matches</value>
+  </data>
+  <data name="label_SearchMatches_Endtext.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Endtext.Name" xml:space="preserve">
+    <value>label_SearchMatches_Endtext</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Endtext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Endtext.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Endtext.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label_SearchMatches_Starttext.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_SearchMatches_Starttext.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label_SearchMatches_Starttext.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 75</value>
+  </data>
+  <data name="label_SearchMatches_Starttext.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="label_SearchMatches_Starttext.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="label_SearchMatches_Starttext.Text" xml:space="preserve">
+    <value>matches</value>
+  </data>
+  <data name="label_SearchMatches_Starttext.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Starttext.Name" xml:space="preserve">
+    <value>label_SearchMatches_Starttext</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Starttext.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Starttext.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;label_SearchMatches_Starttext.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -5757,6 +5949,48 @@ If you want to create a new configuration based on the existing script, you can 
   </data>
   <data name="&gt;&gt;iMDBEnumeratorBindingSource1.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn1.Name" xml:space="preserve">
+    <value>ResultColumn1</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn2.Name" xml:space="preserve">
+    <value>ResultColumn2</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn3.Name" xml:space="preserve">
+    <value>ResultColumn3</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn4.Name" xml:space="preserve">
+    <value>ResultColumn4</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn5.Name" xml:space="preserve">
+    <value>ResultColumn5</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn6.Name" xml:space="preserve">
+    <value>ResultColumn6</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn7.Name" xml:space="preserve">
+    <value>ResultColumn7</value>
+  </data>
+  <data name="&gt;&gt;ResultColumn7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GrabConfig</value>

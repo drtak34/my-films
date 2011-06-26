@@ -22,6 +22,12 @@
       <KeyStartLink Param1="" Param2="" />
       <KeyEndLink />
       <KeyLinkIndex />
+      <KeyStartID Param1="" Param2="" />
+      <KeyEndID />
+      <KeyIDIndex />
+      <KeyStartOptions Param1="" Param2="" />
+      <KeyEndOptions />
+      <KeyOptionsIndex />
     </URLSearch>
     <Details>
       <KeyStartBody Param1="" Param2="" />
