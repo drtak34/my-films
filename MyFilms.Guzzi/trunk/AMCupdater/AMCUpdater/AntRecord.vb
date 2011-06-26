@@ -669,6 +669,8 @@ Public Class AntRecord
                                 Dim TitleMatch As String
                                 Dim index As Integer
                                 Dim indexFirstMatch As Integer
+                                Dim titleFirstMatch As String
+                                Dim titleLastMatch As String
 
                                 ' Check for direct IMDB match
                                 For i As Integer = 0 To wurl.Count - 1
@@ -729,6 +731,9 @@ Public Class AntRecord
                                 CountNameMatch = 0
                                 index = 0
                                 indexFirstMatch = 0
+                                titleFirstMatch = ""
+                                titleLastMatch = ""
+
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
@@ -738,15 +743,17 @@ Public Class AntRecord
                                     If (wyear = _InternetSearchHintYear And _InternetLookupAlwaysPrompt = False) Then
                                         If CountNameMatch = 0 Then
                                             indexFirstMatch = i
+                                            titleFirstMatch = wtitle
                                         End If
                                         CountNameMatch = CountNameMatch + 1
                                         index = i
+                                        titleLastMatch = wtitle
                                     End If
                                 Next
                                 If (CountNameMatch = 1 And FuzziDistance(SearchString, wurl.Item(index).Title.ToString) < 5) Then
                                     _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                     _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with single match and FuzziDistance = '" & FuzziDistance(SearchString, wurl.Item(index).Title.ToString).ToString & "'."
+                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with single match and name match (" & titleFirstMatch & ") with FuzziDistance = '" & FuzziDistance(SearchString, titleFirstMatch).ToString & "'."
                                     If bgwFolderScanUpdate.CancellationPending = True Then
                                         Exit Sub
                                     End If
@@ -756,7 +763,7 @@ Public Class AntRecord
                                 If (CountNameMatch = 2 And FuzziDistance(SearchString, wurl.Item(index).Title.ToString) < 5) Then
                                     _InternetData = Gb.GetDetail(wurl.Item(indexFirstMatch).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                     _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with DOUBLE match and FuzziDistance = '" & FuzziDistance(SearchString, wurl.Item(indexFirstMatch).Title.ToString).ToString & "' - using first match."
+                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with DOUBLE match and FuzziDistance = '" & FuzziDistance(SearchString, titleFirstMatch).ToString & "' - using first match (" & titleFirstMatch & ")."
                                     If bgwFolderScanUpdate.CancellationPending = True Then
                                         Exit Sub
                                     End If
