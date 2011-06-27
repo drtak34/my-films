@@ -3379,8 +3379,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             View_Dflt_Item.Items.Add("Year");
             View_Dflt_Item.Items.Add("Category");
             View_Dflt_Item.Items.Add("Country");
-            if (this.AntStorage.Text.Length != 0 && !(AntStorage.Text == "(none)"))
-                View_Dflt_Item.Items.Add("Storage");
+            //if (this.AntStorage.Text.Length != 0 && !(AntStorage.Text == "(none)"))
+            //    View_Dflt_Item.Items.Add("Storage");
             if (!(AntViewItem1.Text == "(none)") && this.AntViewItem1.Text.Length != 0 && this.AntViewText1.Text.Length != 0)
                 View_Dflt_Item.Items.Add(AntViewText1.Text);
             if (!(AntViewItem2.Text == "(none)") && this.AntViewItem2.Text.Length != 0 && this.AntViewText2.Text.Length != 0)
