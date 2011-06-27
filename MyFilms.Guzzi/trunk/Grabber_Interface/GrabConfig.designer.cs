@@ -30,8 +30,8 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -873,6 +873,7 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.textFind, "textFind");
           this.textFind.Name = "textFind";
+          this.toolTip1.SetToolTip(this.textFind, resources.GetString("textFind.ToolTip"));
           // 
           // label10
           // 
@@ -1114,7 +1115,6 @@ namespace Grabber_Interface
           resources.ApplyResources(this.textBody, "textBody");
           this.textBody.Name = "textBody";
           this.textBody.ReadOnly = true;
-          this.textBody.ShowSelectionMargin = true;
           this.textBody.CursorChanged += new System.EventHandler(this.textBody_CursorChanged);
           this.textBody.SelectionChanged += new System.EventHandler(this.textBody_SelectionChanged);
           this.textBody.Click += new System.EventHandler(this.textBody_Click);
@@ -1123,6 +1123,7 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.textBox5, "textBox5");
           this.textBox5.Name = "textBox5";
+          this.toolTip1.SetToolTip(this.textBox5, resources.GetString("textBox5.ToolTip"));
           // 
           // label9
           // 
@@ -1178,16 +1179,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle1;
+          dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle7;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle2;
+          dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle8;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 

@@ -279,8 +279,8 @@ namespace Grabber_Interface
           
           if (dataGridViewSearchResults.Rows.Count > 0)
           {
-            dataGridViewSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewSearchResults.Rows[0].Selected = true; //set first line as selected
+            // dataGridViewSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // dataGridViewSearchResults.Rows[0].Selected = true; //set first line as selected
           }
         }
 
@@ -593,6 +593,8 @@ namespace Grabber_Interface
     private void Load_Preview(bool AlwaysAsk)
     {
       dataGridViewSearchResults.Rows.Clear();
+      button_GoDetailPage.Enabled = false;
+
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
       Grabber_URLClass.IMDBUrl wurl;
       int pageNumber = -1;
@@ -629,20 +631,30 @@ namespace Grabber_Interface
       {
         dataGridViewSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         dataGridViewSearchResults.Rows[0].Selected = true; //set first line as selected
+        button_GoDetailPage.Enabled = true;
       }
     }
 
     private void button_Find_Click(object sender, EventArgs e)
     {
-
-      int i = textBody.Find(textBox5.Text, GLiSearch, RichTextBoxFinds.None);
-      if (i > 0)
+      try
       {
-        textBody.Select(i, textBox5.Text.Length);
-        GLiSearch = i + textBox5.Text.Length;
+        int iLength = 0;
+        int i = GrabUtil.FindPosition(textBody.Text, textBox5.Text, GLiSearch, ref iLength, true, false);
+        //int i = textBody.Find(textBox5.Text, GLiSearch, RichTextBoxFinds.None);
+        if (i > 0)
+        {
+          textBody.Select(i, iLength);
+          // textBody.Select(i, textBox5.Text.Length);
+          GLiSearch = i + iLength;
+        }
+        else
+          GLiSearch = 0;
       }
-      else
+      catch (Exception)
+      {
         GLiSearch = 0;
+      }
     }
 
     private void textBody_Click(object sender, EventArgs e)
@@ -735,32 +747,6 @@ namespace Grabber_Interface
       {
         case 0:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value = TextKeyStart.Text;
-          if (TextKeyStart.Text.Length > 0)
-          {
-            iStart = Body.IndexOf(TextKeyStart.Text);
-            //Si la clé de début a été trouvé
-            if (iStart > 0)
-            {
-              //Si une clé de fin a été paramétrée, on l'utilise si non on prend le reste du body
-              if (TextKeyStop.Text != "")
-              {
-                iEnd = Body.IndexOf(TextKeyStop.Text, iStart);
-              }
-              else
-                iEnd = Body.Length;
-
-              if (iEnd == -1)
-                iEnd = Body.Length;
-
-              //Découpage du body
-              iStart += TextKeyStart.Text.Length;
-              textBody.Text = Body.Substring(iStart, iEnd - iStart);
-
-            }
-            else
-              textBody.Text = Body;
-          }
-
           break;
         case 1:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartTitle)._Value = TextKeyStart.Text;
@@ -783,49 +769,24 @@ namespace Grabber_Interface
         default:
           TextKeyStart.Text = "";
           break;
-
       }
 
-      if (cb_Parameter.SelectedIndex > 0 && TextKeyStop.Text.Length > 0)
-        textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, false);
-      // ToDo: Also mark Regex selection on Textbody
+      if (cb_Parameter.SelectedIndex > 0) // && TextKeyStop.Text.Length > 0
+        textBody.Text = BodyStripped;
+      else
+        textBody.Text = Body;
+      textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, false);
 
     }
 
     private void TextKeyStop_TextChanged(object sender, EventArgs e)
     {
-      int iStart;
-      int iEnd;
       switch (cb_Parameter.SelectedIndex)
       {
         case 0:
           xmlConf.find(xmlConf.listSearch, TagName.KeyEndList)._Value = TextKeyStop.Text;
-          if (TextKeyStart.Text.Length > 0)
-          {
-            iStart = Body.IndexOf(TextKeyStart.Text);
-            //Si la clé de début a été trouvé
-            if (iStart > 0)
-            {
-              //Si une clé de fin a été paramétrée, on l'utilise si non on prend le reste du body
-              if (TextKeyStop.Text != "")
-              {
-                iEnd = Body.IndexOf(TextKeyStop.Text, iStart);
-              }
-              else
-                iEnd = Body.Length;
-
-              if (iEnd == -1)
-                iEnd = Body.Length;
-
-              //Découpage du body
-              iStart += TextKeyStart.Text.Length;
-
-              try { textBody.Text = Body.Substring(iStart, iEnd - iStart); }
-              catch { textBody.Text = Body; }
-            }
-            else
-              textBody.Text = Body;
-          }
+          try { textBody.Text = BodyStripped; }
+          catch { textBody.Text = Body; }
           break;
         case 1:
           xmlConf.find(xmlConf.listSearch, TagName.KeyEndTitle)._Value = TextKeyStop.Text;
@@ -845,17 +806,16 @@ namespace Grabber_Interface
         case 6:
           xmlConf.find(xmlConf.listSearch, TagName.KeyEndOptions)._Value = TextKeyStop.Text;
           break;
-        case 7:
-          xmlConf.find(xmlConf.listSearch, TagName.KeyEndOptions)._Value = TextKeyStop.Text;
-          break;
         default:
           TextKeyStop.Text = "";
           break;
-
       }
 
-      if (cb_Parameter.SelectedIndex > 0)
-        textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, false);
+      if (cb_Parameter.SelectedIndex > 0) // && TextKeyStop.Text.Length > 0
+        textBody.Text = BodyStripped;
+      else
+        textBody.Text = Body;
+      textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, false);
     }
 
     private void textBody_SelectionChanged(object sender, EventArgs e)
@@ -865,11 +825,14 @@ namespace Grabber_Interface
 
       int nb = 0;
       int i = 0;
-      i = textBody.Find(textBody.SelectedText, 0, RichTextBoxFinds.NoHighlight);
+      int iLength = 0;
+      // i = textBody.Find(textBody.SelectedText, 0, RichTextBoxFinds.NoHighlight);
+      i = GrabUtil.FindPosition(textBody.Text, textBody.SelectedText, i, ref iLength, true, false);
       while (i > 0)
       {
         nb++;
-        i = textBody.Find(textBody.SelectedText, i + textBody.SelectedText.Length, RichTextBoxFinds.NoHighlight);
+        // i = textBody.Find(textBody.SelectedText, i + textBody.SelectedText.Length, RichTextBoxFinds.NoHighlight);
+        i = GrabUtil.FindPosition(textBody.Text, textBody.SelectedText, i + iLength, ref iLength, true, false);
       }
       label9.Text = nb.ToString() + " match found";
     }
@@ -2268,11 +2231,14 @@ namespace Grabber_Interface
 
     private void buttonFind_Click(object sender, EventArgs e)
     {
-      int i = textBodyDetail.Find(textFind.Text, GLiSearchD, RichTextBoxFinds.None);
+      int iLength = 0;
+      int i = GrabUtil.FindPosition(textBodyDetail.Text, textFind.Text, GLiSearchD, ref iLength, true, false);
+      // int i = textBodyDetail.Find(textFind.Text, GLiSearchD, RichTextBoxFinds.None);
       if (i > 0)
       {
-        textBodyDetail.Select(i, textFind.Text.Length);
-        GLiSearchD = i + textFind.Text.Length;
+        textBodyDetail.Select(i, iLength);
+        // textBodyDetail.Select(i, textFind.Text.Length);
+        GLiSearchD = i + iLength;
       }
       else
         GLiSearchD = 0;
@@ -2292,15 +2258,17 @@ namespace Grabber_Interface
       {
         int nb = 0;
         int i = 0;
-        i = textBodyDetail.Find(textBodyDetail.SelectedText, 0, RichTextBoxFinds.NoHighlight);
+        int iLength = 0;
+        // i = textBodyDetail.Find(textBodyDetail.SelectedText, 0, RichTextBoxFinds.NoHighlight);
+        i = GrabUtil.FindPosition(textBodyDetail.Text, textBodyDetail.SelectedText, i, ref iLength, true, false);
         while (i > 0)
         {
           nb++;
-          i = textBodyDetail.Find(textBodyDetail.SelectedText, i + textBodyDetail.SelectedText.Length, RichTextBoxFinds.NoHighlight);
+          // i = textBodyDetail.Find(textBodyDetail.SelectedText, i + textBodyDetail.SelectedText.Length, RichTextBoxFinds.NoHighlight);
+          i = GrabUtil.FindPosition(textBodyDetail.Text, textBodyDetail.SelectedText, i + iLength, ref iLength, true, false);
         }
         label10.Text = nb.ToString() + " match found";
       }
-
     }
 
     private void dataGridViewSearchResults_SelectionChanged(object sender, EventArgs e)
