@@ -474,6 +474,8 @@ Public Class AntRecord
                         Dim wdirector As String
                         Dim wmovieurl As String
                         Dim wyear As String
+                        Dim wOptions As String
+                        Dim wID As String
                         Dim dyear As Double
                         Dim wimdb As String
                         Dim wtmdb As String
@@ -546,7 +548,7 @@ Public Class AntRecord
                                 frmList.txtSource.Text = _FilePath
                             End If
                             If (wurl.Count = 0) Then
-                                frmList.lstOptionsExt.Rows.Add(New String() {"Movie not found...", "", "", ""})
+                                frmList.lstOptionsExt.Rows.Add(New String() {"Movie not found...", "", "", "", "", ""})
                             Else
                                 For i As Integer = 0 To wurl.Count - 1
                                     If wurl.Item(i).Year.ToString = _InternetSearchHintYear Then
@@ -557,6 +559,8 @@ Public Class AntRecord
                                     wtitle = wurl.Item(i).Title.ToString
                                     wdirector = wurl.Item(i).Director.ToString
                                     wyear = wurl.Item(i).Year.ToString
+                                    wID = wurl.Item(i).ID.ToString
+                                    wOptions = wurl.Item(i).Options.ToString
                                     wmovieurl = wurl.Item(i).URL.ToString
                                     If (_InternetSearchHint.Length > 0 And (wdirector.Contains(_InternetSearchHint) Or wyear.Contains(_InternetSearchHint)) And _InternetLookupAlwaysPrompt = False And (wlimityear = False Or wyear = _InternetSearchHintYear)) Then
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
@@ -572,9 +576,9 @@ Public Class AntRecord
                                         distance = FuzziDistance(SearchString, wtitle).ToString
                                     End If
                                     If wyear = _InternetSearchHintYear Then
-                                        frmList.lstOptionsExt.Rows.Add(New String() {wtitle & " - (+++ year match! +++)", wyear, wmovieurl, distance})
+                                        frmList.lstOptionsExt.Rows.Add(New String() {wtitle & " - (+++ year match! +++)", wyear, wOptions, wID, wmovieurl, distance})
                                     Else
-                                        frmList.lstOptionsExt.Rows.Add(New String() {wtitle, wyear, wmovieurl, distance})
+                                        frmList.lstOptionsExt.Rows.Add(New String() {wtitle, wyear, wOptions, wID, wmovieurl, distance})
                                     End If
                                 Next
                             End If

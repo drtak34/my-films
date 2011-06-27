@@ -15,7 +15,7 @@ Public Class frmList
         btnSearchAgain.Enabled = False
         If txtSearchString.Text <> "" Then
             lstOptionsExt.Rows.Clear()
-            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", "", ""})
+            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", "", "", "", ""})
             'Thread.Sleep(5)
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
@@ -29,13 +29,13 @@ Public Class frmList
                     Else
                         distance = FuzziDistance(txtSearchString.Text, wurl.Item(i).Title.ToString).ToString
                     End If
-                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL, distance})
+                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).ID, wurl.Item(i).URL, distance})
                 Next
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
             Else
-                lstOptionsExt.Rows.Add(New String() {"No results found !", "", ""})
+                lstOptionsExt.Rows.Add(New String() {"No results found !", "", "", "", ""})
                 btnOK.Enabled = False
             End If
             SearchTextChanged = False
@@ -53,19 +53,19 @@ Public Class frmList
             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
             'Dim wurl As ArrayList
             lstOptionsExt.Rows.Clear()
-            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", ""})
+            lstOptionsExt.Rows.Add(New String() {"... now searching for results ...", "", "", "", ""})
             wurl.Clear()
             wurl = Gb.ReturnURL(txtSearchhintIMDB_Id.Text, txtTmpParserFilePath.Text, 1, CurrentSettings.Internet_Lookup_Always_Prompt)
             lstOptionsExt.Rows.Clear()
             If (wurl.Count > 0) Then
                 For i As Integer = 0 To wurl.Count - 1
-                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).URL, ""})
+                    lstOptionsExt.Rows.Add(New String() {wurl.Item(i).Title, wurl.Item(i).Year, wurl.Item(i).Options, wurl.Item(i).ID, wurl.Item(i).URL, ""})
                 Next
                 lstOptionsExt.SelectionMode = Windows.Forms.DataGridViewSelectionMode.FullRowSelect
                 lstOptionsExt.Rows(0).Selected = True
                 btnOK.Enabled = True
             Else
-                lstOptionsExt.Rows.Add(New String() {"No results found !", "", ""})
+                lstOptionsExt.Rows.Add(New String() {"No results found !", "", "", "", ""})
                 btnOK.Enabled = False
             End If
             SearchTextChanged = False
