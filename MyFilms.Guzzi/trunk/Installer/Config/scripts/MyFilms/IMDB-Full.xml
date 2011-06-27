@@ -3,9 +3,10 @@
   <Section>
     <DBName>IMDB-Full</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
+    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
-      <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_Popular.Titles_x007C_Partial.Matches_x007C_Approx.Matches</KeyStartList>
+      <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_Exact.Matches_x007C_Popular.Titles_x007C_Partial.Matches_x007C_Approx.Matches</KeyStartList>
       <KeyEndList>Suggestions_x0020_For_x0020_Improving_x0020_Your_x0020_Results</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
@@ -20,7 +21,7 @@
       <KeyEndDirector />
       <KeyDirectorIndex />
       <KeyStartLink Param1="_x002F__x0022_" Param2="_x002F_">_x003C_td_x0020_valign_x003D__x0022_top_x0022__x003E__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
-      <KeyEndLink>onClick</KeyEndLink>
+      <KeyEndLink>_x0023_REGEX_x0023_on_x005B_Cc_x005D_lick</KeyEndLink>
       <KeyLinkIndex />
       <KeyStartID Param1="_x002F__x0022__x0020_" Param2="">_x003C_td_x0020_valign_x003D__x0022_top_x0022__x003E__x003C_a_x0020_href_x003D__x0022__x002F_title_x002F_</KeyStartID>
       <KeyEndID>_x0023_REGEX_x0023__x002F__x0022_._x002A__x003F_onClick</KeyEndID>
