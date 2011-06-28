@@ -699,7 +699,7 @@ Public Class AntRecord
                                     If Double.TryParse(wyear, dyear) = False Then
                                         wyear = ""
                                     End If
-                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 3) And wyear = _InternetSearchHintYear) Then
+                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 5) And wyear = _InternetSearchHintYear) Then
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
                                         _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "'."
