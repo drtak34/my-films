@@ -486,6 +486,8 @@ Public Class AntRecord
                         If (_InteractiveMode = True And _Dont_Ask_Interactive = False) Then
 
                             'First try to find matches due to "try to find best match automatically" - this is enhanced matching option as feature on top of grabber matching itself
+
+                            'Try to match by IMDB_Id
                             If _InternetLookupAlwaysPrompt = False Then
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
@@ -692,17 +694,18 @@ Public Class AntRecord
                                     End If
                                 Next
 
-                                ' Check for exact year match (and name match)
+                                ' Check for exact year match (and name match) - without Options
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    wOptions = wurl.Item(i).Options.ToString
                                     If Double.TryParse(wyear, dyear) = False Then
                                         wyear = ""
                                     End If
-                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 5) And wyear = _InternetSearchHintYear) Then
+                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 5) And wyear = _InternetSearchHintYear And wOptions = "") Then
                                         _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
-                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "'."
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "' and Optionsfilter 'on'."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
                                             Exit Sub
                                         End If
@@ -710,10 +713,52 @@ Public Class AntRecord
                                     End If
                                 Next
 
-                                ' Check for "near" year match (and name match)
+                                ' Check for exact year match (and name match) - with Options (including TV, series, etc.)
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
                                     wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    wOptions = wurl.Item(i).Options.ToString
+                                    If Double.TryParse(wyear, dyear) = False Then
+                                        wyear = ""
+                                    End If
+                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 5) And wyear = _InternetSearchHintYear) Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "' and Optionsfilter 'off'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                Next
+
+                                ' Check for "near" year match (and name match) - without Options 
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    wOptions = wurl.Item(i).Options.ToString
+                                    If Double.TryParse(wyear, dyear) = False Then
+                                        wyear = ""
+                                    End If
+                                    If _InternetSearchHintYear <> "" And _InternetSearchHintYear.Length >= 4 And wyear <> "" And wyear.Length >= 4 And wOptions = "" Then
+                                        If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 3) And wyear <> "" And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
+                                            '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
+                                            _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                            _InternetLookupOK = True
+                                            _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "' and Optionsfilter 'on'."
+                                            If bgwFolderScanUpdate.CancellationPending = True Then
+                                                Exit Sub
+                                            End If
+                                            Exit While
+                                        End If
+                                    End If
+                                Next
+
+                                ' Check for "near" year match (and name match) - with Options (including TV, series, etc.)
+                                For i As Integer = 0 To wurl.Count - 1
+                                    wtitle = wurl.Item(i).Title.ToString
+                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    wOptions = wurl.Item(i).Options.ToString
                                     If Double.TryParse(wyear, dyear) = False Then
                                         wyear = ""
                                     End If
@@ -722,7 +767,7 @@ Public Class AntRecord
                                             '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
                                             _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                             _InternetLookupOK = True
-                                            _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "'."
+                                            _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "' and Optionsfilter 'off'."
                                             If bgwFolderScanUpdate.CancellationPending = True Then
                                                 Exit Sub
                                             End If
