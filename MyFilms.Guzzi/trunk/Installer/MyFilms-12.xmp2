@@ -3065,13 +3065,6 @@ Updated DLLs for BrowseTheWeb and SubCentral with MyFilms Support</Description>
               <ZipFileName>Installer{CopyFile}\{f2d608b0-72d6-413e-8d11-57deab7654dc}-BrowseTheWeb.dll</ZipFileName>
               <DestinationFilename>%Plugins%\Windows\BrowseTheWeb.dll</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>plugins.12\Windows\SubCentral.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{342078f4-5cde-4f44-ada7-ab53b5275944}-SubCentral.dll</ZipFileName>
-              <DestinationFilename>%Plugins%\Windows\SubCentral.dll</DestinationFilename>
-            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3411,82 +3404,27 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Message>requires MediaPortal min version 1.1.6.27644</Message>
         <Name>MediaPortal</Name>
       </DependencyItem>
+      <DependencyItem>
+        <Type>Extension</Type>
+        <Id>f8f30e5e-cc8a-44a0-91a9-1175fe55732f</Id>
+        <MinVersion>
+          <Major>1</Major>
+          <Minor>1</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
+        </MinVersion>
+        <MaxVersion>
+          <Major>1</Major>
+          <Minor>2</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
+        </MaxVersion>
+        <WarnOnly>true</WarnOnly>
+        <Message>requires min Extension version 1.1.0.0</Message>
+        <Name>SubCentral</Name>
+      </DependencyItem>
     </Items>
   </Dependencies>
-  <PluginDependencies>
-    <Items>
-      <PluginDependencyItem AssemblyName="MyFilms.dll">
-        <CompatibleVersion>
-          <Items>
-            <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.1.7.27830</DesignedForVersion>
-            </CompatibleVersionItem>
-          </Items>
-        </CompatibleVersion>
-        <SubSystemsUsed>
-          <Items>
-            <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.Players" />
-            <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Config" />
-          </Items>
-        </SubSystemsUsed>
-      </PluginDependencyItem>
-      <PluginDependencyItem AssemblyName="MovingPicturesXML.dll">
-        <CompatibleVersion>
-          <Items>
-            <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
-            </CompatibleVersionItem>
-          </Items>
-        </CompatibleVersion>
-        <SubSystemsUsed>
-          <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.Players" />
-            <SubSystemItem Name="MP.DB" />
-          </Items>
-        </SubSystemsUsed>
-      </PluginDependencyItem>
-      <PluginDependencyItem AssemblyName="BrowseTheWeb.dll">
-        <CompatibleVersion>
-          <Items>
-            <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.7.0</MinRequiredVersion>
-              <DesignedForVersion>1.1.7.0</DesignedForVersion>
-            </CompatibleVersionItem>
-          </Items>
-        </CompatibleVersion>
-        <SubSystemsUsed>
-          <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.DB" />
-          </Items>
-        </SubSystemsUsed>
-      </PluginDependencyItem>
-      <PluginDependencyItem AssemblyName="SubCentral.dll">
-        <CompatibleVersion>
-          <Items>
-            <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
-            </CompatibleVersionItem>
-          </Items>
-        </CompatibleVersion>
-        <SubSystemsUsed>
-          <Items>
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Externals.MediaInfo" />
-          </Items>
-        </SubSystemsUsed>
-      </PluginDependencyItem>
-    </Items>
-  </PluginDependencies>
   <GeneralInfo>
     <Name>MyFilms</Name>
     <Id>ceddd4d1-4cac-4846-9af5-f4daee1bbddc</Id>
@@ -6526,13 +6464,6 @@ Please refer to the Wiki onlinedocumentation.</Value>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>plugins.12\Windows\SubCentral.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{342078f4-5cde-4f44-ada7-ab53b5275944}-SubCentral.dll</ZipFileName>
-        <DestinationFilename>%Plugins%\Windows\SubCentral.dll</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{31439464-c8ad-4605-86e0-0aa2882fe38c}-AMCUpdaterSetup.msi</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\AMCinstaller\AMCUpdaterSetup.msi</DestinationFilename>
@@ -6548,14 +6479,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e3825770-21b2-4913-a0c1-388f1d8826c2}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{dfb87912-1ffb-4e47-951f-35a11b75f0cd}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ab39e02e-5e1e-4b54-b0bc-24e5cb499fd7}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{db2b1297-6403-4723-9ddf-c73930b14abf}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
