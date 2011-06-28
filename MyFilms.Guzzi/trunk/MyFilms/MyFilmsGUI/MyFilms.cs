@@ -4661,16 +4661,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // stop background worker
           if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
           {
-            bgUpdateDB.CancelAsync();
-
             //// Temporary added to hard kill process
-            //foreach (Process clsProcess in Process.GetProcesses())
-            //{
-            //  if (clsProcess.ProcessName.StartsWith("AMCupdater"))
-            //    clsProcess.Kill();
-            //}
-
+            foreach (Process clsProcess in System.Diagnostics.Process.GetProcesses())
+            {
+              if (clsProcess.ProcessName.StartsWith("AMCupdater"))
+                clsProcess.Kill();
+            }
             Thread.Sleep(1000);
+            bgUpdateDB.CancelAsync();
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
           }
           else
