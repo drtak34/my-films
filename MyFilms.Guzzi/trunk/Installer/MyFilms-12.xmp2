@@ -3385,25 +3385,6 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Name>OnlineVideos</Name>
       </DependencyItem>
       <DependencyItem>
-        <Type>MediaPortal</Type>
-        <Id />
-        <MinVersion>
-          <Major>1</Major>
-          <Minor>1</Minor>
-          <Build>6</Build>
-          <Revision>27644</Revision>
-        </MinVersion>
-        <MaxVersion>
-          <Major>1</Major>
-          <Minor>1</Minor>
-          <Build>6</Build>
-          <Revision>27644</Revision>
-        </MaxVersion>
-        <WarnOnly>true</WarnOnly>
-        <Message>requires MediaPortal min version 1.1.6.27644</Message>
-        <Name>MediaPortal</Name>
-      </DependencyItem>
-      <DependencyItem>
         <Type>Extension</Type>
         <Id>f8f30e5e-cc8a-44a0-91a9-1175fe55732f</Id>
         <MinVersion>
@@ -3419,8 +3400,27 @@ Please refer to the Wiki onlinedocumentation.</Value>
           <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>requires min Extension version 1.1.0.0</Message>
+        <Message>To use subtitle SubCentral Plugin with min. version 1.1.0.0 is required.</Message>
         <Name>SubCentral</Name>
+      </DependencyItem>
+      <DependencyItem>
+        <Type>MediaPortal</Type>
+        <Id />
+        <MinVersion>
+          <Major>1</Major>
+          <Minor>1</Minor>
+          <Build>6</Build>
+          <Revision>27644</Revision>
+        </MinVersion>
+        <MaxVersion>
+          <Major>1</Major>
+          <Minor>2</Minor>
+          <Build>9</Build>
+          <Revision>99999</Revision>
+        </MaxVersion>
+        <WarnOnly>true</WarnOnly>
+        <Message>requires MediaPortal min version 1.1.6.27644.</Message>
+        <Name>MediaPortal</Name>
       </DependencyItem>
     </Items>
   </Dependencies>
@@ -6478,14 +6478,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{74d0b4d6-b547-4b85-8a5c-ac0bd65a3e17}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{8746ba5b-37d6-48a6-a34a-252a5c4e37dc}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{91885ce5-f774-4a0c-9465-9a7554182584}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f6341bd4-9ec5-4809-84df-2515e8a2112f}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
