@@ -108,6 +108,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
               this.buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
               // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
+              CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
               CatalogType.Items.Remove("MyFilms extended Database");
               CatalogType.Items.Remove("XBMC nfo reader");
               //CatalogType.Items.Remove(CatalogType.Items[7]); // MF internal DB
