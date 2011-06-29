@@ -2445,72 +2445,100 @@ Required!</Description>
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\Cinefacts-DVD.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{78b1be4a-1faf-4c59-bd38-2c631361980d}-Cinefacts-DVD.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\Cinefacts-DVD.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\Cinefacts-Kino.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{cb3ed927-1bb7-4f4a-ab5a-2147c54083ef}-Cinefacts-Kino.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{1432f11f-82bd-4994-9b89-27d524edc524}-Cinefacts-Kino.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\Cinefacts-Kino.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\IMDB-Full.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{86eda1d8-98c8-480d-8b49-e8113d120b22}-IMDB-Full.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{16466d3c-6eab-428d-be6e-e31aef38a10e}-IMDB-Full.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Full.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\IMDB.DE-OFDB.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{93e8908e-8165-469c-aefc-8150f5c29072}-IMDB.DE-OFDB.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.DE-OFDB.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\IMDB.ES.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{14a1d8cc-a64b-488d-9517-131cb24759d8}-IMDB.ES.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\IMDB.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{27c04428-f047-45af-92af-25b521ce50ae}-IMDB.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{7007871b-e853-480e-b207-b79b0a9aa01a}-IMDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\MovieGoods.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{241971b9-3c67-40f7-841c-6797a871abed}-MovieGoods.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\MovieGoods.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\OFDB-XML.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{f08fc66a-918a-448b-9b31-80768019db0f}-OFDB-XML.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{d5dad54d-60b6-4897-a6a9-e56df4491c5a}-OFDB-XML.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\OFDB-XML.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\OFDB.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{4970505a-f838-4976-bf04-f72752f8a562}-OFDB.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{6bd3d107-d4bf-4ba9-acdc-9c733a9fccc8}-OFDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\OFDB.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\TMDB-DE.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{0c2ffe7c-f242-453c-bc19-bfbf608df33d}-TMDB-DE.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{f42527b4-f8c4-43c1-aa27-7da032a7f907}-TMDB-DE.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\TMDB-EN.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2bcebc04-3e35-492f-ba3a-499c0ef32bbf}-TMDB-EN.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{d978e647-2f71-41a5-a201-c7edb3e90e10}-TMDB-EN.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-EN.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\TMDB-ES.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{55ec09b4-2734-4921-bcee-f5896ffe362e}-TMDB-ES.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{f6f80688-45d5-40f7-8512-30d2bffc4b59}-TMDB-ES.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ES.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\TMDB-FR.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{d6d9c29d-a6ed-437b-9646-78aca9bf2c78}-TMDB-FR.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{0664b6e8-6ab4-45b8-b2fb-dccab8641267}-TMDB-FR.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-FR.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\TMDB-IT.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{602479a3-1126-424b-bc08-b8c7c4bf57b3}-TMDB-IT.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{f1c4c2cf-8869-4815-9d14-fcea43aa5599}-TMDB-IT.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-IT.xml</DestinationFilename>
             </FileItem>
           </Items>
@@ -5874,72 +5902,100 @@ Please refer to the Wiki onlinedocumentation.</Value>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\Cinefacts-DVD.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{78b1be4a-1faf-4c59-bd38-2c631361980d}-Cinefacts-DVD.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\Cinefacts-DVD.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\Cinefacts-Kino.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{cb3ed927-1bb7-4f4a-ab5a-2147c54083ef}-Cinefacts-Kino.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{1432f11f-82bd-4994-9b89-27d524edc524}-Cinefacts-Kino.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\Cinefacts-Kino.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\IMDB-Full.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{86eda1d8-98c8-480d-8b49-e8113d120b22}-IMDB-Full.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{16466d3c-6eab-428d-be6e-e31aef38a10e}-IMDB-Full.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Full.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\IMDB.DE-OFDB.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{93e8908e-8165-469c-aefc-8150f5c29072}-IMDB.DE-OFDB.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.DE-OFDB.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\IMDB.ES.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{14a1d8cc-a64b-488d-9517-131cb24759d8}-IMDB.ES.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\IMDB.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{27c04428-f047-45af-92af-25b521ce50ae}-IMDB.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{7007871b-e853-480e-b207-b79b0a9aa01a}-IMDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\MovieGoods.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{241971b9-3c67-40f7-841c-6797a871abed}-MovieGoods.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\MovieGoods.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\OFDB-XML.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{f08fc66a-918a-448b-9b31-80768019db0f}-OFDB-XML.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d5dad54d-60b6-4897-a6a9-e56df4491c5a}-OFDB-XML.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\OFDB-XML.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\OFDB.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{4970505a-f838-4976-bf04-f72752f8a562}-OFDB.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{6bd3d107-d4bf-4ba9-acdc-9c733a9fccc8}-OFDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\OFDB.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\TMDB-DE.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0c2ffe7c-f242-453c-bc19-bfbf608df33d}-TMDB-DE.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f42527b4-f8c4-43c1-aa27-7da032a7f907}-TMDB-DE.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\TMDB-EN.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2bcebc04-3e35-492f-ba3a-499c0ef32bbf}-TMDB-EN.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d978e647-2f71-41a5-a201-c7edb3e90e10}-TMDB-EN.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-EN.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\TMDB-ES.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{55ec09b4-2734-4921-bcee-f5896ffe362e}-TMDB-ES.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f6f80688-45d5-40f7-8512-30d2bffc4b59}-TMDB-ES.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ES.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\TMDB-FR.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d6d9c29d-a6ed-437b-9646-78aca9bf2c78}-TMDB-FR.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{0664b6e8-6ab4-45b8-b2fb-dccab8641267}-TMDB-FR.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-FR.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\TMDB-IT.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{602479a3-1126-424b-bc08-b8c7c4bf57b3}-TMDB-IT.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{f1c4c2cf-8869-4815-9d14-fcea43aa5599}-TMDB-IT.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-IT.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
@@ -6464,14 +6520,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0d523bd6-93b3-4d50-a7c6-6869ac96e98a}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{001682d5-62d8-4f0a-acb7-497ee0e427ed}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{248d748f-d64a-4308-b0fc-98659fddbbd8}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{a0f02463-c158-40b7-9075-aa2f3f90b8a1}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
@@ -6526,6 +6582,16 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <DestinationFilename>%Thumbs%\MyFilms\AMCinstaller</DestinationFilename>
         <Folder>Thumbs\MyFilms\AMCinstaller</Folder>
         <Group>AMCinstaller</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{7fbbada6-66bf-4ff4-9e64-72441d42c1b1}-</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms</DestinationFilename>
+        <Folder>Config\scripts\MyFilms</Folder>
+        <Group>Scripts</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
     </FolderGroups>
