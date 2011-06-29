@@ -184,47 +184,67 @@ Module Module1
         'File Name + Internet Lookup 
         'Folder Name + Internet Lookup
 
-        Dim CleanString As String = ""
+        Dim CleanString As String = FilePath
 
-        'If CurrentSettings.Movie_Title_Handling.Contains("File Name") Then
-        '    'Strip Path
-        '    CleanString = FilePath.Substring(FilePath.LastIndexOf("\") + 1)
-        '    'Strip Extension
-        '    CleanString = CleanString.Substring(0, CleanString.LastIndexOf("."))
-        'ElseIf CurrentSettings.Movie_Title_Handling.Contains("Folder Name") Then
-        '    'Strip filename:
-        '    CleanString = FilePath.Substring(0, FilePath.LastIndexOf("\"))
-        '    'Strip Path:
-        '    CleanString = CleanString.Substring(CleanString.LastIndexOf("\") + 1)
-        'Else
-        CleanString = FilePath
-        'End If
-
-
-        'Dim CutText As New Regex("\(" & "([^)]*)" & "\)")
-        Dim CutText As New Regex("[^0-9][0-9]{4}[^0-9]")
-        Dim m As Match
-        m = CutText.Match(CleanString)
-        If m.Success = True Then
-            Return m.Value.Substring(1, 4) 'remove ()
-        Else
-            ' remove IMDB ID from text
-            Dim CutIMDB As New Regex("tt\d{7}")
-            Dim imdb As Match
-            imdb = CutIMDB.Match(CleanString)
-            If imdb.Success = True Then
-                CleanString = CleanString.Replace(imdb.Value, "")
-            End If
-
-            Dim CutText2 As New Regex("[0-9]{4}")
-            Dim m2 As Match
-            m2 = CutText2.Match(CleanString)
-            If m2.Success = True Then
-                Return m2.Value
-            Else
-                Return ""
-            End If
+        ' remove IMDB ID from text
+        Dim CutIMDB As New Regex("tt\d{7}")
+        Dim imdb As Match
+        imdb = CutIMDB.Match(CleanString)
+        If imdb.Success = True Then
+            CleanString = CleanString.Replace(imdb.Value, "")
         End If
+
+        ' Check different methods to get year from CleanString
+        Dim MatchList As MatchCollection
+        Dim matcher As Match
+
+        Dim p As New Regex("\(" & "[0-9]{4}" & "\)") ' year in brackets
+        MatchList = p.Matches(CleanString)
+        If MatchList.Count > 0 Then
+            matcher = MatchList(MatchList.Count - 1)
+            Return matcher.Value.Substring(1, 4)
+        End If
+
+        Dim p1 As New Regex("[^0-9][0-9]{4}[^0-9]") ' year in non numbers
+        MatchList = p1.Matches(CleanString)
+        If MatchList.Count > 0 Then
+            matcher = MatchList(MatchList.Count - 1)
+            Return matcher.Value.Substring(1, 4)
+        End If
+
+        Dim p2 As New Regex("[0-9]{4}") ' year just as 4-digit
+        MatchList = p2.Matches(CleanString)
+        If MatchList.Count > 0 Then
+            matcher = MatchList(MatchList.Count - 1)
+            Return matcher.Value
+        End If
+        Return "" ' if nothing could be found ...
+
+
+        ''Dim CutText As New Regex("\(" & "([^)]*)" & "\)")
+        'Dim CutText As New Regex("[^0-9][0-9]{4}[^0-9]")
+        'Dim m As Match
+        'm = CutText.Match(CleanString)
+        'If m.Success = True Then
+        '    Return m.Value.Substring(1, 4) 'remove ()
+        'Else
+        '    ' remove IMDB ID from text
+        '    Dim CutIMDB As New Regex("tt\d{7}")
+        '    Dim imdb As Match
+        '    imdb = CutIMDB.Match(CleanString)
+        '    If imdb.Success = True Then
+        '        CleanString = CleanString.Replace(imdb.Value, "")
+        '    End If
+
+        '    Dim CutText2 As New Regex("[0-9]{4}")
+        '    Dim m2 As Match
+        '    m2 = CutText2.Match(CleanString)
+        '    If m2.Success = True Then
+        '        Return m2.Value
+        '    Else
+        '        Return ""
+        '    End If
+        'End If
 
         'Tidy up any trailing spaces:
         CleanString = CleanString.Trim
