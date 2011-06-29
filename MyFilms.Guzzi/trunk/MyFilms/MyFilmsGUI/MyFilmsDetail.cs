@@ -1763,7 +1763,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 Thread.Sleep(500);
                 dlgPrgrs.ShowWaitCursor = false;
                 dlgPrgrs.Close();
-                
+
 
                 //new System.Threading.Thread(delegate()
                 //  {

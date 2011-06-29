@@ -2508,7 +2508,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Load_Lstdetail(item.ItemId, true, item.Label);
     }
 
-    // delegate void MovieDetailsPublisherWorker(GUIListItem item, bool wrep);
+    delegate void MovieDetailsPublisherWorker(GUIListItem item, bool wrep);
     
     //private void MovieDetailsPublisher(int ItemId, string wlabel)
     private void MovieDetailsPublisher(GUIListItem item, bool wrep)
@@ -2521,10 +2521,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (125 < (int)(tickCount - lastPublished)) // wait 125 ms to load details...
       {
         lastPublished = tickCount;
-        // MovieDetailsPublisherWorker publisher = new MovieDetailsPublisherWorker(MovieDetailsPublisher);
-        // publisher.BeginInvoke(itemToPublish, false, null, null);
+        MovieDetailsPublisherWorker publisher = new MovieDetailsPublisherWorker(Load_Lstdetail);
+        publisher.BeginInvoke(itemToPublish, false, null, null);
 
-        Load_Lstdetail(itemToPublish, false);
+        // Load_Lstdetail(itemToPublish, false);
         // Load_Lstdetail(ItemId, wlabel); 
         return;
       }
@@ -3237,6 +3237,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if ((conf.StrIndex > facadeView.Count - 1) || (conf.StrIndex < 0)) //check index within bounds, will be unless xml file heavily edited
         conf.StrIndex = 0;
+
+      // Call this async after facade is loaded - WIP
+      //if (getThumbs) this.LoadFacadeImages(WStrSort, strThumbDirectory, isperson);
+      if (getThumbs)
+      {
+        // load first image syncronously, as asyncloading might cause flicker or even let it disappear
+        string[] strActiveFacadeImages = SetViewThumbs(WStrSort, facadeView[conf.StrIndex].Label, strThumbDirectory, isperson);
+        string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+        facadeView[conf.StrIndex].ThumbnailImage = strActiveFacadeImages[0].ToString();
+        facadeView[conf.StrIndex].IconImage = strActiveFacadeImages[1].ToString();
+        facadeView[conf.StrIndex].IconImageBig = strActiveFacadeImages[0].ToString();
+
+        // load the rest of images asynchronously!
+        this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir);
+      }
+      
       if (facadeView.Count == 0)
       {
         ShowMessageDialog(GUILocalizeStrings.Get(10798624), GUILocalizeStrings.Get(10798637), GUILocalizeStrings.Get(10798638)); //"no movies matching the view" - " show filmlist"
@@ -3254,8 +3270,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
           MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
-        else
-          MyFilmsDetail.Load_Detailed_DB(0, false);
+        // else
+        //  MyFilmsDetail.Load_Detailed_DB(0, false);
 
         // Disabled because replaced by SpeedLoader
         // ImgLstFilm.SetFileName("#myfilms.picture");
@@ -3267,12 +3283,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_List, (int)conf.StrIndex);
-      // Call this async after facade is loaded - WIP
-      //if (getThumbs) this.LoadFacadeImages(WStrSort, strThumbDirectory, isperson);
-      if (getThumbs)
-        this.GetImages(facadeDownloadItems, WStrSort, strThumbDirectory, isperson, getThumbs, createFanartDir);
     }
-
 
     private void GetImages(List<GUIListItem> itemsWithThumbs, string WStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir)
     {
@@ -3309,6 +3320,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //  item.IconImage = texture;
               //  item.IconImageBig = texture;
               //}
+              
               item.ThumbnailImage = strActiveFacadeImages[0].ToString();
               item.IconImage = strActiveFacadeImages[1].ToString();
               item.IconImageBig = strActiveFacadeImages[0].ToString();
