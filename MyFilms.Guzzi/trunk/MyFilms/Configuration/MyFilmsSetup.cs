@@ -4064,11 +4064,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         }
 
 
-        private void btnLaunchAMCupdater_Click(object sender, EventArgs e)
-        {
-            launchAMCmanager();
-        }
-
         private void btnLaunchAMCglobal_Click(object sender, EventArgs e)
         {
             launchAMCmanager();
@@ -4090,7 +4085,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             psi.UseShellExecute = true;
             psi.WindowStyle = ProcessWindowStyle.Normal;
             psi.Arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
-            //psi.Arguments = " \"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI\"";
+            //psi.Arguments = " \"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI\"";
             psi.ErrorDialog = true;
             if (OSInfo.OSInfo.VistaOrLater())
             {

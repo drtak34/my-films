@@ -1906,12 +1906,13 @@ Public Class AntProcessor
                             Ant.ProcessFile(AntRecord.Process_Mode_Names.Import)
                             Ant.SaveProgress()
 
-                            If Ant.LastOutputMessage.StartsWith("ERROR") = True Then
+                            If Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
+                                bgwFolderScanUpdate.CancelAsync()
+                            End If
+
+                            If Ant.LastOutputMessage.StartsWith("ERROR") = True Or Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                                 'LogEvent("ERROR : " & blah.LastOutputMessage, EventLogLevel.ErrorOrSimilar)
-                            ElseIf Ant.LastOutputMessage.StartsWith("UserAbort") = True Then
-                                bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
-                                bgwFolderScanUpdate.CancelAsync()
                             Else
                                 If CurrentSettings.Import_File_On_Internet_Lookup_Failure And (_InteractiveMode = False Or CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = False) Then
                                     'Doesn't matter if the Internet loookup worked; just load the entry:
@@ -1947,9 +1948,9 @@ Public Class AntProcessor
                                             bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Not Imported - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
                                         End If
                                     End If
-                                    End If
+                                End If
                             End If
-                        End If
+                            End If
                     End If
                 Next row
             End If
