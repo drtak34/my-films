@@ -49,13 +49,13 @@ Partial Class frmList
         Me.txtSource = New System.Windows.Forms.TextBox
         Me.Label5 = New System.Windows.Forms.Label
         Me.lstOptionsExt = New System.Windows.Forms.DataGridView
-        Me.btnSearchGoogle = New System.Windows.Forms.Button
         Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Year = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Options = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Weblink = New System.Windows.Forms.DataGridViewLinkColumn
         Me.Distance = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.btnSearchGoogle = New System.Windows.Forms.Button
         CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -106,11 +106,11 @@ Partial Class frmList
         'btnSelectParserFile
         '
         Me.btnSelectParserFile.CausesValidation = False
-        Me.btnSelectParserFile.Location = New System.Drawing.Point(247, 59)
+        Me.btnSelectParserFile.Location = New System.Drawing.Point(255, 59)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
-        Me.btnSelectParserFile.Size = New System.Drawing.Size(58, 20)
+        Me.btnSelectParserFile.Size = New System.Drawing.Size(31, 20)
         Me.btnSelectParserFile.TabIndex = 20
-        Me.btnSelectParserFile.Text = "Browse..."
+        Me.btnSelectParserFile.Text = "..."
         Me.btnSelectParserFile.UseVisualStyleBackColor = True
         '
         'btnDontAskAgain
@@ -286,16 +286,6 @@ Partial Class frmList
         Me.lstOptionsExt.Size = New System.Drawing.Size(689, 266)
         Me.lstOptionsExt.TabIndex = 83
         '
-        'btnSearchGoogle
-        '
-        Me.btnSearchGoogle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSearchGoogle.Location = New System.Drawing.Point(437, 59)
-        Me.btnSearchGoogle.Name = "btnSearchGoogle"
-        Me.btnSearchGoogle.Size = New System.Drawing.Size(108, 20)
-        Me.btnSearchGoogle.TabIndex = 84
-        Me.btnSearchGoogle.Text = "Search Internet"
-        Me.btnSearchGoogle.UseVisualStyleBackColor = True
-        '
         'Title
         '
         Me.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
@@ -356,6 +346,16 @@ Partial Class frmList
         Me.Distance.ReadOnly = True
         Me.Distance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Distance.Width = 30
+        '
+        'btnSearchGoogle
+        '
+        Me.btnSearchGoogle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSearchGoogle.Location = New System.Drawing.Point(437, 59)
+        Me.btnSearchGoogle.Name = "btnSearchGoogle"
+        Me.btnSearchGoogle.Size = New System.Drawing.Size(108, 20)
+        Me.btnSearchGoogle.TabIndex = 84
+        Me.btnSearchGoogle.Text = "Search Internet"
+        Me.btnSearchGoogle.UseVisualStyleBackColor = True
         '
         'frmList
         '

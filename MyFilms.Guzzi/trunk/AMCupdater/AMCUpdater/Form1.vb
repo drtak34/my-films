@@ -1820,15 +1820,13 @@ Public Class Form1
         CurrentSettings.Date_Handling = cbDateHandling.SelectedItem
         CurrentSettings.Movie_Title_Handling = cbTitleHandling.SelectedItem
         CurrentSettings.Excluded_Movies_File = txtExcludeFilePath.Text
+        CurrentSettings.Manual_Excluded_Movies_File = txtManualExcludedMoviesPath.Text
         CurrentSettings.Execute_Only_For_Orphans = chkExecuteOnlyForOrphans.Checked
         CurrentSettings.Execute_Program = chkExecuteProgram.Checked
         CurrentSettings.Execute_Program_Path = txtExecuteProgramPath.Text
         CurrentSettings.File_Types_Media = txtDefaultFileTypes.Text
         CurrentSettings.File_Types_Non_Media = txtDefaultFileTypesNonMedia.Text
         CurrentSettings.File_Types_Trailer = txtTrailerIentificationStrings.Text
-        CurrentSettings.Import_File_On_Internet_Lookup_Failure = chkImportOnInternetFail.Checked
-        CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = chkImportOnInternetFailIgnoreWhenInteractive.Checked
-        CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupBehaviour.SelectedValue
         CurrentSettings.Internet_Parser_Path = txtParserFilePath.Text
         CurrentSettings.Dont_Ask_Interactive = chkDontAskInteractive.Checked
         CurrentSettings.Log_Level = cbLogLevel.SelectedItem
@@ -1843,10 +1841,6 @@ Public Class Form1
         CurrentSettings.Store_Short_Names_Only = chkShortNames.Checked
         CurrentSettings.XML_File = txtConfigFilePath.Text
         CurrentSettings.Read_DVD_Label = chkReadDVDLabel.Checked
-        CurrentSettings.Manual_Excluded_Movies_File = txtManualExcludedMoviesPath.Text
-        CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
-        CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
-        CurrentSettings.Manual_XML_File = txtManualXMLPath.Text
         CurrentSettings.Folder_Name_Is_Group_Name = chkFolderNameIsGroupName.Checked
         CurrentSettings.Parse_Playlist_Files = chkParsePlaylistFiles.Checked
         CurrentSettings.Parse_Trailers = chkParseTrailers.Checked
@@ -1856,6 +1850,14 @@ Public Class Form1
         CurrentSettings.Use_Page_Grabber = chkUsePageGrabber.Checked
         CurrentSettings.Parse_Subtitle_Files = chkParseSubtitleFiles.Checked
         CurrentSettings.Rescan_Moved_Files = chkRescanMovedFiles.Checked
+
+        CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
+        CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
+        CurrentSettings.Manual_XML_File = txtManualXMLPath.Text
+
+        CurrentSettings.Import_File_On_Internet_Lookup_Failure = chkImportOnInternetFail.Checked
+        CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = chkImportOnInternetFailIgnoreWhenInteractive.Checked
+        CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupBehaviour.SelectedValue
 
         Select Case cbPictureHandling.SelectedItem
             Case "Relative Path"
