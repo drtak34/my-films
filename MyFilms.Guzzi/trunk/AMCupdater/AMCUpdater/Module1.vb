@@ -1179,7 +1179,12 @@ Module Module1
         Dim LogText As String = My.Computer.Clock.LocalTime.ToString + " - " + EventString
         Dim LogDirectoryParam As String
         If My.Application.CommandLineArgs.Count > 1 Then
-            LogDirectoryParam = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\" + My.Application.CommandLineArgs.Item(1)
+            If My.Application.CommandLineArgs.Item(1) = "LogDirectory" Then
+                LogDirectoryParam = Config.GetDirectoryInfo(Config.Dir.Config).ToString & "\log"
+            Else
+                LogDirectoryParam = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\" + My.Application.CommandLineArgs.Item(1)
+            End If
+
             If CurrentSettings.LogDirectory.Length > 0 Then
                 path = CurrentSettings.LogDirectory + "\MyFilmsAMCupdater.log"
             ElseIf Directory.Exists(LogDirectoryParam) Then
