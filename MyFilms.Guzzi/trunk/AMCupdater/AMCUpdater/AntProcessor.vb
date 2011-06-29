@@ -1942,12 +1942,12 @@ Public Class AntProcessor
                                     Else
                                         'Mark as Ignored - do not import.
                                         If ReplacementPath.IndexOf(";") >= 0 Then
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Ignored - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
+                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Not Imported - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
                                         Else
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Ignored - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
+                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Not Imported - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
                                         End If
                                     End If
-                                End If
+                                    End If
                             End If
                         End If
                     End If

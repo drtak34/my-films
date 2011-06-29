@@ -1071,6 +1071,13 @@ Public Class AntRecord
                 TempValue = GetXBMCnfoData(_FilePath, "OriginalTitle")
             End If
 
+
+            ' Check, if internetlookup has given proper title name - otherwise set to failed
+            If _InternetLookupOK = True And _InternetData(Grabber_Output.OriginalTitle) = "" Then
+                _InternetLookupOK = False
+                _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : Matching the movie was successful, but grabber failed getting movie details data (title)"
+            End If
+
             If _InternetLookupOK = True Then
                 'Now update the Original Title with the Internet value, if set to do so:
                 If _MovieTitleHandling.Contains("Internet Lookup") = True Then
