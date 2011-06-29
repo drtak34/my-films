@@ -2320,5 +2320,12 @@ Public Class Form1
         End Using
     End Sub
 
+    Private Sub txtParserFilePath_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtParserFilePath.TextChanged
+        If txtParserFilePath.Text <> "" Then
+            txtParserFilePathDisplay.Text = Path.GetFileName(txtParserFilePath.Text)
+        Else
+            txtParserFilePathDisplay.Text = ""
+        End If
+    End Sub
 End Class
 
