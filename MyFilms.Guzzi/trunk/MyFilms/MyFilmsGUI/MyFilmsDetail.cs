@@ -3920,6 +3920,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.sourcetrailer.value", log);
             clearGUIProperty("user.sourcetrailer.count", log);
             clearGUIProperty("user.watched.value", log);
+            clearGUIProperty("user.source.isonline", log);
+            clearGUIProperty("user.sourcetrailer.isonline", log);
+
         }
 
         //-------------------------------------------------------------------------------------------

@@ -327,7 +327,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private System.Threading.Timer m_FanartTimer = null;
 
     // Guzzi: Added to proper handle listlevels
-    private static Listlevel listLevel = Listlevel.Movie;
+    private static Listlevel currentListLevel = Listlevel.Movie;
 
     private bool m_bFanartTimerDisabled = false;
 
@@ -593,7 +593,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // (re)link backdrop image controls to the backdrop image swapper
       backdrop.GUIImageOne = ImgFanart;
       backdrop.GUIImageTwo = ImgFanart2;
-      backdrop.LoadingImage = loadingImage;  // --> Do NOT activate - otherwise coverimage flickers and goes away !!!!
+      backdrop.LoadingImage = loadingImage;  // --> Not used - could be used to show other image while loading destination thumb
       if (!cover.Active) cover.Active = true;
       if (!groupcover.Active) groupcover.Active = true;
       if (!personcover.Active) personcover.Active = true;
@@ -800,7 +800,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //    bool emptyList = currentitem.Label == "no items";
     //    if (!emptyList)
     //    {
-    //      switch (this.listLevel)
+    //      switch (this.currentListLevel)
     //      {
     //        case Listlevel.Series:
     //          {
@@ -817,7 +817,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //      if (!emptyList)
     //      {
-    //        switch (this.listLevel)
+    //        switch (this.currentListLevel)
     //        {
     //          case Listlevel.Movie:
     //            dlg.SetHeading("Movie" + "MovieName");
@@ -837,7 +837,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //        }
 
     //        #region Top Level Menu Items - Context Sensitive
-    //        if (this.listLevel == Listlevel.Movie)
+    //        if (this.currentListLevel == Listlevel.Movie)
     //        {
     //          pItem = new GUIListItem("Translation.Toggle_watched_flag");
     //          dlg.Add(pItem);
@@ -847,7 +847,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //          dlg.Add(pItem);
     //          pItem.ItemId = (int)eContextMenus.rate;
     //        }
-    //        else if (this.listLevel != Listlevel.Group)
+    //        else if (this.currentListLevel != Listlevel.Group)
     //        {
     //          pItem = new GUIListItem("Translation.Mark_all_as_watched");
     //          dlg.Add(pItem);
@@ -858,7 +858,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //          pItem.ItemId = (int)eContextItems.actionMarkAllUnwatched;
     //        }
 
-    //        if (this.listLevel != Listlevel.Group)
+    //        if (this.currentListLevel != Listlevel.Group)
     //        {
     //          if (MyFilms.conf.StrFanart) // only if skins supports it
     //          {
@@ -875,7 +875,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //          }
     //        }
 
-    //        if (this.listLevel == Listlevel.Movie)
+    //        if (this.currentListLevel == Listlevel.Movie)
     //        {
     //          if (true) //(selectedSeries.PosterList.Count > 1)
     //          {
@@ -895,14 +895,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //      dlg.Add(pItem);
     //      pItem.ItemId = (int)eContextMenus.switchView;
 
-    //      if (SkinSettings.GetLayoutCount(this.listLevel.ToString()) > 1)
+    //      if (SkinSettings.GetLayoutCount(this.currentListLevel.ToString()) > 1)
     //      {
     //        pItem = new GUIListItem(Translation.ChangeLayout + " ...");
     //        dlg.Add(pItem);
     //        pItem.ItemId = (int)eContextMenus.switchLayout;
     //      }
 
-    //      if (listLevel != Listlevel.Group)
+    //      if (currentListLevel != Listlevel.Group)
     //      {
     //        pItem = new GUIListItem(Translation.Actions + " ...");
     //        dlg.Add(pItem);
@@ -915,7 +915,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //      #endregion
 
     //      #region Download menu - keep at the bottom for fast access (menu + up => there)
-    //      if (!emptyList && subtitleDownloadEnabled && this.listLevel == Listlevel.Episode)
+    //      if (!emptyList && subtitleDownloadEnabled && this.currentListLevel == Listlevel.Episode)
     //      {
     //        pItem = new GUIListItem(Translation.Download + " ...");
     //        dlg.Add(pItem);
@@ -949,7 +949,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //          {
     //            dlg.Reset();
     //            dlg.SetHeading(Translation.Actions);
-    //            if (listLevel != Listlevel.Group)
+    //            if (currentListLevel != Listlevel.Group)
     //            {
     //              if (DBOption.GetOptions(DBOption.cShowDeleteMenu))
     //              {
@@ -968,7 +968,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //              // add hidden menu
     //              // check if item is already hidden
     //              pItem = new GUIListItem();
-    //              switch (listLevel)
+    //              switch (currentListLevel)
     //              {
     //                case Listlevel.Series:
     //                  pItem.Label = selectedSeries[DBSeries.cHidden] ? Translation.UnHide : Translation.Hide;
@@ -989,7 +989,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //            }
 
     //            // Online to Local Episode Matching order
-    //            if (this.listLevel != Listlevel.Group)
+    //            if (this.currentListLevel != Listlevel.Group)
     //            {
     //              // get current online episode to local episode matching order
     //              string currMatchOrder = selectedSeries[DBOnlineSeries.cChosenEpisodeOrder].ToString();
@@ -1001,7 +1001,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //            }
 
     //            // Episode Sort By
-    //            if (this.listLevel == Listlevel.Episode || this.listLevel == Listlevel.Season)
+    //            if (this.currentListLevel == Listlevel.Episode || this.currentListLevel == Listlevel.Season)
     //            {
     //              // get current episode sort order (DVD or Aired)
     //              string currSortBy = selectedSeries[DBOnlineSeries.cEpisodeSortOrder].ToString();
@@ -1071,7 +1071,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //        case (int)eContextMenus.rate:
     //          {
-    //            switch (listLevel)
+    //            switch (currentListLevel)
     //            {
     //              case Listlevel.Episode:
     //                showRatingsDialog(m_SelectedEpisode, false);
@@ -1172,11 +1172,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //        FollwitConnector.Watch(episodeList, true);
 
     //        // Updated Episode Counts
-    //        if (this.listLevel == Listlevel.Series && selectedSeries != null)
+    //        if (this.currentListLevel == Listlevel.Series && selectedSeries != null)
     //        {
     //          DBSeries.UpdateEpisodeCounts(selectedSeries);
     //        }
-    //        else if (this.listLevel == Listlevel.Season && selectedSeason != null)
+    //        else if (this.currentListLevel == Listlevel.Season && selectedSeason != null)
     //        {
     //          DBSeason.UpdateEpisodeCounts(selectedSeries, selectedSeason);
     //        }
@@ -1218,11 +1218,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //        FollwitConnector.Watch(episodeList, false);
 
     //        // Updated Episode Counts
-    //        if (this.listLevel == Listlevel.Series && selectedSeries != null)
+    //        if (this.currentListLevel == Listlevel.Series && selectedSeries != null)
     //        {
     //          DBSeries.UpdateEpisodeCounts(selectedSeries);
     //        }
-    //        else if (this.listLevel == Listlevel.Season && selectedSeason != null)
+    //        else if (this.currentListLevel == Listlevel.Season && selectedSeason != null)
     //        {
     //          DBSeason.UpdateEpisodeCounts(selectedSeries, selectedSeason);
     //        }
@@ -1327,7 +1327,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //      #region Actions
     //      #region Hide
     //      case (int)eContextItems.actionHide:
-    //        switch (this.listLevel)
+    //        switch (this.currentListLevel)
     //        {
     //          case Listlevel.Series:
     //            selectedSeries.HideSeries(!selectedSeries[DBSeries.cHidden]);
@@ -1367,7 +1367,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //      #region MediaInfo
     //      case (int)eContextItems.actionRecheckMI:
-    //        switch (listLevel)
+    //        switch (currentListLevel)
     //        {
     //          case Listlevel.Episode:
     //            m_SelectedEpisode.ReadMediaInfo();
@@ -1482,7 +1482,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else
                 base.OnAction(action);
             Change_view(conf.WStrSort.ToLower());
-            this.SetDummyControlsForFacade(listLevel);
+            this.SetDummyControlsForFacade(currentListLevel);
             return;
           }
           if (GetPrevFilmList())
@@ -1755,8 +1755,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 conf.StrIndex = facadeView.SelectedListItem.ItemId;
                 conf.StrTIndex = facadeView.SelectedListItem.Label;
 
-                listLevel = Listlevel.None;
-                this.SetDummyControlsForFacade(listLevel);
+                currentListLevel = Listlevel.None;
+                this.SetDummyControlsForFacade(currentListLevel);
                 
                 // GUITextureManager.CleanupThumbs(); // Guzzi: Removed to keep animations! - do cleanup later in OnPageDestroy!
                 GUIWindowManager.ActivateWindow(ID_MyFilmsDetail);
@@ -1774,7 +1774,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (conf.StrTitleSelect != "") conf.StrTitleSelect += conf.TitleDelim;
                   conf.StrTitleSelect += conf.Wselectedlabel;
                 } while (GetFilmList() == false); //keep calling while single folders found
-                this.SetDummyControlsForFacade(listLevel);
+                this.SetDummyControlsForFacade(currentListLevel);
               }
             }
           }
@@ -1804,14 +1804,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GetFilmList();
           SetLabelView("all"); // if back on "root", show view as "movies"
           SetLabelSelect("root");
-          listLevel = Listlevel.Movie;
-          SetDummyControlsForFacade(listLevel);
+          currentListLevel = Listlevel.Movie;
+          SetDummyControlsForFacade(currentListLevel);
           return true; //jump back to main full list  
         }
 
         if (conf.StrTxtSelect == "" || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798632))) //"All" or "Global Filter"
         {
-          listLevel = Listlevel.Movie;
+          currentListLevel = Listlevel.Movie;
           return false; //this was already "root" view - so jumping back should leave the plugin !
         }
         else
@@ -1822,7 +1822,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             SelItem = NewString.StripChars(@"[]", conf.StrTxtSelect); // Moved one up to first set SelItem to the actor and thus get back to correct facade position
             conf.StrTxtSelect = GUILocalizeStrings.Get(1079870); // "Selection"
             getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, SelItem);
-            listLevel = Listlevel.Person;
+            currentListLevel = Listlevel.Person;
           }
           //else if (conf.WStrSort == "PRODUCER")
           //  {
@@ -1851,15 +1851,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "writer":
               case "actor":
               case "borrower":
-                listLevel = Listlevel.Person;
+                currentListLevel = Listlevel.Person;
                 break;
               case "originaltitle":
               case "translatedtitle":
               case "formattedtitle":
-                listLevel = Listlevel.Movie;
+                currentListLevel = Listlevel.Movie;
                 break;
               default:
-                listLevel = Listlevel.Group;
+                currentListLevel = Listlevel.Group;
                 break;
             }
           }
@@ -1874,9 +1874,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.StrTitleSelect = "";
         if (GetFilmList(SelItem) == false) // if single folder then call this func to jump back again
           return GetPrevFilmList();
-        listLevel = Listlevel.Movie;
+        currentListLevel = Listlevel.Movie;
       }
-      SetDummyControlsForFacade(listLevel);
+      SetDummyControlsForFacade(currentListLevel);
       return true;
     }
 
@@ -2163,7 +2163,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.Boolreturn = false;
         conf.Wselectedlabel = item.Label;
       }
-      listLevel = Listlevel.Movie;
+      currentListLevel = Listlevel.Movie;
       LogMyFilms.Debug("GetFilmList finished!");
       GetImagesFilmList(facadeDownloadItems);
       return !(facadeView.Count == 1 && item.IsFolder); //ret false if single folder found
@@ -2298,10 +2298,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (currentItem.ItemId == -1)
       {
-        // reinit some fields
-        //cover.Filename = "";
-        //backdrop.Filename = "";
-        //MyFilmsDetail.Init_Detailed_DB(false);
+        // reinit some fields //cover.Filename = ""; //backdrop.Filename = ""; //MyFilmsDetail.Init_Detailed_DB(false);
         LogMyFilms.Debug("(Load_Lstdetail): ItemId == -1 -> return");
         return;
       }
@@ -2309,26 +2306,37 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Prev_ItemID = currentItem.ItemId;
       Prev_Label = currentItem.Label;
 
+      switch (currentListLevel) // ToDo: Add and change code on conditions
+      {
+        case Listlevel.Movie:
+          break;
+        case Listlevel.Group:
+          break;
+        case Listlevel.Person:
+          break;
+        case Listlevel.None:
+          break;
+        default:
+          break;
+      }
+
       if ((currentItem.IsFolder) && (MyFilms.conf.Boolselect))
       {
         LogMyFilms.Debug("(Load_Lstdetail): Item is Folder and BoolSelect is true");
         string[] wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage.ToString(), currentItem.Path);
         if (wfanart[0] == " ")
         {
-          if (backdrop.Active)
-            backdrop.Active = false;
+          if (backdrop.Active) backdrop.Active = false;
           GUIControl.HideControl(GetID, 35);
-          LogMyFilms.Debug("(Load_Lstdetail): INACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         }
         else
         {
-          if (!backdrop.Active)
-            backdrop.Active = true;
+          if (!backdrop.Active) backdrop.Active = true;
           GUIControl.ShowControl(GetID, 35);
-          LogMyFilms.Debug("(Load_Lstdetail): ACTIVE backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         }
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
+        LogMyFilms.Debug("(Load_Lstdetail): Backdrop status: '" + backdrop.Active.ToString() + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
 
         conf.FileImage = currentItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
@@ -2351,12 +2359,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         //GUIControl.ShowControl(GetID, 34);
         // Load_Rating(0); // old method - nor more used
-        MyFilmsDetail.clearGUIProperty("logos_id2001");
-        MyFilmsDetail.clearGUIProperty("logos_id2002");
-        MyFilmsDetail.clearGUIProperty("logos_id2003");
-        MyFilmsDetail.clearGUIProperty("logos_id2012");
-        MyFilmsDetail.clearGUIProperty("user.source.isonline");
-        MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
+        Load_Logos(MyFilms.r[currentItem.ItemId], false); // reset logos
+
       }
       else
       {
@@ -2364,41 +2368,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string[] wfanart = new string[2];
         wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", false, currentItem.ThumbnailImage, string.Empty);
         LogMyFilms.Debug("MyFilm (Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-        //if (wfanart[0] == " ")
-        //{
-        //    wfanart = MyFilmsDetail.Search_Fanart(wlabel, true, "dir", true, facadeView.SelectedListItem.ThumbnailImage.ToString(), facadeView.SelectedListItem.Path);
-        // }
         if (wfanart[0] == " ")
         {
-          if (backdrop.Active)
-            backdrop.Active = false;
+          if (backdrop.Active) backdrop.Active = false;
           GUIControl.HideControl(GetID, 35);
-          LogMyFilms.Debug("MyFilm (Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "'");
         }
         else
         {
-          if (!backdrop.Active)
-            backdrop.Active = true;
+          if (!backdrop.Active) backdrop.Active = true;
           GUIControl.ShowControl(GetID, 35);
-          LogMyFilms.Debug("MyFilm (Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "'");
         }
-        LogMyFilms.Debug("MyFilm (Load_Lstdetail): Backdrops-File: backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
+        LogMyFilms.Debug("MyFilm (Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "', Backdrops-File: backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
 
-        //if (!cover.Active)
-        //  cover.Active = true;
-
-        //if (!System.IO.File.Exists(facadeView.SelectedListItem.ThumbnailImage))
-        //{
-        //  conf.FileImage = MyFilms.conf.DefaultCover;
-        //  //conf.FileImage = MyFilms.conf.DefaultCoverArtist;
-        //  //conf.FileImage = MyFilms.conf.DefaultCoverViews;
-        //  MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage);
-        //  cover.Filename = MyFilms.conf.FileImage;
-        //}
-        //else
-        //{
         conf.FileImage = currentItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
         //if (this.facadeView.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
@@ -2418,20 +2401,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         cover.Filename = conf.FileImage;
         //}
 
-        //XmlConfig XmlConfig = new XmlConfig();
-        //string logo_type = string.Empty;
-        //string wlogos = string.Empty;
-        Load_Logos(MyFilms.r[currentItem.ItemId]);
+        Load_Logos(MyFilms.r[currentItem.ItemId], true); // set logos
       }
 
-      //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
-      switch (currentItem.TVTag.ToString())
+      switch (currentItem.TVTag.ToString()) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
       {
         case "person":
+          MyFilmsDetail.clearGUIProperty("user.source.isonline");
+          MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
+
           MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false); 
           MyFilmsDetail.Load_Detailed_PersonInfo(currentItem.Label, true); 
           break;
         case "group":
+          MyFilmsDetail.clearGUIProperty("user.source.isonline");
+          MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
+
           MyFilmsDetail.Load_Detailed_DB(currentItem.ItemId, false);
           break;
         case "film":
@@ -2442,7 +2427,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //GUIControl.ShowControl(GetID, 34);
           break;
       }
-      // Load_Rating(conf.W_rating); // old method - nor more used
+      // Load_Rating(conf.W_rating); // old method - no more used
     }
 
     //-------------------------------------------------------------------------------------------
@@ -2587,7 +2572,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
       Change_view(choiceView[dlg1.SelectedLabel].ToLower());
-      SetDummyControlsForFacade(listLevel);
+      SetDummyControlsForFacade(currentListLevel);
       return;
     }
 
@@ -2815,7 +2800,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           case "title":
             if (control_searchText(keyboard.Text))
             {
-              listLevel = Listlevel.Movie;
+              currentListLevel = Listlevel.Movie;
               conf.StrSelect = conf.StrTitle1.ToString() + " like '*" + keyboard.Text + "*'";
               //conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]";
               conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(369) + " [*" +
@@ -2828,7 +2813,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           case "actors":
             if (control_searchText(keyboard.Text))
             {
-              listLevel = Listlevel.Person;
+              currentListLevel = Listlevel.Person;
               conf.WStrSort = "ACTORS";
               conf.Wselectedlabel = "";
               conf.WStrSortSens = " ASC";
@@ -3818,7 +3803,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.Boolreturn = true;
               conf.Boolview = true;
               conf.WStrSort = wStrViewDfltItem;
-              listLevel = Listlevel.Movie;
+              currentListLevel = Listlevel.Movie;
               if (wStrViewDfltItem == "DateAdded")
                 conf.StrSelect = "Date" + " like '" + DateTime.Parse(conf.StrViewDfltText).ToShortDateString() + "'";
               else
@@ -3845,7 +3830,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         SetLabelSelect("root");
       else
         SetLabelSelect(conf.StrTxtSelect);
-      SetDummyControlsForFacade(listLevel);
+      SetDummyControlsForFacade(currentListLevel);
 
       if (conf.LastID == ID_MyFilmsDetail)
         GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
@@ -3920,7 +3905,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         case "all":
           //  Change View All Films
-          listLevel = Listlevel.Movie;
+          currentListLevel = Listlevel.Movie;
           conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
           conf.WStrSort = conf.StrSTitle;
           conf.Boolselect = false;
@@ -3933,7 +3918,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         case "year":
           //  Change View by Year
-          listLevel = Listlevel.Group;
+          currentListLevel = Listlevel.Group;
           conf.WStrSort = "YEAR";
           conf.WStrSortSens = " DESC";
           BtnSrtBy.IsAscending = false;
@@ -3943,7 +3928,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         case "category":
           //  Change View by  "Category":
-          listLevel = Listlevel.Group;
+          currentListLevel = Listlevel.Group;
           conf.WStrSort = "CATEGORY";
           conf.WStrSortSens = " ASC";
           BtnSrtBy.IsAscending = true;
@@ -3953,7 +3938,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         case "country":
           //  Change View by "Country":
-          listLevel = Listlevel.Group;
+          currentListLevel = Listlevel.Group;
           conf.WStrSort = "COUNTRY";
           conf.WStrSortSens = " ASC";
           BtnSrtBy.IsAscending = true;
@@ -3964,7 +3949,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "actors":
           //  Change View by "Actors":
-          listLevel = Listlevel.Person;
+          currentListLevel = Listlevel.Person;
           conf.WStrSort = "ACTORS";
           conf.WStrSortSens = " ASC";
           BtnSrtBy.IsAscending = true;
@@ -3975,7 +3960,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "storage":
           //  Change View by "Storage":
-          listLevel = Listlevel.Movie;
+          currentListLevel = Listlevel.Movie;
           conf.StrSelect = "((" + conf.StrTitle1.ToString() + " not like '') and (" + conf.StrStorage.ToString() + " not like ''))";
           conf.StrTxtSelect = GUILocalizeStrings.Get(10798736);
           //                    TxtSelect.Label = conf.StrTxtSelect;
@@ -4018,15 +4003,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "writer":
               case "actor":
               case "borrower":
-                listLevel = Listlevel.Person;
+                currentListLevel = Listlevel.Person;
                 break;
               case "originaltitle":
               case "translatedtitle":
               case "formattedtitle":
-                listLevel = Listlevel.Movie;
+                currentListLevel = Listlevel.Movie;
                 break;
               default:
-                listLevel = Listlevel.Group;
+                currentListLevel = Listlevel.Group;
                 break;
             }
           conf.WStrSort = conf.StrViewItem[i];
@@ -5202,7 +5187,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.WStrSortSens = " ASC";
               BtnSrtBy.IsAscending = true;
               conf.StrActors = "*";
-              listLevel = Listlevel.Person;
+              currentListLevel = Listlevel.Person;
               getSelectFromDivx("TranslatedTitle like '*" + conf.StrTIndex + "*'", conf.WStrSort, conf.WStrSortSens, conf.StrActors, true, string.Empty);
             }
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
@@ -8820,143 +8805,85 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("statusmessage");
     }
 
-    private void Load_Logos(DataRow row)
+    private void Load_Logos(DataRow row, bool showLogos)
     {
       LogMyFilms.Debug("Using Logos -> '" + conf.StrLogos + "'");
-      //if ((ImgID2001 != null) && (ImgID2002 != null) && (conf.StrLogos))
-      //{
-      //    if ((ImgID2001.XPosition == ImgID2002.XPosition) && (ImgID2001.YPosition == ImgID2002.YPosition))
-      //    {
-      //        logo_type = "ID2003";
-      //        try
-      //        {
-      //            wlogos = Logos.Build_Logos(r[ItemId], logo_type, Math.Max(ImgID2001.Height, ImgID2002.Height), Math.Max(ImgID2001.Width, ImgID2002.Width), ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID);
-      //        }
-      //        catch
-      //        {
-      //        }
-      //        //GUIControl.ClearControl(GetID, (int)Controls.CTRL_logos_id2001);
-      //        LogMyFilms.Debug(": Logo thumb assigned : " + wlogos);
-      //        if (wlogos.Length == 0)
-      //            wlogos = " ";
-      //        MyFilmsDetail.setGUIProperty("logos_id2001", wlogos);
-      //        MyFilmsDetail.clearGUIProperty("logos_id2002");
 
-      //        //ImgID2001.DoUpdate();
-      //        GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001);
-      //        GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
-      //    }
-      //}
-      //else
-      //{
-      //    if ((ImgID2001 != null) && (conf.StrLogos))
-      //    {
-      //        logo_type = "ID2001";
-      //        try
-      //        {
-      //          MyFilmsDetail.setGUIProperty("logos_id2001", Logos.Build_Logos(MesFilms.r[ItemId], logo_type, ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, 1, GetID));  
-      //        }
-      //        catch (Exception e)
-      //        {
-      //          LogMyFilms.Error(": " + e.Message);
-      //        }
-      //        if (wlogos.Length == 0)
-      //            wlogos = string.Empty;
-      //        //MyFilmsDetail.setGUIProperty("logos_id2001", wlogos);
-      //        ////ImgID2001.DoUpdate();
-      //        //GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2001); 
-      //        //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2001);
-      //    }
-      //    else
-      //    {
-      //      MyFilmsDetail.clearGUIProperty("logos_id2001");
-      //    }
-
-      //    if ((ImgID2002 != null) && (conf.StrLogos))
-      //    {
-      //        logo_type = "ID2002";
-      //        try
-      //        {
-      //          MyFilmsDetail.setGUIProperty("logos_id2002", Logos.Build_Logos(MesFilms.r[ItemId], logo_type, ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, 1, GetID));  
-      //          //wlogos = Logos.Build_Logos(r[ItemId], logo_type, ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, 1, GetID);
-      //        }
-      //        catch (Exception e)
-      //        {
-      //          LogMyFilms.Error(": " + e.Message);
-      //        }
-      //        if (wlogos.Length == 0)
-      //            wlogos = string.Empty;
-      //        //MyFilmsDetail.setGUIProperty("logos_id2002", wlogos);
-      //        //GUIControl.ShowControl(GetID, (int)Controls.CTRL_logos_id2002); 
-      //        //GUIControl.RefreshControl(GetID, (int)Controls.CTRL_logos_id2002);
-      //    }
-      //    else
-      //    {
-      //      MyFilmsDetail.clearGUIProperty("logos_id2002");
-      //    }
-      //    //if (wlogos.Length == 0)
-      //    //{
-      //    //    MyFilmsDetail.clearGUIProperty("logos_id2001");
-      //    //    MyFilmsDetail.clearGUIProperty("logos_id2002");
-
-      //    //}
-      //}
-
-      if ((ImgID2001 != null) && (MyFilms.conf.StrLogos))
+      if (!showLogos)
       {
-        try
-        {
-          MyFilmsDetail.setGUIProperty("logos_id2001", Logos.Build_Logos(row, "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, GetID));
-        }
-        catch (Exception e)
-        {
-          LogMyFilms.Error("" + e.Message);
-        }
-      }
-      else
         MyFilmsDetail.clearGUIProperty("logos_id2001");
-
-      if ((ImgID2002 != null) && (MyFilms.conf.StrLogos))
-      {
-        try
-        {
-          MyFilmsDetail.setGUIProperty("logos_id2002", Logos.Build_Logos(row, "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, GetID));
-        }
-        catch (Exception e)
-        {
-          LogMyFilms.Error("" + e.Message);
-        }
-      }
-      else
         MyFilmsDetail.clearGUIProperty("logos_id2002");
-
-      if ((ImgID2003 != null) && (MyFilms.conf.StrLogos))
-      {
-        try
-        {
-          MyFilmsDetail.setGUIProperty("logos_id2003", Logos.Build_Logos(row, "ID2003", ImgID2003.Height, ImgID2003.Width, ImgID2003.XPosition, ImgID2003.YPosition, GetID));
-        }
-        catch (Exception e)
-        {
-          LogMyFilms.Error("" + e.Message);
-        }
-      }
-      else
         MyFilmsDetail.clearGUIProperty("logos_id2003");
-
-      if ((ImgID2012 != null) && (MyFilms.conf.StrLogos))
-      {
-        try
-        {
-          MyFilmsDetail.setGUIProperty("logos_id2012", Logos.Build_Logos(row, "ID2012", ImgID2012.Height, ImgID2012.Width, ImgID2012.XPosition, ImgID2012.YPosition, GetID));
-        }
-        catch (Exception e)
-        {
-          LogMyFilms.Error("" + e.Message);
-        }
+        MyFilmsDetail.clearGUIProperty("logos_id2012");
+        return;
       }
       else
-        MyFilmsDetail.clearGUIProperty("logos_id2012");
+      {
+
+        if ((ImgID2001 != null) && (MyFilms.conf.StrLogos))
+        {
+          try
+          {
+            MyFilmsDetail.setGUIProperty(
+              "logos_id2001",
+              Logos.Build_Logos(
+                row, "ID2001", ImgID2001.Height, ImgID2001.Width, ImgID2001.XPosition, ImgID2001.YPosition, GetID));
+          }
+          catch (Exception e)
+          {
+            LogMyFilms.Error("" + e.Message);
+          }
+        }
+        else MyFilmsDetail.clearGUIProperty("logos_id2001");
+
+        if ((ImgID2002 != null) && (MyFilms.conf.StrLogos))
+        {
+          try
+          {
+            MyFilmsDetail.setGUIProperty(
+              "logos_id2002",
+              Logos.Build_Logos(
+                row, "ID2002", ImgID2002.Height, ImgID2002.Width, ImgID2002.XPosition, ImgID2002.YPosition, GetID));
+          }
+          catch (Exception e)
+          {
+            LogMyFilms.Error("" + e.Message);
+          }
+        }
+        else MyFilmsDetail.clearGUIProperty("logos_id2002");
+
+        if ((ImgID2003 != null) && (MyFilms.conf.StrLogos))
+        {
+          try
+          {
+            MyFilmsDetail.setGUIProperty(
+              "logos_id2003",
+              Logos.Build_Logos(
+                row, "ID2003", ImgID2003.Height, ImgID2003.Width, ImgID2003.XPosition, ImgID2003.YPosition, GetID));
+          }
+          catch (Exception e)
+          {
+            LogMyFilms.Error("" + e.Message);
+          }
+        }
+        else MyFilmsDetail.clearGUIProperty("logos_id2003");
+
+        if ((ImgID2012 != null) && (MyFilms.conf.StrLogos))
+        {
+          try
+          {
+            MyFilmsDetail.setGUIProperty(
+              "logos_id2012",
+              Logos.Build_Logos(
+                row, "ID2012", ImgID2012.Height, ImgID2012.Width, ImgID2012.XPosition, ImgID2012.YPosition, GetID));
+          }
+          catch (Exception e)
+          {
+            LogMyFilms.Error("" + e.Message);
+          }
+        }
+        else MyFilmsDetail.clearGUIProperty("logos_id2012");
+      }
     }
 
     private string GetJumpToViewName()
@@ -9032,7 +8959,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  {
     //    if (mode == GUIFacadeControl.Layout.AlbumView)
     //    {
-    //      switch (this.listLevel)
+    //      switch (this.currentListLevel)
     //      {
     //        case (Listlevel.Movie):
     //            this.facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
@@ -9091,10 +9018,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //      this.facadeView.CoverFlowLayout.Clear();
 
     //    if (facadeView != null) facadeView.Focus = true;
-    //    LogMyFilms.Debug("LoadFacade: ListLevel: " + listLevel);
+    //    LogMyFilms.Debug("LoadFacade: ListLevel: " + currentListLevel);
     //    //setCurPositionLabel();
 
-    //    switch (this.listLevel)
+    //    switch (this.currentListLevel)
     //    {
     //      case Listlevel.Movie:
     //      case Listlevel.Group:
@@ -9276,7 +9203,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //    bool delayedImageLoading = false;
     //    List<DBSeries> seriesList = null;
 
-    //    switch (this.listLevel)
+    //    switch (this.currentListLevel)
     //    {
     //      #region Group
     //      case Listlevel.Group:

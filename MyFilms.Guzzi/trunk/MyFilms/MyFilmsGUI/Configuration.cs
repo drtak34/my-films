@@ -1376,7 +1376,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           set { trailerList = value; }
         }
 
-
         public static void SaveConfiguration(string currentConfig, int selectedItem, string selectedItemLabel)
         {
           LogMyFilms.Debug("MFC: Configuration saving started for '" + currentConfig + "'");
