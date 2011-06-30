@@ -1688,7 +1688,11 @@ Public Class AntProcessor
 
         'Take an additional backup regardless and store in the application directory.
         ' _TempXMLBackupFile = My.Application.Info.DirectoryPath & "\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
-        _TempXMLBackupFile = MediaPortal.Configuration.Config.Dir.Thumbs & "\MyFilms\AMCupdaterData\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
+        If Not (System.IO.Directory.Exists(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCUbackup")) Then
+            System.IO.Directory.CreateDirectory(MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCUbackup")
+        End If
+
+        _TempXMLBackupFile = MediaPortal.Configuration.Config.GetDirectoryInfo(MediaPortal.Configuration.Config.Dir.Thumbs).ToString & "\MyFilms\AMCUbackup\AntCatalogAutoBackup_" & My.Computer.Clock.LocalTime.ToString.Replace(":", "-") & ".xml"
         _TempXMLBackupFile = _TempXMLBackupFile.Replace("/", "-")
         My.Computer.FileSystem.CopyFile(CurrentSettings.XML_File, _TempXMLBackupFile)
 
@@ -1786,8 +1790,11 @@ Public Class AntProcessor
             wtime = My.Computer.Clock.LocalTime.Year.ToString() + My.Computer.Clock.LocalTime.Month.ToString() + My.Computer.Clock.LocalTime.Day.ToString() + "-" + My.Computer.Clock.LocalTime.Hour.ToString() + My.Computer.Clock.LocalTime.Minute.ToString()
 
             Dim f As New IO.FileInfo(objSettings.Internet_Parser_Path)
-            If Not (Directory.Exists(f.DirectoryName + "\log")) Then
-                Directory.CreateDirectory(f.DirectoryName + "\log")
+            'If Not (Directory.Exists(f.DirectoryName + "\log")) Then
+            '    Directory.CreateDirectory(f.DirectoryName + "\log")
+            'End If
+            If Not (Directory.Exists(f.DirectoryName)) Then
+                Directory.CreateDirectory(f.DirectoryName)
             End If
 
             Dim dvMultiPartFiles As New DataView

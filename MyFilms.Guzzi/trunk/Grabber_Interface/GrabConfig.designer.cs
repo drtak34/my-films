@@ -30,8 +30,8 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -649,7 +649,7 @@ namespace Grabber_Interface
           this.dataGridViewMapping.AllowUserToAddRows = false;
           this.dataGridViewMapping.AllowUserToDeleteRows = false;
           this.dataGridViewMapping.AllowUserToOrderColumns = true;
-          this.dataGridViewMapping.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+          this.dataGridViewMapping.BackgroundColor = System.Drawing.SystemColors.Window;
           this.dataGridViewMapping.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
           this.dataGridViewMapping.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dataGridViewMapping.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1144,7 +1144,7 @@ namespace Grabber_Interface
           this.dataGridViewSearchResults.AllowUserToAddRows = false;
           this.dataGridViewSearchResults.AllowUserToDeleteRows = false;
           this.dataGridViewSearchResults.AllowUserToOrderColumns = true;
-          this.dataGridViewSearchResults.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+          this.dataGridViewSearchResults.BackgroundColor = System.Drawing.SystemColors.Window;
           this.dataGridViewSearchResults.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
           this.dataGridViewSearchResults.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
           this.dataGridViewSearchResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1182,16 +1182,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle31;
+          dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle35;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle32;
+          dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle36;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
