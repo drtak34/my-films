@@ -973,36 +973,6 @@ Public Class AntRecord
             'searchtitle = GetSearchString(searchtitle) ' might be unneccessary, as already done by AMCU
             'Dim distance As Integer = Levenshtein.Match(searchtitle, wurl.Item(index).Title.ToString.ToLower())
 
-
-            ' get and check AKAs if present
-            If wurl.Item(index).Akas.ToString <> "" Then
-                Dim AKAstring As String = wurl.Item(index).Akas.ToString
-                Dim MatchList As MatchCollection
-                Dim matcher As Match
-
-                Dim p As New Regex("aka." & Chr(34) & ".*?" & Chr(34) & ".-")
-                MatchList = p.Matches(AKAstring)
-                If MatchList.Count > 0 Then
-                    For Each matcher In MatchList
-                        Dim AKAtitle As String = matcher.Value
-                        Dim AKAdistance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, AKAtitle.ToString)
-                        If (AKAdistance = matchingDistance And matchingDistance <> Integer.MaxValue) Then
-                            isAmbiguous = True
-                            matchingCount = matchingCount + 1
-                        End If
-
-                        If (AKAdistance < matchingDistance) Then
-                            isAmbiguous = False
-                            matchingDistance = AKAdistance
-                            matchingIndex = index
-                            matchingCount = 1
-                            matchingTitle = AKAtitle & " (AKA) - " & wurl.Item(index).Title.ToString
-                        End If
-                    Next
-                End If
-            End If
-
-
             ' check main title
             Dim distance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, wurl.Item(index).Title.ToString)
             If (distance = matchingDistance And matchingDistance <> Integer.MaxValue) Then 'check, if a second match with same distance is found - then no valid result (until result with lower matchingdistance))
@@ -1016,6 +986,69 @@ Public Class AntRecord
                 matchingIndex = index
                 matchingCount = 1
                 matchingTitle = wurl.Item(index).Title.ToString
+            End If
+
+            ' get and check AKAs if present
+            If wurl.Item(index).Akas.ToString <> "" Then
+                Dim AKAstring As String = wurl.Item(index).Akas.ToString
+                'Dim MatchList As MatchCollection
+                'Dim matcher As Match
+                'Dim p As New Regex("aka." & Chr(34) & ".*?" & Chr(34) & ".-")
+                'MatchList = p.Matches(AKAstring)
+                'If MatchList.Count > 0 Then
+                '    For Each matcher In MatchList
+                '        Dim AKAtitle As String = matcher.Value
+                '        Dim AKAdistance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, AKAtitle.ToString)
+                '        'If (AKAdistance = matchingDistance And matchingDistance <> Integer.MaxValue) Then
+                '        '    isAmbiguous = True
+                '        '    matchingCount = matchingCount + 1
+                '        'End If
+
+                '        If (AKAdistance < matchingDistance) Then
+                '            isAmbiguous = False
+                '            matchingDistance = AKAdistance
+                '            matchingIndex = index
+                '            matchingCount = 1
+                '            matchingTitle = AKAtitle & " (AKA) - " & wurl.Item(index).Title.ToString
+                '        End If
+                '    Next
+                'End If
+                Dim StringList As String() = AKAstring.Split(New Char() {","}, System.StringSplitOptions.RemoveEmptyEntries)
+                If StringList.Length > 0 And matchingDistance > 0 Then ' Only, if no perfect match yet done
+                    For Each AKAtitle As String In StringList
+                        Dim AKAdistance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, AKAtitle.ToString.Trim)
+                        'If (AKAdistance = matchingDistance And matchingDistance <> Integer.MaxValue) Then 'check, if a second match with same distance is found - then no valid result (until result with lower matchingdistance))
+                        '    isAmbiguous = True
+                        '    matchingCount = matchingCount + 1
+                        'End If
+                        If (AKAdistance < matchingDistance) Then
+                            isAmbiguous = False
+                            matchingDistance = AKAdistance
+                            matchingIndex = index
+                            matchingCount = 1
+                            matchingTitle = "'" & AKAtitle & "' (AKA) - main title '" & wurl.Item(index).Title.ToString & "'"
+                        End If
+                        If (AKAtitle.Contains(":")) Then
+                            Dim iTrimIndex As Integer = 0
+                            iTrimIndex = AKAtitle.IndexOf(":")
+                            If iTrimIndex > 0 Then
+                                AKAtitle = AKAtitle.Substring(0, iTrimIndex)
+                                AKAdistance = AdvancedStringComparer.Levenshtein(searchtitle, AKAtitle.ToString.Trim)
+                                If (AKAdistance < matchingDistance) Then
+                                    isAmbiguous = False
+                                    matchingDistance = AKAdistance
+                                    matchingIndex = index
+                                    matchingCount = 1
+                                    matchingTitle = "'" & AKAtitle & "' (AKA-Trim) - main title '" & wurl.Item(index).Title.ToString & "'"
+                                End If
+                            End If
+                        End If
+                    Next
+                    'If (AKAdistance = matchingDistance And matchingDistance <> Integer.MaxValue) Then 'check, if a second match with same distance is found - then no valid result (until result with lower matchingdistance))
+                    '    isAmbiguous = True
+                    '    matchingCount = matchingCount + 1
+                    'End If
+                End If
             End If
         Next
         If isAmbiguous = True Then

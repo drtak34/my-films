@@ -749,8 +749,6 @@ namespace Grabber_Interface
       if (GLbBlock == true)
         return;
 
-      int iStart;
-      int iEnd;
       switch (cb_Parameter.SelectedIndex)
       {
         case 0:
