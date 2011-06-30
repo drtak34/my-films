@@ -1013,7 +1013,7 @@ Public Class AntRecord
                 '        End If
                 '    Next
                 'End If
-                Dim StringList As String() = AKAstring.Split(New Char() {","}, System.StringSplitOptions.RemoveEmptyEntries)
+                Dim StringList As String() = AKAstring.Split(New Char() {"|"}, System.StringSplitOptions.RemoveEmptyEntries)
                 If StringList.Length > 0 And matchingDistance > 0 Then ' Only, if no perfect match yet done
                     For Each AKAtitle As String In StringList
                         Dim AKAdistance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, AKAtitle.ToString.Trim)

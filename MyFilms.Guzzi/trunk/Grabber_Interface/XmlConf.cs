@@ -325,6 +325,7 @@ public class TagName
   public static string KeyEndOptions = "KeyEndOptions";
   public static string KeyStartAkas = "KeyStartAkas";           // Start / End AKAs
   public static string KeyEndAkas = "KeyEndAkas";
+  public static string KeyAkasRegExp = "KeyAkasRegExp";
 
   public static string KeyStartBody = "KeyStartBody";
   public static string KeyEndBody = "KeyEndBody";

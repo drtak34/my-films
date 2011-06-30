@@ -141,6 +141,10 @@ namespace Grabber_Interface
       buttonPrevParam1.Visible = true;
       label_SearchMatches_Starttext.Text = "";
       label_SearchMatches_Endtext.Text = "";
+      textboxSearchAkasRegex.Clear();
+      textboxSearchAkasRegex.Visible = false;
+      button_Preview.Enabled = true;
+      labelSearchAkasRegex.Visible = false;
 
       switch (cb_Parameter.SelectedIndex)
       {
@@ -186,10 +190,13 @@ namespace Grabber_Interface
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param2;
           break;
         case 7: // Akas (other title infos)
+          labelSearchAkasRegex.Visible = true;
+          textboxSearchAkasRegex.Visible = true;
           TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Value;
           TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndAkas)._Value;
           textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param1;
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param2;
+          textboxSearchAkasRegex.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyAkasRegExp)._Value;
           break;
 
         default:
@@ -197,6 +204,7 @@ namespace Grabber_Interface
           TextKeyStop.Text = "";
           textReplace.Text = "";
           textReplaceWith.Text = "";
+          textboxSearchAkasRegex.Text = "";
           break;
 
       }
@@ -602,8 +610,13 @@ namespace Grabber_Interface
 
     private void Load_Preview(bool AlwaysAsk)
     {
-      dataGridViewSearchResults.Rows.Clear();
+      // dataGridViewSearchResults.Rows.Clear();
+      while (dataGridViewSearchResults.Rows.Count > 0)
+      {
+        dataGridViewSearchResults.Rows.RemoveAt(0);
+      }
       button_GoDetailPage.Enabled = false;
+      button_Preview.Enabled = false;
 
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
       Grabber_URLClass.IMDBUrl wurl;
@@ -617,7 +630,7 @@ namespace Grabber_Interface
       catch (Exception ex)
       {
         DialogResult dlgResult = DialogResult.None;
-
+        button_Preview.Enabled = true;
         dlgResult = MessageBox.Show("Grabber ERROR - check your definitions! \n\nException Message: " + ex.Message + "\nStacktrace: " + ex.StackTrace, "Error", MessageBoxButtons.OK);
         if (dlgResult == DialogResult.OK)
         {
@@ -643,6 +656,7 @@ namespace Grabber_Interface
         dataGridViewSearchResults.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         dataGridViewSearchResults.Rows[0].Selected = true; //set first line as selected
         button_GoDetailPage.Enabled = true;
+        button_Preview.Enabled = true;
       }
     }
 
@@ -831,6 +845,18 @@ namespace Grabber_Interface
       else
         textBody.Text = Body;
       textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, false);
+    }
+
+    private void textboxSearchAkasRegex_TextChanged(object sender, EventArgs e)
+    {
+      switch (cb_Parameter.SelectedIndex)
+      {
+        case 7: // Akas Search Regex
+          xmlConf.find(xmlConf.listSearch, TagName.KeyAkasRegExp)._Value = textboxSearchAkasRegex.Text;
+          break;
+        default:
+          break;
+      }
     }
 
     private void textBody_SelectionChanged(object sender, EventArgs e)
@@ -3492,10 +3518,8 @@ namespace Grabber_Interface
           find = GrabUtil.FindWithAction(textBody.Text, TextKeyStart.Text, TextKeyStop.Text, textReplace.Text, textReplaceWith.Text);
         else
           find = GrabUtil.Find(textBody.Text, TextKeyStart.Text, TextKeyStop.Text);
-
         MessageBox.Show(find, "Preview", MessageBoxButtons.OK);
       }
-
     }
 
     private void btnLoadPreview_Click(object sender, EventArgs e)
@@ -3840,6 +3864,5 @@ namespace Grabber_Interface
       else 
         labelSearchPosition.Text = "";
     }
-
   }
 }

@@ -30,8 +30,8 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -157,6 +157,8 @@ namespace Grabber_Interface
           this.ResultColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.ResultColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
+          this.labelSearchAkasRegex = new System.Windows.Forms.Label();
+          this.textboxSearchAkasRegex = new System.Windows.Forms.TextBox();
           this.label_SearchMatches_Starttext = new System.Windows.Forms.Label();
           this.label_SearchMatches_Endtext = new System.Windows.Forms.Label();
           this.button_FirstMatch = new System.Windows.Forms.Button();
@@ -1183,16 +1185,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle3;
+          dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle1;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle4;
+          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle2;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1229,6 +1231,8 @@ namespace Grabber_Interface
           // 
           // groupBox1
           // 
+          this.groupBox1.Controls.Add(this.labelSearchAkasRegex);
+          this.groupBox1.Controls.Add(this.textboxSearchAkasRegex);
           this.groupBox1.Controls.Add(this.label_SearchMatches_Starttext);
           this.groupBox1.Controls.Add(this.label_SearchMatches_Endtext);
           this.groupBox1.Controls.Add(this.button_FirstMatch);
@@ -1247,6 +1251,18 @@ namespace Grabber_Interface
           resources.ApplyResources(this.groupBox1, "groupBox1");
           this.groupBox1.Name = "groupBox1";
           this.groupBox1.TabStop = false;
+          // 
+          // labelSearchAkasRegex
+          // 
+          resources.ApplyResources(this.labelSearchAkasRegex, "labelSearchAkasRegex");
+          this.labelSearchAkasRegex.Name = "labelSearchAkasRegex";
+          // 
+          // textboxSearchAkasRegex
+          // 
+          resources.ApplyResources(this.textboxSearchAkasRegex, "textboxSearchAkasRegex");
+          this.textboxSearchAkasRegex.Name = "textboxSearchAkasRegex";
+          this.toolTip1.SetToolTip(this.textboxSearchAkasRegex, resources.GetString("textboxSearchAkasRegex.ToolTip"));
+          this.textboxSearchAkasRegex.TextChanged += new System.EventHandler(this.textboxSearchAkasRegex_TextChanged);
           // 
           // label_SearchMatches_Starttext
           // 
@@ -1717,6 +1733,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn ResultColumn8;
         private System.Windows.Forms.Label Version_Label;
+        private System.Windows.Forms.Label labelSearchAkasRegex;
+        private System.Windows.Forms.TextBox textboxSearchAkasRegex;
 
     }
 }
