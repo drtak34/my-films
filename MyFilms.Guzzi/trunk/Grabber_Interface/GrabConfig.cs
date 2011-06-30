@@ -88,6 +88,9 @@ namespace Grabber_Interface
     {
       System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
       InitializeComponent();
+      System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+      this.Version_Label.Text = "V" + asm.GetName().Version.ToString();
+
       this.InitMappingTable(); // load Mappingtable with values and other initialization
 
       if (CultureInfo.InstalledUICulture.ToString() == FrenchCulture.ToString())
