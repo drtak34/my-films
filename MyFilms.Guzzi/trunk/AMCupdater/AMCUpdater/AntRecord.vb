@@ -463,7 +463,7 @@ Public Class AntRecord
                         '_InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage)
                         _InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                         _InternetLookupOK = True
-                        _LastOutputMessage = SearchString & " - " & " Movie found by 'single result' match."
+                        _LastOutputMessage = SearchString & " - " & " Movie found by 'single result' automatch."
 
                         If bgwFolderScanUpdate.CancellationPending = True Then
                             Exit Sub
@@ -482,6 +482,20 @@ Public Class AntRecord
                         Dim wlimityear As Boolean = False
                         Dim distance As String
 
+                        Dim CountTitleMatch As Integer
+                        Dim TitleMatch As String
+                        Dim matchingDistance As Integer
+                        Dim index As Integer
+                        'Dim indexFirstMatch As Integer
+                        'Dim titleFirstMatch As String
+                        'Dim titleLastMatch As String
+                        Dim searchyearHint As Double
+
+                        If Double.TryParse(_InternetSearchHintYear, searchyearHint) = False Then
+                            searchyearHint = 0
+                        End If
+
+
                         'If _InteractiveMode = True Then
                         If (_InteractiveMode = True And _Dont_Ask_Interactive = False) Then
 
@@ -491,10 +505,6 @@ Public Class AntRecord
                             If _InternetLookupAlwaysPrompt = False Then
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
-                                    If Double.TryParse(wyear, dyear) = False Then
-                                        wyear = ""
-                                    End If
                                     wimdb = wurl.Item(i).IMDB_ID.ToString
                                     wtmdb = wurl.Item(i).TMDB_ID.ToString
                                     If (wimdb = _InternetSearchHintIMDB_Id) Then
@@ -508,24 +518,50 @@ Public Class AntRecord
                                     End If
                                 Next
 
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
-                                    If Double.TryParse(wyear, dyear) = False Then
-                                        wyear = ""
-                                    End If
-                                    wimdb = wurl.Item(i).IMDB_ID.ToString
-                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
-                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 3) And wyear = _InternetSearchHintYear) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                If searchyearHint > 0 Then
+                                    index = FuzzyMatch(SearchString, wurl, True, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index > -1 And matchingDistance < 3 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
-                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & SearchString & ")."
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
                                             Exit Sub
                                         End If
                                         Exit While
                                     End If
-                                Next
+
+                                    index = FuzzyMatch(SearchString, wurl, False, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index > -1 And matchingDistance < 3 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'off'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                Else
+                                    index = FuzzyMatch(SearchString, wurl, True, 0, 0, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index > -1 And matchingDistance < 2 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                    index = FuzzyMatch(SearchString, wurl, False, 0, 0, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index > -1 And matchingDistance < 2 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+                                End If
                             End If
 
                             'If no automatches found, show dialog box to choose from
@@ -640,7 +676,7 @@ Public Class AntRecord
                                 End If
                             End If
                         Else
-                            ' In batch mode, try to identify the right movie with  optseachstring
+                            ' In batch mode (or GUI mode with 'don't ask interactive'), try to identify the right movie with  optseachstring
                             'LogEvent(SearchString & " - " & wurl.Count.ToString & " Movies found", EventLogLevel.Informational)
                             If _InternetSearchHint.Length > 0 Then ' this is old searchhint method !
                                 For i As Integer = 0 To wurl.Count - 1
@@ -671,13 +707,6 @@ Public Class AntRecord
                                 Exit While
                             Else 'If _InternetSearchHint.Length > 0 Or _InternetSearchHintYear.Length > 0 Or _InternetSearchHintIMDB_Id.Length > 0 Then
 
-                                Dim CountNameMatch As Integer
-                                Dim TitleMatch As String
-                                Dim index As Integer
-                                Dim indexFirstMatch As Integer
-                                Dim titleFirstMatch As String
-                                Dim titleLastMatch As String
-
                                 ' Check for direct IMDB match
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
@@ -694,184 +723,213 @@ Public Class AntRecord
                                     End If
                                 Next
 
-                                ' Check for exact year match (and name match) - without Options
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
-                                    wOptions = wurl.Item(i).Options.ToString
-                                    If Double.TryParse(wyear, dyear) = False Then
-                                        wyear = ""
-                                    End If
-                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 5) And wyear = _InternetSearchHintYear And wOptions = "") Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                ' searches with yearhint
+                                If searchyearHint > 0 Then
+
+                                    ' Check for exact year match (and name match) - without Options
+                                    index = FuzzyMatch(SearchString, wurl, True, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index < 0 And matchingDistance = 0 And CountTitleMatch > 1 Then ' multiple exact matches - exit, as no matching possible
+                                        _InternetLookupOK = False
+                                        _LastOutputMessage = SearchString & " - Multiple matches (optionsfilter on) - no matching possible. Closest Match Distance: '" & matchingDistance.ToString & "' with '" & CountTitleMatch.ToString & "' matches and match name '" & TitleMatch & "'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    ElseIf index > -1 And matchingDistance < 5 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
-                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "' and Optionsfilter 'on'."
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
                                             Exit Sub
                                         End If
                                         Exit While
                                     End If
-                                Next
 
-                                ' Check for exact year match (and name match) - with Options (including TV, series, etc.)
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
-                                    wOptions = wurl.Item(i).Options.ToString
-                                    If Double.TryParse(wyear, dyear) = False Then
-                                        wyear = ""
-                                    End If
-                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 5) And wyear = _InternetSearchHintYear) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                    ' Check for exact year match (and name match) - with Options (including TV, series, etc.)
+                                    index = FuzzyMatch(SearchString, wurl, False, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index < 0 And matchingDistance = 0 And CountTitleMatch > 1 Then ' multiple exact matches - exit, as no matching possible
+                                        _InternetLookupOK = False
+                                        _LastOutputMessage = SearchString & " - Multiple matches (optionsfilter off) - no matching possible. Closest Match Distance: '" & matchingDistance.ToString & "' with '" & CountTitleMatch.ToString & "' matches and match name '" & TitleMatch & "'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    ElseIf index > -1 And matchingDistance < 5 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
-                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "' and Optionsfilter 'off'."
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'off'."
                                         If bgwFolderScanUpdate.CancellationPending = True Then
                                             Exit Sub
                                         End If
                                         Exit While
                                     End If
-                                Next
 
-                                ' Check for "near" year match (and name match) - without Options 
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
-                                    wOptions = wurl.Item(i).Options.ToString
-                                    If Double.TryParse(wyear, dyear) = False Then
-                                        wyear = ""
-                                    End If
-                                    If _InternetSearchHintYear <> "" And _InternetSearchHintYear.Length >= 4 And wyear <> "" And wyear.Length >= 4 And wOptions = "" Then
-                                        If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 3) And wyear <> "" And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
-                                            '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
-                                            _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
-                                            _InternetLookupOK = True
-                                            _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "' and Optionsfilter 'on'."
-                                            If bgwFolderScanUpdate.CancellationPending = True Then
-                                                Exit Sub
-                                            End If
-                                            Exit While
+                                    ' Check for "near" year match (and name match) - without Options 
+                                    index = FuzzyMatch(SearchString, wurl, True, searchyearHint, 1, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index < 0 And matchingDistance = 0 And CountTitleMatch > 1 Then ' multiple matches - exit, as no matching possible
+                                        _InternetLookupOK = False
+                                        _LastOutputMessage = SearchString & " - Multiple matches (optionsfilter on, close year match) - no matching possible. Closest Match Distance: '" & matchingDistance.ToString & "' with '" & CountTitleMatch.ToString & "' matches and match name '" & TitleMatch & "'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
                                         End If
+                                        Exit While
+                                    ElseIf index > -1 And matchingDistance < 3 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
                                     End If
-                                Next
 
-                                ' Check for "near" year match (and name match) - with Options (including TV, series, etc.)
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
-                                    wOptions = wurl.Item(i).Options.ToString
-                                    If Double.TryParse(wyear, dyear) = False Then
-                                        wyear = ""
-                                    End If
-                                    If _InternetSearchHintYear <> "" And _InternetSearchHintYear.Length >= 4 And wyear <> "" And wyear.Length >= 4 Then
-                                        If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 3) And wyear <> "" And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
-                                            '_InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage)
-                                            _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
-                                            _InternetLookupOK = True
-                                            _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & wtitle & ") with FuzziDistance = '" & FuzziDistance(SearchString, wtitle).ToString & "' and Optionsfilter 'off'."
-                                            If bgwFolderScanUpdate.CancellationPending = True Then
-                                                Exit Sub
-                                            End If
-                                            Exit While
+                                    ' Check for "near" year match (and name match) - with Options (including TV, series, etc.)
+                                    index = FuzzyMatch(SearchString, wurl, False, searchyearHint, 1, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index < 0 And matchingDistance = 0 And CountTitleMatch > 1 Then ' multiple matches - exit, as no matching possible
+                                        _InternetLookupOK = False
+                                        _LastOutputMessage = SearchString & " - Multiple matches (optionsfilter off, close year match) - no matching possible. Closest Match Distance: '" & matchingDistance.ToString & "' with '" & CountTitleMatch.ToString & "' matches and match name '" & TitleMatch & "'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
                                         End If
+                                        Exit While
+                                    ElseIf index > -1 And matchingDistance < 3 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by year hint and close match (+/- 1) (" & _InternetSearchHintYear & ") and name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'off'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
                                     End If
-                                Next
+
+
+                                Else ' searches without year hint
+
+                                    ' Check for name matches without year hint and options on
+                                    index = FuzzyMatch(SearchString, wurl, True, 0, 0, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index < 0 And matchingDistance = 0 And CountTitleMatch > 1 Then ' multiple matches - exit, as no matching possible
+                                        _InternetLookupOK = False
+                                        _LastOutputMessage = SearchString & " - Multiple matches (optionsfilter on, only title match) - no matching possible. Closest Match Distance: '" & matchingDistance.ToString & "' with '" & CountTitleMatch.ToString & "' matches and match name '" & TitleMatch & "'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    ElseIf index > -1 And matchingDistance < 4 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+
+                                    ' Check for name matches without year hint and options off
+                                    index = FuzzyMatch(SearchString, wurl, False, 0, 0, matchingDistance, CountTitleMatch, TitleMatch)
+                                    If index < 0 And matchingDistance = 0 And CountTitleMatch > 1 Then ' multiple matches - exit, as no matching possible
+                                        _InternetLookupOK = False
+                                        _LastOutputMessage = SearchString & " - Multiple matches (optionsfilter off, only title match) - no matching possible. Closest Match Distance: '" & matchingDistance.ToString & "' with '" & CountTitleMatch.ToString & "' matches and match name '" & TitleMatch & "'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    ElseIf index > -1 And matchingDistance < 4 Then
+                                        _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                        _InternetLookupOK = True
+                                        _LastOutputMessage = SearchString & " - " & " Movie found by name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
+                                        If bgwFolderScanUpdate.CancellationPending = True Then
+                                            Exit Sub
+                                        End If
+                                        Exit While
+                                    End If
+
+                                End If
 
                                 ' Check  - only if ""Try to find best match automatically" is chosen
-                                CountNameMatch = 0
-                                index = 0
-                                indexFirstMatch = 0
-                                titleFirstMatch = ""
-                                titleLastMatch = ""
+                                If _InternetLookupAlwaysPrompt = False Then
+                                    If searchyearHint > 0 Then
 
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
-                                    If Double.TryParse(wyear, dyear) = False Then
-                                        wyear = ""
+                                    Else
+
                                     End If
-                                    If (wyear = _InternetSearchHintYear And _InternetLookupAlwaysPrompt = False) Then
-                                        If CountNameMatch = 0 Then
-                                            indexFirstMatch = i
-                                            titleFirstMatch = wtitle
-                                        End If
-                                        CountNameMatch = CountNameMatch + 1
-                                        index = i
-                                        titleLastMatch = wtitle
-                                    End If
-                                Next
-                                If (CountNameMatch = 1 And FuzziDistance(SearchString, wurl.Item(index).Title.ToString) < 5) Then
-                                    _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
-                                    _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with single match and name match (" & titleFirstMatch & ") with FuzziDistance = '" & FuzziDistance(SearchString, titleFirstMatch).ToString & "'."
-                                    If bgwFolderScanUpdate.CancellationPending = True Then
-                                        Exit Sub
-                                    End If
-                                    Exit While
-                                End If
-                                ' more results found
-                                If (CountNameMatch = 2 And FuzziDistance(SearchString, wurl.Item(index).Title.ToString) < 5) Then
-                                    _InternetData = Gb.GetDetail(wurl.Item(indexFirstMatch).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
-                                    _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with DOUBLE match and FuzziDistance = '" & FuzziDistance(SearchString, titleFirstMatch).ToString & "' - using first match (" & titleFirstMatch & ")."
-                                    If bgwFolderScanUpdate.CancellationPending = True Then
-                                        Exit Sub
-                                    End If
-                                    Exit While
                                 End If
 
-                                ' Check for name matches (as we didn't have success with year&name matches)
-                                CountNameMatch = 0
-                                index = 0
-                                TitleMatch = ""
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
-                                    If Double.TryParse(wyear, dyear) = False Then
-                                        wyear = ""
-                                    End If
-                                    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wurl.Item(i).Title.ToString) < 5) And _InternetLookupAlwaysPrompt = False) Then
-                                        CountNameMatch = CountNameMatch + 1
-                                        index = i
-                                        TitleMatch = wtitle
-                                    End If
-                                Next
-                                If (CountNameMatch = 1) Then
-                                    _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
-                                    _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by name match (" & TitleMatch & ") with single match."
-                                    If bgwFolderScanUpdate.CancellationPending = True Then
-                                        Exit Sub
-                                    End If
-                                    Exit While
-                                End If
+                                '' Check  - only if ""Try to find best match automatically" is chosen
+                                'CountTitleMatch = 0
+                                'index = 0
+                                'indexFirstMatch = 0
+                                'titleFirstMatch = ""
+                                'titleLastMatch = ""
 
-                                ' Check Fuzzi Matching - try to find the best one that matches max distance allowed
-                                CountNameMatch = 0
-                                index = -1
-                                Dim matchingDistance As Integer = Integer.MaxValue
-                                index = FuzzyMatch(SearchString, wurl, matchingDistance)
-                                If index > -1 And matchingDistance < 4 Then
-                                    wtitle = wurl.Item(index).Title.ToString
-                                    _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
-                                    _InternetLookupOK = True
-                                    _LastOutputMessage = SearchString & " - " & " Movie found by FuzzySearch (" & wtitle & ") with (distance = " & matchingDistance.ToString & ")."
-                                    If bgwFolderScanUpdate.CancellationPending = True Then
-                                        Exit Sub
-                                    End If
-                                    Exit While
-                                End If
+                                'For i As Integer = 0 To wurl.Count - 1
+                                '    wtitle = wurl.Item(i).Title.ToString
+                                '    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                '    If Double.TryParse(wyear, dyear) = False Then
+                                '        wyear = ""
+                                '    End If
+                                '    If (wyear = _InternetSearchHintYear And _InternetLookupAlwaysPrompt = False) Then
+                                '        If CountTitleMatch = 0 Then
+                                '            indexFirstMatch = i
+                                '            titleFirstMatch = wtitle
+                                '        End If
+                                '        CountTitleMatch = CountTitleMatch + 1
+                                '        index = i
+                                '        titleLastMatch = wtitle
+                                '    End If
+                                'Next
+                                'If (CountTitleMatch = 1 And FuzziDistance(SearchString, wurl.Item(index).Title.ToString) < 5) Then
+                                '    _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                '    _InternetLookupOK = True
+                                '    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with single match and name match (" & titleFirstMatch & ") with FuzziDistance = '" & FuzziDistance(SearchString, titleFirstMatch).ToString & "'."
+                                '    If bgwFolderScanUpdate.CancellationPending = True Then
+                                '        Exit Sub
+                                '    End If
+                                '    Exit While
+                                'End If
+                                '' more results found
+                                'If (CountTitleMatch = 2 And FuzziDistance(SearchString, wurl.Item(index).Title.ToString) < 5) Then
+                                '    _InternetData = Gb.GetDetail(wurl.Item(indexFirstMatch).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                '    _InternetLookupOK = True
+                                '    _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") with DOUBLE match and FuzziDistance = '" & FuzziDistance(SearchString, titleFirstMatch).ToString & "' - using first match (" & titleFirstMatch & ")."
+                                '    If bgwFolderScanUpdate.CancellationPending = True Then
+                                '        Exit Sub
+                                '    End If
+                                '    Exit While
+                                'End If
+
+                                '' Check for name matches (as we didn't have success with year&name matches)
+                                'CountTitleMatch = 0
+                                'index = 0
+                                'TitleMatch = ""
+                                'For i As Integer = 0 To wurl.Count - 1
+                                '    wtitle = wurl.Item(i).Title.ToString
+                                '    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                '    If Double.TryParse(wyear, dyear) = False Then
+                                '        wyear = ""
+                                '    End If
+                                '    If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wurl.Item(i).Title.ToString) < 5) And _InternetLookupAlwaysPrompt = False) Then
+                                '        CountTitleMatch = CountTitleMatch + 1
+                                '        index = i
+                                '        TitleMatch = wtitle
+                                '    End If
+                                'Next
+                                'If (CountTitleMatch = 1) Then
+                                '    _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                '    _InternetLookupOK = True
+                                '    _LastOutputMessage = SearchString & " - " & " Movie found by name match (" & TitleMatch & ") with single match."
+                                '    If bgwFolderScanUpdate.CancellationPending = True Then
+                                '        Exit Sub
+                                '    End If
+                                '    Exit While
+                                'End If
+
                             End If
+
                             Dim md As Integer = Integer.MaxValue
-                            Dim idx = FuzzyMatch(SearchString, wurl, md)
                             Dim count As Integer = 0
-                            If md < Integer.MaxValue Then
-                                For i As Integer = 0 To wurl.Count - 1
-                                    If FuzziDistance(SearchString, wurl.Item(i).Title.ToString) = md Then
-                                        count = count + 1
-                                    End If
-                                Next
-                            End If
-                            _LastOutputMessage = SearchString & " - " & wurl.Count.ToString & " Movies found from Internet lookup - no matching possible. Closest Match Distance: '" & md.ToString & "' with '" & count.ToString & "' matches."
+                            Dim title As String = ""
+                            Dim idx = FuzzyMatch(SearchString, wurl, False, 0, 0, md, count, title)
+                            _LastOutputMessage = SearchString & " - " & wurl.Count.ToString & " Movies found from Internet lookup - no matching possible. Closest Match Distance: '" & md.ToString & "' with '" & count.ToString & "' matches and match name '" & title & "'."
                             _InternetLookupOK = False
                             Exit While
                             'dtmulti.Rows.Add(FilePath)
@@ -884,30 +942,51 @@ Public Class AntRecord
         End Try
     End Sub
 
-    Function FuzzyMatch(ByVal searchtitle As String, ByVal wurl As ArrayList, ByRef matchingDistance As Integer) As Integer
+    Function FuzzyMatch(ByVal searchtitle As String, ByVal wurl As ArrayList, ByVal restrictoptions As Boolean, ByVal searchyear As Double, ByVal yearDistance As Integer, ByRef matchingDistance As Integer, ByRef matchingCount As Integer, ByRef matchingTitle As String) As Integer
         Dim matchingIndex As Integer = -1
         matchingDistance = Integer.MaxValue
+        matchingCount = 0
+        matchingTitle = ""
+
         Dim isAmbiguous As Boolean = False
+
+        Dim wyear As String
+        Dim wOptions As String
+        Dim dyear As Double
+
+        'If _InternetSearchHintYear <> "" And _InternetSearchHintYear.Length >= 4 And wyear <> "" And wyear.Length >= 4 And wOptions = "" Then
+        'If ((wtitle.Contains(SearchString) Or FuzziDistance(SearchString, wtitle) < 3) And wyear <> "" And ((wyear - 1) <= _InternetSearchHintYear) And ((wyear + 1) >= _InternetSearchHintYear)) Then
 
 
         For index As Integer = 0 To wurl.Count - 1
+            wyear = wurl.Item(index).Year.ToString.Substring(0, 4)
+            wOptions = wurl.Item(index).Options.ToString
+            If Double.TryParse(wyear, dyear) = False Then
+                wyear = ""
+                dyear = 0
+            End If
+            If restrictoptions And wOptions <> "" Then Continue For ' skip Option movies
+            If searchyear > 0 And ((dyear > searchyear + yearDistance) Or (dyear < searchyear - yearDistance)) Then Continue For ' skip non year match movies
             'searchtitle = GetSearchString(searchtitle) ' might be unneccessary, as already done by AMCU
             'Dim distance As Integer = Levenshtein.Match(searchtitle, wurl.Item(index).Title.ToString.ToLower())
             Dim distance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, wurl.Item(index).Title.ToString)
             If (distance = matchingDistance And matchingDistance <> Integer.MaxValue) Then 'check, if a second match with same distance is found - then no valid result (until result with lower matchingdistance))
                 isAmbiguous = True
+                matchingCount = matchingCount + 1
             End If
 
             If (distance < matchingDistance) Then
                 isAmbiguous = False
                 matchingDistance = distance
                 matchingIndex = index
+                matchingCount = 1
+                matchingTitle = wurl.Item(index).Title.ToString
             End If
         Next
         If isAmbiguous = True Then
-            Return -1
+            Return -2           ' this indicates multiple matches
         End If
-        Return matchingIndex
+        Return matchingIndex    ' returns "-1" if no matches
     End Function
 
     Function GetSearchString(ByVal strMovie As String) As String
