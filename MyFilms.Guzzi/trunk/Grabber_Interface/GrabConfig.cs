@@ -182,6 +182,12 @@ namespace Grabber_Interface
           textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param1;
           textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param2;
           break;
+        case 7: // Akas (other title infos)
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndAkas)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param2;
+          break;
 
         default:
           TextKeyStart.Text = "";
@@ -275,6 +281,7 @@ namespace Grabber_Interface
             dataGridViewSearchResults.Rows[i].Cells[4].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).ID;
             dataGridViewSearchResults.Rows[i].Cells[5].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).URL;
             dataGridViewSearchResults.Rows[i].Cells[6].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Director;
+            dataGridViewSearchResults.Rows[i].Cells[7].Value = ((Grabber_URLClass.IMDBUrl)listUrl[0]).Akas;
           }
           
           if (dataGridViewSearchResults.Rows.Count > 0)
@@ -625,6 +632,7 @@ namespace Grabber_Interface
         dataGridViewSearchResults.Rows[i].Cells[4].Value = wurl.ID;
         dataGridViewSearchResults.Rows[i].Cells[5].Value = wurl.URL;
         dataGridViewSearchResults.Rows[i].Cells[6].Value = wurl.Director;
+        dataGridViewSearchResults.Rows[i].Cells[7].Value = wurl.Akas;
         // dataGridViewSearchResults.Rows.Add(new object() { (i + 1).ToString(), wtitle, wyear, wmovieurl, distance });
       }
       if (dataGridViewSearchResults.Rows.Count > 0)
@@ -766,6 +774,9 @@ namespace Grabber_Interface
         case 6:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Value = TextKeyStart.Text;
           break;
+        case 7:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Value = TextKeyStart.Text;
+          break;
         default:
           TextKeyStart.Text = "";
           break;
@@ -805,6 +816,9 @@ namespace Grabber_Interface
           break;
         case 6:
           xmlConf.find(xmlConf.listSearch, TagName.KeyEndOptions)._Value = TextKeyStop.Text;
+          break;
+        case 7:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndAkas)._Value = TextKeyStop.Text;
           break;
         default:
           TextKeyStop.Text = "";
@@ -3046,6 +3060,9 @@ namespace Grabber_Interface
         case 6:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param1 = textReplace.Text;
           break;
+        case 7:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param1 = textReplace.Text;
+          break;
         default:
           break;
 
@@ -3076,6 +3093,9 @@ namespace Grabber_Interface
           break;
         case 6:
           xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param2 = textReplaceWith.Text;
+          break;
+        case 7:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param2 = textReplaceWith.Text;
           break;
         default:
           break;

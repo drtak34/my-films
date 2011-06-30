@@ -323,6 +323,8 @@ public class TagName
   public static string KeyEndID = "KeyEndID";
   public static string KeyStartOptions = "KeyStartOptions";           // Start / End Options
   public static string KeyEndOptions = "KeyEndOptions";
+  public static string KeyStartAkas = "KeyStartAkas";           // Start / End AKAs
+  public static string KeyEndAkas = "KeyEndAkas";
 
   public static string KeyStartBody = "KeyStartBody";
   public static string KeyEndBody = "KeyEndBody";
