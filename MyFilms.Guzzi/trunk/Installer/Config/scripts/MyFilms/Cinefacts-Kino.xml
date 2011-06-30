@@ -22,8 +22,8 @@
       <KeyStartLink Param1="_x002F_kino_x002F_" Param2="http:_x002F__x002F_www.cinefacts.de_x002F_kino_x002F_">_x0009__x0009__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
       <KeyEndLink>_x0022__x003E_Details_x003C__x002F_a_x003E__x003C__x002F_td_x003E_</KeyEndLink>
       <KeyLinkIndex />
-      <KeyStartID Param1="" Param2="" />
-      <KeyEndID />
+      <KeyStartID Param1="" Param2="">_x0009__x0009__x003C_a_x0020_href_x003D__x0022__x002F_kino_x002F_</KeyStartID>
+      <KeyEndID>_x0023_REGEX_x0023__x002F_._x002A__x003F__x0022__x003E_Details_x003C__x002F_a_x003E__x003C__x002F_td_x003E_</KeyEndID>
       <KeyIDIndex />
       <KeyStartOptions Param1="" Param2="" />
       <KeyEndOptions />
@@ -55,15 +55,15 @@
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
-      <KeyStartRate Param1="" Param2="">FSK:</KeyStartRate>
-      <KeyEndRate>_x003C__x002F_dd_x003E_</KeyEndRate>
+      <KeyStartRate Param1="" Param2="">_x0023_REGEX_x0023__x003C_li_x0020_class_x003D__x0022_current-rating_x0022_._x002A__x003F__x0022__x003E_._x002A__x003F__x0020_</KeyStartRate>
+      <KeyEndRate>_x0023_REGEX_x0023_._x002F_10</KeyEndRate>
       <KeyRateIndex />
       <KeyRatePage />
       <KeyStartRate2 Param1="" Param2="" />
       <KeyEndRate2 />
       <KeyRate2Index />
       <KeyRate2Page />
-      <BaseRating />
+      <BaseRating>_x0031_0</BaseRating>
       <KeyStartSyn Param1="_x0023_REGEX_x0023_.mehr." Param2="">KURZINHALT</KeyStartSyn>
       <KeyEndSyn>_x003C_li_x0020_class_x003D__x0022_c5b_x0022__x003E__x003C_h2_x003E__x003C_</KeyEndSyn>
       <KeySynIndex />
@@ -72,13 +72,13 @@
       <KeyEndRealise>_x003C__x002F_tr_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage />
-      <KeyRealiseRegExp>persondetails._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_als._x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyRealiseRegExp>
+      <KeyRealiseRegExp>persondetails._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyRealiseRegExp>
       <KeyRealiseMaxItems />
-      <KeyStartProduct Param1="_x0023_REGEX_x0023_" Param2="">Produzent:</KeyStartProduct>
+      <KeyStartProduct Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">Produzent:</KeyStartProduct>
       <KeyEndProduct>Darsteller:</KeyEndProduct>
       <KeyProductIndex />
       <KeyProductPage />
-      <KeyProductRegExp>persondetails._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_als._x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyProductRegExp>
+      <KeyProductRegExp>persondetails._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyProductRegExp>
       <KeyProductMaxItems />
       <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">Buch:</KeyStartWriter>
       <KeyEndWriter>Musik:</KeyEndWriter>
@@ -115,7 +115,7 @@
       <KeyEndComment>_x0023_REGEX_x0023_BEWERTUNG</KeyEndComment>
       <KeyCommentRegExp>class_x003D__x0022_c5b_x0022__x003E__x003C_h2_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_ul</KeyCommentRegExp>
       <KeyCommentIndex />
-      <KeyCommentPage />
+      <KeyCommentPage>URL_x0020_Redirection_x0020_Comment</KeyCommentPage>
       <KeyStartLanguage Param1="" Param2="" />
       <KeyEndLanguage />
       <KeyLanguageIndex />

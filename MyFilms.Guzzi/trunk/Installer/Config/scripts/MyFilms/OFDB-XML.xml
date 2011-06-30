@@ -5,16 +5,16 @@
     <URLPrefix>http://ofdbgw.home-of-root.de</URLPrefix>
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_ofdbgw.home-of-root.de_x002F_search_x002F__x0023_Search_x0023_</URL>
-      <KeyStartList Param1="" Param2="" />
+      <KeyStartList Param1="" Param2="">_x003C_resultat_x003E_</KeyStartList>
       <KeyEndList />
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
       <KeyNextPage />
       <KeyStartTitle Param1="" Param2="">_x003C_titel_x003E_</KeyStartTitle>
-      <KeyEndTitle>_x003C_</KeyEndTitle>
+      <KeyEndTitle>_x003C__x002F_titel_x003E_</KeyEndTitle>
       <KeyTitleIndex />
       <KeyStartYear Param1="" Param2="">_x003C_jahr_x003E_</KeyStartYear>
-      <KeyEndYear>_x003C_</KeyEndYear>
+      <KeyEndYear>_x003C__x002F_jahr_x003E_</KeyEndYear>
       <KeyYearIndex />
       <KeyStartDirector Param1="" Param2="" />
       <KeyEndDirector />
@@ -22,14 +22,14 @@
       <KeyStartLink Param1="_x003E_" Param2="http:_x002F__x002F_ofdbgw.org_x002F_movie_x002F_">_x003C_id</KeyStartLink>
       <KeyEndLink>_x003C__x002F_id_x003E_</KeyEndLink>
       <KeyLinkIndex />
-      <KeyStartID Param1="" Param2="" />
-      <KeyEndID />
+      <KeyStartID Param1="" Param2="">_x003C_id_x003E_</KeyStartID>
+      <KeyEndID>_x003C__x002F_id_x003E_</KeyEndID>
       <KeyIDIndex />
-      <KeyStartOptions Param1="" Param2="" />
-      <KeyEndOptions />
+      <KeyStartOptions Param1="" Param2="">_x0023_REGEX_x0023__x003C_titel_x003E_._x002A__x003F__x005C__x005B_</KeyStartOptions>
+      <KeyEndOptions>_x0023_REGEX_x0023__x005C__x005D__x003C__x002F_titel_x003E_</KeyEndOptions>
       <KeyOptionsIndex />
-      <KeyStartAkas Param1="" Param2="" />
-      <KeyEndAkas />
+      <KeyStartAkas Param1="" Param2="">_x003C_titel_orig_x003E_</KeyStartAkas>
+      <KeyEndAkas>_x003C__x002F_titel_orig_x003E_</KeyEndAkas>
       <KeyAkasRegExp />
     </URLSearch>
     <Details>
