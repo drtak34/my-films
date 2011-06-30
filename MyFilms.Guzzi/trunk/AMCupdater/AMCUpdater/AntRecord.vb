@@ -482,14 +482,14 @@ Public Class AntRecord
                         Dim wlimityear As Boolean = False
                         Dim distance As String
 
-                        Dim CountTitleMatch As Integer
-                        Dim TitleMatch As String
-                        Dim matchingDistance As Integer
-                        Dim index As Integer
+                        Dim CountTitleMatch As Integer = 0
+                        Dim TitleMatch As String = ""
+                        Dim matchingDistance As Integer = 0
+                        Dim index As Integer = -1
                         'Dim indexFirstMatch As Integer
                         'Dim titleFirstMatch As String
                         'Dim titleLastMatch As String
-                        Dim searchyearHint As Double
+                        Dim searchyearHint As Double = 0
 
                         If Double.TryParse(_InternetSearchHintYear, searchyearHint) = False Then
                             searchyearHint = 0
@@ -588,6 +588,7 @@ Public Class AntRecord
                             If (wurl.Count = 0) Then
                                 frmList.lstOptionsExt.Rows.Add(New String() {"Movie not found...", "", "", "", "", ""})
                             Else
+                                ' index = FuzzyMatch(SearchString, wurl, False, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
                                 For i As Integer = 0 To wurl.Count - 1
                                     If wurl.Item(i).Year.ToString = _InternetSearchHintYear Then
                                         wlimityear = True
@@ -959,16 +960,50 @@ Public Class AntRecord
 
 
         For index As Integer = 0 To wurl.Count - 1
+            ' calculate year
             wyear = wurl.Item(index).Year.ToString.Substring(0, 4)
             wOptions = wurl.Item(index).Options.ToString
             If Double.TryParse(wyear, dyear) = False Then
                 wyear = ""
                 dyear = 0
             End If
+
             If restrictoptions And wOptions <> "" Then Continue For ' skip Option movies
             If searchyear > 0 And ((dyear > searchyear + yearDistance) Or (dyear < searchyear - yearDistance)) Then Continue For ' skip non year match movies
             'searchtitle = GetSearchString(searchtitle) ' might be unneccessary, as already done by AMCU
             'Dim distance As Integer = Levenshtein.Match(searchtitle, wurl.Item(index).Title.ToString.ToLower())
+
+
+            ' get and check AKAs if present
+            If wurl.Item(index).Akas.ToString <> "" Then
+                Dim AKAstring As String = wurl.Item(index).Akas.ToString
+                Dim MatchList As MatchCollection
+                Dim matcher As Match
+
+                Dim p As New Regex("aka." & Chr(34) & ".*?" & Chr(34) & ".-")
+                MatchList = p.Matches(AKAstring)
+                If MatchList.Count > 0 Then
+                    For Each matcher In MatchList
+                        Dim AKAtitle As String = matcher.Value
+                        Dim AKAdistance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, AKAtitle.ToString)
+                        If (AKAdistance = matchingDistance And matchingDistance <> Integer.MaxValue) Then
+                            isAmbiguous = True
+                            matchingCount = matchingCount + 1
+                        End If
+
+                        If (AKAdistance < matchingDistance) Then
+                            isAmbiguous = False
+                            matchingDistance = AKAdistance
+                            matchingIndex = index
+                            matchingCount = 1
+                            matchingTitle = AKAtitle & " (AKA) - " & wurl.Item(index).Title.ToString
+                        End If
+                    Next
+                End If
+            End If
+
+
+            ' check main title
             Dim distance As Integer = AdvancedStringComparer.Levenshtein(searchtitle, wurl.Item(index).Title.ToString)
             If (distance = matchingDistance And matchingDistance <> Integer.MaxValue) Then 'check, if a second match with same distance is found - then no valid result (until result with lower matchingdistance))
                 isAmbiguous = True
