@@ -70,6 +70,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             ProfilerDict.Add("Filesize", "Size");
             ProfilerDict.Add("Disks", "Disks");
             ProfilerDict.Add("Cover", "Picture");
+            ProfilerDict.Add("Fanart", "Fanart");
             ProfilerDict.Add("Writer", "Writer");
             ProfilerDict.Add("MPAA", "Certification");
             ProfilerDict.Add("TagLine", "TagLine");
@@ -79,6 +80,16 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             //ProfilerDict.Add("watcheddate", "WatchedDate");
             //ProfilerDict.Add("IMDB_Id", "IMDB_Id");
             //ProfilerDict.Add("TMDB_Id", "TMDB_Id");
+
+                //case "Aspectratio":
+                //case "RatingUser":
+                //case "Fanart":
+                //case "Studio":
+                //case "IMDB_Rank":
+                //case "IsOnline":
+                //case "Edition":
+                //case "IsOnlineTrailer":
+
 
             //int Number, 
             //string Checked, 
@@ -460,6 +471,11 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                 string Image = String.Empty;
                 if (nodeDVD.SelectSingleNode("Cover") != null) Image = nodeDVD.SelectSingleNode("Cover").InnerText.Replace(char.ConvertFromUtf32(160), " ");
                 WriteAntAtribute(destXml, "Cover", Image);
+
+                //string Fanart
+                string Fanart = String.Empty;
+                if (nodeDVD.SelectSingleNode("FanArt") != null) Fanart = nodeDVD.SelectSingleNode("FanArt").InnerText.Replace(char.ConvertFromUtf32(160), " ");
+                WriteAntAtribute(destXml, "Fanart", Fanart);
 
                 // Now writing MF extended attributes
                 WriteAntElement(destXml, "MPAA", Certification);
