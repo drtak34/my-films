@@ -4952,7 +4952,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
 
           // Create Desktop Icon for AMCupdater with config created...
-          CreateAMCDesktopIcon();
+          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10) // only for YMC configs
+            CreateAMCDesktopIcon();
 
           // Change Config to selected catalog type
           CatalogType.SelectedIndex = newCatalogSelectedIndex;
@@ -4976,7 +4977,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               break;
           }
               
-          if (newCatalog && CatalogType.SelectedIndex == 0)
+          if (newCatalog && (CatalogType.SelectedIndex == 0 || CatalogType.SelectedIndex == 10))
           {
             launchAMCmanager();
           }
