@@ -158,7 +158,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
               XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/XMM_Movie_Database/Movie");
               foreach (XmlNode nodeDVD in dvdList)
               {
-                //HTMLUtil htmlUtil = new HTMLUtil();
+                HTMLUtil htmlUtil = new HTMLUtil();
                 
                 destXml.WriteStartElement("Movie");
 
@@ -489,6 +489,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             }
             catch //(Exception ex)
             {
+              //throw;
               //LogMyFilms.Debug("XMM Importer: Failed to import Catalog: " + ex.Message);
               return string.Empty;
             }

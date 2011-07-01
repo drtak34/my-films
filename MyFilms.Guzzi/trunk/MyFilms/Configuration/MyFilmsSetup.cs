@@ -275,7 +275,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               }
               else // Fields not supported by AMC - (dc.ColumnName != "Picture") && (dc.ColumnName != "Contents_Id") && (dc.ColumnName != "IMDB_Id") && (dc.ColumnName != "TMDB_Id") && (dc.ColumnName != "Watched") && (dc.ColumnName != "Certification")
               {
-                if (CatalogType.SelectedIndex == 7 && (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" || dc.ColumnName == "Certification"))
+                if (CatalogType.SelectedIndex == 10 && (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" || dc.ColumnName == "Certification"))
                 {
                   AntSearchField.Items.Add(dc.ColumnName);
                   AntUpdField.Items.Add(dc.ColumnName);
@@ -2138,13 +2138,34 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     AntStorageTrailer.Text = "SourceTrailer";
                     if (MesFilmsCat.Text.Length > 0)
                     {
-                      //// try to get path infos from export file
-                      //XmlDocument doc = new XmlDocument();
-                      //doc.Load(source);
-                      //XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/XMM_Movie_Database/Movie");
-                      //foreach (XmlNode nodeDVD in dvdList)
-                      //{
-                      //}
+                      //<XMM_Movie_Database>
+                      //<DBName='Test.mdb'>
+                      //<DBpath='D:\My Documents\eXtreme Movie Manager 7\Databases\Test.mdb'>
+                      //Then 
+                      //Covers path = D:\My Documents\eXtreme Movie Manager 7\Databases\Test_cover
+                      //Persons Thumbs = D:\My Documents\eXtreme Movie Manager 7\Databases\Test_photos
+                      string DBname = string.Empty;
+                      string DBpath = string.Empty;
+                      string XMMthumbpath = string.Empty;
+                      try
+                      {
+                        // try to get path infos from export file
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(MesFilmsCat.Text);
+                        //XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/XMM_Movie_Database/Movie");
+                        //foreach (XmlNode nodeDVD in dvdList)
+                        //{ }
+                        XmlNode nodeDBname = doc.DocumentElement.SelectSingleNode("/XMM_Movie_Database/DBName");
+                        XmlNode nodeDBpath = doc.DocumentElement.SelectSingleNode("/XMM_Movie_Database/DBpath");
+                        if (nodeDBname != null && nodeDBname.InnerText.Length > 0)
+                          DBname = nodeDBname.InnerText.Replace(char.ConvertFromUtf32(160), " ");
+                        if (nodeDBpath != null && nodeDBpath.InnerText.Length > 0)
+                          DBpath = nodeDBpath.InnerText.Replace(char.ConvertFromUtf32(160), " ");
+                      if (!string.IsNullOrEmpty(DBname) && !string.IsNullOrEmpty(DBpath))
+                        XMMthumbpath = DBpath.Substring(0, DBpath.LastIndexOf("\\") + 1) + DBname.Substring(0, DBname.IndexOf("."));
+                      }
+                      catch (Exception) { }
+
                       // C:\WinApps\Video\eXtreme Movie Manager 7\Databases\<DB-name>_cover etc.
                       //string strDatadirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
                       //string[] directories = System.IO.Directory.GetDirectories(strDatadirectory);
@@ -2164,9 +2185,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                       //a.	…eXtreme Movie Manager 7\Databases\Test_cover – for movie covers
                       //b.	… eXtreme Movie Manager 7\Databases\Test_photos – for person thumbs – filename format is Steve-Martin_143135.jpg
                       //c.	… eXtreme Movie Manager 7\Databases\Test_thumbs – for covers and thumbnails – this is where fanart might be stored as #-[movietitle]_fanart.jpg
-                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // cover path
-                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // person thumb path
-                      //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
+                      if (!string.IsNullOrEmpty(XMMthumbpath))
+                        {
+                        MesFilmsImg.Text = XMMthumbpath + "_cover"; // cover path
+                        MesFilmsImgArtist.Text = XMMthumbpath + "_photos"; // person thumb path
+                        // MesFilmsFanart.Text = XMMthumbpath + "_thumbs"; // fanart path - better use _cover, as otherwise only small thumbs !
+                        MesFilmsFanart.Text = XMMthumbpath + "_cover";
+                        }
+                      else
+                        {
+                        MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // cover path
+                        MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // person thumb path
+                        //MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")); // fanart path
+                        }
                       chkAddTagline.Checked = true;
                       ECMergeDestinationFieldTagline.Text = "Description";
                     }
@@ -4593,7 +4624,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           // Ask user to select existing or create new catalog...
           bool useExistingCatalog = true;
 
-          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 7)
+          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10)
           {
             if (MyFilms_PluginMode != "normal") // added to only allow new catalogs in test mode
             {
@@ -4795,7 +4826,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           cbWatched.Text = "Checked";
 
           // Now ask user for his movie directory...
-          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 7)
+          if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10)
           {
             MessageBox.Show("Now choose the folder containing your movies.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
