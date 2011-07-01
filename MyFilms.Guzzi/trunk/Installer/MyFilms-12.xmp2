@@ -6520,14 +6520,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{53d4d896-f82a-4bdb-bef8-d86c5afc01e4}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{142dfd03-067c-40be-9f31-9aa0ab915e5e}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{494e0158-3238-4d93-9c51-207f0930961e}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{78ccfd44-68bf-4b84-9c24-897810bd87c0}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

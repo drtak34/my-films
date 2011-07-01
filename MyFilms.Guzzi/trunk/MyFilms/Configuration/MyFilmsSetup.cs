@@ -2038,6 +2038,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
           groupBox_DVDprofiler.Enabled = false; // deaktivates DVDprofiler options as default...
 
+            
+            //0	Ant Movie Catalog (V3.5.1.2)
+            //1	DVD Profiler (V3.7.2)
+            //2	Movie Collector (V7.1.4)
+            //3	MyMovies (V3.18)
+            //4	Eax Movie Catalog (2.5.0)
+            //5	Eax Movie Catalog (3.0.9 b5)
+            //6	PVD - Personal Video Database (0.9.9.21)
+            //7	eXtreme Movie Manager (V7.1.1.1)
+            //8	XBMC (V10.0)
+            //9	MovingPicturesXML (V1.2 process plugin)
+            //10	MyFilms extended Database
+            //11	XBMC nfo reader          
+          
             switch (CatalogType.SelectedIndex)
             {
               case 0:
