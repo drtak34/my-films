@@ -2082,11 +2082,56 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     }
                     if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
                     break;
-              case 5: // XMM Extreme Movie Manager
+
+              case 5: // EAX MC 3.0.9
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "SourceTrailer";
                     if (MesFilmsCat.Text.Length > 0)
-                    { // C:\WinApps\Video\eXtreme Movie Manager 7\Databases\<DB-name>_cover etc.
+                    {
+                      //if (MesFilmsImg.Text.Length == 0)
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures"; // cover path
+                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
+                      // Did Work! MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
+                      //a.	Cover image folder = D:My Documents\Data\Eax Movie Catalog \Pictures
+                      //b.	Person Thumbs = D:My Documents\Data\Eax Movie Catalog\NamePictures
+                      //c.	Fanart = D:My Documents\Eax Movie Catalog\Thumbnails – depends on the script i.e. grabs photos, but TMDB scrip grabs fanart but if users have fanart in EAX this folder is where it will be stored.
+                    }
+                    cbWatched.Text = "Checked";
+                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
+                    break;
+
+              case 6: // PVD Personal Video Database V0.9.9.21
+                    AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = "Borrower";
+                    if (MesFilmsCat.Text.Length > 0)
+                    {
+                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
+                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Photos"; // person thumb path
+                      // Did Work! MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Screenshots"; // fanart path
+                      // o	Posters - D:\My Documents\Personal Video Database\TEST\Posters – movie covers used in PVD DB - but setting to DB path required !
+                      //o	D:\My Documents\Personal Video Database\TEST\Photos – actor/person images
+                      //o	D:\My Documents\Personal Video Database\TEST\Screenshots – could be video thumbnails, fanart, manually saved thumbs
+                      //o	D:\My Documents\Personal Video Database\TEST\images – PVD copies covers to this folder when you export to xml and these are the filenames exported for cover images, i.e.:
+                      //	<poster>images/image1_66_-1x-1.jpg</poster>
+                    }
+                    cbWatched.Text = "Checked";
+                    chkAddTagline.Checked = true;
+                    ECMergeDestinationFieldTagline.Text = "Description";
+                    break;
+
+              case 7: // XMM Extreme Movie Manager
+                    AntStorage.Text = "Source";
+                    AntStorageTrailer.Text = "SourceTrailer";
+                    if (MesFilmsCat.Text.Length > 0)
+                    {
+                      //// try to get path infos from export file
+                      //XmlDocument doc = new XmlDocument();
+                      //doc.Load(source);
+                      //XmlNodeList dvdList = doc.DocumentElement.SelectNodes("/XMM_Movie_Database/Movie");
+                      //foreach (XmlNode nodeDVD in dvdList)
+                      //{
+                      //}
+                      // C:\WinApps\Video\eXtreme Movie Manager 7\Databases\<DB-name>_cover etc.
                       //string strDatadirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
                       //string[] directories = System.IO.Directory.GetDirectories(strDatadirectory);
                       //string lastDirectory = string.Empty;
@@ -2113,46 +2158,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     }
                     break;
 
-                case 7: // MyFilms DB (currently same as ANT Movie Catalog, but possible to extend DB fields in the future
-                    break;
-
-                case 9: // EAX MC 3.0.9
-                    AntStorage.Text = "Source";
-                    AntStorageTrailer.Text = "SourceTrailer";
-                    if (MesFilmsCat.Text.Length > 0)
-                    {
-                      //if (MesFilmsImg.Text.Length == 0)
-                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Pictures"; // cover path
-                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\NamePictures"; // person thumb path
-                      // Did Work! MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Thumbnails"; // fanart path
-                      //a.	Cover image folder = D:My Documents\Data\Eax Movie Catalog \Pictures
-                      //b.	Person Thumbs = D:My Documents\Data\Eax Movie Catalog\NamePictures
-                      //c.	Fanart = D:My Documents\Eax Movie Catalog\Thumbnails – depends on the script i.e. grabs photos, but TMDB scrip grabs fanart but if users have fanart in EAX this folder is where it will be stored.
-                    }
-                    cbWatched.Text = "Checked";
-                    if (!string.IsNullOrEmpty(AntSearchList.Text)) AntSearchList.Text.Replace(", Borrower", ""); // remove Borrower, as it's not supported...
-                    break;
-
-                case 10: // PVD Personal Video Database V0.9.9.21
-                    AntStorage.Text = "Source";
-                    AntStorageTrailer.Text = "Borrower";
-                    if (MesFilmsCat.Text.Length > 0)
-                    {
-                      MesFilmsImg.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\"));
-                      MesFilmsImgArtist.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Photos"; // person thumb path
-                      // Did Work! MesFilmsFanart.Text = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\")) + "\\Screenshots"; // fanart path
-                      // o	Posters - D:\My Documents\Personal Video Database\TEST\Posters – movie covers used in PVD DB - but setting to DB path required !
-                      //o	D:\My Documents\Personal Video Database\TEST\Photos – actor/person images
-                      //o	D:\My Documents\Personal Video Database\TEST\Screenshots – could be video thumbnails, fanart, manually saved thumbs
-                      //o	D:\My Documents\Personal Video Database\TEST\images – PVD copies covers to this folder when you export to xml and these are the filenames exported for cover images, i.e.:
-                      //	<poster>images/image1_66_-1x-1.jpg</poster>
-                    }
-                    cbWatched.Text = "Checked";
-                    chkAddTagline.Checked = true;
-                    ECMergeDestinationFieldTagline.Text = "Description";
-                    break;
-
-                case 11: // MovingPicturesXML V1.2
+              case 9: // MovingPicturesXML V1.2
                     AntStorage.Text = "Source";
                     AntStorageTrailer.Text = "SourceTrailer";
                     if (MesFilmsCat.Text.Length > 0)
@@ -2164,13 +2170,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                     cbWatched.Text = "Checked";
                     break;
 
+              case 10: // MyFilms DB (currently same as ANT Movie Catalog, but possible to extend DB fields in the future
+                    break;
+
                 default:
                     if (string.IsNullOrEmpty(AntStorage.Text))
                       AntStorage.Text = "Source";
                     if (string.IsNullOrEmpty(AntStorageTrailer.Text))
                       AntStorageTrailer.Text = "Borrower";
                     break;
-
             }
         }
 
@@ -4707,26 +4715,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           string FanartDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\Fanart";
           if (!System.IO.Directory.Exists(FanartDirectory))
           {
-            try
-            {
-              System.IO.Directory.CreateDirectory(FanartDirectory);
-            }
-            catch
-            {
-            }
+            try { System.IO.Directory.CreateDirectory(FanartDirectory); }
+            catch { }
           }
           MesFilmsFanart.Text = FanartDirectory;
 
           string ArtistImagesDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\PersonImages";
           if (!System.IO.Directory.Exists(ArtistImagesDirectory))
           {
-            try
-            {
-              System.IO.Directory.CreateDirectory(ArtistImagesDirectory);
-            }
-            catch
-            {
-            }
+            try { System.IO.Directory.CreateDirectory(ArtistImagesDirectory); }
+            catch { }
           }
           MesFilmsImgArtist.Text = ArtistImagesDirectory;
           DefaultCover.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\thumbs\MyFilms\DefaultImages\DefaultCover.jpg";
