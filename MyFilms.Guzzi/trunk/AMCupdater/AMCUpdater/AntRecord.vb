@@ -484,8 +484,10 @@ Public Class AntRecord
 
                         Dim CountTitleMatch As Integer = 0
                         Dim TitleMatch As String = ""
-                        Dim matchingDistance As Integer = 0
+                        Dim matchingDistance As Integer = Integer.MaxValue
+                        Dim matchingDistanceWithOptions As Integer = Integer.MaxValue
                         Dim index As Integer = -1
+                        Dim indexWithOptions As Integer = -1
                         'Dim indexFirstMatch As Integer
                         'Dim titleFirstMatch As String
                         'Dim titleLastMatch As String
@@ -519,8 +521,9 @@ Public Class AntRecord
                                 Next
 
                                 If searchyearHint > 0 Then
+                                    indexWithOptions = FuzzyMatch(SearchString, wurl, False, searchyearHint, 0, matchingDistanceWithOptions, CountTitleMatch, TitleMatch)
                                     index = FuzzyMatch(SearchString, wurl, True, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
-                                    If index > -1 And matchingDistance < 3 Then
+                                    If index > -1 And matchingDistance < 3 And matchingDistance <= matchingDistanceWithOptions Then
                                         _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
                                         _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
@@ -728,6 +731,7 @@ Public Class AntRecord
                                 If searchyearHint > 0 Then
 
                                     ' Check for exact year match (and name match) - without Options
+                                    indexWithOptions = FuzzyMatch(SearchString, wurl, False, searchyearHint, 0, matchingDistanceWithOptions, CountTitleMatch, TitleMatch) ' get also value with Options for proper match decision
                                     index = FuzzyMatch(SearchString, wurl, True, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
                                     If index < 0 And matchingDistance = 0 And CountTitleMatch > 1 Then ' multiple exact matches - exit, as no matching possible
                                         _InternetLookupOK = False
@@ -736,7 +740,7 @@ Public Class AntRecord
                                             Exit Sub
                                         End If
                                         Exit While
-                                    ElseIf index > -1 And matchingDistance < 5 Then
+                                    ElseIf index > -1 And matchingDistance < 5 And matchingDistance <= matchingDistanceWithOptions Then
                                         _InternetData = Gb.GetDetail(wurl.Item(index).URL, _ImagePath, _ParserPath, _DownloadImage, GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
                                         _InternetLookupOK = True
                                         _LastOutputMessage = SearchString & " - " & " Movie found by year hint (" & _InternetSearchHintYear & ") and name match (" & TitleMatch & ") with FuzziDistance = '" & matchingDistance.ToString & "' and Optionsfilter 'on'."
