@@ -4659,7 +4659,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
           {
             bgUpdateDB.CancelAsync();
-            // ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
           }
           else
           {
@@ -7627,21 +7626,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     void bgUpdateDB_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
       MyFilmsDetail.clearGUIProperty("statusmessage");
+
+      Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+      Load_Config(Configuration.CurrentConfig, true);
+      Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+
       if (e.Cancelled)
       {
-        LogMyFilms.Info("RunAMCupdater - Update database with AMCUpdater successfully cancelled by user request. (GetID = '" + GetID + "')");
+        LogMyFilms.Info("RunAMCupdater - Update database with AMCUpdater cancelled by user request. (GetID = '" + GetID + "')");
         if (GetID == 7986)
-          ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
+          ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(1079856)); // Global Update was cancelled !
       }
       else
       {
         LogMyFilms.Info("RunAMCupdater - Update database with AMCUpdater sucessfully finished. (GetID = '" + GetID + "')");
         if (GetID == 7986)
         {
-          Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
-          Load_Config(Configuration.CurrentConfig, true);
-          Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-          ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798748));
+          ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(10798748)); // Global Update finished !
         }
       }
     }
