@@ -588,6 +588,8 @@ Public Class AntRecord
                                 frmList.Text = _FilePath
                                 frmList.txtSource.Text = _FilePath
                             End If
+                            frmList.txtSourceFullAllPath.Text = _AllFilesPath
+                            frmList.txtSourceFull.Text = _FilePath
                             If (wurl.Count = 0) Then
                                 frmList.lstOptionsExt.Rows.Add(New String() {"Movie not found...", "", "", "", "", ""})
                             Else

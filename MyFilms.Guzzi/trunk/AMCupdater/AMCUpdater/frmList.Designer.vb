@@ -22,12 +22,14 @@ Partial Class frmList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Me.components = New System.ComponentModel.Container
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmList))
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.btnCancel = New System.Windows.Forms.Button
         Me.btnOK = New System.Windows.Forms.Button
         Me.txtSearchString = New System.Windows.Forms.TextBox
@@ -56,6 +58,10 @@ Partial Class frmList
         Me.Weblink = New System.Windows.Forms.DataGridViewLinkColumn
         Me.Distance = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.btnSearchGoogle = New System.Windows.Forms.Button
+        Me.ToolTipImportDialog = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnRenameAndCancel = New System.Windows.Forms.Button
+        Me.txtSourceFull = New System.Windows.Forms.TextBox
+        Me.txtSourceFullAllPath = New System.Windows.Forms.TextBox
         CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -67,6 +73,8 @@ Partial Class frmList
         Me.btnCancel.Size = New System.Drawing.Size(94, 23)
         Me.btnCancel.TabIndex = 50
         Me.btnCancel.Text = "Ignore"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnCancel, """Ignore"" does skip the current movie - thus not importing it." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Movie will be foun" & _
+                "d again on a new scan next time.")
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'btnOK
@@ -77,6 +85,7 @@ Partial Class frmList
         Me.btnOK.Size = New System.Drawing.Size(93, 23)
         Me.btnOK.TabIndex = 70
         Me.btnOK.Text = "OK"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnOK, "Choose the selected data for the current movie.")
         Me.btnOK.UseVisualStyleBackColor = True
         '
         'txtSearchString
@@ -120,6 +129,7 @@ Partial Class frmList
         Me.btnDontAskAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnDontAskAgain.TabIndex = 60
         Me.btnDontAskAgain.Text = "Always Ignore"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnDontAskAgain, resources.GetString("btnDontAskAgain.ToolTip"))
         Me.btnDontAskAgain.UseVisualStyleBackColor = True
         '
         'chkDontAskAgain
@@ -140,6 +150,8 @@ Partial Class frmList
         Me.ButtonGrabberOptions.Size = New System.Drawing.Size(101, 20)
         Me.ButtonGrabberOptions.TabIndex = 71
         Me.ButtonGrabberOptions.Text = "Grabber Options"
+        Me.ToolTipImportDialog.SetToolTip(Me.ButtonGrabberOptions, "This starts the ""Grabber Interface"" " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "and allows you to either change user settin" & _
+                "gs " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "or modify the grabber script.")
         Me.ButtonGrabberOptions.UseVisualStyleBackColor = True
         '
         'txtSearchintYear
@@ -166,6 +178,8 @@ Partial Class frmList
         Me.Label1.Size = New System.Drawing.Size(61, 26)
         Me.Label1.TabIndex = 74
         Me.Label1.Text = "Searchhint " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Year"
+        Me.ToolTipImportDialog.SetToolTip(Me.Label1, "If a year can be retrieved from the directory " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "or file name, the result is shown" & _
+                " here.")
         '
         'Label2
         '
@@ -175,6 +189,7 @@ Partial Class frmList
         Me.Label2.Size = New System.Drawing.Size(61, 26)
         Me.Label2.TabIndex = 75
         Me.Label2.Text = "Searchhint " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "IMDB_Id"
+        Me.ToolTipImportDialog.SetToolTip(Me.Label2, resources.GetString("Label2.ToolTip"))
         '
         'btnCancelFromDialog
         '
@@ -183,6 +198,7 @@ Partial Class frmList
         Me.btnCancelFromDialog.Size = New System.Drawing.Size(97, 23)
         Me.btnCancelFromDialog.TabIndex = 76
         Me.btnCancelFromDialog.Text = "Cancel Grabbing"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnCancelFromDialog, "Cancel current import.")
         Me.btnCancelFromDialog.UseVisualStyleBackColor = True
         '
         'txtTmpParserFilePathShort
@@ -200,6 +216,7 @@ Partial Class frmList
         Me.btnSearchAgainWithIMDB_Id.Size = New System.Drawing.Size(138, 20)
         Me.btnSearchAgainWithIMDB_Id.TabIndex = 78
         Me.btnSearchAgainWithIMDB_Id.Text = "Search IMDB"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnSearchAgainWithIMDB_Id, "Performs a search based on IMDB id entered above.")
         Me.btnSearchAgainWithIMDB_Id.UseVisualStyleBackColor = True
         '
         'Label3
@@ -210,6 +227,9 @@ Partial Class frmList
         Me.Label3.Size = New System.Drawing.Size(75, 13)
         Me.Label3.TabIndex = 79
         Me.Label3.Text = "Grabber Script"
+        Me.ToolTipImportDialog.SetToolTip(Me.Label3, "You can change the grabber script used for retrieving internet data." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Useful, if " & _
+                "the default script does not find a result - so you can try " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "other internet site" & _
+                "s to retrieve data.")
         '
         'Label4
         '
@@ -219,13 +239,14 @@ Partial Class frmList
         Me.Label4.Size = New System.Drawing.Size(64, 13)
         Me.Label4.TabIndex = 80
         Me.Label4.Text = "Search Title"
+        Me.ToolTipImportDialog.SetToolTip(Me.Label4, resources.GetString("Label4.ToolTip"))
         '
         'txtSource
         '
         Me.txtSource.Enabled = False
         Me.txtSource.Location = New System.Drawing.Point(96, 6)
         Me.txtSource.Name = "txtSource"
-        Me.txtSource.Size = New System.Drawing.Size(611, 20)
+        Me.txtSource.Size = New System.Drawing.Size(449, 20)
         Me.txtSource.TabIndex = 81
         '
         'Label5
@@ -236,17 +257,18 @@ Partial Class frmList
         Me.Label5.Size = New System.Drawing.Size(73, 13)
         Me.Label5.TabIndex = 82
         Me.Label5.Text = "Media Source"
+        Me.ToolTipImportDialog.SetToolTip(Me.Label5, resources.GetString("Label5.ToolTip"))
         '
         'lstOptionsExt
         '
         Me.lstOptionsExt.AllowUserToAddRows = False
         Me.lstOptionsExt.AllowUserToDeleteRows = False
         Me.lstOptionsExt.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        Me.lstOptionsExt.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.lstOptionsExt.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.lstOptionsExt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.lstOptionsExt.BackgroundColor = System.Drawing.SystemColors.Window
         Me.lstOptionsExt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -254,27 +276,27 @@ Partial Class frmList
         Me.lstOptionsExt.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.lstOptionsExt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.lstOptionsExt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Title, Me.Year, Me.Options, Me.ID, Me.Weblink, Me.Distance})
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.lstOptionsExt.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.lstOptionsExt.DefaultCellStyle = DataGridViewCellStyle11
         Me.lstOptionsExt.Location = New System.Drawing.Point(18, 85)
         Me.lstOptionsExt.Margin = New System.Windows.Forms.Padding(1)
         Me.lstOptionsExt.MultiSelect = False
         Me.lstOptionsExt.Name = "lstOptionsExt"
         Me.lstOptionsExt.ReadOnly = True
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.lstOptionsExt.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.lstOptionsExt.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.lstOptionsExt.RowHeadersVisible = False
         Me.lstOptionsExt.RowHeadersWidth = 11
         Me.lstOptionsExt.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
@@ -297,8 +319,8 @@ Partial Class frmList
         'Year
         '
         Me.Year.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Year.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Year.DefaultCellStyle = DataGridViewCellStyle8
         Me.Year.HeaderText = "Year"
         Me.Year.Name = "Year"
         Me.Year.ReadOnly = True
@@ -324,8 +346,8 @@ Partial Class frmList
         '
         Me.Weblink.ActiveLinkColor = System.Drawing.Color.Black
         Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Gray
-        Me.Weblink.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Gray
+        Me.Weblink.DefaultCellStyle = DataGridViewCellStyle9
         Me.Weblink.FillWeight = 75.54945!
         Me.Weblink.HeaderText = "Weblink"
         Me.Weblink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
@@ -338,9 +360,9 @@ Partial Class frmList
         'Distance
         '
         Me.Distance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Gray
-        Me.Distance.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Gray
+        Me.Distance.DefaultCellStyle = DataGridViewCellStyle10
         Me.Distance.HeaderText = "Dist"
         Me.Distance.Name = "Distance"
         Me.Distance.ReadOnly = True
@@ -355,7 +377,42 @@ Partial Class frmList
         Me.btnSearchGoogle.Size = New System.Drawing.Size(108, 20)
         Me.btnSearchGoogle.TabIndex = 84
         Me.btnSearchGoogle.Text = "Search Internet"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnSearchGoogle, "Launches the web browser with search title as destination for a common lookup.")
         Me.btnSearchGoogle.UseVisualStyleBackColor = True
+        '
+        'ToolTipImportDialog
+        '
+        Me.ToolTipImportDialog.AutoPopDelay = 15000
+        Me.ToolTipImportDialog.InitialDelay = 500
+        Me.ToolTipImportDialog.IsBalloon = True
+        Me.ToolTipImportDialog.ReshowDelay = 100
+        Me.ToolTipImportDialog.ToolTipTitle = "MyFilms AMCupdater Help ..."
+        '
+        'btnRenameAndCancel
+        '
+        Me.btnRenameAndCancel.Location = New System.Drawing.Point(569, 6)
+        Me.btnRenameAndCancel.Name = "btnRenameAndCancel"
+        Me.btnRenameAndCancel.Size = New System.Drawing.Size(138, 20)
+        Me.btnRenameAndCancel.TabIndex = 85
+        Me.btnRenameAndCancel.Text = "rename and ignore"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnRenameAndCancel, resources.GetString("btnRenameAndCancel.ToolTip"))
+        Me.btnRenameAndCancel.UseVisualStyleBackColor = True
+        '
+        'txtSourceFull
+        '
+        Me.txtSourceFull.Location = New System.Drawing.Point(501, 6)
+        Me.txtSourceFull.Name = "txtSourceFull"
+        Me.txtSourceFull.Size = New System.Drawing.Size(44, 20)
+        Me.txtSourceFull.TabIndex = 86
+        Me.txtSourceFull.Visible = False
+        '
+        'txtSourceFullAllPath
+        '
+        Me.txtSourceFullAllPath.Location = New System.Drawing.Point(374, 6)
+        Me.txtSourceFullAllPath.Name = "txtSourceFullAllPath"
+        Me.txtSourceFullAllPath.Size = New System.Drawing.Size(38, 20)
+        Me.txtSourceFullAllPath.TabIndex = 87
+        Me.txtSourceFullAllPath.Visible = False
         '
         'frmList
         '
@@ -364,6 +421,9 @@ Partial Class frmList
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(717, 396)
         Me.ControlBox = False
+        Me.Controls.Add(Me.txtSourceFullAllPath)
+        Me.Controls.Add(Me.txtSourceFull)
+        Me.Controls.Add(Me.btnRenameAndCancel)
         Me.Controls.Add(Me.btnSearchGoogle)
         Me.Controls.Add(Me.lstOptionsExt)
         Me.Controls.Add(Me.Label5)
@@ -425,4 +485,8 @@ Partial Class frmList
     Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Weblink As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Distance As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ToolTipImportDialog As System.Windows.Forms.ToolTip
+    Friend WithEvents btnRenameAndCancel As System.Windows.Forms.Button
+    Friend WithEvents txtSourceFull As System.Windows.Forms.TextBox
+    Friend WithEvents txtSourceFullAllPath As System.Windows.Forms.TextBox
 End Class

@@ -4,6 +4,7 @@ Imports Cornerstone.Tools
 
 Public Class frmList
 
+    Dim DialogRename As New DialogRename()
     Private SearchTextChanged As Boolean = False
 
     Private Sub lstOptionsExt_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstOptionsExt.DoubleClick
@@ -244,5 +245,71 @@ Public Class frmList
             Process.Start("http://google.com/search?q=" + t)
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub btnRenameAndCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRenameAndCancel.Click
+        ' launches Rename Dialog and "ignores" file for later import after rescanning
+        Dim currentPathAllFiles As String = ""
+        Dim currentPathFull As String = ""
+        Dim currentStartPath As String = ""
+        Dim currentDirectoryName As String = ""
+        Dim currentFileName As String = ""
+
+        currentPathAllFiles = txtSourceFullAllPath.Text
+        If currentPathAllFiles.Contains(";") Then
+            currentPathFull = currentPathAllFiles.Substring(0, currentPathAllFiles.IndexOf(";")).Trim
+        Else
+            currentPathFull = currentPathAllFiles.Trim
+        End If
+        If currentPathFull.Length = 0 Then
+            currentPathFull = txtSourceFull.Text
+        End If
+        If currentPathFull.Contains("\") = True Then
+            currentFileName = currentPathFull.Substring(currentPathFull.LastIndexOf("\") + 1)
+            currentDirectoryName = currentPathFull.Substring(0, currentPathFull.LastIndexOf("\"))
+            currentStartPath = currentDirectoryName
+            If currentDirectoryName.Contains("\") = True Then
+                currentStartPath = currentDirectoryName.Substring(0, currentDirectoryName.LastIndexOf("\"))
+                currentDirectoryName = currentDirectoryName.Substring(currentDirectoryName.LastIndexOf("\") + 1)
+            End If
+        End If
+        If (currentPathFull.Length <> (currentStartPath + "\" + currentDirectoryName + "\" + currentFileName).Length) Then
+            MsgBox("Error getting directory and file information !" + Chr(13) + "'" + currentPathFull + "'" + Chr(13) + "'" + currentStartPath + "\" + currentDirectoryName + "\" + currentFileName + "'", MsgBoxStyle.Exclamation, Me.Text)
+            Return
+        End If
+        If Not System.IO.File.Exists(currentPathFull) Then
+            MsgBox("Rename not possible - File does not exist !", MsgBoxStyle.Exclamation, Me.Text)
+            Return
+        End If
+        Try
+            With DialogRename
+                .TextBoxAllPathWithMultiFiles.Text = currentPathAllFiles
+                .TextBoxStartPathCurrent.Text = currentPathFull
+                .TextBoxStartPathCurrent.Text = currentStartPath
+                .TextBoxDirectoryNameCurrent.Text = currentDirectoryName
+                .TextBoxFileNameCurrent.Text = currentFileName
+                If .ShowDialog = Windows.Forms.DialogResult.OK Then
+                    Try
+                        If .TextBoxFileNameCurrent.Text <> .TextBoxFileNameNew.Text And .TextBoxFileNameNew.Text.Length > 0 Then
+                            My.Computer.FileSystem.RenameFile(currentPathFull, .TextBoxFileNameNew.Text)
+                        End If
+
+                        If .TextBoxDirectoryNameCurrent.Text <> .TextBoxDirectoryNameNew.Text And .TextBoxDirectoryNameNew.Text.Length > 0 Then
+                            My.Computer.FileSystem.RenameDirectory(currentStartPath + "\" + currentDirectoryName, .TextBoxDirectoryNameNew.Text)
+                        End If
+                        MsgBox("Rename Successful!" + Chr(13) + Chr(13) + "Old name = '...\" + .TextBoxDirectoryNameCurrent.Text + "\" + .TextBoxFileNameCurrent.Text + "'" + Chr(13) + "New name = '...\" + .TextBoxDirectoryNameNew.Text + "\" + .TextBoxFileNameNew.Text + "'", MsgBoxStyle.Information)
+                        Me.DialogResult = Windows.Forms.DialogResult.Cancel ' to cancel import in List Selection !
+                        Return
+                    Catch renameException As Exception
+                        LogEvent("RENAME : successful! Old name = '...\" + .TextBoxDirectoryNameCurrent.Text + "\" + .TextBoxFileNameCurrent.Text + "', New name = '" + .TextBoxDirectoryNameNew.Text + "\" + .TextBoxFileNameNew.Text + "'", EventLogLevel.ErrorOrSimilar)
+                        MsgBox("Rename not successful! - Error: " + renameException.Message, MsgBoxStyle.Exclamation)
+                    End Try
+                End If
+            End With
+        Catch ex As Exception
+            LogEvent("ERROR : " + ex.Message, EventLogLevel.ErrorOrSimilar)
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, Me.Text)
+        End Try
+        Me.ValidateChildren()
     End Sub
 End Class
