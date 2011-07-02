@@ -176,7 +176,6 @@
     <Compile Include="MyFilms\Utils\Cornerstone.MP\Extensions\GUIFacadeControlExtensions.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\Extensions\GUIWindowExtensions.cs" />
     <Compile Include="MyFilms\Utils\Cornerstone.MP\ImageSwapper.cs" />
-    <Compile Include="MyFilms\Utils\FileGrabber.cs" />
     <Compile Include="MyFilms\Utils\CryptageTexte.cs" />
     <Compile Include="MyFilms\Utils\CString.cs" />
     <Compile Include="MyFilms\CatalogConverter\EaxMovieCatalog.cs" />

@@ -38,7 +38,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
-        //System.ComponentModel.BackgroundWorker bgPictureList = new System.ComponentModel.BackgroundWorker();
         public Configuration(string CurrentConfig, bool create_temp)
         {
             //-----------------------------------------------------------------------------------------------
@@ -475,10 +474,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     LogMyFilms.Info("MyFilms : Artist Path '" + StrPathArtist + "', doesn't exist. Artist Pictures disabled ! ");
                     StrArtist = false;
                 }
-            LogMyFilms.Debug("MFC: Configuration loading ended for '" + CurrentConfig + "'"); 
+            LogMyFilms.Debug("MFC: Configuration loading ended for '" + CurrentConfig + "'");
         }
 
-// static values
+#region Getter/Setter - static values
+
         private static string currentConfig = string.Empty;
         public static string CurrentConfig
         {
@@ -1375,6 +1375,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return trailerList; }
           set { trailerList = value; }
         }
+        #endregion
 
         public static void SaveConfiguration(string currentConfig, int selectedItem, string selectedItemLabel)
         {
