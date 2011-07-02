@@ -2141,6 +2141,38 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
   <data name="&gt;&gt;textBox5.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="textboxSearchAkasRegex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 114</value>
+  </data>
+  <data name="textboxSearchAkasRegex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
+  </data>
+  <data name="textboxSearchAkasRegex.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="textboxSearchAkasRegex.ToolTip" xml:space="preserve">
+    <value>Define a regex matchgroup collection to add additional titles to the match results.
+Those will be used for matching in MF and AMCupdater.
+Example:
+aka.\"(?&lt;aka&gt;.*?)\"
+Note: The group definition "(?&lt;aka&gt;.*?)" must always be present 
+to properly collect title infos.</value>
+  </data>
+  <data name="textboxSearchAkasRegex.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;textboxSearchAkasRegex.Name" xml:space="preserve">
+    <value>textboxSearchAkasRegex</value>
+  </data>
+  <data name="&gt;&gt;textboxSearchAkasRegex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textboxSearchAkasRegex.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;textboxSearchAkasRegex.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>109, 17</value>
   </metadata>
@@ -2433,11 +2465,17 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
   <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="textBodyDetail.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
   <data name="textBodyDetail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 311</value>
+    <value>3, 314</value>
+  </data>
+  <data name="textBodyDetail.ScrollBars" type="System.Windows.Forms.RichTextBoxScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
   </data>
   <data name="textBodyDetail.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1039, 336</value>
+    <value>1056, 336</value>
   </data>
   <data name="textBodyDetail.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -3079,7 +3117,7 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageDetailPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 653</value>
+    <value>1062, 653</value>
   </data>
   <data name="tabPageDetailPage.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3405,14 +3443,17 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="textBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
   <data name="textBody.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 311</value>
+    <value>3, 316</value>
   </data>
   <data name="textBody.ScrollBars" type="System.Windows.Forms.RichTextBoxScrollBars, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="textBody.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1040, 334</value>
+    <value>1056, 334</value>
   </data>
   <data name="textBody.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -3608,38 +3649,6 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
   </data>
   <data name="&gt;&gt;labelSearchAkasRegex.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="textboxSearchAkasRegex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 114</value>
-  </data>
-  <data name="textboxSearchAkasRegex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 20</value>
-  </data>
-  <data name="textboxSearchAkasRegex.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="textboxSearchAkasRegex.ToolTip" xml:space="preserve">
-    <value>Define a regex matchgroup collection to add additional titles to the match results.
-Those will be used for matching in MF and AMCupdater.
-Example:
-aka.\"(?&lt;aka&gt;.*?)\"
-Note: The group definition "(?&lt;aka&gt;.*?)" must always be present 
-to properly collect title infos.</value>
-  </data>
-  <data name="textboxSearchAkasRegex.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;textboxSearchAkasRegex.Name" xml:space="preserve">
-    <value>textboxSearchAkasRegex</value>
-  </data>
-  <data name="&gt;&gt;textboxSearchAkasRegex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textboxSearchAkasRegex.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;textboxSearchAkasRegex.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="label_SearchMatches_Starttext.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4026,7 +4035,7 @@ to properly collect title infos.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageSearchPage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 653</value>
+    <value>1062, 653</value>
   </data>
   <data name="tabPageSearchPage.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4606,7 +4615,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageUserSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 653</value>
+    <value>1062, 653</value>
   </data>
   <data name="tabPageUserSettings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4626,11 +4635,14 @@ If you want to create a new configuration based on the existing script, you can 
   <data name="&gt;&gt;tabPageUserSettings.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 93</value>
+    <value>0, 98</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1060, 679</value>
+    <value>1070, 679</value>
   </data>
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

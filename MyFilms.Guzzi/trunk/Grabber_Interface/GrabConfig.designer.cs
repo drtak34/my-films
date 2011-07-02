@@ -98,6 +98,7 @@ namespace Grabber_Interface
           this.URLpage = new System.Windows.Forms.ComboBox();
           this.textFind = new System.Windows.Forms.TextBox();
           this.textBox5 = new System.Windows.Forms.TextBox();
+          this.textboxSearchAkasRegex = new System.Windows.Forms.TextBox();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -158,7 +159,6 @@ namespace Grabber_Interface
           this.ResultColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
           this.groupBox1 = new System.Windows.Forms.GroupBox();
           this.labelSearchAkasRegex = new System.Windows.Forms.Label();
-          this.textboxSearchAkasRegex = new System.Windows.Forms.TextBox();
           this.label_SearchMatches_Starttext = new System.Windows.Forms.Label();
           this.label_SearchMatches_Endtext = new System.Windows.Forms.Label();
           this.button_FirstMatch = new System.Windows.Forms.Button();
@@ -786,6 +786,13 @@ namespace Grabber_Interface
           this.textBox5.Name = "textBox5";
           this.toolTip1.SetToolTip(this.textBox5, resources.GetString("textBox5.ToolTip"));
           // 
+          // textboxSearchAkasRegex
+          // 
+          resources.ApplyResources(this.textboxSearchAkasRegex, "textboxSearchAkasRegex");
+          this.textboxSearchAkasRegex.Name = "textboxSearchAkasRegex";
+          this.toolTip1.SetToolTip(this.textboxSearchAkasRegex, resources.GetString("textboxSearchAkasRegex.ToolTip"));
+          this.textboxSearchAkasRegex.TextChanged += new System.EventHandler(this.textboxSearchAkasRegex_TextChanged);
+          // 
           // linkLabelMFwiki
           // 
           resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
@@ -878,8 +885,8 @@ namespace Grabber_Interface
           // 
           // textBodyDetail
           // 
-          this.textBodyDetail.HideSelection = false;
           resources.ApplyResources(this.textBodyDetail, "textBodyDetail");
+          this.textBodyDetail.HideSelection = false;
           this.textBodyDetail.Name = "textBodyDetail";
           this.textBodyDetail.ReadOnly = true;
           this.textBodyDetail.ShowSelectionMargin = true;
@@ -1122,8 +1129,8 @@ namespace Grabber_Interface
           // 
           // textBody
           // 
-          this.textBody.HideSelection = false;
           resources.ApplyResources(this.textBody, "textBody");
+          this.textBody.HideSelection = false;
           this.textBody.Name = "textBody";
           this.textBody.ReadOnly = true;
           this.textBody.CursorChanged += new System.EventHandler(this.textBody_CursorChanged);
@@ -1256,13 +1263,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.labelSearchAkasRegex, "labelSearchAkasRegex");
           this.labelSearchAkasRegex.Name = "labelSearchAkasRegex";
-          // 
-          // textboxSearchAkasRegex
-          // 
-          resources.ApplyResources(this.textboxSearchAkasRegex, "textboxSearchAkasRegex");
-          this.textboxSearchAkasRegex.Name = "textboxSearchAkasRegex";
-          this.toolTip1.SetToolTip(this.textboxSearchAkasRegex, resources.GetString("textboxSearchAkasRegex.ToolTip"));
-          this.textboxSearchAkasRegex.TextChanged += new System.EventHandler(this.textboxSearchAkasRegex_TextChanged);
           // 
           // label_SearchMatches_Starttext
           // 
