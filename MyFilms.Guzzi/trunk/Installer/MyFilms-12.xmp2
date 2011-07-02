@@ -2541,6 +2541,20 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{04bffb8f-8db3-4b78-98fd-adbd442e27f8}-TMDB-IT.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-IT.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\AlloCine.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{23bc3769-4359-42f6-84ce-7658aeeba412}-AlloCine.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\AlloCine.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\IMDB.FR.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8c818b0e-b856-43ab-b525-57cc41342679}-IMDB.FR.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.FR.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -6000,6 +6014,20 @@ Please refer to the Wiki onlinedocumentation.</Value>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\AlloCine.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{23bc3769-4359-42f6-84ce-7658aeeba412}-AlloCine.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\AlloCine.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\IMDB.FR.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8c818b0e-b856-43ab-b525-57cc41342679}-IMDB.FR.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.FR.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultCover.jpg</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{d5363a28-1df8-4674-9430-d5c395ca307d}-DefaultCover.jpg</ZipFileName>
@@ -6520,14 +6548,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{142dfd03-067c-40be-9f31-9aa0ab915e5e}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{dc48be25-49f3-4f62-ab24-63133ba13cb6}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{78ccfd44-68bf-4b84-9c24-897810bd87c0}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{895e921b-b9b4-457d-a55f-c39a80999425}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
