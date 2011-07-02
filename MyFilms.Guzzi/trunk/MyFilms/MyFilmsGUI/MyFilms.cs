@@ -36,8 +36,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Threading;
   using System.Web.UI.WebControls;
 
-  using AMCUpdater;
-
   using Grabber;
 
   using MediaPortal.Configuration;
@@ -4310,14 +4308,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (MyFilms.conf.StrAMCUpd)
           {
-            // stop background worker
-            dlg2.Add(GUILocalizeStrings.Get(1079861));   // Update Database with external AMCupdater
-            choiceViewGlobalUpdates.Add("updatedb");
-
             if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
             {
+              // stop background worker
               dlg2.Add(GUILocalizeStrings.Get(1079855));   // Stop Database Updater (active)
               choiceViewGlobalUpdates.Add("cancelupdatedb");
+            }
+            else
+            {
+              dlg2.Add(GUILocalizeStrings.Get(1079861));   // Update Database with external AMCupdater
+              choiceViewGlobalUpdates.Add("updatedb");
             }
           }
 
@@ -4658,15 +4658,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // stop background worker
           if (bgUpdateDB.IsBusy && bgUpdateDB.WorkerSupportsCancellation)
           {
-            //// Temporary added to hard kill process
-            foreach (Process clsProcess in System.Diagnostics.Process.GetProcesses())
-            {
-              if (clsProcess.ProcessName.StartsWith("AMCupdater"))
-                clsProcess.Kill();
-            }
-            Thread.Sleep(1000);
             bgUpdateDB.CancelAsync();
-            ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
+            // ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
           }
           else
           {
@@ -7571,114 +7564,85 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgUpdateDB.IsBusy) //         bgUpdateDB.CancelAsync();
       {
-        // moved here to avoid reinstantiating for each menu change.... thanks inker !
         bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
         bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
         bgUpdateDB.WorkerSupportsCancellation = true;
+        bgUpdateDB.WorkerReportsProgress = true;
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
+        MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
         LogMyFilms.Info("Launching AMCUpdater in batch mode");
       }
     }
 
-    static void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+    void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
     {
       BackgroundWorker worker = sender as BackgroundWorker;
-      MyFilmsDetail.RunAMCupdater(Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe", "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
-
-      //BackgroundWorker bgwFolderScanUpdate = new System.ComponentModel.BackgroundWorker();
-      //bgwFolderScanUpdate.WorkerSupportsCancellation = true;
-      //bgwFolderScanUpdate.WorkerReportsProgress = true;
-      //bgwFolderScanUpdate.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
-      //bgwFolderScanUpdate.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
-      //bgwFolderScanUpdate.ProgressChanged += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
-      ////bgwFolderScanUpdate.RunWorkerAsync();
-
-
-      //AntSettings CurrentSettings = new AntSettings();
-      //ArrayList wurl = new ArrayList();
-
-      //LogMyFilms.Debug(" : Starting Batch Mode");
-      //LogMyFilms.Debug(" - Movie Path : " + CurrentSettings.Movie_Scan_Path);
-      //LogMyFilms.Debug(" - XML File Path : " + CurrentSettings.XML_File);
-      //LogMyFilms.Debug(" - Parser File Path : " + CurrentSettings.Internet_Parser_Path);
-      //LogMyFilms.Debug(" - Grabber_Override_Language    : " + CurrentSettings.Grabber_Override_Language.ToString());
-      //LogMyFilms.Debug(" - Grabber_Override_PersonLimit : " + CurrentSettings.Grabber_Override_PersonLimit.ToString());
-      //LogMyFilms.Debug(" - Grabber_Override_TitleLimit  : " + CurrentSettings.Grabber_Override_TitleLimit.ToString());
-      //LogMyFilms.Debug(" - Grabber_Override_GetRoles    : " + CurrentSettings.Grabber_Override_GetRoles.ToString());
-      //LogMyFilms.Debug(" - Exclude File Path : " + CurrentSettings.Excluded_Movies_File);
-      //LogMyFilms.Debug(" - Fanart Path : " + CurrentSettings.Movie_Fanart_Path);
-      //LogMyFilms.Debug(" - PersonArtwork Path : " + CurrentSettings.Movie_PersonArtwork_Path);
-      //LogMyFilms.Debug(" - Media Label : " + CurrentSettings.Ant_Media_Label);
-      //LogMyFilms.Debug(" - Media Type : " + CurrentSettings.Ant_Media_Type);
-      //LogMyFilms.Debug(" - Override Path : " + CurrentSettings.Override_Path);
-      //LogMyFilms.Debug(" - Store Short Names : " + CurrentSettings.Store_Short_Names_Only);
-      //LogMyFilms.Debug(" - Backup Option : " + CurrentSettings.Backup_XML_First);
-      //LogMyFilms.Debug(" - Overwrite Original File Option : " + CurrentSettings.Overwrite_XML_File.ToString());
-      //LogMyFilms.Debug(" - Source Field : " + CurrentSettings.Ant_Database_Source_Field.ToString());
-      //LogMyFilms.Debug(" - Purge Missing Movies From Database : " + CurrentSettings.Purge_Missing_Files.ToString());
-      //LogMyFilms.Debug(" - Check for folders containing DVD copies : " + CurrentSettings.Scan_For_DVD_Folders.ToString());
-      
-      //string ConfigFile = MyFilms.conf.StrAMCUpd_cnf;
-      //if (!System.IO.File.Exists(ConfigFile))
-      //{
-      //  LogMyFilms.Debug("ERROR - Config File '" + ConfigFile.ToString() + "' not found.");
-      //  return;
-      //}
-
-      //CurrentSettings.LoadUserSettings(ConfigFile);
-
-      //try
-      //{
-      //  FileInfo f = new System.IO.FileInfo(CurrentSettings.XML_File);
-      //  if (!f.Exists) //  System.IO.File.Exists(f)
-      //  {
-      //    LogMyFilms.Debug("XML File '" + CurrentSettings.XML_File.ToString() + "' Not Found.");
-      //    System.Xml.XmlTextWriter destXml = new System.Xml.XmlTextWriter(CurrentSettings.XML_File.ToString(), System.Text.Encoding.Default);
-      //    destXml.Formatting = System.Xml.Formatting.Indented;
-      //    destXml.WriteStartDocument(false);
-      //    destXml.WriteStartElement("AntMovieCatalog");
-      //    destXml.WriteStartElement("Catalog");
-      //    destXml.WriteElementString("Properties", "");
-      //    destXml.WriteStartElement("Contents");
-      //    destXml.WriteEndElement();
-      //    destXml.WriteEndElement();
-      //    destXml.WriteEndElement();
-      //    destXml.Close();
-      //    LogMyFilms.Debug("Creating XML File");
-      //    LogMyFilms.Debug(" - FilePath : " + CurrentSettings.XML_File.ToString());
-      //  }
-
-        
-      //  AntProcessor Ant = new AntProcessor();
-      //  Ant.InteractiveMode = false;
-      //  Ant.ProcessXML(""); // XMLFilePath as sting param
-      //  Ant.ProcessMovieFolder();
-      //  Ant.ProcessOrphanFiles();
-      //  if (Ant.CountOrphanFiles > 0 || Ant.CountOrphanRecords > 0)
-      //    Ant.UpdateXMLFile();
-
-      //}
-      //catch (Exception ex)
-      //{
-      //  //Console.WriteLine(ex.Message);
-      //  //LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar);
-      //  throw;
-      //}
-      //finally
-      //{
-      //  // LogEvent(" - Processing Complete.", EventLogLevel.ImportantEvent)
-      //}
+      // MyFilmsDetail.RunAMCupdater(Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe", "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\""); // Add Logpath to commandlineparameters
+      string exeName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe"; 
+      string argsLine = "\"" + MyFilms.conf.StrAMCUpd_cnf + "\" \"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\"";
+      //static public void RunAMCupdater(string exeName, string argsLine)
+      if (exeName.Length > 0)
+      {
+          using (Process p = new Process())
+          {
+              ProcessStartInfo psi = new ProcessStartInfo();
+              psi.FileName = exeName;
+              psi.UseShellExecute = true;
+              psi.WindowStyle = ProcessWindowStyle.Minimized;
+              psi.Arguments = argsLine;
+              psi.ErrorDialog = false;
+              if (OSInfo.OSInfo.VistaOrLater())
+              {
+                  psi.Verb = "runas";
+              }
+              // psi.RedirectStandardOutput = true; // redirect output to streamreader - ToDo: add reader to use and add console output to AMCU !
+              p.StartInfo = psi;
+              LogMyFilms.Debug("RunAMCupdater - Starting external command: {0} {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
+              try
+              {
+                p.Start();
+                while (!p.HasExited)
+                {
+                  if (bgUpdateDB.CancellationPending)
+                  {
+                    LogMyFilms.Debug("RunAMCupdater - Cancellation requested by user - try to kill process 'AMCupdater.exe' !");
+                    e.Cancel = true;
+                    p.Kill();
+                    p.WaitForExit();
+                    //Process[] aProc = System.Diagnostics.Process.GetProcessesByName("AMCupdater");
+                    //if (aProc.Length > 0) {  Process myprc = aProc[0]; myprc.Kill(); }
+                  }
+                  Thread.Sleep(1000);
+                }
+              }
+              catch (Exception ex)
+              {
+                  LogMyFilms.Debug(ex.Message.ToString());
+              }
+              LogMyFilms.Debug("RunAMCupdater - External command finished");
+          }
+      }
     }
 
     void bgUpdateDB_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
-      LogMyFilms.Info(": Update database with AMCUpdater finished. (GetID = '" + GetID + "')");
-      if (GetID == 7986)
+      MyFilmsDetail.clearGUIProperty("statusmessage");
+      if (e.Cancelled)
       {
-        Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
-        Load_Config(Configuration.CurrentConfig, true);
-        Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-        ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798748));
+        LogMyFilms.Info("RunAMCupdater - Update database with AMCUpdater successfully cancelled by user request. (GetID = '" + GetID + "')");
+        if (GetID == 7986)
+          ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(1079856)); // AMC Updater is stopping!
+      }
+      else
+      {
+        LogMyFilms.Info("RunAMCupdater - Update database with AMCUpdater sucessfully finished. (GetID = '" + GetID + "')");
+        if (GetID == 7986)
+        {
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+          Load_Config(Configuration.CurrentConfig, true);
+          Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+          ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798748));
+        }
       }
     }
 

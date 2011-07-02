@@ -6148,6 +6148,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     try
                     {
                         p.Start();
+                        // p.Kill();
                         p.WaitForExit();
                     }
                     catch (Exception e)
