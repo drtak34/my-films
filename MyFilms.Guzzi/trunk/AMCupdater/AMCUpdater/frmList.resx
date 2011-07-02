@@ -188,6 +188,8 @@ Weblink -&gt; The link to the movie's website. If you're unsure about a matching
 Distance -&gt; The "matching distance" between the search title and the returned movie title. '0' is exact match - bigger value is worse matching.
 
 Tip: If you don't get proper result, you can manually change the "Search Title" and repeat searching.
-If usinfg IMDB, you can also manually enter IMDB-Id in Searchhint to get desired movie.</value>
+If usinfg IMDB, you can also manually enter IMDB-Id in Searchhint to get desired movie.
+
+Note: You can sort the results by name, year or options to better find the matching movie, when many results are given.</value>
   </data>
 </root>

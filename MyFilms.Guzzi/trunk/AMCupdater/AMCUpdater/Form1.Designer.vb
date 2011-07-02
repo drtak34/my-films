@@ -3936,10 +3936,10 @@ Partial Class Form1
         '
         Me.ToolTip1.AutoPopDelay = 15000
         Me.ToolTip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.ToolTip1.InitialDelay = 500
+        Me.ToolTip1.InitialDelay = 1000
         Me.ToolTip1.IsBalloon = True
         Me.ToolTip1.ReshowDelay = 100
-        Me.ToolTip1.ToolTipTitle = "MyFilms - AMCupdater Help"
+        Me.ToolTip1.ToolTipTitle = "MyFilms AMCupdater Help ..."
         '
         'AntMovieCatalog
         '

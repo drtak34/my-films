@@ -376,7 +376,7 @@ Partial Class frmList
         'ToolTipImportDialog
         '
         Me.ToolTipImportDialog.AutoPopDelay = 15000
-        Me.ToolTipImportDialog.InitialDelay = 500
+        Me.ToolTipImportDialog.InitialDelay = 3000
         Me.ToolTipImportDialog.IsBalloon = True
         Me.ToolTipImportDialog.ReshowDelay = 100
         Me.ToolTipImportDialog.ToolTipTitle = "MyFilms AMCupdater Help ..."
