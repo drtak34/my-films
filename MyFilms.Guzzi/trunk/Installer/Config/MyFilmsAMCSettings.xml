@@ -116,7 +116,7 @@
     <Value />
   </Values>
   <Values Option="Filter_Strings">
-    <Value>\([0-9][0-9][0-9][0-9]\)|\(.*?\)|\[.*?\]|\{.*?\}|tt\d{7}|-\s+\d{4}$|\s+1$</Value>
+    <Value>\([0-9][0-9][0-9][0-9]\)|\(.*?\)|\[.*?\]|\{.*?\}|tt\d{7}|-\s+\d{4}$|\s+1$|\s\d{4}\.</Value>
   </Values>
   <Values Option="Check_Field_Handling">
     <Value>False</Value>
