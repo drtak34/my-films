@@ -120,9 +120,6 @@
   <metadata name="ToolTipImportDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="ToolTipImportDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="btnDontAskAgain.ToolTip" xml:space="preserve">
     <value>"Always Ignore" does skip the current movie and permamnently "blacklist" it.
 Movie will NOT be found on a new scan next time.
@@ -177,5 +174,20 @@ Attention !
 This will modify your original source data!
 Other catlogs might not find the movie any longer.
 Only use, when you are sure.</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value>Search Results:
+You get a list of the search results, that have been returned after requesting the selected site.
+Each result will show you several details, that make the selection of the "corret" matching movie easier.
+Title -&gt; Name of the movie. Language depends on the internet site.
+Year -&gt; Year (optional, but very useful especially for automatic matching)
+Options -&gt; If the website supports it, you will get additional infos for the movie, like categories or types.
+The grabber will use this info for better matching results - e.g. by preferring to match movie titles before matching TV or series (optional).
+ID -&gt; The ID that the site is giving the movie (e.g. IMDB-Id for IMDB website)
+Weblink -&gt; The link to the movie's website. If you're unsure about a matching, you can check details there. Click will strt the page in the browser.
+Distance -&gt; The "matching distance" between the search title and the returned movie title. '0' is exact match - bigger value is worse matching.
+
+Tip: If you don't get proper result, you can manually change the "Search Title" and repeat searching.
+If usinfg IMDB, you can also manually enter IMDB-Id in Searchhint to get desired movie.</value>
   </data>
 </root>

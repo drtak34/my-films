@@ -24,12 +24,12 @@ Partial Class frmList
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmList))
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.btnCancel = New System.Windows.Forms.Button
         Me.btnOK = New System.Windows.Forms.Button
         Me.txtSearchString = New System.Windows.Forms.TextBox
@@ -102,6 +102,8 @@ Partial Class frmList
         Me.btnSearchAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnSearchAgain.TabIndex = 40
         Me.btnSearchAgain.Text = "Search Again"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnSearchAgain, "Perform new search." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Will only be available, if settings have been changed," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like" & _
+                " grabber script or search title.")
         Me.btnSearchAgain.UseVisualStyleBackColor = True
         '
         'txtTmpParserFilePath
@@ -264,11 +266,8 @@ Partial Class frmList
         Me.lstOptionsExt.AllowUserToAddRows = False
         Me.lstOptionsExt.AllowUserToDeleteRows = False
         Me.lstOptionsExt.AllowUserToResizeRows = False
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        Me.lstOptionsExt.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lstOptionsExt.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.lstOptionsExt.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.lstOptionsExt.BackgroundColor = System.Drawing.SystemColors.Window
         Me.lstOptionsExt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -276,31 +275,25 @@ Partial Class frmList
         Me.lstOptionsExt.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.[Single]
         Me.lstOptionsExt.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.lstOptionsExt.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Title, Me.Year, Me.Options, Me.ID, Me.Weblink, Me.Distance})
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.lstOptionsExt.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.lstOptionsExt.DefaultCellStyle = DataGridViewCellStyle5
         Me.lstOptionsExt.Location = New System.Drawing.Point(18, 85)
         Me.lstOptionsExt.Margin = New System.Windows.Forms.Padding(1)
         Me.lstOptionsExt.MultiSelect = False
         Me.lstOptionsExt.Name = "lstOptionsExt"
         Me.lstOptionsExt.ReadOnly = True
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.lstOptionsExt.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.lstOptionsExt.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.lstOptionsExt.RowHeadersVisible = False
         Me.lstOptionsExt.RowHeadersWidth = 11
-        Me.lstOptionsExt.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        Me.lstOptionsExt.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         Me.lstOptionsExt.RowTemplate.Height = 16
         Me.lstOptionsExt.RowTemplate.ReadOnly = True
         Me.lstOptionsExt.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -319,8 +312,8 @@ Partial Class frmList
         'Year
         '
         Me.Year.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.Year.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.Year.DefaultCellStyle = DataGridViewCellStyle2
         Me.Year.HeaderText = "Year"
         Me.Year.Name = "Year"
         Me.Year.ReadOnly = True
@@ -346,8 +339,8 @@ Partial Class frmList
         '
         Me.Weblink.ActiveLinkColor = System.Drawing.Color.Black
         Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Gray
-        Me.Weblink.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Gray
+        Me.Weblink.DefaultCellStyle = DataGridViewCellStyle3
         Me.Weblink.FillWeight = 75.54945!
         Me.Weblink.HeaderText = "Weblink"
         Me.Weblink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
@@ -360,9 +353,9 @@ Partial Class frmList
         'Distance
         '
         Me.Distance.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Gray
-        Me.Distance.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Gray
+        Me.Distance.DefaultCellStyle = DataGridViewCellStyle4
         Me.Distance.HeaderText = "Dist"
         Me.Distance.Name = "Distance"
         Me.Distance.ReadOnly = True
@@ -452,6 +445,7 @@ Partial Class frmList
         Me.Name = "frmList"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Please select the correct entry"
+        Me.ToolTipImportDialog.SetToolTip(Me, resources.GetString("$this.ToolTip"))
         CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
