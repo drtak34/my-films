@@ -2328,7 +2328,7 @@ Partial Class Form1
         '
         Me.cbManualSelectOperation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbManualSelectOperation.FormattingEnabled = True
-        Me.cbManualSelectOperation.Items.AddRange(New Object() {"Update Value", "Update Value - Replace String", "Update Value - Add String", "Update Value - Remove String", "Delete Value", "Update Record", "Delete Record", "Download Fanart", "Register Trailer"})
+        Me.cbManualSelectOperation.Items.AddRange(New Object() {"Update Value", "Update Value - Replace String", "Update Value - Add String", "Update Value - Insert String", "Update Value - Remove String", "Delete Value", "Update Record", "Delete Record", "Download Fanart", "Register Trailer"})
         Me.cbManualSelectOperation.Location = New System.Drawing.Point(6, 19)
         Me.cbManualSelectOperation.Name = "cbManualSelectOperation"
         Me.cbManualSelectOperation.Size = New System.Drawing.Size(195, 21)

@@ -461,6 +461,10 @@ Public Class AntProcessor
             LogEvent(" - Field to Update : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
             LogEvent(" - Value to add to existing value : " & _ManualFieldValue.ToString, EventLogLevel.ImportantEvent)
         End If
+        If (_ManualOperation.ToString = "Update Value - Insert String") Then
+            LogEvent(" - Field to Update : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
+            LogEvent(" - Value to insert to existing value : " & _ManualFieldValue.ToString, EventLogLevel.ImportantEvent)
+        End If
         If (_ManualOperation.ToString = "Update Value - Remove String") Then
             LogEvent(" - Field to Update : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
             LogEvent(" - Value to remove from existing value : " & _ManualFieldValue.ToString, EventLogLevel.ImportantEvent)
@@ -675,6 +679,19 @@ Public Class AntProcessor
                             CurrentNode.Attributes(_ManualFieldName).Value = CurrentNode.Attributes(_ManualFieldName).Value & _ManualFieldValue
                             'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        End If
+
+                    Case "Update Value - Insert String"
+                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                            newAttr = XmlDoc.CreateAttribute(_ManualFieldName)
+                            newAttr.Value = _ManualFieldValue
+                            CurrentNode.Attributes.Append(newAttr)
+                            'LogEvent("Value Updated (Added too) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Added Field and String) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        Else
+                            CurrentNode.Attributes(_ManualFieldName).Value = _ManualFieldValue & CurrentNode.Attributes(_ManualFieldName).Value
+                            'LogEvent("Value Updated : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value Updated (Inserted String): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
                     Case "Update Value - Remove String"
                         If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then

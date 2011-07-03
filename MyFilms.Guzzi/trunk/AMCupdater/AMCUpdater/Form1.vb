@@ -952,6 +952,13 @@ Public Class Form1
                 lblManualSelectField.Visible = True
                 cbManualSelectField.Visible = True
                 cbManualSelectField.SelectedIndex = -1
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Insert String" Then
+                lblManualEnterNewValue.Visible = True
+                txtManualNewValue.Visible = True
+                txtManualNewValue.Clear()
+                lblManualSelectField.Visible = True
+                cbManualSelectField.Visible = True
+                cbManualSelectField.SelectedIndex = -1
             ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Remove String" Then
                 lblManualEnterNewValue.Visible = True
                 txtManualNewValue.Visible = True
@@ -1309,33 +1316,46 @@ Public Class Form1
                     epManualUpdater.SetError(txtManualNewValue, "")
                 End If
             ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Add String" Then
-                    'Update value : requires cbManualSelectField and txtManualNewValue
-                    If cbManualSelectField.SelectedIndex < 0 Then
-                        epManualUpdater.SetError(cbManualSelectField, "Please select a field to update")
-                        IsValid = False
-                    Else
-                        epManualUpdater.SetError(cbManualSelectField, "")
-                    End If
-                    If txtManualNewValue.Text = String.Empty Then
-                        epManualUpdater.SetError(txtManualNewValue, "Please enter the new value to add")
-                        IsValid = False
-                    Else
-                        epManualUpdater.SetError(txtManualNewValue, "")
-                    End If
+                'Update value : requires cbManualSelectField and txtManualNewValue
+                If cbManualSelectField.SelectedIndex < 0 Then
+                    epManualUpdater.SetError(cbManualSelectField, "Please select a field to update")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(cbManualSelectField, "")
+                End If
+                If txtManualNewValue.Text = String.Empty Then
+                    epManualUpdater.SetError(txtManualNewValue, "Please enter the new value to add")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(txtManualNewValue, "")
+                End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Insert String" Then
+                If cbManualSelectField.SelectedIndex < 0 Then
+                    epManualUpdater.SetError(cbManualSelectField, "Please select a field to update")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(cbManualSelectField, "")
+                End If
+                If txtManualNewValue.Text = String.Empty Then
+                    epManualUpdater.SetError(txtManualNewValue, "Please enter the new value to insert")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(txtManualNewValue, "")
+                End If
             ElseIf cbManualSelectOperation.SelectedItem = "Update Value - Remove String" Then
-                    'Update value : requires cbManualSelectField and txtManualNewValue
-                    If cbManualSelectField.SelectedIndex < 0 Then
-                        epManualUpdater.SetError(cbManualSelectField, "Please select a field to update")
-                        IsValid = False
-                    Else
-                        epManualUpdater.SetError(cbManualSelectField, "")
-                    End If
-                    If txtManualNewValue.Text = String.Empty Then
-                        epManualUpdater.SetError(txtManualNewValue, "Please enter the new value to remove")
-                        IsValid = False
-                    Else
-                        epManualUpdater.SetError(txtManualNewValue, "")
-                    End If
+                'Update value : requires cbManualSelectField and txtManualNewValue
+                If cbManualSelectField.SelectedIndex < 0 Then
+                    epManualUpdater.SetError(cbManualSelectField, "Please select a field to update")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(cbManualSelectField, "")
+                End If
+                If txtManualNewValue.Text = String.Empty Then
+                    epManualUpdater.SetError(txtManualNewValue, "Please enter the new value to remove")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(txtManualNewValue, "")
+                End If
             ElseIf cbManualSelectOperation.SelectedItem = "Delete Value" Then
                     'Delete Value : requires cbManualSelectField
                     If cbManualSelectField.SelectedIndex < 0 Then
