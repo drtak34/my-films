@@ -503,23 +503,26 @@ Public Class AntRecord
 
                             'First try to find matches due to "try to find best match automatically" - this is enhanced matching option as feature on top of grabber matching itself
 
-                            'Try to match by IMDB_Id
                             If _InternetLookupAlwaysPrompt = False Then
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wimdb = wurl.Item(i).IMDB_ID.ToString
-                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
-                                    If (wimdb = _InternetSearchHintIMDB_Id) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, _GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
-                                        _InternetLookupOK = True
-                                        _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint (" & _InternetSearchHintIMDB_Id & ")."
-                                        If bgwFolderScanUpdate.CancellationPending = True Then
-                                            Exit Sub
+                                'Try to match by IMDB_Id
+                                If _InternetSearchHintIMDB_Id.Length > 0 Then
+                                    For i As Integer = 0 To wurl.Count - 1
+                                        wtitle = wurl.Item(i).Title.ToString
+                                        wimdb = wurl.Item(i).IMDB_ID.ToString
+                                        wtmdb = wurl.Item(i).TMDB_ID.ToString
+                                        If (wimdb = _InternetSearchHintIMDB_Id And wimdb.Length > 3) Then
+                                            _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, _GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                            _InternetLookupOK = True
+                                            _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint (" & _InternetSearchHintIMDB_Id & ")."
+                                            If bgwFolderScanUpdate.CancellationPending = True Then
+                                                Exit Sub
+                                            End If
+                                            Exit While
                                         End If
-                                        Exit While
-                                    End If
-                                Next
+                                    Next
+                                End If
 
+                                'Try to match by year hint (and name)
                                 If searchyearHint > 0 Then
                                     indexWithOptions = FuzzyMatch(SearchString, wurl, False, searchyearHint, 0, matchingDistanceWithOptions, CountTitleMatch, TitleMatch)
                                     index = FuzzyMatch(SearchString, wurl, True, searchyearHint, 0, matchingDistance, CountTitleMatch, TitleMatch)
@@ -714,20 +717,22 @@ Public Class AntRecord
                             Else 'If _InternetSearchHint.Length > 0 Or _InternetSearchHintYear.Length > 0 Or _InternetSearchHintIMDB_Id.Length > 0 Then
 
                                 ' Check for direct IMDB match
-                                For i As Integer = 0 To wurl.Count - 1
-                                    wtitle = wurl.Item(i).Title.ToString
-                                    wimdb = wurl.Item(i).IMDB_ID.ToString
-                                    wtmdb = wurl.Item(i).TMDB_ID.ToString
-                                    If (wimdb = _InternetSearchHintIMDB_Id) Then
-                                        _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, _GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
-                                        _InternetLookupOK = True
-                                        _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint (" & _InternetSearchHintIMDB_Id & ")."
-                                        If bgwFolderScanUpdate.CancellationPending = True Then
-                                            Exit Sub
+                                If _InternetSearchHintIMDB_Id.Length > 0 Then
+                                    For i As Integer = 0 To wurl.Count - 1
+                                        wtitle = wurl.Item(i).Title.ToString
+                                        wimdb = wurl.Item(i).IMDB_ID.ToString
+                                        wtmdb = wurl.Item(i).TMDB_ID.ToString
+                                        If (wimdb = _InternetSearchHintIMDB_Id) Then
+                                            _InternetData = Gb.GetDetail(wurl.Item(i).URL, _ImagePath, _ParserPath, _DownloadImage, _GrabberOverrideLanguage, _GrabberOverridePersonLimit, _GrabberOverrideTitleLimit, _GrabberOverrideGetRoles)
+                                            _InternetLookupOK = True
+                                            _LastOutputMessage = SearchString & " - " & " Movie found by imdb hint (" & _InternetSearchHintIMDB_Id & ")."
+                                            If bgwFolderScanUpdate.CancellationPending = True Then
+                                                Exit Sub
+                                            End If
+                                            Exit While
                                         End If
-                                        Exit While
-                                    End If
-                                Next
+                                    Next
+                                End If
 
                                 ' searches with yearhint
                                 If searchyearHint > 0 Then
@@ -1121,6 +1126,7 @@ Public Class AntRecord
             Dim director As String = ""
             Dim year As Int16 = 0
             Dim imdb_id As String = "" ' Guzzi Added for exact IMDB matching
+
             If (ProcessMode = Process_Mode_Names.Import) Then
                 'Second get a decent Movie Title which we can then use for Internet Lookups as well as the Original Title field.
                 'LogEvent("ProcessFile() - Import: Get search & matching hints...", EventLogLevel.InformationalWithGrabbing)
