@@ -502,6 +502,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // Register Eventhandler for AMCupdater Background progress reporting
       //AMCupdaterStartEventHandler();
+
+      // Initialize Backgroundworker
+      this.InitializeBackgroundWorker();
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
 
       return result;
@@ -7556,21 +7559,49 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
     }
 
+    private void InitializeBackgroundWorker()
+    {
+      if (bgUpdateDB == null) bgUpdateDB = new BackgroundWorker();
+      bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
+      bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
+      bgUpdateDB.WorkerSupportsCancellation = true;
+      bgUpdateDB.WorkerReportsProgress = true;
+      // bgUpdateDB.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bgUpdateDB_ProgressChanged);
+
+      if (bgUpdateFanart == null) bgUpdateFanart = new System.ComponentModel.BackgroundWorker();
+      bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
+      bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
+
+      if (bgUpdateActors == null) bgUpdateActors = new System.ComponentModel.BackgroundWorker();
+      bgUpdateActors.DoWork += new DoWorkEventHandler(bgUpdateActors_DoWork);
+      bgUpdateActors.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateActors_RunWorkerCompleted);
+
+      if (bgUpdateTrailer == null) bgUpdateTrailer = new System.ComponentModel.BackgroundWorker();
+      bgUpdateTrailer.DoWork += new DoWorkEventHandler(bgUpdateTrailer_DoWork);
+      bgUpdateTrailer.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateTrailer_RunWorkerCompleted);
+
+      if (bgLoadMovieList == null) bgLoadMovieList = new System.ComponentModel.BackgroundWorker();
+      bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
+      bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
+
+      if (bgIsOnlineCheck == null) bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
+      bgIsOnlineCheck.DoWork += new DoWorkEventHandler(bgIsOnlineCheck_DoWork);
+      bgIsOnlineCheck.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgIsOnlineCheck_RunWorkerCompleted);
+    }
+
     //*****************************************************************************************
     //*  Update Database in batch mode                                                        *
     //*****************************************************************************************
     public void AsynUpdateDatabase()
     {
-      if (!bgUpdateDB.IsBusy) //         bgUpdateDB.CancelAsync();
+      if (!bgUpdateDB.IsBusy && !bgUpdateDB.CancellationPending)
       {
-        bgUpdateDB.DoWork += new DoWorkEventHandler(bgUpdateDB_DoWork);
-        bgUpdateDB.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateDB_RunWorkerCompleted);
-        bgUpdateDB.WorkerSupportsCancellation = true;
-        bgUpdateDB.WorkerReportsProgress = true;
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
-        LogMyFilms.Info("Launching AMCUpdater in batch mode");
+        LogMyFilms.Info("AsynUpdateDatabase() - Launching AMCUpdater in batch mode");
       }
+      else
+        LogMyFilms.Info("AsynUpdateDatabase() - AMCUpdater cannot be started in batch mode - either already running or cancellation pending");
     }
 
     void bgUpdateDB_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -7654,9 +7685,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgUpdateFanart.IsBusy)
       {
-        // moved here to avoid reinstantiating for each menu change.... thanks inker !
-        bgUpdateFanart.DoWork += new DoWorkEventHandler(bgUpdateFanart_DoWork);
-        bgUpdateFanart.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateFanart_RunWorkerCompleted);
         bgUpdateFanart.RunWorkerAsync(MyFilms.r);
         LogMyFilms.Info(": Downloading backdrop fanart in batch mode");
       }
@@ -7710,11 +7738,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgUpdateActors.IsBusy)
       {
-        bgUpdateActors.DoWork += new DoWorkEventHandler(bgUpdateActors_DoWork);
-        bgUpdateActors.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateActors_RunWorkerCompleted);
         bgUpdateActors.RunWorkerAsync(actors);
         LogMyFilms.Info(": Downloading actors artwork in batch mode");
-
       }
     }
 
@@ -7760,10 +7785,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgLoadMovieList.IsBusy)
       {
-        LogMyFilms.Debug("AsynLoadMovieList() started in background !");
-        bgLoadMovieList.DoWork += new DoWorkEventHandler(bgLoadMovieList_DoWork);
-        bgLoadMovieList.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgLoadMovieList_RunWorkerCompleted);
-        LogMyFilms.Info("Loading Movie List in batch mode");
+        LogMyFilms.Info("AsynLoadMovieList() - Loading Movie List in batch mode");
         bgLoadMovieList.RunWorkerAsync();
       }
       else
@@ -7835,10 +7857,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgIsOnlineCheck.IsBusy)
       {
-        LogMyFilms.Debug("AsynIsOnlineCheck() started in background !");
-        bgIsOnlineCheck.DoWork += new DoWorkEventHandler(bgIsOnlineCheck_DoWork);
-        bgIsOnlineCheck.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgIsOnlineCheck_RunWorkerCompleted);
-        LogMyFilms.Info("Check IsOnline  started in batch mode");
+        LogMyFilms.Info("AsynIsOnlineCheck() - Check IsOnline  started in batch mode");
         bgIsOnlineCheck.RunWorkerAsync(MyFilms.r);
       }
       else
@@ -8092,9 +8111,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgUpdateTrailer.IsBusy)
       {
-        // moved here to avoid reinstantiating for each menu change.... thanks inker !
-        bgUpdateTrailer.DoWork += new DoWorkEventHandler(bgUpdateTrailer_DoWork);
-        bgUpdateTrailer.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgUpdateTrailer_RunWorkerCompleted);
         bgUpdateTrailer.RunWorkerAsync(MyFilms.r);
         LogMyFilms.Info("starting 'Search and register Trailer' in batch mode");
       }
