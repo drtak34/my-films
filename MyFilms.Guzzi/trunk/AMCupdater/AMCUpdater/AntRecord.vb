@@ -2116,7 +2116,7 @@ Public Class AntRecord
                 End If
             End If
         Catch ex As Exception
-            _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : " & ex.Message.ToString
+            _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : " & ex.Message.ToString & ", " & ex.StackTrace.ToString
         End Try
     End Sub
 

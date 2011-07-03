@@ -3817,6 +3817,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
               MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
               BtnSrtBy.Label = conf.CurrentSortMethod;
+              // BtnSrtBy.Label = conf.WStrSort; // ToDo: Check, wh yinitial value not set properly
               if (conf.StrSortSens == " ASC")
                 BtnSrtBy.IsAscending = true;
               else
