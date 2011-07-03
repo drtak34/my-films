@@ -7656,12 +7656,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     void bgUpdateDB_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
-      MyFilmsDetail.clearGUIProperty("statusmessage");
-
-      Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
-      Load_Config(Configuration.CurrentConfig, true);
-      Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-
       if (e.Cancelled)
       {
         LogMyFilms.Info("RunAMCupdater - Update database with AMCUpdater cancelled by user request. (GetID = '" + GetID + "')");
@@ -7676,6 +7670,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(10798748)); // Global Update finished !
         }
       }
+      MyFilmsDetail.clearGUIProperty("statusmessage");
+
+      Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+
+      Load_Config(Configuration.CurrentConfig, true);
+      Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
     }
 
     //*****************************************************************************************
