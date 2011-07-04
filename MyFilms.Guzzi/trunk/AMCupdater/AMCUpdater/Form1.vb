@@ -2408,5 +2408,13 @@ Public Class Form1
             End Try
         End If
     End Sub
+
+    Private Sub txtManualInternetParserPath_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtManualInternetParserPath.TextChanged
+        If txtManualInternetParserPath.Text <> "" Then
+            txtManualInternetParserPathDisplay.Text = Path.GetFileName(txtParserFilePath.Text)
+        Else
+            txtManualInternetParserPathDisplay.Text = ""
+        End If
+    End Sub
 End Class
 
