@@ -400,11 +400,11 @@
         8Dsg/w+T+GsRKGk0sAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1095, 13</value>
-  </metadata>
   <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>280, 50</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1095, 13</value>
   </metadata>
   <data name="txtOverridePath.ToolTip" xml:space="preserve">
     <value>Override path when writing to XML file:
@@ -413,6 +413,31 @@ Normally used if you are scanning local files (i.e. d:\Movies)
 but your MediaPortal client will access them over the network (i.e. \\server\Movies\)
 The over-ride path will replace the 'Path to Movies Folder'.
 Note : Can only be used when scanning a single folder structure.</value>
+  </data>
+  <data name="chkDontAskInteractive.ToolTip" xml:space="preserve">
+    <value>Only effective, if you have chosen the internet lookup behaviour as
+"try to find best match automatically".
+If unchecked, you will get a dialog for each movie AMCupdater cannot automatically match.
+If checked, you won't get a dialog - instead AMCupdater is importing the movie without internet data.</value>
+  </data>
+  <data name="cbInternetLookupBehaviour.ToolTip" xml:space="preserve">
+    <value>If you choose "try to find best match automatically", AMCupdater will automatically load internet infos
+in the case, only one match is found for the selected movie (assuming, this one match is the right one).
+If you choose "always ask" you will always get a dialog to verify, if the found movie is the correct one - 
+even if only one result was found.
+
+Note:
+If you don't have e.g. the year in the directory or movie name, AMCupdater most probably will not get good matches on movie searches.
+To get good matches automatically, year should be in directory or filename in brackets - e.g. "moviename (1982)"</value>
+  </data>
+  <data name="chkImportOnInternetFail.ToolTip" xml:space="preserve">
+    <value>Continue processing and import files even when Internet lookup fails or similar.
+This is the preferred setting for silent background operation, if you
+prefer to have your media files imported, even if the internet lookup is failing.
+It gives you the possibility to update the INternet infos interactively in MyFilms.
+To have this option active for silent background operation (e.g. global update from MyFilms GUI,
+but NOT active for AMCupdater interactive GUI mode, you have to select the 
+option "Don't import file in interactive mode".</value>
   </data>
   <data name="cbTitleHandling.ToolTip" xml:space="preserve">
     <value>Options are:
@@ -456,35 +481,10 @@ Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
   </data>
-  <data name="chkDontAskInteractive.ToolTip" xml:space="preserve">
-    <value>Only effective, if you have chosen the internet lookup behaviour as
-"try to find best match automatically".
-If unchecked, you will get a dialog for each movie AMCupdater cannot automatically match.
-If checked, you won't get a dialog - instead AMCupdater is importing the movie without internet data.</value>
-  </data>
-  <data name="chkImportOnInternetFail.ToolTip" xml:space="preserve">
-    <value>Continue processing and import files even when Internet lookup fails or similar.
-This is the preferred setting for silent background operation, if you
-prefer to have your media files imported, even if the internet lookup is failing.
-It gives you the possibility to update the INternet infos interactively in MyFilms.
-To have this option active for silent background operation (e.g. global update from MyFilms GUI,
-but NOT active for AMCupdater interactive GUI mode, you have to select the 
-option "Don't import file in interactive mode".</value>
-  </data>
   <data name="txtParserFilePath.ToolTip" xml:space="preserve">
     <value>Enter the location of an Internet Parser file.
 These files allow AMCUpdater to access Internet Movie sites to get movie information
 Various Parser Files are provided by default - they are in the Scripts subfolder of the AMCUpdater application folder.</value>
-  </data>
-  <data name="cbInternetLookupBehaviour.ToolTip" xml:space="preserve">
-    <value>If you choose "try to find best match automatically", AMCupdater will automatically load internet infos
-in the case, only one match is found for the selected movie (assuming, this one match is the right one).
-If you choose "always ask" you will always get a dialog to verify, if the found movie is the correct one - 
-even if only one result was found.
-
-Note:
-If you don't have e.g. the year in the directory or movie name, AMCupdater most probably will not get good matches on movie searches.
-To get good matches automatically, year should be in directory or filename in brackets - e.g. "moviename (1982)"</value>
   </data>
   <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
     <value>Checks your Ant Movie Database catalog for references to files which no longer exist.

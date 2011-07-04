@@ -945,6 +945,8 @@ Public Class Form1
 
             chkManualUpdateRecordsOnlyMissingData.Visible = False
 
+            grpManualUpdatesParameters.Visible = True
+
             If cbManualSelectOperation.SelectedItem = "Update Value" Then
                 lblManualEnterNewValue.Visible = True
                 txtManualNewValue.Visible = True

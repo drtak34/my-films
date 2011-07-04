@@ -1114,7 +1114,7 @@ Public Class AntRecord
         Try
 
             Dim attr As Xml.XmlAttribute
-            Dim element As Xml.XmlElement
+            'Dim element As Xml.XmlElement
             Dim TempValue As String
             Dim CurrentAttribute As String
 
@@ -1256,37 +1256,21 @@ Public Class AntRecord
                     If _DatabaseFields("originaltitle") = True Then
                         CurrentAttribute = "OriginalTitle"
                         TempValue = _InternetData(Grabber_Output.OriginalTitle)
-                        If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                            attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                            attr.Value = TempValue
-                            If attr.Value <> "" Then
-                                _XMLElement.Attributes.Append(attr)
-                            End If
-                        Else
-                            _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                        End If
                         title = TempValue
-                        TempValue = ""
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                     End If
                 End If
             Else
                 'If the Internet Lookup has failed, and the user has requested a Translated Title, use the Original Title instead:
-                If _DatabaseFields("translatedtitle") = True Then
-                    CurrentAttribute = "TranslatedTitle"
+                CurrentAttribute = "TranslatedTitle"
+                If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = GetTitleFromFilePath(_FilePath)
                     If _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
                         If _XMLElement.Attributes("OriginalTitle").Value.ToString <> String.Empty Then
                             TempValue = _XMLElement.Attributes("OriginalTitle").Value.ToString
                         End If
                     End If
-
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
             End If
 
@@ -1307,11 +1291,10 @@ Public Class AntRecord
                 _XMLElement = VerifyElement(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
             Else
                 _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : No originaltitle or translatedtitle activated"
-
             End If
 
-            If _DatabaseFields("formattedtitle") = True Then
-                CurrentAttribute = "FormattedTitle"
+            CurrentAttribute = "FormattedTitle"
+            If IsUpdateRequested(CurrentAttribute) = True Then
                 If _XMLElement.Attributes("TranslatedTitle") IsNot Nothing Then
                     'TempValue = _XMLElement.Attributes("TranslatedTitle").Value
                     'Guzzi: Reverted Change to use InetNames for dupe checks to avoid overwriting old DB entries
@@ -1321,49 +1304,23 @@ Public Class AntRecord
                     'Guzzi: Reverted Change to use InetNames for dupe checks to avoid overwriting old DB entries
                     TempValue = Grabber.GrabUtil.TitleToArchiveName(_XMLElement.Attributes("OriginalTitle").Value)
                 End If
-                If TempValue.Trim <> String.Empty Then
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("date") = True And (_FilePath.Length > 0) Then
+            CurrentAttribute = "Date"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "Date")
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    CurrentAttribute = "Date"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
-            TempValue = ""
 
-
-            If _DatabaseFields("checked") = True Then
+            CurrentAttribute = "Checked"
+            If IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = CurrentSettings.Check_Field_Handling.ToString
-                CurrentAttribute = "Checked"
-                If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                    attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                    attr.Value = TempValue
-                    _XMLElement.Attributes.Append(attr)
-                Else
-                    _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("medialabel") = True And (_FilePath.Length > 0) Then
-                CurrentAttribute = "MediaLabel"
+            CurrentAttribute = "MediaLabel"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 If _Read_DVD_Label = True Then
                     Dim DrivePath As String = String.Empty
                     Dim DriveLetter As String = String.Empty
@@ -1390,110 +1347,55 @@ Public Class AntRecord
                 Else
                     TempValue = _MediaLabel
                 End If
-
-                If Not String.IsNullOrEmpty(TempValue) And Not TempValue.Contains("ERROR") Then
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
-
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("mediatype") = True Then
-                If Not String.IsNullOrEmpty(_MediaType) Then
-                    CurrentAttribute = "MediaType"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _MediaType
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _MediaType
-                    End If
-                    TempValue = ""
-                End If
+            CurrentAttribute = "MediaType"
+            If Not String.IsNullOrEmpty(_MediaType) And IsUpdateRequested(CurrentAttribute) = True Then
+                TempValue = _MediaType
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If (_FilePath.Length > 0) Then
-                If Not String.IsNullOrEmpty(_OverridePath) Then
-                    TempValue = _OverridePath
-                Else
-                    TempValue = _FilePath
-                End If
-                If CurrentSettings.Store_Short_Names_Only Then
-                    If TempValue.Contains("\") Then
-                        TempValue = TempValue.Substring(TempValue.LastIndexOf("\") + 1)
-                    End If
-                End If
-                CurrentAttribute = _SourceField
-                If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) Then
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
+            ' Sourcefile - field depends on configuration
+            CurrentAttribute = _SourceField
+            If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) Then
+                If (_FilePath.Length > 0) Then
+                    If Not String.IsNullOrEmpty(_OverridePath) Then
+                        TempValue = _OverridePath
                     Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
+                        TempValue = _FilePath
                     End If
+                    If CurrentSettings.Store_Short_Names_Only Then
+                        If TempValue.Contains("\") Then
+                            TempValue = TempValue.Substring(TempValue.LastIndexOf("\") + 1)
+                        End If
+                    End If
+
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
             End If
-
-            TempValue = ""
 
             CurrentAttribute = "Subtitles"
-            If UpdateRequested(CurrentAttribute) = True Then
-                If (_FilePath.Length > 0) Then
-                    TempValue = GetFileData(_FilePath, "textstreamlanguagelist")
-                    'CreateOrUpdateAttribute(CurrentAttribute, TempValue)
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        If attr.Value <> "" And Not attr.Value.Contains("ERROR") Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                    TempValue = ""
-                End If
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
+                TempValue = GetFileData(_FilePath, "textstreamlanguagelist")
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("languages") = True And (_FilePath.Length > 0) Then
+            CurrentAttribute = "Languages"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "audiostreamlanguagelist")
-                CurrentAttribute = "Languages"
-                If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                    attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                    attr.Value = TempValue
-                    If attr.Value <> "" And Not attr.Value.Contains("ERROR") Then
-                        _XMLElement.Attributes.Append(attr)
-                    End If
-                Else
-                    _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("resolution") = True And (_FilePath.Length > 0) Then
+            CurrentAttribute = "Resolution"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "Resolution")
-                CurrentAttribute = "Resolution"
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("length") = True Then
+            CurrentAttribute = "Length"
+            If IsUpdateRequested(CurrentAttribute) = True Then
                 'TempValue = fnGetFileData(_FilePath, "Runtime")
-                CurrentAttribute = "Length"
                 If _AllFilesPath <> "" Then
                     For Each wfile As String In _AllFilesPath.Split(";")
                         If GetFileData(wfile, "runtime") <> "" And Not GetFileData(wfile, "runtime").Contains("ERROR") Then
@@ -1509,105 +1411,41 @@ Public Class AntRecord
                 Else
                     TempValue = GetFileData(_FilePath, "runtime")
                 End If
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("videoformat") = True And (_FilePath.Length > 0) Then
+            CurrentAttribute = "VideoFormat"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "VideoFormat")
-                CurrentAttribute = "VideoFormat"
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("videobitrate") = True And (_FilePath.Length > 0) Then
+            CurrentAttribute = "VideoBitrate"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "VideoBitrate")
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    CurrentAttribute = "VideoBitrate"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("audioformat") = True And (_FilePath.Length > 0) Then
+            CurrentAttribute = "AudioFormat"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "AudioFormat")
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    CurrentAttribute = "AudioFormat"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("audiobitrate") = True And (_FilePath.Length > 0) Then
+            CurrentAttribute = "AudioBitrate"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "AudioBitrate")
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    CurrentAttribute = "AudioBitrate"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("framerate") = True And (_FilePath.Length > 0) Then
+            CurrentAttribute = "Framerate"
+            If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "Framerate")
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    CurrentAttribute = "Framerate"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("size") = True Then
-                CurrentAttribute = "Size"
+            CurrentAttribute = "Size"
+            If IsUpdateRequested(CurrentAttribute) = True Then
                 If _AllFilesPath <> "" Then
                     For Each wfile As String In _AllFilesPath.Split(";")
                         If GetFileData(wfile, "FileSize") <> "" And Not GetFileData(wfile, "FileSize").Contains("ERROR") Then
@@ -1622,20 +1460,11 @@ Public Class AntRecord
                     TempValue = GetFileData(_FilePath, "FileSize")
                 End If
 
-                If TempValue <> "" And Not TempValue.Contains("ERROR") Then
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
-                End If
-                TempValue = ""
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
-            If _DatabaseFields("disks") = True Then
-                CurrentAttribute = "Disks"
+            CurrentAttribute = "Disks"
+            If IsUpdateRequested(CurrentAttribute) = True Then
                 Dim Diskcount As Integer = 0
                 If _AllFilesPath <> "" Then
                     For Each wfile As String In _AllFilesPath.Split(";")
@@ -1645,38 +1474,22 @@ Public Class AntRecord
                     Diskcount = 1
                 End If
 
-                If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                    attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                    attr.Value = Diskcount
-                    _XMLElement.Attributes.Append(attr)
-                Else
-                    _XMLElement.Attributes(CurrentAttribute).Value = Diskcount
-                End If
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
 
-            If _DatabaseFields("description") = True And CurrentSettings.Use_Page_Grabber = True Or UsePageGrabber = True Then
+            CurrentAttribute = "Description" ' for nfo reading - test only
+            If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Page_Grabber = True Or UsePageGrabber = True Then
                 'Now update the Description with the description from HTML-File, if set to do so:
-                CurrentAttribute = "Description"
                 TempValue = GetHTMLFileData(_FilePath, "description")
-                If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                    attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                    attr.Value = GetHTMLFileData(_FilePath, "description")
-                    If attr.Value <> "" Then
-                        _XMLElement.Attributes.Append(attr)
-                    End If
-                Else
-                    _XMLElement.Attributes(CurrentAttribute).Value = GetHTMLFileData(_FilePath, "description")
-                End If
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
 
             If _InternetLookupOK = False Then
                 'Additional attempt to load picture with folder.jpg settings, in case Internet lookup fails
-                If _DatabaseFields("picture") = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
-                    CurrentAttribute = "Picture"
-
-
+                CurrentAttribute = "Picture"
+                If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
                     'GUZZI: Added to try to get Picture with Moviename.JPG !!!
                     'Dim ReturnValue As String
                     'Dim Filename As String = FilePath
@@ -1700,31 +1513,18 @@ Public Class AntRecord
                     End Try
 
                     If FileExists = True Then
-                        If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                            attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                            attr.Value = NewFileName
-                            _XMLElement.Attributes.Append(attr)
-                        Else
-                            _XMLElement.Attributes(CurrentAttribute).Value = NewFileName
-                        End If
+                        TempValue = NewFileName
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                     End If
-
                 End If
-
             Else
+
                 'Load all the Internet data...
                 title = _InternetData(Grabber_Output.OriginalTitle)
-                If _DatabaseFields("translatedtitle") = True Then
-                    CurrentAttribute = "TranslatedTitle"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.TranslatedTitle)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.TranslatedTitle)
-                    End If
+                CurrentAttribute = "TranslatedTitle"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.TranslatedTitle)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
                 'Finally, check to see if there's a group name attached to this, and apply it.
@@ -1738,140 +1538,68 @@ Public Class AntRecord
                     End If
                 End If
 
-                If _DatabaseFields("year") = True Then
-                    CurrentAttribute = "Year"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Year)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Year)
-                    End If
+                CurrentAttribute = "Year"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Year)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("country") = True Then
-                    CurrentAttribute = "Country"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Country)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Country)
-                    End If
+                CurrentAttribute = "Country"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Country)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("category") = True Then
-                    CurrentAttribute = "Category"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Category)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Category)
-                    End If
+                CurrentAttribute = "Category"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Category)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("url") = True Then
-                    CurrentAttribute = "URL"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.URL)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.URL)
-                    End If
+                CurrentAttribute = "URL"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.URL)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-
-                If _DatabaseFields("rating") = True Then
-                    CurrentAttribute = "Rating"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Rating)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Rating)
-                    End If
+                CurrentAttribute = "Rating"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Rating)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("director") = True Then
-                    CurrentAttribute = "Director"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Director)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Director)
-                    End If
+                CurrentAttribute = "Director"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Director)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("producer") = True Then
-                    CurrentAttribute = "Producer"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Producer)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Producer)
-                    End If
+                CurrentAttribute = "Producer"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Producer)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("actors") = True Then
-                    CurrentAttribute = "Actors"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Actors)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Actors)
-                    End If
+                CurrentAttribute = "Actors"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Actors)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("description") = True Then
-                    CurrentAttribute = "Description"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Description)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Description)
-                    End If
+                CurrentAttribute = "Description"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Description)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("comments") = True Then
-                    CurrentAttribute = "Comments"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = _InternetData(Grabber_Output.Comments)
-                        If attr.Value <> "" Then
-                            _XMLElement.Attributes.Append(attr)
-                        End If
-                    Else
-                        ' _XMLElement.Attributes(CurrentAttribute).Value = ""
-                        _XMLElement.Attributes(CurrentAttribute).Value = _InternetData(Grabber_Output.Comments) ' Guzzi addded grabbed commment
-                    End If
+                CurrentAttribute = "Comments"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Comments)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("picture") = True Then
-                    CurrentAttribute = "Picture"
+                CurrentAttribute = "Picture"
+                If IsUpdateRequested(CurrentAttribute) = True Then
                     If CurrentSettings.Use_Folder_Dot_Jpg = True Then
                         'First check to see if the file exists in a nice safe way:
                         Dim FileExists As Boolean = False
@@ -1942,13 +1670,8 @@ Public Class AntRecord
 
                         'Now check if we have a valid link; and use it.
                         If FileExists = True Then
-                            If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                                attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                                attr.Value = NewFileName
-                                _XMLElement.Attributes.Append(attr)
-                            Else
-                                _XMLElement.Attributes(CurrentAttribute).Value = NewFileName
-                            End If
+                            TempValue = NewFileName
+                            CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                         End If
 
                     Else
@@ -1995,13 +1718,8 @@ Public Class AntRecord
                             End If
 
                             If PicturePathToSave <> String.Empty Then
-                                If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                                    attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                                    attr.Value = PicturePathToSave
-                                    _XMLElement.Attributes.Append(attr)
-                                Else
-                                    _XMLElement.Attributes(CurrentAttribute).Value = PicturePathToSave
-                                End If
+                                TempValue = PicturePathToSave
+                                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                             End If
                         End If
                     End If
@@ -2009,82 +1727,40 @@ Public Class AntRecord
 
 
                 ' Guzzi: Added Languages, Writer, Certification, Tagline
-                If _DatabaseFields("languages") = True Then
-                    CurrentAttribute = "Languages"
-                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
-                        element = _XMLDoc.CreateElement(CurrentAttribute)
-                        element.InnerText = _InternetData(Grabber_Output.Language)
-                        If element.InnerText <> "" Then
-                            _XMLElement.AppendChild(element)
-                        End If
-                    Else
-                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Language)
-                    End If
+                CurrentAttribute = "Languages"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Language)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("certification") = True Then
-                    CurrentAttribute = "Certification"
-                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
-                        element = _XMLDoc.CreateElement(CurrentAttribute)
-                        element.InnerText = _InternetData(Grabber_Output.Certification)
-                        If element.InnerText <> "" Then
-                            _XMLElement.AppendChild(element)
-                        End If
-                    Else
-                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Certification)
-                    End If
+                CurrentAttribute = "Certification"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Certification)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("writer") = True Then
-                    CurrentAttribute = "Writer"
-                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
-                        element = _XMLDoc.CreateElement(CurrentAttribute)
-                        element.InnerText = _InternetData(Grabber_Output.Writer)
-                        If element.InnerText <> "" Then
-                            _XMLElement.AppendChild(element)
-                        End If
-                    Else
-                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Writer)
-                    End If
+                CurrentAttribute = "Writer"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Writer)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue)
                 End If
 
-                If _DatabaseFields("tagline") = True Then
-                    CurrentAttribute = "Tagline"
-                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
-                        element = _XMLDoc.CreateElement(CurrentAttribute)
-                        element.InnerText = _InternetData(Grabber_Output.Tagline)
-                        If element.InnerText <> "" Then
-                            _XMLElement.AppendChild(element)
-                        End If
-                    Else
-                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Tagline)
-                    End If
+                CurrentAttribute = "Tagline"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Tagline)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue)
                 End If
 
-                'If _DatabaseFields("imdbrank") = True Then
-                '    CurrentAttribute = "ImdbRank"
-                '    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
-                '        element = _XMLDoc.CreateElement(CurrentAttribute)
-                '        element.InnerText = _InternetData(Grabber_Output.IMDBrank)
-                '        If element.InnerText <> "" Then
-                '            _XMLElement.AppendChild(element)
-                '        End If
-                '    Else
-                '        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.IMDBrank)
-                '    End If
+                ' CurrentAttribute = "ImdbRank"
+                'If IsUpdateRequested(CurrentAttribute) = True Then
+                '    TempValue = _InternetData(Grabber_Output.IMDBrank)
+                '    CreateOrUpdateElement(CurrentAttribute, TempValue)
                 'End If
 
-                If _DatabaseFields("studio") = True Then
-                    CurrentAttribute = "Studio"
-                    If _XMLElement.Item(CurrentAttribute) Is Nothing Then
-                        element = _XMLDoc.CreateElement(CurrentAttribute)
-                        element.InnerText = _InternetData(Grabber_Output.Studio)
-                        If element.InnerText <> "" Then
-                            _XMLElement.AppendChild(element)
-                        End If
-                    Else
-                        _XMLElement.Item(CurrentAttribute).InnerText = _InternetData(Grabber_Output.Studio)
-                    End If
+                CurrentAttribute = "Studio"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.Studio)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue)
                 End If
             End If
 
@@ -2139,27 +1815,60 @@ Public Class AntRecord
         End Try
     End Sub
 
-    Public Function UpdateRequested(ByVal currentAttribute As String) As Boolean
+    Private Function IsUpdateRequested(ByVal currentAttribute As String) As Boolean
+        Dim attr As Xml.XmlAttribute
+        Dim element As Xml.XmlElement
         If _DatabaseFields(currentAttribute.ToLower) = False Then
             Return False
+        Else
+            If OnlyAddMissingData = True Then
+                If _XMLElement.Attributes(currentAttribute) Is Nothing And _XMLElement.Item(currentAttribute) Is Nothing Then
+                    Return True
+                Else
+                    attr = _XMLElement.Attributes(currentAttribute)
+                    element = _XMLElement.Item(currentAttribute)
+                    If attr.Value Is Nothing And element.InnerText Is Nothing Then
+                        Return True
+                    ElseIf attr.Value = "" And element.InnerText = "" Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                End If
+            Else
+                Return True
+            End If
         End If
-
-        Return True
-
     End Function
 
-    Public Sub CreateOrUpdateAttribute(ByVal currentAttribute As String, ByVal currentValue As String)
+    Private Sub CreateOrUpdateAttribute(ByVal currentAttribute As String, ByRef currentValue As String)
         Dim attr As Xml.XmlAttribute
-        If _XMLElement.Attributes(currentAttribute) Is Nothing Then
-            attr = _XMLDoc.CreateAttribute(currentAttribute)
-            attr.Value = currentValue
-            If attr.Value <> "" And Not attr.Value.Contains("ERROR") Then
-                _XMLElement.Attributes.Append(attr)
-            End If
-        Else
-            _XMLElement.Attributes(currentAttribute).Value = currentValue
-        End If
 
+        If currentValue <> "" Then
+            If _XMLElement.Attributes(currentAttribute) Is Nothing Then
+                attr = _XMLDoc.CreateAttribute(currentAttribute)
+                attr.Value = currentValue
+                _XMLElement.Attributes.Append(attr)
+            Else
+                _XMLElement.Attributes(currentAttribute).Value = currentValue
+            End If
+        End If
+        currentValue = ""
+    End Sub
+
+    Private Sub CreateOrUpdateElement(ByVal currentAttribute As String, ByRef currentValue As String)
+        Dim element As Xml.XmlElement
+
+        If currentValue <> "" Then
+            If _XMLElement.Item(currentAttribute) Is Nothing Then
+                element = _XMLDoc.CreateElement(currentAttribute)
+                element.InnerText = currentValue
+                _XMLElement.AppendChild(element)
+            Else
+                _XMLElement.Item(currentAttribute).InnerText = currentValue
+            End If
+        End If
+        currentValue = ""
     End Sub
 
     Public Sub UpdateElement()
