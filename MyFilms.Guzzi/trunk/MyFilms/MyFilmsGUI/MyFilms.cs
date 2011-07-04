@@ -5517,7 +5517,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
             LogMyFilms.Debug("selecting (grabb_Internet_Informations) with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
           }
-          else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
+          else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString())) // Master Title
           {
             title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString();
             LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (master)title = '" + title.ToString() + "'");
@@ -5601,7 +5601,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgYesNo.DoModal(GetID);
           if (dlgYesNo.IsConfirmed)
             //MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString(), false);
-            MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString(), false); // Fixed, as it should delete content of mastertitle...
+            MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString(), false); // Fixed, as it should delete content of master title...
           break;
 
         case "togglewatchedstatus":
@@ -8234,7 +8234,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //Search Fanarts
       string wtitle2 = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
       LogMyFilms.Debug("(FindFanart) - wtitle old = '" + wtitle2 + "'");
-      //Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
+      //Added by Guzzi to fix Fanartproblem when Master Title is set to OriginalTitle
       if (MyFilms.conf.StrTitle1 != "OriginalTitle")
       {
         if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)

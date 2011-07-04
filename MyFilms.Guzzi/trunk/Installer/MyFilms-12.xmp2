@@ -7,8 +7,8 @@
         <ParentGroup />
         <DisplayName>MyFilms Plugin</DisplayName>
         <DefaulChecked>true</DefaulChecked>
-        <Description>MyFilms Plugin Suite:
-Main Components (Plugin, AMC Updater, Grabber Interface, Default Skinfiles, Grabber Scripts, Default Config Files)
+        <Description>My Films Plugin Suite:
+Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Grabber Scripts, Default Config Files)
 Required!</Description>
         <Files>
           <Items>
@@ -2953,7 +2953,7 @@ Required!</Description>
         <ParentGroup />
         <DisplayName>SampleMovies</DisplayName>
         <DefaulChecked>false</DefaulChecked>
-        <Description>SampleMovies to test AMCupdater and for Skinning Setup</Description>
+        <Description>SampleMovies to test AMC Updater and for Skinning Setup</Description>
         <Files>
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
@@ -3089,7 +3089,7 @@ Required!</Description>
         <ParentGroup />
         <DisplayName>AddOns</DisplayName>
         <DefaulChecked>false</DefaulChecked>
-        <Description>AddOns: Updated DLLs for Plugins not yet public available</Description>
+        <Description>AddOns: Updated DLLs for Plugins not yet publically available</Description>
         <Files>
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
@@ -3106,7 +3106,7 @@ Required!</Description>
         <ParentGroup>Default</ParentGroup>
         <DisplayName>AMCinstaller</DisplayName>
         <DefaulChecked>true</DefaulChecked>
-        <Description>AMCinstaller</Description>
+        <Description>AMC Installer</Description>
         <Files>
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
@@ -3309,7 +3309,7 @@ public class Script
             <SectionParam Name="Readme text">
               <Value>MyFilms plugin requires a minimal setup to work.
 
-Please refer to the Wiki onlinedocumentation.</Value>
+Please refer to the Wiki online documentation.</Value>
               <ValueType>String</ValueType>
               <Description>The readme text</Description>
             </SectionParam>
@@ -3397,7 +3397,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
           <Revision>9</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To use MyFilms online help and preview IMDB pages, BrowseTheWeb version 0.30 (0.3.0) or higher must be installed.</Message>
+        <Message>To use My Films online help and preview IMDB pages, BrowseTheWeb version 0.30 (0.3.0) or higher must be installed.</Message>
         <Name>Browse The Web</Name>
       </DependencyItem>
       <DependencyItem>
@@ -3435,7 +3435,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
           <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To use subtitle SubCentral Plugin with min. version 1.1.0.0 is required.</Message>
+        <Message>To use subtitles the SubCentral Plugin with min. version 1.1.0.0 is required.</Message>
         <Name>SubCentral</Name>
       </DependencyItem>
       <DependencyItem>
@@ -3454,7 +3454,7 @@ Please refer to the Wiki onlinedocumentation.</Value>
           <Revision>99999</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>requires MediaPortal min version 1.1.6.27644.</Message>
+        <Message>My Films requires MediaPortal min version 1.1.6.27644 (1.2.0 beta).</Message>
         <Name>MediaPortal</Name>
       </DependencyItem>
     </Items>
@@ -6548,14 +6548,14 @@ Please refer to the Wiki onlinedocumentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{149dcc98-4369-4ff6-a1be-bbeeee88407e}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{c54e40b9-aec4-4c97-9207-05ffabb15b28}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{8c31f58f-c353-4da0-97a5-676ee785a8ac}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{b37f5300-a63b-4447-b379-2efce6492272}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

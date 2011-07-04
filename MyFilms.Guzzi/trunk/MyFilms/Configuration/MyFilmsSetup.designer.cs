@@ -641,7 +641,7 @@
           this.ButCopy.TabIndex = 76;
           this.ButCopy.Text = "Copy";
           this.ToolTip1.SetToolTip(this.ButCopy, "Creates a copy of the current selected configuration.\r\nCan be used e.g. if you wa" +
-                  "nt to have more than one \r\nconfigurations available withdifferent settings or fi" +
+                  "nt to have more than one \r\nconfiguration available with different settings or fi" +
                   "lters, \r\nbut based on same movie DB.");
           this.ButCopy.UseVisualStyleBackColor = true;
           this.ButCopy.Click += new System.EventHandler(this.ButCopy_Click);
@@ -751,8 +751,9 @@
           this.groupBox9.TabIndex = 0;
           this.groupBox9.TabStop = false;
           this.groupBox9.Text = "Tags ...";
-          this.ToolTip1.SetToolTip(this.groupBox9, "With those options, you can use specifics Tags DVDP\'s Fields\r\nand store either wi" +
-                  "th Genre field either in another field\r\nof the generated DB.");
+          this.ToolTip1.SetToolTip(this.groupBox9, "To merge the DVD Profiler Tags field data with the My Films category field, enabl" +
+                  "e this option. \r\nAlternatively you may use the general External Catalogs options" +
+                  " to add Tags to another field.");
           // 
           // chkDVDprofilerMergeWithGenreField
           // 
@@ -971,10 +972,10 @@
           this.check_WOL_Userdialog.Enabled = false;
           this.check_WOL_Userdialog.Location = new System.Drawing.Point(27, 59);
           this.check_WOL_Userdialog.Name = "check_WOL_Userdialog";
-          this.check_WOL_Userdialog.Size = new System.Drawing.Size(343, 17);
+          this.check_WOL_Userdialog.Size = new System.Drawing.Size(346, 17);
           this.check_WOL_Userdialog.TabIndex = 75;
-          this.check_WOL_Userdialog.Text = "Enable WakeOnLAN UserDialog (Autoinvoke WOL when disabled)";
-          this.ToolTip1.SetToolTip(this.check_WOL_Userdialog, "Enable WakeOnLAN UserDialog whn launching a movie");
+          this.check_WOL_Userdialog.Text = "Enable WakeOnLAN User Dialog (Autoinvoke WOL when disabled)";
+          this.ToolTip1.SetToolTip(this.check_WOL_Userdialog, "Enable WakeOnLAN User Dialog when launching a movie");
           this.check_WOL_Userdialog.UseVisualStyleBackColor = true;
           // 
           // check_WOL_enable
@@ -1179,7 +1180,7 @@
           this.btnLogoClearCache.Size = new System.Drawing.Size(116, 21);
           this.btnLogoClearCache.TabIndex = 102;
           this.btnLogoClearCache.Text = "Clear Logo Cache";
-          this.ToolTip1.SetToolTip(this.btnLogoClearCache, "If you have redefined logo parameters like spacing, you shoudl clear the logo cac" +
+          this.ToolTip1.SetToolTip(this.btnLogoClearCache, "If you have redefined logo parameters like spacing, you should clear the logo cac" +
                   "he,\r\nso the logos will be rebuild with the new parameters");
           this.btnLogoClearCache.UseVisualStyleBackColor = true;
           this.btnLogoClearCache.Click += new System.EventHandler(this.btnLogoClearCache_Click);
@@ -1226,7 +1227,7 @@
           this.chkDfltFanartImageAll.Size = new System.Drawing.Size(67, 30);
           this.chkDfltFanartImageAll.TabIndex = 79;
           this.chkDfltFanartImageAll.Text = "Use for \r\nall Views";
-          this.ToolTip1.SetToolTip(this.chkDfltFanartImageAll, "Use default fanart image for all grouped views like persons, date added, etc.");
+          this.ToolTip1.SetToolTip(this.chkDfltFanartImageAll, "Use default fanart image for all group views like persons, date added, etc.");
           this.chkDfltFanartImageAll.UseVisualStyleBackColor = true;
           // 
           // label48
@@ -1246,8 +1247,8 @@
           this.chkDfltFanartImage.Size = new System.Drawing.Size(114, 30);
           this.chkDfltFanartImage.TabIndex = 77;
           this.chkDfltFanartImage.Text = "Use default image \r\nfor missing fanart";
-          this.ToolTip1.SetToolTip(this.chkDfltFanartImage, "Use default fanart image if no fanart found for movies and grouped views like yea" +
-                  "r, genre, country.");
+          this.ToolTip1.SetToolTip(this.chkDfltFanartImage, "Use default fanart image if no fanart found for movies and group views like year," +
+                  " genre, country.");
           this.chkDfltFanartImage.UseVisualStyleBackColor = true;
           this.chkDfltFanartImage.CheckedChanged += new System.EventHandler(this.chkDfltFanartImage_CheckedChanged);
           // 
@@ -1408,7 +1409,7 @@
           this.btnResetThumbs.Size = new System.Drawing.Size(64, 36);
           this.btnResetThumbs.TabIndex = 76;
           this.btnResetThumbs.Text = "Reset Thumbs";
-          this.ToolTip1.SetToolTip(this.btnResetThumbs, "That Action\'ll remove all generated Thumbs for grouped views");
+          this.ToolTip1.SetToolTip(this.btnResetThumbs, "That action will remove all generated thumbs for group views");
           this.btnResetThumbs.UseVisualStyleBackColor = true;
           this.btnResetThumbs.Click += new System.EventHandler(this.btnResetThumbs_Click);
           // 
@@ -1499,7 +1500,7 @@
           // lblPictureHandling
           // 
           this.lblPictureHandling.AutoSize = true;
-          this.lblPictureHandling.Location = new System.Drawing.Point(508, 42);
+          this.lblPictureHandling.Location = new System.Drawing.Point(508, 43);
           this.lblPictureHandling.Name = "lblPictureHandling";
           this.lblPictureHandling.Size = new System.Drawing.Size(85, 13);
           this.lblPictureHandling.TabIndex = 96;
@@ -1608,7 +1609,7 @@
           this.btnResetThumbsArtist.Size = new System.Drawing.Size(64, 34);
           this.btnResetThumbsArtist.TabIndex = 99;
           this.btnResetThumbsArtist.Text = "Reset Thumbs";
-          this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, "That action\'ll remove all generated person image thumbs");
+          this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, "That action will remove all generated person image thumbs");
           this.btnResetThumbsArtist.UseVisualStyleBackColor = true;
           this.btnResetThumbsArtist.Click += new System.EventHandler(this.btnResetThumbsArtist_Click);
           // 
@@ -2135,7 +2136,7 @@
           this.AMCMovieScanPath.Name = "AMCMovieScanPath";
           this.AMCMovieScanPath.Size = new System.Drawing.Size(537, 20);
           this.AMCMovieScanPath.TabIndex = 81;
-          this.ToolTip1.SetToolTip(this.AMCMovieScanPath, "Enter the path(es) to your mediafiles.\r\nMore than one path, separated by semicolo" +
+          this.ToolTip1.SetToolTip(this.AMCMovieScanPath, "Enter the path(s) to your media files.\r\nMore than one path, separated by semicolo" +
                   "n, are allowed.");
           // 
           // btnCreateAMCDesktopIcon
@@ -2145,8 +2146,8 @@
           this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(143, 36);
           this.btnCreateAMCDesktopIcon.TabIndex = 78;
           this.btnCreateAMCDesktopIcon.Text = "Create Desktop Icon ";
-          this.ToolTip1.SetToolTip(this.btnCreateAMCDesktopIcon, "By creating a desktop icon you can launch AMC Updater directly \r\nfrom windows wih" +
-                  "tout first starting MyFilms setup.");
+          this.ToolTip1.SetToolTip(this.btnCreateAMCDesktopIcon, "By creating a desktop icon you can launch AMC Updater directly \r\nfrom Windows wit" +
+                  "hout first starting MyFilms setup.");
           this.btnCreateAMCDesktopIcon.UseVisualStyleBackColor = true;
           this.btnCreateAMCDesktopIcon.Click += new System.EventHandler(this.btnCreateAMCDesktopIcon_Click);
           // 
@@ -2584,7 +2585,7 @@
           this.Tab_Search.Size = new System.Drawing.Size(747, 354);
           this.Tab_Search.TabIndex = 9;
           this.Tab_Search.Text = "Sort/Search";
-          this.ToolTip1.SetToolTip(this.Tab_Search, "Setup for userdefined searches \r\nand userdefined sort items");
+          this.ToolTip1.SetToolTip(this.Tab_Search, "Setup for user defined searches \r\nand user defined sort items");
           this.Tab_Search.UseVisualStyleBackColor = true;
           // 
           // groupBox_SortByItem
@@ -2644,9 +2645,9 @@
           this.groupBoxSearchByProperties.TabIndex = 35;
           this.groupBoxSearchByProperties.TabStop = false;
           this.groupBoxSearchByProperties.Text = "Global Search by Properties";
-          this.ToolTip1.SetToolTip(this.groupBoxSearchByProperties, "In opposite to the \"User defined Search Items\", this is a more generic search \r\na" +
-                  "nd it is based on searching the whole catalog, including items, that are not vis" +
-                  "ible in the current view\r\n");
+          this.ToolTip1.SetToolTip(this.groupBoxSearchByProperties, "In opposition to the \"User defined Search Items\", this is a more generic search \r" +
+                  "\nand it is based on searching the whole catalog, including items, that are not v" +
+                  "isible in the current view\r\n");
           // 
           // AntSearchFieldReset
           // 
@@ -3543,7 +3544,7 @@
           this.Tab_Trailer.Size = new System.Drawing.Size(747, 354);
           this.Tab_Trailer.TabIndex = 7;
           this.Tab_Trailer.Text = "Trailer";
-          this.ToolTip1.SetToolTip(this.Tab_Trailer, "Setup for trailer options like search pathes and options for behaviour in GUI");
+          this.ToolTip1.SetToolTip(this.Tab_Trailer, "Setup for trailer options like search paths and options for behaviour in GUI");
           this.Tab_Trailer.UseVisualStyleBackColor = true;
           // 
           // groupBox24
@@ -3750,6 +3751,7 @@
           this.groupBox_Security.TabIndex = 75;
           this.groupBox_Security.TabStop = false;
           this.groupBox_Security.Text = "Security";
+          this.ToolTip1.SetToolTip(this.groupBox_Security, resources.GetString("groupBox_Security.ToolTip"));
           // 
           // label_Security
           // 
@@ -3810,9 +3812,7 @@
           this.groupBox_PreLaunchingCommand.TabIndex = 70;
           this.groupBox_PreLaunchingCommand.TabStop = false;
           this.groupBox_PreLaunchingCommand.Text = "Pre-Launching Command";
-          this.ToolTip1.SetToolTip(this.groupBox_PreLaunchingCommand, "You can define here a command batch file to be executed before\r\neach movie launch" +
-                  ". The following field give the item of your \r\ndatabase passed as  parameter to t" +
-                  "he command file.\r\n\r\nVery unused...");
+          this.ToolTip1.SetToolTip(this.groupBox_PreLaunchingCommand, resources.GetString("groupBox_PreLaunchingCommand.ToolTip"));
           // 
           // label39
           // 
@@ -3828,9 +3828,9 @@
           this.label38.AutoSize = true;
           this.label38.Location = new System.Drawing.Point(12, 22);
           this.label38.Name = "label38";
-          this.label38.Size = new System.Drawing.Size(70, 13);
+          this.label38.Size = new System.Drawing.Size(77, 13);
           this.label38.TabIndex = 38;
-          this.label38.Text = "Commandline";
+          this.label38.Text = "Command Line";
           // 
           // CmdPar
           // 
@@ -4356,7 +4356,7 @@
           this.SPicture.Size = new System.Drawing.Size(79, 58);
           this.SPicture.TabIndex = 85;
           this.SPicture.TabStop = false;
-          this.ToolTip1.SetToolTip(this.SPicture, "Click here to open filedialog and select image for logo");
+          this.ToolTip1.SetToolTip(this.SPicture, "Click here to open file dialog and select image for logo");
           this.SPicture.Click += new System.EventHandler(this.pictureBox_Click);
           // 
           // groupBox_DVDprofiler
@@ -4894,7 +4894,7 @@
           this.Tab_AMCupdater.Size = new System.Drawing.Size(747, 354);
           this.Tab_AMCupdater.TabIndex = 4;
           this.Tab_AMCupdater.Text = "Internet Grabbing";
-          this.Tab_AMCupdater.ToolTipText = "Setup for internetupdates and basic configuration for AMCupdater";
+          this.Tab_AMCupdater.ToolTipText = "Setup for internet updates and basic configuration for AMC Updater";
           this.Tab_AMCupdater.UseVisualStyleBackColor = true;
           // 
           // Tab_Update

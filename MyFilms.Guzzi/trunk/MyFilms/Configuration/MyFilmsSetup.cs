@@ -4703,7 +4703,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           AntStorage.Text = "Source";
           cbPictureHandling.Text = "Relative Path"; // set option for picture path handling (grabber)
           AntStorageTrailer.Text = "Borrower";
-          if (System.Windows.Forms.MessageBox.Show("Do you want to use OriginalTitle as Mastertitle ? \n(If you select no, TranslatedTitle will be used)", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+          if (System.Windows.Forms.MessageBox.Show("Do you want to use Original Title as Master Title ? \n(If you select no, Translated Title will be used)", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
           {
             AntTitle1.Text = "OriginalTitle";
             AntTitle2.Text = "TranslatedTitle";
