@@ -1121,16 +1121,8 @@ Public Class AntRecord
             'First ensure we have a valid movie number so the record can be saved:
             TempValue = _MovieNumber
             CurrentAttribute = "Number"
-            If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                attr.Value = TempValue
-                _XMLElement.Attributes.Append(attr)
-                'Removed by OH August 9th 2008 - why would we ever need to update this value?  If it is there, then good.  If not then it must be added.  But not updated!
-                'Else
-                '_XMLElement.Attributes(CurrentAttribute).Value = TempValue
-            End If
+            CreateOrUpdateElement(CurrentAttribute, TempValue)
             'LogEvent("ProcessFile() - get valid record number: '" & TempValue & "'", EventLogLevel.InformationalWithGrabbing)
-            TempValue = ""
             Dim title As String = ""
             Dim ttitle As String = ""
             Dim director As String = ""
@@ -1145,47 +1137,27 @@ Public Class AntRecord
                     If (_FilePath.Length > 0) Then
                         TempValue = GetTitleFromFilePath(_FilePath)
                         CurrentAttribute = "OriginalTitle"
-                        If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                            attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                            attr.Value = TempValue
-                            _XMLElement.Attributes.Append(attr)
-                        Else
-                            _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                        End If
                         title = TempValue
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                         'LogEvent("ProcessFile() - Import - hints - title: '" & title & "'", EventLogLevel.InformationalWithGrabbing)
-                        TempValue = ""
                     End If
                 End If
                 If _DatabaseFields("year") = True Then
                     'try to get year from filepath/name 
                     If (_FilePath.Length > 0) Then
                         TempValue = GetYearFromFilePath(_FilePath)
-                        CurrentAttribute = "Year"
-                        If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                            attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                            attr.Value = TempValue
-                            _XMLElement.Attributes.Append(attr)
-                        Else
-                            _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                        End If
                         _InternetSearchHintYear = TempValue
+                        CurrentAttribute = "Year"
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                         'LogEvent("ProcessFile() - Import - hints - year: '" & _InternetSearchHintYear & "'", EventLogLevel.InformationalWithGrabbing)
-                        TempValue = ""
                     End If
                 End If
                 'try to get IMDB Id from filepath/name
                 If (_FilePath.Length > 0) Then
                     TempValue = GetIMDBidFromFilePath(_FilePath)
                     CurrentAttribute = "IMDB_Id"
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                        attr.Value = TempValue
-                        _XMLElement.Attributes.Append(attr)
-                    Else
-                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
-                    End If
                     _InternetSearchHintIMDB_Id = TempValue
+                    CreateOrUpdateElement(CurrentAttribute, TempValue)
                     'LogEvent("ProcessFile() - Import - hints - imdb_id: '" & _InternetSearchHintIMDB_Id & "'", EventLogLevel.InformationalWithGrabbing)
                     TempValue = ""
                 End If
@@ -1473,7 +1445,7 @@ Public Class AntRecord
                 Else
                     Diskcount = 1
                 End If
-
+                TempValue = Diskcount.ToString
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
