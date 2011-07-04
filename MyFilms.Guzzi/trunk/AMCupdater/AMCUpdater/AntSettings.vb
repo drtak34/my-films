@@ -597,6 +597,27 @@ Public Class AntSettings
             SetAttribute("Rescan_Moved_Files", value)
         End Set
     End Property
+    Public Property Only_Add_Missing_Data() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Only_Add_Missing_Data").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Only_Add_Missing_Data", value)
+        End Set
+    End Property
+    Public Property Auto_Approve_Limits() As String
+        Get
+            Return ReadAttribute("Auto_Approve_Limits")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Auto_Approve_Limits", value)
+        End Set
+    End Property
 
     Public Sub New()
         Dim AppPath As String = My.Application.Info.DirectoryPath
@@ -685,6 +706,8 @@ Public Class AntSettings
         dt.Rows.Add("LogDirectory", "")
         dt.Rows.Add("Use_XBMC_nfo", "False")
         dt.Rows.Add("Use_Page_Grabber", "False")
+        dt.Rows.Add("Only_Add_Missing_Data", "False")
+        dt.Rows.Add("Auto_Approve_Limits", "")
 
         dsDefaultSettings.Tables.Add(dt)
         dsDefaultSettings.CaseSensitive = False

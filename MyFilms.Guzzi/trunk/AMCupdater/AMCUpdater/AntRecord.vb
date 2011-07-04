@@ -38,6 +38,8 @@ Public Class AntRecord
     Private _GroupName As String = String.Empty
     Private _DownloadImage As Boolean = False
     Private _MasterTitle As String = String.Empty
+    Private _OnlyAddMissing As Boolean = False
+
     '    Private _Process_Mode As Process_Mode_Names
     Private _DatabaseFields As New Hashtable
     Private Shared _InternetData() As String
@@ -372,6 +374,14 @@ Public Class AntRecord
         End Get
         Set(ByVal value As String)
             _MasterTitle = value
+        End Set
+    End Property
+    Public Property OnlyAddMissingData() As Boolean
+        Get
+            Return _OnlyAddMissing
+        End Get
+        Set(ByVal value As Boolean)
+            _OnlyAddMissing = value
         End Set
     End Property
 
@@ -1233,7 +1243,7 @@ Public Class AntRecord
 
             ' Check, if internetlookup has given proper title name - otherwise set to failed
             If _InternetLookupOK = True Then
-                TempValue = _InternetData(Grabber_Output.OriginalTitle) = ""
+                TempValue = _InternetData(Grabber_Output.OriginalTitle)
                 If TempValue Is Nothing Or TempValue = "" Then
                     _InternetLookupOK = False
                     _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : Matching the movie was successful, but grabber failed getting movie details data (title)"
@@ -1433,19 +1443,22 @@ Public Class AntRecord
 
             TempValue = ""
 
-            If _DatabaseFields("subtitles") = True And (_FilePath.Length > 0) Then
-                TempValue = GetFileData(_FilePath, "textstreamlanguagelist")
-                CurrentAttribute = "Subtitles"
-                If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                    attr = _XMLDoc.CreateAttribute(CurrentAttribute)
-                    attr.Value = TempValue
-                    If attr.Value <> "" And Not attr.Value.Contains("ERROR") Then
-                        _XMLElement.Attributes.Append(attr)
+            CurrentAttribute = "Subtitles"
+            If UpdateRequested(CurrentAttribute) = True Then
+                If (_FilePath.Length > 0) Then
+                    TempValue = GetFileData(_FilePath, "textstreamlanguagelist")
+                    'CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
+                        attr = _XMLDoc.CreateAttribute(CurrentAttribute)
+                        attr.Value = TempValue
+                        If attr.Value <> "" And Not attr.Value.Contains("ERROR") Then
+                            _XMLElement.Attributes.Append(attr)
+                        End If
+                    Else
+                        _XMLElement.Attributes(CurrentAttribute).Value = TempValue
                     End If
-                Else
-                    _XMLElement.Attributes(CurrentAttribute).Value = TempValue
+                    TempValue = ""
                 End If
-                TempValue = ""
             End If
 
             If _DatabaseFields("languages") = True And (_FilePath.Length > 0) Then
@@ -2124,6 +2137,29 @@ Public Class AntRecord
         Catch ex As Exception
             _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : " & ex.Message.ToString & ", " & ex.StackTrace.ToString
         End Try
+    End Sub
+
+    Public Function UpdateRequested(ByVal currentAttribute As String) As Boolean
+        If _DatabaseFields(currentAttribute.ToLower) = False Then
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+    Public Sub CreateOrUpdateAttribute(ByVal currentAttribute As String, ByVal currentValue As String)
+        Dim attr As Xml.XmlAttribute
+        If _XMLElement.Attributes(currentAttribute) Is Nothing Then
+            attr = _XMLDoc.CreateAttribute(currentAttribute)
+            attr.Value = currentValue
+            If attr.Value <> "" And Not attr.Value.Contains("ERROR") Then
+                _XMLElement.Attributes.Append(attr)
+            End If
+        Else
+            _XMLElement.Attributes(currentAttribute).Value = currentValue
+        End If
+
     End Sub
 
     Public Sub UpdateElement()

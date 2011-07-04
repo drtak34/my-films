@@ -943,6 +943,8 @@ Public Class Form1
             chkManualMissingFanartDownload.Visible = False
             chkManualMissingTrailer.Visible = False
 
+            chkManualUpdateRecordsOnlyMissingData.Visible = False
+
             If cbManualSelectOperation.SelectedItem = "Update Value" Then
                 lblManualEnterNewValue.Visible = True
                 txtManualNewValue.Visible = True
@@ -987,15 +989,13 @@ Public Class Form1
             ElseIf cbManualSelectOperation.SelectedItem = "Update Record" Then
                 grpManualInternetLookupSettings.Visible = True
                 lblManualDatabaseFieldsPrompt.Visible = True
+                chkManualUpdateRecordsOnlyMissingData.Visible = True
             ElseIf cbManualSelectOperation.SelectedItem = "Download Fanart" Then
                 chkManualMissingFanartDownload.Visible = True
-                grpManualInternetLookupSettings.Visible = True
+                'grpManualInternetLookupSettings.Visible = True
                 lblManualDatabaseFieldsPrompt.Visible = True
             ElseIf cbManualSelectOperation.SelectedItem = "Register Trailer" Then
                 chkManualMissingTrailer.Visible = True
-                chkManualMissingFanartDownload.Visible = False
-                grpManualInternetLookupSettings.Visible = False
-                lblManualDatabaseFieldsPrompt.Visible = False
             End If
         End If
         Me.ValidateChildren()
@@ -1885,6 +1885,7 @@ Public Class Form1
         CurrentSettings.Use_Page_Grabber = chkUsePageGrabber.Checked
         CurrentSettings.Parse_Subtitle_Files = chkParseSubtitleFiles.Checked
         CurrentSettings.Rescan_Moved_Files = chkRescanMovedFiles.Checked
+        CurrentSettings.Only_Add_Missing_Data = chkManualUpdateRecordsOnlyMissingData.Checked
 
         CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
         CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
@@ -2024,6 +2025,7 @@ Public Class Form1
             chkUsePageGrabber.Checked = CurrentSettings.Use_Page_Grabber
             chkParseSubtitleFiles.Checked = CurrentSettings.Parse_Subtitle_Files
             chkRescanMovedFiles.Checked = CurrentSettings.Rescan_Moved_Files
+            chkManualUpdateRecordsOnlyMissingData.Checked = CurrentSettings.Only_Add_Missing_Data
 
             txtManualExcludedMoviesPath.Text = CurrentSettings.Manual_Excluded_Movies_File
             txtManualInternetParserPath.Text = CurrentSettings.Manual_Internet_Parser_Path

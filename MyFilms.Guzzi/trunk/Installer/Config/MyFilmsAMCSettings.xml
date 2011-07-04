@@ -175,4 +175,10 @@
   <Values Option="Parse_Trailers">
     <Value></Value>
   </Values>
+  <Values Option="Only_Add_Missing_Data">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Auto_Approve_Limits">
+    <Value></Value>
+  </Values>
 </NewDataSet>

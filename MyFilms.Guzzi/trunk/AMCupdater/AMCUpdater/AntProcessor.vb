@@ -818,12 +818,11 @@ Public Class AntProcessor
                                 .GrabberOverrideGetRoles = CurrentSettings.Grabber_Override_GetRoles
                                 .GrabberOverridePersonLimit = CurrentSettings.Grabber_Override_PersonLimit
                                 .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
+                                .OnlyAddMissingData = CurrentSettings.Only_Add_Missing_Data ' added for "add missing data" mode"
 
                                 .ProcessFile(AntRecord.Process_Mode_Names.Update)
                                 .SaveProgress()
                             End With
-
-
 
                             If Ant.LastOutputMessage.StartsWith("ERROR") = True Then
                                 bgwManualUpdate.ReportProgress(ProcessCounter, Ant.LastOutputMessage)
@@ -834,7 +833,6 @@ Public Class AntProcessor
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "File Scanned for Data : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                 End If
                             End If
-
 
                         End If
                     Case "Download Fanart"
@@ -1910,6 +1908,7 @@ Public Class AntProcessor
                             .XMLFilePath = objSettings.XML_File
                             .MovieTitleHandling = objSettings.Movie_Title_Handling
                             .GroupName = row("GroupName").ToString
+                            .OnlyAddMissingData = False ' always add all selected data for new records
                         End With
 
                         If (row("Moved")) Then
