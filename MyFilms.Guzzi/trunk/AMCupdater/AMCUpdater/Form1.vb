@@ -3,6 +3,7 @@ Imports System.ComponentModel
 Imports System.Text
 Imports System.Security.Cryptography
 Imports System.Management
+Imports System.Windows.Forms
 Imports MediaPortal.Configuration
 
 Public Class Form1
@@ -814,10 +815,15 @@ Public Class Form1
     End Sub
 
     Private Sub btnManualSelectInternetParserPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualSelectInternetParserPath.Click
+        Dim currentPath As String
+        currentPath = txtManualInternetParserPath.Text
+        If currentPath.Contains(";") = True Then
+            currentPath.Substring(currentPath.IndexOf(";") + 1)
+        End If
         Try
             With OpenFileDialog1
                 .InitialDirectory = My.Application.Info.DirectoryPath
-                .FileName = ""
+                .FileName = currentPath
                 .CheckFileExists = True
                 .CheckPathExists = True
                 .DefaultExt = "xml"
@@ -847,6 +853,15 @@ Public Class Form1
     End Sub
 
     Private Sub btnManualSelectExcludedMoviesFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualSelectExcludedMoviesFile.Click
+
+
+
+
+
+
+
+
+
         Try
             With OpenFileDialog1
                 .InitialDirectory = My.Application.Info.DirectoryPath
@@ -2347,6 +2362,46 @@ Public Class Form1
             txtParserFilePathDisplay.Text = Path.GetFileName(txtParserFilePath.Text)
         Else
             txtParserFilePathDisplay.Text = ""
+        End If
+    End Sub
+
+    Private Sub btnManualExcludedMoviesFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualExcludedMoviesFileShow.Click
+        Dim t As String = txtManualExcludedMoviesPath.Text
+        Try
+            Process.Start(t)
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub btnExcludeFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileShow.Click
+        Dim t As String = txtExcludeFilePath.Text
+        Try
+            Process.Start(t)
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub btnExcludeFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileDelete.Click
+        Dim dialogResult As Windows.Forms.DialogResult = Windows.Forms.MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dialogResult = Windows.Forms.DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.DeleteFile(txtExcludeFilePath.Text)
+                MsgBox("File deleted !", MsgBoxStyle.Information)
+            Catch deleteException As Exception
+                MsgBox("An error occurred ! - Error: " + deleteException.Message, MsgBoxStyle.Exclamation)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnManualExcludedMoviesFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualExcludedMoviesFileDelete.Click
+        Dim dialogResult As Windows.Forms.DialogResult = Windows.Forms.MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dialogResult = Windows.Forms.DialogResult.OK Then
+            Try
+                My.Computer.FileSystem.DeleteFile(txtManualExcludedMoviesPath.Text)
+                MsgBox("File deleted !", MsgBoxStyle.Information)
+            Catch deleteException As Exception
+                MsgBox("An error occurred ! - Error: " + deleteException.Message, MsgBoxStyle.Exclamation)
+            End Try
         End If
     End Sub
 End Class

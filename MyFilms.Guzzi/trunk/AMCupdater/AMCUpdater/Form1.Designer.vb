@@ -29,10 +29,10 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -390,6 +390,11 @@ Partial Class Form1
         Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.GroupBox27 = New System.Windows.Forms.GroupBox
+        Me.btnManualExcludedMoviesFileShow = New System.Windows.Forms.Button
+        Me.btnManualExcludedMoviesFileDelete = New System.Windows.Forms.Button
+        Me.btnExcludeFileShow = New System.Windows.Forms.Button
+        Me.btnExcludeFileDelete = New System.Windows.Forms.Button
         Me.TabControl1.SuspendLayout()
         Me.Interactive.SuspendLayout()
         Me.GroupBox24.SuspendLayout()
@@ -441,6 +446,7 @@ Partial Class Form1
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox27.SuspendLayout()
         Me.SuspendLayout()
         '
         'FolderBrowserDialog1
@@ -486,29 +492,29 @@ Partial Class Form1
         Me.GroupBox24.Controls.Add(Me.Label1)
         Me.GroupBox24.Controls.Add(Me.txtMovieFolder)
         Me.GroupBox24.Controls.Add(Me.Label17)
-        Me.GroupBox24.Location = New System.Drawing.Point(11, 106)
+        Me.GroupBox24.Location = New System.Drawing.Point(11, 93)
         Me.GroupBox24.Name = "GroupBox24"
-        Me.GroupBox24.Size = New System.Drawing.Size(521, 102)
+        Me.GroupBox24.Size = New System.Drawing.Size(521, 88)
         Me.GroupBox24.TabIndex = 106
         Me.GroupBox24.TabStop = False
         Me.GroupBox24.Text = "Movie Folder(s) ..."
         '
         'txtOverridePath
         '
-        Me.txtOverridePath.Location = New System.Drawing.Point(12, 73)
+        Me.txtOverridePath.Location = New System.Drawing.Point(103, 60)
         Me.txtOverridePath.Name = "txtOverridePath"
-        Me.txtOverridePath.Size = New System.Drawing.Size(463, 20)
+        Me.txtOverridePath.Size = New System.Drawing.Size(372, 20)
         Me.txtOverridePath.TabIndex = 40
         Me.ToolTip1.SetToolTip(Me.txtOverridePath, resources.GetString("txtOverridePath.ToolTip"))
         '
         'lblOverridePath
         '
         Me.lblOverridePath.AutoSize = True
-        Me.lblOverridePath.Location = New System.Drawing.Point(11, 57)
+        Me.lblOverridePath.Location = New System.Drawing.Point(11, 63)
         Me.lblOverridePath.Name = "lblOverridePath"
-        Me.lblOverridePath.Size = New System.Drawing.Size(185, 13)
+        Me.lblOverridePath.Size = New System.Drawing.Size(71, 13)
         Me.lblOverridePath.TabIndex = 41
-        Me.lblOverridePath.Text = "Override path when writing to xml file :"
+        Me.lblOverridePath.Text = "Override path"
         '
         'btnSelectMovieFolder
         '
@@ -550,22 +556,18 @@ Partial Class Form1
         '
         'GroupBox23
         '
+        Me.GroupBox23.Controls.Add(Me.GroupBox27)
         Me.GroupBox23.Controls.Add(Me.txtParserFilePathDisplay)
-        Me.GroupBox23.Controls.Add(Me.chkImportOnInternetFailIgnoreWhenInteractive)
         Me.GroupBox23.Controls.Add(Me.cbTitleHandling)
         Me.GroupBox23.Controls.Add(Me.GroupBox26)
         Me.GroupBox23.Controls.Add(Me.Label43)
-        Me.GroupBox23.Controls.Add(Me.chkDontAskInteractive)
         Me.GroupBox23.Controls.Add(Me.Button1)
         Me.GroupBox23.Controls.Add(Me.btnSelectParserFile)
-        Me.GroupBox23.Controls.Add(Me.chkImportOnInternetFail)
         Me.GroupBox23.Controls.Add(Me.Label23)
         Me.GroupBox23.Controls.Add(Me.txtParserFilePath)
-        Me.GroupBox23.Controls.Add(Me.cbInternetLookupBehaviour)
-        Me.GroupBox23.Controls.Add(Me.Label24)
-        Me.GroupBox23.Location = New System.Drawing.Point(11, 214)
+        Me.GroupBox23.Location = New System.Drawing.Point(11, 187)
         Me.GroupBox23.Name = "GroupBox23"
-        Me.GroupBox23.Size = New System.Drawing.Size(521, 218)
+        Me.GroupBox23.Size = New System.Drawing.Size(521, 245)
         Me.GroupBox23.TabIndex = 104
         Me.GroupBox23.TabStop = False
         Me.GroupBox23.Text = "Internet Grabber Options ..."
@@ -573,15 +575,15 @@ Partial Class Form1
         'txtParserFilePathDisplay
         '
         Me.txtParserFilePathDisplay.Enabled = False
-        Me.txtParserFilePathDisplay.Location = New System.Drawing.Point(103, 21)
+        Me.txtParserFilePathDisplay.Location = New System.Drawing.Point(103, 17)
         Me.txtParserFilePathDisplay.Name = "txtParserFilePathDisplay"
-        Me.txtParserFilePathDisplay.Size = New System.Drawing.Size(180, 20)
+        Me.txtParserFilePathDisplay.Size = New System.Drawing.Size(135, 20)
         Me.txtParserFilePathDisplay.TabIndex = 62
         '
         'chkImportOnInternetFailIgnoreWhenInteractive
         '
         Me.chkImportOnInternetFailIgnoreWhenInteractive.AutoSize = True
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.Location = New System.Drawing.Point(320, 99)
+        Me.chkImportOnInternetFailIgnoreWhenInteractive.Location = New System.Drawing.Point(304, 57)
         Me.chkImportOnInternetFailIgnoreWhenInteractive.Name = "chkImportOnInternetFailIgnoreWhenInteractive"
         Me.chkImportOnInternetFailIgnoreWhenInteractive.Size = New System.Drawing.Size(196, 17)
         Me.chkImportOnInternetFailIgnoreWhenInteractive.TabIndex = 61
@@ -597,7 +599,7 @@ Partial Class Form1
         Me.cbTitleHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTitleHandling.FormattingEnabled = True
         Me.cbTitleHandling.Items.AddRange(New Object() {"File Name", "Folder Name", "Relative Name", "File Name + Internet Lookup", "Folder Name + Internet Lookup", "Relative Name + Internet Lookup"})
-        Me.cbTitleHandling.Location = New System.Drawing.Point(103, 81)
+        Me.cbTitleHandling.Location = New System.Drawing.Point(103, 43)
         Me.cbTitleHandling.Name = "cbTitleHandling"
         Me.cbTitleHandling.Size = New System.Drawing.Size(198, 21)
         Me.cbTitleHandling.TabIndex = 40
@@ -613,12 +615,12 @@ Partial Class Form1
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverridePersonLimit)
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideGetRoles)
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideLanguage)
-        Me.GroupBox26.Location = New System.Drawing.Point(8, 122)
+        Me.GroupBox26.Location = New System.Drawing.Point(8, 153)
         Me.GroupBox26.Name = "GroupBox26"
-        Me.GroupBox26.Size = New System.Drawing.Size(500, 86)
+        Me.GroupBox26.Size = New System.Drawing.Size(504, 86)
         Me.GroupBox26.TabIndex = 60
         Me.GroupBox26.TabStop = False
-        Me.GroupBox26.Text = "AMC Updater - Grabber Override Options ..."
+        Me.GroupBox26.Text = "Grabber Override Options ..."
         Me.ToolTip1.SetToolTip(Me.GroupBox26, resources.GetString("GroupBox26.ToolTip"))
         '
         'Label87
@@ -703,7 +705,7 @@ Partial Class Form1
         'Label43
         '
         Me.Label43.AutoSize = True
-        Me.Label43.Location = New System.Drawing.Point(11, 79)
+        Me.Label43.Location = New System.Drawing.Point(11, 41)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(86, 26)
         Me.Label43.TabIndex = 39
@@ -712,7 +714,7 @@ Partial Class Form1
         'chkDontAskInteractive
         '
         Me.chkDontAskInteractive.AutoSize = True
-        Me.chkDontAskInteractive.Location = New System.Drawing.Point(320, 53)
+        Me.chkDontAskInteractive.Location = New System.Drawing.Point(304, 11)
         Me.chkDontAskInteractive.Name = "chkDontAskInteractive"
         Me.chkDontAskInteractive.Size = New System.Drawing.Size(129, 17)
         Me.chkDontAskInteractive.TabIndex = 59
@@ -722,7 +724,7 @@ Partial Class Form1
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(377, 21)
+        Me.Button1.Location = New System.Drawing.Point(377, 17)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(116, 20)
         Me.Button1.TabIndex = 51
@@ -732,7 +734,7 @@ Partial Class Form1
         'btnSelectParserFile
         '
         Me.btnSelectParserFile.CausesValidation = False
-        Me.btnSelectParserFile.Location = New System.Drawing.Point(320, 21)
+        Me.btnSelectParserFile.Location = New System.Drawing.Point(320, 17)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
         Me.btnSelectParserFile.Size = New System.Drawing.Size(32, 20)
         Me.btnSelectParserFile.TabIndex = 5
@@ -742,7 +744,7 @@ Partial Class Form1
         'chkImportOnInternetFail
         '
         Me.chkImportOnInternetFail.AutoSize = True
-        Me.chkImportOnInternetFail.Location = New System.Drawing.Point(320, 76)
+        Me.chkImportOnInternetFail.Location = New System.Drawing.Point(304, 34)
         Me.chkImportOnInternetFail.Name = "chkImportOnInternetFail"
         Me.chkImportOnInternetFail.Size = New System.Drawing.Size(184, 17)
         Me.chkImportOnInternetFail.TabIndex = 0
@@ -753,7 +755,7 @@ Partial Class Form1
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(11, 24)
+        Me.Label23.Location = New System.Drawing.Point(11, 20)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(73, 13)
         Me.Label23.TabIndex = 42
@@ -761,9 +763,9 @@ Partial Class Form1
         '
         'txtParserFilePath
         '
-        Me.txtParserFilePath.Location = New System.Drawing.Point(103, 21)
+        Me.txtParserFilePath.Location = New System.Drawing.Point(103, 17)
         Me.txtParserFilePath.Name = "txtParserFilePath"
-        Me.txtParserFilePath.Size = New System.Drawing.Size(201, 20)
+        Me.txtParserFilePath.Size = New System.Drawing.Size(196, 20)
         Me.txtParserFilePath.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.txtParserFilePath, resources.GetString("txtParserFilePath.ToolTip"))
         Me.txtParserFilePath.Visible = False
@@ -772,7 +774,7 @@ Partial Class Form1
         '
         Me.cbInternetLookupBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInternetLookupBehaviour.FormattingEnabled = True
-        Me.cbInternetLookupBehaviour.Location = New System.Drawing.Point(103, 51)
+        Me.cbInternetLookupBehaviour.Location = New System.Drawing.Point(95, 30)
         Me.cbInternetLookupBehaviour.Name = "cbInternetLookupBehaviour"
         Me.cbInternetLookupBehaviour.Size = New System.Drawing.Size(198, 21)
         Me.cbInternetLookupBehaviour.TabIndex = 9
@@ -781,7 +783,7 @@ Partial Class Form1
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(11, 47)
+        Me.Label24.Location = New System.Drawing.Point(6, 25)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(85, 26)
         Me.Label24.TabIndex = 51
@@ -796,7 +798,7 @@ Partial Class Form1
         Me.GroupBox17.Controls.Add(Me.chkPurgeMissing)
         Me.GroupBox17.Controls.Add(Me.chkOverwriteXML)
         Me.GroupBox17.Controls.Add(Me.chkBackupXMLFirst)
-        Me.GroupBox17.Location = New System.Drawing.Point(11, 15)
+        Me.GroupBox17.Location = New System.Drawing.Point(11, 6)
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.Size = New System.Drawing.Size(521, 85)
         Me.GroupBox17.TabIndex = 103
@@ -1140,6 +1142,8 @@ Partial Class Form1
         '
         'GroupBox7
         '
+        Me.GroupBox7.Controls.Add(Me.btnExcludeFileDelete)
+        Me.GroupBox7.Controls.Add(Me.btnExcludeFileShow)
         Me.GroupBox7.Controls.Add(Me.btnSelectPersonArtworkFolder)
         Me.GroupBox7.Controls.Add(Me.Label28)
         Me.GroupBox7.Controls.Add(Me.txtPersonArtworkFolder)
@@ -1219,7 +1223,7 @@ Partial Class Form1
         '
         Me.txtExcludeFilePath.Location = New System.Drawing.Point(6, 72)
         Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
-        Me.txtExcludeFilePath.Size = New System.Drawing.Size(464, 20)
+        Me.txtExcludeFilePath.Size = New System.Drawing.Size(302, 20)
         Me.txtExcludeFilePath.TabIndex = 6
         Me.ToolTip1.SetToolTip(Me.txtExcludeFilePath, resources.GetString("txtExcludeFilePath.ToolTip"))
         '
@@ -2336,6 +2340,8 @@ Partial Class Form1
         '
         'GroupBox9
         '
+        Me.GroupBox9.Controls.Add(Me.btnManualExcludedMoviesFileDelete)
+        Me.GroupBox9.Controls.Add(Me.btnManualExcludedMoviesFileShow)
         Me.GroupBox9.Controls.Add(Me.txtManualXMLPath)
         Me.GroupBox9.Controls.Add(Me.Label20)
         Me.GroupBox9.Controls.Add(Me.Label40)
@@ -2379,7 +2385,7 @@ Partial Class Form1
         '
         Me.txtManualExcludedMoviesPath.Location = New System.Drawing.Point(8, 74)
         Me.txtManualExcludedMoviesPath.Name = "txtManualExcludedMoviesPath"
-        Me.txtManualExcludedMoviesPath.Size = New System.Drawing.Size(464, 20)
+        Me.txtManualExcludedMoviesPath.Size = New System.Drawing.Size(318, 20)
         Me.txtManualExcludedMoviesPath.TabIndex = 48
         '
         'btnManualSelectXMLFile
@@ -2905,26 +2911,26 @@ Partial Class Form1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5})
         Me.DataGridView1.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle17
         Me.DataGridView1.Location = New System.Drawing.Point(-2, 30)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle18
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 20
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -3953,26 +3959,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle19
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle20
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4022,6 +4028,56 @@ Partial Class Form1
         Me.DateAddedDataGridViewTextBoxColumn.Name = "DateAddedDataGridViewTextBoxColumn"
         Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
+        '
+        'GroupBox27
+        '
+        Me.GroupBox27.Controls.Add(Me.chkDontAskInteractive)
+        Me.GroupBox27.Controls.Add(Me.Label24)
+        Me.GroupBox27.Controls.Add(Me.chkImportOnInternetFailIgnoreWhenInteractive)
+        Me.GroupBox27.Controls.Add(Me.cbInternetLookupBehaviour)
+        Me.GroupBox27.Controls.Add(Me.chkImportOnInternetFail)
+        Me.GroupBox27.Location = New System.Drawing.Point(8, 70)
+        Me.GroupBox27.Name = "GroupBox27"
+        Me.GroupBox27.Size = New System.Drawing.Size(504, 78)
+        Me.GroupBox27.TabIndex = 63
+        Me.GroupBox27.TabStop = False
+        Me.GroupBox27.Text = "Importer Options ..."
+        '
+        'btnManualExcludedMoviesFileShow
+        '
+        Me.btnManualExcludedMoviesFileShow.Location = New System.Drawing.Point(416, 74)
+        Me.btnManualExcludedMoviesFileShow.Name = "btnManualExcludedMoviesFileShow"
+        Me.btnManualExcludedMoviesFileShow.Size = New System.Drawing.Size(56, 20)
+        Me.btnManualExcludedMoviesFileShow.TabIndex = 53
+        Me.btnManualExcludedMoviesFileShow.Text = "show"
+        Me.btnManualExcludedMoviesFileShow.UseVisualStyleBackColor = True
+        '
+        'btnManualExcludedMoviesFileDelete
+        '
+        Me.btnManualExcludedMoviesFileDelete.Location = New System.Drawing.Point(342, 74)
+        Me.btnManualExcludedMoviesFileDelete.Name = "btnManualExcludedMoviesFileDelete"
+        Me.btnManualExcludedMoviesFileDelete.Size = New System.Drawing.Size(56, 20)
+        Me.btnManualExcludedMoviesFileDelete.TabIndex = 54
+        Me.btnManualExcludedMoviesFileDelete.Text = "delete"
+        Me.btnManualExcludedMoviesFileDelete.UseVisualStyleBackColor = True
+        '
+        'btnExcludeFileShow
+        '
+        Me.btnExcludeFileShow.Location = New System.Drawing.Point(409, 72)
+        Me.btnExcludeFileShow.Name = "btnExcludeFileShow"
+        Me.btnExcludeFileShow.Size = New System.Drawing.Size(56, 20)
+        Me.btnExcludeFileShow.TabIndex = 56
+        Me.btnExcludeFileShow.Text = "show"
+        Me.btnExcludeFileShow.UseVisualStyleBackColor = True
+        '
+        'btnExcludeFileDelete
+        '
+        Me.btnExcludeFileDelete.Location = New System.Drawing.Point(333, 72)
+        Me.btnExcludeFileDelete.Name = "btnExcludeFileDelete"
+        Me.btnExcludeFileDelete.Size = New System.Drawing.Size(56, 20)
+        Me.btnExcludeFileDelete.TabIndex = 57
+        Me.btnExcludeFileDelete.Text = "delete"
+        Me.btnExcludeFileDelete.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -4123,6 +4179,8 @@ Partial Class Form1
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox27.ResumeLayout(False)
+        Me.GroupBox27.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4485,4 +4543,9 @@ Partial Class Form1
     Friend WithEvents chkImportOnInternetFailIgnoreWhenInteractive As System.Windows.Forms.CheckBox
     Friend WithEvents txtParserFilePathDisplay As System.Windows.Forms.TextBox
     Friend WithEvents txtManualInternetParserPathDisplay As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox27 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnManualExcludedMoviesFileShow As System.Windows.Forms.Button
+    Friend WithEvents btnExcludeFileDelete As System.Windows.Forms.Button
+    Friend WithEvents btnExcludeFileShow As System.Windows.Forms.Button
+    Friend WithEvents btnManualExcludedMoviesFileDelete As System.Windows.Forms.Button
 End Class
