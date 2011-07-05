@@ -455,6 +455,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     System.ComponentModel.BackgroundWorker bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
     // System.ComponentModel.BackgroundWorker bgOnPageLoad = null;
 
+    private static FileSystemWatcher FSwatcher = new FileSystemWatcher();
+
     public delegate void DelegateUpdateProgress(string message);
     public static void UpdateMyProgressbar(string message)
     {
@@ -504,9 +506,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //AMCupdaterStartEventHandler();
 
       // Initialize Backgroundworker
-      this.InitializeBackgroundWorker();
-      LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
+      InitializeBackgroundWorker();
 
+      // Initialize Filesysstemwatcher
+      InitFSwatcher();
+
+      LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
     }
 
@@ -7588,7 +7593,87 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (bgIsOnlineCheck == null) bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
       bgIsOnlineCheck.DoWork += new DoWorkEventHandler(bgIsOnlineCheck_DoWork);
       bgIsOnlineCheck.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgIsOnlineCheck_RunWorkerCompleted);
+
     }
+
+      
+      private static void InitFSwatcher()
+      {
+        // Init FileSystem Watcher
+
+        // ***** Change this as required
+        FSwatcher.Path = @"\\myServer\c$\test\";
+        FSwatcher.IncludeSubdirectories = true;
+        //FSwatcher.InternalBufferSize = 64;
+        // For this example, I only care about when new files are
+        // created
+        FSwatcher.NotifyFilter = NotifyFilters.LastWrite;
+        FSwatcher.Filter = "*.txt";
+
+        // Add event handlers: 1 for the event raised when a file
+        // is created, and 1 for when it detects an error.
+        FSwatcher.Changed += new FileSystemEventHandler(NewFile);
+        FSwatcher.Error += new ErrorEventHandler(WatcherError);
+
+        //FSwatcher.Changed += new FileSystemEventHandler(FSW_Changed);
+        //FSwatcher.Created += new FileSystemEventHandler(FSW_Created);
+        //FSwatcher.Deleted += new FileSystemEventHandler(FSW_Deleted);
+        //FSwatcher.Renamed += new RenamedEventHandler(FSW_Renamed);
+
+        // Begin watching.
+        FSwatcher.EnableRaisingEvents = true;
+      }
+    
+    // Define the found event handler.
+      private static void NewFile(object source, FileSystemEventArgs e)
+      {
+        LogMyFilms.Debug("A new file has been found! Filename: '" + e.FullPath + "'");
+         //File.Delete(e.FullPath);
+      }
+
+      // The error event handler
+      private static void WatcherError(object source, ErrorEventArgs e)
+      {
+         Exception watchException = e.GetException();
+         LogMyFilms.Debug("A FileSystemWatcher error has occurred: " + watchException.Message);
+         // We need to create new version of the object because the old one is now corrupted
+         FSwatcher = new FileSystemWatcher();
+         while (!FSwatcher.EnableRaisingEvents)
+         {
+            try
+            {
+              // This will throw an error at the watcher.NotifyFilter line if it can't get the path.
+             InitFSwatcher();
+             LogMyFilms.Debug("I'm Back!!");
+            }
+            catch
+            {
+              // Sleep for a bit; otherwise, it takes a bit of processor time
+              System.Threading.Thread.Sleep(5000);
+            }
+         }
+      }
+
+      private static void FSW_Renamed(object sender, RenamedEventArgs e)
+      {
+        LogMyFilms.Debug("Umbenannt: " + e.Name);
+      }
+
+      private static void FSW_Deleted(object sender, FileSystemEventArgs e)
+      {
+        LogMyFilms.Debug("Gelöscht: " + e.Name);
+      }
+
+      private static void FSW_Created(object sender, FileSystemEventArgs e)
+      {
+        LogMyFilms.Debug("Erstellt: " + e.Name);
+      }
+
+      private static void FSW_Changed(object sender, FileSystemEventArgs e)
+      {
+        LogMyFilms.Debug("Geändert: " + e.Name);
+      }
+
 
     //*****************************************************************************************
     //*  Update Database in batch mode                                                        *
