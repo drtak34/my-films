@@ -1112,22 +1112,22 @@ Public Class AntRecord
         _LastOutputMessage = ""
         'LogEvent("ProcessFile() - Start !", EventLogLevel.InformationalWithGrabbing)
         Try
-
-            Dim attr As Xml.XmlAttribute
+            'Dim attr As Xml.XmlAttribute
             'Dim element As Xml.XmlElement
-            Dim TempValue As String
             Dim CurrentAttribute As String
+            Dim TempValue As String
 
-            'First ensure we have a valid movie number so the record can be saved:
-            TempValue = _MovieNumber
-            CurrentAttribute = "Number"
-            CreateOrUpdateElement(CurrentAttribute, TempValue)
-            'LogEvent("ProcessFile() - get valid record number: '" & TempValue & "'", EventLogLevel.InformationalWithGrabbing)
             Dim title As String = ""
             Dim ttitle As String = ""
             Dim director As String = ""
             Dim year As Int16 = 0
             Dim imdb_id As String = "" ' Guzzi Added for exact IMDB matching
+
+            'First ensure we have a valid movie number so the record can be saved:
+            CurrentAttribute = "Number"
+            TempValue = _MovieNumber
+            CreateOrUpdateElement(CurrentAttribute, TempValue)
+            'LogEvent("ProcessFile() - get valid record number: '" & TempValue & "'", EventLogLevel.InformationalWithGrabbing)
 
             If (ProcessMode = Process_Mode_Names.Import) Then
                 'Second get a decent Movie Title which we can then use for Internet Lookups as well as the Original Title field.

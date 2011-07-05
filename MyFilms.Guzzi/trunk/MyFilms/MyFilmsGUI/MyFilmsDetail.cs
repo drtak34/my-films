@@ -60,7 +60,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using MediaInfo = MyFilmsPlugin.MyFilms.Utils.MediaInfo;
-  using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
+  // using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
 
     /// <summary>
     /// Summary description for GUIMesFilms.
@@ -2581,7 +2581,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             try
             {
                 // CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits);
-              bool success = VideoThumbCreator.CreateVideoThumb(fileName, tempImage, true, false, columns, rows, false, "Cover");
+              bool success = Grabber.ThumbCreator.CreateVideoThumb(fileName, tempImage, true, false, columns, rows, false, "Cover");
                 if (!success)
                 {
                   LogMyFilms.Debug("(CreateThumbFromMovie): 'CreateVideoThumb' was NOT successful!");

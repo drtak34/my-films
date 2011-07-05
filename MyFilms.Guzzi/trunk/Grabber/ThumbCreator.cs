@@ -1,37 +1,19 @@
-#region Copyright (C) 2005-2010 Team MediaPortal
+﻿using System;
+using System.Collections.Generic;
+// using System.Linq;
+using System.Text;
 
-// Copyright (C) 2005-2010 Team MediaPortal
-// http://www.team-mediaportal.com
-// 
-// MediaPortal is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 2 of the License, or
-// (at your option) any later version.
-// 
-// MediaPortal is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with MediaPortal. If not, see <http://www.gnu.org/licenses/>.
-
-#endregion
-
-namespace MyFilmsPlugin.MyFilms.Utils
+namespace Grabber
 {
-  using System;
   using System.Globalization;
   using System.IO;
-  using System.Threading;
   using System.Runtime.CompilerServices;
+  using System.Threading;
 
   using MediaPortal.Configuration;
-  using MediaPortal.Profile;
   using MediaPortal.Services;
   using MediaPortal.Util;
-
-  public class VideoThumbCreator
+  public class ThumbCreator
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     private static string ExtractApp = "mtn.exe";
@@ -55,7 +37,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     [MethodImpl(MethodImplOptions.Synchronized)]
     public static bool CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits, int Columns, int Rows, bool doShareThumb, string ImageType)
     {
-      
+
       PreviewColumns = Columns;
       PreviewRows = Rows;
       LeaveShareThumb = doShareThumb;
@@ -67,8 +49,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
       {
         // ToDo: Set Resolution Params to FullHD
       }
-      
-      LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb); 
+
+      LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows. Share thumb = {2}", PreviewColumns, PreviewRows, LeaveShareThumb);
       //if (NeedsConfigRefresh)
 
       if (String.IsNullOrEmpty(aVideoPath) || String.IsNullOrEmpty(aThumbPath))
@@ -264,4 +246,5 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     #endregion
   }
+
 }
