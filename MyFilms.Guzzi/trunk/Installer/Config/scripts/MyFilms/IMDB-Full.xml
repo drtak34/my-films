@@ -3,6 +3,7 @@
   <Section>
     <DBName>IMDB-Full</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
+    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_Exact.Matches_x007C_Popular.Titles_x007C_Partial.Matches_x007C_Approx.Matches</KeyStartList>
@@ -53,7 +54,7 @@
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
-      <KeyStartRate Param1="" Param2="">_x003C_span_x0020_class_x003D__x0022_rating-rating_x0022__x003E_</KeyStartRate>
+      <KeyStartRate Param1="" Param2="">_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_rating-rating_x0022__x003E_._x002A__x003F__x0022__x003E_</KeyStartRate>
       <KeyEndRate>_x003C_span</KeyEndRate>
       <KeyRateIndex />
       <KeyRatePage />

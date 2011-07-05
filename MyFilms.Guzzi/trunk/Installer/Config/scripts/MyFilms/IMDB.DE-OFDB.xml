@@ -3,6 +3,8 @@
   <Section>
     <DBName>IMDB.DE with OFDB</DBName>
     <URLPrefix>http://www.imdb.de</URLPrefix>
+    <Mapping />
+    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.imdb.de_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_eistgesuchte.Titel_x007C_bereinstimmung</KeyStartList>
@@ -38,11 +40,11 @@
       <KeyEndOTitle>_x0022_</KeyEndOTitle>
       <KeyOTitleIndex />
       <KeyOTitlePage />
-      <KeyStartTTitle Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h5_x003E_._x002A_Auch_x0020_bekannt_x0020_als._x002A__x003F__x005B__x005E__x003C__x005D__x002A__x003C__x002F_h5_x003E_._x002A__x003F_</KeyStartTTitle>
-      <KeyEndTTitle>_x003C__x002F_table_x003E_</KeyEndTTitle>
+      <KeyStartTTitle Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x003C_titel_x003E_</KeyStartTTitle>
+      <KeyEndTTitle>_x003C__x002F_titel_x003E_</KeyEndTTitle>
       <KeyTTitleRegExp>_x003C_td_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F__x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_</KeyTTitleRegExp>
       <KeyTTitleIndex />
-      <KeyTTitlePage>URL_x0020_Redirection_x0020_Title</KeyTTitlePage>
+      <KeyTTitlePage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyTTitlePage>
       <KeyTTitleMaxItems>_x0039_99</KeyTTitleMaxItems>
       <KeyTTitleLanguage>Deutschland</KeyTTitleLanguage>
       <KeyTTitleLanguageAll>USA_x002C__x0020_Argentina_x002C__x0020_Austria_x002C__x0020_Belgium_x002C__x0020_Brazil_x002C__x0020_Croatia_x002C__x0020_Czech_x0020_Republic_x002C__x0020_Estonia_x002C__x0020_Finland_x002C__x0020_France_x002C__x0020_Germany_x002C__x0020_Italy_x002C__x0020_Japan_x002C__x0020_Mexico_x002C__x0020_Poland_x002C__x0020_Portugal_x002C__x0020_Romania_x002C__x0020_Slovakia_x002C__x0020_Spain_x002C__x0020_Sweden_x002C__x0020_Turkey_x002C__x0020_Uruguay_x002C__x0020_Denmark_x002C__x0020_Greece_x002C__x0020_Norway_x002C__x0020_Russia_x002C__x0020_Canada_x002C__x0020_Hungary_x002C__x0020_Estonia_x002C__x0020_Slovenia</KeyTTitleLanguageAll>
@@ -159,7 +161,7 @@
       <KeyIMDB_RankIndex />
       <KeyIMDB_RankPage />
       <KeyStartIMDB_Id Param1="" Param2="">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.de_x002F_title_x002F_</KeyStartIMDB_Id>
-      <KeyEndIMDB_Id>_x002F__x0022_</KeyEndIMDB_Id>
+      <KeyEndIMDB_Id>_x002F_</KeyEndIMDB_Id>
       <KeyIMDB_IdIndex />
       <KeyIMDB_IdPage />
       <KeyStartTMDB_Id Param1="" Param2="" />
