@@ -509,7 +509,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitializeBackgroundWorker();
 
       // Initialize Filesysstemwatcher
-      InitFSwatcher();
+      // InitFSwatcher();
 
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
@@ -7607,13 +7607,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //FSwatcher.InternalBufferSize = 64;
         // For this example, I only care about when new files are
         // created
-        FSwatcher.NotifyFilter = NotifyFilters.LastWrite;
+        // FSwatcher.NotifyFilter = NotifyFilters.LastWrite;
+        FSwatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.Size;
+
         FSwatcher.Filter = "*.txt";
 
         // Add event handlers: 1 for the event raised when a file
         // is created, and 1 for when it detects an error.
         FSwatcher.Changed += new FileSystemEventHandler(NewFile);
         FSwatcher.Error += new ErrorEventHandler(WatcherError);
+
+        //FSwatcher.Changed += new FileSystemEventHandler(watcher_Changed);
+        //FSwatcher.Created += new FileSystemEventHandler(watcher_Changed);
+        //FSwatcher.Deleted += new FileSystemEventHandler(watcher_Changed);
+        //FSwatcher.Renamed += new RenamedEventHandler(watcher_Renamed);
+        //FSwatcher.Error += new ErrorEventHandler(watcher_Error);
 
         //FSwatcher.Changed += new FileSystemEventHandler(FSW_Changed);
         //FSwatcher.Created += new FileSystemEventHandler(FSW_Created);
