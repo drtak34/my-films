@@ -43,6 +43,7 @@ Public Class AntRecord
     '    Private _Process_Mode As Process_Mode_Names
     Private _DatabaseFields As New Hashtable
     Private Shared _InternetData() As String
+    Private Shared _MediaInfoData() As String
     Public ProhibitInternetLookup As Boolean
     Public UseXBMCnfo As Boolean
     Public UsePageGrabber As Boolean
@@ -113,6 +114,23 @@ Public Class AntRecord
         CertificationAllNames = 58
         CertificationAllValues = 59
     End Enum
+
+    Private Enum MediaInfo_Output
+        VideoFormat = 1
+        VideoBitrate = 2
+        Framerate = 3
+        Resolution = 4
+        AudioBitrate = 5
+        AudioFormat = 6
+        runtime = 7
+        filesize = 8
+        audiostreamcount = 9
+        audiostreamcodeclist = 10
+        audiostreamlanguagelist = 11
+        textstreamcodeclist = 12
+        textstreamlanguagelist = 13
+    End Enum
+
     Public Enum Process_Mode_Names
         Import
         Update

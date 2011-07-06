@@ -119,6 +119,8 @@ namespace Grabber_Interface
       if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms"))
       {
         openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
+        openFileDialog1.FileName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\*.xml";
+        openFileDialog1.RestoreDirectory = false;
       }
       else
       {
@@ -235,9 +237,9 @@ namespace Grabber_Interface
 
     private void button_Load_Click(object sender, EventArgs e)
     {
-      if (!TextURL.Text.Contains("#Search#"))
+      if (!TextURL.Text.Contains("#Search#") && !TextURL.Text.Contains("#Filename#") && !TextSearch.Text.Contains("\\"))
       {
-        MessageBox.Show("Please, replace search keyword by #Search# in URL !", "Error");
+        MessageBox.Show("Please, replace search keyword by #Search# in URL or use a media path for local grabbing in Testpage !", "Error");
         return;
       }
 
@@ -263,10 +265,12 @@ namespace Grabber_Interface
         int iEnd = -1;
         int iLength = 0;
 
-        if (TextURL.Text.StartsWith("http://") == false)
+        if (TextURL.Text.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
           TextURL.Text = "http://" + TextURL.Text;
-
-        strSearch = GrabUtil.encodeSearch(TextSearch.Text);
+        if (!TextSearch.Text.Contains("\\"))
+          strSearch = GrabUtil.encodeSearch(TextSearch.Text);
+        else 
+          strSearch = TextSearch.Text;
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
 
@@ -632,9 +636,7 @@ namespace Grabber_Interface
         DialogResult dlgResult = DialogResult.None;
         button_Preview.Enabled = true;
         dlgResult = MessageBox.Show("Grabber ERROR - check your definitions! \n\nException Message: " + ex.Message + "\nStacktrace: " + ex.StackTrace, "Error", MessageBoxButtons.OK);
-        if (dlgResult == DialogResult.OK)
-        {
-        }
+        if (dlgResult == DialogResult.OK) {}
       }
 
       for (int i = 0; i < listUrl.Count; i++)
@@ -3863,6 +3865,18 @@ namespace Grabber_Interface
         labelSearchPosition.Text = textBody.SelectionStart.ToString();
       else 
         labelSearchPosition.Text = "";
+    }
+
+    private void button_openMediafile_Click(object sender, EventArgs e)
+    {
+      openFileDialog1.RestoreDirectory = true;
+      openFileDialog1.Filter = "All Files (*.*)|*.*";
+      openFileDialog1.Title = "Open a media file for local grabbing";
+      if (openFileDialog1.ShowDialog() == DialogResult.OK)
+      {
+        TextSearch.Text = openFileDialog1.FileName;
+        // button_Load_Click(this, e);
+      }
     }
   }
 }
