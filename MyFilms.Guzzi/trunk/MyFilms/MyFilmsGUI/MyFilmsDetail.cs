@@ -870,11 +870,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "togglewatchedstatus":
                     if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
                     {
-                      MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
+                      // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
+                      MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, false);
                     }
                     else
                     {
-                      MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+                      // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+                      MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, true);
                     }
                     afficher_detail(true);
                     break;
@@ -1648,19 +1650,96 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Set an entry from the database to watched/unwatched
         //-------------------------------------------------------------------------------------------        
-        public static void Watched_Toggle(DataRow[] r1, int Index, bool watched)
+        // public static void Watched_Toggle(DataRow[] r1, int Index, bool watched)
+        public static void Watched_Toggle(int Index, bool watched)
         {
           if (watched)
           {
-            MyFilms.r[Index][MyFilms.conf.StrWatchedField] = "true";
-            LogMyFilms.Info("Database movie set 'watched' by setting '" + MyFilms.conf.StrWatchedField.ToString() + "' to '" + "true" + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+              SetWatchedCount(Index, MyFilms.conf.StrUserProfileName, 1); //set watchedcount for enhanced watched count handling to 1
+            else
+              MyFilms.r[Index][MyFilms.conf.StrWatchedField] = "true";
           }
           else
           {
-            MyFilms.r[Index][MyFilms.conf.StrWatchedField] = MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
-            LogMyFilms.Info("Database movie set 'watched' by setting '" + MyFilms.conf.StrWatchedField.ToString() + "' to '" + MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower() + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+              SetWatchedCount(Index, MyFilms.conf.StrUserProfileName, 0); //set watchedcount for enhanced watched count handling to 0
+            else
+              MyFilms.r[Index][MyFilms.conf.StrWatchedField] = MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
           }
+          LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField.ToString() + "' to '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
           Update_XML_database();
+        }
+
+
+
+        //-------------------------------------------------------------------------------------------
+        //  Set enhanced watch count
+        //-------------------------------------------------------------------------------------------        
+        private static void SetWatchedCount(int Index, string userprofilename, int count)
+        {
+          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
+          string newEnhancedWatchedValue = string.Empty;
+
+          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value
+          {
+            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in split)
+            {
+              if (s.Contains(":"))
+              {
+                string sNew = s;
+                string tempuser = s.Substring(0, s.IndexOf(":")); // extract userprofilename
+                string tempcount = s.Substring(s.IndexOf(":") + 1);
+                // int itempcount = 0;
+                if (tempuser == userprofilename) // Update Count Value
+                {
+                  // bool success = int.TryParse(tempcount, out itempcount);
+                  sNew = tempuser + ":" + count.ToString();
+                }
+                if (string.IsNullOrEmpty(newEnhancedWatchedValue))
+                  newEnhancedWatchedValue = sNew;
+                else
+                  newEnhancedWatchedValue += "|" + sNew;
+              }
+            }
+          }
+          else
+          {
+            if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":")) // add count value
+              newEnhancedWatchedValue = userprofilename + ":" + count.ToString();
+            else
+              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + count.ToString();
+          }
+          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //  Get enhanced watch count
+        //-------------------------------------------------------------------------------------------        
+        private static int GetWatchedCount(int Index, string userprofilename)
+        {
+          int count = 0;
+          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
+
+          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value
+          {
+            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in split)
+            {
+              if (s.Contains(":"))
+              {
+                string tempuser = s.Substring(0, s.IndexOf(":")); // extract userprofilename
+                string tempcount = s.Substring(s.IndexOf(":") + 1);
+                if (tempuser == userprofilename) // Update Count Value
+                {
+                  bool success = int.TryParse(tempcount, out count);
+                  if (!success) count = 0;
+                }
+              }
+            }
+          }
+          return count;
         }
 
         //-------------------------------------------------------------------------------------------

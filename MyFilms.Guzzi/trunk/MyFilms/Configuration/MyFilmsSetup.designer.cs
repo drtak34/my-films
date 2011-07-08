@@ -264,7 +264,7 @@
           this.UserProfileName = new System.Windows.Forms.TextBox();
           this.label19 = new System.Windows.Forms.Label();
           this.cbWatched = new System.Windows.Forms.ComboBox();
-          this.checkWatchedInProfile = new System.Windows.Forms.CheckBox();
+          this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
           this.CheckWatched = new System.Windows.Forms.CheckBox();
           this.groupBox_AntUpdatingItems = new System.Windows.Forms.GroupBox();
           this.label46 = new System.Windows.Forms.Label();
@@ -2374,7 +2374,7 @@
           this.groupBox2.Controls.Add(this.UserProfileName);
           this.groupBox2.Controls.Add(this.label19);
           this.groupBox2.Controls.Add(this.cbWatched);
-          this.groupBox2.Controls.Add(this.checkWatchedInProfile);
+          this.groupBox2.Controls.Add(this.chkEnhancedWatchedStatusHandling);
           this.groupBox2.Controls.Add(this.CheckWatched);
           this.groupBox2.Location = new System.Drawing.Point(17, 116);
           this.groupBox2.Name = "groupBox2";
@@ -2417,18 +2417,19 @@
           // Label_UserProfileName
           // 
           this.Label_UserProfileName.AutoSize = true;
-          this.Label_UserProfileName.Location = new System.Drawing.Point(88, 117);
+          this.Label_UserProfileName.Location = new System.Drawing.Point(28, 120);
           this.Label_UserProfileName.Name = "Label_UserProfileName";
-          this.Label_UserProfileName.Size = new System.Drawing.Size(92, 13);
+          this.Label_UserProfileName.Size = new System.Drawing.Size(125, 13);
           this.Label_UserProfileName.TabIndex = 72;
-          this.Label_UserProfileName.Text = "User Profile Name";
+          this.Label_UserProfileName.Text = "Active User Profile Name";
           // 
           // UserProfileName
           // 
-          this.UserProfileName.Location = new System.Drawing.Point(186, 114);
+          this.UserProfileName.Location = new System.Drawing.Point(186, 117);
           this.UserProfileName.Name = "UserProfileName";
           this.UserProfileName.Size = new System.Drawing.Size(162, 20);
           this.UserProfileName.TabIndex = 71;
+          this.ToolTip1.SetToolTip(this.UserProfileName, resources.GetString("UserProfileName.ToolTip"));
           // 
           // label19
           // 
@@ -2447,18 +2448,16 @@
           this.cbWatched.Size = new System.Drawing.Size(123, 21);
           this.cbWatched.TabIndex = 73;
           // 
-          // checkWatchedInProfile
+          // chkEnhancedWatchedStatusHandling
           // 
-          this.checkWatchedInProfile.AutoSize = true;
-          this.checkWatchedInProfile.Location = new System.Drawing.Point(10, 97);
-          this.checkWatchedInProfile.Name = "checkWatchedInProfile";
-          this.checkWatchedInProfile.Size = new System.Drawing.Size(338, 17);
-          this.checkWatchedInProfile.TabIndex = 70;
-          this.checkWatchedInProfile.Text = "Update the movie status in the userprofile when movie is launched";
-          this.ToolTip1.SetToolTip(this.checkWatchedInProfile, "Select this option if you want to update the watched status in the\r\nuserprofile. " +
-                  "Requires a userprofilename to choose.\r\nTo be updated each time a movie is launch" +
-                  "ed.");
-          this.checkWatchedInProfile.UseVisualStyleBackColor = true;
+          this.chkEnhancedWatchedStatusHandling.AutoSize = true;
+          this.chkEnhancedWatchedStatusHandling.Location = new System.Drawing.Point(10, 98);
+          this.chkEnhancedWatchedStatusHandling.Name = "chkEnhancedWatchedStatusHandling";
+          this.chkEnhancedWatchedStatusHandling.Size = new System.Drawing.Size(200, 17);
+          this.chkEnhancedWatchedStatusHandling.TabIndex = 70;
+          this.chkEnhancedWatchedStatusHandling.Text = "Enhanced Watched Status Handling";
+          this.ToolTip1.SetToolTip(this.chkEnhancedWatchedStatusHandling, resources.GetString("chkEnhancedWatchedStatusHandling.ToolTip"));
+          this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
           // 
           // CheckWatched
           // 
@@ -5250,7 +5249,7 @@
         private TextBox UserProfileName;
         private Label label19;
         private ComboBox cbWatched;
-        private CheckBox checkWatchedInProfile;
+        private CheckBox chkEnhancedWatchedStatusHandling;
         private CheckBox CheckWatched;
         private GroupBox groupBoxUpdateByProperties;
         private Button AntUpdFieldReset;

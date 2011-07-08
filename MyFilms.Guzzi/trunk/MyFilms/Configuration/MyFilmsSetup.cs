@@ -94,7 +94,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               //hide a tab by removing it from the TabPages collection
               this.tabPageSave = General.TabPages[10];
               this.General.TabPages.Remove(this.tabPageSave); // Disable Trakt Tab, as it's not yet implemented
-              this.checkWatchedInProfile.Visible = false; // Disable Watched options for Userprofiles, as it's not yet implemented
+              this.chkEnhancedWatchedStatusHandling.Visible = false; // Disable Watched options for Userprofiles, as it's not yet implemented
               this.Label_UserProfileName.Visible = false;
               this.UserProfileName.Visible = false;
               this.SearchSubDirsTrailer.Visible = false; // Disable Trailer options, that are not yet implemented
@@ -989,6 +989,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseListviewForGroups", chkUseListviewForGroups.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", textBoxGlobalUnwatchedOnlyValue.Text);
+            
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "EnhancedWatchedStatusHandling", chkEnhancedWatchedStatusHandling.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UserProfileName", UserProfileName.Text);
+          
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckMediaOnStart", chkScanMediaOnStart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AllowTraktSync", cbAllowTraktSync.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", chkOnlyTitle.Checked);
@@ -1419,6 +1423,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkUseListviewForGroups.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseListviewForGroups", true);
             chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", false);
             textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", "false");
+
+            chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "EnhancedWatchedStatusHandling", false);
+            UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UserProfileName", "Global");
+
             chkScanMediaOnStart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckMediaOnStart", false);
             cbAllowTraktSync.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AllowTraktSync", false);
             chkOnlyTitle.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "OnlyTitleList", false);
@@ -1750,6 +1758,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkScanMediaOnStart.Checked = false;
             cbAllowTraktSync.Checked = false;
             textBoxGlobalUnwatchedOnlyValue.Text = "false";
+            chkEnhancedWatchedStatusHandling.Checked = false;
+            UserProfileName.Text = string.Empty;
             chkOnlyTitle.Checked = false;
             chkWindowsFileDialog.Checked = false;
             //chkGrabber.Checked = false;

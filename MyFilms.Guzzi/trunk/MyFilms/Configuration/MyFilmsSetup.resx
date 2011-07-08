@@ -438,6 +438,28 @@ You will have the option in the GUI to switch to "unwatched movies only" - based
     <value>In opposition to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
 The difference is, you can't predefine a value for the update - but will always get a user dialog prefilled with the current value to change the content.</value>
   </data>
+  <data name="textBoxGlobalUnwatchedOnlyValue.ToolTip" xml:space="preserve">
+    <value>By Default, unwatched items are identified by having either "false" or "" (empty) in the related field.
+The field used for watched / unwatched status can be configured in the Update Tab.
+
+However, you can define a value other than that, if you require it.</value>
+  </data>
+  <data name="UserProfileName.ToolTip" xml:space="preserve">
+    <value>You can set a "User Profile Name" that will be used for watched status handling.
+This is useful, if you want the watched status kept separately for different users.
+If you checked "Enhanced Watched Status handling" you can select the user grom global settings in MyFilms GUI.
+The user "global" is always existing and is counting global watched status.</value>
+  </data>
+  <data name="chkEnhancedWatchedStatusHandling.ToolTip" xml:space="preserve">
+    <value>Select this option if you want to update the watched status field with "enhanced watched status info".
+It requires the field to be able to store text infos (e.g. borrowers field).
+Make sure, you don't share the field with other functions.
+If checked, watched status will be stored with extended info:
+- Watched count "global"
+- Watched count in usercontext (if a usercontext is set)
+Watched count in usercontext requires a userprofilename to choose.
+To be updated each time a movie is launched.</value>
+  </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
     <value>This option allows AMC users to update field info for storing your "watched status".
 
@@ -446,12 +468,6 @@ You can choose to update this field when starting a movie or when playback is fi
 You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
 However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
-  </data>
-  <data name="textBoxGlobalUnwatchedOnlyValue.ToolTip" xml:space="preserve">
-    <value>By Default, unwatched items are identified by having either "false" or "" (empty) in the related field.
-The field used for watched / unwatched status can be configured in the Update Tab.
-
-However, you can define a value other than that, if you require it.</value>
   </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 

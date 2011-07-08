@@ -137,6 +137,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrWatchedField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WatchedField", "Checked"); // Defaults to "Checked", if no value set, as it's most used in ANT like that
                 StrSuppressField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressField", string.Empty);
                 StrSuppressValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressValue", string.Empty);
+
+                StrEnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "EnhancedWatchedStatusHandling", false);
+                StrUserProfileName = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UserProfileName", "Global");
+
                 StrECoptionStoreTaglineInDescription = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionStoreTaglineInDescription", false);
                 // Common EC options
                 bool addTagline = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ECoptionAddTagline", false);
@@ -589,6 +593,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strSuppress; }
             set { strSuppress = value; }
         }
+
+        private bool strEnhancedWatchedStatusHandling = false;
+        public bool StrEnhancedWatchedStatusHandling
+        {
+            get { return strEnhancedWatchedStatusHandling; }
+            set { strEnhancedWatchedStatusHandling = value; }
+        }
+
+        private string strUserProfileName = string.Empty;
+        public string StrUserProfileName
+        {
+            get { return strUserProfileName; }
+            set { strUserProfileName = value; }
+        }
+    
         private bool strECoptionStoreTaglineInDescription = false;
         public bool StrECoptionStoreTaglineInDescription
         {
@@ -635,6 +654,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             get { return strIdentLabel; }
             set { strIdentLabel = value; }
         }
+
         private string strlabel1 = string.Empty;
         public string Strlabel1
         {
@@ -1405,6 +1425,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WLayOut", MyFilms.conf.StrLayOut);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "LastID", MyFilms.conf.LastID);
             XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "SearchHistory", MyFilms.conf.StrSearchHistory);
+            XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
 
             switch (MyFilms.conf.StrFileType)
             {

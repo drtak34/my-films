@@ -2070,12 +2070,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           //if (sr["Checked"].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue) // changed to take setup config into consideration
-          if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
-            if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+          if (conf.StrEnhancedWatchedStatusHandling)
+          {
+            if (EnhancedWatchedCount(sr[conf.StrWatchedField].ToString(), conf.StrUserProfileName) > 0) 
               item.IsPlayed = true;
-          if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
-            if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
-              item.IsPlayed = true;
+          }
+          else
+          {
+            if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
+              if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+                item.IsPlayed = true;
+            if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
+              if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
+                item.IsPlayed = true;
+          }
 
           if (sr["Picture"].ToString().Length > 0)
           {
@@ -2276,6 +2284,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // 3.5-4.4=(4)=2s  | 4.5-5.4=(5)=2.5s | 5.5-6.4=(6)=3s   | 6.5-7.4=(7)=3.5s
     // 7.5-8.4=(8)=4s  | 8.5-9.4=(9)=4.5s | 9.5-10=(10)=5s
     //----------------------------------------------------------------------------------------
+
+    
+    private int EnhancedWatchedCount(string strEnhancedWatchedValue, string strUserProfileName)
+    {
+      int count = 0;
+      if (!strEnhancedWatchedValue.Contains(":"))
+      {
+        return 0;
+      }
+
+      string[] split = strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+      foreach (string s in split)
+      {
+        if (s.Contains(":"))
+        {
+          string userprofilename = s.Substring(0, s.IndexOf(":")); // extract userprofilename
+          string usercount = s.Substring(s.IndexOf(":") + 1);
+          if (userprofilename == strUserProfileName)
+          {
+            bool success = int.TryParse(usercount, out count);
+          }
+        }
+      }
+      return count;
+    }
+
     private void Load_Rating(decimal rating)
     {
       int r, i;
@@ -4262,6 +4296,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MyFilms.conf.StrAntFilterMinRating.ToString()));
           choiceViewGlobalOptions.Add("filterdbsetrating");
 
+          // Choose UserProfileName
+          if (MyFilmsDetail.ExtendedStartmode("Global Settings - Enhanced Watched Status Handling - User Profile Name"))
+          {
+            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+            {
+              dlg1.Add(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName));
+              choiceViewGlobalOptions.Add("userprofilename");
+            }
+          }
+
           // From ZebonsMerge
           //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
           if (MyFilms.conf.StrGrabber_ChooseScript) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), GUILocalizeStrings.Get(10798628)));   // Choose grabber script for that session (status on)
@@ -4466,6 +4510,75 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           return;
+
+
+        case "userprofilename": // choose global user profile name
+          GUIDialogMenu dlg4 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          if (dlg4 == null) return;
+          dlg4.Reset();
+          dlg4.SetHeading(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)); // Choose User Profile Name ... GUILocalizeStrings.Get(1079840), conf.StrUserProfileName)
+          System.Collections.Generic.List<string> choiceGlobalUserProfileName = new System.Collections.Generic.List<string>();
+
+          //// Add Configured UserProfileName from Setup  
+          //if (conf.StrUserProfileName.Length > 0)
+          //{
+          //  dlg4.Add(conf.StrUserProfileName); // current Value
+          //  choiceGlobalUserProfileName.Add(conf.StrUserProfileName);
+          //}
+
+          dlg4.Add("Global"); // Global default value - should already be present by default, if enhanced watch handling is selected
+          choiceGlobalUserProfileName.Add("Global");
+
+          dlg4.Add("<" + GUILocalizeStrings.Get(10798630) + ">"); // New Value ...
+          choiceGlobalUserProfileName.Add("");
+
+
+          // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
+          foreach (DataRow sr in r)
+          {
+            string strEnhancedWatchedValue = sr[conf.StrWatchedField].ToString().Trim();
+            string[] split1 = strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in split1)
+            {
+              if (s.Contains(":"))
+              {
+                string userprofilename = s.Substring(0, s.IndexOf(":")); // extract userprofilename
+                if (!choiceGlobalUserProfileName.Contains(userprofilename))
+                {
+                  dlg4.Add(userprofilename);
+                  choiceGlobalUserProfileName.Add(userprofilename);
+                }
+              }
+            }
+          }
+          dlg4.DoModal(GetID);
+          if (dlg4.SelectedLabel == -1)
+            return;
+          string strUserProfileNameSelection = choiceGlobalUserProfileName[dlg4.SelectedLabel];
+          switch (strUserProfileNameSelection)
+          {
+            case "": // new value
+              VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+              if (null == keyboard) return;
+              keyboard.Reset();
+              keyboard.Text = ""; // Default string is empty
+              keyboard.DoModal(GetID);
+              if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text)))
+                conf.StrUserProfileName = keyboard.Text;
+              else 
+                return;
+              break;
+            default:
+              conf.StrUserProfileName = strUserProfileNameSelection;
+              break;
+          }
+          LogMyFilms.Debug("UserProfileName - change to '" + conf.StrUserProfileName.ToString() + "'");
+          //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+          //Load_Config(Configuration.CurrentConfig, true);
+          MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
+          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          return;
+
 
         case "globalwikihelp":
           var hasRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
@@ -5613,12 +5726,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (facadeView.SelectedListItem.IsPlayed)
           {
             facadeView.SelectedListItem.IsPlayed = false;
-            MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, false);
+            // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, false);
+            MyFilmsDetail.Watched_Toggle((int)facadeView.SelectedListItem.ItemId, false);
           }
           else
           {
             facadeView.SelectedListItem.IsPlayed = true;
-            MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, true);
+            // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, true);
+            MyFilmsDetail.Watched_Toggle((int)facadeView.SelectedListItem.ItemId, true);
           }
           //Fin_Charge_Init(true, true);
           break;
