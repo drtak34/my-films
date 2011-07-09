@@ -1998,7 +1998,7 @@ Detailmenu for technical details
 		<width>20</width>
 		<height>20</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,False)</visible>
+		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
@@ -2014,7 +2014,7 @@ Detailmenu for technical details
 		<height>20</height>
 		<texture>MyFilms\overlaywatched.png</texture>
 		<colordiffuse>eea9d0f7</colordiffuse>
-		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.db.checked.value,True)</visible>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
 		<animation effect="fade" time="250">WindowClose</animation>	
