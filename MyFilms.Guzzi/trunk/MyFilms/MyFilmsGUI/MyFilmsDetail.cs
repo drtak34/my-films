@@ -726,10 +726,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
                     {
-                      if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()) // show only the required option
-                        dlgmenu.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
-                      else 
-                        dlgmenu.Add(GUILocalizeStrings.Get(1079894)); // set watched
+                      if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                      {
+                        if (GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0) // show only the required option
+                          dlgmenu.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
+                        else
+                          dlgmenu.Add(GUILocalizeStrings.Get(1079894)); // set watched
+                      }
+                      else
+                      {
+                        if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()) // show only the required option
+                          dlgmenu.Add(GUILocalizeStrings.Get(1079895)); // set unwatched
+                        else
+                          dlgmenu.Add(GUILocalizeStrings.Get(1079894)); // set watched
+                      }
                       choiceViewMenu.Add("togglewatchedstatus");
                     }
                     
@@ -868,15 +878,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "togglewatchedstatus":
-                    if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
+
+                    if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
                     {
-                      // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
-                      MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, false);
+                      if (MyFilmsDetail.GetWatchedCount(MyFilms.conf.StrIndex, MyFilms.conf.StrUserProfileName) > 0)
+                      {
+                        // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
+                        MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, false);
+                      }
+                      else
+                      {
+                        // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+                        MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, true);
+                      }
                     }
                     else
                     {
-                      // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
-                      MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, true);
+                      if (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
+                      {
+                        // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
+                        MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, false);
+                      }
+                      else
+                      {
+                        // MyFilmsDetail.Watched_Toggle((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+                        MyFilmsDetail.Watched_Toggle((int)MyFilms.conf.StrIndex, true);
+                      }
                     }
                     afficher_detail(true);
                     break;
@@ -1676,7 +1703,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Set enhanced watch count
         //-------------------------------------------------------------------------------------------        
-        private static void SetWatchedCount(int Index, string userprofilename, int count)
+        public static void SetWatchedCount(int Index, string userprofilename, int count)
         {
           string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
           string newEnhancedWatchedValue = string.Empty;
@@ -1740,6 +1767,61 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
           return count;
+        }
+
+
+        //-------------------------------------------------------------------------------------------
+        //  Add watch count by one
+        //-------------------------------------------------------------------------------------------        
+        private static void AddWatchedCount(int Index, string userprofilename)
+        {
+          if (userprofilename != "Global") // avoid to add twice, if user selected "Global" as profile name
+            AddWatchedByOne(Index, userprofilename);
+          AddWatchedByOne(Index, "Global"); // Global watched count will always be set
+          // ToDo: Could also populate "watched history" here (future version)
+        }
+
+
+        //-------------------------------------------------------------------------------------------
+        //  Add watch count by one
+        //-------------------------------------------------------------------------------------------        
+        private static void AddWatchedByOne(int Index, string userprofilename)
+        {
+          int count = GetWatchedCount(Index, userprofilename);
+          string EnhancedWatchedValue = MyFilms.r[Index][MyFilms.conf.StrWatchedField].ToString();
+          string newEnhancedWatchedValue = string.Empty;
+
+          if (EnhancedWatchedValue.Contains(userprofilename)) // Update count value
+          {
+            string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in split)
+            {
+              if (s.Contains(":"))
+              {
+                string sNew = s;
+                string tempuser = s.Substring(0, s.IndexOf(":")); // extract userprofilename
+                string tempcount = s.Substring(s.IndexOf(":") + 1);
+                // int itempcount = 0;
+                if (tempuser == userprofilename) // Update Count Value
+                {
+                  // bool success = int.TryParse(tempcount, out itempcount);
+                  sNew = tempuser + ":" + count.ToString();
+                }
+                if (string.IsNullOrEmpty(newEnhancedWatchedValue))
+                  newEnhancedWatchedValue = sNew;
+                else
+                  newEnhancedWatchedValue += "|" + sNew;
+              }
+            }
+          }
+          else
+          {
+            if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":")) // add count value
+              newEnhancedWatchedValue = userprofilename + ":" + count.ToString();
+            else
+              newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + count.ToString();
+          }
+          MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
         }
 
         //-------------------------------------------------------------------------------------------
@@ -3999,6 +4081,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.sourcetrailer.value", log);
             clearGUIProperty("user.sourcetrailer.count", log);
             clearGUIProperty("user.watched.value", log);
+            clearGUIProperty("user.watched.count", log);
+            clearGUIProperty("user.watched.name", log);
+            clearGUIProperty("user.watched.total", log);
             clearGUIProperty("user.source.isonline", log);
             clearGUIProperty("user.sourcetrailer.isonline", log);
 
@@ -4122,10 +4207,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     if (wrep && (MyFilms.conf.StrWatchedField.ToLower() == (dc.ColumnName.ToLower())))
                     {
-                      if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
-                        setGUIProperty("user.watched.value", "true");
+                      if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                      {
+                        int count = GetWatchedCount(ItemId, MyFilms.conf.StrUserProfileName);
+                        if (count > 0)
+                          setGUIProperty("user.watched.value", "true");
+                        else
+                          setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
+                        setGUIProperty("user.watched.count", count.ToString());
+                        setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
+                        setGUIProperty("user.watched.total", GetWatchedCount(ItemId, "Global").ToString());
+                      }
                       else
-                        setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
+                      {
+                        if (MyFilms.r[ItemId][dc.ColumnName].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower())
+                          setGUIProperty("user.watched.value", "true");
+                        else
+                          setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
+                      }
                     }
 
                     switch (dc.ColumnName.ToLower())
@@ -5275,7 +5374,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 
                 if (MyFilms.conf.CheckWatched)
                 {
-                  r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                  {
+                    // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
+                    AddWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
+                  }
+                  else
+                  {
+                    r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  }
                   LogMyFilms.Debug("Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie start'");
                 }
                 if (ended)
@@ -5285,12 +5392,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 if (ended && MyFilms.conf.CheckWatchedPlayerStopped)
                 {
-                  r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                  {
+                    // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
+                    AddWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
+                  }
+                  else
+                  {
+                    r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  }
                   LogMyFilms.Debug("Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie end'");
                 }
                 if (stopped && MyFilms.conf.CheckWatchedPlayerStopped && playTimePercentage >= 80)
                 {
-                  r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                  {
+                    // int currentCount = GetWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
+                    AddWatchedCount(MyFilms.conf.StrPlayedIndex, MyFilms.conf.StrUserProfileName);
+                  }
+                  else
+                  {
+                    r1[MyFilms.conf.StrPlayedIndex][MyFilms.conf.StrWatchedField] = "True";
+                  }
                   LogMyFilms.Debug("Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie end'");
                 }
 
@@ -5318,6 +5441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Info("Error during PlayBackEnded ");
             }
         }
+
 
         private static string LoadPlaylist(string filename)
         {

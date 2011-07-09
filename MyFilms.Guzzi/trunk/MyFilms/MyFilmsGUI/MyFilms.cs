@@ -1689,7 +1689,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilms.conf.GlobalUnwatchedOnly = !MyFilms.conf.GlobalUnwatchedOnly;
             if (conf.GlobalUnwatchedOnly)
             {
-              GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+              //GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+              if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                GlobalFilterStringUnwatched = conf.StrWatchedField + " like '*" + conf.StrUserProfileName + ":0*" + "' AND ";
+              else
+                GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
               MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
             }
             else
@@ -2072,8 +2076,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //if (sr["Checked"].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue) // changed to take setup config into consideration
           if (conf.StrEnhancedWatchedStatusHandling)
           {
-            if (EnhancedWatchedCount(sr[conf.StrWatchedField].ToString(), conf.StrUserProfileName) > 0) 
+            if (EnhancedWatchedCount(sr[conf.StrWatchedField].ToString(), conf.StrUserProfileName) > 0)
               item.IsPlayed = true;
+            if (!sr[conf.StrWatchedField].ToString().Contains("Global:"))
+            {
+              if (sr[conf.StrWatchedField].ToString().Length > 0)
+                sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|Global:0";
+              else
+                sr[conf.StrWatchedField] = "Global:0";
+            }
+            if (!sr[conf.StrWatchedField].ToString().Contains(conf.StrUserProfileName + ":"))
+            {
+              if (sr[conf.StrWatchedField].ToString().Length > 0)
+                sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|" + conf.StrUserProfileName + ":0";
+              else
+                sr[conf.StrWatchedField] = conf.StrUserProfileName + ":0";
+            }
           }
           else
           {
@@ -2289,7 +2307,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private int EnhancedWatchedCount(string strEnhancedWatchedValue, string strUserProfileName)
     {
       int count = 0;
-      if (!strEnhancedWatchedValue.Contains(":"))
+
+      if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0"))
+      {
+        return 0;
+      }
+      
+      if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":"))
       {
         return 0;
       }
@@ -3735,7 +3759,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (conf.GlobalUnwatchedOnly) // Reset GlobalUnwatchedFilter to the setup default (can be changed via GUI menu)
         {
-          GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+          // GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+          if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+            GlobalFilterStringUnwatched = conf.StrWatchedField + " like '*" + conf.StrUserProfileName + ":0*" + "' AND ";
+          else
+            GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
           MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
         }
         else
@@ -4629,7 +4657,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilms.conf.GlobalUnwatchedOnly = !MyFilms.conf.GlobalUnwatchedOnly;
           if (conf.GlobalUnwatchedOnly)
           {
-            GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
+            if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+              GlobalFilterStringUnwatched = conf.StrWatchedField + " like '*" + conf.StrUserProfileName + ":0*" + "' AND ";
+            else
+              GlobalFilterStringUnwatched = conf.StrWatchedField + " like '" + conf.GlobalUnwatchedOnlyValue + "' AND ";
             MyFilmsDetail.setGUIProperty("globalfilter.unwatched", "true");
           }
           else
