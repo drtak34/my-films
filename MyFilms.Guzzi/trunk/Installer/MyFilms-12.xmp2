@@ -110,6 +110,13 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{9ad219ee-edaf-4335-b760-d5102ace67af}-MyFilmsSampleGrabber.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilmsSampleGrabber.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_hu.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3611,6 +3618,13 @@ Please refer to the Wiki online documentation.</Value>
         <ZipFileName>Installer{CopyFile}\{9ad219ee-edaf-4335-b760-d5102ace67af}-MyFilmsSampleGrabber.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilmsSampleGrabber.xml</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Language\MyFilms\strings_hu.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
+        <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -6548,14 +6562,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{576c8925-6bd0-4e7d-9c95-671d9af017cd}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{13836168-dfbe-4487-80ce-72d540ae9830}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{fe43b661-ed2d-4bdd-a8ae-ad64897ea761}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{448d5065-2723-4a33-b708-0707959df4bd}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
