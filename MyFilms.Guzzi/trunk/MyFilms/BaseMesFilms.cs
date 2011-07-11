@@ -292,6 +292,15 @@ namespace MyFilmsPlugin.MyFilms
 
         public static string Translate_Column(string Column)
         {
+            string s = Column;
+	          // Check for empty string.
+	          if (string.IsNullOrEmpty(s))
+	          {
+	              return string.Empty;
+	          }
+	          // Return char and concat substring.
+	          Column = char.ToUpper(s[0]) + s.Substring(1);
+
             switch (Column)
             {
                 case "Number":

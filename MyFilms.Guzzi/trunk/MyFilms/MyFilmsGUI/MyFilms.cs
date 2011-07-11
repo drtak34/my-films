@@ -2867,8 +2867,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               currentListLevel = Listlevel.Movie;
               conf.StrSelect = conf.StrTitle1.ToString() + " like '*" + keyboard.Text + "*'";
               //conf.StrTxtSelect = "Selection " + GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]";
-              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(369) + " [*" +
-                                  keyboard.Text + @"*]";
+              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]";
               conf.StrTitleSelect = "";
               GetFilmList();
             }
@@ -6556,9 +6555,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel] + "*'";
       if (choiceSearch.Count == 0)
-        conf.StrTxtSelect = "Selection " + wproperty + "(none)";
+        //conf.StrTxtSelect = "Selection " + wproperty + "(none)";
+        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " (none)";
       else
-        conf.StrTxtSelect = "Selection " + wproperty + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
+        //conf.StrTxtSelect = "Selection " + wproperty + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
+        conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
       conf.StrTitleSelect = string.Empty;
       SetLabelView("search"); // show "search"
       GetFilmList();
@@ -6737,7 +6738,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
           }
           LogMyFilms.Debug("(RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
-          conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
+          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + wproperty2 + @"*]";
+          //conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
           conf.StrTitleSelect = string.Empty;
 
           // Temporarily Enabled for Testing
@@ -7152,7 +7154,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
           }
           LogMyFilms.Debug("(RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
-          conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
+          //conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
+          conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + wproperty2 + @"*]";
+
           conf.StrTitleSelect = string.Empty;
 
 
@@ -7331,7 +7335,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
                   break;
               }
-              conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]";
+              //conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]";
+              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + keyboard.Text + @"*]";
+
               conf.StrTitleSelect = string.Empty;
               // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
               SetLabelView("search"); // show "search"
@@ -7578,7 +7584,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("(SearchIncompleteMovies) - ChosenProperty is '" + wproperty + "'"); 
 
       conf.StrSelect = wproperty + " is NULL";
-      conf.StrTxtSelect = "Selection " + wproperty + " [*empty*]";
+      // conf.StrTxtSelect = "Selection " + wproperty + " [*empty*]";
+      conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*empty*]";
       conf.StrTitleSelect = string.Empty;
       SetLabelView("search"); // show "search"
       GetFilmList();
