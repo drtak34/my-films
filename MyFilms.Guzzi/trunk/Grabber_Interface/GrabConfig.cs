@@ -3502,7 +3502,7 @@ namespace Grabber_Interface
 
         MessageBox.Show(find, "Preview", MessageBoxButtons.OK);
 
-        if (textURLPreview.Text.StartsWith("http"))
+        if (find.StartsWith("http"))
           textURLPreview.Text = find; // load Parameter in Sub URL field (to allow web launching etc.
 
         if (find.EndsWith("jpg") || find.EndsWith("png"))
@@ -3797,7 +3797,7 @@ namespace Grabber_Interface
       }
       catch (Exception)
       {
-        throw;
+        // throw;
       }
     }
 
