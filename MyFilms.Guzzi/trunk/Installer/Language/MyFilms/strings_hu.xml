@@ -53,7 +53,7 @@
     <String id="2087">Hátra</String>
     <String id="2998">perc</String>
     <String id="4514">Háttérkép letöltése (összes filmhez)</String>
-    <String id="5910">Infó az internetről (kijelölt filmhez)</String>
+    <String id="5910">Infó az internetről (kijelölt film)</String>
     <String id="6022">Adatbázis kiválasztása</String>
     <String id="6029">Csere</String>
     <String id="7986">Filmek / Főképernyő</String>
@@ -78,7 +78,7 @@
     <String id="1079858">Kézi bevitel bill.-ről</String>
     <String id="1079859">Keresési kifejezés kiválasztása</String>
     <String id="1079860">Manuális kiválasztás</String>
-    <String id="1079861">Adatbázisfrissítés (AMC Updater)</String>
+    <String id="1079861">Adatbázis frissítés (AMC Updater)</String>
     <String id="1079862">Háttérkép letöltése (kijelölt film)</String>
     <String id="1079863">Letöltő script kiválasztása: ({0})</String>
     <String id="1079864">Automatikus kiválasztás: ({0})</String>
@@ -87,7 +87,7 @@
     <String id="1079867">Válassz személyt</String>
     <String id="1079868">Színész</String>
     <String id="1079869">Rendező</String>
-    <String id="1079870"> - Találatok</String>
+    <String id="1079870"> - Találatok: </String>
     <String id="1079872">Első</String>
     <String id="1079873">Utolsó</String>
     <String id="1079874">Háttérkép törlése (kijelölt film)</String>
@@ -104,14 +104,14 @@
     <String id="1079885">Választott személy összes filmje (IMDB)</String>
     <String id="1079886">Választott személy IMDB adatlapja</String>
     <String id="1079887">Bejátszások a választott filmhez (IMDB)</String>
-    <String id="1079888">Képek a kiválasztott filmről (IMDB)</String>
+    <String id="1079888">Képek a kiválasztott filmből (IMDB)</String>
     <String id="1079889">Választott film IMDB adatlapja</String>
-    <String id="1079890">Bejátszások a választott személlyel (IMDB)</String>
-    <String id="1079891">Fotók a választott személlyel (IMDB)</String>
+    <String id="1079890">Bejátszások a választott személy filmjeiből (IMDB)</String>
+    <String id="1079891">Fotók a választott személyről (IMDB)</String>
     <String id="1079892">Frissítés ...</String>
     <String id="1079893">Sorrend:</String>
-    <String id="1079894">Megtekintettként jelölni</String>
-    <String id="1079895">Még nem látottként jelölni</String>
+    <String id="1079894">"Láttam"-nak jelölni</String>
+    <String id="1079895">"Nem láttam"-nak jelölni</String>
     <String id="1079896">Személyek</String>
     <String id="1079897">Csoport listaszerű megjelenítése: ({0})</String>
     <String id="1079898">Rákérdezés WOL küldés előtt: ({0})</String>
@@ -120,8 +120,8 @@
     <String id="1079903">Nézet váltás ...</String>
     <String id="1079904">Beállítások ...</String>
     <String id="10798609">Utoljára keresett ...</String>
-    <String id="10798610">Filmek típusa </String>
-    <String id="10798611">Funkciól kiválasztása</String>
+    <String id="10798610">Találat: </String>
+    <String id="10798611">Keresés az alábbira: </String>
     <String id="10798612">Producer</String>
     <String id="10798613">Tulajdonság választása kereséshez</String>
     <String id="10798614">Hasonló tulajdonságú filmek keresése</String>
@@ -134,10 +134,10 @@
     <String id="10798621">Véletlenszerű keresés</String>
     <String id="10798622">Összes</String>
     <String id="10798623">(nincs adat)</String>
-    <String id="10798624">Filmek / Rendszerinformációk</String>
+    <String id="10798624">Filmek / Rendszer információk</String>
     <String id="10798625">Nincs találat a megadott értékre!</String>
     <String id="10798626">=> '{1}' ({0})</String>
-    <String id="10798627">Egyszavas</String>
+    <String id="10798627">egyszavas</String>
     <String id="10798628">be</String>
     <String id="10798629">ki</String>
     <String id="10798630">Új érték</String>
@@ -192,7 +192,7 @@
     <String id="10798682">Kép</String>
     <String id="10798683">Korhatár</String>
     <String id="10798684">Író</String>
-    <String id="10798685">Megtekintett</String>
+    <String id="10798685">"Láttam"</String>
     <String id="10798686">Megtekintés dátuma</String>
     <String id="10798687">IMDB azonosító</String>
     <String id="10798688">TMDB azonosító</String>
@@ -203,7 +203,7 @@
     <String id="10798693">Minimum értékelés beállítása erről: '{0}'</String>
     <String id="10798694">Előzetesek keresése és hozzáadása (összes filmhez)</String>
     <String id="10798695">Előzetesek keresése befejeződött!</String>
-    <String id="10798696">Csak a nem látott filmek megjelnítése: ({0})</String>
+    <String id="10798696">Csak a nem látott filmek megjelenítése: ({0})</String>
     <String id="10798697">Képarány</String>
     <String id="10798698">Képformátum</String>
     <String id="10798699">Wiki Online Segítség (Web)</String>
@@ -224,8 +224,8 @@
     <String id="10798714">Globális szűrők ...</String>
     <String id="10798715">Személy adatainak betöltése (mindenki)</String>
     <String id="10798716">IMDB előzetes (OnlineVideos)</String>
-    <String id="10798717">Incomplete movie data</String>
-    <String id="10798718">=> {0} film hiányzik '{1}'</String>
+    <String id="10798717">Hiányzó film adatok</String>
+    <String id="10798718">=> '{1}' hiányzik {0} filmnél </String>
     <String id="10798719">Film adatok betöltése (.nfo fájl, helyben, hiányzó adatok pótlása)</String>
     <String id="10798720">Film adatok betöltése (.nfo fájl, helyben, minden adat cseréje)</String>
     <String id="10798721">Film adatok betöltése AMC fájlból (helyben)</String>
