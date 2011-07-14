@@ -116,10 +116,11 @@ namespace Grabber_Interface
 
     private void button_Browse_Click(object sender, EventArgs e)
     {
-      if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms"))
+      if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\"))
       {
-        openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
-        openFileDialog1.FileName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\*.xml";
+        openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\";
+        // openFileDialog1.FileName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\*.xml";
+        // openFileDialog1.FileName = @"*.xml";
         openFileDialog1.RestoreDirectory = false;
       }
       else
