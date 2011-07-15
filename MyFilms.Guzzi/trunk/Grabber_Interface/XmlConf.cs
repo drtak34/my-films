@@ -56,8 +56,8 @@ class XmlConf
         
         for (int i = 0; i<l.Count; i++)
         {
-            if (l.Item(i).ParentNode.Name == "Section" 
-                && !l.Item(i).Name.Equals("URLSearch") && !l.Item(i).Name.Equals("Details"))
+            if (l.Item(i).ParentNode.Name == "Section"
+                && !l.Item(i).Name.Equals("URLSearch") && !l.Item(i).Name.Equals("Details") && !l.Item(i).Name.Equals("Mapping"))
                 setList(1, l.Item(i));
         }
 
