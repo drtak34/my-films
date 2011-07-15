@@ -106,6 +106,9 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.pictureBox1 = new System.Windows.Forms.PictureBox();
+          this.labelTraktDescription = new System.Windows.Forms.Label();
+          this.linkLabelTrakt = new System.Windows.Forms.LinkLabel();
           this.cbAllowTraktSync = new System.Windows.Forms.CheckBox();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
@@ -438,6 +441,9 @@
           this.chkDVDprofilerOnlyFile = new System.Windows.Forms.CheckBox();
           this.buttonDeleteTmpCatalog = new System.Windows.Forms.Button();
           this.buttonOpenTmpFileAMC = new System.Windows.Forms.Button();
+          this.AMCConfigView = new System.Windows.Forms.ListView();
+          this.Option = new System.Windows.Forms.ColumnHeader();
+          this.Value = new System.Windows.Forms.ColumnHeader();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
           this.AntFilterItem4 = new System.Windows.Forms.ComboBox();
@@ -486,19 +492,14 @@
           this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
-          this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
-          this.lblNbConfig = new System.Windows.Forms.Label();
-          this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.Tab_Other = new System.Windows.Forms.TabPage();
           this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
-          this.AMCConfigView = new System.Windows.Forms.ListView();
-          this.Option = new System.Windows.Forms.ColumnHeader();
-          this.Value = new System.Windows.Forms.ColumnHeader();
-          this.linkLabelTrakt = new System.Windows.Forms.LinkLabel();
-          this.labelTraktDescription = new System.Windows.Forms.Label();
-          this.pictureBox1 = new System.Windows.Forms.PictureBox();
+          this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
+          this.lblNbConfig = new System.Windows.Forms.Label();
+          this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
           this.Tab_Trakt.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
           this.Fanart.SuspendLayout();
@@ -547,9 +548,8 @@
           this.Tab_AMCupdater.SuspendLayout();
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           this.Tab_Other.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -678,6 +678,35 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // pictureBox1
+          // 
+          this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.trakt;
+          this.pictureBox1.Location = new System.Drawing.Point(251, 26);
+          this.pictureBox1.Name = "pictureBox1";
+          this.pictureBox1.Size = new System.Drawing.Size(52, 50);
+          this.pictureBox1.TabIndex = 3;
+          this.pictureBox1.TabStop = false;
+          // 
+          // labelTraktDescription
+          // 
+          this.labelTraktDescription.AutoSize = true;
+          this.labelTraktDescription.Location = new System.Drawing.Point(42, 100);
+          this.labelTraktDescription.Name = "labelTraktDescription";
+          this.labelTraktDescription.Size = new System.Drawing.Size(500, 65);
+          this.labelTraktDescription.TabIndex = 2;
+          this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
+          // 
+          // linkLabelTrakt
+          // 
+          this.linkLabelTrakt.AutoSize = true;
+          this.linkLabelTrakt.Location = new System.Drawing.Point(42, 205);
+          this.linkLabelTrakt.Name = "linkLabelTrakt";
+          this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
+          this.linkLabelTrakt.TabIndex = 1;
+          this.linkLabelTrakt.TabStop = true;
+          this.linkLabelTrakt.Text = "Trakt Website";
+          this.linkLabelTrakt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTrakt_LinkClicked);
           // 
           // cbAllowTraktSync
           // 
@@ -4361,6 +4390,34 @@
           this.buttonOpenTmpFileAMC.UseVisualStyleBackColor = true;
           this.buttonOpenTmpFileAMC.Click += new System.EventHandler(this.buttonOpenTmpFileAMC_Click);
           // 
+          // AMCConfigView
+          // 
+          this.AMCConfigView.AllowColumnReorder = true;
+          this.AMCConfigView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Option,
+            this.Value});
+          this.AMCConfigView.FullRowSelect = true;
+          this.AMCConfigView.GridLines = true;
+          this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+          this.AMCConfigView.Location = new System.Drawing.Point(20, 73);
+          this.AMCConfigView.MultiSelect = false;
+          this.AMCConfigView.Name = "AMCConfigView";
+          this.AMCConfigView.Size = new System.Drawing.Size(706, 263);
+          this.AMCConfigView.TabIndex = 89;
+          this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
+          this.AMCConfigView.UseCompatibleStateImageBehavior = false;
+          this.AMCConfigView.View = System.Windows.Forms.View.Details;
+          // 
+          // Option
+          // 
+          this.Option.Text = "Option";
+          this.Option.Width = 171;
+          // 
+          // Value
+          // 
+          this.Value.Text = "Value";
+          this.Value.Width = 515;
+          // 
           // AntFilterSign4
           // 
           this.AntFilterSign4.Location = new System.Drawing.Point(0, 0);
@@ -4880,6 +4937,38 @@
           this.General.TabIndex = 46;
           this.General.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.General_Selected);
           // 
+          // Tab_Other
+          // 
+          this.Tab_Other.Controls.Add(this.btnGrabberInterface);
+          this.Tab_Other.Controls.Add(this.lblAMCupdaterConfigPreview);
+          this.Tab_Other.Controls.Add(this.AMCConfigView);
+          this.Tab_Other.Location = new System.Drawing.Point(4, 22);
+          this.Tab_Other.Name = "Tab_Other";
+          this.Tab_Other.Padding = new System.Windows.Forms.Padding(3);
+          this.Tab_Other.Size = new System.Drawing.Size(747, 354);
+          this.Tab_Other.TabIndex = 11;
+          this.Tab_Other.Text = "Other";
+          this.Tab_Other.UseVisualStyleBackColor = true;
+          // 
+          // btnGrabberInterface
+          // 
+          this.btnGrabberInterface.Location = new System.Drawing.Point(550, 26);
+          this.btnGrabberInterface.Name = "btnGrabberInterface";
+          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 27);
+          this.btnGrabberInterface.TabIndex = 91;
+          this.btnGrabberInterface.Text = "Grabber Interface";
+          this.btnGrabberInterface.UseVisualStyleBackColor = true;
+          this.btnGrabberInterface.Click += new System.EventHandler(this.btnGrabberInterface_Click);
+          // 
+          // lblAMCupdaterConfigPreview
+          // 
+          this.lblAMCupdaterConfigPreview.AutoSize = true;
+          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(25, 57);
+          this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
+          this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
+          this.lblAMCupdaterConfigPreview.TabIndex = 90;
+          this.lblAMCupdaterConfigPreview.Text = "Preview of current AMC Updater Configuration";
+          // 
           // textBoxNBconfigs
           // 
           this.textBoxNBconfigs.Enabled = false;
@@ -4908,94 +4997,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // Tab_Other
-          // 
-          this.Tab_Other.Controls.Add(this.btnGrabberInterface);
-          this.Tab_Other.Controls.Add(this.lblAMCupdaterConfigPreview);
-          this.Tab_Other.Controls.Add(this.AMCConfigView);
-          this.Tab_Other.Location = new System.Drawing.Point(4, 22);
-          this.Tab_Other.Name = "Tab_Other";
-          this.Tab_Other.Padding = new System.Windows.Forms.Padding(3);
-          this.Tab_Other.Size = new System.Drawing.Size(747, 354);
-          this.Tab_Other.TabIndex = 11;
-          this.Tab_Other.Text = "Other";
-          this.Tab_Other.UseVisualStyleBackColor = true;
-          // 
-          // btnGrabberInterface
-          // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(550, 26);
-          this.btnGrabberInterface.Name = "btnGrabberInterface";
-          this.btnGrabberInterface.Size = new System.Drawing.Size(152, 27);
-          this.btnGrabberInterface.TabIndex = 91;
-          this.btnGrabberInterface.Text = "Grabber Interface";
-          this.btnGrabberInterface.UseVisualStyleBackColor = true;
-          // 
-          // lblAMCupdaterConfigPreview
-          // 
-          this.lblAMCupdaterConfigPreview.AutoSize = true;
-          this.lblAMCupdaterConfigPreview.Location = new System.Drawing.Point(25, 69);
-          this.lblAMCupdaterConfigPreview.Name = "lblAMCupdaterConfigPreview";
-          this.lblAMCupdaterConfigPreview.Size = new System.Drawing.Size(225, 13);
-          this.lblAMCupdaterConfigPreview.TabIndex = 90;
-          this.lblAMCupdaterConfigPreview.Text = "Preview of current AMC Updater Configuration";
-          // 
-          // AMCConfigView
-          // 
-          this.AMCConfigView.AllowColumnReorder = true;
-          this.AMCConfigView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Option,
-            this.Value});
-          this.AMCConfigView.FullRowSelect = true;
-          this.AMCConfigView.GridLines = true;
-          this.AMCConfigView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-          this.AMCConfigView.Location = new System.Drawing.Point(20, 85);
-          this.AMCConfigView.MultiSelect = false;
-          this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(706, 244);
-          this.AMCConfigView.TabIndex = 89;
-          this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
-          this.AMCConfigView.UseCompatibleStateImageBehavior = false;
-          this.AMCConfigView.View = System.Windows.Forms.View.Details;
-          // 
-          // Option
-          // 
-          this.Option.Text = "Option";
-          this.Option.Width = 171;
-          // 
-          // Value
-          // 
-          this.Value.Text = "Value";
-          this.Value.Width = 515;
-          // 
-          // linkLabelTrakt
-          // 
-          this.linkLabelTrakt.AutoSize = true;
-          this.linkLabelTrakt.Location = new System.Drawing.Point(42, 205);
-          this.linkLabelTrakt.Name = "linkLabelTrakt";
-          this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
-          this.linkLabelTrakt.TabIndex = 1;
-          this.linkLabelTrakt.TabStop = true;
-          this.linkLabelTrakt.Text = "Trakt Website";
-          this.linkLabelTrakt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTrakt_LinkClicked);
-          // 
-          // labelTraktDescription
-          // 
-          this.labelTraktDescription.AutoSize = true;
-          this.labelTraktDescription.Location = new System.Drawing.Point(42, 100);
-          this.labelTraktDescription.Name = "labelTraktDescription";
-          this.labelTraktDescription.Size = new System.Drawing.Size(500, 65);
-          this.labelTraktDescription.TabIndex = 2;
-          this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
-          // 
-          // pictureBox1
-          // 
-          this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.trakt;
-          this.pictureBox1.Location = new System.Drawing.Point(251, 26);
-          this.pictureBox1.Name = "pictureBox1";
-          this.pictureBox1.Size = new System.Drawing.Size(52, 50);
-          this.pictureBox1.TabIndex = 3;
-          this.pictureBox1.TabStop = false;
           // 
           // MyFilmsSetup
           // 
@@ -5027,6 +5028,7 @@
           this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MesFilmsSetup_Quit);
           this.Tab_Trakt.ResumeLayout(false);
           this.Tab_Trakt.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           this.groupBox9.ResumeLayout(false);
           this.groupBox9.PerformLayout();
           this.groupBox25.ResumeLayout(false);
@@ -5111,10 +5113,9 @@
           this.Tab_AMCupdater.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
           this.General.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
