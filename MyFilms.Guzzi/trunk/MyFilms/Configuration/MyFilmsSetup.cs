@@ -92,11 +92,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             if (MyFilms_PluginMode == "normal") // disable Trakt and other controls in standardmode
             {
               //hide a tab by removing it from the TabPages collection
-              this.tabPageSave = General.TabPages[10];
-              this.General.TabPages.Remove(this.tabPageSave); // Disable Trakt Tab, as it's not yet implemented
-              this.chkEnhancedWatchedStatusHandling.Visible = false; // Disable Watched options for Userprofiles, as it's not yet implemented
-              this.Label_UserProfileName.Visible = false;
-              this.UserProfileName.Visible = false;
+              this.tabPageSave = General.TabPages[11];
+              this.General.TabPages.Remove(this.tabPageSave); // Disable Others Tab, as it has stuff not for public
+              // this.chkEnhancedWatchedStatusHandling.Visible = false; // Disable Watched options for Userprofiles
+              // this.Label_UserProfileName.Visible = false;
+              // this.UserProfileName.Visible = false;
               this.SearchSubDirsTrailer.Visible = false; // Disable Trailer options, that are not yet implemented
               this.SearchFileNameTrailer.Visible = false;
               this.ItemSearchFileNameTrailer.Visible = false;
@@ -5351,5 +5351,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           else
             txtAMCUpd_cnf_Display.Text = string.Empty;
         }
+
+        private void linkLabelTrakt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+          System.Diagnostics.Process.Start("http://trakt.tv/");
+        }
+
     }
 }

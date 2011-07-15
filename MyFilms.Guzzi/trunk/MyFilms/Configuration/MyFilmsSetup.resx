@@ -139,15 +139,12 @@ Subsequently, the most recent configuration used will be loaded.
 
 Note: You can't select that option if a Default Config is defined.</value>
   </data>
-  <data name="AMCConfigView.ToolTip" xml:space="preserve">
-    <value>List the content of the AMCupdater configuration options.
-Those options are used to create the Default Config and when launching AMCupdater from 
-MyFilms setup or via the desktop icon.
+  <data name="labelTraktDescription.Text" xml:space="preserve">
+    <value>"Trakt.TV" actively keeps a record of what TV shows and movies you are watching. 
+Based on your favorites, your friends, and the community, trakt recommends other TV shows and movies.
 
-Note:
-This config will be created for AMCupdater when you first create a MyFilms config.
-It won't be updated, until you press button "(re)create Default Config".
-This is to make sure, MyFilms won't overwrite any settings that you may have done in AMCupdater itself.</value>
+You need to have the trakt plugin installed and configure a user account.
+If you don't have a useraccount, you can register on trakt website.</value>
   </data>
   <data name="cbAllowTraktSync.ToolTip" xml:space="preserve">
     <value>If enabled, TRAKT plugin is allowed to synchronize your movie data
@@ -438,6 +435,15 @@ You will have the option in the GUI to switch to "unwatched movies only" - based
     <value>In opposition to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
 The difference is, you can't predefine a value for the update - but will always get a user dialog prefilled with the current value to change the content.</value>
   </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value>This option allows AMC users to update field info for storing your "watched status".
+
+You can choose a field to be used for "watched status" - a good recommendation is "checked".
+You can choose to update this field when starting a movie or when playback is finished.
+You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
   <data name="textBoxGlobalUnwatchedOnlyValue.ToolTip" xml:space="preserve">
     <value>By Default, unwatched items are identified by having either "false" or "" (empty) in the related field.
 The field used for watched / unwatched status can be configured in the Update Tab.
@@ -459,15 +465,6 @@ If checked, watched status will be stored with extended info:
 - Watched count in usercontext (if a usercontext is set)
 Watched count in usercontext requires a userprofilename to choose.
 To be updated each time a movie is launched.</value>
-  </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>This option allows AMC users to update field info for storing your "watched status".
-
-You can choose a field to be used for "watched status" - a good recommendation is "checked".
-You can choose to update this field when starting a movie or when playback is finished.
-You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
-However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
-You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
@@ -1178,6 +1175,16 @@ external catalog - so AMC should only be used for readonly.</value>
         u4ZnAJC/lsb+3gB8BoBnAPh7a8DvrVF/tdd7ZgGeWYBnFuCvprW/5/U+swDPLMAzC/B7atRf7bWeWYBn
         FuCZBfirae3veb3PLMAzC/DMAvyeGvVXe61nFuBvbgH+D7ZJYjnerQCqAAAAAElFTkSuQmCC
 </value>
+  </data>
+  <data name="AMCConfigView.ToolTip" xml:space="preserve">
+    <value>List the content of the AMCupdater configuration options.
+Those options are used to create the Default Config and when launching AMCupdater from 
+MyFilms setup or via the desktop icon.
+
+Note:
+This config will be created for AMCupdater when you first create a MyFilms config.
+It won't be updated, until you press button "(re)create Default Config".
+This is to make sure, MyFilms won't overwrite any settings that you may have done in AMCupdater itself.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>57</value>
