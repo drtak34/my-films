@@ -30,8 +30,8 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -99,6 +99,7 @@ namespace Grabber_Interface
           this.textFind = new System.Windows.Forms.TextBox();
           this.textBox5 = new System.Windows.Forms.TextBox();
           this.textboxSearchAkasRegex = new System.Windows.Forms.TextBox();
+          this.button_openMediafile = new System.Windows.Forms.Button();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -192,7 +193,8 @@ namespace Grabber_Interface
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
           this.Version_Label = new System.Windows.Forms.Label();
-          this.button_openMediafile = new System.Windows.Forms.Button();
+          this.textEncoding = new System.Windows.Forms.TextBox();
+          this.label34 = new System.Windows.Forms.Label();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -794,6 +796,14 @@ namespace Grabber_Interface
           this.toolTip1.SetToolTip(this.textboxSearchAkasRegex, resources.GetString("textboxSearchAkasRegex.ToolTip"));
           this.textboxSearchAkasRegex.TextChanged += new System.EventHandler(this.textboxSearchAkasRegex_TextChanged);
           // 
+          // button_openMediafile
+          // 
+          resources.ApplyResources(this.button_openMediafile, "button_openMediafile");
+          this.button_openMediafile.Name = "button_openMediafile";
+          this.toolTip1.SetToolTip(this.button_openMediafile, resources.GetString("button_openMediafile.ToolTip"));
+          this.button_openMediafile.UseVisualStyleBackColor = true;
+          this.button_openMediafile.Click += new System.EventHandler(this.button_openMediafile_Click);
+          // 
           // linkLabelMFwiki
           // 
           resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
@@ -1036,6 +1046,8 @@ namespace Grabber_Interface
           // 
           // tabPageSearchPage
           // 
+          this.tabPageSearchPage.Controls.Add(this.label34);
+          this.tabPageSearchPage.Controls.Add(this.textEncoding);
           this.tabPageSearchPage.Controls.Add(this.labelSearchPosition);
           this.tabPageSearchPage.Controls.Add(this.PositionSearch);
           this.tabPageSearchPage.Controls.Add(this.groupBox6);
@@ -1194,16 +1206,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle9;
+          dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle3;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle10;
+          dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle4;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1513,13 +1525,16 @@ namespace Grabber_Interface
           resources.ApplyResources(this.Version_Label, "Version_Label");
           this.Version_Label.Name = "Version_Label";
           // 
-          // button_openMediafile
+          // textEncoding
           // 
-          resources.ApplyResources(this.button_openMediafile, "button_openMediafile");
-          this.button_openMediafile.Name = "button_openMediafile";
-          this.toolTip1.SetToolTip(this.button_openMediafile, resources.GetString("button_openMediafile.ToolTip"));
-          this.button_openMediafile.UseVisualStyleBackColor = true;
-          this.button_openMediafile.Click += new System.EventHandler(this.button_openMediafile_Click);
+          resources.ApplyResources(this.textEncoding, "textEncoding");
+          this.textEncoding.Name = "textEncoding";
+          this.toolTip1.SetToolTip(this.textEncoding, resources.GetString("textEncoding.ToolTip"));
+          // 
+          // label34
+          // 
+          resources.ApplyResources(this.label34, "label34");
+          this.label34.Name = "label34";
           // 
           // GrabConfig
           // 
@@ -1746,6 +1761,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.Label labelSearchAkasRegex;
         private System.Windows.Forms.TextBox textboxSearchAkasRegex;
         private System.Windows.Forms.Button button_openMediafile;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox textEncoding;
 
     }
 }

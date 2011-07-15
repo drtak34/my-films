@@ -275,7 +275,7 @@ namespace Grabber_Interface
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
 
-        Body = GrabUtil.GetPage(wurl, null, out absoluteUri, cookie);
+        Body = GrabUtil.GetPage(wurl, textEncoding.Text, out absoluteUri, cookie);
 
         //1 resultat -> redirection automatique vers la fiche
         if (!wurl.Equals(absoluteUri))
@@ -308,7 +308,7 @@ namespace Grabber_Interface
         }
 
         if (textRedir.Text.Length > 0)
-          Body = GrabUtil.GetPage(textRedir.Text, null, out absoluteUri, cookie);
+          Body = GrabUtil.GetPage(textRedir.Text, textEncoding.Text, out absoluteUri, cookie);
 
         // now stripping the search page
         BodyStripped = Body;
@@ -353,6 +353,14 @@ namespace Grabber_Interface
 
       textName.Text = xmlConf.find(xmlConf.listGen, TagName.DBName)._Value;
       textURLPrefix.Text = xmlConf.find(xmlConf.listGen, TagName.URLPrefix)._Value;
+      try
+      {
+        textEncoding.Text = xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value;
+      }
+      catch (Exception)
+      {
+        textEncoding.Text = "";
+      }
       TextURL.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Value;
       textRedir.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1;
       textNextPage.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyNextPage)._Value;
@@ -470,6 +478,14 @@ namespace Grabber_Interface
     {
       xmlConf.find(xmlConf.listGen, TagName.DBName)._Value = textName.Text;
       xmlConf.find(xmlConf.listGen, TagName.URLPrefix)._Value = textURLPrefix.Text;
+      try
+      {
+        xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value = textEncoding.Text;
+      }
+      catch (Exception)
+      {
+        
+      }
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Value = TextURL.Text;
       xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1 = textRedir.Text;
       xmlConf.find(xmlConf.listSearch, TagName.KeyNextPage)._Value = textNextPage.Text;
@@ -1055,7 +1071,7 @@ namespace Grabber_Interface
         textPreview.ResetText();
         URLBodyDetail = TextURLDetail.Text;
         if (TextURLDetail.Text.ToLower().StartsWith("http"))
-          BodyDetail = GrabUtil.GetPage(TextURLDetail.Text, null, out absoluteUri, new CookieContainer());
+          BodyDetail = GrabUtil.GetPage(TextURLDetail.Text, textEncoding.Text, out absoluteUri, new CookieContainer());
         else
           BodyDetail = this.ReadFile(TextURLDetail.Text); // Read html page from file !
         if (xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value.Length > 0)
@@ -1111,7 +1127,7 @@ namespace Grabber_Interface
           else
             strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
           URLBodyDetail2 = strTemp;
-          BodyDetail2 = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+          BodyDetail2 = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
         }
         else
           BodyDetail2 = "";
@@ -1143,7 +1159,7 @@ namespace Grabber_Interface
           else
             strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
           URLBodyLinkGeneric1 = strTemp;
-          BodyLinkGeneric1 = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+          BodyLinkGeneric1 = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
         }
         else
           BodyLinkGeneric1 = "";
@@ -1175,7 +1191,7 @@ namespace Grabber_Interface
           else
             strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
           URLBodyLinkGeneric2 = strTemp;
-          BodyLinkGeneric2 = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+          BodyLinkGeneric2 = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
         }
         else
           BodyLinkGeneric2 = "";
@@ -1205,7 +1221,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkImg = strTemp;
-        BodyLinkImg = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+        BodyLinkImg = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
       }
       else
         BodyLinkImg = "";
@@ -1230,7 +1246,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkPersons = strTemp;
-        BodyLinkPersons = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+        BodyLinkPersons = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
       }
       else
         BodyLinkPersons = "";
@@ -1255,7 +1271,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkTitles = strTemp;
-        BodyLinkTitles = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+        BodyLinkTitles = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
       }
       else
         BodyLinkTitles = "";
@@ -1280,7 +1296,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkCertification = strTemp;
-        BodyLinkCertification = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+        BodyLinkCertification = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
       }
       else
         BodyLinkCertification = "";
@@ -1305,7 +1321,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkSyn = strTemp;
-        BodyLinkSyn = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+        BodyLinkSyn = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
       }
       else
         BodyLinkSyn = "";
@@ -1330,7 +1346,7 @@ namespace Grabber_Interface
         else
           strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
         URLBodyLinkComment = strTemp;
-        BodyLinkComment = GrabUtil.GetPage(strTemp, null, out absoluteUri, new CookieContainer());
+        BodyLinkComment = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
       }
       else
         BodyLinkComment = "";
@@ -3536,7 +3552,7 @@ namespace Grabber_Interface
 
         textPreview.ResetText();
 
-        BodyDetail = GrabUtil.GetPage(textURLPreview.Text, null, out absoluteUri, new CookieContainer());
+        BodyDetail = GrabUtil.GetPage(textURLPreview.Text, textEncoding.Text, out absoluteUri, new CookieContainer());
 
         if (xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value.Length > 0)
         {

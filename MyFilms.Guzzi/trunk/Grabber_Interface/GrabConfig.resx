@@ -699,7 +699,7 @@ Certification: Certification</value>
     <value>Both</value>
   </data>
   <data name="TextKeyStartD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 63</value>
+    <value>173, 57</value>
   </data>
   <data name="TextKeyStartD.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -775,7 +775,10 @@ Allows to clarify more precisely the basis of the score (Score 5, 10, 20 ...)
 Others:
 Allows regex expressions to get content as matchgroups.
 #MULTILINE# allows to perform regex match collection with multiline regexoption.
-Default is "Singleline".</value>
+Default is "Singleline".
+Match Groups:
+To enable the usage of "match groups", in "Replace" field you have to use "#REGEX#". 
+No parameters are required, but this will enable the scraper engine to use match groups when getting data.</value>
   </data>
   <data name="textComplement.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1128,7 +1131,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>5</value>
   </data>
   <data name="TextURL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 21</value>
+    <value>72, 11</value>
   </data>
   <data name="TextURL.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 20</value>
@@ -1158,7 +1161,7 @@ This will be replaced by the grabber engine with the name of the mediafile.</val
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;TextURL.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="cb_Parameter.Items" xml:space="preserve">
     <value>(Start-End Result List)</value>
@@ -1352,7 +1355,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_Find.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="button_Preview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1382,7 +1385,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_Preview.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="button_GoDetailPage.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1415,10 +1418,10 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_GoDetailPage.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="textRedir.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 51</value>
+    <value>72, 41</value>
   </data>
   <data name="textRedir.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 20</value>
@@ -1442,7 +1445,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textRedir.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="buttonPrevParam1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1475,7 +1478,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="textStartPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>349, 14</value>
@@ -2244,7 +2247,7 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textBox5.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="textboxSearchAkasRegex.Location" type="System.Drawing.Point, System.Drawing">
     <value>295, 114</value>
@@ -2277,6 +2280,35 @@ to properly collect title infos.</value>
   </data>
   <data name="&gt;&gt;textboxSearchAkasRegex.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="button_openMediafile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 14</value>
+  </data>
+  <data name="button_openMediafile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 20</value>
+  </data>
+  <data name="button_openMediafile.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="button_openMediafile.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="button_openMediafile.ToolTip" xml:space="preserve">
+    <value>If you define a local grabber, you can browse to open a media file.
+This is only useful, if you have "#Filename#" in your search definition,
+otherwise the internet database would get this media file name as search expression.</value>
+  </data>
+  <data name="&gt;&gt;button_openMediafile.Name" xml:space="preserve">
+    <value>button_openMediafile</value>
+  </data>
+  <data name="&gt;&gt;button_openMediafile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_openMediafile.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;button_openMediafile.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>109, 17</value>
@@ -3578,6 +3610,58 @@ to properly collect title infos.</value>
   <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="label34.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label34.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 73</value>
+  </data>
+  <data name="label34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="label34.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="label34.Text" xml:space="preserve">
+    <value>Encoding</value>
+  </data>
+  <data name="&gt;&gt;label34.Name" xml:space="preserve">
+    <value>label34</value>
+  </data>
+  <data name="&gt;&gt;label34.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label34.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;label34.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="textEncoding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>72, 70</value>
+  </data>
+  <data name="textEncoding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 20</value>
+  </data>
+  <data name="textEncoding.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="textEncoding.ToolTip" xml:space="preserve">
+    <value>manually override Encoding setting.
+Normally can be empty, as webgrabber automatically detects the encoding based on the web content.</value>
+  </data>
+  <data name="&gt;&gt;textEncoding.Name" xml:space="preserve">
+    <value>textEncoding</value>
+  </data>
+  <data name="&gt;&gt;textEncoding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textEncoding.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;textEncoding.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="labelSearchPosition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -3603,7 +3687,7 @@ to properly collect title infos.</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;labelSearchPosition.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="PositionSearch.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3630,48 +3714,7 @@ to properly collect title infos.</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;PositionSearch.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="button_openMediafile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 14</value>
-  </data>
-  <data name="button_openMediafile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 20</value>
-  </data>
-  <data name="button_openMediafile.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="button_openMediafile.Text" xml:space="preserve">
-    <value>...</value>
-  </data>
-  <data name="button_openMediafile.ToolTip" xml:space="preserve">
-    <value>If you define a local grabber, you can browse to open a media file.
-This is only useful, if you have "#Filename#" in your search definition,
-otherwise the internet database would get this media file name as search expression.</value>
-  </data>
-  <data name="&gt;&gt;button_openMediafile.Name" xml:space="preserve">
-    <value>button_openMediafile</value>
-  </data>
-  <data name="&gt;&gt;button_openMediafile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button_openMediafile.Parent" xml:space="preserve">
-    <value>groupBox6</value>
-  </data>
-  <data name="&gt;&gt;button_openMediafile.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="button_Load_Web.Location" type="System.Drawing.Point, System.Drawing">
-    <value>459, 13</value>
-  </data>
-  <data name="button_Load_Web.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
-  </data>
-  <data name="button_Load_Web.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="button_Load_Web.Text" xml:space="preserve">
-    <value>Web</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;button_Load_Web.Name" xml:space="preserve">
     <value>button_Load_Web</value>
@@ -3685,24 +3728,6 @@ otherwise the internet database would get this media file name as search express
   <data name="&gt;&gt;button_Load_Web.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 18</value>
-  </data>
-  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
-  </data>
-  <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="label8.Text" xml:space="preserve">
-    <value>#Search#</value>
-  </data>
   <data name="&gt;&gt;label8.Name" xml:space="preserve">
     <value>label8</value>
   </data>
@@ -3714,24 +3739,6 @@ otherwise the internet database would get this media file name as search express
   </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 17</value>
-  </data>
-  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
-  </data>
-  <data name="label11.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="label11.Text" xml:space="preserve">
-    <value>#Page#</value>
   </data>
   <data name="&gt;&gt;label11.Name" xml:space="preserve">
     <value>label11</value>
@@ -3767,7 +3774,7 @@ otherwise the internet database would get this media file name as search express
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;label20.Name" xml:space="preserve">
     <value>label20</value>
@@ -3827,7 +3834,7 @@ otherwise the internet database would get this media file name as search express
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3836,7 +3843,7 @@ otherwise the internet database would get this media file name as search express
     <value>NoControl</value>
   </data>
   <data name="label17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 54</value>
+    <value>11, 44</value>
   </data>
   <data name="label17.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
@@ -3857,7 +3864,7 @@ otherwise the internet database would get this media file name as search express
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="textBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -3887,7 +3894,7 @@ otherwise the internet database would get this media file name as search express
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textBody.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3914,7 +3921,7 @@ otherwise the internet database would get this media file name as search express
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;dataGridViewSearchResults.Name" xml:space="preserve">
     <value>dataGridViewSearchResults</value>
@@ -3950,7 +3957,7 @@ otherwise the internet database would get this media file name as search express
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;labelSearchAkasRegex.Name" xml:space="preserve">
     <value>labelSearchAkasRegex</value>
@@ -4115,7 +4122,7 @@ otherwise the internet database would get this media file name as search express
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4124,7 +4131,7 @@ otherwise the internet database would get this media file name as search express
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 26</value>
+    <value>11, 16</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -4145,7 +4152,7 @@ otherwise the internet database would get this media file name as search express
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="tabPageSearchPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -4173,6 +4180,90 @@ otherwise the internet database would get this media file name as search express
   </data>
   <data name="&gt;&gt;tabPageSearchPage.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="button_Load_Web.Location" type="System.Drawing.Point, System.Drawing">
+    <value>459, 13</value>
+  </data>
+  <data name="button_Load_Web.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="button_Load_Web.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="button_Load_Web.Text" xml:space="preserve">
+    <value>Web</value>
+  </data>
+  <data name="&gt;&gt;button_Load_Web.Name" xml:space="preserve">
+    <value>button_Load_Web</value>
+  </data>
+  <data name="&gt;&gt;button_Load_Web.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_Load_Web.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;button_Load_Web.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 18</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 13</value>
+  </data>
+  <data name="label8.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="label8.Text" xml:space="preserve">
+    <value>#Search#</value>
+  </data>
+  <data name="&gt;&gt;label8.Name" xml:space="preserve">
+    <value>label8</value>
+  </data>
+  <data name="&gt;&gt;label8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>297, 17</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="label11.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>#Page#</value>
+  </data>
+  <data name="&gt;&gt;label11.Name" xml:space="preserve">
+    <value>label11</value>
+  </data>
+  <data name="&gt;&gt;label11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
+    <value>groupBox6</value>
+  </data>
+  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

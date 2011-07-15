@@ -3,6 +3,7 @@
   <Section>
     <DBName>TestSite (international)</DBName>
     <URLPrefix />
+    <Encoding />
     <URLSearch>
       <URL Param1="" Param2="" />
       <KeyStartList Param1="" Param2="" />

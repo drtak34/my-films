@@ -304,6 +304,7 @@ public class TagName
   public static string DBName = "DBName";
   public static string URLPrefix = "URLPrefix";
   public static string URL = "URL";
+  public static string Encoding = "Encoding";                   // Added Encoding as override options for webpages not properly posting page encoding
   public static string KeyStartList = "KeyStartList";           // List
   public static string KeyEndList = "KeyEndList";
   public static string KeyNextPage = "KeyNextPage";             // Page
