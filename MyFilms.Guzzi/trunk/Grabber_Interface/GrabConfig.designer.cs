@@ -30,8 +30,8 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -1206,16 +1206,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle3;
+          dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle5;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle4;
+          dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle6;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
