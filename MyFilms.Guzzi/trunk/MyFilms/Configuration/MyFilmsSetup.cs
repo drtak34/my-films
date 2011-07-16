@@ -5359,10 +5359,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void chkEnhancedWatchedStatusHandling_CheckedChanged(object sender, EventArgs e)
         {
-          if (chkEnhancedWatchedStatusHandling.Checked) 
+          if (chkEnhancedWatchedStatusHandling.Checked)
+          {
             textBoxGlobalUnwatchedOnlyValue.Enabled = false;
-          else 
+            UserProfileName.Enabled = true;
+          }
+          else
+          {
             textBoxGlobalUnwatchedOnlyValue.Enabled = true;
+            UserProfileName.Enabled = false;
+          }
         }
 
     }

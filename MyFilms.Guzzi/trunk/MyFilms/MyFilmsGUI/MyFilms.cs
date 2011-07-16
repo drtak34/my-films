@@ -463,6 +463,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("statusmessage", message);
     }
 
+    //public static event WatchedEventDelegate WatchedItem;
+    //public delegate void WatchedEventDelegate(MFMovie movie, bool watched, int count);
+
+    //public static event RatingEventDelegate RateItem;
+    //public delegate void RatingEventDelegate(MFMovie movie, string rating);
+
+
     #endregion
 
     #region Base Overrides
@@ -568,6 +575,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // actors are possible by using property:actors|propertyvalue:actorname
         // if invalid values are given, param start is ignored
         // optional: add public method for basichome editors to ask possible values
+        // new: add jump to DETAILS view for certain movie for trakt integration !!!
       }      
       string jumpToViewName = null;
       if (LoadWithParameterSupported)
@@ -2076,25 +2084,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //if (sr["Checked"].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue) // changed to take setup config into consideration
           if (conf.StrEnhancedWatchedStatusHandling)
           {
-            if (EnhancedWatchedCount(sr[conf.StrWatchedField].ToString(), conf.StrUserProfileName) > 0)
+            if (EnhancedWatched(sr[conf.StrWatchedField].ToString(), conf.StrUserProfileName) == true)
               item.IsPlayed = true;
-            if (!sr[conf.StrWatchedField].ToString().Contains("Global:"))
-            {
-              if (sr[conf.StrWatchedField].ToString().Length > 0)
-                sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|Global:0";
-              else
-                sr[conf.StrWatchedField] = "Global:0";
-            }
+            if (!sr[conf.StrWatchedField].ToString().StartsWith("Global:"))
+              sr[conf.StrWatchedField] = "Global:0:-1";
             if (!sr[conf.StrWatchedField].ToString().Contains(conf.StrUserProfileName + ":"))
             {
               if (sr[conf.StrWatchedField].ToString().Length > 0)
-                sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|" + conf.StrUserProfileName + ":0";
+                sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|" + conf.StrUserProfileName + ":0:-1";
               else
-                sr[conf.StrWatchedField] = conf.StrUserProfileName + ":0";
+                sr[conf.StrWatchedField] = conf.StrUserProfileName + ":0:-1";
             }
           }
           else
           {
+            if (sr[conf.StrWatchedField].ToString().StartsWith("Global:"))
+            {
+              string s = sr[conf.StrWatchedField].ToString();
+              string count = s.Substring(s.IndexOf(":") + 1, 1);
+              if (count == "0")
+                sr[conf.StrWatchedField] = conf.GlobalUnwatchedOnlyValue;
+              else 
+                sr[conf.StrWatchedField] = "true";
+            }
+            
             if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
               if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
                 item.IsPlayed = true;
@@ -2304,34 +2317,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //----------------------------------------------------------------------------------------
 
     
-    public static int EnhancedWatchedCount(string strEnhancedWatchedValue, string strUserProfileName)
+    public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
     {
-      int count = 0;
-
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0"))
       {
-        return 0;
+        return false;
       }
       
       if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":"))
       {
-        return 0;
+        return false;
       }
 
-      string[] split = strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-      foreach (string s in split)
-      {
-        if (s.Contains(":"))
-        {
-          string userprofilename = s.Substring(0, s.IndexOf(":")); // extract userprofilename
-          string usercount = s.Substring(s.IndexOf(":") + 1);
-          if (userprofilename == strUserProfileName)
-          {
-            bool success = int.TryParse(usercount, out count);
-          }
-        }
-      }
-      return count;
+      //string[] split = strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+      //int count = 0;
+      //foreach (string s in split)
+      //{
+      //  if (s.Contains(":"))
+      //  {
+      //    string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
+      //    string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
+      //    // string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+          
+      //    if (tempuser == strUserProfileName)
+      //    {
+      //      bool success = int.TryParse(tempcount, out count);
+      //      if (success) 
+      //        return count;
+      //    }
+      //  }
+      //}
+      //return count;
+      return true;
     }
 
     private void Load_Rating(decimal rating)
@@ -3883,7 +3900,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
               MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
               BtnSrtBy.Label = conf.CurrentSortMethod;
-              // BtnSrtBy.Label = conf.WStrSort; // ToDo: Check, wh yinitial value not set properly
+              // BtnSrtBy.Label = conf.WStrSort; // ToDo: Check, why initial value not set properly
               if (conf.StrSortSens == " ASC")
                 BtnSrtBy.IsAscending = true;
               else

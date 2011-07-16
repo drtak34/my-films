@@ -258,7 +258,7 @@ namespace MyFilmsPlugin.MyFilms
                       bool played = false;
                       if (EnhancedWatchedStatusHandling)
                       {
-                        if (MyFilms.EnhancedWatchedCount(sr[WatchedField].ToString(), UserProfileName) > 0)
+                        if (MyFilms.EnhancedWatched(sr[WatchedField].ToString(), UserProfileName) == true)
                           played = true;
                       }
                       else
@@ -278,7 +278,13 @@ namespace MyFilmsPlugin.MyFilms
                       ////if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
                       ////  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
                       ////    movie.Watched = true;
-                      movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
+
+                      float rating = 0;
+                      bool success = float.TryParse(sr["Rating"].ToString(), out rating);
+                      if (!success) rating = 0;
+                      movie.Rating = rating;
+                      // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
+                      
                       string mediapath = string.Empty;
                       if (!string.IsNullOrEmpty(Storage) && Storage != "(none)")
                       {
