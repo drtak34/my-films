@@ -220,8 +220,11 @@ namespace MyFilmsPlugin.MyFilms
               bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
               string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
               string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
+              bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
               string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
               string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
+              string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
+
               string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
               LogMyFilms.Debug("GetMovies: TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
               if (System.IO.File.Exists(Catalog) && TraktEnabled)
@@ -253,19 +256,19 @@ namespace MyFilmsPlugin.MyFilms
                       movie.Title = sr["OriginalTitle"].ToString();
 
                       bool played = false;
-                      if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                      if (EnhancedWatchedStatusHandling)
                       {
-                        if (MyFilms.EnhancedWatchedCount(sr[MyFilms.conf.StrWatchedField].ToString(), MyFilms.conf.StrUserProfileName) > 0)
+                        if (MyFilms.EnhancedWatchedCount(sr[WatchedField].ToString(), UserProfileName) > 0)
                           played = true;
                       }
                       else
                       {
-                        if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
-                          if (sr[MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+                        if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
+                          if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
                             played = true;
-                        if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
-                          if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
-                            played = true;
+                        //if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
+                        //  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
+                        //    played = true;
                       }
                       movie.Watched = played;
                       
