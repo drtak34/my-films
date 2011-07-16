@@ -2304,7 +2304,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //----------------------------------------------------------------------------------------
 
     
-    private int EnhancedWatchedCount(string strEnhancedWatchedValue, string strUserProfileName)
+    public static int EnhancedWatchedCount(string strEnhancedWatchedValue, string strUserProfileName)
     {
       int count = 0;
 

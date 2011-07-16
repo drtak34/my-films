@@ -251,12 +251,30 @@ namespace MyFilmsPlugin.MyFilms
                       else movie.ID = 0;
                       movie.Year = Int32.Parse(sr["Year"].ToString());
                       movie.Title = sr["OriginalTitle"].ToString();
-                      if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
-                        if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower())
-                          movie.Watched = true;
-                      //if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
-                      //  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
+
+                      bool played = false;
+                      if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
+                      {
+                        if (MyFilms.EnhancedWatchedCount(sr[MyFilms.conf.StrWatchedField].ToString(), MyFilms.conf.StrUserProfileName) > 0)
+                          played = true;
+                      }
+                      else
+                      {
+                        if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
+                          if (sr[MyFilms.conf.StrWatchedField].ToString().ToLower() != MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+                            played = true;
+                        if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
+                          if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
+                            played = true;
+                      }
+                      movie.Watched = played;
+                      
+                      //if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
+                      //  if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower())
                       //    movie.Watched = true;
+                      ////if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
+                      ////  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
+                      ////    movie.Watched = true;
                       movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
                       string mediapath = string.Empty;
                       if (!string.IsNullOrEmpty(Storage) && Storage != "(none)")
