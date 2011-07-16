@@ -5357,5 +5357,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           System.Diagnostics.Process.Start("http://trakt.tv/");
         }
 
+        private void chkEnhancedWatchedStatusHandling_CheckedChanged(object sender, EventArgs e)
+        {
+          if (chkEnhancedWatchedStatusHandling.Checked) 
+            textBoxGlobalUnwatchedOnlyValue.Enabled = false;
+          else 
+            textBoxGlobalUnwatchedOnlyValue.Enabled = true;
+        }
+
     }
 }

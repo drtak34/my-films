@@ -2435,6 +2435,7 @@
           this.chkEnhancedWatchedStatusHandling.Text = "Enhanced Watched Status Handling";
           this.ToolTip1.SetToolTip(this.chkEnhancedWatchedStatusHandling, resources.GetString("chkEnhancedWatchedStatusHandling.ToolTip"));
           this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
+          this.chkEnhancedWatchedStatusHandling.CheckedChanged += new System.EventHandler(this.chkEnhancedWatchedStatusHandling_CheckedChanged);
           // 
           // CheckWatched
           // 
