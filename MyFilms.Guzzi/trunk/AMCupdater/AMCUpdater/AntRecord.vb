@@ -428,6 +428,10 @@ Public Class AntRecord
         _XMLElement = XMLDoc.CreateElement("Movie")
     End Sub
     Public Function VerifyElement(ByVal otitle As String, ByVal currentNode As Xml.XmlNode) As Xml.XmlNode
+        ' added to avoid exception with empty otitle reported by z3us
+        If otitle Is Nothing Then
+            Return currentNode
+        End If
 
         Dim CurrentNode2 As Xml.XmlNode
         Dim CurrentAttribute2 As String
@@ -999,10 +1003,15 @@ Public Class AntRecord
 
 
         For index As Integer = 0 To wurl.Count - 1
-            ' calculate year
-            wyear = wurl.Item(index).Year.ToString.Substring(0, 4)
             wOptions = wurl.Item(index).Options.ToString
-            If Double.TryParse(wyear, dyear) = False Then
+            ' calculate year
+            If wurl.Item(index).Year.ToString.Length > 3 Then
+                wyear = wurl.Item(index).Year.ToString.Substring(0, 4)
+                If Double.TryParse(wyear, dyear) = False Then
+                    wyear = ""
+                    dyear = 0
+                End If
+            Else
                 wyear = ""
                 dyear = 0
             End If
