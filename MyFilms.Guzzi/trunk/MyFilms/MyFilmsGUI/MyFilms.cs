@@ -4341,14 +4341,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           choiceViewGlobalOptions.Add("filterdbsetrating");
 
           // Choose UserProfileName
-          if (MyFilmsDetail.ExtendedStartmode("Global Settings - Enhanced Watched Status Handling - User Profile Name"))
-          {
+          //if (MyFilmsDetail.ExtendedStartmode("Global Settings - Enhanced Watched Status Handling - User Profile Name"))
+          //{
             if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
             {
               dlg1.Add(string.Format(GUILocalizeStrings.Get(1079840), conf.StrUserProfileName));
               choiceViewGlobalOptions.Add("userprofilename");
             }
-          }
+          //}
 
           // From ZebonsMerge
           //dlg1.Add(string.Format(GUILocalizeStrings.Get(1079863), MesFilms.conf.StrGrabber_ChooseScript.ToString(), (!MesFilms.conf.StrGrabber_ChooseScript).ToString()));   // Choose grabber script for that session
