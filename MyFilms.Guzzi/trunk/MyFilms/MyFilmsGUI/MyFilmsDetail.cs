@@ -1952,6 +1952,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             AddWatchedByOne(Index, userprofilename);
           AddWatchedByOne(Index, "Global"); // Global watched count will always be set
           // ToDo: Could also populate "watched history" here (future version)
+
+          // tell any listeners that user watched the movie
+          MFMovie movie = new MFMovie();
+          movie = GetMovieFromRecord(MyFilms.r[Index]);
+          if (WatchedItem != null)
+            WatchedItem(movie, true, GetWatchedCount(Index, userprofilename) + 1);
         }
 
 
@@ -1994,12 +2000,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               newEnhancedWatchedValue = EnhancedWatchedValue + "|" + userprofilename + ":" + (count + 1).ToString() + ":" + "-1";
           }
           MyFilms.r[Index][MyFilms.conf.StrWatchedField] = newEnhancedWatchedValue;
-
-          // tell any listeners that user watched the movie
-          MFMovie movie = new MFMovie();
-          movie = GetMovieFromRecord(MyFilms.r[Index]);
-          if (WatchedItem != null)
-            WatchedItem(movie, true, count + 1);
 
         }
 
