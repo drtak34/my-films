@@ -1153,7 +1153,7 @@ Public Class AntRecord
             'First ensure we have a valid movie number so the record can be saved:
             CurrentAttribute = "Number"
             TempValue = _MovieNumber
-            CreateOrUpdateElement(CurrentAttribute, TempValue)
+            CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             'LogEvent("ProcessFile() - get valid record number: '" & TempValue & "'", EventLogLevel.InformationalWithGrabbing)
 
             If (ProcessMode = Process_Mode_Names.Import) Then
