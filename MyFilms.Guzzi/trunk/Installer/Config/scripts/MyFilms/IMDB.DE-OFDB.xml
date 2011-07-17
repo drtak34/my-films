@@ -3,8 +3,6 @@
   <Section>
     <DBName>IMDB.DE with OFDB</DBName>
     <URLPrefix>http://www.imdb.de</URLPrefix>
-    <Mapping />
-    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.imdb.de_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_eistgesuchte.Titel_x007C_bereinstimmung</KeyStartList>
@@ -36,18 +34,18 @@
     <Details>
       <KeyStartBody Param1="" Param2="" />
       <KeyEndBody />
-      <KeyStartOTitle Param1="_x0023_REGEX_x0023_ls.._x0022_._x002A__x003F__x0022_.." Param2="">_x0023_REGEX_x0023__x003C_h5_x003E_._x002A_Auch_x0020_bekannt_x0020_als._x002A__x003F__x005B__x005E__x003C__x005D__x002A__x003C__x002F_h5_x003E_._x002A__x003F_content_x0022_._x002A__x003F__x0022_</KeyStartOTitle>
-      <KeyEndOTitle>_x0022_</KeyEndOTitle>
+      <KeyStartOTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_title_x003E_</KeyStartOTitle>
+      <KeyEndOTitle>_x0020__x0028_</KeyEndOTitle>
       <KeyOTitleIndex />
-      <KeyOTitlePage />
-      <KeyStartTTitle Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x003C_titel_x003E_</KeyStartTTitle>
-      <KeyEndTTitle>_x003C__x002F_titel_x003E_</KeyEndTTitle>
-      <KeyTTitleRegExp>_x003C_td_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F__x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_</KeyTTitleRegExp>
+      <KeyOTitlePage>URL_x0020_Redirection_x0020_Generic_x0020_2</KeyOTitlePage>
+      <KeyStartTTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_h1_x003E_</KeyStartTTitle>
+      <KeyEndTTitle>_x003C_</KeyEndTTitle>
+      <KeyTTitleRegExp />
       <KeyTTitleIndex />
-      <KeyTTitlePage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyTTitlePage>
+      <KeyTTitlePage />
       <KeyTTitleMaxItems>_x0039_99</KeyTTitleMaxItems>
-      <KeyTTitleLanguage>Deutschland</KeyTTitleLanguage>
-      <KeyTTitleLanguageAll>USA_x002C__x0020_Argentina_x002C__x0020_Austria_x002C__x0020_Belgium_x002C__x0020_Brazil_x002C__x0020_Croatia_x002C__x0020_Czech_x0020_Republic_x002C__x0020_Estonia_x002C__x0020_Finland_x002C__x0020_France_x002C__x0020_Germany_x002C__x0020_Italy_x002C__x0020_Japan_x002C__x0020_Mexico_x002C__x0020_Poland_x002C__x0020_Portugal_x002C__x0020_Romania_x002C__x0020_Slovakia_x002C__x0020_Spain_x002C__x0020_Sweden_x002C__x0020_Turkey_x002C__x0020_Uruguay_x002C__x0020_Denmark_x002C__x0020_Greece_x002C__x0020_Norway_x002C__x0020_Russia_x002C__x0020_Canada_x002C__x0020_Hungary_x002C__x0020_Estonia_x002C__x0020_Slovenia</KeyTTitleLanguageAll>
+      <KeyTTitleLanguage />
+      <KeyTTitleLanguageAll />
       <KeyStartImg Param1="_x0023_REVERSE_x0023_" Param2="">_x0022__x0020_data-rmconst</KeyStartImg>
       <KeyEndImg>src_x003D__x0022_</KeyEndImg>
       <KeyImgIndex />
@@ -81,12 +79,12 @@
       <KeyProductPage>URL_x0020_Redirection_x0020_Persons</KeyProductPage>
       <KeyProductRegExp>_x003C_a_x005C_s_x002B_href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022__x005B__x005E__x003E__x005D__x002A__x003E__x0028__x003F__x003C_person_x003E__x005B__x005E__x003C__x005D__x002B__x0029__x003C__x002F_a_x003E_</KeyProductRegExp>
       <KeyProductMaxItems />
-      <KeyStartWriter Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003E_Buch_x003C_._x002A__x003F_</KeyStartWriter>
+      <KeyStartWriter Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003E_Buch._x002A__x003F_</KeyStartWriter>
       <KeyEndWriter>_x003C__x002F_table_x003E_</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage>URL_x0020_Redirection_x0020_Persons</KeyWriterPage>
       <KeyWriterRegExp>_x003C_a_x005C_s_x002B_href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_._x002A__x003F__x0022__x003E__x005C__x0028__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x005C__x0029_</KeyWriterRegExp>
-      <KeyWriterMaxItems>_x0039_99</KeyWriterMaxItems>
+      <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_table_x0020_class_x003D__x0022_cast_x0022__x003E_._x002A__x003F__x007C__x003C_table_x0020_class_x003D__x0022_cast_list_x0022__x003E_._x002A__x003F_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_table_x003E_</KeyEndCredits>
       <KeyCreditsRegExp>td_x0020_class_x003D__x0022_nm_x0022__x003E__x003C_a_x0020_href_x003D_._x002F_name._x002A__x003F__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_._x002A__x003F__x003C_td.class_x003D__x0022_char_x0022__x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyCreditsRegExp>
@@ -125,8 +123,8 @@
       <KeyEndTagline>_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_._x002A__x007C__x003C__x002F_div_x003E_._x002A_</KeyEndTagline>
       <KeyTaglineIndex />
       <KeyTaglinePage />
-      <KeyStartCertification Param1="_x0023_REGEX_x0023__x005C__x0028_._x005C__x0029_" Param2="">_x0023_REGEX_x0023_Deutschland:</KeyStartCertification>
-      <KeyEndCertification>_x007C_</KeyEndCertification>
+      <KeyStartCertification Param1="_x0023_REGEX_x0023__x005C__x0028_._x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h5_x003E_Altersfreigabe._x002A__x003F_Deutschland:</KeyStartCertification>
+      <KeyEndCertification>_x0023_REGEX_x0023__x005C__x007C__x007C__x003C_</KeyEndCertification>
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
       <KeyCertificationPage />
@@ -176,8 +174,8 @@
       <KeyEndLinkGeneric1>_x003C__x002F_ofdbid_x003E_</KeyEndLinkGeneric1>
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page>URL_x0020_Gateway</KeyLinkGeneric1Page>
-      <KeyStartLinkGeneric2 Param1="" Param2="" />
-      <KeyEndLinkGeneric2 />
+      <KeyStartLinkGeneric2 Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_m.imdb.com_x002F_title_x002F__x007C__x002F_">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.de_x002F_title_x002F_</KeyStartLinkGeneric2>
+      <KeyEndLinkGeneric2>_x002F__x0022__x0020__x002F__x003E_</KeyEndLinkGeneric2>
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
       <KeyStartGeneric1 Param1="" Param2="">_x003C_beschreibung_x003E_</KeyStartGeneric1>
@@ -204,7 +202,7 @@
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_1 source="TranslatedTitle" destination="OriginalTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_4 source="Rating" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
