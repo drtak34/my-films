@@ -2447,7 +2447,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         LogMyFilms.Debug("(Load_Lstdetail): Item is Movie itself!");
         string[] wfanart = new string[2];
-        wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", false, currentItem.ThumbnailImage, string.Empty);
+
+        string wtitle = currentItem.Label;
+
+        if (MyFilms.conf.StrTitle1 == "FormattedTitle") // added to get fanart displayed when mastertitle is set to formattedtitle
+        {
+          wtitle = MyFilms.r[facadeView.SelectedListItem.ItemId]["OriginalTitle"].ToString();
+          //Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
+          if (MyFilms.conf.StrTitle1 != "OriginalTitle")
+          {
+
+            if (MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+              wtitle = MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
+          }
+        }
+
+        wfanart = MyFilmsDetail.Search_Fanart(wtitle, true, "file", false, currentItem.ThumbnailImage, string.Empty);
         LogMyFilms.Debug("MyFilm (Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         if (wfanart[0] == " ")
         {
@@ -5679,35 +5694,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           break;
         case "grabber":
-          string title = string.Empty;
-          string mediapath = string.Empty;
-          if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString()))
-          {
-            title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
-            LogMyFilms.Debug("selecting (grabb_Internet_Informations) with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
-          }
-          else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString())) // Master Title
-          {
-            title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString();
-            LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (master)title = '" + title.ToString() + "'");
-          }
-          else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle2].ToString())) // Secondary title
-          {
-            title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrTitle2].ToString();
-            LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (secondary)title = '" + title.ToString() + "'");
-          }
-          else if (!string.IsNullOrEmpty(MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
-          {
-            title = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString();
-            if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
-            if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
-            if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-            LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (media source)name = '" + title.ToString() + "'");
-          }
-
-          if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          mediapath = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString(); // Configured GrabberTitle
+          string title = MyFilmsDetail.GetSearchTitle(r, facadeView.SelectedListItem.ItemId, "titleoption");
+          string mediapath = mediapath = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString();
           if (mediapath.Contains(";")) // take the forst source file
           {
             mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
@@ -8610,186 +8598,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("(DisableFanart): Fanart disabled !");
     }
 
-    //-------------------------------------------------------------------------------------------
-    //  Search All Fanart for a given movie
-    //-------------------------------------------------------------------------------------------        
-    public static void SearchFanart(DataRow[] r1, int Index, bool ExtendedSearch)
-    {
-      //Searchdirectory:
-      LogMyFilms.Debug("(SearchtrailerLocal) - StrDirStortrailer: " + MyFilms.conf.StrDirStorTrailer);
-      //Title1 = Movietitle
-      LogMyFilms.Debug("(SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle1] : '" + MyFilms.r[Index][MyFilms.conf.StrTitle1] + "'");
-      //Title2 = Translated Movietitle
-      LogMyFilms.Debug("(SearchTrailerLocal) - MesFilms.r[MesFilms.conf.StrIndex][MesFilms.conf.StrTitle2] : '" + MyFilms.r[Index][MyFilms.conf.StrTitle2] + "'");
-      //Cleaned Title
-      LogMyFilms.Debug("(SearchTrailerLocal) - Cleaned Title                                               : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
-      //Index of facadeview?
-      LogMyFilms.Debug("(SearchtrailerLocal) - Index: '" + Index + "'");
-      //Full Path to Film
-      LogMyFilms.Debug("(SearchtrailerLocal) - FullMediasource: '" + (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim() + "'");
-
-      ArrayList result = new ArrayList();
-      ArrayList resultsize = new ArrayList();
-      string[] filesfound = new string[100];
-      Int64[] filesfoundsize = new Int64[100];
-      int filesfoundcounter = 0;
-      string file = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
-      string titlename = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
-      string titlename2 = MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString();
-      string directoryname = string.Empty;
-      string movieName = string.Empty;
-      Int64 wsize = 0; // Temporary Filesize detection
-      // split searchpath information delimited by semicolumn (multiple searchpathes from config)
-      string[] Trailerdirectories = MyFilms.conf.StrDirStorTrailer.Split(new Char[] { ';' });
-      LogMyFilms.Debug("(SearchtrailerLocal) Search for '" + file + "' in '" + MyFilms.conf.StrDirStorTrailer + "'");
-
-      //Retrieve original directory of mediafiles
-      //directoryname
-      movieName = (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim();
-      movieName = movieName.Substring(movieName.LastIndexOf(";") + 1);
-      LogMyFilms.Debug("(SearchtrailerLocal) splits media directory name: '" + movieName + "'");
-      try
-      { directoryname = System.IO.Path.GetDirectoryName(movieName); }
-      catch
-      { directoryname = string.Empty; }
-      LogMyFilms.Debug("(SearchtrailerLocal) get media directory name: '" + directoryname + "'");
-
-      //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
-      if (!string.IsNullOrEmpty(directoryname))
-      {
-        string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
-        foreach (string filefound in files)
-        {
-          if (((filefound.ToLower().Contains("trailer")) || (filefound.ToLower().Contains("trl"))) && (Utils.IsVideo(filefound)))
-          {
-            wsize = new System.IO.FileInfo(filefound).Length;
-            result.Add(filefound);
-            resultsize.Add(wsize);
-            filesfound[filesfoundcounter] = filefound;
-            filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-            filesfoundcounter = filesfoundcounter + 1;
-            LogMyFilms.Debug("(TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
-          }
-        }
-      }
-
-      //Search Filenames with "title" in Trailer Searchpath
-      if (ExtendedSearch)
-      {
-        string[] files;
-        string[] directories;
-
-        foreach (string storage in Trailerdirectories)
-        {
-          LogMyFilms.Debug("(TrailersearchLocal) - TrailerSearchDirectoriy: '" + storage + "'");
-
-          // search in root directory
-          files = Directory.GetFiles(storage, "*.*", SearchOption.TopDirectoryOnly);
-          LogMyFilms.Debug("(TrailersearchLocal) - Search for matching files in root directory: '" + storage + "'");
-          foreach (string filefound in files)
-          {
-            if (((filefound.ToLower().Contains(titlename.ToLower())) || (filefound.ToLower().Contains(titlename2.ToLower()))) && (Utils.IsVideo(filefound)))
-            {
-              wsize = new System.IO.FileInfo(filefound).Length;
-              result.Add(filefound);
-              resultsize.Add(wsize);
-              filesfound[filesfoundcounter] = filefound;
-              filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-              filesfoundcounter = filesfoundcounter + 1;
-              LogMyFilms.Debug("(TrailersearchLocal) - Singlefiles found in Trailer root directory: Size '" + wsize + "' - Name '" + filefound + "'");
-            }
-          }
-
-          // search in subdirectories:
-          directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
-          LogMyFilms.Debug("(TrailersearchLocal) - Search for matching (sub)directories ...");
-          foreach (string directoryfound in directories)
-          {
-            LogMyFilms.Debug("(TrailersearchLocal) - directory to check: '" + directoryfound + "'");
-            if ((directoryfound.ToLower().Contains(titlename.ToLower())) || (directoryfound.ToLower().Contains(titlename2.ToLower())))
-            {
-              LogMyFilms.Debug("(TrailersearchLocal) - Directory found: '" + directoryfound + "'");
-              files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files)
-              {
-                if (Utils.IsVideo(filefound))
-                {
-                  wsize = new System.IO.FileInfo(filefound).Length;
-                  result.Add(filefound);
-                  resultsize.Add(wsize);
-                  filesfound[filesfoundcounter] = filefound;
-                  filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-                  filesfoundcounter = filesfoundcounter + 1;
-                  LogMyFilms.Debug("(TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
-                }
-              }
-
-            }
-            else
-            {
-              files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files)
-              {
-                if (((filefound.ToLower().Contains(titlename.ToLower())) || (filefound.ToLower().Contains(titlename2.ToLower()))) && (Utils.IsVideo(filefound)))
-                {
-                  wsize = new System.IO.FileInfo(filefound).Length;
-                  result.Add(filefound);
-                  resultsize.Add(wsize);
-                  filesfound[filesfoundcounter] = filefound;
-                  filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-                  filesfoundcounter = filesfoundcounter + 1;
-                  LogMyFilms.Debug("(TrailersearchLocal) - Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
-                }
-              }
-            }
-          }
-        }
-      }
-
-      var sort = from fn in filesfound
-                 orderby new FileInfo(fn).Length descending
-                 select fn;
-      foreach (string n in filesfound)
-        LogMyFilms.Debug("(Sorted Trailerfiles) ******* : '" + n + "'");
-
-      Array.Sort(filesfoundsize);
-      for (int i = 0; i < result.Count; i++)
-      {
-        LogMyFilms.Debug("(Sorted Trailerfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
-      }
-
-      string trailersourcepath = "";
-
-      if (result.Count != 0)
-      {
-        //result.Sort();
-        trailersourcepath = result[0].ToString();
-        //ArrayList wresult = new ArrayList();
-        //foreach (String s in result)
-        if (result.Count > 1)
-        {
-          for (int i = 1; i < result.Count; i++)
-          {
-            trailersourcepath = trailersourcepath + ";" + result[i];
-            LogMyFilms.Debug("(SearchTrailerLocal) - Added Trailer to Trailersouce: '" + result[i] + "'");
-          }
-        }
-        LogMyFilms.Debug("(SearchTrailerLocal) - Total Files found: " + result.Count);
-        LogMyFilms.Debug("(SearchTrailerLocal) - TrailerSourcePath: '" + trailersourcepath + "'");
-      }
-      else
-        LogMyFilms.Debug("(SearchTrailerLocal) - NO TRAILERS FOUND !!!!");
-
-      if ((trailersourcepath.Length > 0) && (MyFilms.conf.StrStorageTrailer.Length != 0 && MyFilms.conf.StrStorageTrailer != "(none)"))
-      {
-        LogMyFilms.Debug("(SearchTrailerLocal) - Old Trailersourcepath: '" + MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] + "'");
-        MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] = trailersourcepath;
-        LogMyFilms.Debug("(SearchTrailerLocal) - New Trailersourcepath    : '" + MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] + "'");
-        //Update_XML_database();
-        LogMyFilms.Debug("(SearchTrailerLocal) - Database Updated !!!!");
-      }
-    }
-
     private void ShowMessageDialog(string headline, string line1, string line2)
     {
       GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -8825,10 +8633,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             actorID = Convert.ToInt32(strActor[0]); // IMDBActor  GetActorInfo(int idActor) we need integer)
             actorname = strActor[1];
           }
-
           MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorID);
         }
-
       }
     }
 

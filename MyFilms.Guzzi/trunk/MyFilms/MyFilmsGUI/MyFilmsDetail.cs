@@ -839,22 +839,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
                       if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
                       {
-                        title = string.Empty;
-                        if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
-                          title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
-                        else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
-                          title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-                        else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
-                          title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
-                        else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
-                        {
-                          title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-                          if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
-                          if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
-                          if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-                        }
-                        if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
-                          title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                        title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
 
                         string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked";
                         //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
@@ -1465,33 +1450,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         }
                     }
                     // setProcessAnimationStatus(true, m_SearchAnimation); // will be done later ...
-                    title = string.Empty;
-                    mediapath = string.Empty;
-                    if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
-                    {
-                      title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
-                      LogMyFilms.Debug("selecting (grabb_Internet_Informations) with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
-                    }
-                    else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
-                    {
-                      title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-                      LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (master)title = '" + title.ToString() + "'");
-                    }
-                    else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
-                    {
-                      title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
-                      LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (secondary)title = '" + title.ToString() + "'");
-                    }
-                    else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
-                    {
-                      title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-                      if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
-                      if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
-                      if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-                      LogMyFilms.Debug("selecting (grabb_Internet_Informations) with (media source)name = '" + title.ToString() + "'");
-                    }
-                    if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
-                        title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
+                    title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, ""); 
                     mediapath = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
                     if (mediapath.Contains(";")) // take the forst source file
                     {
@@ -2019,6 +1978,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilms._rw.ExitWriteLock();
           LogMyFilms.Info("Movie Database updated");
           MyFilms.FSwatcher.EnableRaisingEvents = true;
+        }
+
+
+
+        //-------------------------------------------------------------------------------------------
+        //  Get Search title
+        //-------------------------------------------------------------------------------------------        
+        public static string GetSearchTitle(DataRow[] r1, int index, string titleoption)
+        {
+          string title = "";
+          if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && MyFilms.conf.ItemSearchGrabber != "(none)" && !string.IsNullOrEmpty(r1[index][MyFilms.conf.ItemSearchGrabber].ToString()))
+          {
+            title = r1[index][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
+            LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with '" + MyFilms.conf.ItemSearchGrabber + "' = '" + title.ToString() + "'");
+          }
+          else if (MyFilms.conf.StrTitle1 != "(none)" && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrTitle1].ToString())) // Master Title
+          {
+            title = r1[index][MyFilms.conf.StrTitle1].ToString();
+            LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (master)title = '" + title.ToString() + "'");
+          }
+          else if (MyFilms.conf.StrTitle2 != "(none)" && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrTitle2].ToString())) // Secondary title
+          {
+            title = r1[index][MyFilms.conf.StrTitle2].ToString();
+            LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (secondary)title = '" + title.ToString() + "'");
+          }
+          else if (MyFilms.conf.StrStorage != "(none)" && !string.IsNullOrEmpty(r1[index][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
+          {
+            title = r1[index][MyFilms.conf.StrStorage].ToString();
+            if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
+            if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
+            if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
+            LogMyFilms.Debug("GetSearchTitle() - selecting searchtitle with (media source)name = '" + title.ToString() + "'");
+          }
+
+          if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
+            title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
+          return title;
         }
 
         //-------------------------------------------------------------------------------------------
@@ -3312,9 +3308,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string[] filesfound = new string[100];
           Int64[] filesfoundsize = new Int64[100];
           int filesfoundcounter = 0;
-          string file = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
-          string titlename = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
-          string titlename2 = MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString();
+          //string file = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
+          //string titlename = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
+          //string titlename2 = MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString();
           //string file = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
           //string titlename = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
           //string titlename2 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
@@ -5136,23 +5132,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
                 if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
                 {
-                  string title = string.Empty;
-                  if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabber) && !string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString()))
-                    title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchGrabber].ToString(); // Configured GrabberTitle
-                  else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString())) // Mastertitle
-                    title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-                  else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString())) // Secondary title
-                    title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
-                  else if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Name from source (media)
-                  {
-                    title = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-                    if (title.Contains(";")) title = title.Substring(0, title.IndexOf(";"));
-                    if (title.Contains("\\")) title = title.Substring(title.LastIndexOf("\\") + 1);
-                    if (title.Contains(".")) title = title.Substring(0, title.LastIndexOf("."));
-                  }
-                  if (title.IndexOf(MyFilms.conf.TitleDelim) > 0)
-                    title = title.Substring(title.IndexOf(MyFilms.conf.TitleDelim) + 1);
-
+                  string title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, ""); 
                   string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked";
                   //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
@@ -6555,18 +6535,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void SearchTrailerLocal(DataRow[] r1, int Index, bool ExtendedSearch)
         {
-            //Searchdirectory:
-            LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) - StrDirStortrailer: " + MyFilms.conf.StrDirStorTrailer);
-            //Title1 = Movietitle
-            LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - mastertitle      : '" + MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString() + "'");
-            //Title2 = Translated Movietitle
-            LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - secondary title  : '" + MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString() + "'");
-            //Cleaned Title
-            LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");            
-            //Index of facadeview?
-            LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) - Index            : '" + Index + "'");
-            //Full Path to Film
-            LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) - FullMediasource  : '" + (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim() + "'");
+            LogMyFilms.Debug("(SearchTrailerLocal) - mastertitle      : '" + MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString() + "'");
+            if (MyFilms.conf.StrTitle2 != "(none)")
+              LogMyFilms.Debug("(SearchTrailerLocal) - secondary title  : '" + MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString() + "'");
+            LogMyFilms.Debug("(SearchTrailerLocal) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");            
+            LogMyFilms.Debug("(SearchtrailerLocal) - Index            : '" + Index + "'");
+            LogMyFilms.Debug("(SearchtrailerLocal) - StrDirStortrailer: '" + MyFilms.conf.StrDirStorTrailer + "'");
+            LogMyFilms.Debug("(SearchtrailerLocal) - FullMediasource  : '" + (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim() + "'");
 
             result = new ArrayList();
             ArrayList resultsize = new ArrayList();
@@ -6575,32 +6550,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             int filesfoundcounter = 0;
             string file = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
             string titlename = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
-            string titlename2 = MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString();
-            //string file = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-            //string titlename = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-            //string titlename2 = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString();
+            string titlename2 = "";
+            if (MyFilms.conf.StrTitle2 != "(none)" && !string.IsNullOrEmpty(MyFilms.conf.StrTitle2))
+              titlename2 = MyFilms.r[Index][MyFilms.conf.StrTitle2].ToString();
             string directoryname = "";
             string movieName = "";
             string[] files = null;
             Int64 wsize = 0; // Temporary Filesize detection
             // split searchpath information delimited by semicolumn (multiple searchpathes from config)
             string[] Trailerdirectories = MyFilms.conf.StrDirStorTrailer.ToString().Split(new Char[] { ';' });
-            LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) Extended Search '" + ExtendedSearch + "' for movie '" + file + "' in search directories: '" + MyFilms.conf.StrDirStorTrailer + "'");
+            LogMyFilms.Debug("(SearchtrailerLocal) Extended Search '" + ExtendedSearch + "' for movie '" + file + "' in search directories: '" + MyFilms.conf.StrDirStorTrailer + "'");
 
             //Retrieve original directory of mediafiles
             //directoryname
             movieName = (string)MyFilms.r[Index][MyFilms.conf.StrStorage].ToString().Trim();
             movieName = movieName.Substring(movieName.LastIndexOf(";") + 1);
-            LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) splits media directory name: '" + movieName + "'"); 
+            LogMyFilms.Debug("(SearchtrailerLocal) splits media directory name: '" + movieName + "'"); 
             try    
             { directoryname = System.IO.Path.GetDirectoryName(movieName); }
             catch
             { directoryname = ""; }
-            LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) get media directory name: '" + directoryname + "'");
+            LogMyFilms.Debug("(SearchtrailerLocal) get media directory name: '" + directoryname + "'");
             if (!System.IO.Directory.Exists(directoryname))
             {
               directoryname = "";
-              LogMyFilms.Debug("MyFilmsDetails (SearchtrailerLocal) directory of movie '" + movieName + "' doesn't exist anymore - check your DB");
+              LogMyFilms.Debug("(SearchtrailerLocal) directory of movie '" + movieName + "' doesn't exist anymore - check your DB");
             }
 
             //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
