@@ -4780,6 +4780,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgRating.Rating = 0;
           dlgRating.SetTitle(GUILocalizeStrings.Get(1079881));
           dlgRating.DoModal(GetID);
+
           MyFilms.conf.StrAntFilterMinRating = dlgRating.Rating.ToString("0.0", CultureInfo.InvariantCulture);
           XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntFilterMinRating", MyFilms.conf.StrAntFilterMinRating);
           LogMyFilms.Info("(FilterDbSetRating) - 'AntFilterMinRating' changed to '" + MyFilms.conf.StrAntFilterMinRating + "'");

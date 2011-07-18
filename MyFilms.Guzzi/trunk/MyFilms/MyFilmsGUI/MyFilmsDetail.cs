@@ -926,9 +926,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                     dlgRating.SetTitle(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
                     dlgRating.DoModal(GetID);
-                    if (dlgmenu.SelectedLabel != 2) // If not returning from "ok"
+                    // if (dlgRating.SelectedLabel == -1 || dlgmenu.SelectedLabel != 2)  // If "ESC" or not returning from "ok"
+                    if (dlgRating.Result == MyFilmsDialogSetRating.ResultCode.Cancel)  // If "ESC" or not returning from "ok"
+                    {
                       Change_Menu("mainmenu");
+                      return;
+                    }
                     MyFilms.r[MyFilms.conf.StrIndex]["Rating"] = dlgRating.Rating;
+
+                    Update_XML_database();
+                    afficher_detail(true);
 
                     // tell any listeners that user rated the movie
                     MFMovie movie = new MFMovie();
@@ -937,8 +944,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (RateItem != null)
                       RateItem(movie, value);
 
-                    Update_XML_database();
-                    afficher_detail(true);
                     break;
 
               case "updatesmenu":

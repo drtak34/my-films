@@ -41,7 +41,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       Close,
       Next,
-      Previous
+      Previous,
+      Cancel
     };
 
     [SkinControl(2)]
@@ -128,6 +129,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             resultCode = ResultCode.Close;
             base.OnMessage(message);
             UpdateRating();
+          }
+          return true;
+        case GUIMessage.MessageType.GUI_MSG_WINDOW_DEINIT:
+          {
+            resultCode = ResultCode.Cancel;
+            base.OnMessage(message);
           }
           return true;
       }
