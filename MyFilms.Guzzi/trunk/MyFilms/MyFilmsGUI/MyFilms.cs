@@ -455,7 +455,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     System.ComponentModel.BackgroundWorker bgIsOnlineCheck = new System.ComponentModel.BackgroundWorker();
     // System.ComponentModel.BackgroundWorker bgOnPageLoad = null;
 
-    private static FileSystemWatcher FSwatcher = new FileSystemWatcher();
+    public static FileSystemWatcher FSwatcher = new FileSystemWatcher();
 
     public delegate void DelegateUpdateProgress(string message);
     public static void UpdateMyProgressbar(string message)
@@ -3799,7 +3799,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //chargement des films
         _rw.EnterReadLock();
         if (reload)
-          BaseMesFilms.LoadFilm(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+          BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
         _rw.ExitReadLock();
       }
@@ -5786,6 +5786,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.Watched_Toggle((int)facadeView.SelectedListItem.ItemId, true);
           }
           //Fin_Charge_Init(true, true);
+          //this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
 
         case "updatemenu":
@@ -7780,62 +7781,77 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (FSwatcher.EnableRaisingEvents && FSwatcher.Filter == System.IO.Path.GetFileName(conf.StrFileXml))
           return; // return, if it's already enabled and DB name has not changed
+        else
+        {
+          FSwatcher.EnableRaisingEvents = false;
+          FSwatcher.Changed -= new FileSystemEventHandler(FSwatcherChanged);
+          FSwatcher.Error -= new ErrorEventHandler(FSwatcherError);
+          //FSwatcher.Created -= new FileSystemEventHandler(FSwatcherCreated);
+          //FSwatcher.Deleted -= new FileSystemEventHandler(FSwatcherDeleted);
+          //FSwatcher.Renamed -= new RenamedEventHandler(FSwatcherRenamed);
+        }
 
         // Init FileSystem Watcher
 
         // ***** Change this as required
-        string path = System.IO.Path.GetFullPath(conf.StrFileXml);
+        string path = System.IO.Path.GetDirectoryName(conf.StrFileXml);
         string filename = System.IO.Path.GetFileName(conf.StrFileXml);
 
         FSwatcher.Path = path;
         FSwatcher.IncludeSubdirectories = false;
+        FSwatcher.Filter = filename; // FSwatcher.Filter = "*.xml";
+        FSwatcher.NotifyFilter = NotifyFilters.LastWrite; // FSwatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.Size;
         //FSwatcher.InternalBufferSize = 64;
-        // For this example, I only care about when new files are
-        // created
-        // FSwatcher.NotifyFilter = NotifyFilters.LastWrite;
-        // FSwatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.Size;
-
-        FSwatcher.Filter = filename;
 
         // Add event handlers: 1 for the event raised when a file is created, and 1 for when it detects an error.
-        FSwatcher.Changed += new FileSystemEventHandler(WatcherChanged);
-        FSwatcher.Error += new ErrorEventHandler(WatcherError);
+        FSwatcher.Changed += new FileSystemEventHandler(FSwatcherChanged);
+        FSwatcher.Error += new ErrorEventHandler(FSwatcherError);
+        //FSwatcher.Created += new FileSystemEventHandler(FSwatcherCreated);
+        //FSwatcher.Deleted += new FileSystemEventHandler(FSwatcherDeleted);
+        //FSwatcher.Renamed += new RenamedEventHandler(FSwatcherRenamed);
 
-        //FSwatcher.Changed += new FileSystemEventHandler(watcher_Changed);
-        //FSwatcher.Created += new FileSystemEventHandler(watcher_Changed);
-        //FSwatcher.Deleted += new FileSystemEventHandler(watcher_Changed);
-        //FSwatcher.Renamed += new RenamedEventHandler(watcher_Renamed);
-        //FSwatcher.Error += new ErrorEventHandler(watcher_Error);
-
-        //FSwatcher.Changed += new FileSystemEventHandler(FSW_Changed);
-        //FSwatcher.Created += new FileSystemEventHandler(FSW_Created);
-        //FSwatcher.Deleted += new FileSystemEventHandler(FSW_Deleted);
-        //FSwatcher.Renamed += new RenamedEventHandler(FSW_Renamed);
-
-        // Begin watching.
-        FSwatcher.EnableRaisingEvents = true;
-        LogMyFilms.Debug("InitFSwatcher() - FSwatcher started watching !");
+        FSwatcher.EnableRaisingEvents = true; // Begin watching.
+        LogMyFilms.Debug("InitFSwatcher() - FSwatcher started watching - DB-file: '" + conf.StrFileXml + "'");
       }
     
     // Define the found event handler.
-      private static void WatcherChanged(object source, FileSystemEventArgs e)
+      private static void FSwatcherChanged(object source, FileSystemEventArgs e)
       {
+        FSwatcher.EnableRaisingEvents = false;
+
+        Thread.Sleep(50);
+        //FileInfo objFileInfo = new FileInfo(e.FullPath);
+        //if (!objFileInfo.Exists) 
+        //  return; // ignore the file changed event
+
         LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
-        ////chargement des films
-        //_rw.EnterReadLock();
-        //// reload
-        //BaseMesFilms.LoadFilm(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-        //// (re)populate dataset
-        //r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-        //_rw.ExitReadLock();
-        
-         //File.Delete(e.FullPath);
+        _rw.EnterReadLock();
+        // load dataset
+        BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+        // (re)populate films
+        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+        _rw.ExitReadLock();
 
         // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
+        FSwatcher.EnableRaisingEvents = true;
       }
 
-      // The error event handler
-      private static void WatcherError(object source, ErrorEventArgs e)
+      private static void FSwatcherCreated(object source, FileSystemEventArgs e)
+      {
+        LogMyFilms.Debug("WatcherCreated() - New FSwatcher Event: '" + e.ChangeType + "', Name: '" + e.Name + "', Path: '" + e.FullPath + "'");
+      }
+
+      private static void FSwatcherDeleted(object source, FileSystemEventArgs e)
+      {
+        LogMyFilms.Debug("WatcherDeleted() - New FSwatcher Event: '" + e.ChangeType + "', Name: '" + e.Name + "', Path: '" + e.FullPath + "'");
+      }
+
+      private static void FSwatcherRenamed(object source, FileSystemEventArgs e)
+      {
+        LogMyFilms.Debug("WatcherRenamed() - New FSwatcher Event: '" + e.ChangeType + "', Name: '" + e.Name + "', Path: '" + e.FullPath + "'");
+      }
+
+      private static void FSwatcherError(object source, ErrorEventArgs e) // The error event handler
       {
          Exception watchException = e.GetException();
          LogMyFilms.Debug("WatcherError() - A FileSystemWatcher error has occurred: " + watchException.Message);
@@ -7845,38 +7861,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          {
             try
             {
-              // This will throw an error at the watcher.NotifyFilter line if it can't get the path.
-             InitFSwatcher();
+              InitFSwatcher(); // This will throw an error at the watcher.NotifyFilter line if it can't get the path.
              LogMyFilms.Debug("WatcherError() - FSwatcher restarted after error !");
             }
             catch
             {
-              // Sleep for a bit; otherwise, it takes a bit of processor time
-              System.Threading.Thread.Sleep(5000);
+              System.Threading.Thread.Sleep(5000); // Sleep for a bit; otherwise, it takes a bit of processor time
             }
          }
       }
-
-      private static void FSW_Renamed(object sender, RenamedEventArgs e)
-      {
-        LogMyFilms.Debug("Umbenannt: " + e.Name);
-      }
-
-      private static void FSW_Deleted(object sender, FileSystemEventArgs e)
-      {
-        LogMyFilms.Debug("Gelöscht: " + e.Name);
-      }
-
-      private static void FSW_Created(object sender, FileSystemEventArgs e)
-      {
-        LogMyFilms.Debug("Erstellt: " + e.Name);
-      }
-
-      private static void FSW_Changed(object sender, FileSystemEventArgs e)
-      {
-        LogMyFilms.Debug("Geändert: " + e.Name);
-      }
-
 
     //*****************************************************************************************
     //*  Update Database in batch mode                                                        *

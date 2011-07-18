@@ -142,7 +142,7 @@ namespace MyFilmsPlugin.MyFilms
             return persons;
         }
 
-        public static void LoadFilm(string StrFileXml)
+        public static void LoadMesFilms(string StrFileXml)
         {
             if (!System.IO.File.Exists(StrFileXml))
             {

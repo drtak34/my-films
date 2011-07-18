@@ -1762,6 +1762,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           LogMyFilms.Info("Database movie changed 'watchedstatus' by setting '" + MyFilms.conf.StrWatchedField.ToString() + "' to '" + MyFilms.r[Index][MyFilms.conf.StrWatchedField] + "' for movie: " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
 
+          Update_XML_database();
+          
           // tell any listeners that user rated the movie
           MFMovie movie = new MFMovie();
           movie = GetMovieFromRecord(MyFilms.r[Index]);
@@ -1770,8 +1772,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             count = 1;
           if (WatchedItem != null)
             WatchedItem(movie, watched, count);
-
-          Update_XML_database();
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2008,10 +2008,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void Update_XML_database()
         {
+          MyFilms.FSwatcher.EnableRaisingEvents = false; // stop FSwatcher for local update, otherwise unneeded reread would be triggered
           MyFilms._rw.EnterWriteLock();
           BaseMesFilms.SaveMesFilms();
           MyFilms._rw.ExitWriteLock();
           LogMyFilms.Info("Movie Database updated");
+          MyFilms.FSwatcher.EnableRaisingEvents = true;
         }
 
         //-------------------------------------------------------------------------------------------
