@@ -515,9 +515,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Initialize Backgroundworker
       InitializeBackgroundWorker();
 
-      // Initialize Filesysstemwatcher
-      // InitFSwatcher();
-
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
     }
@@ -713,6 +710,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //InitGlobalFilters(false);
         Configuration.Current_Config();
         Load_Config(Configuration.CurrentConfig, true);
+        
+        InitFSwatcher(); // load DB watcher for multiseat
+        
         if (MyFilms.conf.StrFanart)
         {
            if (!backdrop.Active) backdrop.Active = true;
@@ -4181,6 +4181,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //else
               //  Refreshfacade(); // load threaded Fin_Charge_Init(false, true)
             }
+
+            // launch DB watcher for multiseat
+            InitFSwatcher();
 
             // Launch Background availability scanner, if configured in setup
             if (MyFilms.conf.ScanMediaOnStart && InitialStart)
@@ -7766,25 +7769,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     }
 
+      private delegate void UpdateWatchTextDelegate(string newText);
+
+      public static void UpdateWatchText(string newText)
+      {
+          MyFilmsDetail.setGUIProperty("statusmessage", newText, true);
+      }
       
       private static void InitFSwatcher()
       {
+        if (FSwatcher.EnableRaisingEvents && FSwatcher.Filter == System.IO.Path.GetFileName(conf.StrFileXml))
+          return; // return, if it's already enabled and DB name has not changed
+
         // Init FileSystem Watcher
 
         // ***** Change this as required
-        FSwatcher.Path = @"\\myServer\c$\test\";
-        FSwatcher.IncludeSubdirectories = true;
+        string path = System.IO.Path.GetFullPath(conf.StrFileXml);
+        string filename = System.IO.Path.GetFileName(conf.StrFileXml);
+
+        FSwatcher.Path = path;
+        FSwatcher.IncludeSubdirectories = false;
         //FSwatcher.InternalBufferSize = 64;
         // For this example, I only care about when new files are
         // created
         // FSwatcher.NotifyFilter = NotifyFilters.LastWrite;
-        FSwatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.Size;
+        // FSwatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.Size;
 
-        FSwatcher.Filter = "*.txt";
+        FSwatcher.Filter = filename;
 
-        // Add event handlers: 1 for the event raised when a file
-        // is created, and 1 for when it detects an error.
-        FSwatcher.Changed += new FileSystemEventHandler(NewFile);
+        // Add event handlers: 1 for the event raised when a file is created, and 1 for when it detects an error.
+        FSwatcher.Changed += new FileSystemEventHandler(WatcherChanged);
         FSwatcher.Error += new ErrorEventHandler(WatcherError);
 
         //FSwatcher.Changed += new FileSystemEventHandler(watcher_Changed);
@@ -7800,20 +7814,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         // Begin watching.
         FSwatcher.EnableRaisingEvents = true;
+        LogMyFilms.Debug("InitFSwatcher() - FSwatcher started watching !");
       }
     
     // Define the found event handler.
-      private static void NewFile(object source, FileSystemEventArgs e)
+      private static void WatcherChanged(object source, FileSystemEventArgs e)
       {
-        LogMyFilms.Debug("A new file has been found! Filename: '" + e.FullPath + "'");
+        LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
+        ////chargement des films
+        //_rw.EnterReadLock();
+        //// reload
+        //BaseMesFilms.LoadFilm(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+        //// (re)populate dataset
+        //r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+        //_rw.ExitReadLock();
+        
          //File.Delete(e.FullPath);
+
+        // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
       }
 
       // The error event handler
       private static void WatcherError(object source, ErrorEventArgs e)
       {
          Exception watchException = e.GetException();
-         LogMyFilms.Debug("A FileSystemWatcher error has occurred: " + watchException.Message);
+         LogMyFilms.Debug("WatcherError() - A FileSystemWatcher error has occurred: " + watchException.Message);
          // We need to create new version of the object because the old one is now corrupted
          FSwatcher = new FileSystemWatcher();
          while (!FSwatcher.EnableRaisingEvents)
@@ -7822,7 +7847,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               // This will throw an error at the watcher.NotifyFilter line if it can't get the path.
              InitFSwatcher();
-             LogMyFilms.Debug("I'm Back!!");
+             LogMyFilms.Debug("WatcherError() - FSwatcher restarted after error !");
             }
             catch
             {
