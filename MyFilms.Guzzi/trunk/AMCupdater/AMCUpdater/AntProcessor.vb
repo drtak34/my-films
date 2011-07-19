@@ -1654,12 +1654,11 @@ Public Class AntProcessor
         LogEvent("  Import on Internet Lookup Failure : " + CurrentSettings.Import_File_On_Internet_Lookup_Failure.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Don't Import on Internet Lookup Failure in GuiMode: " + CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Prohibit Internet Lookup : " + CurrentSettings.Prohibit_Internet_Lookup.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Use nfo : " + CurrentSettings.Use_XBMC_nfo.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_Language    : " + CurrentSettings.Grabber_Override_Language.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_PersonLimit : " + CurrentSettings.Grabber_Override_PersonLimit.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_TitleLimit  : " + CurrentSettings.Grabber_Override_TitleLimit.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_GetRoles    : " + CurrentSettings.Grabber_Override_GetRoles.ToString, EventLogLevel.ImportantEvent)
-        LogEvent("  Use XBMC nfo : " + CurrentSettings.Use_XBMC_nfo.ToString, EventLogLevel.ImportantEvent)
-        LogEvent("  Use Page Grabber : " + CurrentSettings.Use_Page_Grabber.ToString, EventLogLevel.ImportantEvent)
         LogEvent("Starting file analysis and import - " & _CountOrphanFiles.ToString & " orphaned files found.", EventLogLevel.ImportantEvent)
 
         XMLDoc.Load(CurrentSettings.XML_File)

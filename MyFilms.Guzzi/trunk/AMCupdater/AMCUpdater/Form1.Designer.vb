@@ -68,7 +68,6 @@ Partial Class Form1
         Me.Label23 = New System.Windows.Forms.Label
         Me.txtParserFilePath = New System.Windows.Forms.TextBox
         Me.GroupBox17 = New System.Windows.Forms.GroupBox
-        Me.chkUsePageGrabber = New System.Windows.Forms.CheckBox
         Me.chkUseXBMCnfo = New System.Windows.Forms.CheckBox
         Me.chkRescanMovedFiles = New System.Windows.Forms.CheckBox
         Me.chkProhibitInternetLookup = New System.Windows.Forms.CheckBox
@@ -493,7 +492,7 @@ Partial Class Form1
         Me.GroupBox24.Controls.Add(Me.Label1)
         Me.GroupBox24.Controls.Add(Me.txtMovieFolder)
         Me.GroupBox24.Controls.Add(Me.Label17)
-        Me.GroupBox24.Location = New System.Drawing.Point(11, 93)
+        Me.GroupBox24.Location = New System.Drawing.Point(11, 88)
         Me.GroupBox24.Name = "GroupBox24"
         Me.GroupBox24.Size = New System.Drawing.Size(521, 88)
         Me.GroupBox24.TabIndex = 106
@@ -806,7 +805,6 @@ Partial Class Form1
         '
         'GroupBox17
         '
-        Me.GroupBox17.Controls.Add(Me.chkUsePageGrabber)
         Me.GroupBox17.Controls.Add(Me.chkUseXBMCnfo)
         Me.GroupBox17.Controls.Add(Me.chkRescanMovedFiles)
         Me.GroupBox17.Controls.Add(Me.chkProhibitInternetLookup)
@@ -815,22 +813,10 @@ Partial Class Form1
         Me.GroupBox17.Controls.Add(Me.chkBackupXMLFirst)
         Me.GroupBox17.Location = New System.Drawing.Point(11, 6)
         Me.GroupBox17.Name = "GroupBox17"
-        Me.GroupBox17.Size = New System.Drawing.Size(521, 85)
+        Me.GroupBox17.Size = New System.Drawing.Size(521, 67)
         Me.GroupBox17.TabIndex = 103
         Me.GroupBox17.TabStop = False
         Me.GroupBox17.Text = "Options for File Handling ..."
-        '
-        'chkUsePageGrabber
-        '
-        Me.chkUsePageGrabber.AutoSize = True
-        Me.chkUsePageGrabber.Enabled = False
-        Me.chkUsePageGrabber.Location = New System.Drawing.Point(358, 64)
-        Me.chkUsePageGrabber.Name = "chkUsePageGrabber"
-        Me.chkUsePageGrabber.Size = New System.Drawing.Size(114, 17)
-        Me.chkUsePageGrabber.TabIndex = 10
-        Me.chkUsePageGrabber.Text = "Use Page Grabber"
-        Me.ToolTip1.SetToolTip(Me.chkUsePageGrabber, "Try to read infos from webpage in movie directory")
-        Me.chkUsePageGrabber.UseVisualStyleBackColor = True
         '
         'chkUseXBMCnfo
         '
@@ -4490,7 +4476,6 @@ Partial Class Form1
     Friend WithEvents cbInternetLookupBehaviour As System.Windows.Forms.ComboBox
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents GroupBox17 As System.Windows.Forms.GroupBox
-    Friend WithEvents chkUsePageGrabber As System.Windows.Forms.CheckBox
     Friend WithEvents chkUseXBMCnfo As System.Windows.Forms.CheckBox
     Friend WithEvents chkRescanMovedFiles As System.Windows.Forms.CheckBox
     Friend WithEvents chkProhibitInternetLookup As System.Windows.Forms.CheckBox

@@ -558,19 +558,6 @@ Public Class AntSettings
             SetAttribute("Use_XBMC_nfo", value)
         End Set
     End Property
-    Public Property Use_Page_Grabber() As Boolean
-        Get
-            Dim tempvalue As String = ReadAttribute("Use_Page_Grabber").ToLower
-            If tempvalue = "true" Then
-                Return True
-            Else
-                Return False
-            End If
-        End Get
-        Set(ByVal value As Boolean)
-            SetAttribute("Use_Page_Grabber", value)
-        End Set
-    End Property
     Public Property Parse_Subtitle_Files() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Parse_Subtitle_Files").ToLower

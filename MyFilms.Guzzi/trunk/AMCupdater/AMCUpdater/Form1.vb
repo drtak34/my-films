@@ -1884,7 +1884,6 @@ Public Class Form1
         CurrentSettings.Image_Download_Filename_Prefix = txtPictureFilenamePrefix.Text
         CurrentSettings.Prohibit_Internet_Lookup = chkProhibitInternetLookup.Checked
         CurrentSettings.Use_XBMC_nfo = chkUseXBMCnfo.Checked
-        CurrentSettings.Use_Page_Grabber = chkUsePageGrabber.Checked
         CurrentSettings.Parse_Subtitle_Files = chkParseSubtitleFiles.Checked
         CurrentSettings.Rescan_Moved_Files = chkRescanMovedFiles.Checked
         CurrentSettings.Only_Add_Missing_Data = chkManualUpdateRecordsOnlyMissingData.Checked
@@ -2024,7 +2023,6 @@ Public Class Form1
             txtPictureFilenamePrefix.Text = CurrentSettings.Image_Download_Filename_Prefix
             chkProhibitInternetLookup.Checked = CurrentSettings.Prohibit_Internet_Lookup
             chkUseXBMCnfo.Checked = CurrentSettings.Use_XBMC_nfo
-            chkUsePageGrabber.Checked = CurrentSettings.Use_Page_Grabber
             chkParseSubtitleFiles.Checked = CurrentSettings.Parse_Subtitle_Files
             chkRescanMovedFiles.Checked = CurrentSettings.Rescan_Moved_Files
             chkManualUpdateRecordsOnlyMissingData.Checked = CurrentSettings.Only_Add_Missing_Data

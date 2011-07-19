@@ -1235,7 +1235,7 @@ Public Class AntRecord
 
 
             If CurrentSettings.Use_XBMC_nfo = True Or UseXBMCnfo = True Then
-                'Now update the Original Title with the XBMCnfo-file, if set to do so:
+                'Now update the Original Title with the nfo-file title, if set to do so:
                 TempValue = GetXBMCnfoData(_FilePath, "OriginalTitle")
             End If
 
@@ -1473,14 +1473,6 @@ Public Class AntRecord
                     Diskcount = 1
                 End If
                 TempValue = Diskcount.ToString
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
-            End If
-
-
-            CurrentAttribute = "Description" ' for nfo reading - test only
-            If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Page_Grabber = True Or UsePageGrabber = True Then
-                'Now update the Description with the description from HTML-File, if set to do so:
-                TempValue = GetHTMLFileData(_FilePath, "description")
                 CreateOrUpdateAttribute(CurrentAttribute, TempValue)
             End If
 
