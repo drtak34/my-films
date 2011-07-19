@@ -2000,14 +2000,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
           string machineName = System.Environment.MachineName;
           string[] files = System.IO.Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
-          LogMyFilms.Debug("GlobalLockActive() - number of lockfiles found: '" + files.Length.ToString() + "'");
+          // LogMyFilms.Debug("GlobalLockActive() - number of lockfiles found: '" + files.Length.ToString() + "'");
           if (files.Length > 0)
           {
-            LogMyFilms.Debug("GlobalLockActive() - First LockFile: '" + files[0] + "'");
+            LogMyFilms.Debug("GlobalLockActive() - Global Lock detected ! - First LockFile: '" + files[0] + "'");
             return true;
           }
           else
+          {
+            LogMyFilms.Debug("GlobalLockActive() - No Global Lock detected !");
             return false;
+          }
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2018,6 +2021,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           try
           {
             File.Create(LockFilename()).Dispose();
+            LogMyFilms.Debug("SetGlobalLock() - successfully created global lock ! - " + LockFilename());
           }
           catch (Exception ex)
           {
@@ -2032,6 +2036,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static void RemoveGlobalLock()
         {
           File.Delete(LockFilename());
+          LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + LockFilename());
         }
 
         //-------------------------------------------------------------------------------------------
@@ -2043,8 +2048,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string path = System.IO.Path.GetDirectoryName(MyFilms.conf.StrFileXml);
           string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
           string machineName = System.Environment.MachineName;
-          lockfilename = path + filename + "_" + machineName + ".lck";
-          LogMyFilms.Debug("LockFilename() - created lock file name is: '" + lockfilename + "'");
+          lockfilename = path + @"\" + filename + "_" + machineName + ".lck";
+          // LogMyFilms.Debug("LockFilename() - created lock file name is: '" + lockfilename + "'");
           return lockfilename;
         }
 

@@ -7774,7 +7774,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.setGUIProperty("statusmessage", newText, true);
       }
       
-      private static void InitFSwatcher()
+      private void InitFSwatcher()
       {
         if (FSwatcher.EnableRaisingEvents && FSwatcher.Filter == System.IO.Path.GetFileName(conf.StrFileXml))
           return; // return, if it's already enabled and DB name has not changed
@@ -7822,35 +7822,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  return; // ignore the file changed event
 
         LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
-        //_rw.EnterReadLock();
-        //// load dataset
-        //BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-        // MyFilmsDetail.RemoveGlobalLock(); // make sure, no global lock is left
-        //// (re)populate films
-        //r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-        //_rw.ExitReadLock();
-        this.Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+
+        _rw.EnterReadLock();
+        // load dataset
+        BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+        MyFilmsDetail.RemoveGlobalLock(); // make sure, no global lock is left
+        // (re)populate films
+        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+        _rw.ExitReadLock();
+        
+        // alternatively RefreshFacade() could be called to also update facade - might disturb user?
+        // Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
 
         // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
         FSwatcher.EnableRaisingEvents = true;
       }
 
-      private static void FSwatcherCreated(object source, FileSystemEventArgs e)
+      private void FSwatcherCreated(object source, FileSystemEventArgs e)
       {
         LogMyFilms.Debug("WatcherCreated() - New FSwatcher Event: '" + e.ChangeType + "', Name: '" + e.Name + "', Path: '" + e.FullPath + "'");
       }
 
-      private static void FSwatcherDeleted(object source, FileSystemEventArgs e)
+      private void FSwatcherDeleted(object source, FileSystemEventArgs e)
       {
         LogMyFilms.Debug("WatcherDeleted() - New FSwatcher Event: '" + e.ChangeType + "', Name: '" + e.Name + "', Path: '" + e.FullPath + "'");
       }
 
-      private static void FSwatcherRenamed(object source, FileSystemEventArgs e)
+      private void FSwatcherRenamed(object source, FileSystemEventArgs e)
       {
         LogMyFilms.Debug("WatcherRenamed() - New FSwatcher Event: '" + e.ChangeType + "', Name: '" + e.Name + "', Path: '" + e.FullPath + "'");
       }
 
-      private static void FSwatcherError(object source, ErrorEventArgs e) // The error event handler
+      private void FSwatcherError(object source, ErrorEventArgs e) // The error event handler
       {
          Exception watchException = e.GetException();
          LogMyFilms.Debug("WatcherError() - A FileSystemWatcher error has occurred: " + watchException.Message);
@@ -7877,7 +7880,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgUpdateDB.IsBusy && !bgUpdateDB.CancellationPending)
       {
-        // FSwatcher.EnableRaisingEvents = false;
+        FSwatcher.EnableRaisingEvents = false;
         MyFilmsDetail.SetGlobalLock();
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
@@ -7959,7 +7962,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       Load_Config(Configuration.CurrentConfig, true);
       Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-      // FSwatcher.EnableRaisingEvents = true;
+      FSwatcher.EnableRaisingEvents = true;
       MyFilmsDetail.RemoveGlobalLock();
     }
 
