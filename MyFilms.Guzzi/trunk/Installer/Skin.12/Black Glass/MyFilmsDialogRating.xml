@@ -101,12 +101,12 @@
 		<control>
 			<type>imagelist</type>
 			<id>100</id>
-			<posX>440</posX>
+			<posX>390</posX>
 			<posY>386</posY>
 			<width>520</width>
 			<height>72</height>
-			<textureWidth>60</textureWidth>
-			<textureHeight>60</textureHeight>
+			<textureWidth>50</textureWidth>
+			<textureHeight>50</textureHeight>
 			<subitems>
 				<subitem>UserRatingStarOff.png</subitem>
 				<subitem>stargood.png</subitem>
