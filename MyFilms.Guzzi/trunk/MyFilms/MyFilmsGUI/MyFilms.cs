@@ -3814,7 +3814,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //chargement des films
         _rw.EnterReadLock();
         if (reload)
+        {
           BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+          MyFilmsDetail.RemoveGlobalLock();
+        }
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
         _rw.ExitReadLock();
       }
@@ -4836,6 +4839,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (bgUpdateDB.IsBusy)
           {
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
+            break;
+          }
+          if (MyFilmsDetail.GlobalLockActive())
+          {
+            ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(1079854), GUILocalizeStrings.Get(330)); //movie db already in use (locked)
             break;
           }
           AsynUpdateDatabase();
@@ -7804,22 +7812,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     
     // Define the found event handler.
-      private static void FSwatcherChanged(object source, FileSystemEventArgs e)
+      private void FSwatcherChanged(object source, FileSystemEventArgs e)
       {
         FSwatcher.EnableRaisingEvents = false;
 
-        Thread.Sleep(50);
+        Thread.Sleep(250);
         //FileInfo objFileInfo = new FileInfo(e.FullPath);
         //if (!objFileInfo.Exists) 
         //  return; // ignore the file changed event
 
         LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
-        _rw.EnterReadLock();
-        // load dataset
-        BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-        // (re)populate films
-        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-        _rw.ExitReadLock();
+        //_rw.EnterReadLock();
+        //// load dataset
+        //BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+        // MyFilmsDetail.RemoveGlobalLock(); // make sure, no global lock is left
+        //// (re)populate films
+        //r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+        //_rw.ExitReadLock();
+        this.Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
 
         // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
         FSwatcher.EnableRaisingEvents = true;
@@ -7867,6 +7877,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgUpdateDB.IsBusy && !bgUpdateDB.CancellationPending)
       {
+        // FSwatcher.EnableRaisingEvents = false;
+        MyFilmsDetail.SetGlobalLock();
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
         LogMyFilms.Info("AsynUpdateDatabase() - Launching AMCUpdater in batch mode");
@@ -7947,6 +7959,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       Load_Config(Configuration.CurrentConfig, true);
       Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+      // FSwatcher.EnableRaisingEvents = true;
+      MyFilmsDetail.RemoveGlobalLock();
     }
 
     //*****************************************************************************************

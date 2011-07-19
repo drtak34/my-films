@@ -1972,14 +1972,81 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void Update_XML_database()
         {
-          MyFilms.FSwatcher.EnableRaisingEvents = false; // stop FSwatcher for local update, otherwise unneeded reread would be triggered
-          MyFilms._rw.EnterWriteLock();
-          BaseMesFilms.SaveMesFilms();
-          MyFilms._rw.ExitWriteLock();
-          LogMyFilms.Info("Movie Database updated");
-          MyFilms.FSwatcher.EnableRaisingEvents = true;
+          // first check, if there is a global manual lock
+          if (!GlobalLockActive())
+          {
+            SetGlobalLock();
+            MyFilms.FSwatcher.EnableRaisingEvents = false; // stop FSwatcher for local update, otherwise unneeded reread would be triggered
+            MyFilms._rw.EnterWriteLock();
+            BaseMesFilms.SaveMesFilms();
+            MyFilms._rw.ExitWriteLock();
+            LogMyFilms.Info("Movie Database updated");
+            MyFilms.FSwatcher.EnableRaisingEvents = true;
+            RemoveGlobalLock();
+          }
+          else
+          {
+            // ShowMessageDialog("System Warning", "", "Data not saved due to global lock !");
+            LogMyFilms.Info("Movie Database NOT updated due to GlobalLock !");
+          }
         }
 
+        //-------------------------------------------------------------------------------------------
+        //  Get Global Lock
+        //-------------------------------------------------------------------------------------------        
+        public static bool GlobalLockActive()
+        {
+          string path = System.IO.Path.GetDirectoryName(MyFilms.conf.StrFileXml);
+          string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
+          string machineName = System.Environment.MachineName;
+          string[] files = System.IO.Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
+          LogMyFilms.Debug("GlobalLockActive() - number of lockfiles found: '" + files.Length.ToString() + "'");
+          if (files.Length > 0)
+          {
+            LogMyFilms.Debug("GlobalLockActive() - First LockFile: '" + files[0] + "'");
+            return true;
+          }
+          else
+            return false;
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //  Set Global Lock
+        //-------------------------------------------------------------------------------------------        
+        public static void SetGlobalLock()
+        {
+          try
+          {
+            File.Create(LockFilename()).Dispose();
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.FatalException("SetGlobalLock() - Error creating Lockfile - check if file system rights properly set! - Lockfile: '" + LockFilename() + "', exception: " + ex.Message, ex);
+            // throw;
+          }
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //  Remove Global Lock
+        //-------------------------------------------------------------------------------------------        
+        public static void RemoveGlobalLock()
+        {
+          File.Delete(LockFilename());
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //  Create machine specific Lock Filename
+        //-------------------------------------------------------------------------------------------        
+        private static string LockFilename()
+        {
+          string lockfilename = "";
+          string path = System.IO.Path.GetDirectoryName(MyFilms.conf.StrFileXml);
+          string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
+          string machineName = System.Environment.MachineName;
+          lockfilename = path + filename + "_" + machineName + ".lck";
+          LogMyFilms.Debug("LockFilename() - created lock file name is: '" + lockfilename + "'");
+          return lockfilename;
+        }
 
 
         //-------------------------------------------------------------------------------------------
