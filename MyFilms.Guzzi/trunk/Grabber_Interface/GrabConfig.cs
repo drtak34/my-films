@@ -97,13 +97,14 @@ namespace Grabber_Interface
         radioButtonFR.Checked = true;
       else
         radioButtonEN.Checked = true;
-      tabPageSearchPage.Enabled = false;
-      tabPageDetailPage.Enabled = false;
+      // tabPageSearchPage.Enabled = false;
+      // tabPageDetailPage.Enabled = false;
+      ChangeVisibility(true);
       // Test if input arguments were supplied:
       if (args.Length > 0)
       {
-        ExpertModeOn = false;
-        ChangeVisibility(false);
+        // ExpertModeOn = false; // Disabled due to google request z3us -> show always expert mode
+        // ChangeVisibility(false);
         ResetFormControlValues(this);
         if (System.IO.File.Exists(args[0]))
         {
