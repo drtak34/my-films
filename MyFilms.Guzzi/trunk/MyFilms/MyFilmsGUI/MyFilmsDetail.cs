@@ -1102,7 +1102,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       Change_Menu("mainmenu");
                       return;
                     }
-                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel]);
                     break;
 
 

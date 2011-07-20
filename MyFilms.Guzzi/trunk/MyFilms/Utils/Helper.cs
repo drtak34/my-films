@@ -523,10 +523,20 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
         }
 
-        public static bool IsSubCentralAvailableAndEnabled {
-            get {
-                return Helper.IsAssemblyAvailable("SubCentral", new Version(1, 0, 0, 0)) && IsPluginEnabled("SubCentral");
-            }
+        public static bool IsSubCentralAvailableAndEnabled
+        {
+          get
+          {
+            return Helper.IsAssemblyAvailable("SubCentral", new Version(1, 0, 0, 0)) && IsPluginEnabled("SubCentral");
+          }
+        }
+
+        public static bool IsTraktAvailableAndEnabled
+        {
+          get
+          {
+            return Helper.IsAssemblyAvailable("Trakt", new Version(1, 0, 0, 0)) && IsPluginEnabled("Trakt");
+          }
         }
 
         #endregion

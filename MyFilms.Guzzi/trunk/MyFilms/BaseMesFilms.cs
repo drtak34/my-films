@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.MyFilms
   using System;
   using System.Collections;
   using System.Data;
+  using System.Text.RegularExpressions;
 
   using MediaPortal.Configuration;
   using MediaPortal.GUI.Library;
@@ -43,14 +44,10 @@ namespace MyFilmsPlugin.MyFilms
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     
         private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
-
-        //private static MyFilmsData MFdata; // Separate DB File to store "NonANT Data"
-
 /*
         private static Dictionary<string, string> dataPath;
 */
         private static DataRow[] movies;
-
         private static DataRow[] persons;
 
         #region ctor
@@ -81,12 +78,10 @@ namespace MyFilmsPlugin.MyFilms
         {
             get { return movies; }
         }
-
         public static DataRow[] PersonsSelected
         {
           get { return persons; }
         }
-
         #endregion
 
         #region méthodes statique publiques
@@ -141,7 +136,6 @@ namespace MyFilmsPlugin.MyFilms
             }
             return persons;
         }
-
         public static void LoadMesFilms(string StrFileXml)
         {
             if (!System.IO.File.Exists(StrFileXml))
@@ -193,7 +187,6 @@ namespace MyFilmsPlugin.MyFilms
             }
           //}
         }
-
         public static void CancelMesFilms()
         {
             if (data != null)
@@ -236,7 +229,7 @@ namespace MyFilmsPlugin.MyFilms
                 }
                 catch (Exception e)
                 {
-                  LogMyFilms.Error(": Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+                  LogMyFilms.Error(": Error reading xml database after " + dataExport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
                   throw e;
                 }
 
@@ -268,19 +261,10 @@ namespace MyFilmsPlugin.MyFilms
                         if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
                           if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
                             played = true;
-                        //if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
-                        //  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
-                        //    played = true;
                       }
                       movie.Watched = played;
+                      movie.WatchedCount = -1; // check against it, if value returns...
                       
-                      //if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
-                      //  if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower())
-                      //    movie.Watched = true;
-                      ////if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
-                      ////  if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
-                      ////    movie.Watched = true;
-
                       float rating = 0;
                       bool success = float.TryParse(sr["Rating"].ToString(), out rating);
                       if (!success) rating = 0;
@@ -295,8 +279,23 @@ namespace MyFilmsPlugin.MyFilms
                           mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
                       }
                       movie.File = mediapath;
+
+                      string IMDB = "";
+
+
                       if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
-                        movie.IMDBNumber = sr["IMDB_Id"].ToString();
+                        IMDB = sr["IMDB_Id"].ToString();
+
+                      if (!string.IsNullOrEmpty(sr["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
+                      {
+                        string CleanString = sr["URL"].ToString();
+                        Regex CutText = new Regex("" + @"tt\d{7}" + "");
+                        Match m = CutText.Match(CleanString);
+                        if (m.Success)
+                          IMDB = m.Value;
+                      }
+                      movie.IMDBNumber = IMDB;
+
                       if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString())) 
                         movie.TMDBNumber = sr["TMDB_Id"].ToString();
                       movie.DateAdded = sr["Date"].ToString();
@@ -491,6 +490,8 @@ namespace MyFilmsPlugin.MyFilms
     }
   public class MFMovie
   {
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
+
     private int _mID = -1;
     private string _mStrTitle = string.Empty;
     private string _mStrFile = string.Empty;
@@ -500,10 +501,12 @@ namespace MyFilmsPlugin.MyFilms
     private int _mIYear = 1900;
     private float _mFRating;
     private bool _mIWatched;
+    private int _mIWatchedCount = -1;
     private string _mDateAdded = string.Empty;
     private string _mPicture = string.Empty;
     private string _mFanart = string.Empty;
     private string _mConfig = string.Empty;
+    private string _mUsername = string.Empty;
 
     public MFMovie() { }
     
@@ -529,6 +532,12 @@ namespace MyFilmsPlugin.MyFilms
     {
       get { return _mIWatched; }
       set { _mIWatched = value; }
+    }
+
+    public int WatchedCount
+    {
+      get { return _mIWatchedCount; }
+      set { _mIWatchedCount = value; }
     }
 
     public string Title
@@ -597,6 +606,12 @@ namespace MyFilmsPlugin.MyFilms
       set { _mConfig = value; }
     }
 
+    public string Username
+    {
+      get { return _mUsername; }
+      set { _mUsername = value; }
+    }
+
     public void Reset()
     {
       _mStrTitle = string.Empty;
@@ -605,25 +620,16 @@ namespace MyFilmsPlugin.MyFilms
       _mIYear = 1900;
       _mFRating = 0.0f;
       _mIWatched = false;
+      _mIWatchedCount = -1;
       _mDateAdded = string.Empty;
       _mPicture = string.Empty;
       _mFanart = string.Empty;
       _mConfig = string.Empty;
+      _mUsername = string.Empty;
     }
 
     public void Commit()
     {
-      //_mStrTitle = string.Empty;
-      //_mStrIMDBNumber = string.Empty;
-      //_mStrTMDBNumber = string.Empty;
-      //_mIYear = 1900;
-      //_mFRating = 0.0f;
-      //_mIWatched = false;
-      //_mDateAdded = string.Empty;
-      //_mPicture = string.Empty;
-      //_mFanart = string.Empty;
-      //_mConfig = string.Empty;
-
       AntMovieCatalog dataImport = new AntMovieCatalog();
 
       using (XmlSettings XmlConfig = new XmlSettings(MediaPortal.Configuration.Config.GetFile(MediaPortal.Configuration.Config.Dir.Config, "MyFilms.xml")))
@@ -642,61 +648,75 @@ namespace MyFilmsPlugin.MyFilms
           string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
           string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
 
+          LogMyFilms.Debug("Commit() : TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+          LogMyFilms.Debug("Commit() : Update requested for Movie = '" + _mStrTitle + "' (" + _mIYear + "), IMDB = '" + _mStrIMDBNumber + "', Watched = '" + _mIWatched + "'");
 
-          // LogMyFilms.Debug("GetMovies: TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
-          if (System.IO.File.Exists(Catalog) && TraktEnabled)
+          if (System.IO.File.Exists(Catalog))
           {
+            if (!TraktEnabled)
+            {
+              LogMyFilms.Debug("Trakt not enabled for this config - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+              return;
+            }
+            if (StrFileType != "0")
+            {
+              LogMyFilms.Debug("Catalog Type is readonly (EC) - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+              return;
+            }
             try
             {
               dataImport.ReadXml(Catalog);
-            }
-            catch (Exception e)
-            {
-              // LogMyFilms.Error(": Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
-              // throw e;
-            }
-
-            try
-            {
-              DataRow[] results = dataImport.Tables["Movie"].Select(StrDfltSelect + "Number" + " like " + _mID, "OriginalTitle" + " " + "ASC");
-              // if (results.Length == 0) continue;
-              //MyFilms._rw.EnterReadLock();
-              //r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
-              //MyFilms._rw.ExitReadLock();
-              //MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId);
+              DataRow[] results = dataImport.Tables["Movie"].Select(StrDfltSelect + "Number" + " = " + "'" + _mID + "'", "OriginalTitle" + " " + "ASC"); // if (results.Length != 1) continue;
+              if (results.Length != 1)
+                LogMyFilms.Debug("Commit() : Warning - Results found: '" + results.Length + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
 
               foreach (DataRow sr in results)
               {
                 try
                 {
+                  // watched status
+                  string oldWatchedString = sr[WatchedField].ToString();
                   if (!EnhancedWatchedStatusHandling)
                   {
                     if (_mIWatched)
-                      // MyFilmsDetail.Watched_Toggle(Index, true);
                       sr[WatchedField] = "true";
                     else
-                      // MyFilmsDetail.Watched_Toggle(Index, true);
                       sr[WatchedField] = GlobalUnwatchedOnlyValue;
                   }
+                  else
+                  {
+                    string EnhancedWatchedValue = sr[WatchedField].ToString();
+                    string newEnhancedWatchedValue = NewEnhancedWatchValue(EnhancedWatchedValue, UserProfileName, _mIWatched, _mIWatchedCount);
+                    if (!string.IsNullOrEmpty(_mUsername))
+                      newEnhancedWatchedValue = NewEnhancedWatchValue(newEnhancedWatchedValue, _mUsername, _mIWatched, _mIWatchedCount);
+                    sr[WatchedField] = newEnhancedWatchedValue;
+                  }
+                  if (sr[WatchedField].ToString() != oldWatchedString)
+                    LogMyFilms.Debug("Commit() : Updating 'Watched' from '" + oldWatchedString + "' to '" + sr[WatchedField].ToString() + "', WatchedCount = '" + _mIWatchedCount + "'");
+
+                  // imdb number
+                  string oldIMDB = sr["IMDB_Id"].ToString();
                   if (!string.IsNullOrEmpty(_mStrIMDBNumber))
                     sr["IMDB_Id"] = _mStrIMDBNumber;
+                  if (sr["IMDB_Id"].ToString() != oldIMDB)
+                    LogMyFilms.Debug("Commit() : Updating 'IMDB_Id' from '" + oldIMDB + "' to '" + sr["IMDB_Id"].ToString() + "'");
                 }
-                catch (Exception mex)
+                catch (Exception ex)
                 {
-                  Log.Error("MyFilms videodatabase: add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
+                  LogMyFilms.DebugException("MyFilms videodatabase exception err: " + ex.Message + ", stack: " + ex.StackTrace, ex);
                   throw;
                 }
               }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-              // LogMyFilms.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
-              Log.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
+              LogMyFilms.Error(": Error reading xml database after " + dataImport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
             }
+
             try
             {
               System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(Catalog, System.Text.Encoding.Default);
-              MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
+              MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
               MyXmlTextWriter.WriteStartDocument();
               dataImport.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
               MyXmlTextWriter.Close();
@@ -704,8 +724,52 @@ namespace MyFilmsPlugin.MyFilms
             catch (Exception) { }
           }
         } 
-    
-    
+      dataImport.Reset();
+      if (dataImport != null)
+        dataImport.Dispose();
     }
+
+
+    private string NewEnhancedWatchValue(string EnhancedWatchedValue, string UserProfileName, bool watched, int count)
+    {
+      string newEnhancedWatchedValue = "";
+      if (_mIWatchedCount > -1) 
+        count = _mIWatchedCount;
+      if (!watched)
+        count = 0;
+
+      if (EnhancedWatchedValue.Contains(UserProfileName))
+      {
+        string[] split = EnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (string s in split)
+        {
+          if (s.Contains(":"))
+          {
+            string sNew = s;
+            string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
+            string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
+            string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
+
+            if (tempuser == UserProfileName) // Update Count Value
+            {
+              sNew = tempuser + ":" + count.ToString() + ":" + temprating;
+            }
+            if (string.IsNullOrEmpty(newEnhancedWatchedValue))
+              newEnhancedWatchedValue = sNew;
+            else
+              newEnhancedWatchedValue += "|" + sNew;
+          }
+        }
+      }
+      else
+      {
+        if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":"))
+          newEnhancedWatchedValue = "Global:0:-1|" + UserProfileName + ":" + count.ToString() + ":" + "-1";
+        else
+          newEnhancedWatchedValue = EnhancedWatchedValue + "|" + UserProfileName + ":" + count.ToString() + ":" + "-1";
+      }
+      return newEnhancedWatchedValue;
+    }
+
   }
 }
