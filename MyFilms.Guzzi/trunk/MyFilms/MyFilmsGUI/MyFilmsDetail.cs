@@ -282,6 +282,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //case "Edition":
                 //case "IsOnlineTrailer":
         }
+
+        private enum TraktGUIWindows
+        {
+          Main = 87258,
+          Calendar = 87259,
+          Friends = 87260,
+          Recommendations = 87261,
+          RecommendationsShows = 87262,
+          RecommendationsMovies = 87263,
+          Trending = 87264,
+          TrendingShows = 87265,
+          TrendingMovies = 87266,
+          WatchedList = 87267,
+          WatchedListShows = 87268,
+          WatchedListEpisodes = 87269,
+          WatchedListMovies = 87270,
+          Settings = 87271,
+          SettingsAccount = 87272,
+          SettingsPlugins = 87273,
+          SettingsGeneral = 87274,
+          Shouts = 87280
+        }
         #endregion
 
         public static event WatchedEventDelegate WatchedItem;
@@ -763,6 +785,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798703)); // Fanart & Cover ...
                     choiceViewMenu.Add("fanartcovermenu");
 
+                    if (Helper.IsTraktAvailableAndEnabled) //  && MyFilms.conf.AllowTraktSync
+                    {
+                      dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
+                      choiceViewMenu.Add("trakt");
+                    }
+                    else LogMyFilms.Debug("trakt not found or wrong version - disabling context entry");
+
                     if (Helper.IsSubCentralAvailableAndEnabled)
                     {
                       dlgmenu.Add(GUILocalizeStrings.Get(10798707)); // Subtitles ...
@@ -1039,6 +1068,71 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                     break;
+
+              case "trakt":
+                    if (dlgmenu == null) return;
+                    dlgmenu.Reset();
+                    choiceViewMenu.Clear();
+                    dlgmenu.SetHeading(GUILocalizeStrings.Get(10798775)); // Trakt...
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798776)); // 
+                    choiceViewMenu.Add("trakt-Main");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798777)); // 
+                    choiceViewMenu.Add("trakt-Calendar");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798778)); // 
+                    choiceViewMenu.Add("trakt-Friends");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798779)); // 
+                    choiceViewMenu.Add("trakt-RecommendationsMovies");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798780)); // 
+                    choiceViewMenu.Add("trakt-TrendingMovies");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798781)); // 
+                    choiceViewMenu.Add("trakt-WatchedListMovies");
+
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798782)); // Shouts
+                    choiceViewMenu.Add("trakt-Shouts");
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1)
+                    {
+                      Change_Menu("mainmenu");
+                      return;
+                    }
+                    Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                    break;
+
+
+              case "trakt-Main":
+                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Main, "");
+                break;
+
+              case "trakt-Calendar":
+                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Calendar, "");
+                break;
+
+              case "trakt-Friends":
+                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Friends, "");
+                break;
+
+              case "trakt-RecommendationsMovies":
+                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.RecommendationsMovies, "");
+                break;
+
+              case "trakt-TrendingMovies":
+                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.TrendingMovies, "");
+                break;
+
+              case "trakt-WatchedListMovies":
+                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.WatchedListMovies, "");
+                break;
+
+              case "trakt-Shouts":
+                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts, "");
+                break;
 
               case "trailermenu":
                     if (dlgmenu == null) return;
