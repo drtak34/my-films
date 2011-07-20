@@ -154,9 +154,6 @@
   <Values Option="Use_XBMC_nfo">
     <Value>False</Value>
   </Values>
-  <Values Option="Use_Page_Grabber">
-    <Value>False</Value>
-  </Values>
   <Values Option="LogDirectory">
     <Value></Value>
   </Values>
