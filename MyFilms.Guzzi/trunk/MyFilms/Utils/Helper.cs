@@ -30,6 +30,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.Diagnostics;
   using System.Text;
 
+  using MediaPortal.Configuration;
   using MediaPortal.GUI.Library;
   using MediaPortal.Util;
   using MediaPortal.Ripper;
@@ -535,7 +536,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
-            return Helper.IsAssemblyAvailable("Trakt", new Version(1, 0, 0, 0)) && IsPluginEnabled("Trakt");
+            return File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")) && IsPluginEnabled("Trakt");
+            // return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 0, 0)) && IsPluginEnabled("Trakt");
           }
         }
 
