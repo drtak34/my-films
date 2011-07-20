@@ -5770,6 +5770,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "togglewatchedstatus":
+          // first set index so that details calls don't fail (as they are relying on it)
+          conf.StrIndex = facadeView.SelectedListItem.ItemId;
+          conf.StrTIndex = facadeView.SelectedListItem.Label;
+
           if (facadeView.SelectedListItem.IsPlayed)
           {
             facadeView.SelectedListItem.IsPlayed = false;
