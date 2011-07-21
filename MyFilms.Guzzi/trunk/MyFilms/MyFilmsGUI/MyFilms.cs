@@ -344,7 +344,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public enum optimizeOption { optimizeDisabled };
     public static bool InitialStart = false; //Added to implement InitialViewSetup
     public static bool InitialIsOnlineScan = false; //Added to implement switch if facade should display media availability
-    private bool LoadWithParameterSupported = false;
 
     private double lastPublished = 0;
     private Timer publishTimer;
@@ -619,6 +618,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       StopDownload = true;
       GUIConnector.Instance.StopBackgroundTask();
 
+      loadParamInfo.SafeDispose();
       // Reset to force republishing details on reentering
       Prev_ItemID = -1;
       Prev_Label = string.Empty;
@@ -704,7 +704,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (InitialStart) InitMainScreen(false); // don't log to MyFilms.log Property clear
         //InitGlobalFilters(false);
 
-        if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)) // config given in load params
+        if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) && PreviousWindowId != ID_MyFilmsDetail) // config given in load params
         {
           LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading config: '" + loadParamInfo.Config + "'");
           string newConfig = Configuration.Control_Access_Config(loadParamInfo.Config, GetID);
@@ -770,19 +770,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //GUIControl.ShowControl(GetID, 34);
       GUIWaitCursor.Hide();
 
-      if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID)) // movieID given in load params -> jump to details screen !
+      if (PreviousWindowId != ID_MyFilmsDetail && loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> jump to details screen !
       {
         LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
-        int index = -1;
-        bool success = int.TryParse(loadParamInfo.MovieID, out index);
-        if (success) conf.StrIndex = index;
-        conf.StrTIndex = "";
-        // currentListLevel = Listlevel.None;
-        // this.SetDummyControlsForFacade(currentListLevel);
-        GUIWindowManager.ActivateWindow(ID_MyFilmsDetail);
-        if (loadParamInfo.Play == "true")
+        // facade index is set in filmlist loading - only launching details necessary !
+
+        if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
         {
-          MyFilmsDetail.Launch_Movie(index, GetID, null);
+          int index = -1;
+          foreach (DataRow sr in r)
+          {
+            index += 1;
+            if (sr["number"].ToString() == loadParamInfo.MovieID)
+            {
+              // bool success = int.TryParse(loadParamInfo.MovieID, out index);
+              conf.StrIndex = index;
+              conf.StrTIndex = sr[conf.StrTitle1].ToString();
+            }
+          }
+          if (index == -1) 
+            GUIWindowManager.ShowPreviousWindow();
+          if (loadParamInfo.Play == "true")
+            MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null);
+          else 
+            GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // activate this, if you want to jump to Details screen automatically !
         }
       }
       else if (!string.IsNullOrEmpty(loadParamInfo.Search)) // search expression given in load params -> do global search !
@@ -806,23 +817,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //}
         // ********************************
         // Originally Deactivated by Zebons    
-
-        //// Start Filesystemwatcher to watch for changes in availability
-        //FileSystemWatcher FSW = new FileSystemWatcher("c:\\", "*.cs");
-        //FswHandler Handler = new FswHandler();
-
-        //FSW.Changed += Handler.OnEvent;
-        //FSW.Created += Handler.OnEvent;
-        //FSW.Deleted += Handler.OnEvent;
-        //FSW.Renamed += Handler.OnEvent;
-
-        //FSW.EnableRaisingEvents = true;
-
-        //System.Threading.Thread.Sleep(555000);
-        //// change the file manually to see which events are fired
-
-        //FSW.EnableRaisingEvents = false;
-        //lockFacade = false;
       }
     }
 
@@ -841,7 +835,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     #endregion
 
-    #region Main Context Menu (inative)
+    #region Main Context Menu (inactive)
     //protected override void OnShowContextMenu()
     //{
     //  try
@@ -2044,6 +2038,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       foreach (DataRow sr in r)
       {
+        if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
+        {
+          if (sr["number"].ToString() == loadParamInfo.MovieID)
+          {
+            int index = 0;
+            bool success = int.TryParse(loadParamInfo.MovieID, out index);
+            conf.StrIndex = index;
+            conf.StrTIndex = sr[conf.StrTitle1].ToString();
+          }
+        }
+
         number++;
         if (conf.Boolreturn)//in case of selection by view verify if value correspond excatly to the searched string
         {
@@ -2200,6 +2205,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
         }
+
         if (iSelItem >= 0) //-1 = ignore, >=0 = itemID to locate (test every item in case item is from within a folder)
         {
           if (!(conf.StrTIndex.Length > 0))
@@ -2217,7 +2223,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
         }
-
         sPrevTitle = sTitle;
       fin: ;
       }
