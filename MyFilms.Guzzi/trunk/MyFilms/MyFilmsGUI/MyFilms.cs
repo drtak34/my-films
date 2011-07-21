@@ -704,7 +704,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (InitialStart) InitMainScreen(false); // don't log to MyFilms.log Property clear
         //InitGlobalFilters(false);
 
-        if (!string.IsNullOrEmpty(loadParamInfo.Config)) // config given in load params
+        if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)) // config given in load params
         {
           LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading config: '" + loadParamInfo.Config + "'");
           string newConfig = Configuration.Control_Access_Config(loadParamInfo.Config, GetID);
@@ -770,7 +770,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //GUIControl.ShowControl(GetID, 34);
       GUIWaitCursor.Hide();
 
-      if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // movieID given in load params -> jump to details screen !
+      if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID)) // movieID given in load params -> jump to details screen !
       {
         LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
         int index = -1;
@@ -2019,6 +2019,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string SelItem = gSelItem.ToString();
       int iSelItem = -2;
       List<GUIListItem> facadeDownloadItems = new List<GUIListItem>();
+
       if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
 
       // setlabels
@@ -2337,11 +2338,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 item.ThumbnailImage = conf.DefaultCover;
               }
             }
-          // Thread.Sleep(10);
+          Thread.Sleep(10);
           }
         })
         {
-          IsBackground = true,
+          IsBackground = true, Priority = ThreadPriority.BelowNormal,
           Name = "MyFilms FilmList Image Detector" + i.ToString()
         }.Start(groupList);
       }
@@ -2369,27 +2370,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         return false;
       }
-
-      //string[] split = strEnhancedWatchedValue.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-      //int count = 0;
-      //foreach (string s in split)
-      //{
-      //  if (s.Contains(":"))
-      //  {
-      //    string tempuser = MyFilmsDetail.EnhancedWatchedValue(s, "username");
-      //    string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
-      //    // string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
-          
-      //    if (tempuser == strUserProfileName)
-      //    {
-      //      bool success = int.TryParse(tempcount, out count);
-      //      if (success) 
-      //        return count;
-      //    }
-      //  }
-      //}
-      //return count;
-      return true;
+      return true; // count > 0 -> return true
     }
 
     private void Load_Rating(decimal rating)
