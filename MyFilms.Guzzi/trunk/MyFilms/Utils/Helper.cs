@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System;
   using System.IO;
   using System.Collections.Generic;
+  using System.Linq;
   using System.Net;
   using System.Diagnostics;
   using System.Text;
@@ -538,6 +539,33 @@ namespace MyFilmsPlugin.MyFilms.Utils
           {
             return File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")) && IsPluginEnabled("Trakt");
             // return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 0, 0)) && IsPluginEnabled("Trakt");
+          }
+        }
+
+        public static bool IsBrowseTheWebAvailableAndEnabled
+        {
+          get
+          {
+            bool status = false;
+            bool BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
+            bool BrowseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
+            LogMyFilms.Debug("MyFilms.Init() - BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "', BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "'");
+            if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion) 
+              status = true;
+            return status;
+          }
+        }
+
+        public static bool IsOnlineVideosAvailableAndEnabled
+        {
+          get
+          {
+            bool OnlineVideosRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
+            bool OnlineVideosRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
+            LogMyFilms.Debug("MyFilms.Init() - OnlineVideosRightPlugin = '" + OnlineVideosRightPlugin + "', OnlineVideosRightVersion = '" + OnlineVideosRightVersion + "'");
+            if (OnlineVideosRightPlugin && OnlineVideosRightVersion) 
+              return true;
+            return false;
           }
         }
 

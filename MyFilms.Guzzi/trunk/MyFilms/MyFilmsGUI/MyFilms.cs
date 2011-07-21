@@ -81,9 +81,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       backdrop.PropertyTwo = "#myfilms.fanart2";
 
       // create Film Cover image swapper
-      cover = new AsyncImageResource();
-      cover.Property = "#myfilms.coverimage";
-      cover.Delay = 125;
+      filmcover = new AsyncImageResource();
+      filmcover.Property = "#myfilms.coverimage";
+      filmcover.Delay = 125;
 
       // create Group Cover image swapper
       groupcover = new AsyncImageResource();
@@ -317,7 +317,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //Imageswapperdefinitions for fanart and cover
     private ImageSwapper backdrop;
-    private AsyncImageResource cover = null;
+    private AsyncImageResource filmcover = null;
     private AsyncImageResource groupcover = null;
     private AsyncImageResource personcover = null;
 
@@ -346,16 +346,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static bool InitialIsOnlineScan = false; //Added to implement switch if facade should display media availability
     private bool LoadWithParameterSupported = false;
 
-    public bool BrowseTheWebRightPlugin = false;
-    public bool BrowseTheWebRightVersion = false;
-    public static bool OnlineVideosRightPlugin = false;
-    public static bool OnlineVideosRightVersion = false;
     private double lastPublished = 0;
     private Timer publishTimer;
 
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
-
+    LoadParameterInfo loadParamInfo;
     #endregion
 
     #region Enums
@@ -425,6 +421,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     enum guiProperty
     {
+      statusmessage,
       Title,
       Subtitle,
       Description,
@@ -558,26 +555,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // Support for StartParameters - ToDo: Add start view options (implementation)
 
-      // check if running version of mediaportal supports loading with parameter
-      System.Reflection.FieldInfo fi = typeof(GUIWindow).GetField("_loadParameter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-      if (fi != null)
+      if (PreviousWindowId != ID_MyFilms && PreviousWindowId != ID_MyFilmsDetail)
       {
-          string loadParam = (string)fi.GetValue(this);
-          //site:<sitename>|category:<categoryname>|search:<searchstring>|return:<locked|root>|view:<list|smallthumbs|largethumbs>
-          //add bool option on search to popup VK if nothing found or not
+        // reset the LoadParameterInfo
+        loadParamInfo = null;
 
-        // MF planned options:
-        // config:<configname>|property:<propertyname>|propertyvalue:<propertyvalue>|search:<searchexpression>|view:<facadeviewtype>
-        // priority order: search overrules property view. propertyvalue is optional. view is optional, config is optional, if not set, last used or default will be used.
-        // actors are possible by using property:actors|propertyvalue:actorname
-        // if invalid values are given, param start is ignored
-        // optional: add public method for basichome editors to ask possible values
-        // new: add jump to DETAILS view for certain movie for trakt integration !!!
-      }      
-      string jumpToViewName = null;
-      if (LoadWithParameterSupported)
-      {
-        jumpToViewName = GetJumpToViewName();
+        string loadParam = null;
+        // check if running version of mediaportal supports loading with parameter and handle _loadParameter
+        System.Reflection.FieldInfo fi = typeof(GUIWindow).GetField("_loadParameter", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+        if (fi != null)
+        {
+          loadParam = (string)fi.GetValue(this);
+        }
+
+        // check for LoadParameters by GUIproperties if nothing was set by the _loadParameter
+        if (string.IsNullOrEmpty(loadParam)) loadParam = LoadParameterInfo.FromGuiProperties();
+
+        if (!string.IsNullOrEmpty(loadParam))
+        {
+          loadParamInfo = new LoadParameterInfo(loadParam);
+
+          // set all state variables to reflect the state we were called with
+          if (!string.IsNullOrEmpty(loadParamInfo.Config))
+          {
+            // set config accordingly
+          }
+          if (!string.IsNullOrEmpty(loadParamInfo.Search))
+          {
+            //lastSearchQuery = loadParamInfo.Search;
+            //Display_SearchResults(loadParamInfo.Search);
+            return;
+          }
+        }
       }
 
       // Setup Random Fanart Timer
@@ -588,24 +597,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //MyFilmsDetail.clearGUIProperty("picture");
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
 
-      if (!BrowseTheWebRightPlugin || !BrowseTheWebRightVersion)
-      {
-        BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
-        BrowseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
-        LogMyFilms.Debug("MyFilms.Init() - BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "', BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "'");
-      }
-      if (!OnlineVideosRightPlugin || !OnlineVideosRightVersion)
-      {
-        OnlineVideosRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos");
-        OnlineVideosRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "OnlineVideos" && plugin.GetType().Assembly.GetName().Version.Minor > 27);
-        LogMyFilms.Debug("MyFilms.Init() - OnlineVideosRightPlugin = '" + OnlineVideosRightPlugin + "', OnlineVideosRightVersion = '" + OnlineVideosRightVersion + "'");
-      }
-
       // (re)link backdrop image controls to the backdrop image swapper
       backdrop.GUIImageOne = ImgFanart;
       backdrop.GUIImageTwo = ImgFanart2;
       backdrop.LoadingImage = loadingImage;  // --> Not used - could be used to show other image while loading destination thumb
-      if (!cover.Active) cover.Active = true;
+      if (!filmcover.Active) filmcover.Active = true;
       if (!groupcover.Active) groupcover.Active = true;
       if (!personcover.Active) personcover.Active = true;
 
@@ -656,7 +652,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // added from MoPic
       //backdrop.Filename = string.Empty;
       //MyFilmsDetail.clearGUIProperty("currentfanart");
-      //cover.Filename = string.Empty;
+      //filmcover.Filename = string.Empty;
 
       //LogMyFilms.Debug("GUIMessage: GUI_MSG_WINDOW_DEINIT - End");
 
@@ -705,25 +701,50 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
       {
         Prev_MenuID = PreviousWindowId;
-        if (InitialStart)
-          InitMainScreen(false); // don't log to MyFilms.log Property clear
+        if (InitialStart) InitMainScreen(false); // don't log to MyFilms.log Property clear
         //InitGlobalFilters(false);
-        Configuration.Current_Config();
-        Load_Config(Configuration.CurrentConfig, true);
+
+        if (!string.IsNullOrEmpty(loadParamInfo.Config)) // config given in load params
+        {
+          LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading config: '" + loadParamInfo.Config + "'");
+          string newConfig = Configuration.Control_Access_Config(loadParamInfo.Config, GetID);
+          if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
+          {
+            InitMainScreen(false); // reset all properties and values
+            InitGlobalFilters(false); // reset global filters, when loading new config !
+            //Change "Config":
+            if (!string.IsNullOrEmpty(Configuration.CurrentConfig)) // if there is an active config, save it !
+            {
+              if (facadeView.SelectedListItem != null)
+                Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+              else
+                Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
+            }
+            Configuration.CurrentConfig = newConfig;
+            InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
+            InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
+            //GUIWaitCursor.Init();
+            //GUIWaitCursor.Show();
+            //GUIWindowManager.Process();
+            //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
+            Load_Config(newConfig, true);
+          }
+        }
+        else
+        {
+          Configuration.Current_Config();
+          Load_Config(Configuration.CurrentConfig, true);
+        }
         
         InitFSwatcher(); // load DB watcher for multiseat
         
-        if (MyFilms.conf.StrFanart)
-        {
-           if (!backdrop.Active) backdrop.Active = true;
-        }
-        else
-          backdrop.Active = false;
+        if (MyFilms.conf.StrFanart) if (!backdrop.Active) backdrop.Active = true;
+        else backdrop.Active = false;
       }
       if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
       {
-        GUIWindowManager.ShowPreviousWindow();
         GUIWaitCursor.Hide();
+        GUIWindowManager.ShowPreviousWindow();
         return;
       }
 
@@ -748,6 +769,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       //GUIControl.ShowControl(GetID, 34);
       GUIWaitCursor.Hide();
+
+      if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // movieID given in load params -> jump to details screen !
+      {
+        LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
+        int index = -1;
+        bool success = int.TryParse(loadParamInfo.MovieID, out index);
+        if (success) conf.StrIndex = index;
+        conf.StrTIndex = "";
+        // currentListLevel = Listlevel.None;
+        // this.SetDummyControlsForFacade(currentListLevel);
+        GUIWindowManager.ActivateWindow(ID_MyFilmsDetail);
+        if (loadParamInfo.Play == "true")
+        {
+          MyFilmsDetail.Launch_Movie(index, GetID, null);
+        }
+      }
+      else if (!string.IsNullOrEmpty(loadParamInfo.Search)) // search expression given in load params -> do global search !
+      {
+        LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading search: '" + loadParamInfo.Search + "' -> NOT YET IMPLEMENTED !");
+      }
     }
 
     void bgOnPageLoad_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -2379,7 +2420,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (currentItem.ItemId == -1)
       {
-        // reinit some fields //cover.Filename = ""; //backdrop.Filename = ""; //MyFilmsDetail.Init_Detailed_DB(false);
+        // reinit some fields //filmcover.Filename = ""; //backdrop.Filename = ""; //MyFilmsDetail.Init_Detailed_DB(false);
         LogMyFilms.Debug("(Load_Lstdetail): ItemId == -1 -> return");
         return;
       }
@@ -2423,20 +2464,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
         //if (this.facadeView.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
         //{
-        //  if (!cover.Active) cover.Active = true;
+        //  if (!filmcover.Active) filmcover.Active = true;
         //  if (!groupcover.Active) groupcover.Active = true;
         //  if (!personcover.Active) personcover.Active = true;
         //  groupcover.Filename = conf.FileImage;
         //}
         //else
         //{
-        //  if (cover.Active) cover.Active = false;
+        //  if (filmcover.Active) filmcover.Active = false;
         //  if (groupcover.Active) groupcover.Active = false;
         //  if (personcover.Active) personcover.Active = false;
         //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
         //}
         groupcover.Filename = conf.FileImage;
-        cover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
+        filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
 
         //GUIControl.ShowControl(GetID, 34);
         // Load_Rating(0); // old method - nor more used
@@ -2482,19 +2523,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
         //if (this.facadeView.CurrentLayout != GUIFacadeControl.Layout.CoverFlow)
         //{
-        //  if (!cover.Active) cover.Active = true;
+        //  if (!filmcover.Active) filmcover.Active = true;
         //  if (!groupcover.Active) groupcover.Active = true;
         //  if (!personcover.Active) personcover.Active = true;
-        //  cover.Filename = conf.FileImage;
+        //  filmcover.Filename = conf.FileImage;
         //}
         //else
         //{
-        //  if (cover.Active) cover.Active = false;
+        //  if (filmcover.Active) filmcover.Active = false;
         //  if (groupcover.Active) groupcover.Active = false;
         //  if (personcover.Active) personcover.Active = false;
         //  LogMyFilms.Debug("(Load_Lstdetail): Cover deactivated due to Layout.CoverFlow");
         //}
-        cover.Filename = conf.FileImage;
+        filmcover.Filename = conf.FileImage;
         //}
 
         Load_Logos(MyFilms.r[currentItem.ItemId], true); // set logos
@@ -5228,7 +5269,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "movieimdbtrailer":
           // Example: (http://www.imdb.com/title/tt0438488/videogallery)
           {
-            if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+            if (Helper.IsBrowseTheWebAvailableAndEnabled)
             {
               string url = ImdbBaseUrl + "";
               string zoom = "150";
@@ -5271,7 +5312,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "movieimdbbilder":
           // example: http://www.imdb.com/title/tt0133093/mediaindex
           {
-            if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+            if (Helper.IsBrowseTheWebAvailableAndEnabled)
             {
               string url = ImdbBaseUrl + "";
               string zoom = "150";
@@ -5310,7 +5351,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
         case "movieimdbinternet":
-          if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+          if (Helper.IsBrowseTheWebAvailableAndEnabled)
           {
             //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
             //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
@@ -5393,7 +5434,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "artistimdbclips": // Example: http://www.imdb.com/name/nm0000206/videogallery
           {
-            if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+            if (Helper.IsBrowseTheWebAvailableAndEnabled)
             { //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
               string url = ImdbBaseUrl + "";
               string zoom = "150";
@@ -5436,7 +5477,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "artistimdbbilder": // Example: http://www.imdb.com/name/nm0000206/mediaindex
           {
-            if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+            if (Helper.IsBrowseTheWebAvailableAndEnabled)
             { //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
               string url = ImdbBaseUrl + "";
               string zoom = "150";
@@ -5479,7 +5520,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "artistimdbinternet": // Example: http://www.imdb.com/name/nm0000206/
 
-          if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
+          if (Helper.IsBrowseTheWebAvailableAndEnabled)
           { //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
             string url = ImdbBaseUrl + "";
             string zoom = "150";
@@ -7686,7 +7727,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.Init_Detailed_DB(log);  // Includes clear of db & user properties
 
       backdrop.Filename = String.Empty;
-      cover.Filename = String.Empty;
+      filmcover.Filename = String.Empty;
+      groupcover.Filename = String.Empty;
+      personcover.Filename = String.Empty;
 
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
 
@@ -8894,6 +8937,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("picture");
       MyFilmsDetail.clearGUIProperty("currentfanart");
       MyFilmsDetail.clearGUIProperty("statusmessage");
+      // MyFilmsDetail.clearGUIProperty(guiProperty.statusmessage);
     }
 
     private void Load_Logos(DataRow row, bool showLogos)
@@ -8975,12 +9019,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else MyFilmsDetail.clearGUIProperty("logos_id2012");
       }
-    }
-
-    private string GetJumpToViewName()
-    {
-      return "";
-      //return GUIWindow._loadParameter; // Requires MePo 1.2+
     }
 
     public class FswHandler
@@ -9621,9 +9659,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       pDlgOk.DoModal(GUIWindowManager.ActiveWindow);
     }
-
-
-
 
     //enum BackGroundLoadingArgumentType
     //{

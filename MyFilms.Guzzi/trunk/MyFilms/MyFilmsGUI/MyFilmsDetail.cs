@@ -866,7 +866,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... 
                       // OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
                       //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
-                      if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
+                      if (Helper.IsOnlineVideosAvailableAndEnabled)
                       {
                         title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
 
@@ -4431,7 +4431,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             clearGUIProperty("user.watched.value", log);
             clearGUIProperty("user.watched.count", log);
             clearGUIProperty("user.watched.name", log);
-            clearGUIProperty("user.watched.total", log);
+            clearGUIProperty("user.watched.global", log);
             clearGUIProperty("user.source.isonline", log);
             clearGUIProperty("user.sourcetrailer.isonline", log);
 
@@ -4564,7 +4564,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                           setGUIProperty("user.watched.value", ""); // set to empty, if movie is unwatched
                         setGUIProperty("user.watched.count", count.ToString());
                         setGUIProperty("user.watched.name", MyFilms.conf.StrUserProfileName);
-                        setGUIProperty("user.watched.total", GetWatchedCount(ItemId, "Global").ToString());
+                        setGUIProperty("user.watched.global", GetWatchedCount(ItemId, "Global").ToString());
                       }
                       else
                       {
@@ -4942,6 +4942,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
         #region  Lecture du film demandé
 
+        public static void PlayMovie(string config, int movieid)
+        //-------------------------------------------------------------------------------------------
+        // Play Movie from external (wrapper to prepare environment)
+        //-------------------------------------------------------------------------------------------
+        {
+          try
+          {
+            Launch_Movie(movieid, MyFilms.ID_OnlineVideos, null);
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.DebugException("PlayMovie() : Exception !", ex);
+            // throw;
+          }
+        }
+
         public static void Launch_Movie(int select_item, int GetID, GUIAnimation m_SearchAnimation)
         //-------------------------------------------------------------------------------------------
         // Play Movie
@@ -5296,7 +5312,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
                 //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
-                if (MyFilms.OnlineVideosRightPlugin && MyFilms.OnlineVideosRightVersion)
+                if (Helper.IsOnlineVideosAvailableAndEnabled)
                 {
                   string title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, ""); 
                   string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked";
