@@ -728,6 +728,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //GUIWindowManager.Process();
             //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
             Load_Config(newConfig, true);
+            Fin_Charge_Init(true, true);
           }
         }
         else
@@ -2012,6 +2013,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string sPrevTitle = "";
       string SelItem = gSelItem.ToString();
       int iSelItem = -2;
+      bool tmpwatched = false;
       List<GUIListItem> facadeDownloadItems = new List<GUIListItem>();
 
       if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
@@ -2049,6 +2051,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
+        tmpwatched = false; 
         number++;
         if (conf.Boolreturn)//in case of selection by view verify if value correspond excatly to the searched string
         {
@@ -2128,20 +2131,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          //if (sr["Checked"].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue) // changed to take setup config into consideration
           if (conf.StrEnhancedWatchedStatusHandling)
           {
-            if (EnhancedWatched(sr[conf.StrWatchedField].ToString(), conf.StrUserProfileName) == true)
-              item.IsPlayed = true;
             if (!sr[conf.StrWatchedField].ToString().StartsWith("Global:"))
-              sr[conf.StrWatchedField] = "Global:0:-1";
+            {
+              if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
+                if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+                  tmpwatched = true;
+              if (tmpwatched) sr[conf.StrWatchedField] = "Global:1:-1";
+              else sr[conf.StrWatchedField] = "Global:0:-1";
+            }
             if (!sr[conf.StrWatchedField].ToString().Contains(conf.StrUserProfileName + ":"))
             {
-              if (sr[conf.StrWatchedField].ToString().Length > 0)
-                sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|" + conf.StrUserProfileName + ":0:-1";
-              else
-                sr[conf.StrWatchedField] = conf.StrUserProfileName + ":0:-1";
+                if (tmpwatched) sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|" + conf.StrUserProfileName + ":1:-1";
+                else sr[conf.StrWatchedField] = sr[conf.StrWatchedField].ToString() + "|" + conf.StrUserProfileName + ":0:-1";
             }
+            if (EnhancedWatched(sr[conf.StrWatchedField].ToString(), conf.StrUserProfileName) == true)
+              item.IsPlayed = true;
           }
           else
           {
@@ -2154,14 +2160,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else 
                 sr[conf.StrWatchedField] = "true";
             }
-            
             if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
               if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
                 item.IsPlayed = true;
-            if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
-              if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
-                item.IsPlayed = true;
           }
+          if (MyFilms.conf.StrSuppress && MyFilms.conf.StrSuppressField.Length > 0)
+            if ((sr[MyFilms.conf.StrSuppressField].ToString() == MyFilms.conf.StrSuppressValue.ToString()) && (MyFilms.conf.StrSupPlayer))
+              item.IsPlayed = true;
 
           if (sr["Picture"].ToString().Length > 0)
           {
@@ -2343,7 +2348,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 item.ThumbnailImage = conf.DefaultCover;
               }
             }
-          Thread.Sleep(10);
+          // Thread.Sleep(10);
           }
         })
         {
@@ -4618,8 +4623,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  choiceGlobalUserProfileName.Add(conf.StrUserProfileName);
           //}
 
-          dlg4.Add("Global"); // Global default value - should already be present by default, if enhanced watch handling is selected
-          choiceGlobalUserProfileName.Add("Global");
+          //dlg4.Add("Global"); // Global default value - should already be present by default, if enhanced watch handling is selected
+          //choiceGlobalUserProfileName.Add("Global");
 
           dlg4.Add("<" + GUILocalizeStrings.Get(10798630) + ">"); // New Value ...
           choiceGlobalUserProfileName.Add("");
@@ -4635,7 +4640,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (s.Contains(":"))
               {
                 string userprofilename = s.Substring(0, s.IndexOf(":")); // extract userprofilename
-                if (!choiceGlobalUserProfileName.Contains(userprofilename))
+                if (!choiceGlobalUserProfileName.Contains(userprofilename) && userprofilename != "Global")
                 {
                   dlg4.Add(userprofilename);
                   choiceGlobalUserProfileName.Add(userprofilename);
@@ -4664,6 +4669,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.StrUserProfileName = strUserProfileNameSelection;
               break;
           }
+          XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UserProfileName", MyFilms.conf.StrUserProfileName);
           LogMyFilms.Debug("UserProfileName - change to '" + conf.StrUserProfileName.ToString() + "'");
           //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
           //Load_Config(Configuration.CurrentConfig, true);

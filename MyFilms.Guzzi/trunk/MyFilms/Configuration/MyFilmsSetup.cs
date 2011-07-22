@@ -740,6 +740,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 MesFilmsFanart.Focus();
                 return;
             }
+            if ((chkEnhancedWatchedStatusHandling.Checked) && (UserProfileName.Text.Length == 0))
+            {
+              System.Windows.Forms.MessageBox.Show("'Active User Profile Name' must be filled when activating 'Enhanced Watched Status Handling' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+              General.SelectedIndex = 4;
+              UserProfileName.Focus();
+              return;
+            }
+            if ((chkEnhancedWatchedStatusHandling.Checked) && (cbWatched.Text.ToLower() == "checked"))
+            {
+              System.Windows.Forms.MessageBox.Show("You have enabled 'Enhanced Watched Status Handling' and use 'Checked' field for watched status !\n This is NOT compatible with AMC and it is recommended to use a field that can store text like e.g. 'MediaLabel' !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+              General.SelectedIndex = 4;
+              cbWatched.Focus();
+              // return;
+            }
+
             Selected_Enreg_TextChanged();
             if (View_Dflt_Item.Text.Length == 0)
                 View_Dflt_Item.Text = "(none)";

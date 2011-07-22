@@ -220,7 +220,10 @@ namespace MyFilmsPlugin.MyFilms
               string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
 
               string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
-              LogMyFilms.Debug("GetMovies: TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+              if (TraktEnabled)
+                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+              else
+                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "'");
               if (System.IO.File.Exists(Catalog) && TraktEnabled)
               {
                 try
@@ -750,7 +753,11 @@ namespace MyFilmsPlugin.MyFilms
             string tempcount = MyFilmsDetail.EnhancedWatchedValue(s, "count");
             string temprating = MyFilmsDetail.EnhancedWatchedValue(s, "rating");
 
-            if (tempuser == UserProfileName) // Update Count Value
+            if (tempuser == "Global" && int.Parse(tempcount) < count) // Update Count Value for Global count, if it is lower than user count
+            {
+              sNew = tempuser + ":" + count.ToString() + ":" + temprating;
+            }
+            if (tempuser == UserProfileName) // Update Count Value for selected user
             {
               sNew = tempuser + ":" + count.ToString() + ":" + temprating;
             }
@@ -764,7 +771,7 @@ namespace MyFilmsPlugin.MyFilms
       else
       {
         if (string.IsNullOrEmpty(EnhancedWatchedValue) || !EnhancedWatchedValue.Contains(":"))
-          newEnhancedWatchedValue = "Global:0:-1|" + UserProfileName + ":" + count.ToString() + ":" + "-1";
+          newEnhancedWatchedValue = "Global:" + count + ":-1|" + UserProfileName + ":" + count + ":" + "-1";
         else
           newEnhancedWatchedValue = EnhancedWatchedValue + "|" + UserProfileName + ":" + count.ToString() + ":" + "-1";
       }

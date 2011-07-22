@@ -2402,6 +2402,7 @@
           // 
           // UserProfileName
           // 
+          this.UserProfileName.Enabled = false;
           this.UserProfileName.Location = new System.Drawing.Point(186, 117);
           this.UserProfileName.Name = "UserProfileName";
           this.UserProfileName.Size = new System.Drawing.Size(162, 20);

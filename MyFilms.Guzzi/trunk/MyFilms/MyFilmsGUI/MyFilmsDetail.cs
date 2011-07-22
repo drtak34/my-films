@@ -312,18 +312,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static event RatingEventDelegate RateItem;
         public delegate void RatingEventDelegate(MFMovie movie, string rating);
 
-        static MyFilmsDetail()
-        {
-            playlistPlayer = PlayListPlayer.SingletonPlayer;
-        }
+        //static MyFilmsDetail()
+        //{
+        //  playlistPlayer = PlayListPlayer.SingletonPlayer;
+        //}
 
         #endregion
 
         public MyFilmsDetail()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+          playlistPlayer = PlayListPlayer.SingletonPlayer;
+          g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
+          g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
+          g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
         }
         public override int GetID
         {
@@ -372,9 +373,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // ToDo: Should be unhidden, if ActorThumbs are implemented
             GUIControl.HideControl(GetID, (int)Controls.CTRL_ActorMultiThumb);
 
-            g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
-            g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
-            g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
             m_directory.SetExtensions(MediaPortal.Util.Utils.VideoExtensions);
             if (MyFilms.conf.StrTxtSelect.Length == 0)
               clearGUIProperty("select"); //GUIControl.HideControl(GetID, (int)Controls.CTRL_TxtSelect);
@@ -431,6 +429,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //}
               MyFilms.conf.LastID = MyFilms.ID_MyFilms;
               GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
+              // GUIWindowManager.ShowPreviousWindow();
               return;
             }
 
@@ -4942,14 +4941,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
         #region  Lecture du film demandé
 
+        public static void PlayMovie(string config, MFMovie movie)
+        {
+          
+        }
+
+
         public static void PlayMovie(string config, int movieid)
         //-------------------------------------------------------------------------------------------
         // Play Movie from external (wrapper to prepare environment)
         //-------------------------------------------------------------------------------------------
         {
+          int GetID = GUIWindowManager.GetPreviousActiveWindow();
           try
           {
-            Launch_Movie(movieid, MyFilms.ID_OnlineVideos, null);
+            Launch_Movie(movieid, GetID, null);
           }
           catch (Exception ex)
           {

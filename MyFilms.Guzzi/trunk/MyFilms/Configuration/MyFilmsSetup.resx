@@ -449,12 +449,12 @@ The user "global" is always existing and is counting global watched status.</val
   </data>
   <data name="chkEnhancedWatchedStatusHandling.ToolTip" xml:space="preserve">
     <value>Select this option if you want to update the watched status field with "enhanced watched status info".
-It requires the field to be able to store text infos (e.g. borrowers field).
+It requires the field to be able to store text info (e.g. borrowers field).
 Make sure, you don't share the field with other functions.
 If checked, watched status will be stored with extended info:
 - Watched count "global"
-- Watched count in usercontext (if a usercontext is set)
-Watched count in usercontext requires a userprofilename to choose.
+- Watched count in user context (if a user context is set)
+Watched count in user context requires a user profile name to choose.
 To be updated each time a movie is launched.</value>
   </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
