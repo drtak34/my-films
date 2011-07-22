@@ -452,10 +452,13 @@ The user "global" is always existing and is counting global watched status.</val
 It requires the field to be able to store text info (e.g. borrowers field).
 Make sure, you don't share the field with other functions.
 If checked, watched status will be stored with extended info:
-- Watched count "global"
+- Watched count "global", representing the "total played"
 - Watched count in user context (if a user context is set)
 Watched count in user context requires a user profile name to choose.
-To be updated each time a movie is launched.</value>
+To be updated each time a movie is launched.
+Note:
+The "global count" will inclease each time any user is watching a film thus representing "total plays".
+It will NOT change, if user manually sets a movie to watched or unwatched.</value>
   </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
     <value>This option allows AMC users to update field info for storing your "watched status".
