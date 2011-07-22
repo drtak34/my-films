@@ -289,13 +289,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         return true;
                     }
 
-                    if (iControl == (int)Controls.CTRL_BtnReturn)
-                    {
-                      GUIWindowManager.ShowPreviousWindow();
-                      //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
-                      return true;
-                    }
-
                     if ((iControl == (int)Controls.CTRL_BtnLayout) && !MyFilms.conf.Boolselect)
                     // Change Layout View
                     {

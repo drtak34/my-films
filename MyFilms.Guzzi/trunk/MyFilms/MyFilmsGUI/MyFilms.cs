@@ -308,7 +308,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static string Prev_Label = string.Empty;
     //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
-    public static int Prev_MenuID = -1;
     public bool Context_Menu = false;
     public static Configuration conf;
     public static Logos confLogos;
@@ -709,7 +708,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIWaitCursor.Show();
       if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
       {
-        Prev_MenuID = PreviousWindowId;
+        // Prev_MenuID = PreviousWindowId;
         if (InitialStart) InitMainScreen(false); // don't log to MyFilms.log Property clear
         //InitGlobalFilters(false);
 
@@ -1548,12 +1547,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           else
           {
-            //GUIWindowManager.ShowPreviousWindow();
+            GUIWindowManager.ShowPreviousWindow();
             //Fix to not only always return to MyHome, e.g. when coming from Basichome...
             //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
             //if (Prev_MenuID != -1)
-            LogMyFilms.Debug("(GuzziFix for Previous Window - Prev_MenuID: '" + Prev_MenuID + "'");
-            GUIWindowManager.ActivateWindow(Prev_MenuID);
+            //LogMyFilms.Debug("(GuzziFix for Previous Window - Prev_MenuID: '" + Prev_MenuID + "'");
+            //GUIWindowManager.ActivateWindow(Prev_MenuID);
             return;
           }
         case Action.ActionType.ACTION_KEY_PRESSED:

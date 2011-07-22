@@ -428,8 +428,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //  return;
               //}
               MyFilms.conf.LastID = MyFilms.ID_MyFilms;
-              GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
-              // GUIWindowManager.ShowPreviousWindow();
+              // GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
+              GUIWindowManager.ShowPreviousWindow();
               return;
             }
 
