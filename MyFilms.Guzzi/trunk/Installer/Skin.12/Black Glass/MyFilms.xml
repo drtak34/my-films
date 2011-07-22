@@ -884,11 +884,11 @@ End additional Backdrops  -->
 			<description>RatingValue</description>
 			<type>label</type>
 			<id>1</id>
-			<posX>280</posX>
+			<posX>305</posX>
 			<posY>452</posY>
 			<label>(#myfilms.db.rating.value)</label>
 			<font>font10</font>
-			<align>left</align>
+			<align>right</align>
 			<textcolor>6fffffff</textcolor>
 			<visible>!control.isvisible(34)+!player.hasmedia+facadeview.list+control.hasfocus(50)</visible>
 			<animation effect="fade" time="250">visiblechange</animation>
@@ -1415,7 +1415,7 @@ End additional Backdrops  -->
 
 -->
 
-<!-- Watched Icon start -->
+<!-- Watched Icon start (cover) -->
 <!--
 			<control>
 				<description>Watched Icon Background</description>
@@ -1464,6 +1464,55 @@ End additional Backdrops  -->
 -->
 <!-- Watched Icon end -->
 
+<!-- Watched Count -->
+			<control>
+				<description>Watched Icon</description>
+				<type>image</type>
+				<id>0</id>
+				<posX>733</posX>
+				<posY>680</posY>
+				<width>13</width>
+				<height>13</height>
+				<texture>MyFilms\overlaywatched.png</texture>
+				<colordiffuse>eea9d0f7</colordiffuse>
+				<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.contains(#myfilms.user.watched.value)</visible>
+				<animation effect="fade" time="250">visiblechange</animation>
+				<animation effect="fade" time="250">WindowClose</animation>	
+				<animation effect="fade" time="250">WindowOpen</animation>
+			</control>
+
+			<control>
+				<description>Un-Watched Icon</description>
+				<type>image</type>
+				<id>0</id>
+				<posX>733</posX>
+				<posY>680</posY>
+				<width>13</width>
+				<height>13</height>
+				<texture>MyFilms\overlayunwatched.png</texture>
+				<colordiffuse>7fffffff</colordiffuse>
+				<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+!string.contains(#myfilms.user.watched.value)</visible>
+				<animation effect="fade" time="250">visiblechange</animation>
+				<animation effect="fade" time="250">WindowClose</animation>	
+				<animation effect="fade" time="250">WindowOpen</animation>
+			</control>
+		<control>
+			<description>User Watched Count</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>725</posX>
+			<posY>679</posY>
+			<width>279</width>
+			<label>#myfilms.user.watched.name: #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
+			<font>font9</font>
+			<align>right</align>
+			<textcolor>6fffffff</textcolor>
+			<visible>!control.isvisible(34)+facadeview.list+control.hasfocus(50)+string.equals(#myfilms.user.watched.name)</visible>
+			<animation effect="fade" time="250">visiblechange</animation>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+	
 		<control>
 			<type>imagelist</type>
 			<id>1</id>
