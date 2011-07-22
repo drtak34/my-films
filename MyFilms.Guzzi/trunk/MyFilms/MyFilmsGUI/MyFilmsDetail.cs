@@ -2089,8 +2089,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
+            //int i = 0;
+            //while (GlobalLockActive() && i < 20)
+            //{
+            //  i += 1;
+            //  Thread.Sleep(100);
+            //}
+            if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms)
+            {
+              GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+              if (dlgOK != null)
+              {
+                dlgOK.SetHeading("System Warning");
+                dlgOK.SetLine(1, "");
+                dlgOK.SetLine(2, "Data not saved due to global lock !");
+                dlgOK.DoModal(GUIWindowManager.ActiveWindow);
+              }
+            }
             // ShowMessageDialog("System Warning", "", "Data not saved due to global lock !");
-            LogMyFilms.Info("Movie Database NOT updated due to GlobalLock !");
+            LogMyFilms.Warn("Movie Database NOT updated due to GlobalLock !");
           }
         }
 
