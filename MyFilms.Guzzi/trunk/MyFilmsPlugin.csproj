@@ -118,6 +118,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\TaskScheduler.dll</HintPath>
     </Reference>
+    <Reference Include="TraktPlugin, Version=1.0.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Externals\TraktPlugin.dll</HintPath>
+    </Reference>
     <Reference Include="Utils, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\Mediaportal\Utils.dll</HintPath>

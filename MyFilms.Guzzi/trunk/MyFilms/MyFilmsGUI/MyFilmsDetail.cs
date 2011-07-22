@@ -57,7 +57,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using SQLite.NET;
 
-
+  using TraktPlugin.GUI;
+  
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using MediaInfo = MyFilmsPlugin.MyFilms.Utils.MediaInfo;
   // using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
@@ -1131,8 +1132,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
               case "trakt-Shouts":
-                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts, "");
+                GUIShouts.ShoutType = GUIShouts.ShoutTypeEnum.movie;
+                GUIShouts.MovieInfo = new MovieShout { IMDbId = MyFilms.currentMovie.IMDBNumber, TMDbId = "", Title = MyFilms.currentMovie.Title, Year = MyFilms.currentMovie.Year.ToString() };
+                GUIShouts.Fanart = MyFilms.currentMovie.Fanart;
+                GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts);
+                //GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts, "");
                 break;
+
+              //case "trakt-Rate":
+              //  GUIUtils.ShowRateDialog<TraktRateMovie>(BasicHandler.CreateMovieRateData(title, MyFilms.currentMovie.Year.ToString(), MyFilms.currentMovie.IMDBNumber));
+              //  break;
 
               case "trailermenu":
                     if (dlgmenu == null) return;
