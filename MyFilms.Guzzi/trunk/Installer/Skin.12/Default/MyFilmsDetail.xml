@@ -1521,7 +1521,7 @@
 	</control>
 <!-- End Special View for FullColorFanart -->
 
-<!-- Watched/Unwatched Iocn -->
+<!-- Watched/Unwatched Icon -->
 	<control>
 		<type>image</type>
 		<description>UnWatched Icon</description>
@@ -1554,14 +1554,43 @@
 		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 
-<!-- Additional Display for Info Movie available -->
+<!-- Watched Count -->
+		<control>
+			<description>User</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>275</posX>
+			<posY>457</posY>
+			<width>80</width>
+			<label>#myfilms.user.watched.name: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>6fffffff</textcolor>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.global)</visible>
+		</control>
+		<!-- <control>
+			<description>User</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>260</posX>
+			<posY>477</posY>
+			<width>80</width>
+			<label>#myfilms.user.watched.count/#myfilms.user.watched.global</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>6fffffff</textcolor>
+			<visible>!Control.HasFocus(10099)</visible>
+		</control> -->
+
+
+	<!-- Additional Display for Info Movie available -->
 
 		<control>
 			<description>Movie available Info Label</description>
 			<type>fadelabel</type>
 			<id>1</id>
 			<posX>260</posX>
-			<posY>477</posY>
+			<posY>497</posY>
 			<width>80</width>
 			<label>Film:</label>
 			<font>font10</font>
@@ -1574,7 +1603,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>265</posX>
-			<posY>478</posY>
+			<posY>498</posY>
 			<width>15</width>
 			<height>15</height>
 			<texture>MyFilms\led_red.png</texture>
@@ -1588,7 +1617,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>265</posX>
-			<posY>478</posY>
+			<posY>498</posY>
 			<width>15</width>
 			<height>15</height>
 			<texture>MyFilms\led_green.png</texture>
@@ -1602,7 +1631,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>265</posX>
-			<posY>478</posY>
+			<posY>498</posY>
 			<width>15</width>
 			<height>15</height>
 			<texture>MyFilms\led_yellow.png</texture>
@@ -1616,7 +1645,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>265</posX>
-			<posY>478</posY>
+			<posY>498</posY>
 			<width>15</width>
 			<height>15</height>
 			<texture>MyFilms\led_grey.png</texture>
@@ -1633,7 +1662,7 @@
 			<type>fadelabel</type>
 			<id>1</id>
 			<posX>260</posX>
-			<posY>497</posY>
+			<posY>517</posY>
 			<width>80</width>
 			<label>Trailer:</label>
 			<font>font10</font>
@@ -1646,7 +1675,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>265</posX>
-			<posY>498</posY>
+			<posY>518</posY>
 			<width>15</width>
 			<height>15</height>
 			<texture>MyFilms\led_red.png</texture>
@@ -1660,7 +1689,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>265</posX>
-			<posY>498</posY>
+			<posY>518</posY>
 			<width>15</width>
 			<height>15</height>
 			<texture>MyFilms\led_green.png</texture>
@@ -1674,7 +1703,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>265</posX>
-			<posY>498</posY>
+			<posY>518</posY>
 			<width>15</width>
 			<height>15</height>
 			<texture>MyFilms\led_yellow.png</texture>
@@ -1688,7 +1717,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>265</posX>
-			<posY>498</posY>
+			<posY>518</posY>
 			<width>15</width>
 			<height>15</height>
 			<texture>MyFilms\led_grey.png</texture>

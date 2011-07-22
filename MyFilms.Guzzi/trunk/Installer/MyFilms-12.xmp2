@@ -3106,13 +3106,6 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{f2d608b0-72d6-413e-8d11-57deab7654dc}-BrowseTheWeb.dll</ZipFileName>
               <DestinationFilename>%Plugins%\Windows\BrowseTheWeb.dll</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>plugins.12\Windows\TraktPlugin.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{4d421ec5-6866-412e-b50f-a41a9d6bf850}-TraktPlugin.dll</ZipFileName>
-              <DestinationFilename>%Plugins%\Windows\TraktPlugin.dll</DestinationFilename>
-            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3484,7 +3477,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>1195</Revision>
+      <Revision>1205</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -3492,7 +3485,7 @@ Please refer to the Wiki online documentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1195(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1205(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -6551,13 +6544,6 @@ Please refer to the Wiki online documentation.</Value>
         <ZipFileName>Installer{CopyFile}\{f2d608b0-72d6-413e-8d11-57deab7654dc}-BrowseTheWeb.dll</ZipFileName>
         <DestinationFilename>%Plugins%\Windows\BrowseTheWeb.dll</DestinationFilename>
       </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>plugins.12\Windows\TraktPlugin.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{4d421ec5-6866-412e-b50f-a41a9d6bf850}-TraktPlugin.dll</ZipFileName>
-        <DestinationFilename>%Plugins%\Windows\TraktPlugin.dll</DestinationFilename>
-      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -6576,14 +6562,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{356eb40c-b25d-4cc6-b522-3bb6bcab8917}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{c4fea66a-5adf-4793-bd12-5bc3faa08555}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{6dd88080-84c0-4fd2-a542-f3899c032239}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{5578e5a4-d634-41f2-85e6-597f24bdb1fc}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

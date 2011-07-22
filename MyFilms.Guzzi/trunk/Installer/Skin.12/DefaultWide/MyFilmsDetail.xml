@@ -1576,6 +1576,21 @@
 		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	
+<!-- Watched Count -->
+		<control>
+			<description>User</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>385</posX>
+			<posY>633</posY>
+			<width>280</width>
+			<label>#myfilms.user.watched.name: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>6fffffff</textcolor>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.global)</visible>
+		</control>
+	
 <!-- Additional Display for Info Movie available -->
 		<control>
 			<description>Movie available Info Label</description>
