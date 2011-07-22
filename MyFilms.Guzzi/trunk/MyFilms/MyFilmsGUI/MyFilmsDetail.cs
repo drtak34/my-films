@@ -882,7 +882,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 #if MP11
                         GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
 #else
-                        GUIWindowManager.ActivateWindow((int)MyFilms.ID_OnlineVideos, OVstartparams);
+                        GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, OVstartparams);
+                        // GUIWindowManager.ActivateWindow((int)MyFilms.ID_OnlineVideos, OVstartparams);
 #endif
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
@@ -1195,7 +1196,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       // ShowSubtitleMenu(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString());
                       if (Helper.IsSubCentralAvailableAndEnabled)
                       {
-                        GUIWindowManager.ActivateWindow(84623);
+                        GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.SubCentral);
                       }
                     }
                     break;
@@ -5333,7 +5334,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 #if MP11
                   GUIWindowManager.ActivateWindow(MyFilms.ID_OnlineVideos, false); // 4755 is ID for OnlineVideos
 #else
-                  GUIWindowManager.ActivateWindow((int)MyFilms.ID_OnlineVideos, OVstartparams);
+                  GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, OVstartparams);
 #endif
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
                   GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");

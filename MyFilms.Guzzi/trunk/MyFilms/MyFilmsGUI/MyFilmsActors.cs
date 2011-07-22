@@ -192,7 +192,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if ((actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU) || (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR))
             {
                 MyFilms.conf.LastID = MyFilms.ID_MyFilms;
-                GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
+                GUIWindowManager.ShowPreviousWindow();
                 return;
             }
 
@@ -285,16 +285,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     {
                         MyFilms.conf.LastID = MyFilms.ID_MyFilms;
                         GUITextureManager.CleanupThumbs();
-                        GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms);
+                        GUIWindowManager.ShowPreviousWindow();
                         return true;
                     }
 
                     if (iControl == (int)Controls.CTRL_BtnReturn)
                     {
-                      // Show Actor Details Screen
-                      //GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_HOME);
-                      GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
-                      // Hier Aktivitäten wie z.b. ListControl für Actors?
                       GUIWindowManager.ShowPreviousWindow();
                       //Update_XML_Items(); //To be changed, when DetailScreen is done!!!
                       return true;

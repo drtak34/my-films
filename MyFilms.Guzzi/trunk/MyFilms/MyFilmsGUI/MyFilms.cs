@@ -196,8 +196,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public const int ID_MyFilmsThumbs = 7990;
     public const int ID_MyFilmsActorsInfo = 7991;
     public const int ID_MyFilmsArtworkSelection = 7992;
+
     public const int ID_BrowseTheWeb = 54537689;
     public const int ID_OnlineVideos = 4755;
+    public const int ID_SubCentral = 84623;
 
     public const int cacheThumbWith = 400;
     public const int cacheThumbHeight = 600;
@@ -362,6 +364,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  Filmstrip = 3,
     //  Coverflow = 4
     //}
+
+    public enum ExternalPluginWindows : int
+    {
+      BrowseTheWeb = 54537689,
+      OnlineVideos = 4755,
+      SubCentral = 84623
+    }
 
     enum eContextItems
     {
@@ -794,7 +803,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (loadParamInfo.Play == "true")
             MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null);
           else 
-            GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // activate this, if you want to jump to Details screen automatically !
+            GUIWindowManager.ActivateWindow((int)ID_MyFilmsDetail, true);
         }
       }
       else if (!string.IsNullOrEmpty(loadParamInfo.Search)) // search expression given in load params -> do global search !
@@ -4693,7 +4702,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
             MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-            GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+            GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
             MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
             GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -5282,7 +5291,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                 MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-                GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
                 MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -5324,7 +5333,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                 MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-                GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
                 MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -5373,7 +5382,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
               MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-              GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+              GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
               MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
               GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -5449,7 +5458,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                 MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-                GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
                 MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -5492,7 +5501,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
                 MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-                GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+                GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
                 MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
                 GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
                 GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -5546,7 +5555,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
               MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-              GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+              GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
               MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
               GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
               GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
@@ -5711,7 +5720,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
             MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-            GUIWindowManager.ActivateWindow(ID_BrowseTheWeb, false); //54537689
+            GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
             MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
             GUIPropertyManager.SetProperty("#btWeb.startup.link", "");
             GUIPropertyManager.SetProperty("#btWeb.link.zoom", "");
