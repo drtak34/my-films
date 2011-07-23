@@ -27,6 +27,7 @@ namespace MyFilmsPlugin.MyFilms
   using System.Collections;
   using System.Data;
   using System.Text.RegularExpressions;
+  using System.Xml;
 
   using MediaPortal.Configuration;
   using MediaPortal.GUI.Library;
@@ -42,18 +43,19 @@ namespace MyFilmsPlugin.MyFilms
   public class BaseMesFilms
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
-    
+
         private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
+        private static MyFilmsData myfilmsdata;
+
 /*
         private static Dictionary<string, string> dataPath;
 */
         private static DataRow[] movies;
         private static DataRow[] persons;
+        private static DataRow[] history;
 
         #region ctor
-        static BaseMesFilms()
-        {
-        }
+        static BaseMesFilms() {}
         #endregion
 
         #region méthodes statique sprivées
@@ -71,16 +73,58 @@ namespace MyFilmsPlugin.MyFilms
               throw e;
             }
         }
+        private static void initDataMyFilms()
+        {
+          string datafile = GetNameForMyFilmsDatafile(MyFilms.conf.StrFileXml);
+
+          myfilmsdata = new MyFilmsData();
+          LogMyFilms.Debug("MyFilmsData - Try reading datafile '" + datafile + "'");
+          try
+          {
+            if (!System.IO.File.Exists(datafile))
+            {
+              XmlTextWriter destXml = new XmlTextWriter(datafile, System.Text.Encoding.Default);
+              destXml.Formatting = Formatting.Indented;
+              destXml.WriteStartDocument();
+              destXml.WriteStartElement("MyFilmsData");
+              destXml.WriteStartElement("Persons");
+              destXml.WriteElementString("Properties", string.Empty);
+              destXml.WriteStartElement("Contents");
+              destXml.WriteStartElement("History");
+              destXml.WriteElementString("Properties", string.Empty);
+              destXml.WriteStartElement("Contents");
+              destXml.Close();
+            }
+            myfilmsdata.ReadXml(datafile);
+          }
+          catch (Exception e)
+          {
+            LogMyFilms.Error(": Error reading myfilms data xml '" + datafile + "'; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+            // throw e; // do NOT throw the exception to upper level
+          }
+        }
+        private static string GetNameForMyFilmsDatafile(string catalogfullpath)
+        {
+          string path = System.IO.Path.GetDirectoryName(MyFilms.conf.StrFileXml);
+          string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
+          string extension = System.IO.Path.GetExtension(MyFilms.conf.StrFileXml);
+          string datafile = path + @"\" + filename + "_MFdata." + extension;
+          return datafile;
+        }
         #endregion
 
         #region accesseurs
         public static DataRow[] FilmsSelected
         {
-            get { return movies; }
+          get { return movies; }
         }
         public static DataRow[] PersonsSelected
         {
           get { return persons; }
+        }
+        public static DataRow[] HistorySelected
+        {
+          get { return history; }
         }
         #endregion
 
@@ -94,15 +138,17 @@ namespace MyFilmsPlugin.MyFilms
           //lock (data)
           //{
             LogMyFilms.Debug("ReadDataMovies() - Starting ...");
-            if (data == null) 
+            if (data == null)
+            {
               initData();
+              LogMyFilms.Debug("StrDfltSelect      : '" + StrDfltSelect + "'");
+              LogMyFilms.Debug("StrSelect          : '" + StrSelect + "'");
+              LogMyFilms.Debug("StrSort            : '" + StrSort + "'");
+              LogMyFilms.Debug("StrSortSens        : '" + StrSortSens + "'");
+              LogMyFilms.Debug("RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
+            }
             else 
               LogMyFilms.Debug("ReadDataMovies() - Data already cached in memory !");
-            LogMyFilms.Debug("StrDfltSelect      : '" + StrDfltSelect + "'");
-            LogMyFilms.Debug("StrSelect          : '" + StrSelect + "'");
-            LogMyFilms.Debug("StrSort            : '" + StrSort + "'");
-            LogMyFilms.Debug("StrSortSens        : '" + StrSortSens + "'");
-            LogMyFilms.Debug("RESULTSELECT       : '" + StrDfltSelect + StrSelect, StrSort + " " + StrSortSens + "'");
             if (StrSelect.Length == 0)
             {
               StrSelect = MyFilms.conf.StrTitle1.ToString() + " not like ''";
@@ -121,46 +167,80 @@ namespace MyFilmsPlugin.MyFilms
 
         public static DataRow[] ReadDataPersons(string StrSelect, string StrSort, string StrSortSens, bool all)
         {
-            if (data == null) initData();
-            if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
+          if (data == null) initData();
+          if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
+          persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
+          if (persons.Length == 0 && all)
+          {
+            StrSelect = "Name" + " not like ''";
             persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
-            if (persons.Length == 0 && all)
-            {
-              StrSelect = "Name" + " not like ''";
-              persons = data.Tables["Person"].Select(StrSelect, StrSort + " " + StrSortSens);
-              //Guzzi
-              LogMyFilms.Debug("Persons:  StrSelect          : '" + StrSelect + "'");
-              LogMyFilms.Debug("Persons:  StrSort            : '" + StrSort + "'");
-              LogMyFilms.Debug("Persons:  StrSortSens        : '" + StrSortSens + "'");
-              LogMyFilms.Debug("Persons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
-            }
-            return persons;
+            //Guzzi
+            LogMyFilms.Debug("Persons:  StrSelect          : '" + StrSelect + "'");
+            LogMyFilms.Debug("Persons:  StrSort            : '" + StrSort + "'");
+            LogMyFilms.Debug("Persons:  StrSortSens        : '" + StrSortSens + "'");
+            LogMyFilms.Debug("Persons:  RESULTSELECT       : '" + StrSelect, StrSort + " " + StrSortSens + "'");
+          }
+          return persons;
         }
+
+        public static DataRow[] ReadDataHistory(string StrSelect, string StrSort, string StrSortSens, bool all)
+        {
+          if (myfilmsdata == null) initDataMyFilms();
+          if (StrSelect.Length == 0) StrSelect = "Name" + " not like ''";
+          history = myfilmsdata.Tables["History"].Select(StrSelect, StrSort + " " + StrSortSens);
+          if (history.Length == 0 && all)
+          {
+            StrSelect = "Name" + " not like ''";
+            history = data.Tables["History"].Select(StrSelect, StrSort + " " + StrSortSens);
+          }
+          return history;
+        }
+
         public static void LoadMesFilms(string StrFileXml)
         {
-            if (!System.IO.File.Exists(StrFileXml))
-            {
-              throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
-            }
-            data = new AntMovieCatalog();
-            try
-            {
-              data.ReadXml(StrFileXml);
-            }
-            catch (Exception e)
-            {
-              LogMyFilms.Error("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
-              throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
-            }
+          if (!System.IO.File.Exists(StrFileXml))
+          {
+            throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
+          }
+          data = new AntMovieCatalog();
+          try
+          {
+            data.ReadXml(StrFileXml);
+          }
+          catch (Exception e)
+          {
+            LogMyFilms.Error("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+            throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
+          }
         }
+
+        public static void LoadMyFilmsData(string datafile)
+        {
+          if (!System.IO.File.Exists(datafile))
+          {
+            LogMyFilms.Debug("The file {0} does not exist !.", datafile);
+            // throw new Exception(string.Format("The file {0} does not exist !.", datafile)); // do NOT throw an exception to upper level
+          }
+          myfilmsdata = new MyFilmsData();
+          try
+          {
+            myfilmsdata.ReadXml(datafile);
+          }
+          catch (Exception e)
+          {
+            LogMyFilms.Error("Error reading myfilms data xml database '" + datafile + "'; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+          }
+        }
+
         public static void UnloadMesFilms()
         {
-            if (data != null)
-            {
-              data.Dispose();
+          if (data != null)
+            data.Dispose();
 
-            }
+          if (myfilmsdata != null)
+            myfilmsdata.Dispose();
         }
+
         public static void SaveMesFilms()
         {
           //lock (data)
@@ -186,13 +266,37 @@ namespace MyFilmsPlugin.MyFilms
               // data.WriteXmlSchema(@"c:\myfilms.xsd"); // this writes XML schema infos to disk
             }
           //}
+
+            if (myfilmsdata != null)
+            {
+              string datafile = GetNameForMyFilmsDatafile(MyFilms.conf.StrFileXml);
+              try
+              {
+                System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(datafile, System.Text.Encoding.Default);
+                MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
+                MyXmlTextWriter.WriteStartDocument();
+                data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                MyXmlTextWriter.Close();
+              }
+              catch
+              {
+                MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+                dlgOk.SetHeading("Error");//my videos
+                dlgOk.SetLine(1, "Error during updating the MyFilms Data XML database !");
+                dlgOk.SetLine(2, "Maybe Directory full or no write access.");
+                dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
+              }
+              // data.WriteXmlSchema(@"c:\myfilms.xsd"); // this writes XML schema infos to disk
+            }
+        
         }
+
         public static void CancelMesFilms()
         {
-            if (data != null)
-            {
-              data.Clear();
-            }
+          if (data != null)
+            data.Clear();
+          if (myfilmsdata != null)
+            myfilmsdata.Clear();
         }
 
         public static void GetMovies(ref ArrayList movies)
@@ -491,6 +595,7 @@ namespace MyFilmsPlugin.MyFilms
         }
         #endregion
     }
+
   public class MFMovie
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();

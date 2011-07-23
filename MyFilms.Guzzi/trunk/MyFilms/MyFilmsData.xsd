@@ -9,14 +9,33 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="MyFilmsData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="MyFilmsData" msprop:Generator_UserDSName="MyFilmsData" msprop:EnableTableAdapterManager="true">
+  <xs:element name="MyFilmsData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="MyFilmsData" msprop:Generator_DataSetName="MyFilmsData" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="MyFilmsHistory" msprop:Generator_UserTableName="MyFilmsHistory" msprop:Generator_RowDeletedName="MyFilmsHistoryRowDeleted" msprop:Generator_TableClassName="MyFilmsHistoryDataTable" msprop:Generator_RowChangedName="MyFilmsHistoryRowChanged" msprop:Generator_RowClassName="MyFilmsHistoryRow" msprop:Generator_RowChangingName="MyFilmsHistoryRowChanging" msprop:Generator_RowEvArgName="MyFilmsHistoryRowChangeEvent" msprop:Generator_RowEvHandlerName="MyFilmsHistoryRowChangeEventHandler" msprop:Generator_TablePropName="MyFilmsHistory" msprop:Generator_TableVarName="tableMyFilmsHistory" msprop:Generator_RowDeletingName="MyFilmsHistoryRowDeleting">
+        <xs:element name="History" msprop:Generator_UserTableName="History" msprop:Generator_RowDeletedName="HistoryRowDeleted" msprop:Generator_TableClassName="HistoryDataTable" msprop:Generator_RowChangedName="HistoryRowChanged" msprop:Generator_RowClassName="HistoryRow" msprop:Generator_RowChangingName="HistoryRowChanging" msprop:Generator_RowEvArgName="HistoryRowChangeEvent" msprop:Generator_RowEvHandlerName="HistoryRowChangeEventHandler" msprop:Generator_TablePropName="History" msprop:Generator_TableVarName="tableHistory" msprop:Generator_RowDeletingName="HistoryRowDeleting">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Id_History" msprop:Generator_UserColumnName="Id_History" msprop:Generator_ColumnPropNameInRow="Id_History" msprop:Generator_ColumnVarNameInTable="columnId_History" msprop:Generator_ColumnPropNameInTable="Id_HistoryColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="MyFilmsData_ID" msprop:Generator_UserColumnName="MyFilmsData_ID" msprop:Generator_ColumnPropNameInRow="MyFilmsData_ID" msprop:Generator_ColumnVarNameInTable="columnMyFilmsData_ID" msprop:Generator_ColumnPropNameInTable="MyFilmsData_IDColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Properties" msprop:Generator_UserColumnName="Properties" msprop:Generator_ColumnPropNameInRow="Properties" msprop:Generator_ColumnVarNameInTable="columnProperties" msprop:Generator_ColumnPropNameInTable="PropertiesColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="History_ID" msprop:Generator_UserColumnName="History_ID" msprop:Generator_ColumnPropNameInRow="History_ID" msprop:Generator_ColumnVarNameInTable="columnHistory_ID" msprop:Generator_ColumnPropNameInTable="History_IDColumn" type="xs:string" minOccurs="0" />
             </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Persons" msprop:Generator_UserTableName="Persons" msprop:Generator_RowDeletedName="PersonsRowDeleted" msprop:Generator_TableClassName="PersonsDataTable" msprop:Generator_RowChangedName="PersonsRowChanged" msprop:Generator_RowClassName="PersonsRow" msprop:Generator_RowChangingName="PersonsRowChanging" msprop:Generator_RowEvArgName="PersonsRowChangeEvent" msprop:Generator_RowEvHandlerName="PersonsRowChangeEventHandler" msprop:Generator_TablePropName="Persons" msprop:Generator_TableVarName="tablePersons" msprop:Generator_RowDeletingName="PersonsRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MyFilmsData_ID" msprop:Generator_UserColumnName="MyFilmsData_ID" msprop:Generator_ColumnPropNameInRow="MyFilmsData_ID" msprop:Generator_ColumnVarNameInTable="columnMyFilmsData_ID" msprop:Generator_ColumnPropNameInTable="MyFilmsData_IDColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Properties" msprop:Generator_UserColumnName="Properties" msprop:Generator_ColumnPropNameInRow="Properties" msprop:Generator_ColumnVarNameInTable="columnProperties" msprop:Generator_ColumnPropNameInTable="PropertiesColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Person_ID" msprop:Generator_UserColumnName="Person_ID" msprop:Generator_ColumnPropNameInRow="Person_ID" msprop:Generator_ColumnVarNameInTable="columnPerson_ID" msprop:Generator_ColumnPropNameInTable="Person_IDColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Person" msprop:Generator_UserTableName="Person" msprop:Generator_RowDeletedName="PersonRowDeleted" msprop:Generator_TableClassName="PersonDataTable" msprop:Generator_RowChangedName="PersonRowChanged" msprop:Generator_RowClassName="PersonRow" msprop:Generator_RowChangingName="PersonRowChanging" msprop:Generator_RowEvArgName="PersonRowChangeEvent" msprop:Generator_RowEvHandlerName="PersonRowChangeEventHandler" msprop:Generator_TablePropName="Person" msprop:Generator_TableVarName="tablePerson" msprop:Generator_RowDeletingName="PersonRowDeleting">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Watched" msprop:Generator_UserTableName="Watched" msprop:Generator_RowDeletedName="WatchedRowDeleted" msprop:Generator_TableClassName="WatchedDataTable" msprop:Generator_RowChangedName="WatchedRowChanged" msprop:Generator_RowClassName="WatchedRow" msprop:Generator_RowChangingName="WatchedRowChanging" msprop:Generator_RowEvArgName="WatchedRowChangeEvent" msprop:Generator_RowEvHandlerName="WatchedRowChangeEventHandler" msprop:Generator_TablePropName="Watched" msprop:Generator_TableVarName="tableWatched" msprop:Generator_RowDeletingName="WatchedRowDeleting">
+          <xs:complexType>
           </xs:complexType>
         </xs:element>
       </xs:choice>

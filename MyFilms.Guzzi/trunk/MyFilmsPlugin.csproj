@@ -132,11 +132,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyFilms\MyFilmsData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyFilmsData.xsd</DependentUpon>
-    </Compile>
     <Compile Include="MyFilms\AntMovieCatalog.cs">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -163,6 +158,11 @@
     </Compile>
     <Compile Include="MyFilms\Configuration\MyFilmsSetup.designer.cs">
       <DependentUpon>MyFilmsSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyFilms\MyFilmsData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyFilmsData.xsd</DependentUpon>
     </Compile>
     <Compile Include="MyFilms\MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilms\MyFilmsGUI\GUIConnector.cs" />
@@ -211,17 +211,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MyFilms\MyFilmsData.xsc">
-      <DependentUpon>MyFilmsData.xsd</DependentUpon>
-    </None>
-    <None Include="MyFilms\MyFilmsData.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MyFilmsData.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="MyFilms\MyFilmsData.xss">
-      <DependentUpon>MyFilmsData.xsd</DependentUpon>
-    </None>
     <None Include="MyFilms\AntMovieCatalog.xsc">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>
@@ -232,6 +221,17 @@
     </None>
     <None Include="MyFilms\AntMovieCatalog.xss">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
+    </None>
+    <None Include="MyFilms\MyFilmsData.xsc">
+      <DependentUpon>MyFilmsData.xsd</DependentUpon>
+    </None>
+    <None Include="MyFilms\MyFilmsData.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MyFilmsData.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MyFilms\MyFilmsData.xss">
+      <DependentUpon>MyFilmsData.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
