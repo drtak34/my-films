@@ -1673,44 +1673,48 @@ Public Class AntRecord
                             Dim PictureFileName As String = _InternetData(Grabber_Output.PicturePathShort) '2001_ A Space Odyssey.jpg
                             Dim PicturePathToSave As String = String.Empty
 
-                            'Separate the folder from the prefix string (if needed)
-                            Dim PrefixString As String = String.Empty
-                            Dim PrefixPath As String = String.Empty
-                            If PicturePathPrefix <> String.Empty Then
-                                If PicturePathPrefix.Contains("\") = True Then
-                                    PrefixPath = PicturePathPrefix.Substring(0, PicturePathPrefix.LastIndexOf("\") + 1)
-                                    PrefixString = PicturePathPrefix.Substring(PicturePathPrefix.LastIndexOf("\") + 1)
+                            'Check, if the returned picture is existing - it might not due to download errors like 404
+                            If System.IO.File.Exists(PicturePathFull) Then
+
+                                'Separate the folder from the prefix string (if needed)
+                                Dim PrefixString As String = String.Empty
+                                Dim PrefixPath As String = String.Empty
+                                If PicturePathPrefix <> String.Empty Then
+                                    If PicturePathPrefix.Contains("\") = True Then
+                                        PrefixPath = PicturePathPrefix.Substring(0, PicturePathPrefix.LastIndexOf("\") + 1)
+                                        PrefixString = PicturePathPrefix.Substring(PicturePathPrefix.LastIndexOf("\") + 1)
+                                    Else
+                                        PrefixString = PicturePathPrefix
+                                    End If
+                                End If
+
+                                Dim NewFileName As String = String.Empty
+                                If PrefixString <> String.Empty Then
+                                    'Need to rename the file.
+                                    NewFileName = PicturePathFull.Replace(PictureFileName, PrefixString & PictureFileName)
+                                    If Not File.Exists(NewFileName) Then
+                                        File.Copy(PicturePathFull, NewFileName)
+                                    End If
+                                    File.Delete(PicturePathFull)
+                                    PicturePathFull = NewFileName
+                                    PictureFileName = PrefixString & PictureFileName
+                                End If
+
+                                If PrefixPath <> String.Empty Then
+                                    'Need to add the new folder to the short (relative) path:
+                                    PictureFileName = PrefixPath & PictureFileName
+                                End If
+
+                                If CurrentSettings.Store_Image_With_Relative_Path = True Then
+                                    PicturePathToSave = PictureFileName
                                 Else
-                                    PrefixString = PicturePathPrefix
+                                    PicturePathToSave = PicturePathFull
                                 End If
-                            End If
 
-                            Dim NewFileName As String = String.Empty
-                            If PrefixString <> String.Empty Then
-                                'Need to rename the file.
-                                NewFileName = PicturePathFull.Replace(PictureFileName, PrefixString & PictureFileName)
-                                If Not File.Exists(NewFileName) Then
-                                    File.Copy(PicturePathFull, NewFileName)
+                                If PicturePathToSave <> String.Empty Then
+                                    TempValue = PicturePathToSave
+                                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                                 End If
-                                File.Delete(PicturePathFull)
-                                PicturePathFull = NewFileName
-                                PictureFileName = PrefixString & PictureFileName
-                            End If
-
-                            If PrefixPath <> String.Empty Then
-                                'Need to add the new folder to the short (relative) path:
-                                PictureFileName = PrefixPath & PictureFileName
-                            End If
-
-                            If CurrentSettings.Store_Image_With_Relative_Path = True Then
-                                PicturePathToSave = PictureFileName
-                            Else
-                                PicturePathToSave = PicturePathFull
-                            End If
-
-                            If PicturePathToSave <> String.Empty Then
-                                TempValue = PicturePathToSave
-                                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
                             End If
                         End If
                     End If
