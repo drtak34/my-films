@@ -636,7 +636,7 @@
           this.label_VersionNumber.Size = new System.Drawing.Size(98, 13);
           this.label_VersionNumber.TabIndex = 34;
           this.label_VersionNumber.Text = "Version x.x.x.x beta";
-          this.ToolTip1.SetToolTip(this.label_VersionNumber, "Alphaversion for Testing only !");
+          this.ToolTip1.SetToolTip(this.label_VersionNumber, "MyFilms Version Number");
           // 
           // ButCopy
           // 
