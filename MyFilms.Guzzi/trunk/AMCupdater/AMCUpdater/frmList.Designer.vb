@@ -384,7 +384,7 @@ Partial Class frmList
         'Weblink
         '
         Me.Weblink.ActiveLinkColor = System.Drawing.Color.Black
-        Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        Me.Weblink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Gray
         Me.Weblink.DefaultCellStyle = DataGridViewCellStyle3
         Me.Weblink.FillWeight = 75.54945!
@@ -394,7 +394,6 @@ Partial Class frmList
         Me.Weblink.Name = "Weblink"
         Me.Weblink.ReadOnly = True
         Me.Weblink.TrackVisitedState = False
-        Me.Weblink.Width = 51
         '
         'Distance
         '
