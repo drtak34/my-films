@@ -51,24 +51,24 @@ Partial Class frmList
         Me.txtSource = New System.Windows.Forms.TextBox
         Me.Label5 = New System.Windows.Forms.Label
         Me.lstOptionsExt = New System.Windows.Forms.DataGridView
+        Me.btnSearchGoogle = New System.Windows.Forms.Button
+        Me.ToolTipImportDialog = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnRenameAndCancel = New System.Windows.Forms.Button
+        Me.txtSourceFull = New System.Windows.Forms.TextBox
+        Me.txtSourceFullAllPath = New System.Windows.Forms.TextBox
         Me.Title = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Year = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Options = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.Weblink = New System.Windows.Forms.DataGridViewLinkColumn
         Me.Distance = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.btnSearchGoogle = New System.Windows.Forms.Button
-        Me.ToolTipImportDialog = New System.Windows.Forms.ToolTip(Me.components)
-        Me.btnRenameAndCancel = New System.Windows.Forms.Button
-        Me.txtSourceFull = New System.Windows.Forms.TextBox
-        Me.txtSourceFullAllPath = New System.Windows.Forms.TextBox
         CType(Me.lstOptionsExt, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCancel
         '
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(480, 364)
+        Me.btnCancel.Location = New System.Drawing.Point(617, 364)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(94, 23)
         Me.btnCancel.TabIndex = 50
@@ -80,7 +80,7 @@ Partial Class frmList
         'btnOK
         '
         Me.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnOK.Location = New System.Drawing.Point(614, 364)
+        Me.btnOK.Location = New System.Drawing.Point(751, 364)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(93, 23)
         Me.btnOK.TabIndex = 70
@@ -126,7 +126,7 @@ Partial Class frmList
         '
         'btnDontAskAgain
         '
-        Me.btnDontAskAgain.Location = New System.Drawing.Point(374, 364)
+        Me.btnDontAskAgain.Location = New System.Drawing.Point(511, 364)
         Me.btnDontAskAgain.Name = "btnDontAskAgain"
         Me.btnDontAskAgain.Size = New System.Drawing.Size(94, 23)
         Me.btnDontAskAgain.TabIndex = 60
@@ -159,7 +159,7 @@ Partial Class frmList
         'txtSearchintYear
         '
         Me.txtSearchintYear.Enabled = False
-        Me.txtSearchintYear.Location = New System.Drawing.Point(501, 32)
+        Me.txtSearchintYear.Location = New System.Drawing.Point(638, 32)
         Me.txtSearchintYear.Name = "txtSearchintYear"
         Me.txtSearchintYear.Size = New System.Drawing.Size(44, 20)
         Me.txtSearchintYear.TabIndex = 72
@@ -167,7 +167,7 @@ Partial Class frmList
         '
         'txtSearchhintIMDB_Id
         '
-        Me.txtSearchhintIMDB_Id.Location = New System.Drawing.Point(629, 32)
+        Me.txtSearchhintIMDB_Id.Location = New System.Drawing.Point(766, 32)
         Me.txtSearchhintIMDB_Id.Name = "txtSearchhintIMDB_Id"
         Me.txtSearchhintIMDB_Id.Size = New System.Drawing.Size(78, 20)
         Me.txtSearchhintIMDB_Id.TabIndex = 73
@@ -175,7 +175,7 @@ Partial Class frmList
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(434, 29)
+        Me.Label1.Location = New System.Drawing.Point(571, 29)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(61, 26)
         Me.Label1.TabIndex = 74
@@ -186,7 +186,7 @@ Partial Class frmList
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(566, 29)
+        Me.Label2.Location = New System.Drawing.Point(703, 29)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 26)
         Me.Label2.TabIndex = 75
@@ -213,7 +213,7 @@ Partial Class frmList
         '
         'btnSearchAgainWithIMDB_Id
         '
-        Me.btnSearchAgainWithIMDB_Id.Location = New System.Drawing.Point(569, 59)
+        Me.btnSearchAgainWithIMDB_Id.Location = New System.Drawing.Point(706, 59)
         Me.btnSearchAgainWithIMDB_Id.Name = "btnSearchAgainWithIMDB_Id"
         Me.btnSearchAgainWithIMDB_Id.Size = New System.Drawing.Size(138, 20)
         Me.btnSearchAgainWithIMDB_Id.TabIndex = 78
@@ -248,7 +248,7 @@ Partial Class frmList
         Me.txtSource.Enabled = False
         Me.txtSource.Location = New System.Drawing.Point(96, 6)
         Me.txtSource.Name = "txtSource"
-        Me.txtSource.Size = New System.Drawing.Size(449, 20)
+        Me.txtSource.Size = New System.Drawing.Size(748, 20)
         Me.txtSource.TabIndex = 81
         '
         'Label5
@@ -298,16 +298,62 @@ Partial Class frmList
         Me.lstOptionsExt.RowTemplate.ReadOnly = True
         Me.lstOptionsExt.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.lstOptionsExt.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.lstOptionsExt.Size = New System.Drawing.Size(689, 266)
+        Me.lstOptionsExt.Size = New System.Drawing.Size(828, 266)
         Me.lstOptionsExt.TabIndex = 83
+        '
+        'btnSearchGoogle
+        '
+        Me.btnSearchGoogle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSearchGoogle.Location = New System.Drawing.Point(574, 59)
+        Me.btnSearchGoogle.Name = "btnSearchGoogle"
+        Me.btnSearchGoogle.Size = New System.Drawing.Size(108, 20)
+        Me.btnSearchGoogle.TabIndex = 84
+        Me.btnSearchGoogle.Text = "Search Internet"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnSearchGoogle, "Launches the web browser with search title as destination for a common lookup.")
+        Me.btnSearchGoogle.UseVisualStyleBackColor = True
+        '
+        'ToolTipImportDialog
+        '
+        Me.ToolTipImportDialog.AutoPopDelay = 15000
+        Me.ToolTipImportDialog.InitialDelay = 3000
+        Me.ToolTipImportDialog.IsBalloon = True
+        Me.ToolTipImportDialog.ReshowDelay = 100
+        Me.ToolTipImportDialog.ToolTipTitle = "MyFilms AMCupdater Help ..."
+        '
+        'btnRenameAndCancel
+        '
+        Me.btnRenameAndCancel.Location = New System.Drawing.Point(374, 364)
+        Me.btnRenameAndCancel.Name = "btnRenameAndCancel"
+        Me.btnRenameAndCancel.Size = New System.Drawing.Size(106, 23)
+        Me.btnRenameAndCancel.TabIndex = 85
+        Me.btnRenameAndCancel.Text = "rename and ignore"
+        Me.ToolTipImportDialog.SetToolTip(Me.btnRenameAndCancel, resources.GetString("btnRenameAndCancel.ToolTip"))
+        Me.btnRenameAndCancel.UseVisualStyleBackColor = True
+        '
+        'txtSourceFull
+        '
+        Me.txtSourceFull.Location = New System.Drawing.Point(501, 6)
+        Me.txtSourceFull.Name = "txtSourceFull"
+        Me.txtSourceFull.Size = New System.Drawing.Size(44, 20)
+        Me.txtSourceFull.TabIndex = 86
+        Me.txtSourceFull.Visible = False
+        '
+        'txtSourceFullAllPath
+        '
+        Me.txtSourceFullAllPath.Location = New System.Drawing.Point(374, 6)
+        Me.txtSourceFullAllPath.Name = "txtSourceFullAllPath"
+        Me.txtSourceFullAllPath.Size = New System.Drawing.Size(38, 20)
+        Me.txtSourceFullAllPath.TabIndex = 87
+        Me.txtSourceFullAllPath.Visible = False
         '
         'Title
         '
-        Me.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.Title.FillWeight = 377.7473!
         Me.Title.HeaderText = "Title"
         Me.Title.Name = "Title"
         Me.Title.ReadOnly = True
+        Me.Title.Width = 51
         '
         'Year
         '
@@ -362,57 +408,12 @@ Partial Class frmList
         Me.Distance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.Distance.Width = 30
         '
-        'btnSearchGoogle
-        '
-        Me.btnSearchGoogle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSearchGoogle.Location = New System.Drawing.Point(437, 59)
-        Me.btnSearchGoogle.Name = "btnSearchGoogle"
-        Me.btnSearchGoogle.Size = New System.Drawing.Size(108, 20)
-        Me.btnSearchGoogle.TabIndex = 84
-        Me.btnSearchGoogle.Text = "Search Internet"
-        Me.ToolTipImportDialog.SetToolTip(Me.btnSearchGoogle, "Launches the web browser with search title as destination for a common lookup.")
-        Me.btnSearchGoogle.UseVisualStyleBackColor = True
-        '
-        'ToolTipImportDialog
-        '
-        Me.ToolTipImportDialog.AutoPopDelay = 15000
-        Me.ToolTipImportDialog.InitialDelay = 3000
-        Me.ToolTipImportDialog.IsBalloon = True
-        Me.ToolTipImportDialog.ReshowDelay = 100
-        Me.ToolTipImportDialog.ToolTipTitle = "MyFilms AMCupdater Help ..."
-        '
-        'btnRenameAndCancel
-        '
-        Me.btnRenameAndCancel.Location = New System.Drawing.Point(569, 6)
-        Me.btnRenameAndCancel.Name = "btnRenameAndCancel"
-        Me.btnRenameAndCancel.Size = New System.Drawing.Size(138, 20)
-        Me.btnRenameAndCancel.TabIndex = 85
-        Me.btnRenameAndCancel.Text = "rename and ignore"
-        Me.ToolTipImportDialog.SetToolTip(Me.btnRenameAndCancel, resources.GetString("btnRenameAndCancel.ToolTip"))
-        Me.btnRenameAndCancel.UseVisualStyleBackColor = True
-        '
-        'txtSourceFull
-        '
-        Me.txtSourceFull.Location = New System.Drawing.Point(501, 6)
-        Me.txtSourceFull.Name = "txtSourceFull"
-        Me.txtSourceFull.Size = New System.Drawing.Size(44, 20)
-        Me.txtSourceFull.TabIndex = 86
-        Me.txtSourceFull.Visible = False
-        '
-        'txtSourceFullAllPath
-        '
-        Me.txtSourceFullAllPath.Location = New System.Drawing.Point(374, 6)
-        Me.txtSourceFullAllPath.Name = "txtSourceFullAllPath"
-        Me.txtSourceFullAllPath.Size = New System.Drawing.Size(38, 20)
-        Me.txtSourceFullAllPath.TabIndex = 87
-        Me.txtSourceFullAllPath.Visible = False
-        '
         'frmList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(717, 396)
+        Me.ClientSize = New System.Drawing.Size(856, 396)
         Me.ControlBox = False
         Me.Controls.Add(Me.txtSourceFullAllPath)
         Me.Controls.Add(Me.txtSourceFull)
@@ -473,14 +474,14 @@ Partial Class frmList
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents lstOptionsExt As System.Windows.Forms.DataGridView
     Friend WithEvents btnSearchGoogle As System.Windows.Forms.Button
+    Friend WithEvents ToolTipImportDialog As System.Windows.Forms.ToolTip
+    Friend WithEvents btnRenameAndCancel As System.Windows.Forms.Button
+    Friend WithEvents txtSourceFull As System.Windows.Forms.TextBox
+    Friend WithEvents txtSourceFullAllPath As System.Windows.Forms.TextBox
     Friend WithEvents Title As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Year As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Options As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ID As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Weblink As System.Windows.Forms.DataGridViewLinkColumn
     Friend WithEvents Distance As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents ToolTipImportDialog As System.Windows.Forms.ToolTip
-    Friend WithEvents btnRenameAndCancel As System.Windows.Forms.Button
-    Friend WithEvents txtSourceFull As System.Windows.Forms.TextBox
-    Friend WithEvents txtSourceFullAllPath As System.Windows.Forms.TextBox
 End Class

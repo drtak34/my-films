@@ -805,7 +805,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIWindowManager.ActivateWindow((int)ID_MyFilmsDetail, true);
         }
       }
-      else if (!string.IsNullOrEmpty(loadParamInfo.Search)) // search expression given in load params -> do global search !
+      else if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Search)) // search expression given in load params -> do global search !
       {
         LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading search: '" + loadParamInfo.Search + "' -> NOT YET IMPLEMENTED !");
       }
