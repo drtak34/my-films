@@ -313,19 +313,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static event RatingEventDelegate RateItem;
         public delegate void RatingEventDelegate(MFMovie movie, string rating);
 
-        //static MyFilmsDetail()
-        //{
-        //  playlistPlayer = PlayListPlayer.SingletonPlayer;
-        //}
+        static MyFilmsDetail()
+        {
+          playlistPlayer = PlayListPlayer.SingletonPlayer;
+        }
 
         #endregion
 
         public MyFilmsDetail()
         {
-          playlistPlayer = PlayListPlayer.SingletonPlayer;
-          g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
-          g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
-          g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
+          //
+          // TODO: Add constructor logic here
+          //
         }
         public override int GetID
         {
@@ -340,26 +339,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         public override bool Init()
         {
-          LogMyFilms.Debug("MyFilmsDetail.Init() started/ended.");
+          LogMyFilms.Debug("MyFilmsDetail.Init() started.");
+          LogMyFilms.Debug("MyFilmsDetail.Init() ended.");
           return Load(GUIGraphicsContext.Skin + @"\MyFilmsDetail.xml");
         }
 
         protected override void OnPageLoad()
         {
             LogMyFilms.Debug("OnPageLoad() started.");
-            setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
-            setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
-            setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
-            setGUIProperty("menu.actors", GUILocalizeStrings.Get(10798754));
-            setGUIProperty("menu.techinfos", GUILocalizeStrings.Get(10798755));
 
-            BtnFirst.Label = GUILocalizeStrings.Get(1079872); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
-            BtnLast.Label = GUILocalizeStrings.Get(1079873); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
+            g_Player.PlayBackStarted -= new g_Player.StartedHandler(OnPlayBackStarted);
+            g_Player.PlayBackEnded -= new g_Player.EndedHandler(OnPlayBackEnded);
+            g_Player.PlayBackStopped -= new g_Player.StoppedHandler(OnPlayBackStopped);
+            g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
+            g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
+            g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
 
-            //---------------------------------------------------------------------------------------
-            // Windows Init
-            //---------------------------------------------------------------------------------------
-            //LogMyFilms.Debug("Message - WINDOWS_INIT - Starting");
             //bool result = base.OnMessage(messageType);
             if (ImgDetFilm != null)
               if (ImgDetFilm.IsVisible)
@@ -369,6 +364,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   ImgDetFilm2.Refresh();
 
             //base.OnMessage(messageType); // Guzzi: Removing does not work properly...
+
+            setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
+            setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
+            setGUIProperty("menu.comments", GUILocalizeStrings.Get(10798753));
+            setGUIProperty("menu.actors", GUILocalizeStrings.Get(10798754));
+            setGUIProperty("menu.techinfos", GUILocalizeStrings.Get(10798755));
+
+            BtnFirst.Label = GUILocalizeStrings.Get(1079872); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
+            BtnLast.Label = GUILocalizeStrings.Get(1079873); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
+
             wGetID = GetID;
             GUIControl.ShowControl(GetID, 35);
             // ToDo: Should be unhidden, if ActorThumbs are implemented
@@ -5565,7 +5570,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
         {
-            LogMyFilms.Debug("UpdateOnPlayEnd was initiated - trailerPlayed = '" + trailerPlayed + "'");
+            LogMyFilms.Debug("UpdateOnPlayEnd was initiated - trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "', StrPlayedIndex: '" + MyFilms.conf.StrPlayedIndex + "'");
 
             if (MyFilms.conf.StrPlayedIndex == -1)
                 return;
