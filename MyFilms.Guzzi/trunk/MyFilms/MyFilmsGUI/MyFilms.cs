@@ -3856,7 +3856,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (reload)
         {
           BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-          MyFilmsDetail.RemoveGlobalLock();
+          MyFilmsDetail.SetGlobalLock(false);
         }
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
         _rw.ExitReadLock();
@@ -4882,7 +4882,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
             break;
           }
-          if (MyFilmsDetail.GlobalLockActive())
+          if (MyFilmsDetail.GlobalLockIsActive())
           {
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(1079854), GUILocalizeStrings.Get(330)); //movie db already in use (locked)
             break;
@@ -7873,7 +7873,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         _rw.EnterReadLock();
         // load dataset
         BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-        MyFilmsDetail.RemoveGlobalLock(); // make sure, no global lock is left
+        MyFilmsDetail.SetGlobalLock(false); // make sure, no global lock is left
         // (re)populate films
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
         _rw.ExitReadLock();
@@ -7927,8 +7927,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgUpdateDB.IsBusy && !bgUpdateDB.CancellationPending)
       {
-        FSwatcher.EnableRaisingEvents = false;
-        MyFilmsDetail.SetGlobalLock();
+        MyFilmsDetail.SetGlobalLock(true); // also disabled local FSwatcher
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
         LogMyFilms.Info("AsynUpdateDatabase() - Launching AMCUpdater in batch mode");
@@ -8009,8 +8008,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       Load_Config(Configuration.CurrentConfig, true);
       Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-      FSwatcher.EnableRaisingEvents = true;
-      MyFilmsDetail.RemoveGlobalLock();
+      MyFilmsDetail.SetGlobalLock(false);
     }
 
     //*****************************************************************************************

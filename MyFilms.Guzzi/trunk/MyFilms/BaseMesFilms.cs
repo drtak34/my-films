@@ -26,7 +26,9 @@ namespace MyFilmsPlugin.MyFilms
   using System;
   using System.Collections;
   using System.Data;
+  using System.IO;
   using System.Text.RegularExpressions;
+  using System.Threading;
   using System.Xml;
 
   using MediaPortal.Configuration;
@@ -62,14 +64,23 @@ namespace MyFilmsPlugin.MyFilms
         private static void initData()
         {
             data = new AntMovieCatalog();
-            LogMyFilms.Debug("BaseMesFilms - Try reading catalogfile '" + MyFilms.conf.StrFileXml + "'");
+            string catalogfile = MyFilms.conf.StrFileXml;
+            LogMyFilms.Debug("initData() - Try reading catalogfile '" + catalogfile + "'");
             try
             {
-              data.ReadXml(MyFilms.conf.StrFileXml);
+              using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                  LogMyFilms.Debug("initData()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+                  data.ReadXml(fs);
+                  fs.Close();
+                  LogMyFilms.Debug("initData()- closing  '" + catalogfile + "' FileStream");
+                }
+              
+              // data.ReadXml(MyFilms.conf.StrFileXml);
             }
             catch (Exception e)
             {
-              LogMyFilms.Error(": Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+              LogMyFilms.Error("initData() : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
               throw e;
             }
         }
@@ -81,21 +92,20 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("MyFilmsData - Try reading datafile '" + datafile + "'");
           try
           {
-            if (!System.IO.File.Exists(datafile))
+            if (!System.IO.File.Exists(datafile)) 
+              CreateEmptyDataFile(datafile);
+
+            using (FileStream fs = new FileStream(datafile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-              XmlTextWriter destXml = new XmlTextWriter(datafile, System.Text.Encoding.Default);
-              destXml.Formatting = Formatting.Indented;
-              destXml.WriteStartDocument();
-              destXml.WriteStartElement("MyFilmsData");
-              destXml.WriteStartElement("Persons");
-              destXml.WriteElementString("Properties", string.Empty);
-              destXml.WriteStartElement("Contents");
-              destXml.WriteStartElement("History");
-              destXml.WriteElementString("Properties", string.Empty);
-              destXml.WriteStartElement("Contents");
-              destXml.Close();
+              LogMyFilms.Debug("initData()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+              myfilmsdata.ReadXml(fs);
+              data.ReadXml(fs);
+              // ... change data here, if intended ...
+              // fs.SetLength(0);
+              // data.WriteXml(fs);
+              fs.Close();
+              LogMyFilms.Debug("initData()- closing  '" + datafile + "' FileStream");
             }
-            myfilmsdata.ReadXml(datafile);
           }
           catch (Exception e)
           {
@@ -103,13 +113,28 @@ namespace MyFilmsPlugin.MyFilms
             // throw e; // do NOT throw the exception to upper level
           }
         }
+
         private static string GetNameForMyFilmsDatafile(string catalogfullpath)
         {
-          string path = System.IO.Path.GetDirectoryName(MyFilms.conf.StrFileXml);
-          string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
-          string extension = System.IO.Path.GetExtension(MyFilms.conf.StrFileXml);
+          string path = System.IO.Path.GetDirectoryName(catalogfullpath);
+          string filename = System.IO.Path.GetFileNameWithoutExtension(catalogfullpath);
+          string extension = System.IO.Path.GetExtension(catalogfullpath);
           string datafile = path + @"\" + filename + "_MFdata." + extension;
           return datafile;
+        }
+        private static void CreateEmptyDataFile(string datafile)
+        {
+          XmlTextWriter destXml = new XmlTextWriter(datafile, System.Text.Encoding.Default);
+          destXml.Formatting = Formatting.Indented;
+          destXml.WriteStartDocument();
+          destXml.WriteStartElement("MyFilmsData");
+          destXml.WriteStartElement("Persons");
+          destXml.WriteElementString("Properties", string.Empty);
+          destXml.WriteStartElement("Contents");
+          destXml.WriteStartElement("History");
+          destXml.WriteElementString("Properties", string.Empty);
+          destXml.WriteStartElement("Contents");
+          destXml.Close();
         }
         #endregion
 
@@ -241,27 +266,72 @@ namespace MyFilmsPlugin.MyFilms
             myfilmsdata.Dispose();
         }
 
-        public static void SaveMesFilms()
+        public static bool SaveMesFilms()
         {
           //lock (data)
           //{
             if (data != null)
             {
+              string catalogfile = MyFilms.conf.StrFileXml;
+
+              //bool _FileUse = false;
+              //while (!_FileUse)
+              //{
+              //  try
+              //  {
+              //    // write file here
+              //    Thread.Sleep(1000);
+              //    _FileUse = true;
+              //  }
+              //  catch (Exception ex)
+              //  {
+              //    Thread.Sleep(1000);
+              //    _FileUse = false;
+              //  }
+              //}
+
+
               try
               {
-                System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(MyFilms.conf.StrFileXml, System.Text.Encoding.Default);
-                MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
-                MyXmlTextWriter.WriteStartDocument();
-                data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
-                MyXmlTextWriter.Close();
+                using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                {
+                  LogMyFilms.Debug("SaveMesFilms()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+                  // data.ReadXml(fs); data alreadry in memory, only to be saved
+                  
+                  fs.SetLength(0); // do not append, owerwrite !
+
+                  using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+                  {
+                    LogMyFilms.Debug("SaveMesFilms()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream"); 
+                    MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
+                    MyXmlTextWriter.WriteStartDocument();
+                    data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                    MyXmlTextWriter.Flush();
+                    MyXmlTextWriter.Close();
+
+                  }
+                  // data.WriteXml(fs);
+                  // fs.Flush();
+                  fs.Close(); // write bugger and release lock on file (either Flush, Dispose or Close is required)
+                  LogMyFilms.Debug("SaveMesFilms()- closing '" + catalogfile + "' FileStream and releasing file lock");
+                }
+
+                //System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(MyFilms.conf.StrFileXml, System.Text.Encoding.Default);
+                //MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
+                //MyXmlTextWriter.WriteStartDocument();
+                //data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                ////MyXmlTextWriter.Flush();
+                //MyXmlTextWriter.Close();
               }
-              catch
+              catch (Exception ex)
               {
+                LogMyFilms.DebugException("SaveMesFilms()- error saving '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None", ex);
                 MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
                 dlgOk.SetHeading("Error");//my videos
-                dlgOk.SetLine(1, "Error during updating the XML database !");
+                dlgOk.SetLine(1, "Error during updating the XML database '" + catalogfile + "' !");
                 dlgOk.SetLine(2, "Maybe Directory full or no write access.");
                 dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
+                return false;
               }
               // data.WriteXmlSchema(@"c:\myfilms.xsd"); // this writes XML schema infos to disk
             }
@@ -272,23 +342,41 @@ namespace MyFilmsPlugin.MyFilms
               string datafile = GetNameForMyFilmsDatafile(MyFilms.conf.StrFileXml);
               try
               {
-                System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(datafile, System.Text.Encoding.Default);
-                MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
-                MyXmlTextWriter.WriteStartDocument();
-                data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
-                MyXmlTextWriter.Close();
+                using (FileStream fs = new FileStream(datafile, FileMode.Open, FileAccess.Write, FileShare.None)) // lock the fole for any other use, as we do write to it now !
+                {
+                  LogMyFilms.Debug("SaveMesFilms()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Write, FileShare.None");
+                  // data.ReadXml(fs); data alreadry in memory, only to be saved
+
+                  fs.SetLength(0); // do not append, owerwrite !
+
+                  using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+                  {
+                    LogMyFilms.Debug("SaveMesFilms()- writing '" + datafile + "' as MyXmlTextWriter in FileStream");
+                    MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
+                    MyXmlTextWriter.WriteStartDocument();
+                    myfilmsdata.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                    MyXmlTextWriter.Flush();
+                    MyXmlTextWriter.Close();
+                  }
+                  // myfilmsdata.WriteXml(fs);
+                  fs.Flush();
+                  fs.Close();
+                  LogMyFilms.Debug("SaveMesFilms()- closing '" + datafile + "' FileStream and releasing file lock");
+                }
+                
+                //System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(datafile, System.Text.Encoding.Default);
+                //MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
+                //MyXmlTextWriter.WriteStartDocument();
+                //myfilmsdata.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                //MyXmlTextWriter.Close();
               }
-              catch
+              catch (Exception ex)
               {
-                MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-                dlgOk.SetHeading("Error");//my videos
-                dlgOk.SetLine(1, "Error during updating the MyFilms Data XML database !");
-                dlgOk.SetLine(2, "Maybe Directory full or no write access.");
-                dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
+                LogMyFilms.DebugException("SaveMesFilms()- error writing '" + datafile + "', exception: " + ex.Message, ex);
               }
               // data.WriteXmlSchema(@"c:\myfilms.xsd"); // this writes XML schema infos to disk
             }
-        
+          return true; // write successful!
         }
 
         public static void CancelMesFilms()

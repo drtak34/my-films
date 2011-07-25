@@ -2080,60 +2080,69 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void Update_XML_database()
         {
-          // first check, if there is a global manual lock
-          if (!GlobalLockActive())
+          int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+          int i = 0;
+          bool success = false; // result of update operation
+
+
+          while (!success && i < maxretries)
           {
-            SetGlobalLock();
-            MyFilms.FSwatcher.EnableRaisingEvents = false; // stop FSwatcher for local update, otherwise unneeded reread would be triggered
-            MyFilms._rw.EnterWriteLock();
-            BaseMesFilms.SaveMesFilms();
-            MyFilms._rw.ExitWriteLock();
-            LogMyFilms.Info("Movie Database updated");
-            MyFilms.FSwatcher.EnableRaisingEvents = true;
-            RemoveGlobalLock();
+            // first check, if there is a global manual lock
+            if (!GlobalLockIsActive())
+            {
+              SetGlobalLock(true);
+              bool writesuccessful = BaseMesFilms.SaveMesFilms();
+              SetGlobalLock(false);
+              if (writesuccessful)
+              {
+                LogMyFilms.Info("Movie Database updated to filesystem!");
+                success = true;
+              }
+            }
+            else
+            {
+              i += 1;
+              LogMyFilms.Info("Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
+              Thread.Sleep(1000);
+            }
           }
-          else
+          
+          if (!success)
           {
-            //int i = 0;
-            //while (GlobalLockActive() && i < 20)
-            //{
-            //  i += 1;
-            //  Thread.Sleep(100);
-            //}
             if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms)
             {
               GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
               if (dlgOK != null)
               {
                 dlgOK.SetHeading("System Warning");
-                dlgOK.SetLine(1, "");
-                dlgOK.SetLine(2, "Data not saved due to global lock !");
+                dlgOK.SetLine(1, "Timout passed.");
+                dlgOK.SetLine(2, "Data could not be saved due to active global lock !");
                 dlgOK.DoModal(GUIWindowManager.ActiveWindow);
               }
             }
             // ShowMessageDialog("System Warning", "", "Data not saved due to global lock !");
-            LogMyFilms.Warn("Movie Database NOT updated due to GlobalLock !");
+            LogMyFilms.Warn("Movie Database NOT updated due to GlobalLock ! - timeout passed.");
           }
         }
 
         //-------------------------------------------------------------------------------------------
         //  Get Global Lock
         //-------------------------------------------------------------------------------------------        
-        public static bool GlobalLockActive()
+        public static bool GlobalLockIsActive()
         {
           string path = System.IO.Path.GetDirectoryName(MyFilms.conf.StrFileXml);
           string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
           string machineName = System.Environment.MachineName;
           string[] files = System.IO.Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
-          // LogMyFilms.Debug("GlobalLockActive() - number of lockfiles found: '" + files.Length.ToString() + "'");
+          // LogMyFilms.Debug("GlobalLockIsActive() - number of lockfiles found: '" + files.Length.ToString() + "'");
           if (files.Length > 0)
           {
-            LogMyFilms.Debug("GlobalLockActive() - Global Lock detected ! - First LockFile: '" + files[0] + "'");
+            LogMyFilms.Debug("GlobalLockIsActive() - Global Lock detected ! - First LockFile: '" + files[0] + "'");
             return true;
           }
           else
           {
-            LogMyFilms.Debug("GlobalLockActive() - No Global Lock detected !");
+            LogMyFilms.Debug("GlobalLockIsActive() - No Global Lock detected !");
             return false;
           }
         }
@@ -2141,27 +2150,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Set Global Lock
         //-------------------------------------------------------------------------------------------        
-        public static void SetGlobalLock()
+        public static void SetGlobalLock(bool lockstate)
         {
-          try
+          if (lockstate)
           {
-            File.Create(LockFilename()).Dispose();
-            LogMyFilms.Debug("SetGlobalLock() - successfully created global lock ! - " + LockFilename());
-          }
-          catch (Exception ex)
-          {
-            LogMyFilms.FatalException("SetGlobalLock() - Error creating Lockfile - check if file system rights properly set! - Lockfile: '" + LockFilename() + "', exception: " + ex.Message, ex);
-            // throw;
-          }
-        }
+            MyFilms.FSwatcher.EnableRaisingEvents = false; // stop FSwatcher for local update, otherwise unneeded reread would be triggered
+            MyFilms._rw.EnterWriteLock();
 
-        //-------------------------------------------------------------------------------------------
-        //  Remove Global Lock
-        //-------------------------------------------------------------------------------------------        
-        public static void RemoveGlobalLock()
-        {
-          File.Delete(LockFilename());
-          LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + LockFilename());
+            try
+            {
+              File.Create(LockFilename()).Dispose();
+              LogMyFilms.Debug("SetGlobalLock() - successfully created global lock ! - " + LockFilename());
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.FatalException("SetGlobalLock() - Error creating Lockfile - check if file system rights properly set! - Lockfile: '" + LockFilename() + "', exception: " + ex.Message, ex);
+              // throw;
+            }
+          }
+          else
+          {
+            File.Delete(LockFilename());
+            if (MyFilms._rw.IsWriteLockHeld)
+              MyFilms._rw.ExitWriteLock();
+            MyFilms.FSwatcher.EnableRaisingEvents = true;
+
+            LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + LockFilename());
+          }
         }
 
         //-------------------------------------------------------------------------------------------
