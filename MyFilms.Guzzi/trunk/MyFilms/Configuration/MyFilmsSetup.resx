@@ -144,7 +144,10 @@ Note: You can't select that option if a Default Config is defined.</value>
 Based on your favorites, your friends, and the community, trakt recommends other TV shows and movies.
 
 You need to have the trakt plugin installed and configure a user account.
-If you don't have a useraccount, you can register on trakt website.</value>
+If you don't have a useraccount, you can register on trakt website.
+
+To successfully use Trakt with MyFilms, you have to both allow MyFilms to provide data to Tralt plugin by enabloing Trakt here
+and you have to enable MyFilms in Trakt setup (setup or from GUI)</value>
   </data>
   <data name="cbAllowTraktSync.ToolTip" xml:space="preserve">
     <value>If enabled, TRAKT plugin is allowed to synchronize your movie data

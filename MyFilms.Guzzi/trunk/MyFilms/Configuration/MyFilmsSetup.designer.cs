@@ -693,14 +693,14 @@
           this.labelTraktDescription.AutoSize = true;
           this.labelTraktDescription.Location = new System.Drawing.Point(42, 100);
           this.labelTraktDescription.Name = "labelTraktDescription";
-          this.labelTraktDescription.Size = new System.Drawing.Size(500, 65);
+          this.labelTraktDescription.Size = new System.Drawing.Size(599, 104);
           this.labelTraktDescription.TabIndex = 2;
           this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
           // 
           // linkLabelTrakt
           // 
           this.linkLabelTrakt.AutoSize = true;
-          this.linkLabelTrakt.Location = new System.Drawing.Point(42, 205);
+          this.linkLabelTrakt.Location = new System.Drawing.Point(42, 234);
           this.linkLabelTrakt.Name = "linkLabelTrakt";
           this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
           this.linkLabelTrakt.TabIndex = 1;
