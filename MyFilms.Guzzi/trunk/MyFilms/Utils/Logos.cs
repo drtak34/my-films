@@ -279,7 +279,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         
         static bool get_record_rule(DataRow r, string field, string compar, string value)
         {
-            switch (compar)
+          switch (compar)
             {
                 case "equal":
                     if (r[field].ToString().ToLower() == value.ToLower())
@@ -298,23 +298,54 @@ namespace MyFilmsPlugin.MyFilms.Utils
                         return true;
                     break;
                 case "greater":
+                    int number;
+                    int ivalue;
+                    bool isnumeric;
+                    bool isnumericref;
                     switch (r[field].GetType().Name )
                     {
-                        case "Int32":
-                            if ((int)r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0)
-                                return true;
-                            break;
+                        //case "Int32": // -> to be handled in "default" as string to int value ...
+                        //    if ((int)r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0)
+                        //      return true;
+                        //    break;
                         case "DateTime":
                             break;
                         default:
-                            if (r[field].ToString().ToLower().CompareTo(value.ToLower()) >  0)
+                            isnumeric = int.TryParse(r[field].ToString(), out number);
+                            isnumericref = int.TryParse(value, out ivalue);
+                            if (isnumeric && isnumericref)
+                            {
+                              if (number > ivalue)
                                 return true;
+                            }
+                            else
+                            {
+                              if (r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0)
+                                return true;
+                            }
                             break;
                     }
                     break;
                 case "lower":
-                    if (!(r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0))
-                        return true;
+                    switch (r[field].GetType().Name)
+                    {
+                      case "DateTime":
+                        break;
+                      default:
+                        isnumeric = int.TryParse(r[field].ToString(), out number);
+                        isnumericref = int.TryParse(value, out ivalue);
+                        if (isnumeric && isnumericref)
+                        {
+                          if (number <= ivalue)
+                            return true;
+                        }
+                        else
+                        {
+                          if (!(r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0))
+                            return true;
+                        }
+                        break;
+                    }
                     break;
                 case "filled":
                     if (r[field].ToString().Length > 0)
