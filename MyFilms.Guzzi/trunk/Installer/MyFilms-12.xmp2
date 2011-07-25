@@ -3464,6 +3464,25 @@ Please refer to the Wiki online documentation.</Value>
         <Message>My Films requires MediaPortal min version 1.1.6.27644 (1.2.0 beta).</Message>
         <Name>MediaPortal</Name>
       </DependencyItem>
+      <DependencyItem>
+        <Type>Extension</Type>
+        <Id>a9c3845a-8718-4712-85cc-26f56520bb9a</Id>
+        <MinVersion>
+          <Major>1</Major>
+          <Minor>0</Minor>
+          <Build>4</Build>
+          <Revision>1</Revision>
+        </MinVersion>
+        <MaxVersion>
+          <Major>0</Major>
+          <Minor>0</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
+        </MaxVersion>
+        <WarnOnly>true</WarnOnly>
+        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.0.4.1 or above.</Message>
+        <Name>Trakt for MediaPortal</Name>
+      </DependencyItem>
     </Items>
   </Dependencies>
   <GeneralInfo>
@@ -6562,14 +6581,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c4fea66a-5adf-4793-bd12-5bc3faa08555}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d086ef9b-bea8-490d-a5ec-78026dd7c1ab}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{5578e5a4-d634-41f2-85e6-597f24bdb1fc}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{c1ab09a4-8156-4b73-b9dd-1760611db826}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
