@@ -2834,17 +2834,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
       //Add Menuentries here
 
+      if (MyFilms.conf.StrSearchList[0].Length > 0)
+      {
+        dlg.Add(GUILocalizeStrings.Get(10798615)); //Search global movies by property
+        choiceSearch.Add("globalproperty");
+      }
+
       if (MyFilmsDetail.ExtendedStartmode("Global Random Movie Search"))
       {
         //Guzzi: RandomMovie Search added
         dlg.Add(GUILocalizeStrings.Get(10798621)); //Search global movies by randomsearch (singlesearch, areasearch)
         choiceSearch.Add("randomsearch");
-      }
-
-      if (MyFilms.conf.StrSearchList[0].Length > 0)
-      {
-        dlg.Add(GUILocalizeStrings.Get(10798615)); //Search global movies by property
-        choiceSearch.Add("globalproperty");
       }
 
       if (MyFilmsDetail.ExtendedStartmode("Global Search Movies by Areas"))
