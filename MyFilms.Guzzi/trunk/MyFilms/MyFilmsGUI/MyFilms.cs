@@ -2144,7 +2144,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!sr[conf.StrWatchedField].ToString().StartsWith("Global:"))
             {
               if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
-                if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+                if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() && sr[conf.StrWatchedField].ToString().Length > 0) // changed to take setup config into consideration
                   tmpwatched = true;
               if (tmpwatched) sr[conf.StrWatchedField] = "Global:1:-1";
               else sr[conf.StrWatchedField] = "Global:0:-1";
