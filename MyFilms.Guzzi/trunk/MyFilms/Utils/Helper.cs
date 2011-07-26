@@ -573,6 +573,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         #endregion
 
+
         #region Web Methods
         public static bool DownloadFile(string url, string localFile)
         {
@@ -596,7 +597,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
         }
         #endregion
-    
     }
 }
 

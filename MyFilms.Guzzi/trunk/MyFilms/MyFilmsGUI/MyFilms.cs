@@ -473,7 +473,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //public static event RatingEventDelegate RateItem;
     //public delegate void RatingEventDelegate(MFMovie movie, string rating);
 
-
     #endregion
 
     #region Base Overrides
@@ -515,6 +514,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // Register Eventhandler for AMCupdater Background progress reporting
       //AMCupdaterStartEventHandler();
+      
+      // Register PowerEventMode Changed Handler
+      System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
+      Microsoft.Win32.SystemEvents.PowerModeChanged += new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
 
       // Initialize Backgroundworker
       InitializeBackgroundWorker();
@@ -7858,7 +7861,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("InitFSwatcher() - FSwatcher started watching - DB-file: '" + conf.StrFileXml + "'");
       }
     
-    // Define the found event handler.
       private void FSwatcherChanged(object source, FileSystemEventArgs e)
       {
         FSwatcher.EnableRaisingEvents = false;
@@ -7919,6 +7921,53 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
          }
       }
+
+      void SystemEvents_PowerModeChanged(object sender, Microsoft.Win32.PowerModeChangedEventArgs e)
+      {
+        if (e.Mode == Microsoft.Win32.PowerModes.Resume)
+        {
+          LogMyFilms.Debug("MyFilms is resuming from standby");
+          conf.IsResumeFromStandby = true;
+
+          // reload data, as it might have changed while sleeping
+          FSwatcher.EnableRaisingEvents = false;
+
+          Thread.Sleep(250);
+
+          _rw.EnterReadLock();
+          // load dataset
+          BaseMesFilms.LoadMesFilms(conf.StrFileXml);
+          MyFilmsDetail.SetGlobalLock(false); // make sure, no global lock is left
+          // (re)populate films
+          r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+          _rw.ExitReadLock();
+
+          // alternatively RefreshFacade() could be called to also update facade - might disturb user?
+          // Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+
+          FSwatcher.EnableRaisingEvents = true;
+        }
+        else if (e.Mode == Microsoft.Win32.PowerModes.Suspend)
+        {
+          LogMyFilms.Debug("MyFilms is entering standby");
+        }
+      }
+
+      void NetworkAvailabilityChanged(object sender, System.Net.NetworkInformation.NetworkAvailabilityEventArgs e)
+      {
+        if (e.IsAvailable)
+        {
+          LogMyFilms.Debug("MyFilms is connected to the network");
+          conf.IsNetworkAvailable = true;
+        }
+        else
+        {
+          LogMyFilms.Debug("MyFilms is disconnected from the network");
+          // DBOnlineMirror.IsMirrorsAvailable = false; // Force to recheck later
+          conf.IsNetworkAvailable = false;
+        }
+      }
+
 
     //*****************************************************************************************
     //*  Update Database in batch mode                                                        *
@@ -8159,7 +8208,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Info("Loading Movie List in batch mode finished");
     }
 
-
     public void AMCupdaterStartEventHandler()
     {
         // AMCUpdater.AntProcessor.bgwFolderScanUpdate.ProgressChanged += new ProgressChangedEventHandler(AMCupdater_ProgressChanged);
@@ -8174,7 +8222,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.setGUIProperty("statusmessage", "AMCupdater Running - Importing Movies");
       }
     }
-    void  AMCupdater_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+    void AMCupdater_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
       LogMyFilms.Info("AMCupdater RunWorkerCompleted");
       if (GetID == ID_MyFilms)
@@ -8458,7 +8506,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Info("'Search and register Trailer' Thread finished");
     }
-
+    
     private void FanartTimerEvent(object state)
     {
       //LogMyFilms.Debug("(FanartTimerEvent): FanartTimerEvent triggered !!!");
@@ -9070,487 +9118,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     #endregion
 
-
-    #region Facade Loading
-    //// this is expensive to do if changing mode......450 ms ???
-    //private void setFacadeMode(GUIFacadeControl.Layout mode)
-    //{
-    //  if (this.facadeView == null)
-    //    return;
-
-    //  if (mode == GUIFacadeControl.Layout.List)
-    //  {
-    //    this.facadeView.CurrentLayout = mode;
-    //  }
-    //  else
-    //  {
-    //    if (mode == GUIFacadeControl.Layout.AlbumView)
-    //    {
-    //      switch (this.currentListLevel)
-    //      {
-    //        case (Listlevel.Movie):
-    //            this.facadeView.CurrentLayout = GUIFacadeControl.Layout.Filmstrip;
-    //          break;
-    //        case (Listlevel.Person):
-    //        case (Listlevel.Group):
-    //          break;
-    //      }
-    //    }
-    //  }
-    //}
-
-    //System.ComponentModel.BackgroundWorker bg = null;
-
-    //private void LoadFacade()
-    //{
-    //  if (bg == null)
-    //  {
-    //    bg = new System.ComponentModel.BackgroundWorker();
-    //    bg.DoWork += new System.ComponentModel.DoWorkEventHandler(bgLoadFacade);
-    //    bg.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(bgFacadeDone);
-    //    bg.WorkerReportsProgress = true;
-    //    bg.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bg_ProgressChanged);
-    //    bg.WorkerSupportsCancellation = true;
-    //  }
-
-    //  lock (bg)
-    //  {
-    //    if (bg.IsBusy) // we have to wait - complete method will call LoadFacade again
-    //    {
-    //      if (!bg.CancellationPending)
-    //        bg.CancelAsync();
-    //      return;
-    //    }
-    //    //aclib.Performance.PerfWatcher.GetNamedWatch("FacadeLoading").Start();
-    //    prepareLoadFacade();
-    //    bg.RunWorkerAsync();
-    //  }
-    //}
-
-    //bool bFacadeEmpty = true;
-    //private void prepareLoadFacade()
-    //{
-    //  try
-    //  {
-    //    this.facadeView.ListLayout.Clear();
-    //    this.facadeView.AlbumListLayout.Clear();
-
-    //    if (this.facadeView.ThumbnailLayout != null)
-    //      this.facadeView.ThumbnailLayout.Clear();
-
-    //    if (this.facadeView.FilmstripLayout != null)
-    //      this.facadeView.FilmstripLayout.Clear();
-
-    //    if (this.facadeView.CoverFlowLayout != null)
-    //      this.facadeView.CoverFlowLayout.Clear();
-
-    //    if (facadeView != null) facadeView.Focus = true;
-    //    LogMyFilms.Debug("LoadFacade: ListLevel: " + currentListLevel);
-    //    //setCurPositionLabel();
-
-    //    switch (this.currentListLevel)
-    //    {
-    //      case Listlevel.Movie:
-    //      case Listlevel.Group:
-    //        //if (!CheckSkinFanartSettings()) DisableFanart();
-    //        break;
-    //    }
-    //    //setNewListLevelOfCurrView(m_CurrViewStep);
-
-    //  }
-    //  catch (Exception ex)
-    //  {
-    //    LogMyFilms.Debug("Error preparing Facade... " + ex.Message);
-    //  }
-    //}
-
-    ////SkipSeasonCodes SkipSeasonCode = SkipSeasonCodes.none;
-    //List<GUIListItem> itemsForDelayedImgLoading = null;
-    //private void bg_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-    //{
-    //  try
-    //  {
-    //    BackgroundFacadeLoadingArgument arg = e.UserState as BackgroundFacadeLoadingArgument;
-    //    //MPTVSeriesLog.Write("bg_ProgressChanged for: " + arg.Type.ToString(), MPTVSeriesLog.LogLevel.Debug);
-
-    //    if (bg.CancellationPending)
-    //    {
-    //      LogMyFilms.Debug("bg_ProgressChanged cancelled");
-    //      return;
-    //    }
-
-    //    if (arg == null || arg.Type == BackGroundLoadingArgumentType.None) return;
-
-    //    switch (arg.Type)
-    //    {
-    //      case BackGroundLoadingArgumentType.FullElement:
-    //      case BackGroundLoadingArgumentType.ElementForDelayedImgLoading:
-    //        {
-    //          GUIListItem gli = arg.Argument as GUIListItem;
-    //          if (facadeView != null && gli != null)
-    //          {
-    //            // Messages are not recieved in OnMessage for Filmstrip/Coverflow, instead subscribe to OnItemSelected
-    //            if (facadeView.CurrentLayout == GUIFacadeControl.Layout.Filmstrip)
-    //              gli.OnItemSelected += new GUIListItem.ItemSelectedHandler(onFacadeItemSelected);
-
-    //            if (facadeView.CurrentLayout == GUIFacadeControl.Layout.CoverFlow)
-    //              gli.OnItemSelected += new GUIListItem.ItemSelectedHandler(onFacadeItemSelected);
-
-    //            bFacadeEmpty = false;
-    //            facadeView.Add(gli);
-    //            if (arg.Type == BackGroundLoadingArgumentType.ElementForDelayedImgLoading)
-    //            {
-    //              if (itemsForDelayedImgLoading == null)
-    //                itemsForDelayedImgLoading = new List<GUIListItem>();
-    //              itemsForDelayedImgLoading.Add(gli);
-    //            }
-    //          }
-    //        }
-    //        break;
-
-    //      case BackGroundLoadingArgumentType.DelayedImgLoading:
-    //        {
-    //          if (itemsForDelayedImgLoading != null && itemsForDelayedImgLoading.Count > arg.IndexArgument)
-    //          {
-    //            string image = arg.Argument as string;
-    //            itemsForDelayedImgLoading[arg.IndexArgument].IconImageBig = image;
-    //          }
-    //        }
-    //        break;
-
-    //      case BackGroundLoadingArgumentType.ElementSelection:
-    //        {
-    //          // thread told us which element it'd like to select
-    //          // however the user might have already started moving around
-    //          // if that is the case, we don't select anything
-    //          LogMyFilms.Debug("Element Selection: " + arg.IndexArgument.ToString());
-    //          if (this.facadeView != null && this.facadeView.SelectedListItemIndex < 1)
-    //          {
-    //            this.facadeView.Focus = true;
-    //            this.facadeView.SelectedListItemIndex = arg.IndexArgument;
-
-    //            // Hack for 'set' SelectedListItemIndex not being implemented in Filmstrip/Coverflow Layout
-    //            // Navigate to selected using OnAction instead 
-    //            if (facadeView.CurrentLayout == GUIFacadeControl.Layout.Filmstrip ||
-    //                facadeView.CurrentLayout == GUIFacadeControl.Layout.CoverFlow)
-    //            {
-    //            }
-    //          }
-    //        }
-    //        break;
-
-    //      case BackGroundLoadingArgumentType.DelayedImgInit:
-    //        itemsForDelayedImgLoading = null;
-    //        break;
-    //      case BackGroundLoadingArgumentType.SetFacadeMode:
-    //        GUIFacadeControl.Layout viewMode = (GUIFacadeControl.Layout)arg.Argument;
-    //        setFacadeMode(viewMode);
-    //        break;
-    //    }
-    //  }
-    //  catch (Exception ex)
-    //  {
-    //    LogMyFilms.Debug(string.Format("Error in bg_ProgressChanged: {0}: {1}", ex.Message, ex.InnerException));
-    //    LogMyFilms.Debug(ex.StackTrace);
-    //  }
-    //}
-
-    //private void bgFacadeDone(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-    //{
-    //  // ZF - seems to be crashing because of facade being null sometimes, before getting inside the plugin
-    //  if (facadeView == null)
-    //    return;
-
-    //  if (e.Cancelled)
-    //  {
-    //    LogMyFilms.Debug("Background Load Facade detected cancel - performing delayed userclick");
-    //    LoadFacade(); // we only cancel if the user clicked something while we were still loading
-    //    // whatever was selected we will enter (this is because m_selected whatever will not get updated
-    //    // even if the user selects somethign else while we wait for cancellation due to it being a different listlevel)                                
-    //    return;
-    //  }
-    //  LogMyFilms.Debug("Background Load Facade Complete");
-
-    //  if (facadeView == null)
-    //    return;
-
-    //  //if (!CheckSkinFanartSettings()) DisableFanart();
-
-    //  facadeView.Focus = true;
-
-    //  if (bFacadeEmpty)
-    //  {
-    //    if (m_CurrViewStep == 0)
-    //    {
-    //      setFacadeMode(GUIFacadeControl.Layout.List);
-    //      GUIListItem item = new GUIListItem("Translation.No_items");
-    //      item.IsRemote = true;
-    //      this.facadeView.Add(item);
-
-    //      #region Clear GUI Properties
-    //      // ToDo: clear GUI Properties
-    //      #endregion
-
-    //    }
-    //    else
-    //    {
-    //      // probably something was removed
-    //      LogMyFilms.Debug("Nothing to display, going out");
-    //      OnAction(new Action(Action.ActionType.ACTION_PREVIOUS_MENU, 0, 0));
-    //    }
-    //  }
-
-    //  if (skipSeasonIfOne_DirectionDown && SkipSeasonCode == SkipSeasonCodes.SkipSeasonDown)
-    //  {
-    //    OnClicked(facadeView.GetID, m_Facade, Action.ActionType.ACTION_SELECT_ITEM);
-    //  }
-    //  else if (!skipSeasonIfOne_DirectionDown && SkipSeasonCode == SkipSeasonCodes.SkipSeasonUp)
-    //  {
-    //    OnAction(new Action(Action.ActionType.ACTION_PREVIOUS_MENU, 0, 0));
-    //  }
-    //}
-
-    //private void bgLoadFacade(object sender, System.ComponentModel.DoWorkEventArgs e)
-    //{
-    //  //facadeLoaded = false; // reset
-    //  bgLoadFacade();
-    //  if (bg.CancellationPending)
-    //    e.Cancel = true;
-
-    //}
-
-    //private void bgLoadFacade()
-    //{
-    //  LogMyFilms.Debug("Begin Loading of Facade");
-    //  try
-    //  {
-    //    GUIListItem item = null;
-    //    int selectedIndex = -1;
-    //    int count = 0;
-    //    bool delayedImageLoading = false;
-    //    List<DBSeries> seriesList = null;
-
-    //    switch (this.currentListLevel)
-    //    {
-    //      #region Group
-    //      case Listlevel.Group:
-    //        break;
-    //      #endregion
-    //      #region Episode
-    //      case Listlevel.Movie:
-    //        {
-    //          bool bFindNext = false;
-    //          ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.SetFacadeMode, 0, GUIFacadeControl.Layout.List);
-
-    //          // Get a list of Episodes to display for current view							
-    //          List<DBMovie> episodesToDisplay = m_CurrLView.getEpisodeItems(m_CurrViewStep, m_stepSelection);
-
-    //          // Update Filtered Episode Count Property, this acurately displays the number of items on the facade
-    //          // #TVSeries.Series.EpisodeCount is not desirable in some views e.g. Recently Added or views that filter by episode fields
-    //          setGUIProperty(guiProperty.FilteredEpisodeCount, episodesToDisplay.Count.ToString());
-    //          setGUIProperty("#itemcount", episodesToDisplay.Count.ToString());
-
-    //          int watchedCount = 0;
-    //          int unwatchedCount = episodesToDisplay.Count;
-
-    //          LogMyFilms.Debug(string.Format("Displaying {0} episodes from {1}", episodesToDisplay.Count.ToString(), m_SelectedSeries));
-    //          item = null;
-
-    //          if (episodesToDisplay.Count == 0)
-    //            bFacadeEmpty = true;
-
-    //          foreach (DBMovie episode in episodesToDisplay)
-    //          {
-    //            try
-    //            {
-    //              //bEmpty = false;
-    //              item = new GUIListItem();
-
-    //              // its possible the user never selected a series/season (flat view)
-    //              // thus its desirable to display series and season index also)
-
-    //              item.Label = FieldGetter.resolveDynString(m_sFormatEpisodeCol2, episode);
-
-    //              item.Label2 = FieldGetter.resolveDynString(m_sFormatEpisodeCol3, episode);
-    //              item.Label3 = FieldGetter.resolveDynString(m_sFormatEpisodeCol1, episode);
-
-    //              #region List Colors
-    //              item.IsRemote = false;
-    //              item.IsPlayed = false;
-
-    //              // Set IsRemote property to true, if the episode is not local on disk                                    
-    //              if (episode[DBMovie.cFilename].ToString().Length == 0 || episode[DBMovie.cIsAvailable] == 0)
-    //              {
-    //                item.IsRemote = true;
-    //              }
-    //              // Set IsPlayed property to true, if the episode has been watched
-    //              else if (episode[DBOnlineEpisode.cWatched])
-    //              {
-    //                item.IsPlayed = true;
-    //              }
-    //              // Set Selected property to true, if all episodes are hidden
-    //              if (episode[DBOnlineEpisode.cHidden] && DBOption.GetOptions(DBOption.cShowHiddenItems))
-    //              {
-    //                item.IsRemote = false;
-    //                item.IsPlayed = false;
-    //                item.Selected = true;
-    //              }
-    //              #endregion
-
-    //              if (item.IsPlayed)
-    //              {
-    //                watchedCount++;
-    //                unwatchedCount--;
-    //              }
-
-    //              item.TVTag = episode;
-
-    //              if (m_SelectedEpisode != null)
-    //              {
-    //                if (episode[DBMovie.cCompositeID] == m_SelectedEpisode[DBMovie.cCompositeID])
-    //                {
-    //                  if (!episode[DBOnlineEpisode.cWatched])
-    //                  {
-    //                    //-- video has not been watched so keep it selected
-    //                    selectedIndex = count;
-    //                  }
-    //                  else
-    //                  {
-    //                    //-- move to the next unwatched video in the list
-    //                    bFindNext = true;
-    //                    selectedIndex = count;
-    //                  }
-    //                }
-    //                else if (bFindNext && !episode[DBOnlineEpisode.cWatched])
-    //                {
-    //                  selectedIndex = count;
-    //                  bFindNext = false;
-    //                }
-    //              }
-    //              else
-    //              {
-    //                // select the first that has a file and is not watched
-    //                if (selectedIndex == -1 && episode[DBOnlineEpisode.cWatched] == 0 && episode[DBMovie.cFilename].ToString().Length > 0)
-    //                  selectedIndex = count;
-    //              }
-
-    //              // show watched flag image if skin supports it
-    //              // this should take precedence over least used option for appending logo/ep thumb
-    //              bool bWatched = episode[DBOnlineEpisode.cWatched];
-    //              bool bAvailable = episode[DBMovie.cFilename].ToString().Length > 0;
-
-    //              if (!LoadWatchedFlag(item, bWatched, bAvailable))
-    //              {
-    //                if (DBOption.GetOptions(DBOption.cAppendFirstLogoToList))
-    //                {
-    //                  // first returned logo should also show up here in list view directly
-    //                  item.IconImage = localLogos.getFirstEpLogo(episode);
-    //                }
-    //              }
-
-    //              if (bg.CancellationPending)
-    //              {
-    //                LogMyFilms.Debug("Cancelling Episode List Load");
-    //                return;
-    //              }
-    //              else
-    //              {
-    //                ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.FullElement, count, item);
-    //              }
-    //            }
-    //            catch (Exception ex)
-    //            {
-    //              LogMyFilms.Debug("The 'LoadFacade' function has generated an error displaying episode list item: " + ex.Message);
-    //            }
-    //            count++;
-    //          }
-    //          // Push Watched/Unwatched Count for Current Episode View
-    //          //setGUIProperty(guiProperty.WatchedCount, watchedCount.ToString());
-    //          //setGUIProperty(guiProperty.UnWatchedCount, unwatchedCount.ToString());
-    //        }
-    //        LogMyFilms.Debug("LoadFacade: Finish");
-    //        break;
-    //      #endregion
-    //    }
-
-    //    #region Report ItemToAutoSelect
-    //    if (selectedIndex != -1)
-    //      ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.ElementSelection, selectedIndex, null);
-    //    else ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.ElementSelection, (selectedIndex = 0), null); // select the first by default
-    //    #endregion
-
-    //    #region Delayed Image Loading
-    //    if (delayedImageLoading && seriesList != null)
-    //    {
-    //      // This is a perfect oportunity to use all cores on the machine
-    //      // we queue each image up to be loaded, resize and put them into memory in parallel
-    //      // on my dual core dev. machine this saves about 40%, but it heavily depends on the no. of images
-    //      // and img sizes the user has selected in config
-    //      int done = 0;                   // we need to know later when all threads are done
-    //      ThreadPool.SetMinThreads(8, 8); // seems to default to 2 (avail. cores?)
-    //      try
-    //      {
-    //        // we know which one was selected, lets be smart and try to first load those around it                        
-    //        Helper.ProximityForEach(seriesList, selectedIndex, delegate(DBSeries series, int currIndex)
-    //        {
-    //          if (!bg.CancellationPending)
-    //          {
-    //            // now foreach series, queue up the banner loading in the threadpool
-    //            KeyValuePair<int, DBSeries> keySeriesValue = new KeyValuePair<int, DBSeries>(currIndex, series);
-    //            ThreadPool.QueueUserWorkItem(delegate(object state)
-    //            {
-    //              string img = string.Empty;
-    //              KeyValuePair<int, DBSeries> stateSeries = (KeyValuePair<int, DBSeries>)state;
-
-    //              // Load Series Banners if WideBanners otherwise load Posters for Filmstrip/Coverflow
-    //              if (DBOption.GetOptions(DBOption.cView_Series_ListFormat) == "Filmstrip")
-    //                img = ImageAllocator.GetSeriesPoster(stateSeries.Value, false);
-    //              else if (DBOption.GetOptions(DBOption.cView_Series_ListFormat) == "Coverflow")
-    //                img = ImageAllocator.GetSeriesPoster(stateSeries.Value, true);
-    //              else
-    //                img = ImageAllocator.GetSeriesBanner(stateSeries.Value);
-    //              //ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.DelayedImgLoading, stateSeries.Value[DBSeries.cID], img);
-    //              ReportFacadeLoadingProgress(BackGroundLoadingArgumentType.DelayedImgLoading, stateSeries.Key, img);
-    //              Interlocked.Increment(ref done);
-    //            }, keySeriesValue);
-    //          }
-    //          else done++;
-    //        });
-    //      }
-    //      catch (Exception exs)
-    //      {
-    //        LogMyFilms.Debug("Delayed ImgLoad Exception: " + exs.Message);
-    //      }
-
-    //      // we now need to wait until all are done, because we are already on a different thread
-    //      // and the workitems themselves call our bg worker's progresschanged method to display the imgs
-    //      // on the gui's thread, and if we exit to early we cannot do that
-    //      while (done < seriesList.Count) // let's hope we don't get an exception in a background thread or we will never finish
-    //        Thread.Sleep(15);           // this no. can use some tweaking
-    //    }
-    //    #endregion
-    //  }
-    //  catch (Exception e)
-    //  {
-    //    LogMyFilms.Debug("The 'LoadFacade' function has generated an error: " + e.Message);
-    //  }
-    //}
-
-    //private void ReportFacadeLoadingProgress(BackGroundLoadingArgumentType type, int indexArgument, object state)
-    //{
-    //  if (!bg.CancellationPending)
-    //  {
-    //    BackgroundFacadeLoadingArgument Arg = new BackgroundFacadeLoadingArgument();
-    //    Arg.Type = type;
-    //    Arg.IndexArgument = indexArgument;
-    //    Arg.Argument = state;
-
-    //    bg.ReportProgress(0, Arg);
-    //  }
-    //}
-    #endregion
-
-
     public static int ShowMenuDialog(string heading, List<GUIListItem> items)
     {
       return ShowMenuDialog(heading, items, -1);
@@ -9762,5 +9329,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   //  #endregion
   //}
+
 
 }

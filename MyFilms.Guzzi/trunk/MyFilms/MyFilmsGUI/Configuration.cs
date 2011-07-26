@@ -1395,6 +1395,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return trailerList; }
           set { trailerList = value; }
         }
+
+        #region GetSet for Network and Powermode
+        private bool bResumeFromStandby = false;
+        public bool IsResumeFromStandby
+        {
+          get { return bResumeFromStandby; }
+          set { bResumeFromStandby = value; }
+        }
+
+        private bool bIsNetworkAvailable = true;
+        public bool IsNetworkAvailable
+        {
+          get { return bIsNetworkAvailable; }
+          set { bIsNetworkAvailable = value; }
+        }
+
+        #endregion
+
+
         #endregion
 
         public static void SaveConfiguration(string currentConfig, int selectedItem, string selectedItemLabel)
