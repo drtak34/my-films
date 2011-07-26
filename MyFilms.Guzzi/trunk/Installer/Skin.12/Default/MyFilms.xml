@@ -377,8 +377,23 @@
 				</control>
 	<!-- End - Additional Buttons for Links to other Plugins -->
 			 </control>
+	<!-- Status Message -->
+			<control>
+				<id>1</id>
+				<description>Update Status</description>
+				<label>#myfilms.statusmessage</label>
+				<type>fadelabel</type>
+				<posX>55</posX>
+				<posY>375</posY>
+				<width>180</width>
+				<textcolor>90a9d0f7</textcolor>
+				<visible>string.equals(#myfilms.statusmessage)+!control.hasfocus(50)</visible>
+				<animation effect="slide" time="450" start="-400,0">visible</animation>
+				<animation effect="slide" time="450" end="-400,0">hidden</animation>
+			</control>
 		</control>
-    <control>
+
+		<control>
         	<type>group</type>
       		<visible>!Control.HasFocus(50)</visible>
       	   	<animation effect="fade" time="250">WindowOpen</animation>
