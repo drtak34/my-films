@@ -537,8 +537,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
-            return File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")) && IsPluginEnabled("Trakt");
-            // return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 0, 0)) && IsPluginEnabled("Trakt");
+            bool TraktRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "Trakt");
+            bool TraktRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "Trakt" && plugin.GetType().Assembly.GetName().Version.Minor >= 4);
+            return File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")) && IsPluginEnabled("Trakt") && TraktRightVersion;
+            // return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 4, 1)) && IsPluginEnabled("Trakt");
           }
         }
 
