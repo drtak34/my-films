@@ -537,10 +537,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
-            bool TraktRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "Trakt");
-            bool TraktRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "Trakt" && plugin.GetType().Assembly.GetName().Version.Minor >= 4);
-            return File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")) && IsPluginEnabled("Trakt") && TraktRightVersion;
-            // return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 4, 1)) && IsPluginEnabled("Trakt");
+            return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 4, 1)) && IsPluginEnabled("Trakt");
           }
         }
 
@@ -555,6 +552,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion) 
               status = true;
             return status;
+            // return Helper.IsAssemblyAvailable("BrowseTheWeb", new Version(0, 3, 0, 0)) && IsPluginEnabled("BrowseTheWeb");
           }
         }
 
@@ -568,6 +566,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (OnlineVideosRightPlugin && OnlineVideosRightVersion) 
               return true;
             return false;
+            // return Helper.IsAssemblyAvailable("OnlineVideos", new Version(0, 30, 0, 13883)) && IsPluginEnabled("OnlineVideos");
+            
           }
         }
 
