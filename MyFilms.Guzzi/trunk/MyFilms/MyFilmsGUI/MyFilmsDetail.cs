@@ -2088,11 +2088,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           while (!success && i < maxretries)
           {
             // first check, if there is a global manual lock
-            if (!GlobalLockIsActive())
+            if (!GlobalLockIsActive(MyFilms.conf.StrFileXml))
             {
-              SetGlobalLock(true);
+              SetGlobalLock(true, MyFilms.conf.StrFileXml);
               bool writesuccessful = BaseMesFilms.SaveMesFilms();
-              SetGlobalLock(false);
+              SetGlobalLock(false, MyFilms.conf.StrFileXml);
               if (writesuccessful)
               {
                 LogMyFilms.Info("Movie Database updated to filesystem!");
@@ -2128,10 +2128,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Get Global Lock
         //-------------------------------------------------------------------------------------------        
-        public static bool GlobalLockIsActive()
+        public static bool GlobalLockIsActive(string config)
         {
-          string path = System.IO.Path.GetDirectoryName(MyFilms.conf.StrFileXml);
-          string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
+          string DB = "";
+          if (string.IsNullOrEmpty(config)) 
+            DB = MyFilms.conf.StrFileXml;
+          else 
+            DB = config;
+          string path = System.IO.Path.GetDirectoryName(DB);
+          string filename = System.IO.Path.GetFileNameWithoutExtension(DB);
           string machineName = System.Environment.MachineName;
           string[] files = System.IO.Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
           // LogMyFilms.Debug("GlobalLockIsActive() - number of lockfiles found: '" + files.Length.ToString() + "'");
@@ -2150,7 +2155,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
         //  Set Global Lock
         //-------------------------------------------------------------------------------------------        
-        public static void SetGlobalLock(bool lockstate)
+        public static void SetGlobalLock(bool lockstate, string config)
         {
           if (lockstate)
           {
@@ -2159,34 +2164,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             try
             {
-              File.Create(LockFilename()).Dispose();
-              LogMyFilms.Debug("SetGlobalLock() - successfully created global lock ! - " + LockFilename());
+              File.Create(LockFilename(config)).Dispose();
+              LogMyFilms.Debug("SetGlobalLock() - successfully created global lock ! - " + LockFilename(config));
             }
             catch (Exception ex)
             {
-              LogMyFilms.FatalException("SetGlobalLock() - Error creating Lockfile - check if file system rights properly set! - Lockfile: '" + LockFilename() + "', exception: " + ex.Message, ex);
+              LogMyFilms.FatalException("SetGlobalLock() - Error creating Lockfile - check if file system rights properly set! - Lockfile: '" + LockFilename(config) + "', exception: " + ex.Message, ex);
               // throw;
             }
           }
           else
           {
-            File.Delete(LockFilename());
+            File.Delete(LockFilename(config));
             if (MyFilms._rw.IsWriteLockHeld)
               MyFilms._rw.ExitWriteLock();
             MyFilms.FSwatcher.EnableRaisingEvents = true;
 
-            LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + LockFilename());
+            LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + LockFilename(config));
           }
         }
 
         //-------------------------------------------------------------------------------------------
         //  Create machine specific Lock Filename
         //-------------------------------------------------------------------------------------------        
-        private static string LockFilename()
+        private static string LockFilename(string config)
         {
           string lockfilename = "";
-          string path = System.IO.Path.GetDirectoryName(MyFilms.conf.StrFileXml);
-          string filename = System.IO.Path.GetFileNameWithoutExtension(MyFilms.conf.StrFileXml);
+          string path = System.IO.Path.GetDirectoryName(config);
+          string filename = System.IO.Path.GetFileNameWithoutExtension(config);
           string machineName = System.Environment.MachineName;
           lockfilename = path + @"\" + filename + "_" + machineName + ".lck";
           // LogMyFilms.Debug("LockFilename() - created lock file name is: '" + lockfilename + "'");

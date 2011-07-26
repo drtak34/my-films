@@ -552,7 +552,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  // add plugin specific routines here
     //}
 
-
     protected override void OnPageLoad() //This is loaded each time, the plugin is entered - can be used to reset certain settings etc.
     {
       LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
@@ -2369,17 +2368,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-
-
-    //----------------------------------------------------------------------------------------
-    //    Display rating (Hide/show Star Images)
-    //    altered to add half stars
-    //   0-0.4=(0)=0s  | 0.5-1.4=(1)=0.5s | 1.5-2.4=(2)=1s   | 2.5-3.4=(3)=1.5s 
-    // 3.5-4.4=(4)=2s  | 4.5-5.4=(5)=2.5s | 5.5-6.4=(6)=3s   | 6.5-7.4=(7)=3.5s
-    // 7.5-8.4=(8)=4s  | 8.5-9.4=(9)=4.5s | 9.5-10=(10)=5s
-    //----------------------------------------------------------------------------------------
-
-    
     public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
     {
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0"))
@@ -2394,6 +2382,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return true; // count > 0 -> return true
     }
 
+    //----------------------------------------------------------------------------------------
+    //    Display rating (Hide/show Star Images)
+    //    altered to add half stars
+    //   0-0.4=(0)=0s  | 0.5-1.4=(1)=0.5s | 1.5-2.4=(2)=1s   | 2.5-3.4=(3)=1.5s 
+    // 3.5-4.4=(4)=2s  | 4.5-5.4=(5)=2.5s | 5.5-6.4=(6)=3s   | 6.5-7.4=(7)=3.5s
+    // 7.5-8.4=(8)=4s  | 8.5-9.4=(9)=4.5s | 9.5-10=(10)=5s
+    //----------------------------------------------------------------------------------------
     private void Load_Rating(decimal rating)
     {
       int r, i;
@@ -2769,8 +2764,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Change_view(choiceView[dlg1.SelectedLabel].ToLower());
       return;
     }
-
-
 
     //--------------------------------------------------------------------------------------------
     //  Select main global filters
@@ -3859,7 +3852,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (reload)
         {
           BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-          MyFilmsDetail.SetGlobalLock(false);
+          MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml);
         }
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
         _rw.ExitReadLock();
@@ -7875,7 +7868,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         _rw.EnterReadLock();
         // load dataset
         BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-        MyFilmsDetail.SetGlobalLock(false); // make sure, no global lock is left
+        MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
         // (re)populate films
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
         _rw.ExitReadLock();
@@ -7937,7 +7930,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           _rw.EnterReadLock();
           // load dataset
           BaseMesFilms.LoadMesFilms(conf.StrFileXml);
-          MyFilmsDetail.SetGlobalLock(false); // make sure, no global lock is left
+          MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
           // (re)populate films
           r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
           _rw.ExitReadLock();
@@ -7976,7 +7969,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (!bgUpdateDB.IsBusy && !bgUpdateDB.CancellationPending)
       {
-        MyFilmsDetail.SetGlobalLock(true); // also disabled local FSwatcher
+        MyFilmsDetail.SetGlobalLock(true, MyFilms.conf.StrFileXml); // also disabled local FSwatcher
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
         LogMyFilms.Info("AsynUpdateDatabase() - Launching AMCUpdater in batch mode");
@@ -8057,7 +8050,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       Load_Config(Configuration.CurrentConfig, true);
       Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-      MyFilmsDetail.SetGlobalLock(false);
+      MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml);
     }
 
     //*****************************************************************************************

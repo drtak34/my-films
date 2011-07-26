@@ -293,7 +293,7 @@ namespace MyFilmsPlugin.MyFilms
 
               try
               {
-                using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                using (FileStream fs = new FileStream(catalogfile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
                 {
                   LogMyFilms.Debug("SaveMesFilms()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
                   // data.ReadXml(fs); data alreadry in memory, only to be saved
@@ -312,7 +312,7 @@ namespace MyFilmsPlugin.MyFilms
                   }
                   // data.WriteXml(fs);
                   // fs.Flush();
-                  fs.Close(); // write bugger and release lock on file (either Flush, Dispose or Close is required)
+                  fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
                   LogMyFilms.Debug("SaveMesFilms()- closing '" + catalogfile + "' FileStream and releasing file lock");
                 }
 
@@ -342,7 +342,7 @@ namespace MyFilmsPlugin.MyFilms
               string datafile = GetNameForMyFilmsDatafile(MyFilms.conf.StrFileXml);
               try
               {
-                using (FileStream fs = new FileStream(datafile, FileMode.Open, FileAccess.Write, FileShare.None)) // lock the fole for any other use, as we do write to it now !
+                using (FileStream fs = new FileStream(datafile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the fole for any other use, as we do write to it now !
                 {
                   LogMyFilms.Debug("SaveMesFilms()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Write, FileShare.None");
                   // data.ReadXml(fs); data alreadry in memory, only to be saved
@@ -705,7 +705,8 @@ namespace MyFilmsPlugin.MyFilms
     private string _mUsername = string.Empty;
 
     public MFMovie() { }
-    
+
+    #region Variables
     public int ID
     {
       get { return _mID; }
@@ -823,6 +824,7 @@ namespace MyFilmsPlugin.MyFilms
       _mConfig = string.Empty;
       _mUsername = string.Empty;
     }
+    #endregion
 
     public void Commit()
     {
@@ -861,7 +863,14 @@ namespace MyFilmsPlugin.MyFilms
             }
             try
             {
-              dataImport.ReadXml(Catalog);
+              using (FileStream fs = new FileStream(Catalog, FileMode.Open, FileAccess.Read, FileShare.Read))
+              {
+                //LogMyFilms.Debug("Commit()- opening '" + Catalog + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+                dataImport.ReadXml(fs);
+                fs.Close();
+                //LogMyFilms.Debug("Commit()- closing  '" + Catalog + "' FileStream");
+              }
+
               DataRow[] results = dataImport.Tables["Movie"].Select(StrDfltSelect + "Number" + " = " + "'" + _mID + "'", "OriginalTitle" + " " + "ASC"); // if (results.Length != 1) continue;
               if (results.Length != 1)
                 LogMyFilms.Debug("Commit() : Warning - Results found: '" + results.Length + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
@@ -909,22 +918,60 @@ namespace MyFilmsPlugin.MyFilms
               LogMyFilms.Error(": Error reading xml database after " + dataImport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
             }
 
-            try
+            int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+            int i = 0;
+            bool success = false; // result of update operation
+
+
+            while (!success && i < maxretries)
             {
-              System.Xml.XmlTextWriter MyXmlTextWriter = new System.Xml.XmlTextWriter(Catalog, System.Text.Encoding.Default);
-              MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
-              MyXmlTextWriter.WriteStartDocument();
-              dataImport.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
-              MyXmlTextWriter.Close();
+              // first check, if there is a global manual lock
+              if (!MyFilmsDetail.GlobalLockIsActive(Catalog))
+              {
+                MyFilmsDetail.SetGlobalLock(true, Catalog);
+
+                try
+                {
+                  using (FileStream fs = new FileStream(Catalog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                  {
+                    LogMyFilms.Debug("Commit()- opening '" + Catalog + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+                    fs.SetLength(0); // do not append, owerwrite !
+
+                    using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+                    {
+                      LogMyFilms.Debug("Commit()- writing '" + Catalog + "' as MyXmlTextWriter in FileStream");
+                      MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
+                      MyXmlTextWriter.WriteStartDocument();
+                      dataImport.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                      MyXmlTextWriter.Flush();
+                      MyXmlTextWriter.Close();
+                    }
+                    fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
+                    LogMyFilms.Debug("Commit()- closing '" + Catalog + "' FileStream and releasing file lock");
+                    success = true;
+                  }
+                }
+                catch (Exception saveexeption)
+                {
+                  LogMyFilms.Debug("Commit()- exception while trying to save data in '" + Catalog + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
+                  success = false;
+                }
+                
+                MyFilmsDetail.SetGlobalLock(false, Catalog);
+              }
+              else
+              {
+                i += 1;
+                LogMyFilms.Info("Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
+                Thread.Sleep(1000);
+              }
             }
-            catch (Exception) { }
           }
         } 
       dataImport.Reset();
       if (dataImport != null)
         dataImport.Dispose();
     }
-
 
     private string NewEnhancedWatchValue(string EnhancedWatchedValue, string UserProfileName, bool watched, int count)
     {
