@@ -4878,7 +4878,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(875), GUILocalizeStrings.Get(330)); //action already launched
             break;
           }
-          if (MyFilmsDetail.GlobalLockIsActive())
+          if (MyFilmsDetail.GlobalLockIsActive(MyFilms.conf.StrFileXml))
           {
             ShowMessageDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(1079854), GUILocalizeStrings.Get(330)); //movie db already in use (locked)
             break;
@@ -7865,16 +7865,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         LogMyFilms.Debug("WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
 
-        _rw.EnterReadLock();
-        // load dataset
-        BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-        MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
-        // (re)populate films
-        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-        _rw.ExitReadLock();
-        
-        // alternatively RefreshFacade() could be called to also update facade - might disturb user?
-        // Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+        if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
+        {
+          _rw.EnterReadLock();
+          // load dataset
+          BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+          MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
+          // (re)populate films
+          r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+          _rw.ExitReadLock();
+        }
+        else
+        {
+          // alternatively RefreshFacade() to be called to also update facade (only when main window is active)
+          Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+        }
 
         // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
         FSwatcher.EnableRaisingEvents = true;
