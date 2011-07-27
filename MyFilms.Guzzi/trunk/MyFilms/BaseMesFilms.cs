@@ -929,6 +929,7 @@ namespace MyFilmsPlugin.MyFilms
               if (!MyFilmsDetail.GlobalLockIsActive(Catalog))
               {
                 MyFilmsDetail.SetGlobalLock(true, Catalog);
+                MyFilms.FSwatcher.EnableRaisingEvents = true; // re enable watcher - as myfilms should auto update dataset for current config, if update is done from trakt
 
                 try
                 {
