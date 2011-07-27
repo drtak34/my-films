@@ -5411,7 +5411,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     dlgOK.SetHeading("MyFilms");
                     dlgOK.SetLine(1, "OnlineVideo plugin not installed or wrong version");
-                    dlgOK.SetLine(2, "Minimum Version required: 0.28");
+                    dlgOK.SetLine(2, "Minimum Version required: 0.30");
                     dlgOK.DoModal(GetID);
                     return;
                   }
@@ -5565,7 +5565,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("OnPlayBackStarted was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
               return;
             }
-            LogMyFilms.Debug("OnPlayBackStarted was initiated");
+            LogMyFilms.Debug("OnPlayBackStarted was initiated - filename: '" + filename + "'");
 
             // store informations for action at endplayback if any
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
@@ -5608,7 +5608,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("OnPlayBackEnded was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
             return;
           }
-          LogMyFilms.Debug("OnPlayBackEnded was initiated");
+          LogMyFilms.Debug("OnPlayBackEnded was initiated - filename: '" + filename + "'");
           UpdateOnPlayEnd(type, 0, filename, true, false);
         }
         private void OnPlayBackStopped(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename)
@@ -5618,12 +5618,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("OnPlayBackStopped was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
             return;
           }
-          LogMyFilms.Debug("OnPlayBackStopped was initiated");
+          LogMyFilms.Debug("OnPlayBackStopped was initiated - filename: '" + filename + "'");
           UpdateOnPlayEnd(type, timeMovieStopped, filename, false, true);
         }
         private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
         {
-            LogMyFilms.Debug("UpdateOnPlayEnd was initiated - trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "', StrPlayedIndex: '" + MyFilms.conf.StrPlayedIndex + "'");
+            LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "', StrPlayedIndex: '" + MyFilms.conf.StrPlayedIndex + "'");
 
             if (MyFilms.conf.StrPlayedIndex == -1)
                 return;
