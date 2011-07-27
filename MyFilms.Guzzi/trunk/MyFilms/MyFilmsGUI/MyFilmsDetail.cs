@@ -57,7 +57,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using SQLite.NET;
 
+  using TraktPlugin;
   using TraktPlugin.GUI;
+  using TraktPlugin.TraktAPI.DataStructures;
   
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using MediaInfo = MyFilmsPlugin.MyFilms.Utils.MediaInfo;
@@ -1145,8 +1147,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
               //case "trakt-Rate":
-              //  GUIUtils.ShowRateDialog<TraktRateMovie>(BasicHandler.CreateMovieRateData(title, MyFilms.currentMovie.Year.ToString(), MyFilms.currentMovie.IMDBNumber));
-              //  break;
+              //      TraktRateMovie rateObject = new TraktRateMovie
+              //      {
+              //        IMDBID = MyFilms.currentMovie.IMDBNumber,
+              //        Title = MyFilms.currentMovie.Title,
+              //        Year = MyFilms.currentMovie.Year.ToString(),
+              //        Rating = "love",
+              //        UserName = TraktSettings.Username,
+              //        Password = TraktSettings.Password
+              //      };
+              //      GUIUtils.ShowRateDialog<TraktRateMovie>(rateObject);
+              //      break;
 
               case "trailermenu":
                     if (dlgmenu == null) return;
@@ -5539,11 +5550,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             update_database(fileName, select_item, -1);
             newItems.Add(fileName);
         }
+
+        bool PlayBackEventIsOfConcern(g_Player.MediaType type, string filename)
+        {
+          if (string.IsNullOrEmpty(filename)) return false;
+
+          return (MyFilms.currentMovie != null && type == g_Player.MediaType.Video && MyFilms.currentMovie.File.Contains(filename));
+        }
+
         private void OnPlayBackStarted(MediaPortal.Player.g_Player.MediaType type, string filename)
         {
+            if (!PlayBackEventIsOfConcern(type, filename))
+            {
+              LogMyFilms.Debug("OnPlayBackStarted was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
+              return;
+            }
             LogMyFilms.Debug("OnPlayBackStarted was initiated");
 
-            if (type != g_Player.MediaType.Video) return;
             // store informations for action at endplayback if any
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
             MyFilms.conf.StrPlayedDfltSelect = MyFilms.conf.StrDfltSelect;
@@ -5580,11 +5603,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         private void OnPlayBackEnded(MediaPortal.Player.g_Player.MediaType type, string filename)
         {
+          if (!PlayBackEventIsOfConcern(type, filename))
+          {
+            LogMyFilms.Debug("OnPlayBackEnded was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
+            return;
+          }
           LogMyFilms.Debug("OnPlayBackEnded was initiated");
           UpdateOnPlayEnd(type, 0, filename, true, false);
         }
         private void OnPlayBackStopped(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename)
         {
+          if (!PlayBackEventIsOfConcern(type, filename))
+          {
+            LogMyFilms.Debug("OnPlayBackStopped was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
+            return;
+          }
           LogMyFilms.Debug("OnPlayBackStopped was initiated");
           UpdateOnPlayEnd(type, timeMovieStopped, filename, false, true);
         }
