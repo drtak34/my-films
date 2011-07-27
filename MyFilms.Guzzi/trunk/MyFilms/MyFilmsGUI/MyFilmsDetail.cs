@@ -57,10 +57,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using SQLite.NET;
 
-  using TraktPlugin;
-  using TraktPlugin.GUI;
-  using TraktPlugin.TraktAPI.DataStructures;
-  
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using MediaInfo = MyFilmsPlugin.MyFilms.Utils.MediaInfo;
   // using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
@@ -1139,9 +1135,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
               case "trakt-Shouts":
-                GUIShouts.ShoutType = GUIShouts.ShoutTypeEnum.movie;
-                GUIShouts.MovieInfo = new MovieShout { IMDbId = MyFilms.currentMovie.IMDBNumber, TMDbId = "", Title = MyFilms.currentMovie.Title, Year = MyFilms.currentMovie.Year.ToString() };
-                GUIShouts.Fanart = MyFilms.currentMovie.Fanart;
+                SetTraktShout(MyFilms.currentMovie);
                 GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts);
                 break;
 
@@ -1727,7 +1721,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
       
-      
+        private void SetTraktShout(MFMovie movie)
+        {
+          TraktPlugin.GUI.GUIShouts.ShoutType = TraktPlugin.GUI.GUIShouts.ShoutTypeEnum.movie;
+          TraktPlugin.GUI.GUIShouts.MovieInfo = new TraktPlugin.GUI.MovieShout { IMDbId = movie.IMDBNumber, TMDbId = "", Title = movie.Title, Year = movie.Year.ToString() };
+          TraktPlugin.GUI.GUIShouts.Fanart = movie.Fanart;
+        }
+
         private static MFMovie GetMovieFromRecord(DataRow sr)
         {
           MFMovie movie = new MFMovie();

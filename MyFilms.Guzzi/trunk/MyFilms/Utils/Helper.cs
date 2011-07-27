@@ -537,6 +537,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
+            //if (!File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")))
+            //  return false;
             return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 4, 1)) && IsPluginEnabled("Trakt");
           }
         }
@@ -567,6 +569,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
               return true;
             return false;
             // return Helper.IsAssemblyAvailable("OnlineVideos", new Version(0, 30, 0, 13883)) && IsPluginEnabled("OnlineVideos");
+            // return File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "OnlineVideos.MediaPortal1.dll")) && IsPluginEnabled("Online Videos");
             
           }
         }
