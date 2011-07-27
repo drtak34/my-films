@@ -1143,7 +1143,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIShouts.MovieInfo = new MovieShout { IMDbId = MyFilms.currentMovie.IMDBNumber, TMDbId = "", Title = MyFilms.currentMovie.Title, Year = MyFilms.currentMovie.Year.ToString() };
                 GUIShouts.Fanart = MyFilms.currentMovie.Fanart;
                 GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts);
-                //GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts, "");
                 break;
 
               //case "trakt-Rate":

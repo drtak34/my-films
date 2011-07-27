@@ -7924,27 +7924,47 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (e.Mode == Microsoft.Win32.PowerModes.Resume)
         {
-          LogMyFilms.Debug("MyFilms is resuming from standby");
+          LogMyFilms.Debug("SystemEvents_PowerModeChanged() - MyFilms is resuming from standby");
           conf.IsResumeFromStandby = true;
 
-          // reload data, as it might have changed while sleeping
-          FSwatcher.EnableRaisingEvents = false;
+          // Thread.Sleep(250);
 
-          Thread.Sleep(250);
+          int maxretries = 10; // max retries 10 * 500 = 5 seconds
+          int i = 0;
+          bool success = false; // result of update operation
 
-          _rw.EnterReadLock();
-          // load dataset
-          BaseMesFilms.LoadMesFilms(conf.StrFileXml);
-          MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
-          // (re)populate films
-          r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-          _rw.ExitReadLock();
-
-          // alternatively RefreshFacade() could be called to also update facade - might disturb user?
-          // Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-
+          while (!success && i < maxretries)
+          {
+            // first check, if the network is ready and DB is accessible
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && System.IO.File.Exists(conf.StrFileXml))
+            {
+              LogMyFilms.Debug("MyFilms is reloading movie data to memory cache.");
+              FSwatcher.EnableRaisingEvents = false;
+              if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
+              {
+                // reload data, as it might have changed while sleeping
+                _rw.EnterReadLock();
+                BaseMesFilms.LoadMesFilms(conf.StrFileXml); // load dataset
+                MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
+                r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // (re)populate films
+                _rw.ExitReadLock();
+              }
+              else
+              {
+                Refreshfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+              }
+              success = true;
+            }
+            else
+            {
+              i += 1;
+              LogMyFilms.Info("Network not yet ready or file not accessible on try '" + i + " of " + maxretries + "' to reload - waiting for next retry");
+              Thread.Sleep(500);
+            }
+          }
           FSwatcher.EnableRaisingEvents = true;
         }
+
         else if (e.Mode == Microsoft.Win32.PowerModes.Suspend)
         {
           LogMyFilms.Debug("MyFilms is entering standby");
