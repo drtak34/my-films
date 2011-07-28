@@ -8996,6 +8996,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("nbobjects.unit", GUILocalizeStrings.Get(127));
       MyFilmsDetail.setGUIProperty("db.length.unit", GUILocalizeStrings.Get(2998));
       MyFilmsDetail.setGUIProperty("user.watched.label", GUILocalizeStrings.Get(200027));
+
+      MyFilmsDetail.clearGUIProperty("user.watched.value");
+      MyFilmsDetail.clearGUIProperty("user.watched.count");
+      MyFilmsDetail.clearGUIProperty("user.watched.name");
+      MyFilmsDetail.clearGUIProperty("user.watched.global");
+
       MyFilmsDetail.clearGUIProperty("user.source.isonline");
       MyFilmsDetail.clearGUIProperty("user.sourcetrailer.isonline");
       MyFilmsDetail.clearGUIProperty("logos_id2001");
