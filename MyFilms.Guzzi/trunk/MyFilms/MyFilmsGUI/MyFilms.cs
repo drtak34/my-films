@@ -515,10 +515,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Register Eventhandler for AMCupdater Background progress reporting
       //AMCupdaterStartEventHandler();
       
-      // Register PowerEventMode Changed Handler
-      System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
-      Microsoft.Win32.SystemEvents.PowerModeChanged += new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
-
       // Initialize Backgroundworker
       InitializeBackgroundWorker();
 
@@ -561,6 +557,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         // Initial steps
       }
+
+      // Register PowerEventMode Changed Handler
+      System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged -= NetworkAvailabilityChanged;
+      System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
+      Microsoft.Win32.SystemEvents.PowerModeChanged -= new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
+      Microsoft.Win32.SystemEvents.PowerModeChanged += new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
 
       // Support for StartParameters - ToDo: Add start view options (implementation)
 
@@ -7924,7 +7926,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (e.Mode == Microsoft.Win32.PowerModes.Resume)
         {
-          LogMyFilms.Debug("SystemEvents_PowerModeChanged() - MyFilms is resuming from standby");
+          LogMyFilms.Debug("PowerModeChanged() - MyFilms is resuming from standby");
           conf.IsResumeFromStandby = true;
 
           // Thread.Sleep(250);
@@ -7938,7 +7940,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // first check, if the network is ready and DB is accessible
             if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && System.IO.File.Exists(conf.StrFileXml))
             {
-              LogMyFilms.Debug("MyFilms is reloading movie data to memory cache.");
+              LogMyFilms.Debug("PowerModeChanged() - MyFilms is reloading movie data to memory cache.");
               FSwatcher.EnableRaisingEvents = false;
               if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
               {
@@ -7958,7 +7960,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             else
             {
               i += 1;
-              LogMyFilms.Info("Network not yet ready or file not accessible on try '" + i + " of " + maxretries + "' to reload - waiting for next retry");
+              LogMyFilms.Info("PowerModeChanged() - Network not yet ready or file not accessible on try '" + i + " of " + maxretries + "' to reload - waiting for next retry");
               Thread.Sleep(500);
             }
           }
@@ -7967,8 +7969,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         else if (e.Mode == Microsoft.Win32.PowerModes.Suspend)
         {
-          LogMyFilms.Debug("MyFilms is entering standby");
+          LogMyFilms.Debug("PowerModeChanged() - MyFilms is entering standby");
         }
+        else
+          LogMyFilms.Debug("PowerModeChanged() - MyFilms detected unhandled PowerModeChanged event - no action.");
       }
 
       void NetworkAvailabilityChanged(object sender, System.Net.NetworkInformation.NetworkAvailabilityEventArgs e)
