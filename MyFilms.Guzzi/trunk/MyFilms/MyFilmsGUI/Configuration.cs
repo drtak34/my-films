@@ -430,6 +430,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     CmdPar = "";
                 OnlyTitleList = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "OnlyTitleList", false);
                 WindowsFileDialog = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WindowsFileDialog", false);
+                GlobalAvailableOnly = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalAvailableOnly", false);
                 GlobalUnwatchedOnly = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnly", false);
                 GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "GlobalUnwatchedOnlyValue", "false");
                 ScanMediaOnStart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "CheckMediaOnStart", false);
@@ -544,6 +545,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get { return alwaysDefaultView; }
             set { alwaysDefaultView = value; }
+        }
+        private bool globalAvailableOnly = false;
+        public bool GlobalAvailableOnly
+        {
+          get { return globalAvailableOnly; }
+          set { globalAvailableOnly = value; }
         }
         private bool globalUnwatchedOnly = false;
         public bool GlobalUnwatchedOnly
@@ -1556,7 +1563,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CurrentConfig = null;
             using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
-            //XmlConfig XmlConfig = new XmlConfig();
             NbConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", 0);
             pluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Reads Plugin start mode and sets to normal if not present
             LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");

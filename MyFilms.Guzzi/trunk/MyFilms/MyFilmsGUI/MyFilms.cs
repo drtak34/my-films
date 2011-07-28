@@ -3841,9 +3841,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.clearGUIProperty("globalfilter.unwatched");
         }
 
-        GlobalFilterIsOnlineOnly = false;
-        GlobalFilterStringIsOnline = String.Empty;
-        MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
+        if (conf.GlobalAvailableOnly)
+          GlobalFilterIsOnlineOnly = true;
+        else
+          GlobalFilterIsOnlineOnly = false;
+
+        if (GlobalFilterIsOnlineOnly)
+        {
+          GlobalFilterStringIsOnline = "IsOnline like 'true' AND ";
+          MyFilmsDetail.setGUIProperty("globalfilter.isonline", "true");
+        }
+        else
+        {
+          GlobalFilterStringIsOnline = String.Empty;
+          MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
+        }
+
 
         MovieScrobbling = false; // reset scrobbler filter setting
       }

@@ -498,6 +498,7 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.chkGlobalAvailableOnly = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
@@ -3078,6 +3079,7 @@
           // 
           // groupBox_DefaultView
           // 
+          this.groupBox_DefaultView.Controls.Add(this.chkGlobalAvailableOnly);
           this.groupBox_DefaultView.Controls.Add(this.chkUseListviewForGroups);
           this.groupBox_DefaultView.Controls.Add(this.chkGlobalUnwatchedOnly);
           this.groupBox_DefaultView.Controls.Add(this.label10);
@@ -5000,6 +5002,17 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // chkGlobalAvailableOnly
+          // 
+          this.chkGlobalAvailableOnly.AutoSize = true;
+          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(183, 130);
+          this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
+          this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
+          this.chkGlobalAvailableOnly.TabIndex = 82;
+          this.chkGlobalAvailableOnly.Text = "Show only available movies";
+          this.ToolTip1.SetToolTip(this.chkGlobalAvailableOnly, resources.GetString("chkGlobalAvailableOnly.ToolTip"));
+          this.chkGlobalAvailableOnly.UseVisualStyleBackColor = true;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5527,5 +5540,6 @@
         private ColumnHeader Value;
         private Label labelTraktDescription;
         private PictureBox pictureBox1;
+        private CheckBox chkGlobalAvailableOnly;
     }
 }

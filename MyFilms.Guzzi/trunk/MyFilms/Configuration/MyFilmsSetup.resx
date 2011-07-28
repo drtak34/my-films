@@ -529,6 +529,16 @@ so children will not be aware of any other configurations.
 Adult movies can then be included in another configuration that is password protected.
 </value>
   </data>
+  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
+    <value>"Only available" option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+Note:
+The availability status is only usable after MyFilms has done a scan. 
+This can be anabled for startup - but will take some time, depending on the size of your DB.</value>
+  </data>
   <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
     <value>Unwatched option acts as global overlayfilter for all views
 and this setting is used for start view.

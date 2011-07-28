@@ -1002,6 +1002,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", CheckWatchedPlayerStopped.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", AlwaysDefaultView.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseListviewForGroups", chkUseListviewForGroups.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalAvailableOnly", chkGlobalAvailableOnly.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", chkGlobalUnwatchedOnly.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", textBoxGlobalUnwatchedOnlyValue.Text);
             
@@ -1436,6 +1437,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             CheckWatchedPlayerStopped.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "CheckWatchedPlayerStopped", false);
             AlwaysDefaultView.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AlwaysDefaultView", false);
             chkUseListviewForGroups.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "UseListviewForGroups", true);
+            chkGlobalAvailableOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalAvailableOnly", false);
             chkGlobalUnwatchedOnly.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnly", false);
             textBoxGlobalUnwatchedOnlyValue.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "GlobalUnwatchedOnlyValue", "false");
 
@@ -1769,6 +1771,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDVDprofilerOnlyFile.Checked = false;
             AlwaysDefaultView.Checked = false;
             chkUseListviewForGroups.Checked = true;
+            chkGlobalAvailableOnly.Checked = false;
             chkGlobalUnwatchedOnly.Checked = false;
             chkScanMediaOnStart.Checked = false;
             cbAllowTraktSync.Checked = false;
