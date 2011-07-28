@@ -4629,12 +4629,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  choiceGlobalUserProfileName.Add(conf.StrUserProfileName);
           //}
 
-          //dlg4.Add("Global"); // Global default value - should already be present by default, if enhanced watch handling is selected
-          //choiceGlobalUserProfileName.Add("Global");
-
           dlg4.Add("<" + GUILocalizeStrings.Get(10798630) + ">"); // New Value ...
           choiceGlobalUserProfileName.Add("");
 
+          // add Trakt user, if there is any configured:
+          if (Helper.IsTraktAvailableAndEnabled)
+          {
+            string currentTraktuser = Helper.GetTraktUser();
+            if (!string.IsNullOrEmpty(currentTraktuser))
+            {
+              dlg4.Add(currentTraktuser + " (Trakt)");
+              choiceGlobalUserProfileName.Add(currentTraktuser);
+            }
+          }
 
           // Add already existing UserProfileNames - example of string value: "Global:3|Mike:0|Sandy:1"
           foreach (DataRow sr in r)

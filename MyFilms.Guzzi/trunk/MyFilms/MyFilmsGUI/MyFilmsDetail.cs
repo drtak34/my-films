@@ -7524,8 +7524,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         return false;
       }
-
-
     }
 
 }

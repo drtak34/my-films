@@ -574,6 +574,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
         }
 
+        public static string GetTraktUser()
+        {
+          if (Helper.IsTraktAvailableAndEnabled)
+            return TraktPlugin.TraktSettings.Username;
+          return string.Empty;
+        }
+
         #endregion
 
 
