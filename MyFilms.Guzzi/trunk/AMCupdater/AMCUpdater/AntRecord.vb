@@ -1153,7 +1153,9 @@ Public Class AntRecord
             'First ensure we have a valid movie number so the record can be saved:
             CurrentAttribute = "Number"
             TempValue = _MovieNumber
-            CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+            If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then ' only update when there is no content
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+            End If
             'LogEvent("ProcessFile() - get valid record number: '" & TempValue & "'", EventLogLevel.InformationalWithGrabbing)
 
             If (ProcessMode = Process_Mode_Names.Import) Then
@@ -1410,7 +1412,9 @@ Public Class AntRecord
                 Else
                     TempValue = GetFileData(_FilePath, "runtime")
                 End If
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                If Not TempValue.Contains("ERROR") Then
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                End If
             End If
 
             CurrentAttribute = "VideoFormat"
@@ -1459,7 +1463,9 @@ Public Class AntRecord
                     TempValue = GetFileData(_FilePath, "FileSize")
                 End If
 
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                If Not TempValue.Contains("ERROR") Then
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                End If
             End If
 
             CurrentAttribute = "Disks"
