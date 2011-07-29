@@ -1558,9 +1558,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //--------------------------------------------------------------------------------------------
         //  Return Current Configuration
         //--------------------------------------------------------------------------------------------
-        public static void Current_Config()
+        public static bool Current_Config() // returns true, if a default config is set (requires full reload on entering plugin)
         {
             CurrentConfig = null;
+            bool defaultconfig = false;
+
             using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
             {
             NbConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", 0);
@@ -1574,8 +1576,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgOk.SetLine(2, "Please enter setup first");
                 dlgOk.DoModal(MyFilms.ID_MyFilms);
                 //MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow(); // doesn't work in this context - why?
-              return;
+              return false;
             }
+
             bool boolchoice = true;
             if (CurrentConfig == null)
               if (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Current_Config", string.Empty).Length > 0)
@@ -1583,10 +1586,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 else
                   CurrentConfig = string.Empty;
 
-            if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) && ((XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty).Length > 0)))
+            if (!(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false)) && (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty).Length > 0))
+            {
               CurrentConfig = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
-            //else //Guzzi: Remarked, because otherwise currentconfig will always be owerwritten if no defaultconfig available
-            //    CurrentConfig = string.Empty;
+              defaultconfig = true;
+            }
             if (CurrentConfig == string.Empty || (XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", true)))
             {
                 boolchoice = false;
@@ -1596,6 +1600,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if ((CurrentConfig == "") && (NbConfig > 1) && (boolchoice)) //error password ? so if many config => choice config menu
                 CurrentConfig = Configuration.Choice_Config(MyFilms.ID_MyFilms);
             }
+            return defaultconfig;
         }
     }
 

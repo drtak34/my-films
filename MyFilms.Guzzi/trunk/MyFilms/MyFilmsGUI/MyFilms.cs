@@ -708,6 +708,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Worker_DoPageLoad()
     {
       //Hier muß irgendwie gemerkt werden, daß eine Rückkehr vom TrailerIsAvailable erfolgt - CheckAccess WIndowsID des Conterxts via LOGs
+      bool defaultconfig = false;
       GUIWaitCursor.Init();
       GUIWaitCursor.Show();
       if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
@@ -745,7 +746,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          Configuration.Current_Config();
+          defaultconfig = Configuration.Current_Config();
           Load_Config(Configuration.CurrentConfig, true);
         }
         
@@ -766,12 +767,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
       {
         LogMyFilms.Debug("OnPageLoad() - load facade with DefaultView -> Fin_Charge_Init(true, false)");
-        Fin_Charge_Init(true, false);
+        Fin_Charge_Init(true, defaultconfig); // defaultconfig is true, if a default config is set in MF setup (not default view!)
       }
       else
       {
         LogMyFilms.Debug("OnPageLoad() - load facade with last settings -> Fin_Charge_Init(false, false)");
-        Fin_Charge_Init(false, false);
+        Fin_Charge_Init(false, defaultconfig);
       }
 
       // Launch Background availability scanner, if configured in setup
@@ -2503,7 +2504,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         wfanart = MyFilmsDetail.Search_Fanart(wtitle, true, "file", false, currentItem.ThumbnailImage, string.Empty);
-        LogMyFilms.Debug("MyFilm (Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+        LogMyFilms.Debug("(Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         if (wfanart[0] == " ")
         {
           if (backdrop.Active) backdrop.Active = false;
@@ -2540,6 +2541,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         Load_Logos(MyFilms.r[currentItem.ItemId], true); // set logos
       }
 
+      LogMyFilms.Debug("switch (currentItem.TVTag.ToString() with TVTag = '" + currentItem.TVTag.ToString() + "', currentItem.ItemId = '" + currentItem.ItemId.ToString() + "'"); 
       switch (currentItem.TVTag.ToString()) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
       {
         case "person":
@@ -3389,7 +3391,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
           MyFilmsDetail.Load_Detailed_PersonInfo(facadeView.SelectedListItem.Label, false);
         // else
-        //  MyFilmsDetail.Load_Detailed_DB(0, false);
+        //   MyFilmsDetail.Load_Detailed_DB(0, false);
 
         // Disabled because replaced by SpeedLoader
         // ImgLstFilm.SetFileName("#myfilms.picture");
@@ -3900,14 +3902,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        //if (MyFilms.conf.UseListViewForGoups) // remarked, as we have films here !
-        //  Change_LayOut(0);
-        //else
-          Change_LayOut(MyFilms.conf.StrLayOut);
+        Change_LayOut(MyFilms.conf.StrLayOut);
         if (!(LoadDfltSlct))                       // Defaultview not selected
         {
           GetFilmList(conf.StrIndex);
           SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+          // this.Load_Lstdetail(facadeView.SelectedListItem, true);
         }
         else                                        // Defaultview selected
         {
@@ -8606,8 +8606,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       fanartdir = MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
       LogMyFilms.Debug("(FindFanart) - fanartdir = '" + fanartdir + "'");
-
-
 
       try
       {
