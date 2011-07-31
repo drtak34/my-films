@@ -762,6 +762,7 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
+			<description>Item 1 Prompt</description>
 			<type>label</type>
 			<id>1030</id>
 			<posX>520</posX>
@@ -775,6 +776,7 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
+			<description>Item 1 Value</description>
 			<type>fadelabel</type>
 			<id>1031</id>
 			<posX>730</posX>
@@ -816,92 +818,11 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
-			<description>CategoryPrompt</description>
+			<description>Item 2 Prompt</description>
 			<type>label</type>
 			<id>2032</id>
 			<posX>520</posX>
 			<posY>230</posY>
-			<label>#myfilms.db.category.label:</label>
-			<textcolor>90ffffff</textcolor>
-			<font>font14</font>
-			<width>200</width>
-      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
-		<control>
-			<description>CategoryValue</description>
-			<type>fadelabel</type>
-			<id>2062</id>
-			<posX>730</posX>
-			<posY>230</posY>
-			<label>#myfilms.db.category.value</label>
-			<width>535</width>
-			<font>font14</font>
-      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
-		<control>
-			<description>CountryPrompt</description>
-			<type>label</type>
-			<id>2033</id>
-			<posX>520</posX>
-			<posY>260</posY>
-			<label>#myfilms.db.country.label:</label>
-			<textcolor>90ffffff</textcolor>
-			<font>font14</font>
-			<width>200</width>
-      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
-		<control>
-			<description>CountryValue</description>
-			<type>fadelabel</type>
-			<id>2063</id>
-			<posX>730</posX>
-			<posY>260</posY>
-			<label>#myfilms.db.country.value</label>
-			<width>535</width>
-			<font>font14</font>
-      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
-		<control>
-			<description>DirectorPrompt</description>
-			<type>label</type>
-			<id>2034</id>
-			<posX>520</posX>
-			<posY>290</posY>
-			<label>#myfilms.db.director.label:</label>
-			<textcolor>90ffffff</textcolor>
-			<font>font14</font>
-			<width>200</width>
-      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
-		<control>
-			<description>DirectorValue</description>
-			<type>fadelabel</type>
-			<id>2064</id>
-			<posX>730</posX>
-			<posY>290</posY>
-			<label>#myfilms.db.director.value</label>
-			<width>535</width>
-			<font>font14</font>
-      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-		</control>
-		<control>
-			<description>Optional Display Field 2 Prompt</description>
-			<type>label</type>
-			<id>1032</id>
-			<posX>520</posX>
-			<posY>320</posY>
 			<label>#myfilms.user.item2.label:</label>
 			<textcolor>90ffffff</textcolor>
 			<font>font14</font>
@@ -911,12 +832,93 @@
 			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
-			<description>Optional Display Field 2 Value</description>
+			<description>Item 2 Value</description>
+			<type>fadelabel</type>
+			<id>2062</id>
+			<posX>730</posX>
+			<posY>230</posY>
+			<label>#myfilms.user.item2.value</label>
+			<width>535</width>
+			<font>font14</font>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>Item 3 Prompt</description>
+			<type>label</type>
+			<id>2033</id>
+			<posX>520</posX>
+			<posY>260</posY>
+			<label>#myfilms.user.item3.label:</label>
+			<textcolor>90ffffff</textcolor>
+			<font>font14</font>
+			<width>200</width>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>Item 3 Value</description>
+			<type>fadelabel</type>
+			<id>2063</id>
+			<posX>730</posX>
+			<posY>260</posY>
+			<label>#myfilms.user.item3.value</label>
+			<width>535</width>
+			<font>font14</font>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>Item 4 Prompt</description>
+			<type>label</type>
+			<id>2034</id>
+			<posX>520</posX>
+			<posY>290</posY>
+			<label>#myfilms.user.item4.label:</label>
+			<textcolor>90ffffff</textcolor>
+			<font>font14</font>
+			<width>200</width>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>Item 4 Value</description>
+			<type>fadelabel</type>
+			<id>2064</id>
+			<posX>730</posX>
+			<posY>290</posY>
+			<label>#myfilms.user.item4.value</label>
+			<width>535</width>
+			<font>font14</font>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>Item5 Prompt</description>
+			<type>label</type>
+			<id>1032</id>
+			<posX>520</posX>
+			<posY>320</posY>
+			<label>#myfilms.user.item5.label:</label>
+			<textcolor>90ffffff</textcolor>
+			<font>font14</font>
+			<width>200</width>
+      			<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+			<animation effect="fade" time="250">WindowClose</animation>	
+			<animation effect="fade" time="250">WindowOpen</animation>
+		</control>
+		<control>
+			<description>Item 5 Value</description>
 			<type>fadelabel</type>
 			<id>1033</id>
 			<posX>730</posX>
 			<posY>320</posY>
-			<label>#myfilms.user.item2.value</label>
+			<label>#myfilms.user.item5.value</label>
 			<width>535</width>
 			<textcolor>ffffffff</textcolor>
 			<font>font14</font>
@@ -1972,7 +1974,7 @@ Detailmenu for technical details
 		</control>
 <!-- End Special View for FullColorFanart -->
 
-<!-- Watched/Unwatched Icon -->
+<!-- Watched/Unwatched Icon for Cover -->
 	<control>
             	<description>Episode Watched Icon Background</description>
             	<type>image</type>
@@ -2021,17 +2023,50 @@ Detailmenu for technical details
 		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 
+<!-- Watched/Unwatched Icon for enhanced watched status  -->
+	<control>
+		<type>image</type>
+		<description>Watched Icon</description>
+		<id>1</id>
+		<posX>1257</posX>
+		<posY>636</posY>
+		<width>14</width>
+		<height>14</height>
+		<texture>MyFilms\overlayunwatched.png</texture>
+		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>UnWatched Icon</description>
+		<id>1</id>
+		<posX>1257</posX>
+		<posY>636</posY>
+		<width>14</width>
+		<height>14</height>
+		<texture>MyFilms\overlaywatched.png</texture>
+		<colordiffuse>eea9d0f7</colordiffuse>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+		<animation effect="fade" time="250">WindowClose</animation>	
+		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+
 <!-- Watched Count -->
 		<control>
 			<description>User</description>
 			<type>fadelabel</type>
 			<id>1</id>
-			<posX>1210</posX>
+			<posX>1251</posX>
 			<posY>633</posY>
 			<width>280</width>
 			<label>#myfilms.user.watched.name: #myfilms.user.watched.count(#myfilms.user.watched.global)</label>
 			<font>font10</font>
-			<align>left</align>
+			<align>right</align>
 			<textcolor>6fffffff</textcolor>
 			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.name)</visible>
 		</control>
