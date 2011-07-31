@@ -139,10 +139,18 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
                   {
                   }
                   destXml.WriteStartElement("Movie");
-                  string wID = nodeDVD.Attributes["mID"].Value;
+
+                  string wID = nodeDVD.Attributes["Label"].Value;
                   if (wID != null && wID.Length > 3 && wID.ToLower().Contains("no:")) WriteAntAtribute(destXml, "Number", wID.Substring(3));
-                  else if (!string.IsNullOrEmpty(wID)) WriteAntAtribute(destXml, "Number", wID);
-                  else WriteAntAtribute(destXml, "Number", "9999");
+                  else
+                    if (!string.IsNullOrEmpty(wID)) WriteAntAtribute(destXml, "Number", wID);
+                    else
+                    {
+                      wID = nodeDVD.Attributes["mID"].Value;
+                      if (wID != null && wID.Length > 3 && wID.ToLower().Contains("no:")) WriteAntAtribute(destXml, "Number", wID.Substring(3));
+                      else if (!string.IsNullOrEmpty(wID)) WriteAntAtribute(destXml, "Number", wID);
+                      else WriteAntAtribute(destXml, "Number", "9999");
+                    }
                   if (nodeDVD.Attributes["OriginalTitle"] != null &&
                       nodeDVD.Attributes["OriginalTitle"].Value.Length > 0) WriteAntAtribute(destXml, "OriginalTitle", nodeDVD.Attributes["OriginalTitle"].Value);
                   else if (nodeDVD.Attributes["TranslatedTitle"] != null &&
