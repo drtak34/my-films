@@ -230,12 +230,20 @@ namespace MyFilmsPlugin.MyFilms
           data = new AntMovieCatalog();
           try
           {
-            data.ReadXml(StrFileXml);
+            using (FileStream fs = new FileStream(StrFileXml, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+              LogMyFilms.Debug("LoadMesFilms()- opening '" + StrFileXml + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+              data.ReadXml(fs);
+              fs.Close();
+              LogMyFilms.Debug("LoadMesFilms()- closing  '" + StrFileXml + "' FileStream");
+            }
+            // data.ReadXml(StrFileXml);
           }
           catch (Exception e)
           {
-            LogMyFilms.Error("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
-            throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString());
+            LogMyFilms.Error("LoadMesFilms() : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+            LogMyFilms.Error("LoadMesFilms() : Last Record: '" + data.Movie[data.Movie.Count - 1].Number.ToString() + "', title: '" + data.Movie[data.Movie.Count - 1].OriginalTitle.ToString() + "'");
+            throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; movie: '" + data.Movie[data.Movie.Count - 1].OriginalTitle + "'; error : " + e.Message.ToString());
           }
         }
 
@@ -249,11 +257,17 @@ namespace MyFilmsPlugin.MyFilms
           myfilmsdata = new MyFilmsData();
           try
           {
-            myfilmsdata.ReadXml(datafile);
+            using (FileStream fs = new FileStream(datafile, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+              LogMyFilms.Debug("LoadMyFilmsData()- opening '" + datafile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+              myfilmsdata.ReadXml(fs);
+              fs.Close();
+              LogMyFilms.Debug("LoadMyFilmsData()- closing  '" + datafile + "' FileStream");
+            }
           }
           catch (Exception e)
           {
-            LogMyFilms.Error("Error reading myfilms data xml database '" + datafile + "'; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+            LogMyFilms.Error("LoadMyFilmsData() - Error reading myfilms data xml database '" + datafile + "'; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
           }
         }
 

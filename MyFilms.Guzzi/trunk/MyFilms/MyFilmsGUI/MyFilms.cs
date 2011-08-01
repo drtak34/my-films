@@ -1999,9 +1999,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("GetFilmList started: BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false)");
       SetFilmSelect();
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      MyFilms._rw.EnterReadLock();
+      //MyFilms._rw.EnterReadLock();
       r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
-      MyFilms._rw.ExitReadLock();
+      //MyFilms._rw.ExitReadLock();
       LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
@@ -3865,14 +3865,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (((PreviousWindowId != ID_MyFilmsDetail) && (PreviousWindowId != ID_MyFilmsActors)) || (reload))
       {
         //chargement des films
-        _rw.EnterReadLock();
         if (reload)
         {
+          //_rw.EnterReadLock();
           BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+          //_rw.ExitReadLock();
           MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml);
         }
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-        _rw.ExitReadLock();
       }
       //Layout = conf.StrLayOut;
 
@@ -6036,33 +6036,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      MyFilms._rw.EnterReadLock();
+      //MyFilms._rw.EnterReadLock();
       DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      MyFilms._rw.ExitReadLock();
+      //MyFilms._rw.ExitReadLock();
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
         choiceSearch.Add("Producer");
       }
-      MyFilms._rw.EnterReadLock();
+      //MyFilms._rw.EnterReadLock();
       wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      MyFilms._rw.ExitReadLock();
+      //MyFilms._rw.ExitReadLock();
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079869) + "  (" + wr.Length + ")");
         choiceSearch.Add("Director");
       }
-      MyFilms._rw.EnterReadLock();
+      //MyFilms._rw.EnterReadLock();
       wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Writer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      MyFilms._rw.ExitReadLock();
+      //MyFilms._rw.ExitReadLock();
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798684) + "  (" + wr.Length + ")");
         choiceSearch.Add("Writer");
       }
-      MyFilms._rw.EnterReadLock();
+      //MyFilms._rw.EnterReadLock();
       wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-      MyFilms._rw.ExitReadLock();
+      //MyFilms._rw.ExitReadLock();
       if (wr.Length > 0)
       {
         dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
@@ -7730,9 +7730,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.WStrSort = conf.StrSTitle;
       conf.Boolselect = false;
       conf.Boolreturn = false;
-      MyFilms._rw.EnterReadLock();
+      //MyFilms._rw.EnterReadLock();
       r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, true);
-      MyFilms._rw.ExitReadLock();
+      //MyFilms._rw.ExitReadLock();
     }
 
     //*****************************************************************************************
@@ -7889,13 +7889,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
         {
-          _rw.EnterReadLock();
+          //_rw.EnterReadLock();
           // load dataset
           BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
           MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
           // (re)populate films
           r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-          _rw.ExitReadLock();
+          //_rw.ExitReadLock();
         }
         else
         {
@@ -7965,11 +7965,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
               {
                 // reload data, as it might have changed while sleeping
-                _rw.EnterReadLock();
+                //_rw.EnterReadLock();
                 BaseMesFilms.LoadMesFilms(conf.StrFileXml); // load dataset
                 MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
                 r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // (re)populate films
-                _rw.ExitReadLock();
+                //_rw.ExitReadLock();
               }
               else
               {
@@ -8377,9 +8377,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       LogMyFilms.Info("bgIsOnlineCheck_DoWork: Read MyFilms Database ...");
-      MyFilms._rw.EnterReadLock();
+      //MyFilms._rw.EnterReadLock();
       DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens, true);
-      MyFilms._rw.ExitReadLock();
+      //MyFilms._rw.ExitReadLock();
       string TotalRecords = wr.Count().ToString();
       LogMyFilms.Debug("bgIsOnlineCheck_DoWork: DB-Records found: '" + TotalRecords + "'");
 

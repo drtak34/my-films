@@ -2170,7 +2170,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (lockstate)
           {
             MyFilms.FSwatcher.EnableRaisingEvents = false; // stop FSwatcher for local update, otherwise unneeded reread would be triggered
-            MyFilms._rw.EnterWriteLock();
+            //MyFilms._rw.EnterWriteLock();
 
             try
             {
@@ -2186,8 +2186,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
           {
             File.Delete(LockFilename(config));
-            if (MyFilms._rw.IsWriteLockHeld)
-              MyFilms._rw.ExitWriteLock();
+            //if (MyFilms._rw.IsWriteLockHeld)
+            //  MyFilms._rw.ExitWriteLock();
             MyFilms.FSwatcher.EnableRaisingEvents = true;
 
             LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + LockFilename(config));
