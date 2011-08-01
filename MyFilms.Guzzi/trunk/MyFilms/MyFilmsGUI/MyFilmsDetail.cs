@@ -2090,33 +2090,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------        
         public static void Update_XML_database()
         {
-          int maxretries = 10; // max retries 10 * 1000 = 10 seconds
-          int i = 0;
-          bool success = false; // result of update operation
+          //int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+          //int i = 0;
+          //bool success = false; // result of update operation
 
 
-          while (!success && i < maxretries)
-          {
-            // first check, if there is a global manual lock
-            if (!GlobalLockIsActive(MyFilms.conf.StrFileXml))
-            {
-              SetGlobalLock(true, MyFilms.conf.StrFileXml);
-              bool writesuccessful = BaseMesFilms.SaveMesFilms();
-              SetGlobalLock(false, MyFilms.conf.StrFileXml);
-              if (writesuccessful)
-              {
-                LogMyFilms.Info("Movie Database updated to filesystem!");
-                success = true;
-              }
-            }
-            else
-            {
-              i += 1;
-              LogMyFilms.Info("Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
-              Thread.Sleep(1000);
-            }
-          }
-          
+          //while (!success && i < maxretries)
+          //{
+          //  // first check, if there is a global manual lock
+          //  if (!GlobalLockIsActive(MyFilms.conf.StrFileXml))
+          //  {
+          //    SetGlobalLock(true, MyFilms.conf.StrFileXml);
+          //    bool writesuccessful = BaseMesFilms.SaveMesFilms();
+          //    SetGlobalLock(false, MyFilms.conf.StrFileXml);
+          //    if (writesuccessful)
+          //    {
+          //      LogMyFilms.Info("Movie Database updated to filesystem!");
+          //      success = true;
+          //    }
+          //  }
+          //  else
+          //  {
+          //    i += 1;
+          //    LogMyFilms.Info("Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
+          //    Thread.Sleep(1000);
+          //  }
+          //}
+
+          bool success = BaseMesFilms.SaveMesFilms(); 
           if (!success)
           {
             if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms)
