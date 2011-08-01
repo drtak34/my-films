@@ -2145,19 +2145,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             DB = MyFilms.conf.StrFileXml;
           else 
             DB = config;
+          if (string.IsNullOrEmpty(DB))
+          {
+            DB = "";
+            LogMyFilms.Debug("GlobalLockIsActive() - No valid DB - returning 'false' (DB-Config: '" + DB + "')");
+            return false;
+          }
+
           string path = System.IO.Path.GetDirectoryName(DB);
           string filename = System.IO.Path.GetFileNameWithoutExtension(DB);
           string machineName = System.Environment.MachineName;
           string[] files = System.IO.Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
-          // LogMyFilms.Debug("GlobalLockIsActive() - number of lockfiles found: '" + files.Length.ToString() + "'");
           if (files.Length > 0)
           {
-            LogMyFilms.Debug("GlobalLockIsActive() - Global Lock detected ! - First LockFile: '" + files[0] + "'");
+            LogMyFilms.Debug("GlobalLockIsActive() - Global Lock detected ! (DB-Config: '" + DB + "') - First LockFile: '" + files[0] + "', Number LockFiles: '" + files.Length + "'");
             return true;
           }
           else
           {
-            LogMyFilms.Debug("GlobalLockIsActive() - No Global Lock detected !");
+            LogMyFilms.Debug("GlobalLockIsActive() - No Global Lock detected ! (DB-Config: '" + DB + "')");
             return false;
           }
         }

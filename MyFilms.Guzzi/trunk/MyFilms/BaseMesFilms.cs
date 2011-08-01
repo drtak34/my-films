@@ -245,6 +245,10 @@ namespace MyFilmsPlugin.MyFilms
             LogMyFilms.Error("LoadMesFilms() : Last Record: '" + data.Movie[data.Movie.Count - 1].Number.ToString() + "', title: '" + data.Movie[data.Movie.Count - 1].OriginalTitle.ToString() + "'");
             throw new Exception("Error reading xml database after " + data.Movie.Count.ToString() + " records; movie: '" + data.Movie[data.Movie.Count - 1].OriginalTitle + "'; error : " + e.Message.ToString());
           }
+          finally
+          {
+            // put final statements here
+          }
         }
 
         public static void LoadMyFilmsData(string datafile)
