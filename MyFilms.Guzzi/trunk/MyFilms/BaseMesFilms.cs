@@ -49,6 +49,7 @@ namespace MyFilmsPlugin.MyFilms
         private static AntMovieCatalog data; // Ant compatible File - with temp extended fields and person infos
         private static MyFilmsData myfilmsdata;
 
+        public static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 /*
         private static Dictionary<string, string> dataPath;
 */
@@ -63,10 +64,11 @@ namespace MyFilmsPlugin.MyFilms
         #region méthodes statique sprivées
         private static void initData()
         {
-            data = new AntMovieCatalog();
-            string catalogfile = MyFilms.conf.StrFileXml;
-            LogMyFilms.Debug("initData() - Try reading catalogfile '" + catalogfile + "'");
-            try
+          _dataLock.EnterReadLock();
+          data = new AntMovieCatalog();
+          string catalogfile = MyFilms.conf.StrFileXml;
+          LogMyFilms.Debug("initData() - Try reading catalogfile '" + catalogfile + "'");
+          try
             {
               using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
@@ -75,13 +77,15 @@ namespace MyFilmsPlugin.MyFilms
                   fs.Close();
                   LogMyFilms.Debug("initData()- closing  '" + catalogfile + "' FileStream");
                 }
-              
-              // data.ReadXml(MyFilms.conf.StrFileXml);
             }
-            catch (Exception e)
+          catch (Exception e)
             {
               LogMyFilms.Error("initData() : Error reading xml database after " + data.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
               throw e;
+            }
+          finally
+            {
+              _dataLock.ExitReadLock();
             }
         }
         private static void initDataMyFilms()
@@ -227,17 +231,24 @@ namespace MyFilmsPlugin.MyFilms
           {
             throw new Exception(string.Format("The file {0} does not exist !.", StrFileXml));
           }
+
+          _dataLock.EnterReadLock();
           data = new AntMovieCatalog();
+
+          string catalogfile = StrFileXml;
+          bool success = false;
+
+
           try
           {
-            using (FileStream fs = new FileStream(StrFileXml, FileMode.Open, FileAccess.Read, FileShare.Read))
+            //success = LoadMesFilmsFromDisk(StrFileXml);
+            using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-              LogMyFilms.Debug("LoadMesFilms()- opening '" + StrFileXml + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+              LogMyFilms.Debug("LoadMesFilms()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
               data.ReadXml(fs);
               fs.Close();
-              LogMyFilms.Debug("LoadMesFilms()- closing  '" + StrFileXml + "' FileStream");
+              LogMyFilms.Debug("LoadMesFilms()- closing  '" + catalogfile + "' FileStream");
             }
-            // data.ReadXml(StrFileXml);
           }
           catch (Exception e)
           {
@@ -247,7 +258,7 @@ namespace MyFilmsPlugin.MyFilms
           }
           finally
           {
-            // put final statements here
+            _dataLock.ExitReadLock();
           }
         }
 
@@ -284,86 +295,58 @@ namespace MyFilmsPlugin.MyFilms
             myfilmsdata.Dispose();
         }
 
-        public static bool SaveMesFilms()
+        public static bool SaveMesFilms(int timeout)
         {
           string catalogfile = MyFilms.conf.StrFileXml;
-          bool success = false; // result of write operation
-          int maxretries = 10; // max retries 10 * 1000 = 10 seconds
-          int i = 0;
+          bool success = false;
 
-          //lock (data)
-          //{
-          if (data != null)
+          if (data == null) 
+            return false;
+          if (timeout == 0) timeout = 10000; // defualt is 10 secs
+
+          if (_dataLock.TryEnterWriteLock(timeout))
           {
-            while (!success && i < maxretries)
+            try
             {
-              if (!MyFilmsDetail.GlobalLockIsActive(catalogfile)) // first check, if there is a global manual lock
+              success = SaveMesFilmsToDisk(catalogfile);
+            }
+            catch (Exception ex)
+            {
+              success = false;
+              LogMyFilms.DebugException("SaveMesFilms() - error saving data - exception: '" + ex.Message + "'", ex);
+              // throw;
+            }
+            finally
+            {
+              _dataLock.ExitWriteLock();
+            }
+
+            if (success)
+            {
+              try
               {
-                try
-                {
-                  MyFilmsDetail.SetGlobalLock(true, catalogfile);
-
-                  using (FileStream fs = new FileStream(catalogfile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
-                  {
-                    LogMyFilms.Debug("SaveMesFilms()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
-                    // data.ReadXml(fs); data alreadry in memory, only to be saved
-
-                    fs.SetLength(0); // do not append, owerwrite !
-
-                    using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
-                    {
-                      LogMyFilms.Debug("SaveMesFilms()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream");
-                      MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
-                      MyXmlTextWriter.WriteStartDocument();
-                      data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
-                      MyXmlTextWriter.Flush();
-                      MyXmlTextWriter.Close();
-
-                    }
-                    fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
-                    LogMyFilms.Debug("SaveMesFilms()- closing '" + catalogfile + "' FileStream and releasing file lock");
-                    success = true;
-                  }
-                }
-                catch (Exception ex)
-                {
-                  LogMyFilms.DebugException("SaveMesFilms()- error saving '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None", ex);
-                  // LogMyFilms.Debug("Commit()- exception while trying to save data in '" + catalogfile + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
-                  success = false;
-                }
-                finally
-                {
-                  MyFilmsDetail.SetGlobalLock(false, catalogfile);
-                }
+                SaveMyFilmsData(); // try to save extended data too
               }
-              else
+              catch (Exception)
               {
-                i += 1;
-                LogMyFilms.Info("SaveMesFilms() - Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
-                Thread.Sleep(1000);
+                LogMyFilms.Info("SaveMesFilms() - Saving MyFilmsData unsuccessful !");
               }
+
+              return true; // write successful!
+            }
+            else
+            {
+              MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+              dlgOk.SetHeading("Error");//my videos
+              dlgOk.SetLine(1, "Error during updating the XML database '" + catalogfile + "' !");
+              dlgOk.SetLine(2, "Maybe Directory full or no write access.");
+              dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
+              return false;
             }
           }
-          //}
-
-          try
-          {
-            SaveMyFilmsData(); // try to save extended data too
-          }
-          catch (Exception)
-          {
-            LogMyFilms.Info("SaveMesFilms() - Savinbg MyFilmsData unsuccessful !");
-          }
-
-          if (success)
-            return true; // write successful!
           else
           {
-            MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-            dlgOk.SetHeading("Error");//my videos
-            dlgOk.SetLine(1, "Error during updating the XML database '" + catalogfile + "' !");
-            dlgOk.SetLine(2, "Maybe Directory full or no write access.");
-            dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
+            LogMyFilms.Info("SaveMesFilms() - Movie Database could not get slim writelock for '" + timeout + "' ms - returning 'false'");
             return false;
           }
         }
@@ -413,6 +396,92 @@ namespace MyFilmsPlugin.MyFilms
             return true; // write successful!
         }
 
+        public static bool SaveMesFilmsToDisk(string catalogfile)
+        {
+          bool success = false; // result of write operation
+          int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+          int i = 0;
+          
+          while (!success && i < maxretries)
+          {
+            if (!MyFilmsDetail.GlobalLockIsActive(catalogfile)) // first check, if there is a global manual lock
+            {
+              try
+              {
+                MyFilmsDetail.SetGlobalLock(true, catalogfile);
+
+                using (FileStream fs = new FileStream(catalogfile, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                {
+                  LogMyFilms.Debug("SaveMesFilmsToDisk()- opening '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+
+                  fs.SetLength(0); // do not append, owerwrite !
+
+                  using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+                  {
+                    LogMyFilms.Debug("SaveMesFilmsToDisk()- writing '" + catalogfile + "' as MyXmlTextWriter in FileStream");
+                    MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
+                    MyXmlTextWriter.WriteStartDocument();
+                    data.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                    MyXmlTextWriter.Flush();
+                    MyXmlTextWriter.Close();
+                  }
+                  fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
+                  LogMyFilms.Debug("SaveMesFilmsToDisk()- closing '" + catalogfile + "' FileStream and releasing file lock");
+                  success = true;
+                }
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.DebugException("SaveMesFilmsToDisk()- error saving '" + catalogfile + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None", ex);
+                // LogMyFilms.Debug("Commit()- exception while trying to save data in '" + catalogfile + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
+                success = false;
+              }
+              finally
+              {
+                MyFilmsDetail.SetGlobalLock(false, catalogfile);
+              }
+            }
+            else
+            {
+              i += 1;
+              LogMyFilms.Info("SaveMesFilmsToDisk() - Movie Database locked on try '" + i + " of " + maxretries + "' to write, waiting for next retry");
+              Thread.Sleep(1000);
+            }
+          }
+          return success;
+        }
+
+        private bool LoadMesFilmsFromDisk(string catalogfile)
+        {
+          bool success = false; // result of write operation
+          int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+          int i = 0;
+
+          while (!success && i < maxretries)
+          {
+              try
+              {
+                using (FileStream fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                  LogMyFilms.Debug("LoadMesFilms()- opening '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read");
+                  data.ReadXml(fs);
+                  fs.Close();
+                  LogMyFilms.Debug("LoadMesFilms()- closing  '" + catalogfile + "' FileStream");
+                }
+                success = true;
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.DebugException("LoadMesFilmsFromDisk()- error reading '" + catalogfile + "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read", ex);
+                // LogMyFilms.Debug("Commit()- exception while trying to save data in '" + catalogfile + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
+                success = false;
+                throw ex;
+              }
+          }
+
+          return success;
+        }
+
         public static void CancelMesFilms()
         {
           if (data != null)
@@ -452,6 +521,7 @@ namespace MyFilmsPlugin.MyFilms
                 LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "'");
               if (System.IO.File.Exists(Catalog) && TraktEnabled)
               {
+                _dataLock.EnterReadLock();
                 try
                 {
                   dataExport.ReadXml(Catalog);
@@ -460,6 +530,10 @@ namespace MyFilmsPlugin.MyFilms
                 {
                   LogMyFilms.Error(": Error reading xml database after " + dataExport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
                   throw e;
+                }
+                finally
+                {
+                  _dataLock.ExitReadLock();
                 }
 
                 try
@@ -895,6 +969,7 @@ namespace MyFilmsPlugin.MyFilms
               LogMyFilms.Debug("Catalog Type is readonly (EC) - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
               return;
             }
+            BaseMesFilms._dataLock.EnterReadLock();
             try
             {
               using (FileStream fs = new FileStream(Catalog, FileMode.Open, FileAccess.Read, FileShare.Read))
@@ -951,11 +1026,14 @@ namespace MyFilmsPlugin.MyFilms
             {
               LogMyFilms.Error(": Error reading xml database after " + dataImport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
             }
+            finally
+            {
+              BaseMesFilms._dataLock.ExitReadLock();
+            }
 
             int maxretries = 10; // max retries 10 * 1000 = 10 seconds
             int i = 0;
             bool success = false; // result of update operation
-
 
             while (!success && i < maxretries)
             {
@@ -965,33 +1043,45 @@ namespace MyFilmsPlugin.MyFilms
                 MyFilmsDetail.SetGlobalLock(true, Catalog);
                 MyFilms.FSwatcher.EnableRaisingEvents = true; // re enable watcher - as myfilms should auto update dataset for current config, if update is done from trakt
 
-                try
+                if (BaseMesFilms._dataLock.TryEnterWriteLock(10000))
                 {
-                  using (FileStream fs = new FileStream(Catalog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+                  try
                   {
-                    LogMyFilms.Debug("Commit()- opening '" + Catalog + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
-                    fs.SetLength(0); // do not append, owerwrite !
-
-                    using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+                    using (FileStream fs = new FileStream(Catalog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
                     {
-                      LogMyFilms.Debug("Commit()- writing '" + Catalog + "' as MyXmlTextWriter in FileStream");
-                      MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
-                      MyXmlTextWriter.WriteStartDocument();
-                      dataImport.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
-                      MyXmlTextWriter.Flush();
-                      MyXmlTextWriter.Close();
+                      LogMyFilms.Debug("Commit()- opening '" + Catalog + "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+                      fs.SetLength(0); // do not append, owerwrite !
+
+                      using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+                      {
+                        LogMyFilms.Debug("Commit()- writing '" + Catalog + "' as MyXmlTextWriter in FileStream");
+                        MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented; // Added by Guzzi to get properly formatted output XML
+                        MyXmlTextWriter.WriteStartDocument();
+                        dataImport.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                        MyXmlTextWriter.Flush();
+                        MyXmlTextWriter.Close();
+                      }
+                      fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
+                      LogMyFilms.Debug("Commit()- closing '" + Catalog + "' FileStream and releasing file lock");
+                      success = true;
                     }
-                    fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
-                    LogMyFilms.Debug("Commit()- closing '" + Catalog + "' FileStream and releasing file lock");
-                    success = true;
                   }
+                  catch (Exception saveexeption)
+                  {
+                    LogMyFilms.Debug("Commit()- exception while trying to save data in '" + Catalog + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
+                    success = false;
+                  }
+                  finally
+                  {
+                    BaseMesFilms._dataLock.ExitWriteLock();
+                  }
+
+                  MyFilmsDetail.SetGlobalLock(false, Catalog);
                 }
-                catch (Exception saveexeption)
+                else
                 {
-                  LogMyFilms.Debug("Commit()- exception while trying to save data in '" + Catalog + "' - exception: " + saveexeption.Message + ", stacktrace: " + saveexeption.StackTrace);
-                  success = false;
+                  LogMyFilms.Debug("Commit()- timeout when waiting for slim writelock - could not write data!");
                 }
-                
                 MyFilmsDetail.SetGlobalLock(false, Catalog);
               }
               else

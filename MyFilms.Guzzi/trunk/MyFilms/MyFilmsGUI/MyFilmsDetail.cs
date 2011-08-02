@@ -2117,7 +2117,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  }
           //}
 
-          bool success = BaseMesFilms.SaveMesFilms(); 
+          bool success = BaseMesFilms.SaveMesFilms(10000); 
           if (!success)
           {
             if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms)
