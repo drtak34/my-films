@@ -2606,11 +2606,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (filmstrip != null)
         filmstrip.InfoImageFileName = item.ThumbnailImage;
 
-      if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label)
-      {
-        LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
-        return;
-      }
+      //if (facadeView.SelectedListItem.ItemId == Prev_ItemID && facadeView.SelectedListItem.Label == Prev_Label)
+      //{
+      //  LogMyFilms.Debug("(item_OnItemSelected): ItemId == Prev_ItemID (" + Prev_ItemID + ") && label == Prev_Label (" + Prev_Label + ") -> return without action !");
+      //  return;
+      //}
 
       MovieDetailsPublisher(item, true); // try: load MovieDetailsPublisher always ...
 
