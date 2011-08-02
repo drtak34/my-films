@@ -1556,8 +1556,6 @@
 		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	<control>
 		<type>image</type>
@@ -1568,26 +1566,24 @@
 		<width>20</width>
 		<height>20</height>
 		<texture>MyFilms\overlaywatched.png</texture>
-		<colordiffuse>eea9d0f7</colordiffuse>
+		<colordiffuse>ffffcc00</colordiffuse>
 		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	
 <!-- Watched Count -->
 		<control>
-			<description>User</description>
+			<description>User: Watched Count/Global User Count</description>
 			<type>fadelabel</type>
 			<id>1</id>
 			<posX>385</posX>
-			<posY>633</posY>
+			<posY>630</posY>
 			<width>280</width>
 			<label>#myfilms.user.watched.name: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
 			<font>font10</font>
 			<align>right</align>
-			<textcolor>6fffffff</textcolor>
+			<textcolor>ccffcc00</textcolor>
 			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.global)</visible>
 		</control>
 	
@@ -1597,7 +1593,7 @@
 			<type>fadelabel</type>
 			<id>1</id>
 			<posX>387</posX>
-			<posY>657</posY>
+			<posY>662</posY>
 			<width>80</width>
 			<label>Film:</label>
 			<font>font10</font>
@@ -1610,7 +1606,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>392</posX>
-			<posY>660</posY>
+			<posY>665</posY>
 			<width>20</width>
 			<height>20</height>
 			<texture>MyFilms\led_red.png</texture>
@@ -1624,7 +1620,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>392</posX>
-			<posY>660</posY>
+			<posY>665</posY>
 			<width>20</width>
 			<height>20</height>
 			<texture>MyFilms\led_green.png</texture>
@@ -1638,7 +1634,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>392</posX>
-			<posY>660</posY>
+			<posY>665</posY>
 			<width>20</width>
 			<height>20</height>
 			<texture>MyFilms\led_yellow.png</texture>
@@ -1652,7 +1648,7 @@
 			<type>image</type>
 			<id>0</id>
 			<posX>392</posX>
-			<posY>660</posY>
+			<posY>665</posY>
 			<width>20</width>
 			<height>20</height>
 			<texture>MyFilms\led_grey.png</texture>

@@ -71,7 +71,6 @@
 			<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 			<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-			<animation effect="fade" time="250">WindowOpen</animation>
 		</control>
 		<control>
 			<description>Top Gradient Overlay for Fanart View</description>
@@ -583,12 +582,12 @@
 		<description>Rating Value</description>
 		<type>label</type>
 		<id>1</id>
-		<posX>55</posX>
+		<posX>65</posX>
 		<posY>435</posY>
 		<label>(#myfilms.db.rating.value)</label>
 		<font>font10</font>
 		<align>right</align>
-		<textcolor>6fffffff</textcolor>
+		<textcolor>ffffcc00</textcolor>
 		<visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 	</control>
@@ -1534,8 +1533,6 @@
 		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	<control>
 		<type>image</type>
@@ -1546,17 +1543,15 @@
 		<width>16</width>
 		<height>16</height>
 		<texture>MyFilms\overlaywatched.png</texture>
-		<colordiffuse>eea9d0f7</colordiffuse>
+		<colordiffuse>ffffcc00</colordiffuse>
 		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 
 <!-- Watched Count -->
 		<control>
-			<description>User</description>
+			<description>User: Watched Count/Global User Count</description>
 			<type>fadelabel</type>
 			<id>1</id>
 			<posX>275</posX>
@@ -1565,7 +1560,7 @@
 			<label>#myfilms.user.watched.name: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
 			<font>font10</font>
 			<align>right</align>
-			<textcolor>6fffffff</textcolor>
+			<textcolor>ffffcc00</textcolor>
 			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.global)</visible>
 		</control>
 		<!-- <control>
@@ -1582,9 +1577,7 @@
 			<visible>!Control.HasFocus(10099)</visible>
 		</control> -->
 
-
 	<!-- Additional Display for Info Movie available -->
-
 		<control>
 			<description>Movie available Info Label</description>
 			<type>fadelabel</type>

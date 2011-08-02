@@ -379,6 +379,19 @@
 				</control>
 	<!-- End - Additional Buttons for Links to other Plugins -->
 		 </control>
+			<control>
+				<id>1</id>
+				<description>Update Status</description>
+				<label>#myfilms.statusmessage</label>
+				<type>fadelabel</type>
+				<posX>55</posX>
+				<posY>465</posY>
+				<width>250</width>
+				<textcolor>90a9d0f7</textcolor>
+				<visible>string.equals(#myfilms.statusmessage)+!control.hasfocus(50)</visible>
+				<animation effect="slide" time="450" start="-400,0">visible</animation>
+				<animation effect="slide" time="450" end="-400,0">hidden</animation>
+			</control>
 	</control>
     <control>
         	<type>group</type>
@@ -645,14 +658,14 @@
 			<label>(#myfilms.db.rating.value)</label>
 			<font>font10</font>
 			<align>left</align>
-			<textcolor>6fffffff</textcolor>
+			<textcolor>ffffcc00</textcolor>
 			<visible>!control.isvisible(34)+string.equals(#myfilms.db.rating.value)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia</visible>
 			<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		</control>
 		<control>
 			<type>imagelist</type>
 			<id>1</id>
-			<posX>110</posX>
+			<posX>120</posX>
 			<posY>563</posY>
 			<height>16</height>
 			<textureWidth>16</textureWidth>
@@ -1058,8 +1071,6 @@
 		<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
 	</control>
 	<control>
 		<type>image</type>
@@ -1074,8 +1085,19 @@
 		<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+!player.hasmedia+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
 		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
-		<animation effect="fade" time="250">WindowClose</animation>	
-		<animation effect="fade" time="250">WindowOpen</animation>
+	</control>
+	<control>
+		<description>Watched Count/Global User Count</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>335</posX>
+		<posY>557</posY>
+		<width>80</width>
+		<label>#myfilms.user.watched.count/#myfilms.user.watched.global</label>
+		<font>font10</font>
+		<align>left</align>
+		<textcolor>ffffcc00</textcolor>
+		<visible>!control.isvisible(34)+!facadeview.filmstrip+!facadeview.coverflow+string.equals(#myfilms.user.watched.global)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 	</control>
 
 <!-- Additional Display for Info Movie available -->
