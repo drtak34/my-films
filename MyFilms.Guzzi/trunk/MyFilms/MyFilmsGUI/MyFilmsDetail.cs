@@ -1082,8 +1082,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798776)); // 
                     choiceViewMenu.Add("trakt-Main");
 
-                    dlgmenu.Add(GUILocalizeStrings.Get(10798777)); // 
-                    choiceViewMenu.Add("trakt-Calendar");
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798777)); // 
+                    //choiceViewMenu.Add("trakt-Calendar");
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798778)); // 
                     choiceViewMenu.Add("trakt-Friends");
