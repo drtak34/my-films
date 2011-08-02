@@ -3817,7 +3817,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (reload) //chargement des films
         {
-          BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+          BaseMesFilms.LoadMyFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
           MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
         }
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
@@ -7880,7 +7880,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
         {
           // load dataset
-          BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
+          BaseMesFilms.LoadMyFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
           MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
           // (re)populate films
           r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
@@ -7953,7 +7953,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
               {
                 // reload data, as it might have changed while sleeping
-                BaseMesFilms.LoadMesFilms(conf.StrFileXml); // load dataset
+                BaseMesFilms.LoadMyFilms(conf.StrFileXml); // load dataset
                 MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
                 r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // (re)populate films
               }

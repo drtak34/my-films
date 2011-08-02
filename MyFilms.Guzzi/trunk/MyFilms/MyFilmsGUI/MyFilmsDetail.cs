@@ -2101,7 +2101,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  if (!GlobalLockIsActive(MyFilms.conf.StrFileXml))
           //  {
           //    SetGlobalLock(true, MyFilms.conf.StrFileXml);
-          //    bool writesuccessful = BaseMesFilms.SaveMesFilms();
+          //    bool writesuccessful = BaseMesFilms.SaveMyFilms();
           //    SetGlobalLock(false, MyFilms.conf.StrFileXml);
           //    if (writesuccessful)
           //    {
@@ -2117,7 +2117,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  }
           //}
 
-          bool success = BaseMesFilms.SaveMesFilms(10000); 
+          bool success = BaseMesFilms.SaveMyFilms(MyFilms.conf.StrFileXml, 10000); 
           if (!success)
           {
             if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms)
