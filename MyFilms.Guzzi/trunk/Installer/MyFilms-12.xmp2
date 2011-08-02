@@ -3496,7 +3496,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>1233</Revision>
+      <Revision>1255</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -3504,7 +3504,7 @@ Please refer to the Wiki online documentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1233(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1255(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -6581,14 +6581,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{93a2c60c-a932-4e2d-bfdb-a0bf707640ce}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{09f943d3-4651-4182-9767-fdfa1707b05a}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{1fc4aa3f-c373-4e7e-9f98-4c79f3d6bd60}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{1d37856a-d7aa-4e9a-8d2f-937bd700ae0b}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
