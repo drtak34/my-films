@@ -752,8 +752,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         
         InitFSwatcher(); // load DB watcher for multiseat
         
-        if (MyFilms.conf.StrFanart) if (!backdrop.Active) backdrop.Active = true;
-        else backdrop.Active = false;
+        if (MyFilms.conf.StrFanart)
+          Fanartstatus(true);
+        else
+          Fanartstatus(false);
       }
       if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
       {
@@ -2263,7 +2265,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else
       {
         //ImgFanart.SetVisibleCondition(1, true);  ->> This fucked up the fanart swapper !!!!!
-        if (!backdrop.Active) backdrop.Active = true;
+        Fanartstatus(true);
         GUIControl.HideControl(GetID, 34);
       }
       MyFilmsDetail.setGUIProperty("nbobjects.value", facadeView.Count.ToString());
@@ -2449,12 +2451,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string[] wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage.ToString(), currentItem.Path);
         if (wfanart[0] == " ")
         {
-          if (backdrop.Active) backdrop.Active = false;
+          Fanartstatus(false);
           GUIControl.HideControl(GetID, 35);
         }
         else
         {
-          if (!backdrop.Active) backdrop.Active = true;
+          Fanartstatus(true);
           GUIControl.ShowControl(GetID, 35);
         }
         backdrop.Filename = wfanart[0];
@@ -2508,12 +2510,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("(Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         if (wfanart[0] == " ")
         {
-          if (backdrop.Active) backdrop.Active = false;
+          Fanartstatus(false);
           GUIControl.HideControl(GetID, 35);
         }
         else
         {
-          if (!backdrop.Active) backdrop.Active = true;
+          Fanartstatus(true);
           GUIControl.ShowControl(GetID, 35);
         }
         backdrop.Filename = wfanart[0];
@@ -3385,8 +3387,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        if (!backdrop.Active)
-          backdrop.Active = true;
+        Fanartstatus(true);
         GUIControl.ShowControl(GetID, 34);
 
         if (isperson) //Make a difference between movies and persons -> Load_Detailed_DB or Load_Detailed_PersonInfo
@@ -4265,9 +4266,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             InitialStart = false; // Guzzi: Set InitialStart to false after initialization done
 
             if (MyFilms.conf.StrFanart)
-              backdrop.Active = true;
+              Fanartstatus(true);
             else
-              backdrop.Active = false;
+              Fanartstatus(false);
           }
           else
             GUIControl.HideControl(GetID, 34); // show elements in skin
@@ -5808,12 +5809,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string[] wfanart = MyFilmsDetail.Search_Fanart(facadeView.SelectedListItem.Label, true, "file", false, facadeView.SelectedListItem.ThumbnailImage, string.Empty);
           if (wfanart[0] == " ")
           {
-            backdrop.Active = false;
+            Fanartstatus(false);
             GUIControl.HideControl(GetID, 35);
           }
           else
           {
-            backdrop.Active = true;
+            Fanartstatus(true);
             GUIControl.ShowControl(GetID, 35);
           }
           LogMyFilms.Debug("(Backdrops-NewfromContext): backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
@@ -8620,7 +8621,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         // Activate Backdrop in Image Swapper                
-        if (!backdrop.Active) backdrop.Active = true;
+        Fanartstatus(true);
 
         // Assign Fanart filename to Image Loader
         // Will display fanart in backdrop or reset to default background                
@@ -8734,10 +8735,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       m_bFanartTimerDisabled = true;
 
       // Disable Fanart                
-      if (backdrop.Active) backdrop.Active = false;
+      Fanartstatus(false);
       backdrop.Filename = String.Empty;
       MyFilmsDetail.clearGUIProperty("currentfanart");
       LogMyFilms.Debug("(DisableFanart): Fanart disabled !");
+    }
+
+    private void Fanartstatus(bool status)
+    {
+      if (backdrop == null)
+        backdrop = new ImageSwapper();
+
+      if (status == true)
+      {
+        if (!backdrop.Active)
+          backdrop.Active = true;
+      }
+      else
+      {
+        if (backdrop.Active)
+          backdrop.Active = false;
+      }
+      LogMyFilms.Debug("Fanartstatus switched to '" + status + "'");
     }
 
     private void ShowMessageDialog(string headline, string line1, string line2)
