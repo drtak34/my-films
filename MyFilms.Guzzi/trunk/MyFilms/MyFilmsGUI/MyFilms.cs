@@ -631,9 +631,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIConnector.Instance.StopBackgroundTask();
 
       loadParamInfo.SafeDispose();
-      // Reset to force republishing details on reentering
-      Prev_ItemID = -1;
-      Prev_Label = string.Empty;
+      //// Reset to force republishing details on reentering
+      //Prev_ItemID = -1;
+      //Prev_Label = string.Empty;
       //if (!bgOnPageLoad.CancellationPending) // cancel pageload worker thread - otherwise null ref exception when trying to populate facade ...
       //  bgOnPageLoad.CancelAsync();
       //Thread.Sleep(5); // sleep 5 milliseconds
