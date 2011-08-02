@@ -8276,6 +8276,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!bgIsOnlineCheck.IsBusy)
       {
         LogMyFilms.Info("AsynIsOnlineCheck() - Check IsOnline  started in batch mode");
+        MyFilmsDetail.setGUIProperty("statusmessage", "Availability Scanner started ...", false);
         bgIsOnlineCheck.RunWorkerAsync(MyFilms.r);
       }
       else
