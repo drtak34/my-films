@@ -303,9 +303,9 @@ namespace MyFilmsPlugin.MyFilms
           if (data == null) 
             return false;
           if (timeout == 0) timeout = 10000; // defualt is 10 secs
-
-          if (_dataLock.TryEnterWriteLock(timeout))
+          LogMyFilms.Debug("TryEnterWriteLock(" + timeout + ") - CurrentReadCount = '" + _dataLock.CurrentReadCount + "', RecursiveReadCount = '" + _dataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _dataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _dataLock.RecursiveWriteCount + "'"); if (_dataLock.TryEnterWriteLock(timeout))
           {
+            LogMyFilms.Debug("TryEnterWriteLock(" + timeout + ") - CurrentReadCount = '" + _dataLock.CurrentReadCount + "', RecursiveReadCount = '" + _dataLock.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _dataLock.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _dataLock.RecursiveWriteCount + "'");
             try
             {
               success = SaveMesFilmsToDisk(catalogfile);

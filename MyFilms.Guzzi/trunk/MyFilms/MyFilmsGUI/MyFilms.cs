@@ -299,7 +299,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private bool StopDownload { get; set; }
     //private Layout CurrentLayout { get; set; }
 
-    public static ReaderWriterLockSlim _rw = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+    // public static ReaderWriterLockSlim _rw = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
     public int Layout = 0;
     public static int Prev_ItemID = -1;
@@ -1994,10 +1994,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("GetFilmList started: BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false)");
       SetFilmSelect();
       string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      MyFilms._rw.EnterUpgradeableReadLock();
-      LogMyFilms.Debug("EnterUpgradeableReadLock() - CurrentReadCount = '" + _rw.CurrentReadCount + "', RecursiveReadCount = '" + _rw.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _rw.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _rw.RecursiveWriteCount + "'");
       r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
-      MyFilms._rw.ExitUpgradeableReadLock();
       LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrFilmSelect:          '" + conf.StrFilmSelect + "'");
@@ -3820,11 +3817,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (reload) //chargement des films
         {
-          _rw.EnterUpgradeableReadLock();
-          LogMyFilms.Debug("EnterUpgradeableReadLock() - CurrentReadCount = '" + _rw.CurrentReadCount + "', RecursiveReadCount = '" + _rw.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _rw.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _rw.RecursiveWriteCount + "'");
           BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
-          _rw.ExitUpgradeableReadLock();
-          MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml);
+          MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
         }
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
       }
@@ -7885,14 +7879,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
         {
-          _rw.EnterUpgradeableReadLock();
-          LogMyFilms.Debug("EnterUpgradeableReadLock() - CurrentReadCount = '" + _rw.CurrentReadCount + "', RecursiveReadCount = '" + _rw.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _rw.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _rw.RecursiveWriteCount + "'");
           // load dataset
           BaseMesFilms.LoadMesFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
           MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
           // (re)populate films
           r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
-          _rw.ExitUpgradeableReadLock();
         }
         else
         {
@@ -7962,12 +7953,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
               {
                 // reload data, as it might have changed while sleeping
-                _rw.EnterUpgradeableReadLock();
-                LogMyFilms.Debug("EnterUpgradeableReadLock() - CurrentReadCount = '" + _rw.CurrentReadCount + "', RecursiveReadCount = '" + _rw.RecursiveReadCount + "', RecursiveUpgradeCount = '" + _rw.RecursiveUpgradeCount + "', RecursiveWriteCount = '" + _rw.RecursiveWriteCount + "'");
                 BaseMesFilms.LoadMesFilms(conf.StrFileXml); // load dataset
                 MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
                 r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // (re)populate films
-                _rw.ExitUpgradeableReadLock();
               }
               else
               {
