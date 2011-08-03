@@ -320,6 +320,7 @@
           this.AntFilterItem1 = new System.Windows.Forms.ComboBox();
           this.AntFilterText1 = new System.Windows.Forms.TextBox();
           this.groupBox_DefaultView = new System.Windows.Forms.GroupBox();
+          this.chkGlobalAvailableOnly = new System.Windows.Forms.CheckBox();
           this.chkUseListviewForGroups = new System.Windows.Forms.CheckBox();
           this.chkGlobalUnwatchedOnly = new System.Windows.Forms.CheckBox();
           this.label10 = new System.Windows.Forms.Label();
@@ -498,7 +499,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.chkGlobalAvailableOnly = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
@@ -694,14 +694,14 @@
           this.labelTraktDescription.AutoSize = true;
           this.labelTraktDescription.Location = new System.Drawing.Point(42, 100);
           this.labelTraktDescription.Name = "labelTraktDescription";
-          this.labelTraktDescription.Size = new System.Drawing.Size(599, 104);
+          this.labelTraktDescription.Size = new System.Drawing.Size(593, 130);
           this.labelTraktDescription.TabIndex = 2;
           this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
           // 
           // linkLabelTrakt
           // 
           this.linkLabelTrakt.AutoSize = true;
-          this.linkLabelTrakt.Location = new System.Drawing.Point(42, 234);
+          this.linkLabelTrakt.Location = new System.Drawing.Point(42, 256);
           this.linkLabelTrakt.Name = "linkLabelTrakt";
           this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
           this.linkLabelTrakt.TabIndex = 1;
@@ -3099,6 +3099,17 @@
           this.groupBox_DefaultView.Text = "Default Start View";
           this.ToolTip1.SetToolTip(this.groupBox_DefaultView, resources.GetString("groupBox_DefaultView.ToolTip"));
           // 
+          // chkGlobalAvailableOnly
+          // 
+          this.chkGlobalAvailableOnly.AutoSize = true;
+          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(183, 130);
+          this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
+          this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
+          this.chkGlobalAvailableOnly.TabIndex = 82;
+          this.chkGlobalAvailableOnly.Text = "Show only available movies";
+          this.ToolTip1.SetToolTip(this.chkGlobalAvailableOnly, resources.GetString("chkGlobalAvailableOnly.ToolTip"));
+          this.chkGlobalAvailableOnly.UseVisualStyleBackColor = true;
+          // 
           // chkUseListviewForGroups
           // 
           this.chkUseListviewForGroups.AutoSize = true;
@@ -5001,17 +5012,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // chkGlobalAvailableOnly
-          // 
-          this.chkGlobalAvailableOnly.AutoSize = true;
-          this.chkGlobalAvailableOnly.Location = new System.Drawing.Point(183, 130);
-          this.chkGlobalAvailableOnly.Name = "chkGlobalAvailableOnly";
-          this.chkGlobalAvailableOnly.Size = new System.Drawing.Size(156, 17);
-          this.chkGlobalAvailableOnly.TabIndex = 82;
-          this.chkGlobalAvailableOnly.Text = "Show only available movies";
-          this.ToolTip1.SetToolTip(this.chkGlobalAvailableOnly, resources.GetString("chkGlobalAvailableOnly.ToolTip"));
-          this.chkGlobalAvailableOnly.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 

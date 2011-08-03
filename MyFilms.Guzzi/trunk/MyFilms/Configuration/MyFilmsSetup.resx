@@ -146,8 +146,10 @@ Based on your favorites, your friends, and the community, trakt recommends other
 You need to have the trakt plugin installed and configure a user account.
 If you don't have a useraccount, you can register on trakt website.
 
-To successfully use Trakt with MyFilms, you have to both allow MyFilms to provide data to Tralt plugin by enabloing Trakt here
-and you have to enable MyFilms in Trakt setup (setup or from GUI)</value>
+To successfully use Trakt with MyFilms, you have to both allow MyFilms to provide data to Tralt plugin by enabling Trakt here
+and you have to enable MyFilms in Trakt setup (setup or from GUI)
+
+You can enable or disable Trakt synchronisation separately for each MyFilms config.</value>
   </data>
   <data name="cbAllowTraktSync.ToolTip" xml:space="preserve">
     <value>If enabled, TRAKT plugin is allowed to synchronize your movie data
