@@ -107,6 +107,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
               this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
               this.buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
+              this.btnWatchedExport.Visible = false; // disable export/import for watched status (not yet implemented)
+              this.btnWatchedImport.Visible = false; // disable export/import for watched status (not yet implemented)
               // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
               CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
               CatalogType.Items.Remove("MyFilms extended Database");
@@ -5386,6 +5388,51 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             textBoxGlobalUnwatchedOnlyValue.Enabled = true;
             UserProfileName.Enabled = false;
+          }
+        }
+
+        private void btnWatchedExport_Click(object sender, EventArgs e)
+        {
+          SaveFileDialog fd = new SaveFileDialog();
+          fd.Filter = "Exported Watched Info (*.watched)|*.watched";
+          if (fd.ShowDialog() == DialogResult.OK)
+          {
+            StreamWriter w = new StreamWriter(fd.FileName);
+
+            string val = ""; // ToDo: get infos per record here
+              try
+              {
+                w.WriteLine((string)val);
+              }
+              catch (IOException exception)
+              {
+                LogMyFilms.Debug("Watched info NOT exported!  Error: " + exception.ToString());
+                return;
+              }
+            w.Close();
+            LogMyFilms.Debug("Watched info succesfully exported!");
+          }
+
+        }
+
+        private void btnWatchedImport_Click(object sender, EventArgs e)
+        {
+          OpenFileDialog fd = new OpenFileDialog();
+          fd.Filter = "Exported Watched Info (*.watched)|*.watched";
+          if (fd.ShowDialog() == DialogResult.OK && System.IO.File.Exists(fd.FileName))
+          {
+            StreamReader r = new StreamReader(fd.FileName);
+
+            string line = string.Empty;
+            // set unwatched for all
+            // ToDo: Initialize Watched for all here
+            // now set watched for all in file
+            while ((line = r.ReadLine()) != null)
+            {
+              // ToDo: Set watched per line to DB here
+            }
+            r.Close();
+            LogMyFilms.Debug("Watched info succesfully imported!");
           }
         }
 

@@ -499,6 +499,8 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.btnWatchedExport = new System.Windows.Forms.Button();
+          this.btnWatchedImport = new System.Windows.Forms.Button();
           this.Tab_Trakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
@@ -2345,6 +2347,8 @@
           // 
           // groupBox2
           // 
+          this.groupBox2.Controls.Add(this.btnWatchedImport);
+          this.groupBox2.Controls.Add(this.btnWatchedExport);
           this.groupBox2.Controls.Add(this.lblUnwatchedItemsValue);
           this.groupBox2.Controls.Add(this.textBoxGlobalUnwatchedOnlyValue);
           this.groupBox2.Controls.Add(this.CheckWatchedPlayerStopped);
@@ -2384,11 +2388,11 @@
           this.CheckWatchedPlayerStopped.AutoSize = true;
           this.CheckWatchedPlayerStopped.Location = new System.Drawing.Point(10, 34);
           this.CheckWatchedPlayerStopped.Name = "CheckWatchedPlayerStopped";
-          this.CheckWatchedPlayerStopped.Size = new System.Drawing.Size(332, 17);
+          this.CheckWatchedPlayerStopped.Size = new System.Drawing.Size(238, 17);
           this.CheckWatchedPlayerStopped.TabIndex = 75;
-          this.CheckWatchedPlayerStopped.Text = "Update the \'Watched\' field when playback is stopped or finished.";
-          this.ToolTip1.SetToolTip(this.CheckWatchedPlayerStopped, "watched status will be set if:\r\n- movie ended\r\n- movie was stopped at a playtime " +
-                  ">= 80%");
+          this.CheckWatchedPlayerStopped.Text = "Update when playback is stopped or finished";
+          this.ToolTip1.SetToolTip(this.CheckWatchedPlayerStopped, "Watched status (by updating the field configured for Watched) will be set if:\r\n- " +
+                  "movie ended\r\n- movie was stopped at a playtime >= 80%");
           this.CheckWatchedPlayerStopped.UseVisualStyleBackColor = true;
           this.CheckWatchedPlayerStopped.CheckedChanged += new System.EventHandler(this.CheckWatchedPlayerStopped_CheckedChanged);
           // 
@@ -2444,10 +2448,11 @@
           this.CheckWatched.AutoSize = true;
           this.CheckWatched.Location = new System.Drawing.Point(10, 15);
           this.CheckWatched.Name = "CheckWatched";
-          this.CheckWatched.Size = new System.Drawing.Size(269, 17);
+          this.CheckWatched.Size = new System.Drawing.Size(178, 17);
           this.CheckWatched.TabIndex = 69;
-          this.CheckWatched.Text = "Update the \'Watched\' field when movie is launched";
-          this.ToolTip1.SetToolTip(this.CheckWatched, "watched status will be set if:\r\n- movie is started");
+          this.CheckWatched.Text = "Update when movie is launched";
+          this.ToolTip1.SetToolTip(this.CheckWatched, "Watched status (by updating the field configured for Watched) will be set if:\r\n- " +
+                  "movie is started");
           this.CheckWatched.UseVisualStyleBackColor = true;
           this.CheckWatched.CheckedChanged += new System.EventHandler(this.CheckWatched_CheckedChanged);
           // 
@@ -5013,6 +5018,26 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // btnWatchedExport
+          // 
+          this.btnWatchedExport.Location = new System.Drawing.Point(273, 11);
+          this.btnWatchedExport.Name = "btnWatchedExport";
+          this.btnWatchedExport.Size = new System.Drawing.Size(75, 21);
+          this.btnWatchedExport.TabIndex = 85;
+          this.btnWatchedExport.Text = "export";
+          this.btnWatchedExport.UseVisualStyleBackColor = true;
+          this.btnWatchedExport.Click += new System.EventHandler(this.btnWatchedExport_Click);
+          // 
+          // btnWatchedImport
+          // 
+          this.btnWatchedImport.Location = new System.Drawing.Point(273, 33);
+          this.btnWatchedImport.Name = "btnWatchedImport";
+          this.btnWatchedImport.Size = new System.Drawing.Size(75, 21);
+          this.btnWatchedImport.TabIndex = 86;
+          this.btnWatchedImport.Text = "import";
+          this.btnWatchedImport.UseVisualStyleBackColor = true;
+          this.btnWatchedImport.Click += new System.EventHandler(this.btnWatchedImport_Click);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5541,5 +5566,7 @@
         private Label labelTraktDescription;
         private PictureBox pictureBox1;
         private CheckBox chkGlobalAvailableOnly;
+        private Button btnWatchedImport;
+        private Button btnWatchedExport;
     }
 }
