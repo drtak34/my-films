@@ -748,10 +748,15 @@ Public Class Form1
             btnShowHideLog.Text = "Show Log >>"
             btnShowHideLogTest.Text = "Show Log >>"
         Else
-            dgLogWindow.Height = Me.Height
-            dgLogWindow.SetDesktopLocation(Me.Location.X + Me.Width, Me.Location.Y)
+            dgLogWindow.SetDesktopLocation(Me.Location.X, Me.Location.Y + Me.Height)
+            dgLogWindow.Width = Me.Width
+            'dgLogWindow.Height = 150
             dgLogWindow.Show()
-            'Me.AddOwnedForm(dgLogWindow)
+
+            'dgLogWindow.Height = Me.Height
+            'dgLogWindow.SetDesktopLocation(Me.Location.X + Me.Width, Me.Location.Y)
+            'dgLogWindow.Show()
+            ''Me.AddOwnedForm(dgLogWindow)
 
             btnShowHideLog.Text = "<< Hide Log"
             btnShowHideLogTest.Text = "<< Hide Log"

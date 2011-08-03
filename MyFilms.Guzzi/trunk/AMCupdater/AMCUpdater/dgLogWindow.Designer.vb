@@ -36,7 +36,7 @@ Partial Class dgLogWindow
         Me.txtLogWindow.Name = "txtLogWindow"
         Me.txtLogWindow.ReadOnly = True
         Me.txtLogWindow.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtLogWindow.Size = New System.Drawing.Size(492, 498)
+        Me.txtLogWindow.Size = New System.Drawing.Size(492, 138)
         Me.txtLogWindow.TabIndex = 1
         Me.txtLogWindow.WordWrap = False
         '
@@ -44,7 +44,7 @@ Partial Class dgLogWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(516, 522)
+        Me.ClientSize = New System.Drawing.Size(516, 162)
         Me.Controls.Add(Me.txtLogWindow)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.MaximizeBox = False
