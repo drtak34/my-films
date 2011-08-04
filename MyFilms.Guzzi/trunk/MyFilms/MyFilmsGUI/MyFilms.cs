@@ -6813,14 +6813,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //conf.StrTxtSelect = "Selection " + wproperty + " [*" + wproperty2 + @"*]";
           conf.StrTitleSelect = string.Empty;
 
-          // Temporarily Enabled for Testing
-          // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
-          //GetFilmList();
-
           // we have: wproperty = selected category (randomall for all) and wproperty2 = value to search after
 
-          //if (wproperty2 == string.Format(GUILocalizeStrings.Get(10798623)))
-          //    wproperty2 = "";                                                    // Should not be done, because it is already handled in searchroutine
           ArrayList w_index = new ArrayList();
           int w_index_count = 0;
           string t_number_id = string.Empty;
