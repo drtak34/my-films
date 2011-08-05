@@ -323,12 +323,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private AsyncImageResource personcover = null;
 
     // Guzzi: Added from TV-Series for Fanarttoggling
-    private System.Threading.Timer m_FanartTimer = null;
+
+    private System.Threading.Timer _fanartTimer = null;
 
     // Guzzi: Added to proper handle listlevels
     private static Listlevel currentListLevel = Listlevel.Movie;
-
-    private bool m_bFanartTimerDisabled = false;
 
     //Guzzi Addons for Global nonpermanent Trailer and MinRating Filters
     public bool GlobalFilterTrailersOnly = false;
@@ -346,8 +345,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static bool InitialStart = false; //Added to implement InitialViewSetup
     public static bool InitialIsOnlineScan = false; //Added to implement switch if facade should display media availability
 
+    // current Random Fanart
+    public static List<string> currentFanartList = new List<string>();
+
     private double lastPublished = 0;
     private Timer publishTimer;
+
+    private const int RandomFanartDelay = 15000;
 
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
@@ -497,6 +501,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() + "',   BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
       LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion.ToString() + "', BuildDate: '" + MyFilmsSettings.MPBuildDate.ToString() + "'");
 
+      // Fanart Timer
+      _fanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
+
       // Set Variable for FirstTimeView Setup
       InitialStart = true;
 
@@ -640,9 +647,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Set Facadevisibilities false ...
       //SetDummyControlsForFacade(Listlevel.None);
 
-      // Disable Random Fanart Timer
-      //m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
-      //m_bFanartTimerDisabled = true;
+      //Disable Random Fanart Timer
+      _fanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
+
       //MyFilmsDetail.clearGUIProperty("Fanart");
       //MyFilmsDetail.clearGUIProperty("Fanart2");
 
@@ -2364,6 +2371,231 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+
+    bool GetMoviesInGroup(ref ArrayList fanartItems)
+    {
+      LogMyFilms.Debug("GetRandomFanartForGroups started: BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false)");
+
+      string s = "";
+      string StrSelect = string.Empty;
+      if (conf.Boolselect)
+      {
+        string sLabel = facadeView.SelectedListItem.Label;
+        if ((conf.WStrSort == "Date") || (conf.WStrSort == "DateAdded"))
+          StrSelect = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
+        else
+        {
+          if (sLabel == "")
+            StrSelect = conf.WStrSort + " is NULL";
+          else
+            StrSelect = conf.WStrSort + " like '*" + sLabel.Replace("'", "''") + "*'";
+        }
+      }
+
+      if (StrSelect != "")
+        s = StrSelect + " And ";
+      if (conf.StrTitleSelect != "") //' in blake's seven causes fuckup
+        s = s + String.Format("{0} like '{1}{2}*'", conf.StrTitle1.ToString(), conf.StrTitleSelect.Replace("'", "''"), conf.TitleDelim);
+      else
+        s = s + conf.StrTitle1.ToString() + " not like ''";
+      string StrFilmSelect = s;
+
+      ArrayList RandomFanartItems = new ArrayList();
+
+      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
+      LogMyFilms.Debug("(GetRandomFanartForGroups) - GlobalFilterString:          '" + GlobalFilterString + "'");
+      LogMyFilms.Debug("(GetRandomFanartForGroups) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
+      LogMyFilms.Debug("(GetRandomFanartForGroups) - conf.StrFilmSelect:          '" + StrFilmSelect + "'");
+      LogMyFilms.Debug("(GetRandomFanartForGroups) - conf.StrSorta:               '" + conf.StrSorta + "'");
+      LogMyFilms.Debug("(GetRandomFanartForGroups) - conf.StrSortSens:            '" + conf.StrSortSens + "'");
+      LogMyFilms.Debug("(GetRandomFanartForGroups) - Count:                       '" + r.Length + "'");
+      int iCnt = 0;
+      int DelimCnt = 0, DelimCnt2;
+      GUIListItem item = new GUIListItem();
+      string sTitle;
+      string sFullTitle;
+      string sPrevTitle = "";
+      //string SelItem = gSelItem.ToString();
+      //int iSelItem = -2;
+
+      // if (typeof(T) == typeof(int)) iSelItem = Int32.Parse(SelItem);
+
+      if (conf.StrTitleSelect != "") DelimCnt = NewString.PosCount(conf.TitleDelim, conf.StrTitleSelect, false) + 1; //get num .'s in title
+      //----------------------------------------------------------------------------------------
+      // Load the DataSet.
+      int number = -1;
+      ArrayList w_tableau = new ArrayList();
+      bool isdate = false;
+      if (conf.WStrSort == "Date" || conf.WStrSort == "DateAdded") isdate = true;
+
+      foreach (DataRow sr in r)
+      {
+        number++;
+        if (conf.Boolreturn)//in case of selection by view verify if value correspond excatly to the searched string
+        {
+          w_tableau = Search_String(sr[conf.WStrSort].ToString());
+          foreach (object t in w_tableau)
+          {
+            if (isdate)
+            {
+              if (string.Format("{0:dd/MM/yyyy}", DateTime.Parse(t.ToString()).ToShortDateString()) == string.Format("{0:dd/MM/yyyy}", DateTime.Parse(conf.Wselectedlabel).ToShortDateString()))
+                goto suite;
+            }
+            else
+            {
+              if (t.ToString().ToLower().Contains(conf.Wselectedlabel.Trim().ToLower()))
+                goto suite;
+            }
+          }
+          goto fin;
+        }
+      suite:
+
+        sFullTitle = sTitle = sr[conf.StrTitle1].ToString();
+        DelimCnt2 = NewString.PosCount(conf.TitleDelim, sTitle, false);
+        if (DelimCnt <= DelimCnt2)
+        {
+          sTitle = NewString.NPosMid(conf.TitleDelim, sTitle, DelimCnt, DelimCnt + 1, false, false); //get current substring (folder) within path
+          sFullTitle = NewString.NPosRight(conf.TitleDelim, sFullTitle, DelimCnt, false, false); //current rest of path (if only 1 entry in subfolders will present entry ignoring folders)
+        }
+        if ((iCnt > 0) && (DelimCnt < DelimCnt2) && (sTitle == sPrevTitle)) // don't stack items already at lowest folder level
+        {
+          iCnt++;
+          item.Label2 = "(" + iCnt.ToString() + ")  " + NewString.PosRight(")  ", item.Label2);// prepend (items in folder count)
+          if (iCnt == 2)
+          {
+            item.Label = sTitle; //reset to current single folder as > 1 entries
+            item.IsFolder = true;
+          }
+        }
+        else
+        {
+          iCnt = 1;
+          item = new GUIListItem();
+          item.Label = sFullTitle; // Set = full subfolders path initially
+          item.ItemId = number;
+          if (!item.IsFolder)
+            RandomFanartItems.Add(item);
+        }
+      fin: ;
+      }
+      fanartItems = RandomFanartItems;
+      return !(RandomFanartItems.Count == 1 && item.IsFolder); //ret false if single folder found
+    }
+
+    private bool GetRandomFanartForGroups(int limit)
+    {
+      ArrayList fanartItems = new ArrayList();
+      int i = 0;
+      GetMoviesInGroup(ref fanartItems);
+      currentFanartList.Clear(); // clear list from former content
+      foreach (GUIListItem randomFanartItem in fanartItems)
+      {
+        string[] wfanart = new string[2];
+
+        wfanart = MyFilmsDetail.Search_Fanart(randomFanartItem.Label, true, "file", false, string.Empty, string.Empty);
+        if (wfanart[0] != " " && wfanart[0] != MyFilms.conf.DefaultFanartImage && !currentFanartList.Contains(wfanart[0]))
+        {
+          currentFanartList.Add(wfanart[0]);
+          LogMyFilms.Debug("GetRandomFanartForGroups() - added fanart #" + currentFanartList.Count + " : '" + wfanart[0] + "'");
+          i += 1;
+          if (i >= limit && limit != 0)
+            return true;
+        }
+      }
+      if (currentFanartList.Count > 0)
+        return true;
+      else
+        return false;
+    }
+
+    private bool GetRandomFanartForFilms(int limit)
+    {
+      int i = 0;
+      string fanartDirectory = string.Empty;
+      currentFanartList.Clear(); // clear list from former content
+      string[] wfanart = new string[2];
+
+      wfanart = MyFilmsDetail.Search_Fanart(facadeView.SelectedListItem.Label, false, "dir", false, "false", string.Empty);
+
+      if (wfanart[1] == "dir")
+        fanartDirectory = wfanart[0];
+
+      if (!string.IsNullOrEmpty(fanartDirectory) && System.IO.Directory.Exists(fanartDirectory))
+      {
+        string searchname = "*.jpg";
+        string[] files = Directory.GetFiles(fanartDirectory, searchname, SearchOption.TopDirectoryOnly);
+        if (files.Length > 0)
+          foreach (string file in files)
+          {
+            if (!currentFanartList.Contains(file))
+            {
+              currentFanartList.Add(file);
+              LogMyFilms.Debug("GetRandomFanartForFilms() - added fanart #" + currentFanartList.Count + " : '" + file + "'");
+              i += 1;
+              if (i >= limit && limit != 0)
+                return true;
+            }
+          }
+      }
+      if (currentFanartList.Count > 0)
+        return true;
+      else
+        return false;
+    }
+
+
+    private string GetNewRandomFanart(bool reset, bool movie)
+    {
+      string newFanart = " ";
+      bool success = false;
+      int errorcount = 0;
+
+      if (reset)
+      {
+        currentFanartList.Clear();
+        if (movie) 
+          GetRandomFanartForFilms(50);
+        else
+          GetRandomFanartForGroups(50); // Limit items for performance reasons...
+      }
+      if (currentFanartList.Count == 0)
+        newFanart = " ";
+      else if (currentFanartList.Count == 1) 
+        newFanart = currentFanartList[0];
+      else if (currentFanartList.Count > 1)
+      {
+        while (!success && errorcount < 10)
+        {
+          try
+          {
+            //Choose Random Fanart from Resultlist
+            System.Random rnd = new System.Random();
+            Int32 randomFanartIndex = rnd.Next(currentFanartList.Count);
+            newFanart = currentFanartList[randomFanartIndex];
+            if (newFanart != backdrop.Filename)
+            {
+              success = true;
+              LogMyFilms.Debug("GetNewRandomFanart() - Available: '" + currentFanartList.Count + "', selected ID: '" + randomFanartIndex + "', selected Path: '" + newFanart + "'");
+            }
+            else
+            {
+              errorcount += 1;
+              Thread.Sleep(25);
+            }
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.DebugException("GetNewRandomFanart() - error, invalid index !", ex);
+            errorcount += 1;
+            success = false;
+          }
+        }
+      }
+      return newFanart;
+    }
+
     public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
     {
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0"))
@@ -2439,6 +2671,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         LogMyFilms.Debug("(Load_Lstdetail): Item is Folder and BoolSelect is true");
         string[] wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage.ToString(), currentItem.Path);
+        if (conf.StrFanartDefaultViewsUseRandom)
+        {
+          string GroupFanart = GetNewRandomFanart(true, false); // resets and populates fanart list and selects a random one
+          if (GroupFanart != " ")
+          {
+            wfanart[0] = GroupFanart;
+          }
+        }
         if (wfanart[0] == " ")
         {
           Fanartstatus(false);
@@ -2473,13 +2713,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         filmcover.Filename = conf.FileImage; // Added for backwardcompatibility - might be removed in later releases, when skins are changed
 
         //GUIControl.ShowControl(GetID, 34);
-        // Load_Rating(0); // old method - nor more used
+        //Load_Rating(0); // old method - nor more used
         Load_Logos(MyFilms.r[currentItem.ItemId], false); // reset logos
 
       }
       else
       {
         LogMyFilms.Debug("(Load_Lstdetail): Item is Movie itself!");
+        if (conf.StrFanartDefaultViewsUseRandom)
+          currentFanartList.Clear();
+
         string[] wfanart = new string[2];
 
         string wtitle = currentItem.Label;
@@ -2497,6 +2740,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         wfanart = MyFilmsDetail.Search_Fanart(wtitle, true, "file", false, currentItem.ThumbnailImage, string.Empty);
+        if (conf.StrFanartDefaultViewsUseRandom)
+        {
+          string FilmFanart = GetNewRandomFanart(true, true); // resets and populates fanart list and selects a random one
+          if (FilmFanart != " ")
+          {
+            wfanart[0] = FilmFanart;
+          }
+        }
+
         LogMyFilms.Debug("(Load_Lstdetail): Backdrops-File: wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
         if (wfanart[0] == " ")
         {
@@ -8530,201 +8782,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     
     private void FanartTimerEvent(object state)
     {
-      //LogMyFilms.Debug("(FanartTimerEvent): FanartTimerEvent triggered !!!");
-      //LogMyFilms.Debug("(FanartTimerEvent): Current Setting of Backdrop: '" + backdrop.Filename.ToString() + "'");
-      // ToDo: Load new Fanart here !!!
-      //if ((CurrentMovie.Length > 0) && (backdrop.Filename.Length > 0) && (backdrop.Active == true))
       if (backdrop.Filename != null)
       {
-        LogMyFilms.Debug("(FanartTimerEvent): loadFanart triggered for '" + facadeView.SelectedListItem.Label + "' !");
-        //LogMyFilms.Debug("(FanartTimerEvent): loadFanart triggered for '" + CurrentMovie.ToString() + "' !");
-        //LogMyFilms.Debug("(FanartTimerEvent): loadFanart CurrentFanartDir '" + CurrentFanartDir.ToString() + "' !");
-        //Disabled, because it's still not working ...
-        loadFanart();
+        //LogMyFilms.Debug("(FanartTimerEvent): ToggleFanart triggered for '" + facadeView.SelectedListItem.Label + "' !");
+        bool success = ToggleFanart();
+        if (!success)
+          LogMyFilms.Debug("(FanartTimerEvent): ToggleFanart triggered, but not executed due to backdrop not enabled or set properly !");
       }
       else
       {
-        LogMyFilms.Debug("(FanartTimerEvent): loadFanart NOT triggered !");
+        LogMyFilms.Debug("(FanartTimerEvent): ToggleFanart NOT triggered, but not executed due to backdrop filename not set !");
       }
-      if (m_bFanartTimerDisabled)
-        m_bFanartTimerDisabled = false;
     }
 
-    bool fanartSet = false;
-    //Fanart currSeriesFanart = null;
-
-    private bool loadFanart()
-    //private bool loadFanart(DBTable item)
+    private bool ToggleFanart()
     {
       if (backdrop == null)
       {
-        // Fanart not supported by skin, exit now
-        fanartSet = false;
-        return false;
+        Fanartstatus(false);
+        return false; // Fanart not supported by skin, exit now
       }
-      if (fanartSet)
+      string newfanart = GetNewRandomFanart(false, true);
+      if (currentFanartList.Count > 1)
       {
-        // Can be removed?
-      }
-
-      string fanart = string.Empty;
-      string fanartdir = string.Empty;
-      string wtitle2 = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-
-      // Get FanartDirectory
-      if (MyFilms.conf.StrTitle1 != "OriginalTitle")
-      {
-        if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-          wtitle2 = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-      }
-
-      if (wtitle2.Contains(MyFilms.conf.TitleDelim))
-        wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
-      LogMyFilms.Debug("(FindFanart) - wtitle name = '" + wtitle2 + "'");
-      //wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
-
-      fanartdir = MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
-      LogMyFilms.Debug("(FindFanart) - fanartdir = '" + fanartdir + "'");
-
-      try
-      {
-        //LogMyFilms.Debug("(loadFanart): Load Fanart by Timer for activemovie: '" + "'");
-        //Fanart fanart = currSeriesFanart;
-        //DBSeries series = item as DBSeries;
-
-        // Get a Fanart for selected movie
-
-
-        //FindFanart(); // first modify the method before calling it here ....
-        fanart = "test";
-
-        if (fanart == null)
-        {
-          // This shouldn't happen
-          LogMyFilms.Debug("(loadFanart): Fanart is unavailable, disabling");
-          DisableFanart();
-          return false;
-        }
-
-        // Activate Backdrop in Image Swapper                
-        Fanartstatus(true);
-
-        // Assign Fanart filename to Image Loader
-        // Will display fanart in backdrop or reset to default background                
-        // backdrop.Filename = "test";
-        LogMyFilms.Debug("(loadFanart): Loaded fanart is: '" + backdrop.Filename + "'");
-        return fanartSet = true;
-      }
-      catch (Exception ex)
-      {
-        LogMyFilms.Debug("(loadFanart): Failed to load Fanart: " + ex.Message);
-        return fanartSet = false;
-      }
-    }
-
-    private bool FindFanart()
-    {
-      LogMyFilms.Debug("(FindFanart): Started FanartSearch");
-      if (MyFilms.conf.StrFanart)
-      { };
-      string[] wfanart = new string[2];
-      wfanart[0] = " ";
-      wfanart[1] = " ";
-      //Search Fanarts
-      string wtitle2 = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-      LogMyFilms.Debug("(FindFanart) - wtitle old = '" + wtitle2 + "'");
-      //Added by Guzzi to fix Fanartproblem when Master Title is set to OriginalTitle
-      if (MyFilms.conf.StrTitle1 != "OriginalTitle")
-      {
-        if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-          wtitle2 = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-      }
-
-      if (wtitle2.Contains(MyFilms.conf.TitleDelim))
-        wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
-      LogMyFilms.Debug("(FindFanart) - wtitle name = '" + wtitle2 + "'");
-      wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
-      LogMyFilms.Debug("(FindFanart) - wtitle filename = '" + wtitle2 + "'");
-      LogMyFilms.Debug("(FindFanart) - MesFilms.conf.StrFanart = '" + MyFilms.conf.StrFanart + "'");
-
-      string safeName = string.Empty;
-      safeName = MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
-      //LogMyFilms.Debug("(FindFanart) - Directory (safename) = '" + safeName.ToString() + "'");
-      FileInfo wfile = new FileInfo(safeName + "\\{" + wtitle2 + "}.jpg");
-      //LogMyFilms.Debug("(FindFanart) - FullPath (safename file&ext) = '" + wfile.ToString() + "'");
-
-      // Single File
-      //wfanart[0] = safeName + "\\{" + wtitle2 + "}.jpg";
-      //wfanart[1] = "file";
-
-      if (System.IO.Directory.Exists(safeName))
-      {
-        //file
-        if (System.IO.Directory.GetFiles(safeName).Length > 0)
-        {
-          wfanart[0] = System.IO.Directory.GetFiles(safeName)[0];
-          wfanart[1] = "file";
-        }
-        //dir    
-        if (System.IO.Directory.GetFiles(safeName).Length > 0)
-        {
-          wfanart[0] = safeName;
-          wfanart[1] = "dir";
-        }
+        backdrop.Filename = newfanart;
+        LogMyFilms.Debug("(ToggleFanart): Loaded fanart is: '" + backdrop.Filename + "'");
+        return true;
       }
       else
       {
-        try { System.IO.Directory.CreateDirectory(safeName); }
-        catch { }
-      }
-
-      ArrayList result = new ArrayList();
-      ArrayList resultsize = new ArrayList();
-      string[] filesfound = new string[100];
-      Int64[] filesfoundsize = new Int64[100];
-      int filesfoundcounter = 0;
-      Int64 wsize = 0; // Temporary Filesize detection
-      //Search Files in Mediadirectory (used befor: SearchFiles("trailer", directoryname, true, true);)
-      string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}", "*.*", SearchOption.AllDirectories);
-      foreach (string filefound in files)
-      {
-        LogMyFilms.Debug("(FanartSearchLocal) - Processing FilesFound: '" + filefound + "'");
-        if (Utils.IsPicture(filefound))
-        {
-          wsize = new System.IO.FileInfo(filefound).Length;
-          result.Add(filefound);
-          resultsize.Add(wsize);
-          filesfound[filesfoundcounter] = filefound;
-          filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-          filesfoundcounter = filesfoundcounter + 1;
-          LogMyFilms.Debug("(FanartSearchLocal) - FilesFound in FanartDirectory: Size-Name '" + wsize + "' - Name '" + filefound + "'");
-        }
-      }
-
-      LogMyFilms.Debug("(FindFanart): Results for wfanart[1,2]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
-      if (wfanart[0] == " ")
-      {
-        //No Fanart available ...
+        _fanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
         return false;
       }
-      else
-      {
-        //Choose random fanart and return it ....
-        return false;
-      }
-    }
-
-    private void DisableFanart()
-    {
-      // Disable Random Fanart Timer
-      m_FanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
-      m_bFanartTimerDisabled = true;
-
-      // Disable Fanart                
-      Fanartstatus(false);
-      backdrop.Filename = String.Empty;
-      MyFilmsDetail.clearGUIProperty("currentfanart");
-      LogMyFilms.Debug("(DisableFanart): Fanart disabled !");
     }
 
     private void Fanartstatus(bool status)
@@ -8736,11 +8825,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (!backdrop.Active)
           backdrop.Active = true;
+        if (currentFanartList.Count > 0)
+          _fanartTimer.Change(0, RandomFanartDelay); //default 15000 = 15 secs
+        else
+          _fanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
       }
       else
       {
         if (backdrop.Active)
           backdrop.Active = false;
+        // Disable Random Fanart Timer
+        _fanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
+        // clear current fanarts
+        currentFanartList.Clear();
+        // Disable Fanart                
+        backdrop.Filename = String.Empty;
+        MyFilmsDetail.clearGUIProperty("currentfanart");
       }
       LogMyFilms.Debug("Fanartstatus switched to '" + status + "'");
     }

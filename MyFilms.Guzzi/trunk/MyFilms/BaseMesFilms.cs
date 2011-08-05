@@ -232,7 +232,7 @@ namespace MyFilmsPlugin.MyFilms
           data = new AntMovieCatalog();
 
           string catalogfile = StrFileXml;
-          bool success = false;
+          //bool success = false;
 
           try
           {

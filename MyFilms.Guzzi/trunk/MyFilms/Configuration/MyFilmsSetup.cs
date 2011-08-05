@@ -1039,6 +1039,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", txtAMCUpd_cnf.Text);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", chkFanart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDefaultViews", chkFanartDefaultViews.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDefaultViewsUseRandom", chkFanartDefaultViewsUseRandom.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDflt", chkDfltFanart.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImage", chkDfltFanartImage.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImageAll", chkDfltFanartImageAll.Checked);
@@ -1357,6 +1358,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDfltFanartImageAll.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDfltImageAll", false);
             chkFanart.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Fanart", false);
             chkFanartDefaultViews.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDefaultViews", false);
+            chkFanartDefaultViewsUseRandom.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "FanartDefaultViewsUseRandom", false);
             txtGrabber.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_cnf", string.Empty);
             txtPicturePrefix.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "PicturePrefix", string.Empty);
             //txtDirGrab.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_Dir", Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
@@ -1795,6 +1797,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkDfltFanartImageAll.Checked = false;
             chkFanart.Checked = false;
             chkFanartDefaultViews.Checked = false;
+            chkFanartDefaultViewsUseRandom.Checked = false;
             chkDfltViews.Checked = false;
             chkDfltViewsAll.Checked = false;
             chkDfltArtist.Checked = false;
@@ -2464,6 +2467,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 chkDfltFanartImage.Enabled = true;
                 chkDfltFanartImageAll.Enabled = true;
                 chkFanartDefaultViews.Enabled = true;
+                chkFanartDefaultViewsUseRandom.Enabled = true;
             }
             else
             {
@@ -2475,6 +2479,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 chkDfltFanartImage.Enabled = false;
                 chkDfltFanartImageAll.Enabled = false;
                 chkFanartDefaultViews.Enabled = false;
+                chkFanartDefaultViewsUseRandom.Enabled = false;
             }
         }
 
@@ -4782,6 +4787,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           chkFanart.Checked = true;
           chkFanartDefaultViews.Checked = false;
+          chkFanartDefaultViewsUseRandom.Checked = false;
           chkDfltFanart.Checked = true;
           chkDfltFanartImage.Checked = true;
           chkDfltFanartImageAll.Checked = true;

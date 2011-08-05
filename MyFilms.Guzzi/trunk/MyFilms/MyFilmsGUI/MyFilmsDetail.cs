@@ -4004,7 +4004,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 
                 //LogMyFilms.Debug("(SearchFanart) - safename(file) = '" + wfile + "'");
-                LogMyFilms.Debug("(SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + wtitle2 + "}.jpg") + "'");
+                //LogMyFilms.Debug("(SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + wtitle2 + "}.jpg") + "'");
                 if (((main) || (searched == "file")) && (System.IO.File.Exists(safeName + "\\{" + wtitle2 + "}.jpg")))
                 {
                     wfanart[0] = safeName + "\\{" + wtitle2 + "}.jpg";
@@ -4143,7 +4143,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
             }
             
-            LogMyFilms.Debug("(SearchFanart) - Fanart not configured: wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+            // LogMyFilms.Debug("(SearchFanart) - Fanart config for '" + wtitle2 + "': wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             return wfanart;
         }
         //-------------------------------------------------------------------------------------------

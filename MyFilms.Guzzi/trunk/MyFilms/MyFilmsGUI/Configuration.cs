@@ -379,6 +379,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrAMCUpd_cnf = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AMCUpd_cnf", string.Empty);
                 StrFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Fanart", false);
                 StrFanartDefaultViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDefaultViews", false);
+                StrFanartDefaultViewsUseRandom = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDefaultViewsUseRandom", false);
                 StrFanartDflt = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDflt", false);
                 StrFanartDfltImage = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImage", false);
                 StrFanartDfltImageAll = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartDfltImageAll", false);
@@ -1166,6 +1167,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           get { return strFanartDefaultViews; }
           set { strFanartDefaultViews = value; }
+        }
+        private bool strFanartDefaultViewsUseRandom = false;
+        public bool StrFanartDefaultViewsUseRandom
+        {
+          get { return strFanartDefaultViewsUseRandom; }
+          set { strFanartDefaultViewsUseRandom = value; }
         }
         private bool strArtist = false;
         public bool StrArtist

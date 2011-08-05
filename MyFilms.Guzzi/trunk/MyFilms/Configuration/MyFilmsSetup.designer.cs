@@ -254,6 +254,8 @@
           this.AntUpdField = new System.Windows.Forms.ComboBox();
           this.AntUpdList = new System.Windows.Forms.TextBox();
           this.groupBox2 = new System.Windows.Forms.GroupBox();
+          this.btnWatchedImport = new System.Windows.Forms.Button();
+          this.btnWatchedExport = new System.Windows.Forms.Button();
           this.lblUnwatchedItemsValue = new System.Windows.Forms.Label();
           this.textBoxGlobalUnwatchedOnlyValue = new System.Windows.Forms.TextBox();
           this.CheckWatchedPlayerStopped = new System.Windows.Forms.CheckBox();
@@ -499,8 +501,7 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.btnWatchedExport = new System.Windows.Forms.Button();
-          this.btnWatchedImport = new System.Windows.Forms.Button();
+          this.chkFanartDefaultViewsUseRandom = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
@@ -1167,6 +1168,7 @@
           // 
           // Fanart
           // 
+          this.Fanart.Controls.Add(this.chkFanartDefaultViewsUseRandom);
           this.Fanart.Controls.Add(this.chkFanartDefaultViews);
           this.Fanart.Controls.Add(this.chkDfltFanartImageAll);
           this.Fanart.Controls.Add(this.label48);
@@ -1191,11 +1193,11 @@
           // chkFanartDefaultViews
           // 
           this.chkFanartDefaultViews.AutoSize = true;
-          this.chkFanartDefaultViews.Location = new System.Drawing.Point(39, 44);
+          this.chkFanartDefaultViews.Location = new System.Drawing.Point(39, 36);
           this.chkFanartDefaultViews.Name = "chkFanartDefaultViews";
-          this.chkFanartDefaultViews.Size = new System.Drawing.Size(166, 17);
+          this.chkFanartDefaultViews.Size = new System.Drawing.Size(118, 30);
           this.chkFanartDefaultViews.TabIndex = 80;
-          this.chkFanartDefaultViews.Text = "Fanart for default group views";
+          this.chkFanartDefaultViews.Text = "Fanart for \r\ndefault group views";
           this.ToolTip1.SetToolTip(this.chkFanartDefaultViews, resources.GetString("chkFanartDefaultViews.ToolTip"));
           this.chkFanartDefaultViews.UseVisualStyleBackColor = true;
           // 
@@ -2365,6 +2367,26 @@
           this.groupBox2.TabStop = false;
           this.groupBox2.Text = "Watched-Status Handling";
           this.ToolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
+          // 
+          // btnWatchedImport
+          // 
+          this.btnWatchedImport.Location = new System.Drawing.Point(273, 33);
+          this.btnWatchedImport.Name = "btnWatchedImport";
+          this.btnWatchedImport.Size = new System.Drawing.Size(75, 21);
+          this.btnWatchedImport.TabIndex = 86;
+          this.btnWatchedImport.Text = "import";
+          this.btnWatchedImport.UseVisualStyleBackColor = true;
+          this.btnWatchedImport.Click += new System.EventHandler(this.btnWatchedImport_Click);
+          // 
+          // btnWatchedExport
+          // 
+          this.btnWatchedExport.Location = new System.Drawing.Point(273, 11);
+          this.btnWatchedExport.Name = "btnWatchedExport";
+          this.btnWatchedExport.Size = new System.Drawing.Size(75, 21);
+          this.btnWatchedExport.TabIndex = 85;
+          this.btnWatchedExport.Text = "export";
+          this.btnWatchedExport.UseVisualStyleBackColor = true;
+          this.btnWatchedExport.Click += new System.EventHandler(this.btnWatchedExport_Click);
           // 
           // lblUnwatchedItemsValue
           // 
@@ -5018,25 +5040,17 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // btnWatchedExport
+          // chkFanartDefaultViewsUseRandom
           // 
-          this.btnWatchedExport.Location = new System.Drawing.Point(273, 11);
-          this.btnWatchedExport.Name = "btnWatchedExport";
-          this.btnWatchedExport.Size = new System.Drawing.Size(75, 21);
-          this.btnWatchedExport.TabIndex = 85;
-          this.btnWatchedExport.Text = "export";
-          this.btnWatchedExport.UseVisualStyleBackColor = true;
-          this.btnWatchedExport.Click += new System.EventHandler(this.btnWatchedExport_Click);
-          // 
-          // btnWatchedImport
-          // 
-          this.btnWatchedImport.Location = new System.Drawing.Point(273, 33);
-          this.btnWatchedImport.Name = "btnWatchedImport";
-          this.btnWatchedImport.Size = new System.Drawing.Size(75, 21);
-          this.btnWatchedImport.TabIndex = 86;
-          this.btnWatchedImport.Text = "import";
-          this.btnWatchedImport.UseVisualStyleBackColor = true;
-          this.btnWatchedImport.Click += new System.EventHandler(this.btnWatchedImport_Click);
+          this.chkFanartDefaultViewsUseRandom.AutoSize = true;
+          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(159, 36);
+          this.chkFanartDefaultViewsUseRandom.Name = "chkFanartDefaultViewsUseRandom";
+          this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(86, 30);
+          this.chkFanartDefaultViewsUseRandom.TabIndex = 81;
+          this.chkFanartDefaultViewsUseRandom.Text = "Use random \r\nfilm fanart";
+          this.ToolTip1.SetToolTip(this.chkFanartDefaultViewsUseRandom, "If selected, MyFilms will show random fanart from the movies contained in the sel" +
+                  "ected group.");
+          this.chkFanartDefaultViewsUseRandom.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 
@@ -5568,5 +5582,6 @@
         private CheckBox chkGlobalAvailableOnly;
         private Button btnWatchedImport;
         private Button btnWatchedExport;
+        private CheckBox chkFanartDefaultViewsUseRandom;
     }
 }
