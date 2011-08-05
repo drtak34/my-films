@@ -25,6 +25,7 @@ namespace MyFilmsPlugin.MyFilms
 {
   using System;
   using System.Collections;
+  using System.Collections.Generic;
   using System.Data;
   using System.IO;
   using System.Text.RegularExpressions;
@@ -157,6 +158,14 @@ namespace MyFilmsPlugin.MyFilms
         #endregion
 
         #region méthodes statique publiques
+
+        public enum MostRecentType
+        {
+          Watched,
+          Added,
+          Created
+        }
+
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens)
         {
             return ReadDataMovies(StrDfltSelect, StrSelect, StrSort, StrSortSens, false);
@@ -614,6 +623,78 @@ namespace MyFilmsPlugin.MyFilms
           }
         }
 
+
+        //#region Most Recent Helpers
+
+        ///// <summary>
+        ///// returns the 3 most recent episodes based on criteria
+        ///// </summary>        
+        //public static List<MFMovie> GetMostRecent(MostRecentType type)
+        //{
+        //  return GetMostRecent(type, 30, 3);
+        //}
+
+        ///// <summary>
+        ///// returns the most recent episodes based on criteria
+        ///// </summary>
+        ///// <param name="type">most recent type</param>
+        ///// <param name="days">number of days to look back in database</param>
+        ///// <param name="limit">number of results to return</param>        
+        //public static List<MFMovie> GetMostRecent(MostRecentType type, int days, int limit)
+        //{
+        //  return GetMostRecent(type, days, limit, false);
+        //}
+
+        ///// <summary>
+        ///// returns the most recent episodes based on criteria
+        ///// </summary>
+        ///// <param name="type">most recent type</param>
+        ///// <param name="days">number of days to look back in database</param>
+        ///// <param name="limit">number of results to return</param>
+        ///// <param name="unwatched">only get unwatched episodes (only used with recent added type)</param>
+        //public static List<MFMovie> GetMostRecent(MostRecentType type, int days, int limit, bool unwatchedOnly)
+        //{
+        //  // Create Time Span to lookup most recents
+        //  DateTime dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+        //  dt = dt.Subtract(new TimeSpan(days, 0, 0, 0, 0));
+        //  string date = dt.ToString("yyyy'-'MM'-'dd HH':'mm':'ss");
+
+        //  // Create Conditions for SQL Query
+        //  SQLCondition condition = new SQLCondition();
+        //  switch (type)
+        //  {
+        //    case MostRecentType.Created:
+        //      condition.Add(new DBEpisode(), DBEpisode.cFileDateCreated, date, SQLConditionType.GreaterEqualThan);
+        //      if (unwatchedOnly)
+        //      {
+        //        condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cWatched, 1, SQLConditionType.NotEqual);
+        //      }
+        //      condition.AddOrderItem(DBEpisode.Q(DBEpisode.cFileDateCreated), SQLCondition.orderType.Descending);
+        //      break;
+
+        //    case MostRecentType.Added:
+        //      condition.Add(new DBEpisode(), DBEpisode.cFileDateAdded, date, SQLConditionType.GreaterEqualThan);
+        //      if (unwatchedOnly)
+        //      {
+        //        condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cWatched, 1, SQLConditionType.NotEqual);
+        //      }
+        //      condition.AddOrderItem(DBEpisode.Q(cFileDateAdded), SQLCondition.orderType.Descending);
+        //      break;
+
+        //    case MostRecentType.Watched:
+        //      condition.Add(new DBEpisode(), DBEpisode.cDateWatched, date, SQLConditionType.GreaterEqualThan);
+        //      condition.AddOrderItem(DBEpisode.Q(DBEpisode.cDateWatched), SQLCondition.orderType.Descending);
+        //      break;
+        //  }
+
+        //  // Only get from database what we need
+        //  condition.SetLimit(limit);
+
+        //  return Get(condition, false);
+        //}
+        //#endregion
+    
+    
         public static string Translate_Column(string Column)
         {
             //string s = Column;
