@@ -1548,10 +1548,10 @@
 		<type>image</type>
 		<description>UnWatched Icon</description>
 		<id>0</id>
-		<posX>392</posX>
-		<posY>633</posY>
-		<width>20</width>
-		<height>20</height>
+		<posX>394</posX>
+		<posY>638</posY>
+		<width>16</width>
+		<height>16</height>
 		<texture>MyFilms\overlayunwatched.png</texture>
 		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!player.hasmedia</visible>
 		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
@@ -1561,10 +1561,10 @@
 		<type>image</type>
 		<description>Watched Icon</description>
 		<id>0</id>
-		<posX>392</posX>
-		<posY>633</posY>
-		<width>20</width>
-		<height>20</height>
+		<posX>394</posX>
+		<posY>638</posY>
+		<width>16</width>
+		<height>16</height>
 		<texture>MyFilms\overlaywatched.png</texture>
 		<colordiffuse>ffffcc00</colordiffuse>
 		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!player.hasmedia</visible>
@@ -1578,10 +1578,10 @@
 			<type>fadelabel</type>
 			<id>1</id>
 			<posX>385</posX>
-			<posY>630</posY>
+			<posY>636</posY>
 			<width>280</width>
 			<label>#myfilms.user.watched.name: #myfilms.user.watched.count/#myfilms.user.watched.global</label>
-			<font>font10</font>
+			<font>font9</font>
 			<align>right</align>
 			<textcolor>ccffcc00</textcolor>
 			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.watched.global)</visible>
