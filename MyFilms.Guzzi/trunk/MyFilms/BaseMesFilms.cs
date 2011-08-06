@@ -842,14 +842,13 @@ namespace MyFilmsPlugin.MyFilms
                     }
                     catch (Exception mex)
                     {
-                      Log.Error("MyFilms videodatabase: add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
+                      LogMyFilms.Error("MyFilms videodatabase: add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
                     }
                   }
                 }
                 catch (Exception ex)
                 {
                   LogMyFilms.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
-                  Log.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
                 }
               }
             }

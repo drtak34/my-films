@@ -340,6 +340,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public string GlobalFilterStringIsOnline = string.Empty;
     //public string GlobalUnwatchedFilterString = string.Empty;
     public bool MovieScrobbling = false;
+
+    public static bool trailerscrobbleactive = false;
     public int actorID = 0;
     public enum optimizeOption { optimizeDisabled };
     public static bool InitialStart = false; //Added to implement InitialViewSetup
@@ -347,6 +349,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     // current Random Fanart
     public static List<string> currentFanartList = new List<string>();
+    // current Trailer List for Scrobbling
+    public static List<MFMovie> currentTrailerMoviesList = new List<MFMovie>();
 
     private double lastPublished = 0;
     private Timer publishTimer;
@@ -476,6 +480,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //public static event RatingEventDelegate RateItem;
     //public delegate void RatingEventDelegate(MFMovie movie, string rating);
+
+    //public event TrailerScrobbledEventDelegate TrailerScrobbled;
+    //public delegate void TrailerScrobbledEventDelegate(MFMovie movie, bool watched, int count);
+    //TrailerScrobbled += (OnPlayBackEnded);
+    //private void OnPlayBackEnded(MediaPortal.Player.g_Player.MediaType type, string filename)
+    //{
+    //  LogMyFilms.Debug("OnPlayBackEnded was initiated, but has no relevant event data for MyFilms - filename: '" + filename + "'");
+    //  if (MyFilms.trailerscrobbleactive == true)
+    //  {
+    //    MyFilms.trailerscrobbleactive = false;
+    //    MyFilms.PlayRandomTrailer(true);
+    //  }
+    //  return;
+    //}
+
 
     #endregion
 
@@ -6893,6 +6912,440 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //******************************************************************************************************
     private void SearchMoviesbyRandomWithTrailer(bool returnToContextmenu)
     {
+      currentTrailerMoviesList.Clear();
+      // first select the area where to make random search on - "all", "category", "year", "country" - then populate the currentTrailerMovieList
+      AntMovieCatalog ds = new AntMovieCatalog();
+      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      ArrayList w_tableau = new ArrayList();
+      ArrayList wsub_tableau = new ArrayList();
+      bool GetItems = false;
+      bool GetSubItems = true;
+      if (dlg == null) return;
+      dlg.Reset();
+      dlg.SetHeading(GUILocalizeStrings.Get(10798621)); // menu for random search
+      dlg.Add(GUILocalizeStrings.Get(10798622)); // random search on all
+      choiceSearch.Add("randomall");
+      dlg.Add(GUILocalizeStrings.Get(10798664)); // random search on Genre
+      choiceSearch.Add("Category");
+      dlg.Add(GUILocalizeStrings.Get(10798665)); // random search on year
+      choiceSearch.Add("Year");
+      dlg.Add(GUILocalizeStrings.Get(10798663)); // random search on country
+      choiceSearch.Add("Country");
+      dlg.DoModal(GetID);
+      if (dlg.SelectedLabel == -1)
+      {
+        if (returnToContextmenu)
+          this.Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+        else
+          this.Change_Search_Options();
+        return;
+      }
+      string wproperty = choiceSearch[dlg.SelectedLabel];
+
+      ArrayList w_count = new ArrayList();
+      if (dlg == null) return;
+      dlg.Reset();
+      dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
+      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+      w_tableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
+      w_count.Add(0);
+      foreach (DataRow wsr in wr)
+      {
+        foreach (DataColumn dc in ds.Movie.Columns)
+        {
+          if (dc.ToString().Contains(wproperty))  // Only count property chosen
+          {
+            if (wsr[dc.ColumnName].ToString().Length == 0) //Empty property special handling
+            {
+              w_count[0] = (int)w_count[0] + 1;
+              break;
+            }
+            else
+            {
+              if (GetSubItems)
+              {
+                // LogMyFilms.Debug("SubItemGrabber: Input: " + wsr[dc.ColumnName]);
+                wsub_tableau = SubItemGrabbing(wsr[dc.ColumnName].ToString()); //Grab SubItems
+                foreach (object t in wsub_tableau)
+                {
+                  // LogMyFilms.Debug("SubItemGrabber: Output: " + t);
+                  {
+                    if (w_tableau.Contains(t.ToString())) // search position in w_tableau for adding +1 to w_count
+                    {
+                      //if (!w_index.Contains(
+                      for (int i = 0; i < w_tableau.Count; i++)
+                      {
+                        if (w_tableau[i].ToString() == t.ToString())
+                        {
+                          w_count[i] = (int)w_count[i] + 1;
+                          //LogMyFilms.Debug("SubItemGrabber: add Counter for '" + wsub_tableau[wi].ToString() + "'");
+                          break;
+                        }
+                      }
+                    }
+                    else
+                    // add to w_tableau and move 1 to w_count
+                    {
+                      LogMyFilms.Debug("SubItemGrabber: add new Entry for '" + wsr[dc.ColumnName] + "'");
+                      w_tableau.Add(t.ToString());
+                      w_count.Add(1);
+                    }
+                  }
+                }
+
+              }
+              if (GetItems)
+              {
+                if (w_tableau.Contains(wsr[dc.ColumnName])) // search position in w_tableau for adding +1 to w_count
+                {
+                  for (int i = 0; i < w_tableau.Count; i++)
+                  {
+                    if (w_tableau[i].ToString() == wsr[dc.ColumnName].ToString())
+                    {
+                      w_count[i] = (int)w_count[i] + 1;
+                      //LogMyFilms.Debug("(Guzzi) Class already present, adding Counter for Property: " + dc.ToString() + "Value: '" + wsr[dc.ColumnName].ToString() + "'");
+                      break;
+                    }
+                  }
+                }
+                else
+                // add to w_tableau and move 1 to w_count
+                {
+                  //LogMyFilms.Debug("AddDistinctClasses with Property: '" + dc.ToString() + "' and Value '" + wsr[dc.ColumnName].ToString() + "'");
+                  w_tableau.Add(wsr[dc.ColumnName].ToString());
+                  w_count.Add(1);
+                }
+              }
+            }
+          }
+        }
+      }
+      if (w_tableau.Count == 0)
+      {
+        LogMyFilms.Debug("PropertyClassCount is 0");
+        //return;
+      }
+
+
+      string wproperty2 = "";
+
+      if (wproperty != "randomall")
+      {
+        dlg.Reset();
+        dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798618), wproperty)); // menu
+        choiceSearch.Clear();
+        //w_tableau = Array.Sort(w_tableau);
+        for (int i = 0; i < w_tableau.Count; i++)
+        {
+          dlg.Add(string.Format(GUILocalizeStrings.Get(10798626), w_count[i], w_tableau[i]));
+          choiceSearch.Add(w_tableau[i].ToString());
+        }
+        dlg.DoModal(GetID);
+        if (dlg.SelectedLabel == -1)
+          return;
+        string t_wproperty2 = choiceSearch[dlg.SelectedLabel];
+        wproperty2 = t_wproperty2;
+      }
+      else
+        wproperty2 = "*";
+
+      LogMyFilms.Debug("(RandomMovies) - Chosen Subcategory: '" + wproperty2 + "' selecting in '" + wproperty + "'");
+      switch (wproperty)
+      {
+        case "randomall":
+          conf.StrSelect = string.Empty;
+          conf.StrTxtSelect = "Selection [*]";
+          conf.StrTitleSelect = string.Empty;
+          SetLabelView("search"); // show "search"
+          break;
+        case "Rating":
+          conf.StrSelect = wproperty + " = " + wproperty2;
+          break;
+        case "Number":
+          conf.StrSelect = wproperty + " = " + wproperty2;
+          break;
+        default:
+          if (wproperty2 == string.Format(GUILocalizeStrings.Get(10798623))) // Check, if emptypropertystring is set
+            conf.StrSelect = wproperty + " like ''";
+          else
+            conf.StrSelect = wproperty + " like '*" + wproperty2 + "*'";
+          break;
+      }
+
+      GetFilmList(); // load facade with selected group of movies
+
+      LogMyFilms.Debug("(RandomMovies) - resulting conf.StrSelect: '" + conf.StrSelect + "'");
+      conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.Translate_Column(wproperty) + " [*" + wproperty2 + @"*]";
+      conf.StrTitleSelect = string.Empty;
+
+      // we have now: wproperty = selected category (randomall for all) and wproperty2 = value to search after
+
+      
+      //for (int i = 0; i < facadeView.Count; i++)
+      //{
+      //  // Do something here
+      //}
+      foreach (DataRow sr in r)
+      {
+        // if trailer present, add to list
+        if (!string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) && MyFilms.conf.StrStorageTrailer != "(none)" && sr[MyFilms.conf.StrStorageTrailer].ToString().Trim() != "")
+        {
+          try
+          {
+            MFMovie movie = new MFMovie();
+            movie.Config = Configuration.CurrentConfig; // MF config context
+            if (!string.IsNullOrEmpty(sr["Number"].ToString()))
+              movie.ID = Int32.Parse(sr["Number"].ToString());
+            else movie.ID = 0;
+            movie.Year = Int32.Parse(sr["Year"].ToString());
+            movie.Title = sr["OriginalTitle"].ToString();
+
+            string mediapath = string.Empty;
+            if (!string.IsNullOrEmpty(MyFilms.conf.StrStorageTrailer) && MyFilms.conf.StrStorageTrailer != "(none)")
+            {
+              mediapath = sr[MyFilms.conf.StrStorageTrailer].ToString();
+              if (mediapath.Contains(";")) // take the first source file
+                mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
+            }
+            movie.File = mediapath;
+            movie.DateAdded = sr["Date"].ToString();
+
+            currentTrailerMoviesList.Add(movie);
+          }
+          catch (Exception mex)
+          {
+            LogMyFilms.Error("add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
+          }
+        }
+      }
+
+
+      // Remove any blocked movies
+      //moviesToPlay.RemoveAll(movie => TraktSettings.BlockedFolders.Any(f => movie.Path.Contains(f)));
+
+      //// get the movies that we have watched
+      //List<MFMovie> MovieList = (from MFMovie movie in allmovies select movie).ToList();
+      //List<MFMovie> movielist = moviesToPlay.Where(m => m.Watched == true).ToList();
+      
+      // we now have a list with movies matching the choice and their index/number value -> now do loop for selection
+      LogMyFilms.Debug("(ResultBuildIndex) Found " + currentTrailerMoviesList.Count + " Records matching '" + wproperty2 + "' in '" + wproperty + "'");
+      for (int i = 0; i < currentTrailerMoviesList.Count; i++)
+        LogMyFilms.Debug("(ResultList) - Index: '" + i + "' - Number: '" + currentTrailerMoviesList[i].ID + "'");
+      if (currentTrailerMoviesList.Count == 0)
+      {
+        ShowMessageDialog(GUILocalizeStrings.Get(10798621), "Suchergebnis: 0", "Keine Filme in der Auswahl vorhanden"); // menu for random search
+        return;
+      }
+
+      PlayRandomTrailer(false);
+
+      return;
+
+      //Choose Random Movie from Resultlist
+      System.Random rnd = new System.Random();
+      Int32 RandomNumber = rnd.Next(currentTrailerMoviesList.Count);
+      LogMyFilms.Debug("RandomNumber: '" + RandomNumber + "', Record: '" + currentTrailerMoviesList[RandomNumber].ID + "', RandomTitle: '" + currentTrailerMoviesList[RandomNumber].Title + "'");
+
+      //Set Filmlist to random Movie:
+      conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = string.Empty; //clear all selects
+      conf.WStrSort = conf.StrSTitle;
+      conf.Boolselect = false;
+      conf.Boolreturn = false;
+
+      conf.StrSelect = "number = " + Convert.ToInt32(currentTrailerMoviesList[RandomNumber].ID);
+      conf.StrTxtSelect = "Selection number [" + Convert.ToInt32(currentTrailerMoviesList[RandomNumber].ID) + "]";
+      conf.StrTitleSelect = string.Empty;
+      //getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+      LogMyFilms.Debug("(Guzzi): Change_View filter - " + "StrSelect: " + conf.StrSelect + " | WStrSort: " + conf.WStrSort);
+      SetLabelView("search"); // show "search"
+      GetFilmList(); // Added to update facade
+
+      //Set Context to first and only title in facadeview
+      facadeView.SelectedListItemIndex = 0; //(Auf ersten und einzigen Film setzen, der dem Suchergebnis entsprechen sollte)
+      if (!facadeView.SelectedListItem.IsFolder && !conf.Boolselect)
+      // New Window for detailed selected item information
+      {
+        conf.StrIndex = facadeView.SelectedListItem.ItemId;
+        conf.StrTIndex = facadeView.SelectedListItem.Label;
+        GUITextureManager.CleanupThumbs();
+        //GUIWindowManager.ActivateWindow(ID_MyFilmsDetail);
+      }
+      else
+      // View List as selected
+      {
+        conf.Wselectedlabel = facadeView.SelectedListItem.Label;
+        Change_LayOut(MyFilms.conf.StrLayOut);
+        if (facadeView.SelectedListItem.IsFolder)
+          conf.Boolreturn = false;
+        else
+          conf.Boolreturn = true;
+        do
+        {
+          if (conf.StrTitleSelect != "") conf.StrTitleSelect += conf.TitleDelim;
+          conf.StrTitleSelect += conf.Wselectedlabel;
+        } while (GetFilmList() == false); //keep calling while single folders found
+      }
+
+      PlayRandomTrailer(false);
+
+      LogMyFilms.Debug("(SearchRandomWithTrailer-Info): Here should happen the handling of menucontext....");
+    }
+
+    public void PlayRandomTrailer(bool showMenu)
+    {
+      if (showMenu)
+      {
+        GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+        dlgYesNo.SetHeading("Wollen Sie den Hauptfilm sehen?");
+        //dlgYesNo.SetLine(1, MyFilms.r[Convert.ToInt32(w_index[RandomNumber])]["Originaltitle"].ToString());
+        //dlgYesNo.SetLine(2, "Current ID = '" + w_index[RandomNumber] + "'");
+        dlgYesNo.SetLine(2, "Und nu ?");
+        dlgYesNo.TimeOut = 5;
+        dlgYesNo.SetYesLabel("Options");
+        dlgYesNo.SetNoLabel("Next Trailer");
+        dlgYesNo.SetDefaultToYes(false);
+        dlgYesNo.DoModal(ID_MyFilms);
+        if (dlgYesNo.IsConfirmed)
+          TrailerScrobbleOptions(0);
+        //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
+      }
+
+      //Choose Random Movie from Resultlist
+      System.Random rnd = new System.Random();
+      Int32 RandomNumber = rnd.Next(currentTrailerMoviesList.Count);
+      LogMyFilms.Debug("RandomNumber: '" + RandomNumber + "', Record: '" + currentTrailerMoviesList[RandomNumber].ID + "', RandomTitle: '" + currentTrailerMoviesList[RandomNumber].Title + "'");
+
+
+      ArrayList trailer = new ArrayList();
+      trailer.Add(currentTrailerMoviesList[RandomNumber].File);
+      trailerscrobbleactive = true;
+      MyFilmsDetail.Launch_Movie_Trailer_Scrobbling(trailer, ID_MyFilms); 
+    }
+
+    private void TrailerScrobbleOptions(int currentNumber)
+    {
+      //// Exit fullscreen Video so we can see main facade again			
+      //if (GUIGraphicsContext.IsFullScreenVideo) {
+      //  GUIGraphicsContext.IsFullScreenVideo = false;
+      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
+      //Before showing menu, first play the trailer
+      //conf.Wselectedlabel = facadeView.SelectedListItem.Label;
+      //Change_LayOut(MesFilms.conf.StrLayOut);
+      //conf.Boolreturn = true;
+      //if (conf.StrTitleSelect != "") conf.StrTitleSelect += conf.TitleDelim;
+      //conf.StrTitleSelect += conf.Wselectedlabel;
+      //while (GetFilmList() == false) ; //keep calling while single folders found
+      //MyFilmsDetail.Launch_Movie_Trailer(Convert.ToInt32(w_index[currentNumber]), GetID, null);
+
+      while (dlg.SelectedLabel != -1)
+      {
+        dlg.Reset();
+        choiceSearch.Clear();
+        //dlg.SetHeading(string.Format(MesFilms.r[Convert.ToInt32(w_index[currentNumber])]["Originaltitle"].ToString())); // menu
+        dlg.SetHeading(string.Format("Wählen Sie eine Aktion aus")); // menu
+        //if (TrailerIsAvailable) // Später den Eintrag nur anzeigen, wenn auch ein Trailer verfügbar ist (siehe Klassen option)
+        dlg.Add(string.Format("Hauptfilm spielen"));
+        choiceSearch.Add("PlayMovie");
+        dlg.Add(string.Format("Trailer spielen"));
+        choiceSearch.Add("PlayMovieTrailer");
+        dlg.Add(string.Format("Zeige Filmdetails")); //(goes to MesFilmsDetails ID7987 with selected record to show DetailScreen)
+        choiceSearch.Add("ShowMovieDetails");
+        dlg.Add(string.Format("Zeige alle Filme des gewählten Bereiches"));
+        choiceSearch.Add("ShowMovieList");
+        dlg.Add(string.Format("Neue Zufallssuche in gleicher Kategorie"));
+        choiceSearch.Add("RepeatSearch");
+        dlg.Add(string.Format("Neue globale Zufallssuche"));
+        choiceSearch.Add("NewSearch");
+        dlg.Add(string.Format("Zurück zum Hauptmenü", "Back"));
+        choiceSearch.Add("Back");
+        dlg.DoModal(ID_MyFilms);
+        if ((dlg.SelectedLabel == -1) || (dlg.SelectedLabel == 6))
+          return;
+
+        switch (choiceSearch[dlg.SelectedLabel])
+        {
+          case "PlayMovie":
+            MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, null);
+            //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
+            return;
+          case "PlayMovieTrailer":
+            //Hier muß irgendwie sichergestellt werden, daß nach Rückkehr keine Neuinitialisierung erfolgt (analog return von Details 7988
+            MovieScrobbling = true; //Set True to avoid reload menu after Return ...    
+            //MyFilmsDetail.Launch_Movie_Trailer(Convert.ToInt32(w_index[currentNumber]), GetID, null);
+            //conf.Wselectedlabel = facadeView.SelectedListItem.Label;
+            //Change_LayOut(MesFilms.conf.StrLayOut);
+            //conf.Boolreturn = true;
+            //if (conf.StrTitleSelect != "") conf.StrTitleSelect += conf.TitleDelim;
+            //conf.StrTitleSelect += conf.Wselectedlabel;
+            //while (GetFilmList() == false) ; //keep calling while single folders found
+
+            MyFilmsDetail.trailerPlayed = true;
+            MyFilmsDetail.Launch_Movie_Trailer(facadeView.SelectedListItem.ItemId, 7990, null); //7990 To Return to this Dialog
+            // MyFilmsDetail.Launch_Movie_Trailer(1, GetID, m_SearchAnimation);
+            //MyFilmsDetail.Launch_Movie_Trailer(Convert.ToInt32(w_index[currentNumber]), GetID, null);    
+            //GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            dlgYesNo.SetHeading("Wollen Sie den Hauptfilm sehen?");
+            dlgYesNo.SetLine(1, MyFilms.r[Convert.ToInt32(currentTrailerMoviesList[currentNumber].ID)]["Originaltitle"].ToString());
+            dlgYesNo.SetLine(2, "Current ID = '" + currentTrailerMoviesList[currentNumber].ID + "'");
+            dlgYesNo.DoModal(GetID);
+            if (dlgYesNo.IsConfirmed)
+              MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, m_SearchAnimation);
+            //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
+            break;
+          case "ShowMovieDetails":
+            // New Window for detailed selected item information
+            //conf.StrIndex = facadeView.SelectedListItem.ItemId;
+            //conf.StrTIndex = facadeView.SelectedListItem.Label;
+            GUITextureManager.CleanupThumbs();
+            GUIWindowManager.ActivateWindow(ID_MyFilmsDetail);
+            return;
+
+          case "ShowMovieList":
+            //GetFilmList(); //Is this necessary????
+            //conf.StrIndex = facadeView.SelectedListItem.ItemId;
+            //conf.StrTIndex = facadeView.SelectedListItem.Label;
+            GUIControl.FocusControl(ID_MyFilms, (int)Controls.CTRL_List);
+            dlg.DeInit();
+            return;
+
+          case "RepeatSearch":
+            PlayRandomTrailer(false);
+            //MyFilmsDetail.Launch_Movie_Trailer(Convert.ToInt32(w_index[currentNumber]), GetID, null);
+            GUIDialogYesNo dlg1YesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            dlg1YesNo.SetHeading("Wollen Sie den Hauptfilm sehen?");
+            dlg1YesNo.SetLine(1, GUILocalizeStrings.Get(219));
+            dlg1YesNo.SetLine(2, "Zufällige Film ID = '" + currentTrailerMoviesList[currentNumber].ID + "'");
+            dlg1YesNo.DoModal(ID_MyFilms);
+            if (dlg1YesNo.IsConfirmed)
+              //Launch_Movie(select_item, GetID, m_SearchAnimation);
+              MyFilmsDetail.Launch_Movie(facadeView.SelectedListItem.ItemId, GetID, null);
+            //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
+            break;
+          case "NewSearch":
+            SearchMoviesbyRandomWithTrailer(false);
+            return;
+
+          case "Back":
+            return;
+
+          default:
+            {
+              break;
+            }
+        }
+      }
+      
+    }
+
+    //******************************************************************************************************
+    //*  Global search movies by RANDOM (Random Search with Options, e.g. Trailer, Rating) - Guzzi Version *
+    //******************************************************************************************************
+    private void SearchMoviesbyRandomWithTrailerOriginalVersion(bool returnToContextmenu)
+    {
       // first select the area where to make random search on - "all", "category", "year", "country"
       AntMovieCatalog ds = new AntMovieCatalog();
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -7321,22 +7774,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
       string wproperty = choiceSearch[dlg.SelectedLabel];
-      VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-      //            if (null == keyboard) return;
-      keyboard.Reset();
-      keyboard.Text = string.Empty;
-      //            keyboard.DoModal(GetID);
-      //            if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
       switch (choiceSearch[dlg.SelectedLabel])
       {
         case "randomall":
           conf.StrSelect = string.Empty;
           conf.StrTxtSelect = "Selection [*]";
           conf.StrTitleSelect = string.Empty;
-
-
-          // Temporarily Enabled for Testing
-          //getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
           SetLabelView("search"); // show "search"
           GetFilmList();
           break;
@@ -7476,17 +7919,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           conf.StrTitleSelect = string.Empty;
 
-
-          // Temporarily Enabled for Testing
-          //getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
           SetLabelView("search"); // show "search"
           GetFilmList();
           break;
       }
-      // Select RandomMovie from Filmlist and process 
-      // MyFilmsDetail.Launch_Movie_Trailer(facadeView.SelectedListItem.ItemId, GetID, null);
-
-
     }
 
     //*****************************************************************************************
