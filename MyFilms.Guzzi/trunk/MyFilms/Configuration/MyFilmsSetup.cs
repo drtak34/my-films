@@ -2979,7 +2979,47 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             return mydivx;
         }
-        private void General_Selected(object sender, TabControlCancelEventArgs e)
+
+
+        private bool WriteXml(AntMovieCatalog dataset, string Catalog)
+        {
+          if (dataset == null || string.IsNullOrEmpty(Catalog)) return false;
+          if (CatalogType.SelectedIndex != 0 && CatalogType.SelectedIndex != 10) return false; // only write AMC type catalogs
+
+          try
+          {
+            using (FileStream fs = new FileStream(Catalog, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)) // lock the file for any other use, as we do write to it now !
+            {
+              LogMyFilms.Debug(
+                "Commit()- opening '" + Catalog +
+                "' as FileStream with FileMode.OpenOrCreate, FileAccess.Write, FileShare.None");
+              fs.SetLength(0); // do not append, owerwrite !
+
+              using (XmlTextWriter MyXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.Default))
+              {
+                LogMyFilms.Debug("Commit()- writing '" + Catalog + "' as MyXmlTextWriter in FileStream");
+                MyXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
+                  // Added by Guzzi to get properly formatted output XML
+                MyXmlTextWriter.WriteStartDocument();
+                dataset.WriteXml(MyXmlTextWriter, XmlWriteMode.IgnoreSchema);
+                MyXmlTextWriter.Flush();
+                MyXmlTextWriter.Close();
+              }
+              fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
+              LogMyFilms.Debug("Commit()- closing '" + Catalog + "' FileStream and releasing file lock");
+            }
+          }
+          catch (Exception saveexeption)
+          {
+            LogMyFilms.Debug(
+              "Commit()- exception while trying to save data in '" + Catalog + "' - exception: " + saveexeption.Message +
+              ", stacktrace: " + saveexeption.StackTrace);
+            return false;
+          }
+          return true;
+        }
+
+    private void General_Selected(object sender, TabControlCancelEventArgs e)
         {
             if (General.SelectedTab.Text == "Logos")
             {
@@ -5400,23 +5440,60 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void btnWatchedExport_Click(object sender, EventArgs e)
         {
           SaveFileDialog fd = new SaveFileDialog();
+          fd.Title = "Select Backup file for watched Status (.watched)";
           fd.Filter = "Exported Watched Info (*.watched)|*.watched";
+          fd.DefaultExt = ".watched";
+          if (MesFilmsCat.Text.Contains("\\"))
+            fd.InitialDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\") + 1);
+          // fd.RestoreDirectory = true;
+
           if (fd.ShowDialog() == DialogResult.OK)
           {
             StreamWriter w = new StreamWriter(fd.FileName);
 
-            string val = ""; // ToDo: get infos per record here
-              try
+            if (MesFilmsCat.Text.Length > 0)
+            {
+              try { mydivx.Clear(); }
+              catch { }
+              mydivx = ReadXml();
+              if (mydivx != null)
               {
-                w.WriteLine((string)val);
+                string expression = StrDfltSelect + AntTitle1.Text + " not like ''";
+                DataRow[] movies = mydivx.Movie.Select(expression);
+                if (mydivx.Movie.Count > 0)
+                {
+                  foreach (DataRow movie in movies)
+                  {
+                    string val = movie["Number"] + " || " + movie[cbWatched.Text] + " || " + movie["OriginalTitle"] + " || " + movie["Year"];
+                    try
+                    {
+                      w.WriteLine((string)val);
+                    }
+                    catch (IOException exception)
+                    {
+                      LogMyFilms.Debug("Watched info NOT exported!  Error: " + exception.ToString());
+                      System.Windows.Forms.MessageBox.Show("Watched info NOT exported!  Error: " + exception.ToString(), "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                      return;
+                    }
+                  }
+                }
+                else
+                {
+                  System.Windows.Forms.MessageBox.Show("Watched info NOT exported!  No Movies found in Catalog !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                }
               }
-              catch (IOException exception)
-              {
-                LogMyFilms.Debug("Watched info NOT exported!  Error: " + exception.ToString());
-                return;
-              }
+              else
+                System.Windows.Forms.MessageBox.Show("Watched info NOT exported!  Catalog cannot be read !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+            }
+            else
+            {
+              LogMyFilms.Debug("Movie Data cannot be read - Watched info NOT exported!");
+              System.Windows.Forms.MessageBox.Show("Movie Data cannot be read - Watched info NOT exported!", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+              return;
+            }
             w.Close();
             LogMyFilms.Debug("Watched info succesfully exported!");
+            System.Windows.Forms.MessageBox.Show("Watched info succesfully exported !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information); 
           }
 
         }
@@ -5424,21 +5501,88 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void btnWatchedImport_Click(object sender, EventArgs e)
         {
           OpenFileDialog fd = new OpenFileDialog();
+          fd.Title = "Select Backup file for watched Status (.watched)";
           fd.Filter = "Exported Watched Info (*.watched)|*.watched";
+          fd.DefaultExt = ".watched";
+          if (MesFilmsCat.Text.Contains("\\"))
+            fd.InitialDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\") + 1);
+          // fd.RestoreDirectory = true;
+
           if (fd.ShowDialog() == DialogResult.OK && System.IO.File.Exists(fd.FileName))
           {
-            StreamReader r = new StreamReader(fd.FileName);
-
             string line = string.Empty;
+            DataRow[] movies = null;
+
+            // try reading catalog
+            if (MesFilmsCat.Text.Length > 0)
+            {
+              try { mydivx.Clear(); }
+              catch { }
+              mydivx = ReadXml();
+              if (mydivx != null)
+              {
+                string expression = StrDfltSelect + AntTitle1.Text + " not like ''";
+                movies = mydivx.Movie.Select(expression);
+                if (mydivx.Movie.Count == 0)
+                {
+                  System.Windows.Forms.MessageBox.Show("Watched info NOT imported!  No Movies found in Catalog !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                }
+              }
+              else
+              {
+                System.Windows.Forms.MessageBox.Show("Watched info NOT imported!  Catalog cannot be read !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                return;
+              }
+            }
+            else
+            {
+              LogMyFilms.Debug("Movie Data cannot be read - Watched info NOT imported!");
+              System.Windows.Forms.MessageBox.Show("Movie Data cannot be read - Watched info NOT imported!", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+              return;
+            }
+            
             // set unwatched for all
-            // ToDo: Initialize Watched for all here
+              foreach (DataRow movie in movies)
+              {
+                //movie[cbWatched.Text] = "";
+                movie[cbWatched.Text] = textBoxGlobalUnwatchedOnlyValue.Text;
+              }
             // now set watched for all in file
+            StreamReader r = new StreamReader(fd.FileName);
             while ((line = r.ReadLine()) != null)
             {
               // ToDo: Set watched per line to DB here
+              string tmp = line;
+              string number = tmp.Substring(0, tmp.IndexOf("||")).Trim();
+              tmp = tmp.Substring(tmp.IndexOf("||") + 2).Trim();
+              string watched = tmp.Substring(0, tmp.IndexOf("||")).Trim();
+              tmp = tmp.Substring(tmp.IndexOf("||") + 2).Trim();
+              string otitle = tmp.Substring(0, tmp.IndexOf("||")).Trim();
+              tmp = tmp.Substring(tmp.IndexOf("||") + 2).Trim();
+              string year = tmp.Trim();
+              
+              foreach (DataRow movie in movies)
+              {
+                if (movie["Number"].ToString() == number && movie["OriginalTitle"].ToString() == otitle && movie["Year"].ToString() == year)
+                {
+                  movie[cbWatched.Text] = watched;
+                }
+              }
             }
             r.Close();
-            LogMyFilms.Debug("Watched info succesfully imported!");
+
+            // now save dataset to catalog file
+            bool writesuccess = WriteXml(mydivx, MesFilmsCat.Text);
+            if (writesuccess)
+            {
+              LogMyFilms.Debug("Watched info succesfully imported!");
+              System.Windows.Forms.MessageBox.Show("Watched info succesfully imported !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+              LogMyFilms.Debug("Watched info NOT succesfully imported!");
+              System.Windows.Forms.MessageBox.Show("Watched info NOT succesfully imported !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
           }
         }
 
