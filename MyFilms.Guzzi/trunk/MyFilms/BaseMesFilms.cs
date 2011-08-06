@@ -497,7 +497,8 @@ namespace MyFilmsPlugin.MyFilms
         public static void GetMovies(ref ArrayList movies)
         {
           // movies = GetMoviesGlobal("", "", -1, false, -1);
-          movies = GetMoviesGlobal("", "", 3, false, -1, true);
+          movies = GetMoviesGlobal("", "", -1, false, -1, true);
+          LogMyFilms.Debug("GetMovies()- movies matched: '" + movies.Count + "'");
         }
 
         #region Most Recent Helpers
@@ -556,8 +557,6 @@ namespace MyFilmsPlugin.MyFilms
         }
         #endregion
 
-
-    
         private static ArrayList GetMoviesGlobal(string Expression, string Sort, int limit, bool unwatched, int days, bool traktOnly)
         {
           // Create Time Span to lookup most recents
@@ -696,8 +695,9 @@ namespace MyFilmsPlugin.MyFilms
                       }
                       catch { }
 
+                      // now check, if movie should be added to results
                       if (unwatched == false || movie.Watched == false)
-                        if (limit == -1 || moviecount <= limit)
+                        if (limit == -1 || moviecount < limit)
                           if (wdate >= dateCompare || days == -1)
                         {
                           movies.Add(movie);
