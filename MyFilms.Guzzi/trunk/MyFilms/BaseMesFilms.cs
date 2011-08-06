@@ -1082,7 +1082,7 @@ namespace MyFilmsPlugin.MyFilms
                     sr[WatchedField] = newEnhancedWatchedValue;
                   }
                   if (sr[WatchedField].ToString() != oldWatchedString)
-                    LogMyFilms.Debug("Commit() : Updating 'Watched' from '" + oldWatchedString + "' to '" + sr[WatchedField].ToString() + "', WatchedCount = '" + _mIWatchedCount + "'");
+                    LogMyFilms.Debug("Commit() : Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField].ToString() + "', WatchedCount = '" + _mIWatchedCount + "'");
 
                   // imdb number
                   string oldIMDB = sr["IMDB_Id"].ToString();
@@ -1117,8 +1117,14 @@ namespace MyFilmsPlugin.MyFilms
               if (!MyFilmsDetail.GlobalLockIsActive(Catalog))
               {
                 MyFilmsDetail.SetGlobalLock(true, Catalog);
-                MyFilms.FSwatcher.EnableRaisingEvents = true; // re enable watcher - as myfilms should auto update dataset for current config, if update is done from trakt
-
+                try
+                {
+                  MyFilms.FSwatcher.EnableRaisingEvents = true; // re enable watcher - as myfilms should auto update dataset for current config, if update is done from trakt
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Debug("Commit()- FSwatcher - problem enabling Raisingevents - Message:  '" + ex.Message);
+                }
                 if (BaseMesFilms._dataLock.TryEnterWriteLock(10000))
                 {
                   try
@@ -1151,8 +1157,6 @@ namespace MyFilmsPlugin.MyFilms
                   {
                     BaseMesFilms._dataLock.ExitWriteLock();
                   }
-
-                  MyFilmsDetail.SetGlobalLock(false, Catalog);
                 }
                 else
                 {

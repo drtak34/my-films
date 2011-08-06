@@ -2149,7 +2149,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!sr[conf.StrWatchedField].ToString().StartsWith("Global:"))
             {
               if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
-                if (sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() && sr[conf.StrWatchedField].ToString().Length > 0) // changed to take setup config into consideration
+                if (!string.IsNullOrEmpty(conf.GlobalUnwatchedOnlyValue) && sr[conf.StrWatchedField].ToString().ToLower() != conf.GlobalUnwatchedOnlyValue.ToLower() && sr[conf.StrWatchedField].ToString().Length > 0) // changed to take setup config into consideration
                   tmpwatched = true;
               if (tmpwatched) sr[conf.StrWatchedField] = "Global:1:-1";
               else sr[conf.StrWatchedField] = "Global:0:-1";
@@ -8183,7 +8183,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("PowerModeChanged() - MyFilms is resuming from standby");
           conf.IsResumeFromStandby = true;
 
-          // Thread.Sleep(250);
+          Thread.Sleep(250);
 
           int maxretries = 10; // max retries 10 * 500 = 5 seconds
           int i = 0;
@@ -8216,7 +8216,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Thread.Sleep(500);
             }
           }
-          FSwatcher.EnableRaisingEvents = true;
+          try
+          {
+            FSwatcher.EnableRaisingEvents = true;
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("PowerModeChanged()- FSwatcher - problem enabling Raisingevents - Message:  '" + ex.Message);
+          }
         }
 
         else if (e.Mode == Microsoft.Win32.PowerModes.Suspend)

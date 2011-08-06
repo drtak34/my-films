@@ -153,6 +153,7 @@
           this.comboBoxLogoPresets = new System.Windows.Forms.ComboBox();
           this.btnLogoClearCache = new System.Windows.Forms.Button();
           this.Fanart = new System.Windows.Forms.GroupBox();
+          this.chkFanartDefaultViewsUseRandom = new System.Windows.Forms.CheckBox();
           this.chkFanartDefaultViews = new System.Windows.Forms.CheckBox();
           this.chkDfltFanartImageAll = new System.Windows.Forms.CheckBox();
           this.label48 = new System.Windows.Forms.Label();
@@ -501,7 +502,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.chkFanartDefaultViewsUseRandom = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
@@ -1189,6 +1189,18 @@
           this.Fanart.TabStop = false;
           this.Fanart.Text = "Fanart (Backdrops)";
           this.ToolTip1.SetToolTip(this.Fanart, resources.GetString("Fanart.ToolTip"));
+          // 
+          // chkFanartDefaultViewsUseRandom
+          // 
+          this.chkFanartDefaultViewsUseRandom.AutoSize = true;
+          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(159, 36);
+          this.chkFanartDefaultViewsUseRandom.Name = "chkFanartDefaultViewsUseRandom";
+          this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(86, 30);
+          this.chkFanartDefaultViewsUseRandom.TabIndex = 81;
+          this.chkFanartDefaultViewsUseRandom.Text = "Use random \r\nfilm fanart";
+          this.ToolTip1.SetToolTip(this.chkFanartDefaultViewsUseRandom, "If selected, MyFilms will show random fanart from the movies contained in the sel" +
+                  "ected group.");
+          this.chkFanartDefaultViewsUseRandom.UseVisualStyleBackColor = true;
           // 
           // chkFanartDefaultViews
           // 
@@ -2452,6 +2464,7 @@
           this.cbWatched.Name = "cbWatched";
           this.cbWatched.Size = new System.Drawing.Size(123, 21);
           this.cbWatched.TabIndex = 73;
+          this.ToolTip1.SetToolTip(this.cbWatched, resources.GetString("cbWatched.ToolTip"));
           // 
           // chkEnhancedWatchedStatusHandling
           // 
@@ -5039,18 +5052,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // chkFanartDefaultViewsUseRandom
-          // 
-          this.chkFanartDefaultViewsUseRandom.AutoSize = true;
-          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(159, 36);
-          this.chkFanartDefaultViewsUseRandom.Name = "chkFanartDefaultViewsUseRandom";
-          this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(86, 30);
-          this.chkFanartDefaultViewsUseRandom.TabIndex = 81;
-          this.chkFanartDefaultViewsUseRandom.Text = "Use random \r\nfilm fanart";
-          this.ToolTip1.SetToolTip(this.chkFanartDefaultViewsUseRandom, "If selected, MyFilms will show random fanart from the movies contained in the sel" +
-                  "ected group.");
-          this.chkFanartDefaultViewsUseRandom.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 

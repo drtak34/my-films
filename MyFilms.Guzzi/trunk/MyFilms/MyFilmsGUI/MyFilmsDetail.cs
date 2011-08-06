@@ -2176,6 +2176,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (lockstate)
           {
+            
             MyFilms.FSwatcher.EnableRaisingEvents = false; // stop FSwatcher for local update, otherwise unneeded reread would be triggered
 
             try
@@ -2191,9 +2192,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            File.Delete(LockFilename(config));
-            MyFilms.FSwatcher.EnableRaisingEvents = true;
-
+            try
+            {
+              File.Delete(LockFilename(config));
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug("RemoveGlobalLock() - there seems to be a problem removing global lock - Message: " + ex.Message);
+            }
+            try
+            {
+              MyFilms.FSwatcher.EnableRaisingEvents = true;
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug("RemoveGlobalLock()- FSwatcher - problem enabling Raisingevents - Message:  '" + ex.Message);
+            }
             LogMyFilms.Debug("RemoveGlobalLock() - removed global lock ! - " + LockFilename(config));
           }
         }
