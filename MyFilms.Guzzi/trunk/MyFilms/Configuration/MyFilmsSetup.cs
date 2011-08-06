@@ -107,8 +107,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
               this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
               this.buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
-              this.btnWatchedExport.Visible = false; // disable export/import for watched status (not yet implemented)
-              this.btnWatchedImport.Visible = false; // disable export/import for watched status (not yet implemented)
+              //this.btnWatchedExport.Visible = false; // disable export/import for watched status (not yet implemented)
+              //this.btnWatchedImport.Visible = false; // disable export/import for watched status (not yet implemented)
               // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
               CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
               CatalogType.Items.Remove("MyFilms extended Database");
