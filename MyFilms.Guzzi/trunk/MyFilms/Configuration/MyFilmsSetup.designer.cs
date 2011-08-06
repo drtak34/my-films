@@ -502,6 +502,7 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
@@ -669,6 +670,7 @@
           // 
           // Tab_Trakt
           // 
+          this.Tab_Trakt.Controls.Add(this.cbAllowRecentAddedAPI);
           this.Tab_Trakt.Controls.Add(this.pictureBox1);
           this.Tab_Trakt.Controls.Add(this.labelTraktDescription);
           this.Tab_Trakt.Controls.Add(this.linkLabelTrakt);
@@ -5053,6 +5055,18 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // cbAllowRecentAddedAPI
+          // 
+          this.cbAllowRecentAddedAPI.AutoSize = true;
+          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(505, 47);
+          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
+          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
+          this.cbAllowRecentAddedAPI.TabIndex = 4;
+          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added\" API";
+          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config will be included when external plugins ask for \"recenty a" +
+                  "dded\" movies.\r\nYou can enable this for multple configs.");
+          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5584,5 +5598,6 @@
         private Button btnWatchedImport;
         private Button btnWatchedExport;
         private CheckBox chkFanartDefaultViewsUseRandom;
+        private CheckBox cbAllowRecentAddedAPI;
     }
 }

@@ -28,6 +28,7 @@ namespace MyFilmsPlugin.MyFilms
   using System.Collections.Generic;
   using System.Data;
   using System.IO;
+  using System.Linq;
   using System.Text.RegularExpressions;
   using System.Threading;
   using System.Xml;
@@ -48,6 +49,13 @@ namespace MyFilmsPlugin.MyFilms
         private static MyFilmsData myfilmsdata;
 
         public static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+
+        public enum MostRecentType
+        {
+          Watched,
+          Added
+        }
+    
 /*
         private static Dictionary<string, string> dataPath;
 */
@@ -158,13 +166,6 @@ namespace MyFilmsPlugin.MyFilms
         #endregion
 
         #region méthodes statique publiques
-
-        public enum MostRecentType
-        {
-          Watched,
-          Added,
-          Created
-        }
 
         public static DataRow[] ReadDataMovies(string StrDfltSelect, string StrSelect, string StrSort, string StrSortSens)
         {
@@ -495,7 +496,234 @@ namespace MyFilmsPlugin.MyFilms
 
         public static void GetMovies(ref ArrayList movies)
         {
-          movies.Clear(); 
+          // movies = GetMoviesGlobal("", "", -1, false, -1);
+          movies = GetMoviesGlobal("", "", 3, false, -1, true);
+        }
+
+        #region Most Recent Helpers
+
+        /// <summary>
+        /// returns the 3 most recent episodes based on criteria
+        /// </summary>        
+        public static List<MFMovie> GetMostRecent(MostRecentType type)
+        {
+          return GetMostRecent(type, 30, 3);
+        }
+
+        /// <summary>
+        /// returns the most recent episodes based on criteria
+        /// </summary>
+        /// <param name="type">most recent type</param>
+        /// <param name="days">number of days to look back in database</param>
+        /// <param name="limit">number of results to return</param>        
+        public static List<MFMovie> GetMostRecent(MostRecentType type, int days, int limit)
+        {
+          return GetMostRecent(type, days, limit, false);
+        }
+
+        /// <summary>
+        /// returns the most recent episodes based on criteria
+        /// </summary>
+        /// <param name="type">most recent type</param>
+        /// <param name="days">number of days to look back in database</param>
+        /// <param name="limit">number of results to return</param>
+        /// <param name="unwatched">only get unwatched episodes (only used with recent added type)</param>
+        public static List<MFMovie> GetMostRecent(MostRecentType type, int days, int limit, bool unwatchedOnly)
+        {
+          List<MFMovie> movielist = new List<MFMovie>();
+          ArrayList allmovies = new ArrayList();
+          switch (type)
+          {
+            case MostRecentType.Added:
+              // string sqlExpression = "Date" + " like '*" + string.Format("{0:dd/MM/yyyy}", DateTime.Parse(sLabel).ToShortDateString()) + "*'";
+              allmovies = GetMoviesGlobal("", "", limit, unwatchedOnly, days, false);
+              movielist = (from MFMovie movie in allmovies select movie).ToList();
+
+              //// get the movies that we have watched
+              //List<MFMovie> SeenList = MovieList.Where(m => m.Watched == true).ToList();
+
+              break;
+
+            case MostRecentType.Watched:
+              allmovies = GetMoviesGlobal("", "", limit, false, days, false);
+              movielist = (from MFMovie movie in allmovies select movie).ToList();
+              //// get the movies that we have watched
+              //List<MFMovie> MovieList = (from MFMovie movie in allmovies select movie).ToList();
+              //movielist = MovieList.Where(m => m.Watched == true).ToList();
+              break;
+          }
+          return movielist;
+        }
+        #endregion
+
+
+    
+        private static ArrayList GetMoviesGlobal(string Expression, string Sort, int limit, bool unwatched, int days, bool traktOnly)
+        {
+          // Create Time Span to lookup most recents
+          DateTime dateCompare = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+          dateCompare = dateCompare.Subtract(new TimeSpan(days, 0, 0, 0, 0));
+          string date = dateCompare.ToString("yyyy'-'MM'-'dd HH':'mm':'ss");
+
+          
+          ArrayList movies = new ArrayList();
+          movies.Clear();
+          AntMovieCatalog dataExport = new AntMovieCatalog();
+          int moviecount = 0; // total count for added movies
+
+          using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          {
+            int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+            ArrayList configs = new ArrayList();
+            for (int i = 0; i < MesFilms_nb_config; i++)
+              configs.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+
+            foreach (string config in configs)
+            {
+              string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+              // string StrFileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
+              bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+              bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
+              string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
+              string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
+              bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
+              string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
+              string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
+              string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
+
+              string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
+              if (TraktEnabled)
+                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+              else
+                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "'");
+              if (System.IO.File.Exists(Catalog) && (TraktEnabled || (!traktOnly && RecentAddedAPIEnabled)))
+              {
+                _dataLock.EnterReadLock();
+                try
+                {
+                  dataExport.ReadXml(Catalog);
+                }
+                catch (Exception e)
+                {
+                  LogMyFilms.Error(": Error reading xml database after " + dataExport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+                  throw e;
+                }
+                finally
+                {
+                  _dataLock.ExitReadLock();
+                }
+
+                try
+                {
+                  string sqlExpression = "";
+                  string sqlSort = "";
+
+                  if (!string.IsNullOrEmpty(Expression)) sqlExpression = Expression;
+                  else sqlExpression = StrDfltSelect + StrTitle1 + " not like ''";
+
+                  if (!string.IsNullOrEmpty(Sort)) sqlSort = Sort;
+                  else sqlSort = "OriginalTitle" + " " + "ASC";
+
+                  DataRow[] results = dataExport.Tables["Movie"].Select(sqlExpression, sqlSort);
+                  // if (results.Length == 0) continue;
+
+                  foreach (DataRow sr in results)
+                  {
+                    try
+                    {
+                      MFMovie movie = new MFMovie();
+                      movie.Config = config; // MF config context
+                      if (!string.IsNullOrEmpty(sr["Number"].ToString()))
+                        movie.ID = Int32.Parse(sr["Number"].ToString());
+                      else movie.ID = 0;
+                      movie.Year = Int32.Parse(sr["Year"].ToString());
+                      movie.Title = sr["OriginalTitle"].ToString();
+
+                      bool played = false;
+                      if (EnhancedWatchedStatusHandling)
+                      {
+                        if (MyFilms.EnhancedWatched(sr[WatchedField].ToString(), UserProfileName) == true)
+                          played = true;
+                      }
+                      else
+                      {
+                        if (GlobalUnwatchedOnlyValue != null && WatchedField.Length > 0)
+                          if (sr[WatchedField].ToString().ToLower() != GlobalUnwatchedOnlyValue.ToLower()) // changed to take setup config into consideration
+                            played = true;
+                      }
+                      movie.Watched = played;
+                      movie.WatchedCount = -1; // check against it, if value returns...
+
+                      float rating = 0;
+                      bool success = float.TryParse(sr["Rating"].ToString(), out rating);
+                      if (!success) rating = 0;
+                      movie.Rating = rating;
+                      // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
+
+                      string mediapath = string.Empty;
+                      if (!string.IsNullOrEmpty(Storage) && Storage != "(none)")
+                      {
+                        mediapath = sr[Storage].ToString();
+                        if (mediapath.Contains(";")) // take the first source file
+                          mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
+                      }
+                      movie.File = mediapath;
+
+                      string IMDB = "";
+
+
+                      if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
+                        IMDB = sr["IMDB_Id"].ToString();
+
+                      if (!string.IsNullOrEmpty(sr["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
+                      {
+                        string CleanString = sr["URL"].ToString();
+                        Regex CutText = new Regex("" + @"tt\d{7}" + "");
+                        Match m = CutText.Match(CleanString);
+                        if (m.Success)
+                          IMDB = m.Value;
+                      }
+                      movie.IMDBNumber = IMDB;
+
+                      if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString()))
+                        movie.TMDBNumber = sr["TMDB_Id"].ToString();
+                      
+                      movie.DateAdded = sr["Date"].ToString();
+                      DateTime wdate = new DateTime(1900, 01, 01);
+                      try
+                      {
+                        wdate = Convert.ToDateTime(sr["Date"]);
+                      }
+                      catch { }
+
+                      if (unwatched == false || movie.Watched == false)
+                        if (limit == -1 || moviecount <= limit)
+                          if (wdate >= dateCompare || days == -1)
+                        {
+                          movies.Add(movie);
+                          moviecount += 1;
+                        }
+                    }
+                    catch (Exception mex)
+                    {
+                      Log.Error("MyFilms videodatabase: add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
+                    }
+                  }
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
+                  Log.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
+                }
+              }
+            }
+          }
+          return movies;
+        }
+
+        public static void GetMoviesOld(ref ArrayList movies)
+        {
+          movies.Clear();
           AntMovieCatalog dataExport = new AntMovieCatalog();
 
           using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
@@ -510,6 +738,7 @@ namespace MyFilmsPlugin.MyFilms
               string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
               // string StrFileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
               bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+              bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
               string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
               string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
               bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
@@ -541,7 +770,11 @@ namespace MyFilmsPlugin.MyFilms
 
                 try
                 {
-                  DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect + StrTitle1 + " not like ''", "OriginalTitle" + " " + "ASC");
+                  string sqlExpression = StrDfltSelect + StrTitle1 + " not like ''";
+
+                  string sqlOrder = "OriginalTitle" + " " + "ASC";
+
+                  DataRow[] results = dataExport.Tables["Movie"].Select(sqlExpression, sqlOrder);
                   // if (results.Length == 0) continue;
 
                   foreach (DataRow sr in results)
@@ -570,13 +803,13 @@ namespace MyFilmsPlugin.MyFilms
                       }
                       movie.Watched = played;
                       movie.WatchedCount = -1; // check against it, if value returns...
-                      
+
                       float rating = 0;
                       bool success = float.TryParse(sr["Rating"].ToString(), out rating);
                       if (!success) rating = 0;
                       movie.Rating = rating;
                       // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
-                      
+
                       string mediapath = string.Empty;
                       if (!string.IsNullOrEmpty(Storage) && Storage != "(none)")
                       {
@@ -602,7 +835,7 @@ namespace MyFilmsPlugin.MyFilms
                       }
                       movie.IMDBNumber = IMDB;
 
-                      if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString())) 
+                      if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString()))
                         movie.TMDBNumber = sr["TMDB_Id"].ToString();
                       movie.DateAdded = sr["Date"].ToString();
                       movies.Add(movie);
@@ -619,82 +852,10 @@ namespace MyFilmsPlugin.MyFilms
                   Log.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
                 }
               }
-            } 
+            }
           }
         }
 
-
-        //#region Most Recent Helpers
-
-        ///// <summary>
-        ///// returns the 3 most recent episodes based on criteria
-        ///// </summary>        
-        //public static List<MFMovie> GetMostRecent(MostRecentType type)
-        //{
-        //  return GetMostRecent(type, 30, 3);
-        //}
-
-        ///// <summary>
-        ///// returns the most recent episodes based on criteria
-        ///// </summary>
-        ///// <param name="type">most recent type</param>
-        ///// <param name="days">number of days to look back in database</param>
-        ///// <param name="limit">number of results to return</param>        
-        //public static List<MFMovie> GetMostRecent(MostRecentType type, int days, int limit)
-        //{
-        //  return GetMostRecent(type, days, limit, false);
-        //}
-
-        ///// <summary>
-        ///// returns the most recent episodes based on criteria
-        ///// </summary>
-        ///// <param name="type">most recent type</param>
-        ///// <param name="days">number of days to look back in database</param>
-        ///// <param name="limit">number of results to return</param>
-        ///// <param name="unwatched">only get unwatched episodes (only used with recent added type)</param>
-        //public static List<MFMovie> GetMostRecent(MostRecentType type, int days, int limit, bool unwatchedOnly)
-        //{
-        //  // Create Time Span to lookup most recents
-        //  DateTime dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-        //  dt = dt.Subtract(new TimeSpan(days, 0, 0, 0, 0));
-        //  string date = dt.ToString("yyyy'-'MM'-'dd HH':'mm':'ss");
-
-        //  // Create Conditions for SQL Query
-        //  SQLCondition condition = new SQLCondition();
-        //  switch (type)
-        //  {
-        //    case MostRecentType.Created:
-        //      condition.Add(new DBEpisode(), DBEpisode.cFileDateCreated, date, SQLConditionType.GreaterEqualThan);
-        //      if (unwatchedOnly)
-        //      {
-        //        condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cWatched, 1, SQLConditionType.NotEqual);
-        //      }
-        //      condition.AddOrderItem(DBEpisode.Q(DBEpisode.cFileDateCreated), SQLCondition.orderType.Descending);
-        //      break;
-
-        //    case MostRecentType.Added:
-        //      condition.Add(new DBEpisode(), DBEpisode.cFileDateAdded, date, SQLConditionType.GreaterEqualThan);
-        //      if (unwatchedOnly)
-        //      {
-        //        condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cWatched, 1, SQLConditionType.NotEqual);
-        //      }
-        //      condition.AddOrderItem(DBEpisode.Q(cFileDateAdded), SQLCondition.orderType.Descending);
-        //      break;
-
-        //    case MostRecentType.Watched:
-        //      condition.Add(new DBEpisode(), DBEpisode.cDateWatched, date, SQLConditionType.GreaterEqualThan);
-        //      condition.AddOrderItem(DBEpisode.Q(DBEpisode.cDateWatched), SQLCondition.orderType.Descending);
-        //      break;
-        //  }
-
-        //  // Only get from database what we need
-        //  condition.SetLimit(limit);
-
-        //  return Get(condition, false);
-        //}
-        //#endregion
-    
-    
         public static string Translate_Column(string Column)
         {
             //string s = Column;
@@ -1023,6 +1184,7 @@ namespace MyFilmsPlugin.MyFilms
           string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
           string StrFileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
           bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+          bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
           string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
           string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
           bool EnhancedWatchedStatusHandling = XmlConfig.ReadXmlConfig("MyFilms", config, "EnhancedWatchedStatusHandling", false);
