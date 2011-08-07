@@ -765,7 +765,10 @@ Public Class Form1
 
     Private Sub Form1_Move(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Move
         If dgLogWindow.Visible = True Then
-            dgLogWindow.SetDesktopLocation(Me.Location.X + Me.Width, Me.Location.Y)
+
+            dgLogWindow.SetDesktopLocation(Me.Location.X, Me.Location.Y + Me.Height)
+            'dgLogWindow.SetDesktopLocation(Me.Location.X + Me.Width, Me.Location.Y)
+
             'dgLogWindow.BringToFront()
             'Me.BringToFront()
         End If
