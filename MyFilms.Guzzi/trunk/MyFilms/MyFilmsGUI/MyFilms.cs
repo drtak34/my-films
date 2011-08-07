@@ -7082,11 +7082,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // we have now: wproperty = selected category (randomall for all) and wproperty2 = value to search after
 
-      
-      //for (int i = 0; i < facadeView.Count; i++)
-      //{
-      //  // Do something here
-      //}
       foreach (DataRow sr in r)
       {
         // if trailer present, add to list
@@ -7120,14 +7115,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
-
-
       // Remove any blocked movies
       //moviesToPlay.RemoveAll(movie => TraktSettings.BlockedFolders.Any(f => movie.Path.Contains(f)));
 
       //// get the movies that we have watched
       //List<MFMovie> MovieList = (from MFMovie movie in allmovies select movie).ToList();
       //List<MFMovie> movielist = moviesToPlay.Where(m => m.Watched == true).ToList();
+
+      //// Populte currentmovieslist as GUIListItems
+      //for (int i = 0; i < facadeView.Count; i++)
+      //{
+      //}
       
       // we now have a list with movies matching the choice and their index/number value -> now do loop for selection
       LogMyFilms.Debug("(ResultBuildIndex) Found " + currentTrailerMoviesList.Count + " Records matching '" + wproperty2 + "' in '" + wproperty + "'");
@@ -7216,6 +7214,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       System.Random rnd = new System.Random();
       Int32 RandomNumber = rnd.Next(currentTrailerMoviesList.Count);
       LogMyFilms.Debug("RandomNumber: '" + RandomNumber + "', Record: '" + currentTrailerMoviesList[RandomNumber].ID + "', RandomTitle: '" + currentTrailerMoviesList[RandomNumber].Title + "'");
+      //for (int i = 0; i < facadeView.Count; i++)
+      //{
+      //  facadeView[i].Label
+      //  // Do something here
+      //}
 
 
       ArrayList trailer = new ArrayList();
@@ -9465,10 +9468,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       FileTarget fileTarget = new FileTarget();
       fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName);
-      fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,f} " +
+      fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff} " +
                           "${level:fixedLength=true:padding=5} " +
                           "[${logger:fixedLength=true:padding=20:shortName=true}]: ${message} " +
-                          "${exception:format=tostring}";
+                          "${exception:format=tostring}" +
+                          "${qpc}";
+                         //${qpc:normalize=Boolean:difference=Boolean:alignDecimalPoint=Boolean:precision=Integer:seconds=Boolean}
 
       config.AddTarget("file", fileTarget);
 
