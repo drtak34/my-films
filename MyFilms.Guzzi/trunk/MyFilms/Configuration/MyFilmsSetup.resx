@@ -202,6 +202,14 @@ fully qualified path to a logo is stored in the rule, so it might not be fully p
 "Use skins default logos" is the default and will search for logos in the skindirectory\media\logos 
 and it's subdirectories for logos matching the name in the logo rule. It should work in most situations.</value>
   </data>
+  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
+    <value>If enabled, fanart will be used for group views.
+MyFilms will autocreate subfolders for you.
+Images placed in those folders will be used for fanart display
+ in the default group views (category, year, genre).
+
+If disabled, default fanart will be displayed, if it is enabled.</value>
+  </data>
   <data name="Fanart.ToolTip" xml:space="preserve">
     <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
 Enter the full path (or use the browse button) to the root folder containing the fanart image files.
@@ -212,13 +220,12 @@ displayed as a background image for movies without a matching fanart file. Be aw
 because of low resolution of cover images and you might get a distorted picture as covers and fanarts don't have the same size.
 Therefore it is recommended to enable “Use the default image for missing fanart”.</value>
   </data>
-  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
-    <value>If enabled, fanart will be used for group views.
-MyFilms will autocreate subfolders for you.
-Images placed in those folders will be used for fanart display
- in the default group views (category, year, genre).
-
-If disabled, default fanart will be displayed, if it is enabled.</value>
+  <data name="MesFilmsViews.ToolTip" xml:space="preserve">
+    <value>This path is the "root folder" for group thumbs.
+The respective thumbs will be loaded from subfolders, named like the views 
+you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
+You can place a "default.jpg" in the respective sub folder that will be displayed
+when no specific thumb can be matched.</value>
   </data>
   <data name="groupBox22.ToolTip" xml:space="preserve">
     <value>Select the “Use thumbs for group views" option if you have image files 
@@ -233,13 +240,6 @@ You can also use fanart for those views, to do so, put fanart in the subfolder
 for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
 The setting for this path is done via the Fanart path setting automatically; 
 See "Fanart for default group views - path" below.</value>
-  </data>
-  <data name="MesFilmsViews.ToolTip" xml:space="preserve">
-    <value>This path is the "root folder" for group thumbs.
-The respective thumbs will be loaded from subfolders, named like the views 
-you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
-You can place a "default.jpg" in the respective sub folder that will be displayed
-when no specific thumb can be matched.</value>
   </data>
   <data name="groupBox1.ToolTip" xml:space="preserve">
     <value>Use this area to define a path where cover images are stored.
@@ -448,6 +448,24 @@ You can choose to update this field when starting a movie or when playback is fi
 You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
 However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
 You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
+  <data name="btnWatchedImport.ToolTip" xml:space="preserve">
+    <value>You can import a formerly created backupfile of your watched status.
+Important:
+Importing a status will OVERWRITE the content of the field, that you have configured for "Field used for Watched Status" !
+All former content will be lost after this operation - so choose this action with care and only if you know what you are doing.
+If you are not sure, take a backup of your XML catalog file before you start.</value>
+  </data>
+  <data name="btnWatchedExport.ToolTip" xml:space="preserve">
+    <value>You can export the current content of the watched field for your database to an external file.
+Main purpose is to take a backup of your watched status, when you e.g. plan to make changes on your config.
+You could also use it to "move" your watched data from one field to another:
+- port your current settings
+- Change the "Field used for Watched Status"
+- Import your watched data
+As a result, the content will have been copied to the new field.
+A useful case is, if you used "checked" field in that past, but want to change to "Enhanced Watched Status Handling" - as
+this requires the use of a field that supports text content (like e.g. mdiainfo or borrower).</value>
   </data>
   <data name="textBoxGlobalUnwatchedOnlyValue.ToolTip" xml:space="preserve">
     <value>By Default, unwatched items are identified by having either "false" or "" (empty) in the related field.

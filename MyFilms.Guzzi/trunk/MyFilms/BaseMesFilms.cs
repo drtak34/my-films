@@ -1242,7 +1242,7 @@ namespace MyFilmsPlugin.MyFilms
                       newEnhancedWatchedValue = NewEnhancedWatchValue(newEnhancedWatchedValue, _mUsername, _mIWatched, _mIWatchedCount);
                     sr[WatchedField] = newEnhancedWatchedValue;
                   }
-                  if (sr[WatchedField].ToString() != oldWatchedString)
+                  if (sr[WatchedField].ToString().ToLower() != oldWatchedString.ToLower())
                     LogMyFilms.Debug("Commit() : Updating Field '" + WatchedField + "' from '" + oldWatchedString + "' to '" + sr[WatchedField].ToString() + "', WatchedCount = '" + _mIWatchedCount + "'");
 
                   // imdb number

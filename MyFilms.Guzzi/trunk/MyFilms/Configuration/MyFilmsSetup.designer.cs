@@ -106,6 +106,7 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
+          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
           this.labelTraktDescription = new System.Windows.Forms.Label();
           this.linkLabelTrakt = new System.Windows.Forms.LinkLabel();
@@ -502,7 +503,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
@@ -684,6 +684,18 @@
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
+          // 
+          // cbAllowRecentAddedAPI
+          // 
+          this.cbAllowRecentAddedAPI.AutoSize = true;
+          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(505, 47);
+          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
+          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
+          this.cbAllowRecentAddedAPI.TabIndex = 4;
+          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added\" API";
+          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config will be included when external plugins ask for \"recenty a" +
+                  "dded\" movies.\r\nYou can enable this for multple configs.");
+          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
           // 
           // pictureBox1
           // 
@@ -1195,7 +1207,7 @@
           // chkFanartDefaultViewsUseRandom
           // 
           this.chkFanartDefaultViewsUseRandom.AutoSize = true;
-          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(159, 36);
+          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(155, 36);
           this.chkFanartDefaultViewsUseRandom.Name = "chkFanartDefaultViewsUseRandom";
           this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(86, 30);
           this.chkFanartDefaultViewsUseRandom.TabIndex = 81;
@@ -1207,7 +1219,7 @@
           // chkFanartDefaultViews
           // 
           this.chkFanartDefaultViews.AutoSize = true;
-          this.chkFanartDefaultViews.Location = new System.Drawing.Point(39, 36);
+          this.chkFanartDefaultViews.Location = new System.Drawing.Point(37, 36);
           this.chkFanartDefaultViews.Name = "chkFanartDefaultViews";
           this.chkFanartDefaultViews.Size = new System.Drawing.Size(118, 30);
           this.chkFanartDefaultViews.TabIndex = 80;
@@ -1218,7 +1230,7 @@
           // chkDfltFanartImageAll
           // 
           this.chkDfltFanartImageAll.AutoSize = true;
-          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(159, 66);
+          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(155, 66);
           this.chkDfltFanartImageAll.Name = "chkDfltFanartImageAll";
           this.chkDfltFanartImageAll.Size = new System.Drawing.Size(67, 30);
           this.chkDfltFanartImageAll.TabIndex = 79;
@@ -1229,7 +1241,7 @@
           // label48
           // 
           this.label48.AutoSize = true;
-          this.label48.Location = new System.Drawing.Point(240, 72);
+          this.label48.Location = new System.Drawing.Point(242, 72);
           this.label48.Name = "label48";
           this.label48.Size = new System.Drawing.Size(69, 26);
           this.label48.TabIndex = 78;
@@ -1238,7 +1250,7 @@
           // chkDfltFanartImage
           // 
           this.chkDfltFanartImage.AutoSize = true;
-          this.chkDfltFanartImage.Location = new System.Drawing.Point(39, 66);
+          this.chkDfltFanartImage.Location = new System.Drawing.Point(37, 66);
           this.chkDfltFanartImage.Name = "chkDfltFanartImage";
           this.chkDfltFanartImage.Size = new System.Drawing.Size(114, 30);
           this.chkDfltFanartImage.TabIndex = 77;
@@ -1282,7 +1294,7 @@
           // 
           this.label40.AutoSize = true;
           this.label40.ForeColor = System.Drawing.SystemColors.ControlDark;
-          this.label40.Location = new System.Drawing.Point(240, 48);
+          this.label40.Location = new System.Drawing.Point(242, 48);
           this.label40.Name = "label40";
           this.label40.Size = new System.Drawing.Size(32, 13);
           this.label40.TabIndex = 73;
@@ -1321,7 +1333,7 @@
           // labelFanart
           // 
           this.labelFanart.AutoSize = true;
-          this.labelFanart.Location = new System.Drawing.Point(240, 14);
+          this.labelFanart.Location = new System.Drawing.Point(242, 14);
           this.labelFanart.Name = "labelFanart";
           this.labelFanart.Size = new System.Drawing.Size(65, 26);
           this.labelFanart.TabIndex = 69;
@@ -1331,7 +1343,7 @@
           // 
           this.chkDfltFanart.AutoSize = true;
           this.chkDfltFanart.Enabled = false;
-          this.chkDfltFanart.Location = new System.Drawing.Point(39, 95);
+          this.chkDfltFanart.Location = new System.Drawing.Point(37, 95);
           this.chkDfltFanart.Name = "chkDfltFanart";
           this.chkDfltFanart.Size = new System.Drawing.Size(191, 17);
           this.chkDfltFanart.TabIndex = 67;
@@ -1362,7 +1374,7 @@
           // chkDfltViewsAll
           // 
           this.chkDfltViewsAll.AutoSize = true;
-          this.chkDfltViewsAll.Location = new System.Drawing.Point(59, 67);
+          this.chkDfltViewsAll.Location = new System.Drawing.Point(57, 67);
           this.chkDfltViewsAll.Name = "chkDfltViewsAll";
           this.chkDfltViewsAll.Size = new System.Drawing.Size(104, 17);
           this.chkDfltViewsAll.TabIndex = 80;
@@ -1432,7 +1444,7 @@
           // chkDfltViews
           // 
           this.chkDfltViews.AutoSize = true;
-          this.chkDfltViews.Location = new System.Drawing.Point(39, 35);
+          this.chkDfltViews.Location = new System.Drawing.Point(37, 35);
           this.chkDfltViews.Name = "chkDfltViews";
           this.chkDfltViews.Size = new System.Drawing.Size(112, 30);
           this.chkDfltViews.TabIndex = 75;
@@ -1612,7 +1624,7 @@
           // chkDfltArtist
           // 
           this.chkDfltArtist.AutoSize = true;
-          this.chkDfltArtist.Location = new System.Drawing.Point(39, 32);
+          this.chkDfltArtist.Location = new System.Drawing.Point(37, 32);
           this.chkDfltArtist.Name = "chkDfltArtist";
           this.chkDfltArtist.Size = new System.Drawing.Size(114, 30);
           this.chkDfltArtist.TabIndex = 98;
@@ -2389,6 +2401,7 @@
           this.btnWatchedImport.Size = new System.Drawing.Size(75, 21);
           this.btnWatchedImport.TabIndex = 86;
           this.btnWatchedImport.Text = "import";
+          this.ToolTip1.SetToolTip(this.btnWatchedImport, resources.GetString("btnWatchedImport.ToolTip"));
           this.btnWatchedImport.UseVisualStyleBackColor = true;
           this.btnWatchedImport.Click += new System.EventHandler(this.btnWatchedImport_Click);
           // 
@@ -2399,6 +2412,7 @@
           this.btnWatchedExport.Size = new System.Drawing.Size(75, 21);
           this.btnWatchedExport.TabIndex = 85;
           this.btnWatchedExport.Text = "export";
+          this.ToolTip1.SetToolTip(this.btnWatchedExport, resources.GetString("btnWatchedExport.ToolTip"));
           this.btnWatchedExport.UseVisualStyleBackColor = true;
           this.btnWatchedExport.Click += new System.EventHandler(this.btnWatchedExport_Click);
           // 
@@ -5054,18 +5068,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // cbAllowRecentAddedAPI
-          // 
-          this.cbAllowRecentAddedAPI.AutoSize = true;
-          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(505, 47);
-          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
-          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
-          this.cbAllowRecentAddedAPI.TabIndex = 4;
-          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added\" API";
-          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config will be included when external plugins ask for \"recenty a" +
-                  "dded\" movies.\r\nYou can enable this for multple configs.");
-          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 

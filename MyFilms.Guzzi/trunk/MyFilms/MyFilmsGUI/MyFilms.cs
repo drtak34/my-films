@@ -517,7 +517,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitLogger(); // Initialize Logger 
       Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
       LogMyFilms.Debug("MyFilms.Init() started.");
-      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() + "',   BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
+      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() +  "',  BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
       LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion.ToString() + "', BuildDate: '" + MyFilmsSettings.MPBuildDate.ToString() + "'");
 
       // Fanart Timer

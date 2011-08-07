@@ -4830,7 +4830,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
           chkFanart.Checked = true;
           chkFanartDefaultViews.Checked = false;
-          chkFanartDefaultViewsUseRandom.Checked = false;
+          chkFanartDefaultViewsUseRandom.Checked = true;
           chkDfltFanart.Checked = true;
           chkDfltFanartImage.Checked = true;
           chkDfltFanartImageAll.Checked = true;
@@ -5449,6 +5449,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (MesFilmsCat.Text.Contains("\\"))
             fd.InitialDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\") + 1);
           // fd.RestoreDirectory = true;
+          fd.FileName = System.IO.Path.GetFileNameWithoutExtension(MesFilmsCat.Text) + ".watched";
 
           if (fd.ShowDialog() == DialogResult.OK)
           {
@@ -5510,6 +5511,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           if (MesFilmsCat.Text.Contains("\\"))
             fd.InitialDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\") + 1);
           // fd.RestoreDirectory = true;
+          fd.FileName = System.IO.Path.GetFileNameWithoutExtension(MesFilmsCat.Text) + ".watched";
 
           if (fd.ShowDialog() == DialogResult.OK && System.IO.File.Exists(fd.FileName))
           {
