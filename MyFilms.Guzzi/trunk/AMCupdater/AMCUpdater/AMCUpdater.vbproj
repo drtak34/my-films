@@ -193,6 +193,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AntMovieCatalog.resx">
@@ -288,6 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AMCUpdater.ico" />
+    <None Include="app.config" />
     <None Include="Resources\google_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />

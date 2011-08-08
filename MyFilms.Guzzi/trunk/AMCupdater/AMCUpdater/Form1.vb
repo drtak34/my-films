@@ -45,6 +45,38 @@ Public Class Form1
         Me.AddOwnedForm(dgLogWindow)
         dgLogWindow.Visible = True
 
+        Me.Size = My.Settings.MainFormSize
+        Me.Location = My.Settings.MainFormLocation
+
+
+
+        'Dim lngLeft As Long
+        'Dim lngTop As Long
+        'Dim lngWidth As Long
+        'Dim lngHeight As Long
+
+        '' Get the latest position and size values
+        'lngLeft = Val(GetSetting(App.EXEName, "Settings", "Left", "0"))
+        'lngTop = Val(GetSetting(App.EXEName, "Settings", "Top", "0"))
+        'lngWidth = Val(GetSetting(App.EXEName, "Settings", "Width", "0"))
+        'lngHeight = Val(GetSetting(App.EXEName, "Settings", "Height", "0"))
+
+        'If lngWidth > 0 Then
+        '    Me.Move(lngLeft, lngTop, lngWidth, lngHeight)
+        'End If
+
+
+        'Me.Visible = True
+        'Dim x As Integer
+        'Dim y As Integer
+        'x = Screen.PrimaryScreen.WorkingArea.Width
+        'y = Screen.PrimaryScreen.WorkingArea.Height - Me.Height
+
+        'Do Until x = Screen.PrimaryScreen.WorkingArea.Width - Me.Width
+        '    x = x - 1
+        '    Me.Location = New Point(x, y)
+        'Loop
+
         If ToolStripStatusLabel.Text = "" Then
             ToolStripStatusLabel.Text = "Ready"
         End If
@@ -151,11 +183,61 @@ Public Class Form1
 
     End Sub
     Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+
+        Try
+            'Set my user settings MainFormSize to the current(Form) 's size
+            My.Settings.MainFormSize = Me.Size
+            'Set my user setting MainFormLocation to the current form's location
+            My.Settings.MainFormLocation = Me.Location
+            'Save the user settings so next time the window will be the same size and location
+            My.Settings.Save()
+
+            'MsgBox("Your settings were saved successfully.", _
+            'MsgBoxStyle.OkOnly, "Save...")
+        Catch ex As Exception
+            MsgBox("There was a problem saving your settings.", _
+            MsgBoxStyle.Critical, "Save Error...")
+        End Try
+
         If dgLogWindow.Visible = True Then
             dgLogWindow.Close()
         End If
         ApplySettings()
         CurrentSettings.SaveDefaultSettings()
+    End Sub
+
+    ''Save position and size values to a system registry
+    'Private Sub Form_QueryUnload(ByVal Cancel As Integer, ByVal UnloadMode As Integer)
+    '    SaveSetting(App.EXEName, "Settings", "Left", Me.Left)
+    '    SaveSetting(App.EXEName, "Settings", "Top", Me.Top)
+    '    SaveSetting(AMCUpdater.EXEName, "Settings", "Width", Me.Width)
+    '    SaveSetting(App.EXEName, "Settings", "Height", Me.Height)
+    'End Sub
+
+    ' Save the form's size and position.
+    Private Sub SavePosition(ByVal frm As Form, ByVal app_name As String)
+        SaveSetting(app_name, "Geometry", "WindowState", frm.WindowState)
+        If frm.WindowState = FormWindowState.Normal Then
+            SaveSetting(app_name, "Geometry", "Left", frm.Left)
+            SaveSetting(app_name, "Geometry", "Top", frm.Top)
+            SaveSetting(app_name, "Geometry", "Width", frm.Width)
+            SaveSetting(app_name, "Geometry", "Height", frm.Height)
+        Else
+            SaveSetting(app_name, "Geometry", "Left", frm.RestoreBounds.Left)
+            SaveSetting(app_name, "Geometry", "Top", frm.RestoreBounds.Top)
+            SaveSetting(app_name, "Geometry", "Width", frm.RestoreBounds.Width)
+            SaveSetting(app_name, "Geometry", "Height", frm.RestoreBounds.Height)
+        End If
+    End Sub
+    ' Restore the form's size and position.
+    Private Sub RestorePosition(ByVal frm As Form, ByVal app_name As String)
+        frm.SetBounds( _
+            GetSetting(app_name, "Geometry", "Left", Me.RestoreBounds.Left), _
+            GetSetting(app_name, "Geometry", "Top", Me.RestoreBounds.Top), _
+            GetSetting(app_name, "Geometry", "Width", Me.RestoreBounds.Width), _
+            GetSetting(app_name, "Geometry", "Height", Me.RestoreBounds.Height) _
+        )
+        Me.WindowState = GetSetting(app_name, "Geometry", "WindowState", Me.WindowState)
     End Sub
 
 
@@ -1382,71 +1464,71 @@ Public Class Form1
                     epManualUpdater.SetError(txtManualNewValue, "")
                 End If
             ElseIf cbManualSelectOperation.SelectedItem = "Delete Value" Then
-                    'Delete Value : requires cbManualSelectField
-                    If cbManualSelectField.SelectedIndex < 0 Then
-                        epManualUpdater.SetError(cbManualSelectField, "Please select a field to delete")
+                'Delete Value : requires cbManualSelectField
+                If cbManualSelectField.SelectedIndex < 0 Then
+                    epManualUpdater.SetError(cbManualSelectField, "Please select a field to delete")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(cbManualSelectField, "")
+                End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Download Fanart" Then
+                'Delete Value : requires cbManualSelectField
+                If txtFanartFolder.Text = String.Empty Then
+                    epManualUpdater.SetError(cbManualSelectOperation, "Please select a Path to Fanart download")
+                    IsValid = False
+                End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Update Record" Then
+                If IsInternetLookupNeeded() = True Then
+                    grpManualInternetLookupSettings.Visible = True
+                    'Excluded Movie File Path Required:
+                    If txtManualExcludedMoviesPath.Text = String.Empty Then
+                        epManualUpdater.SetError(txtManualExcludedMoviesPath, "Path to excluded movies file must be entered")
                         IsValid = False
                     Else
-                        epManualUpdater.SetError(cbManualSelectField, "")
-                    End If
-            ElseIf cbManualSelectOperation.SelectedItem = "Download Fanart" Then
-                    'Delete Value : requires cbManualSelectField
-                    If txtFanartFolder.Text = String.Empty Then
-                        epManualUpdater.SetError(cbManualSelectOperation, "Please select a Path to Fanart download")
-                        IsValid = False
-                    End If
-            ElseIf cbManualSelectOperation.SelectedItem = "Update Record" Then
-                    If IsInternetLookupNeeded() = True Then
-                        grpManualInternetLookupSettings.Visible = True
-                        'Excluded Movie File Path Required:
-                        If txtManualExcludedMoviesPath.Text = String.Empty Then
-                            epManualUpdater.SetError(txtManualExcludedMoviesPath, "Path to excluded movies file must be entered")
+                        'Check it's a valid path:
+                        Dim wpath As String = txtManualExcludedMoviesPath.Text
+                        If Not wpath.Contains("\") Then
+                            'Not a path without a backslash!
+                            epManualUpdater.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
                             IsValid = False
                         Else
-                            'Check it's a valid path:
-                            Dim wpath As String = txtManualExcludedMoviesPath.Text
-                            If Not wpath.Contains("\") Then
-                                'Not a path without a backslash!
-                                epManualUpdater.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
-                                IsValid = False
-                            Else
-                                wpath = wpath.Substring(0, wpath.LastIndexOf("\"))
-                                If Directory.Exists(wpath) Then
-                                    If txtManualExcludedMoviesPath.Text.EndsWith("\") = True Then
-                                        txtManualExcludedMoviesPath.Text += "AMCUpdater_Excluded_Files.txt"
-                                    ElseIf txtManualExcludedMoviesPath.Text.EndsWith(".txt") = True Then
-                                        'Else
-                                        'txtManualExcludedMoviesPath.Text += "\AMCUpdater_Excluded_Files.txt"
-                                    End If
-                                    epInteractive.SetError(txtManualExcludedMoviesPath, "")
-                                Else
-                                    epInteractive.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
-                                    IsValid = False
+                            wpath = wpath.Substring(0, wpath.LastIndexOf("\"))
+                            If Directory.Exists(wpath) Then
+                                If txtManualExcludedMoviesPath.Text.EndsWith("\") = True Then
+                                    txtManualExcludedMoviesPath.Text += "AMCUpdater_Excluded_Files.txt"
+                                ElseIf txtManualExcludedMoviesPath.Text.EndsWith(".txt") = True Then
+                                    'Else
+                                    'txtManualExcludedMoviesPath.Text += "\AMCUpdater_Excluded_Files.txt"
                                 End If
+                                epInteractive.SetError(txtManualExcludedMoviesPath, "")
+                            Else
+                                epInteractive.SetError(txtManualExcludedMoviesPath, "Please enter a valid file path")
+                                IsValid = False
                             End If
                         End If
+                    End If
 
-                        'Internet parser file required:
-                        If txtManualInternetParserPath.Text = String.Empty Then
+                    'Internet parser file required:
+                    If txtManualInternetParserPath.Text = String.Empty Then
                         epManualUpdater.SetError(txtManualInternetParserPath, "Path to Internet Grabber Script must be entered")
+                        IsValid = False
+                    Else
+                        Dim wpath As String = txtManualInternetParserPath.Text
+                        If Not wpath.Contains("\") Then
+                            'Not a path without a backslash!
+                            epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Grabber Script path.")
                             IsValid = False
                         Else
-                            Dim wpath As String = txtManualInternetParserPath.Text
-                            If Not wpath.Contains("\") Then
-                                'Not a path without a backslash!
-                            epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Grabber Script path.")
-                                IsValid = False
+                            If File.Exists(wpath) Then
+                                epManualUpdater.SetError(txtManualInternetParserPath, "")
                             Else
-                                If File.Exists(wpath) Then
-                                    epManualUpdater.SetError(txtManualInternetParserPath, "")
-                                Else
                                 epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Grabber Script path.")
-                                    IsValid = False
-                                End If
+                                IsValid = False
                             End If
                         End If
                     End If
                 End If
+            End If
         End If
 
         If chkManualParametersUpdateAll.Checked Then
@@ -2268,7 +2350,7 @@ Public Class Form1
             VideoBindingSource.SuspendBinding()
         End If
     End Sub
- 
+
     Private Sub BindingNavigatorPositionItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorPositionItem.Click
 
     End Sub
