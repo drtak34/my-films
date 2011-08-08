@@ -9468,11 +9468,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       FileTarget fileTarget = new FileTarget();
       fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName);
-      fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff} " +
-                          "${level:fixedLength=true:padding=5} " +
+      fileTarget.Layout = "${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff} " + "${level:fixedLength=true:padding=5} " +
                           "[${logger:fixedLength=true:padding=20:shortName=true}]: ${message} " +
-                          "${exception:format=tostring}" +
-                          "${qpc}";
+                          "${exception:format=tostring}";
+                          //"${qpc}";
                          //${qpc:normalize=Boolean:difference=Boolean:alignDecimalPoint=Boolean:precision=Integer:seconds=Boolean}
 
       config.AddTarget("file", fileTarget);
