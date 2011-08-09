@@ -926,7 +926,7 @@ Public Class AntProcessor
 
         If e.Error IsNot Nothing Then
             'If e.Error.Message.ToString <> "" Then
-            LogEvent("ERROR : " & e.Error.Message.ToLower, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ERROR : " & e.Error.Message.ToLower & ", " & e.Error.InnerException.Message.ToString, EventLogLevel.ErrorOrSimilar)
             'End If
         End If
 
@@ -1224,7 +1224,7 @@ Public Class AntProcessor
                                 'LogEvent("  File Excluded - " & FoundFileName, EventLogLevel.Informational)
                             End If
                         Catch ex As Exception
-                            LogEvent("ERROR : " & ex.Message, EventLogLevel.ErrorOrSimilar)
+                            LogEvent("ERROR : " & ex.Message & ", " & ex.InnerException.ToString, EventLogLevel.ErrorOrSimilar)
                         End Try
                     Else
                         LogEvent("  File Excluded - " & foundFile & "  - (always ignore)", EventLogLevel.Informational)
@@ -2138,7 +2138,7 @@ Public Class AntProcessor
 
         If e.Error IsNot Nothing Then
             'If e.Error.Message.ToString <> "" Then
-            LogEvent("ERROR : " & e.Error.Message.ToLower, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ERROR : " & e.Error.Message.ToLower & ", " & e.Error.InnerException.ToString, EventLogLevel.ErrorOrSimilar)
             'End If
         End If
 
