@@ -276,6 +276,8 @@
     <String id="10798780">Trending movies</String>
     <String id="10798781">Watchlist</String>
     <String id="10798782">Shouts</String>
+    <String id="10798783">Add movie to watchlist</String>
+    <String id="10798784">Rate movie</String>
     <String id="10798800">Warning: possible long runtime!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">started for {0} films?</String>

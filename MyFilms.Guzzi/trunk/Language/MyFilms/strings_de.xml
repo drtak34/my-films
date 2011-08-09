@@ -256,7 +256,7 @@
     <String id="10798746">ist nicht für WakeOnLan konfiguriert !</String>
     <String id="10798747">Automatischer NAS Start nicht möglich ...</String>
     <String id="10798748">Globales Update abgeschlossen !</String>
-    <String id="10798751">Übersicht und Filmstart</String>
+    <String id="10798751">Übersicht</String>
     <String id="10798752">Beschreibung</String>
     <String id="10798753">Kommentar</String>
     <String id="10798754">Mitwirkende Personen</String>
@@ -276,6 +276,8 @@
     <String id="10798780">Aktuelle Trends</String>
     <String id="10798781">Beobachtungsliste</String>
     <String id="10798782">Shouts</String>
+    <String id="10798783">Füge Film zur Beobachtungsliste hinzu</String>
+    <String id="10798784">Bewerte Film</String>
     <String id="10798800">Warnung: Lange Laufzeit !</String>
     <String id="10798801">Soll wirklich die Trailersuche</String>
     <String id="10798802">für {0} Filme gestartet werden?</String>

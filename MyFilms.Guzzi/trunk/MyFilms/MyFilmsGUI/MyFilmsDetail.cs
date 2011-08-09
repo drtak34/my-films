@@ -1097,8 +1097,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798781)); // 
                     choiceViewMenu.Add("trakt-WatchedListMovies");
 
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798783)); // 
+                    //choiceViewMenu.Add("trakt-AddToWatchedListMovies");
+
                     dlgmenu.Add(GUILocalizeStrings.Get(10798782)); // Shouts
                     choiceViewMenu.Add("trakt-Shouts");
+
+                    //dlgmenu.Add(GUILocalizeStrings.Get(10798784)); // Rate
+                    //choiceViewMenu.Add("trakt-Rate");
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
@@ -1133,6 +1139,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "trakt-WatchedListMovies":
                 GUIWindowManager.ActivateWindow((int)TraktGUIWindows.WatchedListMovies, "");
                 break;
+
+              //case "trakt-AddToWatchedListMovies":
+              //  new Thread(delegate()
+              //    {
+              //      TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(MyFilms.currentMovie.Title, MyFilms.currentMovie.Year.ToString(), MyFilms.currentMovie.IMDBNumber), TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
+              //      TraktPlugin.GUI.GUIWatchListMovies.ClearCache(TraktPlugin.TraktSettings.Username);
+              //    }) { Name = "MyFilms-AddFilmToTraktWatchlist", IsBackground = true }.Start();
+              //  break;
 
               case "trakt-Shouts":
                 SetTraktShout(MyFilms.currentMovie);
