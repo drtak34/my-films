@@ -141,13 +141,15 @@ Note: You can't select that option if a Default Config is defined.</value>
   </data>
   <data name="labelTraktDescription.Text" xml:space="preserve">
     <value>"Trakt.TV" actively keeps a record of what TV shows and movies you are watching. 
-Based on your favorites, your friends, and the community, trakt recommends other TV shows and movies.
+Based on your favorites, your friends, and the community, trakt recommends 
+other TV shows and movies.
 
 You need to have the trakt plugin installed and configure a user account.
 If you don't have a useraccount, you can register on trakt website.
 
-To successfully use Trakt with MyFilms, you have to both allow MyFilms to provide data to Tralt plugin by enabling Trakt here
-and you have to enable MyFilms in Trakt setup (setup or from GUI)
+To successfully use Trakt with MyFilms, you have to both allow MyFilms to provide 
+data to Trakt plugin by enabling Trakt here and you have to enable MyFilms 
+in Trakt setup (setup or from GUI)
 
 You can enable or disable Trakt synchronisation separately for each MyFilms config.</value>
   </data>
@@ -202,14 +204,6 @@ fully qualified path to a logo is stored in the rule, so it might not be fully p
 "Use skins default logos" is the default and will search for logos in the skindirectory\media\logos 
 and it's subdirectories for logos matching the name in the logo rule. It should work in most situations.</value>
   </data>
-  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
-    <value>If enabled, fanart will be used for group views.
-MyFilms will autocreate subfolders for you.
-Images placed in those folders will be used for fanart display
- in the default group views (category, year, genre).
-
-If disabled, default fanart will be displayed, if it is enabled.</value>
-  </data>
   <data name="Fanart.ToolTip" xml:space="preserve">
     <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
 Enter the full path (or use the browse button) to the root folder containing the fanart image files.
@@ -220,12 +214,13 @@ displayed as a background image for movies without a matching fanart file. Be aw
 because of low resolution of cover images and you might get a distorted picture as covers and fanarts don't have the same size.
 Therefore it is recommended to enable “Use the default image for missing fanart”.</value>
   </data>
-  <data name="MesFilmsViews.ToolTip" xml:space="preserve">
-    <value>This path is the "root folder" for group thumbs.
-The respective thumbs will be loaded from subfolders, named like the views 
-you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
-You can place a "default.jpg" in the respective sub folder that will be displayed
-when no specific thumb can be matched.</value>
+  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
+    <value>If enabled, fanart will be used for group views.
+MyFilms will autocreate subfolders for you.
+Images placed in those folders will be used for fanart display
+ in the default group views (category, year, genre).
+
+If disabled, default fanart will be displayed, if it is enabled.</value>
   </data>
   <data name="groupBox22.ToolTip" xml:space="preserve">
     <value>Select the “Use thumbs for group views" option if you have image files 
@@ -240,6 +235,13 @@ You can also use fanart for those views, to do so, put fanart in the subfolder
 for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
 The setting for this path is done via the Fanart path setting automatically; 
 See "Fanart for default group views - path" below.</value>
+  </data>
+  <data name="MesFilmsViews.ToolTip" xml:space="preserve">
+    <value>This path is the "root folder" for group thumbs.
+The respective thumbs will be loaded from subfolders, named like the views 
+you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
+You can place a "default.jpg" in the respective sub folder that will be displayed
+when no specific thumb can be matched.</value>
   </data>
   <data name="groupBox1.ToolTip" xml:space="preserve">
     <value>Use this area to define a path where cover images are stored.
