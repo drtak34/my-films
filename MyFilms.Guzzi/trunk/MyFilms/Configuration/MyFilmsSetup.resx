@@ -155,8 +155,10 @@ You can enable or disable Trakt synchronisation separately for each MyFilms conf
   </data>
   <data name="cbAllowTraktSync.ToolTip" xml:space="preserve">
     <value>If enabled, TRAKT plugin is allowed to synchronize your movie data
-to the TRAKT site.
-Note:
+for this config to the TRAKT site.
+
+Notes:
+You can enable this for multiple configs.
 Do only enable for movie collections.
 It is not recommended to enable for private videos or documentaries, as 
 there is usually no movie data available on internet databases.</value>

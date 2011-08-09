@@ -106,11 +106,11 @@
           this.ButCopy = new System.Windows.Forms.Button();
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
-          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
-          this.pictureBox1 = new System.Windows.Forms.PictureBox();
+          this.groupBoxTrakt = new System.Windows.Forms.GroupBox();
           this.labelTraktDescription = new System.Windows.Forms.Label();
-          this.linkLabelTrakt = new System.Windows.Forms.LinkLabel();
           this.cbAllowTraktSync = new System.Windows.Forms.CheckBox();
+          this.pictureBox1 = new System.Windows.Forms.PictureBox();
+          this.linkLabelTrakt = new System.Windows.Forms.LinkLabel();
           this.groupBox9 = new System.Windows.Forms.GroupBox();
           this.chkDVDprofilerMergeWithGenreField = new System.Windows.Forms.CheckBox();
           this.groupBox25 = new System.Windows.Forms.GroupBox();
@@ -503,10 +503,11 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.groupBoxTrakt = new System.Windows.Forms.GroupBox();
           this.groupBoxExternal = new System.Windows.Forms.GroupBox();
           this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
+          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
+          this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.groupBox9.SuspendLayout();
           this.groupBox25.SuspendLayout();
@@ -558,7 +559,6 @@
           this.General.SuspendLayout();
           this.Tab_Other.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
-          this.groupBoxTrakt.SuspendLayout();
           this.groupBoxExternal.SuspendLayout();
           this.SuspendLayout();
           // 
@@ -675,69 +675,69 @@
           // 
           // Tab_Trakt
           // 
-          this.Tab_Trakt.Controls.Add(this.groupBoxExternal);
           this.Tab_Trakt.Controls.Add(this.groupBoxTrakt);
           this.Tab_Trakt.Location = new System.Drawing.Point(4, 22);
           this.Tab_Trakt.Name = "Tab_Trakt";
           this.Tab_Trakt.Padding = new System.Windows.Forms.Padding(3);
           this.Tab_Trakt.Size = new System.Drawing.Size(747, 354);
           this.Tab_Trakt.TabIndex = 10;
-          this.Tab_Trakt.Text = "Trakt/External";
+          this.Tab_Trakt.Text = "Trakt";
           this.ToolTip1.SetToolTip(this.Tab_Trakt, "Setup for Trakt user settings");
           this.Tab_Trakt.UseVisualStyleBackColor = true;
           this.Tab_Trakt.Visible = false;
           // 
-          // cbAllowRecentAddedAPI
+          // groupBoxTrakt
           // 
-          this.cbAllowRecentAddedAPI.AutoSize = true;
-          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(16, 51);
-          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
-          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
-          this.cbAllowRecentAddedAPI.TabIndex = 4;
-          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added\" API";
-          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config will be included when external plugins ask for \"recenty a" +
-                  "dded\" movies.\r\nYou can enable this for multple configs.");
-          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
-          // 
-          // pictureBox1
-          // 
-          this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.trakt;
-          this.pictureBox1.Location = new System.Drawing.Point(231, 30);
-          this.pictureBox1.Name = "pictureBox1";
-          this.pictureBox1.Size = new System.Drawing.Size(52, 50);
-          this.pictureBox1.TabIndex = 3;
-          this.pictureBox1.TabStop = false;
+          this.groupBoxTrakt.Controls.Add(this.labelTraktDescription);
+          this.groupBoxTrakt.Controls.Add(this.cbAllowTraktSync);
+          this.groupBoxTrakt.Controls.Add(this.pictureBox1);
+          this.groupBoxTrakt.Controls.Add(this.linkLabelTrakt);
+          this.groupBoxTrakt.Location = new System.Drawing.Point(29, 25);
+          this.groupBoxTrakt.Name = "groupBoxTrakt";
+          this.groupBoxTrakt.Size = new System.Drawing.Size(698, 296);
+          this.groupBoxTrakt.TabIndex = 5;
+          this.groupBoxTrakt.TabStop = false;
+          this.groupBoxTrakt.Text = "Trakt ...";
           // 
           // labelTraktDescription
           // 
           this.labelTraktDescription.AutoSize = true;
-          this.labelTraktDescription.Location = new System.Drawing.Point(42, 119);
+          this.labelTraktDescription.Location = new System.Drawing.Point(35, 106);
           this.labelTraktDescription.Name = "labelTraktDescription";
           this.labelTraktDescription.Size = new System.Drawing.Size(407, 156);
           this.labelTraktDescription.TabIndex = 2;
           this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
           // 
-          // linkLabelTrakt
-          // 
-          this.linkLabelTrakt.AutoSize = true;
-          this.linkLabelTrakt.Location = new System.Drawing.Point(356, 51);
-          this.linkLabelTrakt.Name = "linkLabelTrakt";
-          this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
-          this.linkLabelTrakt.TabIndex = 1;
-          this.linkLabelTrakt.TabStop = true;
-          this.linkLabelTrakt.Text = "Trakt Website";
-          this.linkLabelTrakt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTrakt_LinkClicked);
-          // 
           // cbAllowTraktSync
           // 
           this.cbAllowTraktSync.AutoSize = true;
-          this.cbAllowTraktSync.Location = new System.Drawing.Point(25, 51);
+          this.cbAllowTraktSync.Location = new System.Drawing.Point(38, 50);
           this.cbAllowTraktSync.Name = "cbAllowTraktSync";
           this.cbAllowTraktSync.Size = new System.Drawing.Size(176, 17);
           this.cbAllowTraktSync.TabIndex = 0;
           this.cbAllowTraktSync.Text = "Enable TRAKT Synchronisation";
           this.ToolTip1.SetToolTip(this.cbAllowTraktSync, resources.GetString("cbAllowTraktSync.ToolTip"));
           this.cbAllowTraktSync.UseVisualStyleBackColor = true;
+          // 
+          // pictureBox1
+          // 
+          this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.trakt;
+          this.pictureBox1.Location = new System.Drawing.Point(390, 26);
+          this.pictureBox1.Name = "pictureBox1";
+          this.pictureBox1.Size = new System.Drawing.Size(52, 50);
+          this.pictureBox1.TabIndex = 3;
+          this.pictureBox1.TabStop = false;
+          // 
+          // linkLabelTrakt
+          // 
+          this.linkLabelTrakt.AutoSize = true;
+          this.linkLabelTrakt.Location = new System.Drawing.Point(275, 51);
+          this.linkLabelTrakt.Name = "linkLabelTrakt";
+          this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
+          this.linkLabelTrakt.TabIndex = 1;
+          this.linkLabelTrakt.TabStop = true;
+          this.linkLabelTrakt.Text = "Trakt Website";
+          this.linkLabelTrakt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTrakt_LinkClicked);
           // 
           // groupBox9
           // 
@@ -4475,7 +4475,7 @@
           this.AMCConfigView.Location = new System.Drawing.Point(20, 73);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(706, 263);
+          this.AMCConfigView.Size = new System.Drawing.Size(491, 263);
           this.AMCConfigView.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
@@ -5012,6 +5012,7 @@
           // 
           // Tab_Other
           // 
+          this.Tab_Other.Controls.Add(this.groupBoxExternal);
           this.Tab_Other.Controls.Add(this.btnGrabberInterface);
           this.Tab_Other.Controls.Add(this.lblAMCupdaterConfigPreview);
           this.Tab_Other.Controls.Add(this.AMCConfigView);
@@ -5025,7 +5026,7 @@
           // 
           // btnGrabberInterface
           // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(550, 26);
+          this.btnGrabberInterface.Location = new System.Drawing.Point(29, 12);
           this.btnGrabberInterface.Name = "btnGrabberInterface";
           this.btnGrabberInterface.Size = new System.Drawing.Size(152, 27);
           this.btnGrabberInterface.TabIndex = 91;
@@ -5071,27 +5072,14 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // groupBoxTrakt
-          // 
-          this.groupBoxTrakt.Controls.Add(this.labelTraktDescription);
-          this.groupBoxTrakt.Controls.Add(this.cbAllowTraktSync);
-          this.groupBoxTrakt.Controls.Add(this.pictureBox1);
-          this.groupBoxTrakt.Controls.Add(this.linkLabelTrakt);
-          this.groupBoxTrakt.Location = new System.Drawing.Point(19, 13);
-          this.groupBoxTrakt.Name = "groupBoxTrakt";
-          this.groupBoxTrakt.Size = new System.Drawing.Size(499, 324);
-          this.groupBoxTrakt.TabIndex = 5;
-          this.groupBoxTrakt.TabStop = false;
-          this.groupBoxTrakt.Text = "Trakt ...";
-          // 
           // groupBoxExternal
           // 
           this.groupBoxExternal.Controls.Add(this.labelRecentlyAddedAPI);
           this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
-          this.groupBoxExternal.Location = new System.Drawing.Point(524, 13);
+          this.groupBoxExternal.Location = new System.Drawing.Point(532, 12);
           this.groupBoxExternal.Name = "groupBoxExternal";
           this.groupBoxExternal.Size = new System.Drawing.Size(200, 324);
-          this.groupBoxExternal.TabIndex = 6;
+          this.groupBoxExternal.TabIndex = 92;
           this.groupBoxExternal.TabStop = false;
           this.groupBoxExternal.Text = "Recentrly Added API ...";
           // 
@@ -5104,6 +5092,18 @@
           this.labelRecentlyAddedAPI.TabIndex = 5;
           this.labelRecentlyAddedAPI.Text = "You can enable or disable \r\nper config, if you want to \r\ninclude the catalog to t" +
               "he \r\nrecently added API.";
+          // 
+          // cbAllowRecentAddedAPI
+          // 
+          this.cbAllowRecentAddedAPI.AutoSize = true;
+          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(16, 51);
+          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
+          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
+          this.cbAllowRecentAddedAPI.TabIndex = 4;
+          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added\" API";
+          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config will be included when external plugins ask for \"recenty a" +
+                  "dded\" movies.\r\nYou can enable this for multiple configs.");
+          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 
@@ -5134,6 +5134,8 @@
           this.Load += new System.EventHandler(this.MesFilmsSetup_Load);
           this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MesFilmsSetup_Quit);
           this.Tab_Trakt.ResumeLayout(false);
+          this.groupBoxTrakt.ResumeLayout(false);
+          this.groupBoxTrakt.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
           this.groupBox9.ResumeLayout(false);
           this.groupBox9.PerformLayout();
@@ -5222,8 +5224,6 @@
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
-          this.groupBoxTrakt.ResumeLayout(false);
-          this.groupBoxTrakt.PerformLayout();
           this.groupBoxExternal.ResumeLayout(false);
           this.groupBoxExternal.PerformLayout();
           this.ResumeLayout(false);
@@ -5639,9 +5639,9 @@
         private Button btnWatchedImport;
         private Button btnWatchedExport;
         private CheckBox chkFanartDefaultViewsUseRandom;
-        private CheckBox cbAllowRecentAddedAPI;
         private GroupBox groupBoxTrakt;
         private GroupBox groupBoxExternal;
         private Label labelRecentlyAddedAPI;
+        private CheckBox cbAllowRecentAddedAPI;
     }
 }
