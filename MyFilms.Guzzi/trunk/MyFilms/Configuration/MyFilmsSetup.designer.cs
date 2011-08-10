@@ -449,6 +449,7 @@
           this.AMCConfigView = new System.Windows.Forms.ListView();
           this.Option = new System.Windows.Forms.ColumnHeader();
           this.Value = new System.Windows.Forms.ColumnHeader();
+          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
           this.AntFilterItem4 = new System.Windows.Forms.ComboBox();
@@ -498,14 +499,13 @@
           this.Tab_Update = new System.Windows.Forms.TabPage();
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
+          this.groupBoxExternal = new System.Windows.Forms.GroupBox();
+          this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
           this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.groupBoxExternal = new System.Windows.Forms.GroupBox();
-          this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
-          this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -558,8 +558,8 @@
           this.Tab_Update.SuspendLayout();
           this.General.SuspendLayout();
           this.Tab_Other.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           this.groupBoxExternal.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -1209,7 +1209,7 @@
           // chkFanartDefaultViewsUseRandom
           // 
           this.chkFanartDefaultViewsUseRandom.AutoSize = true;
-          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(155, 36);
+          this.chkFanartDefaultViewsUseRandom.Location = new System.Drawing.Point(150, 36);
           this.chkFanartDefaultViewsUseRandom.Name = "chkFanartDefaultViewsUseRandom";
           this.chkFanartDefaultViewsUseRandom.Size = new System.Drawing.Size(86, 30);
           this.chkFanartDefaultViewsUseRandom.TabIndex = 81;
@@ -1223,16 +1223,16 @@
           this.chkFanartDefaultViews.AutoSize = true;
           this.chkFanartDefaultViews.Location = new System.Drawing.Point(37, 36);
           this.chkFanartDefaultViews.Name = "chkFanartDefaultViews";
-          this.chkFanartDefaultViews.Size = new System.Drawing.Size(118, 30);
+          this.chkFanartDefaultViews.Size = new System.Drawing.Size(109, 30);
           this.chkFanartDefaultViews.TabIndex = 80;
-          this.chkFanartDefaultViews.Text = "Fanart for \r\ndefault group views";
+          this.chkFanartDefaultViews.Text = "Fanart for default \r\ngroup views";
           this.ToolTip1.SetToolTip(this.chkFanartDefaultViews, resources.GetString("chkFanartDefaultViews.ToolTip"));
           this.chkFanartDefaultViews.UseVisualStyleBackColor = true;
           // 
           // chkDfltFanartImageAll
           // 
           this.chkDfltFanartImageAll.AutoSize = true;
-          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(155, 66);
+          this.chkDfltFanartImageAll.Location = new System.Drawing.Point(150, 66);
           this.chkDfltFanartImageAll.Name = "chkDfltFanartImageAll";
           this.chkDfltFanartImageAll.Size = new System.Drawing.Size(67, 30);
           this.chkDfltFanartImageAll.TabIndex = 79;
@@ -4491,6 +4491,18 @@
           this.Value.Text = "Value";
           this.Value.Width = 515;
           // 
+          // cbAllowRecentAddedAPI
+          // 
+          this.cbAllowRecentAddedAPI.AutoSize = true;
+          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(16, 51);
+          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
+          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
+          this.cbAllowRecentAddedAPI.TabIndex = 4;
+          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added\" API";
+          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config will be included when external plugins ask for \"recenty a" +
+                  "dded\" movies.\r\nYou can enable this for multiple configs.");
+          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
+          // 
           // AntFilterSign4
           // 
           this.AntFilterSign4.Location = new System.Drawing.Point(0, 0);
@@ -5024,6 +5036,27 @@
           this.Tab_Other.Text = "Other";
           this.Tab_Other.UseVisualStyleBackColor = true;
           // 
+          // groupBoxExternal
+          // 
+          this.groupBoxExternal.Controls.Add(this.labelRecentlyAddedAPI);
+          this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
+          this.groupBoxExternal.Location = new System.Drawing.Point(532, 12);
+          this.groupBoxExternal.Name = "groupBoxExternal";
+          this.groupBoxExternal.Size = new System.Drawing.Size(200, 324);
+          this.groupBoxExternal.TabIndex = 92;
+          this.groupBoxExternal.TabStop = false;
+          this.groupBoxExternal.Text = "Recentrly Added API ...";
+          // 
+          // labelRecentlyAddedAPI
+          // 
+          this.labelRecentlyAddedAPI.AutoSize = true;
+          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(34, 119);
+          this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
+          this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(133, 52);
+          this.labelRecentlyAddedAPI.TabIndex = 5;
+          this.labelRecentlyAddedAPI.Text = "You can enable or disable \r\nper config, if you want to \r\ninclude the catalog to t" +
+              "he \r\nrecently added API.";
+          // 
           // btnGrabberInterface
           // 
           this.btnGrabberInterface.Location = new System.Drawing.Point(29, 12);
@@ -5071,39 +5104,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // groupBoxExternal
-          // 
-          this.groupBoxExternal.Controls.Add(this.labelRecentlyAddedAPI);
-          this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
-          this.groupBoxExternal.Location = new System.Drawing.Point(532, 12);
-          this.groupBoxExternal.Name = "groupBoxExternal";
-          this.groupBoxExternal.Size = new System.Drawing.Size(200, 324);
-          this.groupBoxExternal.TabIndex = 92;
-          this.groupBoxExternal.TabStop = false;
-          this.groupBoxExternal.Text = "Recentrly Added API ...";
-          // 
-          // labelRecentlyAddedAPI
-          // 
-          this.labelRecentlyAddedAPI.AutoSize = true;
-          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(34, 119);
-          this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
-          this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(133, 52);
-          this.labelRecentlyAddedAPI.TabIndex = 5;
-          this.labelRecentlyAddedAPI.Text = "You can enable or disable \r\nper config, if you want to \r\ninclude the catalog to t" +
-              "he \r\nrecently added API.";
-          // 
-          // cbAllowRecentAddedAPI
-          // 
-          this.cbAllowRecentAddedAPI.AutoSize = true;
-          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(16, 51);
-          this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
-          this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
-          this.cbAllowRecentAddedAPI.TabIndex = 4;
-          this.cbAllowRecentAddedAPI.Text = "Enable \"Recently added\" API";
-          this.ToolTip1.SetToolTip(this.cbAllowRecentAddedAPI, "If checked, this config will be included when external plugins ask for \"recenty a" +
-                  "dded\" movies.\r\nYou can enable this for multiple configs.");
-          this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
           // 
           // MyFilmsSetup
           // 
@@ -5223,9 +5223,9 @@
           this.General.ResumeLayout(false);
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           this.groupBoxExternal.ResumeLayout(false);
           this.groupBoxExternal.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
