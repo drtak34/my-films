@@ -2562,6 +2562,20 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{8c818b0e-b856-43ab-b525-57cc41342679}-IMDB.FR.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB.FR.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\alpacine.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{eb74efa6-94f4-491d-96a1-b71c9f632bd0}-alpacine.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\alpacine.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\cineol.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2632428f-f451-41b2-a1e6-7bb739c990d3}-cineol.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\cineol.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3456,9 +3470,9 @@ Please refer to the Wiki online documentation.</Value>
         </MinVersion>
         <MaxVersion>
           <Major>1</Major>
-          <Minor>2</Minor>
-          <Build>9</Build>
-          <Revision>99999</Revision>
+          <Minor>1</Minor>
+          <Build>6</Build>
+          <Revision>27644</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
         <Message>My Films requires MediaPortal min version 1.1.6.27644 (1.2.0 beta).</Message>
@@ -3470,7 +3484,7 @@ Please refer to the Wiki online documentation.</Value>
         <MinVersion>
           <Major>1</Major>
           <Minor>0</Minor>
-          <Build>4</Build>
+          <Build>5</Build>
           <Revision>1</Revision>
         </MinVersion>
         <MaxVersion>
@@ -3485,6 +3499,27 @@ Please refer to the Wiki online documentation.</Value>
       </DependencyItem>
     </Items>
   </Dependencies>
+  <PluginDependencies>
+    <Items>
+      <PluginDependencyItem AssemblyName="BrowseTheWeb.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.7.0</MinRequiredVersion>
+              <DesignedForVersion>1.1.7.0</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items>
+            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.DB" />
+          </Items>
+        </SubSystemsUsed>
+      </PluginDependencyItem>
+    </Items>
+  </PluginDependencies>
   <GeneralInfo>
     <Name>MyFilms</Name>
     <Id>ceddd4d1-4cac-4846-9af5-f4daee1bbddc</Id>
@@ -3502,9 +3537,9 @@ Please refer to the Wiki online documentation.</Value>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Beta</DevelopmentStatus>
     <OnlineLocation />
-    <ReleaseDate>2011-02-21T22:05:54</ReleaseDate>
+    <ReleaseDate>2011-08-10T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1286(MP12).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1286(MP12RC).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -6061,6 +6096,20 @@ Please refer to the Wiki online documentation.</Value>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\alpacine.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{eb74efa6-94f4-491d-96a1-b71c9f632bd0}-alpacine.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\alpacine.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\cineol.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2632428f-f451-41b2-a1e6-7bb739c990d3}-cineol.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\cineol.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultCover.jpg</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{d5363a28-1df8-4674-9430-d5c395ca307d}-DefaultCover.jpg</ZipFileName>
@@ -6581,14 +6630,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c9972fed-0ac7-4d70-b7d6-f292f1730433}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{b2c2f9b0-2651-458d-9bee-18d369292656}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{572557b7-0d7e-4db4-b881-dd9292814641}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{ab86fa89-5d5e-41e9-bb21-a942bbca7dad}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
@@ -6656,9 +6705,10 @@ Please refer to the Wiki online documentation.</Value>
         <Recursive>true</Recursive>
       </FolderGroup>
     </FolderGroups>
-    <ProjectFilename>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-12.xmp2</ProjectFilename>
+    <ProjectFilename>MyFilms-12.xmp2</ProjectFilename>
     <UpdatePath1 />
     <UpdatePath2 />
     <UpdatePath3 />
   </ProjectSettings>
+  <IsSkin>false</IsSkin>
 </PackageClass>
