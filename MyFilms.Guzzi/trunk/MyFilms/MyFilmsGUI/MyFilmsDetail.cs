@@ -1097,14 +1097,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(10798781)); // 
                     choiceViewMenu.Add("trakt-WatchedListMovies");
 
-                    //dlgmenu.Add(GUILocalizeStrings.Get(10798783)); // 
-                    //choiceViewMenu.Add("trakt-AddToWatchedListMovies");
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798783)); // 
+                    choiceViewMenu.Add("trakt-AddToWatchedListMovies");
 
                     dlgmenu.Add(GUILocalizeStrings.Get(10798782)); // Shouts
                     choiceViewMenu.Add("trakt-Shouts");
 
-                    //dlgmenu.Add(GUILocalizeStrings.Get(10798784)); // Rate
-                    //choiceViewMenu.Add("trakt-Rate");
+                    dlgmenu.Add(GUILocalizeStrings.Get(10798784)); // Rate
+                    choiceViewMenu.Add("trakt-Rate");
 
                     dlgmenu.DoModal(GetID);
                     if (dlgmenu.SelectedLabel == -1)
@@ -1140,31 +1140,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIWindowManager.ActivateWindow((int)TraktGUIWindows.WatchedListMovies, "");
                 break;
 
-              //case "trakt-AddToWatchedListMovies":
-              //  new Thread(delegate()
-              //    {
-              //      TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(MyFilms.currentMovie.Title, MyFilms.currentMovie.Year.ToString(), MyFilms.currentMovie.IMDBNumber), TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
-              //      TraktPlugin.GUI.GUIWatchListMovies.ClearCache(TraktPlugin.TraktSettings.Username);
-              //    }) { Name = "MyFilms-AddFilmToTraktWatchlist", IsBackground = true }.Start();
-              //  break;
+              case "trakt-AddToWatchedListMovies":
+                if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
+                {
+                  TraktAddToWatchedList(MyFilms.currentMovie);
+                }
+                else
+                {
+                  this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
+                }
+
+                break;
 
               case "trakt-Shouts":
                 SetTraktShout(MyFilms.currentMovie);
                 GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts);
                 break;
 
-              //case "trakt-Rate":
-              //      TraktRateMovie rateObject = new TraktRateMovie
-              //      {
-              //        IMDBID = MyFilms.currentMovie.IMDBNumber,
-              //        Title = MyFilms.currentMovie.Title,
-              //        Year = MyFilms.currentMovie.Year.ToString(),
-              //        Rating = "love",
-              //        UserName = TraktSettings.Username,
-              //        Password = TraktSettings.Password
-              //      };
-              //      GUIUtils.ShowRateDialog<TraktRateMovie>(rateObject);
-              //      break;
+              case "trakt-Rate":
+                if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
+                {
+                  TraktRate(MyFilms.currentMovie);
+                }
+                else
+                {
+                  this.ShowMessageDialog("Error !", "", "Your installed Trakt Version does not allow this feature!");
+                }
+                break;
 
               case "trailermenu":
                     if (dlgmenu == null) return;
@@ -1734,12 +1736,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
-      
         private void SetTraktShout(MFMovie movie)
         {
           TraktPlugin.GUI.GUIShouts.ShoutType = TraktPlugin.GUI.GUIShouts.ShoutTypeEnum.movie;
           TraktPlugin.GUI.GUIShouts.MovieInfo = new TraktPlugin.GUI.MovieShout { IMDbId = movie.IMDBNumber, TMDbId = "", Title = movie.Title, Year = movie.Year.ToString() };
           TraktPlugin.GUI.GUIShouts.Fanart = movie.Fanart;
+        }
+
+        private void TraktRate(MFMovie movie)
+        {
+          TraktPlugin.TraktAPI.DataStructures.TraktRateMovie rateObject = new TraktPlugin.TraktAPI.DataStructures.TraktRateMovie
+          {
+            IMDBID = movie.IMDBNumber,
+            Title = movie.Title,
+            Year = movie.Year.ToString(),
+            Rating = "love",
+            UserName = TraktPlugin.TraktSettings.Username,
+            Password = TraktPlugin.TraktSettings.Password
+          };
+          TraktPlugin.GUI.GUIUtils.ShowRateDialog<TraktPlugin.TraktAPI.DataStructures.TraktRateMovie>(rateObject);
+        }
+
+        private void TraktAddToWatchedList(MFMovie movie)
+        {
+        new Thread(delegate()
+        {
+          TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(movie.Title, movie.Year.ToString(), movie.IMDBNumber), TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
+          TraktPlugin.GUI.GUIWatchListMovies.ClearCache(TraktPlugin.TraktSettings.Username);
+        }) { Name = "MyFilms-AddFilmToTraktWatchlist", IsBackground = true }.Start();
         }
 
         private static MFMovie GetMovieFromRecord(DataRow sr)

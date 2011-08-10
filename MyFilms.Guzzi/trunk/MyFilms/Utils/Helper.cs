@@ -482,7 +482,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         #endregion
 
         #region Assembly methods
-        public static bool IsAssemblyAvailable(string name, Version ver) {
+        public static bool IsAssemblyAvailable(string name, Version ver, bool onlymatchingversion) {
             bool result = false;
 
             LogMyFilms.Debug(string.Format("Checking whether assembly {0} is available and loaded...", name));
@@ -493,7 +493,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                 {
                     if (a.GetName().Name == name && a.GetName().Version >= ver)
                     {
-                        LogMyFilms.Debug(string.Format("Assembly {0} is available and loaded.", name));
+                      LogMyFilms.Debug(string.Format("Assembly '{0}' with Version '{1}' is available and loaded.", name, a.GetName().Version.ToString()));
                         result = true;
                         break;
                     }
@@ -503,7 +503,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
                     LogMyFilms.Debug(string.Format("Assembly.GetName() call failed for '{0}'!\n", a.Location));
                 }
 
-            if (!result) {
+            if (!result && !onlymatchingversion) {
                 LogMyFilms.Debug(string.Format("Assembly {0} is not loaded (not available?), trying to load it manually...", name));
                 try {
                     //Assembly assembly = AppDomain.CurrentDomain.Reflection(new AssemblyName(name));
@@ -529,7 +529,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
-            return Helper.IsAssemblyAvailable("SubCentral", new Version(1, 0, 0, 0)) && IsPluginEnabled("SubCentral");
+            return Helper.IsAssemblyAvailable("SubCentral", new Version(1, 0, 0, 0), false) && IsPluginEnabled("SubCentral");
           }
         }
 
@@ -539,7 +539,17 @@ namespace MyFilmsPlugin.MyFilms.Utils
           {
             //if (!File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")))
             //  return false;
-            return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 4, 1)) && IsPluginEnabled("Trakt");
+            return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 5, 1), false) && IsPluginEnabled("Trakt");
+          }
+        }
+
+        public static bool IsTraktAvailableAndEnabledAndNewVersion
+        {
+          get
+          {
+            //if (!File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")))
+            //  return false;
+            return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 6, 1), true) && IsPluginEnabled("Trakt");
           }
         }
 
