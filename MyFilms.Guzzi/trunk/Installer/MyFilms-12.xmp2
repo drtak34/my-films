@@ -3494,7 +3494,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.0.4.1 or above.</Message>
+        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.0.5.1 or above.</Message>
         <Name>Trakt for MediaPortal</Name>
       </DependencyItem>
     </Items>
