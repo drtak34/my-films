@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("616, 685")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
         Public Property MainFormSize() As Global.System.Drawing.Size
             Get
                 Return CType(Me("MainFormSize"),Global.System.Drawing.Size)
@@ -68,13 +68,49 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("30, 30")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
         Public Property MainFormLocation() As Global.System.Drawing.Point
             Get
                 Return CType(Me("MainFormLocation"),Global.System.Drawing.Point)
             End Get
             Set
                 Me("MainFormLocation") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
+        Public Property LogFormSize() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("LogFormSize"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("LogFormSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
+        Public Property LogFormLocation() As Global.System.Drawing.Point
+            Get
+                Return CType(Me("LogFormLocation"),Global.System.Drawing.Point)
+            End Get
+            Set
+                Me("LogFormLocation") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property LogFormVisible() As Boolean
+            Get
+                Return CType(Me("LogFormVisible"),Boolean)
+            End Get
+            Set
+                Me("LogFormVisible") = value
             End Set
         End Property
     End Class

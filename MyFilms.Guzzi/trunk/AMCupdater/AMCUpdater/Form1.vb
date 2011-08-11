@@ -42,13 +42,25 @@ Public Class Form1
     End Sub
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If My.Settings.MainFormSize.Height <> 0 And My.Settings.MainFormSize.Width <> 0 Then
+            Me.Size = My.Settings.MainFormSize
+        End If
+        If My.Settings.MainFormLocation.X <> 0 And My.Settings.MainFormLocation.Y <> 0 Then
+            Me.Location = My.Settings.MainFormLocation
+        End If
+
         Me.AddOwnedForm(dgLogWindow)
-        dgLogWindow.Visible = True
-
-        Me.Size = My.Settings.MainFormSize
-        Me.Location = My.Settings.MainFormLocation
-
-
+        If My.Settings.LogFormVisible = True Then
+            dgLogWindow.Visible = True
+        Else
+            dgLogWindow.Visible = False
+        End If
+        If My.Settings.LogFormSize.Height <> 0 And My.Settings.LogFormSize.Width <> 0 Then
+            dgLogWindow.Size = My.Settings.LogFormSize
+        End If
+        If My.Settings.LogFormLocation.X <> 0 And My.Settings.LogFormLocation.Y <> 0 Then
+            dgLogWindow.Location = My.Settings.LogFormLocation
+        End If
 
         'Dim lngLeft As Long
         'Dim lngTop As Long
@@ -185,13 +197,19 @@ Public Class Form1
     Private Sub Form1_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
         Try
-            'Set my user settings MainFormSize to the current(Form) 's size
+            'Set my user settings to save size and position
             My.Settings.MainFormSize = Me.Size
-            'Set my user setting MainFormLocation to the current form's location
             My.Settings.MainFormLocation = Me.Location
-            'Save the user settings so next time the window will be the same size and location
-            My.Settings.Save()
+            My.Settings.LogFormSize = dgLogWindow.Size
+            My.Settings.LogFormLocation = dgLogWindow.Location
 
+            If dgLogWindow.Visible = True Then
+                My.Settings.LogFormVisible = True 'save visible status 
+            Else
+                My.Settings.LogFormVisible = False
+            End If
+
+            My.Settings.Save() 'Save the user settings so next time the window will be the same size and location
             'MsgBox("Your settings were saved successfully.", _
             'MsgBoxStyle.OkOnly, "Save...")
         Catch ex As Exception
@@ -830,9 +848,9 @@ Public Class Form1
             btnShowHideLog.Text = "Show Log >>"
             btnShowHideLogTest.Text = "Show Log >>"
         Else
-            dgLogWindow.SetDesktopLocation(Me.Location.X, Me.Location.Y + Me.Height)
-            dgLogWindow.Width = Me.Width
-            'dgLogWindow.Height = 150
+            'dgLogWindow.SetDesktopLocation(Me.Location.X, Me.Location.Y + Me.Height)
+            'dgLogWindow.Width = Me.Width
+            ''dgLogWindow.Height = 150
             dgLogWindow.Show()
 
             'dgLogWindow.Height = Me.Height
@@ -846,7 +864,7 @@ Public Class Form1
     End Sub
 
     Private Sub Form1_Move(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Move
-        If dgLogWindow.Visible = True Then
+        If dgLogWindow.Visible = True And dgLogWindow.Location.X = Me.Location.X Then
 
             dgLogWindow.SetDesktopLocation(Me.Location.X, Me.Location.Y + Me.Height)
             'dgLogWindow.SetDesktopLocation(Me.Location.X + Me.Width, Me.Location.Y)
