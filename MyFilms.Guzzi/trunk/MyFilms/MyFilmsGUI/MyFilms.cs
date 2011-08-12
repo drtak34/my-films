@@ -343,23 +343,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static bool trailerscrobbleactive = false;
     public int actorID = 0;
+
     public enum optimizeOption { optimizeDisabled };
+
     public static bool InitialStart = false; //Added to implement InitialViewSetup
     public static bool InitialIsOnlineScan = false; //Added to implement switch if facade should display media availability
 
     // current Random Fanart
     public static List<string> currentFanartList = new List<string>();
+    
     // current Trailer List for Scrobbling
-    public static List<MFMovie> currentTrailerMoviesList = new List<MFMovie>();
+    private static List<MFMovie> currentTrailerMoviesList = new List<MFMovie>();
+    private static MFMovie currentTrailerPlayingItem = null;
 
     //PlayList currentPlaylist = null;
     //PlayListItem currentPlayingItem = null;
 
     private bool NetworkAvailabilityChanged_Subscribed = false;
     private bool PowerModeChanged_Subscribed = false;
-
-
-
+    private bool PlayerEvents_Subscribed = false;
 
     private double lastPublished = 0;
     private Timer publishTimer;
@@ -4248,8 +4250,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       SetDummyControlsForFacade(currentListLevel);
       if (conf.LastID == ID_MyFilmsDetail)
         GUIWindowManager.ActivateWindow(ID_MyFilmsDetail); // if last window in use was detailed one display that one again
-      if (conf.LastID == ID_MyFilmsActors)
+      else if (conf.LastID == ID_MyFilmsActors)
         GUIWindowManager.ActivateWindow(ID_MyFilmsActors); // if last window in use was actor one display that one again
+      else GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
     }
 
     private void ResetGlobalFilters()
@@ -7242,7 +7245,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlgYesNo.SetDefaultToYes(false);
         dlgYesNo.DoModal(ID_MyFilms);
         if (dlgYesNo.IsConfirmed)
-          TrailerScrobbleOptions(0);
+          this.TrailerScrobbleOptionsMenu(0);
         //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
       }
 
@@ -7259,11 +7262,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       ArrayList trailer = new ArrayList();
       trailer.Add(currentTrailerMoviesList[RandomNumber].File);
+      currentTrailerPlayingItem = currentTrailerMoviesList[RandomNumber];
       trailerscrobbleactive = true;
       MyFilmsDetail.Launch_Movie_Trailer_Scrobbling(trailer, ID_MyFilms); 
     }
 
-    private void TrailerScrobbleOptions(int currentNumber)
+    private void TrailerScrobbleOptionsMenu(int currentNumber)
     {
       //// Exit fullscreen Video so we can see main facade again			
       //if (GUIGraphicsContext.IsFullScreenVideo) {
@@ -8582,6 +8586,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("InitBSHandler() - Error on initializing PowerModeChanged Handler: '" + ex.Message + "', stackstrace: '" + ex.StackTrace + "'");
           // throw;
         }
+        //// subscribe events for main window trailer scrobble playback
+        //if (!PlayerEvents_Subscribed)
+        //{
+        //  MediaPortal.Player.g_Player.PlayBackEnded += new MediaPortal.Player.g_Player.EndedHandler(OnPlayBackEnded);
+        //  MediaPortal.Player.g_Player.PlayBackStopped += new MediaPortal.Player.g_Player.StoppedHandler(OnPlayBackStopped);
+        //  PlayerEvents_Subscribed = true;
+        //  LogMyFilms.Debug("InitBSHandler() - Successfully subscribed PlayerEvents !");
+        //}
       }
   
       private void InitFSwatcher()
@@ -8685,6 +8697,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
          }
       }
 
+
+    
       void SystemEvents_PowerModeChanged(object sender, Microsoft.Win32.PowerModeChangedEventArgs e)
       {
         if (e.Mode == Microsoft.Win32.PowerModes.Resume)
@@ -8755,6 +8769,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("MyFilms is disconnected from the network");
           // DBOnlineMirror.IsMirrorsAvailable = false; // Force to recheck later
           conf.IsNetworkAvailable = false;
+        }
+      }
+
+      private void OnPlayBackEnded(MediaPortal.Player.g_Player.MediaType type, string filename)
+      {
+        LogMyFilms.Debug("OnPlayBackEnded was initiated - filename: '" + filename + "'");
+        OnPlayEndAction(type, 0, filename, true, false);
+      }
+      private void OnPlayBackStopped(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename)
+      {
+        LogMyFilms.Debug("OnPlayBackStopped was initiated - filename: '" + filename + "'");
+        OnPlayEndAction(type, timeMovieStopped, filename, false, true);
+      }
+
+      private void OnPlayEndAction(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
+      {
+        if (currentTrailerMoviesList.Count > 0 && currentTrailerPlayingItem != null)
+        {
+          if (filename == currentTrailerPlayingItem.File && type == MediaPortal.Player.g_Player.MediaType.Video) // is it the last played trailer?
+          {
+            LogMyFilms.Debug("OnPlayEndAction is launching PlayRandomTrailer()");
+            currentTrailerPlayingItem = null;
+            PlayRandomTrailer(true); // show GUI dialog for user selection
+          }
+          else
+          {
+            // some other playback ended, and a playlist is still set here -> clear it
+            currentTrailerMoviesList.Clear();
+            currentTrailerPlayingItem = null;
+          }
+        }
+        else
+        {
+          currentTrailerPlayingItem = null;
         }
       }
 
