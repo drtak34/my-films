@@ -850,6 +850,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 case "playtraileronlinevideosimdbtrailer":
                       string site = string.Empty;
                       string titleextension = string.Empty;
+                      string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                      if (path.Contains(";")) 
+                        path = path.Substring(0, path.IndexOf(";"));
+                      if (path.Contains("\\"))
+                        path = path.Substring(0, path.LastIndexOf("\\"));
+
                       switch (choiceView)
                       {
                         case "playtraileronlinevideos":
@@ -873,12 +879,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       {
                         title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
 
-                        string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked";
+                        string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked" + "|downloaddir:" + path;
                         //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title + titleextension);
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", path);
+
 
                         LogMyFilms.Debug("Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                         // should this be set here to make original movie doesn't get set to watched??
@@ -893,7 +901,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
                         GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
-                    }
+                        GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", "");
+                      }
                     else
                     {
                         ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
@@ -5419,6 +5428,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               string site = string.Empty;
               string titleextension = string.Empty;
+              string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+              if (path.Contains(";"))
+                path = path.Substring(0, path.IndexOf(";"));
+              if (path.Contains("\\")) 
+                path = path.Substring(0, path.LastIndexOf("\\"));
+
               switch (choiceViewMenu[dlgmenu.SelectedLabel].ToLower())
               {
                 case "playtraileronlinevideos":
@@ -5439,12 +5454,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (Helper.IsOnlineVideosAvailableAndEnabled)
               {
                 string title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
-                string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked";
+                string OVstartparams = "site:" + site + "|category:|search:" + title + titleextension + "|return:Locked" + "|downloaddir:" + path;
                 //GUIPropertyManager.SetProperty("Onlinevideos.startparams", OVstartparams);
                 GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
                 GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                 GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title + titleextension);
                 GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
+                GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", path); 
                 LogMyFilms.Debug("Starting OnlineVideos with '" + OVstartparams.ToString() + "'");
                 // should this be set here to make original movie doesn't get set to watched??
                 // trailerPlayed = true;
@@ -5457,6 +5473,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
                 GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
                 GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
+                GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", "");
               }
               else
               {
