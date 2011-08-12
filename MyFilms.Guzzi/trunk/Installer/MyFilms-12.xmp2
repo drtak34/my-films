@@ -3110,7 +3110,8 @@ Required!</Description>
         <ParentGroup />
         <DisplayName>AddOns</DisplayName>
         <DefaulChecked>false</DefaulChecked>
-        <Description>AddOns: Updated DLLs for Plugins not yet publically available</Description>
+        <Description>AddOns: Updated DLLs for Plugins not yet publically available
+(BrowseTHeWeb, Onlinevideos with support for trailer download to movie directory)</Description>
         <Files>
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
@@ -3119,6 +3120,13 @@ Required!</Description>
               <LocalFileName>plugins.12\Windows\BrowseTheWeb.dll</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{f2d608b0-72d6-413e-8d11-57deab7654dc}-BrowseTheWeb.dll</ZipFileName>
               <DestinationFilename>%Plugins%\Windows\BrowseTheWeb.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>plugins.12\Windows\OnlineVideos.MediaPortal1.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b5f37c86-a314-4c36-9184-db3853b9ccf7}-OnlineVideos.MediaPortal1.dll</ZipFileName>
+              <DestinationFilename>%Plugins%\Windows\OnlineVideos.MediaPortal1.dll</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -6611,6 +6619,13 @@ Please refer to the Wiki online documentation.</Value>
         <LocalFileName>plugins.12\Windows\BrowseTheWeb.dll</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{f2d608b0-72d6-413e-8d11-57deab7654dc}-BrowseTheWeb.dll</ZipFileName>
         <DestinationFilename>%Plugins%\Windows\BrowseTheWeb.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>plugins.12\Windows\OnlineVideos.MediaPortal1.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b5f37c86-a314-4c36-9184-db3853b9ccf7}-OnlineVideos.MediaPortal1.dll</ZipFileName>
+        <DestinationFilename>%Plugins%\Windows\OnlineVideos.MediaPortal1.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
