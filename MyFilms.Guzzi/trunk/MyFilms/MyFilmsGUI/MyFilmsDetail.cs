@@ -161,6 +161,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //public static bool isTrailer = false;
         //public static bool trailerPlayed = false;
         public static bool trailerPlayed = false;
+        private bool PlayBackEvents_Subscribed = false;
+
 
         #region Enums
         private enum Grabber_Output : int
@@ -346,12 +348,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             LogMyFilms.Debug("OnPageLoad() started.");
 
-            g_Player.PlayBackStarted -= new g_Player.StartedHandler(OnPlayBackStarted);
-            g_Player.PlayBackEnded -= new g_Player.EndedHandler(OnPlayBackEnded);
-            g_Player.PlayBackStopped -= new g_Player.StoppedHandler(OnPlayBackStopped);
-            g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
-            g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
-            g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
+            if (!PlayBackEvents_Subscribed)
+            {
+              //g_Player.PlayBackStarted -= new g_Player.StartedHandler(OnPlayBackStarted);
+              //g_Player.PlayBackEnded -= new g_Player.EndedHandler(OnPlayBackEnded);
+              //g_Player.PlayBackStopped -= new g_Player.StoppedHandler(OnPlayBackStopped);
+              g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
+              g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
+              g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
+              PlayBackEvents_Subscribed = true;
+            }
 
             //bool result = base.OnMessage(messageType);
             if (ImgDetFilm != null)

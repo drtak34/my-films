@@ -355,6 +355,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //PlayList currentPlaylist = null;
     //PlayListItem currentPlayingItem = null;
 
+    private bool NetworkAvailabilityChanged_Subscribed = false;
+    private bool PowerModeChanged_Subscribed = false;
+
+
 
 
     private double lastPublished = 0;
@@ -522,7 +526,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitLogger(); // Initialize Logger 
       Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
       LogMyFilms.Debug("MyFilms.Init() started.");
-      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() +  "',  BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
+      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() +  "', BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
       LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion.ToString() + "', BuildDate: '" + MyFilmsSettings.MPBuildDate.ToString() + "'");
 
       // Fanart Timer
@@ -589,11 +593,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Initial steps
       }
 
-      // Register PowerEventMode Changed Handler
-      System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged -= NetworkAvailabilityChanged;
-      System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
-      Microsoft.Win32.SystemEvents.PowerModeChanged -= new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
-      Microsoft.Win32.SystemEvents.PowerModeChanged += new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
+      // Register PowerEventMode and Networkavailability Changed Handler
+      InitBSHandler();
 
       // attach to global action event, to handle remote keys during playback - e.g. trailer previews
       GUIWindowManager.OnNewAction += new OnActionHandler(this.GUIWindowManager_OnNewAction);
@@ -8548,7 +8549,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
           MyFilmsDetail.setGUIProperty("statusmessage", newText, true);
       }
-      
+
+    
+      private void InitBSHandler()
+      {
+        try
+        {
+          if (!NetworkAvailabilityChanged_Subscribed)
+          {
+            System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
+            NetworkAvailabilityChanged_Subscribed = true;
+            LogMyFilms.Debug("InitBSHandler() - Successfully subscribed NetworkAvailabilityChanged Handler !");
+          }
+        }
+        catch (Exception ex)
+        {
+          NetworkAvailabilityChanged_Subscribed = false;
+          LogMyFilms.Debug("InitBSHandler() - Error on initializing NetworkAvailabilityChanged Handler: '" + ex.Message + "', stackstrace: '" + ex.StackTrace + "'");
+        }
+        try
+        {
+          if (!PowerModeChanged_Subscribed)
+          {
+            Microsoft.Win32.SystemEvents.PowerModeChanged += new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
+            PowerModeChanged_Subscribed = true;
+            LogMyFilms.Debug("InitBSHandler() - Successfully subscribed PowerModeChanged Handler !");
+          }
+        }
+        catch (Exception ex)
+        {
+          PowerModeChanged_Subscribed = false;
+          LogMyFilms.Debug("InitBSHandler() - Error on initializing PowerModeChanged Handler: '" + ex.Message + "', stackstrace: '" + ex.StackTrace + "'");
+          // throw;
+        }
+      }
+  
       private void InitFSwatcher()
       {
         if (FSwatcher.EnableRaisingEvents && FSwatcher.Filter == System.IO.Path.GetFileName(conf.StrFileXml))
