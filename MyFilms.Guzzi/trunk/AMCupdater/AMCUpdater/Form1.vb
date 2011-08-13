@@ -1763,6 +1763,14 @@ Public Class Form1
                     lblPictureHandling.Enabled = False
                     lblPicturePrefix.Enabled = False
                 End If
+            ElseIf FieldName = "Fanart" Then
+                If FieldChecked = True Then
+                    cbPictureHandling.Enabled = True
+                    lblPictureHandling.Enabled = True
+                Else
+                    'cbPictureHandling.Enabled = False
+                    'lblPictureHandling.Enabled = False
+                End If
             End If
 
         Next
@@ -2010,6 +2018,10 @@ Public Class Form1
                 CurrentSettings.Use_Folder_Dot_Jpg = False
             Case "Use Folder.jpg"
                 CurrentSettings.Use_Folder_Dot_Jpg = True
+                CurrentSettings.Create_Cover_From_Movie = False
+            Case "Create Moviethumb"
+                CurrentSettings.Use_Folder_Dot_Jpg = True
+                CurrentSettings.Create_Cover_From_Movie = True
             Case "Full Path"
                 CurrentSettings.Store_Image_With_Relative_Path = False
                 CurrentSettings.Use_Folder_Dot_Jpg = False
@@ -2257,6 +2269,10 @@ Public Class Form1
 
             If CurrentSettings.Use_Folder_Dot_Jpg = True Then
                 cbPictureHandling.SelectedItem = "Use Folder.jpg"
+            End If
+
+            If CurrentSettings.Create_Cover_From_Movie = True Then
+                cbPictureHandling.SelectedItem = "Create Moviethumb"
             End If
 
             Me.ValidateChildren()

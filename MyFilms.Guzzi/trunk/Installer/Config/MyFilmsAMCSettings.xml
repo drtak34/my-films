@@ -139,6 +139,9 @@
   <Values Option="Use_Folder_Dot_Jpg">
     <Value>False</Value>
   </Values>
+  <Values Option="Create_Cover_From_Movie">
+    <Value>False</Value>
+  </Values>
   <Values Option="Prohibit_Internet_Lookup">
     <Value>False</Value>
   </Values>

@@ -123,8 +123,35 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
+  <data name="txtPictureFilenamePrefix.ToolTip" xml:space="preserve">
+    <value>Alter this field to change the location and name of downloaded cover art.
+By default the images are stored in the same folder as your Ant database file.
+If you enter a relative folder path, this will be used as a subfolder
+i.e. 'covers\' will create / use a subfolder called 'covers'.
+You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
+i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
+  </data>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1095, 13</value>
+  </metadata>
+  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
+    <value>The location of your cover art files is stored in the Ant Movie Catalog 'Picture' field.
+You can refer to the file as a relative ('\covers\moviename.jpg') or full ('c:\covers\moviename.jpg') path.
+You can also store the cover art as 'folder.jpg' - this is only suitable if you store your movies in separate folders (one movie per folder)
+If using Folder.jpg - the system will use any existing file on import and will create one (if available online) if not.
+
+"Create Moviethumb" is an option to create and use thumbnails created from the movie content (thumbnailer).
+Usage: Disable internet lookup, enable Picture/Fanart and choose "Cover Thumbnail" in Picture Handling.
+THis is especially useful, if you have private movies, documentaries etc. where usually is no artwork available.</value>
+  </data>
+  <data name="chkFolderNameIsGroupName.ToolTip" xml:space="preserve">
+    <value>The MyFilms plugin supports the use of a Group Identifier to group movies together.
+Normally used for film Trilogies and so on.
+The update will attempt to work out which films are grouped based on the folder structure.
+The movie title will then be saved as 'Groupname \ Movie Name'</value>
+  </data>
+  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>280, 50</value>
   </metadata>
   <data name="txtOverridePath.ToolTip" xml:space="preserve">
     <value>Override path when writing to XML file:
@@ -176,6 +203,17 @@ Example:
 So if you have named your files by movie title, select “title”. 
 If you have your movie files in folders, that have the movie title, select “folder”.</value>
   </data>
+  <data name="GroupBox26.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "MyFilms Grabber Interface" ("Edit script").
+
+</value>
+  </data>
   <data name="chkGrabberOverrideLanguage.ToolTip" xml:space="preserve">
     <value>Preferred Language(s) for 
 Translated Title(s) and Certification
@@ -189,17 +227,6 @@ of your ANT Movie Catalog.
 Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
-  </data>
-  <data name="GroupBox26.ToolTip" xml:space="preserve">
-    <value>You can set several options for the internet grabber.
-Be aware, that not all options are supported by all grabber scripts.
-However, IMDB (full) script should support all options listed here.
-If you set no values, the default settings of the grabber
-will be used instead.
-The default settings (of the grabber script) can be changed by editing 
-the grabber script in the "MyFilms Grabber Interface" ("Edit script").
-
-</value>
   </data>
   <data name="txtParserFilePath.ToolTip" xml:space="preserve">
     <value>Enter the location of an Internet Parser file.
@@ -413,26 +440,6 @@ It is sufficient, to set path and name to a file - AMCupdater will autocreate it
   <data name="Label46.Text" xml:space="preserve">
     <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
 </value>
-  </data>
-  <data name="txtPictureFilenamePrefix.ToolTip" xml:space="preserve">
-    <value>Alter this field to change the location and name of downloaded cover art.
-By default the images are stored in the same folder as your Ant database file.
-If you enter a relative folder path, this will be used as a subfolder
-i.e. 'covers\' will create / use a subfolder called 'covers'.
-You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
-i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
-  </data>
-  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
-    <value>The location of your cover art files is stored in the Ant Movie Catalog 'Picture' field.
-You can refer to the file as a relative ('\coverts\moviename.jpg') or full ('c:\covers\moviename.jpg') path.
-You can also store the cover art as 'folder.jpg' - this is only suitable if you store your movies in separate folders (one movie per folder)
-If using Folder.jpg - the system will use any existing file on import and will create one (if available online) if not.</value>
-  </data>
-  <data name="chkFolderNameIsGroupName.ToolTip" xml:space="preserve">
-    <value>The MyFilms plugin supports the use of a Group Identifier to group movies together.
-Normally used for film Trilogies and so on.
-The update will attempt to work out which films are grouped based on the folder structure.
-The movie title will then be saved as 'Groupname \ Movie Name'</value>
   </data>
   <data name="btnManualCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -710,6 +717,9 @@ The movie title will then be saved as 'Groupname \ Movie Name'</value>
         8Dsg/w+T+GsRKGk0sAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 50</value>
+  </metadata>
   <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 50</value>
   </metadata>

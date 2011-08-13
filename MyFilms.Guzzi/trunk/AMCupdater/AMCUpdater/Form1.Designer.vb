@@ -29,13 +29,13 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -261,28 +261,49 @@ Partial Class Form1
         Me.txtSampleFile = New System.Windows.Forms.TextBox
         Me.ViewCollection = New System.Windows.Forms.TabPage
         Me.GroupBoxMovieDetails = New System.Windows.Forms.GroupBox
-        Me.TextBox31 = New System.Windows.Forms.TextBox
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.VideoBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TextBox31 = New System.Windows.Forms.TextBox
+        Me.TextBox2 = New System.Windows.Forms.TextBox
         Me.Label82 = New System.Windows.Forms.Label
+        Me.Label49 = New System.Windows.Forms.Label
         Me.TextBox30 = New System.Windows.Forms.TextBox
+        Me.TextBox5 = New System.Windows.Forms.TextBox
         Me.Label81 = New System.Windows.Forms.Label
+        Me.Label50 = New System.Windows.Forms.Label
         Me.Label80 = New System.Windows.Forms.Label
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox
         Me.TextBox29 = New System.Windows.Forms.TextBox
-        Me.XionPanel1 = New XionControls.XionPanel
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox
+        Me.GroupBox14 = New System.Windows.Forms.GroupBox
+        Me.Label53 = New System.Windows.Forms.Label
+        Me.Label52 = New System.Windows.Forms.Label
+        Me.Label51 = New System.Windows.Forms.Label
+        Me.TextBox7 = New System.Windows.Forms.TextBox
+        Me.TextBox6 = New System.Windows.Forms.TextBox
+        Me.TextBox1 = New System.Windows.Forms.TextBox
         Me.Label78 = New System.Windows.Forms.Label
+        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox
         Me.TextBox28 = New System.Windows.Forms.TextBox
+        Me.TextBox3 = New System.Windows.Forms.TextBox
         Me.Label77 = New System.Windows.Forms.Label
+        Me.Label54 = New System.Windows.Forms.Label
         Me.TextBox27 = New System.Windows.Forms.TextBox
+        Me.TextBox4 = New System.Windows.Forms.TextBox
         Me.Label74 = New System.Windows.Forms.Label
+        Me.Label55 = New System.Windows.Forms.Label
         Me.TextBox24 = New System.Windows.Forms.TextBox
+        Me.TextBox9 = New System.Windows.Forms.TextBox
         Me.Label73 = New System.Windows.Forms.Label
+        Me.Label57 = New System.Windows.Forms.Label
         Me.TextBox23 = New System.Windows.Forms.TextBox
+        Me.TextBox8 = New System.Windows.Forms.TextBox
         Me.GroupBox22 = New System.Windows.Forms.GroupBox
         Me.Label75 = New System.Windows.Forms.Label
         Me.Label76 = New System.Windows.Forms.Label
         Me.TextBox25 = New System.Windows.Forms.TextBox
         Me.TextBox26 = New System.Windows.Forms.TextBox
+        Me.Label56 = New System.Windows.Forms.Label
         Me.GroupBox21 = New System.Windows.Forms.GroupBox
         Me.Label72 = New System.Windows.Forms.Label
         Me.TextBox22 = New System.Windows.Forms.TextBox
@@ -292,50 +313,37 @@ Partial Class Form1
         Me.Label70 = New System.Windows.Forms.Label
         Me.TextBox19 = New System.Windows.Forms.TextBox
         Me.TextBox20 = New System.Windows.Forms.TextBox
+        Me.Label58 = New System.Windows.Forms.Label
         Me.GroupBox15 = New System.Windows.Forms.GroupBox
         Me.Label68 = New System.Windows.Forms.Label
         Me.Label67 = New System.Windows.Forms.Label
         Me.TextBox17 = New System.Windows.Forms.TextBox
         Me.TextBox18 = New System.Windows.Forms.TextBox
-        Me.Label66 = New System.Windows.Forms.Label
-        Me.TextBox16 = New System.Windows.Forms.TextBox
-        Me.Label64 = New System.Windows.Forms.Label
-        Me.TextBox14 = New System.Windows.Forms.TextBox
-        Me.Label65 = New System.Windows.Forms.Label
-        Me.TextBox15 = New System.Windows.Forms.TextBox
-        Me.Label62 = New System.Windows.Forms.Label
-        Me.TextBox12 = New System.Windows.Forms.TextBox
-        Me.Label63 = New System.Windows.Forms.Label
-        Me.TextBox13 = New System.Windows.Forms.TextBox
-        Me.Label61 = New System.Windows.Forms.Label
-        Me.TextBox11 = New System.Windows.Forms.TextBox
-        Me.Label60 = New System.Windows.Forms.Label
-        Me.Label59 = New System.Windows.Forms.Label
         Me.TextBox10 = New System.Windows.Forms.TextBox
-        Me.Label58 = New System.Windows.Forms.Label
-        Me.Label56 = New System.Windows.Forms.Label
-        Me.TextBox8 = New System.Windows.Forms.TextBox
-        Me.Label57 = New System.Windows.Forms.Label
-        Me.TextBox9 = New System.Windows.Forms.TextBox
-        Me.Label55 = New System.Windows.Forms.Label
-        Me.TextBox4 = New System.Windows.Forms.TextBox
-        Me.Label54 = New System.Windows.Forms.Label
-        Me.TextBox3 = New System.Windows.Forms.TextBox
-        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
-        Me.GroupBox14 = New System.Windows.Forms.GroupBox
-        Me.Label53 = New System.Windows.Forms.Label
-        Me.Label52 = New System.Windows.Forms.Label
-        Me.Label51 = New System.Windows.Forms.Label
-        Me.TextBox7 = New System.Windows.Forms.TextBox
-        Me.TextBox6 = New System.Windows.Forms.TextBox
-        Me.TextBox1 = New System.Windows.Forms.TextBox
-        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox
-        Me.Label50 = New System.Windows.Forms.Label
-        Me.TextBox5 = New System.Windows.Forms.TextBox
-        Me.Label49 = New System.Windows.Forms.Label
-        Me.TextBox2 = New System.Windows.Forms.TextBox
+        Me.Label66 = New System.Windows.Forms.Label
+        Me.Label60 = New System.Windows.Forms.Label
+        Me.TextBox16 = New System.Windows.Forms.TextBox
+        Me.TextBox11 = New System.Windows.Forms.TextBox
+        Me.Label64 = New System.Windows.Forms.Label
+        Me.Label61 = New System.Windows.Forms.Label
+        Me.TextBox14 = New System.Windows.Forms.TextBox
+        Me.TextBox13 = New System.Windows.Forms.TextBox
+        Me.Label65 = New System.Windows.Forms.Label
+        Me.Label63 = New System.Windows.Forms.Label
+        Me.TextBox15 = New System.Windows.Forms.TextBox
+        Me.TextBox12 = New System.Windows.Forms.TextBox
+        Me.Label62 = New System.Windows.Forms.Label
+        Me.XionPanel1 = New XionControls.XionPanel
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Country = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Rating = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Label59 = New System.Windows.Forms.Label
         Me.VidéoBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
@@ -394,14 +402,6 @@ Partial Class Form1
         Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Country = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Rating = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.TabControl1.SuspendLayout()
         Me.Interactive.SuspendLayout()
         Me.GroupBox24.SuspendLayout()
@@ -438,14 +438,14 @@ Partial Class Form1
         Me.GroupBox1.SuspendLayout()
         Me.ViewCollection.SuspendLayout()
         Me.GroupBoxMovieDetails.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VideoBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XionPanel1.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox14.SuspendLayout()
         Me.GroupBox22.SuspendLayout()
         Me.GroupBox21.SuspendLayout()
         Me.GroupBox15.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox14.SuspendLayout()
+        Me.XionPanel1.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VidéoBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.VidéoBindingNavigator.SuspendLayout()
         Me.mnuFile.SuspendLayout()
@@ -1708,7 +1708,7 @@ Partial Class Form1
         Me.cbPictureHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbPictureHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbPictureHandling.FormattingEnabled = True
-        Me.cbPictureHandling.Items.AddRange(New Object() {"Full Path", "Relative Path", "Use Folder.jpg"})
+        Me.cbPictureHandling.Items.AddRange(New Object() {"Full Path", "Relative Path", "Use Folder.jpg", "Create Moviethumb"})
         Me.cbPictureHandling.Location = New System.Drawing.Point(376, 488)
         Me.cbPictureHandling.Name = "cbPictureHandling"
         Me.cbPictureHandling.Size = New System.Drawing.Size(174, 21)
@@ -2902,6 +2902,20 @@ Partial Class Form1
         Me.GroupBoxMovieDetails.TabIndex = 74
         Me.GroupBoxMovieDetails.TabStop = False
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.VideoBindingSource, "Picture", True))
+        Me.PictureBox1.Location = New System.Drawing.Point(6, 11)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(158, 218)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 5
+        Me.PictureBox1.TabStop = False
+        '
+        'VideoBindingSource
+        '
+        Me.VideoBindingSource.DataSource = GetType(AMCUpdater.AntMovieCatalog.MovieDataTable)
+        '
         'TextBox31
         '
         Me.TextBox31.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Tagline", True))
@@ -2910,9 +2924,13 @@ Partial Class Form1
         Me.TextBox31.Size = New System.Drawing.Size(93, 20)
         Me.TextBox31.TabIndex = 73
         '
-        'VideoBindingSource
+        'TextBox2
         '
-        Me.VideoBindingSource.DataSource = GetType(AMCUpdater.AntMovieCatalog.MovieDataTable)
+        Me.TextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Number", True))
+        Me.TextBox2.Location = New System.Drawing.Point(202, 20)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(49, 20)
+        Me.TextBox2.TabIndex = 4
         '
         'Label82
         '
@@ -2923,6 +2941,15 @@ Partial Class Form1
         Me.Label82.TabIndex = 72
         Me.Label82.Text = "Tagline"
         '
+        'Label49
+        '
+        Me.Label49.AutoSize = True
+        Me.Label49.Location = New System.Drawing.Point(172, 23)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(24, 13)
+        Me.Label49.TabIndex = 8
+        Me.Label49.Text = "Nbr"
+        '
         'TextBox30
         '
         Me.TextBox30.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Certification", True))
@@ -2930,6 +2957,14 @@ Partial Class Form1
         Me.TextBox30.Name = "TextBox30"
         Me.TextBox30.Size = New System.Drawing.Size(93, 20)
         Me.TextBox30.TabIndex = 71
+        '
+        'TextBox5
+        '
+        Me.TextBox5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Rating", True))
+        Me.TextBox5.Location = New System.Drawing.Point(457, 20)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox5.TabIndex = 9
         '
         'Label81
         '
@@ -2940,6 +2975,15 @@ Partial Class Form1
         Me.Label81.TabIndex = 70
         Me.Label81.Text = "Cert"
         '
+        'Label50
+        '
+        Me.Label50.AutoSize = True
+        Me.Label50.Location = New System.Drawing.Point(413, 23)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(38, 13)
+        Me.Label50.TabIndex = 10
+        Me.Label50.Text = "Rating"
+        '
         'Label80
         '
         Me.Label80.AutoSize = True
@@ -2949,6 +2993,15 @@ Partial Class Form1
         Me.Label80.TabIndex = 69
         Me.Label80.Text = "Writer"
         '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Description", True))
+        Me.RichTextBox1.Location = New System.Drawing.Point(187, 316)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(310, 106)
+        Me.RichTextBox1.TabIndex = 13
+        Me.RichTextBox1.Text = ""
+        '
         'TextBox29
         '
         Me.TextBox29.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Writer", True))
@@ -2957,62 +3010,84 @@ Partial Class Form1
         Me.TextBox29.Size = New System.Drawing.Size(121, 20)
         Me.TextBox29.TabIndex = 68
         '
-        'XionPanel1
+        'RichTextBox2
         '
-        Me.XionPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.XionPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.XionPanel1.Controls.Add(Me.DataGridView1)
-        Me.XionPanel1.Location = New System.Drawing.Point(3, 31)
-        Me.XionPanel1.Movable = False
-        Me.XionPanel1.Name = "XionPanel1"
-        Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
-        Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 27, 0, 0)
-        Me.XionPanel1.Sizable = True
-        Me.XionPanel1.Size = New System.Drawing.Size(84, 546)
-        Me.XionPanel1.State = XionControls.XionPanel.PanelState.Expand
-        Me.XionPanel1.TabIndex = 67
-        Me.XionPanel1.Text = "Movie List"
-        Me.XionPanel1.Title = "Movie List"
-        Me.XionPanel1.TitleBackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.XionPanel1.TitleFont = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.XionPanel1.TitleHeight = 27
+        Me.RichTextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Comments", True))
+        Me.RichTextBox2.Location = New System.Drawing.Point(187, 430)
+        Me.RichTextBox2.Name = "RichTextBox2"
+        Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
+        Me.RichTextBox2.Size = New System.Drawing.Size(310, 56)
+        Me.RichTextBox2.TabIndex = 14
+        Me.RichTextBox2.Text = ""
         '
-        'DataGridView1
+        'GroupBox14
         '
-        Me.DataGridView1.AutoGenerateColumns = False
-        Me.DataGridView1.ColumnHeadersHeight = 21
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
-        Me.DataGridView1.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 27)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
-        Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.RowHeadersWidth = 20
-        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.DataGridView1.RowTemplate.Height = 16
-        Me.DataGridView1.Size = New System.Drawing.Size(80, 515)
-        Me.DataGridView1.TabIndex = 1
+        Me.GroupBox14.Controls.Add(Me.Label53)
+        Me.GroupBox14.Controls.Add(Me.Label52)
+        Me.GroupBox14.Controls.Add(Me.Label51)
+        Me.GroupBox14.Controls.Add(Me.TextBox7)
+        Me.GroupBox14.Controls.Add(Me.TextBox6)
+        Me.GroupBox14.Controls.Add(Me.TextBox1)
+        Me.GroupBox14.Location = New System.Drawing.Point(172, 43)
+        Me.GroupBox14.Name = "GroupBox14"
+        Me.GroupBox14.Size = New System.Drawing.Size(236, 86)
+        Me.GroupBox14.TabIndex = 15
+        Me.GroupBox14.TabStop = False
+        Me.GroupBox14.Text = "Titles"
+        '
+        'Label53
+        '
+        Me.Label53.AutoSize = True
+        Me.Label53.Location = New System.Drawing.Point(7, 62)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(51, 13)
+        Me.Label53.TabIndex = 11
+        Me.Label53.Text = "Formated"
+        '
+        'Label52
+        '
+        Me.Label52.AutoSize = True
+        Me.Label52.Location = New System.Drawing.Point(2, 38)
+        Me.Label52.Name = "Label52"
+        Me.Label52.Size = New System.Drawing.Size(57, 13)
+        Me.Label52.TabIndex = 10
+        Me.Label52.Text = "Translated"
+        '
+        'Label51
+        '
+        Me.Label51.AutoSize = True
+        Me.Label51.Location = New System.Drawing.Point(6, 14)
+        Me.Label51.Name = "Label51"
+        Me.Label51.Size = New System.Drawing.Size(42, 13)
+        Me.Label51.TabIndex = 9
+        Me.Label51.Text = "Original"
+        '
+        'TextBox7
+        '
+        Me.TextBox7.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "FormattedTitle", True))
+        Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox7.Location = New System.Drawing.Point(65, 60)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(165, 20)
+        Me.TextBox7.TabIndex = 4
+        '
+        'TextBox6
+        '
+        Me.TextBox6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "TranslatedTitle", True))
+        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox6.Location = New System.Drawing.Point(65, 36)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(165, 20)
+        Me.TextBox6.TabIndex = 3
+        '
+        'TextBox1
+        '
+        Me.TextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "OriginalTitle", True))
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(65, 12)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(165, 20)
+        Me.TextBox1.TabIndex = 2
         '
         'Label78
         '
@@ -3023,6 +3098,15 @@ Partial Class Form1
         Me.Label78.TabIndex = 64
         Me.Label78.Text = "Disks"
         '
+        'RichTextBox3
+        '
+        Me.RichTextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Actors", True))
+        Me.RichTextBox3.Location = New System.Drawing.Point(227, 251)
+        Me.RichTextBox3.Name = "RichTextBox3"
+        Me.RichTextBox3.Size = New System.Drawing.Size(270, 59)
+        Me.RichTextBox3.TabIndex = 16
+        Me.RichTextBox3.Text = ""
+        '
         'TextBox28
         '
         Me.TextBox28.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Disks", True))
@@ -3030,6 +3114,14 @@ Partial Class Form1
         Me.TextBox28.Name = "TextBox28"
         Me.TextBox28.Size = New System.Drawing.Size(31, 20)
         Me.TextBox28.TabIndex = 63
+        '
+        'TextBox3
+        '
+        Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "DateAdded", True))
+        Me.TextBox3.Location = New System.Drawing.Point(332, 20)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(76, 20)
+        Me.TextBox3.TabIndex = 17
         '
         'Label77
         '
@@ -3040,6 +3132,15 @@ Partial Class Form1
         Me.Label77.TabIndex = 62
         Me.Label77.Text = "Size"
         '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.Location = New System.Drawing.Point(262, 23)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(64, 13)
+        Me.Label54.TabIndex = 18
+        Me.Label54.Text = "Date Added"
+        '
         'TextBox27
         '
         Me.TextBox27.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Size", True))
@@ -3047,6 +3148,14 @@ Partial Class Form1
         Me.TextBox27.Name = "TextBox27"
         Me.TextBox27.Size = New System.Drawing.Size(34, 20)
         Me.TextBox27.TabIndex = 61
+        '
+        'TextBox4
+        '
+        Me.TextBox4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Year", True))
+        Me.TextBox4.Location = New System.Drawing.Point(457, 53)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox4.TabIndex = 20
         '
         'Label74
         '
@@ -3058,6 +3167,15 @@ Partial Class Form1
         Me.Label74.Text = "Subtitles"
         Me.Label74.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.Location = New System.Drawing.Point(413, 56)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(29, 13)
+        Me.Label55.TabIndex = 21
+        Me.Label55.Text = "Year"
+        '
         'TextBox24
         '
         Me.TextBox24.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Subtitles", True))
@@ -3066,6 +3184,14 @@ Partial Class Form1
         Me.TextBox24.Name = "TextBox24"
         Me.TextBox24.Size = New System.Drawing.Size(93, 20)
         Me.TextBox24.TabIndex = 59
+        '
+        'TextBox9
+        '
+        Me.TextBox9.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Checked", True))
+        Me.TextBox9.Location = New System.Drawing.Point(457, 79)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox9.TabIndex = 22
         '
         'Label73
         '
@@ -3077,6 +3203,16 @@ Partial Class Form1
         Me.Label73.Text = "Languages"
         Me.Label73.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
+        'Label57
+        '
+        Me.Label57.AutoSize = True
+        Me.Label57.Location = New System.Drawing.Point(413, 82)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(32, 13)
+        Me.Label57.TabIndex = 23
+        Me.Label57.Text = "Chkd"
+        Me.Label57.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
         'TextBox23
         '
         Me.TextBox23.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Languages", True))
@@ -3085,6 +3221,14 @@ Partial Class Form1
         Me.TextBox23.Name = "TextBox23"
         Me.TextBox23.Size = New System.Drawing.Size(93, 20)
         Me.TextBox23.TabIndex = 57
+        '
+        'TextBox8
+        '
+        Me.TextBox8.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Length", True))
+        Me.TextBox8.Location = New System.Drawing.Point(457, 105)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(40, 20)
+        Me.TextBox8.TabIndex = 24
         '
         'GroupBox22
         '
@@ -3136,6 +3280,16 @@ Partial Class Form1
         Me.TextBox26.Name = "TextBox26"
         Me.TextBox26.Size = New System.Drawing.Size(86, 20)
         Me.TextBox26.TabIndex = 44
+        '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.Location = New System.Drawing.Point(411, 108)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(40, 13)
+        Me.Label56.TabIndex = 25
+        Me.Label56.Text = "Length"
+        Me.Label56.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'GroupBox21
         '
@@ -3230,6 +3384,15 @@ Partial Class Form1
         Me.TextBox20.Size = New System.Drawing.Size(86, 20)
         Me.TextBox20.TabIndex = 44
         '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.Location = New System.Drawing.Point(184, 251)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(37, 13)
+        Me.Label58.TabIndex = 26
+        Me.Label58.Text = "Actors"
+        '
         'GroupBox15
         '
         Me.GroupBox15.Controls.Add(Me.Label68)
@@ -3279,6 +3442,15 @@ Partial Class Form1
         Me.TextBox18.Size = New System.Drawing.Size(93, 20)
         Me.TextBox18.TabIndex = 44
         '
+        'TextBox10
+        '
+        Me.TextBox10.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Director", True))
+        Me.TextBox10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox10.Location = New System.Drawing.Point(376, 135)
+        Me.TextBox10.Name = "TextBox10"
+        Me.TextBox10.Size = New System.Drawing.Size(121, 20)
+        Me.TextBox10.TabIndex = 27
+        '
         'Label66
         '
         Me.Label66.AutoSize = True
@@ -3287,105 +3459,6 @@ Partial Class Form1
         Me.Label66.Size = New System.Drawing.Size(49, 13)
         Me.Label66.TabIndex = 41
         Me.Label66.Text = "Borrower"
-        '
-        'TextBox16
-        '
-        Me.TextBox16.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Borrower", True))
-        Me.TextBox16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox16.Location = New System.Drawing.Point(376, 187)
-        Me.TextBox16.Name = "TextBox16"
-        Me.TextBox16.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox16.TabIndex = 40
-        '
-        'Label64
-        '
-        Me.Label64.AutoSize = True
-        Me.Label64.Location = New System.Drawing.Point(264, 523)
-        Me.Label64.Name = "Label64"
-        Me.Label64.Size = New System.Drawing.Size(29, 13)
-        Me.Label64.TabIndex = 39
-        Me.Label64.Text = "URL"
-        '
-        'TextBox14
-        '
-        Me.TextBox14.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "URL", True))
-        Me.TextBox14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox14.Location = New System.Drawing.Point(299, 520)
-        Me.TextBox14.Name = "TextBox14"
-        Me.TextBox14.Size = New System.Drawing.Size(198, 20)
-        Me.TextBox14.TabIndex = 38
-        '
-        'Label65
-        '
-        Me.Label65.AutoSize = True
-        Me.Label65.Location = New System.Drawing.Point(252, 497)
-        Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(41, 13)
-        Me.Label65.TabIndex = 37
-        Me.Label65.Text = "Source"
-        '
-        'TextBox15
-        '
-        Me.TextBox15.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Source", True))
-        Me.TextBox15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox15.Location = New System.Drawing.Point(299, 494)
-        Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.Size = New System.Drawing.Size(198, 20)
-        Me.TextBox15.TabIndex = 36
-        '
-        'Label62
-        '
-        Me.Label62.AutoSize = True
-        Me.Label62.Location = New System.Drawing.Point(172, 138)
-        Me.Label62.Name = "Label62"
-        Me.Label62.Size = New System.Drawing.Size(49, 13)
-        Me.Label62.TabIndex = 35
-        Me.Label62.Text = "Category"
-        '
-        'TextBox12
-        '
-        Me.TextBox12.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Category", True))
-        Me.TextBox12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox12.Location = New System.Drawing.Point(227, 135)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox12.TabIndex = 34
-        '
-        'Label63
-        '
-        Me.Label63.AutoSize = True
-        Me.Label63.Location = New System.Drawing.Point(172, 164)
-        Me.Label63.Name = "Label63"
-        Me.Label63.Size = New System.Drawing.Size(43, 13)
-        Me.Label63.TabIndex = 33
-        Me.Label63.Text = "Country"
-        '
-        'TextBox13
-        '
-        Me.TextBox13.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Country", True))
-        Me.TextBox13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox13.Location = New System.Drawing.Point(227, 161)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.Size = New System.Drawing.Size(93, 20)
-        Me.TextBox13.TabIndex = 32
-        '
-        'Label61
-        '
-        Me.Label61.AutoSize = True
-        Me.Label61.Location = New System.Drawing.Point(326, 164)
-        Me.Label61.Name = "Label61"
-        Me.Label61.Size = New System.Drawing.Size(50, 13)
-        Me.Label61.TabIndex = 31
-        Me.Label61.Text = "Producer"
-        '
-        'TextBox11
-        '
-        Me.TextBox11.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Producer", True))
-        Me.TextBox11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox11.Location = New System.Drawing.Point(376, 161)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox11.TabIndex = 30
         '
         'Label60
         '
@@ -3396,6 +3469,230 @@ Partial Class Form1
         Me.Label60.TabIndex = 29
         Me.Label60.Text = "Director"
         '
+        'TextBox16
+        '
+        Me.TextBox16.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Borrower", True))
+        Me.TextBox16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox16.Location = New System.Drawing.Point(376, 187)
+        Me.TextBox16.Name = "TextBox16"
+        Me.TextBox16.Size = New System.Drawing.Size(121, 20)
+        Me.TextBox16.TabIndex = 40
+        '
+        'TextBox11
+        '
+        Me.TextBox11.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Producer", True))
+        Me.TextBox11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox11.Location = New System.Drawing.Point(376, 161)
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(121, 20)
+        Me.TextBox11.TabIndex = 30
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Location = New System.Drawing.Point(264, 523)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(29, 13)
+        Me.Label64.TabIndex = 39
+        Me.Label64.Text = "URL"
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Location = New System.Drawing.Point(326, 164)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(50, 13)
+        Me.Label61.TabIndex = 31
+        Me.Label61.Text = "Producer"
+        '
+        'TextBox14
+        '
+        Me.TextBox14.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "URL", True))
+        Me.TextBox14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox14.Location = New System.Drawing.Point(299, 520)
+        Me.TextBox14.Name = "TextBox14"
+        Me.TextBox14.Size = New System.Drawing.Size(198, 20)
+        Me.TextBox14.TabIndex = 38
+        '
+        'TextBox13
+        '
+        Me.TextBox13.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Country", True))
+        Me.TextBox13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox13.Location = New System.Drawing.Point(227, 161)
+        Me.TextBox13.Name = "TextBox13"
+        Me.TextBox13.Size = New System.Drawing.Size(93, 20)
+        Me.TextBox13.TabIndex = 32
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Location = New System.Drawing.Point(252, 497)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(41, 13)
+        Me.Label65.TabIndex = 37
+        Me.Label65.Text = "Source"
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.Location = New System.Drawing.Point(172, 164)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(43, 13)
+        Me.Label63.TabIndex = 33
+        Me.Label63.Text = "Country"
+        '
+        'TextBox15
+        '
+        Me.TextBox15.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Source", True))
+        Me.TextBox15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox15.Location = New System.Drawing.Point(299, 494)
+        Me.TextBox15.Name = "TextBox15"
+        Me.TextBox15.Size = New System.Drawing.Size(198, 20)
+        Me.TextBox15.TabIndex = 36
+        '
+        'TextBox12
+        '
+        Me.TextBox12.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Category", True))
+        Me.TextBox12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox12.Location = New System.Drawing.Point(227, 135)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(93, 20)
+        Me.TextBox12.TabIndex = 34
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Location = New System.Drawing.Point(172, 138)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(49, 13)
+        Me.Label62.TabIndex = 35
+        Me.Label62.Text = "Category"
+        '
+        'XionPanel1
+        '
+        Me.XionPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.XionPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.XionPanel1.Controls.Add(Me.DataGridView1)
+        Me.XionPanel1.Location = New System.Drawing.Point(3, 31)
+        Me.XionPanel1.Movable = False
+        Me.XionPanel1.Name = "XionPanel1"
+        Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
+        Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 27, 0, 0)
+        Me.XionPanel1.Sizable = True
+        Me.XionPanel1.Size = New System.Drawing.Size(84, 546)
+        Me.XionPanel1.State = XionControls.XionPanel.PanelState.Expand
+        Me.XionPanel1.TabIndex = 67
+        Me.XionPanel1.Text = "Movie List"
+        Me.XionPanel1.Title = "Movie List"
+        Me.XionPanel1.TitleBackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.XionPanel1.TitleFont = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XionPanel1.TitleHeight = 27
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AutoGenerateColumns = False
+        Me.DataGridView1.ColumnHeadersHeight = 21
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
+        Me.DataGridView1.DataSource = Me.VideoBindingSource
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle11
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 27)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        Me.DataGridView1.RowHeadersVisible = False
+        Me.DataGridView1.RowHeadersWidth = 20
+        Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.DataGridView1.RowTemplate.Height = 16
+        Me.DataGridView1.Size = New System.Drawing.Size(80, 515)
+        Me.DataGridView1.TabIndex = 1
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle8
+        Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.Width = 35
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle9
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataGridViewTextBoxColumn4.Width = 35
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "OriginalTitle"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Original Title"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TranslatedTitle"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Translated Title"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle10
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        Me.DataGridViewTextBoxColumn5.Width = 66
+        '
+        'Category
+        '
+        Me.Category.DataPropertyName = "Category"
+        Me.Category.HeaderText = "Category"
+        Me.Category.Name = "Category"
+        Me.Category.ReadOnly = True
+        Me.Category.Width = 110
+        '
+        'Country
+        '
+        Me.Country.DataPropertyName = "Country"
+        Me.Country.HeaderText = "Country"
+        Me.Country.Name = "Country"
+        Me.Country.ReadOnly = True
+        Me.Country.Width = 70
+        '
+        'Rating
+        '
+        Me.Rating.DataPropertyName = "Rating"
+        Me.Rating.HeaderText = "Rating"
+        Me.Rating.Name = "Rating"
+        Me.Rating.ReadOnly = True
+        Me.Rating.Width = 50
+        '
         'Label59
         '
         Me.Label59.AutoSize = True
@@ -3404,235 +3701,6 @@ Partial Class Form1
         Me.Label59.Size = New System.Drawing.Size(42, 13)
         Me.Label59.TabIndex = 28
         Me.Label59.Text = "Original"
-        '
-        'TextBox10
-        '
-        Me.TextBox10.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Director", True))
-        Me.TextBox10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox10.Location = New System.Drawing.Point(376, 135)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox10.TabIndex = 27
-        '
-        'Label58
-        '
-        Me.Label58.AutoSize = True
-        Me.Label58.Location = New System.Drawing.Point(184, 251)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(37, 13)
-        Me.Label58.TabIndex = 26
-        Me.Label58.Text = "Actors"
-        '
-        'Label56
-        '
-        Me.Label56.AutoSize = True
-        Me.Label56.Location = New System.Drawing.Point(411, 108)
-        Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(40, 13)
-        Me.Label56.TabIndex = 25
-        Me.Label56.Text = "Length"
-        Me.Label56.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'TextBox8
-        '
-        Me.TextBox8.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Length", True))
-        Me.TextBox8.Location = New System.Drawing.Point(457, 105)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(40, 20)
-        Me.TextBox8.TabIndex = 24
-        '
-        'Label57
-        '
-        Me.Label57.AutoSize = True
-        Me.Label57.Location = New System.Drawing.Point(413, 82)
-        Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(32, 13)
-        Me.Label57.TabIndex = 23
-        Me.Label57.Text = "Chkd"
-        Me.Label57.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'TextBox9
-        '
-        Me.TextBox9.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Checked", True))
-        Me.TextBox9.Location = New System.Drawing.Point(457, 79)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(40, 20)
-        Me.TextBox9.TabIndex = 22
-        '
-        'Label55
-        '
-        Me.Label55.AutoSize = True
-        Me.Label55.Location = New System.Drawing.Point(413, 56)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(29, 13)
-        Me.Label55.TabIndex = 21
-        Me.Label55.Text = "Year"
-        '
-        'TextBox4
-        '
-        Me.TextBox4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Year", True))
-        Me.TextBox4.Location = New System.Drawing.Point(457, 53)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(40, 20)
-        Me.TextBox4.TabIndex = 20
-        '
-        'Label54
-        '
-        Me.Label54.AutoSize = True
-        Me.Label54.Location = New System.Drawing.Point(262, 23)
-        Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(64, 13)
-        Me.Label54.TabIndex = 18
-        Me.Label54.Text = "Date Added"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "DateAdded", True))
-        Me.TextBox3.Location = New System.Drawing.Point(332, 20)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(76, 20)
-        Me.TextBox3.TabIndex = 17
-        '
-        'RichTextBox3
-        '
-        Me.RichTextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Actors", True))
-        Me.RichTextBox3.Location = New System.Drawing.Point(227, 251)
-        Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.Size = New System.Drawing.Size(270, 59)
-        Me.RichTextBox3.TabIndex = 16
-        Me.RichTextBox3.Text = ""
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.VideoBindingSource, "Picture", True))
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 11)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(158, 218)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 5
-        Me.PictureBox1.TabStop = False
-        '
-        'GroupBox14
-        '
-        Me.GroupBox14.Controls.Add(Me.Label53)
-        Me.GroupBox14.Controls.Add(Me.Label52)
-        Me.GroupBox14.Controls.Add(Me.Label51)
-        Me.GroupBox14.Controls.Add(Me.TextBox7)
-        Me.GroupBox14.Controls.Add(Me.TextBox6)
-        Me.GroupBox14.Controls.Add(Me.TextBox1)
-        Me.GroupBox14.Location = New System.Drawing.Point(172, 43)
-        Me.GroupBox14.Name = "GroupBox14"
-        Me.GroupBox14.Size = New System.Drawing.Size(236, 86)
-        Me.GroupBox14.TabIndex = 15
-        Me.GroupBox14.TabStop = False
-        Me.GroupBox14.Text = "Titles"
-        '
-        'Label53
-        '
-        Me.Label53.AutoSize = True
-        Me.Label53.Location = New System.Drawing.Point(7, 62)
-        Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(51, 13)
-        Me.Label53.TabIndex = 11
-        Me.Label53.Text = "Formated"
-        '
-        'Label52
-        '
-        Me.Label52.AutoSize = True
-        Me.Label52.Location = New System.Drawing.Point(2, 38)
-        Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(57, 13)
-        Me.Label52.TabIndex = 10
-        Me.Label52.Text = "Translated"
-        '
-        'Label51
-        '
-        Me.Label51.AutoSize = True
-        Me.Label51.Location = New System.Drawing.Point(6, 14)
-        Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(42, 13)
-        Me.Label51.TabIndex = 9
-        Me.Label51.Text = "Original"
-        '
-        'TextBox7
-        '
-        Me.TextBox7.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "FormattedTitle", True))
-        Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(65, 60)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(165, 20)
-        Me.TextBox7.TabIndex = 4
-        '
-        'TextBox6
-        '
-        Me.TextBox6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "TranslatedTitle", True))
-        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(65, 36)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(165, 20)
-        Me.TextBox6.TabIndex = 3
-        '
-        'TextBox1
-        '
-        Me.TextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "OriginalTitle", True))
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(65, 12)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(165, 20)
-        Me.TextBox1.TabIndex = 2
-        '
-        'RichTextBox2
-        '
-        Me.RichTextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Comments", True))
-        Me.RichTextBox2.Location = New System.Drawing.Point(187, 430)
-        Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
-        Me.RichTextBox2.Size = New System.Drawing.Size(310, 56)
-        Me.RichTextBox2.TabIndex = 14
-        Me.RichTextBox2.Text = ""
-        '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Description", True))
-        Me.RichTextBox1.Location = New System.Drawing.Point(187, 316)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(310, 106)
-        Me.RichTextBox1.TabIndex = 13
-        Me.RichTextBox1.Text = ""
-        '
-        'Label50
-        '
-        Me.Label50.AutoSize = True
-        Me.Label50.Location = New System.Drawing.Point(413, 23)
-        Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(38, 13)
-        Me.Label50.TabIndex = 10
-        Me.Label50.Text = "Rating"
-        '
-        'TextBox5
-        '
-        Me.TextBox5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Rating", True))
-        Me.TextBox5.Location = New System.Drawing.Point(457, 20)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(40, 20)
-        Me.TextBox5.TabIndex = 9
-        '
-        'Label49
-        '
-        Me.Label49.AutoSize = True
-        Me.Label49.Location = New System.Drawing.Point(172, 23)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(24, 13)
-        Me.Label49.TabIndex = 8
-        Me.Label49.Text = "Nbr"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Number", True))
-        Me.TextBox2.Location = New System.Drawing.Point(202, 20)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(49, 20)
-        Me.TextBox2.TabIndex = 4
         '
         'VidéoBindingNavigator
         '
@@ -3992,26 +4060,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle13
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4061,74 +4129,6 @@ Partial Class Form1
         Me.DateAddedDataGridViewTextBoxColumn.Name = "DateAddedDataGridViewTextBoxColumn"
         Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
-        Me.DataGridViewTextBoxColumn1.Width = 35
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
-        Me.DataGridViewTextBoxColumn4.Width = 35
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "OriginalTitle"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Original Title"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "TranslatedTitle"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Translated Title"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.ReadOnly = True
-        Me.DataGridViewTextBoxColumn5.Width = 66
-        '
-        'Category
-        '
-        Me.Category.DataPropertyName = "Category"
-        Me.Category.HeaderText = "Category"
-        Me.Category.Name = "Category"
-        Me.Category.ReadOnly = True
-        Me.Category.Width = 110
-        '
-        'Country
-        '
-        Me.Country.DataPropertyName = "Country"
-        Me.Country.HeaderText = "Country"
-        Me.Country.Name = "Country"
-        Me.Country.ReadOnly = True
-        Me.Country.Width = 70
-        '
-        'Rating
-        '
-        Me.Rating.DataPropertyName = "Rating"
-        Me.Rating.HeaderText = "Rating"
-        Me.Rating.Name = "Rating"
-        Me.Rating.ReadOnly = True
-        Me.Rating.Width = 50
         '
         'Form1
         '
@@ -4208,18 +4208,18 @@ Partial Class Form1
         Me.ViewCollection.PerformLayout()
         Me.GroupBoxMovieDetails.ResumeLayout(False)
         Me.GroupBoxMovieDetails.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VideoBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.XionPanel1.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox14.ResumeLayout(False)
+        Me.GroupBox14.PerformLayout()
         Me.GroupBox22.ResumeLayout(False)
         Me.GroupBox22.PerformLayout()
         Me.GroupBox21.ResumeLayout(False)
         Me.GroupBox21.PerformLayout()
         Me.GroupBox15.ResumeLayout(False)
         Me.GroupBox15.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox14.ResumeLayout(False)
-        Me.GroupBox14.PerformLayout()
+        Me.XionPanel1.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VidéoBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.VidéoBindingNavigator.ResumeLayout(False)
         Me.VidéoBindingNavigator.PerformLayout()

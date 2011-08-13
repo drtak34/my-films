@@ -532,6 +532,19 @@ Public Class AntSettings
             SetAttribute("Use_Folder_Dot_Jpg", value)
         End Set
     End Property
+    Public Property Create_Cover_From_Movie() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Create_Cover_From_Movie").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Create_Cover_From_Movie", value)
+        End Set
+    End Property
     Public Property Prohibit_Internet_Lookup() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Prohibit_Internet_Lookup").ToLower
@@ -682,6 +695,7 @@ Public Class AntSettings
         dt.Rows.Add("Store_Image_With_Relative_Path", "True")
         dt.Rows.Add("Image_Download_Filename_Prefix", "")
         dt.Rows.Add("Use_Folder_Dot_Jpg", "False")
+        dt.Rows.Add("Create_Cover_From_Movie", "False")
         dt.Rows.Add("Prohibit_Internet_Lookup", "False")
         dt.Rows.Add("Parse_Subtitle_Files", "False")
         dt.Rows.Add("Rescan_Moved_Files", "False")

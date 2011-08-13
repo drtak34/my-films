@@ -608,6 +608,18 @@ Module Module1
                     LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
                     ReturnValue = ""
                 End Try
+            Case "aspectratio"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    TempString = MI.Get_(StreamKind.Visual, 0, "AspectRatio")
+                    MI.Close()
+                    ReturnValue = TempString
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
+                    ReturnValue = ""
+                End Try
             Case Else
                 ReturnValue = "Unknown Variable Requested"
         End Select
