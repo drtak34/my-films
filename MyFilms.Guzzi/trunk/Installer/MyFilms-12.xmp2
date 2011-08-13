@@ -3421,9 +3421,9 @@ Please refer to the Wiki online documentation.</Value>
         </MinVersion>
         <MaxVersion>
           <Major>0</Major>
-          <Minor>3</Minor>
-          <Build>9</Build>
-          <Revision>9</Revision>
+          <Minor>0</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
         <Message>To use My Films online help and preview IMDB pages, BrowseTheWeb version 0.30 (0.3.0) or higher must be installed.</Message>
@@ -3440,9 +3440,9 @@ Please refer to the Wiki online documentation.</Value>
         </MinVersion>
         <MaxVersion>
           <Major>0</Major>
-          <Minor>30</Minor>
-          <Build>9</Build>
-          <Revision>9</Revision>
+          <Minor>0</Minor>
+          <Build>0</Build>
+          <Revision>0</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
         <Message>To access online trailers (incl. IMDB) from MyFilms, Online Videos v0.29 (0.29.1) or higher must be installed.</Message>
@@ -3458,8 +3458,8 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>0</Revision>
         </MinVersion>
         <MaxVersion>
-          <Major>1</Major>
-          <Minor>2</Minor>
+          <Major>0</Major>
+          <Minor>0</Minor>
           <Build>0</Build>
           <Revision>0</Revision>
         </MaxVersion>
@@ -3539,15 +3539,15 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>1286</Revision>
+      <Revision>1302</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
-    <DevelopmentStatus>Beta</DevelopmentStatus>
+    <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation />
     <ReleaseDate>2011-08-10T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.1.1286(MP12RC).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1302(MP12RC).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -6645,14 +6645,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b2c2f9b0-2651-458d-9bee-18d369292656}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{022f98e1-8807-4de0-87e6-4cb1757fc44f}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ab86fa89-5d5e-41e9-bb21-a942bbca7dad}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{d1f77822-e4f6-450c-a465-e0b025f04fcf}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
