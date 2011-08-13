@@ -76,7 +76,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
             InitializeComponent();
             System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
-            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString() + " beta";
+            this.label_VersionNumber.Text = "Version " + asm.GetName().Version.ToString() + " RC";
         }
 
 
