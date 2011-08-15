@@ -46,7 +46,7 @@
     <String id="931">Rating</String>
     <String id="936">Resume from:</String>
     <String id="985">Downloading films details</String>
-    <String id="1951">Harddisk</String>
+    <String id="1951">Hard disk</String>
     <String id="2084">Start</String>
     <String id="2085">End</String>
     <String id="2086">Forward</String>
@@ -74,7 +74,7 @@
     <String id="1079850">Update online availability</String>
     <String id="1079854">Movie DB already in use (locked) !</String>
     <String id="1079855">Stop movie DB update (active)</String>
-    <String id="1079856">Global Update was Cancelled !</String>
+    <String id="1079856">Global Update was Cancelled!</String>
     <String id="1079857">Download TMDB data (online)</String>
     <String id="1079858">Manual Selection with Keyboard</String>
     <String id="1079859">Choose Search Expression</String>
@@ -82,7 +82,7 @@
     <String id="1079861">Update DB (AMC Updater)</String>
     <String id="1079862">Download fanart (selected film)</String>
     <String id="1079863">Manually choose grabber script ({0})</String>
-    <String id="1079864">Autoselect best match ({0})</String>
+    <String id="1079864">Auto select best match ({0})</String>
     <String id="1079865">Use standard windows file dialog ({0})</String>
     <String id="1079866">Search related films by person</String>
     <String id="1079867">Select person</String>
@@ -126,7 +126,7 @@
     <String id="10798612">Producer</String>
     <String id="10798613">Choose property for searching</String>
     <String id="10798614">Search related films by properties</String>
-    <String id="10798615">Search all fims by properties</String>
+    <String id="10798615">Search all films by properties</String>
     <String id="10798616">Search on all properties</String>
     <String id="10798617">Search on property </String>
     <String id="10798618">Global search for string '{0}'</String>
@@ -138,7 +138,7 @@
     <String id="10798624">Films System Information</String>
     <String id="10798625">No result found for this value!</String>
     <String id="10798626">=> '{1}' ({0})</String>
-    <String id="10798627">Singleword</String>
+    <String id="10798627">Single word</String>
     <String id="10798628">on</String>
     <String id="10798629">off</String>
     <String id="10798630">New value</String>
@@ -216,7 +216,7 @@
     <String id="10798705">Trailer(s) found !</String>
     <String id="10798706">Choose internet grabber script</String>
     <String id="10798707">Subtitles ...</String>
-    <String id="10798708">Update Mediainfos</String>
+    <String id="10798708">Update media info</String>
     <String id="10798709">Play Film</String>
     <String id="10798710">Play trailer</String>
     <String id="10798711">YouTube Trailer (OnlineVideos)</String>
@@ -253,7 +253,7 @@
     <String id="10798743">successfully started!</String>
     <String id="10798744">could not be started!</String>
     <String id="10798745">Start not possible - check config!</String>
-    <String id="10798746">is not configured for wakeonlan!</String>
+    <String id="10798746">is not configured for Wake-on-Lan!</String>
     <String id="10798747">Automatic NAS start not possible...</String>
     <String id="10798748">Global Update finished !</String>
     <String id="10798751">Overview</String>
@@ -261,7 +261,7 @@
     <String id="10798753">Comments</String>
     <String id="10798754">Actors</String>
     <String id="10798755">Technical Info</String>
-    <String id="10798761">Load  Covers (TMDB)</String>
+    <String id="10798761">Load Covers (TMDB)</String>
     <String id="10798762">Change Cover</String>
     <String id="10798770">Show only films with media available ({0})</String>
     <String id="10798771">Display options ...</String>
@@ -284,13 +284,13 @@
     <String id="10798940">Trailer</String>
     <String id="10798941">Tagline</String>
     <String id="10798942">Tags</String>
-    <String id="10798943">Aspectratio</String>
+    <String id="10798943">Aspect ratio</String>
     <String id="10798944">User Rating</String>
     <String id="10798945">Fanart</String>
-    <String id="10798946">Filmstudio</String>
-    <String id="10798947">IMDB Toplist</String>
-    <String id="10798948">Onlinestatus</String>
+    <String id="10798946">Film studio</String>
+    <String id="10798947">IMDB Top list</String>
+    <String id="10798948">Online status</String>
     <String id="10798949">Edition</String>
-    <String id="10798950">Onlinestatus Trailer</String>
+    <String id="10798950">Online status Trailer</String>
   </Section>
 </Language>
