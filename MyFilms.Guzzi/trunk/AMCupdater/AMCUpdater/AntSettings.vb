@@ -558,19 +558,6 @@ Public Class AntSettings
             SetAttribute("Prohibit_Internet_Lookup", value)
         End Set
     End Property
-    Public Property Use_XBMC_nfo() As Boolean
-        Get
-            Dim tempvalue As String = ReadAttribute("Use_XBMC_nfo").ToLower
-            If tempvalue = "true" Then
-                Return True
-            Else
-                Return False
-            End If
-        End Get
-        Set(ByVal value As Boolean)
-            SetAttribute("Use_XBMC_nfo", value)
-        End Set
-    End Property
     Public Property Parse_Subtitle_Files() As Boolean
         Get
             Dim tempvalue As String = ReadAttribute("Parse_Subtitle_Files").ToLower
@@ -608,6 +595,19 @@ Public Class AntSettings
         End Get
         Set(ByVal value As Boolean)
             SetAttribute("Only_Add_Missing_Data", value)
+        End Set
+    End Property
+    Public Property Only_Update_With_Nonempty_Data() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Only_Update_With_Nonempty_Data").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Only_Update_With_Nonempty_Data", value)
         End Set
     End Property
     Public Property Auto_Approve_Limits() As String
@@ -798,7 +798,7 @@ Public Class AntSettings
                     'LoadUserSettings()
                     'End If
                 Catch ex As Exception
-                    MsgBox("Error reading config file - loading defaults instead")
+                    MsgBox("Error reading config file: '" + ex.Message + "' - loading defaults instead")
                     dsSettings.Clear()
                     LoadUserSettings()
                 End Try

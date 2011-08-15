@@ -634,62 +634,6 @@ Module Module1
     End Function
 
 
-    Public Function GetXBMCnfoData(ByVal FilePath As String, ByVal DataItem As String)
-        'Guzzi: Function to retreive information from the XBMC-nfo-file, that resides in same directory as movie does...
-        'Search for movie.nfo in directory ...
-
-        Dim ReturnValue As String = ""
-        Dim TempInteger As Long = 0
-        Dim TempString As String = ""
-        Dim i As Integer = 0
-        If Not System.IO.File.Exists(FilePath) Then
-            Return "ERROR : File cannot be found"
-            LogEvent("Error - Cannot open file for analysis - " & FilePath, EventLogLevel.ErrorOrSimilar)
-            Exit Function
-        End If
-
-        Dim f As New IO.FileInfo(FilePath)
-
-        Select Case DataItem.ToLower
-
-            'Guzzi Test'
-            Case "beschreibung"
-                Try
-                    TempString = "Test-Guzzi-Beschreibung"
-                    ReturnValue = TempString
-
-                Catch ex As Exception
-                    Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, 3)
-                    ReturnValue = ""
-                End Try
-
-            Case "filename"
-                Try
-                    TempString = f.Name
-                    'Console.WriteLine(f.Extension)
-                    TempString = TempString.Replace(f.Extension, "")
-                    'Put this bit in here to remove the '1of2' type bits using the system variable regex expression.
-                    Dim SplitText As New Regex("\(" & CurrentSettings.RegEx_Check_For_MultiPart_Files & "\)")
-                    TempString = SplitText.Replace(TempString, "")
-                    SplitText = New Regex(CurrentSettings.RegEx_Check_For_MultiPart_Files)
-                    TempString = SplitText.Replace(TempString, "")
-                    ReturnValue = TempString
-
-                Catch ex As Exception
-                    'Console.WriteLine(ex.Message)
-                    LogEvent("ERROR : " + ex.Message.ToString, EventLogLevel.ErrorOrSimilar)
-                    ReturnValue = ""
-                End Try
-
-            Case Else
-                ReturnValue = "Unknown Variable Requested"
-        End Select
-        'Console.WriteLine(DataItem.ToString + " - " + ReturnValue.ToString)
-        Return ReturnValue
-    End Function
-
-
     Public Function GetHTMLFileData(ByVal FilePath As String, ByVal DataItem As String)
         'Guzzi: Function to retreive information from the HTML-Files in movie directory...
         'Search for goldesel 2004.htm, index.php.htm, Detail.aspx.htm, goldesel.to - quality source for more than 10 years.htm 

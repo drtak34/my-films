@@ -39,14 +39,13 @@ Public Class AntRecord
     Private _DownloadImage As Boolean = False
     Private _MasterTitle As String = String.Empty
     Private _OnlyAddMissing As Boolean = False
+    Private _OnlyUpdateNonEmptyData As Boolean = False
 
     '    Private _Process_Mode As Process_Mode_Names
     Private _DatabaseFields As New Hashtable
     Private Shared _InternetData() As String
     Private Shared _MediaInfoData() As String
     Public ProhibitInternetLookup As Boolean
-    Public UseXBMCnfo As Boolean
-    Public UsePageGrabber As Boolean
 
     Private Shared _XMLDoc As New Xml.XmlDocument
     Private Shared _XMLElement As Xml.XmlElement
@@ -131,6 +130,10 @@ Public Class AntRecord
         textstreamlanguagelist = 13
     End Enum
 
+    Public Enum Artwork_Thumb_Mode
+        Cover
+        Fanart
+    End Enum
     Public Enum Process_Mode_Names
         Import
         Update
@@ -400,6 +403,14 @@ Public Class AntRecord
         End Get
         Set(ByVal value As Boolean)
             _OnlyAddMissing = value
+        End Set
+    End Property
+    Public Property OnlyUpdateNonEmptyData() As Boolean
+        Get
+            Return _OnlyUpdateNonEmptyData
+        End Get
+        Set(ByVal value As Boolean)
+            _OnlyUpdateNonEmptyData = value
         End Set
     End Property
 
@@ -889,7 +900,7 @@ Public Class AntRecord
 
                                 End If
 
-                                ' Check  - only if ""Try to find best match automatically" is chosen
+                                ' Check  - only if "Try to find best match automatically" is chosen
                                 If _InternetLookupAlwaysPrompt = False Then
                                     If searchyearHint > 0 Then
 
@@ -1154,7 +1165,9 @@ Public Class AntRecord
             CurrentAttribute = "Number"
             TempValue = _MovieNumber
             If _XMLElement.Attributes(CurrentAttribute) Is Nothing Then ' only update when there is no content
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
+            ElseIf ProcessMode = Process_Mode_Names.Update Then
+                _MovieNumber = Integer.Parse(_XMLElement.Attributes(CurrentAttribute).Value)
             End If
             'LogEvent("ProcessFile() - get valid record number: '" & TempValue & "'", EventLogLevel.InformationalWithGrabbing)
 
@@ -1167,7 +1180,7 @@ Public Class AntRecord
                         TempValue = GetTitleFromFilePath(_FilePath)
                         CurrentAttribute = "OriginalTitle"
                         title = TempValue
-                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                         'LogEvent("ProcessFile() - Import - hints - title: '" & title & "'", EventLogLevel.InformationalWithGrabbing)
                     End If
                 End If
@@ -1177,7 +1190,7 @@ Public Class AntRecord
                         TempValue = GetYearFromFilePath(_FilePath)
                         _InternetSearchHintYear = TempValue
                         CurrentAttribute = "Year"
-                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                         'LogEvent("ProcessFile() - Import - hints - year: '" & _InternetSearchHintYear & "'", EventLogLevel.InformationalWithGrabbing)
                     End If
                 End If
@@ -1186,13 +1199,14 @@ Public Class AntRecord
                     TempValue = GetIMDBidFromFilePath(_FilePath)
                     CurrentAttribute = "IMDB_Id"
                     _InternetSearchHintIMDB_Id = TempValue
-                    CreateOrUpdateElement(CurrentAttribute, TempValue)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                     'LogEvent("ProcessFile() - Import - hints - imdb_id: '" & _InternetSearchHintIMDB_Id & "'", EventLogLevel.InformationalWithGrabbing)
                     TempValue = ""
                 End If
             End If
 
             If IsInternetLookupNeeded() = True Then
+                ' set the search hints for update mode (AMC, IMDB, Year)
                 If ProcessMode = Process_Mode_Names.Update Then
                     Dim wdirector As String
                     If _XMLElement.Attributes("Director") IsNot Nothing Then
@@ -1214,7 +1228,29 @@ Public Class AntRecord
                         _InternetSearchHintYear = _XMLElement.Attributes("Year").Value.ToString
                     End If
                     'LogEvent("ProcessFile() - Update - _InternetSearchHint: '" & _InternetSearchHint & "'", EventLogLevel.InformationalWithGrabbing)
+
+
+                    If _XMLElement.Item("IMDB_Id") IsNot Nothing Then
+                        If _XMLElement.Item("IMDB_Id").InnerText.Length > 0 Then
+                            _InternetSearchHintIMDB_Id = _XMLElement.Item("IMDB_Id").InnerText.ToString
+                        ElseIf _XMLElement.Attributes("URL") IsNot Nothing Then
+                            If _XMLElement.Attributes("URL").Value.Length > 0 Then
+                                Dim URL As String = _XMLElement.Attributes("URL").Value.ToString
+                                Dim IMDB As String = GetIMDBidFromFilePath(URL)
+                                If IMDB.Length > 0 Then
+                                    _InternetSearchHintIMDB_Id = IMDB
+                                ElseIf (_FilePath.Length > 0) Then 'try to get IMDB Id from filepath/name
+                                    IMDB = GetIMDBidFromFilePath(_FilePath)
+                                    If IMDB.Length > 0 Then
+                                        _InternetSearchHintIMDB_Id = IMDB
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
                 End If
+
+                ' Get Internetdata with "best title possible"
                 If _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
                     'Looks like we have a value here - if so, use it for the lookup.  Assuming here that it has already been 'cleaned'.
                     If _XMLElement.Attributes("OriginalTitle").Value.ToString = String.Empty Then
@@ -1236,12 +1272,6 @@ Public Class AntRecord
             End If
 
 
-            If CurrentSettings.Use_XBMC_nfo = True Or UseXBMCnfo = True Then
-                'Now update the Original Title with the nfo-file title, if set to do so:
-                TempValue = GetXBMCnfoData(_FilePath, "OriginalTitle")
-            End If
-
-
             ' Check, if internetlookup has given proper title name - otherwise set to failed
             If _InternetLookupOK = True Then
                 TempValue = _InternetData(Grabber_Output.OriginalTitle)
@@ -1258,7 +1288,7 @@ Public Class AntRecord
                         CurrentAttribute = "OriginalTitle"
                         TempValue = _InternetData(Grabber_Output.OriginalTitle)
                         title = TempValue
-                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                     End If
                 End If
             Else
@@ -1271,7 +1301,7 @@ Public Class AntRecord
                             TempValue = _XMLElement.Attributes("OriginalTitle").Value.ToString
                         End If
                     End If
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
             End If
 
@@ -1298,26 +1328,24 @@ Public Class AntRecord
             If IsUpdateRequested(CurrentAttribute) = True Then
                 If _XMLElement.Attributes("TranslatedTitle") IsNot Nothing Then
                     'TempValue = _XMLElement.Attributes("TranslatedTitle").Value
-                    'Guzzi: Reverted Change to use InetNames for dupe checks to avoid overwriting old DB entries
                     TempValue = Grabber.GrabUtil.TitleToArchiveName(_XMLElement.Attributes("TranslatedTitle").Value)
                 ElseIf _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
                     'TempValue = _XMLElement.Attributes("OriginalTitle").Value
-                    'Guzzi: Reverted Change to use InetNames for dupe checks to avoid overwriting old DB entries
                     TempValue = Grabber.GrabUtil.TitleToArchiveName(_XMLElement.Attributes("OriginalTitle").Value)
                 End If
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Date"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "Date")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Checked"
             If IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = CurrentSettings.Check_Field_Handling.ToString
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "MediaLabel"
@@ -1348,17 +1376,16 @@ Public Class AntRecord
                 Else
                     TempValue = _MediaLabel
                 End If
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "MediaType"
             If Not String.IsNullOrEmpty(_MediaType) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = _MediaType
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
-            ' Sourcefile - field depends on configuration
-            CurrentAttribute = _SourceField
+            CurrentAttribute = _SourceField ' Sourcefile - field depends on configuration
             If Not (CurrentAttribute = "(none)" Or String.IsNullOrEmpty(CurrentAttribute)) Then
                 If (_FilePath.Length > 0) Then
                     If Not String.IsNullOrEmpty(_OverridePath) Then
@@ -1371,27 +1398,28 @@ Public Class AntRecord
                             TempValue = TempValue.Substring(TempValue.LastIndexOf("\") + 1)
                         End If
                     End If
-
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    If TempValue <> _XMLElement.Attributes(CurrentAttribute).Value.ToString Then
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
+                    End If
                 End If
             End If
 
             CurrentAttribute = "Subtitles"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "textstreamlanguagelist")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Languages"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "audiostreamlanguagelist")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Resolution"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "Resolution")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Length"
@@ -1413,38 +1441,38 @@ Public Class AntRecord
                     TempValue = GetFileData(_FilePath, "runtime")
                 End If
                 If Not TempValue.Contains("ERROR") Then
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
             End If
 
             CurrentAttribute = "VideoFormat"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "VideoFormat")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "VideoBitrate"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "VideoBitrate")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "AudioFormat"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "AudioFormat")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "AudioBitrate"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "AudioBitrate")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Framerate"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 TempValue = GetFileData(_FilePath, "Framerate")
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
             CurrentAttribute = "Size"
@@ -1464,7 +1492,7 @@ Public Class AntRecord
                 End If
 
                 If Not TempValue.Contains("ERROR") Then
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
             End If
 
@@ -1479,7 +1507,7 @@ Public Class AntRecord
                     Diskcount = 1
                 End If
                 TempValue = Diskcount.ToString
-                CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
             End If
 
 
@@ -1487,147 +1515,33 @@ Public Class AntRecord
 
                 'Additional attempt to load picture with folder.jpg settings, in case Internet lookup fails
                 CurrentAttribute = "Picture"
-                If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
-                    'GUZZI: Added to try to get Picture with Moviename.JPG !!!
-                    'Dim ReturnValue As String
-                    'Dim Filename As String = FilePath
-                    'Get the file name itself off the end: .avi
-                    'Dim FileNameEnd As String = Filename.Substring(InStrRev(Filename, "."))
-                    'Filename = Filename.Replace(FileNameEnd, "")
-                    'ReturnValue = Filename + "jpg"
-
+                If IsUpdateRequested(CurrentAttribute) = True Then
                     Dim CoverFileExists As Boolean = False
-                    Dim NewCoverThumbName As String = _FilePath
-                    If NewCoverThumbName.Contains("\") = True Then
-                        NewCoverThumbName = NewCoverThumbName.Substring(0, NewCoverThumbName.LastIndexOf("\"))
-                    End If
-                    NewCoverThumbName += "\folder.jpg"
-                    Try
-                        If File.Exists(NewCoverThumbName) Then
-                            CoverFileExists = True
-                        End If
-                    Catch ex As Exception
-                    End Try
-                    If CoverFileExists = False And CurrentSettings.Create_Cover_From_Movie = True Then
-                        ' create missing covers by thumbnailer
-                        Dim Filename As String = _FilePath
-                        If Not Filename.Contains("VIDEO_TS\\VIDEO_TS.IFO") And System.IO.File.Exists(Filename) Then ' Do not try to create thumbnails for DVDs or nonexisting media files
-                            Dim ar As String = GetFileData(Filename, "AspectRatio") '"fullscreen" : "widescreen"
-                            Dim columns As Integer = 2
-                            Dim rows As Integer = 4
-                            Dim arValue As Double = 0
-                            Try
-                                arValue = Double.Parse(ar, System.Globalization.CultureInfo.InvariantCulture.NumberFormat)
-                            Catch ex As Exception
-                            End Try
+                    Dim Filename As String = _FilePath ' media file
+                    Dim PicturePathToSave As String = String.Empty ' the strintg to save in DB field Pictures = "..."
 
-                            'Cover
-                            If arValue < 1.4 Then '4:3
-                                columns = 2
-                                rows = 4
-                            ElseIf arValue < 1.9 Then '16:9
-                                columns = 2
-                                rows = 5
-                            ElseIf arValue >= 1.9 Then 'cinemascopt
-                                columns = 2
-                                rows = 6
+                    If CurrentSettings.Create_Cover_From_Movie = True Then ' create missing covers by thumbnailer
+                        'Not using folder.jpg - use default location instead (with the xml file, maybe using override path) _ImagePath
+                        CoverFileExists = CreateCoverFromMovie(Filename, PicturePathToSave)
+                    ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True Then
+                        Dim NewCoverThumbName As String = _FilePath
+                        If NewCoverThumbName.Contains("\") = True Then
+                            NewCoverThumbName = NewCoverThumbName.Substring(0, NewCoverThumbName.LastIndexOf("\"))
+                        End If
+                        NewCoverThumbName += "\folder.jpg"
+                        Try
+                            If File.Exists(NewCoverThumbName) Then
+                                CoverFileExists = True
+                                PicturePathToSave = NewCoverThumbName
                             End If
-                            'System.Drawing.Image thumb = null;))))
-                            Try
-                                ' CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits);
-                                Dim success As Boolean = Grabber.ThumbCreator.CreateVideoThumbForAMCupdater(Filename, NewCoverThumbName, False, columns, rows, "Cover")
-                                If success Then
-                                    CoverFileExists = True
-                                End If
-                            Catch ex As Exception
-                                'LogMyFilms.Error("Could not create thumbnail for {0}", Filename)
-                                'LogMyFilms.Error(ex)
-                            End Try
-                        End If
+                        Catch ex As Exception
+                        End Try
                     End If
 
-                    ' recheck, if file is existing now after trying to create thumb from movie
-                    Try
-                        If File.Exists(NewCoverThumbName) Then
-                            CoverFileExists = True
-                        End If
-                    Catch ex As Exception
-                    End Try
-
-                    If CoverFileExists = True Then
-                        TempValue = NewCoverThumbName
-                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
-                    End If
-                End If
-
-                CurrentAttribute = "Fanart"
-                'If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
-                If _DatabaseFields(CurrentAttribute.ToLower) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
-                    'GUZZI: Added to try to get Picture with Moviename.JPG !!!
-                    'Dim ReturnValue As String
-                    'Dim Filename As String = FilePath
-                    'Get the file name itself off the end: .avi
-                    'Dim FileNameEnd As String = Filename.Substring(InStrRev(Filename, "."))
-                    'Filename = Filename.Replace(FileNameEnd, "")
-                    'ReturnValue = Filename + "jpg"
-
-                    Dim FanartFileExists As Boolean = False
-                    Dim NewFanartThumbName As String = _FilePath
-                    If NewFanartThumbName.Contains("\") = True Then
-                        NewFanartThumbName = NewFanartThumbName.Substring(0, NewFanartThumbName.LastIndexOf("\"))
-                    End If
-                    NewFanartThumbName += "\fanart.jpg"
-                    Try
-                        If File.Exists(NewFanartThumbName) Then
-                            FanartFileExists = True
-                        End If
-                    Catch ex As Exception
-                    End Try
-                    If FanartFileExists = False And CurrentSettings.Create_Cover_From_Movie = True Then
-                        ' create missing fanart by thumbnailer
-                        Dim Filename As String = _FilePath
-                        If Not Filename.Contains("VIDEO_TS\\VIDEO_TS.IFO") And System.IO.File.Exists(Filename) Then ' Do not try to create thumbnails for DVDs or nonexisting media files
-                            Dim ar As String = GetFileData(Filename, "AspectRatio") '"fullscreen" : "widescreen"
-                            Dim columns As Integer = 4
-                            Dim rows As Integer = 4
-                            Dim arValue As Double = 0
-                            Try
-                                arValue = Double.Parse(ar, System.Globalization.CultureInfo.InvariantCulture.NumberFormat)
-                            Catch ex As Exception
-                                columns = 4
-                                rows = 4
-                            End Try
-
-                            'Fanart
-                            If arValue < 1.4 Then '4:3
-                                columns = 4
-                                rows = 5
-                            ElseIf arValue < 1.9 Then '16:9
-                                columns = 4
-                                rows = 4
-                            ElseIf arValue >= 1.9 Then 'cinemascopt
-                                columns = 5
-                                rows = 4
-                            End If
-                            'System.Drawing.Image thumb = null;))))
-                            Try
-                                Dim success As Boolean = Grabber.ThumbCreator.CreateVideoThumbForAMCupdater(Filename, NewFanartThumbName, False, columns, rows, "Fanart")
-                            Catch ex As Exception
-                            End Try
-                        End If
-                    End If
-
-                    ' recheck, if file is existing now after trying to create thumb from movie
-                    Try
-                        If File.Exists(NewFanartThumbName) Then
-                            FanartFileExists = True
-                        End If
-                    Catch ex As Exception
-                    End Try
-
-                    If FanartFileExists = True Then
-                        TempValue = NewFanartThumbName
-                        CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    ' now update with either folder.jpg or filename.jpg
+                    If CoverFileExists = True And PicturePathToSave <> "" Then
+                        TempValue = PicturePathToSave
+                        CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                     End If
                 End If
 
@@ -1635,10 +1549,11 @@ Public Class AntRecord
             Else 'Load all the Internet data...
 
                 title = _InternetData(Grabber_Output.OriginalTitle)
+
                 CurrentAttribute = "TranslatedTitle"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.TranslatedTitle)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 'Finally, check to see if there's a group name attached to this, and apply it.
@@ -1655,61 +1570,61 @@ Public Class AntRecord
                 CurrentAttribute = "Year"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Year)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Country"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Country)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Category"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Category)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "URL"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.URL)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Rating"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Rating)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Director"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Director)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Producer"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Producer)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Actors"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Actors)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Description"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Description)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Comments"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Comments)
-                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Picture"
@@ -1785,7 +1700,7 @@ Public Class AntRecord
                         'Now check if we have a valid link; and use it.
                         If FileExists = True Then
                             TempValue = NewFileName
-                            CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                            CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                         End If
 
                     Else
@@ -1797,6 +1712,12 @@ Public Class AntRecord
                             Dim PicturePathToSave As String = String.Empty
 
                             'Check, if the returned picture is existing - it might not due to download errors like 404
+
+                            If Not System.IO.File.Exists(PicturePathFull) And CurrentSettings.Create_Cover_From_Movie = True Then ' If internet did not return picture try creating one from movie
+                                Dim Filename As String = _FilePath
+                                Dim success As Boolean = CreateArtworkFromMovie(Filename, PicturePathFull, Artwork_Thumb_Mode.Cover)
+                            End If
+
                             If System.IO.File.Exists(PicturePathFull) Then
 
                                 'Separate the folder from the prefix string (if needed)
@@ -1836,8 +1757,33 @@ Public Class AntRecord
 
                                 If PicturePathToSave <> String.Empty Then
                                     TempValue = PicturePathToSave
-                                    CreateOrUpdateAttribute(CurrentAttribute, TempValue)
+                                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                                 End If
+                            End If
+                        Else
+                            Dim CoverFileExists As Boolean = False
+                            Dim Filename As String = _FilePath ' media file
+                            Dim PicturePathToSave As String = String.Empty ' the strintg to save in DB field Pictures = "..."
+
+                            If CurrentSettings.Create_Cover_From_Movie = True Then ' create missing covers by thumbnailer
+                                CoverFileExists = CreateCoverFromMovie(Filename, PicturePathToSave)
+                            ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True Then
+                                Dim NewCoverThumbName As String = _FilePath
+                                If NewCoverThumbName.Contains("\") = True Then
+                                    NewCoverThumbName = NewCoverThumbName.Substring(0, NewCoverThumbName.LastIndexOf("\"))
+                                End If
+                                NewCoverThumbName += "\folder.jpg"
+                                Try
+                                    If File.Exists(NewCoverThumbName) Then
+                                        CoverFileExists = True
+                                        PicturePathToSave = NewCoverThumbName
+                                    End If
+                                Catch ex As Exception
+                                End Try
+                            End If
+                            If PicturePathToSave <> String.Empty Then
+                                TempValue = PicturePathToSave
+                                CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                             End If
                         End If
                     End If
@@ -1848,43 +1794,44 @@ Public Class AntRecord
                 CurrentAttribute = "Languages"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Language)
-                    CreateOrUpdateElement(CurrentAttribute, TempValue)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Certification"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Certification)
-                    CreateOrUpdateElement(CurrentAttribute, TempValue)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Writer"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Writer)
-                    CreateOrUpdateElement(CurrentAttribute, TempValue)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
                 CurrentAttribute = "Tagline"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Tagline)
-                    CreateOrUpdateElement(CurrentAttribute, TempValue)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
 
-                ' CurrentAttribute = "ImdbRank"
-                'If IsUpdateRequested(CurrentAttribute) = True Then
-                '    TempValue = _InternetData(Grabber_Output.IMDBrank)
-                '    CreateOrUpdateElement(CurrentAttribute, TempValue)
-                'End If
+                CurrentAttribute = "ImdbRank"
+                If IsUpdateRequested(CurrentAttribute) = True Then
+                    TempValue = _InternetData(Grabber_Output.IMDBrank)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                End If
 
                 CurrentAttribute = "Studio"
                 If IsUpdateRequested(CurrentAttribute) = True Then
                     TempValue = _InternetData(Grabber_Output.Studio)
-                    CreateOrUpdateElement(CurrentAttribute, TempValue)
+                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                 End If
             End If
 
             'get fanart
-            If _InternetLookupOK = True Then
-                If _DatabaseFields("fanart") = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
+            CurrentAttribute = "Fanart"
+            If _DatabaseFields(CurrentAttribute.ToLower) = True Then
+                If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
                     Dim fanart As List(Of Grabber.DBMovieInfo)
                     Dim ttitleCleaned As String = ""
                     CurrentAttribute = "Year"
@@ -1917,17 +1864,64 @@ Public Class AntRecord
                         If title.Contains("\") = True Then
                             title = title.Substring(0, title.IndexOf("\") - 1)
                             'Console.WriteLine("-" & .GroupName.ToString & "-")
-                            'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
-                            'fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path)
-                            fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
-                        Else
-                            'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
-                            'fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path)
-                            fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                         End If
+                        'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                        'fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path)
+                        fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                        If fanart.Count = 1 Then
+                            If fanart(0).Backdrops.Count > 0 Then
+                                TempValue = fanart(0).Backdrops(0).ToString
+                                If String.IsNullOrEmpty(TempValue) = False Then
+                                    CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                                End If
+                            End If
+                        End If
+                    End If
+                ElseIf CurrentSettings.Create_Cover_From_Movie Then ' create missing fanart by thumbnailer
+                    Dim FanartFileExists As Boolean = False
+                    Dim NewFanartThumbName As String = _FilePath
+                    NewFanartThumbName = System.IO.Path.GetDirectoryName(NewFanartThumbName) + "\" + System.IO.Path.GetFileNameWithoutExtension(NewFanartThumbName) + "-fanart.jpg" ' Now set to filename-fanart.jpg to get "better matching" if existing...
+                    Dim Filename As String = _FilePath
+                    Try
+                        If Not File.Exists(NewFanartThumbName) Then
+                            FanartFileExists = CreateArtworkFromMovie(Filename, NewFanartThumbName, Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
+                        End If
+                    Catch ex As Exception
+                    End Try
+                    Try
+                        If File.Exists(NewFanartThumbName) Then ' recheck, if file is existing now after trying to create thumb from movie
+                            FanartFileExists = True
+                        End If
+                    Catch ex As Exception
+                    End Try
+
+                    If FanartFileExists = True Then
+                        TempValue = NewFanartThumbName
+                        CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                    End If
+                ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True Then
+                    'If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
+                    Dim FanartFileExists As Boolean = False
+                    Dim NewFanartThumbName As String = _FilePath
+
+                    If NewFanartThumbName.Contains("\") = True Then
+                        NewFanartThumbName = NewFanartThumbName.Substring(0, NewFanartThumbName.LastIndexOf("\"))
+                    End If
+                    NewFanartThumbName += "\fanart.jpg"
+                    Try
+                        If File.Exists(NewFanartThumbName) Then
+                            FanartFileExists = True
+                        End If
+                    Catch ex As Exception
+                    End Try
+
+                    If FanartFileExists = True Then
+                        TempValue = NewFanartThumbName
+                        CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                     End If
                 End If
             End If
+
         Catch ex As Exception
             _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : " & ex.Message.ToString & ", " & ex.StackTrace.ToString
         End Try
@@ -1936,21 +1930,32 @@ Public Class AntRecord
     Private Function IsUpdateRequested(ByVal currentAttribute As String) As Boolean
         Dim attr As Xml.XmlAttribute
         Dim element As Xml.XmlElement
-        If _DatabaseFields(currentAttribute.ToLower) = False Then
+        Dim IsUpdateRequired As Boolean = False
+        If _DatabaseFields(currentAttribute.ToLower) = False Then ' Field not selected !
             Return False
         Else
             If OnlyAddMissingData = True Then
-                If _XMLElement.Attributes(currentAttribute) Is Nothing And _XMLElement.Item(currentAttribute) Is Nothing Then
+                attr = _XMLElement.Attributes(currentAttribute)
+                element = _XMLElement.Item(currentAttribute)
+                If attr Is Nothing And element Is Nothing Then ' no values exist at all
                     Return True
                 Else
-                    attr = _XMLElement.Attributes(currentAttribute)
-                    element = _XMLElement.Item(currentAttribute)
-                    If attr.Value Is Nothing And element.InnerText Is Nothing Then
-                        Return True
-                    ElseIf attr.Value = "" And element.InnerText = "" Then
-                        Return True
-                    Else
-                        Return False
+                    If Not attr Is Nothing Then ' check for standard attr value
+                        If attr.Value Is Nothing Then
+                            Return True
+                        ElseIf attr.Value = "" Then
+                            Return True
+                        Else
+                            Return False
+                        End If
+                    ElseIf Not element Is Nothing Then  ' check for enhanced element value
+                        If element.InnerText Is Nothing Then
+                            Return True
+                        ElseIf element.InnerText = "" Then
+                            Return True
+                        Else
+                            Return False
+                        End If
                     End If
                 End If
             Else
@@ -1959,10 +1964,18 @@ Public Class AntRecord
         End If
     End Function
 
-    Private Sub CreateOrUpdateAttribute(ByVal currentAttribute As String, ByRef currentValue As String)
+    Private Sub CreateOrUpdateAttribute(ByVal currentAttribute As String, ByRef currentValue As String, ByVal ProcessMode As Process_Mode_Names)
         Dim attr As Xml.XmlAttribute
-
         If currentValue <> "" Then
+            ' currentValue = currentValue.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;")
+            ' currentValue.Replace("""", "'")
+            Dim pattern As String = "#x((10?|[2-F])FFF[EF]|FDD[0-9A-F]|[19][0-9A-F]|7F|8[0-46-9A-F]|0?[1-8BCEF])"
+            Dim regex As New Regex(pattern, RegexOptions.IgnoreCase)
+            If (regex.IsMatch(currentValue)) Then
+                currentValue = regex.Replace(currentValue, String.Empty)
+            End If
+        End If
+        If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False) Then
             If _XMLElement.Attributes(currentAttribute) Is Nothing Then
                 attr = _XMLDoc.CreateAttribute(currentAttribute)
                 attr.Value = currentValue
@@ -1970,20 +1983,42 @@ Public Class AntRecord
             Else
                 _XMLElement.Attributes(currentAttribute).Value = currentValue
             End If
+            If ProcessMode = Process_Mode_Names.Update Then
+                If _LastOutputMessage = "" Then
+                    _LastOutputMessage += "Updated: " + currentAttribute
+                Else
+                    _LastOutputMessage += ", " + currentAttribute
+                End If
+            End If
         End If
         currentValue = ""
     End Sub
 
-    Private Sub CreateOrUpdateElement(ByVal currentAttribute As String, ByRef currentValue As String)
+    Private Sub CreateOrUpdateElement(ByVal currentAttribute As String, ByRef currentValue As String, ByVal ProcessMode As Process_Mode_Names)
         Dim element As Xml.XmlElement
-
         If currentValue <> "" Then
+            ' currentValue = currentValue.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;")
+            ' currentValue.Replace("""", "'")
+            Dim pattern As String = "#x((10?|[2-F])FFF[EF]|FDD[0-9A-F]|[19][0-9A-F]|7F|8[0-46-9A-F]|0?[1-8BCEF])"
+            Dim regex As New Regex(pattern, RegexOptions.IgnoreCase)
+            If (regex.IsMatch(currentValue)) Then
+                currentValue = regex.Replace(currentValue, String.Empty)
+            End If
+        End If
+        If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False) Then
             If _XMLElement.Item(currentAttribute) Is Nothing Then
                 element = _XMLDoc.CreateElement(currentAttribute)
                 element.InnerText = currentValue
                 _XMLElement.AppendChild(element)
             Else
                 _XMLElement.Item(currentAttribute).InnerText = currentValue
+            End If
+            If ProcessMode = Process_Mode_Names.Update Then
+                If _LastOutputMessage = "" Then
+                    _LastOutputMessage += "Updated: " + currentAttribute
+                Else
+                    _LastOutputMessage += ", " + currentAttribute
+                End If
             End If
         End If
         currentValue = ""
@@ -1998,6 +2033,152 @@ Public Class AntRecord
         _XMLElement = CurrentNode
 
     End Sub
+
+    Private Function CreateArtworkFromMovie(ByVal FileName As String, ByVal OutputThumbName As String, ByVal CoverType As String) As Boolean
+        If FileName.Contains("VIDEO_TS\\VIDEO_TS.IFO") Or Not System.IO.File.Exists(FileName) Then ' Do not try to create thumbnails for DVDs or nonexisting media files
+            Return False
+        End If
+        Dim success As Boolean = False
+        Dim ar As String = GetFileData(FileName, "AspectRatio") '"fullscreen" : "widescreen"
+        Dim columns As Integer = 2
+        Dim rows As Integer = 4
+        Dim arValue As Double = 0
+        Try
+            arValue = Double.Parse(ar, System.Globalization.CultureInfo.InvariantCulture.NumberFormat)
+        Catch ex As Exception
+        End Try
+
+        Select Case CoverType
+            Case Artwork_Thumb_Mode.Cover
+                If arValue < 1.4 Then '4:3
+                    columns = 2
+                    rows = 4
+                ElseIf arValue < 1.9 Then '16:9
+                    columns = 2
+                    rows = 5
+                ElseIf arValue >= 1.9 Then 'cinemascopt
+                    columns = 2
+                    rows = 6
+                End If
+            Case Artwork_Thumb_Mode.Fanart
+                If arValue < 1.4 Then '4:3
+                    columns = 4
+                    rows = 5
+                ElseIf arValue < 1.9 Then '16:9
+                    columns = 4
+                    rows = 4
+                ElseIf arValue >= 1.9 Then 'cinemascopt
+                    columns = 5
+                    rows = 4
+                End If
+            Case Else
+                If arValue < 1.4 Then '4:3
+                    columns = 3
+                    rows = 4
+                ElseIf arValue < 1.9 Then '16:9
+                    columns = 3
+                    rows = 5
+                ElseIf arValue >= 1.9 Then 'cinemascopt
+                    columns = 3
+                    rows = 6
+                End If
+        End Select
+
+        'System.Drawing.Image thumb = null;))))
+        ' CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits);
+        Try
+            success = Grabber.ThumbCreator.CreateVideoThumbForAMCupdater(FileName, OutputThumbName, False, columns, rows, "Cover")
+        Catch ex As Exception
+            'LogMyFilms.Error("Could not create thumbnail for {0}", Filename)
+            'LogMyFilms.Error(ex)
+        End Try
+        'Create a smaller Thumb for proper dimensions
+        If (success) Then
+            'If Picture.CreateThumbnail(ShareThumb, aThumbPath, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, false) Then
+            '  Picture.CreateThumbnail(ShareThumb, Utils.ConvertToLargeCoverArt(aThumbPath), (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
+            '  If !System.IO.File.Exists(LargeThumb) Then
+            '                  Picture.CreateThumbnail(wImage, LargeThumb, (int)Thumbs.ThumbLargeResolution, (Thumbs As integer).ThumbLargeResolution, 0, Thumbs.SpeedThumbsLarge)
+            '  End If
+        End If
+
+        Return success
+    End Function
+
+    Private Function CreateCoverFromMovie(ByVal FileName As String, ByRef PicturePathToSave As String) As Boolean
+        Dim NewCoverThumbName As String = ""
+        Dim CoverFileExists As Boolean = False
+        If CurrentSettings.Store_Image_With_Relative_Path = True Then
+            Dim PicturePathPrefix As String = CurrentSettings.Image_Download_Filename_Prefix.ToString 'Covers\'
+            Dim PictureFileName As String = _MovieNumber.ToString + "_" + System.IO.Path.GetFileName(System.IO.Path.ChangeExtension(FileName, "jpg"))
+            Dim PicturePathFull As String = System.IO.Path.Combine(_ImagePath, PictureFileName)
+            NewCoverThumbName = PicturePathFull
+            'Check, if the returned picture is existing - it might not due to download errors like 404
+            Try
+                If Not File.Exists(NewCoverThumbName) Then
+                    CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
+                Else
+                    CoverFileExists = True
+                End If
+            Catch ex As Exception
+            End Try
+
+            If System.IO.File.Exists(PicturePathFull) Then
+
+                'Separate the folder from the prefix string (if needed)
+                Dim PrefixString As String = String.Empty
+                Dim PrefixPath As String = String.Empty
+                If PicturePathPrefix <> String.Empty Then
+                    If PicturePathPrefix.Contains("\") = True Then
+                        PrefixPath = PicturePathPrefix.Substring(0, PicturePathPrefix.LastIndexOf("\") + 1)
+                        PrefixString = PicturePathPrefix.Substring(PicturePathPrefix.LastIndexOf("\") + 1)
+                    Else
+                        PrefixString = PicturePathPrefix
+                    End If
+                End If
+
+                Dim NewFileName As String = String.Empty
+                If PrefixString <> String.Empty Then
+                    'Need to rename the file.
+                    NewFileName = PicturePathFull.Replace(PictureFileName, PrefixString & PictureFileName)
+                    If Not File.Exists(NewFileName) Then
+                        File.Copy(PicturePathFull, NewFileName)
+                    End If
+                    File.Delete(PicturePathFull)
+                    PicturePathFull = NewFileName
+                    PictureFileName = PrefixString & PictureFileName
+                End If
+
+                If PrefixPath <> String.Empty Then
+                    'Need to add the new folder to the short (relative) path:
+                    PictureFileName = PrefixPath & PictureFileName
+                End If
+
+                If CurrentSettings.Store_Image_With_Relative_Path = True Then
+                    PicturePathToSave = PictureFileName
+                Else
+                    PicturePathToSave = PicturePathFull
+                End If
+            End If
+
+        Else
+            NewCoverThumbName = _FilePath
+            NewCoverThumbName = System.IO.Path.ChangeExtension(NewCoverThumbName, "jpg") ' Now set to filename.jpg and use, if it exists
+            PicturePathToSave = NewCoverThumbName
+            Try
+                If Not File.Exists(NewCoverThumbName) Then
+                    CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
+                End If
+            Catch ex As Exception
+            End Try
+            Try
+                If File.Exists(NewCoverThumbName) Then
+                    CoverFileExists = True
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+        Return CoverFileExists
+    End Function
 
     Public Sub SaveProgress()
         XMLDoc.Save(_XMLFilePath)

@@ -154,9 +154,6 @@
   <Values Option="Master_Title">
     <Value>TranslatedTitle</Value>
   </Values>
-  <Values Option="Use_XBMC_nfo">
-    <Value>False</Value>
-  </Values>
   <Values Option="LogDirectory">
     <Value></Value>
   </Values>
@@ -176,6 +173,9 @@
     <Value></Value>
   </Values>
   <Values Option="Only_Add_Missing_Data">
+    <Value>False</Value>
+  </Values>
+  <Values Option="Only_Update_With_Nonempty_Data">
     <Value>False</Value>
   </Values>
   <Values Option="Auto_Approve_Limits">

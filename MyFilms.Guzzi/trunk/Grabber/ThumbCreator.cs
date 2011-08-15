@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Grabber
 {
+  using System.Configuration;
   using System.Globalization;
   using System.IO;
   using System.Runtime.CompilerServices;
@@ -13,6 +14,7 @@ namespace Grabber
   using MediaPortal.Configuration;
   using MediaPortal.Services;
   using MediaPortal.Util;
+
   public class ThumbCreator
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
@@ -37,9 +39,16 @@ namespace Grabber
     [MethodImpl(MethodImplOptions.Synchronized)]
     public static bool CreateVideoThumbForAMCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int Columns, int Rows, string ImageType)
     {
-
       PreviewColumns = Columns;
       PreviewRows = Rows;
+
+      //MediaInfo mediainfo;
+      //bool success = Grabber.GrabUtil.ReadMediaInfo(aVideoPath, ref mediainfo);
+
+      //if (mediainfo != null)
+      //{
+      //}
+
       if (ImageType == "Cover")
       {
         // ToDo: Set Resolution Params to Coverimagesize
@@ -113,7 +122,8 @@ namespace Grabber
       {
         // Use this for the working dir to be on the safe side
         string TempPath = Path.GetTempPath();
-        string OutputThumbtmp = string.Format("{0}_s{1}", Path.ChangeExtension(aVideoPath, null), ".jpg");
+        string OutputThumbtmp = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(aThumbPath), System.IO.Path.GetFileName(string.Format("{0}_s{1}", Path.ChangeExtension(aVideoPath, null), ".jpg")));
+        // string OutputThumbtmp = string.Format("{0}_s{1}", Path.ChangeExtension(aThumbPath, null), Path.GetExtension(aThumbPath));
         string OutputThumb = aThumbPath;
 
         if (!File.Exists(OutputThumb)) // No thumb in share although it should be there

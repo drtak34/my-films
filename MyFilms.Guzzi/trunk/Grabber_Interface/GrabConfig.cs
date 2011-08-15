@@ -270,7 +270,7 @@ namespace Grabber_Interface
         if (TextURL.Text.StartsWith("http://") == false && !TextSearch.Text.Contains("\\"))
           TextURL.Text = "http://" + TextURL.Text;
         if (!TextSearch.Text.Contains("\\"))
-          strSearch = GrabUtil.encodeSearch(TextSearch.Text);
+          strSearch = GrabUtil.encodeSearch(TextSearch.Text, textEncoding.Text);
         else 
           strSearch = TextSearch.Text;
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
@@ -3841,7 +3841,7 @@ namespace Grabber_Interface
       if (TextURL.Text.Length > 0)
       {
         if (TextURL.Text.StartsWith("http://") == false) TextURL.Text = "http://" + TextURL.Text;
-        string strSearch = GrabUtil.encodeSearch(TextSearch.Text);
+        string strSearch = GrabUtil.encodeSearch(TextSearch.Text, textEncoding.Text);
         string wurl = TextURL.Text.Replace("#Search#", strSearch);
         wurl = wurl.Replace("#Page#", textPage.Text);
         try { Process.Start(wurl); }

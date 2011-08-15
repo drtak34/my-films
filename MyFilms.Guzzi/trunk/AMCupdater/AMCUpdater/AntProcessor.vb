@@ -323,7 +323,6 @@ Public Class AntProcessor
 
 #Region "Manual Updater"
 
-
     Public Function ManualControlRecord(ByVal ManualParameterField As String, ByVal ManualParameterOperator As String, ByVal ManualParameterValue As String, ByRef CurrentNode As XmlNode) As Integer
         Select Case ManualParameterOperator
             Case "LIKE"
@@ -819,6 +818,7 @@ Public Class AntProcessor
                                 .GrabberOverridePersonLimit = CurrentSettings.Grabber_Override_PersonLimit
                                 .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
                                 .OnlyAddMissingData = CurrentSettings.Only_Add_Missing_Data ' added for "add missing data" mode"
+                                .OnlyUpdateNonEmptyData = CurrentSettings.Only_Update_With_Nonempty_Data
 
                                 .ProcessFile(AntRecord.Process_Mode_Names.Update)
                                 .SaveProgress()
@@ -828,9 +828,9 @@ Public Class AntProcessor
                                 bgwManualUpdate.ReportProgress(ProcessCounter, Ant.LastOutputMessage)
                             Else
                                 If (CurrentNode.Attributes("Number") Is Nothing) Then
-                                    bgwManualUpdate.ReportProgress(ProcessCounter, "File Scanned for Data : " & row(0).ToString & " | " & row("AntTitle").ToString)
+                                    bgwManualUpdate.ReportProgress(ProcessCounter, "File Scanned for Data : " & row(0).ToString & " | " & row("AntTitle").ToString & " | " & Ant.LastOutputMessage)
                                 Else
-                                    bgwManualUpdate.ReportProgress(ProcessCounter, "File Scanned for Data : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                                    bgwManualUpdate.ReportProgress(ProcessCounter, "File Scanned for Data : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString & " | " & Ant.LastOutputMessage)
                                 End If
                             End If
 
@@ -1654,7 +1654,6 @@ Public Class AntProcessor
         LogEvent("  Import on Internet Lookup Failure : " + CurrentSettings.Import_File_On_Internet_Lookup_Failure.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Don't Import on Internet Lookup Failure in GuiMode: " + CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Prohibit Internet Lookup : " + CurrentSettings.Prohibit_Internet_Lookup.ToString, EventLogLevel.ImportantEvent)
-        LogEvent("  Use nfo : " + CurrentSettings.Use_XBMC_nfo.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_Language    : " + CurrentSettings.Grabber_Override_Language.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_PersonLimit : " + CurrentSettings.Grabber_Override_PersonLimit.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_TitleLimit  : " + CurrentSettings.Grabber_Override_TitleLimit.ToString, EventLogLevel.ImportantEvent)
@@ -1908,6 +1907,7 @@ Public Class AntProcessor
                             .MovieTitleHandling = objSettings.Movie_Title_Handling
                             .GroupName = row("GroupName").ToString
                             .OnlyAddMissingData = False ' always add all selected data for new records
+                            .OnlyUpdateNonEmptyData = False
                         End With
 
                         If (row("Moved")) Then
@@ -2138,7 +2138,7 @@ Public Class AntProcessor
 
         If e.Error IsNot Nothing Then
             'If e.Error.Message.ToString <> "" Then
-            LogEvent("ERROR : " & e.Error.Message.ToLower & ", " & e.Error.InnerException.ToString, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ERROR : " & e.Error.Message.ToLower, EventLogLevel.ErrorOrSimilar)
             'End If
         End If
 

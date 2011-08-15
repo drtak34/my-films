@@ -123,35 +123,18 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
-  <data name="txtPictureFilenamePrefix.ToolTip" xml:space="preserve">
-    <value>Alter this field to change the location and name of downloaded cover art.
-By default the images are stored in the same folder as your Ant database file.
-If you enter a relative folder path, this will be used as a subfolder
-i.e. 'covers\' will create / use a subfolder called 'covers'.
-You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
-i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
-  </data>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1095, 13</value>
-  </metadata>
-  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
-    <value>The location of your cover art files is stored in the Ant Movie Catalog 'Picture' field.
-You can refer to the file as a relative ('\covers\moviename.jpg') or full ('c:\covers\moviename.jpg') path.
-You can also store the cover art as 'folder.jpg' - this is only suitable if you store your movies in separate folders (one movie per folder)
-If using Folder.jpg - the system will use any existing file on import and will create one (if available online) if not.
-
-"Create Moviethumb" is an option to create and use thumbnails created from the movie content (thumbnailer).
-Usage: Disable internet lookup, enable Picture/Fanart and choose "Cover Thumbnail" in Picture Handling.
-THis is especially useful, if you have private movies, documentaries etc. where usually is no artwork available.</value>
-  </data>
-  <data name="chkFolderNameIsGroupName.ToolTip" xml:space="preserve">
-    <value>The MyFilms plugin supports the use of a Group Identifier to group movies together.
-Normally used for film Trilogies and so on.
-The update will attempt to work out which films are grouped based on the folder structure.
-The movie title will then be saved as 'Groupname \ Movie Name'</value>
+  <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
+    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
+If orphaned entries are found, then will be purged from the database.
+This only affects database entries which reference the currently scanned movie folder.
+Override path is taken into account for this option.
+For example, an entry listing a Source of 'd:\Movies' will not be considered an orphen if you scan 'e:\Other Movies'.</value>
   </data>
   <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>280, 50</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1095, 13</value>
   </metadata>
   <data name="txtOverridePath.ToolTip" xml:space="preserve">
     <value>Override path when writing to XML file:
@@ -232,13 +215,6 @@ As the dropdown only allows choosing one value, multiple values have to be enter
     <value>Enter the location of an Internet Parser file.
 These files allow AMCUpdater to access Internet Movie sites to get movie information
 Various Parser Files are provided by default - they are in the Scripts subfolder of the AMCUpdater application folder.</value>
-  </data>
-  <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
-    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
-If orphaned entries are found, then will be purged from the database.
-This only affects database entries which reference the currently scanned movie folder.
-Override path is taken into account for this option.
-For example, an entry listing a Source of 'd:\Movies' will not be considered an orphen if you scan 'e:\Other Movies'.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCancelProcessing.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -440,6 +416,30 @@ It is sufficient, to set path and name to a file - AMCupdater will autocreate it
   <data name="Label46.Text" xml:space="preserve">
     <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
 </value>
+  </data>
+  <data name="txtPictureFilenamePrefix.ToolTip" xml:space="preserve">
+    <value>Alter this field to change the location and name of downloaded cover art.
+By default the images are stored in the same folder as your Ant database file.
+If you enter a relative folder path, this will be used as a subfolder
+i.e. 'covers\' will create / use a subfolder called 'covers'.
+You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
+i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
+  </data>
+  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
+    <value>The location of your cover art files is stored in the Ant Movie Catalog 'Picture' field.
+You can refer to the file as a relative ('\covers\moviename.jpg') or full ('c:\covers\moviename.jpg') path.
+You can also store the cover art as 'folder.jpg' - this is only suitable if you store your movies in separate folders (one movie per folder)
+If using Folder.jpg - the system will use any existing file on import and will create one (if available online) if not.
+
+"Create Moviethumb" is an option to create and use thumbnails created from the movie content (thumbnailer).
+Usage: Disable internet lookup, enable Picture/Fanart and choose "Cover Thumbnail" in Picture Handling.
+THis is especially useful, if you have private movies, documentaries etc. where usually is no artwork available.</value>
+  </data>
+  <data name="chkFolderNameIsGroupName.ToolTip" xml:space="preserve">
+    <value>The MyFilms plugin supports the use of a Group Identifier to group movies together.
+Normally used for film Trilogies and so on.
+The update will attempt to work out which films are grouped based on the folder structure.
+The movie title will then be saved as 'Groupname \ Movie Name'</value>
   </data>
   <data name="btnManualCancel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

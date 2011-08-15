@@ -41,9 +41,8 @@
 
 using System;
 using System.Runtime.InteropServices;
-using MyFilmsPlugin;
 
-namespace MyFilmsPlugin.MyFilms.Utils
+namespace Grabber
 {
     public enum StreamKind
     {
@@ -281,6 +280,14 @@ namespace MyFilmsPlugin.MyFilms.Utils
         public string VideoAspectRatio {
             get {
                 string result = this.Get(StreamKind.Video, 0, "DisplayAspectRatio");
+                //LogMyFilms.Debug("Video Aspect Ratio: ", result);
+                return result.Length > 0 ? result : "-1";
+            }
+        }
+
+        public string VideoAspectRatioNumber {
+            get {
+                string result = this.Get(StreamKind.Video, 0, "AspectRatio");
                 //LogMyFilms.Debug("Video Aspect Ratio: ", result);
                 return result.Length > 0 ? result : "-1";
             }

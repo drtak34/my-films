@@ -58,7 +58,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using SQLite.NET;
 
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
-  using MediaInfo = MyFilmsPlugin.MyFilms.Utils.MediaInfo;
+  using MediaInfo = Grabber.MediaInfo;
   // using VideoThumbCreator = MyFilmsPlugin.MyFilms.Utils.VideoThumbCreator;
 
     /// <summary>
@@ -7478,7 +7478,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       public bool ReadMediaInfo(string file, ref MediaInfo mediainfo)
       {
-        MediaInfo MI = MediaInfo.GetInstance();
+        Grabber.MediaInfo MI = Grabber.MediaInfo.GetInstance();
 
         // MediaInfo Object could not be created
         if (null == MI) return false;

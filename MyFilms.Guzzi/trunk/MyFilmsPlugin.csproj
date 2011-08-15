@@ -190,7 +190,6 @@
     <Compile Include="MyFilms\CatalogConverter\MovieCollector.cs" />
     <Compile Include="MyFilms\CatalogConverter\MyMovies.cs" />
     <Compile Include="MyFilms\Utils\Logos.cs" />
-    <Compile Include="MyFilms\Utils\MediaInfoDLL.cs" />
     <Compile Include="MyFilms\Utils\XmlSettings.cs" />
     <Compile Include="MyFilms\Utils\Utility.cs" />
     <Compile Include="MyFilms\Utils\WakeOnLanManager.cs" />

@@ -635,7 +635,11 @@ namespace MyFilmsPlugin.MyFilms
                       if (!string.IsNullOrEmpty(sr["Number"].ToString()))
                         movie.ID = Int32.Parse(sr["Number"].ToString());
                       else movie.ID = 0;
-                      movie.Year = Int32.Parse(sr["Year"].ToString());
+
+                      int year = 1900;
+                      Int32.TryParse(sr["Year"].ToString(), out year);
+                      movie.Year = year;
+
                       movie.Title = sr["OriginalTitle"].ToString();
 
                       bool played = false;

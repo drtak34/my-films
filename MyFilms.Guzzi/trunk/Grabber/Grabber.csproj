@@ -107,6 +107,7 @@
     <Compile Include="IMDB.cs" />
     <Compile Include="IMDBActor.cs" />
     <Compile Include="IMDBMovie.cs" />
+    <Compile Include="MediaInfoDLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TheMoviedb.cs" />
     <Compile Include="ThumbCreator.cs" />

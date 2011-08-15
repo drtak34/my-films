@@ -1052,6 +1052,7 @@ Public Class Form1
             chkManualMissingTrailer.Visible = False
 
             chkManualUpdateRecordsOnlyMissingData.Visible = False
+            chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = False
 
             grpManualUpdatesParameters.Visible = True
 
@@ -1100,6 +1101,7 @@ Public Class Form1
                 grpManualInternetLookupSettings.Visible = True
                 lblManualDatabaseFieldsPrompt.Visible = True
                 chkManualUpdateRecordsOnlyMissingData.Visible = True
+                chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = True
             ElseIf cbManualSelectOperation.SelectedItem = "Download Fanart" Then
                 chkManualMissingFanartDownload.Visible = True
                 'grpManualInternetLookupSettings.Visible = True
@@ -1528,19 +1530,23 @@ Public Class Form1
 
                     'Internet parser file required:
                     If txtManualInternetParserPath.Text = String.Empty Then
-                        epManualUpdater.SetError(txtManualInternetParserPath, "Path to Internet Grabber Script must be entered")
+                        epManualUpdater.SetError(txtManualInternetParserPath, "Path to Internet Grabber Script must be entered.")
+                        epManualUpdater.SetError(txtManualInternetParserPathDisplay, "Path to Internet Grabber Script must be entered.")
                         IsValid = False
                     Else
                         Dim wpath As String = txtManualInternetParserPath.Text
                         If Not wpath.Contains("\") Then
                             'Not a path without a backslash!
                             epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Grabber Script path.")
+                            epManualUpdater.SetError(txtManualInternetParserPathDisplay, "Please enter a valid Internet Grabber Script path.")
                             IsValid = False
                         Else
                             If File.Exists(wpath) Then
                                 epManualUpdater.SetError(txtManualInternetParserPath, "")
+                                epManualUpdater.SetError(txtManualInternetParserPathDisplay, "")
                             Else
                                 epManualUpdater.SetError(txtManualInternetParserPath, "Please enter a valid Internet Grabber Script path.")
+                                epManualUpdater.SetError(txtManualInternetParserPathDisplay, "Please enter a valid Internet Grabber Script path.")
                                 IsValid = False
                             End If
                         End If
@@ -1871,9 +1877,16 @@ Public Class Form1
         Dim OldSettingsFile As String
         OldSettingsFile = CurrentSettings.UserSettingsFile
         Dim SettingsFile As String = String.Empty
+        Dim InitialDirectory As String
+        Dim MePoConfigPath As String = Config.GetDirectoryInfo(Config.Dir.Config).ToString
+        If System.IO.Directory.Exists(MePoConfigPath) Then
+            InitialDirectory = MePoConfigPath
+        Else
+            InitialDirectory = My.Application.Info.DirectoryPath
+        End If
         Try
             With OpenFileDialog1
-                .InitialDirectory = My.Application.Info.DirectoryPath
+                .InitialDirectory = InitialDirectory
                 .FileName = "*.xml"
                 .CheckFileExists = True
                 .CheckPathExists = True
@@ -1999,10 +2012,10 @@ Public Class Form1
         CurrentSettings.Parse_Trailers = chkParseTrailers.Checked
         CurrentSettings.Image_Download_Filename_Prefix = txtPictureFilenamePrefix.Text
         CurrentSettings.Prohibit_Internet_Lookup = chkProhibitInternetLookup.Checked
-        CurrentSettings.Use_XBMC_nfo = chkUseXBMCnfo.Checked
         CurrentSettings.Parse_Subtitle_Files = chkParseSubtitleFiles.Checked
         CurrentSettings.Rescan_Moved_Files = chkRescanMovedFiles.Checked
         CurrentSettings.Only_Add_Missing_Data = chkManualUpdateRecordsOnlyMissingData.Checked
+        CurrentSettings.Only_Update_With_Nonempty_Data = chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Checked
 
         CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
         CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
@@ -2016,6 +2029,10 @@ Public Class Form1
             Case "Relative Path"
                 CurrentSettings.Store_Image_With_Relative_Path = True
                 CurrentSettings.Use_Folder_Dot_Jpg = False
+            Case "Relative Path & Create Moviethumb"
+                CurrentSettings.Store_Image_With_Relative_Path = True
+                CurrentSettings.Use_Folder_Dot_Jpg = False
+                CurrentSettings.Create_Cover_From_Movie = True
             Case "Use Folder.jpg"
                 CurrentSettings.Use_Folder_Dot_Jpg = True
                 CurrentSettings.Create_Cover_From_Movie = False
@@ -2025,6 +2042,10 @@ Public Class Form1
             Case "Full Path"
                 CurrentSettings.Store_Image_With_Relative_Path = False
                 CurrentSettings.Use_Folder_Dot_Jpg = False
+            Case "Full Path & Create Moviethumb"
+                CurrentSettings.Store_Image_With_Relative_Path = False
+                CurrentSettings.Use_Folder_Dot_Jpg = False
+                CurrentSettings.Create_Cover_From_Movie = True
         End Select
 
 
@@ -2052,7 +2073,6 @@ Public Class Form1
             DBFields = DBFields.Substring(0, DBFields.Length - 1)
         End If
         CurrentSettings.Database_Fields_To_Import = DBFields
-
 
         'Console.WriteLine(dgExcludedFileStrings.Rows.Count)
         Dim dgRow As System.Windows.Forms.DataGridViewRow
@@ -2142,10 +2162,10 @@ Public Class Form1
             chkParseTrailers.Checked = CurrentSettings.Parse_Trailers
             txtPictureFilenamePrefix.Text = CurrentSettings.Image_Download_Filename_Prefix
             chkProhibitInternetLookup.Checked = CurrentSettings.Prohibit_Internet_Lookup
-            chkUseXBMCnfo.Checked = CurrentSettings.Use_XBMC_nfo
             chkParseSubtitleFiles.Checked = CurrentSettings.Parse_Subtitle_Files
             chkRescanMovedFiles.Checked = CurrentSettings.Rescan_Moved_Files
             chkManualUpdateRecordsOnlyMissingData.Checked = CurrentSettings.Only_Add_Missing_Data
+            chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Checked = CurrentSettings.Only_Update_With_Nonempty_Data
 
             txtManualExcludedMoviesPath.Text = CurrentSettings.Manual_Excluded_Movies_File
             txtManualInternetParserPath.Text = CurrentSettings.Manual_Internet_Parser_Path
