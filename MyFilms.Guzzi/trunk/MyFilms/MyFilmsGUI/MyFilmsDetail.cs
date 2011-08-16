@@ -4978,8 +4978,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         case "year":
                             if ((wrep) && (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0))
                             {
+                              int year = 0;
                               setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[ItemId][dc.ColumnName].ToString());
-                              MyFilms.currentMovie.Year = Int32.Parse(MyFilms.r[ItemId][dc.ColumnName].ToString());
+                              Int32.TryParse(MyFilms.r[ItemId][dc.ColumnName].ToString(), out year);
+                              MyFilms.currentMovie.Year = year;
                             }
                               
                             else
