@@ -23,6 +23,8 @@ namespace Grabber
     private static int PreviewColumns = 2;
     private static int PreviewRows = 3;
     private static bool LeaveShareThumb = false;
+    private static string IndividualShots = "";
+    private static int ArtworkWidth = 0;
 
     #region Public methods
 
@@ -37,25 +39,23 @@ namespace Grabber
     //}
 
     [MethodImpl(MethodImplOptions.Synchronized)]
-    public static bool CreateVideoThumbForAMCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int Columns, int Rows, string ImageType)
+    public static bool CreateVideoThumbForAMCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int Columns, int Rows, string ImageType, bool SaveIndividualShots)
     {
       PreviewColumns = Columns;
       PreviewRows = Rows;
-
-      //MediaInfo mediainfo;
-      //bool success = Grabber.GrabUtil.ReadMediaInfo(aVideoPath, ref mediainfo);
-
-      //if (mediainfo != null)
-      //{
-      //}
+      ArtworkWidth = 0;
+      if (SaveIndividualShots) 
+        IndividualShots = "-I "; // set param for individual shots ...
+      else
+        IndividualShots = "";
 
       if (ImageType == "Cover")
       {
-        // ToDo: Set Resolution Params to Coverimagesize
+        ArtworkWidth = 400;
       }
       if (ImageType == "Fanart")
       {
-        // ToDo: Set Resolution Params to FullHD
+        ArtworkWidth = 1920;
       }
 
       LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows.", PreviewColumns, PreviewRows);
@@ -97,6 +97,7 @@ namespace Grabber
       //   -h 100       : minimum height of each shot; will reduce # of column to fit
       //   -t           : time stamp off
       //   -i           : info text off
+      //   -I           : save individual shots too
       //   -w 0         : width of output image; 0:column * movie width
       //   -n           : run at normal priority
       //   -W           : dont overwrite existing files, i.e. update mode
@@ -113,9 +114,27 @@ namespace Grabber
         postGapSec = 600;
       }
       bool Success = false;
-      string ExtractorArgs = string.Format(" -D 6 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"",
-                                           preGapSec, postGapSec, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\")), aVideoPath);
-      string ExtractorFallbackArgs = string.Format(" -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"", 0, 0, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1), aVideoPath);
+      string ExtractorArgs = string.Format(" -D 6 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"",
+                                           preGapSec, 
+                                           postGapSec, 
+                                           PreviewColumns, 
+                                           PreviewRows, 
+                                           blank,
+                                           ArtworkWidth, 
+                                           aThumbPath.Substring(0, 
+                                           aThumbPath.LastIndexOf("\\")), 
+                                           aVideoPath, 
+                                           IndividualShots);
+      string ExtractorFallbackArgs = string.Format(" -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"", 
+                                           0, 
+                                           0,
+                                           PreviewColumns, 
+                                           PreviewRows, 
+                                           blank,
+                                           ArtworkWidth, 
+                                           aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1), 
+                                           aVideoPath, 
+                                           IndividualShots);
       // Honour we are using a unix app
       ExtractorArgs = ExtractorArgs.Replace('\\', '/');
       try
@@ -168,6 +187,8 @@ namespace Grabber
       }
       if (File.Exists(aThumbPath))
       {
+        // Create a smaller Thumb for proper dimensions
+        // Picture.CreateThumbnail(aThumbPath, Utils.ConvertToLargeCoverArt(aThumbPath), (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
         return true;
       }
       else

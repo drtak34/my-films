@@ -2029,6 +2029,7 @@ Public Class Form1
             Case "Relative Path"
                 CurrentSettings.Store_Image_With_Relative_Path = True
                 CurrentSettings.Use_Folder_Dot_Jpg = False
+                CurrentSettings.Create_Cover_From_Movie = False
             Case "Relative Path & Create Moviethumb"
                 CurrentSettings.Store_Image_With_Relative_Path = True
                 CurrentSettings.Use_Folder_Dot_Jpg = False
@@ -2042,6 +2043,7 @@ Public Class Form1
             Case "Full Path"
                 CurrentSettings.Store_Image_With_Relative_Path = False
                 CurrentSettings.Use_Folder_Dot_Jpg = False
+                CurrentSettings.Create_Cover_From_Movie = False
             Case "Full Path & Create Moviethumb"
                 CurrentSettings.Store_Image_With_Relative_Path = False
                 CurrentSettings.Use_Folder_Dot_Jpg = False

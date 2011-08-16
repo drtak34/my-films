@@ -708,6 +708,7 @@ Public Class AntSettings
         dt.Rows.Add("Use_XBMC_nfo", "False")
         dt.Rows.Add("Use_Page_Grabber", "False")
         dt.Rows.Add("Only_Add_Missing_Data", "False")
+        dt.Rows.Add("Only_Update_With_Nonempty_Data", "False")
         dt.Rows.Add("Auto_Approve_Limits", "")
 
         dsDefaultSettings.Tables.Add(dt)

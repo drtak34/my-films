@@ -285,14 +285,6 @@ namespace Grabber
             }
         }
 
-        public string VideoAspectRatioNumber {
-            get {
-                string result = this.Get(StreamKind.Video, 0, "AspectRatio");
-                //LogMyFilms.Debug("Video Aspect Ratio: ", result);
-                return result.Length > 0 ? result : "-1";
-            }
-        }
-
         public string VideoPlaytime {
             get {
                 string result = this.Get(StreamKind.Video, 0, "Duration");

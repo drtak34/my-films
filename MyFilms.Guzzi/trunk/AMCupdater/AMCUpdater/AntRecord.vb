@@ -1,4 +1,5 @@
 Imports System.Windows.Forms
+Imports Grabber
 Imports MediaPortal.Util
 Imports Cornerstone.Tools
 
@@ -128,11 +129,6 @@ Public Class AntRecord
         audiostreamlanguagelist = 11
         textstreamcodeclist = 12
         textstreamlanguagelist = 13
-    End Enum
-
-    Public Enum Artwork_Thumb_Mode
-        Cover
-        Fanart
     End Enum
     Public Enum Process_Mode_Names
         Import
@@ -1712,14 +1708,7 @@ Public Class AntRecord
                             Dim PicturePathToSave As String = String.Empty
 
                             'Check, if the returned picture is existing - it might not due to download errors like 404
-
-                            If Not System.IO.File.Exists(PicturePathFull) And CurrentSettings.Create_Cover_From_Movie = True Then ' If internet did not return picture try creating one from movie
-                                Dim Filename As String = _FilePath
-                                Dim success As Boolean = CreateArtworkFromMovie(Filename, PicturePathFull, Artwork_Thumb_Mode.Cover)
-                            End If
-
                             If System.IO.File.Exists(PicturePathFull) Then
-
                                 'Separate the folder from the prefix string (if needed)
                                 Dim PrefixString As String = String.Empty
                                 Dim PrefixPath As String = String.Empty
@@ -1831,42 +1820,39 @@ Public Class AntRecord
             'get fanart
             CurrentAttribute = "Fanart"
             If _DatabaseFields(CurrentAttribute.ToLower) = True Then
-                If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
-                    Dim fanart As List(Of Grabber.DBMovieInfo)
+                If Not _XMLElement.Attributes("OriginalTitle") Is Nothing Then
+                    title = _XMLElement.Attributes("OriginalTitle").Value
+                End If
+                If title.Length > 0 Then
+                    If title.Contains("\") = True Then
+                        title = title.Substring(0, title.IndexOf("\") - 1)
+                        'Console.WriteLine("-" & .GroupName.ToString & "-")
+                    End If
                     Dim ttitleCleaned As String = ""
-                    CurrentAttribute = "Year"
-                    If Not _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        Try
-                            year = CInt(_XMLElement.Attributes(CurrentAttribute).Value)
-                        Catch
-                            year = 0
-                        End Try
-                    End If
-                    CurrentAttribute = "Director"
-                    If Not _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        director = _XMLElement.Attributes(CurrentAttribute).Value
-                    End If
-                    CurrentAttribute = "OriginalTitle"
-                    If Not _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        title = _XMLElement.Attributes(CurrentAttribute).Value
-                    End If
-                    CurrentAttribute = "TranslatedTitle"
-                    If Not _XMLElement.Attributes(CurrentAttribute) Is Nothing Then
-                        ttitle = _XMLElement.Attributes(CurrentAttribute).Value
+                    If Not _XMLElement.Attributes("TranslatedTitle") Is Nothing Then
+                        ttitle = _XMLElement.Attributes("TranslatedTitle").Value
                         If ttitle.Contains("(") Then
                             ttitleCleaned = ttitle.Substring(0, ttitle.IndexOf("("))
                         Else
                             ttitleCleaned = ttitle
                         End If
                     End If
-                    Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-                    If title.Length > 0 Then
-                        If title.Contains("\") = True Then
-                            title = title.Substring(0, title.IndexOf("\") - 1)
-                            'Console.WriteLine("-" & .GroupName.ToString & "-")
+
+                    If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
+                        Dim fanart As List(Of Grabber.DBMovieInfo)
+                        If Not _XMLElement.Attributes("Year") Is Nothing Then
+                            Try
+                                year = CInt(_XMLElement.Attributes("Year").Value)
+                            Catch
+                                year = 0
+                            End Try
+                        End If
+                        If Not _XMLElement.Attributes("Director") Is Nothing Then
+                            director = _XMLElement.Attributes("Director").Value
                         End If
                         'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                         'fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path)
+                        Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
                         fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                         If fanart.Count = 1 Then
                             If fanart(0).Backdrops.Count > 0 Then
@@ -1876,49 +1862,53 @@ Public Class AntRecord
                                 End If
                             End If
                         End If
-                    End If
-                ElseIf CurrentSettings.Create_Cover_From_Movie Then ' create missing fanart by thumbnailer
-                    Dim FanartFileExists As Boolean = False
-                    Dim NewFanartThumbName As String = _FilePath
-                    NewFanartThumbName = System.IO.Path.GetDirectoryName(NewFanartThumbName) + "\" + System.IO.Path.GetFileNameWithoutExtension(NewFanartThumbName) + "-fanart.jpg" ' Now set to filename-fanart.jpg to get "better matching" if existing...
-                    Dim Filename As String = _FilePath
-                    Try
-                        If Not File.Exists(NewFanartThumbName) Then
-                            FanartFileExists = CreateArtworkFromMovie(Filename, NewFanartThumbName, Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
-                        End If
-                    Catch ex As Exception
-                    End Try
-                    Try
-                        If File.Exists(NewFanartThumbName) Then ' recheck, if file is existing now after trying to create thumb from movie
-                            FanartFileExists = True
-                        End If
-                    Catch ex As Exception
-                    End Try
+                    ElseIf CurrentSettings.Create_Cover_From_Movie Then ' create missing fanart by thumbnailer
+                        Dim FanartFileExists As Boolean = False
+                        Dim NewFanartThumbName As String = _FilePath
+                        NewFanartThumbName = System.IO.Path.GetDirectoryName(NewFanartThumbName) + "\" + System.IO.Path.GetFileNameWithoutExtension(NewFanartThumbName) + "-fanart.jpg" ' Now set to filename-fanart.jpg to get "better matching" if existing...
+                        Dim Filename As String = _FilePath
+                        Try
+                            If Not File.Exists(NewFanartThumbName) Then
+                                ' FanartFileExists = CreateArtworkFromMovie(Filename, NewFanartThumbName, Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
+                                ' FanartFileExists = Grabber.GrabUtil.GetCoverartFromMovie(Filename, NewFanartThumbName, GrabUtil.Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
+                                ' public static string GetFanartFromMovie(string title, string ttitle, string year, string artFolder, bool createSeparateImages, string mastertitle, string FileName, string newFanartThumbName, out string filename)
+                                FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(title, ttitleCleaned, year, CurrentSettings.Movie_Fanart_Path, True, CurrentSettings.Master_Title, Filename, NewFanartThumbName)
+                            End If
+                        Catch ex As Exception
+                        End Try
+                        Try
+                            If File.Exists(NewFanartThumbName) Then ' recheck, if file is existing now after trying to create thumb from movie
+                                FanartFileExists = True
+                            End If
+                        Catch ex As Exception
+                        End Try
 
-                    If FanartFileExists = True Then
-                        TempValue = NewFanartThumbName
-                        CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
-                    End If
-                ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True Then
-                    'If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
-                    Dim FanartFileExists As Boolean = False
-                    Dim NewFanartThumbName As String = _FilePath
-
-                    If NewFanartThumbName.Contains("\") = True Then
-                        NewFanartThumbName = NewFanartThumbName.Substring(0, NewFanartThumbName.LastIndexOf("\"))
-                    End If
-                    NewFanartThumbName += "\fanart.jpg"
-                    Try
-                        If File.Exists(NewFanartThumbName) Then
-                            FanartFileExists = True
+                        If FanartFileExists = True Then
+                            TempValue = NewFanartThumbName
+                            CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
                         End If
-                    Catch ex As Exception
-                    End Try
+                    ElseIf CurrentSettings.Use_Folder_Dot_Jpg = True Then
+                        'If IsUpdateRequested(CurrentAttribute) = True And CurrentSettings.Use_Folder_Dot_Jpg = True Then
+                        Dim FanartFileExists As Boolean = False
+                        Dim NewFanartThumbName As String = _FilePath
 
-                    If FanartFileExists = True Then
-                        TempValue = NewFanartThumbName
-                        CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                        If NewFanartThumbName.Contains("\") = True Then
+                            NewFanartThumbName = NewFanartThumbName.Substring(0, NewFanartThumbName.LastIndexOf("\"))
+                        End If
+                        NewFanartThumbName += "\fanart.jpg"
+                        Try
+                            If File.Exists(NewFanartThumbName) Then
+                                FanartFileExists = True
+                            End If
+                        Catch ex As Exception
+                        End Try
+
+                        If FanartFileExists = True Then
+                            TempValue = NewFanartThumbName
+                            CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+                        End If
                     End If
+
                 End If
             End If
 
@@ -2034,76 +2024,6 @@ Public Class AntRecord
 
     End Sub
 
-    Private Function CreateArtworkFromMovie(ByVal FileName As String, ByVal OutputThumbName As String, ByVal CoverType As String) As Boolean
-        If FileName.Contains("VIDEO_TS\\VIDEO_TS.IFO") Or Not System.IO.File.Exists(FileName) Then ' Do not try to create thumbnails for DVDs or nonexisting media files
-            Return False
-        End If
-        Dim success As Boolean = False
-        Dim ar As String = GetFileData(FileName, "AspectRatio") '"fullscreen" : "widescreen"
-        Dim columns As Integer = 2
-        Dim rows As Integer = 4
-        Dim arValue As Double = 0
-        Try
-            arValue = Double.Parse(ar, System.Globalization.CultureInfo.InvariantCulture.NumberFormat)
-        Catch ex As Exception
-        End Try
-
-        Select Case CoverType
-            Case Artwork_Thumb_Mode.Cover
-                If arValue < 1.4 Then '4:3
-                    columns = 2
-                    rows = 4
-                ElseIf arValue < 1.9 Then '16:9
-                    columns = 2
-                    rows = 5
-                ElseIf arValue >= 1.9 Then 'cinemascopt
-                    columns = 2
-                    rows = 6
-                End If
-            Case Artwork_Thumb_Mode.Fanart
-                If arValue < 1.4 Then '4:3
-                    columns = 4
-                    rows = 5
-                ElseIf arValue < 1.9 Then '16:9
-                    columns = 4
-                    rows = 4
-                ElseIf arValue >= 1.9 Then 'cinemascopt
-                    columns = 5
-                    rows = 4
-                End If
-            Case Else
-                If arValue < 1.4 Then '4:3
-                    columns = 3
-                    rows = 4
-                ElseIf arValue < 1.9 Then '16:9
-                    columns = 3
-                    rows = 5
-                ElseIf arValue >= 1.9 Then 'cinemascopt
-                    columns = 3
-                    rows = 6
-                End If
-        End Select
-
-        'System.Drawing.Image thumb = null;))))
-        ' CreateVideoThumb(string aVideoPath, string aThumbPath, bool aCacheThumb, bool aOmitCredits);
-        Try
-            success = Grabber.ThumbCreator.CreateVideoThumbForAMCupdater(FileName, OutputThumbName, False, columns, rows, "Cover")
-        Catch ex As Exception
-            'LogMyFilms.Error("Could not create thumbnail for {0}", Filename)
-            'LogMyFilms.Error(ex)
-        End Try
-        'Create a smaller Thumb for proper dimensions
-        If (success) Then
-            'If Picture.CreateThumbnail(ShareThumb, aThumbPath, (int)Thumbs.ThumbResolution, (int)Thumbs.ThumbResolution, 0, false) Then
-            '  Picture.CreateThumbnail(ShareThumb, Utils.ConvertToLargeCoverArt(aThumbPath), (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
-            '  If !System.IO.File.Exists(LargeThumb) Then
-            '                  Picture.CreateThumbnail(wImage, LargeThumb, (int)Thumbs.ThumbLargeResolution, (Thumbs As integer).ThumbLargeResolution, 0, Thumbs.SpeedThumbsLarge)
-            '  End If
-        End If
-
-        Return success
-    End Function
-
     Private Function CreateCoverFromMovie(ByVal FileName As String, ByRef PicturePathToSave As String) As Boolean
         Dim NewCoverThumbName As String = ""
         Dim CoverFileExists As Boolean = False
@@ -2115,7 +2035,8 @@ Public Class AntRecord
             'Check, if the returned picture is existing - it might not due to download errors like 404
             Try
                 If Not File.Exists(NewCoverThumbName) Then
-                    CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
+                    ' CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
+                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, Grabber.GrabUtil.Artwork_Thumb_Mode.Cover, False) ' try creating artwork from movie
                 Else
                     CoverFileExists = True
                 End If
@@ -2166,7 +2087,8 @@ Public Class AntRecord
             PicturePathToSave = NewCoverThumbName
             Try
                 If Not File.Exists(NewCoverThumbName) Then
-                    CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
+                    ' CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
+                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, GrabUtil.Artwork_Thumb_Mode.Cover, False) ' try creating artwork from movie
                 End If
             Catch ex As Exception
             End Try
