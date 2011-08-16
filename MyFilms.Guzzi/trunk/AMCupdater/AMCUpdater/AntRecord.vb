@@ -116,6 +116,7 @@ Public Class AntRecord
     End Enum
 
     Private Enum MediaInfo_Output
+        Filename = 0
         VideoFormat = 1
         VideoBitrate = 2
         Framerate = 3

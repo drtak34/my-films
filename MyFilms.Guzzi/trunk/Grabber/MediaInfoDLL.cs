@@ -222,6 +222,22 @@ namespace Grabber
         public String Option(String Option_) { return Option(Option_, ""); }
         public int Count_Get(StreamKind StreamKind) { return Count_Get(StreamKind, -1); }
 
+
+      
+        //#region Media Properties
+
+        //public string Filename
+        //{
+        //    get
+        //    {
+        //      System.IO.FileInfo f = new System.IO.FileInfo(FileName); 
+        //      string result = this.Get(StreamKind.General, 0, "FileName");
+        //        //LogMyFilms.Debug("Video Codec ID: ", result);
+        //        return result.Length > 0 ? result : "-1";
+        //    }
+        //}
+        //#endregion
+
         #region Video Properties
 
         public string VideoCodec
@@ -347,6 +363,16 @@ namespace Grabber
                 //LogMyFilms.Debug("Audio Stream Count: ", result);
                 return result.Length > 0 ? result : "-1";
             }
+        }
+
+        public string AudioStreamCodecList
+        {
+          get
+          {
+            string result = this.Get(StreamKind.General, 0, "Audio_Codec_List");
+            //LogMyFilms.Debug("Audio Stream Count: ", result);
+            return result.Length > 0 ? result : "-1";
+          }
         }
 
         /// <summary>
