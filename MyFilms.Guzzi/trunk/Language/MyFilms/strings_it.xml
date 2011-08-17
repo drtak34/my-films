@@ -72,6 +72,9 @@
     <String id="107988">My Films</String>
     <String id="1079840">Choose user profile ('{0}')</String>
     <String id="1079850">Aggiorna disponibilità online</String>
+    <String id="1079851">Create single fanart from movie as multi image (local)</String>
+    <String id="1079852">Create single fanart from movie on current position (local)</String>
+    <String id="1079853">Create fanart from movie  (local)</String>
     <String id="1079854">Movie DB already in use (locked) !</String>
     <String id="1079855">Arresta aggiornamento DB film (attivo)</String>
     <String id="1079856">Global Update stopped !</String>
@@ -256,6 +259,7 @@
     <String id="10798746">Non è configurato per WOL!</String>
     <String id="10798747">Inizializzazione Automatica NAS non possibile...</String>
     <String id="10798748">aggiornamento globale terminato !</String>
+    <String id="10798749">Download to movie directory (MyFilms)</String>
     <String id="10798751">Dettaglio</String>
     <String id="10798752">Descrizione</String>
     <String id="10798753">Commenti</String>

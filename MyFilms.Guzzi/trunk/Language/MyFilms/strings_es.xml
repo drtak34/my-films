@@ -72,6 +72,9 @@
     <String id="107988">Films</String>
     <String id="1079840">Choose user profile ('{0}')</String>
     <String id="1079850">Actualizar disponibilidad online</String>
+    <String id="1079851">Create single fanart from movie as multi image (local)</String>
+    <String id="1079852">Create single fanart from movie on current position (local)</String>
+    <String id="1079853">Create fanart from movie  (local)</String>
     <String id="1079854">Movie DB already in use (locked) !</String>
     <String id="1079855">Stop movie DB update (active)</String>
     <String id="1079856">Global Update cancelled !</String>
@@ -256,6 +259,7 @@
     <String id="10798746">is not configured for wakeonlan!</String>
     <String id="10798747">Automatic NAS start not possible...</String>
     <String id="10798748">Global Update finished !</String>
+    <String id="10798749">Download to movie directory (MyFilms)</String>
     <String id="10798751">Sinopsis</String>
     <String id="10798752">Descripción</String>
     <String id="10798753">Comentarios</String>

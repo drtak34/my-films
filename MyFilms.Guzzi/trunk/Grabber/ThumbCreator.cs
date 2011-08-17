@@ -24,7 +24,9 @@ namespace Grabber
     private static int PreviewRows = 3;
     private static bool LeaveShareThumb = false;
     private static string IndividualShots = "";
+    private static string LimitScanArea = "";
     private static int ArtworkWidth = 0;
+    private static bool BlacklistingIsEnabled = true;
 
     #region Public methods
 
@@ -39,11 +41,13 @@ namespace Grabber
     //}
 
     [MethodImpl(MethodImplOptions.Synchronized)]
-    public static bool CreateVideoThumbForAMCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int Columns, int Rows, string ImageType, bool SaveIndividualShots)
+    public static bool CreateVideoThumbForAMCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int Columns, int Rows, string ImageType, bool SaveIndividualShots, int SnapshotPosition)
     {
       PreviewColumns = Columns;
       PreviewRows = Rows;
       ArtworkWidth = 0;
+      LimitScanArea = "";
+      BlacklistingIsEnabled = true;
       if (SaveIndividualShots) 
         IndividualShots = "-I "; // set param for individual shots ...
       else
@@ -52,10 +56,12 @@ namespace Grabber
       if (ImageType == "Cover")
       {
         ArtworkWidth = 400;
+        BlacklistingIsEnabled = false;
       }
       if (ImageType == "Fanart")
       {
         ArtworkWidth = 1920;
+        BlacklistingIsEnabled = false;
       }
 
       LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows.", PreviewColumns, PreviewRows);
@@ -77,7 +83,7 @@ namespace Grabber
         return false;
       }
       IVideoThumbBlacklist blacklist = GlobalServiceProvider.Get<IVideoThumbBlacklist>();
-      if (blacklist != null && blacklist.Contains(aVideoPath))
+      if (BlacklistingIsEnabled && blacklist != null && blacklist.Contains(aVideoPath))
       {
         LogMyFilms.Debug("Skipped creating thumbnail for {0}, it has been blacklisted because last attempt failed", aVideoPath);
         return false;
@@ -113,19 +119,31 @@ namespace Grabber
         preGapSec = 420;
         postGapSec = 600;
       }
+      if (SnapshotPosition > 0) // this is for single picture snapshots as fanart !
+      {
+        if (SnapshotPosition > 2)
+          preGapSec = SnapshotPosition - 2;
+        else
+          preGapSec = SnapshotPosition;
+        postGapSec = 0;
+        PreviewColumns = 1;
+        PreviewRows = 1;
+        LimitScanArea = "-C 2 -z "; // to limit the snapshotarea to 2 seconds and used unecact searching for speedup
+      }
+
       bool Success = false;
-      string ExtractorArgs = string.Format(" -D 6 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"",
+      string ExtractorArgs = string.Format(" -D 6 -B {0} {9}-E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"",
                                            preGapSec, 
                                            postGapSec, 
                                            PreviewColumns, 
                                            PreviewRows, 
                                            blank,
                                            ArtworkWidth, 
-                                           aThumbPath.Substring(0, 
-                                           aThumbPath.LastIndexOf("\\")), 
+                                           aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\")), 
                                            aVideoPath, 
-                                           IndividualShots);
-      string ExtractorFallbackArgs = string.Format(" -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"", 
+                                           IndividualShots,
+                                           LimitScanArea);
+      string ExtractorFallbackArgs = string.Format(" -D 8 -B {0} {9}-E {1} -c {2} -r {3} -b {4} -t -i {8}-w {5} -n -O \"{6}\" -P \"{7}\"", 
                                            0, 
                                            0,
                                            PreviewColumns, 
@@ -134,7 +152,8 @@ namespace Grabber
                                            ArtworkWidth, 
                                            aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1), 
                                            aVideoPath, 
-                                           IndividualShots);
+                                           IndividualShots,
+                                           LimitScanArea);
       // Honour we are using a unix app
       ExtractorArgs = ExtractorArgs.Replace('\\', '/');
       try
@@ -147,12 +166,13 @@ namespace Grabber
 
         if (!File.Exists(OutputThumb)) // No thumb in share although it should be there
         {
-          //LogMyFilms.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", ShareThumb, ExtractorArgs);
+          LogMyFilms.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", OutputThumb, ExtractorArgs);
           Success = Utils.StartProcess(ExtractorPath, ExtractorArgs, TempPath, 15000, true, GetMtnConditions());
           if (!Success)
           {
             // Maybe the pre-gap was too large or not enough sharp & light scenes could be caught
             Thread.Sleep(100);
+            LogMyFilms.Debug("First try failed - trying fallback with arguments: {0}", ExtractorFallbackArgs);
             Success = Utils.StartProcess(ExtractorPath, ExtractorFallbackArgs, TempPath, 30000, true, GetMtnConditions());
             if (!Success)
               LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp, ExtractorFallbackArgs);
@@ -193,7 +213,7 @@ namespace Grabber
       }
       else
       {
-        if (blacklist != null)
+        if (blacklist != null && BlacklistingIsEnabled)
         {
           blacklist.Add(aVideoPath);
         }

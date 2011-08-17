@@ -1873,7 +1873,7 @@ Public Class AntRecord
                                 ' FanartFileExists = CreateArtworkFromMovie(Filename, NewFanartThumbName, Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
                                 ' FanartFileExists = Grabber.GrabUtil.GetCoverartFromMovie(Filename, NewFanartThumbName, GrabUtil.Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
                                 ' public static string GetFanartFromMovie(string title, string ttitle, string year, string artFolder, bool createSeparateImages, string mastertitle, string FileName, string newFanartThumbName, out string filename)
-                                FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(title, ttitleCleaned, year, CurrentSettings.Movie_Fanart_Path, True, CurrentSettings.Master_Title, Filename, NewFanartThumbName)
+                                FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(title, ttitleCleaned, year, CurrentSettings.Movie_Fanart_Path, True, CurrentSettings.Master_Title, Filename, NewFanartThumbName, 0)
                             End If
                         Catch ex As Exception
                         End Try
@@ -2037,7 +2037,7 @@ Public Class AntRecord
             Try
                 If Not File.Exists(NewCoverThumbName) Then
                     ' CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
-                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, Grabber.GrabUtil.Artwork_Thumb_Mode.Cover, False) ' try creating artwork from movie
+                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, Grabber.GrabUtil.Artwork_Thumb_Mode.Cover, False, 0) ' try creating artwork from movie
                 Else
                     CoverFileExists = True
                 End If
@@ -2089,7 +2089,7 @@ Public Class AntRecord
             Try
                 If Not File.Exists(NewCoverThumbName) Then
                     ' CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
-                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, GrabUtil.Artwork_Thumb_Mode.Cover, False) ' try creating artwork from movie
+                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, GrabUtil.Artwork_Thumb_Mode.Cover, False, 0) ' try creating artwork from movie
                 End If
             Catch ex As Exception
             End Try
