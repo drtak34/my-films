@@ -636,11 +636,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      // Setup Random Fanart Timer
-      //m_FanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
-      //m_bFanartTimerDisabled = true;
-      //m_FanartTimer.Change(0,10000);
-
       //MyFilmsDetail.clearGUIProperty("picture");
       BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
 
@@ -652,10 +647,137 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!groupcover.Active) groupcover.Active = true;
       if (!personcover.Active) personcover.Active = true;
 
-      Worker_DoPageLoad(); // run former WindowInit synchronous
-      //DoPageLoad(); // run former WindowInit threaded...
+      OnPageLoad_DoPageLoad(); // run former WindowInit synchronous
       LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
       base.OnPageLoad(); // let animations run
+      //new System.Threading.Thread(delegate()
+      //{
+      //  this.OnPageLoad_DoPageLoad();
+      //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+      //  {
+      //    // enter here what to load after background thread has finished !
+      //    return 0;
+      //  }, 0, 0, null);
+      //}) { Name = "MyFilmsOnPageLoadWorker", IsBackground = true }.Start();
+    }
+
+    private void OnPageLoad_DoPageLoad()
+    {
+      bool defaultconfig = false;
+      GUIWaitCursor.Init(); GUIWaitCursor.Show();
+      if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
+      {
+        // Prev_MenuID = PreviousWindowId;
+        if (InitialStart) InitMainScreen(false); // don't log to MyFilms.log Property clear
+        //InitGlobalFilters(false);
+
+        if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) && PreviousWindowId != ID_MyFilmsDetail) // config given in load params
+        {
+          LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading config: '" + loadParamInfo.Config + "'");
+          string newConfig = Configuration.Control_Access_Config(loadParamInfo.Config, GetID);
+          if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
+          {
+            InitMainScreen(false); // reset all properties and values
+            InitGlobalFilters(false); // reset global filters, when loading new config !
+            //Change "Config":
+            if (!string.IsNullOrEmpty(Configuration.CurrentConfig)) // if there is an active config, save it !
+            {
+              if (facadeView.SelectedListItem != null)
+                Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
+              else
+                Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
+            }
+            Configuration.CurrentConfig = newConfig;
+            InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
+            InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
+            Load_Config(newConfig, true);
+            Fin_Charge_Init(true, true);
+          }
+        }
+        else
+        {
+          defaultconfig = Configuration.Current_Config();
+          Load_Config(Configuration.CurrentConfig, true);
+        }
+
+        InitFSwatcher(); // load DB watcher for multiseat
+
+        if (MyFilms.conf.StrFanart) Fanartstatus(true);
+        else Fanartstatus(false);
+      }
+      if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
+      {
+        GUIWaitCursor.Hide();
+        GUIWindowManager.ShowPreviousWindow();
+        return;
+      }
+
+      bool launchMediaScanner = InitialStart;
+
+      if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
+      {
+        LogMyFilms.Debug("OnPageLoad() - load facade with DefaultView -> Fin_Charge_Init(true, false)");
+        Fin_Charge_Init(true, defaultconfig); // defaultconfig is true, if a default config is set in MF setup (not default view!)
+      }
+      else
+      {
+        LogMyFilms.Debug("OnPageLoad() - load facade with last settings -> Fin_Charge_Init(false, false)");
+        Fin_Charge_Init(false, defaultconfig);
+      }
+
+      // Launch Background availability scanner, if configured in setup
+      if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
+      {
+        LogMyFilms.Debug("Launching Availabilityscanner - Initialstart = '" + launchMediaScanner + "'");
+        this.AsynIsOnlineCheck();
+      }
+      //GUIControl.ShowControl(GetID, 34);
+      GUIWaitCursor.Hide();
+
+      if (PreviousWindowId != ID_MyFilmsDetail && loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> jump to details screen !
+      {
+        LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
+        // facade index is set in filmlist loading - only launching details necessary !
+
+        if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
+        {
+          int index = -1;
+          foreach (DataRow sr in r)
+          {
+            index += 1;
+            if (sr["number"].ToString() == loadParamInfo.MovieID)
+            {
+              // bool success = int.TryParse(loadParamInfo.MovieID, out index);
+              conf.StrIndex = index;
+              conf.StrTIndex = sr[conf.StrTitle1].ToString();
+            }
+          }
+          if (index == -1)
+            GUIWindowManager.ShowPreviousWindow();
+          if (loadParamInfo.Play == "true")
+            MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null);
+          else
+            GUIWindowManager.ActivateWindow((int)ID_MyFilmsDetail, true);
+        }
+      }
+      else if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Search)) // search expression given in load params -> do global search !
+      {
+        LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading search: '" + loadParamInfo.Search + "' -> NOT YET IMPLEMENTED !");
+      }
+
+      if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
+      {
+        // Originally Deactivated by Zebons    
+        // ********************************
+        // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
+        //if (!bgLoadMovieList.IsBusy)
+        //{
+        //  LogMyFilms.Debug("Launching AsynLoadMovieList");
+        //  AsynLoadMovieList();
+        //}
+        // ********************************
+        // Originally Deactivated by Zebons    
+      }
     }
 
     protected override void OnPageDestroy(int new_windowId)
@@ -708,167 +830,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + new_windowId.ToString() + ") completed.");
       Log.Debug("MyFilms.OnPageDestroy() completed. See MyFilms.log for further Details.");
       base.OnPageDestroy(new_windowId);
-    }
-
-    private void DoPageLoad()
-    {
-      //if (bgOnPageLoad == null)
-      //{
-      //  bgOnPageLoad = new System.ComponentModel.BackgroundWorker();
-      //  bgOnPageLoad.DoWork += new DoWorkEventHandler(bgOnPageLoad_DoWork);
-      //  bgOnPageLoad.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgOnPageLoad_RunWorkerCompleted);
-      //  bgOnPageLoad.WorkerSupportsCancellation = true;
-      //  bgOnPageLoad.WorkerReportsProgress = false;
-      //  //bgOnPageLoad.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(bgOnPageLoad_ProgressChanged);
-      //  bgOnPageLoad.RunWorkerAsync();
-      //  LogMyFilms.Info("DoPageLoad() launching OnPageLoad LoadSettings in batch mode");
-      //}
-
-      //lock (bgOnPageLoad) // Locking not necessary, because we just don't perform it, if it's already running!
-      //{
-      //  if (!bgOnPageLoad.IsBusy) // we have to wait - complete method will call LoadFacade again
-      //  {
-      //    bgOnPageLoad.RunWorkerAsync();
-      //  }
-      //}
-
-      Thread LoadThread = new Thread(new ThreadStart(Worker_DoPageLoad));
-      LoadThread.IsBackground = true;
-      LoadThread.Priority = ThreadPriority.AboveNormal;
-      LoadThread.Name = "MyFilms init";
-      LoadThread.Start();
-      LoadThread.Join(); // block main thread until background thread finished
-    }
-
-    //private void bgOnPageLoad_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-    private void Worker_DoPageLoad()
-    {
-      bool defaultconfig = false;
-      GUIWaitCursor.Init();
-      GUIWaitCursor.Show();
-      if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
-      {
-        // Prev_MenuID = PreviousWindowId;
-        if (InitialStart) InitMainScreen(false); // don't log to MyFilms.log Property clear
-        //InitGlobalFilters(false);
-
-        if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) && PreviousWindowId != ID_MyFilmsDetail) // config given in load params
-        {
-          LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading config: '" + loadParamInfo.Config + "'");
-          string newConfig = Configuration.Control_Access_Config(loadParamInfo.Config, GetID);
-          if (newConfig != string.Empty) // if user escapes dialog or bad value leave system unchanged
-          {
-            InitMainScreen(false); // reset all properties and values
-            InitGlobalFilters(false); // reset global filters, when loading new config !
-            //Change "Config":
-            if (!string.IsNullOrEmpty(Configuration.CurrentConfig)) // if there is an active config, save it !
-            {
-              if (facadeView.SelectedListItem != null)
-                Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
-              else
-                Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
-            }
-            Configuration.CurrentConfig = newConfig;
-            InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
-            InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
-            //GUIWaitCursor.Init();
-            //GUIWaitCursor.Show();
-            //GUIWindowManager.Process();
-            //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-            Load_Config(newConfig, true);
-            Fin_Charge_Init(true, true);
-          }
-        }
-        else
-        {
-          defaultconfig = Configuration.Current_Config();
-          Load_Config(Configuration.CurrentConfig, true);
-        }
-        
-        InitFSwatcher(); // load DB watcher for multiseat
-        
-        if (MyFilms.conf.StrFanart)
-          Fanartstatus(true);
-        else
-          Fanartstatus(false);
-      }
-      if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
-      {
-        GUIWaitCursor.Hide();
-        GUIWindowManager.ShowPreviousWindow();
-        return;
-      }
-
-      bool launchMediaScanner = InitialStart;
-
-      if (((conf.AlwaysDefaultView) || (InitialStart)) && (PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
-      {
-        LogMyFilms.Debug("OnPageLoad() - load facade with DefaultView -> Fin_Charge_Init(true, false)");
-        Fin_Charge_Init(true, defaultconfig); // defaultconfig is true, if a default config is set in MF setup (not default view!)
-      }
-      else
-      {
-        LogMyFilms.Debug("OnPageLoad() - load facade with last settings -> Fin_Charge_Init(false, false)");
-        Fin_Charge_Init(false, defaultconfig);
-      }
-
-      // Launch Background availability scanner, if configured in setup
-      if (MyFilms.conf.ScanMediaOnStart && launchMediaScanner)
-      {
-        LogMyFilms.Debug("Launching Availabilityscanner - Initialstart = '" + launchMediaScanner.ToString() + "'");
-        this.AsynIsOnlineCheck();
-      }
-      //GUIControl.ShowControl(GetID, 34);
-      GUIWaitCursor.Hide();
-
-      if (PreviousWindowId != ID_MyFilmsDetail && loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> jump to details screen !
-      {
-        LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
-        // facade index is set in filmlist loading - only launching details necessary !
-
-        if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
-        {
-          int index = -1;
-          foreach (DataRow sr in r)
-          {
-            index += 1;
-            if (sr["number"].ToString() == loadParamInfo.MovieID)
-            {
-              // bool success = int.TryParse(loadParamInfo.MovieID, out index);
-              conf.StrIndex = index;
-              conf.StrTIndex = sr[conf.StrTitle1].ToString();
-            }
-          }
-          if (index == -1) 
-            GUIWindowManager.ShowPreviousWindow();
-          if (loadParamInfo.Play == "true")
-            MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null);
-          else 
-            GUIWindowManager.ActivateWindow((int)ID_MyFilmsDetail, true);
-        }
-      }
-      else if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Search)) // search expression given in load params -> do global search !
-      {
-        LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading search: '" + loadParamInfo.Search + "' -> NOT YET IMPLEMENTED !");
-      }
-    }
-
-    void bgOnPageLoad_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-    {
-      LogMyFilms.Info("bgOnPageLoad_RunWorkerCompleted launched. (GetID = '" + GetID + "')");
-      if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
-      {
-        // Originally Deactivated by Zebons    
-        // ********************************
-        // ToDo: Crash on Details to be fixed (make it threadsafe !!!!!!!)
-        //if (!bgLoadMovieList.IsBusy)
-        //{
-        //  LogMyFilms.Debug("Launching AsynLoadMovieList");
-        //  AsynLoadMovieList();
-        //}
-        // ********************************
-        // Originally Deactivated by Zebons    
-      }
     }
 
     protected override void OnShowContextMenu()
