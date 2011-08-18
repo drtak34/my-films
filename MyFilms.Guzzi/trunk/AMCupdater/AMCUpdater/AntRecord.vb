@@ -1820,7 +1820,7 @@ Public Class AntRecord
 
             'get fanart
             CurrentAttribute = "Fanart"
-            If _DatabaseFields(CurrentAttribute.ToLower) = True Then
+            If IsUpdateRequested(CurrentAttribute) = True Then ' Old: If _DatabaseFields(CurrentAttribute.ToLower) = True Then
                 If Not _XMLElement.Attributes("OriginalTitle") Is Nothing Then
                     title = _XMLElement.Attributes("OriginalTitle").Value
                 End If
