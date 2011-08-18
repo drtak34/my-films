@@ -1688,10 +1688,50 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "createfanartmultiimage": // create single fanart from local media on pause position
-                    Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-                    Thread.Sleep(50);
-                    Menu_CreateFanartMultiImage();
-                    break;
+                  {
+                    GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+                    if (dlgPrgrs != null)
+                    {
+                      dlgPrgrs.Reset();
+                      dlgPrgrs.DisplayProgressBar = false;
+                      dlgPrgrs.ShowWaitCursor = true;
+                      dlgPrgrs.DisableCancel(true);
+                      dlgPrgrs.SetHeading("MyFilms Fanart Creator");
+                      dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+                      dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
+                      dlgPrgrs.Percentage = 0;
+                    }
+
+                    //new System.Threading.Thread(delegate()
+                    //{
+                    //  Menu_CreateFanartMultiImage(false, dlgPrgrs);
+                    //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+                    //  {
+                    //    // Continue processing here, if necessary 
+                    //    return 0;
+                    //  }, 0, 0, null);
+                    //}
+                    //) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
+                    
+                    new System.Threading.Thread(delegate()
+                    {
+                      Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+                      Thread.Sleep(50);
+                      Menu_CreateFanartMultiImage(true, r =>
+                      {
+                        dlgPrgrs.Percentage = r;
+                        return dlgPrgrs.ShouldRenderLayer();
+                      });
+                      if (dlgPrgrs != null) { dlgPrgrs.Percentage = 100; dlgPrgrs.SetLine(1, "done"); dlgPrgrs.Close(); }
+                      GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+                        {
+                          dlgPrgrs.ShowWaitCursor = false;
+                        // enter here what to load after background thread has finished !
+                        return 0;
+                      }, 0, 0, null);
+                    }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
+                    return;
+                  }  
 
                 case "createfanartonposition": // create single fanart from local media on pause position
                     Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
@@ -1814,14 +1854,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
-        private void Menu_CreateFanartMultiImage()
+        private void Menu_CreateFanartMultiImage(bool test, Func<byte, bool> progressCallback)
         {
+          progressCallback(Byte.MinValue);
           string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
           if (path.Contains(";"))
             path = path.Substring(0, path.IndexOf(";"));
           bool success = false;
 
-          setProcessAnimationStatus(true, m_SearchAnimation);
+          // setProcessAnimationStatus(true, m_SearchAnimation);
           string wtitle = string.Empty;
           if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
             wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
@@ -1852,9 +1893,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               "localfanart",
               0);
           }
+          int i = 50;
+          int ii = 100;
+          if (!progressCallback((byte)((float)i / ii * 100)))
+            return;
           if (success)
             afficher_detail(true);
-          setProcessAnimationStatus(false, m_SearchAnimation);
+          // setProcessAnimationStatus(false, m_SearchAnimation);
+          progressCallback(Byte.MaxValue);
         }
 
         private void Menu_CreateFanart()
@@ -4026,9 +4072,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   dlgs.SelectedLabel = -1;
                   dlgs.DoModal(wGetID);
                 }
-                //LogMyFilms.Debug("(SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabelText: '" + dlgs.SelectedLabelText.ToString() + "'");
-                //LogMyFilms.Debug("(SingleFanartGrabber) - Info about Selected DIalog Searchstring: DialofSelectedLabel: '" + dlgs.SelectedLabel.ToString() + "'");
-                if (dlgs.SelectedLabel == 0)
+                if (dlgs.SelectedLabel == 0) // enter manual searchstring via VK
                 {
                   VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
                   if (null == keyboard) return;
@@ -4059,135 +4103,306 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               if (dlg.SelectedLabel > 0)
               {
-                // Load Fanart  
-                bool first = true;
-                string filename = string.Empty;
-                string filename1 = string.Empty;
-                if (MyFilms.conf.StrTitle1 == "OriginalTitle")
-                  wttitle = savetitle; // Was wttitle = wtitle;
-                foreach (string backdrop in listemovies[dlg.SelectedLabel - 1].Backdrops)
-                {
-                  filename1 = Grabber.GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, backdrop, wttitle, true, first, out filename);
-                  LogMyFilms.Info("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
+                // Load Fanart  -> show progress dialog !
 
-                  if (filename == string.Empty)
-                    filename = filename1;
-                  if (!(filename == "already" && filename1 == "already"))
-                    filename = "added";
-                  first = false;
+                GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+                if (dlgPrgrs != null)
+                {
+                  dlgPrgrs.Reset();
+                  dlgPrgrs.DisplayProgressBar = true;
+                  dlgPrgrs.ShowWaitCursor = false;
+                  dlgPrgrs.DisableCancel(true);
+                  dlgPrgrs.SetHeading("MyFilms Artwork Download");
+                  dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+                  dlgPrgrs.SetLine(1, "Loading Artwork ...");
+                  dlgPrgrs.Percentage = 0;
                 }
-                listemovies[0].Name = filename;
-                // Download PersonArtwork
-                string filenameperson = string.Empty;
-                string filename1person = string.Empty;
-                string filename2person = string.Empty;
-                LogMyFilms.Info("Person Artwork - " + listemovies[0].Persons.Count + " persons found - now loading artwork");
-                if (!string.IsNullOrEmpty(personartworkpath) && listemovies[0].Persons != null && listemovies[0].Persons.Count > 0)
+
+                new System.Threading.Thread(delegate()
                 {
-                  List<grabber.DBPersonInfo> listepersons = listemovies[0].Persons;
-                  foreach (grabber.DBPersonInfo person in listepersons)
+                  bool first = true;
+                  string filename = string.Empty;
+                  string filename1 = string.Empty;
+                  if (MyFilms.conf.StrTitle1 == "OriginalTitle")
+                    wttitle = savetitle; // Was wttitle = wtitle;
+                  int i = 0;
+                  if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading Fanart for '" + wttitle + "'");
+
+                  foreach (string backdrop in listemovies[dlg.SelectedLabel - 1].Backdrops)
                   {
-                    bool firstpersonimage = true;
-                    grabber.DBPersonInfo persondetails = new DBPersonInfo();
-                    grabber.TheMoviedb TheMoviedb = new grabber.TheMoviedb();
-                    persondetails = TheMoviedb.getPersonsById(person.Id, string.Empty);
-                    LogMyFilms.Info(
-                      "MF: Person Artwork - " + persondetails.Images.Count + " Images found for '" +
-                      persondetails.Name + "'");
-                    if (persondetails.Images.Count > 0)
-                    {
-                      foreach (var image in persondetails.Images)
-                      {
-                        filename1person = Grabber.GrabUtil.DownloadPersonArtwork(personartworkpath, image, persondetails.Name, true, firstpersonimage, out filenameperson);
-                        LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
-                        if (filenameperson == string.Empty) filenameperson = filename1person;
-                        if (!(filenameperson == "already" && filename1person == "already")) filenameperson = "added";
-                        firstpersonimage = false;
-                      }
-                    }
-                    else
-                    {
-                      // Get further IMDB images
-                      Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
-                      Grabber.MyFilmsIMDB.IMDBUrl wurl;
-                      _imdb.FindActor(persondetails.Name);
-                      //Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
-                      IMDBActor imdbActor = new IMDBActor();
+                    filename1 = Grabber.GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, backdrop, wttitle, true, first, out filename);
+                    if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "loading '" + System.IO.Path.GetFileName(filename) + "'");
+                    if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / listemovies[dlg.SelectedLabel - 1].Backdrops.Count;
+                    LogMyFilms.Info("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
 
-                      if (_imdb.Count > 0)
+                    if (filename == string.Empty)
+                      filename = filename1;
+                    if (!(filename == "already" && filename1 == "already"))
+                      filename = "added";
+                    first = false;
+                    i++;
+                  }
+                  listemovies[0].Name = filename;
+                  // Download PersonArtwork
+                  string filenameperson = string.Empty;
+                  string filename1person = string.Empty;
+                  string filename2person = string.Empty;
+                  LogMyFilms.Info("Person Artwork - " + listemovies[0].Persons.Count + " persons found - now loading artwork");
+                  if (!string.IsNullOrEmpty(personartworkpath) && listemovies[0].Persons != null && listemovies[0].Persons.Count > 0)
+                  {
+                    if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading person images for '" + wttitle + "'");
+                    List<grabber.DBPersonInfo> listepersons = listemovies[0].Persons;
+                    foreach (grabber.DBPersonInfo person in listepersons)
+                    {
+                      bool firstpersonimage = true;
+                      grabber.DBPersonInfo persondetails = new DBPersonInfo();
+                      grabber.TheMoviedb TheMoviedb = new grabber.TheMoviedb();
+                      persondetails = TheMoviedb.getPersonsById(person.Id, string.Empty);
+                      LogMyFilms.Info("MF: Person Artwork - " + persondetails.Images.Count + " Images found for '" + persondetails.Name + "'");
+                      if (persondetails.Images.Count > 0)
                       {
-                        string url = string.Empty;
-                        wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
-                        if (wurl.URL.Length != 0)
+                        i = 0;
+                        foreach (var image in persondetails.Images)
                         {
-                          url = wurl.URL;
-                          //url = wurl.URL + "videogallery"; // Assign proper Webpage for Actorinfos
-                          //url = MyFilms.ImdbBaseUrl + url.Substring(url.IndexOf("name"));
-                          Grabber.Grabber_URLClass fetchactor = new Grabber_URLClass();
-                          fetchactor.GetActorDetails(url, persondetails.Name, false, out imdbActor);
-                          filename1person = GrabUtil.DownloadPersonArtwork(personartworkpath, imdbActor.ThumbnailUrl, persondetails.Name, true, firstpersonimage, out filenameperson);
+                          filename1person = Grabber.GrabUtil.DownloadPersonArtwork(personartworkpath, image, persondetails.Name, true, firstpersonimage, out filenameperson);
+                          if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "loading images for person '" + persondetails.Name + "'");
+                          if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / persondetails.Images.Count;
+                          
                           LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
-                          // Add actor to datbbase to get infos in person facades later...
-                          int actorId = VideoDatabase.AddActor(imdbActor.Name);
-                          if (actorId > 0)
-                          {
-                            VideoDatabase.SetActorInfo(actorId, imdbActor);
-                            //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
-
-                            // Deactivated, as downloading not yet working !!!
-                            //if (imdbActor.ThumbnailUrl != string.Empty)
-                            //{
-                            //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-                            //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
-                            //  Utils.FileDelete(largeCoverArt);
-                            //  Utils.FileDelete(coverArt);
-                            //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
-                            //}
-                          }
+                          if (filenameperson == string.Empty) filenameperson = filename1person;
+                          if (!(filenameperson == "already" && filename1person == "already")) filenameperson = "added";
+                          firstpersonimage = false;
+                          i++;
                         }
                       }
                       else
                       {
-                        int actorId = VideoDatabase.AddActor(imdbActor.Name);
-                        imdbActor.Name = persondetails.Name;
-                        //IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
-                        //imdbActorMovie.MovieTitle = _movieDetails.Title;
-                        //imdbActorMovie.Year = _movieDetails.Year;
-                        //imdbActorMovie.Role = role;
-                        //imdbActor.Add(imdbActorMovie);
-                        VideoDatabase.SetActorInfo(actorId, imdbActor);
-                        //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
-                      }
-                      firstpersonimage = false;
+                        // Get further IMDB images
+                        if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading additional IMDB person images ...");
+                        if (dlgPrgrs != null) dlgPrgrs.Percentage = 0;
+                        Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+                        Grabber.MyFilmsIMDB.IMDBUrl wurl;
+                        _imdb.FindActor(persondetails.Name);
+                        //Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
+                        IMDBActor imdbActor = new IMDBActor();
 
-                      // Try to get actor images from IMDB
-                      // Get further Actors from IMDB
-                      //IMDBMovie MPmovie = new IMDBMovie();
-                      //MPmovie.Title = listemovies[0].Name;
-                      //MPmovie.IMDBNumber = listemovies[0].ImdbID;
-                      //FetchActors(MPmovie, personartworkpath);
-                      //Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
-                      //Grabber.Grabber_URLClass.IMDBUrl wurl;
-                      //_imdb.FindActor(person.Name);
-                      //if (_imdb.Count > 0)
-                      //{
-                      //  wurl = (Grabber_URLClass.IMDBUrl)_imdb[0]; // Assume first match is the best !
-                      //  if (wurl.IMDBURL.Length != 0)
-                      //  {
-                      //    IMDBActor imdbactor = new IMDBActor();
-                      //    if (Grab.GetActorDetails(wurl, false, out imdbactor))
-                      //    {
-                      //      //Download Thumb
-                      //    }
-                      //    string url = imdbactor.ThumbnailUrl;
-                      //  }
-                      //}
+                        if (_imdb.Count > 0)
+                        {
+                          string url = string.Empty;
+                          wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+                          if (wurl.URL.Length != 0)
+                          {
+                            url = wurl.URL;
+                            //url = wurl.URL + "videogallery"; // Assign proper Webpage for Actorinfos
+                            //url = MyFilms.ImdbBaseUrl + url.Substring(url.IndexOf("name"));
+                            Grabber.Grabber_URLClass fetchactor = new Grabber_URLClass();
+                            fetchactor.GetActorDetails(url, persondetails.Name, false, out imdbActor);
+                            filename1person = GrabUtil.DownloadPersonArtwork(personartworkpath, imdbActor.ThumbnailUrl, persondetails.Name, true, firstpersonimage, out filenameperson);
+                            LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
+                            // Add actor to datbbase to get infos in person facades later...
+                            int actorId = VideoDatabase.AddActor(imdbActor.Name);
+                            if (actorId > 0)
+                            {
+                              VideoDatabase.SetActorInfo(actorId, imdbActor);
+                              //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+
+                              // Deactivated, as downloading not yet working !!!
+                              //if (imdbActor.ThumbnailUrl != string.Empty)
+                              //{
+                              //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                              //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+                              //  Utils.FileDelete(largeCoverArt);
+                              //  Utils.FileDelete(coverArt);
+                              //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+                              //}
+                            }
+                          }
+                        }
+                        else
+                        {
+                          int actorId = VideoDatabase.AddActor(imdbActor.Name);
+                          imdbActor.Name = persondetails.Name;
+                          //IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
+                          //imdbActorMovie.MovieTitle = _movieDetails.Title;
+                          //imdbActorMovie.Year = _movieDetails.Year;
+                          //imdbActorMovie.Role = role;
+                          //imdbActor.Add(imdbActorMovie);
+                          VideoDatabase.SetActorInfo(actorId, imdbActor);
+                          //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+                        }
+                        firstpersonimage = false;
+
+                        // Try to get actor images from IMDB
+                        // Get further Actors from IMDB
+                        //IMDBMovie MPmovie = new IMDBMovie();
+                        //MPmovie.Title = listemovies[0].Name;
+                        //MPmovie.IMDBNumber = listemovies[0].ImdbID;
+                        //FetchActors(MPmovie, personartworkpath);
+                        //Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+                        //Grabber.Grabber_URLClass.IMDBUrl wurl;
+                        //_imdb.FindActor(person.Name);
+                        //if (_imdb.Count > 0)
+                        //{
+                        //  wurl = (Grabber_URLClass.IMDBUrl)_imdb[0]; // Assume first match is the best !
+                        //  if (wurl.IMDBURL.Length != 0)
+                        //  {
+                        //    IMDBActor imdbactor = new IMDBActor();
+                        //    if (Grab.GetActorDetails(wurl, false, out imdbactor))
+                        //    {
+                        //      //Download Thumb
+                        //    }
+                        //    string url = imdbactor.ThumbnailUrl;
+                        //  }
+                        //}
+                      }
                     }
                   }
-                }
-                else
-                  if (string.IsNullOrEmpty(personartworkpath))
-                    LogMyFilms.Debug("No Personartwork loaded - Personartworkpath is not set in setup!");
+                  else
+                    if (string.IsNullOrEmpty(personartworkpath))
+                      LogMyFilms.Debug("No Personartwork loaded - Personartworkpath is not set in setup!");
+
+                  
+                  if (dlgPrgrs != null) { dlgPrgrs.Percentage = 100; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close(); 
+                  }
+                  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+                  {
+                    dlgPrgrs.ShowWaitCursor = false;
+                    // enter here what to load after background thread has finished !
+                    return 0;
+                  }, 0, 0, null);
+                }) { Name = "MyFilmsTMDBLoader", IsBackground = true }.Start();
+                return;
+                
+                
+                
+              //  bool first = true;
+              //  string filename = string.Empty;
+              //  string filename1 = string.Empty;
+              //  if (MyFilms.conf.StrTitle1 == "OriginalTitle")
+              //    wttitle = savetitle; // Was wttitle = wtitle;
+              //  foreach (string backdrop in listemovies[dlg.SelectedLabel - 1].Backdrops)
+              //  {
+              //    filename1 = Grabber.GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, backdrop, wttitle, true, first, out filename);
+              //    LogMyFilms.Info("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
+
+              //    if (filename == string.Empty)
+              //      filename = filename1;
+              //    if (!(filename == "already" && filename1 == "already"))
+              //      filename = "added";
+              //    first = false;
+              //  }
+              //  listemovies[0].Name = filename;
+              //  // Download PersonArtwork
+              //  string filenameperson = string.Empty;
+              //  string filename1person = string.Empty;
+              //  string filename2person = string.Empty;
+              //  LogMyFilms.Info("Person Artwork - " + listemovies[0].Persons.Count + " persons found - now loading artwork");
+              //  if (!string.IsNullOrEmpty(personartworkpath) && listemovies[0].Persons != null && listemovies[0].Persons.Count > 0)
+              //  {
+              //    List<grabber.DBPersonInfo> listepersons = listemovies[0].Persons;
+              //    foreach (grabber.DBPersonInfo person in listepersons)
+              //    {
+              //      bool firstpersonimage = true;
+              //      grabber.DBPersonInfo persondetails = new DBPersonInfo();
+              //      grabber.TheMoviedb TheMoviedb = new grabber.TheMoviedb();
+              //      persondetails = TheMoviedb.getPersonsById(person.Id, string.Empty);
+              //      LogMyFilms.Info(
+              //        "MF: Person Artwork - " + persondetails.Images.Count + " Images found for '" +
+              //        persondetails.Name + "'");
+              //      if (persondetails.Images.Count > 0)
+              //      {
+              //        foreach (var image in persondetails.Images)
+              //        {
+              //          filename1person = Grabber.GrabUtil.DownloadPersonArtwork(personartworkpath, image, persondetails.Name, true, firstpersonimage, out filenameperson);
+              //          LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
+              //          if (filenameperson == string.Empty) filenameperson = filename1person;
+              //          if (!(filenameperson == "already" && filename1person == "already")) filenameperson = "added";
+              //          firstpersonimage = false;
+              //        }
+              //      }
+              //      else
+              //      {
+              //        // Get further IMDB images
+              //        Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+              //        Grabber.MyFilmsIMDB.IMDBUrl wurl;
+              //        _imdb.FindActor(persondetails.Name);
+              //        //Grabber.MyFilmsIMDBActor imdbActor = new Grabber.MyFilmsIMDBActor();
+              //        IMDBActor imdbActor = new IMDBActor();
+
+              //        if (_imdb.Count > 0)
+              //        {
+              //          string url = string.Empty;
+              //          wurl = (Grabber.MyFilmsIMDB.IMDBUrl)_imdb[0]; // Assume first match is the best !
+              //          if (wurl.URL.Length != 0)
+              //          {
+              //            url = wurl.URL;
+              //            //url = wurl.URL + "videogallery"; // Assign proper Webpage for Actorinfos
+              //            //url = MyFilms.ImdbBaseUrl + url.Substring(url.IndexOf("name"));
+              //            Grabber.Grabber_URLClass fetchactor = new Grabber_URLClass();
+              //            fetchactor.GetActorDetails(url, persondetails.Name, false, out imdbActor);
+              //            filename1person = GrabUtil.DownloadPersonArtwork(personartworkpath, imdbActor.ThumbnailUrl, persondetails.Name, true, firstpersonimage, out filenameperson);
+              //            LogMyFilms.Info("Person Artwork " + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + " downloaded for '" + persondetails.Name + "' in movie '" + wttitle + "', path='" + filename1person + "'");
+              //            // Add actor to datbbase to get infos in person facades later...
+              //            int actorId = VideoDatabase.AddActor(imdbActor.Name);
+              //            if (actorId > 0)
+              //            {
+              //              VideoDatabase.SetActorInfo(actorId, imdbActor);
+              //              //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+
+              //              // Deactivated, as downloading not yet working !!!
+              //              //if (imdbActor.ThumbnailUrl != string.Empty)
+              //              //{
+              //              //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+              //              //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, imdbActor.Name);
+              //              //  Utils.FileDelete(largeCoverArt);
+              //              //  Utils.FileDelete(coverArt);
+              //              //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
+              //              //}
+              //            }
+              //          }
+              //        }
+              //        else
+              //        {
+              //          int actorId = VideoDatabase.AddActor(imdbActor.Name);
+              //          imdbActor.Name = persondetails.Name;
+              //          //IMDBActor.IMDBActorMovie imdbActorMovie = new IMDBActor.IMDBActorMovie();
+              //          //imdbActorMovie.MovieTitle = _movieDetails.Title;
+              //          //imdbActorMovie.Year = _movieDetails.Year;
+              //          //imdbActorMovie.Role = role;
+              //          //imdbActor.Add(imdbActorMovie);
+              //          VideoDatabase.SetActorInfo(actorId, imdbActor);
+              //          //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
+              //        }
+              //        firstpersonimage = false;
+
+              //        // Try to get actor images from IMDB
+              //        // Get further Actors from IMDB
+              //        //IMDBMovie MPmovie = new IMDBMovie();
+              //        //MPmovie.Title = listemovies[0].Name;
+              //        //MPmovie.IMDBNumber = listemovies[0].ImdbID;
+              //        //FetchActors(MPmovie, personartworkpath);
+              //        //Grabber.MyFilmsIMDB _imdb = new Grabber.MyFilmsIMDB();
+              //        //Grabber.Grabber_URLClass.IMDBUrl wurl;
+              //        //_imdb.FindActor(person.Name);
+              //        //if (_imdb.Count > 0)
+              //        //{
+              //        //  wurl = (Grabber_URLClass.IMDBUrl)_imdb[0]; // Assume first match is the best !
+              //        //  if (wurl.IMDBURL.Length != 0)
+              //        //  {
+              //        //    IMDBActor imdbactor = new IMDBActor();
+              //        //    if (Grab.GetActorDetails(wurl, false, out imdbactor))
+              //        //    {
+              //        //      //Download Thumb
+              //        //    }
+              //        //    string url = imdbactor.ThumbnailUrl;
+              //        //  }
+              //        //}
+              //      }
+              //    }
+              //  }
+              //  else
+              //    if (string.IsNullOrEmpty(personartworkpath))
+              //      LogMyFilms.Debug("No Personartwork loaded - Personartworkpath is not set in setup!");
               }
               break;
           }
