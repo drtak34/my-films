@@ -761,9 +761,15 @@ Public Class AntProcessor
                                 Else
                                     If (CurrentSettings.Group_Name_Applies_To = "Translated Title") Then
                                         wtitle = "TranslatedTitle"
+                                    ElseIf (CurrentSettings.Group_Name_Applies_To = "Formatted Title") Then
+                                        wtitle = "FormattedTitle"
                                     End If
                                 End If
-                                wtitle = CurrentNode.Attributes(wtitle).Value
+                                Try
+                                    wtitle = CurrentNode.Attributes(wtitle).Value
+                                Catch ex As Exception
+                                    wtitle = row("AntTitle").ToString
+                                End Try
                             End If
                             SearchFile(FileToScan, CurrentSettings.Movie_Scan_Path, CurrentNode.Attributes("Number").Value, wtitle)
                             If Not FileToScan.Length > 0 Then
@@ -926,7 +932,7 @@ Public Class AntProcessor
 
         If e.Error IsNot Nothing Then
             'If e.Error.Message.ToString <> "" Then
-            LogEvent("ERROR : " & e.Error.Message.ToLower & ", " & e.Error.InnerException.Message.ToString, EventLogLevel.ErrorOrSimilar)
+            LogEvent("ERROR : " & e.Error.Message.ToLower, EventLogLevel.ErrorOrSimilar)
             'End If
         End If
 
@@ -946,13 +952,9 @@ Public Class AntProcessor
                 LogEvent("Operation Cancelled - Save Continuing", EventLogLevel.ErrorOrSimilar)
             End If
         End If
-        ' added to force refresh of View Collection Tab
-        Form1.txtConfigFilePath_TextChanged(sender, e)
 
-        'XMLDoc.Save(_ManualXMLPath)
-        'LogEvent("Manual Update Process Complete.", EventLogLevel.ImportantEvent)
-        'LogEvent("===================================================================================================", EventLogLevel.Informational)
-        'MsgBox("Process Complete", MsgBoxStyle.Information)
+        Form1.txtConfigFilePath_TextChanged(sender, e) ' added to force refresh of View Collection Tab
+
         bgwManualUpdate_PostProcessing()
 
     End Sub
@@ -980,7 +982,6 @@ Public Class AntProcessor
         Form1.dgExcludedFileStrings.DataSource = dtFiles
         Form1.dgExcludedFileStrings.Columns(0).Width = Form1.dgExcludedFileStrings.Width - Form1.dgExcludedFileStrings.RowHeadersWidth - 20
 
-
         If CurrentSettings.Execute_Program = False Or CurrentSettings.Execute_Program_Path = "" Then
             MsgBox("Process Complete", MsgBoxStyle.Information)
         ElseIf CurrentSettings.Execute_Program = True And CurrentSettings.Execute_Program_Path <> "" Then
@@ -1001,10 +1002,6 @@ Public Class AntProcessor
                 End If
             End If
         End If
-
-        'MsgBox("Process Complete", MsgBoxStyle.Information)
-
-
     End Sub
 
     Private Shared Sub bgwManualUpdate_ProgressChanged(ByVal sender As Object, ByVal e As ProgressChangedEventArgs) Handles bgwManualUpdate.ProgressChanged
