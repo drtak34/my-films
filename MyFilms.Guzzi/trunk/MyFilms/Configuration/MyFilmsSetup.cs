@@ -4200,7 +4200,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             launchAMCmanager();
           else
             MessageBox.Show("Cannot launch AMC Updater !  \n AMC Updater is not supported for external catalogs other than AMC  !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-          jzgjkgjhjhgk
         }
     
         private void launchAMCmanager()
