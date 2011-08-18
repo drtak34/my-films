@@ -123,16 +123,6 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>177, 17</value>
   </metadata>
-  <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
-    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
-If orphaned entries are found, then will be purged from the database.
-This only affects database entries which reference the currently scanned movie folder.
-Override path is taken into account for this option.
-For example, an entry listing a Source of 'd:\Movies' will not be considered an orphen if you scan 'e:\Other Movies'.</value>
-  </data>
-  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>280, 50</value>
-  </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1095, 13</value>
   </metadata>
@@ -186,17 +176,6 @@ Example:
 So if you have named your files by movie title, select “title”. 
 If you have your movie files in folders, that have the movie title, select “folder”.</value>
   </data>
-  <data name="GroupBox26.ToolTip" xml:space="preserve">
-    <value>You can set several options for the internet grabber.
-Be aware, that not all options are supported by all grabber scripts.
-However, IMDB (full) script should support all options listed here.
-If you set no values, the default settings of the grabber
-will be used instead.
-The default settings (of the grabber script) can be changed by editing 
-the grabber script in the "MyFilms Grabber Interface" ("Edit script").
-
-</value>
-  </data>
   <data name="chkGrabberOverrideLanguage.ToolTip" xml:space="preserve">
     <value>Preferred Language(s) for 
 Translated Title(s) and Certification
@@ -211,10 +190,28 @@ Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
   </data>
+  <data name="GroupBox26.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "MyFilms Grabber Interface" ("Edit script").
+
+</value>
+  </data>
   <data name="txtParserFilePath.ToolTip" xml:space="preserve">
     <value>Enter the location of an Internet Parser file.
 These files allow AMCUpdater to access Internet Movie sites to get movie information
 Various Parser Files are provided by default - they are in the Scripts subfolder of the AMCUpdater application folder.</value>
+  </data>
+  <data name="chkPurgeMissing.ToolTip" xml:space="preserve">
+    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
+If orphaned entries are found, then will be purged from the database.
+This only affects database entries which reference the currently scanned movie folder.
+Override path is taken into account for this option.
+For example, an entry listing a Source of 'd:\Movies' will not be considered an orphen if you scan 'e:\Other Movies'.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnCancelProcessing.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -717,9 +714,6 @@ The movie title will then be saved as 'Groupname \ Movie Name'</value>
         8Dsg/w+T+GsRKGk0sAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 50</value>
-  </metadata>
   <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 50</value>
   </metadata>
