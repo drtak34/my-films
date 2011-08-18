@@ -282,6 +282,9 @@
     <String id="10798782">Comentarios de la película</String>
     <String id="10798783">Add movie to watchlist</String>
     <String id="10798784">Rate movie</String>
+    <String id="10798790">Master title</String>
+    <String id="10798791">Secondary title</String>
+    <String id="10798792">Sort title</String>
     <String id="10798800">Warning: possible long runtime!</String>
     <String id="10798801">Should trailer search really be</String>
     <String id="10798802">started for {0} films?</String>

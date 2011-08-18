@@ -4798,6 +4798,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg3.Reset();
           dlg3.SetHeading(GUILocalizeStrings.Get(10798771)); // Display options ...
           System.Collections.Generic.List<string> choiceGlobalMappings = new System.Collections.Generic.List<string>();
+          
           dlg3.Add(GUILocalizeStrings.Get(10798773) + " 1 (" + MyFilms.conf.Stritem1 + "-" + MyFilms.conf.Strlabel1 + ")");
           choiceGlobalMappings.Add("useritem1");
           dlg3.Add(GUILocalizeStrings.Get(10798773) + " 2 (" + MyFilms.conf.Stritem2 + "-" + MyFilms.conf.Strlabel2 + ")");
@@ -4808,18 +4809,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           choiceGlobalMappings.Add("useritem4");
           dlg3.Add(GUILocalizeStrings.Get(10798773) + " 5 (" + MyFilms.conf.Stritem5 + "-" + MyFilms.conf.Strlabel5 + ")");
           choiceGlobalMappings.Add("useritem5");
+          
+          // master-, secondary-  and sorttitle
+          //dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
+          dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
+          choiceGlobalMappings.Add("mastertitle");
+          dlg3.Add(GUILocalizeStrings.Get(10798791) + " (" + MyFilms.conf.StrTitle2 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle2) + ")"); // secondary title
+          choiceGlobalMappings.Add("secondarytitle");
+          dlg3.Add(GUILocalizeStrings.Get(10798792) + " (" + MyFilms.conf.StrSTitle + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrSTitle) + ")"); // sort title
+          choiceGlobalMappings.Add("sorttitle");
+
           dlg3.DoModal(GetID);
           if (dlg3.SelectedLabel == -1)
           { return; }
+          int selection = dlg3.SelectedLabel;
           string strUserItemSelection = choiceGlobalMappings[dlg3.SelectedLabel];
           dlg3.Reset();
           choiceGlobalMappings.Clear();
 
           dlg3.SetHeading(GUILocalizeStrings.Get(10798772)); // Choose field ...
-
-          dlg3.Add("<" + GUILocalizeStrings.Get(10798774) + ">"); // empty
-          choiceGlobalMappings.Add("");
-
+          switch (strUserItemSelection)
+          {
+            case "mastertitle":
+            case "sorttitle":
+              break;
+            case "secondarytitle":
+              dlg3.Add("<" + GUILocalizeStrings.Get(10798774) + ">"); // empty
+              choiceGlobalMappings.Add("(none)");
+              break;
+            default:
+              dlg3.Add("<" + GUILocalizeStrings.Get(10798774) + ">"); // empty
+              choiceGlobalMappings.Add("");
+              break;
+          }
           AntMovieCatalog amc = new AntMovieCatalog();
           foreach (DataColumn dc in amc.Movie.Columns)
           {
@@ -4828,30 +4850,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "Contents_Id" && dc.ColumnName != "DateWatched"
                 && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer")
               {
-                if (MyFilms.conf.StrFileType != "0" || (dc.ColumnName != "DateAdded" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
-                  && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags"
-                  && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio"))
+                if (selection > 4) // title fields
                 {
-                  dlg3.Add(BaseMesFilms.Translate_Column(dc.ColumnName));
-                  choiceGlobalMappings.Add(dc.ColumnName);
+                  if (dc.ColumnName == "OriginalTitle" || dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "FormattedTitle")
+                  {
+                    dlg3.Add(dc.ColumnName + "-" + BaseMesFilms.Translate_Column(dc.ColumnName));
+                    choiceGlobalMappings.Add(dc.ColumnName);
+                  }
+                }
+                else // display item fields
+                {
+                  if (MyFilms.conf.StrFileType != "0" || (dc.ColumnName != "DateAdded" && dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched"
+                    && dc.ColumnName != "Certification" && dc.ColumnName != "Writer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags"
+                    && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio"))
+                  {
+                    dlg3.Add(BaseMesFilms.Translate_Column(dc.ColumnName));
+                    choiceGlobalMappings.Add(dc.ColumnName);
+                  }
                 }
               }
             }
           }
-          //string[] PropertyList = new string[] { "OriginalTitle", "TranslatedTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Source", "Borrower" };
-          //string[] PropertyListLabel = new string[] { "10798658", "10798659", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
-          //for (int ii = 0; ii < 31; ii++)
-          //{
-          //    dlg3.Add(GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))));
-          //    choiceGlobalMappings.Add(PropertyList[ii]);
-          //}
 
-          // Dont use the propertylist...
-          //foreach (string wSearch in wSearchList)
-          //{
-          //    dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(wSearch));
-          //    choiceSearch.Add(wSearch);
-          //}
           dlg3.DoModal(GetID);
           if (dlg3.SelectedLabel == -1)
             return;
@@ -4885,6 +4905,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilms.conf.Stritem5 = wproperty;
               MyFilms.conf.Strlabel5 = BaseMesFilms.Translate_Column(wproperty);
               LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.Stritem5 + "', Label: '" + conf.Strlabel5 + "'.");
+              break;
+            case "mastertitle":
+              MyFilms.conf.StrTitle1 = wproperty;
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrTitle1 + "'.");
+              break;
+            case "secondarytitle":
+              MyFilms.conf.StrTitle2 = wproperty;
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrTitle2 + "'.");
+              break;
+            case "sorttitle":
+              MyFilms.conf.StrSTitle = wproperty;
+              LogMyFilms.Debug("Display Options - change '" + strUserItemSelection + "' to DB-field: '" + conf.StrSTitle + "'.");
               break;
             default:
               break;
@@ -8393,6 +8425,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel4", MyFilms.conf.Strlabel4);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntItem5", MyFilms.conf.Stritem5);
       XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntLabel5", MyFilms.conf.Strlabel5);
+
+      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntTitle1", MyFilms.conf.StrTitle1);
+      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntTitle2", MyFilms.conf.StrTitle2);
+      XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntSTitle", MyFilms.conf.StrSTitle);
     }
 
 

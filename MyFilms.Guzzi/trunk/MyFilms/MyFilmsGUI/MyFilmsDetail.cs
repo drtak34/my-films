@@ -1701,22 +1701,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
                       dlgPrgrs.Percentage = 0;
                     }
-
-                    //new System.Threading.Thread(delegate()
-                    //{
-                    //  Menu_CreateFanartMultiImage(false, dlgPrgrs);
-                    //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
-                    //  {
-                    //    // Continue processing here, if necessary 
-                    //    return 0;
-                    //  }, 0, 0, null);
-                    //}
-                    //) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
-                    
                     new System.Threading.Thread(delegate()
                     {
                       Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
                       Thread.Sleep(50);
+                      //  Menu_CreateFanartMultiImage(false, dlgPrgrs);
                       Menu_CreateFanartMultiImage(true, r =>
                       {
                         dlgPrgrs.Percentage = r;

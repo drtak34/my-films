@@ -282,6 +282,9 @@
     <String id="10798782">Shouts</String>
     <String id="10798783">Add movie to watchlist</String>
     <String id="10798784">Rate movie</String>
+    <String id="10798790">Master title</String>
+    <String id="10798791">Secondary title</String>
+    <String id="10798792">Sort title</String>
     <String id="10798800">Figyelmeztetés: ez sokáig eltarthat!</String>
     <String id="10798801">Előzetes keresés ajánlott helyen:</String>
     <String id="10798802">indítás {0} filmhez?</String>
