@@ -45,14 +45,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (string.IsNullOrEmpty(loadParam)) 
               return;
 
-            Config = Regex.Match(loadParam, "config:([^|]*)").Groups[1].Value;
-            MovieID = Regex.Match(loadParam, "movieid:([^|]*)").Groups[1].Value;
-            Play = Regex.Match(loadParam, "play:([^|]*)").Groups[1].Value;
+            Config = Regex.Match(loadParam, "config:([^|]*)").Groups[1].Value; // name of configuration
+            MovieID = Regex.Match(loadParam, "movieid:([^|]*)").Groups[1].Value; // movieID - used by Trakt
+            Play = Regex.Match(loadParam, "play:([^|]*)").Groups[1].Value; // "true" -> start movie with MovieID
             
-            Category = Regex.Match(loadParam, "category:([^|]*)").Groups[1].Value;
-            CategoryValue = Regex.Match(loadParam, "categoryvalue:([^|]*)").Groups[1].Value;
-            Layout = Regex.Match(loadParam, "layout:([^|]*)").Groups[1].Value;
-            Search = Regex.Match(loadParam, "search:([^|]*)").Groups[1].Value;
+            Category = Regex.Match(loadParam, "category:([^|]*)").Groups[1].Value; // Category name as start grouped view
+            CategoryValue = Regex.Match(loadParam, "categoryvalue:([^|]*)").Groups[1].Value; // Category value, e.g. "Country" to show that category's movies directly
+            Layout = Regex.Match(loadParam, "layout:([^|]*)").Groups[1].Value; // Choose Layout -> 0, 1, 2, 3, 4 for ListView, SmallThumb, BigThumb, FilmStrip, CoverFlow
+            Search = Regex.Match(loadParam, "search:([^|]*)").Groups[1].Value; // Start MyFilms with GlobalSearch with that parameter
             if (!bool.TryParse(Regex.Match(loadParam, "VKonfail:([^|]*)").Groups[1].Value, out _ShowVKonFailedSearch)) _ShowVKonFailedSearch = true;
             try { Return = (ReturnMode)Enum.Parse(typeof(ReturnMode), Regex.Match(loadParam, "return:([^|]*)").Groups[1].Value); }
             catch { Return = ReturnMode.Root; }

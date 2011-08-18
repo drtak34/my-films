@@ -38,6 +38,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
+        // public LoadParameterInfo LoadParams = null;
         public Configuration(string CurrentConfig, bool create_temp)
         {
             //-----------------------------------------------------------------------------------------------
@@ -84,7 +85,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (StrSTitle == string.Empty)
                     StrSTitle = StrTitle1;
                 StrViewDfltItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltItem", string.Empty);
+                //if (LoadParams != null && !string.IsNullOrEmpty(LoadParams.Category)) 
+                //  StrViewDfltItem = LoadParams.Category;
                 StrViewDfltText = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltText", string.Empty);
+                //if (LoadParams != null && !string.IsNullOrEmpty(LoadParams.CategoryValue)) 
+                //  StrViewDfltItem = LoadParams.CategoryValue;
+
                 for (int i = 1; i < 6; i++)
                 {
                   StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, string.Format("AntViewItem{0}", i), string.Empty);
@@ -447,7 +453,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     Boolreturn = false;
                     Boolselect = true;
                     Wselectedlabel = StrViewDfltText;
-                    StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", StrLayOut);
+                    //if (LoadParams != null && !string.IsNullOrEmpty(LoadParams.Layout) && (LoadParams.Layout == "0" || LoadParams.Layout == "1" || LoadParams.Layout == "2" || LoadParams.Layout == "3" || LoadParams.Layout == "4"))
+                    //{
+                    //  StrLayOut = int.Parse(LoadParams.Layout);
+                    //}
+                    //else 
+                      StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", StrLayOut);
+                    
                     if (wDfltSort != "(none)" && wDfltSort.Length > 0)
                     {
                         StrSorta = wDfltSort;

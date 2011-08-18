@@ -4012,6 +4012,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static void Load_Config(string CurrentConfig, bool create_temp)
     {
+      
       conf = new Configuration(CurrentConfig, create_temp);
       if ((conf.Boolreturn) && (conf.Wselectedlabel == string.Empty))
       {
