@@ -4196,7 +4196,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnLaunchAMCglobal_Click(object sender, EventArgs e)
         {
+          if (CatalogType.SelectedIndex == 0 || CatalogType.SelectedIndex == 10) // can be "10" = "MyFilms DB", if standalone with extended features/DB-fields is supported...
             launchAMCmanager();
+          else
+            MessageBox.Show("Cannot launch AMC Updater !  \n AMC Updater is not supported for external catalogs other than AMC  !", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          jzgjkgjhjhgk
         }
     
         private void launchAMCmanager()
