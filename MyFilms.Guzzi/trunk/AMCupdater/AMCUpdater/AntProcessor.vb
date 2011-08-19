@@ -513,6 +513,7 @@ Public Class AntProcessor
                     Else
                         wtitle = CurrentNode.Attributes("OriginalTitle").Value
                     End If
+
                     'Dim wotitle As String = wtitle
                     'If (Not IsNothing(CurrentNode.Attributes("OriginalTitle"))) Then
                     '    If (CurrentNode.Attributes("OriginalTitle").Value.Length <> 0) Then
@@ -825,6 +826,7 @@ Public Class AntProcessor
                                 .GrabberOverrideTitleLimit = CurrentSettings.Grabber_Override_TitleLimit
                                 .OnlyAddMissingData = CurrentSettings.Only_Add_Missing_Data ' added for "add missing data" mode"
                                 .OnlyUpdateNonEmptyData = CurrentSettings.Only_Update_With_Nonempty_Data
+                                .Dont_Ask_Interactive = CurrentSettings.Manual_Dont_Ask_Interactive ' added for silent updates without asking user to choose movie on failed auto matches
 
                                 .ProcessFile(AntRecord.Process_Mode_Names.Update)
                                 .SaveProgress()

@@ -1995,6 +1995,7 @@ Public Class Form1
         CurrentSettings.File_Types_Trailer = txtTrailerIentificationStrings.Text
         CurrentSettings.Internet_Parser_Path = txtParserFilePath.Text
         CurrentSettings.Dont_Ask_Interactive = chkDontAskInteractive.Checked
+        CurrentSettings.Manual_Dont_Ask_Interactive = chkManualDontAskInteractive.Checked
         CurrentSettings.Log_Level = cbLogLevel.SelectedItem
         CurrentSettings.Movie_Fanart_Path = txtFanartFolder.Text
         CurrentSettings.Movie_PersonArtwork_Path = txtPersonArtworkFolder.Text
@@ -2159,6 +2160,7 @@ Public Class Form1
             txtManualXMLPath.Text = CurrentSettings.XML_File
             chkReadDVDLabel.Checked = CurrentSettings.Read_DVD_Label
             chkDontAskInteractive.Checked = CurrentSettings.Dont_Ask_Interactive
+            chkManualDontAskInteractive.Checked = CurrentSettings.Manual_Dont_Ask_Interactive
             chkFolderNameIsGroupName.Checked = CurrentSettings.Folder_Name_Is_Group_Name
             chkParsePlaylistFiles.Checked = CurrentSettings.Parse_Playlist_Files
             chkParseTrailers.Checked = CurrentSettings.Parse_Trailers

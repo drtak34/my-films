@@ -369,6 +369,19 @@ Public Class AntSettings
             SetAttribute("Dont_Ask_Interactive", value)
         End Set
     End Property
+    Public Property Manual_Dont_Ask_Interactive() As Boolean
+        Get
+            Dim tempvalue As String = ReadAttribute("Manual_Dont_Ask_Interactive").ToLower
+            If tempvalue = "true" Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            SetAttribute("Manual_Dont_Ask_Interactive", value)
+        End Set
+    End Property
     Public Property Manual_XML_File() As String
         Get
             Return ReadAttribute("Manual_XML_File")
