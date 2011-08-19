@@ -73,7 +73,7 @@ Public Class AntRecord
         'IMDB_Id = 18
         'IMDBrank = 19
         'Studio = 20
-        'Edition= 21
+        'Edition = 21
         'Fanart = 22
         'Generic1 = 23
         'Generic2 = 24
