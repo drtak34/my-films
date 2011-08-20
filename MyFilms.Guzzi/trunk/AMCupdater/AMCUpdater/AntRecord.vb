@@ -1392,9 +1392,7 @@ Public Class AntRecord
                             TempValue = TempValue.Substring(TempValue.LastIndexOf("\") + 1)
                         End If
                     End If
-                    If _XMLElement.Attributes(CurrentAttribute) Is Nothing Or _XMLElement.Attributes(CurrentAttribute).Value Is Nothing Or TempValue <> _XMLElement.Attributes(CurrentAttribute).Value.ToString Then
-                        CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
-                    End If
+                    CreateOrUpdateAttribute(CurrentAttribute, TempValue, ProcessMode)
                 End If
             End If
 
