@@ -1682,45 +1682,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "createfanart": // create fanart from local media
-                    Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-                    Thread.Sleep(50);
                     Menu_CreateFanart();
                     break;
 
                 case "createfanartmultiimage": // create single fanart from local media on pause position
-                  {
-                    GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
-                    if (dlgPrgrs != null)
-                    {
-                      dlgPrgrs.Reset();
-                      dlgPrgrs.DisplayProgressBar = false;
-                      dlgPrgrs.ShowWaitCursor = true;
-                      dlgPrgrs.DisableCancel(true);
-                      dlgPrgrs.SetHeading("MyFilms Fanart Creator");
-                      dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
-                      dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
-                      dlgPrgrs.Percentage = 0;
-                    }
-                    new System.Threading.Thread(delegate()
-                    {
-                      Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-                      Thread.Sleep(50);
-                      //  Menu_CreateFanartMultiImage(false, dlgPrgrs);
-                      Menu_CreateFanartMultiImage(true, r =>
-                      {
-                        dlgPrgrs.Percentage = r;
-                        return dlgPrgrs.ShouldRenderLayer();
-                      });
-                      if (dlgPrgrs != null) { dlgPrgrs.Percentage = 100; dlgPrgrs.SetLine(1, "done"); dlgPrgrs.Close(); }
-                      GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
-                        {
-                          dlgPrgrs.ShowWaitCursor = false;
-                        // enter here what to load after background thread has finished !
-                        return 0;
-                      }, 0, 0, null);
-                    }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
-                    return;
-                  }  
+                    Menu_CreateFanartMultiImage();
+                    break;
 
                 case "createfanartonposition": // create single fanart from local media on pause position
                     Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
@@ -1758,34 +1725,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
-
         private void Menu_LoadTMDBposter()
         {
-          setProcessAnimationStatus(true, m_SearchAnimation);
           //Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-          string wtitle = string.Empty;
-          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
-            wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-          if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          string wttitle = string.Empty;
-          if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-            wttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-          if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0 && MyFilms.conf.StrFanart)
+          string fanartTitle, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+          fanartTitle = this.GetFanartTitle(out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+          if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
           {
-            int wyear = 0;
-            try { wyear = System.Convert.ToInt16(MyFilms.r[MyFilms.conf.StrIndex]["Year"]); }
-            catch { }
-            string wdirector = string.Empty;
-            try { wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"]; }
-            catch { }
-            LogMyFilms.Debug("MyFilmsDetails (posters - menu select) Download Posters: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
             Download_TMDB_Posters(wtitle, wttitle, wdirector, wyear.ToString(), true, GetID, wtitle);
           }
           afficher_detail(true);
-          setProcessAnimationStatus(false, m_SearchAnimation);
         }
 
         private void Menu_CreateFanart_OnMoviePosition()
@@ -1797,45 +1746,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (!g_Player.Stopped && g_Player.HasVideo && !string.IsNullOrEmpty(g_Player.CurrentFile)) // g_Player.Paused && 
           {
-            //string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-            //if (path.Contains(";"))
-            //  path = path.Substring(0, path.IndexOf(";"));
-            bool success = false;
-
-            setProcessAnimationStatus(true, m_SearchAnimation);
-            string wtitle = string.Empty;
-            if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
-              wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-            if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-              wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-            string wttitle = string.Empty;
-            if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-              wttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-            if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-              wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-            if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0 && MyFilms.conf.StrFanart)
+            GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+            if (dlgPrgrs != null)
             {
-              int wyear = 0;
-              try { wyear = System.Convert.ToInt16(MyFilms.r[MyFilms.conf.StrIndex]["Year"]); }
-              catch { }
-              string wdirector = string.Empty;
-              try { wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"]; }
-              catch { }
-              LogMyFilms.Debug("CreateSingleFanartLocalFromMoviePosition: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - year: '" + wyear.ToString() + "' - mediafile: '" + file + "'");
-              success = GrabUtil.GetFanartFromMovie(
-                wtitle,
-                wttitle,
-                wyear.ToString(),
-                MyFilms.conf.StrPathFanart,
-                false,
-                MyFilms.conf.StrTitle1,
-                file,
-                "localfanart",
-                currentposition);
+              dlgPrgrs.Reset();
+              dlgPrgrs.DisplayProgressBar = false;
+              dlgPrgrs.ShowWaitCursor = true;
+              dlgPrgrs.DisableCancel(true);
+              dlgPrgrs.SetHeading("MyFilms Fanart Creator");
+              dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+              dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
+              dlgPrgrs.Percentage = 0;
             }
-            if (success)
-              afficher_detail(true);
-            setProcessAnimationStatus(false, m_SearchAnimation);
+            new System.Threading.Thread(delegate()
+            {
+              string fanartTitle, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+              fanartTitle = this.GetFanartTitle(out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+              if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
+              {
+                if (GrabUtil.GetFanartFromMovie(wtitle, wyear.ToString(), MyFilms.conf.StrPathFanart, false, file, "localfanart", currentposition))
+                  afficher_detail(true);
+              }
+              if (dlgPrgrs != null)
+                dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
+              GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+              {
+                // this will be executed after background thread finished
+                return 0;
+              }, 0, 0, null);
+            }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
+            return;
           }
           else
           {
@@ -1843,121 +1783,95 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
-        private void Menu_CreateFanartMultiImage(bool test, Func<byte, bool> progressCallback)
+        private void Menu_CreateFanartMultiImage()
         {
-          progressCallback(Byte.MinValue);
-          string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-          if (path.Contains(";"))
-            path = path.Substring(0, path.IndexOf(";"));
-          bool success = false;
-
-          // setProcessAnimationStatus(true, m_SearchAnimation);
-          string wtitle = string.Empty;
-          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
-            wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-          if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          string wttitle = string.Empty;
-          if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-            wttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-          if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0 && MyFilms.conf.StrFanart)
+          GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+          if (dlgPrgrs != null)
           {
-            int wyear = 0;
-            try { wyear = System.Convert.ToInt16(MyFilms.r[MyFilms.conf.StrIndex]["Year"]); }
-            catch { }
-            string wdirector = string.Empty;
-            try { wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"]; }
-            catch { }
-            LogMyFilms.Debug("CreateFanartLocal: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - year: '" + wyear.ToString() + "' - mediafile: '" + path + "'");
-            success = GrabUtil.GetFanartFromMovie(
-              wtitle,
-              wttitle,
-              wyear.ToString(),
-              MyFilms.conf.StrPathFanart,
-              false,
-              MyFilms.conf.StrTitle1,
-              path,
-              "localfanart",
-              0);
+            dlgPrgrs.Reset();
+            dlgPrgrs.DisplayProgressBar = false;
+            dlgPrgrs.ShowWaitCursor = true;
+            dlgPrgrs.DisableCancel(true);
+            dlgPrgrs.SetHeading("MyFilms Fanart Creator");
+            dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+            dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
+            dlgPrgrs.Percentage = 0;
           }
-          int i = 50;
-          int ii = 100;
-          if (!progressCallback((byte)((float)i / ii * 100)))
-            return;
-          if (success)
-            afficher_detail(true);
-          // setProcessAnimationStatus(false, m_SearchAnimation);
-          progressCallback(Byte.MaxValue);
+          new System.Threading.Thread(delegate()
+          {
+            Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+            Thread.Sleep(50);
+            string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+            if (path.Contains(";"))
+              path = path.Substring(0, path.IndexOf(";"));
+            string fanartTitle, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+            fanartTitle = this.GetFanartTitle(out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+            if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
+            {
+              if (GrabUtil.GetFanartFromMovie(wtitle, wyear.ToString(), MyFilms.conf.StrPathFanart, false, path, "localfanart", 0))
+                afficher_detail(true);
+            }
+
+            if (dlgPrgrs != null)
+              dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
+            GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+            {
+              // this will be executed after background thread finished
+              return 0;
+            }, 0, 0, null);
+          }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
+          return;
         }
 
         private void Menu_CreateFanart()
         {
-          string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-          if (path.Contains(";"))
-            path = path.Substring(0, path.IndexOf(";"));
-          bool success = false;
-
-          setProcessAnimationStatus(true, m_SearchAnimation);
-          string wtitle = string.Empty;
-          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
-            wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-          if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          string wttitle = string.Empty;
-          if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-            wttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-          if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0 && MyFilms.conf.StrFanart)
           {
-            int wyear = 0;
-            try { wyear = System.Convert.ToInt16(MyFilms.r[MyFilms.conf.StrIndex]["Year"]); }
-            catch { }
-            string wdirector = string.Empty;
-            try { wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"]; }
-            catch { }
-            LogMyFilms.Debug("CreateFanartLocal: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - year: '" + wyear.ToString() + "' - mediafile: '" + path + "'");
-            success = GrabUtil.GetFanartFromMovie(
-              wtitle,
-              wttitle,
-              wyear.ToString(),
-              MyFilms.conf.StrPathFanart,
-              true,
-              MyFilms.conf.StrTitle1,
-              path,
-              "localfanart",
-              0);
-          }
-          if (success)
-            afficher_detail(true);
-          setProcessAnimationStatus(false, m_SearchAnimation);
+            GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+            if (dlgPrgrs != null)
+            {
+              dlgPrgrs.Reset();
+              dlgPrgrs.DisplayProgressBar = false;
+              dlgPrgrs.ShowWaitCursor = true;
+              dlgPrgrs.DisableCancel(true);
+              dlgPrgrs.SetHeading("MyFilms Fanart Creator");
+              dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+              dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
+              dlgPrgrs.Percentage = 0;
+            }
+            new System.Threading.Thread(delegate()
+            {
+              Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+              Thread.Sleep(50);
+              string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+              if (path.Contains(";"))
+                path = path.Substring(0, path.IndexOf(";"));
+              string fanartTitle, wtitle, wttitle, wftitle, wdirector = string.Empty; int wyear = 0;
+              fanartTitle = this.GetFanartTitle(out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+              if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
+              {
+                if (GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, true, path, "localfanart", 0))
+                  afficher_detail(true);
+              }
+              
+              if (dlgPrgrs != null)
+                dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
+              GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+              {
+                // this will be executed after background thread finished
+                return 0;
+              }, 0, 0, null);
+            }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
+            return;
+          }  
         }
 
         private void Menu_LoadFanart()
         {
-          setProcessAnimationStatus(true, m_SearchAnimation);
           Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-          string wtitle = string.Empty;
-          string personartworkpath = string.Empty;
-          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
-            wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-          if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          string wttitle = string.Empty;
-          if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-            wttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-          if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0 && MyFilms.conf.StrFanart)
+          string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+          fanartTitle = this.GetFanartTitle(out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+          if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
           {
-            int wyear = 0;
-            try { wyear = System.Convert.ToInt16(MyFilms.r[MyFilms.conf.StrIndex]["Year"]); }
-            catch { }
-            string wdirector = string.Empty;
-            try { wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"]; }
-            catch { }
             LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download Fanart: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
             if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
             {
@@ -1965,9 +1879,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
             }
             Download_Backdrops_Fanart(wtitle, wttitle, wdirector.ToString(), wyear.ToString(), true, GetID, wtitle, personartworkpath);
+            afficher_detail(true);
           }
-          afficher_detail(true);
-          setProcessAnimationStatus(false, m_SearchAnimation);
         }
 
         private void SetTraktShout(MFMovie movie)
@@ -2782,35 +2695,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlgPrgrs.ShowWaitCursor = false;
                 dlgPrgrs.Close();
 
-                //MyFilms.DelegateUpdateProgress myProgress = new MyFilms.DelegateUpdateProgress(MyFilms.UpdateMyProgressbar);
-                //  myProgressbar.Invoke(myProgress, "test");
                 
-                //Thread LoadThread = new Thread(delegate()
-                //  {
-                //    dlgPrgrs.Percentage = 10;
-                //    Result = Grab.GetDetail(
-                //      url,
-                //      downLoadPath,
-                //      wscript,
-                //      true,
-                //      MyFilms.conf.GrabberOverrideLanguage,
-                //      MyFilms.conf.GrabberOverridePersonLimit,
-                //      MyFilms.conf.GrabberOverrideTitleLimit,
-                //      MyFilms.conf.GrabberOverrideGetRoles);
-                //    if (dlgPrgrs != null)
-                //    {
-                //      dlgPrgrs.Percentage = 100;
-                //      dlgPrgrs.SetLine(1, "Finished loading Movie Details ...");
-                //      Thread.Sleep(200);
-                //      dlgPrgrs.Close();
-                //    }
-                //  });
-                //LoadThread.IsBackground = true;
-                //LoadThread.Priority = ThreadPriority.AboveNormal;
-                //LoadThread.Name = "MyFilmsDetailLoader";
-                //LoadThread.Start();
-                //LoadThread.Join(); // block main thread until background thread finished
-
                 //new System.Threading.Thread(delegate()
                 //  {
                 //    dlgPrgrs.Percentage = 10;
@@ -3685,10 +3570,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (dlg.SelectedLabel == 0)
               {
                 //Get SubTitles and Subwords from otitle and ttitle
-                wotitle_tableau = MyFilms.SubTitleGrabbing(wtitle.ToString());
-                wttitle_tableau = MyFilms.SubTitleGrabbing(wttitle.ToString());
-                wotitle_sub_tableau = MyFilms.SubWordGrabbing(wtitle.ToString(), MinChars, Filter); // Min 3 Chars, Filter true (no der die das)
-                wttitle_sub_tableau = MyFilms.SubWordGrabbing(wttitle.ToString(), MinChars, Filter); // Min 3 Chars, Filter true (no der die das)
+                wotitle_tableau = MyFilms.SubTitleGrabbing(wtitle);
+                wttitle_tableau = MyFilms.SubTitleGrabbing(wttitle);
+                wotitle_sub_tableau = MyFilms.SubWordGrabbing(wtitle, MinChars, Filter); // Min 3 Chars, Filter true (no der die das)
+                wttitle_sub_tableau = MyFilms.SubWordGrabbing(wttitle, MinChars, Filter); // Min 3 Chars, Filter true (no der die das)
                 //First Show Dialog to choose Otitle, Ttitle or substrings - or Keyboard to manually enter searchstring!!!
                 GUIDialogMenu dlgs = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                 if (dlgs == null) return;
@@ -3934,10 +3819,57 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return "";
         }
 
-        private string GetFanartTitle()
+        private string GetFanartTitle(out string wtitle, out string wttitle, out string wftitle, out int wyear, out string wdirector)
         {
-          // ToDo: Collect logic to get fanart title here
-          return "";
+          string fanartTitle = "";
+          wtitle = "";
+          wttitle = "";
+          wftitle = "";
+          wyear = 0;
+          wdirector = "";
+          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0)
+            wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
+          if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+            wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+
+          if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+            wttitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+          if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+            wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+
+          if (MyFilms.r[MyFilms.conf.StrIndex]["FormattedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["FormattedTitle"].ToString().Length > 0)
+            wftitle = MyFilms.r[MyFilms.conf.StrIndex]["FormattedTitle"].ToString();
+          if (wftitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+            wftitle = wftitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+
+          if (MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString().Length > 0 && MyFilms.conf.StrFanart)
+          {
+            try
+            {
+              wyear = System.Convert.ToInt16(MyFilms.r[MyFilms.conf.StrIndex]["Year"]);
+            }
+            catch
+            {
+              wyear = 0;
+            }
+            try
+            {
+              wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"];
+            }
+            catch
+            {
+              wdirector = string.Empty;
+            }
+          }
+          LogMyFilms.Debug("GetFanartTitle: originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - formattedtitle: '" + wftitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
+          if (!string.IsNullOrEmpty(wtitle)) fanartTitle = wtitle;
+          else if (!string.IsNullOrEmpty(wttitle))
+            fanartTitle = wttitle;
+          else if (!string.IsNullOrEmpty(wftitle))
+            fanartTitle = wftitle;
+          else fanartTitle = "";
+
+          return fanartTitle;
         }
   
         //-------------------------------------------------------------------------------------------

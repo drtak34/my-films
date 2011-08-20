@@ -528,9 +528,6 @@ Public Class AntRecord
                         Dim matchingDistanceWithOptions As Integer = Integer.MaxValue
                         Dim index As Integer = -1
                         Dim indexWithOptions As Integer = -1
-                        'Dim indexFirstMatch As Integer
-                        'Dim titleFirstMatch As String
-                        'Dim titleLastMatch As String
                         Dim searchyearHint As Double = 0
 
                         If Double.TryParse(_InternetSearchHintYear, searchyearHint) = False Then
@@ -1873,7 +1870,7 @@ Public Class AntRecord
                                 ' FanartFileExists = CreateArtworkFromMovie(Filename, NewFanartThumbName, Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
                                 ' FanartFileExists = Grabber.GrabUtil.GetCoverartFromMovie(Filename, NewFanartThumbName, GrabUtil.Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
                                 ' public static string GetFanartFromMovie(string title, string ttitle, string year, string artFolder, bool createSeparateImages, string mastertitle, string FileName, string newFanartThumbName, out string filename)
-                                FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(title, ttitleCleaned, year, CurrentSettings.Movie_Fanart_Path, True, CurrentSettings.Master_Title, Filename, NewFanartThumbName, 0)
+                                FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(title, year, CurrentSettings.Movie_Fanart_Path, True, Filename, NewFanartThumbName, 0)
                             End If
                         Catch ex As Exception
                         End Try
