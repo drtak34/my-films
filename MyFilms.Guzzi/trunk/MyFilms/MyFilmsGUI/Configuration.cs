@@ -39,7 +39,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
         // public LoadParameterInfo LoadParams = null;
-        public Configuration(string CurrentConfig, bool create_temp)
+        public Configuration(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
         {
             //-----------------------------------------------------------------------------------------------
             //   Load Config Parameters in MyFilms.xml file (section CurrentConfig)
@@ -84,12 +84,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrSTitle = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntSTitle", string.Empty);
                 if (StrSTitle == string.Empty)
                     StrSTitle = StrTitle1;
+
                 StrViewDfltItem = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltItem", string.Empty);
-                //if (LoadParams != null && !string.IsNullOrEmpty(LoadParams.Category)) 
-                //  StrViewDfltItem = LoadParams.Category;
+                if (loadParams != null && !string.IsNullOrEmpty(loadParams.View))
+                  StrViewDfltItem = loadParams.View;
+
                 StrViewDfltText = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltText", string.Empty);
-                //if (LoadParams != null && !string.IsNullOrEmpty(LoadParams.CategoryValue)) 
-                //  StrViewDfltItem = LoadParams.CategoryValue;
+                if (loadParams != null && !string.IsNullOrEmpty(loadParams.ViewValue))
+                  StrViewDfltItem = loadParams.ViewValue;
 
                 for (int i = 1; i < 6; i++)
                 {

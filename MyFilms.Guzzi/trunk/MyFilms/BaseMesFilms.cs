@@ -49,6 +49,21 @@ namespace MyFilmsPlugin.MyFilms
         private static MyFilmsData myfilmsdata;
 
         public static ReaderWriterLockSlim _dataLock = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+        public class MFConfig
+        {
+          public string Name
+          {
+            get { return name; }
+            set { name = value; }
+          } private string name;
+
+          public List<KeyValuePair<string, string>> ViewList
+          {
+            get { return viewList; }
+            set { viewList = value; }
+          }
+          private List<KeyValuePair<string, string>> viewList;
+        }
 
         public enum MostRecentType
         {
@@ -501,7 +516,160 @@ namespace MyFilmsPlugin.MyFilms
           LogMyFilms.Debug("GetMovies()- movies matched: '" + movies.Count + "'");
         }
 
-        #region Most Recent Helpers
+        #region API for Basic Home Editors
+        /// <summary>
+        /// returns an array of KeyValue ViewLists and name for each config
+        /// .Name = config name
+        /// .ViewList = List of KeyValues with view name and pretty name
+        /// </summary>        
+        public static ArrayList GetConfigViewLists()
+        {
+          ArrayList configViewLists = new ArrayList();
+          List<KeyValuePair<string, string>> viewList = new List<KeyValuePair<string, string>>();
+
+          using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          {
+            int MesFilms_nb_config = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "NbConfig", -1);
+            ArrayList configs = new ArrayList();
+            for (int i = 0; i < MesFilms_nb_config; i++) configs.Add(XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
+
+            foreach (string config in configs)
+            {
+              MFConfig configViewList = new MFConfig();
+              string[] StrViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty }, StrViewText = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty }, StrViewValue = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+
+              string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+              bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+              bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
+              for (int i = 1; i < 6; i++)
+              {
+                StrViewItem[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewItem{0}", i), string.Empty);
+                StrViewText[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewText{0}", i), string.Empty);
+                StrViewValue[i - 1] = XmlConfig.ReadXmlConfig("MyFilms", config, string.Format("AntViewValue{0}", i), string.Empty);
+              }
+
+              if (System.IO.File.Exists(Catalog))
+              {
+                viewList.Add(new KeyValuePair<string, string>("all", GUILocalizeStrings.Get(342)));
+                viewList.Add(new KeyValuePair<string, string>("year", GUILocalizeStrings.Get(345)));
+                viewList.Add(new KeyValuePair<string, string>("category", GUILocalizeStrings.Get(10798664)));
+                viewList.Add(new KeyValuePair<string, string>("country", GUILocalizeStrings.Get(200026)));
+                viewList.Add(new KeyValuePair<string, string>("actors", GUILocalizeStrings.Get(10798667)));
+                for (int i = 0; i < 5; i++) // userdefined views
+                {
+                  if (StrViewItem[i] != null && StrViewItem[i] != "(none)" && (StrViewItem[i].Length > 0))
+                  {
+                    string viewName = "", viewDisplayName = "";
+                    viewName = (string.Format("view{0}", i));
+                    if ((StrViewText[i] == null) || (StrViewText[i].Length == 0))
+                      viewDisplayName = StrViewItem[i];   // specific user View1
+                    else
+                      viewDisplayName = StrViewText[i];   // specific Text for View1
+                    viewList.Add(new KeyValuePair<string, string>(viewName, viewDisplayName));
+                  }
+                }
+              }
+              configViewList.Name = config;
+              configViewList.ViewList = viewList;
+              configViewLists.Add(configViewList);
+            }
+          }
+          return configViewLists;
+        }
+
+        /// <summary>
+        /// returns a string List of available values for a given config & view
+        /// use GetConfigViewLists() to get valid values for config and view
+        /// returns <null> if no values can be evaluated - user should still be able to manually set a value for startparam
+        /// </summary>        
+        public static List<string> GetViewListValues(string config, string view)
+        {
+          List<string> values = new List<string>();
+          ArrayList movies = new ArrayList();
+          movies.Clear();
+          AntMovieCatalog dataExport = new AntMovieCatalog();
+          if (string.IsNullOrEmpty(config) || string.IsNullOrEmpty(view)) 
+            return null;
+
+          using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          {
+            string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+            bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
+            bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
+            string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
+
+            if (System.IO.File.Exists(Catalog))
+            {
+              string champselect = "";
+              string wchampselect = "";
+              ArrayList w_tableau = new ArrayList();
+              int Wnb_enr = 0;
+
+              _dataLock.EnterReadLock();
+              try
+              {
+                dataExport.ReadXml(Catalog);
+              }
+              catch (Exception e)
+              {
+                LogMyFilms.Error(": Error reading xml database after " + dataExport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
+                throw e;
+              }
+              finally
+              {
+                _dataLock.ExitReadLock();
+              }
+              DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect, view + " " + "*");
+              if (results.Length == 0) return null;
+
+              foreach (DataRow enr in results)
+              {
+                bool isdate = false;
+                if (view == "Date" || view == "DateAdded")
+                  isdate = true;
+
+                if (isdate)
+                  champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
+                else
+                  champselect = enr[view].ToString().Trim();
+                ArrayList wtab = MyFilms.Search_String(champselect);
+                for (int wi = 0; wi < wtab.Count; wi++)
+                {
+                  w_tableau.Add(wtab[wi].ToString().Trim());
+                }
+              }
+              w_tableau.Sort(0, w_tableau.Count, null);
+
+              for (int wi = 0; wi != w_tableau.Count; wi++)
+              {
+                champselect = w_tableau[wi].ToString();
+                if (string.Compare(champselect, wchampselect, true) == 0) // Are the strings equal? Then add count!
+                {
+                  Wnb_enr++; // count items of distinct property
+                }
+                else
+                {
+                  if ((Wnb_enr > 0) && (wchampselect.Length > 0))
+                  {
+                    values.Add(wchampselect);
+                  }
+                  Wnb_enr = 1;
+                  wchampselect = champselect;
+                }
+              }
+
+              if ((Wnb_enr > 0) && (wchampselect.Length > 0))
+              {
+                values.Add(wchampselect);
+                Wnb_enr = 0;
+              }
+            }
+          }
+          return values;
+        }
+        #endregion
+
+        #region API for Most Recent movies
 
         /// <summary>
         /// returns the 3 most recent episodes based on criteria

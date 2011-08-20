@@ -690,14 +690,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             Configuration.CurrentConfig = newConfig;
             InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
             InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
-            Load_Config(newConfig, true);
+            Load_Config(newConfig, true, loadParamInfo);
             Fin_Charge_Init(true, true);
           }
         }
         else
         {
           defaultconfig = Configuration.Current_Config();
-          Load_Config(Configuration.CurrentConfig, true);
+          Load_Config(Configuration.CurrentConfig, true, loadParamInfo);
         }
 
         InitFSwatcher(); // load DB watcher for multiseat
@@ -4010,10 +4010,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    private static void Load_Config(string CurrentConfig, bool create_temp)
+    private static void Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
       
-      conf = new Configuration(CurrentConfig, create_temp);
+      conf = new Configuration(CurrentConfig, create_temp, loadParams);
       if ((conf.Boolreturn) && (conf.Wselectedlabel == string.Empty))
       {
         conf.Boolselect = true;
@@ -4508,7 +4508,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //GUIWaitCursor.Show();
             //GUIWindowManager.Process();
             //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-            Load_Config(newConfig, true);
+            Load_Config(newConfig, true, null);
             if (InitialStart)
               Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
               //Loadfacade(); // load facade threaded...
@@ -8891,7 +8891,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
 
-      Load_Config(Configuration.CurrentConfig, true);
+      Load_Config(Configuration.CurrentConfig, true, null);
       Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
       MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml);
     }

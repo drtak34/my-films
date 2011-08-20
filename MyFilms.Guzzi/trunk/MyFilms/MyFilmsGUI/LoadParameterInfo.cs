@@ -18,8 +18,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public string MovieID { get; protected set; }
         public string Play { get; protected set; }
 
-        public string Category { get; protected set; }
-        public string CategoryValue { get; protected set; }
+        public string View { get; protected set; }
+        public string ViewValue { get; protected set; }
 
         public string Layout { get; protected set; }
 
@@ -32,7 +32,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             LogMyFilms.Debug("LoadParameterInfo() : parsing load parameter: '" + loadParam + "'");  
             // MF planned options:
-            // config:<configname>|category:<categoryname>|categoryvalue:<categoryvaluevalue>|search:<searchexpression>|layout:<facadeviewtype>|movieid:<movieid>
+            // config:<configname>|view:<viewname>|viewvalue:<viewvalue>|search:<searchexpression>|layout:<facadeviewtype>|movieid:<movieid>
             // priority order: search overrules property view. propertyvalue is optional. view is optional, config is optional, if not set, last used or default will be used.
             // actors are possible by using property:actors|propertyvalue:actorname
             // if invalid values are given, param start is ignored
@@ -49,8 +49,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MovieID = Regex.Match(loadParam, "movieid:([^|]*)").Groups[1].Value; // movieID - used by Trakt
             Play = Regex.Match(loadParam, "play:([^|]*)").Groups[1].Value; // "true" -> start movie with MovieID
             
-            Category = Regex.Match(loadParam, "category:([^|]*)").Groups[1].Value; // Category name as start grouped view
-            CategoryValue = Regex.Match(loadParam, "categoryvalue:([^|]*)").Groups[1].Value; // Category value, e.g. "Country" to show that category's movies directly
+            View = Regex.Match(loadParam, "view:([^|]*)").Groups[1].Value; // Category name as start grouped view
+            ViewValue = Regex.Match(loadParam, "viewvalue:([^|]*)").Groups[1].Value; // Category value, e.g. "Country" to show that category's movies directly
             Layout = Regex.Match(loadParam, "layout:([^|]*)").Groups[1].Value; // Choose Layout -> 0, 1, 2, 3, 4 for ListView, SmallThumb, BigThumb, FilmStrip, CoverFlow
             Search = Regex.Match(loadParam, "search:([^|]*)").Groups[1].Value; // Start MyFilms with GlobalSearch with that parameter
             if (!bool.TryParse(Regex.Match(loadParam, "VKonfail:([^|]*)").Groups[1].Value, out _ShowVKonFailedSearch)) _ShowVKonFailedSearch = true;
