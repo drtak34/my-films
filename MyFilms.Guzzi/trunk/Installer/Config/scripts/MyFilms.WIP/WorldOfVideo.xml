@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Profile>
+  <Section>
+    <DBName>WorldOfVideo (german)</DBName>
+    <URLPrefix>http://www.world-of-video.de</URLPrefix>
+    <URLSearch>
+      <URL Param1="" Param2="">http:_x002F__x002F_www.world-of-video.de_x002F_Shop_x002F_Suchen_x003F_q_x003D__x0023_Search_x0023__x0026_kat_x003D_mt_x0025_3D1_x0026_sort_x003D_6_x0026_x_x003D_6_x0026_y_x003D_12_x0027_</URL>
+      <KeyStartList Param1="" Param2="">Treffer</KeyStartList>
+      <KeyEndList>Treffer_x0020_in_x0020_Schlagworte</KeyEndList>
+      <KeyStartPage Param1="" Param2="" />
+      <KeyStepPage />
+      <KeyNextPage />
+      <KeyStartTitle Param1="" Param2="">alt_x003D__x0022_</KeyStartTitle>
+      <KeyEndTitle>_x0022_</KeyEndTitle>
+      <KeyTitleIndex />
+      <KeyStartYear Param1="_x0023_REGEX_x0023__x005B__x005E_0-9_x005D_" Param2="_x0020_">_x0026_nbsp_x003B__x007C__x0026_nbsp_x003B_</KeyStartYear>
+      <KeyEndYear>_x0020__x003C__x002F_td_x003E_</KeyEndYear>
+      <KeyYearIndex />
+      <KeyStartDirector Param1="" Param2="" />
+      <KeyEndDirector />
+      <KeyDirectorIndex />
+      <KeyStartLink Param1="_x002F_kino_x002F_" Param2="http:_x002F__x002F_www.cinefacts.de_x002F_kino_x002F_">href_x003D__x0022__x002F_shop</KeyStartLink>
+      <KeyEndLink>_x0022_</KeyEndLink>
+      <KeyLinkIndex />
+      <KeyStartID Param1="" Param2="" />
+      <KeyEndID />
+      <KeyStartOptions Param1="" Param2="" />
+      <KeyEndOptions />
+      <KeyStartAkas Param1="" Param2="" />
+      <KeyEndAkas />
+      <KeyAkasRegExp />
+    </URLSearch>
+    <Details>
+      <KeyStartBody Param1="" Param2="" />
+      <KeyEndBody />
+      <KeyStartOTitle Param1="" Param2="">class_x003D__x0022_c1_x0022__x003E_Originaltitel:_x003C__x002F_dt_x003E_</KeyStartOTitle>
+      <KeyEndOTitle>_x003C_dt_x0020_class_x003D__x0022_</KeyEndOTitle>
+      <KeyOTitleIndex />
+      <KeyOTitlePage />
+      <KeyStartTTitle Param1="" Param2="">_x0020__x003C_title_x003E__x0020_</KeyStartTTitle>
+      <KeyEndTTitle>_x007C_</KeyEndTTitle>
+      <KeyTTitleRegExp />
+      <KeyTTitleIndex />
+      <KeyTTitlePage />
+      <KeyTTitleMaxItems />
+      <KeyTTitleLanguage />
+      <KeyTTitleLanguageAll />
+      <KeyStartImg Param1="_x002F_plakat_x002F_" Param2="http:_x002F__x002F_www.cinefacts.de_x002F_kino_x002F_plakat_x002F_">src_x003D__x0022__x002F_kino</KeyStartImg>
+      <KeyEndImg>_x0022__x0020_</KeyEndImg>
+      <KeyImgIndex />
+      <KeyImgPage />
+      <KeyStartLinkImg Param1="_x002F_kino_x002F_" Param2="http:_x002F__x002F_www.cinefacts.de_x002F_kino_x002F_">_x0023_REGEX_x0023_FILMPLAKAT._x002A__x003F_href_x003D__x0022_</KeyStartLinkImg>
+      <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
+      <KeyLinkImgIndex />
+      <KeyLinkImgPage />
+      <KeyStartRate Param1="" Param2="">FSK:</KeyStartRate>
+      <KeyEndRate>_x003C__x002F_dd_x003E_</KeyEndRate>
+      <KeyRateIndex />
+      <KeyRatePage />
+      <KeyStartRate2 Param1="" Param2="" />
+      <KeyEndRate2 />
+      <KeyRate2Index />
+      <KeyRate2Page />
+      <BaseRating />
+      <KeyStartSyn Param1="_x0023_REGEX_x0023_.mehr." Param2="">KURZINHALT</KeyStartSyn>
+      <KeyEndSyn>_x003C_li_x0020_class_x003D__x0022_c5b_x0022__x003E__x003C_h2_x003E__x003C_</KeyEndSyn>
+      <KeySynIndex />
+      <KeySynPage />
+      <KeyStartRealise Param1="" Param2="">Regie:</KeyStartRealise>
+      <KeyEndRealise>_x003C__x002F_tr_x003E_</KeyEndRealise>
+      <KeyRealiseIndex />
+      <KeyRealisePage />
+      <KeyRealiseRegExp>persondetails._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_als._x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyRealiseRegExp>
+      <KeyRealiseMaxItems />
+      <KeyStartProduct Param1="_x0023_REGEX_x0023_" Param2="">Produzent:</KeyStartProduct>
+      <KeyEndProduct>Darsteller:</KeyEndProduct>
+      <KeyProductIndex />
+      <KeyProductPage />
+      <KeyProductRegExp>persondetails._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_als._x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyProductRegExp>
+      <KeyProductMaxItems />
+      <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">Buch:</KeyStartWriter>
+      <KeyEndWriter>Musik:</KeyEndWriter>
+      <KeyWriterIndex />
+      <KeyWriterPage />
+      <KeyWriterRegExp>persondetails._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyWriterRegExp>
+      <KeyWriterMaxItems />
+      <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0022__x003E_Darsteller:</KeyStartCredits>
+      <KeyEndCredits>_x003C__x002F_table_x003E_</KeyEndCredits>
+      <KeyCreditsRegExp>persondetails._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_als._x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyCreditsRegExp>
+      <KeyCreditsIndex />
+      <KeyCreditsPage />
+      <KeyCreditsMaxItems />
+      <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
+      <KeyStartCountry Param1="" Param2="">Produktionsland:</KeyStartCountry>
+      <KeyEndCountry>_x003C__x002F_a_x003E__x0020_</KeyEndCountry>
+      <KeyCountryRegExp />
+      <KeyCountryIndex />
+      <KeyCountryPage />
+      <KeyStartGenre Param1="_x0023_REGEX_x0023_" Param2="">_x003C_dt_x0020_class_x003D__x0022_c1_x0022__x003E_Genre:_x003C__x002F_dt_x003E_</KeyStartGenre>
+      <KeyEndGenre>_x003C_dt_x0020_class_x003D__x0022_</KeyEndGenre>
+      <KeyGenreRegExp>href._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyGenreRegExp>
+      <KeyGenreIndex />
+      <KeyGenrePage />
+      <KeyStartYear Param1="_x0023_REGEX_x0023__x005B__x005E_0-9_x005D_._x003F_" Param2="">_x003C__x002F_h1_x003E_</KeyStartYear>
+      <KeyEndYear>_x003C__x002F_li_x003E_</KeyEndYear>
+      <KeyYearIndex />
+      <KeyYearPage />
+      <KeyStartLinkPersons Param1="" Param2="" />
+      <KeyEndLinkPersons />
+      <KeyLinkPersonsIndex />
+      <KeyLinkPersonsPage />
+      <KeyStartComment Param1="" Param2="">USERKOMMENTARE</KeyStartComment>
+      <KeyEndComment>_x0020__x0020__x0020__x0020_Bewertung:_x0020__x0009__x0009_</KeyEndComment>
+      <KeyCommentRegExp />
+      <KeyCommentIndex />
+      <KeyCommentPage />
+      <KeyStartLanguage Param1="" Param2="" />
+      <KeyEndLanguage />
+      <KeyLanguageIndex />
+      <KeyLanguagePage />
+      <KeyStartTagline Param1="" Param2="" />
+      <KeyEndTagline />
+      <KeyTaglineIndex />
+      <KeyTaglinePage />
+      <KeyStartCertification Param1="" Param2="">FSK:</KeyStartCertification>
+      <KeyEndCertification>_x003C__x002F_dd_x003E_</KeyEndCertification>
+      <KeyCertificationRegExp />
+      <KeyCertificationIndex />
+      <KeyCertificationPage />
+      <KeyCertificationLanguage />
+      <KeyCertificationLanguageAll />
+      <KeyStartLinkTitles Param1="" Param2="" />
+      <KeyEndLinkTitles />
+      <KeyLinkTitlesIndex />
+      <KeyLinkTitlesPage />
+      <KeyStartLinkCertification Param1="" Param2="" />
+      <KeyEndLinkCertification />
+      <KeyLinkCertificationIndex />
+      <KeyLinkCertificationPage />
+      <KeyStartLinkComment Param1="" Param2="" />
+      <KeyEndLinkComment />
+      <KeyLinkCommentIndex />
+      <KeyLinkCommentPage />
+      <KeyStartDetails2 Param1="" Param2="" />
+      <KeyEndDetails2 />
+      <KeyDetails2Index />
+      <KeyDetails2Page />
+      <KeyStartStudio Param1="" Param2="" />
+      <KeyEndStudio />
+      <KeyStudioIndex />
+      <KeyStudioPage />
+      <KeyStartEdition Param1="" Param2="" />
+      <KeyEndEdition />
+      <KeyEditionIndex />
+      <KeyEditionPage />
+      <KeyStartIMDB_Rank Param1="" Param2="" />
+      <KeyEndIMDB_Rank />
+      <KeyIMDB_RankIndex />
+      <KeyIMDB_RankPage />
+      <KeyStartIMDB_Id Param1="" Param2="" />
+      <KeyEndIMDB_Id />
+      <KeyIMDB_IdIndex />
+      <KeyIMDB_IdPage />
+      <KeyStartTMDB_Id Param1="" Param2="" />
+      <KeyEndTMDB_Id />
+      <KeyTMDB_IdIndex />
+      <KeyTMDB_IdPage />
+      <KeyStartLinkSyn Param1="" Param2="" />
+      <KeyEndLinkSyn />
+      <KeyLinkSynIndex />
+      <KeyLinkSynPage />
+      <KeyStartLinkGeneric1 Param1="" Param2="" />
+      <KeyEndLinkGeneric1 />
+      <KeyLinkGeneric1Index />
+      <KeyLinkGeneric1Page />
+      <KeyStartLinkGeneric2 Param1="" Param2="" />
+      <KeyEndLinkGeneric2 />
+      <KeyLinkGeneric2Index />
+      <KeyLinkGeneric2Page />
+      <KeyStartGeneric1 Param1="" Param2="" />
+      <KeyEndGeneric1 />
+      <KeyGeneric1Index />
+      <KeyGeneric1RegExp />
+      <KeyGeneric1MaxItems />
+      <KeyGeneric1Language />
+      <KeyGeneric1Page />
+      <KeyStartGeneric2 Param1="" Param2="" />
+      <KeyEndGeneric2 />
+      <KeyGeneric2Index />
+      <KeyGeneric2RegExp />
+      <KeyGeneric2MaxItems />
+      <KeyGeneric2Language />
+      <KeyGeneric2Page />
+      <KeyStartGeneric3 Param1="" Param2="" />
+      <KeyEndGeneric3 />
+      <KeyGeneric3Index />
+      <KeyGeneric3RegExp />
+      <KeyGeneric3MaxItems />
+      <KeyGeneric3Language />
+      <KeyGeneric3Page />
+    </Details>
+  </Section>
+</Profile>

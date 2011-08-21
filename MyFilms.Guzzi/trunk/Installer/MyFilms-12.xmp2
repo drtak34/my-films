@@ -117,6 +117,27 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
               <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base.12\AMCUpdater.pdb</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{26d2ab5c-d40d-457b-81bb-e5220f75a2cc}-AMCUpdater.pdb</ZipFileName>
+              <DestinationFilename>%Base%\AMCUpdater.pdb</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base.12\MyFilms_Grabber_Interface.pdb</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0bf20568-b913-4f0b-91a0-1c8362be90be}-MyFilms_Grabber_Interface.pdb</ZipFileName>
+              <DestinationFilename>%Base%\MyFilms_Grabber_Interface.pdb</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>plugins.12\Windows\MyFilms.pdb</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0c163edd-c85d-487c-8006-69c3f2dccf5f}-MyFilms.pdb</ZipFileName>
+              <DestinationFilename>%Plugins%\windows\MyFilms.pdb</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3395,6 +3416,25 @@ Please refer to the Wiki online documentation.</Value>
   <Dependencies>
     <Items>
       <DependencyItem>
+        <Type>MediaPortal</Type>
+        <Id />
+        <MinVersion>
+          <Major>1</Major>
+          <Minor>1</Minor>
+          <Build>6</Build>
+          <Revision>27644</Revision>
+        </MinVersion>
+        <MaxVersion>
+          <Major>1</Major>
+          <Minor>1</Minor>
+          <Build>6</Build>
+          <Revision>27644</Revision>
+        </MaxVersion>
+        <WarnOnly>true</WarnOnly>
+        <Message>MyFilms requires Mediaportal 1.2.</Message>
+        <Name>MediaPortal</Name>
+      </DependencyItem>
+      <DependencyItem>
         <Type>Extension</Type>
         <Id>2869e8cd-579e-4fdb-ad6d-19ff5bd4e46f</Id>
         <MinVersion>
@@ -3452,25 +3492,6 @@ Please refer to the Wiki online documentation.</Value>
         <Name>SubCentral</Name>
       </DependencyItem>
       <DependencyItem>
-        <Type>MediaPortal</Type>
-        <Id />
-        <MinVersion>
-          <Major>1</Major>
-          <Minor>1</Minor>
-          <Build>6</Build>
-          <Revision>27644</Revision>
-        </MinVersion>
-        <MaxVersion>
-          <Major>1</Major>
-          <Minor>1</Minor>
-          <Build>6</Build>
-          <Revision>27644</Revision>
-        </MaxVersion>
-        <WarnOnly>true</WarnOnly>
-        <Message>My Films requires MediaPortal min version 1.1.6.27644 (1.2.0 beta).</Message>
-        <Name>MediaPortal</Name>
-      </DependencyItem>
-      <DependencyItem>
         <Type>Extension</Type>
         <Id>a9c3845a-8718-4712-85cc-26f56520bb9a</Id>
         <MinVersion>
@@ -3492,7 +3513,25 @@ Please refer to the Wiki online documentation.</Value>
     </Items>
   </Dependencies>
   <PluginDependencies>
-    <Items />
+    <Items>
+      <PluginDependencyItem AssemblyName="MyFilms.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.7.0</MinRequiredVersion>
+              <DesignedForVersion>1.1.7.0</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items>
+            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.DB" />
+          </Items>
+        </SubSystemsUsed>
+      </PluginDependencyItem>
+    </Items>
   </PluginDependencies>
   <GeneralInfo>
     <Name>MyFilms</Name>
@@ -3505,15 +3544,15 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>1302</Revision>
+      <Revision>1332</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation />
-    <ReleaseDate>2011-08-10T22:05:54</ReleaseDate>
+    <ReleaseDate>2011-08-21T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1302(MP12RC).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1332(MP12RC).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3652,6 +3691,27 @@ Please refer to the Wiki online documentation.</Value>
         <LocalFileName>Language\MyFilms\strings_hu.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
         <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base.12\AMCUpdater.pdb</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{26d2ab5c-d40d-457b-81bb-e5220f75a2cc}-AMCUpdater.pdb</ZipFileName>
+        <DestinationFilename>%Base%\AMCUpdater.pdb</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base.12\MyFilms_Grabber_Interface.pdb</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0bf20568-b913-4f0b-91a0-1c8362be90be}-MyFilms_Grabber_Interface.pdb</ZipFileName>
+        <DestinationFilename>%Base%\MyFilms_Grabber_Interface.pdb</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>plugins.12\Windows\MyFilms.pdb</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0c163edd-c85d-487c-8006-69c3f2dccf5f}-MyFilms.pdb</ZipFileName>
+        <DestinationFilename>%Plugins%\windows\MyFilms.pdb</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -6597,14 +6657,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{022f98e1-8807-4de0-87e6-4cb1757fc44f}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{4f145100-60bf-4a64-bfa2-68afaedbf154}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d1f77822-e4f6-450c-a465-e0b025f04fcf}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{c1bf0ee5-8dbf-44f3-829b-9da519dfd2df}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
