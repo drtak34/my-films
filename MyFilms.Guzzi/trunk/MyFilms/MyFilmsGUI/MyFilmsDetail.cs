@@ -1894,7 +1894,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
             }
             doUpdateDetailsViewByFinishEvent = true;
-            Download_Backdrops_Fanart(wtitle, wttitle, wftitle, wdirector.ToString(), wyear.ToString(), true, GetID, wtitle, personartworkpath);
+            Download_Backdrops_Fanart(wtitle, wttitle, wftitle, wdirector.ToString(), wyear.ToString(), true, GetID, fanartTitle, personartworkpath);
           }
         }
 
@@ -3883,15 +3883,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               wdirector = string.Empty;
             }
           }
-          if (!string.IsNullOrEmpty(mastertitle))
-            fanartTitle = mastertitle;
-          else if (!string.IsNullOrEmpty(wtitle))
-            fanartTitle = wtitle;
-          else if (!string.IsNullOrEmpty(wttitle))
-            fanartTitle = wttitle;
-          else if (!string.IsNullOrEmpty(wftitle))
-            fanartTitle = wftitle;
-          else fanartTitle = "";
+          if (MyFilms.conf.StrTitle1 == "FormattedTitle") // special setting for formatted title - we don't want to use it, as it is usually too long and causes problems with path length
+          {
+            if (!string.IsNullOrEmpty(wttitle))
+              fanartTitle = wttitle;
+            else if (!string.IsNullOrEmpty(wtitle))
+              fanartTitle = wtitle;
+            else
+              fanartTitle = wftitle;
+          } 
+          else
+          {
+            if (!string.IsNullOrEmpty(mastertitle))
+              fanartTitle = mastertitle;
+            else if (!string.IsNullOrEmpty(wtitle))
+              fanartTitle = wtitle;
+            else if (!string.IsNullOrEmpty(wttitle))
+              fanartTitle = wttitle;
+            else if (!string.IsNullOrEmpty(wftitle))
+              fanartTitle = wftitle;
+            else fanartTitle = "";
+          }
 
           LogMyFilms.Debug("GetFanartTitle: returning fanartTitle: '" + fanartTitle + "' - mastertitle (" + MyFilms.conf.StrTitle1 + ") =  '" + mastertitle + "' - originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - formattedtitle: '" + wftitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
           return fanartTitle;
@@ -4258,8 +4270,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //-------------------------------------------------------------------------------------------
 
         public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group)
+        {
+          return Search_Fanart(wtitle2, main, searched, rep, filecover, group, null);
+        }
+        public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group, DataRow record)
         //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
         {
+          LogMyFilms.Debug("Search_Fanart(): Using ");
             string[] wfanart = new string[2];
             wfanart[0] = " ";
             wfanart[1] = " ";
@@ -4309,7 +4326,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 catch (Exception e)
                     {
-                        LogMyFilms.Debug("Title too long to create fanart path/filename from it - not loading fanart! - Exception: " + e.ToString());
+                        LogMyFilms.Error("Title too long to create fanart path/filename from it - not loading fanart! - Exception: " + e.ToString());
                         return wfanart;
                     }
                 
@@ -4321,6 +4338,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     wfanart[1] = "file";
                     return wfanart;
                 }
+
                 if (System.IO.Directory.Exists(safeName))
                 {
                     if ((main) || (searched == "file"))
@@ -4329,6 +4347,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                             wfanart[0] = System.IO.Directory.GetFiles(safeName)[0].ToString();
                             wfanart[1] = "file";
+                            LogMyFilms.Debug("Search_Fanart(): File Mode - searchtitle = '" + wtitle2 + "', safename = '" + safeName + "'wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                             return wfanart;
                         }
                     }
@@ -4347,6 +4366,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     try { System.IO.Directory.CreateDirectory(safeName); }
                     catch { }
                 }
+
                 // Added to support fanart for external catalogs
                 switch (MyFilms.conf.StrFileType)
                 {
@@ -4568,22 +4588,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           
             //ImageSwapper backdrop = new ImageSwapper();
             string[] wfanart = new string[2];
-            string wtitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
-      			//Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
-            if (MyFilms.conf.StrTitle1 != "OriginalTitle")
-            {
 
-                if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
-                    wtitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
-            }
+            string fanartTitle, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+            fanartTitle = GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+
+            //string fanartTitle = MyFilms.r[MyFilms.conf.StrIndex]["OriginalTitle"].ToString();
+      			//Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
+            //if (MyFilms.conf.StrTitle1 != "OriginalTitle")
+            //{
+
+            //    if (MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"] != null && MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString().Length > 0)
+            //        fanartTitle = MyFilms.r[MyFilms.conf.StrIndex]["TranslatedTitle"].ToString();
+            //}
             if (ImgFanartDir != null)
             {
-                wfanart = Search_Fanart(wtitle, false, "dir", false, file, string.Empty);
+              wfanart = Search_Fanart(fanartTitle, false, "dir", false, file, string.Empty);
                 LogMyFilms.Debug("(afficher_detail): Backdrops-File (dir): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             }
             else
             {
-                wfanart = Search_Fanart(wtitle, false, "file", false, file, string.Empty);
+              wfanart = Search_Fanart(fanartTitle, false, "file", false, file, string.Empty);
                 LogMyFilms.Debug("(afficher_detail): Backdrops-File (file): wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             }
 
@@ -4616,7 +4640,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     GUIControl.ShowControl(GetID, (int)Controls.CTRL_Fanart);
                 }
             }
-            MyFilms.currentMovie.Fanart = Search_Fanart(wtitle, false, "file", false, file, string.Empty)[0]; 
+            MyFilms.currentMovie.Fanart = Search_Fanart(fanartTitle, false, "file", false, file, string.Empty)[0]; 
             //MyFilms.currentMovie.Fanart = wfanart[0];  
 
             if (MyFilms.conf.StrStorage.Length != 0 && MyFilms.conf.StrStorage != "(none)" && checkfileavailability)

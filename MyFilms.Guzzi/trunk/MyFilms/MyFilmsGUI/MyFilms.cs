@@ -2541,7 +2541,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       currentFanartList.Clear(); // clear list from former content
       string[] wfanart = new string[2];
 
-      wfanart = MyFilmsDetail.Search_Fanart(facadeView.SelectedListItem.Label, false, "dir", false, "false", string.Empty);
+      string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+      fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+//       fanartTitle = facadeView.SelectedListItem.Label;
+      wfanart = MyFilmsDetail.Search_Fanart(fanartTitle, false, "dir", false, "false", string.Empty);
 
       if (wfanart[1] == "dir")
         fanartDirectory = wfanart[0];
@@ -2580,9 +2583,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         currentFanartList.Clear();
         if (movie) 
-          GetRandomFanartForFilms(50);
+          GetRandomFanartForFilms(25);
         else
-          GetRandomFanartForGroups(50); // Limit items for performance reasons...
+          GetRandomFanartForGroups(25); // Limit items for performance reasons...
       }
       if (currentFanartList.Count == 0)
         newFanart = " ";
@@ -2749,23 +2752,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         string[] wfanart = new string[2];
 
-        string wtitle = currentItem.Label;
-
+        string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+        fanartTitle = MyFilmsDetail.GetFanartTitle(r[facadeView.SelectedListItem.ItemId], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+        // fanartTitle = currentItem.Label;
         //if (MyFilms.conf.StrTitle1 == "FormattedTitle") // added to get fanart displayed when mastertitle is set to formattedtitle
         //{
-        //  wtitle = MyFilms.r[facadeView.SelectedListItem.ItemId]["OriginalTitle"].ToString();
+        //  fanartTitle = MyFilms.r[facadeView.SelectedListItem.ItemId]["OriginalTitle"].ToString();
         //  //Added by Guzzi to fix Fanartproblem when Mastertitle is set to OriginalTitle
         //  if (MyFilms.conf.StrTitle1 != "OriginalTitle")
         //  {
 
         //    if (MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"] != null && MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString().Length > 0)
-        //      wtitle = MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
+        //      fanartTitle = MyFilms.r[facadeView.SelectedListItem.ItemId]["TranslatedTitle"].ToString();
         //  }
         //}
-        //string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
-        //fanartTitle = MyFilmsDetail.GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
-
-        wfanart = MyFilmsDetail.Search_Fanart(wtitle, true, "file", false, currentItem.ThumbnailImage, string.Empty);
+        LogMyFilms.Debug("(Load_Lstdetail): FanartTitle from facadeview = '" + fanartTitle + "'");
+        
+        wfanart = MyFilmsDetail.Search_Fanart(fanartTitle, true, "file", false, currentItem.ThumbnailImage, string.Empty);
         if (conf.StrFanartDefaultViewsUseRandom)
         {
           string FilmFanart = GetNewRandomFanart(true, true); // resets and populates fanart list and selects a random one
@@ -2788,7 +2791,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         backdrop.Filename = wfanart[0];
         MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
-        LogMyFilms.Debug("MyFilm (Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "', Backdrops-File: backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+        LogMyFilms.Debug("(Load_Lstdetail): Fanart-Status: '" + backdrop.Active + "', Backdrops-File: backdrop.Filename = wfanart[X]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
 
         conf.FileImage = currentItem.ThumbnailImage;
         MyFilmsDetail.setGUIProperty("picture", MyFilms.conf.FileImage, true);
