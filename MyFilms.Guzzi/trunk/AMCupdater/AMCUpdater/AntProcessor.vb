@@ -520,15 +520,11 @@ Public Class AntProcessor
                     '        wotitle = Grabber.GrabUtil.normalizeTitle(CurrentNode.Attributes("OriginalTitle").Value)
                     '    End If
                     'End If
-                    'If (((Not _ManualMissingFanartDownload) Or (_ManualMissingFanartDownload And ManualTestMissingFanart(wtitle))) And (_ManualOperation = "Download Fanart")) Or (Not _ManualOperation = "Download Fanart") Then
-                    'If (_ManualMissingFanartDownload And (Not _ManualMissingFanartDownload Or Not ManualTestMissingFanart(wtitle)) Or _ManualOperation <> "Download Fanart") And _ManualOperation = "Download Fanart" Then Continue While
-                    'If Not _ManualMissingFanartDownload Or Not ManualTestMissingFanart(wtitle) Then Continue While
-                    'If (_ManualOperation <> "Download Fanart") Or ((_ManualOperation = "Download Fanart") And ((Not _ManualMissingFanartDownload) Or (_ManualMissingFanartDownload And ManualTestMissingFanart(wtitle)))) Then
 
                     ' skip those:
                     If _ManualOperation = "Download Fanart" Then
                         If _ManualMissingFanartDownload Then
-                            If Not ManualTestMissingFanart(wtitle) Then Continue While
+                            If Not ManualTestMissingFanart_IsUpdateNeeded(wtitle) Then Continue While
                         End If
                     End If
 
@@ -1982,7 +1978,7 @@ Public Class AntProcessor
                                     End If
                                 End If
                             End If
-                            End If
+                        End If
                     End If
                 Next row
             End If
@@ -2662,7 +2658,7 @@ Public Class AntProcessor
         End If
 
     End Sub
-    Public Function ManualTestMissingFanart(ByVal wtitle As String) As Boolean
+    Public Function ManualTestMissingFanart_IsUpdateNeeded(ByVal wtitle As String) As Boolean
 
         wtitle = Grabber.GrabUtil.CreateFilename(wtitle.ToLower().Trim()).Replace(" ", ".")
         '        If (System.IO.Directory.Exists(CurrentSettings.Movie_Fanart_Path & "\\{" & wtitle & "}")) Then
