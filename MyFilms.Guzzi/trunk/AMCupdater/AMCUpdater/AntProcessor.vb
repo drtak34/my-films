@@ -520,38 +520,49 @@ Public Class AntProcessor
                     '        wotitle = Grabber.GrabUtil.normalizeTitle(CurrentNode.Attributes("OriginalTitle").Value)
                     '    End If
                     'End If
+                    'If (((Not _ManualMissingFanartDownload) Or (_ManualMissingFanartDownload And ManualTestMissingFanart(wtitle))) And (_ManualOperation = "Download Fanart")) Or (Not _ManualOperation = "Download Fanart") Then
+                    'If (_ManualMissingFanartDownload And (Not _ManualMissingFanartDownload Or Not ManualTestMissingFanart(wtitle)) Or _ManualOperation <> "Download Fanart") And _ManualOperation = "Download Fanart" Then Continue While
+                    'If Not _ManualMissingFanartDownload Or Not ManualTestMissingFanart(wtitle) Then Continue While
+                    'If (_ManualOperation <> "Download Fanart") Or ((_ManualOperation = "Download Fanart") And ((Not _ManualMissingFanartDownload) Or (_ManualMissingFanartDownload And ManualTestMissingFanart(wtitle)))) Then
 
-                    If (((Not _ManualMissingFanartDownload) Or (_ManualMissingFanartDownload And ManualTestMissingFanart(wtitle))) And (_ManualOperation = "Download Fanart")) Or (Not _ManualOperation = "Download Fanart") Then
-                        If _ManualParameterMatchAll = True Then
-                            'We're matching all records - proceed with editing
-                            Dim wyear As String = ""
-                            If (Not IsNothing(CurrentNode.Attributes("Year"))) Then
-                                wyear = CurrentNode.Attributes("Year").Value
-                            End If
-                            If (Not IsNothing(CurrentNode.Attributes("Director"))) Then
-                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, CurrentNode.Attributes("Director").Value, wyear})
-                            Else
-                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, "", wyear})
-                            End If
-                            LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
+                    ' skip those:
+                    If _ManualOperation = "Download Fanart" Then
+                        If _ManualMissingFanartDownload Then
+                            If Not ManualTestMissingFanart(wtitle) Then Continue While
+                        End If
+                    End If
+
+                    If _ManualParameterMatchAll = True Then
+                        'We're matching all records - proceed with editing
+                        Dim wyear As String = ""
+                        If (Not IsNothing(CurrentNode.Attributes("Year"))) Then
+                            wyear = CurrentNode.Attributes("Year").Value
+                        End If
+                        If (Not IsNothing(CurrentNode.Attributes("Director"))) Then
+                            ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, CurrentNode.Attributes("Director").Value, wyear})
                         Else
-                            'Parameters in use - check first then proceed
-                            If CurrentNode IsNot Nothing Then
-                                Dim wrecord As Integer
-                                wrecord = ManualControlRecord(_ManualParameterField1, _ManualParameterOperator1, _ManualParameterValue1, CurrentNode)
-                                wrecord = wrecord + ManualControlRecord(_ManualParameterField2, _ManualParameterOperator2, _ManualParameterValue2, CurrentNode)
-                                If (_ManualParameterAndOr <> "and" And wrecord > 0) Then
+                            ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle, "", wyear})
+                        End If
+                        LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
+                    Else
+                        'Parameters in use - check first then proceed
+                        If CurrentNode IsNot Nothing Then
+                            Dim wrecord As Integer
+                            wrecord = ManualControlRecord(_ManualParameterField1, _ManualParameterOperator1, _ManualParameterValue1, CurrentNode)
+                            wrecord = wrecord + ManualControlRecord(_ManualParameterField2, _ManualParameterOperator2, _ManualParameterValue2, CurrentNode)
+                            If (_ManualParameterAndOr <> "and" And wrecord > 0) Then
+                                ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle})
+                                LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
+                            Else
+                                If (_ManualParameterAndOr = "and" And wrecord = 2) Then
                                     ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle})
                                     LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
-                                Else
-                                    If (_ManualParameterAndOr = "and" And wrecord = 2) Then
-                                        ds.Tables("tblNodesToProcess").Rows.Add(New Object() {CurrentMovieNumber, wtitle})
-                                        LogEvent(" - Entry to process : " & CurrentMovieNumber.ToString & " | " & wtitle, EventLogLevel.Informational)
-                                    End If
                                 End If
                             End If
                         End If
                     End If
+
+
                 End If
             End If
         End While
