@@ -3445,9 +3445,9 @@ Please refer to the Wiki online documentation.</Value>
         </MinVersion>
         <MaxVersion>
           <Major>0</Major>
-          <Minor>0</Minor>
-          <Build>0</Build>
-          <Revision>0</Revision>
+          <Minor>3</Minor>
+          <Build>99</Build>
+          <Revision>99</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
         <Message>To use My Films online help and preview IMDB pages, BrowseTheWeb version 0.30 (0.3.0) or higher must be installed.</Message>
@@ -3464,9 +3464,9 @@ Please refer to the Wiki online documentation.</Value>
         </MinVersion>
         <MaxVersion>
           <Major>0</Major>
-          <Minor>0</Minor>
-          <Build>0</Build>
-          <Revision>0</Revision>
+          <Minor>99</Minor>
+          <Build>99</Build>
+          <Revision>99</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
         <Message>To access online trailers (incl. IMDB) from MyFilms, Online Videos v0.29 (0.29.1) or higher must be installed.</Message>
@@ -3482,10 +3482,10 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>0</Revision>
         </MinVersion>
         <MaxVersion>
-          <Major>0</Major>
-          <Minor>0</Minor>
-          <Build>0</Build>
-          <Revision>0</Revision>
+          <Major>1</Major>
+          <Minor>9</Minor>
+          <Build>9</Build>
+          <Revision>9</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
         <Message>To use subtitles the SubCentral Plugin with min. version 1.1.0.0 is required.</Message>
@@ -3501,10 +3501,10 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>1</Revision>
         </MinVersion>
         <MaxVersion>
-          <Major>0</Major>
+          <Major>1</Major>
           <Minor>0</Minor>
-          <Build>0</Build>
-          <Revision>0</Revision>
+          <Build>99</Build>
+          <Revision>99</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
         <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.0.5.1 or above.</Message>
@@ -3518,15 +3518,16 @@ Please refer to the Wiki online documentation.</Value>
         <CompatibleVersion>
           <Items>
             <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.7.0</MinRequiredVersion>
-              <DesignedForVersion>1.1.7.0</DesignedForVersion>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
+              <DesignedForVersion>1.1.7.27830</DesignedForVersion>
             </CompatibleVersionItem>
           </Items>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
@@ -6657,14 +6658,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{4f145100-60bf-4a64-bfa2-68afaedbf154}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{4ea48eac-0422-4d22-8fb4-580bd25fe520}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{c1bf0ee5-8dbf-44f3-829b-9da519dfd2df}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{186d8729-a04d-46b2-9e0e-6b03eec8a71e}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
