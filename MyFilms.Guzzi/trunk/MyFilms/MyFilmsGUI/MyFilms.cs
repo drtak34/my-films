@@ -8817,6 +8817,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.SetGlobalLock(true, MyFilms.conf.StrFileXml); // also disabled local FSwatcher
         bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
+        if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
+        {
+          MyFilmsDetail.ShowNotificationDialog("MyFilms Info ...", "Global Update started !");
+        }
         LogMyFilms.Info("AsynUpdateDatabase() - Launching AMCUpdater in batch mode");
       }
       else
@@ -8878,16 +8882,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (e.Cancelled)
       {
         LogMyFilms.Info("RunAMCupdater - Update database with AMCUpdater cancelled by user request. (GetID = '" + GetID + "')");
-        if (GetID == 7986)
-          ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(1079856)); // Global Update was cancelled !
+        if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
+        {
+          MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(1079856));
+          // ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(1079856)); // Global Update was cancelled !
+        }
       }
       else
       {
         LogMyFilms.Info("RunAMCupdater - Update database with AMCUpdater sucessfully finished. (GetID = '" + GetID + "')");
-        if (GetID == 7986)
-        {
-          ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(10798748)); // Global Update finished !
-        }
+        if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
+          {
+            MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), GUILocalizeStrings.Get(10798748));
+            // ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(10798748)); // Global Update finished !
+          }
       }
       MyFilmsDetail.clearGUIProperty("statusmessage");
 
@@ -9063,9 +9071,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     void AMCupdater_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
       LogMyFilms.Info("AMCupdater RunWorkerCompleted");
-      if (GetID == ID_MyFilms)
+      MyFilmsDetail.clearGUIProperty("statusmessage");
+      if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
       {
-        MyFilmsDetail.clearGUIProperty("statusmessage");
+        MyFilmsDetail.ShowNotificationDialog("MyFilms Info ...", "Global Update finished !");
       }
     }
 

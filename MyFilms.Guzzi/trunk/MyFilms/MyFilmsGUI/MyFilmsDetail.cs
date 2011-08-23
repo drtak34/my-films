@@ -2320,18 +2320,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           bool success = BaseMesFilms.SaveMyFilms(MyFilms.conf.StrFileXml, 10000); 
           if (!success)
           {
-            if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms)
+            if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail)
             {
-              GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-              if (dlgOK != null)
-              {
-                dlgOK.SetHeading("System Warning");
-                dlgOK.SetLine(1, "Timout passed.");
-                dlgOK.SetLine(2, "Data could not be saved due to active global lock !");
-                dlgOK.DoModal(GUIWindowManager.ActiveWindow);
-              }
+              MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), "DB could not be updated due to lock !");
+              // ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(1079856)); // Global Update was cancelled !
             }
-            // ShowMessageDialog("System Warning", "", "Data not saved due to global lock !");
             LogMyFilms.Warn("Movie Database NOT updated due to GlobalLock ! - timeout passed.");
           }
         }
@@ -7542,6 +7535,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgOK.DoModal(GetID);
             return;
           }
+        }
+
+        public static void ShowNotificationDialog(string headline, string line)
+        {
+            GUIDialogNotify dlg = (GUIDialogNotify)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
+            if (dlg != null)
+            {
+                dlg.Reset();
+                dlg.SetImage(GetMyFilmsDefaultLogo());
+                dlg.SetHeading(headline);
+                dlg.SetText(line);
+                dlg.DoModal(GUIWindowManager.ActiveWindow);
+            }
+            return;
+        }
+
+        internal static string GetMyFilmsDefaultLogo()
+        {
+            // first check subfolder of current skin (allows skinners to use custom icons)
+            string image = string.Format(@"{0}\Media\MyFilms\MyFilms.png", GUIGraphicsContext.Skin);
+            if (!System.IO.File.Exists(image))
+            {
+                // use png in thumbs folder
+                image = string.Format(@"{0}\MyFilms\DefaultImages\MyFilms.png", Config.GetFolder(Config.Dir.Thumbs));
+            }
+            return image;
         }
 
         //string getGUIProperty(guiProperty name)
