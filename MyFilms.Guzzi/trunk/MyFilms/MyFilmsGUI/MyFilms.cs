@@ -4101,6 +4101,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           BaseMesFilms.LoadMyFilms(conf.StrFileXml); // Will be automatically loaded, if not yet done - save time on reentering MyFilms GUI !!!
           MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
+          currentFanartList.Clear(); // as items do change, reset fanart list ...
         }
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
       }
