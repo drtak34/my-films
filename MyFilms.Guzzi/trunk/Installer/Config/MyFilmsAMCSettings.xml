@@ -97,6 +97,9 @@
   <Values Option="Dont_Ask_Interactive">
     <Value>False</Value>
   </Values>
+  <Values Option="Manual_Dont_Ask_Interactive">
+    <Value>False</Value>
+  </Values>
   <Values Option="Manual_XML_File">
     <Value>C:\Movies - Test.xml</Value>
   </Values>
