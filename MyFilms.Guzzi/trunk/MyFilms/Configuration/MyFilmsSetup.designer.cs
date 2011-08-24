@@ -4076,7 +4076,6 @@
           // CatalogType
           // 
           this.CatalogType.BackColor = System.Drawing.SystemColors.Info;
-          this.CatalogType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
           this.CatalogType.FormattingEnabled = true;
           this.CatalogType.Items.AddRange(new object[] {
             "Ant Movie Catalog (V3.5.1.2)",

@@ -444,6 +444,15 @@ You will have the option in the GUI to switch to "unwatched movies only" - based
     <value>In opposition to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
 The difference is, you can't predefine a value for the update - but will always get a user dialog prefilled with the current value to change the content.</value>
   </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value>This option allows AMC users to update field info for storing your "watched status".
+
+You can choose a field to be used for "watched status" - a good recommendation is "checked".
+You can choose to update this field when starting a movie or when playback is finished.
+You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
   <data name="btnWatchedImport.ToolTip" xml:space="preserve">
     <value>You can import a formerly created backupfile of your watched status.
 Important:
@@ -502,15 +511,6 @@ To be updated each time a movie is launched.
 Note:
 The "global count" will inclease each time any user is watching a film thus representing "total plays".
 It will NOT change, if user manually sets a movie to watched or unwatched.</value>
-  </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>This option allows AMC users to update field info for storing your "watched status".
-
-You can choose a field to be used for "watched status" - a good recommendation is "checked".
-You can choose to update this field when starting a movie or when playback is finished.
-You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
-However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
-You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
@@ -680,6 +680,28 @@ passed as  parameter to the command file.
 
 Very unused...</value>
   </data>
+  <data name="CatalogType.ToolTip" xml:space="preserve">
+    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
+Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
+The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
+  </data>
+  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
+    <value>Title selection:
+You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
+
+Grouping:
+Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
+This can be used to group more than one movie together,
+e.g. for collections.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
+  </data>
   <data name="chkScanMediaOnStart.ToolTip" xml:space="preserve">
     <value>If checked, MyFilms will automatically scan all media files (films, trailer) to check 
 if they are currently "reachable".
@@ -715,28 +737,6 @@ In the first field you can select the database item that can be used to locate t
 In the second field you can enter your own text message to provide additional information.
 
 </value>
-  </data>
-  <data name="CatalogType.ToolTip" xml:space="preserve">
-    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
-Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
-The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
-  </data>
-  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
-    <value>Title selection:
-You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
-
-Grouping:
-Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
-This can be used to group more than one movie together,
-e.g. for collections.
-
-Example:
-Hierachy Separator: "\"
-movie 1: Moviecollection\movie1
-movie 2: Moviecollection\movie2
-movie 3: Moviecollection\movie3
-
-Will show "Moviecollection" with 3 items in it.</value>
   </data>
   <data name="chkUseOriginalAsTranslatedTitle.ToolTip" xml:space="preserve">
     <value>This setting is useful for non english users:
