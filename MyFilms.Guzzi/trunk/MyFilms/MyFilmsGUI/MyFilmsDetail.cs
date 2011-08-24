@@ -1776,8 +1776,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               fanartTitle = GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
               if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
               {
-                // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-                Remove_Backdrops_Fanart(fanartTitle, false);
+                //// Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+                //Remove_Backdrops_Fanart(fanartTitle, false);
                 Thread.Sleep(50);
                 bool success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, false, file, "localfanart", currentposition);
               }
