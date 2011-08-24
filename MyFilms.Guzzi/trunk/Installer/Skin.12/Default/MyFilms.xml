@@ -49,13 +49,11 @@
             <description>fanart</description>
             <type>image</type>
             <id>11</id>
-            <posX>-152</posX>
+            <posX>-170</posX>
             <posY>0</posY>
-			<width>1024</width>
+			<width>1194</width>
 			<height>576</height>
-			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<zoom>yes</zoom>
+			<keepaspectratio>no</keepaspectratio>
             <texture>#myfilms.Fanart</texture>
             <colordiffuse>ffffffff</colordiffuse>
 			<animation effect="fade" time="250">visible</animation>
@@ -68,13 +66,11 @@
             <description>fanart2 (for fading between items, only 1 image is displayed</description>
             <type>image</type>
             <id>21</id>
-            <posX>-152</posX>
+            <posX>-170</posX>
             <posY>0</posY>
-			<width>1024</width>
+			<width>1194</width>
 			<height>576</height>
-			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<zoom>yes</zoom>
+			<keepaspectratio>no</keepaspectratio>
             <texture>#myfilms.Fanart2</texture>
             <colorkey>9fffffff</colorkey>
             <colordiffuse>ffffffff</colordiffuse>

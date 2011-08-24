@@ -28,11 +28,11 @@
 			<description>fanart</description>
 			<type>image</type>
 			<id>1000</id>
-			<posX>-152</posX>
+			<posX>-170</posX>
 			<posY>0</posY>
-			<width>1024</width>
+			<width>1194</width>
 			<height>576</height>
-			<keepaspectratio>yes</keepaspectratio>
+			<keepaspectratio>no</keepaspectratio>
 			<centered>yes</centered>
             <zoom>yes</zoom>
 			<texture>#myfilms.fanart</texture>
@@ -45,17 +45,15 @@
 			<description>fanart</description>
 			<type>multiimage</type>
 			<id>1001</id>
-			<posX>0</posX>
+			<posX>-170</posX>
 			<posY>0</posY>
-			<width>1024</width>
+			<width>1194</width>
 			<height>576</height>
 			<imagepath></imagepath>
 			<timeperimage>5000</timeperimage>
 			<fadetime>1000</fadetime>
 			<loop>yes</loop>
-			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<zoom>yes</zoom>
+			<keepaspectratio>no</keepaspectratio>
 			<randomize>true</randomize>
 		</control>
 		<control>
