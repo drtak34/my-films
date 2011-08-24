@@ -1848,6 +1848,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             MyFilmsInputBox input = new MyFilmsInputBox();
             input.CatalogTypeSelectedIndex = CatalogType.SelectedIndex ; // preset to currently chosen catalog type 
             input.CatalogType = CatalogType.Text; // preset to currently chosen catalog name
+            input.Country = cbGrabberOverrideLanguage.Text; // to preset country to alredy existing setting ...
+            input.ShowOnlyName = true; // to disable selection of country and year
             input.ShowDialog(this);
             string newCatalogType = input.CatalogType;
             int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;

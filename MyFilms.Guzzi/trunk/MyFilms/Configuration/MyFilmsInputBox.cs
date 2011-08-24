@@ -33,6 +33,27 @@
           set { cbCountry.Text = value; }
         }
 
+        public bool ShowOnlyName
+        {
+          get { return showOnlyName; }
+          set
+          {
+            showOnlyName = value;
+            if (showOnlyName)
+            {
+              cbCountry.Enabled = false;
+              cbCatalogType.Enabled = false;
+            }
+            else
+            {
+              cbCountry.Enabled = true;
+              cbCatalogType.Enabled = true;
+            }
+          }
+        }
+        private bool showOnlyName = false;
+
+
         private void textBoxNewName_TextChanged(object sender, EventArgs e)
         {
 
