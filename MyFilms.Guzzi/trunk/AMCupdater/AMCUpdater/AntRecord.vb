@@ -1953,13 +1953,7 @@ Public Class AntRecord
     Private Sub CreateOrUpdateAttribute(ByVal currentAttribute As String, ByRef currentValue As String, ByVal ProcessMode As Process_Mode_Names)
         Dim attr As Xml.XmlAttribute
         If currentValue <> "" Then
-            ' currentValue = currentValue.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;")
-            ' currentValue.Replace("""", "'")
-            Dim pattern As String = "#x((10?|[2-F])FFF[EF]|FDD[0-9A-F]|[19][0-9A-F]|7F|8[0-46-9A-F]|0?[1-8BCEF])"
-            Dim regex As New Regex(pattern, RegexOptions.IgnoreCase)
-            If (regex.IsMatch(currentValue)) Then
-                currentValue = regex.Replace(currentValue, String.Empty)
-            End If
+            CleanValueForInnerXML(currentValue)
         End If
         If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False And ProcessMode = Process_Mode_Names.Update) Then
             If _XMLElement.Attributes(currentAttribute) Is Nothing Then
@@ -1983,13 +1977,7 @@ Public Class AntRecord
     Private Sub CreateOrUpdateElement(ByVal currentAttribute As String, ByRef currentValue As String, ByVal ProcessMode As Process_Mode_Names)
         Dim element As Xml.XmlElement
         If currentValue <> "" Then
-            ' currentValue = currentValue.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;")
-            ' currentValue.Replace("""", "'")
-            Dim pattern As String = "#x((10?|[2-F])FFF[EF]|FDD[0-9A-F]|[19][0-9A-F]|7F|8[0-46-9A-F]|0?[1-8BCEF])"
-            Dim regex As New Regex(pattern, RegexOptions.IgnoreCase)
-            If (regex.IsMatch(currentValue)) Then
-                currentValue = regex.Replace(currentValue, String.Empty)
-            End If
+            CleanValueForInnerXML(currentValue)
         End If
         If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False And ProcessMode = Process_Mode_Names.Update) Then
             If _XMLElement.Item(currentAttribute) Is Nothing Then
@@ -2008,6 +1996,18 @@ Public Class AntRecord
             End If
         End If
         currentValue = ""
+    End Sub
+
+    Private Sub CleanValueForInnerXML(ByRef currentValue)
+        If currentValue <> "" Then
+            '' currentValue = currentValue.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;")
+            '' currentValue.Replace("""", "'")
+            'Dim pattern As String = "#x((10?|[2-F])FFF[EF]|FDD[0-9A-F]|[19][0-9A-F]|7F|8[0-46-9A-F]|0?[1-8BCEF])"
+            'Dim regex As New Regex(pattern, RegexOptions.IgnoreCase)
+            'If (regex.IsMatch(currentValue)) Then
+            '    currentValue = regex.Replace(currentValue, String.Empty)
+            'End If
+        End If
     End Sub
 
     Public Sub UpdateElement()
