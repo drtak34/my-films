@@ -1961,7 +1961,7 @@ Public Class AntRecord
                 currentValue = regex.Replace(currentValue, String.Empty)
             End If
         End If
-        If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False) Then
+        If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False And ProcessMode = Process_Mode_Names.Update) Then
             If _XMLElement.Attributes(currentAttribute) Is Nothing Then
                 attr = _XMLDoc.CreateAttribute(currentAttribute)
                 attr.Value = currentValue
@@ -1991,7 +1991,7 @@ Public Class AntRecord
                 currentValue = regex.Replace(currentValue, String.Empty)
             End If
         End If
-        If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False) Then
+        If currentValue <> "" Or (currentValue = "" And OnlyUpdateNonEmptyData = False And ProcessMode = Process_Mode_Names.Update) Then
             If _XMLElement.Item(currentAttribute) Is Nothing Then
                 element = _XMLDoc.CreateElement(currentAttribute)
                 element.InnerText = currentValue
