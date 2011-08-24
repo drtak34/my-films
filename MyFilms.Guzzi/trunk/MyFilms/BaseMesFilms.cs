@@ -748,7 +748,20 @@ namespace MyFilmsPlugin.MyFilms
             foreach (string config in configs)
             {
               string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
-              // string StrFileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
+              string CatalogTmp = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
+              string FileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
+
+              if (FileType != "0" && FileType != "10")
+              {
+                if (!string.IsNullOrEmpty(CatalogTmp))
+                  Catalog = CatalogTmp;
+                else if (!string.IsNullOrEmpty(Catalog) && Catalog.Contains("\\"))
+                {
+                  string Path = System.IO.Path.GetDirectoryName(Catalog);
+                  Catalog = Path + "\\" + Catalog.Substring(Catalog.LastIndexOf(@"\") + 1, Catalog.Length - Catalog.LastIndexOf(@"\") - 5) + "_tmp.xml";
+                }
+              }
+              
               bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
               bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
               string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
@@ -757,12 +770,12 @@ namespace MyFilmsPlugin.MyFilms
               string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
               string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
               string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
-
               string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
+
               if (TraktEnabled)
-                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "', CatalogType = '" + FileType + "', Catalogfile = '" + Catalog + "'");
               else
-                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "'");
+                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "', CatalogType = '" + FileType + "'");
               if (System.IO.File.Exists(Catalog) && (TraktEnabled || (!traktOnly && RecentAddedAPIEnabled)))
               {
                 _dataLock.EnterReadLock();
@@ -773,7 +786,7 @@ namespace MyFilmsPlugin.MyFilms
                 catch (Exception e)
                 {
                   LogMyFilms.Error(": Error reading xml database after " + dataExport.Movie.Count.ToString() + " records; error : " + e.Message.ToString() + ", " + e.StackTrace.ToString());
-                  throw e;
+                  // throw e; // we should NOT throw the exception, otherwilse MP crashes due to unhandled exception
                 }
                 finally
                 {
@@ -878,14 +891,13 @@ namespace MyFilmsPlugin.MyFilms
                     }
                     catch (Exception mex)
                     {
-                      Log.Error("MyFilms videodatabase: add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
+                      LogMyFilms.Error("MyFilms videodatabase: add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
                     }
                   }
                 }
                 catch (Exception ex)
                 {
                   LogMyFilms.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
-                  Log.Error("MyFilms videodatabase exception err:{0} stack:{1}", ex.Message, ex.StackTrace);
                 }
               }
             }
