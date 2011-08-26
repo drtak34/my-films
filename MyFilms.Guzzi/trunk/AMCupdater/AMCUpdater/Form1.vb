@@ -1049,7 +1049,6 @@ Public Class Form1
             grpManualInternetLookupSettings.Visible = False
             lblManualDatabaseFieldsPrompt.Visible = False
             chkManualMissingFanartDownload.Visible = False
-            chkManualMissingTrailer.Visible = False
 
             chkManualUpdateRecordsOnlyMissingData.Visible = False
             chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = False
@@ -1106,8 +1105,6 @@ Public Class Form1
                 chkManualMissingFanartDownload.Visible = True
                 'grpManualInternetLookupSettings.Visible = True
                 lblManualDatabaseFieldsPrompt.Visible = True
-            ElseIf cbManualSelectOperation.SelectedItem = "Register Trailer" Then
-                chkManualMissingTrailer.Visible = True
             End If
         End If
         Me.ValidateChildren()

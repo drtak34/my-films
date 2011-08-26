@@ -852,48 +852,19 @@ Public Class AntProcessor
                         End If
                     Case "Download Fanart"
                         If Not CurrentNode Is Nothing Then
-                            Dim fanart As List(Of Grabber.DBMovieInfo)
-                            Dim year As Int16 = 0
-                            If CurrentNode.Attributes("Year") IsNot Nothing Then
-                                Try
-                                    year = CInt(CurrentNode.Attributes("Year").Value)
-                                Catch
-                                End Try
-                            End If
-                            Dim director As String = ""
-                            If CurrentNode.Attributes("Director") IsNot Nothing Then
-                                director = CurrentNode.Attributes("Director").Value
-                            End If
-
                             Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-                            Dim wtitle As String = String.Empty
-                            Dim wotitle As String = String.Empty
-                            If CurrentNode.Attributes("OriginalTitle") IsNot Nothing Then
-                                wotitle = CurrentNode.Attributes("OriginalTitle").Value
-                            Else
-                                If CurrentNode.Attributes("TranslatedTitle") IsNot Nothing Then
-                                    wotitle = CurrentNode.Attributes("TranslatedTitle").Value
-                                End If
-                            End If
-                            wtitle = wotitle
-                            If CurrentNode.Attributes("TranslatedTitle") IsNot Nothing Then
-                                wtitle = CurrentNode.Attributes("TranslatedTitle").Value
-                            End If
-                            If wtitle.Contains("\") Then
-                                wtitle = wtitle.Substring(wtitle.LastIndexOf("\") + 1)
-                            End If
-                            If wotitle.Contains("\") Then
-                                wotitle = wotitle.Substring(wtitle.LastIndexOf("\") + 1)
-                            End If
-                            If wtitle.Length > 0 Then
-                                'If CurrentNode.Attributes("OriginalTitle").Value.ToString.Contains("\") = True Then
-                                '    Dim Title As String = CurrentNode.Attributes("OriginalTitle").Value.ToString.Substring(0, CurrentNode.Attributes("OriginalTitle").Value.ToString.IndexOf("\"))
-                                '    'Console.WriteLine("-" & .GroupName.ToString & "-")
+                            Dim fanart As List(Of Grabber.DBMovieInfo)
 
-                                '    fanart = Gb.GetFanart(Title, year, director, CurrentSettings.Movie_Fanart_Path, True)
-                                'Else 
-                                'fanart = Gb.GetFanart(wotitle, wtitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_Fanart_Path)
-                                fanart = Gb.GetFanart(wotitle, wtitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                            Dim fanartTitle As String = ""
+                            Dim year As Int16 = 0
+
+                            Dim ftitle As String = ""
+                            Dim director As String = ""
+                            Dim title As String = String.Empty
+                            Dim ttitle As String = String.Empty
+                            fanartTitle = GetFanartTitle(CurrentNode, title, ttitle, ftitle, year, director)
+                            If fanartTitle.Length > 0 Then
+                                fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                                 'End If
                                 If (fanart.Count > 0) Then
                                     If (fanart(0).Name = "already") Then
@@ -910,9 +881,9 @@ Public Class AntProcessor
                                         End If
                                     End If
                                 Else
-                                    wtitle = Grabber.GrabUtil.CreateFilename(wtitle.ToLower().Trim.Replace(" ", "."))
-                                    If Not (System.IO.Directory.Exists(CurrentSettings.Movie_Fanart_Path & "\\{" & wtitle & "}")) Then
-                                        System.IO.Directory.CreateDirectory(CurrentSettings.Movie_Fanart_Path & "\\{" & wtitle & "}")
+                                    fanartTitle = Grabber.GrabUtil.CreateFilename(fanartTitle.ToLower().Trim.Replace(" ", "."))
+                                    If Not (System.IO.Directory.Exists(CurrentSettings.Movie_Fanart_Path & "\\{" & fanartTitle & "}")) Then
+                                        System.IO.Directory.CreateDirectory(CurrentSettings.Movie_Fanart_Path & "\\{" & fanartTitle & "}")
                                     End If
                                     bgwManualUpdate.ReportProgress(ProcessCounter, "Fanart not Found : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                 End If

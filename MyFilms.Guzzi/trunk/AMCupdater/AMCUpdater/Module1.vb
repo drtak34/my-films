@@ -5,6 +5,7 @@ Imports System.Globalization
 Imports System.ComponentModel
 Imports System.Threading
 Imports MediaPortal.Configuration
+Imports System.Xml
 
 Module Module1
 
@@ -1111,6 +1112,86 @@ Module Module1
 
         Return ReturnValue
 
+    End Function
+
+    Public Function GetFanartTitle(ByVal MovieRecord As XmlElement, ByRef title As String, ByRef ttitle As String, ByRef ftitle As String, ByRef year As Integer, ByRef director As String) As String
+        Dim fanartTitle As String = ""
+        Dim mastertitle As String = String.Empty
+        title = ttitle = ftitle = director = String.Empty
+        year = 0
+
+        If Not MovieRecord.Attributes("OriginalTitle") Is Nothing Then
+            title = RemoveGroupName(MovieRecord.Attributes("OriginalTitle").Value)
+            If CurrentSettings.Master_Title = "OriginalTitle" Then
+                mastertitle = title
+            End If
+        End If
+
+        If Not MovieRecord.Attributes("TranslatedTitle") Is Nothing Then
+            ttitle = RemoveGroupName(MovieRecord.Attributes("TranslatedTitle").Value)
+            'If ttitle.Contains("(") Then
+            '    ttitle = ttitle.Substring(0, ttitle.IndexOf("("))
+            'End If
+            If CurrentSettings.Master_Title = "TranslatedTitle" Then
+                mastertitle = ttitle
+            End If
+        End If
+
+        If Not MovieRecord.Attributes("FormattedTitle") Is Nothing Then
+            ftitle = RemoveGroupName(MovieRecord.Attributes("FormattedTitle").Value)
+            If CurrentSettings.Master_Title = "FormattedTitle" Then
+                mastertitle = ftitle
+            End If
+        End If
+
+        If title.ToString().Length > 0 Then
+            If Not MovieRecord.Attributes("Year") Is Nothing Then
+                Try
+                    year = CInt(MovieRecord.Attributes("Year").Value)
+                Catch
+                    year = 0
+                End Try
+            End If
+            If Not MovieRecord.Attributes("Director") Is Nothing Then
+                director = MovieRecord.Attributes("Director").Value
+            Else
+                director = ""
+            End If
+        End If
+
+
+        If CurrentSettings.Master_Title = "FormattedTitle" Then ' // special setting for formatted title - we don't want to use it, as it is usually too long and causes problems with path length
+            If Not String.IsNullOrEmpty(ttitle) Then
+                fanartTitle = ttitle
+            ElseIf Not String.IsNullOrEmpty(title) Then
+                fanartTitle = title
+            Else
+                fanartTitle = ftitle
+            End If
+        Else
+            If Not String.IsNullOrEmpty(mastertitle) Then
+                fanartTitle = mastertitle
+            ElseIf Not String.IsNullOrEmpty(title) Then
+                fanartTitle = title
+            ElseIf Not String.IsNullOrEmpty(ttitle) Then
+                fanartTitle = ttitle
+            ElseIf Not String.IsNullOrEmpty(ftitle) Then
+                fanartTitle = ftitle
+            Else
+                fanartTitle = ""
+            End If
+        End If
+        Return fanartTitle
+    End Function
+    Private Function RemoveGroupName(ByVal FullName As String) As String
+        Dim Name As String
+        If FullName.Contains("\") = True Then
+            'FullName = FullName.Substring(0, FullName.IndexOf("\") - 1) ' remove rest of group name part (group fanart)
+            Name = FullName.Substring(FullName.IndexOf("\") + 1) ' remove group name part
+        Else
+            Name = FullName
+        End If
+        Return Name
     End Function
 
 End Module

@@ -1816,40 +1816,16 @@ Public Class AntRecord
             'get fanart
             CurrentAttribute = "Fanart"
             If IsUpdateRequested(CurrentAttribute) = True Then ' Old: If _DatabaseFields(CurrentAttribute.ToLower) = True Then
-                If Not _XMLElement.Attributes("OriginalTitle") Is Nothing Then
-                    title = _XMLElement.Attributes("OriginalTitle").Value
-                End If
-                If title.Length > 0 Then
-                    If title.Contains("\") = True Then
-                        title = title.Substring(0, title.IndexOf("\") - 1)
-                        'Console.WriteLine("-" & .GroupName.ToString & "-")
-                    End If
-                    Dim ttitleCleaned As String = ""
-                    If Not _XMLElement.Attributes("TranslatedTitle") Is Nothing Then
-                        ttitle = _XMLElement.Attributes("TranslatedTitle").Value
-                        If ttitle.Contains("(") Then
-                            ttitleCleaned = ttitle.Substring(0, ttitle.IndexOf("("))
-                        Else
-                            ttitleCleaned = ttitle
-                        End If
-                    End If
 
+                Dim fanartTitle As String = ""
+                Dim ftitle As String = ""
+                fanartTitle = GetFanartTitle(_XMLElement, title, ttitle, ftitle, year, director)
+
+                If fanartTitle.Length > 0 Then
                     If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
                         Dim fanart As List(Of Grabber.DBMovieInfo)
-                        If Not _XMLElement.Attributes("Year") Is Nothing Then
-                            Try
-                                year = CInt(_XMLElement.Attributes("Year").Value)
-                            Catch
-                                year = 0
-                            End Try
-                        End If
-                        If Not _XMLElement.Attributes("Director") Is Nothing Then
-                            director = _XMLElement.Attributes("Director").Value
-                        End If
-                        'fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
-                        'fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, CurrentSettings.Movie_PersonArtwork_Path)
                         Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
-                        fanart = Gb.GetFanart(title, ttitleCleaned, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                        fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
                         If fanart.Count = 1 Then
                             If fanart(0).Backdrops.Count > 0 Then
                                 TempValue = fanart(0).Backdrops(0).ToString
@@ -1865,10 +1841,7 @@ Public Class AntRecord
                         Dim Filename As String = _FilePath
                         Try
                             If Not File.Exists(NewFanartThumbName) Then
-                                ' FanartFileExists = CreateArtworkFromMovie(Filename, NewFanartThumbName, Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
-                                ' FanartFileExists = Grabber.GrabUtil.GetCoverartFromMovie(Filename, NewFanartThumbName, GrabUtil.Artwork_Thumb_Mode.Fanart) ' try creating artwork from movie
-                                ' public static string GetFanartFromMovie(string title, string ttitle, string year, string artFolder, bool createSeparateImages, string mastertitle, string FileName, string newFanartThumbName, out string filename)
-                                FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(title, year, CurrentSettings.Movie_Fanart_Path, True, Filename, NewFanartThumbName, 0)
+                                FanartFileExists = Grabber.GrabUtil.GetFanartFromMovie(fanartTitle, year, CurrentSettings.Movie_Fanart_Path, True, Filename, NewFanartThumbName, 0)
                             End If
                         Catch ex As Exception
                         End Try

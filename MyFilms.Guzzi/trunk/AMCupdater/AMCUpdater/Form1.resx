@@ -212,20 +212,6 @@
         vf8Chxm7X1GMcz8AAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1095, 13</value>
-  </metadata>
-  <data name="chkManualDontAskInteractive.ToolTip" xml:space="preserve">
-    <value>Check this, if you want to update your movie data without user interaction.
-If a movie can't be identified automatically, it will NOT show the userdialog for manual selection.
-Thus the (internet) movie data cannot be retrieved and updated.
-
-Note:
-Auto matching depends very much on your database structure; 
-if you have e.g. imdb links stored in URL field and try updaating with IMDB grabber script, auto match will always work
-due to usage if IMDB id.
-Other grabber scripts require matching by name and year, that might not always allow auto matches.</value>
-  </data>
   <data name="btnManualApplyChanges.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -416,6 +402,9 @@ Other grabber scripts require matching by name and year, that might not always a
   </data>
   <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>280, 50</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1095, 13</value>
   </metadata>
   <data name="txtOverridePath.ToolTip" xml:space="preserve">
     <value>Override path when writing to XML file:
@@ -727,6 +716,17 @@ THis is especially useful, if you have private movies, documentaries etc. where 
 Normally used for film Trilogies and so on.
 The update will attempt to work out which films are grouped based on the folder structure.
 The movie title will then be saved as 'Groupname \ Movie Name'</value>
+  </data>
+  <data name="chkManualDontAskInteractive.ToolTip" xml:space="preserve">
+    <value>Check this, if you want to update your movie data without user interaction.
+If a movie can't be identified automatically, it will NOT show the userdialog for manual selection.
+Thus the (internet) movie data cannot be retrieved and updated.
+
+Note:
+Auto matching depends very much on your database structure; 
+if you have e.g. imdb links stored in URL field and try updaating with IMDB grabber script, auto match will always work
+due to usage if IMDB id.
+Other grabber scripts require matching by name and year, that might not always allow auto matches.</value>
   </data>
   <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 50</value>
