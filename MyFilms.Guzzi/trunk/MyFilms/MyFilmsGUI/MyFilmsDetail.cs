@@ -3835,23 +3835,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           wyear = 0;
 
           if (movieRecord["OriginalTitle"] != null && movieRecord["OriginalTitle"].ToString().Length > 0)
-            wtitle = movieRecord["OriginalTitle"].ToString();
-          if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+            wtitle = RemoveGroupNames(movieRecord["OriginalTitle"].ToString());
           if (MyFilms.conf.StrTitle1 == "OriginalTitle") 
             mastertitle = wtitle;
 
           if (movieRecord["TranslatedTitle"] != null && movieRecord["TranslatedTitle"].ToString().Length > 0)
-            wttitle = movieRecord["TranslatedTitle"].ToString();
-          if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+            wttitle = RemoveGroupNames(movieRecord["TranslatedTitle"].ToString());
           if (MyFilms.conf.StrTitle1 == "TranslatedTitle")
             mastertitle = wttitle;
 
           if (movieRecord["FormattedTitle"] != null && movieRecord["FormattedTitle"].ToString().Length > 0)
-            wftitle = movieRecord["FormattedTitle"].ToString();
-          if (wftitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-            wftitle = wftitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+            wftitle = RemoveGroupNames(movieRecord["FormattedTitle"].ToString());
           if (MyFilms.conf.StrTitle1 == "FormattedTitle")
             mastertitle = wftitle;
 
@@ -3899,7 +3893,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("GetFanartTitle: returning fanartTitle: '" + fanartTitle + "' - mastertitle (" + MyFilms.conf.StrTitle1 + ") =  '" + mastertitle + "' - originaltitle: '" + wtitle + "' - translatedtitle: '" + wttitle + "' - formattedtitle: '" + wftitle + "' - director: '" + wdirector + "' - year: '" + wyear.ToString() + "'");
           return fanartTitle;
         }
-  
+
+        private static string RemoveGroupNames(string FullName)
+        {
+          string Name = string.Empty;
+          if (FullName.IndexOf(MyFilms.conf.TitleDelim) > 0)
+            Name = FullName.Substring(FullName.IndexOf(MyFilms.conf.TitleDelim) + 1);
+          else 
+            Name = FullName;
+          
+          return Name;
+        }
+
         //-------------------------------------------------------------------------------------------
         //  Remove Old backdrops Fanart already downloaded (case in title change)
         //-------------------------------------------------------------------------------------------        
@@ -3949,7 +3954,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           int wyear = 0;
           try { wyear = Convert.ToInt32(year); }
           catch { }
-          System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose, MyFilms.conf.StrTitle1, personartworkpath);
+          System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, savetitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose, MyFilms.conf.StrTitle1, personartworkpath);
           //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose);
           LogMyFilms.Debug("(DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "'");
           int listCount = listemovies.Count;
@@ -4047,7 +4052,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     //Remove_Backdrops_Fanart(wtitle, true);
                     //Remove_Backdrops_Fanart(wttitle, true);
                     //Remove_Backdrops_Fanart(wftitle, true);
-                    Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
+                    Download_Backdrops_Fanart(keyboard.Text, string.Empty, string.Empty, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
                   }
                   break;
                 }
@@ -4087,14 +4092,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   bool first = true;
                   string filename = string.Empty;
                   string filename1 = string.Empty;
-                  if (MyFilms.conf.StrTitle1 == "OriginalTitle")
-                    wttitle = savetitle; // Was wttitle = wtitle;
+                  //if (MyFilms.conf.StrTitle1 == "OriginalTitle")
+                  //  wttitle = savetitle; // Was wttitle = wtitle;
                   int i = 0;
-                  if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading Fanart for '" + wttitle + "'");
+                  if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading Fanart for '" + savetitle + "'");
 
                   foreach (string backdrop in listemovies[dlg.SelectedLabel - 1].Backdrops)
                   {
-                    filename1 = Grabber.GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, backdrop, wttitle, true, first, out filename);
+                    filename1 = Grabber.GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, backdrop, savetitle, true, first, out filename);
                     if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "loading '" + System.IO.Path.GetFileName(filename) + "'");
                     if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / listemovies[dlg.SelectedLabel - 1].Backdrops.Count;
                     LogMyFilms.Info("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
@@ -4250,7 +4255,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         //-------------------------------------------------------------------------------------------
         //  Search Fanart Thumbs 
-        //                          wtitle2 = Translated Title if any or Original Title
+        //                          title = Translated Title if any or Original Title
         //                          main = true for main screen and false for detailed
         //                          searched = dir for Directory searched (detail screen and control multiImage)or file 
         //                          rep = true if the selected Item is a grouped Item (country, genre, year...) on main screen
@@ -4260,22 +4265,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //                          [1] = file or dir
         //-------------------------------------------------------------------------------------------
 
-        public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group)
-        {
-          return Search_Fanart(wtitle2, main, searched, rep, filecover, group, null);
-        }
-        public static string[] Search_Fanart(string wtitle2, bool main, string searched, bool rep, string filecover, string group, DataRow record)
+        public static string[] Search_Fanart(string title, bool main, string searched, bool rep, string filecover, string group)
         //                     Search_Fanart(wlabel, true, "file", false, facadeView.SelectedListItem.ThumbnailImage.ToString(), string.Empty);
         {
-          LogMyFilms.Debug("Search_Fanart(): Using ");
+            LogMyFilms.Debug("Search_Fanart(): Using '" + title + "'");
             string[] wfanart = new string[2];
             wfanart[0] = " ";
             wfanart[1] = " ";
             if (MyFilms.conf.StrFanart)
             {
-                if (wtitle2.Contains(MyFilms.conf.TitleDelim))
-                  wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MyFilms.conf.TitleDelim) + 1); // Removed "trim", as there is no matching in details, if spacees are removed! old: wtitle2 = wtitle2.Substring(wtitle2.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
-                wtitle2 = Grabber.GrabUtil.CreateFilename(wtitle2.ToLower()).Replace(' ', '.');
+                if (title.Contains(MyFilms.conf.TitleDelim))
+                  title = title.Substring(title.LastIndexOf(MyFilms.conf.TitleDelim) + 1); // Removed "trim", as there is no matching in details, if spacees are removed! old: title = title.Substring(title.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
+                title = Grabber.GrabUtil.CreateFilename(title.ToLower()).Replace(' ', '.');
 
                 if (!MyFilms.conf.StrFanart)
                     return wfanart;
@@ -4289,7 +4290,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             System.IO.Directory.CreateDirectory(MyFilms.conf.StrPathFanart + "\\_Group");
                         if (!System.IO.Directory.Exists(MyFilms.conf.StrPathFanart + "\\_Group\\" + group))
                             System.IO.Directory.CreateDirectory(MyFilms.conf.StrPathFanart + "\\_Group\\" + group);
-                        safeName = MyFilms.conf.StrPathFanart + "\\_Group\\" + group + "\\{" + wtitle2 + "}";
+                        safeName = MyFilms.conf.StrPathFanart + "\\_Group\\" + group + "\\{" + title + "}";
                     }
                     else
                       if (MyFilms.conf.StrFanartDfltImageAll && (wfanart[0] == "" || wfanart[0] == " "))
@@ -4301,19 +4302,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else 
              
-                    if ((MyFilms.conf.StrPathFanart.ToString() + wtitle2 + "\\{" + wtitle2 + "}.jpg").Length > 259) // Added to avoid crash with very long filenames - better is if user configures titledelimiters properly !
+                    if ((MyFilms.conf.StrPathFanart.ToString() + title + "\\{" + title + "}.jpg").Length > 259) // Added to avoid crash with very long filenames - better is if user configures titledelimiters properly !
                      {
                          return wfanart;
                      }
                     else
                     {
-                        safeName = MyFilms.conf.StrPathFanart + "\\{" + wtitle2 + "}";
+                        safeName = MyFilms.conf.StrPathFanart + "\\{" + title + "}";
                     }
 
                 
                 try //Added to avoid crash with very long filenames - better is if user configures titledelimiters properly !
                     {
-                        FileInfo wfile = new FileInfo(safeName + "\\{" + wtitle2 + "}.jpg");
+                        FileInfo wfile = new FileInfo(safeName + "\\{" + title + "}.jpg");
                     }
                 catch (Exception e)
                     {
@@ -4322,10 +4323,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 
                 //LogMyFilms.Debug("(SearchFanart) - safename(file) = '" + wfile + "'");
-                //LogMyFilms.Debug("(SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + wtitle2 + "}.jpg") + "'");
-                if (((main) || (searched == "file")) && (System.IO.File.Exists(safeName + "\\{" + wtitle2 + "}.jpg")))
+                //LogMyFilms.Debug("(SearchFanart) - safename(file&ext) = '" + (safeName + "\\{" + title + "}.jpg") + "'");
+                if (((main) || (searched == "file")) && (System.IO.File.Exists(safeName + "\\{" + title + "}.jpg")))
                 {
-                    wfanart[0] = safeName + "\\{" + wtitle2 + "}.jpg";
+                    wfanart[0] = safeName + "\\{" + title + "}.jpg";
                     wfanart[1] = "file";
                     return wfanart;
                 }
@@ -4338,7 +4339,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         {
                             wfanart[0] = System.IO.Directory.GetFiles(safeName)[0].ToString();
                             wfanart[1] = "file";
-                            LogMyFilms.Debug("Search_Fanart(): File Mode - searchtitle = '" + wtitle2 + "', safename = '" + safeName + "'wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                            LogMyFilms.Debug("Search_Fanart(): File Mode - searchtitle = '" + title + "', safename = '" + safeName + "'wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                             return wfanart;
                         }
                     }
@@ -4377,7 +4378,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   case "5": // EAX 3.x
                     if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in XMM fanart directory
                     {
-                      string searchname = HTMLParser.removeHtml(wtitle2).Replace(" ", "."); // replaces special character "á" and other special chars !
+                      string searchname = HTMLParser.removeHtml(title).Replace(" ", "."); // replaces special character "á" and other special chars !
                       //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
                       searchname = searchname + ".*.jpg";
                       string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
@@ -4393,7 +4394,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   case "6": // PVD artist thumbs: e.g. Natalie Portman_1.jpg , then Natalie Portman_2.jpg 
                     if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in XMM fanart directory
                     {
-                      string searchname = HTMLParser.removeHtml(wtitle2); // replaces special character "á" and other special chars !
+                      string searchname = HTMLParser.removeHtml(title); // replaces special character "á" and other special chars !
                       //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
                       searchname = searchname + "*.jpg";
                       string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
@@ -4409,7 +4410,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   case "7": // XMM
                     if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in XMM fanart directory
                     {
-                      string searchname = HTMLParser.removeHtml(wtitle2).Replace(" ", "-"); // replaces special character "á" and other special chars !
+                      string searchname = HTMLParser.removeHtml(title).Replace(" ", "-"); // replaces special character "á" and other special chars !
                       searchname = searchname.Replace(" ", "-");
                       searchname = searchname.Replace(".", "-");
                       searchname = searchname.Replace("'", "-");
@@ -4431,7 +4432,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   case "9": // MovingPicturesXML V1.2
                     if (!string.IsNullOrEmpty(MyFilms.conf.StrPathFanart)) //Search matching files in MoPi fanart directory
                     {
-                      string searchname = HTMLParser.removeHtml(wtitle2); // replaces special character "á" and other special chars !
+                      string searchname = HTMLParser.removeHtml(title); // replaces special character "á" and other special chars !
                       //searchname = Regex.Replace(searchname, "[\n\r\t]", "-") + "_*.jpg";
                       searchname = "{" + searchname + "}" + "*.jpg";
                       string[] files = Directory.GetFiles(MyFilms.conf.StrPathFanart, searchname, SearchOption.TopDirectoryOnly);
@@ -4464,7 +4465,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
             }
             
-            // LogMyFilms.Debug("(SearchFanart) - Fanart config for '" + wtitle2 + "': wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+            // LogMyFilms.Debug("(SearchFanart) - Fanart config for '" + title + "': wfanart[0,1]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
             return wfanart;
         }
         //-------------------------------------------------------------------------------------------
