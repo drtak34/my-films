@@ -8923,32 +8923,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       BackgroundWorker worker = sender as BackgroundWorker;
       Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-      string wtitle = string.Empty;
-      string personartworkpath = string.Empty;
+      string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
       if (MyFilms.conf.StrPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist)) // if persoin artwork path present and person thumbs enabled, also load person images
       {
         personartworkpath = MyFilms.conf.StrPathArtist;
         LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
       }
-      foreach (DataRow t in MyFilms.r)
+      foreach (DataRow movieRecord in MyFilms.r)
       {
-        if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
-          wtitle = t["OriginalTitle"].ToString();
-        if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-          wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-        string wttitle = string.Empty;
-        if (t["TranslatedTitle"] != null && t["TranslatedTitle"].ToString().Length > 0)
-          wttitle = t["TranslatedTitle"].ToString();
-        if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
-          wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
-        if (t["OriginalTitle"].ToString().Length > 0)
+        fanartTitle = wtitle = wttitle = wftitle = wdirector = string.Empty;
+        wyear = 0;
+        fanartTitle = MyFilmsDetail.GetFanartTitle(movieRecord, out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+
+        //if (t["OriginalTitle"] != null && t["OriginalTitle"].ToString().Length > 0)
+        //  wtitle = t["OriginalTitle"].ToString();
+        //if (wtitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+        //  wtitle = wtitle.Substring(wtitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+        //string wttitle = string.Empty;
+        //if (t["TranslatedTitle"] != null && t["TranslatedTitle"].ToString().Length > 0)
+        //  wttitle = t["TranslatedTitle"].ToString();
+        //if (wttitle.IndexOf(MyFilms.conf.TitleDelim) > 0)
+        //  wttitle = wttitle.Substring(wttitle.IndexOf(MyFilms.conf.TitleDelim) + 1);
+        if (fanartTitle.Length > 0)
         {
-          int wyear = 0;
-          try { wyear = System.Convert.ToInt16(t["Year"]); }
-          catch { }
-          string wdirector = string.Empty;
-          try { wdirector = (string)t["Director"]; }
-          catch { }
           System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, wdirector, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1.ToString(), personartworkpath);
         }
       }
