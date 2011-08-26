@@ -1776,9 +1776,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               fanartTitle = GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
               if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
               {
-                //// Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-                //Remove_Backdrops_Fanart(fanartTitle, false);
-                Thread.Sleep(50);
+                // Remove_Backdrops_Fanart(fanartTitle, false); // old: // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+                // Thread.Sleep(50);
                 bool success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, false, file, "localfanart", currentposition);
               }
               if (dlgPrgrs != null)
@@ -1820,9 +1819,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             fanartTitle = GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
             if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
             {
-              // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-              Remove_Backdrops_Fanart(fanartTitle, false);
-              Thread.Sleep(50);
+              // Remove_Backdrops_Fanart(fanartTitle, false); // old: Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+              // Thread.Sleep(50);
               bool success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, false, path, "localfanart", 0);
             }
 
@@ -1855,8 +1853,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             new System.Threading.Thread(delegate()
             {
-              Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-              Thread.Sleep(50);
+              // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+              // Thread.Sleep(50);
               string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
               if (path.Contains(";"))
                 path = path.Substring(0, path.IndexOf(";"));
@@ -4046,9 +4044,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   keyboard.DoModal(wGetID);
                   if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
                   {
-                    Remove_Backdrops_Fanart(wtitle, true);
-                    Remove_Backdrops_Fanart(wttitle, true);
-                    Remove_Backdrops_Fanart(wftitle, true);
+                    //Remove_Backdrops_Fanart(wtitle, true);
+                    //Remove_Backdrops_Fanart(wttitle, true);
+                    //Remove_Backdrops_Fanart(wftitle, true);
                     Download_Backdrops_Fanart(keyboard.Text, wttitle, string.Empty, string.Empty, string.Empty, true, wGetID, savetitle, personartworkpath);
                   }
                   break;
