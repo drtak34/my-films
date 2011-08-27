@@ -3539,10 +3539,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
+            <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.SkinEngine" />
-            <SubSystemItem Name="MP.Players" />
-            <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3559,7 +3559,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>1357</Revision>
+      <Revision>1359</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -3567,7 +3567,7 @@ Please refer to the Wiki online documentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-08-27T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1357(MP12RC).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1359(MP12RC).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -6686,14 +6686,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9066cc83-b793-4f6b-bdc8-0933153ec141}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{71b240b0-9823-4bb5-93d3-f83558b5c79a}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{d06b6720-03d4-433f-aabc-115b1bee658c}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{9f3ee018-f335-422d-9c76-7f6962ed2894}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
