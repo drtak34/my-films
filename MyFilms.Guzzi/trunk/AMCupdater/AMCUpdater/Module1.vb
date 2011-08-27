@@ -1117,7 +1117,10 @@ Module Module1
     Public Function GetFanartTitle(ByVal MovieRecord As XmlElement, ByRef title As String, ByRef ttitle As String, ByRef ftitle As String, ByRef year As Integer, ByRef director As String) As String
         Dim fanartTitle As String = ""
         Dim mastertitle As String = String.Empty
-        title = ttitle = ftitle = director = String.Empty
+        title = String.Empty
+        ttitle = String.Empty
+        ftitle = String.Empty
+        director = String.Empty
         year = 0
 
         If Not MovieRecord.Attributes("OriginalTitle") Is Nothing Then
