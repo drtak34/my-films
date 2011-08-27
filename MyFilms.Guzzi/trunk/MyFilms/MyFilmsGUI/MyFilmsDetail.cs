@@ -2292,7 +2292,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //int i = 0;
           //bool success = false; // result of update operation
 
-
           //while (!success && i < maxretries)
           //{
           //  // first check, if there is a global manual lock
@@ -2315,17 +2314,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //  }
           //}
 
-          bool success = BaseMesFilms.SaveMyFilms(MyFilms.conf.StrFileXml, 10000); 
-          if (!success)
+          new System.Threading.Thread(delegate()
           {
-            MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), "DB could not be updated (locked) !");
-            //if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail)
-            //{
-            //  MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), "DB could not be updated (locked) !");
-            //  // ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(1079856)); // Global Update was cancelled !
-            //}
-            LogMyFilms.Warn("Movie Database NOT updated due to GlobalLock ! - timeout passed.");
-          }
+            bool successwrite = BaseMesFilms.SaveMyFilms(MyFilms.conf.StrFileXml, 10000);
+
+            GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+            {
+              // this will be executed after background thread finished
+              if (!successwrite)
+              {
+                MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), "DB could not be updated (locked) !");
+                LogMyFilms.Warn("Movie Database NOT updated due to GlobalLock ! - timeout passed.");
+              }
+              //else
+              //  MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), "DB successfully updated !");
+              return 0;
+            }, 0, 0, null);
+          }) { Name = "MyFilmsUpdateXML", IsBackground = true }.Start();
+          return;
         }
 
         //-------------------------------------------------------------------------------------------

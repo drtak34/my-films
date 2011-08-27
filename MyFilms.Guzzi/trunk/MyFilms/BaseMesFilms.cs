@@ -418,7 +418,7 @@ namespace MyFilmsPlugin.MyFilms
         public static bool SaveMyFilmsToDisk(string catalogfile)
         {
           bool success = false; // result of write operation
-          int maxretries = 10; // max retries 10 * 1000 = 10 seconds
+          int maxretries = 5; // max retries 10 * 1000 = 10 seconds
           int i = 0;
           
           while (!success && i < maxretries)
