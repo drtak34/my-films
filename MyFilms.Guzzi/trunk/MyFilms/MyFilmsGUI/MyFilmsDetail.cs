@@ -2318,11 +2318,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           bool success = BaseMesFilms.SaveMyFilms(MyFilms.conf.StrFileXml, 10000); 
           if (!success)
           {
-            if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail)
-            {
-              MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), "DB could not be updated due to lock !");
-              // ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(1079856)); // Global Update was cancelled !
-            }
+            MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), "DB could not be updated (locked) !");
+            //if (GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilms || GUIWindowManager.ActiveWindow == MyFilms.ID_MyFilmsDetail)
+            //{
+            //  MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(1079861), "DB could not be updated (locked) !");
+            //  // ShowMessageDialog(GUILocalizeStrings.Get(1079861), "", GUILocalizeStrings.Get(1079856)); // Global Update was cancelled !
+            //}
             LogMyFilms.Warn("Movie Database NOT updated due to GlobalLock ! - timeout passed.");
           }
         }

@@ -355,11 +355,11 @@ namespace MyFilmsPlugin.MyFilms
             }
             else
             {
-              MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-              dlgOk.SetHeading("Error");//my videos
-              dlgOk.SetLine(1, "Error during updating the XML database '" + catalogfile + "' !");
-              dlgOk.SetLine(2, "Maybe Directory full or no write access.");
-              dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
+              //MediaPortal.Dialogs.GUIDialogOK dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
+              //dlgOk.SetHeading("Error");//my videos
+              //dlgOk.SetLine(1, "Error during updating the XML database '" + catalogfile + "' !");
+              //dlgOk.SetLine(2, "Maybe Directory full or no write access.");
+              //dlgOk.DoModal(MyFilms.ID_MyFilmsDetail);
               return false;
             }
           }
