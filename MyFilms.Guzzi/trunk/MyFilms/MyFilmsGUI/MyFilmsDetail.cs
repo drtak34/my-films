@@ -1187,7 +1187,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 break;
 
               case "trakt-Shouts":
-                SetTraktShout(MyFilms.currentMovie);
+                movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
+                SetTraktShout(movie);
+                //SetTraktShout(MyFilms.currentMovie);
                 GUIWindowManager.ActivateWindow((int)TraktGUIWindows.Shouts);
                 break;
 
@@ -1932,8 +1934,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!string.IsNullOrEmpty(sr["Number"].ToString()))
             movie.ID = Int32.Parse(sr["Number"].ToString());
           else movie.ID = 0;
-          movie.Year = Int32.Parse(sr["Year"].ToString());
+
           movie.Title = sr["OriginalTitle"].ToString();
+
+          int year = 1900;
+          Int32.TryParse(sr["Year"].ToString(), out year);
+          movie.Year = year;
 
           bool played = false;
           if (MyFilms.conf.StrEnhancedWatchedStatusHandling)
@@ -1967,8 +1973,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
           }
           movie.File = mediapath;
+
+          string IMDB = "";
           if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
-            movie.IMDBNumber = sr["IMDB_Id"].ToString();
+            IMDB = sr["IMDB_Id"].ToString();
+          if (!string.IsNullOrEmpty(sr["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
+          {
+            string CleanString = sr["URL"].ToString();
+            Regex CutText = new Regex("" + @"tt\d{7}" + "");
+            Match m = CutText.Match(CleanString);
+            if (m.Success)
+              IMDB = m.Value;
+          }
+          movie.IMDBNumber = IMDB;
+
           if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString()))
             movie.TMDBNumber = sr["TMDB_Id"].ToString();
           movie.DateAdded = sr["Date"].ToString();
@@ -4563,6 +4581,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
                 GUIControl.HideControl(GetID, (int)Controls.CTRL_OTitle);
+
+
+            int year = 1900;
+            Int32.TryParse(MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString(), out year);
+            MyFilms.currentMovie.Year = year;
+            string IMDB = "";
+            if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"].ToString()))
+              IMDB = MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"].ToString();
+            if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
+            {
+              string CleanString = MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString();
+              Regex CutText = new Regex("" + @"tt\d{7}" + "");
+              Match m = CutText.Match(CleanString);
+              if (m.Success)
+                IMDB = m.Value;
+            }
+            MyFilms.currentMovie.IMDBNumber = IMDB;
 
             string file = "false";
             if (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Length > 0)
