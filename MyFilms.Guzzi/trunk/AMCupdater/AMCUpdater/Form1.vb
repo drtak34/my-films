@@ -540,7 +540,7 @@ Public Class Form1
 #End Region
 
 #Region "Misc GUI Actions"
-    Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectMovieFolder.Click
+    Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim wpath As String
         Dim currentPath As String
         currentPath = txtMovieFolder.Text
@@ -586,7 +586,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectConfigFile.Click
+    Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim currentDirectory As String
         currentDirectory = txtConfigFilePath.Text
         Try
@@ -763,7 +763,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectExcludeFile.Click
+    Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim currentPath As String
         currentPath = txtExcludeFilePath.Text
         If currentPath.Contains(";") = True Then
@@ -1619,7 +1619,7 @@ Public Class Form1
         End If
 
     End Sub
-    Private Sub Options_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtDefaultSourceField.Validating, chkExecuteProgram.Validating, txtExecuteProgramPath.Validating
+    Private Sub Options_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles chkExecuteProgram.Validating, txtExecuteProgramPath.Validating
         'txtDefaultFileType
         'txtDefaultSourceField
         'chkExecuteProgram
@@ -2520,7 +2520,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub btnExcludeFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileShow.Click
+    Private Sub btnExcludeFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim t As String = txtExcludeFilePath.Text
         Try
             Process.Start(t)
@@ -2528,7 +2528,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub btnExcludeFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileDelete.Click
+    Private Sub btnExcludeFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim dialogResult As Windows.Forms.DialogResult = Windows.Forms.MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dialogResult = Windows.Forms.DialogResult.OK Then
             Try

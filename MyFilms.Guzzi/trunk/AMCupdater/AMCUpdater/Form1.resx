@@ -212,6 +212,99 @@
         vf8Chxm7X1GMcz8AAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="btnManualDoTest.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        8Dsg/w+T+GsRKGk0sAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="btnManualApplyChanges.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -307,112 +400,45 @@
         kjX+os/+D1cNRyxq14aNAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnManualDoTest.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        8Dsg/w+T+GsRKGk0sAAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>280, 50</value>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1095, 13</value>
   </metadata>
   <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1095, 13</value>
   </metadata>
-  <data name="txtOverridePath.ToolTip" xml:space="preserve">
-    <value>Override path when writing to XML file:
-Use this field to change the path to your files.
-Normally used if you are scanning local files (i.e. d:\Movies)
-but your MediaPortal client will access them over the network (i.e. \\server\Movies\)
-The over-ride path will replace the 'Path to Movies Folder'.
-Note : Can only be used when scanning a single folder structure.</value>
+  <data name="chkFolderNameIsGroupName.ToolTip" xml:space="preserve">
+    <value>The MyFilms plugin supports the use of a Group Identifier to group movies together.
+Normally used for film Trilogies and so on.
+The update will attempt to work out which films are grouped based on the folder structure.
+The movie title will then be saved as 'Groupname \ Movie Name'</value>
+  </data>
+  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
+    <value>The location of your cover art files is stored in the Ant Movie Catalog 'Picture' field.
+You can refer to the file as a relative ('\covers\moviename.jpg') or full ('c:\covers\moviename.jpg') path.
+You can also store the cover art as 'folder.jpg' - this is only suitable if you store your movies in separate folders (one movie per folder)
+If using Folder.jpg - the system will use any existing file on import and will create one (if available online) if not.
+
+"Create Moviethumb" is an option to create and use thumbnails created from the movie content (thumbnailer).
+Usage: Disable internet lookup, enable Picture/Fanart and choose "Cover Thumbnail" in Picture Handling.
+THis is especially useful, if you have private movies, documentaries etc. where usually is no artwork available.</value>
+  </data>
+  <data name="txtPictureFilenamePrefix.ToolTip" xml:space="preserve">
+    <value>Alter this field to change the location and name of downloaded cover art.
+By default the images are stored in the same folder as your Ant database file.
+If you enter a relative folder path, this will be used as a subfolder
+i.e. 'covers\' will create / use a subfolder called 'covers'.
+You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
+i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
+  </data>
+  <metadata name="VidéoBindingNavigator.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>280, 50</value>
+  </metadata>
+  <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
+    <value>AMCUpdater can be instructed to ignore selected files.
+These files will never be scanned or imported by AMCUpdater.
+If the file does not exist; it will be created the first time you select 'Ignore' on a movie.
+Note:
+It is sufficient, to set path and name to a file - AMCupdater will autocreate it on first use.</value>
   </data>
   <data name="chkDontAskInteractive.ToolTip" xml:space="preserve">
     <value>Only effective, if you have chosen the internet lookup behaviour as
@@ -676,47 +702,6 @@ For example, an entry listing a Source of 'd:\Movies' will not be considered an 
         kjX+os/+D1cNRyxq14aNAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="chkParseSubtitleFiles.ToolTip" xml:space="preserve">
-    <value>When enabled, AMCUpdater will look for and analyse .IDX subtitle index files.
-These files will be scanned to determine what languages are included, if possible.
-This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
-</value>
-  </data>
-  <data name="txtExcludeFilePath.ToolTip" xml:space="preserve">
-    <value>AMCUpdater can be instructed to ignore selected files.
-These files will never be scanned or imported by AMCUpdater.
-If the file does not exist; it will be created the first time you select 'Ignore' on a movie.
-Note:
-It is sufficient, to set path and name to a file - AMCupdater will autocreate it on first use.</value>
-  </data>
-  <data name="Label46.Text" xml:space="preserve">
-    <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
-</value>
-  </data>
-  <data name="txtPictureFilenamePrefix.ToolTip" xml:space="preserve">
-    <value>Alter this field to change the location and name of downloaded cover art.
-By default the images are stored in the same folder as your Ant database file.
-If you enter a relative folder path, this will be used as a subfolder
-i.e. 'covers\' will create / use a subfolder called 'covers'.
-You can also add a prefix to the cover art filenames - this is for compatibility with Ant Movie Catalog which also does this.
-i.e. 'covers\MyDB' will save the images in the 'covers' subfolder, and the images will be named 'MyDBmoviename.jpg'.</value>
-  </data>
-  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
-    <value>The location of your cover art files is stored in the Ant Movie Catalog 'Picture' field.
-You can refer to the file as a relative ('\covers\moviename.jpg') or full ('c:\covers\moviename.jpg') path.
-You can also store the cover art as 'folder.jpg' - this is only suitable if you store your movies in separate folders (one movie per folder)
-If using Folder.jpg - the system will use any existing file on import and will create one (if available online) if not.
-
-"Create Moviethumb" is an option to create and use thumbnails created from the movie content (thumbnailer).
-Usage: Disable internet lookup, enable Picture/Fanart and choose "Cover Thumbnail" in Picture Handling.
-THis is especially useful, if you have private movies, documentaries etc. where usually is no artwork available.</value>
-  </data>
-  <data name="chkFolderNameIsGroupName.ToolTip" xml:space="preserve">
-    <value>The MyFilms plugin supports the use of a Group Identifier to group movies together.
-Normally used for film Trilogies and so on.
-The update will attempt to work out which films are grouped based on the folder structure.
-The movie title will then be saved as 'Groupname \ Movie Name'</value>
-  </data>
   <data name="chkManualDontAskInteractive.ToolTip" xml:space="preserve">
     <value>Check this, if you want to update your movie data without user interaction.
 If a movie can't be identified automatically, it will NOT show the userdialog for manual selection.
@@ -727,6 +712,24 @@ Auto matching depends very much on your database structure;
 if you have e.g. imdb links stored in URL field and try updaating with IMDB grabber script, auto match will always work
 due to usage if IMDB id.
 Other grabber scripts require matching by name and year, that might not always allow auto matches.</value>
+  </data>
+  <data name="txtOverridePath.ToolTip" xml:space="preserve">
+    <value>Override path when writing to XML file:
+Use this field to change the path to your files.
+Normally used if you are scanning local files (i.e. d:\Movies)
+but your MediaPortal client will access them over the network (i.e. \\server\Movies\)
+The over-ride path will replace the 'Path to Movies Folder'.
+Note : Can only be used when scanning a single folder structure.</value>
+  </data>
+  <data name="Label46.Text" xml:space="preserve">
+    <value>These options allow you to filter which files and folders are scanned and how to treat the filenames discovered.  You can filter out files or folders based on their names, as well as stripping out any unwanted characters / text strings.  The file and folder exclusion lists are case-insensitive string comparisons; the 'strip characters from title' list supports RegEx expressions.
+</value>
+  </data>
+  <data name="chkParseSubtitleFiles.ToolTip" xml:space="preserve">
+    <value>When enabled, AMCUpdater will look for and analyse .IDX subtitle index files.
+These files will be scanned to determine what languages are included, if possible.
+This does not affect the detection of external subtitle files - but may improve the results if you use .IDX files.
+</value>
   </data>
   <metadata name="VideoBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 50</value>

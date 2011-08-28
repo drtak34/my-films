@@ -29,24 +29,26 @@ Partial Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.Interactive = New System.Windows.Forms.TabPage
-        Me.GroupBox24 = New System.Windows.Forms.GroupBox
-        Me.txtOverridePath = New System.Windows.Forms.TextBox
-        Me.lblOverridePath = New System.Windows.Forms.Label
-        Me.btnSelectMovieFolder = New System.Windows.Forms.Button
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.txtMovieFolder = New System.Windows.Forms.TextBox
-        Me.Label17 = New System.Windows.Forms.Label
+        Me.Import_Movies = New System.Windows.Forms.TabPage
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox
+        Me.btnExcludeFileDelete = New System.Windows.Forms.Button
+        Me.btnExcludeFileShow = New System.Windows.Forms.Button
+        Me.txtExcludeFilePath = New System.Windows.Forms.TextBox
+        Me.Label22 = New System.Windows.Forms.Label
+        Me.btnSelectExcludeFile = New System.Windows.Forms.Button
+        Me.txtConfigFilePath = New System.Windows.Forms.TextBox
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.btnSelectConfigFile = New System.Windows.Forms.Button
         Me.GroupBox23 = New System.Windows.Forms.GroupBox
         Me.GroupBox27 = New System.Windows.Forms.GroupBox
         Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox
@@ -86,93 +88,7 @@ Partial Class Form1
         Me.btnUpdateXML = New System.Windows.Forms.Button
         Me.btnProcessMovieList = New System.Windows.Forms.Button
         Me.btnJustDoIt = New System.Windows.Forms.Button
-        Me.Options = New System.Windows.Forms.TabPage
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox
-        Me.chkParseTrailers = New System.Windows.Forms.CheckBox
-        Me.GroupBox25 = New System.Windows.Forms.GroupBox
-        Me.chkCheckDVDFolders = New System.Windows.Forms.CheckBox
-        Me.chkParseSubtitleFiles = New System.Windows.Forms.CheckBox
-        Me.chkParsePlaylistFiles = New System.Windows.Forms.CheckBox
-        Me.txtTrailerIentificationStrings = New System.Windows.Forms.TextBox
-        Me.Label79 = New System.Windows.Forms.Label
-        Me.txtDefaultFileTypesNonMedia = New System.Windows.Forms.TextBox
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.txtDefaultFileTypes = New System.Windows.Forms.TextBox
-        Me.Label15 = New System.Windows.Forms.Label
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox
-        Me.btnExcludeFileDelete = New System.Windows.Forms.Button
-        Me.btnExcludeFileShow = New System.Windows.Forms.Button
-        Me.btnSelectPersonArtworkFolder = New System.Windows.Forms.Button
-        Me.Label28 = New System.Windows.Forms.Label
-        Me.txtPersonArtworkFolder = New System.Windows.Forms.TextBox
-        Me.btnSelectFanartFolder = New System.Windows.Forms.Button
-        Me.txtFanartFolder = New System.Windows.Forms.TextBox
-        Me.Label48 = New System.Windows.Forms.Label
-        Me.txtExcludeFilePath = New System.Windows.Forms.TextBox
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.btnSelectExcludeFile = New System.Windows.Forms.Button
-        Me.txtConfigFilePath = New System.Windows.Forms.TextBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.btnSelectConfigFile = New System.Windows.Forms.Button
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox
-        Me.cbLogLevel = New System.Windows.Forms.ComboBox
-        Me.Label29 = New System.Windows.Forms.Label
-        Me.GroupBox12 = New System.Windows.Forms.GroupBox
-        Me.chkExecuteOnlyForOrphans = New System.Windows.Forms.CheckBox
-        Me.btnExecuteProgramSelectPath = New System.Windows.Forms.Button
-        Me.txtExecuteProgramPath = New System.Windows.Forms.TextBox
-        Me.chkExecuteProgram = New System.Windows.Forms.CheckBox
-        Me.Label27 = New System.Windows.Forms.Label
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox
-        Me.chkShortNames = New System.Windows.Forms.CheckBox
-        Me.chkReadDVDLabel = New System.Windows.Forms.CheckBox
-        Me.txtMediaLabel = New System.Windows.Forms.TextBox
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.txtMediaType = New System.Windows.Forms.TextBox
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.txtDefaultSourceField = New System.Windows.Forms.TextBox
-        Me.Label26 = New System.Windows.Forms.Label
-        Me.ScanFilters = New System.Windows.Forms.TabPage
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox
-        Me.Label25 = New System.Windows.Forms.Label
-        Me.txtRegExSearchMultiPart = New System.Windows.Forms.TextBox
-        Me.Label46 = New System.Windows.Forms.Label
-        Me.GroupBox20 = New System.Windows.Forms.GroupBox
-        Me.Label83 = New System.Windows.Forms.Label
-        Me.dgFilterStrings = New System.Windows.Forms.DataGridView
-        Me.GroupBox19 = New System.Windows.Forms.GroupBox
-        Me.dgExcludedFolderStrings = New System.Windows.Forms.DataGridView
-        Me.Label44 = New System.Windows.Forms.Label
-        Me.Label45 = New System.Windows.Forms.Label
-        Me.dgExcludedFileStrings = New System.Windows.Forms.DataGridView
-        Me.DatabaseFields = New System.Windows.Forms.TabPage
-        Me.cbMasterTitle = New System.Windows.Forms.ComboBox
-        Me.lblMasterTitle = New System.Windows.Forms.Label
-        Me.lblPicturePrefix = New System.Windows.Forms.Label
-        Me.txtPictureFilenamePrefix = New System.Windows.Forms.TextBox
-        Me.cbPictureHandling = New System.Windows.Forms.ComboBox
-        Me.lblPictureHandling = New System.Windows.Forms.Label
-        Me.cbGroupNameAppliesTo = New System.Windows.Forms.ComboBox
-        Me.lblGroupNameAppliesTo = New System.Windows.Forms.Label
-        Me.chkFolderNameIsGroupName = New System.Windows.Forms.CheckBox
-        Me.cbCheckHandling = New System.Windows.Forms.ComboBox
-        Me.lblCheckFieldHandling = New System.Windows.Forms.Label
-        Me.lblInternetLookupRequired = New System.Windows.Forms.Label
-        Me.cbDateHandling = New System.Windows.Forms.ComboBox
-        Me.Label30 = New System.Windows.Forms.Label
-        Me.GroupBox16 = New System.Windows.Forms.GroupBox
-        Me.Label33 = New System.Windows.Forms.Label
-        Me.Label32 = New System.Windows.Forms.Label
-        Me.btnDBFieldsSelectNoInternet = New System.Windows.Forms.Button
-        Me.Label31 = New System.Windows.Forms.Label
-        Me.btnDBFieldsSelectAllInternet = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectNoMedia = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectNone = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectAllMedia = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectAll = New System.Windows.Forms.Button
-        Me.cbDatabaseFields = New System.Windows.Forms.CheckedListBox
-        Me.Label34 = New System.Windows.Forms.Label
-        Me.Manual = New System.Windows.Forms.TabPage
+        Me.Update_Movies = New System.Windows.Forms.TabPage
         Me.btnManualCancel = New System.Windows.Forms.Button
         Me.grpManualInternetLookupSettings = New System.Windows.Forms.GroupBox
         Me.chkManualDontAskInteractive = New System.Windows.Forms.CheckBox
@@ -223,7 +139,96 @@ Partial Class Form1
         Me.txtManualExcludedMoviesPath = New System.Windows.Forms.TextBox
         Me.btnManualSelectXMLFile = New System.Windows.Forms.Button
         Me.btnManualSelectExcludedMoviesFile = New System.Windows.Forms.Button
-        Me.Test = New System.Windows.Forms.TabPage
+        Me.DatabaseFields = New System.Windows.Forms.TabPage
+        Me.Label88 = New System.Windows.Forms.Label
+        Me.TextBox33 = New System.Windows.Forms.TextBox
+        Me.GroupBox31 = New System.Windows.Forms.GroupBox
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox
+        Me.Label90 = New System.Windows.Forms.Label
+        Me.TextBox34 = New System.Windows.Forms.TextBox
+        Me.GroupBox30 = New System.Windows.Forms.GroupBox
+        Me.Label89 = New System.Windows.Forms.Label
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox
+        Me.TextBox32 = New System.Windows.Forms.TextBox
+        Me.GroupBox29 = New System.Windows.Forms.GroupBox
+        Me.cbGroupNameAppliesTo = New System.Windows.Forms.ComboBox
+        Me.chkFolderNameIsGroupName = New System.Windows.Forms.CheckBox
+        Me.lblGroupNameAppliesTo = New System.Windows.Forms.Label
+        Me.GroupBox28 = New System.Windows.Forms.GroupBox
+        Me.lblPicturePrefix = New System.Windows.Forms.Label
+        Me.lblPictureHandling = New System.Windows.Forms.Label
+        Me.cbPictureHandling = New System.Windows.Forms.ComboBox
+        Me.txtPictureFilenamePrefix = New System.Windows.Forms.TextBox
+        Me.lblMasterTitle = New System.Windows.Forms.Label
+        Me.cbMasterTitle = New System.Windows.Forms.ComboBox
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox
+        Me.lblCheckFieldHandling = New System.Windows.Forms.Label
+        Me.Label30 = New System.Windows.Forms.Label
+        Me.cbDateHandling = New System.Windows.Forms.ComboBox
+        Me.cbCheckHandling = New System.Windows.Forms.ComboBox
+        Me.lblInternetLookupRequired = New System.Windows.Forms.Label
+        Me.GroupBox16 = New System.Windows.Forms.GroupBox
+        Me.Label33 = New System.Windows.Forms.Label
+        Me.Label32 = New System.Windows.Forms.Label
+        Me.btnDBFieldsSelectNoInternet = New System.Windows.Forms.Button
+        Me.Label31 = New System.Windows.Forms.Label
+        Me.btnDBFieldsSelectAllInternet = New System.Windows.Forms.Button
+        Me.btnDBFieldsSelectNoMedia = New System.Windows.Forms.Button
+        Me.btnDBFieldsSelectNone = New System.Windows.Forms.Button
+        Me.btnDBFieldsSelectAllMedia = New System.Windows.Forms.Button
+        Me.btnDBFieldsSelectAll = New System.Windows.Forms.Button
+        Me.cbDatabaseFields = New System.Windows.Forms.CheckedListBox
+        Me.Label34 = New System.Windows.Forms.Label
+        Me.ScanFilters = New System.Windows.Forms.TabPage
+        Me.GroupBox24 = New System.Windows.Forms.GroupBox
+        Me.txtOverridePath = New System.Windows.Forms.TextBox
+        Me.lblOverridePath = New System.Windows.Forms.Label
+        Me.btnSelectMovieFolder = New System.Windows.Forms.Button
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.txtMovieFolder = New System.Windows.Forms.TextBox
+        Me.Label17 = New System.Windows.Forms.Label
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox
+        Me.Label25 = New System.Windows.Forms.Label
+        Me.txtRegExSearchMultiPart = New System.Windows.Forms.TextBox
+        Me.Label46 = New System.Windows.Forms.Label
+        Me.GroupBox20 = New System.Windows.Forms.GroupBox
+        Me.Label83 = New System.Windows.Forms.Label
+        Me.dgFilterStrings = New System.Windows.Forms.DataGridView
+        Me.GroupBox19 = New System.Windows.Forms.GroupBox
+        Me.dgExcludedFolderStrings = New System.Windows.Forms.DataGridView
+        Me.Label44 = New System.Windows.Forms.Label
+        Me.Label45 = New System.Windows.Forms.Label
+        Me.dgExcludedFileStrings = New System.Windows.Forms.DataGridView
+        Me.Options = New System.Windows.Forms.TabPage
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox
+        Me.chkParseTrailers = New System.Windows.Forms.CheckBox
+        Me.GroupBox25 = New System.Windows.Forms.GroupBox
+        Me.chkCheckDVDFolders = New System.Windows.Forms.CheckBox
+        Me.chkParseSubtitleFiles = New System.Windows.Forms.CheckBox
+        Me.chkParsePlaylistFiles = New System.Windows.Forms.CheckBox
+        Me.txtTrailerIentificationStrings = New System.Windows.Forms.TextBox
+        Me.Label79 = New System.Windows.Forms.Label
+        Me.txtDefaultFileTypesNonMedia = New System.Windows.Forms.TextBox
+        Me.Label14 = New System.Windows.Forms.Label
+        Me.txtDefaultFileTypes = New System.Windows.Forms.TextBox
+        Me.Label15 = New System.Windows.Forms.Label
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox
+        Me.btnSelectPersonArtworkFolder = New System.Windows.Forms.Button
+        Me.Label28 = New System.Windows.Forms.Label
+        Me.txtPersonArtworkFolder = New System.Windows.Forms.TextBox
+        Me.btnSelectFanartFolder = New System.Windows.Forms.Button
+        Me.txtFanartFolder = New System.Windows.Forms.TextBox
+        Me.Label48 = New System.Windows.Forms.Label
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox
+        Me.cbLogLevel = New System.Windows.Forms.ComboBox
+        Me.Label29 = New System.Windows.Forms.Label
+        Me.GroupBox12 = New System.Windows.Forms.GroupBox
+        Me.chkExecuteOnlyForOrphans = New System.Windows.Forms.CheckBox
+        Me.btnExecuteProgramSelectPath = New System.Windows.Forms.Button
+        Me.txtExecuteProgramPath = New System.Windows.Forms.TextBox
+        Me.chkExecuteProgram = New System.Windows.Forms.CheckBox
+        Me.Label27 = New System.Windows.Forms.Label
+        Me.Mediainfo_Test = New System.Windows.Forms.TabPage
         Me.Label47 = New System.Windows.Forms.Label
         Me.GroupBox18 = New System.Windows.Forms.GroupBox
         Me.txtSampleTextLanguageList = New System.Windows.Forms.TextBox
@@ -395,6 +400,11 @@ Partial Class Form1
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog
         Me.epOptions = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.chkShortNames = New System.Windows.Forms.CheckBox
+        Me.chkReadDVDLabel = New System.Windows.Forms.CheckBox
+        Me.txtMediaLabel = New System.Windows.Forms.TextBox
+        Me.txtMediaType = New System.Windows.Forms.TextBox
+        Me.txtDefaultSourceField = New System.Windows.Forms.TextBox
         Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog
         Me.ListVideos = New System.Windows.Forms.DataGridView
         Me.NumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -402,36 +412,45 @@ Partial Class Form1
         Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Label12 = New System.Windows.Forms.Label
+        Me.Label13 = New System.Windows.Forms.Label
+        Me.Label26 = New System.Windows.Forms.Label
+        Me.GroupBox32 = New System.Windows.Forms.GroupBox
         Me.TabControl1.SuspendLayout()
-        Me.Interactive.SuspendLayout()
-        Me.GroupBox24.SuspendLayout()
+        Me.Import_Movies.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
         Me.GroupBox23.SuspendLayout()
         Me.GroupBox27.SuspendLayout()
         Me.GroupBox26.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
-        Me.Options.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox25.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.GroupBox13.SuspendLayout()
-        Me.GroupBox12.SuspendLayout()
+        Me.Update_Movies.SuspendLayout()
+        Me.grpManualInternetLookupSettings.SuspendLayout()
+        Me.grpManualUpdatesParameters.SuspendLayout()
+        Me.GroupBox10.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
+        Me.DatabaseFields.SuspendLayout()
+        Me.GroupBox31.SuspendLayout()
+        Me.GroupBox30.SuspendLayout()
+        Me.GroupBox29.SuspendLayout()
+        Me.GroupBox28.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
+        Me.GroupBox16.SuspendLayout()
         Me.ScanFilters.SuspendLayout()
+        Me.GroupBox24.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox20.SuspendLayout()
         CType(Me.dgFilterStrings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox19.SuspendLayout()
         CType(Me.dgExcludedFolderStrings, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgExcludedFileStrings, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.DatabaseFields.SuspendLayout()
-        Me.GroupBox16.SuspendLayout()
-        Me.Manual.SuspendLayout()
-        Me.grpManualInternetLookupSettings.SuspendLayout()
-        Me.grpManualUpdatesParameters.SuspendLayout()
-        Me.GroupBox10.SuspendLayout()
-        Me.GroupBox9.SuspendLayout()
-        Me.Test.SuspendLayout()
+        Me.Options.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.GroupBox25.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
+        Me.GroupBox13.SuspendLayout()
+        Me.GroupBox12.SuspendLayout()
+        Me.Mediainfo_Test.SuspendLayout()
         Me.GroupBox18.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -455,6 +474,7 @@ Partial Class Form1
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox32.SuspendLayout()
         Me.SuspendLayout()
         '
         'FolderBrowserDialog1
@@ -466,12 +486,12 @@ Partial Class Form1
         Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TabControl1.Controls.Add(Me.Interactive)
-        Me.TabControl1.Controls.Add(Me.Options)
-        Me.TabControl1.Controls.Add(Me.ScanFilters)
+        Me.TabControl1.Controls.Add(Me.Import_Movies)
+        Me.TabControl1.Controls.Add(Me.Update_Movies)
         Me.TabControl1.Controls.Add(Me.DatabaseFields)
-        Me.TabControl1.Controls.Add(Me.Manual)
-        Me.TabControl1.Controls.Add(Me.Test)
+        Me.TabControl1.Controls.Add(Me.ScanFilters)
+        Me.TabControl1.Controls.Add(Me.Options)
+        Me.TabControl1.Controls.Add(Me.Mediainfo_Test)
         Me.TabControl1.Controls.Add(Me.ViewCollection)
         Me.TabControl1.Location = New System.Drawing.Point(0, 27)
         Me.TabControl1.Name = "TabControl1"
@@ -479,91 +499,112 @@ Partial Class Form1
         Me.TabControl1.Size = New System.Drawing.Size(608, 606)
         Me.TabControl1.TabIndex = 1
         '
-        'Interactive
+        'Import_Movies
         '
-        Me.Interactive.Controls.Add(Me.GroupBox24)
-        Me.Interactive.Controls.Add(Me.GroupBox23)
-        Me.Interactive.Controls.Add(Me.GroupBox17)
-        Me.Interactive.Controls.Add(Me.ToolStripProgressMessage)
-        Me.Interactive.Controls.Add(Me.btnShowHideLog)
-        Me.Interactive.Controls.Add(Me.GroupBox8)
-        Me.Interactive.Location = New System.Drawing.Point(4, 22)
-        Me.Interactive.Name = "Interactive"
-        Me.Interactive.Padding = New System.Windows.Forms.Padding(3)
-        Me.Interactive.Size = New System.Drawing.Size(600, 580)
-        Me.Interactive.TabIndex = 0
-        Me.Interactive.Text = "Interactive"
-        Me.Interactive.UseVisualStyleBackColor = True
+        Me.Import_Movies.Controls.Add(Me.GroupBox11)
+        Me.Import_Movies.Controls.Add(Me.GroupBox23)
+        Me.Import_Movies.Controls.Add(Me.GroupBox17)
+        Me.Import_Movies.Controls.Add(Me.ToolStripProgressMessage)
+        Me.Import_Movies.Controls.Add(Me.btnShowHideLog)
+        Me.Import_Movies.Controls.Add(Me.GroupBox8)
+        Me.Import_Movies.Location = New System.Drawing.Point(4, 22)
+        Me.Import_Movies.Name = "Import_Movies"
+        Me.Import_Movies.Padding = New System.Windows.Forms.Padding(3)
+        Me.Import_Movies.Size = New System.Drawing.Size(600, 580)
+        Me.Import_Movies.TabIndex = 0
+        Me.Import_Movies.Text = "Import Movies"
+        Me.Import_Movies.UseVisualStyleBackColor = True
         '
-        'GroupBox24
+        'GroupBox11
         '
-        Me.GroupBox24.Controls.Add(Me.txtOverridePath)
-        Me.GroupBox24.Controls.Add(Me.lblOverridePath)
-        Me.GroupBox24.Controls.Add(Me.btnSelectMovieFolder)
-        Me.GroupBox24.Controls.Add(Me.Label1)
-        Me.GroupBox24.Controls.Add(Me.txtMovieFolder)
-        Me.GroupBox24.Controls.Add(Me.Label17)
-        Me.GroupBox24.Location = New System.Drawing.Point(11, 88)
-        Me.GroupBox24.Name = "GroupBox24"
-        Me.GroupBox24.Size = New System.Drawing.Size(572, 88)
-        Me.GroupBox24.TabIndex = 106
-        Me.GroupBox24.TabStop = False
-        Me.GroupBox24.Text = "Movie Folder(s) ..."
+        Me.GroupBox11.Controls.Add(Me.btnExcludeFileDelete)
+        Me.GroupBox11.Controls.Add(Me.btnExcludeFileShow)
+        Me.GroupBox11.Controls.Add(Me.txtExcludeFilePath)
+        Me.GroupBox11.Controls.Add(Me.Label22)
+        Me.GroupBox11.Controls.Add(Me.btnSelectExcludeFile)
+        Me.GroupBox11.Controls.Add(Me.txtConfigFilePath)
+        Me.GroupBox11.Controls.Add(Me.Label2)
+        Me.GroupBox11.Controls.Add(Me.btnSelectConfigFile)
+        Me.GroupBox11.Location = New System.Drawing.Point(11, 6)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(572, 102)
+        Me.GroupBox11.TabIndex = 107
+        Me.GroupBox11.TabStop = False
+        Me.GroupBox11.Text = "Folders and Files ..."
         '
-        'txtOverridePath
+        'btnExcludeFileDelete
         '
-        Me.txtOverridePath.Location = New System.Drawing.Point(103, 60)
-        Me.txtOverridePath.Name = "txtOverridePath"
-        Me.txtOverridePath.Size = New System.Drawing.Size(410, 20)
-        Me.txtOverridePath.TabIndex = 40
-        Me.ToolTip1.SetToolTip(Me.txtOverridePath, resources.GetString("txtOverridePath.ToolTip"))
+        Me.btnExcludeFileDelete.Location = New System.Drawing.Point(339, 72)
+        Me.btnExcludeFileDelete.Name = "btnExcludeFileDelete"
+        Me.btnExcludeFileDelete.Size = New System.Drawing.Size(56, 20)
+        Me.btnExcludeFileDelete.TabIndex = 65
+        Me.btnExcludeFileDelete.Text = "delete"
+        Me.btnExcludeFileDelete.UseVisualStyleBackColor = True
         '
-        'lblOverridePath
+        'btnExcludeFileShow
         '
-        Me.lblOverridePath.AutoSize = True
-        Me.lblOverridePath.Location = New System.Drawing.Point(11, 63)
-        Me.lblOverridePath.Name = "lblOverridePath"
-        Me.lblOverridePath.Size = New System.Drawing.Size(71, 13)
-        Me.lblOverridePath.TabIndex = 41
-        Me.lblOverridePath.Text = "Override path"
+        Me.btnExcludeFileShow.Location = New System.Drawing.Point(415, 72)
+        Me.btnExcludeFileShow.Name = "btnExcludeFileShow"
+        Me.btnExcludeFileShow.Size = New System.Drawing.Size(56, 20)
+        Me.btnExcludeFileShow.TabIndex = 64
+        Me.btnExcludeFileShow.Text = "show"
+        Me.btnExcludeFileShow.UseVisualStyleBackColor = True
         '
-        'btnSelectMovieFolder
+        'txtExcludeFilePath
         '
-        Me.btnSelectMovieFolder.CausesValidation = False
-        Me.btnSelectMovieFolder.Location = New System.Drawing.Point(519, 34)
-        Me.btnSelectMovieFolder.Name = "btnSelectMovieFolder"
-        Me.btnSelectMovieFolder.Size = New System.Drawing.Size(32, 20)
-        Me.btnSelectMovieFolder.TabIndex = 1
-        Me.btnSelectMovieFolder.Text = "..."
-        Me.btnSelectMovieFolder.UseVisualStyleBackColor = True
+        Me.txtExcludeFilePath.Location = New System.Drawing.Point(12, 72)
+        Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
+        Me.txtExcludeFilePath.Size = New System.Drawing.Size(302, 20)
+        Me.txtExcludeFilePath.TabIndex = 60
+        Me.ToolTip1.SetToolTip(Me.txtExcludeFilePath, resources.GetString("txtExcludeFilePath.ToolTip"))
         '
-        'Label1
+        'Label22
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(11, 18)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(130, 13)
-        Me.Label1.TabIndex = 28
-        Me.Label1.Text = "Path to Movies Folder(s)  :"
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(12, 56)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(173, 13)
+        Me.Label22.TabIndex = 63
+        Me.Label22.Text = "Path to Excluded Movies File (.txt) :"
         '
-        'txtMovieFolder
+        'btnSelectExcludeFile
         '
-        Me.txtMovieFolder.Location = New System.Drawing.Point(12, 34)
-        Me.txtMovieFolder.Name = "txtMovieFolder"
-        Me.txtMovieFolder.Size = New System.Drawing.Size(501, 20)
-        Me.txtMovieFolder.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.txtMovieFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
-                "e folders with semi-colons.")
+        Me.btnSelectExcludeFile.CausesValidation = False
+        Me.btnSelectExcludeFile.Location = New System.Drawing.Point(523, 72)
+        Me.btnSelectExcludeFile.Name = "btnSelectExcludeFile"
+        Me.btnSelectExcludeFile.Size = New System.Drawing.Size(37, 20)
+        Me.btnSelectExcludeFile.TabIndex = 61
+        Me.btnSelectExcludeFile.Text = "..."
+        Me.btnSelectExcludeFile.UseVisualStyleBackColor = True
         '
-        'Label17
+        'txtConfigFilePath
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(273, 19)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(202, 12)
-        Me.Label17.TabIndex = 39
-        Me.Label17.Text = "Note : Separate movie folders with semi-colons."
+        Me.txtConfigFilePath.Location = New System.Drawing.Point(12, 32)
+        Me.txtConfigFilePath.Name = "txtConfigFilePath"
+        Me.txtConfigFilePath.Size = New System.Drawing.Size(503, 20)
+        Me.txtConfigFilePath.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.txtConfigFilePath, "Enter the location of your Ant Movie Database file." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This must be saved in .xml f" & _
+                "ormat." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you do not have one, enter the desired location and a new database fi" & _
+                "le will be created for you.")
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(12, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(168, 13)
+        Me.Label2.TabIndex = 62
+        Me.Label2.Text = "Path to AMC Database File (.xml) :"
+        '
+        'btnSelectConfigFile
+        '
+        Me.btnSelectConfigFile.CausesValidation = False
+        Me.btnSelectConfigFile.Location = New System.Drawing.Point(523, 32)
+        Me.btnSelectConfigFile.Name = "btnSelectConfigFile"
+        Me.btnSelectConfigFile.Size = New System.Drawing.Size(37, 20)
+        Me.btnSelectConfigFile.TabIndex = 59
+        Me.btnSelectConfigFile.Text = "..."
+        Me.btnSelectConfigFile.UseVisualStyleBackColor = True
         '
         'GroupBox23
         '
@@ -821,7 +862,7 @@ Partial Class Form1
         Me.GroupBox17.Controls.Add(Me.chkPurgeMissing)
         Me.GroupBox17.Controls.Add(Me.chkOverwriteXML)
         Me.GroupBox17.Controls.Add(Me.chkBackupXMLFirst)
-        Me.GroupBox17.Location = New System.Drawing.Point(11, 6)
+        Me.GroupBox17.Location = New System.Drawing.Point(11, 114)
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.Size = New System.Drawing.Size(572, 67)
         Me.GroupBox17.TabIndex = 103
@@ -998,946 +1039,27 @@ Partial Class Form1
         Me.btnJustDoIt.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
         Me.btnJustDoIt.UseVisualStyleBackColor = True
         '
-        'Options
-        '
-        Me.Options.Controls.Add(Me.GroupBox4)
-        Me.Options.Controls.Add(Me.GroupBox7)
-        Me.Options.Controls.Add(Me.GroupBox13)
-        Me.Options.Controls.Add(Me.GroupBox12)
-        Me.Options.Controls.Add(Me.GroupBox5)
-        Me.Options.Location = New System.Drawing.Point(4, 22)
-        Me.Options.Name = "Options"
-        Me.Options.Padding = New System.Windows.Forms.Padding(3)
-        Me.Options.Size = New System.Drawing.Size(600, 580)
-        Me.Options.TabIndex = 1
-        Me.Options.Text = "Options"
-        Me.Options.UseVisualStyleBackColor = True
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Controls.Add(Me.chkParseTrailers)
-        Me.GroupBox4.Controls.Add(Me.GroupBox25)
-        Me.GroupBox4.Controls.Add(Me.txtTrailerIentificationStrings)
-        Me.GroupBox4.Controls.Add(Me.Label79)
-        Me.GroupBox4.Controls.Add(Me.txtDefaultFileTypesNonMedia)
-        Me.GroupBox4.Controls.Add(Me.Label14)
-        Me.GroupBox4.Controls.Add(Me.txtDefaultFileTypes)
-        Me.GroupBox4.Controls.Add(Me.Label15)
-        Me.GroupBox4.Location = New System.Drawing.Point(8, 195)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(575, 138)
-        Me.GroupBox4.TabIndex = 106
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "File Type Identification ..."
-        '
-        'chkParseTrailers
-        '
-        Me.chkParseTrailers.AutoSize = True
-        Me.chkParseTrailers.Enabled = False
-        Me.chkParseTrailers.Location = New System.Drawing.Point(377, 112)
-        Me.chkParseTrailers.Name = "chkParseTrailers"
-        Me.chkParseTrailers.Size = New System.Drawing.Size(134, 17)
-        Me.chkParseTrailers.TabIndex = 31
-        Me.chkParseTrailers.Text = "Check for Trailers (wip)"
-        Me.chkParseTrailers.UseVisualStyleBackColor = True
-        Me.chkParseTrailers.Visible = False
-        '
-        'GroupBox25
-        '
-        Me.GroupBox25.Controls.Add(Me.chkCheckDVDFolders)
-        Me.GroupBox25.Controls.Add(Me.chkParseSubtitleFiles)
-        Me.GroupBox25.Controls.Add(Me.chkParsePlaylistFiles)
-        Me.GroupBox25.Location = New System.Drawing.Point(367, 16)
-        Me.GroupBox25.Name = "GroupBox25"
-        Me.GroupBox25.Size = New System.Drawing.Size(187, 91)
-        Me.GroupBox25.TabIndex = 31
-        Me.GroupBox25.TabStop = False
-        Me.GroupBox25.Text = "Media Scan Options ..."
-        '
-        'chkCheckDVDFolders
-        '
-        Me.chkCheckDVDFolders.AutoSize = True
-        Me.chkCheckDVDFolders.Location = New System.Drawing.Point(10, 23)
-        Me.chkCheckDVDFolders.Name = "chkCheckDVDFolders"
-        Me.chkCheckDVDFolders.Size = New System.Drawing.Size(132, 17)
-        Me.chkCheckDVDFolders.TabIndex = 10
-        Me.chkCheckDVDFolders.Text = "Check for DVD folders"
-        Me.ToolTip1.SetToolTip(Me.chkCheckDVDFolders, "Enable this option to search for DVD rips." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The system looks for a VIDEO_TS.IFO f" & _
-                "ile and attempts to work out" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the movie title from the folder structure.")
-        Me.chkCheckDVDFolders.UseVisualStyleBackColor = True
-        '
-        'chkParseSubtitleFiles
-        '
-        Me.chkParseSubtitleFiles.AutoSize = True
-        Me.chkParseSubtitleFiles.Location = New System.Drawing.Point(10, 46)
-        Me.chkParseSubtitleFiles.Name = "chkParseSubtitleFiles"
-        Me.chkParseSubtitleFiles.Size = New System.Drawing.Size(145, 17)
-        Me.chkParseSubtitleFiles.TabIndex = 30
-        Me.chkParseSubtitleFiles.Text = "Try to Parse Subtitle Files"
-        Me.ToolTip1.SetToolTip(Me.chkParseSubtitleFiles, resources.GetString("chkParseSubtitleFiles.ToolTip"))
-        Me.chkParseSubtitleFiles.UseVisualStyleBackColor = True
-        '
-        'chkParsePlaylistFiles
-        '
-        Me.chkParsePlaylistFiles.AutoSize = True
-        Me.chkParsePlaylistFiles.Enabled = False
-        Me.chkParsePlaylistFiles.Location = New System.Drawing.Point(10, 69)
-        Me.chkParsePlaylistFiles.Name = "chkParsePlaylistFiles"
-        Me.chkParsePlaylistFiles.Size = New System.Drawing.Size(156, 17)
-        Me.chkParsePlaylistFiles.TabIndex = 11
-        Me.chkParsePlaylistFiles.Text = "Check for Playlist Files (wip)"
-        Me.chkParsePlaylistFiles.UseVisualStyleBackColor = True
-        '
-        'txtTrailerIentificationStrings
-        '
-        Me.txtTrailerIentificationStrings.Location = New System.Drawing.Point(12, 110)
-        Me.txtTrailerIentificationStrings.Name = "txtTrailerIentificationStrings"
-        Me.txtTrailerIentificationStrings.Size = New System.Drawing.Size(296, 20)
-        Me.txtTrailerIentificationStrings.TabIndex = 29
-        Me.ToolTip1.SetToolTip(Me.txtTrailerIentificationStrings, "if a file contains one of these strings, it will be identified as trailer instead" & _
-                " of movie" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "several values are possible - use "";"" as delimiter.")
-        '
-        'Label79
-        '
-        Me.Label79.AutoSize = True
-        Me.Label79.Location = New System.Drawing.Point(9, 94)
-        Me.Label79.Name = "Label79"
-        Me.Label79.Size = New System.Drawing.Size(183, 13)
-        Me.Label79.TabIndex = 28
-        Me.Label79.Text = "Accepted Trailer Identification Strings"
-        '
-        'txtDefaultFileTypesNonMedia
-        '
-        Me.txtDefaultFileTypesNonMedia.Location = New System.Drawing.Point(12, 71)
-        Me.txtDefaultFileTypesNonMedia.Name = "txtDefaultFileTypesNonMedia"
-        Me.txtDefaultFileTypesNonMedia.Size = New System.Drawing.Size(296, 20)
-        Me.txtDefaultFileTypesNonMedia.TabIndex = 9
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(9, 55)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(268, 13)
-        Me.Label14.TabIndex = 26
-        Me.Label14.Text = "Accepted non-Media Files (import without media details)"
-        '
-        'txtDefaultFileTypes
-        '
-        Me.txtDefaultFileTypes.Location = New System.Drawing.Point(12, 32)
-        Me.txtDefaultFileTypes.Name = "txtDefaultFileTypes"
-        Me.txtDefaultFileTypes.Size = New System.Drawing.Size(296, 20)
-        Me.txtDefaultFileTypes.TabIndex = 8
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(9, 16)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(257, 13)
-        Me.Label15.TabIndex = 25
-        Me.Label15.Text = "Accepted Media Files. Separate List with semi-colons"
-        Me.ToolTip1.SetToolTip(Me.Label15, "Accepted Media Files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate List with semi-colons, e.g. wmv,avi,mpg")
-        '
-        'GroupBox7
-        '
-        Me.GroupBox7.Controls.Add(Me.btnExcludeFileDelete)
-        Me.GroupBox7.Controls.Add(Me.btnExcludeFileShow)
-        Me.GroupBox7.Controls.Add(Me.btnSelectPersonArtworkFolder)
-        Me.GroupBox7.Controls.Add(Me.Label28)
-        Me.GroupBox7.Controls.Add(Me.txtPersonArtworkFolder)
-        Me.GroupBox7.Controls.Add(Me.btnSelectFanartFolder)
-        Me.GroupBox7.Controls.Add(Me.txtFanartFolder)
-        Me.GroupBox7.Controls.Add(Me.Label48)
-        Me.GroupBox7.Controls.Add(Me.txtExcludeFilePath)
-        Me.GroupBox7.Controls.Add(Me.Label22)
-        Me.GroupBox7.Controls.Add(Me.btnSelectExcludeFile)
-        Me.GroupBox7.Controls.Add(Me.txtConfigFilePath)
-        Me.GroupBox7.Controls.Add(Me.Label2)
-        Me.GroupBox7.Controls.Add(Me.btnSelectConfigFile)
-        Me.GroupBox7.Location = New System.Drawing.Point(8, 6)
-        Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(575, 183)
-        Me.GroupBox7.TabIndex = 103
-        Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Folders and Files"
-        '
-        'btnExcludeFileDelete
-        '
-        Me.btnExcludeFileDelete.Location = New System.Drawing.Point(333, 72)
-        Me.btnExcludeFileDelete.Name = "btnExcludeFileDelete"
-        Me.btnExcludeFileDelete.Size = New System.Drawing.Size(56, 20)
-        Me.btnExcludeFileDelete.TabIndex = 57
-        Me.btnExcludeFileDelete.Text = "delete"
-        Me.btnExcludeFileDelete.UseVisualStyleBackColor = True
-        '
-        'btnExcludeFileShow
-        '
-        Me.btnExcludeFileShow.Location = New System.Drawing.Point(409, 72)
-        Me.btnExcludeFileShow.Name = "btnExcludeFileShow"
-        Me.btnExcludeFileShow.Size = New System.Drawing.Size(56, 20)
-        Me.btnExcludeFileShow.TabIndex = 56
-        Me.btnExcludeFileShow.Text = "show"
-        Me.btnExcludeFileShow.UseVisualStyleBackColor = True
-        '
-        'btnSelectPersonArtworkFolder
-        '
-        Me.btnSelectPersonArtworkFolder.Enabled = False
-        Me.btnSelectPersonArtworkFolder.Location = New System.Drawing.Point(517, 153)
-        Me.btnSelectPersonArtworkFolder.Name = "btnSelectPersonArtworkFolder"
-        Me.btnSelectPersonArtworkFolder.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectPersonArtworkFolder.TabIndex = 53
-        Me.btnSelectPersonArtworkFolder.Text = "..."
-        Me.btnSelectPersonArtworkFolder.UseVisualStyleBackColor = True
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Enabled = False
-        Me.Label28.Location = New System.Drawing.Point(6, 137)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(117, 13)
-        Me.Label28.TabIndex = 52
-        Me.Label28.Text = "Path to Person Images:"
-        '
-        'txtPersonArtworkFolder
-        '
-        Me.txtPersonArtworkFolder.Enabled = False
-        Me.txtPersonArtworkFolder.Location = New System.Drawing.Point(6, 153)
-        Me.txtPersonArtworkFolder.Name = "txtPersonArtworkFolder"
-        Me.txtPersonArtworkFolder.Size = New System.Drawing.Size(503, 20)
-        Me.txtPersonArtworkFolder.TabIndex = 51
-        '
-        'btnSelectFanartFolder
-        '
-        Me.btnSelectFanartFolder.CausesValidation = False
-        Me.btnSelectFanartFolder.Location = New System.Drawing.Point(517, 112)
-        Me.btnSelectFanartFolder.Name = "btnSelectFanartFolder"
-        Me.btnSelectFanartFolder.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectFanartFolder.TabIndex = 50
-        Me.btnSelectFanartFolder.Text = "..."
-        Me.btnSelectFanartFolder.UseVisualStyleBackColor = True
-        '
-        'txtFanartFolder
-        '
-        Me.txtFanartFolder.Location = New System.Drawing.Point(6, 112)
-        Me.txtFanartFolder.Name = "txtFanartFolder"
-        Me.txtFanartFolder.Size = New System.Drawing.Size(503, 20)
-        Me.txtFanartFolder.TabIndex = 49
-        Me.ToolTip1.SetToolTip(Me.txtFanartFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
-                "e folders with semi-colons.")
-        '
-        'Label48
-        '
-        Me.Label48.AutoSize = True
-        Me.Label48.Location = New System.Drawing.Point(6, 95)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(80, 13)
-        Me.Label48.TabIndex = 48
-        Me.Label48.Text = "Path to Fanart :"
-        '
-        'txtExcludeFilePath
-        '
-        Me.txtExcludeFilePath.Location = New System.Drawing.Point(6, 72)
-        Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
-        Me.txtExcludeFilePath.Size = New System.Drawing.Size(302, 20)
-        Me.txtExcludeFilePath.TabIndex = 6
-        Me.ToolTip1.SetToolTip(Me.txtExcludeFilePath, resources.GetString("txtExcludeFilePath.ToolTip"))
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(6, 56)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(173, 13)
-        Me.Label22.TabIndex = 45
-        Me.Label22.Text = "Path to Excluded Movies File (.txt) :"
-        '
-        'btnSelectExcludeFile
-        '
-        Me.btnSelectExcludeFile.CausesValidation = False
-        Me.btnSelectExcludeFile.Location = New System.Drawing.Point(517, 72)
-        Me.btnSelectExcludeFile.Name = "btnSelectExcludeFile"
-        Me.btnSelectExcludeFile.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectExcludeFile.TabIndex = 7
-        Me.btnSelectExcludeFile.Text = "..."
-        Me.btnSelectExcludeFile.UseVisualStyleBackColor = True
-        '
-        'txtConfigFilePath
-        '
-        Me.txtConfigFilePath.Location = New System.Drawing.Point(6, 32)
-        Me.txtConfigFilePath.Name = "txtConfigFilePath"
-        Me.txtConfigFilePath.Size = New System.Drawing.Size(503, 20)
-        Me.txtConfigFilePath.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.txtConfigFilePath, "Enter the location of your Ant Movie Database file." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This must be saved in .xml f" & _
-                "ormat." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you do not have one, enter the desired location and a new database fi" & _
-                "le will be created for you.")
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(6, 16)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(168, 13)
-        Me.Label2.TabIndex = 38
-        Me.Label2.Text = "Path to AMC Database File (.xml) :"
-        '
-        'btnSelectConfigFile
-        '
-        Me.btnSelectConfigFile.CausesValidation = False
-        Me.btnSelectConfigFile.Location = New System.Drawing.Point(517, 32)
-        Me.btnSelectConfigFile.Name = "btnSelectConfigFile"
-        Me.btnSelectConfigFile.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectConfigFile.TabIndex = 3
-        Me.btnSelectConfigFile.Text = "..."
-        Me.btnSelectConfigFile.UseVisualStyleBackColor = True
-        '
-        'GroupBox13
-        '
-        Me.GroupBox13.Controls.Add(Me.cbLogLevel)
-        Me.GroupBox13.Controls.Add(Me.Label29)
-        Me.GroupBox13.Location = New System.Drawing.Point(8, 530)
-        Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(575, 40)
-        Me.GroupBox13.TabIndex = 5
-        Me.GroupBox13.TabStop = False
-        Me.GroupBox13.Text = "Other"
-        '
-        'cbLogLevel
-        '
-        Me.cbLogLevel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbLogLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbLogLevel.FormattingEnabled = True
-        Me.cbLogLevel.Items.AddRange(New Object() {"All Events with Grabbing", "All Events", "Major Events", "Errors Only"})
-        Me.cbLogLevel.Location = New System.Drawing.Point(137, 13)
-        Me.cbLogLevel.Name = "cbLogLevel"
-        Me.cbLogLevel.Size = New System.Drawing.Size(171, 21)
-        Me.cbLogLevel.TabIndex = 20
-        Me.ToolTip1.SetToolTip(Me.cbLogLevel, "The logging level option controls what information is saved to the logfile")
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(9, 16)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(80, 13)
-        Me.Label29.TabIndex = 34
-        Me.Label29.Text = "Logging Level :"
-        '
-        'GroupBox12
-        '
-        Me.GroupBox12.Controls.Add(Me.chkExecuteOnlyForOrphans)
-        Me.GroupBox12.Controls.Add(Me.btnExecuteProgramSelectPath)
-        Me.GroupBox12.Controls.Add(Me.txtExecuteProgramPath)
-        Me.GroupBox12.Controls.Add(Me.chkExecuteProgram)
-        Me.GroupBox12.Controls.Add(Me.Label27)
-        Me.GroupBox12.Location = New System.Drawing.Point(8, 445)
-        Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(575, 79)
-        Me.GroupBox12.TabIndex = 4
-        Me.GroupBox12.TabStop = False
-        Me.GroupBox12.Text = "Post Processing"
-        '
-        'chkExecuteOnlyForOrphans
-        '
-        Me.chkExecuteOnlyForOrphans.AutoSize = True
-        Me.chkExecuteOnlyForOrphans.Location = New System.Drawing.Point(377, 16)
-        Me.chkExecuteOnlyForOrphans.Name = "chkExecuteOnlyForOrphans"
-        Me.chkExecuteOnlyForOrphans.Size = New System.Drawing.Size(136, 17)
-        Me.chkExecuteOnlyForOrphans.TabIndex = 19
-        Me.chkExecuteOnlyForOrphans.Text = "Only if changes applied"
-        Me.chkExecuteOnlyForOrphans.UseVisualStyleBackColor = True
-        '
-        'btnExecuteProgramSelectPath
-        '
-        Me.btnExecuteProgramSelectPath.Location = New System.Drawing.Point(476, 51)
-        Me.btnExecuteProgramSelectPath.Name = "btnExecuteProgramSelectPath"
-        Me.btnExecuteProgramSelectPath.Size = New System.Drawing.Size(37, 20)
-        Me.btnExecuteProgramSelectPath.TabIndex = 18
-        Me.btnExecuteProgramSelectPath.Text = "..."
-        Me.btnExecuteProgramSelectPath.UseVisualStyleBackColor = True
-        '
-        'txtExecuteProgramPath
-        '
-        Me.txtExecuteProgramPath.Location = New System.Drawing.Point(12, 51)
-        Me.txtExecuteProgramPath.Name = "txtExecuteProgramPath"
-        Me.txtExecuteProgramPath.Size = New System.Drawing.Size(458, 20)
-        Me.txtExecuteProgramPath.TabIndex = 17
-        '
-        'chkExecuteProgram
-        '
-        Me.chkExecuteProgram.AutoSize = True
-        Me.chkExecuteProgram.Location = New System.Drawing.Point(12, 16)
-        Me.chkExecuteProgram.Name = "chkExecuteProgram"
-        Me.chkExecuteProgram.Size = New System.Drawing.Size(217, 17)
-        Me.chkExecuteProgram.TabIndex = 16
-        Me.chkExecuteProgram.Text = "Launch a file after processing completed"
-        Me.chkExecuteProgram.UseVisualStyleBackColor = True
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(10, 35)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(143, 13)
-        Me.Label27.TabIndex = 31
-        Me.Label27.Text = "Path to executable to launch"
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.chkShortNames)
-        Me.GroupBox5.Controls.Add(Me.chkReadDVDLabel)
-        Me.GroupBox5.Controls.Add(Me.txtMediaLabel)
-        Me.GroupBox5.Controls.Add(Me.Label12)
-        Me.GroupBox5.Controls.Add(Me.txtMediaType)
-        Me.GroupBox5.Controls.Add(Me.Label13)
-        Me.GroupBox5.Controls.Add(Me.txtDefaultSourceField)
-        Me.GroupBox5.Controls.Add(Me.Label26)
-        Me.GroupBox5.Location = New System.Drawing.Point(8, 339)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(575, 102)
-        Me.GroupBox5.TabIndex = 3
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "AMC Options ..."
-        '
-        'chkShortNames
-        '
-        Me.chkShortNames.AutoSize = True
-        Me.chkShortNames.Location = New System.Drawing.Point(377, 19)
-        Me.chkShortNames.Name = "chkShortNames"
-        Me.chkShortNames.Size = New System.Drawing.Size(145, 17)
-        Me.chkShortNames.TabIndex = 69
-        Me.chkShortNames.Text = "Store files with name only"
-        Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
-                "les in your setup.")
-        Me.chkShortNames.UseVisualStyleBackColor = True
-        '
-        'chkReadDVDLabel
-        '
-        Me.chkReadDVDLabel.AutoSize = True
-        Me.chkReadDVDLabel.Location = New System.Drawing.Point(377, 71)
-        Me.chkReadDVDLabel.Name = "chkReadDVDLabel"
-        Me.chkReadDVDLabel.Size = New System.Drawing.Size(156, 17)
-        Me.chkReadDVDLabel.TabIndex = 66
-        Me.chkReadDVDLabel.Text = "Try to read DVD Disk Label"
-        Me.ToolTip1.SetToolTip(Me.chkReadDVDLabel, "Used when importing movies from CD or DVD." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Will attempt to read the disk label a" & _
-                "nd use that in the Media Label field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If not found then the value entered for '" & _
-                "Media Label' will be used (if any).")
-        Me.chkReadDVDLabel.UseVisualStyleBackColor = True
-        '
-        'txtMediaLabel
-        '
-        Me.txtMediaLabel.Location = New System.Drawing.Point(137, 69)
-        Me.txtMediaLabel.Name = "txtMediaLabel"
-        Me.txtMediaLabel.Size = New System.Drawing.Size(171, 20)
-        Me.txtMediaLabel.TabIndex = 65
-        Me.ToolTip1.SetToolTip(Me.txtMediaLabel, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field" & _
-                ".")
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(9, 46)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(105, 13)
-        Me.Label12.TabIndex = 67
-        Me.Label12.Text = "Media Type (Preset):"
-        '
-        'txtMediaType
-        '
-        Me.txtMediaType.Location = New System.Drawing.Point(137, 43)
-        Me.txtMediaType.Name = "txtMediaType"
-        Me.txtMediaType.Size = New System.Drawing.Size(171, 20)
-        Me.txtMediaType.TabIndex = 64
-        Me.ToolTip1.SetToolTip(Me.txtMediaType, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field." & _
-                "")
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(9, 72)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(71, 13)
-        Me.Label13.TabIndex = 68
-        Me.Label13.Text = "Media Label :"
-        '
-        'txtDefaultSourceField
-        '
-        Me.txtDefaultSourceField.Location = New System.Drawing.Point(137, 17)
-        Me.txtDefaultSourceField.Name = "txtDefaultSourceField"
-        Me.txtDefaultSourceField.Size = New System.Drawing.Size(171, 20)
-        Me.txtDefaultSourceField.TabIndex = 12
-        Me.ToolTip1.SetToolTip(Me.txtDefaultSourceField, "This is the Ant Movie Catalog field which references the location of your moviel " & _
-                "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
-                "d to!")
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(9, 20)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(122, 13)
-        Me.Label26.TabIndex = 25
-        Me.Label26.Text = "Item for Storage File Info"
-        '
-        'ScanFilters
-        '
-        Me.ScanFilters.Controls.Add(Me.GroupBox6)
-        Me.ScanFilters.Controls.Add(Me.Label46)
-        Me.ScanFilters.Controls.Add(Me.GroupBox20)
-        Me.ScanFilters.Controls.Add(Me.GroupBox19)
-        Me.ScanFilters.Location = New System.Drawing.Point(4, 22)
-        Me.ScanFilters.Name = "ScanFilters"
-        Me.ScanFilters.Size = New System.Drawing.Size(600, 580)
-        Me.ScanFilters.TabIndex = 5
-        Me.ScanFilters.Text = "Scan Filters"
-        Me.ScanFilters.UseVisualStyleBackColor = True
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.Label25)
-        Me.GroupBox6.Controls.Add(Me.txtRegExSearchMultiPart)
-        Me.GroupBox6.Location = New System.Drawing.Point(8, 92)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(575, 63)
-        Me.GroupBox6.TabIndex = 58
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Multi Part Files Detection  ..."
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(6, 16)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(210, 13)
-        Me.Label25.TabIndex = 57
-        Me.Label25.Text = "RegEx Expression to detect multi-part files :"
-        '
-        'txtRegExSearchMultiPart
-        '
-        Me.txtRegExSearchMultiPart.Location = New System.Drawing.Point(9, 32)
-        Me.txtRegExSearchMultiPart.Name = "txtRegExSearchMultiPart"
-        Me.txtRegExSearchMultiPart.Size = New System.Drawing.Size(551, 20)
-        Me.txtRegExSearchMultiPart.TabIndex = 56
-        Me.ToolTip1.SetToolTip(Me.txtRegExSearchMultiPart, "AMCUpdater uses this Regular Expression to detect multi-part movies." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example: 'm" & _
-                "oviename - CD1.avi;'moviename - CD2.avi '")
-        '
-        'Label46
-        '
-        Me.Label46.Location = New System.Drawing.Point(14, 23)
-        Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(506, 54)
-        Me.Label46.TabIndex = 55
-        Me.Label46.Text = resources.GetString("Label46.Text")
-        '
-        'GroupBox20
-        '
-        Me.GroupBox20.Controls.Add(Me.Label83)
-        Me.GroupBox20.Controls.Add(Me.dgFilterStrings)
-        Me.GroupBox20.Location = New System.Drawing.Point(8, 172)
-        Me.GroupBox20.Name = "GroupBox20"
-        Me.GroupBox20.Size = New System.Drawing.Size(575, 212)
-        Me.GroupBox20.TabIndex = 54
-        Me.GroupBox20.TabStop = False
-        Me.GroupBox20.Text = "Strip Characters From Title ..."
-        '
-        'Label83
-        '
-        Me.Label83.AutoSize = True
-        Me.Label83.Location = New System.Drawing.Point(6, 20)
-        Me.Label83.Name = "Label83"
-        Me.Label83.Size = New System.Drawing.Size(233, 13)
-        Me.Label83.TabIndex = 52
-        Me.Label83.Text = "Cleanup TITLEs based on keyword and RegEx:"
-        '
-        'dgFilterStrings
-        '
-        Me.dgFilterStrings.AllowUserToResizeRows = False
-        Me.dgFilterStrings.BackgroundColor = System.Drawing.SystemColors.Window
-        Me.dgFilterStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.dgFilterStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
-        Me.dgFilterStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgFilterStrings.ColumnHeadersVisible = False
-        Me.dgFilterStrings.Location = New System.Drawing.Point(9, 41)
-        Me.dgFilterStrings.Name = "dgFilterStrings"
-        Me.dgFilterStrings.RowHeadersWidth = 25
-        Me.dgFilterStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgFilterStrings.Size = New System.Drawing.Size(551, 165)
-        Me.dgFilterStrings.TabIndex = 51
-        '
-        'GroupBox19
-        '
-        Me.GroupBox19.Controls.Add(Me.dgExcludedFolderStrings)
-        Me.GroupBox19.Controls.Add(Me.Label44)
-        Me.GroupBox19.Controls.Add(Me.Label45)
-        Me.GroupBox19.Controls.Add(Me.dgExcludedFileStrings)
-        Me.GroupBox19.Location = New System.Drawing.Point(8, 390)
-        Me.GroupBox19.Name = "GroupBox19"
-        Me.GroupBox19.Size = New System.Drawing.Size(575, 176)
-        Me.GroupBox19.TabIndex = 53
-        Me.GroupBox19.TabStop = False
-        Me.GroupBox19.Text = "File and Folder Exclusions ..."
-        '
-        'dgExcludedFolderStrings
-        '
-        Me.dgExcludedFolderStrings.AllowUserToResizeRows = False
-        Me.dgExcludedFolderStrings.BackgroundColor = System.Drawing.SystemColors.Window
-        Me.dgExcludedFolderStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.dgExcludedFolderStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
-        Me.dgExcludedFolderStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgExcludedFolderStrings.ColumnHeadersVisible = False
-        Me.dgExcludedFolderStrings.Location = New System.Drawing.Point(9, 41)
-        Me.dgExcludedFolderStrings.Name = "dgExcludedFolderStrings"
-        Me.dgExcludedFolderStrings.RowHeadersWidth = 25
-        Me.dgExcludedFolderStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgExcludedFolderStrings.Size = New System.Drawing.Size(259, 125)
-        Me.dgExcludedFolderStrings.TabIndex = 48
-        '
-        'Label44
-        '
-        Me.Label44.AutoSize = True
-        Me.Label44.Location = New System.Drawing.Point(6, 19)
-        Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(194, 13)
-        Me.Label44.TabIndex = 46
-        Me.Label44.Text = "Exclude FOLDERs based on keywords:"
-        '
-        'Label45
-        '
-        Me.Label45.AutoSize = True
-        Me.Label45.Location = New System.Drawing.Point(296, 19)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(173, 13)
-        Me.Label45.TabIndex = 47
-        Me.Label45.Text = "Exclude FILEs based on keywords:"
-        '
-        'dgExcludedFileStrings
-        '
-        Me.dgExcludedFileStrings.AllowUserToResizeRows = False
-        Me.dgExcludedFileStrings.BackgroundColor = System.Drawing.SystemColors.Window
-        Me.dgExcludedFileStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.dgExcludedFileStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
-        Me.dgExcludedFileStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgExcludedFileStrings.ColumnHeadersVisible = False
-        Me.dgExcludedFileStrings.Location = New System.Drawing.Point(299, 41)
-        Me.dgExcludedFileStrings.Name = "dgExcludedFileStrings"
-        Me.dgExcludedFileStrings.RowHeadersWidth = 25
-        Me.dgExcludedFileStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgExcludedFileStrings.Size = New System.Drawing.Size(261, 125)
-        Me.dgExcludedFileStrings.TabIndex = 49
-        '
-        'DatabaseFields
-        '
-        Me.DatabaseFields.Controls.Add(Me.cbMasterTitle)
-        Me.DatabaseFields.Controls.Add(Me.lblMasterTitle)
-        Me.DatabaseFields.Controls.Add(Me.lblPicturePrefix)
-        Me.DatabaseFields.Controls.Add(Me.txtPictureFilenamePrefix)
-        Me.DatabaseFields.Controls.Add(Me.cbPictureHandling)
-        Me.DatabaseFields.Controls.Add(Me.lblPictureHandling)
-        Me.DatabaseFields.Controls.Add(Me.cbGroupNameAppliesTo)
-        Me.DatabaseFields.Controls.Add(Me.lblGroupNameAppliesTo)
-        Me.DatabaseFields.Controls.Add(Me.chkFolderNameIsGroupName)
-        Me.DatabaseFields.Controls.Add(Me.cbCheckHandling)
-        Me.DatabaseFields.Controls.Add(Me.lblCheckFieldHandling)
-        Me.DatabaseFields.Controls.Add(Me.lblInternetLookupRequired)
-        Me.DatabaseFields.Controls.Add(Me.cbDateHandling)
-        Me.DatabaseFields.Controls.Add(Me.Label30)
-        Me.DatabaseFields.Controls.Add(Me.GroupBox16)
-        Me.DatabaseFields.Controls.Add(Me.cbDatabaseFields)
-        Me.DatabaseFields.Controls.Add(Me.Label34)
-        Me.DatabaseFields.Location = New System.Drawing.Point(4, 22)
-        Me.DatabaseFields.Name = "DatabaseFields"
-        Me.DatabaseFields.Size = New System.Drawing.Size(600, 580)
-        Me.DatabaseFields.TabIndex = 4
-        Me.DatabaseFields.Text = "Database Fields"
-        Me.DatabaseFields.UseVisualStyleBackColor = True
-        '
-        'cbMasterTitle
-        '
-        Me.cbMasterTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbMasterTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMasterTitle.FormattingEnabled = True
-        Me.cbMasterTitle.Items.AddRange(New Object() {"TranslatedTitle", "OriginalTitle", "FormattedTitle"})
-        Me.cbMasterTitle.Location = New System.Drawing.Point(376, 410)
-        Me.cbMasterTitle.Name = "cbMasterTitle"
-        Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
-        Me.cbMasterTitle.TabIndex = 51
-        Me.ToolTip1.SetToolTip(Me.cbMasterTitle, "Select the title that is used for fanart search and creation.")
-        '
-        'lblMasterTitle
-        '
-        Me.lblMasterTitle.AutoSize = True
-        Me.lblMasterTitle.Location = New System.Drawing.Point(373, 394)
-        Me.lblMasterTitle.Name = "lblMasterTitle"
-        Me.lblMasterTitle.Size = New System.Drawing.Size(116, 13)
-        Me.lblMasterTitle.TabIndex = 50
-        Me.lblMasterTitle.Text = "Master Title (for fanart):"
-        '
-        'lblPicturePrefix
-        '
-        Me.lblPicturePrefix.AutoSize = True
-        Me.lblPicturePrefix.Location = New System.Drawing.Point(372, 518)
-        Me.lblPicturePrefix.Name = "lblPicturePrefix"
-        Me.lblPicturePrefix.Size = New System.Drawing.Size(148, 13)
-        Me.lblPicturePrefix.TabIndex = 49
-        Me.lblPicturePrefix.Text = "Add Prefix to Picture Filename"
-        '
-        'txtPictureFilenamePrefix
-        '
-        Me.txtPictureFilenamePrefix.Location = New System.Drawing.Point(376, 534)
-        Me.txtPictureFilenamePrefix.Name = "txtPictureFilenamePrefix"
-        Me.txtPictureFilenamePrefix.Size = New System.Drawing.Size(174, 20)
-        Me.txtPictureFilenamePrefix.TabIndex = 48
-        Me.ToolTip1.SetToolTip(Me.txtPictureFilenamePrefix, resources.GetString("txtPictureFilenamePrefix.ToolTip"))
-        '
-        'cbPictureHandling
-        '
-        Me.cbPictureHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbPictureHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPictureHandling.FormattingEnabled = True
-        Me.cbPictureHandling.Items.AddRange(New Object() {"Full Path", "Full Path & Create Moviethumb", "Relative Path", "Relative Path & Create Moviethumb", "Use Folder.jpg", "Create Moviethumb"})
-        Me.cbPictureHandling.Location = New System.Drawing.Point(376, 488)
-        Me.cbPictureHandling.Name = "cbPictureHandling"
-        Me.cbPictureHandling.Size = New System.Drawing.Size(174, 21)
-        Me.cbPictureHandling.TabIndex = 46
-        Me.ToolTip1.SetToolTip(Me.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"))
-        '
-        'lblPictureHandling
-        '
-        Me.lblPictureHandling.AutoSize = True
-        Me.lblPictureHandling.Location = New System.Drawing.Point(372, 472)
-        Me.lblPictureHandling.Name = "lblPictureHandling"
-        Me.lblPictureHandling.Size = New System.Drawing.Size(91, 13)
-        Me.lblPictureHandling.TabIndex = 45
-        Me.lblPictureHandling.Text = "Picture Handling :"
-        '
-        'cbGroupNameAppliesTo
-        '
-        Me.cbGroupNameAppliesTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbGroupNameAppliesTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbGroupNameAppliesTo.FormattingEnabled = True
-        Me.cbGroupNameAppliesTo.Items.AddRange(New Object() {"Original Title", "Translated Title", "Both Titles"})
-        Me.cbGroupNameAppliesTo.Location = New System.Drawing.Point(376, 355)
-        Me.cbGroupNameAppliesTo.Name = "cbGroupNameAppliesTo"
-        Me.cbGroupNameAppliesTo.Size = New System.Drawing.Size(174, 21)
-        Me.cbGroupNameAppliesTo.TabIndex = 44
-        '
-        'lblGroupNameAppliesTo
-        '
-        Me.lblGroupNameAppliesTo.AutoSize = True
-        Me.lblGroupNameAppliesTo.Location = New System.Drawing.Point(373, 339)
-        Me.lblGroupNameAppliesTo.Name = "lblGroupNameAppliesTo"
-        Me.lblGroupNameAppliesTo.Size = New System.Drawing.Size(113, 13)
-        Me.lblGroupNameAppliesTo.TabIndex = 43
-        Me.lblGroupNameAppliesTo.Text = "Add Group Name to ..."
-        '
-        'chkFolderNameIsGroupName
-        '
-        Me.chkFolderNameIsGroupName.AutoSize = True
-        Me.chkFolderNameIsGroupName.Location = New System.Drawing.Point(376, 319)
-        Me.chkFolderNameIsGroupName.Name = "chkFolderNameIsGroupName"
-        Me.chkFolderNameIsGroupName.Size = New System.Drawing.Size(175, 17)
-        Me.chkFolderNameIsGroupName.TabIndex = 42
-        Me.chkFolderNameIsGroupName.Text = "Folder Name as Group Identifier"
-        Me.ToolTip1.SetToolTip(Me.chkFolderNameIsGroupName, resources.GetString("chkFolderNameIsGroupName.ToolTip"))
-        Me.chkFolderNameIsGroupName.UseVisualStyleBackColor = True
-        '
-        'cbCheckHandling
-        '
-        Me.cbCheckHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbCheckHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCheckHandling.FormattingEnabled = True
-        Me.cbCheckHandling.Items.AddRange(New Object() {"Checked", "Unchecked"})
-        Me.cbCheckHandling.Location = New System.Drawing.Point(376, 238)
-        Me.cbCheckHandling.Name = "cbCheckHandling"
-        Me.cbCheckHandling.Size = New System.Drawing.Size(174, 21)
-        Me.cbCheckHandling.TabIndex = 41
-        Me.ToolTip1.SetToolTip(Me.cbCheckHandling, "The Ant Movie Catalog database includes a boolean 'Checked' field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you select" & _
-                " this option in the Database Fields list you can choose " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "whether to set it to '" & _
-                "True' or 'False'.")
-        '
-        'lblCheckFieldHandling
-        '
-        Me.lblCheckFieldHandling.AutoSize = True
-        Me.lblCheckFieldHandling.Location = New System.Drawing.Point(373, 222)
-        Me.lblCheckFieldHandling.Name = "lblCheckFieldHandling"
-        Me.lblCheckFieldHandling.Size = New System.Drawing.Size(120, 13)
-        Me.lblCheckFieldHandling.TabIndex = 40
-        Me.lblCheckFieldHandling.Text = "Checked Field Handling"
-        '
-        'lblInternetLookupRequired
-        '
-        Me.lblInternetLookupRequired.AutoSize = True
-        Me.lblInternetLookupRequired.ForeColor = System.Drawing.Color.Red
-        Me.lblInternetLookupRequired.Location = New System.Drawing.Point(389, 188)
-        Me.lblInternetLookupRequired.Name = "lblInternetLookupRequired"
-        Me.lblInternetLookupRequired.Size = New System.Drawing.Size(147, 26)
-        Me.lblInternetLookupRequired.TabIndex = 39
-        Me.lblInternetLookupRequired.Text = "-- Internet lookup is required --" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "-- with these settings --"
-        Me.lblInternetLookupRequired.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'cbDateHandling
-        '
-        Me.cbDateHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbDateHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDateHandling.FormattingEnabled = True
-        Me.cbDateHandling.Items.AddRange(New Object() {"File Created Date", "File Modified Date", "Current System Date", "No Date"})
-        Me.cbDateHandling.Location = New System.Drawing.Point(376, 281)
-        Me.cbDateHandling.Name = "cbDateHandling"
-        Me.cbDateHandling.Size = New System.Drawing.Size(174, 21)
-        Me.cbDateHandling.TabIndex = 36
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(373, 265)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(106, 13)
-        Me.Label30.TabIndex = 35
-        Me.Label30.Text = "Date Field Handling :"
-        '
-        'GroupBox16
-        '
-        Me.GroupBox16.Controls.Add(Me.Label33)
-        Me.GroupBox16.Controls.Add(Me.Label32)
-        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectNoInternet)
-        Me.GroupBox16.Controls.Add(Me.Label31)
-        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectAllInternet)
-        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectNoMedia)
-        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectNone)
-        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectAllMedia)
-        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectAll)
-        Me.GroupBox16.Location = New System.Drawing.Point(371, 35)
-        Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.Size = New System.Drawing.Size(187, 148)
-        Me.GroupBox16.TabIndex = 9
-        Me.GroupBox16.TabStop = False
-        Me.GroupBox16.Text = "Quick Select ..."
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(5, 100)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(176, 13)
-        Me.Label33.TabIndex = 4
-        Me.Label33.Text = "Only data retrieved from the Internet"
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(6, 58)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(83, 13)
-        Me.Label32.TabIndex = 4
-        Me.Label32.Text = "Only media data"
-        '
-        'btnDBFieldsSelectNoInternet
-        '
-        Me.btnDBFieldsSelectNoInternet.Location = New System.Drawing.Point(95, 116)
-        Me.btnDBFieldsSelectNoInternet.Name = "btnDBFieldsSelectNoInternet"
-        Me.btnDBFieldsSelectNoInternet.Size = New System.Drawing.Size(80, 23)
-        Me.btnDBFieldsSelectNoInternet.TabIndex = 30
-        Me.btnDBFieldsSelectNoInternet.Text = "Select None"
-        Me.btnDBFieldsSelectNoInternet.UseVisualStyleBackColor = True
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(6, 16)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(45, 13)
-        Me.Label31.TabIndex = 4
-        Me.Label31.Text = "All items"
-        '
-        'btnDBFieldsSelectAllInternet
-        '
-        Me.btnDBFieldsSelectAllInternet.Location = New System.Drawing.Point(8, 116)
-        Me.btnDBFieldsSelectAllInternet.Name = "btnDBFieldsSelectAllInternet"
-        Me.btnDBFieldsSelectAllInternet.Size = New System.Drawing.Size(81, 23)
-        Me.btnDBFieldsSelectAllInternet.TabIndex = 25
-        Me.btnDBFieldsSelectAllInternet.Text = "Select All"
-        Me.btnDBFieldsSelectAllInternet.UseVisualStyleBackColor = True
-        '
-        'btnDBFieldsSelectNoMedia
-        '
-        Me.btnDBFieldsSelectNoMedia.Location = New System.Drawing.Point(95, 74)
-        Me.btnDBFieldsSelectNoMedia.Name = "btnDBFieldsSelectNoMedia"
-        Me.btnDBFieldsSelectNoMedia.Size = New System.Drawing.Size(80, 23)
-        Me.btnDBFieldsSelectNoMedia.TabIndex = 20
-        Me.btnDBFieldsSelectNoMedia.Text = "Select None"
-        Me.btnDBFieldsSelectNoMedia.UseVisualStyleBackColor = True
-        '
-        'btnDBFieldsSelectNone
-        '
-        Me.btnDBFieldsSelectNone.Location = New System.Drawing.Point(95, 32)
-        Me.btnDBFieldsSelectNone.Name = "btnDBFieldsSelectNone"
-        Me.btnDBFieldsSelectNone.Size = New System.Drawing.Size(80, 23)
-        Me.btnDBFieldsSelectNone.TabIndex = 11
-        Me.btnDBFieldsSelectNone.Text = "Select None"
-        Me.btnDBFieldsSelectNone.UseVisualStyleBackColor = True
-        '
-        'btnDBFieldsSelectAllMedia
-        '
-        Me.btnDBFieldsSelectAllMedia.Location = New System.Drawing.Point(9, 74)
-        Me.btnDBFieldsSelectAllMedia.Name = "btnDBFieldsSelectAllMedia"
-        Me.btnDBFieldsSelectAllMedia.Size = New System.Drawing.Size(80, 23)
-        Me.btnDBFieldsSelectAllMedia.TabIndex = 15
-        Me.btnDBFieldsSelectAllMedia.Text = "Select All"
-        Me.btnDBFieldsSelectAllMedia.UseVisualStyleBackColor = True
-        '
-        'btnDBFieldsSelectAll
-        '
-        Me.btnDBFieldsSelectAll.Location = New System.Drawing.Point(9, 32)
-        Me.btnDBFieldsSelectAll.Name = "btnDBFieldsSelectAll"
-        Me.btnDBFieldsSelectAll.Size = New System.Drawing.Size(80, 23)
-        Me.btnDBFieldsSelectAll.TabIndex = 10
-        Me.btnDBFieldsSelectAll.Text = "Select All"
-        Me.btnDBFieldsSelectAll.UseVisualStyleBackColor = True
-        '
-        'cbDatabaseFields
-        '
-        Me.cbDatabaseFields.CheckOnClick = True
-        Me.cbDatabaseFields.ColumnWidth = 140
-        Me.cbDatabaseFields.FormattingEnabled = True
-        Me.cbDatabaseFields.Location = New System.Drawing.Point(11, 24)
-        Me.cbDatabaseFields.MultiColumn = True
-        Me.cbDatabaseFields.Name = "cbDatabaseFields"
-        Me.cbDatabaseFields.Size = New System.Drawing.Size(322, 544)
-        Me.cbDatabaseFields.TabIndex = 8
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Location = New System.Drawing.Point(8, 10)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(329, 13)
-        Me.Label34.TabIndex = 7
-        Me.Label34.Text = "Here you can select which database fields will be imported/updated."
-        '
-        'Manual
-        '
-        Me.Manual.Controls.Add(Me.btnManualCancel)
-        Me.Manual.Controls.Add(Me.grpManualInternetLookupSettings)
-        Me.Manual.Controls.Add(Me.btnShowHideLogTest)
-        Me.Manual.Controls.Add(Me.btnManualApplyChanges)
-        Me.Manual.Controls.Add(Me.btnManualDoTest)
-        Me.Manual.Controls.Add(Me.grpManualUpdatesParameters)
-        Me.Manual.Controls.Add(Me.GroupBox10)
-        Me.Manual.Controls.Add(Me.GroupBox9)
-        Me.Manual.Location = New System.Drawing.Point(4, 22)
-        Me.Manual.Name = "Manual"
-        Me.Manual.Size = New System.Drawing.Size(600, 580)
-        Me.Manual.TabIndex = 3
-        Me.Manual.Text = "Manual Update"
-        Me.Manual.UseVisualStyleBackColor = True
+        'Update_Movies
+        '
+        Me.Update_Movies.Controls.Add(Me.GroupBox32)
+        Me.Update_Movies.Controls.Add(Me.grpManualInternetLookupSettings)
+        Me.Update_Movies.Controls.Add(Me.btnShowHideLogTest)
+        Me.Update_Movies.Controls.Add(Me.grpManualUpdatesParameters)
+        Me.Update_Movies.Controls.Add(Me.GroupBox10)
+        Me.Update_Movies.Controls.Add(Me.GroupBox9)
+        Me.Update_Movies.Location = New System.Drawing.Point(4, 22)
+        Me.Update_Movies.Name = "Update_Movies"
+        Me.Update_Movies.Size = New System.Drawing.Size(600, 580)
+        Me.Update_Movies.TabIndex = 3
+        Me.Update_Movies.Text = "Update Movies"
+        Me.Update_Movies.UseVisualStyleBackColor = True
         '
         'btnManualCancel
         '
         Me.btnManualCancel.Enabled = False
         Me.btnManualCancel.Image = CType(resources.GetObject("btnManualCancel.Image"), System.Drawing.Image)
         Me.btnManualCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnManualCancel.Location = New System.Drawing.Point(269, 494)
+        Me.btnManualCancel.Location = New System.Drawing.Point(263, 21)
         Me.btnManualCancel.Name = "btnManualCancel"
         Me.btnManualCancel.Size = New System.Drawing.Size(110, 57)
         Me.btnManualCancel.TabIndex = 102
@@ -2039,7 +1161,7 @@ Partial Class Form1
         'btnShowHideLogTest
         '
         Me.btnShowHideLogTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnShowHideLogTest.Location = New System.Drawing.Point(489, 529)
+        Me.btnShowHideLogTest.Location = New System.Drawing.Point(489, 547)
         Me.btnShowHideLogTest.Name = "btnShowHideLogTest"
         Me.btnShowHideLogTest.Size = New System.Drawing.Size(94, 22)
         Me.btnShowHideLogTest.TabIndex = 100
@@ -2051,7 +1173,7 @@ Partial Class Form1
         Me.btnManualApplyChanges.Enabled = False
         Me.btnManualApplyChanges.Image = CType(resources.GetObject("btnManualApplyChanges.Image"), System.Drawing.Image)
         Me.btnManualApplyChanges.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnManualApplyChanges.Location = New System.Drawing.Point(130, 494)
+        Me.btnManualApplyChanges.Location = New System.Drawing.Point(124, 21)
         Me.btnManualApplyChanges.Name = "btnManualApplyChanges"
         Me.btnManualApplyChanges.Size = New System.Drawing.Size(110, 57)
         Me.btnManualApplyChanges.TabIndex = 55
@@ -2064,7 +1186,7 @@ Partial Class Form1
         '
         Me.btnManualDoTest.Image = CType(resources.GetObject("btnManualDoTest.Image"), System.Drawing.Image)
         Me.btnManualDoTest.ImageAlign = System.Drawing.ContentAlignment.BottomRight
-        Me.btnManualDoTest.Location = New System.Drawing.Point(14, 494)
+        Me.btnManualDoTest.Location = New System.Drawing.Point(8, 21)
         Me.btnManualDoTest.Name = "btnManualDoTest"
         Me.btnManualDoTest.Size = New System.Drawing.Size(110, 57)
         Me.btnManualDoTest.TabIndex = 50
@@ -2420,7 +1542,7 @@ Partial Class Form1
         Me.txtManualXMLPath.Enabled = False
         Me.txtManualXMLPath.Location = New System.Drawing.Point(8, 32)
         Me.txtManualXMLPath.Name = "txtManualXMLPath"
-        Me.txtManualXMLPath.Size = New System.Drawing.Size(464, 20)
+        Me.txtManualXMLPath.Size = New System.Drawing.Size(498, 20)
         Me.txtManualXMLPath.TabIndex = 0
         '
         'Label20
@@ -2451,7 +1573,7 @@ Partial Class Form1
         'btnManualSelectXMLFile
         '
         Me.btnManualSelectXMLFile.CausesValidation = False
-        Me.btnManualSelectXMLFile.Location = New System.Drawing.Point(478, 32)
+        Me.btnManualSelectXMLFile.Location = New System.Drawing.Point(512, 32)
         Me.btnManualSelectXMLFile.Name = "btnManualSelectXMLFile"
         Me.btnManualSelectXMLFile.Size = New System.Drawing.Size(36, 20)
         Me.btnManualSelectXMLFile.TabIndex = 1
@@ -2461,31 +1583,977 @@ Partial Class Form1
         'btnManualSelectExcludedMoviesFile
         '
         Me.btnManualSelectExcludedMoviesFile.CausesValidation = False
-        Me.btnManualSelectExcludedMoviesFile.Location = New System.Drawing.Point(478, 74)
+        Me.btnManualSelectExcludedMoviesFile.Location = New System.Drawing.Point(512, 73)
         Me.btnManualSelectExcludedMoviesFile.Name = "btnManualSelectExcludedMoviesFile"
         Me.btnManualSelectExcludedMoviesFile.Size = New System.Drawing.Size(36, 20)
         Me.btnManualSelectExcludedMoviesFile.TabIndex = 49
         Me.btnManualSelectExcludedMoviesFile.Text = "..."
         Me.btnManualSelectExcludedMoviesFile.UseVisualStyleBackColor = True
         '
-        'Test
+        'DatabaseFields
         '
-        Me.Test.Controls.Add(Me.Label47)
-        Me.Test.Controls.Add(Me.GroupBox18)
-        Me.Test.Controls.Add(Me.GroupBox3)
-        Me.Test.Controls.Add(Me.GroupBox2)
-        Me.Test.Controls.Add(Me.btnTestAnalyse)
-        Me.Test.Controls.Add(Me.GroupBox1)
-        Me.Test.Controls.Add(Me.Label3)
-        Me.Test.Controls.Add(Me.btnGetSampleFile)
-        Me.Test.Controls.Add(Me.txtSampleFile)
-        Me.Test.Location = New System.Drawing.Point(4, 22)
-        Me.Test.Name = "Test"
-        Me.Test.Padding = New System.Windows.Forms.Padding(3)
-        Me.Test.Size = New System.Drawing.Size(600, 580)
-        Me.Test.TabIndex = 2
-        Me.Test.Text = "Tests"
-        Me.Test.UseVisualStyleBackColor = True
+        Me.DatabaseFields.Controls.Add(Me.GroupBox31)
+        Me.DatabaseFields.Controls.Add(Me.GroupBox30)
+        Me.DatabaseFields.Controls.Add(Me.GroupBox29)
+        Me.DatabaseFields.Controls.Add(Me.GroupBox5)
+        Me.DatabaseFields.Controls.Add(Me.GroupBox28)
+        Me.DatabaseFields.Controls.Add(Me.lblInternetLookupRequired)
+        Me.DatabaseFields.Controls.Add(Me.GroupBox16)
+        Me.DatabaseFields.Controls.Add(Me.cbDatabaseFields)
+        Me.DatabaseFields.Controls.Add(Me.Label34)
+        Me.DatabaseFields.Location = New System.Drawing.Point(4, 22)
+        Me.DatabaseFields.Name = "DatabaseFields"
+        Me.DatabaseFields.Size = New System.Drawing.Size(600, 580)
+        Me.DatabaseFields.TabIndex = 4
+        Me.DatabaseFields.Text = "Database Fields"
+        Me.DatabaseFields.UseVisualStyleBackColor = True
+        '
+        'Label88
+        '
+        Me.Label88.AutoSize = True
+        Me.Label88.Location = New System.Drawing.Point(18, 74)
+        Me.Label88.Name = "Label88"
+        Me.Label88.Size = New System.Drawing.Size(105, 13)
+        Me.Label88.TabIndex = 67
+        Me.Label88.Text = "Media Type (Preset):"
+        '
+        'TextBox33
+        '
+        Me.TextBox33.Location = New System.Drawing.Point(164, 71)
+        Me.TextBox33.Name = "TextBox33"
+        Me.TextBox33.Size = New System.Drawing.Size(174, 20)
+        Me.TextBox33.TabIndex = 64
+        Me.ToolTip1.SetToolTip(Me.TextBox33, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field." & _
+                "")
+        '
+        'GroupBox31
+        '
+        Me.GroupBox31.Controls.Add(Me.CheckBox1)
+        Me.GroupBox31.Controls.Add(Me.Label90)
+        Me.GroupBox31.Controls.Add(Me.TextBox34)
+        Me.GroupBox31.Location = New System.Drawing.Point(239, 145)
+        Me.GroupBox31.Name = "GroupBox31"
+        Me.GroupBox31.Size = New System.Drawing.Size(353, 61)
+        Me.GroupBox31.TabIndex = 56
+        Me.GroupBox31.TabStop = False
+        Me.GroupBox31.Text = "Storage Field Handling ..."
+        '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(21, 37)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(145, 17)
+        Me.CheckBox1.TabIndex = 69
+        Me.CheckBox1.Text = "Store files with name only"
+        Me.ToolTip1.SetToolTip(Me.CheckBox1, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
+                "les in your setup.")
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
+        'Label90
+        '
+        Me.Label90.AutoSize = True
+        Me.Label90.Location = New System.Drawing.Point(18, 18)
+        Me.Label90.Name = "Label90"
+        Me.Label90.Size = New System.Drawing.Size(122, 13)
+        Me.Label90.TabIndex = 25
+        Me.Label90.Text = "Item for Storage File Info"
+        '
+        'TextBox34
+        '
+        Me.TextBox34.Location = New System.Drawing.Point(164, 15)
+        Me.TextBox34.Name = "TextBox34"
+        Me.TextBox34.Size = New System.Drawing.Size(174, 20)
+        Me.TextBox34.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.TextBox34, "This is the Ant Movie Catalog field which references the location of your moviel " & _
+                "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
+                "d to!")
+        '
+        'GroupBox30
+        '
+        Me.GroupBox30.Controls.Add(Me.Label89)
+        Me.GroupBox30.Controls.Add(Me.CheckBox2)
+        Me.GroupBox30.Controls.Add(Me.TextBox32)
+        Me.GroupBox30.Location = New System.Drawing.Point(239, 285)
+        Me.GroupBox30.Name = "GroupBox30"
+        Me.GroupBox30.Size = New System.Drawing.Size(353, 62)
+        Me.GroupBox30.TabIndex = 55
+        Me.GroupBox30.TabStop = False
+        Me.GroupBox30.Text = "Media Label Field Handling ..."
+        '
+        'Label89
+        '
+        Me.Label89.AutoSize = True
+        Me.Label89.Location = New System.Drawing.Point(18, 15)
+        Me.Label89.Name = "Label89"
+        Me.Label89.Size = New System.Drawing.Size(71, 13)
+        Me.Label89.TabIndex = 68
+        Me.Label89.Text = "Media Label :"
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(21, 38)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(156, 17)
+        Me.CheckBox2.TabIndex = 66
+        Me.CheckBox2.Text = "Try to read DVD Disk Label"
+        Me.ToolTip1.SetToolTip(Me.CheckBox2, "Used when importing movies from CD or DVD." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Will attempt to read the disk label a" & _
+                "nd use that in the Media Label field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If not found then the value entered for '" & _
+                "Media Label' will be used (if any).")
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'TextBox32
+        '
+        Me.TextBox32.Location = New System.Drawing.Point(164, 12)
+        Me.TextBox32.Name = "TextBox32"
+        Me.TextBox32.Size = New System.Drawing.Size(174, 20)
+        Me.TextBox32.TabIndex = 65
+        Me.ToolTip1.SetToolTip(Me.TextBox32, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field" & _
+                ".")
+        '
+        'GroupBox29
+        '
+        Me.GroupBox29.Controls.Add(Me.cbGroupNameAppliesTo)
+        Me.GroupBox29.Controls.Add(Me.chkFolderNameIsGroupName)
+        Me.GroupBox29.Controls.Add(Me.lblGroupNameAppliesTo)
+        Me.GroupBox29.Location = New System.Drawing.Point(239, 209)
+        Me.GroupBox29.Name = "GroupBox29"
+        Me.GroupBox29.Size = New System.Drawing.Size(353, 70)
+        Me.GroupBox29.TabIndex = 54
+        Me.GroupBox29.TabStop = False
+        Me.GroupBox29.Text = "Title Handling ..."
+        '
+        'cbGroupNameAppliesTo
+        '
+        Me.cbGroupNameAppliesTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbGroupNameAppliesTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbGroupNameAppliesTo.FormattingEnabled = True
+        Me.cbGroupNameAppliesTo.Items.AddRange(New Object() {"Original Title", "Translated Title", "Both Titles"})
+        Me.cbGroupNameAppliesTo.Location = New System.Drawing.Point(164, 40)
+        Me.cbGroupNameAppliesTo.Name = "cbGroupNameAppliesTo"
+        Me.cbGroupNameAppliesTo.Size = New System.Drawing.Size(174, 21)
+        Me.cbGroupNameAppliesTo.TabIndex = 44
+        '
+        'chkFolderNameIsGroupName
+        '
+        Me.chkFolderNameIsGroupName.AutoSize = True
+        Me.chkFolderNameIsGroupName.Location = New System.Drawing.Point(21, 17)
+        Me.chkFolderNameIsGroupName.Name = "chkFolderNameIsGroupName"
+        Me.chkFolderNameIsGroupName.Size = New System.Drawing.Size(175, 17)
+        Me.chkFolderNameIsGroupName.TabIndex = 42
+        Me.chkFolderNameIsGroupName.Text = "Folder Name as Group Identifier"
+        Me.ToolTip1.SetToolTip(Me.chkFolderNameIsGroupName, resources.GetString("chkFolderNameIsGroupName.ToolTip"))
+        Me.chkFolderNameIsGroupName.UseVisualStyleBackColor = True
+        '
+        'lblGroupNameAppliesTo
+        '
+        Me.lblGroupNameAppliesTo.AutoSize = True
+        Me.lblGroupNameAppliesTo.Location = New System.Drawing.Point(18, 43)
+        Me.lblGroupNameAppliesTo.Name = "lblGroupNameAppliesTo"
+        Me.lblGroupNameAppliesTo.Size = New System.Drawing.Size(113, 13)
+        Me.lblGroupNameAppliesTo.TabIndex = 43
+        Me.lblGroupNameAppliesTo.Text = "Add Group Name to ..."
+        '
+        'GroupBox28
+        '
+        Me.GroupBox28.Controls.Add(Me.lblPicturePrefix)
+        Me.GroupBox28.Controls.Add(Me.lblPictureHandling)
+        Me.GroupBox28.Controls.Add(Me.cbPictureHandling)
+        Me.GroupBox28.Controls.Add(Me.txtPictureFilenamePrefix)
+        Me.GroupBox28.Controls.Add(Me.lblMasterTitle)
+        Me.GroupBox28.Controls.Add(Me.cbMasterTitle)
+        Me.GroupBox28.Location = New System.Drawing.Point(239, 459)
+        Me.GroupBox28.Name = "GroupBox28"
+        Me.GroupBox28.Size = New System.Drawing.Size(353, 94)
+        Me.GroupBox28.TabIndex = 53
+        Me.GroupBox28.TabStop = False
+        Me.GroupBox28.Text = "Picture Handling ..."
+        '
+        'lblPicturePrefix
+        '
+        Me.lblPicturePrefix.AutoSize = True
+        Me.lblPicturePrefix.Location = New System.Drawing.Point(18, 43)
+        Me.lblPicturePrefix.Name = "lblPicturePrefix"
+        Me.lblPicturePrefix.Size = New System.Drawing.Size(126, 13)
+        Me.lblPicturePrefix.TabIndex = 49
+        Me.lblPicturePrefix.Text = "Prefix to Picture Filename"
+        '
+        'lblPictureHandling
+        '
+        Me.lblPictureHandling.AutoSize = True
+        Me.lblPictureHandling.Location = New System.Drawing.Point(18, 16)
+        Me.lblPictureHandling.Name = "lblPictureHandling"
+        Me.lblPictureHandling.Size = New System.Drawing.Size(91, 13)
+        Me.lblPictureHandling.TabIndex = 45
+        Me.lblPictureHandling.Text = "Picture Handling :"
+        '
+        'cbPictureHandling
+        '
+        Me.cbPictureHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbPictureHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbPictureHandling.FormattingEnabled = True
+        Me.cbPictureHandling.Items.AddRange(New Object() {"Full Path", "Full Path & Create Moviethumb", "Relative Path", "Relative Path & Create Moviethumb", "Use Folder.jpg", "Create Moviethumb"})
+        Me.cbPictureHandling.Location = New System.Drawing.Point(164, 13)
+        Me.cbPictureHandling.Name = "cbPictureHandling"
+        Me.cbPictureHandling.Size = New System.Drawing.Size(174, 21)
+        Me.cbPictureHandling.TabIndex = 46
+        Me.ToolTip1.SetToolTip(Me.cbPictureHandling, resources.GetString("cbPictureHandling.ToolTip"))
+        '
+        'txtPictureFilenamePrefix
+        '
+        Me.txtPictureFilenamePrefix.Location = New System.Drawing.Point(164, 40)
+        Me.txtPictureFilenamePrefix.Name = "txtPictureFilenamePrefix"
+        Me.txtPictureFilenamePrefix.Size = New System.Drawing.Size(174, 20)
+        Me.txtPictureFilenamePrefix.TabIndex = 48
+        Me.ToolTip1.SetToolTip(Me.txtPictureFilenamePrefix, resources.GetString("txtPictureFilenamePrefix.ToolTip"))
+        '
+        'lblMasterTitle
+        '
+        Me.lblMasterTitle.AutoSize = True
+        Me.lblMasterTitle.Location = New System.Drawing.Point(18, 69)
+        Me.lblMasterTitle.Name = "lblMasterTitle"
+        Me.lblMasterTitle.Size = New System.Drawing.Size(116, 13)
+        Me.lblMasterTitle.TabIndex = 50
+        Me.lblMasterTitle.Text = "Master Title (for fanart):"
+        '
+        'cbMasterTitle
+        '
+        Me.cbMasterTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbMasterTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMasterTitle.FormattingEnabled = True
+        Me.cbMasterTitle.Items.AddRange(New Object() {"TranslatedTitle", "OriginalTitle", "FormattedTitle"})
+        Me.cbMasterTitle.Location = New System.Drawing.Point(164, 66)
+        Me.cbMasterTitle.Name = "cbMasterTitle"
+        Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
+        Me.cbMasterTitle.TabIndex = 51
+        Me.ToolTip1.SetToolTip(Me.cbMasterTitle, "Select the title that is used for fanart search and creation.")
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.Label88)
+        Me.GroupBox5.Controls.Add(Me.TextBox33)
+        Me.GroupBox5.Controls.Add(Me.lblCheckFieldHandling)
+        Me.GroupBox5.Controls.Add(Me.Label30)
+        Me.GroupBox5.Controls.Add(Me.cbDateHandling)
+        Me.GroupBox5.Controls.Add(Me.cbCheckHandling)
+        Me.GroupBox5.Location = New System.Drawing.Point(239, 353)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(353, 100)
+        Me.GroupBox5.TabIndex = 52
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Other Field Handling Options ..."
+        '
+        'lblCheckFieldHandling
+        '
+        Me.lblCheckFieldHandling.AutoSize = True
+        Me.lblCheckFieldHandling.Location = New System.Drawing.Point(18, 47)
+        Me.lblCheckFieldHandling.Name = "lblCheckFieldHandling"
+        Me.lblCheckFieldHandling.Size = New System.Drawing.Size(120, 13)
+        Me.lblCheckFieldHandling.TabIndex = 40
+        Me.lblCheckFieldHandling.Text = "Checked Field Handling"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(18, 20)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(106, 13)
+        Me.Label30.TabIndex = 35
+        Me.Label30.Text = "Date Field Handling :"
+        '
+        'cbDateHandling
+        '
+        Me.cbDateHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbDateHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDateHandling.FormattingEnabled = True
+        Me.cbDateHandling.Items.AddRange(New Object() {"File Created Date", "File Modified Date", "Current System Date", "No Date"})
+        Me.cbDateHandling.Location = New System.Drawing.Point(164, 17)
+        Me.cbDateHandling.Name = "cbDateHandling"
+        Me.cbDateHandling.Size = New System.Drawing.Size(174, 21)
+        Me.cbDateHandling.TabIndex = 36
+        '
+        'cbCheckHandling
+        '
+        Me.cbCheckHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbCheckHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCheckHandling.FormattingEnabled = True
+        Me.cbCheckHandling.Items.AddRange(New Object() {"Checked", "Unchecked"})
+        Me.cbCheckHandling.Location = New System.Drawing.Point(164, 44)
+        Me.cbCheckHandling.Name = "cbCheckHandling"
+        Me.cbCheckHandling.Size = New System.Drawing.Size(174, 21)
+        Me.cbCheckHandling.TabIndex = 41
+        Me.ToolTip1.SetToolTip(Me.cbCheckHandling, "The Ant Movie Catalog database includes a boolean 'Checked' field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you select" & _
+                " this option in the Database Fields list you can choose " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "whether to set it to '" & _
+                "True' or 'False'.")
+        '
+        'lblInternetLookupRequired
+        '
+        Me.lblInternetLookupRequired.AutoSize = True
+        Me.lblInternetLookupRequired.ForeColor = System.Drawing.Color.Red
+        Me.lblInternetLookupRequired.Location = New System.Drawing.Point(8, 556)
+        Me.lblInternetLookupRequired.Name = "lblInternetLookupRequired"
+        Me.lblInternetLookupRequired.Size = New System.Drawing.Size(227, 13)
+        Me.lblInternetLookupRequired.TabIndex = 39
+        Me.lblInternetLookupRequired.Text = "-- Internet lookup required with these settings --"
+        Me.lblInternetLookupRequired.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'GroupBox16
+        '
+        Me.GroupBox16.Controls.Add(Me.Label33)
+        Me.GroupBox16.Controls.Add(Me.Label32)
+        Me.GroupBox16.Controls.Add(Me.Label31)
+        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectNoMedia)
+        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectNoInternet)
+        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectNone)
+        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectAllMedia)
+        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectAllInternet)
+        Me.GroupBox16.Controls.Add(Me.btnDBFieldsSelectAll)
+        Me.GroupBox16.Location = New System.Drawing.Point(239, 24)
+        Me.GroupBox16.Name = "GroupBox16"
+        Me.GroupBox16.Size = New System.Drawing.Size(353, 97)
+        Me.GroupBox16.TabIndex = 9
+        Me.GroupBox16.TabStop = False
+        Me.GroupBox16.Text = "Quick Select ..."
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(245, 16)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(93, 13)
+        Me.Label33.TabIndex = 4
+        Me.Label33.Text = "Only Internet Data"
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Location = New System.Drawing.Point(138, 16)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(86, 13)
+        Me.Label32.TabIndex = 4
+        Me.Label32.Text = "Only Media Data"
+        '
+        'btnDBFieldsSelectNoInternet
+        '
+        Me.btnDBFieldsSelectNoInternet.Location = New System.Drawing.Point(248, 61)
+        Me.btnDBFieldsSelectNoInternet.Name = "btnDBFieldsSelectNoInternet"
+        Me.btnDBFieldsSelectNoInternet.Size = New System.Drawing.Size(89, 23)
+        Me.btnDBFieldsSelectNoInternet.TabIndex = 30
+        Me.btnDBFieldsSelectNoInternet.Text = "Select None"
+        Me.btnDBFieldsSelectNoInternet.UseVisualStyleBackColor = True
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(44, 16)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(45, 13)
+        Me.Label31.TabIndex = 4
+        Me.Label31.Text = "All items"
+        '
+        'btnDBFieldsSelectAllInternet
+        '
+        Me.btnDBFieldsSelectAllInternet.Location = New System.Drawing.Point(248, 32)
+        Me.btnDBFieldsSelectAllInternet.Name = "btnDBFieldsSelectAllInternet"
+        Me.btnDBFieldsSelectAllInternet.Size = New System.Drawing.Size(90, 23)
+        Me.btnDBFieldsSelectAllInternet.TabIndex = 25
+        Me.btnDBFieldsSelectAllInternet.Text = "Select All"
+        Me.btnDBFieldsSelectAllInternet.UseVisualStyleBackColor = True
+        '
+        'btnDBFieldsSelectNoMedia
+        '
+        Me.btnDBFieldsSelectNoMedia.Location = New System.Drawing.Point(141, 61)
+        Me.btnDBFieldsSelectNoMedia.Name = "btnDBFieldsSelectNoMedia"
+        Me.btnDBFieldsSelectNoMedia.Size = New System.Drawing.Size(89, 23)
+        Me.btnDBFieldsSelectNoMedia.TabIndex = 20
+        Me.btnDBFieldsSelectNoMedia.Text = "Select None"
+        Me.btnDBFieldsSelectNoMedia.UseVisualStyleBackColor = True
+        '
+        'btnDBFieldsSelectNone
+        '
+        Me.btnDBFieldsSelectNone.Location = New System.Drawing.Point(21, 61)
+        Me.btnDBFieldsSelectNone.Name = "btnDBFieldsSelectNone"
+        Me.btnDBFieldsSelectNone.Size = New System.Drawing.Size(89, 23)
+        Me.btnDBFieldsSelectNone.TabIndex = 11
+        Me.btnDBFieldsSelectNone.Text = "Select None"
+        Me.btnDBFieldsSelectNone.UseVisualStyleBackColor = True
+        '
+        'btnDBFieldsSelectAllMedia
+        '
+        Me.btnDBFieldsSelectAllMedia.Location = New System.Drawing.Point(141, 32)
+        Me.btnDBFieldsSelectAllMedia.Name = "btnDBFieldsSelectAllMedia"
+        Me.btnDBFieldsSelectAllMedia.Size = New System.Drawing.Size(89, 23)
+        Me.btnDBFieldsSelectAllMedia.TabIndex = 15
+        Me.btnDBFieldsSelectAllMedia.Text = "Select All"
+        Me.btnDBFieldsSelectAllMedia.UseVisualStyleBackColor = True
+        '
+        'btnDBFieldsSelectAll
+        '
+        Me.btnDBFieldsSelectAll.Location = New System.Drawing.Point(21, 32)
+        Me.btnDBFieldsSelectAll.Name = "btnDBFieldsSelectAll"
+        Me.btnDBFieldsSelectAll.Size = New System.Drawing.Size(89, 23)
+        Me.btnDBFieldsSelectAll.TabIndex = 10
+        Me.btnDBFieldsSelectAll.Text = "Select All"
+        Me.btnDBFieldsSelectAll.UseVisualStyleBackColor = True
+        '
+        'cbDatabaseFields
+        '
+        Me.cbDatabaseFields.CheckOnClick = True
+        Me.cbDatabaseFields.ColumnWidth = 140
+        Me.cbDatabaseFields.FormattingEnabled = True
+        Me.cbDatabaseFields.Location = New System.Drawing.Point(11, 24)
+        Me.cbDatabaseFields.MultiColumn = True
+        Me.cbDatabaseFields.Name = "cbDatabaseFields"
+        Me.cbDatabaseFields.Size = New System.Drawing.Size(218, 529)
+        Me.cbDatabaseFields.TabIndex = 8
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Location = New System.Drawing.Point(8, 7)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(225, 13)
+        Me.Label34.TabIndex = 7
+        Me.Label34.Text = "Select database fields to be imported/updated"
+        '
+        'ScanFilters
+        '
+        Me.ScanFilters.Controls.Add(Me.GroupBox24)
+        Me.ScanFilters.Controls.Add(Me.GroupBox6)
+        Me.ScanFilters.Controls.Add(Me.Label46)
+        Me.ScanFilters.Controls.Add(Me.GroupBox20)
+        Me.ScanFilters.Controls.Add(Me.GroupBox19)
+        Me.ScanFilters.Location = New System.Drawing.Point(4, 22)
+        Me.ScanFilters.Name = "ScanFilters"
+        Me.ScanFilters.Size = New System.Drawing.Size(600, 580)
+        Me.ScanFilters.TabIndex = 5
+        Me.ScanFilters.Text = "Scan Path and Filters"
+        Me.ScanFilters.UseVisualStyleBackColor = True
+        '
+        'GroupBox24
+        '
+        Me.GroupBox24.Controls.Add(Me.txtOverridePath)
+        Me.GroupBox24.Controls.Add(Me.lblOverridePath)
+        Me.GroupBox24.Controls.Add(Me.btnSelectMovieFolder)
+        Me.GroupBox24.Controls.Add(Me.Label1)
+        Me.GroupBox24.Controls.Add(Me.txtMovieFolder)
+        Me.GroupBox24.Controls.Add(Me.Label17)
+        Me.GroupBox24.Location = New System.Drawing.Point(8, 13)
+        Me.GroupBox24.Name = "GroupBox24"
+        Me.GroupBox24.Size = New System.Drawing.Size(584, 88)
+        Me.GroupBox24.TabIndex = 107
+        Me.GroupBox24.TabStop = False
+        Me.GroupBox24.Text = "Movie Scan Folder(s) ..."
+        '
+        'txtOverridePath
+        '
+        Me.txtOverridePath.Location = New System.Drawing.Point(103, 60)
+        Me.txtOverridePath.Name = "txtOverridePath"
+        Me.txtOverridePath.Size = New System.Drawing.Size(410, 20)
+        Me.txtOverridePath.TabIndex = 40
+        Me.ToolTip1.SetToolTip(Me.txtOverridePath, resources.GetString("txtOverridePath.ToolTip"))
+        '
+        'lblOverridePath
+        '
+        Me.lblOverridePath.AutoSize = True
+        Me.lblOverridePath.Location = New System.Drawing.Point(11, 63)
+        Me.lblOverridePath.Name = "lblOverridePath"
+        Me.lblOverridePath.Size = New System.Drawing.Size(71, 13)
+        Me.lblOverridePath.TabIndex = 41
+        Me.lblOverridePath.Text = "Override path"
+        '
+        'btnSelectMovieFolder
+        '
+        Me.btnSelectMovieFolder.CausesValidation = False
+        Me.btnSelectMovieFolder.Location = New System.Drawing.Point(528, 34)
+        Me.btnSelectMovieFolder.Name = "btnSelectMovieFolder"
+        Me.btnSelectMovieFolder.Size = New System.Drawing.Size(32, 20)
+        Me.btnSelectMovieFolder.TabIndex = 1
+        Me.btnSelectMovieFolder.Text = "..."
+        Me.btnSelectMovieFolder.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(11, 18)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(130, 13)
+        Me.Label1.TabIndex = 28
+        Me.Label1.Text = "Path to Movies Folder(s)  :"
+        '
+        'txtMovieFolder
+        '
+        Me.txtMovieFolder.Location = New System.Drawing.Point(12, 34)
+        Me.txtMovieFolder.Name = "txtMovieFolder"
+        Me.txtMovieFolder.Size = New System.Drawing.Size(501, 20)
+        Me.txtMovieFolder.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.txtMovieFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
+                "e folders with semi-colons.")
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(311, 19)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(202, 12)
+        Me.Label17.TabIndex = 39
+        Me.Label17.Text = "Note : Separate movie folders with semi-colons."
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.Label25)
+        Me.GroupBox6.Controls.Add(Me.txtRegExSearchMultiPart)
+        Me.GroupBox6.Location = New System.Drawing.Point(8, 162)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(584, 63)
+        Me.GroupBox6.TabIndex = 58
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Multi Part Files Detection  ..."
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(20, 16)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(210, 13)
+        Me.Label25.TabIndex = 57
+        Me.Label25.Text = "RegEx Expression to detect multi-part files :"
+        '
+        'txtRegExSearchMultiPart
+        '
+        Me.txtRegExSearchMultiPart.Location = New System.Drawing.Point(14, 32)
+        Me.txtRegExSearchMultiPart.Name = "txtRegExSearchMultiPart"
+        Me.txtRegExSearchMultiPart.Size = New System.Drawing.Size(546, 20)
+        Me.txtRegExSearchMultiPart.TabIndex = 56
+        Me.ToolTip1.SetToolTip(Me.txtRegExSearchMultiPart, "AMCUpdater uses this Regular Expression to detect multi-part movies." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example: 'm" & _
+                "oviename - CD1.avi;'moviename - CD2.avi '")
+        '
+        'Label46
+        '
+        Me.Label46.Location = New System.Drawing.Point(8, 115)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(584, 44)
+        Me.Label46.TabIndex = 55
+        Me.Label46.Text = resources.GetString("Label46.Text")
+        '
+        'GroupBox20
+        '
+        Me.GroupBox20.Controls.Add(Me.Label83)
+        Me.GroupBox20.Controls.Add(Me.dgFilterStrings)
+        Me.GroupBox20.Location = New System.Drawing.Point(8, 231)
+        Me.GroupBox20.Name = "GroupBox20"
+        Me.GroupBox20.Size = New System.Drawing.Size(584, 202)
+        Me.GroupBox20.TabIndex = 54
+        Me.GroupBox20.TabStop = False
+        Me.GroupBox20.Text = "Strip Characters From Title ..."
+        '
+        'Label83
+        '
+        Me.Label83.AutoSize = True
+        Me.Label83.Location = New System.Drawing.Point(20, 25)
+        Me.Label83.Name = "Label83"
+        Me.Label83.Size = New System.Drawing.Size(233, 13)
+        Me.Label83.TabIndex = 52
+        Me.Label83.Text = "Cleanup TITLEs based on keyword and RegEx:"
+        '
+        'dgFilterStrings
+        '
+        Me.dgFilterStrings.AllowUserToResizeRows = False
+        Me.dgFilterStrings.BackgroundColor = System.Drawing.SystemColors.Window
+        Me.dgFilterStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgFilterStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+        Me.dgFilterStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgFilterStrings.ColumnHeadersVisible = False
+        Me.dgFilterStrings.Location = New System.Drawing.Point(14, 41)
+        Me.dgFilterStrings.Name = "dgFilterStrings"
+        Me.dgFilterStrings.RowHeadersWidth = 25
+        Me.dgFilterStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgFilterStrings.Size = New System.Drawing.Size(546, 150)
+        Me.dgFilterStrings.TabIndex = 51
+        '
+        'GroupBox19
+        '
+        Me.GroupBox19.Controls.Add(Me.dgExcludedFolderStrings)
+        Me.GroupBox19.Controls.Add(Me.Label44)
+        Me.GroupBox19.Controls.Add(Me.Label45)
+        Me.GroupBox19.Controls.Add(Me.dgExcludedFileStrings)
+        Me.GroupBox19.Location = New System.Drawing.Point(8, 439)
+        Me.GroupBox19.Name = "GroupBox19"
+        Me.GroupBox19.Size = New System.Drawing.Size(584, 133)
+        Me.GroupBox19.TabIndex = 53
+        Me.GroupBox19.TabStop = False
+        Me.GroupBox19.Text = "File and Folder Exclusions ..."
+        '
+        'dgExcludedFolderStrings
+        '
+        Me.dgExcludedFolderStrings.AllowUserToResizeRows = False
+        Me.dgExcludedFolderStrings.BackgroundColor = System.Drawing.SystemColors.Window
+        Me.dgExcludedFolderStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgExcludedFolderStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+        Me.dgExcludedFolderStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgExcludedFolderStrings.ColumnHeadersVisible = False
+        Me.dgExcludedFolderStrings.Location = New System.Drawing.Point(14, 41)
+        Me.dgExcludedFolderStrings.Name = "dgExcludedFolderStrings"
+        Me.dgExcludedFolderStrings.RowHeadersWidth = 25
+        Me.dgExcludedFolderStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgExcludedFolderStrings.Size = New System.Drawing.Size(259, 82)
+        Me.dgExcludedFolderStrings.TabIndex = 48
+        '
+        'Label44
+        '
+        Me.Label44.AutoSize = True
+        Me.Label44.Location = New System.Drawing.Point(20, 25)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(194, 13)
+        Me.Label44.TabIndex = 46
+        Me.Label44.Text = "Exclude FOLDERs based on keywords:"
+        '
+        'Label45
+        '
+        Me.Label45.AutoSize = True
+        Me.Label45.Location = New System.Drawing.Point(307, 25)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(173, 13)
+        Me.Label45.TabIndex = 47
+        Me.Label45.Text = "Exclude FILEs based on keywords:"
+        '
+        'dgExcludedFileStrings
+        '
+        Me.dgExcludedFileStrings.AllowUserToResizeRows = False
+        Me.dgExcludedFileStrings.BackgroundColor = System.Drawing.SystemColors.Window
+        Me.dgExcludedFileStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgExcludedFileStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
+        Me.dgExcludedFileStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgExcludedFileStrings.ColumnHeadersVisible = False
+        Me.dgExcludedFileStrings.Location = New System.Drawing.Point(299, 41)
+        Me.dgExcludedFileStrings.Name = "dgExcludedFileStrings"
+        Me.dgExcludedFileStrings.RowHeadersWidth = 25
+        Me.dgExcludedFileStrings.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgExcludedFileStrings.Size = New System.Drawing.Size(261, 82)
+        Me.dgExcludedFileStrings.TabIndex = 49
+        '
+        'Options
+        '
+        Me.Options.Controls.Add(Me.GroupBox4)
+        Me.Options.Controls.Add(Me.GroupBox7)
+        Me.Options.Controls.Add(Me.GroupBox13)
+        Me.Options.Controls.Add(Me.GroupBox12)
+        Me.Options.Location = New System.Drawing.Point(4, 22)
+        Me.Options.Name = "Options"
+        Me.Options.Padding = New System.Windows.Forms.Padding(3)
+        Me.Options.Size = New System.Drawing.Size(600, 580)
+        Me.Options.TabIndex = 1
+        Me.Options.Text = "Options"
+        Me.Options.UseVisualStyleBackColor = True
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.chkParseTrailers)
+        Me.GroupBox4.Controls.Add(Me.GroupBox25)
+        Me.GroupBox4.Controls.Add(Me.txtTrailerIentificationStrings)
+        Me.GroupBox4.Controls.Add(Me.Label79)
+        Me.GroupBox4.Controls.Add(Me.txtDefaultFileTypesNonMedia)
+        Me.GroupBox4.Controls.Add(Me.Label14)
+        Me.GroupBox4.Controls.Add(Me.txtDefaultFileTypes)
+        Me.GroupBox4.Controls.Add(Me.Label15)
+        Me.GroupBox4.Location = New System.Drawing.Point(8, 150)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(575, 138)
+        Me.GroupBox4.TabIndex = 106
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "File Type Identification ..."
+        '
+        'chkParseTrailers
+        '
+        Me.chkParseTrailers.AutoSize = True
+        Me.chkParseTrailers.Enabled = False
+        Me.chkParseTrailers.Location = New System.Drawing.Point(377, 112)
+        Me.chkParseTrailers.Name = "chkParseTrailers"
+        Me.chkParseTrailers.Size = New System.Drawing.Size(134, 17)
+        Me.chkParseTrailers.TabIndex = 31
+        Me.chkParseTrailers.Text = "Check for Trailers (wip)"
+        Me.chkParseTrailers.UseVisualStyleBackColor = True
+        Me.chkParseTrailers.Visible = False
+        '
+        'GroupBox25
+        '
+        Me.GroupBox25.Controls.Add(Me.chkCheckDVDFolders)
+        Me.GroupBox25.Controls.Add(Me.chkParseSubtitleFiles)
+        Me.GroupBox25.Controls.Add(Me.chkParsePlaylistFiles)
+        Me.GroupBox25.Location = New System.Drawing.Point(367, 16)
+        Me.GroupBox25.Name = "GroupBox25"
+        Me.GroupBox25.Size = New System.Drawing.Size(187, 91)
+        Me.GroupBox25.TabIndex = 31
+        Me.GroupBox25.TabStop = False
+        Me.GroupBox25.Text = "Media Scan Options ..."
+        '
+        'chkCheckDVDFolders
+        '
+        Me.chkCheckDVDFolders.AutoSize = True
+        Me.chkCheckDVDFolders.Location = New System.Drawing.Point(10, 23)
+        Me.chkCheckDVDFolders.Name = "chkCheckDVDFolders"
+        Me.chkCheckDVDFolders.Size = New System.Drawing.Size(132, 17)
+        Me.chkCheckDVDFolders.TabIndex = 10
+        Me.chkCheckDVDFolders.Text = "Check for DVD folders"
+        Me.ToolTip1.SetToolTip(Me.chkCheckDVDFolders, "Enable this option to search for DVD rips." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The system looks for a VIDEO_TS.IFO f" & _
+                "ile and attempts to work out" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the movie title from the folder structure.")
+        Me.chkCheckDVDFolders.UseVisualStyleBackColor = True
+        '
+        'chkParseSubtitleFiles
+        '
+        Me.chkParseSubtitleFiles.AutoSize = True
+        Me.chkParseSubtitleFiles.Location = New System.Drawing.Point(10, 46)
+        Me.chkParseSubtitleFiles.Name = "chkParseSubtitleFiles"
+        Me.chkParseSubtitleFiles.Size = New System.Drawing.Size(145, 17)
+        Me.chkParseSubtitleFiles.TabIndex = 30
+        Me.chkParseSubtitleFiles.Text = "Try to Parse Subtitle Files"
+        Me.ToolTip1.SetToolTip(Me.chkParseSubtitleFiles, resources.GetString("chkParseSubtitleFiles.ToolTip"))
+        Me.chkParseSubtitleFiles.UseVisualStyleBackColor = True
+        '
+        'chkParsePlaylistFiles
+        '
+        Me.chkParsePlaylistFiles.AutoSize = True
+        Me.chkParsePlaylistFiles.Enabled = False
+        Me.chkParsePlaylistFiles.Location = New System.Drawing.Point(10, 69)
+        Me.chkParsePlaylistFiles.Name = "chkParsePlaylistFiles"
+        Me.chkParsePlaylistFiles.Size = New System.Drawing.Size(156, 17)
+        Me.chkParsePlaylistFiles.TabIndex = 11
+        Me.chkParsePlaylistFiles.Text = "Check for Playlist Files (wip)"
+        Me.chkParsePlaylistFiles.UseVisualStyleBackColor = True
+        '
+        'txtTrailerIentificationStrings
+        '
+        Me.txtTrailerIentificationStrings.Location = New System.Drawing.Point(12, 110)
+        Me.txtTrailerIentificationStrings.Name = "txtTrailerIentificationStrings"
+        Me.txtTrailerIentificationStrings.Size = New System.Drawing.Size(296, 20)
+        Me.txtTrailerIentificationStrings.TabIndex = 29
+        Me.ToolTip1.SetToolTip(Me.txtTrailerIentificationStrings, "if a file contains one of these strings, it will be identified as trailer instead" & _
+                " of movie" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "several values are possible - use "";"" as delimiter.")
+        '
+        'Label79
+        '
+        Me.Label79.AutoSize = True
+        Me.Label79.Location = New System.Drawing.Point(9, 94)
+        Me.Label79.Name = "Label79"
+        Me.Label79.Size = New System.Drawing.Size(183, 13)
+        Me.Label79.TabIndex = 28
+        Me.Label79.Text = "Accepted Trailer Identification Strings"
+        '
+        'txtDefaultFileTypesNonMedia
+        '
+        Me.txtDefaultFileTypesNonMedia.Location = New System.Drawing.Point(12, 71)
+        Me.txtDefaultFileTypesNonMedia.Name = "txtDefaultFileTypesNonMedia"
+        Me.txtDefaultFileTypesNonMedia.Size = New System.Drawing.Size(296, 20)
+        Me.txtDefaultFileTypesNonMedia.TabIndex = 9
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(9, 55)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(268, 13)
+        Me.Label14.TabIndex = 26
+        Me.Label14.Text = "Accepted non-Media Files (import without media details)"
+        '
+        'txtDefaultFileTypes
+        '
+        Me.txtDefaultFileTypes.Location = New System.Drawing.Point(12, 32)
+        Me.txtDefaultFileTypes.Name = "txtDefaultFileTypes"
+        Me.txtDefaultFileTypes.Size = New System.Drawing.Size(296, 20)
+        Me.txtDefaultFileTypes.TabIndex = 8
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(9, 16)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(257, 13)
+        Me.Label15.TabIndex = 25
+        Me.Label15.Text = "Accepted Media Files. Separate List with semi-colons"
+        Me.ToolTip1.SetToolTip(Me.Label15, "Accepted Media Files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate List with semi-colons, e.g. wmv,avi,mpg")
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.btnSelectPersonArtworkFolder)
+        Me.GroupBox7.Controls.Add(Me.Label28)
+        Me.GroupBox7.Controls.Add(Me.txtPersonArtworkFolder)
+        Me.GroupBox7.Controls.Add(Me.btnSelectFanartFolder)
+        Me.GroupBox7.Controls.Add(Me.txtFanartFolder)
+        Me.GroupBox7.Controls.Add(Me.Label48)
+        Me.GroupBox7.Location = New System.Drawing.Point(8, 25)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(575, 107)
+        Me.GroupBox7.TabIndex = 103
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Folders and Files"
+        '
+        'btnSelectPersonArtworkFolder
+        '
+        Me.btnSelectPersonArtworkFolder.Enabled = False
+        Me.btnSelectPersonArtworkFolder.Location = New System.Drawing.Point(521, 74)
+        Me.btnSelectPersonArtworkFolder.Name = "btnSelectPersonArtworkFolder"
+        Me.btnSelectPersonArtworkFolder.Size = New System.Drawing.Size(37, 20)
+        Me.btnSelectPersonArtworkFolder.TabIndex = 53
+        Me.btnSelectPersonArtworkFolder.Text = "..."
+        Me.btnSelectPersonArtworkFolder.UseVisualStyleBackColor = True
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Enabled = False
+        Me.Label28.Location = New System.Drawing.Point(10, 58)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(117, 13)
+        Me.Label28.TabIndex = 52
+        Me.Label28.Text = "Path to Person Images:"
+        '
+        'txtPersonArtworkFolder
+        '
+        Me.txtPersonArtworkFolder.Enabled = False
+        Me.txtPersonArtworkFolder.Location = New System.Drawing.Point(10, 74)
+        Me.txtPersonArtworkFolder.Name = "txtPersonArtworkFolder"
+        Me.txtPersonArtworkFolder.Size = New System.Drawing.Size(503, 20)
+        Me.txtPersonArtworkFolder.TabIndex = 51
+        '
+        'btnSelectFanartFolder
+        '
+        Me.btnSelectFanartFolder.CausesValidation = False
+        Me.btnSelectFanartFolder.Location = New System.Drawing.Point(521, 33)
+        Me.btnSelectFanartFolder.Name = "btnSelectFanartFolder"
+        Me.btnSelectFanartFolder.Size = New System.Drawing.Size(37, 20)
+        Me.btnSelectFanartFolder.TabIndex = 50
+        Me.btnSelectFanartFolder.Text = "..."
+        Me.btnSelectFanartFolder.UseVisualStyleBackColor = True
+        '
+        'txtFanartFolder
+        '
+        Me.txtFanartFolder.Location = New System.Drawing.Point(10, 33)
+        Me.txtFanartFolder.Name = "txtFanartFolder"
+        Me.txtFanartFolder.Size = New System.Drawing.Size(503, 20)
+        Me.txtFanartFolder.TabIndex = 49
+        Me.ToolTip1.SetToolTip(Me.txtFanartFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
+                "e folders with semi-colons.")
+        '
+        'Label48
+        '
+        Me.Label48.AutoSize = True
+        Me.Label48.Location = New System.Drawing.Point(10, 16)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(80, 13)
+        Me.Label48.TabIndex = 48
+        Me.Label48.Text = "Path to Fanart :"
+        '
+        'GroupBox13
+        '
+        Me.GroupBox13.Controls.Add(Me.cbLogLevel)
+        Me.GroupBox13.Controls.Add(Me.Label29)
+        Me.GroupBox13.Location = New System.Drawing.Point(8, 524)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.Size = New System.Drawing.Size(575, 40)
+        Me.GroupBox13.TabIndex = 5
+        Me.GroupBox13.TabStop = False
+        Me.GroupBox13.Text = "Other"
+        '
+        'cbLogLevel
+        '
+        Me.cbLogLevel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbLogLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbLogLevel.FormattingEnabled = True
+        Me.cbLogLevel.Items.AddRange(New Object() {"All Events with Grabbing", "All Events", "Major Events", "Errors Only"})
+        Me.cbLogLevel.Location = New System.Drawing.Point(137, 13)
+        Me.cbLogLevel.Name = "cbLogLevel"
+        Me.cbLogLevel.Size = New System.Drawing.Size(171, 21)
+        Me.cbLogLevel.TabIndex = 20
+        Me.ToolTip1.SetToolTip(Me.cbLogLevel, "The logging level option controls what information is saved to the logfile")
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(9, 16)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(80, 13)
+        Me.Label29.TabIndex = 34
+        Me.Label29.Text = "Logging Level :"
+        '
+        'GroupBox12
+        '
+        Me.GroupBox12.Controls.Add(Me.chkExecuteOnlyForOrphans)
+        Me.GroupBox12.Controls.Add(Me.btnExecuteProgramSelectPath)
+        Me.GroupBox12.Controls.Add(Me.txtExecuteProgramPath)
+        Me.GroupBox12.Controls.Add(Me.chkExecuteProgram)
+        Me.GroupBox12.Controls.Add(Me.Label27)
+        Me.GroupBox12.Location = New System.Drawing.Point(8, 427)
+        Me.GroupBox12.Name = "GroupBox12"
+        Me.GroupBox12.Size = New System.Drawing.Size(575, 79)
+        Me.GroupBox12.TabIndex = 4
+        Me.GroupBox12.TabStop = False
+        Me.GroupBox12.Text = "Post Processing"
+        '
+        'chkExecuteOnlyForOrphans
+        '
+        Me.chkExecuteOnlyForOrphans.AutoSize = True
+        Me.chkExecuteOnlyForOrphans.Location = New System.Drawing.Point(377, 16)
+        Me.chkExecuteOnlyForOrphans.Name = "chkExecuteOnlyForOrphans"
+        Me.chkExecuteOnlyForOrphans.Size = New System.Drawing.Size(136, 17)
+        Me.chkExecuteOnlyForOrphans.TabIndex = 19
+        Me.chkExecuteOnlyForOrphans.Text = "Only if changes applied"
+        Me.chkExecuteOnlyForOrphans.UseVisualStyleBackColor = True
+        '
+        'btnExecuteProgramSelectPath
+        '
+        Me.btnExecuteProgramSelectPath.Location = New System.Drawing.Point(476, 51)
+        Me.btnExecuteProgramSelectPath.Name = "btnExecuteProgramSelectPath"
+        Me.btnExecuteProgramSelectPath.Size = New System.Drawing.Size(37, 20)
+        Me.btnExecuteProgramSelectPath.TabIndex = 18
+        Me.btnExecuteProgramSelectPath.Text = "..."
+        Me.btnExecuteProgramSelectPath.UseVisualStyleBackColor = True
+        '
+        'txtExecuteProgramPath
+        '
+        Me.txtExecuteProgramPath.Location = New System.Drawing.Point(12, 51)
+        Me.txtExecuteProgramPath.Name = "txtExecuteProgramPath"
+        Me.txtExecuteProgramPath.Size = New System.Drawing.Size(458, 20)
+        Me.txtExecuteProgramPath.TabIndex = 17
+        '
+        'chkExecuteProgram
+        '
+        Me.chkExecuteProgram.AutoSize = True
+        Me.chkExecuteProgram.Location = New System.Drawing.Point(12, 16)
+        Me.chkExecuteProgram.Name = "chkExecuteProgram"
+        Me.chkExecuteProgram.Size = New System.Drawing.Size(217, 17)
+        Me.chkExecuteProgram.TabIndex = 16
+        Me.chkExecuteProgram.Text = "Launch a file after processing completed"
+        Me.chkExecuteProgram.UseVisualStyleBackColor = True
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(10, 35)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(143, 13)
+        Me.Label27.TabIndex = 31
+        Me.Label27.Text = "Path to executable to launch"
+        '
+        'Mediainfo_Test
+        '
+        Me.Mediainfo_Test.Controls.Add(Me.Label47)
+        Me.Mediainfo_Test.Controls.Add(Me.GroupBox18)
+        Me.Mediainfo_Test.Controls.Add(Me.GroupBox3)
+        Me.Mediainfo_Test.Controls.Add(Me.GroupBox2)
+        Me.Mediainfo_Test.Controls.Add(Me.btnTestAnalyse)
+        Me.Mediainfo_Test.Controls.Add(Me.GroupBox1)
+        Me.Mediainfo_Test.Controls.Add(Me.Label3)
+        Me.Mediainfo_Test.Controls.Add(Me.btnGetSampleFile)
+        Me.Mediainfo_Test.Controls.Add(Me.txtSampleFile)
+        Me.Mediainfo_Test.Location = New System.Drawing.Point(4, 22)
+        Me.Mediainfo_Test.Name = "Mediainfo_Test"
+        Me.Mediainfo_Test.Padding = New System.Windows.Forms.Padding(3)
+        Me.Mediainfo_Test.Size = New System.Drawing.Size(600, 580)
+        Me.Mediainfo_Test.TabIndex = 2
+        Me.Mediainfo_Test.Text = "Mediainfo Test"
+        Me.Mediainfo_Test.UseVisualStyleBackColor = True
         '
         'Label47
         '
@@ -3594,27 +3662,27 @@ Partial Class Form1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
         Me.DataGridView1.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle32
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 27)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle33.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle33
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 20
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -3625,8 +3693,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle29
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -3635,8 +3703,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle30
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -3659,8 +3727,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle31
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -4045,6 +4113,59 @@ Partial Class Form1
         Me.ToolTip1.ReshowDelay = 100
         Me.ToolTip1.ToolTipTitle = "MyFilms AMCupdater Help ..."
         '
+        'chkShortNames
+        '
+        Me.chkShortNames.AutoSize = True
+        Me.chkShortNames.Location = New System.Drawing.Point(377, 19)
+        Me.chkShortNames.Name = "chkShortNames"
+        Me.chkShortNames.Size = New System.Drawing.Size(145, 17)
+        Me.chkShortNames.TabIndex = 69
+        Me.chkShortNames.Text = "Store files with name only"
+        Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
+                "les in your setup.")
+        Me.chkShortNames.UseVisualStyleBackColor = True
+        '
+        'chkReadDVDLabel
+        '
+        Me.chkReadDVDLabel.AutoSize = True
+        Me.chkReadDVDLabel.Location = New System.Drawing.Point(377, 71)
+        Me.chkReadDVDLabel.Name = "chkReadDVDLabel"
+        Me.chkReadDVDLabel.Size = New System.Drawing.Size(156, 17)
+        Me.chkReadDVDLabel.TabIndex = 66
+        Me.chkReadDVDLabel.Text = "Try to read DVD Disk Label"
+        Me.ToolTip1.SetToolTip(Me.chkReadDVDLabel, "Used when importing movies from CD or DVD." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Will attempt to read the disk label a" & _
+                "nd use that in the Media Label field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If not found then the value entered for '" & _
+                "Media Label' will be used (if any).")
+        Me.chkReadDVDLabel.UseVisualStyleBackColor = True
+        '
+        'txtMediaLabel
+        '
+        Me.txtMediaLabel.Location = New System.Drawing.Point(137, 69)
+        Me.txtMediaLabel.Name = "txtMediaLabel"
+        Me.txtMediaLabel.Size = New System.Drawing.Size(171, 20)
+        Me.txtMediaLabel.TabIndex = 65
+        Me.ToolTip1.SetToolTip(Me.txtMediaLabel, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field" & _
+                ".")
+        '
+        'txtMediaType
+        '
+        Me.txtMediaType.Location = New System.Drawing.Point(137, 43)
+        Me.txtMediaType.Name = "txtMediaType"
+        Me.txtMediaType.Size = New System.Drawing.Size(171, 20)
+        Me.txtMediaType.TabIndex = 64
+        Me.ToolTip1.SetToolTip(Me.txtMediaType, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field." & _
+                "")
+        '
+        'txtDefaultSourceField
+        '
+        Me.txtDefaultSourceField.Location = New System.Drawing.Point(137, 17)
+        Me.txtDefaultSourceField.Name = "txtDefaultSourceField"
+        Me.txtDefaultSourceField.Size = New System.Drawing.Size(171, 20)
+        Me.txtDefaultSourceField.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.txtDefaultSourceField, "This is the Ant Movie Catalog field which references the location of your moviel " & _
+                "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
+                "d to!")
+        '
         'AntMovieCatalog
         '
         Me.AntMovieCatalog.DataSetName = "AntMovieCatalog"
@@ -4057,26 +4178,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle34
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle35.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle35
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4127,6 +4248,45 @@ Partial Class Form1
         Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(9, 46)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(105, 13)
+        Me.Label12.TabIndex = 67
+        Me.Label12.Text = "Media Type (Preset):"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(9, 72)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(71, 13)
+        Me.Label13.TabIndex = 68
+        Me.Label13.Text = "Media Label :"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(9, 20)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(122, 13)
+        Me.Label26.TabIndex = 25
+        Me.Label26.Text = "Item for Storage File Info"
+        '
+        'GroupBox32
+        '
+        Me.GroupBox32.Controls.Add(Me.btnManualCancel)
+        Me.GroupBox32.Controls.Add(Me.btnManualDoTest)
+        Me.GroupBox32.Controls.Add(Me.btnManualApplyChanges)
+        Me.GroupBox32.Location = New System.Drawing.Point(10, 484)
+        Me.GroupBox32.Name = "GroupBox32"
+        Me.GroupBox32.Size = New System.Drawing.Size(398, 87)
+        Me.GroupBox32.TabIndex = 103
+        Me.GroupBox32.TabStop = False
+        Me.GroupBox32.Text = "Begin Update ..."
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4141,10 +4301,10 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "Ant Movie Catalog Auto-Updater"
         Me.TabControl1.ResumeLayout(False)
-        Me.Interactive.ResumeLayout(False)
-        Me.Interactive.PerformLayout()
-        Me.GroupBox24.ResumeLayout(False)
-        Me.GroupBox24.PerformLayout()
+        Me.Import_Movies.ResumeLayout(False)
+        Me.Import_Movies.PerformLayout()
+        Me.GroupBox11.ResumeLayout(False)
+        Me.GroupBox11.PerformLayout()
         Me.GroupBox23.ResumeLayout(False)
         Me.GroupBox23.PerformLayout()
         Me.GroupBox27.ResumeLayout(False)
@@ -4155,6 +4315,41 @@ Partial Class Form1
         Me.GroupBox17.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
+        Me.Update_Movies.ResumeLayout(False)
+        Me.grpManualInternetLookupSettings.ResumeLayout(False)
+        Me.grpManualInternetLookupSettings.PerformLayout()
+        Me.grpManualUpdatesParameters.ResumeLayout(False)
+        Me.grpManualUpdatesParameters.PerformLayout()
+        Me.GroupBox10.ResumeLayout(False)
+        Me.GroupBox10.PerformLayout()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
+        Me.DatabaseFields.ResumeLayout(False)
+        Me.DatabaseFields.PerformLayout()
+        Me.GroupBox31.ResumeLayout(False)
+        Me.GroupBox31.PerformLayout()
+        Me.GroupBox30.ResumeLayout(False)
+        Me.GroupBox30.PerformLayout()
+        Me.GroupBox29.ResumeLayout(False)
+        Me.GroupBox29.PerformLayout()
+        Me.GroupBox28.ResumeLayout(False)
+        Me.GroupBox28.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox16.ResumeLayout(False)
+        Me.GroupBox16.PerformLayout()
+        Me.ScanFilters.ResumeLayout(False)
+        Me.GroupBox24.ResumeLayout(False)
+        Me.GroupBox24.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        Me.GroupBox20.ResumeLayout(False)
+        Me.GroupBox20.PerformLayout()
+        CType(Me.dgFilterStrings, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox19.ResumeLayout(False)
+        Me.GroupBox19.PerformLayout()
+        CType(Me.dgExcludedFolderStrings, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgExcludedFileStrings, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Options.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
@@ -4166,33 +4361,8 @@ Partial Class Form1
         Me.GroupBox13.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
         Me.GroupBox12.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
-        Me.ScanFilters.ResumeLayout(False)
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
-        Me.GroupBox20.ResumeLayout(False)
-        Me.GroupBox20.PerformLayout()
-        CType(Me.dgFilterStrings, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox19.ResumeLayout(False)
-        Me.GroupBox19.PerformLayout()
-        CType(Me.dgExcludedFolderStrings, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgExcludedFileStrings, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.DatabaseFields.ResumeLayout(False)
-        Me.DatabaseFields.PerformLayout()
-        Me.GroupBox16.ResumeLayout(False)
-        Me.GroupBox16.PerformLayout()
-        Me.Manual.ResumeLayout(False)
-        Me.grpManualInternetLookupSettings.ResumeLayout(False)
-        Me.grpManualInternetLookupSettings.PerformLayout()
-        Me.grpManualUpdatesParameters.ResumeLayout(False)
-        Me.grpManualUpdatesParameters.PerformLayout()
-        Me.GroupBox10.ResumeLayout(False)
-        Me.GroupBox10.PerformLayout()
-        Me.GroupBox9.ResumeLayout(False)
-        Me.GroupBox9.PerformLayout()
-        Me.Test.ResumeLayout(False)
-        Me.Test.PerformLayout()
+        Me.Mediainfo_Test.ResumeLayout(False)
+        Me.Mediainfo_Test.PerformLayout()
         Me.GroupBox18.ResumeLayout(False)
         Me.GroupBox18.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -4229,6 +4399,7 @@ Partial Class Form1
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox32.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4236,11 +4407,11 @@ Partial Class Form1
     Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents Interactive As System.Windows.Forms.TabPage
+    Friend WithEvents Import_Movies As System.Windows.Forms.TabPage
     Friend WithEvents Options As System.Windows.Forms.TabPage
     Friend WithEvents btnProcessMovieList As System.Windows.Forms.Button
     Friend WithEvents btnParseXML As System.Windows.Forms.Button
-    Friend WithEvents Test As System.Windows.Forms.TabPage
+    Friend WithEvents Mediainfo_Test As System.Windows.Forms.TabPage
     Friend WithEvents btnGetSampleFile As System.Windows.Forms.Button
     Friend WithEvents txtSampleFile As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
@@ -4283,7 +4454,7 @@ Partial Class Form1
     Friend WithEvents ToolStripProgressBar As System.Windows.Forms.ToolStripProgressBar
     Friend WithEvents ToolStripFixedText As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents GroupBox8 As System.Windows.Forms.GroupBox
-    Friend WithEvents Manual As System.Windows.Forms.TabPage
+    Friend WithEvents Update_Movies As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
     Friend WithEvents txtManualXMLPath As System.Windows.Forms.TextBox
     Friend WithEvents Label20 As System.Windows.Forms.Label
@@ -4322,9 +4493,6 @@ Partial Class Form1
     Friend WithEvents epManualUpdater As System.Windows.Forms.ErrorProvider
     Friend WithEvents LoadConfigurationFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SaveConfigFileAsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents txtDefaultSourceField As System.Windows.Forms.TextBox
-    Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents GroupBox12 As System.Windows.Forms.GroupBox
     Friend WithEvents chkExecuteOnlyForOrphans As System.Windows.Forms.CheckBox
     Friend WithEvents btnExecuteProgramSelectPath As System.Windows.Forms.Button
@@ -4532,31 +4700,12 @@ Partial Class Form1
     Friend WithEvents btnSelectFanartFolder As System.Windows.Forms.Button
     Friend WithEvents txtFanartFolder As System.Windows.Forms.TextBox
     Friend WithEvents Label48 As System.Windows.Forms.Label
-    Friend WithEvents txtExcludeFilePath As System.Windows.Forms.TextBox
-    Friend WithEvents Label22 As System.Windows.Forms.Label
-    Friend WithEvents btnSelectExcludeFile As System.Windows.Forms.Button
-    Friend WithEvents txtConfigFilePath As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents btnSelectConfigFile As System.Windows.Forms.Button
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents txtRegExSearchMultiPart As System.Windows.Forms.TextBox
-    Friend WithEvents chkReadDVDLabel As System.Windows.Forms.CheckBox
-    Friend WithEvents txtMediaLabel As System.Windows.Forms.TextBox
-    Friend WithEvents Label12 As System.Windows.Forms.Label
-    Friend WithEvents txtMediaType As System.Windows.Forms.TextBox
-    Friend WithEvents Label13 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox24 As System.Windows.Forms.GroupBox
-    Friend WithEvents btnSelectMovieFolder As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents txtMovieFolder As System.Windows.Forms.TextBox
-    Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents txtPersonArtworkFolder As System.Windows.Forms.TextBox
     Friend WithEvents btnSelectPersonArtworkFolder As System.Windows.Forms.Button
     Friend WithEvents Label28 As System.Windows.Forms.Label
-    Friend WithEvents txtOverridePath As System.Windows.Forms.TextBox
-    Friend WithEvents lblOverridePath As System.Windows.Forms.Label
-    Friend WithEvents chkShortNames As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents chkParseSubtitleFiles As System.Windows.Forms.CheckBox
     Friend WithEvents txtTrailerIentificationStrings As System.Windows.Forms.TextBox
@@ -4585,8 +4734,6 @@ Partial Class Form1
     Friend WithEvents txtManualInternetParserPathDisplay As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox27 As System.Windows.Forms.GroupBox
     Friend WithEvents btnManualExcludedMoviesFileShow As System.Windows.Forms.Button
-    Friend WithEvents btnExcludeFileDelete As System.Windows.Forms.Button
-    Friend WithEvents btnExcludeFileShow As System.Windows.Forms.Button
     Friend WithEvents btnManualExcludedMoviesFileDelete As System.Windows.Forms.Button
     Friend WithEvents chkManualUpdateRecordsOnlyMissingData As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBoxMovieDetails As System.Windows.Forms.GroupBox
@@ -4600,4 +4747,42 @@ Partial Class Form1
     Friend WithEvents Rating As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData As System.Windows.Forms.CheckBox
     Friend WithEvents chkManualDontAskInteractive As System.Windows.Forms.CheckBox
+    Friend WithEvents GroupBox11 As System.Windows.Forms.GroupBox
+    Friend WithEvents btnExcludeFileDelete As System.Windows.Forms.Button
+    Friend WithEvents btnExcludeFileShow As System.Windows.Forms.Button
+    Friend WithEvents txtExcludeFilePath As System.Windows.Forms.TextBox
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents btnSelectExcludeFile As System.Windows.Forms.Button
+    Friend WithEvents txtConfigFilePath As System.Windows.Forms.TextBox
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents btnSelectConfigFile As System.Windows.Forms.Button
+    Friend WithEvents GroupBox24 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtOverridePath As System.Windows.Forms.TextBox
+    Friend WithEvents lblOverridePath As System.Windows.Forms.Label
+    Friend WithEvents btnSelectMovieFolder As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents txtMovieFolder As System.Windows.Forms.TextBox
+    Friend WithEvents Label17 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents TextBox32 As System.Windows.Forms.TextBox
+    Friend WithEvents Label88 As System.Windows.Forms.Label
+    Friend WithEvents TextBox33 As System.Windows.Forms.TextBox
+    Friend WithEvents Label89 As System.Windows.Forms.Label
+    Friend WithEvents TextBox34 As System.Windows.Forms.TextBox
+    Friend WithEvents Label90 As System.Windows.Forms.Label
+    Friend WithEvents chkShortNames As System.Windows.Forms.CheckBox
+    Friend WithEvents chkReadDVDLabel As System.Windows.Forms.CheckBox
+    Friend WithEvents txtMediaLabel As System.Windows.Forms.TextBox
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents txtMediaType As System.Windows.Forms.TextBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents txtDefaultSourceField As System.Windows.Forms.TextBox
+    Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox30 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox29 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox28 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox31 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox32 As System.Windows.Forms.GroupBox
 End Class
