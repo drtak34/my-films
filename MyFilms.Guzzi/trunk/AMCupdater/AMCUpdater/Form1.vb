@@ -586,7 +586,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnSelectConfigFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectConfigFile.Click
         Dim currentDirectory As String
         currentDirectory = txtConfigFilePath.Text
         Try
@@ -763,7 +763,7 @@ Public Class Form1
         End Try
         Me.ValidateChildren()
     End Sub
-    Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnSelectExcludeFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectExcludeFile.Click
         Dim currentPath As String
         currentPath = txtExcludeFilePath.Text
         If currentPath.Contains(";") = True Then
@@ -996,7 +996,7 @@ Public Class Form1
 #End Region
 
 #Region "Validation"
-    Private Sub chkOverwriteXML_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub chkOverwriteXML_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkOverwriteXML.CheckedChanged
 
         'AntProcessor.OverwriteXMLFile = chkOverwriteXML.Checked
 
@@ -1007,12 +1007,12 @@ Public Class Form1
             chkBackupXMLFirst.Enabled = False
         End If
     End Sub
-    Private Sub txtOverridePath_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub txtOverridePath_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtOverridePath.LostFocus
         If txtOverridePath.Text <> String.Empty And txtOverridePath.Text.EndsWith("\") = False Then
             txtOverridePath.Text += "\"
         End If
     End Sub
-    Private Sub chkPurgeMissing_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub chkPurgeMissing_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkPurgeMissing.Click
 
         If chkPurgeMissing.Checked = True Then
             Dim Warning As String = "Warning : The 'Purge missing' option removes invalid entries from your database file."
@@ -1185,7 +1185,7 @@ Public Class Form1
     Private Sub cbManualSelectField_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualSelectField.SelectedIndexChanged
         Me.ValidateChildren()
     End Sub
-    Private Sub txtMovieFolder_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub txtMovieFolder_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMovieFolder.LostFocus
         'txtOverridePath_LostFocus(sender, e)
         Dim Path As String() = txtMovieFolder.Text.Split(";")
         Dim PathItem As String = String.Empty
@@ -1218,7 +1218,7 @@ Public Class Form1
         End If
         Me.ValidateChildren()
     End Sub
-    Private Sub txtDefaultFileTypes_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub txtDefaultFileTypes_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDefaultFileTypes.LostFocus
         Dim FileTypes() As String
         Dim OutputString As String = String.Empty
         If txtDefaultFileTypes.Text <> String.Empty Then
@@ -1239,7 +1239,7 @@ Public Class Form1
         End If
         'Me.ValidateChildren()
     End Sub
-    Private Sub txtDefaultFileTypesNonMedia_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub txtDefaultFileTypesNonMedia_LostFocus(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDefaultFileTypesNonMedia.LostFocus
         Dim FileTypes() As String
         Dim OutputString As String = String.Empty
         If txtDefaultFileTypesNonMedia.Text <> String.Empty Then
@@ -1287,7 +1287,7 @@ Public Class Form1
         Database_Fields_Validation()
     End Sub
 
-    Private Sub Interactive_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
+    Private Sub Interactive_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtOverridePath.Validating, txtMovieFolder.Validating, txtConfigFilePath.Validating, txtParserFilePath.Validating, txtExcludeFilePath.Validating
         'Override Path and Movie Folder (Check for empty; check that no override path used with multiple scan folders
         Dim IsValid As Boolean = True
 
@@ -1370,7 +1370,6 @@ Public Class Form1
 
     End Sub
     Private Sub ManualUpdater_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtManualXMLPath.Validating, cbManualParameterOperator1.Validating, cbManualParameterFieldList1.Validating, txtManualNewValue.Validating, txtManualParameterValue1.Validating, cbManualSelectField.Validating, cbManualSelectOperation.Validating, chkManualParametersUpdateAll.Validating
-
         Dim IsValid As Boolean = True
         Dim TestState As Boolean = btnManualDoTest.Enabled
         Dim ApplyState As Boolean = btnManualApplyChanges.Enabled
@@ -2338,7 +2337,7 @@ Public Class Form1
 
     End Sub
 
-    Public Sub txtConfigFilePath_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Public Sub txtConfigFilePath_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtConfigFilePath.TextChanged
 
         txtManualXMLPath.Text = txtConfigFilePath.Text
         CurrentSettings.XML_File = txtConfigFilePath.Text
@@ -2506,7 +2505,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub btnExcludeFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnExcludeFileShow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileShow.Click
         Dim t As String = txtExcludeFilePath.Text
         Try
             Process.Start(t)
@@ -2514,7 +2513,7 @@ Public Class Form1
         End Try
     End Sub
 
-    Private Sub btnExcludeFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnExcludeFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileDelete.Click
         Dim dialogResult As Windows.Forms.DialogResult = Windows.Forms.MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If dialogResult = Windows.Forms.DialogResult.OK Then
             Try
