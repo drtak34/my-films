@@ -30,8 +30,8 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -100,6 +100,7 @@ namespace Grabber_Interface
           this.textBox5 = new System.Windows.Forms.TextBox();
           this.textboxSearchAkasRegex = new System.Windows.Forms.TextBox();
           this.button_openMediafile = new System.Windows.Forms.Button();
+          this.textEncoding = new System.Windows.Forms.TextBox();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -135,6 +136,7 @@ namespace Grabber_Interface
           this.label15 = new System.Windows.Forms.Label();
           this.pictureBoxPreviewCover = new System.Windows.Forms.PictureBox();
           this.tabPageSearchPage = new System.Windows.Forms.TabPage();
+          this.label34 = new System.Windows.Forms.Label();
           this.labelSearchPosition = new System.Windows.Forms.Label();
           this.PositionSearch = new System.Windows.Forms.Label();
           this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -193,8 +195,6 @@ namespace Grabber_Interface
           this.iMDBEnumeratorBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.iMDBEnumeratorBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
           this.Version_Label = new System.Windows.Forms.Label();
-          this.textEncoding = new System.Windows.Forms.TextBox();
-          this.label34 = new System.Windows.Forms.Label();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -424,7 +424,8 @@ namespace Grabber_Interface
             resources.GetString("Index.Items8"),
             resources.GetString("Index.Items9"),
             resources.GetString("Index.Items10"),
-            resources.GetString("Index.Items11")});
+            resources.GetString("Index.Items11"),
+            resources.GetString("Index.Items12")});
           resources.ApplyResources(this.Index, "Index");
           this.Index.Name = "Index";
           this.toolTip1.SetToolTip(this.Index, resources.GetString("Index.ToolTip"));
@@ -804,6 +805,12 @@ namespace Grabber_Interface
           this.button_openMediafile.UseVisualStyleBackColor = true;
           this.button_openMediafile.Click += new System.EventHandler(this.button_openMediafile_Click);
           // 
+          // textEncoding
+          // 
+          resources.ApplyResources(this.textEncoding, "textEncoding");
+          this.textEncoding.Name = "textEncoding";
+          this.toolTip1.SetToolTip(this.textEncoding, resources.GetString("textEncoding.ToolTip"));
+          // 
           // linkLabelMFwiki
           // 
           resources.ApplyResources(this.linkLabelMFwiki, "linkLabelMFwiki");
@@ -1069,6 +1076,11 @@ namespace Grabber_Interface
           this.tabPageSearchPage.Name = "tabPageSearchPage";
           this.tabPageSearchPage.UseVisualStyleBackColor = true;
           // 
+          // label34
+          // 
+          resources.ApplyResources(this.label34, "label34");
+          this.label34.Name = "label34";
+          // 
           // labelSearchPosition
           // 
           resources.ApplyResources(this.labelSearchPosition, "labelSearchPosition");
@@ -1206,16 +1218,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle5;
+          dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle1;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle6;
+          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle2;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1524,17 +1536,6 @@ namespace Grabber_Interface
           // 
           resources.ApplyResources(this.Version_Label, "Version_Label");
           this.Version_Label.Name = "Version_Label";
-          // 
-          // textEncoding
-          // 
-          resources.ApplyResources(this.textEncoding, "textEncoding");
-          this.textEncoding.Name = "textEncoding";
-          this.toolTip1.SetToolTip(this.textEncoding, resources.GetString("textEncoding.ToolTip"));
-          // 
-          // label34
-          // 
-          resources.ApplyResources(this.label34, "label34");
-          this.label34.Name = "label34";
           // 
           // GrabConfig
           // 
