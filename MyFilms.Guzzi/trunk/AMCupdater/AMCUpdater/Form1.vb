@@ -540,7 +540,7 @@ Public Class Form1
 #End Region
 
 #Region "Misc GUI Actions"
-    Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub btnSelectMovieFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectMovieFolder.Click
         Dim wpath As String
         Dim currentPath As String
         currentPath = txtMovieFolder.Text
@@ -961,15 +961,6 @@ Public Class Form1
     End Sub
 
     Private Sub btnManualSelectExcludedMoviesFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnManualSelectExcludedMoviesFile.Click
-
-
-
-
-
-
-
-
-
         Try
             With OpenFileDialog1
                 .InitialDirectory = My.Application.Info.DirectoryPath
@@ -1296,8 +1287,6 @@ Public Class Form1
         Database_Fields_Validation()
     End Sub
 
-
-
     Private Sub Interactive_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
         'Override Path and Movie Folder (Check for empty; check that no override path used with multiple scan folders
         Dim IsValid As Boolean = True
@@ -1619,7 +1608,7 @@ Public Class Form1
         End If
 
     End Sub
-    Private Sub Options_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles chkExecuteProgram.Validating, txtExecuteProgramPath.Validating
+    Private Sub Options_Validating(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles txtDefaultSourceField.Validating, chkExecuteProgram.Validating, txtExecuteProgramPath.Validating
         'txtDefaultFileType
         'txtDefaultSourceField
         'chkExecuteProgram
@@ -1711,9 +1700,6 @@ Public Class Form1
             epOptions.SetError(txtPictureFilenamePrefix, "")
             ValidOptions = False
         End If
-
-
-
 
     End Sub
     Private Sub Database_Fields_Validation()
@@ -2559,5 +2545,6 @@ Public Class Form1
             txtManualInternetParserPathDisplay.Text = ""
         End If
     End Sub
+
 End Class
 
