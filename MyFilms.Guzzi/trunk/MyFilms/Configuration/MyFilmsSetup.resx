@@ -512,6 +512,14 @@ Note:
 The "global count" will inclease each time any user is watching a film thus representing "total plays".
 It will NOT change, if user manually sets a movie to watched or unwatched.</value>
   </data>
+  <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
+    <value>If chosen, the option to update the filename / source of the movie in the update menu ("Filename") will use the 
+windows file dialog to choose a movie file. If unchecked, Mediaportal's virtual keyboard will be launched.
+
+As this option will be using a standard windows file dialog to browse the filesystem and select the movie file,
+it is not recommended to use that option for remote only users. 
+If using a mouse, this option can be enabled.</value>
+  </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
 but you can define two more fields to be updated here.
@@ -521,14 +529,6 @@ Select the database field to be updated, enter the label associated with that fi
 and enter a pre-defined value to update the field.
 
 A possible use case could be ""Language" "french" to have a oneclick solution to set a movie to this setting without using virtual keyboard.</value>
-  </data>
-  <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
-    <value>If chosen, the option to update the filename / source of the movie in the update menu ("Filename") will usethe 
-windows file dialog to choose a movie file. If unchecked, the GUIkeyboard will be launched.
-
-As this option will be using a standard windows file dialog to browse the filesystem and select the movie file,
-it is not recommended to use that option for remote only users. 
-If using a mouse, this option can be enabled.</value>
   </data>
   <data name="groupBox_SortByItem.ToolTip" xml:space="preserve">
     <value>You can define additional sort parameters – for example if you wish to sort by the movie’s length, use the database field ‘Length_num’.  
@@ -680,28 +680,6 @@ passed as  parameter to the command file.
 
 Very unused...</value>
   </data>
-  <data name="CatalogType.ToolTip" xml:space="preserve">
-    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
-Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
-The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
-  </data>
-  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
-    <value>Title selection:
-You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
-
-Grouping:
-Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
-This can be used to group more than one movie together,
-e.g. for collections.
-
-Example:
-Hierachy Separator: "\"
-movie 1: Moviecollection\movie1
-movie 2: Moviecollection\movie2
-movie 3: Moviecollection\movie3
-
-Will show "Moviecollection" with 3 items in it.</value>
-  </data>
   <data name="chkScanMediaOnStart.ToolTip" xml:space="preserve">
     <value>If checked, MyFilms will automatically scan all media files (films, trailer) to check 
 if they are currently "reachable".
@@ -737,6 +715,28 @@ In the first field you can select the database item that can be used to locate t
 In the second field you can enter your own text message to provide additional information.
 
 </value>
+  </data>
+  <data name="CatalogType.ToolTip" xml:space="preserve">
+    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
+Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
+The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
+  </data>
+  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
+    <value>Title selection:
+You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
+
+Grouping:
+Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
+This can be used to group more than one movie together,
+e.g. for collections.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
   </data>
   <data name="chkUseOriginalAsTranslatedTitle.ToolTip" xml:space="preserve">
     <value>This setting is useful for non english users:
