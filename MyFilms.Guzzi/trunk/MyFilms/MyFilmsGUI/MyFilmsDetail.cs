@@ -1088,7 +1088,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       dlgmenu.Add(GUILocalizeStrings.Get(1079851)); // Create single fanart from movie as multi image (local)
                       choiceViewMenu.Add("createfanartmultiimage");
 
-                      if (!g_Player.Stopped && g_Player.HasVideo && !string.IsNullOrEmpty(g_Player.CurrentFile) && ExtendedStartmode("Details context: Create single fanart from movie on current position (local)"))
+                      if (!g_Player.Stopped && g_Player.HasVideo && !string.IsNullOrEmpty(g_Player.CurrentFile))
                       {
                         dlgmenu.Add(GUILocalizeStrings.Get(1079852)); // Create single fanart from movie on current position (local)
                         choiceViewMenu.Add("createfanartonposition");
