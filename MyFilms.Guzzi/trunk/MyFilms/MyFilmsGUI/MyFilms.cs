@@ -3024,11 +3024,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       choiceView.Add("globalmappings");
 
       // Add Submenu for Wiki Online Help
-      if (MyFilmsDetail.ExtendedStartmode("Contextmenu for Wiki Onlinehelp")) // check if specialmode is configured for disabled features
-      {
+      //if (MyFilmsDetail.ExtendedStartmode("Contextmenu for Wiki Onlinehelp")) // check if specialmode is configured for disabled features
+      // {
         dlg1.Add(string.Format(GUILocalizeStrings.Get(10798699)));
         choiceView.Add("globalwikihelp");
-      }
+      //}
 
       dlg1.Add(string.Format(GUILocalizeStrings.Get(10798700))); // About ...
       choiceView.Add("about");
@@ -5019,9 +5019,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
         case "globalwikihelp":
-          var hasRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
-          var hasRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
-          if (hasRightPlugin && hasRightVersion)
+          if (Helper.IsBrowseTheWebAvailableAndEnabled)
           {
             //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser
             //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
