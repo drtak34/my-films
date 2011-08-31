@@ -27,6 +27,7 @@ namespace Grabber
     private static string LimitScanArea = "";
     private static int ArtworkWidth = 0;
     private static bool BlacklistingIsEnabled = true;
+    private static bool keepMainImage = false;
 
     #region Public methods
 
@@ -41,7 +42,7 @@ namespace Grabber
     //}
 
     [MethodImpl(MethodImplOptions.Synchronized)]
-    public static bool CreateVideoThumbForAMCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int Columns, int Rows, string ImageType, bool SaveIndividualShots, int SnapshotPosition)
+    public static bool CreateVideoThumbForAMCupdater(string aVideoPath, string aThumbPath, bool aOmitCredits, int Columns, int Rows, string ImageType, bool SaveIndividualShots, bool KeepMainImage, int SnapshotPosition)
     {
       PreviewColumns = Columns;
       PreviewRows = Rows;
@@ -63,6 +64,10 @@ namespace Grabber
         ArtworkWidth = 1920;
         BlacklistingIsEnabled = false;
       }
+      if (KeepMainImage) 
+        keepMainImage = true;
+      else
+        keepMainImage = false;
 
       LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows.", PreviewColumns, PreviewRows);
       //if (NeedsConfigRefresh)
@@ -161,8 +166,11 @@ namespace Grabber
         // Use this for the working dir to be on the safe side
         string TempPath = Path.GetTempPath();
         string OutputThumbtmp = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(aThumbPath), System.IO.Path.GetFileName(string.Format("{0}_s{1}", Path.ChangeExtension(aVideoPath, null), ".jpg")));
+        string OutputDirectory = System.IO.Path.GetDirectoryName(aThumbPath);
+        string searchmask = System.IO.Path.GetFileNameWithoutExtension(aVideoPath) + "_";
         // string OutputThumbtmp = string.Format("{0}_s{1}", Path.ChangeExtension(aThumbPath, null), Path.GetExtension(aThumbPath));
         string OutputThumb = aThumbPath;
+        string OutputName = System.IO.Path.GetFileNameWithoutExtension(aThumbPath);
 
         if (!File.Exists(OutputThumb)) // No thumb in share although it should be there
         {
@@ -181,8 +189,15 @@ namespace Grabber
           Utils.KillProcess(Path.ChangeExtension(ExtractApp, null)); // make sure there's no process hanging
           try
           {
-            // remove the _s which mdn appends to its files
+            // remove the _s which mtn appends to its files
             File.Move(OutputThumbtmp, OutputThumb);
+            // rename the singleimages to destination names
+            string[] files = System.IO.Directory.GetFiles(OutputDirectory, searchmask + "*.*", SearchOption.TopDirectoryOnly);
+            foreach (string file in files)
+            {
+              string filenew = file.Replace(searchmask, OutputName);
+              File.Move(file, filenew);
+            }
           }
           catch (FileNotFoundException)
           {
@@ -195,6 +210,11 @@ namespace Grabber
               // Clean up
               File.Delete(OutputThumbtmp);
               Thread.Sleep(50);
+              if (!keepMainImage)
+              {
+                File.Delete(OutputThumb);
+                Thread.Sleep(50);
+              }
             }
             catch (Exception) { }
           }

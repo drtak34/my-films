@@ -1085,6 +1085,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       dlgmenu.Add(GUILocalizeStrings.Get(1079853)); // create fanart from movie (local)
                       choiceViewMenu.Add("createfanart");
 
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079849)); // create single images fanart from movie (local)
+                      choiceViewMenu.Add("createfanartsingleimages");
+
                       dlgmenu.Add(GUILocalizeStrings.Get(1079851)); // Create single fanart from movie as multi image (local)
                       choiceViewMenu.Add("createfanartmultiimage");
 
@@ -1690,11 +1693,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "createfanart": // create fanart from local media
-                    Menu_CreateFanart();
+                    Menu_CreateFanart(GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages);
+                    break;
+
+                case "createfanartsingleimages": // create single images fanart from local media
+                    Menu_CreateFanart(GrabUtil.Artwork_Fanart_Type.MultipleSingleImages);
                     break;
 
                 case "createfanartmultiimage": // create single fanart from local media on pause position
-                    Menu_CreateFanartMultiImage();
+                    Menu_CreateFanart(GrabUtil.Artwork_Fanart_Type.Multiimage);
                     break;
 
                 case "createfanartonposition": // create single fanart from local media on pause position
@@ -1718,8 +1725,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
                       Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle2].ToString(), false);
                       Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrSTitle].ToString(), false);
+                      Thread.Sleep(50);
+                      afficher_detail(true);
                     }
-                    afficher_detail(true);
                     break;
 
                 case "changecover":
@@ -1780,13 +1788,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 // Remove_Backdrops_Fanart(fanartTitle, false); // old: // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
                 // Thread.Sleep(50);
-                bool success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, false, file, "localfanart", currentposition);
+                bool success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Snapshotimage, file, "localfanart", currentposition);
               }
               if (dlgPrgrs != null)
                 dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
               GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
               {
                 // this will be executed after background thread finished
+                doUpdateDetailsViewByFinishEvent = true;
+                if (DetailsUpdated != null)
+                  DetailsUpdated(true); // will launch afficher_detail(true) via message handler
                 return 0;
               }, 0, 0, null);
             }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
@@ -1798,47 +1809,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
 
-        private void Menu_CreateFanartMultiImage()
-        {
-          GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
-          if (dlgPrgrs != null)
-          {
-            dlgPrgrs.Reset();
-            dlgPrgrs.DisplayProgressBar = false;
-            dlgPrgrs.ShowWaitCursor = true;
-            dlgPrgrs.DisableCancel(true);
-            dlgPrgrs.SetHeading("MyFilms Fanart Creator");
-            dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
-            dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
-            dlgPrgrs.Percentage = 0;
-          }
-          new System.Threading.Thread(delegate()
-          {
-            string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-            if (path.Contains(";"))
-              path = path.Substring(0, path.IndexOf(";"));
-            string fanartTitle, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
-            fanartTitle = GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
-            if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
-            {
-              // Remove_Backdrops_Fanart(fanartTitle, false); // old: Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-              // Thread.Sleep(50);
-              bool success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, false, path, "localfanart", 0);
-            }
-
-            if (dlgPrgrs != null)
-              dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
-            GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
-            {
-              // this will be executed after background thread finished
-              afficher_detail(true);
-              return 0;
-            }, 0, 0, null);
-          }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
-          return;
-        }
-
-        private void Menu_CreateFanart()
+        private void Menu_CreateFanart(GrabUtil.Artwork_Fanart_Type FanartType)
         {
           {
             GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
@@ -1855,8 +1826,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             new System.Threading.Thread(delegate()
             {
-              // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-              // Thread.Sleep(50);
               string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
               if (path.Contains(";"))
                 path = path.Substring(0, path.IndexOf(";"));
@@ -1864,7 +1833,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               fanartTitle = GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
               if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
               {
-                bool success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, true, path, "localfanart", 0);
+                // Remove_Backdrops_Fanart(fanartTitle, false); // old: Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+                // Thread.Sleep(50);
+                bool success = false;
+                switch (FanartType)
+                {
+                    
+                  case GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages:
+                    success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages, path, "localfanart", 0);
+                    break;
+                  case GrabUtil.Artwork_Fanart_Type.Multiimage:
+                    success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Multiimage, path, "localfanart", 0);
+                    break;
+                  case GrabUtil.Artwork_Fanart_Type.MultipleSingleImages:
+                    success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultipleSingleImages, path, "localfanart", 0);
+                    break;
+                }
               }
               
               if (dlgPrgrs != null)
@@ -1872,7 +1856,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
               {
                 // this will be executed after background thread finished
-                afficher_detail(true);
+                doUpdateDetailsViewByFinishEvent = true;
+                if (DetailsUpdated != null)
+                  DetailsUpdated(true); // will launch afficher_detail(true) via message handler
                 return 0;
               }, 0, 0, null);
             }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();

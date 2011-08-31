@@ -2005,7 +2005,7 @@ Public Class AntRecord
             Try
                 If Not File.Exists(NewCoverThumbName) Then
                     ' CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
-                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, Grabber.GrabUtil.Artwork_Thumb_Mode.Cover, False, 0) ' try creating artwork from movie
+                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, Grabber.GrabUtil.Artwork_Thumb_Mode.Cover, False, True, 0) ' try creating artwork from movie
                 Else
                     CoverFileExists = True
                 End If
@@ -2057,7 +2057,7 @@ Public Class AntRecord
             Try
                 If Not File.Exists(NewCoverThumbName) Then
                     ' CoverFileExists = CreateArtworkFromMovie(FileName, NewCoverThumbName, Artwork_Thumb_Mode.Cover) ' try creating artwork from movie
-                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, GrabUtil.Artwork_Thumb_Mode.Cover, False, 0) ' try creating artwork from movie
+                    CoverFileExists = Grabber.GrabUtil.GetCoverartFromMovie(FileName, NewCoverThumbName, GrabUtil.Artwork_Thumb_Mode.Cover, False, True, 0) ' try creating artwork from movie
                 End If
             Catch ex As Exception
             End Try
