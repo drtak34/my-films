@@ -3864,7 +3864,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             try
             {
-              wyear = System.Convert.ToInt16(MyFilms.r[MyFilms.conf.StrIndex]["Year"]);
+              wyear = System.Convert.ToInt16(movieRecord["Year"]);
             }
             catch
             {
@@ -3872,7 +3872,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             try
             {
-              wdirector = (string)MyFilms.r[MyFilms.conf.StrIndex]["Director"];
+              wdirector = (string)movieRecord["Director"];
             }
             catch
             {
