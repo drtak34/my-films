@@ -71,10 +71,11 @@
     <String id="107987">Films</String>
     <String id="107988">Films</String>
     <String id="1079840">Choose user profile ('{0}')</String>
+    <String id="1079849">Create fanart from movie as single images (local)</String>
     <String id="1079850">Update online availability</String>
-    <String id="1079851">Create single fanart from movie as multi image (local)</String>
+    <String id="1079851">Create single fanart from movie as mosaic image (local)</String>
     <String id="1079852">Create single fanart from movie on current position (local)</String>
-    <String id="1079853">Create fanart from movie  (local)</String>
+    <String id="1079853">Create fanart from movie as mosaic/single images (local)</String>
     <String id="1079854">Movie DB already in use (locked) !</String>
     <String id="1079855">Arrêter la mise à jour de la base de données(active)</String>
     <String id="1079856">Global Update cancelled !</String>

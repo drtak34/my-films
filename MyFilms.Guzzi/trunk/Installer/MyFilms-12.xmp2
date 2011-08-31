@@ -2656,6 +2656,13 @@ Required!</Description>
               <ZipFileName>Installer{CopyFile}\{36598a75-b6c3-4a69-b016-cff8faa49632}-DefaultGroupAlternative.jpg</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultGroupAlternative.jpg</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultImages\MyFilms.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8767b463-d897-45d0-b59e-63c182b7521d}-MyFilms.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\MyFilms.png</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3539,10 +3546,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3558,8 +3565,8 @@ Please refer to the Wiki online documentation.</Value>
     <Version>
       <Major>5</Major>
       <Minor>0</Minor>
-      <Build>1</Build>
-      <Revision>1359</Revision>
+      <Build>2</Build>
+      <Revision>1372</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
@@ -3567,7 +3574,7 @@ Please refer to the Wiki online documentation.</Value>
     <OnlineLocation />
     <ReleaseDate>2011-08-27T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1359(MP12RC).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1372(MP12RC).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -6206,6 +6213,13 @@ Please refer to the Wiki online documentation.</Value>
         <ZipFileName>Installer{CopyFile}\{36598a75-b6c3-4a69-b016-cff8faa49632}-DefaultGroupAlternative.jpg</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\DefaultGroupAlternative.jpg</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultImages\MyFilms.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8767b463-d897-45d0-b59e-63c182b7521d}-MyFilms.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultImages\MyFilms.png</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -6686,14 +6700,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{71b240b0-9823-4bb5-93d3-f83558b5c79a}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{96a906e0-5c24-4261-86cd-4dbe76928c7d}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9f3ee018-f335-422d-9c76-7f6962ed2894}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{3fae3c36-5d21-4c28-ba46-323347b4b87d}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
