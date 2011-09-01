@@ -9316,12 +9316,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     void bgIsOnlineCheck_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
     {
       LogMyFilms.Info("Check IsOnline in batch mode finished. (GetID = '" + GetID + "')");
+      //if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
+      //{
+      //  MyFilmsDetail.ShowNotificationDialog(GUILocalizeStrings.Get(10798948), "Finished !");
+      //}
       if (GetID == ID_MyFilms)
       {
         //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeView.SelectedListItem.ItemId, facadeView.SelectedListItem.Label);
         //Load_Config(Configuration.CurrentConfig, true);
         InitialIsOnlineScan = true; // let MF know, the status has been retrieved !
-        Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+        // Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+        Fin_Charge_Init(false, true); //need to reload the facade, but NOT default select, as it otherwise will reset global filters the user might have set...
         MyFilmsDetail.clearGUIProperty("statusmessage");
       }
     }
