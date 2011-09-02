@@ -1,10 +1,9 @@
-REM %1 = Solution Directory
+REM %1 = Project Directory
 REM %2 = $(ConfigurationName) Debug/Release
 echo %1 >%1\postbuild.log
 echo %2 >>%1\postbuild.log
-F:
-cd F:\Team Mediaportal
+xcopy %1\bin\Debug\*.* %1\Merge /s/r/y >>%1\postbuild.log
+cd %1\Merge
+rem dir >>%1\postbuild.log
+call ilmerge.bat  >>%1\postbuild.log
 dir >>%1\postbuild.log
-
-rem copy %1\obj\Debug\MesFilms.dll MediaPortal\trunk\MediaPortal\xbmc\bin\Debug\plugins\Windows
-

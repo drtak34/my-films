@@ -1,0 +1,43 @@
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\ 
+Debug 
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\Common.Utils.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\Core.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\CSScriptLibrary.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\Databases.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\Grabber.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\Grabber.pdb
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\MediaPortal.Support.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\MyFilms_Grabber_Interface.exe
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\MyFilms_Grabber_Interface.pdb
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\NLog.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\Utils.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\en\MyFilms_Grabber_Interface.resources.dll
+D:\Entwicklung\MyFilms\trunk\Grabber_Interface\\bin\Debug\fr\MyFilms_Grabber_Interface.resources.dll
+13 Datei(en) kopiert
+ Datentr„ger in Laufwerk D: ist Dev-Data
+ Volumeseriennummer: 8858-7F38
+
+ Verzeichnis von D:\Entwicklung\MyFilms\trunk\Grabber_Interface\Merge
+
+02.09.2011  00:42    <DIR>          .
+02.09.2011  00:42    <DIR>          ..
+21.08.2011  09:49            12.288 Common.Utils.dll
+21.08.2011  09:50         2.494.464 Core.dll
+20.11.2010  13:02            81.920 CSScriptLibrary.dll
+21.08.2011  09:50           335.872 Databases.dll
+02.09.2011  00:42    <DIR>          en
+02.09.2011  00:42    <DIR>          fr
+02.09.2011  00:42           144.384 Grabber.dll
+02.09.2011  00:42           253.440 Grabber.pdb
+31.01.2011  13:06               281 ilmerge.bat
+05.11.2010  21:48           847.360 ILMerge.exe
+21.08.2011  09:49            32.768 MediaPortal.Support.dll
+07.04.2011  00:37             3.609 MyFilmsSample.xml
+02.09.2011  00:42           871.936 MyFilms_Grabber_Interface.exe
+02.09.2011  00:42           310.784 MyFilms_Grabber_Interface.pdb
+02.09.2011  00:42           453.120 MyFilms_Grabber_Interface_UNMERGED.exe
+05.11.2010  21:48           253.952 NLog.dll
+24.01.2011  04:01    <DIR>          Scripts
+21.08.2011  09:49           114.688 Utils.dll
+              15 Datei(en)      6.210.866 Bytes
+               5 Verzeichnis(se), 108.959.784.960 Bytes frei

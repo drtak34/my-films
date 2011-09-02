@@ -1,28 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFilmsPlugin", "MyFilmsPlugin.csproj", "{20BCDBE0-0812-4235-9330-40B8E570DAE1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{92C183EE-636F-4A55-A6AB-363CDA606110} = {92C183EE-636F-4A55-A6AB-363CDA606110}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber", "Grabber\Grabber.csproj", "{92C183EE-636F-4A55-A6AB-363CDA606110}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IMDBfiles", "IMDBfiles", "{BB0C676F-E2F6-415A-AB1B-9FBF9CF38806}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\Mediaportal\trunk\mediaportal\Databases\Video\IMDB.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\IMDB.cs
-		..\..\Mediaportal\trunk\mediaportal\Databases\Video\IMDBActor.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\IMDBActor.cs
-		..\..\Mediaportal\trunk\mediaportal\Databases\Video\IMDBFetcher.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\IMDBFetcher.cs
-		..\..\Mediaportal\trunk\mediaportal\Databases\Video\IMDBMovie.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\IMDBMovie.cs
-		..\..\Mediaportal\trunk\mediaportal\Databases\Video\IVideoDatabase.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\IVideoDatabase.cs
-		..\..\Mediaportal\trunk\mediaportal\Databases\Video\VideoDatabase.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\VideoDatabase.cs
-		..\..\Mediaportal\trunk\mediaportal\Databases\Video\VideoThumbBlacklistDBImpl.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\VideoThumbBlacklistDBImpl.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqLite", "SqLite", "{593C4621-FD47-4EF8-BC04-BF29E59C9CDB}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\Mediaportal\trunk\mediaportal\Databases\Video\SqlLite\VideoDatabaseSqlLite.cs = ..\..\Mediaportal\trunk\mediaportal\Databases\Video\SqlLite\VideoDatabaseSqlLite.cs
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Interface", "Grabber_Interface\Grabber_Interface.csproj", "{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}"
 EndProject
@@ -36,6 +15,8 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AMCUpdater", "AMCupdater\AMCUpdater\AMCUpdater.vbproj", "{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AMCUpdaterSetup", "AMCupdater\AMCUpdaterSetup\AMCUpdaterSetup.vdproj", "{37FA1F82-54BF-4A6B-AC14-90C09FBEB106}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFilmsPlugin", "MyFilms\MyFilmsPlugin.csproj", "{20BCDBE0-0812-4235-9330-40B8E570DAE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,46 +46,6 @@ Global
 		UseCaptureDefintionsRelease|x86 = UseCaptureDefintionsRelease|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug (Guzzi)|Any CPU
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|Any CPU.Build.0 = Debug (Guzzi)|Any CPU
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug (Guzzi)|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|Mixed Platforms.Build.0 = Debug (Guzzi)|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|x64.ActiveCfg = Debug (Guzzi)|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|x86.ActiveCfg = Debug (Guzzi)|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|x86.Build.0 = Debug (Guzzi)|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|x64.ActiveCfg = Debug|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|x86.ActiveCfg = Debug|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|x86.Build.0 = Debug|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|Any CPU.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|Mixed Platforms.Build.0 = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|x64.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|x86.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|x86.Build.0 = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|Mixed Platforms.Build.0 = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|x64.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|x86.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|x86.Build.0 = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|Any CPU.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|Mixed Platforms.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|Mixed Platforms.Build.0 = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|x64.ActiveCfg = Debug (Guzzi)|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|x86.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|x86.Build.0 = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|Any CPU.Build.0 = Release|Any CPU
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|x86
-		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x86.Build.0 = Release|x86
 		{92C183EE-636F-4A55-A6AB-363CDA606110}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug (Guzzi)|Any CPU
 		{92C183EE-636F-4A55-A6AB-363CDA606110}.Debug (Guzzi)|Any CPU.Build.0 = Debug (Guzzi)|Any CPU
 		{92C183EE-636F-4A55-A6AB-363CDA606110}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug (Guzzi)|x86
@@ -346,11 +287,48 @@ Global
 		{37FA1F82-54BF-4A6B-AC14-90C09FBEB106}.UseCaptureDefintionsRelease|x64.Build.0 = Release
 		{37FA1F82-54BF-4A6B-AC14-90C09FBEB106}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release
 		{37FA1F82-54BF-4A6B-AC14-90C09FBEB106}.UseCaptureDefintionsRelease|x86.Build.0 = Release
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug (Guzzi)|Any CPU
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|Any CPU.Build.0 = Debug (Guzzi)|Any CPU
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|Mixed Platforms.Build.0 = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|x64.ActiveCfg = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|x86.ActiveCfg = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug (Guzzi)|x86.Build.0 = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|x64.ActiveCfg = Debug|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|x86.ActiveCfg = Debug|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Debug|x86.Build.0 = Debug|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|Any CPU.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|Mixed Platforms.Build.0 = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|x64.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|x86.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release (Standalone)|x86.Build.0 = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|Mixed Platforms.Build.0 = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|x64.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|x86.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.Release|x86.Build.0 = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|Any CPU.ActiveCfg = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|Mixed Platforms.ActiveCfg = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|Mixed Platforms.Build.0 = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|x64.ActiveCfg = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|x86.ActiveCfg = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureCardDefinitions|x86.Build.0 = Debug (Guzzi)|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|Any CPU.Build.0 = Release|Any CPU
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|x86
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{593C4621-FD47-4EF8-BC04-BF29E59C9CDB} = {BB0C676F-E2F6-415A-AB1B-9FBF9CF38806}
 	EndGlobalSection
 EndGlobal
