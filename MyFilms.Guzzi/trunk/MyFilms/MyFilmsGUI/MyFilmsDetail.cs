@@ -1082,14 +1082,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       dlgmenu.Add(GUILocalizeStrings.Get(1079874)); // Remove Fanart
                       choiceViewMenu.Add("deletefanart");
 
-                      dlgmenu.Add(GUILocalizeStrings.Get(1079853)); // create fanart from movie (local)
-                      choiceViewMenu.Add("createfanart");
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079851)); // Create single fanart from movie as multi image (local)
+                      choiceViewMenu.Add("createfanartmultiimage");
 
                       dlgmenu.Add(GUILocalizeStrings.Get(1079849)); // create single images fanart from movie (local)
                       choiceViewMenu.Add("createfanartsingleimages");
 
-                      dlgmenu.Add(GUILocalizeStrings.Get(1079851)); // Create single fanart from movie as multi image (local)
-                      choiceViewMenu.Add("createfanartmultiimage");
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079853)); // create fanart from movie (local)
+                      choiceViewMenu.Add("createfanart");
 
                       if (!g_Player.Stopped && g_Player.HasVideo && !string.IsNullOrEmpty(g_Player.CurrentFile))
                       {
