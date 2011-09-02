@@ -1245,29 +1245,17 @@ Public Class AntRecord
                 End If
 
                 ' Get Internetdata with "best title possible"
-                If _MasterTitle Then
-                    ' add mastertitle handling for update search here ....
-                End If
-                If _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
-                    'Looks like we have a value here - if so, use it for the lookup.  Assuming here that it has already been 'cleaned'.
-                    If _XMLElement.Attributes("OriginalTitle").Value.ToString = String.Empty Then
-                        'No original title available, so use the clean filename instead:
-                        DoInternetLookup(GetTitleFromFilePath(_FilePath))
-                    Else
-                        If _XMLElement.Attributes("OriginalTitle").Value.ToString.Contains("\") = True Then
-                            'I don't think this is needed now, but leave it for the time being to be safe!
-                            DoInternetLookup(_XMLElement.Attributes("OriginalTitle").Value.ToString.Substring(_XMLElement.Attributes("OriginalTitle").Value.ToString.LastIndexOf("\") + 1))
-                        Else
-                            'Do Internet lookup with the existing Original Title value.
-                            DoInternetLookup(_XMLElement.Attributes("OriginalTitle").Value.ToString)
-                        End If
-                    End If
+                If _MasterTitle = "FormattedTitle" And _XMLElement.Attributes("FormattedTitle") IsNot Nothing And Not _XMLElement.Attributes("FormattedTitle").Value.ToString = String.Empty Then
+                    DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("FormattedTitle").Value.ToString))
+                ElseIf _MasterTitle = "TranslatedTitle" And _XMLElement.Attributes("TranslatedTitle") IsNot Nothing And Not _XMLElement.Attributes("TranslatedTitle").Value.ToString = String.Empty Then
+                    DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("TranslatedTitle").Value.ToString))
+                ElseIf _XMLElement.Attributes("OriginalTitle") IsNot Nothing And Not _XMLElement.Attributes("OriginalTitle").Value.ToString = String.Empty Then
+                    DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("OriginalTitle").Value.ToString))
                 Else
-                    'No original title available, so use the clean filename instead:
+                    'No DB title available, so use the cleaned filename instead:
                     DoInternetLookup(GetTitleFromFilePath(_FilePath))
                 End If
             End If
-
 
             ' Check, if internetlookup has given proper title name - otherwise set to failed
             If _InternetLookupOK = True Then

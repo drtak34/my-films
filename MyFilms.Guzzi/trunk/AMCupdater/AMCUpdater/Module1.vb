@@ -1186,7 +1186,7 @@ Module Module1
         End If
         Return fanartTitle
     End Function
-    Private Function RemoveGroupName(ByVal FullName As String) As String
+    Public Function RemoveGroupName(ByVal FullName As String) As String
         Dim Name As String
         If FullName.Contains("\") = True Then
             'FullName = FullName.Substring(0, FullName.IndexOf("\") - 1) ' remove rest of group name part (group fanart)
