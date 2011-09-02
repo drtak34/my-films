@@ -5797,7 +5797,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   dlgOK.SetHeading("MyFilms");
                   dlgOK.SetLine(1, "OnlineVideo plugin not installed or wrong version");
-                  dlgOK.SetLine(2, "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos)));
+                  dlgOK.SetLine(2, "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos));
                   dlgOK.DoModal(GetID);
                   return;
                 }
