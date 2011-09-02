@@ -364,7 +364,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private bool NetworkAvailabilityChanged_Subscribed = false;
     private bool PowerModeChanged_Subscribed = false;
-    private bool PlayerEvents_Subscribed = false;
+    // private bool PlayerEvents_Subscribed = false;
 
     private double lastPublished = 0;
     private Timer publishTimer;

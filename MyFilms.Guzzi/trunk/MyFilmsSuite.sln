@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Plugin", "Grabber_P
 		{92C183EE-636F-4A55-A6AB-363CDA606110} = {92C183EE-636F-4A55-A6AB-363CDA606110}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovingPicturesXML", "MovingPicturesXML\movingpicturesxml\MovingPicturesXML.csproj", "{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AMCUpdater", "AMCupdater\AMCUpdater\AMCUpdater.vbproj", "{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}"
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AMCUpdaterSetup", "AMCupdater\AMCUpdaterSetup\AMCUpdaterSetup.vdproj", "{37FA1F82-54BF-4A6B-AC14-90C09FBEB106}"
@@ -160,43 +158,6 @@ Global
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|Any CPU
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug (Guzzi)|Any CPU.Build.0 = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug (Guzzi)|Mixed Platforms.Build.0 = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug (Guzzi)|x64.ActiveCfg = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug (Guzzi)|x86.ActiveCfg = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Debug|x86.Build.0 = Debug|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|Mixed Platforms.Build.0 = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|x64.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release (Standalone)|x86.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release|x64.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.Release|x86.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureCardDefinitions|Any CPU.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureCardDefinitions|Any CPU.Build.0 = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureCardDefinitions|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureCardDefinitions|Mixed Platforms.Build.0 = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureCardDefinitions|x64.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureCardDefinitions|x86.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureDefintionsRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureDefintionsRelease|Any CPU.Build.0 = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|Any CPU
-		{4BBFEA03-7865-4FB2-A86E-B0FB0C33ED18}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
 		{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug|x86
 		{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug|x86
 		{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}.Debug (Guzzi)|Mixed Platforms.Build.0 = Debug|x86

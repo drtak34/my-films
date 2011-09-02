@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MultiGrabber.cs" />
+    <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="ScriptDialog.cs">
       <SubType>Form</SubType>
     </Compile>

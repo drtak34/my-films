@@ -177,6 +177,7 @@
     <Compile Include="MyFilmsSettings.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="Utils\Cornerstone.MP\AsyncImageResource.cs" />
     <Compile Include="Utils\Cornerstone.MP\Extensions\GUIFacadeControlExtensions.cs" />
     <Compile Include="Utils\Cornerstone.MP\Extensions\GUIWindowExtensions.cs" />
