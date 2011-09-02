@@ -28,25 +28,26 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
         Me.Import_Movies = New System.Windows.Forms.TabPage
-        Me.GroupBox23 = New System.Windows.Forms.GroupBox
+        Me.Label88 = New System.Windows.Forms.Label
         Me.GroupBox27 = New System.Windows.Forms.GroupBox
         Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox
         Me.Label24 = New System.Windows.Forms.Label
         Me.chkImportOnInternetFailIgnoreWhenInteractive = New System.Windows.Forms.CheckBox
         Me.cbInternetLookupBehaviour = New System.Windows.Forms.ComboBox
         Me.chkImportOnInternetFail = New System.Windows.Forms.CheckBox
+        Me.GroupBox23 = New System.Windows.Forms.GroupBox
         Me.txtParserFilePathDisplay = New System.Windows.Forms.TextBox
         Me.cbTitleHandling = New System.Windows.Forms.ComboBox
         Me.Label43 = New System.Windows.Forms.Label
@@ -123,6 +124,12 @@ Partial Class Form1
         Me.btnManualSelectXMLFile = New System.Windows.Forms.Button
         Me.btnManualSelectExcludedMoviesFile = New System.Windows.Forms.Button
         Me.DatabaseFields = New System.Windows.Forms.TabPage
+        Me.GroupBox_TitleHandling = New System.Windows.Forms.GroupBox
+        Me.cbGroupNameAppliesTo = New System.Windows.Forms.ComboBox
+        Me.chkFolderNameIsGroupName = New System.Windows.Forms.CheckBox
+        Me.lblGroupNameAppliesTo = New System.Windows.Forms.Label
+        Me.cbMasterTitle = New System.Windows.Forms.ComboBox
+        Me.lblMasterTitle = New System.Windows.Forms.Label
         Me.GroupBox_StorageFieldHandling = New System.Windows.Forms.GroupBox
         Me.chkShortNames = New System.Windows.Forms.CheckBox
         Me.Label26 = New System.Windows.Forms.Label
@@ -131,10 +138,6 @@ Partial Class Form1
         Me.Label13 = New System.Windows.Forms.Label
         Me.chkReadDVDLabel = New System.Windows.Forms.CheckBox
         Me.txtMediaLabel = New System.Windows.Forms.TextBox
-        Me.GroupBox_TitleHandling = New System.Windows.Forms.GroupBox
-        Me.cbGroupNameAppliesTo = New System.Windows.Forms.ComboBox
-        Me.chkFolderNameIsGroupName = New System.Windows.Forms.CheckBox
-        Me.lblGroupNameAppliesTo = New System.Windows.Forms.Label
         Me.GroupBox_OtherFieldHandling = New System.Windows.Forms.GroupBox
         Me.Label12 = New System.Windows.Forms.Label
         Me.txtMediaType = New System.Windows.Forms.TextBox
@@ -147,8 +150,6 @@ Partial Class Form1
         Me.lblPictureHandling = New System.Windows.Forms.Label
         Me.cbPictureHandling = New System.Windows.Forms.ComboBox
         Me.txtPictureFilenamePrefix = New System.Windows.Forms.TextBox
-        Me.lblMasterTitle = New System.Windows.Forms.Label
-        Me.cbMasterTitle = New System.Windows.Forms.ComboBox
         Me.lblInternetLookupRequired = New System.Windows.Forms.Label
         Me.GroupBox16 = New System.Windows.Forms.GroupBox
         Me.Label33 = New System.Windows.Forms.Label
@@ -183,6 +184,24 @@ Partial Class Form1
         Me.Label45 = New System.Windows.Forms.Label
         Me.dgExcludedFileStrings = New System.Windows.Forms.DataGridView
         Me.Options = New System.Windows.Forms.TabPage
+        Me.GroupBox26 = New System.Windows.Forms.GroupBox
+        Me.Label87 = New System.Windows.Forms.Label
+        Me.Label86 = New System.Windows.Forms.Label
+        Me.Label85 = New System.Windows.Forms.Label
+        Me.Label84 = New System.Windows.Forms.Label
+        Me.chkGrabberOverrideTitleLimit = New System.Windows.Forms.ComboBox
+        Me.chkGrabberOverridePersonLimit = New System.Windows.Forms.ComboBox
+        Me.chkGrabberOverrideGetRoles = New System.Windows.Forms.ComboBox
+        Me.chkGrabberOverrideLanguage = New System.Windows.Forms.ComboBox
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox
+        Me.btnExcludeFileDelete = New System.Windows.Forms.Button
+        Me.btnExcludeFileShow = New System.Windows.Forms.Button
+        Me.txtExcludeFilePath = New System.Windows.Forms.TextBox
+        Me.Label22 = New System.Windows.Forms.Label
+        Me.btnSelectExcludeFile = New System.Windows.Forms.Button
+        Me.txtConfigFilePath = New System.Windows.Forms.TextBox
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.btnSelectConfigFile = New System.Windows.Forms.Button
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
         Me.chkParseTrailers = New System.Windows.Forms.CheckBox
         Me.GroupBox25 = New System.Windows.Forms.GroupBox
@@ -390,29 +409,10 @@ Partial Class Form1
         Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox
-        Me.btnExcludeFileDelete = New System.Windows.Forms.Button
-        Me.btnExcludeFileShow = New System.Windows.Forms.Button
-        Me.txtExcludeFilePath = New System.Windows.Forms.TextBox
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.btnSelectExcludeFile = New System.Windows.Forms.Button
-        Me.txtConfigFilePath = New System.Windows.Forms.TextBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.btnSelectConfigFile = New System.Windows.Forms.Button
-        Me.Label88 = New System.Windows.Forms.Label
-        Me.GroupBox26 = New System.Windows.Forms.GroupBox
-        Me.Label87 = New System.Windows.Forms.Label
-        Me.Label86 = New System.Windows.Forms.Label
-        Me.Label85 = New System.Windows.Forms.Label
-        Me.Label84 = New System.Windows.Forms.Label
-        Me.chkGrabberOverrideTitleLimit = New System.Windows.Forms.ComboBox
-        Me.chkGrabberOverridePersonLimit = New System.Windows.Forms.ComboBox
-        Me.chkGrabberOverrideGetRoles = New System.Windows.Forms.ComboBox
-        Me.chkGrabberOverrideLanguage = New System.Windows.Forms.ComboBox
         Me.TabControl1.SuspendLayout()
         Me.Import_Movies.SuspendLayout()
-        Me.GroupBox23.SuspendLayout()
         Me.GroupBox27.SuspendLayout()
+        Me.GroupBox23.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
         Me.Update_Movies.SuspendLayout()
@@ -422,9 +422,9 @@ Partial Class Form1
         Me.GroupBox10.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.DatabaseFields.SuspendLayout()
+        Me.GroupBox_TitleHandling.SuspendLayout()
         Me.GroupBox_StorageFieldHandling.SuspendLayout()
         Me.GroupBox_MediaLabelFieldHandling.SuspendLayout()
-        Me.GroupBox_TitleHandling.SuspendLayout()
         Me.GroupBox_OtherFieldHandling.SuspendLayout()
         Me.GroupBox_PictureHandling.SuspendLayout()
         Me.GroupBox16.SuspendLayout()
@@ -437,6 +437,8 @@ Partial Class Form1
         CType(Me.dgExcludedFolderStrings, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgExcludedFileStrings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Options.SuspendLayout()
+        Me.GroupBox26.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox25.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -466,8 +468,6 @@ Partial Class Form1
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox11.SuspendLayout()
-        Me.GroupBox26.SuspendLayout()
         Me.SuspendLayout()
         '
         'FolderBrowserDialog1
@@ -509,21 +509,13 @@ Partial Class Form1
         Me.Import_Movies.Text = "Import Movies"
         Me.Import_Movies.UseVisualStyleBackColor = True
         '
-        'GroupBox23
+        'Label88
         '
-        Me.GroupBox23.Controls.Add(Me.txtParserFilePathDisplay)
-        Me.GroupBox23.Controls.Add(Me.cbTitleHandling)
-        Me.GroupBox23.Controls.Add(Me.Label43)
-        Me.GroupBox23.Controls.Add(Me.Button1)
-        Me.GroupBox23.Controls.Add(Me.btnSelectParserFile)
-        Me.GroupBox23.Controls.Add(Me.Label23)
-        Me.GroupBox23.Controls.Add(Me.txtParserFilePath)
-        Me.GroupBox23.Location = New System.Drawing.Point(11, 337)
-        Me.GroupBox23.Name = "GroupBox23"
-        Me.GroupBox23.Size = New System.Drawing.Size(572, 79)
-        Me.GroupBox23.TabIndex = 104
-        Me.GroupBox23.TabStop = False
-        Me.GroupBox23.Text = "Internet Grabber Options ..."
+        Me.Label88.Location = New System.Drawing.Point(11, 51)
+        Me.Label88.Name = "Label88"
+        Me.Label88.Size = New System.Drawing.Size(572, 69)
+        Me.Label88.TabIndex = 105
+        Me.Label88.Text = resources.GetString("Label88.Text")
         '
         'GroupBox27
         '
@@ -592,6 +584,22 @@ Partial Class Form1
         Me.chkImportOnInternetFail.Text = "Import File if Internet Lookup Fails"
         Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFail, resources.GetString("chkImportOnInternetFail.ToolTip"))
         Me.chkImportOnInternetFail.UseVisualStyleBackColor = True
+        '
+        'GroupBox23
+        '
+        Me.GroupBox23.Controls.Add(Me.txtParserFilePathDisplay)
+        Me.GroupBox23.Controls.Add(Me.cbTitleHandling)
+        Me.GroupBox23.Controls.Add(Me.Label43)
+        Me.GroupBox23.Controls.Add(Me.Button1)
+        Me.GroupBox23.Controls.Add(Me.btnSelectParserFile)
+        Me.GroupBox23.Controls.Add(Me.Label23)
+        Me.GroupBox23.Controls.Add(Me.txtParserFilePath)
+        Me.GroupBox23.Location = New System.Drawing.Point(11, 337)
+        Me.GroupBox23.Name = "GroupBox23"
+        Me.GroupBox23.Size = New System.Drawing.Size(572, 79)
+        Me.GroupBox23.TabIndex = 104
+        Me.GroupBox23.TabStop = False
+        Me.GroupBox23.Text = "Internet Grabber Options ..."
         '
         'txtParserFilePathDisplay
         '
@@ -1412,9 +1420,9 @@ Partial Class Form1
         '
         'DatabaseFields
         '
+        Me.DatabaseFields.Controls.Add(Me.GroupBox_TitleHandling)
         Me.DatabaseFields.Controls.Add(Me.GroupBox_StorageFieldHandling)
         Me.DatabaseFields.Controls.Add(Me.GroupBox_MediaLabelFieldHandling)
-        Me.DatabaseFields.Controls.Add(Me.GroupBox_TitleHandling)
         Me.DatabaseFields.Controls.Add(Me.GroupBox_OtherFieldHandling)
         Me.DatabaseFields.Controls.Add(Me.GroupBox_PictureHandling)
         Me.DatabaseFields.Controls.Add(Me.lblInternetLookupRequired)
@@ -1428,100 +1436,16 @@ Partial Class Form1
         Me.DatabaseFields.Text = "Database Fields"
         Me.DatabaseFields.UseVisualStyleBackColor = True
         '
-        'GroupBox_StorageFieldHandling
-        '
-        Me.GroupBox_StorageFieldHandling.Controls.Add(Me.chkShortNames)
-        Me.GroupBox_StorageFieldHandling.Controls.Add(Me.Label26)
-        Me.GroupBox_StorageFieldHandling.Controls.Add(Me.txtDefaultSourceField)
-        Me.GroupBox_StorageFieldHandling.Location = New System.Drawing.Point(239, 145)
-        Me.GroupBox_StorageFieldHandling.Name = "GroupBox_StorageFieldHandling"
-        Me.GroupBox_StorageFieldHandling.Size = New System.Drawing.Size(353, 61)
-        Me.GroupBox_StorageFieldHandling.TabIndex = 56
-        Me.GroupBox_StorageFieldHandling.TabStop = False
-        Me.GroupBox_StorageFieldHandling.Text = "Storage Field Handling ..."
-        '
-        'chkShortNames
-        '
-        Me.chkShortNames.AutoSize = True
-        Me.chkShortNames.Location = New System.Drawing.Point(21, 38)
-        Me.chkShortNames.Name = "chkShortNames"
-        Me.chkShortNames.Size = New System.Drawing.Size(145, 17)
-        Me.chkShortNames.TabIndex = 69
-        Me.chkShortNames.Text = "Store files with name only"
-        Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
-                "les in your setup.")
-        Me.chkShortNames.UseVisualStyleBackColor = True
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(18, 18)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(122, 13)
-        Me.Label26.TabIndex = 25
-        Me.Label26.Text = "Item for Storage File Info"
-        '
-        'txtDefaultSourceField
-        '
-        Me.txtDefaultSourceField.Location = New System.Drawing.Point(164, 15)
-        Me.txtDefaultSourceField.Name = "txtDefaultSourceField"
-        Me.txtDefaultSourceField.Size = New System.Drawing.Size(173, 20)
-        Me.txtDefaultSourceField.TabIndex = 12
-        Me.ToolTip1.SetToolTip(Me.txtDefaultSourceField, "This is the Ant Movie Catalog field which references the location of your moviel " & _
-                "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
-                "d to!")
-        '
-        'GroupBox_MediaLabelFieldHandling
-        '
-        Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.Label13)
-        Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.chkReadDVDLabel)
-        Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.txtMediaLabel)
-        Me.GroupBox_MediaLabelFieldHandling.Location = New System.Drawing.Point(239, 285)
-        Me.GroupBox_MediaLabelFieldHandling.Name = "GroupBox_MediaLabelFieldHandling"
-        Me.GroupBox_MediaLabelFieldHandling.Size = New System.Drawing.Size(353, 62)
-        Me.GroupBox_MediaLabelFieldHandling.TabIndex = 55
-        Me.GroupBox_MediaLabelFieldHandling.TabStop = False
-        Me.GroupBox_MediaLabelFieldHandling.Text = "Media Label Field Handling ..."
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(18, 16)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(71, 13)
-        Me.Label13.TabIndex = 68
-        Me.Label13.Text = "Media Label :"
-        '
-        'chkReadDVDLabel
-        '
-        Me.chkReadDVDLabel.AutoSize = True
-        Me.chkReadDVDLabel.Location = New System.Drawing.Point(21, 39)
-        Me.chkReadDVDLabel.Name = "chkReadDVDLabel"
-        Me.chkReadDVDLabel.Size = New System.Drawing.Size(156, 17)
-        Me.chkReadDVDLabel.TabIndex = 66
-        Me.chkReadDVDLabel.Text = "Try to read DVD Disk Label"
-        Me.ToolTip1.SetToolTip(Me.chkReadDVDLabel, "Used when importing movies from CD or DVD." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Will attempt to read the disk label a" & _
-                "nd use that in the Media Label field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If not found then the value entered for '" & _
-                "Media Label' will be used (if any).")
-        Me.chkReadDVDLabel.UseVisualStyleBackColor = True
-        '
-        'txtMediaLabel
-        '
-        Me.txtMediaLabel.Location = New System.Drawing.Point(164, 13)
-        Me.txtMediaLabel.Name = "txtMediaLabel"
-        Me.txtMediaLabel.Size = New System.Drawing.Size(173, 20)
-        Me.txtMediaLabel.TabIndex = 65
-        Me.ToolTip1.SetToolTip(Me.txtMediaLabel, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field" & _
-                ".")
-        '
         'GroupBox_TitleHandling
         '
         Me.GroupBox_TitleHandling.Controls.Add(Me.cbGroupNameAppliesTo)
         Me.GroupBox_TitleHandling.Controls.Add(Me.chkFolderNameIsGroupName)
         Me.GroupBox_TitleHandling.Controls.Add(Me.lblGroupNameAppliesTo)
-        Me.GroupBox_TitleHandling.Location = New System.Drawing.Point(239, 209)
+        Me.GroupBox_TitleHandling.Controls.Add(Me.cbMasterTitle)
+        Me.GroupBox_TitleHandling.Controls.Add(Me.lblMasterTitle)
+        Me.GroupBox_TitleHandling.Location = New System.Drawing.Point(239, 208)
         Me.GroupBox_TitleHandling.Name = "GroupBox_TitleHandling"
-        Me.GroupBox_TitleHandling.Size = New System.Drawing.Size(353, 70)
+        Me.GroupBox_TitleHandling.Size = New System.Drawing.Size(353, 96)
         Me.GroupBox_TitleHandling.TabIndex = 54
         Me.GroupBox_TitleHandling.TabStop = False
         Me.GroupBox_TitleHandling.Text = "Title Handling ..."
@@ -1557,6 +1481,114 @@ Partial Class Form1
         Me.lblGroupNameAppliesTo.TabIndex = 43
         Me.lblGroupNameAppliesTo.Text = "Add Group Name to ..."
         '
+        'cbMasterTitle
+        '
+        Me.cbMasterTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cbMasterTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbMasterTitle.FormattingEnabled = True
+        Me.cbMasterTitle.Items.AddRange(New Object() {"TranslatedTitle", "OriginalTitle", "FormattedTitle"})
+        Me.cbMasterTitle.Location = New System.Drawing.Point(164, 67)
+        Me.cbMasterTitle.Name = "cbMasterTitle"
+        Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
+        Me.cbMasterTitle.TabIndex = 51
+        Me.ToolTip1.SetToolTip(Me.cbMasterTitle, "Select the title that is used for internet data search." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "It is used for both inte" & _
+                "rnet data (e.g. update records) and" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "fanart search and creation.")
+        '
+        'lblMasterTitle
+        '
+        Me.lblMasterTitle.AutoSize = True
+        Me.lblMasterTitle.Location = New System.Drawing.Point(18, 70)
+        Me.lblMasterTitle.Name = "lblMasterTitle"
+        Me.lblMasterTitle.Size = New System.Drawing.Size(62, 13)
+        Me.lblMasterTitle.TabIndex = 50
+        Me.lblMasterTitle.Text = "Master Title"
+        '
+        'GroupBox_StorageFieldHandling
+        '
+        Me.GroupBox_StorageFieldHandling.Controls.Add(Me.chkShortNames)
+        Me.GroupBox_StorageFieldHandling.Controls.Add(Me.Label26)
+        Me.GroupBox_StorageFieldHandling.Controls.Add(Me.txtDefaultSourceField)
+        Me.GroupBox_StorageFieldHandling.Location = New System.Drawing.Point(239, 141)
+        Me.GroupBox_StorageFieldHandling.Name = "GroupBox_StorageFieldHandling"
+        Me.GroupBox_StorageFieldHandling.Size = New System.Drawing.Size(353, 61)
+        Me.GroupBox_StorageFieldHandling.TabIndex = 56
+        Me.GroupBox_StorageFieldHandling.TabStop = False
+        Me.GroupBox_StorageFieldHandling.Text = "Storage Field Handling ..."
+        '
+        'chkShortNames
+        '
+        Me.chkShortNames.AutoSize = True
+        Me.chkShortNames.Location = New System.Drawing.Point(21, 38)
+        Me.chkShortNames.Name = "chkShortNames"
+        Me.chkShortNames.Size = New System.Drawing.Size(145, 17)
+        Me.chkShortNames.TabIndex = 69
+        Me.chkShortNames.Text = "Store files with name only"
+        Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
+                "les in your setup.")
+        Me.chkShortNames.UseVisualStyleBackColor = True
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(18, 18)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(122, 13)
+        Me.Label26.TabIndex = 25
+        Me.Label26.Text = "Item for Storage File Info"
+        '
+        'txtDefaultSourceField
+        '
+        Me.txtDefaultSourceField.Location = New System.Drawing.Point(164, 15)
+        Me.txtDefaultSourceField.Name = "txtDefaultSourceField"
+        Me.txtDefaultSourceField.Size = New System.Drawing.Size(174, 20)
+        Me.txtDefaultSourceField.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.txtDefaultSourceField, "This is the Ant Movie Catalog field which references the location of your moviel " & _
+                "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
+                "d to!")
+        '
+        'GroupBox_MediaLabelFieldHandling
+        '
+        Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.Label13)
+        Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.chkReadDVDLabel)
+        Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.txtMediaLabel)
+        Me.GroupBox_MediaLabelFieldHandling.Location = New System.Drawing.Point(239, 310)
+        Me.GroupBox_MediaLabelFieldHandling.Name = "GroupBox_MediaLabelFieldHandling"
+        Me.GroupBox_MediaLabelFieldHandling.Size = New System.Drawing.Size(353, 62)
+        Me.GroupBox_MediaLabelFieldHandling.TabIndex = 55
+        Me.GroupBox_MediaLabelFieldHandling.TabStop = False
+        Me.GroupBox_MediaLabelFieldHandling.Text = "Media Label Field Handling ..."
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(18, 16)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(65, 13)
+        Me.Label13.TabIndex = 68
+        Me.Label13.Text = "Media Label"
+        '
+        'chkReadDVDLabel
+        '
+        Me.chkReadDVDLabel.AutoSize = True
+        Me.chkReadDVDLabel.Location = New System.Drawing.Point(21, 39)
+        Me.chkReadDVDLabel.Name = "chkReadDVDLabel"
+        Me.chkReadDVDLabel.Size = New System.Drawing.Size(156, 17)
+        Me.chkReadDVDLabel.TabIndex = 66
+        Me.chkReadDVDLabel.Text = "Try to read DVD Disk Label"
+        Me.ToolTip1.SetToolTip(Me.chkReadDVDLabel, "Used when importing movies from CD or DVD." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Will attempt to read the disk label a" & _
+                "nd use that in the Media Label field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If not found then the value entered for '" & _
+                "Media Label' will be used (if any).")
+        Me.chkReadDVDLabel.UseVisualStyleBackColor = True
+        '
+        'txtMediaLabel
+        '
+        Me.txtMediaLabel.Location = New System.Drawing.Point(164, 13)
+        Me.txtMediaLabel.Name = "txtMediaLabel"
+        Me.txtMediaLabel.Size = New System.Drawing.Size(174, 20)
+        Me.txtMediaLabel.TabIndex = 65
+        Me.ToolTip1.SetToolTip(Me.txtMediaLabel, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field" & _
+                ".")
+        '
         'GroupBox_OtherFieldHandling
         '
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.Label12)
@@ -1565,7 +1597,7 @@ Partial Class Form1
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.Label30)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.cbDateHandling)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.cbCheckHandling)
-        Me.GroupBox_OtherFieldHandling.Location = New System.Drawing.Point(239, 353)
+        Me.GroupBox_OtherFieldHandling.Location = New System.Drawing.Point(239, 378)
         Me.GroupBox_OtherFieldHandling.Name = "GroupBox_OtherFieldHandling"
         Me.GroupBox_OtherFieldHandling.Size = New System.Drawing.Size(353, 100)
         Me.GroupBox_OtherFieldHandling.TabIndex = 52
@@ -1577,15 +1609,15 @@ Partial Class Form1
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(18, 74)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(105, 13)
+        Me.Label12.Size = New System.Drawing.Size(102, 13)
         Me.Label12.TabIndex = 67
-        Me.Label12.Text = "Media Type (Preset):"
+        Me.Label12.Text = "Media Type (Preset)"
         '
         'txtMediaType
         '
         Me.txtMediaType.Location = New System.Drawing.Point(164, 71)
         Me.txtMediaType.Name = "txtMediaType"
-        Me.txtMediaType.Size = New System.Drawing.Size(173, 20)
+        Me.txtMediaType.Size = New System.Drawing.Size(174, 20)
         Me.txtMediaType.TabIndex = 64
         Me.ToolTip1.SetToolTip(Me.txtMediaType, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field." & _
                 "")
@@ -1604,9 +1636,9 @@ Partial Class Form1
         Me.Label30.AutoSize = True
         Me.Label30.Location = New System.Drawing.Point(18, 20)
         Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(106, 13)
+        Me.Label30.Size = New System.Drawing.Size(100, 13)
         Me.Label30.TabIndex = 35
-        Me.Label30.Text = "Date Field Handling :"
+        Me.Label30.Text = "Date Field Handling"
         '
         'cbDateHandling
         '
@@ -1639,11 +1671,9 @@ Partial Class Form1
         Me.GroupBox_PictureHandling.Controls.Add(Me.lblPictureHandling)
         Me.GroupBox_PictureHandling.Controls.Add(Me.cbPictureHandling)
         Me.GroupBox_PictureHandling.Controls.Add(Me.txtPictureFilenamePrefix)
-        Me.GroupBox_PictureHandling.Controls.Add(Me.lblMasterTitle)
-        Me.GroupBox_PictureHandling.Controls.Add(Me.cbMasterTitle)
-        Me.GroupBox_PictureHandling.Location = New System.Drawing.Point(239, 459)
+        Me.GroupBox_PictureHandling.Location = New System.Drawing.Point(239, 484)
         Me.GroupBox_PictureHandling.Name = "GroupBox_PictureHandling"
-        Me.GroupBox_PictureHandling.Size = New System.Drawing.Size(353, 94)
+        Me.GroupBox_PictureHandling.Size = New System.Drawing.Size(353, 69)
         Me.GroupBox_PictureHandling.TabIndex = 53
         Me.GroupBox_PictureHandling.TabStop = False
         Me.GroupBox_PictureHandling.Text = "Picture Handling ..."
@@ -1662,9 +1692,9 @@ Partial Class Form1
         Me.lblPictureHandling.AutoSize = True
         Me.lblPictureHandling.Location = New System.Drawing.Point(18, 16)
         Me.lblPictureHandling.Name = "lblPictureHandling"
-        Me.lblPictureHandling.Size = New System.Drawing.Size(91, 13)
+        Me.lblPictureHandling.Size = New System.Drawing.Size(85, 13)
         Me.lblPictureHandling.TabIndex = 45
-        Me.lblPictureHandling.Text = "Picture Handling :"
+        Me.lblPictureHandling.Text = "Picture Handling"
         '
         'cbPictureHandling
         '
@@ -1685,27 +1715,6 @@ Partial Class Form1
         Me.txtPictureFilenamePrefix.Size = New System.Drawing.Size(174, 20)
         Me.txtPictureFilenamePrefix.TabIndex = 48
         Me.ToolTip1.SetToolTip(Me.txtPictureFilenamePrefix, resources.GetString("txtPictureFilenamePrefix.ToolTip"))
-        '
-        'lblMasterTitle
-        '
-        Me.lblMasterTitle.AutoSize = True
-        Me.lblMasterTitle.Location = New System.Drawing.Point(18, 69)
-        Me.lblMasterTitle.Name = "lblMasterTitle"
-        Me.lblMasterTitle.Size = New System.Drawing.Size(116, 13)
-        Me.lblMasterTitle.TabIndex = 50
-        Me.lblMasterTitle.Text = "Master Title (for fanart):"
-        '
-        'cbMasterTitle
-        '
-        Me.cbMasterTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
-        Me.cbMasterTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMasterTitle.FormattingEnabled = True
-        Me.cbMasterTitle.Items.AddRange(New Object() {"TranslatedTitle", "OriginalTitle", "FormattedTitle"})
-        Me.cbMasterTitle.Location = New System.Drawing.Point(164, 66)
-        Me.cbMasterTitle.Name = "cbMasterTitle"
-        Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
-        Me.cbMasterTitle.TabIndex = 51
-        Me.ToolTip1.SetToolTip(Me.cbMasterTitle, "Select the title that is used for fanart search and creation.")
         '
         'lblInternetLookupRequired
         '
@@ -1776,7 +1785,7 @@ Partial Class Form1
         '
         Me.btnDBFieldsSelectNoInternet.Location = New System.Drawing.Point(248, 61)
         Me.btnDBFieldsSelectNoInternet.Name = "btnDBFieldsSelectNoInternet"
-        Me.btnDBFieldsSelectNoInternet.Size = New System.Drawing.Size(89, 23)
+        Me.btnDBFieldsSelectNoInternet.Size = New System.Drawing.Size(90, 23)
         Me.btnDBFieldsSelectNoInternet.TabIndex = 30
         Me.btnDBFieldsSelectNoInternet.Text = "Select None"
         Me.btnDBFieldsSelectNoInternet.UseVisualStyleBackColor = True
@@ -2069,6 +2078,194 @@ Partial Class Form1
         Me.Options.TabIndex = 1
         Me.Options.Text = "Options"
         Me.Options.UseVisualStyleBackColor = True
+        '
+        'GroupBox26
+        '
+        Me.GroupBox26.Controls.Add(Me.Label87)
+        Me.GroupBox26.Controls.Add(Me.Label86)
+        Me.GroupBox26.Controls.Add(Me.Label85)
+        Me.GroupBox26.Controls.Add(Me.Label84)
+        Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideTitleLimit)
+        Me.GroupBox26.Controls.Add(Me.chkGrabberOverridePersonLimit)
+        Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideGetRoles)
+        Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideLanguage)
+        Me.GroupBox26.Location = New System.Drawing.Point(8, 368)
+        Me.GroupBox26.Name = "GroupBox26"
+        Me.GroupBox26.Size = New System.Drawing.Size(575, 86)
+        Me.GroupBox26.TabIndex = 109
+        Me.GroupBox26.TabStop = False
+        Me.GroupBox26.Text = "Internet Grabber - Override Options ..."
+        Me.ToolTip1.SetToolTip(Me.GroupBox26, resources.GetString("GroupBox26.ToolTip"))
+        '
+        'Label87
+        '
+        Me.Label87.AutoSize = True
+        Me.Label87.Location = New System.Drawing.Point(339, 62)
+        Me.Label87.Name = "Label87"
+        Me.Label87.Size = New System.Drawing.Size(66, 13)
+        Me.Label87.TabIndex = 7
+        Me.Label87.Text = "Limit # Titles"
+        '
+        'Label86
+        '
+        Me.Label86.AutoSize = True
+        Me.Label86.Location = New System.Drawing.Point(339, 38)
+        Me.Label86.Name = "Label86"
+        Me.Label86.Size = New System.Drawing.Size(79, 13)
+        Me.Label86.TabIndex = 6
+        Me.Label86.Text = "Limit # Persons"
+        '
+        'Label85
+        '
+        Me.Label85.AutoSize = True
+        Me.Label85.Location = New System.Drawing.Point(339, 14)
+        Me.Label85.Name = "Label85"
+        Me.Label85.Size = New System.Drawing.Size(82, 13)
+        Me.Label85.TabIndex = 5
+        Me.Label85.Text = "Get Actor Roles"
+        '
+        'Label84
+        '
+        Me.Label84.AutoSize = True
+        Me.Label84.Location = New System.Drawing.Point(12, 27)
+        Me.Label84.Name = "Label84"
+        Me.Label84.Size = New System.Drawing.Size(68, 39)
+        Me.Label84.TabIndex = 4
+        Me.Label84.Text = "Preferred " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Languages /" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Countries"
+        '
+        'chkGrabberOverrideTitleLimit
+        '
+        Me.chkGrabberOverrideTitleLimit.FormattingEnabled = True
+        Me.chkGrabberOverrideTitleLimit.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "10", "15", "20", "999"})
+        Me.chkGrabberOverrideTitleLimit.Location = New System.Drawing.Point(436, 59)
+        Me.chkGrabberOverrideTitleLimit.Name = "chkGrabberOverrideTitleLimit"
+        Me.chkGrabberOverrideTitleLimit.Size = New System.Drawing.Size(69, 21)
+        Me.chkGrabberOverrideTitleLimit.TabIndex = 3
+        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You may also set a preferred lan" & _
+                "guage/country " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for grabbing in the override options.")
+        '
+        'chkGrabberOverridePersonLimit
+        '
+        Me.chkGrabberOverridePersonLimit.FormattingEnabled = True
+        Me.chkGrabberOverridePersonLimit.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "10", "15", "20", "999"})
+        Me.chkGrabberOverridePersonLimit.Location = New System.Drawing.Point(436, 35)
+        Me.chkGrabberOverridePersonLimit.Name = "chkGrabberOverridePersonLimit"
+        Me.chkGrabberOverridePersonLimit.Size = New System.Drawing.Size(69, 21)
+        Me.chkGrabberOverridePersonLimit.TabIndex = 2
+        Me.ToolTip1.SetToolTip(Me.chkGrabberOverridePersonLimit, "Limits the number of person names grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This settings applies to all fields t" & _
+                "hat grab person names, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like actors, producers, writers, directors.")
+        '
+        'chkGrabberOverrideGetRoles
+        '
+        Me.chkGrabberOverrideGetRoles.FormattingEnabled = True
+        Me.chkGrabberOverrideGetRoles.Items.AddRange(New Object() {"true", "false"})
+        Me.chkGrabberOverrideGetRoles.Location = New System.Drawing.Point(436, 11)
+        Me.chkGrabberOverrideGetRoles.Name = "chkGrabberOverrideGetRoles"
+        Me.chkGrabberOverrideGetRoles.Size = New System.Drawing.Size(69, 21)
+        Me.chkGrabberOverrideGetRoles.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideGetRoles, "If checked, add Roles to actor infos." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Depends on the grabber script supporting t" & _
+                "hat option.")
+        '
+        'chkGrabberOverrideLanguage
+        '
+        Me.chkGrabberOverrideLanguage.FormattingEnabled = True
+        Me.chkGrabberOverrideLanguage.Items.AddRange(New Object() {"Argentina", "Australia", "Austria", "Belgium", "Brazil", "Canada", "Chile", "Croatia", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hong Kong", "Hungary", "Iceland", "India", "Ireland", "Israel", "Italy", "Japan", "Malaysia", "Mexico", "Netherlands", "New Zealand", "Norway", "Peru", "Philippines", "Poland", "Portugal", "Romania", "Russia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Turkey", "UK", "Uruguay", "USA"})
+        Me.chkGrabberOverrideLanguage.Location = New System.Drawing.Point(95, 38)
+        Me.chkGrabberOverrideLanguage.Name = "chkGrabberOverrideLanguage"
+        Me.chkGrabberOverrideLanguage.Size = New System.Drawing.Size(198, 21)
+        Me.chkGrabberOverrideLanguage.TabIndex = 0
+        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideLanguage, resources.GetString("chkGrabberOverrideLanguage.ToolTip"))
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.Controls.Add(Me.btnExcludeFileDelete)
+        Me.GroupBox11.Controls.Add(Me.btnExcludeFileShow)
+        Me.GroupBox11.Controls.Add(Me.txtExcludeFilePath)
+        Me.GroupBox11.Controls.Add(Me.Label22)
+        Me.GroupBox11.Controls.Add(Me.btnSelectExcludeFile)
+        Me.GroupBox11.Controls.Add(Me.txtConfigFilePath)
+        Me.GroupBox11.Controls.Add(Me.Label2)
+        Me.GroupBox11.Controls.Add(Me.btnSelectConfigFile)
+        Me.GroupBox11.Location = New System.Drawing.Point(8, 119)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(575, 102)
+        Me.GroupBox11.TabIndex = 108
+        Me.GroupBox11.TabStop = False
+        Me.GroupBox11.Text = "AMC Folders and Files ..."
+        '
+        'btnExcludeFileDelete
+        '
+        Me.btnExcludeFileDelete.Location = New System.Drawing.Point(339, 72)
+        Me.btnExcludeFileDelete.Name = "btnExcludeFileDelete"
+        Me.btnExcludeFileDelete.Size = New System.Drawing.Size(56, 20)
+        Me.btnExcludeFileDelete.TabIndex = 65
+        Me.btnExcludeFileDelete.Text = "delete"
+        Me.btnExcludeFileDelete.UseVisualStyleBackColor = True
+        '
+        'btnExcludeFileShow
+        '
+        Me.btnExcludeFileShow.Location = New System.Drawing.Point(415, 72)
+        Me.btnExcludeFileShow.Name = "btnExcludeFileShow"
+        Me.btnExcludeFileShow.Size = New System.Drawing.Size(56, 20)
+        Me.btnExcludeFileShow.TabIndex = 64
+        Me.btnExcludeFileShow.Text = "show"
+        Me.btnExcludeFileShow.UseVisualStyleBackColor = True
+        '
+        'txtExcludeFilePath
+        '
+        Me.txtExcludeFilePath.Location = New System.Drawing.Point(12, 72)
+        Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
+        Me.txtExcludeFilePath.Size = New System.Drawing.Size(296, 20)
+        Me.txtExcludeFilePath.TabIndex = 60
+        Me.ToolTip1.SetToolTip(Me.txtExcludeFilePath, resources.GetString("txtExcludeFilePath.ToolTip"))
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(12, 56)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(173, 13)
+        Me.Label22.TabIndex = 63
+        Me.Label22.Text = "Path to Excluded Movies File (.txt) :"
+        '
+        'btnSelectExcludeFile
+        '
+        Me.btnSelectExcludeFile.CausesValidation = False
+        Me.btnSelectExcludeFile.Location = New System.Drawing.Point(521, 72)
+        Me.btnSelectExcludeFile.Name = "btnSelectExcludeFile"
+        Me.btnSelectExcludeFile.Size = New System.Drawing.Size(37, 20)
+        Me.btnSelectExcludeFile.TabIndex = 61
+        Me.btnSelectExcludeFile.Text = "..."
+        Me.btnSelectExcludeFile.UseVisualStyleBackColor = True
+        '
+        'txtConfigFilePath
+        '
+        Me.txtConfigFilePath.Location = New System.Drawing.Point(12, 32)
+        Me.txtConfigFilePath.Name = "txtConfigFilePath"
+        Me.txtConfigFilePath.Size = New System.Drawing.Size(501, 20)
+        Me.txtConfigFilePath.TabIndex = 58
+        Me.ToolTip1.SetToolTip(Me.txtConfigFilePath, "Enter the location of your Ant Movie Database file." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This must be saved in .xml f" & _
+                "ormat." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you do not have one, enter the desired location and a new database fi" & _
+                "le will be created for you.")
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(12, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(168, 13)
+        Me.Label2.TabIndex = 62
+        Me.Label2.Text = "Path to AMC Database File (.xml) :"
+        '
+        'btnSelectConfigFile
+        '
+        Me.btnSelectConfigFile.CausesValidation = False
+        Me.btnSelectConfigFile.Location = New System.Drawing.Point(521, 32)
+        Me.btnSelectConfigFile.Name = "btnSelectConfigFile"
+        Me.btnSelectConfigFile.Size = New System.Drawing.Size(37, 20)
+        Me.btnSelectConfigFile.TabIndex = 59
+        Me.btnSelectConfigFile.Text = "..."
+        Me.btnSelectConfigFile.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
@@ -3484,27 +3681,27 @@ Partial Class Form1
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
         Me.DataGridView1.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 27)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.RowHeadersWidth = 20
         Me.DataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -3515,8 +3712,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -3525,8 +3722,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -3549,8 +3746,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -3947,26 +4144,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.VideoBindingSource
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle6
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4017,202 +4214,6 @@ Partial Class Form1
         Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
         '
-        'GroupBox11
-        '
-        Me.GroupBox11.Controls.Add(Me.btnExcludeFileDelete)
-        Me.GroupBox11.Controls.Add(Me.btnExcludeFileShow)
-        Me.GroupBox11.Controls.Add(Me.txtExcludeFilePath)
-        Me.GroupBox11.Controls.Add(Me.Label22)
-        Me.GroupBox11.Controls.Add(Me.btnSelectExcludeFile)
-        Me.GroupBox11.Controls.Add(Me.txtConfigFilePath)
-        Me.GroupBox11.Controls.Add(Me.Label2)
-        Me.GroupBox11.Controls.Add(Me.btnSelectConfigFile)
-        Me.GroupBox11.Location = New System.Drawing.Point(8, 119)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(575, 102)
-        Me.GroupBox11.TabIndex = 108
-        Me.GroupBox11.TabStop = False
-        Me.GroupBox11.Text = "AMC Folders and Files ..."
-        '
-        'btnExcludeFileDelete
-        '
-        Me.btnExcludeFileDelete.Location = New System.Drawing.Point(339, 72)
-        Me.btnExcludeFileDelete.Name = "btnExcludeFileDelete"
-        Me.btnExcludeFileDelete.Size = New System.Drawing.Size(56, 20)
-        Me.btnExcludeFileDelete.TabIndex = 65
-        Me.btnExcludeFileDelete.Text = "delete"
-        Me.btnExcludeFileDelete.UseVisualStyleBackColor = True
-        '
-        'btnExcludeFileShow
-        '
-        Me.btnExcludeFileShow.Location = New System.Drawing.Point(415, 72)
-        Me.btnExcludeFileShow.Name = "btnExcludeFileShow"
-        Me.btnExcludeFileShow.Size = New System.Drawing.Size(56, 20)
-        Me.btnExcludeFileShow.TabIndex = 64
-        Me.btnExcludeFileShow.Text = "show"
-        Me.btnExcludeFileShow.UseVisualStyleBackColor = True
-        '
-        'txtExcludeFilePath
-        '
-        Me.txtExcludeFilePath.Location = New System.Drawing.Point(12, 72)
-        Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
-        Me.txtExcludeFilePath.Size = New System.Drawing.Size(296, 20)
-        Me.txtExcludeFilePath.TabIndex = 60
-        Me.ToolTip1.SetToolTip(Me.txtExcludeFilePath, resources.GetString("txtExcludeFilePath.ToolTip"))
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(12, 56)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(173, 13)
-        Me.Label22.TabIndex = 63
-        Me.Label22.Text = "Path to Excluded Movies File (.txt) :"
-        '
-        'btnSelectExcludeFile
-        '
-        Me.btnSelectExcludeFile.CausesValidation = False
-        Me.btnSelectExcludeFile.Location = New System.Drawing.Point(521, 72)
-        Me.btnSelectExcludeFile.Name = "btnSelectExcludeFile"
-        Me.btnSelectExcludeFile.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectExcludeFile.TabIndex = 61
-        Me.btnSelectExcludeFile.Text = "..."
-        Me.btnSelectExcludeFile.UseVisualStyleBackColor = True
-        '
-        'txtConfigFilePath
-        '
-        Me.txtConfigFilePath.Location = New System.Drawing.Point(12, 32)
-        Me.txtConfigFilePath.Name = "txtConfigFilePath"
-        Me.txtConfigFilePath.Size = New System.Drawing.Size(501, 20)
-        Me.txtConfigFilePath.TabIndex = 58
-        Me.ToolTip1.SetToolTip(Me.txtConfigFilePath, "Enter the location of your Ant Movie Database file." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This must be saved in .xml f" & _
-                "ormat." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you do not have one, enter the desired location and a new database fi" & _
-                "le will be created for you.")
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 16)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(168, 13)
-        Me.Label2.TabIndex = 62
-        Me.Label2.Text = "Path to AMC Database File (.xml) :"
-        '
-        'btnSelectConfigFile
-        '
-        Me.btnSelectConfigFile.CausesValidation = False
-        Me.btnSelectConfigFile.Location = New System.Drawing.Point(521, 32)
-        Me.btnSelectConfigFile.Name = "btnSelectConfigFile"
-        Me.btnSelectConfigFile.Size = New System.Drawing.Size(37, 20)
-        Me.btnSelectConfigFile.TabIndex = 59
-        Me.btnSelectConfigFile.Text = "..."
-        Me.btnSelectConfigFile.UseVisualStyleBackColor = True
-        '
-        'Label88
-        '
-        Me.Label88.Location = New System.Drawing.Point(11, 51)
-        Me.Label88.Name = "Label88"
-        Me.Label88.Size = New System.Drawing.Size(572, 69)
-        Me.Label88.TabIndex = 105
-        Me.Label88.Text = resources.GetString("Label88.Text")
-        '
-        'GroupBox26
-        '
-        Me.GroupBox26.Controls.Add(Me.Label87)
-        Me.GroupBox26.Controls.Add(Me.Label86)
-        Me.GroupBox26.Controls.Add(Me.Label85)
-        Me.GroupBox26.Controls.Add(Me.Label84)
-        Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideTitleLimit)
-        Me.GroupBox26.Controls.Add(Me.chkGrabberOverridePersonLimit)
-        Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideGetRoles)
-        Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideLanguage)
-        Me.GroupBox26.Location = New System.Drawing.Point(8, 368)
-        Me.GroupBox26.Name = "GroupBox26"
-        Me.GroupBox26.Size = New System.Drawing.Size(575, 86)
-        Me.GroupBox26.TabIndex = 109
-        Me.GroupBox26.TabStop = False
-        Me.GroupBox26.Text = "Internet Grabber - Override Options ..."
-        Me.ToolTip1.SetToolTip(Me.GroupBox26, resources.GetString("GroupBox26.ToolTip"))
-        '
-        'Label87
-        '
-        Me.Label87.AutoSize = True
-        Me.Label87.Location = New System.Drawing.Point(339, 62)
-        Me.Label87.Name = "Label87"
-        Me.Label87.Size = New System.Drawing.Size(66, 13)
-        Me.Label87.TabIndex = 7
-        Me.Label87.Text = "Limit # Titles"
-        '
-        'Label86
-        '
-        Me.Label86.AutoSize = True
-        Me.Label86.Location = New System.Drawing.Point(339, 38)
-        Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(79, 13)
-        Me.Label86.TabIndex = 6
-        Me.Label86.Text = "Limit # Persons"
-        '
-        'Label85
-        '
-        Me.Label85.AutoSize = True
-        Me.Label85.Location = New System.Drawing.Point(339, 14)
-        Me.Label85.Name = "Label85"
-        Me.Label85.Size = New System.Drawing.Size(82, 13)
-        Me.Label85.TabIndex = 5
-        Me.Label85.Text = "Get Actor Roles"
-        '
-        'Label84
-        '
-        Me.Label84.AutoSize = True
-        Me.Label84.Location = New System.Drawing.Point(12, 27)
-        Me.Label84.Name = "Label84"
-        Me.Label84.Size = New System.Drawing.Size(68, 39)
-        Me.Label84.TabIndex = 4
-        Me.Label84.Text = "Preferred " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Languages /" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & " Countries"
-        '
-        'chkGrabberOverrideTitleLimit
-        '
-        Me.chkGrabberOverrideTitleLimit.FormattingEnabled = True
-        Me.chkGrabberOverrideTitleLimit.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "10", "15", "20", "999"})
-        Me.chkGrabberOverrideTitleLimit.Location = New System.Drawing.Point(436, 59)
-        Me.chkGrabberOverrideTitleLimit.Name = "chkGrabberOverrideTitleLimit"
-        Me.chkGrabberOverrideTitleLimit.Size = New System.Drawing.Size(69, 21)
-        Me.chkGrabberOverrideTitleLimit.TabIndex = 3
-        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You may also set a preferred lan" & _
-                "guage/country " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for grabbing in the override options.")
-        '
-        'chkGrabberOverridePersonLimit
-        '
-        Me.chkGrabberOverridePersonLimit.FormattingEnabled = True
-        Me.chkGrabberOverridePersonLimit.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "10", "15", "20", "999"})
-        Me.chkGrabberOverridePersonLimit.Location = New System.Drawing.Point(436, 35)
-        Me.chkGrabberOverridePersonLimit.Name = "chkGrabberOverridePersonLimit"
-        Me.chkGrabberOverridePersonLimit.Size = New System.Drawing.Size(69, 21)
-        Me.chkGrabberOverridePersonLimit.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.chkGrabberOverridePersonLimit, "Limits the number of person names grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This settings applies to all fields t" & _
-                "hat grab person names, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like actors, producers, writers, directors.")
-        '
-        'chkGrabberOverrideGetRoles
-        '
-        Me.chkGrabberOverrideGetRoles.FormattingEnabled = True
-        Me.chkGrabberOverrideGetRoles.Items.AddRange(New Object() {"true", "false"})
-        Me.chkGrabberOverrideGetRoles.Location = New System.Drawing.Point(436, 11)
-        Me.chkGrabberOverrideGetRoles.Name = "chkGrabberOverrideGetRoles"
-        Me.chkGrabberOverrideGetRoles.Size = New System.Drawing.Size(69, 21)
-        Me.chkGrabberOverrideGetRoles.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideGetRoles, "If checked, add Roles to actor infos." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Depends on the grabber script supporting t" & _
-                "hat option.")
-        '
-        'chkGrabberOverrideLanguage
-        '
-        Me.chkGrabberOverrideLanguage.FormattingEnabled = True
-        Me.chkGrabberOverrideLanguage.Items.AddRange(New Object() {"Argentina", "Australia", "Austria", "Belgium", "Brazil", "Canada", "Chile", "Croatia", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hong Kong", "Hungary", "Iceland", "India", "Ireland", "Israel", "Italy", "Japan", "Malaysia", "Mexico", "Netherlands", "New Zealand", "Norway", "Peru", "Philippines", "Poland", "Portugal", "Romania", "Russia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Turkey", "UK", "Uruguay", "USA"})
-        Me.chkGrabberOverrideLanguage.Location = New System.Drawing.Point(95, 38)
-        Me.chkGrabberOverrideLanguage.Name = "chkGrabberOverrideLanguage"
-        Me.chkGrabberOverrideLanguage.Size = New System.Drawing.Size(198, 21)
-        Me.chkGrabberOverrideLanguage.TabIndex = 0
-        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideLanguage, resources.GetString("chkGrabberOverrideLanguage.ToolTip"))
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4229,10 +4230,10 @@ Partial Class Form1
         Me.TabControl1.ResumeLayout(False)
         Me.Import_Movies.ResumeLayout(False)
         Me.Import_Movies.PerformLayout()
-        Me.GroupBox23.ResumeLayout(False)
-        Me.GroupBox23.PerformLayout()
         Me.GroupBox27.ResumeLayout(False)
         Me.GroupBox27.PerformLayout()
+        Me.GroupBox23.ResumeLayout(False)
+        Me.GroupBox23.PerformLayout()
         Me.GroupBox17.ResumeLayout(False)
         Me.GroupBox17.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
@@ -4249,12 +4250,12 @@ Partial Class Form1
         Me.GroupBox9.PerformLayout()
         Me.DatabaseFields.ResumeLayout(False)
         Me.DatabaseFields.PerformLayout()
+        Me.GroupBox_TitleHandling.ResumeLayout(False)
+        Me.GroupBox_TitleHandling.PerformLayout()
         Me.GroupBox_StorageFieldHandling.ResumeLayout(False)
         Me.GroupBox_StorageFieldHandling.PerformLayout()
         Me.GroupBox_MediaLabelFieldHandling.ResumeLayout(False)
         Me.GroupBox_MediaLabelFieldHandling.PerformLayout()
-        Me.GroupBox_TitleHandling.ResumeLayout(False)
-        Me.GroupBox_TitleHandling.PerformLayout()
         Me.GroupBox_OtherFieldHandling.ResumeLayout(False)
         Me.GroupBox_OtherFieldHandling.PerformLayout()
         Me.GroupBox_PictureHandling.ResumeLayout(False)
@@ -4274,6 +4275,10 @@ Partial Class Form1
         CType(Me.dgExcludedFolderStrings, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgExcludedFileStrings, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Options.ResumeLayout(False)
+        Me.GroupBox26.ResumeLayout(False)
+        Me.GroupBox26.PerformLayout()
+        Me.GroupBox11.ResumeLayout(False)
+        Me.GroupBox11.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.GroupBox25.ResumeLayout(False)
@@ -4322,10 +4327,6 @@ Partial Class Form1
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox11.ResumeLayout(False)
-        Me.GroupBox11.PerformLayout()
-        Me.GroupBox26.ResumeLayout(False)
-        Me.GroupBox26.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
