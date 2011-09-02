@@ -36,12 +36,20 @@ namespace MyFilmsPlugin.MyFilms
 
         public enum Path
         {
-            log,
-            logBackup,
-            lang,
-            thumbs,
-            app,
-            skin
+          log,
+          logBackup,
+          lang,
+          thumbs,
+          app,
+          skin
+        };
+
+        public enum MinimumVersion
+        {
+          BrowseTheWeb,
+          OnlineVideos,
+          SubCentral,
+          Trakt
         };
 
         #region Path Vars
@@ -131,22 +139,43 @@ namespace MyFilmsPlugin.MyFilms
         /// <returns>The fully qualified Path as a String</returns>
         public static string GetPath(Path path)
         {
-            switch (path)
-            {
-                case Path.log:
-                    return logPath;
-                case Path.logBackup:
-                    return backupLogPath;
-                case Path.lang:
-                    return langPath;
-                case Path.thumbs:
-                    return thumbsPath;
-                case Path.app:
-                    return apppath;
-                case Path.skin:
-                    return skinPath;
-                default: return string.Empty;
-            }
+          switch (path)
+          {
+            case Path.log:
+              return logPath;
+            case Path.logBackup:
+              return backupLogPath;
+            case Path.lang:
+              return langPath;
+            case Path.thumbs:
+              return thumbsPath;
+            case Path.app:
+              return apppath;
+            case Path.skin:
+              return skinPath;
+            default: return string.Empty;
+          }
+        }
+
+        /// <summary>
+        /// Gets the required minimum version for third party plugins
+        /// </summary>
+        /// <param name="path">The Settings.Path to get</param>
+        /// <returns>The fully qualified Path as a String</returns>
+        public static string GetRequiredMinimumVersion(MinimumVersion plugin)
+        {
+          switch (plugin)
+          {
+            case MinimumVersion.BrowseTheWeb:
+              return "0.3.0";
+            case MinimumVersion.OnlineVideos:
+              return "0.29";
+            case MinimumVersion.SubCentral:
+              return "1.1";
+            case MinimumVersion.Trakt:
+              return "1.0.5.1";
+            default: return "unknown";
+          }
         }
         #endregion
 

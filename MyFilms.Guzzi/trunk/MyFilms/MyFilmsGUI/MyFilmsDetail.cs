@@ -920,7 +920,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       }
                     else
                     {
-                        ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
+                        ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos));
                     }
                     break;
 
@@ -5790,13 +5790,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               else
               {
-                //ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: 0.28");
+                // ShowMessageDialog("MyFilms", "OnlineVideo plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos));
+
                 GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                 if (dlgOK != null)
                 {
                   dlgOK.SetHeading("MyFilms");
                   dlgOK.SetLine(1, "OnlineVideo plugin not installed or wrong version");
-                  dlgOK.SetLine(2, "Minimum Version required: 0.30");
+                  dlgOK.SetLine(2, "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos)));
                   dlgOK.DoModal(GetID);
                   return;
                 }

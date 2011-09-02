@@ -5038,7 +5038,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0");
+            ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
           }
           break;
 
@@ -5634,7 +5634,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-              ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+              ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
             }
             break;
           }
@@ -5675,7 +5675,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-              ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+              ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
             }
             break;
           }
@@ -5725,7 +5725,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+            ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
           }
           break;
 
@@ -5800,7 +5800,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-              ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+              ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
             }
             break;
           }
@@ -5843,7 +5843,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-              ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+              ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
             }
             break;
           }
@@ -5897,7 +5897,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: 0.27");
+            ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
           }
           break;
 
