@@ -126,9 +126,6 @@
     <EmbeddedResource Include="Resources\United States of America%28USA%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyFilmsSample.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework Client Profile</ProductName>

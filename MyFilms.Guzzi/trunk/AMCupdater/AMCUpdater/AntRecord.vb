@@ -1245,6 +1245,9 @@ Public Class AntRecord
                 End If
 
                 ' Get Internetdata with "best title possible"
+                If _MasterTitle Then
+                    ' add mastertitle handling for update search here ....
+                End If
                 If _XMLElement.Attributes("OriginalTitle") IsNot Nothing Then
                     'Looks like we have a value here - if so, use it for the lookup.  Assuming here that it has already been 'cleaned'.
                     If _XMLElement.Attributes("OriginalTitle").Value.ToString = String.Empty Then
