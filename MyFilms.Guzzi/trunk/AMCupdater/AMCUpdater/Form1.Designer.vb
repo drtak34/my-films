@@ -1438,6 +1438,7 @@ Partial Class Form1
         '
         'GroupBox_TitleHandling
         '
+        Me.GroupBox_TitleHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox_TitleHandling.Controls.Add(Me.cbGroupNameAppliesTo)
         Me.GroupBox_TitleHandling.Controls.Add(Me.chkFolderNameIsGroupName)
         Me.GroupBox_TitleHandling.Controls.Add(Me.lblGroupNameAppliesTo)
@@ -1505,6 +1506,7 @@ Partial Class Form1
         '
         'GroupBox_StorageFieldHandling
         '
+        Me.GroupBox_StorageFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.chkShortNames)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.Label26)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.txtDefaultSourceField)
@@ -1548,6 +1550,7 @@ Partial Class Form1
         '
         'GroupBox_MediaLabelFieldHandling
         '
+        Me.GroupBox_MediaLabelFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.Label13)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.chkReadDVDLabel)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.txtMediaLabel)
@@ -1591,6 +1594,7 @@ Partial Class Form1
         '
         'GroupBox_OtherFieldHandling
         '
+        Me.GroupBox_OtherFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.Label12)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.txtMediaType)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.lblCheckFieldHandling)
@@ -1667,6 +1671,7 @@ Partial Class Form1
         '
         'GroupBox_PictureHandling
         '
+        Me.GroupBox_PictureHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox_PictureHandling.Controls.Add(Me.lblPicturePrefix)
         Me.GroupBox_PictureHandling.Controls.Add(Me.lblPictureHandling)
         Me.GroupBox_PictureHandling.Controls.Add(Me.cbPictureHandling)
@@ -1718,6 +1723,7 @@ Partial Class Form1
         '
         'lblInternetLookupRequired
         '
+        Me.lblInternetLookupRequired.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblInternetLookupRequired.AutoSize = True
         Me.lblInternetLookupRequired.ForeColor = System.Drawing.Color.Red
         Me.lblInternetLookupRequired.Location = New System.Drawing.Point(8, 556)
@@ -1729,6 +1735,7 @@ Partial Class Form1
         '
         'GroupBox16
         '
+        Me.GroupBox16.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox16.Controls.Add(Me.Label33)
         Me.GroupBox16.Controls.Add(Me.Label32)
         Me.GroupBox16.Controls.Add(Me.Label31)
@@ -1828,6 +1835,9 @@ Partial Class Form1
         '
         'cbDatabaseFields
         '
+        Me.cbDatabaseFields.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbDatabaseFields.CheckOnClick = True
         Me.cbDatabaseFields.ColumnWidth = 140
         Me.cbDatabaseFields.FormattingEnabled = True
@@ -1862,6 +1872,8 @@ Partial Class Form1
         '
         'GroupBox24
         '
+        Me.GroupBox24.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox24.Controls.Add(Me.txtOverridePath)
         Me.GroupBox24.Controls.Add(Me.lblOverridePath)
         Me.GroupBox24.Controls.Add(Me.btnSelectMovieFolder)
@@ -1877,6 +1889,8 @@ Partial Class Form1
         '
         'txtOverridePath
         '
+        Me.txtOverridePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtOverridePath.Location = New System.Drawing.Point(103, 60)
         Me.txtOverridePath.Name = "txtOverridePath"
         Me.txtOverridePath.Size = New System.Drawing.Size(410, 20)
@@ -1894,6 +1908,7 @@ Partial Class Form1
         '
         'btnSelectMovieFolder
         '
+        Me.btnSelectMovieFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelectMovieFolder.CausesValidation = False
         Me.btnSelectMovieFolder.Location = New System.Drawing.Point(528, 34)
         Me.btnSelectMovieFolder.Name = "btnSelectMovieFolder"
@@ -1913,6 +1928,8 @@ Partial Class Form1
         '
         'txtMovieFolder
         '
+        Me.txtMovieFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMovieFolder.Location = New System.Drawing.Point(12, 34)
         Me.txtMovieFolder.Name = "txtMovieFolder"
         Me.txtMovieFolder.Size = New System.Drawing.Size(501, 20)
@@ -1922,6 +1939,7 @@ Partial Class Form1
         '
         'Label17
         '
+        Me.Label17.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.Location = New System.Drawing.Point(311, 19)
@@ -1932,6 +1950,8 @@ Partial Class Form1
         '
         'GroupBox6
         '
+        Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox6.Controls.Add(Me.Label25)
         Me.GroupBox6.Controls.Add(Me.txtRegExSearchMultiPart)
         Me.GroupBox6.Location = New System.Drawing.Point(8, 162)
@@ -1952,6 +1972,8 @@ Partial Class Form1
         '
         'txtRegExSearchMultiPart
         '
+        Me.txtRegExSearchMultiPart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtRegExSearchMultiPart.Location = New System.Drawing.Point(14, 32)
         Me.txtRegExSearchMultiPart.Name = "txtRegExSearchMultiPart"
         Me.txtRegExSearchMultiPart.Size = New System.Drawing.Size(546, 20)
@@ -1969,6 +1991,9 @@ Partial Class Form1
         '
         'GroupBox20
         '
+        Me.GroupBox20.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox20.Controls.Add(Me.Label83)
         Me.GroupBox20.Controls.Add(Me.dgFilterStrings)
         Me.GroupBox20.Location = New System.Drawing.Point(8, 231)
@@ -1990,6 +2015,9 @@ Partial Class Form1
         'dgFilterStrings
         '
         Me.dgFilterStrings.AllowUserToResizeRows = False
+        Me.dgFilterStrings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgFilterStrings.BackgroundColor = System.Drawing.SystemColors.Window
         Me.dgFilterStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgFilterStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
@@ -2004,6 +2032,8 @@ Partial Class Form1
         '
         'GroupBox19
         '
+        Me.GroupBox19.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox19.Controls.Add(Me.dgExcludedFolderStrings)
         Me.GroupBox19.Controls.Add(Me.Label44)
         Me.GroupBox19.Controls.Add(Me.Label45)
@@ -2081,6 +2111,8 @@ Partial Class Form1
         '
         'GroupBox26
         '
+        Me.GroupBox26.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox26.Controls.Add(Me.Label87)
         Me.GroupBox26.Controls.Add(Me.Label86)
         Me.GroupBox26.Controls.Add(Me.Label85)
@@ -2089,7 +2121,7 @@ Partial Class Form1
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverridePersonLimit)
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideGetRoles)
         Me.GroupBox26.Controls.Add(Me.chkGrabberOverrideLanguage)
-        Me.GroupBox26.Location = New System.Drawing.Point(8, 368)
+        Me.GroupBox26.Location = New System.Drawing.Point(13, 368)
         Me.GroupBox26.Name = "GroupBox26"
         Me.GroupBox26.Size = New System.Drawing.Size(575, 86)
         Me.GroupBox26.TabIndex = 109
@@ -2099,6 +2131,7 @@ Partial Class Form1
         '
         'Label87
         '
+        Me.Label87.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label87.AutoSize = True
         Me.Label87.Location = New System.Drawing.Point(339, 62)
         Me.Label87.Name = "Label87"
@@ -2108,6 +2141,7 @@ Partial Class Form1
         '
         'Label86
         '
+        Me.Label86.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label86.AutoSize = True
         Me.Label86.Location = New System.Drawing.Point(339, 38)
         Me.Label86.Name = "Label86"
@@ -2117,6 +2151,7 @@ Partial Class Form1
         '
         'Label85
         '
+        Me.Label85.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label85.AutoSize = True
         Me.Label85.Location = New System.Drawing.Point(339, 14)
         Me.Label85.Name = "Label85"
@@ -2135,6 +2170,7 @@ Partial Class Form1
         '
         'chkGrabberOverrideTitleLimit
         '
+        Me.chkGrabberOverrideTitleLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkGrabberOverrideTitleLimit.FormattingEnabled = True
         Me.chkGrabberOverrideTitleLimit.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "10", "15", "20", "999"})
         Me.chkGrabberOverrideTitleLimit.Location = New System.Drawing.Point(436, 59)
@@ -2146,6 +2182,7 @@ Partial Class Form1
         '
         'chkGrabberOverridePersonLimit
         '
+        Me.chkGrabberOverridePersonLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkGrabberOverridePersonLimit.FormattingEnabled = True
         Me.chkGrabberOverridePersonLimit.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "10", "15", "20", "999"})
         Me.chkGrabberOverridePersonLimit.Location = New System.Drawing.Point(436, 35)
@@ -2157,6 +2194,7 @@ Partial Class Form1
         '
         'chkGrabberOverrideGetRoles
         '
+        Me.chkGrabberOverrideGetRoles.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkGrabberOverrideGetRoles.FormattingEnabled = True
         Me.chkGrabberOverrideGetRoles.Items.AddRange(New Object() {"true", "false"})
         Me.chkGrabberOverrideGetRoles.Location = New System.Drawing.Point(436, 11)
@@ -2170,14 +2208,16 @@ Partial Class Form1
         '
         Me.chkGrabberOverrideLanguage.FormattingEnabled = True
         Me.chkGrabberOverrideLanguage.Items.AddRange(New Object() {"Argentina", "Australia", "Austria", "Belgium", "Brazil", "Canada", "Chile", "Croatia", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hong Kong", "Hungary", "Iceland", "India", "Ireland", "Israel", "Italy", "Japan", "Malaysia", "Mexico", "Netherlands", "New Zealand", "Norway", "Peru", "Philippines", "Poland", "Portugal", "Romania", "Russia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Turkey", "UK", "Uruguay", "USA"})
-        Me.chkGrabberOverrideLanguage.Location = New System.Drawing.Point(95, 38)
+        Me.chkGrabberOverrideLanguage.Location = New System.Drawing.Point(112, 35)
         Me.chkGrabberOverrideLanguage.Name = "chkGrabberOverrideLanguage"
-        Me.chkGrabberOverrideLanguage.Size = New System.Drawing.Size(198, 21)
+        Me.chkGrabberOverrideLanguage.Size = New System.Drawing.Size(196, 21)
         Me.chkGrabberOverrideLanguage.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideLanguage, resources.GetString("chkGrabberOverrideLanguage.ToolTip"))
         '
         'GroupBox11
         '
+        Me.GroupBox11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox11.Controls.Add(Me.btnExcludeFileDelete)
         Me.GroupBox11.Controls.Add(Me.btnExcludeFileShow)
         Me.GroupBox11.Controls.Add(Me.txtExcludeFilePath)
@@ -2186,7 +2226,7 @@ Partial Class Form1
         Me.GroupBox11.Controls.Add(Me.txtConfigFilePath)
         Me.GroupBox11.Controls.Add(Me.Label2)
         Me.GroupBox11.Controls.Add(Me.btnSelectConfigFile)
-        Me.GroupBox11.Location = New System.Drawing.Point(8, 119)
+        Me.GroupBox11.Location = New System.Drawing.Point(13, 119)
         Me.GroupBox11.Name = "GroupBox11"
         Me.GroupBox11.Size = New System.Drawing.Size(575, 102)
         Me.GroupBox11.TabIndex = 108
@@ -2195,6 +2235,7 @@ Partial Class Form1
         '
         'btnExcludeFileDelete
         '
+        Me.btnExcludeFileDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnExcludeFileDelete.Location = New System.Drawing.Point(339, 72)
         Me.btnExcludeFileDelete.Name = "btnExcludeFileDelete"
         Me.btnExcludeFileDelete.Size = New System.Drawing.Size(56, 20)
@@ -2204,6 +2245,7 @@ Partial Class Form1
         '
         'btnExcludeFileShow
         '
+        Me.btnExcludeFileShow.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnExcludeFileShow.Location = New System.Drawing.Point(415, 72)
         Me.btnExcludeFileShow.Name = "btnExcludeFileShow"
         Me.btnExcludeFileShow.Size = New System.Drawing.Size(56, 20)
@@ -2213,6 +2255,8 @@ Partial Class Form1
         '
         'txtExcludeFilePath
         '
+        Me.txtExcludeFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtExcludeFilePath.Location = New System.Drawing.Point(12, 72)
         Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
         Me.txtExcludeFilePath.Size = New System.Drawing.Size(296, 20)
@@ -2230,6 +2274,7 @@ Partial Class Form1
         '
         'btnSelectExcludeFile
         '
+        Me.btnSelectExcludeFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelectExcludeFile.CausesValidation = False
         Me.btnSelectExcludeFile.Location = New System.Drawing.Point(521, 72)
         Me.btnSelectExcludeFile.Name = "btnSelectExcludeFile"
@@ -2240,6 +2285,8 @@ Partial Class Form1
         '
         'txtConfigFilePath
         '
+        Me.txtConfigFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtConfigFilePath.Location = New System.Drawing.Point(12, 32)
         Me.txtConfigFilePath.Name = "txtConfigFilePath"
         Me.txtConfigFilePath.Size = New System.Drawing.Size(501, 20)
@@ -2259,6 +2306,7 @@ Partial Class Form1
         '
         'btnSelectConfigFile
         '
+        Me.btnSelectConfigFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelectConfigFile.CausesValidation = False
         Me.btnSelectConfigFile.Location = New System.Drawing.Point(521, 32)
         Me.btnSelectConfigFile.Name = "btnSelectConfigFile"
@@ -2269,6 +2317,8 @@ Partial Class Form1
         '
         'GroupBox4
         '
+        Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.chkParseTrailers)
         Me.GroupBox4.Controls.Add(Me.GroupBox25)
         Me.GroupBox4.Controls.Add(Me.txtTrailerIentificationStrings)
@@ -2277,7 +2327,7 @@ Partial Class Form1
         Me.GroupBox4.Controls.Add(Me.Label14)
         Me.GroupBox4.Controls.Add(Me.txtDefaultFileTypes)
         Me.GroupBox4.Controls.Add(Me.Label15)
-        Me.GroupBox4.Location = New System.Drawing.Point(8, 224)
+        Me.GroupBox4.Location = New System.Drawing.Point(13, 224)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(575, 138)
         Me.GroupBox4.TabIndex = 106
@@ -2286,6 +2336,7 @@ Partial Class Form1
         '
         'chkParseTrailers
         '
+        Me.chkParseTrailers.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chkParseTrailers.AutoSize = True
         Me.chkParseTrailers.Enabled = False
         Me.chkParseTrailers.Location = New System.Drawing.Point(377, 112)
@@ -2298,6 +2349,7 @@ Partial Class Form1
         '
         'GroupBox25
         '
+        Me.GroupBox25.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox25.Controls.Add(Me.chkCheckDVDFolders)
         Me.GroupBox25.Controls.Add(Me.chkParseSubtitleFiles)
         Me.GroupBox25.Controls.Add(Me.chkParsePlaylistFiles)
@@ -2344,6 +2396,8 @@ Partial Class Form1
         '
         'txtTrailerIentificationStrings
         '
+        Me.txtTrailerIentificationStrings.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTrailerIentificationStrings.Location = New System.Drawing.Point(12, 110)
         Me.txtTrailerIentificationStrings.Name = "txtTrailerIentificationStrings"
         Me.txtTrailerIentificationStrings.Size = New System.Drawing.Size(296, 20)
@@ -2362,6 +2416,8 @@ Partial Class Form1
         '
         'txtDefaultFileTypesNonMedia
         '
+        Me.txtDefaultFileTypesNonMedia.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDefaultFileTypesNonMedia.Location = New System.Drawing.Point(12, 71)
         Me.txtDefaultFileTypesNonMedia.Name = "txtDefaultFileTypesNonMedia"
         Me.txtDefaultFileTypesNonMedia.Size = New System.Drawing.Size(296, 20)
@@ -2378,6 +2434,8 @@ Partial Class Form1
         '
         'txtDefaultFileTypes
         '
+        Me.txtDefaultFileTypes.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDefaultFileTypes.Location = New System.Drawing.Point(12, 32)
         Me.txtDefaultFileTypes.Name = "txtDefaultFileTypes"
         Me.txtDefaultFileTypes.Size = New System.Drawing.Size(296, 20)
@@ -2395,13 +2453,15 @@ Partial Class Form1
         '
         'GroupBox7
         '
+        Me.GroupBox7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox7.Controls.Add(Me.btnSelectPersonArtworkFolder)
         Me.GroupBox7.Controls.Add(Me.Label28)
         Me.GroupBox7.Controls.Add(Me.txtPersonArtworkFolder)
         Me.GroupBox7.Controls.Add(Me.btnSelectFanartFolder)
         Me.GroupBox7.Controls.Add(Me.txtFanartFolder)
         Me.GroupBox7.Controls.Add(Me.Label48)
-        Me.GroupBox7.Location = New System.Drawing.Point(8, 6)
+        Me.GroupBox7.Location = New System.Drawing.Point(13, 6)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(575, 107)
         Me.GroupBox7.TabIndex = 103
@@ -2410,6 +2470,7 @@ Partial Class Form1
         '
         'btnSelectPersonArtworkFolder
         '
+        Me.btnSelectPersonArtworkFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelectPersonArtworkFolder.Enabled = False
         Me.btnSelectPersonArtworkFolder.Location = New System.Drawing.Point(521, 74)
         Me.btnSelectPersonArtworkFolder.Name = "btnSelectPersonArtworkFolder"
@@ -2430,6 +2491,8 @@ Partial Class Form1
         '
         'txtPersonArtworkFolder
         '
+        Me.txtPersonArtworkFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPersonArtworkFolder.Enabled = False
         Me.txtPersonArtworkFolder.Location = New System.Drawing.Point(10, 74)
         Me.txtPersonArtworkFolder.Name = "txtPersonArtworkFolder"
@@ -2438,6 +2501,7 @@ Partial Class Form1
         '
         'btnSelectFanartFolder
         '
+        Me.btnSelectFanartFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSelectFanartFolder.CausesValidation = False
         Me.btnSelectFanartFolder.Location = New System.Drawing.Point(521, 33)
         Me.btnSelectFanartFolder.Name = "btnSelectFanartFolder"
@@ -2448,6 +2512,8 @@ Partial Class Form1
         '
         'txtFanartFolder
         '
+        Me.txtFanartFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFanartFolder.Location = New System.Drawing.Point(10, 33)
         Me.txtFanartFolder.Name = "txtFanartFolder"
         Me.txtFanartFolder.Size = New System.Drawing.Size(503, 20)
@@ -2466,9 +2532,11 @@ Partial Class Form1
         '
         'GroupBox13
         '
+        Me.GroupBox13.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox13.Controls.Add(Me.cbLogLevel)
         Me.GroupBox13.Controls.Add(Me.Label29)
-        Me.GroupBox13.Location = New System.Drawing.Point(8, 534)
+        Me.GroupBox13.Location = New System.Drawing.Point(13, 534)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(575, 40)
         Me.GroupBox13.TabIndex = 5
@@ -2481,9 +2549,9 @@ Partial Class Form1
         Me.cbLogLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbLogLevel.FormattingEnabled = True
         Me.cbLogLevel.Items.AddRange(New Object() {"All Events with Grabbing", "All Events", "Major Events", "Errors Only"})
-        Me.cbLogLevel.Location = New System.Drawing.Point(137, 13)
+        Me.cbLogLevel.Location = New System.Drawing.Point(112, 13)
         Me.cbLogLevel.Name = "cbLogLevel"
-        Me.cbLogLevel.Size = New System.Drawing.Size(171, 21)
+        Me.cbLogLevel.Size = New System.Drawing.Size(196, 21)
         Me.cbLogLevel.TabIndex = 20
         Me.ToolTip1.SetToolTip(Me.cbLogLevel, "The logging level option controls what information is saved to the logfile")
         '
@@ -2498,12 +2566,14 @@ Partial Class Form1
         '
         'GroupBox12
         '
+        Me.GroupBox12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox12.Controls.Add(Me.chkExecuteOnlyForOrphans)
         Me.GroupBox12.Controls.Add(Me.btnExecuteProgramSelectPath)
         Me.GroupBox12.Controls.Add(Me.txtExecuteProgramPath)
         Me.GroupBox12.Controls.Add(Me.chkExecuteProgram)
         Me.GroupBox12.Controls.Add(Me.Label27)
-        Me.GroupBox12.Location = New System.Drawing.Point(8, 460)
+        Me.GroupBox12.Location = New System.Drawing.Point(13, 460)
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.Size = New System.Drawing.Size(575, 68)
         Me.GroupBox12.TabIndex = 4
@@ -2522,6 +2592,7 @@ Partial Class Form1
         '
         'btnExecuteProgramSelectPath
         '
+        Me.btnExecuteProgramSelectPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnExecuteProgramSelectPath.Location = New System.Drawing.Point(521, 39)
         Me.btnExecuteProgramSelectPath.Name = "btnExecuteProgramSelectPath"
         Me.btnExecuteProgramSelectPath.Size = New System.Drawing.Size(37, 20)
@@ -2531,9 +2602,11 @@ Partial Class Form1
         '
         'txtExecuteProgramPath
         '
-        Me.txtExecuteProgramPath.Location = New System.Drawing.Point(137, 39)
+        Me.txtExecuteProgramPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtExecuteProgramPath.Location = New System.Drawing.Point(112, 39)
         Me.txtExecuteProgramPath.Name = "txtExecuteProgramPath"
-        Me.txtExecuteProgramPath.Size = New System.Drawing.Size(376, 20)
+        Me.txtExecuteProgramPath.Size = New System.Drawing.Size(401, 20)
         Me.txtExecuteProgramPath.TabIndex = 17
         '
         'chkExecuteProgram
@@ -2576,7 +2649,7 @@ Partial Class Form1
         '
         'Label47
         '
-        Me.Label47.Location = New System.Drawing.Point(14, 11)
+        Me.Label47.Location = New System.Drawing.Point(19, 12)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(495, 43)
         Me.Label47.TabIndex = 16
@@ -2590,7 +2663,7 @@ Partial Class Form1
         Me.GroupBox18.Controls.Add(Me.txtSampleTextCodecList)
         Me.GroupBox18.Controls.Add(Me.Label39)
         Me.GroupBox18.Controls.Add(Me.Label38)
-        Me.GroupBox18.Location = New System.Drawing.Point(10, 397)
+        Me.GroupBox18.Location = New System.Drawing.Point(15, 398)
         Me.GroupBox18.Name = "GroupBox18"
         Me.GroupBox18.Size = New System.Drawing.Size(522, 99)
         Me.GroupBox18.TabIndex = 15
@@ -2639,7 +2712,7 @@ Partial Class Form1
         Me.GroupBox3.Controls.Add(Me.Label8)
         Me.GroupBox3.Controls.Add(Me.txtSampleFileSize)
         Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Location = New System.Drawing.Point(10, 502)
+        Me.GroupBox3.Location = New System.Drawing.Point(15, 503)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(522, 58)
         Me.GroupBox3.TabIndex = 12
@@ -2694,7 +2767,7 @@ Partial Class Form1
         Me.GroupBox2.Controls.Add(Me.Label10)
         Me.GroupBox2.Controls.Add(Me.txtSampleAudioCodec)
         Me.GroupBox2.Controls.Add(Me.Label11)
-        Me.GroupBox2.Location = New System.Drawing.Point(10, 237)
+        Me.GroupBox2.Location = New System.Drawing.Point(15, 238)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(522, 154)
         Me.GroupBox2.TabIndex = 11
@@ -2793,7 +2866,7 @@ Partial Class Form1
         '
         'btnTestAnalyse
         '
-        Me.btnTestAnalyse.Location = New System.Drawing.Point(370, 108)
+        Me.btnTestAnalyse.Location = New System.Drawing.Point(413, 105)
         Me.btnTestAnalyse.Name = "btnTestAnalyse"
         Me.btnTestAnalyse.Size = New System.Drawing.Size(124, 31)
         Me.btnTestAnalyse.TabIndex = 3
@@ -2810,7 +2883,7 @@ Partial Class Form1
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txtSampleVideoCodec)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Location = New System.Drawing.Point(10, 150)
+        Me.GroupBox1.Location = New System.Drawing.Point(15, 151)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(522, 81)
         Me.GroupBox1.TabIndex = 4
@@ -2892,7 +2965,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 54)
+        Me.Label3.Location = New System.Drawing.Point(20, 55)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(126, 13)
         Me.Label3.TabIndex = 2
@@ -2900,7 +2973,7 @@ Partial Class Form1
         '
         'btnGetSampleFile
         '
-        Me.btnGetSampleFile.Location = New System.Drawing.Point(456, 69)
+        Me.btnGetSampleFile.Location = New System.Drawing.Point(499, 70)
         Me.btnGetSampleFile.Name = "btnGetSampleFile"
         Me.btnGetSampleFile.Size = New System.Drawing.Size(38, 20)
         Me.btnGetSampleFile.TabIndex = 2
@@ -2909,9 +2982,9 @@ Partial Class Form1
         '
         'txtSampleFile
         '
-        Me.txtSampleFile.Location = New System.Drawing.Point(17, 69)
+        Me.txtSampleFile.Location = New System.Drawing.Point(22, 70)
         Me.txtSampleFile.Name = "txtSampleFile"
-        Me.txtSampleFile.Size = New System.Drawing.Size(433, 20)
+        Me.txtSampleFile.Size = New System.Drawing.Size(471, 20)
         Me.txtSampleFile.TabIndex = 1
         '
         'ViewCollection
@@ -3079,6 +3152,8 @@ Partial Class Form1
         '
         'RichTextBox1
         '
+        Me.RichTextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.RichTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Description", True))
         Me.RichTextBox1.Location = New System.Drawing.Point(187, 316)
         Me.RichTextBox1.Name = "RichTextBox1"
@@ -3096,6 +3171,7 @@ Partial Class Form1
         '
         'RichTextBox2
         '
+        Me.RichTextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.RichTextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Comments", True))
         Me.RichTextBox2.Location = New System.Drawing.Point(187, 430)
         Me.RichTextBox2.Name = "RichTextBox2"
@@ -3175,6 +3251,7 @@ Partial Class Form1
         '
         'Label78
         '
+        Me.Label78.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label78.AutoSize = True
         Me.Label78.Location = New System.Drawing.Point(179, 523)
         Me.Label78.Name = "Label78"
@@ -3193,6 +3270,7 @@ Partial Class Form1
         '
         'TextBox28
         '
+        Me.TextBox28.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TextBox28.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Disks", True))
         Me.TextBox28.Location = New System.Drawing.Point(215, 520)
         Me.TextBox28.Name = "TextBox28"
@@ -3209,6 +3287,7 @@ Partial Class Form1
         '
         'Label77
         '
+        Me.Label77.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label77.AutoSize = True
         Me.Label77.Location = New System.Drawing.Point(179, 497)
         Me.Label77.Name = "Label77"
@@ -3227,6 +3306,7 @@ Partial Class Form1
         '
         'TextBox27
         '
+        Me.TextBox27.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TextBox27.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Size", True))
         Me.TextBox27.Location = New System.Drawing.Point(212, 494)
         Me.TextBox27.Name = "TextBox27"
@@ -3243,6 +3323,7 @@ Partial Class Form1
         '
         'Label74
         '
+        Me.Label74.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label74.AutoSize = True
         Me.Label74.Location = New System.Drawing.Point(10, 523)
         Me.Label74.Name = "Label74"
@@ -3262,6 +3343,7 @@ Partial Class Form1
         '
         'TextBox24
         '
+        Me.TextBox24.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TextBox24.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Subtitles", True))
         Me.TextBox24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox24.Location = New System.Drawing.Point(70, 520)
@@ -3279,6 +3361,7 @@ Partial Class Form1
         '
         'Label73
         '
+        Me.Label73.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label73.AutoSize = True
         Me.Label73.Location = New System.Drawing.Point(7, 497)
         Me.Label73.Name = "Label73"
@@ -3299,6 +3382,7 @@ Partial Class Form1
         '
         'TextBox23
         '
+        Me.TextBox23.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TextBox23.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Languages", True))
         Me.TextBox23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox23.Location = New System.Drawing.Point(70, 494)
@@ -3316,6 +3400,7 @@ Partial Class Form1
         '
         'GroupBox22
         '
+        Me.GroupBox22.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox22.Controls.Add(Me.Label75)
         Me.GroupBox22.Controls.Add(Me.Label76)
         Me.GroupBox22.Controls.Add(Me.TextBox25)
@@ -3377,6 +3462,7 @@ Partial Class Form1
         '
         'GroupBox21
         '
+        Me.GroupBox21.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox21.Controls.Add(Me.Label72)
         Me.GroupBox21.Controls.Add(Me.TextBox22)
         Me.GroupBox21.Controls.Add(Me.Label71)
@@ -3479,6 +3565,7 @@ Partial Class Form1
         '
         'GroupBox15
         '
+        Me.GroupBox15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.GroupBox15.Controls.Add(Me.Label68)
         Me.GroupBox15.Controls.Add(Me.Label67)
         Me.GroupBox15.Controls.Add(Me.TextBox17)
@@ -3573,6 +3660,7 @@ Partial Class Form1
         '
         'Label64
         '
+        Me.Label64.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label64.AutoSize = True
         Me.Label64.Location = New System.Drawing.Point(264, 523)
         Me.Label64.Name = "Label64"
@@ -3591,6 +3679,7 @@ Partial Class Form1
         '
         'TextBox14
         '
+        Me.TextBox14.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TextBox14.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "URL", True))
         Me.TextBox14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox14.Location = New System.Drawing.Point(299, 520)
@@ -3609,6 +3698,7 @@ Partial Class Form1
         '
         'Label65
         '
+        Me.Label65.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label65.AutoSize = True
         Me.Label65.Location = New System.Drawing.Point(252, 497)
         Me.Label65.Name = "Label65"
@@ -3627,6 +3717,7 @@ Partial Class Form1
         '
         'TextBox15
         '
+        Me.TextBox15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.TextBox15.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.VideoBindingSource, "Source", True))
         Me.TextBox15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox15.Location = New System.Drawing.Point(299, 494)
