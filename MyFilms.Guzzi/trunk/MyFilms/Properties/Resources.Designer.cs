@@ -76,7 +76,14 @@ namespace MyFilmsPlugin.Properties {
         
         internal static System.Drawing.Bitmap film_reel_128x128 {
             get {
-                object obj = ResourceManager.GetObject("film-reel-128x128", resourceCulture);
+                object obj = ResourceManager.GetObject("film_reel_128x128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap film_reel_128x128_faded {
+            get {
+                object obj = ResourceManager.GetObject("film_reel_128x128_faded", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

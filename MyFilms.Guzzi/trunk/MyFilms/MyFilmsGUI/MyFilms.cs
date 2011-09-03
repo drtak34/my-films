@@ -68,7 +68,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     //[PluginIcons("MesFilms.MyFilms.Resources.clapperboard-128x128.png", "MesFilms.MyFilms.Resources.clapperboard-128x128-faded.png")]
     //[PluginIcons("MesFilms.MyFilms.Resources.logo_mesfilms.png", "MesFilms.MyFilms.Resources.logo_mesfilms-faded.png")]
-  [PluginIcons("MyFilmsPlugin.MyFilms.Resources.film-reel-128x128.png", "MyFilmsPlugin.MyFilms.Resources.film-reel-128x128-faded.png")]
+  [PluginIcons("MyFilmsPlugin.Resources.film-reel-128x128.png", "MyFilmsPlugin.Resources.film-reel-128x128-faded.png")]
+  
   public class MyFilms : GUIWindow, ISetupForm
   {
     #region Constructor
