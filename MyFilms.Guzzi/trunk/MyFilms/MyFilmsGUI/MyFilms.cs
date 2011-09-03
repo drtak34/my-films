@@ -8355,7 +8355,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         foreach (DataColumn dc in ds.Movie.Columns)
         {
           //if (wsr[dc.ColumnName].ToString().ToLower().Contains(keyboard.Text.ToLower()))
-          if (wsr[dc.ColumnName].ToString().Length == 0) //Check if field is empty
+          if (string.IsNullOrEmpty(wsr[dc.ColumnName].ToString())) //Check if field is empty // old: wsr[dc.ColumnName].ToString().Length == 0
             if (w_tableau.Contains(dc.ColumnName.ToLower()))
             // search position in w_tableau for adding +1 to w_count
             {
@@ -8390,9 +8390,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Reset();
       dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798717))); // incomplete movie data
       choiceSearch.Clear();
-      string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL" };
-      string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668" };
-      for (int ii = 0; ii < 29; ii++)
+      string[] PropertyList = new string[] { "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year", "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked", "MediaLabel", "MediaType", "Length", "VideoFormat", "VideoBitrate", "AudioFormat", "AudioBitrate", "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "IMDB_Id", "Picture", "Fanart" };
+      string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798687", "10798682", "10798945" };
+      for (int ii = 0; ii < 31; ii++)
       {
         //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: Property is '" + PropertyList[ii] + "' - '" + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))) + "' (" + PropertyListLabel[ii] + ")");
         for (int i = 0; i < w_tableau.Count; i++)
