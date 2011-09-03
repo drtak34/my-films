@@ -4821,20 +4821,23 @@ If you want to create a new configuration based on the existing script, you can 
   <metadata name="iMDBEnumeratorBindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>319, 620</value>
   </metadata>
+  <data name="Version_Label.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="Version_Label.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="Version_Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1000, 90</value>
+    <value>987, 90</value>
   </data>
   <data name="Version_Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+    <value>71, 13</value>
   </data>
   <data name="Version_Label.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="Version_Label.Text" xml:space="preserve">
-    <value>V0.0.0.0</value>
+    <value>V0.0.0.00000</value>
   </data>
   <data name="Version_Label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
