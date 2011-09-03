@@ -221,8 +221,8 @@ namespace Grabber_Interface
           // 
           // textConfig
           // 
-          this.textConfig.BackColor = System.Drawing.SystemColors.Control;
           resources.ApplyResources(this.textConfig, "textConfig");
+          this.textConfig.BackColor = System.Drawing.SystemColors.Control;
           this.textConfig.Name = "textConfig";
           this.textConfig.ReadOnly = true;
           this.textConfig.TextChanged += new System.EventHandler(this.textConfig_TextChanged);
@@ -656,6 +656,7 @@ namespace Grabber_Interface
           this.dataGridViewMapping.AllowUserToAddRows = false;
           this.dataGridViewMapping.AllowUserToDeleteRows = false;
           this.dataGridViewMapping.AllowUserToOrderColumns = true;
+          resources.ApplyResources(this.dataGridViewMapping, "dataGridViewMapping");
           this.dataGridViewMapping.BackgroundColor = System.Drawing.SystemColors.Window;
           this.dataGridViewMapping.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
           this.dataGridViewMapping.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -668,7 +669,6 @@ namespace Grabber_Interface
             this.Column5,
             this.MergePreferSource,
             this.MergePreferDestination});
-          resources.ApplyResources(this.dataGridViewMapping, "dataGridViewMapping");
           this.dataGridViewMapping.MultiSelect = false;
           this.dataGridViewMapping.Name = "dataGridViewMapping";
           this.dataGridViewMapping.RowHeadersVisible = false;
@@ -820,15 +820,15 @@ namespace Grabber_Interface
           // 
           // pictureBox1
           // 
-          this.pictureBox1.Image = global::Grabber_Interface.Properties.Resources.film_reel_128x128;
           resources.ApplyResources(this.pictureBox1, "pictureBox1");
+          this.pictureBox1.Image = global::Grabber_Interface.Properties.Resources.film_reel_128x128;
           this.pictureBox1.Name = "pictureBox1";
           this.pictureBox1.TabStop = false;
           // 
           // pictureBoxUSFlag
           // 
-          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.United_States_of_America_USA_;
           resources.ApplyResources(this.pictureBoxUSFlag, "pictureBoxUSFlag");
+          this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.United_States_of_America_USA_;
           this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
           this.pictureBoxUSFlag.TabStop = false;
           this.pictureBoxUSFlag.Click += new System.EventHandler(this.pictureBoxUSFlag_Click);
@@ -918,8 +918,8 @@ namespace Grabber_Interface
           // 
           // groupBox3
           // 
-          this.groupBox3.Controls.Add(this.textPreview);
           resources.ApplyResources(this.groupBox3, "groupBox3");
+          this.groupBox3.Controls.Add(this.textPreview);
           this.groupBox3.Name = "groupBox3";
           this.groupBox3.TabStop = false;
           // 
@@ -1045,8 +1045,8 @@ namespace Grabber_Interface
           // 
           // pictureBoxPreviewCover
           // 
-          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
           resources.ApplyResources(this.pictureBoxPreviewCover, "pictureBoxPreviewCover");
+          this.pictureBoxPreviewCover.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
           this.pictureBoxPreviewCover.Name = "pictureBoxPreviewCover";
           this.pictureBoxPreviewCover.TabStop = false;
           this.pictureBoxPreviewCover.Click += new System.EventHandler(this.pictureBoxPreviewCover_Click);
@@ -1170,8 +1170,8 @@ namespace Grabber_Interface
           // 
           // groupBox2
           // 
-          this.groupBox2.Controls.Add(this.dataGridViewSearchResults);
           resources.ApplyResources(this.groupBox2, "groupBox2");
+          this.groupBox2.Controls.Add(this.dataGridViewSearchResults);
           this.groupBox2.Name = "groupBox2";
           this.groupBox2.TabStop = false;
           // 
@@ -1517,10 +1517,10 @@ namespace Grabber_Interface
           // 
           // tabControl1
           // 
+          resources.ApplyResources(this.tabControl1, "tabControl1");
           this.tabControl1.Controls.Add(this.tabPageUserSettings);
           this.tabControl1.Controls.Add(this.tabPageSearchPage);
           this.tabControl1.Controls.Add(this.tabPageDetailPage);
-          resources.ApplyResources(this.tabControl1, "tabControl1");
           this.tabControl1.Name = "tabControl1";
           this.tabControl1.SelectedIndex = 0;
           // 

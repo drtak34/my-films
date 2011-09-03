@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="textConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="textConfig.Location" type="System.Drawing.Point, System.Drawing">
     <value>103, 12</value>
@@ -140,7 +144,9 @@
   <data name="&gt;&gt;textConfig.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="button_Browse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="button_Browse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -314,6 +320,9 @@ This parameter makes it possible to define the beginning of the URL ("http://les
   <data name="&gt;&gt;textURLPrefix.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="button_New.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="button_New.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -343,6 +352,9 @@ This parameter makes it possible to define the beginning of the URL ("http://les
   </data>
   <data name="&gt;&gt;button_New.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="button_Save.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="button_Save.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -374,6 +386,9 @@ This parameter makes it possible to define the beginning of the URL ("http://les
   <data name="&gt;&gt;button_Save.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="radioButtonFR.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="radioButtonFR.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -400,6 +415,9 @@ This parameter makes it possible to define the beginning of the URL ("http://les
   </data>
   <data name="&gt;&gt;radioButtonFR.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="radioButtonEN.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="radioButtonEN.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -475,6 +493,9 @@ This parameter makes it possible to define the beginning of the URL ("http://les
   </data>
   <data name="&gt;&gt;button3.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="buttonExpertMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="buttonExpertMode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1823,6 +1844,9 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="dataGridViewMapping.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2015,6 +2039,9 @@ Most sites do not support country specific certifications.</value>
   </data>
   <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="button_SaveAs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="button_SaveAs.Location" type="System.Drawing.Point, System.Drawing">
     <value>796, 64</value>
@@ -2245,6 +2272,9 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>109, 17</value>
   </metadata>
+  <data name="linkLabelMFwiki.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="linkLabelMFwiki.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2275,6 +2305,9 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <data name="&gt;&gt;linkLabelMFwiki.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="pictureBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="pictureBox1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2302,6 +2335,9 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="pictureBoxUSFlag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="pictureBoxUSFlag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -2328,6 +2364,9 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   </data>
   <data name="&gt;&gt;pictureBoxUSFlag.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="pictureBoxFranceFlag.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="pictureBoxFranceFlag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2534,8 +2573,8 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="textBodyDetail.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="textBodyDetail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="textBodyDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 314</value>
@@ -2591,11 +2630,17 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textPreview.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 16</value>
+    <value>3, 16</value>
   </data>
   <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 248</value>
+    <value>324, 251</value>
   </data>
   <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2619,7 +2664,7 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
     <value>508, 3</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 270</value>
+    <value>330, 270</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -3152,11 +3197,14 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="pictureBoxPreviewCover.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="pictureBoxPreviewCover.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="pictureBoxPreviewCover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>834, 8</value>
+    <value>844, 7</value>
   </data>
   <data name="pictureBoxPreviewCover.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 295</value>
@@ -3539,8 +3587,8 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="textBody.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="textBody.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="textBody.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 316</value>
@@ -3595,6 +3643,9 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3671,8 +3722,11 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <data name="ResultColumn8.Width" type="System.Int32, mscorlib">
     <value>58</value>
   </data>
+  <data name="dataGridViewSearchResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="dataGridViewSearchResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 13</value>
+    <value>3, 16</value>
   </data>
   <data name="dataGridViewSearchResults.Size" type="System.Drawing.Size, System.Drawing">
     <value>539, 165</value>
@@ -3696,7 +3750,7 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
     <value>494, 92</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>551, 184</value>
+    <value>545, 184</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -4151,6 +4205,9 @@ A website requiring UTF-8 Encoding: "UTF-8".</value>
   <data name="&gt;&gt;tabPageSearchPage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="label33.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
   <data name="label33.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -4245,6 +4302,9 @@ you do not need to customize them in each script here.</value>
   </data>
   <data name="&gt;&gt;label31.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="label30.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
   </data>
   <data name="label30.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4731,8 +4791,8 @@ If you want to create a new configuration based on the existing script, you can 
   <data name="&gt;&gt;tabPageUserSettings.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tabControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Bottom</value>
+  <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 98</value>
