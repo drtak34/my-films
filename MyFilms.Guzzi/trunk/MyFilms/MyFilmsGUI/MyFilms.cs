@@ -5295,20 +5295,56 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
           dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798800)); // Warning: Long runtime !
           dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798801)); //should really the trailer search be started
-          dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), w_index_count.ToString())); // for <xx> movies ?
+          // dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), w_index_count.ToString()))); // for <xx> movies ?
+          dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), wr.Length.ToString())); // for <xx> movies ?
           dlgYesNo.DoModal(GetID);
           if (!(dlgYesNo.IsConfirmed))
             break;
-          MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
-          for (i = 0; i < w_index_count; i++)
-          {
-            LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] + "'");
-            //MyFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
-            MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, Convert.ToInt32(i), false);
-          }
-          MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
-          this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
-          ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798695)); //Traiersearch finished!
+          
+            GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+            if (dlgPrgrs != null)
+            {
+              dlgPrgrs.Reset();
+              dlgPrgrs.DisplayProgressBar = true;
+              dlgPrgrs.ShowWaitCursor = true;
+              dlgPrgrs.DisableCancel(true);
+              dlgPrgrs.SetHeading("MyFilms Trailer Registration");
+              dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
+              //dlgPrgrs.SetLine(1, "Register Trailers ...");
+              dlgPrgrs.Percentage = 0;
+            }
+            new System.Threading.Thread(delegate()
+            {
+              // MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
+              for (i = 0; i < w_index_count; i++)
+              {
+                try
+                {
+                  string title = wr[i][MyFilms.conf.StrTitle1].ToString();
+                  LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number: '" + i.ToString() + "' - Index to search: '" + w_index[i] + "'");
+                  if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Register trailer for '" + title + "'");
+                  if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / w_index_count;
+                  //MyFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
+                  MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, Convert.ToInt32(i), false);
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Debug("(GlobalSearchTrailerLocal) - index: '" + i + "', Exception: '" + ex.Message + "', Stacktrace: '" + ex.StackTrace + "'");
+                }
+              }
+              // MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
+              
+              if (dlgPrgrs != null)
+                dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
+              GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+              {
+                // this will be executed after background thread finished
+                this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+                ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798695)); //Traiersearch finished!
+                return 0;
+              }, 0, 0, null);
+            }) { Name = "GlobalTrailerUpdate", IsBackground = true }.Start();
+            return;
           break;
 
         case "incomplete-movie-data":

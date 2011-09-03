@@ -1655,24 +1655,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 case "trailer-register":
                     {
-                        setProcessAnimationStatus(true, m_SearchAnimation);
-                        //Zuerst Pfad lesen, dann Dateien suchen, in liste packen, Auswahlmenü präsenteiren und zum Schluß Update des Records 
-                        // Suchen nach Files mit folgendem Kriterium:
-                        // 1.) ... die den Filmnamen im Filenamen haben und im Trailerverzeichnis gefunden werden (wahrscheinlich HD, daher an 1. Stelle setzen)
-                        // 2.) Im Verzeichnis des Films suchen nach Filmdateien die das Wort "Trailer" im Namen haben (Endung beliebig: avi, mov, flv, etc.)
-                        // 3.) Im (Trailer)-Suchpfad nach Verzeichnissen, die nach dem Filmnamen benannt sind - dann alle Files darin registrien
+                      setProcessAnimationStatus(true, m_SearchAnimation);
+                      //Zuerst Pfad lesen, dann Dateien suchen, in liste packen, Auswahlmenü präsentieren und zum Schluß Update des Records 
+                      // Suchen nach Files mit folgendem Kriterium:
+                      // 1.) ... die den Filmnamen im Filenamen haben und im Trailerverzeichnis gefunden werden (wahrscheinlich HD, daher an 1. Stelle setzen)
+                      // 2.) Im Verzeichnis des Films suchen nach Filmdateien die das Wort "Trailer" im Namen haben (Endung beliebig: avi, mov, flv, etc.)
+                      // 3.) Im (Trailer)-Suchpfad nach Verzeichnissen, die nach dem Filmnamen benannt sind - dann alle Files darin registrien
 
-                        LogMyFilms.Debug("(SearchTrailerLocal) SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex]: '" + (MyFilms.r[MyFilms.conf.StrIndex].ToString() + "'"));
-                        SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
-                        setProcessAnimationStatus(false, m_SearchAnimation);
-                        afficher_detail(true);
-                        GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                        dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                        dlgOk.SetLine(1, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrSTitle.ToString()].ToString());//video title
-                        dlgOk.SetLine(2, result.Count.ToString() + " " + GUILocalizeStrings.Get(10798705)); // trailers found ! 
-                        dlgOk.DoModal(GetID);
-                        break;
-                    }
+                      LogMyFilms.Debug("(SearchTrailerLocal) SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex]: '" + (MyFilms.r[MyFilms.conf.StrIndex].ToString() + "'"));
+                      SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+                      setProcessAnimationStatus(false, m_SearchAnimation);
+                      afficher_detail(true);
+                      GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                      dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                      dlgOk.SetLine(1, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrSTitle.ToString()].ToString());//video title
+                      dlgOk.SetLine(2, result.Count.ToString() + " " + GUILocalizeStrings.Get(10798705)); // trailers found ! 
+                      dlgOk.DoModal(GetID);
+                      break;
+                    }  
 
                 case "trailer-delete":
                     dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
