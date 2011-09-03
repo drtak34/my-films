@@ -37,6 +37,7 @@ namespace MyVideoGrabber
           this.button6 = new System.Windows.Forms.Button();
           this.listView1 = new System.Windows.Forms.ListView();
           this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+          this.label_Version = new System.Windows.Forms.Label();
           this.SuspendLayout();
           // 
           // label1
@@ -125,11 +126,22 @@ namespace MyVideoGrabber
           this.columnHeader1.Text = "";
           this.columnHeader1.Width = 520;
           // 
+          // label_Version
+          // 
+          this.label_Version.AutoSize = true;
+          this.label_Version.Location = new System.Drawing.Point(548, 9);
+          this.label_Version.Name = "label_Version";
+          this.label_Version.Size = new System.Drawing.Size(47, 13);
+          this.label_Version.TabIndex = 10;
+          this.label_Version.Text = "V0.0.0.0";
+          this.label_Version.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+          // 
           // MultiGrabberForm
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(608, 310);
+          this.Controls.Add(this.label_Version);
           this.Controls.Add(this.listView1);
           this.Controls.Add(this.button6);
           this.Controls.Add(this.button5);
@@ -157,5 +169,6 @@ namespace MyVideoGrabber
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.Label label_Version;
     }
 }

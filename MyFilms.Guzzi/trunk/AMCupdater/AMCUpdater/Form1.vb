@@ -27,6 +27,8 @@ Public Class Form1
 
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
+        Dim asm As System.Reflection.Assembly = System.Reflection.Assembly.GetExecutingAssembly()
+        Label_VersionNumber.Text = "V" + asm.GetName().Version.ToString()
 
 #If CONFIG = "Release" Then
         DebugToolStripMenuItem.Visible = False

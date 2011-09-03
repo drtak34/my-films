@@ -12,6 +12,8 @@ namespace MyVideoGrabber
         public MultiGrabberForm()
         {
             InitializeComponent();
+            System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
+            this.label_Version.Text = "V" + asm.GetName().Version.ToString();
         }
         
         private void button3_Click(object sender, EventArgs e)

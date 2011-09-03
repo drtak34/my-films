@@ -4825,13 +4825,19 @@ If you want to create a new configuration based on the existing script, you can 
     <value>True</value>
   </data>
   <data name="Version_Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>987, 90</value>
+    <value>1000, 90</value>
   </data>
   <data name="Version_Label.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
+    <value>47, 13</value>
   </data>
   <data name="Version_Label.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
+  </data>
+  <data name="Version_Label.Text" xml:space="preserve">
+    <value>V0.0.0.0</value>
+  </data>
+  <data name="Version_Label.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;Version_Label.Name" xml:space="preserve">
     <value>Version_Label</value>
