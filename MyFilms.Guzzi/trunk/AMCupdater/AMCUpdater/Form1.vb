@@ -1809,7 +1809,7 @@ Public Class Form1
         frmAbout.ShowDialog()
     End Sub
     Private Sub MyFilmsWikiToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyFilmsWikiToolStripMenuItem.Click
-        System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/")
+        System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/Updating_AMC_Data/AMC_Updater")
     End Sub
     Private Sub AMCUpdaterSourceforgeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AMCUpdaterSourceforgeToolStripMenuItem.Click
         System.Diagnostics.Process.Start("http://sourceforge.net/projects/amcupdater/")
@@ -2547,5 +2547,8 @@ Public Class Form1
         End If
     End Sub
 
+    Private Sub LinkLabelMyFilmsWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabelMyFilmsWiki.LinkClicked
+        System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/Updating_AMC_Data/AMC_Updater")
+    End Sub
 End Class
 

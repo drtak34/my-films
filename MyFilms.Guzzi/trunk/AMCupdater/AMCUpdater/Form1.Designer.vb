@@ -41,6 +41,7 @@ Partial Class Form1
         Me.TabControl1 = New System.Windows.Forms.TabControl
         Me.Import_Movies = New System.Windows.Forms.TabPage
         Me.Label_VersionNumber = New System.Windows.Forms.Label
+        Me.LinkLabelMyFilmsWiki = New System.Windows.Forms.LinkLabel
         Me.Label88 = New System.Windows.Forms.Label
         Me.GroupBox27 = New System.Windows.Forms.GroupBox
         Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox
@@ -357,12 +358,12 @@ Partial Class Form1
         Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
         Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
-        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
+        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
+        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
+        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.VidéoBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
         Me.mnuFile = New System.Windows.Forms.MenuStrip
@@ -461,9 +462,6 @@ Partial Class Form1
         Me.XionPanel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VidéoBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.VidéoBindingNavigator.SuspendLayout()
-        Me.mnuFile.SuspendLayout()
-        Me.StatusStrip1.SuspendLayout()
         CType(Me.epInteractive, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -496,6 +494,7 @@ Partial Class Form1
         'Import_Movies
         '
         Me.Import_Movies.Controls.Add(Me.Label_VersionNumber)
+        Me.Import_Movies.Controls.Add(Me.LinkLabelMyFilmsWiki)
         Me.Import_Movies.Controls.Add(Me.Label88)
         Me.Import_Movies.Controls.Add(Me.GroupBox27)
         Me.Import_Movies.Controls.Add(Me.GroupBox23)
@@ -513,20 +512,29 @@ Partial Class Form1
         '
         'Label_VersionNumber
         '
-        Me.Label_VersionNumber.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label_VersionNumber.AutoSize = True
-        Me.Label_VersionNumber.Location = New System.Drawing.Point(547, 3)
+        Me.Label_VersionNumber.Location = New System.Drawing.Point(23, 14)
         Me.Label_VersionNumber.Name = "Label_VersionNumber"
-        Me.Label_VersionNumber.Size = New System.Drawing.Size(47, 13)
+        Me.Label_VersionNumber.Size = New System.Drawing.Size(71, 13)
         Me.Label_VersionNumber.TabIndex = 55
-        Me.Label_VersionNumber.Text = "V0.0.0.0"
-        Me.Label_VersionNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label_VersionNumber.Text = "V0.0.0.00000"
+        Me.Label_VersionNumber.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LinkLabelMyFilmsWiki
+        '
+        Me.LinkLabelMyFilmsWiki.AutoSize = True
+        Me.LinkLabelMyFilmsWiki.Location = New System.Drawing.Point(111, 14)
+        Me.LinkLabelMyFilmsWiki.Name = "LinkLabelMyFilmsWiki"
+        Me.LinkLabelMyFilmsWiki.Size = New System.Drawing.Size(68, 13)
+        Me.LinkLabelMyFilmsWiki.TabIndex = 107
+        Me.LinkLabelMyFilmsWiki.TabStop = True
+        Me.LinkLabelMyFilmsWiki.Text = "MyFilms Wiki"
         '
         'Label88
         '
-        Me.Label88.Location = New System.Drawing.Point(11, 51)
+        Me.Label88.Location = New System.Drawing.Point(19, 56)
         Me.Label88.Name = "Label88"
-        Me.Label88.Size = New System.Drawing.Size(572, 69)
+        Me.Label88.Size = New System.Drawing.Size(552, 60)
         Me.Label88.TabIndex = 105
         Me.Label88.Text = resources.GetString("Label88.Text")
         '
@@ -3896,7 +3904,6 @@ Partial Class Form1
         Me.VidéoBindingNavigator.BindingSource = Me.VideoBindingSource
         Me.VidéoBindingNavigator.CountItem = Me.BindingNavigatorCountItem
         Me.VidéoBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
-        Me.VidéoBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.VidéoBindingNavigatorSaveItem})
         Me.VidéoBindingNavigator.Location = New System.Drawing.Point(3, 3)
         Me.VidéoBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.VidéoBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
@@ -3945,33 +3952,14 @@ Partial Class Form1
         Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorMoveFirstItem.Text = "Move First"
         '
-        'BindingNavigatorMovePreviousItem
+        'BindingNavigatorMoveLastItem
         '
-        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
-        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMovePreviousItem.Text = "Move Previous"
-        '
-        'BindingNavigatorSeparator
-        '
-        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
-        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
-        '
-        'BindingNavigatorPositionItem
-        '
-        Me.BindingNavigatorPositionItem.AccessibleName = "Position"
-        Me.BindingNavigatorPositionItem.AutoSize = False
-        Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
-        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(70, 21)
-        Me.BindingNavigatorPositionItem.Text = "0"
-        Me.BindingNavigatorPositionItem.ToolTipText = "Current Position"
-        '
-        'BindingNavigatorSeparator1
-        '
-        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
-        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
+        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
+        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveLastItem.Text = "Move Last"
         '
         'BindingNavigatorMoveNextItem
         '
@@ -3982,14 +3970,33 @@ Partial Class Form1
         Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorMoveNextItem.Text = "Move Next"
         '
-        'BindingNavigatorMoveLastItem
+        'BindingNavigatorMovePreviousItem
         '
-        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
-        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
-        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
-        Me.BindingNavigatorMoveLastItem.Text = "Move Last"
+        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
+        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMovePreviousItem.Text = "Move Previous"
+        '
+        'BindingNavigatorPositionItem
+        '
+        Me.BindingNavigatorPositionItem.AccessibleName = "Position"
+        Me.BindingNavigatorPositionItem.AutoSize = False
+        Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
+        Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(70, 21)
+        Me.BindingNavigatorPositionItem.Text = "0"
+        Me.BindingNavigatorPositionItem.ToolTipText = "Current Position"
+        '
+        'BindingNavigatorSeparator
+        '
+        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
+        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
+        '
+        'BindingNavigatorSeparator1
+        '
+        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
+        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
         '
         'BindingNavigatorSeparator2
         '
@@ -4006,7 +4013,6 @@ Partial Class Form1
         '
         'mnuFile
         '
-        Me.mnuFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.DebugToolStripMenuItem})
         Me.mnuFile.Location = New System.Drawing.Point(0, 0)
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(608, 24)
@@ -4051,16 +4057,14 @@ Partial Class Form1
         '
         'ToolStripMenuItem2
         '
-        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InternetLinksToolStripMenuItem, Me.UserManualToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
         Me.ToolStripMenuItem2.Size = New System.Drawing.Size(40, 20)
         Me.ToolStripMenuItem2.Text = "Help"
         '
         'InternetLinksToolStripMenuItem
         '
-        Me.InternetLinksToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MyFilmsWikiToolStripMenuItem, Me.AMCUpdaterSourceforgeToolStripMenuItem, Me.AntMovieCatalogToolStripMenuItem, Me.MediaInfodllToolStripMenuItem})
         Me.InternetLinksToolStripMenuItem.Name = "InternetLinksToolStripMenuItem"
-        Me.InternetLinksToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.InternetLinksToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.InternetLinksToolStripMenuItem.Text = "Internet Links"
         '
         'MyFilmsWikiToolStripMenuItem
@@ -4090,13 +4094,13 @@ Partial Class Form1
         'UserManualToolStripMenuItem
         '
         Me.UserManualToolStripMenuItem.Name = "UserManualToolStripMenuItem"
-        Me.UserManualToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.UserManualToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.UserManualToolStripMenuItem.Text = "User Manual"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'DebugToolStripMenuItem
@@ -4186,7 +4190,6 @@ Partial Class Form1
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripFixedText, Me.ToolStripStatusLabel, Me.ToolStripProgressBar})
         Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 636)
         Me.StatusStrip1.Name = "StatusStrip1"
@@ -4420,12 +4423,6 @@ Partial Class Form1
         Me.XionPanel1.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VidéoBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.VidéoBindingNavigator.ResumeLayout(False)
-        Me.VidéoBindingNavigator.PerformLayout()
-        Me.mnuFile.ResumeLayout(False)
-        Me.mnuFile.PerformLayout()
-        Me.StatusStrip1.ResumeLayout(False)
-        Me.StatusStrip1.PerformLayout()
         CType(Me.epInteractive, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4810,4 +4807,5 @@ Partial Class Form1
     Friend WithEvents chkGrabberOverrideGetRoles As System.Windows.Forms.ComboBox
     Friend WithEvents chkGrabberOverrideLanguage As System.Windows.Forms.ComboBox
     Friend WithEvents Label_VersionNumber As System.Windows.Forms.Label
+    Friend WithEvents LinkLabelMyFilmsWiki As System.Windows.Forms.LinkLabel
 End Class
