@@ -1885,6 +1885,7 @@ Public Class AntProcessor
                             .GroupName = row("GroupName").ToString
                             .OnlyAddMissingData = False ' always add all selected data for new records
                             .OnlyUpdateNonEmptyData = False
+                            .MasterTitle = objSettings.Master_Title
                         End With
 
                         If (row("Moved")) Then

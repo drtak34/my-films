@@ -1245,15 +1245,14 @@ Public Class AntRecord
                 End If
 
                 ' Get Internetdata with "best title possible"
-                If _MasterTitle = "FormattedTitle" And _XMLElement.Attributes("FormattedTitle") IsNot Nothing And Not _XMLElement.Attributes("FormattedTitle").Value.ToString = String.Empty Then
+                If IsValidTitle(_XMLElement, "FormattedTitle") Then
                     DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("FormattedTitle").Value.ToString))
-                ElseIf _MasterTitle = "TranslatedTitle" And _XMLElement.Attributes("TranslatedTitle") IsNot Nothing And Not _XMLElement.Attributes("TranslatedTitle").Value.ToString = String.Empty Then
+                ElseIf IsValidTitle(_XMLElement, "TranslatedTitle") Then
                     DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("TranslatedTitle").Value.ToString))
-                ElseIf _XMLElement.Attributes("OriginalTitle") IsNot Nothing And Not _XMLElement.Attributes("OriginalTitle").Value.ToString = String.Empty Then
+                ElseIf IsValidTitle(_XMLElement, "OriginalTitle") Then
                     DoInternetLookup(RemoveGroupName(_XMLElement.Attributes("OriginalTitle").Value.ToString))
                 Else
-                    'No DB title available, so use the cleaned filename instead:
-                    DoInternetLookup(GetTitleFromFilePath(_FilePath))
+                    DoInternetLookup(GetTitleFromFilePath(_FilePath)) 'No DB title available, so use the cleaned filename instead:
                 End If
             End If
 
@@ -1714,6 +1713,7 @@ Public Class AntRecord
                                     NewFileName = PicturePathFull.Replace(PictureFileName, PrefixString & PictureFileName)
                                     If Not File.Exists(NewFileName) Then
                                         File.Copy(PicturePathFull, NewFileName)
+                                        Thread.Sleep(20)
                                     End If
                                     File.Delete(PicturePathFull)
                                     PicturePathFull = NewFileName
@@ -1973,6 +1973,19 @@ Public Class AntRecord
             'End If
         End If
     End Sub
+
+    Private Function IsValidTitle(ByVal _XMLElement As Xml.XmlElement, ByRef TitleType As String) As Boolean
+        Dim ValidTitle As Boolean = False
+        If _MasterTitle = TitleType Then
+            If _XMLElement.Attributes(TitleType) IsNot Nothing Then
+                If Not _XMLElement.Attributes(TitleType).Value.ToString = String.Empty Then
+                    ValidTitle = True
+                End If
+            End If
+        End If
+        Return ValidTitle
+    End Function
+
 
     Public Sub UpdateElement()
 
