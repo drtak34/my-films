@@ -5919,8 +5919,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
-
-
         protected static void delete_movie(string fileName, ref ArrayList newItems)
         {
             VideoDatabase.DeleteMovie(fileName); // Remove file from videodatabase, if any.
@@ -6347,6 +6345,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 movieDetails.PlotOutline = movieDetails.Plot = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wdescription));
 
                 movieDetails.Title = MyFilms.r[select_item][MyFilms.conf.StrTitle1].ToString();
+
                 try
                 { movieDetails.RunTime = Int32.Parse(MyFilms.r[select_item]["Length"].ToString()); }
                 catch
@@ -6362,13 +6361,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
                 // Modified to match changes by Deda in MyVideos (New Thumbformat)
+                // Cover save new method
+                string titleExt = movieDetails.Title + "{" + idMovie + "}";
 
-                string strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, movieDetails.Title);
-                string LargeThumb = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieTitle, movieDetails.Title);
-                //string strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, movieDetails.Title) + "{" + idMovie.ToString() + "}";;
-                //string LargeThumb = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieTitle, movieDetails.Title) + "{" + idMovie.ToString() + "}";;
-                //LogMyFilms.Debug("(ThumbCreation): strThumb: '" + strThumb.ToString() + "'");
-                //LogMyFilms.Debug("(ThumbCreation): LargeThumb: '" + LargeThumb.ToString() + "'");
+                //string strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, movieDetails.Title);
+                //string LargeThumb = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieTitle, movieDetails.Title);
+                string strThumb = MediaPortal.Util.Utils.GetCoverArtName(Thumbs.MovieTitle, titleExt);
+                string LargeThumb = MediaPortal.Util.Utils.GetLargeCoverArtName(Thumbs.MovieTitle, titleExt);
+                //// Delete old thumbs
+                //Utils.FileDelete(strThumb);
+                //Utils.FileDelete(LargeThumb);
 
                 try
                 {
@@ -6387,8 +6389,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             Picture.CreateThumbnail(wImage, LargeThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, Thumbs.SpeedThumbsLarge);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                  LogMyFilms.DebugException("Error updating MyVideos DB! - ", ex);
                 }
                 movieDetails.Director = MyFilms.r[select_item]["Director"].ToString();
                 wzone = null;

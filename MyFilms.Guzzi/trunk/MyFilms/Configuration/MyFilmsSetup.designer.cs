@@ -643,9 +643,9 @@
           this.label_VersionNumber.ForeColor = System.Drawing.SystemColors.HotTrack;
           this.label_VersionNumber.Location = new System.Drawing.Point(650, 16);
           this.label_VersionNumber.Name = "label_VersionNumber";
-          this.label_VersionNumber.Size = new System.Drawing.Size(98, 13);
+          this.label_VersionNumber.Size = new System.Drawing.Size(92, 13);
           this.label_VersionNumber.TabIndex = 34;
-          this.label_VersionNumber.Text = "Version x.x.x.x beta";
+          this.label_VersionNumber.Text = "Version x.x.x.x RC";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "MyFilms Version Number");
           // 
           // ButCopy
