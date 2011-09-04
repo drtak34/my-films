@@ -116,27 +116,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
               <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
             </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Base.12\AMCUpdater.pdb</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{26d2ab5c-d40d-457b-81bb-e5220f75a2cc}-AMCUpdater.pdb</ZipFileName>
-              <DestinationFilename>%Base%\AMCUpdater.pdb</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Base.12\MyFilms_Grabber_Interface.pdb</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{0bf20568-b913-4f0b-91a0-1c8362be90be}-MyFilms_Grabber_Interface.pdb</ZipFileName>
-              <DestinationFilename>%Base%\MyFilms_Grabber_Interface.pdb</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>plugins.12\Windows\MyFilms.pdb</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{0c163edd-c85d-487c-8006-69c3f2dccf5f}-MyFilms.pdb</ZipFileName>
-              <DestinationFilename>%Plugins%\windows\MyFilms.pdb</DestinationFilename>
-            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3545,9 +3524,9 @@ Please refer to the Wiki online documentation.</Value>
         <SubSystemsUsed>
           <Items>
             <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3564,15 +3543,15 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>2</Build>
-      <Revision>1399</Revision>
+      <Revision>1407</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation />
-    <ReleaseDate>2011-09-03T22:05:54</ReleaseDate>
+    <ReleaseDate>2011-09-04T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1399-RC-1(MP12RC).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1407-RC1(MP12RC).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -3711,27 +3690,6 @@ Please refer to the Wiki online documentation.</Value>
         <LocalFileName>Language\MyFilms\strings_hu.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{2da080e9-69d6-47e9-86c5-7899a6d2a534}-strings_hu.xml</ZipFileName>
         <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Base.12\AMCUpdater.pdb</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{26d2ab5c-d40d-457b-81bb-e5220f75a2cc}-AMCUpdater.pdb</ZipFileName>
-        <DestinationFilename>%Base%\AMCUpdater.pdb</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Base.12\MyFilms_Grabber_Interface.pdb</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0bf20568-b913-4f0b-91a0-1c8362be90be}-MyFilms_Grabber_Interface.pdb</ZipFileName>
-        <DestinationFilename>%Base%\MyFilms_Grabber_Interface.pdb</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>plugins.12\Windows\MyFilms.pdb</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0c163edd-c85d-487c-8006-69c3f2dccf5f}-MyFilms.pdb</ZipFileName>
-        <DestinationFilename>%Plugins%\windows\MyFilms.pdb</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -6698,14 +6656,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{a5180642-70bd-4c4f-87ea-8f03c212ec91}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{ea95fb22-51e8-4173-989b-dd2407d0cee9}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2bd3e693-afe6-49b6-bd38-14bb3ffcef2c}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{453fd963-0808-4c1b-b37c-f61dbec9f339}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
