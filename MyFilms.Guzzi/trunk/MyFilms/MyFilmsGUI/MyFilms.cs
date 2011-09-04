@@ -5335,7 +5335,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // MyFilmsDetail.setProcessAnimationStatus(false, m_SearchAnimation);
               
               if (dlgPrgrs != null)
-                dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
+                dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); Thread.Sleep(50); dlgPrgrs.Close(); // Done...
               GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
               {
                 // this will be executed after background thread finished

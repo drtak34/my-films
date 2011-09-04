@@ -1775,9 +1775,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgPrgrs.DisplayProgressBar = false;
               dlgPrgrs.ShowWaitCursor = true;
               dlgPrgrs.DisableCancel(true);
-              dlgPrgrs.SetHeading("MyFilms Fanart Creator");
+              dlgPrgrs.SetHeading(GUILocalizeStrings.Get(1079847)); // MyFilms Fanart Creator
               dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
-              dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
+              dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079848)); // Creating new Fanart from movie
               dlgPrgrs.Percentage = 0;
             }
             new System.Threading.Thread(delegate()
@@ -1791,7 +1791,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 bool success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Snapshotimage, file, "localfanart", currentposition);
               }
               if (dlgPrgrs != null)
-                dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
+                dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); Thread.Sleep(50); dlgPrgrs.Close(); // Done ...
               GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
               {
                 // this will be executed after background thread finished
@@ -1819,9 +1819,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgPrgrs.DisplayProgressBar = false;
               dlgPrgrs.ShowWaitCursor = true;
               dlgPrgrs.DisableCancel(true);
-              dlgPrgrs.SetHeading("MyFilms Fanart Creator");
+              dlgPrgrs.SetHeading(GUILocalizeStrings.Get(1079847)); // MyFilms Fanart Creator
               dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
-              dlgPrgrs.SetLine(1, "Creating new Fanart from movie");
+              dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079848)); // Creating new Fanart from movie
               dlgPrgrs.Percentage = 0;
             }
             new System.Threading.Thread(delegate()
@@ -1882,7 +1882,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 
                 if (dlgPrgrs != null)
-                  dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
+                  dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); Thread.Sleep(50); dlgPrgrs.Close(); // Done ...
                 GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
                 {
                   // this will be executed after background thread finished
@@ -4279,7 +4279,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
                   if (dlgPrgrs != null)
-                    dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); dlgPrgrs.SetLine(2, ""); Thread.Sleep(50); dlgPrgrs.Close();
+                    dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); dlgPrgrs.SetLine(2, ""); Thread.Sleep(50); dlgPrgrs.Close(); // Done...
                   GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
                   {
                     dlgPrgrs.ShowWaitCursor = false;
