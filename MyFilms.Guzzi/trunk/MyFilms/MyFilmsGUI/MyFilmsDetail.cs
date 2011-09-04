@@ -1765,6 +1765,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           int currentposition = (int)g_Player.CurrentPosition;
           string file = g_Player.CurrentFile;
           string title = g_Player.currentTitle;
+          Menu_CreateFanart_OnMoviePosition_Parameterized(duration, currentposition, file, title);
+        }
+
+        private void Menu_CreateFanart_OnMoviePosition_Parameterized(int duration, int currentposition, string file, string title)
+        {
+          //int duration = (int)g_Player.Duration;
+          //int currentposition = (int)g_Player.CurrentPosition;
+          //string file = g_Player.CurrentFile;
+          //string title = g_Player.currentTitle;
 
           if (!g_Player.Stopped && g_Player.HasVideo && !string.IsNullOrEmpty(g_Player.CurrentFile)) // g_Player.Paused && 
           {
@@ -6019,6 +6028,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             LogMyFilms.Debug("OnPlayBackStarted was initiated - filename: '" + filename + "'");
 
+            // attach to global action event, to handle remote keys during playback - e.g. trailer previews
+            GUIWindowManager.OnNewAction += new OnActionHandler(this.GUIWindowManager_OnNewAction);
+            
             // store informations for action at endplayback if any
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
             MyFilms.conf.StrPlayedDfltSelect = MyFilms.conf.StrDfltSelect;
@@ -6082,6 +6094,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
         {
             LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "', StrPlayedIndex: '" + MyFilms.conf.StrPlayedIndex + "'");
+
+            // detach from global action event, to handle remote keys during playback - e.g. trailer previews
+            try
+            {
+              GUIWindowManager.OnNewAction -= new OnActionHandler(this.GUIWindowManager_OnNewAction);
+            }
+            catch (Exception)
+            {
+            }  
 
             if (MyFilms.conf.StrPlayedIndex == -1)
                 return;
@@ -6339,6 +6360,45 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
         }
 
+        private void GUIWindowManager_OnNewAction(MediaPortal.GUI.Library.Action action)
+        {
+          LogMyFilms.Debug("GUIWindowManager_OnNewAction(): Action detected - '" + action.wID + "'");
+          switch (action.wID)
+          {
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_RECORD:
+              {
+                int duration = (int)g_Player.Duration;
+                int currentposition = (int)g_Player.CurrentPosition;
+                string file = g_Player.CurrentFile;
+                string title = g_Player.currentTitle;
+
+                GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+                dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079847)); // MyFilms Fanart Creator
+                dlgYesNo.SetLine(1, ""); // dlgYesNo.SetLine(1, "-> " + currentposition + " s.");
+                dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079852) + " ?"); // Create 'snapshot' fanart from current playback position
+                dlgYesNo.SetLine(3, "");
+                // dlgYesNo.SetNoLabel("Cancel");
+                dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
+                //dlgYesNo.DoModal(GetID);
+                if (!(dlgYesNo.IsConfirmed))
+                  return;
+                Menu_CreateFanart_OnMoviePosition_Parameterized(duration, currentposition, file, title);
+                break;
+              }
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PARENT_DIR:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_KEY_PRESSED:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_MUSIC_PLAY:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREV_PICTURE:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_NEXT_PICTURE:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_CONTEXT_MENU:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_NEXT_ITEM:
+            case MediaPortal.GUI.Library.Action.ActionType.ACTION_PREV_ITEM:
+            default:
+              break;
+          }
+        }
 
         private static string LoadPlaylist(string filename)
         {

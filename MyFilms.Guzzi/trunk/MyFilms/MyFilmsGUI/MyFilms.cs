@@ -605,9 +605,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Register PowerEventMode and Networkavailability Changed Handler
       InitBSHandler();
 
-      // attach to global action event, to handle remote keys during playback - e.g. trailer previews
-      GUIWindowManager.OnNewAction += new OnActionHandler(this.GUIWindowManager_OnNewAction);
-
       // Support for StartParameters - ToDo: Add start view options (implementation)
       if (PreviousWindowId != ID_MyFilms && PreviousWindowId != ID_MyFilmsDetail)
       {
@@ -1602,34 +1599,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
       }
     }
-
-    private void GUIWindowManager_OnNewAction(Action action)
-    {
-      //if (currentPlaylist != null && g_Player.HasVideo && g_Player.Player.GetType().Assembly == typeof(GUIOnlineVideos).Assembly)
-      //{
-      //  if (action.wID == Action.ActionType.ACTION_NEXT_ITEM)
-      //  {
-      //    int currentPlaylistIndex = currentPlayingItem != null ? currentPlaylist.IndexOf(currentPlayingItem) : 0;
-      //    // move to next
-      //    if (currentPlaylist.Count > currentPlaylistIndex + 1)
-      //    {
-      //      currentPlaylistIndex++;
-      //      Play_Step1(currentPlaylist[currentPlaylistIndex], GUIWindowManager.ActiveWindow == GUIOnlineVideoFullscreen.WINDOW_FULLSCREEN_ONLINEVIDEO);
-      //    }
-      //  }
-      //  else if (action.wID == Action.ActionType.ACTION_PREV_ITEM)
-      //  {
-      //    int currentPlaylistIndex = currentPlayingItem != null ? currentPlaylist.IndexOf(currentPlayingItem) : 0;
-      //    // move to previous
-      //    if (currentPlaylistIndex - 1 >= 0)
-      //    {
-      //      currentPlaylistIndex--;
-      //      Play_Step1(currentPlaylist[currentPlaylistIndex], GUIWindowManager.ActiveWindow == GUIOnlineVideoFullscreen.WINDOW_FULLSCREEN_ONLINEVIDEO);
-      //    }
-      //  }
-      //}
-    }
-
 
     ////---------------------------------------------------------------------------------------
     ////   Handle Clicked Events

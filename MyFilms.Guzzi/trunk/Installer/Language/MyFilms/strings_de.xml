@@ -74,11 +74,11 @@
     <String id="1079846">Abgeschlossen ...</String>
     <String id="1079847">MyFilms lokale Fanart Erstellung</String>
     <String id="1079848">Erstelle neue Fanart(s) vom Film</String>
-    <String id="1079849">Erstelle Fanart vom Film als Einzelbilder (lokal)</String>
+    <String id="1079849">Erstelle Fanart vom Film als Einzelbilder</String>
     <String id="1079850">Aktualisiere Online Verfügbarkeit</String>
-    <String id="1079851">Erstelle Fanart vom Film als Mosaik (lokal)</String>
-    <String id="1079852">Erstelle Fanart vom Film an aktueller Position (lokal)</String>
-    <String id="1079853">Erstelle Fanart vom Film (Mosaik/Einzel) (lokal)</String>
+    <String id="1079851">Erstelle Fanart vom Film als Mosaik</String>
+    <String id="1079852">Erstelle Fanart vom Film an aktueller Position</String>
+    <String id="1079853">Erstelle Fanart vom Film (Mosaik/Einzel)</String>
     <String id="1079854">Film Datenbank wird bereits verwendet (locked) !</String>
     <String id="1079855">Stoppe Film Datenbank Aktualisierung (aktiv)</String>
     <String id="1079856">DB Update wurde abgebrochen (AMCupdater) !</String>

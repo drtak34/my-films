@@ -26,6 +26,7 @@ namespace Grabber
     private static string IndividualShots = "";
     private static string LimitScanArea = "";
     private static int ArtworkWidth = 0;
+    private static int ArtworkHeight = 0;
     private static bool BlacklistingIsEnabled = true;
     private static bool keepMainImage = false;
 
@@ -57,11 +58,13 @@ namespace Grabber
       if (ImageType == "Cover")
       {
         ArtworkWidth = 400;
+        ArtworkHeight = 600;
         BlacklistingIsEnabled = false;
       }
       if (ImageType == "Fanart")
       {
         ArtworkWidth = 1920;
+        ArtworkHeight = 1080;
         BlacklistingIsEnabled = false;
       }
       if (KeepMainImage)
@@ -148,7 +151,7 @@ namespace Grabber
                                            PreviewColumns, 
                                            PreviewRows, 
                                            blank,
-                                           ArtworkWidth, 
+                                           0, //ArtworkWidth, 
                                            aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\")), 
                                            aVideoPath, 
                                            IndividualShots,
@@ -159,7 +162,7 @@ namespace Grabber
                                            PreviewColumns, 
                                            PreviewRows, 
                                            blank,
-                                           ArtworkWidth, 
+                                           0, //ArtworkWidth, 
                                            aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1), 
                                            aVideoPath, 
                                            IndividualShots,
@@ -195,7 +198,20 @@ namespace Grabber
           try
           {
             // remove the _s which mtn appends to its files
-            File.Move(OutputThumbtmp, OutputThumb);
+            if (ArtworkWidth > 0 && keepMainImage && SnapshotPosition == 0)
+            {
+              if (File.Exists(OutputThumbtmp))
+              {
+                Picture.CreateThumbnail(OutputThumbtmp, OutputThumb, ArtworkWidth, ArtworkHeight, 0, false); // Create a smaller Thumb for proper dimensions //Picture.CreateThumbnail(OutputThumbtmp, OutputThumb, (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
+                File.Delete(OutputThumbtmp);
+                Thread.Sleep(50);
+              }
+            }
+            else
+            {
+              File.Move(OutputThumbtmp, OutputThumb);
+            }
+
             // rename the singleimages to destination names
             string[] files = System.IO.Directory.GetFiles(OutputDirectory, searchmask + "*.*", SearchOption.TopDirectoryOnly);
             foreach (string file in files)
@@ -238,7 +254,7 @@ namespace Grabber
       if (File.Exists(aThumbPath))
       {
         // Create a smaller Thumb for proper dimensions
-        // Picture.CreateThumbnail(aThumbPath, Utils.ConvertToLargeCoverArt(aThumbPath), (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
+        //Picture.CreateThumbnail(aThumbPath, Utils.ConvertToLargeCoverArt(aThumbPath), (int)Thumbs.ThumbLargeResolution, (int)Thumbs.ThumbLargeResolution, 0, false);
         return true;
       }
       else
