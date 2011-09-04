@@ -1825,42 +1825,72 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgPrgrs.Percentage = 0;
             }
             new System.Threading.Thread(delegate()
-            {
-              string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-              if (path.Contains(";"))
-                path = path.Substring(0, path.IndexOf(";"));
-              string fanartTitle, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
-              fanartTitle = GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
-              if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart)
               {
-                // Remove_Backdrops_Fanart(fanartTitle, false); // old: Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
-                // Thread.Sleep(50);
-                bool success = false;
-                switch (FanartType)
+                string movieFile = "";
+
+                // for catalog using "storage field"
+                if (!string.IsNullOrEmpty(MyFilms.conf.StrStorage) && MyFilms.conf.StrStorage != "(none)")
+                  {
+                    try
+                    {
+                      movieFile = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
+                      if (movieFile.Contains(";"))
+                        movieFile = movieFile.Substring(0, movieFile.IndexOf(";"));
+                    }
+                    catch
+                    {
+                      movieFile = string.Empty;
+                    }
+                  }
+
+
+                // for catalog using "search" instead storage field
+                if (string.IsNullOrEmpty(movieFile)) // use search method only if required...
                 {
-                    
-                  case GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages:
-                    success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages, path, "localfanart", 0);
-                    break;
-                  case GrabUtil.Artwork_Fanart_Type.Multiimage:
-                    success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Multiimage, path, "localfanart", 0);
-                    break;
-                  case GrabUtil.Artwork_Fanart_Type.MultipleSingleImages:
-                    success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultipleSingleImages, path, "localfanart", 0);
-                    break;
+                  if ((MyFilms.conf.SearchFile == "True") || (MyFilms.conf.SearchFile == "yes"))
+                  {
+                    string movieName = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.ItemSearchFile].ToString();
+                    movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
+                    if (MyFilms.conf.ItemSearchFile.Length > 0)
+                    {
+                      movieFile = Search_FileName(movieName, MyFilms.conf.StrDirStor).Trim();
+                    }
+                  }
                 }
-              }
-              
-              if (dlgPrgrs != null)
-                dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
-              GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
-              {
-                // this will be executed after background thread finished
-                doUpdateDetailsViewByFinishEvent = true;
-                if (DetailsUpdated != null)
-                  DetailsUpdated(true); // will launch afficher_detail(true) via message handler
-                return 0;
-              }, 0, 0, null);
+
+                string fanartTitle, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
+                fanartTitle = GetFanartTitle(MyFilms.r[MyFilms.conf.StrIndex], out wtitle, out wttitle, out wftitle, out wyear, out wdirector);
+                LogMyFilms.Debug("Menu_CreateFanart(): movieFile: '" + movieFile + "', fanartTitle: '" + fanartTitle + "'");
+                if (!string.IsNullOrEmpty(fanartTitle) && MyFilms.conf.StrFanart && !string.IsNullOrEmpty(movieFile))
+                {
+                  // Remove_Backdrops_Fanart(fanartTitle, false); // old: Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
+                  // Thread.Sleep(50);
+                  bool success = false;
+                  switch (FanartType)
+                  {
+                      
+                    case GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages:
+                      success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultiImageWithMultipleSingleImages, movieFile, "localfanart", 0);
+                      break;
+                    case GrabUtil.Artwork_Fanart_Type.Multiimage:
+                      success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.Multiimage, movieFile, "localfanart", 0);
+                      break;
+                    case GrabUtil.Artwork_Fanart_Type.MultipleSingleImages:
+                      success = GrabUtil.GetFanartFromMovie(fanartTitle, wyear.ToString(), MyFilms.conf.StrPathFanart, GrabUtil.Artwork_Fanart_Type.MultipleSingleImages, movieFile, "localfanart", 0);
+                      break;
+                  }
+                }
+                
+                if (dlgPrgrs != null)
+                  dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, "done ..."); Thread.Sleep(50); dlgPrgrs.Close();
+                GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+                {
+                  // this will be executed after background thread finished
+                  doUpdateDetailsViewByFinishEvent = true;
+                  if (DetailsUpdated != null)
+                    DetailsUpdated(true); // will launch afficher_detail(true) via message handler
+                  return 0;
+                }, 0, 0, null);
             }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
             return;
           }  

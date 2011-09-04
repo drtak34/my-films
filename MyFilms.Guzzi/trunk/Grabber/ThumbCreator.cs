@@ -64,10 +64,15 @@ namespace Grabber
         ArtworkWidth = 1920;
         BlacklistingIsEnabled = false;
       }
-      if (KeepMainImage) 
+      if (KeepMainImage)
+      {
         keepMainImage = true;
+      }
       else
+      {
         keepMainImage = false;
+        ArtworkWidth = 0; // to get single images in original size
+      }
 
       LogMyFilms.Debug("VideoThumbCreator: Settings loaded - using {0} columns and {1} rows.", PreviewColumns, PreviewRows);
       //if (NeedsConfigRefresh)
@@ -197,6 +202,11 @@ namespace Grabber
             {
               string filenew = file.Replace(searchmask, OutputName);
               File.Move(file, filenew);
+            }
+            if (!keepMainImage)
+            {
+              File.Delete(OutputThumb);
+              Thread.Sleep(50);
             }
           }
           catch (FileNotFoundException)
