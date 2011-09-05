@@ -9362,7 +9362,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     
     private void FanartTimerEvent(object state)
     {
-      if (backdrop.Filename != null)
+      if (backdrop.Filename != null && GUIWindowManager.ActiveWindow == ID_MyFilms)
       {
         //LogMyFilms.Debug("(FanartTimerEvent): ToggleFanart triggered for '" + facadeView.SelectedListItem.Label + "' !");
         bool success = ToggleFanart();
@@ -9371,7 +9371,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        LogMyFilms.Debug("(FanartTimerEvent): ToggleFanart NOT triggered, but not executed due to backdrop filename not set !");
+        LogMyFilms.Debug("(FanartTimerEvent): ToggleFanart triggered, but NOT executed due to MyFilms Main window not active (or backdrop filename not set)!");
       }
     }
 
