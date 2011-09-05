@@ -196,7 +196,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public const int ID_MyFilmsActors = 7989;
     public const int ID_MyFilmsThumbs = 7990;
     public const int ID_MyFilmsActorsInfo = 7991;
-    public const int ID_MyFilmsArtworkSelection = 7992;
+    public const int ID_MyFilmsFanart = 7992;
 
     public const int ID_BrowseTheWeb = 54537689;
     public const int ID_OnlineVideos = 4755;
@@ -693,7 +693,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             Configuration.CurrentConfig = newConfig;
             InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
-            InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
+            if (string.IsNullOrEmpty(loadParamInfo.MovieID))
+              InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
+            else
+              InitialStart = false;
             Load_Config(newConfig, true, loadParamInfo);
             Fin_Charge_Init(true, true);
           }
@@ -741,22 +744,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (PreviousWindowId != ID_MyFilmsDetail && loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> jump to details screen !
       {
         LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
-        // facade index is set in filmlist loading - only launching details necessary !
+        // facade index is alreadey set in filmlist loading - only launching details necessary !
 
         if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
         {
-          int index = -1;
-          foreach (DataRow sr in r)
-          {
-            index += 1;
-            if (sr["number"].ToString() == loadParamInfo.MovieID)
-            {
-              // bool success = int.TryParse(loadParamInfo.MovieID, out index);
-              conf.StrIndex = index;
-              conf.StrTIndex = sr[conf.StrTitle1].ToString();
-            }
-          }
-          if (index == -1)
+          if (r.Length == 0)
             GUIWindowManager.ShowPreviousWindow();
           if (loadParamInfo.Play == "true")
             MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null);
@@ -2047,16 +2039,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       foreach (DataRow sr in r)
       {
-        if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
-        {
-          if (sr["number"].ToString() == loadParamInfo.MovieID)
-          {
-            int index = 0;
-            bool success = int.TryParse(loadParamInfo.MovieID, out index);
-            conf.StrIndex = index;
-            conf.StrTIndex = sr[conf.StrTitle1].ToString();
-          }
-        }
+        //if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
+        //{
+        //  string movieNumberString = Int32.Parse(sr["Number"].ToString()).ToString();
+        //  if (movieNumberString == loadParamInfo.MovieID) //if (sr["number"].ToString() == loadParamInfo.MovieID)
+        //  {
+        //    int index = 0;
+        //    bool success = int.TryParse(loadParamInfo.MovieID, out index);
+        //    conf.StrIndex = index;
+        //    conf.StrTIndex = sr[conf.StrTitle1].ToString();
+        //  }
+        //}
 
         tmpwatched = false; 
         number++;
@@ -4092,7 +4085,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BtnSrtBy.SortChanged += new SortEventHandler(SortChanged);
       InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
 
-      if (conf.Boolselect) // Groupviews ?
+      if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> set index to selected film!
+      {
+        LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
+        // facade index is set in filmlist loading - only launching details necessary !
+
+        if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
+          {
+            int index = -1;
+            foreach (DataRow sr in r)
+            {
+              index += 1;
+              // string movieNumber = sr["Number"].ToString();
+              // string movieName = sr[conf.StrTitle1].ToString();
+              string movieNumberString = Int32.Parse(sr["Number"].ToString()).ToString();
+              if (movieNumberString == loadParamInfo.MovieID)
+              {
+                // bool success = int.TryParse(loadParamInfo.MovieID, out index);
+                conf.StrIndex = index;
+                conf.StrTIndex = sr[conf.StrTitle1].ToString();
+                LogMyFilms.Debug("Fin_Charge_Init(): loadParam - set movie '" + conf.StrTIndex + "' by index '" + conf.StrIndex + "'");
+              }
+            }
+          }
+        currentListLevel = Listlevel.Movie; // set as default, if no group view
+        GetFilmList(conf.StrIndex);
+        SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+      }
+      else if (conf.Boolselect) // Groupviews ?
       {
         // Hack to get persons in ASC order after returning from external plugins ...
         if (conf.WStrSort.ToUpper() == "ACTORS" || conf.WStrSort.ToUpper() == "PRODUCER" || conf.WStrSort.ToUpper() == "DIRECTOR" || conf.WStrSort.ToUpper() == "WRITER")
@@ -4112,7 +4132,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         Change_LayOut(MyFilms.conf.StrLayOut);
         currentListLevel = Listlevel.Movie; // set as default, if no group view
-        if (!(LoadDfltSlct))                       // Defaultview not selected
+        if (!(LoadDfltSlct)) // Defaultview not selected
         {
           GetFilmList(conf.StrIndex);
           SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
