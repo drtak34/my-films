@@ -750,9 +750,11 @@ namespace MyFilmsPlugin.MyFilms
               string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
               string CatalogTmp = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
               string FileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
+              bool ReadOnly = false;
 
               if (FileType != "0" && FileType != "10")
               {
+                ReadOnly = true;
                 if (!string.IsNullOrEmpty(CatalogTmp))
                   Catalog = CatalogTmp;
                 else if (!string.IsNullOrEmpty(Catalog) && Catalog.Contains("\\"))
@@ -773,9 +775,9 @@ namespace MyFilmsPlugin.MyFilms
               string Storage = XmlConfig.ReadXmlConfig("MyFilms", config, "AntStorage", string.Empty);
 
               if (TraktEnabled)
-                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "', CatalogType = '" + FileType + "', Catalogfile = '" + Catalog + "'");
+                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', CatalogType = '" + FileType + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
               else
-                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', Config = '" + config + "', CatalogType = '" + FileType + "'");
+                LogMyFilms.Debug("Trakt:GetMovies() - Sync = '" + TraktEnabled + "', CatalogType = '" + FileType + "', Config = '" + config + "'");
               if (System.IO.File.Exists(Catalog) && (TraktEnabled || (!traktOnly && RecentAddedAPIEnabled)))
               {
                 _dataLock.EnterReadLock();
@@ -813,6 +815,7 @@ namespace MyFilmsPlugin.MyFilms
                     {
                       MFMovie movie = new MFMovie();
                       movie.Config = config; // MF config context
+                      movie.ReadOnly = ReadOnly; // is true for readonly ctalog types
                       if (!string.IsNullOrEmpty(sr["Number"].ToString()))
                         movie.ID = Int32.Parse(sr["Number"].ToString());
                       else movie.ID = 0;
@@ -841,8 +844,7 @@ namespace MyFilmsPlugin.MyFilms
                       float rating = 0;
                       bool success = float.TryParse(sr["Rating"].ToString(), out rating);
                       if (!success) rating = 0;
-                      movie.Rating = rating;
-                      // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
+                      movie.Rating = rating; // movie.Rating = (float)Double.Parse(sr["Rating"].ToString());
 
                       string mediapath = string.Empty;
                       if (!string.IsNullOrEmpty(Storage) && Storage != "(none)")
@@ -850,12 +852,30 @@ namespace MyFilmsPlugin.MyFilms
                         mediapath = sr[Storage].ToString();
                         if (mediapath.Contains(";")) // take the first source file
                           mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
+                        movie.File = mediapath;
                       }
-                      movie.File = mediapath;
+                      if (string.IsNullOrEmpty(mediapath)) // e.g. offline media files
+                        movie.File = movie.Title + " {offline} [" + movie.ID + "]";
+
+                      string path = "";
+                      if (!string.IsNullOrEmpty(mediapath))
+                      {
+                        try
+                        {
+                          path = System.IO.Path.GetDirectoryName(mediapath);
+                        }
+                        catch (Exception)
+                        {
+                          movie.Path = "{search}";
+                        }
+                        movie.Path = path;
+                      }
+                      else
+                      {
+                        movie.Path = "{offline}";
+                      }
 
                       string IMDB = "";
-
-
                       if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
                         IMDB = sr["IMDB_Id"].ToString();
 
@@ -1003,9 +1023,15 @@ namespace MyFilmsPlugin.MyFilms
                       }
                       movie.File = mediapath;
 
+                      string path = "";
+                      try
+                      {
+                        path = System.IO.Path.GetDirectoryName(mediapath);
+                      }
+                      catch (Exception) {}
+
+                      
                       string IMDB = "";
-
-
                       if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
                         IMDB = sr["IMDB_Id"].ToString();
 
@@ -1230,6 +1256,7 @@ namespace MyFilmsPlugin.MyFilms
     private string _mFanart = string.Empty;
     private string _mConfig = string.Empty;
     private string _mUsername = string.Empty;
+    private bool _mReadOnly = false;
     #endregion
 
     public MFMovie() { }
@@ -1336,6 +1363,12 @@ namespace MyFilmsPlugin.MyFilms
       get { return _mUsername; }
       set { _mUsername = value; }
     }
+
+    public bool ReadOnly
+    {
+      get { return _mReadOnly; }
+      set { _mReadOnly = value; }
+    }
     #endregion
 
     public void Reset()
@@ -1352,6 +1385,7 @@ namespace MyFilmsPlugin.MyFilms
       _mFanart = string.Empty;
       _mConfig = string.Empty;
       _mUsername = string.Empty;
+      _mReadOnly = false;
     }
 
     public void Commit()
@@ -1365,7 +1399,8 @@ namespace MyFilmsPlugin.MyFilms
           //Configuration.Current_Config();
           //MyFilms.Load_Config(Configuration.config, true);
           string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
-          string StrFileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
+          string CatalogTmp = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalogTemp", string.Empty);
+          string FileType = XmlConfig.ReadXmlConfig("MyFilms", config, "CatalogType", "0");
           bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
           bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
           string StrTitle1 = XmlConfig.ReadXmlConfig("MyFilms", config, "AntTitle1", string.Empty);
@@ -1374,6 +1409,22 @@ namespace MyFilmsPlugin.MyFilms
           string GlobalUnwatchedOnlyValue = XmlConfig.ReadXmlConfig("MyFilms", config, "GlobalUnwatchedOnlyValue", "false");
           string WatchedField = XmlConfig.ReadXmlConfig("MyFilms", config, "WatchedField", "Checked");
           string UserProfileName = XmlConfig.ReadXmlConfig("MyFilms", config, "UserProfileName", "");
+
+          if (FileType != "0" && FileType != "10")
+          {
+            if (!string.IsNullOrEmpty(CatalogTmp))
+              Catalog = CatalogTmp;
+            else if (!string.IsNullOrEmpty(Catalog) && Catalog.Contains("\\"))
+            {
+              string Path = System.IO.Path.GetDirectoryName(Catalog);
+              Catalog = Path + "\\" + Catalog.Substring(Catalog.LastIndexOf(@"\") + 1, Catalog.Length - Catalog.LastIndexOf(@"\") - 5) + "_tmp.xml";
+            }
+            else
+            {
+              LogMyFilms.Debug("Catalog Type is readonly (EC) - tmp-Catalog not found - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+              return;
+            }
+          }
 
           LogMyFilms.Debug("Commit() : TraktSync = '" + TraktEnabled + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
           LogMyFilms.Debug("Commit() : Update requested for Movie = '" + _mStrTitle + "' (" + _mIYear + "), IMDB = '" + _mStrIMDBNumber + "', Watched = '" + _mIWatched + "'");
@@ -1385,11 +1436,11 @@ namespace MyFilmsPlugin.MyFilms
               LogMyFilms.Debug("Trakt not enabled for this config - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
               return;
             }
-            if (StrFileType != "0")
-            {
-              LogMyFilms.Debug("Catalog Type is readonly (EC) - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
-              return;
-            }
+            //if (StrFileType != "0" && StrFileType != "10")
+            //{
+            //  LogMyFilms.Debug("Catalog Type is readonly (EC) - Update rejected ! - Movie = '" + _mStrTitle + "', Config = '" + config + "', Catalogfile = '" + Catalog + "'");
+            //  return;
+            //}
             BaseMesFilms._dataLock.EnterReadLock();
             try
             {
