@@ -2011,8 +2011,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (string.IsNullOrEmpty(mediapath)) // e.g. offline media files
             movie.File = movie.Title + " {offline} [" + movie.ID + "]";
 
-          if (!string.IsNullOrEmpty(g_Player.CurrentFile))
-            movie.File = g_Player.currentFileName;
+          string currentPlayerFile = g_Player.CurrentFile;
+          if (!string.IsNullOrEmpty(currentPlayerFile))
+            movie.File = currentPlayerFile;
             
           string path = "";
           if (!string.IsNullOrEmpty(mediapath))
@@ -2023,7 +2024,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             catch (Exception)
             {
-              movie.Path = "{search}";
+              if (!string.IsNullOrEmpty(movie.File))
+                try
+                {
+                  path = System.IO.Path.GetDirectoryName(movie.File);
+                }
+                catch (Exception)
+                {
+                  path = "{search}";
+                }
             }
             movie.Path = path;
           }
@@ -2031,8 +2040,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             movie.Path = "{offline}";
           }
-
-
 
           string IMDB = "";
           if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
@@ -2050,7 +2057,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!string.IsNullOrEmpty(sr["TMDB_Id"].ToString()))
             movie.TMDBNumber = sr["TMDB_Id"].ToString();
           movie.DateAdded = sr["Date"].ToString();
-          
+
+          LogMyFilms.Info("GetMovieFromRecord(): Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', file = '" + movie.File + "', path = '" + movie.Path + "'");
           return movie;
         }
       
@@ -6088,7 +6096,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MFMovie movie = new MFMovie();
             movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
             if (MovieStarted != null && MyFilms.conf.AllowTraktSync)
+            {
               MovieStarted(movie);
+              LogMyFilms.Debug("OnPlayBackStarted(): Fired 'MovieStarted' event with movie = '" + movie.Title + "'");
+            }
             
             // store informations for action at endplayback if any
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
@@ -6414,7 +6425,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   MFMovie movie = new MFMovie();
                   movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrPlayedIndex]);
                   if (MovieWatched != null && MyFilms.conf.AllowTraktSync)
+                  {
                     MovieWatched(movie);
+                    LogMyFilms.Debug("UpdateOnPlayEnd(): Fired 'MovieWatched' event with movie = '" + movie.Title + "'");
+                  }
                 }
                 else
                 {
@@ -6422,7 +6436,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   MFMovie movie = new MFMovie();
                   movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrPlayedIndex]);
                   if (MovieStopped != null && MyFilms.conf.AllowTraktSync)
+                  {
                     MovieStopped(movie);
+                    LogMyFilms.Debug("UpdateOnPlayEnd(): Fired 'MovieStopped' event with movie = '" + movie.Title + "'");
+                  }
                 }
 
                 MyFilms.conf.StrPlayedIndex = -1;
