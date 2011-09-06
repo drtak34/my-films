@@ -6087,7 +6087,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // tell any listeners that user rated the movie
             MFMovie movie = new MFMovie();
             movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
-            if (MovieStarted != null && && MyFilms.conf.AllowTraktSync)
+            if (MovieStarted != null && MyFilms.conf.AllowTraktSync)
               MovieStarted(movie);
             
             // store informations for action at endplayback if any
