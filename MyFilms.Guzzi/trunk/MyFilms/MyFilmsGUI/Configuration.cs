@@ -1423,6 +1423,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           get { return trailerList; }
           set { trailerList = value; }
         }
+        private bool _MyFilmsPlaybackActive = false;
+        public bool MyFilmsPlaybackActive
+        {
+          get { return _MyFilmsPlaybackActive; }
+          set { _MyFilmsPlaybackActive = value; }
+        }
 
         #region GetSet for Network and Powermode
         private bool bResumeFromStandby = false;

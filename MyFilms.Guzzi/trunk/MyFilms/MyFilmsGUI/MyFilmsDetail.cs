@@ -163,7 +163,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool PlayBackEvents_Subscribed = false;
         private bool doUpdateDetailsViewByFinishEvent = false;
 
-
         #region Enums
         private enum Grabber_Output : int
         {
@@ -313,8 +312,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static event RatingEventDelegate RateItem;
         public delegate void RatingEventDelegate(MFMovie movie, string rating);
 
-        public static event PlaybackStartedEventDelegate PlaybackStartedMovie;
-        public delegate void PlaybackStartedEventDelegate(MFMovie movie);
+        public static event MovieStartedEventDelegate MovieStarted;
+        public delegate void MovieStartedEventDelegate(MFMovie movie);
+
+        public static event MovieStoppedEventDelegate MovieStopped;
+        public delegate void MovieStoppedEventDelegate(MFMovie movie);
+
+        public static event MovieWatchedEventDelegate MovieWatched;
+        public delegate void MovieWatchedEventDelegate(MFMovie movie);
+
 
         public static event DetailsUpdatedEventDelegate DetailsUpdated;
         public delegate void DetailsUpdatedEventDelegate(bool searchPicture);
@@ -4901,6 +4907,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //clearGUIProperty("db." + dc.ColumnName.ToLower() + ".label"); // Don't Clear Labels - they're only set once when plugin start !
               clearGUIProperty("db." + dc.ColumnName.ToLower() + ".value", log);
             }
+            
+            MyFilms.currentMovie.Reset();
 
             //Clear userdefined properties
             clearGUIProperty("db.calc.format.value", log);
@@ -4946,7 +4954,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("Load_Detailed_DB - ItemId: '" + ItemId.ToString() + "', Details (wrep): '" + wrep.ToString() + "'");
             string wstrformat = "";
             AntMovieCatalog ds = new AntMovieCatalog();
-            
+
             foreach (DataColumn dc in ds.Movie.Columns)
             {
                 string wstring = "";
@@ -5370,6 +5378,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
             }
+            //// for catalog using "search" instead storage field
+            //if (string.IsNullOrEmpty(MyFilms.currentMovie.File)) // use search method only if required...
+            //{
+            //  if ((MyFilms.conf.SearchFile == "True") || (MyFilms.conf.SearchFile == "yes"))
+            //  {
+            //    string movieName = MyFilms.r[ItemId][MyFilms.conf.ItemSearchFile].ToString();
+            //    movieName = movieName.Substring(movieName.LastIndexOf(MyFilms.conf.TitleDelim) + 1).Trim();
+            //    if (MyFilms.conf.ItemSearchFile.Length > 0)
+            //    {
+            //      MyFilms.currentMovie.File = Search_FileName(movieName, MyFilms.conf.StrDirStor).Trim();
+            //    }
+            //  }
+            //}
         }
 
         //-------------------------------------------------------------------------------------------
@@ -5629,8 +5650,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   // ask for start movie Index
 
+                  // Set Playbackhandler to active
+                  MyFilms.conf.MyFilmsPlaybackActive = true;
                   // play movie...
-
                   PlayMovieFromPlayList(NoResumeMovie, IMovieIndex - 1);
                 }
             }
@@ -6036,16 +6058,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                 }
             }
-            // update the MP Video Database for OSD view during playing // ToDo: Check proper fit for changes in Mediaportal 1.2 by Deda !!!
+            // update the MP Video Database for OSD view during playing
             update_database(fileName, select_item, -1);
             newItems.Add(fileName);
         }
 
         bool PlayBackEventIsOfConcern(g_Player.MediaType type, string filename)
         {
+          bool playbackeventIsOfConcern = false;
           if (string.IsNullOrEmpty(filename)) return false;
-
-          return (MyFilms.currentMovie != null && type == g_Player.MediaType.Video && MyFilms.currentMovie.File.Contains(filename));
+          if ((MyFilms.currentMovie != null && type == g_Player.MediaType.Video && (MyFilms.currentMovie.File.Contains(filename) || MyFilms.conf.MyFilmsPlaybackActive))) 
+            playbackeventIsOfConcern = true;
+          return playbackeventIsOfConcern;
         }
 
         private void OnPlayBackStarted(MediaPortal.Player.g_Player.MediaType type, string filename)
@@ -6063,8 +6087,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // tell any listeners that user rated the movie
             MFMovie movie = new MFMovie();
             movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
-            if (PlaybackStartedMovie != null)
-              PlaybackStartedMovie(movie);
+            if (MovieStarted != null)
+              MovieStarted(movie);
             
             // store informations for action at endplayback if any
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
@@ -6130,6 +6154,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "', StrPlayedIndex: '" + MyFilms.conf.StrPlayedIndex + "'");
 
+            MyFilms.conf.MyFilmsPlaybackActive = false;  
             // detach from global action event, to handle remote keys during playback - e.g. trailer previews
             try
             {
@@ -6383,6 +6408,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   afficher_detail(true);
                   //GUIWindowManager.Process(); // Enabling creates lock in handler !!!
                 }
+                if (ended || (stopped && playTimePercentage >= 80))
+                {
+                  // tell any listeners that movie is watched
+                  MFMovie movie = new MFMovie();
+                  movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrPlayedIndex]);
+                  if (MovieWatched != null)
+                    MovieWatched(movie);
+                }
+                else
+                {
+                  // tell any listeners that movie is watched
+                  MFMovie movie = new MFMovie();
+                  movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrPlayedIndex]);
+                  if (MovieStopped != null)
+                    MovieStopped(movie);
+                }
+
                 MyFilms.conf.StrPlayedIndex = -1;
                 MyFilms.conf.StrPlayedDfltSelect = string.Empty;
                 MyFilms.conf.StrPlayedSelect = string.Empty;
