@@ -313,6 +313,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static event RatingEventDelegate RateItem;
         public delegate void RatingEventDelegate(MFMovie movie, string rating);
 
+        public static event PlaybackStartedEventDelegate PlaybackStartedMovie;
+        public delegate void PlaybackStartedEventDelegate(MFMovie movie);
+
         public static event DetailsUpdatedEventDelegate DetailsUpdated;
         public delegate void DetailsUpdatedEventDelegate(bool searchPicture);
 
@@ -985,7 +988,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     string value = dlgRating.Rating.ToString();
                     if (RateItem != null)
                       RateItem(movie, value);
-
                     break;
 
               case "updatesmenu":
@@ -1956,6 +1958,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private static MFMovie GetMovieFromRecord(DataRow sr)
         {
           MFMovie movie = new MFMovie();
+          movie.Config = Configuration.CurrentConfig;
           if (!string.IsNullOrEmpty(sr["Number"].ToString()))
             movie.ID = Int32.Parse(sr["Number"].ToString());
           else movie.ID = 0;
@@ -1998,6 +2001,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               mediapath = mediapath.Substring(0, mediapath.IndexOf(";"));
           }
           movie.File = mediapath;
+
+          if (string.IsNullOrEmpty(mediapath)) // e.g. offline media files
+            movie.File = movie.Title + " {offline} [" + movie.ID + "]";
+
+          if (!string.IsNullOrEmpty(g_Player.CurrentFile))
+            movie.File = g_Player.currentFileName;
+            
+          string path = "";
+          if (!string.IsNullOrEmpty(mediapath))
+          {
+            try
+            {
+              path = System.IO.Path.GetDirectoryName(mediapath);
+            }
+            catch (Exception)
+            {
+              movie.Path = "{search}";
+            }
+            movie.Path = path;
+          }
+          else
+          {
+            movie.Path = "{offline}";
+          }
+
+
 
           string IMDB = "";
           if (!string.IsNullOrEmpty(sr["IMDB_Id"].ToString()))
@@ -6030,6 +6059,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             // attach to global action event, to handle remote keys during playback - e.g. trailer previews
             GUIWindowManager.OnNewAction += new OnActionHandler(this.GUIWindowManager_OnNewAction);
+
+            // tell any listeners that user rated the movie
+            MFMovie movie = new MFMovie();
+            movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
+            if (PlaybackStartedMovie != null)
+              PlaybackStartedMovie(movie);
             
             // store informations for action at endplayback if any
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
