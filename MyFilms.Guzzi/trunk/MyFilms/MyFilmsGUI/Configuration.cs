@@ -1167,8 +1167,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private int strPlayedIndex = int.MinValue;
         public int StrPlayedIndex
         {
-            get { return strPlayedIndex; }
-            set { strPlayedIndex = value; }
+          get { return strPlayedIndex; }
+          set { strPlayedIndex = value; }
+        }
+        private MFMovie strPlayedMovie = null;
+        public MFMovie StrPlayedMovie
+        {
+          get { return strPlayedMovie; }
+          set { strPlayedMovie = value; }
         }
         private bool strFanart = false;
         public bool StrFanart

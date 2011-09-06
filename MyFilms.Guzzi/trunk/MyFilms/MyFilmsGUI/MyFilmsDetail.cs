@@ -6102,6 +6102,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             
             // store informations for action at endplayback if any
+            MyFilms.conf.StrPlayedMovie = movie; // store movie object
             MyFilms.conf.StrPlayedIndex = MyFilms.conf.StrIndex;
             MyFilms.conf.StrPlayedDfltSelect = MyFilms.conf.StrDfltSelect;
             MyFilms.conf.StrPlayedSelect = MyFilms.conf.StrFilmSelect;
@@ -6433,8 +6434,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 else
                 {
                   // tell any listeners that movie is watched
-                  MFMovie movie = new MFMovie();
-                  movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrPlayedIndex]);
+                  MFMovie movie = MyFilms.conf.StrPlayedMovie;
                   if (MovieStopped != null && MyFilms.conf.AllowTraktSync)
                   {
                     MovieStopped(movie);
@@ -6442,6 +6442,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                 }
 
+                MyFilms.conf.StrPlayedMovie = null;  
                 MyFilms.conf.StrPlayedIndex = -1;
                 MyFilms.conf.StrPlayedDfltSelect = string.Empty;
                 MyFilms.conf.StrPlayedSelect = string.Empty;
