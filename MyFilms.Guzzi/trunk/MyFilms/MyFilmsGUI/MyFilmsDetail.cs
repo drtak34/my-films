@@ -6423,8 +6423,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (ended || (stopped && playTimePercentage >= 80))
                 {
                   // tell any listeners that movie is watched
-                  MFMovie movie = new MFMovie();
-                  movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrPlayedIndex]);
+                  MFMovie movie = MyFilms.conf.StrPlayedMovie;
                   if (MovieWatched != null && MyFilms.conf.AllowTraktSync)
                   {
                     MovieWatched(movie);
