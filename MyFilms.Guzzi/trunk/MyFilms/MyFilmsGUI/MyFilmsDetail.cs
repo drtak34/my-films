@@ -321,7 +321,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         public static event MovieWatchedEventDelegate MovieWatched;
         public delegate void MovieWatchedEventDelegate(MFMovie movie);
 
-
+        // MF event for async updates
         public static event DetailsUpdatedEventDelegate DetailsUpdated;
         public delegate void DetailsUpdatedEventDelegate(bool searchPicture);
 
@@ -6087,7 +6087,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // tell any listeners that user rated the movie
             MFMovie movie = new MFMovie();
             movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrIndex]);
-            if (MovieStarted != null)
+            if (MovieStarted != null && && MyFilms.conf.AllowTraktSync)
               MovieStarted(movie);
             
             // store informations for action at endplayback if any
@@ -6413,7 +6413,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   // tell any listeners that movie is watched
                   MFMovie movie = new MFMovie();
                   movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrPlayedIndex]);
-                  if (MovieWatched != null)
+                  if (MovieWatched != null && MyFilms.conf.AllowTraktSync)
                     MovieWatched(movie);
                 }
                 else
@@ -6421,7 +6421,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   // tell any listeners that movie is watched
                   MFMovie movie = new MFMovie();
                   movie = GetMovieFromRecord(MyFilms.r[MyFilms.conf.StrPlayedIndex]);
-                  if (MovieStopped != null)
+                  if (MovieStopped != null && MyFilms.conf.AllowTraktSync)
                     MovieStopped(movie);
                 }
 
