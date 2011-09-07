@@ -1162,6 +1162,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{cfcbc129-e1e1-4267-8af1-789175748b64}-MyFilms.png</ZipFileName>
               <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\MyFilms.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\MyFilmsFanArt.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{165e9e67-693e-4d3e-a6a3-0ea5aec9189c}-MyFilmsFanArt.xml</ZipFileName>
+              <DestinationFilename>%Skin%\Black Glass\MyFilmsFanArt.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3543,15 +3550,15 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>2</Build>
-      <Revision>1407</Revision>
+      <Revision>1428</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.</ExtensionDescription>
     <VersionDescription>This Version is for Testing only - please do not use in production. Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation />
-    <ReleaseDate>2011-09-04T22:05:54</ReleaseDate>
+    <ReleaseDate>2011-09-07T22:05:54</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1407-RC1(MP12RC).mpe1</Location>
+    <Location>D:\Entwicklung\MyFilms\trunk\Installer\MyFilms-5.0.2.1428-RC1a(MP12RC).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -4726,6 +4733,13 @@ Please refer to the Wiki online documentation.</Value>
         <LocalFileName>Skin.12\Black Glass\Media\MyFilms\MyFilms.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{cfcbc129-e1e1-4267-8af1-789175748b64}-MyFilms.png</ZipFileName>
         <DestinationFilename>%Skin%\Black Glass\Media\MyFilms\MyFilms.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\MyFilmsFanArt.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{165e9e67-693e-4d3e-a6a3-0ea5aec9189c}-MyFilmsFanArt.xml</ZipFileName>
+        <DestinationFilename>%Skin%\Black Glass\MyFilmsFanArt.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -6656,14 +6670,14 @@ Please refer to the Wiki online documentation.</Value>
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ea95fb22-51e8-4173-989b-dd2407d0cee9}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{14f5e148-2df3-45ee-ae53-df3fa6cb638b}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{453fd963-0808-4c1b-b37c-f61dbec9f339}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{1956e47f-c297-4dd3-98cc-33b75aaff958}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>
