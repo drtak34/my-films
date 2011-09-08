@@ -23,11 +23,11 @@
     <String id="299">Játékidő</String>
     <String id="330">Ez eltart egy ideig...</String>
     <String id="342">Filmek</String>
-    <String id="344">Színészek</String>
+    <String id="344">színészekre</String>
     <String id="345">Év</String>
     <String id="366">Sorrend: Év</String>
     <String id="367">Sorrend: Értékelés</String>
-    <String id="369">Cím</String>
+    <String id="369">címre</String>
     <String id="417">Megjelenítés: Nagy ikonok</String>
     <String id="432">Film törlése az adatbázisból</String>
     <String id="433">Biztosan eltávolítod?</String>
@@ -283,7 +283,7 @@
     <String id="10798779">Javaslatok</String>
     <String id="10798780">Népszerű filmek</String>
     <String id="10798781">Megnézendők listája</String>
-    <String id="10798782">Shouts</String>
+    <String id="10798782">Kommentek</String>
     <String id="10798783">Film hozzáadása a megnézendőkhöz</String>
     <String id="10798784">Film értékelése</String>
     <String id="10798790">Elsődleges cím</String>
