@@ -3550,7 +3550,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>3</Build>
-      <Revision>1428</Revision>
+      <Revision>1434</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3564,7 +3564,7 @@ Please report bugs in MyFilms forum.
 </VersionDescription>
     <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-5.0.2.1428-RC1a%28MP12RC%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-09-07T22:05:54</ReleaseDate>
+    <ReleaseDate>2011-09-08T08:47:01.2596356+02:00</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-RC1a(MP12).mpe1</Location>
     <Params>

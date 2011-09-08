@@ -16,6 +16,16 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AMCUpdaterSetup", "AMCupdat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyFilmsPlugin", "MyFilms\MyFilmsPlugin.csproj", "{20BCDBE0-0812-4235-9330-40B8E570DAE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build-All", "Build-All\Build-All.csproj", "{D950360A-F886-4B3A-A40E-54500FC2FCAF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4} = {6B6B4D52-6F95-4ACD-9F65-9AB06D8F9DF4}
+		{37FA1F82-54BF-4A6B-AC14-90C09FBEB106} = {37FA1F82-54BF-4A6B-AC14-90C09FBEB106}
+		{CFA9C7A2-D09D-409C-9E50-862D72CB9F48} = {CFA9C7A2-D09D-409C-9E50-862D72CB9F48}
+		{307F46D7-0620-4EA0-BBA8-8A27037CA75D} = {307F46D7-0620-4EA0-BBA8-8A27037CA75D}
+		{20BCDBE0-0812-4235-9330-40B8E570DAE1} = {20BCDBE0-0812-4235-9330-40B8E570DAE1}
+		{92C183EE-636F-4A55-A6AB-363CDA606110} = {92C183EE-636F-4A55-A6AB-363CDA606110}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (Guzzi)|Any CPU = Debug (Guzzi)|Any CPU
@@ -288,6 +298,43 @@ Global
 		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|x86
 		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|x86
 		{20BCDBE0-0812-4235-9330-40B8E570DAE1}.UseCaptureDefintionsRelease|x86.Build.0 = Release|x86
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug (Guzzi)|Any CPU.ActiveCfg = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug (Guzzi)|Any CPU.Build.0 = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug (Guzzi)|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug (Guzzi)|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug (Guzzi)|x64.ActiveCfg = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug (Guzzi)|x86.ActiveCfg = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Debug|x86.Build.0 = Debug|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release (Standalone)|Any CPU.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release (Standalone)|Any CPU.Build.0 = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release (Standalone)|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release (Standalone)|Mixed Platforms.Build.0 = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release (Standalone)|x64.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release (Standalone)|x86.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|x64.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.Release|x86.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureCardDefinitions|Any CPU.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureCardDefinitions|Any CPU.Build.0 = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureCardDefinitions|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureCardDefinitions|Mixed Platforms.Build.0 = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureCardDefinitions|x64.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureCardDefinitions|x86.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureDefintionsRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureDefintionsRelease|Any CPU.Build.0 = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureDefintionsRelease|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureDefintionsRelease|Mixed Platforms.Build.0 = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureDefintionsRelease|x64.ActiveCfg = Release|Any CPU
+		{D950360A-F886-4B3A-A40E-54500FC2FCAF}.UseCaptureDefintionsRelease|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
