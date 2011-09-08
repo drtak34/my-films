@@ -3109,7 +3109,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>3</Build>
-      <Revision>1434</Revision>
+      <Revision>1436</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3123,7 +3123,7 @@ Please report bugs in MyFilms forum.
 </VersionDescription>
     <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-5.0.2.1428-RC1a%28MP12RC%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-09-08T08:47:01.2596356+02:00</ReleaseDate>
+    <ReleaseDate>2011-09-08T08:59:54.2252179+02:00</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-RC1a(MP12).mpe1</Location>
     <Params>
@@ -3146,7 +3146,7 @@ Please report bugs in MyFilms forum.
  If have .dll extension used like MP plugin configuration</Description>
         </SectionParam>
         <SectionParam Name="Online Screenshots">
-          <Value>http://wiki.team-mediaportal.com/@api/deki/files/1943/=MyFilmsMain.jpg; http://wiki.team-mediaportal.com/@api/deki/files/1944/=MyFilmsFanart.jpg</Value>
+          <Value>http://wiki.team-mediaportal.com/@api/deki/files/1943/=MyFilmsMain.jpg; http://wiki.team-mediaportal.com/@api/deki/files/1944/=MyFilmsFanart.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2235/=DetailsOverview.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2236/=DetailsDesc.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2237/=DetailsComments.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2233/=DetailsActors.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2234/=DetailsTechInfo.jpg</Value>
           <ValueType>String</ValueType>
           <Description>Online stored screenshot urls separated by ; </Description>
         </SectionParam>
