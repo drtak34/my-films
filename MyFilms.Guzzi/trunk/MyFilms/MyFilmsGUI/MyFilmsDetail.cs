@@ -6090,6 +6090,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("OnPlayBackStarted was initiated - filename: '" + filename + "'");
 
             // attach to global action event, to handle remote keys during playback - e.g. trailer previews
+            GUIWindowManager.OnNewAction -= new OnActionHandler(this.GUIWindowManager_OnNewAction); // make sure it doesn't register twice ....
             GUIWindowManager.OnNewAction += new OnActionHandler(this.GUIWindowManager_OnNewAction);
 
             // tell any listeners that user rated the movie
