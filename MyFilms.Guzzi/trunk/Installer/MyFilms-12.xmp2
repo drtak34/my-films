@@ -3549,7 +3549,7 @@ Please refer to the Wiki online documentation.</Value>
     <Version>
       <Major>5</Major>
       <Minor>0</Minor>
-      <Build>2</Build>
+      <Build>3</Build>
       <Revision>1428</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
