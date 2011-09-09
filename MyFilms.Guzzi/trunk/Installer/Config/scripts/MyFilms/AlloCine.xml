@@ -4,8 +4,6 @@
     <DBName>Allocine</DBName>
     <URLPrefix>www.allocine.fr</URLPrefix>
     <Encoding>windows-1252</Encoding>
-    <Mapping />
-    <Mapping />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.allocine.fr_x002F_recherche_x002F_1_x002F__x003F_p_x003D__x0023_Page_x0023__x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023__x003C_table_x0020_class_x003D__x0022_totalwidth_x0020_noborder_x0020_purehtml_x0022__x003E_</KeyStartList>

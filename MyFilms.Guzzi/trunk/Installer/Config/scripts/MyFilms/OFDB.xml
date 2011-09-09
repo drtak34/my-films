@@ -3,6 +3,7 @@
   <Section>
     <DBName>OFDB.DE</DBName>
     <URLPrefix>http://www.ofdb.de/</URLPrefix>
+    <Encoding />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.ofdb.de_x002F_view.php_x003F_page_x003D_suchergebnis_x0026_SText_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="" />

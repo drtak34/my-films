@@ -3,6 +3,7 @@
   <Section>
     <DBName>Cinefacts (german)</DBName>
     <URLPrefix />
+    <Encoding />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.cinefacts.de_x002F_suche_x002F_suche.php_x003F_type_x003D_f_x0026_name_x003D__x0027__x0023_Search_x0023__x0027_</URL>
       <KeyStartList Param1="" Param2="">SUCHERGEBNISSE_x0020_</KeyStartList>

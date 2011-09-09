@@ -3,10 +3,7 @@
   <Section>
     <DBName>Alpacine</DBName>
     <URLPrefix>http://alpacine.com</URLPrefix>
-    <Mapping />
-    <Mapping />
-    <Mapping />
-    <Mapping />
+    <Encoding />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_alpacine.com_x002F_buscar_x002F__x003F_buscar_x003D__x0023_Search_x0023__x0026_tipo_x003D_2_x0026_todo_x003D_1</URL>
       <KeyStartList Param1="" Param2="">_x003C_div_x0020_class_x003D__x0022_titulo_x0022__x003E_</KeyStartList>

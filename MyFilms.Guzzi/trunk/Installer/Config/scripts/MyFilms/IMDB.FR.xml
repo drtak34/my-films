@@ -3,8 +3,7 @@
   <Section>
     <DBName>IMDB.FR</DBName>
     <URLPrefix>http://www.imdb.fr</URLPrefix>
-    <Mapping />
-    <Mapping />
+    <Encoding />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.imdb.fr_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_Populaires_x007C_Exacts_x007C_Partiels</KeyStartList>

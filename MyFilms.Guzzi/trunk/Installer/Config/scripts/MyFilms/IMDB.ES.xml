@@ -3,6 +3,7 @@
   <Section>
     <DBName>IMDB.ES</DBName>
     <URLPrefix>http://www.imdb.es</URLPrefix>
+    <Encoding />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.imdb.es_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_Populares_x007C_Exactos_x007C_Parciales_x007C_Aproximados</KeyStartList>

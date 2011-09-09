@@ -3,6 +3,7 @@
   <Section>
     <DBName>The Movie DB (en)</DBName>
     <URLPrefix />
+    <Encoding />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_api.themoviedb.org_x002F_2.1_x002F_Movie.search_x002F_en_x002F_xml_x002F_5b8fecd0c39786077bc5af07e56fee5e_x002F__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x003C_movies_x003E_</KeyStartList>

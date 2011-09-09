@@ -3,6 +3,7 @@
   <Section>
     <DBName>MovieGoods</DBName>
     <URLPrefix>http://www.moviegoods.com</URLPrefix>
+    <Encoding />
     <URLSearch>
       <URL Param1="" Param2="">http:_x002F__x002F_www.moviegoods.com_x002F_search_x002F_search.asp_x003F_page_x003D__x0023_Page_x0023__x0026_keywords_x003D__x0023_Search_x0023__x0026_in_field_x003D__x0026_sort_by_field_x003D__x0026_display_type_x003D_List</URL>
       <KeyStartList Param1="" Param2="">Search_x0020_Results_x0020_for:</KeyStartList>
