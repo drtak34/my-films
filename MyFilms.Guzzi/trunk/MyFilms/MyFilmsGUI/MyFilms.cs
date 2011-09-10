@@ -490,6 +490,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("statusmessage", message);
     }
 
+    public static event ImportCompleteEventDelegate ImportComplete;
+    public delegate void ImportCompleteEventDelegate();
+
+
     //public static event WatchedEventDelegate WatchedItem;
     //public delegate void WatchedEventDelegate(MFMovie movie, bool watched, int count);
 
@@ -705,6 +709,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           defaultconfig = Configuration.Current_Config();
           Load_Config(Configuration.CurrentConfig, true, loadParamInfo);
+          if (InitialStart && conf.StrFileType != "0" && conf.StrFileType != "10")
+          {
+            if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+            {
+              ImportComplete();
+              LogMyFilms.Debug("OnPageLoad_DoPageLoad(): Fired 'ImportCompleted' event to trigger sync to trakt page after initial DB import of external Catalog is finished !");
+            }
+          }
         }
 
         InitFSwatcher(); // load DB watcher for multiseat
@@ -712,7 +724,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (MyFilms.conf.StrFanart) Fanartstatus(true);
         else Fanartstatus(false);
       }
-      if ((Configuration.CurrentConfig == null) || (Configuration.CurrentConfig.Length == 0))
+      if (string.IsNullOrEmpty(Configuration.CurrentConfig))
       {
         GUIWaitCursor.Hide();
         GUIWindowManager.ShowPreviousWindow();
@@ -4512,8 +4524,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //MyFilmsDetail.setProcessAnimationStatus(true, m_SearchAnimation);
             Load_Config(newConfig, true, null);
             if (InitialStart)
+            {
               Fin_Charge_Init(true, true); //Guzzi: need to always load default view on initial start, even if always default view is disabled ...
               //Loadfacade(); // load facade threaded...
+
+              if (conf.StrFileType != "0" && conf.StrFileType != "10")
+              {
+                if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+                {
+                  ImportComplete();
+                  LogMyFilms.Debug("CHange_View(): Fired 'ImportCompleted' event to trigger sync to trakt page after initial DB import of external Catalog is finished !");
+                }
+              }
+            }
             else
             {
               Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
@@ -8685,6 +8708,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         // this.BeginInvoke(new UpdateWatchTextDelegate(UpdateWatchText), "WatcherChanged() - New FSwatcher Event: " + e.ChangeType + ": '" + e.FullPath + "'");
         FSwatcher.EnableRaisingEvents = true;
+        if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+        {
+          ImportComplete();
+          LogMyFilms.Debug("FSwatcherChanged(): Fired 'ImportCompleted' event to trigger sync to trakt page after reloading database content !");
+        }
       }
 
       private void FSwatcherCreated(object source, FileSystemEventArgs e)
@@ -8929,6 +8957,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Load_Config(Configuration.CurrentConfig, true, null);
       Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
       MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml);
+      if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+      {
+        ImportComplete();
+        LogMyFilms.Debug("bgUpdateDB_RunWorkerCompleted(): Fired 'ImportCompleted' event to trigger sync to trakt page after importer finished !");
+      }
     }
 
     //*****************************************************************************************
@@ -9354,6 +9387,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.clearGUIProperty("statusmessage");
         // Fin_Charge_Init(conf.AlwaysDefaultView, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
         Refreshfacade(); // Fin_Charge_Init(false, true); //need to reload the facade, but NOT default select, as it otherwise will reset global filters the user might have set...
+      }
+      if (ImportComplete != null && MyFilms.conf.AllowTraktSync) // trigger sync to trakt page after importer finished
+      {
+        ImportComplete();
+        LogMyFilms.Debug("bgIsOnlineCheck_RunWorkerCompleted(): Fired 'ImportCompleted' event to trigger sync to trakt page after importer finished !");
       }
     }
 
