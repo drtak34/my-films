@@ -5596,5 +5596,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           }
         }
 
+        private void linkLabelTraktWiki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+          System.Diagnostics.Process.Start("https://github.com/Technicolour/Trakt-for-Mediaportal/wiki/");
+        }
+
+        private void linkLabelUsingTraktInMyFilmsWiki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+          System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/3_Using_My_Films/Trakt/");
+        }
+
     }
 }

@@ -506,6 +506,8 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.linkLabelTraktWiki = new System.Windows.Forms.LinkLabel();
+          this.linkLabelUsingTraktInMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -688,6 +690,8 @@
           // 
           // groupBoxTrakt
           // 
+          this.groupBoxTrakt.Controls.Add(this.linkLabelUsingTraktInMyFilmsWiki);
+          this.groupBoxTrakt.Controls.Add(this.linkLabelTraktWiki);
           this.groupBoxTrakt.Controls.Add(this.labelTraktDescription);
           this.groupBoxTrakt.Controls.Add(this.cbAllowTraktSync);
           this.groupBoxTrakt.Controls.Add(this.pictureBox1);
@@ -713,16 +717,16 @@
           this.cbAllowTraktSync.AutoSize = true;
           this.cbAllowTraktSync.Location = new System.Drawing.Point(38, 50);
           this.cbAllowTraktSync.Name = "cbAllowTraktSync";
-          this.cbAllowTraktSync.Size = new System.Drawing.Size(176, 17);
+          this.cbAllowTraktSync.Size = new System.Drawing.Size(242, 17);
           this.cbAllowTraktSync.TabIndex = 0;
-          this.cbAllowTraktSync.Text = "Enable TRAKT Synchronisation";
+          this.cbAllowTraktSync.Text = "Enable TRAKT Synchronisation for this config";
           this.ToolTip1.SetToolTip(this.cbAllowTraktSync, resources.GetString("cbAllowTraktSync.ToolTip"));
           this.cbAllowTraktSync.UseVisualStyleBackColor = true;
           // 
           // pictureBox1
           // 
           this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.trakt;
-          this.pictureBox1.Location = new System.Drawing.Point(390, 26);
+          this.pictureBox1.Location = new System.Drawing.Point(521, 32);
           this.pictureBox1.Name = "pictureBox1";
           this.pictureBox1.Size = new System.Drawing.Size(52, 50);
           this.pictureBox1.TabIndex = 3;
@@ -731,7 +735,7 @@
           // linkLabelTrakt
           // 
           this.linkLabelTrakt.AutoSize = true;
-          this.linkLabelTrakt.Location = new System.Drawing.Point(275, 51);
+          this.linkLabelTrakt.Location = new System.Drawing.Point(518, 137);
           this.linkLabelTrakt.Name = "linkLabelTrakt";
           this.linkLabelTrakt.Size = new System.Drawing.Size(74, 13);
           this.linkLabelTrakt.TabIndex = 1;
@@ -5104,6 +5108,28 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // linkLabelTraktWiki
+          // 
+          this.linkLabelTraktWiki.AutoSize = true;
+          this.linkLabelTraktWiki.Location = new System.Drawing.Point(518, 208);
+          this.linkLabelTraktWiki.Name = "linkLabelTraktWiki";
+          this.linkLabelTraktWiki.Size = new System.Drawing.Size(56, 13);
+          this.linkLabelTraktWiki.TabIndex = 4;
+          this.linkLabelTraktWiki.TabStop = true;
+          this.linkLabelTraktWiki.Text = "Trakt Wiki";
+          this.linkLabelTraktWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTraktWiki_LinkClicked);
+          // 
+          // linkLabelUsingTraktInMyFilmsWiki
+          // 
+          this.linkLabelUsingTraktInMyFilmsWiki.AutoSize = true;
+          this.linkLabelUsingTraktInMyFilmsWiki.Location = new System.Drawing.Point(518, 172);
+          this.linkLabelUsingTraktInMyFilmsWiki.Name = "linkLabelUsingTraktInMyFilmsWiki";
+          this.linkLabelUsingTraktInMyFilmsWiki.Size = new System.Drawing.Size(113, 13);
+          this.linkLabelUsingTraktInMyFilmsWiki.TabIndex = 5;
+          this.linkLabelUsingTraktInMyFilmsWiki.TabStop = true;
+          this.linkLabelUsingTraktInMyFilmsWiki.Text = "Using Trakt in MyFilms";
+          this.linkLabelUsingTraktInMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsingTraktInMyFilmsWiki_LinkClicked);
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5643,5 +5669,7 @@
         private GroupBox groupBoxExternal;
         private Label labelRecentlyAddedAPI;
         private CheckBox cbAllowRecentAddedAPI;
+        private LinkLabel linkLabelTraktWiki;
+        private LinkLabel linkLabelUsingTraktInMyFilmsWiki;
     }
 }
