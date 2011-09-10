@@ -4925,8 +4925,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             clearGUIProperty("user.mastertitle.label", log);
             clearGUIProperty("user.mastertitle.value", log);
+            clearGUIProperty("user.mastertitle.groupname", log);
             clearGUIProperty("user.secondarytitle.label", log);
             clearGUIProperty("user.secondarytitle.value", log);
+            clearGUIProperty("user.secondarytitle.groupname", log);
             clearGUIProperty("user.item1.label", log);
             clearGUIProperty("user.item1.field", log);
             clearGUIProperty("user.item1.value", log);
@@ -4965,8 +4967,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             foreach (DataColumn dc in ds.Movie.Columns)
             {
-                string wstring = "";
-                //LogMyFilms.Debug("PropertyManager: Set Properties for DB Column '" + dc.ColumnName + "' - '" + BaseMesFilms.Translate_Column(dc.ColumnName) + "'");
+              string wstring = "";
+              string wstring2 = "";
+              //LogMyFilms.Debug("PropertyManager: Set Properties for DB Column '" + dc.ColumnName + "' - '" + BaseMesFilms.Translate_Column(dc.ColumnName) + "'");
 
                 if (MyFilms.r[ItemId][dc.ColumnName] != null)
                 {
@@ -5100,24 +5103,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             if (wrep)
                                 if (MyFilms.r[ItemId][dc.ColumnName].ToString().Length > 0)
                                     if (MyFilms.r[ItemId][dc.ColumnName].ToString().Contains(MyFilms.conf.TitleDelim))
-                                        wstring = MyFilms.r[ItemId][dc.ColumnName].ToString().Substring(MyFilms.r[ItemId][dc.ColumnName].ToString().LastIndexOf(MyFilms.conf.TitleDelim) + 1);
+                                    {
+                                      wstring = MyFilms.r[ItemId][dc.ColumnName].ToString().Substring(MyFilms.r[ItemId][dc.ColumnName].ToString().LastIndexOf(MyFilms.conf.TitleDelim) + 1);
+                                      wstring2 = MyFilms.r[ItemId][dc.ColumnName].ToString().Substring(0, MyFilms.r[ItemId][dc.ColumnName].ToString().LastIndexOf(MyFilms.conf.TitleDelim));
+                                    }
                                     else
-                                        wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                                    {
+                                      wstring = MyFilms.r[ItemId][dc.ColumnName].ToString();
+                                      wstring2 = "";
+                                    }
                             setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
 
                             if ((MyFilms.conf.StrTitle1.ToLower() == (dc.ColumnName.ToLower())))
                             {
                               // MyFilms.currentMovie.Title = wstring; // already set in afficher_detail()
                               if (wrep)
+                              {
                                 setGUIProperty("user.mastertitle.value", wstring);
+                                setGUIProperty("user.mastertitle.groupname", wstring2);
+                              }
                               else
+                              {
                                 clearGUIProperty("user.mastertitle.value");
+                                clearGUIProperty("user.mastertitle.groupname");
+                              }
                             }
                             if ((MyFilms.conf.StrTitle2.ToLower() == (dc.ColumnName.ToLower())))
                                 if (wrep)
-                                    setGUIProperty("user.secondarytitle.value", wstring);
+                                {
+                                  setGUIProperty("user.secondarytitle.value", wstring);
+                                  setGUIProperty("user.secondarytitle.groupname", wstring2);
+                                }
                                     else
-                                    clearGUIProperty("user.secondarytitle.value");
+                                {
+                                  clearGUIProperty("user.secondarytitle.value");
+                                  clearGUIProperty("user.secondarytitle.groupname");
+                                }
                             break;
 
                         case "length":
