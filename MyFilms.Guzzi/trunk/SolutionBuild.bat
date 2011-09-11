@@ -14,5 +14,5 @@ rem dir >>%1\solutionbuild.log
 call mpe-maker.bat  >>%1\solutionbuild.log
 rem "C:\Programme\Team MediaPortal\MediaPortal\MpeMaker.exe" MyFilms-12.xmp2 /V=1.0.0.0 /B
 
-cd %1\Installer\MPE-Files
+cd %1\Installer\MPE-Packages
 dir >>%1\solutionbuild.log
