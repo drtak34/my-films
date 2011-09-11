@@ -2802,12 +2802,12 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <Params>
           <Items>
             <SectionParam Name="Header Title">
-              <Value />
+              <Value>Installation</Value>
               <ValueType>String</ValueType>
               <Description>Header title</Description>
             </SectionParam>
             <SectionParam Name="Header description">
-              <Value />
+              <Value>Please wait while MyFilms is being installed...</Value>
               <ValueType>String</ValueType>
               <Description>Description of section, shown in under section title</Description>
             </SectionParam>
@@ -2870,6 +2870,34 @@ public class Script
 </Value>
                     <ValueType>Script</ValueType>
                     <Description />
+                  </SectionParam>
+                </Items>
+              </Params>
+              <ExecuteLocation>AfterPanelShow</ExecuteLocation>
+            </ActionItem>
+            <ActionItem Name="CreateShortCut" ActionType="CreateShortCut" ConditionGroup="Default">
+              <Params>
+                <Items>
+                  <SectionParam Name="ShortCut location">
+                    <Value>%Desktop%\MyFilms Configuration.lnk</Value>
+                    <ValueType>Template</ValueType>
+                    <Description>Location of shortcut</Description>
+                  </SectionParam>
+                  <SectionParam Name="ShortCut target">
+                    <Value>%Base%\PluginLoader - MyFilms.cmd</Value>
+                    <ValueType>Template</ValueType>
+                    <Description>Target of short cut</Description>
+                  </SectionParam>
+                  <SectionParam Name="Description">
+                    <Value>MyFilms Configuration</Value>
+                    <ValueType>String</ValueType>
+                    <Description>Description tooltip text </Description>
+                  </SectionParam>
+                  <SectionParam Name="Icon of the shortcut">
+                    <Value>%Plugins%\windows\myfilms.dll</Value>
+                    <ValueType>Template</ValueType>
+                    <Description>Icon of the shortcut, 
+ if is empty the icon of the target will be used</Description>
                   </SectionParam>
                 </Items>
               </Params>
@@ -3108,8 +3136,8 @@ Please refer to the Wiki online documentation.</Value>
     <Version>
       <Major>5</Major>
       <Minor>0</Minor>
-      <Build>3</Build>
-      <Revision>1448</Revision>
+      <Build>4</Build>
+      <Revision>1450</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3118,7 +3146,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-5.0.2.1428-RC1a%28MP12RC%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-09-11T02:57:37.947988+02:00</ReleaseDate>
+    <ReleaseDate>2011-09-11T03:07:32.5524766+02:00</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-RC2(MP12).mpe1</Location>
     <Params>
@@ -5857,7 +5885,7 @@ Please report bugs in MyFilms forum.</VersionDescription>
       </FolderGroup>
     </FolderGroups>
     <ProjectFilename>MyFilms-12.xmp2</ProjectFilename>
-    <UpdatePath1>D:\Entwicklung\MyFilms\trunk\Installer\update.xml</UpdatePath1>
+    <UpdatePath1>.\update.xml</UpdatePath1>
     <UpdatePath2 />
     <UpdatePath3 />
   </ProjectSettings>
