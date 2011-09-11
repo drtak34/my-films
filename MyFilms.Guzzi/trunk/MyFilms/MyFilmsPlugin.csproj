@@ -71,13 +71,6 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE;MP12</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Guzzi%29|AnyCPU' ">
-    <OutputPath>bin\Debug %28Guzzi%29\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug %28Guzzi%29|x86' ">
-    <OutputPath>bin\x86\Debug %28Guzzi%29\</OutputPath>
-    <Optimize>false</Optimize>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Utils, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
