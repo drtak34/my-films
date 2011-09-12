@@ -26,6 +26,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build-All", "Build-All\Buil
 		{92C183EE-636F-4A55-A6AB-363CDA606110} = {92C183EE-636F-4A55-A6AB-363CDA606110}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{E84B5580-81E7-4DF0-B9F3-0B2F7BD76242}"
+	ProjectSection(SolutionItems) = preProject
+		Installer\MyFilms-12.xmp2 = Installer\MyFilms-12.xmp2
+		Installer\update.xml = Installer\update.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
