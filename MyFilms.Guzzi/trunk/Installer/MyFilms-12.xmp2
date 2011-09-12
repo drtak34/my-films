@@ -2155,6 +2155,20 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{2632428f-f451-41b2-a1e6-7bb739c990d3}-cineol.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\cineol.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\CSFD.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{cab5992b-930a-4eab-a979-378dfb44195b}-CSFD.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\CSFD.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\TMDB-CZ.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c6b1f027-647b-431b-977d-e39d80b390c7}-TMDB-CZ.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-CZ.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3117,10 +3131,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3137,7 +3151,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>4</Build>
-      <Revision>1450</Revision>
+      <Revision>1451</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3146,7 +3160,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-5.0.2.1428-RC1a%28MP12RC%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-09-11T03:07:32.5524766+02:00</ReleaseDate>
+    <ReleaseDate>2011-09-11T20:35:34.0747739+02:00</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-RC2(MP12).mpe1</Location>
     <Params>
@@ -5296,6 +5310,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\scripts\MyFilms\cineol.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{2632428f-f451-41b2-a1e6-7bb739c990d3}-cineol.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\cineol.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\CSFD.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{cab5992b-930a-4eab-a979-378dfb44195b}-CSFD.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\CSFD.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\TMDB-CZ.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c6b1f027-647b-431b-977d-e39d80b390c7}-TMDB-CZ.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-CZ.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
