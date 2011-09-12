@@ -6855,8 +6855,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //string[] PropertyListLabel = new string[] { "10798659", "10798658", "10798669", "10798670", "10798667", "10798661", "10798662", "10798665", "10798655", "10798664", "10798663", "10798657", "10798677", "10798678", "10798660", "10798651", "10798652", "10798653", "10798666", "10798671", "10798672", "10798673", "10798674", "10798675", "10798676", "10798680", "10798681", "10798650", "10798668", "10798654", "10798656" };
       for (int ii = 0; ii < 31; ii++)
       {
-        dlg.Add(GUILocalizeStrings.Get(10798617) + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))));
-        choiceSearch.Add(PropertyList[ii]);
+        if (!string.IsNullOrEmpty(MyFilms.r[Index][PropertyList[ii]].ToString()))
+        {
+          dlg.Add(GUILocalizeStrings.Get(10798617) + GUILocalizeStrings.Get(Convert.ToInt32((PropertyListLabel[ii]))));
+          choiceSearch.Add(PropertyList[ii]);
+        }
+        else
+          LogMyFilms.Debug("SearchRelatedMoviesByProperties: Property '" + PropertyList[ii] + "' not added to menu list, as it is null or empty !");
       }
 
       // Dont use the propertylist...
