@@ -2487,7 +2487,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       ArrayList fanartItems = new ArrayList();
       int i = 0;
-      GetMoviesInGroup(ref fanartItems);
+      try
+      {
+        GetMoviesInGroup(ref fanartItems);
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.DebugException("GetRandomFanartForGroups(): exception on calling GetMoviesInGroup() - ", ex);
+        return false;
+      }
       currentFanartList.Clear(); // clear list from former content
       foreach (GUIListItem randomFanartItem in fanartItems)
       {
