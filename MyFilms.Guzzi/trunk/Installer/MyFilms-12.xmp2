@@ -2019,6 +2019,20 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{af451ef1-a682-4c3d-aef6-3798ee8bc020}-xvid.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos.B3\xvid.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0c3b5821-2083-41b5-9fe7-f2879e67d4c9}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos.B3\Thumbs.db</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{112bb733-2116-42cc-a2f9-ed04b52f9888}-Thumbs.db</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos.B3\Thumbs.db</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3151,7 +3165,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>0</Minor>
       <Build>4</Build>
-      <Revision>1451</Revision>
+      <Revision>1457</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3160,7 +3174,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Rc</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-5.0.2.1428-RC1a%28MP12RC%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-09-11T20:35:34.0747739+02:00</ReleaseDate>
+    <ReleaseDate>2011-09-14T07:18:39.8536694+02:00</ReleaseDate>
     <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-RC2(MP12).mpe1</Location>
     <Params>
@@ -3183,7 +3197,8 @@ Please report bugs in MyFilms forum.</VersionDescription>
  If have .dll extension used like MP plugin configuration</Description>
         </SectionParam>
         <SectionParam Name="Online Screenshots">
-          <Value>http://wiki.team-mediaportal.com/@api/deki/files/1943/=MyFilmsMain.jpg; http://wiki.team-mediaportal.com/@api/deki/files/1944/=MyFilmsFanart.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2235/=DetailsOverview.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2236/=DetailsDesc.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2237/=DetailsComments.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2233/=DetailsActors.jpg; http://wiki.team-mediaportal.com/@api/deki/files/2234/=DetailsTechInfo.jpg</Value>
+          <Value>http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DefaultView.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsOverview.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/MyFilmsMain.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/MyFilmsFanart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/CoverFlow.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/IconsLayout.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Filmstrip.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/CatListFanart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsDesc.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsTechInfo.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/SetWatchedMain.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/QuickStart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCInteractive.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCU_View.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCU_ViewFull.png
+</Value>
           <ValueType>String</ValueType>
           <Description>Online stored screenshot urls separated by ; </Description>
         </SectionParam>
@@ -5184,6 +5199,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Thumbs\MyFilms\DefaultLogos.B3\xvid.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{af451ef1-a682-4c3d-aef6-3798ee8bc020}-xvid.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos.B3\xvid.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0c3b5821-2083-41b5-9fe7-f2879e67d4c9}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Thumbs.db</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos.B3\Thumbs.db</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{112bb733-2116-42cc-a2f9-ed04b52f9888}-Thumbs.db</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos.B3\Thumbs.db</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
