@@ -675,8 +675,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIWaitCursor.Init(); GUIWaitCursor.Show();
       if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
       {
-        // Prev_MenuID = PreviousWindowId;
         if (InitialStart) InitMainScreen(false); // don't log to MyFilms.log Property clear
+        
         //InitGlobalFilters(false);
 
         if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config) && PreviousWindowId != ID_MyFilmsDetail) // config given in load params
@@ -708,6 +708,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else
         {
           defaultconfig = Configuration.Current_Config();
+          if (defaultconfig) // clear all properties, if a defaultconfig is loaded - otherwise we might run into display problems due to old properties remaining
+            InitMainScreen(false); // don't log to MyFilms.log Property clear
           Load_Config(Configuration.CurrentConfig, true, loadParamInfo);
           if (InitialStart && conf.StrFileType != "0" && conf.StrFileType != "10")
           {
