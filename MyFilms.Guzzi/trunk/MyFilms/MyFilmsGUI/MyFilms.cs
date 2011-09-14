@@ -4099,8 +4099,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  BtnToggleGlobalWatched.Label = string.Format(GUILocalizeStrings.Get(10798713), GUILocalizeStrings.Get(10798629));
       if (string.IsNullOrEmpty(conf.CurrentSortMethod))
         conf.CurrentSortMethod = GUILocalizeStrings.Get(103);
-      else
-        BtnSrtBy.Label = conf.CurrentSortMethod;
+      // else
+      BtnSrtBy.Label = conf.CurrentSortMethod;
       string BtnSearchT = GUILocalizeStrings.Get(137);
 
       GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnSearchT, BtnSearchT);
