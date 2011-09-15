@@ -1164,7 +1164,7 @@
           this.comboBoxLogoPresets.FormattingEnabled = true;
           this.comboBoxLogoPresets.Items.AddRange(new object[] {
             "Use Logos of currently selected skin",
-            "Use Blue3Wide logos",
+            "Use MP logos",
             "Use MyFilms Logo Pack",
             "Define your path to logo image files"});
           this.comboBoxLogoPresets.Location = new System.Drawing.Point(220, 8);

@@ -4563,7 +4563,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void LogosPresetSelect()
         {
             //"Use Logos of currently selected skin",
-            //"Use Blue3Wide logos",
+            //"Use MP logos",
             //"Use MyFilms Logo Pack",
             //"Define your path to logo image files"});
           if (comboBoxLogoPresets.Text == "Define your path to logo image files")
@@ -4594,7 +4594,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               btnLogosPath.Visible = false;
               lblLogosPath.Visible = false;
             }
-            else if (comboBoxLogoPresets.Text == "Use Blue3Wide logos")
+            else if (comboBoxLogoPresets.Text == "Use Blue3Wide logos" || comboBoxLogoPresets.Text == "Use MP logos")
             {
 #if MP11
               txtLogosPath.Text = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\blue3wide\media\logos";
