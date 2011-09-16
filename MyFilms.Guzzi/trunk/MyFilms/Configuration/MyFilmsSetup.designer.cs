@@ -647,7 +647,7 @@
           this.label_VersionNumber.Name = "label_VersionNumber";
           this.label_VersionNumber.Size = new System.Drawing.Size(92, 13);
           this.label_VersionNumber.TabIndex = 34;
-          this.label_VersionNumber.Text = "Version x.x.x.x RC";
+          this.label_VersionNumber.Text = "Version x.x.x.xxxx";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "MyFilms Version Number");
           // 
           // ButCopy

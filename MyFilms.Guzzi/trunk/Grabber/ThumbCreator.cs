@@ -6,6 +6,7 @@ using System.Text;
 namespace Grabber
 {
   using System.Configuration;
+  using System.Drawing;
   using System.Globalization;
   using System.IO;
   using System.Runtime.CompilerServices;
@@ -14,6 +15,8 @@ namespace Grabber
   using MediaPortal.Configuration;
   using MediaPortal.Services;
   using MediaPortal.Util;
+
+  using Microsoft.WindowsAPICodePack.Shell;
 
   public class ThumbCreator
   {
@@ -191,7 +194,28 @@ namespace Grabber
             LogMyFilms.Debug("First try failed - trying fallback with arguments: {0}", ExtractorFallbackArgs);
             Success = Utils.StartProcess(ExtractorPath, ExtractorFallbackArgs, TempPath, 30000, true, GetMtnConditions());
             if (!Success)
+            {
               LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp, ExtractorFallbackArgs);
+              //try
+              //{
+              //  using (ShellObject Item = ShellObject.FromParsingName(recFileName))
+              //  {
+              //    Item.Thumbnail.RetrievalOption = ShellThumbnailRetrievalOption.Default;
+              //    Item.Thumbnail.FormatOption = ShellThumbnailFormatOption.ThumbnailOnly;
+              //    Bitmap _bitmap;
+              //    _bitmap = Item.Thumbnail.LargeBitmap;
+              //    if (_bitmap != null)
+              //    {
+              //      _bitmap.Save(thumbNail, System.Drawing.Imaging.ImageFormat.Jpeg);
+              //      LogMyFilms.Info("RecordedTV: Thumbnail successfully created for -- {0}", recFileName);
+              //    }
+              //  }
+              //}
+              //catch
+              //{
+              //  LogMyFilms.Info("RecordedTV: No thumbnail created for -- {0}", recFileName);
+              //}              
+            }
           }
           Thread.Sleep(100); // give the system a few IO cycles
           Utils.KillProcess(Path.ChangeExtension(ExtractApp, null)); // make sure there's no process hanging
