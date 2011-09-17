@@ -49,6 +49,7 @@ Public Class AntProcessor
     Private Shared _InteractiveMode As Boolean = True
 
     Private Shared _ManualFieldName As String
+    Private Shared _ManualFieldNameDestination As String
     Private Shared _ManualFieldValue As String
     Private Shared _ManualFieldOldValue As String
     Private Shared _ManualOperation As String
@@ -148,13 +149,20 @@ Public Class AntProcessor
         End Get
     End Property
 
-
     Public Property ManualFieldName() As String
         Get
             Return _ManualFieldName
         End Get
         Set(ByVal value As String)
             _ManualFieldName = value
+        End Set
+    End Property
+    Public Property ManualFieldNameDestination() As String
+        Get
+            Return _ManualFieldNameDestination
+        End Get
+        Set(ByVal value As String)
+            _ManualFieldNameDestination = value
         End Set
     End Property
     Public Property ManualFieldValue() As String
@@ -468,6 +476,10 @@ Public Class AntProcessor
             LogEvent(" - Field to Update : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
             LogEvent(" - Value to remove from existing value : " & _ManualFieldValue.ToString, EventLogLevel.ImportantEvent)
         End If
+        If (_ManualOperation.ToString = "Copy Value") Then
+            LogEvent(" - Field to copy from : " & _ManualFieldName.ToString, EventLogLevel.ImportantEvent)
+            LogEvent(" - Field to copy to   : " & _ManualFieldNameDestination.ToString, EventLogLevel.ImportantEvent)
+        End If
         If _ManualParameterMatchAll = True Then
             LogEvent(" - Parameters - Match All Records : True", EventLogLevel.ImportantEvent)
         Else
@@ -642,6 +654,7 @@ Public Class AntProcessor
                 Select Case _ManualOperation
                     'Update Value
                     'Delete Value
+                    'Copy Value
                     'Update Record
                     'Delete Record
                     'Download Fanart
@@ -725,6 +738,20 @@ Public Class AntProcessor
                             CurrentNode.Attributes.Remove(CurrentNode.Attributes.GetNamedItem(_ManualFieldName))
                             'LogEvent("Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString, EventLogLevel.Informational)
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value Deleted : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        End If
+                    Case "Copy Value"
+                        If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                        Else
+                            If CurrentNode.Attributes(_ManualFieldNameDestination) Is Nothing Then
+                                newAttr = XmlDoc.CreateAttribute(_ManualFieldNameDestination)
+                                newAttr.Value = CurrentNode.Attributes(_ManualFieldNameDestination).Value
+                                CurrentNode.Attributes.Append(newAttr)
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            Else
+                                CurrentNode.Attributes(_ManualFieldNameDestination).Value = CurrentNode.Attributes(_ManualFieldName).Value
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            End If
                         End If
                     Case "Update Record"
                         Dim FileToScan As String = String.Empty

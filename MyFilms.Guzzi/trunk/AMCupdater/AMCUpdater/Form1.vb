@@ -492,6 +492,9 @@ Public Class Form1
         If cbManualSelectField.SelectedIndex > -1 Then
             AntProcessor.ManualFieldName = cbManualSelectField.SelectedValue.ToString
         End If
+        If cbManualSelectFieldDestination.SelectedIndex > -1 Then
+            AntProcessor.ManualFieldNameDestination = cbManualSelectFieldDestination.SelectedValue.ToString
+        End If
         AntProcessor.ManualFieldValue = txtManualNewValue.Text
         AntProcessor.ManualFieldOldValue = txtManualOldValue.Text
         If cbManualParameterFieldList1.SelectedIndex > -1 Then
@@ -1038,6 +1041,8 @@ Public Class Form1
             txtManualOldValue.Visible = False
             lblManualSelectField.Visible = False
             cbManualSelectField.Visible = False
+            lblManualSelectFieldDestination.Visible = False
+            cbManualSelectFieldDestination.Visible = False
 
             grpManualInternetLookupSettings.Visible = False
             lblManualDatabaseFieldsPrompt.Visible = False
@@ -1089,6 +1094,11 @@ Public Class Form1
             ElseIf cbManualSelectOperation.SelectedItem = "Delete Value" Then
                 lblManualSelectField.Visible = True
                 cbManualSelectField.Visible = True
+            ElseIf cbManualSelectOperation.SelectedItem = "Copy Value" Then
+                lblManualSelectField.Visible = True
+                cbManualSelectField.Visible = True
+                lblManualSelectFieldDestination.Visible = True
+                cbManualSelectFieldDestination.Visible = True
             ElseIf cbManualSelectOperation.SelectedItem = "Update Record" Then
                 grpManualInternetLookupSettings.Visible = True
                 lblManualDatabaseFieldsPrompt.Visible = True
@@ -1474,6 +1484,17 @@ Public Class Form1
                 'Delete Value : requires cbManualSelectField
                 If cbManualSelectField.SelectedIndex < 0 Then
                     epManualUpdater.SetError(cbManualSelectField, "Please select a field to delete")
+                    IsValid = False
+                Else
+                    epManualUpdater.SetError(cbManualSelectField, "")
+                End If
+            ElseIf cbManualSelectOperation.SelectedItem = "Copy Value" Then
+                'Copy Value : requires cbManualSelectField and cbManualSelectFieldDestination
+                If cbManualSelectField.SelectedIndex < 0 Then
+                    epManualUpdater.SetError(cbManualSelectField, "Please select a field as source to copy from")
+                    IsValid = False
+                ElseIf cbManualSelectFieldDestination.SelectedIndex < 0 Then
+                    epManualUpdater.SetError(cbManualSelectFieldDestination, "Please select a field as destination to copy to")
                     IsValid = False
                 Else
                     epManualUpdater.SetError(cbManualSelectField, "")
