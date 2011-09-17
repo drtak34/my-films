@@ -105,6 +105,11 @@ Public Class Form1
         cbManualSelectField.ValueMember = "FieldName"
         cbManualSelectField.SelectedIndex = -1
 
+        cbManualSelectFieldDestination.DataSource = New DataView(AntProcessor.GetAntFieldNames())
+        cbManualSelectFieldDestination.DisplayMember = "FieldName"
+        cbManualSelectFieldDestination.ValueMember = "FieldName"
+        cbManualSelectFieldDestination.SelectedIndex = -1
+
         cbManualParameterFieldList1.DataSource = New DataView(AntProcessor.GetAntFieldNames())
         cbManualParameterFieldList1.DisplayMember = "FieldName"
         cbManualParameterFieldList1.ValueMember = "FieldName"
@@ -446,6 +451,18 @@ Public Class Form1
             If txtManualNewValue.Text.Length = 0 Then
                 MsgBox("New Value Mandatory with Update Operation", MsgBoxStyle.Critical, "Missing Update Value")
                 txtManualNewValue.Focus()
+                Return
+            End If
+        End If
+        If cbManualSelectOperation.SelectedItem.ToString = "Copy Value" Then
+            If cbManualSelectField.SelectedIndex = -1 Then
+                MsgBox("Field Mandatory with Copy Operation", MsgBoxStyle.Critical, "Missing Source Field")
+                cbManualSelectField.Focus()
+                Return
+            End If
+            If cbManualSelectFieldDestination.SelectedIndex = -1 Then
+                MsgBox("Field Mandatory with Copy Operation", MsgBoxStyle.Critical, "Missing Destination Field")
+                cbManualSelectFieldDestination.Focus()
                 Return
             End If
         End If
@@ -1197,6 +1214,9 @@ Public Class Form1
     Private Sub cbManualSelectField_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualSelectField.SelectedIndexChanged
         Me.ValidateChildren()
     End Sub
+    Private Sub cbManualSelectFieldDestination_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualSelectFieldDestination.SelectedIndexChanged
+        Me.ValidateChildren()
+    End Sub
     Private Sub txtMovieFolder_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtMovieFolder.LostFocus
         'txtOverridePath_LostFocus(sender, e)
         Dim Path As String() = txtMovieFolder.Text.Split(";")
@@ -1493,11 +1513,14 @@ Public Class Form1
                 If cbManualSelectField.SelectedIndex < 0 Then
                     epManualUpdater.SetError(cbManualSelectField, "Please select a field as source to copy from")
                     IsValid = False
-                ElseIf cbManualSelectFieldDestination.SelectedIndex < 0 Then
+                Else
+                    epManualUpdater.SetError(cbManualSelectField, "")
+                End If
+                If cbManualSelectFieldDestination.SelectedIndex < 0 Then
                     epManualUpdater.SetError(cbManualSelectFieldDestination, "Please select a field as destination to copy to")
                     IsValid = False
                 Else
-                    epManualUpdater.SetError(cbManualSelectField, "")
+                    epManualUpdater.SetError(cbManualSelectFieldDestination, "")
                 End If
             ElseIf cbManualSelectOperation.SelectedItem = "Download Fanart" Then
                 'Delete Value : requires cbManualSelectField
@@ -2571,5 +2594,6 @@ Public Class Form1
     Private Sub LinkLabelMyFilmsWiki_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabelMyFilmsWiki.LinkClicked
         System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/Updating_AMC_Data/AMC_Updater")
     End Sub
+
 End Class
 
