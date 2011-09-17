@@ -3145,10 +3145,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3165,7 +3165,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>1</Minor>
       <Build>0</Build>
-      <Revision>1460</Revision>
+      <Revision>1461</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3174,9 +3174,9 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-5.0.2.1428-RC1a%28MP12RC%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-09-15T07:59:36.2864581+02:00</ReleaseDate>
+    <ReleaseDate>2011-09-16T23:36:48.3105787+02:00</ReleaseDate>
     <Tags>movie, film, video, myfilms, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-    <Location>.\MPE-Packages\MyFilms-V[Version]-RC2(MP12).mpe1</Location>
+    <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">

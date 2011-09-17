@@ -1846,6 +1846,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void ButCopy_Click(object sender, EventArgs e)
         {
             MyFilmsInputBox input = new MyFilmsInputBox();
+            input.Text = "MyFilms - Copy Config";
             input.CatalogTypeSelectedIndex = CatalogType.SelectedIndex ; // preset to currently chosen catalog type 
             input.CatalogType = CatalogType.Text; // preset to currently chosen catalog name
             input.Country = cbGrabberOverrideLanguage.Text; // to preset country to alredy existing setting ...
@@ -4678,6 +4679,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               return;
           }
           MyFilmsInputBox input = new MyFilmsInputBox();
+          input.Text = "MyFilms - Setup Wizard";
           input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
           input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
           input.Country = "USA";
@@ -5070,6 +5072,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void butNew_Click(object sender, EventArgs e)
         {
           MyFilmsInputBox input = new MyFilmsInputBox();
+          input.Text = "MyFilms - New Catalog";
           input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
           input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
           input.ShowDialog(this);
