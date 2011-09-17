@@ -1116,6 +1116,8 @@ Public Class Form1
                 cbManualSelectField.Visible = True
                 lblManualSelectFieldDestination.Visible = True
                 cbManualSelectFieldDestination.Visible = True
+                chkManualUpdateRecordsOnlyMissingData.Visible = True
+                chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = True
             ElseIf cbManualSelectOperation.SelectedItem = "Update Record" Then
                 grpManualInternetLookupSettings.Visible = True
                 lblManualDatabaseFieldsPrompt.Visible = True

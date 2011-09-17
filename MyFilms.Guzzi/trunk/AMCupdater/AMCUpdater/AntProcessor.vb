@@ -742,16 +742,20 @@ Public Class AntProcessor
                     Case "Copy Value"
                         If CurrentNode.Attributes(_ManualFieldName) Is Nothing Then
                             bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied (No source value present) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                        Else
+                        ElseIf Not CurrentSettings.Only_Update_With_Nonempty_Data Or (CurrentSettings.Only_Update_With_Nonempty_Data And CurrentNode.Attributes(_ManualFieldNameDestination).Value.Length > 0) Then
                             If CurrentNode.Attributes(_ManualFieldNameDestination) Is Nothing Then
                                 newAttr = XmlDoc.CreateAttribute(_ManualFieldNameDestination)
                                 newAttr.Value = CurrentNode.Attributes(_ManualFieldNameDestination).Value
                                 CurrentNode.Attributes.Append(newAttr)
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied (and field created): " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
-                            Else
+                            ElseIf Not CurrentSettings.Only_Add_Missing_Data Or (CurrentSettings.Only_Add_Missing_Data And CurrentNode.Attributes(_ManualFieldNameDestination).Value.Length > 0) Then
                                 CurrentNode.Attributes(_ManualFieldNameDestination).Value = CurrentNode.Attributes(_ManualFieldName).Value
                                 bgwManualUpdate.ReportProgress(ProcessCounter, "Value copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                            Else
+                                bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - non empty destination should not be overwritten: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                             End If
+                        Else
+                            bgwManualUpdate.ReportProgress(ProcessCounter, "Value not copied - empty sources should not be copied: " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                         End If
                     Case "Update Record"
                         Dim FileToScan As String = String.Empty
