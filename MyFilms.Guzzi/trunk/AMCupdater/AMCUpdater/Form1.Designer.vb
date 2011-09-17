@@ -464,6 +464,9 @@ Partial Class Form1
         Me.XionPanel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.VidéoBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.VidéoBindingNavigator.SuspendLayout()
+        Me.mnuFile.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         CType(Me.epInteractive, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3929,6 +3932,7 @@ Partial Class Form1
         Me.VidéoBindingNavigator.BindingSource = Me.VideoBindingSource
         Me.VidéoBindingNavigator.CountItem = Me.BindingNavigatorCountItem
         Me.VidéoBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+        Me.VidéoBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.VidéoBindingNavigatorSaveItem})
         Me.VidéoBindingNavigator.Location = New System.Drawing.Point(3, 3)
         Me.VidéoBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.VidéoBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
@@ -4038,6 +4042,7 @@ Partial Class Form1
         '
         'mnuFile
         '
+        Me.mnuFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.DebugToolStripMenuItem})
         Me.mnuFile.Location = New System.Drawing.Point(0, 0)
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(608, 24)
@@ -4082,12 +4087,14 @@ Partial Class Form1
         '
         'ToolStripMenuItem2
         '
+        Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InternetLinksToolStripMenuItem, Me.UserManualToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
         Me.ToolStripMenuItem2.Size = New System.Drawing.Size(40, 20)
         Me.ToolStripMenuItem2.Text = "Help"
         '
         'InternetLinksToolStripMenuItem
         '
+        Me.InternetLinksToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MyFilmsWikiToolStripMenuItem, Me.AMCUpdaterSourceforgeToolStripMenuItem, Me.AntMovieCatalogToolStripMenuItem, Me.MediaInfodllToolStripMenuItem})
         Me.InternetLinksToolStripMenuItem.Name = "InternetLinksToolStripMenuItem"
         Me.InternetLinksToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.InternetLinksToolStripMenuItem.Text = "Internet Links"
@@ -4215,6 +4222,7 @@ Partial Class Form1
         '
         'StatusStrip1
         '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripFixedText, Me.ToolStripStatusLabel, Me.ToolStripProgressBar})
         Me.StatusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 636)
         Me.StatusStrip1.Name = "StatusStrip1"
@@ -4448,6 +4456,12 @@ Partial Class Form1
         Me.XionPanel1.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.VidéoBindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.VidéoBindingNavigator.ResumeLayout(False)
+        Me.VidéoBindingNavigator.PerformLayout()
+        Me.mnuFile.ResumeLayout(False)
+        Me.mnuFile.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         CType(Me.epInteractive, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.epOptions, System.ComponentModel.ISupportInitialize).EndInit()
