@@ -194,10 +194,10 @@
             </CompatibleVersion>
             <SubSystemsUsed>
               <Items>
-                <SubSystemItem Name="MP.Config" />
+                <SubSystemItem Name="MP.SkinEngine" />
                 <SubSystemItem Name="MP.Players" />
                 <SubSystemItem Name="MP.DB" />
-                <SubSystemItem Name="MP.SkinEngine" />
+                <SubSystemItem Name="MP.Config" />
               </Items>
             </SubSystemsUsed>
           </PluginDependencyItem>
@@ -209,28 +209,23 @@
         <Author>Zebons, Guzzi</Author>
         <HomePage>http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films</HomePage>
         <ForumPage>http://forum.team-mediaportal.com/my-films-164/</ForumPage>
-        <UpdateUrl>http://my-films.googlecode.com/svn/trunk/installer/update.xml</UpdateUrl>
+        <UpdateUrl>http://my-films.googlecode.com/svn/trunk/Installer/update.xml</UpdateUrl>
         <Version>
           <Major>5</Major>
-          <Minor>0</Minor>
-          <Build>2</Build>
-          <Revision>1428</Revision>
+          <Minor>1</Minor>
+          <Build>0</Build>
+          <Revision>1468</Revision>
         </Version>
-        <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
-
+        <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
 The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.</ExtensionDescription>
-        <VersionDescription>This Version is Release Candidate 1a.
-
-Please report bugs in MyFilms forum.
-
-
-
-</VersionDescription>
-        <DevelopmentStatus>Rc</DevelopmentStatus>
-        <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-5.0.2.1428-RC1a%28MP12RC%29.mpe1</OnlineLocation>
-        <ReleaseDate>2011-09-07T22:05:54</ReleaseDate>
-        <Tags>movie, film, catalog, manager, ant, amc, dvdprofiler, extreme movie manager, xbmc</Tags>
-        <Location>.\MPE-Packages\MyFilms-V[Version]-RC1a(MP12).mpe1</Location>
+        <VersionDescription>This Version is the final release of MyFilms 5.
+Please report bugs in MyFilms forum.</VersionDescription>
+        <DevelopmentStatus>Stable</DevelopmentStatus>
+        <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
+        <ReleaseDate>2011-09-19T22:10:40.3398602+02:00</ReleaseDate>
+        <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
+        <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
         <Params>
           <Items>
             <SectionParam Name="Online Icon">
@@ -246,7 +241,8 @@ Please report bugs in MyFilms forum.
  If have .dll extension used like MP plugin configuration</Description>
             </SectionParam>
             <SectionParam Name="Online Screenshots">
-              <Value>http://wiki.team-mediaportal.com/@api/deki/files/1943/=MyFilmsMain.jpg; http://wiki.team-mediaportal.com/@api/deki/files/1944/=MyFilmsFanart.jpg</Value>
+              <Value>http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/MyFilmsMain.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/MyFilmsFanart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/CoverFlow.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/IconsLayout.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Filmstrip.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/CatListFanart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DefaultView.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsOverview.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsDesc.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsTechInfo.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/SetWatchedMain.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/QuickStart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCInteractive.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCU_View.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCU_ViewFull.png
+</Value>
               <ValueType>String</ValueType>
               <Description>Online stored screenshot urls separated by ; </Description>
             </SectionParam>
