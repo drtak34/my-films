@@ -1648,7 +1648,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "ant-nfo-writer":
-                    ShowMessageDialog("Info", "", "Action not yet implemented");
+                    ShowMessageDialog("Info", "", "Action not yet implemented");  
                     break;
 
                 case "trailer-imdb":
