@@ -238,6 +238,12 @@ for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
 The setting for this path is done via the Fanart path setting automatically; 
 See "Fanart for default group views - path" below.</value>
   </data>
+  <data name="btnResetThumbs.ToolTip" xml:space="preserve">
+    <value>That action will remove all generated cache thumbs for group views.
+(Your original images will not be deleted.)
+This is only required, if you replaced existing (and already cached thumbs) 
+with new ones to let MyFilms (re)create the cache.</value>
+  </data>
   <data name="MesFilmsViews.ToolTip" xml:space="preserve">
     <value>This path is the "root folder" for group thumbs.
 The respective thumbs will be loaded from subfolders, named like the views 
@@ -293,6 +299,13 @@ populate or change them accordingly.
 Remark:
 If you choose a subfolder to your catalog directory, MyFilms setup will automatically split the path and
 set this path to the catalog directory and the rest of the path to the Picture Prefix.</value>
+  </data>
+  <data name="btnResetThumbsArtist.ToolTip" xml:space="preserve">
+    <value>That action will remove all generated person image thumbs.
+(Your original images will not be deleted.)
+This is only required, if you replaced existing (and already cached thumbs) 
+with new ones to let MyFilms (re)create the cache.
+</value>
   </data>
   <data name="MesFilmsImgArtist.ToolTip" xml:space="preserve">
     <value>Enter the full path to the folder containing the person image files.

@@ -107,6 +107,8 @@
           this.linkLabelMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
           this.groupBoxTrakt = new System.Windows.Forms.GroupBox();
+          this.linkLabelUsingTraktInMyFilmsWiki = new System.Windows.Forms.LinkLabel();
+          this.linkLabelTraktWiki = new System.Windows.Forms.LinkLabel();
           this.labelTraktDescription = new System.Windows.Forms.Label();
           this.cbAllowTraktSync = new System.Windows.Forms.CheckBox();
           this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -506,8 +508,6 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.linkLabelTraktWiki = new System.Windows.Forms.LinkLabel();
-          this.linkLabelUsingTraktInMyFilmsWiki = new System.Windows.Forms.LinkLabel();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -645,7 +645,7 @@
           this.label_VersionNumber.ForeColor = System.Drawing.SystemColors.HotTrack;
           this.label_VersionNumber.Location = new System.Drawing.Point(650, 16);
           this.label_VersionNumber.Name = "label_VersionNumber";
-          this.label_VersionNumber.Size = new System.Drawing.Size(92, 13);
+          this.label_VersionNumber.Size = new System.Drawing.Size(89, 13);
           this.label_VersionNumber.TabIndex = 34;
           this.label_VersionNumber.Text = "Version x.x.x.xxxx";
           this.ToolTip1.SetToolTip(this.label_VersionNumber, "MyFilms Version Number");
@@ -702,6 +702,28 @@
           this.groupBoxTrakt.TabIndex = 5;
           this.groupBoxTrakt.TabStop = false;
           this.groupBoxTrakt.Text = "Trakt ...";
+          // 
+          // linkLabelUsingTraktInMyFilmsWiki
+          // 
+          this.linkLabelUsingTraktInMyFilmsWiki.AutoSize = true;
+          this.linkLabelUsingTraktInMyFilmsWiki.Location = new System.Drawing.Point(518, 172);
+          this.linkLabelUsingTraktInMyFilmsWiki.Name = "linkLabelUsingTraktInMyFilmsWiki";
+          this.linkLabelUsingTraktInMyFilmsWiki.Size = new System.Drawing.Size(113, 13);
+          this.linkLabelUsingTraktInMyFilmsWiki.TabIndex = 5;
+          this.linkLabelUsingTraktInMyFilmsWiki.TabStop = true;
+          this.linkLabelUsingTraktInMyFilmsWiki.Text = "Using Trakt in MyFilms";
+          this.linkLabelUsingTraktInMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsingTraktInMyFilmsWiki_LinkClicked);
+          // 
+          // linkLabelTraktWiki
+          // 
+          this.linkLabelTraktWiki.AutoSize = true;
+          this.linkLabelTraktWiki.Location = new System.Drawing.Point(518, 208);
+          this.linkLabelTraktWiki.Name = "linkLabelTraktWiki";
+          this.linkLabelTraktWiki.Size = new System.Drawing.Size(56, 13);
+          this.linkLabelTraktWiki.TabIndex = 4;
+          this.linkLabelTraktWiki.TabStop = true;
+          this.linkLabelTraktWiki.Text = "Trakt Wiki";
+          this.linkLabelTraktWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTraktWiki_LinkClicked);
           // 
           // labelTraktDescription
           // 
@@ -1423,7 +1445,7 @@
           this.btnResetThumbs.Size = new System.Drawing.Size(64, 36);
           this.btnResetThumbs.TabIndex = 76;
           this.btnResetThumbs.Text = "Reset Thumbs";
-          this.ToolTip1.SetToolTip(this.btnResetThumbs, "That action will remove all generated thumbs for group views");
+          this.ToolTip1.SetToolTip(this.btnResetThumbs, resources.GetString("btnResetThumbs.ToolTip"));
           this.btnResetThumbs.UseVisualStyleBackColor = true;
           this.btnResetThumbs.Click += new System.EventHandler(this.btnResetThumbs_Click);
           // 
@@ -1623,7 +1645,7 @@
           this.btnResetThumbsArtist.Size = new System.Drawing.Size(64, 34);
           this.btnResetThumbsArtist.TabIndex = 99;
           this.btnResetThumbsArtist.Text = "Reset Thumbs";
-          this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, "That action will remove all generated person image thumbs");
+          this.ToolTip1.SetToolTip(this.btnResetThumbsArtist, resources.GetString("btnResetThumbsArtist.ToolTip"));
           this.btnResetThumbsArtist.UseVisualStyleBackColor = true;
           this.btnResetThumbsArtist.Click += new System.EventHandler(this.btnResetThumbsArtist_Click);
           // 
@@ -5107,28 +5129,6 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
-          // 
-          // linkLabelTraktWiki
-          // 
-          this.linkLabelTraktWiki.AutoSize = true;
-          this.linkLabelTraktWiki.Location = new System.Drawing.Point(518, 208);
-          this.linkLabelTraktWiki.Name = "linkLabelTraktWiki";
-          this.linkLabelTraktWiki.Size = new System.Drawing.Size(56, 13);
-          this.linkLabelTraktWiki.TabIndex = 4;
-          this.linkLabelTraktWiki.TabStop = true;
-          this.linkLabelTraktWiki.Text = "Trakt Wiki";
-          this.linkLabelTraktWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelTraktWiki_LinkClicked);
-          // 
-          // linkLabelUsingTraktInMyFilmsWiki
-          // 
-          this.linkLabelUsingTraktInMyFilmsWiki.AutoSize = true;
-          this.linkLabelUsingTraktInMyFilmsWiki.Location = new System.Drawing.Point(518, 172);
-          this.linkLabelUsingTraktInMyFilmsWiki.Name = "linkLabelUsingTraktInMyFilmsWiki";
-          this.linkLabelUsingTraktInMyFilmsWiki.Size = new System.Drawing.Size(113, 13);
-          this.linkLabelUsingTraktInMyFilmsWiki.TabIndex = 5;
-          this.linkLabelUsingTraktInMyFilmsWiki.TabStop = true;
-          this.linkLabelUsingTraktInMyFilmsWiki.Text = "Using Trakt in MyFilms";
-          this.linkLabelUsingTraktInMyFilmsWiki.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsingTraktInMyFilmsWiki_LinkClicked);
           // 
           // MyFilmsSetup
           // 
