@@ -1335,23 +1335,9 @@ Public Class AntRecord
             CurrentAttribute = "MediaLabel"
             If (_FilePath.Length > 0) And IsUpdateRequested(CurrentAttribute) = True Then
                 If _Read_DVD_Label = True Then
-                    Dim DrivePath As String = String.Empty
-                    Dim DriveLetter As String = String.Empty
                     Dim DriveLabel As String = String.Empty
-                    If _FilePath.IndexOf(":") > 0 Then
-                        'We're scanning a drive not a UNC, check what drive:
-                        DriveLetter = _FilePath.Substring(0, _FilePath.IndexOf(":") + 1)
-                        Dim myObjectSearcher As System.Management.ManagementObjectSearcher
-                        Dim myObject As System.Management.ManagementObject
-                        myObjectSearcher = New System.Management.ManagementObjectSearcher("SELECT * FROM Win32_CDROMDrive")
-                        For Each myObject In myObjectSearcher.Get
-                            If myObject("MediaLoaded") = "True" Then
-                                If myObject("Drive").ToString.ToLower = DriveLetter.ToLower Then
-                                    DriveLabel = myObject("VolumeName").ToString
-                                End If
-                            End If
-                        Next
-                    End If
+                    DriveLabel = DrvLabel(_FilePath)
+
                     If DriveLabel = String.Empty Then
                         TempValue = _MediaLabel
                     Else
@@ -2073,6 +2059,50 @@ Public Class AntRecord
             End Try
         End If
         Return CoverFileExists
+    End Function
+
+    Private Function DrvLabel(ByVal MediaPath As String) As String
+        Dim Label As String = ""
+
+        ' Try to get DVD-Drive-Label
+        Dim DrivePath As String = String.Empty
+        Dim DriveLetter As String = String.Empty
+        If _FilePath.IndexOf(":") > 0 Then
+            'We're scanning a drive not a UNC, check what drive:
+            DriveLetter = _FilePath.Substring(0, _FilePath.IndexOf(":") + 1) ' e.g. C:
+            Dim myObjectSearcher As System.Management.ManagementObjectSearcher
+            Dim myObject As System.Management.ManagementObject
+            myObjectSearcher = New System.Management.ManagementObjectSearcher("SELECT * FROM Win32_CDROMDrive")
+            For Each myObject In myObjectSearcher.Get
+                If myObject("MediaLoaded") = "True" Then
+                    If myObject("Drive").ToString.ToLower = DriveLetter.ToLower Then
+                        Label = myObject("VolumeName").ToString
+                    End If
+                End If
+            Next
+
+            If Label = String.Empty Then ' Try to get Volumelabel from Disk Drive
+                DriveLetter = DriveLetter.Substring(0, 2) ' e.g. C:\
+                Dim allDrives() As DriveInfo = DriveInfo.GetDrives()
+                Dim d As DriveInfo
+                For Each d In allDrives
+                    If d.IsReady = True Then
+                        If d.Name.ToString.ToLower.Substring(0, 2) = DriveLetter.ToLower Then
+                            Label = d.VolumeLabel ' d.DriveFormat, d.DriveType
+                        End If
+                    End If
+                Next
+            End If
+        Else ' not a drive name, but UNC path - so populate with UNC server name
+            If _FilePath.StartsWith("\\") Then
+                Dim tString As String
+                tString = _FilePath.Substring(2)
+                If tString.IndexOf("\") > 0 Then
+                    Label = _FilePath.Substring(0, tString.IndexOf("\"))
+                End If
+            End If
+        End If
+        Return Label
     End Function
 
     Public Sub SaveProgress()
