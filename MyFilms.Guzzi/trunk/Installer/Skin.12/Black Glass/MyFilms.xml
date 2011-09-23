@@ -1673,17 +1673,17 @@ End additional Backdrops  -->
 				<animation effect="fade" time="450" reversible="true">visible</animation>
 				<animation effect="fade" time="450" reversible="true">hidden</animation>
 				<visible>!control.hasfocus(50)</visible>
-  			    <mpe>
+  			    	<mpe>
   				      <layout>Grid</layout>
   				      <spring>no</spring>
   				      <spacing>0</spacing>
   				      <padding>
-    			          <top>0</top>
-    			          <right>0</right>
-    			          <bottom>0</bottom>
-    			          <left>0</left>
+    			          	<top>0</top>
+    			          	<right>0</right>
+    			          	<bottom>0</bottom>
+    			          	<left>0</left>
   				      </padding>
-  			    </mpe>
+  			    	</mpe>
 				<control>
 					<type>button</type>
 					<description>Layout</description>
@@ -1789,6 +1789,17 @@ End additional Backdrops  -->
 					<onright>50</onright>
 					<onup>10013</onup>
 					<ondown>2</ondown>
+				</control>
+          			<control>
+					<description>MPEIUPDATE:ceddd4d1-4cac-4846-9af5-f4daee1bbddc</description>
+					<type>button</type>
+					<id>99999</id>
+					<label>MyFilms Update Available !</label>
+					<onup>99991</onup>
+					<ondown>2</ondown>
+					<onright>50</onright>
+					<width>310</width>            
+					<visible>string.equals(#mpei.ceddd4d1-4cac-4846-9af5-f4daee1bbddc.haveupdate,true)</visible>
 				</control>
 			</control> 
 		</control>
