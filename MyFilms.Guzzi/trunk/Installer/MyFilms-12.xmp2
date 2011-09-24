@@ -3167,10 +3167,13 @@ Please refer to the Wiki online documentation.</Value>
       <Build>0</Build>
       <Revision>1468</Revision>
     </Version>
-    <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
-
+    <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
+
+
 The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.</ExtensionDescription>
-    <VersionDescription>This Version is the final release of MyFilms 5.
+    <VersionDescription>This Version is the final release of MyFilms 5.
+
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
