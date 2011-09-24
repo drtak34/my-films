@@ -110,7 +110,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               //this.btnWatchedExport.Visible = false; // disable export/import for watched status (not yet implemented)
               //this.btnWatchedImport.Visible = false; // disable export/import for watched status (not yet implemented)
               // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
-              CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
+              //CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
               CatalogType.Items.Remove("MyFilms extended Database");
               CatalogType.Items.Remove("XBMC nfo reader");
               //CatalogType.Items.Remove(CatalogType.Items[7]); // MF internal DB
