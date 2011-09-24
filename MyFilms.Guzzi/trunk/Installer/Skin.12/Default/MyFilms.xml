@@ -5,6 +5,12 @@
 	<define>#header.label:#myfilms.config.pluginname</define>
 	<allowoverlay>player.hasmedia+!facadeview.filmstrip+!facadeview.coverflow</allowoverlay>
 	 <controls>
+
+    	  <!-- MyFilms -->
+    	  <settings>
+      		<skininterfaceversion>1.0</skininterfaceversion>
+    	  </settings>
+
 	  <!-- <import>common.time.xml</import> -->
      	 <control>
       	    <description>BG</description>

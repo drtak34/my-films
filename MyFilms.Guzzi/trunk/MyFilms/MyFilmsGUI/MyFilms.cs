@@ -35,6 +35,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.Text.RegularExpressions;
   using System.Threading;
   using System.Web.UI.WebControls;
+  using System.Xml;
 
   using Grabber;
 
@@ -372,6 +373,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private const int RandomFanartDelay = 15000;
 
+    // Version for Skin Interface
+    private const int SkinInterfaceVersionMajor = 1;
+    private const int SkinInterfaceVersionMinor = 0;
+    // keeps track of currently loaded skin name to (re)initiate skin interface check on pageload
+    private string currentSkin = null;
+
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
     LoadParameterInfo loadParamInfo;
@@ -536,8 +543,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitLogger(); // Initialize Logger 
       Log.Info("MyFilms.Init() started. See MyFilms.log for further Details.");
       LogMyFilms.Debug("MyFilms.Init() started.");
-      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() +  "', BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
+      LogMyFilms.Info("MyFilms     Version: 'V" + MyFilmsSettings.Version.ToString() + "', BuildDate: '" + MyFilmsSettings.BuildDate.ToString() + "'");
       LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion.ToString() + "', BuildDate: '" + MyFilmsSettings.MPBuildDate.ToString() + "'");
+      LogMyFilms.Info("MyFilms Skin Interface Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
 
       // Fanart Timer
       _fanartTimer = new System.Threading.Timer(new TimerCallback(FanartTimerEvent), null, Timeout.Infinite, Timeout.Infinite);
@@ -601,6 +609,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("MyFilms.OnPageLoad() started.");
       Log.Debug("MyFilms.OnPageLoad() started. See MyFilms.log for further Details.");
 
+      CheckSkinInterfaceVersion();
+      
       if (InitialStart)
       {
         // Initial steps
@@ -9500,12 +9510,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void ShowMessageDialog(string headline, string line1, string line2)
     {
+      ShowMessageDialog(headline, line1, line2, "");
+    }
+
+    private void ShowMessageDialog(string headline, string line1, string line2, string line3)
+    {
       GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
       if (dlgOK != null)
       {
         dlgOK.SetHeading(headline);
         dlgOK.SetLine(1, line1);
         dlgOK.SetLine(2, line2);
+        dlgOK.SetLine(3, line3);
         dlgOK.DoModal(GetID);
       }
     }
@@ -10008,7 +10024,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (pDlgNotify == null) return;
 
       // if image is empty, attempt to load the default
-      string defaultLogo = Path.Combine(GUIGraphicsContext.Skin, @"Media\Logos\tvseries.png");
+      string defaultLogo = Path.Combine(GUIGraphicsContext.Skin, @"Media\Logos\myfilms.png");
       if (File.Exists(defaultLogo))
       {
         image = defaultLogo;
@@ -10043,6 +10059,85 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         pDlgOk.SetLine(i, lines[i - 1]);
       }
       pDlgOk.DoModal(GUIWindowManager.ActiveWindow);
+    }
+
+      private void CheckSkinInterfaceVersion()
+      {
+        string Skin = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
+        if (currentSkin == null || currentSkin != Skin)
+        {
+          int VersionMajor = 0;
+          int VersionMinor = 0;
+          currentSkin = Skin;
+          bool success = GetSkinInterfaceVersion(ref VersionMajor, ref VersionMinor);
+          if (success)
+          {
+            LogMyFilms.Info("OnPageLoad(): Current Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
+            if (VersionMajor < SkinInterfaceVersionMajor || VersionMajor == 0)
+            {
+              this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin is not compatible!", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
+            }
+            else if (VersionMinor < SkinInterfaceVersionMinor)
+            {
+              this.ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your MyFilms skin should be updated to support all features !", "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
+            }
+          }
+          else
+          {
+            LogMyFilms.Info("OnPageLoad(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "'");
+          }
+        }
+      }
+
+      private bool GetSkinInterfaceVersion(ref int VersionMajor, ref int VersionMinor)
+      {
+      string _version = "";
+      bool success = false;
+      VersionMajor = 0;
+      VersionMinor = 0;
+      string _name = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
+      XmlDocument doc = new XmlDocument();
+      try
+      {
+        string file = Config.GetFile(Config.Dir.Skin, _name, @"MyFilms.xml");
+        doc.PreserveWhitespace = true;
+        doc.Load(file);
+        XmlElement root = doc.DocumentElement;
+        if (root != null)
+        {
+          XmlNode controlsNode = root.SelectSingleNode("controls");
+          if (controlsNode != null)
+          {
+            XmlNode settingsNode = controlsNode.SelectSingleNode("settings");
+            if (settingsNode != null)
+            {
+              XmlNode versionNode = settingsNode.SelectSingleNode("skininterfaceversion");
+              if (versionNode != null)
+              {
+                _version = versionNode.InnerText;
+                success = true;
+              }
+            }
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug("OnPageLoad(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "' - exception: " + ex.Message + ", Stacktrace: " + ex.StackTrace);
+        _version = "";
+        VersionMajor = 0;
+        VersionMinor = 0;
+      }
+      finally
+      {
+        doc = null;
+      }
+      if (!success) return false;
+      success = int.TryParse(_version.Substring(0, _version.IndexOf(".")).Trim(), out VersionMajor);
+      if (!success) return false;
+      success = int.TryParse(_version.Substring(_version.IndexOf(".") + 1).Trim(), out VersionMinor);
+      if (!success) return false;
+      return true;
     }
 
     //enum BackGroundLoadingArgumentType
