@@ -688,6 +688,7 @@ Public Class AntSettings
         dt.Rows.Add("Read_DVD_Label", "False")
         dt.Rows.Add("DVD_Drive_Letter", "")
         dt.Rows.Add("Dont_Ask_Interactive", "False")
+        dt.Rows.Add("Manual_Dont_Ask_Interactive", "False")
         dt.Rows.Add("Manual_XML_File", "")
         If MePo Then
             dt.Rows.Add("Manual_Internet_Parser_Path", MePoConfigPath & "\Scripts\MyFilms\IMDB.xml")
