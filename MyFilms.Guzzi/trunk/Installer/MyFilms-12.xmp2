@@ -2183,6 +2183,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{c6b1f027-647b-431b-977d-e39d80b390c7}-TMDB-CZ.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-CZ.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\Affinity-ES.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{13c385fc-827c-4a43-9198-e07a880df19a}-Affinity-ES.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\Affinity-ES.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3165,7 +3172,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>1</Minor>
       <Build>0</Build>
-      <Revision>1468</Revision>
+      <Revision>1480</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3177,7 +3184,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-09-19T22:10:40.3398602+02:00</ReleaseDate>
+    <ReleaseDate>2011-09-25T20:08:39.9895879+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -5356,6 +5363,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\scripts\MyFilms\TMDB-CZ.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{c6b1f027-647b-431b-977d-e39d80b390c7}-TMDB-CZ.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-CZ.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\Affinity-ES.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{13c385fc-827c-4a43-9198-e07a880df19a}-Affinity-ES.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\Affinity-ES.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
