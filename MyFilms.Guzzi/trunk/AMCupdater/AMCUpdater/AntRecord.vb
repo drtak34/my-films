@@ -1303,7 +1303,9 @@ Public Class AntRecord
             ' Guzzi: Original Code does remove old entries with same otitle name
             'Try to see if entry already exist with empty movie filename => delete the new entry and update existing one
             If _DatabaseFields("originaltitle") = True Or _DatabaseFields("translatedtitle") = True Then
-                _XMLElement = VerifyElement(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
+                If _DatabaseFields("originaltitle") = True Then
+                    _XMLElement = VerifyElement(_XMLElement.Attributes("OriginalTitle").Value.ToString, _XMLElement)
+                End If
             ElseIf ProcessMode = Process_Mode_Names.Import Then
                 _LastOutputMessage = "ERROR : Error importing " & _FileName.ToString & " : No originaltitle or translatedtitle activated"
             End If
