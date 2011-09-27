@@ -1937,6 +1937,7 @@
           this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
           this.ItemSearchGrabberName.Size = new System.Drawing.Size(138, 21);
           this.ItemSearchGrabberName.TabIndex = 61;
+          this.ToolTip1.SetToolTip(this.ItemSearchGrabberName, resources.GetString("ItemSearchGrabberName.ToolTip"));
           // 
           // chkGrabber_ChooseScript
           // 
