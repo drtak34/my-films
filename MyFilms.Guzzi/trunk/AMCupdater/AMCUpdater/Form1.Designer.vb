@@ -2412,9 +2412,9 @@ Partial Class Form1
         Me.chkCheckDVDFolders.AutoSize = True
         Me.chkCheckDVDFolders.Location = New System.Drawing.Point(10, 23)
         Me.chkCheckDVDFolders.Name = "chkCheckDVDFolders"
-        Me.chkCheckDVDFolders.Size = New System.Drawing.Size(132, 17)
+        Me.chkCheckDVDFolders.Size = New System.Drawing.Size(158, 17)
         Me.chkCheckDVDFolders.TabIndex = 10
-        Me.chkCheckDVDFolders.Text = "Check for DVD folders"
+        Me.chkCheckDVDFolders.Text = "Check for DVD / BR folders"
         Me.ToolTip1.SetToolTip(Me.chkCheckDVDFolders, "Enable this option to search for DVD rips." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The system looks for a VIDEO_TS.IFO f" & _
                 "ile and attempts to work out" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the movie title from the folder structure.")
         Me.chkCheckDVDFolders.UseVisualStyleBackColor = True

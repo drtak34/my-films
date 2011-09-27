@@ -1224,9 +1224,17 @@ Public Class AntProcessor
 
                             ElseIf CurrentSettings.Scan_For_DVD_Folders = True Then
                                 'Finally special handling to check for DVD images in folders.
-                                'If FoundFileName.ToLower.Contains("video_ts") Then
                                 If Right(FoundFileName, 12).ToLower = "video_ts.ifo" Then
-                                    LogEvent("  File Found (DVDfolder) - " & FoundFileName, EventLogLevel.Informational)
+                                    LogEvent("  File Found (DVD folder) - " & FoundFileName, EventLogLevel.Informational)
+
+                                    row = ds.Tables("tblFoundNonMediaFiles").NewRow()
+                                    row("FileName") = FoundFileName
+                                    row("FilePath") = CurrentMoviePath
+                                    ds.Tables("tblFoundNonMediaFiles").Rows.Add(row)
+                                End If
+                                'Finally special handling to check for BR images in folders.
+                                If Right(FoundFileName, 10).ToLower = "index.bdmv" Then
+                                    LogEvent("  File Found (BR folder) - " & FoundFileName, EventLogLevel.Informational)
 
                                     row = ds.Tables("tblFoundNonMediaFiles").NewRow()
                                     row("FileName") = FoundFileName
