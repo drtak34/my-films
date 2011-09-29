@@ -2909,8 +2909,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       double tickCount = System.Windows.Media.Animation.AnimationTimer.TickCount;
       // Update instance of delayed item with current position
       itemToPublish = item;
+      if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID)) // if loaded movie via loadparams, never use delayed loading ...
+      {
+        LogMyFilms.Debug("MovieDetailsPublisher() - direct call by load paramaters");
+        Load_Lstdetail(itemToPublish, false);
+      }
       // Publish instantly when previous request has passed the required delay
-      if (125 < (int)(tickCount - lastPublished)) // wait 125 ms to load details...
+      else if ((125 < (int)(tickCount - lastPublished)) || loadParamInfo != null) // wait 125 ms to load details... if loaded via loadparams, never use delayed loading ...
       {
         lastPublished = tickCount;
         MovieDetailsPublisherWorker publisher = new MovieDetailsPublisherWorker(Load_Lstdetail);
