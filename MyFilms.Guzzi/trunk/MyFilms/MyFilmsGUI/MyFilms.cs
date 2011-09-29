@@ -1576,7 +1576,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case Action.ActionType.ACTION_KEY_PRESSED:
           base.OnAction(action);
           break;
-        // case Action.ActionType.ACTION_MUSIC_PLAY:
+        case Action.ActionType.ACTION_MUSIC_PLAY:
         case Action.ActionType.ACTION_PLAY:
           // Play groups as playlist (ToDo)
           if (facadeView.Focus && !facadeView.SelectedListItem.IsFolder)
