@@ -474,6 +474,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 return;
             }
 
+            if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY)
+            {
+              Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
+              return;
+            }
+              
 
             if (actionType.wID == MediaPortal.GUI.Library.Action.ActionType.ACTION_PAGE_UP)
             {
