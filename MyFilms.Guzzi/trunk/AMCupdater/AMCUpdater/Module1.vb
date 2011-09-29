@@ -65,6 +65,47 @@ Module Module1
 
         Return ReturnValue
 
+    End Function
+
+    Public Function GetBRFolderName(ByVal FileName As String) As String
+        'Function to try and guess the correct movie name for a BR image stored in a folder.
+        'filename = BRs\IRON MAN\BDMV\index.bdmv
+        'filename = BRs\IRON MAN\index.bdmv
+
+        Dim TempString As String
+        Dim ReturnValue As String
+
+        'Get the file name itself off the end: \index.bdmv
+        Dim FileNameEnd As String = FileName.Substring(InStrRev(FileName, "\") - 1)
+
+        'This trims the filename and leaves BRs\IRON MAN"
+        FileName = FileName.Replace(FileNameEnd, "")
+
+        If FileName.Contains("\") Then
+            TempString = FileName.Substring(InStrRev(FileName, "\"))
+        Else
+            TempString = FileName
+        End If
+
+        If TempString.ToLower = "bdmv" Then
+            TempString = FileName.Replace(TempString, "")
+            'Check that there isn't a trailing backslash (probably is)
+            If TempString.EndsWith("\") = True Then
+                TempString = TempString.Substring(0, Len(TempString) - 1)
+            End If
+            'Check to see if we've still got a nested path.  Take the next level up if so.
+            If TempString.Contains("\") = True Then
+                ReturnValue = TempString.Substring(InStrRev(TempString, "\"))
+            Else
+                ReturnValue = TempString
+            End If
+
+            'do more processing?
+        Else
+            ReturnValue = TempString
+        End If
+
+        Return ReturnValue
 
     End Function
 
@@ -164,8 +205,11 @@ Module Module1
         End If
 
         'If CurrentSettings.Scan_For_DVD_Folders = True Then
-        If FilePath.Contains("VIDEO_TS") = True Then
+        If FilePath.ToLower.Contains("video_ts") = True Then
             CleanString = GetDVDFolderName(FilePath)
+        End If
+        If FilePath.ToLower.Contains("index.bdmv") = True Then
+            CleanString = GetBRFolderName(FilePath)
         End If
         'End If
 
@@ -174,7 +218,6 @@ Module Module1
         CleanString = CleanString.Trim
 
         CleanString = RemoveNastyCharacters(CleanString)
-
 
         Return CleanString
 

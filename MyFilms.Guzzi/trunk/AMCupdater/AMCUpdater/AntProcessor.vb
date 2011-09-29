@@ -1233,7 +1233,7 @@ Public Class AntProcessor
                                     ds.Tables("tblFoundNonMediaFiles").Rows.Add(row)
                                 End If
                                 'Finally special handling to check for BR images in folders.
-                                If Right(FoundFileName, 10).ToLower = "index.bdmv" Then
+                                If Right(FoundFileName, 10).ToLower = "index.bdmv" And Not Right(FoundFileName, 18).ToLower = "\backup\index.bdmv" Then
                                     LogEvent("  File Found (BR folder) - " & FoundFileName, EventLogLevel.Informational)
 
                                     row = ds.Tables("tblFoundNonMediaFiles").NewRow()
