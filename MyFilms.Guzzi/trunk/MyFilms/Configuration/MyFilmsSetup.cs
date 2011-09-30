@@ -541,7 +541,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem1.Text.Length == 0)
                 AntViewItem1.Text = "(none)";
-            if (!(AntViewItem1.Text == "(none)") && (AntViewText1.Text.Length == 0))
+            if (AntViewItem1.Text != "(none)" && AntViewText1.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText1.Focus();
@@ -549,7 +549,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem2.Text.Length == 0)
                 AntViewItem2.Text = "(none)";
-            if (!(AntViewItem2.Text == "(none)") && (AntViewText2.Text.Length == 0))
+            if (AntViewItem2.Text != "(none)" && AntViewText2.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText2.Focus();
@@ -557,7 +557,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem3.Text.Length == 0)
                 AntViewItem3.Text = "(none)";
-            if (!(AntViewItem3.Text == "(none)") && (AntViewText3.Text.Length == 0))
+            if (AntViewItem3.Text != "(none)" && AntViewText3.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText3.Focus();
@@ -565,7 +565,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem4.Text.Length == 0)
                 AntViewItem4.Text = "(none)";
-            if (!(AntViewItem4.Text == "(none)") && (AntViewText4.Text.Length == 0))
+            if (AntViewItem4.Text != "(none)" && AntViewText4.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText4.Focus();
@@ -573,7 +573,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntViewItem5.Text.Length == 0)
                 AntViewItem5.Text = "(none)";
-            if (!(AntViewItem5.Text == "(none)") && (AntViewText5.Text.Length == 0))
+            if (AntViewItem5.Text != "(none)" && AntViewText5.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Supplementary View Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntViewText5.Focus();
@@ -583,13 +583,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 View_Dflt_Item.Text = "(none)";
             if (AntFilterItem1.Text.Length == 0)
                 AntFilterItem1.Text = "(none)";
-            if (!(AntFilterItem1.Text == "(none)") && (AntFilterSign1.Text.Length == 0))
+            if (AntFilterItem1.Text != "(none)" && AntFilterSign1.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntFilterSign1.Focus();
                 return;
             }
-            if (!(AntFilterItem1.Text == "(none)") && (AntFilterText1.Text.Length == 0))
+            if (AntFilterItem1.Text != "(none)" && AntFilterText1.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntFilterText1.Focus();
@@ -597,19 +597,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntFilterItem2.Text.Length == 0)
                 AntFilterItem2.Text = "(none)";
-            if (!(AntFilterItem2.Text == "(none)") && (AntFilterSign2.Text.Length == 0))
+            if (AntFilterItem2.Text != "(none)" && AntFilterSign2.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Symbol for Filter comparison must be '=' or '#'", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntFilterSign2.Focus();
                 return;
             }
-            if (!(AntFilterItem2.Text == "(none)") && (AntFilterText2.Text.Length == 0))
+            if (AntFilterItem2.Text != "(none)" && AntFilterText2.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("Length of Filter Text Item must be > 0", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntFilterText2.Focus();
                 return;
             }
-            if (!(AntFilterItem1.Text == "(none)") && !(AntFilterItem1.Text == "(none)"))
+            if (AntFilterItem1.Text != "(none)" && AntFilterItem2.Text != "(none)")
             {
                 if (AntFilterComb.Text.Length == 0)
                 {
@@ -644,7 +644,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntSort1.Text.Length == 0)
                 AntSort1.Text = "(none)";
-            if (!(AntSort1.Text == "(none)") && (AntTSort1.Text.Length == 0))
+            if (AntSort1.Text != "(none)" && AntTSort1.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Sortby Label is mandatory with Sortby Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntTSort1.Focus();
@@ -652,14 +652,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntSort2.Text.Length == 0)
                 AntSort2.Text = "(none)";
-            if (!(AntSort2.Text == "(none)") && (AntTSort2.Text.Length == 0))
+            if (AntSort2.Text != "(none)" && AntTSort2.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Sortby Label is mandatory with Sortby Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntTSort2.Focus();
                 return;
-            } if (AntUpdItem1.Text.Length == 0)
+            } 
+            if (AntUpdItem1.Text.Length == 0)
                 AntUpdItem1.Text = "(none)";
-            if (!(AntUpdItem1.Text == "(none)") && (AntUpdText1.Text.Length == 0))
+            if (AntUpdItem1.Text != "(none)" && AntUpdText1.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Button Label is mandatory with the corresponding Update Field Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntUpdText1.Focus();
@@ -667,7 +668,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntUpdItem2.Text.Length == 0)
                 AntUpdItem2.Text = "(none)";
-            if (!(AntUpdItem2.Text == "(none)") && (AntUpdText2.Text.Length == 0))
+            if (AntUpdItem2.Text != "(none)" && AntUpdText2.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Button Label is mandatory with the corresponding Update Field Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntUpdText2.Focus();
@@ -675,7 +676,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntSearchItem1.Text.Length == 0)
                 AntSearchItem1.Text = "(none)";
-            if (!(AntSearchItem1.Text == "(none)") && (AntSearchText1.Text.Length == 0))
+            if (AntSearchItem1.Text != "(none)" && AntSearchText1.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Supplementary Search Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntSearchText1.Focus();
@@ -683,7 +684,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             }
             if (AntSearchItem2.Text.Length == 0)
                 AntSearchItem2.Text = "(none)";
-            if (!(AntSearchItem2.Text == "(none)") && (AntSearchText2.Text.Length == 0))
+            if (AntSearchItem2.Text != "(none)" && AntSearchText2.Text.Length == 0)
             {
                 System.Windows.Forms.MessageBox.Show("The Supplementary Search Label is mandatory with corresponding Item !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 AntSearchText2.Focus();
