@@ -592,7 +592,10 @@ Define this configuration by default and a menu of other configurations will not
 so children will not be aware of any other configurations.
 
 Adult movies can then be included in another configuration that is password protected.
-</value>
+
+Alterternatively you could define a "whitelist" config for children:
+Category LIKE '*Children*' will include all movies, that have Children as part of the Category
+Category LIKE 'Children' will include all movies, that have Children as Category</value>
   </data>
   <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
     <value>"Only available" option acts as global overlayfilter for all views
