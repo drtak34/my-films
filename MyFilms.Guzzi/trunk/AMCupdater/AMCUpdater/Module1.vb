@@ -1,11 +1,13 @@
 Imports System.Runtime.InteropServices
 'Imports System.Xml
 Imports System.Collections
+Imports System.Linq
 Imports System.Globalization
 Imports System.ComponentModel
 Imports System.Threading
 Imports MediaPortal.Configuration
 Imports System.Xml
+
 
 Module Module1
 
@@ -107,6 +109,94 @@ Module Module1
 
         Return ReturnValue
 
+    End Function
+
+    Public Function GetDVDMovieFile(ByVal FileName As String) As String
+        'Function to try and guess the correct movie file by getting the biggest from directory.
+        'filename = DVDs\Shawshank Redemption, the\VIDEO_TS.IFO
+        'filename = DVDs\Shawshank Redemption, the\VIDEO_TS\VIDEO_TS.IFO
+
+        Dim ReturnValue As String
+        Dim directory As String
+
+        If FileName.Contains("\") Then
+            directory = FileName.Substring(0, FileName.LastIndexOf("\"))
+        Else
+            Return FileName
+        End If
+
+        Dim dir As New System.IO.DirectoryInfo(directory)
+        Dim fileList As IEnumerable(Of System.IO.FileInfo) = dir.GetFiles("*.vob", System.IO.SearchOption.AllDirectories)
+
+        ' Return the size of the largest file
+        Dim maxSize = Aggregate aFile In fileList Into Max(GetFileLength(aFile))
+
+        Dim filesByLengDesc = From file In fileList Let filelength = GetFileLength(file) Where filelength > 0 Order By filelength Descending Select file
+
+        Dim longestFile As FileSystemInfo = filesByLengDesc.First
+
+        ReturnValue = longestFile.FullName.ToString
+        Return ReturnValue
+
+    End Function
+
+    Public Function GetBRMovieFile(ByVal FileName As String) As String
+        'Function to try and guess the correct movie file by getting the biggest from directory.
+        'filename = BRs\IRON MAN\BDMV\index.bdmv
+        'filename = BRs\IRON MAN\index.bdmv
+
+        Dim TempString As String
+        Dim ReturnValue As String
+
+        Dim directory As String
+
+        If FileName.Contains("\") Then
+            directory = FileName.Substring(0, FileName.LastIndexOf("\"))
+        Else
+            Return FileName
+        End If
+
+        'Take a snapshot of the folder contents
+        Dim dir As New System.IO.DirectoryInfo(directory)
+        Dim fileList = dir.GetFiles("*.m2ts", System.IO.SearchOption.AllDirectories)
+
+        ' Return the size of the largest file
+        Dim maxSize = Aggregate aFile In fileList Into Max(GetFileLength(aFile))
+
+        'Dim maxSize = fileLengths.Max
+        'Console.WriteLine("The length of the largest file under {0} is {1}", directory, maxSize)
+
+        ' Return the FileInfo object of the largest file
+        ' by sorting and selecting from the beginning of the list
+        Dim filesByLengDesc = From file In fileList Let filelength = GetFileLength(file) Where filelength > 0 Order By filelength Descending Select file
+
+        Dim longestFile = filesByLengDesc.First
+
+        'Console.WriteLine("The largest file under {0} is {1} with a length of {2} bytes", directory, longestFile.FullName, longestFile.Length)
+
+
+        'Try - didn't work ...
+        'Dim FileInfo As FileSystemInfo = New DirectoryInfo(directory).GetFileSystemInfos().OrderByDescending(fi >= fi.Length).First()
+
+        ReturnValue = longestFile.FullName
+        Return ReturnValue
+
+    End Function
+
+    ' This method is used to catch the possible exception
+    ' that can be raised when accessing the FileInfo.Length property.
+    ' In this particular case, it is safe to ignore the exception.
+    Function GetFileLength(ByVal fi As System.IO.FileInfo) As Long
+        Dim retval As Long
+        Try
+            retval = fi.Length
+        Catch ex As FileNotFoundException
+            ' If a file is no longer present,
+            ' just return zero bytes. 
+            retval = 0
+        End Try
+
+        Return retval
     End Function
 
     Public Function StripPathFromFile(ByVal FilePath As String, ByVal ScanPath As String, Optional ByVal OverridePath As String = "") As String
@@ -356,6 +446,13 @@ Module Module1
 
     Public Function GetFileData(ByVal FilePath As String, ByVal DataItem As String)
         'Function to retreive information from the given file.
+
+        If FilePath.ToLower.EndsWith("video_ts.ifo") = True Then
+            FilePath = GetDVDMovieFile(FilePath)
+        End If
+        If FilePath.ToLower.EndsWith("index.bdmv") = True Then
+            FilePath = GetBRMovieFile(FilePath)
+        End If
 
         Dim ReturnValue As String = ""
         Dim TempInteger As Long = 0
