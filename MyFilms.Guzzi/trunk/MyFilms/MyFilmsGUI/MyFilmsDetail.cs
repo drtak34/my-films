@@ -5665,10 +5665,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
                 // Check, if the content returned is a BR playlist to supress internal player and dialogs
                 bool isBRcontent = false;
-                if (newItems[0].ToString().ToLower().Contains("bdmv")) 
+                string mediapath = MyFilms.r[select_item][MyFilms.conf.StrStorage].ToString();
+                if (newItems[0].ToString().ToLower().EndsWith("bdmv")) 
                   isBRcontent = true;
 
-                if (!isBRcontent)
+                if (!isBRcontent || Helper.IsBDHandlerAvailableAndEnabled)
                 {
                   playlistPlayer.Reset();
                   playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;

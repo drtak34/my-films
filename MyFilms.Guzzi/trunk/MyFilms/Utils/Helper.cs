@@ -529,7 +529,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
-            return Helper.IsAssemblyAvailable("SubCentral", new Version(1, 0, 0, 0), false) && IsPluginEnabled("SubCentral");
+            bool status = Helper.IsAssemblyAvailable("SubCentral", new Version(1, 0, 0, 0), false) && IsPluginEnabled("SubCentral");
+            LogMyFilms.Debug("Helper() - SubCentral available and enabled = '" + status + "'");
+            return status;
           }
         }
 
@@ -537,9 +539,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
-            //if (!File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")))
-            //  return false;
-            return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 5, 1), false) && IsPluginEnabled("Trakt");
+            bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 5, 1), false) && IsPluginEnabled("Trakt");
+            LogMyFilms.Debug("Helper() - TraktPlugin available and enabled = '" + status + "'");
+            return status;
           }
         }
 
@@ -547,9 +549,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           get
           {
-            //if (!File.Exists(Path.Combine(Config.GetSubFolder(Config.Dir.Plugins, "Windows"), "TraktPlugin.dll")))
-            //  return false;
-            return Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 6, 1), true) && IsPluginEnabled("Trakt");
+            bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 0, 6, 1), true) && IsPluginEnabled("Trakt");
+            LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
+            return status;
           }
         }
 
@@ -561,10 +563,21 @@ namespace MyFilmsPlugin.MyFilms.Utils
             bool BrowseTheWebRightPlugin = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb");
             bool BrowseTheWebRightVersion = PluginManager.SetupForms.Cast<ISetupForm>().Any(plugin => plugin.PluginName() == "BrowseTheWeb" && plugin.GetType().Assembly.GetName().Version.Minor >= 0);
             LogMyFilms.Debug("MyFilms.Init() - BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "', BrowseTheWebRightVersion = '" + BrowseTheWebRightVersion + "'");
-            if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion) 
+            if (BrowseTheWebRightPlugin && BrowseTheWebRightVersion)
               status = true;
+            LogMyFilms.Debug("Helper() - BrowseTheWeb available and enabled = '" + status + "'");
             return status;
             // return Helper.IsAssemblyAvailable("BrowseTheWeb", new Version(0, 3, 0, 0)) && IsPluginEnabled("BrowseTheWeb");
+          }
+        }
+
+        public static bool IsBDHandlerAvailableAndEnabled
+        {
+          get
+          {
+            bool status = Helper.IsAssemblyAvailable("BDHandler", new Version(0, 9, 7, 29), false) && IsPluginEnabled("Blu-ray Handler");
+            LogMyFilms.Debug("Helper() - BDHandler available and enabled = '" + status + "'");
+            return status;
           }
         }
 
