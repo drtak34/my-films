@@ -145,9 +145,7 @@ Module Module1
         'filename = BRs\IRON MAN\BDMV\index.bdmv
         'filename = BRs\IRON MAN\index.bdmv
 
-        Dim TempString As String
         Dim ReturnValue As String
-
         Dim directory As String
 
         If FileName.Contains("\") Then

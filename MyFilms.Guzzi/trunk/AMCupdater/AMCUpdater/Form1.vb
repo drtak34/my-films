@@ -901,7 +901,9 @@ Public Class Form1
     End Sub
     Private Sub btnDBFieldsSelectAll_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDBFieldsSelectAll.Click
         For i As Integer = 0 To cbDatabaseFields.Items.Count - 1
-            cbDatabaseFields.SetItemChecked(i, True)
+            If Not cbDatabaseFields.Items(i).ToString = txtDefaultSourceField.Text Then
+                cbDatabaseFields.SetItemChecked(i, True)
+            End If
         Next
         Database_Fields_Validation()
     End Sub
@@ -914,7 +916,9 @@ Public Class Form1
     Private Sub btnDBFieldsSelectAllMedia_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDBFieldsSelectAllMedia.Click
         For i As Integer = 0 To cbDatabaseFields.Items.Count - 1
             If MediaData.ContainsKey(cbDatabaseFields.Items(i).ToString.ToLower) Then
-                cbDatabaseFields.SetItemChecked(i, True)
+                If Not cbDatabaseFields.Items(i).ToString = txtDefaultSourceField.Text Then
+                    cbDatabaseFields.SetItemChecked(i, True)
+                End If
             End If
         Next
         Database_Fields_Validation()
@@ -930,7 +934,9 @@ Public Class Form1
     Private Sub btnDBFieldsSelectAllInternet_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDBFieldsSelectAllInternet.Click
         For i As Integer = 0 To cbDatabaseFields.Items.Count - 1
             If InternetData.ContainsKey(cbDatabaseFields.Items(i).ToString.ToLower) Then
-                cbDatabaseFields.SetItemChecked(i, True)
+                If Not cbDatabaseFields.Items(i).ToString = txtDefaultSourceField.Text Then
+                    cbDatabaseFields.SetItemChecked(i, True)
+                End If
             End If
         Next
         Database_Fields_Validation()
@@ -1260,6 +1266,8 @@ Public Class Form1
             For Each blah As String In FileTypes
                 If blah.ToLower = "ifo" Then
                     MsgBox("You cannot scan for filetype 'ifo' as this is used for DVD image detection.")
+                ElseIf blah.ToLower = "bdmv" Then
+                    MsgBox("You cannot scan for filetype 'bdmv' as this is used for BR image detection.")
                 Else
                     OutputString += blah & ";"
                 End If
@@ -1281,6 +1289,8 @@ Public Class Form1
             For Each blah As String In FileTypes
                 If blah.ToLower = "ifo" Then
                     MsgBox("You cannot scan for filetype 'ifo' as this is used for DVD image detection.")
+                ElseIf blah.ToLower = "bdmv" Then
+                    MsgBox("You cannot scan for filetype 'bdmv' as this is used for BR image detection.")
                 Else
                     OutputString += blah & ";"
                 End If
@@ -1671,8 +1681,19 @@ Public Class Form1
             epOptions.SetError(txtDefaultFileTypes, "")
         End If
 
+        Dim SourceChecked As String
+        Dim SourceIndex As Integer = cbDatabaseFields.Items.IndexOf(txtDefaultSourceField.Text)
+        If SourceIndex > -1 Then
+            SourceChecked = cbDatabaseFields.GetItemChecked(SourceIndex).ToString
+        Else
+            SourceChecked = ""
+        End If
+
         If txtDefaultSourceField.Text.Length < 1 Then
             epOptions.SetError(txtDefaultSourceField, "Source Field is mandatory. The default is 'Source'.")
+            ValidOptions = False
+        ElseIf SourceChecked = "True" Then
+            epOptions.SetError(txtDefaultSourceField, "Make sure the media Source Field is not selected to be updated in database fields.")
             ValidOptions = False
         Else
             epOptions.SetError(txtDefaultSourceField, "")
@@ -1758,11 +1779,23 @@ Public Class Form1
         For Each item In cbDatabaseFields.Items
             FieldName = item.ToString
             FieldChecked = cbDatabaseFields.GetItemChecked(cbDatabaseFields.Items.IndexOf(FieldName)).ToString
+
             If FieldChecked = "True" Then
                 If InternetData.ContainsValue(FieldName.ToLower) Then
                     InternetLookupNeeded = True
                 End If
             End If
+
+
+            If FieldName = txtDefaultSourceField.Text Then
+                If FieldChecked = "True" Then
+                    epOptions.SetError(txtDefaultSourceField, "Make sure the media Source Field is not selected to be updated in database fields.")
+                    ' cbDatabaseFields.SetItemChecked(cbDatabaseFields.Items.IndexOf(FieldName), False)
+                Else
+                    epOptions.SetError(txtDefaultSourceField, "")
+                End If
+            End If
+
             If FieldName = "OriginalTitle" Then
                 'Original Title needs special handling - only required if TitleHandling says to use Internet lookup:
                 If FieldChecked = True Then
