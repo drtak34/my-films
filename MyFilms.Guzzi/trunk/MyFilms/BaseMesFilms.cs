@@ -672,7 +672,7 @@ namespace MyFilmsPlugin.MyFilms
         #region API for Most Recent movies
 
         /// <summary>
-        /// returns the 3 most recent episodes based on criteria
+        /// returns the 3 most recent movies based on conditions
         /// </summary>        
         public static List<MFMovie> GetMostRecent(MostRecentType type)
         {
@@ -680,7 +680,7 @@ namespace MyFilmsPlugin.MyFilms
         }
 
         /// <summary>
-        /// returns the most recent episodes based on criteria
+        /// returns the most recent movies based on conditions
         /// </summary>
         /// <param name="type">most recent type</param>
         /// <param name="days">number of days to look back in database</param>
@@ -691,7 +691,7 @@ namespace MyFilmsPlugin.MyFilms
         }
 
         /// <summary>
-        /// returns the most recent episodes based on criteria
+        /// returns the most recent movies based on conditions
         /// </summary>
         /// <param name="type">most recent type</param>
         /// <param name="days">number of days to look back in database</param>

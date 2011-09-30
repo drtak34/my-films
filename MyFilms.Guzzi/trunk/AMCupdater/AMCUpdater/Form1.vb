@@ -1264,9 +1264,9 @@ Public Class Form1
         If txtDefaultFileTypes.Text <> String.Empty Then
             FileTypes = txtDefaultFileTypes.Text.Split(";")
             For Each blah As String In FileTypes
-                If blah.ToLower = "ifo" Then
+                If blah.ToLower.Trim = "ifo" Then
                     MsgBox("You cannot scan for filetype 'ifo' as this is used for DVD image detection.")
-                ElseIf blah.ToLower = "bdmv" Then
+                ElseIf blah.ToLower.Trim = "bdmv" Then
                     MsgBox("You cannot scan for filetype 'bdmv' as this is used for BR image detection.")
                 Else
                     OutputString += blah & ";"
@@ -1287,9 +1287,9 @@ Public Class Form1
         If txtDefaultFileTypesNonMedia.Text <> String.Empty Then
             FileTypes = txtDefaultFileTypesNonMedia.Text.Split(";")
             For Each blah As String In FileTypes
-                If blah.ToLower = "ifo" Then
+                If blah.ToLower.Trim = "ifo" Then
                     MsgBox("You cannot scan for filetype 'ifo' as this is used for DVD image detection.")
-                ElseIf blah.ToLower = "bdmv" Then
+                ElseIf blah.ToLower.Trim = "bdmv" Then
                     MsgBox("You cannot scan for filetype 'bdmv' as this is used for BR image detection.")
                 Else
                     OutputString += blah & ";"
@@ -1677,8 +1677,24 @@ Public Class Form1
         If txtDefaultFileTypes.Text.Length < 1 Then
             epOptions.SetError(txtDefaultFileTypes, "Some file types must be entered.")
             ValidOptions = False
+        ElseIf txtDefaultFileTypes.Text.ToLower.Contains("ifo") Then
+            epOptions.SetError(txtDefaultFileTypes, "You cannot scan for filetype 'ifo' as this is used for DVD image detection.")
+            ValidOptions = False
+        ElseIf txtDefaultFileTypes.Text.ToLower.Contains("bdmv") Then
+            epOptions.SetError(txtDefaultFileTypes, "You cannot scan for filetype 'bdmv' as this is used for BR image detection.")
+            ValidOptions = False
         Else
             epOptions.SetError(txtDefaultFileTypes, "")
+        End If
+
+        If txtDefaultFileTypesNonMedia.Text.ToLower.Contains("ifo") Then
+            epOptions.SetError(txtDefaultFileTypesNonMedia, "You cannot scan for filetype 'ifo' as this is used for DVD image detection.")
+            ValidOptions = False
+        ElseIf txtDefaultFileTypesNonMedia.Text.ToLower.Contains("bdmv") Then
+            epOptions.SetError(txtDefaultFileTypesNonMedia, "You cannot scan for filetype 'bdmv' as this is used for BR image detection.")
+            ValidOptions = False
+        Else
+            epOptions.SetError(txtDefaultFileTypesNonMedia, "")
         End If
 
         Dim SourceChecked As String
@@ -1698,7 +1714,6 @@ Public Class Form1
         Else
             epOptions.SetError(txtDefaultSourceField, "")
         End If
-
 
         Dim DuplicateMediaTypes As Boolean = False
         Dim MediaTypes() As String
