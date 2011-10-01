@@ -129,7 +129,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", 0);
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOut", StrLayOut);
                 if (loadParams != null && !string.IsNullOrEmpty(loadParams.Layout))
-                  int.TryParse(loadParams.Layout, out StrLayOut);
+                {
+                  int iLayout = 0;
+                  if (int.TryParse(loadParams.Layout, out iLayout)) 
+                    StrLayOut = iLayout;
+                }
 
                 Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", string.Empty);
                 Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", string.Empty);
