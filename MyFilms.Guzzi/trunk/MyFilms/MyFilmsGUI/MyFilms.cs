@@ -634,24 +634,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         // check for LoadParameters by GUIproperties if nothing was set by the _loadParameter
-        if (string.IsNullOrEmpty(loadParam)) loadParam = LoadParameterInfo.FromGuiProperties();
+        if (string.IsNullOrEmpty(loadParam)) 
+          loadParam = LoadParameterInfo.FromGuiProperties();
 
         if (!string.IsNullOrEmpty(loadParam))
-        {
           loadParamInfo = new LoadParameterInfo(loadParam);
-
-          // set all state variables to reflect the state we were called with
-          if (!string.IsNullOrEmpty(loadParamInfo.Config))
-          {
-            // set config accordingly
-          }
-          if (!string.IsNullOrEmpty(loadParamInfo.Search))
-          {
-            //lastSearchQuery = loadParamInfo.Search;
-            //Display_SearchResults(loadParamInfo.Search);
-            return;
-          }
-        }
       }
 
       //MyFilmsDetail.clearGUIProperty("picture");
@@ -783,7 +770,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Search)) // search expression given in load params -> do global search !
       {
-        LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading search: '" + loadParamInfo.Search + "' -> NOT YET IMPLEMENTED !");
+        LogMyFilms.Debug("OnPageLoad() - LoadParams - try loading search with search expression: '" + loadParamInfo.Search + "'");
+        conf.Boolselect = false;
+        SearchMoviesbyProperties(MyFilms.conf.StrSearchList, false, loadParamInfo.Search, string.Empty);
       }
 
       if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
@@ -3194,7 +3183,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (choiceSearch[dlg.SelectedLabel] == "globalproperty")
       {
-        SearchMoviesbyProperties(MyFilms.conf.StrSearchList, false);
+        SearchMoviesbyProperties(MyFilms.conf.StrSearchList, false, string.Empty, string.Empty);
         //GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
         dlg.DeInit();
         return;
@@ -8069,70 +8058,85 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  Global search movies by properties     (Guzzi Version)                               *
     //*****************************************************************************************
-    private void SearchMoviesbyProperties(IEnumerable<string> wSearchList, bool returnToContextmenu) // Old hardcoded searchlist: "TranslatedTitle|OriginalTitle|Description|Comments|Actors|Director|Producer|Rating|Year|Date|Category|Country"
+    private void SearchMoviesbyProperties(IEnumerable<string> wSearchList, bool returnToContextmenu, string searchExpression, string searchField) // Old hardcoded searchlist: "TranslatedTitle|OriginalTitle|Description|Comments|Actors|Director|Producer|Rating|Year|Date|Category|Country"
     {
       // first select the property to be searching on
       AntMovieCatalog ds = new AntMovieCatalog();
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       GUIDialogOK dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
       System.Collections.Generic.List<string> choiceSearch = new System.Collections.Generic.List<string>();
       ArrayList w_tableau = new ArrayList();
       //ArrayList w_tablabel = new ArrayList();
-      if (dlg == null) return;
-      dlg.Reset();
-      dlg.SetHeading(GUILocalizeStrings.Get(10798615)); // menu
-
-      if (MyFilms.SearchHistory.Count > 0) // only show dialog, if there was a searchword stored before ...
-      {
-        dlg.Add(GUILocalizeStrings.Get(10798609));//last recent searches
-        choiceSearch.Add("recentsearch");
-      }
-
-      dlg.Add(GUILocalizeStrings.Get(10798616)); // search on all fields
-      choiceSearch.Add("all");
-
-      foreach (string wSearch in wSearchList)
-      {
-        dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(wSearch.Trim()));
-        choiceSearch.Add(wSearch.Trim());
-      }
-
-      dlg.DoModal(GetID);
-      if (dlg.SelectedLabel == -1)
-      {
-        if (returnToContextmenu)
-          this.Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
-        else 
-          this.Change_Search_Options();
-          return;
-      }
-
-      string wproperty = choiceSearch[dlg.SelectedLabel];
       string searchstring = string.Empty;
-      if (wproperty == "recentsearch") // if user choose recent search, set searchname = choice of user instead of asking via vkeyboard
-      {
-        GUIDialogMenu dlgrecent = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-        dlgrecent.Reset();
-        dlgrecent.SetHeading(GUILocalizeStrings.Get(10798609)); // Last Searches ...
-        if (dlgrecent == null) return;
+      string wproperty = "all";
+      bool continueSearch = false;
 
-        for (int i = SearchHistory.Count; i > 0; i--)
+      if (string.IsNullOrEmpty(searchExpression)) // if no search startparameter is set ...
+      {
+        if (dlg == null) return;
+        dlg.Reset();
+        dlg.SetHeading(GUILocalizeStrings.Get(10798615)); // menu
+
+        if (MyFilms.SearchHistory.Count > 0) // only show dialog, if there was a searchword stored before ...
         {
-          dlg.Add(SearchHistory[i - 1]);
+          dlg.Add(GUILocalizeStrings.Get(10798609));//last recent searches
+          choiceSearch.Add("recentsearch");
         }
-        dlgrecent.DoModal(GetID);
-        if (dlg.SelectedId == -1) 
+
+        dlg.Add(GUILocalizeStrings.Get(10798616)); // search on all fields
+        choiceSearch.Add("all");
+
+        foreach (string wSearch in wSearchList)
+        {
+          dlg.Add(GUILocalizeStrings.Get(10798617) + BaseMesFilms.Translate_Column(wSearch.Trim()));
+          choiceSearch.Add(wSearch.Trim());
+        }
+
+        dlg.DoModal(GetID);
+        if (dlg.SelectedLabel == -1)
+        {
+          if (returnToContextmenu)
+            this.Context_Menu_Movie(facadeView.SelectedListItem.ItemId);
+          else
+            this.Change_Search_Options();
           return;
-        // if (dlg.SelectedLabel == -1) return;
-        searchstring = dlgrecent.SelectedLabelText;
+        }
+
+        wproperty = choiceSearch[dlg.SelectedLabel];
+        if (wproperty == "recentsearch") // if user choose recent search, set searchname = choice of user instead of asking via vkeyboard
+        {
+          GUIDialogMenu dlgrecent = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          dlgrecent.Reset();
+          dlgrecent.SetHeading(GUILocalizeStrings.Get(10798609)); // Last Searches ...
+          if (dlgrecent == null) return;
+
+          for (int i = SearchHistory.Count; i > 0; i--)
+          {
+            dlg.Add(SearchHistory[i - 1]);
+          }
+          dlgrecent.DoModal(GetID);
+          if (dlg.SelectedId == -1)
+            return;
+          // if (dlg.SelectedLabel == -1) return;
+          searchstring = dlgrecent.SelectedLabelText;
+        }
+        if (keyboard == null) return;
+        keyboard.Reset();
+        keyboard.Text = searchstring;
+        keyboard.DoModal(GetID);
+        if (keyboard.IsConfirmed)
+          continueSearch = true;
+      }
+      else
+      {
+        searchstring = searchExpression;
+        keyboard.Text = searchstring;
+        continueSearch = true;
       }
 
-      VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-      if (null == keyboard) return;
-      keyboard.Reset();
-      keyboard.Text = searchstring;
-      keyboard.DoModal(GetID);
-      if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text) || !string.IsNullOrEmpty(searchstring)))
+      // if all prerequisites are met, do the search itself
+      if (continueSearch && (!string.IsNullOrEmpty(keyboard.Text) || !string.IsNullOrEmpty(searchstring)))
       {
         UpdateRecentSearch(keyboard.Text, 20); // makes sure, searchstring will go to first place, if already present ... maxItems 20
         ArrayList w_count = new ArrayList();
