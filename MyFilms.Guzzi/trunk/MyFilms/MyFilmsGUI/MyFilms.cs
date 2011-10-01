@@ -685,7 +685,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIWaitCursor.Init(); GUIWaitCursor.Show();
       if ((PreviousWindowId != ID_MyFilmsDetail) && !MovieScrobbling && (PreviousWindowId != ID_MyFilmsActors) && (PreviousWindowId != ID_OnlineVideos) && (PreviousWindowId != ID_BrowseTheWeb))
       {
-        if (InitialStart) InitMainScreen(false); // don't log to MyFilms.log Property clear
+        if (InitialStart) 
+          InitMainScreen(false); // don't log to MyFilms.log Property clear
         
         //InitGlobalFilters(false);
 
@@ -4093,7 +4094,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("Fin_Charge_Init() called with LoadDfltSlct = '" + LoadDfltSlct + "', reload = '" + reload + "'");
       //if (publishTimer != null)
       //  publishTimer.SafeDispose();
-      if (LoadDfltSlct)
+      if (LoadDfltSlct || (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.View)))
       {
         conf.Boolselect = false; // Groupviews = false
         ResetGlobalFilters();
@@ -4126,6 +4127,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BtnSrtBy.SortChanged += new SortEventHandler(SortChanged);
       InitialStart = false; // Guzzi: Set to false after first initialization to be able to return to noninitialized View - Make sure to set true if changing DB config
 
+      // check if single movie is requested by loadparameters
       if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID) && loadParamInfo.Config == Configuration.CurrentConfig) // movieID given in load params -> set index to selected film!
       {
         LogMyFilms.Debug("OnPageLoad() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
@@ -4153,96 +4155,114 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GetFilmList(conf.StrIndex);
         SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
       }
-      else if (conf.Boolselect) // Groupviews ?
-      {
-        // Hack to get persons in ASC order after returning from external plugins ...
-        if (conf.WStrSort.ToUpper() == "ACTORS" || conf.WStrSort.ToUpper() == "PRODUCER" || conf.WStrSort.ToUpper() == "DIRECTOR" || conf.WStrSort.ToUpper() == "WRITER")
-        {
-          currentListLevel = Listlevel.Person;
-          getSelectFromDivx(conf.StrSelect, conf.WStrSort, " ASC", conf.Wstar, false, ""); // preserve index from last time
-        }
-        else
-        {
-          currentListLevel = Listlevel.Group;
-          getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, false, ""); // preserve index from last time
-        }
-        LogMyFilms.Debug("(Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
-        SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
-      }
       else
       {
-        Change_LayOut(MyFilms.conf.StrLayOut);
-        currentListLevel = Listlevel.Movie; // set as default, if no group view
-        if (!(LoadDfltSlct)) // Defaultview not selected
+        //// not necessary - already done in Configuration loading !
+        //// override settings by loadparams ?
+        //if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.View) && loadParamInfo.Config == Configuration.CurrentConfig) // set views as defined by loadparams
+        //{
+        //  conf.Boolselect = false;
+        //  LogMyFilms.Debug("(Fin_Charge_Init) - loadParameters - set view from '" + conf.StrViewDfltItem + "' to '" + loadParamInfo.View + "'");
+        //  conf.StrViewDfltItem = loadParamInfo.View;
+        //  if (!string.IsNullOrEmpty(loadParamInfo.ViewValue)) // set views value filter as defined by loadparams
+        //  {
+        //    LogMyFilms.Debug("(Fin_Charge_Init) - loadParameters - set view filter value from '" + conf.StrViewDfltText + "' to '" + loadParamInfo.ViewValue + "'");
+        //    conf.StrViewDfltText = loadParamInfo.ViewValue;
+        //  }
+        //}
+
+        // now set views in MF ...
+        if (conf.Boolselect) // Groupviews ?
         {
-          GetFilmList(conf.StrIndex);
-          SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
-        }
-        else                                        // Defaultview selected
-        {
-          if (string.IsNullOrEmpty(conf.StrViewDfltItem) || conf.StrViewDfltItem == "(none)" || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
+          // Hack to get persons in ASC order after returning from external plugins ...
+          if (conf.WStrSort.ToUpper() == "ACTORS" || conf.WStrSort.ToUpper() == "PRODUCER" || conf.WStrSort.ToUpper() == "DIRECTOR" || conf.WStrSort.ToUpper() == "WRITER")
           {
-            conf.StrSelect = conf.StrTitle1 + " not like ''"; // was: TxtSelect.Label = conf.StrTxtSelect = "";
-            conf.Boolselect = false;
-            if (conf.StrSortSens == " ASC")
-              BtnSrtBy.IsAscending = true;
-            else
-              BtnSrtBy.IsAscending = false;
-            GetFilmList(conf.StrIndex);
-            SetLabelView("all");
-            SetLabelSelect("root");
+            currentListLevel = Listlevel.Person;
+            getSelectFromDivx(conf.StrSelect, conf.WStrSort, " ASC", conf.Wstar, false, ""); // preserve index from last time
           }
           else
           {
-            if (string.IsNullOrEmpty(conf.StrViewDfltText)) // no filteritem defined for the defaultview
+            currentListLevel = Listlevel.Group;
+            getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.StrSortSens, conf.Wstar, false, ""); // preserve index from last time
+          }
+          LogMyFilms.Debug("(Fin_Charge_Init) - Boolselect = true -> StrTxtSelect = '" + MyFilms.conf.StrTxtSelect + "', StrTxtView = '" + MyFilms.conf.StrTxtView + "'");
+          SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+        }
+        else
+        {
+          Change_LayOut(MyFilms.conf.StrLayOut);
+          currentListLevel = Listlevel.Movie; // set as default, if no group view
+          if (!(LoadDfltSlct) && (loadParamInfo == null || string.IsNullOrEmpty(loadParamInfo.View))) // Defaultview not selected and no view loadparameters set
+          {
+            GetFilmList(conf.StrIndex);
+            SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
+          }
+          else                                        // Defaultview selected
+          {
+            if (string.IsNullOrEmpty(conf.StrViewDfltItem) || conf.StrViewDfltItem == "(none)" || conf.StrViewDfltItem == GUILocalizeStrings.Get(342)) // no Defaultitem defined for defaultview or "films" -> normal movielist
             {
-              if (conf.StrViewDfltItem.ToLower() == "year" || conf.StrViewDfltItem.ToLower() == "category" || conf.StrViewDfltItem.ToLower() == "country" || conf.StrViewDfltItem.ToLower() == "storage" || conf.StrViewDfltItem.ToLower() == "actors")
-                Change_view(conf.StrViewDfltItem.ToLower());
-              else
-              {
-                for (int i = 0; i < 5; i++)
-                {
-                  if (conf.StrViewDfltItem == conf.StrViewText[i])
-                    Change_view(string.Format("View{0}", i).ToLower());
-                }
-              }
-              // SetLabelView and SetLabelSelect will be set by "Change_view"
-            }
-            else
-            // View List as selected - filteritem IS defined for the defaultview
-            {
-              string wStrViewDfltItem = conf.StrViewDfltItem.ToLower();
-              for (int i = 0; i < 5; i++)
-              {
-                if (conf.StrViewDfltItem == conf.StrViewText[i])
-                {
-                  wStrViewDfltItem = conf.StrViewItem[i];
-                  SetLabelView("view" + i.ToString());
-                  break;
-                }
-              }
-              conf.Boolselect = true;
-              conf.Boolreturn = true;
-              conf.Boolview = true;
-              conf.WStrSort = wStrViewDfltItem;
-              if (wStrViewDfltItem == "DateAdded")
-                conf.StrSelect = "Date" + " like '" + DateTime.Parse(conf.StrViewDfltText).ToShortDateString() + "'";
-              else
-                conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";
-              //                            TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
-              conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
-              SetLabelSelect(conf.StrTxtSelect);
-
-              if (wStrViewDfltItem.Length > 0)
-                SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
-              MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
-              BtnSrtBy.Label = conf.CurrentSortMethod;
-              // BtnSrtBy.Label = conf.WStrSort; // ToDo: Check, why initial value not set properly
+              conf.StrSelect = conf.StrTitle1 + " not like ''"; // was: TxtSelect.Label = conf.StrTxtSelect = "";
+              conf.Boolselect = false;
               if (conf.StrSortSens == " ASC")
                 BtnSrtBy.IsAscending = true;
               else
                 BtnSrtBy.IsAscending = false;
               GetFilmList(conf.StrIndex);
+              SetLabelView("all");
+              SetLabelSelect("root");
+            }
+            else
+            {
+              if (string.IsNullOrEmpty(conf.StrViewDfltText)) // no filteritem defined for the defaultview
+              {
+                if (conf.StrViewDfltItem.ToLower() == "year" || conf.StrViewDfltItem.ToLower() == "category" || conf.StrViewDfltItem.ToLower() == "country" || conf.StrViewDfltItem.ToLower() == "storage" || conf.StrViewDfltItem.ToLower() == "actors")
+                  Change_view(conf.StrViewDfltItem.ToLower());
+                else
+                {
+                  for (int i = 0; i < 5; i++)
+                  {
+                    if (conf.StrViewDfltItem == conf.StrViewText[i])
+                      Change_view(string.Format("View{0}", i).ToLower());
+                  }
+                }
+                // SetLabelView and SetLabelSelect will be set by "Change_view"
+              }
+              else
+              // View List as selected - filteritem IS defined for the defaultview
+              {
+                string wStrViewDfltItem = conf.StrViewDfltItem.ToLower();
+                for (int i = 0; i < 5; i++)
+                {
+                  if (conf.StrViewDfltItem == conf.StrViewText[i])
+                  {
+                    wStrViewDfltItem = conf.StrViewItem[i];
+                    SetLabelView("view" + i.ToString());
+                    break;
+                  }
+                }
+                conf.Boolselect = true;
+                conf.Boolreturn = true;
+                conf.Boolview = true;
+                conf.WStrSort = wStrViewDfltItem;
+                if (wStrViewDfltItem == "DateAdded")
+                  conf.StrSelect = "Date" + " like '" + DateTime.Parse(conf.StrViewDfltText).ToShortDateString() + "'";
+                else
+                  conf.StrSelect = wStrViewDfltItem + " like '*" + conf.StrViewDfltText + "*'";
+                //                            TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
+                conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
+                SetLabelSelect(conf.StrTxtSelect);
+
+                if (wStrViewDfltItem.Length > 0)
+                  SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
+                MyFilmsDetail.setGUIProperty("select", conf.StrTxtSelect);
+                BtnSrtBy.Label = conf.CurrentSortMethod;
+                // BtnSrtBy.Label = conf.WStrSort; // ToDo: Check, why initial value not set properly
+                if (conf.StrSortSens == " ASC")
+                  BtnSrtBy.IsAscending = true;
+                else
+                  BtnSrtBy.IsAscending = false;
+                GetFilmList(conf.StrIndex);
+              }
             }
           }
         }

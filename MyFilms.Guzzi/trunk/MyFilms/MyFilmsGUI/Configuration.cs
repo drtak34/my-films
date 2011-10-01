@@ -91,7 +91,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 StrViewDfltText = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewDfltText", string.Empty);
                 if (loadParams != null && !string.IsNullOrEmpty(loadParams.ViewValue))
-                  StrViewDfltItem = loadParams.ViewValue;
+                  StrViewDfltText = loadParams.ViewValue;
 
                 for (int i = 1; i < 6; i++)
                 {
@@ -447,7 +447,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 UseListViewForGoups = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "UseListviewForGroups", true);
                 AlwaysDefaultView = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AlwaysDefaultView", false);
-                if ((AlwaysDefaultView) || (MyFilms.InitialStart))
+                if ((AlwaysDefaultView) || (MyFilms.InitialStart) || (loadParams != null && !string.IsNullOrEmpty(loadParams.View)))
                 {
                     strIndex = -1;
                     LastID = -1;
