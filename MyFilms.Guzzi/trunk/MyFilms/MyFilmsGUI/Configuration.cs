@@ -125,8 +125,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrPathFanart = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "FanartPicture", string.Empty);
                 StrPathViews = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ViewsPicture", string.Empty);
                 StrPathArtist = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "ArtistPicturePath", string.Empty);
+
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "LayOut", 0);
                 StrLayOut = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WLayOut", StrLayOut);
+                if (loadParams != null && !string.IsNullOrEmpty(loadParams.Layout))
+                  int.TryParse(loadParams.Layout, out StrLayOut);
+
                 Strlabel1 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel1", string.Empty);
                 Strlabel2 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel2", string.Empty);
                 Strlabel3 = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntLabel3", string.Empty);
