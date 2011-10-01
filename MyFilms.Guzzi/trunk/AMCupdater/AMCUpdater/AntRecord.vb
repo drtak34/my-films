@@ -1800,7 +1800,7 @@ Public Class AntRecord
                 Dim ftitle As String = ""
                 fanartTitle = GetFanartTitle(_XMLElement, title, ttitle, ftitle, year, director)
 
-                If fanartTitle.Length > 0 Then
+                If fanartTitle.Length > 0 And Not String.IsNullOrEmpty(CurrentSettings.Movie_Fanart_Path) Then
                     If _InternetLookupOK = True And CurrentSettings.Prohibit_Internet_Lookup = False Then
                         Dim fanart As List(Of Grabber.DBMovieInfo)
                         Dim Gb As Grabber.Grabber_URLClass = New Grabber.Grabber_URLClass
