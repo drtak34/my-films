@@ -4210,7 +4210,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   for (int i = 0; i < 5; i++)
                   {
-                    if (conf.StrViewDfltItem == conf.StrViewText[i])
+                    if (conf.StrViewDfltItem.ToLower() == conf.StrViewText[i].ToLower() || conf.StrViewDfltItem.ToLower() == conf.StrViewItem[i].ToLower())
                       Change_view(string.Format("View{0}", i).ToLower());
                   }
                 }
@@ -4434,6 +4434,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
           break;
 
+        case "producer":
+          //  Change View by "Actors":
+          currentListLevel = Listlevel.Person;
+          conf.WStrSort = "PRODUCER";
+          conf.WStrSortSens = " ASC";
+          BtnSrtBy.IsAscending = true;
+          getSelectFromDivx(conf.StrTitle1 + " not like ''", conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
+          SetLabelView("producer");
+          GUIControl.FocusControl(GetID, (int)Controls.CTRL_List);
+          break;
+
         case "storage":
           //  Change View by "Storage":
           currentListLevel = Listlevel.Movie;
@@ -4477,7 +4488,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "producer":
               case "director":
               case "writer":
-              case "actor":
+              case "actors":
               case "borrower":
                 currentListLevel = Listlevel.Person;
                 break;
