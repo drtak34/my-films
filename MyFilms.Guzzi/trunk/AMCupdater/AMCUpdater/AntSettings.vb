@@ -27,6 +27,30 @@ Public Class AntSettings
             SetAttribute("Movie_Fanart_Path", value)
         End Set
     End Property
+    Public Property Movie_Fanart_Resolution_Min() As String
+        Get
+            Return ReadAttribute("Movie_Fanart_Resolution_Min")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Movie_Fanart_Resolution_Min", value)
+        End Set
+    End Property
+    Public Property Movie_Fanart_Resolution_Max() As String
+        Get
+            Return ReadAttribute("Movie_Fanart_Resolution_Max")
+        End Get
+        Set(ByVal value As String)
+            SetAttribute("Movie_Fanart_Resolution_Max", value)
+        End Set
+    End Property
+    Public Property Movie_Fanart_Number_Limit() As Integer
+        Get
+            Return ReadAttribute("Movie_Fanart_Number_Limit")
+        End Get
+        Set(ByVal value As Integer)
+            SetAttribute("Movie_Fanart_Number_Limit", value)
+        End Set
+    End Property
     Public Property Movie_PersonArtwork_Path() As String
         Get
             Return ReadAttribute("Movie_PersonArtwork_Path")
@@ -651,9 +675,12 @@ Public Class AntSettings
         dt.Rows.Add("Movie_Scan_Path", "") 'DefaultMoviePath
         dt.Rows.Add("XML_File", "") 'DefaultXMLPath
         dt.Rows.Add("Movie_Fanart_Path", "") 'DefaultFanartPath
+        dt.Rows.Add("Movie_Fanart_Resolution_Min", "") 'Default Fanart Min Resolution
+        dt.Rows.Add("Movie_Fanart_Resolution_Max", "") 'Default Fanart Max Resolution
+        dt.Rows.Add("Movie_Fanart_Number_Limit", "3") 'Default Fanart Download Limit
         dt.Rows.Add("Movie_PersonArtwork_Path", "") 'DefaultPersonArtworkPath
         dt.Rows.Add("Ant_Media_Type", "HDD") 'DefaultMediaType
-        dt.Rows.Add("Ant_Media_Label", "Server") 'DefaultMediaLabel
+        dt.Rows.Add("Ant_Media_Label", "AMCU") 'DefaultMediaLabel
         dt.Rows.Add("Override_Path", "") 'DefaultOverridePath
         dt.Rows.Add("File_Types_Media", "avi;mpg;divx;mpeg;wmv;mkv") 'FileTypesToCheck
         dt.Rows.Add("File_Types_Non_Media", "iso;img") 'FileTypesNonMedia

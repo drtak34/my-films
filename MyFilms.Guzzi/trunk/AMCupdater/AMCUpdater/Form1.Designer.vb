@@ -150,6 +150,10 @@ Partial Class Form1
         Me.cbDateHandling = New System.Windows.Forms.ComboBox
         Me.cbCheckHandling = New System.Windows.Forms.ComboBox
         Me.GroupBox_PictureHandling = New System.Windows.Forms.GroupBox
+        Me.cbFanartLimitResolutionMin = New System.Windows.Forms.ComboBox
+        Me.lblFanartLimits = New System.Windows.Forms.Label
+        Me.cbNumFanartLimitNumber = New System.Windows.Forms.NumericUpDown
+        Me.cbFanartLimitResolutionMax = New System.Windows.Forms.ComboBox
         Me.lblPicturePrefix = New System.Windows.Forms.Label
         Me.lblPictureHandling = New System.Windows.Forms.Label
         Me.cbPictureHandling = New System.Windows.Forms.ComboBox
@@ -431,6 +435,7 @@ Partial Class Form1
         Me.GroupBox_MediaLabelFieldHandling.SuspendLayout()
         Me.GroupBox_OtherFieldHandling.SuspendLayout()
         Me.GroupBox_PictureHandling.SuspendLayout()
+        CType(Me.cbNumFanartLimitNumber, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox16.SuspendLayout()
         Me.ScanFilters.SuspendLayout()
         Me.GroupBox24.SuspendLayout()
@@ -1243,11 +1248,11 @@ Partial Class Form1
         'lblManualSelectFieldDestination
         '
         Me.lblManualSelectFieldDestination.AutoSize = True
-        Me.lblManualSelectFieldDestination.Location = New System.Drawing.Point(227, 72)
+        Me.lblManualSelectFieldDestination.Location = New System.Drawing.Point(222, 71)
         Me.lblManualSelectFieldDestination.Name = "lblManualSelectFieldDestination"
-        Me.lblManualSelectFieldDestination.Size = New System.Drawing.Size(99, 13)
+        Me.lblManualSelectFieldDestination.Size = New System.Drawing.Size(104, 13)
         Me.lblManualSelectFieldDestination.TabIndex = 15
-        Me.lblManualSelectFieldDestination.Text = "Ant field destination"
+        Me.lblManualSelectFieldDestination.Text = "Ant Field Destination"
         Me.lblManualSelectFieldDestination.Visible = False
         '
         'cbManualSelectFieldDestination
@@ -1330,11 +1335,11 @@ Partial Class Form1
         'lblManualSelectField
         '
         Me.lblManualSelectField.AutoSize = True
-        Me.lblManualSelectField.Location = New System.Drawing.Point(262, 22)
+        Me.lblManualSelectField.Location = New System.Drawing.Point(278, 24)
         Me.lblManualSelectField.Name = "lblManualSelectField"
-        Me.lblManualSelectField.Size = New System.Drawing.Size(54, 13)
+        Me.lblManualSelectField.Size = New System.Drawing.Size(48, 13)
         Me.lblManualSelectField.TabIndex = 4
-        Me.lblManualSelectField.Text = "Ant Field :"
+        Me.lblManualSelectField.Text = "Ant Field"
         Me.lblManualSelectField.TextAlign = System.Drawing.ContentAlignment.TopRight
         Me.lblManualSelectField.Visible = False
         '
@@ -1493,7 +1498,7 @@ Partial Class Form1
         Me.GroupBox_TitleHandling.Controls.Add(Me.lblGroupNameAppliesTo)
         Me.GroupBox_TitleHandling.Controls.Add(Me.cbMasterTitle)
         Me.GroupBox_TitleHandling.Controls.Add(Me.lblMasterTitle)
-        Me.GroupBox_TitleHandling.Location = New System.Drawing.Point(239, 208)
+        Me.GroupBox_TitleHandling.Location = New System.Drawing.Point(239, 194)
         Me.GroupBox_TitleHandling.Name = "GroupBox_TitleHandling"
         Me.GroupBox_TitleHandling.Size = New System.Drawing.Size(353, 96)
         Me.GroupBox_TitleHandling.TabIndex = 54
@@ -1559,7 +1564,7 @@ Partial Class Form1
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.chkShortNames)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.Label26)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.txtDefaultSourceField)
-        Me.GroupBox_StorageFieldHandling.Location = New System.Drawing.Point(239, 141)
+        Me.GroupBox_StorageFieldHandling.Location = New System.Drawing.Point(239, 127)
         Me.GroupBox_StorageFieldHandling.Name = "GroupBox_StorageFieldHandling"
         Me.GroupBox_StorageFieldHandling.Size = New System.Drawing.Size(353, 61)
         Me.GroupBox_StorageFieldHandling.TabIndex = 56
@@ -1603,7 +1608,7 @@ Partial Class Form1
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.Label13)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.chkReadDVDLabel)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.txtMediaLabel)
-        Me.GroupBox_MediaLabelFieldHandling.Location = New System.Drawing.Point(239, 310)
+        Me.GroupBox_MediaLabelFieldHandling.Location = New System.Drawing.Point(239, 296)
         Me.GroupBox_MediaLabelFieldHandling.Name = "GroupBox_MediaLabelFieldHandling"
         Me.GroupBox_MediaLabelFieldHandling.Size = New System.Drawing.Size(353, 62)
         Me.GroupBox_MediaLabelFieldHandling.TabIndex = 55
@@ -1648,7 +1653,7 @@ Partial Class Form1
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.Label30)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.cbDateHandling)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.cbCheckHandling)
-        Me.GroupBox_OtherFieldHandling.Location = New System.Drawing.Point(239, 378)
+        Me.GroupBox_OtherFieldHandling.Location = New System.Drawing.Point(239, 364)
         Me.GroupBox_OtherFieldHandling.Name = "GroupBox_OtherFieldHandling"
         Me.GroupBox_OtherFieldHandling.Size = New System.Drawing.Size(353, 100)
         Me.GroupBox_OtherFieldHandling.TabIndex = 52
@@ -1719,16 +1724,57 @@ Partial Class Form1
         'GroupBox_PictureHandling
         '
         Me.GroupBox_PictureHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_PictureHandling.Controls.Add(Me.cbFanartLimitResolutionMin)
+        Me.GroupBox_PictureHandling.Controls.Add(Me.lblFanartLimits)
+        Me.GroupBox_PictureHandling.Controls.Add(Me.cbNumFanartLimitNumber)
+        Me.GroupBox_PictureHandling.Controls.Add(Me.cbFanartLimitResolutionMax)
         Me.GroupBox_PictureHandling.Controls.Add(Me.lblPicturePrefix)
         Me.GroupBox_PictureHandling.Controls.Add(Me.lblPictureHandling)
         Me.GroupBox_PictureHandling.Controls.Add(Me.cbPictureHandling)
         Me.GroupBox_PictureHandling.Controls.Add(Me.txtPictureFilenamePrefix)
-        Me.GroupBox_PictureHandling.Location = New System.Drawing.Point(239, 484)
+        Me.GroupBox_PictureHandling.Location = New System.Drawing.Point(239, 470)
         Me.GroupBox_PictureHandling.Name = "GroupBox_PictureHandling"
-        Me.GroupBox_PictureHandling.Size = New System.Drawing.Size(353, 69)
+        Me.GroupBox_PictureHandling.Size = New System.Drawing.Size(353, 99)
         Me.GroupBox_PictureHandling.TabIndex = 53
         Me.GroupBox_PictureHandling.TabStop = False
-        Me.GroupBox_PictureHandling.Text = "Picture Handling ..."
+        Me.GroupBox_PictureHandling.Text = "Image Handling ..."
+        '
+        'cbFanartLimitResolutionMin
+        '
+        Me.cbFanartLimitResolutionMin.FormattingEnabled = True
+        Me.cbFanartLimitResolutionMin.Items.AddRange(New Object() {"", "0x0", "640x480", "768x576", "1280x720", "1920x1080"})
+        Me.cbFanartLimitResolutionMin.Location = New System.Drawing.Point(164, 66)
+        Me.cbFanartLimitResolutionMin.Name = "cbFanartLimitResolutionMin"
+        Me.cbFanartLimitResolutionMin.Size = New System.Drawing.Size(78, 21)
+        Me.cbFanartLimitResolutionMin.TabIndex = 53
+        Me.ToolTip1.SetToolTip(Me.cbFanartLimitResolutionMin, "Sets minimum resolution for fanart to be allowed to download.")
+        '
+        'lblFanartLimits
+        '
+        Me.lblFanartLimits.AutoSize = True
+        Me.lblFanartLimits.Location = New System.Drawing.Point(18, 69)
+        Me.lblFanartLimits.Name = "lblFanartLimits"
+        Me.lblFanartLimits.Size = New System.Drawing.Size(66, 13)
+        Me.lblFanartLimits.TabIndex = 52
+        Me.lblFanartLimits.Text = "Fanart Limits"
+        '
+        'cbNumFanartLimitNumber
+        '
+        Me.cbNumFanartLimitNumber.Location = New System.Drawing.Point(100, 67)
+        Me.cbNumFanartLimitNumber.Name = "cbNumFanartLimitNumber"
+        Me.cbNumFanartLimitNumber.Size = New System.Drawing.Size(44, 20)
+        Me.cbNumFanartLimitNumber.TabIndex = 51
+        Me.ToolTip1.SetToolTip(Me.cbNumFanartLimitNumber, "Limits the number of downloaded fanarts." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & """0"" = all available.")
+        '
+        'cbFanartLimitResolutionMax
+        '
+        Me.cbFanartLimitResolutionMax.FormattingEnabled = True
+        Me.cbFanartLimitResolutionMax.Items.AddRange(New Object() {"", "0x0", "640x480", "768x576", "1280x720", "1920x1080"})
+        Me.cbFanartLimitResolutionMax.Location = New System.Drawing.Point(248, 66)
+        Me.cbFanartLimitResolutionMax.Name = "cbFanartLimitResolutionMax"
+        Me.cbFanartLimitResolutionMax.Size = New System.Drawing.Size(90, 21)
+        Me.cbFanartLimitResolutionMax.TabIndex = 50
+        Me.ToolTip1.SetToolTip(Me.cbFanartLimitResolutionMax, "Sets maximum resolution for fanart to be allowed to download.")
         '
         'lblPicturePrefix
         '
@@ -1742,7 +1788,7 @@ Partial Class Form1
         'lblPictureHandling
         '
         Me.lblPictureHandling.AutoSize = True
-        Me.lblPictureHandling.Location = New System.Drawing.Point(18, 16)
+        Me.lblPictureHandling.Location = New System.Drawing.Point(18, 17)
         Me.lblPictureHandling.Name = "lblPictureHandling"
         Me.lblPictureHandling.Size = New System.Drawing.Size(85, 13)
         Me.lblPictureHandling.TabIndex = 45
@@ -2513,7 +2559,7 @@ Partial Class Form1
         Me.GroupBox7.Size = New System.Drawing.Size(575, 107)
         Me.GroupBox7.TabIndex = 103
         Me.GroupBox7.TabStop = False
-        Me.GroupBox7.Text = "Folders and Files"
+        Me.GroupBox7.Text = "Artwork Folders ..."
         '
         'btnSelectPersonArtworkFolder
         '
@@ -4398,6 +4444,7 @@ Partial Class Form1
         Me.GroupBox_OtherFieldHandling.PerformLayout()
         Me.GroupBox_PictureHandling.ResumeLayout(False)
         Me.GroupBox_PictureHandling.PerformLayout()
+        CType(Me.cbNumFanartLimitNumber, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox16.ResumeLayout(False)
         Me.GroupBox16.PerformLayout()
         Me.ScanFilters.ResumeLayout(False)
@@ -4847,4 +4894,8 @@ Partial Class Form1
     Friend WithEvents LinkLabelMyFilmsWiki As System.Windows.Forms.LinkLabel
     Friend WithEvents cbManualSelectFieldDestination As System.Windows.Forms.ComboBox
     Friend WithEvents lblManualSelectFieldDestination As System.Windows.Forms.Label
+    Friend WithEvents cbFanartLimitResolutionMax As System.Windows.Forms.ComboBox
+    Friend WithEvents cbNumFanartLimitNumber As System.Windows.Forms.NumericUpDown
+    Friend WithEvents lblFanartLimits As System.Windows.Forms.Label
+    Friend WithEvents cbFanartLimitResolutionMin As System.Windows.Forms.ComboBox
 End Class

@@ -1851,9 +1851,16 @@ Public Class Form1
                 If FieldChecked = True Then
                     cbPictureHandling.Enabled = True
                     lblPictureHandling.Enabled = True
+                    cbFanartLimitResolutionMin.Enabled = True
+                    cbFanartLimitResolutionMax.Enabled = True
+                    cbNumFanartLimitNumber.Enabled = True
+
                 Else
                     'cbPictureHandling.Enabled = False
                     'lblPictureHandling.Enabled = False
+                    cbFanartLimitResolutionMin.Enabled = False
+                    cbFanartLimitResolutionMax.Enabled = False
+                    cbNumFanartLimitNumber.Enabled = False
                 End If
             End If
 
@@ -2076,6 +2083,9 @@ Public Class Form1
         CurrentSettings.Manual_Dont_Ask_Interactive = chkManualDontAskInteractive.Checked
         CurrentSettings.Log_Level = cbLogLevel.SelectedItem
         CurrentSettings.Movie_Fanart_Path = txtFanartFolder.Text
+        CurrentSettings.Movie_Fanart_Resolution_Min = cbFanartLimitResolutionMin.Text
+        CurrentSettings.Movie_Fanart_Resolution_Max = cbFanartLimitResolutionMax.Text
+        CurrentSettings.Movie_Fanart_Number_Limit = cbNumFanartLimitNumber.Value
         CurrentSettings.Movie_PersonArtwork_Path = txtPersonArtworkFolder.Text
         CurrentSettings.Movie_Scan_Path = txtMovieFolder.Text
         CurrentSettings.Override_Path = txtOverridePath.Text
@@ -2227,6 +2237,9 @@ Public Class Form1
             cbLogLevel.SelectedItem = CurrentSettings.Log_Level
             txtMovieFolder.Text = CurrentSettings.Movie_Scan_Path
             txtFanartFolder.Text = CurrentSettings.Movie_Fanart_Path
+            cbFanartLimitResolutionMin.Text = CurrentSettings.Movie_Fanart_Resolution_Min
+            cbFanartLimitResolutionMax.Text = CurrentSettings.Movie_Fanart_Resolution_Max
+            cbNumFanartLimitNumber.Value = CurrentSettings.Movie_Fanart_Number_Limit
             txtPersonArtworkFolder.Text = CurrentSettings.Movie_PersonArtwork_Path
             txtOverridePath.Text = CurrentSettings.Override_Path
             chkOverwriteXML.Checked = CurrentSettings.Overwrite_XML_File

@@ -184,4 +184,13 @@
   <Values Option="Auto_Approve_Limits">
     <Value></Value>
   </Values>
+  <Values Option="Movie_Fanart_Resolution_Min">
+    <Value></Value>
+  </Values>
+  <Values Option="Movie_Fanart_Resolution_Max">
+    <Value></Value>
+  </Values>
+  <Values Option="Movie_Fanart_Number_Limit">
+    <Value>3</Value>
+  </Values>
 </NewDataSet>

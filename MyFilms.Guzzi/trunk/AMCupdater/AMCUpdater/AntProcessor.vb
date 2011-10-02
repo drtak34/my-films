@@ -900,13 +900,17 @@ Public Class AntProcessor
                             Dim ttitle As String = String.Empty
                             fanartTitle = GetFanartTitle(CurrentNode, title, ttitle, ftitle, year, director)
                             If fanartTitle.Length > 0 Then
-                                fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title)
+                                fanart = Gb.GetFanart(title, ttitle, year, director, CurrentSettings.Movie_Fanart_Path, True, False, CurrentSettings.Master_Title, String.Empty, CurrentSettings.Movie_Fanart_Number_Limit, CurrentSettings.Movie_Fanart_Resolution_Min, CurrentSettings.Movie_Fanart_Resolution_Max)
                                 'End If
                                 If (fanart.Count > 0) Then
                                     If (fanart(0).Name = "already") Then
                                         bgwManualUpdate.ReportProgress(ProcessCounter, "Fanart already downloaded : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                     ElseIf (fanart(0).Name = "added") Then
                                         bgwManualUpdate.ReportProgress(ProcessCounter, "Fanart added : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                                    ElseIf (fanart(0).Name.StartsWith("resolution")) Then
+                                        bgwManualUpdate.ReportProgress(ProcessCounter, "Resolution requirements missed : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
+                                    ElseIf (fanart(0).Name.StartsWith("numberlimit")) Then
+                                        bgwManualUpdate.ReportProgress(ProcessCounter, "Fanart added (download limit reached) : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                     ElseIf (fanart(0).Name.StartsWith("(toomany)")) Then
                                         bgwManualUpdate.ReportProgress(ProcessCounter, "Too many Movies found : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString)
                                     Else
@@ -1664,6 +1668,8 @@ Public Class AntProcessor
         LogEvent("  MoviePath : " + CurrentSettings.Movie_Scan_Path.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  OverridePath : " + CurrentSettings.Override_Path.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  FanartPath : " + CurrentSettings.Movie_Fanart_Path.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Fanart Resolution Limits (Min/Max): " & CurrentSettings.Movie_Fanart_Resolution_Min & ", " & CurrentSettings.Movie_Fanart_Resolution_Max, EventLogLevel.ImportantEvent)
+        LogEvent("  Fanart Download Limit: " & CurrentSettings.Movie_Fanart_Number_Limit, EventLogLevel.ImportantEvent)
         LogEvent("  PersonArtworkPath : " + CurrentSettings.Movie_PersonArtwork_Path.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Store Short Names : " + CurrentSettings.Store_Short_Names_Only.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  OverwriteFlag : " + CurrentSettings.Overwrite_XML_File.ToString, EventLogLevel.ImportantEvent)

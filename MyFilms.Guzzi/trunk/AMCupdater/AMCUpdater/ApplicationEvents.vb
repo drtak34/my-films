@@ -106,6 +106,8 @@ Namespace My
                 LogEvent(" - Grabber_Override_GetRoles    : " + CurrentSettings.Grabber_Override_GetRoles.ToString, EventLogLevel.ImportantEvent)
                 LogEvent(" - Exclude File Path : " & CurrentSettings.Excluded_Movies_File, EventLogLevel.ImportantEvent)
                 LogEvent(" - Fanart Path : " & CurrentSettings.Movie_Fanart_Path, EventLogLevel.ImportantEvent)
+                LogEvent(" - Fanart Resolution Limits (Min/Max): " & CurrentSettings.Movie_Fanart_Resolution_Min & ", " & CurrentSettings.Movie_Fanart_Resolution_Max, EventLogLevel.ImportantEvent)
+                LogEvent(" - Fanart Download Limit: " & CurrentSettings.Movie_Fanart_Number_Limit, EventLogLevel.ImportantEvent)
                 LogEvent(" - PersonArtwork Path : " & CurrentSettings.Movie_PersonArtwork_Path, EventLogLevel.ImportantEvent)
                 LogEvent(" - Media Label : " & CurrentSettings.Ant_Media_Label, EventLogLevel.ImportantEvent)
                 LogEvent(" - Media Type : " & CurrentSettings.Ant_Media_Type, EventLogLevel.ImportantEvent)
