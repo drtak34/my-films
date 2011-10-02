@@ -759,6 +759,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               cbWatched.Focus();
               // return;
             }
+            if (chkGlobalAvailableOnly.Checked && !chkScanMediaOnStart.Checked)
+            {
+              System.Windows.Forms.MessageBox.Show("You have enabled the global filter to only see available movies.\n As you don't have 'scan media on start' enabled, you won't get the filtered view until you made a manual availability scan via global options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+            }
 
             Selected_Enreg_TextChanged();
             if (View_Dflt_Item.Text.Length == 0)
@@ -5733,6 +5737,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             startParamOutput += "search:" + tbEditorSearchExpression.Text;
           }
           tbEditorStartParamsOutput.Text = startParamOutput;
+        }
+
+        private void chkGlobalAvailableOnly_CheckedChanged(object sender, EventArgs e)
+        {
+          //if (chkGlobalAvailableOnly.Checked && !chkScanMediaOnStart.Checked)
+          //{
+          //  // System.Windows.Forms.MessageBox.Show("If you don't have 'scan media on start' enabled, \nyou won't get the filtered view until you made a manual scan via options !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+          //  // chkGlobalAvailableOnly.Checked = false;
+          //}
         }
 
     }
