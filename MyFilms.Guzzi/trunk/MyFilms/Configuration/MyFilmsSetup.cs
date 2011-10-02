@@ -5719,7 +5719,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
                 }
               }
             }
-            startParamOutput += "views:" + viewCallName;
+            startParamOutput += "view:" + viewCallName;
           }
           if (!string.IsNullOrEmpty(cbEditorViewValues.Text))
           {
