@@ -54,8 +54,8 @@
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
-      <KeyStartRate Param1="" Param2="">_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_rating-rating_x0022__x003E_._x002A__x003F__x0022__x003E_</KeyStartRate>
-      <KeyEndRate>_x003C_span</KeyEndRate>
+      <KeyStartRate Param1="" Param2="">_x0023_REGEX_x0023__x003D__x0022_ratingValue_x0022__x003E_</KeyStartRate>
+      <KeyEndRate>_x003C__x002F_span</KeyEndRate>
       <KeyRateIndex />
       <KeyRatePage />
       <KeyStartRate2 Param1="" Param2="" />
