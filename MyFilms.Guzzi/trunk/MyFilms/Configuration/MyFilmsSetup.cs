@@ -5614,6 +5614,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
         private void btnLoadEditorValues_Click(object sender, EventArgs e)
         {
+          tbEditorStartParamsOutput.Text = "";
           cbEditorConfigs.Items.Clear();
           cbEditorViews.Items.Clear();
           cbEditorViewValues.Items.Clear();
@@ -5632,6 +5633,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void cbEditorConfigs_SelectedIndexChanged(object sender, EventArgs e)
         {
           ArrayList MyFilmsEditor = BaseMesFilms.GetConfigViewLists();
+          tbEditorStartParamsOutput.Text = "";
           cbEditorViews.Items.Clear();
           cbEditorViewValues.Items.Clear();
           cbEditorViews.Text = "";
@@ -5653,6 +5655,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void cbEditorViews_SelectedIndexChanged(object sender, EventArgs e)
         {
           string viewCallName = "";
+          tbEditorStartParamsOutput.Text = "";
           cbEditorViewValues.Items.Clear();
           cbEditorViewValues.Text = "";
           ArrayList MyFilmsEditor = BaseMesFilms.GetConfigViewLists();
@@ -5680,6 +5683,53 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               cbEditorViewValues.Items.Add(value);
             }
           }
+        }
+
+        private void cbEditorLayout_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          if (cbEditorLayout.SelectedIndex < 0 || cbEditorLayout.SelectedIndex > 5) 
+            cbEditorLayout.SelectedIndex = 0;
+          if (cbEditorLayout.SelectedIndex == 0)
+            cbEditorLayout.Text = "";
+        }
+
+        private void btnSaveEditorStartParams_Click(object sender, EventArgs e)
+        {
+          string startParamOutput = "";
+          if (!string.IsNullOrEmpty(cbEditorConfigs.Text)) startParamOutput += "config:" + cbEditorConfigs.Text;
+          if (!string.IsNullOrEmpty(cbEditorViews.Text))
+          {
+            if (!string.IsNullOrEmpty(startParamOutput)) startParamOutput += "|";
+            startParamOutput += "views:" + cbEditorViews.Text;
+          }
+          if (!string.IsNullOrEmpty(cbEditorViewValues.Text))
+          {
+            if (!string.IsNullOrEmpty(startParamOutput)) startParamOutput += "|";
+            string viewCallName = "";
+            ArrayList myFilmsEditor = BaseMesFilms.GetConfigViewLists();
+            foreach (BaseMesFilms.MFConfig config in myFilmsEditor)
+            {
+              if (config.Name == cbEditorConfigs.Text)
+              {
+                foreach (KeyValuePair<string, string> view in config.ViewList)
+                {
+                  if (view.Value == cbEditorViews.Text) viewCallName = view.Key;
+                }
+              }
+            }
+            startParamOutput += "viewvalue:" + viewCallName;
+          }
+          if (!string.IsNullOrEmpty(cbEditorLayout.Text))
+          {
+            if (!string.IsNullOrEmpty(startParamOutput)) startParamOutput += "|";
+            startParamOutput += "layout:" + cbEditorLayout.SelectedIndex;
+          }
+          if (!string.IsNullOrEmpty(tbEditorSearchExpression.Text))
+          {
+            if (!string.IsNullOrEmpty(startParamOutput)) startParamOutput += "|";
+            startParamOutput += "search:" + tbEditorSearchExpression.Text;
+          }
+          tbEditorStartParamsOutput.Text = startParamOutput;
         }
 
     }

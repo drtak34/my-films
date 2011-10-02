@@ -516,6 +516,12 @@
           this.label52 = new System.Windows.Forms.Label();
           this.label57 = new System.Windows.Forms.Label();
           this.label58 = new System.Windows.Forms.Label();
+          this.cbEditorLayout = new System.Windows.Forms.ComboBox();
+          this.label59 = new System.Windows.Forms.Label();
+          this.tbEditorSearchExpression = new System.Windows.Forms.TextBox();
+          this.label60 = new System.Windows.Forms.Label();
+          this.btnSaveEditorStartParams = new System.Windows.Forms.Button();
+          this.tbEditorStartParamsOutput = new System.Windows.Forms.TextBox();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -4510,7 +4516,7 @@
           this.AMCConfigView.Location = new System.Drawing.Point(20, 73);
           this.AMCConfigView.MultiSelect = false;
           this.AMCConfigView.Name = "AMCConfigView";
-          this.AMCConfigView.Size = new System.Drawing.Size(491, 263);
+          this.AMCConfigView.Size = new System.Drawing.Size(413, 263);
           this.AMCConfigView.TabIndex = 89;
           this.ToolTip1.SetToolTip(this.AMCConfigView, resources.GetString("AMCConfigView.ToolTip"));
           this.AMCConfigView.UseCompatibleStateImageBehavior = false;
@@ -4529,7 +4535,7 @@
           // cbAllowRecentAddedAPI
           // 
           this.cbAllowRecentAddedAPI.AutoSize = true;
-          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(15, 29);
+          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(15, 21);
           this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
           this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
           this.cbAllowRecentAddedAPI.TabIndex = 4;
@@ -5076,9 +5082,9 @@
           // 
           this.groupBoxExternal.Controls.Add(this.labelRecentlyAddedAPI);
           this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
-          this.groupBoxExternal.Location = new System.Drawing.Point(532, 12);
+          this.groupBoxExternal.Location = new System.Drawing.Point(444, 12);
           this.groupBoxExternal.Name = "groupBoxExternal";
-          this.groupBoxExternal.Size = new System.Drawing.Size(200, 134);
+          this.groupBoxExternal.Size = new System.Drawing.Size(288, 89);
           this.groupBoxExternal.TabIndex = 92;
           this.groupBoxExternal.TabStop = false;
           this.groupBoxExternal.Text = "Recentrly Added API ...";
@@ -5089,7 +5095,7 @@
           this.btnLoadEditorValues.Name = "btnLoadEditorValues";
           this.btnLoadEditorValues.Size = new System.Drawing.Size(121, 23);
           this.btnLoadEditorValues.TabIndex = 93;
-          this.btnLoadEditorValues.Text = "Load Editor Data";
+          this.btnLoadEditorValues.Text = "Load MyFilms Data";
           this.btnLoadEditorValues.UseVisualStyleBackColor = true;
           this.btnLoadEditorValues.Click += new System.EventHandler(this.btnLoadEditorValues_Click);
           // 
@@ -5122,12 +5128,12 @@
           // labelRecentlyAddedAPI
           // 
           this.labelRecentlyAddedAPI.AutoSize = true;
-          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(33, 61);
+          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(16, 45);
           this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
-          this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(133, 52);
+          this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(252, 26);
           this.labelRecentlyAddedAPI.TabIndex = 5;
-          this.labelRecentlyAddedAPI.Text = "You can enable or disable \r\nper config, if you want to \r\ninclude the catalog to t" +
-              "he \r\nrecently added API.";
+          this.labelRecentlyAddedAPI.Text = "You can enable or disable per config, if you want to \r\ninclude the catalog to the" +
+              " recently added API.";
           // 
           // btnGrabberInterface
           // 
@@ -5179,6 +5185,12 @@
           // 
           // groupBox3
           // 
+          this.groupBox3.Controls.Add(this.tbEditorStartParamsOutput);
+          this.groupBox3.Controls.Add(this.btnSaveEditorStartParams);
+          this.groupBox3.Controls.Add(this.label60);
+          this.groupBox3.Controls.Add(this.tbEditorSearchExpression);
+          this.groupBox3.Controls.Add(this.label59);
+          this.groupBox3.Controls.Add(this.cbEditorLayout);
           this.groupBox3.Controls.Add(this.label58);
           this.groupBox3.Controls.Add(this.label57);
           this.groupBox3.Controls.Add(this.label52);
@@ -5186,9 +5198,9 @@
           this.groupBox3.Controls.Add(this.cbEditorViews);
           this.groupBox3.Controls.Add(this.cbEditorConfigs);
           this.groupBox3.Controls.Add(this.cbEditorViewValues);
-          this.groupBox3.Location = new System.Drawing.Point(532, 152);
+          this.groupBox3.Location = new System.Drawing.Point(444, 116);
           this.groupBox3.Name = "groupBox3";
-          this.groupBox3.Size = new System.Drawing.Size(200, 184);
+          this.groupBox3.Size = new System.Drawing.Size(288, 220);
           this.groupBox3.TabIndex = 93;
           this.groupBox3.TabStop = false;
           this.groupBox3.Text = "Basic Home Editor API test ...";
@@ -5219,6 +5231,64 @@
           this.label58.Size = new System.Drawing.Size(82, 13);
           this.label58.TabIndex = 98;
           this.label58.Text = "Config selection";
+          // 
+          // cbEditorLayout
+          // 
+          this.cbEditorLayout.FormattingEnabled = true;
+          this.cbEditorLayout.Items.AddRange(new object[] {
+            "",
+            "List View",
+            "Big Thumbs",
+            "Small Thumbs",
+            "Filmstrip",
+            "Coverflow"});
+          this.cbEditorLayout.Location = new System.Drawing.Point(182, 67);
+          this.cbEditorLayout.Name = "cbEditorLayout";
+          this.cbEditorLayout.Size = new System.Drawing.Size(77, 21);
+          this.cbEditorLayout.TabIndex = 99;
+          this.cbEditorLayout.SelectedIndexChanged += new System.EventHandler(this.cbEditorLayout_SelectedIndexChanged);
+          // 
+          // label59
+          // 
+          this.label59.AutoSize = true;
+          this.label59.Location = new System.Drawing.Point(184, 51);
+          this.label59.Name = "label59";
+          this.label59.Size = new System.Drawing.Size(39, 13);
+          this.label59.TabIndex = 100;
+          this.label59.Text = "Layout";
+          // 
+          // tbEditorSearchExpression
+          // 
+          this.tbEditorSearchExpression.Location = new System.Drawing.Point(168, 147);
+          this.tbEditorSearchExpression.Name = "tbEditorSearchExpression";
+          this.tbEditorSearchExpression.Size = new System.Drawing.Size(100, 20);
+          this.tbEditorSearchExpression.TabIndex = 101;
+          // 
+          // label60
+          // 
+          this.label60.AutoSize = true;
+          this.label60.Location = new System.Drawing.Point(170, 131);
+          this.label60.Name = "label60";
+          this.label60.Size = new System.Drawing.Size(95, 13);
+          this.label60.TabIndex = 102;
+          this.label60.Text = "Search Expression";
+          // 
+          // btnSaveEditorStartParams
+          // 
+          this.btnSaveEditorStartParams.Location = new System.Drawing.Point(168, 23);
+          this.btnSaveEditorStartParams.Name = "btnSaveEditorStartParams";
+          this.btnSaveEditorStartParams.Size = new System.Drawing.Size(100, 23);
+          this.btnSaveEditorStartParams.TabIndex = 103;
+          this.btnSaveEditorStartParams.Text = "Save StartParams";
+          this.btnSaveEditorStartParams.UseVisualStyleBackColor = true;
+          this.btnSaveEditorStartParams.Click += new System.EventHandler(this.btnSaveEditorStartParams_Click);
+          // 
+          // tbEditorStartParamsOutput
+          // 
+          this.tbEditorStartParamsOutput.Location = new System.Drawing.Point(15, 183);
+          this.tbEditorStartParamsOutput.Name = "tbEditorStartParamsOutput";
+          this.tbEditorStartParamsOutput.Size = new System.Drawing.Size(253, 20);
+          this.tbEditorStartParamsOutput.TabIndex = 104;
           // 
           // MyFilmsSetup
           // 
@@ -5771,5 +5841,11 @@
         private Label label58;
         private Label label57;
         private Label label52;
+        private Label label60;
+        private TextBox tbEditorSearchExpression;
+        private Label label59;
+        private ComboBox cbEditorLayout;
+        private TextBox tbEditorStartParamsOutput;
+        private Button btnSaveEditorStartParams;
     }
 }
