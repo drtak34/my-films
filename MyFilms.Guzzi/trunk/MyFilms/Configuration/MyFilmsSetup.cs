@@ -5696,28 +5696,31 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void btnSaveEditorStartParams_Click(object sender, EventArgs e)
         {
           string startParamOutput = "";
-          if (!string.IsNullOrEmpty(cbEditorConfigs.Text)) startParamOutput += "config:" + cbEditorConfigs.Text;
+          ArrayList myFilmsEditor = BaseMesFilms.GetConfigViewLists();
+          
+          if (!string.IsNullOrEmpty(cbEditorConfigs.Text)) 
+            startParamOutput += "config:" + cbEditorConfigs.Text;
           if (!string.IsNullOrEmpty(cbEditorViews.Text))
           {
+            string viewCallName = ""; 
             if (!string.IsNullOrEmpty(startParamOutput)) startParamOutput += "|";
-            startParamOutput += "views:" + cbEditorViews.Text;
-          }
-          if (!string.IsNullOrEmpty(cbEditorViewValues.Text))
-          {
-            if (!string.IsNullOrEmpty(startParamOutput)) startParamOutput += "|";
-            string viewCallName = "";
-            ArrayList myFilmsEditor = BaseMesFilms.GetConfigViewLists();
             foreach (BaseMesFilms.MFConfig config in myFilmsEditor)
             {
               if (config.Name == cbEditorConfigs.Text)
               {
                 foreach (KeyValuePair<string, string> view in config.ViewList)
                 {
-                  if (view.Value == cbEditorViews.Text) viewCallName = view.Key;
+                  if (view.Value == cbEditorViews.Text)
+                    viewCallName = view.Key;
                 }
               }
             }
-            startParamOutput += "viewvalue:" + viewCallName;
+            startParamOutput += "views:" + viewCallName;
+          }
+          if (!string.IsNullOrEmpty(cbEditorViewValues.Text))
+          {
+            if (!string.IsNullOrEmpty(startParamOutput)) startParamOutput += "|";
+            startParamOutput += "viewvalue:" + cbEditorViewValues.Text;
           }
           if (!string.IsNullOrEmpty(cbEditorLayout.Text))
           {
