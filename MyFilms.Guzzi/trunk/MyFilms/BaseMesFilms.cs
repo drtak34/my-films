@@ -525,7 +525,7 @@ namespace MyFilmsPlugin.MyFilms
         public static ArrayList GetConfigViewLists()
         {
           ArrayList configViewLists = new ArrayList();
-          List<KeyValuePair<string, string>> viewList = new List<KeyValuePair<string, string>>();
+          List<KeyValuePair<string, string>> viewList = null;
 
           using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
           {
@@ -535,6 +535,8 @@ namespace MyFilmsPlugin.MyFilms
 
             foreach (string config in configs)
             {
+              viewList = new List<KeyValuePair<string, string>>();
+              viewList.Clear();
               MFConfig configViewList = new MFConfig();
               string[] StrViewItem = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty }, StrViewText = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty }, StrViewValue = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
 
@@ -550,21 +552,22 @@ namespace MyFilmsPlugin.MyFilms
 
               if (System.IO.File.Exists(Catalog))
               {
-                viewList.Add(new KeyValuePair<string, string>("all", GUILocalizeStrings.Get(342)));
-                viewList.Add(new KeyValuePair<string, string>("year", GUILocalizeStrings.Get(345)));
-                viewList.Add(new KeyValuePair<string, string>("category", GUILocalizeStrings.Get(10798664)));
-                viewList.Add(new KeyValuePair<string, string>("country", GUILocalizeStrings.Get(200026)));
-                viewList.Add(new KeyValuePair<string, string>("actors", GUILocalizeStrings.Get(10798667)));
+                //viewList.Add(new KeyValuePair<string, string>("all", GUILocalizeStrings.Get(342)));
+                viewList.Add(new KeyValuePair<string, string>("Year", GUILocalizeStrings.Get(345)));
+                viewList.Add(new KeyValuePair<string, string>("Category", GUILocalizeStrings.Get(10798664)));
+                viewList.Add(new KeyValuePair<string, string>("Country", GUILocalizeStrings.Get(200026)));
+                viewList.Add(new KeyValuePair<string, string>("Actors", GUILocalizeStrings.Get(10798667)));
                 for (int i = 0; i < 5; i++) // userdefined views
                 {
-                  if (StrViewItem[i] != null && StrViewItem[i] != "(none)" && (StrViewItem[i].Length > 0))
+                  if (!string.IsNullOrEmpty(StrViewItem[i]) && StrViewItem[i] != "(none)")
                   {
                     string viewName = "", viewDisplayName = "";
-                    viewName = (string.Format("view{0}", i));
-                    if ((StrViewText[i] == null) || (StrViewText[i].Length == 0))
-                      viewDisplayName = StrViewItem[i];   // specific user View1
+                    // viewName = (string.Format("view{0}", i));
+                    viewName = StrViewItem[i];
+                    if (!string.IsNullOrEmpty(StrViewText[i]))
+                      viewDisplayName = StrViewText[i];
                     else
-                      viewDisplayName = StrViewText[i];   // specific Text for View1
+                      viewDisplayName = StrViewItem[i];
                     viewList.Add(new KeyValuePair<string, string>(viewName, viewDisplayName));
                   }
                 }
@@ -594,9 +597,29 @@ namespace MyFilmsPlugin.MyFilms
           using (XmlSettings XmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
           {
             string Catalog = XmlConfig.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty);
+            string[] listSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
+            string[] roleSeparator = { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
             bool TraktEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowTraktSync", false);
             bool RecentAddedAPIEnabled = XmlConfig.ReadXmlConfig("MyFilms", config, "AllowRecentAddedAPI", false);
             string StrDfltSelect = XmlConfig.ReadXmlConfig("MyFilms", config, "StrDfltSelect", string.Empty);
+            int j = 0;
+            for (int i = 1; i <= 5; i++)
+            {
+              if (XmlConfig.ReadXmlConfig("MyFilms", config, "ListSeparator" + i, string.Empty).Length > 0)
+              {
+                listSeparator[j] = XmlConfig.ReadXmlConfig("MyFilms", config, "ListSeparator" + i, string.Empty);
+                j++;
+              }
+            }
+            j = 0;
+            for (int i = 1; i <= 5; i++)
+            {
+              if (XmlConfig.ReadXmlConfig("MyFilms", config, "RoleSeparator" + i, string.Empty).Length > 0)
+              {
+                roleSeparator[j] = XmlConfig.ReadXmlConfig("MyFilms", config, "RoleSeparator" + i, string.Empty);
+                j++;
+              }
+            }
 
             if (System.IO.File.Exists(Catalog))
             {
@@ -619,23 +642,29 @@ namespace MyFilmsPlugin.MyFilms
               {
                 _dataLock.ExitReadLock();
               }
-              DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect, view + " " + "*");
+              DataRow[] results = dataExport.Tables["Movie"].Select(StrDfltSelect, view.ToUpper() + " ASC");
               if (results.Length == 0) return null;
 
               foreach (DataRow enr in results)
               {
-                bool isdate = false;
-                if (view == "Date" || view == "DateAdded")
-                  isdate = true;
-
-                if (isdate)
-                  champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
-                else
-                  champselect = enr[view].ToString().Trim();
-                ArrayList wtab = MyFilms.Search_String(champselect);
-                for (int wi = 0; wi < wtab.Count; wi++)
+                try
                 {
-                  w_tableau.Add(wtab[wi].ToString().Trim());
+                  bool isdate = false;
+                  if (view == "Date" || view == "DateAdded")
+                    isdate = true;
+
+                  if (isdate)
+                    champselect = string.Format("{0:yyyy/MM/dd}", enr["DateAdded"]);
+                  else
+                    champselect = enr[view].ToString().Trim();
+                  ArrayList wtab = Base_Search_String(champselect, listSeparator, roleSeparator);
+                  for (int wi = 0; wi < wtab.Count; wi++)
+                  {
+                    w_tableau.Add(wtab[wi].ToString().Trim());
+                  }
+                }
+                catch (Exception)
+                {
                 }
               }
               w_tableau.Sort(0, w_tableau.Count, null);
@@ -1064,6 +1093,54 @@ namespace MyFilmsPlugin.MyFilms
             }
           }
         }
+
+        public static ArrayList Base_Search_String(string champselect, string[] listSeparator, string[] roleSeparator)
+        {
+          Regex oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
+          System.Text.RegularExpressions.MatchCollection oMatches = oRegex.Matches(champselect);
+          foreach (System.Text.RegularExpressions.Match oMatch in oMatches)
+          {
+            Regex oRegexReplace = new Regex("[,;]");
+            champselect = champselect.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, string.Empty));
+          }
+          ArrayList wtab = new ArrayList();
+
+          int wi = 0;
+          string[] Sep = listSeparator;
+          string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
+          string wzone = string.Empty;
+          int wzoneIndexPosition = 0;
+          for (wi = 0; wi < arSplit.Length; wi++)
+          {
+            if (arSplit[wi].Length > 0)
+            {
+              // wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim()); // Replaced for performancereasons - HTML cleanup was not necessary !
+              wzone = arSplit[wi].Replace("  ", " ").Trim();
+              for (int i = 0; i <= 4; i++)
+              {
+                if (roleSeparator[i].Length > 0)
+                {
+                  wzoneIndexPosition = wzone.IndexOf(roleSeparator[i]);
+                  if (wzoneIndexPosition == wzone.Length - 1)
+                  {
+                    wzone = string.Empty;
+                    break;
+                  }
+                  if (wzoneIndexPosition > 1 && wzoneIndexPosition < wzone.Length)
+                  {
+                    wzone = wzone.Substring(0, wzoneIndexPosition).Trim();
+                  }
+                }
+              }
+              if (wzone.Length > 0)
+                wtab.Add(wzone);
+              wzone = string.Empty;
+            }
+          }
+          return wtab;
+        }
+
+
 
         public static string Translate_Column(string Column)
         {
