@@ -502,12 +502,20 @@
           this.General = new System.Windows.Forms.TabControl();
           this.Tab_Other = new System.Windows.Forms.TabPage();
           this.groupBoxExternal = new System.Windows.Forms.GroupBox();
+          this.btnLoadEditorValues = new System.Windows.Forms.Button();
+          this.cbEditorViews = new System.Windows.Forms.ComboBox();
+          this.cbEditorViewValues = new System.Windows.Forms.ComboBox();
+          this.cbEditorConfigs = new System.Windows.Forms.ComboBox();
           this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
           this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.groupBox3 = new System.Windows.Forms.GroupBox();
+          this.label52 = new System.Windows.Forms.Label();
+          this.label57 = new System.Windows.Forms.Label();
+          this.label58 = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -562,6 +570,7 @@
           this.Tab_Other.SuspendLayout();
           this.groupBoxExternal.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
+          this.groupBox3.SuspendLayout();
           this.SuspendLayout();
           // 
           // ToolTip1
@@ -4520,7 +4529,7 @@
           // cbAllowRecentAddedAPI
           // 
           this.cbAllowRecentAddedAPI.AutoSize = true;
-          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(16, 51);
+          this.cbAllowRecentAddedAPI.Location = new System.Drawing.Point(15, 29);
           this.cbAllowRecentAddedAPI.Name = "cbAllowRecentAddedAPI";
           this.cbAllowRecentAddedAPI.Size = new System.Drawing.Size(167, 17);
           this.cbAllowRecentAddedAPI.TabIndex = 4;
@@ -5050,6 +5059,7 @@
           // 
           // Tab_Other
           // 
+          this.Tab_Other.Controls.Add(this.groupBox3);
           this.Tab_Other.Controls.Add(this.groupBoxExternal);
           this.Tab_Other.Controls.Add(this.btnGrabberInterface);
           this.Tab_Other.Controls.Add(this.lblAMCupdaterConfigPreview);
@@ -5068,15 +5078,51 @@
           this.groupBoxExternal.Controls.Add(this.cbAllowRecentAddedAPI);
           this.groupBoxExternal.Location = new System.Drawing.Point(532, 12);
           this.groupBoxExternal.Name = "groupBoxExternal";
-          this.groupBoxExternal.Size = new System.Drawing.Size(200, 324);
+          this.groupBoxExternal.Size = new System.Drawing.Size(200, 134);
           this.groupBoxExternal.TabIndex = 92;
           this.groupBoxExternal.TabStop = false;
           this.groupBoxExternal.Text = "Recentrly Added API ...";
           // 
+          // btnLoadEditorValues
+          // 
+          this.btnLoadEditorValues.Location = new System.Drawing.Point(36, 23);
+          this.btnLoadEditorValues.Name = "btnLoadEditorValues";
+          this.btnLoadEditorValues.Size = new System.Drawing.Size(121, 23);
+          this.btnLoadEditorValues.TabIndex = 93;
+          this.btnLoadEditorValues.Text = "Load Editor Data";
+          this.btnLoadEditorValues.UseVisualStyleBackColor = true;
+          this.btnLoadEditorValues.Click += new System.EventHandler(this.btnLoadEditorValues_Click);
+          // 
+          // cbEditorViews
+          // 
+          this.cbEditorViews.FormattingEnabled = true;
+          this.cbEditorViews.Location = new System.Drawing.Point(36, 107);
+          this.cbEditorViews.Name = "cbEditorViews";
+          this.cbEditorViews.Size = new System.Drawing.Size(121, 21);
+          this.cbEditorViews.TabIndex = 95;
+          this.cbEditorViews.SelectedIndexChanged += new System.EventHandler(this.cbEditorViews_SelectedIndexChanged);
+          // 
+          // cbEditorViewValues
+          // 
+          this.cbEditorViewValues.FormattingEnabled = true;
+          this.cbEditorViewValues.Location = new System.Drawing.Point(36, 147);
+          this.cbEditorViewValues.Name = "cbEditorViewValues";
+          this.cbEditorViewValues.Size = new System.Drawing.Size(121, 21);
+          this.cbEditorViewValues.TabIndex = 6;
+          // 
+          // cbEditorConfigs
+          // 
+          this.cbEditorConfigs.FormattingEnabled = true;
+          this.cbEditorConfigs.Location = new System.Drawing.Point(36, 67);
+          this.cbEditorConfigs.Name = "cbEditorConfigs";
+          this.cbEditorConfigs.Size = new System.Drawing.Size(121, 21);
+          this.cbEditorConfigs.TabIndex = 94;
+          this.cbEditorConfigs.SelectedIndexChanged += new System.EventHandler(this.cbEditorConfigs_SelectedIndexChanged);
+          // 
           // labelRecentlyAddedAPI
           // 
           this.labelRecentlyAddedAPI.AutoSize = true;
-          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(34, 119);
+          this.labelRecentlyAddedAPI.Location = new System.Drawing.Point(33, 61);
           this.labelRecentlyAddedAPI.Name = "labelRecentlyAddedAPI";
           this.labelRecentlyAddedAPI.Size = new System.Drawing.Size(133, 52);
           this.labelRecentlyAddedAPI.TabIndex = 5;
@@ -5130,6 +5176,49 @@
           this.pictureBoxMyFilms.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
+          // 
+          // groupBox3
+          // 
+          this.groupBox3.Controls.Add(this.label58);
+          this.groupBox3.Controls.Add(this.label57);
+          this.groupBox3.Controls.Add(this.label52);
+          this.groupBox3.Controls.Add(this.btnLoadEditorValues);
+          this.groupBox3.Controls.Add(this.cbEditorViews);
+          this.groupBox3.Controls.Add(this.cbEditorConfigs);
+          this.groupBox3.Controls.Add(this.cbEditorViewValues);
+          this.groupBox3.Location = new System.Drawing.Point(532, 152);
+          this.groupBox3.Name = "groupBox3";
+          this.groupBox3.Size = new System.Drawing.Size(200, 184);
+          this.groupBox3.TabIndex = 93;
+          this.groupBox3.TabStop = false;
+          this.groupBox3.Text = "Basic Home Editor API test ...";
+          // 
+          // label52
+          // 
+          this.label52.AutoSize = true;
+          this.label52.Location = new System.Drawing.Point(38, 131);
+          this.label52.Name = "label52";
+          this.label52.Size = new System.Drawing.Size(104, 13);
+          this.label52.TabIndex = 96;
+          this.label52.Text = "Value to filter movies";
+          // 
+          // label57
+          // 
+          this.label57.AutoSize = true;
+          this.label57.Location = new System.Drawing.Point(38, 91);
+          this.label57.Name = "label57";
+          this.label57.Size = new System.Drawing.Size(77, 13);
+          this.label57.TabIndex = 97;
+          this.label57.Text = "View Selection";
+          // 
+          // label58
+          // 
+          this.label58.AutoSize = true;
+          this.label58.Location = new System.Drawing.Point(38, 51);
+          this.label58.Name = "label58";
+          this.label58.Size = new System.Drawing.Size(82, 13);
+          this.label58.TabIndex = 98;
+          this.label58.Text = "Config selection";
           // 
           // MyFilmsSetup
           // 
@@ -5253,6 +5342,8 @@
           this.groupBoxExternal.ResumeLayout(false);
           this.groupBoxExternal.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
+          this.groupBox3.ResumeLayout(false);
+          this.groupBox3.PerformLayout();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -5672,5 +5763,13 @@
         private CheckBox cbAllowRecentAddedAPI;
         private LinkLabel linkLabelTraktWiki;
         private LinkLabel linkLabelUsingTraktInMyFilmsWiki;
+        private Button btnLoadEditorValues;
+        private ComboBox cbEditorViews;
+        private ComboBox cbEditorViewValues;
+        private ComboBox cbEditorConfigs;
+        private GroupBox groupBox3;
+        private Label label58;
+        private Label label57;
+        private Label label52;
     }
 }

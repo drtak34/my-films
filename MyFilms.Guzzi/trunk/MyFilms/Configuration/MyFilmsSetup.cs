@@ -24,6 +24,8 @@
 namespace MyFilmsPlugin.MyFilms.Configuration
 {
   using System;
+  using System.Collections;
+  using System.Collections.Generic;
   using System.Data;
   using System.Diagnostics;
   using System.Globalization;
@@ -5608,6 +5610,76 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         private void linkLabelUsingTraktInMyFilmsWiki_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
           System.Diagnostics.Process.Start("http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films/3_Using_My_Films/Trakt/");
+        }
+
+        private void btnLoadEditorValues_Click(object sender, EventArgs e)
+        {
+          cbEditorConfigs.Items.Clear();
+          cbEditorViews.Items.Clear();
+          cbEditorViewValues.Items.Clear();
+          cbEditorConfigs.Text = "";
+          cbEditorViews.Text = "";
+          cbEditorViewValues.Text = "";
+
+          ArrayList MyFilmsEditor = BaseMesFilms.GetConfigViewLists();
+          // cbEditorConfigs.Items.Add("");
+          foreach (BaseMesFilms.MFConfig config in MyFilmsEditor)
+          {
+            cbEditorConfigs.Items.Add(config.Name);
+          }
+        }
+
+        private void cbEditorConfigs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          ArrayList MyFilmsEditor = BaseMesFilms.GetConfigViewLists();
+          cbEditorViews.Items.Clear();
+          cbEditorViewValues.Items.Clear();
+          cbEditorViews.Text = "";
+          cbEditorViewValues.Text = "";
+
+          foreach (BaseMesFilms.MFConfig config in MyFilmsEditor)
+          {
+            if (config.Name == cbEditorConfigs.Text)
+            {
+              foreach (KeyValuePair<string, string> view in config.ViewList)
+              {
+                // key = viewname, value = translated viewname
+                cbEditorViews.Items.Add(view.Value);
+              }
+            }
+          }
+        }
+
+        private void cbEditorViews_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          string viewCallName = "";
+          cbEditorViewValues.Items.Clear();
+          cbEditorViewValues.Text = "";
+          ArrayList MyFilmsEditor = BaseMesFilms.GetConfigViewLists();
+          foreach (BaseMesFilms.MFConfig config in MyFilmsEditor)
+          {
+            if (config.Name == cbEditorConfigs.Text)
+            {
+              foreach (KeyValuePair<string, string> view in config.ViewList)
+              {
+                // key = viewname, value = translated viewname
+                if (view.Value == cbEditorViews.Text)
+                {
+                  viewCallName = view.Key;
+                }
+              }
+            }
+          }
+
+          if (!string.IsNullOrEmpty(cbEditorConfigs.Text) && !string.IsNullOrEmpty(viewCallName))
+          {
+            List<string> ViewValues = BaseMesFilms.GetViewListValues(cbEditorConfigs.Text, viewCallName);
+            if (ViewValues != null)
+            foreach (string value in ViewValues)
+            {
+              cbEditorViewValues.Items.Add(value);
+            }
+          }
         }
 
     }
