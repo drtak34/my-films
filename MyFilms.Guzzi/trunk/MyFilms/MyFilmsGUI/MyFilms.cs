@@ -2004,7 +2004,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("GetFilmList started: BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false)");
       SetFilmSelect();
-      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      string GlobalFilterString = "";
+      // set online filter only, if scan is done already ...
+      if (InitialIsOnlineScan) GlobalFilterString =  GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      else GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      
       r = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       LogMyFilms.Debug("(GetFilmList) - GlobalFilterString:          '" + GlobalFilterString + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrDfltSelect:          '" + conf.StrDfltSelect + "'");
@@ -3057,7 +3061,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
 
       // Change global MovieFilter (Only Movies with media files reachable 
-      if (InitialIsOnlineScan) // (requires at least initial scan!)
+      if (InitialIsOnlineScan) // (requires at least initial scan! - //  || MyFilms.conf.ScanMediaOnStart -> or enabled startup option)
       {
         if (GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798628)));
         if (!GlobalFilterIsOnlineOnly) dlg1.Add(string.Format(GUILocalizeStrings.Get(10798770), GUILocalizeStrings.Get(10798629)));
