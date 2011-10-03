@@ -6319,9 +6319,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgupdate.SetHeading(GUILocalizeStrings.Get(1079892)); // Update ...
 
 
-          if ((MyFilms.conf.StrSuppressMenu) && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+          if ((MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual) && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
           {
-            dlg.Add(GUILocalizeStrings.Get(432));
+            dlg.Add(GUILocalizeStrings.Get(1079830));
             upd_choice[ichoice] = "suppress";
             ichoice++;
           }

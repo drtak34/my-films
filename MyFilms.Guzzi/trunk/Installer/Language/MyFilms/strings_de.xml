@@ -43,6 +43,7 @@
     <String id="905">Das Plugin muss noch konfiguriert werden</String>
     <String id="921">Datei wird gerade geladen</String>
     <String id="924">Menü</String>
+    <String id="927">Warnung</String>
     <String id="931">Wertung</String>
     <String id="936">Fortsetzen bei:</String>
     <String id="985">Lade Filmdetails</String>
@@ -75,7 +76,7 @@
     <String id="1079832">Lösche Film Datei(en) von Disk</String>
     <String id="1079833">Lösche Film aus Datenbank und von Disk</String>
     <String id="1079834">Die Film Media Dateien werden unwiderruflich gel�scht !</String>
-    <String id="1079835">Wollen Sie die Filme Dateien L�schen ?</String>
+    <String id="1079835">Wollen Sie die Film Dateien löschen ?</String>
     <String id="1079840">Wähle User Profil ('{0}')</String>
     <String id="1079846">Abgeschlossen ...</String>
     <String id="1079847">MyFilms lokale Fanart Erstellung</String>

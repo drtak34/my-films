@@ -1427,17 +1427,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
                       break;
                     }
-
-                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
-                    dlgYesNo.DoModal(GetID);
-                    if (dlgYesNo.IsConfirmed)
-                    {
-                        MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
-                        // Update_XML_database();
-                        MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
-                        afficher_detail(true);
-                    }
                     break;
 
                 case "removefromdb":
@@ -1445,11 +1434,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079831));//Remove movie from catalog
                     dlgYesNo.SetLine(2, GUILocalizeStrings.Get(433));//confirm suppression
                     dlgYesNo.DoModal(GetID);
-                    if (dlgYesNo.SelectedLabel == -1)
-                    {
-                      Change_Menu("delete");
-                      return;
-                    }
                     if (dlgYesNo.IsConfirmed)
                     {
                       // MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
@@ -1457,6 +1441,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       // Update_XML_database();
                       MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
                       afficher_detail(true);
+                    }
+                    if (dlgYesNo.SelectedLabel == -1)
+                    {
+                      Change_Menu("delete");
+                      return;
                     }
                     break;
                 case "deletefromdisk":
@@ -1466,16 +1455,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079834));//If you confirm, you media files will physically be deleted !
                     dlgYesNo.SetLine(3, GUILocalizeStrings.Get(1079835));//Are you sure you want to delete movie ?
                     dlgYesNo.DoModal(GetID);
-                    if (dlgYesNo.SelectedLabel == -1)
-                    {
-                      Change_Menu("delete");
-                      return;
-                    }
                     if (dlgYesNo.IsConfirmed)
                     {
                       MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false, true);
                       MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
                       afficher_detail(true);
+                    }
+                    if (dlgYesNo.SelectedLabel == -1)
+                    {
+                      Change_Menu("delete");
+                      return;
                     }
                     break;
                 case "deletefromdbanddisk":
@@ -1485,17 +1474,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079834));//If you confirm, you media files will physically be deleted !
                     dlgYesNo.SetLine(3, GUILocalizeStrings.Get(1079835));//Are you sure you want to delete movie ?
                     dlgYesNo.DoModal(GetID);
-                    if (dlgYesNo.SelectedLabel == -1)
-                    {
-                      Change_Menu("delete");
-                      return;
-                    }
                     if (dlgYesNo.IsConfirmed)
                     {
                       // old "suppress approach" MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId);
                       MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true);
                       MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
                       afficher_detail(true);
+                      break;
+                    }
+                    if (dlgYesNo.SelectedLabel == -1)
+                    {
+                      Change_Menu("delete");
+                      return;
                     }
                     break;
 
