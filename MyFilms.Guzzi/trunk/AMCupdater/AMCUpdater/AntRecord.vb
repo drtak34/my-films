@@ -727,9 +727,12 @@ Public Class AntRecord
                             If _InternetSearchHint.Length > 0 Then ' this is old searchhint method !
                                 For i As Integer = 0 To wurl.Count - 1
                                     wtitle = wurl.Item(i).Title.ToString
-                                    wyear = wurl.Item(i).Year.ToString.Substring(0, 4)
+                                    wyear = wurl.Item(i).Year.ToString
                                     wdirector = wurl.Item(i).Director.ToString
-                                    If Double.TryParse(wyear, dyear) = False Then
+                                    If wyear.Length > 4 Then
+                                        wyear = wyear.Substring(0, 4)
+                                    End If
+                                    If Double.TryParse(wyear, dyear) = False Or wyear.Length < 4 Then
                                         wyear = ""
                                     End If
                                     'If (_InternetSearchHint.Length > 0 And wtitle.Contains(_InternetSearchHint)) Then
@@ -1916,8 +1919,8 @@ Public Class AntRecord
                 _XMLElement.Attributes(currentAttribute).Value = currentValue
             End If
             If ProcessMode = Process_Mode_Names.Update Then
-                If _LastOutputMessage = "" Then
-                    _LastOutputMessage += "Updated: " + currentAttribute
+                If Not _LastOutputMessage.Contains(" - Updated: ") Then
+                    _LastOutputMessage += " - Updated: " + currentAttribute
                 Else
                     _LastOutputMessage += ", " + currentAttribute
                 End If
@@ -1940,8 +1943,8 @@ Public Class AntRecord
                 _XMLElement.Item(currentAttribute).InnerText = currentValue
             End If
             If ProcessMode = Process_Mode_Names.Update Then
-                If _LastOutputMessage = "" Then
-                    _LastOutputMessage += "Updated: " + currentAttribute
+                If Not _LastOutputMessage.Contains(" - Updated: ") Then
+                    _LastOutputMessage += " - Updated: " + currentAttribute
                 Else
                     _LastOutputMessage += ", " + currentAttribute
                 End If
