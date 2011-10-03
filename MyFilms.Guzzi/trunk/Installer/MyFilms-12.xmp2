@@ -2190,6 +2190,27 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{13c385fc-827c-4a43-9198-e07a880df19a}-Affinity-ES.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\Affinity-ES.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\MovieMaze(GermanCover).xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e0e91052-28d7-4015-a6d2-29d4eeacfc19}-MovieMaze(GermanCover).xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\MovieMaze(GermanCover).xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\Filmstarts.de.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{859a857f-45ef-420c-a33c-865771812953}-Filmstarts.de.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\Filmstarts.de.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\kino.de.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{070b6708-8b6c-4d74-b455-92fbca6c02cd}-kino.de.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\kino.de.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2760,6 +2781,72 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
           </Items>
         </Files>
       </GroupItem>
+      <GroupItem Name="LanguageFiles">
+        <ParentGroup>Default</ParentGroup>
+        <DisplayName>Language Translation Files</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>LanguageFiles</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_cs.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9cc4c6a5-ed99-4a1f-bd9d-479b7ae1a95f}-strings_cs.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_cs.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_de.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{580c9eb8-9d0a-418c-ae74-09475ad8859d}-strings_de.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_de.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_en.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5b55668f-6295-4794-a804-f287d7484ba9}-strings_en.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_en.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_es.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c5fee759-5389-499f-902b-1b94b4dc5478}-strings_es.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_es.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_fr.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2d5e4f1a-ac49-4243-b9bb-cb4156d3d839}-strings_fr.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_fr.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_hu.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{212a770d-569d-444a-acd6-6167ddf87046}-strings_hu.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_hu.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_it.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5df4ff86-21ad-406c-95cf-cd1aaf8944b7}-strings_it.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_it.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Language\MyFilms\strings_sk.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{303b1657-24e5-43d9-a124-2c89680af724}-strings_sk.xml</ZipFileName>
+              <DestinationFilename>%Language%\MyFilms\strings_sk.xml</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
     </Items>
   </Groups>
   <Sections>
@@ -3152,10 +3239,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players" />
             <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -3172,7 +3259,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>5</Major>
       <Minor>1</Minor>
       <Build>0</Build>
-      <Revision>1480</Revision>
+      <Revision>1513</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -3184,7 +3271,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V5.1.0.1468-%28MP12%29.mpe1</OnlineLocation>
-    <ReleaseDate>2011-09-25T20:08:39.9895879+02:00</ReleaseDate>
+    <ReleaseDate>2011-10-02T21:36:42.6820493+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version]-(MP12).mpe1</Location>
     <Params>
@@ -5373,6 +5460,27 @@ Please report bugs in MyFilms forum.</VersionDescription>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\MovieMaze(GermanCover).xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e0e91052-28d7-4015-a6d2-29d4eeacfc19}-MovieMaze(GermanCover).xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\MovieMaze(GermanCover).xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\Filmstarts.de.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{859a857f-45ef-420c-a33c-865771812953}-Filmstarts.de.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\Filmstarts.de.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\kino.de.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{070b6708-8b6c-4d74-b455-92fbca6c02cd}-kino.de.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\kino.de.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\DefaultImages\DefaultCover.jpg</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{d5363a28-1df8-4674-9430-d5c395ca307d}-DefaultCover.jpg</ZipFileName>
@@ -5889,6 +5997,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{0bcf3be9-f459-4e60-826e-de04dc31b7a9}-setup.exe</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\AMCinstaller\setup.exe</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Language\MyFilms\strings_cs.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9cc4c6a5-ed99-4a1f-bd9d-479b7ae1a95f}-strings_cs.xml</ZipFileName>
+        <DestinationFilename>%Language%\MyFilms\strings_cs.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Language\MyFilms\strings_sk.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{303b1657-24e5-43d9-a124-2c89680af724}-strings_sk.xml</ZipFileName>
+        <DestinationFilename>%Language%\MyFilms\strings_sk.xml</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -5955,6 +6077,16 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <DestinationFilename>%Config%\scripts\MyFilms</DestinationFilename>
         <Folder>Config\scripts\MyFilms</Folder>
         <Group>Scripts</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{d78d5883-73ff-4314-9c78-c0c3bbfd06d9}-</ZipFileName>
+        <DestinationFilename>%Language%</DestinationFilename>
+        <Folder>Language</Folder>
+        <Group>LanguageFiles</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
     </FolderGroups>
