@@ -70,6 +70,12 @@
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
     <String id="107988">Filme</String>
+    <String id="1079830">Lösche Film ...</String>
+    <String id="1079831">Lösche Film aus Datenbank</String>
+    <String id="1079832">Lösche Film Datei(en) von Disk</String>
+    <String id="1079833">Lösche Film aus Datenbank und von Disk</String>
+    <String id="1079834">Die Film Media Dateien werden unwiderruflich gel�scht !</String>
+    <String id="1079835">Wollen Sie die Filme Dateien L�schen ?</String>
     <String id="1079840">Wähle User Profil ('{0}')</String>
     <String id="1079846">Abgeschlossen ...</String>
     <String id="1079847">MyFilms lokale Fanart Erstellung</String>
