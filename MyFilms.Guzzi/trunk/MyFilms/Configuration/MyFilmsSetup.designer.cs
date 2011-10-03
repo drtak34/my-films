@@ -522,6 +522,8 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
+          this.chkSuppressManual = new System.Windows.Forms.CheckBox();
+          this.label61 = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -2218,25 +2220,27 @@
           // 
           // groupBoxDeletionOptions
           // 
-          this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
           this.groupBoxDeletionOptions.Controls.Add(this.gpsuppress);
+          this.groupBoxDeletionOptions.Controls.Add(this.chkSuppress);
           this.groupBoxDeletionOptions.Controls.Add(this.gpspfield);
-          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(378, 6);
+          this.groupBoxDeletionOptions.Location = new System.Drawing.Point(378, 31);
           this.groupBoxDeletionOptions.Name = "groupBoxDeletionOptions";
-          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(350, 253);
+          this.groupBoxDeletionOptions.Size = new System.Drawing.Size(350, 228);
           this.groupBoxDeletionOptions.TabIndex = 35;
           this.groupBoxDeletionOptions.TabStop = false;
-          this.groupBoxDeletionOptions.Text = "Deletion Options for automatic updates and/or deletions";
+          this.groupBoxDeletionOptions.Text = "Deletion Options for automatic updates and/or deletions ...";
           this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
           // 
           // chkSuppress
           // 
           this.chkSuppress.AutoSize = true;
-          this.chkSuppress.Location = new System.Drawing.Point(10, 20);
+          this.chkSuppress.Location = new System.Drawing.Point(15, 19);
           this.chkSuppress.Name = "chkSuppress";
-          this.chkSuppress.Size = new System.Drawing.Size(292, 17);
+          this.chkSuppress.Size = new System.Drawing.Size(294, 17);
           this.chkSuppress.TabIndex = 0;
-          this.chkSuppress.Text = "Enable database deletion options after movie is watched";
+          this.chkSuppress.Text = "Enable automatic deletion options after movie is watched";
+          this.ToolTip1.SetToolTip(this.chkSuppress, "WHen enabled, the selected actions are automatically performed after a movie is w" +
+                  "atched.");
           this.chkSuppress.UseVisualStyleBackColor = true;
           this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
           // 
@@ -2247,16 +2251,16 @@
           this.gpsuppress.Controls.Add(this.rbsuppress3);
           this.gpsuppress.Controls.Add(this.rbsuppress1);
           this.gpsuppress.Enabled = false;
-          this.gpsuppress.Location = new System.Drawing.Point(15, 39);
+          this.gpsuppress.Location = new System.Drawing.Point(15, 35);
           this.gpsuppress.Name = "gpsuppress";
-          this.gpsuppress.Size = new System.Drawing.Size(321, 97);
+          this.gpsuppress.Size = new System.Drawing.Size(321, 93);
           this.gpsuppress.TabIndex = 2;
           this.gpsuppress.TabStop = false;
           // 
           // rbsuppress2
           // 
           this.rbsuppress2.AutoSize = true;
-          this.rbsuppress2.Location = new System.Drawing.Point(15, 33);
+          this.rbsuppress2.Location = new System.Drawing.Point(18, 30);
           this.rbsuppress2.Name = "rbsuppress2";
           this.rbsuppress2.Size = new System.Drawing.Size(189, 17);
           this.rbsuppress2.TabIndex = 5;
@@ -2267,7 +2271,7 @@
           // rbsuppress4
           // 
           this.rbsuppress4.AutoSize = true;
-          this.rbsuppress4.Location = new System.Drawing.Point(15, 75);
+          this.rbsuppress4.Location = new System.Drawing.Point(18, 72);
           this.rbsuppress4.Name = "rbsuppress4";
           this.rbsuppress4.Size = new System.Drawing.Size(201, 17);
           this.rbsuppress4.TabIndex = 4;
@@ -2279,7 +2283,7 @@
           // rbsuppress3
           // 
           this.rbsuppress3.AutoSize = true;
-          this.rbsuppress3.Location = new System.Drawing.Point(15, 54);
+          this.rbsuppress3.Location = new System.Drawing.Point(18, 51);
           this.rbsuppress3.Name = "rbsuppress3";
           this.rbsuppress3.Size = new System.Drawing.Size(196, 17);
           this.rbsuppress3.TabIndex = 2;
@@ -2291,7 +2295,7 @@
           // rbsuppress1
           // 
           this.rbsuppress1.AutoSize = true;
-          this.rbsuppress1.Location = new System.Drawing.Point(15, 12);
+          this.rbsuppress1.Location = new System.Drawing.Point(18, 9);
           this.rbsuppress1.Name = "rbsuppress1";
           this.rbsuppress1.Size = new System.Drawing.Size(119, 17);
           this.rbsuppress1.TabIndex = 1;
@@ -2301,14 +2305,15 @@
           // 
           // gpspfield
           // 
+          this.gpspfield.Controls.Add(this.label61);
           this.gpspfield.Controls.Add(this.chksupplaystop);
           this.gpspfield.Controls.Add(this.txtfdupdate);
           this.gpspfield.Controls.Add(this.lblUpdateValue);
           this.gpspfield.Controls.Add(this.cbfdupdate);
           this.gpspfield.Enabled = false;
-          this.gpspfield.Location = new System.Drawing.Point(15, 151);
+          this.gpspfield.Location = new System.Drawing.Point(15, 134);
           this.gpspfield.Name = "gpspfield";
-          this.gpspfield.Size = new System.Drawing.Size(321, 93);
+          this.gpspfield.Size = new System.Drawing.Size(321, 87);
           this.gpspfield.TabIndex = 18;
           this.gpspfield.TabStop = false;
           this.gpspfield.Text = "Player finished Update Action";
@@ -2318,17 +2323,18 @@
           // 
           this.chksupplaystop.AutoSize = true;
           this.chksupplaystop.Enabled = false;
-          this.chksupplaystop.Location = new System.Drawing.Point(12, 19);
+          this.chksupplaystop.Location = new System.Drawing.Point(10, 19);
           this.chksupplaystop.Name = "chksupplaystop";
           this.chksupplaystop.Size = new System.Drawing.Size(184, 17);
           this.chksupplaystop.TabIndex = 19;
           this.chksupplaystop.Text = "Update Field when player finishes";
+          this.ToolTip1.SetToolTip(this.chksupplaystop, "You can update a DB field with a specified value after a movie is watched.");
           this.chksupplaystop.UseVisualStyleBackColor = true;
           this.chksupplaystop.CheckedChanged += new System.EventHandler(this.chksupplaystop_CheckedChanged);
           // 
           // txtfdupdate
           // 
-          this.txtfdupdate.Location = new System.Drawing.Point(170, 60);
+          this.txtfdupdate.Location = new System.Drawing.Point(170, 58);
           this.txtfdupdate.Name = "txtfdupdate";
           this.txtfdupdate.Size = new System.Drawing.Size(144, 20);
           this.txtfdupdate.TabIndex = 16;
@@ -2336,16 +2342,16 @@
           // lblUpdateValue
           // 
           this.lblUpdateValue.AutoSize = true;
-          this.lblUpdateValue.Location = new System.Drawing.Point(9, 39);
+          this.lblUpdateValue.Location = new System.Drawing.Point(9, 40);
           this.lblUpdateValue.Name = "lblUpdateValue";
-          this.lblUpdateValue.Size = new System.Drawing.Size(109, 13);
+          this.lblUpdateValue.Size = new System.Drawing.Size(93, 13);
           this.lblUpdateValue.TabIndex = 20;
-          this.lblUpdateValue.Text = "Field to update/Value";
+          this.lblUpdateValue.Text = "DB Item to update";
           // 
           // cbfdupdate
           // 
           this.cbfdupdate.FormattingEnabled = true;
-          this.cbfdupdate.Location = new System.Drawing.Point(10, 60);
+          this.cbfdupdate.Location = new System.Drawing.Point(10, 58);
           this.cbfdupdate.Name = "cbfdupdate";
           this.cbfdupdate.Size = new System.Drawing.Size(150, 21);
           this.cbfdupdate.TabIndex = 15;
@@ -5030,6 +5036,7 @@
           // 
           // Tab_Update
           // 
+          this.Tab_Update.Controls.Add(this.chkSuppressManual);
           this.Tab_Update.Controls.Add(this.groupBox_AntUpdatingItems);
           this.Tab_Update.Controls.Add(this.groupBox2);
           this.Tab_Update.Controls.Add(this.groupBoxUpdateByProperties);
@@ -5291,6 +5298,27 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
+          // chkSuppressManual
+          // 
+          this.chkSuppressManual.AutoSize = true;
+          this.chkSuppressManual.Location = new System.Drawing.Point(393, 10);
+          this.chkSuppressManual.Name = "chkSuppressManual";
+          this.chkSuppressManual.Size = new System.Drawing.Size(216, 17);
+          this.chkSuppressManual.TabIndex = 19;
+          this.chkSuppressManual.Text = "Enable manual deletion / removal option";
+          this.ToolTip1.SetToolTip(this.chkSuppressManual, "Enables an entry in context menu to manually delete DB record and/or media files." +
+                  "");
+          this.chkSuppressManual.UseVisualStyleBackColor = true;
+          // 
+          // label61
+          // 
+          this.label61.AutoSize = true;
+          this.label61.Location = new System.Drawing.Point(169, 40);
+          this.label61.Name = "label61";
+          this.label61.Size = new System.Drawing.Size(72, 13);
+          this.label61.TabIndex = 21;
+          this.label61.Text = "Update Value";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -5407,6 +5435,7 @@
           this.Tab_Artwork.ResumeLayout(false);
           this.Tab_AMCupdater.ResumeLayout(false);
           this.Tab_Update.ResumeLayout(false);
+          this.Tab_Update.PerformLayout();
           this.General.ResumeLayout(false);
           this.Tab_Other.ResumeLayout(false);
           this.Tab_Other.PerformLayout();
@@ -5848,5 +5877,7 @@
         private ComboBox cbEditorLayout;
         private TextBox tbEditorStartParamsOutput;
         private Button btnSaveEditorStartParams;
+        private CheckBox chkSuppressManual;
+        private Label label61;
     }
 }

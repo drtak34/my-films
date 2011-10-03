@@ -5602,9 +5602,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
-      if (MyFilms.conf.StrSuppress && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+      if ((MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual) && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
       {
-        dlg.Add(GUILocalizeStrings.Get(432));
+        dlg.Add(GUILocalizeStrings.Get(1079830));
         upd_choice[ichoice] = "suppress";
         ichoice++;
       }
@@ -6165,15 +6165,72 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
         case "suppress":
-          dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
-          dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
-          dlgYesNo.DoModal(GetID);
-          if (dlgYesNo.IsConfirmed)
           {
-            MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId);
-            Fin_Charge_Init(true, true);
+            GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            System.Collections.Generic.List<string> choiceViewMenu = new System.Collections.Generic.List<string>();
+
+            if (dlgmenu == null) return;
+            dlgmenu.Reset();
+            choiceViewMenu.Clear();
+            dlgmenu.SetHeading(GUILocalizeStrings.Get(1079830)); // Delete movie ...
+
+            dlgmenu.Add(GUILocalizeStrings.Get(1079831)); // Remove movie from catalog
+            choiceViewMenu.Add("removefromdb");
+
+            dlgmenu.Add(GUILocalizeStrings.Get(1079832)); // Delete movie file(s) from disk
+            choiceViewMenu.Add("deletefromdisk");
+
+            dlgmenu.Add(GUILocalizeStrings.Get(1079833)); // Delete from catalog and disk
+            choiceViewMenu.Add("deletefromdbanddisk");
+
+            dlgmenu.DoModal(GetID);
+            if (dlgmenu.SelectedLabel == -1)
+            {
+              break;
+            }
+            switch (choiceViewMenu[dlgmenu.SelectedLabel].ToLower())
+            {
+              case "removefromdb":
+                dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079831));//Remove movie from catalog
+                dlgYesNo.SetLine(2, GUILocalizeStrings.Get(433));//confirm suppression
+                dlgYesNo.DoModal(GetID);
+                if (dlgYesNo.IsConfirmed)
+                {
+                  MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, true, false);
+                  Fin_Charge_Init(true, true);
+                }
+                break;
+              case "deletefromdisk":
+                dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079832));//Delete movie file(s) from disk
+                dlgYesNo.SetLine(1, GUILocalizeStrings.Get(927));// warning
+                dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079834));//If you confirm, you media files will physically be deleted !
+                dlgYesNo.SetLine(3, GUILocalizeStrings.Get(1079835));//Are you sure you want to delete movie ?
+                dlgYesNo.DoModal(GetID);
+                if (dlgYesNo.IsConfirmed)
+                {
+                  MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, false, true);
+                  Fin_Charge_Init(true, true);
+                }
+                break;
+              case "deletefromdbanddisk":
+                dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079833));//Delete from catalog and disk
+                dlgYesNo.SetLine(1, GUILocalizeStrings.Get(927));// warning
+                dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079834));//If you confirm, you media files will physically be deleted !
+                dlgYesNo.SetLine(3, GUILocalizeStrings.Get(1079835));//Are you sure you want to delete movie ?
+                dlgYesNo.DoModal(GetID);
+                if (dlgYesNo.IsConfirmed)
+                {
+                  // old "suppress approach" MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId);
+                  MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId, true, true);
+                  Fin_Charge_Init(true, true);
+                }
+                break;
+              default:
+                break;
+            }
+            break;
           }
-          break;
+
         case "grabber":
           string title = MyFilmsDetail.GetSearchTitle(r, facadeView.SelectedListItem.ItemId, "titleoption");
           string mediapath = mediapath = MyFilms.r[facadeView.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString();
@@ -6262,7 +6319,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgupdate.SetHeading(GUILocalizeStrings.Get(1079892)); // Update ...
 
 
-          if (MyFilms.conf.StrSuppress && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
+          if ((MyFilms.conf.StrSuppressMenu) && facadeView.SelectedListItemIndex > -1 && !facadeView.SelectedListItem.IsFolder)
           {
             dlg.Add(GUILocalizeStrings.Get(432));
             upd_choice[ichoice] = "suppress";

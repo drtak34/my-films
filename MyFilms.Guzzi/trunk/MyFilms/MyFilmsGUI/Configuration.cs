@@ -149,6 +149,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 StrIdentLabel = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "AntIdentLabel", string.Empty);
                 StrLogos = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Logos", false);
                 StrSuppress = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "Suppress", false);
+                StrSuppressManual = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressManual", false);
                 StrSupPlayer = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressPlayed", false);
                 StrSuppressType = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "SuppressType", string.Empty);
                 StrWatchedField = XmlConfig.ReadXmlConfig("MyFilms", CurrentConfig, "WatchedField", "Checked"); // Defaults to "Checked", if no value set, as it's most used in ANT like that
@@ -621,8 +622,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         private bool strSuppress = false;
         public bool StrSuppress
         {
-            get { return strSuppress; }
-            set { strSuppress = value; }
+          get { return strSuppress; }
+          set { strSuppress = value; }
+        }
+
+        private bool strSuppressManual = false;
+        public bool StrSuppressManual
+        {
+          get { return strSuppressManual; }
+          set { strSuppressManual = value; }
         }
 
         private bool strEnhancedWatchedStatusHandling = false;

@@ -1059,6 +1059,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "ViewsDfltAll", chkDfltViewsAll.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "LastID", "7986");
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "Suppress", chkSuppress.Checked);
+            XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressManual", chkSuppressManual.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", chksupplaystop.Checked);
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "WatchedField", cbWatched.Text.ToString());
             XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressField", cbfdupdate.Text.ToString());
@@ -1376,6 +1377,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Grabber_ChooseScript", false);
             txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "AMCUpd_cnf", string.Empty);
             chkSuppress.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "Suppress", false);
+            chkSuppressManual.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressManual", false);
             chksupplaystop.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressPlayed", false);
             cbWatched.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "WatchedField", "Checked");
             cbfdupdate.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text.ToString(), "SuppressField", string.Empty);
@@ -1749,6 +1751,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             chkUseOriginalAsTranslatedTitle.Checked = false;
             SearchFileName.Checked = false;
             chkSuppress.Checked = false;
+            chkSuppressManual.Checked = false;
             chksupplaystop.Checked = false;
             cbfdupdate.ResetText();
             cbWatched.ResetText();

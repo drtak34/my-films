@@ -803,9 +803,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     dlgmenu.Add(GUILocalizeStrings.Get(931));//rating
                     choiceViewMenu.Add("rating");
 
-                    if (MyFilms.conf.StrSuppress)
+                    if (MyFilms.conf.StrSuppress || MyFilms.conf.StrSuppressManual)
                     {
-                        dlgmenu.Add(GUILocalizeStrings.Get(432));
+                        dlgmenu.Add(GUILocalizeStrings.Get(1079830)); // Delete movie ...
                         choiceViewMenu.Add("delete");
                     }
 
@@ -1403,22 +1403,103 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
 
                 case "delete":
-                    if (MyFilms.conf.StrSuppress)
                     {
-                        dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
-                        dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
-                        dlgYesNo.DoModal(GetID);
-                        if (dlgYesNo.IsConfirmed)
-                        {
-                            MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
-                            // Update_XML_database();
-                            MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
-                            afficher_detail(true);
+                      if (dlgmenu == null) return;
+                      dlgmenu.Reset();
+                      choiceViewMenu.Clear();
+                      dlgmenu.SetHeading(GUILocalizeStrings.Get(1079830)); // Delete movie ...
 
-                        }
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079831)); // Remove movie from catalog
+                      choiceViewMenu.Add("removefromdb");
+
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079832)); // Delete movie file(s) from disk
+                      choiceViewMenu.Add("deletefromdisk");
+
+                      dlgmenu.Add(GUILocalizeStrings.Get(1079833)); // Delete from catalog and disk
+                      choiceViewMenu.Add("deletefromdbanddisk");
+
+                      dlgmenu.DoModal(GetID);
+                      if (dlgmenu.SelectedLabel == -1)
+                      {
+                        Change_Menu("mainmenu");
+                        return;
+                      }
+                      Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+                      break;
+                    }
+
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986));//my films
+                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(433));//confirm suppression
+                    dlgYesNo.DoModal(GetID);
+                    if (dlgYesNo.IsConfirmed)
+                    {
+                        MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
+                        // Update_XML_database();
+                        MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
+                        afficher_detail(true);
                     }
                     break;
-                case "updproperty":
+
+                case "removefromdb":
+                    dlgYesNo.Reset();
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079831));//Remove movie from catalog
+                    dlgYesNo.SetLine(2, GUILocalizeStrings.Get(433));//confirm suppression
+                    dlgYesNo.DoModal(GetID);
+                    if (dlgYesNo.SelectedLabel == -1)
+                    {
+                      Change_Menu("delete");
+                      return;
+                    }
+                    if (dlgYesNo.IsConfirmed)
+                    {
+                      // MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
+                      MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, false);
+                      // Update_XML_database();
+                      MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
+                      afficher_detail(true);
+                    }
+                    break;
+                case "deletefromdisk":
+                    dlgYesNo.Reset();
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079832));//Delete movie file(s) from disk
+                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(927));// warning
+                    dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079834));//If you confirm, you media files will physically be deleted !
+                    dlgYesNo.SetLine(3, GUILocalizeStrings.Get(1079835));//Are you sure you want to delete movie ?
+                    dlgYesNo.DoModal(GetID);
+                    if (dlgYesNo.SelectedLabel == -1)
+                    {
+                      Change_Menu("delete");
+                      return;
+                    }
+                    if (dlgYesNo.IsConfirmed)
+                    {
+                      MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false, true);
+                      MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
+                      afficher_detail(true);
+                    }
+                    break;
+                case "deletefromdbanddisk":
+                    dlgYesNo.Reset();
+                    dlgYesNo.SetHeading(GUILocalizeStrings.Get(1079833));//Delete from catalog and disk
+                    dlgYesNo.SetLine(1, GUILocalizeStrings.Get(927));// warning
+                    dlgYesNo.SetLine(2, GUILocalizeStrings.Get(1079834));//If you confirm, you media files will physically be deleted !
+                    dlgYesNo.SetLine(3, GUILocalizeStrings.Get(1079835));//Are you sure you want to delete movie ?
+                    dlgYesNo.DoModal(GetID);
+                    if (dlgYesNo.SelectedLabel == -1)
+                    {
+                      Change_Menu("delete");
+                      return;
+                    }
+                    if (dlgYesNo.IsConfirmed)
+                    {
+                      // old "suppress approach" MyFilmsDetail.Suppress_Entry((DataRow[])MyFilms.r, (int)facadeView.SelectedListItem.ItemId);
+                      MyFilmsDetail.Manual_Delete((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true, true);
+                      MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
+                      afficher_detail(true);
+                    }
+                    break;
+
+              case "updproperty":
                     System.Collections.Generic.List<string> choiceUpd = new System.Collections.Generic.List<string>();
                     ArrayList w_tableau = new ArrayList();
                     if (dlgmenu == null) return;
@@ -2067,49 +2148,88 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info("GetMovieFromRecord(): Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', file = '" + movie.File + "', path = '" + movie.Path + "'");
           return movie;
         }
-      
+
         //-------------------------------------------------------------------------------------------
         //  Suppress an entry from the database
         //-------------------------------------------------------------------------------------------        
         public static void Suppress_Entry(DataRow[] r1, int Index)
         {
 
-            if ((MyFilms.conf.StrSuppressType == "2") || (MyFilms.conf.StrSuppressType == "4"))
-            {
-                ArrayList newItems = new ArrayList();
-                bool NoResumeMovie = true;
-                int IMovieIndex = 0;
+          if ((MyFilms.conf.StrSuppressType == "2") || (MyFilms.conf.StrSuppressType == "4"))
+          {
+            ArrayList newItems = new ArrayList();
+            bool NoResumeMovie = true;
+            int IMovieIndex = 0;
 
-                Search_All_Files(Index, true, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
-                foreach (object t in newItems)
+            Search_All_Files(Index, true, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
+            foreach (object t in newItems)
+            {
+              // for each entry test if it's a file, a directory or a dvd copy
+              // no action for files on amovible media or image files
+              if (System.IO.File.Exists(t.ToString()))
+                try
                 {
-                    // for each entry test if it's a file, a directory or a dvd copy
-                    // no action for files on amovible media or image files
-                    if (System.IO.File.Exists(t.ToString()))
-                        try
-                        {
-                            System.IO.File.Delete(t.ToString());
-                            LogMyFilms.Info("file deleted : " + t.ToString());
-                        }
-                        catch
-                        {
-                            LogMyFilms.Info("unable to delete file : " + t.ToString());
-                        }
+                  System.IO.File.Delete(t.ToString());
+                  LogMyFilms.Info("file deleted : " + t.ToString());
+                }
+                catch
+                {
+                  LogMyFilms.Info("unable to delete file : " + t.ToString());
                 }
             }
-            if ((MyFilms.conf.StrSuppressType == "1") || (MyFilms.conf.StrSuppressType == "2"))
+          }
+          if ((MyFilms.conf.StrSuppressType == "1") || (MyFilms.conf.StrSuppressType == "2"))
+          {
+            string wdelTitle = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
+            MyFilms.r[Index].Delete();
+
+            LogMyFilms.Info("Database movie deleted : " + wdelTitle);
+          }
+          else
+          {
+            MyFilms.r[Index][MyFilms.conf.StrSuppressField] = MyFilms.conf.StrSuppressValue.ToString();
+            LogMyFilms.Info("Database movie updated for deletion : " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
+          }
+          Update_XML_database();
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //  Suppress an entry from the database
+        //-------------------------------------------------------------------------------------------        
+        public static void Manual_Delete(DataRow[] r1, int Index, bool removefromDB, bool deletefromStorage)
+        {
+          LogMyFilms.Info("Manual_Delete(): remove from DB = '" + removefromDB + "', delete from storage = '" + deletefromStorage + "'");
+          if (deletefromStorage)
+          {
+            ArrayList newItems = new ArrayList();
+            bool NoResumeMovie = true;
+            int IMovieIndex = 0;
+
+            Search_All_Files(Index, true, ref NoResumeMovie, ref newItems, ref IMovieIndex, false);
+            foreach (object t in newItems)
             {
-                string wdelTitle = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
-                MyFilms.r[Index].Delete();
-                
-                LogMyFilms.Info("Database movie deleted : " + wdelTitle);
+              // for each entry test if it's a file, a directory or a dvd copy
+              // no action for files on amovible media or image files
+              if (System.IO.File.Exists(t.ToString()))
+                try
+                {
+                  System.IO.File.Delete(t.ToString());
+                  LogMyFilms.Info("file deleted : " + t.ToString());
+                }
+                catch (Exception ex)
+                {
+                  LogMyFilms.Info("unable to delete file : " + t.ToString());
+                  LogMyFilms.InfoException("Manual_Delete() - delete file exception: ", ex);
+                }
             }
-            else
-            {
-                MyFilms.r[Index][MyFilms.conf.StrSuppressField] = MyFilms.conf.StrSuppressValue.ToString();
-                LogMyFilms.Info("Database movie updated for deletion : " + MyFilms.r[Index][MyFilms.conf.StrTitle1]);
-            }
+          }
+          if (removefromDB)
+          {
+            string wdelTitle = MyFilms.r[Index][MyFilms.conf.StrTitle1].ToString();
+            MyFilms.r[Index].Delete();
+            LogMyFilms.Info("Database movie deleted : " + wdelTitle);
             Update_XML_database();
+          }
         }
 
         //-------------------------------------------------------------------------------------------
