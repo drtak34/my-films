@@ -2713,13 +2713,51 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     }
                     DirectoryInfo dirsInf = new DirectoryInfo(Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms");
                     FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
+                    string[] Sep = new string[] { ",", ";", "|", "/", ".", @"\", ":" };
+
                     foreach (FileSystemInfo sfi in sfiles)
                     {
-                        if ((sfi.Extension.ToLower() == ".xml") && (sfi.FullName != MyFilms.conf.StrGrabber_cnf))
+                      if ((sfi.Extension.ToLower() == ".xml") && (sfi.FullName != MyFilms.conf.StrGrabber_cnf))
+                      {
+                        bool add = false; 
+                        GrabberScript script = new GrabberScript(sfi.FullName);
+                        script.Load(sfi.FullName);
+
+                        if (string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabberScriptsFilter))
                         {
-                            dlg.Add(sfi.Name);
-                            scriptfile.Add(sfi.FullName);
+                          add = true;
                         }
+                        else
+                        {
+                          string[] supportedlanguages = script.Language.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
+                          if (supportedlanguages.Length == 0) add = true;
+                          else
+                          {
+                            foreach (string supportedlanguage in supportedlanguages)
+                            {
+                              {
+                                string[] split = MyFilms.conf.ItemSearchGrabberScriptsFilter.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
+                                foreach (string s in split) if (supportedlanguage.ToLower() == s.ToLower()) add = true;
+                              }
+                            }
+                          }
+                        }
+                        if (add)
+                        {
+                          string displayName = "";
+                          if (!string.IsNullOrEmpty(script.Name))
+                          {
+                            displayName += script.Name;
+                            if (!string.IsNullOrEmpty(script.Language))
+                              displayName += " (" + script.Language + ")";
+                          }
+                          else
+                            displayName += sfi.Name;
+
+                          dlg.Add(displayName);
+                          scriptfile.Add(sfi.FullName);
+                        }
+                      }
                     }
                     if (scriptfile.Count > 1)
                     {

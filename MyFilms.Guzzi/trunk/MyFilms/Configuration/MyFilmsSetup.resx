@@ -206,6 +206,14 @@ fully qualified path to a logo is stored in the rule, so it might not be fully p
 "Use skins default logos" is the default and will search for logos in the skindirectory\media\logos 
 and it's subdirectories for logos matching the name in the logo rule. It should work in most situations.</value>
   </data>
+  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
+    <value>If enabled, fanart will be used for group views.
+MyFilms will autocreate subfolders for you.
+Images placed in those folders will be used for fanart display
+ in the default group views (category, year, genre).
+
+If disabled, default fanart will be displayed, if it is enabled.</value>
+  </data>
   <data name="Fanart.ToolTip" xml:space="preserve">
     <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
 Enter the full path (or use the browse button) to the root folder containing the fanart image files.
@@ -215,28 +223,6 @@ Select the option “Use movie cover for missing Fanart” to have the movie's D
 displayed as a background image for movies without a matching fanart file. Be aware, that using that option will often create fanart image of low quality
 because of low resolution of cover images and you might get a distorted picture as covers and fanarts don't have the same size.
 Therefore it is recommended to enable “Use the default image for missing fanart”.</value>
-  </data>
-  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
-    <value>If enabled, fanart will be used for group views.
-MyFilms will autocreate subfolders for you.
-Images placed in those folders will be used for fanart display
- in the default group views (category, year, genre).
-
-If disabled, default fanart will be displayed, if it is enabled.</value>
-  </data>
-  <data name="groupBox22.ToolTip" xml:space="preserve">
-    <value>Select the “Use thumbs for group views" option if you have image files 
-to be displayed as cover image replacement in grouped views.  
-These image files must have the same name as the list item of the group, e.g. "2010.jpg" or "action.png".
-Enter the full path (or use the browse button) to your folder containing the view thumb image files.
-
-Select the option 'Use the default movie cover for missing thumbs' if you wish to use a movie cover 
-when no thumb for views is available.
-
-You can also use fanart for those views, to do so, put fanart in the subfolder 
-for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
-The setting for this path is done via the Fanart path setting automatically; 
-See "Fanart for default group views - path" below.</value>
   </data>
   <data name="btnResetThumbs.ToolTip" xml:space="preserve">
     <value>That action will remove all generated cache thumbs for group views.
@@ -251,11 +237,19 @@ you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
 You can place a "default.jpg" in the respective sub folder that will be displayed
 when no specific thumb can be matched.</value>
   </data>
-  <data name="groupBox1.ToolTip" xml:space="preserve">
-    <value>Use this area to define a path where cover images are stored.
-This is mainly required, if you have only image names without full path stored in your DB.
-You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
-</value>
+  <data name="groupBox22.ToolTip" xml:space="preserve">
+    <value>Select the “Use thumbs for group views" option if you have image files 
+to be displayed as cover image replacement in grouped views.  
+These image files must have the same name as the list item of the group, e.g. "2010.jpg" or "action.png".
+Enter the full path (or use the browse button) to your folder containing the view thumb image files.
+
+Select the option 'Use the default movie cover for missing thumbs' if you wish to use a movie cover 
+when no thumb for views is available.
+
+You can also use fanart for those views, to do so, put fanart in the subfolder 
+for year, category, country, e.g. &lt;fanartfolder&gt;\\_group\\year\2010";
+The setting for this path is done via the Fanart path setting automatically; 
+See "Fanart for default group views - path" below.</value>
   </data>
   <data name="txtPicturePrefix.ToolTip" xml:space="preserve">
     <value>You can define a prefix for the cover images that will be 
@@ -300,6 +294,12 @@ Remark:
 If you choose a subfolder to your catalog directory, MyFilms setup will automatically split the path and
 set this path to the catalog directory and the rest of the path to the Picture Prefix.</value>
   </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value>Use this area to define a path where cover images are stored.
+This is mainly required, if you have only image names without full path stored in your DB.
+You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
+</value>
+  </data>
   <data name="btnResetThumbsArtist.ToolTip" xml:space="preserve">
     <value>That action will remove all generated person image thumbs.
 (Your original images will not be deleted.)
@@ -318,18 +318,14 @@ You can use the browse button to select the file.
 The default person image will be displayed when a person does not have an associated photo or image
 and it will be used as a default person image.</value>
   </data>
-  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
-    <value>You can update your movie data via internet from inside MyFilms GUI.
-
-You have to define the xml parser file ("grabber script") to be used.
-
-With the 'try to find best match automatically' option enabled, the grabber will
-try to find best match but can provide errors in some cases. It's better to
-don't enable it. In that case, you'll get a menu to choose the right movie.
-
-You can change those options from MyFilms GUI (global settings) also.
-
-</value>
+  <data name="ItemSearchGrabberScriptsFilter.ToolTip" xml:space="preserve">
+    <value>You can filter the Grabber scripts that should be displayed in the selection menu.
+Usage:
+- us "|" as separator
+- use 2-letter language codes for country/language selection
+- use "*" or "all" to display grabber scripts for multiple languages
+- use "local" to display grabbers for local use
+- leave empty to show all available grabber scripts</value>
   </data>
   <data name="txtGrabberDisplay.ToolTip" xml:space="preserve">
     <value>Set the default grabber script for updates within MyFilms.
@@ -337,6 +333,11 @@ If you selected "Don't use default script", you still can choose to use another 
 will always appear as first entry.
 
 For global override settings, that affect possibly any grabber sfcript, see "MyFilms Grabber Override Options".</value>
+  </data>
+  <data name="chkGrabber_Always.ToolTip" xml:space="preserve">
+    <value>If checked, MyFilms will choose the best match automatically.
+If unchecked, you'll get possible matching movies presented in a list to choose manually yourself.
+Automatically matching best result may lead to wrong information for a movie.</value>
   </data>
   <data name="btnEditScript.ToolTip" xml:space="preserve">
     <value>This launches the MyFilms Grabber Interface.
@@ -348,16 +349,6 @@ Remark: Changes to the Grabber Options will apply to the script,
 so all MyFilms configs that use it, will be affected.
 If you want those settings to only apply to a certain MyFilms config, you should save the script
 with a separate name and set this as default grabber script.</value>
-  </data>
-  <data name="groupBox6.ToolTip" xml:space="preserve">
-    <value>You can set several options for the internet grabber.
-Be aware, that not all options are supported by all grabber scripts.
-However, IMDB (full) script should support all options listed here.
-If you set no values, the default settings of the grabber
-will be used instead.
-The default settings (of the grabber script) can be changed by editing 
-the grabber script in the "My Films Grabber Interface" ("Grabber Options").
-</value>
   </data>
   <data name="cbGrabberOverrideLanguage.ToolTip" xml:space="preserve">
     <value>Preferred Language(s) for 
@@ -373,6 +364,21 @@ Note: You can add more than one language/country using comma separated values.
 Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
 As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
   </data>
+  <data name="groupBox6.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "My Films Grabber Interface" ("Grabber Options").
+</value>
+  </data>
+  <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
+    <value>If unchecked, you will be asked to manually choose the script to use for internet data update.
+If checked, the Default script will always be used.
+You can change this setting also from inside MyFilms GUI in global options.</value>
+  </data>
   <data name="ItemSearchGrabberName.ToolTip" xml:space="preserve">
     <value>File Name + Internet Lookup
 Folder Name + Internet Lookup
@@ -385,16 +391,6 @@ Example:
 So if you have named your files by movie title, select “title”. 
 If you have your movie files in folders, that have the movie title, select “folder”.</value>
   </data>
-  <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
-    <value>If unchecked, you will be asked to manually choose the script to use for internet data update.
-If checked, the Default script will always be used.
-You can change this setting also from inside MyFilms GUI in global options.</value>
-  </data>
-  <data name="chkGrabber_Always.ToolTip" xml:space="preserve">
-    <value>If checked, MyFilms will choose the best match automatically.
-If unchecked, you'll get possible matching movies presented in a list to choose manually yourself.
-Automatically matching best result may lead to wrong information for a movie.</value>
-  </data>
   <data name="txtGrabber.ToolTip" xml:space="preserve">
     <value>Choose a default grabber script to be used for internet data update in MyFilms GUI.
 Grabber script files are located in the mediaportal data directory in \scripts\MyFilms after installation.
@@ -402,11 +398,18 @@ Grabber script files are located in the mediaportal data directory in \scripts\M
 This setting will also be used to set the script as default script for AMCupdater configuration - however 
 you can change AMCupdater settings in the GUI to use any other settings.</value>
   </data>
-  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
-    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
-including grabbing media info, internet movie data, cover image and fanart.
-You can use and launch AMCUpdater in batch mode from inside the MyFilms GUI or schedule a task 
-to run independently from Mediaportal / My Films.</value>
+  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
+    <value>You can update your movie data via internet from inside MyFilms GUI.
+
+You have to define the xml parser file ("grabber script") to be used.
+
+With the 'try to find best match automatically' option enabled, the grabber will
+try to find best match but can provide errors in some cases. It's better to
+don't enable it. In that case, you'll get a menu to choose the right movie.
+
+You can change those options from MyFilms GUI (global settings) also.
+
+</value>
   </data>
   <data name="scheduleAMCUpdater.ToolTip" xml:space="preserve">
     <value>You can use the Windows scheduler to schedule AMCupdater to run and update automatically to update your catalog.
@@ -447,6 +450,12 @@ Loading data includes:
 - getting cover image via the selected internet grabber script
 - loading fanart</value>
   </data>
+  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
+    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
+including grabbing media info, internet movie data, cover image and fanart.
+You can use and launch AMCUpdater in batch mode from inside the MyFilms GUI or schedule a task 
+to run independently from Mediaportal / My Films.</value>
+  </data>
   <data name="gpspfield.ToolTip" xml:space="preserve">
     <value>This defines the action taken, when the player finishes.
 You can update e.g. the "checked" field with a value "true to indicate "watched status". 
@@ -467,15 +476,6 @@ Delete Movie file = PHYSICALLY DELETES your movie from storage medium.</value>
   <data name="groupBoxUpdateByProperties.ToolTip" xml:space="preserve">
     <value>In opposition to the "User defined Updating Items", this is used to give you a menu entry to update all fields you define.
 The difference is, you can't predefine a value for the update - but will always get a user dialog prefilled with the current value to change the content.</value>
-  </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>This option allows AMC users to update field info for storing your "watched status".
-
-You can choose a field to be used for "watched status" - a good recommendation is "checked".
-You can choose to update this field when starting a movie or when playback is finished.
-You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
-However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
-You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
   </data>
   <data name="btnWatchedImport.ToolTip" xml:space="preserve">
     <value>You can import a formerly created backupfile of your watched status.
@@ -536,6 +536,23 @@ Note:
 The "global count" will inclease each time any user is watching a film thus representing "total plays".
 It will NOT change, if user manually sets a movie to watched or unwatched.</value>
   </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value>This option allows AMC users to update field info for storing your "watched status".
+
+You can choose a field to be used for "watched status" - a good recommendation is "checked".
+You can choose to update this field when starting a movie or when playback is finished.
+You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
+  <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
+    <value>If chosen, the option to update the filename / source of the movie in the update menu ("Filename") will use the 
+windows file dialog to choose a movie file. If unchecked, Mediaportal's virtual keyboard will be launched.
+
+As this option will be using a standard windows file dialog to browse the file system and select the movie file,
+it is not recommended to use that option for remote only users. 
+If using a mouse, this option can be enabled.</value>
+  </data>
   <data name="groupBox_AntUpdatingItems.ToolTip" xml:space="preserve">
     <value>Some fields (Rating and Filename) can be updated through the plugin via the Update menu, 
 but you can define two more fields to be updated here.
@@ -545,14 +562,6 @@ Select the database field to be updated, enter the label associated with that fi
 and enter a pre-defined value to update the field.
 
 A possible use case could be ""Language" "french" to have a oneclick solution to set a movie to this setting without using virtual keyboard.</value>
-  </data>
-  <data name="chkWindowsFileDialog.ToolTip" xml:space="preserve">
-    <value>If chosen, the option to update the filename / source of the movie in the update menu ("Filename") will use the 
-windows file dialog to choose a movie file. If unchecked, Mediaportal's virtual keyboard will be launched.
-
-As this option will be using a standard windows file dialog to browse the file system and select the movie file,
-it is not recommended to use that option for remote only users. 
-If using a mouse, this option can be enabled.</value>
   </data>
   <data name="groupBox_SortByItem.ToolTip" xml:space="preserve">
     <value>You can define additional sort parameters – for example if you wish to sort by the movie’s length, use the database field ‘Length_num’.  
@@ -596,17 +605,6 @@ Alterternatively you could define a "whitelist" config for children:
 Category LIKE '*Children*' will include all movies, that have Children as part of the Category
 Category LIKE 'Children' will include all movies, that have Children as Category</value>
   </data>
-  <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
-    <value>Select from the list, the view you want to see when first entering the plugin.  
-Select the option “Display Always that view when using this config”, 
-if you always want to see this view for this configuration.  
-If you do not select the option “Display Always that view when using this config”, 
-the last view used before exiting the plugin will be shown next time.
-
-If a value is entered for the second parameter, only records containing that value will be displayed.  
-For example, you can define a view for children with ‘Category’ – ‘Animation’.
-</value>
-  </data>
   <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
     <value>"Only available" option acts as global overlayfilter for all views
 and this setting is used for start view.
@@ -626,6 +624,17 @@ So you should only activate this if you want to filter your views always when en
 AMC users can configure the field and value to identify unwatched films
 on "update" tab (Watched-Status Handling).</value>
   </data>
+  <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
+    <value>Select from the list, the view you want to see when first entering the plugin.  
+Select the option “Display Always that view when using this config”, 
+if you always want to see this view for this configuration.  
+If you do not select the option “Display Always that view when using this config”, 
+the last view used before exiting the plugin will be shown next time.
+
+If a value is entered for the second parameter, only records containing that value will be displayed.  
+For example, you can define a view for children with ‘Category’ – ‘Animation’.
+</value>
+  </data>
   <data name="groupBox_SupplementaryView.ToolTip" xml:space="preserve">
     <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
 In this section you can define additional views; 
@@ -638,17 +647,6 @@ If a value is entered, a list of the movies with that value will be displayed.
     <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
 As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
 </value>
-  </data>
-  <data name="groupBox24.ToolTip" xml:space="preserve">
-    <value>The Trailer section allows you to use a selectable DB field to store trailer source path infos
-and thus to integrate trailers into MyFilms.
-Trailer can be searched within the plugin and "autoregistered".
-GUI can display if a trailer is present (registered) and play it.
-By default, the search includes media files in the directory of the main movie and it's subdirectories, 
-searching for media files containing "trlr" or "trailer" in the filename.
-So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
-and make sure they are named accordingly (many downloader utilities do it this way).
-You can add an additional trailer search path that will search for and register media files containing the movie's title.</value>
   </data>
   <data name="PathStorageTrailer.ToolTip" xml:space="preserve">
     <value>Enter or select the path for extended search for trailers.
@@ -670,6 +668,17 @@ Attention: Might degrade performace!
 If you use external ANT movie catalog to edit this field manually, you can add more than one movie by separating them with semicolon.
 e.g.: "\\server\path\trailer1.flv;C:\Movies\trailer2.flv"
 When using the trailer search &amp; register, MyFilms will automatically populate this DB field for you.</value>
+  </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>The Trailer section allows you to use a selectable DB field to store trailer source path infos
+and thus to integrate trailers into MyFilms.
+Trailer can be searched within the plugin and "autoregistered".
+GUI can display if a trailer is present (registered) and play it.
+By default, the search includes media files in the directory of the main movie and it's subdirectories, 
+searching for media files containing "trlr" or "trailer" in the filename.
+So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
+and make sure they are named accordingly (many downloader utilities do it this way).
+You can add an additional trailer search path that will search for and register media files containing the movie's title.</value>
   </data>
   <data name="groupBoxSetupWizard.ToolTip" xml:space="preserve">
     <value>Usually, MyFilms will be used with external catalog software, thus you have an existing catalog and 
@@ -748,23 +757,6 @@ In the second field you can enter your own text message to provide additional in
 Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
 The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
   </data>
-  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
-    <value>Title selection:
-You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
-
-Grouping:
-Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
-This can be used to group more than one movie together,
-e.g. for collections.
-
-Example:
-Hierachy Separator: "\"
-movie 1: Moviecollection\movie1
-movie 2: Moviecollection\movie2
-movie 3: Moviecollection\movie3
-
-Will show "Moviecollection" with 3 items in it.</value>
-  </data>
   <data name="chkUseOriginalAsTranslatedTitle.ToolTip" xml:space="preserve">
     <value>This setting is useful for non english users:
 If using translated title as mastertitle, certain views might miss 
@@ -809,6 +801,23 @@ Will show "Moviecollection" with 3 items in it.</value>
     <value>Select the ANT database field that you want to be displayed as the ‘Master Title’.
 You can use hierarchies for "grouping" when defining a hierarchy separator 
 and use it in the content of your catalog's title field.</value>
+  </data>
+  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
+    <value>Title selection:
+You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
+
+Grouping:
+Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
+This can be used to group more than one movie together,
+e.g. for collections.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
   </data>
   <data name="groupBoxExtendedFieldHandling.ToolTip" xml:space="preserve">
     <value>MyFilms internally supports more than just the Ant Movie Catalog (AMC) fields.

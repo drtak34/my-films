@@ -240,13 +240,14 @@
           this.btnCreateAMCDesktopIcon = new System.Windows.Forms.Button();
           this.chkAMCUpd = new System.Windows.Forms.CheckBox();
           this.groupBoxDeletionOptions = new System.Windows.Forms.GroupBox();
-          this.chkSuppress = new System.Windows.Forms.CheckBox();
           this.gpsuppress = new System.Windows.Forms.GroupBox();
           this.rbsuppress2 = new System.Windows.Forms.RadioButton();
           this.rbsuppress4 = new System.Windows.Forms.RadioButton();
           this.rbsuppress3 = new System.Windows.Forms.RadioButton();
           this.rbsuppress1 = new System.Windows.Forms.RadioButton();
+          this.chkSuppress = new System.Windows.Forms.CheckBox();
           this.gpspfield = new System.Windows.Forms.GroupBox();
+          this.label61 = new System.Windows.Forms.Label();
           this.chksupplaystop = new System.Windows.Forms.CheckBox();
           this.txtfdupdate = new System.Windows.Forms.TextBox();
           this.lblUpdateValue = new System.Windows.Forms.Label();
@@ -452,6 +453,7 @@
           this.Option = new System.Windows.Forms.ColumnHeader();
           this.Value = new System.Windows.Forms.ColumnHeader();
           this.cbAllowRecentAddedAPI = new System.Windows.Forms.CheckBox();
+          this.chkSuppressManual = new System.Windows.Forms.CheckBox();
           this.AntFilterSign4 = new System.Windows.Forms.ComboBox();
           this.AntFilterSign3 = new System.Windows.Forms.ComboBox();
           this.AntFilterItem4 = new System.Windows.Forms.ComboBox();
@@ -522,8 +524,8 @@
           this.textBoxNBconfigs = new System.Windows.Forms.TextBox();
           this.lblNbConfig = new System.Windows.Forms.Label();
           this.pictureBoxMyFilms = new System.Windows.Forms.PictureBox();
-          this.chkSuppressManual = new System.Windows.Forms.CheckBox();
-          this.label61 = new System.Windows.Forms.Label();
+          this.ItemSearchGrabberScriptsFilter = new System.Windows.Forms.TextBox();
+          this.lblFilterGrabberScripts = new System.Windows.Forms.Label();
           this.Tab_Trakt.SuspendLayout();
           this.groupBoxTrakt.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -1732,19 +1734,21 @@
           // 
           // groupBox_GrabberOptions
           // 
+          this.groupBox_GrabberOptions.Controls.Add(this.lblFilterGrabberScripts);
+          this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberScriptsFilter);
           this.groupBox_GrabberOptions.Controls.Add(this.txtGrabberDisplay);
+          this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_Always);
           this.groupBox_GrabberOptions.Controls.Add(this.btnEditScript);
           this.groupBox_GrabberOptions.Controls.Add(this.groupBox6);
           this.groupBox_GrabberOptions.Controls.Add(this.lblSearchGrabberName);
-          this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberName);
           this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_ChooseScript);
-          this.groupBox_GrabberOptions.Controls.Add(this.chkGrabber_Always);
+          this.groupBox_GrabberOptions.Controls.Add(this.ItemSearchGrabberName);
           this.groupBox_GrabberOptions.Controls.Add(this.btnGrabber);
           this.groupBox_GrabberOptions.Controls.Add(this.txtGrabber);
           this.groupBox_GrabberOptions.Controls.Add(this.label27);
-          this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 19);
+          this.groupBox_GrabberOptions.Location = new System.Drawing.Point(6, 9);
           this.groupBox_GrabberOptions.Name = "groupBox_GrabberOptions";
-          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 123);
+          this.groupBox_GrabberOptions.Size = new System.Drawing.Size(735, 133);
           this.groupBox_GrabberOptions.TabIndex = 1;
           this.groupBox_GrabberOptions.TabStop = false;
           this.groupBox_GrabberOptions.Text = "MyFilms Internal Internet Grabbing";
@@ -1782,7 +1786,7 @@
           this.groupBox6.Controls.Add(this.cbGrabberOverrideLanguage);
           this.groupBox6.Location = new System.Drawing.Point(398, 15);
           this.groupBox6.Name = "groupBox6";
-          this.groupBox6.Size = new System.Drawing.Size(330, 96);
+          this.groupBox6.Size = new System.Drawing.Size(330, 112);
           this.groupBox6.TabIndex = 65;
           this.groupBox6.TabStop = false;
           this.groupBox6.Text = "MyFilms Grabber Override Options ...";
@@ -1794,7 +1798,7 @@
           this.cbGrabberOverrideGetRoles.Items.AddRange(new object[] {
             "true",
             "false"});
-          this.cbGrabberOverrideGetRoles.Location = new System.Drawing.Point(276, 13);
+          this.cbGrabberOverrideGetRoles.Location = new System.Drawing.Point(276, 21);
           this.cbGrabberOverrideGetRoles.Name = "cbGrabberOverrideGetRoles";
           this.cbGrabberOverrideGetRoles.Size = new System.Drawing.Size(45, 21);
           this.cbGrabberOverrideGetRoles.TabIndex = 71;
@@ -1804,7 +1808,7 @@
           // label55
           // 
           this.label55.AutoSize = true;
-          this.label55.Location = new System.Drawing.Point(191, 19);
+          this.label55.Location = new System.Drawing.Point(191, 27);
           this.label55.Name = "label55";
           this.label55.Size = new System.Drawing.Size(82, 13);
           this.label55.TabIndex = 70;
@@ -1813,7 +1817,7 @@
           // label51
           // 
           this.label51.AutoSize = true;
-          this.label51.Location = new System.Drawing.Point(191, 71);
+          this.label51.Location = new System.Drawing.Point(191, 79);
           this.label51.Name = "label51";
           this.label51.Size = new System.Drawing.Size(66, 13);
           this.label51.TabIndex = 68;
@@ -1833,7 +1837,7 @@
             "15",
             "20",
             "999"});
-          this.cbGrabberOverrideTitleLimit.Location = new System.Drawing.Point(276, 68);
+          this.cbGrabberOverrideTitleLimit.Location = new System.Drawing.Point(276, 76);
           this.cbGrabberOverrideTitleLimit.Name = "cbGrabberOverrideTitleLimit";
           this.cbGrabberOverrideTitleLimit.Size = new System.Drawing.Size(45, 21);
           this.cbGrabberOverrideTitleLimit.TabIndex = 67;
@@ -1843,7 +1847,7 @@
           // label50
           // 
           this.label50.AutoSize = true;
-          this.label50.Location = new System.Drawing.Point(12, 20);
+          this.label50.Location = new System.Drawing.Point(12, 28);
           this.label50.Name = "label50";
           this.label50.Size = new System.Drawing.Size(161, 13);
           this.label50.TabIndex = 66;
@@ -1852,7 +1856,7 @@
           // label49
           // 
           this.label49.AutoSize = true;
-          this.label49.Location = new System.Drawing.Point(191, 44);
+          this.label49.Location = new System.Drawing.Point(191, 52);
           this.label49.Name = "label49";
           this.label49.Size = new System.Drawing.Size(79, 13);
           this.label49.TabIndex = 65;
@@ -1871,7 +1875,7 @@
             "15",
             "20",
             "999"});
-          this.cbGrabberOverridePersonLimit.Location = new System.Drawing.Point(276, 40);
+          this.cbGrabberOverridePersonLimit.Location = new System.Drawing.Point(276, 48);
           this.cbGrabberOverridePersonLimit.Name = "cbGrabberOverridePersonLimit";
           this.cbGrabberOverridePersonLimit.Size = new System.Drawing.Size(45, 21);
           this.cbGrabberOverridePersonLimit.TabIndex = 63;
@@ -1928,7 +1932,7 @@
             "UK",
             "Uruguay",
             "USA"});
-          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(11, 41);
+          this.cbGrabberOverrideLanguage.Location = new System.Drawing.Point(11, 49);
           this.cbGrabberOverrideLanguage.Name = "cbGrabberOverrideLanguage";
           this.cbGrabberOverrideLanguage.Size = new System.Drawing.Size(167, 21);
           this.cbGrabberOverrideLanguage.TabIndex = 64;
@@ -1937,7 +1941,7 @@
           // lblSearchGrabberName
           // 
           this.lblSearchGrabberName.AutoSize = true;
-          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 50);
+          this.lblSearchGrabberName.Location = new System.Drawing.Point(16, 105);
           this.lblSearchGrabberName.Name = "lblSearchGrabberName";
           this.lblSearchGrabberName.Size = new System.Drawing.Size(124, 13);
           this.lblSearchGrabberName.TabIndex = 62;
@@ -1950,7 +1954,7 @@
             "OriginalTitle",
             "TranslatedTitle",
             "FormattedTitle"});
-          this.ItemSearchGrabberName.Location = new System.Drawing.Point(145, 47);
+          this.ItemSearchGrabberName.Location = new System.Drawing.Point(145, 102);
           this.ItemSearchGrabberName.Name = "ItemSearchGrabberName";
           this.ItemSearchGrabberName.Size = new System.Drawing.Size(138, 21);
           this.ItemSearchGrabberName.TabIndex = 61;
@@ -1959,18 +1963,18 @@
           // chkGrabber_ChooseScript
           // 
           this.chkGrabber_ChooseScript.AutoSize = true;
-          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(145, 74);
+          this.chkGrabber_ChooseScript.Location = new System.Drawing.Point(226, 74);
           this.chkGrabber_ChooseScript.Name = "chkGrabber_ChooseScript";
-          this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(193, 17);
+          this.chkGrabber_ChooseScript.Size = new System.Drawing.Size(158, 17);
           this.chkGrabber_ChooseScript.TabIndex = 60;
-          this.chkGrabber_ChooseScript.Text = "don\'t use default script (always ask)";
+          this.chkGrabber_ChooseScript.Text = "don\'t use default script (ask)";
           this.ToolTip1.SetToolTip(this.chkGrabber_ChooseScript, resources.GetString("chkGrabber_ChooseScript.ToolTip"));
           this.chkGrabber_ChooseScript.UseVisualStyleBackColor = true;
           // 
           // chkGrabber_Always
           // 
           this.chkGrabber_Always.AutoSize = true;
-          this.chkGrabber_Always.Location = new System.Drawing.Point(145, 97);
+          this.chkGrabber_Always.Location = new System.Drawing.Point(19, 74);
           this.chkGrabber_Always.Name = "chkGrabber_Always";
           this.chkGrabber_Always.Size = new System.Drawing.Size(188, 17);
           this.chkGrabber_Always.TabIndex = 56;
@@ -2231,19 +2235,6 @@
           this.groupBoxDeletionOptions.Text = "Deletion Options for automatic updates and/or deletions ...";
           this.ToolTip1.SetToolTip(this.groupBoxDeletionOptions, resources.GetString("groupBoxDeletionOptions.ToolTip"));
           // 
-          // chkSuppress
-          // 
-          this.chkSuppress.AutoSize = true;
-          this.chkSuppress.Location = new System.Drawing.Point(15, 19);
-          this.chkSuppress.Name = "chkSuppress";
-          this.chkSuppress.Size = new System.Drawing.Size(294, 17);
-          this.chkSuppress.TabIndex = 0;
-          this.chkSuppress.Text = "Enable automatic deletion options after movie is watched";
-          this.ToolTip1.SetToolTip(this.chkSuppress, "WHen enabled, the selected actions are automatically performed after a movie is w" +
-                  "atched.");
-          this.chkSuppress.UseVisualStyleBackColor = true;
-          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
-          // 
           // gpsuppress
           // 
           this.gpsuppress.Controls.Add(this.rbsuppress2);
@@ -2303,6 +2294,19 @@
           this.rbsuppress1.Text = "Delete db entry only";
           this.rbsuppress1.UseVisualStyleBackColor = true;
           // 
+          // chkSuppress
+          // 
+          this.chkSuppress.AutoSize = true;
+          this.chkSuppress.Location = new System.Drawing.Point(15, 19);
+          this.chkSuppress.Name = "chkSuppress";
+          this.chkSuppress.Size = new System.Drawing.Size(294, 17);
+          this.chkSuppress.TabIndex = 0;
+          this.chkSuppress.Text = "Enable automatic deletion options after movie is watched";
+          this.ToolTip1.SetToolTip(this.chkSuppress, "WHen enabled, the selected actions are automatically performed after a movie is w" +
+                  "atched.");
+          this.chkSuppress.UseVisualStyleBackColor = true;
+          this.chkSuppress.CheckedChanged += new System.EventHandler(this.chkSuppress_CheckedChanged);
+          // 
           // gpspfield
           // 
           this.gpspfield.Controls.Add(this.label61);
@@ -2318,6 +2322,15 @@
           this.gpspfield.TabStop = false;
           this.gpspfield.Text = "Player finished Update Action";
           this.ToolTip1.SetToolTip(this.gpspfield, resources.GetString("gpspfield.ToolTip"));
+          // 
+          // label61
+          // 
+          this.label61.AutoSize = true;
+          this.label61.Location = new System.Drawing.Point(169, 40);
+          this.label61.Name = "label61";
+          this.label61.Size = new System.Drawing.Size(72, 13);
+          this.label61.TabIndex = 21;
+          this.label61.Text = "Update Value";
           // 
           // chksupplaystop
           // 
@@ -4551,6 +4564,18 @@
                   "dded\" movies.\r\nYou can enable this for multiple configs.");
           this.cbAllowRecentAddedAPI.UseVisualStyleBackColor = true;
           // 
+          // chkSuppressManual
+          // 
+          this.chkSuppressManual.AutoSize = true;
+          this.chkSuppressManual.Location = new System.Drawing.Point(393, 10);
+          this.chkSuppressManual.Name = "chkSuppressManual";
+          this.chkSuppressManual.Size = new System.Drawing.Size(216, 17);
+          this.chkSuppressManual.TabIndex = 19;
+          this.chkSuppressManual.Text = "Enable manual deletion / removal option";
+          this.ToolTip1.SetToolTip(this.chkSuppressManual, "Enables an entry in context menu to manually delete DB record and/or media files." +
+                  "");
+          this.chkSuppressManual.UseVisualStyleBackColor = true;
+          // 
           // AntFilterSign4
           // 
           this.AntFilterSign4.Location = new System.Drawing.Point(0, 0);
@@ -5298,26 +5323,22 @@
           this.pictureBoxMyFilms.TabIndex = 75;
           this.pictureBoxMyFilms.TabStop = false;
           // 
-          // chkSuppressManual
+          // ItemSearchGrabberScriptsFilter
           // 
-          this.chkSuppressManual.AutoSize = true;
-          this.chkSuppressManual.Location = new System.Drawing.Point(393, 10);
-          this.chkSuppressManual.Name = "chkSuppressManual";
-          this.chkSuppressManual.Size = new System.Drawing.Size(216, 17);
-          this.chkSuppressManual.TabIndex = 19;
-          this.chkSuppressManual.Text = "Enable manual deletion / removal option";
-          this.ToolTip1.SetToolTip(this.chkSuppressManual, "Enables an entry in context menu to manually delete DB record and/or media files." +
-                  "");
-          this.chkSuppressManual.UseVisualStyleBackColor = true;
+          this.ItemSearchGrabberScriptsFilter.Location = new System.Drawing.Point(145, 48);
+          this.ItemSearchGrabberScriptsFilter.Name = "ItemSearchGrabberScriptsFilter";
+          this.ItemSearchGrabberScriptsFilter.Size = new System.Drawing.Size(138, 20);
+          this.ItemSearchGrabberScriptsFilter.TabIndex = 72;
+          this.ToolTip1.SetToolTip(this.ItemSearchGrabberScriptsFilter, resources.GetString("ItemSearchGrabberScriptsFilter.ToolTip"));
           // 
-          // label61
+          // lblFilterGrabberScripts
           // 
-          this.label61.AutoSize = true;
-          this.label61.Location = new System.Drawing.Point(169, 40);
-          this.label61.Name = "label61";
-          this.label61.Size = new System.Drawing.Size(72, 13);
-          this.label61.TabIndex = 21;
-          this.label61.Text = "Update Value";
+          this.lblFilterGrabberScripts.AutoSize = true;
+          this.lblFilterGrabberScripts.Location = new System.Drawing.Point(16, 51);
+          this.lblFilterGrabberScripts.Name = "lblFilterGrabberScripts";
+          this.lblFilterGrabberScripts.Size = new System.Drawing.Size(105, 13);
+          this.lblFilterGrabberScripts.TabIndex = 68;
+          this.lblFilterGrabberScripts.Text = "Filter Grabber Scripts";
           // 
           // MyFilmsSetup
           // 
@@ -5879,5 +5900,7 @@
         private Button btnSaveEditorStartParams;
         private CheckBox chkSuppressManual;
         private Label label61;
+        private Label lblFilterGrabberScripts;
+        private TextBox ItemSearchGrabberScriptsFilter;
     }
 }
