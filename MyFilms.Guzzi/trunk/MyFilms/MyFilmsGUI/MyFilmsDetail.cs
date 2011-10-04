@@ -2691,9 +2691,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("launching (grabb_Internet_Informations) with title = '" + FullMovieName + "', choosescript = '" + choosescript + "', grabberfile = '" + wscript + "'");
             if (choosescript)
             {
-              if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\scripts\myfilms"))
+              if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\myfilms"))
                 {
-                    // Grabber Directory filled, search for XML scripts files
+                    if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\myfilms\user"))
+                    {
+                      try {System.IO.Directory.CreateDirectory(Config.Dir.Config + @"\scripts\myfilms\user");}
+                      catch (Exception) {}
+                    }
+
+                  // Grabber Directory filled, search for XML scripts files
                     GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
                     dlg.Reset();
                     dlg.SetHeading(GUILocalizeStrings.Get(10798706)); // "Choose internet grabber script"

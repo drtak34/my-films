@@ -802,6 +802,11 @@ namespace Grabber_Interface
       {
         if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms"))
         {
+          if (!System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\myfilms\user"))
+          {
+            try { System.IO.Directory.CreateDirectory(Config.Dir.Config + @"\scripts\myfilms\user"); }
+            catch (Exception) { }
+          }
           saveFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms";
         }
         else
