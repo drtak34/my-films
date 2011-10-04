@@ -50,6 +50,11 @@ namespace Grabber_Interface
     private string BodyLinkCertification = string.Empty;
     private string BodyLinkComment = string.Empty;
     private string BodyLinkSyn = string.Empty;
+    private string BodyLinkMultiPosters = string.Empty;
+    private string BodyLinkPhotos = string.Empty;
+    private string BodyLinkPersonImages = string.Empty;
+    private string BodyLinkMultiFanart = string.Empty;
+    private string BodyLinkTrailer = string.Empty;
 
     private string URLBodyDetail = string.Empty;
     private string URLBodyDetail2 = string.Empty;
@@ -61,6 +66,11 @@ namespace Grabber_Interface
     private string URLBodyLinkCertification = string.Empty;
     private string URLBodyLinkComment = string.Empty;
     private string URLBodyLinkSyn = string.Empty;
+    private string URLBodyLinkMultiPosters = string.Empty;
+    private string URLBodyLinkPhotos = string.Empty;
+    private string URLBodyLinkPersonImages = string.Empty;
+    private string URLBodyLinkMultiFanart = string.Empty;
+    private string URLBodyLinkTrailer = string.Empty;
 
     private string TimeBodyDetail = string.Empty;
     private string TimeBodyDetail2 = string.Empty;
@@ -72,6 +82,11 @@ namespace Grabber_Interface
     private string TimeBodyLinkCertification = string.Empty;
     private string TimeBodyLinkComment = string.Empty;
     private string TimeBodyLinkSyn = string.Empty;
+    private string TimeBodyLinkMultiPosters = string.Empty;
+    private string TimeBodyLinkPhotos = string.Empty;
+    private string TimeBodyLinkPersonImages = string.Empty;
+    private string TimeBodyLinkMultiFanart = string.Empty;
+    private string TimeBodyLinkTrailer = string.Empty;
     
     private bool ExpertModeOn = true; // to toggle GUI for simplification
 
@@ -82,7 +97,7 @@ namespace Grabber_Interface
     //TabPage tabPageSaveMovie = null;
     //TabPage tabPageSaveDetails = null;
 
-    private string[] Fields = new string[30]; // List to hold all possible grab fields ...
+    private string[] Fields = new string[40]; // List to hold all possible grab fields ...
 
     public GrabConfig(string[] args)
     {
@@ -466,7 +481,7 @@ namespace Grabber_Interface
       else cbCertificationPreferredLanguage.Enabled = false;
 
         // Read Mapping Infos
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 40; i++)
         {
           try
           {
@@ -1082,6 +1097,11 @@ namespace Grabber_Interface
       URLBodyLinkCertification = string.Empty;
       URLBodyLinkComment = string.Empty;
       URLBodyLinkSyn = string.Empty;
+      URLBodyLinkMultiPosters = string.Empty;
+      URLBodyLinkPhotos = string.Empty;
+      URLBodyLinkPersonImages = string.Empty;
+      URLBodyLinkMultiFanart = string.Empty;
+      URLBodyLinkTrailer = string.Empty;
 
       TimeBodyDetail = string.Empty;
       TimeBodyDetail2 = string.Empty;
@@ -1093,6 +1113,11 @@ namespace Grabber_Interface
       TimeBodyLinkCertification = string.Empty;
       TimeBodyLinkComment = string.Empty;
       TimeBodyLinkSyn = string.Empty;
+      TimeBodyLinkMultiPosters = string.Empty;
+      TimeBodyLinkPhotos = string.Empty;
+      TimeBodyLinkPersonImages = string.Empty;
+      TimeBodyLinkMultiFanart = string.Empty;
+      TimeBodyLinkTrailer = string.Empty;
 
       Stopwatch watch = new Stopwatch();
 
@@ -1359,7 +1384,7 @@ namespace Grabber_Interface
         BodyLinkSyn = "";
       watch.Stop();
       TimeBodyLinkSyn = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      
+
       // Test if there is a redirection page for Comment and load page in BodyLinkComment
       watch.Reset();
       watch.Start();
@@ -1369,7 +1394,7 @@ namespace Grabber_Interface
       strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2;
       strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
       strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentPage)._Value;
-      strActivePage = this.LoadPage(strPage); 
+      strActivePage = this.LoadPage(strPage);
       if (strStart.Length > 0)
       {
         string strTemp = string.Empty;
@@ -1384,6 +1409,131 @@ namespace Grabber_Interface
         BodyLinkComment = "";
       watch.Stop();
       TimeBodyLinkComment = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+
+      // Test if there is a redirection page for MultiPosters and load page in BodyLinkMultiPosters
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiPosters)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersPage)._Value;
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkMultiPosters = strTemp;
+        BodyLinkMultiPosters = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
+      }
+      else
+        BodyLinkMultiPosters = "";
+      watch.Stop();
+      TimeBodyLinkMultiPosters = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+
+      // Test if there is a redirection page for Photos and load page in BodyLinkPhotos
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPhotos)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosPage)._Value;
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkPhotos = strTemp;
+        BodyLinkPhotos = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
+      }
+      else
+        BodyLinkPhotos = "";
+      watch.Stop();
+      TimeBodyLinkPhotos = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+
+      // Test if there is a redirection page for PersonImages and load page in BodyLinkPersonImages
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersonImages)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesPage)._Value;
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkPersonImages = strTemp;
+        BodyLinkPersonImages = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
+      }
+      else
+        BodyLinkPersonImages = "";
+      watch.Stop();
+      TimeBodyLinkPersonImages = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+
+      // Test if there is a redirection page for MultiFanart and load page in BodyLinkMultiFanart
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiFanart)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartPage)._Value;
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkMultiFanart = strTemp;
+        BodyLinkMultiFanart = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
+      }
+      else
+        BodyLinkMultiFanart = "";
+      watch.Stop();
+      TimeBodyLinkMultiFanart = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+
+      // Test if there is a redirection page for Trailer and load page in BodyLinkTrailer
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTrailer)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerPage)._Value;
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkTrailer = strTemp;
+        BodyLinkTrailer = GrabUtil.GetPage(strTemp, textEncoding.Text, out absoluteUri, new CookieContainer());
+      }
+      else
+        BodyLinkTrailer = "";
+      watch.Stop();
+      TimeBodyLinkTrailer = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
     }
 
 
@@ -1432,6 +1582,27 @@ namespace Grabber_Interface
           strActivePage = BodyLinkSyn;
           textURLPreview.Text = URLBodyLinkSyn;
           break;
+        case "URL Redirection Multi Posters":
+          strActivePage = BodyLinkMultiPosters;
+          textURLPreview.Text = URLBodyLinkMultiPosters;
+          break;
+        case "URL Redirection Photos":
+          strActivePage = BodyLinkMultiPosters;
+          textURLPreview.Text = URLBodyLinkMultiPosters;
+          break;
+        case "URL Redirection PersonImages":
+          strActivePage = BodyLinkPersonImages;
+          textURLPreview.Text = URLBodyLinkPersonImages;
+          break;
+        case "URL Redirection Multi Fanart":
+          strActivePage = BodyLinkMultiFanart;
+          textURLPreview.Text = URLBodyLinkMultiFanart;
+          break;
+        case "URL Redirection Trailer":
+          strActivePage = BodyLinkTrailer;
+          textURLPreview.Text = URLBodyLinkTrailer;
+          break;
+
         default:
           strActivePage = "";
           textURLPreview.Text = "";
@@ -1975,6 +2146,153 @@ namespace Grabber_Interface
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value;
           break;
 
+        case 35: // Link MultiPosters - Secondary Page
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersPage)._Value;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiPosters)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersIndex)._Value;
+          break;
+        case 36: // Link Photos - Secondary Page
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosPage)._Value;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPhotos)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosIndex)._Value;
+          break;
+        case 37: // Link PersonImages - Secondary Page
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesPage)._Value;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersonImages)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesIndex)._Value;
+          break;
+        case 38: // Link MultiFanart - Secondary Page
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartPage)._Value;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiFanart)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartIndex)._Value;
+          break;
+        case 39: // Link Trailer - Secondary Page
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerPage)._Value;
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTrailer)._Value;
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerIndex)._Value;
+          break;
+
+        case 40: // MultiPosters
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersPage)._Value;
+          lblLanguages.Visible = true;
+          lblComplement.Visible = true;
+          lblMaxItems.Visible = true;
+          textComplement.Visible = true;
+          textMaxItems.Visible = true;
+          textLanguages.Visible = true;
+          lblComplement.Text = "RegExp";
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiPosters)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiPosters)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiPosters)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndMultiPosters)._Value;
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
+          try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersLanguage)._Value; }
+          catch { textLanguages.Text = string.Empty; };
+          try { textMaxItems.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersMaxItems)._Value; }
+          catch { textMaxItems.Text = string.Empty; };
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersIndex)._Value;
+          break;
+        case 41: // Photos
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosPage)._Value;
+          lblLanguages.Visible = true;
+          lblComplement.Visible = true;
+          lblMaxItems.Visible = true;
+          textComplement.Visible = true;
+          textMaxItems.Visible = true;
+          textLanguages.Visible = true;
+          lblComplement.Text = "RegExp";
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartPhotos)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartPhotos)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartPhotos)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndPhotos)._Value;
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
+          try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosLanguage)._Value; }
+          catch { textLanguages.Text = string.Empty; };
+          try { textMaxItems.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosMaxItems)._Value; }
+          catch { textMaxItems.Text = string.Empty; };
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosIndex)._Value;
+          break;
+        case 42: // PersonImages
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesPage)._Value;
+          lblLanguages.Visible = true;
+          lblComplement.Visible = true;
+          lblMaxItems.Visible = true;
+          textComplement.Visible = true;
+          textMaxItems.Visible = true;
+          textLanguages.Visible = true;
+          lblComplement.Text = "RegExp";
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartPersonImages)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartPersonImages)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartPersonImages)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndPersonImages)._Value;
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
+          try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesLanguage)._Value; }
+          catch { textLanguages.Text = string.Empty; };
+          try { textMaxItems.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesMaxItems)._Value; }
+          catch { textMaxItems.Text = string.Empty; };
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesIndex)._Value;
+          break;
+        case 43: // MultiFanart
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartPage)._Value;
+          lblLanguages.Visible = true;
+          lblComplement.Visible = true;
+          lblMaxItems.Visible = true;
+          textComplement.Visible = true;
+          textMaxItems.Visible = true;
+          textLanguages.Visible = true;
+          lblComplement.Text = "RegExp";
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiFanart)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiFanart)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiFanart)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndMultiFanart)._Value;
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
+          try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartLanguage)._Value; }
+          catch { textLanguages.Text = string.Empty; };
+          try { textMaxItems.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartMaxItems)._Value; }
+          catch { textMaxItems.Text = string.Empty; };
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartIndex)._Value;
+          break;
+        case 44: // Trailer
+          URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerPage)._Value;
+          lblLanguages.Visible = true;
+          lblComplement.Visible = true;
+          lblMaxItems.Visible = true;
+          textComplement.Visible = true;
+          textMaxItems.Visible = true;
+          textLanguages.Visible = true;
+          lblComplement.Text = "RegExp";
+          textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Param1;
+          textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Param2;
+          TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Value;
+          TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndTrailer)._Value;
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; };
+          try { textLanguages.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerLanguage)._Value; }
+          catch { textLanguages.Text = string.Empty; };
+          try { textMaxItems.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerMaxItems)._Value; }
+          catch { textMaxItems.Text = string.Empty; };
+          Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerIndex)._Value;
+          break;
+
         default:
           URLpage.Text = "";
           textDReplace.Text = "";
@@ -2161,10 +2479,42 @@ namespace Grabber_Interface
         case 34:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value = TextKeyStartD.Text;
           break;
+
+        case 35:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Value = TextKeyStartD.Text;
+          break;
+        case 36:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Value = TextKeyStartD.Text;
+          break;
+        case 37:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Value = TextKeyStartD.Text;
+          break;
+        case 38:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Value = TextKeyStartD.Text;
+          break;
+        case 39:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Value = TextKeyStartD.Text;
+          break;
+
+        case 40:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiPosters)._Value = TextKeyStartD.Text;
+          break;
+        case 41:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartPhotos)._Value = TextKeyStartD.Text;
+          break;
+        case 42:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartPersonImages)._Value = TextKeyStartD.Text;
+          break;
+        case 43:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiFanart)._Value = TextKeyStartD.Text;
+          break;
+        case 44:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Value = TextKeyStartD.Text;
+          break;
+        
         default:
           TextKeyStartD.Text = "";
           break;
-
       }
 
       if (cb_ParamDetail.SelectedIndex > 0 && TextKeyStopD.Text.Length > 0)
@@ -2309,10 +2659,41 @@ namespace Grabber_Interface
         case 34:
           xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkSyn)._Value = TextKeyStopD.Text;
           break;
+
+        case 35:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiPosters)._Value = TextKeyStopD.Text;
+          break;
+        case 36:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPhotos)._Value = TextKeyStopD.Text;
+          break;
+        case 37:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersonImages)._Value = TextKeyStopD.Text;
+          break;
+        case 38:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiFanart)._Value = TextKeyStopD.Text;
+          break;
+        case 39:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTrailer)._Value = TextKeyStopD.Text;
+          break;
+
+        case 40:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndMultiPosters)._Value = TextKeyStopD.Text;
+          break;
+        case 41:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndPhotos)._Value = TextKeyStopD.Text;
+          break;
+        case 42:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndPersonImages)._Value = TextKeyStopD.Text;
+          break;
+        case 43:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndMultiFanart)._Value = TextKeyStopD.Text;
+          break;
+        case 44:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyEndTrailer)._Value = TextKeyStopD.Text;
+          break;
         default:
           TextKeyStopD.Text = "";
           break;
-
       }
 
       if (cb_ParamDetail.SelectedIndex > 0)
@@ -2444,7 +2825,7 @@ namespace Grabber_Interface
 
       SaveXml(textConfig.Text + ".tmp");
       Grabber.Grabber_URLClass Grab = new Grabber_URLClass();
-      string[] Result = new string[60];
+      string[] Result = new string[80];
 
       try // http://akas.imdb.com/title/tt0133093/
       {
@@ -2465,7 +2846,7 @@ namespace Grabber_Interface
       for (int i = 0; i < Result.Length; i++)
       {
         textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline);
-        if (i > 29) mapped = " (mapped)";
+        if (i > 39) mapped = " (mapped)";
         else mapped = "";
  
         switch (i)
@@ -2473,7 +2854,7 @@ namespace Grabber_Interface
           case 0:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Original Title" + mapped + Environment.NewLine;
             break;
-          case 30:
+          case 40:
             textPreview.SelectedText += Environment.NewLine;
             textPreview.SelectedText += Environment.NewLine;
             textPreview.SelectionFont = new Font("Arial", (float)9.75, FontStyle.Bold | FontStyle.Underline); 
@@ -2483,11 +2864,11 @@ namespace Grabber_Interface
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Original Title" + mapped + Environment.NewLine;
             break;
           case 1:
-          case 31:
+          case 41:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Translated Title" + mapped + Environment.NewLine;
             break;
           case 2:
-          case 32:
+          case 42:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Cover" + mapped + Environment.NewLine;
             try
             {
@@ -2508,119 +2889,138 @@ namespace Grabber_Interface
             }
             break;
           case 3:
-          case 33:
+          case 43:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Description" + mapped + Environment.NewLine;
             break;
           case 4:
-          case 34:
+          case 44:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Rating" + mapped + Environment.NewLine;
             break;
           case 5:
-          case 35:
+          case 45:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Actors" + mapped + Environment.NewLine;
             break;
           case 6:
-          case 36:
+          case 46:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Director" + mapped + Environment.NewLine;
             break;
           case 7:
-          case 37:
+          case 47:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Producer" + mapped + Environment.NewLine;
             break;
           case 8:
-          case 38:
+          case 48:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Year" + mapped + Environment.NewLine;
             break;
           case 9:
-          case 39:
+          case 49:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Country" + mapped + Environment.NewLine;
             break;
           case 10:
-          case 40:
+          case 50:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Genre" + mapped + Environment.NewLine;
             break;
           case 11:
-          case 41:
+          case 51:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "URL" + mapped + Environment.NewLine;
             break;
           case 12:
-          case 42:
+          case 52:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Image" + mapped + Environment.NewLine;
             break;
           case 13:
-          case 43:
+          case 53:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Writer" + mapped + Environment.NewLine;
             break;
           case 14:
-          case 44:
+          case 54:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Comment" + mapped + Environment.NewLine;
             break;
           case 15:
-          case 45:
+          case 55:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Language" + mapped + Environment.NewLine;
             break;
           case 16:
-          case 46:
+          case 56:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Tagline" + mapped + Environment.NewLine;
             break;
           case 17:
-          case 47:
+          case 57:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Certification" + mapped + Environment.NewLine;
             break;
           case 18:
-          case 48:
+          case 58:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "IMDB_Id" + mapped + Environment.NewLine;
             break;
           case 19:
-          case 49:
+          case 59:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "IMDBrank" + mapped + Environment.NewLine;
             break;
           case 20:
-          case 50:
+          case 60:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Studio" + mapped + Environment.NewLine;
             break;
           case 21:
-          case 51:
+          case 61:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Edition" + mapped + Environment.NewLine;
             break;
           case 22:
-          case 52:
+          case 62:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Fanart" + mapped + Environment.NewLine;
             break;
           case 23:
-          case 53:
+          case 63:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Generic 1" + mapped + Environment.NewLine;
             break;
           case 24:
-          case 54:
+          case 64:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Generic 2" + mapped + Environment.NewLine;
             break;
           case 25:
-          case 55:
+          case 65:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Generic 3" + mapped + Environment.NewLine;
             break;
           case 26:
-          case 56:
+          case 66:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Names: Countries for 'Translated Title'" + mapped + Environment.NewLine;
             break;
           case 27:
-          case 57:
+          case 67:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Translated Title'" + mapped + Environment.NewLine;
             break;
           case 28:
-          case 58:
+          case 68:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Names: Countries for 'Certification'" + mapped + Environment.NewLine;
             break;
           case 29:
-          case 59:
+          case 69:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Countries for 'Certification'" + mapped + Environment.NewLine;
             break;
-          default:
-            textPreview.SelectedText += "(" + (i).ToString() + ") " + "Mapping Output Field '" + (i - 30).ToString() + "'" + mapped + Environment.NewLine;
+          case 30:
+          case 70:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: MultiPosters'" + mapped + Environment.NewLine;
             break;
-
+          case 31:
+          case 71:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Photos'" + mapped + Environment.NewLine;
+            break;
+          case 32:
+          case 72:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: PersonImages'" + mapped + Environment.NewLine;
+            break;
+          case 33:
+          case 73:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: MultiFanart'" + mapped + Environment.NewLine;
+            break;
+          case 34:
+          case 74:
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Values: Trailer'" + mapped + Environment.NewLine;
+            break;
+          default:
+            textPreview.SelectedText += "(" + (i).ToString() + ") " + "Mapping Output Field '" + (i - 40).ToString() + "'" + mapped + Environment.NewLine;
+            break;
         }
-        if (i <= 60) // Changed to support new fields...
+        if (i <= 80) // Changed to support new fields...
           textPreview.AppendText(Result[i] + Environment.NewLine);
       }
       // List of Grab Pages used for Grabber results:
@@ -2658,6 +3058,21 @@ namespace Grabber_Interface
       textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText("URL Redirection Description:" + TimeBodyLinkSyn + Environment.NewLine);
       textPreview.AppendText(URLBodyLinkSyn + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
+      textPreview.AppendText("URL Redirection MultiPosters:" + TimeBodyLinkMultiPosters + Environment.NewLine);
+      textPreview.AppendText(URLBodyLinkMultiPosters + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
+      textPreview.AppendText("URL Redirection Photos:" + TimeBodyLinkPhotos + Environment.NewLine);
+      textPreview.AppendText(URLBodyLinkPhotos + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
+      textPreview.AppendText("URL Redirection PersonImages:" + TimeBodyLinkPersonImages + Environment.NewLine);
+      textPreview.AppendText(URLBodyLinkPersonImages + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
+      textPreview.AppendText("URL Redirection MultiFanart:" + TimeBodyLinkMultiFanart + Environment.NewLine);
+      textPreview.AppendText(URLBodyLinkMultiFanart + Environment.NewLine);
+      textPreview.AppendText(Environment.NewLine);
+      textPreview.AppendText("URL Redirection Trailer:" + TimeBodyLinkTrailer + Environment.NewLine);
+      textPreview.AppendText(URLBodyLinkTrailer + Environment.NewLine);
 
       textPreview.AppendText(Environment.NewLine);
       textPreview.AppendText(Environment.NewLine);
@@ -2711,6 +3126,23 @@ namespace Grabber_Interface
         case 25:
           xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric3RegExp)._Value = textComplement.Text;
           break;
+
+        case 40:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersRegExp)._Value = textComplement.Text;
+          break;
+        case 41:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosRegExp)._Value = textComplement.Text;
+          break;
+        case 42:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesRegExp)._Value = textComplement.Text;
+          break;
+        case 43:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartRegExp)._Value = textComplement.Text;
+          break;
+        case 44:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerRegExp)._Value = textComplement.Text;
+          break;
+
         default:
           break;
       }
@@ -2739,11 +3171,28 @@ namespace Grabber_Interface
           xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric1MaxItems)._Value = textMaxItems.Text;
           break;
         case 24:
-          xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric1MaxItems)._Value = textMaxItems.Text;
+          xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric2MaxItems)._Value = textMaxItems.Text;
           break;
         case 25:
-          xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric1MaxItems)._Value = textMaxItems.Text;
+          xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric3MaxItems)._Value = textMaxItems.Text;
           break;
+
+        case 40:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersMaxItems)._Value = textMaxItems.Text;
+          break;
+        case 41:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosMaxItems)._Value = textMaxItems.Text;
+          break;
+        case 42:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesMaxItems)._Value = textMaxItems.Text;
+          break;
+        case 43:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartMaxItems)._Value = textMaxItems.Text;
+          break;
+        case 44:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerMaxItems)._Value = textMaxItems.Text;
+          break;
+
         default:
           break;
       }
@@ -2789,6 +3238,23 @@ namespace Grabber_Interface
         case 25:
           xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric3Language)._Value = textLanguages.Text;
           break;
+
+        case 40:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersLanguage)._Value = textLanguages.Text;
+          break;
+        case 41:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosLanguage)._Value = textLanguages.Text;
+          break;
+        case 42:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesLanguage)._Value = textLanguages.Text;
+          break;
+        case 43:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartLanguage)._Value = textLanguages.Text;
+          break;
+        case 44:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerLanguage)._Value = textLanguages.Text;
+          break;
+
         default:
           break;
       }
@@ -2990,6 +3456,38 @@ namespace Grabber_Interface
         case 34:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param1 = textDReplace.Text;
           break;
+
+        case 35:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param1 = textDReplace.Text;
+          break;
+        case 36:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param1 = textDReplace.Text;
+          break;
+        case 37:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param1 = textDReplace.Text;
+          break;
+        case 38:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param1 = textDReplace.Text;
+          break;
+        case 39:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param1 = textDReplace.Text;
+          break;
+
+        case 40:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiPosters)._Param1 = textDReplace.Text;
+          break;
+        case 41:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartPhotos)._Param1 = textDReplace.Text;
+          break;
+        case 42:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartPersonImages)._Param1 = textDReplace.Text;
+          break;
+        case 43:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiFanart)._Param1 = textDReplace.Text;
+          break;
+        case 44:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Param1 = textDReplace.Text;
+          break;
         default:
           break;
 
@@ -3105,9 +3603,41 @@ namespace Grabber_Interface
         case 34:
           xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param2 = textDReplaceWith.Text;
           break;
-        default:
+
+        case 35:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param2 = textDReplaceWith.Text;
+          break;
+        case 36:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param2 = textDReplaceWith.Text;
+          break;
+        case 37:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param2 = textDReplaceWith.Text;
+          break;
+        case 38:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param2 = textDReplaceWith.Text;
+          break;
+        case 39:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param2 = textDReplaceWith.Text;
           break;
 
+        case 40:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiPosters)._Param2 = textDReplaceWith.Text;
+          break;
+        case 41:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartPhotos)._Param2 = textDReplaceWith.Text;
+          break;
+        case 42:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartPersonImages)._Param2 = textDReplaceWith.Text;
+          break;
+        case 43:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartMultiFanart)._Param2 = textDReplaceWith.Text;
+          break;
+        case 44:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStartTrailer)._Param2 = textDReplaceWith.Text;
+          break;
+
+        default:
+          break;
       }
       //if (cbParamDetail.SelectedIndex > 0)
       //    textBodyDetail_NewSelection(TextKeyStartD.Text, TextKeyStopD.Text, ExtractBody(textBodyDetail.Text, Index.Text));
@@ -3385,6 +3915,38 @@ namespace Grabber_Interface
         case 34: // added for secondary Synopsis/description 
           xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value = Index.Text;
           break;
+
+        case 35: // added for secondary MultiPosters
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersIndex)._Value = Index.Text;
+          break;
+        case 36: // added for secondary Photos
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosIndex)._Value = Index.Text;
+          break;
+        case 37: // added for secondary PersonImages
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesIndex)._Value = Index.Text;
+          break;
+        case 38: // added for secondary MultiFanart
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartIndex)._Value = Index.Text;
+          break;
+        case 39: // added for secondary Trailer
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerIndex)._Value = Index.Text;
+          break;
+
+        case 40: // added for MultiPosters
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersIndex)._Value = Index.Text;
+          break;
+        case 41: // added for Photos
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosIndex)._Value = Index.Text;
+          break;
+        case 42: // added for PersonImages
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesIndex)._Value = Index.Text;
+          break;
+        case 43: // added for MultiFanart
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartIndex)._Value = Index.Text;
+          break;
+        case 44: // added for Trailer
+          xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerIndex)._Value = Index.Text;
+          break;
         default:
           break;
       }
@@ -3507,6 +4069,39 @@ namespace Grabber_Interface
         case 34:
           xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynPage)._Value = URLpage.Text;
           break;
+
+        case 35:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersPage)._Value = URLpage.Text;
+          break;
+        case 36:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosPage)._Value = URLpage.Text;
+          break;
+        case 37:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesPage)._Value = URLpage.Text;
+          break;
+        case 38:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartPage)._Value = URLpage.Text;
+          break;
+        case 39:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerPage)._Value = URLpage.Text;
+          break;
+
+        case 40:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiPostersPage)._Value = URLpage.Text;
+          break;
+        case 41:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPhotosPage)._Value = URLpage.Text;
+          break;
+        case 42:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyPersonImagesPage)._Value = URLpage.Text;
+          break;
+        case 43:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyMultiFanartPage)._Value = URLpage.Text;
+          break;
+        case 44:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyTrailerPage)._Value = URLpage.Text;
+          break;
+
         default:
           break;
       }
@@ -3826,6 +4421,16 @@ namespace Grabber_Interface
       Fields[27] = "TranslatedTitle - All Values";
       Fields[28] = "Certification - All Names";
       Fields[29] = "Certification - All Values";
+      Fields[30] = "MultiPosters";
+      Fields[31] = "Photos";
+      Fields[32] = "PersonImages";
+      Fields[33] = "MultiFanart";
+      Fields[34] = "Trailer";
+      Fields[35] = "Empty35";
+      Fields[36] = "Empty36";
+      Fields[37] = "Empty37";
+      Fields[38] = "Empty38";
+      Fields[39] = "Empty39";
 
       Column2.Items.Clear();
       Column2.Items.Add(""); // empty field to choose ....
@@ -3834,7 +4439,7 @@ namespace Grabber_Interface
         if (!string.IsNullOrEmpty(field) && !field.Contains("URL") && !field.Contains("All "))
         Column2.Items.Add(field);
       }
-      for (int i = 0; i < 30; i++)
+      for (int i = 0; i < 40; i++)
       {
         i = dataGridViewMapping.Rows.Add(); // add row for config
         dataGridViewMapping.Rows[i].Cells[0].Value = i;

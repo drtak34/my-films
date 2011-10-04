@@ -196,37 +196,57 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //TranslatedTitleAllValues = 27,
             //CertificationAllNames = 28,
             //CertificationAllValues = 29
+            //MultiPosters = 30,
+            //Photos = 31,
+            //PersonImages = 32,
+            //MultiFanart = 33,
+            //Trailer = 34,
+            //Empty35 = 35,
+            //Empty36 = 36,
+            //Empty37 = 37,
+            //Empty38 = 38,
+            //Empty39 = 39,
 
-            OriginalTitle = 30,
-            TranslatedTitle = 31,
-            PicturePathLong = 32,
-            Description = 33,
-            Rating = 34,
-            Actors = 35,
-            Director = 36,
-            Producer = 37,
-            Year = 38,
-            Country = 39,
-            Category = 40,
-            URL = 41,
-            PicturePathShort = 42,
-            SubUrlPersons = 43,
-            Comment = 44,
-            Language = 45,
-            Tagline = 46,
-            Certification = 47,
-            SubUrlTitles = 48,
-            SubUrlCertification = 49,
-            Writer = 50,
-            IMDBrank = 51,
-            Studio = 52,
-            Edition = 53,
-            Fanart = 54,
-            AspectRatio = 55,
-            TranslatedTitleAllNames = 56,
-            TranslatedTitleAllValues = 57,
-            CertificationAllNames = 58,
-            CertificationAllValues = 59
+            OriginalTitle = 40,
+            TranslatedTitle = 41,
+            PicturePathLong = 42,
+            Description = 43,
+            Rating = 44,
+            Actors = 45,
+            Director = 46,
+            Producer = 47,
+            Year = 48,
+            Country = 49,
+            Category = 50,
+            URL = 51,
+            PicturePathShort = 52,
+            SubUrlPersons = 53,
+            Comment = 54,
+            Language = 55,
+            Tagline = 56,
+            Certification = 57,
+            SubUrlTitles = 58,
+            SubUrlCertification = 59,
+            Writer = 60,
+            IMDBrank = 61,
+            Studio = 62,
+            Edition = 63,
+            Fanart = 64,
+            AspectRatio = 65,
+            TranslatedTitleAllNames = 66,
+            TranslatedTitleAllValues = 67,
+            CertificationAllNames = 68,
+            CertificationAllValues = 69,
+            MultiPosters = 70,
+            Photos = 71,
+            PersonImages = 72,
+            MultiFanart = 73,
+            Trailer = 74,
+            Empty35 = 75,
+            Empty36 = 76,
+            Empty37 = 77,
+            Empty38 = 78,
+            Empty39 = 79
         }
 
         private enum Grabber_DB_Field
@@ -2855,7 +2875,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url.ToString() + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID.ToString() + "', interactive = '" + interactive.ToString() + "'"); 
             Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
-            string[] Result = new string[60];
+            string[] Result = new string[80];
             string title = string.Empty;
             string ttitle = string.Empty;
             string wtitle = string.Empty;
@@ -2938,10 +2958,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               // Result = Grab.GetDetail(url, downLoadPath, wscript);
               // copy mapped values to original values
-              for (int i = 0; i < 30; i++)
+              for (int i = 0; i < 40; i++)
               {
                 LogMyFilms.Debug("Grabber Details: original: '" + i + "' - '" + Result[i] + "'");
-                Result[i] = Result[i + 30];
+                Result[i] = Result[i + 40];
                 LogMyFilms.Debug("Grabber Details: mapped  : '" + i + "' - '" + Result[i] + "'");
               }
               LogMyFilms.Info("Grabber - downloadpath = '" + downLoadPath + "'");
@@ -2994,7 +3014,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   "TranslatedTitleAllNames",
                   "TranslatedTitleAllValues",
                   "CertificationAllNames",
-                  "CertificationAllValues"
+                  "CertificationAllValues",
+                  "MultiPosters",
+                  "Photos",
+                  "PersonImages",
+                  "MultiFanart",
+                  "Trailer",
+                  "Empty35",
+                  "Empty36",
+                  "Empty37",
+                  "Empty38",
+                  "Empty39"
                 };
                 string strOldValue = "";
                 string strNewValue = "";
@@ -3018,6 +3048,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         && !wProperty.Contains("Sub")
                         && !wProperty.Contains("All")
                         && !wProperty.Contains("Generic")
+                        && !wProperty.Contains("Empty")
                         && wProperty != "TagLine"
                         && wProperty != "Certification"
                         && wProperty != "Writer"
@@ -3025,6 +3056,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         && wProperty != "Edition"
                         && wProperty != "Fanart"
                         && wProperty != "Aspectratio"
+                        && wProperty != "MultiPosters"
+                        && wProperty != "Photos"
+                        && wProperty != "PersonImages"
+                        && wProperty != "MultiFanart"
+                        && wProperty != "Trailer"
                         )
                       {
                         dlgmenu.Add(BaseMesFilms.Translate_Column(wProperty) + ": '" + strOldValue.Replace(Environment.NewLine, " # ") + "' -> '" + strNewValue.Replace(Environment.NewLine, " # ") + "'");

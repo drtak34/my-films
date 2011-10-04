@@ -517,61 +517,77 @@ public class TagName
   public static string KeyGeneric3Page = "KeyGeneric3Page";
 
 // new added for extended scraping 2011-10-04
+  //URL Redirection Multi Posters
+  //URL Redirection Photos
+  //URL Redirection PersonImages
+  //URL Redirection Multi Fanart
+  //URL Redirection Trailer
 
-      //<KeyStartLinkMultiPosters Param1="" Param2="" />
-      //<KeyEndLinkMultiPosters />
-      //<KeyLinkMultiPostersIndex />
-      //<KeyLinkMultiPostersPage />
-      //<KeyStartMultiPosters Param1="" Param2="" />
-      //<KeyEndMultiPosters />
-      //<KeyMultiPostersIndex />
-      //<KeyMultiPostersRegExp />
-      //<KeyMultiPostersMaxItems />
-      //<KeyMultiPostersLanguage />
-      //<KeyMultiPostersPage />
-      //<KeyStartLinkPhotos Param1="" Param2="" />
-      //<KeyEndLinkPhotos />
-      //<KeyLinkPhotosIndex />
-      //<KeyLinkPhotosPage />
-      //<KeyStartPhotos Param1="" Param2="" />
-      //<KeyEndPhotos />
-      //<KeyPhotosIndex />
-      //<KeyPhotosRegExp />
-      //<KeyPhotosMaxItems />
-      //<KeyPhotosLanguage />
-      //<KeyPhotosPage />
-      //<KeyStartLinkPersonImages Param1="" Param2="" />
-      //<KeyEndLinkPersonImages />
-      //<KeyLinkPersonImagesIndex />
-      //<KeyLinkPersonImagesPage />
-      //<KeyStartPersonImages Param1="" Param2="" />
-      //<KeyEndPersonImages />
-      //<KeyPersonImagesIndex />
-      //<KeyPersonImagesRegExp />
-      //<KeyPersonImagesMaxItems />
-      //<KeyPersonImagesLanguage />
-      //<KeyPersonImagesPage />
-      //<KeyStartLinkMultiFanart Param1="" Param2="" />
-      //<KeyEndLinkMultiFanart />
-      //<KeyLinkMultiFanartIndex />
-      //<KeyLinkMultiFanartPage />
-      //<KeyStartMultiFanart Param1="" Param2="" />
-      //<KeyEndMultiFanart />
-      //<KeyMultiFanartIndex />
-      //<KeyMultiFanartRegExp />
-      //<KeyMultiFanartMaxItems />
-      //<KeyMultiFanartLanguage />
-      //<KeyMultiFanartPage />
-      //<KeyStartLinkTrailer Param1="" Param2="" />
-      //<KeyEndLinkTrailer />
-      //<KeyLinkTrailerIndex />
-      //<KeyLinkTrailerPage />
-      //<KeyStartTrailer Param1="" Param2="" />
-      //<KeyEndTrailer />
-      //<KeyTrailerIndex />
-      //<KeyTrailerRegExp />
-      //<KeyTrailerMaxItems />
-      //<KeyTrailerLanguage />
-      //<KeyTrailerPage />
+  //MultiPosters
+  //Photos
+  //PersonImages
+  //MultiFanart
+  //Trailer
+
+  public static string KeyStartLinkMultiPosters = "KeyStartLinkMultiPosters"; // MultiPosters Link
+  public static string KeyEndLinkMultiPosters = "KeyEndLinkMultiPosters";
+  public static string KeyLinkMultiPostersIndex = "KeyLinkMultiPostersIndex";
+  public static string KeyLinkMultiPostersPage = "KeyLinkMultiPostersPage";
+  public static string KeyStartMultiPosters = "KeyStartMultiPosters";     // MultiPosters 
+  public static string KeyEndMultiPosters = "KeyEndMultiPosters";
+  public static string KeyMultiPostersIndex = "KeyMultiPostersIndex";
+  public static string KeyMultiPostersRegExp = "KeyMultiPostersRegExp";
+  public static string KeyMultiPostersMaxItems = "KeyMultiPostersMaxItems";
+  public static string KeyMultiPostersLanguage = "KeyMultiPostersLanguage";
+  public static string KeyMultiPostersPage = "KeyMultiPostersPage";
+
+  public static string KeyStartLinkPhotos = "KeyStartLinkPhotos"; // Photos Link
+  public static string KeyEndLinkPhotos = "KeyEndLinkPhotos";
+  public static string KeyLinkPhotosIndex = "KeyLinkPhotosIndex";
+  public static string KeyLinkPhotosPage = "KeyLinkPhotosPage";
+  public static string KeyStartPhotos = "KeyStartPhotos";     // Photos 
+  public static string KeyEndPhotos = "KeyEndPhotos";
+  public static string KeyPhotosIndex = "KeyPhotosIndex";
+  public static string KeyPhotosRegExp = "KeyPhotosRegExp";
+  public static string KeyPhotosMaxItems = "KeyPhotosMaxItems";
+  public static string KeyPhotosLanguage = "KeyPhotosLanguage";
+  public static string KeyPhotosPage = "KeyPhotosPage";
+
+  public static string KeyStartLinkPersonImages = "KeyStartLinkPersonImages"; // PersonImages Link
+  public static string KeyEndLinkPersonImages = "KeyEndLinkPersonImages";
+  public static string KeyLinkPersonImagesIndex = "KeyLinkPersonImagesIndex";
+  public static string KeyLinkPersonImagesPage = "KeyLinkPersonImagesPage";
+  public static string KeyStartPersonImages = "KeyStartPersonImages";     // PersonImages 
+  public static string KeyEndPersonImages = "KeyEndPersonImages";
+  public static string KeyPersonImagesIndex = "KeyPersonImagesIndex";
+  public static string KeyPersonImagesRegExp = "KeyPersonImagesRegExp";
+  public static string KeyPersonImagesMaxItems = "KeyPersonImagesMaxItems";
+  public static string KeyPersonImagesLanguage = "KeyPersonImagesLanguage";
+  public static string KeyPersonImagesPage = "KeyPersonImagesPage";
+
+  public static string KeyStartLinkMultiFanart = "KeyStartLinkMultiFanart"; // MultiFanart Link
+  public static string KeyEndLinkMultiFanart = "KeyEndLinkMultiFanart";
+  public static string KeyLinkMultiFanartIndex = "KeyLinkMultiFanartIndex";
+  public static string KeyLinkMultiFanartPage = "KeyLinkMultiFanartPage";
+  public static string KeyStartMultiFanart = "KeyStartMultiFanart";     // MultiFanart 
+  public static string KeyEndMultiFanart = "KeyEndMultiFanart";
+  public static string KeyMultiFanartIndex = "KeyMultiFanartIndex";
+  public static string KeyMultiFanartRegExp = "KeyMultiFanartRegExp";
+  public static string KeyMultiFanartMaxItems = "KeyMultiFanartMaxItems";
+  public static string KeyMultiFanartLanguage = "KeyMultiFanartLanguage";
+  public static string KeyMultiFanartPage = "KeyMultiFanartPage";
+
+  public static string KeyStartLinkTrailer = "KeyStartLinkTrailer"; // Trailer Link
+  public static string KeyEndLinkTrailer = "KeyEndLinkTrailer";
+  public static string KeyLinkTrailerIndex = "KeyLinkTrailerIndex";
+  public static string KeyLinkTrailerPage = "KeyLinkTrailerPage";
+  public static string KeyStartTrailer = "KeyStartTrailer";     // Trailer 
+  public static string KeyEndTrailer = "KeyEndTrailer";
+  public static string KeyTrailerIndex = "KeyTrailerIndex";
+  public static string KeyTrailerRegExp = "KeyTrailerRegExp";
+  public static string KeyTrailerMaxItems = "KeyTrailerMaxItems";
+  public static string KeyTrailerLanguage = "KeyTrailerLanguage";
+  public static string KeyTrailerPage = "KeyTrailerPage";
+
 }
 
